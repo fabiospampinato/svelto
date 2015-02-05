@@ -1,0 +1,41 @@
+
+/* IMPORTS */
+
+@import 'colors';
+@import 'sizes';
+
+@import '../settings/colors';
+@import '../settings/layout';
+@import '../settings/separator';
+
+/* SEPARATOR */
+
+.separator_wrp {
+
+    @include medium ();
+    text-align: center;
+
+    .separator {
+
+        @include red ( true );
+        border-radius: 10000px 10000px;
+        display: inline-block;
+        margin-bottom: $layout-spacing;
+        padding: $separator-padding;
+
+        &.linear {
+            @include gray ( true );
+            color: $color-default-text;
+            display: block;
+            height: $separator-linear-height;
+            line-height: $separator-linear-height;
+            padding: 0;
+            margin-top: 0.5em;
+            margin-bottom: calc(0.5em + #{$layout-spacing});
+            text-shadow: 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg, 0 0 0.85em $color-white-bg;
+            overflow: visible;
+        }
+
+    }
+
+}

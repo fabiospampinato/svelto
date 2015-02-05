@@ -1,0 +1,74 @@
+
+/* IMPORTS */
+
+@import 'colors';
+@import 'sizes';
+
+@import '../settings/colors';
+@import '../settings/layout';
+@import '../settings/modals';
+@import '../settings/shadows';
+
+/* MODALS */
+
+.modal {
+
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 50;
+    display: none;
+
+    .background {
+        background-color: transparent;
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        z-index: -1;
+        transition: background-color 0.2s ease 0s;
+    }
+
+    .container {
+
+        width: $modal-normal-width;
+        box-shadow: $shadow-depth-3;
+        opacity: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: auto;
+        transform: translate(-50%, -50%) scale(0.9);
+        transition: transform 0.2s ease 0s, opacity 0.2s ease 0s;
+
+        .content {
+            overflow: auto;
+        }
+
+    }
+
+    .closing {
+        cursor: pointer;
+    }
+
+    &.active {
+
+        .background {
+            background-color: $modal-bg-color;
+        }
+
+        .container {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+    }
+
+}

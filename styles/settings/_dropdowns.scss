@@ -1,0 +1,18 @@
+
+/* IMPORTS */
+
+@import 'colors';
+
+/* SETTINGS */
+
+$dropdown-tip-border-size: 1px;
+$dropdown-tip-fg-size: 19px;
+$dropdown-tip-bg-size: $dropdown-tip-fg-size + ( 2 * $dropdown-tip-border-size );
+$dropdown-tip-fg-color: $color-white-bg;
+$dropdown-tip-bg-color: $color-white-border;
+
+$dropdown-padding: 15px;
+$dropdown-border-size: 1px;
+
+$dropdown-container-max-height: 325px;
+$dropdown-container-min-width: 120px;

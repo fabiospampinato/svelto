@@ -1,0 +1,102 @@
+
+/* IMPORTS */
+
+@import '../settings/sizes';
+
+/* SIZES */
+
+@mixin nano ( $important: '' ) {
+    font-size: $nano-font-size #{$important};
+}
+
+.nano {
+    @include nano ( '!important' );
+}
+
+@mixin micro ( $important: '' ) {
+    font-size: $micro-font-size #{$important};
+}
+
+.micro {
+    @include micro ( '!important' );
+}
+
+@mixin mini ( $important: '' ) {
+    font-size: $mini-font-size #{$important};
+}
+
+.mini {
+    @include mini ( '!important' );
+}
+
+@mixin tiny ( $important: '' ) {
+    font-size: $tiny-font-size #{$important};
+}
+
+.tiny {
+    @include tiny ( '!important' );
+}
+
+@mixin small ( $important: '' ) {
+    font-size: $small-font-size #{$important};
+}
+
+.small {
+    @include small ( '!important' );
+}
+
+@mixin medium ( $important: '' ) {
+    font-size: $medium-font-size #{$important};
+}
+
+.medium {
+    @include medium ( '!important' );
+}
+
+@mixin large ( $important: '' ) {
+    font-size: $large-font-size #{$important};
+}
+
+.large {
+    @include large ( '!important' );
+}
+
+@mixin big ( $important: '' ) {
+    font-size: $big-font-size #{$important};
+}
+
+.big {
+    @include big ( '!important' );
+}
+
+@mixin huge ( $important: '' ) {
+    font-size: $huge-font-size #{$important};
+}
+
+.huge {
+    @include huge ( '!important' );
+}
+
+@mixin massive ( $important: '' ) {
+    font-size: $massive-font-size #{$important};
+}
+
+.massive {
+    @include massive ( '!important' );
+}
+
+@mixin giant ( $important: '' ) {
+    font-size: $giant-font-size #{$important};
+}
+
+.giant {
+    @include giant ( '!important' );
+}
+
+@mixin enormous ( $important: '' ) {
+    font-size: $enormous-font-size #{$important};
+}
+
+.enormous {
+    @include enormous ( '!important' );
+}

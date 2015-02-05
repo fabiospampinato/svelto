@@ -1,0 +1,70 @@
+
+/* IMPORT */
+
+@import 'icons';
+
+/* CHECKBOX / RADIO */
+
+.checkbox, .radio {
+
+    input {
+        display: none;
+    }
+
+    .icon {
+
+        transition: opacity 0.15s ease 0s;
+
+        &.on {
+            opacity: 0;
+        }
+
+        &.off {
+            opacity: 1;
+            margin-right: -1.635em;
+
+        }
+
+    }
+
+    &.selected .icon {
+
+        &.on  {
+            opacity: 1;
+        }
+
+        &.off {
+            opacity: 0;
+        }
+
+    }
+
+}
+
+/* CHECKBOX */
+
+.checkbox .icon {
+
+    &.on:after {
+        @extend .icon-toggle-check-box:before;
+    }
+
+    &.off:after {
+        @extend .icon-toggle-check-box-outline-blank:before;
+    }
+
+}
+
+/* RADIO */
+
+.radio .icon {
+
+    &.on:after {
+        @extend .icon-toggle-radio-button-on:before;
+    }
+
+    &.off:after {
+        @extend .icon-toggle-radio-button-off:before;
+    }
+
+}

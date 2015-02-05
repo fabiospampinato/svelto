@@ -1,0 +1,16 @@
+
+/* IMPORTS */
+
+@import 'layout';
+
+/* SETTINGS */
+
+$badge-border-radius: 10000px;
+
+$badge-inline-font-size: 0.6em;
+$badge-inline-padding: 0.2em 0.45em;
+
+$badge-floating-font-size: 0.5em;
+$badge-floating-padding: 0.15em 0.4em;
+
+$badge-floating-spacing: - ( $layout-spacing - 2 );

@@ -1,0 +1,67 @@
+
+/* IMPORTS */
+
+@import 'sizes';
+
+@import '../settings/layout';
+
+/* DEFAULT */
+
+h1, h2, h3, h4, h5, h6 {
+    margin-top: 0px;
+    margin-bottom: $layout-spacing;
+}
+
+h1 {
+    @include huge ();
+}
+
+h2 {
+    @include big ();
+}
+
+h3 {
+    @include large ();
+}
+
+h4 {
+    @include medium ();
+}
+
+h5 {
+    @include small ();
+}
+
+h6 {
+    @include tiny ();
+}
+
+/* HEADER */
+
+.header_wrp {
+
+    display: table;
+    text-align: left;
+    width: 100%;
+    margin-bottom: $layout-spacing;
+
+    .icon, .content {
+        display: table-cell;
+        vertical-align: middle;
+    }
+
+    .icon {
+        padding-right: $layout-spacing;
+    }
+
+    .content {
+
+        width: 100%;
+
+        .title + .subtitle {
+            margin-top: $layout-half-spacing;
+        }
+
+    }
+
+}

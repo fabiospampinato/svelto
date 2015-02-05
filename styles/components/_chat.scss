@@ -1,0 +1,107 @@
+
+/* IMPORT */
+
+@import '../tools/mixins';
+
+@import '../settings/chat';
+@import '../settings/colors';
+@import '../settings/layout';
+@import '../settings/shadows';
+@import '../settings/typography';
+
+/* MESSAGES */
+
+#chat_messages {
+
+    .group {
+
+        width: 100%;
+        margin-bottom: $layout-spacing;
+
+        @include clearfix ();
+
+        .message {
+
+            width: auto;
+            min-width: $chat-message-min-width;
+            max-width: $chat-message-max-width;
+            position: relative;
+            opacity: 0;
+            transform: scale(0);
+            transition: transform 0.15s ease 0s, opacity 0.15s ease 0s;
+
+            &.show_up {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            &.by_current {
+                float: right;
+                text-align: right;
+            }
+
+            &.by_current .by {
+                display: none;
+            }
+
+            &.by_current:first-child .content {
+                border-top-left-radius: $border-radius-normal;
+                border-top-right-radius: $border-radius-normal;
+            }
+
+            &.by_others {
+                float: left;
+                text-align: left;
+            }
+
+            .by {
+                height: $chat-message-by-height;
+                line-height: $chat-message-by-height;
+                display: block;
+                padding: $layout-half-spacing $layout-spacing;
+                border-width: 1px;
+                border-style: solid;
+                border-radius: $border-radius-normal $border-radius-normal 0 0;
+                box-shadow: $shadow-depth-1;
+                font-weight:bold;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                white-space: nowrap;
+            }
+
+            .content {
+
+                line-height: $chat-message-content-line-height;
+                padding: $layout-half-spacing $layout-spacing;
+                font-size: $font-size-normal;
+                word-wrap: break-word;
+                border-width: 1px;
+                border-style: solid;
+                box-shadow: $shadow-depth-1;
+                border-bottom-left-radius: $border-radius-normal;
+                border-bottom-right-radius: $border-radius-normal;
+
+                .msg_separator {
+                    height: 4px;
+                    width: 100%;
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+/* INPUT */
+
+#chat_input {
+    text-align: center;
+    border: medium none;
+    font-size: $chat-input-font-size;
+    height: $chat-input-height;
+    margin: - $layout-spacing;
+    padding: 0 $layout-spacing;
+    width: 100%;
+}

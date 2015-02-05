@@ -1,0 +1,75 @@
+
+/* IMPORTS */
+
+@import 'colors';
+@import 'sizes';
+
+@import '../settings/navbar';
+@import '../settings/layout';
+@import '../settings/shadows';
+
+/* NAVBAR */
+
+#navbar {
+
+    @include primary ( true, false, true );
+    @include medium ();
+    position: fixed;
+    height: $navbar-height;
+    line-height: $navbar-height;
+    width: 100%;
+    top: 0;
+    text-align: center;
+    left: 0;
+    right: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: $shadow-depth-2;
+    z-index: 10;
+
+    .content {
+
+        margin: 0 auto;
+        max-width: $layout-max-width;
+        position: relative;
+
+        .navbar_btn {
+
+            @include primary ();
+            @include transparent-initial ();
+            cursor: pointer !important;
+            height: $navbar-height;
+            box-sizing: border-box;
+            padding: $navbar-btn-padding;
+
+            .icon {
+                position: relative;
+                height: $navbar-icon-height;
+                line-height: $navbar-icon-height;
+                font-size: $navbar-icon-font-size;
+                text-align: center;
+            }
+
+        }
+
+    }
+
+}
+
+#logo {
+    font-size: $navbar-logo-size;
+    padding: $navbar-logo-padding !important;
+    height: $navbar-logo-height !important;
+}
+
+#sidebar_toggler {
+
+    display: none;
+
+    @include max-screen ( $layout-sidebar-breakpoint ) {
+        display: block;
+    }
+
+}
+
+#menu {}

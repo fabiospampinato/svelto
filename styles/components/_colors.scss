@@ -1,0 +1,716 @@
+
+/* IMPORTS */
+
+@import '../settings/colors';
+@import '../settings/gradients';
+
+/* BRAND */
+
+@mixin primary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-primary-bg #{$important};
+    border-color: $color-primary-border #{$important};
+    color: $color-primary-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-primary-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-primary ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-primary-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-primary-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-primary-accent #{$important};
+
+            &:after {
+                background: $color-primary-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-primary-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-primary ( $important );
+        }
+
+    }
+
+}
+
+.primary {
+    @include primary ( false, false, false, '!important' );
+}
+
+@mixin secondary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-secondary-bg #{$important};
+    border-color: $color-secondary-border #{$important};
+    color: $color-secondary-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-secondary-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-secondary ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-secondary-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-secondary-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-secondary-accent #{$important};
+
+            &:after {
+                background: $color-secondary-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-secondary-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-secondary ( $important );
+        }
+
+    }
+
+}
+
+.secondary {
+    @include secondary ( false, false, false, '!important' );
+}
+
+/* GENERAL */
+
+@mixin white ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-white-bg #{$important};
+    border-color: $color-white-border #{$important};
+    color: $color-white-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-white-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-white ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-white-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-white-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-white-accent #{$important};
+
+            &:after {
+                background: $color-white-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-white-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-white ( $important );
+        }
+
+    }
+
+}
+
+.white {
+    @include white ( false, false, false, '!important' );
+}
+
+@mixin gray ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-gray-bg #{$important};
+    border-color: $color-gray-border #{$important};
+    color: $color-gray-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-gray-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-gray ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-gray-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-gray-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-gray-accent #{$important};
+
+            &:after {
+                background: $color-gray-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-gray-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-gray ( $important );
+        }
+
+    }
+
+}
+
+.gray {
+    @include gray ( false, false, false, '!important' );
+}
+
+@mixin black ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-black-bg #{$important};
+    border-color: $color-black-border #{$important};
+    color: $color-black-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-black-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-black ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-black-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-black-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-black-accent #{$important};
+
+            &:after {
+                background: $color-black-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-black-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-black ( $important );
+        }
+
+    }
+
+}
+
+.black {
+    @include black ( false, false, false, '!important' );
+}
+
+@mixin yellow ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-yellow-bg #{$important};
+    border-color: $color-yellow-border #{$important};
+    color: $color-yellow-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-yellow-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-yellow ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-yellow-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-yellow-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-yellow-accent #{$important};
+
+            &:after {
+                background: $color-yellow-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-yellow-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-yellow ( $important );
+        }
+
+    }
+
+}
+
+.yellow {
+    @include yellow ( false, false, false, '!important' );
+}
+
+@mixin green ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-green-bg #{$important};
+    border-color: $color-green-border #{$important};
+    color: $color-green-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-green-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-green ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-green-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-green-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-green-accent #{$important};
+
+            &:after {
+                background: $color-green-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-green-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-green ( $important );
+        }
+
+    }
+
+}
+
+.green {
+    @include green ( false, false, false, '!important' );
+}
+
+@mixin blue ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-blue-bg #{$important};
+    border-color: $color-blue-border #{$important};
+    color: $color-blue-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-blue-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-blue ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-blue-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-blue-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-blue-accent #{$important};
+
+            &:after {
+                background: $color-blue-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-blue-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-blue ( $important );
+        }
+
+    }
+
+}
+
+.blue {
+    @include blue ( false, false, false, '!important' );
+}
+
+@mixin orange ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-orange-bg #{$important};
+    border-color: $color-orange-border #{$important};
+    color: $color-orange-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-orange-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-orange ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-orange-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-orange-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-orange-accent #{$important};
+
+            &:after {
+                background: $color-orange-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-orange-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-orange ( $important );
+        }
+
+    }
+
+}
+
+.orange {
+    @include orange ( false, false, false, '!important' );
+}
+
+@mixin purple ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-purple-bg #{$important};
+    border-color: $color-purple-border #{$important};
+    color: $color-purple-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-purple-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-purple ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-purple-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-purple-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-purple-accent #{$important};
+
+            &:after {
+                background: $color-purple-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-purple-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-purple ( $important );
+        }
+
+    }
+
+}
+
+.purple {
+    @include purple ( false, false, false, '!important' );
+}
+
+@mixin red ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-red-bg #{$important};
+    border-color: $color-red-border #{$important};
+    color: $color-red-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-red-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-red ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-red-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-red-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-red-accent #{$important};
+
+            &:after {
+                background: $color-red-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-red-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-red ( $important );
+        }
+
+    }
+
+}
+
+.red {
+    @include red ( false, false, false, '!important' );
+}
+
+@mixin pink ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-pink-bg #{$important};
+    border-color: $color-pink-border #{$important};
+    color: $color-pink-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-pink-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-pink ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-pink-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-pink-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-pink-accent #{$important};
+
+            &:after {
+                background: $color-pink-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-pink-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-pink ( $important );
+        }
+
+    }
+
+}
+
+.pink {
+    @include pink ( false, false, false, '!important' );
+}
+
+@mixin teal ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+
+    background: $color-teal-bg #{$important};
+    border-color: $color-teal-border #{$important};
+    color: $color-teal-text #{$important};
+
+    @if $basic == false {
+
+        &.transparentize {
+            background: transparentize( $color-teal-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        &.gradient {
+            @include gradient-teal ( $important );
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+            background: $color-teal-bg-hover #{$important};
+        }
+
+        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+            background: $color-teal-bg-active #{$important};
+        }
+
+        &.highlight {
+
+            border-bottom-color: $color-teal-accent #{$important};
+
+            &:after {
+                background: $color-teal-accent #{$important};
+            }
+
+        }
+
+    } @else {
+
+        @if $transparentize == true {
+            background: transparentize( $color-teal-bg, $color-transparentize-amount ) #{$important};
+        }
+
+        @if $gradient == true {
+            @include gradient-teal ( $important );
+        }
+
+    }
+
+}
+
+.teal {
+    @include teal ( false, false, false, '!important' );
+}
+
+/* TRANSPARENT */
+
+@mixin transparent ( $important: '' ) {
+
+    background: $color-transparent-bg #{$important};
+    border-color: $color-transparent-border #{$important};
+    box-shadow: none #{$important};
+    color: inherit #{$important};
+
+    &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+        background: $color-transparent-bg-hover #{$important};
+    }
+
+    &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
+        background: $color-transparent-bg-active #{$important};
+    }
+
+}
+
+.transparent {
+    @include transparent ( '!important' );
+}
+
+@mixin transparent-initial ( $important: '' ) {
+    background: transparent #{$important};
+}
+
+.transparent-initial {
+    @include transparent-initial ( '!important' );
+}

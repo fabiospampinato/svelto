@@ -1,0 +1,142 @@
+
+/* MAIN */
+
+$color-primary: #2967ab;
+$color-secondary: #ff7043;
+$color-transparent: rgba(0, 0, 0, 0);
+$color-white: #ffffff;
+$color-gray: #cccccc;
+$color-black: #000000;
+$color-yellow: #ffce16;
+$color-green: #47d469;
+$color-blue: #2187df;
+$color-orange: #ff7138;
+$color-purple: #4e4499;
+$color-red: #f64242;
+$color-pink: #fb2ca0;
+$color-teal: #00bbb3;
+
+/* BRAND */
+
+$color-primary-bg: $color-primary;
+$color-primary-bg-hover: lighten( $color-primary-bg, 2 );
+$color-primary-bg-active: darken( $color-primary-bg, 4 );
+$color-primary-text: #ffffff;
+$color-primary-text-hover: $color-primary-text;
+$color-primary-border: darken( $color-primary-bg, 20 );
+$color-primary-accent: $color-secondary;
+
+$color-secondary-bg: $color-secondary;
+$color-secondary-bg-hover: lighten( $color-secondary-bg, 2 );
+$color-secondary-bg-active: darken( $color-secondary-bg, 4 );
+$color-secondary-text: #ffffff;
+$color-secondary-text-hover: $color-secondary-text;
+$color-secondary-border: darken( $color-secondary-bg, 20 );
+$color-secondary-accent: $color-primary;
+
+/* GENERAL */
+
+$color-transparent-bg: rgba(0, 0, 0, 0);
+$color-transparent-bg-hover: lighten( $color-transparent-bg, 2 );
+$color-transparent-bg-active: darken( $color-transparent-bg, 4 );
+$color-transparent-border: darken( $color-transparent-bg, 20 );
+
+$color-white-bg: $color-white;
+$color-white-bg-hover: darken( $color-white-bg, 2 );
+$color-white-bg-active: darken( $color-white-bg, 4 );
+$color-white-text: #2f2f2f;
+$color-white-text-hover: $color-white-text;
+$color-white-border: darken( $color-white-bg, 20 );
+$color-white-accent: $color-black;
+
+$color-gray-bg: $color-gray;
+$color-gray-bg-hover: lighten( $color-gray-bg, 2 );
+$color-gray-bg-active: darken( $color-gray-bg, 4 );
+$color-gray-text: #2f2f2f;
+$color-gray-text-hover: $color-gray-text;
+$color-gray-border: darken( $color-gray-bg, 20 );
+$color-gray-accent: $color-black;
+
+$color-black-bg: $color-black;
+$color-black-bg-hover: lighten( $color-black-bg, 4 );
+$color-black-bg-active: lighten( $color-black-bg, 10 );
+$color-black-text: #ffffff;
+$color-black-text-hover: $color-black-text;
+$color-black-border: darken( $color-black-bg, 20 );
+$color-black-accent: $color-white;
+
+$color-yellow-bg: $color-yellow;
+$color-yellow-bg-hover: lighten( $color-yellow-bg, 2 );
+$color-yellow-bg-active: darken( $color-yellow-bg, 4 );
+$color-yellow-text: #ffffff;
+$color-yellow-text-hover: $color-yellow-text;
+$color-yellow-border: darken( $color-yellow-bg, 20 );
+$color-yellow-accent: $color-green;
+
+$color-green-bg: $color-green;
+$color-green-bg-hover: lighten( $color-green-bg, 2 );
+$color-green-bg-active: darken( $color-green-bg, 4 );
+$color-green-text: #ffffff;
+$color-green-text-hover: $color-green-text;
+$color-green-border: darken( $color-green-bg, 20 );
+$color-green-accent: $color-yellow;
+
+$color-blue-bg: $color-blue;
+$color-blue-bg-hover: lighten( $color-blue-bg, 2 );
+$color-blue-bg-active: darken( $color-blue-bg, 4 );
+$color-blue-text: #ffffff;
+$color-blue-text-hover: $color-blue-text;
+$color-blue-border: darken( $color-blue-bg, 20 );
+$color-blue-accent: $color-orange;
+
+$color-orange-bg: $color-orange;
+$color-orange-bg-hover: lighten( $color-orange-bg, 2 );
+$color-orange-bg-active: darken( $color-orange-bg, 4 );
+$color-orange-text: #ffffff;
+$color-orange-text-hover: $color-orange-text;
+$color-orange-border: darken( $color-orange-bg, 20 );
+$color-orange-accent: $color-blue;
+
+$color-purple-bg: $color-purple;
+$color-purple-bg-hover: lighten( $color-purple-bg, 2 );
+$color-purple-bg-active: darken( $color-purple-bg, 4 );
+$color-purple-text: #ffffff;
+$color-purple-text-hover: $color-purple-text;
+$color-purple-border: darken( $color-purple-bg, 20 );
+$color-purple-accent: $color-pink;
+
+$color-red-bg: $color-red;
+$color-red-bg-hover: lighten( $color-red-bg, 2 );
+$color-red-bg-active: darken( $color-red-bg, 4 );
+$color-red-text: #ffffff;
+$color-red-text-hover: $color-red-text;
+$color-red-border: darken( $color-red-bg, 20 );
+$color-red-accent: $color-teal;
+
+$color-pink-bg: $color-pink;
+$color-pink-bg-hover: lighten( $color-pink-bg, 2 );
+$color-pink-bg-active: darken( $color-pink-bg, 4 );
+$color-pink-text: #ffffff;
+$color-pink-text-hover: $color-pink-text;
+$color-pink-border: darken( $color-pink-bg, 20 );
+$color-pink-accent: $color-purple;
+
+$color-teal-bg: $color-teal;
+$color-teal-bg-hover: lighten( $color-teal-bg, 2 );
+$color-teal-bg-active: darken( $color-teal-bg, 4 );
+$color-teal-text: #ffffff;
+$color-teal-text-hover: $color-teal-text;
+$color-teal-border: darken( $color-teal-bg, 20 );
+$color-teal-accent: $color-red;
+
+/* DEFAULT */
+
+$color-transparentize-amount: 0.1;
+
+$color-default-bg: #e9eaed;
+
+$color-default-text: $color-white-text;
+$color-default-text-hover: $color-white-text-hover;
+
+$color-default-link: $color-white-text;
+$color-default-link-hover: $color-white-text-hover;

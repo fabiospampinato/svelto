@@ -1,0 +1,72 @@
+
+/* IMPORTS */
+
+@import 'icons';
+
+@import '../settings/colors';
+@import '../settings/loading';
+@import '../settings/shadows';
+
+/* LOADING OVERLAY */
+
+.loading {
+
+    position: relative;
+
+    &:before, &:after {
+        height: $loading-size;
+        line-height: $loading-size !important;
+        width: $loading-size;
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        margin: auto;
+        transform: scale(0);
+        font-size: 0;
+        opacity: 0;
+        transition: transform 0.2s ease 0s, font-size 0.2s ease 0s, opacity 0.2s ease 0s;
+    }
+
+    &:before {
+        @include multi-shadow ( $shadow-depth-3, $loading-shadow-inset );
+        border-radius: $loading-size;
+        border: 1px solid $color-black-border;
+        background-color: transparentize($color-black-bg, $color-transparentize-amount);
+        z-index: 1000;
+    }
+
+    &:after {
+        @extend %icon;
+        @extend .icon-navigation-refresh:before;
+        text-align: center;
+        color: $color-black-text;
+        animation: rotate 0.9s linear infinite;
+        z-index: 1001;
+    }
+
+    & > * {
+        transition: opacity 0.2s ease 0s;
+    }
+
+    &.loading_active {
+
+        &:before, &:after {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        &:after {
+            font-size: $loading-font-size;
+        }
+
+        & > * {
+            opacity: 0.4;
+            pointer-events: none;
+        }
+
+    }
+
+}

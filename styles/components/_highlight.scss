@@ -1,0 +1,22 @@
+
+/* IMPORTS */
+
+@import '../settings/highlight';
+
+/* HIGHLIGHT */
+
+.highlight {
+
+    &:after {
+        border-radius: $highlight-border-radius $highlight-border-radius 0 0;
+        bottom: 0;
+        content: '';
+        display: block;
+        height: $highlight-height-size;
+        left: 0;
+        position: absolute;
+        right: 0;
+        width: 100%;
+    }
+
+}

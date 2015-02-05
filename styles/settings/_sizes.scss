@@ -1,0 +1,23 @@
+
+/* FUNCTIONS */
+
+@function get_rem ( $distance ) {
+    @return 1rem + ( $size-delta-step * $distance );
+}
+
+/* SETTINGS */
+
+$size-delta-step: 1 / 14;
+
+$nano-font-size: get_rem( -6 );
+$micro-font-size: get_rem( -5 );
+$mini-font-size: get_rem( -4 );
+$tiny-font-size: get_rem( -2 );
+$small-font-size: get_rem( -1 );
+$medium-font-size: get_rem( 0 );
+$large-font-size: get_rem( 2 );
+$big-font-size: get_rem( 4 );
+$huge-font-size: get_rem( 6 );
+$massive-font-size: get_rem( 10 );
+$giant-font-size: get_rem( 16 );
+$enormous-font-size: get_rem( 24 );

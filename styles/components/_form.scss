@@ -1,0 +1,90 @@
+
+/* IMPORTS */
+
+@import '../tools/mixins';
+
+@import 'buttons';
+@import 'colors';
+@import 'sizes';
+
+@import '../settings/colors';
+@import '../settings/forms';
+@import '../settings/layout';
+@import '../settings/shadows';
+@import '../settings/typography';
+
+/* FORM */
+
+.img_wrp {
+
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 0;
+    overflow: hidden;
+
+    img {
+        border: 1px solid $color-white-border;
+        border-radius: $border-radius-normal;
+        max-width: 100%;
+        height: auto;
+    }
+
+    .caption {
+        @include black ( true, true );
+        @include medium ();
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: $layout-spacing;
+    }
+
+}
+
+label {
+    display: block;
+    margin-bottom: $layout-spacing;
+    text-align: left;
+}
+
+input, textarea {
+
+    @include white ( true );
+    @include medium ();
+    box-shadow: $shadow-depth-1;
+    border: none;
+    border-radius: $border-radius-normal;
+    box-sizing: border-box;
+    font-family: $font-family;
+    padding: $form-textbox-vertical-padding $form-textbox-horizontal-padding;
+    box-sizing:border-box;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1em;
+    min-width: 0px;
+    margin-bottom: $layout-spacing;
+
+    &.fluid {
+        width: 100%;
+    }
+
+    &[disabled], &.inactive {
+        opacity: 0.5;
+    }
+
+    &.outlined {
+        @include multi-shadow ( $shadow-depth-1, $form-outlined-shadow );
+    }
+
+}
+
+textarea {
+
+    resize: vertical;
+
+    &[disabled], &.inactive {
+        resize: none;
+    }
+
+}

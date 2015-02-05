@@ -1,0 +1,195 @@
+
+/* IMPORTS */
+
+@import '../tools/mixins';
+
+@import 'colors';
+@import 'sizes';
+
+@import '../settings/colors';
+@import '../settings/layout';
+@import '../settings/shadows';
+@import '../settings/slider';
+
+/* SLIDER */
+
+.slider_wrp {
+
+    @include medium ();
+    height: $slider-height;
+    margin-bottom: $layout-spacing;
+
+    & > .slider {
+
+        height: $slider-height;
+
+        input {
+            display: none;
+        }
+
+        .bar {
+
+            height: $slider-height;
+            line-height: $slider-height;
+            position: relative;
+            margin: 0 $slider-min-max-width;
+
+            .unhighlighted {
+
+                @include gray ( true );
+                @include center-absolutely ( false, $slider-unhighlighted-height );
+                border-radius: $slider-unhighlighted-height;
+                height: $slider-unhighlighted-height;
+                overflow: visible;
+                position: absolute;
+                left: $slider-handler-half-size;
+                right: $slider-handler-half-size;
+
+                .highlighted {
+                    @include secondary ( true );
+                    height: $slider-highlighted-height;
+                    border-radius: $slider-highlighted-height;
+                }
+
+                .handler {
+
+                    @include secondary ( true );
+                    @include center-absolutely ( false, $slider-handler-size );
+                    border-radius: 50%;
+                    box-shadow: $shadow-depth-2;
+                    height: $slider-handler-size;
+                    line-height: $slider-handler-size;
+                    position: absolute;
+                    text-align: center;
+                    margin-left: - $slider-handler-half-size;
+                    width: $slider-handler-size;
+                    z-index: 1;
+
+                    transition: height $slider-transitions-time ease 0s,
+                                line-height $slider-transitions-time ease 0s,
+                                margin-left $slider-transitions-time ease 0s,
+                                margin-top $slider-transitions-time ease 0s,
+                                width $slider-transitions-time ease 0s,
+                                box-shadow $slider-transitions-time ease 0s;
+
+                    .label {
+                        font-size: 0;
+                        transition: font-size $slider-transitions-time ease 0s;
+                    }
+
+                }
+
+            }
+
+        }
+
+        .min, .max {
+            height: $slider-height;
+            line-height: $slider-height;
+            text-align: center;
+            width: $slider-min-max-width;
+            position: relative;
+        }
+
+        .min {
+
+            float: left;
+
+            &:after {
+                content: attr(data-min)
+            }
+
+        }
+
+        .max {
+
+            float: right;
+
+            &:after {
+                content: attr(data-max)
+            }
+
+        }
+
+    }
+
+    &:not(.inactive) {
+
+        & > .slider {
+
+            &:not(.dragging) {
+
+                .min, .max {
+                    cursor: pointer;
+                }
+
+                .min {
+
+                    &:hover:after {
+                        content: '-';
+                    }
+
+                }
+
+                .max {
+
+                    &:hover:after {
+                        content: '+';
+                    }
+
+                }
+
+            }
+
+            .bar .unhighlighted {
+
+                cursor: pointer;
+
+                .handler {
+
+                    cursor: move;
+
+                    &:hover, &:active {
+
+                        height: $slider-handler-big-size;
+                        line-height: $slider-handler-big-size;
+                        @include center-absolutely ( false, $slider-handler-big-size );
+                        margin-left: - $slider-handler-half-big-size;
+                        width: $slider-handler-big-size;
+
+                        .label {
+                            font-size: $slider-handler-label-font-size;
+                        }
+
+                    }
+
+                    &:active {
+                        @include multi-shadow ( $shadow-depth-2, $slider-handler-active-shadow );
+                    }
+
+                }
+
+            }
+
+        }
+
+    }
+
+    &.inactive {
+
+        & > .slider .bar .unhighlighted {
+
+            .highlighted  {
+                @include gray ( true );
+            }
+
+            .handler {
+                @include gray ( true );
+                box-shadow: 0 0 0 $slider-inactive-handler-shadow-size $color-white-bg;
+            }
+
+        }
+
+    }
+
+}

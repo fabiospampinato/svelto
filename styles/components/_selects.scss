@@ -1,0 +1,72 @@
+
+/* IMPORTS */
+
+@import 'icons';
+
+@import '../settings/layout';
+@import '../settings/typography';
+
+/* SELECTS */
+
+.select {
+
+    select {
+        @include white ( true );
+        border: none;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        border-radius: $border-radius-normal;
+        cursor: pointer;
+        font-size: $font-size-normal;
+        position: absolute;
+        height: 100%;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        padding: 0 $layout-half-spacing;
+        width: 100%;
+        z-index: 1;
+    }
+
+    &.inactive select {
+        display:none;
+    }
+
+    .label .placeholder {
+
+        text-transform: none;
+        font-weight: bold;
+        display: inline-block;
+
+        &:before {
+            content: '\a0'; // &nbsp;
+        }
+
+    }
+
+    .icon:before {
+        @extend .icon-navigation-unfold-more:before;
+    }
+
+    &.top {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+    }
+
+    &.bottom {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &.right {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+    }
+
+    &.left {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+}

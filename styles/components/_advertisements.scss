@@ -1,0 +1,166 @@
+
+/* IMPORTS */
+
+@import '../settings/colors';
+@import '../settings/layout';
+
+/* GENERAL */
+
+[class*='ad-'] {
+    background-color: $color-gray-bg;
+    color: $color-gray-text;
+    margin-bottom: $layout-spacing;
+    text-align: center;
+}
+
+/* HORIZONTALS */
+
+.ad-728x90 {
+    width: 728px;
+    height: 90px;
+    line-height: 90px;
+}
+
+.ad-320x100 {
+    width: 320px;
+    height: 100px;
+    line-height: 100px;
+}
+
+.ad-970x250 {
+    width: 970px;
+    height: 250px;
+    line-height: 250px;
+}
+
+.ad-970x90 {
+    width: 970px;
+    height: 90px;
+    line-height: 90px;
+}
+
+.ad-468x60 {
+    width: 468px;
+    height: 60px;
+    line-height: 60px;
+}
+
+.ad-320x50 {
+    width: 320px;
+    height: 50px;
+    line-height: 50px;
+}
+
+.ad-234x60 {
+    width: 234px;
+    height: 60px;
+    line-height: 60px;
+}
+
+/* VERTICALS */
+
+.ad-300x600 {
+    width: 300px;
+    height: 600px;
+    line-height: 600px;
+}
+
+.ad-300x1050 {
+    width: 300px;
+    height: 1050px;
+    line-height: 1050px;
+}
+
+.ad-160x600 {
+    width: 160px;
+    height: 600px;
+    line-height: 600px;
+}
+
+.ad-120x600 {
+    width: 120px;
+    height: 600px;
+    line-height: 600px;
+}
+
+.ad-120x240 {
+    width: 120px;
+    height: 240px;
+    line-height: 240px;
+}
+
+/* RECTANGULARS */
+
+.ad-336x280 {
+    width: 336px;
+    height: 280px;
+    line-height: 280px;
+}
+
+.ad-300x250 {
+    width: 300px;
+    height: 250px;
+    line-height: 250px;
+}
+
+.ad-250x250 {
+    width: 250px;
+    height: 250px;
+    line-height: 250px;
+}
+
+.ad-200x200 {
+    width: 200px;
+    height: 200px;
+    line-height: 200px;
+}
+
+.ad-180x150 {
+    width: 180px;
+    height: 150px;
+    line-height: 150px;
+}
+
+.ad-125x125 {
+    width: 125px;
+    height: 125px;
+    line-height: 125px;
+}
+
+/* LINKS */
+
+.ad-728x15 {
+    width: 728px;
+    height: 15px;
+    line-height: 15px;
+}
+
+.ad-468x15 {
+    width: 468px;
+    height: 15px;
+    line-height: 15px;
+}
+
+.ad-200x90 {
+    width: 200px;
+    height: 90px;
+    line-height: 90px;
+}
+
+.ad-180x90 {
+    width: 180px;
+    height: 90px;
+    line-height: 90px;
+}
+
+.ad-160x90 {
+    width: 160px;
+    height: 90px;
+    line-height: 90px;
+}
+
+.ad-120x90 {
+    width: 120px;
+    height: 90px;
+    line-height: 90px;
+}

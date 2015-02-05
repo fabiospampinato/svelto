@@ -1,0 +1,27 @@
+
+/* IMPORTS */
+
+@import 'layout';
+
+/* SETTINGS */
+
+$slider-height: 2.66667em;
+
+$slider-transitions-time: 0.15s;
+
+$slider-min-max-width: $slider-height;
+
+$slider-handler-size: 1.33333em;
+$slider-handler-half-size: $slider-handler-size / 2;
+
+$slider-handler-big-size: 1.86667em;
+$slider-handler-half-big-size: $slider-handler-big-size / 2;
+
+$slider-handler-active-shadow: 0 0 0 0.85em rgba(255, 171, 145, 0.25);
+
+$slider-handler-label-font-size: 0.8em;
+
+$slider-unhighlighted-height: 0.4em;
+$slider-highlighted-height: $slider-unhighlighted-height;
+
+$slider-inactive-handler-shadow-size: 0.33333rem;

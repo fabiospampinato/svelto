@@ -1,0 +1,64 @@
+
+/* IMPORTS */
+
+@import 'expander';
+
+@import '../settings/layout';
+
+/* ACCORDION */
+
+.accordions_wrp {
+
+    margin-bottom: $layout-spacing;
+
+    .accordion {
+
+        @extend .expander;
+
+        margin-bottom: 0 !important;
+
+        &:not(:last-child) {
+
+            margin-bottom: -1px !important;
+            border-bottom-width: 0 !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+
+            .header {
+                border-bottom-width: 0 !important;
+                border-bottom-left-radius: 0 !important;
+                border-bottom-right-radius: 0 !important;
+            }
+
+        }
+
+        &:not(:first-child) {
+
+            border-top-left-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+
+            .header {
+                border-top-left-radius: 0 !important;
+                border-top-right-radius: 0 !important;
+            }
+
+        }
+
+        .header {
+            margin-bottom: 0 !important;
+        }
+
+        &.active {
+
+            margin-bottom: 0 !important;
+
+            .header {
+                margin-bottom: $layout-spacing !important;
+                border-bottom-width: 1px !important;
+            }
+
+        }
+
+    }
+
+}

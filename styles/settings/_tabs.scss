@@ -1,0 +1,13 @@
+
+/* SETTINGS */
+
+$tab-border-size: 1px;
+$tab-height: 41px;
+
+$tab-icon-font-size: 24px;
+$tab-icon-size: $tab-icon-font-size;
+
+$tabs-height: $tab-height + ( $tab-border-size * 2 );
+
+$tab-content-bottom-section-color-bg: rgba(0, 0, 0, 0.15);
+$tab-content-top-section-color-bg: #e6e6e6;

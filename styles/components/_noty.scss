@@ -1,0 +1,108 @@
+
+/* IMPORTS */
+
+@import '../tools/mixins';
+
+@import '../settings/layout';
+@import '../settings/noty';
+@import '../settings/shadows';
+
+/* MEDIA QUERIES */
+
+@include max-screen ( $noty-full-breakpoint ) {
+
+    #noty_queue, .noty_wrp, .noty {
+        width: 100% !important;
+    }
+
+    .noty {
+        border-radius: 0 !important;
+        margin: 0 !important;
+        border-left: none !important;
+        border-right: none !important;
+        border-bottom: none !important;
+    }
+
+}
+
+/* NOTY QUEUE */
+
+#noty_queue {
+    bottom: 0;
+    display: inline-block;
+    left: 0;
+    position: fixed;
+    z-index: 100;
+    max-width: 100%;
+    text-align: left;
+    pointer-events: none;
+}
+
+/* NOTY */
+
+.noty_wrp {
+
+    .noty {
+
+        margin-left: $layout-spacing;
+        margin-right: $layout-spacing;
+        margin-bottom: 0;
+        border-radius: $border-radius-normal;
+        @include multi-shadow ( $shadow-depth-3, $noty-shadow-inset );
+        border-width: 1px;
+        border-style: solid;
+        cursor: pointer;
+        box-sizing: border-box;
+        display: inline-block;
+        text-align: center;
+        pointer-events: auto;
+        opacity: 0;
+        font-size: 0;
+        padding: 0;
+        transition: opacity 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s, margin-bottom 0.2s ease 0s;
+
+        &.has_buttons {
+            cursor: default;
+        }
+
+        .custom_content {
+            margin-top: $layout-spacing;
+        }
+
+        .multiple {
+
+            margin-top: $layout-spacing;
+            margin-bottom: 0;
+
+            .button {
+                margin-top: 0;
+                margin-bottom: 0;
+                transition: height 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s;
+            }
+
+        }
+
+        .msg:empty + .custom_content {
+            margin-top: 0;
+        }
+
+        & > *:last-child, .custom_content > *:last-child {
+            margin-bottom: 0;
+        }
+
+    }
+
+    &:not(.active) .noty .button {
+        height: 0;
+        font-size: 0;
+        padding: 0;
+    }
+
+    &.active .noty {
+        opacity: 1;
+        font-size: $noty-text-size;
+        padding: $layout-spacing;
+        margin-bottom: $layout-spacing;
+    }
+
+}

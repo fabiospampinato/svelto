@@ -1,0 +1,86 @@
+
+/* IMPORTS */
+
+@import 'colors';
+
+@import '../settings/expander';
+@import '../settings/layout';
+@import '../settings/shadows';
+
+/* EXPANDER */
+
+.expander {
+
+    padding-bottom: 0 !important;
+
+    & > .header {
+
+        margin-bottom: 0 !important;
+        border-bottom-left-radius: $border-radius-normal !important;
+        border-bottom-right-radius: $border-radius-normal !important;
+        transition: opacity 0.2s ease 0s;
+
+        .sub {
+
+            .icon {
+                transition: transform 0.2s ease 0s;
+            }
+
+            &.left .icon {
+                transform: rotate(-90deg);
+            }
+
+            &.right .icon {
+                transform: rotate(90deg);
+            }
+
+        }
+
+    }
+
+    & > .content {
+        display: none;
+    }
+
+    &:not(.inactive) {
+
+        & > .header {
+
+            cursor: pointer;
+            opacity: 1;
+
+            &:active {
+                box-shadow: $shadow-inset-1;
+            }
+
+        }
+
+    }
+
+    &.inactive > .header {
+        opacity: $expander-inactive-opacity;
+    }
+
+    &.active {
+
+        padding-bottom: $layout-spacing !important;
+
+        & > .header {
+
+            margin-bottom: $layout-spacing !important;
+            border-bottom-left-radius: 0 !important;
+            border-bottom-right-radius: 0 !important;
+
+            .sub .icon {
+                transform: rotate(0);
+            }
+
+        }
+
+        & > .content {
+            display: block;
+        }
+
+    }
+
+}

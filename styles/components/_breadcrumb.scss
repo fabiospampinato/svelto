@@ -1,0 +1,26 @@
+
+/* IMPORTS */
+
+@import 'icons';
+
+@import '../settings/breadcrumb';
+
+/* BREADCRUMB */
+
+.breadcrumb {
+
+    & >  *:not(:last-child):after {
+        @extend %icon;
+        @extend .icon-navigation-chevron-right:before;
+        padding-left: $breadcrumb-padding;
+        padding-right: $breadcrumb-padding;
+        opacity: $breadcrumb-opacity;
+    }
+
+    &.slashed > *:not(:last-child):after {
+        content: '/';
+        padding-left: $breadcrumb-padding * 1.6;
+        padding-right: $breadcrumb-padding * 1.6;
+    }
+
+}
