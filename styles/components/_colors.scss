@@ -1,9 +1,4 @@
 
-/* IMPORTS */
-
-@import '../settings/colors';
-@import '../settings/gradients';
-
 /* BRAND */
 
 @mixin primary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {

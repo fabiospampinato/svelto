@@ -1,17 +1,4 @@
 
-/* IMPORTS */
-
-@import 'tools/mixins';
-
-@import 'components/colors';
-
-@import 'settings/colors';
-@import 'settings/general';
-@import 'settings/navbar';
-@import 'settings/layout';
-@import 'settings/shadows';
-@import 'settings/typography';
-
 /* GENERAL */
 
 html {
@@ -148,7 +135,7 @@ button {
 
 .blur {
     filter: blur(3px);
-    filter: url('/bootstrap/images/blur.svg');
+    filter: url('/images/blur.svg');
 }
 
 .show {

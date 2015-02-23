@@ -1,0 +1,34 @@
+//- layout.jade
+
+doctype html
+html(lang="en", xml:lang="en", dir="ltr")
+    head
+        title Presto
+
+        meta(charset="UTF-8")
+        meta(name="robots", content="NOYDIR")
+        meta(name="robots", content="NOODP")
+        meta#m_viewport(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+
+        link(rel="shortcut icon", href="/images/favicon.ico")
+
+        block css
+            link(rel="stylesheet", type="text/css", href="/dist/presto-min.css", media="all")
+
+        block js
+            script(type="text/javascript", src="/dist/presto-min.js")
+
+    body
+        #navbar
+            .content
+                #menu_btn.navbar_btn.actionable.left
+                    .hamburger
+                        .layer_wrp
+                            .layer
+                a#logo.navbar_btn.actionable.left(href="/views/index.html") Presto
+                block navbar
+
+        #content
+            block content
+
+        block body

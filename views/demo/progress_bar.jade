@@ -1,0 +1,104 @@
+//- bootstrap/progress_bar.jade
+
+extends ../layout.jade
+
+append content
+    .separator_wrp
+        .separator Base
+    .grid
+        .grid_cols.fluid.limited
+            .grid_col
+                .container
+                    .progress_bar(data-percentage="33")
+                        .unhighlighted
+                            .highlighted
+                    .progress_bar.striped(data-percentage="55")
+                        .unhighlighted
+                            .highlighted
+                    .progress_bar(data-percentage="55")
+                        .unhighlighted
+                            .highlighted
+                                .label
+
+    .separator_wrp
+        .separator Colored
+    .grid
+        .grid_cols.fluid.limited
+            .grid_col
+                .container
+                    .progress_bar(data-percentage="70")
+                        .unhighlighted
+                            .highlighted.yellow
+                            .highlighted.green
+                            .highlighted.pink
+                            .highlighted.teal
+                    .progress_bar.striped(data-percentage="20")
+                        .unhighlighted
+                            .highlighted.yellow
+                            .highlighted.green
+                            .highlighted.pink
+                            .highlighted.teal
+                    .progress_bar(data-percentage="20")
+                        .unhighlighted
+                            .highlighted.yellow
+                                .label
+                            .highlighted.green
+                                .label
+                            .highlighted.pink
+                                .label
+                            .highlighted.teal
+                                .label
+                    .progress_bar.fixed
+                        .unhighlighted
+                            .highlighted.yellow.w10-100
+                            .highlighted.green.w20-100
+                            .highlighted.pink.w30-100
+                            .highlighted.teal.w40-100
+
+    .separator_wrp
+        .separator Inactive
+    .grid
+        .grid_cols.fluid.limited
+            .grid_col
+                .container
+                    .progress_bar.inactive(data-percentage="45")
+                        .unhighlighted
+                            .highlighted
+                    .progress_bar.striped.inactive(data-percentage="66")
+                        .unhighlighted
+                            .highlighted
+                    .progress_bar.inactive(data-percentage="70")
+                        .unhighlighted
+                            .highlighted.yellow
+                            .highlighted.green
+                            .highlighted.pink
+                            .highlighted.teal
+                    .progress_bar.inactive(data-percentage="70")
+                        .unhighlighted
+                            .highlighted.yellow
+                                .label
+                            .highlighted.green
+                                .label
+                            .highlighted.pink
+                                .label
+                            .highlighted.teal
+                                .label
+
+    .separator_wrp
+        .separator Actions
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .multiple
+                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 'default' )") Default
+                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 0 )") Set 0%
+                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 25 )") Set 25%
+                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 50 )") Set 50%
+                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 75 )") Set 75%
+                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 100 )") Set 100%
+
+append body
+    script(type="text/javascript").
+        function progress_bar_set ( percentage ) {
+            $(".progress_bar").progress_bar ( percentage );
+        }

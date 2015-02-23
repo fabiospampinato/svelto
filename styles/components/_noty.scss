@@ -1,12 +1,4 @@
 
-/* IMPORTS */
-
-@import '../tools/mixins';
-
-@import '../settings/layout';
-@import '../settings/noty';
-@import '../settings/shadows';
-
 /* MEDIA QUERIES */
 
 @include max-screen ( $noty-full-breakpoint ) {

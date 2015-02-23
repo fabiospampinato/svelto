@@ -1,0 +1,28 @@
+//- bootstrap/breadcrumb.jade
+
+extends ../layout.jade
+
+append content
+    .separator_wrp
+        .separator Base
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container
+                    .breadcrumb
+                        a(href="#", title="Link 1") Link 1
+                        a(href="#", title="Link 2") Link 2
+                        a(href="#", title="Link 3") Link 3
+                        a(href="#", title="Link 4") Link 4
+
+    .separator_wrp
+        .separator Slashed
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container
+                    .breadcrumb.slashed
+                        a(href="#", title="Link 1") Link 1
+                        a(href="#", title="Link 2") Link 2
+                        a(href="#", title="Link 3") Link 3
+                        a(href="#", title="Link 4") Link 4
