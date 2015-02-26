@@ -1,9 +1,4 @@
 
-/* VARIABLES */
-
-var is_mobile = /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( navigator.userAgent.toLowerCase () );
-var is_tablet = /ipad|playbook|tablet|kindle/i.test ( navigator.userAgent.toLowerCase () );
-
 /* EVENTS */
 
 var get_event_pageXY = function ( event ) {
@@ -86,7 +81,7 @@ var fuzzy_match = function ( string, search ) {
 
             var string_char = string[m];
 
-            if ( search_char.toLowerCase() == string_char.toLowerCase() ) {
+            if ( search_char.toLowerCase() === string_char.toLowerCase() ) {
 
                 current_index = m;
                 matches = true;
@@ -96,7 +91,7 @@ var fuzzy_match = function ( string, search ) {
 
         }
 
-        if ( matches == false ) {
+        if ( matches === false ) {
             return false;
         }
 

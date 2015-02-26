@@ -26,7 +26,7 @@ $.fn.badge = function ( options ) {
             type = options.type || $ele.data ( 'badge-type' ) || 'floating',
             style = options.style || $ele.data ( 'badge-style' ) || ''; // all_colors, squared
 
-        if ( !title || title == 0 ) title = '';
+        if ( !title || title === 0 || title === '0' ) title = '';
 
         if ( !type && type !== 'inline' && type !== 'floating' ) type = 'inline';
 

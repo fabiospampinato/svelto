@@ -1,7 +1,7 @@
 
 /* TIMEAGO */
 
-$.fn.timeago = function ( options ) {
+$.fn.timeago = function () {
 
     return this.each ( function ( node ) {
 

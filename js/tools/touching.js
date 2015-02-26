@@ -16,7 +16,7 @@ $.fn.touching = function ( options ) {
     this.bt_each ( function ( node ) {
 
         var $ele = $(node),
-            offset = $ele.offset ();
+            offset = $ele.offset (),
             x1 = offset.left,
             y1 = offset.top;
 

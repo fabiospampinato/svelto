@@ -68,13 +68,13 @@ $.fn.slider = function () {
 
             distance = round_distance ( distance );
 
-            if ( distance != 0 ) {
+            if ( distance !== 0 ) {
 
                 var possible_new_value = current_value + ( distance / one_step_width );
 
                 possible_new_value = Math.max ( min, Math.min ( max, possible_new_value ) );
 
-                if ( current_value != possible_new_value ) {
+                if ( current_value !== possible_new_value ) {
 
                     current_value = possible_new_value;
 
@@ -111,7 +111,6 @@ $.fn.slider = function () {
             unhighlighted_width = $unhighlighted.width (),
             one_step_width = unhighlighted_width / ( max - min ),
             required_step_width = step * one_step_width,
-            handler_width = $handler.width (),
             current_value = start;
 
         // Init
@@ -124,7 +123,7 @@ $.fn.slider = function () {
 
             var input_val = Number($input.val ());
 
-            if ( input_val == current_value ) return;
+            if ( input_val === current_value ) return;
 
             current_value = input_val;
 
@@ -146,11 +145,11 @@ $.fn.slider = function () {
 
         var doc_keydown_handler = function ( event ) {
 
-            if ( event.keyCode == 37 ) { // left arrow
+            if ( event.keyCode === 37 ) { // left arrow
 
                 navigate ( -step );
 
-            } else if ( event.keyCode == 39 ) { // right arrow
+            } else if ( event.keyCode === 39 ) { // right arrow
 
                 navigate ( step );
 
@@ -216,9 +215,9 @@ $.fn.slider = function () {
 
             if ( Math.abs ( delta_move ) >= 1 ) {
 
-                moved = navigate_move ( delta_move );
+                var moved = navigate_move ( delta_move );
 
-                if ( moved != false && Math.abs ( delta_move ) >= 1 ) {
+                if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
 
                     current_move += moved;
 
@@ -228,7 +227,7 @@ $.fn.slider = function () {
 
         };
 
-        var drag_end_handler = function ( event ) {
+        var drag_end_handler = function () {
 
             $html.removeClass ( 'dragging' );
             $slider.removeClass ( 'dragging' );

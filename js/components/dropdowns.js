@@ -48,7 +48,7 @@ $.fn.dropdowns = function ( options ) {
 
             options.callbacks.before_close ();
 
-            if ( dropdowns_assignments[dropdown_id] == $dropdown_btn ) {
+            if ( dropdowns_assignments[dropdown_id] === $dropdown_btn ) {
 
                 $dropdown.removeClass ( 'active' );
 
@@ -296,7 +296,7 @@ $.fn.dropdowns = function ( options ) {
 
         };
 
-        $dropdown_btn.on ( 'click', function ( event ) {
+        $dropdown_btn.on ( 'click', function () {
 
             if ( opened ) {
 

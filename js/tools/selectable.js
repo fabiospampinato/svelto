@@ -70,7 +70,7 @@ $.fn.selectable = function ( options ) {
 
             if ( event.ctrlKey ) { // CTRL
 
-                if ( event.keyCode == 65 ) { // A
+                if ( event.keyCode === 65 ) { // A
 
                     event.preventDefault ();
 
@@ -78,7 +78,7 @@ $.fn.selectable = function ( options ) {
 
                     $rows.toggleClass ( options.selected_class, !event.shiftKey ); // SHIFT or not
 
-                } else if ( event.keyCode == 73 ) { // I
+                } else if ( event.keyCode === 73 ) { // I
 
                     event.preventDefault ();
 
@@ -140,7 +140,7 @@ $.fn.selectable = function ( options ) {
 
         };
 
-        var drag_mouseenter_handler = function ( event ) { // DRAG HOVER
+        var drag_mouseenter_handler = function () { // DRAG HOVER
 
             var $end_row = $(this);
 
@@ -149,7 +149,7 @@ $.fn.selectable = function ( options ) {
                 min_index = Math.min ( start_index, end_index ),
                 max_index = Math.max ( start_index, end_index );
 
-            if ( min_index == start_index ) { // down
+            if ( min_index === start_index ) { // down
 
                 min_index += 1;
                 max_index += 1;
@@ -174,7 +174,7 @@ $.fn.selectable = function ( options ) {
 
         };
 
-        var drag_mouseup_handler = function ( event ) { // DRAG END
+        var drag_mouseup_handler = function () { // DRAG END
 
             $rows.off ( 'mouseenter', drag_mouseenter_handler );
 
@@ -199,7 +199,7 @@ $.fn.selectable = function ( options ) {
                     min_index = Math.min ( start_index, end_index ),
                     max_index = Math.max ( start_index, end_index );
 
-                if ( min_index == start_index ) { // down
+                if ( min_index === start_index ) { // down
 
                     min_index += 1;
                     max_index += 1;

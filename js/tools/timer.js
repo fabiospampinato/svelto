@@ -3,19 +3,19 @@
 
 var timer = function ( func, time, autostart ) {
 
-    return new timer_obj ( func, time, autostart );
+    return new Timer ( func, time, autostart );
 
 };
 
 /* TIMER OBJ */
 
-var timer_obj = function ( func, time, autostart ) {
+var Timer = function ( func, time, autostart ) {
 
     return this.set ( func, time, autostart );
 
 };
 
-timer_obj.prototype = {
+Timer.prototype = {
 
     set: function ( func, time, autostart ) {
 
@@ -126,7 +126,7 @@ timer_obj.prototype = {
 
         this.timeoutObject = window.setTimeout ( function () {
 
-            timer.go ()
+            timer.go ();
 
         }, time );
 

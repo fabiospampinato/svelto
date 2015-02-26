@@ -20,8 +20,8 @@ $.fn.spinner = function () {
             $input.val ( value ).trigger ( 'change' );
             $label.html ( value );
 
-            $decrease_btn.toggleClass ( 'inactive', value == min );
-            $increase_btn.toggleClass ( 'inactive', value == max );
+            $decrease_btn.toggleClass ( 'inactive', value === min );
+            $increase_btn.toggleClass ( 'inactive', value === max );
 
         };
 
@@ -65,7 +65,7 @@ $.fn.spinner = function () {
 
             var input_val = Number($input.val ());
 
-            if ( input_val == current_value ) return;
+            if ( input_val === current_value ) return;
 
             current_value = input_val;
 
@@ -77,11 +77,11 @@ $.fn.spinner = function () {
 
         var doc_keydown_handler = function ( event ) {
 
-            if ( event.keyCode == 37 ) { // left arrow
+            if ( event.keyCode === 37 ) { // left arrow
 
                 navigate ( -step );
 
-            } else if ( event.keyCode == 39 ) { // right arrow
+            } else if ( event.keyCode === 39 ) { // right arrow
 
                 navigate ( step );
 

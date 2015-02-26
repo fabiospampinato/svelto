@@ -126,8 +126,6 @@ var noty_get_button_html = function ( button ) {
 
 var noty_delete = function ( del_id ) {
 
-    delete noty_queue[del_id];
-
     var $noty_wrp = $('#noty_wrp_' + del_id);
 
     $noty_wrp.removeClass ( 'active' );

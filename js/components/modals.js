@@ -40,7 +40,7 @@ $.fn.modals = function () {
 
         var esc_keydown_handler = function ( event ) {
 
-            if ( event.keyCode == 27 ) { // esc
+            if ( event.keyCode === 27 ) { // esc
 
                 close ();
 

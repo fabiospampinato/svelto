@@ -32,12 +32,14 @@ var cookie = {
 
         }
 
-        return document.cookie =
-               encodeURIComponent ( name ) + '=' + encodeURIComponent ( value ) +
-               ( expire ? '; expires=' + date.toGMTString () : '' ) +
-               '; path=' + ( path ? path : '/' ) +
-               ( domain ? '; domain=' + domain : '' ) +
-               ( secure ? '; secure' : '' );
+        document.cookie =
+          encodeURIComponent ( name ) + '=' + encodeURIComponent ( value ) +
+          ( expire ? '; expires=' + date.toGMTString () : '' ) +
+          '; path=' + ( path ? path : '/' ) +
+          ( domain ? '; domain=' + domain : '' ) +
+          ( secure ? '; secure' : '' );
+
+        return document.cookie;
 
     }
 

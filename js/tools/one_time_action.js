@@ -25,7 +25,7 @@ var one_time_action = function ( method, option, action ) {
             type: 'GET',
             url: option,
             success: function ( res ) {
-                if ( res == '1' ) {
+                if ( res === 1 || res === '1' ) {
                     action ();
                 }
             }

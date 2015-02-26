@@ -95,7 +95,7 @@ $.fn.selects = function () {
 
         var update = function () {
 
-            if ( !is_mobile ) {
+            if ( !browser.is_mobile ) {
 
                 update_dropdown ();
 
@@ -121,7 +121,7 @@ $.fn.selects = function () {
 
         update_placeholder ();
 
-        if ( !is_mobile ) {
+        if ( !browser.is_mobile ) {
 
             $select.hide ();
 

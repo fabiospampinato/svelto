@@ -224,7 +224,7 @@ $.fn.tagbox = function ( options ) {
 
         });
 
-        $partial.on ( 'paste', function ( event ) { // catching a paste, basically parsing the $partial.val () after the paste
+        $partial.on ( 'paste', function () { // catching a paste, basically parsing the $partial.val () after the paste
 
             $.defer ( function () {
 

@@ -7,7 +7,6 @@ $.fn.expander = function () {
 
         var $expander = $(node),
             $header = $expander.children ( '.header' ),
-            $content = $expander.children ( '.content' ),
             opened = $expander.hasClass ( 'active' );
 
         $header.on ( 'click', function () {

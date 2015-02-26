@@ -17,7 +17,11 @@ var lQuery;
 
     var camelize = function ( str ) {
 
-        var camel_cased = str.replace ( /-+(.)?/g, function ( match, chr ) { return chr ? chr.toUpperCase () : '' } );
+        var camel_cased = str.replace ( /-+(.)?/g, function ( match, chr ) {
+
+            return chr ? chr.toUpperCase () : '';
+
+        });
 
         return camel_cased[0].toLowerCase () + camel_cased.slice ( 1 );
 
@@ -28,10 +32,10 @@ var lQuery;
         var num;
 
         return value
-                   ? value == "true" ||
-                       ( value == "false"
+                   ? value === "true" ||
+                       ( value === "false"
                              ? false
-                             : value == "null"
+                             : value === "null"
                                  ? null
                                  : !/^0/.test ( value ) && !isNaN ( num = Number ( value ) )
                                      ? num
@@ -56,15 +60,16 @@ var lQuery;
 
     var arr_unique =  function ( arr, sorted ) {
 
-        var sorted = sorted ? arr : ( arr[0].compareDocumentPosition ? arr.sort ( DOMPositionComparator ) : arr.sort () ),
-            prev;
+        sorted = sorted ? arr : ( arr[0].compareDocumentPosition ? arr.sort ( DOMPositionComparator ) : arr.sort () );
+
+        var prev;
 
         for ( var i = sorted.length - 1; i >= 0; i-- ) {
 
             if ( sorted[i] === prev ) sorted.splice ( i, 1 );
             else prev = sorted[i];
 
-        };
+        }
 
         return sorted;
 
@@ -309,7 +314,7 @@ var lQuery;
 
         get: function ( index ) {
 
-            return this.nodes [ index >= 0 ? index : idx + this.length ];
+            return this.nodes [ index >= 0 ? index : index + this.length ];
 
         },
 
@@ -337,7 +342,7 @@ var lQuery;
 
             for ( var i = 0; i < this.length; i++ ) {
 
-                if ( this.nodes[i] == ele ) return i;
+                if ( this.nodes[i] === ele ) return i;
 
             }
 
@@ -536,7 +541,7 @@ var lQuery;
 
                 var value = callback.call ( this.nodes[i], this.nodes[i], i );
 
-                if ( value != null ) results.push ( value );
+                if ( value !== null ) results.push ( value );
 
             }
 
@@ -751,7 +756,7 @@ var lQuery;
 
                         });
 
-                    };
+                    }
 
                 }
 
@@ -820,7 +825,7 @@ var lQuery;
 
                 var node = this;
 
-                $off ( node, event.type, handler_wrp );
+                $(node).off ( event.type, handler ); //FIXME: does it work?
 
                 return handler.call ( node, event );
 
@@ -834,7 +839,7 @@ var lQuery;
 
             if ( typeof name === 'object' ) {
 
-                for ( key in name ) this.css ( key, name[key] );
+                for ( var key in name ) this.css ( key, name[key] );
 
                 return this;
 
@@ -958,7 +963,7 @@ var lQuery;
 
             for ( var i = 0; i < this.length; i++ ) {
 
-                this.nodes[i].style['display'] = ( getComputedStyle ( this.nodes[i] )['display'] !== 'block' ) ? 'block' : 'none';
+                this.nodes[i].style.display = ( getComputedStyle ( this.nodes[i] ).display !== 'block' ) ? 'block' : 'none';
 
             }
 
@@ -982,7 +987,7 @@ var lQuery;
 
             var parent = this.nodes[0].offsetParent || document.body;
 
-            while ( parent && !rootNodeRE.test ( parent.nodeName ) && getComputedStyle ( parent )['position'] === 'static' ) {
+            while ( parent && !rootNodeRE.test ( parent.nodeName ) && getComputedStyle ( parent ).position === 'static' ) {
 
                 parent = parent.offsetParent;
 
@@ -1056,9 +1061,9 @@ if ( !window.$$ ) window.$$ = lQuery;
 
 lQuery.dom_ready ( function () {
 
-    $window = $(window);
-    $document = $(document);
-    $html = $(document.documentElement);
-    $body = $(document.body);
+    window.$window = $(window);
+    window.$document = $(document);
+    window.$html = $(document.documentElement);
+    window.$body = $(document.body);
 
 });

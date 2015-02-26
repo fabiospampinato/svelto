@@ -76,7 +76,7 @@ $.fn.switcher = function ( options ) {
 
             var possible_new_value = $input.checked ();
 
-            if ( possible_new_value == current_value ) return;
+            if ( possible_new_value === current_value ) return;
 
             current_value = possible_new_value;
 
@@ -88,7 +88,7 @@ $.fn.switcher = function ( options ) {
 
         var doc_keydown_handler = function ( event ) {
 
-            if ( event.keyCode == 37 ) { // left arrow
+            if ( event.keyCode === 37 ) { // left arrow
 
                 if ( current_value !== false ) {
 
@@ -98,7 +98,7 @@ $.fn.switcher = function ( options ) {
 
                 }
 
-            } else if ( event.keyCode == 39 ) { // right arrow
+            } else if ( event.keyCode === 39 ) { // right arrow
 
                 if ( current_value !== true ) {
 
@@ -175,8 +175,7 @@ $.fn.switcher = function ( options ) {
 
         var drag_end_handler = function ( event ) {
 
-            var end_pos = get_event_pageXY ( event ),
-                bar_off = $bar.offset (),
+            var bar_off = $bar.offset (),
                 handler_off = $handler.offset ();
 
             current_value = ( handler_off.left + ( handler_off.width / 2 ) >= bar_off.left + ( bar_off.width / 2 ) );

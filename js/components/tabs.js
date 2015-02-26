@@ -1,7 +1,7 @@
 
 /* TABS */
 
-$.fn.tabs = function ( nodes ) {
+$.fn.tabs = function () {
 
     return this.each ( function ( node ) {
 
