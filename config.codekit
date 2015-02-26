@@ -385,17 +385,6 @@
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/min\/browser.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/tools\/min\/browser.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/min\/browser.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
-		"syntaxCheckerStyle": 1
-		},
 	"\/js\/tools\/one_time_action.js": {
 		"fileType": 64,
 		"ignore": 1,
