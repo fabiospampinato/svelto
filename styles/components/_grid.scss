@@ -33,7 +33,7 @@
 */
 
 .grid {
-    margin: 0 -#{$layout-half-spacing};
+    margin: 0 #{-$layout-half-spacing};
 }
 
 .grid_cols {
@@ -232,7 +232,7 @@
     & > .header {
 
         @include primary ();
-        border-width: 1px;
+        border-width: $container-header-border-width;
         border-style: solid;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
@@ -241,7 +241,7 @@
         height: $container-header-height;
         line-height: $container-header-height;
         font-weight: bold;
-        margin: -#{$layout-spacing + $grid-container-border-size} -#{$layout-spacing + $grid-container-border-size} #{$layout-spacing + $grid-container-border-size};
+        margin: #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)} #{$layout-spacing + $grid-container-border-size};
         text-transform: uppercase;
         position: relative;
 
@@ -282,7 +282,7 @@
     }
 
     & > .footer {
-        margin: #{$layout-spacing} -#{$layout-spacing + $grid-container-border-size} -#{$layout-spacing + $grid-container-border-size};
+        margin: #{$layout-spacing} #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)};
         padding: $layout-spacing $layout-spacing 0;
         min-height: $container-footer-height;
         line-height: $container-footer-height;

@@ -67,11 +67,11 @@
         .sub {
 
             &.left {
-                margin: -#{$button-compact-vertical-padding} #{$button-compact-horizontal-padding} -#{$button-compact-vertical-padding} -#{$button-compact-horizontal-padding};
+                margin: #{-$button-compact-vertical-padding} #{$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
             }
 
             &.right {
-                margin: -#{$button-compact-vertical-padding} -#{$button-compact-horizontal-padding} -#{$button-compact-vertical-padding} #{$button-compact-horizontal-padding};
+                margin: #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} #{$button-compact-horizontal-padding};
             }
 
         }
@@ -92,14 +92,16 @@
 
         .sub {
 
+            padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);
+
             &.left {
                 border-right: 1px solid rgba(0, 0, 0, 0.0625);
-                margin-right: calc(#{$button-horizontal-padding} - 1px);
+                margin: calc(-#{$button-vertical-padding} + 1px) calc(#{$button-horizontal-padding} - 1px) #{-$button-vertical-padding} #{-$button-horizontal-padding};
             }
 
             &.right {
                 border-left: 1px solid rgba(0, 0, 0, 0.0625);
-                margin-left: calc(#{$button-horizontal-padding} - 1px);
+                margin: calc(-#{$button-vertical-padding} + 1px) #{-$button-horizontal-padding} #{-$button-vertical-padding} calc(#{$button-horizontal-padding} - 1px);
             }
 
         }
@@ -107,11 +109,11 @@
         &.compact .sub {
 
             &.left {
-                margin-right: calc(#{$button-compact-horizontal-padding} - 1px);
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) calc(#{$button-compact-horizontal-padding} - 1px) #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
             }
 
             &.right {
-                margin-left: calc(#{$button-compact-horizontal-padding} - 1px);
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} calc(#{$button-compact-horizontal-padding} - 1px);
             }
 
         }
@@ -159,11 +161,11 @@
         min-width: 1em;
 
         &.left {
-            margin: -#{$button-vertical-padding} #{$button-horizontal-padding} -#{$button-vertical-padding} -#{$button-horizontal-padding};
+            margin: #{-$button-vertical-padding} #{$button-horizontal-padding} #{-$button-vertical-padding} #{-$button-horizontal-padding};
         }
 
         &.right {
-            margin: -#{$button-vertical-padding} -#{$button-horizontal-padding} -#{$button-vertical-padding} #{$button-horizontal-padding};
+            margin: #{-$button-vertical-padding} #{-$button-horizontal-padding} #{-$button-vertical-padding} #{$button-horizontal-padding};
         }
 
         &.actionable {

@@ -7,7 +7,7 @@
 
     & > .header {
 
-        margin-bottom: 0 !important;
+        margin-bottom: -$container-header-border-width !important;
         border-bottom-left-radius: $border-radius-normal !important;
         border-bottom-right-radius: $border-radius-normal !important;
         transition: opacity 0.2s ease 0s;
