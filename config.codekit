@@ -306,6 +306,17 @@
 		"outputStyle": 2,
 		"syntaxCheckerStyle": 0
 		},
+	"\/js\/external\/lodash.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/js\/external\/lodash.js",
+		"outputAbbreviatedPath": "\/js\/external\/min\/lodash.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 2,
+		"syntaxCheckerStyle": 1
+		},
 	"\/js\/external\/lQuery.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -2169,218 +2180,224 @@
 	"\/js\/all.js": [
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/external\/lQuery.js",
+			"linkedFileAbbreviatedPath": "\/js\/external\/lodash.js",
 			"position": 0,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/external\/prism.js",
+			"linkedFileAbbreviatedPath": "\/js\/external\/lQuery.js",
 			"position": 1,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/autogrow.js",
+			"linkedFileAbbreviatedPath": "\/js\/external\/prism.js",
 			"position": 2,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/browser.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/autogrow.js",
 			"position": 3,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/bt_each.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/browser.js",
 			"position": 4,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/cookie.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/bt_each.js",
 			"position": 5,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/form_ajax.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/cookie.js",
 			"position": 6,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/forms_sync.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/form_ajax.js",
 			"position": 7,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/one_time_action.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/forms_sync.js",
 			"position": 8,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/selectable.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/one_time_action.js",
 			"position": 9,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/sortable.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/selectable.js",
 			"position": 10,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/table_helper.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/sortable.js",
 			"position": 11,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/table_helper.js",
 			"position": 12,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timer.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
 			"position": 13,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/toggle_height.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timer.js",
 			"position": 14,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/touching.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/toggle_height.js",
 			"position": 15,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/utilities.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/touching.js",
 			"position": 16,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/accordion.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/utilities.js",
 			"position": 17,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/badge.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/accordion.js",
 			"position": 18,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/blur.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/badge.js",
 			"position": 19,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/checkboxes.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/blur.js",
 			"position": 20,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/dropdowns.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/checkboxes.js",
 			"position": 21,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/expander.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/dropdowns.js",
 			"position": 22,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/loading.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/expander.js",
 			"position": 23,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/menu.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/loading.js",
 			"position": 24,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/modals.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/menu.js",
 			"position": 25,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/noty.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/modals.js",
 			"position": 26,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/progress_bar.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/noty.js",
 			"position": 27,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/radios.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/progress_bar.js",
 			"position": 28,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/selects.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/radios.js",
 			"position": 29,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/sidebar.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/selects.js",
 			"position": 30,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/slider.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/sidebar.js",
 			"position": 31,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/spinner.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/slider.js",
 			"position": 32,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/switcher.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/spinner.js",
 			"position": 33,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/tabs.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/switcher.js",
 			"position": 34,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/tagbox.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/tabs.js",
 			"position": 35,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/js\/components\/tagbox.js",
+			"position": 36,
 			"type": 0
 			}
 		]
