@@ -241,7 +241,7 @@
         height: $container-header-height;
         line-height: $container-header-height;
         font-weight: bold;
-        margin: #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)} #{$layout-spacing + $grid-container-border-size};
+        margin: #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)} $layout-spacing;
         text-transform: uppercase;
         position: relative;
 
@@ -281,9 +281,18 @@
 
     }
 
+    & > .content_wrp {
+        overflow: hidden;
+    }
+
+    & > .content, & > .content_wrp > .content {
+        margin: -$layout-spacing;
+        padding: $layout-spacing;
+        overflow: hidden;
+    }
+
     & > .footer {
         margin: #{$layout-spacing} #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)};
-        padding: $layout-spacing $layout-spacing 0;
         min-height: $container-footer-height;
         line-height: $container-footer-height;
         border-bottom-left-radius: inherit;

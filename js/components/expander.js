@@ -7,6 +7,7 @@ $.fn.expander = function () {
 
         var $expander = $(node),
             $header = $expander.children ( '.header' ),
+            $content_wrp = $expander.children ( '.content_wrp' ),
             opened = $expander.hasClass ( 'active' );
 
         $header.on ( 'click', function () {
@@ -15,8 +16,14 @@ $.fn.expander = function () {
 
             opened = !opened;
 
-            $expander.toggleClass ( 'active', opened );
-            $header.toggleClass ( 'active', opened );
+            $.defer ( function () {
+
+                $expander.toggleClass ( 'active', opened );
+                $header.toggleClass ( 'active', opened );
+
+            });
+
+            $content_wrp.toggleHeight ( opened );
 
         });
 

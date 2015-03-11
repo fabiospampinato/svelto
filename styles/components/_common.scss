@@ -1,0 +1,164 @@
+
+/* COMMON CLASSES */
+
+.rounded {
+    border-radius: 10000px 10000px !important;
+}
+
+.blur {
+    filter: blur(3px);
+    filter: url('/images/blur.svg');
+}
+
+.show {
+    display: block !important;
+}
+
+.hidden {
+    display: none !important;
+}
+
+.visible {
+    visibility: visible;
+}
+
+.invisible {
+    visibility: hidden;
+}
+
+.centered {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: right;
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.text-right {
+    text-align: right;
+}
+
+.no-border {
+    border-width: 0 !important;
+}
+
+.no-padding {
+    padding: 0 !important;
+}
+
+.no-padding-top {
+    padding-top: 0 !important;
+}
+
+.no-padding-right {
+    padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+    padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+    padding-left: 0 !important;
+}
+
+.no-margin {
+    margin: 0 !important;
+}
+
+.no-margin-top {
+    margin-top: 0 !important;
+}
+
+.no-margin-right {
+    margin-right: 0 !important;
+}
+
+.no-margin-bottom {
+    margin-bottom: 0 !important;
+}
+
+.no-margin-left {
+    margin-left: 0 !important;
+}
+
+.flipX {
+    transform: rotateY(180deg);
+}
+
+.flipY {
+    transform: rotateX(180deg);
+}
+
+.flip {
+    transform: rotateY(180deg) rotateX(180deg);
+}
+
+.rotate-left {
+    transform: rotate(-90deg);
+}
+
+.rotate-right {
+    transform: rotate(90deg);
+}
+
+.rotating {
+    animation: rotate 0.9s linear infinite;
+}
+
+/* MULTIPLE */
+
+.multiple {
+
+    display: inline-block;
+    font-size: 0;
+    margin-left: - $layout-half-spacing;
+    margin-right: - $layout-half-spacing;
+    vertical-align: middle;
+
+    &.fluid {
+
+        display: flex;
+
+        & > *:not(.no-grow) {
+            flex-grow: 1;
+        }
+
+    }
+
+    &.vertical {
+        display: flex;
+        flex-direction: column;
+    }
+
+    & > * {
+        margin-left: $layout-half-spacing;
+        margin-right: $layout-half-spacing;
+    }
+
+}
+
+/* KEYFRAMES */
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}

@@ -1,8 +1,6 @@
 
 /* lQuery */
 
-var lQuery;
-
 (function() {
 
     /* VARIABLES */
@@ -103,7 +101,7 @@ var lQuery;
 
     /* MAIN */
 
-    lQuery = function ( selector, unique ) {
+    window.lQuery = function ( selector, unique ) {
 
         return new Library ( selector, unique );
 
@@ -959,11 +957,11 @@ var lQuery;
 
         },
 
-        toggle: function () { //FIXME: add the 'hidden' class instead
+        toggle: function ( force ) { //FIXME: add the 'hidden' class instead, restore to the actual previous display prop
 
             for ( var i = 0; i < this.length; i++ ) {
 
-                this.nodes[i].style.display = ( getComputedStyle ( this.nodes[i] ).display !== 'block' ) ? 'block' : 'none';
+                this.nodes[i].style.display = ( getComputedStyle ( this.nodes[i] ).display !== 'block' || force === true ) ? 'block' : 'none';
 
             }
 
@@ -1051,9 +1049,8 @@ var lQuery;
 
 }());
 
-/* Namespaces */
+/* Aliases */
 
-window.lQuery = lQuery;
 if ( !window.$ ) window.$ = lQuery;
 if ( !window.$$ ) window.$$ = lQuery;
 

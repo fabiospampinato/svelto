@@ -4,13 +4,14 @@
 .expander {
 
     padding-bottom: 0 !important;
+    transition: padding-bottom 10s ease 0s;
 
     & > .header {
 
         margin-bottom: -$container-header-border-width !important;
         border-bottom-left-radius: $border-radius-normal !important;
         border-bottom-right-radius: $border-radius-normal !important;
-        transition: opacity 0.2s ease 0s;
+        transition: opacity 0.2s ease 0s, margin-bottom 10s ease 0s;
 
         .sub {
 
@@ -30,8 +31,10 @@
 
     }
 
-    & > .content {
+    & > .content_wrp {
+        transition: height 10s ease 0s;
         display: none;
+        height: 0;
     }
 
     &:not(.inactive) {
@@ -69,8 +72,9 @@
 
         }
 
-        & > .content {
+        & > .content_wrp {
             display: block;
+            height: auto;
         }
 
     }
