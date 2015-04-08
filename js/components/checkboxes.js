@@ -1,61 +1,80 @@
 
 /* CHECKBOXES */
 
-$.fn.checkbox = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'checkbox', {
 
-        var $btn = $(node),
-            $input = $btn.find ( 'input' );
+        /* SPECIAL */
 
-        var toggle = function () {
+        init: function () {
 
-            if ( $btn.hasClass ( 'inactive' ) ) return;
+            this.$input = this.$node.find ( 'input' );
 
-            var active = $input.checked ();
+            if ( this.$input.prop ( 'checked' ) ) {
 
-            $input.checked ( !active ).trigger ( 'change' );
+                this.$node.addClass ( 'selected' );
 
-        };
+            } else if ( this.$node.hasClass ( 'selected' ) ) {
 
-        var update = function () {
-
-            var active = $input.checked ();
-
-            $btn.toggleClass ( 'selected', active );
-
-        };
-
-        var init = function () {
-
-            if ( $input.checked () ) {
-
-                $btn.addClass ( 'selected' );
-
-            } else if ( $btn.hasClass ( 'selected' ) ) {
-
-                $input.checked ( true ).trigger ( 'change' );
+                this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
             }
 
-        };
+            this._bind_click ();
 
-        $btn.on ( 'click', function ( event ) {
+            this._bind_change ();
 
-            if ( event.target !== $input.get ( 0 ) ) toggle ();
+        },
 
-        });
+        ready: function () {
 
-        $input.on ( 'change', update );
+            $('.checkbox').checkbox ();
 
-        init ();
+        },
+
+        /* CLICK */
+
+        _bind_click: function () {
+
+            this.$node.on ( 'click', this._handler_click );
+
+        },
+
+        _handler_click: function ( event ) {
+
+            if ( event.target !== this.$input.get ( 0 ) ) this.toggle ();
+
+        },
+
+        /* CHANGE */
+
+        _bind_change: function () {
+
+            this.$node.on ( 'change', this.update () );
+
+        },
+
+        /* PUBLIC */
+
+        update: function () {
+
+            var active = this.$input.prop ( 'checked' );
+
+            this.$node.toggleClass ( 'selected', active );
+
+        },
+
+        toggle: function () {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            var active = this.$input.prop ( 'checked' );
+
+            this.$input.prop ( 'checked', !active ).trigger ( 'change' );
+
+        }
 
     });
 
-};
-
-$.dom_ready ( function () {
-
-    $('.checkbox').checkbox ();
-
-});
+}( lQuery, window, document ));

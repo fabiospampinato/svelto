@@ -3,23 +3,21 @@
 
 //TODO: add noty for actions AND/OR right click for action
 
-
-
 //FIXME: make it workable with sorting (update after sorting since we may)
 
-$.fn.selectable = function ( options ) {
+;(function ( $, window, document, undefined ) {
 
-    options = _.merge ({
+    $.factory ( 'selectable', {
+
         selector: 'tbody tr',
         not_selector: '.empty',
         selected_class: 'selected'
-    }, options );
 
-    return this.each ( function ( node ) {
+    }, {
 
-        /* FUNCTION */
+        /* UTILITIES */
 
-        var clear_selection = function () {
+        _clear_selection: function () {
 
             if ( document.selection ) {
 
@@ -31,121 +29,137 @@ $.fn.selectable = function ( options ) {
 
             }
 
-        };
+        },
 
-        var reset_vars = function () {
+        _reset_vars: function () {
 
-            $prev_row = false;
-            $prev_shifted = false;
-            $prev_dragged = false;
+            this.$prev_row = false;
+            this.$prev_shifted = false;
+            this.$prev_dragged = false;
 
-        };
+        },
 
-        var get_rows = function () {
+        _get_rows: function () {
 
-            return $table.find ( options.selector ).not ( options.not_selector );
+            return this.$node.find ( this.options.selector ).not ( this.options.not_selector );
 
-        };
+        },
 
-        /* VARIABLES */
+        /* SPECIAL */
 
-        var $table = $(node),
-            $rows = get_rows (),
+        init: function () {
 
-            $prev_row = false,
-            $prev_shifted = false,
-            $prev_dragged = false;
+            this.$rows = this._get_rows ();
 
-        /* CHANGE / SORT */
+            this.$start_row = false;
+            this.$end_row = false;
 
-        $table.on ( 'change sort', function () {
+            this.$prev_row = false;
+            this.$prev_shifted = false;
+            this.$prev_dragged = false;
 
-            $rows = get_rows ();
+            this._bind_keys ();
+            this._bind_mouse ();
+            this._bind_others ();
 
-        });
+        },
 
-        // CTRL + A / CTRL + SHIFT + A / CTRL + I
+        ready: function () {
 
-        var keydown_handler = function ( event ) {
+            $('table.selectable').selectable ();
 
-            if ( event.ctrlKey ) { // CTRL
+        },
 
-                if ( event.keyCode === 65 ) { // A
+        /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
+
+        _bind_keys: function () {
+
+            this.$node.on ( 'mouseenter', function () {
+
+                $document.on ( 'keydown', this._handler_keys );
+
+            }).on ( 'mouseleave', function () {
+
+                $document.off ( 'keydown', this._handler_keys );
+
+            });
+
+        },
+
+        _handler_keys: function ( event ) {
+
+            if ( event.ctrlKey ) { //INFO: CTRL
+
+                if ( event.keyCode === 65 ) { //INFO: A
 
                     event.preventDefault ();
 
-                    reset_vars ();
+                    this._reset_vars ();
 
-                    $rows.toggleClass ( options.selected_class, !event.shiftKey ); // SHIFT or not
+                    this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not
 
-                } else if ( event.keyCode === 73 ) { // I
+                } else if ( event.keyCode === 73 ) { //INFO: I
 
                     event.preventDefault ();
 
-                    reset_vars ();
+                    this._reset_vars ();
 
-                    $rows.toggleClass ( options.selected_class );
+                    this.$rows.toggleClass ( this.options.selected_class );
 
                 }
 
             }
 
-        };
+        },
 
-        $table.on ( 'mouseenter', function () {
+        /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
 
-            $document.on ( 'keydown', keydown_handler );
+        _bind_mouse: function () {
 
-        }).on ( 'mouseleave', function () {
+            this.$rows.on ( 'mousedown', this._handler_mousedown );
 
-            $document.off ( 'keydown', keydown_handler );
+        },
 
-        });
-
-        // CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG
-
-        var $start_row;
-
-        var mousedown_handler = function ( event ) {
+        _handler_mousedown: function ( event ) {
 
             if ( event.button !== 0 ) return;
 
-            $start_row = $(this);
+            this.$start_row = $(this);
 
-            $document.on ( 'mousemove', mousemove_handler );
+            $document.mousemove ( this._handler_mousemove );
 
-            $start_row.on ( 'mouseup', mouseup_handler );
+            this.$start_row.mouseup ( this._handler_mouseup );
 
-        };
+        },
 
-        var mousemove_handler = function ( event ) { // DRAG
+        _handler_mousemove: function ( event ) { // DRAG
 
             if ( !event.ctrlKey ) return;
 
-            $document.off ( 'mousemove', mousemove_handler );
+            $document.off ( 'mousemove', this._handler_mousemove );
 
-            $start_row.off ( 'mouseup', mouseup_handler );
+            this.$start_row.off ( 'mouseup', this._handler_mouseup );
 
-            reset_vars ();
+            this._reset_vars ();
 
-            $prev_row = $start_row;
+            this.$prev_row = this.$start_row;
 
-            $start_row.toggleClass ( options.selected_class );
+            this.$start_row.toggleClass ( this.options.selected_class );
 
             $html.addClass ( 'dragging' );
 
-            $rows.on ( 'mouseenter', drag_mouseenter_handler );
+            this.$rows.on ( 'mouseenter', this._handler_drag_mouseenter );
 
-            $document.on ( 'mouseup', drag_mouseup_handler );
+            $document.on ( 'mouseup', this._handler_drag_mouseup );
 
-        };
+        },
 
-        var drag_mouseenter_handler = function () { // DRAG HOVER
+        _handler_drag_mouseenter: function ( event ) { // DRAG HOVER
 
-            var $end_row = $(this);
+            this.$end_row = $(this);
 
-            var start_index = $rows.index ( $start_row ),
-                end_index = $rows.index ( $end_row ),
+            var start_index = this.$rows.index ( this.$start_row ),
+                end_index = this.$rows.index ( this.$end_row ),
                 min_index = Math.min ( start_index, end_index ),
                 max_index = Math.max ( start_index, end_index );
 
@@ -156,46 +170,46 @@ $.fn.selectable = function ( options ) {
 
             }
 
-            var $new_dragged = $rows.slice ( min_index, max_index );
+            var $new_dragged = this.$rows.slice ( min_index, max_index );
 
-            if ( $prev_dragged ) {
+            if ( this.$prev_dragged ) {
 
-                $new_dragged.not ( $prev_dragged ).toggleClass ( options.selected_class );
+                $new_dragged.not ( this.$prev_dragged ).toggleClass ( this.options.selected_class );
 
-                $prev_dragged.not ( $new_dragged ).toggleClass ( options.selected_class );
+                this.$prev_dragged.not ( $new_dragged ).toggleClass ( this.options.selected_class );
 
             } else {
 
-                $new_dragged.toggleClass ( options.selected_class );
+                $new_dragged.toggleClass ( this.options.selected_class );
 
             }
 
-            $prev_dragged = $new_dragged;
+            this.$prev_dragged = $new_dragged;
 
-        };
+        },
 
-        var drag_mouseup_handler = function () { // DRAG END
+        _handler_drag_mouseup: function ( event ) { // DRAG END
 
-            $rows.off ( 'mouseenter', drag_mouseenter_handler );
+            this.$rows.off ( 'mouseenter', this._handler_drag_mouseenter );
 
-            $document.off ( 'mouseup', drag_mouseup_handler );
+            $document.off ( 'mouseup', this._handler_drag_mouseup );
 
-            $prev_dragged = false;
+            this.$prev_dragged = false;
 
             $html.removeClass ( 'dragging' );
 
-        };
+        },
 
-        var mouseup_handler = function ( event ) { // CLICK
+        _handler_mouseup: function ( event ) { // CLICK
 
-            $document.off ( 'mousemove', mousemove_handler );
+            $document.off ( 'mousemove', this._handler_mousemove );
 
-            $start_row.off ( 'mouseup', mouseup_handler );
+            this.$start_row.off ( 'mouseup', this._handler_mouseup );
 
             if ( event.shiftKey ) {
 
-                var start_index = $rows.index ( $prev_row ),
-                    end_index = $prev_row ? $rows.index ( $start_row ) : 0,
+                var start_index = this.$rows.index ( this.$prev_row ),
+                    end_index = this.$prev_row ? this.$rows.index ( this.$start_row ) : 0,
                     min_index = Math.min ( start_index, end_index ),
                     max_index = Math.max ( start_index, end_index );
 
@@ -206,62 +220,66 @@ $.fn.selectable = function ( options ) {
 
                 }
 
-                var $new_shifted = $rows.slice ( min_index, max_index );
+                var $new_shifted = this.$rows.slice ( min_index, max_index );
 
-                if ( $prev_shifted ) {
+                if ( this.$prev_shifted ) {
 
-                    $new_shifted.not ( $prev_shifted ).toggleClass ( options.selected_class );
+                    $new_shifted.not ( this.$prev_shifted ).toggleClass ( this.options.selected_class );
 
-                    $prev_shifted.not ( $new_shifted ).toggleClass ( options.selected_class );
+                    this.$prev_shifted.not ( $new_shifted ).toggleClass ( this.options.selected_class );
 
                 } else {
 
-                    $new_shifted.toggleClass ( options.selected_class );
+                    $new_shifted.toggleClass ( this.options.selected_class );
 
                 }
 
-                $prev_shifted = $new_shifted;
+                this.$prev_shifted = $new_shifted;
 
             } else if ( event.ctrlKey ) {
 
-                $start_row.toggleClass ( options.selected_class );
+                this.$start_row.toggleClass ( this.options.selected_class );
 
-                reset_vars ();
+                this._reset_vars ();
 
-                $prev_row = $start_row;
+                this.$prev_row = $start_row;
 
             } else {
 
-                $rows.removeClass ( options.selected_class );
+                this.$rows.removeClass ( this.options.selected_class );
 
-                $start_row.addClass ( options.selected_class );
+                this.$start_row.addClass ( this.options.selected_class );
 
-                reset_vars ();
+                this._reset_vars ();
 
-                $prev_row = $start_row;
+                this.$prev_row = this.$start_row;
 
             }
 
-        };
+        },
 
-        $rows.on ( 'mousedown', mousedown_handler );
+        /* OTHER EVENTS */
 
-        // Clear selection
+        _bind_others: function () {
 
-        $table.on ( 'mousedown mouseup', function () {
+            this.$node.on ( 'change sort', this._handler_change_sort );
 
-            $.defer ( clear_selection );
+            this.$node.on ( 'mousedown mouseup', this._handler_clear_selection );
 
-        });
+        },
+
+        _handler_change_sort: function () {
+
+            this.$rows = _get_rows ();
+
+        },
+
+        _handler_clear_selection: function () {
+
+            $.defer ( this._clear_selection );
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('table.selectable').selectable ();
-
-});
+}( lQuery, window, document ));

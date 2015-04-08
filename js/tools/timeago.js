@@ -1,37 +1,63 @@
 
 /* TIMEAGO */
 
-$.fn.timeago = function () {
 
-    return this.each ( function ( node ) {
+;(function ( $, window, document, undefined ) {
 
-        var $ele = $(node),
-            timestamp = $ele.data ( 'timestamp' );
+    /* PLUGIN */
 
-        var update = function ( wait ) {
+    $.factory ( 'timeago', {
+
+        onUpdate: $.noop
+
+    }, {
+
+        /* SPECIAL */
+
+        init: function () {
+
+            this.timestamp = this.$node.data ( 'timestamp' );
+
+            this._update_loop ( 0 );
+
+        },
+
+        ready: function () {
+
+            $('[data-timestamp]').timeago ();
+
+        },
+
+        /* PRIVATE */
+
+        _update_loop: function ( wait ) {
 
             setTimeout ( function () {
 
-                var timeago = get_time_ago ( timestamp );
+                var timeago = get_time_ago ( this.timestamp );
 
-                $ele.html ( timeago.str );
+                this.$node.html ( timeago.str );
 
-                update ( timeago.next );
+                this.hook ( 'onUpdate' );
+
+                this._update_loop ( timeago.next );
 
             }, wait * 1000 );
 
-        };
+        },
 
-        update ( 0 );
+        /* PUBLIC */
+
+        update: function () {
+
+            var timeago = get_time_ago ( this.timestamp );
+
+            this.$node.html ( timeago.str );
+
+            this.hook ( 'onUpdate' );
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('[data-timestamp]').timeago ();
-
-});
+}( lQuery, window, document ));

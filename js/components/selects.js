@@ -1,40 +1,87 @@
 
 /* SELECTS */
 
-$.fn.selects = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'selects', {
 
-        /* FUNCTIONS */
 
-        var init_dropdown = function () {
 
-            $body.append ( get_dropdown_html () );
+    }, {
 
-            $dropdown = $('#dropdown-' + dropdown_id);
-            $dropdown_container = $dropdown.find ( '.container' );
+        /* UTILITIES */
 
-            $btn.addClass ( 'dropdown_trigger' ).data ( 'dropdown', 'dropdown-' + dropdown_id );
+        /* SPECIAL */
 
-            $btn.dropdowns ({
-                callbacks: {
-                    before_open: set_dropdown_width
-                }
+        init: function () {
+
+            this.$select = this.$node.find ( 'select' );
+            this.$options = this.$select.find ( 'option' );
+            this.$placeholder = this.$node.find ( '.placeholder' );
+            this.dropdown_id = $.getUID ();
+
+            this.$dropdown = false;
+            this.$dropdown_container = false;
+            this.$buttons = false;
+
+            this._update_placeholder ();
+
+            if ( $.browser.is_mobile ) {
+
+                this.$select.hide ();
+
+                this._init_dropdown ();
+
+                this.$buttons.on ( 'click', this._handler_click );
+
+            }
+
+            this.$select.on ( 'change', this.update );
+
+        },
+
+        ready: function () {
+
+            $('.select').selects ();
+
+        },
+
+        /* PRIVATE */
+
+        _handler_click: function ( event ) {
+
+            var $button = $(this);
+
+            this.$select.val ( $button.data ( 'value' ) ).trigger ( 'change' );
+
+        },
+
+        _init_dropdown: function () {
+
+            $body.append ( this._get_dropdown_html () );
+
+            this.$dropdown = $('#dropdown-' + this.dropdown_id);
+            this.$dropdown_container = this.$dropdown.find ( '.container' );
+
+            this.$node.addClass ( 'dropdown_trigger' ).data ( 'dropdown', 'dropdown-' + this.dropdown_id );
+
+            this.$node.dropdowns ({
+                beforeOpen: this._set_dropdown_width
             });
 
-            $buttons = $dropdown.find ( '.button' );
+            this.$buttons = this.$dropdown.find ( '.button' );
 
-            update_dropdown ();
+            this._update_dropdown ();
 
-        };
+        },
 
-        var get_dropdown_html = function () {
+        _get_dropdown_html: function () {
 
-            return '<div id="dropdown-' + dropdown_id + '" class="dropdown no_tip"><div class="container"><div class="multiple vertical">' + get_dropdown_options_html ( $select ) + '</div></div></div>';
+            return '<div id="dropdown-' + this.dropdown_id + '" class="dropdown no_tip"><div class="container"><div class="multiple vertical">' + this._get_dropdown_options_html ( this.$select ) + '</div></div></div>';
 
-        };
+        },
 
-        var get_dropdown_options_html = function ( $parent ) {
+        _get_dropdown_options_html: function ( $parent ) {
 
             var html = '',
                 $children = false;
@@ -55,98 +102,57 @@ $.fn.selects = function () {
 
             }
 
-            if ( $children && $children.size () > 0 ) {
+            if ( $children && $children.length > 0 ) {
 
-                $children.each ( function ( child ) {
+                for ( var i = 0, l = $children.length; i < l; i++ ) {
 
-                    var $child = $(child);
+                    html += this.get_dropdown_options_html ( $children.nodes[i] );
 
-                    html += get_dropdown_options_html ( $child );
-
-                });
+                }
 
             }
 
             return html;
 
-        };
+        },
 
-        var set_dropdown_width = function () {
+        _update_dropdown: function () {
 
-            $dropdown_container.css ( 'min-width', $btn.outerWidth () + 'px' );
+            this.$buttons.removeClass ( 'active' );
 
-        };
+            this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( 'active' );
 
-        var update_dropdown = function () {
+        },
 
-            $buttons.removeClass ( 'active' );
+        _set_dropdown_width: function () {
 
-            $buttons.filter ( '[data-value="' + $select.val () + '"]' ).addClass ( 'active' );
+            this.$dropdown_container.css ( 'min-width', this.$node.width () );
 
-        };
+        },
 
-        var update_placeholder = function () {
+        _update_placeholder: function () {
 
-            var selected_option = $options.filter ( '[value="' + $select.val () + '"]' );
+            var $selected_option = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
 
-            $placeholder.html ( selected_option.html () );
+            this.$placeholder.html ( $selected_option.html () );
 
-        };
+        },
 
-        var update = function () {
+        /* PUBLIC */
 
-            if ( !browser.is_mobile ) {
+        update: function () {
 
-                update_dropdown ();
+            if ( !$.browser.is_mobile ) {
+
+                this._update_dropdown ();
 
             }
 
-            update_placeholder ();
-
-        };
-
-        /* VARIABLES */
-
-        var $btn = $(node),
-            $select = $btn.find ( 'select' ),
-            $options = $select.find ( 'option' ),
-            $placeholder = $btn.find ( '.placeholder' ),
-            dropdown_id = $.get_uuid (),
-
-            $dropdown = false,
-            $dropdown_container = false,
-            $buttons = false;
-
-        /* INIT */
-
-        update_placeholder ();
-
-        if ( !browser.is_mobile ) {
-
-            $select.hide ();
-
-            init_dropdown ();
-
-            $buttons.on ( 'click', function () {
-
-                $button = $(this);
-
-                $select.val ( $button.data ( 'value' ) ).trigger ( 'change' );
-
-            });
+            this._update_placeholder ();
 
         }
 
-        $select.on ( 'change', update );
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.select').selects ();
-
-});
+}( lQuery, window, document ));

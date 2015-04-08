@@ -1,87 +1,145 @@
 
 /* DROPDOWNS */
 
-var dropdowns_assignments = {};
+;(function ( $, window, document, undefined ) {
 
-$.fn.dropdowns = function ( options ) {
+    var assignments = {};
 
-    options =  _.merge ({
-        callbacks : {
-            before_open: function () {},
-            after_open: function () {},
-            before_close: function () {},
-            after_close: function () {}
-        }
-    }, options );
+    $.factory ( 'dropdowns', {
 
-    return this.each ( function ( node ) {
+        beforeOpen: $.noop,
+        afterOpen: $.noop,
+        beforeClose: $.noop,
+        afterClose: $.noop
 
-        /* FUNCTIONS */
+    }, {
 
-        var open = function () {
+        /* SPECIAL */
 
-            if ( $dropdown_btn.hasClass ( 'inactive' ) ) return;
+        init: function () {
 
-            options.callbacks.before_open ();
+            this.dropdown_id = this.$node.data ( 'dropdown' );
+            this.$dropdown = $('#' + dropdown_id);
+            this.no_tip = this.$node.hasClass ( 'no_tip' ) || this.$dropdown.hasClass ( 'no_tip' );
+            this.$bottom_tip = this.no_tip ? false : this.$dropdown.find ( '.bottom_tip' );
+            this.$top_tip = this.no_tip ? false : this.$dropdown.find ( '.top_tip' );
+            this.$right_tip = this.no_tip ? false : this.$dropdown.find ( '.right_tip' );
+            this.$left_tip = this.no_tip ? false : this.$dropdown.find ( '.left_tip' );
+            this.$btn_parents = this.$node.parents ();
+            this.$buttons = this.$dropdown.find ( '.button' );
+            this.opened = false;
 
-            dropdowns_assignments[dropdown_id] = $dropdown_btn;
+            this.$node.on ( 'click', this._handler_btn_click );
+            this.$buttons.on ( 'click', this.close );
+            $window.on ( 'resize scroll', this.update );
+            this.$btn_parents.on ( 'scroll', this.update );
 
-            $dropdown_btn.addClass ( 'active' );
+        },
 
-            $dropdown.addClass ( 'show' );
+        ready: function () {
 
-            positionate ();
+            $('.dropdown_trigger').dropdowns ();
 
-            $.defer ( function () {
+        },
 
-                $dropdown.addClass ( 'active' );
+        /* PRIVATE */
 
-            });
+        _handler_window_click: function ( event ) {
 
-            opened = true;
+            var $parents = $(event.target).parents ();
 
-            options.callbacks.after_open ();
+            if ( $parents.index ( this.$dropdown ) !== -1 ) return; // check if we clicked inside the dropdown
 
-        };
+            this.close ();
 
-        var close = function () {
+        },
 
-            options.callbacks.before_close ();
+        _handler_btn_click: function () {
 
-            if ( dropdowns_assignments[dropdown_id] === $dropdown_btn ) {
+            if ( this.opened ) {
 
-                $dropdown.removeClass ( 'active' );
+                this.close ();
+
+            } else {
+
+                this.open ();
 
                 $.defer ( function () {
 
-                    $dropdown.removeClass ( 'show' );
+                    $window.on ( 'click', _handler_window_click );
+
+                });
+
+            }
+
+        },
+
+        /* PUBLIC */
+
+        open: function () {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            this.hook ( 'beforeOpen' );
+
+            assignments[dropdown_id] = this.$node;
+
+            this.$node.addClass ( 'active' );
+
+            this.$dropdown.addClass ( 'show' );
+
+            this.positionate ();
+
+            this.$dropdown.defer ( function () {
+
+                this.addClass ( 'active' );
+
+            });
+
+            this.opened = true;
+
+            this.hook ( 'afterOpen' );
+
+        },
+
+        close: function () {
+
+            this.hook ( 'beforeClose' );
+
+            if ( assignments[dropdown_id] === this.$node ) {
+
+                this.$dropdown.removeClass ( 'active' );
+
+                this.$dropdown.defer ( function () {
+
+                    this.removeClass ( 'show' );
 
                 }, 150 );
 
             }
 
-            $dropdown_btn.removeClass ( 'top bottom left right active' );
+            this.$node.removeClass ( 'top bottom left right active' );
 
-            $window.off ( 'click', window_click_handler );
+            $window.off ( 'click', this._handler_window_click );
 
-            opened = false;
+            this.opened = false;
 
-            options.callbacks.after_close ();
+            this.hook ( 'afterClose' );
 
-        };
+        },
 
-        var positionate = function ( direction ) {
+        positionate: function () {
 
             // reset classes
 
-            $dropdown_btn.removeClass ( 'top bottom left right' );
-            $dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no_tip', no_tip );
+            this.$node.removeClass ( 'top bottom left right' );
+            this.$dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no_tip', this.no_tip );
 
             // update offsets
 
             var body_offset = $body.offset (),
-                drop_offset = $dropdown.offset (),
-                btn_offset = $dropdown_btn.offset ();
+                drop_offset = this.$dropdown.offset (),
+                btn_offset = this.$node.offset ();
 
             // common variables
 
@@ -92,6 +150,11 @@ $.fn.dropdowns = function ( options ) {
                 top_space = btn_offset.top,
                 right_space = body_offset.width - btn_offset.left - btn_offset.width,
                 left_space = btn_offset.left;
+
+            console.log(top_space);
+            console.log(right_space);
+            console.log(bottom_space);
+            console.log(left_space);
 
             var useful_doc_width = Math.min ( body_offset.width, drop_offset.width ),
                 useful_doc_height = Math.min ( body_offset.height, drop_offset.height );
@@ -109,7 +172,7 @@ $.fn.dropdowns = function ( options ) {
 
             var get_vertical_left = function () {
 
-                if ( no_tip ) {
+                if ( this.no_tip ) {
 
                     if ( right_space + btn_offset.width >= drop_offset.width ) {
 
@@ -129,7 +192,7 @@ $.fn.dropdowns = function ( options ) {
 
             var get_horizontal_top = function () {
 
-                if ( no_tip ) {
+                if ( this.no_tip ) {
 
                     if ( bottom_space + btn_offset.height >= drop_offset.height ) {
 
@@ -157,16 +220,16 @@ $.fn.dropdowns = function ( options ) {
 
             if ( !direction ) {
 
-                _.forEach ( areas, function ( area, dir ) {
+                for ( var dir in areas ) {
 
-                    if ( area >= needed_area ) {
+                    if ( areas[dir] >= needed_area ) {
 
                         direction = dir;
-                        return false;
+                        break;
 
                     }
 
-                });
+                }
 
             }
 
@@ -174,18 +237,28 @@ $.fn.dropdowns = function ( options ) {
 
             if ( !direction ) {
 
-                var max_area =  _.max ( areas );
+                var max_area;
 
-                _.forEach ( areas, function ( area, dir ) {
+                for ( var dir in areas ) {
 
-                    if ( area === max_area ) {
+                    if ( areas[dir] > max_area ) {
 
-                        direction = dir;
-                        return false;
+                        max_area = areas[dir];
 
                     }
 
-                });
+                }
+
+                for ( var dir in areas ) {
+
+                    if ( areas[dir] === max_area ) {
+
+                        direction = dir;
+                        break;
+
+                    }
+
+                }
 
             }
 
@@ -220,36 +293,36 @@ $.fn.dropdowns = function ( options ) {
 
                 }
 
-                $dropdown.css ({
+                this.$dropdown.css ({
                     top: top,
                     left: left
                 });
 
-                $dropdown_btn.addClass ( direction );
-                $dropdown.addClass ( direction );
+                this.$node.addClass ( direction );
+                this.$dropdown.addClass ( direction );
 
                 // positionate the tip
 
-                if ( !no_tip ) {
+                if ( !this.no_tip ) {
 
-                    drop_offset = $dropdown.offset ();
+                    drop_offset = this.$dropdown.offset ();
 
                     switch ( direction ) {
 
                         case 'bottom':
-                            $top_tip.css ( 'left', btn_center_left - drop_offset.left + 'px' );
+                            this.$top_tip.css ( 'left', btn_center_left - drop_offset.left + 'px' );
                             break;
 
                         case 'top':
-                            $bottom_tip.css ( 'left', btn_center_left - drop_offset.left + 'px' );
+                            this.$bottom_tip.css ( 'left', btn_center_left - drop_offset.left + 'px' );
                             break;
 
                         case 'right':
-                            $left_tip.css ( 'top', btn_center_top - drop_offset.top + 'px' );
+                            this.$left_tip.css ( 'top', btn_center_top - drop_offset.top + 'px' );
                             break;
 
                         case 'left':
-                            $right_tip.css ( 'top', btn_center_top - drop_offset.top + 'px' );
+                            this.$right_tip.css ( 'top', btn_center_top - drop_offset.top + 'px' );
                             break;
 
                     }
@@ -258,78 +331,18 @@ $.fn.dropdowns = function ( options ) {
 
             }
 
-        };
+        },
 
-        var update = function () {
+        update: function () {
 
-            if ( opened ) {
+            if ( this.opened ) {
 
-                positionate ();
-
-            }
-
-        };
-
-        /* VARIABLES */
-
-        var $dropdown_btn = $(node),
-            dropdown_id = $dropdown_btn.data ( 'dropdown' ),
-            $dropdown = $('#' + dropdown_id),
-            no_tip = $dropdown_btn.hasClass ( 'no_tip' ) || $dropdown.hasClass ( 'no_tip' ),
-            $bottom_tip = no_tip ? false : $dropdown.find ( '.bottom_tip' ),
-            $top_tip = no_tip ? false : $dropdown.find ( '.top_tip' ),
-            $right_tip = no_tip ? false : $dropdown.find ( '.right_tip' ),
-            $left_tip = no_tip ? false : $dropdown.find ( '.left_tip' ),
-            $btn_parents = $dropdown_btn.parents (),
-            $buttons = $dropdown.find ( '.button' ),
-            opened = false;
-
-        /* EVENTS */
-
-        var window_click_handler = function ( event ) {
-
-            var $parents = $(event.target).parents ();
-
-            if ( $parents.contains ( $dropdown ) ) return; // check if we clicked inside the dropdown
-
-            close ();
-
-        };
-
-        $dropdown_btn.on ( 'click', function () {
-
-            if ( opened ) {
-
-                close ();
-
-            } else {
-
-                open ();
-
-                $.defer ( function () {
-
-                    $window.on ( 'click', window_click_handler );
-
-                });
+                this.positionate ();
 
             }
 
-        });
-
-        $buttons.on ( 'click', close );
-
-        $window.on ( 'resize scroll', update );
-
-        $btn_parents.on ( 'scroll', update );
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.dropdown_trigger').dropdowns ();
-
-});
+}( lQuery, window, document ));

@@ -1,109 +1,149 @@
 
 /* AUTOGROW */
 
-$.fn.autogrow = function () {
+;(function ( $, window, document, undefined ) {
 
-    var element_val_pxs = function ( $ele ) {
+    $.factory ( 'autogrow', {
 
-        var span_html = '<span id="test_span">' + $ele.val () + '</span>';
+        default_width: 0,
+        default_height: 0,
+        onUpdate: $.noop
 
-        $body.append ( span_html );
+    }, {
 
-        var $span = $('#test_span');
+        /* SPECIAL */
 
-        $span.css ({
-            'position' : 'absolute',
-            'left' : -9999,
-            'top' : -9999,
-            'font-family' : $ele.css ( 'font-family' ),
-            'font-size' : $ele.css ( 'font-size' ),
-            'font-weight' : $ele.css ( 'font-weight' ),
-            'font-style' : $ele.css ( 'font-style' )
-        });
+        init: function () {
 
-        var result = $span.width ();
+            this.is_border_box = ( this.$ele.css ( 'box-sizing' ) === 'border-box' );
 
-        $span.remove ();
+            this.is_input = this.$ele.is ( 'input' );
+            this.is_textarea = this.$ele.is ( 'textarea' );
 
-        return result;
+            if ( this.is_input ) {
 
-    };
+                this._init_input ();
 
-    return this.each ( function ( node ) {
+            } else if ( this.is_textarea ) {
 
-        var $ele = $(node),
-            default_width = $ele.data ( 'default-width' ) || 0,
-            default_height = $ele.data ( 'default-height' ) || 0,
-            type = $ele.is ( 'input' ) ? 'input' : 'textarea',
-            is_border_box = ( $ele.css ( 'box-sizing' ) === 'border-box' ),
-            extra_pxs = is_border_box
-                            ? type === 'input'
-                                ? parseInt ( $ele.css ( 'border-left-width' ) ) + parseInt ( $ele.css ( 'padding-left' ) ) + parseInt ( $ele.css ( 'padding-right' ) ) + parseInt ( $ele.css ( 'border-right-width' ) )
-                                : type === 'textarea'
-                                    ? parseInt ( $ele.css ( 'border-top-width' ) ) + parseInt ( $ele.css ( 'padding-top' ) ) + parseInt ( $ele.css ( 'padding-bottom' ) ) + parseInt ( $ele.css ( 'border-bottom-width' ) )
-                                    : 0
-                            : 0;
+                this._init_textarea ();
+            }
 
-        if ( type === 'input' ) { // increase the width
+        },
 
-            var update_width = function () {
+        ready: function () {
 
-                var needed_width = element_val_pxs ( $ele ),
-                    actual_width = $ele.width ();
+            $('input.autogrow, textarea.autogrow').autogrow ();
 
-                if ( needed_width > actual_width ) {
+        },
 
-                    $ele.css ( 'width', needed_width + extra_pxs + 'px' );
+        /* INPUT */
 
-                } else if ( actual_width > needed_width ) {
+        _init_input: function () {
 
-                    $ele.css ( 'width', Math.max ( needed_width, default_width ) + extra_pxs + 'px' );
+            this.extra_pxs = this.is_border_box ? parseFloat ( this.$node.css ( 'border-left-width' ) ) + parseFloat ( this.$node.css ( 'padding-left' ) ) + parseFloat ( this.$node.css ( 'padding-right' ) ) + parseFloat ( this.$node.css ( 'border-right-width' ) ) : 0;
 
-                }
+            this._update_input_width ();
 
-            };
+            this.$ele.on ( 'input change', this._update_input_width );
 
-            update_width ();
+        },
 
-            $ele.on ( 'input change', update_width );
+        _update_input_width: function () {
 
-        } else if ( type === 'textarea' ) { // increase the height
+            var needed_width = this._get_input_needed_width ( this.$node ),
+                actual_width = this.$node.width ();
 
-            var update_height = function () {
+            if ( needed_width > actual_width ) {
 
-                var actual_height = $ele.height (),
-                    needed_height = $ele.css ( 'height', '1px' ).get ( 0 ).scrollHeight - parseInt ( $ele.css ( 'padding-top' ) ) - parseInt ( $ele.css ( 'padding-bottom' ) );
+                this.$node.width ( needed_width + this.extra_pxs );
 
-                if ( needed_height > actual_height ) {
+            } else if ( actual_width > needed_width ) {
 
-                    $ele.css ( 'height', needed_height + extra_pxs + 'px' );
+                this.$node.width ( Math.max ( needed_width, this.options.default_width ) + this.extra_pxs );
 
-                } else if ( actual_height > needed_height ) {
+            }
 
-                    $ele.css ( 'height', Math.max ( needed_height, default_height ) + extra_pxs + 'px' );
+            this.hook ( 'onUpdate' );
 
-                } else {
+        },
 
-                    $ele.css ( 'height', actual_height + extra_pxs + 'px' );
+        _get_input_needed_width: function () {
 
-                }
+            var id = 'span_' + $.getUID ();
 
-            };
+            $body.append ( '<span id="' + id + '">' + this.$node.val () + '</span>' );
 
-            update_height();
+            var $span = $('#' + id);
 
-            $ele.on ( 'input change', update_height );
+            $span.css ({
+                'position' : 'absolute',
+                'left' : -9999,
+                'top' : -9999,
+                'font-family' : this.$node.css ( 'font-family' ),
+                'font-size' : this.$node.css ( 'font-size' ),
+                'font-weight' : this.$node.css ( 'font-weight' ),
+                'font-style' : this.$node.css ( 'font-style' )
+            });
+
+            var width = $span.width ();
+
+            $span.remove ();
+
+            return width;
+
+        },
+
+        /* TEXTAREA */
+
+        _init_textarea: function () {
+
+            this.extra_pxs = this.is_border_box ? parseFloat ( this.$node.css ( 'border-top-width' ) ) + parseFloat ( this.$node.css ( 'padding-top' ) ) + parseFloat ( this.$node.css ( 'padding-bottom' ) ) + parseFloat ( this.$node.css ( 'border-bottom-width' ) ) : 0;
+
+            this._update_textarea_height ();
+
+            this.$ele.on ( 'input change', this._update_textarea_height );
+
+        },
+
+        _update_textarea_height: function () {
+
+            var actual_height = this.$node.height (),
+                needed_height = this.$node.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$node.css ( 'padding-top' ) ) - parseFloat ( this.$node.css ( 'padding-bottom' ) );
+
+            if ( needed_height > actual_height ) {
+
+                this.$node.height ( needed_height + this.extra_pxs );
+
+            } else if ( actual_height > needed_height ) {
+
+                this.$node.height ( Math.max ( needed_height, this.options.default_height ) + this.extra_pxs );
+
+            } else {
+
+                this.$node.height ( actual_height + this.extra_pxs );
+
+            }
+
+            this.hook ( 'onUpdate' );
+
+        },
+
+        /* PUBLIC */
+
+        update: function () {
+
+            if ( this.is_input ) {
+
+                this._update_input_width ();
+
+            } else if ( this.is_textarea ) {
+
+                this._update_textarea_height ();
+            }
 
         }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('input.autogrow, textarea.autogrow').autogrow ();
-
-});
+}( lQuery, window, document ));

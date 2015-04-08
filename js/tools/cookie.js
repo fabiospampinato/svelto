@@ -1,46 +1,50 @@
 
 /* COOKIE */
 
-var cookie = {
+;(function ( $, window, document, undefined ) {
 
-    destroy: function ( name ) {
+    $.cookie = {
 
-        this.write ( name, '', - 86400 * 365, '/' );
+        destroy: function ( name ) {
 
-    },
+            this.write ( name, '', - 86400 * 365, '/' );
 
-    read: function ( name ) {
+        },
 
-        var expression = new RegExp ( '(^|; )' + encodeURIComponent ( name ) + '=(.*?)($|;)' ),
-            matches = document.cookie.match ( expression );
+        read: function ( name ) {
 
-        return matches ? decodeURIComponent ( matches[2] ) : null;
+            var expression = new RegExp ( '(^|; )' + encodeURIComponent ( name ) + '=(.*?)($|;)' ),
+                matches = document.cookie.match ( expression );
 
-    },
+            return matches ? decodeURIComponent ( matches[2] ) : null;
 
-    write: function ( name, value, expire, path, domain, secure ) {
+        },
 
-        var date = new Date ();
+        write: function ( name, value, expire, path, domain, secure ) {
 
-        if ( expire && typeof expire === 'number' ) {
+            var date = new Date ();
 
-            date.setTime ( date.getTime () + expire * 1000 );
+            if ( expire && typeof expire === 'number' ) {
 
-        } else {
+                date.setTime ( date.getTime () + expire * 1000 );
 
-            expire = null;
+            } else {
+
+                expire = null;
+
+            }
+
+            document.cookie =
+              encodeURIComponent ( name ) + '=' + encodeURIComponent ( value ) +
+              ( expire ? '; expires=' + date.toGMTString () : '' ) +
+              '; path=' + ( path ? path : '/' ) +
+              ( domain ? '; domain=' + domain : '' ) +
+              ( secure ? '; secure' : '' );
+
+            return document.cookie;
 
         }
 
-        document.cookie =
-          encodeURIComponent ( name ) + '=' + encodeURIComponent ( value ) +
-          ( expire ? '; expires=' + date.toGMTString () : '' ) +
-          '; path=' + ( path ? path : '/' ) +
-          ( domain ? '; domain=' + domain : '' ) +
-          ( secure ? '; secure' : '' );
+    };
 
-        return document.cookie;
-
-    }
-
-};
+}( lQuery, window, document ));

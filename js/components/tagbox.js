@@ -1,9 +1,10 @@
 
 /* TAGBOX */
 
-$.fn.tagbox = function ( options ) {
+;(function ( $, window, document, undefined ) {
 
-    options = _.merge ({
+    $.factory ( 'tagbox', {
+
         input: {
             default_width: '100',
             placeholder: 'New tag...',
@@ -17,33 +18,51 @@ $.fn.tagbox = function ( options ) {
         separator: ',',
         sort: false,
         append: true
-    }, options );
 
-    return this.each ( function ( node ) {
+    }, {
 
-        /* FUNCTIONS */
+        /* SPECIAL */
 
-        var init_input = function () {
+        init: function () {
 
-            var template = '<div id="tagbox_' + tagbox_id + '" class="container transparent no-padding"><div class="multiple">' + get_tags_html () + '<input value="" placeholder="' + options.input.placeholder + '" class="autogrow ' + options.input.theme + '" data-default-width="' + options.input.default_width + '" /></div></div>';
+            this.tagbox_id = $.getUID ();
 
-            $input.after ( template ).addClass ( 'hidden' );
+            var template = '<div id="tagbox_' + this.tagbox_id + '" class="container transparent no-padding"><div class="multiple">' + this._get_tags_html () + '<input value="" placeholder="' + this.options.input.placeholder + '" class="autogrow ' + this.options.input.theme + '" data-default-width="' + this.options.input.default_width + '" /></div></div>';
 
-        };
+            this.$node.after ( template ).addClass ( 'hidden' );
 
-        var get_tags_html = function () {
+            this.$tagbox = $('#tagbox_' + this.tagbox_id);
+            this.$partial = this.$tagbox.find ( 'input' );
+            this.$tags = false;
+            this.tags_arr = false;
 
-            var value = $input.val (),
-                tags_str = value.split ( options.separator ),
+            this.$partial.autogrow ();
+
+            this._update_variables ();
+
+        },
+
+        ready: function () {
+
+            $('input.tagbox').tagbox ();
+
+        },
+
+        /* PRIVATE */
+
+        _get_tags_html: function () {
+
+            var value = this.$node.val (),
+                tags_str = value.split ( this.options.separator ),
                 tags_html = '';
 
             for ( var n = 0; n < tags_str.length; n++ ) {
 
-                tags_str[n] = sanitize_str ( tags_str[n] );
+                tags_str[n] = this._sanitize_str ( tags_str[n] );
 
             }
 
-            if ( options.sort ) {
+            if ( this.options.sort ) {
 
                 tags_str.sort ();
 
@@ -51,74 +70,184 @@ $.fn.tagbox = function ( options ) {
 
             for ( var n = 0; n < tags_str.length; n++ ) {
 
-                tags_html += get_tag_html ( tags_str[n] );
+                tags_html += this._get_tag_html ( tags_str[n] );
 
             }
 
             return tags_html;
 
-        };
+        },
 
-        var get_tag_html = function ( tag_str ) {
+        _get_tag_html: function ( tag_str ) {
 
-            tag_str = sanitize_str ( tag_str );
+            tag_str = this._sanitize_str ( tag_str );
 
-            return '<div class="tag button ' + options.tag.theme + '"><div class="label">' + tag_str + '</div><div class="sub right actionable close">x</div></div>';
+            return '<div class="tag button ' + this.options.tag.theme + '"><div class="label">' + tag_str + '</div><div class="sub right actionable close">x</div></div>';
 
-        };
+        },
 
-        var sanitize_str = function ( string ) {
+        _sanitize_str: function ( string ) {
 
             return string.replace ( /[\n\r\t]/g, ' ' ).replace ( /\s+/g, ' ' );
 
-        };
+        },
 
-        var update_variables = function () {
+        _update_variables: function () {
 
-            $tags = $tagbox.find ( '.tag' );
+            this.$tags = this.$tagbox.find ( '.tag' );
 
-            tags_arr = [];
+            this.tags_arr = [];
 
-            $tags.each ( function ( node ) {
+            for ( var i = 0, l = this.$tags.length; i < l; i++ ) {
 
-                var $tag = $(node),
+                var $tag = this.$tags.nodes[i],
                     $label = $tag.find ( '.label' );
 
-                tags_arr.push ( $label.html () );
+                this.tags_arr.push ( $label.html () );
 
-            });
+            }
 
-        };
+        },
 
-        var update_input = function () {
+        _update_input: function () {
 
-            $input.val ( tags_arr.join ( options.separator ) );
+            this.$node.val ( this.tags_arr.join ( this.options.separator ) );
 
-        };
+        },
 
-        var add_tag = function ( tag_str, empty ) {
+        /* KEYDOWN */
 
-            tag_str = sanitize_str ( tag_str );
+        _bind_keydown: function () {
 
-            if ( tag_str.length < options.tag.min_length ) {
+            this.$partial.on ( 'keydown', this._handler_keydown );
 
-                if ( tag_str.length > 0 ) { // so it won't be triggered when the user presses enter and the $partial is empty
+        },
 
-                    noty ( 'You cannot use tags shorter than 3 characters' );
+        _handler_keydown: function ( event ) {
+
+            switch ( event.keyCode ) {
+
+                case 13: // enter
+            //  case 32: // spacebar, if enabled actually disables tags with spaces inside of them
+                case 188: // comma
+                    this.add_tag ( this.$partial.val (), true );
+                    event.preventDefault ();
+                    event.stopImmediatePropagation ();
+                    break;
+
+                case 8: // backspace
+                case 46: // del
+                    if ( this.$partial.val ().length === 0 && this.$tags.length > 0 ) {
+                        var $last = this.$tags.last ();
+                        this.remove_tag ( $last, !event.ctrlKey );
+                        event.preventDefault ();
+                        event.stopImmediatePropagation ();
+                    }
+                    break;
+
+                default:
+                    if ( this.options.forbidden.indexOf ( event.key ) !== -1 ) {
+                        $.noty ( 'The character you entered is forbidden' );
+                        event.preventDefault ();
+                        event.stopImmediatePropagation ();
+                    }
+                    break;
+
+            }
+
+        },
+
+        /* PASTE */
+
+        _bind_paste: function () {
+
+            this.$partial.on ( 'past', this._handler_paste );
+
+        },
+
+        _handler_paste: function ( event ) {
+
+            // $.defer ( function () { //FIXME: it should be wrapped on defer
+
+                var tags_str = this.$partial.val ().split ( this.options.separator );
+
+                for ( var i = 0; i < tags_str.length; i++ ) {
+
+                    this.add_tag ( tags_str[i], false );
 
                 }
 
-            } else if ( _( tags_arr ).contains ( tag_str ) ) {
+                this.$partial.val ( '' );
 
-                noty ( 'You cannot use duplicate tags' );
+            // });
+
+        },
+
+        /* CLICK ON CLOSE */
+
+        _bind_click_on_close: function () {
+
+            this.$tagbox.on ( 'click', this._handler_click_on_close );
+
+        },
+
+        _handler_click_on_close: function ( event ) {
+
+            var $target = $(event.target);
+
+            if ( $target.is ( '.close ') ) {
+
+                var $tag = $target.parent ();
+
+                this.remove_tag ( $tag );
+
+            }
+
+        },
+
+        /* CLICK ON EMPTY */
+
+        _bind_click_on_empty: function () {
+
+            this.$tagbox.on ( 'click', this._handler_click_on_empty );
+
+        },
+
+        _handler_click_on_empty: function ( event ) {
+
+            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .label' ) ) {
+
+                this.$partial.get ( 0 ).focus ();
+
+            }
+
+        },
+
+        /* PUBLIC */
+
+        add_tag: function ( tag_str, empty ) {
+
+            tag_str = this._sanitize_str ( tag_str );
+
+            if ( tag_str.length < this.options.tag.min_length ) {
+
+                if ( tag_str.length > 0 ) { // so it won't be triggered when the user presses enter and the $partial is empty
+
+                    $.noty ( 'You cannot use tags shorter than 3 characters' );
+
+                }
+
+            } else if ( this.tags_arr.indexOf ( tag_str ) !== -1 ) {
+
+                $.noty ( 'You cannot use duplicate tags' );
 
             } else {
 
-                var tag_html = get_tag_html ( tag_str );
+                var tag_html = this._get_tag_html ( tag_str );
 
-                if ( $tags.size () === 0 || options.append ) {
+                if ( $tags.length === 0 || this.options.append ) {
 
-                    $partial.before ( tag_html );
+                    this.$partial.before ( tag_html );
 
                 } else {
 
@@ -131,149 +260,47 @@ $.fn.tagbox = function ( options ) {
 
                     if ( index - 1 < 0 ) {
 
-                        $tags.first ().before ( tag_html );
+                        this.$tags.first ().before ( tag_html );
 
                     } else {
 
-                        $tags.eq ( index - 1 ).after ( tag_html );
+                        this.$tags.eq ( index - 1 ).after ( tag_html );
 
                     }
 
                 }
 
-                update_variables ();
-                update_input ();
+                this.update_variables ();
+                this.update_input ();
 
                 if ( empty === true ) {
 
-                    $partial.val ( '' );
+                    this.$partial.val ( '' );
 
                 }
 
             }
 
-        };
+        },
 
-        var remove_tag = function ( $tag, edit ) {
+        remove_tag: function ( $tag, edit ) {
 
             var $label = $tag.find ( '.label' ),
                 tag_str = $label.html ();
 
             $tag.remove ();
 
-            update_variables ();
-            update_input ();
+            this.update_variables ();
+            this.update_input ();
 
             if ( edit === true ) {
 
-                $partial.val ( tag_str );
+                this.$partial.val ( tag_str );
 
             }
 
-        };
-
-        /* VARIABLES */
-
-        var $input = $(node),
-            tagbox_id = $.get_uuid ();
-
-        init_input ();
-
-        var $tagbox = $('#tagbox_' + tagbox_id),
-            $partial = $tagbox.find ( 'input' ),
-            $tags = false,
-            tags_arr = false;
-
-        $partial.autogrow ();
-
-        update_variables ();
-
-        /* EVENTS */
-
-        $partial.on ( 'keydown', function ( event ) { // writing inside the partial input
-
-            switch ( event.keyCode ) {
-
-                case 13: // enter
-            //  case 32: // spacebar, if enabled actually disables tags with spaces inside of them
-                case 188: // comma
-                    add_tag ( $partial.val (), true );
-                    event.preventDefault ();
-                    event.stopImmediatePropagation ();
-                    break;
-
-                case 8: // backspace
-                case 46: // del
-                    if ( $partial.val ().length === 0 && $tags.size () > 0 ) {
-                        var $last = $tags.last ();
-                        remove_tag ( $last, !event.ctrlKey );
-                        event.preventDefault ();
-                        event.stopImmediatePropagation ();
-                    }
-                    break;
-
-                default:
-                    if ( _( options.forbidden ).contains ( event.key ) ) {
-                        noty ( 'The character you entered is forbidden' );
-                        event.preventDefault ();
-                        event.stopImmediatePropagation ();
-                    }
-                    break;
-
-            }
-
-        });
-
-        $partial.on ( 'paste', function () { // catching a paste, basically parsing the $partial.val () after the paste
-
-            $.defer ( function () {
-
-                var tags_str = $partial.val ().split ( options.separator );
-
-                for ( var i = 0; i < tags_str.length; i++ ) {
-
-                    add_tag ( tags_str[i], false );
-
-                }
-
-                $partial.val ( '' );
-
-            });
-
-        });
-
-        $tagbox.on ( 'click', function ( event ) { // click on close button
-
-            var $target = $(event.target);
-
-            if ( $target.is ( '.close ') ) {
-
-                var $tag = $target.parent ();
-
-                remove_tag ( $tag );
-
-            }
-
-        });
-
-        $tagbox.on ( 'click', function ( event ) { // focus on partial input when clicking on an empty space
-
-            if ( $partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .label' ) ) {
-
-                $partial.get ( 0 ).focus ();
-
-            }
-
-        });
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('input.tagbox').tagbox ();
-
-});
+}( lQuery, window, document ));

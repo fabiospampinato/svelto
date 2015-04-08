@@ -1,84 +1,307 @@
 
 /* SLIDER */
 
-$.fn.slider = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'slider', {
 
-        // Functions
+        /* SPECIAL */
 
-        var round_value = function ( value ) {
+        init: function () {
 
-            return Number(value).toFixed(decimals);
+            this.$slider = this.$node.find ( '.slider' );
+            this.$min_btn = this.$slider.find ( '.min' );
+            this.$max_btn = this.$slider.find ( '.max' );
+            this.$input = this.$slider.find ( 'input' );
+            this.$unhighlighted = this.$slider.find ( '.unhighlighted' );
+            this.$highlighted = this.$slider.find ( '.highlighted' );
+            this.$handler = this.$slider.find ( '.handler' );
+            this.$label = this.$handler.find ( '.label' );
 
-        };
+            this.min = this.$slider.data ( 'min' );
+            this.max = this.$slider.data ( 'max' );
+            this.start = this.$slider.data ( 'start' ) || this.$input.val () || 0;
+            this.step = this.$slider.data ( 'step' ) || 1;
+            this.decimals = this.$slider.data ( 'decimals' ) || 0;
 
-        var round_distance = function ( distance ) {
+            this.unhighlighted_width = this.$unhighlighted.width ();
+            this.one_step_width = this.unhighlighted_width / ( this.max - this.min );
+            this.required_step_width = this.step * this.one_step_width;
+            this.current_value = this.start;
 
-            var mod = distance % required_step_width,
+            this.start_pos = false;
+            this.current_move = false;
+
+            this.set_value ( this.current_value );
+
+            this._bind_change ();
+            this._bind_resize ();
+            this._bind_arrows ();
+            this._bind_min_max_click ();
+            this._bind_drag ();
+            this._bind_click ();
+
+        },
+
+        ready: function () {
+
+            $('.slider_wrp').slider ();
+
+        },
+
+        /* PRIVATE */
+
+        _round_value: function ( value ) {
+
+            return Number(value).toFixed ( this.decimals );
+
+        },
+
+        _round_distance: function ( distance ) {
+
+            var mod = distance % this.required_step_width,
                 extra_step;
 
             if ( mod > 0 ) {
 
-                extra_step = ( mod >= required_step_width / 2 ) ? 1 : 0;
+                extra_step = ( mod >= this.required_step_width / 2 ) ? 1 : 0;
 
-                distance = ( Math.floor ( distance / required_step_width ) + extra_step ) * required_step_width;
+                distance = ( Math.floor ( distance / this.required_step_width ) + extra_step ) * this.required_step_width;
 
             } else if ( mod < 0 ) {
 
-                extra_step = ( mod <= - ( required_step_width / 2 ) ) ? -1 : 0;
+                extra_step = ( mod <= - ( this.required_step_width / 2 ) ) ? -1 : 0;
 
-                distance = ( Math.ceil ( distance / required_step_width ) + extra_step ) * required_step_width;
+                distance = ( Math.ceil ( distance / this.required_step_width ) + extra_step ) * this.required_step_width;
 
             }
 
             return distance;
 
-        };
+        },
 
-        var set_value = function ( value ) {
+        /* CHANGE */
 
-            value = round_value ( value );
+        _bind_change: function () {
 
-            var width = ( ( value - min ) * 100 / ( max - min ) ) + '%';
+            this.$input.on ( 'change', this._handler_change );
 
-            $handler.css ( 'left', width );
-            $highlighted.css ( 'width', width );
+        },
 
-            $input.val ( value ).trigger ( 'change' );
-            $label.html ( value );
+        _handler_change: function ( event ) {
 
-        };
+            var input_val = Number(this.$input.val ());
 
-        var navigate = function ( modifier ) {
+            if ( input_val === this.current_value ) return;
 
-            var possible_new_value = current_value + modifier;
+            this.current_value = input_val;
 
-            if ( possible_new_value >= min && possible_new_value <= max ) {
+            this.set_value ( this.current_value );
 
-                current_value = possible_new_value;
+        },
 
-                set_value ( current_value );
+        /* RESIZE */
+
+        _bind_resize: function () {
+
+            $window.on ( 'resize', this._handler_resize );
+
+        },
+
+        _handler_resize: function ( event ) {
+
+            this.unhighlighted_width = this.$unhighlighted.width ();
+            this.one_step_width = this.unhighlighted_width / ( this.max - this.min );
+            this.required_step_width = this.step * this.one_step_width;
+
+        },
+
+        /* LEFT / RIGHT ARROWS */
+
+        _bind_arrows: function () {
+
+            this.$slider.hover ( this._handler_arrows_in, this._handler_arrows_out );
+
+        },
+
+        _handler_arrows_in: function ( event ) {
+
+            if ( this.hasClass ( 'inactive' ) ) return;
+
+            $document.on ( 'keydown', this._handler_arrows_keydown );
+
+        },
+
+        _handler_arrows_out: function ( event ) {
+
+            $document.off ( 'keydown', this._handler_arrows_keydown );
+
+        },
+
+        _handler_arrows_keydown: function ( event ) {
+
+            if ( event.keyCode === 37 ) { // left arrow
+
+                this.navigate ( - this.step );
+
+            } else if ( event.keyCode === 39 ) { // right arrow
+
+                this.navigate ( this.step );
 
             }
 
-        };
+        },
 
-        var navigate_move = function ( distance ) {
+        /* MIN / MAX CLICK */
 
-            distance = round_distance ( distance );
+        _bind_min_click: function () {
+
+            this.$min_btn.on ( 'click', this._handler_min_click );
+
+        },
+
+        _handler_min_click: function ( event ) {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            this.navigate ( - this.step );
+
+        },
+
+        _bind_max_click: function () {
+
+            this.$max_btn.on ( 'click', this._handler_max_click );
+
+        },
+
+        _handler_max_click: function () {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            this.navigate ( this.step );
+
+
+        },
+
+        /* DRAG */
+
+        _bind_drag: function () {
+
+            this.$handler.on ( 'mousedown touchstart', this._handler_drag_start );
+
+        },
+
+        _handler_drag_start: function ( event ) {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            this.start_pos = get_event_pageXY ( event );
+            this.current_move = 0;
+
+            $html.addClass ( 'dragging' );
+            this.$slider.addClass ( 'dragging' );
+
+            $document.on ( 'mousemove touchmove', this._handler_drag_move );
+            $document.on ( 'mouseup touchend', this._handler_drag_end );
+
+        },
+
+        _handler_drag_move: function ( event ) {
+
+            var end_pos = get_event_pageXY ( event ),
+                full_move = end_pos.pageX - this.start_pos.pageX,
+                delta_move = full_move - this.current_move;
+
+            if ( Math.abs ( delta_move ) >= 1 ) {
+
+                var moved = this.navigate_move ( delta_move );
+
+                if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
+
+                    this.current_move += moved;
+
+                }
+
+            }
+
+        },
+
+        _handler_drag_end: function ( event ) {
+
+            $html.removeClass ( 'dragging' );
+            this.$slider.removeClass ( 'dragging' );
+
+            $document.off ( 'mousemove touchmove', this._handler_drag_move );
+            $document.off ( 'mouseup touchend', this._handler_drag_end );
+
+        },
+
+        /* CLICK */
+
+        _bind_click: function () {
+
+            this.$unhighlighted.on ( 'click', this._handler_click );
+
+        },
+
+        _handler_click: function ( event ) {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            if ( $(event.target).parents ().index ( this.$handler ) !== -1 ) return;
+
+            var click_pos = get_event_pageXY ( event ),
+                distance = click_pos.pageX - ( this.$highlighted.offset ().left + this.$highlighted.width () );
+
+            this.navigate_move ( distance );
+
+        },
+
+        /* PUBLIC */
+
+        set_value: function ( value ) {
+
+            value = this._round_value ( value );
+
+            var width = ( ( value - this.min ) * 100 / ( this.max - this.min ) ) + '%';
+
+            this.$handler.css ( 'left', width );
+            this.$highlighted.css ( 'width', width );
+
+            this.$input.val ( value ).trigger ( 'change' );
+            this.$label.html ( value );
+
+        },
+
+        navigate: function ( modifier ) {
+
+            var possible_new_value = this.current_value + modifier;
+
+            if ( possible_new_value >= this.min && possible_new_value <= this.max ) {
+
+                this.current_value = possible_new_value;
+
+                this.set_value ( this.current_value );
+
+            }
+
+        },
+
+        navigate_move: function ( distance ) {
+
+            distance = this._round_distance ( distance );
 
             if ( distance !== 0 ) {
 
-                var possible_new_value = current_value + ( distance / one_step_width );
+                var possible_new_value = this.current_value + ( distance / this.one_step_width );
 
-                possible_new_value = Math.max ( min, Math.min ( max, possible_new_value ) );
+                possible_new_value = Math.max ( this.min, Math.min ( this.max, possible_new_value ) );
 
-                if ( current_value !== possible_new_value ) {
+                if ( this.current_value !== possible_new_value ) {
 
-                    current_value = possible_new_value;
+                    this.current_value = possible_new_value;
 
-                    set_value ( current_value );
+                    this.set_value ( this.current_value );
 
                     return distance;
 
@@ -88,182 +311,8 @@ $.fn.slider = function () {
 
             return false;
 
-        };
-
-        // Variables
-
-        var $wrp = $(node),
-            $slider = $wrp.find ( '.slider' ),
-            $min_btn = $slider.find ( '.min' ),
-            $max_btn = $slider.find ( '.max' ),
-            $input = $slider.find ( 'input' ),
-            $unhighlighted = $slider.find ( '.unhighlighted' ),
-            $highlighted = $slider.find ( '.highlighted' ),
-            $handler = $slider.find ( '.handler' ),
-            $label = $handler.find ( '.label' ),
-
-            min = $slider.data ( 'min' ),
-            max = $slider.data ( 'max' ),
-            start = $slider.data ( 'start' ) || $input.val () || 0,
-            step = $slider.data ( 'step' ) || 1,
-            decimals = $slider.data ( 'decimals' ) || 0,
-
-            unhighlighted_width = $unhighlighted.width (),
-            one_step_width = unhighlighted_width / ( max - min ),
-            required_step_width = step * one_step_width,
-            current_value = start;
-
-        // Init
-
-        set_value ( current_value );
-
-        // Change event
-
-        $input.on ( 'change', function () {
-
-            var input_val = Number($input.val ());
-
-            if ( input_val === current_value ) return;
-
-            current_value = input_val;
-
-            set_value ( current_value );
-
-        });
-
-        // Resize event
-
-        $window.on ( 'resize', function () {
-
-            unhighlighted_width = $unhighlighted.width ();
-            one_step_width = unhighlighted_width / ( max - min );
-            required_step_width = step * one_step_width;
-
-        });
-
-        // Left / Right arrows events
-
-        var doc_keydown_handler = function ( event ) {
-
-            if ( event.keyCode === 37 ) { // left arrow
-
-                navigate ( -step );
-
-            } else if ( event.keyCode === 39 ) { // right arrow
-
-                navigate ( step );
-
-            }
-
-        };
-
-        $slider.on ( 'mouseenter', function () {
-
-            if ( $wrp.hasClass ( 'inactive' ) ) return;
-
-            $document.on ( 'keydown', doc_keydown_handler );
-
-        }).on ( 'mouseleave', function () {
-
-            $document.off ( 'keydown', doc_keydown_handler );
-
-        });
-
-        // Navigation events
-
-        $min_btn.on ( 'click', function () {
-
-            if ( $wrp.hasClass ( 'inactive' ) ) return;
-
-            navigate ( -step );
-
-        });
-
-        $max_btn.on ( 'click', function () {
-
-            if ( $wrp.hasClass ( 'inactive' ) ) return;
-
-            navigate ( step );
-
-        });
-
-        // Drag event
-
-        var start_pos,
-            current_move;
-
-        var drag_start_handler = function ( event ) {
-
-            if ( $wrp.hasClass ( 'inactive' ) ) return;
-
-            start_pos = get_event_pageXY ( event );
-            current_move = 0;
-
-            $html.addClass ( 'dragging' );
-            $slider.addClass ( 'dragging' );
-
-            $document.on ( 'mousemove touchmove', drag_move_handler );
-            $document.on ( 'mouseup touchend', drag_end_handler );
-
-        };
-
-        var drag_move_handler = function ( event ) {
-
-            var end_pos = get_event_pageXY ( event ),
-                full_move = end_pos.pageX - start_pos.pageX,
-                delta_move = full_move - current_move;
-
-            if ( Math.abs ( delta_move ) >= 1 ) {
-
-                var moved = navigate_move ( delta_move );
-
-                if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
-
-                    current_move += moved;
-
-                }
-
-            }
-
-        };
-
-        var drag_end_handler = function () {
-
-            $html.removeClass ( 'dragging' );
-            $slider.removeClass ( 'dragging' );
-
-            $document.off ( 'mousemove touchmove', drag_move_handler );
-            $document.off ( 'mouseup touchend', drag_end_handler );
-
-        };
-
-        $handler.on ( 'mousedown touchstart', drag_start_handler );
-
-        // Click event
-
-        var bar_click_handler = function ( event ) {
-
-            if ( $wrp.hasClass ( 'inactive' ) ) return;
-
-            if ( $(event.target).parents ().contains ( $handler ) ) return;
-
-            var click_pos = get_event_pageXY ( event ),
-                distance = click_pos.pageX - ( $highlighted.offset ().left + $highlighted.width() );
-
-            navigate_move ( distance );
-
-        };
-
-        $unhighlighted.on ( 'click', bar_click_handler );
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.slider_wrp').slider ();
-
-});
+}( lQuery, window, document ));

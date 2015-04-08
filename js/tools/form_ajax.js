@@ -1,101 +1,110 @@
 
 /* FORM AJAX */
 
-$.fn.form_ajax = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'form_ajax', {
 
-        var $form = $(node);
+        /* SPECIAL */
 
-        $form.on ( 'submit', function ( event ) {
+        init: function () {
 
-            event.preventDefault ();
+            var $form = this.$node;
 
-            $.ajax ({
-                type: $form.attr ( 'method' ) || 'POST',
-                url: $form.attr ( 'action' ),
-                data: new FormData ( $form.get ( 0 ) ),
-                before: function () {
-                    $form.loading ( true );
-                },
-                after: function () {
-                    $form.loading ( false );
-                },
-                success: function ( res ) {
+            $form.on ( 'submit', function ( event ) {
 
-                    if ( typeof res === 'string' ) {
+                event.preventDefault ();
 
-                        if ( res === 'refresh' ) {
+                $.ajax ({
+                    type: $form.attr ( 'method' ) || 'POST',
+                    url: $form.attr ( 'action' ),
+                    data: new FormData ( $form.get ( 0 ) ),
+                    before: function () {
+                        $form.loading ( true );
+                    },
+                    after: function () {
+                        $form.loading ( false );
+                    },
+                    success: function ( res ) {
 
-                            noty ( 'Done! Refreshing the page...' );
-                            location.reload ();
+                        if ( typeof res === 'string' ) {
 
-                        } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { // is an url, either absolute or relative
+                            if ( res === 'refresh' ) {
 
-                            if ( res === window.location.href || res === window.location.pathname ) {
+                                $.noty ( 'Done! Refreshing the page...' );
 
-                                noty ( 'Done! Refreshing the page...' );
                                 location.reload ();
+
+                            } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
+
+                                if ( res === window.location.href || res === window.location.pathname ) {
+
+                                    $.noty ( 'Done! Refreshing the page...' );
+
+                                    location.reload ();
+
+                                } else {
+
+                                    $.noty ( 'Done! Redirecting...' );
+
+                                    location.assign ( res );
+
+                                }
+
+                            } else if ( res[0] === '<') { //INFO: Is HTML
+
+                                $.noty ( 'Done! A page refresh may be needed to see the changes' );
+
+                                $body.append ( res );
 
                             } else {
 
-                                noty ( 'Done! Redirecting...' );
-                                location.assign ( res );
+                                $.noty ( res );
 
                             }
 
-                        } else if ( res.indexOf ( '<' ) !== -1 ) { // is HTML
+                        } else {
 
                             noty ( 'Done! A page refresh may be needed to see the changes' );
-                            $body.append ( res );
-
-                        } else {
-
-                            noty ( res );
 
                         }
 
-                    } else {
+                    },
+                    error: function ( res ) {
 
-                        noty ( 'Done! A page refresh may be needed to see the changes' );
+                        if ( typeof res === 'string' ) {
 
-                    }
+                            if ( res[0] === '<' ) { //INFO: Is HTML
 
-                },
-                error: function ( res ) {
+                                $.noty ( 'There was an error, please try again or report the problem' );
 
-                    if ( typeof res === 'string' ) {
+                                $body.append ( res );
 
-                        if ( res.indexOf ( '<' ) !== -1 ) { // is HTML
+                            } else {
 
-                            noty ( 'There was an error, please try again or report the problem' );
-                            $body.append ( res );
+                                $.noty ( res );
+
+                            }
 
                         } else {
 
-                            noty ( res );
+                            $.noty ( 'There was an error, please try again or report the problem' );
 
                         }
 
-                    } else {
-
-                        noty ( 'There was an error, please try again or report the problem' );
-
                     }
+                });
 
-                }
             });
 
-        });
+        },
+
+        ready: function () {
+
+            $('form.ajax').form_ajax ();
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('form[data-ajax]').form_ajax ();
-
-});
+}( lQuery, window, document ));

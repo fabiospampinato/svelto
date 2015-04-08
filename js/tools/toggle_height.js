@@ -1,81 +1,86 @@
 
 /* TOGGLE HEIGHT  */
 
-$.fn.toggleHeight = function ( force ) {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'toggleHeight', {
 
-        // FUNCTIONS
+        /* SPECIAL */
 
-        var is_visible = function () {
+        init: function () {
 
-            return $ele.height () !== 0;
+            this.speed = parseFloat ( this.$node.css ( 'transition-duration' ) ) * 1000;
 
-        };
+            this.$node.height ( this.$node.height () );
 
-        var get_actual_height = function () {
+        },
 
-            var old_style = $ele.attr ( 'style' ) || '';
+        call: function ( force ) {
 
-            $ele.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
+            this._toggle ( force );
 
-            var actual_height = $ele.height ();
+        },
 
-            $ele.css ( 'css-text', old_style );
+        /* PRIVATE */
+
+        _is_visible: function () {
+
+            return ( this.$node.height () !== 0 );
+
+        },
+
+        _get_actual_height: function () {
+
+            var old_style = this.$node.attr ( 'style' ) || '';
+
+            this.$node.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
+
+            var actual_height = this.$node.height ();
+
+            this.$node.css ( 'css-text', old_style );
 
             return actual_height;
 
-        };
+        },
 
-        var toggle = function () {
+        _toggle: function ( force ) {
 
-            if ( is_visible () || force === false ) {
+            if ( this._is_visible () || force === false ) {
 
-                $.defer ( function () {
+                this.$node.defer ( function () {
 
-                    $ele.css ( 'height', 0 );
+                    this.height ( 0 );
 
                 });
 
-                $.defer ( function () {
+                this.$node.defer ( function () {
 
-                    $ele.toggle ( false );
+                    this.toggle ( false );
 
-                }, speed || 0 );
+                }, this.speed || 0 );
 
             } else {
 
-                $ele.toggle ( true );
+                this.$node.toggle ( true );
 
-                var actual_height = get_actual_height ();
+                var actual_height = this._get_actual_height ();
 
-                $.defer ( function () {
+                this.$node.defer ( function () {
 
-                    $ele.css ( 'height', actual_height + 'px' );
+                    this.height ( actual_height );
 
                 });
 
-                $.defer ( function () {
+                this.$node.defer ( function () {
 
-                    $ele.css ( 'height', 'auto' );
+                    this.height ( 'auto' );
 
-                }, speed );
+                }, this.speed );
 
             }
 
-        };
-
-        // VARIABLES
-
-        var $ele = $(node),
-            speed = parseFloat ( $ele.css ( 'transition-duration' ) ) * 1000;
-
-        // INIT
-
-        $ele.css ( 'height', $ele.height () + 'px' );
-
-        toggle ();
+        }
 
     });
 
-};
+}( lQuery, window, document ));

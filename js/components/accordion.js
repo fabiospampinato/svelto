@@ -1,18 +1,37 @@
 
 /* ACCORDION */
 
-$.fn.accordion = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'accordion', {
 
-        var $wrp = $(node),
-            $accordions = $wrp.find ( '.accordion' );
+        /* SPECIAL */
 
-        $accordions.each ( function ( node ) {
+        init: function () {
+
+            this.$accordions = this.$node.find ( '.accordion' );
+
+            for ( var i = 0, l = this.$accordions.length; i < l; i++ ) {
+
+                this._init_accordion ( this.$accordions.nodes[i] );
+
+            }
+
+        },
+
+        ready: function () {
+
+            $('.accordions_wrp').accordion ();
+
+        },
+
+        /* ACCORDION */
+
+        _init_accordion: function ( node ) {
 
             var $accordion = $(node),
                 $header = $accordion.find ( '.header' ),
-                $other_accordions = $accordions.not ( $accordion ),
+                $other_accordions = this.$accordions.not ( $accordion ),
                 $other_headers = $other_accordions.find ( '.header' ).not ( $header );
 
             $header.on ( 'click', function () {
@@ -29,16 +48,8 @@ $.fn.accordion = function () {
 
             });
 
-        });
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.accordions_wrp').accordion ();
-
-});
+}( lQuery, window, document ));

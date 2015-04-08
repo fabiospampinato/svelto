@@ -1,94 +1,100 @@
 
 /* BADGE */
 
-$.fn.badge = function ( options ) {
+;(function ( $, window, document, undefined ) {
 
-    if ( typeof options === 'string' ) {
+    $.factory ( 'badge', {
 
-        options = {
-            title: options
-        };
-
-    }
-
-    options = _.merge ({
         title: false,
         type: false,
         style: false
-    }, options );
 
-    return this.each ( function ( node ) {
+    }, {
 
-        var $ele = $(node),
-            $badge_wrp = $ele.find ( '.badge_wrp' ),
-            $badge = $badge_wrp.find ( '.badge' ),
-            title = options.title || $ele.data ( 'badge' ),
-            type = options.type || $ele.data ( 'badge-type' ) || 'floating',
-            style = options.style || $ele.data ( 'badge-style' ) || ''; // all_colors, squared
+        /* SPECIAL */
 
-        if ( !title || title === 0 || title === '0' ) title = '';
+        init: function () {
 
-        if ( !type && type !== 'inline' && type !== 'floating' ) type = 'inline';
+            this.$badge_wrp = this.$node.find ( '.badge_wrp' ),
+            this.$badge = this.$badge_wrp.find ( '.badge' ),
 
-        if ( $badge.size () === 0 ) {
+            this.options.title = this.options.title || $ele.data ( 'badge' ),
+            this.options.type = this.options.type || $ele.data ( 'badge-type' ) || 'floating',
+            this.options.style = this.options.style || $ele.data ( 'badge-style' ) || ''; // all_colors, squared
 
-            $ele.append ( '<div class="badge_wrp ' + type + '"><div class="badge_subwrp"><div class="badge ' + style + '"></div></div></div>' );
+            if ( !this.options.title || this.options.title === 0 || this.options.title === '0' ) this.options.title = '';
 
-            $badge_wrp = $ele.find ( '.badge_wrp' );
-            $badge = $badge_wrp.find ( '.badge' );
+            if ( !this.options.type && this.options.type !== 'inline' && this.options.type !== 'floating' ) this.options.type = 'inline';
 
-        }
+            if ( this.$badge.length === 0 ) {
 
-        if ( !$badge_wrp.hasClass ( type ) ) {
+                this.$node.append ( '<div class="badge_wrp ' + this.options.type + '"><div class="badge_subwrp"><div class="badge ' + this.options.style + '"></div></div></div>' );
 
-            $badge_wrp.toggleClass ( 'inline floating' );
+                this.options.$badge_wrp = this.$node.find ( '.badge_wrp' );
+                this.options.$badge = this.$badge_wrp.find ( '.badge' );
 
-        }
+            }
 
-        if ( style ) {
+            if ( !this.$badge_wrp.hasClass ( this.options.type ) ) {
 
-            $badge.addClass ( style );
+                this.$badge_wrp.toggleClass ( 'inline floating' );
 
-        }
+            }
 
-        if ( title ) {
+            if ( this.options.style ) {
 
-            $badge.html ( title );
+                this.$badge.addClass ( this.options.style );
 
-        }
+            }
 
-        var opening = title !== '';
+            if ( this.options.title ) {
 
-        if ( opening ) {
+                this.$badge.html ( this.options.title );
 
-            $badge_wrp.removeClass ( 'hidden' );
+            }
 
-            $.defer ( function () {
+            var opening = ( this.options.title !== '' );
 
-                $badge_wrp.addClass ( 'active' );
+            if ( opening ) {
 
-            });
+                this.$badge_wrp.removeClass ( 'hidden' );
 
-        } else {
+                this.$badge_wrp.defer ( function () {
 
-            $badge_wrp.removeClass ( 'active' );
+                    this.addClass ( 'active' );
 
-            $.defer ( function () {
+                });
 
-                $badge_wrp.addClass ( 'hidden' );
+            } else {
 
-            }, 150 );
+                this.$badge_wrp.removeClass ( 'active' );
+
+                this.$badge_wrp.defer ( function () {
+
+                    this.addClass ( 'hidden' );
+
+                }, 150 );
+
+            }
+
+        },
+
+        call: function ( title ) {
+
+            if ( typeof title === 'string' ) {
+
+                this.options.title = title;
+
+            }
+
+        },
+
+        ready: function () {
+
+            $('[data-badge]').badge ();
 
         }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('[data-badge]').badge ();
-
-});
+}( lQuery, window, document ));

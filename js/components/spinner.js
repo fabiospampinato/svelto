@@ -1,132 +1,164 @@
 
 /* SPINNER */
 
-$.fn.spinner = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'spinner', {
 
-        // Functions
+        /* SPECIAL */
 
-        var round_value = function ( value ) {
+        init: function () {
 
-            return Number(value).toFixed(decimals);
+            this.$input = this.$node.find ( 'input' ),
+            this.$label = this.$node.find ( '.label' ),
+            this.$decrease_btn = this.$node.find ( '.decrease' ),
+            this.$increase_btn = this.$node.find ( '.increase' ),
 
-        };
+            this.min = this.$node.data ( 'min' ),
+            this.max = this.$node.data ( 'max' ),
+            this.start = this.$node.data ( 'start' ) || this.$input.val () || 0,
+            this.step = this.$node.data ( 'step' ) || 1,
+            this.decimals = this.$node.data ( 'decimals' ) || 0,
 
-        var set_value = function ( value ) {
+            this.current_value = start;
 
-            value = round_value ( value );
+            this.set_value ( this.current_value );
 
-            $input.val ( value ).trigger ( 'change' );
-            $label.html ( value );
+            this._bind_change ();
+            this._bind_arrows ();
+            this._bind_minus_click ();
 
-            $decrease_btn.toggleClass ( 'inactive', value === min );
-            $increase_btn.toggleClass ( 'inactive', value === max );
+        },
 
-        };
+        ready: function () {
 
-        var navigate = function ( modifier ) {
+            $('.spinner').spinner ();
 
-            var possible_new_value = current_value + modifier;
+        },
 
-            if ( possible_new_value >= min && possible_new_value <= max ) {
+        /* PRIVATE */
 
-                current_value = possible_new_value;
+        _round_value: function ( value ) {
 
-                set_value ( current_value );
+            return Number(value).toFixed ( this.decimals );
 
-            }
+        },
 
-        };
+        /* CHANGE */
 
-        // Variables
+        _bind_change: function () {
 
-        var $spinner = $(node),
-            $input = $spinner.find ( 'input' ),
-            $label = $spinner.find ( '.label' ),
-            $decrease_btn = $spinner.find ( '.decrease' ),
-            $increase_btn = $spinner.find ( '.increase' ),
+            this.$input.on ( 'change', this._handler_change );
 
-            min = $spinner.data ( 'min' ),
-            max = $spinner.data ( 'max' ),
-            start = $spinner.data ( 'start' ) || $input.val () || 0,
-            step = $spinner.data ( 'step' ) || 1,
-            decimals = $spinner.data ( 'decimals' ) || 0,
+        },
 
-            current_value = start;
+        _handler_change: function () {
 
-        // Init
+            var input_val = Number(this.$input.val ());
 
-        set_value ( current_value );
+            if ( input_val === this.current_value ) return;
 
-        // Change event
+            this.current_value = input_val;
 
-        $input.on ( 'change', function () {
+            this.set_value ( this.current_value );
 
-            var input_val = Number($input.val ());
+        },
 
-            if ( input_val === current_value ) return;
+        /* LEFT / RIGHT ARROWS */
 
-            current_value = input_val;
+        _bind_arrows: function () {
 
-            set_value ( current_value );
+            this.$node.hover ( this._handler_arrows_in, this._handler_arrows_out );
 
-        });
+        },
 
-        // Left / Right arrows events
+        _handler_arrows_in: function ( event ) {
 
-        var doc_keydown_handler = function ( event ) {
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            $document.on ( 'keydown', this._handler_arrows_keydown );
+
+        },
+
+        _handler_arrows_out: function ( event ) {
+
+            $document.off ( 'keydown', this._handler_arrows_keydown );
+
+        },
+
+        _handler_arrows_keydown: function ( event ) {
 
             if ( event.keyCode === 37 ) { // left arrow
 
-                navigate ( -step );
+                this.navigate ( - this.step );
 
             } else if ( event.keyCode === 39 ) { // right arrow
 
-                navigate ( step );
+                this.navigate ( this.step );
 
             }
 
-        };
+        },
 
-        $spinner.on ( 'mouseenter', function () {
+        /* MINUS / PLUS CLICK */
 
-            if ( $spinner.hasClass ( 'inactive' ) ) return;
+        _bind_minus_click: function () {
 
-            $document.on ( 'keydown', doc_keydown_handler );
+            this.$decrease_btn.on ( 'click', this._handler_minus_click );
 
-        }).on ( 'mouseleave', function () {
+        },
 
-            $document.off ( 'keydown', doc_keydown_handler );
+        _handler_minus_click: function () {
 
-        });
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
 
-        // Navigation events
+            this.navigate ( - this.step );
 
-        $decrease_btn.on ( 'click', function () {
+        },
 
-            if ( $spinner.hasClass ( 'inactive' ) ) return;
+        _bind_plus_click: function () {
 
-            navigate ( -step );
+            this.$increase_btn.on ( 'click', this._handler_plus_click );
 
-        });
+        },
 
-        $increase_btn.on ( 'click', function () {
+        _handler_plus_click: function () {
 
-            if ( $spinner.hasClass ( 'inactive' ) ) return;
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
 
-            navigate ( step );
+            this.navigate ( this.step );
 
-        });
+        },
+
+        /* PUBLIC */
+
+        set_value: function ( value ) {
+
+            value = this._round_value ( value );
+
+            this.$input.val ( value ).trigger ( 'change' );
+            this.$label.html ( value );
+
+            this.$decrease_btn.toggleClass ( 'inactive', value === this.min );
+            this.$increase_btn.toggleClass ( 'inactive', value === this.max );
+
+
+        },
+
+        navigate: function ( modifier ) {
+
+            var possible_new_value = this.current_value + modifier;
+
+            if ( possible_new_value >= this.min && possible_new_value <= this.max ) {
+
+                this.current_value = possible_new_value;
+
+                this.set_value ( this.current_value );
+
+            }
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.spinner').spinner ();
-
-});
+}( lQuery, window, document ));

@@ -1,38 +1,42 @@
 
 /* BINARY TREE .each() */
 
-$.fn.bt_each = function ( callback, start_center ) {
+;(function ( $, window, document, undefined ) {
 
-    var start = 0,
-        end = this.size () - 1,
-        center = 0,
-        iterations = 0,
-        result = false;
+    $.factory ( 'bt_each', function ( callback, start_center ) {
 
-    while ( start <= end ) {
+        var start = 0,
+            end = this.length - 1,
+            center = 0,
+            iterations = 0,
+            result = false;
 
-        center = ( iterations === 0 && typeof start_center === 'number' ) ? start_center : Math.ceil ( ( start + end ) / 2 );
+        while ( start <= end ) {
 
-        result = callback.call ( this.get ( center ), this.get ( center ), center );
+            center = ( iterations === 0 && typeof start_center === 'number' ) ? start_center : Math.ceil ( ( start + end ) / 2 );
 
-        iterations += 1;
+            result = callback.call ( this.get ( center ), center, this.get ( center ) );
 
-        if ( result < 0 ) {
+            iterations += 1;
 
-            end = center - 1;
+            if ( result < 0 ) {
 
-        } else if ( result > 0 ) {
+                end = center - 1;
 
-            start = center + 1;
+            } else if ( result > 0 ) {
 
-        } else {
+                start = center + 1;
 
-            return center;
+            } else {
+
+                return center;
+
+            }
 
         }
 
-    }
+        return false;
 
-    return false;
+    });
 
-};
+}( lQuery, window, document ));

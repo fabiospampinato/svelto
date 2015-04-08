@@ -1,36 +1,40 @@
 
 /* ONE TIME ACTION */
 
-var one_time_action = function ( method, option, action ) {
+;(function ( $, window, document, undefined ) {
 
-    if ( method === 'cookie' ) {
+    $.one_time_action = function ( method, option, action ) {
 
-        var actions_str = cookie.read ( 'ota' ),
-            actions = actions_str ? actions_str.split ( '|' ) : [];
+        if ( method === 'cookie' ) {
 
-        if ( !_( actions ).contains ( option ) ) {
+            var actions_str = $.cookie.read ( 'ota' ),
+                actions = actions_str ? actions_str.split ( '|' ) : [];
 
-            actions.push ( option );
-            actions_str = actions.join ( '|' );
+            if ( actions.indexOf ( option ) === -1 ) {
 
-            cookie.write ( 'ota', actions_str, 31536000 ); // 1 year
+                actions.push ( option );
+                actions_str = actions.join ( '|' );
 
-            action ();
+                $.cookie.write ( 'ota', actions_str, 31536000 ); // 1 year
+
+                action ();
+
+            }
+
+        } else if ( method === 'url' ) {
+
+            $.ajax ({
+                type: 'GET',
+                url: option,
+                success: function ( res ) {
+                    if ( res === 1 || res === '1' ) { //FIXME: doesn't it return only strings???
+                        action ();
+                    }
+                }
+            });
 
         }
 
-    } else if ( method === 'url' ) {
+    };
 
-        $.ajax ({
-            type: 'GET',
-            url: option,
-            success: function ( res ) {
-                if ( res === 1 || res === '1' ) {
-                    action ();
-                }
-            }
-        });
-
-    }
-
-};
+}( lQuery, window, document ));

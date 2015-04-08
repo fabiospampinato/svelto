@@ -37,7 +37,7 @@ var menu_toggle = function ( open ) {
 
 /* READY */
 
-$.dom_ready ( function () {
+$.ready ( function () {
 
     menu_init_events ();
 

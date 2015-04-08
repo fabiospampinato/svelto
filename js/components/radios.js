@@ -1,67 +1,70 @@
 
 /* RADIOS */
 
-$.fn.radio = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'radio', {
 
-        var $btn = $(node),
-            $input = $btn.find ( 'input' ),
-            name = $input.attr ( 'name' ),
-            $form = $btn.parent ( 'form' ),
-            $radios = $form.find ( 'input[name="' + name + '"]' ),
-            $btns = $radios.parent ( '.radio' );
+        /* UTILITIES */
 
-        var select = function () {
+        /* SPECIAL */
 
-            if ( $btn.hasClass ( 'inactive' ) ) return;
+        init: function () {
 
-            $input.checked ( true ).trigger ( 'change' );
+            this.$input = this.$node.find ( 'input' ),
+            this.name = this.$input.attr ( 'name' ),
+            this.$form = this.$node.parent ( 'form' ),
+            this.$radios = this.$form.find ( 'input[name="' + this.name + '"]' ),
+            this.$btns = this.$radios.parent ( '.radio' );
 
-        };
+            if ( this.$input.checked () ) {
 
-        var update = function () {
+                this.$node.addClass ( 'selected' );
 
-            var active = $input.checked ();
+            } else if ( this.$node.hasClass ( 'selected' ) ) {
+
+                this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+            }
+
+            this.$node.on ( 'click', this.select );
+
+            this.$input.on ( 'change', this._update );
+
+        },
+
+        ready: function () {
+
+            $('.radio').radio ();
+
+        },
+
+        /* PRIVATE */
+
+        _update: function () {
+
+            var active = this.$input.prop ( 'checked' );
 
             if ( active ) {
 
-                $btns.removeClass ( 'selected' );
+                this.$btns.removeClass ( 'selected' );
 
-                $btn.addClass ( 'selected' );
-
-            }
-
-        };
-
-        var init = function () {
-
-            if ( $input.checked () ) {
-
-                $btn.addClass ( 'selected' );
-
-            } else if ( $btn.hasClass ( 'selected' ) ) {
-
-                $input.checked ( true ).trigger ( 'change' );
+                this.$node.addClass ( 'selected' );
 
             }
 
-        };
+        },
 
-        $btn.on ( 'click', select );
+        /* PUBLIC */
 
-        $input.on ( 'change', update );
+        select: function () {
 
-        init ();
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.radio').radio ();
-
-});
+}( lQuery, window, document ));

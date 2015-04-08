@@ -1,65 +1,71 @@
 
 /* MODALS */
 
-$.fn.modals = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( '', {
 
-        var $modal_btn = $(node),
-            modal_id = $modal_btn.data ( 'modal' ),
-            $modal = $('#' + modal_id),
-            $closing = $modal.find ( '.closing' );
+        /* SPECIAL */
 
-        var open = function () {
+        init: function () {
 
-            $modal.addClass ( 'show' );
+            this.modal_id = this.$node.data ( 'modal' );
+            this.$modal = $('#' + this.modal_id);
+            this.$closing = this.$modal.find ( '.closing' );
 
-            $.defer ( function () {
+            this.$node.on ( 'click', this.open );
+            this.$closing.on ( 'click', this.close );
 
-                $modal.addClass ( 'active' );
+        },
 
-            });
+        ready: function () {
 
-            $document.on ( 'keydown', esc_keydown_handler );
+            $('.modal_trigger').modals ();
 
-        };
+        },
 
-        var close = function () {
+        /* PRIVATE */
 
-            $modal.removeClass ( 'active' );
-
-            $.defer ( function () {
-
-                $modal.removeClass ( 'show' );
-
-            }, 200 );
-
-            $document.off ( 'keydown', esc_keydown_handler );
-
-        };
-
-        var esc_keydown_handler = function ( event ) {
+        _handler_esc_keydown: function ( event ) {
 
             if ( event.keyCode === 27 ) { // esc
 
-                close ();
+                this.close ();
 
             }
 
-        };
+        },
 
-        $modal_btn.on ( 'click', open );
+        /* PUBLIC */
 
-        $closing.on ( 'click', close );
+        open: function () {
+
+            this.$modal.addClass ( 'show' );
+
+            this.$modal.defer ( function () {
+
+                this.addClass ( 'active' );
+
+            });
+
+            $document.on ( 'keydown', this._handler_esc_keydown );
+
+        },
+
+        close: function () {
+
+            this.$modal.removeClass ( 'active' );
+
+            this.$modal.defer ( function () {
+
+                this.removeClass ( 'show' );
+
+            }, 200 );
+
+            $document.off ( 'keydown', this._handler_esc_keydown );
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.modal_trigger').modals ();
-
-});
+}( lQuery, window, document ));

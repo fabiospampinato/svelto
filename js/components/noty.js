@@ -140,7 +140,7 @@ var noty_delete = function ( del_id ) {
 
 /* READY */
 
-$.dom_ready ( function () {
+$.ready ( function () {
 
     noty_init ();
 

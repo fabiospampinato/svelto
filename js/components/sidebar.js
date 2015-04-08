@@ -32,7 +32,7 @@ var sidebar_toggle = function ( open ) {
 
 /* READY */
 
-$.dom_ready ( function () {
+$.ready ( function () {
 
     sidebar_init_events ();
 

@@ -1,29 +1,23 @@
 
 /* LOADING */
 
-$.fn.loading = function ( activate ) {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
-
-        var $ele = $(node);
+    $.factory ( 'loading', function ( activate ) {
 
         if ( activate ) {
 
-            $ele.addClass ( 'loading' );
+            this.$node.addClass ( 'loading' ).defer ( function () {
 
-            $.defer ( function () {
-
-                $ele.addClass ( 'loading_active' );
+                this.addClass ( 'loading_active' );
 
             });
 
         } else {
 
-            $ele.removeClass ( 'loading_active' );
+            this.$node.removeClass ( 'loading_active' ).defer ( function () {
 
-            $.defer ( function () {
-
-                $ele.removeClass ( 'loading' );
+                this.removeClass ( 'loading' );
 
             }, 200 );
 
@@ -31,4 +25,4 @@ $.fn.loading = function ( activate ) {
 
     });
 
-};
+}( lQuery, window, document ));

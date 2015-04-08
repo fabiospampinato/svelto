@@ -1,12 +1,12 @@
 
 /* BLUR */
 
-$.fn.blur = function ( activate ) {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'blur', function ( activate ) {
 
-        $(node).toggleClass ( 'blur', activate );
+        return this.toggleClass ( 'blur', activate );
 
     });
 
-};
+}( lQuery, window, document ));

@@ -1,34 +1,42 @@
 
 /* PROGRESS BAR */
 
-$.fn.progress_bar = function ( percentage ) {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'progress_bar', {
 
-        var $progress_bar = $(node),
-            $highlighted = $progress_bar.find ( '.highlighted' ),
-            $label = $highlighted.find ( '.label' ),
-            data_percentage = $progress_bar.data ( 'percentage' );
+        /* SPECIAL */
 
-        if ( $progress_bar.hasClass ( 'fixed' ) ) return;
+        init: function () {
 
-        if ( data_percentage !== null || typeof percentage !== 'undefined' ) {
+            this.$highlighted = this.$nodes.find ( '.highlighted' ),
+            this.$label = this.$highlighted.find ( '.label' ),
+            this.data_percentage = this.$nodes.data ( 'percentage' );
 
-            var percentage_nr = ( percentage === 'default' || typeof percentage === 'undefined' ) ? data_percentage / $highlighted.size () : percentage / $highlighted.size ();
+        },
 
-            $highlighted.css ( 'min-width', percentage_nr + '%' );
-            $label.html ( percentage_nr + '%' );
+        call: function ( percentage ) {
+
+            if ( this.$nodes.hasClass ( 'fixed' ) ) return;
+
+            if ( this.data_percentage !== null || typeof percentage !== 'undefined' ) {
+
+                var percentage_nr = ( percentage === 'default' || typeof percentage === 'undefined' ) ? this.data_percentage / this.$highlighted.length : percentage / this.$highlighted.length;
+
+                this.$highlighted.css ( 'min-width', percentage_nr + '%' );
+
+                this.$label.html ( percentage_nr + '%' );
+
+            }
+
+        },
+
+        ready: function () {
+
+            $('.progress_bar').progress_bar ();
 
         }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.progress_bar').progress_bar ();
-
-});
+}( lQuery, window, document ));

@@ -1,66 +1,180 @@
 
-/* lQuery */
+/* lQuery - A lightweight replacement for jQuery */
 
-(function() {
+//FIXME: weird results for self selector benchmarks, if we use `$()` instance od `lQuery()` it's much slower, but the first one should be replaced with the second before executing anyway...
+//       magari debugga quello che sta effettivamente eseguendo
 
-    /* VARIABLES */
+//INFO: Forbidden use of nodes functions when we are also talking with the `window`, or it will throw an error instead of failing gracefully
 
-    var _matches_fn = ( document.documentElement.matches || document.documentElement.matchesSelector || document.documentElement.webkitMatchesSelector || document.documentElement.mozMatchesSelector || document.documentElement.msMatchesSelector || document.documentElement.oMatchesSelector );
+;(function ( window, document, undefined ) {
 
-    var rootNodeRE = /^(?:body|html)$/i;
-    var readyRE = /complete|loaded|interactive/;
-    var simpleSelectorRE = /^[\w-]*$/;
+    'use strict';
 
-    /* EXTERNAL UTILITES */
+    /* PRIVATE VARIABLES */
 
-    var camelize = function ( str ) {
+    var html = document.documentElement,
+        body,
+        browser_matches_fn = ( html.matches || html.matchesSelector || html.webkitMatchesSelector || html.mozMatchesSelector || html.msMatchesSelector || html.oMatchesSelector ),
+        computeStyle = getComputedStyle,
+        propFix = { //INFO: Properties that are mapped to a different name
+            'cellpadding': 'cellPadding',
+            'cellspacing': 'cellSpacing',
+            'class': 'className',
+            'colspan': 'colSpan',
+            'contenteditable': 'contentEditable',
+            'for': 'htmlFor',
+            'frameborder': 'frameBorder',
+            'maxlength': 'maxLength',
+            'readonly': 'readOnly',
+            'rowspan': 'rowSpan',
+            'tabindex': 'tabIndex',
+            'usemap': 'useMap'
+        },
+        cssNumber = ['column-count', 'columns', 'font-weight', 'line-height','opacity', 'z-index', 'zoom'], //INFO: CSS properties that require a plain number
+        uID = 0,
+        data = {};
 
-        var camel_cased = str.replace ( /-+(.)?/g, function ( match, chr ) {
+    /* PRIVATE UTILITES */
 
-            return chr ? chr.toUpperCase () : '';
+    var extend = function ( target, obj ) {
 
-        });
+        for ( var prop in obj ) {
 
-        return camel_cased[0].toLowerCase () + camel_cased.slice ( 1 );
+            if ( Object.prototype.hasOwnProperty.call ( obj, prop ) ) {
+
+                if ( Object.prototype.toString.call ( obj[prop] ) === '[object Object]' ) {
+
+                    target[prop] = lQuery.extend ( target[prop], obj[prop] );
+
+                } else {
+
+                    target[prop] = obj[prop];
+
+                }
+
+            }
+
+        }
 
     };
 
-    var deserialize_value = function ( value ) {
+    var node_position_comparator = function ( node_1, node_2 ) {
 
-        var num;
-
-        return value
-                   ? value === "true" ||
-                       ( value === "false"
-                             ? false
-                             : value === "null"
-                                 ? null
-                                 : !/^0/.test ( value ) && !isNaN ( num = Number ( value ) )
-                                     ? num
-                                     : /^[\[\{]/.test ( value )
-                                         ? JSON.parse ( value )
-                                         : value )
-                   : value;
+        return 3 - ( node_1.compareDocumentPosition ( node_2 ) & 6 );
 
     };
 
-    var nl2arr = function ( node_list ) {
+    var is_simple_selector = function ( selector, start_index ) {
 
-        return Array.prototype.slice.call ( node_list );
+        var char_code;
+
+        for ( var i = start_index || 0, l = selector.length; i < l; i++ ) {
+
+            char_code = selector.charCodeAt ( i ); //INFO: Refers to ASCII table
+
+            if ( char_code <= 122 ) // z
+                if ( char_code >= 48 ) // 0
+                    if ( char_code >= 97 ) continue; // a
+                    else if ( char_code <= 90 ) // Z
+                        if ( char_code <= 57 ) continue; // 9
+                        else if ( char_code >= 65 ) continue; // A
+                    else if ( char_code === 95 ) continue; // _
+                else if ( char_code === 45 ) continue; // -
+
+            return false;
+
+        }
+
+        return true;
 
     };
 
-    var DOMPositionComparator = function ( a, b ) {
+    var dom_selector = function ( selector, context ) {
 
-        return 3 - ( a.compareDocumentPosition ( b ) & 6 );
+        var found;
+
+        return selector[0] === '.'
+                   ? is_simple_selector ( selector, 1 )
+                       ? lQuery.makeArray ( context.getElementsByClassName ( selector.slice ( 1 ) ) )
+                       : lQuery.makeArray ( context.querySelectorAll ( selector ) )
+                   : selector[0] === '#'
+                       ? is_simple_selector ( selector, 1 )
+                           ? ( found = context.getElementById ( selector.slice ( 1 ) ) )
+                               ? [found]
+                               : []
+                           : lQuery.makeArray ( context.querySelectorAll ( selector ) )
+                       : is_simple_selector ( selector )
+                           ? lQuery.makeArray ( context.getElementsByTagName ( selector ) )
+                           : lQuery.makeArray ( context.querySelectorAll ( selector ) );
 
     };
 
-    var arr_unique =  function ( arr, sorted ) {
+    var build_fragment = function ( str ) {
 
-        sorted = sorted ? arr : ( arr[0].compareDocumentPosition ? arr.sort ( DOMPositionComparator ) : arr.sort () );
+        var fragment =  document.createDocumentFragment (),
+            temp_div = fragment.appendChild ( document.createElement ( 'div' ) );
 
-        var prev;
+        temp_div.innerHTML = str;
+
+        return temp_div;
+
+    };
+
+    var maybe_add_px = function ( prop, value ) {
+
+        return ( !isNaN(value) && cssNumber.indexOf ( prop ) === -1 ) ? value + 'px' : value;
+
+    };
+
+    /* lQuery SELECTORS */
+
+    window.lQuery = function ( selector, context /* isUnique */ ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
+
+        if ( selector instanceof Function ) return lQuery.ready ( selector );
+
+        return new lQuery.fn.init ( selector, context );
+
+    };
+
+    window.lQuery_node = function ( node ) { //INFO: It actually also works with the `window` object, even if it's not a node
+
+        return new lQuery.fn.init_node ( node );
+
+    };
+
+    window.lQuery_arr = function ( arr, isUnique ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
+
+        return new lQuery.fn.init_arr ( arr, isUnique );
+
+    };
+
+    /* lQuery UTILTIES */
+
+    lQuery.ready = function ( handler ) {
+
+        if ( document.readyState === 'complete' ) handler (); //INFO: Just check for `complete`, not also `interactive` since it may be fired earlier
+        else document.addEventListener ( 'DOMContentLoaded', handler );
+
+    };
+
+    lQuery.makeArray = function ( arrLike ) {
+
+        var arr = new Array ( arrLike.length );
+
+        for ( var i = 0, l = arrLike.length; i < l; i++ ) {
+
+            arr[i] = arrLike[i];
+
+        }
+
+        return arr;
+
+    };
+
+    lQuery.unique = function ( arr, is_sorted ) {
+
+        var sorted = is_sorted ? arr : arr.sort ( node_position_comparator ),
+            prev;
 
         for ( var i = sorted.length - 1; i >= 0; i-- ) {
 
@@ -73,87 +187,73 @@
 
     };
 
-    var is_loopable = function ( obj ) {
+    lQuery.camelCase = function ( str ) {
 
-        return ( obj instanceof NodeList || obj instanceof Array || obj instanceof HTMLCollection );
+        return str.replace ( /(^-+|-+$)/g, '' ).replace ( /-+(.)?/g, function ( match, chr ) {
 
-    };
+            return chr.toUpperCase ();
 
-    var dom_selector = function ( parent, selector ) { // returns an array of dom elements
-
-        var found,
-            maybe_id = ( selector[0] === '#' ),
-            maybe_class = ( !maybe_id && selector[0] === '.' ),
-            name_only = ( ( maybe_id || maybe_class ) ? selector.slice ( 1 ) : selector ),
-            is_simple = simpleSelectorRE.test ( name_only );
-
-        return is_simple
-                    ? maybe_id
-                        ? ( found = parent.getElementById ( name_only ) )
-                            ? [found]
-                            : []
-                        : maybe_class
-                            ? nl2arr ( parent.getElementsByClassName ( name_only ) )
-                            : nl2arr ( parent.getElementsByTagName ( selector ) )
-                    : nl2arr ( parent.querySelectorAll ( selector ) );
+        });
 
     };
 
-    /* MAIN */
+    lQuery.data = function ( node, key, value ) {
 
-    window.lQuery = function ( selector, unique ) {
+        if ( data[node] === undefined ) data[node] = {};
 
-        return new Library ( selector, unique );
+        if ( value !== undefined ) {
 
-    };
+            data[node][key] = value;
 
-    var Library = function ( selector, unique ) {
+            return this;
 
-        this.nodes = !selector
-                        ? []
-                        : typeof selector === 'string'
-                            ? dom_selector ( document, selector )
-                            : is_loopable ( selector )
-                                ? unique
-                                    ? selector
-                                    : arr_unique ( selector )
-                                : selector instanceof Library
-                                    ? selector.nodes
-                                    : typeof selector === 'object'
-                                        ? [selector]
-                                        : [];
+        } else {
 
-        this.length = this.nodes.length;
+            return data[node][key];
 
-        return this;
+        }
 
     };
 
-    /* UTILITIES */
+    lQuery.extend = function () { //INFO: It's always deep by default
 
-    lQuery.dom_ready = function ( callback ) {
+        var target = arguments[0] || {};
 
-        // need to check if document.body exists for IE as that browser reports
-        // document ready when it hasn't yet created the body element
+        for ( var i = 1, l = arguments.length; i < l; i++ ) {
 
-        if ( readyRE.test ( document.readyState ) && document.body ) callback ();
-        else lQuery(document).on ( 'DOMContentLoaded', callback );
+            extend ( target, arguments[i] );
+
+        }
+
+        return target;
 
     };
 
-    lQuery.defer = function ( callback, ms ) {
+    lQuery.defer = function ( callback, msDelay ) {
 
-        $html.get ( 0 ).clientHeight; // necessary, so that the deferred callback will be executed in another cycle
+        html.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
 
-        setTimeout ( callback, ms || 0 );
+        setTimeout ( callback, msDelay || 0 );
 
     };
 
     lQuery.ajax = function ( options ) {
 
-        options.type = options.type ? options.type.toUpperCase () : 'GET';
+        /*
+            options = {
+                type: '', // GET - POST - HEAD - DELETE - OPTION
+                url: '',
+                data: {}, // the data to be sent
+                json: true || false, // parse the output as JSON or not
+                success: function () {}, // callback on success
+                error: function () {}, // callback on error
+                before: function () {}, // callback before sending the request
+                after: function () {} // callback after sending the request
+            }
+        */
 
         var request = new XMLHttpRequest ();
+
         request.open ( options.type, options.url, true );
 
         request.setRequestHeader ( 'X-Requested-With', 'XMLHttpRequest' );
@@ -164,7 +264,7 @@
 
                 if ( options.success ) {
 
-                    options.success ( ( options.json === true ) ? JSON.parse ( request.responseText ) : request.responseText );
+                    options.success ( options.json ? JSON.parse ( request.responseText ) : request.responseText );
 
                 }
 
@@ -172,7 +272,7 @@
 
                 if ( options.error ) {
 
-                    options.error ( ( options.json === true ) ? JSON.parse ( request.responseText ) : request.responseText );
+                    options.error ( options.json ? JSON.parse ( request.responseText ) : request.responseText );
 
                 }
 
@@ -184,7 +284,7 @@
 
             request.onerror = function () {
 
-                options.error ( ( options.json === true ) ? JSON.parse ( request.responseText ) : request.responseText );
+                options.error ( options.json ? JSON.parse ( request.responseText ) : request.responseText );
 
             };
 
@@ -206,432 +306,192 @@
 
     };
 
-    lQuery.uuid = 0;
+    lQuery.getUID = function () {
 
-    lQuery.get_uuid = function () {
-
-        return this.uuid += 1;
+        return ( uID += 1 );
 
     };
 
-    /* FUNCTIONS */
+    lQuery.parseHTML = function ( str ) {
 
-    lQuery.node_fn = {
+        var parsed = ( /^<(\w+)\s*\/?>(?:<\/\1>|)$/ ).exec ( str );
 
-        // SELECTORS
+        if ( parsed ) {
 
-        is: function ( node, selector ) {
+            return [ document.createElement ( parsed[1] ) ];
 
-            if ( _matches_fn ) {
+        }
 
-                return _matches_fn.call ( node, selector );
+        parsed = build_fragment ( str );
 
-            } else {
+        return lQuery.makeArray ( parsed.childNodes );
 
-                var siblings = dom_selector ( node.parentNode, selector );
+    };
 
-                var found = false;
+    /* jQuery NODE UTILIES */
 
-                for ( var i = 0; i < siblings.length; i++ ) {
+    lQuery.matches = function ( node, selector ) {
 
-                    if ( siblings[i] === node ) {
+        if ( browser_matches_fn ) {
 
-                        found = true;
-                        break;
+            return browser_matches_fn.call ( node, selector );
 
-                    }
+        } else {
 
-                }
-
-                return found;
-
-            }
-
-        },
-
-        // CSS
-
-        addClass: function ( node, class_name ) {
-
-            if ( node.classList ) node.classList.add ( class_name );
-            else node.className += ' ' + class_name;
-
-        },
-
-        removeClass: function ( node, class_name ) {
-
-            if ( node.classList ) node.classList.remove ( class_name );
-            else node.className = node.className.replace ( new RegExp ( '(^|\\b)' + class_name + '(\\b|$)', 'gi' ), ' ' );
-
-        },
-
-        hasClass: function ( node, class_name ) {
-
-            return !!( node.className && new RegExp ( '(\\s|^)' + class_name + '(\\s|$)' ).test ( node.className ) );
-
-        },
-
-        // INFOS
-
-        offset: function ( node ) {
-
-            var rect = node.getBoundingClientRect ();
-
-            return {
-                top: rect.top + document.body.scrollTop,
-                left: rect.left + document.body.scrollLeft,
-                width: rect.width, // should it be rounded instead???
-                height: rect.height // should it be rounded instead???
-            };
+            return ( dom_selector ( selector, node.parentNode ).indexOf ( node ) !== -1 );
 
         }
 
     };
 
-    lQuery.fn = Library.prototype = {
-
-        // GETTING
-
-        first: function () {
-
-            return lQuery ( this.nodes[0] );
-
-        },
-
-        last: function () {
-
-            return lQuery ( this.nodes[this.length-1] );
-
-        },
-
-        eq: function ( index ) {
-
-            return lQuery ( this.get ( index ) );
-
-        },
-
-        get: function ( index ) {
-
-            return this.nodes [ index >= 0 ? index : index + this.length ];
-
-        },
-
-        slice: function ( start, end ) {
-
-            return lQuery ( this.nodes.slice ( start, end || this.length ), true );
-
-        },
-
-        toArray: function () {
-
-            return this.nodes;
-
-        },
-
-        size: function () {
-
-            return this.length;
-
-        },
-
-        index: function ( ele ) {
-
-            if ( ele instanceof Library ) ele = ele.nodes[0];
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                if ( this.nodes[i] === ele ) return i;
-
-            }
-
-            return -1;
-
-        },
-
-        contains: function ( ele ) {
-
-            return ( this.index ( ele ) !== -1 );
-
-        },
-
-        // SELECTORS
-
-        add: function ( ele ) {
-
-            var new_nodes = this.nodes.concat (
-                ele instanceof Library
-                    ? ele.nodes
-                    : ele instanceof NodeList || ele instanceof HTMLCollection
-                        ? nl2arr ( ele )
-                        : ele instanceof Array
-                            ? ele
-                            : typeof ele === 'string'
-                                ? dom_selector ( document, ele )
-                                : typeof ele === 'object'
-                                    ? [ele]
-                                    : []
-            );
-
-            return lQuery ( new_nodes );
-
-        },
-
-        find: function ( selector ) {
-
-            var found = [],
-                partials_nr = 0;
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                var partials = dom_selector ( this.nodes[i], selector );
-
-                if ( partials.length > 0 ) {
-
-                    found = found.concat ( partials );
-                    partials_nr += 1;
-
-                }
-
-            }
-
-            return lQuery ( found, partials_nr < 2 );
-
-        },
-
-        filter: function ( selector ) {
-
-            var filtered = [],
-                type = typeof selector;
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                if ( type === 'string' && lQuery.node_fn.is ( this.nodes[i], selector ) ) filtered.push ( this.nodes[i] );
-                else if ( type === 'function' && selector ( this.nodes[i] ) ) filtered.push ( this.nodes[i] );
-
-            }
-
-            return lQuery ( filtered, true );
-
-        },
-
-        is: function ( selector ) {
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                if ( !lQuery.node_fn.is ( this.nodes[i], selector ) ) return false;
-
-            }
-
-            return ( this.length > 0 );
-
-        },
-
-        not: function ( selector ) {
-
-            return this.filter ( function ( node ) {
-
-                if ( selector instanceof Library ) return !selector.contains ( node );
-                else return !lQuery.node_fn.is ( node, selector );
-
-            });
-
-        },
-
-        parents: function ( selector, max_matches ) {
-
-            max_matches = max_matches || 1000000;
-
-            var all_parents = [];
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                var parents = [],
-                    parent = this.nodes[i].parentNode;
-
-                while ( parents.length < max_matches && parent && parent !== document ) {
-
-                    if ( selector ) {
-
-                        if ( lQuery.node_fn.is ( parent, selector ) ) parents.push ( parent );
-
-                    } else {
-
-                        parents.push ( parent );
-
-                    }
-
-                    parent = parent.parentNode;
-
-                }
-
-                all_parents = all_parents.concat ( parents );
-
-            }
-
-            return lQuery ( all_parents, this.length < 2 );
-
-        },
-
-        parent: function ( selector ) {
-
-            return this.parents ( selector, 1 );
-
-        },
-
-        closest: function ( selector ) {
-
-            return this.parent ( selector );
-
-        },
-
-        children: function ( selector ) {
-
-            var children = [],
-                partials_nr = 0;
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                var partials = [],
-                    child_nodes = this.nodes[i].childNodes;
-
-                for ( var ci = 0; ci < child_nodes.length; ci++ ) {
-
-                    if ( child_nodes[ci].nodeType === 1 ) {
-
-                        partials.push ( child_nodes[ci] );
-
-                    }
-
-                }
-
-                if ( partials.length > 0 ) {
-
-                    children = children.concat ( partials );
-                    partials_nr += 1;
-
-                }
-
-            }
-
-            return ( typeof selector === 'string' ) ? lQuery ( children, partials_nr < 2 ).filter ( selector ) : lQuery ( children, partials_nr < 2 );
-
-        },
-
-        // UTILITIES
-
-        each: function ( callback ) {
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                if ( callback.call ( this.nodes[i], this.nodes[i], i ) === false ) break; // break if the callback returns false
-
-            }
+    lQuery.matches = function ( node, selector, index ) {
+
+        return typeof selector === 'string'
+                   ? browser_matches_fn
+                       ? browser_matches_fn.call ( node, selector )
+                       : ( dom_selector ( selector, node.parentNode ).indexOf ( node ) !== -1 )
+                   : selector instanceof Function
+                       ? selector.call ( node, index, node )
+                       : selector === node; //TODO: Maybe add support for NodeList, HTMLCollection, Array and other lQuery instances
+
+    };
+
+    lQuery.offset = function ( node ) {
+
+        var rect = node.getBoundingClientRect ();
+
+        return {
+            top: rect.top + window.pageYOffset - html.clientTop,
+            left: rect.left + window.pageXOffset - html.clientLeft,
+            width: rect.width,
+            height: rect.height
+        };
+
+    };
+
+    /* jQuery METHODS */
+
+    lQuery.fn = lQuery.prototype = {
+
+        // INIT
+
+        init: function ( selector, context /* isUnique */ ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
+
+            this.nodes = typeof selector === 'string'
+                             ? ( selector[0] === '<' && selector[selector.length - 1] === '>' && selector.length >= 3 )
+                                 ? lQuery.parseHTML ( selector )
+                                 : dom_selector ( selector, ( context ? ( context instanceof lQuery ? lQuery.nodes[0] || document : document ) : document ) )
+                             : selector instanceof lQuery
+                                 ? selector.nodes
+                                 : ( selector instanceof Node || selector instanceof Window )
+                                     ? [selector]
+                                     : ( selector instanceof NodeList || selector instanceof HTMLCollection )
+                                         ? context // isUnique
+                                             ? lQuery.makeArray ( selector )
+                                             : lQuery.unique ( lQuery.makeArray ( selector ) )
+                                         : selector instanceof Array
+                                             ? context // isUnique
+                                                 ? selector
+                                                 : lQuery.unique ( selector )
+                                             : [];
+
+            this.length = this.nodes.length;
 
             return this;
 
         },
 
-        map: function ( callback ) {
+        init_node: function ( node ) { //INFO: It actually also works with the `window` object (and everything else since there are no checks), even if it's not a node
 
-            var results = [];
+            this.nodes = [node];
 
-            for ( var i = 0; i < this.length; i++ ) {
-
-                var value = callback.call ( this.nodes[i], this.nodes[i], i );
-
-                if ( value !== null ) results.push ( value );
-
-            }
-
-            return results;
-
-        },
-
-        // ADDING / REMOVING
-
-        insertHtml: function ( where, html ) {
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                this.nodes[i].insertAdjacentHTML ( where, html );
-
-            }
+            this.length = 1;
 
             return this;
 
         },
 
-        before: function ( html ) {
+        init_arr: function ( arr, isUnique ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
 
-            return this.insertHtml ( 'beforebegin', html );
+            this.nodes = isUnique ? arr : lQuery.unique ( arr );
 
-        },
-
-        after: function ( html ) {
-
-            return this.insertHtml ( 'afterend', html );
-
-        },
-
-        prepend: function ( html ) {
-
-            return this.insertHtml ( 'afterbegin', html );
-
-        },
-
-        append: function ( html ) {
-
-            return this.insertHtml ( 'beforeend', html );
-
-        },
-
-        remove: function () {
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                if ( this.nodes[i].parentNode ) this.nodes[i].parentNode.removeChild ( this.nodes[i] );
-
-            }
+            this.length = this.nodes.length;
 
             return this;
 
         },
 
-        // EDIT
+        // ATTRIBUTES
 
         attr: function ( name, value ) {
 
-            if ( typeof value !== 'undefined' ) {
+            if ( typeof name === 'object' ) {
 
-                for ( var i = 0; i < this.length; i++ ) {
-
-                    this.nodes[i].setAttribute ( name, value );
-
-                }
+                for ( var prop in name ) this.attr ( prop, name[prop] );
 
                 return this;
 
             } else {
 
-                return ( this.length > 0 ) ? this.nodes[0].getAttribute ( name ) : null;
+                if ( value !== undefined ) {
+
+                    for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                        this.nodes[i].setAttribute ( name, value );
+
+                    }
+
+                    return this;
+
+                } else {
+
+                    return this.nodes[0] ? this.nodes[0].getAttribute ( name ) : undefined;
+
+                }
 
             }
 
         },
 
+        removeAttr: function ( name ) {
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                this.nodes[i].removeAttribute ( name );
+
+            }
+
+            return this;
+
+        },
+
         data: function ( name, value ) {
 
-            var return_value = this.attr ( 'data-' + name, value );
+            if ( value !== undefined ) {
 
-            return ( typeof value !== 'undefined' ) ? return_value : deserialize_value ( return_value );
+                return this.attr ( 'data-' + name.toLowerCase (), JSON.stringify ( value ) );
+
+            } else {
+
+                var data_value = this.attr ( 'data-' + name.toLowerCase () );
+
+                return data_value ? JSON.parse ( return_value ) : undefined;
+
+            }
+
+        },
+
+        removeData: function ( name ) {
+
+            return this.removeAttr ( 'data-' + name.toLowerCase () );
 
         },
 
         prop: function ( name, value ) {
 
-            if ( typeof value !== 'undefined' ) {
+            if ( value !== undefined ) {
 
-                for ( var i = 0; i < this.length; i++ ) {
+                for ( var i = 0, l = this.length; i < l; i++ ) {
 
                     this.nodes[i][name] = value;
 
@@ -641,45 +501,19 @@
 
             } else {
 
-                return ( this.length > 0 ) ? this.nodes[0][name] : null;
+                return this.nodes[0] ? this.nodes[0][name] : undefined;
 
             }
 
         },
 
-        checked: function ( value ) {
+        removeProp: function ( name ) {
 
-            return this.prop ( 'checked', value );
+            name = propFix[name] || name;
 
-        },
+            for ( var i = 0, l = this.length; i < l; i++ ) {
 
-        text: function ( text ) {
-
-            return this.prop ( 'textContent', text );
-
-        },
-
-        html: function ( html ) {
-
-            return this.prop ( 'innerHTML', html );
-
-        },
-
-        replaceWith: function ( html ) {
-
-            return this.prop ( 'outerHTML', html );
-
-        },
-
-        empty: function () {
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                while ( this.nodes[i].hasChildNodes () ) {
-
-                    this.nodes[i].removeChild ( this.nodes[i].lastChild );
-
-                }
+                delete this.nodes[i][name];
 
             }
 
@@ -689,9 +523,9 @@
 
         val: function ( value ) {
 
-            if ( typeof value !== 'undefined' ) {
+            if ( value !== undefined ) {
 
-                for ( var i = 0; i < this.length; i++ ) {
+                for ( var i = 0, l = this.length; i < l; i++ ) {
 
                     this.nodes[i].value = value;
 
@@ -701,60 +535,76 @@
 
             } else {
 
-                if ( this.length < 1 ) return null;
-                else return ( this.nodes[0].tagName === 'select' ) ? this.nodes[0].options[this.nodes[0].selectedIndex].value : this.nodes[0].value;
+                if ( !this.nodes[0] ) return;
 
-            }
+                if ( this.nodes[0].multiple ) {
 
-        },
+                    var values = [];
 
-        scrollTop: function ( pixels ) {
+                    for ( var i = 0, l = this.options.length; i < l; i++ ) {
 
-            return this.prop ( 'scrollTop', pixels );
-
-        },
-
-        scrollBottom: function ( pixels ) {
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                this.nodes[i].scrollTop = this.nodes[i].scrollHeight - this.nodes[i].clientHeight - ( pixels || 0 );
-
-            }
-
-            return this;
-
-        },
-
-        scrollLeft: function ( pixels ) {
-
-            return this.prop ( 'scrollLeft', pixels );
-
-        },
-
-        // EVENTS
-
-        on: function ( events, handler ) { //TODO: add support for selector
-
-            events = events.split ( ' ' );
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                for ( var ei = 0; ei < events.length; ei++ ) {
-
-                    if ( this.nodes[i].addEventListener ) {
-
-                        this.nodes[i].addEventListener ( events[ei], handler );
-
-                    } else {
-
-                        this.nodes[i].attachEvent ( 'on' + events[ei], function () {
-
-                            handler.call ( this.nodes[i] );
-
-                        });
+                        if ( this.options[i].selected ) values.push ( this.options[i].value );
 
                     }
+
+                    return values;
+
+                } else {
+
+                    return this.nodes[0].value;
+
+                }
+
+            }
+
+        },
+
+        // CSS
+
+        css: function ( name, value ) {
+
+            if ( typeof name === 'object' ) {
+
+                for ( var prop in name ) this.css ( prop, name[prop] );
+
+                return this;
+
+            } else {
+
+                value = maybe_add_px ( name, value );
+                name = lQuery.camelCase ( name );
+
+                if ( value !== undefined ) {
+
+                    for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                        this.nodes[i].style[name] = value;
+
+                    }
+
+                    return this;
+
+                } else {
+
+                    return this.nodes[0] ? computeStyle ( this.nodes[0] )[name] : undefined;
+
+                }
+
+            }
+
+        },
+
+        addClass: function ( classes ) {
+
+            classes = classes.split ( ' ' );
+
+            var cl = classes.length;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                for ( var ci = 0; ci < cl; ci++ ) {
+
+                    this.nodes[i].classList.add ( classes[ci] );
 
                 }
 
@@ -764,16 +614,187 @@
 
         },
 
-        off: function ( events, handler ) { //TODO: add support for selector
+        removeClass: function ( classes ) {
+
+            classes = classes.split ( ' ' );
+
+            var cl = classes.length;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                for ( var ci = 0; ci < cl; ci++ ) {
+
+                    this.nodes[i].classList.remove ( classes[ci] );
+
+                }
+
+            }
+
+            return this;
+
+        },
+
+        hasClass: function ( classes ) {
+
+            classes = classes.split ( ' ' );
+
+            var cl = classes.length;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                for ( var ci = 0; ci < cl; ci++ ) {
+
+                    if ( !this.nodes[i].classList.contains ( classes[ci] ) ) ci = 100;
+
+                }
+
+                if ( ci === cl ) return true;
+
+            }
+
+            return false;
+
+        },
+
+        toggleClass: function ( classes, state ) {
+
+            if ( state !== undefined ) {
+
+                return state ? this.addClass ( classes ) : this.removeClass ( classes );
+
+            } else {
+
+                classes = classes.split ( ' ' );
+
+                var cl = classes.length;
+
+                for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                    for ( var ci = 0; ci < cl; ci++ ) {
+
+                        this.nodes[i].classList.toggle ( classes[ci] );
+
+                    }
+
+                }
+
+                return this;
+
+            }
+
+        },
+
+        // DIMENSIONS
+
+        width: function ( value ) {
+
+            if ( value !== undefined ) return this.css ( 'width', value );
+
+            var node = this.nodes[0];
+
+            return !node
+                       ? null
+                       : node === window
+                           ? node['innerWidth']
+                           : node === document
+                               ? html['scrollWidth']
+                               : lQuery.offset ( node ).width;
+
+        },
+
+        height: function ( value ) {
+
+            if ( value !== undefined ) return this.css ( 'height', value );
+
+            var node = this.nodes[0];
+
+            return !node
+                       ? null
+                       : node === window
+                           ? node['innerHeight']
+                           : node === document
+                               ? html['scrollHeight']
+                               : lQuery.offset ( node ).height;
+
+        },
+
+        // EFFECTS
+
+        show: function () { //INFO: if is hidden by another thing it will remain hidden
+
+            return this.css ( 'display', '' );
+
+        },
+
+        hide: function () {
+
+            return this.css ( 'display', 'none' );
+
+        },
+
+        toggle: function ( state ) { //INFO: if is hidden by another thing it will remain hidden
+
+            var forced = ( typeof state === 'boolean' ) ? ( state ? '' : 'none' ) : undefined;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                this.nodes[i].style.display = ( forced !== undefined )
+                                                  ? forced
+                                                  : ( computeStyle ( this.nodes[i] )['display'] !== 'none' )
+                                                      ? 'none'
+                                                      : '';
+
+            }
+
+            return this;
+
+        },
+
+        slideDown: function () { //TODO: Implement
+
+        },
+
+        slideUp: function () { //TODO: Implement
+
+        },
+
+        slideToggle: function ( state ) { //TODO: Implement
+
+        },
+
+        // EVENTS
+
+        on: function ( events, handler ) {
 
             events = events.split ( ' ' );
 
-            for ( var i = 0; i < this.length; i++ ) {
+            var el = events.length;
 
-                for ( var ei = 0; ei < events.length; ei++ ) {
+            for ( var i = 0, l = this.length; i < l; i++ ) {
 
-                    if ( this.nodes[i].removeEventListener ) this.nodes[i].removeEventListener ( events[ei], handler );
-                    else this.nodes[i].detachEvent ( 'on' + events[ei], handler );
+                for ( var ei = 0; ei < el; ei++ ) {
+
+                    this.nodes[i].addEventListener ( events[ei], handler );
+
+                }
+
+            }
+
+            return this;
+
+        },
+
+        off: function ( events, handler ) {
+
+            events = events.split ( ' ' );
+
+            var el = events.length;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                for ( var ei = 0; ei < el; ei++ ) {
+
+                    this.nodes[i].removeEventListener ( events[ei], handler );
 
                 }
 
@@ -785,13 +806,13 @@
 
         trigger: function ( events ) {
 
+            var event_obj;
+
             events = events.split ( ' ' );
 
-            for ( var ei = 0; ei < events.length; ei++ ) {
+            for ( var ei = 0, el = events.length; ei < el; ei++ ) {
 
-                var event_obj;
-
-                if ( window.CustomEvent ) {
+                if ( window.CustomEvent ) { //INFO: Unsupported on IE
 
                     event_obj = new CustomEvent ( events[ei] );
 
@@ -805,7 +826,7 @@
 
                 }
 
-                for ( var i = 0; i < this.length; i++ ) {
+                for ( var i = 0, l = this.length; i < l; i++ ) {
 
                     this.nodes[i].dispatchEvent ( event_obj );
 
@@ -821,59 +842,152 @@
 
             return this.on ( events, function handler_wrp ( event ) {
 
-                var node = this;
+                this.removeEventListener ( event.type, handler_wrp );
 
-                $(node).off ( event.type, handler ); //FIXME: does it work?
-
-                return handler.call ( node, event );
+                return handler.call ( this, event );
 
             });
 
         },
 
-        // CSS
+        ready: function ( handler ) {
 
-        css: function ( name, value ) {
+            lQuery.ready ( handler );
 
-            if ( typeof name === 'object' ) {
+            return this;
 
-                for ( var key in name ) this.css ( key, name[key] );
+        },
 
-                return this;
+        hover: function ( handlerIn, handlerOut ) {
 
-            } else {
+            return this.mouseenter ( handlerIn ).mouseleave ( handlerOut );
 
-                name = camelize ( name );
+        },
 
-                if ( typeof value !== 'undefined' ) {
+        // FILTERING
 
-                    for ( var i = 0; i < this.length; i++ ) {
+        filter: function ( selector ) {
 
-                        this.nodes[i].style[name] = value;
+            var filtered = [];
 
-                    }
+            for ( var i = 0, l = this.length; i < l; i++ ) {
 
-                    return this;
+                if ( lQuery.matches ( this.nodes[i], selector, i ) ) filtered.push ( this.nodes[i] );
 
-                } else {
+            }
 
-                    return ( this.length > 0 ) ? getComputedStyle ( this.nodes[0] )[name] : null;
+            return lQuery_arr ( filtered, true );
+
+        },
+
+        is: function ( selector ) {
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                if ( lQuery.matches ( this.nodes[i], selector ) ) return true;
+
+            }
+
+            return false;
+
+        },
+
+        not: function ( selector ) {
+
+            return this.filter ( function ( index ) {
+
+                return !lQuery.matches ( this, selector, index );
+
+            });
+
+        },
+
+        first: function () {
+
+            var node = this.nodes[0];
+
+            return lQuery_arr ( node ? [node] : [], true );
+
+        },
+
+        last: function () {
+
+            var node = this.nodes [ this.length - 1 ];
+
+            return lQuery_arr ( node ? [node] : [], true );
+
+        },
+
+        eq: function ( index ) {
+
+            var node = this.get ( index );
+
+            return lQuery_arr ( node ? [node] : [], true );
+
+        },
+
+        slice: function ( start, end ) {
+
+            return lQuery_arr ( this.nodes.slice ( start, end ), true );
+
+        },
+
+        // FORM
+
+        serializeArray: function () {
+
+            var form = this.nodes[0],
+                data = [];
+
+            if ( !form || form.nodeName !== 'FORM' ) return; //INFO: The `nodeName` property is always uppercase
+
+            for ( var i = 0, l = form.elements.length; i < l; i++ ) {
+
+                var field = form.elements[i];
+
+                if ( field.name && field.nodeName !== 'FIELDSET' && !field.disabled && field.type !== 'submit' && field.type !== 'reset' && field.type !== 'button' && field.type !== 'file' && ( ( field.type !== 'radio' && field.type !== 'checkbox'  ) || field.checked ) ) { //INFO: The `nodeName` property is always uppercase
+
+                    data.push ({
+                        name: field.name,
+                        value: lQuery_node(field).val()
+                    });
 
                 }
 
             }
 
+            return data;
+
         },
 
-        addClass: function ( classes ) {
+        serialize: function () {
 
-            classes = classes.split ( ' ' );
+            var data = this.serializeArray (),
+                result = [];
 
-            for ( var i = 0; i < this.length; i++ ) {
+            for ( var i = 0, l = data.length; i < l; i++ ) {
 
-                for ( var ci = 0; ci < classes.length; ci++ ) {
+                result.push ( encodeURIComponent ( data[i].name ) + '=' + encodeURIComponent ( data[i].value ) );
 
-                    lQuery.node_fn.addClass ( this.nodes[i], classes[ci] );
+            }
+
+            return result.join ( '&' );
+
+        },
+
+        //TODO: form post thought ajax (maybe it requires too much effort right now...)
+
+        // MANIPULATION
+
+        before: function ( selector ) {
+
+            var nodes = lQuery ( selector ).nodes;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
+
+                    this.nodes[i].parentNode.insertBefore ( nodes[ni].cloneNode ( true ), this.nodes[i] );
 
                 }
 
@@ -883,15 +997,15 @@
 
         },
 
-        removeClass: function ( classes ) {
+        after: function ( selector ) {
 
-            classes = classes.split ( ' ' );
+            var nodes = lQuery ( selector ).nodes;
 
-            for ( var i = 0; i < this.length; i++ ) {
+            for ( var i = 0, l = this.length; i < l; i++ ) {
 
-                for ( var ci = 0; ci < classes.length; ci++ ) {
+                for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
 
-                    lQuery.node_fn.removeClass ( this.nodes[i], classes[ci] );
+                    this.nodes[i].parentNode.insertBefore ( nodes[ni].cloneNode ( true ), this.nodes[i].nextSibling );
 
                 }
 
@@ -901,67 +1015,17 @@
 
         },
 
-        hasClass: function ( classes ) {
+        prepend: function ( selector ) {
 
-            classes = classes.split ( ' ' );
+            var nodes = lQuery ( selector ).nodes;
 
-            for ( var i = 0; i < this.length; i++ ) {
+            for ( var i = 0, l = this.length; i < l; i++ ) {
 
-                for ( var ci = 0; ci < classes.length; ci++ ) {
+                for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
 
-                    if ( !lQuery.node_fn.hasClass ( this.nodes[i], classes[ci] ) ) return false;
-
-                }
-
-            }
-
-            return ( this.length > 0 );
-
-        },
-
-        toggleClass: function ( classes, force ) {
-
-            if ( typeof force !== 'undefined' ) {
-
-                return ( force ) ? this.addClass ( classes ) : this.removeClass ( classes );
-
-            } else {
-
-                classes = classes.split ( ' ' );
-
-                for ( var i = 0; i < this.length; i++ ) {
-
-                    for ( var ci = 0; ci < classes.length; ci++ ) {
-
-                        ( lQuery.node_fn.hasClass ( this.nodes[i], classes[ci] ) ) ? lQuery.node_fn.removeClass ( this.nodes[i], classes[ci] ) : lQuery.node_fn.addClass ( this.nodes[i], classes[ci] );
-
-                    }
+                    this.nodes[i].insertBefore ( nodes[ni].cloneNode ( true ), this.nodes[i].firstChild );
 
                 }
-
-                return this;
-
-            }
-
-        },
-
-        show: function () {
-
-            return this.css ( 'display', 'block' );
-
-        },
-
-        hide: function () {
-
-            return this.css ( 'display', 'none' );
-
-        },
-
-        toggle: function ( force ) { //FIXME: add the 'hidden' class instead, restore to the actual previous display prop
-
-            for ( var i = 0; i < this.length; i++ ) {
-
-                this.nodes[i].style.display = ( getComputedStyle ( this.nodes[i] ).display !== 'block' || force === true ) ? 'block' : 'none';
 
             }
 
@@ -969,98 +1033,533 @@
 
         },
 
-        // INFOS
+        append: function ( selector ) {
+
+            var nodes = lQuery ( selector ).nodes;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
+
+                    this.nodes[i].insertBefore ( nodes[ni].cloneNode ( true ), null );
+
+                }
+
+            }
+
+            return this;
+
+        },
+
+        insertBefore: function ( selector ) {
+
+            lQuery ( selector ).before ( this );
+
+            return this;
+
+        },
+
+        insertAfter: function ( selector ) {
+
+            lQuery ( selector ).after ( this );
+
+            return this;
+
+        },
+
+        prependTo: function ( selector ) {
+
+            lQuery ( selector ).prepend ( this );
+
+            return this;
+
+        },
+
+        appendTo: function ( selector ) {
+
+            lQuery ( selector ).append ( this );
+
+            return this;
+
+        },
+
+        text: function () {
+
+            return this.prop ( 'textContent' );
+
+        },
+
+        html: function ( value ) {
+
+            return this.prop ( 'innerHTML', value );
+
+        },
+
+        replaceWith: function ( value ) {
+
+            return this.prop ( 'outerHTML', value );
+
+        },
+
+        empty: function () {
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                while ( this.nodes[i].hasChildNodes () ) {
+
+                    this.nodes[i].removeChild ( this.nodes[i].lastChild );
+
+                }
+
+            }
+
+            return this;
+
+        },
+
+        remove: function () {
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                if ( this.nodes[i].parentNode ) this.nodes[i].parentNode.removeChild ( this.nodes[i] );
+
+            }
+
+            return this;
+
+        },
+
+        detach: function () {
+
+            return this.remove ();
+
+        },
+
+        clone: function () {
+
+            var clones = new Array ( this.length );
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                clones[i] = this.nodes[i].cloneNode ( true );
+
+            }
+
+            return lQuery_arr ( clones, true );
+
+        },
+
+        // MISCELLANEOUS
+
+        get: function ( index ) {
+
+            return this.nodes [ index < 0 ? this.length + index : index ];
+
+        },
+
+        index: function ( selector ) {
+
+            var node = this.nodes[0] ? ( selector ? lQuery ( selector ).get ( 0 ) : this.nodes[0].parentNode ) : undefined;
+
+            return node ? lQuery.makeArray ( node.childNodes ).indexOf ( this.nodes[0] ) : -1;
+
+        },
+
+        size: function () {
+
+            return this.length;
+
+        },
+
+        toArray: function () {
+
+            return this.nodes.slice (); //INFO: By calling `Array.prototype.slice` we create a copy of the array, so if we modify it we won't modify the the original collection
+
+        },
+
+        // OFFSET
 
         offset: function () {
 
-            if ( this.length < 1 ) return null;
-
-            return lQuery.node_fn.offset ( this.nodes[0] );
+            return this.nodes[0] ? lQuery.offset ( this.nodes[0] ) : undefined;
 
         },
 
         offsetParent: function () {
 
-            if ( this.length < 1 ) return null;
+            if ( !this.nodes[0] ) return this;
 
-            var parent = this.nodes[0].offsetParent || document.body;
+            var parent = this.nodes[0].offsetParent || html;
 
-            while ( parent && !rootNodeRE.test ( parent.nodeName ) && getComputedStyle ( parent ).position === 'static' ) {
+            while ( parent && parent !== html && computeStyle ( parent )['position'] === 'static' ) {
 
                 parent = parent.offsetParent;
 
             }
 
-            return parent;
+            return lQuery_node ( parent || html );
 
         },
 
         position: function () {
 
-            if ( this.length < 1 ) return null;
+            if ( !this.nodes[0] ) return undefined;
 
-            var offsetParent = this.offsetParent (),
-                offset = this.offset (),
-                parentOffset = rootNodeRE.test ( offsetParent.nodeName ) ? { top: 0, left: 0 } : lQuery.node_fn.offset ( offsetParent );
+            var parentOffset = { top: 0, left: 0 };
 
-            offset.top  -= parseFloat ( getComputedStyle ( this.nodes[0] )['margin-top'] ) || 0;
-            offset.left -= parseFloat ( getComputedStyle ( this.nodes[0] )['margin-left'] ) || 0;
+            if ( this.nodes[0].position === 'fixed' ) {
 
-            parentOffset.top  += parseFloat ( getComputedStyle ( offsetParent )['border-top-width'] ) || 0;
-            parentOffset.left += parseFloat ( getComputedStyle ( offsetParent )['border-left-width'] ) || 0;
+                var offset = this.nodes[0].getBoundingClientRect ();
+
+            } else {
+
+                var $offsetParent = this.offsetParent (),
+                    offset = this.offset ();
+
+                if ( $offsetParent.get ( 0 ) !== html ) {
+
+                    parentOffset = $offsetParent.offset ();
+
+                }
+
+                parentOffset.top += parseFloat ( computeStyle ( $offsetParent.get ( 0 ) )['borderTopWidth'] );
+                parentOffset.left += parseFloat ( computeStyle ( $offsetParent.get ( 0 ) )['borderLeftWidth'] );
+
+            }
 
             return {
-                top:  offset.top  - parentOffset.top,
-                left: offset.left - parentOffset.left
+                top: offset.top - parentOffset.top - parseFloat ( computeStyle ( this.nodes[0] )['marginTop'] ),
+                left: offset.left - parentOffset.left - parseFloat ( computeStyle ( this.nodes[0] )['marginLeft'] )
             };
 
         },
 
-        width: function () {
+        scrollTop: function ( value ) {
 
-            return this.prop ( 'clientWidth' );
-
-        },
-
-        height: function () {
-
-            return this.prop ( 'clientHeight' );
+            return this.prop ( 'scrollTop', value );
 
         },
 
-        outerWidth: function () {
+        scrollBottom: function ( value ) {
 
-            return this.prop ( 'offsetWidth' );
+            if ( value !== undefined ) {
+
+                for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                    this.nodes[i].scrollTop = this.nodes[i].scrollHeight - this.nodes[i].clientHeight - value;
+
+                }
+
+                return this;
+
+            } else {
+
+                return this.nodes[0] ? this.nodes[0].scrollHeight - this.nodes[0].scrollTop - this.nodes[0].clientHeight : undefined; //FIXME: Not sure at all of this
+
+            }
 
         },
 
-        outerHeight: function () {
+        scrollLeft: function ( value ) {
 
-            return this.prop ( 'offsetHeight' );
+            return this.prop ( 'scrollLeft', value );
+
+        },
+
+        scrollRight: function ( value ) {
+
+            if ( value !== undefined ) {
+
+                for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                    this.nodes[i].scrollLeft = this.nodes[i].scrollWidth - this.nodes[i].clientWidth - value;
+
+                }
+
+                return this;
+
+            } else {
+
+                return this.nodes[0] ? this.nodes[0].scrollWidth - this.nodes[0].scrollLeft - this.nodes[0].clientWidth : undefined; //FIXME: Not sure at all of this
+
+            }
+
+        },
+
+        // TRAVERSING
+
+        add: function ( selector ) {
+
+            var more_nodes = lQuery ( selector ).nodes;
+
+            return lQuery_arr ( this.nodes.concat ( more_nodes ), ( this.length === 0 || more_nodes.length === 0 ) ); //INFO: the `concat` method returns a new array, doesn't touch the original one
+
+        },
+
+        parents: function ( selector, maxMatchesNr ) { //INFO: `maxMatchesNr`: limits the number of returned elements
+
+            var parents = [];
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                var matches = 0,
+                    parent = this.nodes[i].parentNode;
+
+                while ( ( maxMatchesNr === undefined || matches < maxMatchesNr ) && parent !== document ) {
+
+                    if ( ( selector && lQuery.matches ( parent, selector ) ) || !selector ) {
+
+                        parents.push ( parent );
+
+                        matches++;
+
+                    }
+
+                    parent = parent.parentNode;
+
+                }
+
+            }
+
+            return lQuery_arr ( parents, this.length < 2 );
+
+        },
+
+        parent: function ( selector ) {
+
+            var $parents = this.parents ( undefined, 1 );
+
+            return selector ? $parents.filter ( selector ) : $parents;
+
+        },
+
+        closest: function ( selector ) {
+
+            return this.parents ( selector, 1 );
+
+        },
+
+        children: function ( selector, nodeTypeCheck ) {
+
+            var children = [],
+                partials_nr = 0;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                var has_children = false,
+                    child_nodes = this.nodes[i].childNodes;
+
+                for ( var ci = 0, cl = child_nodes.length; ci < cl; ci++ ) {
+
+                    if ( nodeTypeCheck === false || child_nodes[ci].nodeType === 1 ) {
+
+                        children.push ( child_nodes[ci] );
+
+                        has_children = true;
+
+                    }
+
+                }
+
+                if ( has_children ) partials_nr++;
+
+            }
+
+            var $children = lQuery_arr ( children, partials_nr < 2 );
+
+            return selector ? $children.filter ( selector ) : $children;
+
+        },
+
+        contents: function () {
+
+            return this.children ( undefined, false );
+
+        },
+
+        siblings: function ( selector ) {
+
+            var siblings = [],
+                partials_nr = 0;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                var has_siblings = false,
+                    siblings_nodes = this.nodes[i].parentNode.childNodes;
+
+                for ( var ci = 0, cl = siblings_nodes.length; ci < cl; ci++ ) {
+
+                    if ( siblings_nodes[ci].nodeType === 1 && siblings_nodes[ci] !== this.nodes[i] ) {
+
+                        siblings.push ( siblings_nodes[ci] );
+
+                        has_siblings = true;
+
+                    }
+
+                }
+
+                if ( has_siblings ) partials_nr++;
+
+            }
+
+            var $siblings = lQuery_arr ( siblings, partials_nr < 2 );
+
+            return selector ? $siblings.filter ( selector ) : $siblings;
+
+        },
+
+        find: function ( selector ) {
+
+            var found = [],
+                partials_nr = 0;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                var partials = dom_selector ( selector, this.nodes[i] );
+
+                if ( partials.length > 0 ) {
+
+                    found = found.concat ( partials );
+                    partials_nr++;
+
+                }
+
+            }
+
+            return lQuery_arr ( found, partials_nr < 2 );
+
+        },
+
+        prev: function ( selector ) {
+
+            var prevs = [],
+                node;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                node = this.nodes[0].previousElementSibling;
+
+                if ( node ) prevs.push ( node );
+
+            }
+
+            var $prevs = lQuery_arr ( prevs, true );
+
+            return selector ? $prevs.filter ( selector ) : $prevs;
+
+        },
+
+        next: function ( selector ) {
+
+            var nexts = [],
+                node;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                node = this.nodes[0].nextElementSibling;
+
+                if ( node ) nexts.push ( node );
+
+            }
+
+            var $nexts = lQuery_arr ( nexts, true );
+
+            return selector ? $nexts.filter ( selector ) : $nexts;
+
+        },
+
+        // UTILITIES
+
+        each: function ( callback ) {
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                if ( callback.call ( this.nodes[i], i, this.nodes[i] ) === false ) break;
+
+            }
+
+            return this;
+
+        },
+
+        map: function ( callback ) {
+
+            var results = [],
+                result;
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                result = callback.call ( this.nodes[i], i, this.nodes[i] );
+
+                if ( result ) {
+
+                    if ( result instanceof Node || selector instanceof Window ) results.push ( result );
+                    else if ( selector instanceof Array ) results = results.concat ( result );
+
+                }
+
+            }
+
+            return lQuery_arr ( results, results.length < 2 );
+
+        },
+
+        defer: function ( callback, msDelay ) {
+
+            html.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
+
+            var collection = this;
+
+            setTimeout ( function () {
+
+                callback.apply ( collection );
+
+            }, msDelay || 0 );
+
+            return this;
 
         }
 
-        // FORM
-
-        //TODO: form methods (serialize)
-        //TODO: form post thought ajax
-
     };
 
-}());
+    /* EVENTS SHORTHANDS */
 
-/* Aliases */
+    ['blur', 'change', 'click', 'contextmenu', 'dblclick', 'error', 'focus', 'focusin', 'focusout', 'keydown', 'keypress', 'keyup', 'load', 'mousedown', 'mouseenter', 'mouseleave', 'mousemove', 'mouseout', 'mouseover', 'mouseup', 'resize', 'scroll', 'select', 'submit', 'unload'].forEach ( function ( event_name ) {
 
-if ( !window.$ ) window.$ = lQuery;
-if ( !window.$$ ) window.$$ = lQuery;
+        lQuery.fn[event_name] = function ( callback ) {
 
-/* Main objects */
+            return callback ? this.on ( event_name, callback ) : this.trigger ( event_name );
 
-lQuery.dom_ready ( function () {
+        };
 
-    window.$window = $(window);
-    window.$document = $(document);
-    window.$html = $(document.documentElement);
-    window.$body = $(document.body);
+    });
 
-});
+    /* PROTOTYPES ASSIGNMENTS */
+
+    lQuery.fn.init.prototype = lQuery.fn.init_node.prototype = lQuery.fn.init_arr.prototype = lQuery.fn;
+
+    /* ALIASES */
+
+    if ( window.$ === undefined ) {
+
+        window.$ = lQuery;
+        window.$_node = lQuery_node;
+        window.$_arr = lQuery_arr;
+
+    }
+
+    /* COMMON OBJECTS */
+
+    lQuery.ready ( function () {
+
+        body = document.body;
+
+        window.$window = lQuery_node(window);
+        window.$document = lQuery_node(document);
+        window.$html = lQuery_node(document.documentElement);
+        window.$body = lQuery_node(document.body);
+
+    });
+
+} ( window, document ));

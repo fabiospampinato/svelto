@@ -1,79 +1,83 @@
 
-/* FORMS SYNC */
+/* FORM SYNC */
 
-var forms_synced_groups = [];
+;(function ( $, window, document, undefined ) {
 
-$.fn.forms_sync = function () {
+    var synced_groups = [];
 
-    return this.each ( function ( node ) {
+    $.factory ( 'forms_sync', {
 
-        var $form = $(node),
-            group_name = $form.data ( 'sync-group' );
+        /* SPECIAL */
 
-        if ( _( forms_synced_groups ).contains ( group_name ) ) return;
+        init: function () {
 
-        forms_synced_groups.push ( group_name );
+            var $form = this.$node,
+                sync_group = $form.data ( 'sync-group');
 
-        var $forms = $('form[data-sync-group="' + group_name + '"]'),
-            $eles = $forms.find ( 'input, textarea, select' );
+            if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
 
-        $eles.each ( function ( node ) {
+            synced_groups.push ( sync_group );
 
-            var $ele = $(node),
-                name = $ele.attr ( 'name' ),
-                is_checkable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
-                is_radio = is_checkable && $ele.is ( '[type="radio"]' ),
-                is_textbox = $ele.is ( 'input, textarea' ),
-                events = is_textbox ? 'input change' : 'change',
-                $current_form = $ele.parent ( 'form' ),
-                $other_forms = $forms.not ( $current_form ),
-                $other_eles = $other_forms.find ( '[name="' + name + '"]' );
+            var $forms = $('form[data-sync-group="' + sync_group + '"]'),
+                $eles = $forms.find ( 'input, textarea, select' );
 
-            $ele.on ( events, function () {
+            $eles.each ( function () {
 
-                var current_value = $ele.val (),
-                    current_checked = !!$ele.checked ();
+                var $ele = this,
+                    name = $ele.attr ( 'name' ),
+                    is_checkable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
+                    is_radio = is_checkable && $ele.is ( '[type="radio"]' ),
+                    is_textbox = $ele.is ( 'input, textarea' ),
+                    events = is_textbox ? 'input change' : 'change',
+                    $current_form = $ele.parent ( 'form' ),
+                    $other_forms = $forms.not ( $current_form ),
+                    $other_eles = $other_forms.find ( '[name="' + name + '"]' );
 
-                $other_eles.each ( function ( node ) {
+                $ele.on ( events, function () {
 
-                    var $other_ele = $(node),
-                        other_value = $other_ele.val (),
-                        other_checked = !!$other_ele.checked ();
+                    var current_value = $ele.val (),
+                        current_checked = !!$ele.prop ( 'checked' );
 
-                    if ( is_radio ) {
+                    $other_eles.each ( function () {
 
-                        if ( current_value !== other_value || current_checked === other_checked ) return;
+                        var $other_ele = this,
+                            other_value = $other_ele.val (),
+                            other_checked = !!$other_ele.prop ( 'checked' );
 
-                    } else if ( current_value === other_value && current_checked === other_checked ) {
+                        if ( is_radio ) {
 
-                        return;
+                            if ( current_value !== other_value || current_checked === other_checked ) return;
 
-                    }
+                        } else if ( current_value === other_value && current_checked === other_checked ) {
 
-                    if ( is_checkable ) {
+                            return;
 
-                        $other_ele.checked ( current_checked ).trigger ( 'change' );
+                        }
 
-                    } else {
+                        if ( is_checkable ) {
 
-                        $other_ele.val ( current_value ).trigger ( 'change' );
+                            $other_ele.prop ( 'checked', current_checked ).trigger ( 'change' );
 
-                    }
+                        } else {
+
+                            $other_ele.val ( current_value ).trigger ( 'change' );
+
+                        }
+
+                    });
 
                 });
 
             });
 
-        });
+        },
+
+        ready: function () {
+
+            $('form[data-sync-group]').forms_sync ();
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('form[data-sync-group]').forms_sync ();
-
-});
+}( lQuery, window, document ));

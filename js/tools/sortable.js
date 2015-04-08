@@ -3,131 +3,90 @@
 
 //TODO: only do the minimum amount of changes, if a row is added we don't need to resort the whole table
 
-$.fn.sortable = function ( options ) {
+;(function ( $, window, document, undefined ) {
 
-    var sort_fns = _.merge ({
-        'int': function ( a, b ) {
-            return parseInt ( a, 10 ) - parseInt ( b, 10 );
-        },
-        'float': function ( a, b ) {
-            return parseFloat ( a ) - parseFloat ( b );
-        },
-        'string': function ( a, b ) {
-            a = a.toLocaleLowerCase ();
-            b = b.toLocaleLowerCase ();
-            return a.localeCompare ( b );
+    $.factory ( 'sortable', {
+
+        sorters: {
+            int: function ( a, b ) {
+                return parseInt ( a, 10 ) - parseInt ( b, 10 );
+            },
+            float: function ( a, b ) {
+                return parseFloat ( a ) - parseFloat ( b );
+            },
+            string: function ( a, b ) {
+                a = a.toLocaleLowerCase ();
+                b = b.toLocaleLowerCase ();
+                return a.localeCompare ( b );
+            }
         }
-    }, options );
 
-    return this.each ( function ( node ) {
+    }, {
 
-        /* FUNCTIONS */
+        /* SPECIAL */
 
-        var sort = function ( $sortable, direction ) {
+        init: function () {
 
-            var col_index = $headers.index ( $sortable ),
-                sort_fn = sort_fns[$sortable.data ( 'sort' )];
+            this.$headers = this.$node.find ( 'thead th' );
+            this.$sortables = this.$headers.filter ( '[data-sort]' );
+            this.$tbody = this.$node.find ( 'tbody' );
 
-            if ( !sort_fn ) return;
+            this.$current_sortable = false;
+            this.current_direction = false;
 
-            $sortables.removeClass ( 'asc desc' );
-            $sortable.addClass ( direction );
+            this._bind_change ();
+            this._bind_click ();
 
-            var column = [],
-                $trs = $tbody.find ( 'tr:not(.empty)' );
+        },
 
-            // populate
+        ready: function () {
 
-            $trs.each ( function ( tr ) {
+            $('table.sortable').sortable ();
 
-                var $td = $(tr).find ( 'td' ).eq ( col_index ),
-                    val = $td.data ( 'sort-value' ) || $td.text ();
+        },
 
-                column.push ( [tr, val] );
+        /* CHANGE */
 
-            });
+        _bind_change: function () {
 
-            // sort
+            this.$node.on ( 'change', this._handler_change );
 
-            column.sort ( function ( a, b ) {
+        },
 
-                return sort_fn ( a[1], b[1] );
+        _handler_change: function ( event ) {
 
-            });
+            if ( this.$current_sortable ) {
 
-            if ( direction === 'desc' ) column.reverse ();
-
-            // append
-
-            var tbody = $tbody.get ( 0 ),
-                table = $table.get ( 0 );
-
-            table.removeChild ( tbody );
-
-            for ( var i = 0; i < column.length; i++ ) {
-
-                tbody.appendChild ( column[i][0] );
+                this._sort ( this.$current_sortable, this.current_direction );
 
             }
 
-            table.appendChild ( tbody );
+        },
 
-            // trigger
+        /* CLICK */
 
-            $table.trigger ( 'sort' );
+        _bind_click: function () {
 
-        };
+            this.$sortables.on ( 'click', this._handler_click );
 
-        /* VARIABLES */
+        },
 
-        var $table = $(node),
-            $headers = $table.find ( 'thead th' ),
-            $sortables = $headers.filter ( '[data-sort]' ),
-            $tbody = $table.find ( 'tbody' ),
+        _handler_click: function ( event ) {
 
-            $current_sortable = false,
-            current_direction = false;
+            var $sortable = $(this);
 
-        /* EVENTS */
+            this.current_direction = ( this.$current_sortable === $sortable )
+                                    ? ( !this.current_direction || current_direction === 'desc' ) //FIXME: if !current_direction sortare o asc, o se giá é asc usare desc
+                                        ? 'asc'
+                                        : 'desc'
+                                    : 'asc';
 
-        $table.on ( 'change', function () {
+            this.$current_sortable = $sortable;
 
-            if ( $current_sortable ) {
+            _sort ( this.$current_sortable, this.current_direction );
 
-                sort ( $current_sortable, current_direction );
-
-            }
-
-        });
-
-        $sortables.each ( function ( node ) {
-
-            var $sortable = $(node);
-
-            $sortable.on ( 'click', function () {
-
-                current_direction = ( $current_sortable === $sortable )
-                                        ? ( !current_direction || current_direction === 'desc' ) //FIXME: if !current_direction sortare o asc, o se giá é asc usare desc
-                                            ? 'asc'
-                                            : 'desc'
-                                        : 'asc';
-
-                $current_sortable = $sortable;
-
-                sort ( $current_sortable, current_direction );
-
-            });
-
-        });
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('table.sortable').sortable ();
-
-});
+}( lQuery, window, document ));

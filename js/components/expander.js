@@ -1,40 +1,60 @@
 
 /* EXPANDER */
 
-$.fn.expander = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'expander', {
 
-        var $expander = $(node),
-            $header = $expander.children ( '.header' ),
-            $content_wrp = $expander.children ( '.content_wrp' ),
-            opened = $expander.hasClass ( 'active' );
+        /* SPECIAL */
 
-        $header.on ( 'click', function () {
+        init: function () {
 
-            if ( $expander.hasClass ( 'inactive' ) ) return;
+            this.$header = this.$node.children ( '.header' );
+            this.$content_wrp = this.$node.children ( '.content' );
+            this.opened = this.$node.hasClass ( 'active' );
 
-            opened = !opened;
+            this._bind_click ();
 
-            $.defer ( function () {
+        },
 
-                $expander.toggleClass ( 'active', opened );
-                $header.toggleClass ( 'active', opened );
+        ready: function () {
+
+            $('.expander').expander ();
+
+        },
+
+        /* PRIVATE */
+
+        _bind_click: function () {
+
+            this.$header.on ( 'click', this._handler_click );
+
+        },
+
+        _handler_click: function ( event ) {
+
+            if ( this.$node.hasClass ( 'inactive' ) ) return;
+
+            this.opened = !this.opened;
+
+            var opened;
+
+            this.$node.defer ( function () {
+
+                this.toggleClass ( 'active', opened );
 
             });
 
-            $content_wrp.toggleHeight ( opened );
+            this.$header.defer ( function () {
 
-        });
+                this.toggleClass ( 'active', opened );
+
+            });
+
+            this.$content_wrp.toggleHeight ( this.opened );
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.expander').expander ();
-
-});
+}( lQuery, window, document ));

@@ -1,50 +1,51 @@
 
 /* TABS */
 
-$.fn.tabs = function () {
+;(function ( $, window, document, undefined ) {
 
-    return this.each ( function ( node ) {
+    $.factory ( 'tabs', {
 
-        var $wrp = $(node),
-            $tabs = $wrp.find ( '.tab' ),
-            $contabs = $wrp.find ( '.contab' );
+        init: function () {
 
-        $tabs.each ( function ( node ) {
+            $tabs = this.$node.find ( '.tab' ),
+            $contabs = this.$node.find ( '.contab' );
 
-            var $tab = $(node),
-                $contab = $contabs.eq ( $tabs.index ( $tab ) ),
-                to_bottom = $contab.hasClass ( 'to_bottom' ),
-                $top_section = $contab.find ( '.top_section' ),
-                $main_section = ( $top_section.size () !== 0 ) ? $top_section : $contab;
+            $tabs.each ( function () {
 
-            $tab.on ( 'click', function () {
+                var $tab = $(this),
+                    $contab = $contabs.eq ( $tabs.index ( $tab ) ),
+                    to_bottom = $contab.hasClass ( 'to_bottom' ),
+                    $top_section = $contab.find ( '.top_section' ),
+                    $main_section = ( $top_section.size () !== 0 ) ? $top_section : $contab;
 
-                if ( $tab.hasClass ( 'inactive' ) || $tab.hasClass ( 'active' ) ) return;
+                $tab.on ( 'click', function () {
 
-                $tabs.removeClass ( 'active highlight' );
-                $contabs.removeClass ( 'active' );
+                    if ( $tab.hasClass ( 'inactive' ) || $tab.hasClass ( 'active' ) ) return;
 
-                $tab.addClass ( 'active highlight' );
-                $contab.addClass ( 'active' );
+                    $tabs.removeClass ( 'active highlight' );
+                    $contabs.removeClass ( 'active' );
 
-                if ( to_bottom ) {
+                    $tab.addClass ( 'active highlight' );
+                    $contab.addClass ( 'active' );
 
-                    $main_section.scrollBottom ( 0 );
+                    if ( to_bottom ) {
 
-                }
+                        $main_section.scrollBottom ( 0 );
+
+                    }
+
+                });
 
             });
 
-        });
+        },
+
+        ready: function () {
+
+            $('.tabs_wrp').tabs ();
+
+        }
 
     });
 
-};
-
-/* READY */
-
-$.dom_ready ( function () {
-
-    $('.tabs_wrp').tabs ();
-
-});
+}( lQuery, window, document ));
