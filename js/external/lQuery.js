@@ -157,6 +157,8 @@
 
     };
 
+    lQuery.noop = function () {};
+
     lQuery.makeArray = function ( arrLike ) {
 
         var arr = new Array ( arrLike.length );

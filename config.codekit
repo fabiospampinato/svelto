@@ -19,7 +19,7 @@
 		"outputAbbreviatedPath": "\/dist\/min\/presto-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
 	"\/images\/favicon.png": {
@@ -76,7 +76,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/index.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -94,7 +94,7 @@
 		"outputAbbreviatedPath": "\/dist\/presto-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 1,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/accordion.js": {
@@ -105,7 +105,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/accordion.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/badge.js": {
@@ -116,7 +116,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/badge.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/blur.js": {
@@ -127,7 +127,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/blur.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/checkboxes.js": {
@@ -138,7 +138,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/checkboxes.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/dropdowns.js": {
@@ -149,7 +149,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/dropdowns.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/expander.js": {
@@ -160,7 +160,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/expander.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/loading.js": {
@@ -171,7 +171,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/loading.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/menu.js": {
@@ -182,7 +182,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/menu.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/modals.js": {
@@ -193,7 +193,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/modals.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/noty.js": {
@@ -204,7 +204,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/noty.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/progress_bar.js": {
@@ -215,7 +215,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/progress_bar.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/radios.js": {
@@ -226,7 +226,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/radios.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/selects.js": {
@@ -237,7 +237,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/selects.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/sidebar.js": {
@@ -248,7 +248,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/sidebar.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/slider.js": {
@@ -259,7 +259,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/slider.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/spinner.js": {
@@ -270,7 +270,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/spinner.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/switcher.js": {
@@ -281,7 +281,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/switcher.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/tabs.js": {
@@ -292,7 +292,7 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/tabs.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/components\/tagbox.js": {
@@ -303,18 +303,18 @@
 		"outputAbbreviatedPath": "\/js\/components\/min\/tagbox.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/external\/lodash.js": {
+	"\/js\/external\/lQuery.js": {
 		"fileType": 64,
 		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/external\/lodash.js",
-		"outputAbbreviatedPath": "\/js\/external\/min\/lodash.js",
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/js\/external\/lQuery.js",
+		"outputAbbreviatedPath": "\/js\/external\/min\/lQuery.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
 	"\/js\/external\/prism.js": {
@@ -325,8 +325,19 @@
 		"outputAbbreviatedPath": "\/js\/external\/min\/prism.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
+		},
+	"\/js\/external\/underbar.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/js\/external\/underbar.js",
+		"outputAbbreviatedPath": "\/js\/external\/min\/underbar.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
 		},
 	"\/js\/tools\/autogrow.js": {
 		"fileType": 64,
@@ -336,7 +347,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/autogrow.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/browser.js": {
@@ -347,7 +358,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/browser.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
 	"\/js\/tools\/bt_each.js": {
@@ -358,7 +369,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/bt_each.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/cookie.js": {
@@ -369,7 +380,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/cookie.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/factory.js": {
@@ -380,7 +391,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/factory.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/form_ajax.js": {
@@ -391,7 +402,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/form_ajax.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/forms_sync.js": {
@@ -402,7 +413,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/forms_sync.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/one_time_action.js": {
@@ -413,7 +424,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/one_time_action.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/selectable.js": {
@@ -424,7 +435,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/selectable.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/sortable.js": {
@@ -435,7 +446,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/sortable.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/table_helper.js": {
@@ -446,7 +457,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/table_helper.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/timeago.js": {
@@ -457,7 +468,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/timeago.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/timer.js": {
@@ -468,7 +479,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/timer.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/js\/tools\/toggle_height.js": {
@@ -479,7 +490,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/toggle_height.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
 	"\/js\/tools\/touching.js": {
@@ -490,18 +501,7 @@
 		"outputAbbreviatedPath": "\/js\/tools\/min\/touching.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
-		"syntaxCheckerStyle": 0
-		},
-	"\/js\/tools\/utilities.js": {
-		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/utilities.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/utilities.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 2,
+		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
 	"\/Readme.html": {
@@ -526,7 +526,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/styles\/_all.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -542,7 +542,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/_general.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -558,7 +558,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_accordion.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -574,7 +574,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_advertisements.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -590,7 +590,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_badge.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -606,7 +606,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_breadcrumb.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -622,7 +622,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_buttons.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -638,7 +638,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_chat.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -654,7 +654,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_checkbox_radio.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -670,7 +670,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_colors.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -686,7 +686,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_common.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -702,7 +702,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_dropdowns.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -718,7 +718,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_expander.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -734,7 +734,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_flags.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -750,7 +750,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_form.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -766,7 +766,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_grid.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -782,7 +782,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_hamburger.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -798,7 +798,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_header.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -814,7 +814,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_highlight.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -830,7 +830,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_icons.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -846,7 +846,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_loading.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -862,7 +862,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_modals.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -878,7 +878,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_navbar.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -894,7 +894,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_noty.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -910,7 +910,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_progress_bar.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -926,7 +926,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_selects.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -942,7 +942,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_separator.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -958,7 +958,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_sizes.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -974,7 +974,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_slider.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -990,7 +990,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_spinner.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1006,7 +1006,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_switcher.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1022,7 +1022,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_tables.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1038,7 +1038,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_tabs.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1054,7 +1054,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/components\/_toolbar.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1070,7 +1070,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/external\/_normalize.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1086,7 +1086,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/external\/_prism.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1102,7 +1102,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_badge.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1118,7 +1118,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_breadcrumb.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1134,7 +1134,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_buttons.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1150,7 +1150,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_chat.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1166,7 +1166,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_colors.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1182,7 +1182,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_dropdowns.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1198,7 +1198,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_expander.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1214,7 +1214,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_forms.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1230,7 +1230,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_general.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1246,7 +1246,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_gradients.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1262,7 +1262,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_grid.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1278,7 +1278,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_hamburger.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1294,7 +1294,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_header.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1310,7 +1310,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_highlight.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1326,7 +1326,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_layout.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1342,7 +1342,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_loading.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1358,7 +1358,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_modals.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1374,7 +1374,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_navbar.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1390,7 +1390,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_noty.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1406,7 +1406,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_progress_bar.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1422,7 +1422,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_separator.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1438,7 +1438,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_shadows.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1454,7 +1454,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_sizes.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1470,7 +1470,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_slider.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1486,7 +1486,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_switcher.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1502,7 +1502,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_tables.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1518,7 +1518,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_tabs.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1534,7 +1534,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_toolbar.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1550,7 +1550,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/settings\/_typography.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1566,7 +1566,7 @@
 		"useLibsass": 1
 		},
 	"\/styles\/tools\/_mixins.scss": {
-		"createSourceMap": 1,
+		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
@@ -1591,7 +1591,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/accordion.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1611,7 +1611,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/advertisements.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1631,7 +1631,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/badges.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1651,7 +1651,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/breadcrumb.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1671,7 +1671,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/buttons.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1691,7 +1691,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/colors.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1711,7 +1711,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/elements.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1731,7 +1731,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/expander.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1751,7 +1751,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/flags.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1771,7 +1771,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/form.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1791,7 +1791,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/grid.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1811,7 +1811,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/headers.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1831,7 +1831,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/icons.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1851,7 +1851,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/inputs.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1871,7 +1871,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/loading.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1891,7 +1891,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/modals.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1911,7 +1911,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/noty.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1931,7 +1931,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/one_time_action.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1951,7 +1951,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/progress_bar.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1971,7 +1971,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/separators.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -1991,7 +1991,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/sizes.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2011,7 +2011,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/slider.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2031,7 +2031,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/switcher.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2051,7 +2051,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/syntax.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2071,7 +2071,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/table.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2091,7 +2091,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/tabs.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2111,7 +2111,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/tagbox.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2131,7 +2131,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/timeago.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2151,7 +2151,7 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/toggle_height.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
@@ -2162,7 +2162,7 @@
 		"outputStyle": 1
 		},
 	"\/views\/layout.jade": {
-		"compileDebug": 1,
+		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
@@ -2180,224 +2180,212 @@
 	"\/js\/all.js": [
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/external\/lodash.js",
+			"linkedFileAbbreviatedPath": "\/js\/external\/prism.js",
 			"position": 0,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/external\/prism.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/factory.js",
 			"position": 1,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/factory.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/autogrow.js",
 			"position": 2,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/autogrow.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/browser.js",
 			"position": 3,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/browser.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/bt_each.js",
 			"position": 4,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/bt_each.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/cookie.js",
 			"position": 5,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/cookie.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/form_ajax.js",
 			"position": 6,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/form_ajax.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/forms_sync.js",
 			"position": 7,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/forms_sync.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/one_time_action.js",
 			"position": 8,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/one_time_action.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/selectable.js",
 			"position": 9,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/selectable.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/sortable.js",
 			"position": 10,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/sortable.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/table_helper.js",
 			"position": 11,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/table_helper.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
 			"position": 12,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timer.js",
 			"position": 13,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timer.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/toggle_height.js",
 			"position": 14,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/toggle_height.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/touching.js",
 			"position": 15,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/touching.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/accordion.js",
 			"position": 16,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/utilities.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/badge.js",
 			"position": 17,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/accordion.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/blur.js",
 			"position": 18,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/badge.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/checkboxes.js",
 			"position": 19,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/blur.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/dropdowns.js",
 			"position": 20,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/checkboxes.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/expander.js",
 			"position": 21,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/dropdowns.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/loading.js",
 			"position": 22,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/expander.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/menu.js",
 			"position": 23,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/loading.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/modals.js",
 			"position": 24,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/menu.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/noty.js",
 			"position": 25,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/modals.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/progress_bar.js",
 			"position": 26,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/noty.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/radios.js",
 			"position": 27,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/progress_bar.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/selects.js",
 			"position": 28,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/radios.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/sidebar.js",
 			"position": 29,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/selects.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/slider.js",
 			"position": 30,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/sidebar.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/spinner.js",
 			"position": 31,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/slider.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/switcher.js",
 			"position": 32,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/spinner.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/tabs.js",
 			"position": 33,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/switcher.js",
-			"position": 34,
-			"type": 0
-			},
-		{
-			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/tabs.js",
-			"position": 35,
-			"type": 0
-			},
-		{
-			"followForSyntaxChecking": 1,
 			"linkedFileAbbreviatedPath": "\/js\/components\/tagbox.js",
-			"position": 36,
+			"position": 34,
 			"type": 0
 			}
 		]
@@ -2421,7 +2409,7 @@
 	"coffeeAutoOutputPathReplace1": "coffee",
 	"coffeeAutoOutputPathReplace2": "js",
 	"coffeeAutoOutputPathStyle": 2,
-	"coffeeCreateSourceMap": 1,
+	"coffeeCreateSourceMap": 0,
 	"coffeeLintFlags2": {
 		"arrow_spacing": {
 			"active": 0,
@@ -2573,7 +2561,7 @@
 	"jadeAutoOutputPathReplace1": "",
 	"jadeAutoOutputPathReplace2": "",
 	"jadeAutoOutputPathStyle": 0,
-	"jadeCompileDebug": 1,
+	"jadeCompileDebug": 0,
 	"jadeOutputStyle": 1,
 	"javascriptAutoOutputPathEnabled": 1,
 	"javascriptAutoOutputPathFilenamePattern": "*.js",
@@ -2582,7 +2570,7 @@
 	"javascriptAutoOutputPathReplace2": "",
 	"javascriptAutoOutputPathStyle": 2,
 	"javascriptCreateSourceMap": 1,
-	"javascriptOutputStyle": 2,
+	"javascriptOutputStyle": 1,
 	"javascriptSyntaxCheckerStyle": 1,
 	"jsCheckerReservedNamesString": "",
 	"jsHintFlags2": {
@@ -2994,7 +2982,7 @@
 	"lessAutoOutputPathReplace1": "less",
 	"lessAutoOutputPathReplace2": "css",
 	"lessAutoOutputPathStyle": 2,
-	"lessCreateSourceMap": 1,
+	"lessCreateSourceMap": 0,
 	"lessDisableJavascript": 0,
 	"lessIeCompatibility": 1,
 	"lessOutputStyle": 2,
@@ -3018,7 +3006,7 @@
 	"sassAutoOutputPathReplace1": "sass",
 	"sassAutoOutputPathReplace2": "css",
 	"sassAutoOutputPathStyle": 2,
-	"sassCreateSourceMap": 1,
+	"sassCreateSourceMap": 0,
 	"sassDebugStyle": 0,
 	"sassDecimalPrecision": 10,
 	"sassOutputStyle": 3,
@@ -3043,7 +3031,7 @@
 	"stylusAutoOutputPathReplace1": "stylus",
 	"stylusAutoOutputPathReplace2": "css",
 	"stylusAutoOutputPathStyle": 2,
-	"stylusCreateSourceMap": 1,
+	"stylusCreateSourceMap": 0,
 	"stylusDebugStyle": 0,
 	"stylusImportCSS": 0,
 	"stylusOutputStyle": 1,
@@ -3055,7 +3043,7 @@
 	"typescriptAutoOutputPathReplace2": "",
 	"typescriptAutoOutputPathStyle": 2,
 	"typescriptCreateDeclarationFile": 0,
-	"typescriptCreateSourceMap": 1,
+	"typescriptCreateSourceMap": 0,
 	"typescriptMinifyOutput": 1,
 	"typescriptModuleType": 0,
 	"typescriptNoImplicitAny": 0,
