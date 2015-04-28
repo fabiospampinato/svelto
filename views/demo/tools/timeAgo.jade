@@ -1,0 +1,10 @@
+//- tools/timeago.jade
+
+extends ../../layout.jade
+
+append content
++divider Timeago
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")

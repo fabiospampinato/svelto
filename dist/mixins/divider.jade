@@ -1,0 +1,14 @@
+//- divider.jade
+
+mixin divider
+    .divider_wrp
+        .divider&attributes(attributes)
+            block
+
+mixin divider-linear
+    if block
+        .divider_wrp
+            .divider.linear&attributes(attributes)
+                block
+    else
+        hr&attributes(attributes)

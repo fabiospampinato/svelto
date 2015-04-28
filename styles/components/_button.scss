@@ -1,0 +1,188 @@
+
+/* DEFAULT */
+
+button {
+    border: none;
+}
+
+/* BUTTON */
+
+.button {
+
+    @include white ();
+    @include medium ();
+    display: inline-block;
+    margin-bottom: $layout-spacing;
+    border-radius: $border-radius-normal;
+    padding: $button-vertical-padding $button-horizontal-padding;
+    font-weight: bold;
+    box-shadow: $shadow-depth-1;
+    position: relative;
+    outline: none !important;
+    vertical-align: middle;
+    line-height: 1em;
+    min-height: 1em;
+    min-width: 1em;
+    overflow: hidden;
+
+    html.dragging & {
+        cursor: move !important;
+    }
+
+    &.inactive {
+
+        opacity: $button-inactive-opacity;
+        cursor: default;
+
+        .sub {
+            opacity: $button-inactive-opacity;
+            cursor: default;
+        }
+
+    }
+
+    &:not(.inactive) {
+
+        &.actionable:active, &.active {
+            @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
+        }
+
+        .sub.actionable:not(.inactive):not(.active):not(.dragging) {
+
+            &:hover {
+                background-color: rgba(0, 0, 0, 0.07);
+            }
+
+            &:active, &.active {
+                background-color: rgba(0, 0, 0, 0.1);
+                box-shadow: $shadow-inset-1;
+            }
+
+        }
+
+    }
+
+    &.actionable {
+        cursor:pointer;
+    }
+
+    &.compact {
+
+        padding: $button-compact-vertical-padding $button-compact-horizontal-padding;
+
+        .sub {
+
+            &.left {
+                margin: #{-$button-compact-vertical-padding} #{$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
+            }
+
+            &.right {
+                margin: #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} #{$button-compact-horizontal-padding};
+            }
+
+        }
+
+    }
+
+    &.outlined {
+
+        @include multi-shadow ( $shadow-depth-1, $button-outlined-shadow );
+
+        &:not(.inactive) {
+
+            &.actionable:active, &.active {
+                @include multi-shadow ( $shadow-depth-1, $shadow-inset-1, $button-outlined-shadow );
+            }
+
+        }
+
+        .sub {
+
+            padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);
+
+            &.left {
+                border-right: 1px solid rgba(0, 0, 0, 0.0625);
+                margin: calc(-#{$button-vertical-padding} + 1px) calc(#{$button-horizontal-padding} - 1px) #{-$button-vertical-padding} #{-$button-horizontal-padding};
+            }
+
+            &.right {
+                border-left: 1px solid rgba(0, 0, 0, 0.0625);
+                margin: calc(-#{$button-vertical-padding} + 1px) #{-$button-horizontal-padding} #{-$button-vertical-padding} calc(#{$button-horizontal-padding} - 1px);
+            }
+
+        }
+
+        &.compact .sub {
+
+            &.left {
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) calc(#{$button-compact-horizontal-padding} - 1px) #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
+            }
+
+            &.right {
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} calc(#{$button-compact-horizontal-padding} - 1px);
+            }
+
+        }
+
+    }
+
+    &.floating {
+
+        margin: 0 !important;
+        position: absolute;
+        right: $layout-spacing * 2;
+        bottom: $layout-spacing * 2;
+        box-shadow: $shadow-depth-3;
+
+        &.actionable:not(.inactive):not(.active):not(.dragging), &.actionable.active {
+            @include multi-shadow ( $shadow-depth-3, $shadow-inset-1 );
+        }
+
+    }
+
+    .label {
+        display: inline-block;
+    }
+
+    .icon {
+
+        @extend %icon;
+        font-size: 1.3em;
+        margin: -0.115em;
+
+        &.left {
+            padding-right: 0.75em;
+        }
+
+        &.right {
+            padding-left: 0.75em;
+        }
+
+    }
+
+    .sub {
+
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: $button-compact-vertical-padding $button-compact-horizontal-padding;
+        min-width: 1em;
+
+        &.left {
+            margin: #{-$button-vertical-padding} #{$button-horizontal-padding} #{-$button-vertical-padding} #{-$button-horizontal-padding};
+        }
+
+        &.right {
+            margin: #{-$button-vertical-padding} #{-$button-horizontal-padding} #{-$button-vertical-padding} #{$button-horizontal-padding};
+        }
+
+        &.actionable {
+            cursor: pointer;
+        }
+
+        &.inactive {
+            opacity: $button-inactive-opacity;
+            cursor: default;
+        }
+
+    }
+
+}

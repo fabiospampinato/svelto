@@ -1,6 +1,115 @@
 
 /* GRID */
 
+.grid {
+
+    margin: 0 #{-$layout-half-spacing};
+
+    & > .row {
+
+        margin: 0 auto;
+
+        & > .column {
+
+            vertical-align: top;
+
+            & > .container {
+                margin-left: $layout-half-spacing;
+                margin-right: $layout-half-spacing;
+            }
+
+        }
+
+    }
+
+    &.limited > .row {
+        max-width: $grid-limited-width;
+    }
+
+    &.full-size > .row > .column {
+
+        overflow-y: auto;
+        overflow-x: hidden;
+
+        .container {
+            height: calc(100vh - #{$navbar-height} - (#{$layout-spacing} * 2));
+        }
+
+    }
+
+}
+
+/* WIDTH CLASSES */
+
+// medium
+
+@include min-screen ( $layout-medium-breakpoint ) {
+
+    .m0 {
+        width: 0%;
+        display: none !important;
+    }
+
+    @for $nr from 1 through $grid-columns {
+
+        .m#{$nr} {
+            width: ( 100% / $grid-columns ) * $nr !important;
+            display: inline-block !important;
+        }
+
+        .offset-m#{$nr} {
+            margin-left: ( 100% / $grid-columns ) * $nr !important;
+        }
+
+    }
+
+}
+
+// large
+
+@include min-screen ( $layout-large-breakpoint ) {
+
+    .l0 {
+        width: 0%;
+        display: none !important;
+    }
+
+    @for $nr from 1 through $grid-columns {
+
+        .l#{$nr} {
+            width: ( 100% / $grid-columns ) * $nr !important;
+            display: inline-block !important;
+        }
+
+        .offset-l#{$nr} {
+            margin-left: ( 100% / $grid-columns ) * $nr !important;
+        }
+
+    }
+
+}
+
+// small
+
+.s0 {
+    width: 0%;
+    display: none;
+}
+
+@for $nr from 1 through $grid-columns {
+
+    .s#{$nr} {
+        width: ( 100% / $grid-columns ) * $nr;
+        display: inline-block;
+    }
+
+    .offset-s#{$nr} {
+
+        margin-left: ( 100% / $grid-columns ) * $nr;
+    }
+
+}
+
 /*
 @include max-screen ( $layout-no-columns-padding-breakpoint ) { //FIXME
 
@@ -31,300 +140,3 @@
 
 }
 */
-
-.grid {
-    margin: 0 #{-$layout-half-spacing};
-}
-
-.grid_cols {
-
-    margin: 0 auto;
-
-    &.limited {
-        max-width: $grid-max-width;
-    }
-
-    &.vertical > .grid_col {
-        width: 100%;
-    }
-
-    &.fluid {
-
-        display: flex;
-
-        & > .grid_col:not(.no-grow) {
-            flex-grow: 1;
-        }
-
-    }
-
-    &.joined {
-
-        &:not(.vertical) {
-
-            & > .grid_col {
-
-                &:not(:last-child) {
-
-                    & > .container {
-                        margin-right: 0;
-                        border-right-width: 0;
-                        border-top-right-radius: 0;
-                        border-bottom-right-radius: 0;
-                    }
-
-                }
-
-                &:not(:first-child) {
-
-                    & > .container {
-                        margin-left: 0;
-                        border-top-left-radius: 0;
-                        border-bottom-left-radius: 0;
-                    }
-
-                }
-
-            }
-
-        }
-
-        &.vertical {
-
-            & > .grid_col {
-
-                &:not(:last-child) {
-
-                    & > .container {
-                        margin-bottom: 0;
-                        box-shadow: none;
-                        border-bottom-width: 0;
-                        border-bottom-left-radius: 0;
-                        border-bottom-right-radius: 0;
-                    }
-
-                }
-
-                &:not(:first-child) {
-
-                    & > .container {
-                        border-top-left-radius: 0;
-                        border-top-right-radius: 0;
-                    }
-
-                }
-
-            }
-
-        }
-
-    }
-
-    &.full_size > .grid_col {
-
-        overflow-y: auto;
-        overflow-x: hidden;
-
-        .container {
-            height: calc(100vh - #{$navbar-height} - (#{$layout-spacing} * 2));
-        }
-
-    }
-
-    &.has_sidebar > .grid_col {
-
-        &:first-child {
-
-            @include max-screen ( $layout-sidebar-breakpoint ) {
-
-                width: 100% !important;
-
-                & > .container {
-                    margin-right: $layout-half-spacing !important;
-                    border-right-width: $grid-container-border-size !important;
-                    border-radius: $border-radius-normal !important;
-                }
-
-            }
-
-        }
-
-        &:last-child {
-
-            transition: right 0.25s ease 0s;
-
-            html.sidebar_open & {
-                right: 0 !important;
-            }
-
-            @include max-screen ( $layout-sidebar-breakpoint ) {
-
-                position: fixed;
-                right: - ( $sidebar-width + ( $sidebar-width / 100 * $sidebar-hidden-offset ) );
-                top: $navbar-height;
-                width: $sidebar-width !important;
-                z-index: 9;
-                height: calc(100% - #{$navbar-height});
-                max-width: 100% !important;
-                box-shadow: $shadow-depth-2-left;
-
-                .container {
-                    margin: 0 !important;
-                    border-radius: 0;
-                    border-width: 0 0 0 1px;
-                    height: 100%;
-                }
-
-            }
-
-            @include max-screen ( $layout-full-sidebar-breakpoint ) {
-
-                width: 100% !important;
-                right: - ( $sidebar-width + ( $layout-sidebar-breakpoint - $layout-full-sidebar-breakpoint ) + ( $sidebar-width / 100 * $sidebar-hidden-offset ) ) !important;
-
-                .container {
-                    border-width: 0;
-                    width: 100% !important;
-                }
-
-            }
-
-        }
-
-    }
-
-}
-
-.grid_col {
-
-    display: inline-block;
-    vertical-align: top;
-
-    & > .container {
-        margin-left: $layout-half-spacing;
-        margin-right: $layout-half-spacing;
-    }
-
-}
-
-.container {
-
-    @include white ( true );
-    border-width: $grid-container-border-size;
-    border-style: solid;
-    border-radius: $border-radius-normal;
-    padding: $layout-spacing;
-    margin-bottom: $layout-spacing;
-    box-shadow: $shadow-depth-1;
-    box-sizing: border-box;
-    position: relative;
-
-    & > *:last-child:not(.footer), & > .content > *:last-child {
-
-        margin-bottom: 0 !important;
-
-        &.multiple {
-            margin-bottom: -$layout-spacing !important;
-        }
-
-    }
-
-    & > .header {
-
-        @include primary ();
-        border-width: $container-header-border-width;
-        border-style: solid;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-        border-bottom-left-radius: 0;
-        border-bottom-right-radius: 0;
-        height: $container-header-height;
-        line-height: $container-header-height;
-        font-weight: bold;
-        margin: #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)} $layout-spacing;
-        text-transform: uppercase;
-        position: relative;
-
-        .label {
-            position: absolute;
-            left: 0;
-            right: 0;
-            pointer-events: none;
-            padding-left: $layout-spacing;
-            padding-right: $layout-spacing;
-            text-align: center;
-        }
-
-        & > .sub {
-
-            display: table;
-            height: $container-header-height;
-            line-height: $container-header-height;
-
-            &.left {
-                margin-left: $layout-spacing;
-            }
-
-            &.right {
-                margin-right: $layout-spacing;
-            }
-
-            & > .multiple {
-                display: table-cell;
-            }
-
-        }
-
-        .button {
-            margin-bottom: 0 !important;
-        }
-
-    }
-
-    & > .content_wrp {
-        overflow: hidden;
-    }
-
-    & > .content, & > .content_wrp > .content {
-        margin: -$layout-spacing;
-        padding: $layout-spacing;
-        overflow: hidden;
-    }
-
-    & > .footer {
-        margin: #{$layout-spacing} #{-($layout-spacing + $grid-container-border-size)} #{-($layout-spacing + $grid-container-border-size)};
-        min-height: $container-footer-height;
-        line-height: $container-footer-height;
-        border-bottom-left-radius: inherit;
-        border-bottom-right-radius: inherit;
-        border-width: 0px;
-        border-style: solid;
-    }
-
-    .container {
-        box-shadow: none;
-    }
-
-}
-
-/* WIDTH CLASSES */
-
-@for $nr from 1 through 20 {
-
-    .n#{$nr}inrow {
-        display: inline-block;
-        vertical-align: top;
-        width: 100% / $nr;
-    }
-
-}
-
-@for $nr from 1 through 100 {
-
-    .w#{$nr}-100 {
-        display: inline-block;
-        vertical-align: top;
-        width: #{$nr}% !important;
-    }
-
-}

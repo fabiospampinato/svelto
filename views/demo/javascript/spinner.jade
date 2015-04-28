@@ -1,0 +1,22 @@
+//- bootstrap/spinner.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Spinner
+
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container.transparent.no-padding.no-border
+                    .multiple
+                        .button.spinner(data-min="0", data-max="100", data-start="50")
+                            input(type="text", value="50", name="spinner_1")
+                            .sub.left.actionable.decrease -
+                            .label 50
+                            .sub.right.actionable.increase +
+                        .button.spinner.rounded(data-min="0", data-max="100", data-start="50")
+                            input(type="text", value="50", name="spinner_1")
+                            .sub.left.actionable.decrease -
+                            .label 50
+                            .sub.right.actionable.increase +

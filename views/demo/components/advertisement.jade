@@ -1,0 +1,49 @@
+//- components/advertisement.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Horizontals
+
+    +container
+        +advertisement(728, 90)
+        +advertisement(320, 100)
+        +advertisement(970, 250)
+        +advertisement(970, 90)
+        +advertisement(468, 60)
+        +advertisement(320, 50)
+        +advertisement(234, 60)
+
+    +divider Verticals
+
+    +container
+        +advertisement(300, 600)
+        +advertisement(300, 1050)
+        +advertisement(160, 600)
+        +advertisement(120, 600)
+        +advertisement(120, 240)
+
+    +divider Rectangulars
+
+    +container
+        +advertisement(336, 280)
+        +advertisement(300, 250)
+        +advertisement(250, 250)
+        +advertisement(200, 200)
+        +advertisement(180, 150)
+        +advertisement(125, 125)
+
+    +divider Rectangulars
+
+    +container
+        +advertisement(728, 15)
+        +advertisement(468, 15)
+        +advertisement(200, 90)
+        +advertisement(180, 90)
+        +advertisement(160, 90)
+        +advertisement(120, 90)
+
+    +divider Custom content
+
+    +container
+        +advertisement(728, 90) Test advertisement

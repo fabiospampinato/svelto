@@ -3,35 +3,67 @@
 extends views/layout.jade
 
 append content
-    .separator_wrp
-        .separator Components
+    +divider CSS
+
     .multiple
-        a.button.actionable.outlined(href="/views/demo/accordion.html") Accordion
-        a.button.actionable.outlined(href="/views/demo/advertisements.html") Advertisements
-        a.button.actionable.outlined(href="/views/demo/badges.html") Badges
-        a.button.actionable.outlined(href="/views/demo/breadcrumb.html") Breadcrumb
-        a.button.actionable.outlined(href="/views/demo/buttons.html") Buttons
-        a.button.actionable.outlined(href="/views/demo/colors.html") Colors
-        a.button.actionable.outlined(href="/views/demo/elements.html") Elements
-        a.button.actionable.outlined(href="/views/demo/expander.html") Expander
-        a.button.actionable.outlined(href="/views/demo/flags.html") Flags
-        a.button.actionable.outlined(href="/views/demo/form.html") Form
-        a.button.actionable.outlined(href="/views/demo/grid.html") Grid
-        a.button.actionable.outlined(href="/views/demo/headers.html") Headers
-        a.button.actionable.outlined(href="/views/demo/icons.html") Icons
-        a.button.actionable.outlined(href="/views/demo/inputs.html") Inputs
-        a.button.actionable.outlined(href="/views/demo/loading.html") Loading
-        a.button.actionable.outlined(href="/views/demo/modals.html") Modals
-        a.button.actionable.outlined(href="/views/demo/noty.html") Noty
-        a.button.actionable.outlined(href="/views/demo/one_time_action.html") One time action
-        a.button.actionable.outlined(href="/views/demo/progress_bar.html") Progress bar
-        a.button.actionable.outlined(href="/views/demo/separators.html") Separators
-        a.button.actionable.outlined(href="/views/demo/sizes.html") Sizes
-        a.button.actionable.outlined(href="/views/demo/slider.html") Slider
-        a.button.actionable.outlined(href="/views/demo/switcher.html") Switcher
-        a.button.actionable.outlined(href="/views/demo/syntax.html") Syntax
-        a.button.actionable.outlined(href="/views/demo/table.html") Table
-        a.button.actionable.teal(href="/views/demo/tabs.html") Tabs
-        a.button.actionable.outlined(href="/views/demo/tagbox.html") Tagbox
-        a.button.actionable.outlined(href="/views/demo/timeago.html") Timeago
-        a.button.actionable.outlined(href="/views/demo/toggle_height.html") Toggle height
+        a.button.actionable.outlined(href="/views/demo/css/colors.html") Colors
+        a.button.actionable.outlined.red(href="/views/demo/css/container.html") Container
+        a.button.actionable.outlined(href="/views/demo/css/elements.html") Elements
+        a.button.actionable.outlined.teal(href="/views/demo/css/flags.html") Flags
+        a.button.actionable.outlined.teal(href="/views/demo/css/form.html") Form
+        a.button.actionable.outlined.red(href="/views/demo/css/grid.html") Grid
+        a.button.actionable.outlined.teal(href="/views/demo/css/helpers.html") Helpers
+        a.button.actionable.outlined(href="/views/demo/css/icons.html") Icons
+        a.button.actionable.outlined(href="/views/demo/css/sizes.html") Sizes
+        a.button.actionable.outlined.teal(href="/views/demo/css/table.html") Table
+        a.button.actionable.outlined.teal(href="/views/demo/css/typography.html") Typography
+
+    +divider Components
+
+    .multiple
+        a.button.actionable.outlined(href="/views/demo/components/advertisement.html") Advertisement
+        a.button.actionable.outlined.teal(href="/views/demo/components/badges.html") Badges
+        a.button.actionable.outlined(href="/views/demo/components/breadcrumb.html") Breadcrumb
+        a.button.actionable.outlined.red(href="/views/demo/components/button.html") Button
+        a.button.actionable.outlined.teal(href="/views/demo/components/chat.html") Chat
+        a.button.actionable.outlined(href="/views/demo/components/header.html") Header
+        a.button.actionable.outlined.teal(href="/views/demo/components/inputs.html") Inputs
+        a.button.actionable.outlined.teal(href="/views/demo/components/navbar.html") Navbar
+        a.button.actionable.outlined.teal(href="/views/demo/components/progressBar.html") progressBar
+        a.button.actionable.outlined(href="/views/demo/components/divider.html") Divider
+        a.button.actionable.outlined.teal(href="/views/demo/components/toolbar.html") Toolbar
+
+    +divider Javascript
+
+    .multiple
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/accordion.html") Accordion
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/checkbox.html") Checkbox
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/dropdown.html") Dropdown
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/expander.html") Expander
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/loading.html") Loading
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/menu.html") Menu
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/modal.html") Modal
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/noty.html") Noty
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/radio.html") Radio
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/select.html") Select
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/sidebar.html") Sidebar
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/slider.html") Slider
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/spinner.html") Spinner
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/switcher.html") Switcher
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/syntax.html") Syntax
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/tabs.html") Tabs
+        a.button.actionable.outlined.teal(href="/views/demo/javascript/tagbox.html") Tagbox
+
+    +divider Tools
+
+    .multiple
+        a.button.actionable.outlined.teal(href="/views/demo/tools/autogrow.html") Autogrow
+        a.button.actionable.outlined.teal(href="/views/demo/tools/btEach.html") btEach
+        a.button.actionable.outlined.teal(href="/views/demo/tools/formAjax.html") formAjax
+        a.button.actionable.outlined.teal(href="/views/demo/tools/formSync.html") formSync
+        a.button.actionable.outlined.teal(href="/views/demo/tools/oneTimeAction.html") oneTimeAction
+        a.button.actionable.outlined.teal(href="/views/demo/tools/selectable.html") Selectable
+        a.button.actionable.outlined.teal(href="/views/demo/tools/sortable.html") Sortable
+        a.button.actionable.outlined.teal(href="/views/demo/tools/timeAgo.html") timeAgo
+        a.button.actionable.outlined.teal(href="/views/demo/tools/toggleHeight.html") toggleHeight
+        a.button.actionable.outlined.teal(href="/views/demo/tools/touching.html") Touching

@@ -1,0 +1,10 @@
+//- elements.jade
+
+mixin image(url)
+    .image-wrp&attributes(attributes)
+        img(src=url)
+        block
+
+mixin image-caption
+    .image-caption&attributes(attributes)
+        block

@@ -1,0 +1,187 @@
+//- css/form.jade
+
+extends ../../layout.jade
+
+append content
++divider Forms
+    .grid
+        .grid_cols.fluid.limited
+            .grid_col
+                form.container(data-sync-group="test")
+                    .header Test form 1 (Synced)
+                    .content
+                        .img_wrp
+                            img(src="/images/sample.png")
+                        label Input:
+                        input.fluid.outlined(type="text", name="input_1", placeholder="Placeholder...")
+                        label Input (Autogrow):
+                        input.fluid.autogrow.outlined(type="text", name="input_2")
+                        label Input (Disabled):
+                        input.fluid.outlined(type="text", name="input_3", disabled="disabled")
+                        label Textarea:
+                        textarea.fluid.outlined(type="text", name="textarea_1")
+                        label Textarea (Autogrow):
+                        textarea.fluid.autogrow.outlined(type="text", name="textarea_2")
+                        label Textarea (Disabled):
+                        textarea.fluid.outlined(type="text", name="textarea_3", disabled="disabled")
+                        label Checkboxes:
+                        .multiple.fluid
+                            .button.actionable.checkbox.outlined
+                                input(type="checkbox", name="checkbox_name_1", value="1")
+                                .label.left Checkbox 1
+                                .icon.on.right
+                                .icon.off.right
+                            .button.actionable.checkbox.outlined
+                                input(type="checkbox", name="checkbox_name_2", value="2")
+                                .label.left Checkbox 2
+                                .icon.on.right
+                                .icon.off.right
+                        label Radios:
+                        .multiple.fluid
+                            .button.actionable.radio.outlined
+                                input(type="radio", name="radio_name_1", value="1")
+                                .label.left Radio 1
+                                .icon.on.right
+                                .icon.off.right
+                            .button.actionable.radio.outlined
+                                input(type="radio", name="radio_name_1", value="2")
+                                .label.left Radio 2
+                                .icon.on.right
+                                .icon.off.right
+                        label Select:
+                        .multiple.fluid
+                            .button.actionable.select.outlined
+                                .label.left
+                                    | Select:
+                                    .placeholder
+                                .icon.right
+                                select(placeholder="Select a value...", name="select_name_1")
+                                    option(value="public", selected="selected") Public
+                                    option(value="private") Private
+                                    optgroup(label="Elo")
+                                        option(value="1200") 1200+
+                                        option(value="1300") 1300+
+                                        option(value="1400") 1400+
+                                        option(value="1500") 1500+
+                                        option(value="1600") 1600+
+                                        option(value="1700") 1700+
+                                        option(value="1800") 1800+
+                                        option(value="1900") 1900+
+                                        option(value="2000") 2000+
+                                        option(value="2100") 2100+
+                        label Slider:
+                        .slider_wrp
+                            .slider(data-min="0", data-max="100", data-start="75")
+                                input(type="text", value="100", name="slider_name_1")
+                                .min(data-min="0", title="Decrement")
+                                .max(data-max="100", title="Increment")
+                                .bar
+                                    .unhighlighted
+                                        .highlighted
+                                        .handler
+                                            .label 75
+                        .grid
+                            .grid_cols.fluid
+                                .grid_col.text-left
+                                    .container.transparent.no-padding.no-margin-bottom Switcher:
+                                .grid_col
+                                    .container.transparent.no-padding.no-margin-bottom
+                                        .switcher.right.no-margin
+                                            input(type="checkbox", value="Something", name="switcher_name_1")
+                                            .bar
+                                                .handler
+                    .footer
+                        .multiple
+                            button.button.actionable.gray Normal
+                            button.button.actionable.primary Primary
+                            button.button.actionable.secondary Secondary
+
+            .grid_col
+                form.container(data-sync-group="test")
+                    .header Test form 2 (Synced)
+                    .content
+                        .img_wrp
+                            img(src="/images/sample.png")
+                        label Input:
+                        input.fluid.outlined(type="text", name="input_1", placeholder="Placeholder...")
+                        label Input (Autogrow):
+                        input.fluid.autogrow.outlined(type="text", name="input_2")
+                        label Input (Disabled):
+                        input.fluid.outlined(type="text", name="input_3", disabled="disabled")
+                        label Textarea:
+                        textarea.fluid.outlined(type="text", name="textarea_1")
+                        label Textarea (Autogrow):
+                        textarea.fluid.autogrow.outlined(type="text", name="textarea_2")
+                        label Textarea (Disabled):
+                        textarea.fluid.outlined(type="text", name="textarea_3", disabled="disabled")
+                        label Checkboxes:
+                        .multiple.fluid
+                            .button.actionable.checkbox.outlined
+                                input(type="checkbox", name="checkbox_name_1", value="1")
+                                .label.left Checkbox 1
+                                .icon.on.right
+                                .icon.off.right
+                            .button.actionable.checkbox.outlined
+                                input(type="checkbox", name="checkbox_name_2", value="2")
+                                .label.left Checkbox 2
+                                .icon.on.right
+                                .icon.off.right
+                        label Radios:
+                        .multiple.fluid
+                            .button.actionable.radio.outlined
+                                input(type="radio", name="radio_name_1", value="1")
+                                .label.left Radio 1
+                                .icon.on.right
+                                .icon.off.right
+                            .button.actionable.radio.outlined
+                                input(type="radio", name="radio_name_1", value="2")
+                                .label.left Radio 2
+                                .icon.on.right
+                                .icon.off.right
+                        label Select:
+                        .multiple.fluid
+                            .button.actionable.select.outlined
+                                .label.left
+                                    | Select:
+                                    .placeholder
+                                .icon.right
+                                select(placeholder="Select a value...", name="select_name_1")
+                                    option(value="public", selected="selected") Public
+                                    option(value="private") Private
+                                    optgroup(label="Elo")
+                                        option(value="1200") 1200+
+                                        option(value="1300") 1300+
+                                        option(value="1400") 1400+
+                                        option(value="1500") 1500+
+                                        option(value="1600") 1600+
+                                        option(value="1700") 1700+
+                                        option(value="1800") 1800+
+                                        option(value="1900") 1900+
+                                        option(value="2000") 2000+
+                                        option(value="2100") 2100+
+                        label Slider:
+                        .slider_wrp
+                            .slider(data-min="0", data-max="100", data-start="75")
+                                input(type="text", value="100", name="slider_name_1")
+                                .min(data-min="0", title="Decrement")
+                                .max(data-max="100", title="Increment")
+                                .bar
+                                    .unhighlighted
+                                        .highlighted
+                                        .handler
+                                            .label 75
+                        .grid
+                            .grid_cols.fluid
+                                .grid_col.text-left
+                                    .container.transparent.no-padding.no-margin-bottom Switcher:
+                                .grid_col
+                                    .container.transparent.no-padding.no-margin-bottom
+                                        .switcher.right.no-margin
+                                            input(type="checkbox", value="Something", name="switcher_name_1")
+                                            .bar
+                                                .handler
+                    .footer
+                        .multiple
+                            button.button.actionable.gray Normal
+                            button.button.actionable.primary Primary
+                            button.button.actionable.secondary Secondary

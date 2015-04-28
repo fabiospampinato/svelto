@@ -1,0 +1,24 @@
+//- bootstrap/radio.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Radio
+
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container.transparent.no-padding.no-border
+                    form
+                        .multiple
+                            .button.actionable.radio
+                                input(type="radio", name="radio_name", value="4")
+                                .label.left Base
+                                .icon.on.right
+                                .icon.off.right
+                            .button.actionable.radio.selected
+                                input(type="radio", name="radio_name", value="9")
+                                .label.left Selected
+                                .icon.on.right
+                                .icon.off.right
+

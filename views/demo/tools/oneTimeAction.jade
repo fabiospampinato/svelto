@@ -1,0 +1,31 @@
+//- tools/oneTimeAction.jade
+
+extends ../../layout.jade
+
+append content
++divider One time action
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .multiple
+                    .button.actionable.outlined(onclick="javascript:test_one_time_action_cookie1()") Cookie 1
+                    .button.actionable.outlined(onclick="javascript:test_one_time_action_cookie2()") Cookie 2
+                    .button.actionable.outlined(onclick="javascript:test_one_time_action_url()") Url
+
+append body
+    script(type="text/javascript").
+        function test_one_time_action_cookie1 () {
+            one_time_action ( 'cookie', 'test1', function () {
+                noty ( "One time action (Cookie) executed." );
+            });
+        }
+        function test_one_time_action_cookie2 () {
+            one_time_action ( 'cookie', 'test2', function () {
+                noty ( "One time action (Cookie) executed." );
+            });
+        }
+        function test_one_time_action_url () {
+            one_time_action ( 'url', '/bootstrap/one_time_action_test', function () {
+                noty ( "One time action (Url) executed." );
+            });
+        }

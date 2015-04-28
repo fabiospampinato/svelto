@@ -1,0 +1,24 @@
+//- bootstrap/checkbox.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Checkbox
+
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container.transparent.no-padding.no-border
+                    form
+                        .multiple
+                            .button.actionable.checkbox
+                                input(type="checkbox", name="check_name", value="4")
+                                .label.left Base
+                                .icon.on.right
+                                .icon.off.right
+                            .button.actionable.checkbox.selected
+                                input(type="checkbox", name="check_name", value="9")
+                                .label.left Selected
+                                .icon.on.right
+                                .icon.off.right
+

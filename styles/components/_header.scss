@@ -32,27 +32,27 @@ h6 {
 
 /* HEADER */
 
-.header_wrp {
+.header-wrp {
 
     display: table;
     text-align: left;
     width: 100%;
     margin-bottom: $layout-spacing;
 
-    .icon, .content {
+    & > .icon, & > .content {
         display: table-cell;
         vertical-align: middle;
     }
 
-    .icon {
+    & > .icon {
         padding-right: $layout-spacing;
     }
 
-    .content {
+    & > .content {
 
         width: 100%;
 
-        .title + .subtitle {
+        & > .title + .subtitle {
             margin-top: $layout-half-spacing;
         }
 

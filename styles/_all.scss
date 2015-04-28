@@ -15,15 +15,16 @@
 
 @import 'settings/layout';
 @import 'settings/typography';
-@import 'settings/general';
+@import 'settings/elements';
 
 /* SETTINGS */
 
 @import 'settings/badge';
 @import 'settings/breadcrumb';
-@import 'settings/buttons';
+@import 'settings/button';
 @import 'settings/chat';
-@import 'settings/dropdowns';
+@import 'settings/container';
+@import 'settings/dropdown';
 @import 'settings/expander';
 @import 'settings/forms';
 @import 'settings/grid';
@@ -31,20 +32,20 @@
 @import 'settings/header';
 @import 'settings/highlight';
 @import 'settings/loading';
-@import 'settings/modals';
+@import 'settings/modal';
 @import 'settings/navbar';
 @import 'settings/noty';
-@import 'settings/progress_bar';
-@import 'settings/separator';
+@import 'settings/progressBar';
+@import 'settings/divider';
 @import 'settings/slider';
 @import 'settings/switcher';
-@import 'settings/tables';
+@import 'settings/table';
 @import 'settings/tabs';
 @import 'settings/toolbar';
 
-/* GENERAL */
+/* BASE */
 
-@import 'general';
+@import 'base';
 
 /* EXTERNAL */
 
@@ -54,13 +55,15 @@
 /* COMPONENTS */
 
 @import 'components/accordion';
-@import 'components/advertisements';
+@import 'components/advertisement';
 @import 'components/badge';
 @import 'components/breadcrumb';
-@import 'components/buttons';
+@import 'components/button';
 @import 'components/chat';
 @import 'components/checkbox_radio';
-@import 'components/dropdowns';
+@import 'components/container';
+@import 'components/dropdown';
+@import 'components/elements';
 @import 'components/expander';
 @import 'components/flags';
 @import 'components/form';
@@ -70,19 +73,19 @@
 @import 'components/highlight';
 @import 'components/icons';
 @import 'components/loading';
-@import 'components/modals';
+@import 'components/modal';
 @import 'components/navbar';
 @import 'components/noty';
-@import 'components/progress_bar';
-@import 'components/selects';
-@import 'components/separator';
+@import 'components/progressBar';
+@import 'components/select';
+@import 'components/divider';
 @import 'components/slider';
 @import 'components/spinner';
 @import 'components/switcher';
-@import 'components/tables';
+@import 'components/table';
 @import 'components/tabs';
 @import 'components/toolbar';
 
-/* COMMON */
+/* HELPERS */
 
-@import 'components/common';
+@import 'components/helpers';

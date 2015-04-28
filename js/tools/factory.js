@@ -145,7 +145,7 @@
 
                         }
 
-                    } else if ( options === 'option' ) {
+                    } else if ( options === 'option' ) { //TODO: support for multi level options
 
                         if ( typeof arguments[1] === 'string' ) {
 

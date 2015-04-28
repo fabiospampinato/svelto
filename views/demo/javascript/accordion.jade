@@ -1,0 +1,43 @@
+//- javascript/accordion.jade
+
+extends ../../layout.jade
+
+append content
++divider Accordion
+    .grid
+        .grid_cols.fluid.limited
+            .grid_col
+                .container
+                    .accordions_wrp
+                        .container.accordion
+                            .header.actionable
+                                .label Section 1
+                                .sub.right
+                                    .multiple
+                                        .button.compact.transparent.no-padding.huge
+                                            .icon.icon-navigation-arrow-drop-down
+                            .content Content of Section 1
+                        .container.accordion.active
+                            .header.actionable.active
+                                .label Section 2 (Active)
+                                .sub.right
+                                    .multiple
+                                        .button.compact.transparent.no-padding.huge
+                                            .icon.icon-navigation-arrow-drop-down
+                            .content Content of Section 2
+                        .container.accordion.inactive
+                            .header.actionable.inactive
+                                .label Section 3 (Inactive)
+                                .sub.right
+                                    .multiple
+                                        .button.compact.transparent.no-padding.huge
+                                            .icon.icon-navigation-arrow-drop-down
+                            .content Content of Section 3
+                        .container.accordion
+                            .header.actionable
+                                .label Section 4
+                                .sub.right
+                                    .multiple
+                                        .button.compact.transparent.no-padding.huge
+                                            .icon.icon-navigation-arrow-drop-down
+                            .content Content of Section 4

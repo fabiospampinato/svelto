@@ -31,32 +31,9 @@
             'usemap': 'useMap'
         },
         cssNumber = ['column-count', 'columns', 'font-weight', 'line-height','opacity', 'z-index', 'zoom'], //INFO: CSS properties that require a plain number
-        uID = 0,
         data = {};
 
     /* PRIVATE UTILITES */
-
-    var extend = function ( target, obj ) {
-
-        for ( var prop in obj ) {
-
-            if ( Object.prototype.hasOwnProperty.call ( obj, prop ) ) {
-
-                if ( Object.prototype.toString.call ( obj[prop] ) === '[object Object]' ) {
-
-                    target[prop] = lQuery.extend ( target[prop], obj[prop] );
-
-                } else {
-
-                    target[prop] = obj[prop];
-
-                }
-
-            }
-
-        }
-
-    };
 
     var node_position_comparator = function ( node_1, node_2 ) {
 
@@ -122,27 +99,27 @@
 
     var maybe_add_px = function ( prop, value ) {
 
-        return ( !isNaN(value) && cssNumber.indexOf ( prop ) === -1 ) ? value + 'px' : value;
+        return ( !_.isNaN ( value ) && cssNumber.indexOf ( prop ) === -1 ) ? value + 'px' : value;
 
     };
 
     /* lQuery SELECTORS */
 
-    window.lQuery = function ( selector, context /* isUnique */ ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
+    var lQuery = function ( selector, context /* isUnique */ ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
 
-        if ( selector instanceof Function ) return lQuery.ready ( selector );
+        if ( _.isFunction ( selector ) ) return lQuery.ready ( selector );
 
         return new lQuery.fn.init ( selector, context );
 
     };
 
-    window.lQuery_node = function ( node ) { //INFO: It actually also works with the `window` object, even if it's not a node
+    var lQuery_node = function ( node ) { //INFO: It actually also works with the `window` object, even if it's not a node
 
         return new lQuery.fn.init_node ( node );
 
     };
 
-    window.lQuery_arr = function ( arr, isUnique ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
+    var lQuery_arr = function ( arr, isUnique ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
 
         return new lQuery.fn.init_arr ( arr, isUnique );
 
@@ -157,21 +134,9 @@
 
     };
 
-    lQuery.noop = function () {};
+    lQuery.noop = _.noop;
 
-    lQuery.makeArray = function ( arrLike ) {
-
-        var arr = new Array ( arrLike.length );
-
-        for ( var i = 0, l = arrLike.length; i < l; i++ ) {
-
-            arr[i] = arrLike[i];
-
-        }
-
-        return arr;
-
-    };
+    lQuery.makeArray = _.toArray; //TODO: use it
 
     lQuery.unique = function ( arr, is_sorted ) {
 
@@ -201,9 +166,9 @@
 
     lQuery.data = function ( node, key, value ) {
 
-        if ( data[node] === undefined ) data[node] = {};
+        if ( _.isUndefined ( data[node] ) ) data[node] = {};
 
-        if ( value !== undefined ) {
+        if ( !_.isUndefined( value ) ) {
 
             data[node][key] = value;
 
@@ -217,21 +182,9 @@
 
     };
 
-    lQuery.extend = function () { //INFO: It's always deep by default
+    lQuery.extend = _.extend; //INFO: It's always deep by default
 
-        var target = arguments[0] || {};
-
-        for ( var i = 1, l = arguments.length; i < l; i++ ) {
-
-            extend ( target, arguments[i] );
-
-        }
-
-        return target;
-
-    };
-
-    lQuery.defer = function ( callback, msDelay ) {
+    lQuery.defer = function ( callback, msDelay ) { //TODO: join with underscore
 
         html.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
 
@@ -308,12 +261,6 @@
 
     };
 
-    lQuery.getUID = function () {
-
-        return ( uID += 1 );
-
-    };
-
     lQuery.parseHTML = function ( str ) {
 
         var parsed = ( /^<(\w+)\s*\/?>(?:<\/\1>|)$/ ).exec ( str );
@@ -330,21 +277,41 @@
 
     };
 
-    /* jQuery NODE UTILIES */
+    lQuery.eventXY = function ( event ) {
 
-    lQuery.matches = function ( node, selector ) {
+        var coordinates = {
+            X : 0,
+            Y : 0
+        };
 
-        if ( browser_matches_fn ) {
+        if ( _.isUndefined ( event.originalEvent ) ) { //FIXME: doesn't make sense
 
-            return browser_matches_fn.call ( node, selector );
-
-        } else {
-
-            return ( dom_selector ( selector, node.parentNode ).indexOf ( node ) !== -1 );
+            event = event.originalEvent;
 
         }
 
+        if ( _.isUndefined ( event.touches ) && _.isUndefined ( event.touches[0] ) ) {
+
+            coordinates.X = event.touches[0].pageX;
+            coordinates.Y = event.touches[0].pageY;
+
+        } else if ( _.isUndefined ( event.changedTouches ) && _.isUndefined ( event.changedTouches[0] ) ) {
+
+            coordinates.X = event.changedTouches[0].pageX;
+            coordinates.Y = event.changedTouches[0].pageY;
+
+        } else if ( _.isUndefined ( event.pageX ) ) {
+
+            coordinates.X = event.pageX;
+            coordinates.Y = event.pageY;
+
+        }
+
+        return coordinates;
+
     };
+
+    /* jQuery NODE UTILIES */
 
     lQuery.matches = function ( node, selector, index ) {
 
@@ -427,7 +394,7 @@
 
         attr: function ( name, value ) {
 
-            if ( typeof name === 'object' ) {
+            if ( _.isDictionary ( name ) ) {
 
                 for ( var prop in name ) this.attr ( prop, name[prop] );
 
@@ -435,7 +402,7 @@
 
             } else {
 
-                if ( value !== undefined ) {
+                if ( !_.isUndefined( value ) ) {
 
                     for ( var i = 0, l = this.length; i < l; i++ ) {
 
@@ -469,7 +436,7 @@
 
         data: function ( name, value ) {
 
-            if ( value !== undefined ) {
+            if ( !_.isUndefined( value ) ) {
 
                 return this.attr ( 'data-' + name.toLowerCase (), JSON.stringify ( value ) );
 
@@ -491,7 +458,7 @@
 
         prop: function ( name, value ) {
 
-            if ( value !== undefined ) {
+            if ( !_.isUndefined( value ) ) {
 
                 for ( var i = 0, l = this.length; i < l; i++ ) {
 
@@ -525,7 +492,7 @@
 
         val: function ( value ) {
 
-            if ( value !== undefined ) {
+            if ( !_.isUndefined( value ) ) {
 
                 for ( var i = 0, l = this.length; i < l; i++ ) {
 
@@ -565,7 +532,7 @@
 
         css: function ( name, value ) {
 
-            if ( typeof name === 'object' ) {
+            if ( _.isDictionary ( name ) ) {
 
                 for ( var prop in name ) this.css ( prop, name[prop] );
 
@@ -576,7 +543,7 @@
                 value = maybe_add_px ( name, value );
                 name = lQuery.camelCase ( name );
 
-                if ( value !== undefined ) {
+                if ( !_.isUndefined( value ) ) {
 
                     for ( var i = 0, l = this.length; i < l; i++ ) {
 
@@ -660,7 +627,7 @@
 
         toggleClass: function ( classes, state ) {
 
-            if ( state !== undefined ) {
+            if ( !_.isUndefined( state ) ) {
 
                 return state ? this.addClass ( classes ) : this.removeClass ( classes );
 
@@ -690,7 +657,7 @@
 
         width: function ( value ) {
 
-            if ( value !== undefined ) return this.css ( 'width', value );
+            if ( !_.isUndefined( value ) ) return this.css ( 'width', value );
 
             var node = this.nodes[0];
 
@@ -706,7 +673,7 @@
 
         height: function ( value ) {
 
-            if ( value !== undefined ) return this.css ( 'height', value );
+            if ( !_.isUndefined( value ) ) return this.css ( 'height', value );
 
             var node = this.nodes[0];
 
@@ -736,11 +703,11 @@
 
         toggle: function ( state ) { //INFO: if is hidden by another thing it will remain hidden
 
-            var forced = ( typeof state === 'boolean' ) ? ( state ? '' : 'none' ) : undefined;
+            var forced = _.isBoolean ( state ) ? ( state ? '' : 'none' ) : undefined;
 
             for ( var i = 0, l = this.length; i < l; i++ ) {
 
-                this.nodes[i].style.display = ( forced !== undefined )
+                this.nodes[i].style.display = !_.isUndefined( forced )
                                                   ? forced
                                                   : ( computeStyle ( this.nodes[i] )['display'] !== 'none' )
                                                       ? 'none'
@@ -1244,7 +1211,7 @@
 
         scrollBottom: function ( value ) {
 
-            if ( value !== undefined ) {
+            if ( !_.isUndefined( value ) ) {
 
                 for ( var i = 0, l = this.length; i < l; i++ ) {
 
@@ -1270,7 +1237,7 @@
 
         scrollRight: function ( value ) {
 
-            if ( value !== undefined ) {
+            if ( !_.isUndefined( value ) ) {
 
                 for ( var i = 0, l = this.length; i < l; i++ ) {
 
@@ -1307,7 +1274,7 @@
                 var matches = 0,
                     parent = this.nodes[i].parentNode;
 
-                while ( ( maxMatchesNr === undefined || matches < maxMatchesNr ) && parent !== document ) {
+                while ( ( _.isUndefined ( maxMatchesNr ) || matches < maxMatchesNr ) && parent !== document ) {
 
                     if ( ( selector && lQuery.matches ( parent, selector ) ) || !selector ) {
 
@@ -1543,7 +1510,11 @@
 
     /* ALIASES */
 
-    if ( window.$ === undefined ) {
+    window.lQuery = lQuery;
+    window.lQuery_node = lQuery_node;
+    window.lQuery_arr = lQuery_arr;
+
+    if ( _.isUndefined ( window.$ ) ) {
 
         window.$ = lQuery;
         window.$_node = lQuery_node;

@@ -1,0 +1,116 @@
+
+/* ELEMENTS */
+
+a {
+
+    color: $color-default-link;
+    font-weight: bold;
+    text-decoration: none;
+    cursor: pointer;
+
+    &:hover {
+        color: $color-default-link-hover;
+    }
+
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: $layout-spacing;
+    text-align: justify;
+}
+
+blockquote {
+
+    border: 1px solid $general-section-border-bg;
+    border-left-width: ( $layout-spacing / 2 );
+    margin: 0;
+    padding: $layout-spacing;
+    background-color: $general-section-color-bg;
+    border-radius: $border-radius-small;
+    text-align: justify;
+
+    &:before {
+        color: $general-section-border-bg;
+        content: open-quote;
+        float: left;
+        font-family: Verdana;
+        font-size: $font-size-normal * 3.5;
+        line-height: 0;
+        margin-right: $layout-spacing;
+        margin-top: 18px;
+    }
+
+}
+
+abbr[title] {
+    border-bottom: 1px dotted $color-gray-border;
+    cursor: help;
+}
+
+ul, ol, dl {
+    margin: 0;
+    text-align: left;
+    padding-left: $layout-spacing * 2;
+}
+
+ul.no-bullets {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+dd {
+    margin-left: $layout-spacing * 2;
+}
+
+code, section, pre {
+    display: block;
+    margin: 0;
+    padding: $layout-spacing;
+    background-color: $general-section-color-bg;
+    border-radius: $border-radius-small;
+    border: 1px solid $general-section-border-bg;
+}
+
+kbd {
+    @include white ( true );
+    border-width: 1px;
+    border-style: solid;
+    border-radius: $border-radius-normal;
+    margin: 0 ( $layout-spacing / 2 );
+    padding: 2px 3px;
+    box-shadow: $shadow-depth-1;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.image-wrp {
+
+    display: inline-block;
+    position: relative;
+    text-align: center;
+    font-size: 0;
+    overflow: hidden;
+
+    & > img {
+        border: 1px solid $color-white-border;
+        border-radius: $border-radius-normal;
+        max-width: 100%;
+        height: auto;
+    }
+
+    &.smooth {
+        border-radius: $border-radius-normal;
+    }
+
+    & > .image-caption {
+        @include black ( true, true );
+        @include medium ();
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: $layout-spacing;
+    }
+
+}

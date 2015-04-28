@@ -1,0 +1,33 @@
+//- base.jade
+
+mixin html
+    doctype html
+    html(lang="en", xml:lang="en", dir="ltr")&attributes(attributes)
+        block
+
+mixin head(title)
+    head&attributes(attributes)
+        title= title
+
+        meta(charset="UTF-8")
+        meta(name="robots", content="NOYDIR")
+        meta(name="robots", content="NOODP")
+        meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
+
+        link(rel="shortcut icon", href="/images/favicon.ico")
+
+        block
+
+mixin css(url, media)
+    link(rel="stylesheet", type="text/css", href!=url, media= ( media || "all"))&attributes(attributes)
+
+mixin js(url)
+    script(type="text/javascript", src!=url)&attributes(attributes)
+
+mixin body
+    body&attributes(attributes)
+        block
+
+mixin content
+    #content&attributes(attributes)
+        block

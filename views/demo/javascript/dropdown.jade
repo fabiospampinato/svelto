@@ -1,0 +1,43 @@
+//- bootstrap/dropdown.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Dropdown
+
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container.transparent.no-padding.no-border
+                    .multiple
+                        .button.actionable.dropdown_trigger.dropdown_btn(data-dropdown="dropdown-test")
+                            .label.left Base
+                            .icon.right
+                        .button.actionable.compact.dropdown_trigger(data-dropdown="dropdown-test")
+                            .icon.icon-action-settings
+                        .button.actionable.compact.rounded.dropdown_trigger(data-dropdown="dropdown-test")
+                            .icon.icon-action-settings
+                        .button.actionable.dropdown_trigger.dropdown_btn(data-dropdown="dropdown-test-advanced")
+                            .label.left Advanced
+                            .icon.right
+                       #dropdown-test.dropdown
+                            .top_tip
+                            .left_tip
+                            .right_tip
+                            .container
+                                .multiple.vertical
+                                    a.button.actionable.outlined.tiny(href="#1") Action 1
+                                    hr
+                                    a.button.actionable.outlined.tiny(href="#2") Action 2
+                                    a.button.actionable.outlined.tiny(href="#3") Action 3
+                            .bottom_tip
+                       #dropdown-test-advanced.dropdown
+                            .top_tip
+                            .left_tip
+                            .right_tip
+                            .container
+                                .header.transparent Header
+                                .content Content
+                                .footer Footer
+                            .bottom_tip
+

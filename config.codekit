@@ -1,7 +1,128 @@
 {
 "CodeKitInfo": "This is a CodeKit 2.x project configuration file. It is designed to sync project settings across multiple machines. MODIFYING THE CONTENTS OF THIS FILE IS A POOR LIFE DECISION. If you do so, you will likely cause CodeKit to crash. This file is not useful unless accompanied by the project that created it in CodeKit 2. This file is not backwards-compatible with CodeKit 1.x. For more information, see: http:\/\/incident57.com\/codekit",
-"creatorBuild": "18493",
+"creatorBuild": "18902",
 "files": {
+	"\/dist\/mixins\/advertisement.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/advertisement.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/advertisement.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/all.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 1,
+		"inputAbbreviatedPath": "\/dist\/mixins\/all.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/all.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/base.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/base.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/base.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/breadcrumb.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/breadcrumb.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/breadcrumb.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/button.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/button.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/button.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/container.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/container.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/container.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/divider.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/divider.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/divider.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/elements.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/elements.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/elements.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/grid.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/grid.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/grid.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/header.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/header.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/header.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/dist\/mixins\/icons.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/icons.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/icons.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/dist\/presto-min.css": {
 		"fileType": 16,
 		"ignore": 1,
@@ -66,15 +187,6 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 1
 		},
-	"\/index.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/index.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/index.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -130,23 +242,23 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/components\/checkboxes.js": {
+	"\/js\/components\/checkbox.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/components\/checkboxes.js",
-		"outputAbbreviatedPath": "\/js\/components\/min\/checkboxes.js",
+		"inputAbbreviatedPath": "\/js\/components\/checkbox.js",
+		"outputAbbreviatedPath": "\/js\/components\/min\/checkbox.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/components\/dropdowns.js": {
+	"\/js\/components\/dropdown.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/components\/dropdowns.js",
-		"outputAbbreviatedPath": "\/js\/components\/min\/dropdowns.js",
+		"inputAbbreviatedPath": "\/js\/components\/dropdown.js",
+		"outputAbbreviatedPath": "\/js\/components\/min\/dropdown.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -185,12 +297,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/components\/modals.js": {
+	"\/js\/components\/modal.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/components\/modals.js",
-		"outputAbbreviatedPath": "\/js\/components\/min\/modals.js",
+		"inputAbbreviatedPath": "\/js\/components\/modal.js",
+		"outputAbbreviatedPath": "\/js\/components\/min\/modal.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -207,34 +319,34 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/components\/progress_bar.js": {
+	"\/js\/components\/progressBar.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/components\/progress_bar.js",
-		"outputAbbreviatedPath": "\/js\/components\/min\/progress_bar.js",
+		"inputAbbreviatedPath": "\/js\/components\/progressBar.js",
+		"outputAbbreviatedPath": "\/js\/components\/min\/progressBar.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/components\/radios.js": {
+	"\/js\/components\/radio.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/components\/radios.js",
-		"outputAbbreviatedPath": "\/js\/components\/min\/radios.js",
+		"inputAbbreviatedPath": "\/js\/components\/radio.js",
+		"outputAbbreviatedPath": "\/js\/components\/min\/radio.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/components\/selects.js": {
+	"\/js\/components\/select.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/components\/selects.js",
-		"outputAbbreviatedPath": "\/js\/components\/min\/selects.js",
+		"inputAbbreviatedPath": "\/js\/components\/select.js",
+		"outputAbbreviatedPath": "\/js\/components\/min\/select.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -308,8 +420,8 @@
 		},
 	"\/js\/external\/lQuery.js": {
 		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/external\/lQuery.js",
 		"outputAbbreviatedPath": "\/js\/external\/min\/lQuery.js",
 		"outputPathIsOutsideProject": 0,
@@ -330,8 +442,8 @@
 		},
 	"\/js\/external\/underbar.js": {
 		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/external\/underbar.js",
 		"outputAbbreviatedPath": "\/js\/external\/min\/underbar.js",
 		"outputPathIsOutsideProject": 0,
@@ -361,12 +473,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/js\/tools\/bt_each.js": {
+	"\/js\/tools\/BTeach.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/bt_each.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/bt_each.js",
+		"inputAbbreviatedPath": "\/js\/tools\/BTeach.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/BTeach.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -394,34 +506,34 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/form_ajax.js": {
+	"\/js\/tools\/formAjax.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/form_ajax.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/form_ajax.js",
+		"inputAbbreviatedPath": "\/js\/tools\/formAjax.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/formAjax.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/forms_sync.js": {
+	"\/js\/tools\/formSync.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/forms_sync.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/forms_sync.js",
+		"inputAbbreviatedPath": "\/js\/tools\/formSync.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/formSync.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/one_time_action.js": {
+	"\/js\/tools\/oneTimeAction.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/one_time_action.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/one_time_action.js",
+		"inputAbbreviatedPath": "\/js\/tools\/oneTimeAction.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/oneTimeAction.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -449,12 +561,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/table_helper.js": {
+	"\/js\/tools\/tableHelper.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/table_helper.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/table_helper.js",
+		"inputAbbreviatedPath": "\/js\/tools\/tableHelper.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/tableHelper.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -482,12 +594,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/toggle_height.js": {
+	"\/js\/tools\/toggleHeight.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/js\/tools\/toggle_height.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/toggle_height.js",
+		"inputAbbreviatedPath": "\/js\/tools\/toggleHeight.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/toggleHeight.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -514,16 +626,25 @@
 		"outputPathIsSetByUser": 0
 		},
 	"\/Readme.md": {
-		"enableFootnoteSupport": 0,
-		"enableSmartyPants": 1,
-		"expandTabs": 1,
+		"criticStyle": 0,
+		"enableFootnotes": 0,
+		"enableLabels": 1,
+		"enableSmartQuotes": 1,
+		"escapeLineBreaks": 0,
 		"fileType": 4096,
 		"ignore": 0,
 		"ignoreWasSetByUser": 1,
 		"inputAbbreviatedPath": "\/Readme.md",
+		"maskEmailAddresses": 1,
 		"outputAbbreviatedPath": "\/Readme.html",
+		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 0,
+		"parseMetadata": 1,
+		"processHTML": 0,
+		"randomFootnoteNumbers": 0,
+		"useCompatibilityMode": 0
 		},
 	"\/styles\/_all.scss": {
 		"createSourceMap": 0,
@@ -541,15 +662,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/_general.scss": {
+	"\/styles\/_base.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/_general.scss",
-		"outputAbbreviatedPath": "\/css\/_general.css",
+		"inputAbbreviatedPath": "\/styles\/_base.scss",
+		"outputAbbreviatedPath": "\/css\/_base.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -573,15 +694,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_advertisements.scss": {
+	"\/styles\/components\/_advertisement.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_advertisements.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_advertisements.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_advertisement.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_advertisement.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -621,15 +742,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_buttons.scss": {
+	"\/styles\/components\/_button.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_buttons.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_buttons.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_button.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_button.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -685,15 +806,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_common.scss": {
+	"\/styles\/components\/_container.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_common.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_common.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_container.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_container.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -701,15 +822,47 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_dropdowns.scss": {
+	"\/styles\/components\/_divider.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_dropdowns.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_dropdowns.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_divider.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_divider.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/styles\/components\/_dropdown.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/components\/_dropdown.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_dropdown.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/styles\/components\/_elements.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/components\/_elements.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_elements.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -813,6 +966,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
+	"\/styles\/components\/_helpers.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/components\/_helpers.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_helpers.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
 	"\/styles\/components\/_highlight.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -861,15 +1030,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_modals.scss": {
+	"\/styles\/components\/_modal.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_modals.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_modals.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_modal.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_modal.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -909,15 +1078,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_progress_bar.scss": {
+	"\/styles\/components\/_progressBar.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_progress_bar.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_progress_bar.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_progressBar.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_progressBar.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -925,31 +1094,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_selects.scss": {
+	"\/styles\/components\/_select.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_selects.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_selects.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
-	"\/styles\/components\/_separator.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_separator.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_separator.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_select.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_select.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1021,15 +1174,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/components\/_tables.scss": {
+	"\/styles\/components\/_table.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/components\/_tables.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_tables.css",
+		"inputAbbreviatedPath": "\/styles\/components\/_table.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_table.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1133,15 +1286,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/settings\/_buttons.scss": {
+	"\/styles\/settings\/_button.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_buttons.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_buttons.css",
+		"inputAbbreviatedPath": "\/styles\/settings\/_button.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_button.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1181,15 +1334,63 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/settings\/_dropdowns.scss": {
+	"\/styles\/settings\/_container.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_dropdowns.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_dropdowns.css",
+		"inputAbbreviatedPath": "\/styles\/settings\/_container.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_container.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/styles\/settings\/_divider.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/settings\/_divider.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_divider.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/styles\/settings\/_dropdown.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/settings\/_dropdown.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_dropdown.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/styles\/settings\/_elements.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/settings\/_elements.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_elements.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1222,22 +1423,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/styles\/settings\/_forms.scss",
 		"outputAbbreviatedPath": "\/styles\/css\/_forms.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
-	"\/styles\/settings\/_general.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_general.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_general.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1357,15 +1542,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/settings\/_modals.scss": {
+	"\/styles\/settings\/_modal.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_modals.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_modals.css",
+		"inputAbbreviatedPath": "\/styles\/settings\/_modal.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_modal.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1405,31 +1590,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/settings\/_progress_bar.scss": {
+	"\/styles\/settings\/_progressBar.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_progress_bar.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_progress_bar.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
-	"\/styles\/settings\/_separator.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_separator.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_separator.css",
+		"inputAbbreviatedPath": "\/styles\/settings\/_progressBar.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_progressBar.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1501,15 +1670,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/styles\/settings\/_tables.scss": {
+	"\/styles\/settings\/_table.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/styles\/settings\/_tables.scss",
-		"outputAbbreviatedPath": "\/styles\/css\/_tables.css",
+		"inputAbbreviatedPath": "\/styles\/settings\/_table.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_table.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1581,582 +1750,541 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/views\/demo\/accordion.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/accordion.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/accordion.jade": {
+	"\/views\/demo\/components\/advertisement.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/accordion.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/accordion.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/advertisement.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/advertisement.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/advertisements.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/advertisements.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/advertisements.jade": {
+	"\/views\/demo\/components\/badges.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/advertisements.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/advertisements.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/badges.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/badges.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/badges.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/badges.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/badges.jade": {
+	"\/views\/demo\/components\/breadcrumb.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/badges.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/badges.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/breadcrumb.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/breadcrumb.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/breadcrumb.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/breadcrumb.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/breadcrumb.jade": {
+	"\/views\/demo\/components\/button.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/breadcrumb.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/breadcrumb.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/button.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/button.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/buttons.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/buttons.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/buttons.jade": {
+	"\/views\/demo\/components\/chat.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/buttons.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/buttons.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/chat.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/chat.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/colors.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/colors.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/colors.jade": {
+	"\/views\/demo\/components\/divider.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/colors.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/colors.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/divider.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/divider.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/elements.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/elements.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/elements.jade": {
+	"\/views\/demo\/components\/header.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/elements.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/elements.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/header.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/header.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/expander.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/expander.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/expander.jade": {
+	"\/views\/demo\/components\/inputs.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/expander.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/expander.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/inputs.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/inputs.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/flags.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/flags.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/flags.jade": {
+	"\/views\/demo\/components\/navbar.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/flags.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/flags.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/navbar.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/navbar.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/form.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/form.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/form.jade": {
+	"\/views\/demo\/components\/progressBar.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/form.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/form.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/progressBar.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/progressBar.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/grid.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/grid.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/grid.jade": {
+	"\/views\/demo\/components\/toolbar.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/grid.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/grid.html",
+		"inputAbbreviatedPath": "\/views\/demo\/components\/toolbar.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/toolbar.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/headers.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/headers.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/headers.jade": {
+	"\/views\/demo\/css\/colors.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/headers.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/headers.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/colors.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/colors.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/icons.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/icons.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/icons.jade": {
+	"\/views\/demo\/css\/container.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/icons.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/icons.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/container.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/container.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/inputs.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/inputs.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/inputs.jade": {
+	"\/views\/demo\/css\/elements.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/inputs.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/inputs.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/elements.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/elements.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/loading.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/loading.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/loading.jade": {
+	"\/views\/demo\/css\/flags.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/loading.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/loading.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/flags.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/flags.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/modals.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/modals.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/modals.jade": {
+	"\/views\/demo\/css\/form.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/modals.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/modals.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/form.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/form.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/noty.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/noty.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/noty.jade": {
+	"\/views\/demo\/css\/grid.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/noty.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/noty.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/grid.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/grid.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/one_time_action.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/one_time_action.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/one_time_action.jade": {
+	"\/views\/demo\/css\/helpers.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/one_time_action.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/one_time_action.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/helpers.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/helpers.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/progress_bar.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/progress_bar.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/progress_bar.jade": {
+	"\/views\/demo\/css\/icons.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/progress_bar.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/progress_bar.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/icons.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/icons.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/separators.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/separators.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/separators.jade": {
+	"\/views\/demo\/css\/sizes.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/separators.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/separators.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/sizes.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/sizes.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/sizes.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/sizes.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/sizes.jade": {
+	"\/views\/demo\/css\/table.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/sizes.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/sizes.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/table.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/table.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/slider.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/slider.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/slider.jade": {
+	"\/views\/demo\/css\/typography.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/slider.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/slider.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/typography.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/typography.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/switcher.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/switcher.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/switcher.jade": {
+	"\/views\/demo\/javascript\/accordion.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/switcher.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/switcher.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/accordion.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/accordion.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/syntax.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/syntax.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/syntax.jade": {
+	"\/views\/demo\/javascript\/checkbox.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/syntax.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/syntax.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/checkbox.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/checkbox.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/table.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/table.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/table.jade": {
+	"\/views\/demo\/javascript\/dropdown.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/table.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/table.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/dropdown.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/dropdown.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/tabs.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tabs.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/tabs.jade": {
+	"\/views\/demo\/javascript\/expander.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tabs.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/tabs.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/expander.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/expander.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/tagbox.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tagbox.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/tagbox.jade": {
+	"\/views\/demo\/javascript\/loading.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tagbox.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/tagbox.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/loading.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/loading.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/timeago.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/timeago.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/timeago.jade": {
+	"\/views\/demo\/javascript\/menu.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/timeago.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/timeago.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/menu.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/menu.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/toggle_height.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/toggle_height.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/toggle_height.jade": {
+	"\/views\/demo\/javascript\/modal.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/toggle_height.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/toggle_height.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/modal.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/modal.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/noty.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/noty.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/noty.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/radio.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/radio.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/radio.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/select.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/select.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/select.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/sidebar.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/sidebar.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/sidebar.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/slider.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/slider.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/slider.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/spinner.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/spinner.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/spinner.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/switcher.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/switcher.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/switcher.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/syntax.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/syntax.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/syntax.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/tabs.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/tabs.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/tabs.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/tagbox.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/tagbox.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/tagbox.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/autogrow.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/autogrow.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/autogrow.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/btEach.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/btEach.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/btEach.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/formAjax.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/formAjax.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/formAjax.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/formSync.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/formSync.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/formSync.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/oneTimeAction.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/oneTimeAction.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/oneTimeAction.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/selectable.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/selectable.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/selectable.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/sortable.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/sortable.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/sortable.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/timeAgo.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/timeAgo.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/timeAgo.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/toggleHeight.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/toggleHeight.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/toggleHeight.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/touching.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/touching.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/touching.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -2204,187 +2332,187 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/bt_each.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/cookie.js",
 			"position": 4,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/cookie.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/formAjax.js",
 			"position": 5,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/form_ajax.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/formSync.js",
 			"position": 6,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/forms_sync.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/oneTimeAction.js",
 			"position": 7,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/one_time_action.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/selectable.js",
 			"position": 8,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/selectable.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/sortable.js",
 			"position": 9,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/sortable.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/tableHelper.js",
 			"position": 10,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/table_helper.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timer.js",
 			"position": 11,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/toggleHeight.js",
 			"position": 12,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timer.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/touching.js",
 			"position": 13,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/toggle_height.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/accordion.js",
 			"position": 14,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/touching.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/badge.js",
 			"position": 15,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/accordion.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/blur.js",
 			"position": 16,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/badge.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/checkbox.js",
 			"position": 17,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/blur.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/dropdown.js",
 			"position": 18,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/checkboxes.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/expander.js",
 			"position": 19,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/dropdowns.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/loading.js",
 			"position": 20,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/expander.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/menu.js",
 			"position": 21,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/loading.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/modal.js",
 			"position": 22,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/menu.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/noty.js",
 			"position": 23,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/modals.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/progressBar.js",
 			"position": 24,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/noty.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/radio.js",
 			"position": 25,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/progress_bar.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/select.js",
 			"position": 26,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/radios.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/sidebar.js",
 			"position": 27,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/selects.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/slider.js",
 			"position": 28,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/sidebar.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/spinner.js",
 			"position": 29,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/slider.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/switcher.js",
 			"position": 30,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/spinner.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/tabs.js",
 			"position": 31,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/switcher.js",
+			"linkedFileAbbreviatedPath": "\/js\/components\/tagbox.js",
 			"position": 32,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/tabs.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/BTeach.js",
 			"position": 33,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/components\/tagbox.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
 			"position": 34,
 			"type": 0
 			}
@@ -2969,6 +3097,14 @@
 			"flagValue": -1
 			}
 		},
+	"jsonAutoOutputPathEnabled": 0,
+	"jsonAutoOutputPathFilenamePattern": "*-min.json",
+	"jsonAutoOutputPathRelativePath": "",
+	"jsonAutoOutputPathReplace1": "",
+	"jsonAutoOutputPathReplace2": "",
+	"jsonAutoOutputPathStyle": 0,
+	"jsonOrderOutput": 0,
+	"jsonOutputStyle": 1,
 	"kitAutoOutputPathEnabled": 1,
 	"kitAutoOutputPathFilenamePattern": "*.html",
 	"kitAutoOutputPathRelativePath": "",
@@ -2996,9 +3132,18 @@
 	"markdownAutoOutputPathReplace1": "",
 	"markdownAutoOutputPathReplace2": "",
 	"markdownAutoOutputPathStyle": 0,
+	"markdownCriticStyle": 0,
 	"markdownEnableFootnotes": 0,
-	"markdownEnableSmartyPants": 1,
-	"markdownExpandTabs": 1,
+	"markdownEnableLabels": 1,
+	"markdownEnableSmartQuotes": 1,
+	"markdownEscapeLineBreaks": 0,
+	"markdownMaskEmailAddresses": 1,
+	"markdownOutputFormat": 0,
+	"markdownOutputStyle": 0,
+	"markdownParseMetadata": 1,
+	"markdownProcessHTML": 0,
+	"markdownRandomFootnoteNumbers": 0,
+	"markdownUseCompatibilityMode": 0,
 	"reloadFileURLs": 0,
 	"sassAutoOutputPathEnabled": 1,
 	"sassAutoOutputPathFilenamePattern": "*.css",
@@ -3054,6 +3199,10 @@
 	"uglifyDefinesString": "",
 	"uglifyFlags2": {
 		"ascii-only": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"bare-returns": {
 			"active": 0,
 			"flagValue": -1
 			},
@@ -3134,6 +3283,10 @@
 			"flagValue": -1
 			},
 		"keep_fargs": {
+			"active": 0,
+			"flagValue": -1
+			},
+		"keep_fnames": {
 			"active": 0,
 			"flagValue": -1
 			},

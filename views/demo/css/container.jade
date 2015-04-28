@@ -1,0 +1,67 @@
+//- css/container.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Simple
+
+    +container Simple
+
+    +divider Limited
+
+    +container.limited Limited
+
+    +divider Nested
+
+    +container
+        p Outside
+        +container.teal
+            p Inside
+            +container.pink
+                p Insider
+
+    +divider Advanced
+
+    +container
+        .header
+            .sub.left
+                .multiple
+                    .button.actionable.compact.mini
+                        .icon.icon-action-thumb-down
+                    .button.actionable.compact.mini
+                        .icon.icon-action-thumb-up
+            .label Header
+            .sub.right
+                .multiple
+                    .button.actionable.compact.mini
+                        .icon.icon-navigation-apps
+                    .button.actionable.compact.mini
+                        .icon.icon-navigation-menu
+                    .button.actionable.compact.mini
+                        .icon.icon-navigation-more-vert
+                    .button.actionable.compact.mini
+                        .icon.icon-navigation-refresh
+        .content Content
+        .footer Footer
+
+    +divider Vertical
+
+    .grid
+        .grid_cols.vertical
+            .grid_col
+                .container 3
+            .grid_col
+                .container 3
+            .grid_col
+                .container 3
+
+    +divider Vertical - Joined
+
+    .grid
+        .grid_cols.vertical.joined
+            .grid_col
+                .container 3
+            .grid_col
+                .container 3
+            .grid_col
+                .container 3

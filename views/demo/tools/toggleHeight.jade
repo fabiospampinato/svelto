@@ -1,0 +1,33 @@
+//- tools/toggleHeight.jade
+
+extends ../../layout.jade
+
+append content
++divider Paragraph
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .container
+                    #toggable(style="transition: height 0.5s ease 0s; overflow: hidden;")
+                        .container(class="secondary")
+                            p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue urna ac nunc posuere sodales. Sed in nisi libero. Cras laoreet vel nibh in egestas. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas erat libero, vehicula sed consequat et, eleifend id ligula. Aenean sed augue nibh. Aliquam vulputate lobortis molestie. Ut vel gravida elit. Nunc blandit risus vitae leo molestie rutrum. Morbi tortor velit, fringilla a aliquet sed, varius at tortor. Quisque id nulla eu metus sollicitudin facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut accumsan tincidunt mi vel hendrerit.
+                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue urna ac nunc posuere sodales. Sed in nisi libero. Cras laoreet vel nibh in egestas. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas erat libero, vehicula sed consequat et, eleifend id ligula. Aenean sed augue nibh. Aliquam vulputate lobortis molestie. Ut vel gravida elit. Nunc blandit risus vitae leo molestie rutrum. Morbi tortor velit, fringilla a aliquet sed, varius at tortor. Quisque id nulla eu metus sollicitudin facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut accumsan tincidunt mi vel hendrerit.
+
++divider Action
+    .grid
+        .grid_cols.limited
+            .grid_col
+                .multiple
+                    .button.actionable.outlined(onclick="javascript:toggle_height()") Toggle height
+                    .button.actionable.outlined(onclick="javascript:set_speed(0.5)") Set 0.5s
+                    .button.actionable.outlined(onclick="javascript:set_speed(1)") Set 1s
+                    .button.actionable.outlined(onclick="javascript:set_speed(3)") Set 3s
+
+append body
+    script(type="text/javascript").
+        function toggle_height () {
+            $('#toggable').toggleHeight ();
+        }
+        function set_speed ( speed ) {
+            $('#toggable').css ( 'transition', 'height ' + speed + 's ease 0s' );
+        }

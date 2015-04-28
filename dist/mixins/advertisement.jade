@@ -1,0 +1,8 @@
+//- advertisement.jade
+
+mixin advertisement(width, height)
+    .advertisement(style="width:" + ( width || 0 ) + "px; height:" + ( height || 0 ) + "px; line-height: " + ( height || 0 ) + "px")&attributes(attributes)
+        if block
+            block
+        else
+            = ( width || 0 ) + "x" + ( height || 0 )
