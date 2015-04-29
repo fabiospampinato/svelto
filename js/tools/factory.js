@@ -87,6 +87,8 @@
 
             this.defaults = $.fn[name].options;
 
+            this.uuid = _.uniqueId ();
+
             return this;
 
         };
@@ -177,17 +179,17 @@
 
                         temp = instance[options].apply ( instance, arguments.slice ( 1 ) );
 
-                        if ( return_val === undefined && !( temp instanceof Plugin ) ) return_val = temp;
+                        if ( return_val === undefined ) return_val = temp;
 
                     } else if ( typeof instance.call === 'function' ) {
 
-                        temp = instance.call.apply ( instance, arguments );
+                        temp = instance.call.apply ( instance, arguments ); //FIXME: I think we should escape the first value, since it should be the function name
 
-                        if ( return_val === undefined && !( temp instanceof Plugin ) ) return_val = temp;
+                        if ( return_val === undefined ) return_val = temp;
 
                         if ( typeof instance.options.onCall === 'function' ) {
 
-                            instance.options.onCall.apply ( instance, arguments );
+                            instance.options.onCall.apply ( instance, arguments ); //FIXME: I think we should escape the first value, since it should be the function name
 
                         }
 
@@ -203,9 +205,9 @@
 
         $.fn[name].options = options;
 
-        if ( typeof Plugin.ready === 'function' ) {
+        if ( typeof prototype.ready === 'function' ) {
 
-            $.ready ( Plugin.ready );
+            $.ready ( prototype.ready );
 
         }
 

@@ -139,8 +139,23 @@ append content
         .multiple
             +button.actionable.transparent Base
 
+    +divider Text
+
+    +container
+        p.text-primary [PRIMARY] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-secondary [SECONDARY] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-white [WHITE] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-gray [GRAY] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-black [BLACK] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-yellow [YELLOW] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-green [GREEN] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-blue [BLUE] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-orange [ORANGE] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-purple [PURPLE] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-red [RED] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-pink [PINK] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-teal [TEAL] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+        p.text-transparent [TRANSPARENT] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
+
 append body
-    script(type="text/javascript").
-        $(function () {
-            $.noty ( "", false, false, false, "<p>(H) Highlight <br/> (G) Gradient <br/> (T) Transparentized <br/> (O) Outlined</p>", "forever" );
-        });
+    +noty({ body: '<p>(H) Highlight <br/> (G) Gradient <br/> (T) Transparentized <br/> (O) Outlined</p>', ttl: 'forever' })

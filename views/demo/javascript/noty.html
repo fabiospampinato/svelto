@@ -1,21 +1,33 @@
-<!DOCTYPE html><html lang="en" xml:lang="en" dir="ltr"><head><title>Presto</title><meta charset="UTF-8"><meta name="robots" content="NOYDIR"><meta name="robots" content="NOODP"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="stylesheet" type="text/css" href="/dist/presto-min.css" media="all"><script type="text/javascript" src="/js/external/underbar.js"></script><script type="text/javascript" src="/js/external/lQuery.js"></script><script type="text/javascript" src="/dist/presto-min.js"></script></head><body><div id="navbar"><div class="content"><div id="menu_btn" class="navbar_btn actionable left"><div class="hamburger"><div class="layer_wrp"><div class="layer"></div></div></div></div><a id="logo" href="/" class="navbar_btn actionable left">Presto</a></div></div><div id="content"></div><script type="text/javascript">function noty_test_short () {
-    noty ( "Short noty" );
+<!DOCTYPE html><html lang="en" xml:lang="en" dir="ltr"><head><title>Presto</title><meta charset="UTF-8"><meta name="robots" content="NOYDIR"><meta name="robots" content="NOODP"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="stylesheet" type="text/css" href="/dist/presto-min.css" media="all"><script type="text/javascript" src="/js/external/underbar.js"></script><script type="text/javascript" src="/js/external/lQuery.js"></script><script type="text/javascript" src="/dist/presto-min.js"></script></head><body><div id="navbar"><div class="content"><div id="menu_btn" class="navbar_btn actionable left"><div class="hamburger"><div class="layer_wrp"><div class="layer"></div></div></div></div><a id="logo" href="/" class="navbar_btn actionable left">Presto</a></div></div><div id="content"><div class="divider_wrp"><div class="divider">Text</div></div><div class="container transparent no-padding no-border"><div class="multiple"><div onclick="noty_test_short()" class="button actionable outlined">Short</div><div onclick="noty_test_medium()" class="button actionable outlined">Medium</div><div onclick="noty_test_long()" class="button actionable outlined">Long</div></div></div><div class="divider_wrp"><div class="divider">Buttons</div></div><div class="container transparent no-padding no-border"><div class="multiple"><div onclick="noty_test_btns_one()" class="button actionable outlined">One</div><div onclick="noty_test_btns_two()" class="button actionable outlined">Two</div><div onclick="noty_test_btns_three()" class="button actionable outlined">Three</div></div></div><div class="divider_wrp"><div class="divider">Advanced</div></div><div class="container transparent no-padding no-border"><div class="multiple"><div onclick="noty_test_adv_one()" class="button actionable outlined">Title + Body</div><div onclick="noty_test_adv_two()" class="button actionable outlined">Title + Body + Image</div><div onclick="noty_test_adv_three()" class="button actionable outlined">Title + Body + Image + Buttons</div><div onclick="noty_test_adv_four()" class="button actionable outlined">Title + Custom body + Image + Buttons</div></div></div><div class="divider_wrp"><div class="divider">Colors</div></div><div class="container transparent no-padding no-border"><div class="multiple"><div onclick="noty_test_colored('primary')" class="button actionable primary">Primary</div><div onclick="noty_test_colored('secondary')" class="button actionable secondary">Secondary</div><div onclick="noty_test_colored('white')" class="button actionable white outlined">White</div><div onclick="noty_test_colored('gray')" class="button actionable gray">Gray</div><div onclick="noty_test_colored('black')" class="button actionable black">Black</div><div onclick="noty_test_colored('yellow')" class="button actionable yellow">Yellow</div><div onclick="noty_test_colored('green')" class="button actionable green">Green</div><div onclick="noty_test_colored('blue')" class="button actionable blue">Blue</div><div onclick="noty_test_colored('orange')" class="button actionable orange">Orange</div><div onclick="noty_test_colored('purple')" class="button actionable purple">Purple</div><div onclick="noty_test_colored('red')" class="button actionable red">Red</div><div onclick="noty_test_colored('pink')" class="button actionable pink">Pink</div><div onclick="noty_test_colored('teal')" class="button actionable teal">Teal</div></div></div></div><script type="text/javascript">function noty_test_short () {
+    $.noty ( "Short noty" );
 }
 function noty_test_medium () {
-    noty ( "A medium noty, maybe some useful infos here" );
+    $.noty ( "A medium noty, maybe some useful infos here" );
 }
 function noty_test_long () {
-    noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
+    $.noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
 }
 function noty_test_btns_one () {
-    noty ( "Noty with one button", "action", false, [{title:"Foo"}] );
+    $.noty ( { body: "Noty with one button", buttons: [{ text: "Foo" }] } );
 }
 function noty_test_btns_two () {
-    noty ( "Noty with two buttons", "action", false, [{title:"Foo"},{title:"Bar"}] );
+    $.noty ( { body: "Noty with two buttons", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
 }
 function noty_test_btns_three () {
-    noty ( "Noty with three buttons", "action", false, [{title:"Foo"},{title:"Bar"},{title:"Baz"}] );
+    $.noty ( { body: "Noty with three buttons", buttons: [{ text: "Foo" }, { text: "Bar" }, { text: "Baz" }] } );
 }
-function noty_test_colored ( style ) {
-    noty ( "Noty with custom color style", false, style );
+function noty_test_adv_one () {
+    $.noty ( { title: "Test title", body: "This is just an example body" } );
+}
+function noty_test_adv_two () {
+    $.noty ( { title: "Test title", body: "This is just an example body", img: "/images/sample.png" } );
+}
+function noty_test_adv_three () {
+    $.noty ( { title: "Test title", body: "This is just an example body", img: "/images/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+}
+function noty_test_adv_four () {
+    $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/images/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+}
+function noty_test_colored ( color ) {
+    $.noty ( { body: "Noty with custom color", color: color } );
 }</script></body></html>

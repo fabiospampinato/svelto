@@ -30,8 +30,7 @@
             'tabindex': 'tabIndex',
             'usemap': 'useMap'
         },
-        cssNumber = ['column-count', 'columns', 'font-weight', 'line-height','opacity', 'z-index', 'zoom'], //INFO: CSS properties that require a plain number
-        data = {};
+        cssNumber = ['column-count', 'columns', 'font-weight', 'line-height','opacity', 'z-index', 'zoom']; //INFO: CSS properties that require a plain number
 
     /* PRIVATE UTILITES */
 
@@ -166,17 +165,15 @@
 
     lQuery.data = function ( node, key, value ) {
 
-        if ( _.isUndefined ( data[node] ) ) data[node] = {};
+        if ( _.isUndefined ( node.lQuery_data ) ) node.lQuery_data = {};
 
-        if ( !_.isUndefined( value ) ) {
+        if ( !_.isUndefined ( value ) ) {
 
-            data[node][key] = value;
-
-            return this;
+            node.lQuery_data[key] = value;
 
         } else {
 
-            return data[node][key];
+            return node.lQuery_data[key];
 
         }
 

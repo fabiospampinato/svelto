@@ -32,6 +32,7 @@
                 this.setTimer ();
 
             }
+
             return this;
 
         },
@@ -42,7 +43,7 @@
 
             if ( isNaN ( time ) ) time = 0;
 
-            window.setTimeout ( function () {
+            setTimeout ( function () {
 
                 timer.action ();
 
@@ -56,8 +57,13 @@
 
             if ( !this.isActive ) {
 
+                console.log('playing...');
+                console.log(this);
+
                 if ( reset ) this.setTimer ();
-                else this.setTimer ( this.remaining );
+                else this.setTimer ( this.remaining_time );
+
+                console.log('resetted...');
 
                 this.isActive = true;
 
@@ -72,7 +78,7 @@
             if ( this.isActive ) {
 
                 this.isActive = false;
-                this.remaining -= new Date() - this.last;
+                this.remaining_time -= new Date() - this.last;
                 this.clearTimer ();
 
             }
@@ -84,7 +90,7 @@
         stop: function () {
 
             this.isActive = false;
-            this.remaining = this.intervalTime;
+            this.remaining_time = this.intervalTime;
             this.clearTimer ();
 
             return this;
@@ -112,7 +118,10 @@
 
         clearTimer: function () {
 
-            window.clearTimeout ( this.timeoutObject );
+            console.log("clearing timer");
+            console.log(this.timeoutObject);
+
+            clearTimeout ( this.timeoutObject );
 
         },
 
@@ -122,19 +131,29 @@
 
             if ( isNaN ( time ) ) time = this.intervalTime;
 
-            this.remaining = time;
-            this.last = new Date();
-            this.clearTimer();
+            this.remaining_time = time;
+            this.last = new Date ();
+            this.clearTimer ();
 
-            this.timeoutObject = window.setTimeout ( function () {
+            console.log('setting timer');
+            console.log(this.go);
 
-                timer.go ();
+            this.timeoutObject = setTimeout ( function () {
+
+                timer.go ()
 
             }, time );
+
+            console.log('timer setted');
+            console.log(this.timeoutObject);
 
         },
 
         go: function () {
+
+            console.log('go called');
+            console.log(this);
+            console.log(this.isActive);
 
             if ( this.isActive ) {
 
@@ -142,6 +161,16 @@
                 this.setTimer ();
 
             }
+
+        },
+
+        remaining: function ( value ) {
+
+            if ( _.isUndefined ( value ) ) return this.remaining_time;
+
+            this.remaining_time = value;
+
+            return this;
 
         }
 

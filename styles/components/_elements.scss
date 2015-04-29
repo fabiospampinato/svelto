@@ -99,10 +99,6 @@ kbd {
         height: auto;
     }
 
-    &.smooth {
-        border-radius: $border-radius-normal;
-    }
-
     & > .image-caption {
         @include black ( true, true );
         @include medium ();

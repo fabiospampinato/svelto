@@ -3,63 +3,81 @@
 extends ../../layout.jade
 
 append content
-+divider Text
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .multiple
-                    .button.actionable.outlined(onclick="javascript:noty_test_short()") Short
-                    .button.actionable.outlined(onclick="javascript:noty_test_medium()") Medium
-                    .button.actionable.outlined(onclick="javascript:noty_test_long()") Long
+    +divider Text
 
-+divider Buttons
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .multiple
-                    .button.actionable.outlined(onclick="javascript:noty_test_btns_one()") One
-                    .button.actionable.outlined(onclick="javascript:noty_test_btns_two()") Two
-                    .button.actionable.outlined(onclick="javascript:noty_test_btns_three()") Three
+    +container.transparent.no-padding.no-border
+        .multiple
+            .button.actionable.outlined(onclick="noty_test_short()") Short
+            .button.actionable.outlined(onclick="noty_test_medium()") Medium
+            .button.actionable.outlined(onclick="noty_test_long()") Long
 
-+divider Colors
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .multiple
-                    .button.actionable.primary.transparentize(onclick="javascript:noty_test_colored('primary transparentize')") Primary (T)
-                    .button.actionable.secondary.transparentize(onclick="javascript:noty_test_colored('secondary transparentize')") Secondary (T)
-                    .button.actionable.white.outlined.transparentize(onclick="javascript:noty_test_colored('white transparentize')") White (T)
-                    .button.actionable.gray.transparentize(onclick="javascript:noty_test_colored('gray transparentize')") Gray (T)
-                    .button.actionable.black.transparentize(onclick="javascript:noty_test_colored('black transparentize')") Black (T)
-                    .button.actionable.yellow.transparentize(onclick="javascript:noty_test_colored('yellow transparentize')") Yellow (T)
-                    .button.actionable.green.transparentize(onclick="javascript:noty_test_colored('green transparentize')") Green (T)
-                    .button.actionable.blue.transparentize(onclick="javascript:noty_test_colored('blue transparentize')") Blue (T)
-                    .button.actionable.orange.transparentize(onclick="javascript:noty_test_colored('orange transparentize')") Orange (T)
-                    .button.actionable.purple.transparentize(onclick="javascript:noty_test_colored('purple transparentize')") Purple (T)
-                    .button.actionable.red.transparentize(onclick="javascript:noty_test_colored('red transparentize')") Red (T)
-                    .button.actionable.pink.transparentize(onclick="javascript:noty_test_colored('pink transparentize')") Pink (T)
-                    .button.actionable.teal.transparentize(onclick="javascript:noty_test_colored('teal transparentize')") Teal (T)
+    +divider Buttons
+
+    +container.transparent.no-padding.no-border
+        .multiple
+            .button.actionable.outlined(onclick="noty_test_btns_one()") One
+            .button.actionable.outlined(onclick="noty_test_btns_two()") Two
+            .button.actionable.outlined(onclick="noty_test_btns_three()") Three
+
+    +divider Advanced
+
+    +container.transparent.no-padding.no-border
+        .multiple
+            .button.actionable.outlined(onclick="noty_test_adv_one()") Title + Body
+            .button.actionable.outlined(onclick="noty_test_adv_two()") Title + Body + Image
+            .button.actionable.outlined(onclick="noty_test_adv_three()") Title + Body + Image + Buttons
+            .button.actionable.outlined(onclick="noty_test_adv_four()") Title + Custom body + Image + Buttons
+
+    +divider Colors
+
+    +container.transparent.no-padding.no-border
+        .multiple
+            .button.actionable.primary(onclick="noty_test_colored('primary')") Primary
+            .button.actionable.secondary(onclick="noty_test_colored('secondary')") Secondary
+            .button.actionable.white.outlined(onclick="noty_test_colored('white')") White
+            .button.actionable.gray(onclick="noty_test_colored('gray')") Gray
+            .button.actionable.black(onclick="noty_test_colored('black')") Black
+            .button.actionable.yellow(onclick="noty_test_colored('yellow')") Yellow
+            .button.actionable.green(onclick="noty_test_colored('green')") Green
+            .button.actionable.blue(onclick="noty_test_colored('blue')") Blue
+            .button.actionable.orange(onclick="noty_test_colored('orange')") Orange
+            .button.actionable.purple(onclick="noty_test_colored('purple')") Purple
+            .button.actionable.red(onclick="noty_test_colored('red')") Red
+            .button.actionable.pink(onclick="noty_test_colored('pink')") Pink
+            .button.actionable.teal(onclick="noty_test_colored('teal')") Teal
 
 append body
     script(type="text/javascript").
         function noty_test_short () {
-            noty ( "Short noty" );
+            $.noty ( "Short noty" );
         }
         function noty_test_medium () {
-            noty ( "A medium noty, maybe some useful infos here" );
+            $.noty ( "A medium noty, maybe some useful infos here" );
         }
         function noty_test_long () {
-            noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
+            $.noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
         }
         function noty_test_btns_one () {
-            noty ( "Noty with one button", "action", false, [{title:"Foo"}] );
+            $.noty ( { body: "Noty with one button", buttons: [{ text: "Foo" }] } );
         }
         function noty_test_btns_two () {
-            noty ( "Noty with two buttons", "action", false, [{title:"Foo"},{title:"Bar"}] );
+            $.noty ( { body: "Noty with two buttons", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
         }
         function noty_test_btns_three () {
-            noty ( "Noty with three buttons", "action", false, [{title:"Foo"},{title:"Bar"},{title:"Baz"}] );
+            $.noty ( { body: "Noty with three buttons", buttons: [{ text: "Foo" }, { text: "Bar" }, { text: "Baz" }] } );
         }
-        function noty_test_colored ( style ) {
-            noty ( "Noty with custom color style", false, style );
+        function noty_test_adv_one () {
+            $.noty ( { title: "Test title", body: "This is just an example body" } );
+        }
+        function noty_test_adv_two () {
+            $.noty ( { title: "Test title", body: "This is just an example body", img: "/images/sample.png" } );
+        }
+        function noty_test_adv_three () {
+            $.noty ( { title: "Test title", body: "This is just an example body", img: "/images/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+        }
+        function noty_test_adv_four () {
+            $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/images/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+        }
+        function noty_test_colored ( color ) {
+            $.noty ( { body: "Noty with custom color", color: color } );
         }

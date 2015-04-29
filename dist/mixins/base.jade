@@ -24,6 +24,10 @@ mixin css(url, media)
 mixin js(url)
     script(type="text/javascript", src!=url)&attributes(attributes)
 
+mixin script
+    script(type="text/javascript")&attributes(attributes)
+        block
+
 mixin body
     body&attributes(attributes)
         block

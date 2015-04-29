@@ -3,118 +3,126 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'table_helper', function () {
+    $.factory ( 'tableHelper', {
 
-        var $table = this.$node,
-            $thead = $table.find ( 'thead' ),
-            $tbody = $table.find ( 'tbody' ),
-            $headers = $thead.find ( 'th' ),
-            $empty_row = $tbody.find ( 'tr.empty' ),
-            columns_nr = $headers.length;
+        /* SPECIAL */
 
-        var helper = {
+        init: function () {
 
-            add: function () {
+            this.$thead = this.$node.find ( 'thead' ),
+            this.$tfoot = this.$node.find ( 'tfoot' ),
+            this.$tbody = this.$node.find ( 'tbody' ),
+            this.$headers = this.$thead.find ( 'th' ),
+            this.$empty_row = this.$tbody.find ( 'tr.empty' ),
+            this.columns_nr = this.$headers.length;
 
-                var datas = Array.prototype.slice.call ( arguments, 1 );
+            this._check_empty ();
 
-                for ( var i = 0; i < datas.length; i++ ) {
+        },
 
-                    var $fillables = $tbody.find ( 'td.fillable' );
+        ready: function () {
 
-                    if ( $fillables.length > 0 ) {
+            $('table').tableHelper ();
 
-                        $fillables.first ().html ( datas[i] || '' ).removeClass ( 'fillable' );
+        },
 
-                    } else {
+        /* PRIVATE */
 
-                        if ( arguments[0] && $( '#rid_' + arguments[0] ).size () === 1 ) break;
+        _check_empty: function () {
 
-                        var row_html = '<tr ' + ( arguments[0] ? 'id="rid_' + arguments[0] + '"' : '' ) + '>';
+            this.$empty_row.toggleClass ( 'hidden', this.$tbody.find ( 'tr:not(.empty)' ).length > 0 );
 
-                        row_html += '<td>' + ( datas[i] || '' ) + '</td>';
+        },
 
-                        for ( var fi = 1; fi < columns_nr; fi++ ) {
+        /* PUBLIC */
 
-                            row_html += '<td class="fillable"></td>';
+        add: function () {
 
-                        }
+            var datas = Array.prototype.slice.call ( arguments, 1 );
 
-                        row_html += '</tr>';
+            for ( var i = 0; i < datas.length; i++ ) {
 
-                        $tbody.append ( row_html );
+                var $fillables = this.$tbody.find ( 'td.fillable' );
 
-                    }
+                if ( $fillables.length > 0 ) {
 
-                }
+                    $fillables.first ().html ( datas[i] || '' ).removeClass ( 'fillable' );
 
-                this.check_empty ();
+                } else {
 
-                $table.trigger ( 'change' );
+                    if ( arguments[0] && $( '#rid_' + this.uuid + '_' + arguments[0] ).length === 1 ) break;
 
-                return this;
+                    var row_html = '<tr ' + ( arguments[0] ? 'id="rid_' + this.uuid + '_' + arguments[0] + '"' : '' ) + '>';
 
-            },
+                    row_html += '<td>' + ( datas[i] || '' ) + '</td>';
 
-            update: function ( id ) {
+                    for ( var fi = 1; fi < this.columns_nr; fi++ ) {
 
-                var datas = Array.prototype.slice.call ( arguments, 1 ),
-                    $row = $( '#rid_' + id ),
-                    $tds = $row.find ( 'td' );
-
-                for ( var i = 0; i < datas.length; i++ ) {
-
-                    if ( typeof datas[i] !== 'undefined' && datas[i] !== false ) {
-
-                        $tds.eq ( i ).html ( datas[i] );
+                        row_html += '<td class="fillable"></td>';
 
                     }
 
+                    row_html += '</tr>';
+
+                    this.$tbody.append ( row_html );
+
                 }
-
-                $table.trigger ( 'change' );
-
-                return this;
-
-            },
-
-            remove: function ( id ) {
-
-                $( '#rid_' + id ).remove ();
-
-                this.check_empty ();
-
-                $table.trigger ( 'change' );
-
-                return this;
-
-            },
-
-            clear: function () {
-
-                $tbody.find ( 'tr:not(.empty)' ).remove ();
-
-                this.check_empty ();
-
-                $table.trigger ( 'change' );
-
-                return this;
-
-            },
-
-            check_empty: function () {
-
-                $empty_row.toggleClass ( 'hidden', $tbody.find ( 'tr:not(.empty)' ).size () > 0 );
-
-                return this;
 
             }
 
-        };
+            this._check_empty ();
 
-        helper.check_empty ();
+            this.$node.trigger ( 'change' );
 
-        return helper;
+            return this;
+
+        },
+
+        update: function ( id ) {
+
+            var datas = Array.prototype.slice.call ( arguments, 1 ),
+                $row = $( '#rid_' + this.uuid + '_' + id ),
+                $tds = $row.find ( 'td' );
+
+            for ( var i = 0; i < datas.length; i++ ) {
+
+                if ( !_.isUndefined ( datas[i] ) && datas[i] !== false ) {
+
+                    $tds.eq ( i ).html ( datas[i] );
+
+                }
+
+            }
+
+            this.$node.trigger ( 'change' );
+
+            return this;
+
+        },
+
+        remove: function ( id ) {
+
+            $( '#rid_' + this.uuid + '_' + id ).remove ();
+
+            this._check_empty ();
+
+            this.$node.trigger ( 'change' );
+
+            return this;
+
+        },
+
+        clear: function () {
+
+            this.$tbody.find ( 'tr:not(.empty)' ).remove ();
+
+            this._check_empty ();
+
+            this.$node.trigger ( 'change' );
+
+            return this;
+
+        }
 
     });
 

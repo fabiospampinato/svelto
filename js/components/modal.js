@@ -20,7 +20,7 @@
 
         ready: function () {
 
-            $('.modal_trigger').modals ();
+            $('.modal_trigger').modal ();
 
         },
 

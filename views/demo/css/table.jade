@@ -3,38 +3,182 @@
 extends ../../layout.jade
 
 append content
-+divider Table
-    .grid
-        .grid_cols.fluid.limited
-            .grid_col
-                .container
-                    table.sortable.selectable
-                        thead
-                            tr
-                                th(data-sort="int") Int
-                                th(data-sort="string") String
-                                th Date
-                                th Options
-                        tfoot
+    +divider Default
 
-                        tbody
-                            tr.empty
-                                td(colspan="100%") Empty row
-                            - var nr = 0;
-                            while ( nr < 100 )
-                                tr
-                                    td= nr++
-                                    td Foo
-                                    td 16/11/1993
-                                    td
-                                        .multiple
-                                            a.button.actionable.outlined.tiny(href="#") Btn 1
-                                            a.button.actionable.outlined.tiny(href="#") Btn 2
-                                tr
-                                    td= nr++
-                                    td Bar
-                                    td 16 Nov 1993
-                                    td
-                                        .multiple
-                                            a.button.actionable.outlined.tiny(href="#") Btn 1
-                                            a.button.actionable.outlined.tiny(href="#") Btn 2
+    +container
+        table
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 5 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+
+    +divider Empty
+
+    +container
+        table
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+
+    +divider Bordered
+
+    +container
+        table.bordered
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 5 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+
+    +divider Striped
+
+    +container
+        table.striped
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 5 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+
+    +divider Hoverable
+
+    +container
+        table.hoverable
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 5 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+
+    +divider Bordered - Striped - Hoverable
+
+    +container
+        table.bordered.striped.hoverable
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 5 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2

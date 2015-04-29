@@ -53,6 +53,10 @@
     @include primary ( false, false, false, '!important' );
 }
 
+.text-primary {
+    color: $color-primary;
+}
+
 @mixin secondary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-secondary-bg #{$important};
@@ -103,6 +107,10 @@
 
 .secondary {
     @include secondary ( false, false, false, '!important' );
+}
+
+.text-secondary {
+    color: $color-secondary;
 }
 
 /* GENERAL */
@@ -159,6 +167,10 @@
     @include white ( false, false, false, '!important' );
 }
 
+.text-white {
+    color: $color-white;
+}
+
 @mixin gray ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-gray-bg #{$important};
@@ -210,6 +222,11 @@
 .gray {
     @include gray ( false, false, false, '!important' );
 }
+
+.text-gray {
+    color: $color-gray;
+}
+
 
 @mixin black ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
@@ -263,6 +280,11 @@
     @include black ( false, false, false, '!important' );
 }
 
+.text-black {
+    color: $color-black;
+}
+
+
 @mixin yellow ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-yellow-bg #{$important};
@@ -313,6 +335,10 @@
 
 .yellow {
     @include yellow ( false, false, false, '!important' );
+}
+
+.text-yellow {
+    color: $color-yellow;
 }
 
 @mixin green ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
@@ -367,6 +393,10 @@
     @include green ( false, false, false, '!important' );
 }
 
+.text-green {
+    color: $color-green;
+}
+
 @mixin blue ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-blue-bg #{$important};
@@ -417,6 +447,10 @@
 
 .blue {
     @include blue ( false, false, false, '!important' );
+}
+
+.text-blue {
+    color: $color-blue;
 }
 
 @mixin orange ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
@@ -471,6 +505,10 @@
     @include orange ( false, false, false, '!important' );
 }
 
+.text-orange {
+    color: $color-orange;
+}
+
 @mixin purple ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-purple-bg #{$important};
@@ -521,6 +559,10 @@
 
 .purple {
     @include purple ( false, false, false, '!important' );
+}
+
+.text-purple {
+    color: $color-purple;
 }
 
 @mixin red ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
@@ -575,6 +617,10 @@
     @include red ( false, false, false, '!important' );
 }
 
+.text-red {
+    color: $color-red;
+}
+
 @mixin pink ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-pink-bg #{$important};
@@ -625,6 +671,10 @@
 
 .pink {
     @include pink ( false, false, false, '!important' );
+}
+
+.text-pink {
+    color: $color-pink;
 }
 
 @mixin teal ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
@@ -679,6 +729,10 @@
     @include teal ( false, false, false, '!important' );
 }
 
+.text-teal {
+    color: $color-teal;
+}
+
 /* TRANSPARENT */
 
 @mixin transparent ( $important: '' ) {
@@ -700,6 +754,10 @@
 
 .transparent {
     @include transparent ( '!important' );
+}
+
+.text-transparent {
+    color: $color-transparent;
 }
 
 @mixin transparent-initial ( $important: '' ) {

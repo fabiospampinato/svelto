@@ -38,7 +38,7 @@
 
         ready: function () {
 
-            $('.dropdown_trigger').dropdowns ();
+            $('.dropdown_trigger').dropdown ();
 
         },
 

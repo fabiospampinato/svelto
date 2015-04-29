@@ -74,7 +74,7 @@
 
         ready: function () {
 
-            $('form[data-sync-group]').forms_sync ();
+            $('form[data-sync-group]').formSync ();
 
         }
 

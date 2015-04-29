@@ -1,0 +1,4 @@
+//- noty.jade
+
+mixin noty(options)
+    +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });

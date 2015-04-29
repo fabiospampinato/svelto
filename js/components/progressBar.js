@@ -33,7 +33,7 @@
 
         ready: function () {
 
-            $('.progress_bar').progress_bar ();
+            $('.progress_bar').progressBar ();
 
         }
 

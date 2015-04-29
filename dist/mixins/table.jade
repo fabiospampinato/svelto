@@ -1,0 +1,9 @@
+//- table.jade
+
+mixin table-tr-empty
+    tr.empty
+        td(colspan="100%")
+            if block
+                block
+            else
+                = "Nothing to show"

@@ -43,9 +43,8 @@
         @include multi-shadow ( $shadow-depth-3, $noty-shadow-inset );
         border-width: 1px;
         border-style: solid;
-        cursor: pointer;
         box-sizing: border-box;
-        display: inline-block;
+        display: table;
         text-align: center;
         pointer-events: auto;
         opacity: 0;
@@ -53,12 +52,41 @@
         padding: 0;
         transition: opacity 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s, margin-bottom 0.2s ease 0s;
 
-        &.has_buttons {
-            cursor: default;
+        &:not(.action):not(.forever) {
+            cursor: pointer;
         }
 
-        .custom_content {
-            margin-top: $layout-spacing;
+        .noty_img, .noty_content {
+            display: table-cell;
+            vertical-align: middle;
+        }
+
+        .noty_img {
+
+            padding-right: $layout-spacing;
+            font-size: 0;
+            transition: width 0.2 ease 0s;
+
+            img {
+                height: auto;
+                width: auto;
+                transition: max-width 0.2 ease 0s, max-height 0.2 ease 0s;
+            }
+
+        }
+
+        .noty_title {
+            @include large ();
+        }
+
+        .noty_body > *:last-child {
+
+            margin-bottom: 0 !important;
+
+            &.multiple {
+                margin-bottom: -$layout-spacing !important;
+            }
+
         }
 
         .multiple {
@@ -74,27 +102,47 @@
 
         }
 
-        .msg:empty + .custom_content {
-            margin-top: 0;
-        }
-
-        & > *:last-child, .custom_content > *:last-child {
-            margin-bottom: 0;
-        }
-
     }
 
-    &:not(.active) .noty .button {
-        height: 0;
-        font-size: 0;
-        padding: 0;
+    &:not(.active) .noty {
+
+        .noty_img {
+
+            width: $noty-img-size;
+
+            img {
+                max-height: 0;
+                max-width: 0;
+            }
+
+        }
+
+        .button {
+            height: 0;
+            font-size: 0;
+            padding: 0;
+        }
+
     }
 
     &.active .noty {
+
         opacity: 1;
         font-size: $noty-text-size;
         padding: $layout-spacing;
         margin-bottom: $layout-spacing;
+
+        .noty_img {
+
+            width: $noty-img-size;
+
+            img {
+                max-height: $noty-img-size;
+                max-width: $noty-img-size;
+            }
+
+        }
+
     }
 
 }

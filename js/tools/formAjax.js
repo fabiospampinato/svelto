@@ -101,7 +101,7 @@
 
         ready: function () {
 
-            $('form.ajax').form_ajax ();
+            $('form.ajax').formAjax ();
 
         }
 

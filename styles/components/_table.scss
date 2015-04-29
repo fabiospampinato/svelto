@@ -14,42 +14,6 @@ table {
 
                 height: $table-header-block-height;
 
-                &[data-sort] {
-
-                    position: relative;
-                    padding-right: $table-th-sortable-padding;
-                    padding-left: $table-th-sortable-padding;
-                    cursor: pointer;
-
-                    &:before, &:after {
-                        font-size: $table-sortable-icon-font-size;
-                        line-height: $table-sortable-icon-font-size;
-                        position: absolute;
-                        right: 0.5em;
-                        text-align: center;
-                        opacity: 0;
-                    }
-
-                    &:before {
-                        @extend .icon-navigation-expand-less:before;
-                        top: 1.1em;
-                    }
-
-                    &:after {
-                        @extend .icon-navigation-expand-more:before;
-                        bottom: 1.1em;
-                    }
-
-                    &:hover:before, &:hover:after, &.desc:after, &.asc:before {
-                        opacity: 0.35;
-                    }
-
-                    &.desc:before, &.asc:after {
-                        opacity: 1;
-                    }
-
-                }
-
             }
 
         }
@@ -59,68 +23,6 @@ table {
     tbody {
 
         tr {
-
-             &:first-child.empty ~ tr {
-
-                &:nth-child(even) {
-
-                    background-color: $table-row-even-color;
-
-                    &:hover {
-                        background-color: $table-row-even-color-hover;
-                    }
-
-                }
-
-                &:nth-child(odd) {
-
-                    background-color: $table-row-odd-color;
-
-                    &:hover {
-                        background-color: $table-row-odd-color-hover;
-                    }
-
-                }
-
-            }
-
-            &:first-child:not(.empty) {
-
-                background-color: $table-row-even-color;
-
-                &:hover {
-                    background-color: $table-row-even-color-hover;
-                }
-
-                & ~ tr {
-
-                    &:nth-child(odd) {
-
-                        background-color: $table-row-even-color;
-
-                        &:hover {
-                            background-color: $table-row-even-color-hover;
-                        }
-
-                    }
-
-                    &:nth-child(even) {
-
-                        background-color: $table-row-odd-color;
-
-                        &:hover {
-                            background-color: $table-row-odd-color-hover;
-                        }
-
-                    }
-
-                }
-
-            }
-
-            &.selected {
-                background-color: lighten($color-primary-bg, 50) !important;
-            }
 
             td {
 
@@ -140,8 +42,130 @@ table {
 
     }
 
-    &.selectable tbody tr:not(.empty) {
+    &.bordered tr {
+        border-bottom: 1px solid rgba(0,0,0,.05);
+    }
+
+    &.striped tbody tr {
+
+        &:first-child.empty ~ tr {
+
+            &:nth-child(even) {
+                background-color: $table-row-even-color;
+            }
+
+            &:nth-child(odd) {
+                background-color: $table-row-odd-color;
+            }
+
+        }
+
+        &:first-child:not(.empty) {
+
+            background-color: $table-row-even-color;
+
+            & ~ tr {
+
+                &:nth-child(odd) {
+                    background-color: $table-row-even-color;
+                }
+
+                &:nth-child(even) {
+                    background-color: $table-row-odd-color;
+                }
+
+            }
+
+        }
+
+    }
+
+    &.hoverable tbody tr:not(.empty):hover {
+        background-color: $table-row-even-color-hover;
+    }
+
+    &.striped.hoverable tbody tr {
+
+        &:first-child.empty ~ tr {
+
+            &:nth-child(even):hover {
+                background-color: $table-row-even-color-hover;
+            }
+
+            &:nth-child(odd):hover {
+                background-color: $table-row-odd-color-hover;
+            }
+
+        }
+
+        &:first-child:not(.empty) {
+
+            &:hover {
+                background-color: $table-row-even-color-hover;
+            }
+
+            & ~ tr {
+
+                &:nth-child(odd):hover {
+                    background-color: $table-row-even-color-hover;
+                }
+
+                &:nth-child(even):hover {
+                    background-color: $table-row-odd-color-hover;
+                }
+
+            }
+
+        }
+
+    }
+
+    &.sortable thead tr th[data-sort] {
+
+        position: relative;
+        padding-right: $table-th-sortable-padding;
+        padding-left: $table-th-sortable-padding;
         cursor: pointer;
+
+        &:before, &:after {
+            font-size: $table-sortable-icon-font-size;
+            line-height: $table-sortable-icon-font-size;
+            position: absolute;
+            right: 0.5em;
+            text-align: center;
+            opacity: 0;
+        }
+
+        &:before {
+            @extend .icon-navigation-expand-less:before;
+            top: 1.1em;
+        }
+
+        &:after {
+            @extend .icon-navigation-expand-more:before;
+            bottom: 1.1em;
+        }
+
+        &:hover:before, &:hover:after, &.desc:after, &.asc:before {
+            opacity: 0.35;
+        }
+
+        &.desc:before, &.asc:after {
+            opacity: 1;
+        }
+
+    }
+
+    &.selectable tbody tr {
+
+        &:not(.empty) {
+            cursor: pointer;
+        }
+
+        &.selected {
+            background-color: lighten($color-primary-bg, 50) !important;
+        }
+
     }
 
 }

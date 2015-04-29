@@ -1,14 +1,30 @@
 
-/* COMMON CLASSES */
-
-.rounded {
-    border-radius: 10000px 10000px !important;
-}
+/* BLUR */
 
 .blur {
     filter: blur(3px);
     filter: url('/images/blur.svg');
 }
+
+/* BORDER */
+
+.no-border {
+    border-width: 0 !important;
+}
+
+.rounded {
+    border-radius: 10000px 10000px !important;
+}
+
+.smooth {
+    border-radius: $border-radius-normal;
+}
+
+.sharp {
+    border-radius: 0px;
+}
+
+/* DISPLAY */
 
 .show {
     display: block !important;
@@ -18,6 +34,8 @@
     display: none !important;
 }
 
+/* VISIBILITY */
+
 .visible {
     visibility: visible;
 }
@@ -26,11 +44,7 @@
     visibility: hidden;
 }
 
-.centered {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* FLOAT */
 
 .left {
     float: left;
@@ -38,6 +52,14 @@
 
 .right {
     float: right;
+}
+
+/* TEXT ALIGNMENT */
+
+.centered {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .text-left {
@@ -52,9 +74,21 @@
     text-align: right;
 }
 
-.no-border {
-    border-width: 0 !important;
+/* TEXT TRANSFORMATION */
+
+.text-lowercase {
+    text-transform: lowercase;
 }
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+.text-capitalize {
+    text-transform: capitalize;
+}
+
+/* PADDING */
 
 .no-padding {
     padding: 0 !important;
@@ -76,6 +110,8 @@
     padding-left: 0 !important;
 }
 
+/* MARGIN */
+
 .no-margin {
     margin: 0 !important;
 }
@@ -96,6 +132,8 @@
     margin-left: 0 !important;
 }
 
+/* FLIP */
+
 .flipX {
     transform: rotateY(180deg);
 }
@@ -107,6 +145,8 @@
 .flip {
     transform: rotateY(180deg) rotateX(180deg);
 }
+
+/* ROTATE */
 
 .rotate-left {
     transform: rotate(-90deg);

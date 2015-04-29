@@ -1,0 +1,4 @@
+//- notification.jade
+
+mixin notification(options)
+    +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });

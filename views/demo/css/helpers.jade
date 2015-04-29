@@ -1,0 +1,72 @@
+//- css/helpers.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Blur
+
+    +container
+        +square-sample.blur
+
+    +divider Border
+
+    +container
+        .multiple
+            +square-sample.no-border
+            +square-sample.rounded
+            +square-sample.smooth
+            +square-sample.sharp
+
+    +divider Display
+
+    +container
+        .multiple
+            +square-sample.show
+            +square-sample.hidden
+
+    +divider Visibility
+
+    +container
+        .multiple
+            +square-sample.visible
+            +square-sample.invisible
+
+    +divider Float
+
+    +container
+        .multiple
+            +square-sample.left
+            +square-sample.right
+
+    +divider Flip
+
+    +container
+        .multiple
+            +square-sample.flipX
+            +square-sample.flipY
+            +square-sample.flip
+
+    +divider Rotate
+
+    +container
+        .multiple
+            +square-sample.rotate-left
+            +square-sample.rotate-right
+            +square-sample.rotating
+
+    +divider Text alignment
+
+    +container
+        .multiple
+            +square-sample.centered
+            +square-sample.text-left
+            +square-sample.text-center
+            +square-sample.text-right
+
+    +divider Text transform
+
+    +container
+        .multiple
+            +square-sample.text-lowercase
+            +square-sample.text-uppercase
+            +square-sample.text-capitalize

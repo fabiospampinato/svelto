@@ -1,8 +1,4 @@
 
-/* TOOLS */
-
-@import 'tools/mixins';
-
 /* FOUNDAMENTAL */
 
 @import 'settings/colors';
@@ -16,6 +12,10 @@
 @import 'settings/layout';
 @import 'settings/typography';
 @import 'settings/elements';
+
+/* TOOLS */
+
+@import 'tools/mixins';
 
 /* SETTINGS */
 
@@ -78,7 +78,9 @@
 @import 'components/noty';
 @import 'components/progressBar';
 @import 'components/select';
+@import 'components/shapes';
 @import 'components/divider';
+@import 'components/shadows';
 @import 'components/slider';
 @import 'components/spinner';
 @import 'components/switcher';

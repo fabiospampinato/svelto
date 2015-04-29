@@ -142,7 +142,7 @@
 
 /* SHAPES */
 
-@mixin triangle ( $size, $color, $direction ) {
+@mixin triangle ( $size: 1em, $color: $color-gray, $direction: up ) {
     height: 0;
     width: 0;
     $width: nth($size, 1);
@@ -208,20 +208,17 @@
     }
 }
 
-@mixin circle ( $size, $color: inherit ) {
+@mixin square ( $size: 1em, $color: $color-gray ) {
+    width: $size;
+    height: $size;
+    background-color: $color;
+}
+
+@mixin circle ( $size: 1em, $color: $color-gray ) {
+    width: $size;
+    height: $size;
+    background-color: $color;
     border-radius: 50%;
-    display: inline-block;
-    @if $color == inherit {
-        border-width: $size / 2;
-        border-style: solid;
-        height: 0;
-        width: 0;
-    }
-    @else {
-        background-color: $color;
-        height: $size;
-        width: $size;
-    }
 }
 
 /* TOOLTIPS */
