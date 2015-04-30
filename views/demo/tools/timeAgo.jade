@@ -4,7 +4,8 @@ extends ../../layout.jade
 
 append content
     +divider Timeago
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")
+
+    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")
+    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 90 )}")
+    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 120 )}")
+    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 3600 )}")

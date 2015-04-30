@@ -441,7 +441,7 @@
 
                 var data_value = this.attr ( 'data-' + name.toLowerCase () );
 
-                return data_value ? JSON.parse ( return_value ) : undefined;
+                return data_value ? JSON.parse ( data_value ) : undefined;
 
             }
 

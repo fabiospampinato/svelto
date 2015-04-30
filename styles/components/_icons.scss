@@ -4,17 +4,18 @@
 /* GENERAL */
 
 @font-face {
-    font-family: 'Material-Design-Icons';
-    src: url('/fonts/Material-Design-Icons.eot')format('embedded-opentype'),
-         url('/fonts/Material-Design-Icons.woff')format('woff'),
-         url('/fonts/Material-Design-Icons.ttf')format('truetype'),
-         url('/fonts/Material-Design-Icons.svg')format('svg');
+    font-family: "Material-Design-Icons";
+    src: url("/fonts/material-design-icons/Material-Design-Icons.eot")format("embedded-opentype"),
+         url("/fonts/material-design-icons/Material-Design-Icons.woff2")format("woff2"),
+         url("/fonts/material-design-icons/Material-Design-Icons.woff")format("woff"),
+         url("/fonts/material-design-icons/Material-Design-Icons.ttf")format("truetype"),
+         url("/fonts/material-design-icons/Material-Design-Icons.svg")format("svg");
     font-weight: normal;
     font-style: normal;
 }
 
 %icon {
-    font-family: 'Material-Design-Icons';
+    font-family: "Material-Design-Icons";
     speak: none;
     font-style: normal;
     font-weight: normal;

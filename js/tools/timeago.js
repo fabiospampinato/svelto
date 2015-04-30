@@ -6,7 +6,7 @@
 
     /* PLUGIN */
 
-    $.factory ( 'timeago', {
+    $.factory ( 'timeAgo', {
 
         onUpdate: $.noop
 
@@ -24,7 +24,7 @@
 
         ready: function () {
 
-            $('[data-timestamp]').timeago ();
+            $('[data-timestamp]').timeAgo ();
 
         },
 
@@ -32,15 +32,17 @@
 
         _update_loop: function ( wait ) {
 
+            var instance = this;
+
             setTimeout ( function () {
 
-                var timeago = get_time_ago ( this.timestamp );
+                var timeago = _.timeAgo ( instance.timestamp );
 
-                this.$node.html ( timeago.str );
+                instance.$node.html ( timeago.str );
 
-                this.hook ( 'onUpdate' );
+                instance.hook ( 'onUpdate' );
 
-                this._update_loop ( timeago.next );
+                instance._update_loop ( timeago.next );
 
             }, wait * 1000 );
 
@@ -50,7 +52,7 @@
 
         update: function () {
 
-            var timeago = get_time_ago ( this.timestamp );
+            var timeago = _.timeAgo ( this.timestamp );
 
             this.$node.html ( timeago.str );
 

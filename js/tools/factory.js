@@ -67,7 +67,7 @@
 
                 if ( typeof this.options[name] === 'function' ) {
 
-                    this.options[name].apply ( this, arguments.slice ( 1 ) );
+                    this.options[name].apply ( this, Array.prototype.slice.call ( arguments, 1 ) );
 
                 }
 
@@ -177,7 +177,7 @@
 
                         }
 
-                        temp = instance[options].apply ( instance, arguments.slice ( 1 ) );
+                        temp = instance[options].apply ( instance, Array.prototype.slice.call ( arguments, 1 ) );
 
                         if ( return_val === undefined ) return_val = temp;
 
