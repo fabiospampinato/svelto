@@ -3,23 +3,20 @@
 extends ../../layout.jade
 
 append content
-+divider Paragraph
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .container
-                    p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue urna ac nunc posuere sodales. Sed in nisi libero. Cras laoreet vel nibh in egestas. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas erat libero, vehicula sed consequat et, eleifend id ligula. Aenean sed augue nibh. Aliquam vulputate lobortis molestie. Ut vel gravida elit. Nunc blandit risus vitae leo molestie rutrum. Morbi tortor velit, fringilla a aliquet sed, varius at tortor. Quisque id nulla eu metus sollicitudin facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut accumsan tincidunt mi vel hendrerit.
+    +divider Paragraph
 
-+divider Action
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .button.actionable.outlined(onclick="javascript:loading_test()") Toggle loading
+    +container
+        p Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue urna ac nunc posuere sodales. Sed in nisi libero. Cras laoreet vel nibh in egestas. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas erat libero, vehicula sed consequat et, eleifend id ligula. Aenean sed augue nibh. Aliquam vulputate lobortis molestie. Ut vel gravida elit. Nunc blandit risus vitae leo molestie rutrum. Morbi tortor velit, fringilla a aliquet sed, varius at tortor. Quisque id nulla eu metus sollicitudin facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut accumsan tincidunt mi vel hendrerit.
+
+    +divider Action
+
+    +container.transparent.no-padding.no-border
+        +button.actionable.outlined(onclick="loading_test()") Toggle loading
 
 append body
-    script(type="text/javascript").
+    +script.
         var loading = false;
         function loading_test () {
             loading = !loading;
-            $(".container").loading ( loading );
+            $("p").parent ().loading ( loading );
         }

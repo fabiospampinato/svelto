@@ -1,7 +1,9 @@
 
 /* PROGRESS BAR */
 
-.progress_bar {
+//TODO: add support for labels in striped
+
+.progressBar {
 
     @include medium ();
     height: $progress-bar-height;

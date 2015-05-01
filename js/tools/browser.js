@@ -1,11 +1,18 @@
 
 /* BROWSER */
 
+//TODO: detect browsers, versions, OSes
+
 ;(function ( $, window, document, undefined ) {
 
+    var userAgent = navigator.userAgent.toLowerCase ();
+
     $.browser = {
-        is_mobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( navigator.userAgent.toLowerCase () ),
-        is_tablet: /ipad|playbook|tablet|kindle/i.test ( navigator.userAgent.toLowerCase () )
+        isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
+        isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
+        isAndroid: /Android/i.test ( userAgent ),
+        isIOS: /(iPhone|iPad|iPod)/i.test ( userAgent ),
+        isMac: /Mac/i.test ( userAgent )
     };
 
 }( lQuery, window, document ));

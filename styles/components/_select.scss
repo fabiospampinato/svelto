@@ -39,6 +39,7 @@
     }
 
     .icon:before {
+        @extend %icon;
         @extend .icon-navigation-unfold-more:before;
     }
 

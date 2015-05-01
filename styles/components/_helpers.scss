@@ -160,6 +160,16 @@
     animation: rotate 0.9s linear infinite;
 }
 
+/* WIDTH PERCENTAGES */
+
+@for $nr from 1 through 100 {
+
+    .w#{$nr}-100 {
+        width: #{$nr}%;
+    }
+
+}
+
 /* MULTIPLE */
 
 .multiple {

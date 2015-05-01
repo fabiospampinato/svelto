@@ -31,8 +31,13 @@
             this.$sortables = this.$headers.filter ( '[data-sort]' );
             this.$tbody = this.$node.find ( 'tbody' );
 
-            this.$current_sortable = false;
-            this.current_direction = false;
+            this.table = this.$node.get ( 0 );
+            this.tbody = this.$tbody.get ( 0 );
+
+            this.current_index = false; // `$headers` index, not `$sortables` index
+            this.current_direction = false;;
+
+            this._initial_sort ();
 
             this._bind_change ();
             this._bind_click ();
@@ -45,19 +50,39 @@
 
         },
 
+        /* PRIVATE */
+
+        _initial_sort: function () {
+
+            var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
+
+            if ( $initial.length === 1 ) {
+
+                this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( 'asc' ) ? 'asc' : 'desc' ) );
+
+            }
+
+        },
+
         /* CHANGE */
 
         _bind_change: function () {
 
-            this.$node.on ( 'change', this._handler_change );
+            var instance = this;
+
+            this.$node.on ( 'change', function ( event ) {
+
+                instance._handler_change ();
+
+            });
 
         },
 
-        _handler_change: function ( event ) {
+        _handler_change: function () {
 
-            if ( this.$current_sortable ) {
+            if ( this.current_index ) {
 
-                this._sort ( this.$current_sortable, this.current_direction );
+                this.sort ( this.current_index, this.current_direction );
 
             }
 
@@ -67,23 +92,100 @@
 
         _bind_click: function () {
 
-            this.$sortables.on ( 'click', this._handler_click );
+            var instance = this;
+
+            this.$sortables.on ( 'click', function ( event ) {
+
+                instance._handler_click ( this );
+
+            });
 
         },
 
-        _handler_click: function ( event ) {
+        _handler_click: function ( sortable ) {
 
-            var $sortable = $(this);
-
-            this.current_direction = ( this.$current_sortable === $sortable )
-                                    ? ( !this.current_direction || current_direction === 'desc' ) //FIXME: if !current_direction sortare o asc, o se giá é asc usare desc
-                                        ? 'asc'
-                                        : 'desc'
+            var new_index = this.$headers.index ( sortable ),
+                new_direction = this.current_index === new_index
+                                    ? this.current_direction === 'asc'
+                                        ? 'desc'
+                                        : 'asc'
                                     : 'asc';
 
-            this.$current_sortable = $sortable;
+            this.sort ( new_index, new_direction );
 
-            _sort ( this.$current_sortable, this.current_direction );
+        },
+
+        /* SORT */
+
+        sort: function ( index, direction ) {
+
+            // VALIDATE
+
+            var $sortable = this.$headers.eq ( index );
+
+            if ( !$sortable ) return; // bad index
+
+            var sorter_name = $sortable.data ( 'sort' );
+
+            if ( !sorter_name ) return; // unsortable column
+
+            var sorter = this.options.sorters[sorter_name];
+
+            if ( !sorter ) return;
+
+            direction = ( !direction || direction.toLowerCase () === 'asc' ) ? 'asc' : 'desc';
+
+            // STYLE
+
+            this.$sortables.removeClass ( 'asc desc' );
+            $sortable.addClass ( direction );
+
+            // VARIABLES
+
+            var $trs = this.$tbody.find ( 'tr:not(.empty)' ),
+                column = Array ( $trs.length );
+
+            // POPULATE
+
+            $trs.each ( function ( trs_index ) {
+
+                var $td = $(this).find ( 'td' ).eq ( index ),
+                    value = $td.data ( 'sort-value' ) || $td.html ();
+
+                column[trs_index] = [this, value];
+
+            });
+
+            // SORT
+
+            column.sort ( function ( a, b ) {
+
+                return sorter ( a[1], b[1] );
+
+            });
+
+            if ( direction === 'desc' ) column.reverse ();
+
+            // APPEND
+
+            this.table.removeChild ( this.tbody ); // detach
+
+            for ( var i = 0, l = column.length; i < l; i++ ) {
+
+                this.tbody.appendChild ( column[i][0] ); // reorder
+
+            }
+
+            this.table.appendChild ( this.tbody ); // attach
+
+            // UPDATE
+
+            this.current_index = index;
+            this.current_direction = direction;
+
+            // TRIGGER
+
+            this.$node.trigger ( 'sort' );
 
         }
 

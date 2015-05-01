@@ -156,6 +156,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/dist\/mixins\/progressBar.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/dist\/mixins\/progressBar.jade",
+		"outputAbbreviatedPath": "\/dist\/mixins\/progressBar.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/dist\/mixins\/shapes.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -241,15 +252,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 1
-		},
-	"\/index.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/index.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
 		},
 	"\/index.jade": {
 		"compileDebug": 0,
@@ -491,7 +493,7 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
+		"syntaxCheckerStyle": 0
 		},
 	"\/js\/external\/prism.js": {
 		"fileType": 64,
@@ -506,14 +508,14 @@
 		},
 	"\/js\/external\/underbar.js": {
 		"fileType": 64,
-		"ignore": 1,
-		"ignoreWasSetByUser": 1,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/js\/external\/underbar.js",
 		"outputAbbreviatedPath": "\/js\/external\/min\/underbar.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
-		"syntaxCheckerStyle": 0
+		"syntaxCheckerStyle": 1
 		},
 	"\/js\/tools\/autogrow.js": {
 		"fileType": 64,
@@ -647,12 +649,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/js\/tools\/timeAgo.js": {
+	"\/js\/tools\/timeago.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/js\/tools\/timeAgo.js",
-		"outputAbbreviatedPath": "\/js\/tools\/min\/timeAgo.js",
+		"inputAbbreviatedPath": "\/js\/tools\/timeago.js",
+		"outputAbbreviatedPath": "\/js\/tools\/min\/timeago.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -1322,6 +1324,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/styles\/components\/_toolbar.scss",
 		"outputAbbreviatedPath": "\/styles\/css\/_toolbar.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/styles\/components\/_typography.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/styles\/components\/_typography.scss",
+		"outputAbbreviatedPath": "\/styles\/css\/_typography.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2219,6 +2237,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/css\/icons.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/css\/icons.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/css\/icons.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2707,6 +2734,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/tools\/selectable.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/selectable.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/tools\/selectable.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2717,6 +2753,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/sortable.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/sortable.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/tools\/sortable.jade": {
 		"compileDebug": 0,
@@ -3009,7 +3054,7 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/js\/tools\/timeAgo.js",
+			"linkedFileAbbreviatedPath": "\/js\/tools\/timeago.js",
 			"position": 35,
 			"type": 0
 			}

@@ -1,15 +1,19 @@
-<!DOCTYPE html><html lang="en" xml:lang="en" dir="ltr"><head><title>Presto</title><meta charset="UTF-8"><meta name="robots" content="NOYDIR"><meta name="robots" content="NOODP"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="stylesheet" type="text/css" href="/dist/presto-min.css" media="all"><script type="text/javascript" src="/js/external/underbar.js"></script><script type="text/javascript" src="/js/external/lQuery.js"></script><script type="text/javascript" src="/dist/presto-min.js"></script></head><body><div id="navbar"><div class="content"><div id="menu_btn" class="navbar_btn actionable left"><div class="hamburger"><div class="layer_wrp"><div class="layer"></div></div></div></div><a id="logo" href="/" class="navbar_btn actionable left">Presto</a></div></div><div id="content"></div><script type="text/javascript">function test_one_time_action_cookie1 () {
-    one_time_action ( 'cookie', 'test1', function () {
-        noty ( "One time action (Cookie) executed." );
+<!DOCTYPE html><html lang="en" xml:lang="en" dir="ltr"><head><title>Presto</title><meta charset="UTF-8"><meta name="robots" content="NOYDIR"><meta name="robots" content="NOODP"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0"><link rel="shortcut icon" href="/images/favicon.ico"><link rel="stylesheet" type="text/css" href="/dist/presto-min.css" media="all"><script type="text/javascript" src="/js/external/underbar.js"></script><script type="text/javascript" src="/js/external/lQuery.js"></script><script type="text/javascript" src="/dist/presto-min.js"></script></head><body><div id="navbar"><div class="content"><div id="menu_btn" class="navbar_btn actionable left"><div class="hamburger"><div class="layer_wrp"><div class="layer"></div></div></div></div><a id="logo" href="/" class="navbar_btn actionable left">Presto</a></div></div><div id="content"><div class="divider_wrp"><div class="divider">One time action</div></div><div class="container transparent no-padding no-border"><div class="multiple"><div onclick="test_one_time_action_cookie1()" class="button actionable outlined">Cookie 1</div><div onclick="test_one_time_action_cookie2()" class="button actionable outlined">Cookie 2</div><div onclick="test_one_time_action_url()" class="button actionable outlined">Url</div></div></div><div class="divider_wrp"><div class="divider">Action</div></div><div onclick="test_one_time_action_reset_actions()" class="button actionable outlined">Reset actions</div></div><script type="text/javascript">function test_one_time_action_cookie1 () {
+    $.oneTimeAction ( 'cookie', 'test1', function () {
+        $.noty ( "One time action (Cookie)[1] executed." );
     });
 }
 function test_one_time_action_cookie2 () {
-    one_time_action ( 'cookie', 'test2', function () {
-        noty ( "One time action (Cookie) executed." );
+    $.oneTimeAction ( 'cookie', 'test2', function () {
+        $.noty ( "One time action (Cookie)[2] executed." );
     });
 }
 function test_one_time_action_url () {
-    one_time_action ( 'url', '/bootstrap/one_time_action_test', function () {
-        noty ( "One time action (Url) executed." );
+    $.oneTimeAction ( 'url', '/bootstrap/one_time_action_test', function () { //FIXME
+        $.noty ( "One time action (Url) executed." );
     });
+}
+function test_one_time_action_reset_actions () {
+    $.oneTimeAction ( 'reset' );
+    $.noty ( 'oneTimeAction-related clookies have been resetted' );
 }</script></body></html>

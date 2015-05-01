@@ -14,55 +14,6 @@ a {
 
 }
 
-p {
-    margin-top: 0px;
-    margin-bottom: $layout-spacing;
-    text-align: justify;
-}
-
-blockquote {
-
-    border: 1px solid $general-section-border-bg;
-    border-left-width: ( $layout-spacing / 2 );
-    margin: 0;
-    padding: $layout-spacing;
-    background-color: $general-section-color-bg;
-    border-radius: $border-radius-small;
-    text-align: justify;
-
-    &:before {
-        color: $general-section-border-bg;
-        content: open-quote;
-        float: left;
-        font-family: Verdana;
-        font-size: $font-size-normal * 3.5;
-        line-height: 0;
-        margin-right: $layout-spacing;
-        margin-top: 18px;
-    }
-
-}
-
-abbr[title] {
-    border-bottom: 1px dotted $color-gray-border;
-    cursor: help;
-}
-
-ul, ol, dl {
-    margin: 0;
-    text-align: left;
-    padding-left: $layout-spacing * 2;
-}
-
-ul.no-bullets {
-    padding-left: 0;
-    list-style-type: none;
-}
-
-dd {
-    margin-left: $layout-spacing * 2;
-}
-
 code, section, pre {
     display: block;
     margin: 0;

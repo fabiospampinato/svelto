@@ -42,10 +42,12 @@
 .checkbox .icon {
 
     &.on:after {
+@extend %icon;
         @extend .icon-toggle-check-box:before;
     }
 
     &.off:after {
+        @extend %icon;
         @extend .icon-toggle-check-box-outline-blank:before;
     }
 
@@ -56,10 +58,12 @@
 .radio .icon {
 
     &.on:after {
+        @extend %icon;
         @extend .icon-toggle-radio-button-on:before;
     }
 
     &.off:after {
+        @extend %icon;
         @extend .icon-toggle-radio-button-off:before;
     }
 

@@ -1,0 +1,116 @@
+
+/* HEADERS */
+
+h1, h2, h3, h4, h5, h6 {
+
+    margin-top: 0px;
+    margin-bottom: $layout-spacing;
+
+    & > small, & > .small {
+        font-size: 65%;
+        opacity: 0.85;
+    }
+
+}
+
+h1 {
+    @include huge ();
+}
+
+h2 {
+    @include big ();
+}
+
+h3 {
+    @include large ();
+}
+
+h4 {
+    @include medium ();
+}
+
+h5 {
+    @include small ();
+}
+
+h6 {
+    @include tiny ();
+}
+
+/* OTHER */
+
+small, .small {
+    font-size: 85%;
+}
+
+p {
+    margin-top: 0px;
+    margin-bottom: $layout-spacing;
+    text-align: justify;
+}
+
+mark, .mark {
+    padding: 0.2em;
+    background-color: $color-yellow;
+}
+
+abbr[title] {
+    border-bottom: 1px dotted $color-gray-border;
+    cursor: help;
+}
+
+blockquote {
+
+    //TODO: add support for footer -> cite
+    //FIXME: two blockquote one after another, the second is not working, I don't know why
+
+    border: 1px solid $general-section-border-bg;
+    border-left-width: ( $layout-spacing / 2 );
+    margin: 0;
+    padding: $layout-spacing;
+    background-color: $general-section-color-bg;
+    border-radius: $border-radius-small;
+    text-align: justify;
+
+    &:before {
+        color: $general-section-border-bg;
+        content: open-quote;
+        float: left;
+        font-family: Verdana;
+        font-size: $font-size-normal * 3.5;
+        line-height: 0;
+        margin-right: $layout-spacing;
+        margin-top: 18px;
+    }
+
+    & > footer {
+
+        font-size: 85%;
+        opacity: 0.85;
+        margin-top: $layout-spacing;
+
+        &:before {
+            content: '\2014 \00A0';
+            opacity: 0.85;
+        }
+
+    }
+
+}
+
+/* LIST */
+
+ul, ol, dl {
+    margin: 0;
+    text-align: left;
+    padding-left: $layout-spacing * 2;
+}
+
+ul.no-bullets {
+    padding-left: 0;
+    list-style-type: none;
+}
+
+dd {
+    margin-left: $layout-spacing * 2;
+}

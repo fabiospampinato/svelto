@@ -3,98 +3,71 @@
 extends ../../layout.jade
 
 append content
-+divider Base
-    .grid
-        .grid_cols.fluid.limited
-            .grid_col
-                .container
-                    .progress_bar(data-percentage="33")
-                        .unhighlighted
-                            .highlighted
-                    .progress_bar.striped(data-percentage="55")
-                        .unhighlighted
-                            .highlighted
-                    .progress_bar(data-percentage="55")
-                        .unhighlighted
-                            .highlighted
-                                .label
+    +divider Base
 
-+divider Colored
-    .grid
-        .grid_cols.fluid.limited
-            .grid_col
-                .container
-                    .progress_bar(data-percentage="70")
-                        .unhighlighted
-                            .highlighted.yellow
-                            .highlighted.green
-                            .highlighted.pink
-                            .highlighted.teal
-                    .progress_bar.striped(data-percentage="20")
-                        .unhighlighted
-                            .highlighted.yellow
-                            .highlighted.green
-                            .highlighted.pink
-                            .highlighted.teal
-                    .progress_bar(data-percentage="20")
-                        .unhighlighted
-                            .highlighted.yellow
-                                .label
-                            .highlighted.green
-                                .label
-                            .highlighted.pink
-                                .label
-                            .highlighted.teal
-                                .label
-                    .progress_bar.fixed
-                        .unhighlighted
-                            .highlighted.yellow.w10-100
-                            .highlighted.green.w20-100
-                            .highlighted.pink.w30-100
-                            .highlighted.teal.w40-100
+    +container
+        +progressBar(33)
+        +progressBar(55).striped
+        +progressBar(55, true)
 
-+divider Inactive
-    .grid
-        .grid_cols.fluid.limited
-            .grid_col
-                .container
-                    .progress_bar.inactive(data-percentage="45")
-                        .unhighlighted
-                            .highlighted
-                    .progress_bar.striped.inactive(data-percentage="66")
-                        .unhighlighted
-                            .highlighted
-                    .progress_bar.inactive(data-percentage="70")
-                        .unhighlighted
-                            .highlighted.yellow
-                            .highlighted.green
-                            .highlighted.pink
-                            .highlighted.teal
-                    .progress_bar.inactive(data-percentage="70")
-                        .unhighlighted
-                            .highlighted.yellow
-                                .label
-                            .highlighted.green
-                                .label
-                            .highlighted.pink
-                                .label
-                            .highlighted.teal
-                                .label
+    +divider Colored
 
-+divider Actions
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .multiple
-                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 'default' )") Default
-                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 0 )") Set 0%
-                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 25 )") Set 25%
-                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 50 )") Set 50%
-                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 75 )") Set 75%
-                    .button.actionable.outlined(onclick="javascript:progress_bar_set ( 100 )") Set 100%
+    +container
+        +progressBar(70)
+            +progressBar-section.yellow
+            +progressBar-section.green
+            +progressBar-section.pink
+            +progressBar-section.teal
+        +progressBar(20).striped
+            +progressBar-section.yellow
+            +progressBar-section.green
+            +progressBar-section.pink
+            +progressBar-section.teal
+        +progressBar(20)
+            +progressBar-section(true).yellow
+            +progressBar-section(true).green
+            +progressBar-section(true).pink
+            +progressBar-section(true).teal
+        +progressBar.fixed
+            +progressBar-section.yellow.w10-100
+            +progressBar-section.green.w20-100
+            +progressBar-section.pink.w30-100
+            +progressBar-section.teal.w40-100
+
+    +divider Inactive
+
+    +container
+        +progressBar(45).inactive
+        +progressBar(66).striped.inactive
+        +progressBar(24).inactive
+            +progressBar-section.yellow
+            +progressBar-section.green
+            +progressBar-section.pink
+            +progressBar-section.teal
+        +progressBar(70).inactive
+            +progressBar-section(true).yellow
+            +progressBar-section(true).green
+            +progressBar-section(true).pink
+            +progressBar-section(true).teal
+        +progressBar.fixed.inactive
+            +progressBar-section.yellow.w10-100
+            +progressBar-section.green.w20-100
+            +progressBar-section.pink.w30-100
+            +progressBar-section.teal.w40-100
+
+    +divider Actions
+
+    +container.transparent.no-padding.no-border
+        .multiple
+            .button.actionable.outlined(onclick="javascript:progressBar_set ()") Default
+            .button.actionable.outlined(onclick="javascript:progressBar_set ( 0 )") Set 0%
+            .button.actionable.outlined(onclick="javascript:progressBar_set ( 25 )") Set 25%
+            .button.actionable.outlined(onclick="javascript:progressBar_set ( 50 )") Set 50%
+            .button.actionable.outlined(onclick="javascript:progressBar_set ( 75 )") Set 75%
+            .button.actionable.outlined(onclick="javascript:progressBar_set ( 100 )") Set 100%
 
 append body
-    script(type="text/javascript").
-        function progress_bar_set ( percentage ) {
-            $(".progress_bar").progress_bar ( percentage );
+    +script.
+        function progressBar_set ( percentage ) {
+            $(".progressBar").progressBar ( percentage );
         }

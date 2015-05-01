@@ -1,0 +1,16 @@
+//- progressBar.jade
+
+mixin progressBar(percentage, labeled)
+    .progressBar(data-percentage=percentage)&attributes(attributes)
+        .unhighlighted
+            if block
+                block
+            else
+                +progressBar-section(labeled)
+
+mixin progressBar-section(labeled)
+    .highlighted&attributes(attributes)
+        if block
+            block
+        else if labeled
+            .label

@@ -1,0 +1,37 @@
+//- tools/selectable.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Selectable
+
+    +container
+        table.selectable
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 10 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2

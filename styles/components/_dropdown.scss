@@ -2,6 +2,7 @@
 /* BUTTON */
 
 .dropdown_btn .icon:before {
+    @extend %icon;
     @extend .icon-navigation-expand-more:before;
 }
 

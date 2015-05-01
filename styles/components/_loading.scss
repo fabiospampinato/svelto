@@ -1,6 +1,8 @@
 
 /* LOADING OVERLAY */
 
+//FIXME: for whatever reason it's not rotating at the center of the icon
+
 .loading {
 
     position: relative;
@@ -9,7 +11,6 @@
         height: $loading-size;
         line-height: $loading-size !important;
         width: $loading-size;
-        content: '';
         position: absolute;
         top: 0;
         right: 0;
@@ -24,6 +25,7 @@
 
     &:before {
         @include multi-shadow ( $shadow-depth-3, $loading-shadow-inset );
+        content: '';
         border-radius: $loading-size;
         border: 1px solid $color-black-border;
         background-color: transparentize($color-black-bg, $color-transparentize-amount);

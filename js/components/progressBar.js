@@ -1,6 +1,8 @@
 
 /* PROGRESS BAR */
 
+//TODO: add support for specific widths for each section
+
 ;(function ( $, window, document, undefined ) {
 
     $.factory ( 'progressBar', {
@@ -9,19 +11,19 @@
 
         init: function () {
 
-            this.$highlighted = this.$nodes.find ( '.highlighted' ),
+            this.$highlighted = this.$node.find ( '.highlighted' ),
             this.$label = this.$highlighted.find ( '.label' ),
-            this.data_percentage = this.$nodes.data ( 'percentage' );
+            this.data_percentage = this.$node.data ( 'percentage' );
 
         },
 
         call: function ( percentage ) {
 
-            if ( this.$nodes.hasClass ( 'fixed' ) ) return;
+            if ( this.$node.hasClass ( 'fixed' ) ) return;
 
-            if ( this.data_percentage !== null || typeof percentage !== 'undefined' ) {
+            if ( this.data_percentage !== undefined || percentage !== undefined ) {
 
-                var percentage_nr = ( percentage === 'default' || typeof percentage === 'undefined' ) ? this.data_percentage / this.$highlighted.length : percentage / this.$highlighted.length;
+                var percentage_nr = ( percentage === undefined ) ? this.data_percentage / this.$highlighted.length : percentage / this.$highlighted.length;
 
                 this.$highlighted.css ( 'min-width', percentage_nr + '%' );
 
@@ -33,7 +35,7 @@
 
         ready: function () {
 
-            $('.progress_bar').progressBar ();
+            $('.progressBar').progressBar ();
 
         }
 

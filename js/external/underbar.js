@@ -114,7 +114,7 @@
 
     }());
 
-    var uId = 0;
+    var uuid = 0;
 
     /* PRIVATE LANG FUNCTIONS */
 
@@ -230,6 +230,7 @@
 
     }
 
+    /* //FIXME
     function isNaN ( value ) {
 
         // An `NaN` primitive is the only value that is not equal to itself.
@@ -238,6 +239,7 @@
         return isNumber ( value ) && value != +value;
 
     }
+    */
 
     function isNull ( value ) {
 
@@ -3600,7 +3602,7 @@
 
         uniqueId: function ( prefix ) {
 
-            return ( prefix || '' ) + ( uId += 1 ).toString ();
+            return ( prefix || '' ) + ( uuid += 1 ).toString ();
 
         }
 

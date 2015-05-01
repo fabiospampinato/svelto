@@ -102,6 +102,32 @@
 
     };
 
+    var deserializeValue = function ( value ) {
+
+        try {
+
+            return value
+                       ? value == "true"
+                           ? true
+                           : value == "false"
+                               ? false
+                               : value == "null"
+                                   ? null
+                                   : +value + "" == value
+                                       ? +value
+                                       : /^[\[\{]/.test ( value )
+                                           ? JSON.parse ( value )
+                                           : value
+                       : value;
+
+        } catch ( e ) {
+
+            return value;
+
+        }
+
+    };
+
     /* lQuery SELECTORS */
 
     var lQuery = function ( selector, context /* isUnique */ ) { //INFO: `isUnique`: if the loopable object doesn't contain duplicate nodes
@@ -312,13 +338,17 @@
 
     lQuery.matches = function ( node, selector, index ) {
 
+        //TODO: Maybe add support for NodeList, HTMLCollection, Array and other lQuery instances
+
         return typeof selector === 'string'
                    ? browser_matches_fn
                        ? browser_matches_fn.call ( node, selector )
                        : ( dom_selector ( selector, node.parentNode ).indexOf ( node ) !== -1 )
                    : selector instanceof Function
                        ? selector.call ( node, index, node )
-                       : selector === node; //TODO: Maybe add support for NodeList, HTMLCollection, Array and other lQuery instances
+                       : selector instanceof lQuery
+                           ? selector.nodes[0] === node
+                           : selector === node;
 
     };
 
@@ -435,13 +465,13 @@
 
             if ( !_.isUndefined( value ) ) {
 
-                return this.attr ( 'data-' + name.toLowerCase (), JSON.stringify ( value ) );
+                return this.attr ( 'data-' + name.toLowerCase (), value );
 
             } else {
 
                 var data_value = this.attr ( 'data-' + name.toLowerCase () );
 
-                return data_value ? JSON.parse ( data_value ) : undefined;
+                return data_value ? deserializeValue ( data_value ) : undefined;
 
             }
 
@@ -539,6 +569,7 @@
 
                 value = maybe_add_px ( name, value );
                 name = lQuery.camelCase ( name );
+
 
                 if ( !_.isUndefined( value ) ) {
 
@@ -1125,9 +1156,11 @@
 
         index: function ( selector ) {
 
-            var node = this.nodes[0] ? ( selector ? lQuery ( selector ).get ( 0 ) : this.nodes[0].parentNode ) : undefined;
-
-            return node ? lQuery.makeArray ( node.childNodes ).indexOf ( this.nodes[0] ) : -1;
+            return this.nodes[0]
+                       ? selector
+                           ? this.nodes.indexOf ( lQuery ( selector ).get ( 0 ) ) // index relative to the collection
+                           : lQuery.makeArray ( this.nodes[0].parentNode.childNodes ).indexOf ( this.nodes[0] ) // index relative to siblings
+                       : -1;
 
         },
 

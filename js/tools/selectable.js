@@ -2,7 +2,6 @@
 /* SELECTABLE */
 
 //TODO: add noty for actions AND/OR right click for action
-
 //FIXME: make it workable with sorting (update after sorting since we may)
 
 ;(function ( $, window, document, undefined ) {
@@ -54,9 +53,7 @@
             this.$start_row = false;
             this.$end_row = false;
 
-            this.$prev_row = false;
-            this.$prev_shifted = false;
-            this.$prev_dragged = false;
+            this._reset_vars ();
 
             this._bind_keys ();
             this._bind_mouse ();
@@ -74,13 +71,23 @@
 
         _bind_keys: function () {
 
+            var instance = this;
+
             this.$node.on ( 'mouseenter', function () {
 
-                $document.on ( 'keydown', this._handler_keys );
+                $document.on ( 'keydown', function ( event ) {
+
+                    instance._handler_keys ( event );
+
+                });
 
             }).on ( 'mouseleave', function () {
 
-                $document.off ( 'keydown', this._handler_keys );
+                $document.off ( 'keydown', function ( event ) {
+
+                    instance._handler_keys ( event );
+
+                });
 
             });
 
@@ -88,7 +95,7 @@
 
         _handler_keys: function ( event ) {
 
-            if ( event.ctrlKey ) { //INFO: CTRL
+            if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
 
                 if ( event.keyCode === 65 ) { //INFO: A
 
@@ -116,7 +123,13 @@
 
         _bind_mouse: function () {
 
-            this.$rows.on ( 'mousedown', this._handler_mousedown );
+            var instance = this;
+
+            this.$rows.on ( 'mousedown', function ( event ) {
+
+                instance._handler_mousedown ( event );
+
+            });
 
         },
 
@@ -124,17 +137,31 @@
 
             if ( event.button !== 0 ) return;
 
+            var instance = this;
+
             this.$start_row = $(this);
 
-            $document.mousemove ( this._handler_mousemove );
+            $document.mousemove ( function ( event ) {
 
-            this.$start_row.mouseup ( this._handler_mouseup );
+                instance._handler_mousemove ( event );
+
+            });
+
+            this.$start_row.mouseup ( function ( event ) {
+
+                instance._handler_mouseup ( event );
+
+            });
 
         },
 
         _handler_mousemove: function ( event ) { // DRAG
 
+            //FIXME
+
             if ( !event.ctrlKey ) return;
+
+            var instance = this;
 
             $document.off ( 'mousemove', this._handler_mousemove );
 

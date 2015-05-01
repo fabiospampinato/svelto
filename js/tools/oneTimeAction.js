@@ -5,12 +5,12 @@
 
     $.oneTimeAction = function ( method, option, action ) {
 
-        if ( method === 'cookie' ) {
+        if ( method === 'cookie' ) { // option -> action id
 
             var actions_str = $.cookie.read ( 'ota' ),
                 actions = actions_str ? actions_str.split ( '|' ) : [];
 
-            if ( actions.indexOf ( option ) === -1 ) {
+            if ( actions.indexOf ( option ) === -1 ) { // If not already done
 
                 actions.push ( option );
                 actions_str = actions.join ( '|' );
@@ -21,17 +21,20 @@
 
             }
 
-        } else if ( method === 'url' ) {
+        } else if ( method === 'url' ) { // option -> url
 
             $.ajax ({
-                type: 'GET',
                 url: option,
                 success: function ( res ) {
-                    if ( res === 1 || res === '1' ) { //FIXME: doesn't it return only strings???
+                    if ( res === 1 || res === '1' ) { //FIXME: doesn't it return only strings??? //TODO: maybe we should just check if the return valus is truthy
                         action ();
                     }
                 }
             });
+
+        } else if ( method === 'reset' ) {
+
+            $.cookie.destroy ( 'ota' );
 
         }
 

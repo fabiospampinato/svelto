@@ -5,6 +5,10 @@ mixin image(url)
         img(src=url)
         block
 
+mixin image-sample(url)
+    +image("/images/sample.png")
+        block
+
 mixin image-caption
     .image-caption&attributes(attributes)
         block

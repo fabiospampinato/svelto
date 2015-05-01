@@ -74,6 +74,7 @@
             animation: rotate 0.9s linear infinite;
 
             &:before {
+                @extend %icon;
                 @extend .icon-navigation-refresh:before;
             }
 
