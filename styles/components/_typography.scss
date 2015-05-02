@@ -61,27 +61,13 @@ abbr[title] {
 
 blockquote {
 
-    //TODO: add support for footer -> cite
-    //FIXME: two blockquote one after another, the second is not working, I don't know why
-
     border: 1px solid $general-section-border-bg;
     border-left-width: ( $layout-spacing / 2 );
-    margin: 0;
+    margin: 0 0 $layout-spacing 0;
     padding: $layout-spacing;
     background-color: $general-section-color-bg;
     border-radius: $border-radius-small;
     text-align: justify;
-
-    &:before {
-        color: $general-section-border-bg;
-        content: open-quote;
-        float: left;
-        font-family: Verdana;
-        font-size: $font-size-normal * 3.5;
-        line-height: 0;
-        margin-right: $layout-spacing;
-        margin-top: 18px;
-    }
 
     & > footer {
 
@@ -100,7 +86,7 @@ blockquote {
 
 /* LIST */
 
-ul, ol, dl {
+ul, ol {
     margin: 0;
     text-align: left;
     padding-left: $layout-spacing * 2;
@@ -109,6 +95,11 @@ ul, ol, dl {
 ul.unstyled {
     padding-left: 0;
     list-style-type: none;
+}
+
+dl {
+    margin: 0;
+    text-align: left;
 }
 
 dd {

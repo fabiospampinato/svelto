@@ -9,167 +9,142 @@ append navbar
 append content
     +divider Limited
 
-    +grid.limited
-        +grid-row
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-            +grid-column.s1
-                +container 1
-        +grid-row
-            +grid-column.s3
-                +container 3
-            +grid-column.s6
-                +container 6
-            +grid-column.s3
-                +container 3
-        +grid-row
-            +grid-column.s3
-                +container 3
-            +grid-column.s9
-                +container 9
+    +row.limited
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+        +column.xs-1
+            +container 1
+    +row.limited
+        +column.xs-3
+            +container 3
+        +column.xs-6
+            +container 6
+        +column.xs-3
+            +container 3
+    +row.limited
+        +column.xs-3
+            +container 3
+        +column.xs-9
+            +container 9
 
     +divider Different widths - Offset
 
-    +grid
-        +grid-row
-            +grid-column.s1
-                +container 1
-            +grid-column.s4
-                +container 4
-            +grid-column.s3.offset-s2
-                +container 3 offset 2
-            +grid-column.s2
-                +container 2
+    +row
+        +column.xs-1
+            +container 1
+        +column.xs-4
+            +container 4
+        +column.xs-3.offset-xs-2
+            +container 3 offset 2
+        +column.xs-2
+            +container 2
 
     +divider Responsive
 
-    +grid
-        +grid-row
-            +grid-column.s12
-                +container 12
-            +grid-column.s12.m6.l3
-                +container s12 m6 l3
-            +grid-column.s12.m6.l3
-                +container s12 m6 l3
-            +grid-column.s6.l3
-                +container s6 l3
-            +grid-column.s6.l3
-                +container s6 l3
+    +row
+        +column.xs-12.sm-6.md-4.lg-2
+            +container xs-12 sm-6 md-4 lg-2
+        +column.xs-12.sm-6.md-4.lg-2
+            +container xs-12 sm-6 md-4 lg-2
+        +column.xs-12.sm-6.md-4.lg-2
+            +container xs-12 sm-6 md-4 lg-2
+        +column.xs-12.sm-6.md-4.lg-2
+            +container xs-12 sm-6 md-4 lg-2
+        +column.xs-12.sm-6.md-4.lg-2
+            +container xs-12 sm-6 md-4 lg-2
+        +column.xs-12.sm-6.md-4.lg-2
+            +container xs-12 sm-6 md-4 lg-2
 
     +divider Responsive 2
 
-    +grid
-        +grid-row
-            +grid-column.s3
-                +container 3
-            +grid-column.s9.m6.l3
-                +container s9 m6 l3
-            +grid-column.s0.l3
-                +container s0 l3
-            +grid-column.s0.m3
-                +container s0 m3
-
-    +divider Joined
-
-    .grid
-        .grid_cols.joined
-            .grid_col.w25-100
-                .container 25
-            .grid_col.w50-100
-                .container 50
-            .grid_col.w25-100
-                .container 25
+    +row
+        +column.xs-0.sm-3
+            +container xs-0 sm-3
+        +column.xs-12.sm-9.md-6.lg-3
+            +container xs-12 sm-9 md-6 lg-3
+        +column.xs-0.lg-3
+            +container xs-0 lg-3
+        +column.xs-0.md-3
+            +container xs-0 md-3
 
     +divider Complex 1
 
-    .grid
-        .grid_cols
-            .grid_col.w35-100
-                .grid_cols.vertical
-                    .grid_col
-                        .container 3
-                    .grid_col
-                        .container 3
-                    .grid_col
-                        .container 3
-            .grid_col.w65-100
-                .container 1
+    +row
+        +column.w35-100
+            +multiple.vertical.fluid
+                +container 1
+                +container 2
+                +container 3
+        +column.w65-100
+            +container 1
 
     +divider Complex 2
 
-    .grid
-        .grid_cols
-            .grid_col.w65-100
-                .grid_cols.vertical
-                    .grid_col
-                        .container 3
-                    .grid_cols.fluid.joined
-                        .grid_col
-                            .container 1.5
-                        .grid_col
-                            .container 1.5
-                    .grid_col
-                        .container 3
-            .grid_col.w35-100
-                .container 1
+    +row
+        +column.w65-100
+            +multiple.vertical.fluid
+                +container 1
+                +multiple.fluid.joined
+                    +container 0.5
+                    +container 0.5
+                +container 1
+        +column.w35-100
+            +container 1
 
     +divider Complex 3
 
-    .grid
-        .grid_cols
-            .grid_col.w80-100
-                .grid_cols.vertical
-                    .grid_col
-                        .container 3
-                    .grid_col
-                        .grid_cols.fluid
-                            .grid_col
-                                .container 1.5
-                            .grid_col
-                                .grid_cols.vertical
-                                    .grid_col
-                                        .container 0.5
-                                    .grid_col
-                                        .container 0.5
-                                    .grid_col
-                                        .container 0.5
-                    .grid_col
-                        .container 3
-            .grid_col.w20-100
-                .container 1
+    +row
+        +column.w80-100
+            +multiple.vertical.fluid
+                +container 3
+                +multiple.fluid.stretched
+                    +container 1.5
+                    +multiple.vertical.fluid
+                        +container 0.5
+                        +container 0.5
+                        +container 0.5
+                +container 3
+        +column.w20-100
+            +container 1
 
     +divider Full size
 
-    +grid.full-size
-        +grid-row
-            +grid-column.s12
-                +container Full size
+    +row.full-size
+        +column.s12
+            +container Full size
 
-    +divider Full size - Sidebar - Limited
+    +divider Full size - Limited
 
-    .grid
-        .grid_cols.full-size.joined.has_sidebar.limited
-            .grid_col.w65-100
-                .container Main
-            .grid_col.w35-100
-                .container Sidebar
+    +row.full-size.limited
+        +column.w65-100
+            +container Main
+        +column.w35-100
+            +container Sidebar
+
+    +divider Full size - Limited - Joined
+
+    +row.full-size.limited
+        +column
+            +multiple.joined
+                +container.w65-100 Main
+                +container.w35-100 Sidebar

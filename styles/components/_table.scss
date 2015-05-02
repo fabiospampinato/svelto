@@ -4,6 +4,8 @@
 //TODO: move all sortable related stuff to _sortable.scss
 //TODO: move all selectable related stuff to _selectable.scss
 //FIXME: it shouldn't be always centered
+//TODO: add responsive tables
+//TODO: add ability to easily set per-table text alignment
 
 table {
 
@@ -33,7 +35,12 @@ table {
 
                 padding: $table-row-padding;
 
-                & > *, .button {
+                & > .multiple {
+                    justify-content: center;
+                    margin-bottom: -10px;
+                }
+
+                & > *:not(.multiple) {
                     margin-bottom: 0 !important;
                 }
 

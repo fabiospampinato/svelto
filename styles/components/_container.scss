@@ -1,8 +1,6 @@
 
 /* CONTAINER */
 
-//FIXME: limited is not centered, it should be invece
-
 .container {
 
     @include white ( true );
@@ -17,6 +15,8 @@
 
     &.limited {
         max-width: $layout-max-width;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     & > *:last-child:not(.content):not(.footer) {

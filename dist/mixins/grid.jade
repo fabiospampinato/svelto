@@ -1,13 +1,10 @@
 //- grid.jade
 
-mixin grid
+mixin row
     .grid&attributes(attributes)
-        block
+        .grid-row
+            block
 
-mixin grid-row
-    .row&attributes(attributes)
-        block
-
-mixin grid-column
-    .column&attributes(attributes)
+mixin column
+    .grid-column&attributes(attributes)
         block

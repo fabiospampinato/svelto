@@ -1,16 +1,20 @@
 
 /* SETTINGS */
 
-$layout-large-breakpoint: 992px;
-$layout-medium-breakpoint: 600px;
-$layout-small-breakpoint: 0px;
+$layout-xsmall-max-breakpoint: 767px;
+
+$layout-small-min-breakpoint: 768px;
+$layout-small-max-breakpoint: 991px;
+
+$layout-medium-min-breakpoint: 992px;
+$layout-medium-max-breakpoint: 1199px;
+
+$layout-large-min-breakpoint: 1200px;
 
 $layout-max-width: 1400px;
 
 $layout-sidebar-breakpoint: 750px;
-
 $layout-no-columns-padding-breakpoint: 550px;
-
 $layout-full-sidebar-breakpoint: 435px;
 
 $layout-spacing: 10px;

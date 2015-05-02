@@ -33,6 +33,7 @@
             transition: min-width $progress-bar-transitions-time ease 0s;
             min-width: 0;
             position: relative;
+            text-align: center;
 
             &:not(:first-child) {
                 border-top-left-radius: 0;
