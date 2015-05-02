@@ -3,10 +3,10 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'blur', function ( activate ) {
+    $.fn.blur = function ( activate ) {
 
         return this.toggleClass ( 'blur', activate );
 
-    });
+    };
 
 }( lQuery, window, document ));

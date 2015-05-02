@@ -24,7 +24,7 @@
     }
 
     &:before {
-        @include multi-shadow ( $shadow-depth-3, $loading-shadow-inset );
+        @include multi-shadow ( $shadow-depth-5, $loading-shadow-inset );
         content: '';
         border-radius: $loading-size;
         border: 1px solid $color-black-border;

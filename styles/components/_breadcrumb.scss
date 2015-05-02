@@ -1,9 +1,11 @@
 
 /* BREADCRUMB */
 
+//TODO: add support for highlighing the sections before the current (basically highlight e poi unhighlight .current + others)
+
 .breadcrumb {
 
-    & >  *:not(:last-child):after {
+    & > *:not(:last-child):after {
         @extend %icon;
         @extend .icon-navigation-chevron-right:before;
         padding-left: $breadcrumb-padding;

@@ -57,13 +57,8 @@
 
             if ( !this.isActive ) {
 
-                console.log('playing...');
-                console.log(this);
-
                 if ( reset ) this.setTimer ();
                 else this.setTimer ( this.remaining_time );
-
-                console.log('resetted...');
 
                 this.isActive = true;
 
@@ -118,9 +113,6 @@
 
         clearTimer: function () {
 
-            console.log("clearing timer");
-            console.log(this.timeoutObject);
-
             clearTimeout ( this.timeoutObject );
 
         },
@@ -135,25 +127,15 @@
             this.last = new Date ();
             this.clearTimer ();
 
-            console.log('setting timer');
-            console.log(this.go);
-
             this.timeoutObject = setTimeout ( function () {
 
                 timer.go ()
 
             }, time );
 
-            console.log('timer setted');
-            console.log(this.timeoutObject);
-
         },
 
         go: function () {
-
-            console.log('go called');
-            console.log(this);
-            console.log(this.isActive);
 
             if ( this.isActive ) {
 

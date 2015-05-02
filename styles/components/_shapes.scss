@@ -60,6 +60,7 @@
     @include square ( 4rem );
     padding: $layout-half-spacing;
     overflow: hidden;
+    margin-bottom: $layout-spacing;
 
     & > p {
         text-align: inherit;

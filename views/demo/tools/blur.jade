@@ -1,4 +1,4 @@
-//- javascript/loading.jade
+//- tools/blur.jade
 
 extends ../../layout.jade
 
@@ -10,12 +10,10 @@ append content
 
     +divider Action
 
-    +button.actionable.outlined(onclick="loading_test()") Toggle loading
+    +button.actionable.outlined(onclick="blur_test()") Toggle blur
 
 append body
     +script.
-        var loading = false;
-        function loading_test () {
-            loading = !loading;
-            $("p").parent ().loading ( loading );
+        function blur_test () {
+            $("p").parent ().blur ();
         }

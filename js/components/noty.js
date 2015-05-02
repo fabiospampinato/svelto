@@ -22,7 +22,7 @@
 
     var get_html = function ( options ) {
 
-        return '<div id="noty_wrp_' + options.id + '" class="noty_wrp hidden"><div id="noty_' + options.id + '" class="noty ' + options.type + ' ' + ( options.ttl === 'forever' ? 'forever' : '' ) + ' ' + options.color + ' transparentize">' + get_img_html ( options.img ) + '<div class="noty_content">' + get_title_html ( options.title ) + get_body_html ( options.body ) + get_buttons_html ( options.buttons ) + '</div></div>';
+        return '<div id="noty_wrp_' + options.id + '" class="noty_wrp hidden"><div id="noty_' + options.id + '" class="noty ' + options.type + ' ' + options.color + ' transparentize">' + get_img_html ( options.img ) + '<div class="noty_content">' + get_title_html ( options.title ) + get_body_html ( options.body ) + get_buttons_html ( options.buttons ) + '</div></div>';
 
     };
 
@@ -56,7 +56,7 @@
 
         });
 
-        return '<div class="noty_buttons multiple">' + buttons_html + '</div>';
+        return '<div class="noty_buttons multiple center">' + buttons_html + '</div>';
 
     };
 
@@ -133,7 +133,7 @@
 
         var $new_noty_wrp = $('#noty_wrp_' + options.id),
             $new_noty = $('#noty_' + options.id),
-            noty_timer;
+            noty_timer = false;
 
         // BUTTONS
 
@@ -167,33 +167,37 @@
 
         }
 
-        // TIMER
+        // CLOSE FUNCTION
 
-        if ( !options.buttons && options.ttl !== 'forever' ) {
+        var close = function () {
 
-            // FUNCTIONS
-
-            var close = function () {
-
-                console.log("close timer called");
+            if ( noty_timer ) {
 
                 _.pull ( timers, noty_timer );
 
                 noty_timer.stop ();
 
-                remove ( options.id );
+            }
 
-                options.onClose.call ( $new_noty_wrp.get ( 0 ) );
+            remove ( options.id );
 
-            };
+            options.onClose.call ( $new_noty_wrp.get ( 0 ) );
 
-            // START
+        };
+
+        // TIMER
+
+        if ( !options.buttons && options.ttl !== 'forever' ) {
 
             noty_timer = $.timer ( close, options.ttl, true );
 
             timers.push ( noty_timer );
 
-            // CLOSE ON CLICK
+        }
+
+        // CLOSE ON CLICK
+
+        if ( !options.buttons ) {
 
             $new_noty.on ( 'click', close );
 

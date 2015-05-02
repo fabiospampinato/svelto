@@ -132,10 +132,10 @@ button {
         position: absolute;
         right: $layout-spacing * 2;
         bottom: $layout-spacing * 2;
-        box-shadow: $shadow-depth-3;
+        box-shadow: $shadow-depth-5;
 
         &.actionable:not(.inactive):not(.active):not(.dragging), &.actionable.active {
-            @include multi-shadow ( $shadow-depth-3, $shadow-inset-1 );
+            @include multi-shadow ( $shadow-depth-5, $shadow-inset-1 );
         }
 
     }

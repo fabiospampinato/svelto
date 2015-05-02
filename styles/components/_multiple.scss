@@ -1,0 +1,83 @@
+
+/* MULTIPLE */
+
+//FIXME: fix the stretched version, the first and last section don't have enough width available
+
+.multiple {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+
+    &.center {
+        justify-content: center;
+    }
+
+    &.nowrap {
+        flex-wrap: nowrap;
+    }
+
+    &.stretched {
+        align-items: stretch;
+    }
+
+    &.joined {
+
+        flex-wrap: nowrap;
+
+        &:not(.vertical) {
+
+            & > *:not(:last-child) {
+                margin-right: 0;
+                border-right-width: 0;
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            & > *:not(:first-child) {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+        }
+
+        &.vertical {
+
+            & > *:not(:last-child) {
+                margin-bottom: 0;
+                border-bottom-width: 0;
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+
+            & > *:not(:first-child) {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+        }
+
+    }
+
+    &.vertical {
+
+        flex-direction: column;
+        align-items: flex-start;
+        flex-grow: 0;
+        margin-right: 0;
+
+        &.fluid > * {
+            width: 100%;
+        }
+
+    }
+
+    &.fluid > *:not(.nogrow) {
+        flex-grow: 1;
+    }
+
+    &:not(.vertical) > *:not(:last-child) {
+        margin-right: $layout-spacing;
+    }
+
+}

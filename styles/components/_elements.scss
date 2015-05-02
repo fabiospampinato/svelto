@@ -42,6 +42,8 @@ kbd {
     text-align: center;
     font-size: 0;
     overflow: hidden;
+    margin-bottom: $layout-spacing;
+    vertical-align: top;
 
     & > img {
         border: 1px solid $color-white-border;

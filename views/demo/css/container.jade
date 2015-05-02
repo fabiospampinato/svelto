@@ -20,48 +20,40 @@ append content
             +container.pink
                 p Insider
 
+    +divider With header
+
+    +container("Header")
+        +container-content Content
+
+    +divider With footer
+
+    +container Content
+        +container-footer.teal Footer
+
+    +divider With header & footer
+
+    +container("Header", "green") Content
+        +container-footer Footer
+
     +divider Advanced
 
     +container
-        .header
-            .sub.left
+        +container-header("Header")
+            +container-header-left
                 .multiple
-                    .button.actionable.compact.mini
-                        .icon.icon-action-thumb-down
-                    .button.actionable.compact.mini
-                        .icon.icon-action-thumb-up
-            .label Header
-            .sub.right
+                    +button.actionable.compact.mini
+                        +icon("action-thumb-down")
+                    +button.actionable.compact.mini
+                        +icon("action-thumb-up")
+            +container-header-right
                 .multiple
-                    .button.actionable.compact.mini
-                        .icon.icon-navigation-apps
-                    .button.actionable.compact.mini
-                        .icon.icon-navigation-menu
-                    .button.actionable.compact.mini
-                        .icon.icon-navigation-more-vert
-                    .button.actionable.compact.mini
-                        .icon.icon-navigation-refresh
-        .content Content
-        .footer Footer
-
-    +divider Vertical
-
-    .grid
-        .grid_cols.vertical
-            .grid_col
-                .container 3
-            .grid_col
-                .container 3
-            .grid_col
-                .container 3
-
-    +divider Vertical - Joined
-
-    .grid
-        .grid_cols.vertical.joined
-            .grid_col
-                .container 3
-            .grid_col
-                .container 3
-            .grid_col
-                .container 3
+                    +button.actionable.compact.mini
+                        +icon("navigation-apps")
+                    +button.actionable.compact.mini
+                        +icon("navigation-menu")
+                    +button.actionable.compact.mini
+                        +icon("navigation-more-vert")
+                    +button.actionable.compact.mini
+                        +icon("navigation-refresh")
+        +container-content Content
+        +container-footer.pink Footer

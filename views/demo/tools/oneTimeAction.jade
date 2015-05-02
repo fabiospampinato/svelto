@@ -5,11 +5,10 @@ extends ../../layout.jade
 append content
     +divider One time action
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.outlined(onclick="test_one_time_action_cookie1()") Cookie 1
-            .button.actionable.outlined(onclick="test_one_time_action_cookie2()") Cookie 2
-            .button.actionable.outlined(onclick="test_one_time_action_url()") Url
+    .multiple
+        .button.actionable.outlined(onclick="test_one_time_action_cookie1()") Cookie 1
+        .button.actionable.outlined(onclick="test_one_time_action_cookie2()") Cookie 2
+        .button.actionable.outlined(onclick="test_one_time_action_url()") Url
 
     +divider Action
 
@@ -34,5 +33,5 @@ append body
         }
         function test_one_time_action_reset_actions () {
             $.oneTimeAction ( 'reset' );
-            $.noty ( 'oneTimeAction-related clookies have been resetted' );
+            $.noty ( 'oneTimeAction-related cookies have been resetted' );
         }

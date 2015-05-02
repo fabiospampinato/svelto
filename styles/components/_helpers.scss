@@ -2,8 +2,8 @@
 /* BLUR */
 
 .blur {
+    filter: url('/images/blur.svg#blur');
     filter: blur(3px);
-    filter: url('/images/blur.svg');
 }
 
 /* BORDER */
@@ -55,12 +55,6 @@
 }
 
 /* TEXT ALIGNMENT */
-
-.centered {
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
-}
 
 .text-left {
     text-align: left;
@@ -166,38 +160,6 @@
 
     .w#{$nr}-100 {
         width: #{$nr}%;
-    }
-
-}
-
-/* MULTIPLE */
-
-.multiple {
-
-    display: inline-block;
-    font-size: 0;
-    margin-left: - $layout-half-spacing;
-    margin-right: - $layout-half-spacing;
-    vertical-align: middle;
-
-    &.fluid {
-
-        display: flex;
-
-        & > *:not(.no-grow) {
-            flex-grow: 1;
-        }
-
-    }
-
-    &.vertical {
-        display: flex;
-        flex-direction: column;
-    }
-
-    & > * {
-        margin-left: $layout-half-spacing;
-        margin-right: $layout-half-spacing;
     }
 
 }

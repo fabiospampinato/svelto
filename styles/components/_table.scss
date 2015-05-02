@@ -3,11 +3,13 @@
 
 //TODO: move all sortable related stuff to _sortable.scss
 //TODO: move all selectable related stuff to _selectable.scss
+//FIXME: it shouldn't be always centered
 
 table {
 
     @include medium ();
     width: 100%;
+    text-align: center;
 
     thead {
 

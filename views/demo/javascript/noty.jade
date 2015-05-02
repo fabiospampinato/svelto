@@ -5,49 +5,45 @@ extends ../../layout.jade
 append content
     +divider Text
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.outlined(onclick="noty_test_short()") Short
-            .button.actionable.outlined(onclick="noty_test_medium()") Medium
-            .button.actionable.outlined(onclick="noty_test_long()") Long
+    .multiple
+        .button.actionable.outlined(onclick="noty_test_short()") Short
+        .button.actionable.outlined(onclick="noty_test_medium()") Medium
+        .button.actionable.outlined(onclick="noty_test_long()") Long
 
     +divider Buttons
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.outlined(onclick="noty_test_btns_one()") One
-            .button.actionable.outlined(onclick="noty_test_btns_two()") Two
-            .button.actionable.outlined(onclick="noty_test_btns_three()") Three
+    .multiple
+        .button.actionable.outlined(onclick="noty_test_btns_one()") One
+        .button.actionable.outlined(onclick="noty_test_btns_two()") Two
+        .button.actionable.outlined(onclick="noty_test_btns_three()") Three
 
     +divider Advanced
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.outlined(onclick="noty_test_adv_one()") Title + Body
-            .button.actionable.outlined(onclick="noty_test_adv_two()") Title + Body + Image
-            .button.actionable.outlined(onclick="noty_test_adv_three()") Title + Body + Image + Buttons
-            .button.actionable.outlined(onclick="noty_test_adv_four()") Title + Custom body + Image + Buttons
+    .multiple
+        .button.actionable.outlined(onclick="noty_test_adv_one()") Title + Body
+        .button.actionable.outlined(onclick="noty_test_adv_two()") Title + Body + Image
+        .button.actionable.outlined(onclick="noty_test_adv_three()") Title + Body + Image + Buttons
+        .button.actionable.outlined(onclick="noty_test_adv_four()") Title + Custom body + Image + Buttons
 
     +divider Colors
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.primary(onclick="noty_test_colored('primary')") Primary
-            .button.actionable.secondary(onclick="noty_test_colored('secondary')") Secondary
-            .button.actionable.white.outlined(onclick="noty_test_colored('white')") White
-            .button.actionable.gray(onclick="noty_test_colored('gray')") Gray
-            .button.actionable.black(onclick="noty_test_colored('black')") Black
-            .button.actionable.yellow(onclick="noty_test_colored('yellow')") Yellow
-            .button.actionable.green(onclick="noty_test_colored('green')") Green
-            .button.actionable.blue(onclick="noty_test_colored('blue')") Blue
-            .button.actionable.orange(onclick="noty_test_colored('orange')") Orange
-            .button.actionable.purple(onclick="noty_test_colored('purple')") Purple
-            .button.actionable.red(onclick="noty_test_colored('red')") Red
-            .button.actionable.pink(onclick="noty_test_colored('pink')") Pink
-            .button.actionable.teal(onclick="noty_test_colored('teal')") Teal
+    .multiple
+        .button.actionable.primary(onclick="noty_test_colored('primary')") Primary
+        .button.actionable.secondary(onclick="noty_test_colored('secondary')") Secondary
+        .button.actionable.white(onclick="noty_test_colored('white')") White
+        .button.actionable.gray(onclick="noty_test_colored('gray')") Gray
+        .button.actionable.black(onclick="noty_test_colored('black')") Black
+        .button.actionable.yellow(onclick="noty_test_colored('yellow')") Yellow
+        .button.actionable.green(onclick="noty_test_colored('green')") Green
+        .button.actionable.blue(onclick="noty_test_colored('blue')") Blue
+        .button.actionable.orange(onclick="noty_test_colored('orange')") Orange
+        .button.actionable.purple(onclick="noty_test_colored('purple')") Purple
+        .button.actionable.red(onclick="noty_test_colored('red')") Red
+        .button.actionable.pink(onclick="noty_test_colored('pink')") Pink
+        .button.actionable.teal(onclick="noty_test_colored('teal')") Teal
 
 append body
-    script(type="text/javascript").
+    +script.
         function noty_test_short () {
             $.noty ( "Short noty" );
         }

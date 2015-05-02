@@ -27,7 +27,7 @@
     z-index: 100;
     max-width: 100%;
     text-align: left;
-    pointer-events: none;
+    pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
 }
 
 /* NOTY */
@@ -40,19 +40,18 @@
         margin-right: $layout-spacing;
         margin-bottom: 0;
         border-radius: $border-radius-normal;
-        @include multi-shadow ( $shadow-depth-3, $noty-shadow-inset );
+        @include multi-shadow ( $shadow-depth-5, $noty-shadow-inset );
         border-width: 1px;
         border-style: solid;
         box-sizing: border-box;
         display: table;
-        text-align: center;
-        pointer-events: auto;
+        pointer-events: auto; //FIXME: if we use this we cannot support IE 10 (I think)
         opacity: 0;
         font-size: 0;
         padding: 0;
         transition: opacity 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s, margin-bottom 0.2s ease 0s;
 
-        &:not(.action):not(.forever) {
+        &:not(.action) {
             cursor: pointer;
         }
 
@@ -89,17 +88,13 @@
 
         }
 
-        .multiple {
-
+        .noty_buttons {
             margin-top: $layout-spacing;
+        }
+
+        .button {
             margin-bottom: 0;
-
-            .button {
-                margin-top: 0;
-                margin-bottom: 0;
-                transition: height 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s;
-            }
-
+            transition: height 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s;
         }
 
     }

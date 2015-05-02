@@ -5,13 +5,12 @@ extends ../../layout.jade
 append content
     +divider Notifications
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.outlined(onclick="notification_test()") Single
-            .button.actionable.outlined(onclick="notification_test(true)") Both
+    .multiple
+        .button.actionable.outlined(onclick="notification_test()") Single
+        .button.actionable.outlined(onclick="notification_test(true)") Both
 
 append body
-    script(type="text/javascript").
+    +script.
         function notification_test ( both ) {
             $.notification ( { title: "Test title", body: "Example test description", img: "/images/sample.png" }, both );
         }

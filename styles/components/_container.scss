@@ -1,6 +1,8 @@
 
 /* CONTAINER */
 
+//FIXME: limited is not centered, it should be invece
+
 .container {
 
     @include white ( true );
@@ -9,8 +11,6 @@
     border-radius: $border-radius-normal;
     padding: $layout-spacing;
     margin-bottom: $layout-spacing;
-    margin-left: auto;
-    margin-right: auto;
     box-shadow: $shadow-depth-1;
     box-sizing: border-box;
     position: relative;
@@ -19,7 +19,7 @@
         max-width: $layout-max-width;
     }
 
-    & > *:last-child:not(.footer), & > .content > *:last-child {
+    & > *:last-child:not(.content):not(.footer) {
 
         margin-bottom: 0 !important;
 
@@ -32,60 +32,60 @@
     & > .header {
 
         @include primary ();
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        align-items: center;
         border-width: $container-header-border-width;
         border-style: solid;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        height: $container-header-height;
-        line-height: $container-header-height;
         font-weight: bold;
         margin: #{-($layout-spacing + $container-border-size)} #{-($layout-spacing + $container-border-size)} $layout-spacing;
         text-transform: uppercase;
         position: relative;
-
-        & > .label {
-            position: absolute;
-            left: 0;
-            right: 0;
-            pointer-events: none;
-            padding-left: $layout-spacing;
-            padding-right: $layout-spacing;
-            text-align: center;
-        }
+        padding: $layout-spacing;
 
         & > .sub {
 
-            display: table;
-            height: $container-header-height;
-            line-height: $container-header-height;
-
             &.left {
-                margin-left: $layout-spacing;
+                order: 0;
+            }
+
+            &.center {
+
+                order: 1;
+                flex-grow: 1;
+                text-align: center;
+
+                & > .title {
+                    pointer-events: none; //INFO: so we can drag by the title for example (but are are you sure about this?)(is this the original purpose?)//FIXME: if we use this we cannot support IE 10 (I think)
+                    padding-left: $layout-spacing;
+                    padding-right: $layout-spacing;
+                }
+
             }
 
             &.right {
-                margin-right: $layout-spacing;
+                order: 2;
             }
 
             & > .multiple {
-                display: table-cell;
+                margin-top: -3px;
+                margin-bottom: -3px;
+            }
+
+            & > .button, & > .multiple > .button {
+                margin-bottom: 0 !important;
             }
 
         }
 
-        .button {
-            margin-bottom: 0 !important;
-        }
-
     }
 
-    & > .content_wrp {
-        overflow: hidden;
-    }
-
-    & > .content, & > .content_wrp > .content {
+    & > .content {
         margin: -$layout-spacing;
         padding: $layout-spacing;
         overflow: hidden;
@@ -93,16 +93,11 @@
 
     & > .footer {
         margin: #{$layout-spacing} #{-($layout-spacing + $container-border-size)} #{-($layout-spacing + $container-border-size)};
-        min-height: $container-footer-height;
-        line-height: $container-footer-height;
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
-        border-width: 0px;
+        border-width: $container-footer-border-width;
         border-style: solid;
-    }
-
-    .container {
-        box-shadow: none;
+        padding: $layout-spacing;
     }
 
 }

@@ -1,0 +1,36 @@
+//- css/elements.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Code
+
+    +container
+        code print ( 'This is an example code block' )
+
+    +divider Section
+
+    +container
+        section print ( 'This is an example section block' )
+
+    +divider Pre
+
+    +container
+        pre print ( 'This is an example section block' )
+
+    +divider Kbd
+
+    +container
+        #[kbd ctrl] + #[kbd alt] + #[kbd canc]
+
+    +divider Embed
+
+    +container ~ This block is actually empty ~
+
+    +divider Images
+
+    +container
+        .multiple
+            +image-sample
+            +image-sample
+                +image-caption This is a caption

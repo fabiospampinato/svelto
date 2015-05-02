@@ -5,92 +5,86 @@ extends ../../layout.jade
 append content
     +divider Normal
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable Base
-            .button.actionable.rounded Rounded
-            .button.actionable.compact Compact
-            .button.actionable.active Active
-            .button.actionable.inactive Inactive
+    .multiple
+        .button.actionable Base
+        .button.actionable.rounded Rounded
+        .button.actionable.compact Compact
+        .button.actionable.active Active
+        .button.actionable.inactive Inactive
 
     +divider Outlined
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable.outlined Outlined
-            .button.actionable.outlined
-                .sub.left
-                    .icon.icon-action-settings
-                .label Outlined
-            .button.actionable.outlined
-                .label Outlined
-                .sub.right
-                    .icon.icon-action-settings
-            .button.actionable.outlined.compact
-                .sub.left
-                    .icon.icon-action-settings
-                .label Compact
-            .button.actionable.outlined.compact
-                .label Compact
-                .sub.right
-                    .icon.icon-action-settings
+    .multiple
+        .button.actionable.outlined Outlined
+        .button.actionable.outlined
+            .sub.left
+                .icon.icon-action-settings
+            .label Outlined
+        .button.actionable.outlined
+            .label Outlined
+            .sub.right
+                .icon.icon-action-settings
+        .button.actionable.outlined.compact
+            .sub.left
+                .icon.icon-action-settings
+            .label Compact
+        .button.actionable.outlined.compact
+            .label Compact
+            .sub.right
+                .icon.icon-action-settings
 
     +divider Conditional
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .toolbar
-                .button.actionable.red Cancel
-                .conditional
-                .button.actionable.green Save
+    .multiple
+        .toolbar
+            .button.actionable.red Cancel
+            .conditional
+            .button.actionable.green Save
 
     +divider Icon
 
-    +container.transparent.no-padding.no-border
-        .multiple
-            .button.actionable
+    .multiple
+        .button.actionable
+            .icon.icon-action-settings
+        .button.actionable.compact
+            .icon.icon-action-settings
+        .button.actionable.compact.rounded
+            .icon.icon-action-settings
+        .button.actionable
+            .icon.icon-action-settings.left
+            | Settings
+        .button.actionable
+            .icon.icon-action-settings.right
+            | Settings
+        .button.actionable
+            .sub.left
                 .icon.icon-action-settings
-            .button.actionable.compact
+            .label Settings
+        .button.actionable
+            .label Settings
+            .sub.right
                 .icon.icon-action-settings
-            .button.actionable.compact.rounded
+        .button.actionable.compact
+            .sub.left
                 .icon.icon-action-settings
-            .button.actionable
-                .icon.icon-action-settings.left
-                | Settings
-            .button.actionable
-                .icon.icon-action-settings.right
-                | Settings
-            .button.actionable
-                .sub.left
-                    .icon.icon-action-settings
-                .label Settings
-            .button.actionable
-                .label Settings
-                .sub.right
-                    .icon.icon-action-settings
-            .button.actionable.compact
-                .sub.left
-                    .icon.icon-action-settings
-                .label Settings
-            .button.actionable.compact
-                .label Settings
-                .sub.right
-                    .icon.icon-action-settings
+            .label Settings
+        .button.actionable.compact
+            .label Settings
+            .sub.right
+                .icon.icon-action-settings
 
     +divider Fluid
 
-    +container.transparent.no-padding.no-border
-        .multiple.fluid
-            .button.actionable Foo
-            .button.actionable Bar
-            .button.actionable Baz
-            .button.actionable Qux
+    .multiple.fluid
+        .button.actionable Foo
+        .button.actionable Bar
+        .button.actionable Baz
+        .button.actionable Qux
 
     +divider Vertical
 
-    +container.transparent.no-padding.no-border
-        .multiple.vertical
-            .button.actionable Foo
-            .button.actionable Bar
-            .button.actionable Baz
-            .button.actionable Qux
+    .multiple.vertical
+        .button.actionable Foo
+        .button.actionable Bar
+        .button.actionable Baz
+        .button.actionable Qux

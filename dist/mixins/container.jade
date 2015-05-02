@@ -1,5 +1,38 @@
 //- container.jade
 
-mixin container
+mixin container(title, header_classes)
     .container&attributes(attributes)
+        if title
+            +container-header(title)(class=header_classes)
+        block
+
+mixin container-header(title)
+    .header&attributes(attributes)
+        if title
+            +container-header-title(title)
+        block
+
+mixin container-header-left
+    .sub.left&attributes(attributes)
+        block
+
+mixin container-header-center
+    .sub.center&attributes(attributes)
+        block
+
+mixin container-header-title(title)
+    .sub.center&attributes(attributes)
+        .title= title
+        block
+
+mixin container-header-right
+    .sub.right&attributes(attributes)
+        block
+
+mixin container-content
+    .content&attributes(attributes)
+        block
+
+mixin container-footer
+    .footer&attributes(attributes)
         block
