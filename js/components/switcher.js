@@ -3,27 +3,37 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'switcher', {
+    'use strict';
 
-        theme: {
-            on: 'secondary',
-            off: 'gray'
+    $.factory ( 'presto.switcher', {
+
+        /* OPTIONS */
+
+        options: {
+            theme: {
+                on: 'secondary',
+                off: 'gray'
+            },
+            icons: {
+                on: false,
+                off: false
+            }
         },
-        icons: {
-            on: false,
-            off: false
-        }
-
-    }, {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$bar = this.$node.find ( '.bar' );
-            this.$handler = this.$node.find ( '.handler' );
-            this.$icon = this.$node.find ( '.icon' );
-            this.$input = this.$node.find ( 'input' );
+            $('.switcher').switcher ();
+
+        },
+
+        _create: function () {
+
+            this.$bar = this.$element.find ( '.bar' );
+            this.$handler = this.$element.find ( '.handler' );
+            this.$icon = this.$element.find ( '.icon' );
+            this.$input = this.$element.find ( 'input' );
 
             this.current_value = this.$input.prop ( 'checked' );
             this.dragging = false;
@@ -38,12 +48,6 @@
             this._bind_arrows ();
             this._bind_click ();
             this._bind_drag ();
-
-        },
-
-        ready: function () {
-
-            $('.switcher').switcher ();
 
         },
 
@@ -71,13 +75,13 @@
 
         _bind_arrows: function () {
 
-            this.$node.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this.$element.hover ( this._handler_arrows_in, this._handler_arrows_out );
 
         },
 
         _handler_arrows_in: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             $document.on ( 'keydown', this._handler_arrows_keydown );
 
@@ -119,13 +123,13 @@
 
         _bind_click: function () {
 
-            this.$node.on ( 'click', this._handler_click );
+            this.$element.on ( 'click', this._handler_click );
 
         },
 
         _handler_click: function () {
 
-            if ( this.dragging || this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.dragging || this.$element.hasClass ( 'inactive' ) ) return;
 
             this.toggle ();
 
@@ -141,7 +145,7 @@
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.start_percentage = this.current_value ? 100 : 0;
 
@@ -149,7 +153,7 @@
             this.bar_width = this.$bar.width ();
 
             $html.addClass ( 'dragging' );
-            this.$node.addClass ( 'dragging' );
+            this.$element.addClass ( 'dragging' );
 
             $document.on ( 'mousemove touchmove', this._handler_drag_move );
             $document.on ( 'mouseup touchend', this._handler_drag_end );
@@ -178,7 +182,7 @@
             this.current_value = ( handler_off.left + ( handler_off.width / 2 ) >= bar_off.left + ( bar_off.width / 2 ) );
 
             $html.removeClass ( 'dragging' );
-            this.$node.removeClass ( 'dragging' );
+            this.$element.removeClass ( 'dragging' );
 
             $document.off ( 'mousemove touchmove', this._handler_drag_move );
             $document.off ( 'mouseup touchend', this._handler_drag_end );

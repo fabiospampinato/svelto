@@ -3,6 +3,8 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.timer = function ( func, time, autostart ) {
 
         return new Timer ( func, time, autostart );

@@ -3,13 +3,21 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'slider', {
+    'use strict';
+
+    $.factory ( 'presto.slider', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$slider = this.$node.find ( '.slider' );
+            $('.slider_wrp').slider ();
+
+        },
+
+        _create: function () {
+
+            this.$slider = this.$element.find ( '.slider' );
             this.$min_btn = this.$slider.find ( '.min' );
             this.$max_btn = this.$slider.find ( '.max' );
             this.$input = this.$slider.find ( 'input' );
@@ -40,12 +48,6 @@
             this._bind_min_max_click ();
             this._bind_drag ();
             this._bind_click ();
-
-        },
-
-        ready: function () {
-
-            $('.slider_wrp').slider ();
 
         },
 
@@ -162,7 +164,7 @@
 
         _handler_min_click: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.navigate ( - this.step );
 
@@ -176,7 +178,7 @@
 
         _handler_max_click: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.navigate ( this.step );
 
@@ -193,7 +195,7 @@
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.start_pos = get_event_pageXY ( event );
             this.current_move = 0;
@@ -246,7 +248,7 @@
 
         _handler_click: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             if ( $(event.target).parents ().index ( this.$handler ) !== -1 ) return;
 

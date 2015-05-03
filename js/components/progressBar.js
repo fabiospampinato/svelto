@@ -5,21 +5,29 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'progressBar', {
+    'use strict';
+
+    $.factory ( 'presto.progressBar', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$highlighted = this.$node.find ( '.highlighted' ),
-            this.$label = this.$highlighted.find ( '.label' ),
-            this.data_percentage = this.$node.data ( 'percentage' );
+            $('.progressBar').progressBar ();
 
         },
 
-        call: function ( percentage ) {
+        _create: function () {
 
-            if ( this.$node.hasClass ( 'fixed' ) ) return;
+            this.$highlighted = this.$element.find ( '.highlighted' ),
+            this.$label = this.$highlighted.find ( '.label' ),
+            this.data_percentage = this.$element.data ( 'percentage' );
+
+        },
+
+        _init: function ( percentage ) { //FIXME
+
+            if ( this.$element.hasClass ( 'fixed' ) ) return;
 
             if ( this.data_percentage !== undefined || percentage !== undefined ) {
 
@@ -30,12 +38,6 @@
                 this.$label.html ( percentage_nr + '%' );
 
             }
-
-        },
-
-        ready: function () {
-
-            $('.progressBar').progressBar ();
 
         }
 

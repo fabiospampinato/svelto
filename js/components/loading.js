@@ -3,11 +3,13 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'loading', function ( activate ) {
+    'use strict';
+
+    $.fn.loading = function ( activate ) {
 
         if ( activate ) {
 
-            this.$node.addClass ( 'loading' ).defer ( function () {
+            return this.addClass ( 'loading' ).defer ( function () {
 
                 this.addClass ( 'loading_active' );
 
@@ -15,7 +17,7 @@
 
         } else {
 
-            this.$node.removeClass ( 'loading_active' ).defer ( function () {
+            return this.removeClass ( 'loading_active' ).defer ( function () {
 
                 this.removeClass ( 'loading' );
 
@@ -23,6 +25,6 @@
 
         }
 
-    });
+    };
 
 }( lQuery, window, document ));

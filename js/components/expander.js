@@ -3,23 +3,25 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'expander', {
+    'use strict';
+
+    $.factory ( 'presto.expander', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$header = this.$node.children ( '.header' );
-            this.$content_wrp = this.$node.children ( '.content' );
-            this.opened = this.$node.hasClass ( 'active' );
-
-            this._bind_click ();
+            $('.expander').expander ();
 
         },
 
-        ready: function () {
+        _create: function () {
 
-            $('.expander').expander ();
+            this.$header = this.$element.children ( '.header' );
+            this.$content_wrp = this.$element.children ( '.content' );
+            this.opened = this.$element.hasClass ( 'active' );
+
+            this._bind_click ();
 
         },
 
@@ -33,13 +35,13 @@
 
         _handler_click: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.opened = !this.opened;
 
             var opened;
 
-            this.$node.defer ( function () {
+            this.$element.defer ( function () {
 
                 this.toggleClass ( 'active', opened );
 

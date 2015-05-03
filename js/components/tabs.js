@@ -3,12 +3,22 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'tabs', {
+    'use strict';
 
-        init: function () {
+    $.factory ( 'presto.tabs', {
 
-            $tabs = this.$node.find ( '.tab' ),
-            $contabs = this.$node.find ( '.contab' );
+        /* SPECIAL */
+
+        _ready: function () {
+
+            $('.tabs_wrp').tabs ();
+
+        },
+
+        _create: function () {
+
+            $tabs = this.$element.find ( '.tab' ),
+            $contabs = this.$element.find ( '.contab' );
 
             $tabs.each ( function () {
 
@@ -37,12 +47,6 @@
                 });
 
             });
-
-        },
-
-        ready: function () {
-
-            $('.tabs_wrp').tabs ();
 
         }
 

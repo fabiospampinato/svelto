@@ -5,64 +5,76 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'touching', {
+    'use strict';
 
-        start_index : false,
-        x : 0,
-        y : 0
+    //FIXME: It's not a widget
 
-    }, function () {
+    $.factory ( 'presto.touching', {
 
-        var options = this.options,
-            touched = false;
+        /* OPTIONS */
 
-        this.bt_each ( function () {
+        options: {
+            start_index : false,
+            x : 0,
+            y : 0
+        },
 
-            var $ele = $(this),
-                offset = $ele.offset (),
-                x1 = offset.left,
-                y1 = offset.top;
+        /* SPECIAL */
 
-            if ( options.y >= y1 ) {
+        _init: function () {
 
-                if ( options.y <= y1 + $ele.height () ) {
+            var options = this.options,
+                touched = false;
 
-                    if ( options.x >= x1 ) {
+            this.bt_each ( function () {
 
-                        if ( options.x <= x1 + $ele.width () ) {
+                var $ele = $(this),
+                    offset = $ele.offset (),
+                    x1 = offset.left,
+                    y1 = offset.top;
 
-                            touched = $ele;
+                if ( options.y >= y1 ) {
 
-                            return false;
+                    if ( options.y <= y1 + $ele.height () ) {
+
+                        if ( options.x >= x1 ) {
+
+                            if ( options.x <= x1 + $ele.width () ) {
+
+                                touched = $ele;
+
+                                return false;
+
+                            } else {
+
+                                return 1;
+
+                            }
 
                         } else {
 
-                            return 1;
+                            return -1;
 
                         }
 
                     } else {
 
-                        return -1;
+                        return 1;
 
                     }
 
+
                 } else {
 
-                    return 1;
+                    return -1;
 
                 }
 
+            }, this.options.start_index );
 
-            } else {
+            return touched;
 
-                return -1;
-
-            }
-
-        }, this.options.start_index );
-
-        return touched;
+        }
 
     });
 

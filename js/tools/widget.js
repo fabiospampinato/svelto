@@ -3,6 +3,10 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
+    /* WIDGET */
+
     $.widget = function ( /* options, element */ ) {};
 
     $.widget._childConstructors = [];
@@ -13,12 +17,8 @@
 
         defaultElement: '<div>',
 
-        /* WIDGET PROPS */
-
-        widget: {
-            name: 'widget',
-            fullName: 'widget'
-        },
+        widgetName: 'widget',
+        widgetFullName: 'widget',
 
         /* OPTIONS */
 
@@ -30,6 +30,7 @@
         /* WIDGET FUNCTIONS */
 
         _createWidget: function ( options, element ) {
+
             // VARIABLES
 
             element = $( element || this.defaultElement || this )[0];
@@ -45,7 +46,7 @@
 
                 // SAVING INSTANCE
 
-                $.data ( this.element, this.widget.fullName, this );
+                $.data ( this.element, this.widgetFullName, this );
 
                 // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
@@ -85,7 +86,7 @@
 
             this._destroy ();
 
-            $.data ( this.element, this.widget.fullName, null ); //TODO: remove it, not set it to null
+            $.data ( this.element, this.widgetFullName, null ); //TODO: remove it, not set it to null
 
         },
 
@@ -179,7 +180,7 @@
 
             if ( key === 'disabled' ) {
 
-                this.$element.toggleClass ( this.widget.fullName + '-disabled', !!value );
+                this.$element.toggleClass ( this.widgetFullName + '-disabled', !!value );
 
             }
 

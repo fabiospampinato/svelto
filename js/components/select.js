@@ -3,21 +3,23 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'selects', {
+    'use strict';
 
-
-
-    }, {
-
-        /* UTILITIES */
+    $.factory ( 'presto.selects', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$select = this.$node.find ( 'select' );
+            $('.select').selects ();
+
+        },
+
+        _create: function () {
+
+            this.$select = this.$element.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
-            this.$placeholder = this.$node.find ( '.placeholder' );
+            this.$placeholder = this.$element.find ( '.placeholder' );
             this.dropdown_id = $.getUID ();
 
             this.$dropdown = false;
@@ -40,12 +42,6 @@
 
         },
 
-        ready: function () {
-
-            $('.select').selects ();
-
-        },
-
         /* PRIVATE */
 
         _handler_click: function ( event ) {
@@ -63,9 +59,9 @@
             this.$dropdown = $('#dropdown-' + this.dropdown_id);
             this.$dropdown_container = this.$dropdown.find ( '.container' );
 
-            this.$node.addClass ( 'dropdown_trigger' ).data ( 'dropdown', 'dropdown-' + this.dropdown_id );
+            this.$element.addClass ( 'dropdown_trigger' ).data ( 'dropdown', 'dropdown-' + this.dropdown_id );
 
-            this.$node.dropdowns ({
+            this.$element.dropdowns ({
                 beforeOpen: this._set_dropdown_width
             });
 
@@ -126,7 +122,7 @@
 
         _set_dropdown_width: function () {
 
-            this.$dropdown_container.css ( 'min-width', this.$node.width () );
+            this.$dropdown_container.css ( 'min-width', this.$element.width () );
 
         },
 

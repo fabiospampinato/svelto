@@ -3,15 +3,23 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     var synced_groups = [];
 
-    $.factory ( 'formSync', {
+    $.factory ( 'presto.formSync', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            var $form = this.$node,
+            $('form[data-sync-group]').formSync ();
+
+        },
+
+        _create: function () {
+
+            var $form = this.$element,
                 sync_group = $form.data ( 'sync-group');
 
             if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
@@ -69,12 +77,6 @@
                 });
 
             });
-
-        },
-
-        ready: function () {
-
-            $('form[data-sync-group]').formSync ();
 
         }
 

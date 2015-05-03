@@ -3,33 +3,43 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'tagbox', {
+    'use strict';
 
-        input: {
-            default_width: '100',
-            placeholder: 'New tag...',
-            theme: 'transparent small'
-        },
-        tag: {
-            min_length: 3,
-            theme: 'outlined small'
-        },
-        forbidden: [ '<', '>', ';', '`' ],
-        separator: ',',
-        sort: false,
-        append: true
+    $.factory ( 'presto.tagbox', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            input: {
+                default_width: '100',
+                placeholder: 'New tag...',
+                theme: 'transparent small'
+            },
+            tag: {
+                min_length: 3,
+                theme: 'outlined small'
+            },
+            forbidden: [ '<', '>', ';', '`' ],
+            separator: ',',
+            sort: false,
+            append: true
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
+
+            $('input.tagbox').tagbox ();
+
+        },
+
+        _create: function () {
 
             this.tagbox_id = $.getUID ();
 
             var template = '<div id="tagbox_' + this.tagbox_id + '" class="container transparent no-padding"><div class="multiple">' + this._get_tags_html () + '<input value="" placeholder="' + this.options.input.placeholder + '" class="autogrow ' + this.options.input.theme + '" data-default-width="' + this.options.input.default_width + '" /></div></div>';
 
-            this.$node.after ( template ).addClass ( 'hidden' );
+            this.$element.after ( template ).addClass ( 'hidden' );
 
             this.$tagbox = $('#tagbox_' + this.tagbox_id);
             this.$partial = this.$tagbox.find ( 'input' );
@@ -42,17 +52,11 @@
 
         },
 
-        ready: function () {
-
-            $('input.tagbox').tagbox ();
-
-        },
-
         /* PRIVATE */
 
         _get_tags_html: function () {
 
-            var value = this.$node.val (),
+            var value = this.$element.val (),
                 tags_str = value.split ( this.options.separator ),
                 tags_html = '';
 
@@ -111,7 +115,7 @@
 
         _update_input: function () {
 
-            this.$node.val ( this.tags_arr.join ( this.options.separator ) );
+            this.$element.val ( this.tags_arr.join ( this.options.separator ) );
 
         },
 

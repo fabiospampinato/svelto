@@ -4,27 +4,29 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    /* PLUGIN */
+    'use strict';
 
-    $.factory ( 'timeAgo', {
+    $.factory ( 'presto.timeAgo', {
 
-        onUpdate: $.noop
+        /* OPTIONS */
 
-    }, {
+        options: {
+            onUpdate: $.noop
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.timestamp = this.$node.data ( 'timestamp' );
-
-            this._update_loop ( 0 );
+            $('[data-timestamp]').timeAgo ();
 
         },
 
-        ready: function () {
+        _create: function () {
 
-            $('[data-timestamp]').timeAgo ();
+            this.timestamp = this.$element.data ( 'timestamp' );
+
+            this._update_loop ( 0 );
 
         },
 
@@ -54,7 +56,7 @@
 
             var timeago = _.timeAgo ( this.timestamp );
 
-            this.$node.html ( timeago.str );
+            this.$element.html ( timeago.str );
 
             this.hook ( 'onUpdate' );
 

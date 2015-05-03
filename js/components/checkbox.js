@@ -3,19 +3,27 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'checkbox', {
+    'use strict';
+
+    $.factory ( 'presto.checkbox', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$input = this.$node.find ( 'input' );
+            $('.checkbox').checkbox ();
+
+        },
+
+        _create: function () {
+
+            this.$input = this.$element.find ( 'input' );
 
             if ( this.$input.prop ( 'checked' ) ) {
 
-                this.$node.addClass ( 'selected' );
+                this.$element.addClass ( 'selected' );
 
-            } else if ( this.$node.hasClass ( 'selected' ) ) {
+            } else if ( this.$element.hasClass ( 'selected' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -27,17 +35,11 @@
 
         },
 
-        ready: function () {
-
-            $('.checkbox').checkbox ();
-
-        },
-
         /* CLICK */
 
         _bind_click: function () {
 
-            this.$node.on ( 'click', this._handler_click );
+            this.$element.on ( 'click', this._handler_click );
 
         },
 
@@ -51,7 +53,7 @@
 
         _bind_change: function () {
 
-            this.$node.on ( 'change', this.update () );
+            this.$element.on ( 'change', this.update () );
 
         },
 
@@ -61,13 +63,13 @@
 
             var active = this.$input.prop ( 'checked' );
 
-            this.$node.toggleClass ( 'selected', active );
+            this.$element.toggleClass ( 'selected', active );
 
         },
 
         toggle: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             var active = this.$input.prop ( 'checked' );
 

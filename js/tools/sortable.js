@@ -5,33 +5,43 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'sortable', {
+    'use strict';
 
-        sorters: {
-            int: function ( a, b ) {
-                return parseInt ( a, 10 ) - parseInt ( b, 10 );
-            },
-            float: function ( a, b ) {
-                return parseFloat ( a ) - parseFloat ( b );
-            },
-            string: function ( a, b ) {
-                a = a.toLocaleLowerCase ();
-                b = b.toLocaleLowerCase ();
-                return a.localeCompare ( b );
+    $.factory ( 'presto.sortable', {
+
+        /* OPTIONS */
+
+        options: {
+            sorters: {
+                int: function ( a, b ) {
+                    return parseInt ( a, 10 ) - parseInt ( b, 10 );
+                },
+                float: function ( a, b ) {
+                    return parseFloat ( a ) - parseFloat ( b );
+                },
+                string: function ( a, b ) {
+                    a = a.toLocaleLowerCase ();
+                    b = b.toLocaleLowerCase ();
+                    return a.localeCompare ( b );
+                }
             }
-        }
-
-    }, {
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$headers = this.$node.find ( 'thead th' );
+            $('table.sortable').sortable ();
+
+        },
+
+        _create: function () {
+
+            this.$headers = this.$element.find ( 'thead th' );
             this.$sortables = this.$headers.filter ( '[data-sort]' );
-            this.$tbody = this.$node.find ( 'tbody' );
+            this.$tbody = this.$element.find ( 'tbody' );
 
-            this.table = this.$node.get ( 0 );
+            this.table = this.$element.get ( 0 );
             this.tbody = this.$tbody.get ( 0 );
 
             this.current_index = false; // `$headers` index, not `$sortables` index
@@ -41,12 +51,6 @@
 
             this._bind_change ();
             this._bind_click ();
-
-        },
-
-        ready: function () {
-
-            $('table.sortable').sortable ();
 
         },
 
@@ -70,7 +74,7 @@
 
             var instance = this;
 
-            this.$node.on ( 'change', function ( event ) {
+            this.$element.on ( 'change', function ( event ) {
 
                 instance._handler_change ();
 
@@ -185,7 +189,7 @@
 
             // TRIGGER
 
-            this.$node.trigger ( 'sort' );
+            this.$element.trigger ( 'sort' );
 
         }
 

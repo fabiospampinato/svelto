@@ -3,6 +3,8 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.oneTimeAction = function ( method, option, action ) {
 
         if ( method === 'cookie' ) { // option -> action id

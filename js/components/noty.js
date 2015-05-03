@@ -3,6 +3,8 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     // VARIABLES
 
     var $queue,

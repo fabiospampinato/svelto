@@ -3,26 +3,28 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'tableHelper', {
+    'use strict';
+
+    $.factory ( 'presto.tableHelper', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$thead = this.$node.find ( 'thead' ),
-            this.$tfoot = this.$node.find ( 'tfoot' ),
-            this.$tbody = this.$node.find ( 'tbody' ),
+            $('table').tableHelper ();
+
+        },
+
+        _create: function () {
+
+            this.$thead = this.$element.find ( 'thead' ),
+            this.$tfoot = this.$element.find ( 'tfoot' ),
+            this.$tbody = this.$element.find ( 'tbody' ),
             this.$headers = this.$thead.find ( 'th' ),
             this.$empty_row = this.$tbody.find ( 'tr.empty' ),
             this.columns_nr = this.$headers.length;
 
             this._check_empty ();
-
-        },
-
-        ready: function () {
-
-            $('table').tableHelper ();
 
         },
 
@@ -72,7 +74,7 @@
 
             this._check_empty ();
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -94,7 +96,7 @@
 
             }
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -106,7 +108,7 @@
 
             this._check_empty ();
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -118,7 +120,7 @@
 
             this._check_empty ();
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 

@@ -3,6 +3,8 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.factory = function ( name, base, prototype ) {
 
         /* VARIABLES */
@@ -92,7 +94,7 @@
                     this._super = _super;
                     this._superApply = _superApply;
 
-                    returnValue = value.apply ( this, arguments );
+                    returnValue = prototype[prop].apply ( this, arguments );
 
                     this._super = __super;
                     this._superApply = __superApply;
@@ -110,10 +112,8 @@
         constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
-            widget: {
-                name: name,
-                fullName: fullName
-            }
+            widgetName: name,
+            widgetFullName: fullName
         });
 
         /* UPDATE PROTOTYPE CHAIN */
@@ -158,7 +158,7 @@
 
         /* VARIABLES */
 
-        var fullName = object.prototype.widget.fullName || name;
+        var fullName = object.prototype.widgetFullName || name;
 
         /* PLUGIN */
 
@@ -233,11 +233,7 @@
 
                         instance.option ( options || {} );
 
-                        if ( instance._init ) {
-
-                            instance._init ();
-
-                        }
+                        instance._init ();
 
                     } else {
 

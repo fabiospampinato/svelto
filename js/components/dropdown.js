@@ -3,42 +3,44 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     var assignments = {};
 
-    $.factory ( 'dropdown', {
+    $.factory ( 'presto.dropdown', {
 
-        beforeOpen: $.noop,
-        afterOpen: $.noop,
-        beforeClose: $.noop,
-        afterClose: $.noop
-
-    }, {
+        options: {
+            beforeOpen: $.noop,
+            afterOpen: $.noop,
+            beforeClose: $.noop,
+            afterClose: $.noop
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.dropdown_id = this.$node.data ( 'dropdown' );
+            $('.dropdown_trigger').dropdown ();
+
+        },
+
+        _create: function () {
+
+            this.dropdown_id = this.$element.data ( 'dropdown' );
             this.$dropdown = $('#' + dropdown_id);
-            this.no_tip = this.$node.hasClass ( 'no_tip' ) || this.$dropdown.hasClass ( 'no_tip' );
+            this.no_tip = this.$element.hasClass ( 'no_tip' ) || this.$dropdown.hasClass ( 'no_tip' );
             this.$bottom_tip = this.no_tip ? false : this.$dropdown.find ( '.bottom_tip' );
             this.$top_tip = this.no_tip ? false : this.$dropdown.find ( '.top_tip' );
             this.$right_tip = this.no_tip ? false : this.$dropdown.find ( '.right_tip' );
             this.$left_tip = this.no_tip ? false : this.$dropdown.find ( '.left_tip' );
-            this.$btn_parents = this.$node.parents ();
+            this.$btn_parents = this.$element.parents ();
             this.$buttons = this.$dropdown.find ( '.button' );
             this.opened = false;
 
-            this.$node.on ( 'click', this._handler_btn_click );
+            this.$element.on ( 'click', this._handler_btn_click );
             this.$buttons.on ( 'click', this.close );
             $window.on ( 'resize scroll', this.update );
             this.$btn_parents.on ( 'scroll', this.update );
-
-        },
-
-        ready: function () {
-
-            $('.dropdown_trigger').dropdown ();
 
         },
 
@@ -78,13 +80,13 @@
 
         open: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.hook ( 'beforeOpen' );
 
-            assignments[dropdown_id] = this.$node;
+            assignments[dropdown_id] = this.$element;
 
-            this.$node.addClass ( 'active' );
+            this.$element.addClass ( 'active' );
 
             this.$dropdown.addClass ( 'show' );
 
@@ -106,7 +108,7 @@
 
             this.hook ( 'beforeClose' );
 
-            if ( assignments[dropdown_id] === this.$node ) {
+            if ( assignments[dropdown_id] === this.$element ) {
 
                 this.$dropdown.removeClass ( 'active' );
 
@@ -118,7 +120,7 @@
 
             }
 
-            this.$node.removeClass ( 'top bottom left right active' );
+            this.$element.removeClass ( 'top bottom left right active' );
 
             $window.off ( 'click', this._handler_window_click );
 
@@ -132,14 +134,14 @@
 
             // reset classes
 
-            this.$node.removeClass ( 'top bottom left right' );
+            this.$element.removeClass ( 'top bottom left right' );
             this.$dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no_tip', this.no_tip );
 
             // update offsets
 
             var body_offset = $body.offset (),
                 drop_offset = this.$dropdown.offset (),
-                btn_offset = this.$node.offset ();
+                btn_offset = this.$element.offset ();
 
             // common variables
 
@@ -150,11 +152,6 @@
                 top_space = btn_offset.top,
                 right_space = body_offset.width - btn_offset.left - btn_offset.width,
                 left_space = btn_offset.left;
-
-            console.log(top_space);
-            console.log(right_space);
-            console.log(bottom_space);
-            console.log(left_space);
 
             var useful_doc_width = Math.min ( body_offset.width, drop_offset.width ),
                 useful_doc_height = Math.min ( body_offset.height, drop_offset.height );
@@ -298,7 +295,7 @@
                     left: left
                 });
 
-                this.$node.addClass ( direction );
+                this.$element.addClass ( direction );
                 this.$dropdown.addClass ( direction );
 
                 // positionate the tip

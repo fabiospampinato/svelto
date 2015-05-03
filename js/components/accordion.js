@@ -3,25 +3,27 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'accordion', {
+    'use strict';
+
+    $.factory ( 'presto.accordion', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$accordions = this.$node.find ( '.accordion' );
+            $('.accordions_wrp').accordion ();
+
+        },
+
+        _create: function () {
+
+            this.$accordions = this.$element.find ( '.accordion' );
 
             for ( var i = 0, l = this.$accordions.length; i < l; i++ ) {
 
                 this._init_accordion ( this.$accordions.nodes[i] );
 
             }
-
-        },
-
-        ready: function () {
-
-            $('.accordions_wrp').accordion ();
 
         },
 

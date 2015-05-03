@@ -3,24 +3,26 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'modal', {
+    'use strict';
+
+    $.factory ( 'presto.modal', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.modal_id = this.$node.data ( 'modal' );
-            this.$modal = $('#' + this.modal_id);
-            this.$closing = this.$modal.find ( '.closing' );
-
-            this.$node.on ( 'click', this.open );
-            this.$closing.on ( 'click', this.close );
+            $('.modal_trigger').modal ();
 
         },
 
-        ready: function () {
+        _create: function () {
 
-            $('.modal_trigger').modal ();
+            this.modal_id = this.$element.data ( 'modal' );
+            this.$modal = $('#' + this.modal_id);
+            this.$closing = this.$modal.find ( '.closing' );
+
+            this.$element.on ( 'click', this.open );
+            this.$closing.on ( 'click', this.close );
 
         },
 

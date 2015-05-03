@@ -12,6 +12,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.ui = {
         keyCode: {
             BACKSPACE: 8,
@@ -41,6 +43,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
+    /* WIDGET */
+
     $.widget = function ( /* options, element */ ) {};
 
     $.widget._childConstructors = [];
@@ -51,12 +57,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         defaultElement: '<div>',
 
-        /* WIDGET PROPS */
-
-        widget: {
-            name: 'widget',
-            fullName: 'widget'
-        },
+        widgetName: 'widget',
+        widgetFullName: 'widget',
 
         /* OPTIONS */
 
@@ -68,6 +70,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* WIDGET FUNCTIONS */
 
         _createWidget: function ( options, element ) {
+
             // VARIABLES
 
             element = $( element || this.defaultElement || this )[0];
@@ -83,7 +86,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 // SAVING INSTANCE
 
-                $.data ( this.element, this.widget.fullName, this );
+                $.data ( this.element, this.widgetFullName, this );
 
                 // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
@@ -123,7 +126,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._destroy ();
 
-            $.data ( this.element, this.widget.fullName, null ); //TODO: remove it, not set it to null
+            $.data ( this.element, this.widgetFullName, null ); //TODO: remove it, not set it to null
 
         },
 
@@ -217,7 +220,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( key === 'disabled' ) {
 
-                this.$element.toggleClass ( this.widget.fullName + '-disabled', !!value );
+                this.$element.toggleClass ( this.widgetFullName + '-disabled', !!value );
 
             }
 
@@ -382,6 +385,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.factory = function ( name, base, prototype ) {
 
         /* VARIABLES */
@@ -471,7 +476,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     this._super = _super;
                     this._superApply = _superApply;
 
-                    returnValue = value.apply ( this, arguments );
+                    returnValue = prototype[prop].apply ( this, arguments );
 
                     this._super = __super;
                     this._superApply = __superApply;
@@ -489,10 +494,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
-            widget: {
-                name: name,
-                fullName: fullName
-            }
+            widgetName: name,
+            widgetFullName: fullName
         });
 
         /* UPDATE PROTOTYPE CHAIN */
@@ -537,7 +540,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* VARIABLES */
 
-        var fullName = object.prototype.widget.fullName || name;
+        var fullName = object.prototype.widgetFullName || name;
 
         /* PLUGIN */
 
@@ -612,11 +615,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                         instance.option ( options || {} );
 
-                        if ( instance._init ) {
-
-                            instance._init ();
-
-                        }
+                        instance._init ();
 
                     } else {
 
@@ -644,17 +643,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'autogrow', {
+    'use strict';
 
-        default_width: 0,
-        default_height: 0,
-        onUpdate: $.noop
+    $.factory ( 'presto.autogrow', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            default_width: 0,
+            default_height: 0,
+            onUpdate: $.noop
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
+
+            $('input.autogrow, textarea.autogrow').autogrow ();
+
+        },
+
+        _create: function () {
 
             this.is_border_box = ( this.$ele.css ( 'box-sizing' ) === 'border-box' );
 
@@ -672,17 +681,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        ready: function () {
-
-            $('input.autogrow, textarea.autogrow').autogrow ();
-
-        },
-
         /* INPUT */
 
         _init_input: function () {
 
-            this.extra_pxs = this.is_border_box ? parseFloat ( this.$node.css ( 'border-left-width' ) ) + parseFloat ( this.$node.css ( 'padding-left' ) ) + parseFloat ( this.$node.css ( 'padding-right' ) ) + parseFloat ( this.$node.css ( 'border-right-width' ) ) : 0;
+            this.extra_pxs = this.is_border_box ? parseFloat ( this.$element.css ( 'border-left-width' ) ) + parseFloat ( this.$element.css ( 'padding-left' ) ) + parseFloat ( this.$element.css ( 'padding-right' ) ) + parseFloat ( this.$element.css ( 'border-right-width' ) ) : 0;
 
             this._update_input_width ();
 
@@ -692,16 +695,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_input_width: function () {
 
-            var needed_width = this._get_input_needed_width ( this.$node ),
-                actual_width = this.$node.width ();
+            var needed_width = this._get_input_needed_width ( this.$element ),
+                actual_width = this.$element.width ();
 
             if ( needed_width > actual_width ) {
 
-                this.$node.width ( needed_width + this.extra_pxs );
+                this.$element.width ( needed_width + this.extra_pxs );
 
             } else if ( actual_width > needed_width ) {
 
-                this.$node.width ( Math.max ( needed_width, this.options.default_width ) + this.extra_pxs );
+                this.$element.width ( Math.max ( needed_width, this.options.default_width ) + this.extra_pxs );
 
             }
 
@@ -713,7 +716,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var id = 'span_' + $.getUID ();
 
-            $body.append ( '<span id="' + id + '">' + this.$node.val () + '</span>' );
+            $body.append ( '<span id="' + id + '">' + this.$element.val () + '</span>' );
 
             var $span = $('#' + id);
 
@@ -721,10 +724,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 'position' : 'absolute',
                 'left' : -9999,
                 'top' : -9999,
-                'font-family' : this.$node.css ( 'font-family' ),
-                'font-size' : this.$node.css ( 'font-size' ),
-                'font-weight' : this.$node.css ( 'font-weight' ),
-                'font-style' : this.$node.css ( 'font-style' )
+                'font-family' : this.$element.css ( 'font-family' ),
+                'font-size' : this.$element.css ( 'font-size' ),
+                'font-weight' : this.$element.css ( 'font-weight' ),
+                'font-style' : this.$element.css ( 'font-style' )
             });
 
             var width = $span.width ();
@@ -739,7 +742,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _init_textarea: function () {
 
-            this.extra_pxs = this.is_border_box ? parseFloat ( this.$node.css ( 'border-top-width' ) ) + parseFloat ( this.$node.css ( 'padding-top' ) ) + parseFloat ( this.$node.css ( 'padding-bottom' ) ) + parseFloat ( this.$node.css ( 'border-bottom-width' ) ) : 0;
+            this.extra_pxs = this.is_border_box ? parseFloat ( this.$element.css ( 'border-top-width' ) ) + parseFloat ( this.$element.css ( 'padding-top' ) ) + parseFloat ( this.$element.css ( 'padding-bottom' ) ) + parseFloat ( this.$element.css ( 'border-bottom-width' ) ) : 0;
 
             this._update_textarea_height ();
 
@@ -749,20 +752,20 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_textarea_height: function () {
 
-            var actual_height = this.$node.height (),
-                needed_height = this.$node.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$node.css ( 'padding-top' ) ) - parseFloat ( this.$node.css ( 'padding-bottom' ) );
+            var actual_height = this.$element.height (),
+                needed_height = this.$element.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$element.css ( 'padding-top' ) ) - parseFloat ( this.$element.css ( 'padding-bottom' ) );
 
             if ( needed_height > actual_height ) {
 
-                this.$node.height ( needed_height + this.extra_pxs );
+                this.$element.height ( needed_height + this.extra_pxs );
 
             } else if ( actual_height > needed_height ) {
 
-                this.$node.height ( Math.max ( needed_height, this.options.default_height ) + this.extra_pxs );
+                this.$element.height ( Math.max ( needed_height, this.options.default_height ) + this.extra_pxs );
 
             } else {
 
-                this.$node.height ( actual_height + this.extra_pxs );
+                this.$element.height ( actual_height + this.extra_pxs );
 
             }
 
@@ -797,6 +800,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     var userAgent = navigator.userAgent.toLowerCase ();
 
     $.browser = {
@@ -804,7 +809,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
         isAndroid: /Android/i.test ( userAgent ),
         isIOS: /(iPhone|iPad|iPod)/i.test ( userAgent ),
-        isMac: /Mac/i.test ( userAgent )
+        isMac: /Mac/i.test ( userAgent ),
+        isIE: /msie [\w.]+/.test ( userAgent )
     };
 
 }( lQuery, window, document ));
@@ -814,6 +820,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 /* COOKIE */
 
 ;(function ( $, window, document, undefined ) {
+
+    'use strict';
 
     $.cookie = {
 
@@ -867,13 +875,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'formAjax', {
+    'use strict';
+
+    $.factory ( 'presto.formAjax', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            var $form = this.$node;
+            $('form.ajax').formAjax ();
+
+        },
+
+        _create: function () {
+
+            var $form = this.$element;
 
             $form.on ( 'submit', function ( event ) {
 
@@ -961,12 +977,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             });
 
-        },
-
-        ready: function () {
-
-            $('form.ajax').formAjax ();
-
         }
 
     });
@@ -979,15 +989,23 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     var synced_groups = [];
 
-    $.factory ( 'formSync', {
+    $.factory ( 'presto.formSync', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            var $form = this.$node,
+            $('form[data-sync-group]').formSync ();
+
+        },
+
+        _create: function () {
+
+            var $form = this.$element,
                 sync_group = $form.data ( 'sync-group');
 
             if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
@@ -1046,12 +1064,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             });
 
-        },
-
-        ready: function () {
-
-            $('form[data-sync-group]').formSync ();
-
         }
 
     });
@@ -1063,6 +1075,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
  /* NOTIFICATION */
 
 ;(function ( $, window, document, undefined ) {
+
+    'use strict';
 
     $.notification = function ( custom_options, both ) {
 
@@ -1124,6 +1138,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.oneTimeAction = function ( method, option, action ) {
 
         if ( method === 'cookie' ) { // option -> action id
@@ -1172,13 +1188,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'selectable', {
+    'use strict';
 
-        selector: 'tbody tr',
-        not_selector: '.empty',
-        selected_class: 'selected'
+    $.factory ( 'presto.selectable', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            selector: 'tbody tr',
+            not_selector: '.empty',
+            selected_class: 'selected'
+        },
 
         /* UTILITIES */
 
@@ -1206,13 +1226,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _get_rows: function () {
 
-            return this.$node.find ( this.options.selector ).not ( this.options.not_selector );
+            return this.$element.find ( this.options.selector ).not ( this.options.not_selector );
 
         },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
+
+            $('table.selectable').selectable ();
+
+        },
+
+        _create: function () {
 
             this.$rows = this._get_rows ();
 
@@ -1227,19 +1253,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        ready: function () {
-
-            $('table.selectable').selectable ();
-
-        },
-
         /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
         _bind_keys: function () {
 
             var instance = this;
 
-            this.$node.on ( 'mouseenter', function () {
+            this.$element.on ( 'mouseenter', function () {
 
                 $document.on ( 'keydown', function ( event ) {
 
@@ -1455,9 +1475,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_others: function () {
 
-            this.$node.on ( 'change sort', this._handler_change_sort );
+            this.$element.on ( 'change sort', this._handler_change_sort );
 
-            this.$node.on ( 'mousedown mouseup', this._handler_clear_selection );
+            this.$element.on ( 'mousedown mouseup', this._handler_clear_selection );
 
         },
 
@@ -1485,33 +1505,43 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'sortable', {
+    'use strict';
 
-        sorters: {
-            int: function ( a, b ) {
-                return parseInt ( a, 10 ) - parseInt ( b, 10 );
-            },
-            float: function ( a, b ) {
-                return parseFloat ( a ) - parseFloat ( b );
-            },
-            string: function ( a, b ) {
-                a = a.toLocaleLowerCase ();
-                b = b.toLocaleLowerCase ();
-                return a.localeCompare ( b );
+    $.factory ( 'presto.sortable', {
+
+        /* OPTIONS */
+
+        options: {
+            sorters: {
+                int: function ( a, b ) {
+                    return parseInt ( a, 10 ) - parseInt ( b, 10 );
+                },
+                float: function ( a, b ) {
+                    return parseFloat ( a ) - parseFloat ( b );
+                },
+                string: function ( a, b ) {
+                    a = a.toLocaleLowerCase ();
+                    b = b.toLocaleLowerCase ();
+                    return a.localeCompare ( b );
+                }
             }
-        }
-
-    }, {
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$headers = this.$node.find ( 'thead th' );
+            $('table.sortable').sortable ();
+
+        },
+
+        _create: function () {
+
+            this.$headers = this.$element.find ( 'thead th' );
             this.$sortables = this.$headers.filter ( '[data-sort]' );
-            this.$tbody = this.$node.find ( 'tbody' );
+            this.$tbody = this.$element.find ( 'tbody' );
 
-            this.table = this.$node.get ( 0 );
+            this.table = this.$element.get ( 0 );
             this.tbody = this.$tbody.get ( 0 );
 
             this.current_index = false; // `$headers` index, not `$sortables` index
@@ -1521,12 +1551,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._bind_change ();
             this._bind_click ();
-
-        },
-
-        ready: function () {
-
-            $('table.sortable').sortable ();
 
         },
 
@@ -1550,7 +1574,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var instance = this;
 
-            this.$node.on ( 'change', function ( event ) {
+            this.$element.on ( 'change', function ( event ) {
 
                 instance._handler_change ();
 
@@ -1665,7 +1689,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             // TRIGGER
 
-            this.$node.trigger ( 'sort' );
+            this.$element.trigger ( 'sort' );
 
         }
 
@@ -1679,26 +1703,28 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'tableHelper', {
+    'use strict';
+
+    $.factory ( 'presto.tableHelper', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$thead = this.$node.find ( 'thead' ),
-            this.$tfoot = this.$node.find ( 'tfoot' ),
-            this.$tbody = this.$node.find ( 'tbody' ),
+            $('table').tableHelper ();
+
+        },
+
+        _create: function () {
+
+            this.$thead = this.$element.find ( 'thead' ),
+            this.$tfoot = this.$element.find ( 'tfoot' ),
+            this.$tbody = this.$element.find ( 'tbody' ),
             this.$headers = this.$thead.find ( 'th' ),
             this.$empty_row = this.$tbody.find ( 'tr.empty' ),
             this.columns_nr = this.$headers.length;
 
             this._check_empty ();
-
-        },
-
-        ready: function () {
-
-            $('table').tableHelper ();
 
         },
 
@@ -1748,7 +1774,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._check_empty ();
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -1770,7 +1796,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -1782,7 +1808,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._check_empty ();
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -1794,7 +1820,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._check_empty ();
 
-            this.$node.trigger ( 'change' );
+            this.$element.trigger ( 'change' );
 
             return this;
 
@@ -1809,6 +1835,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
  /* TIMER - http://jchavannes.com/jquery-timer */
 
 ;(function ( $, window, document, undefined ) {
+
+    'use strict';
 
     $.timer = function ( func, time, autostart ) {
 
@@ -1973,19 +2001,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'toggleHeight', {
+    'use strict';
+
+    $.factory ( 'presto.toggleHeight', {
 
         /* SPECIAL */
 
-        init: function () {
+        _create: function () {
 
-            this.speed = parseFloat ( this.$node.css ( 'transition-duration' ) ) * 1000;
+            this.speed = parseFloat ( this.$element.css ( 'transition-duration' ) ) * 1000;
 
-            this.$node.height ( this.$node.height () );
+            this.$element.height ( this.$element.height () );
 
         },
 
-        call: function ( force ) {
+        _init: function ( force ) { //FIXME
 
             this._toggle ( force );
 
@@ -1995,19 +2025,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _is_visible: function () {
 
-            return ( this.$node.height () !== 0 );
+            return ( this.$element.height () !== 0 );
 
         },
 
         _get_actual_height: function () {
 
-            var old_style = this.$node.attr ( 'style' ) || '';
+            var old_style = this.$element.attr ( 'style' ) || '';
 
-            this.$node.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
+            this.$element.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
 
-            var actual_height = this.$node.height ();
+            var actual_height = this.$element.height ();
 
-            this.$node.css ( 'css-text', old_style );
+            this.$element.css ( 'css-text', old_style );
 
             return actual_height;
 
@@ -2017,13 +2047,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this._is_visible () || force === false ) {
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.height ( 0 );
 
                 });
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.toggle ( false );
 
@@ -2031,17 +2061,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             } else {
 
-                this.$node.toggle ( true );
+                this.$element.toggle ( true );
 
                 var actual_height = this._get_actual_height ();
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.height ( actual_height );
 
                 });
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.height ( 'auto' );
 
@@ -2063,64 +2093,76 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'touching', {
+    'use strict';
 
-        start_index : false,
-        x : 0,
-        y : 0
+    //FIXME: It's not a widget
 
-    }, function () {
+    $.factory ( 'presto.touching', {
 
-        var options = this.options,
-            touched = false;
+        /* OPTIONS */
 
-        this.bt_each ( function () {
+        options: {
+            start_index : false,
+            x : 0,
+            y : 0
+        },
 
-            var $ele = $(this),
-                offset = $ele.offset (),
-                x1 = offset.left,
-                y1 = offset.top;
+        /* SPECIAL */
 
-            if ( options.y >= y1 ) {
+        _init: function () {
 
-                if ( options.y <= y1 + $ele.height () ) {
+            var options = this.options,
+                touched = false;
 
-                    if ( options.x >= x1 ) {
+            this.bt_each ( function () {
 
-                        if ( options.x <= x1 + $ele.width () ) {
+                var $ele = $(this),
+                    offset = $ele.offset (),
+                    x1 = offset.left,
+                    y1 = offset.top;
 
-                            touched = $ele;
+                if ( options.y >= y1 ) {
 
-                            return false;
+                    if ( options.y <= y1 + $ele.height () ) {
+
+                        if ( options.x >= x1 ) {
+
+                            if ( options.x <= x1 + $ele.width () ) {
+
+                                touched = $ele;
+
+                                return false;
+
+                            } else {
+
+                                return 1;
+
+                            }
 
                         } else {
 
-                            return 1;
+                            return -1;
 
                         }
 
                     } else {
 
-                        return -1;
+                        return 1;
 
                     }
 
+
                 } else {
 
-                    return 1;
+                    return -1;
 
                 }
 
+            }, this.options.start_index );
 
-            } else {
+            return touched;
 
-                return -1;
-
-            }
-
-        }, this.options.start_index );
-
-        return touched;
+        }
 
     });
 
@@ -2132,25 +2174,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'accordion', {
+    'use strict';
+
+    $.factory ( 'presto.accordion', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$accordions = this.$node.find ( '.accordion' );
+            $('.accordions_wrp').accordion ();
+
+        },
+
+        _create: function () {
+
+            this.$accordions = this.$element.find ( '.accordion' );
 
             for ( var i = 0, l = this.$accordions.length; i < l; i++ ) {
 
                 this._init_accordion ( this.$accordions.nodes[i] );
 
             }
-
-        },
-
-        ready: function () {
-
-            $('.accordions_wrp').accordion ();
 
         },
 
@@ -2189,19 +2233,29 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'badge', {
+    'use strict';
 
-        title: false,
-        type: false,
-        style: false
+    $.factory ( 'presto.badge', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            title: false,
+            type: false,
+            style: false
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$badge_wrp = this.$node.find ( '.badge_wrp' ),
+            $('[data-badge]').badge ();
+
+        },
+
+        _create: function () {
+
+            this.$badge_wrp = this.$element.find ( '.badge_wrp' ),
             this.$badge = this.$badge_wrp.find ( '.badge' ),
 
             this.options.title = this.options.title || $ele.data ( 'badge' ),
@@ -2214,9 +2268,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.$badge.length === 0 ) {
 
-                this.$node.append ( '<div class="badge_wrp ' + this.options.type + '"><div class="badge_subwrp"><div class="badge ' + this.options.style + '"></div></div></div>' );
+                this.$element.append ( '<div class="badge_wrp ' + this.options.type + '"><div class="badge_subwrp"><div class="badge ' + this.options.style + '"></div></div></div>' );
 
-                this.options.$badge_wrp = this.$node.find ( '.badge_wrp' );
+                this.options.$badge_wrp = this.$element.find ( '.badge_wrp' );
                 this.options.$badge = this.$badge_wrp.find ( '.badge' );
 
             }
@@ -2265,19 +2319,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        call: function ( title ) {
+        _init: function ( title ) { //FIXME
 
             if ( typeof title === 'string' ) {
 
                 this.options.title = title;
 
             }
-
-        },
-
-        ready: function () {
-
-            $('[data-badge]').badge ();
 
         }
 
@@ -2290,6 +2338,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 /* BLUR */
 
 ;(function ( $, window, document, undefined ) {
+
+    'use strict';
 
     $.fn.blur = function ( activate ) {
 
@@ -2305,19 +2355,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'checkbox', {
+    'use strict';
+
+    $.factory ( 'presto.checkbox', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$input = this.$node.find ( 'input' );
+            $('.checkbox').checkbox ();
+
+        },
+
+        _create: function () {
+
+            this.$input = this.$element.find ( 'input' );
 
             if ( this.$input.prop ( 'checked' ) ) {
 
-                this.$node.addClass ( 'selected' );
+                this.$element.addClass ( 'selected' );
 
-            } else if ( this.$node.hasClass ( 'selected' ) ) {
+            } else if ( this.$element.hasClass ( 'selected' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -2329,17 +2387,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        ready: function () {
-
-            $('.checkbox').checkbox ();
-
-        },
-
         /* CLICK */
 
         _bind_click: function () {
 
-            this.$node.on ( 'click', this._handler_click );
+            this.$element.on ( 'click', this._handler_click );
 
         },
 
@@ -2353,7 +2405,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_change: function () {
 
-            this.$node.on ( 'change', this.update () );
+            this.$element.on ( 'change', this.update () );
 
         },
 
@@ -2363,13 +2415,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var active = this.$input.prop ( 'checked' );
 
-            this.$node.toggleClass ( 'selected', active );
+            this.$element.toggleClass ( 'selected', active );
 
         },
 
         toggle: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             var active = this.$input.prop ( 'checked' );
 
@@ -2387,42 +2439,44 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     var assignments = {};
 
-    $.factory ( 'dropdown', {
+    $.factory ( 'presto.dropdown', {
 
-        beforeOpen: $.noop,
-        afterOpen: $.noop,
-        beforeClose: $.noop,
-        afterClose: $.noop
-
-    }, {
+        options: {
+            beforeOpen: $.noop,
+            afterOpen: $.noop,
+            beforeClose: $.noop,
+            afterClose: $.noop
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.dropdown_id = this.$node.data ( 'dropdown' );
+            $('.dropdown_trigger').dropdown ();
+
+        },
+
+        _create: function () {
+
+            this.dropdown_id = this.$element.data ( 'dropdown' );
             this.$dropdown = $('#' + dropdown_id);
-            this.no_tip = this.$node.hasClass ( 'no_tip' ) || this.$dropdown.hasClass ( 'no_tip' );
+            this.no_tip = this.$element.hasClass ( 'no_tip' ) || this.$dropdown.hasClass ( 'no_tip' );
             this.$bottom_tip = this.no_tip ? false : this.$dropdown.find ( '.bottom_tip' );
             this.$top_tip = this.no_tip ? false : this.$dropdown.find ( '.top_tip' );
             this.$right_tip = this.no_tip ? false : this.$dropdown.find ( '.right_tip' );
             this.$left_tip = this.no_tip ? false : this.$dropdown.find ( '.left_tip' );
-            this.$btn_parents = this.$node.parents ();
+            this.$btn_parents = this.$element.parents ();
             this.$buttons = this.$dropdown.find ( '.button' );
             this.opened = false;
 
-            this.$node.on ( 'click', this._handler_btn_click );
+            this.$element.on ( 'click', this._handler_btn_click );
             this.$buttons.on ( 'click', this.close );
             $window.on ( 'resize scroll', this.update );
             this.$btn_parents.on ( 'scroll', this.update );
-
-        },
-
-        ready: function () {
-
-            $('.dropdown_trigger').dropdown ();
 
         },
 
@@ -2462,13 +2516,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         open: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.hook ( 'beforeOpen' );
 
-            assignments[dropdown_id] = this.$node;
+            assignments[dropdown_id] = this.$element;
 
-            this.$node.addClass ( 'active' );
+            this.$element.addClass ( 'active' );
 
             this.$dropdown.addClass ( 'show' );
 
@@ -2490,7 +2544,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.hook ( 'beforeClose' );
 
-            if ( assignments[dropdown_id] === this.$node ) {
+            if ( assignments[dropdown_id] === this.$element ) {
 
                 this.$dropdown.removeClass ( 'active' );
 
@@ -2502,7 +2556,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$node.removeClass ( 'top bottom left right active' );
+            this.$element.removeClass ( 'top bottom left right active' );
 
             $window.off ( 'click', this._handler_window_click );
 
@@ -2516,14 +2570,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             // reset classes
 
-            this.$node.removeClass ( 'top bottom left right' );
+            this.$element.removeClass ( 'top bottom left right' );
             this.$dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no_tip', this.no_tip );
 
             // update offsets
 
             var body_offset = $body.offset (),
                 drop_offset = this.$dropdown.offset (),
-                btn_offset = this.$node.offset ();
+                btn_offset = this.$element.offset ();
 
             // common variables
 
@@ -2534,11 +2588,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 top_space = btn_offset.top,
                 right_space = body_offset.width - btn_offset.left - btn_offset.width,
                 left_space = btn_offset.left;
-
-            console.log(top_space);
-            console.log(right_space);
-            console.log(bottom_space);
-            console.log(left_space);
 
             var useful_doc_width = Math.min ( body_offset.width, drop_offset.width ),
                 useful_doc_height = Math.min ( body_offset.height, drop_offset.height );
@@ -2682,7 +2731,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     left: left
                 });
 
-                this.$node.addClass ( direction );
+                this.$element.addClass ( direction );
                 this.$dropdown.addClass ( direction );
 
                 // positionate the tip
@@ -2737,23 +2786,25 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'expander', {
+    'use strict';
+
+    $.factory ( 'presto.expander', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$header = this.$node.children ( '.header' );
-            this.$content_wrp = this.$node.children ( '.content' );
-            this.opened = this.$node.hasClass ( 'active' );
-
-            this._bind_click ();
+            $('.expander').expander ();
 
         },
 
-        ready: function () {
+        _create: function () {
 
-            $('.expander').expander ();
+            this.$header = this.$element.children ( '.header' );
+            this.$content_wrp = this.$element.children ( '.content' );
+            this.opened = this.$element.hasClass ( 'active' );
+
+            this._bind_click ();
 
         },
 
@@ -2767,13 +2818,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_click: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.opened = !this.opened;
 
             var opened;
 
-            this.$node.defer ( function () {
+            this.$element.defer ( function () {
 
                 this.toggleClass ( 'active', opened );
 
@@ -2799,11 +2850,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'loading', function ( activate ) {
+    'use strict';
+
+    $.fn.loading = function ( activate ) {
 
         if ( activate ) {
 
-            this.$node.addClass ( 'loading' ).defer ( function () {
+            return this.addClass ( 'loading' ).defer ( function () {
 
                 this.addClass ( 'loading_active' );
 
@@ -2811,7 +2864,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else {
 
-            this.$node.removeClass ( 'loading_active' ).defer ( function () {
+            return this.removeClass ( 'loading_active' ).defer ( function () {
 
                 this.removeClass ( 'loading' );
 
@@ -2819,7 +2872,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         }
 
-    });
+    };
 
 }( lQuery, window, document ));
 
@@ -2875,24 +2928,26 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'modal', {
+    'use strict';
+
+    $.factory ( 'presto.modal', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.modal_id = this.$node.data ( 'modal' );
-            this.$modal = $('#' + this.modal_id);
-            this.$closing = this.$modal.find ( '.closing' );
-
-            this.$node.on ( 'click', this.open );
-            this.$closing.on ( 'click', this.close );
+            $('.modal_trigger').modal ();
 
         },
 
-        ready: function () {
+        _create: function () {
 
-            $('.modal_trigger').modal ();
+            this.modal_id = this.$element.data ( 'modal' );
+            this.$modal = $('#' + this.modal_id);
+            this.$closing = this.$modal.find ( '.closing' );
+
+            this.$element.on ( 'click', this.open );
+            this.$closing.on ( 'click', this.close );
 
         },
 
@@ -2947,6 +3002,8 @@ $.ready ( function () {
 /* NOTY */
 
 ;(function ( $, window, document, undefined ) {
+
+    'use strict';
 
     // VARIABLES
 
@@ -3194,21 +3251,29 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'progressBar', {
+    'use strict';
+
+    $.factory ( 'presto.progressBar', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$highlighted = this.$node.find ( '.highlighted' ),
-            this.$label = this.$highlighted.find ( '.label' ),
-            this.data_percentage = this.$node.data ( 'percentage' );
+            $('.progressBar').progressBar ();
 
         },
 
-        call: function ( percentage ) {
+        _create: function () {
 
-            if ( this.$node.hasClass ( 'fixed' ) ) return;
+            this.$highlighted = this.$element.find ( '.highlighted' ),
+            this.$label = this.$highlighted.find ( '.label' ),
+            this.data_percentage = this.$element.data ( 'percentage' );
+
+        },
+
+        _init: function ( percentage ) { //FIXME
+
+            if ( this.$element.hasClass ( 'fixed' ) ) return;
 
             if ( this.data_percentage !== undefined || percentage !== undefined ) {
 
@@ -3219,12 +3284,6 @@ $.ready ( function () {
                 this.$label.html ( percentage_nr + '%' );
 
             }
-
-        },
-
-        ready: function () {
-
-            $('.progressBar').progressBar ();
 
         }
 
@@ -3238,39 +3297,39 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'radio', {
+    'use strict';
 
-        /* UTILITIES */
+    $.factory ( 'presto.radio', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$input = this.$node.find ( 'input' ),
+            $('.radio').radio ();
+
+        },
+
+        _create: function () {
+
+            this.$input = this.$element.find ( 'input' ),
             this.name = this.$input.attr ( 'name' ),
-            this.$form = this.$node.parent ( 'form' ),
+            this.$form = this.$element.parent ( 'form' ),
             this.$radios = this.$form.find ( 'input[name="' + this.name + '"]' ),
             this.$btns = this.$radios.parent ( '.radio' );
 
             if ( this.$input.checked () ) {
 
-                this.$node.addClass ( 'selected' );
+                this.$element.addClass ( 'selected' );
 
-            } else if ( this.$node.hasClass ( 'selected' ) ) {
+            } else if ( this.$element.hasClass ( 'selected' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
             }
 
-            this.$node.on ( 'click', this.select );
+            this.$element.on ( 'click', this.select );
 
             this.$input.on ( 'change', this._update );
-
-        },
-
-        ready: function () {
-
-            $('.radio').radio ();
 
         },
 
@@ -3284,7 +3343,7 @@ $.ready ( function () {
 
                 this.$btns.removeClass ( 'selected' );
 
-                this.$node.addClass ( 'selected' );
+                this.$element.addClass ( 'selected' );
 
             }
 
@@ -3294,7 +3353,7 @@ $.ready ( function () {
 
         select: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -3310,21 +3369,23 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'selects', {
+    'use strict';
 
-
-
-    }, {
-
-        /* UTILITIES */
+    $.factory ( 'presto.selects', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$select = this.$node.find ( 'select' );
+            $('.select').selects ();
+
+        },
+
+        _create: function () {
+
+            this.$select = this.$element.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
-            this.$placeholder = this.$node.find ( '.placeholder' );
+            this.$placeholder = this.$element.find ( '.placeholder' );
             this.dropdown_id = $.getUID ();
 
             this.$dropdown = false;
@@ -3347,12 +3408,6 @@ $.ready ( function () {
 
         },
 
-        ready: function () {
-
-            $('.select').selects ();
-
-        },
-
         /* PRIVATE */
 
         _handler_click: function ( event ) {
@@ -3370,9 +3425,9 @@ $.ready ( function () {
             this.$dropdown = $('#dropdown-' + this.dropdown_id);
             this.$dropdown_container = this.$dropdown.find ( '.container' );
 
-            this.$node.addClass ( 'dropdown_trigger' ).data ( 'dropdown', 'dropdown-' + this.dropdown_id );
+            this.$element.addClass ( 'dropdown_trigger' ).data ( 'dropdown', 'dropdown-' + this.dropdown_id );
 
-            this.$node.dropdowns ({
+            this.$element.dropdowns ({
                 beforeOpen: this._set_dropdown_width
             });
 
@@ -3433,7 +3488,7 @@ $.ready ( function () {
 
         _set_dropdown_width: function () {
 
-            this.$dropdown_container.css ( 'min-width', this.$node.width () );
+            this.$dropdown_container.css ( 'min-width', this.$element.width () );
 
         },
 
@@ -3511,13 +3566,21 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'slider', {
+    'use strict';
+
+    $.factory ( 'presto.slider', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$slider = this.$node.find ( '.slider' );
+            $('.slider_wrp').slider ();
+
+        },
+
+        _create: function () {
+
+            this.$slider = this.$element.find ( '.slider' );
             this.$min_btn = this.$slider.find ( '.min' );
             this.$max_btn = this.$slider.find ( '.max' );
             this.$input = this.$slider.find ( 'input' );
@@ -3548,12 +3611,6 @@ $.ready ( function () {
             this._bind_min_max_click ();
             this._bind_drag ();
             this._bind_click ();
-
-        },
-
-        ready: function () {
-
-            $('.slider_wrp').slider ();
 
         },
 
@@ -3670,7 +3727,7 @@ $.ready ( function () {
 
         _handler_min_click: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.navigate ( - this.step );
 
@@ -3684,7 +3741,7 @@ $.ready ( function () {
 
         _handler_max_click: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.navigate ( this.step );
 
@@ -3701,7 +3758,7 @@ $.ready ( function () {
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.start_pos = get_event_pageXY ( event );
             this.current_move = 0;
@@ -3754,7 +3811,7 @@ $.ready ( function () {
 
         _handler_click: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             if ( $(event.target).parents ().index ( this.$handler ) !== -1 ) return;
 
@@ -3831,22 +3888,30 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'spinner', {
+    'use strict';
+
+    $.factory ( 'presto.spinner', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$input = this.$node.find ( 'input' ),
-            this.$label = this.$node.find ( '.label' ),
-            this.$decrease_btn = this.$node.find ( '.decrease' ),
-            this.$increase_btn = this.$node.find ( '.increase' ),
+            $('.spinner').spinner ();
 
-            this.min = this.$node.data ( 'min' ),
-            this.max = this.$node.data ( 'max' ),
-            this.start = this.$node.data ( 'start' ) || this.$input.val () || 0,
-            this.step = this.$node.data ( 'step' ) || 1,
-            this.decimals = this.$node.data ( 'decimals' ) || 0,
+        },
+
+        _create: function () {
+
+            this.$input = this.$element.find ( 'input' ),
+            this.$label = this.$element.find ( '.label' ),
+            this.$decrease_btn = this.$element.find ( '.decrease' ),
+            this.$increase_btn = this.$element.find ( '.increase' ),
+
+            this.min = this.$element.data ( 'min' ),
+            this.max = this.$element.data ( 'max' ),
+            this.start = this.$element.data ( 'start' ) || this.$input.val () || 0,
+            this.step = this.$element.data ( 'step' ) || 1,
+            this.decimals = this.$element.data ( 'decimals' ) || 0,
 
             this.current_value = start;
 
@@ -3855,12 +3920,6 @@ $.ready ( function () {
             this._bind_change ();
             this._bind_arrows ();
             this._bind_minus_click ();
-
-        },
-
-        ready: function () {
-
-            $('.spinner').spinner ();
 
         },
 
@@ -3896,13 +3955,13 @@ $.ready ( function () {
 
         _bind_arrows: function () {
 
-            this.$node.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this.$element.hover ( this._handler_arrows_in, this._handler_arrows_out );
 
         },
 
         _handler_arrows_in: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             $document.on ( 'keydown', this._handler_arrows_keydown );
 
@@ -3938,7 +3997,7 @@ $.ready ( function () {
 
         _handler_minus_click: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.navigate ( - this.step );
 
@@ -3952,7 +4011,7 @@ $.ready ( function () {
 
         _handler_plus_click: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.navigate ( this.step );
 
@@ -3997,27 +4056,37 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'switcher', {
+    'use strict';
 
-        theme: {
-            on: 'secondary',
-            off: 'gray'
+    $.factory ( 'presto.switcher', {
+
+        /* OPTIONS */
+
+        options: {
+            theme: {
+                on: 'secondary',
+                off: 'gray'
+            },
+            icons: {
+                on: false,
+                off: false
+            }
         },
-        icons: {
-            on: false,
-            off: false
-        }
-
-    }, {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$bar = this.$node.find ( '.bar' );
-            this.$handler = this.$node.find ( '.handler' );
-            this.$icon = this.$node.find ( '.icon' );
-            this.$input = this.$node.find ( 'input' );
+            $('.switcher').switcher ();
+
+        },
+
+        _create: function () {
+
+            this.$bar = this.$element.find ( '.bar' );
+            this.$handler = this.$element.find ( '.handler' );
+            this.$icon = this.$element.find ( '.icon' );
+            this.$input = this.$element.find ( 'input' );
 
             this.current_value = this.$input.prop ( 'checked' );
             this.dragging = false;
@@ -4032,12 +4101,6 @@ $.ready ( function () {
             this._bind_arrows ();
             this._bind_click ();
             this._bind_drag ();
-
-        },
-
-        ready: function () {
-
-            $('.switcher').switcher ();
 
         },
 
@@ -4065,13 +4128,13 @@ $.ready ( function () {
 
         _bind_arrows: function () {
 
-            this.$node.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this.$element.hover ( this._handler_arrows_in, this._handler_arrows_out );
 
         },
 
         _handler_arrows_in: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             $document.on ( 'keydown', this._handler_arrows_keydown );
 
@@ -4113,13 +4176,13 @@ $.ready ( function () {
 
         _bind_click: function () {
 
-            this.$node.on ( 'click', this._handler_click );
+            this.$element.on ( 'click', this._handler_click );
 
         },
 
         _handler_click: function () {
 
-            if ( this.dragging || this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.dragging || this.$element.hasClass ( 'inactive' ) ) return;
 
             this.toggle ();
 
@@ -4135,7 +4198,7 @@ $.ready ( function () {
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.start_percentage = this.current_value ? 100 : 0;
 
@@ -4143,7 +4206,7 @@ $.ready ( function () {
             this.bar_width = this.$bar.width ();
 
             $html.addClass ( 'dragging' );
-            this.$node.addClass ( 'dragging' );
+            this.$element.addClass ( 'dragging' );
 
             $document.on ( 'mousemove touchmove', this._handler_drag_move );
             $document.on ( 'mouseup touchend', this._handler_drag_end );
@@ -4172,7 +4235,7 @@ $.ready ( function () {
             this.current_value = ( handler_off.left + ( handler_off.width / 2 ) >= bar_off.left + ( bar_off.width / 2 ) );
 
             $html.removeClass ( 'dragging' );
-            this.$node.removeClass ( 'dragging' );
+            this.$element.removeClass ( 'dragging' );
 
             $document.off ( 'mousemove touchmove', this._handler_drag_move );
             $document.off ( 'mouseup touchend', this._handler_drag_end );
@@ -4230,12 +4293,22 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'tabs', {
+    'use strict';
 
-        init: function () {
+    $.factory ( 'presto.tabs', {
 
-            $tabs = this.$node.find ( '.tab' ),
-            $contabs = this.$node.find ( '.contab' );
+        /* SPECIAL */
+
+        _ready: function () {
+
+            $('.tabs_wrp').tabs ();
+
+        },
+
+        _create: function () {
+
+            $tabs = this.$element.find ( '.tab' ),
+            $contabs = this.$element.find ( '.contab' );
 
             $tabs.each ( function () {
 
@@ -4265,12 +4338,6 @@ $.ready ( function () {
 
             });
 
-        },
-
-        ready: function () {
-
-            $('.tabs_wrp').tabs ();
-
         }
 
     });
@@ -4283,33 +4350,43 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'tagbox', {
+    'use strict';
 
-        input: {
-            default_width: '100',
-            placeholder: 'New tag...',
-            theme: 'transparent small'
-        },
-        tag: {
-            min_length: 3,
-            theme: 'outlined small'
-        },
-        forbidden: [ '<', '>', ';', '`' ],
-        separator: ',',
-        sort: false,
-        append: true
+    $.factory ( 'presto.tagbox', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            input: {
+                default_width: '100',
+                placeholder: 'New tag...',
+                theme: 'transparent small'
+            },
+            tag: {
+                min_length: 3,
+                theme: 'outlined small'
+            },
+            forbidden: [ '<', '>', ';', '`' ],
+            separator: ',',
+            sort: false,
+            append: true
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
+
+            $('input.tagbox').tagbox ();
+
+        },
+
+        _create: function () {
 
             this.tagbox_id = $.getUID ();
 
             var template = '<div id="tagbox_' + this.tagbox_id + '" class="container transparent no-padding"><div class="multiple">' + this._get_tags_html () + '<input value="" placeholder="' + this.options.input.placeholder + '" class="autogrow ' + this.options.input.theme + '" data-default-width="' + this.options.input.default_width + '" /></div></div>';
 
-            this.$node.after ( template ).addClass ( 'hidden' );
+            this.$element.after ( template ).addClass ( 'hidden' );
 
             this.$tagbox = $('#tagbox_' + this.tagbox_id);
             this.$partial = this.$tagbox.find ( 'input' );
@@ -4322,17 +4399,11 @@ $.ready ( function () {
 
         },
 
-        ready: function () {
-
-            $('input.tagbox').tagbox ();
-
-        },
-
         /* PRIVATE */
 
         _get_tags_html: function () {
 
-            var value = this.$node.val (),
+            var value = this.$element.val (),
                 tags_str = value.split ( this.options.separator ),
                 tags_html = '';
 
@@ -4391,7 +4462,7 @@ $.ready ( function () {
 
         _update_input: function () {
 
-            this.$node.val ( this.tags_arr.join ( this.options.separator ) );
+            this.$element.val ( this.tags_arr.join ( this.options.separator ) );
 
         },
 
@@ -4592,27 +4663,29 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    /* PLUGIN */
+    'use strict';
 
-    $.factory ( 'timeAgo', {
+    $.factory ( 'presto.timeAgo', {
 
-        onUpdate: $.noop
+        /* OPTIONS */
 
-    }, {
+        options: {
+            onUpdate: $.noop
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.timestamp = this.$node.data ( 'timestamp' );
-
-            this._update_loop ( 0 );
+            $('[data-timestamp]').timeAgo ();
 
         },
 
-        ready: function () {
+        _create: function () {
 
-            $('[data-timestamp]').timeAgo ();
+            this.timestamp = this.$element.data ( 'timestamp' );
+
+            this._update_loop ( 0 );
 
         },
 
@@ -4642,7 +4715,7 @@ $.ready ( function () {
 
             var timeago = _.timeAgo ( this.timestamp );
 
-            this.$node.html ( timeago.str );
+            this.$element.html ( timeago.str );
 
             this.hook ( 'onUpdate' );
 
@@ -4658,7 +4731,9 @@ $.ready ( function () {
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'btEach', function ( callback, start_center ) {
+    'use strict';
+
+    $.fn.btEach = function ( callback, start_center ) {
 
         var start = 0,
             end = this.length - 1,
@@ -4692,7 +4767,7 @@ $.ready ( function () {
 
         return false;
 
-    });
+    };
 
 }( lQuery, window, document ));
 

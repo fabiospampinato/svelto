@@ -6,13 +6,17 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'selectable', {
+    'use strict';
 
-        selector: 'tbody tr',
-        not_selector: '.empty',
-        selected_class: 'selected'
+    $.factory ( 'presto.selectable', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            selector: 'tbody tr',
+            not_selector: '.empty',
+            selected_class: 'selected'
+        },
 
         /* UTILITIES */
 
@@ -40,13 +44,19 @@
 
         _get_rows: function () {
 
-            return this.$node.find ( this.options.selector ).not ( this.options.not_selector );
+            return this.$element.find ( this.options.selector ).not ( this.options.not_selector );
 
         },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
+
+            $('table.selectable').selectable ();
+
+        },
+
+        _create: function () {
 
             this.$rows = this._get_rows ();
 
@@ -61,19 +71,13 @@
 
         },
 
-        ready: function () {
-
-            $('table.selectable').selectable ();
-
-        },
-
         /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
         _bind_keys: function () {
 
             var instance = this;
 
-            this.$node.on ( 'mouseenter', function () {
+            this.$element.on ( 'mouseenter', function () {
 
                 $document.on ( 'keydown', function ( event ) {
 
@@ -289,9 +293,9 @@
 
         _bind_others: function () {
 
-            this.$node.on ( 'change sort', this._handler_change_sort );
+            this.$element.on ( 'change sort', this._handler_change_sort );
 
-            this.$node.on ( 'mousedown mouseup', this._handler_clear_selection );
+            this.$element.on ( 'mousedown mouseup', this._handler_clear_selection );
 
         },
 

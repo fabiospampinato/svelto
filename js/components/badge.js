@@ -3,19 +3,29 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'badge', {
+    'use strict';
 
-        title: false,
-        type: false,
-        style: false
+    $.factory ( 'presto.badge', {
 
-    }, {
+        /* OPTIONS */
+
+        options: {
+            title: false,
+            type: false,
+            style: false
+        },
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$badge_wrp = this.$node.find ( '.badge_wrp' ),
+            $('[data-badge]').badge ();
+
+        },
+
+        _create: function () {
+
+            this.$badge_wrp = this.$element.find ( '.badge_wrp' ),
             this.$badge = this.$badge_wrp.find ( '.badge' ),
 
             this.options.title = this.options.title || $ele.data ( 'badge' ),
@@ -28,9 +38,9 @@
 
             if ( this.$badge.length === 0 ) {
 
-                this.$node.append ( '<div class="badge_wrp ' + this.options.type + '"><div class="badge_subwrp"><div class="badge ' + this.options.style + '"></div></div></div>' );
+                this.$element.append ( '<div class="badge_wrp ' + this.options.type + '"><div class="badge_subwrp"><div class="badge ' + this.options.style + '"></div></div></div>' );
 
-                this.options.$badge_wrp = this.$node.find ( '.badge_wrp' );
+                this.options.$badge_wrp = this.$element.find ( '.badge_wrp' );
                 this.options.$badge = this.$badge_wrp.find ( '.badge' );
 
             }
@@ -79,19 +89,13 @@
 
         },
 
-        call: function ( title ) {
+        _init: function ( title ) { //FIXME
 
             if ( typeof title === 'string' ) {
 
                 this.options.title = title;
 
             }
-
-        },
-
-        ready: function () {
-
-            $('[data-badge]').badge ();
 
         }
 

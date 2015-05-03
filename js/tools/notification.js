@@ -3,6 +3,8 @@
 
 ;(function ( $, window, document, undefined ) {
 
+    'use strict';
+
     $.notification = function ( custom_options, both ) {
 
         // OPTIONS

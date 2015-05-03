@@ -3,13 +3,21 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'formAjax', {
+    'use strict';
+
+    $.factory ( 'presto.formAjax', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            var $form = this.$node;
+            $('form.ajax').formAjax ();
+
+        },
+
+        _create: function () {
+
+            var $form = this.$element;
 
             $form.on ( 'submit', function ( event ) {
 
@@ -96,12 +104,6 @@
                 });
 
             });
-
-        },
-
-        ready: function () {
-
-            $('form.ajax').formAjax ();
 
         }
 

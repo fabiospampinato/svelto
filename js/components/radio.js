@@ -3,39 +3,39 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'radio', {
+    'use strict';
 
-        /* UTILITIES */
+    $.factory ( 'presto.radio', {
 
         /* SPECIAL */
 
-        init: function () {
+        _ready: function () {
 
-            this.$input = this.$node.find ( 'input' ),
+            $('.radio').radio ();
+
+        },
+
+        _create: function () {
+
+            this.$input = this.$element.find ( 'input' ),
             this.name = this.$input.attr ( 'name' ),
-            this.$form = this.$node.parent ( 'form' ),
+            this.$form = this.$element.parent ( 'form' ),
             this.$radios = this.$form.find ( 'input[name="' + this.name + '"]' ),
             this.$btns = this.$radios.parent ( '.radio' );
 
             if ( this.$input.checked () ) {
 
-                this.$node.addClass ( 'selected' );
+                this.$element.addClass ( 'selected' );
 
-            } else if ( this.$node.hasClass ( 'selected' ) ) {
+            } else if ( this.$element.hasClass ( 'selected' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
             }
 
-            this.$node.on ( 'click', this.select );
+            this.$element.on ( 'click', this.select );
 
             this.$input.on ( 'change', this._update );
-
-        },
-
-        ready: function () {
-
-            $('.radio').radio ();
 
         },
 
@@ -49,7 +49,7 @@
 
                 this.$btns.removeClass ( 'selected' );
 
-                this.$node.addClass ( 'selected' );
+                this.$element.addClass ( 'selected' );
 
             }
 
@@ -59,7 +59,7 @@
 
         select: function () {
 
-            if ( this.$node.hasClass ( 'inactive' ) ) return;
+            if ( this.$element.hasClass ( 'inactive' ) ) return;
 
             this.$input.prop ( 'checked', true ).trigger ( 'change' );
 

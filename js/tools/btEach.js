@@ -3,7 +3,9 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'btEach', function ( callback, start_center ) {
+    'use strict';
+
+    $.fn.btEach = function ( callback, start_center ) {
 
         var start = 0,
             end = this.length - 1,
@@ -37,6 +39,6 @@
 
         return false;
 
-    });
+    };
 
 }( lQuery, window, document ));

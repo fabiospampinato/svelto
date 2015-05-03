@@ -3,19 +3,21 @@
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory ( 'toggleHeight', {
+    'use strict';
+
+    $.factory ( 'presto.toggleHeight', {
 
         /* SPECIAL */
 
-        init: function () {
+        _create: function () {
 
-            this.speed = parseFloat ( this.$node.css ( 'transition-duration' ) ) * 1000;
+            this.speed = parseFloat ( this.$element.css ( 'transition-duration' ) ) * 1000;
 
-            this.$node.height ( this.$node.height () );
+            this.$element.height ( this.$element.height () );
 
         },
 
-        call: function ( force ) {
+        _init: function ( force ) { //FIXME
 
             this._toggle ( force );
 
@@ -25,19 +27,19 @@
 
         _is_visible: function () {
 
-            return ( this.$node.height () !== 0 );
+            return ( this.$element.height () !== 0 );
 
         },
 
         _get_actual_height: function () {
 
-            var old_style = this.$node.attr ( 'style' ) || '';
+            var old_style = this.$element.attr ( 'style' ) || '';
 
-            this.$node.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
+            this.$element.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
 
-            var actual_height = this.$node.height ();
+            var actual_height = this.$element.height ();
 
-            this.$node.css ( 'css-text', old_style );
+            this.$element.css ( 'css-text', old_style );
 
             return actual_height;
 
@@ -47,13 +49,13 @@
 
             if ( this._is_visible () || force === false ) {
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.height ( 0 );
 
                 });
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.toggle ( false );
 
@@ -61,17 +63,17 @@
 
             } else {
 
-                this.$node.toggle ( true );
+                this.$element.toggle ( true );
 
                 var actual_height = this._get_actual_height ();
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.height ( actual_height );
 
                 });
 
-                this.$node.defer ( function () {
+                this.$element.defer ( function () {
 
                     this.height ( 'auto' );
 
