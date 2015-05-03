@@ -1,215 +1,259 @@
 
-/*
- * Project: Plugin factory
- * Description: A common boilerplate for lQuery plugins
- * Features: Ability to override global options, getters and setters for local options.
- *           Support for public and private methods (prefixed by `_`).
- *           Easily expose public methods.
- *           Avoid multiple instantation.
- *           Support for chainable plugin: if we call an API we will return the collection by default, but if we get the instance and call it's method directly they are chainable.
- * Special methods: `init`: called after creating a new instance
- *                  `instance`: return the instance of the plugin, it can also be chainable and it supports calls on private methods
- *                  `destroy`: called for resetting the wrapped elements, also deletes the instance reference from `$.data`
- *                  'call': called every time the plugin is invoked, except when the special `ready` or `destroy` functions are invoked, before the actual method called
- *                  `ready`: called when the dom is ready
- *                  `option`: no need to implement it on your own, it provide getter and setter for all plugins
- *                  `hook`: overridable function that triggers a callback, if is defined in the options
- * Special events: `onInit`: called after `init`
- *                 `onDestroy`: called after `destroy`
- *                 `onCall`: called after `call`
- * Author: Fabio Spampinato - spampinabio@gmail.com
- * License: //TODO
- * Usage: $.factory ( name, function ); // The function will be called every time the plugin is called, it behaves like a shorthand for a plugin with the onlu `call` method specified
- *        $.factory ( name, prototype ); // prototype.init will be called during instantiation
- *        $.factory ( name, options, function ); // same as up but faster, basically with options added //FIXME: write it better
- *        $.factory ( name, options, prototype ); // prototype.init will be called during instantiation
- */
-
-//TODO: maybe add a defer method
+/* FACTORY */
 
 ;(function ( $, window, document, undefined ) {
 
-    $.factory = function ( name, options, prototype ) {
+    $.factory = function ( name, base, prototype ) {
 
-        if ( typeof options === 'object' ) {
+        /* VARIABLES */
 
-            if ( typeof prototype === 'function' ) {
+        var fullName,
+            existingConstructor,
+            constructor,
+            basePrototype,
+            proxiedPrototype = {},
+            namespace = name.split ( '.' )[0];
 
-                prototype = {
-                    call: prototype
-                };
+        name = name.split ( '.' )[1];
+        fullName = namespace + '-' + name;
 
-            } else if ( typeof prototype !== 'object' ) {
+        /* NO BASE */
 
-                prototype = options;
+        if ( !prototype ) {
 
-                options = prototype.options || {};
+            prototype = base;
+            base = $.widget;
+
+        }
+
+        /* NAMESPACE */
+
+        $[namespace] = $[namespace] || {};
+
+        /* CONSTRUCTOR */
+
+        existingConstructor = $[namespace][name];
+
+        constructor = $[namespace][name] = function ( options, element ) {
+
+            if ( !this._createWidget ) {
+
+                return new constructor ( options, element );
 
             }
 
-        } else if ( typeof options === 'function' ) {
+            if ( arguments.length ) {
 
-            prototype = {
-                call: options
-            };
+                this._createWidget ( options, element );
 
-            options = {};
+            }
+
+        }
+
+        /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
+
+        _.extend ( constructor, existingConstructor, {
+            _proto: _.extend ( {}, prototype ),
+            _childConstructors: []
+        });
+
+        /* BASE PROTOTYPE */
+
+        basePrototype = new base ();
+
+        basePrototype.options = _.extend ( {}, basePrototype.options );
+
+        /* PROXIED PROTOTYPE */
+
+        for ( var prop in prototype ) {
+
+            if ( !(typeof prototype[prop] === 'function') ) {
+
+                proxiedPrototype[prop] = prototype[prop];
+                continue;
+
+            }
+
+            proxiedPrototype[prop] = (function () {
+
+                var _super = function () {
+                        return base.prototype[prop].apply ( this, arguments );
+                    },
+                    _superApply = function ( args ) {
+                        return base.prototype[prop].apply ( this, args );
+                    };
+
+                return function () {
+
+                    var __super = this._super,
+                        __superApply = this._superApply,
+                        returnValue;
+
+                    this._super = _super;
+                    this._superApply = _superApply;
+
+                    returnValue = value.apply ( this, arguments );
+
+                    this._super = __super;
+                    this._superApply = __superApply;
+
+                    return returnValue;
+
+                };
+
+            })();
+
+        }
+
+        /* CONSTRUCTOR PROTOTYPE */
+
+        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+            constructor: constructor,
+            namespace: namespace,
+            widget: {
+                name: name,
+                fullName: fullName
+            }
+        });
+
+        /* UPDATE PROTOTYPE CHAIN */
+
+        if ( existingConstructor ) {
+
+            for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+
+                var childPrototype = existingConstructor._childConstructors[i].prototype;
+
+                $.factory ( childPrototype.namespace + '.' + childPrototype.widget.name, constructor, existingConstructor._childConstructors[i]._proto );
+
+            }
+
+            delete existingConstructor._childConstructors;
 
         } else {
 
-            return;
+            base._childConstructors.push ( constructor );
 
         }
 
-        if ( typeof prototype.hook !== 'function' ) {
+        /* CONSTRUCT */
 
-            prototype.hook = function ( name ) {
+        $.factory.bridge ( name, constructor );
 
-                if ( typeof this.options[name] === 'function' ) {
+        /* READY */
 
-                    this.options[name].apply ( this, Array.prototype.slice.call ( arguments, 1 ) );
+        if ( constructor.prototype._ready ) {
 
-                }
-
-            };
+            $(constructor.prototype._ready);
 
         }
 
-        var Plugin = function ( node, options ) {
+        /* RETURN */
 
-            this.node = node;
+        return constructor;
 
-            this.$node = $(node); //TODO: optimize
+    };
 
-            this.metaoptions = this.$node.data ( name + '-options' );
+    $.factory.bridge = function ( name, object ) {
 
-            this.options = $.extend ( {}, $.fn[name].options, options, this.metaoptions );
+        /* VARIABLES */
 
-            this.defaults = $.fn[name].options;
+        var fullName = object.prototype.widget.fullName || name;
 
-            this.uuid = _.uniqueId ();
-
-            return this;
-
-        };
-
-        Plugin.prototype = prototype;
+        /* PLUGIN */
 
         $.fn[name] = function ( options ) {
 
-            var instance,
-                return_val,
-                temp;
+            var isMethodCall = ( typeof options === 'string' ),
+                args = Array.prototype.slice.call ( arguments, 1 ),
+                returnValue = this;
 
-            for ( var i = 0, l = this.length; i < l; i++ ) {
+            if ( isMethodCall ) {
 
-                instance = $.data ( this.nodes[i], 'instance-' + name );
+                /* METHOD CALL */
 
-                if ( instance === undefined ) {
+                this.each ( function () {
 
-                    instance = new Plugin ( this.nodes[i], options ); //FIXME: Make it more portable
+                    /* VARIABLES */
 
-                    $.data ( this.nodes[i], 'instance-' + name, instance );
+                    var methodValue,
+                        instance = $.data ( this, fullName );
 
-                    if ( typeof instance.init === 'function' ) {
+                    /* GETTING INSTANCE */
 
-                        instance.init ();
+                    if ( options === "instance" ) {
+
+                        returnValue = instance;
+
+                        return false;
 
                     }
 
-                    if ( typeof instance.options.onInit === 'function' ) {
+                    /* CHECKING VALID CALL */
 
-                        instance.options.onInit.apply ( instance );
+                    if ( !instance ) return; //INFO: No instance found
+
+                    if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
+
+                    /* CALLING */
+
+                    methodValue = instance[options].apply ( instance, args );
+
+                    if ( methodValue !== instance && methodValue !== undefined ) {
+
+                        returnValue = methodValue;
+
+                        return false;
 
                     }
+
+                });
+
+            } else {
+
+                /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
+
+                if ( args.length ) {
+
+                    options = _.extend.apply ( null, [options].concat ( args ) );
 
                 }
 
-                if ( instance instanceof Plugin ) {
+                /* INSTANCIATING */
 
-                    if ( options === 'instance' ) {
+                this.each ( function () {
 
-                        return instance;
+                    /* GET INSTANCE */
 
-                    } else if ( options === 'destroy' ) {
+                    var instance = $.data ( this, fullName );
 
-                        $.data ( this.nodes[i], 'instance-' + name, null ); //FIXME: Make it more portable //TODO: remove instance if null is passed
+                    if ( instance ) {
 
-                        if ( typeof instance.destroy === 'function' ) {
+                        /* INIT */
 
-                            instance.destroy ();
+                        instance.option ( options || {} );
 
-                        }
+                        if ( instance._init ) {
 
-                        if ( typeof instance.options.onDestroy === 'function' ) {
-
-                            instance.options.onDestroy.apply ( instance );
+                            instance._init ();
 
                         }
 
-                    } else if ( options === 'option' ) { //TODO: support for multi level options
+                    } else {
 
-                        if ( typeof arguments[1] === 'string' ) {
+                        /* INSTANCIATING */
 
-                            if ( arguments[2] !== undefined ) {
-
-                                instance.options[arguments[1]] = arguments[2];
-
-                            } else {
-
-                                return instance.options[arguments[1]];
-
-                            }
-
-                        }
-
-                    } else if ( typeof instance[options] === 'function' && options[0] !== '_' && options !== 'init' && option !== 'call' && options !== 'ready' && options !== 'hook' ) {
-
-                        if ( typeof instance.call === 'function' ) {
-
-                            instance.call.apply ( instance, arguments );
-
-                        }
-
-                        if ( typeof instance.options.onCall === 'function' ) {
-
-                            instance.options.onCall.apply ( instance, arguments );
-
-                        }
-
-                        temp = instance[options].apply ( instance, Array.prototype.slice.call ( arguments, 1 ) );
-
-                        if ( return_val === undefined ) return_val = temp;
-
-                    } else if ( typeof instance.call === 'function' ) {
-
-                        temp = instance.call.apply ( instance, arguments ); //FIXME: I think we should escape the first value, since it should be the function name
-
-                        if ( return_val === undefined ) return_val = temp;
-
-                        if ( typeof instance.options.onCall === 'function' ) {
-
-                            instance.options.onCall.apply ( instance, arguments ); //FIXME: I think we should escape the first value, since it should be the function name
-
-                        }
+                        $.data ( this, fullName, new object ( options, this ) );
 
                     }
 
-                }
+                });
 
             }
 
-            return ( return_val === undefined ) ? this : return_val;
+            return returnValue;
 
         };
-
-        $.fn[name].options = options;
-
-        if ( typeof prototype.ready === 'function' ) {
-
-            $.ready ( prototype.ready );
-
-        }
 
     };
 
