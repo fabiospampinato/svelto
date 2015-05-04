@@ -1,6 +1,10 @@
 
 /* BASE WIDGET */
 
+//TODO: add support for _getCreateEventData ()
+//TODO: add support for _getCreateOptions ()
+//TODO: support for trigger -> preventDefault
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -16,6 +20,7 @@
         /* VARIABLES */
 
         defaultElement: false,
+        defaultTemplate: false,
 
         widgetName: 'widget',
         widgetFullName: 'widget',
@@ -31,9 +36,21 @@
 
         _createWidget: function ( options, element ) {
 
+            /* EXTEND OPTIONS */
+
+            _.extend ( this.options, options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
+
             // VARIABLES
 
-            element = $( element || this.defaultElement || this ).get ( 0 );
+            this.initializationType = element
+                                          ? 1
+                                          : this.defaultElement
+                                              ? 2
+                                              : this.templateConstructor !== $.noop
+                                                  ? 3
+                                                  : 4;
+
+            element = $( element || this.defaultElement || this.templateConstructor ( this.options ) || this ).get ( 0 );
 
             this.element = element;
             this.$element = $(element);
@@ -60,13 +77,13 @@
 
                 });
 
+            } else { //FIXME
+
+                console.log("element === this");
+
             }
 
             //TODO: not setting this.document and this.window
-
-            /* EXTEND OPTIONS */
-
-            _.extend ( this.options, options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
 
             /* CALLBACKS */
 
