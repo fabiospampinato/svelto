@@ -5,7 +5,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.autogrow', {
+    /* AUTOGROW */
+
+    $.widget ( 'presto.autogrow', {
 
         /* OPTIONS */
 
@@ -16,12 +18,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('input.autogrow, textarea.autogrow').autogrow ();
-
-        },
 
         _create: function () {
 
@@ -147,6 +143,14 @@
             }
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('input.autogrow, textarea.autogrow').autogrow ();
 
     });
 

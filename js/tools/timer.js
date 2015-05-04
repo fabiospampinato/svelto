@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* TIMER */
+
     $.timer = function ( func, time, autostart ) {
 
         return new Timer ( func, time, autostart );

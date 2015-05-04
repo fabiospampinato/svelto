@@ -8,7 +8,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.selectable', {
+    /* SELECTABLE */
+
+    $.widget ( 'presto.selectable', {
 
         /* OPTIONS */
 
@@ -49,12 +51,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('table.selectable').selectable ();
-
-        },
 
         _create: function () {
 
@@ -310,6 +306,14 @@
             $.defer ( this._clear_selection );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('table.selectable').selectable ();
 
     });
 

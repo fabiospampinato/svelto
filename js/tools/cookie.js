@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* COOKIE */
+
     $.cookie = {
 
         destroy: function ( name ) {

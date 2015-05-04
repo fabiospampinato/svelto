@@ -5,7 +5,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.badge', {
+    /* BADGE */
+
+    $.widget ( 'presto.badge', {
 
         /* OPTIONS */
 
@@ -16,12 +18,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('[data-badge]').badge ();
-
-        },
 
         _create: function () {
 
@@ -98,6 +94,14 @@
             }
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('[data-badge]').badge ();
 
     });
 

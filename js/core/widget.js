@@ -1,11 +1,13 @@
 
-/* FACTORY */
+/* WIDGET FACTORY */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    $.factory = function ( name, base, prototype ) {
+    /* WIDGET FACTORY */
+
+    $.widget = function ( name, base, prototype ) {
 
         /* VARIABLES */
 
@@ -14,29 +16,34 @@
             constructor,
             basePrototype,
             proxiedPrototype = {},
-            namespace = name.split ( '.' )[0];
+            nameParts = name.split ( '.' ),
+            namespace = nameParts.length > 1 ? nameParts[0] : false;
 
-        name = name.split ( '.' )[1];
-        fullName = namespace + '-' + name;
+        name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+        fullName = namespace ? namespace + '-' + name : name;
 
         /* NO BASE */
 
         if ( !prototype ) {
 
             prototype = base;
-            base = $.widget;
+            base = $.Widget;
 
         }
 
         /* NAMESPACE */
 
-        $[namespace] = $[namespace] || {};
+        if ( namespace ) {
+
+            $[namespace] = $[namespace] || {};
+
+        }
 
         /* CONSTRUCTOR */
 
-        existingConstructor = $[namespace][name];
+        existingConstructor = namespace ? $[namespace][name] : $[name];
 
-        constructor = $[namespace][name] = function ( options, element ) {
+        constructor = function ( options, element ) {
 
             if ( !this._createWidget ) {
 
@@ -49,6 +56,16 @@
                 this._createWidget ( options, element );
 
             }
+
+        }
+
+        if ( namespace ) {
+
+            $[namespace][name] = constructor;
+
+        } else {
+
+            $[name] = constructor;
 
         }
 
@@ -69,14 +86,14 @@
 
         for ( var prop in prototype ) {
 
-            if ( !(typeof prototype[prop] === 'function') ) {
+            if ( typeof prototype[prop] !== 'function' ) {
 
                 proxiedPrototype[prop] = prototype[prop];
                 continue;
 
             }
 
-            proxiedPrototype[prop] = (function () {
+            proxiedPrototype[prop] = (function ( prop ) {
 
                 var _super = function () {
                         return base.prototype[prop].apply ( this, arguments );
@@ -103,7 +120,7 @@
 
                 };
 
-            })();
+            })( prop );
 
         }
 
@@ -124,7 +141,7 @@
 
                 var childPrototype = existingConstructor._childConstructors[i].prototype;
 
-                $.factory ( childPrototype.namespace + '.' + childPrototype.widget.name, constructor, existingConstructor._childConstructors[i]._proto );
+                $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
 
             }
 
@@ -138,15 +155,7 @@
 
         /* CONSTRUCT */
 
-        $.factory.bridge ( name, constructor );
-
-        /* READY */
-
-        if ( constructor.prototype._ready ) {
-
-            $(constructor.prototype._ready);
-
-        }
+        $.widget.bridge ( name, constructor );
 
         /* RETURN */
 
@@ -154,7 +163,7 @@
 
     };
 
-    $.factory.bridge = function ( name, object ) {
+    $.widget.bridge = function ( name, object ) {
 
         /* VARIABLES */
 
@@ -163,6 +172,8 @@
         /* PLUGIN */
 
         $.fn[name] = function ( options ) {
+
+            if ( this.length === 0 && !object.prototype.defaultElement ) return; //INFO: nothing to work on
 
             var isMethodCall = ( typeof options === 'string' ),
                 args = Array.prototype.slice.call ( arguments, 1 ),

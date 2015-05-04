@@ -7,15 +7,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.progressBar', {
+    /* PROGRESS BAR */
+
+    $.widget ( 'presto.progressBar', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.progressBar').progressBar ();
-
-        },
 
         _create: function () {
 
@@ -40,6 +36,14 @@
             }
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.progressBar').progressBar ();
 
     });
 

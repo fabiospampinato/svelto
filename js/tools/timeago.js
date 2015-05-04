@@ -1,12 +1,13 @@
 
-/* TIMEAGO */
-
+/* TIME AGO */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    $.factory ( 'presto.timeAgo', {
+    /* TIME AGO */
+
+    $.widget ( 'presto.timeAgo', {
 
         /* OPTIONS */
 
@@ -15,12 +16,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('[data-timestamp]').timeAgo ();
-
-        },
 
         _create: function () {
 
@@ -61,6 +56,14 @@
             this.hook ( 'onUpdate' );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('[data-timestamp]').timeAgo ();
 
     });
 

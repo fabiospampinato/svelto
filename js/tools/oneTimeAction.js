@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* ONE TIME ACTION */
+
     $.oneTimeAction = function ( method, option, action ) {
 
         if ( method === 'cookie' ) { // option -> action id

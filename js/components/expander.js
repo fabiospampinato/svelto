@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.expander', {
+    /* EXPANDER */
+
+    $.widget ( 'presto.expander', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.expander').expander ();
-
-        },
 
         _create: function () {
 
@@ -56,6 +52,14 @@
             this.$content_wrp.toggleHeight ( this.opened );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.expander').expander ();
 
     });
 

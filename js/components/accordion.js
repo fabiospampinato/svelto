@@ -5,15 +5,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.accordion', {
+    $.widget ( 'presto.accordion', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.accordions_wrp').accordion ();
-
-        },
 
         _create: function () {
 
@@ -51,6 +45,14 @@
             });
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.accordions_wrp').accordion ();
 
     });
 

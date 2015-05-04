@@ -5,9 +5,13 @@
 
     'use strict';
 
+    /* VARIABLES */
+
     var assignments = {};
 
-    $.factory ( 'presto.dropdown', {
+    /* DROPDOWN */
+
+    $.widget ( 'presto.dropdown', {
 
         options: {
             beforeOpen: $.noop,
@@ -17,12 +21,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.dropdown_trigger').dropdown ();
-
-        },
 
         _create: function () {
 
@@ -339,6 +337,14 @@
             }
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.dropdown_trigger').dropdown ();
 
     });
 

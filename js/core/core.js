@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* UI */
+
     $.ui = {
         keyCode: {
             BACKSPACE: 8,

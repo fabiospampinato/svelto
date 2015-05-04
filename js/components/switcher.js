@@ -5,7 +5,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.switcher', {
+    /* SWITCHER */
+
+    $.widget ( 'presto.switcher', {
 
         /* OPTIONS */
 
@@ -21,12 +23,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.switcher').switcher ();
-
-        },
 
         _create: function () {
 
@@ -229,6 +225,14 @@
             this.set_value ( this.current_value );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.switcher').switcher ();
 
     });
 

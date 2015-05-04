@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.checkbox', {
+    /* CHECKBOX */
+
+    $.widget ( 'presto.checkbox', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.checkbox').checkbox ();
-
-        },
 
         _create: function () {
 
@@ -76,6 +72,14 @@
             this.$input.prop ( 'checked', !active ).trigger ( 'change' );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.checkbox').checkbox ();
 
     });
 

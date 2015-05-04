@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* BINARY TREE .each () */
+
     $.fn.btEach = function ( callback, start_center ) {
 
         var start = 0,

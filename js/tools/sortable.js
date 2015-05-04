@@ -7,7 +7,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.sortable', {
+    /* SORTABLE */
+
+    $.widget ( 'presto.sortable', {
 
         /* OPTIONS */
 
@@ -28,12 +30,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('table.sortable').sortable ();
-
-        },
 
         _create: function () {
 
@@ -192,6 +188,14 @@
             this.$element.trigger ( 'sort' );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('table.sortable').sortable ();
 
     });
 

@@ -1,19 +1,15 @@
 
-/* SELECTS */
+/* SELECT */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    $.factory ( 'presto.selects', {
+    /* SELECT */
+
+    $.widget ( 'presto.select', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.select').selects ();
-
-        },
 
         _create: function () {
 
@@ -148,6 +144,14 @@
 
         }
 
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.select').select ();
 
     });
 

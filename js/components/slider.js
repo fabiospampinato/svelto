@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.slider', {
+    /* SLIDER */
+
+    $.widget ( 'presto.slider', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.slider_wrp').slider ();
-
-        },
 
         _create: function () {
 
@@ -314,6 +310,14 @@
             return false;
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.slider_wrp').slider ();
 
     });
 

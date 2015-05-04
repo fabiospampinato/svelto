@@ -1,21 +1,21 @@
 
-/* WIDGET */
+/* BASE WIDGET */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    /* WIDGET */
+    /* BASE WIDGET */
 
-    $.widget = function ( /* options, element */ ) {};
+    $.Widget = function ( /* options, element */ ) {};
 
-    $.widget._childConstructors = [];
+    $.Widget._childConstructors = [];
 
-    $.widget.prototype = {
+    $.Widget.prototype = {
 
         /* VARIABLES */
 
-        defaultElement: '<div>',
+        defaultElement: false,
 
         widgetName: 'widget',
         widgetFullName: 'widget',
@@ -33,7 +33,7 @@
 
             // VARIABLES
 
-            element = $( element || this.defaultElement || this )[0];
+            element = $( element || this.defaultElement || this ).get ( 0 );
 
             this.element = element;
             this.$element = $(element);
@@ -66,7 +66,7 @@
 
             /* EXTEND OPTIONS */
 
-            _.extend ( this.options, options ); //TODO: maybe do this.options = ..., but why?
+            _.extend ( this.options, options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
 
             /* CALLBACKS */
 
@@ -207,6 +207,7 @@
         _on: function ( suppressDisabledCheck, $element, events, handler ) {
 
             //TODO: add support for handlers as functions, not just for string name of a method
+            //FIXME: if the widget is redefined the proxied handlers are not updated
 
             var instance = this;
 
@@ -266,6 +267,7 @@
         _off: function ( $element, events, handler ) {
 
             //TODO: add support for handlers as functions, not just for string name of a method
+            //FIXME: if the widget is redefined the proxied handlers are not updated
 
             if ( !handler ) {
 
@@ -291,11 +293,13 @@
 
         _trigger: function ( events ) {
 
-            this.$element.trigger ( events );
+            //TODO: add support for passing datas
 
             events = events.split ( ' ' );
 
             for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+
+                this.$element.trigger ( this.widgetName + ':' + events[ei] );
 
                 if ( typeof this.options.callback[events[ei]] === 'function' ) {
 

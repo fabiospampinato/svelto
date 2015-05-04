@@ -9,7 +9,9 @@
 
     //FIXME: It's not a widget
 
-    $.factory ( 'presto.touching', {
+    /* TOUCHING */
+
+    $.widget ( 'presto.touching', {
 
         /* OPTIONS */
 

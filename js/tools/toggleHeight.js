@@ -5,7 +5,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.toggleHeight', {
+    /* TOGGLE HEIGHT */
+
+    $.widget ( 'presto.toggleHeight', {
 
         /* SPECIAL */
 

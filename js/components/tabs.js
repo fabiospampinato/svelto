@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.tabs', {
+    /* TABS */
+
+    $.widget ( 'presto.tabs', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.tabs_wrp').tabs ();
-
-        },
 
         _create: function () {
 
@@ -49,6 +45,14 @@
             });
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.tabs_wrp').tabs ();
 
     });
 

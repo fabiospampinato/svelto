@@ -14,6 +14,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
+    /* UI */
+
     $.ui = {
         keyCode: {
             BACKSPACE: 8,
@@ -39,23 +41,23 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
-/* WIDGET */
+/* BASE WIDGET */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    /* WIDGET */
+    /* BASE WIDGET */
 
-    $.widget = function ( /* options, element */ ) {};
+    $.Widget = function ( /* options, element */ ) {};
 
-    $.widget._childConstructors = [];
+    $.Widget._childConstructors = [];
 
-    $.widget.prototype = {
+    $.Widget.prototype = {
 
         /* VARIABLES */
 
-        defaultElement: '<div>',
+        defaultElement: false,
 
         widgetName: 'widget',
         widgetFullName: 'widget',
@@ -73,7 +75,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             // VARIABLES
 
-            element = $( element || this.defaultElement || this )[0];
+            element = $( element || this.defaultElement || this ).get ( 0 );
 
             this.element = element;
             this.$element = $(element);
@@ -106,7 +108,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* EXTEND OPTIONS */
 
-            _.extend ( this.options, options ); //TODO: maybe do this.options = ..., but why?
+            _.extend ( this.options, options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
 
             /* CALLBACKS */
 
@@ -247,6 +249,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _on: function ( suppressDisabledCheck, $element, events, handler ) {
 
             //TODO: add support for handlers as functions, not just for string name of a method
+            //FIXME: if the widget is redefined the proxied handlers are not updated
 
             var instance = this;
 
@@ -306,6 +309,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _off: function ( $element, events, handler ) {
 
             //TODO: add support for handlers as functions, not just for string name of a method
+            //FIXME: if the widget is redefined the proxied handlers are not updated
 
             if ( !handler ) {
 
@@ -331,11 +335,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _trigger: function ( events ) {
 
-            this.$element.trigger ( events );
+            //TODO: add support for passing datas
 
             events = events.split ( ' ' );
 
             for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+
+                this.$element.trigger ( this.widgetName + ':' + events[ei] );
 
                 if ( typeof this.options.callback[events[ei]] === 'function' ) {
 
@@ -381,13 +387,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
-/* FACTORY */
+/* WIDGET FACTORY */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    $.factory = function ( name, base, prototype ) {
+    /* WIDGET FACTORY */
+
+    $.widget = function ( name, base, prototype ) {
 
         /* VARIABLES */
 
@@ -396,29 +404,34 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             constructor,
             basePrototype,
             proxiedPrototype = {},
-            namespace = name.split ( '.' )[0];
+            nameParts = name.split ( '.' ),
+            namespace = nameParts.length > 1 ? nameParts[0] : false;
 
-        name = name.split ( '.' )[1];
-        fullName = namespace + '-' + name;
+        name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+        fullName = namespace ? namespace + '-' + name : name;
 
         /* NO BASE */
 
         if ( !prototype ) {
 
             prototype = base;
-            base = $.widget;
+            base = $.Widget;
 
         }
 
         /* NAMESPACE */
 
-        $[namespace] = $[namespace] || {};
+        if ( namespace ) {
+
+            $[namespace] = $[namespace] || {};
+
+        }
 
         /* CONSTRUCTOR */
 
-        existingConstructor = $[namespace][name];
+        existingConstructor = namespace ? $[namespace][name] : $[name];
 
-        constructor = $[namespace][name] = function ( options, element ) {
+        constructor = function ( options, element ) {
 
             if ( !this._createWidget ) {
 
@@ -431,6 +444,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this._createWidget ( options, element );
 
             }
+
+        }
+
+        if ( namespace ) {
+
+            $[namespace][name] = constructor;
+
+        } else {
+
+            $[name] = constructor;
 
         }
 
@@ -451,14 +474,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         for ( var prop in prototype ) {
 
-            if ( !(typeof prototype[prop] === 'function') ) {
+            if ( typeof prototype[prop] !== 'function' ) {
 
                 proxiedPrototype[prop] = prototype[prop];
                 continue;
 
             }
 
-            proxiedPrototype[prop] = (function () {
+            proxiedPrototype[prop] = (function ( prop ) {
 
                 var _super = function () {
                         return base.prototype[prop].apply ( this, arguments );
@@ -485,7 +508,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 };
 
-            })();
+            })( prop );
 
         }
 
@@ -506,7 +529,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 var childPrototype = existingConstructor._childConstructors[i].prototype;
 
-                $.factory ( childPrototype.namespace + '.' + childPrototype.widget.name, constructor, existingConstructor._childConstructors[i]._proto );
+                $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
 
             }
 
@@ -520,15 +543,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CONSTRUCT */
 
-        $.factory.bridge ( name, constructor );
-
-        /* READY */
-
-        if ( constructor.prototype._ready ) {
-
-            $(constructor.prototype._ready);
-
-        }
+        $.widget.bridge ( name, constructor );
 
         /* RETURN */
 
@@ -536,7 +551,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-    $.factory.bridge = function ( name, object ) {
+    $.widget.bridge = function ( name, object ) {
 
         /* VARIABLES */
 
@@ -545,6 +560,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* PLUGIN */
 
         $.fn[name] = function ( options ) {
+
+            if ( this.length === 0 && !object.prototype.defaultElement ) return; //INFO: nothing to work on
 
             var isMethodCall = ( typeof options === 'string' ),
                 args = Array.prototype.slice.call ( arguments, 1 ),
@@ -645,7 +662,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.autogrow', {
+    /* AUTOGROW */
+
+    $.widget ( 'presto.autogrow', {
 
         /* OPTIONS */
 
@@ -656,12 +675,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('input.autogrow, textarea.autogrow').autogrow ();
-
-        },
 
         _create: function () {
 
@@ -790,6 +803,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('input.autogrow, textarea.autogrow').autogrow ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -802,7 +823,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
+    /* VARIABLES */
+
     var userAgent = navigator.userAgent.toLowerCase ();
+
+    /* BROWSER */
 
     $.browser = {
         isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
@@ -822,6 +847,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* COOKIE */
 
     $.cookie = {
 
@@ -877,15 +904,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.formAjax', {
+    /* FORM AJAX */
+
+    $.widget ( 'presto.formAjax', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('form.ajax').formAjax ();
-
-        },
 
         _create: function () {
 
@@ -981,6 +1004,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('form.ajax').formAjax ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -991,17 +1022,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
+    /* VARIABLES */
+
     var synced_groups = [];
 
-    $.factory ( 'presto.formSync', {
+    /* FORM SYNC */
+
+    $.widget ( 'presto.formSync', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('form[data-sync-group]').formSync ();
-
-        },
 
         _create: function () {
 
@@ -1068,6 +1097,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('form[data-sync-group]').formSync ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -1077,6 +1114,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* NOTIFICATION */
 
     $.notification = function ( custom_options, both ) {
 
@@ -1140,6 +1179,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
+    /* ONE TIME ACTION */
+
     $.oneTimeAction = function ( method, option, action ) {
 
         if ( method === 'cookie' ) { // option -> action id
@@ -1190,7 +1231,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.selectable', {
+    /* SELECTABLE */
+
+    $.widget ( 'presto.selectable', {
 
         /* OPTIONS */
 
@@ -1231,12 +1274,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('table.selectable').selectable ();
-
-        },
 
         _create: function () {
 
@@ -1495,6 +1532,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('table.selectable').selectable ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -1507,7 +1552,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.sortable', {
+    /* SORTABLE */
+
+    $.widget ( 'presto.sortable', {
 
         /* OPTIONS */
 
@@ -1528,12 +1575,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('table.sortable').sortable ();
-
-        },
 
         _create: function () {
 
@@ -1695,6 +1736,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('table.sortable').sortable ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -1705,15 +1754,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.tableHelper', {
+    /* TABLE HELPER */
+
+    $.widget ( 'presto.tableHelper', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('table').tableHelper ();
-
-        },
 
         _create: function () {
 
@@ -1828,6 +1873,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('table').tableHelper ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -1837,6 +1890,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* TIMER */
 
     $.timer = function ( func, time, autostart ) {
 
@@ -2003,7 +2058,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.toggleHeight', {
+    /* TOGGLE HEIGHT */
+
+    $.widget ( 'presto.toggleHeight', {
 
         /* SPECIAL */
 
@@ -2097,7 +2154,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     //FIXME: It's not a widget
 
-    $.factory ( 'presto.touching', {
+    /* TOUCHING */
+
+    $.widget ( 'presto.touching', {
 
         /* OPTIONS */
 
@@ -2176,15 +2235,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.accordion', {
+    $.widget ( 'presto.accordion', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.accordions_wrp').accordion ();
-
-        },
 
         _create: function () {
 
@@ -2225,6 +2278,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.accordions_wrp').accordion ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -2235,7 +2296,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.badge', {
+    /* BADGE */
+
+    $.widget ( 'presto.badge', {
 
         /* OPTIONS */
 
@@ -2246,12 +2309,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('[data-badge]').badge ();
-
-        },
 
         _create: function () {
 
@@ -2331,6 +2388,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('[data-badge]').badge ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -2340,6 +2405,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* BLUR */
 
     $.fn.blur = function ( activate ) {
 
@@ -2357,15 +2424,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.checkbox', {
+    /* CHECKBOX */
+
+    $.widget ( 'presto.checkbox', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.checkbox').checkbox ();
-
-        },
 
         _create: function () {
 
@@ -2431,6 +2494,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.checkbox').checkbox ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -2441,9 +2512,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
+    /* VARIABLES */
+
     var assignments = {};
 
-    $.factory ( 'presto.dropdown', {
+    /* DROPDOWN */
+
+    $.widget ( 'presto.dropdown', {
 
         options: {
             beforeOpen: $.noop,
@@ -2453,12 +2528,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.dropdown_trigger').dropdown ();
-
-        },
 
         _create: function () {
 
@@ -2778,6 +2847,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.dropdown_trigger').dropdown ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -2788,15 +2865,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    $.factory ( 'presto.expander', {
+    /* EXPANDER */
+
+    $.widget ( 'presto.expander', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.expander').expander ();
-
-        },
 
         _create: function () {
 
@@ -2842,6 +2915,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.expander').expander ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -2851,6 +2932,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* LOADING */
 
     $.fn.loading = function ( activate ) {
 
@@ -2930,15 +3013,11 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.modal', {
+    /* MODAL */
+
+    $.widget ( 'presto.modal', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.modal_trigger').modal ();
-
-        },
 
         _create: function () {
 
@@ -2992,6 +3071,14 @@ $.ready ( function () {
             $document.off ( 'keydown', this._handler_esc_keydown );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.modal_trigger').modal ();
 
     });
 
@@ -3253,15 +3340,11 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.progressBar', {
+    /* PROGRESS BAR */
+
+    $.widget ( 'presto.progressBar', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.progressBar').progressBar ();
-
-        },
 
         _create: function () {
 
@@ -3289,6 +3372,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.progressBar').progressBar ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -3299,15 +3390,11 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.radio', {
+    /* RADIO */
+
+    $.widget ( 'presto.radio', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.radio').radio ();
-
-        },
 
         _create: function () {
 
@@ -3361,25 +3448,29 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.radio').radio ();
+
+    });
+
 }( lQuery, window, document ));
 
 
 
-/* SELECTS */
+/* SELECT */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    $.factory ( 'presto.selects', {
+    /* SELECT */
+
+    $.widget ( 'presto.select', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.select').selects ();
-
-        },
 
         _create: function () {
 
@@ -3517,6 +3608,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.select').select ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -3568,15 +3667,11 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.slider', {
+    /* SLIDER */
+
+    $.widget ( 'presto.slider', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.slider_wrp').slider ();
-
-        },
 
         _create: function () {
 
@@ -3880,6 +3975,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.slider_wrp').slider ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -3890,15 +3993,11 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.spinner', {
+    /* SPINNER */
+
+    $.widget ( 'presto.spinner', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.spinner').spinner ();
-
-        },
 
         _create: function () {
 
@@ -4048,6 +4147,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.spinner').spinner ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -4058,7 +4165,9 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.switcher', {
+    /* SWITCHER */
+
+    $.widget ( 'presto.switcher', {
 
         /* OPTIONS */
 
@@ -4074,12 +4183,6 @@ $.ready ( function () {
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.switcher').switcher ();
-
-        },
 
         _create: function () {
 
@@ -4285,6 +4388,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.switcher').switcher ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -4295,15 +4406,11 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.tabs', {
+    /* TABS */
+
+    $.widget ( 'presto.tabs', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.tabs_wrp').tabs ();
-
-        },
 
         _create: function () {
 
@@ -4342,6 +4449,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('.tabs_wrp').tabs ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -4352,7 +4467,9 @@ $.ready ( function () {
 
     'use strict';
 
-    $.factory ( 'presto.tagbox', {
+    /* TAGBOX */
+
+    $.widget ( 'presto.tagbox', {
 
         /* OPTIONS */
 
@@ -4373,12 +4490,6 @@ $.ready ( function () {
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('input.tagbox').tagbox ();
-
-        },
 
         _create: function () {
 
@@ -4654,18 +4765,27 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('input.tagbox').tagbox ();
+
+    });
+
 }( lQuery, window, document ));
 
 
 
-/* TIMEAGO */
-
+/* TIME AGO */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    $.factory ( 'presto.timeAgo', {
+    /* TIME AGO */
+
+    $.widget ( 'presto.timeAgo', {
 
         /* OPTIONS */
 
@@ -4674,12 +4794,6 @@ $.ready ( function () {
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('[data-timestamp]').timeAgo ();
-
-        },
 
         _create: function () {
 
@@ -4723,6 +4837,14 @@ $.ready ( function () {
 
     });
 
+    /* READY */
+
+    $(function () {
+
+        $('[data-timestamp]').timeAgo ();
+
+    });
+
 }( lQuery, window, document ));
 
 
@@ -4732,6 +4854,8 @@ $.ready ( function () {
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* BINARY TREE .each () */
 
     $.fn.btEach = function ( callback, start_center ) {
 

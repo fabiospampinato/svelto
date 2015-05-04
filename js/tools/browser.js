@@ -7,7 +7,11 @@
 
     'use strict';
 
+    /* VARIABLES */
+
     var userAgent = navigator.userAgent.toLowerCase ();
+
+    /* BROWSER */
 
     $.browser = {
         isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),

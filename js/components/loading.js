@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* LOADING */
+
     $.fn.loading = function ( activate ) {
 
         if ( activate ) {

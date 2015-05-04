@@ -5,17 +5,15 @@
 
     'use strict';
 
+    /* VARIABLES */
+
     var synced_groups = [];
 
-    $.factory ( 'presto.formSync', {
+    /* FORM SYNC */
+
+    $.widget ( 'presto.formSync', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('form[data-sync-group]').formSync ();
-
-        },
 
         _create: function () {
 
@@ -79,6 +77,14 @@
             });
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('form[data-sync-group]').formSync ();
 
     });
 

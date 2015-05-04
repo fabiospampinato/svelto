@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* NOTIFICATION */
+
     $.notification = function ( custom_options, both ) {
 
         // OPTIONS

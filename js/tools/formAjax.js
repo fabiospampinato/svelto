@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.formAjax', {
+    /* FORM AJAX */
+
+    $.widget ( 'presto.formAjax', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('form.ajax').formAjax ();
-
-        },
 
         _create: function () {
 
@@ -106,6 +102,14 @@
             });
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('form.ajax').formAjax ();
 
     });
 

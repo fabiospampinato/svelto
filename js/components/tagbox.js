@@ -5,7 +5,9 @@
 
     'use strict';
 
-    $.factory ( 'presto.tagbox', {
+    /* TAGBOX */
+
+    $.widget ( 'presto.tagbox', {
 
         /* OPTIONS */
 
@@ -26,12 +28,6 @@
         },
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('input.tagbox').tagbox ();
-
-        },
 
         _create: function () {
 
@@ -304,6 +300,14 @@
             }
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('input.tagbox').tagbox ();
 
     });
 

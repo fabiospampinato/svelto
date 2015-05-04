@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.modal', {
+    /* MODAL */
+
+    $.widget ( 'presto.modal', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.modal_trigger').modal ();
-
-        },
 
         _create: function () {
 
@@ -67,6 +63,14 @@
             $document.off ( 'keydown', this._handler_esc_keydown );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.modal_trigger').modal ();
 
     });
 

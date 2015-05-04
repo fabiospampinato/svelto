@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.spinner', {
+    /* SPINNER */
+
+    $.widget ( 'presto.spinner', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.spinner').spinner ();
-
-        },
 
         _create: function () {
 
@@ -160,6 +156,14 @@
             }
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.spinner').spinner ();
 
     });
 

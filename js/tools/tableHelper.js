@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.tableHelper', {
+    /* TABLE HELPER */
+
+    $.widget ( 'presto.tableHelper', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('table').tableHelper ();
-
-        },
 
         _create: function () {
 
@@ -125,6 +121,14 @@
             return this;
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('table').tableHelper ();
 
     });
 

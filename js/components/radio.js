@@ -5,15 +5,11 @@
 
     'use strict';
 
-    $.factory ( 'presto.radio', {
+    /* RADIO */
+
+    $.widget ( 'presto.radio', {
 
         /* SPECIAL */
-
-        _ready: function () {
-
-            $('.radio').radio ();
-
-        },
 
         _create: function () {
 
@@ -64,6 +60,14 @@
             this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
         }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.radio').radio ();
 
     });
 
