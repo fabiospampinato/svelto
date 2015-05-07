@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
     +divider Base
 
     +container
@@ -65,7 +65,7 @@ append content
         .button.actionable.outlined(onclick="javascript:progressBar_set ( 75 )") Set 75%
         .button.actionable.outlined(onclick="javascript:progressBar_set ( 100 )") Set 100%
 
-append body
+append body-end
     +script.
         function progressBar_set ( percentage ) {
             $(".progressBar").progressBar ( percentage );

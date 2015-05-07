@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
 +divider Paragraph
     .grid
         .grid_cols.limited
@@ -23,7 +23,7 @@ append content
                     .button.actionable.outlined(onclick="javascript:set_speed(1)") Set 1s
                     .button.actionable.outlined(onclick="javascript:set_speed(3)") Set 3s
 
-append body
+append body-end
     script(type="text/javascript").
         function toggle_height () {
             $('#toggable').toggleHeight ();

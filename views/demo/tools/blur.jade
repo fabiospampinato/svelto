@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
     +divider Paragraph
 
     +container
@@ -12,7 +12,7 @@ append content
 
     +button.actionable.outlined(onclick="blur_test()") Toggle blur
 
-append body
+append body-end
     +script.
         function blur_test () {
             $("p").parent ().blur ();

@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
 +divider Normal
     .multiple
         input(type="text", name="input_1", value="Base")
@@ -74,7 +74,7 @@ append content
         .toolbar
             .button.actionable(onclick="javascript:toggle_loading();") Toggle loading
 
-append body
+append body-end
     script(type="text/javascript").
         function toggle_loading () {
             $("#loadable").toggleClass ( "loading_icons" );

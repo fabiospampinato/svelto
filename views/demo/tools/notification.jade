@@ -2,14 +2,14 @@
 
 extends ../../layout.jade
 
-append content
+append body
     +divider Notifications
 
     .multiple
         .button.actionable.outlined(onclick="notification_test()") Single
         .button.actionable.outlined(onclick="notification_test(true)") Both
 
-append body
+append body-end
     +script.
         function notification_test ( both ) {
             $.notification ( { title: "Test title", body: "Example test description", img: "/images/sample.png" }, both );

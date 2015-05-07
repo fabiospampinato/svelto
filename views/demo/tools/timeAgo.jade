@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
     +divider Timeago
 
     +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")

@@ -1,0 +1,25 @@
+{
+    "version": "0.0.1",
+    "name": "Presto",
+    "launch_path": "/index.html",
+    "description": "A modular web framework for the world of today",
+    "icons": {
+        "60": "/assets/images/touch/touch-icon-60x60.png",
+        "128": "/assets/images/touch/touch-icon-128x128.png"
+    },
+    "developer": {
+        "name": "Fabio Spampinato",
+        "url": "fabiospampinato.me"
+    },
+    "installs_allowed_from": [
+        "*"
+    ],
+    "default_locale": "en",
+    "permissions": {},
+    "locales": {
+        "en": {
+            "name": "Presto",
+            "description": "A modular web framework for the world of today"
+        }
+    }
+}

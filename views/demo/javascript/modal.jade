@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
 +divider Modals
     .grid
         .grid_cols.limited
@@ -14,7 +14,7 @@ append content
                     .button.actionable.outlined.modal_trigger(data-modal="modal-4") Only content
                     .button.actionable.outlined.modal_trigger(data-modal="modal-5") With buttons
 
-append body
+append body-end
     #modal-1.modal
         .background.closing
         .container

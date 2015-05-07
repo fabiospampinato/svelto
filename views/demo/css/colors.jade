@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
     +divider Primary
 
     +multiple
@@ -143,5 +143,5 @@ append content
         p.text-teal [TEAL] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
         p.text-transparent [TRANSPARENT] Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et.
 
-append body
+append body-end
     +noty({ body: '<p>[H] Highlight <br/> [G] Gradient <br/> [T] Transparentized <br/> [O] Outlined</p>', ttl: 'forever' })

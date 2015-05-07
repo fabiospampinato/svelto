@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append body
     +divider One time action
 
     .multiple
@@ -14,7 +14,7 @@ append content
 
     .button.actionable.outlined(onclick="test_one_time_action_reset_actions()") Reset actions
 
-append body
+append body-end
     +script.
         function test_one_time_action_cookie1 () {
             $.oneTimeAction ( 'cookie', 'test1', function () {
