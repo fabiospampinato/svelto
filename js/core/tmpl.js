@@ -1,5 +1,54 @@
 
- /* TMPL - https://github.com/blueimp/JavaScript-Templates */
+/* TMPL - https://github.com/blueimp/JavaScript-Templates */
+
+/*
+ ***************************
+ *      Documentation      *
+ ***************************
+ *
+ * Interpolation
+ *
+ * - Basic
+ * <h3>{%=o.title%}</h3>
+ *
+ * - Unescaped
+ * <h3>{%#o.user_id%}</h3>
+ *
+ * - Result of function call
+ * <a href="{%=encodeURI(o.url)%}">Website</a>
+ *
+ * - Nested properties
+ * <strong>{%=o.author.name%}</strong>
+ *
+ * Evaluation
+ *
+ * - Print
+ * <span>Year: {% var d=new Date(); print(d.getFullYear()); %}</span>
+ *
+ * - Print unescaped
+ * <span>{% print("Fast &amp; powerful", true); %}</span>
+ *
+ * - Include another template
+ * <div>
+ *     {% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
+ * </div>
+ *
+ * - If else condition
+ * {% if (o.author.url) { %}
+ *     <a href="{%=encodeURI(o.author.url)%}">{%=o.author.name%}</a>
+ * {% } else { %}
+ *     <em>No author url.</em>
+ * {% } %}
+ *
+ * - For loop
+ * <ul>
+ *     {% for (var i=0; i<o.features.length; i++) { %}
+ *         <li>{%=o.features[i]%}</li>
+ *     {% } %}
+ * </ul>
+ *
+ ***************************
+ */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -11,7 +60,7 @@
 
         var f = !/[^\w\-\.:]/.test ( str )
                     ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-                    : new Function ( tmpl.arg + ',tmpl', 'var _e=tmpl.encode' + tmpl.helper + ',_s="' + str.replace ( tmpl.regexp, tmpl.func ) + '";return _s;' );
+                    : new Function ( tmpl.arg + ',tmpl', 'var _e=_.encode' + tmpl.helper + ',_s="' + str.replace ( tmpl.regexp, tmpl.func ) + '";return _s;' );
 
         return data
                    ? f ( data, tmpl )
@@ -59,26 +108,6 @@
             return '_s+="';
 
         }
-
-    };
-
-    tmpl.encReg = /[<>&"'\x00]/g;
-
-    tmpl.encMap = {
-        '<'   : '&lt;',
-        '>'   : '&gt;',
-        '&'   : '&amp;',
-        '"'   : '&quot;',
-        '\''  : '&#39;'
-    };
-
-    tmpl.encode = function ( s ) {
-
-        return ( s == null ? '' : '' + s ).replace ( tmpl.encReg, function ( c ) {
-
-            return tmpl.encMap[c] || '';
-
-        });
 
     };
 

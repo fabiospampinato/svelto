@@ -1,5 +1,5 @@
 
- /* TIMER - http://jchavannes.com/jquery-timer */
+/* TIMER - http://jchavannes.com/jquery-timer */
 
 ;(function ( $, window, document, undefined ) {
 

@@ -21,6 +21,10 @@
 
         width: 100%;
 
+        & > .title {
+            @include big ();
+        }
+
         & > .title + .subtitle {
             margin-top: $layout-half-spacing;
         }

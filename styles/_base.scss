@@ -43,8 +43,13 @@
 
 /* GENERAL */
 
+*, *:before, *:after {
+    box-sizing: inherit;
+}
+
 html {
 
+    box-sizing: border-box;
     height: 100%;
     font-family: $font-family;
     font-size: $font-size-normal;

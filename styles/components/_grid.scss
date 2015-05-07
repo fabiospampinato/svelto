@@ -188,34 +188,3 @@
     }
 
 }
-
-/*
-@include max-screen ( $layout-no-columns-padding-breakpoint ) { //FIXME
-
-    html.has_columns {
-
-        body {
-            height:calc(100% - #{$navbar-height}) !important;
-        }
-
-        #content {
-            margin: $navbar-height 0 0 0 !important;
-            padding: 0 !important;
-            height: 100% !important;
-        }
-
-        .columns {
-
-            box-shadow: none !important;
-
-            .column {
-                border: none !important;
-                border-radius: 0 !important;
-            }
-
-        }
-
-    }
-
-}
-*/

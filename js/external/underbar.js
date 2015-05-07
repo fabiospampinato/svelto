@@ -65,7 +65,7 @@
 
     underbar.factory = function ( name, fn ) {
 
-        if ( isDictionary ( name ) ) {
+        if ( isPlainObject ( name ) ) {
 
             for ( var key in name ) {
 
@@ -105,6 +105,9 @@
 
     var MAX_SAFE_INTEGER = Math.pow ( 2, 53 ) - 1;
 
+    var reRegExpChars = /[.*+?^${}()|[\]\/\\]/g,
+        reHasRegExpChars = RegExp ( reRegExpChars.source );
+
     var reWords = (function () {
 
         var upper = '[A-Z\\xc0-\\xd6\\xd8-\\xde]',
@@ -113,6 +116,33 @@
         return RegExp ( upper + '+(?=' + upper + lower + ')|' + upper + '?' + lower + '|' + upper + '+|[0-9]+', 'g' );
 
     }());
+
+    var reNative = RegExp ( '^' + escapeRegExp ( Object.prototype.toString + '' ).replace ( /toString|(function).*?(?=\\\()| for .+?(?=\\\])/g, '$1.*?' ) + '$' );
+
+    var reHostCtor = /^\[object .+?Constructor\]$/;
+
+    var htmlEscapes = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#39;',
+        '`': '&#96;'
+    };
+
+    var htmlUnescapes = {
+        '&amp;': '&',
+        '&lt;': '<',
+        '&gt;': '>',
+        '&quot;': '"',
+        '&#39;': "'",
+        '&#96;': '`'
+    };
+
+    var reEscapedHtml = /&(?:amp|lt|gt|quot|#39|#96);/g,
+        reUnescapedHtml = /[&<>"'`]/g,
+        reHasEscapedHtml = RegExp ( reEscapedHtml.source ),
+        reHasUnescapedHtml = RegExp ( reUnescapedHtml.source );
 
     var uuid = 0;
 
@@ -149,15 +179,9 @@
 
     var isArray = Array.isArray;
 
-    function isDictionary ( value ) { //TODO: does it work??? Maybe check it with all the types
-
-        return Object.prototype.toString.call ( value ) === '[object Object]';
-
-    }
-
     function isCollection ( value ) {
 
-        return isArray ( value ) || isDictionary ( value );
+        return isArray ( value ) || isPlainObject ( value );
 
     }
 
@@ -241,6 +265,24 @@
     }
     */
 
+    function isNative ( value ) {
+
+        if ( value == null ) {
+
+            return false;
+
+        }
+
+        if ( Object.prototype.toString.call ( value ) === '[object Function]' ) {
+
+            return reNative.test ( Function.prototype.toString.call ( value ) );
+
+        }
+
+        return isObjectLike ( value ) && reHostCtor.test ( value );
+
+    }
+
     function isNull ( value ) {
 
         return value === null;
@@ -250,6 +292,21 @@
     function isNumber ( value ) {
 
         return typeof value === 'number' || ( isObjectLike ( value ) && Object.prototype.toString.call ( value ) === '[object Number]' );
+
+    }
+
+    function isPlainObject ( value ) {
+
+        if ( !( value && Object.prototype.toString.call ( value ) === '[object Object]' ) ) {
+
+            return false;
+
+        }
+
+        var valueOf = value.valueOf,
+            objProto = isNative ( valueOf ) && ( objProto = Object.getPrototypeOf ( valueOf ) ) && Object.getPrototypeOf ( objProto );
+
+        return ( value == objProto || Object.getPrototypeOf ( value ) == objProto );
 
     }
 
@@ -283,7 +340,7 @@
 
             return underbar.identity;
 
-        } else if ( isDictionary ( iteratee ) ) {
+        } else if ( isPlainObject ( iteratee ) ) {
 
             return underbar.matches ( iteratee );
 
@@ -391,13 +448,21 @@
 
     /* PRIVATE OTHER FUNCTIONS */
 
+    function escapeRegExp ( str ) {
+
+        return ( str && reHasRegExpChars.test ( str ) )
+                   ? str.replace ( reRegExpChars, '\\$&' )
+                   : str;
+
+    }
+
     function extend ( target, obj ) {
 
         for ( var prop in obj ) {
 
             if ( Object.prototype.hasOwnProperty.call ( obj, prop ) ) {
 
-                if ( isDictionary ( obj[prop] ) ) {
+                if ( isPlainObject ( obj[prop] ) ) {
 
                     target[prop] = underbar.extend ( target[prop], obj[prop] );
 
@@ -2339,8 +2404,6 @@
 
         isArray: isArray,
 
-        isDictionary: isDictionary, //INFO: not implemented in lodash
-
         isCollection: isCollection, //INFO: not implemented in lodash
 
         /*
@@ -2487,6 +2550,18 @@
 
         isNaN: isNaN,
 
+        /* //FIXME: add documentation, benchmark and tests
+         * Checks if `value` is a native function.
+         *
+         * _.isNative(Array.prototype.push);
+         * // => true
+         *
+         * _.isNative(_);
+         * // => false
+         */
+
+        isNative: isNative,
+
         /*
          * Checks if `value` is `null`.
          *
@@ -2516,6 +2591,32 @@
          */
 
         isNumber: isNumber,
+
+        /* //FIXME: add documentation, benchmark and tests
+         * Checks if `value` is a plain object, that is, an object created by the
+         * `Object` constructor or one with a `[[Prototype]]` of `null`.
+         *
+         * **Note:** This method assumes objects created by the `Object` constructor
+         * have no inherited enumerable properties.
+         *
+         * function Foo() {
+         *   this.a = 1;
+         * }
+         *
+         * _.isPlainObject(new Foo);
+         * // => false
+         *
+         * _.isPlainObject([1, 2, 3]);
+         * // => false
+         *
+         * _.isPlainObject({ 'x': 0, 'y': 0 });
+         * // => true
+         *
+         * _.isPlainObject(Object.create(null)); //FIXME: is not working, it throws an error
+         * // => true
+         */
+
+        isPlainObject: isPlainObject,
 
         /*
          * Checks if `value` is classified as a `RegExp` object.
@@ -2891,17 +2992,6 @@
          * predicate is bound to `thisArg` and invoked with three arguments:
          * (value, key, object).
          *
-         * @static
-         * @memberOf _
-         * @category Object
-         * @param {Object} object The source object.
-         * @param {Function|...(string|string[])} [predicate] The function invoked per
-         *  iteration or property names to omit, specified as individual property
-         *  names or arrays of property names.
-         * @param {*} [thisArg] The `this` binding of `predicate`.
-         * @returns {Object} Returns the new object.
-         * @example
-         *
          * var object = { 'user': 'fred', 'age': 40 };
          *
          * _.omit(object, 'age');
@@ -3106,6 +3196,49 @@
             return ( i === l );
 
         },
+
+        /* //FIXME: add doc and stuff
+         * Converts the characters "&", "<", ">", '"', "'", and "\`", in `string` to
+         * their corresponding HTML entities.
+         *
+         * **Note:** No other characters are escaped. To escape additional characters
+         * use a third-party library like [_he_](https://mths.be/he).
+         *
+         * Though the ">" character is escaped for symmetry, characters like
+         * ">" and "/" don't require escaping in HTML and have no special meaning
+         * unless they're part of a tag or unquoted attribute value.
+         * See [Mathias Bynens's article](https://mathiasbynens.be/notes/ambiguous-ampersands)
+         * (under "semi-related fun fact") for more details.
+         *
+         * Backticks are escaped because in Internet Explorer < 9, they can break out
+         * of attribute values or HTML comments. See [#102](https://html5sec.org/#102),
+         * [#108](https://html5sec.org/#108), and [#133](https://html5sec.org/#133) of
+         * the [HTML5 Security Cheatsheet](https://html5sec.org/) for more details.
+         *
+         * When working with HTML you should always [quote attribute values](http://wonko.com/post/html-escaping)
+         * to reduce XSS vectors.
+         *
+         * _.escape('fred, barney, & pebbles');
+         * // => 'fred, barney, &amp; pebbles'
+         */
+
+        escape: function ( str ) {
+
+            return ( str && reHasUnescapedHtml.test ( str ) )
+                       ? str.replace ( reUnescapedHtml, function ( char ) { return htmlEscapes[char]; } )
+                       : str;
+
+        },
+
+        /* //FIXME: add doc and other stuff
+         * Escapes the `RegExp` special characters "\", "/", "^", "$", ".", "|", "?",
+         * "*", "+", "(", ")", "[", "]", "{" and "}" in `string`.
+         *
+         * _.escapeRegExp('[lodash](https://lodash.com/)');
+         * // => '\[lodash\]\(https:\/\/lodash\.com\/\)'
+         */
+
+        escapeRegExp: escapeRegExp,
 
         /*
          * Return a boolean if the string is fuzzy matched with the search string.
@@ -3341,6 +3474,26 @@
             }
 
             return '';
+
+        },
+
+        /* //FIXME: add doc and stuff
+         * The inverse of `_.escape`; this method converts the HTML entities
+         * `&amp;`, `&lt;`, `&gt;`, `&quot;`, `&#39;`, and `&#96;` in `string` to their
+         * corresponding characters.
+         *
+         * **Note:** No other HTML entities are unescaped. To unescape additional HTML
+         * entities use a third-party library like [_he_](https://mths.be/he).
+         *
+         * _.unescape('fred, barney, &amp; pebbles');
+         * // => 'fred, barney, & pebbles'
+         */
+
+        unescape: function ( str ) {
+
+            return ( str && reHasEscapedHtml.test ( str ) )
+                       ? str.replace ( reEscapedHtml, function ( char ) { return htmlUnescapes[char]; } )
+                       : str;
 
         },
 

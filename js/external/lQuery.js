@@ -152,6 +152,268 @@
 
     /* lQuery UTILTIES */
 
+    lQuery.guid = function ( element ) {
+
+        return element.guid || ( element.guid = _.uniqueId () );
+
+    };
+
+    lQuery.Event = function ( type, props ) {
+
+        if ( !_.isString ( type ) )  {
+
+            props = type;
+            type = props.type;
+
+        }
+
+        var event = document.createEvent ( lQuery.event.specialEvents[type] || 'Events' ),
+            bubbles = true;
+
+        if ( props ) {
+
+            for ( var prop in props ) {
+
+                if ( prop === 'bubbles' ) {
+
+                    bubbles = !!props[prop];
+
+                } else {
+
+                    event[prop] = props[prop];
+
+                }
+
+            }
+
+        }
+
+        event.initEvent ( type, bubbles, true );
+
+        return lQuery.event.compatible ( event );
+
+    };
+
+    lQuery.event = {
+
+        /* UTILITIES VARIABLES */
+
+        focusinSupported: 'onfocusin' in window,
+
+        focus: {
+            focus: 'focusin',
+            blur: 'focusout'
+        },
+
+        hover: {
+            mouseenter: 'mouseover',
+            mouseleave: 'mouseout'
+        },
+
+        ignoreProperties: /^([A-Z]|returnValue$|layer[XY]$)/,
+
+        specialEvents: {
+            click: 'MouseEvents',
+            mousedown: 'MouseEvents',
+            mouseup: 'MouseEvents',
+            mousemove: 'MouseEvents'
+        },
+
+        eventMethods: {
+            preventDefault: 'isDefaultPrevented',
+            stopImmediatePropagation: 'isImmediatePropagationStopped',
+            stopPropagation: 'isPropagationStopped'
+        },
+
+        /* UTILITIES */
+
+        parse: function ( event ) {
+
+            var parts = ( '' + event ).split ( '.' );
+
+            return {
+                event: parts[0],
+                namespace: parts.slice ( 1 ).sort ().join ( ' ' )
+            };
+
+        },
+
+        matcherFor: function ( namespace ) {
+
+            return new RegExp ( '(?:^| )' + namespace.replace ( ' ', ' .* ?' ) + '(?: |$)' );
+
+        },
+
+        eventCapture: function ( handler, captureSetting ) {
+
+            return handler.delegator &&
+                   ( !this.focusinSupported && ( handler.event in this.focus ) ) ||
+                   !!captureSetting;
+
+        },
+
+        realEvent: function ( type ) {
+
+            return this.hover[type] || ( this.focusinSupported && this.focus[type] ) || type;
+
+        },
+
+        createProxy: function ( event ) {
+
+            var key,
+                proxy = { originalEvent: event };
+
+            for ( key in event ) {
+
+                if ( !this.ignoreProperties.test ( key ) && !_.isUndefined ( event[key] ) ) {
+
+                    proxy[key] = event[key];
+
+                }
+
+            }
+
+            return this.compatible ( proxy, event );
+
+        },
+
+        compatible: function ( event, source ) {
+
+            if ( source || !event.isDefaultPrevented ) {
+
+                if ( _.isUndefined ( source ) ) {
+
+                    source = event;
+
+                }
+
+                for ( var method in this.eventMethods ) {
+
+                    var sourceMethod = source[method];
+
+                    event[method] = function () {
+
+                        this[lQuery.event.eventMethods[method]] = lQuery.true;
+
+                        return sourceMethod && sourceMethod.apply ( source, arguments );
+
+                    };
+
+                    event[lQuery.event.eventMethods[method]] = lQuery.false;
+
+                }
+
+                if ( !_.isUndefined ( source.defaultPrevented )
+                         ? source.defaultPrevented
+                         : 'returnValue' in source
+                             ? source.returnValue === false
+                             : source.getPreventDefault && source.getPreventDefault () ) {
+
+                    event.isDefaultPrevented = lQuery.true;
+
+                }
+
+            }
+
+            return event;
+
+        },
+
+        /* API VARIABLES */
+
+        handlers: {},
+
+        /* API */
+
+        findHandlers: function ( element, event, fn, selector ) {
+
+            event = this.parse ( event );
+
+            if ( event.namespace ) {
+
+                var matcher = this.matcherFor ( event.namespace );
+
+            }
+
+            return ( this.handlers[lQuery.guid ( element )] || [] ).filter ( function ( handler ) {
+
+                return handler
+                    && ( !event.event     || handler.event == event.event )
+                    && ( !event.namespace || matcher.test (  handler.namespace ) )
+                    && ( !fn              || lQuery.guid ( handler.callback ) === lQuery.guid ( fn ) )
+                    && ( !selector        || handler.selector === selector );
+
+            });
+
+        },
+
+        add: function ( element, event, fn, data, selector, delegator, capture ) {
+
+            var id = lQuery.guid ( element ),
+                set = ( this.handlers[id] || ( this.handlers[id] = [] ) );
+
+            if ( event === 'ready' ) { //INFO: support for `ready` event on every node //FIXME: is it needed?
+
+                lQuery.ready ( fn );
+
+            }
+            var handler = this.parse ( event );
+
+            handler.callback = fn;
+            handler.selector = selector;
+
+            //FIXME: emulate mouseenter, mouseleave when hover
+
+            handler.delegator = delegator;
+
+            var callback = delegator || fn;
+
+            handler.proxy = function ( e ) {
+
+                e = lQuery.event.compatible ( e );
+
+                if ( e.isImmediatePropagationStopped () ) return;
+
+                e.data = data;
+
+                var result = callback.apply ( element, _.isUndefined ( e._args )? [e] : [e].concat ( e._args ) );
+
+                if ( result === false ) {
+
+                    e.preventDefault ();
+                    e.stopPropagation ();
+
+                }
+
+                return result;
+
+            }
+
+            handler.id = set.length;
+
+            set.push ( handler );
+
+            element.addEventListener ( this.realEvent ( handler.event ), handler.proxy, this.eventCapture ( handler, capture ) );
+
+        },
+
+        remove: function ( element, event, fn, selector, capture ) {
+
+            var id = lQuery.guid ( element ),
+                handlers = this.findHandlers ( element, event, fn, selector );
+
+            for ( var hi = 0, hl = handlers.length; hi < hl; hi++ ) {
+
+                delete this.handlers[id][handlers[hi].id];
+
+                element.removeEventListener ( this.realEvent ( handlers[hi].event ), handlers[hi].proxy, this.eventCapture ( handlers[hi], capture ) );
+
+            }
+
+        }
+
+    };
+
     lQuery.ready = function ( handler ) {
 
         if ( document.readyState === 'complete' ) handler (); //INFO: Just check for `complete`, not also `interactive` since it may be fired earlier
@@ -160,6 +422,18 @@
     };
 
     lQuery.noop = _.noop;
+
+    lQuery.true = function () {
+
+        return true;
+
+    };
+
+    lQuery.false = function () {
+
+        return false;
+
+    };
 
     lQuery.makeArray = _.toArray; //TODO: use it
 
@@ -421,7 +695,7 @@
 
         attr: function ( name, value ) {
 
-            if ( _.isDictionary ( name ) ) {
+            if ( _.isPlainObject ( name ) ) {
 
                 for ( var prop in name ) this.attr ( prop, name[prop] );
 
@@ -559,7 +833,7 @@
 
         css: function ( name, value ) {
 
-            if ( _.isDictionary ( name ) ) {
+            if ( _.isPlainObject ( name ) ) {
 
                 for ( var prop in name ) this.css ( prop, name[prop] );
 
@@ -569,7 +843,6 @@
 
                 value = maybe_add_px ( name, value );
                 name = lQuery.camelCase ( name );
-
 
                 if ( !_.isUndefined( value ) ) {
 
@@ -761,9 +1034,46 @@
 
         // EVENTS
 
-        on: function ( events, handler ) {
+        on: function ( event, selector, data, callback, one ) { //FIXME: update documentation
 
-            events = events.split ( ' ' );
+            var autoRemove,
+                delegator,
+                $this = this;
+
+            if ( _.isPlainObject ( event ) ) { //INFO: { event_name: callback, ... }
+
+                for ( var event_name in event ) {
+
+                    this.on ( event_name, selector, data, event[event_name], one );
+
+                }
+
+                return this;
+
+            }
+
+            if ( !_.isString ( selector ) && !_.isFunction ( callback ) && callback !== false ) { //INFO: no `selector`
+
+                callback = data;
+                data = selector;
+                selector = undefined;
+
+            }
+
+            if ( _.isFunction ( data ) || data === false ) { //INFO: no `data`
+
+                callback = data;
+                data = undefined;
+
+            }
+
+            if ( callback === false ) { //INFO: support for `false` shorthand instead of the callback
+
+                callback = lQuery.false;
+
+            }
+
+            var events = event.split ( ' ' );
 
             var el = events.length;
 
@@ -771,7 +1081,52 @@
 
                 for ( var ei = 0; ei < el; ei++ ) {
 
-                    this.nodes[i].addEventListener ( events[ei], handler );
+                    if ( one ) {
+
+                        var autoRemove = (function ( element ) {
+
+                            return function ( e ) {
+
+                                lQuery.event.remove ( element, e.type, callback );
+
+                                return callback.apply ( element, arguments );
+
+                            };
+
+                        })( $this.nodes[i] );
+
+                    }
+
+                    if ( selector ) {
+
+                        var delegator = (function ( element, autoRemove ) {
+
+                            return function ( e ) {
+
+                                var children = lQuery(element).find ( selector );
+
+                                for ( var i = children.length - 1; i >= 0; i-- ) {
+
+                                    if ( e.path.indexOf ( children.nodes[i] ) !== -1 ) {
+
+                                        var evt = _.extend ( lQuery.event.createProxy ( e ), {
+                                            currentTarget: e.target,
+                                            liveFired: element
+                                        });
+
+                                        ( autoRemove || callback ).apply ( children.nodes[i], [evt].concat ( Array.prototype.slice.call ( arguments, 1 ) ) );
+
+                                    }
+
+                                }
+
+                            };
+
+                        })( $this.nodes[i], autoRemove );
+
+                    }
+
+                    lQuery.event.add ( this.nodes[i], events[ei], callback, data, selector, delegator || autoRemove );
 
                 }
 
@@ -781,9 +1136,34 @@
 
         },
 
-        off: function ( events, handler ) {
+        off: function ( event, selector, callback ) { //FIXME: update documentation
 
-            events = events.split ( ' ' );
+            if ( _.isPlainObject ( event ) ) { //INFO: { event_name: callback, ... }
+
+                for ( var event_name in event ) {
+
+                    this.off ( event_name, selector, event[event_name] );
+
+                }
+
+                return this;
+
+            }
+
+            if ( !_.isString ( selector ) && !_.isFunction ( callback ) && callback !== false ) { //INFO: no `selector`
+
+                callback = selector;
+                selector = undefined;
+
+            }
+
+            if ( callback === false ) { //INFO: support for `false` shorthand instead of the callback
+
+                callback = lQuery.false;
+
+            }
+
+            var events = event.split ( ' ' );
 
             var el = events.length;
 
@@ -791,7 +1171,7 @@
 
                 for ( var ei = 0; ei < el; ei++ ) {
 
-                    this.nodes[i].removeEventListener ( events[ei], handler );
+                    lQuery.event.remove ( this.nodes[i], events[ei], callback, selector );
 
                 }
 
@@ -801,49 +1181,56 @@
 
         },
 
-        trigger: function ( events ) {
+        one: function ( event, selector, data, callback ) {
 
-            var event_obj;
+            return this.on ( event, selector, data, callback, 1 );
 
-            events = events.split ( ' ' );
+        },
 
-            for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+        trigger: function ( event, args ) { //FIXME: update documentation
 
-                if ( window.CustomEvent ) { //INFO: Unsupported on IE
+            event = ( _.isString ( event ) || _.isPlainObject ( event ) ) ? lQuery.Event ( event ) : lQuery.event.compatible ( event );
 
-                    event_obj = new CustomEvent ( events[ei] );
+            event._args = args;
 
-                    event_obj.initCustomEvent ( events[ei], true, true, null );
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                if ( event.type in focus && _.isFunction ( this.nodes[i][event.type] ) ) { //INFO: handle focus(), blur() by calling them directly
+
+                    this.nodes[i][event.type]();
 
                 } else {
 
-                    event_obj = document.createEvent ( events[ei] );
-
-                    event_obj.initEvent ( events[ei], true, true );
+                    this.nodes[i].dispatchEvent ( event );
 
                 }
 
-                for ( var i = 0, l = this.length; i < l; i++ ) {
+            }
 
-                    this.nodes[i].dispatchEvent ( event_obj );
+        },
+
+        triggerHandler: function ( event, args ) { //FIXME: document
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                var e = lQuery.event.createProxy ( _.isString ( event ) ? lQuery.Event ( event ) : event );
+
+                e._args = args;
+                e.target = this.nodes[i];
+
+                var handlers = lQuery.event.findHandlers ( this.nodes[i], event.type || event );
+
+                for ( var hi = 0, hl = handlers.length; hi < hl; hi++ ) {
+
+                    handlers[i].proxy ( e );
+
+                    if ( e.isImmediatePropagationStopped () ) break;
 
                 }
 
             }
 
             return this;
-
-        },
-
-        one: function ( events, handler ) {
-
-            return this.on ( events, function handler_wrp ( event ) {
-
-                this.removeEventListener ( event.type, handler_wrp );
-
-                return handler.call ( this, event );
-
-            });
 
         },
 

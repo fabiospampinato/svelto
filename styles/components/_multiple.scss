@@ -28,10 +28,19 @@
         &:not(.vertical) {
 
             & > *:not(:last-child) {
-                margin-right: 0;
+
                 border-right-width: 0;
                 border-top-right-radius: 0;
                 border-bottom-right-radius: 0;
+
+                &.multiple {
+                    padding-right: 0;
+                }
+
+                &:not(.multiple) {
+                    margin-right: 0;
+                }
+
             }
 
             & > *:not(:first-child) {
@@ -64,7 +73,14 @@
         flex-direction: column;
         align-items: flex-start;
         flex-grow: 0;
-        margin-right: 0;
+
+        &.multiple {
+            padding-right: 0;
+        }
+
+        &:not(.multiple) {
+            margin-right: 0;
+        }
 
         &.fluid > * {
             width: 100%;
@@ -77,7 +93,15 @@
     }
 
     &:not(.vertical) > *:not(:last-child) {
-        margin-right: $layout-spacing;
+
+        &.multiple {
+            padding-right: $layout-spacing;
+        }
+
+        &:not(.multiple) {
+            margin-right: $layout-spacing;
+        }
+
     }
 
 }

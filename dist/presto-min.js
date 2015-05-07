@@ -41,7 +41,56 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
- /* TMPL - https://github.com/blueimp/JavaScript-Templates */
+/* TMPL - https://github.com/blueimp/JavaScript-Templates */
+
+/*
+ ***************************
+ *      Documentation      *
+ ***************************
+ *
+ * Interpolation
+ *
+ * - Basic
+ * <h3>{%=o.title%}</h3>
+ *
+ * - Unescaped
+ * <h3>{%#o.user_id%}</h3>
+ *
+ * - Result of function call
+ * <a href="{%=encodeURI(o.url)%}">Website</a>
+ *
+ * - Nested properties
+ * <strong>{%=o.author.name%}</strong>
+ *
+ * Evaluation
+ *
+ * - Print
+ * <span>Year: {% var d=new Date(); print(d.getFullYear()); %}</span>
+ *
+ * - Print unescaped
+ * <span>{% print("Fast &amp; powerful", true); %}</span>
+ *
+ * - Include another template
+ * <div>
+ *     {% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
+ * </div>
+ *
+ * - If else condition
+ * {% if (o.author.url) { %}
+ *     <a href="{%=encodeURI(o.author.url)%}">{%=o.author.name%}</a>
+ * {% } else { %}
+ *     <em>No author url.</em>
+ * {% } %}
+ *
+ * - For loop
+ * <ul>
+ *     {% for (var i=0; i<o.features.length; i++) { %}
+ *         <li>{%=o.features[i]%}</li>
+ *     {% } %}
+ * </ul>
+ *
+ ***************************
+ */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -53,7 +102,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         var f = !/[^\w\-\.:]/.test ( str )
                     ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-                    : new Function ( tmpl.arg + ',tmpl', 'var _e=tmpl.encode' + tmpl.helper + ',_s="' + str.replace ( tmpl.regexp, tmpl.func ) + '";return _s;' );
+                    : new Function ( tmpl.arg + ',tmpl', 'var _e=_.encode' + tmpl.helper + ',_s="' + str.replace ( tmpl.regexp, tmpl.func ) + '";return _s;' );
 
         return data
                    ? f ( data, tmpl )
@@ -101,26 +150,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             return '_s+="';
 
         }
-
-    };
-
-    tmpl.encReg = /[<>&"'\x00]/g;
-
-    tmpl.encMap = {
-        '<'   : '&lt;',
-        '>'   : '&gt;',
-        '&'   : '&amp;',
-        '"'   : '&quot;',
-        '\''  : '&#39;'
-    };
-
-    tmpl.encode = function ( s ) {
-
-        return ( s == null ? '' : '' + s ).replace ( tmpl.encReg, function ( c ) {
-
-            return tmpl.encMap[c] || '';
-
-        });
 
     };
 
@@ -216,7 +245,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             } else { //FIXME
 
-                console.log("element === this");
+                console.log("PAY ATTENCION!!! element === this");
 
             }
 
@@ -360,8 +389,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _on: function ( suppressDisabledCheck, $element, events, handler ) {
 
-            //TODO: add support for handlers as functions, not just for string name of a method
-            //FIXME: if the widget is redefined the proxied handlers are not updated
+            //TODO: add support for delegation and custom data
 
             var instance = this;
 
@@ -382,46 +410,25 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            if ( suppressDisabledCheck ) {
+            handler = _.isString ( handler ) ? this[handler] : handler;
 
-                var handlerProxy = (function ( handler ) {
+            var handler_guid = $.guid ( handler );
 
-                    return function () {
+            function handlerProxy () {
 
-                        if ( instance.options.disabled ) return;
+                if ( !suppressDisabledCheck && instance.options.disabled ) return;
 
-                        return handler.apply ( instance, arguments );
-
-                    };
-
-                }( this[handler] ));
-
-            } else {
-
-                var handlerProxy = (function ( handler ) {
-
-                    return function () {
-
-                        return handler.apply ( instance, arguments );
-
-                    };
-
-                }( this[handler] ));
+                return handler.apply ( instance, arguments );
 
             }
 
-            var new_handler = '_proxy_' + ( suppressDisabledCheck ? 'check_' : '' ) + handler;
+            handlerProxy.guid = handler_guid;
 
-            this[new_handler] = handlerProxy;
-
-            $element.on ( events, this[new_handler] );
+            $element.on ( events, handlerProxy );
 
         },
 
         _off: function ( $element, events, handler ) {
-
-            //TODO: add support for handlers as functions, not just for string name of a method
-            //FIXME: if the widget is redefined the proxied handlers are not updated
 
             if ( !handler ) {
 
@@ -431,17 +438,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            if ( this['_proxy_' + handler] ) {
+            handler = _.isString ( handler ) ? this[handler] : handler;
 
-                $element.off ( events, this['_proxy_' + handler] );
-
-            }
-
-            if ( this['_proxy_check_' + handler] ) {
-
-                $element.off ( events, this['_proxy_check_' + handler] );
-
-            }
+            $element.off ( events, handler );
 
         },
 
@@ -1998,7 +1997,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
- /* TIMER - http://jchavannes.com/jquery-timer */
+/* TIMER - http://jchavannes.com/jquery-timer */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -3319,7 +3318,7 @@ $.ready ( function () {
 
             options.body = custom_options;
 
-        } else if ( _.isDictionary ( custom_options ) ) {
+        } else if ( _.isPlainObject ( custom_options ) ) {
 
             $.extend ( options, custom_options );
 

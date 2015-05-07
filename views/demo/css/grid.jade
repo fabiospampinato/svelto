@@ -90,42 +90,44 @@ append content
     +divider Complex 1
 
     +row
-        +column.w35-100
-            +multiple.vertical.fluid
-                +container 1
-                +container 2
-                +container 3
-        +column.w65-100
-            +container 1
+        +column.xs-12
+            +multiple.stretched
+                +multiple.vertical.fluid.w35-100
+                    +container 1
+                    +container 2
+                    +container 3
+                +container.w65-100 1
 
     +divider Complex 2
 
     +row
-        +column.w65-100
-            +multiple.vertical.fluid
-                +container 1
-                +multiple.fluid.joined
-                    +container 0.5
-                    +container 0.5
-                +container 1
-        +column.w35-100
-            +container 1
+        +column.xs-12
+            +multiple.stretched
+                +multiple.vertical.fluid.w65-100
+                    +container 1
+                    +multiple.fluid.joined
+                        +container 0.5
+                        +container 0.5
+                    +container 1
+                +container.w35-100 1
 
     +divider Complex 3
 
     +row
-        +column.w80-100
-            +multiple.vertical.fluid
-                +container 3
-                +multiple.fluid.stretched
-                    +container 1.5
-                    +multiple.vertical.fluid
-                        +container 0.5
-                        +container 0.5
-                        +container 0.5
-                +container 3
-        +column.w20-100
-            +container 1
+        +column.xs-12
+            +multiple.stretched
+                +multiple.vertical.fluid.w80-100
+                    +container 3
+                    +multiple.fluid.stretched
+                        +container 1.5
+                        +multiple.vertical.fluid
+                            +container 0.5
+                            +multiple.fluid.joined
+                                +container 0.25
+                                +container 0.25
+                            +container 0.5
+                    +container 3
+                +container.w20-100 1
 
     +divider Full size
 
@@ -148,3 +150,16 @@ append content
             +multiple.joined
                 +container.w65-100 Main
                 +container.w35-100 Sidebar
+
+$layout-xsmall-max-breakpoint: 481px;
+
+$layout-small-min-breakpoint: 482px;
+$layout-small-max-breakpoint: 767px;
+
+$layout-medium-min-breakpoint: 768px;
+$layout-medium-max-breakpoint: 961px;
+
+$layout-large-min-breakpoint: 962px;
+
+append body
+    +noty({ body: '<p>[X-SMALL] 0-481 <br/> [SMALL] 482-767 <br/> [MEDIUM] 768-961 <br/> [LARGE] >= 962</p>', ttl: 'forever' })

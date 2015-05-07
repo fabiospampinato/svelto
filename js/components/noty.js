@@ -119,7 +119,7 @@
 
             options.body = custom_options;
 
-        } else if ( _.isDictionary ( custom_options ) ) {
+        } else if ( _.isPlainObject ( custom_options ) ) {
 
             $.extend ( options, custom_options );
 

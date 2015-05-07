@@ -79,7 +79,7 @@
 
             } else { //FIXME
 
-                console.log("element === this");
+                console.log("PAY ATTENCION!!! element === this");
 
             }
 
@@ -223,8 +223,7 @@
 
         _on: function ( suppressDisabledCheck, $element, events, handler ) {
 
-            //TODO: add support for handlers as functions, not just for string name of a method
-            //FIXME: if the widget is redefined the proxied handlers are not updated
+            //TODO: add support for delegation and custom data
 
             var instance = this;
 
@@ -245,46 +244,25 @@
 
             }
 
-            if ( suppressDisabledCheck ) {
+            handler = _.isString ( handler ) ? this[handler] : handler;
 
-                var handlerProxy = (function ( handler ) {
+            var handler_guid = $.guid ( handler );
 
-                    return function () {
+            function handlerProxy () {
 
-                        if ( instance.options.disabled ) return;
+                if ( !suppressDisabledCheck && instance.options.disabled ) return;
 
-                        return handler.apply ( instance, arguments );
-
-                    };
-
-                }( this[handler] ));
-
-            } else {
-
-                var handlerProxy = (function ( handler ) {
-
-                    return function () {
-
-                        return handler.apply ( instance, arguments );
-
-                    };
-
-                }( this[handler] ));
+                return handler.apply ( instance, arguments );
 
             }
 
-            var new_handler = '_proxy_' + ( suppressDisabledCheck ? 'check_' : '' ) + handler;
+            handlerProxy.guid = handler_guid;
 
-            this[new_handler] = handlerProxy;
-
-            $element.on ( events, this[new_handler] );
+            $element.on ( events, handlerProxy );
 
         },
 
         _off: function ( $element, events, handler ) {
-
-            //TODO: add support for handlers as functions, not just for string name of a method
-            //FIXME: if the widget is redefined the proxied handlers are not updated
 
             if ( !handler ) {
 
@@ -294,17 +272,9 @@
 
             }
 
-            if ( this['_proxy_' + handler] ) {
+            handler = _.isString ( handler ) ? this[handler] : handler;
 
-                $element.off ( events, this['_proxy_' + handler] );
-
-            }
-
-            if ( this['_proxy_check_' + handler] ) {
-
-                $element.off ( events, this['_proxy_check_' + handler] );
-
-            }
+            $element.off ( events, handler );
 
         },
 

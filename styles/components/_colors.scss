@@ -1,6 +1,8 @@
 
 /* BRAND */
 
+//TODO: make it DRY
+
 @mixin primary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
 
     background: $color-primary-bg #{$important};
