@@ -73,5 +73,13 @@ append body
         a.button.actionable.outlined.teal(href="/views/demo/tools/toggleHeight.html") toggleHeight
         a.button.actionable.outlined.teal(href="/views/demo/tools/touching.html") Touching
 
+    +divider Responses
+
+    +multiple
+        a.button.actionable.outlined(href="/views/responses/400.html") 400
+        a.button.actionable.outlined(href="/views/responses/403.html") 403
+        a.button.actionable.outlined(href="/views/responses/404.html") 404
+        a.button.actionable.outlined(href="/views/responses/500.html") 500
+
 append body-end
     +noty({ body: '<p>[Green] To update <br/> [Teal] ToDo <br/> [Blue] Make it better <br/> [Red] Problematic</p>', ttl: 'forever' })

@@ -2838,6 +2838,26 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/responses\/403.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/responses\/403.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/responses\/403.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/responses\/403.jade",
+		"outputAbbreviatedPath": "\/views\/responses\/403.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/views\/responses\/404.html": {
 		"fileType": 8192,
 		"ignore": 1,
@@ -2874,6 +2894,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/responses\/500.jade",
 		"outputAbbreviatedPath": "\/views\/responses\/500.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/responses\/response.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/responses\/response.jade",
+		"outputAbbreviatedPath": "\/views\/responses\/response.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
