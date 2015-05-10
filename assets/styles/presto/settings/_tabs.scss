@@ -1,13 +1,13 @@
 
 /* SETTINGS */
 
-$tab-border-size: 1px;
-$tab-height: 41px;
+$tab-border-size: 1px !default;
+$tab-height: 41px !default;
 
-$tab-icon-font-size: 24px;
-$tab-icon-size: $tab-icon-font-size;
+$tab-icon-font-size: 24px !default;
+$tab-icon-size: $tab-icon-font-size !default;
 
-$tabs-height: $tab-height + ( $tab-border-size * 2 );
+$tabs-height: $tab-height + ( $tab-border-size * 2 ) !default;
 
-$tab-content-bottom-section-color-bg: rgba(0, 0, 0, 0.15);
-$tab-content-top-section-color-bg: #e6e6e6;
+$tab-content-bottom-section-color-bg: rgba(0, 0, 0, 0.15) !default;
+$tab-content-top-section-color-bg: #e6e6e6 !default;

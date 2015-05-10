@@ -1,4 +1,8 @@
 
+/* CUSTOMS */
+
+@import 'customs/customs';
+
 /* FOUNDAMENTAL */
 
 @import 'settings/colors';
@@ -45,7 +49,7 @@
 
 /* BASE */
 
-@import 'base';
+@import 'components/base';
 
 /* EXTERNAL */
 

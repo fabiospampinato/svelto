@@ -1,9 +1,9 @@
 
 /* SETTINGS */
 
-$grid-columns: 12;
+$grid-columns: 12 !default;
 
-$grid-limited-width: $layout-max-width + $layout-spacing;
+$grid-limited-width: $layout-max-width + $layout-spacing !default;
 
-$sidebar-width: 350px;
-$sidebar-hidden-offset: 5; // Percentage
+$sidebar-width: 350px !default;
+$sidebar-hidden-offset: 5 !default; // Percentage

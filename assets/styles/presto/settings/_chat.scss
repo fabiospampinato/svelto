@@ -1,12 +1,12 @@
 
 /* SETTINGS */
 
-$chat-message-min-width: 27%;
-$chat-message-max-width: 77%;
+$chat-message-min-width: 27% !default;
+$chat-message-max-width: 77% !default;
 
-$chat-message-by-height: 20px;
+$chat-message-by-height: 20px !default;
 
-$chat-message-content-line-height: 18px;
+$chat-message-content-line-height: 18px !default;
 
-$chat-input-font-size: 14px;
-$chat-input-height: 54px;
+$chat-input-font-size: 14px !default;
+$chat-input-height: 54px !default;

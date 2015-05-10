@@ -1,7 +1,7 @@
 
 /* BLUR */
 
-.blur {
+.blurred {
     filter: url('/assets/images/presto/blur.svg#blur');
     filter: blur(3px);
 }
@@ -152,6 +152,170 @@
 
 .rotating {
     animation: rotate 0.9s linear infinite;
+}
+
+/* GROW */
+
+@for $nr from 1 through 10 {
+
+    .grow-#{$nr} {
+        flex-grow: #{$nr} !important;
+    }
+
+}
+
+/* WIDTH PERCENTAGES */
+
+@for $nr from 1 through 100 {
+
+    .w#{$nr}-100 {
+        width: #{$nr}% !important;
+    }
+
+}
+
+/* VISIBILITY CLASSES */
+
+// XSMALL
+
+.hidden-xs, .xs-0 {
+    display: none !important;
+}
+
+@each $display in block, inline, inline-block {
+
+    .visible-xs-#{$display} {
+        display: $display !important;
+    }
+
+}
+
+// SMALL
+
+@include min-screen ( $layout-small-min-breakpoint ) {
+
+    .hidden-sm, .sm-0 {
+        display: none !important;
+    }
+
+    @each $display in block, inline, inline-block {
+
+        .visible-sm-#{$display} {
+            display: $display !important;
+        }
+
+    }
+
+}
+
+// MEDIUM
+
+@include min-screen ( $layout-small-min-breakpoint ) {
+
+    .hidden-md, .md-0 {
+        display: none !important;
+    }
+
+    @each $display in block, inline, inline-block {
+
+        .visible-md-#{$display} {
+            display: $display !important;
+        }
+
+    }
+
+}
+
+// LARGE
+
+@include min-screen ( $layout-small-min-breakpoint ) {
+
+    .hidden-lg, .lg-0 {
+        display: none !important;
+    }
+
+    @each $display in block, inline, inline-block {
+
+        .visible-lg-#{$display} {
+            display: $display !important;
+        }
+
+    }
+
+}
+
+/* WIDTH GRID */
+
+// XSMALL
+
+@for $nr from 1 through $grid-columns {
+
+    .xs-#{$nr} {
+        display: inline-block !important;
+        width: ( 100% / $grid-columns ) * $nr;
+    }
+
+    .offset-xs-#{$nr} {
+        margin-left: ( 100% / $grid-columns ) * $nr;
+    }
+
+}
+
+// SMALL
+
+@include min-screen ( $layout-small-min-breakpoint ) {
+
+    @for $nr from 1 through $grid-columns {
+
+        .sm-#{$nr} {
+            display: inline-block !important;
+            width: ( 100% / $grid-columns ) * $nr;
+        }
+
+        .offset-sm-#{$nr} {
+            margin-left: ( 100% / $grid-columns ) * $nr;
+        }
+
+    }
+
+}
+
+// MEDIUM
+
+@include min-screen ( $layout-medium-min-breakpoint ) {
+
+    @for $nr from 1 through $grid-columns {
+
+        .md-#{$nr} {
+            display: inline-block !important;
+            width: ( 100% / $grid-columns ) * $nr;
+        }
+
+        .offset-md-#{$nr} {
+            margin-left: ( 100% / $grid-columns ) * $nr;
+        }
+
+    }
+
+}
+
+// LARGE
+
+@include min-screen ( $layout-large-min-breakpoint ) {
+
+    @for $nr from 1 through $grid-columns {
+
+        .lg-#{$nr} {
+            display: inline-block !important;
+            width: ( 100% / $grid-columns ) * $nr;
+        }
+
+        .offset-lg-#{$nr} {
+            margin-left: ( 100% / $grid-columns ) * $nr;
+        }
+
+    }
+
 }
 
 /* KEYFRAMES */

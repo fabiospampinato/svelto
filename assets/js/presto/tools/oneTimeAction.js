@@ -1,44 +1,143 @@
 
 /* ONE TIME ACTION */
 
+//INFO: the pipe character (|) is forbidden as a name
+//TODO: split the code into a Container OBJ and an Action OBJ
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
     /* ONE TIME ACTION */
 
-    $.oneTimeAction = function ( method, option, action ) {
+    $.oneTimeAction = function ( custom_options, action ) {
 
-        if ( method === 'cookie' ) { // option -> action id
+        // OPTIONS
 
-            var actions_str = $.cookie.read ( 'ota' ),
-                actions = actions_str ? actions_str.split ( '|' ) : [];
+        var options = {
+            container: 'ota', // the cookie name that holds the actions
+            mode: 'action', // get - set - reset - [action]
+            name: '', // the action name
+            action: $.noop
+        };
 
-            if ( actions.indexOf ( option ) === -1 ) { // If not already done
+        if ( _.isString ( custom_options ) ) {
 
-                actions.push ( option );
-                actions_str = actions.join ( '|' );
+            options.name = custom_options;
 
-                $.cookie.write ( 'ota', actions_str, 31536000 ); // 1 year
+            if ( _.isString ( action ) ) {
 
-                action ();
+                options.mode = action;
+
+            } else if ( _.isFunction ( action ) ) {
+
+                options.action = action;
 
             }
 
-        } else if ( method === 'url' ) { // option -> url
+        } else if ( _.isPlainObject ( custom_options ) ) {
 
-            $.ajax ({
-                url: option,
-                success: function ( res ) {
-                    if ( res === 1 || res === '1' ) { //FIXME: doesn't it return only strings??? //TODO: maybe we should just check if the return valus is truthy
-                        action ();
-                    }
+            $.extend ( options, custom_options );
+
+        }
+
+        // ONE TIME ACTION
+
+        var action = new Action ( options.container, options.name, options.action );
+
+        switch ( options.mode ) {
+
+            case 'get':
+                return action.get ();
+
+            case 'set':
+                action.set ();
+                break;
+
+            case 'reset':
+                action.reset ();
+                break;
+
+            case 'action':
+
+                if ( !action.get () ) {
+
+                    action.execute ();
+
+                    action.set ();
+
                 }
-            });
 
-        } else if ( method === 'reset' ) {
+        }
 
-            $.cookie.destroy ( 'ota' );
+    };
+
+    /* ACTION OBJ */
+
+    var Action = function ( container, name, action ) {
+
+        this.container = container;
+        this.name = name;
+        this.action = action;
+
+        this.actionsStr = $.cookie.read ( this.container ) || '';
+        this.actions = this.actionsStr.split ( '|' );
+
+        console.log(name);
+        console.log(!!name);
+
+        this.hasName = !!this.name;
+
+        this.isExecuted = this.hasName ? ( this.actions.indexOf ( this.name ) !== -1 ) : false;
+
+    };
+
+    Action.prototype = {
+
+        get: function () {
+
+            return this.isExecuted;
+
+        },
+
+        set: function () {
+
+            if ( !this.isExecuted && this.hasName ) {
+
+                this.actions.push ( this.name );
+                this.actionsStr = this.actions.join ( '|' );
+
+                $.cookie.write ( this.container, this.actionsStr, 31536000 ); // 1 year
+
+            }
+
+        },
+
+        reset: function () {
+
+            if ( this.hasName ) {
+
+                if ( this.isExecuted ) {
+
+                    _.pull ( this.actions, this.name );
+
+                    this.actionsStr = this.actions.join ( '|' );
+
+                    $.cookie.write ( this.container, this.actionsStr, 31536000 ); // 1 year
+
+                }
+
+            } else {
+
+                $.cookie.destroy ( this.container );
+
+            }
+
+        },
+
+        execute: function () {
+
+            this.action ();
 
         }
 

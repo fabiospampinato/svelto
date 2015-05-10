@@ -36,10 +36,58 @@ append body
                                 a.button.actionable.outlined.tiny(href="#") Btn 1
                                 a.button.actionable.outlined.tiny(href="#") Btn 2
 
+    +divider Responsive
+
+    +container
+        table.responsive
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+                - var nr = 1;
+                while ( nr <= 5 )
+                    tr
+                        td= nr++
+                        td Foo
+                        td 16/11/1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+                    tr
+                        td= nr++
+                        td Bar
+                        td 16 Nov 1993
+                        td
+                            .multiple
+                                a.button.actionable.outlined.tiny(href="#") Btn 1
+                                a.button.actionable.outlined.tiny(href="#") Btn 2
+
     +divider Empty
 
     +container
         table
+            thead
+                tr
+                    th Int
+                    th String
+                    th Date
+                    th Options
+            tfoot
+
+            tbody
+                +table-tr-empty
+
+    +divider Empty - Responsive
+
+    +container
+        table.responsive
             thead
                 tr
                     th Int

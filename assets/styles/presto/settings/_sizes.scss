@@ -7,17 +7,17 @@
 
 /* SETTINGS */
 
-$size-delta-step: 1 / 14;
+$size-delta-step: 1 / 14 !default;
 
-$nano-font-size: get_rem( -6 );
-$micro-font-size: get_rem( -5 );
-$mini-font-size: get_rem( -4 );
-$tiny-font-size: get_rem( -2 );
-$small-font-size: get_rem( -1 );
-$medium-font-size: get_rem( 0 );
-$large-font-size: get_rem( 2 );
-$big-font-size: get_rem( 4 );
-$huge-font-size: get_rem( 6 );
-$massive-font-size: get_rem( 10 );
-$giant-font-size: get_rem( 16 );
-$enormous-font-size: get_rem( 24 );
+$nano-font-size: get_rem( -6 ) !default;
+$micro-font-size: get_rem( -5 ) !default;
+$mini-font-size: get_rem( -4 ) !default;
+$tiny-font-size: get_rem( -2 ) !default;
+$small-font-size: get_rem( -1 ) !default;
+$medium-font-size: get_rem( 0 ) !default;
+$large-font-size: get_rem( 2 ) !default;
+$big-font-size: get_rem( 4 ) !default;
+$huge-font-size: get_rem( 6 ) !default;
+$massive-font-size: get_rem( 10 ) !default;
+$giant-font-size: get_rem( 16 ) !default;
+$enormous-font-size: get_rem( 24 ) !default;

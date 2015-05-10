@@ -1,14 +1,14 @@
 
 /* SETTINGS */
 
-$dropdown-tip-border-size: 1px;
-$dropdown-tip-fg-size: 19px;
-$dropdown-tip-bg-size: $dropdown-tip-fg-size + ( 2 * $dropdown-tip-border-size );
-$dropdown-tip-fg-color: $color-white-bg;
-$dropdown-tip-bg-color: $color-white-border;
+$dropdown-tip-border-size: 1px !default;
+$dropdown-tip-fg-size: 19px !default;
+$dropdown-tip-bg-size: $dropdown-tip-fg-size + ( 2 * $dropdown-tip-border-size ) !default;
+$dropdown-tip-fg-color: $color-white-bg !default;
+$dropdown-tip-bg-color: $color-white-border !default;
 
-$dropdown-padding: 15px;
-$dropdown-border-size: 1px;
+$dropdown-padding: 15px !default;
+$dropdown-border-size: 1px !default;
 
-$dropdown-container-max-height: 325px;
-$dropdown-container-min-width: 120px;
+$dropdown-container-max-height: 325px !default;
+$dropdown-container-min-width: 120px !default;

@@ -1,22 +1,22 @@
 
 /* SETTINGS */
 
-$switcher-width: 2.26667em;
-$switcher-height: 0.93333em;
+$switcher-width: 2.26667em !default;
+$switcher-height: 0.93333em !default;
 
-$switcher-bar-width: 1.73333em;
-$switcher-bar-height: 0.93333em;
+$switcher-bar-width: 1.73333em !default;
+$switcher-bar-height: 0.93333em !default;
 
-$switcher-bar-shadow: 0 0 0 0.66667em rgba(255, 255, 255, 0.25) inset;
+$switcher-bar-shadow: 0 0 0 0.66667em rgba(255, 255, 255, 0.25) inset !default;
 
-$switcher-bar-vertical-height: 0.2em;
+$switcher-bar-vertical-height: 0.2em !default;
 
-$switcher-handler-size: 1.33333em;
-$switcher-handler-half-size: $switcher-handler-size / 2;
+$switcher-handler-size: 1.33333em !default;
+$switcher-handler-half-size: $switcher-handler-size / 2 !default;
 
-$switcher-handler-icon-size: 1.66667em;
-$switcher-handler-icon-font-size: 0.8em;
+$switcher-handler-icon-size: 1.66667em !default;
+$switcher-handler-icon-font-size: 0.8em !default;
 
-$switcher-handler-active-shadow: 0 0 0 0.66667rem rgba(255, 171, 145, 0.25);
+$switcher-handler-active-shadow: 0 0 0 0.66667rem rgba(255, 171, 145, 0.25) !default;
 
-$switcher-inactive-handler-shadow-size: 0.2em;
+$switcher-inactive-handler-shadow-size: 0.2em !default;

@@ -1,7 +1,7 @@
 
 /* SETTINGS */
 
-$loading-size: 64px;
-$loading-font-size: 52px;
+$loading-size: 64px !default;
+$loading-font-size: 52px !default;
 
-$loading-shadow-inset: inset 0 1px 1px -1px rgba(255, 255, 255, 0.5);
+$loading-shadow-inset: inset 0 1px 1px -1px rgba(255, 255, 255, 0.5) !default;

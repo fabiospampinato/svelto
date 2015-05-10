@@ -1,0 +1,20 @@
+//- tools/blurred.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Paragraph
+
+    +container
+        p
+            +lorem-ipsum
+
+    +divider Action
+
+    +button.actionable.outlined(onclick="blur_test()") Toggle blur
+
+append body-end
+    +script.
+        function blur_test () {
+            $("p").parent ().blurred ();
+        }

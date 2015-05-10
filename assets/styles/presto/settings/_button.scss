@@ -1,12 +1,12 @@
 
 /* SETTINGS */
 
-$button-horizontal-padding: 1.5em;
-$button-vertical-padding: 0.78571em;
+$button-horizontal-padding: 1.5em !default;
+$button-vertical-padding: 0.78571em !default;
 
-$button-compact-horizontal-padding: 0.78571em;
-$button-compact-vertical-padding: 0.78571em;
+$button-compact-horizontal-padding: 0.78571em !default;
+$button-compact-vertical-padding: 0.78571em !default;
 
-$button-inactive-opacity: 0.5;
+$button-inactive-opacity: 0.5 !default;
 
-$button-outlined-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset;
+$button-outlined-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset !default;

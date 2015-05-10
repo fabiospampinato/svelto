@@ -1,8 +1,8 @@
 
 /* SETTINGS */
 
-$container-border-size: 1px;
+$container-border-size: 1px !default;
 
-$container-header-border-width: 1px;
+$container-header-border-width: 1px !default;
 
-$container-footer-border-width: 0;
+$container-footer-border-width: 0 !default;

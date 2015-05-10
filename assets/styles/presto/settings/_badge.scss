@@ -1,12 +1,12 @@
 
 /* SETTINGS */
 
-$badge-border-radius: 10000px;
+$badge-border-radius: 10000px !default;
 
-$badge-inline-font-size: 0.6em;
-$badge-inline-padding: 0.2em 0.45em;
+$badge-inline-font-size: 0.6em !default;
+$badge-inline-padding: 0.2em 0.45em !default;
 
-$badge-floating-font-size: 0.5em;
-$badge-floating-padding: 0.15em 0.4em;
+$badge-floating-font-size: 0.5em !default;
+$badge-floating-padding: 0.15em 0.4em !default;
 
-$badge-floating-spacing: - ( $layout-spacing - 2 );
+$badge-floating-spacing: - ( $layout-spacing - 2 ) !default;

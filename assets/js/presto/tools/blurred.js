@@ -1,5 +1,5 @@
 
-/* BLUR */
+/* BLURRED */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -7,9 +7,9 @@
 
     /* BLUR */
 
-    $.fn.blur = function ( activate ) {
+    $.fn.blurred = function ( activate ) {
 
-        return this.toggleClass ( 'blur', activate );
+        return this.toggleClass ( 'blurred', activate );
 
     };
 

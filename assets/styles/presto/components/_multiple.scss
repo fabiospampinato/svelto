@@ -9,7 +9,7 @@
     flex-wrap: wrap;
     align-items: center;
 
-    &.center {
+    &.centered {
         justify-content: center;
     }
 
@@ -26,6 +26,10 @@
         flex-wrap: nowrap;
 
         &:not(.vertical) {
+
+            &.no-separators > *:not(:first-child) {
+                border-left-width: 0;
+            }
 
             & > *:not(:last-child) {
 
@@ -51,6 +55,10 @@
         }
 
         &.vertical {
+
+            &.no-separators > *:not(:first-child) {
+                border-top-width: 0;
+            }
 
             & > *:not(:last-child) {
                 margin-bottom: 0;

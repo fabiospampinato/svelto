@@ -1,23 +1,23 @@
 
 /* SETTINGS */
 
-$slider-height: 2.66667em;
+$slider-height: 2.66667em !default;
 
-$slider-transitions-time: 0.15s;
+$slider-transitions-time: 0.15s !default;
 
-$slider-min-max-width: $slider-height;
+$slider-min-max-width: $slider-height !default;
 
-$slider-handler-size: 1.33333em;
-$slider-handler-half-size: $slider-handler-size / 2;
+$slider-handler-size: 1.33333em !default;
+$slider-handler-half-size: $slider-handler-size / 2 !default;
 
-$slider-handler-big-size: 1.86667em;
-$slider-handler-half-big-size: $slider-handler-big-size / 2;
+$slider-handler-big-size: 1.86667em !default;
+$slider-handler-half-big-size: $slider-handler-big-size / 2 !default;
 
-$slider-handler-active-shadow: 0 0 0 0.85em rgba(255, 171, 145, 0.25);
+$slider-handler-active-shadow: 0 0 0 0.85em rgba(255, 171, 145, 0.25) !default;
 
-$slider-handler-label-font-size: 0.8em;
+$slider-handler-label-font-size: 0.8em !default;
 
-$slider-unhighlighted-height: 0.4em;
-$slider-highlighted-height: $slider-unhighlighted-height;
+$slider-unhighlighted-height: 0.4em !default;
+$slider-highlighted-height: $slider-unhighlighted-height !default;
 
-$slider-inactive-handler-shadow-size: 0.33333rem;
+$slider-inactive-handler-shadow-size: 0.33333rem !default;

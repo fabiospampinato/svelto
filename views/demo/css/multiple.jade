@@ -17,6 +17,20 @@ append body
         +container 9
         +container 10
 
+    +divider Multiple - Centered
+
+    +multiple.centered
+        +container 1
+        +container 2
+        +container 3
+        +container 4
+        +container 5
+        +container 6
+        +container 7
+        +container 8
+        +container 9
+        +container 10
+
     +divider Multiple - Nowrap
 
     +multiple.nowrap
@@ -45,11 +59,33 @@ append body
         +container Center
         +container Right
 
+    +divider Fluid - Joined - No separators
+
+    +multiple.fluid.joined.no-separators
+        +container Left
+        +container Center
+        +container Right
+
+    +divider Fluid - Joined - Different grows
+
+    +multiple.fluid.joined
+        +container.grow-1 1
+        +container.grow-2 2
+        +container.grow-3 3
+        +container.grow-4 4
+        +container.grow-5 5
+        +container.grow-6 6
+        +container.grow-7 7
+        +container.grow-8 8
+        +container.grow-9 9
+        +container.grow-10 10
+
     +divider Fluid - Joined - Stretched
 
     +multiple.fluid.joined.stretched
         +container Left
-        +container Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed congue urna ac nunc posuere sodales. Sed in nisi libero. Cras laoreet vel nibh in egestas. Aliquam erat volutpat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Maecenas erat libero, vehicula sed consequat et, eleifend id ligula. Aenean sed augue nibh. Aliquam vulputate lobortis molestie. Ut vel gravida elit. Nunc blandit risus vitae leo molestie rutrum. Morbi tortor velit, fringilla a aliquet sed, varius at tortor. Quisque id nulla eu metus sollicitudin facilisis. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Ut accumsan tincidunt mi vel hendrerit.
+        +container
+            +lorem-ipsum
         +container Right
 
     +divider Vertical
@@ -69,6 +105,13 @@ append body
     +divider Vertical - Fluid - Joined
 
     +multiple.vertical.fluid.joined
+        +container Top
+        +container Middle
+        +container Bottom
+
+    +divider Vertical - Fluid - Joined - No separators
+
+    +multiple.vertical.fluid.joined.no-separators
         +container Top
         +container Middle
         +container Bottom

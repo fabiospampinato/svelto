@@ -17,39 +17,7 @@
     @include triangle ( 1em, $color-gray, "left" );
 }
 
-.triangle-up-right {
-    @include triangle ( 1em, $color-gray, "up-right" );
-}
-
-.triangle-up-left {
-    @include triangle ( 1em, $color-gray, "up-left" );
-}
-
-.triangle-down-right {
-    @include triangle ( 1em, $color-gray, "down-right" );
-}
-
-.triangle-down-left {
-    @include triangle ( 1em, $color-gray, "down-left" );
-}
-
-.triangle-inset-up {
-    @include triangle ( 1em, $color-gray, "inset-up" );
-}
-
-.triangle-inset-down {
-    @include triangle ( 1em, $color-gray, "inset-down" );
-}
-
-.triangle-inset-right {
-    @include triangle ( 1em, $color-gray, "inset-right" );
-}
-
-.triangle-inset-left {
-    @include triangle ( 1em, $color-gray, "inset-left" );
-}
-
-/* OTHERS */
+/* SQUARES */
 
 .square {
     @include square ();
@@ -68,6 +36,8 @@
     }
 
 }
+
+/* CIRCLES */
 
 .circle {
     @include circle ();
