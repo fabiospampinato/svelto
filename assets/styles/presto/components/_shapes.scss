@@ -3,24 +3,29 @@
 
 .triangle, .triangle-up {
     @include triangle ();
+    margin-bottom: $layout-spacing;
 }
 
 .triangle-down {
     @include triangle ( 1em, $color-gray, "down" );
+    margin-bottom: $layout-spacing;
 }
 
 .triangle-right {
     @include triangle ( 1em, $color-gray, "right" );
+    margin-bottom: $layout-spacing;
 }
 
 .triangle-left {
     @include triangle ( 1em, $color-gray, "left" );
+    margin-bottom: $layout-spacing;
 }
 
 /* SQUARES */
 
 .square {
     @include square ();
+    margin-bottom: $layout-spacing;
 }
 
 .square-sample {
@@ -32,6 +37,7 @@
 
     & > p {
         text-align: inherit;
+        margin-bottom: $layout-spacing;
         font-size: 0.5rem;
     }
 
@@ -41,4 +47,5 @@
 
 .circle {
     @include circle ();
+    margin-bottom: $layout-spacing;
 }

@@ -30,6 +30,9 @@
 
     & > .header {
 
+        //TODO: add support for header always centered, even if you have 2 buttons at the left and 4 at the right
+        //TODO: maybe add support for same width if there are some buttons or not
+
         @include primary ();
         display: flex;
         flex-wrap: wrap;
@@ -63,6 +66,7 @@
                     pointer-events: none; //INFO: so we can drag by the title for example (but are are you sure about this?)(is this the original purpose?)//FIXME: if we use this we cannot support IE 10 (I think)
                     padding-left: $layout-spacing;
                     padding-right: $layout-spacing;
+
                 }
 
             }

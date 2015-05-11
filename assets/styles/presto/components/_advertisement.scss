@@ -2,8 +2,7 @@
 /* GENERAL */
 
 .advertisement {
-    background-color: $color-gray-bg;
-    color: $color-gray-text;
+    @include gray ( true );
     margin-bottom: $layout-spacing;
     text-align: center;
 }

@@ -246,6 +246,8 @@
     color: $color-transparent;
 }
 
+/* TRANSPARENT INITIAL */
+
 @mixin transparent-initial ( $important: '' ) {
     background: transparent #{$important};
 }

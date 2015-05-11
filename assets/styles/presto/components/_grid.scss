@@ -27,6 +27,8 @@
         width: 100%;
 
         .container {
+            //TODO: I think this is wrong, we should give the height to the multiple and stretch it for example
+            //TODO: Maybe add support for scrolling the content
             height: calc(100vh - #{$navbar-height} - (#{$layout-spacing} * 2));
         }
 

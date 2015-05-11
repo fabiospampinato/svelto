@@ -93,8 +93,15 @@ ul, ol {
 }
 
 ul.unstyled {
+
     padding-left: 0;
     list-style-type: none;
+
+    ul {
+        list-style-type: none;
+        padding-left: $layout-spacing * 2;
+    }
+
 }
 
 dl {

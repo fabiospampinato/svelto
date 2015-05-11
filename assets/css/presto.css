@@ -316,6 +316,7 @@
 .text-transparent {
   color: transparent; }
 
+/* TRANSPARENT INITIAL */
 .transparent-initial {
   background: transparent !important; }
 
@@ -869,8 +870,9 @@ code[class*='language-'] {
 
 /* GENERAL */
 .advertisement {
-  background-color: #cccccc;
-  color: #2f2f2f;
+  background: #cccccc ;
+  border-color: #999999 ;
+  color: #2f2f2f ;
   margin-bottom: 10px;
   text-align: center; }
 
@@ -5204,34 +5206,39 @@ textarea {
   width: 0;
   border-left: 0.5em dotted transparent;
   border-right: 0.5em dotted transparent;
-  border-bottom: 0.5em solid #cccccc; }
+  border-bottom: 0.5em solid #cccccc;
+  margin-bottom: 10px; }
 
 .triangle-down {
   height: 0;
   width: 0;
   border-left: 0.5em dotted transparent;
   border-right: 0.5em dotted transparent;
-  border-top: 0.5em solid #cccccc; }
+  border-top: 0.5em solid #cccccc;
+  margin-bottom: 10px; }
 
 .triangle-right {
   height: 0;
   width: 0;
   border-top: 0.5em dotted transparent;
   border-bottom: 0.5em dotted transparent;
-  border-left: 0.5em solid #cccccc; }
+  border-left: 0.5em solid #cccccc;
+  margin-bottom: 10px; }
 
 .triangle-left {
   height: 0;
   width: 0;
   border-top: 0.5em dotted transparent;
   border-bottom: 0.5em dotted transparent;
-  border-right: 0.5em solid #cccccc; }
+  border-right: 0.5em solid #cccccc;
+  margin-bottom: 10px; }
 
 /* SQUARES */
 .square {
   width: 1em;
   height: 1em;
-  background-color: #cccccc; }
+  background-color: #cccccc;
+  margin-bottom: 10px; }
 
 .square-sample {
   width: 4rem;
@@ -5242,6 +5249,7 @@ textarea {
   margin-bottom: 10px; }
   .square-sample > p {
     text-align: inherit;
+    margin-bottom: 10px;
     font-size: 0.5rem; }
 
 /* CIRCLES */
@@ -5249,7 +5257,8 @@ textarea {
   width: 1em;
   height: 1em;
   background-color: #cccccc;
-  border-radius: 50%; }
+  border-radius: 50%;
+  margin-bottom: 10px; }
 
 /* DEFAULT */
 hr {
@@ -5263,30 +5272,30 @@ hr {
   font-size: 1rem ;
   text-align: center;
   margin-bottom: 10px; }
-  .divider_wrp .divider:not(.linear) {
+  .divider_wrp > .divider:not(.linear) {
     background: #f64242 ;
     border-color: #c80a0a ;
     color: #ffffff ;
     border-radius: 10000px 10000px;
     display: inline-block;
     padding: 0.3em 0.6em; }
-  .divider_wrp .divider.linear {
+  .divider_wrp > .divider.linear {
     position: relative;
     overflow: hidden; }
-    .divider_wrp .divider.linear:before, .divider_wrp .divider.linear:after {
+    .divider_wrp > .divider.linear:before, .divider_wrp > .divider.linear:after {
       position: absolute;
       content: '';
       z-index: 1;
       width: 50%;
       top: 50%;
       border-top: 1px solid rgba(0, 0, 0, 0.1); }
-    .divider_wrp .divider.linear:before {
+    .divider_wrp > .divider.linear:before {
       margin-left: calc(-50% - 1em); }
-    .divider_wrp .divider.linear:after {
+    .divider_wrp > .divider.linear:after {
       margin-left: 1em; }
 
 /* DEPTHS */
-.shadow-depth-1 {
+.shadow-depth-1, .divider_wrp > .divider:not(.linear) {
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
 
 .shadow-depth-2 {
@@ -5785,6 +5794,9 @@ ul, ol {
 ul.unstyled {
   padding-left: 0;
   list-style-type: none; }
+  ul.unstyled ul {
+    list-style-type: none;
+    padding-left: 20px; }
 
 dl {
   margin: 0;

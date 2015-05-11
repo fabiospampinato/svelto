@@ -166,6 +166,8 @@
 
 /* SHRINK */
 
+//TODO: Does it work?
+
 @for $nr from 1 through 10 {
 
     .shrink-#{$nr} {
