@@ -128,11 +128,18 @@
 
         constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
-            templateConstructor: ( prototype.defaultTemplate ? $.tmpl ( prototype.defaultTemplate ) : $.noop ),
             namespace: namespace,
             widgetName: name,
             widgetFullName: fullName
         });
+
+        /* CACHE TEMPLATES */
+
+        for ( var name in prototype.templates ) {
+
+            $.tmpl.cache[fullName + '.' + name] = $.tmpl ( prototype.templates[name] );
+
+        }
 
         /* UPDATE PROTOTYPE CHAIN */
 
@@ -174,7 +181,7 @@
 
         $.fn[name] = function ( options ) {
 
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.defaultTemplate ) return; //INFO: nothing to work on
+            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on
 
             var isMethodCall = ( typeof options === 'string' ),
                 args = Array.prototype.slice.call ( arguments, 1 ),

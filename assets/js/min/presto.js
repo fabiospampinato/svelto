@@ -167,8 +167,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* BASE WIDGET */
 
-//TODO: add support for _getCreateEventData ()
-//TODO: add support for _getCreateOptions ()
 //TODO: support for trigger -> preventDefault
 
 ;(function ( $, window, document, undefined ) {
@@ -185,11 +183,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* VARIABLES */
 
-        defaultElement: false,
-        defaultTemplate: false,
-
         widgetName: 'widget',
         widgetFullName: 'widget',
+
+        defaultElement: false,
+        templates: {}, //INFO: the `base` template will be used as the constructor
 
         /* OPTIONS */
 
@@ -202,26 +200,34 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _createWidget: function ( options, element ) {
 
-            /* EXTEND OPTIONS */
-
-            _.extend ( this.options, options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
-
             // VARIABLES
 
             this.initializationType = element
                                           ? 1
                                           : this.defaultElement
                                               ? 2
-                                              : this.templateConstructor !== $.noop
+                                              : this.templates.base
                                                   ? 3
                                                   : 4;
 
-            element = $( element || this.defaultElement || this.templateConstructor ( this.options ) || this ).get ( 0 );
+            /* EXTEND OPTIONS */
+
+            _.extend ( this.options, this._getCreateOptions (), options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
+
+            if ( this.initializationType === 1 ) {
+
+                _.extend ( this.options, $(element).data ( this.widgetName ) );
+
+            }
+
+            // INIT ELEMENT
+
+            element = $( element || this.defaultElement || ( this.templates.base ? this._tmpl ( 'base', this.options ) : false ) || this ).get ( 0 );
 
             this.element = element;
             this.$element = $(element);
 
-            this.uuid = _.uniqueId ();
+            this.guid = _.uniqueId ();
 
             // IF THERE'S AN ELEMENT OR A DEFAULT ELEMENT
 
@@ -245,7 +251,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             } else { //FIXME
 
-                console.log("PAY ATTENCION!!! element === this");
+                console.log(this);
+                alert("PAY ATTENCION!!! element === this");
 
             }
 
@@ -255,15 +262,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._create ();
 
-            this._trigger ( 'create' );
+            this._trigger ( 'create', this._getCreateEventData () );
 
             this._init ();
 
         },
 
+        _getCreateOptions: $.noop,
+        _getCreateEventData: $.noop,
         _create: $.noop,
         _init: $.noop,
-        _ready: $.noop,
 
         destroy: function () {
 
@@ -375,13 +383,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         enable: function () {
 
-            return this._setOptions ( { disabled: false } );
+            return this._setOptions ({ disabled: false });
 
         },
 
         disable: function () {
 
-            return this._setOptions ( { disabled: true } );
+            return this._setOptions ({ disabled: true });
 
         },
 
@@ -416,7 +424,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             function handlerProxy () {
 
-                if ( !suppressDisabledCheck && instance.options.disabled ) return;
+                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( widgetFullName + '-disabled' ) ) ) return;
 
                 return handler.apply ( instance, arguments );
 
@@ -444,7 +452,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _trigger: function ( events ) {
+        _trigger: function ( events, data ) {
 
             //TODO: add support for passing datas
 
@@ -452,7 +460,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             for ( var ei = 0, el = events.length; ei < el; ei++ ) {
 
-                this.$element.trigger ( this.widgetName + ':' + events[ei] );
+                this.$element.trigger ( this.widgetName + ':' + events[ei], data );
 
                 if ( typeof this.options.callback[events[ei]] === 'function' ) {
 
@@ -489,6 +497,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 handler.apply ( instance, arguments );
 
             }, delay || 0 );
+
+        },
+
+        /* TEMPLATE */
+
+        _tmpl: function ( name, options ) {
+
+            return $.tmpl ( this.widgetFullName + '.' + name, options );
 
         }
 
@@ -627,11 +643,18 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
-            templateConstructor: ( prototype.defaultTemplate ? $.tmpl ( prototype.defaultTemplate ) : $.noop ),
             namespace: namespace,
             widgetName: name,
             widgetFullName: fullName
         });
+
+        /* CACHE TEMPLATES */
+
+        for ( var name in prototype.templates ) {
+
+            $.tmpl.cache[fullName + '.' + name] = $.tmpl ( prototype.templates[name] );
+
+        }
 
         /* UPDATE PROTOTYPE CHAIN */
 
@@ -673,7 +696,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         $.fn[name] = function ( options ) {
 
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.defaultTemplate ) return; //INFO: nothing to work on
+            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on
 
             var isMethodCall = ( typeof options === 'string' ),
                 args = Array.prototype.slice.call ( arguments, 1 ),
