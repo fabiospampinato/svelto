@@ -5,12 +5,15 @@
 /* BASE */
 /* BRAND */
 /* COLORS */
+/* COLORS */
+/* TRANSPARENT */
 /* DEFAULT */
 /* MIXIN */
 /* BRAND */
 /* GENERAL */
 /* DEPTHS */
 /* INSETS */
+/* COLOR */
 /* BRAND */
 .primary {
   background: #2967ab !important;
@@ -56,7 +59,7 @@
 .text-secondary {
   color: #ff7043; }
 
-/* GENERAL */
+/* COLORS */
 .white {
   background: #ffffff !important;
   border-color: #cccccc !important;

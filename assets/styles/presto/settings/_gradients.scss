@@ -1,63 +1,70 @@
 
 /* MIXIN */
 
-@mixin main-gradient ( $start_color, $end_color, $important: '' ) {
-    background-color: $start_color #{$important};
-    background: linear-gradient(to bottom, $start_color 0%, $end_color 100%) #{$important};
+@mixin gradient ( $color_name, $important: '' ) {
+
+    $colors: map-get($colors, $color_name);
+
+    $start: nth($colors, 2);
+    $end: nth($colors, 3);
+
+    background-color: $start #{$important};
+    background: linear-gradient(to bottom, $start 0%, $end 100%) #{$important};
+
 }
 
 /* BRAND */
 
 @mixin gradient-primary ( $important: '' ) {
-    @include main-gradient ( $color-primary-bg-hover, $color-primary-bg-active, $important );
+    @include gradient ( 'primary', $important );
 }
 
 @mixin gradient-secondary ( $important: '' ) {
-    @include main-gradient ( $color-secondary-bg-hover, $color-secondary-bg-active, $important );
+    @include gradient ( 'secondary', $important );
 }
 
 /* GENERAL */
 
 @mixin gradient-white ( $important: '' ) {
-    @include main-gradient ( $color-white-bg-hover, $color-white-bg-active, $important );
+    @include gradient ( 'white', $important );
 }
 
 @mixin gradient-gray ( $important: '' ) {
-    @include main-gradient ( $color-gray-bg-hover, $color-gray-bg-active, $important );
+    @include gradient ( 'gray', $important );
 }
 
 @mixin gradient-black ( $important: '' ) {
-    @include main-gradient ( $color-black-bg-hover, $color-black-bg-active, $important );
+    @include gradient ( 'black', $important );
 }
 
 @mixin gradient-yellow ( $important: '' ) {
-    @include main-gradient ( $color-yellow-bg-hover, $color-yellow-bg-active, $important );
+    @include gradient ( 'yellow', $important );
 }
 
 @mixin gradient-green ( $important: '' ) {
-    @include main-gradient ( $color-green-bg-hover, $color-green-bg-active, $important );
+    @include gradient ( 'green', $important );
 }
 
 @mixin gradient-blue ( $important: '' ) {
-    @include main-gradient ( $color-blue-bg-hover, $color-blue-bg-active, $important );
+    @include gradient ( 'blue', $important );
 }
 
 @mixin gradient-orange ( $important: '' ) {
-    @include main-gradient ( $color-orange-bg-hover, $color-orange-bg-active, $important );
+    @include gradient ( 'orange', $important );
 }
 
 @mixin gradient-purple ( $important: '' ) {
-    @include main-gradient ( $color-purple-bg-hover, $color-purple-bg-active, $important );
+    @include gradient ( 'purple', $important );
 }
 
 @mixin gradient-red ( $important: '' ) {
-    @include main-gradient ( $color-red-bg-hover, $color-red-bg-active, $important );
+    @include gradient ( 'red', $important );
 }
 
 @mixin gradient-pink ( $important: '' ) {
-    @include main-gradient ( $color-pink-bg-hover, $color-pink-bg-active, $important );
+    @include gradient ( 'pink', $important );
 }
 
 @mixin gradient-teal ( $important: '' ) {
-    @include main-gradient ( $color-teal-bg-hover, $color-teal-bg-active, $important );
+    @include gradient ( 'teal', $important );
 }
