@@ -3337,7 +3337,7 @@ $.ready ( function () {
 
     var get_body_html = function ( body ) {
 
-        return body ? '<div class="noty_body">' + body + '</div>' : '';
+        return body || '';
 
     };
 
