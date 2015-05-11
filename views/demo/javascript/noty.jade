@@ -10,6 +10,14 @@ append body
         +button.actionable.outlined(onclick="noty_test_medium()") Medium
         +button.actionable.outlined(onclick="noty_test_long()") Long
 
+    +divider Anchors
+
+    +multiple
+        +button.actionable.outlined(onclick="noty_test_anchor('top-left')") Top-Left
+        +button.actionable.outlined(onclick="noty_test_anchor('top-right')") Top-Right
+        +button.actionable.outlined(onclick="noty_test_anchor('bottom-left')") Bottom-Left
+        +button.actionable.outlined(onclick="noty_test_anchor('bottom-right')") Bottom-Right
+
     +divider Buttons
 
     +multiple
@@ -72,8 +80,12 @@ append body-end
             $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
         }
         function noty_test_adv_four () {
-            $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/images/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+            $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
         }
         function noty_test_colored ( color ) {
             $.noty ( { body: "Noty with custom color", color: color } );
+        }
+        var anchor_id = 0;
+        function noty_test_anchor ( anchor ) {
+            $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: `" + anchor + "`", anchor: anchor } );
         }

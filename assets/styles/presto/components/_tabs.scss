@@ -20,7 +20,6 @@
             @include primary ();
             border-width: 0 1px 1px 0;
             border-style: solid;
-            box-sizing: border-box;
             display: inline-block;
             font-size: $font-size-normal;
             font-weight: bold;
@@ -69,7 +68,6 @@
         height:calc(100% - #{$tabs-height});
         position: relative;
         width: 100%;
-        box-sizing: border-box;
         overflow: auto;
         border-radius: 0 0 $border-radius-normal $border-radius-normal;
 

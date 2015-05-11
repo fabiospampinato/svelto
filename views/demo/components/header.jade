@@ -5,70 +5,51 @@ extends ../../layout.jade
 append body
     +divider Outside
 
-    +container
-        +header
-            +header-content
-                +header-title
-                    +lorem-ipsum(8, 'words')
+    +header('Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.limited
 
-    +container
-        +header
-            +header-content
-                +header-title
-                    +lorem-ipsum(8, 'words')
-                +header-subtitle
-                    +lorem-ipsum(8, 'words')
+    +header('Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
 
+    +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', false).outlined
 
-    +container
-        +header
-            +icon("action-settings").big
-            +header-content
-                +header-title
-                    +lorem-ipsum(8, 'words')
+    +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
 
-
-    +container
-        +header
+    +header.outlined
+        +header-left
             +icon("action-settings").enormous
-            +header-content
-                +header-title
-                    +lorem-ipsum(8, 'words')
-                +header-subtitle
-                    +lorem-ipsum(8, 'words')
+        +header-center
+            +header-title
+                +lorem-ipsum(8, 'words')
+            ul
+                li
+                    +lorem-ipsum(5, 'words')
+                li
+                    +lorem-ipsum(5, 'words')
+                ul
+                    li
+                        +lorem-ipsum(5, 'words')
+                    li
+                        +lorem-ipsum(5, 'words')
+                    li
+                        +lorem-ipsum(5, 'words')
+                li
+                    +lorem-ipsum(5, 'words')
 
-
-    +container
-        +header
-            +icon("action-settings").giant
-            +header-content
-                +header-title
-                    +lorem-ipsum(8, 'words')
-                +header-subtitle
-                    ul
-                        li
-                            +lorem-ipsum(5, 'words')
-                        li
-                            +lorem-ipsum(5, 'words')
-                        ul
-                            li
-                                +lorem-ipsum(5, 'words')
-                            li
-                                +lorem-ipsum(5, 'words')
-                            li
-                                +lorem-ipsum(5, 'words')
-                        li
-                            +lorem-ipsum(5, 'words')
+    +header.outlined
+        +header-left
+            +icon("action-settings").enormous
+        +header-center
+            +header-title
+                +lorem-ipsum(8, 'words')
+            +header-subtitle
+                +lorem-ipsum(8, 'words')
+        +header-right
+            +button.outlined.actionable.compact
+                +icon("navigation-more-vert")
 
     +divider Inside
 
     +container
-        +header
-            +icon("action-settings").giant
-            +header-content
-                +header-title
-                    +lorem-ipsum(8, 'words')
-                +header-subtitle
-                    +lorem-ipsum(8, 'words')
+        +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.gray
+        +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
         p
             +lorem-ipsum

@@ -1,17 +1,57 @@
 //- header.jade
 
-mixin header
+mixin header(icon, title, subtitle)
     .header-wrp&attributes(attributes)
+        if icon
+            if title
+                if subtitle !== undefined
+                    if subtitle
+                        +header-left
+                            +icon(icon).enormous
+                        +header-center
+                            +header-title(title)
+                            +header-subtitle(subtitle)
+                            block
+                    else
+                        +header-left
+                            +icon(icon).huge
+                        +header-center
+                            +header-title(title)
+                            block
+                else
+                    +header-center
+                        +header-title(icon)
+                        +header-subtitle(title)
+                        block
+            else
+                +header-center
+                    +header-title(icon)
+                    block
+        else
+            block
+
+mixin header-left
+    .header-left&attributes(attributes)
         block
 
-mixin header-content
-    .content&attributes(attributes)
+mixin header-center
+    .header-center&attributes(attributes)
         block
 
-mixin header-title
-    .title&attributes(attributes)
-        block
+mixin header-title(title)
+    if title
+        p.header-title.big&attributes(attributes)= title
+    else
+        p.header-title.big&attributes(attributes)
+            block
 
-mixin header-subtitle
-    .subtitle&attributes(attributes)
+mixin header-subtitle(subtitle)
+    if subtitle
+        p&attributes(attributes)= subtitle
+    else
+        p&attributes(attributes)
+            block
+
+mixin header-right
+    .header-right&attributes(attributes)
         block

@@ -30,7 +30,6 @@
             @include transparent-initial ();
             cursor: pointer !important;
             height: $navbar-height;
-            box-sizing: border-box;
             padding: $navbar-btn-padding;
 
             .icon {

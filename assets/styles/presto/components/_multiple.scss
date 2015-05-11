@@ -100,6 +100,10 @@
         flex-grow: 1;
     }
 
+    &.fluid > *.noshrink {
+        flex-shrink: 0;
+    }
+
     &:not(.vertical) > *:not(:last-child) {
 
         &.multiple {

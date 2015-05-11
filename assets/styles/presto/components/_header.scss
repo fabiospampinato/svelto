@@ -3,30 +3,57 @@
 
 .header-wrp {
 
-    display: table;
-    text-align: left;
-    width: 100%;
+    @include white ( true );
+    display: flex;
+    align-items: center;
     margin-bottom: $layout-spacing;
 
-    & > .icon, & > .content {
-        display: table-cell;
-        vertical-align: middle;
+    &.outlined {
+        border-width: $container-border-size;
+        border-style: solid;
+        border-radius: $border-radius-normal;
+        padding: $layout-spacing;
+        box-shadow: $shadow-depth-1;
     }
 
-    & > .icon {
-        padding-right: $layout-spacing;
+    &.limited {
+        max-width: $layout-max-width;
+        margin-left: auto;
+        margin-right: auto;
     }
 
-    & > .content {
+    & > *:not(:first-child) {
+        margin-left: $layout-spacing;
+    }
 
-        width: 100%;
+    & > .header-left {
+        order: 1;
+        flex-shrink: 0;
+    }
 
-        & > .title {
-            @include big ();
+    & > .header-center {
+
+        order: 2;
+        flex-grow: 1;
+        flex-shrink: 1;
+
+        & > .header-title {
+            margin-bottom: $layout-half-spacing;
         }
 
-        & > .title + .subtitle {
-            margin-top: $layout-half-spacing;
+    }
+
+    & > .header-right {
+        order: 3;
+        flex-shrink: 0;
+    }
+
+    & > * > *:last-child {
+
+        margin-bottom: 0 !important;
+
+        &.multiple {
+            margin-bottom: -$layout-spacing !important;
         }
 
     }

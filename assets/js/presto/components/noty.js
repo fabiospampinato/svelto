@@ -7,16 +7,13 @@
 
     // VARIABLES
 
-    var $queue,
-        timers = [];
+    var timers = [];
 
     // INIT
 
     $(function () {
 
-        $body.append ( '<div id="noty_queue"></div>' );
-
-        $queue = $('#noty_queue');
+        $body.append ( '<div class="noty_queue top-left"></div><div class="noty_queue top-right"></div><div class="noty_queue bottom-left"></div><div class="noty_queue bottom-right"></div>' );
 
     });
 
@@ -24,19 +21,19 @@
 
     var get_html = function ( options ) {
 
-        return '<div id="noty_wrp_' + options.id + '" class="noty_wrp hidden"><div id="noty_' + options.id + '" class="noty ' + options.type + ' ' + options.color + ' transparentize">' + get_img_html ( options.img ) + '<div class="noty_content">' + get_title_html ( options.title ) + get_body_html ( options.body ) + get_buttons_html ( options.buttons ) + '</div></div>';
+        return '<div id="noty_wrp_' + options.id + '" class="noty_wrp hidden"><div id="noty_' + options.id + '" class="noty container ' + options.type + ' ' + options.color + ' transparentize"><div class="header-wrp transparent">' + get_img_html ( options.img ) + '<div class="header-center">' + get_title_html ( options.title ) + get_body_html ( options.body ) + '</div>' + get_single_button_html ( options.buttons ) + '</div>' + get_buttons_html ( options.buttons ) + '</div></div>';
 
     };
 
     var get_img_html = function ( img ) {
 
-        return img ? '<div class="noty_img"><img src="' + img + '" class="smooth" /></div>' : '';
+        return img ? '<div class="noty_img header-left"><img src="' + img + '" class="smooth" /></div>' : '';
 
     };
 
     var get_title_html = function ( title ) {
 
-        return title ? '<div class="noty_title">' + title + '</div>' : '';
+        return title ? '<p class="header-title large">' + title + '</p>' : '';
 
     };
 
@@ -48,17 +45,33 @@
 
     var get_buttons_html = function ( buttons ) {
 
-        if ( !buttons ) return '';
+        if ( buttons.length > 1 ) {
 
-        var buttons_html = '';
+            var buttons_html = '';
 
-        _.each ( buttons, function ( button ) {
+            _.each ( buttons, function ( button ) {
 
-            buttons_html += get_button_html ( button );
+                buttons_html += get_button_html ( button );
 
-        });
+            });
 
-        return '<div class="noty_buttons multiple center">' + buttons_html + '</div>';
+            return '<div class="noty_buttons multiple centered">' + buttons_html + '</div>';
+
+        }
+
+        return '';
+
+    };
+
+    var get_single_button_html = function ( buttons ) {
+
+        if ( buttons.length === 1 ) {
+
+            return '<div class="header-right">' + get_button_html ( buttons[0] ) + '</div>';
+
+        }
+
+        return '';
 
     };
 
@@ -90,6 +103,8 @@
 
         var options = {
             id: _.uniqueId (),
+
+            anchor: 'bottom-left',
 
             title: false,
             body: false,
@@ -129,7 +144,7 @@
 
         // WRITE
 
-        $queue.prepend ( get_html ( options ) );
+        $('.noty_queue.' + options.anchor).append ( get_html ( options ) );
 
         // VARIABLES
 
