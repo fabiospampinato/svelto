@@ -12,14 +12,17 @@
         /* OPTIONS */
 
         options: {
-            onUpdate: $.noop
+            timestamp: false,
+            callbacks: {
+                update: $.noop
+            }
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.timestamp = this.$element.data ( 'timestamp' );
+            this.options.timestamp = this.$element.data ( 'timestamp' ) || this.options.timestamp;
 
             this._update_loop ( 0 );
 
@@ -33,13 +36,7 @@
 
             setTimeout ( function () {
 
-                var timeago = _.timeAgo ( instance.timestamp );
-
-                instance.$node.html ( timeago.str );
-
-                instance.hook ( 'onUpdate' );
-
-                instance._update_loop ( timeago.next );
+                instance._update_loop ( instance.update ().next );
 
             }, wait * 1000 );
 
@@ -49,11 +46,13 @@
 
         update: function () {
 
-            var timeago = _.timeAgo ( this.timestamp );
+            var timeAgo = _.timeAgo ( this.options.timestamp );
 
-            this.$element.html ( timeago.str );
+            this.$element.html ( timeAgo.str );
 
-            this.hook ( 'onUpdate' );
+            this._trigger ( 'update' );
+
+            return timeAgo;
 
         }
 

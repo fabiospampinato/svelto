@@ -30,13 +30,13 @@ append body-end
             });
         }
         function test_one_time_action_cookie3 () {
-            if ( !$.oneTimeAction ( 'test3', 'get' ) ) {
+            if ( !$.oneTimeAction ( 'test3' ).get () ) {
                 $.noty ({
                     body: "One time action (test3) executed.",
                     buttons: [{
                         text: 'Set it!',
                         onClick: function () {
-                            $.oneTimeAction ( 'test3', 'set' );
+                            $.oneTimeAction ( 'test3' ).set ();
                             $.noty ( "One time action (test3) setted." );
                         }
                     }, {
@@ -46,11 +46,11 @@ append body-end
             }
         }
         function test_one_time_action_reset_cookie1 () {
-            $.oneTimeAction ( 'test1', 'reset' );
+            $.oneTimeAction ( 'test1' ).reset ();
             $.noty ( '(test1) action have been resetted' );
         }
         function test_one_time_action_reset_actions () {
-            $.oneTimeAction ( '', 'reset' );
+            $.oneTimeAction ().reset ();
             $.noty ( 'oneTimeAction-related cookies have been resetted' );
         }
         function test_one_time_action_get_string () {

@@ -1,8 +1,7 @@
 
 /* ONE TIME ACTION */
 
-//INFO: the pipe character (|) is forbidden as a name
-//TODO: split the code into a Container OBJ and an Action OBJ
+//INFO: the pipe character (|) is forbidden as a name, cookie's ttl is 1 year
 
 ;(function ( $, window, document, undefined ) {
 
@@ -16,20 +15,15 @@
 
         var options = {
             container: 'ota', // the cookie name that holds the actions
-            mode: 'action', // get - set - reset - [action]
-            name: '', // the action name
-            action: $.noop
+            name: false, // the action name
+            action: false
         };
 
         if ( _.isString ( custom_options ) ) {
 
             options.name = custom_options;
 
-            if ( _.isString ( action ) ) {
-
-                options.mode = action;
-
-            } else if ( _.isFunction ( action ) ) {
+            if ( _.isFunction ( action ) ) {
 
                 options.action = action;
 
@@ -43,30 +37,80 @@
 
         // ONE TIME ACTION
 
-        var action = new Action ( options.container, options.name, options.action );
+        if ( options.name ) {
 
-        switch ( options.mode ) {
+            var action = new Action ( options.container, options.name );
 
-            case 'get':
-                return action.get ();
+            if ( options.action && !action.get () ) {
 
-            case 'set':
+                options.action ();
+
                 action.set ();
-                break;
 
-            case 'reset':
-                action.reset ();
-                break;
+            }
 
-            case 'action':
+            return action;
 
-                if ( !action.get () ) {
+        } else if ( options.container ) {
 
-                    action.execute ();
+            return new Container ( options.container );
 
-                    action.set ();
+        }
 
-                }
+    };
+
+    /* CONTAINER OBJ */
+
+    var Container = function ( name ) {
+
+        this.name = name;
+
+        this.actionsStr = $.cookie.read ( this.name ) || '';
+        this.actions = this.actionsStr.split ( '|' );
+
+    };
+
+    Container.prototype = {
+
+        get: function ( action ) {
+
+            return ( this.actions.indexOf ( action ) !== -1 );
+
+        },
+
+        set: function ( action ) {
+
+            if ( !this.get ( action ) ) {
+
+                this.actions.push ( action );
+
+                this.update ();
+
+            }
+
+        },
+
+        update: function () {
+
+            this.actionsStr = this.actions.join ( '|' );
+
+            $.cookie.write ( this.name, this.actionsStr, 31536000 ); // 1 year
+
+        },
+
+        reset: function ( action ) {
+
+            if ( action ) {
+
+                _.pull ( this.actions, action );
+
+                this.update ();
+
+            } else {
+
+                $.cookie.destroy ( this.name );
+
+            }
 
         }
 
@@ -76,19 +120,8 @@
 
     var Action = function ( container, name, action ) {
 
-        this.container = container;
+        this.container = new Container ( container );
         this.name = name;
-        this.action = action;
-
-        this.actionsStr = $.cookie.read ( this.container ) || '';
-        this.actions = this.actionsStr.split ( '|' );
-
-        console.log(name);
-        console.log(!!name);
-
-        this.hasName = !!this.name;
-
-        this.isExecuted = this.hasName ? ( this.actions.indexOf ( this.name ) !== -1 ) : false;
 
     };
 
@@ -96,48 +129,19 @@
 
         get: function () {
 
-            return this.isExecuted;
+            return this.container.get ( this.name );
 
         },
 
         set: function () {
 
-            if ( !this.isExecuted && this.hasName ) {
-
-                this.actions.push ( this.name );
-                this.actionsStr = this.actions.join ( '|' );
-
-                $.cookie.write ( this.container, this.actionsStr, 31536000 ); // 1 year
-
-            }
+            this.container.set ( this.name );
 
         },
 
         reset: function () {
 
-            if ( this.hasName ) {
-
-                if ( this.isExecuted ) {
-
-                    _.pull ( this.actions, this.name );
-
-                    this.actionsStr = this.actions.join ( '|' );
-
-                    $.cookie.write ( this.container, this.actionsStr, 31536000 ); // 1 year
-
-                }
-
-            } else {
-
-                $.cookie.destroy ( this.container );
-
-            }
-
-        },
-
-        execute: function () {
-
-            this.action ();
+            this.container.reset ( this.name );
 
         }
 

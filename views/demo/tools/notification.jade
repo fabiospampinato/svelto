@@ -5,12 +5,17 @@ extends ../../layout.jade
 append body
     +divider Notifications
 
-    .multiple
-        .button.actionable.outlined(onclick="notification_test()") Single
-        .button.actionable.outlined(onclick="notification_test(true)") Both
+    +multiple
+        .button.actionable.outlined(onclick="notification_test()") Test
+        .button.actionable.outlined(onclick="notification_test_delayed()") Test delayed (3s)
 
 append body-end
     +script.
         function notification_test ( both ) {
-            $.notification ( { title: "Test title", body: "Example test description", img: "/assets/images/presto/sample.png" }, both );
+            $.notification ({ title: "Test title", body: "Test description", img: "/assets/images/presto/sample.png" });
+        }
+        function notification_test_delayed () {
+            setTimeout ( function () {
+                $.notification ({ title: "Test title", body: "Test description", img: "/assets/images/presto/sample.png" });
+            }, 3000 );
         }

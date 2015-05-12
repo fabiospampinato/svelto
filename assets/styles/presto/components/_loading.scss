@@ -2,6 +2,7 @@
 /* LOADING OVERLAY */
 
 //FIXME: for whatever reason it's not rotating at the center of the icon
+//TODO: better loading keyframe, che rallenta arrivato a metà circa e poi accelera, copiarla da google credo (forse Chrome for Android)
 
 .loading {
 
@@ -45,7 +46,7 @@
         transition: opacity 0.2s ease 0s;
     }
 
-    &.loading_active {
+    &.loading-active {
 
         &:before, &:after {
             transform: scale(1);

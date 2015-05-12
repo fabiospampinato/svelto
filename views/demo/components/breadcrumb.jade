@@ -9,14 +9,36 @@ append body
         +breadcrumb
             a(href="#", title="Link 1") Link 1
             a(href="#", title="Link 2") Link 2
-            a(href="#", title="Link 3") Link 3
+            a(href="#", title="Link 3").current Link 3
             a(href="#", title="Link 4") Link 4
+            a(href="#", title="Link 5") Link 5
 
     +divider Slashed
 
     +container
-        +breadcrumb-slashed
+        +breadcrumb.slashed
             a(href="#", title="Link 1") Link 1
             a(href="#", title="Link 2") Link 2
-            a(href="#", title="Link 3") Link 3
+            a(href="#", title="Link 3").current Link 3
             a(href="#", title="Link 4") Link 4
+            a(href="#", title="Link 5") Link 5
+
+    +divider Base - Highlighted
+
+    +container
+        +breadcrumb.highlighted
+            a(href="#", title="Link 1") Link 1
+            a(href="#", title="Link 2") Link 2
+            a(href="#", title="Link 3").current Link 3
+            a(href="#", title="Link 4") Link 4
+            a(href="#", title="Link 5") Link 5
+
+    +divider Slashed - Highlighted
+
+    +container
+        +breadcrumb.slashed.highlighted
+            a(href="#", title="Link 1") Link 1
+            a(href="#", title="Link 2") Link 2
+            a(href="#", title="Link 3").current Link 3
+            a(href="#", title="Link 4") Link 4
+            a(href="#", title="Link 5") Link 5

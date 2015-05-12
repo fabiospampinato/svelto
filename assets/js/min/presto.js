@@ -472,27 +472,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        /* DELAYING / DEFERRING */
+        /* DELAYING */
 
         _delay: function ( handler, delay ) {
 
             var instance = this;
 
             return setTimeout ( function () {
-
-                handler.apply ( instance, arguments );
-
-            }, delay || 0 );
-
-        },
-
-        _defer: function ( handler, delay ) {
-
-            var instance = this;
-
-            return setTimeout ( function () {
-
-                document.documentElement.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
 
                 handler.apply ( instance, arguments );
 
@@ -1264,13 +1250,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
  /* NOTIFICATION */
 
+//INFO: If the tab has a focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
     /* NOTIFICATION */
 
-    $.notification = function ( custom_options, both ) {
+    $.notification = function ( custom_options ) {
 
         // OPTIONS
 
@@ -1284,35 +1272,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // NOTIFICATION
 
-        if ( window.Notification ) {
+        if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-            if ( Notification.permission !== 'denied' ) {
+            Notification.requestPermission ( function ( status ) {
 
-                Notification.requestPermission ( function ( status ) {
+                if ( status === 'granted' ) {
 
-                    if ( status === 'granted' ) {
+                    var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
 
-                        var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
+                } else {
 
-                        if ( both ) {
+                    $.noty ( options );
 
-                            $.noty ( options );
+                }
 
-                        }
-
-                    } else {
-
-                        $.noty ( options );
-
-                    }
-
-                });
-
-            } else {
-
-                $.noty ( options );
-
-            }
+            });
 
         } else {
 
@@ -1328,8 +1302,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* ONE TIME ACTION */
 
-//INFO: the pipe character (|) is forbidden as a name
-//TODO: split the code into a Container OBJ and an Action OBJ
+//INFO: the pipe character (|) is forbidden as a name, cookie's ttl is 1 year
 
 ;(function ( $, window, document, undefined ) {
 
@@ -1343,20 +1316,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         var options = {
             container: 'ota', // the cookie name that holds the actions
-            mode: 'action', // get - set - reset - [action]
-            name: '', // the action name
-            action: $.noop
+            name: false, // the action name
+            action: false
         };
 
         if ( _.isString ( custom_options ) ) {
 
             options.name = custom_options;
 
-            if ( _.isString ( action ) ) {
-
-                options.mode = action;
-
-            } else if ( _.isFunction ( action ) ) {
+            if ( _.isFunction ( action ) ) {
 
                 options.action = action;
 
@@ -1370,30 +1338,80 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // ONE TIME ACTION
 
-        var action = new Action ( options.container, options.name, options.action );
+        if ( options.name ) {
 
-        switch ( options.mode ) {
+            var action = new Action ( options.container, options.name );
 
-            case 'get':
-                return action.get ();
+            if ( options.action && !action.get () ) {
 
-            case 'set':
+                options.action ();
+
                 action.set ();
-                break;
 
-            case 'reset':
-                action.reset ();
-                break;
+            }
 
-            case 'action':
+            return action;
 
-                if ( !action.get () ) {
+        } else if ( options.container ) {
 
-                    action.execute ();
+            return new Container ( options.container );
 
-                    action.set ();
+        }
 
-                }
+    };
+
+    /* CONTAINER OBJ */
+
+    var Container = function ( name ) {
+
+        this.name = name;
+
+        this.actionsStr = $.cookie.read ( this.name ) || '';
+        this.actions = this.actionsStr.split ( '|' );
+
+    };
+
+    Container.prototype = {
+
+        get: function ( action ) {
+
+            return ( this.actions.indexOf ( action ) !== -1 );
+
+        },
+
+        set: function ( action ) {
+
+            if ( !this.get ( action ) ) {
+
+                this.actions.push ( action );
+
+                this.update ();
+
+            }
+
+        },
+
+        update: function () {
+
+            this.actionsStr = this.actions.join ( '|' );
+
+            $.cookie.write ( this.name, this.actionsStr, 31536000 ); // 1 year
+
+        },
+
+        reset: function ( action ) {
+
+            if ( action ) {
+
+                _.pull ( this.actions, action );
+
+                this.update ();
+
+            } else {
+
+                $.cookie.destroy ( this.name );
+
+            }
 
         }
 
@@ -1403,19 +1421,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     var Action = function ( container, name, action ) {
 
-        this.container = container;
+        this.container = new Container ( container );
         this.name = name;
-        this.action = action;
-
-        this.actionsStr = $.cookie.read ( this.container ) || '';
-        this.actions = this.actionsStr.split ( '|' );
-
-        console.log(name);
-        console.log(!!name);
-
-        this.hasName = !!this.name;
-
-        this.isExecuted = this.hasName ? ( this.actions.indexOf ( this.name ) !== -1 ) : false;
 
     };
 
@@ -1423,48 +1430,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         get: function () {
 
-            return this.isExecuted;
+            return this.container.get ( this.name );
 
         },
 
         set: function () {
 
-            if ( !this.isExecuted && this.hasName ) {
-
-                this.actions.push ( this.name );
-                this.actionsStr = this.actions.join ( '|' );
-
-                $.cookie.write ( this.container, this.actionsStr, 31536000 ); // 1 year
-
-            }
+            this.container.set ( this.name );
 
         },
 
         reset: function () {
 
-            if ( this.hasName ) {
-
-                if ( this.isExecuted ) {
-
-                    _.pull ( this.actions, this.name );
-
-                    this.actionsStr = this.actions.join ( '|' );
-
-                    $.cookie.write ( this.container, this.actionsStr, 31536000 ); // 1 year
-
-                }
-
-            } else {
-
-                $.cookie.destroy ( this.container );
-
-            }
-
-        },
-
-        execute: function () {
-
-            this.action ();
+            this.container.reset ( this.name );
 
         }
 
@@ -3173,21 +3151,29 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         if ( activate ) {
 
-            return this.addClass ( 'loading' ).defer ( function () {
+            this.addClass ( 'loading' );
 
-                this.addClass ( 'loading_active' );
+            $.reflow ();
 
-            });
+            this.addClass ( 'loading-active' );
 
         } else {
 
-            return this.removeClass ( 'loading_active' ).defer ( function () {
+            var $this = this;
 
-                this.removeClass ( 'loading' );
+            this.removeClass ( 'loading-active' );
+
+            setTimeout ( function () {
+
+                //TODO: do we need a reflow here? If we don't why?
+
+                $this.removeClass ( 'loading' );
 
             }, 200 );
 
         }
+
+        return this;
 
     };
 
@@ -3408,7 +3394,9 @@ $.ready ( function () {
 
         $noty_wrp.removeClass ( 'active' );
 
-        $.defer ( function () {
+        setTimeout ( function () {
+
+            //TODO: do we need a $.reflow () here? If not, why?
 
             $noty_wrp.remove ();
 
@@ -3567,11 +3555,9 @@ $.ready ( function () {
 
         $new_noty_wrp.removeClass ( 'hidden' );
 
-        $.defer ( function () {
+        $.reflow ();
 
-            $new_noty_wrp.addClass ( 'active' );
-
-        });
+        $new_noty_wrp.addClass ( 'active' );
 
         options.onOpen.call ( $new_noty_wrp.get ( 0 ) );
 
@@ -5039,14 +5025,17 @@ $.ready ( function () {
         /* OPTIONS */
 
         options: {
-            onUpdate: $.noop
+            timestamp: false,
+            callbacks: {
+                update: $.noop
+            }
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.timestamp = this.$element.data ( 'timestamp' );
+            this.options.timestamp = this.$element.data ( 'timestamp' ) || this.options.timestamp;
 
             this._update_loop ( 0 );
 
@@ -5060,13 +5049,7 @@ $.ready ( function () {
 
             setTimeout ( function () {
 
-                var timeago = _.timeAgo ( instance.timestamp );
-
-                instance.$node.html ( timeago.str );
-
-                instance.hook ( 'onUpdate' );
-
-                instance._update_loop ( timeago.next );
+                instance._update_loop ( instance.update ().next );
 
             }, wait * 1000 );
 
@@ -5076,11 +5059,13 @@ $.ready ( function () {
 
         update: function () {
 
-            var timeago = _.timeAgo ( this.timestamp );
+            var timeAgo = _.timeAgo ( this.options.timestamp );
 
-            this.$element.html ( timeago.str );
+            this.$element.html ( timeAgo.str );
 
-            this.hook ( 'onUpdate' );
+            this._trigger ( 'update' );
+
+            return timeAgo;
 
         }
 

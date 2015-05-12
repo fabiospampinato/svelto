@@ -481,11 +481,9 @@
 
     lQuery.extend = _.extend; //INFO: It's always deep by default
 
-    lQuery.defer = function ( callback, msDelay ) { //TODO: join with underscore
+    lQuery.reflow = function () {
 
         html.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
-
-        setTimeout ( callback, msDelay || 0 );
 
     };
 
@@ -866,6 +864,8 @@
 
         addClass: function ( classes ) {
 
+            //TODO: merge with toggleClass
+
             classes = classes.split ( ' ' );
 
             var cl = classes.length;
@@ -885,6 +885,8 @@
         },
 
         removeClass: function ( classes ) {
+
+            //TODO: merge with toggleClass
 
             classes = classes.split ( ' ' );
 
@@ -1888,22 +1890,6 @@
             }
 
             return lQuery_arr ( results, results.length < 2 );
-
-        },
-
-        defer: function ( callback, msDelay ) {
-
-            html.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
-
-            var collection = this;
-
-            setTimeout ( function () {
-
-                callback.apply ( collection );
-
-            }, msDelay || 0 );
-
-            return this;
 
         }
 

@@ -1,8 +1,6 @@
 
 /* BREADCRUMB */
 
-//TODO: add support for highlighing the sections before the current (basically highlight e poi unhighlight .current + others)
-
 .breadcrumb {
 
     & > *:not(:last-child):after {
@@ -10,13 +8,27 @@
         @extend .icon-navigation-chevron-right:before;
         padding-left: $breadcrumb-padding;
         padding-right: $breadcrumb-padding;
-        opacity: $breadcrumb-opacity;
+        opacity: $breadcrumb-icon-opacity;
     }
 
     &.slashed > *:not(:last-child):after {
         content: '/';
         padding-left: $breadcrumb-padding * 1.6;
         padding-right: $breadcrumb-padding * 1.6;
+    }
+
+    &.highlighted > .current ~ * {
+
+        opacity: $breadcrumb-after-opacity;
+
+        &:hover {
+            opacity: $breadcrumb-after-opacity-hover;
+        }
+
+        &:after {
+            opacity: 1;
+        }
+
     }
 
 }

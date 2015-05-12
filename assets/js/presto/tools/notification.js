@@ -1,13 +1,15 @@
 
  /* NOTIFICATION */
 
+//INFO: If the tab has a focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
     /* NOTIFICATION */
 
-    $.notification = function ( custom_options, both ) {
+    $.notification = function ( custom_options ) {
 
         // OPTIONS
 
@@ -21,35 +23,21 @@
 
         // NOTIFICATION
 
-        if ( window.Notification ) {
+        if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-            if ( Notification.permission !== 'denied' ) {
+            Notification.requestPermission ( function ( status ) {
 
-                Notification.requestPermission ( function ( status ) {
+                if ( status === 'granted' ) {
 
-                    if ( status === 'granted' ) {
+                    var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
 
-                        var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
+                } else {
 
-                        if ( both ) {
+                    $.noty ( options );
 
-                            $.noty ( options );
+                }
 
-                        }
-
-                    } else {
-
-                        $.noty ( options );
-
-                    }
-
-                });
-
-            } else {
-
-                $.noty ( options );
-
-            }
+            });
 
         } else {
 

@@ -11,21 +11,29 @@
 
         if ( activate ) {
 
-            return this.addClass ( 'loading' ).defer ( function () {
+            this.addClass ( 'loading' );
 
-                this.addClass ( 'loading_active' );
+            $.reflow ();
 
-            });
+            this.addClass ( 'loading-active' );
 
         } else {
 
-            return this.removeClass ( 'loading_active' ).defer ( function () {
+            var $this = this;
 
-                this.removeClass ( 'loading' );
+            this.removeClass ( 'loading-active' );
+
+            setTimeout ( function () {
+
+                //TODO: do we need a reflow here? If we don't why?
+
+                $this.removeClass ( 'loading' );
 
             }, 200 );
 
         }
+
+        return this;
 
     };
 

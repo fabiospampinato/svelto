@@ -932,6 +932,13 @@ code[class*='language-'] {
   padding-left: 0.8em;
   padding-right: 0.8em; }
 
+.breadcrumb.highlighted > .current ~ * {
+  opacity: 0.5; }
+  .breadcrumb.highlighted > .current ~ *:hover {
+    opacity: 0.75; }
+  .breadcrumb.highlighted > .current ~ *:after {
+    opacity: 1; }
+
 /* DEFAULT */
 button {
   border: none; }
@@ -4762,13 +4769,13 @@ textarea {
   .loading > * {
     -webkit-transition: opacity 0.2s ease 0s;
             transition: opacity 0.2s ease 0s; }
-  .loading.loading_active:before, .loading.loading_active:after {
+  .loading.loading-active:before, .loading.loading-active:after {
     -webkit-transform: scale(1);
             transform: scale(1);
     opacity: 1; }
-  .loading.loading_active:after {
+  .loading.loading-active:after {
     font-size: 52px; }
-  .loading.loading_active > * {
+  .loading.loading-active > * {
     opacity: 0.4;
     pointer-events: none; }
 

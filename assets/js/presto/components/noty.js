@@ -87,7 +87,9 @@
 
         $noty_wrp.removeClass ( 'active' );
 
-        $.defer ( function () {
+        setTimeout ( function () {
+
+            //TODO: do we need a $.reflow () here? If not, why?
 
             $noty_wrp.remove ();
 
@@ -246,11 +248,9 @@
 
         $new_noty_wrp.removeClass ( 'hidden' );
 
-        $.defer ( function () {
+        $.reflow ();
 
-            $new_noty_wrp.addClass ( 'active' );
-
-        });
+        $new_noty_wrp.addClass ( 'active' );
 
         options.onOpen.call ( $new_noty_wrp.get ( 0 ) );
 

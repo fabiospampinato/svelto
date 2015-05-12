@@ -306,27 +306,13 @@
 
         },
 
-        /* DELAYING / DEFERRING */
+        /* DELAYING */
 
         _delay: function ( handler, delay ) {
 
             var instance = this;
 
             return setTimeout ( function () {
-
-                handler.apply ( instance, arguments );
-
-            }, delay || 0 );
-
-        },
-
-        _defer: function ( handler, delay ) {
-
-            var instance = this;
-
-            return setTimeout ( function () {
-
-                document.documentElement.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
 
                 handler.apply ( instance, arguments );
 
