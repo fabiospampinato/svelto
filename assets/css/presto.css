@@ -6364,7 +6364,7 @@ dd {
   .visible-sm-inline-block {
     display: inline-block !important; } }
 
-@media screen and (min-width: 482px) {
+@media screen and (min-width: 768px) {
   .hidden-md, .md-0 {
     display: none !important; }
   .visible-md-block {
@@ -6374,7 +6374,7 @@ dd {
   .visible-md-inline-block {
     display: inline-block !important; } }
 
-@media screen and (min-width: 482px) {
+@media screen and (min-width: 962px) {
   .hidden-lg, .lg-0 {
     display: none !important; }
   .visible-lg-block {

@@ -35,7 +35,7 @@
 
 // MEDIUM
 
-@include min-screen ( $layout-small-min-breakpoint ) {
+@include min-screen ( $layout-medium-min-breakpoint ) {
 
     .hidden-md, .md-0 {
         display: none !important;
@@ -53,7 +53,7 @@
 
 // LARGE
 
-@include min-screen ( $layout-small-min-breakpoint ) {
+@include min-screen ( $layout-large-min-breakpoint ) {
 
     .hidden-lg, .lg-0 {
         display: none !important;
