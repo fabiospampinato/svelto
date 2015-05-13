@@ -7,7 +7,7 @@
 
     /* WIDGET FACTORY */
 
-    $.widget = function ( name, base, prototype ) {
+    $.widget = function ( originalName, base, prototype ) {
 
         /* VARIABLES */
 
@@ -16,10 +16,10 @@
             constructor,
             basePrototype,
             proxiedPrototype = {},
-            nameParts = name.split ( '.' ),
-            namespace = nameParts.length > 1 ? nameParts[0] : false;
+            nameParts = originalName.split ( '.' ),
+            namespace = nameParts.length > 1 ? nameParts[0] : false,
+            name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
 
-        name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
         fullName = namespace ? namespace + '-' + name : name;
 
         /* NO BASE */
@@ -129,6 +129,7 @@
         constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
+            widgetOriginalName: originalName,
             widgetName: name,
             widgetFullName: fullName
         });
@@ -137,7 +138,7 @@
 
         for ( var name in prototype.templates ) {
 
-            $.tmpl.cache[fullName + '.' + name] = $.tmpl ( prototype.templates[name] );
+            $.tmpl.cache[originalName + '.' + name] = $.tmpl ( prototype.templates[name] );
 
         }
 

@@ -17,6 +17,7 @@
 
         /* VARIABLES */
 
+        widgetOriginalName: 'widget',
         widgetName: 'widget',
         widgetFullName: 'widget',
 
@@ -85,8 +86,9 @@
 
             } else { //FIXME
 
-                console.log(this);
+                console.log("PAY ATTENCION!!! element === this");
                 alert("PAY ATTENCION!!! element === this");
+                console.log(this);
 
             }
 
@@ -258,7 +260,7 @@
 
             function handlerProxy () {
 
-                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( widgetFullName + '-disabled' ) ) ) return;
+                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetFullName + '-disabled' ) ) ) return;
 
                 return handler.apply ( instance, arguments );
 
@@ -290,6 +292,8 @@
 
             //TODO: add support for passing datas
 
+            data = data || {};
+
             events = events.split ( ' ' );
 
             for ( var ei = 0, el = events.length; ei < el; ei++ ) {
@@ -298,7 +302,7 @@
 
                 if ( typeof this.options.callback[events[ei]] === 'function' ) {
 
-                    this.options.callback[events[ei]].apply ( this.element );
+                    this.options.callback[events[ei]].call ( this.element, data );
 
                 }
 
@@ -324,7 +328,7 @@
 
         _tmpl: function ( name, options ) {
 
-            return $.tmpl ( this.widgetFullName + '.' + name, options );
+            return $.tmpl ( this.widgetOriginalName + '.' + name, options );
 
         }
 

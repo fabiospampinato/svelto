@@ -2,6 +2,7 @@
 /* SORTABLE */
 
 //TODO: only do the minimum amount of changes, if a row is added we don't need to resort the whole table
+//TODO: add support for tableHelper, just put the new addded row in the right position
 
 ;(function ( $, window, document, undefined ) {
 
@@ -37,7 +38,7 @@
             this.$sortables = this.$headers.filter ( '[data-sort]' );
             this.$tbody = this.$element.find ( 'tbody' );
 
-            this.table = this.$element.get ( 0 );
+            this.table = this.element;
             this.tbody = this.$tbody.get ( 0 );
 
             this.current_index = false; // `$headers` index, not `$sortables` index
@@ -56,7 +57,7 @@
 
             var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
 
-            if ( $initial.length === 1 ) {
+            if ( $initial.length ) {
 
                 this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( 'asc' ) ? 'asc' : 'desc' ) );
 
@@ -68,13 +69,7 @@
 
         _bind_change: function () {
 
-            var instance = this;
-
-            this.$element.on ( 'change', function ( event ) {
-
-                instance._handler_change ();
-
-            });
+            this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
 
         },
 
@@ -92,19 +87,13 @@
 
         _bind_click: function () {
 
-            var instance = this;
-
-            this.$sortables.on ( 'click', function ( event ) {
-
-                instance._handler_click ( this );
-
-            });
+            this._on ( this.$sortables, 'click', this._handler_click );
 
         },
 
-        _handler_click: function ( sortable ) {
+        _handler_click: function ( event ) {
 
-            var new_index = this.$headers.index ( sortable ),
+            var new_index = this.$headers.index ( event.target ),
                 new_direction = this.current_index === new_index
                                     ? this.current_direction === 'asc'
                                         ? 'desc'
@@ -123,7 +112,7 @@
 
             var $sortable = this.$headers.eq ( index );
 
-            if ( !$sortable ) return; // bad index
+            if ( !$sortable.length ) return; // bad index
 
             var sorter_name = $sortable.data ( 'sort' );
 
@@ -133,7 +122,7 @@
 
             if ( !sorter ) return;
 
-            direction = ( !direction || direction.toLowerCase () === 'asc' ) ? 'asc' : 'desc';
+            direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
 
             // STYLE
 
@@ -185,7 +174,10 @@
 
             // TRIGGER
 
-            this.$element.trigger ( 'sort' );
+            this._trigger ( 'sort', {
+                index: this.current_index,
+                direction: this.current_direction
+            });
 
         }
 

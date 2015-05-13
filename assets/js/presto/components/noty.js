@@ -5,132 +5,17 @@
 
     'use strict';
 
-    // VARIABLES
+    /* VARIABLES */
 
     var timers = [];
 
-    // INIT
-
-    $(function () {
-
-        $body.append ( '<div class="noty_queue top-left"></div><div class="noty_queue top-right"></div><div class="noty_queue bottom-left"></div><div class="noty_queue bottom-right"></div>' );
-
-    });
-
-    // FUNCTIONS
-
-    var get_html = function ( options ) {
-
-        return '<div id="noty_wrp_' + options.id + '" class="noty_wrp hidden"><div id="noty_' + options.id + '" class="noty container ' + options.type + ' ' + options.color + ' transparentize"><div class="header-wrp transparent">' + get_img_html ( options.img ) + '<div class="header-center">' + get_title_html ( options.title ) + get_body_html ( options.body ) + '</div>' + get_single_button_html ( options.buttons ) + '</div>' + get_buttons_html ( options.buttons ) + '</div></div>';
-
-    };
-
-    var get_img_html = function ( img ) {
-
-        return img ? '<div class="noty_img header-left"><img src="' + img + '" class="smooth" /></div>' : '';
-
-    };
-
-    var get_title_html = function ( title ) {
-
-        return title ? '<p class="header-title large">' + title + '</p>' : '';
-
-    };
-
-    var get_body_html = function ( body ) {
-
-        return body || '';
-
-    };
-
-    var get_buttons_html = function ( buttons ) {
-
-        if ( buttons.length > 1 ) {
-
-            var buttons_html = '';
-
-            _.each ( buttons, function ( button ) {
-
-                buttons_html += get_button_html ( button );
-
-            });
-
-            return '<div class="noty_buttons multiple centered">' + buttons_html + '</div>';
-
-        }
-
-        return '';
-
-    };
-
-    var get_single_button_html = function ( buttons ) {
-
-        if ( buttons.length === 1 ) {
-
-            return '<div class="header-right">' + get_button_html ( buttons[0] ) + '</div>';
-
-        }
-
-        return '';
-
-    };
-
-    var get_button_html = function ( button ) {
-
-        return button ? '<div class="button actionable ' + ( button.color || 'white' ) + ' ' + ( button.size || 'tiny' ) + ' ' + '">' + ( button.text || '' ) + '</div>' : '';
-
-    };
-
-    var remove = function ( del_id ) {
-
-        var $noty_wrp = $('#noty_wrp_' + del_id);
-
-        $noty_wrp.removeClass ( 'active' );
-
-        setTimeout ( function () {
-
-            //TODO: do we need a $.reflow () here? If not, why?
-
-            $noty_wrp.remove ();
-
-        }, 200 );
-
-    };
-
-    // PLUGIN
+    /* HELPER */
 
     $.noty = function ( custom_options ) {
 
-        // OPTIONS
-
-        var options = {
-            id: _.uniqueId (),
-
-            anchor: 'bottom-left',
-
-            title: false,
-            body: false,
-            img: false,
-            buttons: false,
-            /*
-                   : [{
-                color: 'white',
-                size: 'tiny',
-                text: '',
-                onClick: $.noop
-            }],
-            */
-
-            type: 'alert',
-            color: 'black',
-
-            ttl: 3500,
-
-            onOpen: $.noop,
-            onClose: $.noop
-        };
-
         // EXTEND
+
+        var options = {};
 
         if ( _.isString ( custom_options ) ) {
 
@@ -144,116 +29,219 @@
 
         if ( options.buttons ) options.type = 'action';
 
-        // WRITE
+        // NOTY
 
-        $('.noty_queue.' + options.anchor).append ( get_html ( options ) );
+        var noty = $.fn.noty ( options ); //FIXME: Does it work?
 
-        // VARIABLES
+        noty.open ();
 
-        var $new_noty_wrp = $('#noty_wrp_' + options.id),
-            $new_noty = $('#noty_' + options.id),
-            noty_timer = false;
+        return noty;
 
-        // BUTTONS
+    };
 
-        if ( options.buttons ) {
+    /* NOTY */
 
-            var $buttons = $new_noty.find ( '.button' );
+    $.widget ( 'presto.noty', {
 
-            _.each ( options.buttons, function ( button, index ) {
+        /* TEMPLATES */
 
-                var $button = $buttons.eq ( index );
+        templates: {
+            base: '<div class="noty_wrp hidden">' +
+                      '<div class="noty container transparentize {%=o.type%} {%=o.color%} {%=o.css%}">' +
+                          '<div class="header-wrp transparent">' +
+                              '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
+                              '<div class="header-center">' +
+                                  '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
+                                  '{% if ( o.body ) include ( "presto.noty.body", o.body ); %}' +
+                              '</div>' +
+                              '{% if ( o.buttons.length === 1 ) include ( "presto.noty.single_button", o.buttons[0] ); %}' +
+                          '</div>' +
+                          '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
+                      '</div>' +
+                  '</div>',
+            img: '<div class="noty_img header-left">' +
+                     '<img src="{%=o%}" class="smooth" />' +
+                 '</div>',
+            title: '<p class="header-title large">' +
+                       '{%=o%}' +
+                   '</p>',
+            body: '{%=o%}',
+            single_button: '<div class="header-right">' +
+                               '{% include ( presto.noty.button, o ); %}' +
+                           '</div>',
+            buttons: '<div class="noty_buttons multiple centered>' +
+                         '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                             '{% include ( "presto.noty.button", o[i] ); %}' +
+                         '{% } %}' +
+                     '</div>',
+            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "tiny")%} {%=(o.css || "")%}">' +
+                        '{%=(o.text || "")%}' +
+                    '</div>'
+        },
 
-                $button.on ( 'click', function ( event ) {
+        /* OPTIONS */
 
-                    if ( button.onClick ) button.onClick.call ( this, event );
+        options: {
+            anchor: 'bottom-left',
 
-                    if ( noty_timer ) {
+            title: false,
+            body: false,
+            img: false,
+            buttons: [],
+            /*
+                   : [{
+                          color: 'white',
+                          size: 'tiny',
+                          css: '',
+                          text: '',
+                          onClick: $.noop
+                     }],
+            */
 
-                        _.pull ( timers, noty_timer );
+            type: 'alert',
+            color: 'black',
+            css: '',
 
-                        noty_timer.stop ();
+            ttl: 3500,
 
-                    }
+            callbacks: {
+                open: $.noop,
+                close: $.noop
+            }
+        },
 
-                    remove ( options.id );
+        /* SPECIAL */
 
-                    options.onClose.call ( $new_noty_wrp.get ( 0 ) );
+        _create: function () {
+
+            this.timer = false;
+
+            $('.noty_queue.' + this.options.anchor).append ( this.$element );
+
+        },
+
+        /* PRIVATE */
+
+        _init_click: function () {
+
+            if ( !this.options.buttons.length ) {
+
+                this._on ( 'click', this.close );
+
+            }
+
+        },
+
+        _init_buttons_click: function () {
+
+            if ( this.options.buttons.length ) {
+
+                var $buttons = this.$element.find ( '.button' ),
+                    instance = this;
+
+                _.each ( this.options.buttons, function ( button, index ) {
+
+                    var $button = $buttons.eq ( index ); //FIXME: it will not work if we add a button to the body manually
+
+                    $button.on ( 'click', function ( event ) {
+
+                        if ( button.onClick ) button.onClick.call ( this, event );
+
+                        instance.close ();
+
+                    });
+
+                });
+
+            }
+
+        },
+
+        _init_timer: function () {
+
+            if ( this.options.buttons.length === 0 && this.options.ttl !== 'forever' ) {
+
+                this.timer = $.timer ( this.close, this.options.ttl, true );
+
+                timers.push ( this.timer );
+
+            }
+
+        },
+
+        _init_hover: function () {
+
+            this.$element.hover ( function () {
+
+                _.each ( timers, function ( timer ) {
+
+                    timer.pause ();
+
+                });
+
+            }, function () {
+
+                _.each ( timers, function ( timer ) {
+
+                    timer.remaining ( Math.max ( 1000, timer.remaining () || 0 ) );
+
+                    timer.play ();
 
                 });
 
             });
 
-        }
+        },
 
-        // CLOSE FUNCTION
+        /* PUBLIC */
 
-        var close = function () {
+        open: function () {
 
-            if ( noty_timer ) {
+            this.$element.removeClass ( 'hidden' );
 
-                _.pull ( timers, noty_timer );
+            $.reflow ();
 
-                noty_timer.stop ();
+            this.$element.addClass ( 'active' );
+
+            this._init_click ();
+            this._init_buttons_click ();
+            this._init_hover ();
+            this._init_timer ();
+
+            this._trigger ( 'open' );
+
+        },
+
+        close: function () {
+
+            if ( this.timer ) {
+
+                _.pull ( timers, this.timer );
+
+                this.timer.stop ();
 
             }
 
-            remove ( options.id );
+            this.$element.removeClass ( 'active' );
 
-            options.onClose.call ( $new_noty_wrp.get ( 0 ) );
+            this._delay ( function () {
 
-        };
+                this.$element.remove ();
 
-        // TIMER
+            }, 200 );
 
-        if ( !options.buttons && options.ttl !== 'forever' ) {
-
-            noty_timer = $.timer ( close, options.ttl, true );
-
-            timers.push ( noty_timer );
+            this._trigger ( 'close' );
 
         }
 
-        // CLOSE ON CLICK
+    });
 
-        if ( !options.buttons ) {
+    /* READY */
 
-            $new_noty.on ( 'click', close );
+    $(function () {
 
-        }
+        $body.append ( '<div class="noty_queue top-left"></div><div class="noty_queue top-right"></div><div class="noty_queue bottom-left"></div><div class="noty_queue bottom-right"></div>' );
 
-        // PAUSE TIMERS ON HOVER
-
-        $new_noty.hover ( function () {
-
-            _.each ( timers, function ( timer ) {
-
-                timer.pause ();
-
-            });
-
-        }, function () {
-
-            _.each ( timers, function ( timer ) {
-
-                timer.remaining ( Math.max ( 1000, timer.remaining () || 0 ) );
-
-                timer.play ();
-
-            });
-
-        });
-
-        // SHOW
-
-        $new_noty_wrp.removeClass ( 'hidden' );
-
-        $.reflow ();
-
-        $new_noty_wrp.addClass ( 'active' );
-
-        options.onOpen.call ( $new_noty_wrp.get ( 0 ) );
-
-    }
+    });
 
 }( lQuery, window, document ));

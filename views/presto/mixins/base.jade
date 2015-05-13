@@ -39,6 +39,10 @@ mixin head(title, description)
 
         +css("/assets/css/presto.css")
         +css("/assets/css/main.css")
+        block css
+
+        +script.
+            document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
 
         block
 
@@ -62,3 +66,4 @@ mixin body
             +js("/assets/js/min/lQuery.js")
             +js("/assets/js/min/presto.js")
             +js("/assets/js/min/main.js")
+            block js
