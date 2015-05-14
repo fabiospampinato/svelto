@@ -47,7 +47,7 @@
 
             /* EXTEND OPTIONS */
 
-            _.extend ( this.options, this._getCreateOptions (), options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
+            this.options = _.extend ( {}, this.options, this._getCreateOptions (), options );
 
             if ( this.initializationType === 1 ) {
 

@@ -10,6 +10,13 @@ append body
         +button.actionable.outlined(onclick="noty_test_medium()") Medium
         +button.actionable.outlined(onclick="noty_test_long()") Long
 
+    +divider API calls
+
+    +multiple
+        +button.actionable.outlined(onclick="noty_test_api_create()") Create
+        +button.actionable.outlined(onclick="noty_test_api_open()") Open
+        +button.actionable.outlined(onclick="noty_test_api_close()") Close
+
     +divider Anchors
 
     +multiple
@@ -88,4 +95,15 @@ append body-end
         var anchor_id = 0;
         function noty_test_anchor ( anchor ) {
             $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: `" + anchor + "`", anchor: anchor } );
+        }
+        var created_noty;
+        function noty_test_api_create () {
+            created_noty = $.noty('API noty');
+            created_noty.close();
+        }
+        function noty_test_api_open () {
+            created_noty.open ();
+        }
+        function noty_test_api_close () {
+            created_noty.close ();
         }

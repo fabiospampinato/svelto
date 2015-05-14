@@ -31,7 +31,7 @@
 
         // NOTY
 
-        var noty = $.fn.noty ( options ); //FIXME: Does it work?
+        var noty = new $.presto.noty ( options ); //FIXME: It should be instantiated on an empty object I think, otherwise we always have to type the namespace
 
         noty.open ();
 
@@ -42,6 +42,8 @@
     /* NOTY */
 
     $.widget ( 'presto.noty', {
+
+        //FIXME: buttons are not showing properly
 
         /* TEMPLATES */
 
@@ -63,19 +65,19 @@
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
             title: '<p class="header-title large">' +
-                       '{%=o%}' +
+                       '{%#o%}' +
                    '</p>',
-            body: '{%=o%}',
+            body: '{%#o%}',
             single_button: '<div class="header-right">' +
-                               '{% include ( presto.noty.button, o ); %}' +
+                               '{% include ( "presto.noty.button", o ); %}' +
                            '</div>',
-            buttons: '<div class="noty_buttons multiple centered>' +
-                         '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                             '{% include ( "presto.noty.button", o[i] ); %}' +
-                         '{% } %}' +
+            buttons: '<div class="noty_buttons multiple centered">' +
+                        '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                            '{% include ( "presto.noty.button", o[i] ); %}' +
+                        '{% } %}' +
                      '</div>',
             button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "tiny")%} {%=(o.css || "")%}">' +
-                        '{%=(o.text || "")%}' +
+                        '{%#(o.text || "")%}' +
                     '</div>'
         },
 
@@ -116,7 +118,8 @@
 
             this.timer = false;
 
-            $('.noty_queue.' + this.options.anchor).append ( this.$element );
+            this.isOpen = false;
+            this.neverOpened = true;
 
         },
 
@@ -161,7 +164,7 @@
 
             if ( this.options.buttons.length === 0 && this.options.ttl !== 'forever' ) {
 
-                this.timer = $.timer ( this.close, this.options.ttl, true );
+                this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
 
                 timers.push ( this.timer );
 
@@ -197,18 +200,33 @@
 
         open: function () {
 
-            this.$element.removeClass ( 'hidden' );
+            if ( !this.isOpen ) {
 
-            $.reflow ();
+                $('.noty_queue.' + this.options.anchor).first ().append ( this.$element );
 
-            this.$element.addClass ( 'active' );
+                this.$element.removeClass ( 'hidden' );
 
-            this._init_click ();
-            this._init_buttons_click ();
-            this._init_hover ();
-            this._init_timer ();
+                $.reflow ();
 
-            this._trigger ( 'open' );
+                this.$element.addClass ( 'active' );
+
+                if ( this.neverOpened ) {
+
+                    this._init_click ();
+                    this._init_buttons_click ();
+                    this._init_hover ();
+
+                    this.neverOpened = false;
+
+                }
+
+                this._init_timer ();
+
+                this._trigger ( 'open' );
+
+                this.isOpen = true;
+
+            }
 
         },
 
@@ -231,6 +249,8 @@
             }, 200 );
 
             this._trigger ( 'close' );
+
+            this.isOpen = false;
 
         }
 

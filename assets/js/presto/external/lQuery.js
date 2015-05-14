@@ -1391,7 +1391,7 @@
 
                 for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
 
-                    this.nodes[i].parentNode.insertBefore ( nodes[ni].cloneNode ( true ), this.nodes[i].nextSibling );
+                    this.nodes[i].parentNode.insertBefore ( ( nl > 1 ? nodes[ni].cloneNode ( true ) : nodes[ni] ), this.nodes[i].nextSibling );
 
                 }
 
@@ -1409,7 +1409,7 @@
 
                 for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
 
-                    this.nodes[i].insertBefore ( nodes[ni].cloneNode ( true ), this.nodes[i].firstChild );
+                    this.nodes[i].insertBefore ( ( nl > 1 ? nodes[ni].cloneNode ( true ) : nodes[ni] ), this.nodes[i].firstChild );
 
                 }
 
@@ -1427,7 +1427,7 @@
 
                 for ( var ni = 0, nl = nodes.length; ni < nl; ni++ ) {
 
-                    this.nodes[i].insertBefore ( nodes[ni].cloneNode ( true ), null );
+                    this.nodes[i].insertBefore ( ( nl > 1 ? nodes[ni].cloneNode ( true ) : nodes[ni] ), null );
 
                 }
 

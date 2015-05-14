@@ -102,7 +102,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         var f = !/[^\w\-\.:]/.test ( str )
                     ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-                    : new Function ( tmpl.arg + ',tmpl', 'var _e=_.escape' + tmpl.helper + ',_s=\'' + str.replace ( tmpl.regexp, tmpl.func ) + '\';return _s;' );
+                    : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
 
         return data
                    ? f ( data, tmpl )
@@ -131,23 +131,23 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( p2 === '=' ) {
 
-                return '"+_e(' + p3 + ')+"';
+                return "'+_e(" + p3 + ")+'";
 
             }
 
-            return '"+(' + p3 + '==null?"":' + p3 + ')+"';
+            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
 
         }
 
         if ( p4 ) { // evaluation start tag: {%
 
-            return '\';';
+            return "';";
 
         }
 
         if ( p5 ) { // evaluation end tag: %}
 
-            return '_s+=\'';
+            return "_s+='";
 
         }
 
@@ -155,7 +155,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     tmpl.arg = 'o';
 
-    tmpl.helper = ',print=function(s,e){_s+=e?(s==null?"":s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}';
+    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
 
     /* HELPER */
 
@@ -213,7 +213,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* EXTEND OPTIONS */
 
-            _.extend ( this.options, this._getCreateOptions (), options ); //TODO: maybe do this.options = _.extend ( {}, ..., but why?
+            this.options = _.extend ( {}, this.options, this._getCreateOptions (), options );
 
             if ( this.initializationType === 1 ) {
 
@@ -641,9 +641,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CACHE TEMPLATES */
 
-        for ( var name in prototype.templates ) {
+        for ( var tmpl_name in prototype.templates ) {
 
-            $.tmpl.cache[originalName + '.' + name] = $.tmpl ( prototype.templates[name] );
+            $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
 
         }
 
@@ -687,7 +687,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         $.fn[name] = function ( options ) {
 
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on
+            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
 
             var isMethodCall = ( typeof options === 'string' ),
                 args = Array.prototype.slice.call ( arguments, 1 ),
@@ -706,7 +706,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     /* GETTING INSTANCE */
 
-                    if ( options === "instance" ) {
+                    if ( options === 'instance' ) {
 
                         returnValue = instance;
 
@@ -3335,7 +3335,7 @@ $.ready ( function () {
 
         // NOTY
 
-        var noty = $.fn.noty ( options ); //FIXME: Does it work?
+        var noty = new $.presto.noty ( options ); //FIXME: It should be instantiated on an empty object I think, otherwise we always have to type the namespace
 
         noty.open ();
 
@@ -3346,6 +3346,8 @@ $.ready ( function () {
     /* NOTY */
 
     $.widget ( 'presto.noty', {
+
+        //FIXME: buttons are not showing properly
 
         /* TEMPLATES */
 
@@ -3367,19 +3369,19 @@ $.ready ( function () {
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
             title: '<p class="header-title large">' +
-                       '{%=o%}' +
+                       '{%#o%}' +
                    '</p>',
-            body: '{%=o%}',
+            body: '{%#o%}',
             single_button: '<div class="header-right">' +
-                               '{% include ( presto.noty.button, o ); %}' +
+                               '{% include ( "presto.noty.button", o ); %}' +
                            '</div>',
-            buttons: '<div class="noty_buttons multiple centered>' +
-                         '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                             '{% include ( "presto.noty.button", o[i] ); %}' +
-                         '{% } %}' +
+            buttons: '<div class="noty_buttons multiple centered">' +
+                        '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                            '{% include ( "presto.noty.button", o[i] ); %}' +
+                        '{% } %}' +
                      '</div>',
             button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "tiny")%} {%=(o.css || "")%}">' +
-                        '{%=(o.text || "")%}' +
+                        '{%#(o.text || "")%}' +
                     '</div>'
         },
 
@@ -3420,7 +3422,8 @@ $.ready ( function () {
 
             this.timer = false;
 
-            $('.noty_queue.' + this.options.anchor).append ( this.$element );
+            this.isOpen = false;
+            this.neverOpened = true;
 
         },
 
@@ -3465,7 +3468,7 @@ $.ready ( function () {
 
             if ( this.options.buttons.length === 0 && this.options.ttl !== 'forever' ) {
 
-                this.timer = $.timer ( this.close, this.options.ttl, true );
+                this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
 
                 timers.push ( this.timer );
 
@@ -3501,18 +3504,33 @@ $.ready ( function () {
 
         open: function () {
 
-            this.$element.removeClass ( 'hidden' );
+            if ( !this.isOpen ) {
 
-            $.reflow ();
+                $('.noty_queue.' + this.options.anchor).first ().append ( this.$element );
 
-            this.$element.addClass ( 'active' );
+                this.$element.removeClass ( 'hidden' );
 
-            this._init_click ();
-            this._init_buttons_click ();
-            this._init_hover ();
-            this._init_timer ();
+                $.reflow ();
 
-            this._trigger ( 'open' );
+                this.$element.addClass ( 'active' );
+
+                if ( this.neverOpened ) {
+
+                    this._init_click ();
+                    this._init_buttons_click ();
+                    this._init_hover ();
+
+                    this.neverOpened = false;
+
+                }
+
+                this._init_timer ();
+
+                this._trigger ( 'open' );
+
+                this.isOpen = true;
+
+            }
 
         },
 
@@ -3535,6 +3553,8 @@ $.ready ( function () {
             }, 200 );
 
             this._trigger ( 'close' );
+
+            this.isOpen = false;
 
         }
 

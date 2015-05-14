@@ -136,9 +136,9 @@
 
         /* CACHE TEMPLATES */
 
-        for ( var name in prototype.templates ) {
+        for ( var tmpl_name in prototype.templates ) {
 
-            $.tmpl.cache[originalName + '.' + name] = $.tmpl ( prototype.templates[name] );
+            $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
 
         }
 
@@ -182,7 +182,7 @@
 
         $.fn[name] = function ( options ) {
 
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on
+            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
 
             var isMethodCall = ( typeof options === 'string' ),
                 args = Array.prototype.slice.call ( arguments, 1 ),
@@ -201,7 +201,7 @@
 
                     /* GETTING INSTANCE */
 
-                    if ( options === "instance" ) {
+                    if ( options === 'instance' ) {
 
                         returnValue = instance;
 

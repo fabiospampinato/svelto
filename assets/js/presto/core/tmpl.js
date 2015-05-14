@@ -60,7 +60,7 @@
 
         var f = !/[^\w\-\.:]/.test ( str )
                     ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-                    : new Function ( tmpl.arg + ',tmpl', 'var _e=_.escape' + tmpl.helper + ',_s=\'' + str.replace ( tmpl.regexp, tmpl.func ) + '\';return _s;' );
+                    : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
 
         return data
                    ? f ( data, tmpl )
@@ -89,23 +89,23 @@
 
             if ( p2 === '=' ) {
 
-                return '"+_e(' + p3 + ')+"';
+                return "'+_e(" + p3 + ")+'";
 
             }
 
-            return '"+(' + p3 + '==null?"":' + p3 + ')+"';
+            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
 
         }
 
         if ( p4 ) { // evaluation start tag: {%
 
-            return '\';';
+            return "';";
 
         }
 
         if ( p5 ) { // evaluation end tag: %}
 
-            return '_s+=\'';
+            return "_s+='";
 
         }
 
@@ -113,7 +113,7 @@
 
     tmpl.arg = 'o';
 
-    tmpl.helper = ',print=function(s,e){_s+=e?(s==null?"":s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}';
+    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
 
     /* HELPER */
 
