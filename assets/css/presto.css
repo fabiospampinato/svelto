@@ -949,19 +949,18 @@ button {
   border-color: #cccccc ;
   color: #2f2f2f ;
   font-size: 1rem ;
-  display: inline-block;
+  display: -webkit-inline-box;
+  display: -webkit-inline-flex;
+  display: inline-flex;
   margin-bottom: 10px;
   border-radius: 0.2665rem;
   padding: 0.78571em 1.5em;
   font-weight: bold;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025);
-  position: relative;
-  outline: none !important;
-  vertical-align: middle;
   line-height: 1em;
   min-height: 1em;
   min-width: 1em;
-  overflow: hidden; }
+  cursor: pointer; }
   .button.transparentize {
     background: rgba(255, 255, 255, 0.9) ;}
   .button.gradient {
@@ -978,53 +977,62 @@ button {
       background: #000000 ;}
   html.dragging .button {
     cursor: move !important; }
+  .button > .button-left, .button > .button-right {
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 0.78571em 0.78571em;
+    min-width: 1em;
+    cursor: pointer; }
+  .button > .button-left {
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+            order: 1;
+    margin: -0.78571em 1.5em -0.78571em -1.5em; }
+  .button > .button-center {
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+            order: 2; }
+  .button > .button-right {
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+            order: 3;
+    margin: -0.78571em -1.5em -0.78571em 1.5em; }
   .button.inactive {
     opacity: 0.5;
     cursor: default; }
-    .button.inactive .sub {
-      opacity: 0.5;
-      cursor: default; }
-  .button:not(.inactive).actionable:active, .button:not(.inactive).active {
+    .button.inactive > .button-left, .button.inactive > .button-right {
+      opacity: 0.5; }
+  .button:not(.inactive):active, .button:not(.inactive).active {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
-  .button:not(.inactive) .sub.actionable:not(.inactive):not(.active):not(.dragging):hover {
-    background-color: rgba(0, 0, 0, 0.07); }
-  .button:not(.inactive) .sub.actionable:not(.inactive):not(.active):not(.dragging):active, .button:not(.inactive) .sub.actionable:not(.inactive):not(.active):not(.dragging).active {
-    background-color: rgba(0, 0, 0, 0.1);
-    box-shadow: inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
-  .button.actionable {
-    cursor: pointer; }
   .button.compact {
     padding: 0.78571em 0.78571em; }
-    .button.compact .sub.left {
+    .button.compact > .button-left {
       margin: -0.78571em 0.78571em -0.78571em -0.78571em; }
-    .button.compact .sub.right {
+    .button.compact > .button-right {
       margin: -0.78571em -0.78571em -0.78571em 0.78571em; }
   .button.outlined {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
-    .button.outlined:not(.inactive).actionable:active, .button.outlined:not(.inactive).active {
+    .button.outlined:not(.inactive):active, .button.outlined:not(.inactive).active {
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075), 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
-    .button.outlined .sub {
+    .button.outlined > .button-left, .button.outlined > .button-right {
       padding: calc(0.78571em - 1px) calc(0.78571em - 1px); }
-      .button.outlined .sub.left {
-        border-right: 1px solid rgba(0, 0, 0, 0.0625);
-        margin: calc(-0.78571em + 1px) calc(1.5em - 1px) -0.78571em -1.5em; }
-      .button.outlined .sub.right {
-        border-left: 1px solid rgba(0, 0, 0, 0.0625);
-        margin: calc(-0.78571em + 1px) -1.5em -0.78571em calc(1.5em - 1px); }
-    .button.outlined.compact .sub.left {
+    .button.outlined > .button-left {
+      border-right: 1px solid rgba(0, 0, 0, 0.0625);
+      margin: calc(-0.78571em + 1px) calc(1.5em - 1px) -0.78571em -1.5em; }
+    .button.outlined > .button-right {
+      border-left: 1px solid rgba(0, 0, 0, 0.0625);
+      margin: calc(-0.78571em + 1px) -1.5em -0.78571em calc(1.5em - 1px); }
+    .button.outlined.compact > .button-left {
       margin: calc(-0.78571em + 1px) calc(0.78571em - 1px) -0.78571em -0.78571em; }
-    .button.outlined.compact .sub.right {
+    .button.outlined.compact > .button-right {
       margin: calc(-0.78571em + 1px) -0.78571em -0.78571em calc(0.78571em - 1px); }
   .button.floating {
-    margin: 0 !important;
-    position: absolute;
-    right: 20px;
-    bottom: 20px;
+    margin-bottom: 0 !important;
+    position: fixed;
+    right: 30px;
+    bottom: 30px;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25); }
-    .button.floating.actionable:not(.inactive):not(.active):not(.dragging), .button.floating.actionable.active {
+    .button.floating:not(.inactive):not(.dragging):active, .button.floating.active {
       box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
-  .button .label {
-    display: inline-block; }
   .button .icon {
     font-size: 1.3em;
     margin: -0.115em; }
@@ -1032,19 +1040,6 @@ button {
       padding-right: 0.75em; }
     .button .icon.right {
       padding-left: 0.75em; }
-  .button .sub {
-    background-color: rgba(0, 0, 0, 0.05);
-    padding: 0.78571em 0.78571em;
-    min-width: 1em; }
-    .button .sub.left {
-      margin: -0.78571em 1.5em -0.78571em -1.5em; }
-    .button .sub.right {
-      margin: -0.78571em -1.5em -0.78571em 1.5em; }
-    .button .sub.actionable {
-      cursor: pointer; }
-    .button .sub.inactive {
-      opacity: 0.5;
-      cursor: default; }
 
 /* MESSAGES */
 #chat_messages .group {

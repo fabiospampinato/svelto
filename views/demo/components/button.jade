@@ -5,86 +5,92 @@ extends ../../layout.jade
 append body
     +divider Normal
 
-    .multiple
-        .button.actionable Base
-        .button.actionable.rounded Rounded
-        .button.actionable.compact Compact
-        .button.actionable.active Active
-        .button.actionable.inactive Inactive
+    +multiple
+        +button Base
+        +button.sharp Sharp
+        +button.rounded Rounded
+        +button.compact Compact
+        +button.active Active
+        +button.inactive Inactive
 
     +divider Outlined
 
-    .multiple
-        .button.actionable.outlined Outlined
-        .button.actionable.outlined
-            .sub.left
-                .icon.icon-action-settings
-            .label Outlined
-        .button.actionable.outlined
-            .label Outlined
-            .sub.right
-                .icon.icon-action-settings
-        .button.actionable.outlined.compact
-            .sub.left
-                .icon.icon-action-settings
-            .label Compact
-        .button.actionable.outlined.compact
-            .label Compact
-            .sub.right
-                .icon.icon-action-settings
+    +multiple
+        +button.outlined Outlined
+        +button.outlined
+            +button-left
+                +icon('action-settings')
+            +button-center Outlined
+        +button.outlined
+            +button-center Outlined
+            +button-right
+                +icon('action-settings')
+        +button.outlined.compact
+            +button-left
+                +icon('action-settings')
+            +button-center Compact
+        +button.outlined.compact
+            +button-center Compact
+            +button-right
+                +icon('action-settings')
 
     +divider Conditional
 
-    .multiple
+    +multiple
         .toolbar
-            .button.actionable.red Cancel
+            +button.red Cancel
             .conditional
-            .button.actionable.green Save
+            +button.green Save
 
     +divider Icon
 
-    .multiple
-        .button.actionable
-            .icon.icon-action-settings
-        .button.actionable.compact
-            .icon.icon-action-settings
-        .button.actionable.compact.rounded
-            .icon.icon-action-settings
-        .button.actionable
-            .icon.icon-action-settings.left
+    +multiple
+        +button
+            +icon('action-settings')
+        +button.compact
+            +icon('action-settings')
+        +button.compact.rounded
+            +icon('action-settings')
+        +button
+            +icon('action-settings').left
             | Settings
-        .button.actionable
-            .icon.icon-action-settings.right
+        +button
             | Settings
-        .button.actionable
-            .sub.left
-                .icon.icon-action-settings
-            .label Settings
-        .button.actionable
-            .label Settings
-            .sub.right
-                .icon.icon-action-settings
-        .button.actionable.compact
-            .sub.left
-                .icon.icon-action-settings
-            .label Settings
-        .button.actionable.compact
-            .label Settings
-            .sub.right
-                .icon.icon-action-settings
+            +icon('action-settings').right
+        +button
+            +button-left
+                +icon('action-settings')
+            +button-center Settings
+        +button
+            +button-center Settings
+            +button-right
+                +icon('action-settings')
+        +button.compact
+            +button-left
+                +icon('action-settings')
+            +button-center Settings
+        +button.compact
+            +button-center Settings
+            +button-right
+                +icon('action-settings')
 
     +divider Fluid
 
-    .multiple.fluid
-        .button.actionable Foo
-        .button.actionable Bar
-        .button.actionable Baz
-        .button.actionable Qux
+    +multiple.fluid
+        +button Foo
+        +button Bar
+        +button Baz
+        +button Qux
 
     +divider Vertical
 
-    .multiple.vertical
-        .button.actionable Foo
-        .button.actionable Bar
-        .button.actionable Baz
-        .button.actionable Qux
+    +multiple.vertical
+        +button Foo
+        +button Bar
+        +button Baz
+        +button Qux
+
+    +divider Floating
+
+    +button.floating.compact.rounded.secondary.huge
+        +icon('action-settings')

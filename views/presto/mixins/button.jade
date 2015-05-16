@@ -1,5 +1,28 @@
 //- button.jade
 
-mixin button
-    .button&attributes(attributes)
+mixin button(href)
+    if href
+        if href.slice ( 0, 11 ) === 'javascript:'
+            .button.actionable(onclick=href)&attributes(attributes)
+                block
+        else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+            .button.actionable(onclick="javascript:"+href)&attributes(attributes)
+                block
+        else
+            a.button.actionable(href=href)&attributes(attributes)
+                block
+    else
+        .button.actionable&attributes(attributes)
+            block
+
+mixin button-left
+    .button-left&attributes(attributes)
+        block
+
+mixin button-center
+    .button-center&attributes(attributes)
+        block
+
+mixin button-right
+    .button-right&attributes(attributes)
         block
