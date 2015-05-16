@@ -17,11 +17,11 @@
 }
 
 .smooth {
-    border-radius: $border-radius-normal;
+    border-radius: $border-radius-normal !important;
 }
 
 .sharp {
-    border-radius: 0px;
+    border-radius: 0px !important;
 }
 
 /* DISPLAY */

@@ -204,18 +204,18 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             // VARIABLES
 
             this.initializationType = element
-                                          ? 1
+                                          ? 'element'
                                           : this.defaultElement
-                                              ? 2
+                                              ? 'html'
                                               : this.templates.base
-                                                  ? 3
-                                                  : 4;
+                                                  ? 'template'
+                                                  : 'none';
 
             /* EXTEND OPTIONS */
 
             this.options = _.extend ( {}, this.options, this._getCreateOptions (), options );
 
-            if ( this.initializationType === 1 ) {
+            if ( this.initializationType === 'element' ) {
 
                 _.extend ( this.options, $(element).data ( this.widgetName ) );
 
@@ -495,6 +495,40 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _tmpl: function ( name, options ) {
 
             return $.tmpl ( this.widgetOriginalName + '.' + name, options );
+
+        },
+
+        /* MANIPULATION */
+
+        insertBefore: function ( selector ) {
+
+            this.$element.insertBefore ( selector );
+
+            return this;
+
+        },
+
+        insertAfter: function ( selector ) {
+
+            this.$element.insertAfter ( selector );
+
+            return this;
+
+        },
+
+        prependTo: function ( selector ) {
+
+            this.$element.prependTo ( selector );
+
+            return this;
+
+        },
+
+        appendTo: function ( selector ) {
+
+            this.$element.appendTo ( selector );
+
+            return this;
 
         }
 
@@ -3574,39 +3608,173 @@ $.ready ( function () {
 
 /* PROGRESS BAR */
 
-//TODO: add support for specific widths for each section
+//TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the childs)
+//TODO: make templates DRY
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
+    /* PRIVATE */
+
+    var generate_options = function ( options, multiple ) {
+
+        if ( !_.isUndefined ( multiple ) ) {
+
+            var new_options = { percentages: Array ( arguments.length ) };
+
+            for ( var i = 0, l = arguments.length; i < l; i++ ) {
+
+                new_options.percentages[i] = _.isNumber ( arguments[i] ) ? { value: arguments[i] } : arguments[i];
+
+            }
+
+        } else {
+
+            var new_options = _.isNumber ( options ) ? { percentages: [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+
+        }
+
+        return new_options;
+
+    };
+
+    /* HELPER */
+
+    $.progressBar = function ( options, multiple ) {
+
+        options = generate_options.apply ( null, arguments );
+
+        return new $.presto.progressBar ( options );
+
+    };
+
     /* PROGRESS BAR */
 
     $.widget ( 'presto.progressBar', {
+
+        /* OPTIONS */
+
+        options: {
+            percentages: [],
+            /*
+                       : [{
+                           value: 0,
+                           color: '',
+                           css: ''
+                       }],
+            */
+
+            color: '',
+            size: '',
+            css: '',
+
+            striped: false,
+            labeled: false,
+            decimals: 0,
+
+            callback: {
+                update: $.noop
+            }
+        },
+
+        /* TEMPLATES */
+
+        templates: {
+            base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
+                      '<div class="unhighlighted">' +
+                          '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
+                      '</div>' +
+                      '<div class="stripes"></div>' +
+                  '</div>',
+            percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                             '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
+                         '{% } %}',
+            percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                                     '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
+                                 '{% } %}',
+            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
+            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
+                                    '{% include ( "presto.progressBar.label", {} ); %}' +
+                                '</div>',
+            label: '<div class="label"></div>'
+        },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.$highlighted = this.$element.find ( '.highlighted' ),
-            this.$label = this.$highlighted.find ( '.label' ),
-            this.data_percentage = this.$element.data ( 'percentage' );
+            this.$highlighteds = this.$element.find ( '.highlighted' );
+            this.$stripes = this.$element.find ( '.stripes' );
+
+            if ( this.initializationType !== 'element' ) {
+
+                this._update ();
+
+            }
 
         },
 
-        _init: function ( percentage ) { //FIXME
+        /* PRIVATE */
 
-            if ( this.$element.hasClass ( 'fixed' ) ) return;
+        _update: function () {
 
-            if ( this.data_percentage !== undefined || percentage !== undefined ) {
+            for ( var i = 0, l = this.options.percentages.length; i < l; i++ ) {
 
-                var percentage_nr = ( percentage === undefined ) ? this.data_percentage / this.$highlighted.length : percentage / this.$highlighted.length;
+                var $highlighted = this.$highlighteds.eq ( i );
 
-                this.$highlighted.css ( 'min-width', percentage_nr + '%' );
+                $highlighted.width ( this.options.percentages[i].value + '%' );
 
-                this.$label.html ( percentage_nr + '%' );
+                if ( this.options.labeled ) {
+
+                    var $label = $highlighted.find ( '.label' );
+
+                    $label.html ( +(this.options.percentages[i].value).toFixed ( this.options.decimals ) );
+
+                }
 
             }
+
+            if ( this.options.striped ) {
+
+                //TODO: use the fixed _.sum function instead
+
+                var sum = 0,
+                    all = this.get ().slice ( 0, this.$highlighteds.length );
+
+                for ( var i = 0, l = all.length; i < l; i++ ) {
+
+                    sum += all[i];
+
+                }
+
+                this.$stripes.width ( sum + '%' );
+
+            }
+
+        },
+
+        /* PUBLIC */
+
+        get: function () {
+
+            return _.map ( this.options.percentages, function ( percentage ) {
+
+                return percentage.value;
+
+            });
+
+        },
+
+        set: function ( options, multiple ) {
+
+            options = generate_options.apply ( null, arguments );
+
+            _.extend ( this.options, options );
+
+            this._update ();
+
+            this._trigger ( 'update' );
 
         }
 
@@ -3616,7 +3784,26 @@ $.ready ( function () {
 
     $(function () {
 
-        $('.progressBar').progressBar ();
+        $('.progressBar').each ( function () {
+
+            var $progressBar = $(this),
+                options = {
+                    percentages: [],
+                    striped: $progressBar.hasClass ( 'striped' ),
+                    labeled: !!$progressBar.find ( '.label' ).length
+                };
+
+            $progressBar.find ( '.highlighted' ).each ( function () {
+
+                options.percentages.push ({
+                    value: parseFloat ( this.style.width )
+                });
+
+            });
+
+            $progressBar.progressBar ( options );
+
+        });
 
     });
 

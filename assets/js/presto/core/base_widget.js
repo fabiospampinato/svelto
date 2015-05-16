@@ -38,18 +38,18 @@
             // VARIABLES
 
             this.initializationType = element
-                                          ? 1
+                                          ? 'element'
                                           : this.defaultElement
-                                              ? 2
+                                              ? 'html'
                                               : this.templates.base
-                                                  ? 3
-                                                  : 4;
+                                                  ? 'template'
+                                                  : 'none';
 
             /* EXTEND OPTIONS */
 
             this.options = _.extend ( {}, this.options, this._getCreateOptions (), options );
 
-            if ( this.initializationType === 1 ) {
+            if ( this.initializationType === 'element' ) {
 
                 _.extend ( this.options, $(element).data ( this.widgetName ) );
 
@@ -329,6 +329,40 @@
         _tmpl: function ( name, options ) {
 
             return $.tmpl ( this.widgetOriginalName + '.' + name, options );
+
+        },
+
+        /* MANIPULATION */
+
+        insertBefore: function ( selector ) {
+
+            this.$element.insertBefore ( selector );
+
+            return this;
+
+        },
+
+        insertAfter: function ( selector ) {
+
+            this.$element.insertAfter ( selector );
+
+            return this;
+
+        },
+
+        prependTo: function ( selector ) {
+
+            this.$element.prependTo ( selector );
+
+            return this;
+
+        },
+
+        appendTo: function ( selector ) {
+
+            this.$element.appendTo ( selector );
+
+            return this;
 
         }
 

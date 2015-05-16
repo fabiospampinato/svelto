@@ -1,16 +1,21 @@
 //- progressBar.jade
 
-mixin progressBar(percentage, labeled)
-    .progressBar(data-percentage=percentage)&attributes(attributes)
-        .unhighlighted
-            if block
-                block
-            else
-                +progressBar-section(labeled)
+mixin progressBar(options, multiple)
+    if typeof multiple !== 'undefined'
+        - var new_options = { percentages: Array ( arguments.length ) };
+        - for ( var i = 0, l = arguments.length; i < l; i++ ) {
+            - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
+        - }
+    else
+        - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+    - options = new_options;
+    - var total = 0;
 
-mixin progressBar-section(labeled)
-    .highlighted&attributes(attributes)
-        if block
-            block
-        else if labeled
-            .label
+    .progressBar&attributes(attributes)
+        .unhighlighted
+            each percentage in options.percentages
+                - total += percentage.value;
+                .highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%"))
+                    if options.labeled
+                        .label= +(percentage.value).toFixed(options.decimals || 0)
+        .stripes(style=("width: " + total + "%"))

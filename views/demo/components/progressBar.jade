@@ -8,65 +8,70 @@ append body
     +container
         +progressBar(33)
         +progressBar(55).striped
-        +progressBar(55, true)
+        +progressBar({ percentages: [{ value: 45 }], labeled: true })
 
     +divider Colored
 
     +container
-        +progressBar(70)
-            +progressBar-section.yellow
-            +progressBar-section.green
-            +progressBar-section.pink
-            +progressBar-section.teal
-        +progressBar(20).striped
-            +progressBar-section.yellow
-            +progressBar-section.green
-            +progressBar-section.pink
-            +progressBar-section.teal
-        +progressBar(20)
-            +progressBar-section(true).yellow
-            +progressBar-section(true).green
-            +progressBar-section(true).pink
-            +progressBar-section(true).teal
-        +progressBar.fixed
-            +progressBar-section.yellow.w10-100
-            +progressBar-section.green.w20-100
-            +progressBar-section.pink.w30-100
-            +progressBar-section.teal.w40-100
+        +progressBar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' })
+        +progressBar({ value: 5, color: 'yellow' }, { value: 5, color: 'green' }, { value: 5, color: 'pink' }, { value: 5, color: 'teal' }).striped
+        +progressBar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
+        +progressBar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' })
 
     +divider Inactive
 
     +container
         +progressBar(45).inactive
         +progressBar(66).striped.inactive
-        +progressBar(24).inactive
-            +progressBar-section.yellow
-            +progressBar-section.green
-            +progressBar-section.pink
-            +progressBar-section.teal
-        +progressBar(70).inactive
-            +progressBar-section(true).yellow
-            +progressBar-section(true).green
-            +progressBar-section(true).pink
-            +progressBar-section(true).teal
-        +progressBar.fixed.inactive
-            +progressBar-section.yellow.w10-100
-            +progressBar-section.green.w20-100
-            +progressBar-section.pink.w30-100
-            +progressBar-section.teal.w40-100
+        +progressBar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).inactive
+        +progressBar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' }).inactive
+        +progressBar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' }).inactive
 
-    +divider Actions
+    +divider Created
 
-    .multiple
-        .button.actionable.outlined(onclick="javascript:progressBar_set ()") Default
-        .button.actionable.outlined(onclick="javascript:progressBar_set ( 0 )") Set 0%
-        .button.actionable.outlined(onclick="javascript:progressBar_set ( 25 )") Set 25%
-        .button.actionable.outlined(onclick="javascript:progressBar_set ( 50 )") Set 50%
-        .button.actionable.outlined(onclick="javascript:progressBar_set ( 75 )") Set 75%
-        .button.actionable.outlined(onclick="javascript:progressBar_set ( 100 )") Set 100%
+    .container.created
+
+    +multiple
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( 22 )") Basic
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( 0 )") Basic 0
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( { percentages: [{ value: 43.21 }], labeled: true } )") Labeled
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( { percentages: [{ value: 3.12332 }], labeled: true } )") Labeled small
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( { percentages: [{ value: 31.12382391823 }], labeled: true } )") Labeled long
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( { percentages: [{ value: 31.12382391823 }], labeled: true, decimals: 10 } )") Labeled long 10 decimals
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( { percentages: [{ value: 10 }, { value: 55 }], labeled: true } )") Multiple
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( 10, { value: 55, color: 'pink' } )") Multiple colors
+        +button.actionable.outlined(onclick="javascript:progressBar_create ( { percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true } )") Advanced
+
+    +divider Set single
+
+    +multiple
+        +button.actionable.outlined(onclick="javascript:progressBar_set_single ( 0 )") 0%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_single ( 25 )") 25%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_single ( 50 )") 50%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_single ( 75 )") 75%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_single ( 100 )") 100%
+
+    +divider Set multiple
+
+    +multiple
+        +button.actionable.outlined(onclick="javascript:progressBar_set_multiple ( 0, 10, 0, 0 )") 0% 10% 0%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_multiple ( 5, 10, 0, 0 )") 5% 10% 0%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_multiple ( 20, 5, 10, 5 )") 20% 5% 10% 5%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_multiple ( 40, 10, 5, 45 )") 40% 10% 5% 45%
+        +button.actionable.outlined(onclick="javascript:progressBar_set_multiple ( 10, 20, 30, 40 )") 10% 20% 30% 40%
 
 append body-end
     +script.
-        function progressBar_set ( percentage ) {
-            $(".progressBar").progressBar ( percentage );
+        function progressBar_set_single ( percentage ) {
+            $(".progressBar").each ( function () {
+                $(this).progressBar ( 'instance' ).set ( percentage, 0, 0, 0 );
+            });
+        }
+        function progressBar_set_multiple ( one, two, three, four ) {
+            $(".progressBar").each ( function () {
+                $(this).progressBar ( 'instance' ).set ( one, two, three, four );
+            });
+        }
+        function progressBar_create () {
+            $.progressBar.apply ( null, arguments ).appendTo ( '.container.created' );
         }

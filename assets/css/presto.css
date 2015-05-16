@@ -403,7 +403,7 @@
 /* SETTINGS */
 /* SETTINGS */
 /* SETTINGS */
-.progressBar.striped .highlighted:before {
+.progressBar.striped > .stripes {
   background: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.075) 25%, rgba(0, 0, 0, 0.075) 25%, rgba(0, 0, 0, 0.075) 50%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.075) 75%, rgba(0, 0, 0, 0.075) 75%, rgba(0, 0, 0, 0.075));
   background: linear-gradient(-45deg, rgba(255, 255, 255, 0.075) 25%, rgba(0, 0, 0, 0.075) 25%, rgba(0, 0, 0, 0.075) 50%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.075) 75%, rgba(0, 0, 0, 0.075) 75%, rgba(0, 0, 0, 0.075)); }
 
@@ -5088,65 +5088,71 @@ textarea {
   font-size: 1rem ;
   height: 1.07143em;
   margin-bottom: 10px;
+  border-radius: 1.07143em;
+  overflow: hidden;
   position: relative; }
-  .progressBar .unhighlighted {
+  .progressBar > .unhighlighted {
     background: #cccccc ;
     border-color: #999999 ;
     color: #2f2f2f ;
-    position: absolute;
-    top: 50%;
-    margin-top: -0.535715em;
-    border-radius: 1.07143em;
     height: 1.07143em;
-    position: absolute;
-    width: 100%; }
-    .progressBar .unhighlighted .highlighted {
+    width: 100%;
+    border-radius: inherit; }
+    .progressBar > .unhighlighted > .highlighted {
       background: #ff7043 ;
       border-color: #dc3500 ;
       color: #ffffff ;
-      display: inline-block;
       overflow: hidden;
       float: left;
       height: 1.07143em;
-      border-top-left-radius: inherit;
-      border-top-right-radius: inherit;
-      border-bottom-left-radius: inherit;
-      border-bottom-right-radius: inherit;
-      -webkit-transition: min-width 0.15s ease 0s;
-              transition: min-width 0.15s ease 0s;
-      min-width: 0;
+      -webkit-transition: width 0.15s ease 0s;
+              transition: width 0.15s ease 0s;
+      width: 0;
       position: relative;
-      text-align: center; }
-      .progressBar .unhighlighted .highlighted:not(:first-child) {
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0; }
-      .progressBar .unhighlighted .highlighted:not(:last-child) {
-        border-top-right-radius: 0;
-        border-bottom-right-radius: 0; }
-      .progressBar .unhighlighted .highlighted .label {
+      text-align: center;
+      text-overflow: ellipsis; }
+      .progressBar > .unhighlighted > .highlighted > .label {
+        position: absolute;
+        top: 50%;
+        margin-top: -0.535715em;
+        left: 0;
+        right: 0;
         padding-left: 0.5em;
         padding-right: 0.5em;
-        font-size: 0.9em; }
-  .progressBar.striped .highlighted:before {
+        font-size: 0.8em;
+        z-index: 1; }
+  .progressBar > .stripes {
+    display: none;
+    position: absolute;
+    left: 0;
+    top: 0; }
+  .progressBar.striped > .stripes {
+    display: block;
     background-size: 3.33333em 3.33333em;
     content: '';
     display: block;
-    width: 100%;
+    width: 0%;
     height: 100%;
-    border-radius: 1.07143em; }
-  .progressBar:not(.inactive) .unhighlighted .highlighted:before {
+    -webkit-transition: width 0.15s ease 0s;
+            transition: width 0.15s ease 0s; }
+  .progressBar.striped:not(.inactive) > .stripes {
     -webkit-animation: 2s linear 0s normal none infinite running move;
             animation: 2s linear 0s normal none infinite running move; }
-  .progressBar.inactive .unhighlighted .highlighted {
+  .progressBar.inactive > .unhighlighted > .highlighted {
     background: #cccccc !important;
     border-color: #999999 !important;
     color: #2f2f2f !important; }
-    .progressBar.inactive .unhighlighted .highlighted:not(:first-child) {
+    .progressBar.inactive > .unhighlighted > .highlighted:not(:first-child) {
       box-shadow: -0.13333em 0 0 0 rgba(0, 0, 0, 0.15); }
-    .progressBar.inactive .unhighlighted .highlighted:last-child {
+    .progressBar.inactive > .unhighlighted > .highlighted:last-child {
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
       box-shadow: 0.33333em 0 0 0 #ffffff; }
-    .progressBar.inactive .unhighlighted .highlighted:last-child:not(:first-child) {
+    .progressBar.inactive > .unhighlighted > .highlighted:last-child:not(:first-child) {
       box-shadow: -0.13333em 0 0 0 rgba(0, 0, 0, 0.15), 0.33333em 0 0 0 #ffffff; }
+  .progressBar.inactive > .stripes {
+    border-top-right-radius: inherit;
+    border-bottom-right-radius: inherit; }
 
 @-webkit-keyframes move {
   0% {
@@ -5828,10 +5834,10 @@ dd {
   border-radius: 10000px 10000px !important; }
 
 .smooth {
-  border-radius: 0.2665rem; }
+  border-radius: 0.2665rem !important; }
 
 .sharp {
-  border-radius: 0px; }
+  border-radius: 0px !important; }
 
 /* DISPLAY */
 .show {
