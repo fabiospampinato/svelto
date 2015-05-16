@@ -66,7 +66,7 @@
             labeled: false,
             decimals: 0,
 
-            callback: {
+            callbacks: {
                 update: $.noop
             }
         },

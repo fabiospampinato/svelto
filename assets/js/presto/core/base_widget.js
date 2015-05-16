@@ -28,7 +28,7 @@
 
         options: {
             disabled: false, //TODO: init/set it dinamically on instantiation
-            callback: {}
+            callbacks: {}
         },
 
         /* WIDGET FUNCTIONS */
@@ -300,9 +300,9 @@
 
                 this.$element.trigger ( this.widgetName + ':' + events[ei], data );
 
-                if ( typeof this.options.callback[events[ei]] === 'function' ) {
+                if ( typeof this.options.callbacks[events[ei]] === 'function' ) {
 
-                    this.options.callback[events[ei]].call ( this.element, data );
+                    this.options.callbacks[events[ei]].call ( this.element, data );
 
                 }
 

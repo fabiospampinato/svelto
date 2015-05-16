@@ -299,7 +299,7 @@
 
                     };
 
-                    event[lQuery.event.eventMethods[method]] = lQuery.false;
+                    event[this.eventMethods[method]] = lQuery.false;
 
                 }
 

@@ -8,6 +8,22 @@
 
     'use strict';
 
+    /* PRIVATE */
+
+    var clear_selection = function () {
+
+        if ( document.selection ) {
+
+            document.selection.empty ();
+
+        } else if ( window.getSelection ) {
+
+            window.getSelection ().removeAllRanges ();
+
+        }
+
+    };
+
     /* SELECTABLE */
 
     $.widget ( 'presto.selectable', {
@@ -17,37 +33,10 @@
         options: {
             selector: 'tbody tr',
             not_selector: '.empty',
-            selected_class: 'selected'
-        },
-
-        /* UTILITIES */
-
-        _clear_selection: function () {
-
-            if ( document.selection ) {
-
-                document.selection.empty ();
-
-            } else if ( window.getSelection ) {
-
-                window.getSelection ().removeAllRanges ();
-
+            selected_class: 'selected',
+            callbacks: {
+                //TODO
             }
-
-        },
-
-        _reset_vars: function () {
-
-            this.$prev_row = false;
-            this.$prev_shifted = false;
-            this.$prev_dragged = false;
-
-        },
-
-        _get_rows: function () {
-
-            return this.$element.find ( this.options.selector ).not ( this.options.not_selector );
-
         },
 
         /* SPECIAL */
@@ -59,7 +48,7 @@
             this.$start_row = false;
             this.$end_row = false;
 
-            this._reset_vars ();
+            this._reset_prevs ();
 
             this._bind_keys ();
             this._bind_mouse ();
@@ -71,23 +60,15 @@
 
         _bind_keys: function () {
 
-            var instance = this;
+            this._on ( 'mouseenter', function () {
 
-            this.$element.on ( 'mouseenter', function () {
+                this._on ( $document, 'keydown', this._handler_keys );
 
-                $document.on ( 'keydown', function ( event ) {
+            });
 
-                    instance._handler_keys ( event );
+            this._on ( 'mouseleave', function () {
 
-                });
-
-            }).on ( 'mouseleave', function () {
-
-                $document.off ( 'keydown', function ( event ) {
-
-                    instance._handler_keys ( event );
-
-                });
+                $document.off ( 'keydown', this._handler_keys );
 
             });
 
@@ -99,17 +80,17 @@
 
                 if ( event.keyCode === 65 ) { //INFO: A
 
-                    event.preventDefault ();
+                    event.preventDefault (); //FIXME
 
-                    this._reset_vars ();
+                    this._reset_prevs ();
 
-                    this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not
+                    this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not //FIXME: only works if the last character pushed is the `A`, but is it an unwanted behaviour?
 
                 } else if ( event.keyCode === 73 ) { //INFO: I
 
                     event.preventDefault ();
 
-                    this._reset_vars ();
+                    this._reset_prevs ();
 
                     this.$rows.toggleClass ( this.options.selected_class );
 
@@ -123,35 +104,19 @@
 
         _bind_mouse: function () {
 
-            var instance = this;
-
-            this.$rows.on ( 'mousedown', function ( event ) {
-
-                instance._handler_mousedown ( event );
-
-            });
+            this._on ( this.$rows, 'mousedown', this._handler_mousedown );
 
         },
 
         _handler_mousedown: function ( event ) {
 
-            if ( event.button !== 0 ) return;
+            if ( event.button !== 0 ) return; //INFO: Left click
 
-            var instance = this;
+            this.$start_row = $(event.currentTarget);
 
-            this.$start_row = $(this);
+            this._on ( $document, 'mousemove', this._handler_mousemove );
 
-            $document.mousemove ( function ( event ) {
-
-                instance._handler_mousemove ( event );
-
-            });
-
-            this.$start_row.mouseup ( function ( event ) {
-
-                instance._handler_mouseup ( event );
-
-            });
+            this._on ( this.$start_row, 'mouseup', this._handler_mouseup );
 
         },
 
@@ -159,15 +124,13 @@
 
             //FIXME
 
-            if ( !event.ctrlKey ) return;
-
-            var instance = this;
+            if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
 
             $document.off ( 'mousemove', this._handler_mousemove );
 
             this.$start_row.off ( 'mouseup', this._handler_mouseup );
 
-            this._reset_vars ();
+            this._reset_prevs ();
 
             this.$prev_row = this.$start_row;
 
@@ -175,15 +138,15 @@
 
             $html.addClass ( 'dragging' );
 
-            this.$rows.on ( 'mouseenter', this._handler_drag_mouseenter );
+            this._on ( this.$rows, 'mouseenter', this._handler_drag_mouseenter );
 
-            $document.on ( 'mouseup', this._handler_drag_mouseup );
+            this._on ( $document, 'mouseup', this._handler_drag_mouseup );
 
         },
 
         _handler_drag_mouseenter: function ( event ) { // DRAG HOVER
 
-            this.$end_row = $(this);
+            this.$end_row = $(event.currentTarget);
 
             var start_index = this.$rows.index ( this.$start_row ),
                 end_index = this.$rows.index ( this.$end_row ),
@@ -215,7 +178,7 @@
 
         },
 
-        _handler_drag_mouseup: function ( event ) { // DRAG END
+        _handler_drag_mouseup: function () { // DRAG END
 
             this.$rows.off ( 'mouseenter', this._handler_drag_mouseenter );
 
@@ -263,13 +226,13 @@
 
                 this.$prev_shifted = $new_shifted;
 
-            } else if ( event.ctrlKey ) {
+            } else if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) {
 
                 this.$start_row.toggleClass ( this.options.selected_class );
 
-                this._reset_vars ();
+                this._reset_prevs ();
 
-                this.$prev_row = $start_row;
+                this.$prev_row = this.$start_row;
 
             } else {
 
@@ -277,7 +240,7 @@
 
                 this.$start_row.addClass ( this.options.selected_class );
 
-                this._reset_vars ();
+                this._reset_prevs ();
 
                 this.$prev_row = this.$start_row;
 
@@ -289,21 +252,43 @@
 
         _bind_others: function () {
 
-            this.$element.on ( 'change sort', this._handler_change_sort );
+            //FIXME: support tableHelper and sortable
 
-            this.$element.on ( 'mousedown mouseup', this._handler_clear_selection );
+            this._on ( 'change sort', this._handler_change_sort );
+
+            this._on ( 'mousedown mouseup', this._handler_clear_selection );
 
         },
 
         _handler_change_sort: function () {
 
-            this.$rows = _get_rows ();
+            this.$rows = this._get_rows ();
 
         },
 
         _handler_clear_selection: function () {
 
-            $.defer ( this._clear_selection );
+            $.reflow ();
+
+            clear_selection ();
+
+        },
+
+        /* PRIVATE */
+
+        _reset_prevs: function () {
+
+            this.$prev_row = false;
+            this.$prev_shifted = false;
+            this.$prev_dragged = false;
+
+        },
+
+        _get_rows: function () {
+
+            var $found = this.$element.find ( this.options.selector );
+
+            return this.options.not_selector ? $found.not ( this.options.not_selector ) : $found;
 
         }
 
