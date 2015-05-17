@@ -1,6 +1,8 @@
 
 /* NOTY */
 
+//TODO: add support for swipe to dismiss
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';

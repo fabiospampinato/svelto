@@ -4774,7 +4774,7 @@ textarea {
     opacity: 0.4;
     pointer-events: none; }
 
-/* MODALS */
+/* MODAL */
 .modal {
   position: fixed;
   width: 100%;
@@ -4785,7 +4785,7 @@ textarea {
   right: 0;
   z-index: 50;
   display: none; }
-  .modal .background {
+  .modal > .background {
     background-color: transparent;
     position: fixed;
     width: 100%;
@@ -4794,10 +4794,11 @@ textarea {
     left: 0;
     bottom: 0;
     right: 0;
+    cursor: pointer;
     z-index: -1;
     -webkit-transition: background-color 0.2s ease 0s;
             transition: background-color 0.2s ease 0s; }
-  .modal .container {
+  .modal > .container {
     width: 400px;
     box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25);
     opacity: 0;
@@ -4809,13 +4810,11 @@ textarea {
             transform: translate(-50%, -50%) scale(0.9);
     -webkit-transition: -webkit-transform 0.2s ease 0s, opacity 0.2s ease 0s;
             transition: transform 0.2s ease 0s, opacity 0.2s ease 0s; }
-    .modal .container .content {
+    .modal > .container > .content {
       overflow: auto; }
-  .modal .closing {
-    cursor: pointer; }
-  .modal.active .background {
+  .modal.active > .background {
     background-color: rgba(0, 0, 0, 0.45); }
-  .modal.active .container {
+  .modal.active > .container {
     opacity: 1;
     -webkit-transform: translate(-50%, -50%) scale(1);
             transform: translate(-50%, -50%) scale(1); }

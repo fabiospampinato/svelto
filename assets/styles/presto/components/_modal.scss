@@ -1,5 +1,5 @@
 
-/* MODALS */
+/* MODAL */
 
 .modal {
 
@@ -13,7 +13,7 @@
     z-index: 50;
     display: none;
 
-    .background {
+    & > .background {
         background-color: transparent;
         position: fixed;
         width: 100%;
@@ -22,11 +22,12 @@
         left: 0;
         bottom: 0;
         right: 0;
+        cursor: pointer;
         z-index: -1;
         transition: background-color 0.2s ease 0s;
     }
 
-    .container {
+    & > .container {
 
         width: $modal-normal-width;
         box-shadow: $shadow-depth-5;
@@ -38,23 +39,19 @@
         transform: translate(-50%, -50%) scale(0.9);
         transition: transform 0.2s ease 0s, opacity 0.2s ease 0s;
 
-        .content {
+        & > .content {
             overflow: auto;
         }
 
     }
 
-    .closing {
-        cursor: pointer;
-    }
-
     &.active {
 
-        .background {
+        & > .background {
             background-color: $modal-bg-color;
         }
 
-        .container {
+        & > .container {
             opacity: 1;
             transform: translate(-50%, -50%) scale(1);
         }

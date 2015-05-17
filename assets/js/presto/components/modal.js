@@ -9,16 +9,22 @@
 
     $.widget ( 'presto.modal', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                open: $.noop,
+                close: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
 
-            this.modal_id = this.$element.data ( 'modal' );
-            this.$modal = $('#' + this.modal_id);
-            this.$closing = this.$modal.find ( '.closing' );
+            this.$closers = this.$element.find ( '.modal-closer' );
 
-            this.$element.on ( 'click', this.open );
-            this.$closing.on ( 'click', this.close );
+            this._on ( this.$closers, 'click', this.close );
 
         },
 
@@ -26,7 +32,7 @@
 
         _handler_esc_keydown: function ( event ) {
 
-            if ( event.keyCode === 27 ) { // esc
+            if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
                 this.close ();
 
@@ -38,29 +44,33 @@
 
         open: function () {
 
-            this.$modal.addClass ( 'show' );
+            this.$element.addClass ( 'show' );
 
-            this.$modal.defer ( function () {
+            $.reflow ();
 
-                this.addClass ( 'active' );
+            this.$element.addClass ( 'active' );
 
-            });
+            this._on ( $document, 'keydown', this._handler_esc_keydown );
 
-            $document.on ( 'keydown', this._handler_esc_keydown );
+            this._trigger ( 'open' );
 
         },
 
         close: function () {
 
-            this.$modal.removeClass ( 'active' );
+            this.$element.removeClass ( 'active' );
 
-            this.$modal.defer ( function () {
+            $.reflow ();
 
-                this.removeClass ( 'show' );
+            this._delay ( function () {
+
+                this.$element.removeClass ( 'show' );
 
             }, 200 );
 
             $document.off ( 'keydown', this._handler_esc_keydown );
+
+            this._trigger ( 'close' );
 
         }
 
@@ -70,7 +80,13 @@
 
     $(function () {
 
-        $('.modal_trigger').modal ();
+        $('.modal').modal ();
+
+        $('[data-modal-trigger]').on ( 'click', function () {
+
+            $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
+
+        });
 
     });
 

@@ -1,6 +1,8 @@
 
 /* MEDIA QUERIES */
 
+//TODO: add support for expanded noty, maybe some kind of alert message or stuff like that
+
 @include max-screen ( $noty-full-breakpoint ) {
 
     .noty_queue, .noty_wrp, .noty {
