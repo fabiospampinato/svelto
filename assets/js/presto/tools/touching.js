@@ -1,6 +1,7 @@
 
 /* TOUCHING */
 
+//TODO: rewrite it, with two operating way: 1) chose the one with the most overlapping area 2) chose all that have an overlapping area greater and 0
 //TODO: make it also able to return more than one match
 
 ;(function ( $, window, document, undefined ) {

@@ -3,20 +3,23 @@
 extends ../../layout.jade
 
 append body
-+divider Normal
+    +divider Normal
+
     .multiple
         input(type="text", name="input_1", value="Base")
         input(type="text", name="input_1", value="Inactive").inactive
         input(type="text", name="input_1", value="Disabled" disabled="disabled")
 
-+divider Fluid
+    +divider Fluid
+
     .multiple.fluid
         input(type="text", name="input_1", value="Foo")
         input(type="text", name="input_1", value="Bar")
         input(type="text", name="input_1", value="Baz")
         input(type="text", name="input_1", value="Qux")
 
-+divider Toolbar
+    +divider Toolbar
+
     .multiple
         .toolbar
             input(type="text", name="input_1", value="Search")
@@ -47,7 +50,8 @@ append body
                 .label Checkout
             input(type="text", name="input_1", value="34.50€")
 
-+divider Toolbar - Outlined
+    +divider Toolbar - Outlined
+
     .multiple
         .toolbar
             input(type="text", name="input_1", value="Outlined").outlined
@@ -59,13 +63,15 @@ append body
             .button.gray http://
             input(type="text", name="input_1", placeholder="Outlined..." class="outlined")
 
-+divider Toolbar - Opacify
+    +divider Toolbar - Opacify
+
     .toolbar.opacify
         input(type="text", name="input_1", value="Opaciy")
         .button.compact
             .icon.icon-action-search
 
-+divider Toolbar - Loading
+    +divider Toolbar - Loading
+
     .multiple
         #loadable.toolbar
             input(type="text", name="input_1", value="Search...")

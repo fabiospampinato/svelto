@@ -1,0 +1,12 @@
+//- bootstrap/autogrow.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Input
+
+    input(value="Content of the input...").autogrow
+
+    +divider Textarea
+
+    textarea.autogrow Content of the textarea...

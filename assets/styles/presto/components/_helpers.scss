@@ -154,6 +154,14 @@
     animation: rotate 0.9s linear infinite;
 }
 
+/* OTHER */
+
+.centerize { //TODO: Maybe remove this, or find a better name
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 /* GROW */
 
 @for $nr from 1 through 10 {

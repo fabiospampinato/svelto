@@ -2385,6 +2385,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TOUCHING */
 
+//TODO: rewrite it, with two operating way: 1) chose the one with the most overlapping area 2) chose all that have an overlapping area greater and 0
 //TODO: make it also able to return more than one match
 
 ;(function ( $, window, document, undefined ) {
@@ -5363,6 +5364,54 @@ $.ready ( function () {
 
 
 
+/* BINARY TREE .each() */
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* BINARY TREE .each () */
+
+    $.fn.btEach = function ( callback, start_center ) {
+
+        var start = 0,
+            end = this.length - 1,
+            center = 0,
+            iterations = 0,
+            result = false;
+
+        while ( start <= end ) {
+
+            center = ( iterations === 0 && typeof start_center === 'number' ) ? start_center : Math.ceil ( ( start + end ) / 2 );
+
+            result = callback.call ( this.get ( center ), center, this.get ( center ) );
+
+            iterations += 1;
+
+            if ( result < 0 ) {
+
+                end = center - 1;
+
+            } else if ( result > 0 ) {
+
+                start = center + 1;
+
+            } else {
+
+                return center;
+
+            }
+
+        }
+
+        return false;
+
+    };
+
+}( lQuery, window, document ));
+
+
+
 /* TIME AGO */
 
 ;(function ( $, window, document, undefined ) {
@@ -5429,54 +5478,6 @@ $.ready ( function () {
         $('[data-timestamp]').timeAgo ();
 
     });
-
-}( lQuery, window, document ));
-
-
-
-/* BINARY TREE .each() */
-
-;(function ( $, window, document, undefined ) {
-
-    'use strict';
-
-    /* BINARY TREE .each () */
-
-    $.fn.btEach = function ( callback, start_center ) {
-
-        var start = 0,
-            end = this.length - 1,
-            center = 0,
-            iterations = 0,
-            result = false;
-
-        while ( start <= end ) {
-
-            center = ( iterations === 0 && typeof start_center === 'number' ) ? start_center : Math.ceil ( ( start + end ) / 2 );
-
-            result = callback.call ( this.get ( center ), center, this.get ( center ) );
-
-            iterations += 1;
-
-            if ( result < 0 ) {
-
-                end = center - 1;
-
-            } else if ( result > 0 ) {
-
-                start = center + 1;
-
-            } else {
-
-                return center;
-
-            }
-
-        }
-
-        return false;
-
-    };
 
 }( lQuery, window, document ));
 

@@ -614,12 +614,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/assets\/js\/presto\/tools\/btEach.js": {
+	"\/assets\/js\/presto\/tools\/BTeach.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
-		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/btEach.js",
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/BTeach.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/BTeach.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -713,12 +713,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/assets\/js\/presto\/tools\/timeAgo.js": {
+	"\/assets\/js\/presto\/tools\/timeago.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
-		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/timeAgo.js",
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeago.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/timeago.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -2090,6 +2090,15 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
+	"\/index.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/index.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/index.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2967,6 +2976,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/tools\/autogrow.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/autogrow.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/tools\/autogrow.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2997,6 +3015,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/btEach.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/btEach.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/tools\/btEach.jade": {
 		"compileDebug": 0,
@@ -3791,13 +3818,13 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/BTeach.js",
 			"position": 37,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeago.js",
 			"position": 38,
 			"type": 0
 			}

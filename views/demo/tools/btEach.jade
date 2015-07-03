@@ -1,0 +1,201 @@
+//- tools/btEach.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Squares
+
+    +container
+        +multiple.squares
+            +square.enormous.centerize
+                span.small 1
+            +square.enormous.centerize
+                span.small 2
+            +square.enormous.centerize
+                span.small 3
+            +square.enormous.centerize
+                span.small 4
+            +square.enormous.centerize
+                span.small 5
+            +square.enormous.centerize
+                span.small 6
+            +square.enormous.centerize
+                span.small 7
+            +square.enormous.centerize
+                span.small 8
+            +square.enormous.centerize
+                span.small 9
+            +square.enormous.centerize
+                span.small 10
+            +square.enormous.centerize
+                span.small 11
+            +square.enormous.centerize
+                span.small 12
+            +square.enormous.centerize
+                span.small 13
+            +square.enormous.centerize
+                span.small 14
+            +square.enormous.centerize
+                span.small 15
+            +square.enormous.centerize
+                span.small 16
+            +square.enormous.centerize
+                span.small 17
+            +square.enormous.centerize
+                span.small 18
+            +square.enormous.centerize
+                span.small 19
+            +square.enormous.centerize
+                span.small 20
+            +square.enormous.centerize
+                span.small 21
+            +square.enormous.centerize
+                span.small 22
+            +square.enormous.centerize
+                span.small 23
+            +square.enormous.centerize
+                span.small 24
+            +square.enormous.centerize
+                span.small 25
+            +square.enormous.centerize
+                span.small 26
+            +square.enormous.centerize
+                span.small 27
+            +square.enormous.centerize
+                span.small 28
+            +square.enormous.centerize
+                span.small 29
+            +square.enormous.centerize
+                span.small 30
+            +square.enormous.centerize
+                span.small 31
+            +square.enormous.centerize
+                span.small 32
+            +square.enormous.centerize
+                span.small 33
+            +square.enormous.centerize
+                span.small 34
+            +square.enormous.centerize
+                span.small 35
+            +square.enormous.centerize
+                span.small 36
+            +square.enormous.centerize
+                span.small 37
+            +square.enormous.centerize
+                span.small 38
+            +square.enormous.centerize
+                span.small 39
+            +square.enormous.centerize
+                span.small 40
+            +square.enormous.centerize
+                span.small 41
+            +square.enormous.centerize
+                span.small 42
+            +square.enormous.centerize
+                span.small 43
+            +square.enormous.centerize
+                span.small 44
+            +square.enormous.centerize
+                span.small 45
+            +square.enormous.centerize
+                span.small 46
+            +square.enormous.centerize
+                span.small 47
+            +square.enormous.centerize
+                span.small 48
+            +square.enormous.centerize
+                span.small 49
+            +square.enormous.centerize
+                span.small 50
+            +square.enormous.centerize
+                span.small 51
+            +square.enormous.centerize
+                span.small 52
+            +square.enormous.centerize
+                span.small 53
+            +square.enormous.centerize
+                span.small 54
+            +square.enormous.centerize
+                span.small 55
+            +square.enormous.centerize
+                span.small 56
+            +square.enormous.centerize
+                span.small 57
+            +square.enormous.centerize
+                span.small 58
+            +square.enormous.centerize
+                span.small 59
+            +square.enormous.centerize
+                span.small 60
+            +square.enormous.centerize
+                span.small 61
+            +square.enormous.centerize
+                span.small 62
+            +square.enormous.centerize
+                span.small 63
+            +square.enormous.centerize
+                span.small 64
+
+    +divider Actions
+
+    +multiple
+        .toolbar
+            input(id="input", type="number", name="input", placeholder="Search number...")
+            #search.button.actionable.primary(onclick="javascript:search()") Search
+        .toolbar
+            input(id="populate_input", type="number", name="input2", placeholder="Squares number...")
+            #populate.button.actionable.secondary(onclick="javascript:populate()") Populate
+        #clear.button.actionable.black(onclick="javascript:reset()") Clear
+
+append body-end
+    +script.
+        var $squares,
+            $input,
+            search_nr,
+            iterations = 0;
+
+        function populate () {
+            var html = '';
+
+            for ( var i = 0, l = $('#populate_input').val (); i < l; i++ ) {
+                html += '<div class="square enormous centerize" style=""><span class="small">' + (i + 1) + '</span></div>';
+            }
+
+            $('.squares').empty ().append ( html );
+
+            $squares = $document.find ( '.square' );
+        }
+
+        function search () {
+            reset ();
+            search_nr = Number($input.val ());
+            $squares.btEach ( comparer );
+        }
+
+        function comparer () {
+            var $node = $(this),
+                found_nr = Number($node.find('span').html ());
+
+            iterations += 1;
+
+            if ( found_nr < search_nr ) {
+                $node.attr ( 'style', 'background-color:rgba(255, 0, 0, ' + ( 0.8 - ( 0.15 * iterations ) ) + ');' );
+                return 1;
+            } else if ( found_nr > search_nr ) {
+                $node.attr ( 'style', 'background-color:rgba(0, 0, 255, ' + ( 0.8 - ( 0.15 * iterations ) ) + ');' );
+                return -1;
+            } else {
+                $node.attr ( 'style', 'background-color:#00ff00;' );
+                return 0;
+            }
+        }
+
+        function reset () {
+            iterations = 0;
+            $squares.attr ( 'style', '' );
+        }
+
+        $(function () {
+            $squares = $document.find ( '.square' );
+            $input = $('#input');
+        });

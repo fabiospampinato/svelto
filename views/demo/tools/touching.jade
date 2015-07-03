@@ -1,0 +1,107 @@
+//- tools/touching.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Squares
+
+    +container
+        +multiple.squares
+            +square.enormous.centerize
+                span.small 1
+            +square.enormous.centerize
+                span.small 2
+            +square.enormous.centerize
+                span.small 3
+            +square.enormous.centerize
+                span.small 4
+            +square.enormous.centerize
+                span.small 5
+            +square.enormous.centerize
+                span.small 6
+            +square.enormous.centerize
+                span.small 7
+            +square.enormous.centerize
+                span.small 8
+            +square.enormous.centerize
+                span.small 9
+            +square.enormous.centerize
+                span.small 10
+            +square.enormous.centerize
+                span.small 11
+            +square.enormous.centerize
+                span.small 12
+            +square.enormous.centerize
+                span.small 13
+            +square.enormous.centerize
+                span.small 14
+            +square.enormous.centerize
+                span.small 15
+            +square.enormous.centerize
+                span.small 16
+            +square.enormous.centerize
+                span.small 17
+            +square.enormous.centerize
+                span.small 18
+            +square.enormous.centerize
+                span.small 19
+            +square.enormous.centerize
+                span.small 20
+            +square.enormous.centerize
+                span.small 21
+            +square.enormous.centerize
+                span.small 22
+            +square.enormous.centerize
+                span.small 23
+            +square.enormous.centerize
+                span.small 24
+            +square.enormous.centerize
+                span.small 25
+            +square.enormous.centerize
+                span.small 26
+            +square.enormous.centerize
+                span.small 27
+            +square.enormous.centerize
+                span.small 28
+            +square.enormous.centerize
+                span.small 29
+            +square.enormous.centerize
+                span.small 30
+            +square.enormous.centerize
+                span.small 31
+            +square.enormous.centerize
+                span.small 32
+
+    +divider Actions
+
+    .toolbar
+        input(id="populate_input", type="number", name="input2", placeholder="Squares number...")
+        #populate.button.actionable.secondary(onclick="javascript:populate()") Populate
+
+append body-end
+    +script.
+        var $squares;
+
+        function populate () {
+            var html = '';
+
+            for ( var i = 0, l = $('#populate_input').val (); i < l; i++ ) {
+                html += '<div class="square enormous centerize" style=""><span class="small">' + (i + 1) + '</span></div>';
+            }
+
+            $('.squares').empty ().append ( html );
+
+            $squares = $document.find ( '.square' );
+        }
+
+
+
+        function reset () {
+            iterations = 0;
+            $squares.attr ( 'style', '' );
+        }
+
+        $(function () {
+            $squares = $document.find ( '.square' );
+            $input = $('#input');
+        });
