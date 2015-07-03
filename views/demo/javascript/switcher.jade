@@ -3,35 +3,12 @@
 extends ../../layout.jade
 
 append body
-+divider Switcher
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .container
-                    .switcher
-                        input(type="checkbox", value="Something", name="switcher_name")
-                        .bar
-                            .handler
-                    .switcher.inactive
-                        input(type="checkbox", value="Something", name="switcher_name", checked="checked")
-                        .bar
-                            .handler
-                    .switcher
-                        input(type="checkbox", value="Something", name="switcher_name")
-                        .bar
-                            .handler
-                                .icon.icon-content-add
-                    .switcher.inactive
-                        input(type="checkbox", value="Something", name="switcher_name")
-                        .bar
-                            .handler
-                                .icon.icon-content-add
-                    .switcher(data-theme-on="green", data-theme-off="red")
-                        input(type="checkbox", value="Something", name="switcher_name")
-                        .bar
-                            .handler
-                    .switcher(data-theme-on="yellow", data-theme-off="teal", data-icon-on="icon-action-favorite", data-icon-off="icon-action-favorite-outline")
-                        input(type="checkbox", value="Something", name="switcher_name")
-                        .bar
-                            .handler
-                                .icon
+    +divider Switcher
+
+    +container
+        +switcher("name", "Value")
+        +switcher("name2", "Value2", true).presto-switcher-disabled
+        +switcher({name:"name3", value:"Value3", icons:{on:"content-add"}})
+        +switcher({name:"name4", value:"Value4", icons:{on:"content-add"}}).presto-switcher-disabled
+        +switcher({name:"name5", value:"Value5", checked:true, colors:{on:"green",off:"red"}})
+        +switcher({name:"name6", value:"Value6", colors:{on:"green",off:"red"}, icons:{on:"action-favorite", off:"action-favorite-outline"}})

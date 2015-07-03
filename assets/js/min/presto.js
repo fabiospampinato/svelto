@@ -830,18 +830,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             default_width: 0,
-            default_height: 0,
-            onUpdate: $.noop
+            default_height: 0
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.is_border_box = ( this.$ele.css ( 'box-sizing' ) === 'border-box' );
+            this.is_border_box = ( this.$element.css ( 'box-sizing' ) === 'border-box' );
 
-            this.is_input = this.$ele.is ( 'input' );
-            this.is_textarea = this.$ele.is ( 'textarea' );
+            this.is_input = this.$element.is ( 'input' );
+            this.is_textarea = this.$element.is ( 'textarea' );
 
             if ( this.is_input ) {
 
@@ -862,7 +861,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._update_input_width ();
 
-            this.$ele.on ( 'input change', this._update_input_width );
+            this._on ( 'input change', this._update_input_width );
 
         },
 
@@ -881,17 +880,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.hook ( 'onUpdate' );
-
         },
 
         _get_input_needed_width: function () {
 
-            var id = 'span_' + $.getUID ();
-
-            $body.append ( '<span id="' + id + '">' + this.$element.val () + '</span>' );
-
-            var $span = $('#' + id);
+            var $span = $( '<span>' + this.$element.val () + '</span>' );
 
             $span.css ({
                 'position' : 'absolute',
@@ -902,6 +895,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 'font-weight' : this.$element.css ( 'font-weight' ),
                 'font-style' : this.$element.css ( 'font-style' )
             });
+
+            $span.appendTo ( $body );
 
             var width = $span.width ();
 
@@ -919,7 +914,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._update_textarea_height ();
 
-            this.$ele.on ( 'input change', this._update_textarea_height );
+            this._on ( 'input change', this._update_textarea_height );
 
         },
 
@@ -941,8 +936,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this.$element.height ( actual_height + this.extra_pxs );
 
             }
-
-            this.hook ( 'onUpdate' );
 
         },
 
@@ -2646,7 +2639,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
-/* CHECKBOXES */
+/* CHECKBOX */
+
+//TODO: add better support for disabled checkboxes
 
 ;(function ( $, window, document, undefined ) {
 
@@ -2656,6 +2651,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $.widget ( 'presto.checkbox', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                checked: $.noop,
+                unchecked: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
@@ -2664,9 +2668,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.$input.prop ( 'checked' ) ) {
 
-                this.$element.addClass ( 'selected' );
+                this.$element.addClass ( 'checked' );
 
-            } else if ( this.$element.hasClass ( 'selected' ) ) {
+            } else if ( this.$element.hasClass ( 'checked' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -2682,7 +2686,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_click: function () {
 
-            this.$element.on ( 'click', this._handler_click );
+            this._on ( 'click', this._handler_click );
 
         },
 
@@ -2696,27 +2700,25 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_change: function () {
 
-            this.$element.on ( 'change', this.update () );
+            this._on ( true, 'change', this._handler_change );
+
+        },
+
+        _handler_change: function () {
+
+            var checked = this.$input.prop ( 'checked' );
+
+            this.$element.toggleClass ( 'checked', checked );
+
+            this._trigger ( checked ? 'checked' : 'unchecked' );
 
         },
 
         /* PUBLIC */
 
-        update: function () {
-
-            var active = this.$input.prop ( 'checked' );
-
-            this.$element.toggleClass ( 'selected', active );
-
-        },
-
         toggle: function () {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            var active = this.$input.prop ( 'checked' );
-
-            this.$input.prop ( 'checked', !active ).trigger ( 'change' );
+            this.$input.prop ( 'checked', !this.$input.prop ( 'checked' ) ).trigger ( 'change' );
 
         }
 
@@ -3656,6 +3658,28 @@ $.ready ( function () {
 
     $.widget ( 'presto.progressBar', {
 
+        /* TEMPLATES */
+
+        templates: {
+            base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
+                      '<div class="unhighlighted">' +
+                          '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
+                      '</div>' +
+                      '<div class="stripes"></div>' +
+                  '</div>',
+            percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                             '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
+                         '{% } %}',
+            percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                                     '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
+                                 '{% } %}',
+            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
+            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
+                                    '{% include ( "presto.progressBar.label", {} ); %}' +
+                                '</div>',
+            label: '<div class="label"></div>'
+        },
+
         /* OPTIONS */
 
         options: {
@@ -3679,28 +3703,6 @@ $.ready ( function () {
             callbacks: {
                 update: $.noop
             }
-        },
-
-        /* TEMPLATES */
-
-        templates: {
-            base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                      '<div class="unhighlighted">' +
-                          '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
-                      '</div>' +
-                      '<div class="stripes"></div>' +
-                  '</div>',
-            percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                             '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
-                         '{% } %}',
-            percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                                     '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
-                                 '{% } %}',
-            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
-            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
-                                    '{% include ( "presto.progressBar.label", {} ); %}' +
-                                '</div>',
-            label: '<div class="label"></div>'
         },
 
         /* SPECIAL */
@@ -3814,7 +3816,10 @@ $.ready ( function () {
 
 
 
-/* RADIOS */
+/* RADIO */
+
+//TODO: add better support for disabled checkboxes
+//TODO: api for selecting and unselecting (with events)
 
 ;(function ( $, window, document, undefined ) {
 
@@ -3824,29 +3829,30 @@ $.ready ( function () {
 
     $.widget ( 'presto.radio', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                checked: $.noop,
+                unchecked: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
 
-            this.$input = this.$element.find ( 'input' ),
-            this.name = this.$input.attr ( 'name' ),
-            this.$form = this.$element.parent ( 'form' ),
-            this.$radios = this.$form.find ( 'input[name="' + this.name + '"]' ),
-            this.$btns = this.$radios.parent ( '.radio' );
+            this.$input = this.$element.find ( 'input' );
+            this.name = this.$input.attr ( 'name' );
+            this.$form = this.$element.parent ( 'form' );
+            this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
+            this.$other_radios = this.$other_inputs.parent ();
 
-            if ( this.$input.checked () ) {
+            this.$element.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
 
-                this.$element.addClass ( 'selected' );
+            this._on ( 'click', this.select );
 
-            } else if ( this.$element.hasClass ( 'selected' ) ) {
-
-                this.$input.prop ( 'checked', true ).trigger ( 'change' );
-
-            }
-
-            this.$element.on ( 'click', this.select );
-
-            this.$input.on ( 'change', this._update );
+            this._on ( true, this.$input, 'change', this._update );
 
         },
 
@@ -3854,15 +3860,17 @@ $.ready ( function () {
 
         _update: function () {
 
-            var active = this.$input.prop ( 'checked' );
+            var checked = this.$input.prop ( 'checked' );
 
-            if ( active ) {
+            if ( checked ) { //INFO: We do the update when we reach the checked one
 
-                this.$btns.removeClass ( 'selected' );
+                this.$other_radios.removeClass ( 'checked' );
 
-                this.$element.addClass ( 'selected' );
+                this.$element.addClass ( 'checked' );
 
             }
+
+            this._trigger ( checked ? 'checked' : 'unchecked' );
 
         },
 
@@ -3870,9 +3878,11 @@ $.ready ( function () {
 
         select: function () {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+            if ( !this.$input.prop ( 'checked' ) ) {
 
-            this.$input.prop ( 'checked', true ).trigger ( 'change' );
+                this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+            }
 
         }
 
@@ -4101,6 +4111,20 @@ $.ready ( function () {
 
     $.widget ( 'presto.slider', {
 
+        /* OPTIONS */
+
+        options: {
+            min: 0,
+            max: 100,
+            value: 0,
+            step: 1,
+            decimals: 0,
+            callbacks: {
+                increased: $.noop,
+                decrease: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
@@ -4114,26 +4138,20 @@ $.ready ( function () {
             this.$handler = this.$slider.find ( '.handler' );
             this.$label = this.$handler.find ( '.label' );
 
-            this.min = this.$slider.data ( 'min' );
-            this.max = this.$slider.data ( 'max' );
-            this.start = this.$slider.data ( 'start' ) || this.$input.val () || 0;
-            this.step = this.$slider.data ( 'step' ) || 1;
-            this.decimals = this.$slider.data ( 'decimals' ) || 0;
-
             this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.max - this.min );
-            this.required_step_width = this.step * this.one_step_width;
-            this.current_value = this.start;
+            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
+            this.required_step_width = this.options.step * this.one_step_width;
 
             this.start_pos = false;
             this.current_move = false;
 
-            this.set_value ( this.current_value );
+            this.set_value ( this.options.value, true );
 
             this._bind_change ();
             this._bind_resize ();
             this._bind_arrows ();
-            this._bind_min_max_click ();
+            this._bind_min_click ();
+            this._bind_max_click ();
             this._bind_drag ();
             this._bind_click ();
 
@@ -4143,7 +4161,7 @@ $.ready ( function () {
 
         _round_value: function ( value ) {
 
-            return Number(value).toFixed ( this.decimals );
+            return Number(Number(value).toFixed ( this.options.decimals ));
 
         },
 
@@ -4174,19 +4192,13 @@ $.ready ( function () {
 
         _bind_change: function () {
 
-            this.$input.on ( 'change', this._handler_change );
+            this._on ( true, this.$input, 'change', this._handler_change );
 
         },
 
-        _handler_change: function ( event ) {
+        _handler_change: function () {
 
-            var input_val = Number(this.$input.val ());
-
-            if ( input_val === this.current_value ) return;
-
-            this.current_value = input_val;
-
-            this.set_value ( this.current_value );
+            this.set_value ( this.$input.val () );
 
         },
 
@@ -4194,15 +4206,15 @@ $.ready ( function () {
 
         _bind_resize: function () {
 
-            $window.on ( 'resize', this._handler_resize );
+            this._on ( $window, 'resize', this._handler_resize );
 
         },
 
         _handler_resize: function ( event ) {
 
             this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.max - this.min );
-            this.required_step_width = this.step * this.one_step_width;
+            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
+            this.required_step_width = this.options.step * this.one_step_width;
 
         },
 
@@ -4210,33 +4222,32 @@ $.ready ( function () {
 
         _bind_arrows: function () {
 
-            this.$slider.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
+            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
 
         },
 
-        _handler_arrows_in: function ( event ) {
+        _handler_arrows_in: function () {
 
-            if ( this.hasClass ( 'inactive' ) ) return;
-
-            $document.on ( 'keydown', this._handler_arrows_keydown );
+            this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
-        _handler_arrows_out: function ( event ) {
+        _handler_arrows_out: function () {
 
-            $document.off ( 'keydown', this._handler_arrows_keydown );
+            this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
         _handler_arrows_keydown: function ( event ) {
 
-            if ( event.keyCode === 37 ) { // left arrow
+            if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
 
-                this.navigate ( - this.step );
+                this.decrease ();
 
-            } else if ( event.keyCode === 39 ) { // right arrow
+            } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
 
-                this.navigate ( this.step );
+                this.increase ();
 
             }
 
@@ -4246,30 +4257,13 @@ $.ready ( function () {
 
         _bind_min_click: function () {
 
-            this.$min_btn.on ( 'click', this._handler_min_click );
-
-        },
-
-        _handler_min_click: function ( event ) {
-
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.navigate ( - this.step );
+            this._on ( this.$min_btn, 'click', this.decrease );
 
         },
 
         _bind_max_click: function () {
 
-            this.$max_btn.on ( 'click', this._handler_max_click );
-
-        },
-
-        _handler_max_click: function () {
-
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.navigate ( this.step );
-
+            this._on ( this.$max_btn, 'click', this.increase );
 
         },
 
@@ -4277,34 +4271,32 @@ $.ready ( function () {
 
         _bind_drag: function () {
 
-            this.$handler.on ( 'mousedown touchstart', this._handler_drag_start );
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
 
         },
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.start_pos = get_event_pageXY ( event );
+            this.start_pos = $.eventXY ( event );
             this.current_move = 0;
 
             $html.addClass ( 'dragging' );
             this.$slider.addClass ( 'dragging' );
 
-            $document.on ( 'mousemove touchmove', this._handler_drag_move );
-            $document.on ( 'mouseup touchend', this._handler_drag_end );
+            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
+            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
         _handler_drag_move: function ( event ) {
 
-            var end_pos = get_event_pageXY ( event ),
-                full_move = end_pos.pageX - this.start_pos.pageX,
+            var end_pos = $.eventXY ( event ),
+                full_move = end_pos.X - this.start_pos.X,
                 delta_move = full_move - this.current_move;
 
             if ( Math.abs ( delta_move ) >= 1 ) {
 
-                var moved = this.navigate_move ( delta_move );
+                var moved = this.navigate_distance ( delta_move );
 
                 if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
 
@@ -4321,8 +4313,8 @@ $.ready ( function () {
             $html.removeClass ( 'dragging' );
             this.$slider.removeClass ( 'dragging' );
 
-            $document.off ( 'mousemove touchmove', this._handler_drag_move );
-            $document.off ( 'mouseup touchend', this._handler_drag_end );
+            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
+            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
@@ -4330,72 +4322,78 @@ $.ready ( function () {
 
         _bind_click: function () {
 
-            this.$unhighlighted.on ( 'click', this._handler_click );
+            this._on ( this.$unhighlighted, 'click', this._handler_click );
 
         },
 
         _handler_click: function ( event ) {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+            if ( event.target === this.$handler.get ( 0 ) ) return; //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
-            if ( $(event.target).parents ().index ( this.$handler ) !== -1 ) return;
+            var click_pos = $.eventXY ( event ),
+                distance = click_pos.X - ( this.$highlighted.offset ().left + this.$highlighted.width () );
 
-            var click_pos = get_event_pageXY ( event ),
-                distance = click_pos.pageX - ( this.$highlighted.offset ().left + this.$highlighted.width () );
-
-            this.navigate_move ( distance );
+            this.navigate_distance ( distance );
 
         },
 
         /* PUBLIC */
 
-        set_value: function ( value ) {
+        set_value: function ( value, force ) {
 
             value = this._round_value ( value );
 
-            var width = ( ( value - this.min ) * 100 / ( this.max - this.min ) ) + '%';
+            if ( value >= this.options.min && value <= this.options.max && ( value !== this.options.value || force ) ) {
 
-            this.$handler.css ( 'left', width );
-            this.$highlighted.css ( 'width', width );
+                this.options.value = value;
 
-            this.$input.val ( value ).trigger ( 'change' );
-            this.$label.html ( value );
+                var width = ( ( value - this.options.min ) * 100 / ( this.options.max - this.options.min ) ) + '%';
 
-        },
+                this.$handler.css ( 'left', width );
+                this.$highlighted.css ( 'width', width );
 
-        navigate: function ( modifier ) {
+                this.$input.val ( value ).trigger ( 'change' );
+                this.$label.html ( value );
 
-            var possible_new_value = this.current_value + modifier;
-
-            if ( possible_new_value >= this.min && possible_new_value <= this.max ) {
-
-                this.current_value = possible_new_value;
-
-                this.set_value ( this.current_value );
+                this._trigger ( value > this.options.value ? 'increase' : 'decrease' );
 
             }
 
         },
 
-        navigate_move: function ( distance ) {
+        increase: function () {
+
+            this.navigate ( this.options.step );
+
+        },
+
+        decrease: function () {
+
+            this.navigate ( - this.options.step );
+
+        },
+
+        navigate: function ( modifier ) {
+
+            var new_value = this.options.value + modifier;
+
+            this.set_value ( new_value );
+
+        },
+
+        navigate_distance: function ( distance ) {
 
             distance = this._round_distance ( distance );
 
             if ( distance !== 0 ) {
 
-                var possible_new_value = this.current_value + ( distance / this.one_step_width );
+                var new_value = this.options.value + ( distance / this.one_step_width );
 
-                possible_new_value = Math.max ( this.min, Math.min ( this.max, possible_new_value ) );
+                new_value = Math.max ( this.options.min, Math.min ( this.options.max, new_value ) );
 
-                if ( this.current_value !== possible_new_value ) {
+                this.set_value ( new_value );
 
-                    this.current_value = possible_new_value;
-
-                    this.set_value ( this.current_value );
-
-                    return distance;
-
-                }
+                return distance; //FIXME: Should we check if the values as changed before?
 
             }
 
@@ -4409,7 +4407,23 @@ $.ready ( function () {
 
     $(function () {
 
-        $('.slider_wrp').slider ();
+        $('.slider_wrp').each ( function () {
+
+            var $slider_wrp = $(this),
+                $input = $slider_wrp.find ( 'input' ),
+                $min = $slider_wrp.find ( '.min' ),
+                $max = $slider_wrp.find ( '.max' ),
+                options = {
+                    min: Number($min.data ( 'min' ) || 0),
+                    max: Number($max.data ( 'max' ) || 100),
+                    value: Number($input.val () || 0),
+                    step: Number($slider_wrp.data ( 'step' ) || 1),
+                    decimals: Number($slider_wrp.data ( 'decimals' ) || 0)
+                };
+
+            $slider_wrp.slider ( options );
+
+        });
 
     });
 
@@ -4427,28 +4441,33 @@ $.ready ( function () {
 
     $.widget ( 'presto.spinner', {
 
+        /* OPTIONS */
+
+        options: {
+            min: 0,
+            max: 100,
+            value: 0,
+            step: 1,
+            decimals: 0,
+            callbacks: {
+                increased: $.noop,
+                decrease: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
 
-            this.$input = this.$element.find ( 'input' ),
-            this.$label = this.$element.find ( '.label' ),
-            this.$decrease_btn = this.$element.find ( '.decrease' ),
-            this.$increase_btn = this.$element.find ( '.increase' ),
-
-            this.min = this.$element.data ( 'min' ),
-            this.max = this.$element.data ( 'max' ),
-            this.start = this.$element.data ( 'start' ) || this.$input.val () || 0,
-            this.step = this.$element.data ( 'step' ) || 1,
-            this.decimals = this.$element.data ( 'decimals' ) || 0,
-
-            this.current_value = start;
-
-            this.set_value ( this.current_value );
+            this.$input = this.$element.find ( 'input' );
+            this.$label = this.$element.find ( '.button-center' );
+            this.$decrease_btn = this.$element.find ( '.decrease' );
+            this.$increase_btn = this.$element.find ( '.increase' );
 
             this._bind_change ();
             this._bind_arrows ();
             this._bind_minus_click ();
+            this._bind_plus_click ();
 
         },
 
@@ -4456,7 +4475,7 @@ $.ready ( function () {
 
         _round_value: function ( value ) {
 
-            return Number(value).toFixed ( this.decimals );
+            return Number(Number(value).toFixed ( this.options.decimals ));
 
         },
 
@@ -4464,19 +4483,13 @@ $.ready ( function () {
 
         _bind_change: function () {
 
-            this.$input.on ( 'change', this._handler_change );
+            this._on ( true, this.$input, 'change', this._handler_change );
 
         },
 
         _handler_change: function () {
 
-            var input_val = Number(this.$input.val ());
-
-            if ( input_val === this.current_value ) return;
-
-            this.current_value = input_val;
-
-            this.set_value ( this.current_value );
+            this.set_value ( this.$input.val () );
 
         },
 
@@ -4484,33 +4497,32 @@ $.ready ( function () {
 
         _bind_arrows: function () {
 
-            this.$element.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this._on ( 'mouseenter', this._handler_arrows_in );
+            this._on ( 'mouseleave', this._handler_arrows_out );
 
         },
 
         _handler_arrows_in: function ( event ) {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            $document.on ( 'keydown', this._handler_arrows_keydown );
+            this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
         _handler_arrows_out: function ( event ) {
 
-            $document.off ( 'keydown', this._handler_arrows_keydown );
+            this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
         _handler_arrows_keydown: function ( event ) {
 
-            if ( event.keyCode === 37 ) { // left arrow
+            if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
 
-                this.navigate ( - this.step );
+                this.decrease ();
 
-            } else if ( event.keyCode === 39 ) { // right arrow
+            } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
 
-                this.navigate ( this.step );
+                this.increase ();
 
             }
 
@@ -4520,29 +4532,13 @@ $.ready ( function () {
 
         _bind_minus_click: function () {
 
-            this.$decrease_btn.on ( 'click', this._handler_minus_click );
-
-        },
-
-        _handler_minus_click: function () {
-
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.navigate ( - this.step );
+            this._on ( this.$decrease_btn, 'click', this.decrease );
 
         },
 
         _bind_plus_click: function () {
 
-            this.$increase_btn.on ( 'click', this._handler_plus_click );
-
-        },
-
-        _handler_plus_click: function () {
-
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.navigate ( this.step );
+            this._on ( this.$increase_btn, 'click', this.increase );
 
         },
 
@@ -4552,26 +4548,39 @@ $.ready ( function () {
 
             value = this._round_value ( value );
 
-            this.$input.val ( value ).trigger ( 'change' );
-            this.$label.html ( value );
+            if ( value >= this.options.min && value <= this.options.max && value !== this.options.value ) {
 
-            this.$decrease_btn.toggleClass ( 'inactive', value === this.min );
-            this.$increase_btn.toggleClass ( 'inactive', value === this.max );
+                this.options.value = value;
 
+                this.$input.val ( value ).trigger ( 'change' );
+                this.$label.html ( value );
+
+                this.$decrease_btn.toggleClass ( 'inactive', value === this.options.min );
+                this.$increase_btn.toggleClass ( 'inactive', value === this.options.max );
+
+                this._trigger ( value > this.options.value ? 'increase' : 'decrease' );
+
+            }
+
+        },
+
+        increase: function () {
+
+            this.navigate ( this.options.step );
+
+        },
+
+        decrease: function () {
+
+            this.navigate ( - this.options.step );
 
         },
 
         navigate: function ( modifier ) {
 
-            var possible_new_value = this.current_value + modifier;
+            var new_value = this.options.value + modifier;
 
-            if ( possible_new_value >= this.min && possible_new_value <= this.max ) {
-
-                this.current_value = possible_new_value;
-
-                this.set_value ( this.current_value );
-
-            }
+            this.set_value ( new_value );
 
         }
 
@@ -4581,7 +4590,21 @@ $.ready ( function () {
 
     $(function () {
 
-        $('.spinner').spinner ();
+        $('.spinner').each ( function () {
+
+            var $spinner = $(this),
+                $input = $spinner.find ( 'input' ),
+                options = {
+                    min: Number($spinner.data ( 'min' ) || 0),
+                    max: Number($spinner.data ( 'max' ) || 100),
+                    value: Number($input.val () || 0),
+                    step: Number($spinner.data ( 'step' ) || 1),
+                    decimals: Number($spinner.data ( 'decimals' ) || 0)
+                };
+
+            $spinner.spinner ( options );
+
+        });
 
     });
 
@@ -4590,6 +4613,8 @@ $.ready ( function () {
 
 
 /* SWITCHER */
+
+//TODO: add support for spacebar, tipo uno ha il form e fa tab tab spacebar e ha fatto tutto senza usare il mouse
 
 ;(function ( $, window, document, undefined ) {
 
@@ -4602,13 +4627,17 @@ $.ready ( function () {
         /* OPTIONS */
 
         options: {
-            theme: {
+            colors: {
                 on: 'secondary',
                 off: 'gray'
             },
             icons: {
                 on: false,
                 off: false
+            },
+            callbacks: {
+                checked: $.noop,
+                unchecked: $.noop
             }
         },
 
@@ -4616,24 +4645,24 @@ $.ready ( function () {
 
         _create: function () {
 
+            this.$input = this.$element.find ( 'input' );
             this.$bar = this.$element.find ( '.bar' );
             this.$handler = this.$element.find ( '.handler' );
             this.$icon = this.$element.find ( '.icon' );
-            this.$input = this.$element.find ( 'input' );
 
-            this.current_value = this.$input.prop ( 'checked' );
+            this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
 
             this.start_pos = false,
             this.bar_width = false,
             this.start_percentage = false;
 
-            this.set_value ( this.current_value );
+            this._set_check ( this.checked, true );
 
             this._bind_change ();
             this._bind_arrows ();
-            this._bind_click ();
             this._bind_drag ();
+            this._bind_click ();
 
         },
 
@@ -4641,19 +4670,15 @@ $.ready ( function () {
 
         _bind_change: function () {
 
-            this.$input.on ( 'change', this._handler_change );
+            this._on ( true, this.$input, 'change', this._handler_change );
 
         },
 
         _handler_change: function () {
 
-            var possible_new_value = this.$input.prop ( 'checked' );
+            this.checked = this.$input.prop ( 'checked' );
 
-            if ( possible_new_value === this.current_value ) return;
-
-            this.current_value = possible_new_value;
-
-            this.set_value ( this.current_value );
+            this._set_check ( this.checked );
 
         },
 
@@ -4661,43 +4686,42 @@ $.ready ( function () {
 
         _bind_arrows: function () {
 
-            this.$element.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this._on ( 'mouseenter', this._handler_arrows_in );
+            this._on ( 'mouseleave', this._handler_arrows_out );
 
         },
 
         _handler_arrows_in: function () {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            $document.on ( 'keydown', this._handler_arrows_keydown );
+            this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
         _handler_arrows_out: function () {
 
-            $document.off ( 'keydown', this._handler_arrows_keydown );
+            this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
         _handler_arrows_keydown: function ( event ) {
 
-            if ( event.keyCode === 37 ) { // left arrow
+            if ( event.keyCode === $.ui.keyCode.LEFT ) {
 
-                if ( this.current_value !== false ) {
+                if ( this.checked !== false ) {
 
-                    this.current_value = false;
+                    this.checked = false;
 
-                    this.set_value ( this.current_value );
+                    this._set_check ( this.checked );
 
                 }
 
-            } else if ( event.keyCode === 39 ) { // right arrow
+            } else if ( event.keyCode === $.ui.keyCode.RIGHT ) {
 
-                if ( this.current_value !== true ) {
+                if ( this.checked !== true ) {
 
-                    this.current_value = true;
+                    this.checked = true;
 
-                    this.set_value ( this.current_value );
+                    this._set_check ( this.checked );
 
                 }
 
@@ -4709,13 +4733,18 @@ $.ready ( function () {
 
         _bind_click: function () {
 
-            this.$element.on ( 'click', this._handler_click );
+            this._on ( 'click', this._handler_click );
 
         },
 
         _handler_click: function () {
 
-            if ( this.dragging || this.$element.hasClass ( 'inactive' ) ) return;
+            if ( this.dragging ) {
+
+                this.dragging = false;
+                return;
+
+            }
 
             this.toggle ();
 
@@ -4725,24 +4754,22 @@ $.ready ( function () {
 
         _bind_drag: function () {
 
-            this.$handler.on ( 'mousedown touchstart', this._handler_drag_start );
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
 
         },
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+            this.start_percentage = this.checked ? 100 : 0;
 
-            this.start_percentage = this.current_value ? 100 : 0;
-
-            this.start_pos = get_event_pageXY ( event );
+            this.start_pos = $.eventXY ( event );
             this.bar_width = this.$bar.width ();
 
             $html.addClass ( 'dragging' );
             this.$element.addClass ( 'dragging' );
 
-            $document.on ( 'mousemove touchmove', this._handler_drag_move );
-            $document.on ( 'mouseup touchend', this._handler_drag_end );
+            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
+            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
@@ -4750,69 +4777,87 @@ $.ready ( function () {
 
             this.dragging = true;
 
-            var move_pos = get_event_pageXY ( event ),
-                distance = move_pos.pageX - this.start_pos.pageX,
+            var move_pos = $.eventXY ( event ),
+                distance = move_pos.X - this.start_pos.X,
                 abs_distance = Math.max ( - this.bar_width, Math.min ( Math.abs ( distance ), this.bar_width ) ),
-                percentage = abs_distance * 100 / this.bar_width,
-                possible_new_percentage = ( distance >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
+                percentage = abs_distance * 100 / this.bar_width;
 
-            this.$handler.css ( 'left', Math.max ( 0, Math.min ( 100, possible_new_percentage ) ) + '%' );
+            this.drag_percentage = ( distance >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
+
+            this.$handler.css ( 'left', Math.max ( 0, Math.min ( 100, this.drag_percentage ) ) + '%' );
 
         },
 
         _handler_drag_end: function ( event ) {
 
-            var bar_off = this.$bar.offset (),
-                handler_off = this.$handler.offset ();
-
-            this.current_value = ( handler_off.left + ( handler_off.width / 2 ) >= bar_off.left + ( bar_off.width / 2 ) );
-
             $html.removeClass ( 'dragging' );
             this.$element.removeClass ( 'dragging' );
 
-            $document.off ( 'mousemove touchmove', this._handler_drag_move );
-            $document.off ( 'mouseup touchend', this._handler_drag_end );
+            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
+            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
 
-            this.set_value ( this.current_value );
+            if ( this.dragging ) {
 
-            this.dragging = false; //FIXME: It should be wrapped in a defer function, but how can we set the this value then???
+                this.checked = ( this.drag_percentage > 50 ) ? true : false;
+
+                this._set_check ( this.checked, true );
+
+            }
+
+        },
+
+        _set_check: function ( checked, force ) {
+
+            if ( checked !== this.$input.prop ( 'checked' ) || force ) {
+
+                this.$handler.css ( 'left', checked ? '100%' : 0 );
+
+                var inactive = this.$element.hasClass ( 'inactive' );
+
+                this.$bar.toggleClass ( this.options.colors.on, checked && !inactive );
+                this.$handler.toggleClass ( this.options.colors.on, checked && !inactive );
+
+                this.$bar.toggleClass ( this.options.colors.off, !checked );
+                this.$handler.toggleClass ( this.options.colors.off, !checked );
+
+                if ( this.options.icons.on ) {
+
+                    this.$icon.toggleClass ( 'icon-' + this.options.icons.on, checked );
+
+                }
+
+                if ( this.options.icons.off ) {
+
+                    this.$icon.toggleClass ( 'icon-' + this.options.icons.off, !checked );
+
+                }
+
+                this.$input.prop ( 'checked', checked ).trigger ( 'change' );
+
+                this._trigger ( checked ? 'checked' : 'unchecked' );
+
+            }
 
         },
 
         /* PUBLIC */
 
-        set_value: function ( value ) {
+        check: function () {
 
-            this.$handler.css ( 'left', value ? '100%' : 0 );
+            this._set_check ( true );
 
-            var inactive = this.$switcher.hasClass ( 'inactive' );
+        },
 
-            this.$bar.toggleClass ( this.options.theme.on, value && !inactive );
-            this.$handler.toggleClass ( this.options.theme.on, value && !inactive );
+        uncheck: function () {
 
-            this.$bar.toggleClass ( this.options.theme.off, !value );
-            this.$handler.toggleClass ( this.options.theme.off, !value );
-
-            if ( this.options.icons.on ) {
-
-                this.$icon.toggleClass ( this.options.icons.on, value );
-
-            }
-
-            if ( this.options.icons.off ) {
-
-                this.$icon.toggleClass ( this.options.icons.off, !value );
-
-            }
-
-            this.$input.prop ( 'checked', value ).trigger ( 'change' );
+            this._set_check ( false );
 
         },
 
         toggle: function () {
 
-            this.current_value = !this.current_value;
-            this.set_value ( this.current_value );
+            this.checked = !this.checked;
+            this._set_check ( this.checked );
 
         }
 
@@ -4822,7 +4867,23 @@ $.ready ( function () {
 
     $(function () {
 
-        $('.switcher').switcher ();
+        $('.switcher').each ( function () {
+
+            var $switcher = $(this),
+                options = {
+                    colors: {
+                        on: $switcher.data ( 'color-on' ) || 'secondary',
+                        off: $switcher.data ( 'color-off' ) || 'gray'
+                    },
+                    icons: {
+                        on: $switcher.data ( 'icon-on' ) || false,
+                        off: $switcher.data ( 'icon-off' ) || false
+                    }
+                };
+
+            $switcher.switcher ( options );
+
+        });
 
     });
 
@@ -4893,6 +4954,10 @@ $.ready ( function () {
 
 /* TAGBOX */
 
+//TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
+//FIXME: the partial field is too tall
+//TODO: more explicative noty messages, like :you cannot use the tag 'something' again
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -4901,42 +4966,62 @@ $.ready ( function () {
 
     $.widget ( 'presto.tagbox', {
 
+        /* TEMPLATES */
+
+        templates: {
+            tag: '<div class="tag button {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                     '<div class="button-center">' +
+                         '{%=o.str%}' +
+                     '</div>' +
+                     '<div class="button-right actionable close">x</div>' +
+                 '</div>'
+        },
+
         /* OPTIONS */
 
         options: {
-            input: {
-                default_width: '100',
-                placeholder: 'New tag...',
-                theme: 'transparent small'
+            tags: {
+                str: '',
+                arr: [],
+                $nodes: $()
             },
             tag: {
                 min_length: 3,
-                theme: 'outlined small'
+                color: '',
+                size: 'small',
+                css: 'outlined'
             },
             forbidden: [ '<', '>', ';', '`' ],
             separator: ',',
             sort: false,
-            append: true
+            append: true,
+            callbacks: {
+                tag_added: $.noop,
+                tag_removed: $.noop
+            }
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.tagbox_id = $.getUID ();
+            var $inputs = this.$element.find ( 'input' );
 
-            var template = '<div id="tagbox_' + this.tagbox_id + '" class="container transparent no-padding"><div class="multiple">' + this._get_tags_html () + '<input value="" placeholder="' + this.options.input.placeholder + '" class="autogrow ' + this.options.input.theme + '" data-default-width="' + this.options.input.default_width + '" /></div></div>';
+            this.$input = $inputs.eq ( 0 );
+            this.$partial = $inputs.eq ( 1 );
 
-            this.$element.after ( template ).addClass ( 'hidden' );
+            this._sanitize_tags_str ();
 
-            this.$tagbox = $('#tagbox_' + this.tagbox_id);
-            this.$partial = this.$tagbox.find ( 'input' );
-            this.$tags = false;
-            this.tags_arr = false;
+            var tags_html = this._get_tags_html ();
 
-            this.$partial.autogrow ();
+            this.$partial.before ( tags_html );
 
-            this._update_variables ();
+            this.options.tags.$nodes = this.$element.find ( '.tag' );
+
+            this._bind_keypress ();
+            this._bind_paste ();
+            this._bind_click_on_empty ();
+            this._bind_click_on_close ();
 
         },
 
@@ -4944,25 +5029,11 @@ $.ready ( function () {
 
         _get_tags_html: function () {
 
-            var value = this.$element.val (),
-                tags_str = value.split ( this.options.separator ),
-                tags_html = '';
+            var tags_html = '';
 
-            for ( var n = 0; n < tags_str.length; n++ ) {
+            for ( var i = 0, l = this.options.tags.arr.length; i < l ; i++ ) {
 
-                tags_str[n] = this._sanitize_str ( tags_str[n] );
-
-            }
-
-            if ( this.options.sort ) {
-
-                tags_str.sort ();
-
-            }
-
-            for ( var n = 0; n < tags_str.length; n++ ) {
-
-                tags_html += this._get_tag_html ( tags_str[n] );
+                tags_html += this._get_tag_html ( this.options.tags.arr[i] );
 
             }
 
@@ -4974,7 +5045,29 @@ $.ready ( function () {
 
             tag_str = this._sanitize_str ( tag_str );
 
-            return '<div class="tag button ' + this.options.tag.theme + '"><div class="label">' + tag_str + '</div><div class="sub right actionable close">x</div></div>';
+            return this._tmpl ( 'tag', _.extend ( { str: tag_str }, this.options.tag ) );
+
+        },
+
+        _sanitize_tags_str: function () {
+
+            var tags_arr = this.options.tags.str.split ( this.options.separator );
+
+            this.options.tags.arr = [];
+
+            for ( var n = 0; n < tags_arr.length; n++ ) {
+
+                this.options.tags.arr[n] = this._sanitize_str ( tags_arr[n] );
+
+            }
+
+            if ( this.options.sort ) {
+
+                this.options.tags.arr.sort ();
+
+            }
+
+            this.options.tags.str = this.options.tags.arr.join ( this.options.separator );
 
         },
 
@@ -4986,64 +5079,113 @@ $.ready ( function () {
 
         _update_variables: function () {
 
-            this.$tags = this.$tagbox.find ( '.tag' );
+            this.options.tags.$nodes = this.$element.find ( '.tag' );
 
-            this.tags_arr = [];
+            this.options.tags.arr = [];
 
-            for ( var i = 0, l = this.$tags.length; i < l; i++ ) {
+            for ( var i = 0, l = this.options.tags.$nodes.length; i < l; i++ ) {
 
-                var $tag = this.$tags.nodes[i],
-                    $label = $tag.find ( '.label' );
-
-                this.tags_arr.push ( $label.html () );
+                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.button-center' ).html ();
 
             }
+
+            this.options.tags.str = this.options.tags.arr.join ( this.options.separator );
 
         },
 
         _update_input: function () {
 
-            this.$element.val ( this.tags_arr.join ( this.options.separator ) );
+            this.$input.val ( this.options.tags.str );
 
         },
 
-        /* KEYDOWN */
+        _clear_partial: function () {
 
-        _bind_keydown: function () {
+            this._delay ( function () {
 
-            this.$partial.on ( 'keydown', this._handler_keydown );
+                this.$partial.val ( '' );
+
+            });
 
         },
 
-        _handler_keydown: function ( event ) {
+        _trim_partial: function () {
 
-            switch ( event.keyCode ) {
+            this._delay ( function () {
 
-                case 13: // enter
-            //  case 32: // spacebar, if enabled actually disables tags with spaces inside of them
-                case 188: // comma
-                    this.add_tag ( this.$partial.val (), true );
-                    event.preventDefault ();
-                    event.stopImmediatePropagation ();
-                    break;
+                this.$partial.val ( _.trim ( this.$partial.val () ) );
 
-                case 8: // backspace
-                case 46: // del
-                    if ( this.$partial.val ().length === 0 && this.$tags.length > 0 ) {
-                        var $last = this.$tags.last ();
-                        this.remove_tag ( $last, !event.ctrlKey );
-                        event.preventDefault ();
-                        event.stopImmediatePropagation ();
-                    }
-                    break;
+            });
 
-                default:
-                    if ( this.options.forbidden.indexOf ( event.key ) !== -1 ) {
-                        $.noty ( 'The character you entered is forbidden' );
-                        event.preventDefault ();
-                        event.stopImmediatePropagation ();
-                    }
-                    break;
+        },
+
+        /* KEYPRESS */
+
+        _bind_keypress: function () {
+
+            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
+
+            this._on ( this.$partial, 'keydown', function ( event ) {
+
+                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
+
+                    this._handler_keypress ( event );
+
+                }
+
+            }); //INFO: For the others
+
+        },
+
+        _handler_keypress: function ( event ) {
+
+            var prev_value = this.$partial.val ();
+
+            if ( event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE || event.keyCode === $.ui.keyCode.TAB || event.keyCode === this.options.separator.charCodeAt ( 0 ) ) {
+
+                var added = this.add_tag ( this.$partial.val () );
+
+                if ( added ) {
+
+                    this._clear_partial ();
+
+                } else {
+
+                    this._delay ( function () {
+
+                        this.$partial.val ( prev_value );
+
+                    });
+
+                }
+
+                event.preventDefault ();
+                event.stopImmediatePropagation ();
+
+            } else if ( event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
+
+                if ( this.$partial.val ().length === 0 && this.options.tags.arr.length > 0 ) {
+
+                    var $last = this.options.tags.$nodes.last ();
+                    this.remove_tag ( $last, !event.ctrlKey );
+
+                }
+
+                event.preventDefault ();
+                event.stopImmediatePropagation ();
+
+            } else if ( this.options.forbidden.indexOf ( String.fromCharCode ( event.keyCode ) ) !== -1 ) {
+
+                $.noty ( 'The character you entered is forbidden' );
+
+               this._delay ( function () {
+
+                    this.$partial.val ( prev_value );
+
+                });
+
+                event.preventDefault ();
+                event.stopImmediatePropagation ();
 
             }
 
@@ -5053,25 +5195,25 @@ $.ready ( function () {
 
         _bind_paste: function () {
 
-            this.$partial.on ( 'past', this._handler_paste );
+            this._on ( this.$partial, 'paste', this._handler_paste );
 
         },
 
         _handler_paste: function ( event ) {
 
-            // $.defer ( function () { //FIXME: it should be wrapped on defer
+            this._delay ( function () {
 
-                var tags_str = this.$partial.val ().split ( this.options.separator );
+                var new_tags = this.$partial.val ().split ( this.options.separator );
 
-                for ( var i = 0; i < tags_str.length; i++ ) {
+                for ( var i = 0; i < new_tags.length; i++ ) {
 
-                    this.add_tag ( tags_str[i], false );
+                    this.add_tag ( new_tags[i] );
 
                 }
 
-                this.$partial.val ( '' );
+                this._clear_partial ();
 
-            // });
+            });
 
         },
 
@@ -5079,7 +5221,7 @@ $.ready ( function () {
 
         _bind_click_on_close: function () {
 
-            this.$tagbox.on ( 'click', this._handler_click_on_close );
+            this._on ( 'click', this._handler_click_on_close );
 
         },
 
@@ -5101,13 +5243,13 @@ $.ready ( function () {
 
         _bind_click_on_empty: function () {
 
-            this.$tagbox.on ( 'click', this._handler_click_on_empty );
+            this._on ( 'click', this._handler_click_on_empty );
 
         },
 
         _handler_click_on_empty: function ( event ) {
 
-            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .label' ) ) {
+            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag, .button-center' ) ) {
 
                 this.$partial.get ( 0 ).focus ();
 
@@ -5117,7 +5259,7 @@ $.ready ( function () {
 
         /* PUBLIC */
 
-        add_tag: function ( tag_str, empty ) {
+        add_tag: function ( tag_str ) {
 
             tag_str = this._sanitize_str ( tag_str );
 
@@ -5125,51 +5267,54 @@ $.ready ( function () {
 
                 if ( tag_str.length > 0 ) { // so it won't be triggered when the user presses enter and the $partial is empty
 
-                    $.noty ( 'You cannot use tags shorter than 3 characters' );
+                    $.noty ( 'You cannot use tags shorter than ' + this.options.tag.min_length + ' characters' );
+
+                    return false;
 
                 }
 
-            } else if ( this.tags_arr.indexOf ( tag_str ) !== -1 ) {
+            } else if ( this.options.tags.arr.indexOf ( tag_str ) !== -1 ) {
 
                 $.noty ( 'You cannot use duplicate tags' );
 
+                return false;
+
             } else {
+
+                this.options.tags.arr.push ( tag_str );
+
+                if ( this.options.sort ) {
+
+                    this.options.tags.arr.sort ();
+
+                }
 
                 var tag_html = this._get_tag_html ( tag_str );
 
-                if ( $tags.length === 0 || this.options.append ) {
+                if ( this.options.tags.$nodes.length === 0 || this.options.append ) {
 
                     this.$partial.before ( tag_html );
 
                 } else {
 
-                    var tags_ord_arr = tags_arr;
-
-                    tags_ord_arr.push ( tag_str );
-                    tags_ord_arr.sort ();
-
-                    var index = tags_ord_arr.indexOf ( tag_str );
+                    var index = this.options.tags.arr.indexOf ( tag_str );
 
                     if ( index - 1 < 0 ) {
 
-                        this.$tags.first ().before ( tag_html );
+                        this.options.tags.$nodes.first ().before ( tag_html );
 
                     } else {
 
-                        this.$tags.eq ( index - 1 ).after ( tag_html );
+                        this.options.tags.$nodes.eq ( index - 1 ).after ( tag_html );
 
                     }
 
                 }
 
-                this.update_variables ();
-                this.update_input ();
+                this._update_variables ();
+                this._update_input ();
 
-                if ( empty === true ) {
-
-                    this.$partial.val ( '' );
-
-                }
+                return true;
 
             }
 
@@ -5177,15 +5322,14 @@ $.ready ( function () {
 
         remove_tag: function ( $tag, edit ) {
 
-            var $label = $tag.find ( '.label' ),
-                tag_str = $label.html ();
-
             $tag.remove ();
 
-            this.update_variables ();
-            this.update_input ();
+            this._update_variables ();
+            this._update_input ();
 
             if ( edit === true ) {
+
+                var tag_str = $tag.find ( '.button-center' ).html ();
 
                 this.$partial.val ( tag_str );
 
@@ -5199,7 +5343,19 @@ $.ready ( function () {
 
     $(function () {
 
-        $('input.tagbox').tagbox ();
+        $('.tagbox').each ( function () {
+
+            var $tagbox = $(this),
+                $input = $tagbox.find ( 'input' ).eq ( 0 ),
+                options = {
+                    tags: {
+                        str: $input.val () || ''
+                    }
+                };
+
+            $tagbox.tagbox ( options );
+
+        });
 
     });
 

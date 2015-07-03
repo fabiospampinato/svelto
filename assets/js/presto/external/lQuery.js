@@ -579,23 +579,23 @@
             Y : 0
         };
 
-        if ( _.isUndefined ( event.originalEvent ) ) { //FIXME: doesn't make sense
+        if ( !_.isUndefined ( event.originalEvent ) ) {
 
             event = event.originalEvent;
 
         }
 
-        if ( _.isUndefined ( event.touches ) && _.isUndefined ( event.touches[0] ) ) {
+        if ( !_.isUndefined ( event.touches ) && !_.isUndefined ( event.touches[0] ) ) {
 
             coordinates.X = event.touches[0].pageX;
             coordinates.Y = event.touches[0].pageY;
 
-        } else if ( _.isUndefined ( event.changedTouches ) && _.isUndefined ( event.changedTouches[0] ) ) {
+        } else if ( !_.isUndefined ( event.changedTouches ) && !_.isUndefined ( event.changedTouches[0] ) ) {
 
             coordinates.X = event.changedTouches[0].pageX;
             coordinates.Y = event.changedTouches[0].pageY;
 
-        } else if ( _.isUndefined ( event.pageX ) ) {
+        } else if ( !_.isUndefined ( event.pageX ) ) {
 
             coordinates.X = event.pageX;
             coordinates.Y = event.pageY;
@@ -1715,9 +1715,7 @@
 
         parent: function ( selector ) {
 
-            var $parents = this.parents ( undefined, 1 );
-
-            return selector ? $parents.filter ( selector ) : $parents;
+            return this.parents ( selector, 1 );
 
         },
 

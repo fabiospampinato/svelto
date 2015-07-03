@@ -13,18 +13,17 @@
 
         options: {
             default_width: 0,
-            default_height: 0,
-            onUpdate: $.noop
+            default_height: 0
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.is_border_box = ( this.$ele.css ( 'box-sizing' ) === 'border-box' );
+            this.is_border_box = ( this.$element.css ( 'box-sizing' ) === 'border-box' );
 
-            this.is_input = this.$ele.is ( 'input' );
-            this.is_textarea = this.$ele.is ( 'textarea' );
+            this.is_input = this.$element.is ( 'input' );
+            this.is_textarea = this.$element.is ( 'textarea' );
 
             if ( this.is_input ) {
 
@@ -45,7 +44,7 @@
 
             this._update_input_width ();
 
-            this.$ele.on ( 'input change', this._update_input_width );
+            this._on ( 'input change', this._update_input_width );
 
         },
 
@@ -64,17 +63,11 @@
 
             }
 
-            this.hook ( 'onUpdate' );
-
         },
 
         _get_input_needed_width: function () {
 
-            var id = 'span_' + $.getUID ();
-
-            $body.append ( '<span id="' + id + '">' + this.$element.val () + '</span>' );
-
-            var $span = $('#' + id);
+            var $span = $( '<span>' + this.$element.val () + '</span>' );
 
             $span.css ({
                 'position' : 'absolute',
@@ -85,6 +78,8 @@
                 'font-weight' : this.$element.css ( 'font-weight' ),
                 'font-style' : this.$element.css ( 'font-style' )
             });
+
+            $span.appendTo ( $body );
 
             var width = $span.width ();
 
@@ -102,7 +97,7 @@
 
             this._update_textarea_height ();
 
-            this.$ele.on ( 'input change', this._update_textarea_height );
+            this._on ( 'input change', this._update_textarea_height );
 
         },
 
@@ -124,8 +119,6 @@
                 this.$element.height ( actual_height + this.extra_pxs );
 
             }
-
-            this.hook ( 'onUpdate' );
 
         },
 

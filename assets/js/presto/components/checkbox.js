@@ -1,5 +1,7 @@
 
-/* CHECKBOXES */
+/* CHECKBOX */
+
+//TODO: add better support for disabled checkboxes
 
 ;(function ( $, window, document, undefined ) {
 
@@ -9,6 +11,15 @@
 
     $.widget ( 'presto.checkbox', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                checked: $.noop,
+                unchecked: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
@@ -17,9 +28,9 @@
 
             if ( this.$input.prop ( 'checked' ) ) {
 
-                this.$element.addClass ( 'selected' );
+                this.$element.addClass ( 'checked' );
 
-            } else if ( this.$element.hasClass ( 'selected' ) ) {
+            } else if ( this.$element.hasClass ( 'checked' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -35,7 +46,7 @@
 
         _bind_click: function () {
 
-            this.$element.on ( 'click', this._handler_click );
+            this._on ( 'click', this._handler_click );
 
         },
 
@@ -49,27 +60,25 @@
 
         _bind_change: function () {
 
-            this.$element.on ( 'change', this.update () );
+            this._on ( true, 'change', this._handler_change );
+
+        },
+
+        _handler_change: function () {
+
+            var checked = this.$input.prop ( 'checked' );
+
+            this.$element.toggleClass ( 'checked', checked );
+
+            this._trigger ( checked ? 'checked' : 'unchecked' );
 
         },
 
         /* PUBLIC */
 
-        update: function () {
-
-            var active = this.$input.prop ( 'checked' );
-
-            this.$element.toggleClass ( 'selected', active );
-
-        },
-
         toggle: function () {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            var active = this.$input.prop ( 'checked' );
-
-            this.$input.prop ( 'checked', !active ).trigger ( 'change' );
+            this.$input.prop ( 'checked', !this.$input.prop ( 'checked' ) ).trigger ( 'change' );
 
         }
 

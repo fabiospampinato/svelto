@@ -1,6 +1,10 @@
 
 /* TAGBOX */
 
+//TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
+//FIXME: the partial field is too tall
+//TODO: more explicative noty messages, like :you cannot use the tag 'something' again
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -9,42 +13,62 @@
 
     $.widget ( 'presto.tagbox', {
 
+        /* TEMPLATES */
+
+        templates: {
+            tag: '<div class="tag button {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                     '<div class="button-center">' +
+                         '{%=o.str%}' +
+                     '</div>' +
+                     '<div class="button-right actionable close">x</div>' +
+                 '</div>'
+        },
+
         /* OPTIONS */
 
         options: {
-            input: {
-                default_width: '100',
-                placeholder: 'New tag...',
-                theme: 'transparent small'
+            tags: {
+                str: '',
+                arr: [],
+                $nodes: $()
             },
             tag: {
                 min_length: 3,
-                theme: 'outlined small'
+                color: '',
+                size: 'small',
+                css: 'outlined'
             },
             forbidden: [ '<', '>', ';', '`' ],
             separator: ',',
             sort: false,
-            append: true
+            append: true,
+            callbacks: {
+                tag_added: $.noop,
+                tag_removed: $.noop
+            }
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.tagbox_id = $.getUID ();
+            var $inputs = this.$element.find ( 'input' );
 
-            var template = '<div id="tagbox_' + this.tagbox_id + '" class="container transparent no-padding"><div class="multiple">' + this._get_tags_html () + '<input value="" placeholder="' + this.options.input.placeholder + '" class="autogrow ' + this.options.input.theme + '" data-default-width="' + this.options.input.default_width + '" /></div></div>';
+            this.$input = $inputs.eq ( 0 );
+            this.$partial = $inputs.eq ( 1 );
 
-            this.$element.after ( template ).addClass ( 'hidden' );
+            this._sanitize_tags_str ();
 
-            this.$tagbox = $('#tagbox_' + this.tagbox_id);
-            this.$partial = this.$tagbox.find ( 'input' );
-            this.$tags = false;
-            this.tags_arr = false;
+            var tags_html = this._get_tags_html ();
 
-            this.$partial.autogrow ();
+            this.$partial.before ( tags_html );
 
-            this._update_variables ();
+            this.options.tags.$nodes = this.$element.find ( '.tag' );
+
+            this._bind_keypress ();
+            this._bind_paste ();
+            this._bind_click_on_empty ();
+            this._bind_click_on_close ();
 
         },
 
@@ -52,25 +76,11 @@
 
         _get_tags_html: function () {
 
-            var value = this.$element.val (),
-                tags_str = value.split ( this.options.separator ),
-                tags_html = '';
+            var tags_html = '';
 
-            for ( var n = 0; n < tags_str.length; n++ ) {
+            for ( var i = 0, l = this.options.tags.arr.length; i < l ; i++ ) {
 
-                tags_str[n] = this._sanitize_str ( tags_str[n] );
-
-            }
-
-            if ( this.options.sort ) {
-
-                tags_str.sort ();
-
-            }
-
-            for ( var n = 0; n < tags_str.length; n++ ) {
-
-                tags_html += this._get_tag_html ( tags_str[n] );
+                tags_html += this._get_tag_html ( this.options.tags.arr[i] );
 
             }
 
@@ -82,7 +92,29 @@
 
             tag_str = this._sanitize_str ( tag_str );
 
-            return '<div class="tag button ' + this.options.tag.theme + '"><div class="label">' + tag_str + '</div><div class="sub right actionable close">x</div></div>';
+            return this._tmpl ( 'tag', _.extend ( { str: tag_str }, this.options.tag ) );
+
+        },
+
+        _sanitize_tags_str: function () {
+
+            var tags_arr = this.options.tags.str.split ( this.options.separator );
+
+            this.options.tags.arr = [];
+
+            for ( var n = 0; n < tags_arr.length; n++ ) {
+
+                this.options.tags.arr[n] = this._sanitize_str ( tags_arr[n] );
+
+            }
+
+            if ( this.options.sort ) {
+
+                this.options.tags.arr.sort ();
+
+            }
+
+            this.options.tags.str = this.options.tags.arr.join ( this.options.separator );
 
         },
 
@@ -94,64 +126,113 @@
 
         _update_variables: function () {
 
-            this.$tags = this.$tagbox.find ( '.tag' );
+            this.options.tags.$nodes = this.$element.find ( '.tag' );
 
-            this.tags_arr = [];
+            this.options.tags.arr = [];
 
-            for ( var i = 0, l = this.$tags.length; i < l; i++ ) {
+            for ( var i = 0, l = this.options.tags.$nodes.length; i < l; i++ ) {
 
-                var $tag = this.$tags.nodes[i],
-                    $label = $tag.find ( '.label' );
-
-                this.tags_arr.push ( $label.html () );
+                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.button-center' ).html ();
 
             }
+
+            this.options.tags.str = this.options.tags.arr.join ( this.options.separator );
 
         },
 
         _update_input: function () {
 
-            this.$element.val ( this.tags_arr.join ( this.options.separator ) );
+            this.$input.val ( this.options.tags.str );
 
         },
 
-        /* KEYDOWN */
+        _clear_partial: function () {
 
-        _bind_keydown: function () {
+            this._delay ( function () {
 
-            this.$partial.on ( 'keydown', this._handler_keydown );
+                this.$partial.val ( '' );
+
+            });
 
         },
 
-        _handler_keydown: function ( event ) {
+        _trim_partial: function () {
 
-            switch ( event.keyCode ) {
+            this._delay ( function () {
 
-                case 13: // enter
-            //  case 32: // spacebar, if enabled actually disables tags with spaces inside of them
-                case 188: // comma
-                    this.add_tag ( this.$partial.val (), true );
-                    event.preventDefault ();
-                    event.stopImmediatePropagation ();
-                    break;
+                this.$partial.val ( _.trim ( this.$partial.val () ) );
 
-                case 8: // backspace
-                case 46: // del
-                    if ( this.$partial.val ().length === 0 && this.$tags.length > 0 ) {
-                        var $last = this.$tags.last ();
-                        this.remove_tag ( $last, !event.ctrlKey );
-                        event.preventDefault ();
-                        event.stopImmediatePropagation ();
-                    }
-                    break;
+            });
 
-                default:
-                    if ( this.options.forbidden.indexOf ( event.key ) !== -1 ) {
-                        $.noty ( 'The character you entered is forbidden' );
-                        event.preventDefault ();
-                        event.stopImmediatePropagation ();
-                    }
-                    break;
+        },
+
+        /* KEYPRESS */
+
+        _bind_keypress: function () {
+
+            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
+
+            this._on ( this.$partial, 'keydown', function ( event ) {
+
+                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
+
+                    this._handler_keypress ( event );
+
+                }
+
+            }); //INFO: For the others
+
+        },
+
+        _handler_keypress: function ( event ) {
+
+            var prev_value = this.$partial.val ();
+
+            if ( event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE || event.keyCode === $.ui.keyCode.TAB || event.keyCode === this.options.separator.charCodeAt ( 0 ) ) {
+
+                var added = this.add_tag ( this.$partial.val () );
+
+                if ( added ) {
+
+                    this._clear_partial ();
+
+                } else {
+
+                    this._delay ( function () {
+
+                        this.$partial.val ( prev_value );
+
+                    });
+
+                }
+
+                event.preventDefault ();
+                event.stopImmediatePropagation ();
+
+            } else if ( event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
+
+                if ( this.$partial.val ().length === 0 && this.options.tags.arr.length > 0 ) {
+
+                    var $last = this.options.tags.$nodes.last ();
+                    this.remove_tag ( $last, !event.ctrlKey );
+
+                }
+
+                event.preventDefault ();
+                event.stopImmediatePropagation ();
+
+            } else if ( this.options.forbidden.indexOf ( String.fromCharCode ( event.keyCode ) ) !== -1 ) {
+
+                $.noty ( 'The character you entered is forbidden' );
+
+               this._delay ( function () {
+
+                    this.$partial.val ( prev_value );
+
+                });
+
+                event.preventDefault ();
+                event.stopImmediatePropagation ();
 
             }
 
@@ -161,25 +242,25 @@
 
         _bind_paste: function () {
 
-            this.$partial.on ( 'past', this._handler_paste );
+            this._on ( this.$partial, 'paste', this._handler_paste );
 
         },
 
         _handler_paste: function ( event ) {
 
-            // $.defer ( function () { //FIXME: it should be wrapped on defer
+            this._delay ( function () {
 
-                var tags_str = this.$partial.val ().split ( this.options.separator );
+                var new_tags = this.$partial.val ().split ( this.options.separator );
 
-                for ( var i = 0; i < tags_str.length; i++ ) {
+                for ( var i = 0; i < new_tags.length; i++ ) {
 
-                    this.add_tag ( tags_str[i], false );
+                    this.add_tag ( new_tags[i] );
 
                 }
 
-                this.$partial.val ( '' );
+                this._clear_partial ();
 
-            // });
+            });
 
         },
 
@@ -187,7 +268,7 @@
 
         _bind_click_on_close: function () {
 
-            this.$tagbox.on ( 'click', this._handler_click_on_close );
+            this._on ( 'click', this._handler_click_on_close );
 
         },
 
@@ -209,13 +290,13 @@
 
         _bind_click_on_empty: function () {
 
-            this.$tagbox.on ( 'click', this._handler_click_on_empty );
+            this._on ( 'click', this._handler_click_on_empty );
 
         },
 
         _handler_click_on_empty: function ( event ) {
 
-            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .label' ) ) {
+            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag, .button-center' ) ) {
 
                 this.$partial.get ( 0 ).focus ();
 
@@ -225,7 +306,7 @@
 
         /* PUBLIC */
 
-        add_tag: function ( tag_str, empty ) {
+        add_tag: function ( tag_str ) {
 
             tag_str = this._sanitize_str ( tag_str );
 
@@ -233,51 +314,54 @@
 
                 if ( tag_str.length > 0 ) { // so it won't be triggered when the user presses enter and the $partial is empty
 
-                    $.noty ( 'You cannot use tags shorter than 3 characters' );
+                    $.noty ( 'You cannot use tags shorter than ' + this.options.tag.min_length + ' characters' );
+
+                    return false;
 
                 }
 
-            } else if ( this.tags_arr.indexOf ( tag_str ) !== -1 ) {
+            } else if ( this.options.tags.arr.indexOf ( tag_str ) !== -1 ) {
 
                 $.noty ( 'You cannot use duplicate tags' );
 
+                return false;
+
             } else {
+
+                this.options.tags.arr.push ( tag_str );
+
+                if ( this.options.sort ) {
+
+                    this.options.tags.arr.sort ();
+
+                }
 
                 var tag_html = this._get_tag_html ( tag_str );
 
-                if ( $tags.length === 0 || this.options.append ) {
+                if ( this.options.tags.$nodes.length === 0 || this.options.append ) {
 
                     this.$partial.before ( tag_html );
 
                 } else {
 
-                    var tags_ord_arr = tags_arr;
-
-                    tags_ord_arr.push ( tag_str );
-                    tags_ord_arr.sort ();
-
-                    var index = tags_ord_arr.indexOf ( tag_str );
+                    var index = this.options.tags.arr.indexOf ( tag_str );
 
                     if ( index - 1 < 0 ) {
 
-                        this.$tags.first ().before ( tag_html );
+                        this.options.tags.$nodes.first ().before ( tag_html );
 
                     } else {
 
-                        this.$tags.eq ( index - 1 ).after ( tag_html );
+                        this.options.tags.$nodes.eq ( index - 1 ).after ( tag_html );
 
                     }
 
                 }
 
-                this.update_variables ();
-                this.update_input ();
+                this._update_variables ();
+                this._update_input ();
 
-                if ( empty === true ) {
-
-                    this.$partial.val ( '' );
-
-                }
+                return true;
 
             }
 
@@ -285,15 +369,14 @@
 
         remove_tag: function ( $tag, edit ) {
 
-            var $label = $tag.find ( '.label' ),
-                tag_str = $label.html ();
-
             $tag.remove ();
 
-            this.update_variables ();
-            this.update_input ();
+            this._update_variables ();
+            this._update_input ();
 
             if ( edit === true ) {
+
+                var tag_str = $tag.find ( '.button-center' ).html ();
 
                 this.$partial.val ( tag_str );
 
@@ -307,7 +390,19 @@
 
     $(function () {
 
-        $('input.tagbox').tagbox ();
+        $('.tagbox').each ( function () {
+
+            var $tagbox = $(this),
+                $input = $tagbox.find ( 'input' ).eq ( 0 ),
+                options = {
+                    tags: {
+                        str: $input.val () || ''
+                    }
+                };
+
+            $tagbox.tagbox ( options );
+
+        });
 
     });
 

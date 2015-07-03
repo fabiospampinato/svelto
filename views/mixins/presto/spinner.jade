@@ -1,0 +1,10 @@
+//- spinner.jade
+
+//- TODO: add placeholders (selects-like) labels
+
+mixin spinner(name, min, value, max)
+    .button.spinner(data-min=min, data-max=max)&attributes(attributes)
+        input(type="number", name=name, value=value)
+        .button-left.actionable.decrease -
+        .button-center= value
+        .button-right.actionable.increase +

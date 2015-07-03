@@ -9,6 +9,20 @@
 
     $.widget ( 'presto.slider', {
 
+        /* OPTIONS */
+
+        options: {
+            min: 0,
+            max: 100,
+            value: 0,
+            step: 1,
+            decimals: 0,
+            callbacks: {
+                increased: $.noop,
+                decrease: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
@@ -22,26 +36,20 @@
             this.$handler = this.$slider.find ( '.handler' );
             this.$label = this.$handler.find ( '.label' );
 
-            this.min = this.$slider.data ( 'min' );
-            this.max = this.$slider.data ( 'max' );
-            this.start = this.$slider.data ( 'start' ) || this.$input.val () || 0;
-            this.step = this.$slider.data ( 'step' ) || 1;
-            this.decimals = this.$slider.data ( 'decimals' ) || 0;
-
             this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.max - this.min );
-            this.required_step_width = this.step * this.one_step_width;
-            this.current_value = this.start;
+            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
+            this.required_step_width = this.options.step * this.one_step_width;
 
             this.start_pos = false;
             this.current_move = false;
 
-            this.set_value ( this.current_value );
+            this.set_value ( this.options.value, true );
 
             this._bind_change ();
             this._bind_resize ();
             this._bind_arrows ();
-            this._bind_min_max_click ();
+            this._bind_min_click ();
+            this._bind_max_click ();
             this._bind_drag ();
             this._bind_click ();
 
@@ -51,7 +59,7 @@
 
         _round_value: function ( value ) {
 
-            return Number(value).toFixed ( this.decimals );
+            return Number(Number(value).toFixed ( this.options.decimals ));
 
         },
 
@@ -82,19 +90,13 @@
 
         _bind_change: function () {
 
-            this.$input.on ( 'change', this._handler_change );
+            this._on ( true, this.$input, 'change', this._handler_change );
 
         },
 
-        _handler_change: function ( event ) {
+        _handler_change: function () {
 
-            var input_val = Number(this.$input.val ());
-
-            if ( input_val === this.current_value ) return;
-
-            this.current_value = input_val;
-
-            this.set_value ( this.current_value );
+            this.set_value ( this.$input.val () );
 
         },
 
@@ -102,15 +104,15 @@
 
         _bind_resize: function () {
 
-            $window.on ( 'resize', this._handler_resize );
+            this._on ( $window, 'resize', this._handler_resize );
 
         },
 
         _handler_resize: function ( event ) {
 
             this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.max - this.min );
-            this.required_step_width = this.step * this.one_step_width;
+            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
+            this.required_step_width = this.options.step * this.one_step_width;
 
         },
 
@@ -118,33 +120,32 @@
 
         _bind_arrows: function () {
 
-            this.$slider.hover ( this._handler_arrows_in, this._handler_arrows_out );
+            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
+            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
 
         },
 
-        _handler_arrows_in: function ( event ) {
+        _handler_arrows_in: function () {
 
-            if ( this.hasClass ( 'inactive' ) ) return;
-
-            $document.on ( 'keydown', this._handler_arrows_keydown );
+            this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
-        _handler_arrows_out: function ( event ) {
+        _handler_arrows_out: function () {
 
-            $document.off ( 'keydown', this._handler_arrows_keydown );
+            this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
         },
 
         _handler_arrows_keydown: function ( event ) {
 
-            if ( event.keyCode === 37 ) { // left arrow
+            if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
 
-                this.navigate ( - this.step );
+                this.decrease ();
 
-            } else if ( event.keyCode === 39 ) { // right arrow
+            } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
 
-                this.navigate ( this.step );
+                this.increase ();
 
             }
 
@@ -154,30 +155,13 @@
 
         _bind_min_click: function () {
 
-            this.$min_btn.on ( 'click', this._handler_min_click );
-
-        },
-
-        _handler_min_click: function ( event ) {
-
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.navigate ( - this.step );
+            this._on ( this.$min_btn, 'click', this.decrease );
 
         },
 
         _bind_max_click: function () {
 
-            this.$max_btn.on ( 'click', this._handler_max_click );
-
-        },
-
-        _handler_max_click: function () {
-
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.navigate ( this.step );
-
+            this._on ( this.$max_btn, 'click', this.increase );
 
         },
 
@@ -185,34 +169,32 @@
 
         _bind_drag: function () {
 
-            this.$handler.on ( 'mousedown touchstart', this._handler_drag_start );
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
 
         },
 
         _handler_drag_start: function ( event ) {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
-
-            this.start_pos = get_event_pageXY ( event );
+            this.start_pos = $.eventXY ( event );
             this.current_move = 0;
 
             $html.addClass ( 'dragging' );
             this.$slider.addClass ( 'dragging' );
 
-            $document.on ( 'mousemove touchmove', this._handler_drag_move );
-            $document.on ( 'mouseup touchend', this._handler_drag_end );
+            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
+            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
         _handler_drag_move: function ( event ) {
 
-            var end_pos = get_event_pageXY ( event ),
-                full_move = end_pos.pageX - this.start_pos.pageX,
+            var end_pos = $.eventXY ( event ),
+                full_move = end_pos.X - this.start_pos.X,
                 delta_move = full_move - this.current_move;
 
             if ( Math.abs ( delta_move ) >= 1 ) {
 
-                var moved = this.navigate_move ( delta_move );
+                var moved = this.navigate_distance ( delta_move );
 
                 if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
 
@@ -229,8 +211,8 @@
             $html.removeClass ( 'dragging' );
             this.$slider.removeClass ( 'dragging' );
 
-            $document.off ( 'mousemove touchmove', this._handler_drag_move );
-            $document.off ( 'mouseup touchend', this._handler_drag_end );
+            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
+            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
@@ -238,72 +220,78 @@
 
         _bind_click: function () {
 
-            this.$unhighlighted.on ( 'click', this._handler_click );
+            this._on ( this.$unhighlighted, 'click', this._handler_click );
 
         },
 
         _handler_click: function ( event ) {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+            if ( event.target === this.$handler.get ( 0 ) ) return; //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
-            if ( $(event.target).parents ().index ( this.$handler ) !== -1 ) return;
+            var click_pos = $.eventXY ( event ),
+                distance = click_pos.X - ( this.$highlighted.offset ().left + this.$highlighted.width () );
 
-            var click_pos = get_event_pageXY ( event ),
-                distance = click_pos.pageX - ( this.$highlighted.offset ().left + this.$highlighted.width () );
-
-            this.navigate_move ( distance );
+            this.navigate_distance ( distance );
 
         },
 
         /* PUBLIC */
 
-        set_value: function ( value ) {
+        set_value: function ( value, force ) {
 
             value = this._round_value ( value );
 
-            var width = ( ( value - this.min ) * 100 / ( this.max - this.min ) ) + '%';
+            if ( value >= this.options.min && value <= this.options.max && ( value !== this.options.value || force ) ) {
 
-            this.$handler.css ( 'left', width );
-            this.$highlighted.css ( 'width', width );
+                this.options.value = value;
 
-            this.$input.val ( value ).trigger ( 'change' );
-            this.$label.html ( value );
+                var width = ( ( value - this.options.min ) * 100 / ( this.options.max - this.options.min ) ) + '%';
 
-        },
+                this.$handler.css ( 'left', width );
+                this.$highlighted.css ( 'width', width );
 
-        navigate: function ( modifier ) {
+                this.$input.val ( value ).trigger ( 'change' );
+                this.$label.html ( value );
 
-            var possible_new_value = this.current_value + modifier;
-
-            if ( possible_new_value >= this.min && possible_new_value <= this.max ) {
-
-                this.current_value = possible_new_value;
-
-                this.set_value ( this.current_value );
+                this._trigger ( value > this.options.value ? 'increase' : 'decrease' );
 
             }
 
         },
 
-        navigate_move: function ( distance ) {
+        increase: function () {
+
+            this.navigate ( this.options.step );
+
+        },
+
+        decrease: function () {
+
+            this.navigate ( - this.options.step );
+
+        },
+
+        navigate: function ( modifier ) {
+
+            var new_value = this.options.value + modifier;
+
+            this.set_value ( new_value );
+
+        },
+
+        navigate_distance: function ( distance ) {
 
             distance = this._round_distance ( distance );
 
             if ( distance !== 0 ) {
 
-                var possible_new_value = this.current_value + ( distance / this.one_step_width );
+                var new_value = this.options.value + ( distance / this.one_step_width );
 
-                possible_new_value = Math.max ( this.min, Math.min ( this.max, possible_new_value ) );
+                new_value = Math.max ( this.options.min, Math.min ( this.options.max, new_value ) );
 
-                if ( this.current_value !== possible_new_value ) {
+                this.set_value ( new_value );
 
-                    this.current_value = possible_new_value;
-
-                    this.set_value ( this.current_value );
-
-                    return distance;
-
-                }
+                return distance; //FIXME: Should we check if the values as changed before?
 
             }
 
@@ -317,7 +305,23 @@
 
     $(function () {
 
-        $('.slider_wrp').slider ();
+        $('.slider_wrp').each ( function () {
+
+            var $slider_wrp = $(this),
+                $input = $slider_wrp.find ( 'input' ),
+                $min = $slider_wrp.find ( '.min' ),
+                $max = $slider_wrp.find ( '.max' ),
+                options = {
+                    min: Number($min.data ( 'min' ) || 0),
+                    max: Number($max.data ( 'max' ) || 100),
+                    value: Number($input.val () || 0),
+                    step: Number($slider_wrp.data ( 'step' ) || 1),
+                    decimals: Number($slider_wrp.data ( 'decimals' ) || 0)
+                };
+
+            $slider_wrp.slider ( options );
+
+        });
 
     });
 

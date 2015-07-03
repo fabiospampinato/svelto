@@ -1,6 +1,8 @@
 
 /* SLIDER */
 
+//FIXME: if the container is not white the inactive status is not good
+
 .slider_wrp {
 
     @include medium ();
@@ -44,7 +46,7 @@
                     @include secondary ( true );
                     @include center-absolutely ( false, $slider-handler-size );
                     border-radius: 50%;
-                    box-shadow: $shadow-depth-2;
+                    box-shadow: $shadow-depth-3;
                     height: $slider-handler-size;
                     line-height: $slider-handler-size;
                     position: absolute;
@@ -101,7 +103,7 @@
 
     }
 
-    &:not(.inactive) {
+    &:not(.presto-slider-disabled) {
 
         & > .slider {
 
@@ -163,7 +165,7 @@
 
     }
 
-    &.inactive {
+    &.presto-slider-disabled {
 
         & > .slider .bar .unhighlighted {
 

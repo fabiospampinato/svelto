@@ -21,10 +21,13 @@ button {
     line-height: 1em;
     min-height: 1em;
     min-width: 1em;
-    cursor:pointer;
 
     html.dragging & {
         cursor: move !important;
+    }
+
+    &.actionable {
+        cursor: pointer;
     }
 
     & > .button-left, & > .button-right {
@@ -34,9 +37,27 @@ button {
         cursor: pointer;
     }
 
+    &:not(.inactive):not(.active):not(.dragging) {
+
+        & > .button-left, & > .button-right {
+
+            &.actionable:not(.inactive):not(.active):not(.dragging):hover {
+                background-color: rgba(0, 0, 0, 0.06);
+            }
+
+            &:not(.inactive):active, &:not(.inactive).active {
+                box-shadow: $shadow-inset-1;
+            }
+
+        }
+
+    }
+
     & > .button-left {
         order: 1;
         margin: #{-$button-vertical-padding} #{$button-horizontal-padding} #{-$button-vertical-padding} #{-$button-horizontal-padding};
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
     }
 
     & > .button-center {
@@ -46,6 +67,8 @@ button {
     & > .button-right {
         order: 3;
         margin: #{-$button-vertical-padding} #{-$button-horizontal-padding} #{-$button-vertical-padding} #{$button-horizontal-padding};
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
     }
 
     &.inactive {
@@ -59,7 +82,7 @@ button {
 
     }
 
-    &:not(.inactive) {
+    &.actionable:not(.inactive) {
 
         &:active, &.active {
             @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );

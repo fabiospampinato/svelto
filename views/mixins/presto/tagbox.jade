@@ -1,0 +1,9 @@
+//- tagbox.jade
+
+//- TODO: add autogrow support
+
+mixin tagbox(name, tags)
+    .tagbox.container.transparent.no-padding&attributes(attributes)
+        input(type="text", name=name, value=tags)
+        .multiple
+            input(type="text", name=("placeholder_" + name), value="", placeholder="New tag...", class="transparent small").autogrow

@@ -5,20 +5,8 @@ extends ../../layout.jade
 append body
     +divider Checkbox
 
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .container.transparent.no-padding.no-border
-                    form
-                        .multiple
-                            .button.actionable.checkbox
-                                input(type="checkbox", name="check_name", value="4")
-                                .label.left Base
-                                .icon.on.right
-                                .icon.off.right
-                            .button.actionable.checkbox.selected
-                                input(type="checkbox", name="check_name", value="9")
-                                .label.left Selected
-                                .icon.on.right
-                                .icon.off.right
-
+    form
+        +multiple
+            +checkbox("name1", "Base", 4)
+            +checkbox("name2", "Selected", 8, true)
+            +checkbox("name3", "Disabled", 16, true).presto-checkbox-disabled

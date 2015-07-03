@@ -46,6 +46,28 @@
 
     $.widget ( 'presto.progressBar', {
 
+        /* TEMPLATES */
+
+        templates: {
+            base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
+                      '<div class="unhighlighted">' +
+                          '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
+                      '</div>' +
+                      '<div class="stripes"></div>' +
+                  '</div>',
+            percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                             '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
+                         '{% } %}',
+            percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                                     '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
+                                 '{% } %}',
+            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
+            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
+                                    '{% include ( "presto.progressBar.label", {} ); %}' +
+                                '</div>',
+            label: '<div class="label"></div>'
+        },
+
         /* OPTIONS */
 
         options: {
@@ -69,28 +91,6 @@
             callbacks: {
                 update: $.noop
             }
-        },
-
-        /* TEMPLATES */
-
-        templates: {
-            base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                      '<div class="unhighlighted">' +
-                          '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
-                      '</div>' +
-                      '<div class="stripes"></div>' +
-                  '</div>',
-            percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                             '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
-                         '{% } %}',
-            percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                                     '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
-                                 '{% } %}',
-            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
-            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
-                                    '{% include ( "presto.progressBar.label", {} ); %}' +
-                                '</div>',
-            label: '<div class="label"></div>'
         },
 
         /* SPECIAL */

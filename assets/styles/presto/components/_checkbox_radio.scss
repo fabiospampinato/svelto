@@ -17,13 +17,12 @@
 
         &.off {
             opacity: 1;
-            margin-right: -1.635em;
-
+            margin-left: -1.635em;
         }
 
     }
 
-    &.selected .icon {
+    &.checked .icon {
 
         &.on  {
             opacity: 1;
@@ -42,7 +41,7 @@
 .checkbox .icon {
 
     &.on:after {
-@extend %icon;
+        @extend %icon;
         @extend .icon-toggle-check-box:before;
     }
 

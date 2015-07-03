@@ -1,0 +1,16 @@
+
+/* TAGBOX */
+
+//FIXME: The partial input field is too big
+
+.tagbox {
+
+    & > input {
+        display: none;
+    }
+
+    & > .multiple > input {
+        min-width: 7em;
+    }
+
+}

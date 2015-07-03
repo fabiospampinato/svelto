@@ -3,28 +3,8 @@
 extends ../../layout.jade
 
 append body
-+divider Slider
-    .grid
-        .grid_cols.fluid.limited
-            .grid_col
-                .container
-                    .slider_wrp
-                        .slider(data-min="0", data-max="100", data-start="75")
-                            input(type="text", value="100", name="slider_name")
-                            .min(data-min="0", title="Decrement")
-                            .max(data-max="100", title="Increment")
-                            .bar
-                                .unhighlighted
-                                    .highlighted
-                                    .handler
-                                        .label 75
-                    .slider_wrp.inactive
-                        .slider(data-min="0", data-max="100", data-start="33")
-                            input(type="text", value="100", name="slider_name")
-                            .min(data-min="0", title="Decrement")
-                            .max(data-max="100", title="Increment")
-                            .bar
-                                .unhighlighted
-                                    .highlighted
-                                    .handler
-                                        .label 33
+    +divider Slider
+
+    +container
+        +slider("name1", 0, 75, 100)
+        +slider("name2", 0, 33, 100).presto-slider-disabled

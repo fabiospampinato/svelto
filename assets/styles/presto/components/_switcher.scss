@@ -30,7 +30,7 @@
             width: $switcher-handler-size;
             border-radius: $switcher-handler-size;
             margin-left: -$switcher-handler-half-size;
-            box-shadow: $shadow-depth-2;
+            box-shadow: $shadow-depth-3;
             transition: background-color 0.2s ease 0s, left 0.2s ease 0s, box-shadow 0.2s ease 0s;
 
             &:active {
@@ -43,6 +43,7 @@
                 height: $switcher-handler-icon-size;
                 line-height: $switcher-handler-icon-size;
                 font-size: $switcher-handler-icon-font-size;
+                text-align: center;
             }
 
         }

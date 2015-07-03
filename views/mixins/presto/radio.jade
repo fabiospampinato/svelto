@@ -1,0 +1,15 @@
+//- radio.jade
+
+mixin radio(name, title, value, checked)
+    if checked
+        .button.actionable.radio.checked&attributes(attributes)
+            input(type="radio", name=name, value=value, checked)
+            .label.left= title
+            .icon.on.right
+            .icon.off.right
+    else
+        .button.actionable.radio&attributes(attributes)
+            input(type="radio", name=name, value=value)
+            .label.left= title
+            .icon.on.right
+            .icon.off.right

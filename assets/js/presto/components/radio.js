@@ -1,5 +1,8 @@
 
-/* RADIOS */
+/* RADIO */
+
+//TODO: add better support for disabled checkboxes
+//TODO: api for selecting and unselecting (with events)
 
 ;(function ( $, window, document, undefined ) {
 
@@ -9,29 +12,30 @@
 
     $.widget ( 'presto.radio', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                checked: $.noop,
+                unchecked: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
 
-            this.$input = this.$element.find ( 'input' ),
-            this.name = this.$input.attr ( 'name' ),
-            this.$form = this.$element.parent ( 'form' ),
-            this.$radios = this.$form.find ( 'input[name="' + this.name + '"]' ),
-            this.$btns = this.$radios.parent ( '.radio' );
+            this.$input = this.$element.find ( 'input' );
+            this.name = this.$input.attr ( 'name' );
+            this.$form = this.$element.parent ( 'form' );
+            this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
+            this.$other_radios = this.$other_inputs.parent ();
 
-            if ( this.$input.checked () ) {
+            this.$element.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
 
-                this.$element.addClass ( 'selected' );
+            this._on ( 'click', this.select );
 
-            } else if ( this.$element.hasClass ( 'selected' ) ) {
-
-                this.$input.prop ( 'checked', true ).trigger ( 'change' );
-
-            }
-
-            this.$element.on ( 'click', this.select );
-
-            this.$input.on ( 'change', this._update );
+            this._on ( true, this.$input, 'change', this._update );
 
         },
 
@@ -39,15 +43,17 @@
 
         _update: function () {
 
-            var active = this.$input.prop ( 'checked' );
+            var checked = this.$input.prop ( 'checked' );
 
-            if ( active ) {
+            if ( checked ) { //INFO: We do the update when we reach the checked one
 
-                this.$btns.removeClass ( 'selected' );
+                this.$other_radios.removeClass ( 'checked' );
 
-                this.$element.addClass ( 'selected' );
+                this.$element.addClass ( 'checked' );
 
             }
+
+            this._trigger ( checked ? 'checked' : 'unchecked' );
 
         },
 
@@ -55,9 +61,11 @@
 
         select: function () {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+            if ( !this.$input.prop ( 'checked' ) ) {
 
-            this.$input.prop ( 'checked', true ).trigger ( 'change' );
+                this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+            }
 
         }
 

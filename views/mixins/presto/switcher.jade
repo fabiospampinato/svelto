@@ -1,0 +1,15 @@
+//- switcher.jade
+
+mixin switcher(options, value, checked)
+    if value
+        - var name = options;
+        - options = { name: name, value: value, checked: checked };
+
+    - var color_class = ( options.checked ? (options.colors && options.colors.on ? options.colors.on : "secondary") : (options.colors && options.colors.off ? options.colors.off : "gray"));
+
+    .switcher(data-color-on=(options.colors ? options.colors.on : false), data-color-off=(options.colors ? options.colors.off : false), data-icon-on=(options.icons ? options.icons.on : false), data-icon-off=(options.icons ? options.icons.off : false))&attributes(attributes)
+        input(type="checkbox", name=options.name, value=options.value, checked=options.checked)
+        .bar(class=color_class)
+            .handler(class=color_class)
+                if options.icons && options.icons.on
+                    +icon(options.icons.on)

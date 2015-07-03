@@ -614,12 +614,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/assets\/js\/presto\/tools\/BTeach.js": {
+	"\/assets\/js\/presto\/tools\/btEach.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/BTeach.js",
-		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/BTeach.js",
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/btEach.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -713,12 +713,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/assets\/js\/presto\/tools\/timeago.js": {
+	"\/assets\/js\/presto\/tools\/timeAgo.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeago.js",
-		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/timeago.js",
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/timeAgo.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -1429,6 +1429,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
+	"\/assets\/styles\/presto\/components\/_tagbox.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_tagbox.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_tagbox.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
 	"\/assets\/styles\/presto\/components\/_toolbar.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -2074,15 +2090,6 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/index.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/index.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/index.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2115,7 +2122,7 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
-	"\/README.md": {
+	"\/Readme.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 0,
 		"enableLabels": 1,
@@ -2124,9 +2131,9 @@
 		"fileType": 4096,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/README.md",
+		"inputAbbreviatedPath": "\/Readme.md",
 		"maskEmailAddresses": 1,
-		"outputAbbreviatedPath": "\/README.html",
+		"outputAbbreviatedPath": "\/Readme.html",
 		"outputFormat": 0,
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
@@ -2358,282 +2365,282 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/colors.html": {
+	"\/views\/demo\/CSS\/colors.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/colors.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/colors.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/colors.jade": {
+	"\/views\/demo\/CSS\/colors.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/colors.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/colors.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/colors.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/colors.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/container.html": {
+	"\/views\/demo\/CSS\/container.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/container.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/container.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/container.jade": {
+	"\/views\/demo\/CSS\/container.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/container.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/container.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/container.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/container.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/elements.html": {
+	"\/views\/demo\/CSS\/elements.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/elements.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/elements.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/elements.jade": {
+	"\/views\/demo\/CSS\/elements.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/elements.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/elements.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/elements.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/elements.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/flags.html": {
+	"\/views\/demo\/CSS\/flags.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/flags.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/flags.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/flags.jade": {
+	"\/views\/demo\/CSS\/flags.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/flags.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/flags.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/flags.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/flags.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/form.html": {
+	"\/views\/demo\/CSS\/form.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/form.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/form.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/form.jade": {
+	"\/views\/demo\/CSS\/form.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/form.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/form.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/form.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/form.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/grid.html": {
+	"\/views\/demo\/CSS\/grid.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/grid.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/grid.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/grid.jade": {
+	"\/views\/demo\/CSS\/grid.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/grid.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/grid.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/grid.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/grid.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/helpers.html": {
+	"\/views\/demo\/CSS\/helpers.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/helpers.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/helpers.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/helpers.jade": {
+	"\/views\/demo\/CSS\/helpers.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/helpers.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/helpers.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/helpers.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/helpers.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/helpers_responsive.html": {
+	"\/views\/demo\/CSS\/helpers_responsive.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/helpers_responsive.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/helpers_responsive.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/helpers_responsive.jade": {
+	"\/views\/demo\/CSS\/helpers_responsive.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/helpers_responsive.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/helpers_responsive.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/helpers_responsive.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/helpers_responsive.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/icons.html": {
+	"\/views\/demo\/CSS\/icons.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/icons.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/icons.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/icons.jade": {
+	"\/views\/demo\/CSS\/icons.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/icons.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/icons.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/icons.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/icons.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/multiple.html": {
+	"\/views\/demo\/CSS\/multiple.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/multiple.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/multiple.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/multiple.jade": {
+	"\/views\/demo\/CSS\/multiple.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/multiple.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/multiple.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/multiple.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/multiple.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/shadows.html": {
+	"\/views\/demo\/CSS\/shadows.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/shadows.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/shadows.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/shadows.jade": {
+	"\/views\/demo\/CSS\/shadows.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/shadows.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/shadows.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/shadows.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/shadows.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/sizes.html": {
+	"\/views\/demo\/CSS\/sizes.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/sizes.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/sizes.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/sizes.jade": {
+	"\/views\/demo\/CSS\/sizes.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/sizes.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/sizes.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/sizes.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/sizes.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/table.html": {
+	"\/views\/demo\/CSS\/table.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/table.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/table.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/table.jade": {
+	"\/views\/demo\/CSS\/table.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/table.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/table.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/table.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/table.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/typography.html": {
+	"\/views\/demo\/CSS\/typography.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/typography.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/typography.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/typography.jade": {
+	"\/views\/demo\/CSS\/typography.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/typography.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/typography.html",
+		"inputAbbreviatedPath": "\/views\/demo\/CSS\/typography.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/CSS\/typography.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -2748,6 +2755,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/modal.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/modal.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/javascript\/modal.jade": {
 		"compileDebug": 0,
@@ -3157,222 +3173,299 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/advertisement.jade": {
+	"\/views\/mixins\/presto\/advertisement.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/advertisement.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/advertisement.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/advertisement.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/advertisement.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/all.jade": {
+	"\/views\/mixins\/presto\/all.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/all.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/all.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/all.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/all.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/base.jade": {
+	"\/views\/mixins\/presto\/base.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/base.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/base.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/base.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/base.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/breadcrumb.jade": {
+	"\/views\/mixins\/presto\/breadcrumb.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/breadcrumb.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/breadcrumb.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/breadcrumb.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/breadcrumb.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/button.jade": {
+	"\/views\/mixins\/presto\/button.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/button.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/button.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/button.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/button.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/container.jade": {
+	"\/views\/mixins\/presto\/checkbox.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/container.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/container.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/checkbox.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/checkbox.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/divider.jade": {
+	"\/views\/mixins\/presto\/container.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/divider.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/divider.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/container.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/container.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/elements.jade": {
+	"\/views\/mixins\/presto\/divider.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/elements.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/elements.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/divider.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/divider.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/flags.jade": {
+	"\/views\/mixins\/presto\/elements.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/flags.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/flags.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/elements.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/elements.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/grid.jade": {
+	"\/views\/mixins\/presto\/flags.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/grid.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/grid.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/flags.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/flags.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/header.jade": {
+	"\/views\/mixins\/presto\/grid.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/header.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/header.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/grid.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/grid.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/icons.jade": {
+	"\/views\/mixins\/presto\/header.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/icons.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/icons.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/header.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/header.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/modal.jade": {
+	"\/views\/mixins\/presto\/icons.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/modal.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/modal.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/icons.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/icons.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/multiple.jade": {
+	"\/views\/mixins\/presto\/modal.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/multiple.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/multiple.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/modal.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/modal.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/notification.jade": {
+	"\/views\/mixins\/presto\/multiple.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/notification.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/notification.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/multiple.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/multiple.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/noty.jade": {
+	"\/views\/mixins\/presto\/notification.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/noty.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/noty.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/notification.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/notification.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/others.jade": {
+	"\/views\/mixins\/presto\/noty.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/others.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/others.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/noty.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/noty.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/progressBar.jade": {
+	"\/views\/mixins\/presto\/others.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/progressBar.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/progressBar.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/others.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/others.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/shapes.jade": {
+	"\/views\/mixins\/presto\/progressBar.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/shapes.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/shapes.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/progressBar.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/progressBar.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/presto\/mixins\/table.jade": {
+	"\/views\/mixins\/presto\/radio.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/presto\/mixins\/table.jade",
-		"outputAbbreviatedPath": "\/views\/presto\/mixins\/table.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/radio.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/radio.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/shapes.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/shapes.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/shapes.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/slider.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/slider.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/slider.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/spinner.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/spinner.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/spinner.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/switcher.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/switcher.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/switcher.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/syntax.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/syntax.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/syntax.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/table.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/table.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/table.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/tagbox.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/tagbox.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/tagbox.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -3698,13 +3791,13 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeago.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
 			"position": 37,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/BTeach.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
 			"position": 38,
 			"type": 0
 			}
