@@ -2385,50 +2385,105 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TOUCHING */
 
-//TODO: rewrite it, with two operating way: 1) chose the one with the most overlapping area 2) chose all that have an overlapping area greater and 0
-//TODO: make it also able to return more than one match
+//TODO: add support for lenear search, non binary
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    //FIXME: It's not a widget
+    /* UTILITIES */
+
+    var get_coordinates = function ( $ele ) {
+
+        var offset = $ele.offset ();
+
+        return {
+            X1: offset.left,
+            X2: offset.left + offset.width,
+            Y1: offset.top,
+            Y2: offset.top + offset.height
+        };
+
+    };
+
+    var get_overlapping_area = function ( c1, c2 ) {
+
+        var x_overlap = Math.max ( 0, Math.min ( c1.X2, c2.X2 ) - Math.max ( c1.X1, c2.X1 ) ),
+            y_overlap = Math.max ( 0, Math.min ( c1.Y2, c2.Y2 ) - Math.max ( c1.Y1, c2.Y1 ) );
+
+        return x_overlap * y_overlap;
+
+    };
 
     /* TOUCHING */
 
-    $.widget ( 'presto.touching', {
+    $.fn.touching = function ( custom_options ) {
 
         /* OPTIONS */
 
-        options: {
-            start_index : false,
-            x : 0,
-            y : 0
-        },
+        var options = {
+            start_index : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+            point: false, //INFO: Used for the punctual search
+            //  {
+            //      X: 0,
+            //      Y: 0
+            //  },
+            $comparer: false, //INFO: Used for the overlapping search
+            select: 'all'
+        };
 
-        /* SPECIAL */
+        $.extend ( options, custom_options );
 
-        _init: function () {
+        /* COMPARER */
 
-            var options = this.options,
-                touched = false;
+        if ( options.$comparer ) {
 
-            this.bt_each ( function () {
+            var c1 = get_coordinates ( options.$comparer ),
+                matches = [],
+                areas = [];
+
+            for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                var $ele = $(this.nodes[i]);
+
+                if ( $ele.get ( 0 ) === options.$comparer.get ( 0 ) ) continue;
+
+                var c2 = get_coordinates ( $ele ),
+                    overlap_area = get_overlapping_area ( c1, c2 );
+
+                if ( overlap_area > 0 ) {
+
+                    matches.push ( this.nodes[i] );
+                    areas.push ( overlap_area );
+
+                }
+
+            }
+
+            return $( options.select === 'all' ? $(matches) : ( options.select === 'most' && matches.length > 0 ? $( matches[ areas.indexOf ( _.max ( areas ) ) ] ) : $() ) );
+
+        }
+
+        /* PUNCTUAL */
+
+        if ( options.point ) {
+
+            var $touched = false;
+
+            this.btEach ( function () {
 
                 var $ele = $(this),
-                    offset = $ele.offset (),
-                    x1 = offset.left,
-                    y1 = offset.top;
+                    c = get_coordinates ( $ele );
 
-                if ( options.y >= y1 ) {
+                if ( options.point.Y >= c.Y1 ) {
 
-                    if ( options.y <= y1 + $ele.height () ) {
+                    if ( options.point.Y <= c.Y2 ) {
 
-                        if ( options.x >= x1 ) {
+                        if ( options.point.X >= c.X1 ) {
 
-                            if ( options.x <= x1 + $ele.width () ) {
+                            if ( options.point.X <= c.X2 ) {
 
-                                touched = $ele;
+                                $touched = $ele;
 
                                 return false;
 
@@ -2457,13 +2512,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 }
 
-            }, this.options.start_index );
+            }, options.start_index );
 
-            return touched;
+            return $touched ? $touched : $();
 
         }
 
-    });
+    };
 
 }( lQuery, window, document ));
 
@@ -5372,7 +5427,7 @@ $.ready ( function () {
 
     /* BINARY TREE .each () */
 
-    $.fn.btEach = function ( callback, start_center ) {
+    $.fn.btEach = function ( callback, start_index ) {
 
         var start = 0,
             end = this.length - 1,
@@ -5382,7 +5437,7 @@ $.ready ( function () {
 
         while ( start <= end ) {
 
-            center = ( iterations === 0 && typeof start_center === 'number' ) ? start_center : Math.ceil ( ( start + end ) / 2 );
+            center = ( iterations === 0 && typeof start_index === 'number' ) ? start_index : Math.ceil ( ( start + end ) / 2 );
 
             result = callback.call ( this.get ( center ), center, this.get ( center ) );
 

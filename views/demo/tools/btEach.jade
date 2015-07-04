@@ -148,6 +148,7 @@ append body
         #clear.button.actionable.black(onclick="javascript:reset()") Clear
 
 append body-end
+    +noty({ body: '<p>[Green] Found <br/> [Red] Smaller <br/> [Blue] Bigger</p>', ttl: 'forever' })
     +script.
         var $squares,
             $input,

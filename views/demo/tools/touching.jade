@@ -3,10 +3,10 @@
 extends ../../layout.jade
 
 append body
-    +divider Squares
+    +divider Squares - All matches
 
     +container
-        +multiple.squares
+        +multiple.squares_all
             +square.enormous.centerize
                 span.small 1
             +square.enormous.centerize
@@ -75,33 +75,266 @@ append body
     +divider Actions
 
     .toolbar
-        input(id="populate_input", type="number", name="input2", placeholder="Squares number...")
-        #populate.button.actionable.secondary(onclick="javascript:populate()") Populate
+        input(id="populate_all_input", type="number", name="input1", placeholder="Squares number...")
+        .button.actionable.secondary(onclick="javascript:populate_all()") Populate
+
+    +divider Squares - Most significant match
+
+    +container
+        +multiple.squares_most
+            +square.enormous.centerize
+                span.small 1
+            +square.enormous.centerize
+                span.small 2
+            +square.enormous.centerize
+                span.small 3
+            +square.enormous.centerize
+                span.small 4
+            +square.enormous.centerize
+                span.small 5
+            +square.enormous.centerize
+                span.small 6
+            +square.enormous.centerize
+                span.small 7
+            +square.enormous.centerize
+                span.small 8
+            +square.enormous.centerize
+                span.small 9
+            +square.enormous.centerize
+                span.small 10
+            +square.enormous.centerize
+                span.small 11
+            +square.enormous.centerize
+                span.small 12
+            +square.enormous.centerize
+                span.small 13
+            +square.enormous.centerize
+                span.small 14
+            +square.enormous.centerize
+                span.small 15
+            +square.enormous.centerize
+                span.small 16
+            +square.enormous.centerize
+                span.small 17
+            +square.enormous.centerize
+                span.small 18
+            +square.enormous.centerize
+                span.small 19
+            +square.enormous.centerize
+                span.small 20
+            +square.enormous.centerize
+                span.small 21
+            +square.enormous.centerize
+                span.small 22
+            +square.enormous.centerize
+                span.small 23
+            +square.enormous.centerize
+                span.small 24
+            +square.enormous.centerize
+                span.small 25
+            +square.enormous.centerize
+                span.small 26
+            +square.enormous.centerize
+                span.small 27
+            +square.enormous.centerize
+                span.small 28
+            +square.enormous.centerize
+                span.small 29
+            +square.enormous.centerize
+                span.small 30
+            +square.enormous.centerize
+                span.small 31
+            +square.enormous.centerize
+                span.small 32
+
+    +divider Actions
+
+    .toolbar
+        input(id="populate_most_input", type="number", name="input2", placeholder="Squares number...")
+        .button.actionable.secondary(onclick="javascript:populate_most()") Populate
+
+    +divider Squares - Punctual
+
+    +container
+        +multiple.squares_punctual
+            +square.enormous.centerize
+                span.small 1
+            +square.enormous.centerize
+                span.small 2
+            +square.enormous.centerize
+                span.small 3
+            +square.enormous.centerize
+                span.small 4
+            +square.enormous.centerize
+                span.small 5
+            +square.enormous.centerize
+                span.small 6
+            +square.enormous.centerize
+                span.small 7
+            +square.enormous.centerize
+                span.small 8
+            +square.enormous.centerize
+                span.small 9
+            +square.enormous.centerize
+                span.small 10
+            +square.enormous.centerize
+                span.small 11
+            +square.enormous.centerize
+                span.small 12
+            +square.enormous.centerize
+                span.small 13
+            +square.enormous.centerize
+                span.small 14
+            +square.enormous.centerize
+                span.small 15
+            +square.enormous.centerize
+                span.small 16
+            +square.enormous.centerize
+                span.small 17
+            +square.enormous.centerize
+                span.small 18
+            +square.enormous.centerize
+                span.small 19
+            +square.enormous.centerize
+                span.small 20
+            +square.enormous.centerize
+                span.small 21
+            +square.enormous.centerize
+                span.small 22
+            +square.enormous.centerize
+                span.small 23
+            +square.enormous.centerize
+                span.small 24
+            +square.enormous.centerize
+                span.small 25
+            +square.enormous.centerize
+                span.small 26
+            +square.enormous.centerize
+                span.small 27
+            +square.enormous.centerize
+                span.small 28
+            +square.enormous.centerize
+                span.small 29
+            +square.enormous.centerize
+                span.small 30
+            +square.enormous.centerize
+                span.small 31
+            +square.enormous.centerize
+                span.small 32
+
+    +divider Actions
+
+    .toolbar
+        input(id="populate_punctual_input", type="number", name="input3", placeholder="Squares number...")
+        .button.actionable.secondary(onclick="javascript:populate_punctual()") Populate
 
 append body-end
     +script.
-        var $squares;
+        function get_squares_html ( nr ) {
 
-        function populate () {
             var html = '';
 
-            for ( var i = 0, l = $('#populate_input').val (); i < l; i++ ) {
+            for ( var i = 0; i < Number(nr); i++ ) {
                 html += '<div class="square enormous centerize" style=""><span class="small">' + (i + 1) + '</span></div>';
             }
 
-            $('.squares').empty ().append ( html );
+            return html;
 
-            $squares = $document.find ( '.square' );
         }
 
+        function populate_all () {
 
+            $('.squares_all').empty ().append ( get_squares_html ( $('#populate_all_input').val () ) );
 
-        function reset () {
-            iterations = 0;
-            $squares.attr ( 'style', '' );
         }
+
+        function populate_most () {
+
+            $('.squares_most').empty ().append ( get_squares_html ( $('#populate_most_input').val () ) );
+
+        }
+
+        function populate_punctual () {
+
+            $('.squares_punctual').empty ().append ( get_squares_html ( $('#populate_punctual_input').val () ) );
+
+        }
+
+        // Drag
+
+        var $squares,
+            drag_options,
+            $drag_target,
+            drag_startXY;
+
+        function drag_start ( selector, options, event ) {
+
+            drag_options = options;
+
+            $squares = $(selector + ' .square');
+
+            $squares.removeClass ( 'green' );
+
+            $drag_target = $(event.target);
+
+            if ( $drag_target.is ( 'span' ) ) {
+
+                $drag_target = $drag_target.parent ( '.square' );
+
+            } else if ( !$drag_target.is ( '.square' ) ) {
+
+                return;
+
+            }
+
+            drag_startXY = $.eventXY ( event );
+
+            $document.on ( 'mousemove touchmove', drag_move );
+            $document.on ( 'mouseup touchend', drag_end );
+
+        }
+
+        function drag_move ( event ) {
+
+            var drag_moveXY = $.eventXY ( event );
+
+            $drag_target.css ( 'z-index', 1000 );
+            $drag_target.css ( 'transform', 'translate3d(' + ( drag_moveXY.X - drag_startXY.X ) + 'px,' + ( drag_moveXY.Y - drag_startXY.Y ) + 'px,0)' );
+
+            if ( drag_options === 'punctual' ) {
+
+                $squares.removeClass ( 'green' ).touching ( { point: drag_moveXY } ).addClass ( 'green' );
+
+            } else {
+
+                $squares.removeClass ( 'green' ).touching ( _.extend ( { $comparer : $drag_target }, drag_options ) ).addClass ( 'green' );
+
+            }
+
+        }
+
+        function drag_end () {
+
+            $drag_target.css ( 'transform', 'translate3d(0,0,0)' );
+            $drag_target.css ( 'z-index', 1 );
+
+            $squares.removeClass ( 'green' );
+
+            $document.off ( 'mousemove touchmove', drag_move );
+            $document.off ( 'mouseup touchend', drag_end );
+
+        }
+
+        // Ready
 
         $(function () {
-            $squares = $document.find ( '.square' );
-            $input = $('#input');
+            $('.squares_all').on ( 'mousedown touchstart', function ( event ) {
+                drag_start ( '.squares_all', { select: 'all' }, event );
+            });
+            $('.squares_most').on ( 'mousedown touchstart', function () {
+                drag_start ( '.squares_most', { select: 'most' }, event );
+            });
+            $('.squares_punctual').on ( 'mousedown touchstart', function () {
+                drag_start ( '.squares_punctual', 'punctual', event );
+            });
         });

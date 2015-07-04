@@ -7,7 +7,7 @@
 
     /* BINARY TREE .each () */
 
-    $.fn.btEach = function ( callback, start_center ) {
+    $.fn.btEach = function ( callback, start_index ) {
 
         var start = 0,
             end = this.length - 1,
@@ -17,7 +17,7 @@
 
         while ( start <= end ) {
 
-            center = ( iterations === 0 && typeof start_center === 'number' ) ? start_center : Math.ceil ( ( start + end ) / 2 );
+            center = ( iterations === 0 && typeof start_index === 'number' ) ? start_index : Math.ceil ( ( start + end ) / 2 );
 
             result = callback.call ( this.get ( center ), center, this.get ( center ) );
 
