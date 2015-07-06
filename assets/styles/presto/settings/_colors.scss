@@ -9,13 +9,16 @@ $color-white: #ffffff !default;
 $color-gray: #cccccc !default;
 $color-black: #000000 !default;
 $color-yellow: #ffce16 !default;
+$color-olive: #b5cc18 !default;
 $color-green: #47d469 !default;
 $color-blue: #2187df !default;
+$color-violet: #6435c9 !default;
 $color-orange: #ff7138 !default;
 $color-purple: #4e4499 !default;
 $color-red: #f64242 !default;
 $color-pink: #fb2ca0 !default;
 $color-teal: #00bbb3 !default;
+$color-brown: #a5673f !default;
 $color-transparent: rgba(0, 0, 0, 0) !default;
 
 /* BRAND */
@@ -70,6 +73,14 @@ $color-yellow-text-hover: $color-yellow-text !default;
 $color-yellow-border: darken( $color-yellow-bg, 20 ) !default;
 $color-yellow-accent: $color-green !default;
 
+$color-olive-bg: $color-olive !default;
+$color-olive-bg-hover: lighten( $color-olive-bg, 2 ) !default;
+$color-olive-bg-active: darken( $color-olive-bg, 4 ) !default;
+$color-olive-text: #ffffff !default;
+$color-olive-text-hover: $color-olive-text !default;
+$color-olive-border: darken( $color-olive-bg, 20 ) !default;
+$color-olive-accent: $color-yellow !default;
+
 $color-green-bg: $color-green !default;
 $color-green-bg-hover: lighten( $color-green-bg, 2 ) !default;
 $color-green-bg-active: darken( $color-green-bg, 4 ) !default;
@@ -85,6 +96,14 @@ $color-blue-text: #ffffff !default;
 $color-blue-text-hover: $color-blue-text !default;
 $color-blue-border: darken( $color-blue-bg, 20 ) !default;
 $color-blue-accent: $color-orange !default;
+
+$color-violet-bg: $color-violet !default;
+$color-violet-bg-hover: lighten( $color-violet-bg, 2 ) !default;
+$color-violet-bg-active: darken( $color-violet-bg, 4 ) !default;
+$color-violet-text: #ffffff !default;
+$color-violet-text-hover: $color-violet-text !default;
+$color-violet-border: darken( $color-violet-bg, 20 ) !default;
+$color-violet-accent: $color-orange !default;
 
 $color-orange-bg: $color-orange !default;
 $color-orange-bg-hover: lighten( $color-orange-bg, 2 ) !default;
@@ -126,6 +145,14 @@ $color-teal-text-hover: $color-teal-text !default;
 $color-teal-border: darken( $color-teal-bg, 20 ) !default;
 $color-teal-accent: $color-red !default;
 
+$color-brown-bg: $color-brown !default;
+$color-brown-bg-hover: lighten( $color-brown-bg, 2 ) !default;
+$color-brown-bg-active: darken( $color-brown-bg, 4 ) !default;
+$color-brown-text: #ffffff !default;
+$color-brown-text-hover: $color-brown-text !default;
+$color-brown-border: darken( $color-brown-bg, 20 ) !default;
+$color-brown-accent: $color-red !default;
+
 /* COLORS */
 
 $colors: (
@@ -135,13 +162,16 @@ $colors: (
     "gray" : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-text, $color-gray-text-hover, $color-gray-border, $color-gray-accent ),
     "black" : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-text, $color-black-text-hover, $color-black-border, $color-black-accent ),
     "yellow" : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-text, $color-yellow-text-hover, $color-yellow-border, $color-yellow-accent ),
+    "olive" : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-text, $color-olive-text-hover, $color-olive-border, $color-olive-accent ),
     "green" : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-text, $color-green-text-hover, $color-green-border, $color-green-accent ),
     "blue" : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-text, $color-blue-text-hover, $color-blue-border, $color-blue-accent ),
+    "violet" : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-text, $color-violet-text-hover, $color-violet-border, $color-violet-accent ),
     "orange" : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-text, $color-orange-text-hover, $color-orange-border, $color-orange-accent ),
     "purple" : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-text, $color-purple-text-hover, $color-purple-border, $color-purple-accent ),
     "red" : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-text, $color-red-text-hover, $color-red-border, $color-red-accent ),
     "pink" : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-text, $color-pink-text-hover, $color-pink-border, $color-pink-accent ),
-    "teal" : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-text, $color-teal-text-hover, $color-teal-border, $color-teal-accent )
+    "teal" : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-text, $color-teal-text-hover, $color-teal-border, $color-teal-accent ),
+    "brown" : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-text, $color-brown-text-hover, $color-brown-border, $color-brown-accent )
 );
 
 /* TRANSPARENT */

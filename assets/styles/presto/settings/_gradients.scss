@@ -41,12 +41,20 @@
     @include gradient ( 'yellow', $important );
 }
 
+@mixin gradient-olive ( $important: '' ) {
+    @include gradient ( 'olive', $important );
+}
+
 @mixin gradient-green ( $important: '' ) {
     @include gradient ( 'green', $important );
 }
 
 @mixin gradient-blue ( $important: '' ) {
     @include gradient ( 'blue', $important );
+}
+
+@mixin gradient-violet ( $important: '' ) {
+    @include gradient ( 'violet', $important );
 }
 
 @mixin gradient-orange ( $important: '' ) {
@@ -67,4 +75,8 @@
 
 @mixin gradient-teal ( $important: '' ) {
     @include gradient ( 'teal', $important );
+}
+
+@mixin gradient-brown ( $important: '' ) {
+    @include gradient ( 'brown', $important );
 }

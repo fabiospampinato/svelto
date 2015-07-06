@@ -135,6 +135,18 @@
     color: $color-yellow;
 }
 
+@mixin olive ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+    @include color ( 'olive', $basic, $transparentize, $gradient, $important);
+}
+
+.olive {
+    @include olive ( false, false, false, '!important' );
+}
+
+.text-olive {
+    color: $color-olive;
+}
+
 @mixin green ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
     @include color ( 'green', $basic, $transparentize, $gradient, $important);
 }
@@ -157,6 +169,18 @@
 
 .text-blue {
     color: $color-blue;
+}
+
+@mixin violet ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+    @include color ( 'violet', $basic, $transparentize, $gradient, $important);
+}
+
+.violet {
+    @include violet ( false, false, false, '!important' );
+}
+
+.text-violet {
+    color: $color-violet;
 }
 
 @mixin orange ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
@@ -217,6 +241,18 @@
 
 .text-teal {
     color: $color-teal;
+}
+
+@mixin brown ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+    @include color ( 'brown', $basic, $transparentize, $gradient, $important);
+}
+
+.brown {
+    @include brown ( false, false, false, '!important' );
+}
+
+.text-brown {
+    color: $color-brown;
 }
 
 /* TRANSPARENT */
