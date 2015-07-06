@@ -1,15 +1,13 @@
 
 /* ACCORDION */
 
-.accordions_wrp {
+.accordion {
 
     margin-bottom: $layout-spacing;
 
-    .accordion {
+    & > .expander {
 
-        @extend .expander;
-
-        margin-bottom: 0 !important;
+        margin-bottom: 0;
 
         &:not(:last-child) {
 
@@ -18,8 +16,7 @@
             border-bottom-left-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
 
-            .header {
-                border-bottom-width: 0 !important;
+            & > .header {
                 border-bottom-left-radius: 0 !important;
                 border-bottom-right-radius: 0 !important;
             }
@@ -27,30 +24,8 @@
         }
 
         &:not(:first-child) {
-
             border-top-left-radius: 0 !important;
             border-top-right-radius: 0 !important;
-
-            .header {
-                border-top-left-radius: 0 !important;
-                border-top-right-radius: 0 !important;
-            }
-
-        }
-
-        .header {
-            margin-bottom: 0 !important;
-        }
-
-        &.active {
-
-            margin-bottom: 0 !important;
-
-            .header {
-                margin-bottom: $layout-spacing !important;
-                border-bottom-width: 1px !important;
-            }
-
         }
 
     }

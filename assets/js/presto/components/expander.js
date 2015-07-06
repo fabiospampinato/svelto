@@ -27,7 +27,7 @@
 
             this.opened = this.$element.hasClass ( 'opened' );
 
-            if ( !this.opened ) this.close ();
+            if ( !this.opened ) this.close ( true );
 
             this._bind_click ();
 
@@ -45,27 +45,35 @@
 
         toggle: function () {
 
-            this.opened = !this.opened;
-
-            this[this.opened ? 'open' : 'close']();
+            this[this.opened ? 'close' : 'open']();
 
         },
 
-        open: function () {
+        open: function ( force ) {
 
-            this.$element.addClass ( 'opened' );
-            this.$content.toggleHeight ( true );
+            if ( !this.opened || force ) {
 
-            this._trigger ( 'open' );
+                this.opened = true;
+
+                this.$element.addClass ( 'opened' );
+
+                this._trigger ( 'open' );
+
+            }
 
         },
 
-        close: function () {
+        close: function ( force ) {
 
-            this.$element.removeClass ( 'opened' );
-            this.$content.toggleHeight ( false );
+            if ( this.opened || force ) {
 
-            this._trigger ( 'close' );
+                this.opened = false;
+
+                this.$element.removeClass ( 'opened' );
+
+                this._trigger ( 'close' );
+
+            }
 
         }
 

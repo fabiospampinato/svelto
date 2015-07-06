@@ -4,6 +4,7 @@
 //TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
 //FIXME: the partial field is too tall
 //TODO: more explicative noty messages, like :you cannot use the tag 'something' again
+//FIXME: se si entra una tag con tab poi non si e' in focus nel $partial
 
 ;(function ( $, window, document, undefined ) {
 

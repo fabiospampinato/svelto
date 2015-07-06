@@ -2877,6 +2877,98 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* EXPANDER */
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* EXPANDER */
+
+    $.widget ( 'presto.expander', {
+
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                open: $.noop,
+                close: $.noop
+            }
+        },
+
+        /* SPECIAL */
+
+        _create: function () {
+
+            this.$header = this.$element.children ( '.header' );
+            this.$content = this.$element.children ( '.content' );
+
+            this.opened = this.$element.hasClass ( 'opened' );
+
+            if ( !this.opened ) this.close ( true );
+
+            this._bind_click ();
+
+        },
+
+        /* PRIVATE */
+
+        _bind_click: function () {
+
+            this._on ( this.$header, 'click', this.toggle );
+
+        },
+
+        /* PUBLIC */
+
+        toggle: function () {
+
+            this[this.opened ? 'close' : 'open']();
+
+        },
+
+        open: function ( force ) {
+
+            if ( !this.opened || force ) {
+
+                this.opened = true;
+
+                this.$element.addClass ( 'opened' );
+
+                this._trigger ( 'open' );
+
+            }
+
+        },
+
+        close: function ( force ) {
+
+            if ( this.opened || force ) {
+
+                this.opened = false;
+
+                this.$element.removeClass ( 'opened' );
+
+                this._trigger ( 'close' );
+
+            }
+
+        }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.expander').expander ();
+
+    });
+
+}( lQuery, window, document ));
+
+
+
 /* ACCORDION */
 
 ;(function ( $, window, document, undefined ) {
@@ -2889,38 +2981,58 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _create: function () {
 
-            this.$accordions = this.$element.find ( '.accordion' );
+            this.$expanders = this.$element.children ( '.expander' );
+            this.expanders_inst = [];
 
-            for ( var i = 0, l = this.$accordions.length; i < l; i++ ) {
+            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                this._init_accordion ( this.$accordions.nodes[i] );
+                this.expanders_inst[i] = this.$expanders.eq ( i ).expander ( 'instance' );
+
+            }
+
+            this._bind_open ();
+
+        },
+
+        /* OPEN */
+
+        _bind_open: function () {
+
+            this._on ( this.$expanders, 'expander:open', this._handler_open );
+
+        },
+
+        _handler_open: function ( event, data, node ) {
+
+            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+
+                if ( this.$expanders.nodes[i] !== node ) {
+
+                    this.expanders_inst[i].close ();
+
+                }
 
             }
 
         },
 
-        /* ACCORDION */
+        /* PUBLIC */
 
-        _init_accordion: function ( node ) {
+        toggle: function ( index ) {
 
-            var $accordion = $(node),
-                $header = $accordion.find ( '.header' ),
-                $other_accordions = this.$accordions.not ( $accordion ),
-                $other_headers = $other_accordions.find ( '.header' ).not ( $header );
+            this.expanders_inst[index].toggle ();
 
-            $header.on ( 'click', function () {
+        },
 
-                if ( $accordion.hasClass ( 'inactive' ) ) return;
+        open: function ( index ) {
 
-                var is_active = $accordion.hasClass ( 'active' );
+            this.expanders_inst[index].open ();
 
-                $accordion.toggleClass ( 'active', !is_active );
-                $header.toggleClass ( 'active', !is_active );
+        },
 
-                $other_accordions.removeClass ( 'active' );
-                $other_headers.removeClass ( 'active' );
+        close: function ( index ) {
 
-            });
+            this.expanders_inst[index].close ();
 
         }
 
@@ -2930,7 +3042,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $(function () {
 
-        $('.accordions_wrp').accordion ();
+        $('.accordion').accordion ();
 
     });
 
@@ -3491,90 +3603,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
     $(function () {
 
         $('.dropdown_trigger').dropdown ();
-
-    });
-
-}( lQuery, window, document ));
-
-
-
-/* EXPANDER */
-
-;(function ( $, window, document, undefined ) {
-
-    'use strict';
-
-    /* EXPANDER */
-
-    $.widget ( 'presto.expander', {
-
-        /* OPTIONS */
-
-        options: {
-            callbacks: {
-                open: $.noop,
-                close: $.noop
-            }
-        },
-
-        /* SPECIAL */
-
-        _create: function () {
-
-            this.$header = this.$element.children ( '.header' );
-            this.$content = this.$element.children ( '.content' );
-
-            this.opened = this.$element.hasClass ( 'opened' );
-
-            if ( !this.opened ) this.close ();
-
-            this._bind_click ();
-
-        },
-
-        /* PRIVATE */
-
-        _bind_click: function () {
-
-            this._on ( this.$header, 'click', this.toggle );
-
-        },
-
-        /* PUBLIC */
-
-        toggle: function () {
-
-            this.opened = !this.opened;
-
-            this[this.opened ? 'open' : 'close']();
-
-        },
-
-        open: function () {
-
-            this.$element.addClass ( 'opened' );
-            this.$content.toggleHeight ( true );
-
-            this._trigger ( 'open' );
-
-        },
-
-        close: function () {
-
-            this.$element.removeClass ( 'opened' );
-            this.$content.toggleHeight ( false );
-
-            this._trigger ( 'close' );
-
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('.expander').expander ();
 
     });
 
@@ -5417,6 +5445,7 @@ $.ready ( function () {
 //TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
 //FIXME: the partial field is too tall
 //TODO: more explicative noty messages, like :you cannot use the tag 'something' again
+//FIXME: se si entra una tag con tab poi non si e' in focus nel $partial
 
 ;(function ( $, window, document, undefined ) {
 

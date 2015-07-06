@@ -11,38 +11,58 @@
 
         _create: function () {
 
-            this.$accordions = this.$element.find ( '.accordion' );
+            this.$expanders = this.$element.children ( '.expander' );
+            this.expanders_inst = [];
 
-            for ( var i = 0, l = this.$accordions.length; i < l; i++ ) {
+            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                this._init_accordion ( this.$accordions.nodes[i] );
+                this.expanders_inst[i] = this.$expanders.eq ( i ).expander ( 'instance' );
+
+            }
+
+            this._bind_open ();
+
+        },
+
+        /* OPEN */
+
+        _bind_open: function () {
+
+            this._on ( this.$expanders, 'expander:open', this._handler_open );
+
+        },
+
+        _handler_open: function ( event, data, node ) {
+
+            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+
+                if ( this.$expanders.nodes[i] !== node ) {
+
+                    this.expanders_inst[i].close ();
+
+                }
 
             }
 
         },
 
-        /* ACCORDION */
+        /* PUBLIC */
 
-        _init_accordion: function ( node ) {
+        toggle: function ( index ) {
 
-            var $accordion = $(node),
-                $header = $accordion.find ( '.header' ),
-                $other_accordions = this.$accordions.not ( $accordion ),
-                $other_headers = $other_accordions.find ( '.header' ).not ( $header );
+            this.expanders_inst[index].toggle ();
 
-            $header.on ( 'click', function () {
+        },
 
-                if ( $accordion.hasClass ( 'inactive' ) ) return;
+        open: function ( index ) {
 
-                var is_active = $accordion.hasClass ( 'active' );
+            this.expanders_inst[index].open ();
 
-                $accordion.toggleClass ( 'active', !is_active );
-                $header.toggleClass ( 'active', !is_active );
+        },
 
-                $other_accordions.removeClass ( 'active' );
-                $other_headers.removeClass ( 'active' );
+        close: function ( index ) {
 
-            });
+            this.expanders_inst[index].close ();
 
         }
 
@@ -52,7 +72,7 @@
 
     $(function () {
 
-        $('.accordions_wrp').accordion ();
+        $('.accordion').accordion ();
 
     });
 

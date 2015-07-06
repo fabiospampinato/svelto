@@ -1,0 +1,53 @@
+//- components/chat.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Chat
+
+    +chat-msg({
+        sender: {
+            name: 'Fabio',
+            url: '/',
+            img: '/assets/images/presto/sample.png'
+        },
+        permissions: {
+            own: true,
+            edit: true,
+            'delete': true
+        },
+        message: {
+            timestamp: Math.round ( new Date ().getTime () / 1000 - 270 ),
+            content: 'This is the message, do you like it?',
+            group: '1'
+        }
+    })
+    +chat-msg({
+        sender: {
+            name: 'Francesca',
+            url: '/',
+            img: '/assets/images/presto/sample.png'
+        },
+        permissions: {
+            edit: true
+        },
+        message: {
+            timestamp: Math.round ( new Date ().getTime () / 1000 - 180 ),
+            content: 'Not really...',
+            group: '1',
+            level: 2
+        }
+    })
+    +chat-msg({
+        sender: {
+            name: 'Valeria',
+            url: '/',
+            img: '/assets/images/presto/sample.png'
+        },
+        message: {
+            timestamp: Math.round ( new Date ().getTime () / 1000 - 90 ),
+            content: 'I do!!!',
+            group: '1',
+            level: 2
+        }
+    })

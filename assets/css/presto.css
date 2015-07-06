@@ -910,32 +910,21 @@ code[class*='language-'] {
 
 /* COMPONENTS */
 /* ACCORDION */
-.accordions_wrp {
+.accordion {
   margin-bottom: 10px; }
-  .accordions_wrp .accordion {
-    margin-bottom: 0 !important; }
-    .accordions_wrp .accordion:not(:last-child) {
+  .accordion > .expander {
+    margin-bottom: 0; }
+    .accordion > .expander:not(:last-child) {
       margin-bottom: -1px !important;
       border-bottom-width: 0 !important;
       border-bottom-left-radius: 0 !important;
       border-bottom-right-radius: 0 !important; }
-      .accordions_wrp .accordion:not(:last-child) .header {
-        border-bottom-width: 0 !important;
+      .accordion > .expander:not(:last-child) > .header {
         border-bottom-left-radius: 0 !important;
         border-bottom-right-radius: 0 !important; }
-    .accordions_wrp .accordion:not(:first-child) {
+    .accordion > .expander:not(:first-child) {
       border-top-left-radius: 0 !important;
       border-top-right-radius: 0 !important; }
-      .accordions_wrp .accordion:not(:first-child) .header {
-        border-top-left-radius: 0 !important;
-        border-top-right-radius: 0 !important; }
-    .accordions_wrp .accordion .header {
-      margin-bottom: 0 !important; }
-    .accordions_wrp .accordion.active {
-      margin-bottom: 0 !important; }
-      .accordions_wrp .accordion.active .header {
-        margin-bottom: 10px !important;
-        border-bottom-width: 1px !important; }
 
 /* GENERAL */
 .advertisement {
@@ -1119,76 +1108,7 @@ button {
     .button .icon.right {
       padding-left: 0.75em; }
 
-/* MESSAGES */
-#chat_messages .group {
-  width: 100%;
-  margin-bottom: 10px; }
-  #chat_messages .group:after {
-    content: "";
-    display: table;
-    clear: both; }
-  #chat_messages .group .message {
-    width: auto;
-    min-width: 27%;
-    max-width: 77%;
-    position: relative;
-    opacity: 0;
-    -webkit-transform: scale(0);
-            transform: scale(0);
-    -webkit-transition: -webkit-transform 0.15s ease 0s, opacity 0.15s ease 0s;
-            transition: transform 0.15s ease 0s, opacity 0.15s ease 0s; }
-    #chat_messages .group .message.show_up {
-      opacity: 1;
-      -webkit-transform: scale(1);
-              transform: scale(1); }
-    #chat_messages .group .message.by_current {
-      float: right;
-      text-align: right; }
-    #chat_messages .group .message.by_current .by {
-      display: none; }
-    #chat_messages .group .message.by_current:first-child .content {
-      border-top-left-radius: 0.2665rem;
-      border-top-right-radius: 0.2665rem; }
-    #chat_messages .group .message.by_others {
-      float: left;
-      text-align: left; }
-    #chat_messages .group .message .by {
-      height: 20px;
-      line-height: 20px;
-      display: block;
-      padding: 5px 10px;
-      border-width: 1px;
-      border-style: solid;
-      border-radius: 0.2665rem 0.2665rem 0 0;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025);
-      font-weight: bold;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap; }
-    #chat_messages .group .message .content {
-      line-height: 18px;
-      padding: 5px 10px;
-      font-size: 15px;
-      word-wrap: break-word;
-      border-width: 1px;
-      border-style: solid;
-      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025);
-      border-bottom-left-radius: 0.2665rem;
-      border-bottom-right-radius: 0.2665rem; }
-      #chat_messages .group .message .content .msg_separator {
-        height: 4px;
-        width: 100%; }
-
-/* INPUT */
-#chat_input {
-  text-align: center;
-  border: medium none;
-  font-size: 14px;
-  height: 54px;
-  margin: -10px;
-  padding: 0 10px;
-  width: 100%; }
-
+/* CHAT */
 /* CHECKBOX / RADIO */
 .checkbox input, .radio input {
   display: none; }
@@ -1489,35 +1409,39 @@ kbd {
     padding: 10px; }
 
 /* EXPANDER */
-.expander, .accordions_wrp .accordion {
+.expander {
   padding-bottom: 0;
   -webkit-transition: padding-bottom 0.25s ease 0s;
           transition: padding-bottom 0.25s ease 0s; }
-  .expander > .header, .accordions_wrp .accordion > .header {
+  .expander > .header {
     cursor: pointer;
     margin-bottom: 0;
     border-bottom-left-radius: 0.2665rem;
     border-bottom-right-radius: 0.2665rem;
     -webkit-transition: margin-bottom 0.25s ease 0s, border-bottom-left-radius 0.25s ease 0s, border-bottom-right-radius 0.25s ease 0s;
             transition: margin-bottom 0.25s ease 0s, border-bottom-left-radius 0.25s ease 0s, border-bottom-right-radius 0.25s ease 0s; }
-    .expander > .header .sub .icon.icon-navigation-arrow-drop-down, .accordions_wrp .accordion > .header .sub .icon.icon-navigation-arrow-drop-down {
+    .expander > .header .sub .icon.icon-navigation-arrow-drop-down {
       -webkit-transition: -webkit-transform 0.2s ease 0s;
               transition: transform 0.2s ease 0s; }
-    .expander > .header .sub.left .icon.icon-navigation-arrow-drop-down, .accordions_wrp .accordion > .header .sub.left .icon.icon-navigation-arrow-drop-down {
+    .expander > .header .sub.left .icon.icon-navigation-arrow-drop-down {
       -webkit-transform: rotate(-90deg);
               transform: rotate(-90deg); }
-    .expander > .header .sub.right .icon.icon-navigation-arrow-drop-down, .accordions_wrp .accordion > .header .sub.right .icon.icon-navigation-arrow-drop-down {
+    .expander > .header .sub.right .icon.icon-navigation-arrow-drop-down {
       -webkit-transform: rotate(90deg);
               transform: rotate(90deg); }
-  .expander.opened, .accordions_wrp .opened.accordion {
+  .expander > .content {
+    display: none; }
+  .expander.opened {
     padding-bottom: 10px; }
-    .expander.opened > .header, .accordions_wrp .opened.accordion > .header {
+    .expander.opened > .header {
       margin-bottom: 10px !important;
       border-bottom-left-radius: 0 !important;
       border-bottom-right-radius: 0 !important; }
-      .expander.opened > .header .sub .icon.icon-navigation-arrow-drop-down, .accordions_wrp .opened.accordion > .header .sub .icon.icon-navigation-arrow-drop-down {
+      .expander.opened > .header .sub .icon.icon-navigation-arrow-drop-down {
         -webkit-transform: rotate(0);
                 transform: rotate(0); }
+    .expander.opened > .content {
+      display: block; }
 
 /* URL: http://semantic-ui.com/elements/flag.html */
 /* GENERAL */

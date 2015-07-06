@@ -32,6 +32,10 @@
 
     }
 
+    & > .content {
+        display: none;
+    }
+
     &.opened {
 
         padding-bottom: $layout-spacing;
@@ -46,6 +50,10 @@
                 transform: rotate(0);
             }
 
+        }
+
+        & > .content {
+            display: block;
         }
 
     }

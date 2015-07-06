@@ -1,0 +1,50 @@
+//- chat.jade
+
+//-
+    {
+        sender: {
+            img: '' // Avatar url
+            name: '', //  Nickname
+            url: '', // Profile url
+        },
+        permissions: {
+            own: boolean, // Flag that decide if the chat is owned by you
+            edit: boolean, // Flag that decide if you can edit it
+            delete: boolean, // Flag that decide if you can delete it
+        },
+        message: {
+            timestamp: number, // Unix timestamp of when the message as been sent
+            content: '', // The message content
+            group: '', // The ID of the group, useful for joining all the messages
+            level: ''
+        }
+    }
+
+mixin chat-msg(options)
+    .chat-msg(class=("level-" + ( options.message.level || 1 ) + " sender-" + ( options.sender && options.sender.name ? options.sender.name : "unknown" ) ) )&attributes(attributes)
+        if options.sender && options.sender.img
+            if options.sender.url
+                a(href=options.sender.url, title=options.sender.name).chat-msg-img
+                    img(src=options.sender.img, title=options.sender.name)
+            else
+                .chat-msg-img
+                    img(src=options.sender.img, title=options.sender.name)
+        .chat-msg-content
+            +container
+                +container-header(options.sender.name)
+                    +container-header-left
+                        +multiple
+                            +button(data-timestamp=options.message.timestamp).compact.mini
+                    +container-header-right
+                        +multiple
+                            if options.permissions
+                                if options.permissions.own
+                                    +button.compact.mini
+                                        +icon("action-account-circle")
+                                if options.permissions.edit
+                                    +button.compact.mini
+                                        +icon("editor-mode-edit")
+                                if options.permissions.delete
+                                    +button.compact.mini
+                                        +icon("action-delete")
+                +container-content= options.message.content
