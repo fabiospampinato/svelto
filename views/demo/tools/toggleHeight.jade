@@ -1,35 +1,41 @@
 //- tools/toggleHeight.jade
 
+//- TODO: when selects are ready use a select for the speed and another for the easing
+
 extends ../../layout.jade
 
 append body
-+divider Paragraph
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .container
-                    #toggable(style="transition: height 0.5s ease 0s; overflow: hidden;")
-                        .container(class="secondary")
-                            p
-                                +lorem-ipsum
-                    p
-                        +lorem-ipsum
+    +divider Paragraph
 
-+divider Action
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .multiple
-                    .button.actionable.outlined(onclick="javascript:toggle_height()") Toggle height
-                    .button.actionable.outlined(onclick="javascript:set_speed(0.5)") Set 0.5s
-                    .button.actionable.outlined(onclick="javascript:set_speed(1)") Set 1s
-                    .button.actionable.outlined(onclick="javascript:set_speed(3)") Set 3s
+    +container
+        .div(style="background-color:rgba(0,0,0,0.2);border-bottom: 1px solid transparent;margin-bottom: -1px !important;")
+            #toggable.container(class="secondary")
+                p(style="background-color:rgba(0,0,0,0.2);border-radius: inherit;")
+                    +lorem-ipsum
+
+    +divider Action
+
+    +multiple
+        +button("toggle_height()").outlined Toggle height
+        +button("set_speed(250)").outlined Set 0.25s
+        +button("set_speed(500)").outlined Set 0.5s
+        +button("set_speed(750)").outlined Set 0.75s
+        +button("set_speed(1000)").outlined Set 1s
+        +button("set_speed(2000)").outlined Set 2s
+        +button("set_speed(3000)").outlined Set 3s
+        +button("set_speed(4000)").outlined Set 4s
+        +button("set_speed(5000)").outlined Set 5s
 
 append body-end
     script(type="text/javascript").
+        var speed = 500,
+            easing;
         function toggle_height () {
-            $('#toggable').toggleHeight ();
+            $('#toggable').toggleHeight ( speed, easing );
         }
-        function set_speed ( speed ) {
-            $('#toggable').css ( 'transition', 'height ' + speed + 's ease 0s' );
+        function set_speed ( new_speed ) {
+            speed = new_speed;
+        }
+        function set_easing ( new_easing ) {
+            easing = new_easing;
         }

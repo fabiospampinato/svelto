@@ -3,116 +3,49 @@
 
 .tabs_wrp {
 
-    @include medium ();
-    border-radius: $border-radius-small;
-    right: $layout-spacing;
+    & > .tabs-buttons {
 
-    .tabs {
+        position: relative;
 
-        @include primary ( true );
-        border-width: 1px 1px 0 1px;
-        border-style: solid;
-        border-radius: $border-radius-normal $border-radius-normal 0 0;
-        font-size: 0;
+        & > .tabs-button {
 
-        .tab {
-
-            @include primary ();
-            border-width: 0 1px 1px 0;
-            border-style: solid;
-            display: inline-block;
-            font-size: $font-size-normal;
-            font-weight: bold;
-            height: $tab-height;
-            line-height: $tab-height;
-            text-align: center;
-            text-transform: uppercase;
-            vertical-align: top;
-            position: relative;
+            margin-bottom: 0;
 
             &:first-child {
-                border-radius: $border-radius-normal 0 0 0;
+                border-bottom-left-radius: 0;
             }
 
             &:last-child {
-                border-radius: 0 $border-radius-normal 0 0;
-                border-right: medium none !important;
-            }
-
-            &.inactive {
-                opacity: 0.5;
-                cursor: default;
-            }
-
-            &:not(.inactive) {
-                cursor: pointer;
-            }
-
-            .icon {
-                position: relative;
-                display: inline-block;
-                font-size: $tab-icon-font-size;
-                height: $tab-icon-size;
-                margin-top: ( ( $tab-height - $tab-icon-size ) / 2 );
+                border-bottom-right-radius: 0;
             }
 
         }
 
     }
 
-    .contabs {
+    & > .tabs-contents {
 
-        @include white ( true );
-        border-width: 0 1px 1px 1px;
-        border-style: solid;
-        height:calc(100% - #{$tabs-height});
         position: relative;
-        width: 100%;
-        overflow: auto;
-        border-radius: 0 0 $border-radius-normal $border-radius-normal;
 
-        .contab {
+        & > .tabs-indicator {
+            height: 0.2em;
+            position: absolute;
+            top: -0.2em;
+            left: 1px;
+            right: 1px;
+            transition: left 0.25s ease 0s, right 0.25s ease 0s;
+            z-index: 1;
+        }
+
+        & > .tabs-content {
 
             display: none;
-            height: calc(100% - ( #{$layout-spacing} * 2 ));
-            margin: $layout-spacing;
-            text-align: left;
-            position: relative;
-            border-radius: 0 0 $border-radius-normal $border-radius-normal;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-top-width: 0;
 
             &.active {
                 display: block;
-            }
-
-            .top_section {
-
-                height: calc(100% - 55px);
-                border-bottom: $tab-border-size solid $tab-content-top-section-color-bg;
-                margin: - $layout-spacing - $layout-spacing $layout-spacing;
-                padding: $layout-spacing;
-                overflow-x: hidden;
-                overflow-y: auto; /* FIXME: why is this needed? */
-
-            }
-
-            .bottom_section {
-                background-color: $tab-content-bottom-section-color-bg;
-                height: 34px;
-                margin: - $layout-spacing;
-                padding: $layout-spacing;
-            }
-
-            .btns {
-
-                @include vcenter-lh ( 34px );
-                text-align: center;
-                padding-top: 0px !important;
-                margin: 0 $layout-spacing 0 !important;
-
-                .btn {
-                    min-width: 12px;
-                }
-
             }
 
         }

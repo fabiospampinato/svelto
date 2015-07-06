@@ -1,0 +1,27 @@
+//- tabs.jade
+
+mixin tabs
+    .tabs_wrp&attributes(attributes)
+        block
+
+mixin tabs-buttons
+    .tabs-buttons.multiple.fluid.joined&attributes(attributes)
+        block
+
+mixin tabs-button(icon)
+    .tabs-button.button.actionable.outlined.centered&attributes(attributes)
+        if icon
+            +icon(icon)
+        else
+            block
+
+mixin tabs-indicator
+    .tabs-indicator&attributes(attributes)
+
+mixin tabs-contents
+    .tabs-contents&attributes(attributes)
+        block
+
+mixin tabs-content
+    .tabs-content.container&attributes(attributes)
+        block

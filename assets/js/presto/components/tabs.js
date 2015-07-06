@@ -13,36 +13,71 @@
 
         _create: function () {
 
-            $tabs = this.$element.find ( '.tab' ),
-            $contabs = this.$element.find ( '.contab' );
+            this.$buttons_bar = this.$element.find ( '.tabs-buttons' );
+            this.$buttons = this.$element.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$contents = this.$element.find ( '.tabs-content' );
+            this.$indicator = this.$element.find ( '.tabs-indicator' );
 
-            $tabs.each ( function () {
+            var $current_button = this.$buttons.filter ( '.active' ).first ();
 
-                var $tab = $(this),
-                    $contab = $contabs.eq ( $tabs.index ( $tab ) ),
-                    to_bottom = $contab.hasClass ( 'to_bottom' ),
-                    $top_section = $contab.find ( '.top_section' ),
-                    $main_section = ( $top_section.size () !== 0 ) ? $top_section : $contab;
+            $current_button = $current_button.length > 0 ? $current_button : this.$buttons.first ();
 
-                $tab.on ( 'click', function () {
+            this.prev_index = 0;
+            this.current_index = this.$buttons.index ( $current_button );
 
-                    if ( $tab.hasClass ( 'inactive' ) || $tab.hasClass ( 'active' ) ) return;
+            this.select ( this.current_index, true );
 
-                    $tabs.removeClass ( 'active highlight' );
-                    $contabs.removeClass ( 'active' );
+            this._on ( this.$buttons, 'click', function ( event, node ) {
 
-                    $tab.addClass ( 'active highlight' );
-                    $contab.addClass ( 'active' );
+                var new_index = this.$buttons.index ( $(node) );
 
-                    if ( to_bottom ) {
-
-                        $main_section.scrollBottom ( 0 );
-
-                    }
-
-                });
+                this.select ( new_index );
 
             });
+
+            this._on ( $window, 'resize', this._positionate_indicator );
+
+        },
+
+        _positionate_indicator: function () {
+
+            var $active = this.$buttons.filter ( '.active' ),
+                position = $active.position (),
+                total_width = this.$buttons_bar.width ();
+
+            this._delay ( function () {
+
+                this.$indicator.css ( 'left', position.left + 1 );
+
+            }, this.current_index > this.prev_index ? 50 : 0 );
+
+            this._delay ( function () {
+
+                this.$indicator.css ( 'right', total_width - position.left - $active.width () + 1 );
+
+            }, this.current_index > this.prev_index ? 0 : 50 );
+
+        },
+
+        /* PUBLIC */
+
+        select: function ( index, force ) {
+
+            if ( this.current_index !== index || force ) {
+
+                this.$buttons.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
+                this.$contents.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
+
+                if ( this.current_index !== index ) {
+
+                    this.prev_index = this.current_index;
+                    this.current_index = index;
+
+                }
+
+                this._positionate_indicator ();
+
+            }
 
         }
 

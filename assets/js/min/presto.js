@@ -428,7 +428,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetFullName + '-disabled' ) ) ) return;
 
-                return handler.apply ( instance, arguments );
+                var args = Array.prototype.slice.call ( arguments, 0 );
+
+                args.push ( this );
+
+                return handler.apply ( instance, args );
 
             }
 
@@ -816,6 +820,166 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* ANIMATE */
+
+//FIXME: does it work with units different than pixels???
+//TODO: add support for easing
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* VARIABLES */
+
+    var ms_60fps = 16.5; //INFO: Approximately, it should be a periodic 16.666666
+
+    /* ANIMATE */
+
+    $.fn.animate = function ( properties, duration, easing, complete, delay ) {
+
+        // Support for partial arguments
+
+        if ( !_.isNumber ( duration ) ) {
+
+            delay = complete;
+            complete = easing;
+            easing = duration;
+            duration = 400;
+
+        }
+
+        if ( !_.isString ( easing ) ) {
+
+            complete = easing;
+            easing = 'easeOutQuad';
+
+        }
+
+        if ( !_.isFunction ( complete ) ) {
+
+            delay = complete;
+            complete = $.noop;
+
+        }
+
+        if ( !_.isNumber ( delay ) ) {
+
+            delay = 0;
+
+        }
+
+        for ( var i = 0, l = this.length; i < l; i++ ) {
+
+            (function ( instance, i ){ //INFO: Avoiding variables overriding when the length is greater than 1
+
+                var ele = instance.nodes[i],
+                    $ele = $(ele);
+
+                // Sanitize and create the new_properties (properties that changes)
+
+                var current_properties = {},
+                    new_properties = {};
+
+                for ( var prop in properties ) {
+
+                    current_properties[prop] = parseInt ( getComputedStyle ( ele )[prop], 10 );
+                    properties[prop] = parseInt ( properties[prop], 10 );
+
+                    if ( properties[prop] !== current_properties[prop] ) { //INFO: checking if something actually changed
+
+                        new_properties[prop] = properties[prop];
+
+                    }
+
+                }
+
+                // If something changes
+
+                if ( _.size ( new_properties ) > 0 ) {
+
+                    setTimeout ( function () {
+
+                        // Populating delta properties (the values to set per each step)
+
+                        var steps_nr = duration / ms_60fps, //TODO: maybe parseInt... pros? cons?
+                            delta_properties = {};
+
+                        for ( var prop in new_properties ) {
+
+                            delta_properties[prop] = []; //TODO: Array(steps_nr)
+
+                            var order = current_properties[prop] > new_properties[prop];
+
+                            for ( var step_nr = 0; step_nr < steps_nr; step_nr++ ) {
+
+                                delta_properties[prop][step_nr] = $.easing[easing]( step_nr * ms_60fps, order ? new_properties[prop] : current_properties[prop], order ? current_properties[prop] : new_properties[prop], duration );
+
+                            }
+
+                            if ( order ) delta_properties[prop] = delta_properties[prop].reverse ();
+
+                        }
+
+                        // Scheduling delta properties
+
+                        for ( var prop in new_properties ) {
+
+                            for ( var step_nr = 0; step_nr < steps_nr; step_nr++ ) {
+
+                                setTimeout ( (function ( step_nr ) {
+
+                                    return function () {
+
+                                        $.css_set ( ele, prop, delta_properties[prop][step_nr] );
+
+                                    };
+
+                                })( step_nr ), ms_60fps * step_nr );
+
+                            }
+
+                        }
+
+                        // If the steps are not exactly accurate do the remaining extra change, but do it alsways...
+
+                        setTimeout ( function () {
+
+                            for ( var prop in properties ) {
+
+                                $.css_set ( ele, prop, properties[prop] );
+
+                            };
+
+                        }, duration );
+
+                        // Fire the complete callback
+
+                        if ( i === 0 ) {
+
+                            setTimeout ( function () {
+
+                                complete (); //FIXME: not exactly accurate...
+
+                            }, duration );
+
+                        }
+
+                    }, delay );
+
+                }
+
+            })( this, i );
+
+        }
+
+        return this;
+
+    };
+
+}( lQuery, window, document ));
+
+
+
 /* AUTOGROW */
 
 ;(function ( $, window, document, undefined ) {
@@ -1063,6 +1227,156 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         }
 
+    };
+
+}( lQuery, window, document ));
+
+
+
+/* EASING */
+
+//TODO: stripe out the stupid ones
+
+//INFO: t: current time,
+//      b: start value,
+//      c: end value,
+//      d: duration
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* EASING */
+
+    $.easing = {
+        def: 'easeOutQuad',
+        linear: function ( t, b, c, d ) {
+            return ( c - b ) / d * t + b;
+        },
+        easeInQuad: function ( t, b, c, d ) {
+            return c * ( t /= d ) * t + b;
+        },
+        easeOutQuad: function ( t, b, c, d ) {
+            return -c * ( t /= d ) * ( t - 2 ) + b;
+        },
+        easeInOutQuad: function ( t, b, c, d ) {
+            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t + b;
+            return -c / 2 * ( ( --t ) * ( t - 2 ) - 1 ) + b;
+        },
+        easeInCubic: function ( t, b, c, d ) {
+            return c * ( t /= d ) * t * t + b;
+        },
+        easeOutCubic: function ( t, b, c, d ) {
+            return c * ( ( t = t / d - 1 ) * t * t + 1 ) + b;
+        },
+        easeInOutCubic: function ( t, b, c, d ) {
+            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t + b;
+            return c / 2 * ( ( t -= 2 ) * t * t + 2 ) + b;
+        },
+        easeInQuart: function ( t, b, c, d ) {
+            return c * ( t /= d ) * t * t * t + b;
+        },
+        easeOutQuart: function ( t, b, c, d ) {
+            return -c * ( ( t = t / d - 1 ) * t * t * t - 1 ) + b;
+        },
+        easeInOutQuart: function ( t, b, c, d ) {
+            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t + b;
+            return -c / 2 * ( ( t -= 2 ) * t * t * t - 2 ) + b;
+        },
+        easeInQuint: function ( t, b, c, d ) {
+            return c * ( t /= d ) * t * t * t * t + b;
+        },
+        easeOutQuint: function ( t, b, c, d ) {
+            return c * ( ( t = t / d - 1 ) * t * t * t * t + 1 ) + b;
+        },
+        easeInOutQuint: function ( t, b, c, d ) {
+            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t * t + b;
+            return c / 2 * ( ( t -= 2 ) * t * t * t * t + 2 ) + b;
+        },
+        easeInSine: function ( t, b, c, d ) {
+            return -c * Math.cos ( t / d * ( Math.PI / 2 ) ) + c + b;
+        },
+        easeOutSine: function ( t, b, c, d ) {
+            return c * Math.sin ( t / d * ( Math.PI / 2 ) ) + b;
+        },
+        easeInOutSine: function ( t, b, c, d ) {
+            return -c / 2 * ( Math.cos ( Math.PI * t / d ) - 1 ) + b;
+        },
+        easeInExpo: function ( t, b, c, d ) {
+            return ( t == 0 ) ? b : c * Math.pow ( 2, 10 * ( t / d - 1 ) ) + b;
+        },
+        easeOutExpo: function ( t, b, c, d ) {
+            return ( t == d ) ? b + c : c * ( -Math.pow ( 2, -10 * t / d ) + 1) + b;
+        },
+        easeInOutExpo: function ( t, b, c, d ) {
+            if ( t == 0) return b;
+            if ( t == d) return b + c;
+            if ( ( t /= d / 2 ) < 1) return c / 2 * Math.pow ( 2, 10 * ( t - 1 ) ) + b;
+            return c / 2 * ( -Math.pow ( 2, -10 * --t ) + 2 ) + b;
+        },
+        easeInCirc: function ( t, b, c, d ) {
+            return -c * ( Math.sqrt ( 1 - ( t /= d ) * t ) - 1 ) + b;
+        },
+        easeOutCirc: function ( t, b, c, d ) {
+            return c * Math.sqrt ( 1 - ( t = t / d - 1 ) * t ) + b;
+        },
+        easeInOutCirc: function ( t, b, c, d ) {
+            if ( ( t /= d / 2 ) < 1 ) return -c / 2 * ( Math.sqrt ( 1 - t * t ) - 1 ) + b;
+            return c / 2 * ( Math.sqrt ( 1 - ( t -= 2 ) * t ) + 1) + b;
+        },
+        easeInElastic: function ( t, b, c, d ) {
+            var s = 1.70158; var p = 0; var a = c;
+            if ( t == 0) return b; if ( ( t /= d ) == 1 ) return b + c; if ( !p ) p = d * .3;
+            if ( a < Math.abs ( c ) ) { a = c; var s = p / 4; }
+            else var s = p / ( 2 * Math.PI ) * Math.asin ( c / a );
+            return -( a * Math.pow ( 2, 10 * ( t -= 1 ) ) * Math.sin ( ( t * d - s ) * ( 2 * Math.PI ) / p ) ) + b;
+        },
+        easeOutElastic: function ( t, b, c, d ) {
+            var s = 1.70158; var p = 0; var a = c;
+            if ( t == 0 ) return b; if ( ( t /= d ) == 1 ) return b + c; if ( !p ) p = d * .3;
+            if ( a < Math.abs ( c ) ) { a = c; var s = p / 4; }
+            else var s = p / ( 2 * Math.PI ) * Math.asin ( c / a );
+            return a * Math.pow ( 2, -10 * t ) * Math.sin ( ( t * d - s ) * ( 2 * Math.PI ) / p ) + c + b;
+        },
+        easeInOutElastic: function ( t, b, c, d ) {
+            var s = 1.70158; var p = 0; var a = c;
+            if ( t == 0 ) return b; if ( ( t /= d / 2 ) == 2 ) return b + c; if ( !p ) p = d * ( .3 * 1.5 );
+            if ( a < Math.abs ( c ) ) { a = c; var s = p / 4; }
+            else var s = p / ( 2 * Math.PI ) * Math.asin ( c / a );
+            if ( t < 1 ) return -.5 * ( a * Math.pow ( 2, 10 * ( t -= 1 ) ) * Math.sin( ( t * d - s ) * ( 2 * Math.PI ) / p ) ) + b;
+            return a * Math.pow ( 2 , -10 * ( t -= 1 ) ) * Math.sin( ( t * d - s ) * ( 2 * Math.PI ) / p ) *.5 + c + b;
+        },
+        easeInBack: function ( t, b, c, d, s ) {
+            if ( s == undefined ) s = 1.70158;
+            return c * ( t /= d ) * t * ( ( s + 1 ) * t - s) + b;
+        },
+        easeOutBack: function ( t, b, c, d, s ) {
+            if ( s == undefined ) s = 1.70158;
+            return c * ( ( t = t / d - 1 ) * t * ( ( s + 1 ) * t + s ) + 1) + b;
+        },
+        easeInOutBack: function ( t, b, c, d, s ) {
+            if ( s == undefined) s = 1.70158;
+            if ( ( t /= d / 2 ) < 1 ) return  c / 2 * ( t * t * ( ( ( s *= ( 1.525 ) ) + 1 ) * t - s ) ) + b;
+            return c / 2 * ( ( t -= 2 ) * t * ( ( ( s *= ( 1.525 ) ) + 1 ) * t + s ) + 2 ) + b;
+        },
+        easeInBounce: function ( t, b, c, d ) {
+            return c - $.easing.easeOutBounce ( d-t, 0, c, d ) + b;
+        },
+        easeOutBounce: function ( t, b, c, d ) {
+            if ( ( t /= d ) < ( 1 / 2.75 ) ) {
+                return c * ( 7.5625 * t * t ) + b;
+            } else if ( t < ( 2 / 2.75 ) ) {
+                return c * ( 7.5625 * ( t -= ( 1.5 / 2.75 ) ) * t + .75 ) + b;
+            } else if ( t < ( 2.5 / 2.75 ) ) {
+                return c * ( 7.5625 * ( t -= ( 2.25 / 2.75 ) ) * t + .9375 ) + b;
+            } else {
+                return c * ( 7.5625 * ( t -= ( 2.625 / 2.75 ) ) * t + .984375 ) + b;
+            }
+        },
+        easeInOutBounce: function ( t, b, c, d ) {
+            if ( t < d / 2 ) return $.easing.easeInBounce ( t * 2, 0, c, d ) * .5 + b;
+            return $.easing.easeOutBounce ( t * 2 - d, 0, c, d) * .5 + c * .5 + b;
+        }
     };
 
 }( lQuery, window, document ));
@@ -2293,91 +2607,128 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TOGGLE HEIGHT  */
 
+//FIXME: support triggered twice before the first one has ended
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
+    /* UTILITIES */
+
+    var get_actual_height = function ( $ele ) {
+
+        var old_style = $ele.attr ( 'style' ) || '';
+
+        $ele.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
+
+        var actual_height = $ele.height ();
+
+        $ele.css ( 'css-text', old_style );
+
+        return actual_height;
+
+    };
+
     /* TOGGLE HEIGHT */
 
-    $.widget ( 'presto.toggleHeight', {
+    $.fn.toggleHeight = function ( force, duration, easing, complete, delay ) {
 
-        /* SPECIAL */
+        if ( !_.isBoolean ( force ) ) {
 
-        _create: function () {
+            delay = complete;
+            complete = easing;
+            easing = duration;
+            duration = force;
+            force = undefined;
 
-            this.speed = parseFloat ( this.$element.css ( 'transition-duration' ) ) * 1000;
+        }
 
-            this.$element.height ( this.$element.height () );
+        duration = duration || 400;
+        easing = easing || 'easeOutQuad';
+        complete = $.noop;
+        delay = delay || 0;
 
-        },
+        if ( _.isUndefined ( force ) ) {
 
-        _init: function ( force ) { //FIXME
+            force = ( this.height () === 0 ? true : false );
 
-            this._toggle ( force );
+        }
 
-        },
+        // VERSION WITHOUT WRAPPING
+/*
+        for ( var i = 0, l = this.length; i < l; i++ ) {
 
-        /* PRIVATE */
+            var ele = this.nodes[i],
+                $ele = $(ele);
 
-        _is_visible: function () {
+            if ( force ) {
 
-            return ( this.$element.height () !== 0 );
+                var prev_values = $.data ( ele, 'toggleHeight' );
 
-        },
-
-        _get_actual_height: function () {
-
-            var old_style = this.$element.attr ( 'style' ) || '';
-
-            this.$element.css ( 'css-text', old_style + 'display:block;position:absolute;top:-99999px;height:auto;' );
-
-            var actual_height = this.$element.height ();
-
-            this.$element.css ( 'css-text', old_style );
-
-            return actual_height;
-
-        },
-
-        _toggle: function ( force ) {
-
-            if ( this._is_visible () || force === false ) {
-
-                this.$element.defer ( function () {
-
-                    this.height ( 0 );
-
-                });
-
-                this.$element.defer ( function () {
-
-                    this.toggle ( false );
-
-                }, this.speed || 0 );
+                $ele.animate ( _.extend ( {}, prev_values, { height: get_actual_height ( $ele ) + parseInt ( prev_values['padding-top'] || 0 ) + parseInt ( prev_values['padding-bottom'] || 0 ) + parseInt ( prev_values['border-top-width'] || 0 ) + parseInt ( prev_values['border-bottom-width'] || 0 ) + parseInt ( prev_values['margin-top'] || 0 ) + parseInt ( prev_values['margin-bottom'] || 0 ) } ), duration, easing, function () {
+                    $ele.removeClass ( 'overflow-hidden' );
+                    complete ();
+                }, delay );
 
             } else {
 
-                this.$element.toggle ( true );
-
-                var actual_height = this._get_actual_height ();
-
-                this.$element.defer ( function () {
-
-                    this.height ( actual_height );
-
+                $.data ( ele, 'toggleHeight', {
+                    'border-top-width': $ele.css ( 'border-top-width' ),
+                    'border-bottom-width': $ele.css ( 'border-bottom-width' ),
+                    'margin-top': $ele.css ( 'margin-top' ),
+                    'margin-bottom': $ele.css ( 'margin-bottom' ),
+                    'padding-top': $ele.css ( 'padding-top' ),
+                    'padding-bottom': $ele.css ( 'padding-bottom' )
                 });
 
-                this.$element.defer ( function () {
-
-                    this.height ( 'auto' );
-
-                }, this.speed );
+                $ele.addClass ( 'overflow-hidden' ).animate({
+                    'border-top-width': 0,
+                    'border-bottom-width': 0,
+                    'margin-top': 0,
+                    'margin-bottom': 0,
+                    'padding-top': 0,
+                    'padding-bottom': 0,
+                    'height': 0
+                }, duration, easing, complete, delay );
 
             }
 
         }
+*/
+        // VERSION WITH WRAPPING
 
-    });
+        //FIXME: wrapping might be a problem
+
+        var $instance = this,
+            $parent = this.wrap ( '<div class="overflow-hidden"></div>' ).parent ();
+
+        if ( force ) {
+
+            $parent.height ( 0 );
+
+            $instance.removeClass ( 'hidden' );
+
+            $parent.animate ({
+                height: get_actual_height ( $parent )
+            }, duration, easing, function () {
+                $instance.unwrap ();
+                complete ();
+            }, delay );
+
+        } else {
+
+            $parent.animate ({
+                height: 0
+            }, duration, easing, function () {
+                $instance.addClass ( 'hidden' ).unwrap ();
+                complete ();
+            }, delay );
+
+        }
+
+        return this;
+
+    };
 
 }( lQuery, window, document ));
 
@@ -4961,36 +5312,71 @@ $.ready ( function () {
 
         _create: function () {
 
-            $tabs = this.$element.find ( '.tab' ),
-            $contabs = this.$element.find ( '.contab' );
+            this.$buttons_bar = this.$element.find ( '.tabs-buttons' );
+            this.$buttons = this.$element.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$contents = this.$element.find ( '.tabs-content' );
+            this.$indicator = this.$element.find ( '.tabs-indicator' );
 
-            $tabs.each ( function () {
+            var $current_button = this.$buttons.filter ( '.active' ).first ();
 
-                var $tab = $(this),
-                    $contab = $contabs.eq ( $tabs.index ( $tab ) ),
-                    to_bottom = $contab.hasClass ( 'to_bottom' ),
-                    $top_section = $contab.find ( '.top_section' ),
-                    $main_section = ( $top_section.size () !== 0 ) ? $top_section : $contab;
+            $current_button = $current_button.length > 0 ? $current_button : this.$buttons.first ();
 
-                $tab.on ( 'click', function () {
+            this.prev_index = 0;
+            this.current_index = this.$buttons.index ( $current_button );
 
-                    if ( $tab.hasClass ( 'inactive' ) || $tab.hasClass ( 'active' ) ) return;
+            this.select ( this.current_index, true );
 
-                    $tabs.removeClass ( 'active highlight' );
-                    $contabs.removeClass ( 'active' );
+            this._on ( this.$buttons, 'click', function ( event, node ) {
 
-                    $tab.addClass ( 'active highlight' );
-                    $contab.addClass ( 'active' );
+                var new_index = this.$buttons.index ( $(node) );
 
-                    if ( to_bottom ) {
-
-                        $main_section.scrollBottom ( 0 );
-
-                    }
-
-                });
+                this.select ( new_index );
 
             });
+
+            this._on ( $window, 'resize', this._positionate_indicator );
+
+        },
+
+        _positionate_indicator: function () {
+
+            var $active = this.$buttons.filter ( '.active' ),
+                position = $active.position (),
+                total_width = this.$buttons_bar.width ();
+
+            this._delay ( function () {
+
+                this.$indicator.css ( 'left', position.left + 1 );
+
+            }, this.current_index > this.prev_index ? 50 : 0 );
+
+            this._delay ( function () {
+
+                this.$indicator.css ( 'right', total_width - position.left - $active.width () + 1 );
+
+            }, this.current_index > this.prev_index ? 0 : 50 );
+
+        },
+
+        /* PUBLIC */
+
+        select: function ( index, force ) {
+
+            if ( this.current_index !== index || force ) {
+
+                this.$buttons.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
+                this.$contents.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
+
+                if ( this.current_index !== index ) {
+
+                    this.prev_index = this.current_index;
+                    this.current_index = index;
+
+                }
+
+                this._positionate_indicator ();
+
+            }
 
         }
 

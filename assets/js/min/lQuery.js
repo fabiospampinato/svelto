@@ -637,6 +637,15 @@
 
     };
 
+    lQuery.css_set = function ( node, name, value ) {
+
+        value = maybe_add_px ( name, value );
+        name = lQuery.camelCase ( name );
+
+        node.style[name] = value;
+
+    };
+
     /* jQuery METHODS */
 
     lQuery.fn = lQuery.prototype = {
@@ -647,7 +656,7 @@
 
             this.nodes = typeof selector === 'string'
                              ? ( selector[0] === '<' && selector[selector.length - 1] === '>' && selector.length >= 3 )
-                                 ? lQuery.parseHTML ( selector )
+                                 ? lQuery.parseHTML ( selector ) //FIXME: should be attached to the dom (also fix wrapAll after)
                                  : dom_selector ( selector, ( context ? ( context instanceof lQuery ? lQuery.nodes[0] || document : document ) : document ) )
                              : selector instanceof lQuery
                                  ? selector.nodes
@@ -1483,7 +1492,7 @@
 
         replaceWith: function ( value ) {
 
-            return this.prop ( 'outerHTML', value );
+            return this.before ( value ).remove ();
 
         },
 
@@ -1532,6 +1541,68 @@
             }
 
             return lQuery_arr ( clones, true );
+
+        },
+
+        wrap: function ( structure ) {
+
+            if ( this.length > 0 ) {
+
+                var dom = lQuery(structure).get ( 0 ),
+                    clone = dom.parentNode || this.length > 1;
+
+                for ( var i = 0, l = this.length; i < l; i++ ) {
+
+                    lQuery(this.nodes[i]).wrapAll ( clone ? dom.cloneNode ( true ) : dom );
+
+                }
+
+            }
+
+            return this;
+
+        },
+
+        wrapAll: function ( structure ) { //FIXME: when the parseHTML function is fixed... so that we don't need to reselect the element manually after attaching it
+
+            if ( this.length > 0 ) {
+
+                var $structure = lQuery(structure);
+
+                lQuery(this.nodes[0]).before ( $structure ); //FIXME: ok but update the structure object, it should point to the dom
+
+                $structure = lQuery(this.nodes[0].previousElementSibling); //FIXME: ok but update the structure object, it should point to the dom
+
+                var $children;
+
+                while ( ($children = $structure.children ()).length > 0 ) {
+
+                    $structure = $children.first ();
+
+                }
+
+                $structure.append ( this );
+
+            }
+
+            return this;
+
+        },
+
+        unwrap: function () {
+
+            var $parents = this.parent (),
+                $parent;
+
+            for ( var i = 0, l = $parents.length; i < l; i++ ) {
+
+                $parent = $parents.eq ( i );
+
+                $parent.replaceWith ( $parent.children () );
+
+            }
+
+            return this;
 
         },
 

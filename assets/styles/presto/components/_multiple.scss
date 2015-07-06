@@ -27,7 +27,7 @@
 
         &:not(.vertical) {
 
-            &.no-separators > *:not(:first-child) {
+            &.no-separators > *:not(:first-child) { //TODO: add support for .outlined
                 border-left-width: 0;
             }
 
@@ -45,6 +45,10 @@
                     margin-right: 0;
                 }
 
+                &.outlined {
+                    margin-right: -1px;
+                }
+
             }
 
             & > *:not(:first-child) {
@@ -56,15 +60,21 @@
 
         &.vertical {
 
-            &.no-separators > *:not(:first-child) {
+            &.no-separators > *:not(:first-child) { //TODO: add support for .outlined
                 border-top-width: 0;
             }
 
             & > *:not(:last-child) {
+
                 margin-bottom: 0;
                 border-bottom-width: 0;
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
+
+                &.outlined {
+                    margin-bottom: -1px;
+                }
+
             }
 
             & > *:not(:first-child) {

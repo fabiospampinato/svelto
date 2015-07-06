@@ -262,7 +262,11 @@
 
                 if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetFullName + '-disabled' ) ) ) return;
 
-                return handler.apply ( instance, arguments );
+                var args = Array.prototype.slice.call ( arguments, 0 );
+
+                args.push ( this );
+
+                return handler.apply ( instance, args );
 
             }
 

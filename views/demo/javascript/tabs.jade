@@ -5,17 +5,15 @@ extends ../../layout.jade
 append body
     +divider Tabs
 
-    .tabs_wrp
-        .tabs
-            .tab.actionable.n4inrow.active.highlight(title="Tab 1")
-                .icon.icon-communication-chat
-            .tab.actionable.n4inrow.inactive(title="Tab 2")
-                .icon.icon-action-restore
-            .tab.actionable.n4inrow(title="Tab 3") Text
-            .tab.actionable.n4inrow(title="Tab 4")
-                .icon.icon-action-settings
-        .contabs
-            .contab.to_bottom.active [Content 1] #[+lorem-ipsum]
-            .contab [Content 2] #[+lorem-ipsum]
-            .contab [Content 3] #[+lorem-ipsum]
-            .contab [Content 4] #[+lorem-ipsum]
+    +tabs
+        +tabs-buttons
+            +tabs-button("communication-chat")(title="Tab 1")
+            +tabs-button("action-restore")(title="Tab 2")
+            +tabs-button(title="Tab 3") Text
+            +tabs-button("action-settings")(title="Tab 4")
+        +tabs-contents
+            +tabs-indicator.secondary
+            +tabs-content [Content 1] #[+lorem-ipsum]
+            +tabs-content [Content 2] #[+lorem-ipsum]
+            +tabs-content [Content 3] #[+lorem-ipsum]
+            +tabs-content [Content 4] #[+lorem-ipsum]
