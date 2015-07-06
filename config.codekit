@@ -3321,6 +3321,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/mixins\/presto\/expander.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/expander.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/expander.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/views\/mixins\/presto\/flags.jade": {
 		"compileDebug": 0,
 		"fileType": 512,

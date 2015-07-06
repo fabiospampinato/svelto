@@ -1,0 +1,38 @@
+//- expander.jade
+
+mixin expander(title, header_classes)
+    .container.expander&attributes(attributes)
+        if title
+            +expander-header(title)(class=header_classes)
+        block
+
+mixin expander-header(title)
+    .header.actionable&attributes(attributes)
+        if title
+            +expander-header-title(title)
+        block
+
+mixin expander-header-left
+    .sub.left&attributes(attributes)
+        block
+
+mixin expander-header-center
+    .sub.center&attributes(attributes)
+        block
+
+mixin expander-header-title(title)
+    .sub.center&attributes(attributes)
+        .title= title
+        block
+
+mixin expander-header-right
+    .sub.right&attributes(attributes)
+        block
+
+mixin expander-content
+    .content&attributes(attributes)
+        block
+
+mixin expander-footer
+    .footer&attributes(attributes)
+        block

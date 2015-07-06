@@ -49,7 +49,7 @@
         }
 
         // VERSION WITHOUT WRAPPING
-/*
+
         for ( var i = 0, l = this.length; i < l; i++ ) {
 
             var ele = this.nodes[i],
@@ -88,7 +88,9 @@
             }
 
         }
-*/
+
+        return this;
+
         // VERSION WITH WRAPPING
 
         //FIXME: wrapping might be a problem

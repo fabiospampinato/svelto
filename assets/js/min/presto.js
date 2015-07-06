@@ -2655,7 +2655,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         }
 
         // VERSION WITHOUT WRAPPING
-/*
+
         for ( var i = 0, l = this.length; i < l; i++ ) {
 
             var ele = this.nodes[i],
@@ -2694,7 +2694,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             }
 
         }
-*/
+
+        return this;
+
         // VERSION WITH WRAPPING
 
         //FIXME: wrapping might be a problem
@@ -3506,13 +3508,25 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $.widget ( 'presto.expander', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                open: $.noop,
+                close: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _create: function () {
 
             this.$header = this.$element.children ( '.header' );
-            this.$content_wrp = this.$element.children ( '.content' );
-            this.opened = this.$element.hasClass ( 'active' );
+            this.$content = this.$element.children ( '.content' );
+
+            this.opened = this.$element.hasClass ( 'opened' );
+
+            if ( !this.opened ) this.close ();
 
             this._bind_click ();
 
@@ -3522,31 +3536,35 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_click: function () {
 
-            this.$header.on ( 'click', this._handler_click );
+            this._on ( this.$header, 'click', this.toggle );
 
         },
 
-        _handler_click: function ( event ) {
+        /* PUBLIC */
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+        toggle: function () {
 
             this.opened = !this.opened;
 
-            var opened;
+            this[this.opened ? 'open' : 'close']();
 
-            this.$element.defer ( function () {
+        },
 
-                this.toggleClass ( 'active', opened );
+        open: function () {
 
-            });
+            this.$element.addClass ( 'opened' );
+            this.$content.toggleHeight ( true );
 
-            this.$header.defer ( function () {
+            this._trigger ( 'open' );
 
-                this.toggleClass ( 'active', opened );
+        },
 
-            });
+        close: function () {
 
-            this.$content_wrp.toggleHeight ( this.opened );
+            this.$element.removeClass ( 'opened' );
+            this.$content.toggleHeight ( false );
+
+            this._trigger ( 'close' );
 
         }
 

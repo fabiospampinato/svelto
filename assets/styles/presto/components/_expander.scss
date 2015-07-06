@@ -3,27 +3,28 @@
 
 .expander {
 
-    padding-bottom: 0 !important;
-    transition: padding-bottom 10s ease 0s;
+    padding-bottom: 0;
+    transition: padding-bottom 0.25s ease 0s;
 
     & > .header {
 
-        margin-bottom: -$container-header-border-width !important;
-        border-bottom-left-radius: $border-radius-normal !important;
-        border-bottom-right-radius: $border-radius-normal !important;
-        transition: opacity 0.2s ease 0s, margin-bottom 10s ease 0s;
+        cursor: pointer;
+        margin-bottom: 0;
+        border-bottom-left-radius: $border-radius-normal;
+        border-bottom-right-radius: $border-radius-normal;
+        transition: margin-bottom 0.25s ease 0s, border-bottom-left-radius 0.25s ease 0s, border-bottom-right-radius 0.25s ease 0s;
 
         .sub {
 
-            .icon {
+            .icon.icon-navigation-arrow-drop-down {
                 transition: transform 0.2s ease 0s;
             }
 
-            &.left .icon {
+            &.left .icon.icon-navigation-arrow-drop-down {
                 transform: rotate(-90deg);
             }
 
-            &.right .icon {
+            &.right .icon.icon-navigation-arrow-drop-down {
                 transform: rotate(90deg);
             }
 
@@ -31,34 +32,9 @@
 
     }
 
-    & > .content_wrp {
-        transition: height 10s ease 0s;
-        display: none;
-        height: 0;
-    }
+    &.opened {
 
-    &:not(.inactive) {
-
-        & > .header {
-
-            cursor: pointer;
-            opacity: 1;
-
-            &:active {
-                box-shadow: $shadow-inset-1;
-            }
-
-        }
-
-    }
-
-    &.inactive > .header {
-        opacity: $expander-inactive-opacity;
-    }
-
-    &.active {
-
-        padding-bottom: $layout-spacing !important;
+        padding-bottom: $layout-spacing;
 
         & > .header {
 
@@ -66,15 +42,10 @@
             border-bottom-left-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
 
-            .sub .icon {
+            .sub .icon.icon-navigation-arrow-drop-down {
                 transform: rotate(0);
             }
 
-        }
-
-        & > .content_wrp {
-            display: block;
-            height: auto;
         }
 
     }

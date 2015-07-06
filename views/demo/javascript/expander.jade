@@ -3,45 +3,37 @@
 extends ../../layout.jade
 
 append body
-+divider Expander
-    .grid
-        .grid_cols.fluid.limited
-            .grid_col
-                .container
-                    .container.expander
-                        .header.actionable
-                            .label Base
-                            .sub.right
-                                .multiple
-                                    .button.compact.transparent.no-padding.huge
-                                        .icon.icon-navigation-arrow-drop-down
-                        .content_wrp
-                            .content Content of base
-                    .container.expander
-                        .header.actionable
-                            .sub.left
-                                .multiple
-                                    .button.compact.transparent.no-padding.huge
-                                        .icon.icon-navigation-arrow-drop-down
-                            .label Icon to the left
-                        .content_wrp
-                            .content Content of icon to the left
-                    .container.expander.active
-                        .header.actionable.active
-                            .label Base (Active)
-                            .sub.right
-                                .multiple
-                                    .button.compact.transparent.no-padding.huge
-                                        .icon.icon-navigation-arrow-drop-down
-                        .content_wrp
-                            .content Content of base (Active)
-                    .container.expander.inactive
-                        .header.actionable.inactive
-                            .label Base (Inactive)
-                            .sub.right
-                                .multiple
-                                    .button.compact.transparent.no-padding.huge
-                                        .icon.icon-navigation-arrow-drop-down
-                        .content_wrp
-                            .content Content of base (Inactive)
+    +divider Expander
 
+    +expander
+        +expander-header("Base")
+            +expander-header-right
+                +multiple
+                    +button.compact.transparent.no-padding.huge
+                        +icon("navigation-arrow-drop-down")
+        +expander-content Content of base
+
+    +expander
+        +expander-header("Icon to the left")
+            +expander-header-left
+                +multiple
+                    +button.compact.transparent.no-padding.huge
+                        +icon("navigation-arrow-drop-down")
+        +expander-content Content of icon to the left
+
+    +expander.opened
+        +expander-header("Base - Active")
+            +expander-header-right
+                +multiple
+                    +button.compact.transparent.no-padding.huge
+                        +icon("navigation-arrow-drop-down")
+        +expander-content Content of base - Active
+
+
+    +expander.opened
+        +expander-header("Base - Active")
+            +expander-header-right
+                +multiple
+                    +button.compact.transparent.no-padding.huge
+                        +icon("navigation-arrow-drop-down")
+        +expander-content Content of base - Active
