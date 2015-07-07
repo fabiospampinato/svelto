@@ -3,12 +3,59 @@
 
 .chat-msg {
 
-    .chat-msg-img {
+    display: flex;
+
+    &.level-3, &[class*='level-']  {
+        margin-left: 9em;
+    }
+
+    &.level-2 {
+        margin-left: 4.5em;
+    }
+
+    &.level-1 {
+        margin-left: 0;
+    }
+
+    & > .chat-msg-img {
+
+        order: 1;
+        width: 3em;
+        height: 3em;
+        border-radius: 100%;
+        overflow:hidden;
+        margin-right: $layout-spacing;
+        border: 1px solid $color-white-border;
+        opacity: 1;
+        transition: opacity 0.2s ease 0s;
+
+        & > img {
+            width: 100%;
+            height: 100%;
+        }
 
     }
 
-    .chat-msg-content {
+    & > a.chat-msg-img:hover {
+        opacity: 0.8;
+    }
 
+    & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
+        @include white ();
+        order: 2;
+        transform: rotate(45deg);
+        width: 1em;
+        height: 1em;
+        border-width: 0 0 1px 1px;
+        border-style: solid;
+        margin-right: -0.5em;
+        margin-top: 0.9em;
+        z-index: 1;
+    }
+
+    & > .chat-msg-content {
+        order: 3;
+        flex-grow: 1;
     }
 
 }

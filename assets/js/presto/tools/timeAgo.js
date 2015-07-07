@@ -13,6 +13,7 @@
 
         options: {
             timestamp: false,
+            title: false,
             callbacks: {
                 update: $.noop
             }
@@ -32,11 +33,9 @@
 
         _update_loop: function ( wait ) {
 
-            var instance = this;
+            this._delay ( function () {
 
-            setTimeout ( function () {
-
-                instance._update_loop ( instance.update ().next );
+                this._update_loop ( this.update ().next );
 
             }, wait * 1000 );
 
@@ -48,7 +47,15 @@
 
             var timeAgo = _.timeAgo ( this.options.timestamp );
 
-            this.$element.html ( timeAgo.str );
+            if ( this.options.title ) {
+
+                this.$element.attr ( 'title', timeAgo.str );
+
+            } else {
+
+                this.$element.html ( timeAgo.str );
+
+            }
 
             this._trigger ( 'update' );
 
@@ -63,6 +70,7 @@
     $(function () {
 
         $('[data-timestamp]').timeAgo ();
+        $('[data-timestamp-title]').timeAgo ({ title: true });
 
     });
 

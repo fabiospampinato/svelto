@@ -3,12 +3,12 @@
 
 a {
 
-    color: $color-default-link;
+    color: inherit;
     font-weight: bold;
     text-decoration: none;
     cursor: pointer;
 
-    &:hover {
+    &:hover { //FIXME: it should change according to the theme...
         color: $color-default-link-hover;
     }
 

@@ -9,6 +9,7 @@
         },
         permissions: {
             own: boolean, // Flag that decide if the chat is owned by you
+            reply: boolean, // Flat that decide if you can reply it
             edit: boolean, // Flag that decide if you can edit it
             delete: boolean, // Flag that decide if you can delete it
         },
@@ -29,22 +30,31 @@ mixin chat-msg(options)
             else
                 .chat-msg-img
                     img(src=options.sender.img, title=options.sender.name)
+            .chat-msg-indicator
         .chat-msg-content
             +container
-                +container-header(options.sender.name)
-                    +container-header-left
-                        +multiple
-                            +button(data-timestamp=options.message.timestamp).compact.mini
+                +container-header.transparent
+                    if options.sender
+                        +container-header-left
+                            if options.sender.url
+                                a(href=options.sender.url, title=options.sender.name)= options.sender.name
+                            else
+                                = options.sender.name
                     +container-header-right
                         +multiple
+                            .button(data-timestamp-title=options.message.timestamp).compact.mini.outlined
+                                +icon("device-access-time")
                             if options.permissions
                                 if options.permissions.own
-                                    +button.compact.mini
+                                    .button(title="You are the owner").compact.mini.outlined
                                         +icon("action-account-circle")
+                                if options.permissions.reply
+                                    +button(title="Reply").compact.mini.outlined
+                                        +icon("content-reply")
                                 if options.permissions.edit
-                                    +button.compact.mini
+                                    +button(title="Edit").compact.mini.outlined
                                         +icon("editor-mode-edit")
                                 if options.permissions.delete
-                                    +button.compact.mini
+                                    +button(title="Delete").compact.mini.outlined
                                         +icon("action-delete")
                 +container-content= options.message.content

@@ -1109,6 +1109,72 @@ button {
       padding-left: 0.75em; }
 
 /* CHAT */
+.chat-msg {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: flex; }
+  .chat-msg.level-3, .chat-msg[class*='level-'] {
+    margin-left: 9em; }
+  .chat-msg.level-2 {
+    margin-left: 4.5em; }
+  .chat-msg.level-1 {
+    margin-left: 0; }
+  .chat-msg > .chat-msg-img {
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+            order: 1;
+    width: 3em;
+    height: 3em;
+    border-radius: 100%;
+    overflow: hidden;
+    margin-right: 10px;
+    border: 1px solid #cccccc;
+    opacity: 1;
+    -webkit-transition: opacity 0.2s ease 0s;
+            transition: opacity 0.2s ease 0s; }
+    .chat-msg > .chat-msg-img > img {
+      width: 100%;
+      height: 100%; }
+  .chat-msg > a.chat-msg-img:hover {
+    opacity: 0.8; }
+  .chat-msg > .chat-msg-indicator {
+    background: #ffffff ;
+    border-color: #cccccc ;
+    color: #2f2f2f ;
+    -webkit-box-ordinal-group: 3;
+    -webkit-order: 2;
+            order: 2;
+    -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+    width: 1em;
+    height: 1em;
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+    margin-right: -0.5em;
+    margin-top: 0.9em;
+    z-index: 1; }
+    .chat-msg > .chat-msg-indicator.transparentize {
+      background: rgba(255, 255, 255, 0.9) ;}
+    .chat-msg > .chat-msg-indicator.gradient {
+      background-color: #fafafa ;
+      background: -webkit-linear-gradient(top, #fafafa 0%, whitesmoke 100%);
+      background: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) ;}
+    .chat-msg > .chat-msg-indicator.actionable:not(.inactive):not(.active):not(.dragging):hover {
+      background: #fafafa ;}
+    .chat-msg > .chat-msg-indicator.actionable:not(.inactive):not(.active):not(.dragging):active, .chat-msg > .chat-msg-indicator.actionable.active {
+      background: whitesmoke ;}
+    .chat-msg > .chat-msg-indicator.highlight {
+      border-bottom-color: #000000 ;}
+      .chat-msg > .chat-msg-indicator.highlight:after {
+        background: #000000 ;}
+  .chat-msg > .chat-msg-content {
+    -webkit-box-ordinal-group: 4;
+    -webkit-order: 3;
+            order: 3;
+    -webkit-box-flex: 1;
+    -webkit-flex-grow: 1;
+            flex-grow: 1; }
+
 /* CHECKBOX / RADIO */
 .checkbox input, .radio input {
   display: none; }
@@ -1355,7 +1421,7 @@ button {
 
 /* ELEMENTS */
 a {
-  color: #2f2f2f;
+  color: inherit;
   font-weight: bold;
   text-decoration: none;
   cursor: pointer; }
