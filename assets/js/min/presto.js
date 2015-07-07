@@ -3257,7 +3257,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
-/* DROPDOWNS */
+/* DROPDOWN */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -3271,195 +3271,174 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $.widget ( 'presto.dropdown', {
 
+        /* OPTIONS */
+
         options: {
-            beforeOpen: $.noop,
-            afterOpen: $.noop,
-            beforeClose: $.noop,
-            afterClose: $.noop
+            callbacks: {
+                open: $.noop,
+                close: $.noop
+            }
         },
 
         /* SPECIAL */
 
         _create: function () {
 
-            this.dropdown_id = this.$element.data ( 'dropdown' );
-            this.$dropdown = $('#' + dropdown_id);
-            this.no_tip = this.$element.hasClass ( 'no_tip' ) || this.$dropdown.hasClass ( 'no_tip' );
-            this.$bottom_tip = this.no_tip ? false : this.$dropdown.find ( '.bottom_tip' );
-            this.$top_tip = this.no_tip ? false : this.$dropdown.find ( '.top_tip' );
-            this.$right_tip = this.no_tip ? false : this.$dropdown.find ( '.right_tip' );
-            this.$left_tip = this.no_tip ? false : this.$dropdown.find ( '.left_tip' );
-            this.$btn_parents = this.$element.parents ();
-            this.$buttons = this.$dropdown.find ( '.button' );
+            this.id = this.$element.attr ( 'id' );
+            this.$top_tip = this.$element.find ( '.top-tip' );
+            this.$right_tip = this.$element.find ( '.right-tip' );
+            this.$bottom_tip = this.$element.find ( '.bottom-tip' );
+            this.$left_tip = this.$element.find ( '.left-tip' );
+            this.$actionables = this.$element.find ( '.actionable' );
+
+            this.$triggers = $('.dropdown-trigger[data-dropdown="' + this.id + '"]');
+
             this.opened = false;
 
-            this.$element.on ( 'click', this._handler_btn_click );
-            this.$buttons.on ( 'click', this.close );
-            $window.on ( 'resize scroll', this.update );
-            this.$btn_parents.on ( 'scroll', this.update );
+            this._bind_trigger_click ();
+            this._bind_actionable_click ();
+//          this.$btn_parents.on ( 'scroll', this.update ); //If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
         },
 
-        /* PRIVATE */
+        /* TRIGGER CLICK */
+
+        _bind_trigger_click: function () {
+
+            this._on ( this.$triggers, 'click', this.toggle );
+
+        },
+
+        /* ACTIONABLE CLICK */
+
+        _bind_actionable_click: function () {
+
+            this._on ( this.$actionables, 'click', this.close );
+
+        },
+
+        /* WINDOW RESIZE / SCROLL */
+
+        _bind_window_resize_scroll: function () {
+
+            this._on ( $window, 'resize scroll', this.update );
+
+        },
+
+        _unbind_window_resize_scroll: function () {
+
+            this._off ( $window, 'resize scroll', this.update );
+
+        },
+
+        /* WINDOW CLICK */
+
+        _bind_window_click: function () {
+
+            this._on ( $window, 'click', this._handler_window_click );
+
+        },
+
+        _unbind_window_click: function () {
+
+            this._off ( $window, 'click', this._handler_window_click );
+
+        },
 
         _handler_window_click: function ( event ) {
 
             var $parents = $(event.target).parents ();
 
-            if ( $parents.index ( this.$dropdown ) !== -1 ) return; // check if we clicked inside the dropdown
-
-            this.close ();
-
-        },
-
-        _handler_btn_click: function () {
-
-            if ( this.opened ) {
+            if ( $parents.index ( this.$element ) === -1 ) { //INFO: Checking if we clicked inside the dropdown
 
                 this.close ();
 
-            } else {
-
-                this.open ();
-
-                $.defer ( function () {
-
-                    $window.on ( 'click', _handler_window_click );
-
-                });
-
             }
 
         },
 
-        /* PUBLIC */
+        /* POSITIONATE */
 
-        open: function () {
+        _positionate: function () {
 
-            if ( this.$element.hasClass ( 'inactive' ) ) return;
+            // Variables
 
-            this.hook ( 'beforeOpen' );
+            var $trigger = $(assignments[this.id]),
+                no_tip = $trigger.hasClass ( 'no-tip' ) || this.$element.hasClass ( 'no-tip' );
 
-            assignments[dropdown_id] = this.$element;
+            // Reset classes
 
-            this.$element.addClass ( 'active' );
-
-            this.$dropdown.addClass ( 'show' );
-
-            this.positionate ();
-
-            this.$dropdown.defer ( function () {
-
-                this.addClass ( 'active' );
-
-            });
-
-            this.opened = true;
-
-            this.hook ( 'afterOpen' );
-
-        },
-
-        close: function () {
-
-            this.hook ( 'beforeClose' );
-
-            if ( assignments[dropdown_id] === this.$element ) {
-
-                this.$dropdown.removeClass ( 'active' );
-
-                this.$dropdown.defer ( function () {
-
-                    this.removeClass ( 'show' );
-
-                }, 150 );
-
-            }
-
-            this.$element.removeClass ( 'top bottom left right active' );
-
-            $window.off ( 'click', this._handler_window_click );
-
-            this.opened = false;
-
-            this.hook ( 'afterClose' );
-
-        },
-
-        positionate: function () {
-
-            // reset classes
-
-            this.$element.removeClass ( 'top bottom left right' );
-            this.$dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no_tip', this.no_tip );
+            $trigger.removeClass ( 'top bottom left right' );
+            this.$element.removeClass ( 'top bottom left right' ).toggleClass ( 'no-tip', no_tip );
 
             // update offsets
 
             var body_offset = $body.offset (),
-                drop_offset = this.$dropdown.offset (),
-                btn_offset = this.$element.offset ();
+                drop_offset = this.$element.offset (),
+                trig_offset = $trigger.offset ();
 
             // common variables
 
-            var btn_center_top = btn_offset.top + ( btn_offset.height / 2 ),
-                btn_center_left = btn_offset.left + ( btn_offset.width / 2 );
+            var trig_center_top = trig_offset.top + ( trig_offset.height / 2 ),
+                trig_center_left = trig_offset.left + ( trig_offset.width / 2 );
 
-            var bottom_space = body_offset.height - btn_offset.top - btn_offset.height,
-                top_space = btn_offset.top,
-                right_space = body_offset.width - btn_offset.left - btn_offset.width,
-                left_space = btn_offset.left;
+            var bottom_space = body_offset.height - trig_offset.top - trig_offset.height,
+                top_space = trig_offset.top,
+                right_space = body_offset.width - trig_offset.left - trig_offset.width,
+                left_space = trig_offset.left;
 
             var useful_doc_width = Math.min ( body_offset.width, drop_offset.width ),
                 useful_doc_height = Math.min ( body_offset.height, drop_offset.height );
-
+console.log("useful_doc_width: ", useful_doc_width);
+console.log("useful_doc_height: ", useful_doc_height);
             var areas = {
-                'bottom': Math.min ( bottom_space, drop_offset.height ) * useful_doc_width,
-                'top': Math.min ( top_space, drop_offset.height ) * useful_doc_width,
-                'right': Math.min ( right_space, drop_offset.width ) * useful_doc_height,
-                'left': Math.min ( left_space, drop_offset.width ) * useful_doc_height
+                bottom: Math.min ( bottom_space, drop_offset.height ) * useful_doc_width,
+                top: Math.min ( top_space, drop_offset.height ) * useful_doc_width,
+                right: Math.min ( right_space, drop_offset.width ) * useful_doc_height,
+                left: Math.min ( left_space, drop_offset.width ) * useful_doc_height
             };
 
             var needed_area = drop_offset.width * drop_offset.height;
-
+console.log("areas: ", areas);
             // helpers
 
             var get_vertical_left = function () {
 
-                if ( this.no_tip ) {
+                if ( no_tip ) {
 
-                    if ( right_space + btn_offset.width >= drop_offset.width ) {
+                    if ( right_space + trig_offset.width >= drop_offset.width ) {
 
-                        return btn_offset.left + 'px';
+                        return trig_offset.left;
 
-                    } else if ( left_space + btn_offset.width >= drop_offset.width ) {
+                    } else if ( left_space + trig_offset.width >= drop_offset.width ) {
 
-                        return left_space + btn_offset.width - drop_offset.width + 'px';
+                        return left_space + trig_offset.width - drop_offset.width;
 
                     }
 
                 }
 
-                return Math.max ( 0, Math.min ( body_offset.width - drop_offset.width, btn_center_left - ( drop_offset.width / 2 ) ) ) + 'px';
+                return Math.max ( 0, Math.min ( body_offset.width - drop_offset.width, trig_center_left - ( drop_offset.width / 2 ) ) );
 
             };
 
             var get_horizontal_top = function () {
 
-                if ( this.no_tip ) {
+                if ( no_tip ) {
 
-                    if ( bottom_space + btn_offset.height >= drop_offset.height ) {
+                    if ( bottom_space + trig_offset.height >= drop_offset.height ) {
 
-                        return btn_offset.top + 'px';
+                        return trig_offset.top;
 
-                    } else if ( top_space + btn_offset.height >= drop_offset.height ) {
+                    } else if ( top_space + trig_offset.height >= drop_offset.height ) {
 
-                        return top_space + btn_offset.height - drop_offset.height + 'px';
+                        return top_space + trig_offset.height - drop_offset.height;
 
                     }
 
                 }
 
-                return Math.max ( 0, Math.min ( body_offset.height - drop_offset.height, btn_center_top - ( drop_offset.height / 2 ) ) ) + 'px';
+                return Math.max ( 0, Math.min ( body_offset.height - drop_offset.height, trig_center_top - ( drop_offset.height / 2 ) ) );
 
             };
 
@@ -3470,6 +3449,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             };
 
             // get first with acceptable area
+
+            var direction = 'bottom'; //FIXME
 
             if ( !direction ) {
 
@@ -3489,8 +3470,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             // get the one with the maximum area
 
             if ( !direction ) {
-
-                var max_area;
+console.log("getting maximum area");
+                var max_area = -1;
 
                 for ( var dir in areas ) {
 
@@ -3515,70 +3496,66 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            // positionate everything
+            console.log("direction: ", direction);
 
-            if ( direction ) {
+            // positionate the dropdown
 
-                var direction_type = get_direction_type ( direction );
+            var direction_type = get_direction_type ( direction );
 
-                // positionate the dropdown
+            var top = ( direction_type === 'horizontal' ) ? get_horizontal_top () : false;
+            var left = ( direction_type === 'vertical' ) ? get_vertical_left () : false;
 
-                var top = ( direction_type === 'horizontal' ) ? get_horizontal_top () : false;
-                var left = ( direction_type === 'vertical' ) ? get_vertical_left () : false;
+            switch ( direction ) {
+
+                case 'bottom':
+                    top = body_offset.height - bottom_space;
+                    break;
+
+                case 'top':
+                    top = top_space - drop_offset.height;
+                    break;
+
+                case 'right':
+                    left = body_offset.width - right_space;
+                    break;
+
+                case 'left':
+                    left = left_space - drop_offset.width;
+                    break;
+
+            }
+
+            this.$element.css ({
+                top: top,
+                left: left
+            });
+
+            $trigger.addClass ( direction );
+            this.$element.addClass ( direction );
+
+            // positionate the tip
+
+            if ( !no_tip ) {
+
+                drop_offset = this.$element.offset ();
 
                 switch ( direction ) {
 
                     case 'bottom':
-                        top = ( body_offset.height - bottom_space ) + 'px';
+                        this.$top_tip.css ( 'left', trig_center_left - drop_offset.left );
                         break;
 
                     case 'top':
-                        top = ( top_space - drop_offset.height ) + 'px';
+                        this.$bottom_tip.css ( 'left', trig_center_left - drop_offset.left );
                         break;
 
                     case 'right':
-                        left = ( body_offset.width - right_space ) + 'px';
+                        this.$left_tip.css ( 'top', trig_center_top - drop_offset.top );
                         break;
 
                     case 'left':
-                        left = ( left_space - drop_offset.width ) + 'px';
+                        this.$right_tip.css ( 'top', trig_center_top - drop_offset.top );
                         break;
-
-                }
-
-                this.$dropdown.css ({
-                    top: top,
-                    left: left
-                });
-
-                this.$element.addClass ( direction );
-                this.$dropdown.addClass ( direction );
-
-                // positionate the tip
-
-                if ( !this.no_tip ) {
-
-                    drop_offset = this.$dropdown.offset ();
-
-                    switch ( direction ) {
-
-                        case 'bottom':
-                            this.$top_tip.css ( 'left', btn_center_left - drop_offset.left + 'px' );
-                            break;
-
-                        case 'top':
-                            this.$bottom_tip.css ( 'left', btn_center_left - drop_offset.left + 'px' );
-                            break;
-
-                        case 'right':
-                            this.$left_tip.css ( 'top', btn_center_top - drop_offset.top + 'px' );
-                            break;
-
-                        case 'left':
-                            this.$right_tip.css ( 'top', btn_center_top - drop_offset.top + 'px' );
-                            break;
-
-                    }
 
                 }
 
@@ -3586,11 +3563,71 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
+        /* PUBLIC */
+
+        toggle: function ( event, trigger ) {
+
+            this[this.opened ? 'close' : 'open']( event, trigger );
+
+        },
+
+        open: function ( event, trigger ) {
+
+            if ( trigger ) {
+
+                assignments[this.id] = trigger;
+
+                $(trigger).addClass ( 'active' );
+
+            }
+
+            this.$element.addClass ( 'show' );
+
+            this._positionate ();
+
+            this._delay ( function () {
+
+                this.$element.addClass ( 'active' );
+
+            });
+
+            this.opened = true;
+
+            this._delay ( this._bind_window_click );
+
+            this._bind_window_resize_scroll ();
+
+            this._trigger ( 'open' );
+
+        },
+
+        close: function () {
+
+            $(assignments[this.id]).removeClass ( 'top bottom left right active' );
+
+            this.$element.removeClass ( 'active' );
+
+            this._delay ( function () {
+
+                this.$element.removeClass ( 'show' );
+
+            }, 150 );
+
+            this.opened = false;
+
+            this._unbind_window_click ();
+
+            this._unbind_window_resize_scroll ();
+
+            this._trigger ( 'close' );
+
+        },
+
         update: function () {
 
             if ( this.opened ) {
 
-                this.positionate ();
+                this._positionate ();
 
             }
 
@@ -3602,7 +3639,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $(function () {
 
-        $('.dropdown_trigger').dropdown ();
+        $('.dropdown').dropdown ();
 
     });
 

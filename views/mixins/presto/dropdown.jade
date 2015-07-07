@@ -1,0 +1,21 @@
+//- dropdown.jade
+
+//- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
+
+mixin dropdown-btn(title, id)
+    .button.actionable.dropdown-btn.dropdown-trigger(data-dropdown="dropdown-"+id)&attributes(attributes)
+        = title
+        +icon("navigation-expand-more")
+
+mixin dropdown-btn-icon(icon, id)
+    .button.actionable.compact.dropdown-btn.dropdown-trigger(data-dropdown="dropdown-"+id)&attributes(attributes)
+        +icon(icon)
+
+mixin dropdown(id)
+    .dropdown(id="dropdown-"+id)&attributes(attributes)
+        .top-tip
+        .left-tip
+        .right-tip
+        .container
+            block
+        .bottom-tip

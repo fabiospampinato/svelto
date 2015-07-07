@@ -1112,7 +1112,8 @@ button {
 .chat-msg {
   display: -webkit-box;
   display: -webkit-flex;
-  display: flex; }
+  display: flex;
+  margin-bottom: 10px; }
   .chat-msg.level-3, .chat-msg[class*='level-'] {
     margin-left: 9em; }
   .chat-msg.level-2 {
@@ -1174,6 +1175,8 @@ button {
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
             flex-grow: 1; }
+    .chat-msg > .chat-msg-content > .container {
+      margin-bottom: 0; }
 
 /* CHECKBOX / RADIO */
 .checkbox input, .radio input {
@@ -1293,11 +1296,10 @@ button {
     border-style: solid;
     padding: 10px; }
 
-/* BUTTON */
 /* DROPDOWN */
 .dropdown {
   position: fixed;
-  z-index: 150;
+  z-index: 1000;
   display: none;
   padding: 15px;
   opacity: 0;
@@ -1305,109 +1307,109 @@ button {
           transition: opacity 0.15s ease 0s; }
   .dropdown.active {
     opacity: 1; }
-  .dropdown.no_tip {
+  .dropdown.no-tip {
     padding: 0; }
-    .dropdown.no_tip .top_tip, .dropdown.no_tip .bottom_tip, .dropdown.no_tip .left_tip, .dropdown.no_tip .right_tip {
+    .dropdown.no-tip > .top-tip, .dropdown.no-tip > .bottom-tip, .dropdown.no-tip > .left-tip, .dropdown.no-tip > .right-tip {
       display: none !important; }
-    .dropdown.no_tip.top {
+    .dropdown.no-tip.top {
       margin-bottom: -1px; }
-      .dropdown.no_tip.top .container {
+      .dropdown.no-tip.top > .container {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0; }
-    .dropdown.no_tip.bottom {
+    .dropdown.no-tip.bottom {
       margin-top: -1px; }
-      .dropdown.no_tip.bottom .container {
+      .dropdown.no-tip.bottom > .container {
         border-top-left-radius: 0;
         border-top-right-radius: 0; }
-    .dropdown.no_tip.right {
+    .dropdown.no-tip.right {
       margin-left: -1px; }
-    .dropdown.no_tip.left {
+    .dropdown.no-tip.left {
       margin-right: -1px; }
-  .dropdown .top_tip, .dropdown .bottom_tip, .dropdown .left_tip, .dropdown .right_tip {
+  .dropdown > .top-tip, .dropdown > .bottom-tip, .dropdown > .left-tip, .dropdown > .right-tip {
     position: absolute;
     width: 0;
     height: 0;
-    white-space: nowrap; }
-    .dropdown .top_tip:before, .dropdown .top_tip:after, .dropdown .bottom_tip:before, .dropdown .bottom_tip:after, .dropdown .left_tip:before, .dropdown .left_tip:after, .dropdown .right_tip:before, .dropdown .right_tip:after {
+    white-space: nowrap;
+    display: none;
+    z-index: 1001; }
+    .dropdown > .top-tip:before, .dropdown > .top-tip:after, .dropdown > .bottom-tip:before, .dropdown > .bottom-tip:after, .dropdown > .left-tip:before, .dropdown > .left-tip:after, .dropdown > .right-tip:before, .dropdown > .right-tip:after {
       content: '';
       display: block; }
-  .dropdown .top_tip, .dropdown .bottom_tip, .dropdown .left_tip, .dropdown .right_tip {
-    display: none; }
-  .dropdown.top .bottom_tip, .dropdown.bottom .top_tip, .dropdown.left .right_tip, .dropdown.right .left_tip {
+  .dropdown.top > .bottom-tip, .dropdown.bottom > .top-tip, .dropdown.left > .right-tip, .dropdown.right > .left-tip {
     display: block; }
-  .dropdown .top_tip:before, .dropdown .bottom_tip:before {
+  .dropdown > .top-tip:before, .dropdown > .bottom-tip:before {
     margin-left: -10.5px; }
-  .dropdown .top_tip:after, .dropdown .bottom_tip:after {
+  .dropdown > .top-tip:after, .dropdown > .bottom-tip:after {
     margin-left: -9.5px; }
-  .dropdown .top_tip {
+  .dropdown > .top-tip {
     top: 5.5px;
     left: 50%; }
-    .dropdown .top_tip:before {
+    .dropdown > .top-tip:before {
       height: 0;
       width: 0;
       border-left: 10.5px dotted transparent;
       border-right: 10.5px dotted transparent;
       border-bottom: 10.5px solid #cccccc; }
-    .dropdown .top_tip:after {
+    .dropdown > .top-tip:after {
       height: 0;
       width: 0;
       border-left: 9.5px dotted transparent;
       border-right: 9.5px dotted transparent;
       border-bottom: 9.5px solid #ffffff;
       margin-top: -9px; }
-  .dropdown .bottom_tip {
+  .dropdown > .bottom-tip {
     bottom: 16px;
     left: 50%; }
-    .dropdown .bottom_tip:before {
+    .dropdown > .bottom-tip:before {
       height: 0;
       width: 0;
       border-left: 10.5px dotted transparent;
       border-right: 10.5px dotted transparent;
       border-top: 10.5px solid #cccccc; }
-    .dropdown .bottom_tip:after {
+    .dropdown > .bottom-tip:after {
       height: 0;
       width: 0;
       border-left: 9.5px dotted transparent;
       border-right: 9.5px dotted transparent;
       border-top: 9.5px solid #ffffff;
       margin-top: -10.5px; }
-  .dropdown .left_tip:before, .dropdown .right_tip:before {
+  .dropdown > .left-tip:before, .dropdown > .right-tip:before {
     margin-top: -10.5px; }
-  .dropdown .left_tip:after, .dropdown .right_tip:after {
+  .dropdown > .left-tip:after, .dropdown > .right-tip:after {
     margin-top: -19.5px; }
-  .dropdown .left_tip {
+  .dropdown > .left-tip {
     left: 6.5px;
     top: 50%; }
-    .dropdown .left_tip:before {
+    .dropdown > .left-tip:before {
       height: 0;
       width: 0;
       border-top: 10.5px dotted transparent;
       border-bottom: 10.5px dotted transparent;
       border-right: 10.5px solid #cccccc; }
-    .dropdown .left_tip:after {
+    .dropdown > .left-tip:after {
       height: 0;
       width: 0;
       border-top: 9.5px dotted transparent;
       border-bottom: 9.5px dotted transparent;
       border-right: 9.5px solid #ffffff;
       margin-left: 1px; }
-  .dropdown .right_tip {
+  .dropdown > .right-tip {
     right: 16px;
     top: 50%; }
-    .dropdown .right_tip:before {
+    .dropdown > .right-tip:before {
       height: 0;
       width: 0;
       border-top: 10.5px dotted transparent;
       border-bottom: 10.5px dotted transparent;
       border-left: 10.5px solid #cccccc; }
-    .dropdown .right_tip:after {
+    .dropdown > .right-tip:after {
       height: 0;
       width: 0;
       border-top: 9.5px dotted transparent;
       border-bottom: 9.5px dotted transparent;
       border-left: 9.5px solid #ffffff;
       margin-right: 1px; }
-  .dropdown .container {
+  .dropdown > .container {
     margin-bottom: 0 !important;
     border-width: 1px;
     border-style: solid;
@@ -1416,7 +1418,7 @@ button {
     min-width: 120px;
     overflow-x: hidden;
     overflow-y: auto; }
-    .dropdown .container .footer {
+    .dropdown > .container > .footer {
       margin-bottom: -10px !important; }
 
 /* ELEMENTS */
@@ -2536,7 +2538,7 @@ textarea {
 
 /* URL: http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html */
 /* GENERAL */
-.breadcrumb > *:not(:last-child):after, .button .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, .dropdown_btn .icon:before, [class*='icon-'], .loading:after, .select .icon:before, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after, .toolbar.loading_icons .icon:before {
+.breadcrumb > *:not(:last-child):after, .button .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, [class*='icon-'], .loading:after, .select .icon:before, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after, .toolbar.loading_icons .icon:before {
   font-family: "Material-Design-Icons";
   speak: none;
   font-style: normal;
@@ -4561,7 +4563,7 @@ textarea {
 .icon-navigation-expand-less:before, table.sortable thead tr th[data-sort]:before {
   content: "\f29d"; }
 
-.icon-navigation-expand-more:before, .dropdown_btn .icon:before, table.sortable thead tr th[data-sort]:after {
+.icon-navigation-expand-more:before, table.sortable thead tr th[data-sort]:after {
   content: "\f29e"; }
 
 .icon-navigation-fullscreen:before {

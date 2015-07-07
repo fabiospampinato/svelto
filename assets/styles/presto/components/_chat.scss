@@ -4,6 +4,7 @@
 .chat-msg {
 
     display: flex;
+    margin-bottom: $layout-spacing;
 
     &.level-3, &[class*='level-']  {
         margin-left: 9em;
@@ -54,8 +55,14 @@
     }
 
     & > .chat-msg-content {
+
         order: 3;
         flex-grow: 1;
+
+        & > .container {
+            margin-bottom: 0;
+        }
+
     }
 
 }
