@@ -1,7 +1,9 @@
 
-/* SELECTS */
+/* SELECT */
 
-.select {
+.select-btn {
+
+    position: relative;
 
     select {
         @include white ( true );
@@ -22,11 +24,7 @@
         z-index: 1;
     }
 
-    &.inactive select {
-        display:none;
-    }
-
-    .label .placeholder {
+    & > .placeholder {
 
         text-transform: none;
         font-weight: bold;
@@ -36,11 +34,6 @@
             content: '\a0'; // &nbsp;
         }
 
-    }
-
-    .icon:before {
-        @extend %icon;
-        @extend .icon-navigation-unfold-more:before;
     }
 
     &.top {

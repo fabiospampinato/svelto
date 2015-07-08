@@ -2537,7 +2537,7 @@ textarea {
 
 /* URL: http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html */
 /* GENERAL */
-.breadcrumb > *:not(:last-child):after, .button .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, [class*='icon-'], .loading:after, .select .icon:before, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after, .toolbar.loading_icons .icon:before {
+.breadcrumb > *:not(:last-child):after, .button .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, [class*='icon-'], .loading:after, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after, .toolbar.loading_icons .icon:before {
   font-family: "Material-Design-Icons";
   speak: none;
   font-style: normal;
@@ -4586,7 +4586,7 @@ textarea {
 .icon-navigation-unfold-less:before {
   content: "\f2a5"; }
 
-.icon-navigation-unfold-more:before, .select .icon:before {
+.icon-navigation-unfold-more:before {
   content: "\f2a6"; }
 
 .icon-notification-adb:before {
@@ -5219,52 +5219,46 @@ textarea {
   100% {
     background-position: 3.33333em 3.33333em; } }
 
-/* SELECTS */
-.select select {
-  background: #ffffff ;
-  border-color: #cccccc ;
-  color: #2f2f2f ;
-  border: none;
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
-  border-radius: 0.2665rem;
-  cursor: pointer;
-  font-size: 15px;
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
-  opacity: 0;
-  padding: 0 5px;
-  width: 100%;
-  z-index: 1; }
-
-.select.inactive select {
-  display: none; }
-
-.select .label .placeholder {
-  text-transform: none;
-  font-weight: bold;
-  display: inline-block; }
-  .select .label .placeholder:before {
-    content: '\a0'; }
-
-.select.top {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0; }
-
-.select.bottom {
-  border-bottom-left-radius: 0;
-  border-bottom-right-radius: 0; }
-
-.select.right {
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0; }
-
-.select.left {
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0; }
+/* SELECT */
+.select-btn {
+  position: relative; }
+  .select-btn select {
+    background: #ffffff ;
+    border-color: #cccccc ;
+    color: #2f2f2f ;
+    border: none;
+    -moz-appearance: none;
+    -webkit-appearance: none;
+    appearance: none;
+    border-radius: 0.2665rem;
+    cursor: pointer;
+    font-size: 15px;
+    position: absolute;
+    height: 100%;
+    left: 0;
+    top: 0;
+    opacity: 0;
+    padding: 0 5px;
+    width: 100%;
+    z-index: 1; }
+  .select-btn > .placeholder {
+    text-transform: none;
+    font-weight: bold;
+    display: inline-block; }
+    .select-btn > .placeholder:before {
+      content: '\a0'; }
+  .select-btn.top {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
+  .select-btn.bottom {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0; }
+  .select-btn.right {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0; }
+  .select-btn.left {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0; }
 
 /* TRIANGLES */
 .triangle, .triangle-up {

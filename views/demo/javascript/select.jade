@@ -3,30 +3,13 @@
 extends ../../layout.jade
 
 append body
+    - var elo_options = { public: "Public", private: "Private", Elo: { 1200: "1200+", 1300: "1300+", 1400: "1400+", 1500: "1500+", 1600: "1600+", 1700: "1700+", 1800: "1800+", 1900: "1900+", 2000: "2000+", 2100: "2100+", } };
+
     +divider Select
 
-    .grid
-        .grid_cols.limited
-            .grid_col
-                .container.transparent.no-padding.no-border
-                   .multiple
-                        .button.actionable.select
-                            .label.left
-                                | Base:
-                                .placeholder
-                            .icon.right
-                            select(placeholder="Select a value...", name="select_name1")
-                                option(value="public", selected="selected") Public
-                                option(value="private") Private
-                                optgroup(label="Elo")
-                                    option(value="1200") 1200+
-                                    option(value="1300") 1300+
-                                    option(value="1400") 1400+
-                                    option(value="1500") 1500+
-                                    option(value="1600") 1600+
-                                    option(value="1700") 1700+
-                                    option(value="1800") 1800+
-                                    option(value="1900") 1900+
-                                    option(value="2000") 2000+
-                                    option(value="2100") 2100+
-
+    +multiple
+        +select-btn(elo_options, "public", "base1").outlined
+            | Base :
+            .placeholder
+        +select-btn(elo_options, "public", "base2", "action-settings").outlined
+        +select-btn(elo_options, "public", "base3", "action-settings").outlined.rounded
