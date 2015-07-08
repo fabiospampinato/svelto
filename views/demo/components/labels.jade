@@ -1,0 +1,113 @@
+//- css/labels.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Normal
+
+    +multiple
+        +label.mini.primary Primary
+        +label.mini.secondary Secondary
+        +label.mini.white White
+        +label.mini.gray Gray
+        +label.mini.black Black
+        +label.mini.yellow Yellow
+        +label.mini.olive Olive
+        +label.mini.green Green
+        +label.mini.blue Blue
+        +label.mini.violet Violet
+        +label.mini.orange Orange
+        +label.mini.purple Purple
+        +label.mini.red Red
+        +label.mini.pink Pink
+        +label.mini.teal Teal
+        +label.mini.brown Brown
+
+    +divider Rounded
+
+    +multiple
+        +label.mini.rounded.primary Primary
+        +label.mini.rounded.secondary Secondary
+        +label.mini.rounded.white White
+        +label.mini.rounded.gray Gray
+        +label.mini.rounded.black Black
+        +label.mini.rounded.yellow Yellow
+        +label.mini.rounded.olive Olive
+        +label.mini.rounded.green Green
+        +label.mini.rounded.blue Blue
+        +label.mini.rounded.violet Violet
+        +label.mini.rounded.orange Orange
+        +label.mini.rounded.purple Purple
+        +label.mini.rounded.red Red
+        +label.mini.rounded.pink Pink
+        +label.mini.rounded.teal Teal
+        +label.mini.rounded.brown Brown
+
+    +divider Normal - Numbers
+
+    +multiple
+        +label.mini.primary 1
+        +label.mini.secondary 2
+        +label.mini.white 3
+        +label.mini.gray 4
+        +label.mini.black 5
+        +label.mini.yellow 6
+        +label.mini.olive 7
+        +label.mini.green 8
+        +label.mini.blue 9
+        +label.mini.violet 10
+        +label.mini.orange 11
+        +label.mini.purple 12
+        +label.mini.red 13
+        +label.mini.pink 14
+        +label.mini.teal 15
+        +label.mini.brown 16
+
+    +divider Rounded - Numbers
+
+    +multiple
+        +label.mini.rounded.primary 1
+        +label.mini.rounded.secondary 2
+        +label.mini.rounded.white 3
+        +label.mini.rounded.gray 4
+        +label.mini.rounded.black 5
+        +label.mini.rounded.yellow 6
+        +label.mini.rounded.olive 7
+        +label.mini.rounded.green 8
+        +label.mini.rounded.blue 9
+        +label.mini.rounded.violet 10
+        +label.mini.rounded.orange 11
+        +label.mini.rounded.purple 12
+        +label.mini.rounded.red 13
+        +label.mini.rounded.pink 14
+        +label.mini.rounded.teal 15
+        +label.mini.rounded.brown 16
+
+    +divider Tabs
+
+    .tabs_wrp
+        .tabs
+            .tab.actionable.n4inrow.active.highlight(title="Tab 1")
+                .icon.icon-communication-chat
+            .tab.actionable.n4inrow.inactive(title="Tab 2")
+                .icon.icon-action-restore
+            .tab.actionable.n4inrow(title="Tab 3") Text
+            .tab.actionable.n4inrow(title="Tab 4")
+                .icon.icon-action-settings
+        .contabs
+            .contab [Content 1] #[+lorem-ipsum()]
+            .contab [Content 2] #[+lorem-ipsum()]
+            .contab [Content 3] #[+lorem-ipsum()]
+            .contab [Content 4] #[+lorem-ipsum()]
+
+append body-end
+    script(type="text/javascript").
+        $.dom_ready ( function () {
+            $("#logo").badge ({ title: "Yeah!", type: "inline", style: "squared" });
+        });
+        $.dom_ready ( function () {
+            $("#sidebar_toggler .icon").badge ({ title: "10", type: "floating", style: "primary" });
+        });
+        $.dom_ready ( function () {
+            $(".icon-communication-chat").badge ({ title: "10", type: "floating", style: "secondary" });
+        });

@@ -74,9 +74,9 @@ append body
 
     +divider Actions
 
-    .toolbar
+    +multiple.joined
         input(id="populate_all_input", type="number", name="input1", placeholder="Squares number...")
-        .button.actionable.secondary(onclick="javascript:populate_all()") Populate
+        +button.secondary(onclick="javascript:populate_all()") Populate
 
     +divider Squares - Most significant match
 
@@ -149,9 +149,9 @@ append body
 
     +divider Actions
 
-    .toolbar
+    +multiple.joined
         input(id="populate_most_input", type="number", name="input2", placeholder="Squares number...")
-        .button.actionable.secondary(onclick="javascript:populate_most()") Populate
+        +button.secondary(onclick="javascript:populate_most()") Populate
 
     +divider Squares - Punctual
 
@@ -224,11 +224,12 @@ append body
 
     +divider Actions
 
-    .toolbar
+    +multiple.joined
         input(id="populate_punctual_input", type="number", name="input3", placeholder="Squares number...")
-        .button.actionable.secondary(onclick="javascript:populate_punctual()") Populate
+        +button.secondary(onclick="javascript:populate_punctual()") Populate
 
 append body-end
+    +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })
     +script.
         function get_squares_html ( nr ) {
 

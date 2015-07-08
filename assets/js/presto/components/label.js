@@ -1,11 +1,11 @@
 
-/* BADGE */
+/* LABEL */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    /* BADGE */
+    /* LABEL */
 
     $.widget ( 'presto.badge', {
 

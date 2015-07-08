@@ -5,6 +5,8 @@
 
 .multiple {
 
+    position: relative;
+    border-radius: $border-radius-normal;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -102,6 +104,37 @@
 
         &.fluid > * {
             width: 100%;
+        }
+
+    }
+
+    &.no-separators.outlined {
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: $layout-spacing;
+          z-index: 1;
+          border-radius: inherit;
+          pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
+          box-shadow: $button-outlined-shadow;
+        }
+
+        & > .button.outlined {
+
+            box-shadow: $shadow-depth-1;
+
+            &:not(.inactive) {
+
+                &:active, &.active {
+                    @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
+                }
+
+            }
+
         }
 
     }

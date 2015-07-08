@@ -5,14 +5,14 @@ extends ../../layout.jade
 append body
     +divider Normal
 
-    .multiple
+    +multiple
         input(type="text", name="input_1", value="Base")
         input(type="text", name="input_1", value="Inactive").inactive
         input(type="text", name="input_1", value="Disabled" disabled="disabled")
 
     +divider Fluid
 
-    .multiple.fluid
+    +multiple.fluid
         input(type="text", name="input_1", value="Foo")
         input(type="text", name="input_1", value="Bar")
         input(type="text", name="input_1", value="Baz")
@@ -20,68 +20,69 @@ append body
 
     +divider Toolbar
 
-    .multiple
-        .toolbar
+    +multiple
+        +multiple.joined
             input(type="text", name="input_1", value="Search")
-            .button.compact
-                .icon.icon-action-search
-        .toolbar
+            +button.compact
+                +icon("action-search")
+        +multiple.joined
             input(type="text", name="input_1", value="Search")
-            .button.actionable.compact.secondary
-                .icon.icon-action-search
-        .toolbar
+            +button.compact.secondary
+                +icon("action-search")
+        +multiple.joined
             input(type="text", name="input_1", placeholder="Search...")
-            .button.actionable.primary Search
-        .toolbar
+            +button.primary Search
+        +multiple.joined
             .button.gray http://
             input(type="text", name="input_1", placeholder="Search...")
-        .toolbar
+        +multiple.joined
             .button.compact
-                .icon.icon-social-people
+                +icon("social-people")
             input(type="text", name="input_1", value="Search")
-        .toolbar
+        +multiple.joined
             input(type="text", name="input_1", value="Search")
             .button.compact
-                .icon.icon-navigation-refresh.rotating
-        .toolbar
-            .button.actionable.teal
-                .sub.left
-                    .icon.icon-maps-local-grocery-store
-                .label Checkout
+                +icon("navigation-refresh").rotating
+        +multiple.joined
+            +button.teal
+                +button-left
+                    +icon("maps-local-grocery-store")
+                +button-center Checkout
             input(type="text", name="input_1", value="34.50€")
 
     +divider Toolbar - Outlined
 
-    .multiple
-        .toolbar
+    +multiple
+        +multiple.joined
             input(type="text", name="input_1", value="Outlined").outlined
-        .toolbar.outlined
+        +multiple.joined.outlined
             input(type="text", name="input_1", value="Outlined")
-            .button.compact
-                .icon.icon-action-search
-        .toolbar
+            +button.compact
+                +icon("action-search")
+        +multiple.joined
             .button.gray http://
             input(type="text", name="input_1", placeholder="Outlined..." class="outlined")
 
     +divider Toolbar - Opacify
 
-    .toolbar.opacify
+    //- TODO: sto opacify non è implementato
+
+    +multiple.joined
         input(type="text", name="input_1", value="Opaciy")
-        .button.compact
-            .icon.icon-action-search
+        +button.compact
+            +icon("action-search")
 
     +divider Toolbar - Loading
 
-    .multiple
-        #loadable.toolbar
+    +multiple
+        #loadable.multiple.joined
             input(type="text", name="input_1", value="Search...")
-            .button.compact
-                .icon.icon-action-search
-        .toolbar
-            .button.actionable(onclick="javascript:toggle_loading();") Toggle loading
+            +button.compact
+                +icon("action-search")
+        +button(onclick="javascript:toggle_loading();") Toggle loading
 
 append body-end
-    script(type="text/javascript").
+    script.
         function toggle_loading () {
             $("#loadable").toggleClass ( "loading_icons" );
         }

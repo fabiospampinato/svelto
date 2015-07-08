@@ -17,6 +17,7 @@ button {
     padding: $button-vertical-padding $button-horizontal-padding;
     font-weight: bold;
     box-shadow: $shadow-depth-1;
+    position: relative;
     // outline: none !important; //FIXME: Is it needed?
     line-height: 1em;
     min-height: 1em;

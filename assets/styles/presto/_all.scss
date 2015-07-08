@@ -25,7 +25,7 @@
 
 /* SETTINGS */
 
-@import 'settings/badge';
+@import 'settings/label';
 @import 'settings/breadcrumb';
 @import 'settings/button';
 @import 'settings/chat';
@@ -49,7 +49,6 @@
 @import 'settings/switcher';
 @import 'settings/table';
 @import 'settings/tabs';
-@import 'settings/toolbar';
 
 /* BASE */
 
@@ -64,7 +63,7 @@
 
 @import 'components/accordion';
 @import 'components/advertisement';
-@import 'components/badge';
+@import 'components/label';
 @import 'components/breadcrumb';
 @import 'components/button';
 @import 'components/chat';
@@ -98,7 +97,6 @@
 @import 'components/table';
 @import 'components/tabs';
 @import 'components/tagbox';
-@import 'components/toolbar';
 @import 'components/typography';
 
 /* HELPERS */

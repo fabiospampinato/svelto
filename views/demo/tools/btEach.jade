@@ -139,10 +139,10 @@ append body
     +divider Actions
 
     +multiple
-        .toolbar
+        +multiple.joined
             input(id="input", type="number", name="input", placeholder="Search number...")
             #search.button.actionable.primary(onclick="javascript:search()") Search
-        .toolbar
+        +multiple.joined
             input(id="populate_input", type="number", name="input2", placeholder="Squares number...")
             #populate.button.actionable.secondary(onclick="javascript:populate()") Populate
         #clear.button.actionable.black(onclick="javascript:reset()") Clear

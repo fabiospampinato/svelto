@@ -1,0 +1,13 @@
+
+/* LABEL */
+
+.label {
+
+    @extend .button;
+    text-transform: uppercase;
+
+    &.floating {
+
+    }
+
+}

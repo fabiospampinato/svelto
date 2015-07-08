@@ -163,9 +163,9 @@
   .olive.actionable:not(.inactive):not(.active):not(.dragging):active, .olive.actionable.active {
     background: #a5ba16 !important; }
   .olive.highlight {
-    border-bottom-color: #ffce16 !important; }
+    border-bottom-color: #ff7138 !important; }
     .olive.highlight:after {
-      background: #ffce16 !important; }
+      background: #ff7138 !important; }
 
 .text-olive {
   color: #b5cc18; }
@@ -229,9 +229,9 @@
   .violet.actionable:not(.inactive):not(.active):not(.dragging):active, .violet.actionable.active {
     background: #5c31b9 !important; }
   .violet.highlight {
-    border-bottom-color: #ff7138 !important; }
+    border-bottom-color: #f64242 !important; }
     .violet.highlight:after {
-      background: #ff7138 !important; }
+      background: #f64242 !important; }
 
 .text-violet {
   color: #6435c9; }
@@ -361,9 +361,9 @@
   .brown.actionable:not(.inactive):not(.active):not(.dragging):active, .brown.actionable.active {
     background: #965e39 !important; }
   .brown.highlight {
-    border-bottom-color: #f64242 !important; }
+    border-bottom-color: #ff7138 !important; }
     .brown.highlight:after {
-      background: #f64242 !important; }
+      background: #ff7138 !important; }
 
 .text-brown {
   color: #a5673f; }
@@ -478,7 +478,6 @@
 /* SETTINGS */
 /* SETTINGS */
 /* SETTINGS */
-/* TOOLBAR */
 /* BASE */
 /* GENERAL */
 *, *:before, *:after {
@@ -934,50 +933,9 @@ code[class*='language-'] {
   margin-bottom: 10px;
   text-align: center; }
 
-/* BADGE */
-.badge_wrp .badge {
-  background: #ffffff ;
-  border-color: #cccccc ;
-  color: #2f2f2f ;
-  font-family: sans-serif !important;
-  font-weight: bold;
-  text-transform: uppercase;
-  border-radius: 10000px;
-  line-height: initial;
-  display: block;
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  -webkit-transition: -webkit-transform 0.15s ease 0s;
-          transition: transform 0.15s ease 0s; }
-  .badge_wrp .badge.squared {
-    border-radius: 0.2665rem; }
-
-.badge_wrp.active .badge {
-  -webkit-transform: scale(1);
-          transform: scale(1); }
-
-.badge_wrp.inline {
-  display: table;
-  float: right;
-  height: 100%;
-  margin-left: 10px; }
-  .badge_wrp.inline .badge_subwrp {
-    display: table-cell;
-    vertical-align: middle; }
-  .badge_wrp.inline .badge {
-    font-size: 0.6em;
-    padding: 0.2em 0.45em; }
-
-.badge_wrp.floating {
-  position: absolute;
-  top: -8px;
-  right: -8px; }
-  .badge_wrp.floating .badge {
-    font-size: 0.5em;
-    padding: 0.15em 0.4em;
-    border-style: solid;
-    border-width: 1px;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25); }
+/* LABEL */
+.label {
+  text-transform: uppercase; }
 
 /* BREADCRUMB */
 .breadcrumb > *:not(:last-child):after {
@@ -1002,7 +960,7 @@ button {
   border: none; }
 
 /* BUTTON */
-.button {
+.button, .label {
   background: #ffffff ;
   border-color: #cccccc ;
   color: #2f2f2f ;
@@ -1015,97 +973,98 @@ button {
   padding: 0.78571em 1.5em;
   font-weight: bold;
   box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025);
+  position: relative;
   line-height: 1em;
   min-height: 1em;
   min-width: 1em; }
-  .button.transparentize {
+  .button.transparentize, .transparentize.label {
     background: rgba(255, 255, 255, 0.9) ;}
-  .button.gradient {
+  .button.gradient, .gradient.label {
     background-color: #fafafa ;
     background: -webkit-linear-gradient(top, #fafafa 0%, whitesmoke 100%);
     background: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) ;}
-  .button.actionable:not(.inactive):not(.active):not(.dragging):hover {
+  .button.actionable:not(.inactive):not(.active):not(.dragging):hover, .actionable.label:not(.inactive):not(.active):not(.dragging):hover {
     background: #fafafa ;}
-  .button.actionable:not(.inactive):not(.active):not(.dragging):active, .button.actionable.active {
+  .button.actionable:not(.inactive):not(.active):not(.dragging):active, .actionable.label:not(.inactive):not(.active):not(.dragging):active, .button.actionable.active, .actionable.active.label {
     background: whitesmoke ;}
-  .button.highlight {
+  .button.highlight, .highlight.label {
     border-bottom-color: #000000 ;}
-    .button.highlight:after {
+    .button.highlight:after, .highlight.label:after {
       background: #000000 ;}
-  html.dragging .button {
+  html.dragging .button, html.dragging .label {
     cursor: move !important; }
-  .button.actionable {
+  .button.actionable, .actionable.label {
     cursor: pointer; }
-  .button > .button-left, .button > .button-right {
+  .button > .button-left, .label > .button-left, .button > .button-right, .label > .button-right {
     background-color: rgba(0, 0, 0, 0.05);
     padding: 0.78571em 0.78571em;
     min-width: 1em;
     cursor: pointer; }
-  .button:not(.inactive):not(.active):not(.dragging) > .button-left.actionable:not(.inactive):not(.active):not(.dragging):hover, .button:not(.inactive):not(.active):not(.dragging) > .button-right.actionable:not(.inactive):not(.active):not(.dragging):hover {
+  .button:not(.inactive):not(.active):not(.dragging) > .button-left.actionable:not(.inactive):not(.active):not(.dragging):hover, .label:not(.inactive):not(.active):not(.dragging) > .button-left.actionable:not(.inactive):not(.active):not(.dragging):hover, .button:not(.inactive):not(.active):not(.dragging) > .button-right.actionable:not(.inactive):not(.active):not(.dragging):hover, .label:not(.inactive):not(.active):not(.dragging) > .button-right.actionable:not(.inactive):not(.active):not(.dragging):hover {
     background-color: rgba(0, 0, 0, 0.06); }
-  .button:not(.inactive):not(.active):not(.dragging) > .button-left:not(.inactive):active, .button:not(.inactive):not(.active):not(.dragging) > .button-left:not(.inactive).active, .button:not(.inactive):not(.active):not(.dragging) > .button-right:not(.inactive):active, .button:not(.inactive):not(.active):not(.dragging) > .button-right:not(.inactive).active {
+  .button:not(.inactive):not(.active):not(.dragging) > .button-left:not(.inactive):active, .label:not(.inactive):not(.active):not(.dragging) > .button-left:not(.inactive):active, .button:not(.inactive):not(.active):not(.dragging) > .button-left:not(.inactive).active, .label:not(.inactive):not(.active):not(.dragging) > .button-left:not(.inactive).active, .button:not(.inactive):not(.active):not(.dragging) > .button-right:not(.inactive):active, .label:not(.inactive):not(.active):not(.dragging) > .button-right:not(.inactive):active, .button:not(.inactive):not(.active):not(.dragging) > .button-right:not(.inactive).active, .label:not(.inactive):not(.active):not(.dragging) > .button-right:not(.inactive).active {
     box-shadow: inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
-  .button > .button-left {
+  .button > .button-left, .label > .button-left {
     -webkit-box-ordinal-group: 2;
     -webkit-order: 1;
             order: 1;
     margin: -0.78571em 1.5em -0.78571em -1.5em;
     border-top-left-radius: inherit;
     border-bottom-left-radius: inherit; }
-  .button > .button-center {
+  .button > .button-center, .label > .button-center {
     -webkit-box-ordinal-group: 3;
     -webkit-order: 2;
             order: 2; }
-  .button > .button-right {
+  .button > .button-right, .label > .button-right {
     -webkit-box-ordinal-group: 4;
     -webkit-order: 3;
             order: 3;
     margin: -0.78571em -1.5em -0.78571em 1.5em;
     border-top-right-radius: inherit;
     border-bottom-right-radius: inherit; }
-  .button.inactive {
+  .button.inactive, .inactive.label {
     opacity: 0.5;
     cursor: default; }
-    .button.inactive > .button-left, .button.inactive > .button-right {
+    .button.inactive > .button-left, .inactive.label > .button-left, .button.inactive > .button-right, .inactive.label > .button-right {
       opacity: 0.5; }
-  .button.actionable:not(.inactive):active, .button.actionable:not(.inactive).active {
+  .button.actionable:not(.inactive):active, .actionable.label:not(.inactive):active, .button.actionable:not(.inactive).active, .actionable.label:not(.inactive).active {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
-  .button.compact {
+  .button.compact, .compact.label {
     padding: 0.78571em 0.78571em; }
-    .button.compact > .button-left {
+    .button.compact > .button-left, .compact.label > .button-left {
       margin: -0.78571em 0.78571em -0.78571em -0.78571em; }
-    .button.compact > .button-right {
+    .button.compact > .button-right, .compact.label > .button-right {
       margin: -0.78571em -0.78571em -0.78571em 0.78571em; }
-  .button.outlined {
+  .button.outlined, .outlined.label {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
-    .button.outlined:not(.inactive):active, .button.outlined:not(.inactive).active {
+    .button.outlined:not(.inactive):active, .outlined.label:not(.inactive):active, .button.outlined:not(.inactive).active, .outlined.label:not(.inactive).active {
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075), 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
-    .button.outlined > .button-left, .button.outlined > .button-right {
+    .button.outlined > .button-left, .outlined.label > .button-left, .button.outlined > .button-right, .outlined.label > .button-right {
       padding: calc(0.78571em - 1px) calc(0.78571em - 1px); }
-    .button.outlined > .button-left {
+    .button.outlined > .button-left, .outlined.label > .button-left {
       border-right: 1px solid rgba(0, 0, 0, 0.0625);
       margin: calc(-0.78571em + 1px) calc(1.5em - 1px) -0.78571em -1.5em; }
-    .button.outlined > .button-right {
+    .button.outlined > .button-right, .outlined.label > .button-right {
       border-left: 1px solid rgba(0, 0, 0, 0.0625);
       margin: calc(-0.78571em + 1px) -1.5em -0.78571em calc(1.5em - 1px); }
-    .button.outlined.compact > .button-left {
+    .button.outlined.compact > .button-left, .outlined.compact.label > .button-left {
       margin: calc(-0.78571em + 1px) calc(0.78571em - 1px) -0.78571em -0.78571em; }
-    .button.outlined.compact > .button-right {
+    .button.outlined.compact > .button-right, .outlined.compact.label > .button-right {
       margin: calc(-0.78571em + 1px) -0.78571em -0.78571em calc(0.78571em - 1px); }
-  .button.floating {
+  .button.floating, .floating.label {
     margin-bottom: 0 !important;
     position: fixed;
     right: 30px;
     bottom: 30px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25); }
-    .button.floating:not(.inactive):not(.dragging):active, .button.floating.active {
+    .button.floating:not(.inactive):not(.dragging):active, .floating.label:not(.inactive):not(.dragging):active, .button.floating.active, .floating.active.label {
       box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
-  .button .icon {
+  .button .icon, .label .icon {
     font-size: 1.3em;
     margin: -0.115em; }
-    .button .icon.left {
+    .button .icon.left, .label .icon.left {
       padding-right: 0.75em; }
-    .button .icon.right {
+    .button .icon.right, .label .icon.right {
       padding-left: 0.75em; }
 
 /* CHAT */
@@ -1282,7 +1241,7 @@ button {
     .container > .header > .sub > .multiple {
       margin-top: -3px;
       margin-bottom: -3px; }
-    .container > .header > .sub > .button, .container > .header > .sub > .multiple > .button {
+    .container > .header > .sub > .button, .container > .header > .sub > .label, .container > .header > .sub > .multiple > .button, .container > .header > .sub > .multiple > .label {
       margin-bottom: 0 !important; }
   .container > .content {
     margin: -10px;
@@ -2525,19 +2484,18 @@ textarea {
 
 /* HIGHLIGHT */
 .highlight:after {
-  border-radius: 100px 100px 0 0;
-  bottom: 0;
+  border-radius: 0 0 0.2665rem 0.2665rem;
   content: '';
-  display: block;
   height: 2px;
   left: 0;
-  position: absolute;
   right: 0;
-  width: 100%; }
+  bottom: 0;
+  position: absolute;
+  pointer-events: none; }
 
 /* URL: http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html */
 /* GENERAL */
-.breadcrumb > *:not(:last-child):after, .button .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, [class*='icon-'], .loading:after, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after, .toolbar.loading_icons .icon:before {
+.breadcrumb > *:not(:last-child):after, .button .icon, .label .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, [class*='icon-'], .loading:after, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after {
   font-family: "Material-Design-Icons";
   speak: none;
   font-style: normal;
@@ -4580,7 +4538,7 @@ textarea {
 .icon-navigation-more-vert:before {
   content: "\f2a3"; }
 
-.icon-navigation-refresh:before, .loading:after, .toolbar.loading_icons .icon:before {
+.icon-navigation-refresh:before, .loading:after {
   content: "\f2a4"; }
 
 .icon-navigation-unfold-less:before {
@@ -4876,6 +4834,8 @@ textarea {
 
 /* MULTIPLE */
 .multiple {
+  position: relative;
+  border-radius: 0.2665rem;
   display: -webkit-box;
   display: -webkit-flex;
   display: flex;
@@ -4942,6 +4902,21 @@ textarea {
       margin-right: 0; }
     .multiple.vertical.fluid > * {
       width: 100%; }
+  .multiple.no-separators.outlined:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 10px;
+    z-index: 1;
+    border-radius: inherit;
+    pointer-events: none;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
+  .multiple.no-separators.outlined > .button.outlined, .multiple.no-separators.outlined > .outlined.label {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
+    .multiple.no-separators.outlined > .button.outlined:not(.inactive):active, .multiple.no-separators.outlined > .outlined.label:not(.inactive):active, .multiple.no-separators.outlined > .button.outlined:not(.inactive).active, .multiple.no-separators.outlined > .outlined.label:not(.inactive).active {
+      box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
   .multiple.fluid > *:not(.nogrow) {
     -webkit-box-flex: 1;
     -webkit-flex-grow: 1;
@@ -5108,7 +5083,7 @@ textarea {
       width: auto;
       -webkit-transition: max-width 0.2 ease 0s, max-height 0.2 ease 0s;
               transition: max-width 0.2 ease 0s, max-height 0.2 ease 0s; }
-  .noty_wrp .noty .button {
+  .noty_wrp .noty .button, .noty_wrp .noty .label {
     -webkit-transition: margin-bottom 0.2s ease 0s, height 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s;
             transition: margin-bottom 0.2s ease 0s, height 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s; }
 
@@ -5118,7 +5093,7 @@ textarea {
     max-height: 0;
     max-width: 0; }
 
-.noty_wrp:not(.active) .noty .button {
+.noty_wrp:not(.active) .noty .button, .noty_wrp:not(.active) .noty .label {
   margin-bottom: 0;
   height: 0;
   font-size: 0;
@@ -5133,7 +5108,7 @@ textarea {
     .noty_wrp.active .noty .noty_img img {
       max-height: 38px;
       max-width: 38px; }
-  .noty_wrp.active .noty .button {
+  .noty_wrp.active .noty .button, .noty_wrp.active .noty .label {
     margin-bottom: 10px; }
 
 /* PROGRESS BAR */
@@ -5651,79 +5626,6 @@ table {
 
 .tagbox > .multiple > input {
   min-width: 7em; }
-
-/* TOOLBAR */
-.toolbar {
-  display: inline-block;
-  margin-bottom: 10px;
-  border-radius: 0.2665rem;
-  position: relative; }
-  .toolbar > * {
-    margin-left: 0 !important;
-    margin-right: 0 !important;
-    margin-bottom: 0 !important;
-    border-radius: 0 !important; }
-    .toolbar > *:first-child {
-      border-top-left-radius: 0.2665rem !important;
-      border-bottom-left-radius: 0.2665rem !important; }
-    .toolbar > *:last-child {
-      border-top-right-radius: 0.2665rem !important;
-      border-bottom-right-radius: 0.2665rem !important; }
-  .toolbar.fluid {
-    display: -webkit-box;
-    display: -webkit-flex;
-    display: flex; }
-    .toolbar.fluid > *:not(.no-grow) {
-      -webkit-box-flex: 1;
-      -webkit-flex-grow: 1;
-              flex-grow: 1; }
-  .toolbar.outlined:before {
-    content: '';
-    pointer-events: none;
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 1;
-    border-radius: 0.2665rem;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
-  .toolbar.opacify .icon {
-    opacity: 0.6;
-    -webkit-transition: opacity 0.15s ease 0s;
-            transition: opacity 0.15s ease 0s; }
-  .toolbar.opacify:active .icon, .toolbar.opacify:focus .icon, .toolbar.opacify:hover .icon {
-    opacity: 1; }
-  .toolbar.loading_icons .icon {
-    -webkit-animation: rotate 0.9s linear infinite;
-            animation: rotate 0.9s linear infinite; }
-  .toolbar .conditional {
-    background: #ffffff ;
-    border-color: #cccccc ;
-    color: #2f2f2f ;
-    font-size: 1rem ;
-    display: inline-block;
-    font-size: 1rem;
-    height: 2.57142em;
-    height: 2.57142em;
-    position: relative;
-    vertical-align: top;
-    width: 0.3em;
-    z-index: 1; }
-    .toolbar .conditional:before {
-      background-color: #fff;
-      border-radius: 10000px;
-      content: "or";
-      font-style: normal;
-      font-weight: bold;
-      height: 1.78571em;
-      line-height: 1.70571em;
-      margin-left: -0.892855em;
-      margin-top: -0.892855em;
-      position: absolute;
-      text-align: center;
-      top: 50%;
-      width: 1.78571em; }
 
 /* HEADERS */
 h1, h2, h3, h4, h5, h6 {
