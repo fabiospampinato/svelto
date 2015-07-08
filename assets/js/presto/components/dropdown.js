@@ -39,7 +39,7 @@
 
             this._bind_trigger_click ();
             this._bind_actionable_click ();
-//          this.$btn_parents.on ( 'scroll', this.update ); //If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
+//          this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
         },
 
@@ -91,7 +91,17 @@
 
             var $parents = $(event.target).parents ();
 
-            if ( $parents.index ( this.$element ) === -1 ) { //INFO: Checking if we clicked inside the dropdown
+            if ( $parents.index ( this.$element ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
+
+                for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
+
+                    if ( event.target === this.$triggers.nodes[i] || $parents.index ( this.$triggers.nodes[i] ) !== -1 ) {
+
+                        return;
+
+                    }
+
+                }
 
                 this.close ();
 
@@ -110,12 +120,11 @@
 
             // Reset classes
 
-            $trigger.removeClass ( 'top bottom left right' );
             this.$element.removeClass ( 'top bottom left right' ).toggleClass ( 'no-tip', no_tip );
 
             // update offsets
 
-            var body_offset = $body.offset (),
+            var html_offset = $html.offset (),
                 drop_offset = this.$element.offset (),
                 trig_offset = $trigger.offset ();
 
@@ -124,15 +133,14 @@
             var trig_center_top = trig_offset.top + ( trig_offset.height / 2 ),
                 trig_center_left = trig_offset.left + ( trig_offset.width / 2 );
 
-            var bottom_space = body_offset.height - trig_offset.top - trig_offset.height,
+            var bottom_space = html_offset.height - trig_offset.top - trig_offset.height,
                 top_space = trig_offset.top,
-                right_space = body_offset.width - trig_offset.left - trig_offset.width,
+                right_space = html_offset.width - trig_offset.left - trig_offset.width,
                 left_space = trig_offset.left;
 
-            var useful_doc_width = Math.min ( body_offset.width, drop_offset.width ),
-                useful_doc_height = Math.min ( body_offset.height, drop_offset.height );
-console.log("useful_doc_width: ", useful_doc_width);
-console.log("useful_doc_height: ", useful_doc_height);
+            var useful_doc_width = Math.min ( html_offset.width, drop_offset.width ),
+                useful_doc_height = Math.min ( html_offset.height, drop_offset.height );
+
             var areas = {
                 bottom: Math.min ( bottom_space, drop_offset.height ) * useful_doc_width,
                 top: Math.min ( top_space, drop_offset.height ) * useful_doc_width,
@@ -141,7 +149,7 @@ console.log("useful_doc_height: ", useful_doc_height);
             };
 
             var needed_area = drop_offset.width * drop_offset.height;
-console.log("areas: ", areas);
+
             // helpers
 
             var get_vertical_left = function () {
@@ -160,7 +168,7 @@ console.log("areas: ", areas);
 
                 }
 
-                return Math.max ( 0, Math.min ( body_offset.width - drop_offset.width, trig_center_left - ( drop_offset.width / 2 ) ) );
+                return Math.max ( 0, Math.min ( html_offset.width - drop_offset.width, trig_center_left - ( drop_offset.width / 2 ) ) );
 
             };
 
@@ -180,7 +188,7 @@ console.log("areas: ", areas);
 
                 }
 
-                return Math.max ( 0, Math.min ( body_offset.height - drop_offset.height, trig_center_top - ( drop_offset.height / 2 ) ) );
+                return Math.max ( 0, Math.min ( html_offset.height - drop_offset.height, trig_center_top - ( drop_offset.height / 2 ) ) );
 
             };
 
@@ -192,7 +200,7 @@ console.log("areas: ", areas);
 
             // get first with acceptable area
 
-            var direction = 'bottom'; //FIXME
+            var direction; //FIXME
 
             if ( !direction ) {
 
@@ -212,7 +220,7 @@ console.log("areas: ", areas);
             // get the one with the maximum area
 
             if ( !direction ) {
-console.log("getting maximum area");
+
                 var max_area = -1;
 
                 for ( var dir in areas ) {
@@ -238,8 +246,6 @@ console.log("getting maximum area");
 
             }
 
-            console.log("direction: ", direction);
-
             // positionate the dropdown
 
             var direction_type = get_direction_type ( direction );
@@ -250,7 +256,7 @@ console.log("getting maximum area");
             switch ( direction ) {
 
                 case 'bottom':
-                    top = body_offset.height - bottom_space;
+                    top = html_offset.height - bottom_space;
                     break;
 
                 case 'top':
@@ -258,7 +264,7 @@ console.log("getting maximum area");
                     break;
 
                 case 'right':
-                    left = body_offset.width - right_space;
+                    left = html_offset.width - right_space;
                     break;
 
                 case 'left':
@@ -309,13 +315,15 @@ console.log("getting maximum area");
 
         toggle: function ( event, trigger ) {
 
-            this[this.opened ? 'close' : 'open']( event, trigger );
+            this[this.opened && assignments[this.id] === trigger ? 'close' : 'open']( event, trigger );
 
         },
 
         open: function ( event, trigger ) {
 
             if ( trigger ) {
+
+                $(assignments[this.id]).removeClass ( 'top bottom left right active' );
 
                 assignments[this.id] = trigger;
 

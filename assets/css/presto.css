@@ -1097,7 +1097,7 @@ button {
     position: fixed;
     right: 30px;
     bottom: 30px;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25); }
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25); }
     .button.floating:not(.inactive):not(.dragging):active, .button.floating.active {
       box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
   .button .icon {
@@ -1349,7 +1349,7 @@ button {
       width: 0;
       border-left: 10.5px dotted transparent;
       border-right: 10.5px dotted transparent;
-      border-bottom: 10.5px solid #cccccc; }
+      border-bottom: 10.5px solid #c2c2c2; }
     .dropdown > .top-tip:after {
       height: 0;
       width: 0;
@@ -1365,7 +1365,7 @@ button {
       width: 0;
       border-left: 10.5px dotted transparent;
       border-right: 10.5px dotted transparent;
-      border-top: 10.5px solid #cccccc; }
+      border-top: 10.5px solid #c2c2c2; }
     .dropdown > .bottom-tip:after {
       height: 0;
       width: 0;
@@ -1385,7 +1385,7 @@ button {
       width: 0;
       border-top: 10.5px dotted transparent;
       border-bottom: 10.5px dotted transparent;
-      border-right: 10.5px solid #cccccc; }
+      border-right: 10.5px solid #c2c2c2; }
     .dropdown > .left-tip:after {
       height: 0;
       width: 0;
@@ -1401,7 +1401,7 @@ button {
       width: 0;
       border-top: 10.5px dotted transparent;
       border-bottom: 10.5px dotted transparent;
-      border-left: 10.5px solid #cccccc; }
+      border-left: 10.5px solid #c2c2c2; }
     .dropdown > .right-tip:after {
       height: 0;
       width: 0;
@@ -1413,9 +1413,8 @@ button {
     margin-bottom: 0 !important;
     border-width: 1px;
     border-style: solid;
-    box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25);
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25);
     max-height: 325px;
-    min-width: 120px;
     overflow-x: hidden;
     overflow-y: auto; }
     .dropdown > .container > .footer {
@@ -5331,7 +5330,9 @@ textarea {
 hr {
   background-color: rgba(0, 0, 0, 0.1);
   margin-bottom: 10px;
+  margin-top: 0;
   height: 1px;
+  width: 100%;
   border: none; }
 
 /* DIVIDER */

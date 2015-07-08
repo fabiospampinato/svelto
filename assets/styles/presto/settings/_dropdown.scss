@@ -5,7 +5,7 @@ $dropdown-tip-border-size: 1px !default;
 $dropdown-tip-fg-size: 19px !default;
 $dropdown-tip-bg-size: $dropdown-tip-fg-size + ( 2 * $dropdown-tip-border-size ) !default;
 $dropdown-tip-fg-color: $color-white-bg !default;
-$dropdown-tip-bg-color: $color-white-border !default;
+$dropdown-tip-bg-color: darken($color-white-border, 4) !default;
 
 $dropdown-padding: 15px !default;
 $dropdown-border-size: 1px !default;

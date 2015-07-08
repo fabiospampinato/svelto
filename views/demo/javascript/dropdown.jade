@@ -9,15 +9,25 @@ append body
         +dropdown-btn("Base", "base")
         +dropdown-btn-icon("action-settings", "base")
         +dropdown-btn-icon("action-settings", "base").rounded
+        +dropdown-btn("Dividers", "dividers")
         +dropdown-btn("Advanced", "advanced")
 
 append body-end
         +dropdown("base")
             +multiple.vertical
                 +button("#1").outlined.tiny Action 1
-                hr
-                +button("#1").outlined.tiny Action 2
-                +button("#1").outlined.tiny Action 3
+                +divider-linear
+                +button("#2").outlined.tiny Action 2
+                +button("#3").outlined.tiny Action 3
+        +dropdown("dividers")
+            +multiple.vertical.fluid
+                +button("#1").outlined.tiny Action 1
+                +divider Divider
+                +button("#2").outlined.tiny Action 2
+                +divider-linear Divider
+                +button("#3").outlined.tiny Action 3
+                +divider-linear
+                +button("#4").outlined.tiny Action 4
         +dropdown("advanced")
             +container-header("Header").transparent
             +container-content Content

@@ -5,7 +5,7 @@
 mixin dropdown-btn(title, id)
     .button.actionable.dropdown-btn.dropdown-trigger(data-dropdown="dropdown-"+id)&attributes(attributes)
         = title
-        +icon("navigation-expand-more")
+        +icon("navigation-expand-more").right
 
 mixin dropdown-btn-icon(icon, id)
     .button.actionable.compact.dropdown-btn.dropdown-trigger(data-dropdown="dropdown-"+id)&attributes(attributes)

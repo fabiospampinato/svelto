@@ -152,7 +152,7 @@ button {
         position: fixed;
         right: $layout-spacing * 3;
         bottom: $layout-spacing * 3;
-        box-shadow: $shadow-depth-5;
+        box-shadow: $shadow-depth-4;
 
         &:not(.inactive):not(.dragging):active, &.active {
             @include multi-shadow ( $shadow-depth-5, $shadow-inset-1 );
