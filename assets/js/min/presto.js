@@ -4290,6 +4290,8 @@ $.ready ( function () {
 
 /* SELECT */
 
+//TODO: Add support for selecting multiple options
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';

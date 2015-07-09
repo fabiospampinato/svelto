@@ -39,10 +39,12 @@
 @import 'settings/header';
 @import 'settings/highlight';
 @import 'settings/icons';
+@import 'settings/input';
 @import 'settings/loading';
 @import 'settings/modal';
 @import 'settings/navbar';
 @import 'settings/noty';
+@import 'settings/outline';
 @import 'settings/progressBar';
 @import 'settings/divider';
 @import 'settings/slider';
@@ -81,11 +83,13 @@
 @import 'components/header';
 @import 'components/highlight';
 @import 'components/icons';
+@import 'components/input';
 @import 'components/loading';
 @import 'components/modal';
 @import 'components/multiple';
 @import 'components/navbar';
 @import 'components/noty';
+@import 'components/outline';
 @import 'components/progressBar';
 @import 'components/select';
 @import 'components/shapes';
@@ -97,6 +101,7 @@
 @import 'components/table';
 @import 'components/tabs';
 @import 'components/tagbox';
+@import 'components/textarea';
 @import 'components/typography';
 
 /* HELPERS */

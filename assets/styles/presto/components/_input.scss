@@ -1,0 +1,28 @@
+
+/* INPUT */
+
+input {
+
+    @include white ( true );
+    @include medium ();
+    box-shadow: $shadow-depth-1;
+    border: none;
+    border-radius: $border-radius-normal;
+    font-family: $font-family;
+    padding: $input-vertical-padding $input-horizontal-padding;
+    box-sizing:border-box;
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 1em;
+    min-width: 0px;
+    margin-bottom: $layout-spacing;
+
+    &.fluid {
+        width: 100%;
+    }
+
+    &[disabled] {
+        opacity: 0.5;
+    }
+
+}

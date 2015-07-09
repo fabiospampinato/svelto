@@ -85,6 +85,30 @@
     color: $color-secondary;
 }
 
+@mixin tertiary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+    @include color ( 'tertiary', $basic, $transparentize, $gradient, $important);
+}
+
+.tertiary {
+    @include tertiary ( false, false, false, '!important' );
+}
+
+.text-tertiary {
+    color: $color-tertiary;
+}
+
+@mixin quaternary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+    @include color ( 'quaternary', $basic, $transparentize, $gradient, $important);
+}
+
+.quaternary {
+    @include quaternary ( false, false, false, '!important' );
+}
+
+.text-quaternary {
+    color: $color-quaternary;
+}
+
 /* COLORS */
 
 @mixin white ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {

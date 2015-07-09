@@ -14,20 +14,9 @@
         border-bottom-right-radius: $border-radius-normal;
         transition: margin-bottom 0.25s ease 0s, border-bottom-left-radius 0.25s ease 0s, border-bottom-right-radius 0.25s ease 0s;
 
-        .sub {
-
-            .icon.icon-navigation-arrow-drop-down {
-                transition: transform 0.2s ease 0s;
-            }
-
-            &.left .icon.icon-navigation-arrow-drop-down {
-                transform: rotate(-90deg);
-            }
-
-            &.right .icon.icon-navigation-arrow-drop-down {
-                transform: rotate(90deg);
-            }
-
+        & > .sub .icon.icon-hardware-keyboard-arrow-down {
+            transition: transform 0.2s ease 0s;
+            transition: rotate(0);
         }
 
     }
@@ -46,8 +35,16 @@
             border-bottom-left-radius: 0 !important;
             border-bottom-right-radius: 0 !important;
 
-            .sub .icon.icon-navigation-arrow-drop-down {
-                transform: rotate(0);
+            & > .sub {
+
+                &.left .icon.icon-hardware-keyboard-arrow-down {
+                    transform: rotate(-180deg);
+                }
+
+                &.right .icon.icon-hardware-keyboard-arrow-down {
+                    transform: rotate(180deg);
+                }
+
             }
 
         }

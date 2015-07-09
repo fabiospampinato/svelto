@@ -29,7 +29,7 @@
 
         &:not(.vertical) {
 
-            &.no-separators > *:not(:first-child) { //TODO: add support for .outlined
+            &.no-separators > *:not(:first-child) {
                 border-left-width: 0;
             }
 
@@ -47,10 +47,6 @@
                     margin-right: 0;
                 }
 
-                &.outlined {
-                    margin-right: -1px;
-                }
-
             }
 
             & > *:not(:first-child) {
@@ -62,21 +58,15 @@
 
         &.vertical {
 
-            &.no-separators > *:not(:first-child) { //TODO: add support for .outlined
+            &.no-separators > *:not(:first-child) {
                 border-top-width: 0;
             }
 
             & > *:not(:last-child) {
-
                 margin-bottom: 0;
                 border-bottom-width: 0;
                 border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
-
-                &.outlined {
-                    margin-bottom: -1px;
-                }
-
             }
 
             & > *:not(:first-child) {
@@ -104,37 +94,6 @@
 
         &.fluid > * {
             width: 100%;
-        }
-
-    }
-
-    &.no-separators.outlined {
-
-        &:after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: $layout-spacing;
-          z-index: 1;
-          border-radius: inherit;
-          pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
-          box-shadow: $button-outlined-shadow;
-        }
-
-        & > .button.outlined {
-
-            box-shadow: $shadow-depth-1;
-
-            &:not(.inactive) {
-
-                &:active, &.active {
-                    @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
-                }
-
-            }
-
         }
 
     }

@@ -8,6 +8,8 @@ append body
     +multiple
         +label.mini.primary Primary
         +label.mini.secondary Secondary
+        +label.mini.tertiary Tertiary
+        +label.mini.quaternary Quaternary
         +label.mini.white White
         +label.mini.gray Gray
         +label.mini.black Black
@@ -28,20 +30,22 @@ append body
     +multiple
         +label.mini.rounded.primary 1
         +label.mini.rounded.secondary 2
-        +label.mini.rounded.white 3
-        +label.mini.rounded.gray 4
-        +label.mini.rounded.black 5
-        +label.mini.rounded.yellow 6
-        +label.mini.rounded.olive 7
-        +label.mini.rounded.green 8
-        +label.mini.rounded.blue 9
-        +label.mini.rounded.violet 10
-        +label.mini.rounded.orange 11
-        +label.mini.rounded.purple 12
-        +label.mini.rounded.red 13
-        +label.mini.rounded.pink 14
-        +label.mini.rounded.teal 15
-        +label.mini.rounded.brown 16
+        +label.mini.rounded.tertiary 3
+        +label.mini.rounded.quaternary 4
+        +label.mini.rounded.white 5
+        +label.mini.rounded.gray 6
+        +label.mini.rounded.black 7
+        +label.mini.rounded.yellow 8
+        +label.mini.rounded.olive 9
+        +label.mini.rounded.green 10
+        +label.mini.rounded.blue 11
+        +label.mini.rounded.violet 12
+        +label.mini.rounded.orange 13
+        +label.mini.rounded.purple 14
+        +label.mini.rounded.red 15
+        +label.mini.rounded.pink 16
+        +label.mini.rounded.teal 17
+        +label.mini.rounded.brown 18
 
     +divider Badge
 
@@ -52,15 +56,3 @@ append body
         +button.compact
             +icon("action-settings")
             +label.floating.micro.rounded.primary 3
-
-append body-end
-    script.
-        $.dom_ready ( function () {
-            $("#logo").badge ({ title: "Yeah!", type: "inline", style: "squared" });
-        });
-        $.dom_ready ( function () {
-            $("#sidebar_toggler .icon").badge ({ title: "10", type: "floating", style: "primary" });
-        });
-        $.dom_ready ( function () {
-            $(".icon-communication-chat").badge ({ title: "10", type: "floating", style: "secondary" });
-        });

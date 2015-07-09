@@ -5,6 +5,8 @@
 
 $color-primary: #2967ab !default;
 $color-secondary: #ff7043 !default;
+$color-tertiary: #7f0ce8 !default;
+$color-quaternary: #1dab1e !default;
 $color-white: #ffffff !default;
 $color-gray: #cccccc !default;
 $color-black: #000000 !default;
@@ -19,7 +21,6 @@ $color-red: #f64242 !default;
 $color-pink: #fb2ca0 !default;
 $color-teal: #00bbb3 !default;
 $color-brown: #a5673f !default;
-$color-transparent: rgba(0, 0, 0, 0) !default;
 
 /* BRAND */
 
@@ -38,6 +39,22 @@ $color-secondary-text: #ffffff !default;
 $color-secondary-text-hover: $color-secondary-text !default;
 $color-secondary-border: darken( $color-secondary-bg, 20 ) !default;
 $color-secondary-accent: $color-primary !default;
+
+$color-tertiary-bg: $color-tertiary !default;
+$color-tertiary-bg-hover: lighten( $color-tertiary-bg, 2 ) !default;
+$color-tertiary-bg-active: darken( $color-tertiary-bg, 4 ) !default;
+$color-tertiary-text: #ffffff !default;
+$color-tertiary-text-hover: $color-tertiary-text !default;
+$color-tertiary-border: darken( $color-tertiary-bg, 20 ) !default;
+$color-tertiary-accent: $color-quaternary !default;
+
+$color-quaternary-bg: $color-quaternary !default;
+$color-quaternary-bg-hover: lighten( $color-quaternary-bg, 2 ) !default;
+$color-quaternary-bg-active: darken( $color-quaternary-bg, 4 ) !default;
+$color-quaternary-text: #ffffff !default;
+$color-quaternary-text-hover: $color-quaternary-text !default;
+$color-quaternary-border: darken( $color-quaternary-bg, 20 ) !default;
+$color-quaternary-accent: $color-tertiary !default;
 
 /* COLORS */
 
@@ -158,6 +175,8 @@ $color-brown-accent: $color-orange !default;
 $colors: (
     "primary" : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-text, $color-primary-text-hover, $color-primary-border, $color-primary-accent ),
     "secondary" : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-text, $color-secondary-text-hover, $color-secondary-border, $color-secondary-accent ),
+    "tertiary" : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-text, $color-tertiary-text-hover, $color-tertiary-border, $color-tertiary-accent ),
+    "quaternary" : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-text, $color-quaternary-text-hover, $color-quaternary-border, $color-quaternary-accent ),
     "white" : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-text, $color-white-text-hover, $color-white-border, $color-white-accent ),
     "gray" : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-text, $color-gray-text-hover, $color-gray-border, $color-gray-accent ),
     "black" : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-text, $color-black-text-hover, $color-black-border, $color-black-accent ),
@@ -176,6 +195,7 @@ $colors: (
 
 /* TRANSPARENT */
 
+$color-transparent: rgba(0, 0, 0, 0) !default;
 $color-transparent-bg: rgba(0, 0, 0, 0) !default;
 $color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
 $color-transparent-bg-active: darken( $color-transparent-bg, 4 ) !default;

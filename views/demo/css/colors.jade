@@ -6,6 +6,7 @@ append body
     +divider Primary
 
     +multiple
+        +button.primary.transparent-initial Trans
         +button.primary Base
         +button.primary.highlight Base (H)
         +button.primary.gradient Base (G)
@@ -15,15 +16,37 @@ append body
     +divider Secondary
 
     +multiple
+        +button.secondary.transparent-initial Trans
         +button.secondary Base
         +button.secondary.highlight Base (H)
         +button.secondary.gradient Base (G)
         +button.secondary.transparentize Base (T)
         +button.secondary.outlined Base (O)
 
+    +divider Tertiary
+
+    +multiple
+        +button.tertiary.transparent-initial Trans
+        +button.tertiary Base
+        +button.tertiary.highlight Base (H)
+        +button.tertiary.gradient Base (G)
+        +button.tertiary.transparentize Base (T)
+        +button.tertiary.outlined Base (O)
+
+    +divider Quaternary
+
+    +multiple
+        +button.quaternary.transparent-initial Trans
+        +button.quaternary Base
+        +button.quaternary.highlight Base (H)
+        +button.quaternary.gradient Base (G)
+        +button.quaternary.transparentize Base (T)
+        +button.quaternary.outlined Base (O)
+
     +divider White
 
     +multiple
+        +button.white.transparent-initial Trans
         +button.white Base
         +button.white.highlight Base (H)
         +button.white.gradient Base (G)
@@ -33,6 +56,7 @@ append body
     +divider Gray
 
     +multiple
+        +button.gray.transparent-initial Trans
         +button.gray Base
         +button.gray.highlight Base (H)
         +button.gray.gradient Base (G)
@@ -42,6 +66,7 @@ append body
     +divider Black
 
     +multiple
+        +button.black.transparent-initial Trans
         +button.black Base
         +button.black.highlight Base (H)
         +button.black.gradient Base (G)
@@ -51,6 +76,7 @@ append body
     +divider Yellow
 
     +multiple
+        +button.yellow.transparent-initial Trans
         +button.yellow Base
         +button.yellow.highlight Base (H)
         +button.yellow.gradient Base (G)
@@ -60,6 +86,7 @@ append body
     +divider Olive
 
     +multiple
+        +button.olive.transparent-initial Trans
         +button.olive Base
         +button.olive.highlight Base (H)
         +button.olive.gradient Base (G)
@@ -69,6 +96,7 @@ append body
     +divider Green
 
     +multiple
+        +button.green.transparent-initial Trans
         +button.green Base
         +button.green.highlight Base (H)
         +button.green.gradient Base (G)
@@ -78,6 +106,7 @@ append body
     +divider Blue
 
     +multiple
+        +button.blue.transparent-initial Trans
         +button.blue Base
         +button.blue.highlight Base (H)
         +button.blue.gradient Base (G)
@@ -87,6 +116,7 @@ append body
     +divider Violet
 
     +multiple
+        +button.violet.transparent-initial Trans
         +button.violet Base
         +button.violet.highlight Base (H)
         +button.violet.gradient Base (G)
@@ -96,6 +126,7 @@ append body
     +divider Orange
 
     +multiple
+        +button.orange.transparent-initial Trans
         +button.orange Base
         +button.orange.highlight Base (H)
         +button.orange.gradient Base (G)
@@ -105,6 +136,7 @@ append body
     +divider Purple
 
     +multiple
+        +button.purple.transparent-initial Trans
         +button.purple Base
         +button.purple.highlight Base (H)
         +button.purple.gradient Base (G)
@@ -114,6 +146,7 @@ append body
     +divider Red
 
     +multiple
+        +button.red.transparent-initial Trans
         +button.red Base
         +button.red.highlight Base (H)
         +button.red.gradient Base (G)
@@ -123,6 +156,7 @@ append body
     +divider Pink
 
     +multiple
+        +button.pink.transparent-initial Trans
         +button.pink Base
         +button.pink.highlight Base (H)
         +button.pink.gradient Base (G)
@@ -132,6 +166,7 @@ append body
     +divider Teal
 
     +multiple
+        +button.teal.transparent-initial Trans
         +button.teal Base
         +button.teal.highlight Base (H)
         +button.teal.gradient Base (G)
@@ -141,6 +176,7 @@ append body
     +divider Brown
 
     +multiple
+        +button.brown.transparent-initial Trans
         +button.brown Base
         +button.brown.highlight Base (H)
         +button.brown.gradient Base (G)
@@ -151,15 +187,13 @@ append body
 
     +button.transparent Base
 
-    +divider Transparent initial
-
-    +button.transparent-initial.white Base
-
     +divider Text
 
     +container
         p.text-primary [PRIMARY] #[+lorem-ipsum(10, 'words')]
         p.text-secondary [SECONDARY] #[+lorem-ipsum(10, 'words')]
+        p.text-tertiary [TERTIARY] #[+lorem-ipsum(10, 'words')]
+        p.text-quaternary [QUATERNARY] #[+lorem-ipsum(10, 'words')]
         p.text-white [WHITE] #[+lorem-ipsum(10, 'words')]
         p.text-gray [GRAY] #[+lorem-ipsum(10, 'words')]
         p.text-black [BLACK] #[+lorem-ipsum(10, 'words')]
@@ -177,4 +211,4 @@ append body
         p.text-transparent [TRANSPARENT] #[+lorem-ipsum(10, 'words')]
 
 append body-end
-    +noty({ body: '<p>[H] Highlight <br/> [G] Gradient <br/> [T] Transparentized <br/> [O] Outlined</p>', ttl: 'forever' })
+    +noty({ body: '<p>[TI] Transparent Initial <br/> [H] Highlight <br/> [G] Gradient <br/> [T] Transparentized <br/> [O] Outlined</p>', ttl: 'forever' })

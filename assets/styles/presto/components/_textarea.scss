@@ -1,0 +1,13 @@
+
+/* TEXTAREA */
+
+textarea {
+
+    @extend input;
+    resize: vertical;
+
+    &[disabled] {
+        resize: none;
+    }
+
+}

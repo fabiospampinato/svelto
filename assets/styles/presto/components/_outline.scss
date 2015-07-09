@@ -1,0 +1,136 @@
+
+/* OUTLINE */
+
+.outlined:not(.multiple):not(.header-wrp):not(.button):not(input):not(textarea) {
+
+    &:after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: $layout-spacing;
+      z-index: 1;
+      border-radius: inherit;
+      pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
+      box-shadow: $outline-shadow;
+    }
+
+}
+
+/* MULTIPLE */
+
+.multiple {
+
+    &.joined {
+
+        &:not(.vertical) > *:not(:last-child).outlined {
+            margin-right: -1px;
+        }
+
+        &.vertical > *:not(:last-child).outlined {
+            margin-bottom: -1px;
+        }
+
+    }
+
+    &.no-separators.outlined {
+
+        &:after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: $layout-spacing;
+          z-index: 1;
+          border-radius: inherit;
+          pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
+          box-shadow: $outline-shadow;
+        }
+
+        /* BUTTON */
+
+        & > .button.outlined {
+
+            box-shadow: $shadow-depth-1;
+
+            &:not(.inactive) {
+
+                &:active, &.active {
+                    @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
+                }
+
+            }
+
+        }
+
+    }
+
+}
+
+/* HEADER */
+
+.header-wrp.outlined {
+    border-width: $container-border-size;
+    border-style: solid;
+    border-radius: $border-radius-normal;
+    padding: $layout-spacing;
+    box-shadow: $shadow-depth-1;
+}
+
+/* BUTTON */
+
+.button {
+
+    &.outlined {
+
+        @include multi-shadow ( $shadow-depth-1, $outline-shadow );
+
+        &:not(.inactive) {
+
+            &:active, &.active {
+                @include multi-shadow ( $shadow-depth-1, $shadow-inset-1, $outline-shadow );
+            }
+
+        }
+
+        & > .button-left, & > .button-right {
+            padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);
+        }
+
+        & > .button-left {
+            border-right: 1px solid rgba(0, 0, 0, 0.0625);
+            margin: calc(-#{$button-vertical-padding} + 1px) calc(#{$button-horizontal-padding} - 1px) #{-$button-vertical-padding} #{-$button-horizontal-padding};
+        }
+
+        & > .button-right {
+            border-left: 1px solid rgba(0, 0, 0, 0.0625);
+            margin: calc(-#{$button-vertical-padding} + 1px) #{-$button-horizontal-padding} #{-$button-vertical-padding} calc(#{$button-horizontal-padding} - 1px);
+        }
+
+        &.compact {
+
+            & > .button-left {
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) calc(#{$button-compact-horizontal-padding} - 1px) #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
+            }
+
+            & > .button-right {
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} calc(#{$button-compact-horizontal-padding} - 1px);
+            }
+
+        }
+
+    }
+
+}
+
+/* INPUT / TEXTAREA */
+
+input, textarea {
+
+    &.outlined {
+        @include multi-shadow ( $shadow-depth-1, $outline-shadow );
+    }
+
+}
