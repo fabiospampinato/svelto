@@ -935,7 +935,12 @@ code[class*='language-'] {
 
 /* LABEL */
 .label {
-  text-transform: uppercase; }
+  cursor: default; }
+  .label.floating {
+    position: absolute !important;
+    top: -20% !important;
+    right: -20% !important;
+    bottom: initial !important; }
 
 /* BREADCRUMB */
 .breadcrumb > *:not(:last-child):after {
@@ -1057,7 +1062,7 @@ button {
     right: 30px;
     bottom: 30px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.25); }
-    .button.floating:not(.inactive):not(.dragging):active, .floating.label:not(.inactive):not(.dragging):active, .button.floating.active, .floating.active.label {
+    .button.floating.actionable:not(.inactive):not(.dragging):active, .floating.actionable.label:not(.inactive):not(.dragging):active, .button.floating.active, .floating.active.label {
       box-shadow: 0 3px 5px 0 rgba(0, 0, 0, 0.25), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
   .button .icon, .label .icon {
     font-size: 1.3em;

@@ -7,6 +7,8 @@ button {
 
 /* BUTTON */
 
+//TODO: Add a minimum width, so that when it's not very wide and rounded it will be a circle, not an oval
+
 .button {
 
     @include white ();
@@ -155,7 +157,7 @@ button {
         bottom: $layout-spacing * 3;
         box-shadow: $shadow-depth-4;
 
-        &:not(.inactive):not(.dragging):active, &.active {
+        &.actionable:not(.inactive):not(.dragging):active, &.active {
             @include multi-shadow ( $shadow-depth-5, $shadow-inset-1 );
         }
 

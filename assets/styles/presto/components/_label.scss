@@ -4,10 +4,13 @@
 .label {
 
     @extend .button;
-    text-transform: uppercase;
+    cursor: default;
 
     &.floating {
-
+        position: absolute !important;
+        top: -20% !important;
+        right: -20% !important;
+        bottom: initial !important;
     }
 
 }
