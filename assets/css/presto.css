@@ -5928,7 +5928,6 @@ dd {
           align-items: center; }
 
 .spacer {
-  width: 100%;
   -webkit-box-flex: 1000;
   -webkit-flex-grow: 1000;
           flex-grow: 1000; }

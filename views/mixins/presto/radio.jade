@@ -5,11 +5,11 @@ mixin radio(name, title, value, checked)
         .button.actionable.radio.checked&attributes(attributes)
             input(type="radio", name=name, value=value, checked)
             .label.left= title
-            .icon.on.right
+            .icon.on.right.text-secondary
             .icon.off.right
     else
         .button.actionable.radio&attributes(attributes)
             input(type="radio", name=name, value=value)
             .label.left= title
-            .icon.on.right
+            .icon.on.right.text-secondary
             .icon.off.right
