@@ -4757,15 +4757,18 @@ input, textarea {
   border: none;
   border-radius: 0.2665rem;
   font-family: sans-serif !important;
-  padding: 0.78571em 0.78571em;
+  padding: 0.78571em 1.5em;
   box-sizing: border-box;
   display: inline-block;
   vertical-align: middle;
-  line-height: 1em;
+  line-height: 0.97em;
   min-width: 0px;
-  margin-bottom: 10px; }
+  margin-bottom: 10px;
+  font-size: 0.97em; }
   input.fluid, textarea.fluid {
     width: 100%; }
+  input.compact, textarea.compact {
+    padding: 0.78571em 0.78571em; }
   input[disabled], textarea[disabled] {
     opacity: 0.5; }
 
@@ -5120,7 +5123,7 @@ input, textarea {
     margin-bottom: 10px; }
 
 /* OUTLINE */
-.outlined:not(.multiple):not(.header-wrp):not(.button):not(input):not(textarea):after {
+.outlined:not(.header-wrp):not(.button):not(input):not(textarea):after {
   content: '';
   position: absolute;
   top: 0;
@@ -5140,22 +5143,14 @@ input, textarea {
   margin-bottom: -1px; }
 
 .multiple.no-separators.outlined {
-  /* BUTTON */ }
-  .multiple.no-separators.outlined:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 10px;
-    z-index: 1;
-    border-radius: inherit;
-    pointer-events: none;
-    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
+  /* BUTTON */
+  /* INPUT / TEXTAREA */ }
   .multiple.no-separators.outlined > .button.outlined, .multiple.no-separators.outlined > .outlined.label {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
     .multiple.no-separators.outlined > .button.outlined:not(.inactive):active, .multiple.no-separators.outlined > .outlined.label:not(.inactive):active, .multiple.no-separators.outlined > .button.outlined:not(.inactive).active, .multiple.no-separators.outlined > .outlined.label:not(.inactive).active {
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
+  .multiple.no-separators.outlined > input.outlined, .multiple.no-separators.outlined > textarea.outlined, .multiple.no-separators.outlined > textarea.outlined {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
 
 /* HEADER */
 .header-wrp.outlined {

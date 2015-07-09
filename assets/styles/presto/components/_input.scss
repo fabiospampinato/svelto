@@ -10,15 +10,20 @@ input {
     border-radius: $border-radius-normal;
     font-family: $font-family;
     padding: $input-vertical-padding $input-horizontal-padding;
-    box-sizing:border-box;
+    box-sizing: border-box;
     display: inline-block;
     vertical-align: middle;
-    line-height: 1em;
+    line-height: 0.97em;
     min-width: 0px;
     margin-bottom: $layout-spacing;
+    font-size: 0.97em; //FIXME: Why does it work this 0.02 less? (actually even 0.01)
 
     &.fluid {
         width: 100%;
+    }
+
+    &.compact {
+        padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
     }
 
     &[disabled] {

@@ -7,6 +7,7 @@ append body
 
     +multiple
         input(type="text", name="test", value="Base")
+        input(type="text", name="test", value="Compact").compact
         input(type="text", name="test", value="Outlined").outlined
         input(type="text", name="test", value="Disabled" disabled="disabled")
 
@@ -49,10 +50,12 @@ append body
     +divider Toolbar - Outlined
 
     +multiple
-        +multiple.joined.outlined
-            input(type="text", name="test", value="Outlined")
-            +button.compact
-                +icon("action-search")
-        +multiple.joined
-            +label.gray http://
-            input(type="text", name="test", placeholder="Outlined..." class="outlined")
+        div
+            +multiple.joined.outlined
+                input(type="text", name="test", value="Outlined")
+                +button.compact
+                    +icon("action-search")
+        div
+            +multiple.joined
+                +label.gray http://
+                input(type="text", name="test", placeholder="Outlined...").outlined

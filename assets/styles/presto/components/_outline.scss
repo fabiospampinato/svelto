@@ -1,7 +1,7 @@
 
 /* OUTLINE */
 
-.outlined:not(.multiple):not(.header-wrp):not(.button):not(input):not(textarea) {
+.outlined:not(.header-wrp):not(.button):not(input):not(textarea) {
 
     &:after {
       content: '';
@@ -36,19 +36,6 @@
 
     &.no-separators.outlined {
 
-        &:after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: 0;
-          right: 0;
-          bottom: $layout-spacing;
-          z-index: 1;
-          border-radius: inherit;
-          pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
-          box-shadow: $outline-shadow;
-        }
-
         /* BUTTON */
 
         & > .button.outlined {
@@ -61,6 +48,16 @@
                     @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
                 }
 
+            }
+
+        }
+
+        /* INPUT / TEXTAREA */
+
+        & > input, & > textarea {
+
+            &.outlined {
+                box-shadow: $shadow-depth-1;
             }
 
         }
