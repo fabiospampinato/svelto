@@ -14,6 +14,8 @@ button {
     @include white ();
     @include medium ();
     display: inline-flex;
+    justify-content: center;
+    align-items: center;
     margin-bottom: $layout-spacing;
     border-radius: $border-radius-normal;
     padding: $button-vertical-padding $button-horizontal-padding;

@@ -1,1 +1,61 @@
 //- components/textarea.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Normal
+
+    +multiple
+        textarea(type="text", name="test") Base
+        textarea(type="text", name="test").compact Compact
+        textarea(type="text", name="test").outlined Outlined
+        textarea(type="text", name="test" disabled="disabled") Disabled
+
+    +divider Fluid
+
+    textarea(type="text", name="test").fluid Fluid
+
+    +divider Toolbar
+
+    +multiple
+        +multiple.joined.stretched
+            textarea(type="text", name="test") Search
+            +button.compact
+                +icon("action-search")
+        +multiple.joined.stretched
+            textarea(type="text", name="test") Search
+            +button.compact.secondary
+                +icon("action-search")
+        +multiple.joined.stretched
+            textarea(type="text", name="test", placeholder="Search...")
+            +button.primary Search
+        +multiple.joined.stretched
+            +label.gray http://
+            textarea(type="text", name="test", placeholder="Search...")
+        +multiple.joined.stretched
+            +label.compact
+                +icon("social-people")
+            textarea(type="text", name="test") Search
+        +multiple.joined.stretched
+            textarea(type="text", name="test") Search
+            +label.compact
+                +icon("navigation-refresh").rotating
+        +multiple.joined.stretched
+            +button.teal
+                +button-left
+                    +icon("maps-local-grocery-store")
+                +button-center Checkout
+            textarea(type="text", name="test") 34.50€
+
+    +divider Toolbar - Outlined
+
+    +multiple
+        div
+            +multiple.joined.outlined.stretched
+                textarea(type="text", name="test") Outlined
+                +button.compact
+                    +icon("action-search")
+        div
+            +multiple.joined.stretched
+                +label.gray http://
+                textarea(type="text", name="test", placeholder="Outlined...").outlined

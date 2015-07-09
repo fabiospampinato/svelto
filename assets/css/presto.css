@@ -1024,6 +1024,12 @@ button {
   display: -webkit-inline-box;
   display: -webkit-inline-flex;
   display: inline-flex;
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+          align-items: center;
   margin-bottom: 10px;
   border-radius: 0.2665rem;
   padding: 0.78571em 1.5em;
@@ -4760,7 +4766,6 @@ input, textarea {
   padding: 0.78571em 1.5em;
   box-sizing: border-box;
   display: inline-block;
-  vertical-align: middle;
   line-height: 0.97em;
   min-width: 0px;
   margin-bottom: 10px;
@@ -4871,9 +4876,9 @@ input, textarea {
   display: flex;
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-          align-items: center; }
+  -webkit-box-align: start;
+  -webkit-align-items: flex-start;
+          align-items: flex-start; }
   .multiple.centered {
     -webkit-box-pack: center;
     -webkit-justify-content: center;
