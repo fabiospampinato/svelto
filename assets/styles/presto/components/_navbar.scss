@@ -1,66 +1,128 @@
 
 /* NAVBAR */
 
-#navbar {
+//TODO: Add support for attachable navbars (like attach-xs, attach-sm, attach-md, attach-lg)
 
-    @include primary ( true, false, true );
-    @include medium ();
-    position: fixed;
-    height: $navbar-height;
-    line-height: $navbar-height;
-    width: 100%;
-    top: 0;
-    text-align: center;
-    left: 0;
-    right: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: $shadow-depth-2;
-    z-index: 10;
+.navbar-wrp {
 
-    .content {
+    & > .navbar {
 
-        margin: 0 auto;
-        max-width: $layout-max-width;
-        position: relative;
+        border-width: 0;
+        float: none; //FIXME: this is a fix for the .left and .right classes
+        margin: 0;
+        position: fixed;
+        transition: top 0.3s ease 0s, right 0.3s ease 0s, bottom 0.3s ease 0s, left 0.3s ease 0s;
+        z-index: 20;
+        border-radius: 0;
+        box-shadow: $shadow-depth-5;
 
-        .navbar_btn {
+        &.left, &.right {
 
-            @include primary ();
-            @include transparent-initial ();
-            cursor: pointer !important;
-            height: $navbar-height;
-            padding: $navbar-btn-padding;
+            top: 0;
+            bottom: 0;
+            width: $navbar-vertical-width;
 
-            .icon {
-                position: relative;
-                height: $navbar-icon-height;
-                line-height: $navbar-icon-height;
-                font-size: $navbar-icon-font-size;
-                text-align: center;
+            &.slim {
+                width: $navbar-slim-vertical-width;
+            }
+
+        }
+
+        &.left {
+
+            left: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
+
+            &.slim {
+                left: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
+            }
+
+        }
+
+        &.right {
+
+            right: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
+
+            &.slim {
+                right: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
+            }
+
+        }
+
+        &.top, &.bottom {
+
+            left: 0;
+            right: 0;
+            height: $navbar-horizontal-height;
+
+            &.slim {
+                height: $navbar-slim-horizontal-height;
+            }
+
+        }
+
+        &.top {
+
+            top: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
+
+            &.slim {
+                top: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
+            }
+
+        }
+
+        &.bottom {
+
+            bottom: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
+
+            &.slim {
+                bottom: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
             }
 
         }
 
     }
 
-}
+    & > .background {
+        background-color: rgba(0, 0, 0, 0.5);
+        cursor: pointer;
+        opacity: 0;
+        position: fixed;
+        z-index: 19;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        pointer-events: none;
+        transition: opacity 0.3s ease 0s;
+    }
 
-#logo {
-    font-size: $navbar-logo-size;
-    padding: $navbar-logo-padding !important;
-    height: $navbar-logo-height !important;
-    line-height: $navbar-logo-line-height !important;
-}
+    &.opened {
 
-#sidebar_toggler {
+        & > .navbar {
 
-    display: none;
+            &.left {
+                left: 0;
+            }
 
-    @include max-screen ( $layout-sidebar-breakpoint ) {
-        display: block;
+            &.right {
+                right: 0;
+            }
+
+            &.top {
+                top: 0;
+            }
+
+            &.bottom {
+                bottom: 0;
+            }
+
+        }
+
+        & > .background {
+            pointer-events: auto;
+            opacity: 1;
+        }
+
     }
 
 }
-
-#menu {}

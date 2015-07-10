@@ -38,7 +38,7 @@ html {
 body {
     background-color: $color-default-bg;
     position: relative;
-    min-height: calc(100% - ( #{$navbar-height} + #{$layout-spacing} ));
-    margin: calc(#{$navbar-height} + #{$layout-spacing}) auto 0 !important;
+    min-height: calc(100% - ( #{$header-height} + #{$layout-spacing} ));
+    margin: calc(#{$header-height} + #{$layout-spacing}) auto 0 !important;
     padding: 0 $layout-spacing;
 }

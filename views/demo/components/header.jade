@@ -1,55 +1,6 @@
-//- components/header.jade
+//- bootstrap/header.jade
 
 extends ../../layout.jade
 
 append body
-    +divider Outside
-
-    +header('Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.limited
-
-    +header('Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
-
-    +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', false).outlined
-
-    +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
-
-    +header.outlined
-        +header-left
-            +icon("action-settings").enormous
-        +header-center
-            +header-title
-                +lorem-ipsum(8, 'words')
-            ul
-                li
-                    +lorem-ipsum(5, 'words')
-                li
-                    +lorem-ipsum(5, 'words')
-                ul
-                    li
-                        +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-                li
-                    +lorem-ipsum(5, 'words')
-
-    +header.outlined
-        +header-left
-            +icon("action-settings").enormous
-        +header-center
-            +header-title
-                +lorem-ipsum(8, 'words')
-            +header-subtitle
-                +lorem-ipsum(8, 'words')
-        +header-right
-            +button.outlined.compact
-                +icon("navigation-more-vert")
-
-    +divider Inside
-
-    +container
-        +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.gray
-        +header('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
-        p
-            +lorem-ipsum
+    +divider Header

@@ -1,0 +1,31 @@
+//- bootstrap/navbar.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Normal
+
+    +multiple
+        +navbar-btn("Left", "navigation-chevron-left", "left")
+        +navbar-btn("Top", "navigation-expand-less", "top")
+        +navbar-btn("Bottom", "navigation-expand-more", "bottom")
+        +navbar-btn("Right", "navigation-chevron-right", "right")
+
+    +divider Slim
+
+    +multiple
+        +navbar-btn(false, "navigation-chevron-left", "left-slim")
+        +navbar-btn(false, "navigation-expand-less", "top-slim")
+        +navbar-btn(false, "navigation-expand-more", "bottom-slim")
+        +navbar-btn(false, "navigation-chevron-right", "right-slim")
+
+append body-end
+    +navbar("left").left Left
+    +navbar("top").top Top
+    +navbar("bottom").bottom Bottom
+    +navbar("right").right Right
+
+    +navbar("left-slim").left.slim Left slim
+    +navbar("top-slim").top.slim Top slim
+    +navbar("bottom-slim").bottom.slim Bottom slim
+    +navbar("right-slim").right.slim Right slim

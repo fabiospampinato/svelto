@@ -1,0 +1,57 @@
+//- header.jade
+
+mixin infobar(icon, title, subtitle)
+    .infobar-wrp&attributes(attributes)
+        if icon
+            if title
+                if subtitle !== undefined
+                    if subtitle
+                        +infobar-left
+                            +icon(icon).enormous
+                        +infobar-center
+                            +infobar-title(title)
+                            +infobar-subtitle(subtitle)
+                            block
+                    else
+                        +infobar-left
+                            +icon(icon).huge
+                        +infobar-center
+                            +infobar-title(title)
+                            block
+                else
+                    +infobar-center
+                        +infobar-title(icon)
+                        +infobar-subtitle(title)
+                        block
+            else
+                +infobar-center
+                    +infobar-title(icon)
+                    block
+        else
+            block
+
+mixin infobar-left
+    .infobar-left&attributes(attributes)
+        block
+
+mixin infobar-center
+    .infobar-center&attributes(attributes)
+        block
+
+mixin infobar-title(title)
+    if title
+        p.infobar-title.big&attributes(attributes)= title
+    else
+        p.infobar-title.big&attributes(attributes)
+            block
+
+mixin infobar-subtitle(subtitle)
+    if subtitle
+        p&attributes(attributes)= subtitle
+    else
+        p&attributes(attributes)
+            block
+
+mixin infobar-right
+    .infobar-right&attributes(attributes)
+        block

@@ -1,0 +1,55 @@
+//- components/infobar.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Outside
+
+    +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.limited
+
+    +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
+
+    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', false).outlined
+
+    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
+
+    +infobar.outlined
+        +infobar-left
+            +icon("action-settings").enormous
+        +infobar-center
+            +infobar-title
+                +lorem-ipsum(8, 'words')
+            ul
+                li
+                    +lorem-ipsum(5, 'words')
+                li
+                    +lorem-ipsum(5, 'words')
+                ul
+                    li
+                        +lorem-ipsum(5, 'words')
+                    li
+                        +lorem-ipsum(5, 'words')
+                    li
+                        +lorem-ipsum(5, 'words')
+                li
+                    +lorem-ipsum(5, 'words')
+
+    +infobar.outlined
+        +infobar-left
+            +icon("action-settings").enormous
+        +infobar-center
+            +infobar-title
+                +lorem-ipsum(8, 'words')
+            +infobar-subtitle
+                +lorem-ipsum(8, 'words')
+        +infobar-right
+            +button.outlined.compact
+                +icon("navigation-more-vert")
+
+    +divider Inside
+
+    +container
+        +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.gray
+        +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
+        p
+            +lorem-ipsum

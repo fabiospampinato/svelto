@@ -1,7 +1,7 @@
 
 /* OUTLINE */
 
-.outlined:not(.header-wrp):not(.label):not(.button):not(input):not(textarea) {
+.outlined:not(.infobar-wrp):not(.label):not(.button):not(input):not(textarea) {
 
     &:after {
       content: '';
@@ -72,9 +72,9 @@
 
 }
 
-/* HEADER */
+/* INFOBAR */
 
-.header-wrp.outlined {
+.infobar-wrp.outlined {
     border-width: $container-border-size;
     border-style: solid;
     border-radius: $border-radius-normal;

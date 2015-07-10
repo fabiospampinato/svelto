@@ -3579,52 +3579,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
-/* MENU */
-
-var $menu_btn = false;
-var $hamburger = false;
-
-var menu_init_events = function () {
-
-    $menu_btn = $('#menu_btn');
-    $hamburger = $menu_btn.find ( '.layer' );
-
-    $menu_btn.on ( 'click', function () {
-
-        if ( $html.hasClass ( 'sidebar_open' ) ) {
-
-            sidebar_toggle ( false );
-
-        }
-
-        var opened = $html.hasClass ( 'menu_open' );
-
-        menu_toggle ( !opened );
-
-    });
-
-};
-
-var menu_toggle = function ( open ) {
-
-    $html.toggleClass ( 'menu_open', open );
-    $menu_btn.toggleClass ( 'active', open );
-
-    $hamburger.toggleClass ( 'from_arrow', !open );
-    $hamburger.toggleClass ( 'to_arrow', open );
-
-};
-
-/* READY */
-
-$.ready ( function () {
-
-    menu_init_events ();
-
-});
-
-
-
 /* MODAL */
 
 ;(function ( $, window, document, undefined ) {
@@ -3720,6 +3674,106 @@ $.ready ( function () {
 
 
 
+/* NAVBAR */
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* NAVBAR */
+
+    $.widget ( 'presto.navbar', {
+
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                open: $.noop,
+                close: $.noop
+            }
+        },
+
+        /* SPECIAL */
+
+        _create: function () {
+
+            this.id = this.$element.attr ( 'id' );
+            this.$wrp = this.$element.parent ();
+            this.$closers = this.$wrp.find ( '.navbar-closer' );
+
+            this.opened = this.$wrp.hasClass ( 'opened' );
+
+            this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
+
+            this._bind_closer_click ();
+            this._bind_trigger_click ();
+
+        },
+
+        /* CLOSER CLICK */
+
+        _bind_closer_click: function () {
+
+            this._on ( this.$closers, 'click', this.close );
+
+        },
+
+        /* TRIGGER CLICK */
+
+        _bind_trigger_click: function () {
+
+            this._on ( this.$triggers, 'click', this.open );
+
+        },
+
+        /* PUBLIC */
+
+        toggle: function ( force ) {
+
+            if ( _.isUndefined ( force ) ) {
+
+                this.opened = !this.opened;
+
+            } else {
+
+                if ( this.opened === force ) return;
+
+                this.opened = force;
+
+            }
+
+            this.$wrp.toggleClass ( 'opened', this.opened );
+
+            this._trigger ( this.opened ? 'open' : 'close' );
+
+        },
+
+        open: function () {
+
+            this.toggle ( true );
+
+        },
+
+        close: function () {
+
+            this.toggle ( false );
+
+        }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.navbar').navbar ();
+
+    });
+
+}( lQuery, window, document ));
+
+
+
 /* NOTY */
 
 //TODO: add support for swipe to dismiss
@@ -3773,9 +3827,9 @@ $.ready ( function () {
         templates: {
             base: '<div class="noty_wrp hidden">' +
                       '<div class="noty container transparentize {%=o.type%} {%=o.color%} {%=o.css%}">' +
-                          '<div class="header-wrp transparent">' +
+                          '<div class="infobar-wrp transparent">' +
                               '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
-                              '<div class="header-center">' +
+                              '<div class="infobar-center">' +
                                   '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
                                   '{% if ( o.body ) include ( "presto.noty.body", o.body ); %}' +
                               '</div>' +
@@ -3784,14 +3838,14 @@ $.ready ( function () {
                           '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
                       '</div>' +
                   '</div>',
-            img: '<div class="noty_img header-left">' +
+            img: '<div class="noty_img infobar-left">' +
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
-            title: '<p class="header-title large">' +
+            title: '<p class="infobar-title large">' +
                        '{%#o%}' +
                    '</p>',
             body: '{%#o%}',
-            single_button: '<div class="header-right">' +
+            single_button: '<div class="infobar-right">' +
                                '{% include ( "presto.noty.button", o ); %}' +
                            '</div>',
             buttons: '<div class="noty_buttons multiple centered">' +
@@ -4495,47 +4549,6 @@ $.ready ( function () {
     });
 
 }( lQuery, window, document ));
-
-
-
-/* SIDEBAR */
-
-var $sidebar_btn = false;
-
-var sidebar_init_events = function () {
-
-    $sidebar_btn = $('#sidebar_toggler');
-
-    $sidebar_btn.on ( 'click', function () {
-
-        if ( $html.hasClass ( 'menu_open' ) ) {
-
-            menu_toggle ( false );
-
-        }
-
-        var opened = $html.hasClass ( 'sidebar_open' );
-
-        sidebar_toggle ( !opened );
-
-    });
-
-};
-
-var sidebar_toggle = function ( open ) {
-
-    $html.toggleClass ( 'sidebar_open', open );
-    $sidebar_btn.toggleClass ( 'active', open );
-
-};
-
-/* READY */
-
-$.ready ( function () {
-
-    sidebar_init_events ();
-
-});
 
 
 

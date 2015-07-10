@@ -52,9 +52,9 @@
         templates: {
             base: '<div class="noty_wrp hidden">' +
                       '<div class="noty container transparentize {%=o.type%} {%=o.color%} {%=o.css%}">' +
-                          '<div class="header-wrp transparent">' +
+                          '<div class="infobar-wrp transparent">' +
                               '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
-                              '<div class="header-center">' +
+                              '<div class="infobar-center">' +
                                   '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
                                   '{% if ( o.body ) include ( "presto.noty.body", o.body ); %}' +
                               '</div>' +
@@ -63,14 +63,14 @@
                           '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
                       '</div>' +
                   '</div>',
-            img: '<div class="noty_img header-left">' +
+            img: '<div class="noty_img infobar-left">' +
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
-            title: '<p class="header-title large">' +
+            title: '<p class="infobar-title large">' +
                        '{%#o%}' +
                    '</p>',
             body: '{%#o%}',
-            single_button: '<div class="header-right">' +
+            single_button: '<div class="infobar-right">' +
                                '{% include ( "presto.noty.button", o ); %}' +
                            '</div>',
             buttons: '<div class="noty_buttons multiple centered">' +

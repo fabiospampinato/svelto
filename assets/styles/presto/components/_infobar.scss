@@ -1,7 +1,7 @@
 
 /* HEADER */
 
-.header-wrp {
+.infobar-wrp {
 
     @include white ( true );
     display: flex;
@@ -18,24 +18,24 @@
         margin-left: $layout-spacing;
     }
 
-    & > .header-left {
+    & > .infobar-left {
         order: 1;
         flex-shrink: 0;
     }
 
-    & > .header-center {
+    & > .infobar-center {
 
         order: 2;
         flex-grow: 1;
         flex-shrink: 1;
 
-        & > .header-title {
+        & > .infobar-title {
             margin-bottom: $layout-half-spacing;
         }
 
     }
 
-    & > .header-right {
+    & > .infobar-right {
         order: 3;
         flex-shrink: 0;
     }

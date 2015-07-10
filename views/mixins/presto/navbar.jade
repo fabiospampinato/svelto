@@ -1,0 +1,17 @@
+//- navbar.jade
+
+mixin navbar-btn(title, icon, id)
+    .button.actionable.navbar-btn.navbar-trigger(data-navbar="navbar-"+id, class=(title ? "" : "compact"))&attributes(attributes)
+        if title
+            = title
+        if icon
+            if title
+                +icon(icon).right
+            else
+                +icon(icon)
+
+mixin navbar(id)
+    .navbar-wrp
+        .container(id="navbar-"+id)&attributes(attributes).navbar
+            block
+        .background.navbar-closer
