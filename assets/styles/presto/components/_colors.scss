@@ -309,7 +309,13 @@
 /* TRANSPARENT INITIAL */
 
 @mixin transparent-initial ( $important: '' ) {
+
     background: transparent #{$important};
+
+    &:not(:hover):not(:active):not(.active) {
+        color: inherit;
+    }
+
 }
 
 .transparent-initial {

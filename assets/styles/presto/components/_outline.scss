@@ -3,6 +3,8 @@
 
 .outlined:not(.infobar-wrp):not(.label):not(.button):not(input):not(textarea) {
 
+    position: relative;
+
     &:after {
       content: '';
       position: absolute;

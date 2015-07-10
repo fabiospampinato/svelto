@@ -1,0 +1,16 @@
+
+/* TOOLBAR */
+
+.toolbar {
+
+    display: flex;
+    width: 100%;
+    height: $toolbar-height;
+    margin-bottom: $layout-spacing;
+    padding: 0 $toolbar-horizontal-padding;
+
+    & > * {
+        margin-bottom: 0;
+    }
+
+}

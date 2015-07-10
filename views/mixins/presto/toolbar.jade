@@ -1,0 +1,9 @@
+//- toolbar.jade
+
+mixin toolbar
+    .toolbar.multiple.centered&attributes(attributes)
+        block
+
+mixin toolbar-icon(icon)
+    .button.actionable.compact.transparent-initial&attributes(attributes)
+        +icon(icon)

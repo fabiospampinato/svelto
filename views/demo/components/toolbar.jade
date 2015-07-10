@@ -1,0 +1,49 @@
+//- components/toolbar.jade
+
+extends ../../layout.jade
+
+append body
+    +divider Toolbars
+
+    +toolbar.yellow
+        +toolbar-icon("navigation-menu")
+        span.big Title
+        .spacer
+        +toolbar-icon("navigation-refresh")
+        +toolbar-icon("navigation-more-vert")
+
+    +toolbar.violet
+        +toolbar-icon("navigation-menu")
+        +breadcrumb.big
+            a(href="#", title="Components") Components
+            a(href="#", title="Toolbars").current Toolbars
+        .spacer
+        +toolbar-icon("navigation-more-vert")
+
+    +toolbar.orange
+        +toolbar-icon("navigation-menu")
+        span.big Schedule
+        .spacer
+        +toolbar-icon("action-search")
+        +toolbar-icon("navigation-more-vert")
+
+    +toolbar.green
+        span.big Toolbar
+        .spacer
+        +toolbar-icon("action-search")
+        +toolbar-icon("social-person")
+        +toolbar-icon("navigation-more-vert")
+
+    +toolbar.blue
+        +toolbar-icon("navigation-arrow-back")
+        span.big Main page
+        .spacer
+        +toolbar-icon("navigation-more-vert")
+
+    +toolbar.red
+        +toolbar-icon("navigation-menu")
+        +icon("image-image").giant
+        span.big Title
+        .spacer
+        +switcher({name:"name", value:"value", colors:{on:"orange",off:"blue"}, icons:{on:"action-favorite", off:"action-favorite-outline"}})
+        +toolbar-icon("action-search")
