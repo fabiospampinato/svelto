@@ -1,5 +1,9 @@
 //- form.jade
 
 mixin form
-    form
+    form&attributes(attributes)
+        block
+
+mixin form-button
+    button(type="submit")&attributes(attributes).button.actionable
         block

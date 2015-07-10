@@ -20,3 +20,8 @@ append body
     +divider TimeAgo -3600
 
     +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 3600 )}")
+
+    +divider TimeAgo Title -7200
+
+    .label(data-timestamp-title="#{Math.round ( new Date ().getTime () / 1000 - 7200 )}").compact.outlined
+        +icon("device-access-time")

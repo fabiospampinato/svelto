@@ -5126,7 +5126,7 @@ input, textarea {
     margin-bottom: 10px; }
 
 /* OUTLINE */
-.outlined:not(.header-wrp):not(.button):not(input):not(textarea):after {
+.outlined:not(.header-wrp):not(.label):not(.button):not(input):not(textarea):after {
   content: '';
   position: absolute;
   top: 0;
@@ -5147,11 +5147,14 @@ input, textarea {
 
 .multiple.no-separators.outlined {
   /* BUTTON */
+  /* LABEL */
   /* INPUT / TEXTAREA */ }
   .multiple.no-separators.outlined > .button.outlined, .multiple.no-separators.outlined > .outlined.label {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
     .multiple.no-separators.outlined > .button.outlined:not(.inactive):active, .multiple.no-separators.outlined > .outlined.label:not(.inactive):active, .multiple.no-separators.outlined > .button.outlined:not(.inactive).active, .multiple.no-separators.outlined > .outlined.label:not(.inactive).active {
       box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), inset 0 2px 4px 0 rgba(47, 47, 47, 0.075); }
+  .multiple.no-separators.outlined > .label.outlined {
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
   .multiple.no-separators.outlined > input.outlined, .multiple.no-separators.outlined > textarea.outlined, .multiple.no-separators.outlined > textarea.outlined {
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025); }
 
@@ -5179,6 +5182,22 @@ input, textarea {
   .button.outlined.compact > .button-left, .outlined.compact.label > .button-left {
     margin: calc(-0.78571em + 1px) calc(0.78571em - 1px) -0.78571em -0.78571em; }
   .button.outlined.compact > .button-right, .outlined.compact.label > .button-right {
+    margin: calc(-0.78571em + 1px) -0.78571em -0.78571em calc(0.78571em - 1px); }
+
+/* LABEL */
+.label.outlined {
+  box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.025), 0 0 0 1px rgba(0, 0, 0, 0.2) inset; }
+  .label.outlined > .button-left, .label.outlined > .button-right {
+    padding: calc(0.78571em - 1px) calc(0.78571em - 1px); }
+  .label.outlined > .button-left {
+    border-right: 1px solid rgba(0, 0, 0, 0.0625);
+    margin: calc(-0.78571em + 1px) calc(1.5em - 1px) -0.78571em -1.5em; }
+  .label.outlined > .button-right {
+    border-left: 1px solid rgba(0, 0, 0, 0.0625);
+    margin: calc(-0.78571em + 1px) -1.5em -0.78571em calc(1.5em - 1px); }
+  .label.outlined.compact > .button-left {
+    margin: calc(-0.78571em + 1px) calc(0.78571em - 1px) -0.78571em -0.78571em; }
+  .label.outlined.compact > .button-right {
     margin: calc(-0.78571em + 1px) -0.78571em -0.78571em calc(0.78571em - 1px); }
 
 /* INPUT / TEXTAREA */

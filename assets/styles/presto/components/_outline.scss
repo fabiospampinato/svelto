@@ -1,7 +1,7 @@
 
 /* OUTLINE */
 
-.outlined:not(.header-wrp):not(.button):not(input):not(textarea) {
+.outlined:not(.header-wrp):not(.label):not(.button):not(input):not(textarea) {
 
     &:after {
       content: '';
@@ -52,6 +52,12 @@
 
         }
 
+        /* LABEL */
+
+        & > .label.outlined {
+            box-shadow: $shadow-depth-1;
+        }
+
         /* INPUT / TEXTAREA */
 
         & > input, & > textarea {
@@ -91,6 +97,44 @@
             }
 
         }
+
+        & > .button-left, & > .button-right {
+            padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);
+        }
+
+        & > .button-left {
+            border-right: 1px solid rgba(0, 0, 0, 0.0625);
+            margin: calc(-#{$button-vertical-padding} + 1px) calc(#{$button-horizontal-padding} - 1px) #{-$button-vertical-padding} #{-$button-horizontal-padding};
+        }
+
+        & > .button-right {
+            border-left: 1px solid rgba(0, 0, 0, 0.0625);
+            margin: calc(-#{$button-vertical-padding} + 1px) #{-$button-horizontal-padding} #{-$button-vertical-padding} calc(#{$button-horizontal-padding} - 1px);
+        }
+
+        &.compact {
+
+            & > .button-left {
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) calc(#{$button-compact-horizontal-padding} - 1px) #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
+            }
+
+            & > .button-right {
+                margin: calc(-#{$button-compact-vertical-padding} + 1px) #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} calc(#{$button-compact-horizontal-padding} - 1px);
+            }
+
+        }
+
+    }
+
+}
+
+/* LABEL */
+
+.label {
+
+    &.outlined {
+
+        @include multi-shadow ( $shadow-depth-1, $outline-shadow );
 
         & > .button-left, & > .button-right {
             padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);

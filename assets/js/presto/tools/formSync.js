@@ -11,14 +11,12 @@
 
     /* FORM SYNC */
 
-    $.widget ( 'presto.formSync', {
+    $.fn.formSync = function () {
 
-        /* SPECIAL */
+        this.each ( function () {
 
-        _create: function () {
-
-            var $form = this.$element,
-                sync_group = $form.data ( 'sync-group');
+            var $form = $(this),
+                sync_group = $form.data ( 'sync-group' );
 
             if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
 
@@ -29,7 +27,7 @@
 
             $eles.each ( function () {
 
-                var $ele = this,
+                var $ele = $(this),
                     name = $ele.attr ( 'name' ),
                     is_checkable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
                     is_radio = is_checkable && $ele.is ( '[type="radio"]' ),
@@ -46,7 +44,7 @@
 
                     $other_eles.each ( function () {
 
-                        var $other_ele = this,
+                        var $other_ele = $(this),
                             other_value = $other_ele.val (),
                             other_checked = !!$other_ele.prop ( 'checked' );
 
@@ -76,9 +74,9 @@
 
             });
 
-        }
+        });
 
-    });
+    };
 
     /* READY */
 

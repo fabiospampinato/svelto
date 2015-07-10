@@ -1,0 +1,30 @@
+//- tools/formAjax.jade
+
+extends ../../layout.jade
+
+append body
+    - var elo_options = { public: "Public", private: "Private", Elo: { 1200: "1200+", 1300: "1300+", 1400: "1400+", 1500: "1500+", 1600: "1600+", 1700: "1700+", 1800: "1800+", 1900: "1900+", 2000: "2000+", 2100: "2100+", } };
+
+    +divider Forms
+
+    +form.ajax
+        +container("This is an ajax form")
+            +container-content
+                +image("/assets/images/presto/sample.png").centered
+                label Input:
+                input(type="text", name="input_1", placeholder="Placeholder...").fluid.outlined
+                label Textarea:
+                textarea(type="text", name="textarea_1").fluid.outlined
+                label Checkboxes:
+                +multiple
+                    +checkbox("checkbox_name_1", "Checkbox 1", "1").outlined
+                    +checkbox("checkbox_name_2", "Checkbox 2", "2").outlined
+                label Radios:
+                +multiple.fluid
+                    +radio("radio_name_1", "Radio 1", "1").outlined
+                    +radio("radio_name_1", "Radio 2", "2").outlined
+            +container-footer
+                +multiple
+                    +form-button.gray Normal
+                    +form-button.primary Primary
+                    +form-button.secondary Secondary

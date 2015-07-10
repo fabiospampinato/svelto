@@ -7,103 +7,97 @@
 
     /* FORM AJAX */
 
-    $.widget ( 'presto.formAjax', {
+    $.fn.formAjax = function () {
 
-        /* SPECIAL */
+        this.on ( 'submit', function ( event ) {
 
-        _create: function () {
+            var $form = $(this);
 
-            var $form = this.$element;
+            event.preventDefault (); //FIXME: Does it work?
 
-            $form.on ( 'submit', function ( event ) {
+            $.ajax ({
+                type: $form.attr ( 'method' ) || 'POST',
+                url: $form.attr ( 'action' ),
+                data: new FormData ( this ),
+                before: function () {
+                    $form.loading ( true );
+                },
+                after: function () {
+                    $form.loading ( false );
+                },
+                success: function ( res ) {
 
-                event.preventDefault ();
+                    if ( typeof res === 'string' ) {
 
-                $.ajax ({
-                    type: $form.attr ( 'method' ) || 'POST',
-                    url: $form.attr ( 'action' ),
-                    data: new FormData ( $form.get ( 0 ) ),
-                    before: function () {
-                        $form.loading ( true );
-                    },
-                    after: function () {
-                        $form.loading ( false );
-                    },
-                    success: function ( res ) {
+                        if ( res === 'refresh' ) {
 
-                        if ( typeof res === 'string' ) {
+                            $.noty ( 'Done! Refreshing the page...' );
 
-                            if ( res === 'refresh' ) {
+                            location.reload ();
+
+                        } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
+
+                            if ( res === window.location.href || res === window.location.pathname ) {
 
                                 $.noty ( 'Done! Refreshing the page...' );
 
                                 location.reload ();
 
-                            } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
-
-                                if ( res === window.location.href || res === window.location.pathname ) {
-
-                                    $.noty ( 'Done! Refreshing the page...' );
-
-                                    location.reload ();
-
-                                } else {
-
-                                    $.noty ( 'Done! Redirecting...' );
-
-                                    location.assign ( res );
-
-                                }
-
-                            } else if ( res[0] === '<') { //INFO: Is HTML
-
-                                $.noty ( 'Done! A page refresh may be needed to see the changes' );
-
-                                $body.append ( res );
-
                             } else {
 
-                                $.noty ( res );
+                                $.noty ( 'Done! Redirecting...' );
+
+                                location.assign ( res );
 
                             }
 
+                        } else if ( res[0] === '<') { //INFO: Is HTML
+
+                            $.noty ( 'Done! A page refresh may be needed to see the changes' );
+
+                            $body.append ( res );
+
                         } else {
 
-                            noty ( 'Done! A page refresh may be needed to see the changes' );
+                            $.noty ( res );
 
                         }
 
-                    },
-                    error: function ( res ) {
+                    } else {
 
-                        if ( typeof res === 'string' ) {
+                        noty ( 'Done! A page refresh may be needed to see the changes' );
 
-                            if ( res[0] === '<' ) { //INFO: Is HTML
+                    }
 
-                                $.noty ( 'There was an error, please try again or report the problem' );
+                },
+                error: function ( res ) {
 
-                                $body.append ( res );
+                    if ( typeof res === 'string' ) {
 
-                            } else {
-
-                                $.noty ( res );
-
-                            }
-
-                        } else {
+                        if ( res[0] === '<' ) { //INFO: Is HTML
 
                             $.noty ( 'There was an error, please try again or report the problem' );
 
+                            $body.append ( res );
+
+                        } else {
+
+                            $.noty ( res );
+
                         }
 
-                    }
-                });
+                    } else {
 
+                        $.noty ( 'There was an error, please try again or report the problem' );
+
+                    }
+
+                }
             });
 
-        }
+        });
 
-    });
+    };
 
     /* READY */
 

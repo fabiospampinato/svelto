@@ -65,7 +65,11 @@
 
             this.checked = this.$input.prop ( 'checked' );
 
-            this._set_check ( this.checked );
+            if ( this.checked !== this.$element.hasClass ( 'checked' ) ) {
+
+                this._set_check ( this.checked, true );
+
+            }
 
         },
 
@@ -196,6 +200,8 @@
         _set_check: function ( checked, force ) {
 
             if ( checked !== this.$input.prop ( 'checked' ) || force ) {
+
+                this.$element.toggleClass ( 'checked', checked );
 
                 this.$handler.css ( 'left', checked ? '100%' : 0 );
 
