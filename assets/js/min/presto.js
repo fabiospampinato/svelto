@@ -4065,7 +4065,7 @@ $.ready ( function () {
             percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
                                     '{% include ( "presto.progressBar.label", {} ); %}' +
                                 '</div>',
-            label: '<div class="label"></div>'
+            label: '<div class="progressBar-label"></div>'
         },
 
         /* OPTIONS */
@@ -4120,7 +4120,7 @@ $.ready ( function () {
 
                 if ( this.options.labeled ) {
 
-                    var $label = $highlighted.find ( '.label' );
+                    var $label = $highlighted.find ( '.progressBar-label' );
 
                     $label.html ( +(this.options.percentages[i].value).toFixed ( this.options.decimals ) );
 
@@ -4183,7 +4183,7 @@ $.ready ( function () {
                 options = {
                     percentages: [],
                     striped: $progressBar.hasClass ( 'striped' ),
-                    labeled: !!$progressBar.find ( '.label' ).length
+                    labeled: !!$progressBar.find ( '.progressBar-label' ).length
                 };
 
             $progressBar.find ( '.highlighted' ).each ( function () {
@@ -4290,7 +4290,8 @@ $.ready ( function () {
 
 /* SELECT */
 
-//TODO: Add support for selecting multiple options
+//TODO: Add support for selecting multiple options (with checkboxes maybe)
+//FIXME: Doesn't work when the page is scrolled (check in the components/form)
 
 ;(function ( $, window, document, undefined ) {
 
@@ -4581,7 +4582,7 @@ $.ready ( function () {
             this.$unhighlighted = this.$slider.find ( '.unhighlighted' );
             this.$highlighted = this.$slider.find ( '.highlighted' );
             this.$handler = this.$slider.find ( '.handler' );
-            this.$label = this.$handler.find ( '.label' );
+            this.$label = this.$handler.find ( '.slider-label' );
 
             this.unhighlighted_width = this.$unhighlighted.width ();
             this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );

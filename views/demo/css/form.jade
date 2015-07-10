@@ -8,33 +8,33 @@ append body
     +divider Forms
 
     +form
-        +container-header("This is a form")
-        +container-content
-            +image("/assets/images/presto/sample.png").centered
-            label Input:
-            input(type="text", name="input_1", placeholder="Placeholder...").fluid.outlined
-            label Textarea:
-            textarea(type="text", name="textarea_1").fluid.outlined
-            label Checkboxes:
-            +multiple
-                +checkbox("checkbox_name_1", "Checkbox 1", "1")
-                +checkbox("checkbox_name_2", "Checkbox 2", "2")
-            label Radios:
-            +multiple.fluid
-                +radio("radio_name_1", "Radio 1", "1")
-                +radio("radio_name_1", "Radio 2", "2")
-            label Select:
-            +select-btn(elo_options, "public", "select_name_1")
-                | Select:
-                .placeholder
-            label Slider:
-            mixin slider("slider_name_1", 0, 75, 100)
-            +multiple
-                span Switcher:
-                .spacer
-                mixin switcher("switcher_name_1", "Something")
-        +container-footer
-            +multiple
-                +button.gray Normal
-                +button.primary Primary
-                +button.secondary Secondary
+        +container("This is a form")
+            +container-content
+                +image("/assets/images/presto/sample.png").centered
+                label Input:
+                input(type="text", name="input_1", placeholder="Placeholder...").fluid.outlined
+                label Textarea:
+                textarea(type="text", name="textarea_1").fluid.outlined
+                label Checkboxes:
+                +multiple
+                    +checkbox("checkbox_name_1", "Checkbox 1", "1").outlined
+                    +checkbox("checkbox_name_2", "Checkbox 2", "2").outlined
+                label Radios:
+                +multiple.fluid
+                    +radio("radio_name_1", "Radio 1", "1").outlined
+                    +radio("radio_name_1", "Radio 2", "2").outlined
+                label Select:
+                +select-btn(elo_options, "public", "select_name_1").outlined
+                    | Select:
+                    .placeholder
+                label Slider:
+                mixin slider("slider_name_1", 0, 75, 100)
+                +multiple
+                    span Switcher:
+                    .spacer
+                    mixin switcher("switcher_name_1", "Something")
+            +container-footer
+                +multiple
+                    +button.gray Normal
+                    +button.primary Primary
+                    +button.secondary Secondary

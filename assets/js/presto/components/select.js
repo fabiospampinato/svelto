@@ -1,7 +1,8 @@
 
 /* SELECT */
 
-//TODO: Add support for selecting multiple options
+//TODO: Add support for selecting multiple options (with checkboxes maybe)
+//FIXME: Doesn't work when the page is scrolled (check in the components/form)
 
 ;(function ( $, window, document, undefined ) {
 

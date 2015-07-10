@@ -17,5 +17,5 @@ mixin progressBar(options, multiple)
                 - total += percentage.value;
                 .highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%"))
                     if options.labeled
-                        .label= +(percentage.value).toFixed(options.decimals || 0)
+                        .progressBar-label= +(percentage.value).toFixed(options.decimals || 0)
         .stripes(style=("width: " + total + "%"))

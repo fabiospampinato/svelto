@@ -1,0 +1,38 @@
+
+/* CHECKBOX */
+
+.checkbox {
+
+    & > input {
+        display: none;
+    }
+
+    .icon {
+
+        transition: opacity 0.15s ease 0s;
+
+        &.on {
+            @extend .text-secondary;
+            opacity: 0;
+            margin-left: -1.635em;
+        }
+
+        &.off {
+            opacity: 1;
+        }
+
+    }
+
+    &.checked .icon {
+
+        &.on  {
+            opacity: 1;
+        }
+
+        &.off {
+            opacity: 0;
+        }
+
+    }
+
+}

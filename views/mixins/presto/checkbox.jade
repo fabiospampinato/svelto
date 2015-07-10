@@ -4,12 +4,12 @@ mixin checkbox(name, title, value, checked)
     if checked
         .button.actionable.checkbox.checked&attributes(attributes)
             input(type="checkbox", name=name, value=value, checked)
-            .label.left= title
-            .icon.on.right.text-secondary
-            .icon.off.right
+            .button-center= title
+                +icon("toggle-check-box").on.right
+                +icon("toggle-check-box-outline-blank").off.right
     else
         .button.actionable.checkbox&attributes(attributes)
             input(type="checkbox", name=name, value=value)
-            .label.left= title
-            .icon.on.right.text-secondary
-            .icon.off.right
+            .button-center= title
+                +icon("toggle-check-box").on.right
+                +icon("toggle-check-box-outline-blank").off.right

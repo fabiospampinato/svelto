@@ -62,7 +62,7 @@
                                 width $slider-transitions-time ease 0s,
                                 box-shadow $slider-transitions-time ease 0s;
 
-                    .label {
+                    .slider-label {
                         font-size: 0;
                         transition: font-size $slider-transitions-time ease 0s;
                     }
@@ -147,7 +147,7 @@
                         margin-left: - $slider-handler-half-big-size;
                         width: $slider-handler-big-size;
 
-                        .label {
+                        .slider-label {
                             font-size: $slider-handler-label-font-size;
                         }
 

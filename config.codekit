@@ -896,15 +896,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/assets\/styles\/presto\/components\/_checkbox_radio.scss": {
+	"\/assets\/styles\/presto\/components\/_checkbox.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_checkbox_radio.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_checkbox_radio.css",
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_checkbox.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_checkbox.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1321,6 +1321,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_progressBar.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_progressBar.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/components\/_radio.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_radio.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_radio.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2149,6 +2165,15 @@
 		"randomFootnoteNumbers": 0,
 		"useCompatibilityMode": 0
 		},
+	"\/index.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/index.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/index.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2512,15 +2537,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
-		},
-	"\/views\/demo\/CSS\/form.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/CSS\/form.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/CSS\/form.jade": {
 		"compileDebug": 0,
@@ -3303,7 +3319,7 @@
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
-		"ignoreWasSetByUser": 1,
+		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/mixins\/presto\/all.jade",
 		"outputAbbreviatedPath": "\/views\/mixins\/presto\/all.html",
 		"outputPathIsOutsideProject": 0,

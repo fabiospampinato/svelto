@@ -34,7 +34,7 @@
             this.$unhighlighted = this.$slider.find ( '.unhighlighted' );
             this.$highlighted = this.$slider.find ( '.highlighted' );
             this.$handler = this.$slider.find ( '.handler' );
-            this.$label = this.$handler.find ( '.label' );
+            this.$label = this.$handler.find ( '.slider-label' );
 
             this.unhighlighted_width = this.$unhighlighted.width ();
             this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );

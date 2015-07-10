@@ -65,7 +65,7 @@
             percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
                                     '{% include ( "presto.progressBar.label", {} ); %}' +
                                 '</div>',
-            label: '<div class="label"></div>'
+            label: '<div class="progressBar-label"></div>'
         },
 
         /* OPTIONS */
@@ -120,7 +120,7 @@
 
                 if ( this.options.labeled ) {
 
-                    var $label = $highlighted.find ( '.label' );
+                    var $label = $highlighted.find ( '.progressBar-label' );
 
                     $label.html ( +(this.options.percentages[i].value).toFixed ( this.options.decimals ) );
 
@@ -183,7 +183,7 @@
                 options = {
                     percentages: [],
                     striped: $progressBar.hasClass ( 'striped' ),
-                    labeled: !!$progressBar.find ( '.label' ).length
+                    labeled: !!$progressBar.find ( '.progressBar-label' ).length
                 };
 
             $progressBar.find ( '.highlighted' ).each ( function () {

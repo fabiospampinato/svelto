@@ -56,7 +56,7 @@
     .secondary.highlight:after {
       background: #2967ab !important; }
 
-.text-secondary {
+.text-secondary, .checkbox .icon.on, .radio .icon.on {
   color: #ff7043; }
 
 .tertiary {
@@ -1183,27 +1183,25 @@ button {
     .chat-msg > .chat-msg-content > .container {
       margin-bottom: 0; }
 
-/* CHECKBOX / RADIO */
-.checkbox input, .checkbox textarea, .radio input, .radio textarea {
+/* CHECKBOX */
+.checkbox > input, .radio > input, .checkbox > textarea, .radio > textarea {
   display: none; }
 
 .checkbox .icon, .radio .icon {
   -webkit-transition: opacity 0.15s ease 0s;
           transition: opacity 0.15s ease 0s; }
   .checkbox .icon.on, .radio .icon.on {
-    opacity: 0; }
-  .checkbox .icon.off, .radio .icon.off {
-    opacity: 1;
+    opacity: 0;
     margin-left: -1.635em; }
+  .checkbox .icon.off, .radio .icon.off {
+    opacity: 1; }
 
-.checkbox.checked .icon.on, .radio.checked .icon.on {
+.checkbox.checked .icon.on, .checked.radio .icon.on {
   opacity: 1; }
 
-.checkbox.checked .icon.off, .radio.checked .icon.off {
+.checkbox.checked .icon.off, .checked.radio .icon.off {
   opacity: 0; }
 
-/* CHECKBOX */
-/* RADIO */
 /* CONTAINER */
 .container {
   background: #ffffff ;
@@ -2506,7 +2504,7 @@ label {
 
 /* URL: http://fezvrasta.github.io/bootstrap-material-design/bootstrap-elements.html */
 /* GENERAL */
-.breadcrumb > *:not(:last-child):after, .button .icon, .label .icon, .checkbox .icon.on:after, .checkbox .icon.off:after, .radio .icon.on:after, .radio .icon.off:after, [class*='icon-'], .loading:after, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after {
+.breadcrumb > *:not(:last-child):after, .button .icon, .label .icon, [class*='icon-'], .loading:after, table.sortable thead tr th[data-sort]:before, table.sortable thead tr th[data-sort]:after {
   font-family: "Material-Design-Icons";
   speak: none;
   font-style: normal;
@@ -4732,16 +4730,16 @@ label {
 .icon-social-whatshot:before {
   content: "\f2e0"; }
 
-.icon-toggle-check-box:before, .checkbox .icon.on:after {
+.icon-toggle-check-box:before {
   content: "\f2e1"; }
 
-.icon-toggle-check-box-outline-blank:before, .checkbox .icon.off:after {
+.icon-toggle-check-box-outline-blank:before {
   content: "\f2e2"; }
 
-.icon-toggle-radio-button-off:before, .radio .icon.off:after {
+.icon-toggle-radio-button-off:before {
   content: "\f2e3"; }
 
-.icon-toggle-radio-button-on:before, .radio .icon.on:after {
+.icon-toggle-radio-button-on:before {
   content: "\f2e4"; }
 
 .icon-toggle-star:before {
@@ -5215,7 +5213,7 @@ input.outlined, textarea.outlined, textarea.outlined {
       position: relative;
       text-align: center;
       text-overflow: ellipsis; }
-      .progressBar > .unhighlighted > .highlighted > .label {
+      .progressBar > .unhighlighted > .highlighted > .progressBar-label {
         position: absolute;
         top: 50%;
         margin-top: -0.535715em;
@@ -5270,6 +5268,7 @@ input.outlined, textarea.outlined, textarea.outlined {
   100% {
     background-position: 3.33333em 3.33333em; } }
 
+/* RADIO */
 /* SELECT */
 .select-btn {
   position: relative; }
@@ -5487,7 +5486,7 @@ hr {
           z-index: 1;
           -webkit-transition: height 0.15s ease 0s, line-height 0.15s ease 0s, margin-left 0.15s ease 0s, margin-top 0.15s ease 0s, width 0.15s ease 0s, box-shadow 0.15s ease 0s;
                   transition: height 0.15s ease 0s, line-height 0.15s ease 0s, margin-left 0.15s ease 0s, margin-top 0.15s ease 0s, width 0.15s ease 0s, box-shadow 0.15s ease 0s; }
-          .slider_wrp > .slider .bar .unhighlighted .handler .label {
+          .slider_wrp > .slider .bar .unhighlighted .handler .slider-label {
             font-size: 0;
             -webkit-transition: font-size 0.15s ease 0s;
                     transition: font-size 0.15s ease 0s; }
@@ -5523,7 +5522,7 @@ hr {
         margin-top: -0.933335em;
         margin-left: -0.933335em;
         width: 1.86667em; }
-        .slider_wrp:not(.presto-slider-disabled) > .slider .bar .unhighlighted .handler:hover .label, .slider_wrp:not(.presto-slider-disabled) > .slider .bar .unhighlighted .handler:active .label {
+        .slider_wrp:not(.presto-slider-disabled) > .slider .bar .unhighlighted .handler:hover .slider-label, .slider_wrp:not(.presto-slider-disabled) > .slider .bar .unhighlighted .handler:active .slider-label {
           font-size: 0.8em; }
       .slider_wrp:not(.presto-slider-disabled) > .slider .bar .unhighlighted .handler:active {
         box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), 0 0 0 0.85em rgba(255, 171, 145, 0.25); }

@@ -31,7 +31,7 @@
             text-align: center;
             text-overflow: ellipsis;
 
-            & > .label {
+            & > .progressBar-label {
                 @include center-absolutely ( false, $progress-bar-highlighted-height );
                 left: 0;
                 right: 0;
