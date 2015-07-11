@@ -3,64 +3,21 @@
 
 .header {
 
-    @include primary ( true, false, true );
-    @include medium ();
-    position: fixed;
-    height: $header-height;
-    line-height: $header-height;
-    width: 100%;
-    top: 0;
-    text-align: center;
-    left: 0;
-    right: 0;
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: $shadow-depth-2;
-    z-index: 10;
+    position: relative;
+    margin-bottom: $layout-spacing;
 
-    .content {
+    & > *:last-child {
+        margin-bottom: 0;
+    }
 
-        margin: 0 auto;
-        max-width: $layout-max-width;
-        position: relative;
+    &.has-background { //FIXME: it doesn't work if we want to add the shadow also when using the background
+        overflow: hidden;
+    }
 
-        .header_btn {
-
-            @include primary ();
-            @include transparent-initial ();
-            cursor: pointer !important;
-            height: $header-height;
-            padding: $header-btn-padding;
-
-            .icon {
-                position: relative;
-                height: $header-icon-height;
-                line-height: $header-icon-height;
-                font-size: $header-icon-font-size;
-                text-align: center;
-            }
-
-        }
-
+    & > .header-background { //TODO: scale it, make the image fill the space
+        position: absolute;
+        top: 0;
+        z-index: -1;
     }
 
 }
-
-#logo {
-    font-size: $header-logo-size;
-    padding: $header-logo-padding !important;
-    height: $header-logo-height !important;
-    line-height: $header-logo-line-height !important;
-}
-
-#sidebar_toggler {
-
-    display: none;
-
-    @include max-screen ( $layout-sidebar-breakpoint ) {
-        display: block;
-    }
-
-}
-
-#menu {}

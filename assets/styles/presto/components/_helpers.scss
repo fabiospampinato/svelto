@@ -198,7 +198,7 @@
 
 }
 
-/* WIDTH PERCENTAGES */
+/* WIDTH / VH PERCENTAGES */
 
 @for $nr from 1 through 100 {
 
@@ -206,6 +206,46 @@
         width: #{$nr}% !important;
     }
 
+    .vh#{$nr}-100 {
+        height: #{$nr}vh !important;
+    }
+
+}
+
+/* WIDTH BREAKPOINTS */
+
+.width-xs {
+    width: $layout-xsmall-max-breakpoint;
+}
+
+.width-sm {
+    width: $layout-small-max-breakpoint;
+}
+
+.width-md {
+    width: $layout-medium-max-breakpoint;
+}
+
+.width-lg {
+    width: $layout-max-width;
+}
+
+/* HEIGHT BREAKPOINTS */
+
+.height-xs {
+    height: $layout-xsmall-max-breakpoint / 1.61803398875;
+}
+
+.height-sm {
+    height: $layout-small-max-breakpoint / 1.61803398875;
+}
+
+.height-md {
+    height: $layout-medium-max-breakpoint / 1.61803398875;
+}
+
+.height-lg {
+    height: $layout-max-width / 1.61803398875;
 }
 
 /* KEYFRAMES */

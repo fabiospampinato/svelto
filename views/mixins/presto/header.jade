@@ -1,0 +1,11 @@
+//- header.jade
+
+mixin header
+    .header&attributes(attributes)
+        block
+
+mixin header-bg(background_image)
+    .header.has-background&attributes(attributes)
+        block
+        .header-background
+            img(src=background_image)

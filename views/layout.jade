@@ -5,7 +5,11 @@ include mixins/presto/all.jade
 +html
     +head("Presto")
     +body
-        .header.main
-            .content
-                a#logo.navbar_btn.actionable.left(href="/") Presto
-                block header-main
+        +header
+            +toolbar.primary.shadow-depth-4
+                +toolbar-icon("navigation-menu")
+                a.big(href="/") Presto
+                .spacer
+                +toolbar-icon("navigation-refresh")
+                +toolbar-icon("navigation-more-vert")
+            block header

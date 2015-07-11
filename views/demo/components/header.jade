@@ -4,3 +4,28 @@ extends ../../layout.jade
 
 append body
     +divider Header
+
+    +header
+        +toolbar.yellow
+            +toolbar-icon("navigation-menu")
+            span.big Title
+            .spacer
+            +toolbar-icon("navigation-refresh")
+            +toolbar-icon("navigation-more-vert")
+
+    +header-bg("/assets/images/presto/sample-wide.jpg").height-xs
+        +toolbar
+            +toolbar-icon("navigation-menu")
+            span.big Title
+            .spacer
+            +toolbar-icon("navigation-refresh")
+            +toolbar-icon("navigation-more-vert")
+
+    +header-bg("/assets/images/presto/sample-wide.jpg").vh100-100
+        +toolbar
+            +toolbar-icon("navigation-menu")
+            span.big Title
+            .spacer
+            +toolbar-icon("navigation-refresh")
+            +toolbar-icon("navigation-more-vert")
+
