@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append body
+append content
     +divider Header
 
     +header
@@ -12,6 +12,24 @@ append body
             .spacer
             +toolbar-icon("navigation-refresh")
             +toolbar-icon("navigation-more-vert")
+
+    +header("/assets/images/presto/sample-wide.jpg").has-background.height-xs
+        +toolbar
+            +toolbar-icon("navigation-menu")
+            span.big Title
+            .spacer
+            +toolbar-icon("navigation-refresh")
+            +toolbar-icon("navigation-more-vert")
+        .header-background.red
+
+    +header("/assets/images/presto/sample-wide.jpg").has-background.height-xs
+        +toolbar
+            +toolbar-icon("navigation-menu")
+            span.big Title
+            .spacer
+            +toolbar-icon("navigation-refresh")
+            +toolbar-icon("navigation-more-vert")
+        .header-background.orange.gradient
 
     +header-bg("/assets/images/presto/sample-wide.jpg").height-xs
         +toolbar

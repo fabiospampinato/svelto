@@ -1,5 +1,7 @@
 //- header.jade
 
+//- FIXME: don't use inline style
+
 mixin header
     .header&attributes(attributes)
         block
@@ -7,5 +9,4 @@ mixin header
 mixin header-bg(background_image)
     .header.has-background&attributes(attributes)
         block
-        .header-background
-            img(src=background_image)
+        .header-background(style="background: url(\"" + background_image + "\") no-repeat center center fixed")

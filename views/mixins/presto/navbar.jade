@@ -10,8 +10,8 @@ mixin navbar-btn(title, icon, id)
             else
                 +icon(icon)
 
-mixin navbar(id)
-    .navbar-wrp
+mixin navbar(id, direction, slim, attached)
+    .navbar-wrp(class=(direction || "left") + " " + (slim ? "slim" : "") + " " + (attached ? ( attached === true ? "attached-xs" : "attached-" + attached ) : "" ))
         .container(id="navbar-"+id)&attributes(attributes).navbar
             block
         .background.navbar-closer

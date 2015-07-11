@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append body
+append content
     +divider Normal
 
     +multiple
@@ -19,13 +19,27 @@ append body
         +navbar-btn(false, "navigation-expand-more", "bottom-slim")
         +navbar-btn(false, "navigation-chevron-right", "right-slim")
 
-append body-end
-    +navbar("left").left Left
-    +navbar("top").top Top
-    +navbar("bottom").bottom Bottom
-    +navbar("right").right Right
+    +divider Attached
 
-    +navbar("left-slim").left.slim Left slim
-    +navbar("top-slim").top.slim Top slim
-    +navbar("bottom-slim").bottom.slim Bottom slim
-    +navbar("right-slim").right.slim Right slim
+    +multiple
+        +navbar-btn("Left", "navigation-chevron-left", "left-attached")
+        +navbar-btn(false, "navigation-expand-less", "top-attached")
+        +navbar-btn(false, "navigation-expand-more", "bottom-attached")
+        +navbar-btn("Right", "navigation-chevron-right", "right-attached")
+
+append body-start
+    +navbar("left-attached", "left", false, "lg" ) Left Attached
+    +navbar("top-attached", "top", true, "lg" ) Top Attached
+    +navbar("bottom-attached", "bottom", true, "lg" ) Bottom attached
+    +navbar("right-attached", "right", false, "lg" ) Right Attached
+
+append body-end
+    +navbar("left", "left") Left
+    +navbar("top", "top") Top
+    +navbar("bottom", "bottom") Bottom
+    +navbar("right", "right") Right
+
+    +navbar("left-slim", "left", true) Left slim
+    +navbar("top-slim", "top", true) Top slim
+    +navbar("bottom-slim", "bottom", true) Bottom slim
+    +navbar("right-slim", "right", true) Right slim

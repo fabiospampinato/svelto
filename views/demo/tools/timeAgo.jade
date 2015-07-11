@@ -4,7 +4,7 @@ extends ../../layout.jade
 
 //- TODO: add example where the title is changing
 
-append body
+append content
     +divider TimeAgo
 
     +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")

@@ -27,18 +27,49 @@ html {
 
     &.dragging {
         cursor: move !important;
-        -webkit-touch-callout: none !important;
-        -webkit-user-select: none !important;
-        -moz-user-select: none !important;
         user-select: none !important;
     }
 
 }
 
 body {
+
     background-color: $color-default-bg;
     position: relative;
 //    min-height: calc(100% - ( #{$header-height} + #{$layout-spacing} ));
 //    margin: calc(#{$header-height} + #{$layout-spacing}) auto 0 !important;
-    padding: 0 $layout-spacing;
+
+    & > #header-wrp {
+        position: relative;
+    }
+
+    & > #content-wrp {
+        position: relative;
+        padding: 0 $layout-spacing;
+    }
+
+    &.fixed-header {
+
+        & > #header-wrp {
+
+            margin-top: $toolbar-height + $layout-spacing;
+            transition: margin 0.3s ease 0s;
+
+            & > .header {
+                transition: top 0.3s ease 0s, right 0.3s ease 0s, bottom 0.3s ease 0s, left 0.3s ease 0s;
+                position: fixed;
+                z-index: 5;
+                top: 0;
+                right: 0;
+                left: 0;
+            }
+
+        }
+
+        & > #content-wrp {
+            transition: margin 0.3s ease 0s;
+        }
+
+    }
+
 }

@@ -1,12 +1,204 @@
 
+/* MIXINS */
+
+@mixin open () {
+
+    &.left > .navbar {
+        left: 0;
+    }
+
+    &.right > .navbar {
+        right: 0;
+    }
+
+    &.top > .navbar {
+        top: 0;
+    }
+
+    &.bottom > .navbar {
+        bottom: 0;
+    }
+
+}
+
+@mixin attach () {
+
+    &.left {
+
+        & ~ #header-wrp, & ~ #content-wrp {
+            margin-left: $navbar-vertical-width;
+        }
+
+        body.fixed-header > & ~ #header-wrp > .header {
+            left: $navbar-vertical-width;
+        }
+
+        &.slim {
+
+            & ~ #header-wrp, & ~ #content-wrp {
+                margin-left: $navbar-slim-vertical-width;
+            }
+
+            body.fixed-header > & ~ #header-wrp > .header {
+                left: $navbar-slim-vertical-width;
+            }
+
+        }
+
+    }
+
+    &.right {
+
+        & ~ #header-wrp, & ~ #content-wrp {
+            margin-right: $navbar-vertical-width;
+        }
+
+        body.fixed-header > & ~ #header-wrp > .header {
+            right: $navbar-vertical-width;
+        }
+
+        &.slim {
+
+            & ~ #header-wrp, & ~ #content-wrp {
+                margin-right: $navbar-slim-vertical-width;
+            }
+
+            body.fixed-header > & ~ #header-wrp > .header {
+                right: $navbar-slim-vertical-width;
+            }
+
+        }
+
+    }
+
+    &.top {
+
+        & ~ #header-wrp, & ~ #content-wrp {
+            margin-top: $toolbar-height + $layout-spacing + $navbar-horizontal-height;
+        }
+
+        body.fixed-header > & ~ #header-wrp > .header {
+            top: $navbar-horizontal-height;
+        }
+
+        &.slim {
+
+            & ~ #header-wrp, & ~ #content-wrp {
+                margin-top: $toolbar-height + $layout-spacing + $navbar-slim-horizontal-height;
+            }
+
+            body.fixed-header > & ~ #header-wrp > .header {
+                top: $navbar-slim-horizontal-height;
+            }
+
+        }
+
+    }
+
+    &.bottom {
+
+        & ~ #header-wrp, & ~ #content-wrp {
+            margin-bottom: $navbar-horizontal-height;
+        }
+
+        &.slim {
+
+            & ~ #header-wrp, & ~ #content-wrp {
+                margin-bottom: $navbar-slim-horizontal-height;
+            }
+
+        }
+
+    }
+
+}
+
 /* NAVBAR */
 
 //TODO: Add support for attachable navbars (like attach-xs, attach-sm, attach-md, attach-lg)
+//TODO: Add detached, detached-xs, detached-sm, detached-md, detached-lg
 
 .navbar-wrp {
 
-    & > .navbar {
+    float: none !important;
 
+    &.left, &.right {
+
+        & > .navbar {
+            top: 0;
+            bottom: 0;
+            width: $navbar-vertical-width;
+        }
+
+        &.slim > .navbar {
+            width: $navbar-slim-vertical-width;
+        }
+
+    }
+
+    &.left {
+
+        & > .navbar {
+            left: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
+        }
+
+        &.slim > .navbar {
+            left: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
+        }
+
+    }
+
+    &.right {
+
+        & > .navbar {
+            right: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
+        }
+
+        &.slim > .navbar {
+            right: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
+        }
+
+    }
+
+    &.top, &.bottom {
+
+        & > .navbar {
+            left: 0;
+            right: 0;
+            height: $navbar-horizontal-height;
+        }
+
+        &.slim > .navbar {
+            height: $navbar-slim-horizontal-height;
+        }
+
+    }
+
+    &.top {
+
+        & > .navbar {
+            top: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
+        }
+
+        &.slim > .navbar {
+            top: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
+        }
+
+    }
+
+    &.bottom {
+
+        & > .navbar {
+            bottom: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
+        }
+
+        &.slim > .navbar {
+            bottom: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
+        }
+
+    }
+
+    & > .navbar {
         border-width: 0;
         float: none; //FIXME: this is a fix for the .left and .right classes
         margin: 0;
@@ -15,71 +207,6 @@
         z-index: 20;
         border-radius: 0;
         box-shadow: $shadow-depth-5;
-
-        &.left, &.right {
-
-            top: 0;
-            bottom: 0;
-            width: $navbar-vertical-width;
-
-            &.slim {
-                width: $navbar-slim-vertical-width;
-            }
-
-        }
-
-        &.left {
-
-            left: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
-
-            &.slim {
-                left: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
-            }
-
-        }
-
-        &.right {
-
-            right: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
-
-            &.slim {
-                right: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
-            }
-
-        }
-
-        &.top, &.bottom {
-
-            left: 0;
-            right: 0;
-            height: $navbar-horizontal-height;
-
-            &.slim {
-                height: $navbar-slim-horizontal-height;
-            }
-
-        }
-
-        &.top {
-
-            top: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
-
-            &.slim {
-                top: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
-            }
-
-        }
-
-        &.bottom {
-
-            bottom: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
-
-            &.slim {
-                bottom: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
-            }
-
-        }
-
     }
 
     & > .background {
@@ -96,31 +223,42 @@
         transition: opacity 0.3s ease 0s;
     }
 
-    &.opened {
+    &.opened > .background {
+        pointer-events: auto;
+        opacity: 1;
+    }
 
-        & > .navbar {
+    &.opened, &.attached-xs {
+        @include open ();
+    }
 
-            &.left {
-                left: 0;
-            }
+    &.attached-xs {
+        @include attach ();
+    }
 
-            &.right {
-                right: 0;
-            }
+    @include min-screen ( $layout-small-min-breakpoint ) {
 
-            &.top {
-                top: 0;
-            }
-
-            &.bottom {
-                bottom: 0;
-            }
-
+        &.attached-sm {
+            @include open ();
+            @include attach ();
         }
 
-        & > .background {
-            pointer-events: auto;
-            opacity: 1;
+    }
+
+    @include min-screen ( $layout-medium-min-breakpoint ) {
+
+        &.attached-md {
+            @include open ();
+            @include attach ();
+        }
+
+    }
+
+    @include min-screen ( $layout-large-min-breakpoint ) {
+
+        &.attached-lg {
+            @include open ();
+            @include attach ();
         }
 
     }
