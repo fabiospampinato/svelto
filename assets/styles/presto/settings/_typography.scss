@@ -1,7 +1,11 @@
 
 /* SETTINGS */
 
-$font-family: sans-serif !important !default; //INFO: No `Roboto`, or the page flicjers
+@if $roboto-enabled == true {
+    $font-family: Roboto, Calibri, sans-serif !important !default;
+} @else {
+    $font-family: Calibri, sans-serif !important !default;
+}
 
 $font-size-normal: 15px !default;
 

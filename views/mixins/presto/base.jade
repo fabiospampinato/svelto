@@ -5,41 +5,49 @@ mixin html
     html(class="no-js", lang="en", xml:lang="en", dir="ltr")&attributes(attributes)
         block
 
+//- INFO: Additional configurable options can be find here: `https://github.com/h5bp/html5-boilerplate/blob/master/dist/doc/extend.md`
+
 mixin head(title, description)
     head&attributes(attributes)
         meta(charset="utf-8")
-        meta(http-equiv="x-ua-compatible" content="ie=edge")
+        meta(http-equiv="x-ua-compatible", content="ie=edge")
 
         title= title
-        meta(name="description" content=description)
+        meta(name="description", content=description)
 
-        meta(name="HandheldFriendly" content="True")
-        meta(name="MobileOptimized" content="320")
+        meta(name="application-name", content=title)
+
+        meta(name="HandheldFriendly", content="True")
+        meta(name="MobileOptimized", content="320")
 
         meta(name="viewport", content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0")
 
-        meta(http-equiv="cleartype" content="on")
+        meta(http-equiv="cleartype", content="on")
 
         meta(name="theme-color", content="#2967ab")
 
-        link(rel="icon", sizes="any", href="/assets/images/icons/icon.svg" mask)
+        link(rel="icon", sizes="any", href="/assets/images/icons/icon.svg", mask)
 
         link(rel="shortcut icon", href="/assets/images/icons/favicon.ico")
 
-        link(rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/images/icons/touch/apple-touch-icon-144x144-precomposed.png")
-        link(rel="apple-touch-icon-precomposed" sizes="114x114" href="/assets/images/icons/touch/apple-touch-icon-114x114-precomposed.png")
-        link(rel="apple-touch-icon-precomposed" sizes="72x72" href="/assets/images/icons/touch/apple-touch-icon-72x72-precomposed.png")
-        link(rel="apple-touch-icon-precomposed" href="/assets/images/icons/touch/apple-touch-icon-57x57-precomposed.png")
-        link(rel="apple-touch-icon" sizes="196x196" href="/assets/images/icons/touch/touch-icon-196x196.png")
-        link(rel="apple-touch-icon" href="/assets/images/icons/touch/apple-touch-icon.png")
+        link(rel="icon", sizes="192x192", href="/assets/images/icons/touch/touch-icon-196x196.png")
 
-        meta(name="msapplication-TileImage" content="/assets/images/icons/touch/apple-touch-icon-144x144-precomposed.png")
-        meta(name="msapplication-TileColor" content="#2967ab")
+        link(rel="apple-touch-icon-precomposed", sizes="144x144", href="/assets/images/icons/touch/apple-touch-icon-144x144-precomposed.png")
+        link(rel="apple-touch-icon-precomposed", sizes="114x114", href="/assets/images/icons/touch/apple-touch-icon-114x114-precomposed.png")
+        link(rel="apple-touch-icon-precomposed", sizes="72x72", href="/assets/images/icons/touch/apple-touch-icon-72x72-precomposed.png")
+        link(rel="apple-touch-icon-precomposed", href="/assets/images/icons/touch/apple-touch-icon-57x57-precomposed.png")
+        link(rel="apple-touch-icon", sizes="196x196", href="/assets/images/icons/touch/touch-icon-196x196.png")
+        link(rel="apple-touch-icon", href="/assets/images/icons/touch/apple-touch-icon.png")
 
-        meta(name="mobile-web-app-capable" content="yes")
-        meta(name="apple-mobile-web-app-capable" content="yes")
-        meta(name="apple-mobile-web-app-status-bar-style" content="black")
-        meta(name="apple-mobile-web-app-title" content="")
+        meta(name="msapplication-TileImage", content="/assets/images/icons/touch/apple-touch-icon-144x144-precomposed.png")
+        meta(name="msapplication-TileColor", content="#2967ab")
+
+        meta(name="mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        meta(name="apple-mobile-web-app-title", content="")
+
+        link(rel="sitemap", type="application/xml", title="Sitemap", href="/sitemap.xml")
 
         +css("/assets/css/presto.css")
         +css("/assets/css/main.css")
@@ -65,9 +73,9 @@ mixin body
         block body-start
         block body
             block
-        block body-end
         +js("/assets/js/min/underbar.js")
         +js("/assets/js/min/lQuery.js")
         +js("/assets/js/min/presto.js")
         +js("/assets/js/min/main.js")
         block js
+        block body-end

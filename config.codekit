@@ -20,11 +20,22 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
+	"\/assets\/images\/icons\/favicon.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 19986,
+		"inputAbbreviatedPath": "\/assets\/images\/icons\/favicon.png",
+		"outputAbbreviatedPath": "\/assets\/images\/icons\/favicon.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/assets\/images\/icons\/icon.png": {
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 28677,
+		"initialSize": 83859,
 		"inputAbbreviatedPath": "\/assets\/images\/icons\/icon.png",
 		"outputAbbreviatedPath": "\/assets\/images\/icons\/icon.png",
 		"outputPathIsOutsideProject": 0,
@@ -126,6 +137,17 @@
 		"initialSize": 6109,
 		"inputAbbreviatedPath": "\/assets\/images\/icons\/touch\/touch-icon-128x128.png",
 		"outputAbbreviatedPath": "\/assets\/images\/icons\/touch\/touch-icon-128x128.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
+	"\/assets\/images\/icons\/touch\/touch-icon-192x192.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 10559,
+		"inputAbbreviatedPath": "\/assets\/images\/icons\/touch\/touch-icon-192x192.png",
+		"outputAbbreviatedPath": "\/assets\/images\/icons\/touch\/touch-icon-192x192.png",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"processed": 0
@@ -2949,6 +2971,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/views\/demo\/javascript\/navbar.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/navbar.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/javascript\/navbar.jade": {
 		"compileDebug": 0,

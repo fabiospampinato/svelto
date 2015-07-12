@@ -110,13 +110,19 @@
             &:not(.dragging) {
 
                 .min, .max {
+
                     cursor: pointer;
+
+                    &:hover:after {
+                        @extend %icon;
+                    }
+
                 }
 
                 .min {
 
                     &:hover:after {
-                        content: '-';
+                        content: '\f111'; // content-remove
                     }
 
                 }
@@ -124,7 +130,7 @@
                 .max {
 
                     &:hover:after {
-                        content: '+';
+                        content: '\f0fb'; // content-add
                     }
 
                 }

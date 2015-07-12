@@ -3676,6 +3676,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* NAVBAR */
 
+//TODO: make it work better with attachables: se è già aperta non fare niente al background
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';

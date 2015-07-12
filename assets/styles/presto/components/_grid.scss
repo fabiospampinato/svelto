@@ -22,7 +22,7 @@
         max-width: $grid-limited-width;
     }
 
-    &.full-size > .grid-row > .grid-column {
+    &.full-size > .grid-row > .grid-column { //FIXME
 
         width: 100%;
 
