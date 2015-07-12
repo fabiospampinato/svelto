@@ -4,9 +4,9 @@
 .container {
 
     @include white ( true );
-    border-width: $container-border-size;
+    border-width: $container-border-width;
     border-style: solid;
-    border-radius: $border-radius-normal;
+    border-radius: $border-radius-medium;
     padding: $layout-spacing;
     margin-bottom: $layout-spacing;
     box-shadow: $shadow-depth-1;
@@ -45,7 +45,7 @@
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         font-weight: bold;
-        margin: #{-($layout-spacing + $container-border-size)} #{-($layout-spacing + $container-border-size)} $layout-spacing;
+        margin: #{-($layout-spacing + $container-border-width)} #{-($layout-spacing + $container-border-width)} $layout-spacing;
         text-transform: uppercase;
         position: relative;
         padding: $layout-spacing;
@@ -95,7 +95,7 @@
     }
 
     & > .footer {
-        margin: #{$layout-spacing} #{-($layout-spacing + $container-border-size)} #{-($layout-spacing + $container-border-size)};
+        margin: #{$layout-spacing} #{-($layout-spacing + $container-border-width)} #{-($layout-spacing + $container-border-width)};
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
         border-width: $container-footer-border-width;

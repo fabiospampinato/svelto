@@ -1,9 +1,6 @@
 
-/* SETTINGS */
+/* GRID */
 
-$grid-columns: 12 !default;
+$grid-columns-nr: 12 !default;
 
-$grid-limited-width: $layout-max-width + $layout-spacing !default;
-
-$sidebar-width: 350px !default;
-$sidebar-hidden-offset: 5 !default; // Percentage
+$grid-max-width: $layout-max-width + $layout-spacing !default; //FIXME: add support for unlimited max-width

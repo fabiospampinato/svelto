@@ -17,7 +17,7 @@ button {
     justify-content: center;
     align-items: center;
     margin-bottom: $layout-spacing;
-    border-radius: $border-radius-normal;
+    border-radius: $border-radius-medium;
     padding: $button-vertical-padding $button-horizontal-padding;
     font-weight: bold;
     box-shadow: $shadow-depth-1;
@@ -78,11 +78,11 @@ button {
 
     &.inactive {
 
-        opacity: $button-inactive-opacity;
+        opacity: $button-disabled-opacity;
         cursor: default;
 
         & > .button-left, & > .button-right {
-            opacity: $button-inactive-opacity;
+            opacity: $button-disabled-opacity;
         }
 
     }

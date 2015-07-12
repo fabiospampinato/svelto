@@ -2,9 +2,9 @@
 /* HIGHLIGHT */
 
 .highlight:after {
-    border-radius: 0 0 $border-radius-normal $border-radius-normal;
+    border-radius: 0 0 $border-radius-medium $border-radius-medium;
     content: '';
-    height: $highlight-height-size;
+    height: $highlight-height;
     left: 0;
     right: 0;
     bottom: 0;

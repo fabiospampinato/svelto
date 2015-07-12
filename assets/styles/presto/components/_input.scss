@@ -7,7 +7,7 @@ input {
     @include medium ();
     box-shadow: $shadow-depth-1;
     border: none;
-    border-radius: $border-radius-normal;
+    border-radius: $border-radius-medium;
     font-family: $font-family;
     padding: $input-vertical-padding $input-horizontal-padding;
     box-sizing: border-box;

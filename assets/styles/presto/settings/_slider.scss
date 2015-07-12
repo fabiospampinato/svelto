@@ -1,9 +1,9 @@
 
-/* SETTINGS */
-
-$slider-height: 2.66667em !default;
+/* SLIDER */
 
 $slider-transitions-time: 0.15s !default;
+
+$slider-height: 2.66667em !default;
 
 $slider-min-max-width: $slider-height !default;
 
@@ -11,7 +11,7 @@ $slider-handler-size: 1.33333em !default;
 $slider-handler-half-size: $slider-handler-size / 2 !default;
 
 $slider-handler-big-size: 1.86667em !default;
-$slider-handler-half-big-size: $slider-handler-big-size / 2 !default;
+$slider-handler-big-half-size: $slider-handler-big-size / 2 !default;
 
 $slider-handler-active-shadow: 0 0 0 0.85em rgba(255, 171, 145, 0.25) !default;
 

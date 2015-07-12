@@ -1,9 +1,9 @@
 
-/* SETTINGS */
-
-$progress-bar-height: 1.07143em !default;
+/* PROGRESS BAR */
 
 $progress-bar-transitions-time: 0.15s !default;
+
+$progress-bar-height: 1.07143em !default;
 
 $progress-bar-unhighlighted-height: $progress-bar-height !default;
 $progress-bar-highlighted-height: $progress-bar-unhighlighted-height !default;
@@ -22,6 +22,6 @@ $progress-bar-stripe-light-color: rgba(255, 255, 255, $progress-bar-stripe-opaci
 $progress-bar-stripe-dark-color: rgba(0, 0, 0, $progress-bar-stripe-opacity) !default;
 $progress-bar-stripe-size: 3.33333em !default;
 
-%gradient-stripes {
+%gradient-stripes { //TODO: maybe move this to the component instead
     background: linear-gradient(-45deg, $progress-bar-stripe-light-color 25%, $progress-bar-stripe-dark-color 25%, $progress-bar-stripe-dark-color 50%, $progress-bar-stripe-light-color 50%, $progress-bar-stripe-light-color 75%, $progress-bar-stripe-dark-color 75%, $progress-bar-stripe-dark-color);
 }

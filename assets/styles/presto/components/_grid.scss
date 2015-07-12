@@ -19,7 +19,7 @@
     }
 
     &.limited > .grid-row {
-        max-width: $grid-limited-width;
+        max-width: $grid-max-width;
     }
 
     &.full-size > .grid-row > .grid-column { //FIXME

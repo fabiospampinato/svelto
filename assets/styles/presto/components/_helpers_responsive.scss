@@ -73,15 +73,15 @@
 
 // XSMALL
 
-@for $nr from 1 through $grid-columns {
+@for $nr from 1 through $grid-columns-nr {
 
     .xs-#{$nr} {
         display: inline-block !important;
-        width: ( 100% / $grid-columns ) * $nr;
+        width: ( 100% / $grid-columns-nr ) * $nr;
     }
 
     .offset-xs-#{$nr} {
-        margin-left: ( 100% / $grid-columns ) * $nr;
+        margin-left: ( 100% / $grid-columns-nr ) * $nr;
     }
 
 }
@@ -90,15 +90,15 @@
 
 @include min-screen ( $layout-small-min-breakpoint ) {
 
-    @for $nr from 1 through $grid-columns {
+    @for $nr from 1 through $grid-columns-nr {
 
         .sm-#{$nr} {
             display: inline-block !important;
-            width: ( 100% / $grid-columns ) * $nr;
+            width: ( 100% / $grid-columns-nr ) * $nr;
         }
 
         .offset-sm-#{$nr} {
-            margin-left: ( 100% / $grid-columns ) * $nr;
+            margin-left: ( 100% / $grid-columns-nr ) * $nr;
         }
 
     }
@@ -109,15 +109,15 @@
 
 @include min-screen ( $layout-medium-min-breakpoint ) {
 
-    @for $nr from 1 through $grid-columns {
+    @for $nr from 1 through $grid-columns-nr {
 
         .md-#{$nr} {
             display: inline-block !important;
-            width: ( 100% / $grid-columns ) * $nr;
+            width: ( 100% / $grid-columns-nr ) * $nr;
         }
 
         .offset-md-#{$nr} {
-            margin-left: ( 100% / $grid-columns ) * $nr;
+            margin-left: ( 100% / $grid-columns-nr ) * $nr;
         }
 
     }
@@ -128,15 +128,15 @@
 
 @include min-screen ( $layout-large-min-breakpoint ) {
 
-    @for $nr from 1 through $grid-columns {
+    @for $nr from 1 through $grid-columns-nr {
 
         .lg-#{$nr} {
             display: inline-block !important;
-            width: ( 100% / $grid-columns ) * $nr;
+            width: ( 100% / $grid-columns-nr ) * $nr;
         }
 
         .offset-lg-#{$nr} {
-            margin-left: ( 100% / $grid-columns ) * $nr;
+            margin-left: ( 100% / $grid-columns-nr ) * $nr;
         }
 
     }

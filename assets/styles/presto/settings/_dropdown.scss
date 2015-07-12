@@ -1,5 +1,5 @@
 
-/* SETTINGS */
+/* DROPDOWN */
 
 $dropdown-tip-border-size: 1px !default;
 $dropdown-tip-fg-size: 19px !default;
@@ -8,7 +8,7 @@ $dropdown-tip-fg-color: $color-white-bg !default;
 $dropdown-tip-bg-color: darken($color-white-border, 4) !default;
 
 $dropdown-padding: 15px !default;
-$dropdown-border-size: 1px !default;
+$dropdown-border-width: 1px !default;
 
 $dropdown-container-max-height: 325px !default;
 $dropdown-container-min-width: 120px !default;

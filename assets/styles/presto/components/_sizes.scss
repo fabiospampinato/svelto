@@ -2,7 +2,7 @@
 /* SIZES */
 
 @mixin nano ( $important: '' ) {
-    font-size: $nano-font-size #{$important};
+    font-size: $size-nano #{$important};
 }
 
 .nano {
@@ -10,7 +10,7 @@
 }
 
 @mixin micro ( $important: '' ) {
-    font-size: $micro-font-size #{$important};
+    font-size: $size-micro #{$important};
 }
 
 .micro {
@@ -18,7 +18,7 @@
 }
 
 @mixin mini ( $important: '' ) {
-    font-size: $mini-font-size #{$important};
+    font-size: $size-mini #{$important};
 }
 
 .mini {
@@ -26,7 +26,7 @@
 }
 
 @mixin tiny ( $important: '' ) {
-    font-size: $tiny-font-size #{$important};
+    font-size: $size-tiny #{$important};
 }
 
 .tiny {
@@ -34,7 +34,7 @@
 }
 
 @mixin small ( $important: '' ) {
-    font-size: $small-font-size #{$important};
+    font-size: $size-small #{$important};
 }
 
 .small {
@@ -42,7 +42,7 @@
 }
 
 @mixin medium ( $important: '' ) {
-    font-size: $medium-font-size #{$important};
+    font-size: $size-medium #{$important};
 }
 
 .medium {
@@ -50,7 +50,7 @@
 }
 
 @mixin large ( $important: '' ) {
-    font-size: $large-font-size #{$important};
+    font-size: $size-large #{$important};
 }
 
 .large {
@@ -58,7 +58,7 @@
 }
 
 @mixin big ( $important: '' ) {
-    font-size: $big-font-size #{$important};
+    font-size: $size-big #{$important};
 }
 
 .big {
@@ -66,7 +66,7 @@
 }
 
 @mixin huge ( $important: '' ) {
-    font-size: $huge-font-size #{$important};
+    font-size: $size-huge #{$important};
 }
 
 .huge {
@@ -74,7 +74,7 @@
 }
 
 @mixin massive ( $important: '' ) {
-    font-size: $massive-font-size #{$important};
+    font-size: $size-massive #{$important};
 }
 
 .massive {
@@ -82,7 +82,7 @@
 }
 
 @mixin giant ( $important: '' ) {
-    font-size: $giant-font-size #{$important};
+    font-size: $size-giant #{$important};
 }
 
 .giant {
@@ -90,7 +90,7 @@
 }
 
 @mixin enormous ( $important: '' ) {
-    font-size: $enormous-font-size #{$important};
+    font-size: $size-enormous #{$important};
 }
 
 .enormous {

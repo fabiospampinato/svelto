@@ -77,9 +77,9 @@
 /* INFOBAR */
 
 .infobar-wrp.outlined {
-    border-width: $container-border-size;
+    border-width: $container-border-width;
     border-style: solid;
-    border-radius: $border-radius-normal;
+    border-radius: $border-radius-medium;
     padding: $layout-spacing;
     box-shadow: $shadow-depth-1;
 }

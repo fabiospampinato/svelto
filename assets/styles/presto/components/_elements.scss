@@ -27,7 +27,7 @@ kbd {
     @include white ( true );
     border-width: 1px;
     border-style: solid;
-    border-radius: $border-radius-normal;
+    border-radius: $border-radius-medium;
     margin: 0 ( $layout-spacing / 2 );
     padding: 2px 3px;
     box-shadow: $shadow-depth-1;
@@ -47,7 +47,7 @@ kbd {
 
     & > img {
         border: 1px solid $color-white-border;
-        border-radius: $border-radius-normal;
+        border-radius: $border-radius-medium;
         max-width: 100%;
         height: auto;
     }

@@ -1,0 +1,27 @@
+
+/* EXTRA SMALL */
+
+$layout-xsmall-max-breakpoint: 481px !default;
+
+/* SMALL */
+
+$layout-small-min-breakpoint: 482px !default;
+$layout-small-max-breakpoint: 767px !default;
+
+/* MEDIUM */
+
+$layout-medium-min-breakpoint: 768px !default;
+$layout-medium-max-breakpoint: 961px !default;
+
+/* LARGE */
+
+//TODO: fix large media query mixin, now there's a limit
+
+$layout-large-min-breakpoint: 962px !default;
+$layout-large-max-breakpoint: 1399px !default;
+
+/* EXTRA LARGE */
+
+//TODO: add 'xl' related properties
+
+$layout-xlarge-min-breakpoint: 1400px !default;

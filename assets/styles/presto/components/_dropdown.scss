@@ -90,7 +90,7 @@
 
     & > .top-tip {
 
-        top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-size;
+        top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
         left: 50%;
 
         &:before {
@@ -106,7 +106,7 @@
 
     & > .bottom-tip {
 
-        bottom: $dropdown-padding + $dropdown-border-size;
+        bottom: $dropdown-padding + $dropdown-border-width;
         left: 50%;
 
         &:before {
@@ -134,7 +134,7 @@
 
     & > .left-tip {
 
-        left: $dropdown-padding - ( $dropdown-tip-fg-size / 2 ) + $dropdown-border-size;
+        left: $dropdown-padding - ( $dropdown-tip-fg-size / 2 ) + $dropdown-border-width;
         top: 50%;
 
         &:before {
@@ -150,7 +150,7 @@
 
     & > .right-tip {
 
-        right: $dropdown-padding + $dropdown-border-size;
+        right: $dropdown-padding + $dropdown-border-width;
         top: 50%;
 
         &:before {
@@ -167,7 +167,7 @@
     & > .container {
 
         margin-bottom: 0 !important;
-        border-width: $dropdown-border-size;
+        border-width: $dropdown-border-width;
         border-style: solid;
         box-shadow: $shadow-depth-4;
         max-height: $dropdown-container-max-height;

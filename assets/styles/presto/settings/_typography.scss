@@ -1,19 +1,18 @@
 
-/* SETTINGS */
+/* ROBOTO */
+
+$roboto-enabled: false !default;
+
+/* FONT FAMILIES */
 
 @if $roboto-enabled == true {
-    $font-family: Roboto, Calibri, sans-serif !important !default;
+    $font-family: Roboto, Calibri, sans-serif !important !default; //FIMXE: is this `!important` needed?
 } @else {
-    $font-family: Calibri, sans-serif !important !default;
+    $font-family: Calibri, sans-serif !important !default; //FIMXE: is this `!important` needed?
 }
 
-$font-size-normal: 15px !default;
+/* FONT SIZES */
 
-$h-1-font-size: 50px !default;
-$h0-font-size: 40px !default;
-$h1-font-size: 30px !default;
-$h2-font-size: 23px !default;
-$h3-font-size: 18px !default;
-$h4-font-size: 15px !default;
-$h5-font-size: 13px !default;
-$h6-font-size: 10px !default;
+$font-size-small: 13px !default;
+$font-size-normal: 15px !default;
+$font-size-large: 17px !default;

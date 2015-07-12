@@ -1,23 +1,27 @@
 
-/* FUNCTIONS */
+/* FUNCTION */
 
 @function get_rem ( $distance ) {
     @return 1rem + ( $size-delta-step * $distance );
 }
 
-/* SETTINGS */
+/* DELTA */
 
 $size-delta-step: 1 / 14 !default;
 
-$nano-font-size: get_rem( -6 ) !default;
-$micro-font-size: get_rem( -5 ) !default;
-$mini-font-size: get_rem( -4 ) !default;
-$tiny-font-size: get_rem( -2 ) !default;
-$small-font-size: get_rem( -1 ) !default;
-$medium-font-size: get_rem( 0 ) !default;
-$large-font-size: get_rem( 2 ) !default;
-$big-font-size: get_rem( 4 ) !default;
-$huge-font-size: get_rem( 6 ) !default;
-$massive-font-size: get_rem( 10 ) !default;
-$giant-font-size: get_rem( 16 ) !default;
-$enormous-font-size: get_rem( 24 ) !default;
+/* SIZES */
+
+//TODO: rename them to: xxxxs, xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl, xxxxl
+
+$size-nano: get_rem( -6 ) !default;
+$size-micro: get_rem( -5 ) !default;
+$size-mini: get_rem( -4 ) !default;
+$size-tiny: get_rem( -2 ) !default;
+$size-small: get_rem( -1 ) !default;
+$size-medium: get_rem( 0 ) !default;
+$size-large: get_rem( 2 ) !default;
+$size-big: get_rem( 4 ) !default;
+$size-huge: get_rem( 6 ) !default;
+$size-massive: get_rem( 10 ) !default;
+$size-giant: get_rem( 16 ) !default;
+$size-enormous: get_rem( 24 ) !default;

@@ -5,7 +5,7 @@
 
 /* FOUNDAMENTAL */
 
-@import 'settings/enviroment';
+@import 'settings/environment';
 
 @import 'settings/colors';
 @import 'settings/gradients';
@@ -15,6 +15,7 @@
 @import 'settings/sizes';
 @import 'components/sizes';
 
+@import 'settings/breakpoints';
 @import 'settings/layout';
 @import 'settings/typography';
 @import 'settings/elements';

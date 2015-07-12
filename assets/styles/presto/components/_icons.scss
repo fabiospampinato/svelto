@@ -70,7 +70,7 @@ $index: 0;
 
     @each $icon_name in $all {
 
-        @if $enviroment-production == false or index($enabled, $icon_name) != null {
+        @if $environment-production == false or index($enabled, $icon_name) != null {
 
             .icon-#{$category}-#{$icon_name}:before {
                 @include variable-icon-font ( "f" + dec-to-hex($index) );

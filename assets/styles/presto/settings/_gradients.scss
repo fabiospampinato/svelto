@@ -13,69 +13,109 @@
 
 }
 
-/* BRAND */
+/* PRIMARY */
 
 @mixin gradient-primary ( $important: '' ) {
     @include gradient ( 'primary', $important );
 }
 
+/* SECONDARY */
+
 @mixin gradient-secondary ( $important: '' ) {
     @include gradient ( 'secondary', $important );
 }
 
-/* GENERAL */
+/* TERTIARY */
+
+@mixin gradient-tertiary ( $important: '' ) {
+    @include gradient ( 'tertiary', $important );
+}
+
+/* QUATERNARY */
+
+@mixin gradient-quaternary ( $important: '' ) {
+    @include gradient ( 'quaternary', $important );
+}
+
+/* WHITE */
 
 @mixin gradient-white ( $important: '' ) {
     @include gradient ( 'white', $important );
 }
 
+/* GRAY */
+
 @mixin gradient-gray ( $important: '' ) {
     @include gradient ( 'gray', $important );
 }
+
+/* BLACK */
 
 @mixin gradient-black ( $important: '' ) {
     @include gradient ( 'black', $important );
 }
 
+/* YELLOW */
+
 @mixin gradient-yellow ( $important: '' ) {
     @include gradient ( 'yellow', $important );
 }
+
+/* OLIVE */
 
 @mixin gradient-olive ( $important: '' ) {
     @include gradient ( 'olive', $important );
 }
 
+/* GREEN */
+
 @mixin gradient-green ( $important: '' ) {
     @include gradient ( 'green', $important );
 }
+
+/* BLUE */
 
 @mixin gradient-blue ( $important: '' ) {
     @include gradient ( 'blue', $important );
 }
 
+/* VIOLET */
+
 @mixin gradient-violet ( $important: '' ) {
     @include gradient ( 'violet', $important );
 }
+
+/* ORANGE */
 
 @mixin gradient-orange ( $important: '' ) {
     @include gradient ( 'orange', $important );
 }
 
+/* PURPLE */
+
 @mixin gradient-purple ( $important: '' ) {
     @include gradient ( 'purple', $important );
 }
+
+/* RED */
 
 @mixin gradient-red ( $important: '' ) {
     @include gradient ( 'red', $important );
 }
 
+/* PINK */
+
 @mixin gradient-pink ( $important: '' ) {
     @include gradient ( 'pink', $important );
 }
 
+/* TEAL */
+
 @mixin gradient-teal ( $important: '' ) {
     @include gradient ( 'teal', $important );
 }
+
+/* BROWN */
 
 @mixin gradient-brown ( $important: '' ) {
     @include gradient ( 'brown', $important );

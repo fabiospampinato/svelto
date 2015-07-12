@@ -150,7 +150,7 @@
                         height: $slider-handler-big-size;
                         line-height: $slider-handler-big-size;
                         @include center-absolutely ( false, $slider-handler-big-size );
-                        margin-left: - $slider-handler-half-big-size;
+                        margin-left: - $slider-handler-big-half-size;
                         width: $slider-handler-big-size;
 
                         .slider-label {

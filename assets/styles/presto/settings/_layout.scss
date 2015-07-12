@@ -1,25 +1,15 @@
 
-/* SETTINGS */
+/* MAX WIDTH */
 
-$layout-xsmall-max-breakpoint: 481px !default;
+$layout-max-width: $layout-xlarge-min-breakpoint !default;
 
-$layout-small-min-breakpoint: 482px !default;
-$layout-small-max-breakpoint: 767px !default;
-
-$layout-medium-min-breakpoint: 768px !default;
-$layout-medium-max-breakpoint: 961px !default;
-
-$layout-large-min-breakpoint: 962px !default;
-
-$layout-max-width: 1400px !default;
-
-$layout-sidebar-breakpoint: 750px !default;
-$layout-no-columns-padding-breakpoint: 550px !default;
-$layout-full-sidebar-breakpoint: 435px !default;
+/* SPACING */
 
 $layout-spacing: 10px !default;
 $layout-half-spacing: $layout-spacing / 2 !default;
 
+/* BORDER RADIUS */
+
 $border-radius-small: 0.13325rem !default;
-$border-radius-normal: 0.2665rem !default;
+$border-radius-medium: 0.2665rem !default;
 $border-radius-large: 0.39975rem !default;

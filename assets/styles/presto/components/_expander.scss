@@ -10,8 +10,8 @@
 
         cursor: pointer;
         margin-bottom: 0;
-        border-bottom-left-radius: $border-radius-normal;
-        border-bottom-right-radius: $border-radius-normal;
+        border-bottom-left-radius: $border-radius-medium;
+        border-bottom-right-radius: $border-radius-medium;
         transition: margin-bottom 0.25s ease 0s, border-bottom-left-radius 0.25s ease 0s, border-bottom-right-radius 0.25s ease 0s;
 
         & > .sub .icon.icon-hardware-keyboard-arrow-down {
