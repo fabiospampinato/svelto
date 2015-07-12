@@ -115,7 +115,7 @@
 
 /* NAVBAR */
 
-//TODO: Add support for attachable navbars (like attach-xs, attach-sm, attach-md, attach-lg)
+//TODO: Use inheritance, don't copy over and over again the mixins content...
 //TODO: Add detached, detached-xs, detached-sm, detached-md, detached-lg
 
 .navbar-wrp {
@@ -236,7 +236,7 @@
         @include attach ();
     }
 
-    @include min-screen ( $layout-small-min-breakpoint ) {
+    @include from-small {
 
         &.attached-sm {
             @include open ();
@@ -245,7 +245,7 @@
 
     }
 
-    @include min-screen ( $layout-medium-min-breakpoint ) {
+    @include from-medium {
 
         &.attached-md {
             @include open ();
@@ -254,9 +254,18 @@
 
     }
 
-    @include min-screen ( $layout-large-min-breakpoint ) {
+    @include from-large {
 
         &.attached-lg {
+            @include open ();
+            @include attach ();
+        }
+
+    }
+
+    @include from-xlarge {
+
+        &.attached-xl {
             @include open ();
             @include attach ();
         }

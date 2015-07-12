@@ -188,8 +188,6 @@
 
 /* SHRINK */
 
-//TODO: Does it work?
-
 @for $nr from 1 through 10 {
 
     .shrink-#{$nr} {
@@ -198,12 +196,16 @@
 
 }
 
-/* WIDTH / VH PERCENTAGES */
+/* WIDTH / VW / VH PERCENTAGES */
 
 @for $nr from 1 through 100 {
 
     .w#{$nr}-100 {
         width: #{$nr}% !important;
+    }
+
+    .vw#{$nr}-100 {
+        width: #{$nr}vw !important;
     }
 
     .vh#{$nr}-100 {
@@ -212,40 +214,52 @@
 
 }
 
-/* WIDTH BREAKPOINTS */
+/* STANDARD WIDTHS */
+
+//TODO: add demo, check the values
 
 .width-xs {
-    width: $layout-xsmall-max-breakpoint;
+    width: 200px;
 }
 
 .width-sm {
-    width: $layout-small-max-breakpoint;
+    width: 200px * $GOLDEN-RATIO;
 }
 
 .width-md {
-    width: $layout-medium-max-breakpoint;
+    width: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO;
 }
 
 .width-lg {
-    width: $layout-max-width;
+    width: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO;
 }
 
-/* HEIGHT BREAKPOINTS */
+.width-xl {
+    width: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO;
+}
+
+/* STANDARD HEIGHTS */
+
+//TODO: add demo, check the values
 
 .height-xs {
-    height: $layout-xsmall-max-breakpoint / 1.61803398875;
+    height: 120px;
 }
 
 .height-sm {
-    height: $layout-small-max-breakpoint / 1.61803398875;
+    height: 120px * $GOLDEN-RATIO;
 }
 
 .height-md {
-    height: $layout-medium-max-breakpoint / 1.61803398875;
+    height: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO;
 }
 
 .height-lg {
-    height: $layout-max-width / 1.61803398875;
+    height: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO  * $GOLDEN-RATIO;
+}
+
+.height-xl {
+    height: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO  * $GOLDEN-RATIO  * $GOLDEN-RATIO;
 }
 
 /* KEYFRAMES */

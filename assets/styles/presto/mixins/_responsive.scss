@@ -1,34 +1,86 @@
 
-/* RESPONSIVE */
-
 //TODO: rename them, maybe use just a unique size() mixin e a color() mixin for components and leave this names available for the breakpoints
 
-@mixin bk-xsmall {
+/* FROM MINIMUM */
 
-    @include max-screen ( $layout-xsmall-max-breakpoint );
+@mixin from-xsmall {
 
-}
-
-@mixin bk-small {
-
-    @include screen ( $layout-small-min-breakpoint, $layout-small-max-breakpoint );
+    @media screen and (min-width: 0) {
+        @content;
+    }
 
 }
 
-@mixin bk-medium {
+@mixin from-small {
 
-    @include screen ( $layout-medium-min-breakpoint, $layout-medium-max-breakpoint );
-
-}
-
-@mixin bk-large {
-
-    @include screen ( $layout-large-min-breakpoint, $layout-large-max-breakpoint );
+    @media screen and (min-width: $layout-small-min-breakpoint) {
+        @content;
+    }
 
 }
 
-@mixin bk-xlarge {
+@mixin from-medium {
 
-    @include min-screen ( $layout-xlarge-min-breakpoint );
+    @media screen and (min-width: $layout-medium-min-breakpoint) {
+        @content;
+    }
+
+}
+
+@mixin from-large {
+
+    @media screen and (min-width: $layout-large-min-breakpoint) {
+        @content;
+    }
+
+}
+
+@mixin from-xlarge {
+
+    @media screen and (min-width: $layout-xlarge-min-breakpoint) {
+        @content;
+    }
+
+}
+
+/* ONLY RANGE */
+
+@mixin range-xsmall {
+
+    @media screen and (max-width: $layout-xsmall-max-breakpoint) {
+        @content;
+    }
+
+}
+
+@mixin range-small {
+
+    @media screen and (min-width: $layout-small-min-breakpoint) and (max-width: $layout-small-max-breakpoint) {
+        @content;
+    }
+
+}
+
+@mixin range-medium {
+
+    @media screen and (min-width: $layout-medium-min-breakpoint) and (max-width: $layout-medium-max-breakpoint) {
+        @content;
+    }
+
+}
+
+@mixin range-large {
+
+    @media screen and (min-width: $layout-large-min-breakpoint) and (max-width: $layout-large-max-breakpoint) {
+        @content;
+    }
+
+}
+
+@mixin range-xlarge {
+
+    @media screen and (min-width: $layout-xlarge-min-breakpoint) {
+        @content;
+    }
 
 }

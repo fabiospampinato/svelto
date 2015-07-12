@@ -17,7 +17,7 @@
 
 // SMALL
 
-@include min-screen ( $layout-small-min-breakpoint ) {
+@include from-small {
 
     .hidden-sm, .sm-0 {
         display: none !important;
@@ -35,7 +35,7 @@
 
 // MEDIUM
 
-@include min-screen ( $layout-medium-min-breakpoint ) {
+@include from-medium {
 
     .hidden-md, .md-0 {
         display: none !important;
@@ -53,7 +53,7 @@
 
 // LARGE
 
-@include min-screen ( $layout-large-min-breakpoint ) {
+@include from-large {
 
     .hidden-lg, .lg-0 {
         display: none !important;
@@ -62,6 +62,24 @@
     @each $display in block, inline, inline-block {
 
         .visible-lg-#{$display} {
+            display: $display !important;
+        }
+
+    }
+
+}
+
+// XLARGE
+
+@include from-xlarge {
+
+    .hidden-xl, .xl-0 {
+        display: none !important;
+    }
+
+    @each $display in block, inline, inline-block {
+
+        .visible-xl-#{$display} {
             display: $display !important;
         }
 
@@ -88,7 +106,7 @@
 
 // SMALL
 
-@include min-screen ( $layout-small-min-breakpoint ) {
+@include from-small {
 
     @for $nr from 1 through $grid-columns-nr {
 
@@ -107,7 +125,7 @@
 
 // MEDIUM
 
-@include min-screen ( $layout-medium-min-breakpoint ) {
+@include from-medium {
 
     @for $nr from 1 through $grid-columns-nr {
 
@@ -126,7 +144,7 @@
 
 // LARGE
 
-@include min-screen ( $layout-large-min-breakpoint ) {
+@include from-large {
 
     @for $nr from 1 through $grid-columns-nr {
 
@@ -136,6 +154,25 @@
         }
 
         .offset-lg-#{$nr} {
+            margin-left: ( 100% / $grid-columns-nr ) * $nr;
+        }
+
+    }
+
+}
+
+// XLARGE
+
+@include from-xlarge {
+
+    @for $nr from 1 through $grid-columns-nr {
+
+        .xl-#{$nr} {
+            display: inline-block !important;
+            width: ( 100% / $grid-columns-nr ) * $nr;
+        }
+
+        .offset-xl-#{$nr} {
             margin-left: ( 100% / $grid-columns-nr ) * $nr;
         }
 
