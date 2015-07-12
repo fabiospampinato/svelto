@@ -20,9 +20,15 @@
 @import 'settings/typography';
 @import 'settings/elements';
 
-/* TOOLS */
+/* MIXINS */
 
-@import 'tools/mixins';
+@import 'mixins/centering';
+@import 'mixins/layout';
+@import 'mixins/media_queries';
+@import 'mixins/others';
+@import 'mixins/responsive';
+@import 'mixins/shapes';
+@import 'mixins/typography';
 
 /* SETTINGS */
 

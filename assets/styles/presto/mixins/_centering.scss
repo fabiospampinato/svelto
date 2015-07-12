@@ -1,0 +1,62 @@
+
+/* CENTERING */
+
+@mixin vcenter-lh ( $height ) {
+    height: $height;
+    line-height: $height;
+}
+
+@mixin vcenter-ghost () {
+    &:before {
+        content: "";
+        display: inline-block;
+        vertical-align: middle;
+        height: 100%;
+        width: .1px;
+    }
+}
+
+@mixin center-block ( $max-width: false ) {
+    margin-left: auto;
+    margin-right: auto;
+    @if $max-width {
+        max-width: $max-width;
+    }
+}
+
+@mixin center-absolutely ( $width: false, $height: false ) {
+    position: absolute;
+    @if $width {
+        left: 50%;
+        margin-left: (-$width / 2);
+    }
+    @if $height {
+        top: 50%;
+        margin-top: (-$height / 2);
+    }
+}
+
+@mixin center-transform ( $axis: false ) { /* x, y or false for both */
+    position: absolute;
+    @if $axis != x {
+        top: 50%;
+        margin-top: auto;
+        margin-bottom: auto;
+    }
+    @if $axis != y {
+        left: 50%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    $translate-val: null;
+    @if not($axis) {
+        $translate-val: translate(-50%, -50%);
+    }
+    @else if $axis != x {
+        $translate-val: translateY(-50%);
+    }
+    @else if $axis != y {
+        $translate-val: translateX(-50%);
+    }
+    transform: $translate-val;
+}

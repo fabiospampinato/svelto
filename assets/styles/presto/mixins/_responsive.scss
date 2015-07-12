@@ -1,0 +1,34 @@
+
+/* RESPONSIVE */
+
+//TODO: rename them, maybe use just a unique size() mixin e a color() mixin for components and leave this names available for the breakpoints
+
+@mixin bk-xsmall {
+
+    @include max-screen ( $layout-xsmall-max-breakpoint );
+
+}
+
+@mixin bk-small {
+
+    @include screen ( $layout-small-min-breakpoint, $layout-small-max-breakpoint );
+
+}
+
+@mixin bk-medium {
+
+    @include screen ( $layout-medium-min-breakpoint, $layout-medium-max-breakpoint );
+
+}
+
+@mixin bk-large {
+
+    @include screen ( $layout-large-min-breakpoint, $layout-large-max-breakpoint );
+
+}
+
+@mixin bk-xlarge {
+
+    @include min-screen ( $layout-xlarge-min-breakpoint );
+
+}

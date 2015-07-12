@@ -1,0 +1,6 @@
+
+/* OTHERS */
+
+@mixin multi-shadow ( $shadows... ) {
+    box-shadow: $shadows;
+}
