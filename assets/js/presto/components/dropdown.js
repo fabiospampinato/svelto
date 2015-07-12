@@ -1,6 +1,8 @@
 
 /* DROPDOWN */
 
+//TODO: add dropdown-closer
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -24,7 +26,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.id = this.$element.attr ( 'id' );
             this.$top_tip = this.$element.find ( '.top-tip' );
@@ -37,25 +39,15 @@
 
             this.opened = false;
 
-            this._bind_trigger_click ();
-            this._bind_actionable_click ();
-//          this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
-
         },
 
-        /* TRIGGER CLICK */
-
-        _bind_trigger_click: function () {
+        _events: function () {
 
             this._on ( this.$triggers, 'click', this.toggle );
 
-        },
-
-        /* ACTIONABLE CLICK */
-
-        _bind_actionable_click: function () {
-
             this._on ( this.$actionables, 'click', this.close );
+
+//          this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
         },
 

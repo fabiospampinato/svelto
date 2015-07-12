@@ -266,14 +266,20 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._trigger ( 'create', this._getCreateEventData () );
 
+            this._variables ();
+
             this._init ();
+
+            this._events ();
 
         },
 
         _getCreateOptions: $.noop,
         _getCreateEventData: $.noop,
         _create: $.noop,
+        _variables: $.noop,
         _init: $.noop,
+        _events: $.noop,
 
         destroy: function () {
 
@@ -792,15 +798,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     if ( instance ) {
 
-                        /* INIT */
-
                         instance.option ( options || {} );
 
-                        instance._init ();
-
                     } else {
-
-                        /* INSTANCIATING */
 
                         $.data ( this, fullName, new object ( options, this ) );
 
@@ -982,6 +982,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* AUTOGROW */
 
+//TODO: make it more DRY
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -994,40 +996,54 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             default_width: 0,
-            default_height: 0
+            default_height: 0,
+            callbacks: {
+                update: $.noop
+            }
         },
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
-            this.is_border_box = ( this.$element.css ( 'box-sizing' ) === 'border-box' );
+            this.is_border_box = ( this.$element.css ( 'box-sizing' ) === 'border-box' ); //TODO: maybe only support border-box...
 
             this.is_input = this.$element.is ( 'input' );
             this.is_textarea = this.$element.is ( 'textarea' );
 
-            if ( this.is_input ) {
+            this.extra_pxs = 0;
 
-                this._init_input ();
+        },
 
-            } else if ( this.is_textarea ) {
+        _init: function () {
 
-                this._init_textarea ();
+            if ( this.is_border_box ) {
+
+                var props = this.is_input
+                                ? ['border-left-width', 'padding-left', 'padding-right', 'border-right-width']
+                                : this.is_textarea
+                                    ? ['border-top-width', 'padding-top', 'padding-bottom', 'border-bottom-width']
+                                    : [];
+
+                for ( var i = 0, l = props.length; i < l; i++ ) {
+
+                    this.extra_pxs += parseFloat ( this.$element.css ( props[i] ) );
+
+                }
+
             }
+
+            this.update ();
+
+        },
+
+        _events: function () {
+
+            this._on ( 'input change', this.update );
 
         },
 
         /* INPUT */
-
-        _init_input: function () {
-
-            this.extra_pxs = this.is_border_box ? parseFloat ( this.$element.css ( 'border-left-width' ) ) + parseFloat ( this.$element.css ( 'padding-left' ) ) + parseFloat ( this.$element.css ( 'padding-right' ) ) + parseFloat ( this.$element.css ( 'border-right-width' ) ) : 0;
-
-            this._update_input_width ();
-
-            this._on ( 'input change', this._update_input_width );
-
-        },
 
         _update_input_width: function () {
 
@@ -1072,16 +1088,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* TEXTAREA */
 
-        _init_textarea: function () {
-
-            this.extra_pxs = this.is_border_box ? parseFloat ( this.$element.css ( 'border-top-width' ) ) + parseFloat ( this.$element.css ( 'padding-top' ) ) + parseFloat ( this.$element.css ( 'padding-bottom' ) ) + parseFloat ( this.$element.css ( 'border-bottom-width' ) ) : 0;
-
-            this._update_textarea_height ();
-
-            this._on ( 'input change', this._update_textarea_height );
-
-        },
-
         _update_textarea_height: function () {
 
             var actual_height = this.$element.height (),
@@ -1111,9 +1117,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this._update_input_width ();
 
+                this._trigger ( 'update' );
+
             } else if ( this.is_textarea ) {
 
                 this._update_textarea_height ();
+
+                this._trigger ( 'update' );
+
             }
 
         }
@@ -1832,24 +1843,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$rows = this._get_rows ();
 
             this.$start_row = false;
             this.$end_row = false;
 
-            this._reset_prevs ();
+        },
 
-            this._bind_keys ();
-            this._bind_mouse ();
-            this._bind_others ();
+        _init: function () {
+
+            this._reset_prevs ();
 
         },
 
-        /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
+        _events: function () {
 
-        _bind_keys: function () {
+            /* KEYS */
 
             this._on ( 'mouseenter', function () {
 
@@ -1863,7 +1874,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             });
 
+            /* MOUSE */
+
+            this._on ( this.$rows, 'mousedown', this._handler_mousedown );
+
+            /* OTHERS */
+
+            //FIXME: support tableHelper and sortable
+
+            this._on ( 'change sort', this._handler_change_sort );
+
+            this._on ( 'mousedown mouseup', this._handler_clear_selection );
+
         },
+
+        /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
         _handler_keys: function ( event ) {
 
@@ -1892,12 +1917,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
-
-        _bind_mouse: function () {
-
-            this._on ( this.$rows, 'mousedown', this._handler_mousedown );
-
-        },
 
         _handler_mousedown: function ( event ) {
 
@@ -2041,16 +2060,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* OTHER EVENTS */
 
-        _bind_others: function () {
-
-            //FIXME: support tableHelper and sortable
-
-            this._on ( 'change sort', this._handler_change_sort );
-
-            this._on ( 'mousedown mouseup', this._handler_clear_selection );
-
-        },
-
         _handler_change_sort: function () {
 
             this.$rows = this._get_rows ();
@@ -2130,7 +2139,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$headers = this.$element.find ( 'thead th' );
             this.$sortables = this.$headers.filter ( '[data-sort]' );
@@ -2142,16 +2151,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.current_index = false; // `$headers` index, not `$sortables` index
             this.current_direction = false;;
 
-            this._initial_sort ();
-
-            this._bind_change ();
-            this._bind_click ();
-
         },
 
-        /* PRIVATE */
-
-        _initial_sort: function () {
+        _init: function () {
 
             var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
 
@@ -2163,13 +2165,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        /* CHANGE */
-
-        _bind_change: function () {
+        _events: function () {
 
             this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
 
+            this._on ( this.$sortables, 'click', this._handler_click );
+
         },
+
+        /* CHANGE */
 
         _handler_change: function () {
 
@@ -2182,12 +2186,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* CLICK */
-
-        _bind_click: function () {
-
-            this._on ( this.$sortables, 'click', this._handler_click );
-
-        },
 
         _handler_click: function ( event ) {
 
@@ -2305,7 +2303,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$thead = this.$element.find ( 'thead' ),
             this.$tfoot = this.$element.find ( 'tfoot' ),
@@ -2313,6 +2311,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$headers = this.$thead.find ( 'th' ),
             this.$empty_row = this.$tbody.find ( 'tr.empty' ),
             this.columns_nr = this.$headers.length;
+
+        },
+
+        _init: function () {
 
             this._check_empty ();
 
@@ -2890,22 +2892,22 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$header = this.$element.children ( '.header' );
             this.$content = this.$element.children ( '.content' );
 
             this.opened = this.$element.hasClass ( 'opened' );
 
-            if ( !this.opened ) this.close ( true );
+        },
 
-            this._bind_click ();
+        _init: function () {
+
+            if ( !this.opened ) this.close ( true );
 
         },
 
-        /* PRIVATE */
-
-        _bind_click: function () {
+        _events: function () {
 
             this._on ( this.$header, 'click', this.toggle );
 
@@ -2971,10 +2973,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$expanders = this.$element.children ( '.expander' );
             this.expanders_inst = [];
+
+        },
+
+        _init: function () {
 
             for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
@@ -2982,17 +2988,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._bind_open ();
-
         },
 
-        /* OPEN */
-
-        _bind_open: function () {
+        _events: function () {
 
             this._on ( this.$expanders, 'expander:open', this._handler_open );
 
         },
+
+        /* OPEN */
 
         _handler_open: function ( event, data, node ) {
 
@@ -3065,9 +3069,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
+
+        },
+
+        _init: function () {
 
             if ( this.$input.prop ( 'checked' ) ) {
 
@@ -3079,19 +3087,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._bind_click ();
+        },
 
-            this._bind_change ();
+        _events: function () {
+
+            this._on ( 'click', this._handler_click );
+
+            this._on ( true, 'change', this._handler_change );
 
         },
 
         /* CLICK */
-
-        _bind_click: function () {
-
-            this._on ( 'click', this._handler_click );
-
-        },
 
         _handler_click: function ( event ) {
 
@@ -3100,12 +3106,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* CHANGE */
-
-        _bind_change: function () {
-
-            this._on ( true, 'change', this._handler_change );
-
-        },
 
         _handler_change: function () {
 
@@ -3141,6 +3141,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* DROPDOWN */
 
+//TODO: add dropdown-closer
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -3164,7 +3166,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.id = this.$element.attr ( 'id' );
             this.$top_tip = this.$element.find ( '.top-tip' );
@@ -3177,25 +3179,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.opened = false;
 
-            this._bind_trigger_click ();
-            this._bind_actionable_click ();
-//          this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
-
         },
 
-        /* TRIGGER CLICK */
-
-        _bind_trigger_click: function () {
+        _events: function () {
 
             this._on ( this.$triggers, 'click', this.toggle );
 
-        },
-
-        /* ACTIONABLE CLICK */
-
-        _bind_actionable_click: function () {
-
             this._on ( this.$actionables, 'click', this.close );
+
+//          this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
         },
 
@@ -3600,9 +3592,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$closers = this.$element.find ( '.modal-closer' );
+
+        },
+
+        _events: function () {
 
             this._on ( this.$closers, 'click', this.close );
 
@@ -3662,7 +3658,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         $('.modal').modal ();
 
-        $('[data-modal-trigger]').on ( 'click', function () {
+        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe so something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically
 
             $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
 
@@ -3697,7 +3693,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.id = this.$element.attr ( 'id' );
             this.$wrp = this.$element.parent ();
@@ -3893,7 +3889,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.timer = false;
 
@@ -4143,10 +4139,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$highlighteds = this.$element.find ( '.highlighted' );
             this.$stripes = this.$element.find ( '.stripes' );
+
+        },
+
+        _init: function () {
 
             if ( this.initializationType !== 'element' ) {
 
@@ -4276,7 +4276,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
             this.name = this.$input.attr ( 'name' );
@@ -4284,7 +4284,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
             this.$other_radios = this.$other_inputs.parent ();
 
+        },
+
+        _init: function () {
+
             this.$element.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
+
+        },
+
+        _events: function () {
 
             this._on ( 'click', this.select );
 
@@ -4340,6 +4348,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
+//TODO: add select-closer
 
 ;(function ( $, window, document, undefined ) {
 
@@ -4379,7 +4388,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.id = this.$element.data ( 'select' );
             this.$select = this.$element.find ( 'select' );
@@ -4390,6 +4399,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$dropdown = false;
             this.$dropdown_container = false;
             this.$buttons = false;
+
+        },
+
+        _init: function () {
 
             this._update_placeholder ();
 
@@ -4404,7 +4417,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._bind_change ();
+        },
+
+        _events: function () {
+
+            this._on ( this.$select, 'change', function () {
+                this.update ();
+                this.options.callbacks.change ();
+            });
 
         },
 
@@ -4419,17 +4439,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _handler_button_click: function ( event, button ) {
 
             this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
-
-        },
-
-        /* CHANGE */
-
-        _bind_change: function () {
-
-            this._on ( this.$select, 'change', function () {
-                this.update ();
-                this.options.callbacks.change ();
-            });
 
         },
 
@@ -4580,7 +4589,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$slider = this.$element.find ( '.slider' );
             this.$min_btn = this.$slider.find ( '.min' );
@@ -4598,15 +4607,29 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.start_pos = false;
             this.current_move = false;
 
+        },
+
+        _init: function () {
+
             this.set_value ( this.options.value, true );
 
-            this._bind_change ();
-            this._bind_resize ();
-            this._bind_arrows ();
-            this._bind_min_click ();
-            this._bind_max_click ();
-            this._bind_drag ();
-            this._bind_click ();
+        },
+
+        _events: function () {
+
+            this._on ( true, this.$input, 'change', this._handler_change );
+
+            this._on ( $window, 'resize', this._handler_resize );
+
+            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
+            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
+
+            this._on ( this.$min_btn, 'click', this.decrease );
+            this._on ( this.$max_btn, 'click', this.increase );
+
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+
+            this._on ( this.$unhighlighted, 'click', this._handler_click );
 
         },
 
@@ -4643,12 +4666,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CHANGE */
 
-        _bind_change: function () {
-
-            this._on ( true, this.$input, 'change', this._handler_change );
-
-        },
-
         _handler_change: function () {
 
             this.set_value ( this.$input.val () );
@@ -4656,12 +4673,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* RESIZE */
-
-        _bind_resize: function () {
-
-            this._on ( $window, 'resize', this._handler_resize );
-
-        },
 
         _handler_resize: function ( event ) {
 
@@ -4672,13 +4683,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* LEFT / RIGHT ARROWS */
-
-        _bind_arrows: function () {
-
-            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
-            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
-
-        },
 
         _handler_arrows_in: function () {
 
@@ -4706,27 +4710,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        /* MIN / MAX CLICK */
-
-        _bind_min_click: function () {
-
-            this._on ( this.$min_btn, 'click', this.decrease );
-
-        },
-
-        _bind_max_click: function () {
-
-            this._on ( this.$max_btn, 'click', this.increase );
-
-        },
-
         /* DRAG */
-
-        _bind_drag: function () {
-
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
-
-        },
 
         _handler_drag_start: function ( event ) {
 
@@ -4772,12 +4756,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* CLICK */
-
-        _bind_click: function () {
-
-            this._on ( this.$unhighlighted, 'click', this._handler_click );
-
-        },
 
         _handler_click: function ( event ) {
 
@@ -4910,17 +4888,25 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
             this.$label = this.$element.find ( '.button-center' );
             this.$decrease_btn = this.$element.find ( '.decrease' );
             this.$increase_btn = this.$element.find ( '.increase' );
 
-            this._bind_change ();
-            this._bind_arrows ();
-            this._bind_minus_click ();
-            this._bind_plus_click ();
+        },
+
+        _events: function () {
+
+            this._on ( true, this.$input, 'change', this._handler_change );
+
+            this._on ( 'mouseenter', this._handler_arrows_in );
+            this._on ( 'mouseleave', this._handler_arrows_out );
+
+            this._on ( this.$decrease_btn, 'click', this.decrease );
+
+            this._on ( this.$increase_btn, 'click', this.increase );
 
         },
 
@@ -4934,12 +4920,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CHANGE */
 
-        _bind_change: function () {
-
-            this._on ( true, this.$input, 'change', this._handler_change );
-
-        },
-
         _handler_change: function () {
 
             this.set_value ( this.$input.val () );
@@ -4947,13 +4927,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* LEFT / RIGHT ARROWS */
-
-        _bind_arrows: function () {
-
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
-
-        },
 
         _handler_arrows_in: function ( event ) {
 
@@ -4978,20 +4951,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this.increase ();
 
             }
-
-        },
-
-        /* MINUS / PLUS CLICK */
-
-        _bind_minus_click: function () {
-
-            this._on ( this.$decrease_btn, 'click', this.decrease );
-
-        },
-
-        _bind_plus_click: function () {
-
-            this._on ( this.$increase_btn, 'click', this.increase );
 
         },
 
@@ -5096,7 +5055,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
             this.$bar = this.$element.find ( '.bar' );
@@ -5110,12 +5069,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.bar_width = false,
             this.start_percentage = false;
 
+        },
+
+        _init: function () {
+
             this._set_check ( this.checked, true );
 
-            this._bind_change ();
-            this._bind_arrows ();
-            this._bind_drag ();
-            this._bind_click ();
+        },
+
+        _events: function () {
+
+            this._on ( true, this.$input, 'change', this._handler_change );
+
+            this._on ( 'mouseenter', this._handler_arrows_in );
+            this._on ( 'mouseleave', this._handler_arrows_out );
+
+            this._on ( 'click', this._handler_click );
+
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
 
         },
 
@@ -5123,7 +5094,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_change: function () {
 
-            this._on ( true, this.$input, 'change', this._handler_change );
+
 
         },
 
@@ -5143,8 +5114,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_arrows: function () {
 
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
+
+
 
         },
 
@@ -5190,7 +5161,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_click: function () {
 
-            this._on ( 'click', this._handler_click );
+
 
         },
 
@@ -5211,7 +5182,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _bind_drag: function () {
 
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+
 
         },
 
@@ -5362,7 +5333,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$buttons_bar = this.$element.find ( '.tabs-buttons' );
             this.$buttons = this.$element.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
@@ -5376,7 +5347,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.prev_index = 0;
             this.current_index = this.$buttons.index ( $current_button );
 
+        },
+
+        _init: function () {
+
             this.select ( this.current_index, true );
+
+        },
+
+        _events: function () {
 
             this._on ( this.$buttons, 'click', function ( event, node ) {
 
@@ -5389,6 +5368,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this._on ( $window, 'resize', this._positionate_indicator );
 
         },
+
+        /* PRIVATE */
 
         _positionate_indicator: function () {
 
@@ -5498,12 +5479,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             var $inputs = this.$element.find ( 'input' );
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
+
+        },
+
+        _init: function () {
 
             this._sanitize_tags_str ();
 
@@ -5513,10 +5498,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.options.tags.$nodes = this.$element.find ( '.tag' );
 
-            this._bind_keypress ();
-            this._bind_paste ();
-            this._bind_click_on_empty ();
-            this._bind_click_on_close ();
+        },
+
+        _events: function () {
+
+            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
+
+            this._on ( this.$partial, 'keydown', function ( event ) {
+
+                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
+
+                    this._handler_keypress ( event );
+
+                }
+
+            }); //INFO: For the others
+
+            this._on ( this.$partial, 'paste', this._handler_paste );
+
+            this._on ( 'click', this._handler_click_on_empty );
+
+            this._on ( 'click', this._handler_click_on_close );
 
         },
 
@@ -5616,22 +5618,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* KEYPRESS */
 
-        _bind_keypress: function () {
-
-            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
-
-            this._on ( this.$partial, 'keydown', function ( event ) {
-
-                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
-
-                    this._handler_keypress ( event );
-
-                }
-
-            }); //INFO: For the others
-
-        },
-
         _handler_keypress: function ( event ) {
 
             var prev_value = this.$partial.val ();
@@ -5688,12 +5674,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* PASTE */
 
-        _bind_paste: function () {
-
-            this._on ( this.$partial, 'paste', this._handler_paste );
-
-        },
-
         _handler_paste: function ( event ) {
 
             this._delay ( function () {
@@ -5714,12 +5694,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CLICK ON CLOSE */
 
-        _bind_click_on_close: function () {
-
-            this._on ( 'click', this._handler_click_on_close );
-
-        },
-
         _handler_click_on_close: function ( event ) {
 
             var $target = $(event.target);
@@ -5735,12 +5709,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* CLICK ON EMPTY */
-
-        _bind_click_on_empty: function () {
-
-            this._on ( 'click', this._handler_click_on_empty );
-
-        },
 
         _handler_click_on_empty: function ( event ) {
 
@@ -5928,9 +5896,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.options.timestamp = this.$element.data ( 'timestamp' ) || this.options.timestamp;
+
+        },
+
+        _init: function () {
 
             this._update_loop ( 0 );
 

@@ -21,9 +21,13 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.options.timestamp = this.$element.data ( 'timestamp' ) || this.options.timestamp;
+
+        },
+
+        _init: function () {
 
             this._update_loop ( 0 );
 

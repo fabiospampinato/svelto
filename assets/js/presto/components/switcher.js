@@ -30,7 +30,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
             this.$bar = this.$element.find ( '.bar' );
@@ -44,12 +44,24 @@
             this.bar_width = false,
             this.start_percentage = false;
 
+        },
+
+        _init: function () {
+
             this._set_check ( this.checked, true );
 
-            this._bind_change ();
-            this._bind_arrows ();
-            this._bind_drag ();
-            this._bind_click ();
+        },
+
+        _events: function () {
+
+            this._on ( true, this.$input, 'change', this._handler_change );
+
+            this._on ( 'mouseenter', this._handler_arrows_in );
+            this._on ( 'mouseleave', this._handler_arrows_out );
+
+            this._on ( 'click', this._handler_click );
+
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
 
         },
 
@@ -57,7 +69,7 @@
 
         _bind_change: function () {
 
-            this._on ( true, this.$input, 'change', this._handler_change );
+
 
         },
 
@@ -77,8 +89,8 @@
 
         _bind_arrows: function () {
 
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
+
+
 
         },
 
@@ -124,7 +136,7 @@
 
         _bind_click: function () {
 
-            this._on ( 'click', this._handler_click );
+
 
         },
 
@@ -145,7 +157,7 @@
 
         _bind_drag: function () {
 
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+
 
         },
 

@@ -100,14 +100,20 @@
 
             this._trigger ( 'create', this._getCreateEventData () );
 
+            this._variables ();
+
             this._init ();
+
+            this._events ();
 
         },
 
         _getCreateOptions: $.noop,
         _getCreateEventData: $.noop,
         _create: $.noop,
+        _variables: $.noop,
         _init: $.noop,
+        _events: $.noop,
 
         destroy: function () {
 

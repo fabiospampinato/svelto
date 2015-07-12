@@ -32,7 +32,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$headers = this.$element.find ( 'thead th' );
             this.$sortables = this.$headers.filter ( '[data-sort]' );
@@ -44,16 +44,9 @@
             this.current_index = false; // `$headers` index, not `$sortables` index
             this.current_direction = false;;
 
-            this._initial_sort ();
-
-            this._bind_change ();
-            this._bind_click ();
-
         },
 
-        /* PRIVATE */
-
-        _initial_sort: function () {
+        _init: function () {
 
             var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
 
@@ -65,13 +58,15 @@
 
         },
 
-        /* CHANGE */
-
-        _bind_change: function () {
+        _events: function () {
 
             this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
 
+            this._on ( this.$sortables, 'click', this._handler_click );
+
         },
+
+        /* CHANGE */
 
         _handler_change: function () {
 
@@ -84,12 +79,6 @@
         },
 
         /* CLICK */
-
-        _bind_click: function () {
-
-            this._on ( this.$sortables, 'click', this._handler_click );
-
-        },
 
         _handler_click: function ( event ) {
 

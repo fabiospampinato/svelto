@@ -22,9 +22,13 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
+
+        },
+
+        _init: function () {
 
             if ( this.$input.prop ( 'checked' ) ) {
 
@@ -36,19 +40,17 @@
 
             }
 
-            this._bind_click ();
+        },
 
-            this._bind_change ();
+        _events: function () {
+
+            this._on ( 'click', this._handler_click );
+
+            this._on ( true, 'change', this._handler_change );
 
         },
 
         /* CLICK */
-
-        _bind_click: function () {
-
-            this._on ( 'click', this._handler_click );
-
-        },
 
         _handler_click: function ( event ) {
 
@@ -57,12 +59,6 @@
         },
 
         /* CHANGE */
-
-        _bind_change: function () {
-
-            this._on ( true, 'change', this._handler_change );
-
-        },
 
         _handler_change: function () {
 

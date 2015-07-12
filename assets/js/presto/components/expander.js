@@ -20,22 +20,22 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$header = this.$element.children ( '.header' );
             this.$content = this.$element.children ( '.content' );
 
             this.opened = this.$element.hasClass ( 'opened' );
 
-            if ( !this.opened ) this.close ( true );
+        },
 
-            this._bind_click ();
+        _init: function () {
+
+            if ( !this.opened ) this.close ( true );
 
         },
 
-        /* PRIVATE */
-
-        _bind_click: function () {
+        _events: function () {
 
             this._on ( this.$header, 'click', this.toggle );
 

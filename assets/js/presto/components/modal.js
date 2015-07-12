@@ -20,9 +20,13 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$closers = this.$element.find ( '.modal-closer' );
+
+        },
+
+        _events: function () {
 
             this._on ( this.$closers, 'click', this.close );
 
@@ -82,7 +86,7 @@
 
         $('.modal').modal ();
 
-        $('[data-modal-trigger]').on ( 'click', function () {
+        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe so something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically
 
             $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
 

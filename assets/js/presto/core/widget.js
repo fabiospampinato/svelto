@@ -249,15 +249,9 @@
 
                     if ( instance ) {
 
-                        /* INIT */
-
                         instance.option ( options || {} );
 
-                        instance._init ();
-
                     } else {
-
-                        /* INSTANCIATING */
 
                         $.data ( this, fullName, new object ( options, this ) );
 

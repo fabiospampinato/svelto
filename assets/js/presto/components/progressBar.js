@@ -95,10 +95,14 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$highlighteds = this.$element.find ( '.highlighted' );
             this.$stripes = this.$element.find ( '.stripes' );
+
+        },
+
+        _init: function () {
 
             if ( this.initializationType !== 'element' ) {
 

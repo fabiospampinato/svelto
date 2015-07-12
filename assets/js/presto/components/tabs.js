@@ -11,7 +11,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$buttons_bar = this.$element.find ( '.tabs-buttons' );
             this.$buttons = this.$element.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
@@ -25,7 +25,15 @@
             this.prev_index = 0;
             this.current_index = this.$buttons.index ( $current_button );
 
+        },
+
+        _init: function () {
+
             this.select ( this.current_index, true );
+
+        },
+
+        _events: function () {
 
             this._on ( this.$buttons, 'click', function ( event, node ) {
 
@@ -38,6 +46,8 @@
             this._on ( $window, 'resize', this._positionate_indicator );
 
         },
+
+        /* PRIVATE */
 
         _positionate_indicator: function () {
 

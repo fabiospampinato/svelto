@@ -9,10 +9,14 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$expanders = this.$element.children ( '.expander' );
             this.expanders_inst = [];
+
+        },
+
+        _init: function () {
 
             for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
@@ -20,17 +24,15 @@
 
             }
 
-            this._bind_open ();
-
         },
 
-        /* OPEN */
-
-        _bind_open: function () {
+        _events: function () {
 
             this._on ( this.$expanders, 'expander:open', this._handler_open );
 
         },
+
+        /* OPEN */
 
         _handler_open: function ( event, data, node ) {
 

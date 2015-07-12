@@ -41,24 +41,24 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$rows = this._get_rows ();
 
             this.$start_row = false;
             this.$end_row = false;
 
-            this._reset_prevs ();
+        },
 
-            this._bind_keys ();
-            this._bind_mouse ();
-            this._bind_others ();
+        _init: function () {
+
+            this._reset_prevs ();
 
         },
 
-        /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
+        _events: function () {
 
-        _bind_keys: function () {
+            /* KEYS */
 
             this._on ( 'mouseenter', function () {
 
@@ -72,7 +72,21 @@
 
             });
 
+            /* MOUSE */
+
+            this._on ( this.$rows, 'mousedown', this._handler_mousedown );
+
+            /* OTHERS */
+
+            //FIXME: support tableHelper and sortable
+
+            this._on ( 'change sort', this._handler_change_sort );
+
+            this._on ( 'mousedown mouseup', this._handler_clear_selection );
+
         },
+
+        /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
         _handler_keys: function ( event ) {
 
@@ -101,12 +115,6 @@
         },
 
         /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
-
-        _bind_mouse: function () {
-
-            this._on ( this.$rows, 'mousedown', this._handler_mousedown );
-
-        },
 
         _handler_mousedown: function ( event ) {
 
@@ -249,16 +257,6 @@
         },
 
         /* OTHER EVENTS */
-
-        _bind_others: function () {
-
-            //FIXME: support tableHelper and sortable
-
-            this._on ( 'change sort', this._handler_change_sort );
-
-            this._on ( 'mousedown mouseup', this._handler_clear_selection );
-
-        },
 
         _handler_change_sort: function () {
 

@@ -25,7 +25,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$slider = this.$element.find ( '.slider' );
             this.$min_btn = this.$slider.find ( '.min' );
@@ -43,15 +43,29 @@
             this.start_pos = false;
             this.current_move = false;
 
+        },
+
+        _init: function () {
+
             this.set_value ( this.options.value, true );
 
-            this._bind_change ();
-            this._bind_resize ();
-            this._bind_arrows ();
-            this._bind_min_click ();
-            this._bind_max_click ();
-            this._bind_drag ();
-            this._bind_click ();
+        },
+
+        _events: function () {
+
+            this._on ( true, this.$input, 'change', this._handler_change );
+
+            this._on ( $window, 'resize', this._handler_resize );
+
+            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
+            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
+
+            this._on ( this.$min_btn, 'click', this.decrease );
+            this._on ( this.$max_btn, 'click', this.increase );
+
+            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+
+            this._on ( this.$unhighlighted, 'click', this._handler_click );
 
         },
 
@@ -88,12 +102,6 @@
 
         /* CHANGE */
 
-        _bind_change: function () {
-
-            this._on ( true, this.$input, 'change', this._handler_change );
-
-        },
-
         _handler_change: function () {
 
             this.set_value ( this.$input.val () );
@@ -101,12 +109,6 @@
         },
 
         /* RESIZE */
-
-        _bind_resize: function () {
-
-            this._on ( $window, 'resize', this._handler_resize );
-
-        },
 
         _handler_resize: function ( event ) {
 
@@ -117,13 +119,6 @@
         },
 
         /* LEFT / RIGHT ARROWS */
-
-        _bind_arrows: function () {
-
-            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
-            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
-
-        },
 
         _handler_arrows_in: function () {
 
@@ -151,27 +146,7 @@
 
         },
 
-        /* MIN / MAX CLICK */
-
-        _bind_min_click: function () {
-
-            this._on ( this.$min_btn, 'click', this.decrease );
-
-        },
-
-        _bind_max_click: function () {
-
-            this._on ( this.$max_btn, 'click', this.increase );
-
-        },
-
         /* DRAG */
-
-        _bind_drag: function () {
-
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
-
-        },
 
         _handler_drag_start: function ( event ) {
 
@@ -217,12 +192,6 @@
         },
 
         /* CLICK */
-
-        _bind_click: function () {
-
-            this._on ( this.$unhighlighted, 'click', this._handler_click );
-
-        },
 
         _handler_click: function ( event ) {
 

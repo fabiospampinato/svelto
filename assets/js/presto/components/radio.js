@@ -23,7 +23,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
             this.name = this.$input.attr ( 'name' );
@@ -31,7 +31,15 @@
             this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
             this.$other_radios = this.$other_inputs.parent ();
 
+        },
+
+        _init: function () {
+
             this.$element.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
+
+        },
+
+        _events: function () {
 
             this._on ( 'click', this.select );
 

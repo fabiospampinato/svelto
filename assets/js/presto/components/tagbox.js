@@ -51,12 +51,16 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             var $inputs = this.$element.find ( 'input' );
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
+
+        },
+
+        _init: function () {
 
             this._sanitize_tags_str ();
 
@@ -66,10 +70,27 @@
 
             this.options.tags.$nodes = this.$element.find ( '.tag' );
 
-            this._bind_keypress ();
-            this._bind_paste ();
-            this._bind_click_on_empty ();
-            this._bind_click_on_close ();
+        },
+
+        _events: function () {
+
+            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
+
+            this._on ( this.$partial, 'keydown', function ( event ) {
+
+                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
+
+                    this._handler_keypress ( event );
+
+                }
+
+            }); //INFO: For the others
+
+            this._on ( this.$partial, 'paste', this._handler_paste );
+
+            this._on ( 'click', this._handler_click_on_empty );
+
+            this._on ( 'click', this._handler_click_on_close );
 
         },
 
@@ -169,22 +190,6 @@
 
         /* KEYPRESS */
 
-        _bind_keypress: function () {
-
-            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
-
-            this._on ( this.$partial, 'keydown', function ( event ) {
-
-                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
-
-                    this._handler_keypress ( event );
-
-                }
-
-            }); //INFO: For the others
-
-        },
-
         _handler_keypress: function ( event ) {
 
             var prev_value = this.$partial.val ();
@@ -241,12 +246,6 @@
 
         /* PASTE */
 
-        _bind_paste: function () {
-
-            this._on ( this.$partial, 'paste', this._handler_paste );
-
-        },
-
         _handler_paste: function ( event ) {
 
             this._delay ( function () {
@@ -267,12 +266,6 @@
 
         /* CLICK ON CLOSE */
 
-        _bind_click_on_close: function () {
-
-            this._on ( 'click', this._handler_click_on_close );
-
-        },
-
         _handler_click_on_close: function ( event ) {
 
             var $target = $(event.target);
@@ -288,12 +281,6 @@
         },
 
         /* CLICK ON EMPTY */
-
-        _bind_click_on_empty: function () {
-
-            this._on ( 'click', this._handler_click_on_empty );
-
-        },
 
         _handler_click_on_empty: function ( event ) {
 

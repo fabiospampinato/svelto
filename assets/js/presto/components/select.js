@@ -3,6 +3,7 @@
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
+//TODO: add select-closer
 
 ;(function ( $, window, document, undefined ) {
 
@@ -42,7 +43,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.id = this.$element.data ( 'select' );
             this.$select = this.$element.find ( 'select' );
@@ -53,6 +54,10 @@
             this.$dropdown = false;
             this.$dropdown_container = false;
             this.$buttons = false;
+
+        },
+
+        _init: function () {
 
             this._update_placeholder ();
 
@@ -67,7 +72,14 @@
 
             }
 
-            this._bind_change ();
+        },
+
+        _events: function () {
+
+            this._on ( this.$select, 'change', function () {
+                this.update ();
+                this.options.callbacks.change ();
+            });
 
         },
 
@@ -82,17 +94,6 @@
         _handler_button_click: function ( event, button ) {
 
             this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
-
-        },
-
-        /* CHANGE */
-
-        _bind_change: function () {
-
-            this._on ( this.$select, 'change', function () {
-                this.update ();
-                this.options.callbacks.change ();
-            });
 
         },
 

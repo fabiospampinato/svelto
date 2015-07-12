@@ -25,17 +25,25 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$input = this.$element.find ( 'input' );
             this.$label = this.$element.find ( '.button-center' );
             this.$decrease_btn = this.$element.find ( '.decrease' );
             this.$increase_btn = this.$element.find ( '.increase' );
 
-            this._bind_change ();
-            this._bind_arrows ();
-            this._bind_minus_click ();
-            this._bind_plus_click ();
+        },
+
+        _events: function () {
+
+            this._on ( true, this.$input, 'change', this._handler_change );
+
+            this._on ( 'mouseenter', this._handler_arrows_in );
+            this._on ( 'mouseleave', this._handler_arrows_out );
+
+            this._on ( this.$decrease_btn, 'click', this.decrease );
+
+            this._on ( this.$increase_btn, 'click', this.increase );
 
         },
 
@@ -49,12 +57,6 @@
 
         /* CHANGE */
 
-        _bind_change: function () {
-
-            this._on ( true, this.$input, 'change', this._handler_change );
-
-        },
-
         _handler_change: function () {
 
             this.set_value ( this.$input.val () );
@@ -62,13 +64,6 @@
         },
 
         /* LEFT / RIGHT ARROWS */
-
-        _bind_arrows: function () {
-
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
-
-        },
 
         _handler_arrows_in: function ( event ) {
 
@@ -93,20 +88,6 @@
                 this.increase ();
 
             }
-
-        },
-
-        /* MINUS / PLUS CLICK */
-
-        _bind_minus_click: function () {
-
-            this._on ( this.$decrease_btn, 'click', this.decrease );
-
-        },
-
-        _bind_plus_click: function () {
-
-            this._on ( this.$increase_btn, 'click', this.increase );
 
         },
 

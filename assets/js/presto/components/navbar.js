@@ -22,7 +22,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.id = this.$element.attr ( 'id' );
             this.$wrp = this.$element.parent ();

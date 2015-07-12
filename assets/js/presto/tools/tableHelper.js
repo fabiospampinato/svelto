@@ -11,7 +11,7 @@
 
         /* SPECIAL */
 
-        _create: function () {
+        _variables: function () {
 
             this.$thead = this.$element.find ( 'thead' ),
             this.$tfoot = this.$element.find ( 'tfoot' ),
@@ -19,6 +19,10 @@
             this.$headers = this.$thead.find ( 'th' ),
             this.$empty_row = this.$tbody.find ( 'tr.empty' ),
             this.columns_nr = this.$headers.length;
+
+        },
+
+        _init: function () {
 
             this._check_empty ();
 
