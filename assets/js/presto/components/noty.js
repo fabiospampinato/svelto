@@ -51,7 +51,7 @@
 
         templates: {
             base: '<div class="noty_wrp hidden">' +
-                      '<div class="noty container transparentize {%=o.type%} {%=o.color%} {%=o.css%}">' +
+                      '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
                           '<div class="infobar-wrp transparent">' +
                               '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
                               '<div class="infobar-center">' +
@@ -95,7 +95,7 @@
             /*
                    : [{
                           color: 'white',
-                          size: 'tiny',
+                          size: 'xsmall',
                           css: '',
                           text: '',
                           onClick: $.noop

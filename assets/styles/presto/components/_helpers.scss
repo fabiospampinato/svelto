@@ -2,8 +2,8 @@
 /* BLUR */
 
 .blurred {
-    filter: url('/assets/images/presto/blur.svg#blur');
-    filter: blur(3px);
+    filter: url('/assets/images/presto/blur.svg#blur') !important;
+    filter: blur(3px) !important;
 }
 
 /* BORDER */
@@ -21,7 +21,7 @@
 }
 
 .sharp {
-    border-radius: 0px !important;
+    border-radius: 0 !important;
 }
 
 /* DISPLAY */
@@ -37,49 +37,49 @@
 /* VISIBILITY */
 
 .visible {
-    visibility: visible;
+    visibility: visible !important;
 }
 
 .invisible {
-    visibility: hidden;
+    visibility: hidden !important;
 }
 
 /* FLOAT */
 
 .left {
-    float: left;
+    float: left !important;
 }
 
 .right {
-    float: right;
+    float: right !important;
 }
 
 /* TEXT ALIGNMENT */
 
 .text-left {
-    text-align: left;
+    text-align: left !important;
 }
 
 .text-center {
-    text-align: center;
+    text-align: center !important;
 }
 
 .text-right {
-    text-align: right;
+    text-align: right !important;
 }
 
 /* TEXT TRANSFORMATION */
 
 .text-lowercase {
-    text-transform: lowercase;
+    text-transform: lowercase !important;
 }
 
 .text-uppercase {
-    text-transform: uppercase;
+    text-transform: uppercase !important;
 }
 
 .text-capitalize {
-    text-transform: capitalize;
+    text-transform: capitalize !important;
 }
 
 /* PADDING */
@@ -129,39 +129,39 @@
 /* OVERFLOW */
 
 .overflow-hidden {
-    overflow: hidden;
+    overflow: hidden !important;
 }
 
 .overflow-visible {
-    overflow: visible;
+    overflow: visible !important;
 }
 
 /* FLIP */
 
 .flipX {
-    transform: rotateY(180deg);
+    transform: rotateY(180deg) !important;
 }
 
 .flipY {
-    transform: rotateX(180deg);
+    transform: rotateX(180deg) !important;
 }
 
 .flip {
-    transform: rotateY(180deg) rotateX(180deg);
+    transform: rotateY(180deg) rotateX(180deg) !important;
 }
 
 /* ROTATE */
 
 .rotate-left {
-    transform: rotate(-90deg);
+    transform: rotate(-90deg) !important;
 }
 
 .rotate-right {
-    transform: rotate(90deg);
+    transform: rotate(90deg) !important;
 }
 
-.rotating {
-    animation: rotate 0.9s linear infinite;
+.rotating { //TODO: Maybe move to an _helpers_animations
+    animation: rotate 0.9s linear infinite !important;
 }
 
 /* OTHER */
@@ -173,12 +173,12 @@
 }
 
 .spacer {
-    flex-grow: 1000;
+    flex-grow: 1000 !important;
 }
 
 /* GROW */
 
-@for $nr from 1 through 10 {
+@for $nr from 1 through 12 {
 
     .grow-#{$nr} {
         flex-grow: #{$nr} !important;
@@ -188,87 +188,10 @@
 
 /* SHRINK */
 
-@for $nr from 1 through 10 {
+@for $nr from 1 through 12 {
 
     .shrink-#{$nr} {
         flex-shrink: #{$nr} !important;
     }
 
-}
-
-/* WIDTH / VW / VH PERCENTAGES */
-
-@for $nr from 1 through 100 {
-
-    .w#{$nr}-100 {
-        width: #{$nr}% !important;
-    }
-
-    .vw#{$nr}-100 {
-        width: #{$nr}vw !important;
-    }
-
-    .vh#{$nr}-100 {
-        height: #{$nr}vh !important;
-    }
-
-}
-
-/* STANDARD WIDTHS */
-
-//TODO: add demo, check the values
-
-.width-xs {
-    width: 200px;
-}
-
-.width-sm {
-    width: 200px * $GOLDEN-RATIO;
-}
-
-.width-md {
-    width: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO;
-}
-
-.width-lg {
-    width: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO;
-}
-
-.width-xl {
-    width: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO;
-}
-
-/* STANDARD HEIGHTS */
-
-//TODO: add demo, check the values
-
-.height-xs {
-    height: 120px;
-}
-
-.height-sm {
-    height: 120px * $GOLDEN-RATIO;
-}
-
-.height-md {
-    height: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO;
-}
-
-.height-lg {
-    height: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO  * $GOLDEN-RATIO;
-}
-
-.height-xl {
-    height: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO  * $GOLDEN-RATIO  * $GOLDEN-RATIO;
-}
-
-/* KEYFRAMES */
-
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
 }

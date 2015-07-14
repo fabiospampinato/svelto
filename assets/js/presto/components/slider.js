@@ -40,8 +40,7 @@
             this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
             this.required_step_width = this.options.step * this.one_step_width;
 
-            this.start_pos = false;
-            this.current_move = false;
+            this.current_move = 0;
 
         },
 
@@ -63,7 +62,11 @@
             this._on ( this.$min_btn, 'click', this.decrease );
             this._on ( this.$max_btn, 'click', this.increase );
 
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+            this.$handler.draggable ({
+                start: this._handler_drag_start,
+                move: this._handler_drag_move,
+                context: this
+            });
 
             this._on ( this.$unhighlighted, 'click', this._handler_click );
 
@@ -148,46 +151,27 @@
 
         /* DRAG */
 
-        _handler_drag_start: function ( event ) {
+        _handler_drag_start: function () {
 
-            this.start_pos = $.eventXY ( event );
             this.current_move = 0;
-
-            $html.addClass ( 'dragging' );
-            this.$slider.addClass ( 'dragging' );
-
-            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
-        _handler_drag_move: function ( event ) {
+        _handler_drag_move: function ( event, trigger, XYs ) {
 
-            var end_pos = $.eventXY ( event ),
-                full_move = end_pos.X - this.start_pos.X,
-                delta_move = full_move - this.current_move;
+            var delta_move = XYs.delta.X - this.current_move;
 
             if ( Math.abs ( delta_move ) >= 1 ) {
 
                 var moved = this.navigate_distance ( delta_move );
 
-                if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
+                if ( moved !== false ) {
 
                     this.current_move += moved;
 
                 }
 
             }
-
-        },
-
-        _handler_drag_end: function ( event ) {
-
-            $html.removeClass ( 'dragging' );
-            this.$slider.removeClass ( 'dragging' );
-
-            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 

@@ -3,9 +3,7 @@
 
 input {
 
-    @include white ( true );
-    @include medium ();
-    box-shadow: $shadow-depth-1;
+    @include color ( 'white', true );
     border: none;
     border-radius: $border-radius-medium;
     font-family: $font-family;

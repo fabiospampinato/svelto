@@ -2,7 +2,7 @@
 /* GENERAL */
 
 .advertisement {
-    @include gray ( true );
+    @include color ( 'gray', true );
     margin-bottom: $layout-spacing;
     text-align: center;
 }

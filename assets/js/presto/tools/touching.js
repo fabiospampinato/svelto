@@ -1,7 +1,7 @@
 
 /* TOUCHING */
 
-//TODO: add support for lenear search, non binary
+//TODO: add support for linear search, non binary, or maybe a balanced left then right then left again search, so that if we guess wrong but we are close we still won't spend too much time
 
 ;(function ( $, window, document, undefined ) {
 
@@ -45,10 +45,17 @@
             //      Y: 0
             //  },
             $comparer: false, //INFO: Used for the overlapping search
+            $not: false,
             select: 'all'
         };
 
         $.extend ( options, custom_options );
+
+        /* SEARCHABLE */
+
+        var $searchable = options.$not ? this.not ( options.$not ) : this;
+
+        console.log("searchable: ",$searchable.nodes);
 
         /* COMPARER */
 
@@ -58,18 +65,16 @@
                 matches = [],
                 areas = [];
 
-            for ( var i = 0, l = this.length; i < l; i++ ) {
+            for ( var i = 0, l = $searchable.length; i < l; i++ ) {
 
-                var $ele = $(this.nodes[i]);
-
-                if ( $ele.get ( 0 ) === options.$comparer.get ( 0 ) ) continue;
+                var $ele = $searchable.eq ( i );
 
                 var c2 = get_coordinates ( $ele ),
                     overlap_area = get_overlapping_area ( c1, c2 );
 
                 if ( overlap_area > 0 ) {
 
-                    matches.push ( this.nodes[i] );
+                    matches.push ( $ele.get ( 0 ) );
                     areas.push ( overlap_area );
 
                 }
@@ -86,7 +91,7 @@
 
             var $touched = false;
 
-            this.btEach ( function () {
+            $searchable.btEach ( function () {
 
                 var $ele = $(this),
                     c = get_coordinates ( $ele );

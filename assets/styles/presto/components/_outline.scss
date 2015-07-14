@@ -36,52 +36,16 @@
 
     }
 
-    &.no-separators.outlined {
-
-        /* BUTTON */
-
-        & > .button.outlined {
-
-            box-shadow: $shadow-depth-1;
-
-            &:not(.inactive) {
-
-                &:active, &.active {
-                    @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
-                }
-
-            }
-
-        }
-
-        /* LABEL */
-
-        & > .label.outlined {
-            box-shadow: $shadow-depth-1;
-        }
-
-        /* INPUT / TEXTAREA */
-
-        & > input, & > textarea {
-
-            &.outlined {
-                box-shadow: $shadow-depth-1;
-            }
-
-        }
-
-    }
-
 }
 
 /* INFOBAR */
 
 .infobar-wrp.outlined {
+    @include z-depth ( 1 );
     border-width: $container-border-width;
     border-style: solid;
     border-radius: $border-radius-medium;
     padding: $layout-spacing;
-    box-shadow: $shadow-depth-1;
 }
 
 /* BUTTON */
@@ -90,15 +54,7 @@
 
     &.outlined {
 
-        @include multi-shadow ( $shadow-depth-1, $outline-shadow );
-
-        &:not(.inactive) {
-
-            &:active, &.active {
-                @include multi-shadow ( $shadow-depth-1, $shadow-inset-1, $outline-shadow );
-            }
-
-        }
+        @include z-depth ( 1, $outline-shadow );
 
         & > .button-left, & > .button-right {
             padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);
@@ -136,7 +92,7 @@
 
     &.outlined {
 
-        @include multi-shadow ( $shadow-depth-1, $outline-shadow );
+        @include z-depth ( 1, $outline-shadow );
 
         & > .button-left, & > .button-right {
             padding: calc(#{$button-compact-vertical-padding} - 1px) calc(#{$button-compact-horizontal-padding} - 1px);
@@ -173,7 +129,7 @@
 input, textarea {
 
     &.outlined {
-        @include multi-shadow ( $shadow-depth-1, $outline-shadow );
+        @include z-depth ( 1, $outline-shadow );
     }
 
 }

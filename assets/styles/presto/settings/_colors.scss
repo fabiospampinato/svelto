@@ -19,6 +19,7 @@ $color-red: #f64242 !default;
 $color-pink: #fb2ca0 !default;
 $color-teal: #00bbb3 !default;
 $color-brown: #a5673f !default;
+$color-transparent: rgba(0, 0, 0, 0) !default;
 
 /* PRIMARY */
 
@@ -200,6 +201,16 @@ $color-brown-text-hover: $color-brown-text !default;
 $color-brown-border: darken( $color-brown-bg, 20 ) !default;
 $color-brown-accent: $color-orange !default;
 
+/* TRANSPARENT */
+
+$color-transparent-bg: $color-transparent !default;
+$color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
+$color-transparent-bg-active: darken( $color-transparent-bg, 4 ) !default;
+$color-transparent-text: #2f2f2f !default;
+$color-transparent-text-hover: $color-transparent-text !default;
+$color-transparent-border: darken( $color-transparent-bg, 20 ) !default;
+$color-transparent-accent: $color-primary !default;
+
 /* COLORS */
 
 $colors: (
@@ -220,16 +231,9 @@ $colors: (
     "red" : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-text, $color-red-text-hover, $color-red-border, $color-red-accent ),
     "pink" : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-text, $color-pink-text-hover, $color-pink-border, $color-pink-accent ),
     "teal" : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-text, $color-teal-text-hover, $color-teal-border, $color-teal-accent ),
-    "brown" : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-text, $color-brown-text-hover, $color-brown-border, $color-brown-accent )
+    "brown" : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-text, $color-brown-text-hover, $color-brown-border, $color-brown-accent ),
+    "transparent" : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-text, $color-transparent-text-hover, $color-transparent-border, $color-transparent-accent )
 );
-
-/* TRANSPARENT */
-
-$color-transparent: rgba(0, 0, 0, 0) !default;
-$color-transparent-bg: rgba(0, 0, 0, 0) !default;
-$color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
-$color-transparent-bg-active: darken( $color-transparent-bg, 4 ) !default;
-$color-transparent-border: darken( $color-transparent-bg, 20 ) !default;
 
 /* DEFAULTS */
 
@@ -238,7 +242,5 @@ $color-default-bg: #e9eaed !default;
 $color-default-text: $color-white-text !default;
 $color-default-text-hover: $color-white-text-hover !default;
 
-$color-default-link: $color-white-text !default;
+$color-default-link: $color-white-text !default; //TODO: I think I should add a -link to all the other colors... and rename text-hover to link-hover
 $color-default-link-hover: $color-white-text-hover !default;
-
-$color-transparentize-amount: 0.1 !default;

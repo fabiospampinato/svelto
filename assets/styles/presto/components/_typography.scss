@@ -14,27 +14,27 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-    @include huge ();
+    @include size ( 'xxlarge' );
 }
 
 h2 {
-    @include big ();
+    @include size ( 'xlarge' );
 }
 
 h3 {
-    @include large ();
+    @include size ( 'large' );
 }
 
 h4 {
-    @include medium ();
+    @include size ( 'medium' );
 }
 
 h5 {
-    @include small ();
+    @include size ( 'small' );
 }
 
 h6 {
-    @include tiny ();
+    @include size ( 'xsmall' );
 }
 
 /* OTHER */

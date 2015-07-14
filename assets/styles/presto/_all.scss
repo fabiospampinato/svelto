@@ -10,13 +10,16 @@
 
 @import 'settings/colors';
 @import 'settings/gradients';
-@import 'settings/shadows';
 @import 'components/colors';
+
+@import 'settings/shadows';
+@import 'components/shadows';
 
 @import 'settings/sizes';
 @import 'components/sizes';
 
 @import 'settings/breakpoints';
+@import 'settings/helpers_dimensions';
 @import 'settings/layout';
 @import 'settings/typography';
 @import 'settings/elements';
@@ -45,7 +48,6 @@
 @import 'settings/grid';
 @import 'settings/header';
 @import 'settings/infobar';
-@import 'settings/highlight';
 @import 'settings/icons';
 @import 'settings/input';
 @import 'settings/loading';
@@ -90,9 +92,9 @@
 @import 'components/grid';
 @import 'components/header';
 @import 'components/infobar';
-@import 'components/highlight';
 @import 'components/icons';
 @import 'components/input';
+@import 'components/keyframes';
 @import 'components/loading';
 @import 'components/modal';
 @import 'components/multiple';
@@ -101,10 +103,10 @@
 @import 'components/outline';
 @import 'components/progressBar';
 @import 'components/radio';
+@import 'components/ripple';
 @import 'components/select';
 @import 'components/shapes';
 @import 'components/divider';
-@import 'components/shadows';
 @import 'components/slider';
 @import 'components/spinner';
 @import 'components/switcher';
@@ -118,4 +120,5 @@
 /* HELPERS */
 
 @import 'components/helpers';
+@import 'components/helpers_dimensions';
 @import 'components/helpers_responsive';

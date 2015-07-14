@@ -11,8 +11,7 @@ button {
 
 .button {
 
-    @include white ();
-    @include medium ();
+    @include color ( 'white' );
     display: inline-flex;
     justify-content: center;
     align-items: center;
@@ -20,7 +19,6 @@ button {
     border-radius: $border-radius-medium;
     padding: $button-vertical-padding $button-horizontal-padding;
     font-weight: bold;
-    box-shadow: $shadow-depth-1;
     position: relative;
     // outline: none !important; //FIXME: Is it needed?
     line-height: 1em;
@@ -48,10 +46,6 @@ button {
 
             &.actionable:not(.inactive):not(.active):not(.dragging):hover {
                 background-color: rgba(0, 0, 0, 0.06);
-            }
-
-            &:not(.inactive):active, &:not(.inactive).active {
-                box-shadow: $shadow-inset-1;
             }
 
         }
@@ -87,14 +81,6 @@ button {
 
     }
 
-    &.actionable:not(.inactive) {
-
-        &:active, &.active {
-            @include multi-shadow ( $shadow-depth-1, $shadow-inset-1 );
-        }
-
-    }
-
     &.compact {
 
         padding: $button-compact-vertical-padding $button-compact-horizontal-padding;
@@ -110,19 +96,12 @@ button {
     }
 
     &.floating {
-
         //TODO: add sub floating actions
-
+        @include z-depth ( 4 );
         margin-bottom: 0 !important;
         position: fixed;
         right: $layout-spacing * 3;
         bottom: $layout-spacing * 3;
-        box-shadow: $shadow-depth-4;
-
-        &.actionable:not(.inactive):not(.dragging):active, &.active {
-            @include multi-shadow ( $shadow-depth-5, $shadow-inset-1 );
-        }
-
     }
 
     .icon {

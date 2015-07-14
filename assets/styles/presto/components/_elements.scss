@@ -24,13 +24,12 @@ code, section, pre {
 }
 
 kbd {
-    @include white ( true );
+    @include color ( 'white', true );
     border-width: 1px;
     border-style: solid;
     border-radius: $border-radius-medium;
     margin: 0 ( $layout-spacing / 2 );
     padding: 2px 3px;
-    box-shadow: $shadow-depth-1;
     font-weight: bold;
     font-size: 14px;
 }
@@ -53,8 +52,7 @@ kbd {
     }
 
     & > .image-caption {
-        @include black ( true, true );
-        @include medium ();
+        @include color ( 'black', true, true );
         position: absolute;
         right: 0;
         bottom: 0;

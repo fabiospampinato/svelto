@@ -2,26 +2,43 @@
 /* FUNCTION */
 
 @function get_rem ( $distance ) {
-    @return 1rem + ( $size-delta-step * $distance );
+    @return 1rem + ( $size-step * $distance );
 }
 
-/* DELTA */
+/* STEP */
 
-$size-delta-step: 1 / 14 !default;
+$size-step: 1 / 14 !default;
 
 /* SIZES */
 
-//TODO: rename them to: xxxxs, xxxs, xxs, xs, sm, md, lg, xl, xxl, xxxl, xxxxl
-
-$size-nano: get_rem( -6 ) !default;
-$size-micro: get_rem( -5 ) !default;
-$size-mini: get_rem( -4 ) !default;
-$size-tiny: get_rem( -2 ) !default;
+$size-xxxxxsmall: get_rem( -7 ) !default;
+$size-xxxxsmall: get_rem( -6 ) !default;
+$size-xxxsmall: get_rem( -5 ) !default;
+$size-xxsmall: get_rem( -4 ) !default;
+$size-xsmall: get_rem( -2 ) !default;
 $size-small: get_rem( -1 ) !default;
 $size-medium: get_rem( 0 ) !default;
 $size-large: get_rem( 2 ) !default;
-$size-big: get_rem( 4 ) !default;
-$size-huge: get_rem( 6 ) !default;
-$size-massive: get_rem( 10 ) !default;
-$size-giant: get_rem( 16 ) !default;
-$size-enormous: get_rem( 24 ) !default;
+$size-xlarge: get_rem( 4 ) !default;
+$size-xxlarge: get_rem( 6 ) !default;
+$size-xxxlarge: get_rem( 10 ) !default;
+$size-xxxxlarge: get_rem( 16 ) !default;
+$size-xxxxxlarge: get_rem( 24 ) !default;
+
+/* SIZES */
+
+$sizes: (
+    'xxxxxsmall': $size-xxxxxsmall,
+    'xxxxsmall': $size-xxxxsmall,
+    'xxxsmall': $size-xxxsmall,
+    'xxsmall': $size-xxsmall,
+    'xsmall': $size-xsmall,
+    'small': $size-small,
+    'medium': $size-medium,
+    'large': $size-large,
+    'xlarge': $size-xlarge,
+    'xxlarge': $size-xxlarge,
+    'xxxlarge': $size-xxxlarge,
+    'xxxxlarge': $size-xxxxlarge,
+    'xxxxxlarge': $size-xxxxxlarge
+);

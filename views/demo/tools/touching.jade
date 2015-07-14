@@ -261,54 +261,34 @@ append body-end
 
         }
 
-        // Drag
+        // General drag
 
-        var $squares,
-            drag_options,
-            $drag_target,
-            drag_startXY;
+        var drag_options,
+            $squares,
+            $target;
 
-        function drag_start ( selector, options, event ) {
+        function drag_start ( options, event, target ) {
 
             drag_options = options;
 
-            $squares = $(selector + ' .square');
+            $target = $(target);
 
-            $squares.removeClass ( 'green' );
-
-            $drag_target = $(event.target);
-
-            if ( $drag_target.is ( 'span' ) ) {
-
-                $drag_target = $drag_target.parent ( '.square' );
-
-            } else if ( !$drag_target.is ( '.square' ) ) {
-
-                return;
-
-            }
-
-            drag_startXY = $.eventXY ( event );
-
-            $document.on ( 'mousemove touchmove', drag_move );
-            $document.on ( 'mouseup touchend', drag_end );
+            $squares = $target.parent ().find ( '.square' );
 
         }
 
-        function drag_move ( event ) {
+        function drag_move ( event, target, XYs ) {
 
-            var drag_moveXY = $.eventXY ( event );
-
-            $drag_target.css ( 'z-index', 1000 );
-            $drag_target.css ( 'transform', 'translate3d(' + ( drag_moveXY.X - drag_startXY.X ) + 'px,' + ( drag_moveXY.Y - drag_startXY.Y ) + 'px,0)' );
+            $target.css ( 'z-index', 1000 );
+            $target.css ( 'transform', 'translate3d(' + ( XYs.move.X - XYs.start.X ) + 'px,' + ( XYs.move.Y - XYs.start.Y ) + 'px,0)' );
 
             if ( drag_options === 'punctual' ) {
 
-                $squares.removeClass ( 'green' ).touching ( { point: drag_moveXY } ).addClass ( 'green' );
+                $squares.removeClass ( 'green' ).touching ( { point: XYs.move, $not: $target } ).addClass ( 'green' );
 
             } else {
 
-                $squares.removeClass ( 'green' ).touching ( _.extend ( { $comparer : $drag_target }, drag_options ) ).addClass ( 'green' );
+                $squares.removeClass ( 'green' ).touching ( _.extend ( { $comparer: $target, $not: $target }, drag_options ) ).addClass ( 'green' );
 
             }
 
@@ -316,26 +296,49 @@ append body-end
 
         function drag_end () {
 
-            $drag_target.css ( 'transform', 'translate3d(0,0,0)' );
-            $drag_target.css ( 'z-index', 1 );
+            $target.css ( 'transform', 'translate3d(0,0,0)' );
+            $target.css ( 'z-index', 1 );
 
             $squares.removeClass ( 'green' );
 
-            $document.off ( 'mousemove touchmove', drag_move );
-            $document.off ( 'mouseup touchend', drag_end );
+        }
+
+        // Specific drag
+
+        function drag_start_all ( event, target ) {
+
+            drag_start ( { select: 'all' }, event, target );
+
+        }
+
+        function drag_start_most ( event, target ) {
+
+            drag_start ( { select: 'most' }, event, target );
+
+        }
+
+        function drag_start_punctual ( event, target ) {
+
+            drag_start ( 'punctual', event, target );
 
         }
 
         // Ready
 
         $(function () {
-            $('.squares_all').on ( 'mousedown touchstart', function ( event ) {
-                drag_start ( '.squares_all', { select: 'all' }, event );
+            $('.squares_all .square').draggable ({
+                start: drag_start_all,
+                move: drag_move,
+                end: drag_end
             });
-            $('.squares_most').on ( 'mousedown touchstart', function () {
-                drag_start ( '.squares_most', { select: 'most' }, event );
+            $('.squares_most .square').draggable ({
+                start: drag_start_most,
+                move: drag_move,
+                end: drag_end
             });
-            $('.squares_punctual').on ( 'mousedown touchstart', function () {
-                drag_start ( '.squares_punctual', 'punctual', event );
+            $('.squares_punctual .square').draggable ({
+                start: drag_start_punctual,
+                move: drag_move,
+                end: drag_end
             });
         });

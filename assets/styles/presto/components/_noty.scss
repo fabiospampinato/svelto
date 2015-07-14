@@ -100,9 +100,9 @@
 
     .noty {
 
+        @include z-depth ( 5 );
         margin-left: $layout-spacing;
         margin-right: $layout-spacing;
-        @include multi-shadow ( $shadow-depth-5, $noty-shadow-inset );
         pointer-events: auto; //FIXME: if we use this we cannot support IE 10 (I think)
         opacity: 0;
         font-size: 0;

@@ -199,6 +199,7 @@
     }
 
     & > .navbar {
+        @include z-depth ( 5 );
         border-width: 0;
         float: none; //FIXME: this is a fix for the .left and .right classes
         margin: 0;
@@ -206,7 +207,6 @@
         transition: top 0.3s ease 0s, right 0.3s ease 0s, bottom 0.3s ease 0s, left 0.3s ease 0s;
         z-index: 20;
         border-radius: 0;
-        box-shadow: $shadow-depth-5;
     }
 
     & > .background {

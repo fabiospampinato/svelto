@@ -25,11 +25,11 @@
     }
 
     &:before {
-        @include multi-shadow ( $shadow-depth-5, $loading-shadow-inset );
+        @include z-depth ( 5 );
         content: '';
         border-radius: $loading-size;
         border: 1px solid $color-black-border;
-        background-color: transparentize($color-black-bg, $color-transparentize-amount);
+        background-color: transparentize($color-black-bg, 0.1);
         z-index: 1000;
     }
 

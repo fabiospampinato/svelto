@@ -1,7 +1,9 @@
 
-/* COLOR */
+//TODO: add transparentize classes, maybe even the transparent-initial class
 
-@mixin color ( $color_name, $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
+/* MIXIN */
+
+@mixin color ( $color_name, $basic: false, $gradient: false, $important: '' ) {
 
     $colors: map-get($colors, $color_name);
 
@@ -13,266 +15,227 @@
     $border: nth($colors, 6);
     $accent: nth($colors, 7);
 
-    background: $bg #{$important};
     border-color: $border #{$important};
     color: $text #{$important};
 
     @if $basic == false {
 
-        &.transparentize {
-            background: transparentize( $bg, $color-transparentize-amount ) #{$important};
-        }
+        background: $bg #{$important};
 
         &.gradient {
             @include gradient ( $color_name, $important );
         }
 
-        &.actionable:not(.inactive):not(.active):not(.dragging):hover {
-            background: $bg-hover #{$important};
-        }
+        &.actionable {
 
-        &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
-            background: $bg-active #{$important};
-        }
+            &.active {
+                background: $bg-active #{$important};
+            }
 
-        &.highlight {
+            &:not(.inactive):not(.active):not(.dragging) { //TODO: remove inactive and switch it with '*-disabled' maybe
 
-            border-bottom-color: $accent #{$important};
+                &:hover {
+                    background: $bg-hover #{$important};
+                }
 
-            &:after {
-                background: $accent #{$important};
+                &:active {
+                    background: $bg-active #{$important};
+                }
+
             }
 
         }
 
     } @else {
 
-        @if $transparentize == true {
-            background: transparentize( $bg, $color-transparentize-amount ) #{$important};
-        }
-
         @if $gradient == true {
             @include gradient ( $color_name, $important );
+        } @else {
+            background: $bg #{$important};
         }
 
     }
 
 }
 
-/* BRAND */
-
-@mixin primary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'primary', $basic, $transparentize, $gradient, $important);
+@mixin color-basic ( $color-name, $gradient: false, $important: '' ) {
+    @include color ( $color-name, true, $gradient, $important );
 }
 
+/* PRIMARY */
+
 .primary {
-    @include primary ( false, false, false, '!important' );
+    @include color ( 'primary', false, false, '!important' );
 }
 
 .text-primary {
     color: $color-primary;
 }
 
-@mixin secondary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'secondary', $basic, $transparentize, $gradient, $important);
-}
+/* SECONDARY */
 
 .secondary {
-    @include secondary ( false, false, false, '!important' );
+    @include color ( 'secondary', false, false, '!important' );
 }
 
 .text-secondary {
     color: $color-secondary;
 }
 
-@mixin tertiary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'tertiary', $basic, $transparentize, $gradient, $important);
-}
+/* TERTIARY */
 
 .tertiary {
-    @include tertiary ( false, false, false, '!important' );
+    @include color ( 'tertiary', false, false, '!important' );
 }
 
 .text-tertiary {
     color: $color-tertiary;
 }
 
-@mixin quaternary ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'quaternary', $basic, $transparentize, $gradient, $important);
-}
+/* QUATERNARY */
 
 .quaternary {
-    @include quaternary ( false, false, false, '!important' );
+    @include color ( 'quaternary', false, false, '!important' );
 }
 
 .text-quaternary {
     color: $color-quaternary;
 }
 
-/* COLORS */
-
-@mixin white ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'white', $basic, $transparentize, $gradient, $important);
-}
+/* WHITE */
 
 .white {
-    @include white ( false, false, false, '!important' );
+    @include color ( 'white', false, false, '!important' );
 }
 
 .text-white {
     color: $color-white;
 }
 
-@mixin gray ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'gray', $basic, $transparentize, $gradient, $important);
-}
+/* GRAY */
 
 .gray {
-    @include gray ( false, false, false, '!important' );
+    @include color ( 'gray', false, false, '!important' );
 }
 
 .text-gray {
     color: $color-gray;
 }
 
-@mixin black ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'black', $basic, $transparentize, $gradient, $important);
-}
+/* BLACK */
 
 .black {
-    @include black ( false, false, false, '!important' );
+    @include color ( 'black', false, false, '!important' );
 }
 
 .text-black {
     color: $color-black;
 }
 
-@mixin yellow ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'yellow', $basic, $transparentize, $gradient, $important);
-}
+/* YELLOW */
 
 .yellow {
-    @include yellow ( false, false, false, '!important' );
+    @include color ( 'yellow', false, false, '!important' );
 }
 
 .text-yellow {
     color: $color-yellow;
 }
 
-@mixin olive ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'olive', $basic, $transparentize, $gradient, $important);
-}
+/* OLIVE */
 
 .olive {
-    @include olive ( false, false, false, '!important' );
+    @include color ( 'olive', false, false, '!important' );
 }
 
 .text-olive {
     color: $color-olive;
 }
 
-@mixin green ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'green', $basic, $transparentize, $gradient, $important);
-}
+/* GREEN */
 
 .green {
-    @include green ( false, false, false, '!important' );
+    @include color ( 'green', false, false, '!important' );
 }
 
 .text-green {
     color: $color-green;
 }
 
-@mixin blue ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'blue', $basic, $transparentize, $gradient, $important);
-}
+/* BLUE */
 
 .blue {
-    @include blue ( false, false, false, '!important' );
+    @include color ( 'blue', false, false, '!important' );
 }
 
 .text-blue {
     color: $color-blue;
 }
 
-@mixin violet ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'violet', $basic, $transparentize, $gradient, $important);
-}
+/* VIOLET */
 
 .violet {
-    @include violet ( false, false, false, '!important' );
+    @include color ( 'violet', false, false, '!important' );
 }
 
 .text-violet {
     color: $color-violet;
 }
 
-@mixin orange ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'orange', $basic, $transparentize, $gradient, $important);
-}
+/* ORANGE */
 
 .orange {
-    @include orange ( false, false, false, '!important' );
+    @include color ( 'orange', false, false, '!important' );
 }
 
 .text-orange {
     color: $color-orange;
 }
 
-@mixin purple ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'purple', $basic, $transparentize, $gradient, $important);
-}
+/* PURPLE */
 
 .purple {
-    @include purple ( false, false, false, '!important' );
+    @include color ( 'purple', false, false, '!important' );
 }
 
 .text-purple {
     color: $color-purple;
 }
 
-@mixin red ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'red', $basic, $transparentize, $gradient, $important);
-}
+/* RED */
 
 .red {
-    @include red ( false, false, false, '!important' );
+    @include color ( 'red', false, false, '!important' );
 }
 
 .text-red {
     color: $color-red;
 }
 
-@mixin pink ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'pink', $basic, $transparentize, $gradient, $important);
-}
+/* PINK */
 
 .pink {
-    @include pink ( false, false, false, '!important' );
+    @include color ( 'pink', false, false, '!important' );
 }
 
 .text-pink {
     color: $color-pink;
 }
 
-@mixin teal ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'teal', $basic, $transparentize, $gradient, $important);
-}
+/* TEAL */
 
 .teal {
-    @include teal ( false, false, false, '!important' );
+    @include color ( 'teal', false, false, '!important' );
 }
 
 .text-teal {
     color: $color-teal;
 }
 
-@mixin brown ( $basic: false, $transparentize: false, $gradient: false, $important: '' ) {
-    @include color ( 'brown', $basic, $transparentize, $gradient, $important);
-}
+/* BROWN */
 
 .brown {
-    @include brown ( false, false, false, '!important' );
+    @include color ( 'brown', false, false, '!important' );
 }
 
 .text-brown {
@@ -281,43 +244,10 @@
 
 /* TRANSPARENT */
 
-@mixin transparent ( $important: '' ) {
-
-    background: $color-transparent-bg #{$important};
-    border-color: $color-transparent-border #{$important};
-    box-shadow: none #{$important};
-    color: inherit #{$important};
-
-    &.actionable:not(.inactive):not(.active):not(.dragging):hover {
-        background: $color-transparent-bg-hover #{$important};
-    }
-
-    &.actionable:not(.inactive):not(.active):not(.dragging):active, &.actionable.active {
-        background: $color-transparent-bg-active #{$important};
-    }
-
-}
-
 .transparent {
-    @include transparent ( '!important' );
+    @include color ( 'transparent', false, false, '!important' );
 }
 
 .text-transparent {
     color: $color-transparent;
-}
-
-/* TRANSPARENT INITIAL */
-
-@mixin transparent-initial ( $important: '' ) {
-
-    background: transparent #{$important};
-
-    &:not(:hover):not(:active):not(.active) {
-        color: inherit;
-    }
-
-}
-
-.transparent-initial {
-    @include transparent-initial ( '!important' );
 }

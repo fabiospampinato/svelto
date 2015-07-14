@@ -166,10 +166,10 @@
 
     & > .container {
 
+        @include z-depth ( 4 );
         margin-bottom: 0 !important;
         border-width: $dropdown-border-width;
         border-style: solid;
-        box-shadow: $shadow-depth-4;
         max-height: $dropdown-container-max-height;
         overflow-x: hidden;
         overflow-y: auto;

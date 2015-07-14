@@ -6,7 +6,7 @@ mixin image(url)
         block
 
 mixin image-sample(url)
-    +image("/assets/images/presto/sample.png")
+    +image("/assets/images/presto/sample.png")&attributes(attributes)
         block
 
 mixin image-caption
@@ -14,5 +14,5 @@ mixin image-caption
         block
 
 mixin spacer
-    .spacer
+    .spacer&attributes(attributes)
         block

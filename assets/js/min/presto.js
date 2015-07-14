@@ -1244,6 +1244,113 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* DRAGGABLE */
+
+//TODO: add support for filter, so that we can bind a single event
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* DRAGGABLE */
+
+    $.fn.draggable = function ( custom_options ) {
+
+        /* OPTIONS */
+
+        var options = {
+            start: $.noop,
+            move: $.noop,
+            end: $.noop,
+            context: undefined, //FIXME: Is it necessary?
+            events: {
+                start: 'mousedown touchstart',
+                move: 'mousemove touchmove',
+                end: 'mouseup touchend'
+            }
+        };
+
+        options = _.extend ( options, custom_options );
+
+        /* VARIABLES */
+
+        var $trigger,
+            XYs,
+            dragged;
+
+        /* FUNCTIONS */
+
+        var start = function ( event ) {
+
+            $trigger = $(this);
+
+            XYs = {
+                start: {},
+                move: {},
+                end: {},
+                delta: {}
+            };
+
+            dragged = false;
+
+            XYs.start = $.eventXY ( event );
+
+            options.start.bind ( options.context || this )( event, this, XYs );
+
+            $document.on ( options.events.move, move );
+            $document.on ( options.events.end, end );
+
+        };
+
+        var move = function ( event ) {
+
+            XYs.move = $.eventXY ( event );
+            XYs.delta = {
+                X: XYs.move.X - XYs.start.X,
+                Y: XYs.move.Y - XYs.start.Y
+            };
+
+            options.move.bind ( options.context || this )( event, this, XYs );
+
+            if ( dragged === false ) {
+
+                dragged = true;
+
+                $html.addClass ( 'dragging' );
+                $trigger.addClass ( 'dragging' );
+
+            }
+
+        };
+
+        var end = function ( event ) {
+
+            XYs.end = $.eventXY ( event );
+
+            options.end.bind ( options.context || this )( event, this, XYs );
+
+            if ( dragged === true ) {
+
+                $html.removeClass ( 'dragging' );
+                $trigger.removeClass ( 'dragging' );
+
+            }
+
+            $document.off ( options.events.move, move );
+            $document.off ( options.events.end, end );
+
+        };
+
+        /* START DRAGGING */
+
+        this.on ( options.events.start, start );
+
+    };
+
+}( lQuery, window, document ));
+
+
+
 /* EASING */
 
 //TODO: stripe out the stupid ones
@@ -2732,7 +2839,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TOUCHING */
 
-//TODO: add support for lenear search, non binary
+//TODO: add support for linear search, non binary, or maybe a balanced left then right then left again search, so that if we guess wrong but we are close we still won't spend too much time
 
 ;(function ( $, window, document, undefined ) {
 
@@ -2776,10 +2883,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             //      Y: 0
             //  },
             $comparer: false, //INFO: Used for the overlapping search
+            $not: false,
             select: 'all'
         };
 
         $.extend ( options, custom_options );
+
+        /* SEARCHABLE */
+
+        var $searchable = options.$not ? this.not ( options.$not ) : this;
+
+        console.log("searchable: ",$searchable.nodes);
 
         /* COMPARER */
 
@@ -2789,18 +2903,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 matches = [],
                 areas = [];
 
-            for ( var i = 0, l = this.length; i < l; i++ ) {
+            for ( var i = 0, l = $searchable.length; i < l; i++ ) {
 
-                var $ele = $(this.nodes[i]);
-
-                if ( $ele.get ( 0 ) === options.$comparer.get ( 0 ) ) continue;
+                var $ele = $searchable.eq ( i );
 
                 var c2 = get_coordinates ( $ele ),
                     overlap_area = get_overlapping_area ( c1, c2 );
 
                 if ( overlap_area > 0 ) {
 
-                    matches.push ( this.nodes[i] );
+                    matches.push ( $ele.get ( 0 ) );
                     areas.push ( overlap_area );
 
                 }
@@ -2817,7 +2929,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var $touched = false;
 
-            this.btEach ( function () {
+            $searchable.btEach ( function () {
 
                 var $ele = $(this),
                     c = get_coordinates ( $ele );
@@ -3824,7 +3936,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         templates: {
             base: '<div class="noty_wrp hidden">' +
-                      '<div class="noty container transparentize {%=o.type%} {%=o.color%} {%=o.css%}">' +
+                      '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
                           '<div class="infobar-wrp transparent">' +
                               '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
                               '<div class="infobar-center">' +
@@ -3868,7 +3980,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             /*
                    : [{
                           color: 'white',
-                          size: 'tiny',
+                          size: 'xsmall',
                           css: '',
                           text: '',
                           onClick: $.noop
@@ -4344,6 +4456,130 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* RIPPLE */
+
+//TODO: disable multiple ripples, sure? Check the specs!
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* RIPPLE */
+
+    $.fn.ripple = function () {
+
+
+
+
+
+
+
+
+
+
+
+
+    };
+
+    /* READY */
+
+    $(function () {
+
+        $('.waves-effect').ripple ();
+
+    });
+
+}( lQuery, window, document ));
+
+
+
+
+
+
+
+
+
+var Effect = {
+
+    show: function ( event, $element ) {
+
+        $ripple = $( '<div class="waves-ripple waves-rippling"></div>' ).data ( 'date', Date.now () ).appendTo ( $element );
+
+        var offset = $element.offset (),
+            eventXY = $.eventXY ( event );
+
+        // var scale     = 'scale(' + ((element.clientWidth / 100) * 3) + ')'; //FIXME
+
+        $ripple.css ({
+            top: eventXY.Y - offset.top,
+            left: eventXY.X - offset.left
+        }).addClass ( 'waves-showing' );
+
+    },
+
+    hide: function ( event ) {
+
+        var $ripples = $(this).find ( '.waves-rippling' );
+
+        for ( var i = 0, l = $ripples.length; i < l; i++ ) {
+
+            removeRipple ( event, $ripples.eq ( i ) );
+
+        }
+
+    }
+};
+
+function removeRipple ( event, $ripple ) {
+
+    $ripple.removeClass ( 'waves-rippling' );
+
+    var delay = Math.max ( 0, 350 - ( Date.now () - Number($ripple.data ( 'date' )) ) );
+
+    setTimeout ( function () {
+
+        $ripple.addClass ('waves-hiding');
+
+        setTimeout ( function () {
+
+            $ripple.remove ();
+
+        }, 750 );
+
+    }, delay );
+}
+
+function showEffect ( event ) {
+
+    // Disable right click
+    if ( event.button === 2 ) {
+        return false;
+    }
+
+    var $element = $(event.target);
+
+    if ( !$element.is ( '.waves-effect' ) ) {
+        $element = $element.parent ( '.waves-effect' );
+    }
+
+    element = $element.get ( 0 );
+
+
+
+
+    Effect.show ( event, $element );
+
+    $element.on ( 'mouseup mouseleave', Effect.hide );
+
+}
+
+$(function(){
+    $('.waves-effect').on ( 'mousedown', showEffect ); //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
+});
+
+
+
+
 /* SELECT */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
@@ -4604,8 +4840,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
             this.required_step_width = this.options.step * this.one_step_width;
 
-            this.start_pos = false;
-            this.current_move = false;
+            this.current_move = 0;
 
         },
 
@@ -4627,7 +4862,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this._on ( this.$min_btn, 'click', this.decrease );
             this._on ( this.$max_btn, 'click', this.increase );
 
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+            this.$handler.draggable ({
+                start: this._handler_drag_start,
+                move: this._handler_drag_move,
+                context: this
+            });
 
             this._on ( this.$unhighlighted, 'click', this._handler_click );
 
@@ -4712,46 +4951,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* DRAG */
 
-        _handler_drag_start: function ( event ) {
+        _handler_drag_start: function () {
 
-            this.start_pos = $.eventXY ( event );
             this.current_move = 0;
-
-            $html.addClass ( 'dragging' );
-            this.$slider.addClass ( 'dragging' );
-
-            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
-        _handler_drag_move: function ( event ) {
+        _handler_drag_move: function ( event, trigger, XYs ) {
 
-            var end_pos = $.eventXY ( event ),
-                full_move = end_pos.X - this.start_pos.X,
-                delta_move = full_move - this.current_move;
+            var delta_move = XYs.delta.X - this.current_move;
 
             if ( Math.abs ( delta_move ) >= 1 ) {
 
                 var moved = this.navigate_distance ( delta_move );
 
-                if ( moved !== false && Math.abs ( delta_move ) >= 1 ) {
+                if ( moved !== false ) {
 
                     this.current_move += moved;
 
                 }
 
             }
-
-        },
-
-        _handler_drag_end: function ( event ) {
-
-            $html.removeClass ( 'dragging' );
-            this.$slider.removeClass ( 'dragging' );
-
-            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
@@ -5065,7 +5285,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
 
-            this.start_pos = false,
             this.bar_width = false,
             this.start_percentage = false;
 
@@ -5086,17 +5305,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._on ( 'click', this._handler_click );
 
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+            this.$handler.draggable ({
+                start: this._handler_drag_start,
+                move: this._handler_drag_move,
+                end: this._handler_drag_end,
+                context: this
+            });
 
         },
 
         /* CHANGE */
-
-        _bind_change: function () {
-
-
-
-        },
 
         _handler_change: function () {
 
@@ -5111,13 +5329,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* LEFT / RIGHT ARROWS */
-
-        _bind_arrows: function () {
-
-
-
-
-        },
 
         _handler_arrows_in: function () {
 
@@ -5159,12 +5370,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CLICK */
 
-        _bind_click: function () {
-
-
-
-        },
-
         _handler_click: function () {
 
             if ( this.dragging ) {
@@ -5180,49 +5385,28 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* DRAG */
 
-        _bind_drag: function () {
-
-
-
-        },
-
-        _handler_drag_start: function ( event ) {
+        _handler_drag_start: function () {
 
             this.start_percentage = this.checked ? 100 : 0;
 
-            this.start_pos = $.eventXY ( event );
             this.bar_width = this.$bar.width ();
-
-            $html.addClass ( 'dragging' );
-            this.$element.addClass ( 'dragging' );
-
-            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
-        _handler_drag_move: function ( event ) {
+        _handler_drag_move: function ( event, trigger, XYs ) {
 
             this.dragging = true;
 
-            var move_pos = $.eventXY ( event ),
-                distance = move_pos.X - this.start_pos.X,
-                abs_distance = Math.max ( - this.bar_width, Math.min ( Math.abs ( distance ), this.bar_width ) ),
+            var abs_distance = Math.max ( - this.bar_width, Math.min ( Math.abs ( XYs.delta.X ), this.bar_width ) ),
                 percentage = abs_distance * 100 / this.bar_width;
 
-            this.drag_percentage = ( distance >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
+            this.drag_percentage = ( XYs.delta.X >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
 
             this.$handler.css ( 'left', Math.max ( 0, Math.min ( 100, this.drag_percentage ) ) + '%' );
 
         },
 
-        _handler_drag_end: function ( event ) {
-
-            $html.removeClass ( 'dragging' );
-            this.$element.removeClass ( 'dragging' );
-
-            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
+        _handler_drag_end: function () {
 
             if ( this.dragging ) {
 

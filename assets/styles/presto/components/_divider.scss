@@ -14,14 +14,13 @@ hr {
 
 .divider_wrp {
 
-    @include medium ();
     text-align: center;
     margin-bottom: $layout-spacing;
 
     & > .divider {
 
         &:not(.linear) {
-            @include red ( true );
+            @include color ( 'red', true );
             @extend .shadow-depth-1;
             border-radius: 10000px 10000px;
             display: inline-block;

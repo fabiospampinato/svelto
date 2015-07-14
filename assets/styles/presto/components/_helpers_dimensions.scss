@@ -1,0 +1,83 @@
+
+/* WIDTH / VW / HEIGHT / VH PERCENTAGES */
+
+@for $nr from 1 through 100 {
+
+    .width-#{$nr}-100 {
+        width: #{$nr}% !important;
+    }
+
+    .vwidth-#{$nr}-100 {
+        width: #{$nr}vw !important;
+    }
+
+    .height-#{$nr}-100 {
+        height: #{$nr}% !important;
+    }
+
+    .vheight-#{$nr}-100 {
+        height: #{$nr}vh !important;
+    }
+
+}
+
+/* WIDTH / HEIGTH NUNBERS IN GRID */
+
+//FIXME: why should it be bounded to the grid?
+//FIXME: can't we just always use .multiple?
+
+@for $nr from 1 through $grid-columns-nr {
+
+    .width-#{$nr}-in-#{$grid-columns-nr} {
+        width: #{100 / $nr}% !important;
+    }
+
+    .height-#{$nr}-in-#{$grid-columns-nr} {
+        height: #{100 / $nr}% !important;
+    }
+
+}
+
+/* STANDARD WIDTHS */
+
+.width-xs {
+    width: $width-xs !important;
+}
+
+.width-sm {
+    width: $width-sm !important;
+}
+
+.width-md {
+    width: $width-md !important;
+}
+
+.width-lg {
+    width: $width-lg !important;
+}
+
+.width-xl {
+    width: $width-xl !important;
+}
+
+/* STANDARD HEIGHTS */
+
+.height-xs {
+    height: $height-xs !important;
+}
+
+.height-sm {
+    height: $height-sm !important;
+}
+
+.height-md {
+    height: $height-md !important;
+}
+
+.height-lg {
+    height: $height-lg !important;
+}
+
+.height-xl {
+    height: $height-xl !important;
+}

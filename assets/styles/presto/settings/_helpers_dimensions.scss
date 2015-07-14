@@ -1,0 +1,28 @@
+
+/* STANDARD WIDTHS */
+
+//TODO: maybe derive them from the breakpoints
+
+$width-xs: 200px;
+
+$width-sm: 200px * $GOLDEN-RATIO;
+
+$width-md: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO;
+
+$width-lg: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO;
+
+$width-xl: 200px * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO * $GOLDEN-RATIO;
+
+/* STANDARD HEIGHTS */
+
+//TODO: maybe derive them from the breakpoints
+
+$height-xs: 120px;
+
+$height-sm: 120px * $GOLDEN-RATIO;
+
+$height-md: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO;
+
+$height-lg: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO  * $GOLDEN-RATIO;
+
+$height-xl: 120px * $GOLDEN-RATIO * $GOLDEN-RATIO  * $GOLDEN-RATIO  * $GOLDEN-RATIO;

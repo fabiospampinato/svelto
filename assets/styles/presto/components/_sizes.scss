@@ -1,98 +1,64 @@
 
+/* MIXIN */
+
+@mixin size ( $size_name, $important: '' ) {
+
+    $size: map-get($sizes, $size_name);
+
+    font-size: $size #{$important};
+
+}
+
 /* SIZES */
 
-@mixin nano ( $important: '' ) {
-    font-size: $size-nano #{$important};
+.xxxxxsmall {
+    @include size ( 'xxxxxsmall', '!important' );
 }
 
-.nano {
-    @include nano ( '!important' );
+.xxxxsmall {
+    @include size ( 'xxxxsmall', '!important' );
 }
 
-@mixin micro ( $important: '' ) {
-    font-size: $size-micro #{$important};
+.xxxsmall {
+    @include size ( 'xxxsmall', '!important' );
 }
 
-.micro {
-    @include micro ( '!important' );
+.xxsmall {
+    @include size ( 'xxsmall', '!important' );
 }
 
-@mixin mini ( $important: '' ) {
-    font-size: $size-mini #{$important};
-}
-
-.mini {
-    @include mini ( '!important' );
-}
-
-@mixin tiny ( $important: '' ) {
-    font-size: $size-tiny #{$important};
-}
-
-.tiny {
-    @include tiny ( '!important' );
-}
-
-@mixin small ( $important: '' ) {
-    font-size: $size-small #{$important};
+.xsmall {
+    @include size ( 'xsmall', '!important' );
 }
 
 .small {
-    @include small ( '!important' );
-}
-
-@mixin medium ( $important: '' ) {
-    font-size: $size-medium #{$important};
+    @include size ( 'small', '!important' );
 }
 
 .medium {
-    @include medium ( '!important' );
-}
-
-@mixin large ( $important: '' ) {
-    font-size: $size-large #{$important};
+    @include size ( 'medium', '!important' );
 }
 
 .large {
-    @include large ( '!important' );
+    @include size ( 'large', '!important' );
 }
 
-@mixin big ( $important: '' ) {
-    font-size: $size-big #{$important};
+.xlarge {
+    @include size ( 'xlarge', '!important' );
 }
 
-.big {
-    @include big ( '!important' );
+.xxlarge {
+    @include size ( 'xxlarge', '!important' );
 }
 
-@mixin huge ( $important: '' ) {
-    font-size: $size-huge #{$important};
+.xxxlarge {
+    @include size ( 'xxxlarge', '!important' );
 }
 
-.huge {
-    @include huge ( '!important' );
+.xxxxlarge {
+    @include size ( 'xxxxlarge', '!important' );
 }
 
-@mixin massive ( $important: '' ) {
-    font-size: $size-massive #{$important};
-}
-
-.massive {
-    @include massive ( '!important' );
-}
-
-@mixin giant ( $important: '' ) {
-    font-size: $size-giant #{$important};
-}
-
-.giant {
-    @include giant ( '!important' );
-}
-
-@mixin enormous ( $important: '' ) {
-    font-size: $size-enormous #{$important};
-}
-
-.enormous {
-    @include enormous ( '!important' );
+.xxxxxlarge {
+    @include size ( 'xxxxxlarge', '!important' );
 }

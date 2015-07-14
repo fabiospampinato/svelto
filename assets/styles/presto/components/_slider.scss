@@ -5,7 +5,6 @@
 
 .slider_wrp {
 
-    @include medium ();
     height: $slider-height;
     margin-bottom: $layout-spacing;
 
@@ -26,7 +25,7 @@
 
             .unhighlighted {
 
-                @include gray ( true );
+                @include color ( 'gray', true );
                 @include center-absolutely ( false, $slider-unhighlighted-height );
                 border-radius: $slider-unhighlighted-height;
                 height: $slider-unhighlighted-height;
@@ -36,17 +35,17 @@
                 right: $slider-handler-half-size;
 
                 .highlighted {
-                    @include secondary ( true );
+                    @include color ( 'secondary', true );
                     height: $slider-highlighted-height;
                     border-radius: $slider-highlighted-height;
                 }
 
                 .handler {
 
-                    @include secondary ( true );
+                    @include color ( 'secondary', true );
+                    @include z-depth ( 3 );
                     @include center-absolutely ( false, $slider-handler-size );
                     border-radius: 50%;
-                    box-shadow: $shadow-depth-3;
                     height: $slider-handler-size;
                     line-height: $slider-handler-size;
                     position: absolute;
@@ -160,7 +159,7 @@
                     }
 
                     &:active {
-                        @include multi-shadow ( $shadow-depth-2, $slider-handler-active-shadow );
+                        @include z-depth ( 2, $slider-handler-active-shadow );
                     }
 
                 }
@@ -176,11 +175,11 @@
         & > .slider .bar .unhighlighted {
 
             .highlighted  {
-                @include gray ( true );
+                @include color ( 'gray', true );
             }
 
             .handler {
-                @include gray ( true );
+                @include color ( 'gray', true );
                 box-shadow: 0 0 0 $slider-inactive-handler-shadow-size $color-white-bg;
             }
 

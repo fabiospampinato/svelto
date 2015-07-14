@@ -3,21 +3,27 @@
 extends views/layout.jade
 
 append content
+    +divider Decorators
+
+    +multiple
+        +button("/views/demo/decorators/colors.html").outlined Colors
+        +button("/views/demo/decorators/helpers.html").outlined Helpers
+        +button("/views/demo/decorators/helpers_dimensions.html").outlined Dimensions Helpers
+        +button("/views/demo/decorators/helpers_responsive.html").outlined Responsive Helpers
+        +button("/views/demo/decorators/ripple.html").outlined Ripple
+        +button("/views/demo/decorators/shadows.html").outlined Shadows
+        +button("/views/demo/decorators/sizes.html").outlined Sizes
+
     +divider CSS
 
     +multiple
-        +button("/views/demo/css/colors.html").outlined Colors
         +button("/views/demo/css/container.html").outlined Container
         +button("/views/demo/css/elements.html").outlined Elements
         +button("/views/demo/css/flags.html").outlined Flags
         +button("/views/demo/css/form.html").outlined Form
         +button("/views/demo/css/grid.html").outlined Grid
-        +button("/views/demo/css/helpers.html").outlined Helpers
-        +button("/views/demo/css/helpers_responsive.html").outlined Responsive helpers
         +button("/views/demo/css/icons.html").outlined Icons
         +button("/views/demo/css/multiple.html").outlined Multiple
-        +button("/views/demo/css/shadows.html").outlined Shadows
-        +button("/views/demo/css/sizes.html").outlined Sizes
         +button("/views/demo/css/table.html").outlined Table
         +button("/views/demo/css/typography.html").outlined Typography
 

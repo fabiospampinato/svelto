@@ -3,7 +3,6 @@
 
 .switcher {
 
-    @include medium ();
     width: $switcher-width;
     height: $switcher-height;
     margin-bottom: $layout-spacing;
@@ -24,13 +23,13 @@
 
         .handler {
 
+            @include z-depth ( 3 );
             @include center-absolutely ( false, $switcher-handler-size );
             left: 0;
             height: $switcher-handler-size;
             width: $switcher-handler-size;
             border-radius: $switcher-handler-size;
             margin-left: -$switcher-handler-half-size;
-            box-shadow: $shadow-depth-3;
             transition: background-color 0.2s ease 0s, left 0.2s ease 0s, box-shadow 0.2s ease 0s;
 
             &:active {
@@ -66,7 +65,7 @@
                 cursor: move;
 
                 &:active {
-                    @include multi-shadow ( $shadow-depth-2, $switcher-handler-active-shadow );
+                    @include z-depth ( 2, $switcher-handler-active-shadow );
                 }
 
             }
@@ -79,10 +78,10 @@
 
         .bar {
 
-            @include gray ( true );
+            @include color ( 'gray', true );
 
             .handler {
-                @include gray ( true );
+                @include color ( 'gray', true );
                 box-shadow: 0 0 0 $switcher-inactive-handler-shadow-size $color-white-bg;
             }
 

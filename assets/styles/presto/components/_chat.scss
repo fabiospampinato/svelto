@@ -42,7 +42,7 @@
     }
 
     & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
-        @include white ();
+        @include color ( 'white' );
         order: 2;
         transform: rotate(45deg);
         width: 1em;

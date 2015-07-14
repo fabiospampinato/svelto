@@ -1,0 +1,84 @@
+//- decorators/helpers_dimensions.jade
+
+extends ../../layout.jade
+
+append content
+    +divider Standard widths
+
+    +container.width-xs X-Small
+    +container.width-sm Small
+    +container.width-md Medium
+    +container.width-lg Large
+    +container.width-xl X-Large
+
+    +divider Standard heights
+
+    +multiple.fluid
+        +container.height-xs X-Small
+        +container.height-sm Small
+        +container.height-md Medium
+        +container.height-lg Large
+        +container.height-xl X-Large
+
+    +divider Width N in M (Grid columns number)
+
+    +row
+        +column.width-7-in-12
+            +container 1
+        +column.width-7-in-12
+            +container 2
+        +column.width-7-in-12
+            +container 3
+        +column.width-7-in-12
+            +container 4
+        +column.width-7-in-12
+            +container 5
+        +column.width-7-in-12
+            +container 6
+        +column.width-7-in-12
+            +container 7
+
+    +divider Height N in M (Grid columns number)
+
+    +multiple.vertical.height-lg
+        +container.height-7-in-12 1
+        +container.height-7-in-12 2
+        +container.height-7-in-12 3
+        +container.height-7-in-12 4
+        +container.height-7-in-12 5
+        +container.height-7-in-12 6
+        +container.height-7-in-12 7
+
+    +divider Width percentages
+
+    +container.width-23-100 23
+    +container.width-31-100 31
+    +container.width-47-100 47
+    +container.width-59-100 59
+    +container.width-100-100 100
+
+    +divider Height percentages
+
+    +multiple.height-md.fluid
+        +container.height-23-100 23
+        +container.height-31-100 31
+        +container.height-47-100 47
+        +container.height-59-100 59
+        +container.height-100-100 100
+
+    +divider ViewportWidth
+
+    +container.vwidth-23-100 23
+    +container.vwidth-31-100 31
+    +container.vwidth-47-100 47
+    +container.vwidth-59-100 59
+    +container.vwidth-100-100 100
+
+    +divider ViewportHeight
+
+    +multiple.fluid
+        +container.vheight-23-100 23
+        +container.vheight-31-100 31
+        +container.vheight-47-100 47
+        +container.vheight-59-100 59
+        +container.vheight-100-100 100

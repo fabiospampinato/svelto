@@ -40,7 +40,6 @@
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
 
-            this.start_pos = false,
             this.bar_width = false,
             this.start_percentage = false;
 
@@ -61,17 +60,16 @@
 
             this._on ( 'click', this._handler_click );
 
-            this._on ( this.$handler, 'mousedown touchstart', this._handler_drag_start );
+            this.$handler.draggable ({
+                start: this._handler_drag_start,
+                move: this._handler_drag_move,
+                end: this._handler_drag_end,
+                context: this
+            });
 
         },
 
         /* CHANGE */
-
-        _bind_change: function () {
-
-
-
-        },
 
         _handler_change: function () {
 
@@ -86,13 +84,6 @@
         },
 
         /* LEFT / RIGHT ARROWS */
-
-        _bind_arrows: function () {
-
-
-
-
-        },
 
         _handler_arrows_in: function () {
 
@@ -134,12 +125,6 @@
 
         /* CLICK */
 
-        _bind_click: function () {
-
-
-
-        },
-
         _handler_click: function () {
 
             if ( this.dragging ) {
@@ -155,49 +140,28 @@
 
         /* DRAG */
 
-        _bind_drag: function () {
-
-
-
-        },
-
-        _handler_drag_start: function ( event ) {
+        _handler_drag_start: function () {
 
             this.start_percentage = this.checked ? 100 : 0;
 
-            this.start_pos = $.eventXY ( event );
             this.bar_width = this.$bar.width ();
-
-            $html.addClass ( 'dragging' );
-            this.$element.addClass ( 'dragging' );
-
-            this._on ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._on ( $document, 'mouseup touchend', this._handler_drag_end );
 
         },
 
-        _handler_drag_move: function ( event ) {
+        _handler_drag_move: function ( event, trigger, XYs ) {
 
             this.dragging = true;
 
-            var move_pos = $.eventXY ( event ),
-                distance = move_pos.X - this.start_pos.X,
-                abs_distance = Math.max ( - this.bar_width, Math.min ( Math.abs ( distance ), this.bar_width ) ),
+            var abs_distance = Math.max ( - this.bar_width, Math.min ( Math.abs ( XYs.delta.X ), this.bar_width ) ),
                 percentage = abs_distance * 100 / this.bar_width;
 
-            this.drag_percentage = ( distance >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
+            this.drag_percentage = ( XYs.delta.X >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
 
             this.$handler.css ( 'left', Math.max ( 0, Math.min ( 100, this.drag_percentage ) ) + '%' );
 
         },
 
-        _handler_drag_end: function ( event ) {
-
-            $html.removeClass ( 'dragging' );
-            this.$element.removeClass ( 'dragging' );
-
-            this._off ( $document, 'mousemove touchmove', this._handler_drag_move );
-            this._off ( $document, 'mouseup touchend', this._handler_drag_end );
+        _handler_drag_end: function () {
 
             if ( this.dragging ) {
 

@@ -3,13 +3,12 @@
 
 .container {
 
-    @include white ( true );
+    @include color ( 'white', true );
     border-width: $container-border-width;
     border-style: solid;
     border-radius: $border-radius-medium;
     padding: $layout-spacing;
     margin-bottom: $layout-spacing;
-    box-shadow: $shadow-depth-1;
     position: relative;
 
     &.limited {
@@ -33,7 +32,7 @@
         //TODO: add support for header always centered, even if you have 2 buttons at the left and 4 at the right
         //TODO: maybe add support for same width if there are some buttons or not
 
-        @include primary ();
+        @include color ( 'primary' );
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
