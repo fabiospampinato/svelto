@@ -1,8 +1,6 @@
 
 /* RIPPLE */
 
-//TODO: disable multiple ripples, maybe... sure? Check the specs!
-
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -20,8 +18,7 @@
 
             $ripple.css ({
                 top: eventXY.Y - offset.top,
-                left: eventXY.X - offset.left,
-                transform: 'scale(' + ( offset.width / 100 * 3 ) + ')'
+                left: eventXY.X - offset.left
             }).addClass ( 'waves-showing' );
 
             $element.on ( 'mouseup mouseleave', function () {
@@ -44,7 +41,7 @@
 
                     $ripple.remove ();
 
-                }, 750 );
+                }, 400 );
 
             }, delay );
 
