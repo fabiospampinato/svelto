@@ -5,13 +5,38 @@ extends ../../layout.jade
 append content
     +divider Ripple
 
+    +multiple.ripples-btns
+        +button.waves-effect.waves-primary Primary
+        +button.waves-effect.waves-secondary Secondary
+        +button.waves-effect.waves-tertiary Tertiary
+        +button.waves-effect.waves-quaternary Quaternary
+        +button.waves-effect.waves-white White
+        +button.waves-effect.waves-gray Gray
+        +button.waves-effect.waves-black Black
+        +button.waves-effect.waves-yellow Yellow
+        +button.waves-effect.waves-olive Olive
+        +button.waves-effect.waves-green Green
+        +button.waves-effect.waves-blue Blue
+        +button.waves-effect.waves-violet Violet
+        +button.waves-effect.waves-orange Orange
+        +button.waves-effect.waves-purple Purple
+        +button.waves-effect.waves-red Red
+        +button.waves-effect.waves-pink Pink
+        +button.waves-effect.waves-teal Teal
+        +button.waves-effect.waves-brown Brown
+
+    +divider Test
+
     +multiple
-        +button.waves-effect Test
-        +image-sample.waves-effect
-        +image-sample.waves-effect.waves-light
-        +square-sample.waves-effect
+        +image-sample.waves-effect.rounded
+        +image-sample.waves-effect.waves-white
 
-    +button.float.waves-effect +
-
-    +container.waves-effect
+    +container.waves-effect.waves-tertiary
         +lorem-ipsum
+
+append body-end
+    script.
+        $('.ripples-btns .button').css ({
+            width: 140,
+            height: 80
+        });

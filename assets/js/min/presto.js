@@ -4458,7 +4458,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* RIPPLE */
 
-//TODO: disable multiple ripples, sure? Check the specs!
+//TODO: disable multiple ripples, maybe... sure? Check the specs!
 
 ;(function ( $, window, document, undefined ) {
 
@@ -4466,117 +4466,59 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     /* RIPPLE */
 
-    $.fn.ripple = function () {
+    var Ripple = {
 
+        show: function ( event, $element ) {
 
+            var $ripple = $( '<div class="waves-ripple"></div>' ).appendTo ( $element ),
+                offset = $element.offset (),
+                eventXY = $.eventXY ( event ),
+                now = _.now ();
 
+            $ripple.css ({
+                top: eventXY.Y - offset.top,
+                left: eventXY.X - offset.left,
+                transform: 'scale(' + ( offset.width / 100 * 3 ) + ')'
+            }).addClass ( 'waves-showing' );
 
+            $element.on ( 'mouseup mouseleave', function () {
 
+                Ripple.hide ( $ripple, now );
 
+            });
 
+        },
 
+        hide: function ( $ripple, before ) {
 
+            var delay = Math.max ( 0, 350 + before - _.now () );
 
+            setTimeout ( function () {
 
+                $ripple.addClass ('waves-hiding');
 
+                setTimeout ( function () {
+
+                    $ripple.remove ();
+
+                }, 750 );
+
+            }, delay );
+
+        }
     };
 
     /* READY */
 
-    $(function () {
+    $('.waves-effect').on ( 'mousedown', function ( event ) { //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
 
-        $('.waves-effect').ripple ();
+        if ( event.button === 2 ) return; //INFO: Disable the right click
+
+        Ripple.show ( event, $(this) );
 
     });
 
 }( lQuery, window, document ));
-
-
-
-
-
-
-
-
-
-var Effect = {
-
-    show: function ( event, $element ) {
-
-        $ripple = $( '<div class="waves-ripple waves-rippling"></div>' ).data ( 'date', Date.now () ).appendTo ( $element );
-
-        var offset = $element.offset (),
-            eventXY = $.eventXY ( event );
-
-        // var scale     = 'scale(' + ((element.clientWidth / 100) * 3) + ')'; //FIXME
-
-        $ripple.css ({
-            top: eventXY.Y - offset.top,
-            left: eventXY.X - offset.left
-        }).addClass ( 'waves-showing' );
-
-    },
-
-    hide: function ( event ) {
-
-        var $ripples = $(this).find ( '.waves-rippling' );
-
-        for ( var i = 0, l = $ripples.length; i < l; i++ ) {
-
-            removeRipple ( event, $ripples.eq ( i ) );
-
-        }
-
-    }
-};
-
-function removeRipple ( event, $ripple ) {
-
-    $ripple.removeClass ( 'waves-rippling' );
-
-    var delay = Math.max ( 0, 350 - ( Date.now () - Number($ripple.data ( 'date' )) ) );
-
-    setTimeout ( function () {
-
-        $ripple.addClass ('waves-hiding');
-
-        setTimeout ( function () {
-
-            $ripple.remove ();
-
-        }, 750 );
-
-    }, delay );
-}
-
-function showEffect ( event ) {
-
-    // Disable right click
-    if ( event.button === 2 ) {
-        return false;
-    }
-
-    var $element = $(event.target);
-
-    if ( !$element.is ( '.waves-effect' ) ) {
-        $element = $element.parent ( '.waves-effect' );
-    }
-
-    element = $element.get ( 0 );
-
-
-
-
-    Effect.show ( event, $element );
-
-    $element.on ( 'mouseup mouseleave', Effect.hide );
-
-}
-
-$(function(){
-    $('.waves-effect').on ( 'mousedown', showEffect ); //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
-});
-
 
 
 

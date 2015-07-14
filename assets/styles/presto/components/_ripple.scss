@@ -4,8 +4,6 @@
 .waves-effect {
 
     position: relative;
-    cursor: pointer;
-    display: inline-block;
     overflow: hidden;
 
     .waves-ripple {
@@ -16,37 +14,100 @@
         height: 100px;
         margin-top:-50px;
         margin-left:-50px;
+
         opacity: 0;
-        background: rgba(0,0,0,0.2);
-        $gradient: rgba(0,0,0,0.2) 0,rgba(0,0,0,.3) 40%,rgba(0,0,0,.4) 50%,rgba(0,0,0,.5) 60%,rgba(255,255,255,0) 70%;
-        background: radial-gradient($gradient);
-        transition: all 0.5s ease-out;
-        transition-property: transform, opacity;
-        transform: scale(0) translate(0,0);
+
+        background: transparentize($color-black, $ripple-transparentize-amount);
+
+        transition: transform 0.75s ease-out, opacity 0.75s ease-out;
+
+        transform: scale(0);
         pointer-events: none;
 
         &.waves-showing {
             opacity: 1;
-            transform: scale(5) translate(0,0); //FIXME: the scale should change on the basis of the width
-            transition-duration: 0.5s;
         }
 
         &.waves-hiding {
             opacity: 0;
-            transition-duration: 0.5s;
         }
 
     }
 
-    &.waves-light .waves-ripple {
-        background: rgba(255,255,255,0.4);
-        $gradient: rgba(255,255,255,0.2) 0,rgba(255,255,255,.3) 40%,rgba(255,255,255,.4) 50%,rgba(255,255,255,.5) 60%,rgba(255,255,255,0) 70%;
-        background: radial-gradient($gradient);
+    &.waves-primary .waves-ripple {
+        background: transparentize($color-primary, $ripple-transparentize-amount);
+    }
+
+    &.waves-secondary .waves-ripple {
+        background: transparentize($color-secondary, $ripple-transparentize-amount);
+    }
+
+    &.waves-tertiary .waves-ripple {
+        background: transparentize($color-tertiary, $ripple-transparentize-amount);
+    }
+
+    &.waves-quaternary .waves-ripple {
+        background: transparentize($color-quaternary, $ripple-transparentize-amount);
+    }
+
+    &.waves-white .waves-ripple {
+        background: transparentize($color-white, $ripple-transparentize-amount);
+    }
+
+    &.waves-gray .waves-ripple {
+        background: transparentize($color-gray, $ripple-transparentize-amount);
+    }
+
+    &.waves-black .waves-ripple {
+        background: transparentize($color-black, $ripple-transparentize-amount);
+    }
+
+    &.waves-yellow .waves-ripple {
+        background: transparentize($color-yellow, $ripple-transparentize-amount);
+    }
+
+    &.waves-olive .waves-ripple {
+        background: transparentize($color-olive, $ripple-transparentize-amount);
+    }
+
+    &.waves-green .waves-ripple {
+        background: transparentize($color-green, $ripple-transparentize-amount);
+    }
+
+    &.waves-blue .waves-ripple {
+        background: transparentize($color-blue, $ripple-transparentize-amount);
+    }
+
+    &.waves-violet .waves-ripple {
+        background: transparentize($color-violet, $ripple-transparentize-amount);
+    }
+
+    &.waves-orange .waves-ripple {
+        background: transparentize($color-orange, $ripple-transparentize-amount);
+    }
+
+    &.waves-purple .waves-ripple {
+        background: transparentize($color-purple, $ripple-transparentize-amount);
+    }
+
+    &.waves-red .waves-ripple {
+        background: transparentize($color-red, $ripple-transparentize-amount);
+    }
+
+    &.waves-pink .waves-ripple {
+        background: transparentize($color-pink, $ripple-transparentize-amount);
+    }
+
+    &.waves-teal .waves-ripple {
+        background: transparentize($color-teal, $ripple-transparentize-amount);
+    }
+
+    &.waves-brown .waves-ripple {
+        background: transparentize($color-brown, $ripple-transparentize-amount);
     }
 
 }
 
-/* Firefox Bug: link not triggered */
-a.waves-effect .waves-ripple {
+a.waves-effect .waves-ripple { //INFO: Firefox Bug: link not triggered
     z-index: -1;
 }
