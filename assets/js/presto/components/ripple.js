@@ -11,7 +11,7 @@
 
         show: function ( event, $element ) {
 
-            var $ripple = $( '<div class="waves-ripple"></div>' ).appendTo ( $element ),
+            var $ripple = $( '<div class="ripple-circle"></div>' ).appendTo ( $element ),
                 offset = $element.offset (),
                 eventXY = $.eventXY ( event ),
                 now = _.now ();
@@ -19,7 +19,7 @@
             $ripple.css ({
                 top: eventXY.Y - offset.top,
                 left: eventXY.X - offset.left
-            }).addClass ( 'waves-showing' );
+            }).addClass ( 'ripple-circle-show' );
 
             $element.on ( 'mouseup mouseleave', function () {
 
@@ -35,7 +35,7 @@
 
             setTimeout ( function () {
 
-                $ripple.addClass ('waves-hiding');
+                $ripple.addClass ('ripple-circle-hide');
 
                 setTimeout ( function () {
 
@@ -50,7 +50,7 @@
 
     /* READY */
 
-    $('.waves-effect').on ( 'mousedown', function ( event ) { //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
+    $('.ripple').on ( 'mousedown', function ( event ) { //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
 
         if ( event.button === 2 ) return; //INFO: Disable the right click
 
