@@ -1,18 +1,16 @@
 //- elements.jade
 
+//- TODO: add iframe, embed, video, object
+
 mixin image(url)
     .image-wrp&attributes(attributes)
         img(src=url)
-        block
-
-mixin image-sample(url)
-    +image("/assets/images/presto/sample.png")&attributes(attributes)
         block
 
 mixin image-caption
     .image-caption&attributes(attributes)
         block
 
-mixin spacer
-    .spacer&attributes(attributes)
+mixin image-sample(url)
+    +image("/assets/images/presto/sample.png")&attributes(attributes)
         block

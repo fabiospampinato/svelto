@@ -1,58 +1,21 @@
 
 /* ELEMENTS */
 
-a {
-
-    color: inherit;
-    font-weight: bold;
-    text-decoration: none;
-    cursor: pointer;
-
-    &:hover { //FIXME: it should change according to the theme...
-        color: $color-default-link-hover;
-    }
-
-}
-
-code, section, pre {
-    display: block;
-    margin: 0;
-    padding: $layout-spacing;
-    background-color: $general-section-color-bg;
-    border-radius: $border-radius-small;
-    border: 1px solid $general-section-border-bg;
-}
-
-kbd {
-    @include color ( 'white', true );
-    border-width: 1px;
-    border-style: solid;
-    border-radius: $border-radius-medium;
-    margin: 0 ( $layout-spacing / 2 );
-    padding: 2px 3px;
-    font-weight: bold;
-    font-size: 14px;
+iframe, embed, video, object {
+    //TODO: take it from bootstrap
 }
 
 .image-wrp {
 
-    display: inline-block;
     position: relative;
-    text-align: center;
-    font-size: 0;
+    display: flex;
     overflow: hidden;
     margin-bottom: $layout-spacing;
-    vertical-align: top;
-
-    & > img {
-        border: 1px solid $color-white-border;
-        border-radius: $border-radius-medium;
-        max-width: 100%;
-        height: auto;
-    }
+    border: $image-border-width solid $image-border-color;
+    border-radius: $border-radius-medium;
 
     & > .image-caption {
-        @include color ( 'black', true, true );
+        @include color ( $image-caption-color, true );
         position: absolute;
         right: 0;
         bottom: 0;

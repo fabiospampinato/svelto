@@ -1,5 +1,28 @@
 //- label.jade
 
 mixin label
-    .label.compact&attributes(attributes)
+    .label&attributes(attributes)
+        block
+
+mixin label-left
+    .label-left&attributes(attributes)
+        block
+
+mixin label-center
+    .label-center&attributes(attributes)
+        block
+
+mixin label-right
+    .label-right&attributes(attributes)
+        block
+
+mixin label-simple
+    +label&attributes(attributes)
+        +label-center
+            block
+
+mixin label-icon(icon)
+    +label&attributes(attributes).compact
+        +label-center
+            +icon(icon)
         block

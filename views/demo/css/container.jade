@@ -5,24 +5,24 @@ extends ../../layout.jade
 append main
     +divider Simple
 
-    +simple-container Simple
+    +container-simple Simple
 
     +divider Limited
 
-    +simple-container.limited Limited
+    +container-simple.limited Limited
 
     +divider Nested
 
-    +simple-container
+    +container-simple
         p Outside
-        +simple-container.teal
+        +container-simple.teal
             p Inside
-            +simple-container.pink
+            +container-simple.pink
                 p Insider
 
     +divider With header
 
-    +simple-container("Header") Content
+    +container-simple("Header") Content
 
     +divider With advanced header
 
@@ -52,20 +52,14 @@ append main
         +container-header("Header")
             +container-header-left
                 +multiple
-                    +button.compact.xxsmall
-                        +icon("action-thumb-down")
-                    +button.compact.xxsmall
-                        +icon("action-thumb-up")
+                    +button-icon("action-thumb-down").xxsmall
+                    +button-icon("action-thumb-up").xxsmall
             +container-header-right
                 +multiple
-                    +button.compact.xxsmall
-                        +icon("navigation-apps")
-                    +button.compact.xxsmall
-                        +icon("navigation-menu")
-                    +button.compact.xxsmall
-                        +icon("navigation-more-vert")
-                    +button.compact.xxsmall
-                        +icon("navigation-refresh")
+                    +button-icon("navigation-apps").xxsmall
+                    +button-icon("navigation-menu").xxsmall
+                    +button-icon("navigation-more-vert").xxsmall
+                    +button-icon("navigation-refresh").xxsmall
         +container-content
             p
                 +lorem-ipsum

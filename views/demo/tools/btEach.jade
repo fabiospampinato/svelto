@@ -5,7 +5,7 @@ extends ../../layout.jade
 append main
     +divider Squares
 
-    +simple-container
+    +container-simple
         +multiple.squares
             +square.enormous.centered
                 span.small 1
@@ -141,11 +141,11 @@ append main
     +multiple
         +multiple.joined
             input(id="input", type="number", name="input", placeholder="Search number...")
-            #search.button.actionable.primary(onclick="javascript:search()") Search
+            +button-simple(id="search", onclick="javascript:search()").primary Search
         +multiple.joined
             input(id="populate_input", type="number", name="input2", placeholder="Squares number...")
-            #populate.button.actionable.secondary(onclick="javascript:populate()") Populate
-        #clear.button.actionable.black(onclick="javascript:reset()") Clear
+            +button-simple(id="populate", onclick="javascript:populate()").secondary Populate
+        +button-simple(id="clear", onclick="javascript:reset()").black Clear
 
 append body-end
     +noty({ body: '<p>[Green] Found <br/> [Red] Smaller <br/> [Blue] Bigger</p>', ttl: 'forever' })

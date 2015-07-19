@@ -5,13 +5,13 @@ extends ../../layout.jade
 append main
     +divider Paragraph
 
-    +simple-container
+    +container-simple
         p
             +lorem-ipsum
 
     +divider Action
 
-    +button.outlined(onclick="blur_test()") Toggle blur
+    +button-simple(onclick="blur_test()").outlined Toggle blur
 
 append body-end
     +script.

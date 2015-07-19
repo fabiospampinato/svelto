@@ -3,12 +3,12 @@
 
 $roboto-enabled: false !default;
 
-/* FONT FAMILIES */
+/* FONT FAMILY */
 
 @if $roboto-enabled == true {
-    $font-family: Roboto, Calibri, sans-serif !important !default; //FIMXE: is this `!important` needed?
+    $font-family: Roboto, Calibri, sans-serif !default;
 } @else {
-    $font-family: Calibri, sans-serif !important !default; //FIMXE: is this `!important` needed?
+    $font-family: Calibri, sans-serif !default;
 }
 
 /* FONT SIZES */
@@ -16,3 +16,45 @@ $roboto-enabled: false !default;
 $font-size-small: 13px !default;
 $font-size-normal: 15px !default;
 $font-size-large: 17px !default;
+
+$font-size-base: $font-size-normal;
+
+/* HEADERS */
+
+$h1-size: 'xxlarge';
+$h2-size: 'xlarge';
+$h3-size: 'large';
+$h4-size: 'medium';
+$h5-size: 'small';
+$h6-size: 'xsmall';
+
+$header-small-opacity: 0.85;
+
+/* OTHER */
+
+$small-font-size: 65%;
+
+$mark-padding: 0.2em;
+$mark-bg-color: $color-yellow;
+
+$abbr-border-width: 1px;
+$abbr-border-style: 'dotted';
+$abbr-border-color: $color-gray-border;
+
+$blockquote-border-width: ( $layout-spacing / 2 );
+$blockquote-border-color: rgba(47, 47, 47, 0.15) !default;
+
+$blockquote-footer-font-size: 85%;
+$blockquote-footer-opacity: 0.85;
+
+/* CODE */
+
+$code-bg-color: rgba(47, 47, 47, 0.03) !default;
+$code-border-width: 1px;
+$code-border-color: rgba(47, 47, 47, 0.15) !default;
+
+$kbd-color: 'white';
+$kbd-border-width: 1px;
+$kbd-font-size: 90%;
+$kbd-padding-vertical: 2px;
+$kbd-padding-horizontal: 3px;

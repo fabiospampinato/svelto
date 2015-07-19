@@ -1,16 +1,67 @@
 
 /* LABEL */
 
+//TODO: Add a minimum width, so that when it's not very wide and rounded it will be a circle, not an oval
+
 .label {
 
-    @extend .button;
-    cursor: default;
+    @include color ( $label-color );
+    display: inline-flex; //FIXME: why inline? maybe it's needed for advanced buttons...
+    justify-content: center;
+    align-items: center;
+    margin-bottom: $layout-spacing;
+    border-radius: $border-radius-medium;
+    font-weight: bold;
+    position: relative;
+    overflow: hidden;
+    min-height: 1em;
+    min-width: 1em;
 
-    &.floating {
+    & > .label-left, & > .label-right {
+        background-color: rgba(0, 0, 0, 0.05);
+        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+        min-width: 1em;
+    }
+
+    & > .label-left {
+        order: 1;
+    }
+
+    & > .label-center {
+        order: 2;
+        display: flex;
+        padding: $label-vertical-padding $label-horizontal-padding;
+    }
+
+    & > .label-right {
+        order: 3;
+    }
+
+    &.compact .label-center {
+        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+    }
+
+    &.badge {
         position: absolute !important;
         top: -20% !important;
         right: -20% !important;
         bottom: initial !important;
+    }
+
+    .icon {
+
+        @extend %icon;
+        font-size: 1.3em;
+        margin: -0.115em;
+
+        &.left {
+            padding-right: 0.75em;
+        }
+
+        &.right {
+            padding-left: 0.75em;
+        }
+
     }
 
 }

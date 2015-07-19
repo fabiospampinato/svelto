@@ -6,36 +6,36 @@ append main
     +divider Modals
 
     +multiple
-        +button.outlined(data-modal-trigger="modal-1") Normal
-        +button.outlined(data-modal-trigger="modal-2") No footer
-        +button.outlined(data-modal-trigger="modal-3") No title
-        +button.outlined(data-modal-trigger="modal-4") Only content
-        +button.outlined(data-modal-trigger="modal-5") With buttons
+        +button-simple(data-modal-trigger="modal-1").outlined Normal
+        +button-simple(data-modal-trigger="modal-2").outlined No footer
+        +button-simple(data-modal-trigger="modal-3").outlined No title
+        +button-simple(data-modal-trigger="modal-4").outlined Only content
+        +button-simple(data-modal-trigger="modal-5").outlined With buttons
 
 append body
     +modal("Normal")#modal-1
-        +modal-content
+        +container-content
             +lorem-ipsum
-        +modal-footer The footer here
+        +container-footer The footer here
 
     +modal("No footer")#modal-2
-        +modal-content
+        +container-content
             +lorem-ipsum
 
     +modal#modal-3
-        +modal-content
+        +container-content
             +lorem-ipsum
-        +modal-footer The footer here
+        +container-footer The footer here
 
     +modal#modal-4
-        +modal-content
+        +container-content
             +lorem-ipsum
 
     +modal("With buttons")#modal-5
-        +modal-content
+        +container-content
             +lorem-ipsum
-        +modal-footer
+        +container-footer
             +multiple
-                +button.outlined.modal-closer Normal
-                +button.primary.modal-closer Primary
-                +button.secondary.modal-closer Secondary
+                +button-simple.outlined.modal-closer Normal
+                +button-simple.primary.modal-closer Primary
+                +button-simple.secondary.modal-closer Secondary

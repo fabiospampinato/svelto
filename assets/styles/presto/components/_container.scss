@@ -37,6 +37,10 @@
         margin-right: - $container-header-border-width;
         margin-top: - $container-header-border-width;
 
+        &.actionable {
+            cursor: pointer;
+        }
+
         & > .container-header-sub {
 
             box-sizing: border-box;
@@ -54,11 +58,12 @@
 
             }
 
-            &.center {
+            &.center { //FIXME: is not centered if only one of the left and right sections are provided
 
                 order: 1;
                 flex-grow: 1;
                 text-align: center;
+                white-space: nowrap; //FIXME: it should wrap if necessary...
 
                 & ~ .right {
                     padding-left: $layout-spacing;

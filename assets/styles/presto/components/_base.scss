@@ -1,7 +1,7 @@
 
 /* GENERAL */
 
-*, *:before, *:after {
+*, *:before, *:after { //INFO: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw
     box-sizing: inherit;
 }
 
@@ -9,58 +9,43 @@
     outline: none;
 }
 
+/* HTML */
+
 html {
 
-    box-sizing: border-box;
     font-family: $font-family;
-    font-size: $font-size-normal;
-    color: $color-default-text;
-    position: relative;
-    min-height: 100%;
+    font-size: $font-size-base;
     display: flex;
+    box-sizing: border-box;
+    min-height: 100%;
+    color: $color-base-text;
+    background-color: $color-base-bg;
 
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
 
-    &.unscrollable {
-        overflow: hidden;
-    }
-
     &.dragging {
         cursor: move !important;
-        user-select: none !important;
+        user-select: none !important; //TODO: maybe set it as default, and override it when selectable... but doesn't it work???
     }
 
 }
 
+/* BODY */
+
 body {
 
-    background-color: $color-default-bg;
-    position: relative;
     display: flex;
     flex-direction: column;
-    min-height: 100%;
     width: 100%;
-
-    & > header {
-        flex-shrink: 0;
-        position: relative;
-    }
 
     & > main {
         flex-grow: 1;
-        position: relative;
         padding: 0 $layout-spacing;
     }
 
-    & > footer {
-
-        flex-shrink: 0;
-
-        & > .footer {
-            margin-bottom: 0;
-        }
-
+    & > footer > .footer {
+        margin-bottom: 0;
     }
 
     &.fixed-header {
@@ -68,21 +53,22 @@ body {
         & > header {
 
             margin-top: $toolbar-height + $layout-spacing;
-            transition: margin 0.3s ease 0s;
+            transition: margin $transition-duration-default;
 
             & > .header {
-                transition: top 0.3s ease 0s, right 0.3s ease 0s, bottom 0.3s ease 0s, left 0.3s ease 0s;
                 position: fixed;
                 z-index: 5;
                 top: 0;
                 right: 0;
                 left: 0;
+                transition-duration: $transition-duration-default;
+                transition-property: top, right, bottom, left;
             }
 
         }
 
         & > main {
-            transition: margin 0.3s ease 0s;
+            transition: margin $transition-duration-default;
         }
 
     }

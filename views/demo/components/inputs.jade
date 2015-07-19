@@ -20,26 +20,24 @@ append main
     +multiple
         +multiple.joined
             input(type="text", name="test", value="Search")
-            +button.compact
-                +icon("action-search")
+            +button-icon("action-search")
         +multiple.joined
             input(type="text", name="test", value="Search")
-            +button.compact.secondary
-                +icon("action-search")
+            +button-icon("action-search").secondary
         +multiple.joined
             input(type="text", name="test", placeholder="Search...")
-            +button.primary Search
+            +button-simple.primary Search
         +multiple.joined
-            +label.gray http://
+            +label-simple.gray http://
             input(type="text", name="test", placeholder="Search...")
         +multiple.joined
-            +label.compact
-                +icon("social-people")
+            +label-icon("social-people")
             input(type="text", name="test", value="Search")
         +multiple.joined
             input(type="text", name="test", value="Search")
             +label.compact
-                +icon("navigation-refresh").rotating
+                +label-center
+                    +icon("navigation-refresh").rotating
         +multiple.joined
             +button.teal
                 +button-left
@@ -53,9 +51,8 @@ append main
         div
             +multiple.joined.outlined
                 input(type="text", name="test", value="Outlined")
-                +button.compact
-                    +icon("action-search")
+                +button-icon("action-search")
         div
             +multiple.joined
-                +label.gray http://
+                +label-simple.gray http://
                 input(type="text", name="test", placeholder="Outlined...").outlined

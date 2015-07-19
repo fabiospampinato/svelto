@@ -3,7 +3,7 @@
 
 /* MIXIN */
 
-@mixin color ( $color_name, $basic: false, $gradient: false, $important: '' ) {
+@mixin color ( $color_name, $basic: false, $gradient: false, $extra: '' ) {
 
     $colors: map-get($colors, $color_name);
 
@@ -15,31 +15,31 @@
     $border: nth($colors, 6);
     $accent: nth($colors, 7);
 
-    border-color: $border #{$important};
-    color: $text #{$important};
+    border-color: $border #{$extra};
+    color: $text #{$extra};
 
     @if $basic == false {
 
-        background: $bg #{$important};
+        background: $bg #{$extra};
 
         &.gradient {
-            @include gradient ( $color_name, $important );
+            @include gradient ( $color_name, $extra );
         }
 
         &.actionable {
 
             &.active {
-                background: $bg-active #{$important};
+                background: $bg-active #{$extra};
             }
 
             &:not(.inactive):not(.active):not(.dragging) { //TODO: remove inactive and switch it with '*-disabled' maybe
 
                 &:hover {
-                    background: $bg-hover #{$important};
+                    background: $bg-hover #{$extra};
                 }
 
                 &:not(.ripple):active {
-                    background: $bg-active #{$important};
+                    background: $bg-active #{$extra};
                 }
 
             }
@@ -49,205 +49,25 @@
     } @else {
 
         @if $gradient == true {
-            @include gradient ( $color_name, $important );
+            @include gradient ( $color_name, $extra );
         } @else {
-            background: $bg #{$important};
+            background: $bg #{$extra};
         }
 
     }
 
 }
 
-@mixin color-basic ( $color-name, $gradient: false, $important: '' ) {
-    @include color ( $color-name, true, $gradient, $important );
-}
+/* COLORS */
 
-/* PRIMARY */
+@each $name, $datas in $colors {
 
-.primary {
-    @include color ( 'primary', false, false, '!important' );
-}
+    .#{$name} {
+        @include color ( $name, false, false, '!important' );
+    }
 
-.text-primary {
-    color: $color-primary;
-}
+    .text-#{$name} {
+        color: nth($datas, 1);
+    }
 
-/* SECONDARY */
-
-.secondary {
-    @include color ( 'secondary', false, false, '!important' );
-}
-
-.text-secondary {
-    color: $color-secondary;
-}
-
-/* TERTIARY */
-
-.tertiary {
-    @include color ( 'tertiary', false, false, '!important' );
-}
-
-.text-tertiary {
-    color: $color-tertiary;
-}
-
-/* QUATERNARY */
-
-.quaternary {
-    @include color ( 'quaternary', false, false, '!important' );
-}
-
-.text-quaternary {
-    color: $color-quaternary;
-}
-
-/* WHITE */
-
-.white {
-    @include color ( 'white', false, false, '!important' );
-}
-
-.text-white {
-    color: $color-white;
-}
-
-/* GRAY */
-
-.gray {
-    @include color ( 'gray', false, false, '!important' );
-}
-
-.text-gray {
-    color: $color-gray;
-}
-
-/* BLACK */
-
-.black {
-    @include color ( 'black', false, false, '!important' );
-}
-
-.text-black {
-    color: $color-black;
-}
-
-/* YELLOW */
-
-.yellow {
-    @include color ( 'yellow', false, false, '!important' );
-}
-
-.text-yellow {
-    color: $color-yellow;
-}
-
-/* OLIVE */
-
-.olive {
-    @include color ( 'olive', false, false, '!important' );
-}
-
-.text-olive {
-    color: $color-olive;
-}
-
-/* GREEN */
-
-.green {
-    @include color ( 'green', false, false, '!important' );
-}
-
-.text-green {
-    color: $color-green;
-}
-
-/* BLUE */
-
-.blue {
-    @include color ( 'blue', false, false, '!important' );
-}
-
-.text-blue {
-    color: $color-blue;
-}
-
-/* VIOLET */
-
-.violet {
-    @include color ( 'violet', false, false, '!important' );
-}
-
-.text-violet {
-    color: $color-violet;
-}
-
-/* ORANGE */
-
-.orange {
-    @include color ( 'orange', false, false, '!important' );
-}
-
-.text-orange {
-    color: $color-orange;
-}
-
-/* PURPLE */
-
-.purple {
-    @include color ( 'purple', false, false, '!important' );
-}
-
-.text-purple {
-    color: $color-purple;
-}
-
-/* RED */
-
-.red {
-    @include color ( 'red', false, false, '!important' );
-}
-
-.text-red {
-    color: $color-red;
-}
-
-/* PINK */
-
-.pink {
-    @include color ( 'pink', false, false, '!important' );
-}
-
-.text-pink {
-    color: $color-pink;
-}
-
-/* TEAL */
-
-.teal {
-    @include color ( 'teal', false, false, '!important' );
-}
-
-.text-teal {
-    color: $color-teal;
-}
-
-/* BROWN */
-
-.brown {
-    @include color ( 'brown', false, false, '!important' );
-}
-
-.text-brown {
-    color: $color-brown;
-}
-
-/* TRANSPARENT */
-
-.transparent {
-    @include color ( 'transparent', false, false, '!important' );
-}
-
-.text-transparent {
-    color: $color-transparent;
 }

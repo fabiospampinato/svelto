@@ -6,53 +6,91 @@ append main
     +divider Normal
 
     +multiple
-        +label.mini.primary Primary
-        +label.mini.secondary Secondary
-        +label.mini.tertiary Tertiary
-        +label.mini.quaternary Quaternary
-        +label.mini.white White
-        +label.mini.gray Gray
-        +label.mini.black Black
-        +label.mini.yellow Yellow
-        +label.mini.olive Olive
-        +label.mini.green Green
-        +label.mini.blue Blue
-        +label.mini.violet Violet
-        +label.mini.orange Orange
-        +label.mini.purple Purple
-        +label.mini.red Red
-        +label.mini.pink Pink
-        +label.mini.teal Teal
-        +label.mini.brown Brown
+        +label-simple.xxsmall.primary Primary
+        +label-simple.xxsmall.secondary Secondary
+        +label-simple.xxsmall.tertiary Tertiary
+        +label-simple.xxsmall.quaternary Quaternary
+        +label-simple.xxsmall.white White
+        +label-simple.xxsmall.gray Gray
+        +label-simple.xxsmall.black Black
+        +label-simple.xxsmall.yellow Yellow
+        +label-simple.xxsmall.olive Olive
+        +label-simple.xxsmall.green Green
+        +label-simple.xxsmall.blue Blue
+        +label-simple.xxsmall.violet Violet
+        +label-simple.xxsmall.orange Orange
+        +label-simple.xxsmall.purple Purple
+        +label-simple.xxsmall.red Red
+        +label-simple.xxsmall.pink Pink
+        +label-simple.xxsmall.teal Teal
+        +label-simple.xxsmall.brown Brown
+
+    +divider Advanced
+
+    +multiple
+        +label-icon('action-settings')
+        +label-icon('action-settings').rounded
+        +label-simple
+            +icon('action-settings').left
+            | Settings
+        +label-simple
+            | Settings
+            +icon('action-settings').right
+        +label
+            +label-left
+                +icon('action-settings')
+            +label-center Settings
+        +label
+            +label-center Settings
+            +label-right
+                +icon('action-settings')
+        +label.compact
+            +label-left
+                +icon('action-settings')
+            +label-center Settings
+        +label.compact
+            +label-center Settings
+            +label-right
+                +icon('action-settings')
 
     +divider Rounded
 
     +multiple
-        +label.mini.rounded.primary 1
-        +label.mini.rounded.secondary 2
-        +label.mini.rounded.tertiary 3
-        +label.mini.rounded.quaternary 4
-        +label.mini.rounded.white 5
-        +label.mini.rounded.gray 6
-        +label.mini.rounded.black 7
-        +label.mini.rounded.yellow 8
-        +label.mini.rounded.olive 9
-        +label.mini.rounded.green 10
-        +label.mini.rounded.blue 11
-        +label.mini.rounded.violet 12
-        +label.mini.rounded.orange 13
-        +label.mini.rounded.purple 14
-        +label.mini.rounded.red 15
-        +label.mini.rounded.pink 16
-        +label.mini.rounded.teal 17
-        +label.mini.rounded.brown 18
+        +label-simple.xxsmall.rounded.primary 1
+        +label-simple.xxsmall.rounded.secondary 2
+        +label-simple.xxsmall.rounded.tertiary 3
+        +label-simple.xxsmall.rounded.quaternary 4
+        +label-simple.xxsmall.rounded.white 5
+        +label-simple.xxsmall.rounded.gray 6
+        +label-simple.xxsmall.rounded.black 7
+        +label-simple.xxsmall.rounded.yellow 8
+        +label-simple.xxsmall.rounded.olive 9
+        +label-simple.xxsmall.rounded.green 10
+        +label-simple.xxsmall.rounded.blue 11
+        +label-simple.xxsmall.rounded.violet 12
+        +label-simple.xxsmall.rounded.orange 13
+        +label-simple.xxsmall.rounded.purple 14
+        +label-simple.xxsmall.rounded.red 15
+        +label-simple.xxsmall.rounded.pink 16
+        +label-simple.xxsmall.rounded.teal 17
+        +label-simple.xxsmall.rounded.brown 18
+
+    +divider Compact
+
+    +multiple
+        +label-simple.compact.xxsmall.primary Primary
+        +label-simple.compact.xxsmall.secondary Secondary
+        +label-simple.compact.xxsmall.rounded.primary Primary
+        +label-simple.compact.xxsmall.rounded.secondary Secondary
+        +label-simple.compact.xxsmall.rounded.primary 1
+        +label-simple.compact.xxsmall.rounded.secondary 12
 
     +divider Badge
 
     +multiple
         +button.compact
             +icon("action-settings")
-            +label.floating.micro.red 2
+            +label-simple.compact.badge.xxxsmall.red 2
         +button.compact
             +icon("action-settings")
-            +label.floating.micro.rounded.primary 3
+            +label-simple.compact.badge.xxxsmall.rounded.primary 3

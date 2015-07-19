@@ -6,47 +6,21 @@ append main
     +divider Normal
 
     +multiple
-        +button Base
-        +button.sharp Sharp
-        +button.rounded Rounded
-        +button.compact Compact
-        +button.active Active
-        +button.inactive Inactive
-
-    +divider Outlined
-
-    +multiple
-        +button.outlined Outlined
-        +button.outlined
-            +button-left
-                +icon('action-settings')
-            +button-center Outlined
-        +button.outlined
-            +button-center Outlined
-            +button-right
-                +icon('action-settings')
-        +button.outlined.compact
-            +button-left
-                +icon('action-settings')
-            +button-center Compact
-        +button.outlined.compact
-            +button-center Compact
-            +button-right
-                +icon('action-settings')
+        +button-simple Base
+        +button-simple.sharp Sharp
+        +button-simple.rounded Rounded
+        +button-simple.compact Compact
+        +button-simple.active Active
 
     +divider Icon
 
     +multiple
-        +button
-            +icon('action-settings')
-        +button.compact
-            +icon('action-settings')
-        +button.compact.rounded
-            +icon('action-settings')
-        +button
+        +button-icon('action-settings')
+        +button-icon('action-settings').rounded
+        +button-simple
             +icon('action-settings').left
             | Settings
-        +button
+        +button-simple
             | Settings
             +icon('action-settings').right
         +button
@@ -66,23 +40,6 @@ append main
             +button-right
                 +icon('action-settings')
 
-    +divider Fluid
-
-    +multiple.fluid
-        +button Foo
-        +button Bar
-        +button Baz
-        +button Qux
-
-    +divider Vertical
-
-    +multiple.vertical
-        +button Foo
-        +button Bar
-        +button Baz
-        +button Qux
-
     +divider Floating
 
-    +button.floating.compact.rounded.secondary.huge
-        +icon('action-settings')
+    +button-icon('action-settings').floating.rounded.secondary.xxxlarge

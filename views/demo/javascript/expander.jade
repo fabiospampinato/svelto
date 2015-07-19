@@ -6,34 +6,30 @@ append main
     +divider Expander
 
     +expander
-        +expander-header("Base")
-            +expander-header-right
-                +multiple
-                    +button.compact.transparent.no-padding.huge
-                        +icon("hardware-keyboard-arrow-down")
-        +expander-content Content of base
+        +container-header("Base").actionable
+            +container-header-right
+                +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-header-left
+        +container-content Content of base
 
     +expander
-        +expander-header("Icon to the left")
-            +expander-header-left
-                +multiple
-                    +button.compact.transparent.no-padding.huge
-                        +icon("hardware-keyboard-arrow-down")
-        +expander-content Content of icon to the left
+        +container-header("Icon to the left").actionable
+            +container-header-left
+                +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-header-right
+        +container-content Content of icon to the left
 
     +expander.opened
-        +expander-header("Base - Active")
-            +expander-header-right
-                +multiple
-                    +button.compact.transparent.no-padding.huge
-                        +icon("hardware-keyboard-arrow-down")
-        +expander-content Content of base - Active
+        +container-header("Base - Active").actionable
+            +container-header-right
+                +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-header-left
+        +container-content Content of base - Active
 
 
     +expander.opened
-        +expander-header("Base - Active")
-            +expander-header-right
-                +multiple
-                    +button.compact.transparent.no-padding.huge
-                        +icon("hardware-keyboard-arrow-down")
-        +expander-content Content of base - Active
+        +container-header("Base - Active").actionable
+            +container-header-right
+                +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-header-left
+        +container-content Content of base - Active

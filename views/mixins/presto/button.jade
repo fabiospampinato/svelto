@@ -16,13 +16,24 @@ mixin button(href)
             block
 
 mixin button-left
-    .button-left&attributes(attributes)
+    .label-left&attributes(attributes)
         block
 
 mixin button-center
-    .button-center&attributes(attributes)
+    .label-center&attributes(attributes)
         block
 
 mixin button-right
-    .button-right&attributes(attributes)
+    .label-right&attributes(attributes)
+        block
+
+mixin button-simple(href)
+    +button(href)&attributes(attributes)
+        +button-center
+            block
+
+mixin button-icon(icon)
+    +button&attributes(attributes).compact
+        +button-center
+            +icon(icon)
         block

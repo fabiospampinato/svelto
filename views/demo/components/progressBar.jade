@@ -7,14 +7,14 @@ extends ../../layout.jade
 append main
     +divider Base
 
-    +simple-container
+    +container-simple
         +progressBar(33)
         +progressBar(55).striped
         +progressBar({ percentages: [{ value: 45 }], labeled: true })
 
     +divider Colored
 
-    +simple-container
+    +container-simple
         +progressBar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' })
         +progressBar({ value: 5, color: 'yellow' }, { value: 5, color: 'green' }, { value: 5, color: 'pink' }, { value: 5, color: 'teal' }).striped
         +progressBar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
@@ -22,7 +22,7 @@ append main
 
     +divider Inactive
 
-    +simple-container
+    +container-simple
         +progressBar(45).inactive
         +progressBar(66).striped.inactive
         +progressBar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).inactive
@@ -31,36 +31,36 @@ append main
 
     +divider Created
 
-    +simple-container.created
+    +container-simple.created
 
     +multiple
-        +button("progressBar_create ( 22 )").outlined Basic
-        +button("progressBar_create ( 0 )").outlined Basic 0
-        +button("progressBar_create ( { percentages: [{ value: 43.21 }], labeled: true } )").outlined Labeled
-        +button("progressBar_create ( { percentages: [{ value: 3.12332 }], labeled: true } )").outlined Labeled small
-        +button("progressBar_create ( { percentages: [{ value: 31.12382391823 }], labeled: true } )").outlined Labeled long
-        +button("progressBar_create ( { percentages: [{ value: 31.12382391823 }], labeled: true, decimals: 10 } )").outlined Labeled long 10 decimals
-        +button("progressBar_create ( { percentages: [{ value: 10 }, { value: 55 }], labeled: true } )").outlined Multiple
-        +button("progressBar_create ( 10, { value: 55, color: 'pink' } )").outlined Multiple colors
-        +button("progressBar_create ( { percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true } )").outlined Advanced
+        +button-simple("progressBar_create ( 22 )").outlined Basic
+        +button-simple("progressBar_create ( 0 )").outlined Basic 0
+        +button-simple("progressBar_create ( { percentages: [{ value: 43.21 }], labeled: true } )").outlined Labeled
+        +button-simple("progressBar_create ( { percentages: [{ value: 3.12332 }], labeled: true } )").outlined Labeled small
+        +button-simple("progressBar_create ( { percentages: [{ value: 31.12382391823 }], labeled: true } )").outlined Labeled long
+        +button-simple("progressBar_create ( { percentages: [{ value: 31.12382391823 }], labeled: true, decimals: 10 } )").outlined Labeled long 10 decimals
+        +button-simple("progressBar_create ( { percentages: [{ value: 10 }, { value: 55 }], labeled: true } )").outlined Multiple
+        +button-simple("progressBar_create ( 10, { value: 55, color: 'pink' } )").outlined Multiple colors
+        +button-simple("progressBar_create ( { percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true } )").outlined Advanced
 
     +divider Set single
 
     +multiple
-        +button("progressBar_set_single ( 0 )").outlined 0%
-        +button("progressBar_set_single ( 25 )").outlined 25%
-        +button("progressBar_set_single ( 50 )").outlined 50%
-        +button("progressBar_set_single ( 75 )").outlined 75%
-        +button("progressBar_set_single ( 100 )").outlined 100%
+        +button-simple("progressBar_set_single ( 0 )").outlined 0%
+        +button-simple("progressBar_set_single ( 25 )").outlined 25%
+        +button-simple("progressBar_set_single ( 50 )").outlined 50%
+        +button-simple("progressBar_set_single ( 75 )").outlined 75%
+        +button-simple("progressBar_set_single ( 100 )").outlined 100%
 
     +divider Set multiple
 
     +multiple
-        +button("progressBar_set_multiple ( 0, 10, 0, 0 )").outlined 0% 10% 0%
-        +button("progressBar_set_multiple ( 5, 10, 0, 0 )").outlined 5% 10% 0%
-        +button("progressBar_set_multiple ( 20, 5, 10, 5 )").outlined 20% 5% 10% 5%
-        +button("progressBar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
-        +button("progressBar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
+        +button-simple("progressBar_set_multiple ( 0, 10, 0, 0 )").outlined 0% 10% 0%
+        +button-simple("progressBar_set_multiple ( 5, 10, 0, 0 )").outlined 5% 10% 0%
+        +button-simple("progressBar_set_multiple ( 20, 5, 10, 5 )").outlined 20% 5% 10% 5%
+        +button-simple("progressBar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
+        +button-simple("progressBar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
 
 append body-end
     +script.

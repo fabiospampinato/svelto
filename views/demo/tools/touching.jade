@@ -5,7 +5,7 @@ extends ../../layout.jade
 append main
     +divider Squares - All matches
 
-    +simple-container
+    +container-simple
         +multiple.squares_all
             +square.enormous.centered
                 span.small 1
@@ -76,11 +76,11 @@ append main
 
     +multiple.joined
         input(id="populate_all_input", type="number", name="input1", placeholder="Squares number...")
-        +button.secondary(onclick="javascript:populate_all()") Populate
+        +button-simple(onclick="javascript:populate_all()").secondary Populate
 
     +divider Squares - Most significant match
 
-    +simple-container
+    +container-simple
         +multiple.squares_most
             +square.enormous.centered
                 span.small 1
@@ -151,11 +151,11 @@ append main
 
     +multiple.joined
         input(id="populate_most_input", type="number", name="input2", placeholder="Squares number...")
-        +button.secondary(onclick="javascript:populate_most()") Populate
+        +button-simple(onclick="javascript:populate_most()").secondary Populate
 
     +divider Squares - Punctual
 
-    +simple-container
+    +container-simple
         +multiple.squares_punctual
             +square.enormous.centered
                 span.small 1
@@ -226,7 +226,7 @@ append main
 
     +multiple.joined
         input(id="populate_punctual_input", type="number", name="input3", placeholder="Squares number...")
-        +button.secondary(onclick="javascript:populate_punctual()") Populate
+        +button-simple(onclick="javascript:populate_punctual()").secondary Populate
 
 append body-end
     +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })

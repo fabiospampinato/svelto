@@ -3,43 +3,10 @@
 mixin modal(title, header_classes)
     .modal&attributes(attributes)
         .background.modal-closer
-        .container
+        +container
             if title
-                +modal-header(title)(class=header_classes)
-                    +modal-header-right
-                        +button.compact.mini.modal-closer
-                            +icon('navigation-close')
+                +container-header(title)(class=header_classes)
+                    +container-header-right
+                        +button-icon('navigation-close').xsmall.modal-closer
+                    +container-header-left
             block
-
-//- Copied from container
-
-mixin modal-header(title)
-    .header&attributes(attributes)
-        if title
-            +modal-header-title(title)
-        block
-
-mixin modal-header-left
-    .sub.left&attributes(attributes)
-        block
-
-mixin modal-header-center
-    .sub.center&attributes(attributes)
-        block
-
-mixin modal-header-title(title)
-    .sub.center&attributes(attributes)
-        .title= title
-        block
-
-mixin modal-header-right
-    .sub.right&attributes(attributes)
-        block
-
-mixin modal-content
-    .content&attributes(attributes)
-        block
-
-mixin modal-footer
-    .footer&attributes(attributes)
-        block

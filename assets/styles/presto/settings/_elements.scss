@@ -1,5 +1,7 @@
 
-/* ELEMENTS */
+/* IMAGE */
 
-$general-section-color-bg: rgba(47, 47, 47, 0.03) !default;
-$general-section-border-bg: rgba(47, 47, 47, 0.15) !default;
+$image-border-width: 1px;
+$image-border-color: $color-white-border;
+
+$image-caption-color: 'black';

@@ -7,23 +7,20 @@ append main
 
     +accordion
         +expander
-            +expander-header("Section 1")
-                +expander-header-right
-                    +multiple
-                        +button.compact.transparent.no-padding.huge
-                            +icon("hardware-keyboard-arrow-down")
-            +expander-content Content of section 1
+            +container-header("Section 1").actionable
+                +container-header-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+                +container-header-left
+            +container-content Content of section 1
         +expander.opened
-            +expander-header("Section 2")
-                +expander-header-right
-                    +multiple
-                        +button.compact.transparent.no-padding.huge
-                            +icon("hardware-keyboard-arrow-down")
-            +expander-content Content of section 2
+            +container-header("Section 2").actionable
+                +container-header-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+                +container-header-left
+            +container-content Content of section 2
         +expander
-            +expander-header("Section 3")
-                +expander-header-right
-                    +multiple
-                        +button.compact.transparent.no-padding.huge
-                            +icon("hardware-keyboard-arrow-down")
-            +expander-content Content of section 3
+            +container-header("Section 3").actionable
+                +container-header-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+                +container-header-left
+            +container-content Content of section 3

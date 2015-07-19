@@ -2,14 +2,16 @@
 
 mixin radio(name, title, value, checked)
     if checked
-        .button.actionable.radio.checked&attributes(attributes)
+        +button&attributes(attributes).radio.checked
             input(type="radio", name=name, value=value, checked)
-            .button-center= title
+            +button-center
+                = title
                 +icon("toggle-radio-button-on").on.right
                 +icon("toggle-radio-button-off").off.right
     else
-        .button.actionable.radio&attributes(attributes)
+        +button&attributes(attributes).radio
             input(type="radio", name=name, value=value)
-            .button-center= title
+            +button-center
+                = title
                 +icon("toggle-radio-button-on").on.right
                 +icon("toggle-radio-button-off").off.right

@@ -5,7 +5,7 @@ extends ../../layout.jade
 append main
     +divider Selectable
 
-    +simple-container
+    +container-simple
         table.selectable
             thead
                 tr
@@ -25,13 +25,13 @@ append main
                         td 16/11/1993
                         td
                             +multiple
-                                +button.outlined.tiny("#") Btn 1
-                                +button.outlined.tiny("#") Btn 2
+                                +button-simple("#").outlined.xsmall Btn 1
+                                +button-simple("#").outlined.xsmall Btn 2
                     tr
                         td= nr++
                         td Bar
                         td 16 Nov 1993
                         td
                             +multiple
-                                +button.outlined.tiny("#") Btn 1
-                                +button.outlined.tiny("#") Btn 2
+                                +button-simple("#").outlined.xsmall Btn 1
+                                +button-simple("#").outlined.xsmall Btn 2

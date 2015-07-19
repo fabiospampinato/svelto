@@ -7,7 +7,7 @@ extends ../../layout.jade
 append main
     +divider Paragraph
 
-    +simple-container
+    +container-simple
         div(style="background-color:rgba(0,0,0,0.2);border-bottom: 1px solid transparent;margin-bottom: -1px !important;")
             #toggable.container(class="secondary")
                 +container-content
@@ -17,15 +17,15 @@ append main
     +divider Action
 
     +multiple
-        +button("toggle_height()").outlined Toggle height
-        +button("set_speed(250)").outlined Set 0.25s
-        +button("set_speed(500)").outlined Set 0.5s
-        +button("set_speed(750)").outlined Set 0.75s
-        +button("set_speed(1000)").outlined Set 1s
-        +button("set_speed(2000)").outlined Set 2s
-        +button("set_speed(3000)").outlined Set 3s
-        +button("set_speed(4000)").outlined Set 4s
-        +button("set_speed(5000)").outlined Set 5s
+        +button-simple("toggle_height()").outlined Toggle height
+        +button-simple("set_speed(250)").outlined Set 0.25s
+        +button-simple("set_speed(500)").outlined Set 0.5s
+        +button-simple("set_speed(750)").outlined Set 0.75s
+        +button-simple("set_speed(1000)").outlined Set 1s
+        +button-simple("set_speed(2000)").outlined Set 2s
+        +button-simple("set_speed(3000)").outlined Set 3s
+        +button-simple("set_speed(4000)").outlined Set 4s
+        +button-simple("set_speed(5000)").outlined Set 5s
 
 append body-end
     script(type="text/javascript").

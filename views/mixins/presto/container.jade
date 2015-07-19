@@ -33,7 +33,7 @@ mixin container-footer
     .container-footer&attributes(attributes)
         block
 
-mixin simple-container(title, header_classes)
+mixin container-simple(title, header_classes)
     .container&attributes(attributes)
         if title
             +container-header(title)(class=header_classes)

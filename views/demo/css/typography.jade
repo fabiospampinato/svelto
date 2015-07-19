@@ -3,9 +3,13 @@
 extends ../../layout.jade
 
 append main
-    +divider H1-H6
+    +divider Link
 
-    +simple-container
+    +container-simple Inside this paragraph there is a #[+a("#") link], does it look nice?
+
+    +divider Headers
+
+    +container-simple
         h1 H1 - Heading title #[small Small subheader]
         h2 H2 - Heading title #[small Small subheader]
         h3 H3 - Heading title #[small Small subheader]
@@ -15,29 +19,29 @@ append main
 
     +divider Paragraph
 
-    +simple-container
+    +container-simple
         p
             +lorem-ipsum
 
     +divider Formatting
 
-    +simple-container Nothing #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em em-italics] #[i i-italics]
+    +container-simple Nothing #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em em-italics] #[i i-italics]
 
     +divider Abbr
 
-    +simple-container
+    +container-simple
         abbr(title="HyperText Markup Language") HTML
 
     +divider Blockquote
 
-    +simple-container
+    +container-simple
         blockquote
             +lorem-ipsum
         blockquote #[+lorem-ipsum] #[footer The source is #[cite Someone]]
 
     +divider List - Unordered
 
-    +simple-container
+    +container-simple
         ul
             li
                 +lorem-ipsum(5, 'words')
@@ -45,27 +49,17 @@ append main
                 +lorem-ipsum(5, 'words')
             li
                 +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
                 ul
                     li
                         +lorem-ipsum(5, 'words')
                     li
                         +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
             li
                 +lorem-ipsum(5, 'words')
 
     +divider List - Unordered - Unstyled
 
-    +simple-container
+    +container-simple
         ul.unstyled
             li
                 +lorem-ipsum(5, 'words')
@@ -73,6 +67,20 @@ append main
                 +lorem-ipsum(5, 'words')
             li
                 +lorem-ipsum(5, 'words')
+                ul
+                    li
+                        +lorem-ipsum(5, 'words')
+                    li
+                        +lorem-ipsum(5, 'words')
+            li
+                +lorem-ipsum(5, 'words')
+
+    +divider List - Ordered
+
+    +container-simple
+        ol
+            li
+                +lorem-ipsum(5, 'words')
             li
                 +lorem-ipsum(5, 'words')
             li
@@ -82,39 +90,12 @@ append main
                         +lorem-ipsum(5, 'words')
                     li
                         +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-
-    +divider List - Ordered
-
-    +simple-container
-        ol
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
-            li
-                +lorem-ipsum(5, 'words')
             li
                 +lorem-ipsum(5, 'words')
 
     +divider Definition list
 
-    +simple-container
+    +container-simple
         dl
             dt
                 +lorem-ipsum(5, 'words')
@@ -125,13 +106,22 @@ append main
                 +lorem-ipsum(5, 'words')
             dd
                 +lorem-ipsum(5, 'words')
-        dl
-            dt
-                +lorem-ipsum(5, 'words')
-            dd
-                +lorem-ipsum(5, 'words')
-        dl
-            dt
-                +lorem-ipsum(5, 'words')
-            dd
-                +lorem-ipsum(5, 'words')
+
+    +divider Code
+
+    +container-simple
+        code print ( 'This is an example code block' )
+
+    +divider Section
+
+    +container-simple
+        section print ( 'This is an example section block' )
+
+    +divider Pre
+
+    +container-simple
+        pre print ( 'This is an example section block' )
+
+    +divider Kbd
+
+    +container-simple #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]

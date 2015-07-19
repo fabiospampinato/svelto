@@ -2459,6 +2459,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
+	"\/assets\/styles\/presto\/settings\/base.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/base.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/base.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
 	"\/CONTRIBUTING.md": {
 		"criticStyle": 0,
 		"enableFootnotes": 0,
@@ -3695,15 +3711,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/tools\/touching.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tools\/touching.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/demo\/tools\/touching.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -4151,6 +4158,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/mixins\/presto\/toolbar.jade",
 		"outputAbbreviatedPath": "\/views\/mixins\/presto\/toolbar.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/typography.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/typography.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/typography.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1

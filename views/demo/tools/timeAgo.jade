@@ -27,5 +27,4 @@ append main
 
     +divider TimeAgo Title -7200
 
-    .label(data-timestamp-title="#{Math.round ( new Date ().getTime () / 1000 - 7200 )}").compact.outlined
-        +icon("device-access-time")
+    +label-icon("device-access-time")(data-timestamp-title="#{Math.round ( new Date ().getTime () / 1000 - 7200 )}").outlined

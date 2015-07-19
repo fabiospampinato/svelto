@@ -6,16 +6,16 @@ append main
     +divider One time action
 
     +multiple
-        .button.actionable.outlined(onclick="test_one_time_action_cookie1()") Cookie 'test1'
-        .button.actionable.outlined(onclick="test_one_time_action_cookie2()") Cookie 'test2'
-        .button.actionable.outlined(onclick="test_one_time_action_cookie3()") Cookie 'test3' adv
+        +button-simple(onclick="test_one_time_action_cookie1()").outlined Cookie 'test1'
+        +button-simple(onclick="test_one_time_action_cookie2()").outlined Cookie 'test2'
+        +button-simple(onclick="test_one_time_action_cookie3()").outlined Cookie 'test3' adv
 
     +divider Action
 
     +multiple
-        .button.actionable.outlined(onclick="test_one_time_action_reset_cookie1()") Reset 'test1'
-        .button.actionable.outlined(onclick="test_one_time_action_reset_actions()") Reset all
-        .button.actionable.outlined(onclick="test_one_time_action_get_string()") Get cookie string
+        +button-simple(onclick="test_one_time_action_reset_cookie1()").outlined Reset 'test1'
+        +button-simple(onclick="test_one_time_action_reset_actions()").outlined Reset all
+        +button-simple(onclick="test_one_time_action_get_string()").outlined Get cookie string
 
 append body-end
     +script.

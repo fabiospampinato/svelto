@@ -3,32 +3,13 @@
 extends ../../layout.jade
 
 append main
-    +divider Code
+    +divider Iframe - Embed - Video - Object
 
-    +simple-container
-        code print ( 'This is an example code block' )
-
-    +divider Section
-
-    +simple-container
-        section print ( 'This is an example section block' )
-
-    +divider Pre
-
-    +simple-container
-        pre print ( 'This is an example section block' )
-
-    +divider Kbd
-
-    +simple-container #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]
-
-    +divider Embed
-
-    +simple-container ~ This block is actually empty ~
+    +container-simple //TODO
 
     +divider Images
 
-    +simple-container
+    +container-simple
         +multiple
             +image-sample
             +image-sample

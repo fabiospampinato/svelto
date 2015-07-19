@@ -42,19 +42,14 @@ mixin chat-msg(options)
                                 = options.sender.name
                     +container-header-right
                         +multiple
-                            .button(data-timestamp-title=options.message.timestamp).compact.mini.outlined
-                                +icon("device-access-time")
+                            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).xsmall.outlined
                             if options.permissions
                                 if options.permissions.own
-                                    .button(title="You are the owner").compact.mini.outlined
-                                        +icon("action-account-circle")
+                                    +button-icon("action-account-circle")(title="You are the owner").xsmall.outlined
                                 if options.permissions.reply
-                                    +button(title="Reply").compact.mini.outlined
-                                        +icon("content-reply")
+                                    +button-icon("content-reply")(title="Reply").xsmall.outlined
                                 if options.permissions.edit
-                                    +button(title="Edit").compact.mini.outlined
-                                        +icon("editor-mode-edit")
+                                    +button-icon("editor-mode-edit")(title="Edit").xsmall.outlined
                                 if options.permissions.delete
-                                    +button(title="Delete").compact.mini.outlined
-                                        +icon("action-delete")
+                                    +button-icon("action-delete")(title="Delete").xsmall.outlined
                 +container-content= options.message.content

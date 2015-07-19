@@ -1,5 +1,5 @@
 
-/* DEFAULT */
+/* DEFAULT BUTTON */
 
 button {
     border: none;
@@ -7,93 +7,10 @@ button {
 
 /* BUTTON */
 
-//TODO: Add a minimum width, so that when it's not very wide and rounded it will be a circle, not an oval
-
 .button {
 
-    @include color ( 'white' );
-    display: inline-flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: $layout-spacing;
-    border-radius: $border-radius-medium;
-    padding: $button-vertical-padding $button-horizontal-padding;
-    font-weight: bold;
-    position: relative;
-    // outline: none !important; //FIXME: Is it needed?
-    line-height: 1em;
-    min-height: 1em;
-    min-width: 1em;
-
-    html.dragging & {
-        cursor: move !important;
-    }
-
-    &.actionable {
-        cursor: pointer;
-    }
-
-    & > .button-left, & > .button-right {
-        background-color: rgba(0, 0, 0, 0.05);
-        padding: $button-compact-vertical-padding $button-compact-horizontal-padding;
-        min-width: 1em;
-        cursor: pointer;
-    }
-
-    &:not(.inactive):not(.active):not(.dragging) {
-
-        & > .button-left, & > .button-right {
-
-            &.actionable:not(.inactive):not(.active):not(.dragging):hover {
-                background-color: rgba(0, 0, 0, 0.06);
-            }
-
-        }
-
-    }
-
-    & > .button-left {
-        order: 1;
-        margin: #{-$button-vertical-padding} #{$button-horizontal-padding} #{-$button-vertical-padding} #{-$button-horizontal-padding};
-        border-top-left-radius: inherit;
-        border-bottom-left-radius: inherit;
-    }
-
-    & > .button-center {
-        order: 2;
-    }
-
-    & > .button-right {
-        order: 3;
-        margin: #{-$button-vertical-padding} #{-$button-horizontal-padding} #{-$button-vertical-padding} #{$button-horizontal-padding};
-        border-top-right-radius: inherit;
-        border-bottom-right-radius: inherit;
-    }
-
-    &.inactive {
-
-        opacity: $button-disabled-opacity;
-        cursor: default;
-
-        & > .button-left, & > .button-right {
-            opacity: $button-disabled-opacity;
-        }
-
-    }
-
-    &.compact {
-
-        padding: $button-compact-vertical-padding $button-compact-horizontal-padding;
-
-        & > .button-left {
-            margin: #{-$button-compact-vertical-padding} #{$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding};
-        }
-
-        & > .button-right {
-            margin: #{-$button-compact-vertical-padding} #{-$button-compact-horizontal-padding} #{-$button-compact-vertical-padding} #{$button-compact-horizontal-padding};
-        }
-
-    }
+    @extend .label;
+    cursor: pointer;
 
     &.floating {
         //TODO: add sub floating actions
@@ -102,22 +19,6 @@ button {
         position: fixed;
         right: $layout-spacing * 3;
         bottom: $layout-spacing * 3;
-    }
-
-    .icon {
-
-        @extend %icon;
-        font-size: 1.3em;
-        margin: -0.115em;
-
-        &.left {
-            padding-right: 0.75em;
-        }
-
-        &.right {
-            padding-left: 0.75em;
-        }
-
     }
 
 }

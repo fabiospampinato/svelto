@@ -3,10 +3,11 @@
 //- FIXME: Add support for arbitrary number of optgroups levels
 
 mixin select-btn(options, selected, id, icon)
-    .button.actionable.select-btn.select-trigger(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes)
-        block
-        +icon(icon || "navigation-unfold-more")(class=(block ? "right" : ""))
-        +select(options, selected, id)
+    +button(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes).select-btn.select-trigger
+        +button-center
+            block
+            +icon(icon || "navigation-unfold-more")(class=(block ? "right" : ""))
+            +select(options, selected, id)
 
 mixin select(options, selected, id)
     select(id="select-"+id, name=id, placeholder="Select a value...")

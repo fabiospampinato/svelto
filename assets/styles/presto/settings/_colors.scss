@@ -237,10 +237,6 @@ $colors: (
 
 /* DEFAULTS */
 
-$color-default-bg: #e9eaed !default;
+$color-base-bg: #e9eaed !default;
 
-$color-default-text: $color-white-text !default;
-$color-default-text-hover: $color-white-text-hover !default;
-
-$color-default-link: $color-white-text !default; //TODO: I think I should add a -link to all the other colors... and rename text-hover to link-hover
-$color-default-link-hover: $color-white-text-hover !default;
+$color-base-text: $color-white-text !default;
