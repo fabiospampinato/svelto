@@ -25,21 +25,21 @@
 
     &.left {
 
-        & ~ #header-wrp, & ~ #content-wrp {
+        & ~ header, & ~ main {
             margin-left: $navbar-vertical-width;
         }
 
-        body.fixed-header > & ~ #header-wrp > .header {
+        body.fixed-header > & ~ header > .header {
             left: $navbar-vertical-width;
         }
 
         &.slim {
 
-            & ~ #header-wrp, & ~ #content-wrp {
+            & ~ header, & ~ main {
                 margin-left: $navbar-slim-vertical-width;
             }
 
-            body.fixed-header > & ~ #header-wrp > .header {
+            body.fixed-header > & ~ header > .header {
                 left: $navbar-slim-vertical-width;
             }
 
@@ -49,21 +49,21 @@
 
     &.right {
 
-        & ~ #header-wrp, & ~ #content-wrp {
+        & ~ header, & ~ main {
             margin-right: $navbar-vertical-width;
         }
 
-        body.fixed-header > & ~ #header-wrp > .header {
+        body.fixed-header > & ~ header > .header {
             right: $navbar-vertical-width;
         }
 
         &.slim {
 
-            & ~ #header-wrp, & ~ #content-wrp {
+            & ~ header, & ~ main {
                 margin-right: $navbar-slim-vertical-width;
             }
 
-            body.fixed-header > & ~ #header-wrp > .header {
+            body.fixed-header > & ~ header > .header {
                 right: $navbar-slim-vertical-width;
             }
 
@@ -73,21 +73,21 @@
 
     &.top {
 
-        & ~ #header-wrp, & ~ #content-wrp {
+        & ~ header, & ~ main {
             margin-top: $toolbar-height + $layout-spacing + $navbar-horizontal-height;
         }
 
-        body.fixed-header > & ~ #header-wrp > .header {
+        body.fixed-header > & ~ header > .header {
             top: $navbar-horizontal-height;
         }
 
         &.slim {
 
-            & ~ #header-wrp, & ~ #content-wrp {
+            & ~ header, & ~ main {
                 margin-top: $toolbar-height + $layout-spacing + $navbar-slim-horizontal-height;
             }
 
-            body.fixed-header > & ~ #header-wrp > .header {
+            body.fixed-header > & ~ header > .header {
                 top: $navbar-slim-horizontal-height;
             }
 
@@ -97,13 +97,13 @@
 
     &.bottom {
 
-        & ~ #header-wrp, & ~ #content-wrp {
+        & ~ header, & ~ main {
             margin-bottom: $navbar-horizontal-height;
         }
 
         &.slim {
 
-            & ~ #header-wrp, & ~ #content-wrp {
+            & ~ header, & ~ main {
                 margin-bottom: $navbar-slim-horizontal-height;
             }
 
@@ -231,6 +231,8 @@
     &.opened, &.attached-xs {
         @include open ();
     }
+
+    //INFO: for the `attached-*` classes to work the navbars must be put before the header
 
     &.attached-xs {
         @include attach ();

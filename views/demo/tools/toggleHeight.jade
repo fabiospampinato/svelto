@@ -4,14 +4,15 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Paragraph
 
-    +container
-        .div(style="background-color:rgba(0,0,0,0.2);border-bottom: 1px solid transparent;margin-bottom: -1px !important;")
+    +simple-container
+        div(style="background-color:rgba(0,0,0,0.2);border-bottom: 1px solid transparent;margin-bottom: -1px !important;")
             #toggable.container(class="secondary")
-                p(style="background-color:rgba(0,0,0,0.2);border-radius: inherit;")
-                    +lorem-ipsum
+                +container-content
+                    p(style="background-color:rgba(0,0,0,0.2);border-radius: inherit;")
+                        +lorem-ipsum
 
     +divider Action
 

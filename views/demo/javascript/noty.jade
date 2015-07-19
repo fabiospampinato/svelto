@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Text
 
     +multiple
@@ -61,6 +61,7 @@ append content
         +button.pink(onclick="noty_test_colored('pink')") Pink
         +button.teal(onclick="noty_test_colored('teal')") Teal
         +button.brown(onclick="noty_test_colored('brown')") Brown
+        +button.transparent(onclick="noty_test_colored('transparent')") Transparent
 
 append body-end
     +script.

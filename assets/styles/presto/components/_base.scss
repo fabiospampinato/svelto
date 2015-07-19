@@ -12,11 +12,12 @@
 html {
 
     box-sizing: border-box;
-    min-height: 100%;
     font-family: $font-family;
     font-size: $font-size-normal;
     color: $color-default-text;
     position: relative;
+    min-height: 100%;
+    display: flex;
 
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
@@ -36,21 +37,35 @@ body {
 
     background-color: $color-default-bg;
     position: relative;
-//    min-height: calc(100% - ( #{$header-height} + #{$layout-spacing} ));
-//    margin: calc(#{$header-height} + #{$layout-spacing}) auto 0 !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    width: 100%;
 
-    & > #header-wrp {
+    & > header {
+        flex-shrink: 0;
         position: relative;
     }
 
-    & > #content-wrp {
+    & > main {
+        flex-grow: 1;
         position: relative;
         padding: 0 $layout-spacing;
     }
 
+    & > footer {
+
+        flex-shrink: 0;
+
+        & > .footer {
+            margin-bottom: 0;
+        }
+
+    }
+
     &.fixed-header {
 
-        & > #header-wrp {
+        & > header {
 
             margin-top: $toolbar-height + $layout-spacing;
             transition: margin 0.3s ease 0s;
@@ -66,7 +81,7 @@ body {
 
         }
 
-        & > #content-wrp {
+        & > main {
             transition: margin 0.3s ease 0s;
         }
 

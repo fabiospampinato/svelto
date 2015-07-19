@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Outside
 
     +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.limited
@@ -48,7 +48,7 @@ append content
 
     +divider Inside
 
-    +container
+    +simple-container
         +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.gray
         +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
         p

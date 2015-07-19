@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Base
 
-    +container
+    +simple-container
         +breadcrumb
             a(href="#", title="Link 1") Link 1
             a(href="#", title="Link 2") Link 2
@@ -15,7 +15,7 @@ append content
 
     +divider Slashed
 
-    +container
+    +simple-container
         +breadcrumb.slashed
             a(href="#", title="Link 1") Link 1
             a(href="#", title="Link 2") Link 2
@@ -25,7 +25,7 @@ append content
 
     +divider Base - Highlighted
 
-    +container
+    +simple-container
         +breadcrumb.highlighted
             a(href="#", title="Link 1") Link 1
             a(href="#", title="Link 2") Link 2
@@ -35,7 +35,7 @@ append content
 
     +divider Slashed - Highlighted
 
-    +container
+    +simple-container
         +breadcrumb.slashed.highlighted
             a(href="#", title="Link 1") Link 1
             a(href="#", title="Link 2") Link 2

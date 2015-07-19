@@ -4,86 +4,86 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Limited
 
     +row.limited
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-1
-            +container 1
+            +simple-container 1
     +row.limited
         +column.xs-3
-            +container 3
+            +simple-container 3
         +column.xs-6
-            +container 6
+            +simple-container 6
         +column.xs-3
-            +container 3
+            +simple-container 3
     +row.limited
         +column.xs-3
-            +container 3
+            +simple-container 3
         +column.xs-9
-            +container 9
+            +simple-container 9
 
     +divider Different widths - Offset
 
     +row
         +column.xs-1
-            +container 1
+            +simple-container 1
         +column.xs-4
-            +container 4
+            +simple-container 4
         +column.xs-3.offset-xs-2
-            +container 3 offset 2
+            +simple-container 3 offset 2
         +column.xs-2
-            +container 2
+            +simple-container 2
 
     +divider Responsive
 
     +row
         +column.xs-12.sm-6.md-4.lg-2
-            +container xs-12 sm-6 md-4 lg-2
+            +simple-container xs-12 sm-6 md-4 lg-2
         +column.xs-12.sm-6.md-4.lg-2
-            +container xs-12 sm-6 md-4 lg-2
+            +simple-container xs-12 sm-6 md-4 lg-2
         +column.xs-12.sm-6.md-4.lg-2
-            +container xs-12 sm-6 md-4 lg-2
+            +simple-container xs-12 sm-6 md-4 lg-2
         +column.xs-12.sm-6.md-4.lg-2
-            +container xs-12 sm-6 md-4 lg-2
+            +simple-container xs-12 sm-6 md-4 lg-2
         +column.xs-12.sm-6.md-4.lg-2
-            +container xs-12 sm-6 md-4 lg-2
+            +simple-container xs-12 sm-6 md-4 lg-2
         +column.xs-12.sm-6.md-4.lg-2
-            +container xs-12 sm-6 md-4 lg-2
+            +simple-container xs-12 sm-6 md-4 lg-2
 
     +divider Responsive 2
 
     +row
         +column.xs-0.sm-3
-            +container xs-0 sm-3
+            +simple-container xs-0 sm-3
         +column.xs-12.sm-9.md-6.lg-3
-            +container xs-12 sm-9 md-6 lg-3
+            +simple-container xs-12 sm-9 md-6 lg-3
         +column.xs-0.lg-3
-            +container xs-0 lg-3
+            +simple-container xs-0 lg-3
         +column.xs-0.md-3
-            +container xs-0 md-3
+            +simple-container xs-0 md-3
 
     +divider Complex 1
 
@@ -91,10 +91,10 @@ append content
         +column.xs-12
             +multiple.stretched
                 +multiple.vertical.fluid.w35-100
-                    +container 1
-                    +container 2
-                    +container 3
-                +container.w65-100 1
+                    +simple-container 1
+                    +simple-container 2
+                    +simple-container 3
+                +simple-container.w65-100 1
 
     +divider Complex 2
 
@@ -102,12 +102,12 @@ append content
         +column.xs-12
             +multiple.stretched
                 +multiple.vertical.fluid.w65-100
-                    +container 1
+                    +simple-container 1
                     +multiple.fluid.joined
-                        +container 0.5
-                        +container 0.5
-                    +container 1
-                +container.w35-100 1
+                        +simple-container 0.5
+                        +simple-container 0.5
+                    +simple-container 1
+                +simple-container.w35-100 1
 
     +divider Complex 3
 
@@ -115,39 +115,39 @@ append content
         +column.xs-12
             +multiple.stretched
                 +multiple.vertical.fluid.w80-100
-                    +container 3
+                    +simple-container 3
                     +multiple.fluid.stretched
-                        +container 1.5
+                        +simple-container 1.5
                         +multiple.vertical.fluid
-                            +container 0.5
+                            +simple-container 0.5
                             +multiple.fluid.joined
-                                +container 0.25
-                                +container 0.25
-                            +container 0.5
-                    +container 3
-                +container.w20-100 1
+                                +simple-container 0.25
+                                +simple-container 0.25
+                            +simple-container 0.5
+                    +simple-container 3
+                +simple-container.w20-100 1
 
     +divider Full size
 
     +row.full-size
         +column.s12
-            +container Full size
+            +simple-container Full size
 
     +divider Full size - Limited
 
     +row.full-size.limited
         +column.w65-100
-            +container Main
+            +simple-container Main
         +column.w35-100
-            +container Sidebar
+            +simple-container Sidebar
 
     +divider Full size - Limited - Joined
 
     +row.full-size.limited
         +column
             +multiple.joined
-                +container.w65-100 Main
-                +container.w35-100 Sidebar
+                +simple-container.w65-100 Main
+                +simple-container.w35-100 Sidebar
 
 append body-end
     +noty({ body: '<p>[X-SMALL] 0-481 <br/> [SMALL] 482-767 <br/> [MEDIUM] 768-961 <br/> [LARGE] >= 962</p>', ttl: 'forever' })

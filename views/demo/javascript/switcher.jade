@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Switcher
 
-    +container
+    +simple-container
         +switcher("name", "Value")
         +switcher("name2", "Value2", true).presto-switcher-disabled
         +switcher({name:"name3", value:"Value3", icons:{on:"content-add"}})

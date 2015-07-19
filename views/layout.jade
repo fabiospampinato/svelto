@@ -5,7 +5,7 @@ include mixins/presto/all.jade
 +html
     +head("Presto")
     +body.fixed-header
-        #header-wrp
+        header
             +header
                 +toolbar.primary.shadow-depth-4
                     +toolbar-icon("navigation-menu")
@@ -14,5 +14,9 @@ include mixins/presto/all.jade
                     +toolbar-icon("navigation-refresh")
                     +toolbar-icon("navigation-more-vert")
                 block header
-        #content-wrp
-            block content
+        main
+            block main
+        footer
+            +footer
+                p.centered Presto, a framework by me
+                block footer

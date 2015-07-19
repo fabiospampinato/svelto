@@ -7,9 +7,9 @@
     border-width: $container-border-width;
     border-style: solid;
     border-radius: $border-radius-medium;
-    padding: $layout-spacing;
     margin-bottom: $layout-spacing;
-    position: relative;
+    display: flex;
+    flex-direction: column;
 
     &.limited {
         max-width: $layout-max-width;
@@ -17,24 +17,12 @@
         margin-right: auto;
     }
 
-    & > *:last-child:not(.content):not(.footer) {
-
-        margin-bottom: 0 !important;
-
-        &.multiple {
-            margin-bottom: -$layout-spacing !important;
-        }
-
-    }
-
-    & > .header {
-
-        //TODO: add support for header always centered, even if you have 2 buttons at the left and 4 at the right
-        //TODO: maybe add support for same width if there are some buttons or not
+    & > .container-header {
 
         @include color ( 'primary' );
         display: flex;
-        flex-wrap: wrap;
+        flex-shrink: 0;
+        flex-wrap: nowrap;
         justify-content: space-between;
         align-items: center;
         border-width: $container-header-border-width;
@@ -44,15 +32,26 @@
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
         font-weight: bold;
-        margin: #{-($layout-spacing + $container-border-width)} #{-($layout-spacing + $container-border-width)} $layout-spacing;
-        text-transform: uppercase;
-        position: relative;
         padding: $layout-spacing;
+        margin-left: - $container-header-border-width;
+        margin-right: - $container-header-border-width;
+        margin-top: - $container-header-border-width;
 
-        & > .sub {
+        & > .container-header-sub {
+
+            box-sizing: border-box;
 
             &.left {
+
                 order: 0;
+                flex-shrink: 25;
+                width: 50%;
+
+                & ~ .center, & ~ .right {
+                    padding-left: $layout-spacing;
+                    padding-right: 0;
+                }
+
             }
 
             &.center {
@@ -61,42 +60,78 @@
                 flex-grow: 1;
                 text-align: center;
 
-                & > .title {
-                    pointer-events: none; //INFO: so we can drag by the title for example (but are are you sure about this?)(is this the original purpose?)//FIXME: if we use this we cannot support IE 10 (I think)
+                & ~ .right {
                     padding-left: $layout-spacing;
-                    padding-right: $layout-spacing;
+                    padding-right: 0;
+                }
 
+                & ~ .left {
+                    padding-right: $layout-spacing;
+                    padding-left: 0;
                 }
 
             }
 
             &.right {
+
                 order: 2;
+                flex-shrink: 25;
+                width: 50%;
+                text-align: right;
+
+                & > .multiple {
+                    justify-content: flex-end;
+                }
+
+                & ~ .center, & ~ .left {
+                    padding-right: $layout-spacing;
+                    padding-left: 0;
+                }
+
             }
 
-            & > .multiple {
-                margin-top: -3px;
-                margin-bottom: -3px;
-            }
+            & > * {
 
-            & > .button, & > .multiple > .button {
-                margin-bottom: 0 !important;
+                margin-bottom: 0;
+
+                &.multiple {
+                    margin-bottom: -$layout-spacing !important;
+                }
+
             }
 
         }
 
     }
 
-    & > .content {
-        margin: -$layout-spacing;
+    & > .container-content {
+
+        flex-grow: 1;
         padding: $layout-spacing;
-        overflow: hidden;
+        overflow: auto;
+
+        & > *:last-child {
+
+            margin-bottom: 0 !important;
+
+            &.multiple {
+                margin-bottom: -$layout-spacing !important;
+            }
+
+        }
+
     }
 
-    & > .footer {
-        margin: #{$layout-spacing} #{-($layout-spacing + $container-border-width)} #{-($layout-spacing + $container-border-width)};
+    & > .container-footer {
+        @include color ( 'white' );
+        flex-shrink: 0;
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        margin-left: - $container-footer-border-width;
+        margin-right: - $container-footer-border-width;
+        margin-bottom: - $container-footer-border-width;
         border-width: $container-footer-border-width;
         border-style: solid;
         padding: $layout-spacing;

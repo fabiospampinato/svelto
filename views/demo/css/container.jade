@@ -2,58 +2,71 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Simple
 
-    +container Simple
+    +simple-container Simple
 
     +divider Limited
 
-    +container.limited Limited
+    +simple-container.limited Limited
 
     +divider Nested
 
-    +container
+    +simple-container
         p Outside
-        +container.teal
+        +simple-container.teal
             p Inside
-            +container.pink
+            +simple-container.pink
                 p Insider
 
     +divider With header
 
-    +container("Header")
+    +simple-container("Header") Content
+
+    +divider With advanced header
+
+    +container
+        +container-header.secondary
+            +container-header-right Right
+            +container-header-center Center
+            +container-header-left Left
         +container-content Content
 
     +divider With footer
 
-    +container Content
+    +container
+        +container-content Content
         +container-footer.teal Footer
 
     +divider With header & footer
 
-    +container("Header", "green") Content
+    +container
+        +container-header("Header").green
+        +container-content Content
         +container-footer Footer
 
     +divider Advanced
 
-    +container
+    +container.height-sm
         +container-header("Header")
             +container-header-left
                 +multiple
-                    +button.compact.mini
+                    +button.compact.xxsmall
                         +icon("action-thumb-down")
-                    +button.compact.mini
+                    +button.compact.xxsmall
                         +icon("action-thumb-up")
             +container-header-right
                 +multiple
-                    +button.compact.mini
+                    +button.compact.xxsmall
                         +icon("navigation-apps")
-                    +button.compact.mini
+                    +button.compact.xxsmall
                         +icon("navigation-menu")
-                    +button.compact.mini
+                    +button.compact.xxsmall
                         +icon("navigation-more-vert")
-                    +button.compact.mini
+                    +button.compact.xxsmall
                         +icon("navigation-refresh")
-        +container-content Content
+        +container-content
+            p
+                +lorem-ipsum
         +container-footer.pink Footer

@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Ripple
 
-    +multiple.ripples-btns
+    +multiple.centered.ripples-btns
         +button.ripple.ripple-primary Primary
         +button.ripple.ripple-secondary Secondary
         +button.ripple.ripple-tertiary Tertiary
@@ -58,7 +58,7 @@ append content
 
     +divider Paragraph
 
-    +container.ripple.ripple-tertiary
+    +simple-container.ripple.ripple-tertiary
         +lorem-ipsum
 
 append body-end

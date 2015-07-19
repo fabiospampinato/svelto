@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider H1-H6
 
-    +container
+    +simple-container
         h1 H1 - Heading title #[small Small subheader]
         h2 H2 - Heading title #[small Small subheader]
         h3 H3 - Heading title #[small Small subheader]
@@ -15,29 +15,29 @@ append content
 
     +divider Paragraph
 
-    +container
+    +simple-container
         p
             +lorem-ipsum
 
     +divider Formatting
 
-    +container Nothing #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em em-italics] #[i i-italics]
+    +simple-container Nothing #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em em-italics] #[i i-italics]
 
     +divider Abbr
 
-    +container
+    +simple-container
         abbr(title="HyperText Markup Language") HTML
 
     +divider Blockquote
 
-    +container
+    +simple-container
         blockquote
             +lorem-ipsum
         blockquote #[+lorem-ipsum] #[footer The source is #[cite Someone]]
 
     +divider List - Unordered
 
-    +container
+    +simple-container
         ul
             li
                 +lorem-ipsum(5, 'words')
@@ -65,7 +65,7 @@ append content
 
     +divider List - Unordered - Unstyled
 
-    +container
+    +simple-container
         ul.unstyled
             li
                 +lorem-ipsum(5, 'words')
@@ -93,7 +93,7 @@ append content
 
     +divider List - Ordered
 
-    +container
+    +simple-container
         ol
             li
                 +lorem-ipsum(5, 'words')
@@ -114,7 +114,7 @@ append content
 
     +divider Definition list
 
-    +container
+    +simple-container
         dl
             dt
                 +lorem-ipsum(5, 'words')

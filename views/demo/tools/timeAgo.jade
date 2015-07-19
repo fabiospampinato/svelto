@@ -4,22 +4,26 @@ extends ../../layout.jade
 
 //- TODO: add example where the title is changing
 
-append content
+append main
     +divider TimeAgo
 
-    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")
+    +container
+        +container-content(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")
 
     +divider TimeAgo -90
 
-    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 90 )}")
+    +container
+        +container-content(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 90 )}")
 
     +divider TimeAgo -120
 
-    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 120 )}")
+    +container
+        +container-content(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 120 )}")
 
     +divider TimeAgo -3600
 
-    +container(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 3600 )}")
+    +container
+        +container-content(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 3600 )}")
 
     +divider TimeAgo Title -7200
 

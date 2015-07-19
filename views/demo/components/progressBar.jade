@@ -4,17 +4,17 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Base
 
-    +container
+    +simple-container
         +progressBar(33)
         +progressBar(55).striped
         +progressBar({ percentages: [{ value: 45 }], labeled: true })
 
     +divider Colored
 
-    +container
+    +simple-container
         +progressBar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' })
         +progressBar({ value: 5, color: 'yellow' }, { value: 5, color: 'green' }, { value: 5, color: 'pink' }, { value: 5, color: 'teal' }).striped
         +progressBar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
@@ -22,7 +22,7 @@ append content
 
     +divider Inactive
 
-    +container
+    +simple-container
         +progressBar(45).inactive
         +progressBar(66).striped.inactive
         +progressBar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).inactive
@@ -31,7 +31,7 @@ append content
 
     +divider Created
 
-    .container.created
+    +simple-container.created
 
     +multiple
         +button("progressBar_create ( 22 )").outlined Basic
@@ -75,5 +75,5 @@ append body-end
             });
         }
         function progressBar_create () {
-            $.progressBar.apply ( null, arguments ).appendTo ( '.container.created' );
+            $.progressBar.apply ( null, arguments ).appendTo ( '.container.created .container-content' );
         }

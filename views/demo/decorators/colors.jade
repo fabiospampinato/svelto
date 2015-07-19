@@ -2,7 +2,7 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Base
 
     +multiple
@@ -50,7 +50,7 @@ append content
 
     +divider Text
 
-    +container
+    +simple-container
         p.text-primary [PRIMARY] #[+lorem-ipsum(10, 'words')]
         p.text-secondary [SECONDARY] #[+lorem-ipsum(10, 'words')]
         p.text-tertiary [TERTIARY] #[+lorem-ipsum(10, 'words')]

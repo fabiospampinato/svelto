@@ -2,62 +2,62 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Multiple
 
     +multiple
-        +container 1
-        +container 2
-        +container 3
-        +container 4
-        +container 5
-        +container 6
-        +container 7
-        +container 8
-        +container 9
-        +container 10
+        +simple-container 1
+        +simple-container 2
+        +simple-container 3
+        +simple-container 4
+        +simple-container 5
+        +simple-container 6
+        +simple-container 7
+        +simple-container 8
+        +simple-container 9
+        +simple-container 10
 
     +divider Multiple - Centered
 
     +multiple.centered
-        +container 1
-        +container 2
-        +container 3
-        +container 4
-        +container 5
-        +container 6
-        +container 7
-        +container 8
-        +container 9
-        +container 10
+        +simple-container 1
+        +simple-container 2
+        +simple-container 3
+        +simple-container 4
+        +simple-container 5
+        +simple-container 6
+        +simple-container 7
+        +simple-container 8
+        +simple-container 9
+        +simple-container 10
 
     +divider Multiple - Nowrap
 
     +multiple.nowrap
-        +container 1
-        +container 2
-        +container 3
-        +container 4
-        +container 5
-        +container 6
-        +container 7
-        +container 8
-        +container 9
-        +container 10
+        +simple-container 1
+        +simple-container 2
+        +simple-container 3
+        +simple-container 4
+        +simple-container 5
+        +simple-container 6
+        +simple-container 7
+        +simple-container 8
+        +simple-container 9
+        +simple-container 10
 
     +divider Fluid
 
     +multiple.fluid
-        +container Left
-        +container Center
-        +container.nogrow Right
+        +simple-container Left
+        +simple-container Center
+        +simple-container.nogrow Right
 
     +divider Fluid - Joined
 
     +multiple.fluid.joined
-        +container Left
-        +container Center
-        +container Right
+        +simple-container Left
+        +simple-container Center
+        +simple-container Right
 
     +multiple.fluid.joined
         +button.outlined Left
@@ -67,9 +67,9 @@ append content
     +divider Fluid - Joined - No separators
 
     +multiple.fluid.joined.no-separators
-        +container Left
-        +container Center
-        +container Right
+        +simple-container Left
+        +simple-container Center
+        +simple-container Right
 
     +multiple.fluid.joined.no-separators.outlined
         +button.outlined Left
@@ -81,45 +81,45 @@ append content
     //- TODO: add support for different shrinks
 
     +multiple.fluid.joined
-        +container.grow-1 1
-        +container.grow-2 2
-        +container.grow-3 3
-        +container.grow-4 4
-        +container.grow-5 5
-        +container.grow-6 6
-        +container.grow-7 7
-        +container.grow-8 8
-        +container.grow-9 9
-        +container.grow-10 10
+        +simple-container.grow-1 1
+        +simple-container.grow-2 2
+        +simple-container.grow-3 3
+        +simple-container.grow-4 4
+        +simple-container.grow-5 5
+        +simple-container.grow-6 6
+        +simple-container.grow-7 7
+        +simple-container.grow-8 8
+        +simple-container.grow-9 9
+        +simple-container.grow-10 10
 
     +divider Fluid - Joined - Stretched
 
     +multiple.fluid.joined.stretched
-        +container.noshrink Left
-        +container
+        +simple-container.noshrink Left
+        +simple-container
             +lorem-ipsum
-        +container.noshrink Right
+        +simple-container.noshrink Right
 
     +divider Vertical
 
     +multiple.vertical
-        +container Top
-        +container Middle
-        +container Bottom
+        +simple-container Top
+        +simple-container Middle
+        +simple-container Bottom
 
     +divider Vertical - Fluid
 
     +multiple.vertical.fluid
-        +container Top
-        +container Middle
-        +container Bottom
+        +simple-container Top
+        +simple-container Middle
+        +simple-container Bottom
 
     +divider Vertical - Fluid - Joined
 
     +multiple.vertical.fluid.joined
-        +container Top
-        +container Middle
-        +container Bottom
+        +simple-container Top
+        +simple-container Middle
+        +simple-container Bottom
 
     +multiple.vertical.fluid.joined
         +button.outlined Top
@@ -129,9 +129,9 @@ append content
     +divider Vertical - Fluid - Joined - No separators
 
     +multiple.vertical.fluid.joined.no-separators
-        +container Top
-        +container Middle
-        +container Bottom
+        +simple-container Top
+        +simple-container Middle
+        +simple-container Bottom
 
     +multiple.vertical.fluid.joined.no-separators.outlined
         +button.outlined Top

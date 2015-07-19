@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Depths
 
-    +multiple.centered.z-depths
+    +multiple.centered.z-depths-btns
         +button.z-depth-0 0
         +button.z-depth-1 1
         +button.z-depth-2 2
@@ -34,4 +34,4 @@ append content
 
 append body-end
     script.
-        $('.z-depths .button').wrap ( '<div class="centered" style="width: 150px; height: 150px;"></div>' );
+        $('.z-depths-btns .button').wrap ( '<div class="centered" style="width: 150px; height: 150px;"></div>' );

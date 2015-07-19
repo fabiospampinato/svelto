@@ -12,8 +12,8 @@
 @import 'settings/gradients';
 @import 'components/colors';
 
-@import 'settings/shadows';
-@import 'components/shadows';
+@import 'settings/depths';
+@import 'components/depths';
 
 @import 'settings/sizes';
 @import 'components/sizes';
@@ -44,6 +44,7 @@
 @import 'settings/dropdown';
 @import 'settings/expander';
 @import 'settings/flags';
+@import 'settings/footer';
 @import 'settings/forms';
 @import 'settings/grid';
 @import 'settings/header';
@@ -89,6 +90,7 @@
 @import 'components/flags';
 @import 'components/font_mdi';
 @import 'components/font_roboto';
+@import 'components/footer';
 @import 'components/form';
 @import 'components/grid';
 @import 'components/header';

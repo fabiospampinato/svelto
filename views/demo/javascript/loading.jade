@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Paragraph
 
-    +container
+    +simple-container
         p
             +lorem-ipsum
 
@@ -18,5 +18,5 @@ append body-end
         var loading = false;
         function loading_test () {
             loading = !loading;
-            $("p").parent ().loading ( loading );
+            $("p").parent ( '.container' ).loading ( loading );
         }

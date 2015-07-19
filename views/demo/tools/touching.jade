@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Squares - All matches
 
-    +container
+    +simple-container
         +multiple.squares_all
             +square.enormous.centered
                 span.small 1
@@ -80,7 +80,7 @@ append content
 
     +divider Squares - Most significant match
 
-    +container
+    +simple-container
         +multiple.squares_most
             +square.enormous.centered
                 span.small 1
@@ -155,7 +155,7 @@ append content
 
     +divider Squares - Punctual
 
-    +container
+    +simple-container
         +multiple.squares_punctual
             +square.enormous.centered
                 span.small 1

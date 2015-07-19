@@ -2,10 +2,10 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Paragraph
 
-    +container
+    +simple-container
         p
             +lorem-ipsum
 
@@ -16,5 +16,5 @@ append content
 append body-end
     +script.
         function blur_test () {
-            $("p").parent ().blurred ();
+            $("p").parent ( '.container' ).blurred ();
         }

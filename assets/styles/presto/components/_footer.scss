@@ -1,0 +1,24 @@
+
+/* FOOTER */
+
+.footer {
+
+    background-color: rgba(0, 0, 0, 0.25);
+    margin-bottom: $layout-spacing;
+    padding: $layout-spacing;
+
+    & > * {
+        opacity: default;
+    }
+
+    & > *:last-child {
+
+        margin-bottom: 0;
+
+        &.multiple {
+            margin-bottom: -$layout-spacing !important;
+        }
+
+    }
+
+}

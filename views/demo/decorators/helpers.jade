@@ -2,15 +2,15 @@
 
 extends ../../layout.jade
 
-append content
+append main
     +divider Blurred
 
-    +container
+    +simple-container
         +square-sample.blurred
 
     +divider Border
 
-    +container
+    +simple-container
         +multiple
             +square-sample.no-border
             +square-sample.rounded
@@ -19,28 +19,28 @@ append content
 
     +divider Display
 
-    +container
+    +simple-container
         +multiple
             +square-sample.show
             +square-sample.hidden
 
     +divider Visibility
 
-    +container
+    +simple-container
         +multiple
             +square-sample.visible
             +square-sample.invisible
 
     +divider Float
 
-    +container
+    +simple-container
         +multiple
             +square-sample.left
             +square-sample.right
 
     +divider Flip
 
-    +container
+    +simple-container
         +multiple
             +square-sample.flipX
             +square-sample.flipY
@@ -48,7 +48,7 @@ append content
 
     +divider Rotate
 
-    +container
+    +simple-container
         +multiple
             +square-sample.rotate-left
             +square-sample.rotate-right
@@ -56,7 +56,7 @@ append content
 
     +divider Text alignment
 
-    +container
+    +simple-container
         +multiple
             +square-sample.text-left
             +square-sample.text-center
@@ -64,7 +64,7 @@ append content
 
     +divider Text transform
 
-    +container
+    +simple-container
         +multiple
             +square-sample.text-lowercase
             +square-sample.text-uppercase

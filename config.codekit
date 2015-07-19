@@ -42,6 +42,17 @@
 		"outputPathIsSetByUser": 0,
 		"processed": 0
 		},
+	"\/assets\/images\/icons\/icon_mask.png": {
+		"fileType": 32768,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"initialSize": 50962,
+		"inputAbbreviatedPath": "\/assets\/images\/icons\/icon_mask.png",
+		"outputAbbreviatedPath": "\/assets\/images\/icons\/icon_mask.png",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"processed": 0
+		},
 	"\/assets\/images\/icons\/tile\/tile-wide.png": {
 		"fileType": 32768,
 		"ignore": 0,
@@ -1008,6 +1019,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
+	"\/assets\/styles\/presto\/components\/_depths.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_depths.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_depths.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
 	"\/assets\/styles\/presto\/components\/_divider.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -1113,6 +1140,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_font_roboto.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_font_roboto.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/components\/_footer.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_footer.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_footer.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1449,22 +1492,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_select.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_select.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
-	"\/assets\/styles\/presto\/components\/_shadows.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_shadows.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_shadows.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1920,6 +1947,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
+	"\/assets\/styles\/presto\/settings\/_depths.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_depths.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_depths.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
 	"\/assets\/styles\/presto\/settings\/_divider.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -2009,6 +2052,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_flags.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_flags.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/settings\/_footer.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_footer.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_footer.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2281,22 +2340,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_ripple.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_ripple.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
-	"\/assets\/styles\/presto\/settings\/_shadows.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_shadows.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_shadows.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2595,6 +2638,26 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/demo\/components\/divider.jade",
 		"outputAbbreviatedPath": "\/views\/demo\/components\/divider.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/components\/footer.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/components\/footer.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/demo\/components\/footer.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/components\/footer.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/components\/footer.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -2959,6 +3022,26 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/decorators\/depths.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/decorators\/depths.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/demo\/decorators\/depths.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/decorators\/depths.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/decorators\/depths.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/views\/demo\/decorators\/helpers.html": {
 		"fileType": 8192,
 		"ignore": 1,
@@ -3019,6 +3102,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/decorators\/ripple.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/decorators\/ripple.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/decorators\/ripple.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3026,26 +3118,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/demo\/decorators\/ripple.jade",
 		"outputAbbreviatedPath": "\/views\/demo\/decorators\/ripple.html",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/views\/demo\/decorators\/shadows.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/decorators\/shadows.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
-	"\/views\/demo\/decorators\/shadows.jade": {
-		"compileDebug": 0,
-		"fileType": 512,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/decorators\/shadows.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/decorators\/shadows.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -3612,15 +3684,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/tools\/toggleHeight.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tools\/toggleHeight.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/demo\/tools\/toggleHeight.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3813,6 +3876,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/mixins\/presto\/flags.jade",
 		"outputAbbreviatedPath": "\/views\/mixins\/presto\/flags.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/footer.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/footer.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/footer.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1

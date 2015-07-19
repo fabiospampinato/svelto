@@ -38,7 +38,7 @@
                     background: $bg-hover #{$important};
                 }
 
-                &:active {
+                &:not(.ripple):active {
                     background: $bg-active #{$important};
                 }
 

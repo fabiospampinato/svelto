@@ -2,16 +2,16 @@
 
 extends views/layout.jade
 
-append content
+append main
     +divider Decorators
 
     +multiple
         +button("/views/demo/decorators/colors.html").outlined Colors
+        +button("/views/demo/decorators/depths.html").outlined Depths
         +button("/views/demo/decorators/helpers.html").outlined Helpers
         +button("/views/demo/decorators/helpers_dimensions.html").outlined Dimensions Helpers
         +button("/views/demo/decorators/helpers_responsive.html").outlined Responsive Helpers
         +button("/views/demo/decorators/ripple.html").outlined Ripple
-        +button("/views/demo/decorators/shadows.html").outlined Shadows
         +button("/views/demo/decorators/sizes.html").outlined Sizes
 
     +divider CSS
@@ -35,6 +35,7 @@ append content
         +button("/views/demo/components/button.html").outlined Button
         +button("/views/demo/components/chat.html").outlined Chat
         +button("/views/demo/components/divider.html").outlined Divider
+        +button("/views/demo/components/footer.html").outlined Footer
         +button("/views/demo/components/infobar.html").outlined Infobar
         +button("/views/demo/components/inputs.html").outlined Inputs
         +button("/views/demo/components/labels.html").outlined Labels
@@ -53,7 +54,7 @@ append content
         +button("/views/demo/javascript/expander.html").outlined Expander
         +button("/views/demo/javascript/loading.html").outlined Loading
         +button("/views/demo/javascript/modal.html").outlined Modal
-        +button("/views/demo/javascript/navbar.html").outlined Navbar
+        +button("/views/demo/javascript/navbar.html").outlined.red Navbar
         +button("/views/demo/javascript/noty.html").outlined Noty
         +button("/views/demo/javascript/radio.html").outlined Radio
         +button("/views/demo/javascript/select.html").outlined Select
