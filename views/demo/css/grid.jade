@@ -7,147 +7,88 @@ extends ../../layout.jade
 append main
     +divider Limited
 
-    +row.limited
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-        +column.xs-1
-            +container-simple 1
-    +row.limited
-        +column.xs-3
-            +container-simple 3
-        +column.xs-6
-            +container-simple 6
-        +column.xs-3
-            +container-simple 3
-    +row.limited
-        +column.xs-3
-            +container-simple 3
-        +column.xs-9
-            +container-simple 9
+    +multiple.limited
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+        +container-simple.xs-1 1
+    +multiple.limited
+        +container-simple.xs-3 3
+        +container-simple.xs-6 6
+        +container-simple.xs-3 3
+    +multiple.limited
+        +container-simple.xs-3 3
+        +container-simple.xs-9 9
 
     +divider Different widths - Offset
 
-    +row
-        +column.xs-1
-            +container-simple 1
-        +column.xs-4
-            +container-simple 4
-        +column.xs-3.offset-xs-2
-            +container-simple 3 offset 2
-        +column.xs-2
-            +container-simple 2
+    +multiple
+        +container-simple.xs-1 1
+        +container-simple.xs-4 4
+        +container-simple.xs-3.offset-xs-2 3 offset 2
+        +container-simple.xs-2 2
 
     +divider Responsive
 
-    +row
-        +column.xs-12.sm-6.md-4.lg-2
-            +container-simple xs-12 sm-6 md-4 lg-2
-        +column.xs-12.sm-6.md-4.lg-2
-            +container-simple xs-12 sm-6 md-4 lg-2
-        +column.xs-12.sm-6.md-4.lg-2
-            +container-simple xs-12 sm-6 md-4 lg-2
-        +column.xs-12.sm-6.md-4.lg-2
-            +container-simple xs-12 sm-6 md-4 lg-2
-        +column.xs-12.sm-6.md-4.lg-2
-            +container-simple xs-12 sm-6 md-4 lg-2
-        +column.xs-12.sm-6.md-4.lg-2
-            +container-simple xs-12 sm-6 md-4 lg-2
+    +multiple
+        +container-simple.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
+        +container-simple.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
+        +container-simple.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
+        +container-simple.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
+        +container-simple.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
+        +container-simple.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
 
     +divider Responsive 2
 
-    +row
-        +column.xs-0.sm-3
-            +container-simple xs-0 sm-3
-        +column.xs-12.sm-9.md-6.lg-3
-            +container-simple xs-12 sm-9 md-6 lg-3
-        +column.xs-0.lg-3
-            +container-simple xs-0 lg-3
-        +column.xs-0.md-3
-            +container-simple xs-0 md-3
+    +multiple
+        +container-simple.xs-0.sm-3 xs-0 sm-3
+        +container-simple.xs-12.sm-9.md-6.lg-3 xs-12 sm-9 md-6 lg-3
+        +container-simple.xs-0.lg-3 xs-0 lg-3
+        +container-simple.xs-0.md-3 xs-0 md-3
 
     +divider Complex 1
 
-    +row
-        +column.xs-12
-            +multiple.stretched
-                +multiple.vertical.fluid.w35-100
-                    +container-simple 1
-                    +container-simple 2
-                    +container-simple 3
-                +container-simple.w65-100 1
+    +multiple.stretched
+        +multiple.vertical.fluid.w35-100
+            +container-simple 1
+            +container-simple 2
+            +container-simple 3
+        +container-simple.w65-100 1
 
     +divider Complex 2
 
-    +row
-        +column.xs-12
-            +multiple.stretched
-                +multiple.vertical.fluid.w65-100
-                    +container-simple 1
-                    +multiple.fluid.joined
-                        +container-simple 0.5
-                        +container-simple 0.5
-                    +container-simple 1
-                +container-simple.w35-100 1
+    +multiple.stretched
+        +multiple.vertical.fluid.w65-100
+            +container-simple 1
+            +multiple.fluid.joined
+                +container-simple 0.5
+                +container-simple 0.5
+            +container-simple 1
+        +container-simple.w35-100 1
 
     +divider Complex 3
 
-    +row
-        +column.xs-12
-            +multiple.stretched
-                +multiple.vertical.fluid.w80-100
-                    +container-simple 3
-                    +multiple.fluid.stretched
-                        +container-simple 1.5
-                        +multiple.vertical.fluid
-                            +container-simple 0.5
-                            +multiple.fluid.joined
-                                +container-simple 0.25
-                                +container-simple 0.25
-                            +container-simple 0.5
-                    +container-simple 3
-                +container-simple.w20-100 1
-
-    +divider Full size
-
-    +row.full-size
-        +column.s12
-            +container-simple Full size
-
-    +divider Full size - Limited
-
-    +row.full-size.limited
-        +column.w65-100
-            +container-simple Main
-        +column.w35-100
-            +container-simple Sidebar
-
-    +divider Full size - Limited - Joined
-
-    +row.full-size.limited
-        +column
-            +multiple.joined
-                +container-simple.w65-100 Main
-                +container-simple.w35-100 Sidebar
+    +multiple.stretched
+        +multiple.vertical.fluid.w80-100
+            +container-simple 3
+            +multiple.fluid.stretched
+                +container-simple 1.5
+                +multiple.vertical.fluid
+                    +container-simple 0.5
+                    +multiple.fluid.joined
+                        +container-simple 0.25
+                        +container-simple 0.25
+                    +container-simple 0.5
+            +container-simple 3
+        +container-simple.w20-100 1
 
 append body-end
-    +noty({ body: '<p>[X-SMALL] 0-481 <br/> [SMALL] 482-767 <br/> [MEDIUM] 768-961 <br/> [LARGE] >= 962</p>', ttl: 'forever' })
+    +noty({ body: '<p>[X-SMALL] <= 481 <br/> [SMALL] 482-767 <br/> [MEDIUM] 768-961 <br/> [LARGE] 962-1399 <br/> [X-LARGE] >= 1400</p>', ttl: 'forever' })

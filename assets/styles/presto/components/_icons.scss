@@ -57,11 +57,9 @@
 
 }
 
-/* VARIABLES */
+/* ICONS */
 
 $index: 0;
-
-/* ICONS */
 
 @each $category, $cats in $icons {
 
@@ -70,7 +68,7 @@ $index: 0;
 
     @each $icon_name in $all {
 
-        @if $environment-production == false or index($enabled, $icon_name) != null {
+        @if $icons-only-enabled == false or index($enabled, $icon_name) != null {
 
             .icon-#{$category}-#{$icon_name}:before {
                 @include variable-icon-font ( "f" + dec-to-hex($index) );
