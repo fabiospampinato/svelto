@@ -17,6 +17,20 @@ append main
         +container-simple 9
         +container-simple 10
 
+    +divider Multiple - Limited
+
+    +multiple.limited
+        +container-simple 1
+        +container-simple 2
+        +container-simple 3
+        +container-simple 4
+        +container-simple 5
+        +container-simple 6
+        +container-simple 7
+        +container-simple 8
+        +container-simple 9
+        +container-simple 10
+
     +divider Multiple - Centered
 
     +multiple.centered
@@ -45,6 +59,13 @@ append main
         +container-simple 9
         +container-simple 10
 
+    +divider Multiple - Equal
+
+    +multiple.fluid.equal
+        +container-simple ThisIsSupposedToBeAVeryLongText
+        +container-simple 1
+        +container-simple 2
+
     +divider Fluid
 
     +multiple.fluid
@@ -71,7 +92,7 @@ append main
         +container-simple Center
         +container-simple Right
 
-    +multiple.fluid.joined.no-separators.outlined
+    +multiple.fluid.joined.no-separators
         +button-simple.outlined Left
         +button-simple.outlined Center
         +button-simple.outlined Right
@@ -92,9 +113,9 @@ append main
         +container-simple.grow-9 9
         +container-simple.grow-10 10
 
-    +divider Fluid - Joined - Stretched
+    +divider Fluid - Joined - Stretched - Equal
 
-    +multiple.fluid.joined.stretched
+    +multiple.fluid.joined.stretched.equal
         +container-simple.noshrink Left
         +container-simple
             +lorem-ipsum
@@ -133,7 +154,7 @@ append main
         +container-simple Middle
         +container-simple Bottom
 
-    +multiple.vertical.fluid.joined.no-separators.outlined
+    +multiple.vertical.fluid.joined.no-separators
         +button-simple.outlined Top
         +button-simple.outlined Middle
         +button-simple.outlined Bottom

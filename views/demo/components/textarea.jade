@@ -48,12 +48,10 @@ append main
     +divider Toolbar - Outlined
 
     +multiple
-        div
-            +multiple.joined.outlined.stretched
-                textarea(type="text", name="test") Outlined
-                +button-simple.compact
-                    +icon("action-search")
-        div
-            +multiple.joined.stretched
-                +label-simple.gray http://
-                textarea(type="text", name="test", placeholder="Outlined...").outlined
+        +multiple.joined.outlined.stretched
+            textarea(type="text", name="test") Outlined
+            +button-simple.compact
+                +icon("action-search")
+        +multiple.joined.stretched
+            +label-simple.gray http://
+            textarea(type="text", name="test", placeholder="Outlined...").outlined

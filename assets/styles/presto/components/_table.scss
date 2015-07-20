@@ -34,12 +34,7 @@ table {
 
                 padding: $table-row-padding;
 
-                & > .multiple {
-                    justify-content: center;
-                    margin-bottom: -10px;
-                }
-
-                & > *:not(.multiple) {
+                & > * {
                     margin-bottom: 0 !important;
                 }
 

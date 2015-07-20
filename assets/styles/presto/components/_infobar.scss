@@ -41,13 +41,7 @@
     }
 
     & > * > *:last-child { //TODO: What is this?
-
         margin-bottom: 0 !important;
-
-        &.multiple { //TODO: What is this?
-            margin-bottom: -$layout-spacing !important;
-        }
-
     }
 
 }

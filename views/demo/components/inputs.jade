@@ -48,11 +48,9 @@ append main
     +divider Toolbar - Outlined
 
     +multiple
-        div
-            +multiple.joined.outlined
-                input(type="text", name="test", value="Outlined")
-                +button-icon("action-search")
-        div
-            +multiple.joined
-                +label-simple.gray http://
-                input(type="text", name="test", placeholder="Outlined...").outlined
+        +multiple.joined.outlined
+            input(type="text", name="test", value="Outlined")
+            +button-icon("action-search")
+        +multiple.joined
+            +label-simple.gray http://
+            input(type="text", name="test", placeholder="Outlined...").outlined

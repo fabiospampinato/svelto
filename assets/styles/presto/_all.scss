@@ -19,7 +19,6 @@
 @import 'components/sizes';
 
 @import 'settings/breakpoints';
-@import 'settings/helpers_dimensions';
 @import 'settings/layout';
 @import 'settings/typography';
 @import 'settings/elements';
@@ -123,5 +122,4 @@
 /* HELPERS */
 
 @import 'components/helpers';
-@import 'components/helpers_dimensions';
 @import 'components/helpers_responsive';

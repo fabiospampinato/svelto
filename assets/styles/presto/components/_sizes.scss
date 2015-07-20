@@ -1,64 +1,20 @@
 
 /* MIXIN */
 
-@mixin size ( $size_name, $important: '' ) {
+@mixin size ( $size_name, $extra: '' ) {
 
     $size: map-get($sizes, $size_name);
 
-    font-size: $size #{$important};
+    font-size: $size #{$extra};
 
 }
 
 /* SIZES */
 
-.xxxxxsmall {
-    @include size ( 'xxxxxsmall', '!important' );
-}
+@each $name, $font-size in $sizes {
 
-.xxxxsmall {
-    @include size ( 'xxxxsmall', '!important' );
-}
+    .#{$name} {
+        @include size ( $name, '!important' );
+    }
 
-.xxxsmall {
-    @include size ( 'xxxsmall', '!important' );
-}
-
-.xxsmall {
-    @include size ( 'xxsmall', '!important' );
-}
-
-.xsmall {
-    @include size ( 'xsmall', '!important' );
-}
-
-.small {
-    @include size ( 'small', '!important' );
-}
-
-.medium {
-    @include size ( 'medium', '!important' );
-}
-
-.large {
-    @include size ( 'large', '!important' );
-}
-
-.xlarge {
-    @include size ( 'xlarge', '!important' );
-}
-
-.xxlarge {
-    @include size ( 'xxlarge', '!important' );
-}
-
-.xxxlarge {
-    @include size ( 'xxxlarge', '!important' );
-}
-
-.xxxxlarge {
-    @include size ( 'xxxxlarge', '!important' );
-}
-
-.xxxxxlarge {
-    @include size ( 'xxxxxlarge', '!important' );
 }

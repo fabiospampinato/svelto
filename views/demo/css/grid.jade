@@ -27,13 +27,10 @@ append main
     +multiple.limited
         +container-simple.xs-3 3
         +container-simple.xs-9 9
-
-    +divider Different widths - Offset
-
-    +multiple
+    +multiple.limited
         +container-simple.xs-1 1
         +container-simple.xs-4 4
-        +container-simple.xs-3.offset-xs-2 3 offset 2
+        +container-simple.xs-5 5
         +container-simple.xs-2 2
 
     +divider Responsive
@@ -57,27 +54,27 @@ append main
     +divider Complex 1
 
     +multiple.stretched
-        +multiple.vertical.fluid.w35-100
+        +multiple.vertical.fluid.xs-4
             +container-simple 1
             +container-simple 2
             +container-simple 3
-        +container-simple.w65-100 1
+        +container-simple.xs-8
 
     +divider Complex 2
 
     +multiple.stretched
-        +multiple.vertical.fluid.w65-100
+        +multiple.vertical.fluid.xs-8
             +container-simple 1
             +multiple.fluid.joined
                 +container-simple 0.5
                 +container-simple 0.5
             +container-simple 1
-        +container-simple.w35-100 1
+        +container-simple.xs-4 1
 
     +divider Complex 3
 
     +multiple.stretched
-        +multiple.vertical.fluid.w80-100
+        +multiple.vertical.fluid.xs-9
             +container-simple 3
             +multiple.fluid.stretched
                 +container-simple 1.5
@@ -88,7 +85,7 @@ append main
                         +container-simple 0.25
                     +container-simple 0.5
             +container-simple 3
-        +container-simple.w20-100 1
+        +container-simple.xs-3 1
 
 append body-end
     +noty({ body: '<p>[X-SMALL] <= 481 <br/> [SMALL] 482-767 <br/> [MEDIUM] 768-961 <br/> [LARGE] 962-1399 <br/> [X-LARGE] >= 1400</p>', ttl: 'forever' })

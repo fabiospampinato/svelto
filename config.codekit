@@ -1179,22 +1179,6 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/assets\/styles\/presto\/components\/_grid.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_grid.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_grid.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
 	"\/assets\/styles\/presto\/components\/_header.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -1220,22 +1204,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_helpers.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_helpers.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
-	"\/assets\/styles\/presto\/components\/_helpers_dimensions.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_helpers_dimensions.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_helpers_dimensions.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2139,22 +2107,6 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/assets\/styles\/presto\/settings\/_helpers_dimensions.scss": {
-		"createSourceMap": 0,
-		"debugStyle": 0,
-		"decimalPrecision": 10,
-		"fileType": 4,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_helpers_dimensions.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_helpers_dimensions.css",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 3,
-		"shouldRunAutoprefixer": 1,
-		"shouldRunBless": 0,
-		"useLibsass": 1
-		},
 	"\/assets\/styles\/presto\/settings\/_icons.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
@@ -2718,15 +2670,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/components\/inputs.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/components\/inputs.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/demo\/components\/inputs.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -2797,15 +2740,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
-		},
-	"\/views\/demo\/components\/textarea.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/components\/textarea.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/components\/textarea.jade": {
 		"compileDebug": 0,
@@ -3074,17 +3008,6 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/demo\/decorators\/helpers.jade",
 		"outputAbbreviatedPath": "\/views\/demo\/decorators\/helpers.html",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1
-		},
-	"\/views\/demo\/decorators\/helpers_dimensions.jade": {
-		"compileDebug": 0,
-		"fileType": 512,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/decorators\/helpers_dimensions.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/decorators\/helpers_dimensions.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -3590,6 +3513,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/views\/demo\/tools\/formSync.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/formSync.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/tools\/formSync.jade": {
 		"compileDebug": 0,

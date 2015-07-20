@@ -1,120 +1,132 @@
 
 /* MULTIPLE */
 
-//FIXME: fix the stretched version, the first and last section don't have enough width available
+.multiple-wrp {
 
-.multiple {
+    margin: 0 #{- $grid-gutter-half-width} $layout-spacing;
 
-    position: relative;
-    border-radius: $border-radius-medium;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: flex-start;
+    &.limited > .multiple {
+        max-width: $layout-max-width + $grid-gutter-width; //FIXME: Does it work?
+        margin-left: auto;
+        margin-right: auto;
+    }
 
-    &.centered {
+    &.centered > .multiple {
         justify-content: center;
     }
 
-    &.nowrap {
+    &.nowrap > .multiple {
         flex-wrap: nowrap;
     }
 
-    &.stretched {
+    &.equal > .multiple > * {
+        flex-basis: 0;
+    }
+
+    &.stretched > .multiple {
         align-items: stretch;
     }
 
     &.joined {
 
-        flex-wrap: nowrap;
+        & > .multiple {
+            flex-wrap: nowrap;
+        }
 
         &:not(.vertical) {
 
-            &.no-separators > *:not(:first-child) {
-                border-left-width: 0;
-            }
+            & > .multiple {
 
-            & > *:not(:last-child) {
-
-                border-right-width: 0;
-                border-top-right-radius: 0;
-                border-bottom-right-radius: 0;
-
-                &.multiple {
-                    padding-right: 0;
-                }
-
-                &:not(.multiple) {
+                & > *:not(:last-child) {
                     margin-right: 0;
+                    border-right-width: 0;
+                    border-top-right-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                & > *:not(:first-child) {
+                    margin-left: 0;
+                    border-top-left-radius: 0;
+                    border-bottom-left-radius: 0;
                 }
 
             }
 
-            & > *:not(:first-child) {
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
+            &.no-separators > .multiple > *:not(:first-child) {
+                border-left-width: 0;
             }
 
         }
 
         &.vertical {
 
-            &.no-separators > *:not(:first-child) {
+            & > .multiple {
+
+                & > *:not(:last-child) {
+                    margin-bottom: 0;
+                    border-bottom-width: 0;
+                    border-bottom-left-radius: 0;
+                    border-bottom-right-radius: 0;
+                }
+
+                & > *:not(:first-child) {
+                    border-top-left-radius: 0;
+                    border-top-right-radius: 0;
+                }
+
+            }
+
+            &.no-separators > .multiple > *:not(:first-child) {
                 border-top-width: 0;
             }
 
-            & > *:not(:last-child) {
-                margin-bottom: 0;
-                border-bottom-width: 0;
-                border-bottom-left-radius: 0;
-                border-bottom-right-radius: 0;
-            }
-
-            & > *:not(:first-child) {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-            }
-
         }
 
     }
 
-    &.vertical {
+    &.fluid {
 
+        &.vertical > .multiple > * {
+
+            &:not(.multiple-wrp) {
+                width: calc(100% - #{$grid-gutter-width});
+            }
+
+            &.multiple-wrp {
+                width: 100%;
+            }
+
+        }
+
+        &:not(.vertical) > .multiple > *:not(.nogrow) {
+            flex-grow: 1;
+        }
+
+        & > .multiple > *.noshrink {
+            flex-shrink: 0;
+        }
+
+    }
+
+    &.vertical > .multiple {
         flex-direction: column;
+    }
+
+    & > .multiple {
+
+        margin-bottom: - $layout-spacing;
+        display: flex;
+        flex-wrap: wrap;
         align-items: flex-start;
-        flex-grow: 0;
-        flex-wrap: nowrap;
 
-        &.multiple {
-            padding-right: 0;
+        & > *:not(.multiple-wrp) {
+            margin-left: $grid-gutter-half-width;
+            margin-right: $grid-gutter-half-width;
         }
 
-        &:not(.multiple) {
+        & > .multiple-wrp {
+            margin-left: 0;
             margin-right: 0;
-        }
-
-        &.fluid > * {
-            width: 100%;
-        }
-
-    }
-
-    &.fluid > *:not(.nogrow) {
-        flex-grow: 1;
-    }
-
-    &.fluid > *.noshrink {
-        flex-shrink: 0;
-    }
-
-    &:not(.vertical) > *:not(:last-child) {
-
-        &.multiple {
-            padding-right: $layout-spacing;
-        }
-
-        &:not(.multiple) {
-            margin-right: $layout-spacing;
         }
 
     }

@@ -84,7 +84,7 @@
                 width: 50%;
                 text-align: right;
 
-                & > .multiple {
+                & > .multiple-wrp > .multiple {
                     justify-content: flex-end;
                 }
 
@@ -96,13 +96,7 @@
             }
 
             & > * {
-
                 margin-bottom: 0;
-
-                &.multiple {
-                    margin-bottom: -$layout-spacing !important;
-                }
-
             }
 
         }
@@ -116,13 +110,7 @@
         overflow: auto;
 
         & > *:last-child {
-
             margin-bottom: 0 !important;
-
-            &.multiple {
-                margin-bottom: -$layout-spacing !important;
-            }
-
         }
 
     }

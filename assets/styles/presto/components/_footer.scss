@@ -12,13 +12,7 @@
     }
 
     & > *:last-child {
-
         margin-bottom: 0;
-
-        &.multiple {
-            margin-bottom: -$layout-spacing !important;
-        }
-
     }
 
 }
