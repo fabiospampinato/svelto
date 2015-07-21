@@ -3,17 +3,34 @@
 extends ../../layout.jade
 
 append main
+    +divider Limited
+
+    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', false).limited
+
+    +divider Closable
+
+    +infobar
+        +infobar-left
+            +icon("action-settings").xxxxxlarge
+        +infobar-center
+            +infobar-title
+                +lorem-ipsum(8, 'words')
+            +infobar-subtitle
+                +lorem-ipsum(8, 'words')
+        +infobar-right
+            +button-icon("content-clear").red.outlined.infobar-closer
+
     +divider Outside
 
-    +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.limited
+    +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit').limited
 
-    +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
+    +infobar('Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
 
-    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', false).outlined
+    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', false)
 
-    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined
+    +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
 
-    +infobar.outlined
+    +infobar
         +infobar-left
             +icon("action-settings").xxxxxlarge
         +infobar-center
@@ -27,14 +44,10 @@ append main
                 ul
                     li
                         +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
-                    li
-                        +lorem-ipsum(5, 'words')
                 li
                     +lorem-ipsum(5, 'words')
 
-    +infobar.outlined
+    +infobar
         +infobar-left
             +icon("action-settings").xxxxxlarge
         +infobar-center
@@ -45,10 +58,44 @@ append main
         +infobar-right
             +button-icon("navigation-more-vert").outlined
 
+    +infobar
+        +infobar-left
+            +icon("action-settings").xxxxxlarge
+        +infobar-center
+            +infobar-title
+                +lorem-ipsum(8, 'words')
+            +infobar-subtitle
+                +lorem-ipsum(8, 'words')
+        +infobar-right
+            +button-icon("navigation-more-vert").outlined
+        +infobar-bottom
+            p
+                +lorem-ipsum
+
+    +infobar
+        +infobar-left
+            +icon("action-settings").xxxxxlarge
+        +infobar-center
+            +infobar-title
+                +lorem-ipsum(8, 'words')
+            +infobar-subtitle
+                +lorem-ipsum(8, 'words')
+        +infobar-right
+            +button-icon("navigation-more-vert").outlined
+        +infobar-bottom
+            +multiple.fluid
+                +button-simple.outlined Featured
+                +button-simple.outlined Random
+                +button-simple.outlined Latest
+                +button-simple.outlined Top views
+                +button-simple.outlined Top downloaded
+                +button-simple.outlined Top rated
+                +button-simple.outlined Top favourited
+
     +divider Inside
 
     +container-simple
-        +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').outlined.gray
-        +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit')
+        +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').gray
+        +infobar('action-settings', 'Lorem ipsum dolor sit amet consectetur adipiscing elit', 'Lorem ipsum dolor sit amet consectetur adipiscing elit').unoutlined
         p
             +lorem-ipsum

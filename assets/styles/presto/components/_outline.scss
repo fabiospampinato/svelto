@@ -5,3 +5,9 @@
     border-width: $outline-width;
     border-style: solid;
 }
+
+/* UNOUTLINE */
+
+.unoutlined {
+    border-width: 0;
+}
