@@ -3,12 +3,34 @@
 
 .footer {
 
-    background-color: rgba(0, 0, 0, 0.25);
+    position: relative;
     margin-bottom: $layout-spacing;
     padding: $layout-spacing;
+    background-color: $footer-bg-color;
 
-    & > * {
-        opacity: default;
+    &.beveled {
+
+        &:before, &:after {
+            position: absolute;
+            top: -$footer-beveled-size;
+            width: $footer-beveled-size;
+            height: $footer-beveled-size;
+            content: '';
+            pointer-events: none;
+            background-image: radial-gradient(transparent 70.72%, $footer-bg-color 70.72%);
+            background-size: 200% 200%;
+        }
+
+        &:before {
+            left: 0;
+            background-position: bottom left;
+        }
+
+        &:after {
+            right: 0;
+            background-position: bottom right;
+        }
+
     }
 
     & > *:last-child {

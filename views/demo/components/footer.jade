@@ -3,9 +3,36 @@
 extends ../../layout.jade
 
 append main
-    +divider Footer
+    +divider Normal
 
     +footer
+        +multiple.fluid
+            ul
+                li
+                    a(href="#1") 1
+                li
+                    a(href="#2") 2
+                li
+                    a(href="#3") 3
+                li
+                    a(href="#4") 4
+            ul
+                li
+                    a(href="#1") 1
+                li
+                    a(href="#2") 2
+                li
+                    a(href="#3") 3
+            ul
+                li
+                    a(href="#1") 1
+                li
+                    a(href="#2") 2
+        p.centered Presto, copyright bla bla 2015
+
+    +divider Beveled
+
+    +footer.beveled
         +multiple.fluid
             ul
                 li
