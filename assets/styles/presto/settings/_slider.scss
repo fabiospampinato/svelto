@@ -1,6 +1,21 @@
 
 /* SLIDER */
 
+$slider-unhighlighted-color: 'gray';
+$slider-unhighlighted-color-basic: true;
+
+$slider-highlighted-color: 'secondary';
+$slider-highlighted-color-basic: true;
+
+$slider-handler-color: 'secondary';
+$slider-handler-color-basic: true;
+
+$slider-disabled-highlighted-color: 'gray';
+$slider-disabled-highlighted-color-basic: true;
+
+$slider-disabled-handler-color: 'gray';
+$slider-disabled-handler-color-basic: true;
+
 $slider-transitions-time: 0.15s !default;
 
 $slider-height: 2.66667em !default;

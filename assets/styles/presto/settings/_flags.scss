@@ -976,4 +976,4 @@ $flags-enabled: ();
 
 /* OTHERS */
 
-$flags-only-enabled: $environment-production !default; //TODO: implement this, it should trigger the choice if we want to create the css only for the enabled ones or not
+$flags-only-enabled: $environment-production !default;

@@ -78,7 +78,7 @@
                             '{% include ( "presto.noty.button", o[i] ); %}' +
                         '{% } %}' +
                      '</div>',
-            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "tiny")%} {%=(o.css || "")%}">' +
+            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
                         '{%#(o.text || "")%}' +
                     '</div>'
         },

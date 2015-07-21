@@ -12,44 +12,30 @@ table {
     width: 100%;
     text-align: center;
 
-    thead {
+    thead th {
+        height: $table-header-block-height;
+    }
 
-        tr {
+    tbody tr {
 
-            th {
+        td {
 
-                height: $table-header-block-height;
+            padding: $table-row-padding;
 
+            & > * {
+                margin-bottom: 0 !important;
             }
 
         }
 
-    }
-
-    tbody {
-
-        tr {
-
-            td {
-
-                padding: $table-row-padding;
-
-                & > * {
-                    margin-bottom: 0 !important;
-                }
-
-            }
-
-            &.empty td {
-                height: $table-empty-block-height;
-            }
-
+        &.empty td {
+            height: $table-empty-block-height;
         }
 
     }
 
     &.bordered tr {
-        border-bottom: 1px solid rgba(0,0,0,.05);
+        border-bottom: $table-bordered-width solid $table-bordered-color;
     }
 
     &.striped tbody tr {
@@ -171,7 +157,7 @@ table {
         }
 
         &.selected {
-            background-color: lighten($color-primary-bg, 50) !important;
+            background-color: $table-row-selected-color !important;
         }
 
     }

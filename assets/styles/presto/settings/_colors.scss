@@ -5,6 +5,7 @@ $color-primary: #2967ab !default;
 $color-secondary: #ff7043 !default;
 $color-tertiary: #7f0ce8 !default;
 $color-quaternary: #1dab1e !default;
+
 $color-white: #ffffff !default;
 $color-gray: #cccccc !default;
 $color-black: #000000 !default;
@@ -19,7 +20,9 @@ $color-red: #f64242 !default;
 $color-pink: #fb2ca0 !default;
 $color-teal: #00bbb3 !default;
 $color-brown: #a5673f !default;
+
 $color-transparent: rgba(0, 0, 0, 0) !default;
+$color-base: #e9eaed !default;
 
 /* PRIMARY */
 
@@ -211,6 +214,16 @@ $color-transparent-text-hover: $color-transparent-text !default;
 $color-transparent-border: darken( $color-transparent-bg, 20 ) !default;
 $color-transparent-accent: $color-primary !default;
 
+/* BASE */
+
+$color-base-bg: $color-base !default;
+$color-base-bg-hover: darken( $color-base-bg, 2 ) !default;
+$color-base-bg-active: darken( $color-base-bg, 4 ) !default;
+$color-base-text: #2f2f2f !default;
+$color-base-text-hover: $color-base-text !default;
+$color-base-border: darken( $color-base-bg, 20 ) !default;
+$color-base-accent: $color-primary !default;
+
 /* COLORS */
 
 $colors: (
@@ -232,10 +245,6 @@ $colors: (
     "pink" : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-text, $color-pink-text-hover, $color-pink-border, $color-pink-accent ),
     "teal" : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-text, $color-teal-text-hover, $color-teal-border, $color-teal-accent ),
     "brown" : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-text, $color-brown-text-hover, $color-brown-border, $color-brown-accent ),
-    "transparent" : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-text, $color-transparent-text-hover, $color-transparent-border, $color-transparent-accent )
+    "transparent" : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-text, $color-transparent-text-hover, $color-transparent-border, $color-transparent-accent ),
+    "base" : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-text, $color-base-text-hover, $color-base-border, $color-base-accent )
 );
-
-/* BASE */
-
-$color-base-bg: #e9eaed !default;
-$color-base-text: $color-white-text !default;

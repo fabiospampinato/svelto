@@ -1,7 +1,5 @@
 //- css/grid.jade
 
-//- TODO: Add things for taking XLARGE into account
-
 extends ../../layout.jade
 
 append main
@@ -46,10 +44,10 @@ append main
     +divider Responsive 2
 
     +multiple
-        +container-simple.xs-0.sm-3 xs-0 sm-3
-        +container-simple.xs-12.sm-9.md-6.lg-3 xs-12 sm-9 md-6 lg-3
-        +container-simple.xs-0.lg-3 xs-0 lg-3
-        +container-simple.xs-0.md-3 xs-0 md-3
+        +container-simple.hidden-xs.visible-sm-block.sm-3 hidden-xs visible-sm-block sm-3
+        +container-simple.xs-12.sm-9.md-6.lg-3.hidden-xl xs-12 sm-9 md-6 lg-3 hidden-xl
+        +container-simple.hidden-xs.visible-lg-block.lg-3.xl-6 hidden-xs visible-lg-block lg-3 xl-6
+        +container-simple.hidden-xs.visible-md-block.md-3 hidden-xs visible-md-block md-3
 
     +divider Complex 1
 

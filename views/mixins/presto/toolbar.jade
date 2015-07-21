@@ -1,8 +1,9 @@
 //- toolbar.jade
 
 mixin toolbar
-    +multiple&attributes(attributes).toolbar
-        block
+    .multiple-wrp
+        .multiple.toolbar&attributes(attributes)
+            block
 
 mixin toolbar-icon(icon)
     +button-icon(icon)&attributes(attributes)

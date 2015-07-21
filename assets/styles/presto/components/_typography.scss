@@ -1,6 +1,14 @@
 
 /* LINK */
 
+
+
+
+//TODO: fare gli a come si deve, c'era un implementazione carina con una sottolineatura da semantic-ui
+
+
+
+
 a {
     font-weight: bold;
     text-decoration: none;
@@ -123,7 +131,7 @@ code, section, pre {
 }
 
 kbd {
-    @include color ( $kbd-color, true );
+    @include color ( $kbd-color, $kbd-color-basic );
     font-size: $kbd-font-size;
     font-weight: bold;
     margin: 0 ( $layout-spacing / 2 );

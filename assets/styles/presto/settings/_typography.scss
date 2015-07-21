@@ -30,16 +30,22 @@ $h6-size: 'xsmall';
 
 $header-small-opacity: 0.85;
 
-/* OTHER */
+/* SMALL */
 
 $small-font-size: 65%;
+
+/* MARK */
 
 $mark-padding: 0.2em;
 $mark-bg-color: $color-yellow;
 
+/* ABBR */
+
 $abbr-border-width: 1px;
 $abbr-border-style: 'dotted';
 $abbr-border-color: $color-gray-border;
+
+/* BLOCKQUOTE */
 
 $blockquote-border-width: ( $layout-spacing / 2 );
 $blockquote-border-color: rgba(47, 47, 47, 0.15) !default;
@@ -53,7 +59,11 @@ $code-bg-color: rgba(47, 47, 47, 0.03) !default;
 $code-border-width: 1px;
 $code-border-color: rgba(47, 47, 47, 0.15) !default;
 
+/* KBD */
+
 $kbd-color: 'white';
+$kbd-color-basic: true;
+
 $kbd-border-width: 1px;
 $kbd-font-size: 90%;
 $kbd-padding-vertical: 2px;

@@ -13,14 +13,14 @@
 
     & > .unhighlighted {
 
-        @include color ( 'gray', true );
+        @include color ( $progress-bar-unhighlighted-color, $progress-bar-unhighlighted-color-basic );
         height: $progress-bar-unhighlighted-height;
         width: 100%;
         border-radius: inherit;
 
         & > .highlighted {
 
-            @include color ( 'secondary', true );
+            @include color ( $progress-bar-unhighlighted-color, $progress-bar-highlighted-color-basic );
             overflow: hidden;
             float: left;
             height: $progress-bar-highlighted-height;
@@ -72,7 +72,7 @@
 
         & > .unhighlighted > .highlighted  {
 
-            @include color ( 'gray', true, false, '!important' );
+            @include color ( $progress-bar-inactive-highlighted-color, $progress-bar-inactive-highlighted-color-basic, false, '!important' );
 
             &:not(:first-child) {
                 box-shadow: - $progress-bar-inactive-before-shadow-size 0 0 0 $progress-bar-inactive-highlighted-color;

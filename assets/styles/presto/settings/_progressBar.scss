@@ -1,6 +1,15 @@
 
 /* PROGRESS BAR */
 
+$progress-bar-unhighlighted-color: 'gray';
+$progress-bar-unhighlighted-color-basic: true;
+
+$progress-bar-highlighted-color: 'secondary';
+$progress-bar-highlighted-color-basic: true;
+
+$progress-bar-inactive-highlighted-color: 'gray';
+$progress-bar-inactive-highlighted-color-basic: true;
+
 $progress-bar-transitions-time: 0.15s !default;
 
 $progress-bar-height: 1.07143em !default;

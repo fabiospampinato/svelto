@@ -15,18 +15,20 @@
         pointer-events: none;
 
         &:before {
-            display: block;
             position: absolute;
-            background: transparentize($color-black, $ripple-transparentize-amount);
-            content: '';
             left: -50%;
-            margin-top: -50%;
             width: 100%;
+            margin-top: -50%;
             padding-bottom: 100%;
-            border-radius: 50%;
-            transition: transform 0.6s ease-out, opacity 0.6s ease-out;
-            opacity: 0;
+            content: '';
+            transition-timing-function: $ripple-transition-timing-function;
+            transition-duration: $ripple-transition-show-duration;
+            transition-property: transform, opacity;
             transform: scale(0);
+            opacity: 0;
+            border-radius: 50%;
+            background: transparentize($ripple-color-default, $ripple-transparentize-amount);
+
         }
 
         &.ripple-circle-show:before {
@@ -35,17 +37,19 @@
         }
 
         &.ripple-circle-hide:before {
-            transition-duration: 0.4s;
+            transition-duration: $ripple-transition-hide-duration;
             opacity: 0;
         }
 
     }
 
     &.ripple-centered > .ripple-circle {
-        width: 200%; //FIXME: In this way the behavior is not consistent, but it generally looks better...
         top: 50% !important;
         left: 50% !important;
+        width: 200%; //FIXME: In this way the behavior is not consistent, but it generally looks better...
     }
+
+    /* COLORS */
 
     &.ripple-primary > .ripple-circle:before {
         background: transparentize($color-primary, $ripple-transparentize-amount);

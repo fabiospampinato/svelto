@@ -34,6 +34,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             SPACE: 32,
             TAB: 9,
             UP: 38
+        },
+        mouseButton: {
+            LEFT: 0,
+            MIDDLE: 1,
+            RIGHT: 2
         }
     };
 
@@ -3963,7 +3968,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                             '{% include ( "presto.noty.button", o[i] ); %}' +
                         '{% } %}' +
                      '</div>',
-            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "tiny")%} {%=(o.css || "")%}">' +
+            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
                         '{%#(o.text || "")%}' +
                     '</div>'
         },
@@ -4466,6 +4471,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     var Ripple = {
 
+        delay: {
+            show: 350,
+            hide: 400
+        },
+
         show: function ( event, $element ) {
 
             var $ripple = $( '<div class="ripple-circle"></div>' ).appendTo ( $element ),
@@ -4488,7 +4498,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         hide: function ( $ripple, before ) {
 
-            var delay = Math.max ( 0, 350 + before - _.now () );
+            var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
 
             setTimeout ( function () {
 
@@ -4498,7 +4508,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     $ripple.remove ();
 
-                }, 400 );
+                }, Ripple.delay.hide );
 
             }, delay );
 
@@ -4507,11 +4517,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     /* READY */
 
-    $('.ripple').on ( 'mousedown', function ( event ) { //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
+    $(function () {
 
-        if ( event.button === 2 ) return; //INFO: Disable the right click
+        $body.on ( 'mousedown', '.ripple', function ( event ) {
 
-        Ripple.show ( event, $(this) );
+            if ( event.button === $.ui.mouseButton.RIGHT ) return;
+
+            Ripple.show ( event, $(this) );
+
+        });
 
     });
 
@@ -4548,7 +4562,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             optgroup: '<div class="divider_wrp">' +
                           '<div class="divider">{%=o.prop%}</div>' +
                       '</div>',
-            option: '<div class="button actionable outlined tiny" data-value="{%=o.prop%}">{%=o.value%}</div>'
+            option: '<div class="button actionable outlined xsmall" data-value="{%=o.prop%}">{%=o.value%}</div>'
        },
 
         /* OPTIONS */

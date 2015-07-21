@@ -25,7 +25,7 @@
 
             .unhighlighted {
 
-                @include color ( 'gray', true );
+                @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
                 @include center-absolutely ( false, $slider-unhighlighted-height );
                 border-radius: $slider-unhighlighted-height;
                 height: $slider-unhighlighted-height;
@@ -35,14 +35,14 @@
                 right: $slider-handler-half-size;
 
                 .highlighted {
-                    @include color ( 'secondary', true );
+                    @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
                     height: $slider-highlighted-height;
                     border-radius: $slider-highlighted-height;
                 }
 
                 .handler {
 
-                    @include color ( 'secondary', true );
+                    @include color ( $slider-handler-color, $slider-handler-color-basic );
                     @include z-depth ( 3 );
                     @include center-absolutely ( false, $slider-handler-size );
                     border-radius: 50%;
@@ -175,11 +175,11 @@
         & > .slider .bar .unhighlighted {
 
             .highlighted  {
-                @include color ( 'gray', true );
+                @include color ( $slider-disabled-highlighted-color, $slider-disabled-highlighted-color-basic );
             }
 
             .handler {
-                @include color ( 'gray', true );
+                @include color ( $slider-disabled-handler-color, $slider-disabled-handler-color-basic );
                 box-shadow: 0 0 0 $slider-inactive-handler-shadow-size $color-white-bg;
             }
 

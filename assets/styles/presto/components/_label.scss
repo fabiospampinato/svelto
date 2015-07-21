@@ -5,7 +5,7 @@
 
 .label {
 
-    @include color ( $label-color );
+    @include color ( $label-color, $label-color-basic );
     display: inline-flex; //FIXME: why inline? maybe it's needed for advanced buttons...
     justify-content: center;
     align-items: center;

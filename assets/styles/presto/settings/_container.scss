@@ -1,8 +1,18 @@
 
 /* CONTAINER */
 
+$container-color: 'white';
+$container-color-basic: true;
+
 $container-border-width: 1px !default;
+$contianer-border-radius: $border-radius-medium;
+
+$container-header-color: 'primary';
+$container-header-color-basic: false;
 
 $container-header-border-width: 1px !default;
+
+$container-footer-color: $container-color;
+$container-footer-color-basic: true;
 
 $container-footer-border-width: 1px !default;

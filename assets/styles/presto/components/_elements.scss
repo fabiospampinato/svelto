@@ -5,17 +5,20 @@ iframe, embed, video, object {
     //TODO: take it from bootstrap
 }
 
-.image-wrp {
+.image-wrp { //TODO: add possibility to set a width and scale everything automatically
 
     position: relative;
-    display: flex;
+    display: flex; //INFO: In order to remove the extra white space at the bottom of the image
     overflow: hidden;
     margin-bottom: $layout-spacing;
-    border: $image-border-width solid $image-border-color;
     border-radius: $border-radius-medium;
 
+    & > img {
+        border: $image-border-width solid $image-border-color;
+    }
+
     & > .image-caption {
-        @include color ( $image-caption-color, true );
+        @include color ( $image-caption-color, $image-caption-color-basic );
         position: absolute;
         right: 0;
         bottom: 0;

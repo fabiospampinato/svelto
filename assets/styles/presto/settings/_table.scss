@@ -1,6 +1,11 @@
 
 /* TABLE */
 
+$table-bordered-width: 1px;
+$table-bordered-color: rgba(0,0,0,0.05);
+
+$table-row-selected-color: lighten($color-primary-bg, 50);
+
 $table-header-block-height: 2.7em !default;
 $table-empty-block-height: 5.4em !default;
 

@@ -3,39 +3,38 @@
 
 .container {
 
-    @include color ( 'white', true );
-    border-width: $container-border-width;
-    border-style: solid;
-    border-radius: $border-radius-medium;
-    margin-bottom: $layout-spacing;
+    @include color ( $container-color, $container-color-basic );
     display: flex;
     flex-direction: column;
+    margin-bottom: $layout-spacing;
+    border-width: $container-border-width;
+    border-style: solid;
+    border-radius: $contianer-border-radius;
 
     &.limited {
         max-width: $layout-max-width;
-        margin-left: auto;
         margin-right: auto;
+        margin-left: auto;
     }
 
     & > .container-header {
 
-        @include color ( 'primary' );
+        @include color ( $container-header-color, $container-header-color-basic );
+        font-weight: bold;
         display: flex;
-        flex-shrink: 0;
         flex-wrap: nowrap;
-        justify-content: space-between;
+        flex-shrink: 0;
         align-items: center;
+        margin-top: - $container-header-border-width;
+        margin-right: - $container-header-border-width;
+        margin-left: - $container-header-border-width;
+        padding: $layout-spacing;
         border-width: $container-header-border-width;
         border-style: solid;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
-        border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
-        font-weight: bold;
-        padding: $layout-spacing;
-        margin-left: - $container-header-border-width;
-        margin-right: - $container-header-border-width;
-        margin-top: - $container-header-border-width;
+        border-bottom-left-radius: 0;
 
         &.actionable {
             cursor: pointer;
@@ -47,27 +46,27 @@
 
             &.left {
 
-                order: 0;
                 flex-shrink: 25;
+                order: 0;
                 width: 50%;
 
                 & ~ .center, & ~ .right {
-                    padding-left: $layout-spacing;
                     padding-right: 0;
+                    padding-left: $layout-spacing;
                 }
 
             }
 
-            &.center { //FIXME: is not centered if only one of the left and right sections are provided
+            &.center {
 
+                flex-grow: 1; //FIXME: is not centered if only one of the left and right sections are provided
                 order: 1;
-                flex-grow: 1;
                 text-align: center;
                 white-space: nowrap; //FIXME: it should wrap if necessary...
 
                 & ~ .right {
-                    padding-left: $layout-spacing;
                     padding-right: 0;
+                    padding-left: $layout-spacing;
                 }
 
                 & ~ .left {
@@ -79,8 +78,8 @@
 
             &.right {
 
-                order: 2;
                 flex-shrink: 25;
+                order: 2;
                 width: 50%;
                 text-align: right;
 
@@ -105,9 +104,9 @@
 
     & > .container-content {
 
+        overflow: auto;
         flex-grow: 1;
         padding: $layout-spacing;
-        overflow: auto;
 
         & > *:last-child {
             margin-bottom: 0 !important;
@@ -116,18 +115,18 @@
     }
 
     & > .container-footer {
-        @include color ( 'white' );
+        @include color ( $container-footer-color, $container-footer-color-basic );
         flex-shrink: 0;
-        border-bottom-left-radius: inherit;
-        border-bottom-right-radius: inherit;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-        margin-left: - $container-footer-border-width;
         margin-right: - $container-footer-border-width;
         margin-bottom: - $container-footer-border-width;
+        margin-left: - $container-footer-border-width;
+        padding: $layout-spacing;
         border-width: $container-footer-border-width;
         border-style: solid;
-        padding: $layout-spacing;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        border-bottom-right-radius: inherit;
+        border-bottom-left-radius: inherit;
     }
 
 }

@@ -1048,8 +1048,7 @@
         on: function ( event, selector, data, callback, one ) { //FIXME: update documentation
 
             var autoRemove,
-                delegator,
-                $this = this;
+                delegator;
 
             if ( _.isPlainObject ( event ) ) { //INFO: { event_name: callback, ... }
 
@@ -1104,7 +1103,7 @@
 
                             };
 
-                        })( $this.nodes[i] );
+                        })( this.nodes[i] );
 
                     }
 
@@ -1114,11 +1113,13 @@
 
                             return function ( e ) {
 
-                                var children = lQuery(element).find ( selector );
+                                var children = lQuery(element).find ( selector ),
+                                    target = lQuery(e.target),
+                                    parents = target.parents ( selector );
 
                                 for ( var i = children.length - 1; i >= 0; i-- ) {
 
-                                    if ( e.path.indexOf ( children.nodes[i] ) !== -1 ) {
+                                    if ( e.target === children.nodes[i] || parents.nodes.indexOf ( children.nodes[i] ) !== -1 ) {
 
                                         var evt = _.extend ( lQuery.event.createProxy ( e ), {
                                             currentTarget: e.target,
@@ -1133,7 +1134,7 @@
 
                             };
 
-                        })( $this.nodes[i], autoRemove );
+                        })( this.nodes[i], autoRemove );
 
                     }
 

@@ -3,7 +3,7 @@
 extends ../../layout.jade
 
 append main
-    +divider Blurred
+    +divider Blur
 
     +container-simple
         +square-sample.blurred
@@ -38,6 +38,49 @@ append main
             +square-sample.left
             +square-sample.right
 
+    +divider Text alignment
+
+    +container-simple
+        +multiple
+            +square-sample.text-left
+            +square-sample.text-center
+            +square-sample.text-right
+
+    +divider Text transformation
+
+    +container-simple
+        +multiple
+            +square-sample.text-lowercase
+            +square-sample.text-uppercase
+            +square-sample.text-capitalize
+
+    +divider Padding
+
+    +container-simple
+        +multiple
+            +square-sample.no-padding
+            +square-sample.no-padding-top
+            +square-sample.no-padding-right
+            +square-sample.no-padding-bottom
+            +square-sample.no-padding-left
+
+    +divider Margin
+
+    +container-simple
+        +multiple
+            +square-sample.no-margin
+            +square-sample.no-margin-top
+            +square-sample.no-margin-right
+            +square-sample.no-margin-bottom
+            +square-sample.no-margin-left
+
+    +divider Overflow
+
+    +container-simple
+        +multiple
+            +square-sample.overflow-visible
+            +square-sample.overflow-hidden
+
     +divider Flip
 
     +container-simple
@@ -54,18 +97,11 @@ append main
             +square-sample.rotate-right
             +square-sample.rotating
 
-    +divider Text alignment
+    +divider Other
 
     +container-simple
         +multiple
-            +square-sample.text-left
-            +square-sample.text-center
-            +square-sample.text-right
-
-    +divider Text transform
-
-    +container-simple
-        +multiple
-            +square-sample.text-lowercase
-            +square-sample.text-uppercase
-            +square-sample.text-capitalize
+            .centered(style="width: 100px; height: 100px;")
+                +square-sample
+            .spacer
+            p <- Spacer

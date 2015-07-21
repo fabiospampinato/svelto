@@ -78,10 +78,10 @@
 
         .bar {
 
-            @include color ( 'gray', true );
+            @include color ( $switcher-disabled-bar-color, $switcher-disabled-bar-color-basic );
 
             .handler {
-                @include color ( 'gray', true );
+                @include color ( $switcher-disabled-handler-color, $switcher-disabled-handler-color-basic );
                 box-shadow: 0 0 0 $switcher-inactive-handler-shadow-size $color-white-bg;
             }
 

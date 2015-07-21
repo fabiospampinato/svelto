@@ -9,6 +9,11 @@
 
     var Ripple = {
 
+        delay: {
+            show: 350,
+            hide: 400
+        },
+
         show: function ( event, $element ) {
 
             var $ripple = $( '<div class="ripple-circle"></div>' ).appendTo ( $element ),
@@ -31,7 +36,7 @@
 
         hide: function ( $ripple, before ) {
 
-            var delay = Math.max ( 0, 350 + before - _.now () );
+            var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
 
             setTimeout ( function () {
 
@@ -41,7 +46,7 @@
 
                     $ripple.remove ();
 
-                }, 400 );
+                }, Ripple.delay.hide );
 
             }, delay );
 
@@ -50,11 +55,15 @@
 
     /* READY */
 
-    $('.ripple').on ( 'mousedown', function ( event ) { //TODO: delagate instead, or new added triggers will not work, also it will be more efficient
+    $(function () {
 
-        if ( event.button === 2 ) return; //INFO: Disable the right click
+        $body.on ( 'mousedown', '.ripple', function ( event ) {
 
-        Ripple.show ( event, $(this) );
+            if ( event.button === $.ui.mouseButton.RIGHT ) return;
+
+            Ripple.show ( event, $(this) );
+
+        });
 
     });
 

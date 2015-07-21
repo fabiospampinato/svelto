@@ -35,12 +35,14 @@
 
 /* SETTINGS */
 
+@import 'settings/advertisement';
 @import 'settings/base';
 @import 'settings/label';
 @import 'settings/breadcrumb';
 @import 'settings/button';
 @import 'settings/chat';
 @import 'settings/container';
+@import 'settings/divider';
 @import 'settings/dropdown';
 @import 'settings/expander';
 @import 'settings/flags';
@@ -57,8 +59,8 @@
 @import 'settings/noty';
 @import 'settings/outline';
 @import 'settings/progressBar';
-@import 'settings/divider';
 @import 'settings/ripple';
+@import 'settings/select';
 @import 'settings/slider';
 @import 'settings/switcher';
 @import 'settings/table';
@@ -84,6 +86,7 @@
 @import 'components/chat';
 @import 'components/checkbox';
 @import 'components/container';
+@import 'components/divider';
 @import 'components/dropdown';
 @import 'components/elements';
 @import 'components/expander';
@@ -108,7 +111,6 @@
 @import 'components/ripple';
 @import 'components/select';
 @import 'components/shapes';
-@import 'components/divider';
 @import 'components/slider';
 @import 'components/spinner';
 @import 'components/switcher';

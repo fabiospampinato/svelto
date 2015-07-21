@@ -6,7 +6,7 @@
     position: relative;
 
     select {
-        @include color ( 'white', true );
+        @include color ( $select-color, $select-color-basic );
         border: none;
         -moz-appearance: none;
         -webkit-appearance: none;

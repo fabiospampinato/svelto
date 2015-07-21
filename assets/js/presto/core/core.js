@@ -25,6 +25,11 @@
             SPACE: 32,
             TAB: 9,
             UP: 38
+        },
+        mouseButton: {
+            LEFT: 0,
+            MIDDLE: 1,
+            RIGHT: 2
         }
     };
 

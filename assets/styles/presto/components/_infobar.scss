@@ -3,7 +3,7 @@
 
 .infobar-wrp {
 
-    @include color ( 'white', true );
+    @include color ( $infobar-color, $infobar-color-basic );
     display: flex;
     align-items: center;
     margin-bottom: $layout-spacing;

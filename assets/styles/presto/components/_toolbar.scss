@@ -3,15 +3,14 @@
 
 .toolbar {
 
-    border-radius: 0;
-    display: flex;
-    width: 100%;
+    justify-content: center;
     height: $toolbar-height;
     margin-bottom: $layout-spacing;
     padding: 0 $toolbar-horizontal-padding;
 
     & > * {
         margin-bottom: 0;
+        align-self: center;
     }
 
 }

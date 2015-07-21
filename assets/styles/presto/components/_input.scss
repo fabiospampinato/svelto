@@ -3,7 +3,7 @@
 
 input {
 
-    @include color ( 'white', true );
+    @include color ( $input-color, $input-color-basic );
     border: none;
     border-radius: $border-radius-medium;
     font-family: $font-family;

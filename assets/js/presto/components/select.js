@@ -28,7 +28,7 @@
             optgroup: '<div class="divider_wrp">' +
                           '<div class="divider">{%=o.prop%}</div>' +
                       '</div>',
-            option: '<div class="button actionable outlined tiny" data-value="{%=o.prop%}">{%=o.value%}</div>'
+            option: '<div class="button actionable outlined xsmall" data-value="{%=o.prop%}">{%=o.value%}</div>'
        },
 
         /* OPTIONS */

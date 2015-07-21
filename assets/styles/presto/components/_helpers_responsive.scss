@@ -3,7 +3,7 @@
 
 // XSMALL
 
-.hidden-xs, .xs-0 {
+.hidden-xs {
     display: none !important;
 }
 
@@ -19,7 +19,7 @@
 
 @include from-small {
 
-    .hidden-sm, .sm-0 {
+    .hidden-sm {
         display: none !important;
     }
 
@@ -37,7 +37,7 @@
 
 @include from-medium {
 
-    .hidden-md, .md-0 {
+    .hidden-md {
         display: none !important;
     }
 
@@ -55,7 +55,7 @@
 
 @include from-large {
 
-    .hidden-lg, .lg-0 {
+    .hidden-lg {
         display: none !important;
     }
 
@@ -73,7 +73,7 @@
 
 @include from-xlarge {
 
-    .hidden-xl, .xl-0 {
+    .hidden-xl {
         display: none !important;
     }
 
@@ -94,7 +94,6 @@
 @for $nr from 1 through $grid-columns-nr {
 
     .xs-#{$nr} {
-        display: inline-block !important;
         width: ( 100% / $grid-columns-nr ) * $nr;
     }
 
@@ -111,7 +110,6 @@
     @for $nr from 1 through $grid-columns-nr {
 
         .sm-#{$nr} {
-            display: inline-block !important;
             width: ( 100% / $grid-columns-nr ) * $nr;
         }
 
@@ -130,7 +128,6 @@
     @for $nr from 1 through $grid-columns-nr {
 
         .md-#{$nr} {
-            display: inline-block !important;
             width: ( 100% / $grid-columns-nr ) * $nr;
         }
 
@@ -149,7 +146,6 @@
     @for $nr from 1 through $grid-columns-nr {
 
         .lg-#{$nr} {
-            display: inline-block !important;
             width: ( 100% / $grid-columns-nr ) * $nr;
         }
 
@@ -168,7 +164,6 @@
     @for $nr from 1 through $grid-columns-nr {
 
         .xl-#{$nr} {
-            display: inline-block !important;
             width: ( 100% / $grid-columns-nr ) * $nr;
         }
 

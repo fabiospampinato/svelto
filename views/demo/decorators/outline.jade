@@ -6,7 +6,13 @@ append main
     +divider Outlined
 
     +multiple
-        +label-simple.outlined Outlined
-        +button-simple.outlined Outlined
-        input.outlined
-        textarea.outlined
+        +label-simple.outlined Label
+        +button-simple.outlined Button
+        input(value="Input").outlined
+        textarea(value="Textarea").outlined
+        +multiple.joined
+            input(value="Input").outlined
+            +button-icon("action-settings").outlined
+        +multiple.joined.outlined
+            input(value="Input")
+            +button-icon("action-settings")
