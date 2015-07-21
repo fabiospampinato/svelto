@@ -1,22 +1,25 @@
 
 /* BREADCRUMB */
 
-//FIXME: maybe add the margin at the bottom like all the other components
-
 .breadcrumb {
 
+    margin-bottom: $layout-spacing;
+
     & > *:not(:last-child):after {
-        @extend %icon;
-        @extend .icon-navigation-chevron-right:before;
-        padding-left: $breadcrumb-padding;
         padding-right: $breadcrumb-padding;
+        padding-left: $breadcrumb-padding;
         opacity: $breadcrumb-icon-opacity;
     }
 
+    &:not(.slashed) > *:not(:last-child):after { //FIXME: is not perfectly vertically centered
+        @extend %icon;
+        @extend .icon-navigation-chevron-right:before;
+    }
+
     &.slashed > *:not(:last-child):after {
-        content: '/';
-        padding-left: $breadcrumb-padding * 1.6;
         padding-right: $breadcrumb-padding * 1.6;
+        padding-left: $breadcrumb-padding * 1.6;
+        content: '/';
     }
 
     &.highlighted > .current ~ * {

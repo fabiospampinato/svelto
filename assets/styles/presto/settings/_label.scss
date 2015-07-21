@@ -4,8 +4,17 @@
 $label-color: 'white';
 $label-color-basic: false;
 
+$label-border-radius: $border-radius-medium;
+
+$label-left-right-bg-color: rgba(0, 0, 0, 0.05);
+
+$label-center-icon-extra-spacing: 0.75em;
+
 $label-horizontal-padding: 1.5em !default;
 $label-vertical-padding: 0.78571em !default;
 
 $label-compact-horizontal-padding: 0.78571em !default;
 $label-compact-vertical-padding: 0.78571em !default;
+
+$label-badge-top: -20%;
+$label-badge-right: -20%;

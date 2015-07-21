@@ -1,40 +1,44 @@
 
 /* LABEL */
 
-//TODO: Add a minimum width, so that when it's not very wide and rounded it will be a circle, not an oval
+//TODO: Add a minimum width, so that when it's not very wide and rounded it will be a circle, not an oval. The same for the left and right sections
 
 .label {
 
     @include color ( $label-color, $label-color-basic );
-    display: inline-flex; //FIXME: why inline? maybe it's needed for advanced buttons...
-    justify-content: center;
-    align-items: center;
-    margin-bottom: $layout-spacing;
-    border-radius: $border-radius-medium;
     font-weight: bold;
     position: relative;
-    overflow: hidden;
-    min-height: 1em;
+    display: flex;
+    justify-content: center;
+    align-items: strech;
     min-width: 1em;
+    min-height: 1em;
+    margin-bottom: $layout-spacing;
+    border-radius: $label-border-radius;
 
     & > .label-left, & > .label-right {
-        background-color: rgba(0, 0, 0, 0.05);
-        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
         min-width: 1em;
+        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+        background-color: $label-left-right-bg-color;
     }
 
     & > .label-left {
         order: 1;
+        border-top-left-radius: inherit;
+        border-bottom-left-radius: inherit;
     }
 
     & > .label-center {
-        order: 2;
         display: flex;
+        order: 2;
+        justify-content: space-between;
         padding: $label-vertical-padding $label-horizontal-padding;
     }
 
     & > .label-right {
         order: 3;
+        border-top-right-radius: inherit;
+        border-bottom-right-radius: inherit;
     }
 
     &.compact .label-center {
@@ -43,23 +47,22 @@
 
     &.badge {
         position: absolute !important;
-        top: -20% !important;
-        right: -20% !important;
-        bottom: initial !important;
+        top: $label-badge-top !important;
+        right: $label-badge-right !important;
     }
 
-    .icon {
+    & > * > .icon {
 
         @extend %icon;
-        font-size: 1.3em;
-        margin: -0.115em;
+        font-size: 1.3em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
+        margin: -0.115em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
 
         &.left {
-            padding-right: 0.75em;
+            padding-right: $label-center-icon-extra-spacing;
         }
 
         &.right {
-            padding-left: 0.75em;
+            padding-left: $label-center-icon-extra-spacing;
         }
 
     }

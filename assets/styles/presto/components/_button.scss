@@ -14,11 +14,11 @@ button {
 
     &.floating {
         //TODO: add sub floating actions
-        @include z-depth ( 4 );
-        margin-bottom: 0 !important;
-        position: fixed;
-        right: $layout-spacing * 3;
-        bottom: $layout-spacing * 3;
+        @include z-depth ( $button-floating-z-depth );
+        position: absolute;
+        right: $button-floating-right;
+        bottom: $button-floating-bottom;
+        margin-bottom: 0;
     }
 
 }

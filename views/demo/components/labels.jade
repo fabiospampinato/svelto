@@ -44,14 +44,6 @@ append main
             +label-center Settings
             +label-right
                 +icon('action-settings')
-        +label.compact
-            +label-left
-                +icon('action-settings')
-            +label-center Settings
-        +label.compact
-            +label-center Settings
-            +label-right
-                +icon('action-settings')
 
     +divider Rounded
 
@@ -78,6 +70,20 @@ append main
     +divider Compact
 
     +multiple
+        +label-simple.compact
+            +icon('action-settings').left
+            | Settings
+        +label-simple.compact
+            | Settings
+            +icon('action-settings').right
+        +label.compact
+            +label-left
+                +icon('action-settings')
+            +label-center Settings
+        +label.compact
+            +label-center Settings
+            +label-right
+                +icon('action-settings')
         +label-simple.compact.xxsmall.primary Primary
         +label-simple.compact.xxsmall.secondary Secondary
         +label-simple.compact.xxsmall.rounded.primary Primary
@@ -88,9 +94,7 @@ append main
     +divider Badge
 
     +multiple
-        +button.compact
-            +icon("action-settings")
+        +button-icon("action-settings")
             +label-simple.compact.badge.xxxsmall.red 2
-        +button.compact
-            +icon("action-settings")
+        +button-icon("action-settings")
             +label-simple.compact.badge.xxxsmall.rounded.primary 3
