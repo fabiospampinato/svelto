@@ -3,15 +3,25 @@
 
 .toolbar {
 
-    flex-direction: row;
-    flex-wrap: nowrap; //FIXME: sure?
     height: $toolbar-height;
     margin-bottom: $layout-spacing;
-    padding: 0 $toolbar-horizontal-padding;
+    padding: $toolbar-vertical-padding $toolbar-horizontal-padding;
 
-    & > * {
-        margin-bottom: 0;
-        align-self: center;
+    & .multiple-wrp {
+
+        height: 100%;
+
+        & > .multiple {
+
+            align-items: center;
+            height: 100%;
+
+            & > * {
+                margin-bottom: 0;
+            }
+
+        }
+
     }
 
 }

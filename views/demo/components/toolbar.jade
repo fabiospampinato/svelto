@@ -5,11 +5,11 @@ extends ../../layout.jade
 append main
     +divider Toolbars
 
-    +toolbar.yellow
+    +toolbar.orange
         +button-icon("navigation-menu")
-        span.large Title
+        span.large Schedule
         .spacer
-        +button-icon("navigation-refresh")
+        +button-icon("action-search")
         +button-icon("navigation-more-vert")
 
     +toolbar.violet
@@ -18,13 +18,6 @@ append main
             a(href="#", title="Components") Components
             a(href="#", title="Toolbars").current Toolbars
         .spacer
-        +button-icon("navigation-more-vert")
-
-    +toolbar.orange
-        +button-icon("navigation-menu")
-        span.large Schedule
-        .spacer
-        +button-icon("action-search")
         +button-icon("navigation-more-vert")
 
     +toolbar.green
@@ -47,3 +40,19 @@ append main
         .spacer
         +switcher({name:"name", value:"value", colors:{on:"orange",off:"blue"}, icons:{on:"action-favorite", off:"action-favorite-outline"}})
         +button-icon("action-search")
+
+    +divider With subs
+
+    +toolbar.yellow
+        +multiple-left
+            +button-icon("navigation-menu")
+        +multiple-center
+            span.large Application
+        +multiple-right
+            +button-icon("navigation-more-vert")
+
+    +toolbar.brown
+        +multiple-left
+            +button-icon("navigation-arrow-back")
+        +multiple-center
+            span.large This is a page
