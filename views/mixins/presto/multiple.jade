@@ -4,3 +4,24 @@ mixin multiple
     .multiple-wrp&attributes(attributes)
         .multiple
             block
+
+mixin multiple-left
+    .multiple-sub-spacer
+    .multiple-sub.left&attributes(attributes)
+        +multiple
+            block
+    .multiple-sub-spacer
+
+mixin multiple-center
+    .multiple-sub-spacer
+    .multiple-sub.center&attributes(attributes)
+        +multiple
+            block
+    .multiple-sub-spacer
+
+mixin multiple-right
+    .multiple-sub-spacer
+    .multiple-sub.right&attributes(attributes)
+        +multiple
+            block
+    .multiple-sub-spacer

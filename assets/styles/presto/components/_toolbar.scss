@@ -3,7 +3,8 @@
 
 .toolbar {
 
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: nowrap; //FIXME: sure?
     height: $toolbar-height;
     margin-bottom: $layout-spacing;
     padding: 0 $toolbar-horizontal-padding;

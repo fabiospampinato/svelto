@@ -1,0 +1,79 @@
+//- css/multiple_subs.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Normal
+
+    +container-simple
+        +multiple
+            +multiple-left
+                p Left
+            +multiple-center
+                p Center
+            +multiple-right
+                p Right
+
+    +divider No left
+
+    +container-simple
+        +multiple
+            +multiple-center
+                p Center
+            +multiple-right
+                p Right
+
+    +divider No center
+
+    +container-simple
+        +multiple
+            +multiple-left
+                p Left
+            +multiple-right
+                p Right
+
+    +divider No right
+
+    +container-simple
+        +multiple
+            +multiple-left
+                p Left
+            +multiple-center
+                p Center
+
+    +divider Only left
+
+    +container-simple
+        +multiple
+            +multiple-left
+                p Left
+
+    +divider Only center
+
+    +container-simple
+        +multiple
+            +multiple-center
+                p Center
+
+    +divider Only right
+
+    +container-simple
+        +multiple
+            +multiple-right
+                p Right
+
+    +divider Advanced
+
+    +container-simple
+        +multiple
+            +multiple-left
+                +button-icon("navigation-arrow-back")
+                +button-icon("navigation-menu")
+            +multiple-center
+                p.large Title
+            +multiple-right
+                +button-icon("navigation-refresh")
+                +button-icon("navigation-more-vert")
+
+                +button-icon("navigation-refresh")
+                +button-icon("navigation-more-vert")
