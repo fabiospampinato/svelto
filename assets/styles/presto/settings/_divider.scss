@@ -1,7 +1,11 @@
 
 /* DIVIDER */
 
-$divider-non-linear-color: 'red';
-$divider-non-linear-color-basic: true;
+$divider-bold-color: 'red';
+$divider-bold-color-basic: true;
+$divider-bold-padding: 0.3em 0.6em !default;
 
-$divider-padding: 0.3em 0.6em !default;
+$divider-linear-bg-color: rgba(0, 0, 0, 0.1);
+
+$divider-text-size: 'small';
+$divider-text-opacity: 0.75;

@@ -1,29 +1,27 @@
 
-/* DEFAULT */
+/* DEFAULT DIVIDER */
 
 hr {
-    background-color: rgba(0,0,0,.1);
-    margin-bottom: $layout-spacing;
-    margin-top: 0;
     height: 1px;
-    width: 100%;
+    margin-bottom: $layout-spacing;
     border: none;
+    background-color: $divider-linear-bg-color;
 }
 
 /* DIVIDER */
 
-.divider_wrp {
+.divider-wrp {
 
-    text-align: center;
     margin-bottom: $layout-spacing;
+    text-align: center;
 
     & > .divider {
 
-        &:not(.linear) {
-            @include color ( $divider-non-linear-color, $divider-non-linear-color-basic );
-            border-radius: 10000px 10000px;
+        &.bold {
+            @include color ( $divider-bold-color, $divider-bold-color-basic );
             display: inline-block;
-            padding: $divider-padding;
+            padding: $divider-bold-padding;
+            border-radius: 10000px 10000px; //INFO: Otherwise it will look like an oval, not a rounded rectangle
         }
 
         &.linear {
@@ -33,11 +31,10 @@ hr {
 
             &:before, &:after {
                 position: absolute;
-                content: '';
-                z-index: 1;
+                top: calc(50% - 0.5px);
                 width: 50%;
-                top: 50%;
-                border-top: 1px solid rgba(0,0,0,.1);
+                content: '';
+                border-top: 1px solid $divider-linear-bg-color;
             }
 
             &:before {
@@ -48,6 +45,14 @@ hr {
                 margin-left: 1em;
             }
 
+        }
+
+        &.text {
+            @include size ( $divider-text-size );
+            font-weight: bold;
+            margin: - $layout-half-spacing 0 $layout-half-spacing;
+            text-align: left;
+            opacity: $divider-text-opacity;
         }
 
     }

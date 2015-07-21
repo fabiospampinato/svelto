@@ -1,34 +1,36 @@
 
 /* CHAT */
 
+//FIXME: The header is too big. img, indicator and header should be aligned
+
 .chat-msg {
 
     display: flex;
     margin-bottom: $layout-spacing;
 
-    &.level-3, &[class*='level-']  {
-        margin-left: 9em;
+    &.level-3, &[class*='level-'] {
+        margin-left: $chat-msg-level-3-margin-left;
     }
 
     &.level-2 {
-        margin-left: 4.5em;
+        margin-left: $chat-msg-level-2-margin-left;
     }
 
     &.level-1 {
-        margin-left: 0;
+        margin-left: $chat-msg-level-1-margin-left;
     }
 
     & > .chat-msg-img {
 
-        order: 1;
-        width: 3em;
-        height: 3em;
-        border-radius: 100%;
         overflow:hidden;
+        order: 1;
+        width: $chat-msg-img-size;
+        height: $chat-msg-img-size;
         margin-right: $layout-spacing;
-        border: 1px solid $color-white-border;
+        transition: opacity $chat-msg-img-transition-duration;
         opacity: 1;
-        transition: opacity 0.2s ease 0s;
+        border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
+        border-radius: 100%;
 
         & > img {
             width: 100%;
@@ -38,26 +40,26 @@
     }
 
     & > a.chat-msg-img:hover {
-        opacity: 0.8;
+        opacity: $chat-msg-img-opacity-hover;
     }
 
     & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
         @include color ( $chat-msg-color, $chat-msg-color-basic );
+        z-index: 1;
         order: 2;
-        transform: rotate(45deg);
         width: 1em;
         height: 1em;
+        margin-top: 0.9em;
+        margin-right: -0.5em;
+        transform: rotate(45deg);
         border-width: 0 0 1px 1px;
         border-style: solid;
-        margin-right: -0.5em;
-        margin-top: 0.9em;
-        z-index: 1;
     }
 
     & > .chat-msg-content {
 
-        order: 3;
         flex-grow: 1;
+        order: 3;
 
         & > .container {
             margin-bottom: 0;
