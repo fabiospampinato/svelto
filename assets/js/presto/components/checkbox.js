@@ -24,7 +24,8 @@
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
+            this.$checkbox = this.$element;
+            this.$input = this.$checkbox.find ( 'input' );
 
         },
 
@@ -32,9 +33,9 @@
 
             if ( this.$input.prop ( 'checked' ) ) {
 
-                this.$element.addClass ( 'checked' );
+                this.$checkbox.addClass ( 'checked' );
 
-            } else if ( this.$element.hasClass ( 'checked' ) ) {
+            } else if ( this.$checkbox.hasClass ( 'checked' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -64,7 +65,7 @@
 
             var checked = this.$input.prop ( 'checked' );
 
-            this.$element.toggleClass ( 'checked', checked );
+            this.$checkbox.toggleClass ( 'checked', checked );
 
             this._trigger ( checked ? 'checked' : 'unchecked' );
 

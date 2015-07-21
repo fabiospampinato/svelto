@@ -24,7 +24,8 @@
 
         _variables: function () {
 
-            this.$closers = this.$element.find ( '.infobar-closer' );
+            this.$infobar = this.$element;
+            this.$closers = this.$infobar.find ( '.infobar-closer' );
 
         },
 
@@ -38,11 +39,11 @@
 
         close: function () {
 
-            this.$element.addClass ( 'remove' );
+            this.$infobar.addClass ( 'remove' );
 
             this._delay ( function () {
 
-                this.$element.remove ();
+                this.$infobar.remove ();
 
                 this._trigger ( 'close' );
 

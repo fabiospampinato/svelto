@@ -5,8 +5,8 @@ extends ../../layout.jade
 append main
     +divider Squares
 
-    +container-simple
-        +multiple.squares
+    +container-simple.squares
+        +multiple
             +square.xxxxxlarge.centered
                 span.small 1
             +square.xxxxxlarge.centered
@@ -162,7 +162,7 @@ append body-end
                 html += '<div class="square xxxxxlarge centered" style=""><span class="small">' + (i + 1) + '</span></div>';
             }
 
-            $('.squares').empty ().append ( html );
+            $('.squares .multiple').empty ().append ( html );
 
             $squares = $document.find ( '.square' );
         }

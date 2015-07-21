@@ -24,8 +24,9 @@
 
         _variables: function () {
 
-            this.id = this.$element.attr ( 'id' );
-            this.$wrp = this.$element.parent ();
+            this.$navbar = this.$element;
+            this.id = this.$navbar.attr ( 'id' );
+            this.$wrp = this.$navbar.parent ();
             this.$closers = this.$wrp.find ( '.navbar-closer' );
 
             this.opened = this.$wrp.hasClass ( 'opened' );

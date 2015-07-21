@@ -28,12 +28,13 @@
 
         _variables: function () {
 
-            this.id = this.$element.attr ( 'id' );
-            this.$top_tip = this.$element.find ( '.top-tip' );
-            this.$right_tip = this.$element.find ( '.right-tip' );
-            this.$bottom_tip = this.$element.find ( '.bottom-tip' );
-            this.$left_tip = this.$element.find ( '.left-tip' );
-            this.$actionables = this.$element.find ( '.actionable' );
+            this.$dropdown = this.$element;
+            this.id = this.$dropdown.attr ( 'id' );
+            this.$top_tip = this.$dropdown.find ( '.top-tip' );
+            this.$right_tip = this.$dropdown.find ( '.right-tip' );
+            this.$bottom_tip = this.$dropdown.find ( '.bottom-tip' );
+            this.$left_tip = this.$dropdown.find ( '.left-tip' );
+            this.$actionables = this.$dropdown.find ( '.actionable' );
 
             this.$triggers = $('.dropdown-trigger[data-dropdown="' + this.id + '"]');
 
@@ -83,7 +84,7 @@
 
             var $parents = $(event.target).parents ();
 
-            if ( $parents.index ( this.$element ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
+            if ( $parents.index ( this.$dropdown ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
 
                 for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
 
@@ -108,16 +109,16 @@
             // Variables
 
             var $trigger = $(assignments[this.id]),
-                no_tip = $trigger.hasClass ( 'no-tip' ) || this.$element.hasClass ( 'no-tip' );
+                no_tip = $trigger.hasClass ( 'no-tip' ) || this.$dropdown.hasClass ( 'no-tip' );
 
             // Reset classes
 
-            this.$element.removeClass ( 'top bottom left right' ).toggleClass ( 'no-tip', no_tip );
+            this.$dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no-tip', no_tip );
 
             // update offsets
 
             var html_offset = $html.offset (),
-                drop_offset = this.$element.offset (),
+                drop_offset = this.$dropdown.offset (),
                 trig_offset = $trigger.offset ();
 
             // common variables
@@ -265,19 +266,19 @@
 
             }
 
-            this.$element.css ({
+            this.$dropdown.css ({
                 top: top,
                 left: left
             });
 
             $trigger.addClass ( direction );
-            this.$element.addClass ( direction );
+            this.$dropdown.addClass ( direction );
 
             // positionate the tip
 
             if ( !no_tip ) {
 
-                drop_offset = this.$element.offset ();
+                drop_offset = this.$dropdown.offset ();
 
                 switch ( direction ) {
 
@@ -323,13 +324,13 @@
 
             }
 
-            this.$element.addClass ( 'show' );
+            this.$dropdown.addClass ( 'show' );
 
             this._positionate ();
 
             this._delay ( function () {
 
-                this.$element.addClass ( 'active' );
+                this.$dropdown.addClass ( 'active' );
 
             });
 
@@ -347,11 +348,11 @@
 
             $(assignments[this.id]).removeClass ( 'top bottom left right active' );
 
-            this.$element.removeClass ( 'active' );
+            this.$dropdown.removeClass ( 'active' );
 
             this._delay ( function () {
 
-                this.$element.removeClass ( 'show' );
+                this.$dropdown.removeClass ( 'show' );
 
             }, 150 );
 

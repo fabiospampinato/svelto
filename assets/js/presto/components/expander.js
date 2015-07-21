@@ -22,10 +22,11 @@
 
         _variables: function () {
 
-            this.$header = this.$element.children ( '.header' );
-            this.$content = this.$element.children ( '.content' );
+            this.$expander = this.$element;
+            this.$header = this.$expander.children ( '.header' );
+            this.$content = this.$expander.children ( '.content' );
 
-            this.opened = this.$element.hasClass ( 'opened' );
+            this.opened = this.$expander.hasClass ( 'opened' );
 
         },
 
@@ -55,7 +56,7 @@
 
                 this.opened = true;
 
-                this.$element.addClass ( 'opened' );
+                this.$expander.addClass ( 'opened' );
 
                 this._trigger ( 'open' );
 
@@ -69,7 +70,7 @@
 
                 this.opened = false;
 
-                this.$element.removeClass ( 'opened' );
+                this.$expander.removeClass ( 'opened' );
 
                 this._trigger ( 'close' );
 

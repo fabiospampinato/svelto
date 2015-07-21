@@ -13,10 +13,11 @@
 
         _variables: function () {
 
-            this.$buttons_bar = this.$element.find ( '.tabs-buttons' );
-            this.$buttons = this.$element.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
-            this.$contents = this.$element.find ( '.tabs-content' );
-            this.$indicator = this.$element.find ( '.tabs-indicator' );
+            this.$tabs = this.$element;
+            this.$buttons_bar = this.$tabs.find ( '.tabs-buttons' );
+            this.$buttons = this.$tabs.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$contents = this.$tabs.find ( '.tabs-content' );
+            this.$indicator = this.$tabs.find ( '.tabs-indicator' );
 
             var $current_button = this.$buttons.filter ( '.active' ).first ();
 

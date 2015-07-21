@@ -1011,10 +1011,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.is_border_box = ( this.$element.css ( 'box-sizing' ) === 'border-box' ); //TODO: maybe only support border-box...
+            this.$growable = this.$element;
 
-            this.is_input = this.$element.is ( 'input' );
-            this.is_textarea = this.$element.is ( 'textarea' );
+            this.is_border_box = ( this.$growable.css ( 'box-sizing' ) === 'border-box' ); //TODO: maybe only support border-box...
+
+            this.is_input = this.$growable.is ( 'input' );
+            this.is_textarea = this.$growable.is ( 'textarea' );
 
             this.extra_pxs = 0;
 
@@ -1032,7 +1034,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 for ( var i = 0, l = props.length; i < l; i++ ) {
 
-                    this.extra_pxs += parseFloat ( this.$element.css ( props[i] ) );
+                    this.extra_pxs += parseFloat ( this.$growable.css ( props[i] ) );
 
                 }
 
@@ -1052,16 +1054,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_input_width: function () {
 
-            var needed_width = this._get_input_needed_width ( this.$element ),
-                actual_width = this.$element.width ();
+            var needed_width = this._get_input_needed_width ( this.$growable ),
+                actual_width = this.$growable.width ();
 
             if ( needed_width > actual_width ) {
 
-                this.$element.width ( needed_width + this.extra_pxs );
+                this.$growable.width ( needed_width + this.extra_pxs );
 
             } else if ( actual_width > needed_width ) {
 
-                this.$element.width ( Math.max ( needed_width, this.options.default_width ) + this.extra_pxs );
+                this.$growable.width ( Math.max ( needed_width, this.options.default_width ) + this.extra_pxs );
 
             }
 
@@ -1069,16 +1071,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _get_input_needed_width: function () {
 
-            var $span = $( '<span>' + this.$element.val () + '</span>' );
+            var $span = $( '<span>' + this.$growable.val () + '</span>' );
 
             $span.css ({
                 'position' : 'absolute',
                 'left' : -9999,
                 'top' : -9999,
-                'font-family' : this.$element.css ( 'font-family' ),
-                'font-size' : this.$element.css ( 'font-size' ),
-                'font-weight' : this.$element.css ( 'font-weight' ),
-                'font-style' : this.$element.css ( 'font-style' )
+                'font-family' : this.$growable.css ( 'font-family' ),
+                'font-size' : this.$growable.css ( 'font-size' ),
+                'font-weight' : this.$growable.css ( 'font-weight' ),
+                'font-style' : this.$growable.css ( 'font-style' )
             });
 
             $span.appendTo ( $body );
@@ -1095,20 +1097,20 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_textarea_height: function () {
 
-            var actual_height = this.$element.height (),
-                needed_height = this.$element.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$element.css ( 'padding-top' ) ) - parseFloat ( this.$element.css ( 'padding-bottom' ) );
+            var actual_height = this.$growable.height (),
+                needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
 
             if ( needed_height > actual_height ) {
 
-                this.$element.height ( needed_height + this.extra_pxs );
+                this.$growable.height ( needed_height + this.extra_pxs );
 
             } else if ( actual_height > needed_height ) {
 
-                this.$element.height ( Math.max ( needed_height, this.options.default_height ) + this.extra_pxs );
+                this.$growable.height ( Math.max ( needed_height, this.options.default_height ) + this.extra_pxs );
 
             } else {
 
-                this.$element.height ( actual_height + this.extra_pxs );
+                this.$growable.height ( actual_height + this.extra_pxs );
 
             }
 
@@ -1251,8 +1253,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* DRAGGABLE */
 
-//TODO: add support for filter, so that we can bind a single event
-
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -1267,6 +1267,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             start: $.noop,
             move: $.noop,
             end: $.noop,
+            delegate: false,
             context: undefined, //FIXME: Is it necessary?
             events: {
                 start: 'mousedown touchstart',
@@ -1348,7 +1349,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* START DRAGGING */
 
-        this.on ( options.events.start, start );
+        this.on ( options.events.start, options.delegate, start );
 
     };
 
@@ -2253,9 +2254,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$headers = this.$element.find ( 'thead th' );
+            this.$table = this.$element;
+            this.$headers = this.$table.find ( 'thead th' );
             this.$sortables = this.$headers.filter ( '[data-sort]' );
-            this.$tbody = this.$element.find ( 'tbody' );
+            this.$tbody = this.$table.find ( 'tbody' );
 
             this.table = this.element;
             this.tbody = this.$tbody.get ( 0 );
@@ -2417,9 +2419,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$thead = this.$element.find ( 'thead' ),
-            this.$tfoot = this.$element.find ( 'tfoot' ),
-            this.$tbody = this.$element.find ( 'tbody' ),
+            this.$table = this.$element;
+            this.$thead = this.$table.find ( 'thead' ),
+            this.$tfoot = this.$table.find ( 'tfoot' ),
+            this.$tbody = this.$table.find ( 'tbody' ),
             this.$headers = this.$thead.find ( 'th' ),
             this.$empty_row = this.$tbody.find ( 'tr.empty' ),
             this.columns_nr = this.$headers.length;
@@ -2478,7 +2481,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._check_empty ();
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -2500,7 +2503,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -2512,7 +2515,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._check_empty ();
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -2524,7 +2527,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._check_empty ();
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -3011,10 +3014,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$header = this.$element.children ( '.header' );
-            this.$content = this.$element.children ( '.content' );
+            this.$expander = this.$element;
+            this.$header = this.$expander.children ( '.header' );
+            this.$content = this.$expander.children ( '.content' );
 
-            this.opened = this.$element.hasClass ( 'opened' );
+            this.opened = this.$expander.hasClass ( 'opened' );
 
         },
 
@@ -3044,7 +3048,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.opened = true;
 
-                this.$element.addClass ( 'opened' );
+                this.$expander.addClass ( 'opened' );
 
                 this._trigger ( 'open' );
 
@@ -3058,7 +3062,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.opened = false;
 
-                this.$element.removeClass ( 'opened' );
+                this.$expander.removeClass ( 'opened' );
 
                 this._trigger ( 'close' );
 
@@ -3105,7 +3109,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$closers = this.$element.find ( '.infobar-closer' );
+            this.$infobar = this.$element;
+            this.$closers = this.$infobar.find ( '.infobar-closer' );
 
         },
 
@@ -3119,11 +3124,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         close: function () {
 
-            this.$element.addClass ( 'remove' );
+            this.$infobar.addClass ( 'remove' );
 
             this._delay ( function () {
 
-                this.$element.remove ();
+                this.$infobar.remove ();
 
                 this._trigger ( 'close' );
 
@@ -3157,7 +3162,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$expanders = this.$element.children ( '.expander' );
+            this.$accordion = this.$element;
+            this.$expanders = this.$accordion.children ( '.expander' );
             this.expanders_inst = [];
 
         },
@@ -3253,7 +3259,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
+            this.$checkbox = this.$element;
+            this.$input = this.$checkbox.find ( 'input' );
 
         },
 
@@ -3261,9 +3268,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.$input.prop ( 'checked' ) ) {
 
-                this.$element.addClass ( 'checked' );
+                this.$checkbox.addClass ( 'checked' );
 
-            } else if ( this.$element.hasClass ( 'checked' ) ) {
+            } else if ( this.$checkbox.hasClass ( 'checked' ) ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
@@ -3293,7 +3300,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var checked = this.$input.prop ( 'checked' );
 
-            this.$element.toggleClass ( 'checked', checked );
+            this.$checkbox.toggleClass ( 'checked', checked );
 
             this._trigger ( checked ? 'checked' : 'unchecked' );
 
@@ -3350,12 +3357,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.id = this.$element.attr ( 'id' );
-            this.$top_tip = this.$element.find ( '.top-tip' );
-            this.$right_tip = this.$element.find ( '.right-tip' );
-            this.$bottom_tip = this.$element.find ( '.bottom-tip' );
-            this.$left_tip = this.$element.find ( '.left-tip' );
-            this.$actionables = this.$element.find ( '.actionable' );
+            this.$dropdown = this.$element;
+            this.id = this.$dropdown.attr ( 'id' );
+            this.$top_tip = this.$dropdown.find ( '.top-tip' );
+            this.$right_tip = this.$dropdown.find ( '.right-tip' );
+            this.$bottom_tip = this.$dropdown.find ( '.bottom-tip' );
+            this.$left_tip = this.$dropdown.find ( '.left-tip' );
+            this.$actionables = this.$dropdown.find ( '.actionable' );
 
             this.$triggers = $('.dropdown-trigger[data-dropdown="' + this.id + '"]');
 
@@ -3405,7 +3413,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var $parents = $(event.target).parents ();
 
-            if ( $parents.index ( this.$element ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
+            if ( $parents.index ( this.$dropdown ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
 
                 for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
 
@@ -3430,16 +3438,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             // Variables
 
             var $trigger = $(assignments[this.id]),
-                no_tip = $trigger.hasClass ( 'no-tip' ) || this.$element.hasClass ( 'no-tip' );
+                no_tip = $trigger.hasClass ( 'no-tip' ) || this.$dropdown.hasClass ( 'no-tip' );
 
             // Reset classes
 
-            this.$element.removeClass ( 'top bottom left right' ).toggleClass ( 'no-tip', no_tip );
+            this.$dropdown.removeClass ( 'top bottom left right' ).toggleClass ( 'no-tip', no_tip );
 
             // update offsets
 
             var html_offset = $html.offset (),
-                drop_offset = this.$element.offset (),
+                drop_offset = this.$dropdown.offset (),
                 trig_offset = $trigger.offset ();
 
             // common variables
@@ -3587,19 +3595,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$element.css ({
+            this.$dropdown.css ({
                 top: top,
                 left: left
             });
 
             $trigger.addClass ( direction );
-            this.$element.addClass ( direction );
+            this.$dropdown.addClass ( direction );
 
             // positionate the tip
 
             if ( !no_tip ) {
 
-                drop_offset = this.$element.offset ();
+                drop_offset = this.$dropdown.offset ();
 
                 switch ( direction ) {
 
@@ -3645,13 +3653,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$element.addClass ( 'show' );
+            this.$dropdown.addClass ( 'show' );
 
             this._positionate ();
 
             this._delay ( function () {
 
-                this.$element.addClass ( 'active' );
+                this.$dropdown.addClass ( 'active' );
 
             });
 
@@ -3669,11 +3677,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             $(assignments[this.id]).removeClass ( 'top bottom left right active' );
 
-            this.$element.removeClass ( 'active' );
+            this.$dropdown.removeClass ( 'active' );
 
             this._delay ( function () {
 
-                this.$element.removeClass ( 'show' );
+                this.$dropdown.removeClass ( 'show' );
 
             }, 150 );
 
@@ -3776,7 +3784,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$closers = this.$element.find ( '.modal-closer' );
+            this.$modal = this.$element;
+            this.$closers = this.$modal.find ( '.modal-closer' );
 
         },
 
@@ -3802,11 +3811,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         open: function () {
 
-            this.$element.addClass ( 'show' );
+            this.$modal.addClass ( 'show' );
 
             $.reflow ();
 
-            this.$element.addClass ( 'active' );
+            this.$modal.addClass ( 'active' );
 
             this._on ( $document, 'keydown', this._handler_esc_keydown );
 
@@ -3816,13 +3825,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         close: function () {
 
-            this.$element.removeClass ( 'active' );
+            this.$modal.removeClass ( 'active' );
 
             $.reflow ();
 
             this._delay ( function () {
 
-                this.$element.removeClass ( 'show' );
+                this.$modal.removeClass ( 'show' );
 
             }, 200 );
 
@@ -3877,8 +3886,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.id = this.$element.attr ( 'id' );
-            this.$wrp = this.$element.parent ();
+            this.$navbar = this.$element;
+            this.id = this.$navbar.attr ( 'id' );
+            this.$wrp = this.$navbar.parent ();
             this.$closers = this.$wrp.find ( '.navbar-closer' );
 
             this.opened = this.$wrp.hasClass ( 'opened' );
@@ -4073,6 +4083,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
+            this.$noty = this.$element;
             this.timer = false;
 
             this.isOpen = false;
@@ -4096,7 +4107,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.options.buttons.length ) {
 
-                var $buttons = this.$element.find ( '.button' ),
+                var $buttons = this.$noty.find ( '.button' ),
                     instance = this;
 
                 _.each ( this.options.buttons, function ( button, index ) {
@@ -4131,7 +4142,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _init_hover: function () {
 
-            this.$element.hover ( function () {
+            this.$noty.hover ( function () {
 
                 _.each ( timers, function ( timer ) {
 
@@ -4159,13 +4170,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( !this.isOpen ) {
 
-                $('.noty_queue.' + this.options.anchor).first ().append ( this.$element );
+                $('.noty_queue.' + this.options.anchor).first ().append ( this.$noty );
 
-                this.$element.removeClass ( 'hidden' );
+                this.$noty.removeClass ( 'hidden' );
 
                 $.reflow ();
 
-                this.$element.addClass ( 'active' );
+                this.$noty.addClass ( 'active' );
 
                 if ( this.neverOpened ) {
 
@@ -4197,11 +4208,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$element.removeClass ( 'active' );
+            this.$noty.removeClass ( 'active' );
 
             this._delay ( function () {
 
-                this.$element.remove ();
+                this.$noty.remove ();
 
             }, 200 );
 
@@ -4324,8 +4335,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$highlighteds = this.$element.find ( '.progressBar-highlighted' );
-            this.$stripes = this.$element.find ( '.progressBar-stripes' );
+            this.$progressBar = this.$element;
+            this.$highlighteds = this.$progressBar.find ( '.progressBar-highlighted' );
+            this.$stripes = this.$progressBar.find ( '.progressBar-stripes' );
 
         },
 
@@ -4467,9 +4479,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
+            this.$radio = this.$element;
+            this.$input = this.$radio.find ( 'input' );
             this.name = this.$input.attr ( 'name' );
-            this.$form = this.$element.parent ( 'form' );
+            this.$form = this.$radio.parent ( 'form' );
             this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
             this.$other_radios = this.$other_inputs.parent ();
 
@@ -4477,7 +4490,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _init: function () {
 
-            this.$element.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
+            this.$radio.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
 
         },
 
@@ -4499,7 +4512,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.$other_radios.removeClass ( 'checked' );
 
-                this.$element.addClass ( 'checked' );
+                this.$radio.addClass ( 'checked' );
 
             }
 
@@ -4651,11 +4664,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.id = this.$element.data ( 'select' );
-            this.$select = this.$element.find ( 'select' );
+            this.$trigger = this.$element;
+            this.id = this.$trigger.data ( 'select' );
+            this.$select = this.$trigger.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
             this.select_options = [];
-            this.$placeholder = this.$element.find ( '.placeholder' );
+            this.$placeholder = this.$trigger.find ( '.placeholder' );
 
             this.$dropdown = false;
             this.$dropdown_container = false;
@@ -4750,7 +4764,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$dropdown_container = this.$dropdown.find ( '.container' );
             this.$buttons = this.$dropdown.find ( '.button' );
 
-            this.$element.addClass ( 'dropdown-trigger' ).data ( 'dropdown', 'dropdown-' + this.id );
+            this.$trigger.addClass ( 'dropdown-trigger' ).data ( 'dropdown', 'dropdown-' + this.id );
 
             var instance = this;
 
@@ -4786,7 +4800,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _set_dropdown_width: function () {
 
-            this.$dropdown_container.css ( 'min-width', this.$element.width () );
+            this.$dropdown_container.css ( 'min-width', this.$trigger.width () );
 
         },
 
@@ -4852,7 +4866,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$slider = this.$element.find ( '.slider' );
+            this.$slider_wrp = this.$element;
+            this.$slider = this.$slider_wrp.find ( '.slider' );
             this.$min_btn = this.$slider.find ( '.min' );
             this.$max_btn = this.$slider.find ( '.max' );
             this.$input = this.$slider.find ( 'input' );
@@ -5135,10 +5150,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
-            this.$label = this.$element.find ( '.button-center' );
-            this.$decrease_btn = this.$element.find ( '.decrease' );
-            this.$increase_btn = this.$element.find ( '.increase' );
+            this.$spinner = this.$element;
+            this.$input = this.$spinner.find ( 'input' );
+            this.$label = this.$spinner.find ( '.button-center' );
+            this.$decrease_btn = this.$spinner.find ( '.decrease' );
+            this.$increase_btn = this.$spinner.find ( '.increase' );
 
         },
 
@@ -5302,10 +5318,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
-            this.$bar = this.$element.find ( '.bar' );
-            this.$handler = this.$element.find ( '.handler' );
-            this.$icon = this.$element.find ( '.icon' );
+            this.$switcher = this.$element;
+            this.$input = this.$switcher.find ( 'input' );
+            this.$bar = this.$switcher.find ( '.bar' );
+            this.$handler = this.$switcher.find ( '.handler' );
+            this.$icon = this.$switcher.find ( '.icon' );
 
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
@@ -5345,7 +5362,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.checked = this.$input.prop ( 'checked' );
 
-            if ( this.checked !== this.$element.hasClass ( 'checked' ) ) {
+            if ( this.checked !== this.$switcher.hasClass ( 'checked' ) ) {
 
                 this._set_check ( this.checked, true );
 
@@ -5447,11 +5464,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( checked !== this.$input.prop ( 'checked' ) || force ) {
 
-                this.$element.toggleClass ( 'checked', checked );
+                this.$switcher.toggleClass ( 'checked', checked );
 
                 this.$handler.css ( 'left', checked ? '100%' : 0 );
 
-                var inactive = this.$element.hasClass ( 'inactive' );
+                var inactive = this.$switcher.hasClass ( 'inactive' );
 
                 this.$bar.toggleClass ( this.options.colors.on, checked && !inactive );
                 this.$handler.toggleClass ( this.options.colors.on, checked && !inactive );
@@ -5544,10 +5561,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$buttons_bar = this.$element.find ( '.tabs-buttons' );
-            this.$buttons = this.$element.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
-            this.$contents = this.$element.find ( '.tabs-content' );
-            this.$indicator = this.$element.find ( '.tabs-indicator' );
+            this.$tabs = this.$element;
+            this.$buttons_bar = this.$tabs.find ( '.tabs-buttons' );
+            this.$buttons = this.$tabs.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$contents = this.$tabs.find ( '.tabs-content' );
+            this.$indicator = this.$tabs.find ( '.tabs-indicator' );
 
             var $current_button = this.$buttons.filter ( '.active' ).first ();
 
@@ -5690,7 +5708,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            var $inputs = this.$element.find ( 'input' );
+            this.$tagbox = this.$element;
+
+            var $inputs = this.$tagbox.find ( 'input' );
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
@@ -5705,7 +5725,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$partial.before ( tags_html );
 
-            this.options.tags.$nodes = this.$element.find ( '.tag' );
+            this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
 
         },
 
@@ -5785,7 +5805,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_variables: function () {
 
-            this.options.tags.$nodes = this.$element.find ( '.tag' );
+            this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
 
             this.options.tags.arr = [];
 
@@ -6107,7 +6127,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.options.timestamp = this.$element.data ( 'timestamp' ) || this.options.timestamp;
+            this.$timeAgo_wrp = this.$element;
+
+            this.options.timestamp = this.$timeAgo_wrp.data ( 'timestamp' ) || this.options.timestamp;
 
         },
 
@@ -6137,11 +6159,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.options.title ) {
 
-                this.$element.attr ( 'title', timeAgo.str );
+                this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
 
             } else {
 
-                this.$element.html ( timeAgo.str );
+                this.$timeAgo_wrp.html ( timeAgo.str );
 
             }
 

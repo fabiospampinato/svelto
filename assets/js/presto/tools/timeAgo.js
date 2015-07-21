@@ -23,7 +23,9 @@
 
         _variables: function () {
 
-            this.options.timestamp = this.$element.data ( 'timestamp' ) || this.options.timestamp;
+            this.$timeAgo_wrp = this.$element;
+
+            this.options.timestamp = this.$timeAgo_wrp.data ( 'timestamp' ) || this.options.timestamp;
 
         },
 
@@ -53,11 +55,11 @@
 
             if ( this.options.title ) {
 
-                this.$element.attr ( 'title', timeAgo.str );
+                this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
 
             } else {
 
-                this.$element.html ( timeAgo.str );
+                this.$timeAgo_wrp.html ( timeAgo.str );
 
             }
 

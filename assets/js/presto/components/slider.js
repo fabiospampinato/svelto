@@ -27,7 +27,8 @@
 
         _variables: function () {
 
-            this.$slider = this.$element.find ( '.slider' );
+            this.$slider_wrp = this.$element;
+            this.$slider = this.$slider_wrp.find ( '.slider' );
             this.$min_btn = this.$slider.find ( '.min' );
             this.$max_btn = this.$slider.find ( '.max' );
             this.$input = this.$slider.find ( 'input' );

@@ -8,7 +8,7 @@
     @include color ( $label-color, $label-color-basic );
     font-weight: bold;
     position: relative;
-    display: flex;
+    display: inline-flex;
     justify-content: center;
     align-items: strech;
     min-width: 1em;

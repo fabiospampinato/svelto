@@ -5,8 +5,8 @@ extends ../../layout.jade
 append main
     +divider Squares - All matches
 
-    +container-simple
-        +multiple.squares_all
+    +container-simple.squares_all
+        +multiple
             +square.xxxxxlarge.centered
                 span.small 1
             +square.xxxxxlarge.centered
@@ -80,8 +80,8 @@ append main
 
     +divider Squares - Most significant match
 
-    +container-simple
-        +multiple.squares_most
+    +container-simple.squares_most
+        +multiple
             +square.xxxxxlarge.centered
                 span.small 1
             +square.xxxxxlarge.centered
@@ -155,8 +155,8 @@ append main
 
     +divider Squares - Punctual
 
-    +container-simple
-        +multiple.squares_punctual
+    +container-simple.squares_punctual
+        +multiple
             +square.xxxxxlarge.centered
                 span.small 1
             +square.xxxxxlarge.centered
@@ -245,19 +245,19 @@ append body-end
 
         function populate_all () {
 
-            $('.squares_all').empty ().append ( get_squares_html ( $('#populate_all_input').val () ) );
+            $('.squares_all .multiple').empty ().append ( get_squares_html ( $('#populate_all_input').val () ) );
 
         }
 
         function populate_most () {
 
-            $('.squares_most').empty ().append ( get_squares_html ( $('#populate_most_input').val () ) );
+            $('.squares_most .multiple').empty ().append ( get_squares_html ( $('#populate_most_input').val () ) );
 
         }
 
         function populate_punctual () {
 
-            $('.squares_punctual').empty ().append ( get_squares_html ( $('#populate_punctual_input').val () ) );
+            $('.squares_punctual .multiple').empty ().append ( get_squares_html ( $('#populate_punctual_input').val () ) );
 
         }
 
@@ -326,19 +326,22 @@ append body-end
         // Ready
 
         $(function () {
-            $('.squares_all .square').draggable ({
+            $('.squares_all').draggable ({
                 start: drag_start_all,
                 move: drag_move,
-                end: drag_end
+                end: drag_end,
+                delegate: '.square'
             });
-            $('.squares_most .square').draggable ({
+            $('.squares_most').draggable ({
                 start: drag_start_most,
                 move: drag_move,
-                end: drag_end
+                end: drag_end,
+                delegate: '.square'
             });
-            $('.squares_punctual .square').draggable ({
+            $('.squares_punctual').draggable ({
                 start: drag_start_punctual,
                 move: drag_move,
-                end: drag_end
+                end: drag_end,
+                delegate: '.square'
             });
         });

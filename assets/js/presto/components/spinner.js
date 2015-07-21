@@ -27,10 +27,11 @@
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
-            this.$label = this.$element.find ( '.button-center' );
-            this.$decrease_btn = this.$element.find ( '.decrease' );
-            this.$increase_btn = this.$element.find ( '.increase' );
+            this.$spinner = this.$element;
+            this.$input = this.$spinner.find ( 'input' );
+            this.$label = this.$spinner.find ( '.button-center' );
+            this.$decrease_btn = this.$spinner.find ( '.decrease' );
+            this.$increase_btn = this.$spinner.find ( '.increase' );
 
         },
 

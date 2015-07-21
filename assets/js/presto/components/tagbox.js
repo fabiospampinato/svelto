@@ -53,7 +53,9 @@
 
         _variables: function () {
 
-            var $inputs = this.$element.find ( 'input' );
+            this.$tagbox = this.$element;
+
+            var $inputs = this.$tagbox.find ( 'input' );
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
@@ -68,7 +70,7 @@
 
             this.$partial.before ( tags_html );
 
-            this.options.tags.$nodes = this.$element.find ( '.tag' );
+            this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
 
         },
 
@@ -148,7 +150,7 @@
 
         _update_variables: function () {
 
-            this.options.tags.$nodes = this.$element.find ( '.tag' );
+            this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
 
             this.options.tags.arr = [];
 

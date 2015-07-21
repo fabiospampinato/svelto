@@ -98,8 +98,9 @@
 
         _variables: function () {
 
-            this.$highlighteds = this.$element.find ( '.progressBar-highlighted' );
-            this.$stripes = this.$element.find ( '.progressBar-stripes' );
+            this.$progressBar = this.$element;
+            this.$highlighteds = this.$progressBar.find ( '.progressBar-highlighted' );
+            this.$stripes = this.$progressBar.find ( '.progressBar-stripes' );
 
         },
 

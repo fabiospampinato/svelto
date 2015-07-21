@@ -22,7 +22,8 @@
 
         _variables: function () {
 
-            this.$closers = this.$element.find ( '.modal-closer' );
+            this.$modal = this.$element;
+            this.$closers = this.$modal.find ( '.modal-closer' );
 
         },
 
@@ -48,11 +49,11 @@
 
         open: function () {
 
-            this.$element.addClass ( 'show' );
+            this.$modal.addClass ( 'show' );
 
             $.reflow ();
 
-            this.$element.addClass ( 'active' );
+            this.$modal.addClass ( 'active' );
 
             this._on ( $document, 'keydown', this._handler_esc_keydown );
 
@@ -62,13 +63,13 @@
 
         close: function () {
 
-            this.$element.removeClass ( 'active' );
+            this.$modal.removeClass ( 'active' );
 
             $.reflow ();
 
             this._delay ( function () {
 
-                this.$element.removeClass ( 'show' );
+                this.$modal.removeClass ( 'show' );
 
             }, 200 );
 

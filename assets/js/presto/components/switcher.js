@@ -32,10 +32,11 @@
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
-            this.$bar = this.$element.find ( '.bar' );
-            this.$handler = this.$element.find ( '.handler' );
-            this.$icon = this.$element.find ( '.icon' );
+            this.$switcher = this.$element;
+            this.$input = this.$switcher.find ( 'input' );
+            this.$bar = this.$switcher.find ( '.bar' );
+            this.$handler = this.$switcher.find ( '.handler' );
+            this.$icon = this.$switcher.find ( '.icon' );
 
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
@@ -75,7 +76,7 @@
 
             this.checked = this.$input.prop ( 'checked' );
 
-            if ( this.checked !== this.$element.hasClass ( 'checked' ) ) {
+            if ( this.checked !== this.$switcher.hasClass ( 'checked' ) ) {
 
                 this._set_check ( this.checked, true );
 
@@ -177,11 +178,11 @@
 
             if ( checked !== this.$input.prop ( 'checked' ) || force ) {
 
-                this.$element.toggleClass ( 'checked', checked );
+                this.$switcher.toggleClass ( 'checked', checked );
 
                 this.$handler.css ( 'left', checked ? '100%' : 0 );
 
-                var inactive = this.$element.hasClass ( 'inactive' );
+                var inactive = this.$switcher.hasClass ( 'inactive' );
 
                 this.$bar.toggleClass ( this.options.colors.on, checked && !inactive );
                 this.$handler.toggleClass ( this.options.colors.on, checked && !inactive );

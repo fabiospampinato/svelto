@@ -13,9 +13,10 @@
 
         _variables: function () {
 
-            this.$thead = this.$element.find ( 'thead' ),
-            this.$tfoot = this.$element.find ( 'tfoot' ),
-            this.$tbody = this.$element.find ( 'tbody' ),
+            this.$table = this.$element;
+            this.$thead = this.$table.find ( 'thead' ),
+            this.$tfoot = this.$table.find ( 'tfoot' ),
+            this.$tbody = this.$table.find ( 'tbody' ),
             this.$headers = this.$thead.find ( 'th' ),
             this.$empty_row = this.$tbody.find ( 'tr.empty' ),
             this.columns_nr = this.$headers.length;
@@ -74,7 +75,7 @@
 
             this._check_empty ();
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -96,7 +97,7 @@
 
             }
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -108,7 +109,7 @@
 
             this._check_empty ();
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -120,7 +121,7 @@
 
             this._check_empty ();
 
-            this.$element.trigger ( 'change' );
+            this.$table.trigger ( 'change' );
 
             return this;
 

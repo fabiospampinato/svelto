@@ -118,6 +118,7 @@
 
         _variables: function () {
 
+            this.$noty = this.$element;
             this.timer = false;
 
             this.isOpen = false;
@@ -141,7 +142,7 @@
 
             if ( this.options.buttons.length ) {
 
-                var $buttons = this.$element.find ( '.button' ),
+                var $buttons = this.$noty.find ( '.button' ),
                     instance = this;
 
                 _.each ( this.options.buttons, function ( button, index ) {
@@ -176,7 +177,7 @@
 
         _init_hover: function () {
 
-            this.$element.hover ( function () {
+            this.$noty.hover ( function () {
 
                 _.each ( timers, function ( timer ) {
 
@@ -204,13 +205,13 @@
 
             if ( !this.isOpen ) {
 
-                $('.noty_queue.' + this.options.anchor).first ().append ( this.$element );
+                $('.noty_queue.' + this.options.anchor).first ().append ( this.$noty );
 
-                this.$element.removeClass ( 'hidden' );
+                this.$noty.removeClass ( 'hidden' );
 
                 $.reflow ();
 
-                this.$element.addClass ( 'active' );
+                this.$noty.addClass ( 'active' );
 
                 if ( this.neverOpened ) {
 
@@ -242,11 +243,11 @@
 
             }
 
-            this.$element.removeClass ( 'active' );
+            this.$noty.removeClass ( 'active' );
 
             this._delay ( function () {
 
-                this.$element.remove ();
+                this.$noty.remove ();
 
             }, 200 );
 

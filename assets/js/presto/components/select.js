@@ -45,11 +45,12 @@
 
         _variables: function () {
 
-            this.id = this.$element.data ( 'select' );
-            this.$select = this.$element.find ( 'select' );
+            this.$trigger = this.$element;
+            this.id = this.$trigger.data ( 'select' );
+            this.$select = this.$trigger.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
             this.select_options = [];
-            this.$placeholder = this.$element.find ( '.placeholder' );
+            this.$placeholder = this.$trigger.find ( '.placeholder' );
 
             this.$dropdown = false;
             this.$dropdown_container = false;
@@ -144,7 +145,7 @@
             this.$dropdown_container = this.$dropdown.find ( '.container' );
             this.$buttons = this.$dropdown.find ( '.button' );
 
-            this.$element.addClass ( 'dropdown-trigger' ).data ( 'dropdown', 'dropdown-' + this.id );
+            this.$trigger.addClass ( 'dropdown-trigger' ).data ( 'dropdown', 'dropdown-' + this.id );
 
             var instance = this;
 
@@ -180,7 +181,7 @@
 
         _set_dropdown_width: function () {
 
-            this.$dropdown_container.css ( 'min-width', this.$element.width () );
+            this.$dropdown_container.css ( 'min-width', this.$trigger.width () );
 
         },
 

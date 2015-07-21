@@ -1,8 +1,6 @@
 
 /* DRAGGABLE */
 
-//TODO: add support for filter, so that we can bind a single event
-
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -17,6 +15,7 @@
             start: $.noop,
             move: $.noop,
             end: $.noop,
+            delegate: false,
             context: undefined, //FIXME: Is it necessary?
             events: {
                 start: 'mousedown touchstart',
@@ -98,7 +97,7 @@
 
         /* START DRAGGING */
 
-        this.on ( options.events.start, start );
+        this.on ( options.events.start, options.delegate, start );
 
     };
 

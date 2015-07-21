@@ -25,9 +25,10 @@
 
         _variables: function () {
 
-            this.$input = this.$element.find ( 'input' );
+            this.$radio = this.$element;
+            this.$input = this.$radio.find ( 'input' );
             this.name = this.$input.attr ( 'name' );
-            this.$form = this.$element.parent ( 'form' );
+            this.$form = this.$radio.parent ( 'form' );
             this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
             this.$other_radios = this.$other_inputs.parent ();
 
@@ -35,7 +36,7 @@
 
         _init: function () {
 
-            this.$element.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
+            this.$radio.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
 
         },
 
@@ -57,7 +58,7 @@
 
                 this.$other_radios.removeClass ( 'checked' );
 
-                this.$element.addClass ( 'checked' );
+                this.$radio.addClass ( 'checked' );
 
             }
 

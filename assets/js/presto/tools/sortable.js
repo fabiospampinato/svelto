@@ -34,9 +34,10 @@
 
         _variables: function () {
 
-            this.$headers = this.$element.find ( 'thead th' );
+            this.$table = this.$element;
+            this.$headers = this.$table.find ( 'thead th' );
             this.$sortables = this.$headers.filter ( '[data-sort]' );
-            this.$tbody = this.$element.find ( 'tbody' );
+            this.$tbody = this.$table.find ( 'tbody' );
 
             this.table = this.element;
             this.tbody = this.$tbody.get ( 0 );

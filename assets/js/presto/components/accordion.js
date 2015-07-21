@@ -11,7 +11,8 @@
 
         _variables: function () {
 
-            this.$expanders = this.$element.children ( '.expander' );
+            this.$accordion = this.$element;
+            this.$expanders = this.$accordion.children ( '.expander' );
             this.expanders_inst = [];
 
         },
