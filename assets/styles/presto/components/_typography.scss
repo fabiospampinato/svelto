@@ -1,18 +1,27 @@
 
 /* LINK */
 
-
-
-
-//TODO: fare gli a come si deve, c'era un implementazione carina con una sottolineatura da semantic-ui
-
-
-
-
 a {
-    font-weight: bold;
+
+    position: relative;
     text-decoration: none;
     color: inherit;
+
+    &:before {
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        content: '';
+        transition: transform $a-underline-transition-duration;
+        transform: scaleX(0);
+    }
+
+    &:hover:before {
+        transform: scaleX(1);
+    }
+
 }
 
 /* HEADERS */
