@@ -1,8 +1,0 @@
-
-/* GENERAL */
-
-.advertisement {
-    @include color ( $advertisement-color, $advertisement-color-basic );
-    margin-bottom: $layout-spacing;
-    text-align: center;
-}

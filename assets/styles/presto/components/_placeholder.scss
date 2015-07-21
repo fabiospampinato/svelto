@@ -1,0 +1,8 @@
+
+/* PLACEHOLDER */
+
+.placeholder {
+    @include color ( $placeholder-color, $placeholder-color-basic );
+    margin-bottom: $layout-spacing;
+    text-align: center;
+}

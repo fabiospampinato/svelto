@@ -35,7 +35,6 @@
 
 /* SETTINGS */
 
-@import 'settings/advertisement';
 @import 'settings/base';
 @import 'settings/label';
 @import 'settings/breadcrumb';
@@ -58,6 +57,7 @@
 @import 'settings/navbar';
 @import 'settings/noty';
 @import 'settings/outline';
+@import 'settings/placeholder';
 @import 'settings/progressBar';
 @import 'settings/ripple';
 @import 'settings/select';
@@ -79,7 +79,6 @@
 /* COMPONENTS */
 
 @import 'components/accordion';
-@import 'components/advertisement';
 @import 'components/label';
 @import 'components/breadcrumb';
 @import 'components/button';
@@ -106,6 +105,7 @@
 @import 'components/navbar';
 @import 'components/noty';
 @import 'components/outline';
+@import 'components/placeholder';
 @import 'components/progressBar';
 @import 'components/radio';
 @import 'components/ripple';

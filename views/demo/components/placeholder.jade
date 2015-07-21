@@ -1,0 +1,49 @@
+//- components/placeholder.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Horizontal
+
+    +container-simple
+        +placeholder(728, 90)
+        +placeholder(320, 100)
+        +placeholder(970, 250)
+        +placeholder(970, 90)
+        +placeholder(468, 60)
+        +placeholder(320, 50)
+        +placeholder(234, 60)
+
+    +divider Vertical
+
+    +container-simple
+        +placeholder(300, 600)
+        +placeholder(300, 1050)
+        +placeholder(160, 600)
+        +placeholder(120, 600)
+        +placeholder(120, 240)
+
+    +divider Rectangular / Square
+
+    +container-simple
+        +placeholder(336, 280)
+        +placeholder(300, 250)
+        +placeholder(250, 250)
+        +placeholder(200, 200)
+        +placeholder(180, 150)
+        +placeholder(125, 125)
+
+    +divider Rectangular
+
+    +container-simple
+        +placeholder(728, 15)
+        +placeholder(468, 15)
+        +placeholder(200, 90)
+        +placeholder(180, 90)
+        +placeholder(160, 90)
+        +placeholder(120, 90)
+
+    +divider Custom
+
+    +container-simple
+        +placeholder(600, 50) 600x50 - Custom
