@@ -384,7 +384,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( key === 'disabled' ) {
 
-                this.$element.toggleClass ( this.widgetFullName + '-disabled', !!value );
+                this.$element.toggleClass ( this.widgetName + '-disabled', !!value ); //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
             }
 
@@ -437,7 +437,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             function handlerProxy () {
 
-                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetFullName + '-disabled' ) ) ) return;
+                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return; //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
                 var args = Array.prototype.slice.call ( arguments, 0 );
 
@@ -4276,10 +4276,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         templates: {
             base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                      '<div class="unhighlighted">' +
+                      '<div class="progressBar-unhighlighted">' +
                           '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
                       '</div>' +
-                      '<div class="stripes"></div>' +
+                      '<div class="progressBar-stripes"></div>' +
                   '</div>',
             percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
                              '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
@@ -4287,8 +4287,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
                                      '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
                                  '{% } %}',
-            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
-            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
+            percentage: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
+            percentage_labeled: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
                                     '{% include ( "presto.progressBar.label", {} ); %}' +
                                 '</div>',
             label: '<div class="progressBar-label"></div>'
@@ -4315,7 +4315,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             decimals: 0,
 
             callbacks: {
-                update: $.noop
+                update: $.noop,
+                full: $.noop
             }
         },
 
@@ -4323,8 +4324,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$highlighteds = this.$element.find ( '.highlighted' );
-            this.$stripes = this.$element.find ( '.stripes' );
+            this.$highlighteds = this.$element.find ( '.progressBar-highlighted' );
+            this.$stripes = this.$element.find ( '.progressBar-stripes' );
 
         },
 
@@ -4373,6 +4374,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.$stripes.width ( sum + '%' );
 
+                if ( sum === 100 ) {
+
+                    this._trigger ( 'full' ); //TODO: move it, it should be here I think...
+
+                }
+
             }
 
         },
@@ -4416,7 +4423,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     labeled: !!$progressBar.find ( '.progressBar-label' ).length
                 };
 
-            $progressBar.find ( '.highlighted' ).each ( function () {
+            $progressBar.find ( '.progressBar-highlighted' ).each ( function () {
 
                 options.percentages.push ({
                     value: parseFloat ( this.style.width )

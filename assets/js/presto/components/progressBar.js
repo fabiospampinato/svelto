@@ -50,10 +50,10 @@
 
         templates: {
             base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                      '<div class="unhighlighted">' +
+                      '<div class="progressBar-unhighlighted">' +
                           '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
                       '</div>' +
-                      '<div class="stripes"></div>' +
+                      '<div class="progressBar-stripes"></div>' +
                   '</div>',
             percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
                              '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
@@ -61,8 +61,8 @@
             percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
                                      '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
                                  '{% } %}',
-            percentage: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
-            percentage_labeled: '<div class="highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
+            percentage: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
+            percentage_labeled: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
                                     '{% include ( "presto.progressBar.label", {} ); %}' +
                                 '</div>',
             label: '<div class="progressBar-label"></div>'
@@ -89,7 +89,8 @@
             decimals: 0,
 
             callbacks: {
-                update: $.noop
+                update: $.noop,
+                full: $.noop
             }
         },
 
@@ -97,8 +98,8 @@
 
         _variables: function () {
 
-            this.$highlighteds = this.$element.find ( '.highlighted' );
-            this.$stripes = this.$element.find ( '.stripes' );
+            this.$highlighteds = this.$element.find ( '.progressBar-highlighted' );
+            this.$stripes = this.$element.find ( '.progressBar-stripes' );
 
         },
 
@@ -147,6 +148,12 @@
 
                 this.$stripes.width ( sum + '%' );
 
+                if ( sum === 100 ) {
+
+                    this._trigger ( 'full' ); //TODO: move it, it should be here I think...
+
+                }
+
             }
 
         },
@@ -190,7 +197,7 @@
                     labeled: !!$progressBar.find ( '.progressBar-label' ).length
                 };
 
-            $progressBar.find ( '.highlighted' ).each ( function () {
+            $progressBar.find ( '.progressBar-highlighted' ).each ( function () {
 
                 options.percentages.push ({
                     value: parseFloat ( this.style.width )

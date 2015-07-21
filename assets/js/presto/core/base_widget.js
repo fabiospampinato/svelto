@@ -213,7 +213,7 @@
 
             if ( key === 'disabled' ) {
 
-                this.$element.toggleClass ( this.widgetFullName + '-disabled', !!value );
+                this.$element.toggleClass ( this.widgetName + '-disabled', !!value ); //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
             }
 
@@ -266,7 +266,7 @@
 
             function handlerProxy () {
 
-                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetFullName + '-disabled' ) ) ) return;
+                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return; //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
                 var args = Array.prototype.slice.call ( arguments, 0 );
 

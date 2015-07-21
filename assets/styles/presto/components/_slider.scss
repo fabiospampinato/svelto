@@ -102,7 +102,7 @@
 
     }
 
-    &:not(.presto-slider-disabled) {
+    &:not(.slider-disabled) {
 
         & > .slider {
 
@@ -170,7 +170,7 @@
 
     }
 
-    &.presto-slider-disabled {
+    &.slider-disabled {
 
         & > .slider .bar .unhighlighted {
 

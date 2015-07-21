@@ -20,14 +20,14 @@ append main
         +progressBar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
         +progressBar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' })
 
-    +divider Inactive
+    +divider Disabled
 
     +container-simple
-        +progressBar(45).inactive
-        +progressBar(66).striped.inactive
-        +progressBar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).inactive
-        +progressBar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' }).inactive
-        +progressBar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' }).inactive
+        +progressBar(45).progressBar-disabled
+        +progressBar(66).striped.progressBar-disabled
+        +progressBar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).progressBar-disabled
+        +progressBar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' }).progressBar-disabled
+        +progressBar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' }).progressBar-disabled
 
     +divider Created
 
@@ -62,6 +62,12 @@ append main
         +button-simple("progressBar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
         +button-simple("progressBar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
 
+    +divider Enable / Disable
+
+    +multiple
+        +button-simple("progressBar_enable ()").outlined Enable
+        +button-simple("progressBar_disable ()").outlined Disable
+
 append body-end
     +script.
         function progressBar_set_single ( percentage ) {
@@ -76,4 +82,14 @@ append body-end
         }
         function progressBar_create () {
             $.progressBar.apply ( null, arguments ).appendTo ( '.container.created .container-content' );
+        }
+        function progressBar_enable () {
+            $(".progressBar").each ( function () {
+                $(this).progressBar ( 'instance' ).enable ();
+            });
+        }
+        function progressBar_disable () {
+            $(".progressBar").each ( function () {
+                $(this).progressBar ( 'instance' ).disable ();
+            });
         }

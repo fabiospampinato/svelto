@@ -12,10 +12,10 @@ mixin progressBar(options, multiple)
     - var total = 0;
 
     .progressBar&attributes(attributes)
-        .unhighlighted
+        .progressBar-unhighlighted
             each percentage in options.percentages
                 - total += percentage.value;
-                .highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%"))
+                .progressBar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%"))
                     if options.labeled
                         .progressBar-label= +(percentage.value).toFixed(options.decimals || 0)
-        .stripes(style=("width: " + total + "%"))
+        .progressBar-stripes(style=("width: " + total + "%"))

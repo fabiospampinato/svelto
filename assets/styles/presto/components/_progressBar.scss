@@ -1,105 +1,80 @@
 
-/* PROGRESS BAR */
+/* STRIPES */
 
-//TODO: add support for labels in striped
+%progressBar-stripes {
+    background: linear-gradient(-45deg, $progress-bar-stripe-light-color 25%, $progress-bar-stripe-dark-color 25%, $progress-bar-stripe-dark-color 50%, $progress-bar-stripe-light-color 50%, $progress-bar-stripe-light-color 75%, $progress-bar-stripe-dark-color 75%, $progress-bar-stripe-dark-color);
+}
+
+/* PROGRESS BAR */
 
 .progressBar {
 
+    position: relative;
+    display: flex;
+    overflow: hidden;
+    flex-wrap: nowrap;
     height: $progress-bar-height;
     margin-bottom: $layout-spacing;
-    border-radius: $progress-bar-unhighlighted-height;
-    overflow: hidden;
-    position: relative;
+    transition: opacity $progress-bar-transition-opacity-duration;
+    border-radius: 10000px 10000px;
 
-    & > .unhighlighted {
+    & > .progressBar-unhighlighted {
 
         @include color ( $progress-bar-unhighlighted-color, $progress-bar-unhighlighted-color-basic );
-        height: $progress-bar-unhighlighted-height;
+        display: flex;
         width: 100%;
-        border-radius: inherit;
 
-        & > .highlighted {
+        & > .progressBar-highlighted {
 
-            @include color ( $progress-bar-unhighlighted-color, $progress-bar-highlighted-color-basic );
+            @include color ( $progress-bar-highlighted-color, $progress-bar-highlighted-color-basic );
+            display: flex;
             overflow: hidden;
-            float: left;
-            height: $progress-bar-highlighted-height;
-            transition: width $progress-bar-transitions-time ease 0s;
+            justify-content: center;
+            align-items: center;
             width: 0;
-            position: relative;
+            transition: width $progress-bar-transition-width-duration;
             text-align: center;
             text-overflow: ellipsis;
 
             & > .progressBar-label {
-                @include center-absolutely ( false, $progress-bar-highlighted-height );
-                left: 0;
-                right: 0;
-                padding-left: $progress-bar-label-padding;
-                padding-right: $progress-bar-label-padding;
                 font-size: $progress-bar-label-font-size;
-                z-index: 1;
+                padding: $progress-bar-label-vertical-padding $progress-bar-label-horizontal-padding;
             }
 
         }
 
     }
 
-    & > .stripes {
-        display: none;
+    & > .progressBar-stripes {
         position: absolute;
-        left: 0;
         top: 0;
+        left: 0;
+        display: none;
+        pointer-events: none;
     }
 
-    &.striped > .stripes {
-
+    &.striped > .progressBar-stripes {
+        @extend %progressBar-stripes;
         display: block;
-        @extend %gradient-stripes;
-        background-size: $progress-bar-stripe-size $progress-bar-stripe-size;
-        content: '';
-        display: block;
-        width: 0%;
+        width: 0;
         height: 100%;
-        transition: width $progress-bar-transitions-time ease 0s;
-
+        transition: width $progress-bar-transition-width-duration;
+        background-size: $progress-bar-stripe-size $progress-bar-stripe-size;
     }
 
-    &.striped:not(.inactive) > .stripes {
-        animation: 2s linear 0s normal none infinite running move;
+    &.striped:not(.inactive) > .progressBar-stripes {
+        animation: $progress-bar-stripes-transition-move-duration linear 0s normal none infinite running progressBar-stripes-move;
     }
 
-    &.inactive {
-
-        & > .unhighlighted > .highlighted  {
-
-            @include color ( $progress-bar-inactive-highlighted-color, $progress-bar-inactive-highlighted-color-basic, false, '!important' );
-
-            &:not(:first-child) {
-                box-shadow: - $progress-bar-inactive-before-shadow-size 0 0 0 $progress-bar-inactive-highlighted-color;
-            }
-
-            &:last-child {
-                border-top-right-radius: inherit;
-                border-bottom-right-radius: inherit;
-                box-shadow: $progress-bar-inactive-after-shadow-size 0 0 0 $color-white-bg;
-            }
-
-            &:last-child:not(:first-child) {
-                @include multi-shadow ( - $progress-bar-inactive-before-shadow-size 0 0 0 $progress-bar-inactive-highlighted-color, $progress-bar-inactive-after-shadow-size 0 0 0 $color-white-bg );
-            }
-
-        }
-
-        & > .stripes {
-                border-top-right-radius: inherit;
-                border-bottom-right-radius: inherit;
-        }
-
+    &.progressBar-disabled {
+        opacity: $progress-bar-inactive-opacity;
     }
 
 }
 
-@keyframes move {
+/* KEYFRAMES */
+
+@keyframes progressBar-stripes-move {
     0% {
         background-position: 0 0;
     }

@@ -31,14 +31,14 @@
 .square-sample {
 
     @include square ( 4rem );
-    padding: $layout-half-spacing;
     overflow: hidden;
     margin-bottom: $layout-spacing;
+    padding: $layout-half-spacing;
 
     & > p {
-        text-align: inherit;
-        margin-bottom: $layout-spacing;
         font-size: 0.5rem;
+        margin-bottom: $layout-spacing;
+        text-align: inherit;
     }
 
 }
