@@ -58,13 +58,13 @@
 
             this._delay ( function () {
 
-                this.$indicator.css ( 'left', position.left + 1 );
+                this.$indicator.css ( 'left', position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
 
             }, this.current_index > this.prev_index ? 40 : 0 );
 
             this._delay ( function () {
 
-                this.$indicator.css ( 'right', total_width - position.left - $active.width () + 1 );
+                this.$indicator.css ( 'right', total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
 
             }, this.current_index > this.prev_index ? 0 : 40 );
 

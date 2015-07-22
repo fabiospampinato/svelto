@@ -10,15 +10,19 @@
 
         & > .multiple-wrp {
 
+            margin-right: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
             margin-bottom: 0;
+            margin-left: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
 
             & > .multiple > .button {
 
                 &:first-child {
+                    margin-left: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
                     border-bottom-left-radius: 0;
                 }
 
                 &:last-child {
+                    margin-right: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
                     border-bottom-right-radius: 0;
                 }
 
