@@ -8,22 +8,11 @@ mixin container(title, header_classes)
 
 mixin container-header(title)
     .container-header&attributes(attributes)
-        if title
-            +container-header-center
-                = title
-        block
-
-mixin container-header-left
-    .container-header-sub.left&attributes(attributes)
-        block
-
-mixin container-header-center
-    .container-header-sub.center&attributes(attributes)
-        block
-
-mixin container-header-right
-    .container-header-sub.right&attributes(attributes)
-        block
+        +multiple
+            if title
+                +multiple-center
+                    p= title
+            block
 
 mixin container-content
     .container-content&attributes(attributes)

@@ -21,10 +21,7 @@
 
         @include color ( $container-header-color, $container-header-color-basic );
         font-weight: bold;
-        display: flex;
-        flex-wrap: nowrap;
         flex-shrink: 0;
-        align-items: center;
         margin-top: - $container-header-border-width;
         margin-right: - $container-header-border-width;
         margin-left: - $container-header-border-width;
@@ -40,64 +37,8 @@
             cursor: pointer;
         }
 
-        & > .container-header-sub {
-
-            box-sizing: border-box;
-
-            &.left {
-
-                flex-shrink: 25;
-                order: 0;
-                width: 50%;
-
-                & ~ .center, & ~ .right {
-                    padding-right: 0;
-                    padding-left: $layout-spacing;
-                }
-
-            }
-
-            &.center {
-
-                flex-grow: 1; //FIXME: is not centered if only one of the left and right sections are provided
-                order: 1;
-                text-align: center;
-                white-space: nowrap; //FIXME: it should wrap if necessary...
-
-                & ~ .right {
-                    padding-right: 0;
-                    padding-left: $layout-spacing;
-                }
-
-                & ~ .left {
-                    padding-right: $layout-spacing;
-                    padding-left: 0;
-                }
-
-            }
-
-            &.right {
-
-                flex-shrink: 25;
-                order: 2;
-                width: 50%;
-                text-align: right;
-
-                & > .multiple-wrp > .multiple {
-                    justify-content: flex-end;
-                }
-
-                & ~ .center, & ~ .left {
-                    padding-right: $layout-spacing;
-                    padding-left: 0;
-                }
-
-            }
-
-            & > * {
-                margin-bottom: 0;
-            }
-
+        & .multiple-wrp > .multiple > * {
+            margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
         }
 
     }

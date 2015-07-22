@@ -6,7 +6,6 @@ mixin modal(title, header_classes)
         +container
             if title
                 +container-header(title)(class=header_classes)
-                    +container-header-right
+                    +multiple-right
                         +button-icon('navigation-close').xsmall.modal-closer
-                    +container-header-left
             block

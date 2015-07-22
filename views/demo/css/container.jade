@@ -28,17 +28,12 @@ append main
 
     +container
         +container-header.secondary
-            +container-header-right Right
-            +container-header-center Center
-            +container-header-left Left
-        +container-content Content
-
-    +divider With advanced header (No left)
-
-    +container
-        +container-header.pink
-            +container-header-right Right
-            +container-header-center Center
+            +multiple-right
+                p Right
+            +multiple-left
+                p Left
+            +multiple-center
+                p Center
         +container-content Content
 
     +divider With footer
@@ -58,16 +53,14 @@ append main
 
     +container(style="height:250px")
         +container-header("Header")
-            +container-header-left
-                +multiple
-                    +button-icon("action-thumb-down").xxsmall
-                    +button-icon("action-thumb-up").xxsmall
-            +container-header-right
-                +multiple
-                    +button-icon("navigation-apps").xxsmall
-                    +button-icon("navigation-menu").xxsmall
-                    +button-icon("navigation-more-vert").xxsmall
-                    +button-icon("navigation-refresh").xxsmall
+            +multiple-left
+                +button-icon("action-thumb-down").xxsmall
+                +button-icon("action-thumb-up").xxsmall
+            +multiple-right
+                +button-icon("navigation-apps").xxsmall
+                +button-icon("navigation-menu").xxsmall
+                +button-icon("navigation-more-vert").xxsmall
+                +button-icon("navigation-refresh").xxsmall
         +container-content
             p
                 +lorem-ipsum

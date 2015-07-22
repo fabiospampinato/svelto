@@ -153,8 +153,12 @@
 
         & > .multiple-sub {
 
+            //FIXME: it doesn't work very well if we don't wran plain text in a p, that has a margin-bottom for example...
+            //FIXME; the alignment of the center part is not always correct
+
             align-self: center;
             flex-basis: 0;
+            margin: 0;
 
             & > .multiple-wrp > .multiple {
 
@@ -168,6 +172,8 @@
 
             &.left {
                 order: 0;
+                margin-left: 5px;
+                margin-right: -5px;
             }
 
             &.center {
@@ -183,6 +189,8 @@
             &.right {
 
                 order: 4;
+                margin-left: -5px;
+                margin-right: 5px;
 
                 & > .multiple-wrp > .multiple {
                     justify-content: flex-end;

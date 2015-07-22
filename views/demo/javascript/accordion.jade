@@ -8,19 +8,23 @@ append main
     +accordion
         +expander
             +container-header("Section 1").actionable
-                +container-header-right
+                +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
-                +container-header-left
             +container-content Content of section 1
         +expander.opened
-            +container-header("Section 2").actionable
-                +container-header-right
+            +container-header.actionable
+                +multiple-left
+                    p Section 2
+                +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
-                +container-header-left
             +container-content Content of section 2
         +expander
             +container-header("Section 3").actionable
-                +container-header-right
+                +multiple-left
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
-                +container-header-left
             +container-content Content of section 3
+        +expander
+            +container-header("Section 4").actionable
+                +multiple-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-content Content of section 4

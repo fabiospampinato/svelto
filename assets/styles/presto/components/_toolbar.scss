@@ -17,7 +17,7 @@
             height: 100%;
 
             & > * {
-                margin-bottom: 0;
+                margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
             }
 
         }

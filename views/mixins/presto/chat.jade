@@ -35,21 +35,20 @@ mixin chat-msg(options)
             +container
                 +container-header.transparent
                     if options.sender
-                        +container-header-left
+                        +multiple-left
                             if options.sender.url
                                 a(href=options.sender.url, title=options.sender.name)= options.sender.name
                             else
                                 = options.sender.name
-                    +container-header-right
-                        +multiple
-                            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).xsmall.outlined
-                            if options.permissions
-                                if options.permissions.own
-                                    +button-icon("action-account-circle")(title="You are the owner").xsmall.outlined
-                                if options.permissions.reply
-                                    +button-icon("content-reply")(title="Reply").xsmall.outlined
-                                if options.permissions.edit
-                                    +button-icon("editor-mode-edit")(title="Edit").xsmall.outlined
-                                if options.permissions.delete
-                                    +button-icon("action-delete")(title="Delete").xsmall.outlined
+                    +multiple-right
+                        +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).xsmall.outlined
+                        if options.permissions
+                            if options.permissions.own
+                                +button-icon("action-account-circle")(title="You are the owner").xsmall.outlined
+                            if options.permissions.reply
+                                +button-icon("content-reply")(title="Reply").xsmall.outlined
+                            if options.permissions.edit
+                                +button-icon("editor-mode-edit")(title="Edit").xsmall.outlined
+                            if options.permissions.delete
+                                +button-icon("action-delete")(title="Delete").xsmall.outlined
                 +container-content= options.message.content

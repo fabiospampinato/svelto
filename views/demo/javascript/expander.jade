@@ -7,29 +7,26 @@ append main
 
     +expander
         +container-header("Base").actionable
-            +container-header-right
+            +multiple-right
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-header-left
         +container-content Content of base
 
     +expander
-        +container-header("Icon to the left").actionable
-            +container-header-left
+        +container-header.actionable
+            +multiple-left
+                p Base left
+            +multiple-right
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-header-right
+        +container-content Content of base left
+
+    +expander
+        +container-header("Icon to the left").actionable
+            +multiple-left
+                +button-icon("hardware-keyboard-arrow-down").xxsmall
         +container-content Content of icon to the left
 
     +expander.opened
-        +container-header("Base - Active").actionable
-            +container-header-right
+        +container-header("Opened").actionable
+            +multiple-right
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-header-left
-        +container-content Content of base - Active
-
-
-    +expander.opened
-        +container-header("Base - Active").actionable
-            +container-header-right
-                +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-header-left
-        +container-content Content of base - Active
+        +container-content Content of opened
