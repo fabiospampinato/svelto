@@ -11,21 +11,21 @@
 
         &:not(:last-child) {
 
-            margin-bottom: -1px !important;
-            border-bottom-width: 0 !important;
-            border-bottom-left-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
+            margin-bottom: - $container-border-width;
+            border-bottom-width: 0;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
 
             & > .header {
-                border-bottom-left-radius: 0 !important;
-                border-bottom-right-radius: 0 !important;
+                border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
             }
 
         }
 
         &:not(:first-child) {
-            border-top-left-radius: 0 !important;
-            border-top-right-radius: 0 !important;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
         }
 
     }

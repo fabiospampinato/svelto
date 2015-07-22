@@ -5,6 +5,8 @@
 
     'use strict';
 
+    /* ACCORDION */
+
     $.widget ( 'presto.accordion', {
 
         /* SPECIAL */

@@ -7,24 +7,24 @@ append main
 
     +accordion
         +expander
-            +container-header("Section 1").actionable
+            +container-header("Section 1").actionable.expander-toggler
                 +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
             +container-content Content of section 1
         +expander.opened
-            +container-header.actionable
+            +container-header
                 +multiple-left
-                    p Section 2
+                    p Section 2 - Button toggler
                 +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-content Content of section 2
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall.expander-toggler
+            +container-content Content of section 2 - Button toggler
         +expander
-            +container-header("Section 3").actionable
+            +container-header("Section 3").actionable.expander-toggler
                 +multiple-left
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
             +container-content Content of section 3
         +expander
-            +container-header("Section 4").actionable
+            +container-header("Section 4").actionable.expander-toggler
                 +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
             +container-content Content of section 4

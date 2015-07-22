@@ -6,27 +6,27 @@ append main
     +divider Expander
 
     +expander
-        +container-header("Base").actionable
+        +container-header("Base").actionable.expander-toggler
             +multiple-right
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
         +container-content Content of base
 
     +expander
-        +container-header.actionable
+        +container-header
             +multiple-left
-                p Base left
+                p Base left - Button toggler
             +multiple-right
-                +button-icon("hardware-keyboard-arrow-down").xxsmall
-        +container-content Content of base left
+                +button-icon("hardware-keyboard-arrow-down").xxsmall.expander-toggler
+        +container-content Content of base left - Button toggler
 
     +expander
-        +container-header("Icon to the left").actionable
+        +container-header("Icon to the left").actionable.expander-toggler
             +multiple-left
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
         +container-content Content of icon to the left
 
     +expander.opened
-        +container-header("Opened").actionable
+        +container-header("Opened").actionable.expander-toggler
             +multiple-right
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
         +container-content Content of opened

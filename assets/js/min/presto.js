@@ -3015,22 +3015,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _variables: function () {
 
             this.$expander = this.$element;
-            this.$header = this.$expander.children ( '.header' );
-            this.$content = this.$expander.children ( '.content' );
+            this.$togglers = this.$expander.find ( '.expander-toggler' );
 
             this.opened = this.$expander.hasClass ( 'opened' );
 
         },
 
-        _init: function () {
+        // _init: function () {
 
-            if ( !this.opened ) this.close ( true );
+        //     if ( !this.opened ) this.close ( true ); //INFO: If is opened the CSS takes care of everything
 
-        },
+        // },
 
         _events: function () {
 
-            this._on ( this.$header, 'click', this.toggle );
+            this._on ( this.$togglers, 'click', this.toggle );
 
         },
 
@@ -3042,9 +3041,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        open: function ( force ) {
+        open: function () {
 
-            if ( !this.opened || force ) {
+            if ( !this.opened ) {
 
                 this.opened = true;
 
@@ -3056,9 +3055,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        close: function ( force ) {
+        close: function () {
 
-            if ( this.opened || force ) {
+            if ( this.opened ) {
 
                 this.opened = false;
 
@@ -3155,6 +3154,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
+
+    /* ACCORDION */
 
     $.widget ( 'presto.accordion', {
 

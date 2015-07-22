@@ -3,45 +3,42 @@
 
 .expander {
 
-    padding-bottom: 0;
-    transition: padding-bottom 0.25s ease 0s;
+    //FIXME: the transitions on the content don't work
 
-    & > .header {
+    & > .container-header {
 
-        cursor: pointer;
-        margin-bottom: 0;
-        border-bottom-left-radius: $border-radius-medium;
-        border-bottom-right-radius: $border-radius-medium;
-        transition: margin-bottom 0.25s ease 0s, border-bottom-left-radius 0.25s ease 0s, border-bottom-right-radius 0.25s ease 0s;
+        transition: border-radius $expander-header-transition-border-radius-duration;
+        border-bottom-right-radius: inherit;
+        border-bottom-left-radius: inherit;
 
-        & > .sub .icon.icon-hardware-keyboard-arrow-down {
-            transition: transform 0.2s ease 0s;
-            transition: rotate(0);
+        & .icon-hardware-keyboard-arrow-down {
+            transition: transform $expander-arrow-transition-rotate-duration;
         }
 
     }
 
-    & > .content {
+    & > .container-content {
         display: none;
+        padding-top: 0;
+        padding-bottom: 0;
+        transition: padding $expander-content-transition-padding-duration, opacity $expander-content-transition-opacity-duration;
+        opacity: 0;
     }
 
     &.opened {
 
-        padding-bottom: $layout-spacing;
+        & > .container-header {
 
-        & > .header {
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
 
-            margin-bottom: $layout-spacing !important;
-            border-bottom-left-radius: 0 !important;
-            border-bottom-right-radius: 0 !important;
+            & .multiple-sub {
 
-            & > .sub {
-
-                &.left .icon.icon-hardware-keyboard-arrow-down {
+                &.left .icon-hardware-keyboard-arrow-down {
                     transform: rotate(-180deg);
                 }
 
-                &.right .icon.icon-hardware-keyboard-arrow-down {
+                &.right .icon-hardware-keyboard-arrow-down {
                     transform: rotate(180deg);
                 }
 
@@ -49,8 +46,11 @@
 
         }
 
-        & > .content {
+        & > .container-content {
             display: block;
+            padding-top: $layout-spacing;
+            padding-bottom: $layout-spacing;
+            opacity: 1;
         }
 
     }
