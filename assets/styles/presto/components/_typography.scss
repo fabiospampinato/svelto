@@ -132,6 +132,7 @@ dd {
 
 code, section, pre {
     display: block;
+    overflow-x: auto;
     margin: 0;
     padding: $layout-spacing;
     border: $code-border-width solid $code-border-color;

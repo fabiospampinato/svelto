@@ -14,9 +14,9 @@
         _variables: function () {
 
             this.$tabs = this.$element;
-            this.$buttons_bar = this.$tabs.find ( '.tabs-buttons' );
-            this.$buttons = this.$tabs.find ( '.tabs-button' ); //FIXME: Should only search on the children, or nested tabs will not work
-            this.$contents = this.$tabs.find ( '.tabs-content' );
+            this.$tabs_buttons = this.$tabs.find ( '.tabs-buttons' );
+            this.$buttons = this.$tabs.find ( '.button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$containers = this.$tabs.find ( '.container' );
             this.$indicator = this.$tabs.find ( '.tabs-indicator' );
 
             var $current_button = this.$buttons.filter ( '.active' ).first ();
@@ -54,19 +54,19 @@
 
             var $active = this.$buttons.filter ( '.active' ),
                 position = $active.position (),
-                total_width = this.$buttons_bar.width ();
+                total_width = this.$tabs_buttons.width ();
 
             this._delay ( function () {
 
                 this.$indicator.css ( 'left', position.left + 1 );
 
-            }, this.current_index > this.prev_index ? 50 : 0 );
+            }, this.current_index > this.prev_index ? 40 : 0 );
 
             this._delay ( function () {
 
                 this.$indicator.css ( 'right', total_width - position.left - $active.width () + 1 );
 
-            }, this.current_index > this.prev_index ? 0 : 50 );
+            }, this.current_index > this.prev_index ? 0 : 40 );
 
         },
 
@@ -77,7 +77,7 @@
             if ( this.current_index !== index || force ) {
 
                 this.$buttons.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
-                this.$contents.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
+                this.$containers.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
 
                 if ( this.current_index !== index ) {
 
@@ -98,7 +98,7 @@
 
     $(function () {
 
-        $('.tabs_wrp').tabs ();
+        $('.tabs').tabs ();
 
     });
 

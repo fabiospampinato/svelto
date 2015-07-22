@@ -6,13 +6,13 @@ append main
     +divider Tabs
 
     +tabs
-        +tabs-buttons
-            +button-icon("communication-chat")(title="Tab 1")
-            +button-icon("action-restore")(title="Tab 2")
-            +button-simple(title="Tab 3") Text
-            +button-icon("action-settings")(title="Tab 4")
-        +tabs-contents
-            +tabs-indicator.secondary
+        +tabs-buttons.no-separators
+            +button-icon("communication-chat")(title="Tab 1").outlined
+            +button-icon("action-restore")(title="Tab 2").outlined
+            +button-simple(title="Tab 3").outlined Text
+            +button-icon("action-settings")(title="Tab 4").outlined
+        +tabs-containers
+            +tabs-indicator
             +container-simple [Content 1] #[+lorem-ipsum]
             +container-simple [Content 2] #[+lorem-ipsum]
             +container-simple [Content 3] #[+lorem-ipsum]
