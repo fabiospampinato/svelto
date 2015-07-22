@@ -75,6 +75,15 @@
 
 }
 
+@mixin color-text ( $color_name, $extra: '' ) {
+
+    $colors: map-get($colors, $color_name);
+
+    $bg: nth($colors, 1);
+
+    color: $bg #{$extra};
+}
+
 /* COLORS */
 
 @each $name, $datas in $colors {

@@ -3,21 +3,23 @@
 
 .checkbox {
 
+    transition: opacity $checkbox-transition-opacity-duration;
+
     & > input {
         display: none;
     }
 
     .icon {
 
-        transition: opacity 0.15s ease 0s;
+        transition: opacity $checkbox-icon-transition-opacity-duration;
 
         &.on {
-            @extend .text-secondary;
+            @include color-text ( $checkbox-icon-on-color );
             opacity: 0;
-            margin-left: -1.635em;
         }
 
         &.off {
+            margin-left: -1.635em; //FIXME: it should be hardcoded here...
             opacity: 1;
         }
 
@@ -25,7 +27,7 @@
 
     &.checked .icon {
 
-        &.on  {
+        &.on {
             opacity: 1;
         }
 
@@ -33,6 +35,10 @@
             opacity: 0;
         }
 
+    }
+
+    &.checkbox-disabled {
+        opacity: $checkbox-disabled-opacity;
     }
 
 }
