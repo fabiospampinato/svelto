@@ -50,7 +50,7 @@ hr {
         &.text {
             @include size ( $divider-text-size );
             font-weight: bold;
-            margin: - $layout-half-spacing 0 $layout-half-spacing;
+            margin: - $layout-half-spacing 0 $layout-half-spacing $layout-spacing;
             text-align: left;
             opacity: $divider-text-opacity;
         }

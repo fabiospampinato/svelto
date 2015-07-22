@@ -14,20 +14,22 @@ append main
 
 append body
         +dropdown("base")
-            +multiple.vertical
-                +button-simple("#1").outlined.xsmall.sharp Action 1
-                +divider-linear
-                +button-simple("#2").outlined.xsmall.sharp Action 2
-                +button-simple("#3").outlined.xsmall.sharp Action 3
+            +multiple.vertical.fluid.joined
+                +button-simple("#1").xsmall.sharp Action 1
+                +button-simple("#2").xsmall.sharp Action 2
+                +button-simple("#3").xsmall.sharp Action 3
         +dropdown("dividers")
             +multiple.vertical.fluid
-                +button-simple("#1").outlined.xsmall.sharp Action 1
+                +button-simple("#1").xsmall.sharp Action 1
                 +divider Divider
-                +button-simple("#2").outlined.xsmall.sharp Action 2
+                +button-simple("#2").xsmall.sharp Action 2
                 +divider-linear Divider
-                +button-simple("#3").outlined.xsmall.sharp Action 3
+                +button-simple("#3").xsmall.sharp Action 3
                 +divider-linear
-                +button-simple("#4").outlined.xsmall.sharp Action 4
+                +button-simple("#4").xsmall.sharp Action 4
+                +divider-linear
+                +divider-text Section
+                +button-simple("#5").xsmall.sharp Action 5
         +dropdown("advanced")
             +container-header("Header").transparent
             +container-content Content
