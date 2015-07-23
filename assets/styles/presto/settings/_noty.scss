@@ -1,12 +1,15 @@
 
 /* NOTY */
 
+$noty-z-depth: 5;
+$noty-z-index: 100;
+
 $noty-text-size: 15px !default;
 
 $noty-img-size: 38px !default;
 $noty-img-rounded: true !default; //TODO: implement this
 
-$noty-shadow-inset: inset 0 1px 1px -1px rgba(255, 255, 255, 0.5) !default;
+$noty-transition-all-duration: 0.2s;
 
 /* BREAKPOINTS */
 

@@ -42,8 +42,22 @@ function noty_test_api_create () {
     created_noty.close();
 }
 function noty_test_api_open () {
-    created_noty.open ();
+    if ( created_noty ) {
+        created_noty.open ();
+    } else {
+        $.noty("You should `Create` it before...");
+    }
 }
 function noty_test_api_close () {
-    created_noty.close ();
-}</script></body></html>
+    if ( created_noty ) {
+        created_noty.close ();
+    } else {
+        $.noty("You should `Create` it before...");
+    }
+}</script><script>window.onerror = function ( message, file, line ) {
+    try {
+        $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});
+    } catch ( e ) {
+        alert ( file + ':' + line + '\n\n' + message);
+    }
+};</script></body></html>

@@ -35,4 +35,10 @@ function test_one_time_action_reset_actions () {
 }
 function test_one_time_action_get_string () {
     $.noty ( $.cookie.read ( 'ota' ) );
-}</script></body></html>
+}</script><script>window.onerror = function ( message, file, line ) {
+    try {
+        $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});
+    } catch ( e ) {
+        alert ( file + ':' + line + '\n\n' + message);
+    }
+};</script></body></html>

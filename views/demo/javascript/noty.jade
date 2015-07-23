@@ -112,8 +112,16 @@ append body-end
             created_noty.close();
         }
         function noty_test_api_open () {
-            created_noty.open ();
+            if ( created_noty ) {
+                created_noty.open ();
+            } else {
+                $.noty("You should `Create` it before...");
+            }
         }
         function noty_test_api_close () {
-            created_noty.close ();
+            if ( created_noty ) {
+                created_noty.close ();
+            } else {
+                $.noty("You should `Create` it before...");
+            }
         }

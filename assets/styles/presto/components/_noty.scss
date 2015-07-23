@@ -55,7 +55,7 @@
 .noty-queues {
 
     position: fixed;
-    z-index: 100;
+    z-index: $noty-z-index;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -166,7 +166,7 @@
 
 .noty {
 
-    @include z-depth ( 5 );
+    @include z-depth ( $noty-z-depth );
     pointer-events: auto;
 
     &:not(.action) { //TODO: maybe add an actionable class in that case...
@@ -180,7 +180,7 @@
     /* ANIMATIONS */
 
     & {
-        transition-duration: 0.2s; //TODO: Fix this hiding animation properties
+        transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties
         transition-property: opacity, font-size, padding, margin, height;
     }
 
@@ -189,7 +189,7 @@
         height: 0;
         margin: 0;
         padding: 0;
-        transition-delay: 0s, 0s, 0s, 0s, 2s;
+        transition-delay: 0s, 0s, 0s, 0s, $noty-transition-all-duration;
         opacity: 0;
     }
 

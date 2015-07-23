@@ -9,4 +9,10 @@ function set_speed ( new_speed ) {
 }
 function set_easing ( new_easing ) {
     easing = new_easing;
-}</script></body></html>
+}</script><script>window.onerror = function ( message, file, line ) {
+    try {
+        $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});
+    } catch ( e ) {
+        alert ( file + ':' + line + '\n\n' + message);
+    }
+};</script></body></html>

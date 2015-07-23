@@ -81,3 +81,13 @@ mixin body
         +js("/assets/js/min/main.js")
         block js
         block body-end
+
+        //- INFO: Debug all the errors we found, either via noty, if possible, or via alert
+        script.
+            window.onerror = function ( message, file, line ) {
+                try {
+                    $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});
+                } catch ( e ) {
+                    alert ( file + ':' + line + '\n\n' + message);
+                }
+            };

@@ -6,4 +6,10 @@ function notification_test_delayed () {
     setTimeout ( function () {
         $.notification ({ title: "Test title", body: "Test description", img: "/assets/images/presto/sample.png" });
     }, 3000 );
-}</script></body></html>
+}</script><script>window.onerror = function ( message, file, line ) {
+    try {
+        $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});
+    } catch ( e ) {
+        alert ( file + ':' + line + '\n\n' + message);
+    }
+};</script></body></html>

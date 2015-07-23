@@ -21,4 +21,10 @@ function progressBar_disable () {
     $(".progressBar").each ( function () {
         $(this).progressBar ( 'instance' ).disable ();
     });
-}</script></body></html>
+}</script><script>window.onerror = function ( message, file, line ) {
+    try {
+        $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});
+    } catch ( e ) {
+        alert ( file + ':' + line + '\n\n' + message);
+    }
+};</script></body></html>
