@@ -1437,69 +1437,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             if ( t == d) return b + c;
             if ( ( t /= d / 2 ) < 1) return c / 2 * Math.pow ( 2, 10 * ( t - 1 ) ) + b;
             return c / 2 * ( -Math.pow ( 2, -10 * --t ) + 2 ) + b;
-        },
-        easeInCirc: function ( t, b, c, d ) {
-            return -c * ( Math.sqrt ( 1 - ( t /= d ) * t ) - 1 ) + b;
-        },
-        easeOutCirc: function ( t, b, c, d ) {
-            return c * Math.sqrt ( 1 - ( t = t / d - 1 ) * t ) + b;
-        },
-        easeInOutCirc: function ( t, b, c, d ) {
-            if ( ( t /= d / 2 ) < 1 ) return -c / 2 * ( Math.sqrt ( 1 - t * t ) - 1 ) + b;
-            return c / 2 * ( Math.sqrt ( 1 - ( t -= 2 ) * t ) + 1) + b;
-        },
-        easeInElastic: function ( t, b, c, d ) {
-            var s = 1.70158; var p = 0; var a = c;
-            if ( t == 0) return b; if ( ( t /= d ) == 1 ) return b + c; if ( !p ) p = d * .3;
-            if ( a < Math.abs ( c ) ) { a = c; var s = p / 4; }
-            else var s = p / ( 2 * Math.PI ) * Math.asin ( c / a );
-            return -( a * Math.pow ( 2, 10 * ( t -= 1 ) ) * Math.sin ( ( t * d - s ) * ( 2 * Math.PI ) / p ) ) + b;
-        },
-        easeOutElastic: function ( t, b, c, d ) {
-            var s = 1.70158; var p = 0; var a = c;
-            if ( t == 0 ) return b; if ( ( t /= d ) == 1 ) return b + c; if ( !p ) p = d * .3;
-            if ( a < Math.abs ( c ) ) { a = c; var s = p / 4; }
-            else var s = p / ( 2 * Math.PI ) * Math.asin ( c / a );
-            return a * Math.pow ( 2, -10 * t ) * Math.sin ( ( t * d - s ) * ( 2 * Math.PI ) / p ) + c + b;
-        },
-        easeInOutElastic: function ( t, b, c, d ) {
-            var s = 1.70158; var p = 0; var a = c;
-            if ( t == 0 ) return b; if ( ( t /= d / 2 ) == 2 ) return b + c; if ( !p ) p = d * ( .3 * 1.5 );
-            if ( a < Math.abs ( c ) ) { a = c; var s = p / 4; }
-            else var s = p / ( 2 * Math.PI ) * Math.asin ( c / a );
-            if ( t < 1 ) return -.5 * ( a * Math.pow ( 2, 10 * ( t -= 1 ) ) * Math.sin( ( t * d - s ) * ( 2 * Math.PI ) / p ) ) + b;
-            return a * Math.pow ( 2 , -10 * ( t -= 1 ) ) * Math.sin( ( t * d - s ) * ( 2 * Math.PI ) / p ) *.5 + c + b;
-        },
-        easeInBack: function ( t, b, c, d, s ) {
-            if ( s == undefined ) s = 1.70158;
-            return c * ( t /= d ) * t * ( ( s + 1 ) * t - s) + b;
-        },
-        easeOutBack: function ( t, b, c, d, s ) {
-            if ( s == undefined ) s = 1.70158;
-            return c * ( ( t = t / d - 1 ) * t * ( ( s + 1 ) * t + s ) + 1) + b;
-        },
-        easeInOutBack: function ( t, b, c, d, s ) {
-            if ( s == undefined) s = 1.70158;
-            if ( ( t /= d / 2 ) < 1 ) return  c / 2 * ( t * t * ( ( ( s *= ( 1.525 ) ) + 1 ) * t - s ) ) + b;
-            return c / 2 * ( ( t -= 2 ) * t * ( ( ( s *= ( 1.525 ) ) + 1 ) * t + s ) + 2 ) + b;
-        },
-        easeInBounce: function ( t, b, c, d ) {
-            return c - $.easing.easeOutBounce ( d-t, 0, c, d ) + b;
-        },
-        easeOutBounce: function ( t, b, c, d ) {
-            if ( ( t /= d ) < ( 1 / 2.75 ) ) {
-                return c * ( 7.5625 * t * t ) + b;
-            } else if ( t < ( 2 / 2.75 ) ) {
-                return c * ( 7.5625 * ( t -= ( 1.5 / 2.75 ) ) * t + .75 ) + b;
-            } else if ( t < ( 2.5 / 2.75 ) ) {
-                return c * ( 7.5625 * ( t -= ( 2.25 / 2.75 ) ) * t + .9375 ) + b;
-            } else {
-                return c * ( 7.5625 * ( t -= ( 2.625 / 2.75 ) ) * t + .984375 ) + b;
-            }
-        },
-        easeInOutBounce: function ( t, b, c, d ) {
-            if ( t < d / 2 ) return $.easing.easeInBounce ( t * 2, 0, c, d ) * .5 + b;
-            return $.easing.easeOutBounce ( t * 2 - d, 0, c, d) * .5 + c * .5 + b;
         }
     };
 
@@ -4016,9 +3953,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* TEMPLATES */
 
         templates: {
-            base: '<div class="noty_wrp hidden">' +
-                      '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
-                          '<div class="infobar-wrp transparent">' +
+            base: '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
+                      '<div class="container-content">' +
+                          '<div class="infobar-wrp inset {%=o.color%}">' + //TODO: add back transparentize
                               '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
                               '<div class="infobar-center">' +
                                   '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
@@ -4029,7 +3966,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                           '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
                       '</div>' +
                   '</div>',
-            img: '<div class="noty_img infobar-left">' +
+            img: '<div class="noty-img infobar-left">' +
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
             title: '<p class="infobar-title large">' +
@@ -4039,20 +3976,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             single_button: '<div class="infobar-right">' +
                                '{% include ( "presto.noty.button", o ); %}' +
                            '</div>',
-            buttons: '<div class="noty_buttons multiple centered">' +
-                        '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                            '{% include ( "presto.noty.button", o[i] ); %}' +
-                        '{% } %}' +
+            buttons: '<div class="noty-buttons multiple-wrp centered">' +
+                         '<div class="multiple">' +
+                             '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                                 '{% include ( "presto.noty.button", o[i] ); %}' +
+                             '{% } %}' +
+                         '</div>' +
                      '</div>',
             button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
-                        '{%#(o.text || "")%}' +
+                        '<div class="label-center">' +
+                            '{%#(o.text || "")%}' +
+                        '</div>' +
                     '</div>'
         },
 
         /* OPTIONS */
 
         options: {
-            anchor: 'bottom-left',
+            anchor: {
+                y: 'bottom',
+                x: 'left'
+            },
 
             title: false,
             body: false,
@@ -4171,9 +4115,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( !this.isOpen ) {
 
-                $('.noty_queue.' + this.options.anchor).first ().append ( this.$noty );
-
-                this.$noty.removeClass ( 'hidden' );
+                $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).first ().append ( this.$noty );
 
                 $.reflow ();
 
@@ -4229,7 +4171,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $(function () {
 
-        $body.append ( '<div class="noty_queue top-left"></div><div class="noty_queue top-right"></div><div class="noty_queue bottom-left"></div><div class="noty_queue bottom-right"></div>' );
+        $body.append (
+            '<div class="noty-queues top">' +
+                '<div class="noty-queue expanded"></div>' +
+                '<div class="noty-queues-row">' +
+                    '<div class="noty-queue left"></div>' +
+                    '<div class="noty-queue center"></div>' +
+                    '<div class="noty-queue right"></div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="noty-queues bottom">' +
+                '<div class="noty-queues-row">' +
+                    '<div class="noty-queue left"></div>' +
+                    '<div class="noty-queue center"></div>' +
+                    '<div class="noty-queue right"></div>' +
+                '</div>' +
+                '<div class="noty-queue expanded"></div>' +
+            '</div>'
+        );
 
     });
 

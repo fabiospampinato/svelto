@@ -222,14 +222,14 @@ $color-brown-text: #ffffff !default;
 $color-brown-link: $color-brown-accent !default;
 $color-brown-link-hover: lighten( $color-brown-link, 2 ) !default;
 
-/* TRANSPARENT */
+/* TRANSPARENT */ //TODO: maybe inherit...
 
 $color-transparent-bg: $color-transparent !default;
 $color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
 $color-transparent-bg-active: darken( $color-transparent-bg, 4 ) !default;
 $color-transparent-border: darken( $color-transparent-bg, 20 ) !default;
 $color-transparent-accent: $color-primary !default;
-$color-transparent-text: #2f2f2f !default;
+$color-transparent-text: inerhit !default;
 $color-transparent-link: $color-transparent-accent !default;
 $color-transparent-link-hover: lighten( $color-transparent-link, 2 ) !default;
 

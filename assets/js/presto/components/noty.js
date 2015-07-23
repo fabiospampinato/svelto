@@ -50,9 +50,9 @@
         /* TEMPLATES */
 
         templates: {
-            base: '<div class="noty_wrp hidden">' +
-                      '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
-                          '<div class="infobar-wrp transparent">' +
+            base: '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
+                      '<div class="container-content">' +
+                          '<div class="infobar-wrp inset {%=o.color%}">' + //TODO: add back transparentize
                               '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
                               '<div class="infobar-center">' +
                                   '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
@@ -63,7 +63,7 @@
                           '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
                       '</div>' +
                   '</div>',
-            img: '<div class="noty_img infobar-left">' +
+            img: '<div class="noty-img infobar-left">' +
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
             title: '<p class="infobar-title large">' +
@@ -73,20 +73,27 @@
             single_button: '<div class="infobar-right">' +
                                '{% include ( "presto.noty.button", o ); %}' +
                            '</div>',
-            buttons: '<div class="noty_buttons multiple centered">' +
-                        '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                            '{% include ( "presto.noty.button", o[i] ); %}' +
-                        '{% } %}' +
+            buttons: '<div class="noty-buttons multiple-wrp centered">' +
+                         '<div class="multiple">' +
+                             '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                                 '{% include ( "presto.noty.button", o[i] ); %}' +
+                             '{% } %}' +
+                         '</div>' +
                      '</div>',
             button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
-                        '{%#(o.text || "")%}' +
+                        '<div class="label-center">' +
+                            '{%#(o.text || "")%}' +
+                        '</div>' +
                     '</div>'
         },
 
         /* OPTIONS */
 
         options: {
-            anchor: 'bottom-left',
+            anchor: {
+                y: 'bottom',
+                x: 'left'
+            },
 
             title: false,
             body: false,
@@ -205,9 +212,7 @@
 
             if ( !this.isOpen ) {
 
-                $('.noty_queue.' + this.options.anchor).first ().append ( this.$noty );
-
-                this.$noty.removeClass ( 'hidden' );
+                $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).first ().append ( this.$noty );
 
                 $.reflow ();
 
@@ -263,7 +268,24 @@
 
     $(function () {
 
-        $body.append ( '<div class="noty_queue top-left"></div><div class="noty_queue top-right"></div><div class="noty_queue bottom-left"></div><div class="noty_queue bottom-right"></div>' );
+        $body.append (
+            '<div class="noty-queues top">' +
+                '<div class="noty-queue expanded"></div>' +
+                '<div class="noty-queues-row">' +
+                    '<div class="noty-queue left"></div>' +
+                    '<div class="noty-queue center"></div>' +
+                    '<div class="noty-queue right"></div>' +
+                '</div>' +
+            '</div>' +
+            '<div class="noty-queues bottom">' +
+                '<div class="noty-queues-row">' +
+                    '<div class="noty-queue left"></div>' +
+                    '<div class="noty-queue center"></div>' +
+                    '<div class="noty-queue right"></div>' +
+                '</div>' +
+                '<div class="noty-queue expanded"></div>' +
+            '</div>'
+        );
 
     });
 

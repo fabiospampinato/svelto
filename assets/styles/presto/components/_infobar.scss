@@ -21,14 +21,25 @@
         margin-left: auto;
     }
 
+    &.inset {
+        border-width: 0;
+        padding: 0;
+    }
+
     &.remove {
         transform: scale(0.95);
         opacity: 0;
     }
 
     & > .infobar-left {
+
         flex-shrink: 0;
         order: 1;
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+
     }
 
     & > .infobar-center {
@@ -42,25 +53,37 @@
             margin-bottom: $infobar-title-margin-bottom;
         }
 
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+
     }
 
     & > .infobar-right {
+
         flex-shrink: 0;
         order: 3;
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+
     }
 
-    & > .infobar-bottom {
+    & > .infobar-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
+
         order: 4;
         width: 100%;
         margin-top: $layout-spacing;
+
+        & > *:last-child {
+            margin-bottom: 0;
+        }
+
     }
 
-    & > *:not(:last-child):not(.infobar-right) {
-        margin-right: $layout-spacing;
-    }
-
-    & > * > *:last-child {
-        margin-bottom: 0 !important;
+    & > *:not(:first-child):not(.infobar-bottom) {
+        margin-left: $layout-spacing;
     }
 
 }

@@ -1,180 +1,200 @@
 
-/* MEDIA QUERIES */
+/* MIXINS */
 
-//TODO: add support for expanded noty, maybe some kind of alert message or stuff like that
+@mixin expand-queue {
+
+    width: 100%;
+    margin: 0 !important;
+
+    & > .noty {
+        width: 100%;
+        margin: 0 !important;
+        border-right-width: 0;
+        border-left-width: 0;
+        border-radius: 0;
+    }
+
+}
+
+/* MEDIA QUERIES */
 
 @include max-screen ( $noty-full-breakpoint ) {
 
-    .noty_queue, .noty_wrp, .noty {
-        width: 100% !important;
+    .noty-queues {
+
+        &.top > .noty-queues-row {
+
+            flex-direction: column;
+
+            .noty {
+                border-top-width: 0;
+            }
+
+        }
+
+        &.bottom > .noty-queues-row {
+
+            flex-direction: column-reverse;
+
+            .noty {
+                border-bottom-width: 0;
+            }
+
+        }
+
     }
 
-    .noty_queue {
+    .noty-queue {
+        @include expand-queue ();
+    }
 
-        .noty {
-            border-radius: 0 !important;
-            margin: 0 !important;
-            border-left: none !important;
-            border-right: none !important;
+}
+
+/* NOTY QUEUES */
+
+.noty-queues {
+
+    position: fixed;
+    z-index: 100;
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    pointer-events: none;
+
+    &.top {
+
+        top: 0;
+
+        & > .noty-queues-row {
+            align-items: flex-start;
         }
 
-        &.top-left .noty, &.top-right .noty {
-            border-top: none !important;
+        .noty-queue {
+
+            flex-direction: column;
+
+            &.expanded {
+                border-top-width: 0;
+            }
+
+            & > .noty {
+                margin-top: $layout-spacing;
+            }
+
         }
 
-        &.bottom-left .noty, &.bottom-right .noty {
-            border-bottom: none !important;
+    }
+
+    &.bottom {
+
+        bottom: 0;
+
+        & > .noty-queues-row {
+            align-items: flex-end;
         }
 
+        .noty-queue {
+
+            flex-direction: column-reverse;
+
+            &.expanded {
+                border-bottom-width: 0;
+            }
+
+            & > .noty {
+                margin-bottom: $layout-spacing;
+            }
+
+        }
+
+    }
+
+    & > .noty-queues-row {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
     }
 
 }
 
 /* NOTY QUEUE */
 
-.noty_queue {
+.noty-queue {
 
     display: flex;
-    position: fixed;
-    z-index: 100;
-    max-width: 100%;
-    text-align: left;
-    pointer-events: none; //FIXME: if we use this we cannot support IE 10 (I think)
 
-    &.top-left, &.top-right {
+    &.left {
 
-        top: 0;
-        flex-direction: column;
-
-        .noty {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        .noty_wrp.active .noty {
-            margin-top: $layout-spacing;
-        }
-
-    }
-
-    &.top-left {
-        left: 0;
         align-items: flex-start;
-    }
 
-    &.top-right {
-        right: 0;
-        align-items: flex-end;
-    }
-
-    &.bottom-left, &.bottom-right {
-
-        bottom: 0;
-        flex-direction: column-reverse;
-
-        .noty {
-            margin-bottom: 0;
-        }
-
-        .noty_wrp.active .noty {
-            margin-bottom: $layout-spacing;
+        &:not(:empty) {
+            margin-left: $layout-spacing;
         }
 
     }
 
-    &.bottom-left {
-        left: 0;
-        align-items: flex-start;
+    &.center {
+
+        align-items: center;
+        margin-right: $layout-spacing;
+        margin-left: $layout-spacing;
+
+        &:empty {
+            margin-right: $layout-half-spacing;
+            margin-left: $layout-half-spacing;
+        }
+
     }
 
-    &.bottom-right {
-        right: 0;
+    &.expanded {
+        @include expand-queue ();
+    }
+
+    &.right {
+
         align-items: flex-end;
+
+        &:not(:empty) {
+            margin-right: $layout-spacing;
+        }
+
     }
 
 }
 
 /* NOTY */
 
-.noty_wrp {
+.noty {
 
-    .noty {
+    @include z-depth ( 5 );
+    pointer-events: auto;
 
-        @include z-depth ( 5 );
-        margin-left: $layout-spacing;
-        margin-right: $layout-spacing;
-        pointer-events: auto; //FIXME: if we use this we cannot support IE 10 (I think)
-        opacity: 0;
-        font-size: 0;
+    &:not(.action) { //TODO: maybe add an actionable class in that case...
+        cursor: pointer;
+    }
+
+    .noty-img > img {
+        width: $noty-img-size;
+    }
+
+    /* ANIMATIONS */
+
+    & {
+        transition-duration: 0.2s; //TODO: Fix this hiding animation properties
+        transition-property: opacity, font-size, padding, margin, height;
+    }
+
+    &:not(.active) {
+        font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
+        height: 0;
+        margin: 0;
         padding: 0;
-        transition: opacity 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s, margin-top 0.2s ease 0s, margin-bottom 0.2s ease 0s, margin-left 0.2s ease 0s, margin-right 0.2s ease 0s;
-
-        &:not(.action) {
-            cursor: pointer;
-        }
-
-        .noty_img {
-
-            font-size: 0;
-            transition: width 0.2 ease 0s;
-
-            img {
-                height: auto;
-                width: auto;
-                transition: max-width 0.2 ease 0s, max-height 0.2 ease 0s;
-            }
-
-        }
-
-        .button {
-            transition: margin-bottom 0.2s ease 0s, height 0.2s ease 0s, font-size 0.2s ease 0s, padding 0.2s ease 0s;
-        }
-
+        transition-delay: 0s, 0s, 0s, 0s, 2s;
+        opacity: 0;
     }
 
-    &:not(.active) .noty {
-
-        .noty_img {
-
-            width: $noty-img-size;
-
-            img {
-                max-height: 0;
-                max-width: 0;
-            }
-
-        }
-
-        .button {
-            margin-bottom: 0;
-            height: 0;
-            font-size: 0;
-            padding: 0;
-        }
-
-    }
-
-    &.active .noty {
-
-        opacity: 1;
-        font-size: $noty-text-size;
-        padding: $layout-spacing;
-
-        .noty_img {
-
-            width: $noty-img-size;
-
-            img {
-                max-height: $noty-img-size;
-                max-width: $noty-img-size;
-            }
-
-        }
-
-        .button {
-            margin-bottom: $layout-spacing;
-        }
-
+    &.active { //TODO: Fix this showing animation properites
+        transition-delay: 0s;
     }
 
 }

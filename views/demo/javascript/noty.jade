@@ -20,10 +20,14 @@ append main
     +divider Anchors
 
     +multiple
-        +button-simple.outlined(onclick="noty_test_anchor('top-left')") Top-Left
-        +button-simple.outlined(onclick="noty_test_anchor('top-right')") Top-Right
-        +button-simple.outlined(onclick="noty_test_anchor('bottom-left')") Bottom-Left
-        +button-simple.outlined(onclick="noty_test_anchor('bottom-right')") Bottom-Right
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'left'})") Top-Left
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'center'})") Top-Center
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'expanded'})") Top-Expanded
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'right'})") Top-Right
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'left'})") Bottom-Left
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'center'})") Bottom-Center
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'expanded'})") Bottom-Expanded
+        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'right'})") Bottom-Right
 
     +divider Buttons
 
@@ -100,7 +104,7 @@ append body-end
         }
         var anchor_id = 0;
         function noty_test_anchor ( anchor ) {
-            $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: `" + anchor + "`", anchor: anchor } );
+            $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: { y: `" + anchor.y + "`, x: `" + anchor.x + "`", anchor: anchor } );
         }
         var created_noty;
         function noty_test_api_create () {
