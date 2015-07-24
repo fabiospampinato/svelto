@@ -1,0 +1,92 @@
+
+/* SWITCH */
+
+.switch {
+
+    width: $switch-width;
+    height: $switch-height;
+    margin-bottom: $layout-spacing;
+
+    input {
+        display: none;
+    }
+
+    .switch-bar {
+
+        width: $switch-bar-width;
+        height: $switch-bar-height;
+        border-radius: $switch-bar-height;
+        margin: $switch-bar-vertical-height auto;
+        position: relative;
+        box-shadow: $switch-bar-shadow;
+        transition: background-color 0.2s ease 0s;
+
+        .switch-handler {
+
+            @include z-depth ( 3 );
+            @include center-absolutely ( false, $switch-handler-size );
+            left: 0;
+            height: $switch-handler-size;
+            width: $switch-handler-size;
+            border-radius: $switch-handler-size;
+            margin-left: -$switch-handler-half-size;
+            transition: background-color 0.2s ease 0s, left 0.2s ease 0s, box-shadow 0.2s ease 0s;
+
+            &:active {
+                box-shadow: none;
+                transition: box-shadow 0.2s ease 0s;
+            }
+
+            .icon {
+                width: $switch-handler-icon-size;
+                height: $switch-handler-icon-size;
+                line-height: $switch-handler-icon-size;
+                font-size: $switch-handler-icon-font-size;
+                text-align: center;
+            }
+
+        }
+
+    }
+
+    &.dragging .handler {
+        z-index: 1;
+        transition: none;
+    }
+
+    &:not(.inactive) {
+
+        .bar {
+
+            cursor: pointer;
+
+            .handler {
+
+                cursor: move;
+
+                &:active {
+                    @include z-depth ( 2, $switch-handler-active-shadow );
+                }
+
+            }
+
+        }
+
+    }
+
+    &.inactive {
+
+        .bar {
+
+            @include color ( $switch-disabled-bar-color, $switch-disabled-bar-color-basic );
+
+            .handler {
+                @include color ( $switch-disabled-handler-color, $switch-disabled-handler-color-basic );
+                box-shadow: 0 0 0 $switch-inactive-handler-shadow-size $color-white-bg;
+            }
+
+        }
+
+    }
+
+}

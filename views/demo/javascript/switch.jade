@@ -1,0 +1,14 @@
+//- javascript/switch.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Switch
+
+    +container-simple
+        +switch("name", "Value")
+        +switch("name2", "Value2", true).switch-disabled
+        +switch({name:"name3", value:"Value3", icons:{on:"content-add"}})
+        +switch({name:"name4", value:"Value4", icons:{on:"content-add"}}).switch-disabled
+        +switch({name:"name5", value:"Value5", checked:true, colors:{on:"green",off:"red"}})
+        +switch({name:"name6", value:"Value6", colors:{on:"green",off:"red"}, icons:{on:"action-favorite", off:"action-favorite-outline"}})

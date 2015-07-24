@@ -5237,7 +5237,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
-/* SWITCHER */
+/* SWITCH */
 
 //TODO: add support for spacebar, tipo uno ha il form e fa tab tab spacebar e ha fatto tutto senza usare il mouse
 
@@ -5245,9 +5245,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     'use strict';
 
-    /* SWITCHER */
+    /* SWITCH */
 
-    $.widget ( 'presto.switcher', {
+    $.widget ( 'presto.switch', {
 
         /* OPTIONS */
 
@@ -5270,11 +5270,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$switcher = this.$element;
-            this.$input = this.$switcher.find ( 'input' );
-            this.$bar = this.$switcher.find ( '.bar' );
-            this.$handler = this.$switcher.find ( '.handler' );
-            this.$icon = this.$switcher.find ( '.icon' );
+            this.$switch = this.$element;
+            this.$input = this.$switch.find ( 'input' );
+            this.$bar = this.$switch.find ( '.switch-bar' );
+            this.$handler = this.$switch.find ( '.switch-handler' );
+            this.$icon = this.$switch.find ( '.icon' );
 
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
@@ -5314,7 +5314,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.checked = this.$input.prop ( 'checked' );
 
-            if ( this.checked !== this.$switcher.hasClass ( 'checked' ) ) {
+            if ( this.checked !== this.$switch.hasClass ( 'checked' ) ) {
 
                 this._set_check ( this.checked, true );
 
@@ -5416,11 +5416,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( checked !== this.$input.prop ( 'checked' ) || force ) {
 
-                this.$switcher.toggleClass ( 'checked', checked );
+                this.$switch.toggleClass ( 'checked', checked );
 
                 this.$handler.css ( 'left', checked ? '100%' : 0 );
 
-                var inactive = this.$switcher.hasClass ( 'inactive' );
+                var inactive = this.$switch.hasClass ( 'inactive' );
 
                 this.$bar.toggleClass ( this.options.colors.on, checked && !inactive );
                 this.$handler.toggleClass ( this.options.colors.on, checked && !inactive );
@@ -5475,21 +5475,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $(function () {
 
-        $('.switcher').each ( function () {
+        $('.switch').each ( function () {
 
-            var $switcher = $(this),
+            var $switch = $(this),
                 options = {
                     colors: {
-                        on: $switcher.data ( 'color-on' ) || 'secondary',
-                        off: $switcher.data ( 'color-off' ) || 'gray'
+                        on: $switch.data ( 'color-on' ) || 'secondary',
+                        off: $switch.data ( 'color-off' ) || 'gray'
                     },
                     icons: {
-                        on: $switcher.data ( 'icon-on' ) || false,
-                        off: $switcher.data ( 'icon-off' ) || false
+                        on: $switch.data ( 'icon-on' ) || false,
+                        off: $switch.data ( 'icon-off' ) || false
                     }
                 };
 
-            $switcher.switcher ( options );
+            $switch.switch ( options );
 
         });
 
