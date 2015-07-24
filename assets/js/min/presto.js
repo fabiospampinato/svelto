@@ -4810,7 +4810,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             decimals: 0,
             callbacks: {
                 increased: $.noop,
-                decrease: $.noop
+                decreased: $.noop
             }
         },
 
@@ -4818,14 +4818,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            this.$slider_wrp = this.$element;
-            this.$slider = this.$slider_wrp.find ( '.slider' );
-            this.$min_btn = this.$slider.find ( '.min' );
-            this.$max_btn = this.$slider.find ( '.max' );
+            this.$slider = this.$element;
+            this.$min = this.$slider.find ( '.slider-min' );
+            this.$max = this.$slider.find ( '.slider-max' );
             this.$input = this.$slider.find ( 'input' );
-            this.$unhighlighted = this.$slider.find ( '.unhighlighted' );
-            this.$highlighted = this.$slider.find ( '.highlighted' );
-            this.$handler = this.$slider.find ( '.handler' );
+            this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
+            this.$highlighted = this.$slider.find ( '.slider-highlighted' );
+            this.$handler = this.$slider.find ( '.slider-handler' );
             this.$label = this.$handler.find ( '.slider-label' );
 
             this.unhighlighted_width = this.$unhighlighted.width ();
@@ -4851,8 +4850,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
             this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
 
-            this._on ( this.$min_btn, 'click', this.decrease );
-            this._on ( this.$max_btn, 'click', this.increase );
+            this._on ( this.$min, 'click', this.decrease );
+            this._on ( this.$max, 'click', this.increase );
 
             this.$handler.draggable ({
                 start: this._handler_drag_start,
@@ -4998,7 +4997,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this.$input.val ( value ).trigger ( 'change' );
                 this.$label.html ( value );
 
-                this._trigger ( value > this.options.value ? 'increase' : 'decrease' );
+                this._trigger ( value > this.options.value ? 'increased' : 'decreased' );
 
             }
 
@@ -5050,21 +5049,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $(function () {
 
-        $('.slider_wrp').each ( function () {
+        $('.slider').each ( function () {
 
-            var $slider_wrp = $(this),
-                $input = $slider_wrp.find ( 'input' ),
-                $min = $slider_wrp.find ( '.min' ),
-                $max = $slider_wrp.find ( '.max' ),
+            var $slider = $(this),
+                $input = $slider.find ( 'input' ),
+                $min = $slider.find ( '.slider-min' ),
+                $max = $slider.find ( '.slider-max' ),
                 options = {
                     min: Number($min.data ( 'min' ) || 0),
                     max: Number($max.data ( 'max' ) || 100),
                     value: Number($input.val () || 0),
-                    step: Number($slider_wrp.data ( 'step' ) || 1),
-                    decimals: Number($slider_wrp.data ( 'decimals' ) || 0)
+                    step: Number($slider.data ( 'step' ) || 1),
+                    decimals: Number($slider.data ( 'decimals' ) || 0)
                 };
 
-            $slider_wrp.slider ( options );
+            $slider.slider ( options );
 
         });
 

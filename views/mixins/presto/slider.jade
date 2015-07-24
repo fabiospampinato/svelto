@@ -1,13 +1,12 @@
 //- slider.jade
 
 mixin slider(name, min, value, max)
-    .slider_wrp&attributes(attributes)
-        .slider
-            input(type="number", name=name, value=value)
-            .min(title="Decrease", data-min=min)
-            .max(title="Increase", data-max=max)
-            .bar
-                .unhighlighted
-                    .highlighted
-                        .handler
-                            .slider-label= value
+    .slider&attributes(attributes)
+        input(type="number", name=name, value=value)
+        .slider-min(title="Decrease", data-min=min)
+        .slider-max(title="Increase", data-max=max)
+        .slider-bar
+            .slider-unhighlighted
+                .slider-highlighted
+                .slider-handler
+                    .slider-label= value

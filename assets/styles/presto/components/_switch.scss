@@ -43,9 +43,10 @@
                 border-radius: 50%;
                 z-index: -1;
                 opacity: 0;
-                transition: scale($switch-handler-before-scale-inactive);
+                transform: scale($switch-handler-before-scale-inactive);
                 transition-property: opacity, transform, background-color;
                 transition-duration: $switch-transition-all-duration;
+                transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
             }
 
             & > .icon {

@@ -1,167 +1,163 @@
 
 /* SLIDER */
 
-//FIXME: if the container is not white the inactive status is not good
+//TODO: maybe use a map pointer with the number inside instead of the handler we are using right now
 
-.slider_wrp {
+.slider {
 
+    display: flex;
+    align-items: center;
     height: $slider-height;
     margin-bottom: $layout-spacing;
 
-    & > .slider {
 
-        height: $slider-height;
 
-        input {
-            display: none;
-        }
+    & > input {
+        display: none;
+    }
 
-        .bar {
+    & > .slider-bar {
 
-            height: $slider-height;
-            line-height: $slider-height;
+        flex-grow: 1;
+        order: 1;
+
+        & > .slider-unhighlighted {
+
+            @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
             position: relative;
-            margin: 0 $slider-min-max-width;
+            height: $slider-unhighlighted-height;
+            margin: 0 $slider-handler-half-size;
+            border-radius: $slider-unhighlighted-border-radius;
 
-            .unhighlighted {
+            & > .slider-highlighted {
+                @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
+                height: 100%;
+                border-radius: inherit;
+            }
 
-                @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
-                @include center-absolutely ( false, $slider-unhighlighted-height );
-                border-radius: $slider-unhighlighted-height;
-                height: $slider-unhighlighted-height;
-                overflow: visible;
-                position: absolute;
-                left: $slider-handler-half-size;
-                right: $slider-handler-half-size;
+            & > .slider-handler {
 
-                .highlighted {
-                    @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
-                    height: $slider-highlighted-height;
-                    border-radius: $slider-highlighted-height;
-                }
+                @include color ( $slider-handler-color, $slider-handler-color-basic );
+                @include z-depth ( $slider-handler-z-depth );
+                @include center-absolutely ( false, $slider-handler-size );
+                z-index: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: $slider-handler-size;
+                height: $slider-handler-size;
+                margin-left: - $slider-handler-half-size;
+                transition: transform $slider-transition-all-duration;
+                transform: scale(1);
+                border-radius: $slider-handler-border-radius;
 
-                .handler {
-
-                    @include color ( $slider-handler-color, $slider-handler-color-basic );
-                    @include z-depth ( 3 );
-                    @include center-absolutely ( false, $slider-handler-size );
-                    border-radius: 50%;
-                    height: $slider-handler-size;
-                    line-height: $slider-handler-size;
+                &:before {
                     position: absolute;
-                    text-align: center;
-                    margin-left: - $slider-handler-half-size;
-                    width: $slider-handler-size;
-                    z-index: 1;
-
-                    transition: height $slider-transitions-time ease 0s,
-                                line-height $slider-transitions-time ease 0s,
-                                margin-left $slider-transitions-time ease 0s,
-                                margin-top $slider-transitions-time ease 0s,
-                                width $slider-transitions-time ease 0s,
-                                box-shadow $slider-transitions-time ease 0s;
-
-                    .slider-label {
-                        font-size: 0;
-                        transition: font-size $slider-transitions-time ease 0s;
-                    }
-
+                    z-index: -1;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    content: '';
+                    transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
+                    transition-duration: $slider-transition-all-duration;
+                    transition-property: opacity, transform;
+                    transform: scale($switch-handler-before-scale-inactive);
+                    opacity: 0;
+                    border-radius: 50%;
+                    background-color: inherit;
                 }
 
-            }
+                & > .slider-label {
+                    font-size: $slider-handler-label-font-size;
+                    transition-duration: $slider-transition-all-duration;
+                    transition-property: opacity, transform;
+                    transform: scale(0);
+                    opacity: 0;
+                }
 
-        }
-
-        .min, .max {
-            height: $slider-height;
-            line-height: $slider-height;
-            text-align: center;
-            width: $slider-min-max-width;
-            position: relative;
-        }
-
-        .min {
-
-            float: left;
-
-            &:after {
-                content: attr(data-min)
-            }
-
-        }
-
-        .max {
-
-            float: right;
-
-            &:after {
-                content: attr(data-max)
             }
 
         }
 
     }
 
+    & > .slider-min, & > .slider-max {
+        width: $slider-min-max-width;
+        text-align: center;
+    }
+
+    & > .slider-min {
+
+        order: 0;
+
+        &:after {
+            content: attr(data-min)
+        }
+
+    }
+
+    & > .slider-max {
+
+        order: 3;
+
+        &:after {
+            content: attr(data-max)
+        }
+
+    }
+
     &:not(.slider-disabled) {
 
-        & > .slider {
+        &:not(.dragging) {
 
-            &:not(.dragging) {
+            & > .slider-min, & > .slider-max {
 
-                .min, .max {
+                cursor: pointer;
 
-                    cursor: pointer;
-
-                    &:hover:after {
-                        @extend %icon;
-                    }
-
-                }
-
-                .min {
-
-                    &:hover:after {
-                        content: '\f111'; // content-remove
-                    }
-
-                }
-
-                .max {
-
-                    &:hover:after {
-                        content: '\f0fb'; // content-add
-                    }
-
+                &:hover:after {
+                    @extend %icon;
                 }
 
             }
 
-            .bar .unhighlighted {
+            & > .slider-min {
 
+                &:hover:after {
+                    @extend .icon-content-remove:before;
+                }
+
+            }
+
+            & > .slider-max {
+
+                &:hover:after {
+                    @extend .icon-content-add:before;
+                }
+
+            }
+
+        }
+
+        & > .slider-bar > .slider-unhighlighted {
+
+            cursor: pointer;
+
+            & > .slider-highlighted {
                 cursor: pointer;
+            }
 
-                .handler {
+            & > .slider-handler {
 
-                    cursor: move;
+                cursor: move;
 
-                    &:hover, &:active {
+                &:active {
+                    transform: scale($slider-handler-active-transform-scale) !important;
+                }
 
-                        height: $slider-handler-big-size;
-                        line-height: $slider-handler-big-size;
-                        @include center-absolutely ( false, $slider-handler-big-size );
-                        margin-left: - $slider-handler-big-half-size;
-                        width: $slider-handler-big-size;
-
-                        .slider-label {
-                            font-size: $slider-handler-label-font-size;
-                        }
-
-                    }
-
-                    &:active {
-                        @include z-depth ( 2, $slider-handler-active-shadow );
-                    }
-
+                &:active:before {
+                    transform: scale($switch-handler-before-scale-active);
+                    opacity: $switch-handler-before-active-opacity;
                 }
 
             }
@@ -171,18 +167,14 @@
     }
 
     &.slider-disabled {
+        opacity: $slider-disabled-opacity;
+    }
 
-        & > .slider .bar .unhighlighted {
+    &:hover, &:active {
 
-            .highlighted  {
-                @include color ( $slider-disabled-highlighted-color, $slider-disabled-highlighted-color-basic );
-            }
-
-            .handler {
-                @include color ( $slider-disabled-handler-color, $slider-disabled-handler-color-basic );
-                box-shadow: 0 0 0 $slider-inactive-handler-shadow-size $color-white-bg;
-            }
-
+        .slider-label {
+            transform: scale(1) !important;
+            opacity: 1 !important;
         }
 
     }
