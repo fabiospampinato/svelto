@@ -94,7 +94,7 @@
 		"../styles/presto/components/_select.scss",
 		"../styles/presto/components/_shapes.scss",
 		"../styles/presto/components/_slider.scss",
-		"../styles/presto/components/_spinner.scss",
+		"../styles/presto/components/_stepper.scss",
 		"../styles/presto/components/_switcher.scss",
 		"../styles/presto/components/_table.scss",
 		"../styles/presto/components/_tabs.scss",

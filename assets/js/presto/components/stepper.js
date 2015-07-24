@@ -1,15 +1,13 @@
 
-/* SPINNER */
-
-//TODO: rename it to stepper, maybe, search how other people named it
+/* STEPPER */
 
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
 
-    /* SPINNER */
+    /* STEPPER */
 
-    $.widget ( 'presto.spinner', {
+    $.widget ( 'presto.stepper', {
 
         /* OPTIONS */
 
@@ -29,11 +27,11 @@
 
         _variables: function () {
 
-            this.$spinner = this.$element;
-            this.$input = this.$spinner.find ( 'input' );
-            this.$label = this.$spinner.find ( '.spinner-label .label-center' );
-            this.$decreaser = this.$spinner.find ( '.spinner-decreaser' );
-            this.$increaser = this.$spinner.find ( '.spinner-increaser' );
+            this.$stepper = this.$element;
+            this.$input = this.$stepper.find ( 'input' );
+            this.$label = this.$stepper.find ( '.stepper-label .label-center' );
+            this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
+            this.$increaser = this.$stepper.find ( '.stepper-increaser' );
 
         },
 
@@ -142,19 +140,19 @@
 
     $(function () {
 
-        $('.spinner').each ( function () {
+        $('.stepper').each ( function () {
 
-            var $spinner = $(this),
-                $input = $spinner.find ( 'input' ),
+            var $stepper = $(this),
+                $input = $stepper.find ( 'input' ),
                 options = {
-                    min: Number($spinner.data ( 'min' ) || 0),
-                    max: Number($spinner.data ( 'max' ) || 100),
+                    min: Number($stepper.data ( 'min' ) || 0),
+                    max: Number($stepper.data ( 'max' ) || 100),
                     value: Number($input.val () || 0),
-                    step: Number($spinner.data ( 'step' ) || 1),
-                    decimals: Number($spinner.data ( 'decimals' ) || 0)
+                    step: Number($stepper.data ( 'step' ) || 1),
+                    decimals: Number($stepper.data ( 'decimals' ) || 0)
                 };
 
-            $spinner.spinner ( options );
+            $stepper.stepper ( options );
 
         });
 

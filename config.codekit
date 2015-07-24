@@ -515,12 +515,12 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
-	"\/assets\/js\/presto\/components\/spinner.js": {
+	"\/assets\/js\/presto\/components\/stepper.js": {
 		"fileType": 64,
 		"ignore": 1,
 		"ignoreWasSetByUser": 1,
-		"inputAbbreviatedPath": "\/assets\/js\/presto\/components\/spinner.js",
-		"outputAbbreviatedPath": "\/assets\/js\/presto\/components\/min\/spinner.js",
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/components\/stepper.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/components\/min\/stepper.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -1517,15 +1517,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/assets\/styles\/presto\/components\/_spinner.scss": {
+	"\/assets\/styles\/presto\/components\/_stepper.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_spinner.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_spinner.css",
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_stepper.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_stepper.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -3307,6 +3307,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/javascript\/modal.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/modal.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/javascript\/modal.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3429,22 +3438,22 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/javascript\/spinner.html": {
+	"\/views\/demo\/javascript\/stepper.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/javascript\/spinner.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/stepper.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/javascript\/spinner.jade": {
+	"\/views\/demo\/javascript\/stepper.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/javascript\/spinner.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/javascript\/spinner.html",
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/stepper.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/stepper.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -4121,13 +4130,13 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/mixins\/presto\/spinner.jade": {
+	"\/views\/mixins\/presto\/stepper.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/mixins\/presto\/spinner.jade",
-		"outputAbbreviatedPath": "\/views\/mixins\/presto\/spinner.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/stepper.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/stepper.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -4524,7 +4533,7 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/spinner.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/stepper.js",
 			"position": 36,
 			"type": 0
 			},

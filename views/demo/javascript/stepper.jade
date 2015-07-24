@@ -1,0 +1,10 @@
+//- bootstrap/stepper.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Stepper
+
+    +multiple
+        +stepper("name1", 0, 50, 100)
+        +stepper("name1", 0, 50, 100).rounded
