@@ -49,10 +49,6 @@
 
         open: function () {
 
-            this.$modal.addClass ( 'show' );
-
-            $.reflow ();
-
             this.$modal.addClass ( 'active' );
 
             this._on ( $document, 'keydown', this._handler_esc_keydown );
@@ -64,14 +60,6 @@
         close: function () {
 
             this.$modal.removeClass ( 'active' );
-
-            $.reflow ();
-
-            this._delay ( function () {
-
-                this.$modal.removeClass ( 'show' );
-
-            }, 200 );
 
             $document.off ( 'keydown', this._handler_esc_keydown );
 

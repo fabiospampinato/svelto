@@ -7,35 +7,73 @@ append main
 
     +multiple
         +button-simple(data-modal-trigger="modal-1").outlined Normal
-        +button-simple(data-modal-trigger="modal-2").outlined No footer
-        +button-simple(data-modal-trigger="modal-3").outlined No title
-        +button-simple(data-modal-trigger="modal-4").outlined Only content
-        +button-simple(data-modal-trigger="modal-5").outlined With buttons
+        +button-simple(data-modal-trigger="modal-2").outlined Closable
+        +button-simple(data-modal-trigger="modal-3").outlined No footer
+        +button-simple(data-modal-trigger="modal-4").outlined No header
+        +button-simple(data-modal-trigger="modal-5").outlined Only content
+        +button-simple(data-modal-trigger="modal-6").outlined With buttons
+        +button-simple(data-modal-trigger="modal-7").outlined Long content
+        +button-simple(data-modal-trigger="modal-8").outlined Fullscreen
 
 append body
-    +modal("Normal")#modal-1
-        +container-content
-            +lorem-ipsum
-        +container-footer The footer here
+    +modal#modal-1
+        +container("Normal").xs-8
+            +container-content
+                +lorem-ipsum
+            +container-footer The footer here
 
-    +modal("No footer")#modal-2
-        +container-content
-            +lorem-ipsum
+    +modal#modal-2
+        +container.xs-8
+            +container-header("Closable")
+                +multiple-right
+                    +button-icon("navigation-close").xxsmall.modal-closer
+            +container-content
+                +lorem-ipsum
+            +container-footer The footer here
 
-    +modal#modal-3
-        +container-content
-            +lorem-ipsum
-        +container-footer The footer here
+
+    +modal("No footer")#modal-3
+        +container("No footer").xs-8
+            +container-content
+                +lorem-ipsum
 
     +modal#modal-4
-        +container-content
-            +lorem-ipsum
+        +container.xs-8
+            +container-content
+                +lorem-ipsum
+            +container-footer The footer here
 
-    +modal("With buttons")#modal-5
-        +container-content
-            +lorem-ipsum
-        +container-footer
-            +multiple
-                +button-simple.outlined.modal-closer Normal
-                +button-simple.primary.modal-closer Primary
-                +button-simple.secondary.modal-closer Secondary
+    +modal#modal-5
+        +container.xs-8
+            +container-content
+                +lorem-ipsum
+
+    +modal#modal-6
+        +container("With buttons").xs-8
+            +container-content
+                +lorem-ipsum
+            +container-footer
+                +multiple
+                    +button-simple.outlined.modal-closer Closer
+                    +button-simple.primary No Closer
+                    +button-simple.secondary.modal-closer Closer
+
+    +modal#modal-7
+        +container("Long content").xs-8
+            +container-content
+                +lorem-ipsum
+                +lorem-ipsum
+                +lorem-ipsum
+                +lorem-ipsum
+                +lorem-ipsum
+                +lorem-ipsum
+            +container-footer The footer here
+
+    +modal#modal-8.fullscreen
+        +container
+            +container-header("Fullscreen")
+                +multiple-right
+                    +button-icon("navigation-close").xxsmall.modal-closer
+            +container-content
+                +lorem-ipsum
+            +container-footer The footer here

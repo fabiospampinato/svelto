@@ -3665,9 +3665,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     /* LOADING */
 
-    $.fn.loading = function ( activate ) {
+    $.fn.loading = function ( force ) {
 
-        if ( activate ) {
+        if ( _.isUndefined ( force ) ) {
+
+            force = !this.hasClass ( 'loading' );
+
+        }
+
+        if ( force ) {
 
             this.addClass ( 'loading' );
 
@@ -3677,17 +3683,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else {
 
-            var $this = this;
-
             this.removeClass ( 'loading-active' );
 
-            setTimeout ( function () {
+            setTimeout ( (function () {
 
                 //TODO: do we need a reflow here? If we don't why?
 
-                $this.removeClass ( 'loading' );
+                this.removeClass ( 'loading' );
 
-            }, 200 );
+            }).bind ( this ), 200 );
 
         }
 
@@ -3749,10 +3753,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         open: function () {
 
-            this.$modal.addClass ( 'show' );
-
-            $.reflow ();
-
             this.$modal.addClass ( 'active' );
 
             this._on ( $document, 'keydown', this._handler_esc_keydown );
@@ -3764,14 +3764,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         close: function () {
 
             this.$modal.removeClass ( 'active' );
-
-            $.reflow ();
-
-            this._delay ( function () {
-
-                this.$modal.removeClass ( 'show' );
-
-            }, 200 );
 
             $document.off ( 'keydown', this._handler_esc_keydown );
 
@@ -5084,6 +5076,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* SPINNER */
 
+//TODO: rename it to stepper, maybe, search how other people named it
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -5102,7 +5096,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             decimals: 0,
             callbacks: {
                 increased: $.noop,
-                decrease: $.noop
+                decreased: $.noop
             }
         },
 
@@ -5112,9 +5106,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$spinner = this.$element;
             this.$input = this.$spinner.find ( 'input' );
-            this.$label = this.$spinner.find ( '.button-center' );
-            this.$decrease_btn = this.$spinner.find ( '.decrease' );
-            this.$increase_btn = this.$spinner.find ( '.increase' );
+            this.$label = this.$spinner.find ( '.spinner-label .label-center' );
+            this.$decreaser = this.$spinner.find ( '.spinner-decreaser' );
+            this.$increaser = this.$spinner.find ( '.spinner-increaser' );
 
         },
 
@@ -5125,9 +5119,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this._on ( 'mouseenter', this._handler_arrows_in );
             this._on ( 'mouseleave', this._handler_arrows_out );
 
-            this._on ( this.$decrease_btn, 'click', this.decrease );
+            this._on ( this.$decreaser, 'click', this.decrease );
 
-            this._on ( this.$increase_btn, 'click', this.increase );
+            this._on ( this.$increaser, 'click', this.increase );
 
         },
 
@@ -5188,10 +5182,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this.$input.val ( value ).trigger ( 'change' );
                 this.$label.html ( value );
 
-                this.$decrease_btn.toggleClass ( 'inactive', value === this.options.min );
-                this.$increase_btn.toggleClass ( 'inactive', value === this.options.max );
+                this.$decreaser.toggleClass ( 'disabled', value === this.options.min );
+                this.$increaser.toggleClass ( 'disabled', value === this.options.max );
 
-                this._trigger ( value > this.options.value ? 'increase' : 'decrease' );
+                this._trigger ( value > this.options.value ? 'increased' : 'decreased' );
 
             }
 
@@ -5618,8 +5612,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
 //FIXME: the partial field is too tall
-//TODO: more explicative noty messages, like :you cannot use the tag 'something' again
-//FIXME: se si entra una tag con tab poi non si e' in focus nel $partial
+//TODO: more explicative noty messages, like: you cannot use the tag 'something' again, not "you cannot use the same tag again"
+//FIXME: se si immette una tag con tab poi non si e' in focus nel $partial
 
 ;(function ( $, window, document, undefined ) {
 
@@ -5632,11 +5626,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* TEMPLATES */
 
         templates: {
-            tag: '<div class="tag button {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                     '<div class="button-center">' +
-                         '{%=o.str%}' +
+            tag: '<div class="multiple-wrp joined tag">' +
+                     '<div class="multiple">' +
+                         '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                             '<div class="label-center tag-label">' +
+                                 '{%=o.str%}' +
+                             '</div>' +
+                         '</div>' +
+                         '<div class="tag-deleter button actionable compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                             '<div class="label-center">' +
+                                 '<div class="icon icon-navigation-close"></div>' +
+                             '</div>' +
+                         '</div>' +
                      '</div>' +
-                     '<div class="button-right actionable close">x</div>' +
                  '</div>'
         },
 
@@ -5707,7 +5709,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._on ( 'click', this._handler_click_on_empty );
 
-            this._on ( 'click', this._handler_click_on_close );
+            this._on ( 'click', this._handler_click_on_tag_deleter );
 
         },
 
@@ -5771,7 +5773,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             for ( var i = 0, l = this.options.tags.$nodes.length; i < l; i++ ) {
 
-                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.button-center' ).html ();
+                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.tag-label' ).html ();
 
             }
 
@@ -5848,7 +5850,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 $.noty ( 'The character you entered is forbidden' );
 
-               this._delay ( function () {
+                this._delay ( function () {
 
                     this.$partial.val ( prev_value );
 
@@ -5883,13 +5885,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CLICK ON CLOSE */
 
-        _handler_click_on_close: function ( event ) {
+        _handler_click_on_tag_deleter: function ( event ) {
 
             var $target = $(event.target);
 
-            if ( $target.is ( '.close ') ) {
+            if ( $target.is ( '.tag-deleter ') || $target.parent ( '.tag-deleter' ).length > 0 ) {
 
-                var $tag = $target.parent ();
+                var $tag = $target.parent ( '.tag' );
 
                 this.remove_tag ( $tag );
 
@@ -5901,7 +5903,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_click_on_empty: function ( event ) {
 
-            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag, .button-center' ) ) {
+            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag-label' ) ) {
 
                 this.$partial.get ( 0 ).focus ();
 
@@ -5981,7 +5983,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( edit === true ) {
 
-                var tag_str = $tag.find ( '.button-center' ).html ();
+                var tag_str = $tag.find ( '.tag-label' ).html ();
 
                 this.$partial.val ( tag_str );
 

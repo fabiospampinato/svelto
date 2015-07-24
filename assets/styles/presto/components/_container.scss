@@ -56,6 +56,7 @@
     }
 
     & > .container-footer {
+
         @include color ( $container-footer-color, $container-footer-color-basic );
         flex-shrink: 0;
         margin-right: - $container-footer-border-width;
@@ -68,6 +69,11 @@
         border-top-right-radius: 0;
         border-bottom-right-radius: inherit;
         border-bottom-left-radius: inherit;
+
+        & > *:last-child {
+            margin-bottom: 0 !important;
+        }
+
     }
 
 }

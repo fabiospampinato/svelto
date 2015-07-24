@@ -1,11 +1,6 @@
 //- modal.jade
 
-mixin modal(title, header_classes)
+mixin modal
     .modal&attributes(attributes)
         .background.modal-closer
-        +container
-            if title
-                +container-header(title)(class=header_classes)
-                    +multiple-right
-                        +button-icon('navigation-close').xsmall.modal-closer
-            block
+        block

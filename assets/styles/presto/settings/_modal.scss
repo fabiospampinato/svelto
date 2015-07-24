@@ -1,4 +1,12 @@
 
 /* MODAL */
 
-$modal-bg-color: rgba(0, 0, 0, 0.45) !default;
+$modal-z-index: 50;
+$modal-z-depth: 5;
+
+$modal-transition-all-duration: 0.2s;
+
+$modal-max-width: 80vw;
+$modal-max-height: 80vh;
+
+$modal-background-color: rgba(0, 0, 0, 0.5) !default;

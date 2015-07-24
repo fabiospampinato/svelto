@@ -1,16 +1,26 @@
 
 /* TAGBOX */
 
-//FIXME: The partial input field is too big
-
 .tagbox {
+
+    @include color ( $tagbox-color, $tagbox-color-basic );
+    margin-bottom: $layout-spacing;
+    border-width: 0;
 
     & > input {
         display: none;
     }
 
-    & > .multiple-wrp > .multiple > input {
-        min-width: 7em;
+    & > .multiple-wrp {
+
+        margin-bottom: 0;
+
+        & > .multiple > input {
+            @include color ( $tagbox-input-color, $tagbox-input-color-basic );
+            @include size ( $tagbox-input-size );
+            min-width: $tagbox-input-min-width;
+        }
+
     }
 
 }

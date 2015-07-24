@@ -7,9 +7,15 @@
 
     /* LOADING */
 
-    $.fn.loading = function ( activate ) {
+    $.fn.loading = function ( force ) {
 
-        if ( activate ) {
+        if ( _.isUndefined ( force ) ) {
+
+            force = !this.hasClass ( 'loading' );
+
+        }
+
+        if ( force ) {
 
             this.addClass ( 'loading' );
 
@@ -19,17 +25,15 @@
 
         } else {
 
-            var $this = this;
-
             this.removeClass ( 'loading-active' );
 
-            setTimeout ( function () {
+            setTimeout ( (function () {
 
                 //TODO: do we need a reflow here? If we don't why?
 
-                $this.removeClass ( 'loading' );
+                this.removeClass ( 'loading' );
 
-            }, 200 );
+            }).bind ( this ), 200 );
 
         }
 

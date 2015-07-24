@@ -1,6 +1,8 @@
 
 /* SPINNER */
 
+//TODO: rename it to stepper, maybe, search how other people named it
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -19,7 +21,7 @@
             decimals: 0,
             callbacks: {
                 increased: $.noop,
-                decrease: $.noop
+                decreased: $.noop
             }
         },
 
@@ -29,9 +31,9 @@
 
             this.$spinner = this.$element;
             this.$input = this.$spinner.find ( 'input' );
-            this.$label = this.$spinner.find ( '.button-center' );
-            this.$decrease_btn = this.$spinner.find ( '.decrease' );
-            this.$increase_btn = this.$spinner.find ( '.increase' );
+            this.$label = this.$spinner.find ( '.spinner-label .label-center' );
+            this.$decreaser = this.$spinner.find ( '.spinner-decreaser' );
+            this.$increaser = this.$spinner.find ( '.spinner-increaser' );
 
         },
 
@@ -42,9 +44,9 @@
             this._on ( 'mouseenter', this._handler_arrows_in );
             this._on ( 'mouseleave', this._handler_arrows_out );
 
-            this._on ( this.$decrease_btn, 'click', this.decrease );
+            this._on ( this.$decreaser, 'click', this.decrease );
 
-            this._on ( this.$increase_btn, 'click', this.increase );
+            this._on ( this.$increaser, 'click', this.increase );
 
         },
 
@@ -105,10 +107,10 @@
                 this.$input.val ( value ).trigger ( 'change' );
                 this.$label.html ( value );
 
-                this.$decrease_btn.toggleClass ( 'inactive', value === this.options.min );
-                this.$increase_btn.toggleClass ( 'inactive', value === this.options.max );
+                this.$decreaser.toggleClass ( 'disabled', value === this.options.min );
+                this.$increaser.toggleClass ( 'disabled', value === this.options.max );
 
-                this._trigger ( value > this.options.value ? 'increase' : 'decrease' );
+                this._trigger ( value > this.options.value ? 'increased' : 'decreased' );
 
             }
 

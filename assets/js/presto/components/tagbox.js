@@ -3,8 +3,8 @@
 
 //TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
 //FIXME: the partial field is too tall
-//TODO: more explicative noty messages, like :you cannot use the tag 'something' again
-//FIXME: se si entra una tag con tab poi non si e' in focus nel $partial
+//TODO: more explicative noty messages, like: you cannot use the tag 'something' again, not "you cannot use the same tag again"
+//FIXME: se si immette una tag con tab poi non si e' in focus nel $partial
 
 ;(function ( $, window, document, undefined ) {
 
@@ -17,11 +17,19 @@
         /* TEMPLATES */
 
         templates: {
-            tag: '<div class="tag button {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                     '<div class="button-center">' +
-                         '{%=o.str%}' +
+            tag: '<div class="multiple-wrp joined tag">' +
+                     '<div class="multiple">' +
+                         '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                             '<div class="label-center tag-label">' +
+                                 '{%=o.str%}' +
+                             '</div>' +
+                         '</div>' +
+                         '<div class="tag-deleter button actionable compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                             '<div class="label-center">' +
+                                 '<div class="icon icon-navigation-close"></div>' +
+                             '</div>' +
+                         '</div>' +
                      '</div>' +
-                     '<div class="button-right actionable close">x</div>' +
                  '</div>'
         },
 
@@ -92,7 +100,7 @@
 
             this._on ( 'click', this._handler_click_on_empty );
 
-            this._on ( 'click', this._handler_click_on_close );
+            this._on ( 'click', this._handler_click_on_tag_deleter );
 
         },
 
@@ -156,7 +164,7 @@
 
             for ( var i = 0, l = this.options.tags.$nodes.length; i < l; i++ ) {
 
-                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.button-center' ).html ();
+                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.tag-label' ).html ();
 
             }
 
@@ -233,7 +241,7 @@
 
                 $.noty ( 'The character you entered is forbidden' );
 
-               this._delay ( function () {
+                this._delay ( function () {
 
                     this.$partial.val ( prev_value );
 
@@ -268,13 +276,13 @@
 
         /* CLICK ON CLOSE */
 
-        _handler_click_on_close: function ( event ) {
+        _handler_click_on_tag_deleter: function ( event ) {
 
             var $target = $(event.target);
 
-            if ( $target.is ( '.close ') ) {
+            if ( $target.is ( '.tag-deleter ') || $target.parent ( '.tag-deleter' ).length > 0 ) {
 
-                var $tag = $target.parent ();
+                var $tag = $target.parent ( '.tag' );
 
                 this.remove_tag ( $tag );
 
@@ -286,7 +294,7 @@
 
         _handler_click_on_empty: function ( event ) {
 
-            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag, .button-center' ) ) {
+            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag-label' ) ) {
 
                 this.$partial.get ( 0 ).focus ();
 
@@ -366,7 +374,7 @@
 
             if ( edit === true ) {
 
-                var tag_str = $tag.find ( '.button-center' ).html ();
+                var tag_str = $tag.find ( '.tag-label' ).html ();
 
                 this.$partial.val ( tag_str );
 

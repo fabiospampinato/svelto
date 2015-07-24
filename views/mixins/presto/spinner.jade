@@ -1,13 +1,10 @@
 //- spinner.jade
 
-//- TODO: add placeholders (selects-like) labels
-//- FIXME: the labels are not actionable... actually we just have to create an .actionable class
+//- TODO: add placeholders labels (like selects)
 
 mixin spinner(name, min, value, max)
-    +label(data-min=min, data-max=max)&attributes(attributes).spinner
+    +multiple(data-min=min, data-max=max)&attributes(attributes).spinner.joined
+        +button-icon("content-remove").spinner-decreaser
+        +label-simple.spinner-label= value
         input(type="number", name=name, value=value)
-        +label-left.decrease
-            +button-icon("content-remove").transparent.no-margin.no-padding
-        +label-center= value
-        +label-right.increase
-            +button-icon("content-add").transparent.no-margin.no-padding
+        +button-icon("content-add").spinner-increaser

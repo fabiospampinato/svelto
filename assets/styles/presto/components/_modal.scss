@@ -4,40 +4,41 @@
 .modal {
 
     position: fixed;
-    width: 100%;
-    height: 100%;
+    z-index: $modal-z-index;
     top: 0;
-    left: 0;
-    bottom: 0;
     right: 0;
-    z-index: 50;
-    display: none;
+    bottom: 0;
+    left: 0;
+
+    &.fullscreen > .container {
+        width: 100vw;
+        max-width: 100vw;
+        height: 100vh;
+        max-height: 100vh;
+        border-radius: 0;
+    }
 
     & > .background {
-        background-color: transparent;
         position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        bottom: 0;
-        right: 0;
-        cursor: pointer;
         z-index: -1;
-        transition: background-color 0.2s ease 0s;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        cursor: pointer;
+        transition: background-color $modal-transition-all-duration;
     }
 
     & > .container {
 
-        @include z-depth ( 5 );
-        width: 300px;
-        opacity: 0;
+        @include z-depth ( $modal-z-depth );
         position: absolute;
         top: 50%;
         left: 50%;
+        max-width: $modal-max-width;
+        max-height: $modal-max-height;
         margin: auto;
-        transform: translate(-50%, -50%) scale(0.9);
-        transition: transform 0.2s ease 0s, opacity 0.2s ease 0s;
+        transition: transform $modal-transition-all-duration, opacity $modal-transition-all-duration;
 
         & > .content {
             overflow: auto;
@@ -45,14 +46,29 @@
 
     }
 
+    /* ANIMATIONS */
+
+    &:not(.active) {
+
+        transition-delay: $modal-transition-all-duration;
+        pointer-events: none;
+
+        & > .container {
+            transform: translate(-50%, -50%) scale(0.9);
+            opacity: 0;
+        }
+
+    }
+
     &.active {
 
+        transition-delay: 0s;
+
         & > .background {
-            background-color: $modal-bg-color;
+            background-color: $modal-background-color;
         }
 
         & > .container {
-            opacity: 1;
             transform: translate(-50%, -50%) scale(1);
         }
 
