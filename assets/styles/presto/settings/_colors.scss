@@ -22,6 +22,7 @@ $color-teal: #00bbb3 !default;
 $color-brown: #a5673f !default;
 
 $color-transparent: rgba(0, 0, 0, 0) !default;
+$color-inherit: inherit !default;
 $color-base: #e9eaed !default;
 
 /* PRIMARY */
@@ -34,6 +35,7 @@ $color-primary-accent: $color-secondary !default;
 $color-primary-text: #ffffff !default;
 $color-primary-link: $color-primary-accent !default;
 $color-primary-link-hover: lighten( $color-primary-link, 2 ) !default;
+$color-primary-support-gradient: true !default;
 
 /* SECONDARY */
 
@@ -45,6 +47,7 @@ $color-secondary-accent: $color-primary !default;
 $color-secondary-text: #ffffff !default;
 $color-secondary-link: $color-secondary-accent !default;
 $color-secondary-link-hover: lighten( $color-secondary-link, 2 ) !default;
+$color-secondary-support-gradient: true !default;
 
 /* TERTIARY */
 
@@ -56,6 +59,7 @@ $color-tertiary-accent: $color-quaternary !default;
 $color-tertiary-text: #ffffff !default;
 $color-tertiary-link: $color-tertiary-accent !default;
 $color-tertiary-link-hover: lighten( $color-tertiary-link, 2 ) !default;
+$color-tertiary-support-gradient: true !default;
 
 /* QUATERNARY */
 
@@ -67,6 +71,7 @@ $color-quaternary-accent: $color-tertiary !default;
 $color-quaternary-text: #ffffff !default;
 $color-quaternary-link: $color-quaternary-accent !default;
 $color-quaternary-link-hover: lighten( $color-quaternary-link, 2 ) !default;
+$color-quaternary-support-gradient: true !default;
 
 /* WHITE */
 
@@ -78,6 +83,7 @@ $color-white-accent: $color-black !default;
 $color-white-text: #2f2f2f !default;
 $color-white-link: $color-primary !default;
 $color-white-link-hover: lighten( $color-white-link, 2 ) !default;
+$color-white-support-gradient: true !default;
 
 /* GRAY */
 
@@ -89,6 +95,7 @@ $color-gray-accent: $color-black !default;
 $color-gray-text: #2f2f2f !default;
 $color-gray-link: $color-white !default;
 $color-gray-link-hover: lighten( $color-gray-link, 2 ) !default;
+$color-gray-support-gradient: true !default;
 
 /* BLACK */
 
@@ -100,6 +107,7 @@ $color-black-accent: $color-white !default;
 $color-black-text: #ffffff !default;
 $color-black-link: $color-gray !default;
 $color-black-link-hover: lighten( $color-black-link, 2 ) !default;
+$color-black-support-gradient: true !default;
 
 /* YELLOW */
 
@@ -111,6 +119,7 @@ $color-yellow-accent: $color-green !default;
 $color-yellow-text: #ffffff !default;
 $color-yellow-link: $color-yellow-accent !default;
 $color-yellow-link-hover: lighten( $color-yellow-link, 2 ) !default;
+$color-yellow-support-gradient: true !default;
 
 /* OLIVE */
 
@@ -122,6 +131,7 @@ $color-olive-accent: $color-orange !default;
 $color-olive-text: #ffffff !default;
 $color-olive-link: $color-olive-accent !default;
 $color-olive-link-hover: lighten( $color-olive-link, 2 ) !default;
+$color-olive-support-gradient: true !default;
 
 /* GREEN */
 
@@ -133,6 +143,7 @@ $color-green-accent: $color-yellow !default;
 $color-green-text: #ffffff !default;
 $color-green-link: $color-green-accent !default;
 $color-green-link-hover: lighten( $color-green-link, 2 ) !default;
+$color-green-support-gradient: true !default;
 
 /* BLUE */
 
@@ -144,6 +155,7 @@ $color-blue-accent: $color-orange !default;
 $color-blue-text: #ffffff !default;
 $color-blue-link: $color-blue-accent !default;
 $color-blue-link-hover: lighten( $color-blue-link, 2 ) !default;
+$color-blue-support-gradient: true !default;
 
 /* VIOLET */
 
@@ -155,6 +167,7 @@ $color-violet-accent: $color-red !default;
 $color-violet-text: #ffffff !default;
 $color-violet-link: $color-violet-accent !default;
 $color-violet-link-hover: lighten( $color-violet-link, 2 ) !default;
+$color-violet-support-gradient: true !default;
 
 /* ORANGE */
 
@@ -166,6 +179,7 @@ $color-orange-accent: $color-blue !default;
 $color-orange-text: #ffffff !default;
 $color-orange-link: $color-orange-accent !default;
 $color-orange-link-hover: lighten( $color-orange-link, 2 ) !default;
+$color-orange-support-gradient: true !default;
 
 /* PURPLE */
 
@@ -177,6 +191,7 @@ $color-purple-accent: $color-pink !default;
 $color-purple-text: #ffffff !default;
 $color-purple-link: $color-purple-accent !default;
 $color-purple-link-hover: lighten( $color-purple-link, 2 ) !default;
+$color-purple-support-gradient: true !default;
 
 /* RED */
 
@@ -188,6 +203,7 @@ $color-red-accent: $color-teal !default;
 $color-red-text: #ffffff !default;
 $color-red-link: $color-red-accent !default;
 $color-red-link-hover: lighten( $color-red-link, 2 ) !default;
+$color-red-support-gradient: true !default;
 
 /* PINK */
 
@@ -199,6 +215,7 @@ $color-pink-accent: $color-purple !default;
 $color-pink-text: #ffffff !default;
 $color-pink-link: $color-pink-accent !default;
 $color-pink-link-hover: lighten( $color-pink-link, 2 ) !default;
+$color-pink-support-gradient: true !default;
 
 /* TEAL */
 
@@ -210,6 +227,7 @@ $color-teal-accent: $color-red !default;
 $color-teal-text: #ffffff !default;
 $color-teal-link: $color-teal-accent !default;
 $color-teal-link-hover: lighten( $color-teal-link, 2 ) !default;
+$color-teal-support-gradient: true !default;
 
 /* BROWN */
 
@@ -221,8 +239,9 @@ $color-brown-accent: $color-orange !default;
 $color-brown-text: #ffffff !default;
 $color-brown-link: $color-brown-accent !default;
 $color-brown-link-hover: lighten( $color-brown-link, 2 ) !default;
+$color-brown-support-gradient: true !default;
 
-/* TRANSPARENT */ //TODO: maybe inherit...
+/* TRANSPARENT */
 
 $color-transparent-bg: $color-transparent !default;
 $color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
@@ -232,6 +251,19 @@ $color-transparent-accent: $color-primary !default;
 $color-transparent-text: inerhit !default;
 $color-transparent-link: $color-transparent-accent !default;
 $color-transparent-link-hover: lighten( $color-transparent-link, 2 ) !default;
+$color-transparent-support-gradient: false !default;
+
+/* INHERIT */
+
+$color-inherit-bg: $color-inherit !default;
+$color-inherit-bg-hover: $color-inherit !default;
+$color-inherit-bg-active: $color-inherit !default;
+$color-inherit-border: $color-inherit !default;
+$color-inherit-accent: $color-inherit !default;
+$color-inherit-text: $color-inherit !default;
+$color-inherit-link: $color-inherit !default;
+$color-inherit-link-hover: $color-inherit !default;
+$color-inherit-support-gradient: false !default;
 
 /* BASE */
 
@@ -243,28 +275,30 @@ $color-base-accent: $color-primary !default;
 $color-base-text: #2f2f2f !default;
 $color-base-link: $color-base-accent !default;
 $color-base-link-hover: lighten( $color-base-link, 2 ) !default;
+$color-base-support-gradient: true !default;
 
 /* COLORS */
 
 $colors: (
-    "primary" : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text, $color-primary-link, $color-primary-link-hover ),
-    "secondary" : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text, $color-secondary-link, $color-secondary-link-hover ),
-    "tertiary" : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text, $color-tertiary-link, $color-tertiary-link-hover ),
-    "quaternary" : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text, $color-quaternary-link, $color-quaternary-link-hover ),
-    "white" : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover ),
-    "gray" : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover ),
-    "black" : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover ),
-    "yellow" : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover ),
-    "olive" : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover ),
-    "green" : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover ),
-    "blue" : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover ),
-    "violet" : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover ),
-    "orange" : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover ),
-    "purple" : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover ),
-    "red" : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover ),
-    "pink" : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover ),
-    "teal" : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover ),
-    "brown" : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover ),
-    "transparent" : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover ),
-    "base" : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover )
+    "primary" : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text, $color-primary-link, $color-primary-link-hover , $color-primary-support-gradient),
+    "secondary" : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text, $color-secondary-link, $color-secondary-link-hover , $color-secondary-support-gradient),
+    "tertiary" : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text, $color-tertiary-link, $color-tertiary-link-hover , $color-tertiary-support-gradient),
+    "quaternary" : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text, $color-quaternary-link, $color-quaternary-link-hover , $color-quaternary-support-gradient),
+    "white" : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover , $color-white-support-gradient),
+    "gray" : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover , $color-gray-support-gradient),
+    "black" : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover , $color-black-support-gradient),
+    "yellow" : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover , $color-yellow-support-gradient),
+    "olive" : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover , $color-olive-support-gradient),
+    "green" : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover , $color-green-support-gradient),
+    "blue" : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover , $color-blue-support-gradient),
+    "violet" : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover , $color-violet-support-gradient),
+    "orange" : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover , $color-orange-support-gradient),
+    "purple" : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover , $color-purple-support-gradient),
+    "red" : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover , $color-red-support-gradient),
+    "pink" : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover , $color-pink-support-gradient),
+    "teal" : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover , $color-teal-support-gradient),
+    "brown" : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover , $color-brown-support-gradient),
+    "transparent" : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover , $color-transparent-support-gradient),
+    "inherit" : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text, $color-inherit-link, $color-inherit-link-hover , $color-inherit-support-gradient),
+    "base" : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover, $color-base-support-gradient )
 );

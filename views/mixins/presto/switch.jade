@@ -10,6 +10,9 @@ mixin switch(options, value, checked)
     .switch(data-color-on=(options.colors ? options.colors.on : false), data-color-off=(options.colors ? options.colors.off : false), data-icon-on=(options.icons ? options.icons.on : false), data-icon-off=(options.icons ? options.icons.off : false))&attributes(attributes)
         input(type="checkbox", name=options.name, value=options.value, checked=options.checked)
         .switch-bar(class=color_class)
-            .switch-handler(class=color_class)
-                if options.icons && options.icons.on
-                    +icon(options.icons.on)
+            .switch-handler(class=color_class, style="left: " + (options.checked ? "100%" : "0" ))
+                if options.icons
+                    if options.icons.on
+                        +icon(options.icons.on).on
+                    if options.icons.off
+                        +icon(options.icons.off).off

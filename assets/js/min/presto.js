@@ -1267,7 +1267,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             start: $.noop,
             move: $.noop,
             end: $.noop,
-            delegate: false,
+            delegate: undefined,
             context: undefined, //FIXME: Is it necessary?
             events: {
                 start: 'mousedown touchstart',
@@ -5239,8 +5239,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* SWITCH */
 
-//TODO: add support for spacebar, tipo uno ha il form e fa tab tab spacebar e ha fatto tutto senza usare il mouse
-
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -5256,10 +5254,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 on: 'secondary',
                 off: 'gray'
             },
-            icons: {
-                on: false,
-                off: false
-            },
             callbacks: {
                 checked: $.noop,
                 unchecked: $.noop
@@ -5274,7 +5268,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$input = this.$switch.find ( 'input' );
             this.$bar = this.$switch.find ( '.switch-bar' );
             this.$handler = this.$switch.find ( '.switch-handler' );
-            this.$icon = this.$switch.find ( '.icon' );
+            this.$icon = this.$handler.find ( '.icon' );
 
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
@@ -5312,9 +5306,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_change: function () {
 
-            this.checked = this.$input.prop ( 'checked' );
+            var new_checked = this.$input.prop ( 'checked' );
 
-            if ( this.checked !== this.$switch.hasClass ( 'checked' ) ) {
+            if ( this.checked !== new_checked ) {
+
+                this.checked = new_checked;
 
                 this._set_check ( this.checked, true );
 
@@ -5340,23 +5336,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( event.keyCode === $.ui.keyCode.LEFT ) {
 
-                if ( this.checked !== false ) {
-
-                    this.checked = false;
-
-                    this._set_check ( this.checked );
-
-                }
+                this.uncheck ();
 
             } else if ( event.keyCode === $.ui.keyCode.RIGHT ) {
 
-                if ( this.checked !== true ) {
+                this.check ();
 
-                    this.checked = true;
+            } else if ( event.keyCode === $.ui.keyCode.SPACE ) {
 
-                    this._set_check ( this.checked );
-
-                }
+                this.toggle ();
 
             }
 
@@ -5404,7 +5392,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.dragging ) {
 
-                this.checked = ( this.drag_percentage > 50 ) ? true : false;
+                this.checked = ( this.drag_percentage >= 50 ) ? true : false;
 
                 this._set_check ( this.checked, true );
 
@@ -5420,25 +5408,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.$handler.css ( 'left', checked ? '100%' : 0 );
 
-                var inactive = this.$switch.hasClass ( 'inactive' );
-
-                this.$bar.toggleClass ( this.options.colors.on, checked && !inactive );
-                this.$handler.toggleClass ( this.options.colors.on, checked && !inactive );
+                this.$bar.toggleClass ( this.options.colors.on, checked );
+                this.$handler.toggleClass ( this.options.colors.on, checked );
 
                 this.$bar.toggleClass ( this.options.colors.off, !checked );
                 this.$handler.toggleClass ( this.options.colors.off, !checked );
-
-                if ( this.options.icons.on ) {
-
-                    this.$icon.toggleClass ( 'icon-' + this.options.icons.on, checked );
-
-                }
-
-                if ( this.options.icons.off ) {
-
-                    this.$icon.toggleClass ( 'icon-' + this.options.icons.off, !checked );
-
-                }
 
                 this.$input.prop ( 'checked', checked ).trigger ( 'change' );
 
@@ -5482,10 +5456,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     colors: {
                         on: $switch.data ( 'color-on' ) || 'secondary',
                         off: $switch.data ( 'color-off' ) || 'gray'
-                    },
-                    icons: {
-                        on: $switch.data ( 'icon-on' ) || false,
-                        off: $switch.data ( 'icon-off' ) || false
                     }
                 };
 

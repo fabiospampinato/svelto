@@ -28,11 +28,11 @@ append main
                     | Select:
                     .placeholder
                 label Slider:
-                mixin slider("slider_name_1", 0, 75, 100)
+                +slider("slider_name_1", 0, 75, 100)
                 +multiple
                     span Switcher:
                     .spacer
-                    mixin switcher("switcher_name_1", "Something")
+                    +switch("switcher_name_1", "Something")
             +container-footer
                 +multiple
                     +form-button.gray Normal

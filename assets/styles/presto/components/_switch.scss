@@ -3,69 +3,64 @@
 
 .switch {
 
-    width: $switch-width;
-    height: $switch-height;
+    height: $switch-handler-size;
     margin-bottom: $layout-spacing;
 
-    input {
+    & > input {
         display: none;
     }
 
-    .switch-bar {
+    & > .switch-bar {
 
+        position: relative;
         width: $switch-bar-width;
         height: $switch-bar-height;
+        margin: ( $switch-handler-size - $switch-bar-height ) / 2 $switch-handler-half-size;
+        transition: background-color $switch-transition-all-duration;
         border-radius: $switch-bar-height;
-        margin: $switch-bar-vertical-height auto;
-        position: relative;
-        box-shadow: $switch-bar-shadow;
-        transition: background-color 0.2s ease 0s;
 
-        .switch-handler {
+        & > .switch-handler {
 
-            @include z-depth ( 3 );
+            @include z-depth ( $switch-handler-z-depth );
             @include center-absolutely ( false, $switch-handler-size );
             left: 0;
-            height: $switch-handler-size;
+            z-index: 0;
             width: $switch-handler-size;
-            border-radius: $switch-handler-size;
-            margin-left: -$switch-handler-half-size;
-            transition: background-color 0.2s ease 0s, left 0.2s ease 0s, box-shadow 0.2s ease 0s;
+            height: $switch-handler-size;
+            margin-left: - $switch-handler-half-size;
+            transition-duration: $switch-transition-all-duration;
+            transition-property: background-color, transform, left, box-shadow;
+            border-radius: 50%;
 
-            &:active {
-                box-shadow: none;
-                transition: box-shadow 0.2s ease 0s;
+            &:before {
+                background-color: inherit;
+                content: '';
+                position: absolute;
+                top: 0;
+                right: 0;
+                left: 0;
+                bottom: 0;
+                border-radius: 50%;
+                z-index: -1;
+                opacity: 0;
+                transition: scale($switch-handler-before-scale-inactive);
+                transition-property: opacity, transform, background-color;
+                transition-duration: $switch-transition-all-duration;
             }
 
-            .icon {
+            & > .icon {
+
+                font-size: $switch-handler-icon-font-size;
+                line-height: $switch-handler-icon-size;
                 width: $switch-handler-icon-size;
                 height: $switch-handler-icon-size;
-                line-height: $switch-handler-icon-size;
-                font-size: $switch-handler-icon-font-size;
                 text-align: center;
-            }
+                transition-property: opacity, color;
+                transition-duration: $switch-transition-all-duration;
+                opacity: 0;
 
-        }
-
-    }
-
-    &.dragging .handler {
-        z-index: 1;
-        transition: none;
-    }
-
-    &:not(.inactive) {
-
-        .bar {
-
-            cursor: pointer;
-
-            .handler {
-
-                cursor: move;
-
-                &:active {
-                    @include z-depth ( 2, $switch-handler-active-shadow );
+                &.off {
+                    margin-top: - $switch-handler-icon-size;
                 }
 
             }
@@ -74,19 +69,37 @@
 
     }
 
-    &.inactive {
+    &.dragging > .switch-bar > .switch-handler {
+        cursor: move;
+    }
 
-        .bar {
+    &:not(.checked) .icon.off, &.checked .icon.on {
+        opacity: 1;
+    }
 
-            @include color ( $switch-disabled-bar-color, $switch-disabled-bar-color-basic );
+    &:not(.switch-disabled) {
 
-            .handler {
-                @include color ( $switch-disabled-handler-color, $switch-disabled-handler-color-basic );
-                box-shadow: 0 0 0 $switch-inactive-handler-shadow-size $color-white-bg;
+        & > .switch-bar {
+
+            cursor: pointer;
+
+            & > .switch-handler {
+
+                cursor: pointer;
+
+                &:active:before {
+                    opacity: $switch-handler-before-active-opacity;
+                    transform: scale($switch-handler-before-scale-active);
+                }
+
             }
 
         }
 
+    }
+
+    &.switch-disabled {
+        opacity: $switch-disabled-opacity;
     }
 
 }

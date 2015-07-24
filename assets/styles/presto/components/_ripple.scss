@@ -27,13 +27,12 @@
             transform: scale(0);
             opacity: 0;
             border-radius: 50%;
-            background: transparentize($ripple-color-default, $ripple-transparentize-amount);
-
+            background-color: $ripple-color-default;
         }
 
         &.ripple-circle-show:before {
             transform: scale(1);
-            opacity: 1;
+            opacity: 1 - $ripple-transparentize-amount;
         }
 
         &.ripple-circle-hide:before {
@@ -51,76 +50,14 @@
 
     /* COLORS */
 
-    &.ripple-primary > .ripple-circle:before {
-        background: transparentize($color-primary, $ripple-transparentize-amount);
-    }
+    @each $name, $datas in $colors {
 
-    &.ripple-secondary > .ripple-circle:before {
-        background: transparentize($color-secondary, $ripple-transparentize-amount);
-    }
+        $bg: nth($datas, 1);
 
-    &.ripple-tertiary > .ripple-circle:before {
-        background: transparentize($color-tertiary, $ripple-transparentize-amount);
-    }
+        &.ripple-#{$name} > .ripple-circle:before {
+            background-color: $bg;
+        }
 
-    &.ripple-quaternary > .ripple-circle:before {
-        background: transparentize($color-quaternary, $ripple-transparentize-amount);
-    }
-
-    &.ripple-white > .ripple-circle:before {
-        background: transparentize($color-white, $ripple-transparentize-amount);
-    }
-
-    &.ripple-gray > .ripple-circle:before {
-        background: transparentize($color-gray, $ripple-transparentize-amount);
-    }
-
-    &.ripple-black > .ripple-circle:before {
-        background: transparentize($color-black, $ripple-transparentize-amount);
-    }
-
-    &.ripple-yellow > .ripple-circle:before {
-        background: transparentize($color-yellow, $ripple-transparentize-amount);
-    }
-
-    &.ripple-olive > .ripple-circle:before {
-        background: transparentize($color-olive, $ripple-transparentize-amount);
-    }
-
-    &.ripple-green > .ripple-circle:before {
-        background: transparentize($color-green, $ripple-transparentize-amount);
-    }
-
-    &.ripple-blue > .ripple-circle:before {
-        background: transparentize($color-blue, $ripple-transparentize-amount);
-    }
-
-    &.ripple-violet > .ripple-circle:before {
-        background: transparentize($color-violet, $ripple-transparentize-amount);
-    }
-
-    &.ripple-orange > .ripple-circle:before {
-        background: transparentize($color-orange, $ripple-transparentize-amount);
-    }
-
-    &.ripple-purple > .ripple-circle:before {
-        background: transparentize($color-purple, $ripple-transparentize-amount);
-    }
-
-    &.ripple-red > .ripple-circle:before {
-        background: transparentize($color-red, $ripple-transparentize-amount);
-    }
-
-    &.ripple-pink > .ripple-circle:before {
-        background: transparentize($color-pink, $ripple-transparentize-amount);
-    }
-
-    &.ripple-teal > .ripple-circle:before {
-        background: transparentize($color-teal, $ripple-transparentize-amount);
-    }
-
-    &.ripple-brown > .ripple-circle:before {
-        background: transparentize($color-brown, $ripple-transparentize-amount);
     }
 
 }
