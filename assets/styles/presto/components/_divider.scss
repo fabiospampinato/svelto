@@ -14,48 +14,60 @@ hr {
 .divider-wrp {
 
     margin-bottom: $layout-spacing;
-    text-align: center;
 
-    & > .divider {
+    &.block {
 
-        &.bold {
-            @include color ( $divider-bold-color, $divider-bold-color-basic );
+        text-align: center;
+
+        & > .divider {
+            @include color ( $divider-block-color, $divider-block-color-basic );
             display: inline-block;
-            padding: $divider-bold-padding;
-            border-radius: 10000px 10000px; //INFO: Otherwise it will look like an oval, not a rounded rectangle
+            padding: $divider-block-padding;
+            border-radius: 10000px 10000px;
         }
 
-        &.linear {
+    }
 
-            position: relative;
-            overflow: hidden;
+    &.linear {
 
-            &:before, &:after {
-                position: absolute;
-                top: calc(50% - 0.5px);
-                width: 50%;
-                content: '';
-                border-top: 1px solid $divider-linear-bg-color;
+        display: flex;
+        align-items: center;
+
+        & > hr {
+
+            flex-grow: 1;
+            margin: 0;
+
+            &.left {
+                order: 0;
             }
 
-            &:before {
-                margin-left: calc(-50% - 1em);
-            }
-
-            &:after {
-                margin-left: 1em;
+            &.right {
+                order: 2;
             }
 
         }
 
-        &.text {
+        & > .divider {
+            order: 1;
+            padding: $divider-linear-vertical-padding $divider-linear-horizontal-padding;
+        }
+
+    }
+
+    &.text {
+
+        & > .divider {
             @include size ( $divider-text-size );
-            font-weight: bold;
-            margin: 0 $layout-spacing $layout-spacing;
-            text-align: left;
+            font-weight: $divider-text-font-weight;
+            margin: 0 $layout-spacing;
             opacity: $divider-text-opacity;
         }
 
+    }
+
+    & > .divider > *:last-child {
+        margin-bottom: 0 !important;
     }
 
 }

@@ -1,11 +1,22 @@
 
-/* DIVIDER */
+/* BLOCK */
 
-$divider-bold-color: 'red';
-$divider-bold-color-basic: true;
-$divider-bold-padding: 0.3em 0.6em !default;
+$divider-block-color: 'red';
+$divider-block-color-basic: true;
+
+$divider-block-padding: 0.3em 0.6em !default;
+
+/* LINEAR */
 
 $divider-linear-bg-color: rgba(0, 0, 0, 0.1);
 
+$divider-linear-vertical-padding: 0;
+$divider-linear-horizontal-padding: $layout-spacing;
+
+/* TEXT */
+
 $divider-text-size: 'small';
+
 $divider-text-opacity: 0.75;
+
+$divider-text-font-weight: bold;
