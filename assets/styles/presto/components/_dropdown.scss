@@ -1,36 +1,38 @@
 
 /* DROPDOWN */
 
-//FIXME: per contare lo spazio occupato dai bordi si deve usare la radice di 2 * bordo, non bordo / 2
+//FIXME: If the content is too long it excedes the visible area
 
 .dropdown {
 
     position: fixed;
-    z-index: 1000;
-    display: none;
+    z-index: $dropdown-z-index;
     padding: $dropdown-padding;
-    opacity: 0;
-    transition: opacity 0.15s ease 0s;
+    transition: opacity $dropdown-transition-all-duration;
 
-    &.active {
-        opacity: 1;
+    &.moving {
+        transition: opacity $dropdown-transition-all-duration, top $dropdown-transition-moving-duration, left $dropdown-transition-moving-duration;
     }
 
-    &.no-tip {
+    &.no-tip, &.attached {
 
-        padding: 0;
-
-        & > .top-tip, & > .bottom-tip, & > .left-tip, & > .right-tip {
+        & > .dropdown-tip {
             display: none !important;
         }
+
+    }
+
+    &.attached {
+
+        padding: 0;
 
         &.top {
 
             margin-bottom: -1px;
 
             & > .container {
-                border-bottom-left-radius: 0;
                 border-bottom-right-radius: 0;
+                border-bottom-left-radius: 0;
             }
 
         }
@@ -46,138 +48,89 @@
 
         }
 
-        &.right {
-            margin-left: -1px;
-        }
-
         &.left {
             margin-right: -1px;
         }
 
-    }
-
-    & > .top-tip, & > .bottom-tip, & > .left-tip, & > .right-tip {
-
-        position: absolute;
-        width: 0;
-        height: 0;
-        white-space: nowrap;
-        display: none;
-        z-index: 1001;
-
-        &:before, &:after {
-            content: '';
-            display: block;
+        &.right {
+            margin-left: -1px;
         }
 
     }
 
-    &.top > .bottom-tip, &.bottom > .top-tip, &.left > .right-tip, &.right > .left-tip {
-        display: block;
-    }
+    & > .dropdown-tip {
 
-    & > .top-tip, & > .bottom-tip {
+        position: absolute;
+        z-index: 1;
+        display: none;
+        width: 0;
+        height: 0;
+
+        &:before, &:after {
+            display: block;
+            content: '';
+        }
 
         &:before {
+            @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, up );
             margin-left: - ( $dropdown-tip-bg-size / 2 );
         }
 
         &:after {
+            @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, up );
+            margin-top: - ( $dropdown-tip-fg-size / 2 );
             margin-left: - ( $dropdown-tip-fg-size / 2 );
         }
 
-    }
-
-    & > .top-tip {
-
-        top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-        left: 50%;
-
-        &:before {
-            @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, up );
+        &.top, &.bottom {
+            left: 50%;
         }
 
-        &:after {
-            @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, up );
-            margin-top: - ( $dropdown-tip-fg-size / 2 - $dropdown-tip-border-size / 2 );
+        &.top {
+            top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
         }
 
-    }
-
-    & > .bottom-tip {
-
-        bottom: $dropdown-padding + $dropdown-border-width;
-        left: 50%;
-
-        &:before {
-            @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, down );
+        &.bottom {
+            bottom: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+            transform: rotate(180deg);
         }
 
-        &:after {
-            @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, down );
-            margin-top: - ( $dropdown-tip-bg-size / 2 );
+        &.left, &.right {
+            top: 50%;
+            margin-top: - ( $dropdown-tip-bg-size / 4 );
+        }
+
+        &.left {
+            left: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+            transform: rotate(-90deg);
+        }
+
+        &.right {
+            right: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+            transform: rotate(90deg);
         }
 
     }
 
-    & > .left-tip, & > .right-tip {
-
-        &:before {
-            margin-top: - ( $dropdown-tip-bg-size / 2 );
-        }
-
-        &:after {
-            margin-top: - ( $dropdown-tip-bg-size / 2 + $dropdown-tip-fg-size / 2 ) + ( $dropdown-tip-border-size / 2 );
-        }
-
-    }
-
-    & > .left-tip {
-
-        left: $dropdown-padding - ( $dropdown-tip-fg-size / 2 ) + $dropdown-border-width;
-        top: 50%;
-
-        &:before {
-            @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, left );
-        }
-
-        &:after {
-            @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, left );
-            margin-left: $dropdown-tip-border-size;
-        }
-
-    }
-
-    & > .right-tip {
-
-        right: $dropdown-padding + $dropdown-border-width;
-        top: 50%;
-
-        &:before {
-            @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, right );
-        }
-
-        &:after {
-            @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, right );
-            margin-right: $dropdown-tip-border-size;
-        }
-
+    &.top > .dropdown-tip.bottom, &.bottom > .dropdown-tip.top, &.left > .dropdown-tip.right, &.right > .dropdown-tip.left {
+        display: block;
     }
 
     & > .container {
-
-        @include z-depth ( 4 );
-        margin-bottom: 0 !important;
-        border-width: $dropdown-border-width;
-        border-style: solid;
+        @include z-depth ( $dropdown-z-depth );
+        overflow: hidden;
+        max-width: $dropdown-container-max-width;
         max-height: $dropdown-container-max-height;
-        overflow-x: hidden;
-        overflow-y: auto;
-
-        & > .footer {
-            margin-bottom: -$layout-spacing !important; //FIXME: Without it there's an extra pixel that causes an overflow scroll on dropdown
-        }
-
+        margin-bottom: 0;
+        border-width: $dropdown-border-width;
     }
+
+    /* ANIMATIONS */
+
+    &:not(.active) {
+        pointer-events: none;
+        opacity: 0;
+    }
+
 
 }

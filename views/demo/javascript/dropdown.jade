@@ -11,15 +11,18 @@ append main
         +dropdown-btn-icon("action-settings", "base").rounded
         +dropdown-btn("Dividers", "dividers")
         +dropdown-btn("Advanced", "advanced")
+        +dropdown-btn("Long text", "long_text")
+        +dropdown-btn("Long text 2", "long_text2")
 
 append body
         +dropdown("base")
-            +multiple.vertical.fluid.joined
+            +multiple.vertical.stretched.nowrap
                 +button-simple("#1").xsmall.sharp Action 1
                 +button-simple("#2").xsmall.sharp Action 2
                 +button-simple("#3").xsmall.sharp Action 3
+                +button-simple("#312313").xsmall.sharp Action 312313
         +dropdown("dividers")
-            +multiple.vertical.fluid
+            +multiple.vertical.stretched.nowrap
                 +button-simple("#1").xsmall.sharp Action 1
                 +divider Divider
                 +button-simple("#2").xsmall.sharp Action 2
@@ -31,6 +34,18 @@ append body
                 +divider-text Section
                 +button-simple("#5").xsmall.sharp Action 5
         +dropdown("advanced")
-            +container-header("Header").transparent
+            +container-header("Header").inherit
             +container-content Content
+            +container-footer Footer
+        +dropdown("long_text")
+            +container-header("Lorem ipsum").inherit
+            +container-content
+                +lorem-ipsum
+            +container-footer Footer
+        +dropdown("long_text2")
+            +container-header("Lorem ipsum 2").inherit
+            +container-content
+                +lorem-ipsum
+                +lorem-ipsum
+                +lorem-ipsum
             +container-footer Footer

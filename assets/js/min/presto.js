@@ -3268,6 +3268,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* DROPDOWN */
 
+//TODO: add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 //TODO: add dropdown-closer
 
 ;(function ( $, window, document, undefined ) {
@@ -3297,13 +3298,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$dropdown = this.$element;
             this.id = this.$dropdown.attr ( 'id' );
-            this.$top_tip = this.$dropdown.find ( '.top-tip' );
-            this.$right_tip = this.$dropdown.find ( '.right-tip' );
-            this.$bottom_tip = this.$dropdown.find ( '.bottom-tip' );
-            this.$left_tip = this.$dropdown.find ( '.left-tip' );
+            this.$tips = this.$dropdown.find ( '.dropdown-tip' );
+            this.$top_tip = this.$tips.filter ( '.top' );
+            this.$right_tip = this.$tips.filter ( '.right' );
+            this.$bottom_tip = this.$tips.filter ( '.bottom' );
+            this.$left_tip = this.$tips.filter ( '.left' );
             this.$actionables = this.$dropdown.find ( '.actionable' );
 
             this.$triggers = $('.dropdown-trigger[data-dropdown="' + this.id + '"]');
+
+            this.hasTips = !this.$dropdown.hasClass ( 'no-tip' );
+            this.isAttached = this.$dropdown.hasClass ( 'attached' );
 
             this.opened = false;
 
@@ -3315,7 +3320,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._on ( this.$actionables, 'click', this.close );
 
-//          this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
+            // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
         },
 
@@ -3376,7 +3381,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             // Variables
 
             var $trigger = $(assignments[this.id]),
-                no_tip = $trigger.hasClass ( 'no-tip' ) || this.$dropdown.hasClass ( 'no-tip' );
+                no_tip = $trigger.hasClass ( 'no-tip' ) || !this.hasTips || this.isAttached;
 
             // Reset classes
 
@@ -3538,31 +3543,29 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 left: left
             });
 
-            $trigger.addClass ( direction );
             this.$dropdown.addClass ( direction );
+            $trigger.addClass ( 'dropdown-' + direction );
 
             // positionate the tip
 
             if ( !no_tip ) {
 
-                drop_offset = this.$dropdown.offset ();
-
                 switch ( direction ) {
 
                     case 'bottom':
-                        this.$top_tip.css ( 'left', trig_center_left - drop_offset.left );
+                        this.$top_tip.css ( 'left', trig_center_left - left );
                         break;
 
                     case 'top':
-                        this.$bottom_tip.css ( 'left', trig_center_left - drop_offset.left );
+                        this.$bottom_tip.css ( 'left', trig_center_left - left );
                         break;
 
                     case 'right':
-                        this.$left_tip.css ( 'top', trig_center_top - drop_offset.top );
+                        this.$left_tip.css ( 'top', trig_center_top - top );
                         break;
 
                     case 'left':
-                        this.$right_tip.css ( 'top', trig_center_top - drop_offset.top );
+                        this.$right_tip.css ( 'top', trig_center_top - top );
                         break;
 
                 }
@@ -3585,26 +3588,25 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 $(assignments[this.id]).removeClass ( 'top bottom left right active' );
 
+                if ( this.opened && assignments[this.id] !== trigger ) {
+
+                    this.$dropdown.addClass ( 'moving' );
+
+                }
+
                 assignments[this.id] = trigger;
 
                 $(trigger).addClass ( 'active' );
 
             }
 
-            this.$dropdown.addClass ( 'show' );
-
             this._positionate ();
 
-            this._delay ( function () {
-
-                this.$dropdown.addClass ( 'active' );
-
-            });
+            this.$dropdown.addClass ( 'active' );
 
             this.opened = true;
 
-            this._delay ( this._bind_window_click );
-
+            this._delay ( this._bind_window_click ); //FIXME: Why without the delay it doesn't work?
             this._bind_window_resize_scroll ();
 
             this._trigger ( 'open' );
@@ -3615,18 +3617,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             $(assignments[this.id]).removeClass ( 'top bottom left right active' );
 
-            this.$dropdown.removeClass ( 'active' );
-
-            this._delay ( function () {
-
-                this.$dropdown.removeClass ( 'show' );
-
-            }, 150 );
+            this.$dropdown.removeClass ( 'active moving' );
 
             this.opened = false;
 
             this._unbind_window_click ();
-
             this._unbind_window_resize_scroll ();
 
             this._trigger ( 'close' );

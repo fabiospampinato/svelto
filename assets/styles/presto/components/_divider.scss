@@ -3,7 +3,8 @@
 
 hr {
     height: 1px;
-    margin-bottom: $layout-spacing;
+    margin-top: - $layout-half-spacing;
+    margin-bottom: $layout-half-spacing;
     border: none;
     background-color: $divider-linear-bg-color;
 }
@@ -50,7 +51,7 @@ hr {
         &.text {
             @include size ( $divider-text-size );
             font-weight: bold;
-            margin: - $layout-half-spacing 0 $layout-half-spacing $layout-spacing;
+            margin: 0 $layout-spacing $layout-spacing;
             text-align: left;
             opacity: $divider-text-opacity;
         }

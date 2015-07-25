@@ -179,10 +179,8 @@
 
     /* ANIMATIONS */
 
-    & {
-        transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties
-        transition-property: opacity, font-size, padding, margin, height;
-    }
+    transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties
+    transition-property: opacity, font-size, padding, margin, height;
 
     &:not(.active) {
         font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere

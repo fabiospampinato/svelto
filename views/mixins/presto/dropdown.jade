@@ -13,9 +13,9 @@ mixin dropdown-btn-icon(icon, id)
 
 mixin dropdown(id)
     .dropdown(id="dropdown-"+id)&attributes(attributes)
-        .top-tip
-        .left-tip
-        .right-tip
+        .dropdown-tip.top
+        .dropdown-tip.right
+        .dropdown-tip.bottom
+        .dropdown-tip.left
         +container
             block
-        .bottom-tip

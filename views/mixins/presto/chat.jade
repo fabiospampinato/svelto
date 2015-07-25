@@ -33,7 +33,7 @@ mixin chat-msg(options)
             .chat-msg-indicator
         .chat-msg-content
             +container
-                +container-header.transparent
+                +container-header.inherit
                     if options.sender
                         +multiple-left
                             if options.sender.url

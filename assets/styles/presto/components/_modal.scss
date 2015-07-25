@@ -38,7 +38,8 @@
         max-width: $modal-max-width;
         max-height: $modal-max-height;
         margin: auto;
-        transition: transform $modal-transition-all-duration, opacity $modal-transition-all-duration;
+        transition-property: transform, opacity;
+        transition-duration: $modal-transition-all-duration;
 
         & > .content {
             overflow: auto;
@@ -50,7 +51,6 @@
 
     &:not(.active) {
 
-        transition-delay: $modal-transition-all-duration;
         pointer-events: none;
 
         & > .container {
@@ -61,8 +61,6 @@
     }
 
     &.active {
-
-        transition-delay: 0s;
 
         & > .background {
             background-color: $modal-background-color;

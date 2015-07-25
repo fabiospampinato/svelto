@@ -1,4 +1,10 @@
 
+/* CODEKIT OVERLAYS REMOVER */
+
+#lpckWarningOverlay { //INFO: Red overlay
+    display: none !important;
+}
+
 /* GENERAL */
 
 *, *:before, *:after { //INFO: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw

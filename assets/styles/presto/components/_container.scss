@@ -76,4 +76,8 @@
 
     }
 
+    & > *:last-child:not(.container-footer) {
+        margin-bottom: 0 !important;
+    }
+
 }
