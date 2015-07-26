@@ -5,61 +5,106 @@ extends ../../layout.jade
 append main
     +divider Normal
 
-    +multiple
-        +input({label: "Base"})
-        +input({label: "Compact"}).compact
-        +input({label: "Outlined"}).outlined
-        +input({label: "Disabled"}).disabled
+    +container-simple
+        +multiple
+            +input({label: "Base"})
+            +input({label: "Compact"}).compact
+            +input({label: "Outlined"}).outlined
+            +input({label: "Disabled"}).disabled
 
-    +divider States
+    +divider Colors
 
-    +multiple
-        +input({label: "Success"}).success
-        +input({label: "Error"}).error
-        +input({label: "Warning"}).warning
+    +container-simple
+        +multiple
+            +input({label: "Primary"}).input-primary Primary
+            +input({label: "Secondary"}).input-secondary Secondary
+            +input({label: "Tertiary"}).input-tertiary Tertiary
+            +input({label: "Quaternary"}).input-quaternary Quaternary
+            +input({label: "White"}).input-white White
+            +input({label: "Gray"}).input-gray Gray
+            +input({label: "Black"}).input-black Black
+            +input({label: "Yellow"}).input-yellow Yellow
+            +input({label: "Olive"}).input-olive Olive
+            +input({label: "Green"}).input-green Green
+            +input({label: "Blue"}).input-blue Blue
+            +input({label: "Violet"}).input-violet Violet
+            +input({label: "Orange"}).input-orange Orange
+            +input({label: "Purple"}).input-purple Purple
+            +input({label: "Red"}).input-red Red
+            +input({label: "Pink"}).input-pink Pink
+            +input({label: "Teal"}).input-teal Teal
+            +input({label: "Brown"}).input-brown Brown
+            +input({label: "Transparent"}).input-transparent Transparent
+            +input({label: "Inherit"}).input-inherit Inherit
+            +input({label: "Base"}).input-base Base
+
+    +divider Colors advanced
+
+    +container-simple
+        +multiple
+            +input({label: "White - Secondary"}).white.input-secondary White - Secondary
+            +input({label: "Primary - Secondary"}).primary.input-secondary Primary - Secondary
+            +input({label: "Red - Yellow"}).red.input-yellow Red - Yellow
 
     +divider Fluid
 
-    +input({label: "Fluid"}).fluid
+    +container-simple
+        +input({label: "Fluid"}).fluid
 
-    +divider No label
+    +divider Unraise
 
-    +input({label: "No label"}).fluid.no-label
+    +container-simple
+        +input({label: "Unraise"}).fluid.unraise
+
+    +divider No bar - Unraise
+
+    +container-simple
+        +input({label: "No bar"}).fluid.no-bar.unraise
+
+    +divider Inside a container
+
+    +container-simple
+        +input({label: "Inside a container"})
+
+    +container-simple.yellow
+        +input({label: "Inside a yellow container"})
 
     +divider Toolbar
 
     +multiple
         +multiple.joined
-            +input({value: "Search"})
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
             +button-icon("action-search")
         +multiple.joined
-            +input({value: "Search"})
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
             +button-icon("action-search").secondary
         +multiple.joined
-            +input({label: "Search..."})
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
             +button-simple.primary Search
         +multiple.joined
             +label-simple.gray http://
-            +input({label: "Search..."})
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
         +multiple.joined
             +label-icon("social-people")
-            +input({value: "Search"})
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
         +multiple.joined
-            +input({value: "Search"})
-            +label-icon("navigation-refresh").compact.rotating
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +label.compact
+                +label-center
+                    +icon("navigation-refresh").rotating
         +multiple.joined
             +button.teal
                 +button-left
                     +icon("maps-local-grocery-store")
                 +button-center Checkout
-            +input({value: "34.50€"})
+            +input({label: "Placeholder...", value: "35.50€"}).no-bar.unraise.white
 
     +divider Toolbar - Outlined
 
     +multiple
-        +multiple.joined.outlined
-            +input({value: "Outlined"})
-            +button-icon("action-search")
         +multiple.joined
-            +label-simple.gray http://
-            +input({label: "Outlined..."}).outlined
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white.outlined
+            +button-icon("action-search").outlined
+        +multiple.joined
+            +label-simple.gray.outlined http://
+            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white.outlined

@@ -1,24 +1,22 @@
 
 /* INPUT */
 
-//TODO: add more space if we are going to move the label, but still at the beginning keep it centered
-//TODO: if we add a color the bottom line is not displayed, make it always displayed, like with an rgba color maybe...
+//FIXME: The outlined version has not border at the bottom
+//FIXME: Add perfect support for rounded .input-wrp
 
 .input-wrp {
 
     @include color ( $input-wrp-color, $input-wrp-color-basic );
     position: relative;
     margin-bottom: $layout-spacing;
-    border-width: 0 0 $input-wrp-border-bottom-width 0;
     border-style: solid;
-    border-radius: $input-wrp-border-radius;
 
-    & > input {
+    & > .text-field {
 
         @include color ( $input-color, $input-color-basic );
+        width: 100%;
         padding: $input-vertical-padding $input-horizontal-padding;
         border: none;
-        width: 100%;
 
         &:focus ~ .input-bar {
             transform: scaleX(1);
@@ -28,14 +26,14 @@
 
     & > label {
         position: absolute;
-        transition-property: transform, color, opacity;
-        transition-duration: $input-transition-all-duration;
-        pointer-events: none;
         top: 50%;
         margin-top: auto;
-        opacity: $input-label-opacity;
         margin-bottom: auto;
+        transition-duration: $input-transition-all-duration;
+        transition-property: transform, color, opacity;
         transform: translateY(-50%) translateX($input-horizontal-padding) scale(1);
+        pointer-events: none;
+        opacity: $input-label-opacity;
     }
 
     & > .input-bar {
@@ -44,72 +42,69 @@
         right: 0;
         bottom: - $input-wrp-border-bottom-width;
         left: 0;
-        border-bottom: $input-bar-height solid $input-active-color;
         height: $layout-spacing;
         content: '';
         transition: transform $input-transition-all-duration;
         transform: scaleX(0);
-        border-bottom-left-radius: inherit; //FIXME: make it better
+        border-bottom: $input-bar-height solid $input-active-color;
         border-bottom-right-radius: inherit; //FIXME: make it better
+        border-bottom-left-radius: inherit; //FIXME: make it better
     }
 
-    &.success {
+    /* COLORS */
 
-        & > label {
-            color: $input-success-color !important;
-        }
+    @each $name, $datas in $colors {
 
-        & > .input-bar {
-            border-bottom-color: $input-success-color;
-        }
+        $bg: nth($datas, 1);
 
-    }
+        &.input-#{$name} {
 
-    &.error {
+            & > .text-field {
 
-        & > label {
-            color: $input-error-color !important;
-        }
+                &:focus ~ label {
+                    color: $bg !important;
+                }
 
-        & > .input-bar {
-            border-bottom-color: $input-error-color;
-        }
-
-    }
-
-    &.warning {
-
-        & > label {
-            color: $input-warning-color !important;
-        }
-
-        & > .input-bar {
-            border-bottom-color: $input-warning-color;
-        }
-
-    }
-
-    &:not(.no-label) > input {
-
-        &:focus ~ label, &:valid ~ label {
-            opacity: $input-label-active-opacity;
-            transform: translateY(-150%) translateX(0) scale($input-label-active-scale);
-        }
-
-        &:focus ~ label {
-            color: $input-active-color;
-        }
-
-    }
-
-    &.no-label {
-
-        & > input {
-
-            &:valid ~ label {
-                opacity: 0;
             }
 
+            & > .input-bar {
+                border-bottom-color: $bg !important;
+            }
+
+        }
+
+    }
+
+    &:not(.outlined) {
+        border-width: 0 0 $input-wrp-border-bottom-width 0;
+    }
+
+    &:not(.unraise) {
+
+        & > .text-field {
+
+            margin-top: $input-vertical-padding;
+
+            &:focus ~ label, &:valid ~ label {
+                transform: translateY(-150%) translateX(0) scale($input-label-active-scale);
+                opacity: $input-label-active-opacity;
+            }
+
+            &:focus ~ label {
+                color: $input-active-color;
+            }
+
+        }
+
+        &.compact > .text-field {
+            margin-top: $input-compact-vertical-padding;
+        }
+
+    }
+
+    &.unraise {
+
+        & > .text-field {
 
             &:valid ~ label {
                 opacity: 0;
@@ -123,13 +118,25 @@
 
     }
 
+    &.no-bar {
+
+        &:not(.outlined) {
+            border-bottom-width: 0;
+        }
+
+        & > .input-bar {
+            display: none;
+        }
+
+    }
+
     &.fluid {
         width: 100%;
     }
 
     &.compact {
 
-        & > input {
+        & > .text-field {
             padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
         }
 

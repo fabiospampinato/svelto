@@ -7,10 +7,19 @@ $container-color-basic: true;
 $container-border-width: 1px !default;
 $contianer-border-radius: $border-radius-medium;
 
+/* HEADER */
+
 $container-header-color: 'primary';
 $container-header-color-basic: false;
 
 $container-header-border-width: 1px !default;
+
+/* CONTENT */
+
+$container-content-color: 'inherit';
+$container-content-color-basic: true;
+
+/* FOOTER */
 
 $container-footer-color: $container-color;
 $container-footer-color-basic: true;

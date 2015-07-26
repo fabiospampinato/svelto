@@ -6,6 +6,7 @@
 .multiple-wrp {
 
     margin: 0 #{- $grid-gutter-half-width} $layout-spacing;
+    border-color: inherit;
 
     &.limited > .multiple {
         max-width: $layout-max-width + $grid-gutter-width; //FIXME: Does it work?
@@ -117,6 +118,7 @@
 
     & > .multiple {
 
+        border-color: inherit;
         margin-bottom: - $layout-spacing;
         display: flex;
         flex-wrap: wrap;

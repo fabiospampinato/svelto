@@ -48,6 +48,7 @@
 
     & > .container-content {
 
+        @include color ( $container-content-color, $container-content-color-basic );
         overflow: auto;
         flex-grow: 1;
         padding: $layout-spacing;
@@ -77,6 +78,16 @@
             margin-bottom: 0 !important;
         }
 
+    }
+
+    & > *:first-child.container-content {
+        border-top-left-radius: inherit;
+        border-top-right-radius: inherit;
+    }
+
+    & > *:last-child.container-content {
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
     }
 
     & > *:last-child:not(.container-footer) {
