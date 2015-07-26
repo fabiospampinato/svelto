@@ -15,8 +15,6 @@ append main
 
 append body-end
     +script.
-        var loading = false;
         function loading_test () {
-            loading = !loading;
-            $("p").parent ( '.container' ).loading ( loading );
+            $("p").parent ( '.container' ).loading ();
         }

@@ -9,33 +9,38 @@
 
     $.fn.loading = function ( force ) {
 
+        this.addClass ( 'spinner-overlay-activable' );
+
         if ( _.isUndefined ( force ) ) {
 
-            force = !this.hasClass ( 'loading' );
+            force = !this.hasClass ( 'spinner-overlay-active' );
 
         }
 
-        if ( force ) {
+        var $overlay = this.children ( '.spinner-overlay' );
 
-            this.addClass ( 'loading' );
+        if ( $overlay.length === 0 ) {
 
-            $.reflow ();
-
-            this.addClass ( 'loading-active' );
-
-        } else {
-
-            this.removeClass ( 'loading-active' );
-
-            setTimeout ( (function () {
-
-                //TODO: do we need a reflow here? If we don't why?
-
-                this.removeClass ( 'loading' );
-
-            }).bind ( this ), 200 );
+            this.append (
+                '<div class="spinner-overlay">' +
+                    '<div class="spinner-wrp">' +
+                        '<div class="spinner secondary">' +
+                            '<div class="circle-wrp left">' +
+                                '<div class="circle"></div>' +
+                            '</div>' +
+                            '<div class="circle-wrp right">' +
+                                '<div class="circle"></div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+            );
 
         }
+
+        $.reflow (); //FIXME: is it needed?
+
+        this.toggleClass ( 'spinner-overlay-active', force );
 
         return this;
 

@@ -1,4 +1,67 @@
 
+/* SPINNER OVERLAY */
+
+.spinner-overlay-activable {
+
+    position: relative;
+
+    & > *:not(.spinner-overlay) {
+        transition: opacity $spinner-overlay-transition-all-duration;
+    }
+
+    &.spinner-overlay-active {
+
+        & > .spinner-overlay {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        & > *:not(.spinner-overlay) {
+            pointer-events: none;
+            opacity: $spinner-overlay-children-opacity;
+        }
+
+    }
+
+}
+
+.spinner-overlay, .spinner-overlay:before, .spinner-overlay > .spinner-wrp {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin: auto;
+}
+
+.spinner-overlay {
+
+    @include color ( $spinner-overlay-color, $spinner-overlay-color-basic );
+    visibility: hidden;
+    transition-duration: $spinner-overlay-transition-all-duration;
+    transition-property: opacity, transfrom;
+    transform: scale(0);
+    pointer-events: none;
+    opacity: 0;
+
+    &:before {
+        @include color ( $spinner-overlay-color, $spinner-overlay-color-basic );
+        @include z-depth ( $spinner-overlay-z-depth );
+        visibility: visible;
+        width: $spinner-overlay-size;
+        height: $spinner-overlay-size;
+        content: '';
+        border-radius: 50%;
+    }
+
+    & > .spinner-wrp {
+        visibility: visible;
+        width: $spinner-overlay-spinner-size;
+        height: $spinner-overlay-spinner-size;
+    }
+
+}
+
 /* SPINNER */
 
 .spinner-wrp {

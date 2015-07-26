@@ -18,3 +18,18 @@ $spinner-shrink-time: 400ms;
 $spinner-animation-active-duration: 1568.2352941ms; //INFO: It comes from this formula (5 points star): 360deg * $spinner-arc-time / ( $spinner-arc-start-rotation + ( 360deg - $spinner-arc-size ) )
 
 $spinner-animation-all-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+
+/* SPINNER OVERLAY */
+
+$spinner-overlay-color: 'inherit';
+$spinner-overlay-color-basic: true;
+
+$spinner-overlay-z-depth: 5;
+
+$spinner-overlay-size: 62px;
+
+$spinner-overlay-spinner-size: 42px;
+
+$spinner-overlay-children-opacity: 0.5;
+
+$spinner-overlay-transition-all-duration: 0.25s;

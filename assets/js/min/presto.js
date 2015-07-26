@@ -1647,6 +1647,57 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* LOADING */
+
+;(function ( $, window, document, undefined ) {
+
+    'use strict';
+
+    /* LOADING */
+
+    $.fn.loading = function ( force ) {
+
+        this.addClass ( 'spinner-overlay-activable' );
+
+        if ( _.isUndefined ( force ) ) {
+
+            force = !this.hasClass ( 'spinner-overlay-active' );
+
+        }
+
+        var $overlay = this.children ( '.spinner-overlay' );
+
+        if ( $overlay.length === 0 ) {
+
+            this.append (
+                '<div class="spinner-overlay">' +
+                    '<div class="spinner-wrp">' +
+                        '<div class="spinner secondary">' +
+                            '<div class="circle-wrp left">' +
+                                '<div class="circle"></div>' +
+                            '</div>' +
+                            '<div class="circle-wrp right">' +
+                                '<div class="circle"></div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>' +
+                '</div>'
+            );
+
+        }
+
+        $.reflow (); //FIXME: is it needed?
+
+        this.toggleClass ( 'spinner-overlay-active', force );
+
+        return this;
+
+    };
+
+}( lQuery, window, document ));
+
+
+
  /* NOTIFICATION */
 
 //INFO: If the tab has a focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
@@ -3647,52 +3698,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         $('.dropdown').dropdown ();
 
     });
-
-}( lQuery, window, document ));
-
-
-
-/* LOADING */
-
-;(function ( $, window, document, undefined ) {
-
-    'use strict';
-
-    /* LOADING */
-
-    $.fn.loading = function ( force ) {
-
-        if ( _.isUndefined ( force ) ) {
-
-            force = !this.hasClass ( 'loading' );
-
-        }
-
-        if ( force ) {
-
-            this.addClass ( 'loading' );
-
-            $.reflow ();
-
-            this.addClass ( 'loading-active' );
-
-        } else {
-
-            this.removeClass ( 'loading-active' );
-
-            setTimeout ( (function () {
-
-                //TODO: do we need a reflow here? If we don't why?
-
-                this.removeClass ( 'loading' );
-
-            }).bind ( this ), 200 );
-
-        }
-
-        return this;
-
-    };
 
 }( lQuery, window, document ));
 
