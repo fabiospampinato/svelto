@@ -6,51 +6,60 @@ append main
     +divider Normal
 
     +multiple
-        input(type="text", name="test", value="Base")
-        input(type="text", name="test", value="Compact").compact
-        input(type="text", name="test", value="Outlined").outlined
-        input(type="text", name="test", value="Disabled" disabled="disabled")
+        +input({label: "Base"})
+        +input({label: "Compact"}).compact
+        +input({label: "Outlined"}).outlined
+        +input({label: "Disabled"}).disabled
+
+    +divider States
+
+    +multiple
+        +input({label: "Success"}).success
+        +input({label: "Error"}).error
+        +input({label: "Warning"}).warning
 
     +divider Fluid
 
-    input(type="text", name="test", value="Fluid").fluid
+    +input({label: "Fluid"}).fluid
+
+    +divider No label
+
+    +input({label: "No label"}).fluid.no-label
 
     +divider Toolbar
 
     +multiple
         +multiple.joined
-            input(type="text", name="test", value="Search")
+            +input({value: "Search"})
             +button-icon("action-search")
         +multiple.joined
-            input(type="text", name="test", value="Search")
+            +input({value: "Search"})
             +button-icon("action-search").secondary
         +multiple.joined
-            input(type="text", name="test", placeholder="Search...")
+            +input({label: "Search..."})
             +button-simple.primary Search
         +multiple.joined
             +label-simple.gray http://
-            input(type="text", name="test", placeholder="Search...")
+            +input({label: "Search..."})
         +multiple.joined
             +label-icon("social-people")
-            input(type="text", name="test", value="Search")
+            +input({value: "Search"})
         +multiple.joined
-            input(type="text", name="test", value="Search")
-            +label.compact
-                +label-center
-                    +icon("navigation-refresh").rotating
+            +input({value: "Search"})
+            +label-icon("navigation-refresh").compact.rotating
         +multiple.joined
             +button.teal
                 +button-left
                     +icon("maps-local-grocery-store")
                 +button-center Checkout
-            input(type="text", name="test", value="34.50€")
+            +input({value: "34.50€"})
 
     +divider Toolbar - Outlined
 
     +multiple
         +multiple.joined.outlined
-            input(type="text", name="test", value="Outlined")
+            +input({value: "Outlined"})
             +button-icon("action-search")
         +multiple.joined
             +label-simple.gray http://
-            input(type="text", name="test", placeholder="Outlined...").outlined
+            +input({label: "Outlined..."}).outlined

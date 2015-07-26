@@ -1,0 +1,7 @@
+//- input.jade
+
+mixin input(options)
+    .input-wrp&attributes(attributes)
+        input(type=(options.type || "text"), value=(options.value || ""), name=(options.name || ""), required)
+        label= (options.label || "")
+        .input-bar

@@ -1,37 +1,152 @@
 
 /* INPUT */
 
-input {
+//TODO: add more space if we are going to move the label, but still at the beginning keep it centered
+//TODO: if we add a color the bottom line is not displayed, make it always displayed, like with an rgba color maybe...
 
-    @include color ( $input-color, $input-color-basic );
-    border: none;
-    border-radius: $border-radius-medium;
-    font-family: $font-family;
-    padding: $input-vertical-padding $input-horizontal-padding;
-    box-sizing: border-box;
-    display: inline-block;
-    line-height: 0.97em;
-    min-width: 0px;
+.input-wrp {
+
+    @include color ( $input-wrp-color, $input-wrp-color-basic );
+    position: relative;
     margin-bottom: $layout-spacing;
-    font-size: 0.97em; //FIXME: Why does it work this 0.02 less? (actually even 0.01)
+    border-width: 0 0 $input-wrp-border-bottom-width 0;
+    border-style: solid;
+    border-radius: $input-wrp-border-radius;
+
+    & > input {
+
+        @include color ( $input-color, $input-color-basic );
+        padding: $input-vertical-padding $input-horizontal-padding;
+        border: none;
+        width: 100%;
+
+        &:focus ~ .input-bar {
+            transform: scaleX(1);
+        }
+
+    }
+
+    & > label {
+        position: absolute;
+        transition-property: transform, color, opacity;
+        transition-duration: $input-transition-all-duration;
+        pointer-events: none;
+        top: 50%;
+        margin-top: auto;
+        opacity: $input-label-opacity;
+        margin-bottom: auto;
+        transform: translateY(-50%) translateX($input-horizontal-padding) scale(1);
+    }
+
+    & > .input-bar {
+        position: absolute;
+        z-index: 1;
+        right: 0;
+        bottom: - $input-wrp-border-bottom-width;
+        left: 0;
+        border-bottom: $input-bar-height solid $input-active-color;
+        height: $layout-spacing;
+        content: '';
+        transition: transform $input-transition-all-duration;
+        transform: scaleX(0);
+        border-bottom-left-radius: inherit; //FIXME: make it better
+        border-bottom-right-radius: inherit; //FIXME: make it better
+    }
+
+    &.success {
+
+        & > label {
+            color: $input-success-color !important;
+        }
+
+        & > .input-bar {
+            border-bottom-color: $input-success-color;
+        }
+
+    }
+
+    &.error {
+
+        & > label {
+            color: $input-error-color !important;
+        }
+
+        & > .input-bar {
+            border-bottom-color: $input-error-color;
+        }
+
+    }
+
+    &.warning {
+
+        & > label {
+            color: $input-warning-color !important;
+        }
+
+        & > .input-bar {
+            border-bottom-color: $input-warning-color;
+        }
+
+    }
+
+    &:not(.no-label) > input {
+
+        &:focus ~ label, &:valid ~ label {
+            opacity: $input-label-active-opacity;
+            transform: translateY(-150%) translateX(0) scale($input-label-active-scale);
+        }
+
+        &:focus ~ label {
+            color: $input-active-color;
+        }
+
+    }
+
+    &.no-label {
+
+        & > input {
+
+            &:valid ~ label {
+                opacity: 0;
+            }
+
+
+            &:valid ~ label {
+                opacity: 0;
+            }
+
+        }
+
+        & > label {
+            transition-duration: $input-transition-all-duration / 2;
+        }
+
+    }
 
     &.fluid {
         width: 100%;
     }
 
     &.compact {
-        padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
+
+        & > input {
+            padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
+        }
+
+        & > label {
+            transform: translateY(-50%) translateX($input-compact-horizontal-padding);
+        }
+
     }
 
-    &[disabled] {
-        opacity: 0.5;
+    &.disabled {
+        opacity: $input-disabled-opacity;
     }
 
 }
 
 /* RESET NUMBER INPUTS */
 
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
     -webkit-appearance: none;
 }

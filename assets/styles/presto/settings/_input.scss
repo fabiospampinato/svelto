@@ -1,7 +1,16 @@
 
+/* INPUT WRAPPER */
+
+$input-wrp-color: 'inherit';
+$input-wrp-color-basic: true;
+
+$input-wrp-border-radius: $border-radius-medium;
+
+$input-wrp-border-bottom-width: 1px;
+
 /* INPUT */
 
-$input-color: 'white';
+$input-color: 'inherit';
 $input-color-basic: true;
 
 $input-horizontal-padding: 1.5em !default;
@@ -9,3 +18,26 @@ $input-vertical-padding: 0.78571em !default;
 
 $input-compact-horizontal-padding: 0.78571em !default;
 $input-compact-vertical-padding: 0.78571em !default;
+
+/* LABEL */
+
+$input-label-opacity: 0.75;
+$input-label-active-opacity: 1;
+$input-label-active-scale: 0.75;
+
+/* BAR */
+
+$input-bar-height: 2px;
+
+/* STATES */
+
+$input-active-color: $color-blue;
+$input-success-color: $color-green;
+$input-error-color: $color-red;
+$input-warning-color: $color-yellow;
+
+/* OTHERS */
+
+$input-transition-all-duration: 0.2s;
+
+$input-disabled-opacity: 0.5;
