@@ -1,0 +1,160 @@
+
+/* SPINNER */
+
+.spinner-wrp {
+
+    position: relative;
+    display: inline-block;
+    overflow: hidden;
+    width: $spinner-size;
+    height: $spinner-size;
+    margin-bottom: $layout-spacing;
+    animation: spinner-wrp-rotate $spinner-animation-active-duration linear infinite;
+    background-color: transparent !important;
+
+    & > .spinner {
+
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        animation: fill-unfill-rotate ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both;
+        border-color: $spinner-default-border-color;
+        background-color: transparent !important;
+
+        & > .circle-wrp {
+
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            width: 50%;
+            height: 100%;
+            border-color: inherit;
+
+            & > .circle {
+                position: absolute;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 200%;
+                height: 100%;
+                border-width: $spinner-stroke-width;
+                border-style: solid;
+                border-color: inherit;
+                border-bottom-color: transparent !important;
+                border-radius: 50%;
+                background-color: transparent;
+            }
+
+            &.left > .circle {
+                left: 0;
+                transform: rotate(129deg);
+                animation: left-circle-spin $spinner-arc-time $spinner-animation-all-timing-function infinite both;
+                border-right-color: transparent !important;
+            }
+
+            &.right > .circle {
+                left: -100%;
+                transform: rotate(-129deg);
+                animation: right-circle-spin $spinner-arc-time $spinner-animation-all-timing-function infinite both;
+                border-left-color: transparent !important;
+            }
+
+        }
+
+        /* COLORS */
+
+        @each $name, $datas in $colors {
+
+            $bg: nth($datas, 1);
+
+            &.#{$name} {
+                border-color: $bg !important;
+            }
+
+        }
+
+    }
+
+    &.multiple > .spinner {
+
+        &:nth-child(1) {
+            animation: fill-unfill-rotate ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both, first-fade-in-out ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both;
+        }
+
+        &:nth-child(2) {
+            animation: fill-unfill-rotate ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both, second-fade-in-out ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both;
+        }
+
+        &:nth-child(3) {
+            animation: fill-unfill-rotate ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both, third-fade-in-out ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both;
+        }
+
+        &:nth-child(4) {
+            animation: fill-unfill-rotate ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both, fourth-fade-in-out ( 4 * $spinner-arc-time ) $spinner-animation-all-timing-function infinite both;
+        }
+
+    }
+
+}
+
+/* KEYFRAMES */
+
+@keyframes spinner-wrp-rotate {
+    100% { transform: rotate(360deg) }
+}
+
+@keyframes fill-unfill-rotate {
+    12.5% { transform: rotate(0.5 * $spinner-arc-size);  }
+    25% { transform: rotate(1 * $spinner-arc-size);  }
+    37.5% { transform: rotate(1.5 * $spinner-arc-size);  }
+    50% { transform: rotate(2 * $spinner-arc-size);  }
+    62.5% { transform: rotate(2.5 * $spinner-arc-size);  }
+    75% { transform: rotate(3 * $spinner-arc-size);  }
+    87.5% { transform: rotate(3.5 * $spinner-arc-size);  }
+    100% { transform: rotate(4 * $spinner-arc-size); }
+}
+
+@keyframes first-fade-in-out {
+    0% { opacity: 1; }
+    25% { opacity: 1; }
+    26% { opacity: 0; }
+    89% { opacity: 0; }
+    90% { opacity: 1; }
+    100% { opacity: 1; }
+}
+
+@keyframes second-fade-in-out {
+    0% { opacity: 0; }
+    15% { opacity: 0; }
+    25% { opacity: 1; }
+    50% { opacity: 1; }
+    51% { opacity: 0; }
+}
+
+@keyframes third-fade-in-out {
+    0% { opacity: 0; }
+    40% { opacity: 0; }
+    50% { opacity: 1; }
+    75% { opacity: 1; }
+    76% { opacity: 0; }
+}
+
+@keyframes fourth-fade-in-out {
+    0% { opacity: 0; }
+    65% { opacity: 0; }
+    75% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes left-circle-spin {
+    0% { transform: rotate(130deg); }
+    50% { transform: rotate(-5deg); }
+    100% { transform: rotate(130deg); }
+}
+
+@keyframes right-circle-spin {
+    0% { transform: rotate(-130deg); }
+    50% { transform: rotate(5deg); }
+    100% { transform: rotate(-130deg); }
+}

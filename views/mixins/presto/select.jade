@@ -1,12 +1,20 @@
 //- select.jade
 
 //- FIXME: Add support for arbitrary number of optgroups levels
+//- TODO: Make the mixin set the defualt value at the compilation time
 
 mixin select-btn(options, selected, id, icon)
     +button(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes).select-btn.select-trigger
         +button-center
-            block
-            +icon(icon || "navigation-unfold-more")(class=(block ? "right" : ""))
+            .select-label
+                block
+            +icon(icon || "navigation-unfold-more").right
+            +select(options, selected, id)
+
+mixin select-btn-icon(options, selected, id, icon)
+    +button(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes).select-btn.select-trigger
+        +button-center
+            +icon(icon || "navigation-unfold-more")
             +select(options, selected, id)
 
 mixin select(options, selected, id)

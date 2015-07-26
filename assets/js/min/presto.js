@@ -3586,7 +3586,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( trigger ) {
 
-                $(assignments[this.id]).removeClass ( 'top bottom left right active' );
+                $(assignments[this.id]).removeClass ( 'dropdown-top dropdown-bottom dropdown-left dropdown-right active' );
 
                 if ( this.opened && assignments[this.id] !== trigger ) {
 
@@ -3615,7 +3615,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         close: function () {
 
-            $(assignments[this.id]).removeClass ( 'top bottom left right active' );
+            $(assignments[this.id]).removeClass ( 'dropdown-top dropdown-bottom dropdown-left dropdown-right active' );
 
             this.$dropdown.removeClass ( 'active moving' );
 
@@ -4582,19 +4582,29 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* TEMPLATES */
 
         templates: {
-            base: '<div id="dropdown-{%=o.id%}" class="dropdown no-tip">' +
+            base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
                       '<div class="container">' +
-                          '<div class="multiple vertical fluid">' +
-                              '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                                  '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                              '{% } %}' +
+                          '<div class="container-content">' +
+                              '<div class="multiple-wrp vertical stretched nowrap">' +
+                                  '<div class="multiple">' +
+                                      '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                                          '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                                      '{% } %}' +
+                                  '</div>' +
+                              '</div>' +
                           '</div>' +
                       '</div>' +
                   '</div>',
-            optgroup: '<div class="divider_wrp">' +
-                          '<div class="divider">{%=o.prop%}</div>' +
+            optgroup: '<div class="divider-wrp block">' +
+                          '<div class="divider">' +
+                              '{%=o.prop%}' +
+                          '</div>' +
                       '</div>',
-            option: '<div class="button actionable outlined xsmall" data-value="{%=o.prop%}">{%=o.value%}</div>'
+            option: '<div class="button actionable xsmall sharp" data-value="{%=o.prop%}">' +
+                        '<div class="label-center">' +
+                            '{%=o.value%}' +
+                        '</div>' +
+                    '</div>'
        },
 
         /* OPTIONS */
@@ -4616,7 +4626,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$select = this.$trigger.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
             this.select_options = [];
-            this.$placeholder = this.$trigger.find ( '.placeholder' );
+            this.$select_label = this.$trigger.find ( '.select-label' );
+            this.$valueholder = this.$trigger.find ( '.valueholder' );
+
+            if ( this.$valueholder.length === 0 ) {
+
+                this.$valueholder = this.$select_label;
+
+            }
 
             this.$dropdown = false;
             this.$dropdown_container = false;
@@ -4626,7 +4643,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _init: function () {
 
-            this._update_placeholder ();
+            this._update_valueholder ();
 
             if ( !$.browser.isMobile ) {
 
@@ -4645,7 +4662,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._on ( this.$select, 'change', function () {
                 this.update ();
-                this.options.callbacks.change ();
+                this._trigger ( 'change' );
             });
 
         },
@@ -4718,8 +4735,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$dropdown.dropdown ({
                 callbacks: {
                     open: function () {
-                        instance._set_dropdown_width.bind ( instance )();
-                        instance.options.callbacks.open ();
+                        instance._set_dropdown_width.bind ( instance )(); //FIXME: is the bind necessary?
+                        instance._trigger ( 'open' );
                     },
                     close: instance.options.callbacks.close
                 }
@@ -4729,11 +4746,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _update_placeholder: function () {
+        _update_valueholder: function () {
 
             var $selected_option = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
 
-            this.$placeholder.html ( $selected_option.html () );
+            this.$valueholder.html ( $selected_option.html () );
 
         },
 
@@ -4767,7 +4784,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._update_placeholder ();
+            this._update_valueholder ();
 
         }
 

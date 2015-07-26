@@ -1,6 +1,9 @@
 
 /* CONTAINER */
 
+//FIXME: it should scroll with overflow: auto;
+//FIXME it should scroll if the height is fixed and the content (not .container-content!) takes more space
+
 .container {
 
     @include color ( $container-color, $container-color-basic );

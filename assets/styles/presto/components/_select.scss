@@ -1,12 +1,11 @@
 
-/* SELECT */
+/* SELECT BTN */
 
 .select-btn {
 
     position: relative;
 
     select {
-        @include color ( $select-color, $select-color-basic );
         border: none;
         -moz-appearance: none;
         -webkit-appearance: none;
@@ -24,36 +23,56 @@
         z-index: 1;
     }
 
-    & > .placeholder {
+    .select-label > .valueholder {
 
         text-transform: none;
         font-weight: bold;
         display: inline-block;
 
-        &:before {
+        &.right:before, &.left:before {
             content: '\a0'; // &nbsp;
         }
 
     }
 
-    &.top {
+    &.dropdown-top {
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
 
-    &.bottom {
+    &.dropdown-bottom {
         border-bottom-left-radius: 0;
         border-bottom-right-radius: 0;
     }
 
-    &.right {
+    &.dropdown-right {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
     }
 
-    &.left {
+    &.dropdown-left {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
+    }
+
+}
+
+/* SELECT DROPDOWN */
+
+//FIXME: why the hell does it scroll vertically and horizontally???
+
+.select-dropdown {
+
+    padding: 0;
+
+    & > .container {
+
+        @include z-depth ( $select-dropdown-z-depth );
+
+        & > .container-content {
+            padding: 0;
+        }
+
     }
 
 }

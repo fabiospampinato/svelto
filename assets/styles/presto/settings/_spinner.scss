@@ -1,0 +1,20 @@
+
+/* SPINNER */
+
+$spinner-size: 2em;
+
+$spinner-stroke-width: 3px;
+
+$spinner-default-border-color: $color-blue;
+
+$spinner-arc-size: 270deg;
+$spinner-arc-time: 1333ms;
+$spinner-arc-start-rotation: 216deg;
+
+$spinner-container-width: 28px;
+
+$spinner-shrink-time: 400ms;
+
+$spinner-animation-active-duration: 1568.2352941ms; //INFO: It comes from this formula (5 points star): 360deg * $spinner-arc-time / ( $spinner-arc-start-rotation + ( 360deg - $spinner-arc-size ) )
+
+$spinner-animation-all-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);

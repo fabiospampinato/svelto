@@ -9,7 +9,8 @@ append main
 
     +multiple
         +select-btn(elo_options, "public", "base1").outlined
-            | Base:
-            .placeholder
-        +select-btn(elo_options, "public", "base2", "action-settings").outlined
-        +select-btn(elo_options, "public", "base3", "action-settings").outlined.rounded
+        +select-btn(elo_options, "public", "base2").outlined
+            | Valueholder:
+            .valueholder.right
+        +select-btn-icon(elo_options, "public", "base3", "action-settings").outlined
+        +select-btn-icon(elo_options, "public", "base4", "action-settings").outlined.rounded

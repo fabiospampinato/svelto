@@ -319,7 +319,7 @@
 
             if ( trigger ) {
 
-                $(assignments[this.id]).removeClass ( 'top bottom left right active' );
+                $(assignments[this.id]).removeClass ( 'dropdown-top dropdown-bottom dropdown-left dropdown-right active' );
 
                 if ( this.opened && assignments[this.id] !== trigger ) {
 
@@ -348,7 +348,7 @@
 
         close: function () {
 
-            $(assignments[this.id]).removeClass ( 'top bottom left right active' );
+            $(assignments[this.id]).removeClass ( 'dropdown-top dropdown-bottom dropdown-left dropdown-right active' );
 
             this.$dropdown.removeClass ( 'active moving' );
 

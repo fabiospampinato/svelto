@@ -2,6 +2,7 @@
 /* DROPDOWN */
 
 //FIXME: If the content is too long it excedes the visible area
+//FIXME: the container should be scrollable if the content exceedes it
 
 .dropdown {
 
@@ -118,7 +119,6 @@
 
     & > .container {
         @include z-depth ( $dropdown-z-depth );
-        overflow: hidden;
         max-width: $dropdown-container-max-width;
         max-height: $dropdown-container-max-height;
         margin-bottom: 0;

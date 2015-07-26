@@ -37,6 +37,7 @@ hr {
 
             flex-grow: 1;
             margin: 0;
+            min-width: $layout-spacing;
 
             &.left {
                 order: 0;

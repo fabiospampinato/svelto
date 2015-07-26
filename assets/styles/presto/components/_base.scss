@@ -1,7 +1,7 @@
 
 /* CODEKIT OVERLAYS REMOVER */
 
-#lpckWarningOverlay { //INFO: Red overlay
+#lpckWarningOverlay, #lpckLagWarningOverlay { //INFO: Red and yellow overlay
     display: none !important;
 }
 
