@@ -5,53 +5,107 @@ extends ../../layout.jade
 append main
     +divider Normal
 
-    +multiple
-        textarea(type="text", name="test") Base
-        textarea(type="text", name="test").compact Compact
-        textarea(type="text", name="test").outlined Outlined
-        textarea(type="text", name="test" disabled="disabled") Disabled
+    +container-simple
+        +multiple
+            +textarea({label: "Base"})
+            +textarea({label: "Compact"}).compact
+            +textarea({label: "Outlined"}).outlined
+            +textarea({label: "Disabled"}).disabled
+            +textarea({value: "Disabled"}).disabled
+
+    +divider Colors
+
+    +container-simple
+        +multiple
+            +textarea({label: "Primary"}).text-field-primary Primary
+            +textarea({label: "Secondary"}).text-field-secondary Secondary
+            +textarea({label: "Tertiary"}).text-field-tertiary Tertiary
+            +textarea({label: "Quaternary"}).text-field-quaternary Quaternary
+            +textarea({label: "White"}).text-field-white White
+            +textarea({label: "Gray"}).text-field-gray Gray
+            +textarea({label: "Black"}).text-field-black Black
+            +textarea({label: "Yellow"}).text-field-yellow Yellow
+            +textarea({label: "Olive"}).text-field-olive Olive
+            +textarea({label: "Green"}).text-field-green Green
+            +textarea({label: "Blue"}).text-field-blue Blue
+            +textarea({label: "Violet"}).text-field-violet Violet
+            +textarea({label: "Orange"}).text-field-orange Orange
+            +textarea({label: "Purple"}).text-field-purple Purple
+            +textarea({label: "Red"}).text-field-red Red
+            +textarea({label: "Pink"}).text-field-pink Pink
+            +textarea({label: "Teal"}).text-field-teal Teal
+            +textarea({label: "Brown"}).text-field-brown Brown
+            +textarea({label: "Transparent"}).text-field-transparent Transparent
+            +textarea({label: "Inherit"}).text-field-inherit Inherit
+            +textarea({label: "Base"}).text-field-base Base
+
+    +divider Colors advanced
+
+    +container-simple
+        +multiple
+            +textarea({label: "White - Secondary"}).white.text-field-secondary White - Secondary
+            +textarea({label: "Primary - Secondary"}).primary.text-field-secondary Primary - Secondary
+            +textarea({label: "Red - Yellow"}).red.text-field-yellow Red - Yellow
 
     +divider Fluid
 
-    textarea(type="text", name="test").fluid Fluid
+    +container-simple
+        +textarea({label: "Fluid"}).fluid
+
+    +divider No floating
+
+    +container-simple
+        +textarea({label: "No floating"}).fluid.no-floating
+
+    +divider No bar - No floating
+
+    +container-simple
+        +textarea({label: "No bar"}).fluid.no-bar.no-floating
+
+    +divider Inside a container
+
+    +container-simple
+        +textarea({label: "Inside a container"})
+
+    +container-simple.yellow
+        +textarea({label: "Inside a yellow container"})
 
     +divider Toolbar
 
     +multiple
-        +multiple.joined.stretched
-            textarea(type="text", name="test") Search
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
             +button-icon("action-search")
-        +multiple.joined.stretched
-            textarea(type="text", name="test") Search
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
             +button-icon("action-search").secondary
-        +multiple.joined.stretched
-            textarea(type="text", name="test", placeholder="Search...")
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
             +button-simple.primary Search
-        +multiple.joined.stretched
+        +multiple.joined
             +label-simple.gray http://
-            textarea(type="text", name="test", placeholder="Search...")
-        +multiple.joined.stretched
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
+        +multiple.joined
             +label-icon("social-people")
-            textarea(type="text", name="test") Search
-        +multiple.joined.stretched
-            textarea(type="text", name="test") Search
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
             +label.compact
                 +label-center
                     +icon("navigation-refresh").rotating
-        +multiple.joined.stretched
+        +multiple.joined
             +button.teal
                 +button-left
                     +icon("maps-local-grocery-store")
                 +button-center Checkout
-            textarea(type="text", name="test") 34.50€
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white 34.45€
 
     +divider Toolbar - Outlined
 
     +multiple
-        +multiple.joined.outlined.stretched
-            textarea(type="text", name="test") Outlined
-            +button-simple.compact
-                +icon("action-search")
-        +multiple.joined.stretched
-            +label-simple.gray http://
-            textarea(type="text", name="test", placeholder="Outlined...").outlined
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white.outlined Value
+            +button-icon("action-search").outlined
+        +multiple.joined
+            +label-simple.gray.outlined http://
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white.outlined Value

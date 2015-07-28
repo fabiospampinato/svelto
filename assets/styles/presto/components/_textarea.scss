@@ -1,13 +1,26 @@
 
 /* TEXTAREA */
 
-textarea {
+.textarea-wrp {
 
-    @extend input;
-    resize: vertical;
+    @extend .input-wrp;
 
-    &[disabled] {
-        resize: none;
+    & > .text-field {
+
+        resize: vertical;
+
+        &[disabled] {
+            resize: none;
+        }
+
+    }
+
+    &:not(.no-floating):not(.disabled) > .text-field {
+
+        &:focus ~ label, &:valid ~ label {
+            transform: translateY($textarea-active-tranlate-y) translateX(0);
+        }
+
     }
 
 }

@@ -1,0 +1,8 @@
+//- textarea.jade
+
+mixin textarea(options)
+    .textarea-wrp&attributes(attributes)
+        textarea.text-field(type=(options.type || "text"), name=(options.name || ""), required)
+            block
+        label= (options.label || "")
+        .text-field-bar

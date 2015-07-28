@@ -4,4 +4,4 @@ mixin input(options)
     .input-wrp&attributes(attributes)
         input.text-field(type=(options.type || "text"), value=(options.value || ""), name=(options.name || ""), required)
         label= (options.label || "")
-        .input-bar
+        .text-field-bar

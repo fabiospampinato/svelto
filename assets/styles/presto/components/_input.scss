@@ -3,6 +3,7 @@
 
 //FIXME: The outlined version has not border at the bottom
 //FIXME: Add perfect support for rounded .input-wrp
+//FIXME: The label makes a jump because it's translating Y considering it's actual height with the normal font-size, not the smaller one
 
 .input-wrp {
 
@@ -12,31 +13,23 @@
     border-style: solid;
 
     & > .text-field {
-
         @include color ( $input-color, $input-color-basic );
         width: 100%;
         padding: $input-vertical-padding $input-horizontal-padding;
         border: none;
-
-        &:focus ~ .input-bar {
-            transform: scaleX(1);
-        }
-
     }
 
     & > label {
         position: absolute;
         top: 50%;
-        margin-top: auto;
-        margin-bottom: auto;
         transition-duration: $input-transition-all-duration;
         transition-property: transform, color, opacity;
-        transform: translateY(-50%) translateX($input-horizontal-padding) scale(1);
+        transform: translateY(-50%) translateX($input-horizontal-padding);
         pointer-events: none;
         opacity: $input-label-opacity;
     }
 
-    & > .input-bar {
+    & > .text-field-bar {
         position: absolute;
         z-index: 1;
         right: 0;
@@ -57,7 +50,7 @@
 
         $bg: nth($datas, 1);
 
-        &.input-#{$name} {
+        &.text-field-#{$name} {
 
             & > .text-field {
 
@@ -67,7 +60,7 @@
 
             }
 
-            & > .input-bar {
+            & > .text-field-bar {
                 border-bottom-color: $bg !important;
             }
 
@@ -79,14 +72,21 @@
         border-width: 0 0 $input-wrp-border-bottom-width 0;
     }
 
-    &:not(.unraise) {
+    &:not(.no-floating) {
 
         & > .text-field {
-
             margin-top: $input-vertical-padding;
+        }
+
+        &.compact > .text-field {
+            margin-top: $input-compact-vertical-padding;
+        }
+
+        &:not(.disabled) > .text-field {
 
             &:focus ~ label, &:valid ~ label {
-                transform: translateY(-150%) translateX(0) scale($input-label-active-scale);
+                font-size: $input-label-active-font-size;
+                transform: translateY($input-active-tranlate-y) translateX(0);
                 opacity: $input-label-active-opacity;
             }
 
@@ -96,13 +96,9 @@
 
         }
 
-        &.compact > .text-field {
-            margin-top: $input-compact-vertical-padding;
-        }
-
     }
 
-    &.unraise {
+    &.no-floating {
 
         & > .text-field {
 
@@ -124,7 +120,7 @@
             border-bottom-width: 0;
         }
 
-        & > .input-bar {
+        & > .text-field-bar {
             display: none;
         }
 
@@ -146,8 +142,26 @@
 
     }
 
+    &:not(.disabled) {
+
+        & > .text-field {
+
+            &:focus ~ .text-field-bar {
+                transform: scaleX(1);
+            }
+
+        }
+
+    }
+
     &.disabled {
+
         opacity: $input-disabled-opacity;
+
+        & > .text-field {
+            visibility: hidden;
+        }
+
     }
 
 }

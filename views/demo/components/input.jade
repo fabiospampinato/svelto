@@ -11,55 +11,56 @@ append main
             +input({label: "Compact"}).compact
             +input({label: "Outlined"}).outlined
             +input({label: "Disabled"}).disabled
+            +input({value: "Disabled"}).disabled
 
     +divider Colors
 
     +container-simple
         +multiple
-            +input({label: "Primary"}).input-primary Primary
-            +input({label: "Secondary"}).input-secondary Secondary
-            +input({label: "Tertiary"}).input-tertiary Tertiary
-            +input({label: "Quaternary"}).input-quaternary Quaternary
-            +input({label: "White"}).input-white White
-            +input({label: "Gray"}).input-gray Gray
-            +input({label: "Black"}).input-black Black
-            +input({label: "Yellow"}).input-yellow Yellow
-            +input({label: "Olive"}).input-olive Olive
-            +input({label: "Green"}).input-green Green
-            +input({label: "Blue"}).input-blue Blue
-            +input({label: "Violet"}).input-violet Violet
-            +input({label: "Orange"}).input-orange Orange
-            +input({label: "Purple"}).input-purple Purple
-            +input({label: "Red"}).input-red Red
-            +input({label: "Pink"}).input-pink Pink
-            +input({label: "Teal"}).input-teal Teal
-            +input({label: "Brown"}).input-brown Brown
-            +input({label: "Transparent"}).input-transparent Transparent
-            +input({label: "Inherit"}).input-inherit Inherit
-            +input({label: "Base"}).input-base Base
+            +input({label: "Primary"}).text-field-primary
+            +input({label: "Secondary"}).text-field-secondary
+            +input({label: "Tertiary"}).text-field-tertiary
+            +input({label: "Quaternary"}).text-field-quaternary
+            +input({label: "White"}).text-field-white
+            +input({label: "Gray"}).text-field-gray
+            +input({label: "Black"}).text-field-black
+            +input({label: "Yellow"}).text-field-yellow
+            +input({label: "Olive"}).text-field-olive
+            +input({label: "Green"}).text-field-green
+            +input({label: "Blue"}).text-field-blue
+            +input({label: "Violet"}).text-field-violet
+            +input({label: "Orange"}).text-field-orange
+            +input({label: "Purple"}).text-field-purple
+            +input({label: "Red"}).text-field-red
+            +input({label: "Pink"}).text-field-pink
+            +input({label: "Teal"}).text-field-teal
+            +input({label: "Brown"}).text-field-brown
+            +input({label: "Transparent"}).text-field-transparent
+            +input({label: "Inherit"}).text-field-inherit
+            +input({label: "Base"}).text-field-base
 
     +divider Colors advanced
 
     +container-simple
         +multiple
-            +input({label: "White - Secondary"}).white.input-secondary White - Secondary
-            +input({label: "Primary - Secondary"}).primary.input-secondary Primary - Secondary
-            +input({label: "Red - Yellow"}).red.input-yellow Red - Yellow
+            +input({label: "White - Secondary"}).white.text-field-secondary
+            +input({label: "Primary - Secondary"}).primary.text-field-secondary
+            +input({label: "Red - Yellow"}).red.text-field-yellow
 
     +divider Fluid
 
     +container-simple
         +input({label: "Fluid"}).fluid
 
-    +divider Unraise
+    +divider No floating
 
     +container-simple
-        +input({label: "Unraise"}).fluid.unraise
+        +input({label: "No floating"}).fluid.no-floating
 
-    +divider No bar - Unraise
+    +divider No bar - No floating
 
     +container-simple
-        +input({label: "No bar"}).fluid.no-bar.unraise
+        +input({label: "No bar"}).fluid.no-bar.no-floating
 
     +divider Inside a container
 
@@ -73,22 +74,22 @@ append main
 
     +multiple
         +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
             +button-icon("action-search")
         +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
             +button-icon("action-search").secondary
         +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
             +button-simple.primary Search
         +multiple.joined
             +label-simple.gray http://
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
         +multiple.joined
             +label-icon("social-people")
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
         +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
             +label.compact
                 +label-center
                     +icon("navigation-refresh").rotating
@@ -97,14 +98,14 @@ append main
                 +button-left
                     +icon("maps-local-grocery-store")
                 +button-center Checkout
-            +input({label: "Placeholder...", value: "35.50€"}).no-bar.unraise.white
+            +input({label: "Placeholder...", value: "35.50€"}).no-bar.no-floating.white
 
     +divider Toolbar - Outlined
 
     +multiple
         +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white.outlined
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white.outlined
             +button-icon("action-search").outlined
         +multiple.joined
             +label-simple.gray.outlined http://
-            +input({label: "Placeholder...", value: "Value"}).no-bar.unraise.white.outlined
+            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white.outlined
