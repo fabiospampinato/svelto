@@ -15,12 +15,4 @@
 
     }
 
-    &:not(.no-floating):not(.disabled) > .text-field {
-
-        &:focus ~ label, &:valid ~ label {
-            transform: translateY($textarea-active-tranlate-y) translateX(0);
-        }
-
-    }
-
 }

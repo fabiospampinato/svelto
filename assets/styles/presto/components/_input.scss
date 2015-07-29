@@ -2,8 +2,6 @@
 /* INPUT */
 
 //FIXME: The outlined version has not border at the bottom
-//FIXME: Add perfect support for rounded .input-wrp
-//FIXME: The label makes a jump because it's translating Y considering it's actual height with the normal font-size, not the smaller one
 
 .input-wrp {
 
@@ -20,11 +18,13 @@
     }
 
     & > label {
+        font-size: $input-label-font-size;
         position: absolute;
         top: 50%;
+        left: $input-horizontal-padding;
+        margin-top: - $input-label-font-size / 2;
         transition-duration: $input-transition-all-duration;
-        transition-property: transform, color, opacity;
-        transform: translateY(-50%) translateX($input-horizontal-padding);
+        transition-property: color, opacity, top, left, font-size, margin;
         pointer-events: none;
         opacity: $input-label-opacity;
     }
@@ -35,13 +35,13 @@
         right: 0;
         bottom: - $input-wrp-border-bottom-width;
         left: 0;
-        height: $layout-spacing;
+        height: 100%;
         content: '';
         transition: transform $input-transition-all-duration;
         transform: scaleX(0);
+        pointer-events: none;
         border-bottom: $input-bar-height solid $input-active-color;
-        border-bottom-right-radius: inherit; //FIXME: make it better
-        border-bottom-left-radius: inherit; //FIXME: make it better
+        border-radius: inherit;
     }
 
     /* COLORS */
@@ -86,7 +86,9 @@
 
             &:focus ~ label, &:valid ~ label {
                 font-size: $input-label-active-font-size;
-                transform: translateY($input-active-tranlate-y) translateX(0);
+                top: $layout-half-spacing;
+                left: 0;
+                margin-top: 0;
                 opacity: $input-label-active-opacity;
             }
 
@@ -137,7 +139,7 @@
         }
 
         & > label {
-            transform: translateY(-50%) translateX($input-compact-horizontal-padding);
+            left: $input-compact-horizontal-padding;
         }
 
     }
