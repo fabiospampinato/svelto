@@ -32,8 +32,8 @@ mixin button-simple(href)
         +button-center
             block
 
-mixin button-icon(icon)
-    +button&attributes(attributes).compact
+mixin button-icon(icon, href)
+    +button(href)&attributes(attributes).compact
         +button-center
             +icon(icon)
         block

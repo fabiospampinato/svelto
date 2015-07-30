@@ -1558,6 +1558,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* FORM SYNC */
 
+//TODO: maybe sync at the init time also
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';

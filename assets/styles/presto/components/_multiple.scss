@@ -22,6 +22,10 @@
         flex-wrap: nowrap;
     }
 
+    &.no-spacers > .multiple > .spacer {
+        display: none;
+    }
+
     &.equal > .multiple > * {
         flex-basis: 0;
     }

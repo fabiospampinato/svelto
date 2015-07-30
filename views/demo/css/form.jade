@@ -11,8 +11,8 @@ append main
         +container("This is a form")
             +container-content
                 +image("/assets/images/presto/sample.png").centered
-                +input({label: "Placeholder...", name: "input_1"}).fluid
-                +textarea({name: "input_1"}).fluid
+                +input({label: "Input...", name: "input_1"}).fluid
+                +textarea({label: "Textarea...", name: "textarea_1"}).fluid
                 label Checkboxes:
                 +multiple.fluid
                     +checkbox("checkbox_name_1", "Checkbox 1", "1").outlined
@@ -22,13 +22,13 @@ append main
                     +radio("radio_name_1", "Radio 1", "1").outlined
                     +radio("radio_name_1", "Radio 2", "2").outlined
                 label Select:
-                +select-btn(elo_options, "public", "select_name_1").outlined
+                +select-btn(elo_options, "public", "select_name_1").outlined.fluid
                     | Select:
                     .placeholder
                 label Slider:
                 +slider("slider_name_1", 0, 75, 100)
                 +multiple
-                    span Switcher:
+                    label Switcher:
                     .spacer
                     +switch("switcher_name_1", "Something")
             +container-footer

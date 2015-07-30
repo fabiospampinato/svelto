@@ -1,6 +1,8 @@
 
 /* FORM SYNC */
 
+//TODO: maybe sync at the init time also
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';

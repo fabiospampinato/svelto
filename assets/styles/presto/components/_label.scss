@@ -45,6 +45,10 @@
         padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
     }
 
+    &.fluid {
+        width: 100%;
+    }
+
     &.badge {
         position: absolute !important;
         top: $label-badge-top !important;

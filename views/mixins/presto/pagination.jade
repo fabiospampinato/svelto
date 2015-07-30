@@ -1,1 +1,83 @@
 //- pagination.jade
+
+//-
+    {
+        url: '', // The url to transform wih the page number (eighter by appending or or by replacing <page-nr>)
+        total: '', // The total number of pages, or infinite (for example when the content is generated randomly)
+        current: '', // The current page number
+        blocks: '' // The number of blocks to fill
+    }
+
+mixin pagination(options)
+    +multiple&attributes(attributes).pagination
+
+        if options.total == 1 || options.total == 0
+            block
+
+        else if options.total == 'infinite'
+            +button-simple(options.url) Load more
+            block
+
+        else
+            if options.blocks >= 2
+
+                - var url_to_substitute = ( options.url.indexOf ( '<page-nr>' ) !== -1 );
+
+                if options.current > 1
+                    - var page_nr = options.current - 1;
+                    - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+                    +button-icon("navigation-chevron-left", page_url)(title="Previous page").prev
+                    - options.blocks -= 1;
+
+                if options.current < options.total
+                    - var need_next_button = true;
+                    - options.blocks -= 1;
+                else
+                    - var need_next_button = false;
+
+                if options.blocks > 0
+                    - var need_current_button = true;
+                    - options.blocks -= 1;
+                else
+                    - need_current_button = false;
+
+                - var left_blocks = options.current - 1;
+                - var right_blocks = options.total - options.current;
+                - var required_left_blocks = Math.floor ( options.blocks / 2 );
+                - var required_right_blocks = options.blocks - required_left_blocks;
+
+                if left_blocks <= required_left_blocks && right_blocks <= required_right_blocks
+                    - var outputed_left_blocks = left_blocks;
+                    - var outputed_right_blocks = right_blocks;
+                else if left_blocks <= required_left_blocks
+                    - var outputed_left_blocks = left_blocks;
+                    - var outputed_right_blocks = Math.min ( right_blocks, options.blocks - outputed_left_blocks );
+                else if right_blocks <= required_right_blocks
+                    - var outputed_right_blocks = right_blocks;
+                    - var outputed_left_blocks = Math.min ( left_blocks, options.blocks - outputed_right_blocks );
+                else
+                    - var outputed_left_blocks = required_left_blocks;
+                    - var outputed_right_blocks = required_right_blocks;
+
+                while outputed_left_blocks > 0
+                    - var page_nr = options.current - outputed_left_blocks;
+                    - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+                    +button-simple(page_url)(title="Page " + page_nr).compact= page_nr
+                    - outputed_left_blocks--;
+
+                if need_current_button
+                    +label-simple(title="Current page").compact.current= options.current
+
+                - var counter = 1;
+                while counter <= outputed_right_blocks
+                    - var page_nr = options.current + counter;
+                    - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+                    +button-simple(page_url)(title="Page " + page_nr).compact= page_nr
+                    - counter++;
+
+                if need_next_button
+                    - var page_nr = options.current + 1;
+                    - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+                    +button-icon("navigation-chevron-right", page_url)(title="Next page").next
+
+            block
