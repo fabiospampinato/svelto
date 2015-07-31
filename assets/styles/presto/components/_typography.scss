@@ -7,19 +7,30 @@ a {
     text-decoration: none;
     color: inherit;
 
-    &:before {
-        position: absolute;
-        bottom: 1px;
-        left: 0;
-        right: 0;
-        height: 1px;
-        content: '';
-        transition: transform $a-underline-transition-duration;
-        transform: scaleX(0);
-    }
+    p > & {
 
-    &:hover:before {
-        transform: scaleX(1);
+        //TODO: It should also work with mark, basically almost with everything, but sometimes is uneeded
+
+        &:before {
+            position: absolute;
+            z-index: 1;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            height: 100%;
+            content: '';
+            transition: transform $a-underline-transition-duration;
+            transform: scaleX(0);
+            pointer-events: none;
+            border-bottom-width: $a-underline-height;
+            border-bottom-style: solid;
+            border-radius: inherit;
+        }
+
+        &:hover:before {
+            transform: scaleX(1);
+        }
+
     }
 
 }
@@ -72,6 +83,7 @@ p {
 
 mark, .mark {
     padding: $mark-padding;
+    border-radius: $mark-border-radius;
     background-color: $mark-bg-color;
 }
 

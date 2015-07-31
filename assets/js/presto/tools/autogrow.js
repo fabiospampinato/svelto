@@ -156,7 +156,7 @@
 
     $(function () {
 
-        $('input.autogrow, textarea.autogrow').autogrow ();
+        $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
 
     });
 

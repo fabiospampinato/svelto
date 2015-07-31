@@ -5,22 +5,19 @@
 
     @include color ( $tagbox-color, $tagbox-color-basic );
     margin-bottom: $layout-spacing;
-    border-width: 0;
 
     & > input {
         display: none;
     }
 
     & > .multiple-wrp {
-
         margin-bottom: 0;
+    }
 
-        & > .multiple > input {
-            @include color ( $tagbox-input-color, $tagbox-input-color-basic );
-            @include size ( $tagbox-input-size );
-            min-width: $tagbox-input-min-width;
-        }
-
+    .text-field {
+        @include color ( $tagbox-input-color, $tagbox-input-color-basic );
+        @include size ( $tagbox-input-size );
+        min-width: $tagbox-input-min-width;
     }
 
 }

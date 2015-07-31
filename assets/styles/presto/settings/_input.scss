@@ -4,6 +4,7 @@
 $input-wrp-color: 'inherit';
 $input-wrp-color-basic: true;
 
+$input-wrp-border-radius: $border-radius-medium;
 $input-wrp-border-bottom-width: 1px;
 
 /* INPUT */
@@ -31,10 +32,7 @@ $input-bar-height: 2px;
 
 /* STATES */
 
-$input-active-color: $color-blue;
-$input-success-color: $color-green;
-$input-error-color: $color-red;
-$input-warning-color: $color-yellow;
+$input-active-color: $color-secondary;
 
 /* OTHERS */
 

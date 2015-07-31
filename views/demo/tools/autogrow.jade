@@ -5,8 +5,8 @@ extends ../../layout.jade
 append main
     +divider Input
 
-    input(value="Content of the input...").autogrow
+    +input({value: "Value", label: "Placeholder..."}).autogrow
 
     +divider Textarea
 
-    textarea.autogrow Content of the textarea...
+    +textarea({label: "Placeholder..."}).autogrow Value

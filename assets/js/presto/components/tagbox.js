@@ -67,6 +67,7 @@
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
+            this.$partial_wrp = this.$partial.parent ( '.input-wrp' );
 
         },
 
@@ -76,7 +77,7 @@
 
             var tags_html = this._get_tags_html ();
 
-            this.$partial.before ( tags_html );
+            this.$partial_wrp.before ( tags_html );
 
             this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
 
@@ -338,7 +339,7 @@
 
                 if ( this.options.tags.$nodes.length === 0 || this.options.append ) {
 
-                    this.$partial.before ( tag_html );
+                    this.$partial_wrp.before ( tag_html );
 
                 } else {
 

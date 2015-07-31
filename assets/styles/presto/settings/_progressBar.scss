@@ -3,15 +3,23 @@
 
 $progress-bar-height: 1.07143em !default;
 
+/* UNHIGHLIGHTED */
+
 $progress-bar-unhighlighted-color: 'gray';
 $progress-bar-unhighlighted-color-basic: true;
+
+/* HIGHLIGHTED */
 
 $progress-bar-highlighted-color: 'secondary';
 $progress-bar-highlighted-color-basic: true;
 
+/* LABEL */
+
 $progress-bar-label-font-size: 0.8em !default;
 $progress-bar-label-vertical-padding: 0;
 $progress-bar-label-horizontal-padding: 0.5em;
+
+/* STRIPE */
 
 $progress-bar-stripe-size: 3.33333em !default;
 $progress-bar-stripe-opacity: 0.075 !default;
@@ -19,6 +27,8 @@ $progress-bar-stripe-light-color: rgba(255, 255, 255, $progress-bar-stripe-opaci
 $progress-bar-stripe-dark-color: rgba(0, 0, 0, $progress-bar-stripe-opacity) !default;
 
 $progress-bar-stripes-transition-move-duration: 2s;
+
+/* OTHERS */
 
 $progress-bar-transition-opacity-duration: 0.15s;
 $progress-bar-transition-width-duration: 0.15s;

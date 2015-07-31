@@ -1,9 +1,10 @@
 
 /* BREADCRUMB */
 
-$breadcrumb-padding: 0.5em !default;
-
-$breadcrumb-icon-opacity: 0.5 !default;
-
 $breadcrumb-after-opacity: 0.5 !default;
 $breadcrumb-after-opacity-hover: 0.75 !default;
+
+/* DIVIDER */
+
+$breadcrumb-divider-vertical-padding: 0;
+$breadcrumb-divider-horizontal-padding: 0.75em;

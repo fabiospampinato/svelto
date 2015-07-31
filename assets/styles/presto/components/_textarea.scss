@@ -2,6 +2,7 @@
 /* TEXTAREA */
 
 //FIXME: If we write a lot and we scrroll down the content goes under the label
+//TODO: set a default height
 
 .textarea-wrp {
 
@@ -15,6 +16,10 @@
             resize: none;
         }
 
+    }
+
+    &.unresizable > .text-field {
+        resize: none;
     }
 
 }

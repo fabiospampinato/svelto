@@ -10,13 +10,16 @@
     position: relative;
     display: inline-flex;
     justify-content: center;
-    align-items: strech;
+    align-items: center;
     min-width: 1em;
     min-height: 1em;
     margin-bottom: $layout-spacing;
     border-radius: $label-border-radius;
 
     & > .label-left, & > .label-right {
+        display: flex;
+        align-items: center;
+        align-self: stretch;
         min-width: 1em;
         padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
         background-color: $label-left-right-bg-color;

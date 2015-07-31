@@ -3,3 +3,10 @@
 mixin breadcrumb
     .breadcrumb&attributes(attributes)
         block
+
+mixin breadcrumb-divider(icon)
+    .breadcrumb-divider&attributes(attributes)
+        if block
+            block
+        else
+            +icon(icon || "navigation-chevron-right")

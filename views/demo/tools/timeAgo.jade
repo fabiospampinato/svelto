@@ -3,6 +3,7 @@
 extends ../../layout.jade
 
 //- TODO: add example where the title is changing
+//- TODO: I'm not sure if the title version is working...
 
 append main
     +divider TimeAgo
@@ -25,6 +26,6 @@ append main
     +container
         +container-content(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 3600 )}")
 
-    +divider TimeAgo Title -7200
+    +divider TimeAgo title -7200
 
     +label-icon("device-access-time")(data-timestamp-title="#{Math.round ( new Date ().getTime () / 1000 - 7200 )}").outlined

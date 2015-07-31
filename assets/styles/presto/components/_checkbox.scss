@@ -38,6 +38,7 @@
     }
 
     &.checkbox-disabled {
+        cursor: default;
         opacity: $checkbox-disabled-opacity;
     }
 

@@ -1,6 +1,8 @@
 
 /* STEPPER */
 
+//TODO: use an input instead of a label, so that we can
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';

@@ -14,6 +14,7 @@ button {
 
     &.floating {
         //TODO: add sub floating actions
+        //TODO: write it closet to the spec, it looks a bit too big, expecially the icon
         @include z-depth ( $button-floating-z-depth );
         position: absolute;
         z-index: 1;

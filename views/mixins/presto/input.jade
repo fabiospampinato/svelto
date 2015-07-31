@@ -2,6 +2,9 @@
 
 mixin input(options)
     .input-wrp&attributes(attributes)
+        if !options
+            - options = {}
+
         input.text-field(type=(options.type || "text"), value=(options.value || ""), name=(options.name || ""), required)
         label= (options.label || "")
         .text-field-bar

@@ -1,7 +1,9 @@
 
 /* MULTIPLE */
 
+//FIXME: the right column of the complex-4 grid layout is not stretched, it should...
 //TODO: add a 'lefted', 'righted' classes for aligning the content to the left or right
+//FIXME: make the joined versions look nice even if they have shadows (use different versions of the depths, where we are not outputting the right shadow for example)
 
 .multiple-wrp {
 
@@ -129,8 +131,8 @@
         align-items: flex-start;
 
         & > *:not(.multiple-wrp) {
-            margin-left: $grid-gutter-half-width;
             margin-right: $grid-gutter-half-width;
+            margin-left: $grid-gutter-half-width;
         }
 
         & > .multiple-wrp {

@@ -7,225 +7,48 @@ append main
 
     +container-simple.squares_all
         +multiple
-            +square.xxxxxlarge.centered
-                span.small 1
-            +square.xxxxxlarge.centered
-                span.small 2
-            +square.xxxxxlarge.centered
-                span.small 3
-            +square.xxxxxlarge.centered
-                span.small 4
-            +square.xxxxxlarge.centered
-                span.small 5
-            +square.xxxxxlarge.centered
-                span.small 6
-            +square.xxxxxlarge.centered
-                span.small 7
-            +square.xxxxxlarge.centered
-                span.small 8
-            +square.xxxxxlarge.centered
-                span.small 9
-            +square.xxxxxlarge.centered
-                span.small 10
-            +square.xxxxxlarge.centered
-                span.small 11
-            +square.xxxxxlarge.centered
-                span.small 12
-            +square.xxxxxlarge.centered
-                span.small 13
-            +square.xxxxxlarge.centered
-                span.small 14
-            +square.xxxxxlarge.centered
-                span.small 15
-            +square.xxxxxlarge.centered
-                span.small 16
-            +square.xxxxxlarge.centered
-                span.small 17
-            +square.xxxxxlarge.centered
-                span.small 18
-            +square.xxxxxlarge.centered
-                span.small 19
-            +square.xxxxxlarge.centered
-                span.small 20
-            +square.xxxxxlarge.centered
-                span.small 21
-            +square.xxxxxlarge.centered
-                span.small 22
-            +square.xxxxxlarge.centered
-                span.small 23
-            +square.xxxxxlarge.centered
-                span.small 24
-            +square.xxxxxlarge.centered
-                span.small 25
-            +square.xxxxxlarge.centered
-                span.small 26
-            +square.xxxxxlarge.centered
-                span.small 27
-            +square.xxxxxlarge.centered
-                span.small 28
-            +square.xxxxxlarge.centered
-                span.small 29
-            +square.xxxxxlarge.centered
-                span.small 30
-            +square.xxxxxlarge.centered
-                span.small 31
-            +square.xxxxxlarge.centered
-                span.small 32
+            - var squares_nr = 32;
+            - var nr = 1;
+            while nr <= squares_nr
+                +square.xxxxxlarge.centered
+                    span.small= nr++
 
     +divider Actions
 
     +multiple.joined
-        input(id="populate_all_input", type="number", name="input1", placeholder="Squares number...")
+        +input({name: "input_populate_all", label: "Search number..."}).no-floating.white.text-field-secondary
         +button-simple(onclick="javascript:populate_all()").secondary Populate
 
     +divider Squares - Most significant match
 
     +container-simple.squares_most
         +multiple
-            +square.xxxxxlarge.centered
-                span.small 1
-            +square.xxxxxlarge.centered
-                span.small 2
-            +square.xxxxxlarge.centered
-                span.small 3
-            +square.xxxxxlarge.centered
-                span.small 4
-            +square.xxxxxlarge.centered
-                span.small 5
-            +square.xxxxxlarge.centered
-                span.small 6
-            +square.xxxxxlarge.centered
-                span.small 7
-            +square.xxxxxlarge.centered
-                span.small 8
-            +square.xxxxxlarge.centered
-                span.small 9
-            +square.xxxxxlarge.centered
-                span.small 10
-            +square.xxxxxlarge.centered
-                span.small 11
-            +square.xxxxxlarge.centered
-                span.small 12
-            +square.xxxxxlarge.centered
-                span.small 13
-            +square.xxxxxlarge.centered
-                span.small 14
-            +square.xxxxxlarge.centered
-                span.small 15
-            +square.xxxxxlarge.centered
-                span.small 16
-            +square.xxxxxlarge.centered
-                span.small 17
-            +square.xxxxxlarge.centered
-                span.small 18
-            +square.xxxxxlarge.centered
-                span.small 19
-            +square.xxxxxlarge.centered
-                span.small 20
-            +square.xxxxxlarge.centered
-                span.small 21
-            +square.xxxxxlarge.centered
-                span.small 22
-            +square.xxxxxlarge.centered
-                span.small 23
-            +square.xxxxxlarge.centered
-                span.small 24
-            +square.xxxxxlarge.centered
-                span.small 25
-            +square.xxxxxlarge.centered
-                span.small 26
-            +square.xxxxxlarge.centered
-                span.small 27
-            +square.xxxxxlarge.centered
-                span.small 28
-            +square.xxxxxlarge.centered
-                span.small 29
-            +square.xxxxxlarge.centered
-                span.small 30
-            +square.xxxxxlarge.centered
-                span.small 31
-            +square.xxxxxlarge.centered
-                span.small 32
+            - var squares_nr = 32;
+            - var nr = 1;
+            while nr <= squares_nr
+                +square.xxxxxlarge.centered
+                    span.small= nr++
 
     +divider Actions
 
     +multiple.joined
-        input(id="populate_most_input", type="number", name="input2", placeholder="Squares number...")
+        +input({name: "input_populate_most", label: "Square number..."}).no-floating.white.text-field-secondary
         +button-simple(onclick="javascript:populate_most()").secondary Populate
 
     +divider Squares - Punctual
 
     +container-simple.squares_punctual
         +multiple
-            +square.xxxxxlarge.centered
-                span.small 1
-            +square.xxxxxlarge.centered
-                span.small 2
-            +square.xxxxxlarge.centered
-                span.small 3
-            +square.xxxxxlarge.centered
-                span.small 4
-            +square.xxxxxlarge.centered
-                span.small 5
-            +square.xxxxxlarge.centered
-                span.small 6
-            +square.xxxxxlarge.centered
-                span.small 7
-            +square.xxxxxlarge.centered
-                span.small 8
-            +square.xxxxxlarge.centered
-                span.small 9
-            +square.xxxxxlarge.centered
-                span.small 10
-            +square.xxxxxlarge.centered
-                span.small 11
-            +square.xxxxxlarge.centered
-                span.small 12
-            +square.xxxxxlarge.centered
-                span.small 13
-            +square.xxxxxlarge.centered
-                span.small 14
-            +square.xxxxxlarge.centered
-                span.small 15
-            +square.xxxxxlarge.centered
-                span.small 16
-            +square.xxxxxlarge.centered
-                span.small 17
-            +square.xxxxxlarge.centered
-                span.small 18
-            +square.xxxxxlarge.centered
-                span.small 19
-            +square.xxxxxlarge.centered
-                span.small 20
-            +square.xxxxxlarge.centered
-                span.small 21
-            +square.xxxxxlarge.centered
-                span.small 22
-            +square.xxxxxlarge.centered
-                span.small 23
-            +square.xxxxxlarge.centered
-                span.small 24
-            +square.xxxxxlarge.centered
-                span.small 25
-            +square.xxxxxlarge.centered
-                span.small 26
-            +square.xxxxxlarge.centered
-                span.small 27
-            +square.xxxxxlarge.centered
-                span.small 28
-            +square.xxxxxlarge.centered
-                span.small 29
-            +square.xxxxxlarge.centered
-                span.small 30
-            +square.xxxxxlarge.centered
-                span.small 31
-            +square.xxxxxlarge.centered
-                span.small 32
+            - var squares_nr = 32;
+            - var nr = 1;
+            while nr <= squares_nr
+                +square.xxxxxlarge.centered
+                    span.small= nr++
 
     +divider Actions
 
     +multiple.joined
-        input(id="populate_punctual_input", type="number", name="input3", placeholder="Squares number...")
+        +input({name: "input_populate_punctual", label: "Square number..."}).no-floating.white.text-field-secondary
         +button-simple(onclick="javascript:populate_punctual()").secondary Populate
 
 append body-end
@@ -245,19 +68,19 @@ append body-end
 
         function populate_all () {
 
-            $('.squares_all .multiple').empty ().append ( get_squares_html ( $('#populate_all_input').val () ) );
+            $('.squares_all .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_all"]').val () ) );
 
         }
 
         function populate_most () {
 
-            $('.squares_most .multiple').empty ().append ( get_squares_html ( $('#populate_most_input').val () ) );
+            $('.squares_most .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_most"]').val () ) );
 
         }
 
         function populate_punctual () {
 
-            $('.squares_punctual .multiple').empty ().append ( get_squares_html ( $('#populate_punctual_input').val () ) );
+            $('.squares_punctual .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_punctual"]').val () ) );
 
         }
 

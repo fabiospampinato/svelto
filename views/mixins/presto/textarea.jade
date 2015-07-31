@@ -2,6 +2,9 @@
 
 mixin textarea(options)
     .textarea-wrp&attributes(attributes)
+        if !options
+            - options = {}
+
         textarea.text-field(type=(options.type || "text"), name=(options.name || ""), required)
             block
         label= (options.label || "")

@@ -3,23 +3,13 @@
 
 .breadcrumb {
 
+    display: flex;
+    align-items: center;
     margin-bottom: $layout-spacing;
 
-    & > *:not(:last-child):after {
-        padding-right: $breadcrumb-padding;
-        padding-left: $breadcrumb-padding;
-        opacity: $breadcrumb-icon-opacity;
-    }
-
-    &:not(.slashed) > *:not(:last-child):after { //FIXME: is not perfectly vertically centered
-        @extend %icon;
-        @extend .icon-navigation-chevron-right:before;
-    }
-
-    &.slashed > *:not(:last-child):after {
-        padding-right: $breadcrumb-padding * 1.6;
-        padding-left: $breadcrumb-padding * 1.6;
-        content: '/';
+    & > .breadcrumb-divider {
+        display: inline-block;
+        padding: $breadcrumb-divider-vertical-padding $breadcrumb-divider-horizontal-padding;
     }
 
     &.highlighted > .current ~ * {
@@ -28,10 +18,6 @@
 
         &:hover {
             opacity: $breadcrumb-after-opacity-hover;
-        }
-
-        &:after {
-            opacity: 1;
         }
 
     }

@@ -38,7 +38,7 @@
                 background: $bg-active #{$extra};
             }
 
-            &:not(.inactive):not(.active):not(.dragging) { //TODO: remove inactive and switch it with '*-disabled' maybe
+            &:not(.active):not(.dragging):not(.disabled):not([class*="-disabled"]) {
 
                 &:hover {
                     background: $bg-hover #{$extra};
@@ -70,16 +70,18 @@
 
     }
 
-    p > a { //FIXME: Should we do it just in `p`s? elsewhere maybe is an unwanted effect...
+    @if $color_name != "inherit" { //INFO: Otherwise it will not work for example under .container-content that has color: inherit
 
-        color: $link #{$extra};
+        p > a { //FIXME: Should we do it just in `p`s? elsewhere maybe is an unwanted effect...
 
-        &:hover {
-
-            color: $link-hover #{$extra};
+            color: $link #{$extra};
 
             &:before {
-                background-color: $link-hover #{$extra};
+                border-color: $link-hover #{$extra};
+            }
+
+            &:hover {
+                color: $link-hover #{$extra};
             }
 
         }

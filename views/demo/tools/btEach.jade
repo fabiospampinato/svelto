@@ -7,143 +7,20 @@ append main
 
     +container-simple.squares
         +multiple
-            +square.xxxxxlarge.centered
-                span.small 1
-            +square.xxxxxlarge.centered
-                span.small 2
-            +square.xxxxxlarge.centered
-                span.small 3
-            +square.xxxxxlarge.centered
-                span.small 4
-            +square.xxxxxlarge.centered
-                span.small 5
-            +square.xxxxxlarge.centered
-                span.small 6
-            +square.xxxxxlarge.centered
-                span.small 7
-            +square.xxxxxlarge.centered
-                span.small 8
-            +square.xxxxxlarge.centered
-                span.small 9
-            +square.xxxxxlarge.centered
-                span.small 10
-            +square.xxxxxlarge.centered
-                span.small 11
-            +square.xxxxxlarge.centered
-                span.small 12
-            +square.xxxxxlarge.centered
-                span.small 13
-            +square.xxxxxlarge.centered
-                span.small 14
-            +square.xxxxxlarge.centered
-                span.small 15
-            +square.xxxxxlarge.centered
-                span.small 16
-            +square.xxxxxlarge.centered
-                span.small 17
-            +square.xxxxxlarge.centered
-                span.small 18
-            +square.xxxxxlarge.centered
-                span.small 19
-            +square.xxxxxlarge.centered
-                span.small 20
-            +square.xxxxxlarge.centered
-                span.small 21
-            +square.xxxxxlarge.centered
-                span.small 22
-            +square.xxxxxlarge.centered
-                span.small 23
-            +square.xxxxxlarge.centered
-                span.small 24
-            +square.xxxxxlarge.centered
-                span.small 25
-            +square.xxxxxlarge.centered
-                span.small 26
-            +square.xxxxxlarge.centered
-                span.small 27
-            +square.xxxxxlarge.centered
-                span.small 28
-            +square.xxxxxlarge.centered
-                span.small 29
-            +square.xxxxxlarge.centered
-                span.small 30
-            +square.xxxxxlarge.centered
-                span.small 31
-            +square.xxxxxlarge.centered
-                span.small 32
-            +square.xxxxxlarge.centered
-                span.small 33
-            +square.xxxxxlarge.centered
-                span.small 34
-            +square.xxxxxlarge.centered
-                span.small 35
-            +square.xxxxxlarge.centered
-                span.small 36
-            +square.xxxxxlarge.centered
-                span.small 37
-            +square.xxxxxlarge.centered
-                span.small 38
-            +square.xxxxxlarge.centered
-                span.small 39
-            +square.xxxxxlarge.centered
-                span.small 40
-            +square.xxxxxlarge.centered
-                span.small 41
-            +square.xxxxxlarge.centered
-                span.small 42
-            +square.xxxxxlarge.centered
-                span.small 43
-            +square.xxxxxlarge.centered
-                span.small 44
-            +square.xxxxxlarge.centered
-                span.small 45
-            +square.xxxxxlarge.centered
-                span.small 46
-            +square.xxxxxlarge.centered
-                span.small 47
-            +square.xxxxxlarge.centered
-                span.small 48
-            +square.xxxxxlarge.centered
-                span.small 49
-            +square.xxxxxlarge.centered
-                span.small 50
-            +square.xxxxxlarge.centered
-                span.small 51
-            +square.xxxxxlarge.centered
-                span.small 52
-            +square.xxxxxlarge.centered
-                span.small 53
-            +square.xxxxxlarge.centered
-                span.small 54
-            +square.xxxxxlarge.centered
-                span.small 55
-            +square.xxxxxlarge.centered
-                span.small 56
-            +square.xxxxxlarge.centered
-                span.small 57
-            +square.xxxxxlarge.centered
-                span.small 58
-            +square.xxxxxlarge.centered
-                span.small 59
-            +square.xxxxxlarge.centered
-                span.small 60
-            +square.xxxxxlarge.centered
-                span.small 61
-            +square.xxxxxlarge.centered
-                span.small 62
-            +square.xxxxxlarge.centered
-                span.small 63
-            +square.xxxxxlarge.centered
-                span.small 64
+            - var squares_nr = 64;
+            - var nr = 1;
+            while nr <= squares_nr
+                +square.xxxxxlarge.centered
+                    span.small= nr++
 
     +divider Actions
 
     +multiple
         +multiple.joined
-            input(id="input", type="number", name="input", placeholder="Search number...")
+            +input({name: "input_search", label: "Search number..."}).no-floating.white.text-field-primary
             +button-simple(id="search", onclick="javascript:search()").primary Search
         +multiple.joined
-            input(id="populate_input", type="number", name="input2", placeholder="Squares number...")
+            +input({name: "input_populate", label: "Square number..."}).no-floating.white.text-field-secondary
             +button-simple(id="populate", onclick="javascript:populate()").secondary Populate
         +button-simple(id="clear", onclick="javascript:reset()").black Clear
 
@@ -158,7 +35,7 @@ append body-end
         function populate () {
             var html = '';
 
-            for ( var i = 0, l = $('#populate_input').val (); i < l; i++ ) {
+            for ( var i = 0, l = $('input[name="input_populate"]').val (); i < l; i++ ) {
                 html += '<div class="square xxxxxlarge centered" style=""><span class="small">' + (i + 1) + '</span></div>';
             }
 
@@ -198,5 +75,5 @@ append body-end
 
         $(function () {
             $squares = $document.find ( '.square' );
-            $input = $('#input');
+            $input = $('input[name="input_search"]');
         });

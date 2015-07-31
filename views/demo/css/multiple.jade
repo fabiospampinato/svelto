@@ -71,7 +71,7 @@ append main
     +multiple.fluid
         +container-simple Left
         +container-simple Center
-        +container-simple.nogrow Right
+        +container-simple.nogrow Right (no-grow)
 
     +divider Fluid - Joined
 
@@ -96,6 +96,18 @@ append main
         +button-simple.outlined Left
         +button-simple.outlined Center
         +button-simple.outlined Right
+
+    +divider Fluid - Joined - No separators - Shadows
+
+    +multiple.fluid.joined.no-separators
+        +container-simple.z-depth-4 Left
+        +container-simple.z-depth-4 Center
+        +container-simple.z-depth-4 Right
+
+    +multiple.fluid.joined.no-separators
+        +button-simple.z-depth-4.outlined Left
+        +button-simple.z-depth-4.outlined Center
+        +button-simple.z-depth-4.outlined Right
 
     +divider Fluid - Joined - Different grows
 
@@ -158,3 +170,15 @@ append main
         +button-simple.outlined Top
         +button-simple.outlined Middle
         +button-simple.outlined Bottom
+
+    +divider Vertical - Fluid - Joined - No separators
+
+    +multiple.vertical.fluid.joined.no-separators
+        +container-simple.z-depth-4 Top
+        +container-simple.z-depth-4 Middle
+        +container-simple.z-depth-4 Bottom
+
+    +multiple.vertical.fluid.joined.no-separators
+        +button-simple.z-depth-4.outlined Top
+        +button-simple.z-depth-4.outlined Middle
+        +button-simple.z-depth-4.outlined Bottom

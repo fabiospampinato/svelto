@@ -22,6 +22,7 @@ $font-size-base: $font-size-normal;
 /* LINK */
 
 $a-underline-transition-duration: 0.2s;
+$a-underline-height: 1px;
 
 /* HEADERS */
 
@@ -42,6 +43,7 @@ $small-font-size: 65%;
 
 $mark-padding: 0.2em;
 $mark-bg-color: $color-yellow;
+$mark-border-radius: $border-radius-small;
 
 /* ABBR */
 

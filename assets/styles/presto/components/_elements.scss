@@ -5,7 +5,9 @@ iframe, embed, video, object {
     //TODO: take it from bootstrap
 }
 
-.image-wrp { //TODO: add possibility to set a width and scale everything automatically
+.image-wrp {
+
+    //TODO: add possibility to set a width and scale everything automatically
 
     position: relative;
     display: flex; //INFO: In order to remove the extra white space at the bottom of the image

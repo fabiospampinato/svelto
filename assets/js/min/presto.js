@@ -1142,7 +1142,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $(function () {
 
-        $('input.autogrow, textarea.autogrow').autogrow ();
+        $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
 
     });
 
@@ -5094,6 +5094,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* STEPPER */
 
+//TODO: use an input instead of a label, so that we can
+
 ;(function ( $, window, document, undefined ) {
 
     'use strict';
@@ -5662,6 +5664,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
+            this.$partial_wrp = this.$partial.parent ( '.input-wrp' );
 
         },
 
@@ -5671,7 +5674,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             var tags_html = this._get_tags_html ();
 
-            this.$partial.before ( tags_html );
+            this.$partial_wrp.before ( tags_html );
 
             this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
 
@@ -5933,7 +5936,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( this.options.tags.$nodes.length === 0 || this.options.append ) {
 
-                    this.$partial.before ( tag_html );
+                    this.$partial_wrp.before ( tag_html );
 
                 } else {
 

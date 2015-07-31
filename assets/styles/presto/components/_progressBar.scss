@@ -62,8 +62,8 @@
         background-size: $progress-bar-stripe-size $progress-bar-stripe-size;
     }
 
-    &.striped:not(.inactive) > .progressBar-stripes {
-        animation: $progress-bar-stripes-transition-move-duration linear 0s normal none infinite running progressBar-stripes-move;
+    &.striped:not(.progressBar-disabled) > .progressBar-stripes {
+        animation: progressBar-stripes-move $progress-bar-stripes-transition-move-duration linear 0s infinite;
     }
 
     &.progressBar-disabled {

@@ -166,6 +166,8 @@
 
 .noty {
 
+    //TODO: Make the background a bit transparent
+
     @include z-depth ( $noty-z-depth );
     pointer-events: auto;
 

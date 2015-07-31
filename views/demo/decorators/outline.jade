@@ -8,11 +8,11 @@ append main
     +multiple
         +label-simple.outlined Label
         +button-simple.outlined Button
-        input(value="Input").outlined
-        textarea(value="Textarea").outlined
+        +input({label: "Placeholder...", value: "Input"}).outlined.white
+        +textarea({label: "Placeholder..."}).outlined.white Textarea
         +multiple.joined
-            input(value="Input").outlined
+            +input({label: "Placeholder...", value: "Input"}).outlined.no-bar.no-floating.white
             +button-icon("action-settings").outlined
         +multiple.joined.outlined
-            input(value="Input")
+            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Textarea
             +button-icon("action-settings")
