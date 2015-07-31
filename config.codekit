@@ -405,6 +405,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/assets\/js\/presto\/components\/flippable.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/components\/flippable.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/components\/min\/flippable.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/assets\/js\/presto\/components\/infobar.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -1094,6 +1105,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_flags.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_flags.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/components\/_flippable.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_flippable.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_flippable.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2070,6 +2097,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_flags.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_flags.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/settings\/_flippable.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_flippable.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_flippable.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -3364,6 +3407,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/javascript\/flippable.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/flippable.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/javascript\/flippable.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/views\/demo\/javascript\/menu.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3646,6 +3700,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/tools\/btEach.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/btEach.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/tools\/btEach.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3837,6 +3900,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/tools\/touching.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/touching.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/tools\/touching.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3998,6 +4070,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/mixins\/presto\/flags.jade",
 		"outputAbbreviatedPath": "\/views\/mixins\/presto\/flags.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/flippable.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/flippable.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/flippable.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -4575,110 +4658,116 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/infobar.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/flippable.js",
 			"position": 24,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/accordion.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/infobar.js",
 			"position": 25,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/checkbox.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/accordion.js",
 			"position": 26,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/dropdown.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/checkbox.js",
 			"position": 27,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/modal.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/dropdown.js",
 			"position": 28,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/navbar.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/modal.js",
 			"position": 29,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/noty.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/navbar.js",
 			"position": 30,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/progressBar.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/noty.js",
 			"position": 31,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/radio.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/progressBar.js",
 			"position": 32,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/ripple.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/radio.js",
 			"position": 33,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/select.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/ripple.js",
 			"position": 34,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/slider.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/select.js",
 			"position": 35,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/stepper.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/slider.js",
 			"position": 36,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/switch.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/stepper.js",
 			"position": 37,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tabs.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/switch.js",
 			"position": 38,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tagbox.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tabs.js",
 			"position": 39,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tagbox.js",
 			"position": 40,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
 			"position": 41,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
+			"position": 42,
 			"type": 0
 			}
 		]

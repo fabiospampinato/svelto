@@ -1,0 +1,65 @@
+
+/* FLIPPABLE */
+
+.flippable-wrp {
+
+    position: relative;
+    margin-bottom: $layout-spacing;
+    perspective: $flippable-perspective;
+
+    & > .flippable {
+
+        transition: $flippable-transition-flip-duration;
+        transform-style: preserve-3d;
+        @include fill ();
+
+        & > .flippable-front, & > .flippable-back {
+
+            @include fill ();
+            backface-visibility: hidden;
+
+            & > .container {
+                @include fill ();
+            }
+
+            & > *:last-child {
+                margin-bottom: 0 !important;
+            }
+
+        }
+
+        & > .flippable-front {
+            transform: rotateY(0deg);
+        }
+
+        & > .flippable-back {
+            position: absolute;
+            top: 0;
+            transform: rotateY(180deg);
+        }
+
+    }
+
+    &:not(.vertical).flipped > .flippable {
+        transform: rotateY(180deg);
+    }
+
+    &.vertical {
+
+        & > .flippable {
+
+           transform-origin: 100% 50%;
+
+            & > .flippable-back {
+                transform: rotateX(180deg);
+            }
+
+        }
+
+        &.flipped > .flippable {
+            transform: rotateX(-180deg);
+        }
+
+    }
+
+}

@@ -1,0 +1,49 @@
+//- javascript/flippable.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Horizontal
+
+    +flippable
+        +flippable-front
+            +container-simple.red
+                p Front
+                +button-simple.outlined.flipper Flip
+        +flippable-back
+            +container-simple.blue
+                p Back
+                +button-simple.outlined.flipper Flip
+
+    +divider Vertical
+
+    +flippable.vertical
+        +flippable-front
+            +container-simple.red
+                p Front
+                +button-simple.outlined.flipper Flip
+        +flippable-back
+            +container-simple.blue
+                p Back
+                +button-simple.outlined.flipper Flip
+
+    +divider Actions
+
+    +multiple
+        +button-simple(onclick="set_size (100, 100)").outlined 100x100
+        +button-simple(onclick="set_size (200, 200)").outlined 200x200
+        +button-simple(onclick="set_size (300, 300)").outlined 300x300
+        +button-simple(onclick="set_size (250, 200)").outlined 250x200
+        +button-simple(onclick="set_size (400, 200)").outlined 400x200
+        +button-simple(onclick="set_size (600, 200)").outlined 600x200
+        +button-simple(onclick="set_size (200, 400)").outlined 200x400
+        +button-simple(onclick="set_size ('auto', 'auto')").outlined Auto
+
+append body-end
+    script.
+        function set_size(width, height) {
+            $(".flippable-wrp").css ({
+                width: width,
+                height: height
+            });
+        }
