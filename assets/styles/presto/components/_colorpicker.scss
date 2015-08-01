@@ -1,0 +1,63 @@
+
+/* COLORPICKER */
+
+.colorpicker {
+
+    position: relative;
+    margin-bottom: $layout-spacing;
+
+    img {
+        @include fill ();
+        position: absolute;
+        top: 0;
+        pointer-events: none;
+    }
+
+    .colorpicker-handler {
+        position: absolute;
+        box-sizing: border-box;
+        border: $colorpicker-handler-border-width solid $colorpicker-handler-border-color;
+        box-shadow: $colorpicker-handler-shadow;
+    }
+
+    & > .colorpicker-saturation-brightness-wrp, & > .colorpicker-hue-wrp {
+        position: relative;
+        display: inline-block;
+        box-sizing: content-box;
+        height: $colorpicker-height;
+        cursor: pointer;
+        vertical-align: top;
+        border: $colorpicker-wrp-border-width solid $colorpicker-wrp-border-color;
+    }
+
+    & > .colorpicker-saturation-brightness-wrp {
+
+        width: $colorpicker-height;
+        background-color: red;
+
+        & > .colorpicker-handler {
+            width: $colorpicker-handler-sb-height;
+            height: $colorpicker-handler-sb-width;
+            margin: - #{$colorpicker-handler-sb-height / 2} 0 0 - #{$colorpicker-handler-sb-width / 2};
+            cursor: move;
+            border-radius: $colorpicker-handler-sb-border-radius;
+        }
+
+    }
+
+    & > .colorpicker-hue-wrp {
+
+        width: $colorpicker-hue-wrp-width;
+        margin-left: $layout-spacing;
+
+        & > .colorpicker-handler {
+            width: 100%;
+            height: $colorpicker-handler-hue-height;
+            margin-top: - ( $colorpicker-handler-hue-height / 2 );
+            cursor: ns-resize;
+            border-radius: $colorpicker-handler-hue-border-radius;
+        }
+
+    }
+
+}

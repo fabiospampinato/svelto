@@ -1,0 +1,33 @@
+
+/* COLORPICKER */
+
+$colorpicker-height: 170px;
+
+/* WRAPPERS */
+
+$colorpicker-wrp-border-width: 1px;
+$colorpicker-wrp-border-color: black;
+
+/* WRAPPER HUE */
+
+$colorpicker-hue-wrp-width: 25px;
+
+/* HANDLER */
+
+$colorpicker-handler-border-width: 2px;
+$colorpicker-handler-border-color: white;
+
+$colorpicker-handler-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0px 1px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(0, 0, 0, 0.2);
+
+/* HANDLER SB */
+
+$colorpicker-handler-sb-height: 15px;
+$colorpicker-handler-sb-width: 15px;
+
+$colorpicker-handler-sb-border-radius: 50%;
+
+/* HANDLER HUE */
+
+$colorpicker-handler-hue-height: 7px;
+
+$colorpicker-handler-hue-border-radius: $border-radius-small;

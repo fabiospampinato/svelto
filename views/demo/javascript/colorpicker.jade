@@ -1,0 +1,13 @@
+//- bootstrap/colorpicker.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Colorpicker
+
+    +container-simple
+        +colorpicker(id="colorpicker_test")
+
+    +divider Input
+
+    +input({name: "colorpicker_test"}).white.no-floating
