@@ -6,7 +6,7 @@
     position: relative;
     margin-bottom: $layout-spacing;
 
-    img {
+    .colorpicker-brightness, .colorpicker-saturation, .colorpicker-hue {
         @include fill ();
         position: absolute;
         top: 0;
@@ -14,10 +14,12 @@
     }
 
     .colorpicker-handler {
+        @include z-depth ( 2, ',' + $colorpicker-handler-shadow );
         position: absolute;
         box-sizing: border-box;
         border: $colorpicker-handler-border-width solid $colorpicker-handler-border-color;
-        box-shadow: $colorpicker-handler-shadow;
+        // box-shadow: $colorpicker-handler-shadow;
+        z-index: 2;
     }
 
     & > .colorpicker-saturation-brightness-wrp, & > .colorpicker-hue-wrp {
@@ -35,6 +37,15 @@
         width: $colorpicker-height;
         background-color: red;
 
+        & > .colorpicker-brightness {
+            background: linear-gradient(to right, white 0%, rgba(255,255,255,0) 100%);
+        }
+
+        & > .colorpicker-saturation {
+            background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, black 100%);
+            z-index: 1;
+        }
+
         & > .colorpicker-handler {
             width: $colorpicker-handler-sb-height;
             height: $colorpicker-handler-sb-width;
@@ -49,6 +60,10 @@
 
         width: $colorpicker-hue-wrp-width;
         margin-left: $layout-spacing;
+
+        & > .colorpicker-hue {
+            background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);
+        }
 
         & > .colorpicker-handler {
             width: 100%;
