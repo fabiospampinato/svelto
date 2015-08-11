@@ -139,6 +139,22 @@
             border-left-color: inherit;
         }
 
+        &.outlined {
+
+            & > .label-ribbon-left, & > .label-ribbon-right {
+                bottom: - ( $label-ribbon-size + $outline-width );
+            }
+
+            & > .label-ribbon-left {
+                left: - $outline-width;
+            }
+
+            & > .label-ribbon-right {
+                right: - $outline-width;
+            }
+
+        }
+
     }
 
     & > .label {
