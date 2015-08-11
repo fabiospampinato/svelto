@@ -13,6 +13,7 @@
     border-width: $container-border-width;
     border-style: solid;
     border-radius: $contianer-border-radius;
+    position: relative;
 
     &.limited {
         max-width: $layout-max-width;

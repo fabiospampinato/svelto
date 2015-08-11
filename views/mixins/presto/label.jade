@@ -46,3 +46,40 @@ mixin label-pointed-simple
 mixin label-pointer
     .label-pointer&attributes(attributes)
         block
+
+mixin label-ribbons
+    +label-wrp.ribbons
+        .label&attributes(attributes)
+            .label-ribbon-left
+            .label-ribbon-right
+            block
+    +label-simple&attributes(attributes).invisible
+
+mixin label-ribbon-left
+    +label-wrp.ribbon-left
+        .label&attributes(attributes)
+            .label-ribbon-left
+            block
+    +label-simple&attributes(attributes).invisible
+
+mixin label-ribbon-right
+    +label-wrp.ribbon-right
+        .label&attributes(attributes)
+            .label-ribbon-right
+            block
+    +label-simple&attributes(attributes).invisible
+
+mixin label-ribbons-simple
+    +label-ribbons&attributes(attributes)
+        +label-center
+            block
+
+mixin label-ribbon-left-simple
+    +label-ribbon-left&attributes(attributes)
+        +label-center
+            block
+
+mixin label-ribbon-right-simple
+    +label-ribbon-right&attributes(attributes)
+        +label-center
+            block

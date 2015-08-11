@@ -57,3 +57,40 @@ mixin button-pointed-simple
 mixin button-pointer
     .label-pointer&attributes(attributes)
         block
+
+mixin button-ribbons
+    +button-wrp.ribbons
+        .label.actionable&attributes(attributes)
+            .label-ribbon-left
+            .label-ribbon-right
+            block
+    +button-simple&attributes(attributes).invisible
+
+mixin button-ribbon-left
+    +button-wrp.ribbon-left
+        .label.actionable&attributes(attributes)
+            .label-ribbon-left
+            block
+    +button-simple&attributes(attributes).invisible
+
+mixin button-ribbon-right
+    +button-wrp.ribbon-right
+        .label.actionable&attributes(attributes)
+            .label-ribbon-right
+            block
+    +button-simple&attributes(attributes).invisible
+
+mixin button-ribbons-simple
+    +button-ribbons&attributes(attributes)
+        +label-center
+            block
+
+mixin button-ribbon-left-simple
+    +button-ribbon-left&attributes(attributes)
+        +label-center
+            block
+
+mixin button-ribbon-right-simple
+    +button-ribbon-right&attributes(attributes)
+        +label-center
+            block

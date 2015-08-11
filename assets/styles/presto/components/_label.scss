@@ -7,6 +7,12 @@
     display: flex;
     align-items: center;
     margin-bottom: $layout-spacing;
+    border-radius: $label-border-radius;
+    visibility: hidden;
+
+    & > * {
+        visibility: visible;
+    }
 
     & > .label-pointer {
 
@@ -76,6 +82,61 @@
                 border-left-width: 0;
             }
 
+        }
+
+    }
+
+    &.ribbons, &.ribbon-left, &.ribbon-right {
+        position: absolute;
+    }
+
+    &.ribbons > .label {
+        width: 100%;
+    }
+
+    &.ribbon-left, &.ribbons {
+
+        left: - $label-ribbon-size;
+
+        & > .label {
+            border-bottom-left-radius: 0;
+        }
+
+    }
+
+    &.ribbon-right, &.ribbons {
+
+        right: - $label-ribbon-size;
+
+        & > .label {
+            border-bottom-right-radius: 0;
+        }
+
+    }
+
+    & > .label {
+
+        & > .label-ribbon-left, & > .label-ribbon-right {
+            position: absolute;
+            bottom: - $label-ribbon-size;
+            border-width: $label-ribbon-size / 2;
+            border-style: solid;
+        }
+
+        & > .label-ribbon-left {
+            left: 0;
+            border-color: transparent;
+            border-top-color: inherit;
+            border-right-width: $label-ribbon-size / 2;
+            border-right-color: inherit;
+        }
+
+        & > .label-ribbon-right {
+            right: 0;
+            border-color: transparent;
+            border-top-color: inherit;
+            border-left-width: $label-ribbon-size / 2;
+            border-left-color: inherit;
         }
 
     }
