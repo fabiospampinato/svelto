@@ -1,2 +1,35 @@
 
 /* DATEPICKER */
+
+$datepicker-block-width: 100% / 7;
+
+/* DAY NAME */
+
+$datepicker-day-name-font-weight: bold;
+$datepicker-day-name-height: 40px;
+
+/* DAY */
+
+$datepicker-day-height: 40px;
+$datepicker-day-prev-next-opacity: 0.25;
+$datepicker-day-prev-next-z-depth: 0;
+
+/* DAY CIRCLE */
+
+$datepicker-day-circle-size: 38px;
+
+$datepicker-day-hover-color: $color-secondary-text;
+$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25);
+
+$datepicker-day-today-color: $color-secondary-bg;
+$datepicker-day-today-circle-color: transparent;
+
+$datepicker-day-selected-z-depth: 2;
+$datepicker-day-selected-color: $color-secondary-text;
+$datepicker-day-selected-circle-color: $color-secondary-bg;
+
+/* TRANSITIONS */
+
+$datepicker-transition-all-duration: 0.1s;
+
+$datepicker-disabled-opacity: 0.5;

@@ -16,10 +16,10 @@
     .colorpicker-handler {
         @include z-depth ( 2, ',' + $colorpicker-handler-shadow );
         position: absolute;
+        z-index: 2;
         box-sizing: border-box;
         border: $colorpicker-handler-border-width solid $colorpicker-handler-border-color;
-        // box-shadow: $colorpicker-handler-shadow;
-        z-index: 2;
+        background-color: $colorpicker-handler-border-color;
     }
 
     & > .colorpicker-saturation-brightness-wrp, & > .colorpicker-hue-wrp {

@@ -1,1 +1,13 @@
-//- datepicker.jade
+//- bootstrap/datepicker.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Datepicker
+
+    +container-simple
+        +datepicker(id="datepicker_test")
+
+    +divider Input
+
+    +input({name: "datepicker_test"}).white.no-floating
