@@ -18,3 +18,26 @@ $label-compact-vertical-padding: 0.78571em !default;
 
 $label-badge-top: -20%;
 $label-badge-right: -20%;
+
+/* POINTER */
+
+$label-pointer-color: $label-color;
+$label-pointer-color-basic: $label-color-basic;
+
+$label-pointer-sharp-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2;
+$label-pointer-sharp-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-sharp-size ) / 2 + ( $label-pointer-sharp-size / 16 ) );
+
+$label-pointer-sharp-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2;
+$label-pointer-sharp-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-sharp-compact-size ) / 2 + ( $label-pointer-sharp-compact-size / 16 ) );
+
+$label-pointer-smooth-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2;
+$label-pointer-smooth-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-smooth-size ) / 2 + ( $label-pointer-smooth-size / 16 ) );
+
+$label-pointer-smooth-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2;
+$label-pointer-smooth-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-smooth-compact-size ) / 2 + ( $label-pointer-smooth-compact-size / 16 ) );
+
+/* POINTER CIRCLE */
+
+$label-pointer-circle-size: 0.5em;
+
+$label-pointer-circle-box-shadow: 1px -1px 0.5px 0 rgba(0, 0, 0, 0.1);

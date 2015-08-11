@@ -1,8 +1,13 @@
 //- label.jade
 
-mixin label
-    .label&attributes(attributes)
+mixin label-wrp
+    .label-wrp&attributes(attributes)
         block
+
+mixin label
+    +label-wrp
+        .label&attributes(attributes)
+            block
 
 mixin label-left
     .label-left&attributes(attributes)
@@ -25,4 +30,19 @@ mixin label-icon(icon)
     +label&attributes(attributes).compact
         +label-center
             +icon(icon)
+        block
+
+mixin label-pointed
+    +label-wrp
+        +label-pointer&attributes(attributes)
+        .label&attributes(attributes)
+            block
+
+mixin label-pointed-simple
+    +label-pointed&attributes(attributes)
+        +label-center
+            block
+
+mixin label-pointer
+    .label-pointer&attributes(attributes)
         block

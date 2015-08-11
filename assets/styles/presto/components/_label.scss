@@ -1,75 +1,161 @@
 
 /* LABEL */
 
-//TODO: Add a minimum width, so that when it's not very wide and rounded it will be a circle, not an oval. The same for the left and right sections
+.label-wrp {
 
-.label {
-
-    @include color ( $label-color, $label-color-basic );
-    font-weight: bold;
-    position: relative;
-    display: inline-flex;
-    justify-content: center;
+    @include color ( 'inherit', true );
+    display: flex;
     align-items: center;
-    min-width: 1em;
-    min-height: 1em;
     margin-bottom: $layout-spacing;
-    border-radius: $label-border-radius;
 
-    & > .label-left, & > .label-right {
-        display: flex;
-        align-items: center;
-        align-self: stretch;
-        min-width: 1em;
-        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
-        background-color: $label-left-right-bg-color;
-    }
+    & > .label-pointer {
 
-    & > .label-left {
+        //FIXME: if the angles are rounded we leave more space at the left of the pointer
+        //FIXME: is not pixel-perfect
+
+        @include color ( $label-pointer-color, $label-pointer-color-basic );
+        // background-color: blue !important;
+        position: relative;
         order: 1;
-        border-top-left-radius: inherit;
-        border-bottom-left-radius: inherit;
-    }
+        transform: translateX(50%) rotate(-45deg);
 
-    & > .label-center {
-        display: flex;
-        order: 2;
-        justify-content: space-between;
-        padding: $label-vertical-padding $label-horizontal-padding;
-    }
-
-    & > .label-right {
-        order: 3;
-        border-top-right-radius: inherit;
-        border-bottom-right-radius: inherit;
-    }
-
-    &.compact .label-center {
-        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
-    }
-
-    &.fluid {
-        width: 100%;
-    }
-
-    &.badge {
-        position: absolute !important;
-        top: $label-badge-top !important;
-        right: $label-badge-right !important;
-    }
-
-    & > * > .icon {
-
-        @extend %icon;
-        font-size: 1.3em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
-        margin: -0.115em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
-
-        &.left {
-            padding-right: $label-center-icon-extra-spacing;
+        &:after {
+            @include color ( $container-color, true );
+            content: '';
+            width: $label-pointer-circle-size;
+            height: $label-pointer-circle-size;
+            border-radius: 50%;
+            top: calc(50% - #{$label-pointer-circle-size});
+            left: calc(50% - #{$label-pointer-circle-size});
+            position: absolute;
+            z-index: 3;
+            box-shadow: $label-pointer-circle-box-shadow;
         }
 
-        &.right {
-            padding-left: $label-center-icon-extra-spacing;
+        &:not(.sharp), &.smooth {
+
+            width: $label-pointer-smooth-size;
+            height: $label-pointer-smooth-size;
+            border-radius: $label-border-radius 0;
+            margin-left: $label-pointer-smooth-margin-left;
+
+            &.compact {
+                width: $label-pointer-smooth-compact-size;
+                height: $label-pointer-smooth-compact-size;
+                margin-left: $label-pointer-smooth-compact-margin-left;
+            }
+
+            & + .label {
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+            }
+
+        }
+
+        &.sharp {
+
+            width: $label-pointer-sharp-size;
+            height: $label-pointer-sharp-size;
+            border-radius: $label-border-radius;
+            margin-left: $label-pointer-sharp-margin-left;
+
+            &.compact {
+                width: $label-pointer-sharp-compact-size;
+                height: $label-pointer-sharp-compact-size;
+                margin-left: $label-pointer-sharp-compact-margin-left;
+            }
+
+        }
+
+        &.outlined {
+
+            border-bottom-width: 0;
+            border-right-width: 0;
+
+            & + .label {
+                border-left-width: 0;
+            }
+
+        }
+
+    }
+
+    & > .label {
+
+        @include color ( $label-color, $label-color-basic );
+        order: 2;
+        font-weight: bold;
+        position: relative;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        min-width: 1em + ( $label-horizontal-padding * 2 );
+        height: 1em + ( $label-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
+        border-radius: $label-border-radius;
+
+        & > .label-left, & > .label-right {
+            display: flex;
+            align-items: center;
+            align-self: stretch;
+            min-width: 1em;
+            padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+            background-color: $label-left-right-bg-color;
+        }
+
+        & > .label-left {
+            order: 1;
+            border-top-left-radius: inherit;
+            border-bottom-left-radius: inherit;
+        }
+
+        & > .label-center {
+            display: flex;
+            order: 2;
+            justify-content: space-between;
+            padding: $label-vertical-padding $label-horizontal-padding;
+        }
+
+        & > .label-right {
+            order: 3;
+            border-top-right-radius: inherit;
+            border-bottom-right-radius: inherit;
+        }
+
+        &.compact {
+
+            min-width: 1em + ( $label-compact-horizontal-padding * 2 );
+            height: 1em + ( $label-compact-vertical-padding * 2 );
+
+            & > .label-center {
+                padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+            }
+
+        }
+
+        &.fluid {
+            width: 100%;
+        }
+
+        &.badge {
+            position: absolute !important;
+            top: $label-badge-top !important;
+            right: $label-badge-right !important;
+        }
+
+        & > * > .icon {
+
+            @extend %icon;
+            font-size: 1.3em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
+            margin: -0.115em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
+
+            &.left {
+                padding-right: $label-center-icon-extra-spacing;
+            }
+
+            &.right {
+                padding-left: $label-center-icon-extra-spacing;
+            }
+
         }
 
     }

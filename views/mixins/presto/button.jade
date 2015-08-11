@@ -1,19 +1,24 @@
 //- button.jade
 
+mixin button-wrp
+    .label-wrp.button-wrp&attributes(attributes)
+        block
+
 mixin button(href)
-    if href
-        if href.slice ( 0, 11 ) === 'javascript:'
-            .button.actionable(onclick=href)&attributes(attributes)
-                block
-        else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-            .button.actionable(onclick="javascript:"+href)&attributes(attributes)
-                block
+    +button-wrp
+        if href
+            if href.slice ( 0, 11 ) === 'javascript:'
+                .label.actionable(onclick=href)&attributes(attributes)
+                    block
+            else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+                .label.actionable(onclick="javascript:"+href)&attributes(attributes)
+                    block
+            else
+                a.label.actionable(href=href)&attributes(attributes)
+                    block
         else
-            a.button.actionable(href=href)&attributes(attributes)
+            .label.actionable&attributes(attributes)
                 block
-    else
-        .button.actionable&attributes(attributes)
-            block
 
 mixin button-left
     .label-left&attributes(attributes)
@@ -36,4 +41,19 @@ mixin button-icon(icon, href)
     +button(href)&attributes(attributes).compact
         +button-center
             +icon(icon)
+        block
+
+mixin button-pointed
+    +button-wrp.pointed
+        +button-pointer&attributes(attributes)
+        .label.actionable&attributes(attributes)
+            block
+
+mixin button-pointed-simple
+    +button-pointed&attributes(attributes)
+        +button-center
+            block
+
+mixin button-pointer
+    .label-pointer&attributes(attributes)
         block

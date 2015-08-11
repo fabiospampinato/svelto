@@ -7,5 +7,6 @@ mixin textarea(options)
 
         textarea.text-field(type=(options.type || "text"), name=(options.name || ""), required)
             block
-        label= (options.label || "")
+        if options.label
+            label= options.label
         .text-field-bar
