@@ -259,8 +259,8 @@
 
             visibility: hidden;
             overflow: hidden;
-            width: 3.5em !important;
-            height: 3.5em !important;
+            width: $label-corner-size !important;
+            height: $label-corner-size !important;
             border-radius: 0;
 
             & > * {
@@ -338,6 +338,17 @@
             position: absolute !important;
             top: $label-badge-top !important;
             right: $label-badge-right !important;
+        }
+
+        &.floating {
+            //TODO: add sub floating actions
+            //TODO: write it closet to the spec, it looks a bit too big, expecially the icon
+            @include z-depth ( $label-floating-z-depth );
+            position: fixed;
+            z-index: 1;
+            right: $label-floating-right;
+            bottom: $label-floating-bottom;
+            margin-bottom: 0;
         }
 
         & > * > .icon {

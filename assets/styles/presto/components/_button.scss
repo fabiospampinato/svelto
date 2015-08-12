@@ -9,23 +9,6 @@ button {
 
 //FIXME: Pointed buttons doen't work as expected, the pointer is not clickable and it doesn't react to a click to the actual button
 
-.button-wrp {
-
-    & > .label {
-
-        cursor: pointer;
-
-        &.floating {
-            //TODO: add sub floating actions
-            //TODO: write it closet to the spec, it looks a bit too big, expecially the icon
-            @include z-depth ( $button-floating-z-depth );
-            position: fixed;
-            z-index: 1;
-            right: $button-floating-right;
-            bottom: $button-floating-bottom;
-            margin-bottom: 0;
-        }
-
-    }
-
+.button-wrp > .label {
+    cursor: pointer;
 }

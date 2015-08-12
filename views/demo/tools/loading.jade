@@ -6,8 +6,7 @@ append main
     +divider Paragraph
 
     +container-simple
-        p
-            +lorem-ipsum
+        +paragraph-sample
 
     +divider Action
 
@@ -16,5 +15,5 @@ append main
 append body-end
     +script.
         function loading_test () {
-            $("p").parent ( '.container' ).loading ();
+            $('.container' ).loading ();
         }

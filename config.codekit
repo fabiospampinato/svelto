@@ -2913,6 +2913,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/components\/label.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/components\/label.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/components\/label.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -3806,15 +3815,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/tools\/blurred.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tools\/blurred.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/demo\/tools\/blurred.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -4005,15 +4005,6 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
-		},
-	"\/views\/demo\/tools\/toggleHeight.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/tools\/toggleHeight.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/tools\/toggleHeight.jade": {
 		"compileDebug": 0,

@@ -94,3 +94,15 @@ mixin button-ribbon-right-simple
     +button-ribbon-right&attributes(attributes)
         +label-center
             block
+
+mixin button-corner(direction, icon)
+    +button-wrp(class=(direction || "top-right")).corner
+        .label.actionable&attributes(attributes).compact
+            .label-corner
+            +button-center
+                if icon
+                    +icon(icon)
+                else
+                    block
+            if icon
+                block

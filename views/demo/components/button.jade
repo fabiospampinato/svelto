@@ -55,17 +55,32 @@ append main
 
     +container-simple.limited.xs-10
         +button-ribbons-simple.primary Left & Right
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
         +button-ribbon-left-simple.secondary Left
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
         +button-ribbon-right-simple.tertiary Right
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
         +button-ribbons-simple.outlined Outlined
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
+
+    +divider Corner
+
+    +container-simple
+        +button-corner("top-left").primary.small P
+        +button-corner("top-right", "file-file-download").secondary
+        +button-corner("bottom-right", "action-thumb-up").quaternary.large
+        +button-corner("bottom-left", "action-favorite").tertiary.xlarge
+        +paragraph-sample
+
+    +divider Badge
+
+    +multiple
+        +label-icon("action-settings")
+            +button-simple.compact.badge.xxxsmall.red 1
+        +label-icon("action-settings")
+            +button-simple.compact.badge.xxxsmall.rounded.primary 2
+        +label-icon("action-settings").tertiary
+            +button-simple.compact.badge.xxxsmall.rounded.inherit 3
 
     +divider Floating
 

@@ -111,17 +111,13 @@ append main
 
     +container-simple.limited.xs-10
         +label-ribbons-simple.primary Left & Right
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
         +label-ribbon-left-simple.secondary Left
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
         +label-ribbon-right-simple.tertiary Right
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
         +label-ribbons-simple.outlined Outlined
-        p
-            +lorem-ipsum(50, 'words')
+        +paragraph-sample
 
     +divider Corner
 
@@ -130,8 +126,7 @@ append main
         +label-corner("top-right", "file-file-download").secondary
         +label-corner("bottom-right", "action-thumb-up").quaternary.large
         +label-corner("bottom-left", "action-favorite").tertiary.xlarge
-        p
-            +lorem-ipsum
+        +paragraph-sample
 
     +divider Badge
 
@@ -142,3 +137,7 @@ append main
             +label-simple.compact.badge.xxxsmall.rounded.primary 2
         +button-icon("action-settings").tertiary
             +label-simple.compact.badge.xxxsmall.rounded.inherit 3
+
+    +divider Floating
+
+    +label-icon('action-settings').floating.rounded.secondary.xxxlarge

@@ -45,3 +45,13 @@ $label-pointer-circle-box-shadow: 1px -1px 0.5px 0 rgba(0, 0, 0, 0.1);
 /* RIBBONS */
 
 $label-ribbon-size: $layout-spacing * 1.5;
+
+/* CORNER */
+
+$label-corner-size: 3.5em;
+
+/* FLOATING */
+
+$label-floating-z-depth: 4;
+$label-floating-right: $layout-spacing * 3;
+$label-floating-bottom: $layout-spacing * 3;

@@ -1,8 +1,13 @@
 //- placeholder.jade
 
-mixin placeholder(width, height)
-    .placeholder(style="width:" + ( width || 0 ) + "px; height:" + ( height || 0 ) + "px; line-height: " + ( height || 0 ) + "px")&attributes(attributes)
-        if block
-            block
-        else
-            = ( width || 0 ) + "x" + ( height || 0 )
+mixin placeholder(width, height, empty)
+    - width = width || 0;
+    - height = height || 0;
+    - width = isNaN ( width ) ? width : width + 'px';
+    - height = isNaN ( height ) ? height : height + 'px';
+    .placeholder(style="width:" + width + "; height:" + height + "; line-height: " + height + ";")&attributes(attributes)
+        if !empty
+            if block
+                block
+            else
+                = width + " - " + height

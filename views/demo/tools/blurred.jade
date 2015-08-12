@@ -8,8 +8,7 @@ append main
     +divider Paragraph
 
     +container-simple
-        p
-            +lorem-ipsum
+        +paragraph-sample
 
     +divider Action
 
@@ -18,5 +17,5 @@ append main
 append body-end
     +script.
         function blur_test () {
-            $("p").parent ( '.container' ).blurred ();
+            $('.container').blurred ();
         }
