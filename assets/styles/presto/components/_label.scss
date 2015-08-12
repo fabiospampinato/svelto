@@ -7,7 +7,7 @@
     display: flex;
     align-items: center;
     margin-bottom: $layout-spacing;
-    border-radius: $label-border-radius;
+    border-radius: inherit;
     visibility: hidden;
 
     & > * {
@@ -20,7 +20,6 @@
         //FIXME: is not pixel-perfect
 
         @include color ( $label-pointer-color, $label-pointer-color-basic );
-        // background-color: blue !important;
         position: relative;
         order: 1;
         transform: translateX(50%) rotate(-45deg);
@@ -99,6 +98,7 @@
         left: - $label-ribbon-size;
 
         & > .label {
+            border-top-left-radius: 0;
             border-bottom-left-radius: 0;
         }
 
@@ -109,6 +109,7 @@
         right: - $label-ribbon-size;
 
         & > .label {
+            border-top-right-radius: 0;
             border-bottom-right-radius: 0;
         }
 
@@ -151,6 +152,126 @@
 
             & > .label-ribbon-right {
                 right: - $outline-width;
+            }
+
+        }
+
+    }
+
+    &.corner {
+
+        position: absolute;
+        margin-bottom: 0;
+
+        &.top-left {
+
+            top: 0;
+            left: 0;
+
+            & > .label {
+
+                border-top-left-radius: inherit;
+
+                & > .label-corner {
+                    top: 0;
+                    left: 0;
+                    transform: translateX(-50%) translateY(-50%) rotate(45deg);
+                }
+
+                & > .label-center {
+                    transform: translateX(-25%) translateY(-25%);
+                }
+
+            }
+
+        }
+
+        &.top-right {
+
+            top: 0;
+            right: 0;
+
+            & > .label {
+
+                border-top-right-radius: inherit;
+
+                & > .label-corner {
+                    top: 0;
+                    right: 0;
+                    transform: translateX(50%) translateY(-50%) rotate(45deg);
+                }
+
+                & > .label-center {
+                    transform: translateX(25%) translateY(-25%);
+                }
+
+            }
+
+        }
+
+        &.bottom-left {
+
+            bottom: 0;
+            left: 0;
+
+            & > .label {
+
+                border-bottom-left-radius: inherit;
+
+                & > .label-corner {
+                    bottom: 0;
+                    left: 0;
+                    transform: translateX(-50%) translateY(50%) rotate(45deg);
+                }
+
+                & > .label-center {
+                    transform: translateX(-25%) translateY(25%);
+                }
+
+            }
+
+        }
+
+        &.bottom-right {
+
+            right: 0;
+            bottom: 0;
+
+            & > .label {
+
+                border-bottom-right-radius: inherit;
+
+                & > .label-corner {
+                    right: 0;
+                    bottom: 0;
+                    transform: translateX(50%) translateY(50%) rotate(45deg);
+                }
+
+                & > .label-center {
+                    transform: translateX(25%) translateY(25%);
+                }
+
+            }
+
+        }
+
+        & > .label {
+
+            visibility: hidden;
+            overflow: hidden;
+            width: 3.5em !important;
+            height: 3.5em !important;
+            border-radius: 0;
+
+            & > * {
+                visibility: visible;
+            }
+
+            & > .label-corner {
+                position: absolute;
+                width: 100% * $SQRT2;
+                height: 100% * $SQRT2;
+                background-color: inherit;
             }
 
         }

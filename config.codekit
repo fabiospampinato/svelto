@@ -211,7 +211,7 @@
 		"fileType": 32768,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"initialSize": 130291,
+		"initialSize": 1229,
 		"inputAbbreviatedPath": "\/assets\/images\/presto\/sample.png",
 		"outputAbbreviatedPath": "\/assets\/images\/presto\/sample.png",
 		"outputPathIsOutsideProject": 0,
@@ -2772,6 +2772,15 @@
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
+		},
+	"\/views\/demo\/components\/button.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/components\/button.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/views\/demo\/components\/button.jade": {
 		"compileDebug": 0,

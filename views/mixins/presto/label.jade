@@ -83,3 +83,15 @@ mixin label-ribbon-right-simple
     +label-ribbon-right&attributes(attributes)
         +label-center
             block
+
+mixin label-corner(direction, icon)
+    +label-wrp(class=(direction || "top-right")).corner
+        .label&attributes(attributes).compact
+            .label-corner
+            +label-center
+                if icon
+                    +icon(icon)
+                else
+                    block
+            if icon
+                block
