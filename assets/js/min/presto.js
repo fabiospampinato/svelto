@@ -7099,7 +7099,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$timeAgo_wrp = this.$element;
 
-            this.options.timestamp = this.$timeAgo_wrp.data ( 'timestamp' ) || this.options.timestamp;
+            this.options.timestamp = this.$timeAgo_wrp.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
 
         },
 
