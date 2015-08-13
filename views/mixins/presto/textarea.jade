@@ -1,10 +1,9 @@
 //- textarea.jade
 
 mixin textarea(options)
-    .textarea-wrp&attributes(attributes)
-        if !options
-            - options = {}
-
+    if !options
+        - options = {}
+    .textarea-wrp(class=(!options.label ? 'no-floating' : ''))&attributes(attributes)
         textarea.text-field(type=(options.type || "text"), name=(options.name || ""), required)
             block
         if options.label

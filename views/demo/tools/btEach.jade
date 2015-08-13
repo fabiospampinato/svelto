@@ -1,7 +1,5 @@
 //- tools/btEach.jade
 
-//- TODO: add badge instead
-
 extends ../../layout.jade
 
 append main
@@ -27,7 +25,6 @@ append main
         +button-simple(id="clear", onclick="javascript:reset()").black Clear
 
 append body-end
-    +noty({ body: '<p>[Green] Found <br/> [Red] Smaller <br/> [Blue] Bigger</p>', ttl: 'forever' })
     +script.
         var $squares,
             $input,

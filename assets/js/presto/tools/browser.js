@@ -1,7 +1,7 @@
 
 /* BROWSER */
 
-//TODO: detect browsers, versions, OSes
+//TODO: detect browsers, versions, OSes, but... is it useful?
 
 ;(function ( $, _, window, document, undefined ) {
 

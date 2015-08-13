@@ -4,6 +4,7 @@
 //TODO: add support for alpha channel
 //TODO: add a $bgs variable where we update the background
 //TODO: add drag on the wrps, not on the handlers... so that we can also drag if we are not hovering the handler, or even if we are
+//FIXME: if we input a bad hex color through the input then revert back to default
 
 ;(function ( $, _, window, document, undefined ) {
 

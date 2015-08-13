@@ -1,10 +1,9 @@
 //- input.jade
 
 mixin input(options)
-    .input-wrp&attributes(attributes)
-        if !options
-            - options = {}
-
+    if !options
+        - options = {}
+    .input-wrp(class=(!options.label ? 'no-floating' : ''))&attributes(attributes)
         input.text-field(type=(options.type || "text"), value=(options.value || ""), name=(options.name || ""), required)
         if options.label
             label= options.label

@@ -1104,7 +1104,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* AUTOGROW */
 
-//TODO: make it more DRY
+//INFO: Only works with `box-sizing: border-box`
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1117,8 +1117,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
-            default_width: 0,
-            default_height: 0,
+            minimum_width: 0,
+            minimum_height: 0,
             callbacks: {
                 update: $.noop
             }
@@ -1130,32 +1130,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$growable = this.$element;
 
-            this.is_border_box = ( this.$growable.css ( 'box-sizing' ) === 'border-box' ); //TODO: maybe only support border-box...
-
-            this.is_input = this.$growable.is ( 'input' );
-            this.is_textarea = this.$growable.is ( 'textarea' );
-
-            this.extra_pxs = 0;
+            this.isInput = this.$growable.is ( 'input' );
+            this.isTextarea = this.$growable.is ( 'textarea' );
 
         },
 
         _init: function () {
-
-            if ( this.is_border_box ) {
-
-                var props = this.is_input
-                                ? ['border-left-width', 'padding-left', 'padding-right', 'border-right-width']
-                                : this.is_textarea
-                                    ? ['border-top-width', 'padding-top', 'padding-bottom', 'border-bottom-width']
-                                    : [];
-
-                for ( var i = 0, l = props.length; i < l; i++ ) {
-
-                    this.extra_pxs += parseFloat ( this.$growable.css ( props[i] ) );
-
-                }
-
-            }
 
             this.update ();
 
@@ -1171,18 +1151,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_input_width: function () {
 
-            var needed_width = this._get_input_needed_width ( this.$growable ),
-                actual_width = this.$growable.width ();
+            var needed_width = this._get_input_needed_width ( this.$growable );
 
-            if ( needed_width > actual_width ) {
-
-                this.$growable.width ( needed_width + this.extra_pxs );
-
-            } else if ( actual_width > needed_width ) {
-
-                this.$growable.width ( Math.max ( needed_width, this.options.default_width ) + this.extra_pxs );
-
-            }
+            this.$growable.width ( Math.max ( needed_width, this.options.minimum_width ) );
 
         },
 
@@ -1191,13 +1162,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             var $span = $( '<span>' + this.$growable.val () + '</span>' );
 
             $span.css ({
-                'position' : 'absolute',
-                'left' : -9999,
-                'top' : -9999,
-                'font-family' : this.$growable.css ( 'font-family' ),
-                'font-size' : this.$growable.css ( 'font-size' ),
-                'font-weight' : this.$growable.css ( 'font-weight' ),
-                'font-style' : this.$growable.css ( 'font-style' )
+                font: this.$growable.css ( 'font' ),
+                position: 'absolute',
+                opacity: 0
             });
 
             $span.appendTo ( $body );
@@ -1214,22 +1181,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _update_textarea_height: function () {
 
-            var actual_height = this.$growable.height (),
-                needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
+            var needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
 
-            if ( needed_height > actual_height ) {
-
-                this.$growable.height ( needed_height + this.extra_pxs );
-
-            } else if ( actual_height > needed_height ) {
-
-                this.$growable.height ( Math.max ( needed_height, this.options.default_height ) + this.extra_pxs );
-
-            } else {
-
-                this.$growable.height ( actual_height + this.extra_pxs );
-
-            }
+            this.$growable.height ( Math.max ( needed_height, this.options.minimum_height ) );
 
         },
 
@@ -1237,13 +1191,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         update: function () {
 
-            if ( this.is_input ) {
+            if ( this.isInput ) {
 
                 this._update_input_width ();
 
                 this._trigger ( 'update' );
 
-            } else if ( this.is_textarea ) {
+            } else if ( this.isTextarea ) {
 
                 this._update_textarea_height ();
 
@@ -1275,9 +1229,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     /* BLUR */
 
-    $.fn.blurred = function ( activate ) {
+    $.fn.blurred = function ( force ) {
 
-        return this.toggleClass ( 'blurred', activate );
+        return this.toggleClass ( 'blurred', force );
 
     };
 
@@ -1287,7 +1241,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* BROWSER */
 
-//TODO: detect browsers, versions, OSes
+//TODO: detect browsers, versions, OSes, but... is it useful?
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3538,6 +3492,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: add support for alpha channel
 //TODO: add a $bgs variable where we update the background
 //TODO: add drag on the wrps, not on the handlers... so that we can also drag if we are not hovering the handler, or even if we are
+//FIXME: if we input a bad hex color through the input then revert back to default
 
 ;(function ( $, _, window, document, undefined ) {
 

@@ -7,9 +7,9 @@
 
     /* BLUR */
 
-    $.fn.blurred = function ( activate ) {
+    $.fn.blurred = function ( force ) {
 
-        return this.toggleClass ( 'blurred', activate );
+        return this.toggleClass ( 'blurred', force );
 
     };
 
