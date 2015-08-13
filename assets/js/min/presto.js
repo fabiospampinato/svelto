@@ -2023,7 +2023,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* SELECTABLE */
 
-//TODO: add noty for actions AND/OR right click for action
+//TODO: add dropdown for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)
 
 ;(function ( $, _, window, document, undefined ) {
@@ -2053,11 +2053,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
-            selector: 'tbody tr',
-            not_selector: '.empty',
+            selector: 'tbody tr:not(.empty)',
             selected_class: 'selected',
             callbacks: {
-                //TODO
+                select: $.noop
             }
         },
 
@@ -2082,27 +2081,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* KEYS */
 
-            this._on ( 'mouseenter', function () {
+            this._on ( 'mouseenter', this._handler_keys_in );
 
-                this._on ( $document, 'keydown', this._handler_keys );
-
-            });
-
-            this._on ( 'mouseleave', function () {
-
-                $document.off ( 'keydown', this._handler_keys );
-
-            });
+            this._on ( 'mouseleave', this._handler_keys_out );
 
             /* MOUSE */
 
-            this._on ( this.$rows, 'mousedown', this._handler_mousedown );
+            this._on ( 'mousedown', this.options.selector, this._handler_mousedown );
 
             /* OTHERS */
 
-            //FIXME: support tableHelper and sortable
+            //FIXME: add support tableHelper and sortable
 
-            this._on ( 'change sort', this._handler_change_sort );
+            this._on ( 'change sort', this._handler_change );
 
             this._on ( 'mousedown mouseup', this._handler_clear_selection );
 
@@ -2110,17 +2101,31 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
-        _handler_keys: function ( event ) {
+        _handler_keys_in: function () {
+
+            this._on ( $document, 'keydown', this._handler_keys_keydown );
+
+        },
+
+        _handler_keys_out: function () {
+
+            this._off ( $document, 'keydown', this._handler_keys_keydown );
+
+        },
+
+        _handler_keys_keydown: function ( event ) {
 
             if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
 
                 if ( event.keyCode === 65 ) { //INFO: A
 
-                    event.preventDefault (); //FIXME
+                    event.preventDefault ();
 
                     this._reset_prevs ();
 
                     this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not //FIXME: only works if the last character pushed is the `A`, but is it an unwanted behaviour?
+
+                    this._trigger ( 'select' );
 
                 } else if ( event.keyCode === 73 ) { //INFO: I
 
@@ -2129,6 +2134,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     this._reset_prevs ();
 
                     this.$rows.toggleClass ( this.options.selected_class );
+
+                    this._trigger ( 'select' );
 
                 }
 
@@ -2140,25 +2147,23 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_mousedown: function ( event ) {
 
-            if ( event.button !== 0 ) return; //INFO: Left click
+            if ( event.button !== 0 ) return; //INFO: Only the left click is enabled
 
             this.$start_row = $(event.currentTarget);
 
             this._on ( $document, 'mousemove', this._handler_mousemove );
 
-            this._on ( this.$start_row, 'mouseup', this._handler_mouseup );
+            this._on ( 'mouseup', this.options.selector, this._handler_mouseup );
 
         },
 
         _handler_mousemove: function ( event ) { // DRAG
 
-            //FIXME
-
             if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
 
-            $document.off ( 'mousemove', this._handler_mousemove );
+            this._off ( $document, 'mousemove', this._handler_mousemove );
 
-            this.$start_row.off ( 'mouseup', this._handler_mouseup );
+            this._off ( 'mouseup', this._handler_mouseup );
 
             this._reset_prevs ();
 
@@ -2168,9 +2173,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             $html.addClass ( 'dragging' );
 
-            this._on ( this.$rows, 'mouseenter', this._handler_drag_mouseenter );
+            this._on ( 'mouseenter', this.options.selector, this._handler_drag_mouseenter );
 
             this._on ( $document, 'mouseup', this._handler_drag_mouseup );
+
+            this._trigger ( 'select' );
 
         },
 
@@ -2206,13 +2213,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$prev_dragged = $new_dragged;
 
+            this._trigger ( 'select' );
+
         },
 
         _handler_drag_mouseup: function () { // DRAG END
 
-            this.$rows.off ( 'mouseenter', this._handler_drag_mouseenter );
+            this._off ( 'mouseenter', this._handler_drag_mouseenter );
 
-            $document.off ( 'mouseup', this._handler_drag_mouseup );
+            this._off ( $document, 'mouseup', this._handler_drag_mouseup );
 
             this.$prev_dragged = false;
 
@@ -2222,9 +2231,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_mouseup: function ( event ) { // CLICK
 
-            $document.off ( 'mousemove', this._handler_mousemove );
+            this._off ( $document, 'mousemove', this._handler_mousemove );
 
-            this.$start_row.off ( 'mouseup', this._handler_mouseup );
+            this._off ( 'mouseup', this._handler_mouseup );
 
             if ( event.shiftKey ) {
 
@@ -2266,9 +2275,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             } else {
 
-                this.$rows.removeClass ( this.options.selected_class );
+                this.$rows.not ( this.$start_row ).removeClass ( this.options.selected_class );
 
-                this.$start_row.addClass ( this.options.selected_class );
+                this.$start_row.toggleClass ( this.options.selected_class );
 
                 this._reset_prevs ();
 
@@ -2276,11 +2285,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
+            this._trigger ( 'select' );
+
         },
 
         /* OTHER EVENTS */
 
-        _handler_change_sort: function () {
+        _handler_change: function () {
 
             this.$rows = this._get_rows ();
 
@@ -2306,9 +2317,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _get_rows: function () {
 
-            var $found = this.$element.find ( this.options.selector );
-
-            return this.options.not_selector ? $found.not ( this.options.not_selector ) : $found;
+            return this.$element.find ( this.options.selector );
 
         }
 

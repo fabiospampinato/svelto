@@ -35,3 +35,16 @@ append main
                             +multiple.centered
                                 +button-simple("#").outlined.xsmall Btn 1
                                 +button-simple("#").outlined.xsmall Btn 2
+
+    +divider Other elements
+
+    +container-simple.other-elements
+        +paragraph-sample
+        +paragraph-sample
+
+append body-end
+    script.
+        $('.other-elements').selectable ({
+            selector: '.placeholder',
+            selected_class: 'green'
+        });
