@@ -275,7 +275,7 @@
 
                 if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return; //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
-                var args = Array.prototype.slice.call ( arguments, 0 );
+                var args = _.slice ( arguments );
 
                 args.push ( this );
 

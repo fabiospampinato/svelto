@@ -708,7 +708,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return; //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
-                var args = Array.prototype.slice.call ( arguments, 0 );
+                var args = _.slice ( arguments );
 
                 args.push ( this );
 
@@ -1016,7 +1016,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
 
             var isMethodCall = ( typeof options === 'string' ),
-                args = Array.prototype.slice.call ( arguments, 1 ),
+                args = _.tail ( arguments ),
                 returnValue = this;
 
             if ( isMethodCall ) {
@@ -2514,8 +2514,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TABLE HELPER */
 
-//TODO: add errors with noty if we are trying to do something forbidden, like adding 2 rows with the same ID
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -2552,29 +2550,58 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
+        _get_row_id: function ( id ) {
+
+            return 'rid_' + this.uuid + '_' + id;
+
+        },
+
         /* PUBLIC */
 
-        add: function () {
+        add: function ( id ) { //INFO: id, datas...
 
-            var datas = Array.prototype.slice.call ( arguments, 1 );
+            var datas = _.tail ( arguments );
 
-            for ( var i = 0; i < datas.length; i++ ) {
+            if ( datas.length ) {
 
                 var $fillables = this.$tbody.find ( 'td.fillable' );
 
-                if ( $fillables.length > 0 ) {
+                if ( $fillables.length ) {
 
-                    $fillables.first ().html ( datas[i] || '' ).removeClass ( 'fillable' );
+                    var datas_fillable = _.slice ( datas, 0, $fillables.length );
 
-                } else {
+                    datas = _.slice ( datas, datas_fillable.length - 1, datas.length );
 
-                    if ( arguments[0] && $( '#rid_' + this.uuid + '_' + arguments[0] ).length === 1 ) break;
+                    for ( var i = 0, l = datas_fillable.length; i < l; i++ ) {
 
-                    var row_html = '<tr ' + ( arguments[0] ? 'id="rid_' + this.uuid + '_' + arguments[0] + '"' : '' ) + '>';
+                        $fillables.eq ( i ).html ( datas_fillable[i] ).removeClass ( 'fillable' );
 
-                    row_html += '<td>' + ( datas[i] || '' ) + '</td>';
+                    }
 
-                    for ( var fi = 1; fi < this.columns_nr; fi++ ) {
+                }
+
+                if ( id && $( '.' + this._get_row_id ( id ) ).length ) {
+
+                    $.noty ( 'A table cannot contain 2 rows with the same ID' );
+                    return this;
+
+                };
+
+                var chunks = _.chunk ( datas, this.columns_nr );
+
+                for ( var ci = 0, cl = chunks.length; ci < cl; ci++ ) {
+
+                    var chunk = chunks[ci];
+
+                    var row_html = '<tr ' + ( id ? 'class="' + this._get_row_id ( id ) + '"' : '' ) + '>';
+
+                    for ( var i = 0, l = chunk.length; i < l; i++ ) {
+
+                        row_html += '<td>' + ( chunk[i] || '' ) + '</td>';
+
+                    }
+
+                    for ( var i = chunk.length, l = this.columns_nr; i < l; i++ ) {
 
                         row_html += '<td class="fillable"></td>';
 
@@ -2586,33 +2613,38 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 }
 
+                this._check_empty ();
+
+                this.$table.trigger ( 'change' );
+
             }
-
-            this._check_empty ();
-
-            this.$table.trigger ( 'change' );
 
             return this;
 
         },
 
-        update: function ( id ) {
+        update: function ( id ) { //INFO: id, datas...
 
-            var datas = Array.prototype.slice.call ( arguments, 1 ),
-                $row = $( '#rid_' + this.uuid + '_' + id ),
-                $tds = $row.find ( 'td' );
+            var datas = _.tail ( arguments ),
+                $row = $( '.' + this._get_row_id ( id ) );
 
-            for ( var i = 0; i < datas.length; i++ ) {
+            if ( datas.length && $row.length ) {
 
-                if ( !_.isUndefined ( datas[i] ) && datas[i] !== false ) {
+                var $tds = $row.find ( 'td' );
 
-                    $tds.eq ( i ).html ( datas[i] );
+                _.each ( datas, function ( data, index ) {
 
-                }
+                    if ( _.isString ( data ) ) {
+
+                        $tds.eq ( index ).html ( data );
+
+                    }
+
+                });
+
+                this.$table.trigger ( 'change' );
 
             }
-
-            this.$table.trigger ( 'change' );
 
             return this;
 
@@ -2620,11 +2652,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         remove: function ( id ) {
 
-            $( '#rid_' + this.uuid + '_' + id ).remove ();
+            var $row = $( '.' + this._get_row_id ( id ) );
 
-            this._check_empty ();
+            if ( $row.length ) {
 
-            this.$table.trigger ( 'change' );
+                $row.remove ();
+
+                this._check_empty ();
+
+                this.$table.trigger ( 'change' );
+
+            }
 
             return this;
 
@@ -2632,11 +2670,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         clear: function () {
 
-            this.$tbody.find ( 'tr:not(.empty)' ).remove ();
+            var $rows = this.$tbody.find ( 'tr:not(.empty)' );
 
-            this._check_empty ();
+            if ( $rows.length ) {
 
-            this.$table.trigger ( 'change' );
+                $rows.remove ();
+
+                this._check_empty ();
+
+                this.$table.trigger ( 'change' );
+
+            }
 
             return this;
 

@@ -185,7 +185,7 @@
             if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
 
             var isMethodCall = ( typeof options === 'string' ),
-                args = Array.prototype.slice.call ( arguments, 1 ),
+                args = _.tail ( arguments ),
                 returnValue = this;
 
             if ( isMethodCall ) {
