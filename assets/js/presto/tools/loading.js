@@ -7,7 +7,20 @@
 
     /* LOADING */
 
-    $.fn.loading = function ( force ) {
+    $.fn.loading = function ( force, custom_options ) {
+
+        // OPTIONS
+
+        var options = {
+            color: {
+                wrapper: 'inherit',
+                spinner: 'secondary'
+            }
+        };
+
+        $.extend ( options, custom_options );
+
+        // LOADING
 
         this.addClass ( 'spinner-overlay-activable' );
 
@@ -21,10 +34,10 @@
 
         if ( $overlay.length === 0 ) {
 
-            this.append (
-                '<div class="spinner-overlay">' +
+            this.prepend (
+                '<div class="spinner-overlay ' + options.color.wrapper + '">' +
                     '<div class="spinner-wrp">' +
-                        '<div class="spinner secondary">' +
+                        '<div class="spinner ' + options.color.spinner + '">' +
                             '<div class="circle-wrp left">' +
                                 '<div class="circle"></div>' +
                             '</div>' +
@@ -35,6 +48,15 @@
                     '</div>' +
                 '</div>'
             );
+
+        } else {
+
+            if ( force ) {
+
+                $overlay.attr ( 'class', 'spinner-overlay ' + options.color.wrapper );
+                $overlay.find ( '.spinner' ).attr ( 'class', 'spinner ' + options.color.spinner );
+
+            }
 
         }
 

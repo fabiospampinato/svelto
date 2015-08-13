@@ -1,7 +1,7 @@
 
  /* NOTIFICATION */
 
-//INFO: If the tab has a focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
+//INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
 ;(function ( $, _, window, document, undefined ) {
 
