@@ -1476,8 +1476,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* EASING */
 
-//TODO: stripe out the stupid ones
-
 //INFO: t: current time,
 //      b: start value,
 //      c: end value,
@@ -1563,6 +1561,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* FORM AJAX */
 
+//TODO: check if it works, also for upload
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -1578,18 +1578,47 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             event.preventDefault (); //FIXME: Does it work?
 
             $.ajax ({
+
+                cache: false,
+                contentType: 'multipart/form-data',
+                data: new FormData ( this ),
+                processData: false,
                 type: $form.attr ( 'method' ) || 'POST',
                 url: $form.attr ( 'action' ),
-                data: new FormData ( this ),
-                before: function () {
+
+                beforeSend: function () {
+
                     $form.loading ( true );
+
                 },
-                after: function () {
-                    $form.loading ( false );
+
+                error: function ( res ) {
+
+                    if ( _.isString ( res ) ) {
+
+                        if ( res[0] === '<' ) { //INFO: Is HTML
+
+                            $.noty ( 'There was an error, please try again or report the problem' );
+
+                            $body.append ( res );
+
+                        } else {
+
+                            $.noty ( res );
+
+                        }
+
+                    } else {
+
+                        $.noty ( 'There was an error, please try again or report the problem' );
+
+                    }
+
                 },
+
                 success: function ( res ) {
 
-                    if ( typeof res === 'string' ) {
+                    if ( _.isString ( res ) ) {
 
                         if ( res === 'refresh' ) {
 
@@ -1613,7 +1642,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                             }
 
-                        } else if ( res[0] === '<') { //INFO: Is HTML
+                        } else if ( res[0] === '<' ) { //INFO: Is HTML
 
                             $.noty ( 'Done! A page refresh may be needed to see the changes' );
 
@@ -1627,34 +1656,18 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     } else {
 
-                        noty ( 'Done! A page refresh may be needed to see the changes' );
+                        $.noty ( 'Done! A page refresh may be needed to see the changes' );
 
                     }
 
                 },
-                error: function ( res ) {
 
-                    if ( typeof res === 'string' ) {
+                complete: function () {
 
-                        if ( res[0] === '<' ) { //INFO: Is HTML
-
-                            $.noty ( 'There was an error, please try again or report the problem' );
-
-                            $body.append ( res );
-
-                        } else {
-
-                            $.noty ( res );
-
-                        }
-
-                    } else {
-
-                        $.noty ( 'There was an error, please try again or report the problem' );
-
-                    }
+                    $form.loading ( false );
 
                 }
+
             });
 
         });

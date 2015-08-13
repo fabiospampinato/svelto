@@ -1,8 +1,6 @@
 
 /* EASING */
 
-//TODO: stripe out the stupid ones
-
 //INFO: t: current time,
 //      b: start value,
 //      c: end value,
