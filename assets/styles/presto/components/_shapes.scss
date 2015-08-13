@@ -3,21 +3,25 @@
 
 .triangle, .triangle-up {
     @include triangle ();
+    position: relative;
     margin-bottom: $layout-spacing;
 }
 
 .triangle-down {
     @include triangle ( 1em, $color-gray, "down" );
+    position: relative;
     margin-bottom: $layout-spacing;
 }
 
 .triangle-right {
     @include triangle ( 1em, $color-gray, "right" );
+    position: relative;
     margin-bottom: $layout-spacing;
 }
 
 .triangle-left {
     @include triangle ( 1em, $color-gray, "left" );
+    position: relative;
     margin-bottom: $layout-spacing;
 }
 
@@ -25,6 +29,7 @@
 
 .square {
     @include square ();
+    position: relative;
     margin-bottom: $layout-spacing;
 }
 
@@ -32,6 +37,7 @@
 
     @include square ( 4rem );
     overflow: hidden;
+    position: relative;
     margin-bottom: $layout-spacing;
     padding: $layout-half-spacing;
 
