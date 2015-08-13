@@ -3,6 +3,7 @@
 
 //TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: cache the column datas, if possible
+//TODO: add support for sorting other things other than tables
 
 ;(function ( $, _, window, document, undefined ) {
 

@@ -1871,7 +1871,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* ONE TIME ACTION */
 
-//INFO: the pipe character (|) is forbidden as a name, cookie's ttl is 1 year
+//INFO: the pipe character (|) is forbidden inside a name, cookie's ttl is 1 year
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1884,9 +1884,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         // OPTIONS
 
         var options = {
-            container: 'ota', // the cookie name that holds the actions
-            name: false, // the action name
-            action: false
+            container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
+            expiry: 31536000, //INFO: the expire time of the container, 1 year by default
+            name: false, //INFO: the action name
+            action: false //INFO: the action to execute
         };
 
         if ( _.isString ( custom_options ) ) {
@@ -1923,7 +1924,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else if ( options.container ) {
 
-            return new Container ( options.container );
+            return new Container ( options.container, options.expiry );
 
         }
 
@@ -1931,12 +1932,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     /* CONTAINER OBJ */
 
-    var Container = function ( name ) {
+    var Container = function ( name, expiry ) {
 
         this.name = name;
+        this.expiry = expiry;
 
         this.actionsStr = $.cookie.read ( this.name ) || '';
-        this.actions = this.actionsStr.split ( '|' );
+        this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
 
     };
 
@@ -1944,7 +1946,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         get: function ( action ) {
 
-            return ( this.actions.indexOf ( action ) !== -1 );
+            return _.contains ( this.actions, action );
 
         },
 
@@ -1964,7 +1966,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.actionsStr = this.actions.join ( '|' );
 
-            $.cookie.write ( this.name, this.actionsStr, 31536000 ); // 1 year
+            $.cookie.write ( this.name, this.actionsStr, this.expiry );
 
         },
 
@@ -2339,6 +2341,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: cache the column datas, if possible
+//TODO: add support for sorting other things other than tables
 
 ;(function ( $, _, window, document, undefined ) {
 
