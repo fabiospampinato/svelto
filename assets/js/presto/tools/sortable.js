@@ -1,8 +1,8 @@
 
 /* SORTABLE */
 
-//TODO: only do the minimum amount of changes, if a row is added we don't need to resort the whole table
-//TODO: add support for tableHelper, just put the new addded row in the right position
+//TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
+//TODO: cache the column datas, if possible
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -27,6 +27,9 @@
                     b = b.toLocaleLowerCase ();
                     return a.localeCompare ( b );
                 }
+            },
+            callbacks: {
+                sort: $.noop
             }
         },
 
@@ -42,7 +45,9 @@
             this.table = this.element;
             this.tbody = this.$tbody.get ( 0 );
 
-            this.current_index = false; // `$headers` index, not `$sortables` index
+            this.sort_datas = {}; //INFO: Caching object for datas and references to rows
+
+            this.current_index = false; //INFO: `$headers` index, not `$sortables` index
             this.current_direction = false;;
 
         },
@@ -72,6 +77,8 @@
         _handler_change: function () {
 
             if ( this.current_index ) {
+
+                this.sort_datas = {};
 
                 this.sort ( this.current_index, this.current_direction );
 
@@ -110,48 +117,60 @@
 
             var sorter = this.options.sorters[sorter_name];
 
-            if ( !sorter ) return;
+            if ( !sorter ) return; // unsupported sorter
 
             direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
 
             // STYLE
 
-            this.$sortables.removeClass ( 'asc desc' );
+            if ( this.current_index !== false ) {
+
+                this.$sortables.eq ( this.current_index ).removeClass ( this.current_direction );
+
+            }
+
             $sortable.addClass ( direction );
 
-            // VARIABLES
+            // CHECKING CACHED DATAS
 
-            var $trs = this.$tbody.find ( 'tr:not(.empty)' ),
-                column = Array ( $trs.length );
+            if ( _.isUndefined ( this.sort_datas[index] ) ) {
 
-            // POPULATE
+                // VARIABLES
 
-            $trs.each ( function ( trs_index ) {
+                var $trs = this.$tbody.find ( 'tr:not(.empty)' );
 
-                var $td = $(this).find ( 'td' ).eq ( index ),
-                    value = $td.data ( 'sort-value' ) || $td.html ();
+                this.sort_datas[index] = Array ( $trs.length );
 
-                column[trs_index] = [this, value];
+                // POPULATE
 
-            });
+                for ( var i = 0, l = $trs.length; i < l; i++ ) {
+
+                    var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
+                        value = $td.data ( 'sort-value' ) || $td.html ();
+
+                    this.sort_datas[index][i] = [$trs.get ( i ), value];
+
+                }
+
+            }
 
             // SORT
 
-            column.sort ( function ( a, b ) {
+            this.sort_datas[index].sort ( function ( a, b ) {
 
                 return sorter ( a[1], b[1] );
 
             });
 
-            if ( direction === 'desc' ) column.reverse ();
+            if ( direction === 'desc' ) this.sort_datas[index].reverse ();
 
             // APPEND
 
             this.table.removeChild ( this.tbody ); // detach
 
-            for ( var i = 0, l = column.length; i < l; i++ ) {
+            for ( var i = 0, l = this.sort_datas[index].length; i < l; i++ ) {
 
-                this.tbody.appendChild ( column[i][0] ); // reorder
+                this.tbody.appendChild ( this.sort_datas[index][i][0] ); // reorder
 
             }
 

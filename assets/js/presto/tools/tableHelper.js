@@ -9,6 +9,17 @@
 
     $.widget ( 'presto.tableHelper', {
 
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                add: $.noop,
+                update: $.noop,
+                remove: $.noop,
+                clear: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _variables: function () {
@@ -104,6 +115,8 @@
 
                 this.$table.trigger ( 'change' );
 
+                this._trigger ( 'add' );
+
             }
 
             return this;
@@ -131,6 +144,8 @@
 
                 this.$table.trigger ( 'change' );
 
+                this._trigger ( 'update' );
+
             }
 
             return this;
@@ -149,6 +164,8 @@
 
                 this.$table.trigger ( 'change' );
 
+                this._trigger ( 'remove' );
+
             }
 
             return this;
@@ -166,6 +183,8 @@
                 this._check_empty ();
 
                 this.$table.trigger ( 'change' );
+
+                this._trigger ( 'clear' );
 
             }
 
