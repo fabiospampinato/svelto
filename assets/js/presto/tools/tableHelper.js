@@ -1,6 +1,8 @@
 
 /* TABLE HELPER */
 
+//TODO: add errors with noty if we are trying to do something forbidden, like adding 2 rows with the same ID
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';

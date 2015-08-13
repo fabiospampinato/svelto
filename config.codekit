@@ -3986,6 +3986,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/tools\/tableHelper.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/tableHelper.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/tableHelper.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/views\/demo\/tools\/timeAgo.html": {
 		"fileType": 8192,
 		"ignore": 1,
