@@ -5,7 +5,7 @@
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 //TODO: add select-closer
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -232,4 +232,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

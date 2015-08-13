@@ -50,7 +50,7 @@
  ***************************
  */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -119,4 +119,4 @@
 
     $.tmpl = tmpl;
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

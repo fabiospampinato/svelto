@@ -6,7 +6,7 @@
 //TODO: more explicative noty messages, like: you cannot use the tag 'something' again, not "you cannot use the same tag again"
 //FIXME: se si immette una tag con tab poi non si e' in focus nel $partial
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -405,4 +405,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

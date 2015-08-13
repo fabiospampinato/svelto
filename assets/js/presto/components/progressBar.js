@@ -4,7 +4,7 @@
 //TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the childs)
 //TODO: make templates DRY
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -212,4 +212,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

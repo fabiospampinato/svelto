@@ -3,7 +3,7 @@
 
 //TODO: detect browsers, versions, OSes
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -22,4 +22,4 @@
         isIE: /msie [\w.]+/.test ( userAgent )
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

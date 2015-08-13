@@ -3,7 +3,7 @@
 
 //INFO: If the tab has a focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -47,4 +47,4 @@
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

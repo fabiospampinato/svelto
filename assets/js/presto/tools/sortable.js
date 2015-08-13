@@ -4,7 +4,7 @@
 //TODO: only do the minimum amount of changes, if a row is added we don't need to resort the whole table
 //TODO: add support for tableHelper, just put the new addded row in the right position
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -181,4 +181,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

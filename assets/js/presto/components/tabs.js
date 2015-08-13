@@ -1,7 +1,7 @@
 
 /* TABS */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -15,7 +15,7 @@
 
             this.$tabs = this.$element;
             this.$tabs_buttons = this.$tabs.find ( '.tabs-buttons' );
-            this.$buttons = this.$tabs.find ( '.button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$buttons = this.$tabs.find ( '.button-wrp' ); //FIXME: Should only search on the children, or nested tabs will not work
             this.$containers = this.$tabs.find ( '.container' );
             this.$indicator = this.$tabs.find ( '.tabs-indicator' );
 
@@ -102,4 +102,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

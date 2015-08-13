@@ -167,13 +167,21 @@
 /* OTHER */
 
 .centered { //TODO: Maybe remove this, or find a better name
+
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: $layout-spacing;
+
+    & > *:last-child {
+        margin-bottom: 0 !important;
+    }
+
 }
 
 .spacer {
     flex-grow: 1000 !important;
+    margin-bottom: $layout-spacing;
 }
 
 /* GROW */

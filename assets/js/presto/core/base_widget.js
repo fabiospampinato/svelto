@@ -3,7 +3,7 @@
 
 //TODO: support for trigger -> preventDefault
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -237,32 +237,39 @@
 
         /* EVENTS */
 
-        _on: function ( suppressDisabledCheck, $element, events, handler ) {
+        _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
 
-            //TODO: add support for delegation and custom data
+            //TODO: add support for custom data
 
             var instance = this;
 
             if ( typeof suppressDisabledCheck !== 'boolean' ) {
 
-                handler = events;
+                handler = selector;
+                selector = events;
                 events = $element;
                 $element = suppressDisabledCheck;
                 suppressDisabledCheck = false;
 
             }
 
-            if ( !handler ) {
+            if ( !( $element instanceof $ ) ) {
 
-                handler = events;
+                handler = selector;
+                selector = events;
                 events = $element;
                 $element = this.$element;
 
             }
 
-            handler = _.isString ( handler ) ? this[handler] : handler;
+            if ( selector && !handler ) {
 
-            var handler_guid = $.guid ( handler );
+                handler = selector;
+                selector = false;
+
+            }
+
+            handler = _.isString ( handler ) ? this[handler] : handler;
 
             function handlerProxy () {
 
@@ -276,9 +283,17 @@
 
             }
 
-            handlerProxy.guid = handler_guid;
+            handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
 
-            $element.on ( events, handlerProxy );
+            if ( selector ) {
+
+                $element.on ( events, selector, handlerProxy );
+
+            } else {
+
+                $element.on ( events, handlerProxy );
+
+            }
 
         },
 
@@ -300,7 +315,7 @@
 
         _trigger: function ( events, data ) {
 
-            //TODO: add support for passing datas
+            //FIXME: check if with jQuery UI version
 
             data = data || {};
 
@@ -378,4 +393,4 @@
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

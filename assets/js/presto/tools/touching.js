@@ -1,9 +1,7 @@
 
 /* TOUCHING */
 
-//TODO: add support for linear search, non binary, or maybe a balanced left then right then left again search, so that if we guess wrong but we are close we still won't spend too much time
-
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -15,9 +13,9 @@
 
         return {
             X1: offset.left,
-            X2: offset.left + offset.width,
+            X2: offset.left + $ele.width (),
             Y1: offset.top,
-            Y2: offset.top + offset.height
+            Y2: offset.top + $ele.height ()
         };
 
     };
@@ -38,8 +36,9 @@
         /* OPTIONS */
 
         var options = {
-            start_index : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+            startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
             point: false, //INFO: Used for the punctual search
+            binarySearch: true, //INFO: toggle the binary search when performing a punctual search
             //  {
             //      X: 0,
             //      Y: 0
@@ -55,33 +54,42 @@
 
         var $searchable = options.$not ? this.not ( options.$not ) : this;
 
-        console.log("searchable: ",$searchable.nodes);
-
         /* COMPARER */
 
         if ( options.$comparer ) {
 
             var c1 = get_coordinates ( options.$comparer ),
-                matches = [],
+                nodes = [],
                 areas = [];
 
-            for ( var i = 0, l = $searchable.length; i < l; i++ ) {
+            var result = false;
 
-                var $ele = $searchable.eq ( i );
+            $searchable.each ( function () {
 
-                var c2 = get_coordinates ( $ele ),
-                    overlap_area = get_overlapping_area ( c1, c2 );
+                var c2 = get_coordinates ( $(this) ),
+                    area = get_overlapping_area ( c1, c2 );
 
-                if ( overlap_area > 0 ) {
+                if ( area > 0 ) {
 
-                    matches.push ( $ele.get ( 0 ) );
-                    areas.push ( overlap_area );
+                    nodes.push ( this );
+                    areas.push ( area );
 
                 }
 
-            }
+            });
 
-            return $( options.select === 'all' ? $(matches) : ( options.select === 'most' && matches.length > 0 ? $( matches[ areas.indexOf ( _.max ( areas ) ) ] ) : $() ) );
+            switch ( options.select ) {
+
+                case 'all':
+                    return $(nodes);
+
+                case 'most':
+                    return $(nodes[ areas.indexOf ( _.max ( areas ) )]);
+
+                default:
+                    return $empty;
+
+            }
 
         }
 
@@ -89,56 +97,80 @@
 
         if ( options.point ) {
 
-            var $touched = false;
+            var $touched;
 
-            $searchable.btEach ( function () {
+            if ( options.binarySearch ) {
 
-                var $ele = $(this),
-                    c = get_coordinates ( $ele );
+                $searchable.btEach ( function () {
 
-                if ( options.point.Y >= c.Y1 ) {
+                    var $node = $(this),
+                        c = get_coordinates ( $node );
 
-                    if ( options.point.Y <= c.Y2 ) {
+                    if ( options.point.Y >= c.Y1 ) {
 
-                        if ( options.point.X >= c.X1 ) {
+                        if ( options.point.Y <= c.Y2 ) {
 
-                            if ( options.point.X <= c.X2 ) {
+                            if ( options.point.X >= c.X1 ) {
 
-                                $touched = $ele;
+                                if ( options.point.X <= c.X2 ) {
 
-                                return false;
+                                    $touched = $node;
+
+                                    return false;
+
+                                } else {
+
+                                    return 1;
+
+                                }
 
                             } else {
 
-                                return 1;
+                                return -1;
 
                             }
 
                         } else {
 
-                            return -1;
+                            return 1;
 
                         }
 
+
                     } else {
 
-                        return 1;
+                        return -1;
 
                     }
 
 
-                } else {
+                }, options.startIndex );
 
-                    return -1;
+                return $touched || $empty;
 
-                }
+            } else {
 
-            }, options.start_index );
+                $searchable.each ( function () {
 
-            return $touched ? $touched : $();
+                    var $node = $(this),
+                        c = get_coordinates ( $node );
+
+                    if ( options.point.Y >= c.Y1 && options.point.Y <= c.Y2 && options.point.X >= c.X1 && options.point.X <= c.X2 ) {
+
+                        $touched = $node;
+
+                        return false;
+
+                    }
+
+                });
+
+                return $touched || $empty;
+
+            }
 
         }
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

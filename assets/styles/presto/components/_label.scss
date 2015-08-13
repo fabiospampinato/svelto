@@ -334,6 +334,10 @@
             width: 100%;
         }
 
+        &:not(.badge):not(.floating) {
+            width: 100%;
+        }
+
         &.badge {
             position: absolute !important;
             top: $label-badge-top !important;

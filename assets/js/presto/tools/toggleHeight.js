@@ -3,7 +3,7 @@
 
 //FIXME: support triggered twice before the first one has ended
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -126,4 +126,4 @@
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

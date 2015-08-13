@@ -3,7 +3,7 @@
 
 //TODO: use an input instead of a label, so that we can
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -160,4 +160,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

@@ -90,60 +90,62 @@ append main
 
     +multiple.stretched
         +multiple.vertical.fluid.xs-4
-            +container-simple 1
-            +container-simple 2
-            +container-simple 3
-        +container-simple.xs-8
+            +container-simple 4
+            +container-simple 4
+            +container-simple 4
+        +container-simple.xs-8 8
 
     +divider Complex 2
 
     +multiple.stretched
         +multiple.vertical.fluid.xs-8
-            +container-simple 1
+            +container-simple 8
             +multiple.fluid.joined
-                +container-simple 0.5
-                +container-simple 0.5
-            +container-simple 1
-        +container-simple.xs-4 1
+                +container-simple 4
+                +container-simple 4
+            +container-simple 8
+        +container-simple.xs-4 4
 
     +divider Complex 3
 
     +multiple.stretched
         +multiple.vertical.fluid.xs-9
-            +container-simple 3
+            +container-simple 9
             +multiple.fluid.stretched
-                +container-simple 1.5
+                +container-simple 3
                 +multiple.vertical.fluid
-                    +container-simple 0.5
+                    +container-simple 6
                     +multiple.fluid.joined
-                        +container-simple 0.25
-                        +container-simple 0.25
-                    +container-simple 0.5
-            +container-simple 3
-        +container-simple.xs-3 1
+                        +container-simple 3
+                        +container-simple 3
+                    +container-simple 6
+            +container-simple 9
+        +container-simple.xs-3 3
 
     +divider Complex 4
 
     +multiple.stretched
-        +multiple.vertical.fluid.xs-9
+        +multiple.vertical.fluid.xs-7
             +multiple.fluid
-                +container-simple.xs-8 1
-                +container-simple.xs-4 1
+                +container-simple.xs-8 8 * 7/12
+                +container-simple.xs-4 4 * 7/12
             +multiple.fluid.stretched
-                +container-simple 1.5
+                +container-simple 4 * 7/12
                 +multiple.vertical.fluid
-                    +container-simple 0.5
+                    +container-simple 8 * 7/12
                     +multiple.fluid.joined
-                        +container-simple 0.25
-                        +container-simple 0.25
-                    +container-simple 0.5
+                        +container-simple 4 * 7/12
+                        +container-simple 4 * 7/12
+                    +container-simple 8 * 7/12
             +multiple.fluid
-                +container-simple.xs-3 1
-                +container-simple.xs-6 1
-                +container-simple.xs-3 1
+                +container-simple.xs-3 3 * 7/12
+                +container-simple.xs-6 6 * 7/12
+                +container-simple.xs-3 3 * 7/12
         +multiple.vertical.fluid.joined.xs-3
-            +container-simple 1
-            +container-simple 1
+            +container-simple 3
+            +container-simple 3
+            +container-simple 3
+        +container-simple.xs-2 2
 
 append body-end
     +noty({ body: '<p>[X-SMALL] <= 481 <br/> [SMALL] 482-767 <br/> [MEDIUM] 768-961 <br/> [LARGE] 962-1399 <br/> [X-LARGE] >= 1400</p>', ttl: 'forever' })

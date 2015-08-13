@@ -8,9 +8,271 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* LODASH EXTRA */
+
+;(function ( _, window, document, undefined ) {
+
+    'use strict';
+
+    /* LODASH EXTRA */
+
+    _.mixin ({
+
+        /**
+         * Gets the number of seconds that have elapsed since the Unix epoch
+         * (1 January 1970 00:00:00 UTC).
+         *
+         * _.defer(function(stamp) {
+         *   console.log(_.nowSecs() - stamp);
+         * }, _.nowSecs());
+         * // => logs the number of seconds it took for the deferred function to be invoked
+         */
+
+        nowSecs: function () {
+
+            return _.floor ( _.now () / 1000 );
+
+        },
+
+        /**
+         * Gets a string format of number of seconds elapsed.
+         *
+         * _.timeAgo ( _.nowSecs () )
+         * // => Just now
+         */
+
+        timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
+
+            var elapsed = _.nowSecs () - timestamp,
+                just_now = 5;
+
+            var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+                times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+
+            if ( elapsed < just_now ) {
+
+                return {
+                    str: 'Just now',
+                    next: just_now - elapsed
+                };
+
+            } else {
+
+                for ( var i = 0, l = times.length; i < l; i++ ) {
+
+                    var name = names[i],
+                        secs = times[i],
+                        number = _.floor ( elapsed / secs );
+
+                    if ( number >= 1 ) {
+
+                        return {
+                            str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
+                            next: secs - ( elapsed - ( number * secs ) )
+                        };
+
+                    }
+
+                }
+
+            }
+
+        },
+
+        /**
+         * Return a boolean if the string is fuzzy matched with the search string.
+         *
+         * _.fuzzyMatch ( 'something', 'smTng' );
+         * // => true
+         *
+         * _.fuzzyMatch ( 'something', 'smTng', false );
+         * // => false
+         *
+         * _.fuzzyMatch ( 'something', 'semthing' );
+         * // => false
+         */
+
+        fuzzyMatch: function ( str, search, isCaseSensitive ) {
+
+            if ( isCaseSensitive !== false ) {
+
+                str = str.toLowerCase ();
+                search = search.toLowerCase ();
+
+            }
+
+            var current_index = -1,
+                str_l = str.length;
+
+            for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
+
+                for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
+
+                    if ( str[str_i] === search[search_i] ) {
+
+                        current_index = str_i;
+                        str_i = str_l + 1;
+
+                    }
+
+                }
+
+                if ( str_i === str_l ) {
+
+                    return false;
+
+                }
+
+            }
+
+            return true;
+
+        },
+
+        /**
+         * Returns a number clamped between a minimum and maximum value.
+         * If the maximum isn't provided, only clamps from the bottom.
+         *
+         * @param {number} minimum The minimum value.
+         * @param {number} value The value to clamp.
+         * @param {number} maximum The maximum value.
+         * @returns {number} A value between minimum and maximum.
+         *
+         * @example
+         *
+         * _.clamp(2, 4, 6); // => 4
+         * _.clamp(3, 2, 5); // => 3
+         * _.clamp(2, 7, 5); // => 5
+         */
+
+        clamp: function ( minimum, value, maximum ) {
+
+            return Math.max ( minimum, Math.min ( maximum, value ) );
+
+        },
+
+        /**
+         * Performs a binary each of the array
+         */
+
+        btEach: function ( arr, callback, startIndex ) {
+
+            var start = 0,
+                end = arr.length - 1,
+                center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+                direction;
+
+            while ( start <= end ) {
+
+                direction = callback.call ( arr[center], center, arr[center] );
+
+                if ( direction < 0 ) {
+
+                    end = center - 1;
+
+                } else if ( direction > 0 ) {
+
+                    start = center + 1;
+
+                } else {
+
+                    return center;
+
+                }
+
+                center = _.ceil ( ( start + end ) / 2 );
+
+            }
+
+            return -1;
+
+        },
+
+        /**
+         * Returns true
+         */
+
+        true: _.constant ( true ),
+
+        /**
+         * Returns false
+         */
+
+        false: _.constant ( false )
+
+    });
+
+}( _, window, document ));
+
+
+
+/* JQUERY EXTRA */
+
+;(function ( $, _, window, document, undefined ) {
+
+    'use strict';
+
+    /* JQUERY EXTRA */
+
+    $.reflow = function () {
+
+        document.documentElement.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
+
+    };
+
+    $.eventXY = function ( event ) {
+
+        var coordinates = {
+            X : 0,
+            Y : 0
+        };
+
+        if ( !_.isUndefined ( event.originalEvent ) ) {
+
+            event = event.originalEvent;
+
+        }
+
+        if ( !_.isUndefined ( event.touches ) && !_.isUndefined ( event.touches[0] ) ) {
+
+            coordinates.X = event.touches[0].pageX;
+            coordinates.Y = event.touches[0].pageY;
+
+        } else if ( !_.isUndefined ( event.changedTouches ) && !_.isUndefined ( event.changedTouches[0] ) ) {
+
+            coordinates.X = event.changedTouches[0].pageX;
+            coordinates.Y = event.changedTouches[0].pageY;
+
+        } else if ( !_.isUndefined ( event.pageX ) ) {
+
+            coordinates.X = event.pageX;
+            coordinates.Y = event.pageY;
+
+        }
+
+        return coordinates;
+
+    };
+
+    /* COMMON OBJECTS */
+
+    $(function () {
+
+        window.$window = $(window);
+        window.$document = $(document);
+        window.$html = $(document.documentElement);
+        window.$body = $(document.body);
+        window.$empty = $();
+
+    });
+
+}( jQuery, _, window, document ));
+
+
+
 /* CORE */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -42,7 +304,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         }
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -97,7 +359,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
  ***************************
  */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -166,7 +428,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $.tmpl = tmpl;
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -174,7 +436,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: support for trigger -> preventDefault
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -408,32 +670,39 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* EVENTS */
 
-        _on: function ( suppressDisabledCheck, $element, events, handler ) {
+        _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
 
-            //TODO: add support for delegation and custom data
+            //TODO: add support for custom data
 
             var instance = this;
 
             if ( typeof suppressDisabledCheck !== 'boolean' ) {
 
-                handler = events;
+                handler = selector;
+                selector = events;
                 events = $element;
                 $element = suppressDisabledCheck;
                 suppressDisabledCheck = false;
 
             }
 
-            if ( !handler ) {
+            if ( !( $element instanceof $ ) ) {
 
-                handler = events;
+                handler = selector;
+                selector = events;
                 events = $element;
                 $element = this.$element;
 
             }
 
-            handler = _.isString ( handler ) ? this[handler] : handler;
+            if ( selector && !handler ) {
 
-            var handler_guid = $.guid ( handler );
+                handler = selector;
+                selector = false;
+
+            }
+
+            handler = _.isString ( handler ) ? this[handler] : handler;
 
             function handlerProxy () {
 
@@ -447,9 +716,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            handlerProxy.guid = handler_guid;
+            handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
 
-            $element.on ( events, handlerProxy );
+            if ( selector ) {
+
+                $element.on ( events, selector, handlerProxy );
+
+            } else {
+
+                $element.on ( events, handlerProxy );
+
+            }
 
         },
 
@@ -471,7 +748,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _trigger: function ( events, data ) {
 
-            //TODO: add support for passing datas
+            //FIXME: check if with jQuery UI version
 
             data = data || {};
 
@@ -549,13 +826,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* WIDGET FACTORY */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -821,7 +1098,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -830,7 +1107,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //FIXME: does it work with units different than pixels???
 //TODO: add support for easing
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -981,7 +1258,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -989,7 +1266,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: make it more DRY
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1146,13 +1423,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* BLURRED */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1164,7 +1441,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -1172,7 +1449,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: detect browsers, versions, OSes
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1191,13 +1468,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         isIE: /msie [\w.]+/.test ( userAgent )
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* COOKIE */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1247,13 +1524,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* DRAGGABLE */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1353,7 +1630,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -1366,7 +1643,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //      c: end value,
 //      d: duration
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1440,13 +1717,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         }
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* FORM AJAX */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1552,7 +1829,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -1560,7 +1837,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: maybe sync at the init time also
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1645,13 +1922,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* LOADING */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1696,7 +1973,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -1704,7 +1981,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //INFO: If the tab has a focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1748,7 +2025,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -1756,7 +2033,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //INFO: the pipe character (|) is forbidden as a name, cookie's ttl is 1 year
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -1900,7 +2177,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -1909,7 +2186,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: add noty for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -2205,7 +2482,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -2214,7 +2491,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: only do the minimum amount of changes, if a row is added we don't need to resort the whole table
 //TODO: add support for tableHelper, just put the new addded row in the right position
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -2391,13 +2668,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* TABLE HELPER */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -2533,13 +2810,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* TIMER - http://jchavannes.com/jquery-timer */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -2700,7 +2977,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -2708,7 +2985,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //FIXME: support triggered twice before the first one has ended
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -2831,15 +3108,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* TOUCHING */
 
-//TODO: add support for linear search, non binary, or maybe a balanced left then right then left again search, so that if we guess wrong but we are close we still won't spend too much time
-
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -2851,9 +3126,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         return {
             X1: offset.left,
-            X2: offset.left + offset.width,
+            X2: offset.left + $ele.width (),
             Y1: offset.top,
-            Y2: offset.top + offset.height
+            Y2: offset.top + $ele.height ()
         };
 
     };
@@ -2874,8 +3149,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         var options = {
-            start_index : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+            startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
             point: false, //INFO: Used for the punctual search
+            binarySearch: true, //INFO: toggle the binary search when performing a punctual search
             //  {
             //      X: 0,
             //      Y: 0
@@ -2891,33 +3167,42 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         var $searchable = options.$not ? this.not ( options.$not ) : this;
 
-        console.log("searchable: ",$searchable.nodes);
-
         /* COMPARER */
 
         if ( options.$comparer ) {
 
             var c1 = get_coordinates ( options.$comparer ),
-                matches = [],
+                nodes = [],
                 areas = [];
 
-            for ( var i = 0, l = $searchable.length; i < l; i++ ) {
+            var result = false;
 
-                var $ele = $searchable.eq ( i );
+            $searchable.each ( function () {
 
-                var c2 = get_coordinates ( $ele ),
-                    overlap_area = get_overlapping_area ( c1, c2 );
+                var c2 = get_coordinates ( $(this) ),
+                    area = get_overlapping_area ( c1, c2 );
 
-                if ( overlap_area > 0 ) {
+                if ( area > 0 ) {
 
-                    matches.push ( $ele.get ( 0 ) );
-                    areas.push ( overlap_area );
+                    nodes.push ( this );
+                    areas.push ( area );
 
                 }
 
-            }
+            });
 
-            return $( options.select === 'all' ? $(matches) : ( options.select === 'most' && matches.length > 0 ? $( matches[ areas.indexOf ( _.max ( areas ) ) ] ) : $() ) );
+            switch ( options.select ) {
+
+                case 'all':
+                    return $(nodes);
+
+                case 'most':
+                    return $(nodes[ areas.indexOf ( _.max ( areas ) )]);
+
+                default:
+                    return $empty;
+
+            }
 
         }
 
@@ -2925,65 +3210,89 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         if ( options.point ) {
 
-            var $touched = false;
+            var $touched;
 
-            $searchable.btEach ( function () {
+            if ( options.binarySearch ) {
 
-                var $ele = $(this),
-                    c = get_coordinates ( $ele );
+                $searchable.btEach ( function () {
 
-                if ( options.point.Y >= c.Y1 ) {
+                    var $node = $(this),
+                        c = get_coordinates ( $node );
 
-                    if ( options.point.Y <= c.Y2 ) {
+                    if ( options.point.Y >= c.Y1 ) {
 
-                        if ( options.point.X >= c.X1 ) {
+                        if ( options.point.Y <= c.Y2 ) {
 
-                            if ( options.point.X <= c.X2 ) {
+                            if ( options.point.X >= c.X1 ) {
 
-                                $touched = $ele;
+                                if ( options.point.X <= c.X2 ) {
 
-                                return false;
+                                    $touched = $node;
+
+                                    return false;
+
+                                } else {
+
+                                    return 1;
+
+                                }
 
                             } else {
 
-                                return 1;
+                                return -1;
 
                             }
 
                         } else {
 
-                            return -1;
+                            return 1;
 
                         }
 
+
                     } else {
 
-                        return 1;
+                        return -1;
 
                     }
 
 
-                } else {
+                }, options.startIndex );
 
-                    return -1;
+                return $touched || $empty;
 
-                }
+            } else {
 
-            }, options.start_index );
+                $searchable.each ( function () {
 
-            return $touched ? $touched : $();
+                    var $node = $(this),
+                        c = get_coordinates ( $node );
+
+                    if ( options.point.Y >= c.Y1 && options.point.Y <= c.Y2 && options.point.X >= c.X1 && options.point.X <= c.X2 ) {
+
+                        $touched = $node;
+
+                        return false;
+
+                    }
+
+                });
+
+                return $touched || $empty;
+
+            }
 
         }
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* EXPANDER */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -3069,13 +3378,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* FLIPPABLE */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -3132,13 +3441,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* INFOBAR */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -3198,13 +3507,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* ACCORDION */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -3284,7 +3593,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -3292,7 +3601,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: add better support for disabled checkboxes
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -3378,7 +3687,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -3388,7 +3697,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: add a $bgs variable where we update the background
 //TODO: add drag on the wrps, not on the handlers... so that we can also drag if we are not hovering the handler, or even if we are
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -4028,7 +4337,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -4037,7 +4346,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: Add support for min and max date delimiter
 //TODO: Set it from input
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -4344,7 +4653,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -4353,7 +4662,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 //TODO: add dropdown-closer
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -4730,13 +5039,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* MODAL */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -4818,7 +5127,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -4826,7 +5135,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: make it work better with attachables: se è già aperta non fare niente al background
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -4921,7 +5230,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -4929,7 +5238,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: add support for swipe to dismiss
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -5215,7 +5524,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -5224,7 +5533,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the childs)
 //TODO: make templates DRY
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -5432,7 +5741,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -5441,7 +5750,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: add better support for disabled checkboxes
 //TODO: api for selecting and unselecting (with events)
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -5525,13 +5834,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* RIPPLE */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -5597,7 +5906,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -5607,7 +5916,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 //TODO: add select-closer
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -5834,13 +6143,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* SLIDER */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -6117,7 +6426,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -6125,7 +6434,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: use an input instead of a label, so that we can
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -6282,13 +6591,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* SWITCH */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -6514,13 +6823,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* TABS */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -6534,7 +6843,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$tabs = this.$element;
             this.$tabs_buttons = this.$tabs.find ( '.tabs-buttons' );
-            this.$buttons = this.$tabs.find ( '.button' ); //FIXME: Should only search on the children, or nested tabs will not work
+            this.$buttons = this.$tabs.find ( '.button-wrp' ); //FIXME: Should only search on the children, or nested tabs will not work
             this.$containers = this.$tabs.find ( '.container' );
             this.$indicator = this.$tabs.find ( '.tabs-indicator' );
 
@@ -6621,7 +6930,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
@@ -6632,7 +6941,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: more explicative noty messages, like: you cannot use the tag 'something' again, not "you cannot use the same tag again"
 //FIXME: se si immette una tag con tab poi non si e' in focus nel $partial
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -7031,61 +7340,31 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* BINARY TREE .each() */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
     /* BINARY TREE .each () */
 
-    $.fn.btEach = function ( callback, start_index ) {
+    $.fn.btEach = function ( callback, startIndex ) {
 
-        var start = 0,
-            end = this.length - 1,
-            center = 0,
-            iterations = 0,
-            result = false;
-
-        while ( start <= end ) {
-
-            center = ( iterations === 0 && typeof start_index === 'number' ) ? start_index : Math.ceil ( ( start + end ) / 2 );
-
-            result = callback.call ( this.get ( center ), center, this.get ( center ) );
-
-            iterations += 1;
-
-            if ( result < 0 ) {
-
-                end = center - 1;
-
-            } else if ( result > 0 ) {
-
-                start = center + 1;
-
-            } else {
-
-                return center;
-
-            }
-
-        }
-
-        return false;
+        return _.btEach ( this, callback, startIndex );
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 
 /* TIME AGO */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -7164,7 +7443,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
 
 
 

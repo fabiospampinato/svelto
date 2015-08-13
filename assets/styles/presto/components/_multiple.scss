@@ -1,14 +1,46 @@
 
 /* MULTIPLE */
 
-//FIXME: the right column of the complex-4 grid layout is not stretched, it should...
 //TODO: add a 'lefted', 'righted' classes for aligning the content to the left or right
-//FIXME: make the joined versions look nice even if they have shadows (use different versions of the depths, where we are not outputting the right shadow for example)
 
 .multiple-wrp {
 
+    position: relative;
     margin: 0 #{- $grid-gutter-half-width} $layout-spacing;
     border-color: inherit;
+
+    &[class*="z-depth-"] {
+
+        box-shadow: none !important;
+
+        &:before {
+            position: absolute;
+            top: 0;
+            right: $grid-gutter-half-width;
+            bottom: $grid-gutter-width;
+            left: $grid-gutter-half-width;
+            content: '';
+            pointer-events: none;
+            border-radius: $border-radius-medium;
+        }
+
+        @each $depth, $shadow in $z-depths {
+
+            &.z-depth-#{$depth}:before {
+                @include z-depth ( $depth );
+            }
+
+        }
+
+        & > .multiple {
+
+            & > [class*="z-depth-"], & > [class*="-wrp"] > *:first-child:last-child {
+                box-shadow: none !important;
+            }
+
+        }
+
+    }
 
     &.limited > .multiple {
         max-width: $layout-max-width + $grid-gutter-width; //FIXME: Does it work?
@@ -33,7 +65,25 @@
     }
 
     &.stretched > .multiple {
+
         align-items: stretch;
+
+        & > .multiple-wrp.vertical {
+
+            display: flex;
+
+            & > .multiple {
+
+                flex-grow: 1;
+
+                & > * {
+                    flex-grow: 1;
+                }
+
+            }
+
+        }
+
     }
 
     &.joined {
@@ -47,14 +97,14 @@
 
             & > .multiple {
 
-                & > *:not(:last-child) {
+                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
                     margin-right: 0;
                     border-right-width: 0;
                     border-top-right-radius: 0;
                     border-bottom-right-radius: 0;
                 }
 
-                & > *:not(:first-child) {
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
                     margin-left: 0;
                     border-top-left-radius: 0;
                     border-bottom-left-radius: 0;
@@ -62,8 +112,12 @@
 
             }
 
-            &.no-separators > .multiple > *:not(:first-child) {
-                border-left-width: 0;
+            &.no-separators > .multiple {
+
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+                    border-left-width: 0;
+                }
+
             }
 
         }
@@ -72,22 +126,26 @@
 
             & > .multiple {
 
-                & > *:not(:last-child) {
+                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
                     margin-bottom: 0;
                     border-bottom-width: 0;
                     border-bottom-left-radius: 0;
                     border-bottom-right-radius: 0;
                 }
 
-                & > *:not(:first-child) {
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
                     border-top-left-radius: 0;
                     border-top-right-radius: 0;
                 }
 
             }
 
-            &.no-separators > .multiple > *:not(:first-child) {
-                border-top-width: 0;
+            &.no-separators > .multiple {
+
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+                    border-top-width: 0;
+                }
+
             }
 
         }

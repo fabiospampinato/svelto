@@ -3,7 +3,7 @@
 
 //INFO: the pipe character (|) is forbidden as a name, cookie's ttl is 1 year
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -147,4 +147,4 @@
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

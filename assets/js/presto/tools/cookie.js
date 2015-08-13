@@ -1,7 +1,7 @@
 
 /* COOKIE */
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -51,4 +51,4 @@
 
     };
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

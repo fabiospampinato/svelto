@@ -5,7 +5,7 @@ extends ../../layout.jade
 append main
     +divider Depths
 
-    +multiple.centered.z-depths-btns
+    +multiple.centered.z-depths
         +label-simple.z-depth-0 0
         +label-simple.z-depth-1 1
         +label-simple.z-depth-2 2
@@ -34,4 +34,4 @@ append main
 
 append body-end
     script.
-        $('.z-depths-btns .label').wrap ( '<div class="centered" style="width: 150px; height: 150px;"></div>' );
+        $('.z-depths .label-wrp').wrap ( '<div class="centered" style="width: 150px; height: 150px;"></div>' );

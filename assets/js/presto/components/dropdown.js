@@ -4,7 +4,7 @@
 //TODO: add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 //TODO: add dropdown-closer
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -381,4 +381,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));

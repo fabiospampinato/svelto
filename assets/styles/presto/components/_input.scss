@@ -86,18 +86,46 @@
             margin-top: $input-compact-vertical-padding;
         }
 
-        &:not(.disabled) > .text-field {
+        &:not(.disabled) {
 
-            &:focus ~ label, &:valid ~ label {
-                font-size: $input-label-active-font-size;
-                top: $layout-half-spacing;
-                left: 0;
-                margin-top: 0;
-                opacity: $input-label-active-opacity;
+            & > .text-field {
+
+                &:focus ~ label, &:valid ~ label {
+                    font-size: $input-label-active-font-size;
+                    top: $layout-half-spacing;
+                    left: 0;
+                    margin-top: 0;
+                    opacity: $input-label-active-opacity;
+                }
+
+                &:focus ~ label {
+                    color: $input-active-color;
+                }
+
             }
 
-            &:focus ~ label {
-                color: $input-active-color;
+            &.outlined {
+
+                & > .text-field {
+
+                    &:focus ~ label, &:valid ~ label {
+                        left: $layout-spacing !important;
+                    }
+
+                }
+
+                &.compact {
+
+                    & > .text-field {
+
+                        &:focus ~ label, &:valid ~ label {
+                            left: $layout-half-spacing !important;
+                        }
+
+                    }
+
+                }
+
             }
 
         }

@@ -4,7 +4,7 @@
 //TODO: Add support for min and max date delimiter
 //TODO: Set it from input
 
-;(function ( $, window, document, undefined ) {
+;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
@@ -311,4 +311,4 @@
 
     });
 
-}( lQuery, window, document ));
+}( jQuery, _, window, document ));
