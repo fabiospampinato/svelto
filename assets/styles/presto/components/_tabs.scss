@@ -1,61 +1,111 @@
 
 /* TABS */
 
+//FIXME: in order to positionate the indicator the .multiple-wrp and > .multiple get too hacky, by manually removing the margin
+
 .tabs {
 
     position: relative;
     margin-bottom: $layout-spacing;
 
-    & > .tabs-buttons {
-
-        & > .multiple-wrp {
-
-            margin-right: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
-            margin-bottom: 0;
-            margin-left: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
-
-            & > .multiple > .button {
-
-                &:first-child {
-                    margin-left: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
-                    border-bottom-left-radius: 0;
-                }
-
-                &:last-child {
-                    margin-right: 0; //FIXME: is not a clean solution... it's here for correctly positionate the indicator under the button
-                    border-bottom-right-radius: 0;
-                }
-
-            }
-
-        }
-
+    & > .tabs-buttons > .multiple-wrp {
+        margin-bottom: 0;
     }
 
     & > .tabs-containers {
 
         position: relative;
 
-        & > .tabs-indicator {
+        & > .tabs-buttons-indicator {
             @include color ( $tabs-indicator-color, $tabs-indicator-color-basic );
             position: absolute;
-            z-index: 1;
-            top: - $tabs-indicator-height;
-            right: $container-border-width;
-            left: $container-border-width;
-            height: $tabs-indicator-height;
-            transition: left $tabs-indicator-transition-all-duration, right $tabs-indicator-transition-all-duration;
+             z-index: 1;
+            transition-duration: $tabs-indicator-transition-all-duration;
+            transition-property: top, right, bottom, left;
         }
 
         & > .container {
 
             display: none;
-            border-top-width: 0;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
+            margin-bottom: 0;
 
             &.active {
                 display: block;
+            }
+
+        }
+
+    }
+
+    &:not(.vertical) {
+
+        & > .tabs-buttons > .multiple-wrp {
+
+            margin-right: 0;
+            margin-left: 0;
+
+            & > .multiple > .label-wrp {
+
+                margin-right: 0;
+                margin-left: 0;
+
+                & > .label {
+                    border-bottom-right-radius: 0;
+                    border-bottom-left-radius: 0;
+                }
+
+            }
+
+        }
+
+        & > .tabs-containers {
+
+            & > .tabs-buttons-indicator {
+                top: - $tabs-indicator-size;
+                right: 100%;
+                left: 0;
+                height: $tabs-indicator-size;
+            }
+
+            & > .container {
+                border-top-width: 0;
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+        }
+
+    }
+
+    &.vertical {
+
+        display: flex;
+        align-items: stretch;
+
+        & > .tabs-buttons > .multiple-wrp .label {
+            border-top-right-radius: 0;
+            border-bottom-right-radius: 0;
+        }
+
+        & > .tabs-containers {
+
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+
+            & > .tabs-buttons-indicator {
+                top: 0;
+                bottom: 100%;
+                left: - $tabs-indicator-size;
+                width: $tabs-indicator-size;
+            }
+
+            & > .container {
+                flex-grow: 1;
+                height: 100%;
+                border-left-width: 0;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
             }
 
         }

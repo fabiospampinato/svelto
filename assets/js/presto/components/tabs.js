@@ -1,6 +1,10 @@
 
 /* TABS */
 
+//FIXME: When we resize the window the indicator moves strangely
+//TODO: Maybe switch from the indicator to .button.highlight
+//FIXME: positionate_indicator is too hacky
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -9,19 +13,40 @@
 
     $.widget ( 'presto.tabs', {
 
+        /* OPTIONS */
+
+        options: {
+            selectors: {
+                buttons_wrp: '.tabs-buttons',
+                buttons: '.button-wrp',
+                indicator: '.tabs-buttons-indicator',
+                containers_wrp: '.tabs-containers',
+                containers: '> .container'
+            },
+            indicator_delay: 40,
+            callbacks: {
+                select: $.noop
+            }
+        },
+
         /* SPECIAL */
 
         _variables: function () {
 
             this.$tabs = this.$element;
-            this.$tabs_buttons = this.$tabs.find ( '.tabs-buttons' );
-            this.$buttons = this.$tabs.find ( '.button-wrp' ); //FIXME: Should only search on the children, or nested tabs will not work
-            this.$containers = this.$tabs.find ( '.container' );
-            this.$indicator = this.$tabs.find ( '.tabs-indicator' );
+
+            this.isVertical = this.$tabs.hasClass ( 'vertical' );
+
+            this.$tabs_buttons = this.$tabs.find ( this.options.selectors.buttons_wrp );
+            this.$buttons = this.$tabs_buttons.find ( this.options.selectors.buttons );
+            this.$indicator = this.$tabs.find ( this.options.selectors.indicator );
+
+            this.$tabs_containers = this.$tabs.find ( this.options.selectors.containers_wrp );
+            this.$containers = this.$tabs_containers.find ( this.options.selectors.containers );
 
             var $current_button = this.$buttons.filter ( '.active' ).first ();
 
-            $current_button = $current_button.length > 0 ? $current_button : this.$buttons.first ();
+            $current_button = ( $current_button.length > 0 ) ? $current_button : this.$buttons.first ();
 
             this.prev_index = 0;
             this.current_index = this.$buttons.index ( $current_button );
@@ -53,20 +78,41 @@
         _positionate_indicator: function () {
 
             var $active = this.$buttons.filter ( '.active' ),
-                position = $active.position (),
-                total_width = this.$tabs_buttons.width ();
+                position = $active.position ();
 
-            this._delay ( function () {
+            if ( this.isVertical ) {
 
-                this.$indicator.css ( 'left', position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
+                var total_height = this.$tabs_buttons.height ();
 
-            }, this.current_index > this.prev_index ? 40 : 0 );
+                this._delay ( function () {
 
-            this._delay ( function () {
+                    this.$indicator.css ( 'top', position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
 
-                this.$indicator.css ( 'right', total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+                }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
-            }, this.current_index > this.prev_index ? 0 : 40 );
+                this._delay ( function () {
+
+                    this.$indicator.css ( 'bottom', total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+
+                }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
+
+            } else {
+
+                var total_width = this.$tabs_buttons.width ();
+
+                this._delay ( function () {
+
+                    this.$indicator.css ( 'left', position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
+
+                }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
+
+                this._delay ( function () {
+
+                    this.$indicator.css ( 'right', total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+
+                }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
+
+            }
 
         },
 
@@ -76,8 +122,11 @@
 
             if ( this.current_index !== index || force ) {
 
-                this.$buttons.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
-                this.$containers.removeClass ( 'active' ).eq ( index ).addClass ( 'active' );
+                this.$buttons.eq ( this.current_index ).removeClass ( 'active' );
+                this.$buttons.eq ( index ).addClass ( 'active' );
+
+                this.$containers.eq ( this.current_index ).removeClass ( 'active' );
+                this.$containers.eq ( index ).addClass ( 'active' );
 
                 if ( this.current_index !== index ) {
 

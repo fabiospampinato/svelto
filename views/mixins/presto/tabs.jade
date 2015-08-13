@@ -5,12 +5,12 @@ mixin tabs
         block
 
 mixin tabs-buttons
-    .tabs-buttons
-        +multiple&attributes(attributes).fluid.joined
-            block
+    .tabs-buttons&attributes(attributes)
+        block
 
-mixin tabs-indicator
-    .tabs-indicator&attributes(attributes)
+mixin tabs-buttons-indicator
+    .tabs-buttons-indicator&attributes(attributes)
+        block
 
 mixin tabs-containers
     .tabs-containers&attributes(attributes)
