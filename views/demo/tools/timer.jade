@@ -1,0 +1,92 @@
+//- tools/timer.jade
+
+extends ../../layout.jade
+
+
+append main
+    +divider Actions
+
+    +multiple
+        +multiple.joined
+            +input({name: 'milliseconds', label: 'Milliseconds...', value: 300}).white.outlined.no-floating
+            +checkbox('autostart', 'Autostart', 1, true).outlined
+            +button-simple("timer_set()").outlined Set
+        +multiple.joined
+            +input({name: 'milliseconds_once', label: 'Milliseconds...', value: 1000}).white.outlined.no-floating
+            +button-simple("timer_once()").outlined Once
+        +button-simple("timer_play()").outlined Play
+        +button-simple("timer_pause()").outlined Pause
+        +button-simple("timer_stop()").outlined Stop
+        +button-simple("timer_toggle()").outlined Toggle
+        +button-simple("timer_reset()").outlined Reset
+        +button-simple("timer_go()").outlined Go
+        +button-simple("timer_remaining()").outlined Remaining
+
+append body-end
+    script.
+        var timer = false;
+
+        function timer_callback () {
+
+            $.noty ({ body: 'Timer executed!', color: 'green' });
+
+        }
+
+        function timer_set () {
+
+            var milliseconds = Number($('input[name="milliseconds"]').val ()),
+                autostart = $('input[name="autostart"]').prop ( 'checked' );
+
+            timer = $.timer ( timer_callback, milliseconds, autostart );
+
+        }
+
+        function timer_once () {
+
+            var milliseconds = Number($('input[name="milliseconds_once"]').val ());
+
+            timer.once ( milliseconds );
+
+        }
+
+        function timer_play () {
+
+            timer.play ();
+
+        }
+
+        function timer_pause () {
+
+            timer.pause ();
+
+        }
+
+        function timer_stop () {
+
+            timer.stop ();
+
+        }
+
+        function timer_toggle () {
+
+            timer.toggle ();
+
+        }
+
+        function timer_reset () {
+
+            timer.reset ();
+
+        }
+
+        function timer_go () {
+
+            timer.go ();
+
+        }
+
+        function timer_remaining () {
+
+            $.noty ( 'Remaining: ' + timer.remaining () );
+
+        }

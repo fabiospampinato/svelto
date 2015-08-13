@@ -43,6 +43,8 @@
 
         once: function ( time ) {
 
+            console.log("time: ", time);
+
             var timer = this;
 
             if ( isNaN ( time ) ) time = 0;
