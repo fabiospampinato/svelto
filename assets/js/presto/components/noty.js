@@ -1,7 +1,7 @@
 
 /* NOTY */
 
-//TODO: add support for swipe to dismiss
+//TODO: add support for swipe to dismiss in mobile and touchscreen enabled devices
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -17,7 +17,9 @@
 
         // EXTEND
 
-        var options = {};
+        var options = {
+            autoplay: true
+        };
 
         if ( _.isString ( custom_options ) ) {
 
@@ -29,13 +31,21 @@
 
         }
 
-        if ( options.buttons ) options.type = 'action';
+        if ( options.buttons ) {
+
+            options.type = 'action';
+
+        }
 
         // NOTY
 
-        var noty = new $.presto.noty ( options ); //FIXME: It should be instantiated on an empty object I think, otherwise we always have to type the namespace
+        var noty = new $.presto.noty ( options );
 
-        noty.open ();
+        if ( options.autoplay ) {
+
+            noty.open ();
+
+        }
 
         return noty;
 
@@ -44,8 +54,6 @@
     /* NOTY */
 
     $.widget ( 'presto.noty', {
-
-        //FIXME: buttons are not showing properly
 
         /* TEMPLATES */
 
@@ -80,9 +88,11 @@
                              '{% } %}' +
                          '</div>' +
                      '</div>',
-            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
-                        '<div class="label-center">' +
-                            '{%#(o.text || "")%}' +
+            button: '<div class="label-wrp button-wrp">' +
+                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
+                            '<div class="label-center">' +
+                                '{%#(o.text || "")%}' +
+                            '</div>' +
                         '</div>' +
                     '</div>'
         },
@@ -93,6 +103,10 @@
             anchor: {
                 y: 'bottom',
                 x: 'left'
+            },
+
+            delay: {
+                remove: 200
             },
 
             title: false,
@@ -254,7 +268,7 @@
 
                 this.$noty.remove ();
 
-            }, 200 );
+            }, this.options.delay.remove );
 
             this._trigger ( 'close' );
 

@@ -110,8 +110,7 @@ append body-end
         }
         var created_noty;
         function noty_test_api_create () {
-            created_noty = $.noty('API noty');
-            created_noty.close();
+            created_noty = $.noty({ body: 'API noty', autoplay: false });
         }
         function noty_test_api_open () {
             if ( created_noty ) {

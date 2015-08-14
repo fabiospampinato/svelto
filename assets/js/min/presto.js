@@ -1430,7 +1430,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* EASING */
 
-//INFO: t: current time,
+//INFO: x: nothing, it's here just for compatibility,
+//      t: current time,
 //      b: start value,
 //      c: end value,
 //      d: duration
@@ -1443,65 +1444,68 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $.easing = {
         def: 'easeOutQuad',
-        linear: function ( t, b, c, d ) {
+        swing: function ( x, t, b, c, d ) {
+            return $.easing[$.easing.def]( x, t, b, c, d );
+        },
+        linear: function ( x, t, b, c, d ) {
             return ( c - b ) / d * t + b;
         },
-        easeInQuad: function ( t, b, c, d ) {
+        easeInQuad: function ( x, t, b, c, d ) {
             return c * ( t /= d ) * t + b;
         },
-        easeOutQuad: function ( t, b, c, d ) {
+        easeOutQuad: function ( x, t, b, c, d ) {
             return -c * ( t /= d ) * ( t - 2 ) + b;
         },
-        easeInOutQuad: function ( t, b, c, d ) {
+        easeInOutQuad: function ( x, t, b, c, d ) {
             if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t + b;
             return -c / 2 * ( ( --t ) * ( t - 2 ) - 1 ) + b;
         },
-        easeInCubic: function ( t, b, c, d ) {
+        easeInCubic: function ( x, t, b, c, d ) {
             return c * ( t /= d ) * t * t + b;
         },
-        easeOutCubic: function ( t, b, c, d ) {
+        easeOutCubic: function ( x, t, b, c, d ) {
             return c * ( ( t = t / d - 1 ) * t * t + 1 ) + b;
         },
-        easeInOutCubic: function ( t, b, c, d ) {
+        easeInOutCubic: function ( x, t, b, c, d ) {
             if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t + b;
             return c / 2 * ( ( t -= 2 ) * t * t + 2 ) + b;
         },
-        easeInQuart: function ( t, b, c, d ) {
+        easeInQuart: function ( x, t, b, c, d ) {
             return c * ( t /= d ) * t * t * t + b;
         },
-        easeOutQuart: function ( t, b, c, d ) {
+        easeOutQuart: function ( x, t, b, c, d ) {
             return -c * ( ( t = t / d - 1 ) * t * t * t - 1 ) + b;
         },
-        easeInOutQuart: function ( t, b, c, d ) {
+        easeInOutQuart: function ( x, t, b, c, d ) {
             if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t + b;
             return -c / 2 * ( ( t -= 2 ) * t * t * t - 2 ) + b;
         },
-        easeInQuint: function ( t, b, c, d ) {
+        easeInQuint: function ( x, t, b, c, d ) {
             return c * ( t /= d ) * t * t * t * t + b;
         },
-        easeOutQuint: function ( t, b, c, d ) {
+        easeOutQuint: function ( x, t, b, c, d ) {
             return c * ( ( t = t / d - 1 ) * t * t * t * t + 1 ) + b;
         },
-        easeInOutQuint: function ( t, b, c, d ) {
+        easeInOutQuint: function ( x, t, b, c, d ) {
             if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t * t + b;
             return c / 2 * ( ( t -= 2 ) * t * t * t * t + 2 ) + b;
         },
-        easeInSine: function ( t, b, c, d ) {
+        easeInSine: function ( x, t, b, c, d ) {
             return -c * Math.cos ( t / d * ( Math.PI / 2 ) ) + c + b;
         },
-        easeOutSine: function ( t, b, c, d ) {
+        easeOutSine: function ( x, t, b, c, d ) {
             return c * Math.sin ( t / d * ( Math.PI / 2 ) ) + b;
         },
-        easeInOutSine: function ( t, b, c, d ) {
+        easeInOutSine: function ( x, t, b, c, d ) {
             return -c / 2 * ( Math.cos ( Math.PI * t / d ) - 1 ) + b;
         },
-        easeInExpo: function ( t, b, c, d ) {
+        easeInExpo: function ( x, t, b, c, d ) {
             return ( t == 0 ) ? b : c * Math.pow ( 2, 10 * ( t / d - 1 ) ) + b;
         },
-        easeOutExpo: function ( t, b, c, d ) {
+        easeOutExpo: function ( x, t, b, c, d ) {
             return ( t == d ) ? b + c : c * ( -Math.pow ( 2, -10 * t / d ) + 1) + b;
         },
-        easeInOutExpo: function ( t, b, c, d ) {
+        easeInOutExpo: function ( x, t, b, c, d ) {
             if ( t == 0) return b;
             if ( t == d) return b + c;
             if ( ( t /= d / 2 ) < 1) return c / 2 * Math.pow ( 2, 10 * ( t - 1 ) ) + b;
@@ -3099,6 +3103,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
+            selectors: {
+                toggler: '.expander-toggler',
+                content: '.container-content'
+            },
+            delay: {
+                open: 250,
+                close: 250
+            },
             callbacks: {
                 open: $.noop,
                 close: $.noop
@@ -3110,57 +3122,61 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _variables: function () {
 
             this.$expander = this.$element;
-            this.$togglers = this.$expander.find ( '.expander-toggler' );
+            this.$content = this.$expander.find ( this.options.selectors.content );
 
-            this.opened = this.$expander.hasClass ( 'opened' );
+            this.opened = false;
 
         },
 
-        // _init: function () {
+        _init: function () {
 
-        //     if ( !this.opened ) this.close ( true ); //INFO: If is opened the CSS takes care of everything
+            if ( this.$expander.hasClass ( 'opened' ) ) {
 
-        // },
+                this.open ();
+
+            }
+
+        },
 
         _events: function () {
 
-            this._on ( this.$togglers, 'click', this.toggle );
+            this._on ( 'click', this.options.selectors.toggler, this.toggle );
 
         },
 
         /* PUBLIC */
 
-        toggle: function () {
+        toggle: function ( force ) {
 
-            this[this.opened ? 'close' : 'open']();
+            if ( !_.isBoolean ( force ) ) {
+
+                force = !this.opened;
+
+            }
+
+            if ( force !== this.opened ) {
+
+                this.opened = force;
+
+                this.$expander.toggleClass ( 'opened', this.opened );
+
+                this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
+
+                this._trigger ( this.opened ? 'open' : 'close' );
+
+            }
 
         },
 
         open: function () {
 
-            if ( !this.opened ) {
-
-                this.opened = true;
-
-                this.$expander.addClass ( 'opened' );
-
-                this._trigger ( 'open' );
-
-            }
+            this.toggle ( true );
 
         },
 
         close: function () {
 
-            if ( this.opened ) {
-
-                this.opened = false;
-
-                this.$expander.removeClass ( 'opened' );
-
-                this._trigger ( 'close' );
-
-            }
+            this.toggle ( false);
 
         }
 
@@ -3191,7 +3207,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
+            selectors: {
+                flipper: '.flipper'
+            },
             callbacks: {
+                font: $.noop,
+                back: $.noop,
                 flipped: $.noop
             }
         },
@@ -3203,7 +3224,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$flippable = this.$element;
             this.$front = this.$flippable.find ( '.flippable-front' );
             this.$back = this.$flippable.find ( '.flippable-back' );
-            this.$flippers = this.$flippable.find ( '.flipper' );
 
             this.isFlipped = this.$flippable.hasClass ( 'flipped' );
 
@@ -3211,7 +3231,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
-            this._on ( this.$flippers, 'click', this.flip );
+            this._on ( 'click', this.options.selectors.flipper, this.flip );
 
         },
 
@@ -3223,6 +3243,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$flippable.toggleClass ( 'flipped', this.isFlipped );
 
+            this._trigger ( this.isFlipped ? 'front' : 'back' );
             this._trigger ( 'flipped' );
 
         }
@@ -3243,6 +3264,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* INFOBAR */
 
+//TODO: maybe add the ability to open it
+//TODO: maybe just hiding it on close is enough, do we gain a performance benefit this way?
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -3254,6 +3278,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
+            selectors: {
+                closer: '.infobar-closer'
+            },
             delay: {
                 close: 150
             },
@@ -3267,13 +3294,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _variables: function () {
 
             this.$infobar = this.$element;
-            this.$closers = this.$infobar.find ( '.infobar-closer' );
 
         },
 
         _events: function () {
 
-            this._on ( this.$closers, 'click', this.close );
+            this._on ( 'click', this.options.selectors.closer, this.close );
 
         },
 
@@ -3281,7 +3307,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         close: function () {
 
-            this.$infobar.addClass ( 'remove' );
+            this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
 
             this._delay ( function () {
 
@@ -4853,6 +4879,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
+            selectors: {
+                closer: '.modal-closer'
+            },
             callbacks: {
                 open: $.noop,
                 close: $.noop
@@ -4864,13 +4893,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _variables: function () {
 
             this.$modal = this.$element;
-            this.$closers = this.$modal.find ( '.modal-closer' );
 
         },
 
         _events: function () {
 
-            this._on ( this.$closers, 'click', this.close );
+            this._on ( 'click', this.options.selectors.closer, this.close );
 
         },
 
@@ -4902,7 +4930,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$modal.removeClass ( 'active' );
 
-            $document.off ( 'keydown', this._handler_esc_keydown );
+            this._off ( $document, 'keydown', this._handler_esc_keydown );
 
             this._trigger ( 'close' );
 
@@ -4916,7 +4944,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         $('.modal').modal ();
 
-        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe so something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically
+        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
 
             $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
 
@@ -5033,7 +5061,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* NOTY */
 
-//TODO: add support for swipe to dismiss
+//TODO: add support for swipe to dismiss in mobile and touchscreen enabled devices
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -5049,7 +5077,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // EXTEND
 
-        var options = {};
+        var options = {
+            autoplay: true
+        };
 
         if ( _.isString ( custom_options ) ) {
 
@@ -5061,13 +5091,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         }
 
-        if ( options.buttons ) options.type = 'action';
+        if ( options.buttons ) {
+
+            options.type = 'action';
+
+        }
 
         // NOTY
 
-        var noty = new $.presto.noty ( options ); //FIXME: It should be instantiated on an empty object I think, otherwise we always have to type the namespace
+        var noty = new $.presto.noty ( options );
 
-        noty.open ();
+        if ( options.autoplay ) {
+
+            noty.open ();
+
+        }
 
         return noty;
 
@@ -5076,8 +5114,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
     /* NOTY */
 
     $.widget ( 'presto.noty', {
-
-        //FIXME: buttons are not showing properly
 
         /* TEMPLATES */
 
@@ -5112,9 +5148,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                              '{% } %}' +
                          '</div>' +
                      '</div>',
-            button: '<div class="button actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
-                        '<div class="label-center">' +
-                            '{%#(o.text || "")%}' +
+            button: '<div class="label-wrp button-wrp">' +
+                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
+                            '<div class="label-center">' +
+                                '{%#(o.text || "")%}' +
+                            '</div>' +
                         '</div>' +
                     '</div>'
         },
@@ -5125,6 +5163,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             anchor: {
                 y: 'bottom',
                 x: 'left'
+            },
+
+            delay: {
+                remove: 200
             },
 
             title: false,
@@ -5286,7 +5328,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.$noty.remove ();
 
-            }, 200 );
+            }, this.options.delay.remove );
 
             this._trigger ( 'close' );
 
@@ -5327,7 +5369,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* PROGRESS BAR */
 
-//TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the childs)
+//TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the children)
 //TODO: make templates DRY
 
 ;(function ( $, _, window, document, undefined ) {
@@ -5460,26 +5502,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
+            var sum = _.clamp ( 0, _.sum ( this.get ().slice ( 0, this.$highlighteds.length ) ), 100 );
+
             if ( this.options.striped ) {
-
-                //TODO: use the fixed _.sum function instead
-
-                var sum = 0,
-                    all = this.get ().slice ( 0, this.$highlighteds.length );
-
-                for ( var i = 0, l = all.length; i < l; i++ ) {
-
-                    sum += all[i];
-
-                }
 
                 this.$stripes.width ( sum + '%' );
 
-                if ( sum === 100 ) {
+            }
 
-                    this._trigger ( 'full' ); //TODO: move it, it should be here I think...
+            if ( sum === 100 ) {
 
-                }
+                this._trigger ( 'full' );
 
             }
 
@@ -5544,9 +5577,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* RADIO */
 
-//TODO: add better support for disabled checkboxes
-//TODO: api for selecting and unselecting (with events)
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -5571,9 +5601,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$radio = this.$element;
             this.$input = this.$radio.find ( 'input' );
             this.name = this.$input.attr ( 'name' );
-            this.$form = this.$radio.parent ( 'form' );
-            this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
-            this.$other_radios = this.$other_inputs.parent ();
+
+            this.$container = this.$radio.parent ( 'form' );
+
+            if ( this.$container.length === 0 ) {
+
+                this.$container = $document;
+
+            }
+
+            this.$other_inputs = this.$container.find ( 'input[name="' + this.name + '"]' );
+            this.$other_radios = this.$other_inputs.parent ( '.radio' );
 
         },
 
@@ -5997,21 +6035,33 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
+            /* INPUT CHANGE */
+
             this._on ( true, this.$input, 'change', this._handler_change );
 
+            /* WINDOW RESIZE */
+
             this._on ( $window, 'resize', this._handler_resize );
+
+            /* ARROWS */
 
             this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
             this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
 
+            /* INCREASE / DECREASE */
+
             this._on ( this.$min, 'click', this.decrease );
             this._on ( this.$max, 'click', this.increase );
+
+            /* DRAG */
 
             this.$handler.draggable ({
                 start: this._handler_drag_start,
                 move: this._handler_drag_move,
                 context: this
             });
+
+            /* CLICK */
 
             this._on ( this.$unhighlighted, 'click', this._handler_click );
 
@@ -6630,7 +6680,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TABS */
 
-//FIXME: When we resize the window the indicator moves strangely
 //TODO: Maybe switch from the indicator to .button.highlight
 //FIXME: positionate_indicator is too hacky
 
@@ -6647,10 +6696,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         options: {
             selectors: {
                 buttons_wrp: '.tabs-buttons',
-                buttons: '.button-wrp',
+                buttons: '.button-wrp > .label',
+                button_active_class: 'active',
                 indicator: '.tabs-buttons-indicator',
                 containers_wrp: '.tabs-containers',
-                containers: '> .container'
+                containers: '> .container',
+                container_active_class: 'active'
             },
             indicator_delay: 40,
             callbacks: {
@@ -6673,7 +6724,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$tabs_containers = this.$tabs.find ( this.options.selectors.containers_wrp );
             this.$containers = this.$tabs_containers.find ( this.options.selectors.containers );
 
-            var $current_button = this.$buttons.filter ( '.active' ).first ();
+            var $current_button = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ).first ();
 
             $current_button = ( $current_button.length > 0 ) ? $current_button : this.$buttons.first ();
 
@@ -6692,7 +6743,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._on ( this.$tabs_buttons, 'click', this.options.selectors.buttons, this._hander_button_click );
 
-            this._on ( $window, 'resize', this._positionate_indicator );
+            this._on ( $window, 'resize', this._positionate_indicator ); //TODO: throttle or devounce it
 
         },
 
@@ -6708,7 +6759,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _positionate_indicator: function () {
 
-            var $active = this.$buttons.filter ( '.active' ),
+            var $active = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ),
                 position = $active.position ();
 
             if ( this.isVertical ) {
@@ -6717,13 +6768,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'top', position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var top = position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'top', ( top * 100 / total_height ) + '%' );
 
                 }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'bottom', total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var bottom = total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'bottom', ( bottom * 100 / total_height ) + '%' );
 
                 }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
 
@@ -6733,13 +6788,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'left', position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var left = position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'left', ( left * 100 / total_width ) + '%' );
 
                 }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'right', total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var right = total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'right', ( right * 100 / total_width ) + '%' );
 
                 }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
 
@@ -6753,11 +6812,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.current_index !== index || force ) {
 
-                this.$buttons.eq ( this.current_index ).removeClass ( 'active' );
-                this.$buttons.eq ( index ).addClass ( 'active' );
+                this.$buttons.eq ( this.current_index ).removeClass ( this.options.selectors.button_active_class );
+                this.$buttons.eq ( index ).addClass ( this.options.selectors.button_active_class );
 
-                this.$containers.eq ( this.current_index ).removeClass ( 'active' );
-                this.$containers.eq ( index ).addClass ( 'active' );
+                this.$containers.eq ( this.current_index ).removeClass ( this.options.selectors.container_active_class );
+                this.$containers.eq ( index ).addClass ( this.options.selectors.container_active_class );
 
                 if ( this.current_index !== index ) {
 

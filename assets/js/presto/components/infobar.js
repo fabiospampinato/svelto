@@ -1,6 +1,9 @@
 
 /* INFOBAR */
 
+//TODO: maybe add the ability to open it
+//TODO: maybe just hiding it on close is enough, do we gain a performance benefit this way?
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -12,6 +15,9 @@
         /* OPTIONS */
 
         options: {
+            selectors: {
+                closer: '.infobar-closer'
+            },
             delay: {
                 close: 150
             },
@@ -25,13 +31,12 @@
         _variables: function () {
 
             this.$infobar = this.$element;
-            this.$closers = this.$infobar.find ( '.infobar-closer' );
 
         },
 
         _events: function () {
 
-            this._on ( this.$closers, 'click', this.close );
+            this._on ( 'click', this.options.selectors.closer, this.close );
 
         },
 
@@ -39,7 +44,7 @@
 
         close: function () {
 
-            this.$infobar.addClass ( 'remove' );
+            this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
 
             this._delay ( function () {
 

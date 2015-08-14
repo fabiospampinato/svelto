@@ -12,6 +12,14 @@
         /* OPTIONS */
 
         options: {
+            selectors: {
+                toggler: '.expander-toggler',
+                content: '.container-content'
+            },
+            delay: {
+                open: 250,
+                close: 250
+            },
             callbacks: {
                 open: $.noop,
                 close: $.noop
@@ -23,57 +31,61 @@
         _variables: function () {
 
             this.$expander = this.$element;
-            this.$togglers = this.$expander.find ( '.expander-toggler' );
+            this.$content = this.$expander.find ( this.options.selectors.content );
 
-            this.opened = this.$expander.hasClass ( 'opened' );
+            this.opened = false;
 
         },
 
-        // _init: function () {
+        _init: function () {
 
-        //     if ( !this.opened ) this.close ( true ); //INFO: If is opened the CSS takes care of everything
+            if ( this.$expander.hasClass ( 'opened' ) ) {
 
-        // },
+                this.open ();
+
+            }
+
+        },
 
         _events: function () {
 
-            this._on ( this.$togglers, 'click', this.toggle );
+            this._on ( 'click', this.options.selectors.toggler, this.toggle );
 
         },
 
         /* PUBLIC */
 
-        toggle: function () {
+        toggle: function ( force ) {
 
-            this[this.opened ? 'close' : 'open']();
+            if ( !_.isBoolean ( force ) ) {
+
+                force = !this.opened;
+
+            }
+
+            if ( force !== this.opened ) {
+
+                this.opened = force;
+
+                this.$expander.toggleClass ( 'opened', this.opened );
+
+                this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
+
+                this._trigger ( this.opened ? 'open' : 'close' );
+
+            }
 
         },
 
         open: function () {
 
-            if ( !this.opened ) {
-
-                this.opened = true;
-
-                this.$expander.addClass ( 'opened' );
-
-                this._trigger ( 'open' );
-
-            }
+            this.toggle ( true );
 
         },
 
         close: function () {
 
-            if ( this.opened ) {
-
-                this.opened = false;
-
-                this.$expander.removeClass ( 'opened' );
-
-                this._trigger ( 'close' );
-
-            }
+            this.toggle ( false);
 
         }
 

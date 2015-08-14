@@ -52,21 +52,33 @@
 
         _events: function () {
 
+            /* INPUT CHANGE */
+
             this._on ( true, this.$input, 'change', this._handler_change );
 
+            /* WINDOW RESIZE */
+
             this._on ( $window, 'resize', this._handler_resize );
+
+            /* ARROWS */
 
             this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
             this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
 
+            /* INCREASE / DECREASE */
+
             this._on ( this.$min, 'click', this.decrease );
             this._on ( this.$max, 'click', this.increase );
+
+            /* DRAG */
 
             this.$handler.draggable ({
                 start: this._handler_drag_start,
                 move: this._handler_drag_move,
                 context: this
             });
+
+            /* CLICK */
 
             this._on ( this.$unhighlighted, 'click', this._handler_click );
 

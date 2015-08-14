@@ -9,8 +9,7 @@
     align-items: center;
     margin-bottom: $layout-spacing;
     padding: $layout-spacing;
-    transition-duration: $infobar-transition-close-duration;
-    transition-property: transform, opacity;
+    transition: opacity $infobar-transition-close-duration;
     border-width: $infobar-border-width;
     border-style: solid;
     border-radius: $infobar-border-radius;
@@ -27,7 +26,6 @@
     }
 
     &.remove {
-        transform: scale(0.95);
         opacity: 0;
     }
 

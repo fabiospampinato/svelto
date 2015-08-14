@@ -181,6 +181,10 @@
         width: $noty-img-size;
     }
 
+    .noty-buttons.multiple-wrp {
+        margin-bottom: - $layout-spacing !important;
+    }
+
     /* ANIMATIONS */
 
     transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties

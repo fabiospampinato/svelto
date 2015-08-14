@@ -12,6 +12,9 @@
         /* OPTIONS */
 
         options: {
+            selectors: {
+                closer: '.modal-closer'
+            },
             callbacks: {
                 open: $.noop,
                 close: $.noop
@@ -23,13 +26,12 @@
         _variables: function () {
 
             this.$modal = this.$element;
-            this.$closers = this.$modal.find ( '.modal-closer' );
 
         },
 
         _events: function () {
 
-            this._on ( this.$closers, 'click', this.close );
+            this._on ( 'click', this.options.selectors.closer, this.close );
 
         },
 
@@ -61,7 +63,7 @@
 
             this.$modal.removeClass ( 'active' );
 
-            $document.off ( 'keydown', this._handler_esc_keydown );
+            this._off ( $document, 'keydown', this._handler_esc_keydown );
 
             this._trigger ( 'close' );
 
@@ -75,7 +77,7 @@
 
         $('.modal').modal ();
 
-        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe so something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically
+        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
 
             $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
 

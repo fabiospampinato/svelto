@@ -12,7 +12,7 @@ $slider-min-max-width: $slider-height !default;
 $slider-unhighlighted-color: 'gray';
 $slider-unhighlighted-color-basic: true;
 
-$slider-unhighlighted-height: 0.4em !default;
+$slider-unhighlighted-height: 0.5em !default;
 
 $slider-unhighlighted-border-radius: $slider-unhighlighted-height;
 
@@ -28,11 +28,11 @@ $slider-handler-color-basic: true;
 
 $slider-handler-z-depth: 3;
 
-$slider-handler-active-transform-scale: 1.45;
+$slider-handler-active-transform-scale: 1.35;
 
 $slider-handler-border-radius: 50%;
 
-$slider-handler-size: 1.33333em !default;
+$slider-handler-size: 1.55em !default;
 $slider-handler-half-size: $slider-handler-size / 2 !default;
 
 /* HANDLER:BEFORE */

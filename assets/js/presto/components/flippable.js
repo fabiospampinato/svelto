@@ -12,7 +12,12 @@
         /* OPTIONS */
 
         options: {
+            selectors: {
+                flipper: '.flipper'
+            },
             callbacks: {
+                font: $.noop,
+                back: $.noop,
                 flipped: $.noop
             }
         },
@@ -24,7 +29,6 @@
             this.$flippable = this.$element;
             this.$front = this.$flippable.find ( '.flippable-front' );
             this.$back = this.$flippable.find ( '.flippable-back' );
-            this.$flippers = this.$flippable.find ( '.flipper' );
 
             this.isFlipped = this.$flippable.hasClass ( 'flipped' );
 
@@ -32,7 +36,7 @@
 
         _events: function () {
 
-            this._on ( this.$flippers, 'click', this.flip );
+            this._on ( 'click', this.options.selectors.flipper, this.flip );
 
         },
 
@@ -44,6 +48,7 @@
 
             this.$flippable.toggleClass ( 'flipped', this.isFlipped );
 
+            this._trigger ( this.isFlipped ? 'front' : 'back' );
             this._trigger ( 'flipped' );
 
         }

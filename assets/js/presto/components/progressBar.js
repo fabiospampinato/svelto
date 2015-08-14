@@ -1,7 +1,7 @@
 
 /* PROGRESS BAR */
 
-//TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the childs)
+//TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the children)
 //TODO: make templates DRY
 
 ;(function ( $, _, window, document, undefined ) {
@@ -134,26 +134,17 @@
 
             }
 
+            var sum = _.clamp ( 0, _.sum ( this.get ().slice ( 0, this.$highlighteds.length ) ), 100 );
+
             if ( this.options.striped ) {
-
-                //TODO: use the fixed _.sum function instead
-
-                var sum = 0,
-                    all = this.get ().slice ( 0, this.$highlighteds.length );
-
-                for ( var i = 0, l = all.length; i < l; i++ ) {
-
-                    sum += all[i];
-
-                }
 
                 this.$stripes.width ( sum + '%' );
 
-                if ( sum === 100 ) {
+            }
 
-                    this._trigger ( 'full' ); //TODO: move it, it should be here I think...
+            if ( sum === 100 ) {
 
-                }
+                this._trigger ( 'full' );
 
             }
 

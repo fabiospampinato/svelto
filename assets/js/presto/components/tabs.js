@@ -1,7 +1,6 @@
 
 /* TABS */
 
-//FIXME: When we resize the window the indicator moves strangely
 //TODO: Maybe switch from the indicator to .button.highlight
 //FIXME: positionate_indicator is too hacky
 
@@ -18,10 +17,12 @@
         options: {
             selectors: {
                 buttons_wrp: '.tabs-buttons',
-                buttons: '.button-wrp',
+                buttons: '.button-wrp > .label',
+                button_active_class: 'active',
                 indicator: '.tabs-buttons-indicator',
                 containers_wrp: '.tabs-containers',
-                containers: '> .container'
+                containers: '> .container',
+                container_active_class: 'active'
             },
             indicator_delay: 40,
             callbacks: {
@@ -44,7 +45,7 @@
             this.$tabs_containers = this.$tabs.find ( this.options.selectors.containers_wrp );
             this.$containers = this.$tabs_containers.find ( this.options.selectors.containers );
 
-            var $current_button = this.$buttons.filter ( '.active' ).first ();
+            var $current_button = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ).first ();
 
             $current_button = ( $current_button.length > 0 ) ? $current_button : this.$buttons.first ();
 
@@ -63,7 +64,7 @@
 
             this._on ( this.$tabs_buttons, 'click', this.options.selectors.buttons, this._hander_button_click );
 
-            this._on ( $window, 'resize', this._positionate_indicator );
+            this._on ( $window, 'resize', this._positionate_indicator ); //TODO: throttle or devounce it
 
         },
 
@@ -79,7 +80,7 @@
 
         _positionate_indicator: function () {
 
-            var $active = this.$buttons.filter ( '.active' ),
+            var $active = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ),
                 position = $active.position ();
 
             if ( this.isVertical ) {
@@ -88,13 +89,17 @@
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'top', position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var top = position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'top', ( top * 100 / total_height ) + '%' );
 
                 }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'bottom', total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var bottom = total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'bottom', ( bottom * 100 / total_height ) + '%' );
 
                 }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
 
@@ -104,13 +109,17 @@
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'left', position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var left = position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'left', ( left * 100 / total_width ) + '%' );
 
                 }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
                 this._delay ( function () {
 
-                    this.$indicator.css ( 'right', total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ) ); //FIXME: it's hacky
+                    var right = total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
+
+                    this.$indicator.css ( 'right', ( right * 100 / total_width ) + '%' );
 
                 }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
 
@@ -124,11 +133,11 @@
 
             if ( this.current_index !== index || force ) {
 
-                this.$buttons.eq ( this.current_index ).removeClass ( 'active' );
-                this.$buttons.eq ( index ).addClass ( 'active' );
+                this.$buttons.eq ( this.current_index ).removeClass ( this.options.selectors.button_active_class );
+                this.$buttons.eq ( index ).addClass ( this.options.selectors.button_active_class );
 
-                this.$containers.eq ( this.current_index ).removeClass ( 'active' );
-                this.$containers.eq ( index ).addClass ( 'active' );
+                this.$containers.eq ( this.current_index ).removeClass ( this.options.selectors.container_active_class );
+                this.$containers.eq ( index ).addClass ( this.options.selectors.container_active_class );
 
                 if ( this.current_index !== index ) {
 

@@ -1,9 +1,6 @@
 
 /* RADIO */
 
-//TODO: add better support for disabled checkboxes
-//TODO: api for selecting and unselecting (with events)
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -28,9 +25,17 @@
             this.$radio = this.$element;
             this.$input = this.$radio.find ( 'input' );
             this.name = this.$input.attr ( 'name' );
-            this.$form = this.$radio.parent ( 'form' );
-            this.$other_inputs = this.$form.find ( 'input[name="' + this.name + '"]' );
-            this.$other_radios = this.$other_inputs.parent ();
+
+            this.$container = this.$radio.parent ( 'form' );
+
+            if ( this.$container.length === 0 ) {
+
+                this.$container = $document;
+
+            }
+
+            this.$other_inputs = this.$container.find ( 'input[name="' + this.name + '"]' );
+            this.$other_radios = this.$other_inputs.parent ( '.radio' );
 
         },
 

@@ -3,8 +3,6 @@
 
 .expander {
 
-    //FIXME: the transitions on the content don't work
-
     & > .container-header {
 
         transition: border-radius $expander-header-transition-border-radius-duration;
@@ -19,9 +17,10 @@
 
     & > .container-content {
         display: none;
-        padding-top: 0;
-        padding-bottom: 0;
-        transition: padding $expander-content-transition-padding-duration, opacity $expander-content-transition-opacity-duration;
+        padding-top: $layout-spacing;
+        padding-bottom: $layout-spacing;
+        transition-duration: $expander-content-transition-padding-duration;
+        transition-property: opacity;
         opacity: 0;
     }
 
@@ -47,9 +46,6 @@
         }
 
         & > .container-content {
-            display: block;
-            padding-top: $layout-spacing;
-            padding-bottom: $layout-spacing;
             opacity: 1;
         }
 
