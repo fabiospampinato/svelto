@@ -61,19 +61,21 @@
 
         _events: function () {
 
-            this._on ( this.$buttons, 'click', function ( event, node ) {
-
-                var new_index = this.$buttons.index ( $(node) );
-
-                this.select ( new_index );
-
-            });
+            this._on ( this.$tabs_buttons, 'click', this.options.selectors.buttons, this._hander_button_click );
 
             this._on ( $window, 'resize', this._positionate_indicator );
 
         },
 
         /* PRIVATE */
+
+        _hander_button_click: function ( event, node ) {
+
+            var new_index = this.$buttons.index ( $(node) );
+
+            this.select ( new_index );
+
+        },
 
         _positionate_indicator: function () {
 

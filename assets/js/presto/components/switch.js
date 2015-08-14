@@ -1,7 +1,7 @@
 
 /* SWITCH */
 
-;(function ( $, _, window, document, undefined ) {
+;(function ( $, window, document, undefined ) {
 
     'use strict';
 
@@ -146,7 +146,7 @@
 
             this.drag_percentage = ( XYs.delta.X >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
 
-            this.$handler.css ( 'left', Math.max ( 0, Math.min ( 100, this.drag_percentage ) ) + '%' );
+            this.$handler.css ( 'left', _.clamp ( 0, this.drag_percentage, 100 ) + '%' );
 
         },
 

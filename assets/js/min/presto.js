@@ -6229,8 +6229,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* STEPPER */
 
-//TODO: use an input instead of a label, so that we can
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -6248,8 +6246,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             step: 1,
             decimals: 0,
             callbacks: {
-                increased: $.noop,
-                decreased: $.noop
+                increase: $.noop,
+                decrease: $.noop
             }
         },
 
@@ -6259,7 +6257,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$stepper = this.$element;
             this.$input = this.$stepper.find ( 'input' );
-            this.$label = this.$stepper.find ( '.stepper-label .label-center' );
             this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
             this.$increaser = this.$stepper.find ( '.stepper-increaser' );
 
@@ -6267,10 +6264,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
-            this._on ( true, this.$input, 'change', this._handler_change );
+            /* INPUT / CHANGE */
+
+            this._on ( true, this.$input, 'input change', this._handler_input_change );
+
+            /* ARROWS */
 
             this._on ( 'mouseenter', this._handler_arrows_in );
             this._on ( 'mouseleave', this._handler_arrows_out );
+
+            /* INCREASE / DECREASE */
 
             this._on ( this.$decreaser, 'click', this.decrease );
 
@@ -6288,7 +6291,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CHANGE */
 
-        _handler_change: function () {
+        _handler_input_change: function () {
 
             this.set_value ( this.$input.val () );
 
@@ -6328,17 +6331,18 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             value = this._round_value ( value );
 
-            if ( value >= this.options.min && value <= this.options.max && value !== this.options.value ) {
+            if ( value !== this.options.value || this.$input.val ().length === 0 ) {
 
-                this.options.value = value;
+                var clamped = _.clamp ( this.options.min, value, this.options.max );
 
-                this.$input.val ( value ).trigger ( 'change' );
-                this.$label.html ( value );
+                this.options.value = clamped;
 
-                this.$decreaser.toggleClass ( 'disabled', value === this.options.min );
-                this.$increaser.toggleClass ( 'disabled', value === this.options.max );
+                this.$input.val ( clamped ).trigger ( 'change' );
 
-                this._trigger ( value > this.options.value ? 'increased' : 'decreased' );
+                this.$decreaser.toggleClass ( 'disabled', clamped === this.options.min );
+                this.$increaser.toggleClass ( 'disabled', clamped === this.options.max );
+
+                this._trigger ( clamped > this.options.value ? 'increase' : 'decrease' );
 
             }
 
@@ -6394,7 +6398,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* SWITCH */
 
-;(function ( $, _, window, document, undefined ) {
+;(function ( $, window, document, undefined ) {
 
     'use strict';
 
@@ -6539,7 +6543,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.drag_percentage = ( XYs.delta.X >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
 
-            this.$handler.css ( 'left', Math.max ( 0, Math.min ( 100, this.drag_percentage ) ) + '%' );
+            this.$handler.css ( 'left', _.clamp ( 0, this.drag_percentage, 100 ) + '%' );
 
         },
 
@@ -6686,19 +6690,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
-            this._on ( this.$buttons, 'click', function ( event, node ) {
-
-                var new_index = this.$buttons.index ( $(node) );
-
-                this.select ( new_index );
-
-            });
+            this._on ( this.$tabs_buttons, 'click', this.options.selectors.buttons, this._hander_button_click );
 
             this._on ( $window, 'resize', this._positionate_indicator );
 
         },
 
         /* PRIVATE */
+
+        _hander_button_click: function ( event, node ) {
+
+            var new_index = this.$buttons.index ( $(node) );
+
+            this.select ( new_index );
+
+        },
 
         _positionate_indicator: function () {
 

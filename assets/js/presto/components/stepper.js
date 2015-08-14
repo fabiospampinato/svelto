@@ -1,8 +1,6 @@
 
 /* STEPPER */
 
-//TODO: use an input instead of a label, so that we can
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -20,8 +18,8 @@
             step: 1,
             decimals: 0,
             callbacks: {
-                increased: $.noop,
-                decreased: $.noop
+                increase: $.noop,
+                decrease: $.noop
             }
         },
 
@@ -31,7 +29,6 @@
 
             this.$stepper = this.$element;
             this.$input = this.$stepper.find ( 'input' );
-            this.$label = this.$stepper.find ( '.stepper-label .label-center' );
             this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
             this.$increaser = this.$stepper.find ( '.stepper-increaser' );
 
@@ -39,10 +36,16 @@
 
         _events: function () {
 
-            this._on ( true, this.$input, 'change', this._handler_change );
+            /* INPUT / CHANGE */
+
+            this._on ( true, this.$input, 'input change', this._handler_input_change );
+
+            /* ARROWS */
 
             this._on ( 'mouseenter', this._handler_arrows_in );
             this._on ( 'mouseleave', this._handler_arrows_out );
+
+            /* INCREASE / DECREASE */
 
             this._on ( this.$decreaser, 'click', this.decrease );
 
@@ -60,7 +63,7 @@
 
         /* CHANGE */
 
-        _handler_change: function () {
+        _handler_input_change: function () {
 
             this.set_value ( this.$input.val () );
 
@@ -100,17 +103,18 @@
 
             value = this._round_value ( value );
 
-            if ( value >= this.options.min && value <= this.options.max && value !== this.options.value ) {
+            if ( value !== this.options.value || this.$input.val ().length === 0 ) {
 
-                this.options.value = value;
+                var clamped = _.clamp ( this.options.min, value, this.options.max );
 
-                this.$input.val ( value ).trigger ( 'change' );
-                this.$label.html ( value );
+                this.options.value = clamped;
 
-                this.$decreaser.toggleClass ( 'disabled', value === this.options.min );
-                this.$increaser.toggleClass ( 'disabled', value === this.options.max );
+                this.$input.val ( clamped ).trigger ( 'change' );
 
-                this._trigger ( value > this.options.value ? 'increased' : 'decreased' );
+                this.$decreaser.toggleClass ( 'disabled', clamped === this.options.min );
+                this.$increaser.toggleClass ( 'disabled', clamped === this.options.max );
+
+                this._trigger ( clamped > this.options.value ? 'increase' : 'decrease' );
 
             }
 

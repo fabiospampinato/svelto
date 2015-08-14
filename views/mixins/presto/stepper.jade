@@ -1,10 +1,7 @@
 //- stepper.jade
 
-//- TODO: add placeholders labels (like selects)
-
 mixin stepper(name, min, value, max)
     +multiple(data-min=min, data-max=max)&attributes(attributes).stepper.joined
         +button-icon("content-remove").stepper-decreaser
-        +label-simple.stepper-label= value
-        input(type="number", name=name, value=value)
+        +input({name: name, value: value}).autogrow.compact
         +button-icon("content-add").stepper-increaser
