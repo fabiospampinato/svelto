@@ -5,8 +5,41 @@ extends ../../layout.jade
 append main
     +divider Checkbox
 
-    form
-        +multiple
-            +checkbox("name1", "Base", 4)
-            +checkbox("name2", "Checked", 8, true)
-            +checkbox("name3", "Disabled", 32, true).checkbox-disabled
+    +multiple
+        +checkbox("name1", "Base", 4)
+        +checkbox("name2", "Checked", 8, true)
+        +checkbox("name3", "Disabled", 32, true).checkbox-disabled
+
+    +divider Actions
+
+    +multiple
+        +button-simple("checkbox_get_all()") Get all
+        +button-simple("checkbox_toggle_all()") Toggle all
+        +button-simple("checkbox_check_all()") Check all
+        +button-simple("checkbox_uncheck_all()") Uncheck all
+
+append body-end
+    script.
+        function checkbox_get_all () {
+
+            var gets = _.map ( $('.checkbox'), function ( checkbox ) {
+
+                return $(checkbox).checkbox ( 'get' );
+
+            });
+
+            $.noty ( gets.join ( ' - ' ) );
+
+        }
+
+        function checkbox_toggle_all () {
+            $('.checkbox').checkbox ( 'toggle' );
+        }
+
+        function checkbox_check_all () {
+            $('.checkbox').checkbox ( 'check' );
+        }
+
+        function checkbox_uncheck_all () {
+            $('.checkbox').checkbox ( 'uncheck' );
+        }

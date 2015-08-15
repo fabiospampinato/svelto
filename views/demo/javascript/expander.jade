@@ -30,3 +30,24 @@ append main
             +multiple-right
                 +button-icon("hardware-keyboard-arrow-down").xxsmall
         +container-content Content of opened
+
+    +divider Actions
+
+    +multiple
+        +button-simple("expanders_toggle_all()") Toggle all
+        +button-simple("expanders_open_all()") Open all
+        +button-simple("expanders_close_all()") Close all
+
+append body-end
+    script.
+        function expanders_toggle_all () {
+            $('.expander').expander ( 'toggle' );
+        }
+
+        function expanders_open_all () {
+            $('.expander').expander ( 'open' );
+        }
+
+        function expanders_close_all () {
+            $('.expander').expander ( 'close' );
+        }

@@ -24,9 +24,10 @@
 
             this.$radio = this.$element;
             this.$input = this.$radio.find ( 'input' );
+
             this.name = this.$input.attr ( 'name' );
 
-            this.$container = this.$radio.parent ( 'form' );
+            this.$container = this.$radio.parents ( 'form' ).first ();
 
             if ( this.$container.length === 0 ) {
 
@@ -34,48 +35,71 @@
 
             }
 
-            this.$other_inputs = this.$container.find ( 'input[name="' + this.name + '"]' );
-            this.$other_radios = this.$other_inputs.parent ( '.radio' );
+            this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
 
         },
 
-        _init: function () {
+        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-            this.$radio.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
+            var hasClass = this.$radio.hasClass ( 'checked' );
+
+            if ( this.get () ) {
+
+                if ( !hasClass ) {
+
+                    this.$radio.addClass ( 'checked' );
+
+                }
+
+            } else if ( hasClass ) {
+
+                this.$radio.removeClass ( 'checked' );
+
+            }
 
         },
 
         _events: function () {
 
-            this._on ( 'click', this.select );
+            this._on ( 'click', function () {
 
-            this._on ( true, this.$input, 'change', this._update );
+                this.check ();
+
+            });
+
+            this._on ( true, 'change', this._handler_change );
 
         },
 
-        /* PRIVATE */
+        /* CHANGE */
 
-        _update: function () {
+        _handler_change: function () {
 
-            var checked = this.$input.prop ( 'checked' );
+            var isChecked = this.get ();
 
-            if ( checked ) { //INFO: We do the update when we reach the checked one
+            if ( isChecked ) {
 
                 this.$other_radios.removeClass ( 'checked' );
 
-                this.$radio.addClass ( 'checked' );
-
             }
 
-            this._trigger ( checked ? 'checked' : 'unchecked' );
+            this.$radio.toggleClass ( 'checked', isChecked );
+
+            this._trigger ( isChecked ? 'checked' : 'unchecked' );
 
         },
 
         /* PUBLIC */
 
-        select: function () {
+        get: function () {
 
-            if ( !this.$input.prop ( 'checked' ) ) {
+            return this.$input.prop ( 'checked' );
+
+        },
+
+        check: function () {
+
+            if ( !this.get () ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 

@@ -10,21 +10,76 @@ append main
             +container-header("Section 1").actionable.expander-toggler
                 +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-content Content of section 1
+            +container-content
+                +paragraph-sample
         +expander.opened
             +container-header
                 +multiple-left
                     p Section 2 - Button toggler
                 +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall.expander-toggler
-            +container-content Content of section 2 - Button toggler
+            +container-content
+                +paragraph-sample
         +expander
             +container-header("Section 3").actionable.expander-toggler
                 +multiple-left
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-content Content of section 3
+            +container-content
+                +paragraph-sample
         +expander
             +container-header("Section 4").actionable.expander-toggler
                 +multiple-right
                     +button-icon("hardware-keyboard-arrow-down").xxsmall
-            +container-content Content of section 4
+            +container-content
+                +paragraph-sample
+
+    +divider Accordion - Multiple
+
+    +accordion.multiple
+        +expander
+            +container-header("Section 1").actionable.expander-toggler
+                +multiple-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-content
+                +paragraph-sample
+        +expander.opened
+            +container-header
+                +multiple-left
+                    p Section 2 - Button toggler
+                +multiple-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall.expander-toggler
+            +container-content
+                +paragraph-sample
+        +expander
+            +container-header("Section 3").actionable.expander-toggler
+                +multiple-left
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-content
+                +paragraph-sample
+        +expander
+            +container-header("Section 4").actionable.expander-toggler
+                +multiple-right
+                    +button-icon("hardware-keyboard-arrow-down").xxsmall
+            +container-content
+                +paragraph-sample
+
+    +divider Actions
+
+    +multiple
+        +button-simple("accordions_toggle_all()") Toggle all
+        +button-simple("accordions_open_all()") Open all
+        +button-simple("accordions_close_all()") Close all
+
+append body-end
+    script.
+        function accordions_toggle_all () {
+            $('.accordion').accordion ( 'toggleAll' );
+        }
+
+        function accordions_open_all () {
+            $('.accordion').accordion ( 'openAll' );
+        }
+
+        function accordions_close_all () {
+            $('.accordion').accordion ( 'closeAll' );
+        }

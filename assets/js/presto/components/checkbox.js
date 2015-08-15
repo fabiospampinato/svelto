@@ -1,8 +1,6 @@
 
 /* CHECKBOX */
 
-//TODO: add better support for disabled checkboxes
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -29,15 +27,21 @@
 
         },
 
-        _init: function () {
+        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-            if ( this.$input.prop ( 'checked' ) ) {
+            var hasClass = this.$checkbox.hasClass ( 'checked' );
 
-                this.$checkbox.addClass ( 'checked' );
+            if ( this.get () ) {
 
-            } else if ( this.$checkbox.hasClass ( 'checked' ) ) {
+                if ( !hasClass ) {
 
-                this.$input.prop ( 'checked', true ).trigger ( 'change' );
+                    this.$checkbox.addClass ( 'checked' );
+
+                }
+
+            } else if ( hasClass ) {
+
+                this.$checkbox.removeClass ( 'checked' );
 
             }
 
@@ -45,17 +49,13 @@
 
         _events: function () {
 
-            this._on ( 'click', this._handler_click );
+            this._on ( 'click', function () {
+
+                this.toggle ();
+
+            });
 
             this._on ( true, 'change', this._handler_change );
-
-        },
-
-        /* CLICK */
-
-        _handler_click: function ( event ) {
-
-            if ( event.target !== this.$input.get ( 0 ) ) this.toggle ();
 
         },
 
@@ -63,19 +63,49 @@
 
         _handler_change: function () {
 
-            var checked = this.$input.prop ( 'checked' );
+            var isChecked = this.get ();
 
-            this.$checkbox.toggleClass ( 'checked', checked );
+            this.$checkbox.toggleClass ( 'checked', isChecked );
 
-            this._trigger ( checked ? 'checked' : 'unchecked' );
+            this._trigger ( isChecked ? 'checked' : 'unchecked' );
 
         },
 
         /* PUBLIC */
 
-        toggle: function () {
+        get: function () {
 
-            this.$input.prop ( 'checked', !this.$input.prop ( 'checked' ) ).trigger ( 'change' );
+            return this.$input.prop ( 'checked' );
+
+        },
+
+        toggle: function ( force ) {
+
+            var isChecked = this.get ();
+
+            if ( _.isUndefined ( force ) ) {
+
+                force = !isChecked;
+
+            }
+
+            if ( force !== isChecked ) {
+
+                this.$input.prop ( 'checked', force ).trigger ( 'change' );
+
+            }
+
+        },
+
+        check: function () {
+
+            this.toggle ( true );
+
+        },
+
+        uncheck: function () {
+
+            this.toggle ( false );
 
         }
 

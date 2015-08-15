@@ -5,8 +5,31 @@ extends ../../layout.jade
 append main
     +divider Radio
 
-    form
-        +multiple
-            +radio("name", "Base", 4)
-            +radio("name", "Checked", 8, true)
-            +radio("name", "Disabled", 8, true).radio-disabled
+    +multiple
+        +radio("name", "Base", 4)
+        +radio("name", "Checked", 8, true)
+        +radio("name", "Disabled", 8, true).radio-disabled
+
+    +divider Actions
+
+    +multiple
+        +button-simple("radios_get_all()") Get all
+        +button-simple("radios_check_all()") Check all
+
+append body-end
+    script.
+        function radios_get_all () {
+
+            var gets = _.map ( $('.radio'), function ( radio ) {
+
+                return $(radio).radio ( 'get' );
+
+            });
+
+            $.noty ( gets.join ( ' - ' ) );
+
+        }
+
+        function radios_check_all () {
+            $('.radio').radio ( 'check' );
+        }

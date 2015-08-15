@@ -15,7 +15,10 @@
 
             this.$accordion = this.$element;
             this.$expanders = this.$accordion.children ( '.expander' );
-            this.expanders_inst = [];
+
+            this.expanders_instances = Array ( this.$expanders.length );
+
+            this.isMultiple = this.$accordion.hasClass ( 'multiple' );
 
         },
 
@@ -23,7 +26,7 @@
 
             for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                this.expanders_inst[i] = this.$expanders.eq ( i ).expander ( 'instance' );
+                this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
 
             }
 
@@ -31,7 +34,7 @@
 
         _events: function () {
 
-            this._on ( this.$expanders, 'expander:open', this._handler_open );
+            this._on ( 'expander:open', '.expander', this._handler_open );
 
         },
 
@@ -39,11 +42,15 @@
 
         _handler_open: function ( event, data, node ) {
 
-            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+            if ( !this.isMultiple ) {
 
-                if ( this.$expanders.nodes[i] !== node ) {
+                for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                    this.expanders_inst[i].close ();
+                    if ( this.$expanders[i] !== node ) {
+
+                        this.expanders_instances[i].close ();
+
+                    }
 
                 }
 
@@ -55,19 +62,49 @@
 
         toggle: function ( index ) {
 
-            this.expanders_inst[index].toggle ();
+            this.expanders_instances[index].toggle ();
+
+        },
+
+        toggleAll: function () {
+
+            _.each ( this.expanders_instances, function ( instance ) {
+
+                instance.toggle ();
+
+            });
 
         },
 
         open: function ( index ) {
 
-            this.expanders_inst[index].open ();
+            this.expanders_instances[index].open ();
+
+        },
+
+        openAll: function () {
+
+            _.each ( this.expanders_instances, function ( instance ) {
+
+                instance.open ();
+
+            });
 
         },
 
         close: function ( index ) {
 
-            this.expanders_inst[index].close ();
+            this.expanders_instances[index].close ();
+
+        },
+
+        closeAll: function () {
+
+            _.each ( this.expanders_instances, function ( instance ) {
+
+                instance.close ();
+
+            });
 
         }
 

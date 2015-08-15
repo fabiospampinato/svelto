@@ -3349,7 +3349,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$accordion = this.$element;
             this.$expanders = this.$accordion.children ( '.expander' );
-            this.expanders_inst = [];
+
+            this.expanders_instances = Array ( this.$expanders.length );
+
+            this.isMultiple = this.$accordion.hasClass ( 'multiple' );
 
         },
 
@@ -3357,7 +3360,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                this.expanders_inst[i] = this.$expanders.eq ( i ).expander ( 'instance' );
+                this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
 
             }
 
@@ -3365,7 +3368,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
-            this._on ( this.$expanders, 'expander:open', this._handler_open );
+            this._on ( 'expander:open', '.expander', this._handler_open );
 
         },
 
@@ -3373,11 +3376,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_open: function ( event, data, node ) {
 
-            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+            if ( !this.isMultiple ) {
 
-                if ( this.$expanders.nodes[i] !== node ) {
+                for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                    this.expanders_inst[i].close ();
+                    if ( this.$expanders[i] !== node ) {
+
+                        this.expanders_instances[i].close ();
+
+                    }
 
                 }
 
@@ -3389,19 +3396,49 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         toggle: function ( index ) {
 
-            this.expanders_inst[index].toggle ();
+            this.expanders_instances[index].toggle ();
+
+        },
+
+        toggleAll: function () {
+
+            _.each ( this.expanders_instances, function ( instance ) {
+
+                instance.toggle ();
+
+            });
 
         },
 
         open: function ( index ) {
 
-            this.expanders_inst[index].open ();
+            this.expanders_instances[index].open ();
+
+        },
+
+        openAll: function () {
+
+            _.each ( this.expanders_instances, function ( instance ) {
+
+                instance.open ();
+
+            });
 
         },
 
         close: function ( index ) {
 
-            this.expanders_inst[index].close ();
+            this.expanders_instances[index].close ();
+
+        },
+
+        closeAll: function () {
+
+            _.each ( this.expanders_instances, function ( instance ) {
+
+                instance.close ();
+
+            });
 
         }
 
@@ -3420,8 +3457,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 /* CHECKBOX */
-
-//TODO: add better support for disabled checkboxes
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3449,15 +3484,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _init: function () {
+        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-            if ( this.$input.prop ( 'checked' ) ) {
+            var hasClass = this.$checkbox.hasClass ( 'checked' );
 
-                this.$checkbox.addClass ( 'checked' );
+            if ( this.get () ) {
 
-            } else if ( this.$checkbox.hasClass ( 'checked' ) ) {
+                if ( !hasClass ) {
 
-                this.$input.prop ( 'checked', true ).trigger ( 'change' );
+                    this.$checkbox.addClass ( 'checked' );
+
+                }
+
+            } else if ( hasClass ) {
+
+                this.$checkbox.removeClass ( 'checked' );
 
             }
 
@@ -3465,17 +3506,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
-            this._on ( 'click', this._handler_click );
+            this._on ( 'click', function () {
+
+                this.toggle ();
+
+            });
 
             this._on ( true, 'change', this._handler_change );
-
-        },
-
-        /* CLICK */
-
-        _handler_click: function ( event ) {
-
-            if ( event.target !== this.$input.get ( 0 ) ) this.toggle ();
 
         },
 
@@ -3483,19 +3520,49 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_change: function () {
 
-            var checked = this.$input.prop ( 'checked' );
+            var isChecked = this.get ();
 
-            this.$checkbox.toggleClass ( 'checked', checked );
+            this.$checkbox.toggleClass ( 'checked', isChecked );
 
-            this._trigger ( checked ? 'checked' : 'unchecked' );
+            this._trigger ( isChecked ? 'checked' : 'unchecked' );
 
         },
 
         /* PUBLIC */
 
-        toggle: function () {
+        get: function () {
 
-            this.$input.prop ( 'checked', !this.$input.prop ( 'checked' ) ).trigger ( 'change' );
+            return this.$input.prop ( 'checked' );
+
+        },
+
+        toggle: function ( force ) {
+
+            var isChecked = this.get ();
+
+            if ( _.isUndefined ( force ) ) {
+
+                force = !isChecked;
+
+            }
+
+            if ( force !== isChecked ) {
+
+                this.$input.prop ( 'checked', force ).trigger ( 'change' );
+
+            }
+
+        },
+
+        check: function () {
+
+            this.toggle ( true );
+
+        },
+
+        uncheck: function () {
+
+            this.toggle ( false );
 
         }
 
@@ -5600,9 +5667,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$radio = this.$element;
             this.$input = this.$radio.find ( 'input' );
+
             this.name = this.$input.attr ( 'name' );
 
-            this.$container = this.$radio.parent ( 'form' );
+            this.$container = this.$radio.parents ( 'form' ).first ();
 
             if ( this.$container.length === 0 ) {
 
@@ -5610,48 +5678,71 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this.$other_inputs = this.$container.find ( 'input[name="' + this.name + '"]' );
-            this.$other_radios = this.$other_inputs.parent ( '.radio' );
+            this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
 
         },
 
-        _init: function () {
+        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-            this.$radio.toggleClass ( 'checked', this.$input.prop ( 'checked' ) );
+            var hasClass = this.$radio.hasClass ( 'checked' );
+
+            if ( this.get () ) {
+
+                if ( !hasClass ) {
+
+                    this.$radio.addClass ( 'checked' );
+
+                }
+
+            } else if ( hasClass ) {
+
+                this.$radio.removeClass ( 'checked' );
+
+            }
 
         },
 
         _events: function () {
 
-            this._on ( 'click', this.select );
+            this._on ( 'click', function () {
 
-            this._on ( true, this.$input, 'change', this._update );
+                this.check ();
+
+            });
+
+            this._on ( true, 'change', this._handler_change );
 
         },
 
-        /* PRIVATE */
+        /* CHANGE */
 
-        _update: function () {
+        _handler_change: function () {
 
-            var checked = this.$input.prop ( 'checked' );
+            var isChecked = this.get ();
 
-            if ( checked ) { //INFO: We do the update when we reach the checked one
+            if ( isChecked ) {
 
                 this.$other_radios.removeClass ( 'checked' );
 
-                this.$radio.addClass ( 'checked' );
-
             }
 
-            this._trigger ( checked ? 'checked' : 'unchecked' );
+            this.$radio.toggleClass ( 'checked', isChecked );
+
+            this._trigger ( isChecked ? 'checked' : 'unchecked' );
 
         },
 
         /* PUBLIC */
 
-        select: function () {
+        get: function () {
 
-            if ( !this.$input.prop ( 'checked' ) ) {
+            return this.$input.prop ( 'checked' );
+
+        },
+
+        check: function () {
+
+            if ( !this.get () ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
