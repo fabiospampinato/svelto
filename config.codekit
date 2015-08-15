@@ -3857,6 +3857,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/tools\/browser.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/tools\/browser.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/tools\/browser.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
 	"\/views\/demo\/tools\/btEach.html": {
 		"fileType": 8192,
 		"ignore": 1,

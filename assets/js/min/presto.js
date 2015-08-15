@@ -3096,8 +3096,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         once: function ( time ) {
 
-            console.log("time: ", time);
-
             var timer = this;
 
             if ( isNaN ( time ) ) time = 0;
@@ -7062,16 +7060,20 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* TEMPLATES */
 
         templates: {
-            tag: '<div class="multiple-wrp joined tag">' +
+            tag: '<div class="multiple-wrp joined tagbox-tag">' +
                      '<div class="multiple">' +
-                         '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                             '<div class="label-center tag-label">' +
-                                 '{%=o.str%}' +
+                         '<div class="label-wrp">' +
+                             '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                                 '<div class="label-center tagbox-tag-label">' +
+                                     '{%=o.str%}' +
+                                 '</div>' +
                              '</div>' +
                          '</div>' +
-                         '<div class="tag-deleter button actionable compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                             '<div class="label-center">' +
-                                 '<div class="icon icon-navigation-close"></div>' +
+                         '<div class="label-wrp button-wrp">' +
+                             '<div class="label actionable compact tagbox-tag-remover {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                                 '<div class="label-center">' +
+                                     '<div class="icon icon-navigation-close"></div>' +
+                                 '</div>' +
                              '</div>' +
                          '</div>' +
                      '</div>' +
@@ -7084,7 +7086,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             tags: {
                 str: '',
                 arr: [],
-                $nodes: $()
+                $tags: $()
             },
             tag: {
                 min_length: 3,
@@ -7097,8 +7099,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             sort: false,
             append: true,
             callbacks: {
-                tag_added: $.noop,
-                tag_removed: $.noop
+                add: $.noop,
+                remove: $.noop
             }
         },
 
@@ -7112,6 +7114,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
+
             this.$partial_wrp = this.$partial.parent ( '.input-wrp' );
 
         },
@@ -7124,11 +7127,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$partial_wrp.before ( tags_html );
 
-            this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
+            this.options.tags.$tags = this.$tagbox.find ( '.tag' );
 
         },
 
         _events: function () {
+
+            /* PARTIAL */
 
             this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
 
@@ -7140,13 +7145,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 }
 
-            }); //INFO: For the others
+            }); //INFO: For the others characters
 
             this._on ( this.$partial, 'paste', this._handler_paste );
 
+            /* EMPTY */
+
             this._on ( 'click', this._handler_click_on_empty );
 
-            this._on ( 'click', this._handler_click_on_tag_deleter );
+            /* TAG */
+
+            this._on ( 'click', '.tagbox-tag-remover', this._handler_click_on_tag_remover );
 
         },
 
@@ -7198,19 +7207,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _sanitize_str: function ( string ) {
 
-            return string.replace ( /[\n\r\t]/g, ' ' ).replace ( /\s+/g, ' ' );
+            return _.escape ( _.trim ( string ) );
 
         },
 
         _update_variables: function () {
 
-            this.options.tags.$nodes = this.$tagbox.find ( '.tag' );
+            this.options.tags.$tags = this.$tagbox.find ( '.tagbox-tag' );
 
             this.options.tags.arr = [];
 
-            for ( var i = 0, l = this.options.tags.$nodes.length; i < l; i++ ) {
+            for ( var i = 0, l = this.options.tags.$tags.length; i < l; i++ ) {
 
-                this.options.tags.arr[i] = this.options.tags.$nodes.eq ( i ).find ( '.tag-label' ).html ();
+                this.options.tags.arr[i] = this.options.tags.$tags.eq ( i ).find ( '.tagbox-tag-label' ).html ();
 
             }
 
@@ -7275,7 +7284,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( this.$partial.val ().length === 0 && this.options.tags.arr.length > 0 ) {
 
-                    var $last = this.options.tags.$nodes.last ();
+                    var $last = this.options.tags.$tags.last ();
                     this.remove_tag ( $last, !event.ctrlKey );
 
                 }
@@ -7322,13 +7331,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CLICK ON CLOSE */
 
-        _handler_click_on_tag_deleter: function ( event ) {
+        _handler_click_on_tag_remover: function ( event ) {
 
             var $target = $(event.target);
 
-            if ( $target.is ( '.tag-deleter ') || $target.parent ( '.tag-deleter' ).length > 0 ) {
+            if ( $target.is ( '.tagbox-tag-remover ') || $target.parent ( '.tagbox-tag-remover' ).length > 0 ) {
 
-                var $tag = $target.parent ( '.tag' );
+                var $tag = $target.parent ( '.tagbox-tag' );
 
                 this.remove_tag ( $tag );
 
@@ -7340,7 +7349,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_click_on_empty: function ( event ) {
 
-            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tag-label' ) ) {
+            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tagbox-tag-label' ) ) {
 
                 this.$partial.get ( 0 ).focus ();
 
@@ -7382,7 +7391,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 var tag_html = this._get_tag_html ( tag_str );
 
-                if ( this.options.tags.$nodes.length === 0 || this.options.append ) {
+                if ( this.options.tags.$tags.length === 0 || this.options.append ) {
 
                     this.$partial_wrp.before ( tag_html );
 
@@ -7392,11 +7401,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     if ( index - 1 < 0 ) {
 
-                        this.options.tags.$nodes.first ().before ( tag_html );
+                        this.options.tags.$tags.first ().before ( tag_html );
 
                     } else {
 
-                        this.options.tags.$nodes.eq ( index - 1 ).after ( tag_html );
+                        this.options.tags.$tags.eq ( index - 1 ).after ( tag_html );
 
                     }
 
@@ -7420,7 +7429,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( edit === true ) {
 
-                var tag_str = $tag.find ( '.tag-label' ).html ();
+                var tag_str = $tag.find ( '.tagbox-tag-label' ).html ();
 
                 this.$partial.val ( tag_str );
 

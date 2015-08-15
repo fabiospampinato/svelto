@@ -4,4 +4,4 @@ mixin tagbox(name, tags)
     +container&attributes(attributes).tagbox
         input(type="text", name=name, value=tags)
         +multiple
-            +input({name: "placeholder_" + name, label: "New tag..."}).autogrow.compact.partial.no-floating
+            +input({name: "placeholder_" + name, label: "New tag..."}).autogrow.compact.tagbox-partial.no-floating
