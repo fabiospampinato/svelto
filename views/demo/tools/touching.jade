@@ -17,7 +17,7 @@ append main
 
     +multiple.joined
         +input({name: "input_populate_all", label: "Search number..."}).no-floating.white.text-field-secondary
-        +button-simple(onclick="javascript:populate_all()").secondary Populate
+        +button-simple("populate_all()").secondary Populate
 
     +divider Squares - Most significant match
 
@@ -33,7 +33,7 @@ append main
 
     +multiple.joined
         +input({name: "input_populate_most", label: "Square number..."}).no-floating.white.text-field-secondary
-        +button-simple(onclick="javascript:populate_most()").secondary Populate
+        +button-simple("populate_most()").secondary Populate
 
     +divider Squares - Punctual
 
@@ -49,7 +49,7 @@ append main
 
     +multiple.joined
         +input({name: "input_populate_punctual", label: "Square number..."}).no-floating.white.text-field-secondary
-        +button-simple(onclick="javascript:populate_punctual()").secondary Populate
+        +button-simple("populate_punctual()").secondary Populate
 
 append body-end
     +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })

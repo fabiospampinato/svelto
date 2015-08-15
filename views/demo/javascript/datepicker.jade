@@ -11,3 +11,38 @@ append main
     +divider Input
 
     +input({name: "datepicker_test", label: "YYYY-MM-DD"}).white.no-floating
+
+    +divider Actions
+
+    +multiple
+        +multiple.joined
+            +checkbox("datepicker_get_formatted", "Formatted", 1)
+            +button-simple("datepicker_get()").primary Get
+        +multiple.joined
+            +input({name: "datepicker_delta_months", label: "Delta months..."}).no-floating.white.text-field-secondary
+            +button-simple("datepicker_navigate()").secondary Navigate months
+        +multiple.joined
+            +button-icon("navigation-chevron-left", "datepicker_navigate_prev()")
+            +label-simple Month
+            +button-icon("navigation-chevron-right", "datepicker_navigate_next()")
+
+append body-end
+    +script.
+        function datepicker_get () {
+            var formatted = $("input[name='datepicker_get_formatted']").prop ( 'checked' );
+            var date = $('.datepicker').datepicker ( 'instance' ).get ( formatted );
+            $.noty ( date ? ( formatted ? date : date.toLocaleString () ) : 'No one' );
+        }
+
+        function datepicker_navigate () {
+            var delta_months = Number($("input[name='datepicker_delta_months']").val ());
+            $('.datepicker').datepicker ( 'instance' ).navigate_month ( delta_months );
+        }
+
+        function datepicker_navigate_prev () {
+            $('.datepicker').datepicker ( 'instance' ).prev_month ();
+        }
+
+        function datepicker_navigate_next () {
+            $('.datepicker').datepicker ( 'instance' ).next_month ();
+        }

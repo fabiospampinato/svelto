@@ -12,7 +12,7 @@
         justify-content: space-between;
         align-items: center;
 
-        & > .datepicker-navigation-prev, & > .datepicker-navigation-next {
+        & > .button-wrp { //INFO: We are referring to the `Prev` and `Next` navigation buttons
             width: $datepicker-block-width;
             margin-bottom: 0;
         }

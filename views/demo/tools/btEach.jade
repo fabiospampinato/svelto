@@ -18,11 +18,11 @@ append main
     +multiple
         +multiple.joined
             +input({name: "input_search", label: "Search number..."}).no-floating.white.text-field-primary
-            +button-simple(id="search", onclick="javascript:search()").primary Search
+            +button-simple("search()")(id="search").primary Search
         +multiple.joined
             +input({name: "input_populate", label: "Square number..."}).no-floating.white.text-field-secondary
-            +button-simple(id="populate", onclick="javascript:populate()").secondary Populate
-        +button-simple(id="clear", onclick="javascript:reset()").black Clear
+            +button-simple("populate()")(id="populate").secondary Populate
+        +button-simple("reset()")(id="clear").black Clear
 
 append body-end
     +script.

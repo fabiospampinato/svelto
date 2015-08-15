@@ -5,6 +5,7 @@
 //TODO: add a $bgs variable where we update the background
 //TODO: add drag on the wrps, not on the handlers... so that we can also drag if we are not hovering the handler, or even if we are
 //FIXME: if we input a bad hex color through the input then revert back to default
+//TODO: Add an input inside, so that it works also without an external input
 
 ;(function ( $, _, window, document, undefined ) {
 
