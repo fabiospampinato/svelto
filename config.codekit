@@ -724,6 +724,17 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
 		},
+	"\/assets\/js\/presto\/tools\/colorHelper.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/colorHelper.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/colorHelper.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
 	"\/assets\/js\/presto\/tools\/cookie.js": {
 		"fileType": 64,
 		"ignore": 1,
@@ -778,6 +789,17 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 0
+		},
+	"\/assets\/js\/presto\/tools\/hexColor.js": {
+		"fileType": 64,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/js\/presto\/tools\/hexColor.js",
+		"outputAbbreviatedPath": "\/assets\/js\/presto\/tools\/min\/hexColor.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
 		},
 	"\/assets\/js\/presto\/tools\/loading.js": {
 		"fileType": 64,
@@ -3473,6 +3495,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
+	"\/views\/demo\/javascript\/datepicker.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/javascript\/datepicker.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
 	"\/views\/demo\/javascript\/datepicker.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
@@ -4742,212 +4773,224 @@
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/cookie.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
 			"position": 10,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/draggable.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/colorHelper.js",
 			"position": 11,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/easing.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/cookie.js",
 			"position": 12,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/formAjax.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/draggable.js",
 			"position": 13,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/formSync.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/easing.js",
 			"position": 14,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/loading.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/formAjax.js",
 			"position": 15,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/notification.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/formSync.js",
 			"position": 16,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/oneTimeAction.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/hexColor.js",
 			"position": 17,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/selectable.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/loading.js",
 			"position": 18,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/sortable.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/notification.js",
 			"position": 19,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/tableHelper.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/oneTimeAction.js",
 			"position": 20,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timer.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/selectable.js",
 			"position": 21,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/touching.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/sortable.js",
 			"position": 22,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/expander.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/tableHelper.js",
 			"position": 23,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/flippable.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timer.js",
 			"position": 24,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/infobar.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/touching.js",
 			"position": 25,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/accordion.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/expander.js",
 			"position": 26,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/checkbox.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/flippable.js",
 			"position": 27,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/colorpicker.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/infobar.js",
 			"position": 28,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/datepicker.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/accordion.js",
 			"position": 29,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/dropdown.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/checkbox.js",
 			"position": 30,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/modal.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/colorpicker.js",
 			"position": 31,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/navbar.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/datepicker.js",
 			"position": 32,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/noty.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/dropdown.js",
 			"position": 33,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/progressBar.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/modal.js",
 			"position": 34,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/radio.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/navbar.js",
 			"position": 35,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/ripple.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/noty.js",
 			"position": 36,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/select.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/progressBar.js",
 			"position": 37,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/slider.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/radio.js",
 			"position": 38,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/stepper.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/ripple.js",
 			"position": 39,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/switch.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/select.js",
 			"position": 40,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tabs.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/slider.js",
 			"position": 41,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tagbox.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/stepper.js",
 			"position": 42,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/btEach.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/switch.js",
 			"position": 43,
 			"type": 0
 			},
 		{
 			"followForSyntaxChecking": 1,
-			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tabs.js",
 			"position": 44,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/components\/tagbox.js",
+			"position": 45,
+			"type": 0
+			},
+		{
+			"followForSyntaxChecking": 1,
+			"linkedFileAbbreviatedPath": "\/assets\/js\/presto\/tools\/timeAgo.js",
+			"position": 46,
 			"type": 0
 			}
 		]

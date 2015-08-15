@@ -26,7 +26,8 @@
                 selected: null
             },
             callbacks: {
-                change: $.noop
+                change: $.noop,
+                refresh: $.noop
             }
         },
 
@@ -89,7 +90,7 @@
 
             /* SELECTION */
 
-            this._on ( this.$days_current, 'click', this._handler_day_current_click ); //TODO: delegate
+            this._on ( 'click', '.datepicker-day', this._handler_day_current_click );
 
         },
 
@@ -282,6 +283,8 @@
             this._highlight_today ();
             this._update_title ();
 
+            this._trigger ( 'refresh' );
+
         },
 
         /* API */
@@ -339,9 +342,13 @@
 
         navigate_month: function ( steps ) {
 
-            this.options.date.current.setMonth ( this.options.date.current.getMonth () + steps );
+            if ( steps ) {
 
-            this._refresh ();
+                this.options.date.current.setMonth ( this.options.date.current.getMonth () + steps );
+
+                this._refresh ();
+
+            }
 
         },
 
@@ -354,12 +361,6 @@
         next_month: function () {
 
             this.navigate_month ( 1 );
-
-        },
-
-        refresh: function () {
-
-            this._refresh ();
 
         }
 
