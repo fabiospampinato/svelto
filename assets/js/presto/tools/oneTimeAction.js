@@ -3,6 +3,8 @@
 
 //INFO: the pipe character (|) is forbidden inside a name, cookie's ttl is 1 year
 
+//TODO: add support for other cookie settable parameters
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -15,7 +17,7 @@
 
         var options = {
             container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
-            expiry: 31536000, //INFO: the expire time of the container, 1 year by default
+            expiry: Infinity, //INFO: the expire time of the container
             name: false, //INFO: the action name
             action: false //INFO: the action to execute
         };
@@ -67,7 +69,7 @@
         this.name = name;
         this.expiry = expiry;
 
-        this.actionsStr = $.cookie.read ( this.name ) || '';
+        this.actionsStr = $.cookie.get ( this.name ) || '';
         this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
 
     };
@@ -96,7 +98,7 @@
 
             this.actionsStr = this.actions.join ( '|' );
 
-            $.cookie.write ( this.name, this.actionsStr, this.expiry );
+            $.cookie.set ( this.name, this.actionsStr, this.expiry );
 
         },
 
@@ -110,7 +112,7 @@
 
             } else {
 
-                $.cookie.destroy ( this.name );
+                $.cookie.remove ( this.name );
 
             }
 

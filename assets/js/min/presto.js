@@ -1507,53 +1507,92 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 
+/* URL: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie */
+
 /* COOKIE */
 
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
 
+    /* UTILITIES */
+
+    var encode = encodeURIComponent,
+        decode = decodeURIComponent;
+
     /* COOKIE */
 
     $.cookie = {
 
-        destroy: function ( name ) {
+        get: function ( key ) {
 
-            this.write ( name, '', - 86400 * 365, '/' );
+            if ( !key ) return null;
 
-        },
-
-        read: function ( name ) {
-
-            var expression = new RegExp ( '(^|; )' + encodeURIComponent ( name ) + '=(.*?)($|;)' ),
-                matches = document.cookie.match ( expression );
-
-            return matches ? decodeURIComponent ( matches[2] ) : null;
+            return decode ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
 
         },
 
-        write: function ( name, value, expire, path, domain, secure ) {
+        set: function ( key, value, end, path, domain, secure ) {
 
-            var date = new Date ();
+            if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
 
-            if ( expire && typeof expire === 'number' ) {
+            var expires = '';
 
-                date.setTime ( date.getTime () + expire * 1000 );
+            if ( end ) {
 
-            } else {
+                switch ( end.constructor ) {
 
-                expire = null;
+                    case Number:
+                        expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
+                        break;
+
+                    case String:
+                        expires = '; expires=' + end;
+                        break;
+
+                    case Date:
+                        expires = '; expires=' + end.toUTCString ();
+                        break;
+
+                }
 
             }
 
-            document.cookie =
-              encodeURIComponent ( name ) + '=' + encodeURIComponent ( value ) +
-              ( expire ? '; expires=' + date.toGMTString () : '' ) +
-              '; path=' + ( path ? path : '/' ) +
-              ( domain ? '; domain=' + domain : '' ) +
-              ( secure ? '; secure' : '' );
+            document.cookie = encode ( key ) + '=' + encode ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
 
-            return document.cookie;
+            return true;
+
+        },
+
+        remove: function ( key, path, domain ) {
+
+            if ( !this.has ( key ) ) return false;
+
+            document.cookie = encode ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
+
+            return true;
+
+        },
+
+        has: function ( key ) {
+
+            if ( !key ) return false;
+
+            return ( new RegExp ( '(?:^|;\\s*)' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
+
+        },
+
+        keys: function () {
+
+            var keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
+
+            for ( var i = 0, l = keys.length; i < l; i++ ) {
+
+                keys[i] = decode ( keys[i] );
+
+            }
+
+            return keys;
 
         }
 
@@ -2175,6 +2214,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //INFO: the pipe character (|) is forbidden inside a name, cookie's ttl is 1 year
 
+//TODO: add support for other cookie settable parameters
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -2187,7 +2228,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         var options = {
             container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
-            expiry: 31536000, //INFO: the expire time of the container, 1 year by default
+            expiry: Infinity, //INFO: the expire time of the container
             name: false, //INFO: the action name
             action: false //INFO: the action to execute
         };
@@ -2239,7 +2280,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         this.name = name;
         this.expiry = expiry;
 
-        this.actionsStr = $.cookie.read ( this.name ) || '';
+        this.actionsStr = $.cookie.get ( this.name ) || '';
         this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
 
     };
@@ -2268,7 +2309,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.actionsStr = this.actions.join ( '|' );
 
-            $.cookie.write ( this.name, this.actionsStr, this.expiry );
+            $.cookie.set ( this.name, this.actionsStr, this.expiry );
 
         },
 
@@ -2282,7 +2323,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             } else {
 
-                $.cookie.destroy ( this.name );
+                $.cookie.remove ( this.name );
 
             }
 
@@ -5396,7 +5437,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.options.buttons.length ) {
 
-                var $buttons = this.$noty.find ( '.button' ),
+                var $buttons = this.$noty.find ( '.button-wrp .label' ),
                     instance = this;
 
                 _.each ( this.options.buttons, function ( button, index ) {

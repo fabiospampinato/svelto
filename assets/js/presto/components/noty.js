@@ -163,7 +163,7 @@
 
             if ( this.options.buttons.length ) {
 
-                var $buttons = this.$noty.find ( '.button' ),
+                var $buttons = this.$noty.find ( '.button-wrp .label' ),
                     instance = this;
 
                 _.each ( this.options.buttons, function ( button, index ) {
