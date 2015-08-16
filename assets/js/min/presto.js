@@ -7085,10 +7085,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* TAGBOX */
 
-//TODO: add support for non latin characters, I mean maybe forbid them and replace them with the latin equivalent
-//FIXME: the partial field is too tall
-//TODO: more explicative noty messages, like: you cannot use the tag 'something' again, not "you cannot use the same tag again"
-//FIXME: se si immette una tag con tab poi non si e' in focus nel $partial
+//TODO: add the tag pointer
+//TODO: add support for adding and removing tags by passing: single tag string, single tags string separated by separator, array of tags, multiple parameters
+//FIXME: do we handle the insertion of characters like `&` or `'` propertly?
+//FIXME: should be forbid characters or just escape them?
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -7101,19 +7101,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* TEMPLATES */
 
         templates: {
-            tag: '<div class="multiple-wrp joined tagbox-tag">' +
+            tag: '<div class="multiple-wrp joined tagbox-tag" data-tag-value="{%=o.str%}">' +
                      '<div class="multiple">' +
                          '<div class="label-wrp">' +
                              '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                                 '<div class="label-center tagbox-tag-label">' +
-                                     '{%=o.str%}' +
-                                 '</div>' +
-                             '</div>' +
-                         '</div>' +
-                         '<div class="label-wrp button-wrp">' +
-                             '<div class="label actionable compact tagbox-tag-remover {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
                                  '<div class="label-center">' +
-                                     '<div class="icon icon-navigation-close"></div>' +
+                                     '{%=o.str%}' +
+                                     '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
                                  '</div>' +
                              '</div>' +
                          '</div>' +
@@ -7125,9 +7119,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             tags: {
+                init: '',
                 str: '',
-                arr: [],
-                $tags: $()
+                arr: []
             },
             tag: {
                 min_length: 3,
@@ -7135,11 +7129,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 size: 'small',
                 css: 'outlined'
             },
-            forbidden: [ '<', '>', ';', '`' ],
-            separator: ',',
-            sort: false,
-            append: true,
+            characters: {
+                forbidden: [ '<', '>', ';', '`' ], //FIXME: add tab, enter, and all the other specials
+                separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
+                inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB], //TODO: write them as string, so they are easier to edit and that's the format that the user expects
+            },
+            sort: false, //INFO: The tags are displayed in sorted order
+            escape: true, //INFO: Escape potential XSS characters
+            deburr: false, //INFO: Replace non latin basic letters
             callbacks: {
+                update: $.noop,
                 add: $.noop,
                 remove: $.noop
             }
@@ -7155,6 +7154,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$input = $inputs.eq ( 0 );
             this.$partial = $inputs.eq ( 1 );
+            this.partial = this.$partial.get ( 0 );
 
             this.$partial_wrp = this.$partial.parent ( '.input-wrp' );
 
@@ -7162,13 +7162,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _init: function () {
 
-            this._sanitize_tags_str ();
-
-            var tags_html = this._get_tags_html ();
-
-            this.$partial_wrp.before ( tags_html );
-
-            this.options.tags.$tags = this.$tagbox.find ( '.tag' );
+            this.add ( this.options.tags.init );
 
         },
 
@@ -7176,21 +7170,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* PARTIAL */
 
-            this._on ( this.$partial, 'keypress', this._handler_keypress ); //INFO: For printable characters
-
-            this._on ( this.$partial, 'keydown', function ( event ) {
-
-                if ( event.keyCode === $.ui.keyCode.TAB || event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
-
-                    this._handler_keypress ( event );
-
-                }
-
-            }); //INFO: For the others characters
+            this._on ( this.$partial, 'keypress keydown', this._handler_keypress_keydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
 
             this._on ( this.$partial, 'paste', this._handler_paste );
 
-            /* EMPTY */
+            /* ON EMPTY */
 
             this._on ( 'click', this._handler_click_on_empty );
 
@@ -7202,223 +7186,68 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* PRIVATE */
 
-        _get_tags_html: function () {
-
-            var tags_html = '';
-
-            for ( var i = 0, l = this.options.tags.arr.length; i < l ; i++ ) {
-
-                tags_html += this._get_tag_html ( this.options.tags.arr[i] );
-
-            }
-
-            return tags_html;
-
-        },
-
         _get_tag_html: function ( tag_str ) {
-
-            tag_str = this._sanitize_str ( tag_str );
 
             return this._tmpl ( 'tag', _.extend ( { str: tag_str }, this.options.tag ) );
 
         },
 
-        _sanitize_tags_str: function () {
+        _update_tags_str: function () {
 
-            var tags_arr = this.options.tags.str.split ( this.options.separator );
-
-            this.options.tags.arr = [];
-
-            for ( var n = 0; n < tags_arr.length; n++ ) {
-
-                this.options.tags.arr[n] = this._sanitize_str ( tags_arr[n] );
-
-            }
-
-            if ( this.options.sort ) {
-
-                this.options.tags.arr.sort ();
-
-            }
-
-            this.options.tags.str = this.options.tags.arr.join ( this.options.separator );
+            this.options.tags.str = this.options.tags.arr.join ( this.options.characters.separator );
 
         },
 
-        _sanitize_str: function ( string ) {
+        _sanitize_tag_str: function ( tag_str ) {
 
-            return _.escape ( _.trim ( string ) );
+            tag_str = _.trim ( tag_str );
 
-        },
+            if ( this.options.escape ) {
 
-        _update_variables: function () {
-
-            this.options.tags.$tags = this.$tagbox.find ( '.tagbox-tag' );
-
-            this.options.tags.arr = [];
-
-            for ( var i = 0, l = this.options.tags.$tags.length; i < l; i++ ) {
-
-                this.options.tags.arr[i] = this.options.tags.$tags.eq ( i ).find ( '.tagbox-tag-label' ).html ();
+                tag_str = _.escape ( tag_str );
 
             }
 
-            this.options.tags.str = this.options.tags.arr.join ( this.options.separator );
+            if ( this.options.deburr ) {
+
+                tag_str = _.deburr ( tag_str );
+
+            }
+
+            return tag_str;
 
         },
 
         _update_input: function () {
 
-            this.$input.val ( this.options.tags.str );
+            this.$input.val ( this.options.tags.str ).trigger ( 'change' );
 
         },
 
         _clear_partial: function () {
 
-            this._delay ( function () {
-
-                this.$partial.val ( '' );
-
-            });
+            this.$partial.val ( '' ).trigger ( 'change' );
 
         },
 
-        _trim_partial: function () {
+        /* TAG */
 
-            this._delay ( function () {
+        _partial_add_tag: function ( tag_str ) {
 
-                this.$partial.val ( _.trim ( this.$partial.val () ) );
+            var tag_str_trimmed = _.trim ( tag_str ),
+                tag_str = this._sanitize_tag_str ( tag_str );
 
-            });
+            if ( tag_str_trimmed.length < this.options.tag.min_length ) {
 
-        },
+                if ( tag_str_trimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
 
-        /* KEYPRESS */
-
-        _handler_keypress: function ( event ) {
-
-            var prev_value = this.$partial.val ();
-
-            if ( event.keyCode === $.ui.keyCode.ENTER || event.keyCode === $.ui.keyCode.SPACE || event.keyCode === $.ui.keyCode.TAB || event.keyCode === this.options.separator.charCodeAt ( 0 ) ) {
-
-                var added = this.add_tag ( this.$partial.val () );
-
-                if ( added ) {
-
-                    this._clear_partial ();
-
-                } else {
-
-                    this._delay ( function () {
-
-                        this.$partial.val ( prev_value );
-
-                    });
+                    $.noty ( '`' + tag_str + '` is shorter than ' + this.options.tag.min_length + ' characters' );
 
                 }
 
-                event.preventDefault ();
-                event.stopImmediatePropagation ();
+            } else if ( _.contains ( this.options.tags.arr, tag_str ) ) {
 
-            } else if ( event.keyCode === $.ui.keyCode.BACKSPACE || event.keyCode === $.ui.keyCode.DELETE ) {
-
-                if ( this.$partial.val ().length === 0 && this.options.tags.arr.length > 0 ) {
-
-                    var $last = this.options.tags.$tags.last ();
-                    this.remove_tag ( $last, !event.ctrlKey );
-
-                }
-
-                event.preventDefault ();
-                event.stopImmediatePropagation ();
-
-            } else if ( this.options.forbidden.indexOf ( String.fromCharCode ( event.keyCode ) ) !== -1 ) {
-
-                $.noty ( 'The character you entered is forbidden' );
-
-                this._delay ( function () {
-
-                    this.$partial.val ( prev_value );
-
-                });
-
-                event.preventDefault ();
-                event.stopImmediatePropagation ();
-
-            }
-
-        },
-
-        /* PASTE */
-
-        _handler_paste: function ( event ) {
-
-            this._delay ( function () {
-
-                var new_tags = this.$partial.val ().split ( this.options.separator );
-
-                for ( var i = 0; i < new_tags.length; i++ ) {
-
-                    this.add_tag ( new_tags[i] );
-
-                }
-
-                this._clear_partial ();
-
-            });
-
-        },
-
-        /* CLICK ON CLOSE */
-
-        _handler_click_on_tag_remover: function ( event ) {
-
-            var $target = $(event.target);
-
-            if ( $target.is ( '.tagbox-tag-remover ') || $target.parent ( '.tagbox-tag-remover' ).length > 0 ) {
-
-                var $tag = $target.parent ( '.tagbox-tag' );
-
-                this.remove_tag ( $tag );
-
-            }
-
-        },
-
-        /* CLICK ON EMPTY */
-
-        _handler_click_on_empty: function ( event ) {
-
-            if ( this.$partial.get ( 0 ) !== document.activeElement && !$(event.target).is ( 'input, .tagbox-tag-label' ) ) {
-
-                this.$partial.get ( 0 ).focus ();
-
-            }
-
-        },
-
-        /* PUBLIC */
-
-        add_tag: function ( tag_str ) {
-
-            tag_str = this._sanitize_str ( tag_str );
-
-            if ( tag_str.length < this.options.tag.min_length ) {
-
-                if ( tag_str.length > 0 ) { // so it won't be triggered when the user presses enter and the $partial is empty
-
-                    $.noty ( 'You cannot use tags shorter than ' + this.options.tag.min_length + ' characters' );
-
-                    return false;
-
-                }
-
-            } else if ( this.options.tags.arr.indexOf ( tag_str ) !== -1 ) {
-
-                $.noty ( 'You cannot use duplicate tags' );
-
-                return false;
+                $.noty ( '`' + tag_str + '` is a duplicate' );
 
             } else {
 
@@ -7432,7 +7261,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 var tag_html = this._get_tag_html ( tag_str );
 
-                if ( this.options.tags.$tags.length === 0 || this.options.append ) {
+                if ( this.options.tags.arr.length === 1 || !this.options.sort ) {
 
                     this.$partial_wrp.before ( tag_html );
 
@@ -7440,41 +7269,216 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     var index = this.options.tags.arr.indexOf ( tag_str );
 
-                    if ( index - 1 < 0 ) {
+                    if ( index === 0 ) {
 
-                        this.options.tags.$tags.first ().before ( tag_html );
+                        this.$tagbox.find ( '.tagbox-tag' ).first ().before ( tag_html );
 
                     } else {
 
-                        this.options.tags.$tags.eq ( index - 1 ).after ( tag_html );
+                        this.$tagbox.find ( '.tagbox-tag' ).eq ( index - 1 ).after ( tag_html );
 
                     }
 
                 }
 
-                this._update_variables ();
-                this._update_input ();
-
                 return true;
+
+            }
+
+            return false;
+
+        },
+
+        _partial_remove_tag: function ( $tag, tag_str ) {
+
+            $tag.remove ();
+
+            _.pull ( this.options.tags.arr, tag_str );
+
+        },
+
+        /* KEYPRESS */
+
+        _handler_keypress_keydown: function ( event ) {
+
+            var tag_str = this.$partial.val ();
+
+            if ( _.contains ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
+
+                var added = this.add ( tag_str );
+
+                if ( added ) {
+
+                    this._clear_partial ();
+
+                }
+
+                event.preventDefault ();
+
+            } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
+
+                if ( tag_str.length === 0 && this.options.tags.arr.length > 0 ) {
+
+                    var $tag = this.$tagbox.find ( '.tagbox-tag' ).last (),
+                        edit = !( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
+
+                    this.remove ( $tag, edit );
+
+                    event.preventDefault ();
+
+                }
+
+            } else if ( _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+
+                $.noty ( 'The character you entered is forbidden' );
+
+                event.preventDefault ();
 
             }
 
         },
 
-        remove_tag: function ( $tag, edit ) {
+        /* PASTE */
 
-            $tag.remove ();
+        _handler_paste: function ( event ) {
 
-            this._update_variables ();
-            this._update_input ();
+            this._delay ( function () { //FIXME: is it necessary?
 
-            if ( edit === true ) {
+                this.add ( this.$partial.val () );
 
-                var tag_str = $tag.find ( '.tagbox-tag-label' ).html ();
+                this._clear_partial ();
 
-                this.$partial.val ( tag_str );
+            });
+
+        },
+
+        /* CLICK ON CLOSE */
+
+        _handler_click_on_tag_remover: function ( event, tag_remover ) {
+
+            var $tag = $(tag_remover).parents ( '.tagbox-tag' );
+
+            this.remove ( $tag );
+
+        },
+
+        /* CLICK ON EMPTY */
+
+        _handler_click_on_empty: function ( event ) {
+
+            if ( document.activeElement !== this.partial && !$(event.target).is ( 'input, .tagbox-tag-label' ) ) {
+
+                this.$partial.focus ();
 
             }
+
+        },
+
+        /* PUBLIC */
+
+        get: function () {
+
+            return this.options.tags.str;
+
+        },
+
+        add: function ( tags_str ) {
+
+            var tags = tags_str.split ( this.options.characters.separator ),
+                adds = [];
+
+            for ( var i = 0, l = tags.length; i < l; i++ ) {
+
+                adds.push ( this._partial_add_tag ( tags[i] ) );
+
+            }
+
+            var added = ( _.compact ( adds ).length > 0 );
+
+            if ( added ) {
+
+                this._update_tags_str ();
+                this._update_input ();
+
+            }
+
+            return added;
+
+        },
+
+        remove: function ( tags_str, edit ) {
+
+            if ( tags_str instanceof jQuery ) {
+
+                var tags_obj = [tags_str],
+                    tags = [tags_str.data ( 'tag-value' )];
+
+            } else {
+
+                var tags_obj = [],
+                    tags = [];
+
+                tags_str = tags_str.split ( this.options.characters.separator );
+
+                for ( var i = 0, l = tags_str.length; i < l; i++ ) {
+
+                    var tag_str = this._sanitize_tag_str ( tags_str[i] ),
+                        $tag = this.$tagbox.find ( '.tagbox-tag[data-tag-value="' + tag_str + '"]');
+
+                    if ( $tag.length ) {
+
+                        tags_obj.push ( $tag );
+                        tags.push ( tag_str );
+
+                    }
+
+                }
+
+            }
+
+            if ( tags_obj.length ) {
+
+                for ( var i = 0, l = tags_obj.length; i < l; i++ ) {
+
+                    this._partial_remove_tag ( tags_obj[i], tags[i] );
+
+                }
+
+                this._update_tags_str ();
+                this._update_input ();
+
+                if ( l === 1 && edit === true ) {
+
+                    this.$partial.val ( tags[0] ).trigger ( 'change' );
+
+                }
+
+            }
+
+        },
+
+        clear: function () {
+
+            if ( this.options.tags.arr.length ) {
+
+                this.options.tags.str = '';
+                this.options.tags.arr = [];
+
+                this.$tagbox.find ( '.tagbox-tag' ).remove ();
+
+                this._clear_partial ();
+
+                this._update_input ();
+
+            }
+
+        },
+
+        reset: function () {
+
+            this.clear ();
+
+            this._init ();
 
         }
 
@@ -7490,7 +7494,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 $input = $tagbox.find ( 'input' ).eq ( 0 ),
                 options = {
                     tags: {
-                        str: $input.val () || ''
+                        init: $input.val (),
+                        str: '',
+                        arr: []
                     }
                 };
 
