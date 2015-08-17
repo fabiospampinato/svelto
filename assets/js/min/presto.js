@@ -222,35 +222,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     $.eventXY = function ( event ) {
 
-        var coordinates = {
-            X : 0,
-            Y : 0
-        };
-
-        if ( !_.isUndefined ( event.originalEvent ) ) {
+        if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
 
             event = event.originalEvent;
 
         }
 
-        if ( !_.isUndefined ( event.touches ) && !_.isUndefined ( event.touches[0] ) ) {
+        if ( $.browser.hasTouch ) {
 
-            coordinates.X = event.touches[0].pageX;
-            coordinates.Y = event.touches[0].pageY;
+            event = event.originalEvent;
 
-        } else if ( !_.isUndefined ( event.changedTouches ) && !_.isUndefined ( event.changedTouches[0] ) ) {
-
-            coordinates.X = event.changedTouches[0].pageX;
-            coordinates.Y = event.changedTouches[0].pageY;
-
-        } else if ( !_.isUndefined ( event.pageX ) ) {
-
-            coordinates.X = event.pageX;
-            coordinates.Y = event.pageY;
+            event = event.changedTouches ? event.changedTouches[0] : event.touches[0];
 
         }
 
-        return coordinates;
+        return {
+            X: event.pageX,
+            Y: event.pageY
+        };
 
     };
 
@@ -1242,6 +1231,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 /* BROWSER */
 
 //TODO: detect browsers, versions, OSes, but... is it useful?
+//TODO: detect: windows phone, smartphone, windows, linux, safari, opera, firefox, lowend
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1256,11 +1246,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
     $.browser = {
         isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
         isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
-        isAndroid: /Android/i.test ( userAgent ),
-        isIOS: /(iPhone|iPad|iPod)/i.test ( userAgent ),
-        isMac: /Mac/i.test ( userAgent ),
-        isIE: /msie [\w.]+/.test ( userAgent )
+        isAndroid: /android/i.test ( userAgent ),
+        isIOS: /(iphone|ipad|ipod)/i.test ( userAgent ),
+        isMac: /mac/i.test ( userAgent ),
+        isIE: /msie [\w.]+/.test ( userAgent ),
+        isChrome: /chrome/i.test ( userAgent )
     };
+
+    $.browser.hasTouch = ( 'ontouchstart' in window && !($.browser.isChrome && !$.browser.isAndroid) ); //FIXME: Why do we need the second check? Do other libraries do the same?
 
 }( jQuery, _, window, document ));
 
@@ -1619,7 +1612,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             move: $.noop,
             end: $.noop,
             delegate: undefined,
-            context: undefined, //FIXME: Is it necessary?
+            context: undefined,
             events: {
                 start: 'mousedown touchstart',
                 move: 'mousemove touchmove',
@@ -2361,6 +2354,192 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         }
 
     };
+
+}( jQuery, _, window, document ));
+
+
+
+/* POINTER */
+
+;(function ( $, _, window, document, undefined ) {
+
+    'use strict';
+
+    /* POINTER */
+
+    $.Pointer = {
+        pressDuration: 300,
+        doubleTapInterval: 300,
+        flickDuration: 150,
+        motionThreshold: 5
+    };
+
+    var events = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+        events_namespace = 'pointer';
+
+    _.each ( events, function ( event ) {
+
+        var full_event = events_namespace + event;
+
+        $.Pointer[event] = full_event;
+
+        $.fn[event] = function ( fn ) {
+
+            return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
+
+        };
+
+    });
+
+    /* TRIGGERS */
+
+    var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
+        moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
+        endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
+        $html = $(document.documentElement),
+        startXY,
+        moveXY,
+        deltaXY,
+        endXY,
+        target,
+        $target,
+        start_timestamp,
+        end_timestamp,
+        prev_tap_timestamp = 0,
+        motion,
+        orientation,
+        direction,
+        press_timeout;
+
+    var createEvent = function ( name, originalEvent ) {
+
+        var event = $.Event ( name );
+
+        event.originalEvent = originalEvent;
+        event.isPointerEvent = true;
+
+        return event;
+
+    };
+
+    var startHandler = function ( event ) {
+
+        startXY = $.eventXY ( event );
+
+        target = event.target;
+        $target = $(target);
+
+        start_timestamp = event.timeStamp || _.now ();
+
+        motion = false;
+
+        press_timeout = setTimeout ( pressHandler, $.Pointer.pressDuration );
+
+        $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
+            startXY: startXY
+        });
+
+        $html.on ( moveEvents, moveHandler );
+        $html.on ( endEvents, endHandler );
+
+    };
+
+    var pressHandler = function () {
+
+        $target.trigger ( createEvent ( $.Pointer.press, event ) );
+
+    };
+
+    var moveHandler = function ( event ) {
+
+        clearTimeout ( press_timeout );
+
+        moveXY = $.eventXY ( event );
+        deltaXY = {
+            X: startXY.X - moveXY.X,
+            Y: startXY.Y - moveXY.Y
+        };
+
+        if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
+
+            motion = true;
+
+            $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
+                startXY: startXY,
+                moveXY: moveXY,
+                deltaXY: deltaXY
+            });
+
+        }
+
+    };
+
+    var endHandler = function ( event ) {
+
+        clearTimeout ( press_timeout );
+
+        endXY = $.eventXY ( event );
+        deltaXY = {
+            X: startXY.X - endXY.X,
+            Y: startXY.Y - endXY.Y
+        };
+
+        if ( target === event.target ) {
+
+            end_timestamp = event.timeStamp || _.now ();
+
+            if ( !$.browser.hasTouch || !motion ) {
+
+                $target.trigger ( createEvent ( $.Pointer.tap, event ) );
+
+                if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
+
+                    $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
+
+                }
+
+                prev_tap_timestamp = end_timestamp;
+
+            }
+
+            if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
+
+                if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
+
+                    orientation = 'horizontal';
+                    direction = ( deltaXY.X > 0 ) ? 1 : -1;
+
+                } else {
+
+                    orientation = 'vertical';
+                    direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+
+                }
+
+                $target.trigger ( createEvent ( $.Pointer.flick, event ), {
+                    startXY: startXY,
+                    endXY: endXY,
+                    deltaXY: deltaXY,
+                    orientation: orientation,
+                    direction: direction
+                });
+
+            }
+
+        }
+
+        $html.off ( moveEvents, moveHandler );
+        $html.off ( endEvents, endHandler );
+
+        $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
+            startXY: startXY,
+            endXY: endXY,
+            deltaXY: deltaXY
+        });
+
+    };
+
+    $html.on ( startEvents, startHandler );
 
 }( jQuery, _, window, document ));
 

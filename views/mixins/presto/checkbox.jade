@@ -1,5 +1,7 @@
 //- checkbox.jade
 
+//- TODO: the value should be setted to 1 by default if is not provided
+
 mixin checkbox(name, title, value, checked)
     if checked
         +button&attributes(attributes).checkbox.checked

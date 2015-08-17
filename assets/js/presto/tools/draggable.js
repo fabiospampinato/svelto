@@ -16,7 +16,7 @@
             move: $.noop,
             end: $.noop,
             delegate: undefined,
-            context: undefined, //FIXME: Is it necessary?
+            context: undefined,
             events: {
                 start: 'mousedown touchstart',
                 move: 'mousemove touchmove',

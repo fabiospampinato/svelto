@@ -15,35 +15,24 @@
 
     $.eventXY = function ( event ) {
 
-        var coordinates = {
-            X : 0,
-            Y : 0
-        };
-
-        if ( !_.isUndefined ( event.originalEvent ) ) {
+        if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
 
             event = event.originalEvent;
 
         }
 
-        if ( !_.isUndefined ( event.touches ) && !_.isUndefined ( event.touches[0] ) ) {
+        if ( $.browser.hasTouch ) {
 
-            coordinates.X = event.touches[0].pageX;
-            coordinates.Y = event.touches[0].pageY;
+            event = event.originalEvent;
 
-        } else if ( !_.isUndefined ( event.changedTouches ) && !_.isUndefined ( event.changedTouches[0] ) ) {
-
-            coordinates.X = event.changedTouches[0].pageX;
-            coordinates.Y = event.changedTouches[0].pageY;
-
-        } else if ( !_.isUndefined ( event.pageX ) ) {
-
-            coordinates.X = event.pageX;
-            coordinates.Y = event.pageY;
+            event = event.changedTouches ? event.changedTouches[0] : event.touches[0];
 
         }
 
-        return coordinates;
+        return {
+            X: event.pageX,
+            Y: event.pageY
+        };
 
     };
 
