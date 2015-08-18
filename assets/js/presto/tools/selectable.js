@@ -3,6 +3,7 @@
 
 //TODO: add dropdown for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)
+//TODO: make it work with checkboxes
 
 ;(function ( $, _, window, document, undefined ) {
 

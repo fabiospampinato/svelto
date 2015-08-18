@@ -13,7 +13,7 @@
 
             value = value.replace ( '#', '' );
 
-             if ( /^([0-9a-f]{3}){1,2}$/i.test ( value ) ) { //INFO: full 6-chars color
+             if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
 
                 this.hsv = ColorHelper.hex2hsv ({
                     r: value[0] + value[1],

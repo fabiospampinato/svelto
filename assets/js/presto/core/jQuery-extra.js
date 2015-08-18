@@ -21,11 +21,9 @@
 
         }
 
-        if ( $.browser.hasTouch ) {
+        if ( $.browser.hasTouch && event.originalEvent.touches ) {
 
-            event = event.originalEvent;
-
-            event = event.changedTouches ? event.changedTouches[0] : event.touches[0];
+            event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
 
         }
 

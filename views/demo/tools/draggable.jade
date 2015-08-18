@@ -1,0 +1,28 @@
+//- tools/draggable.jade
+
+extends ../../layout.jade
+
+append main
+    +divider Draggables
+
+    +container.constrainer
+        +container-content.overflow-visible
+            +multiple
+                +label-simple.outlined.draggable Draggable
+                +label-simple.outlined.x-axis X-Axis
+                +label-simple.outlined.y-axis Y-Axis
+                +label-simple.outlined.constrained Constrained
+                +label.outlined.only-handler
+                    +label-center Only handler
+                    +label-right.draggable-handler
+                        +icon('navigation-menu')
+                +label-simple.outlined.revertable Revertable
+
+append body-end
+    +noty({body: "Drag the labels around", ttl: "forever"})
+    +script.
+        $('.x-axis').draggable ({ axis: 'x' });
+        $('.y-axis').draggable ({ axis: 'y' });
+        $('.constrained').draggable ({ $constrainer: $('.constrainer') });
+        $('.revertable').draggable ({ revertable: true });
+        $('.only-handler').draggable ({ only_handlers: true });

@@ -59,6 +59,8 @@
 
         $body.on ( 'mousedown', '.ripple', function ( event ) {
 
+            console.log("mousedown!");
+
             if ( event.button === $.ui.mouseButton.RIGHT ) return;
 
             Ripple.show ( event, $(this) );

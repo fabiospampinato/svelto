@@ -14,16 +14,16 @@
         motionThreshold: 5
     };
 
-    var events = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+    var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
         events_namespace = 'pointer';
 
-    _.each ( events, function ( event ) {
+    _.each ( events_names, function ( event_name ) {
 
-        var full_event = events_namespace + event;
+        var full_event = events_namespace + event_name;
 
-        $.Pointer[event] = full_event;
+        $.Pointer[event_name] = full_event;
 
-        $.fn[event] = function ( fn ) {
+        $.fn[event_name] = function ( fn ) {
 
             return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
 
@@ -95,9 +95,10 @@
         clearTimeout ( press_timeout );
 
         moveXY = $.eventXY ( event );
+
         deltaXY = {
-            X: startXY.X - moveXY.X,
-            Y: startXY.Y - moveXY.Y
+            X: moveXY.X - startXY.X,
+            Y: moveXY.Y - startXY.Y
         };
 
         if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
@@ -120,8 +121,8 @@
 
         endXY = $.eventXY ( event );
         deltaXY = {
-            X: startXY.X - endXY.X,
-            Y: startXY.Y - endXY.Y
+            X: endXY.X - startXY.X,
+            Y: endXY.Y - startXY.Y
         };
 
         if ( target === event.target ) {

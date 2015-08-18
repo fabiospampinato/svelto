@@ -228,11 +228,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         }
 
-        if ( $.browser.hasTouch ) {
+        if ( $.browser.hasTouch && event.originalEvent.touches ) {
 
-            event = event.originalEvent;
-
-            event = event.changedTouches ? event.changedTouches[0] : event.touches[0];
+            event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
 
         }
 
@@ -1603,99 +1601,139 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     /* DRAGGABLE */
 
-    $.fn.draggable = function ( custom_options ) {
+    $.widget ( 'presto.draggable', {
 
         /* OPTIONS */
 
-        var options = {
-            start: $.noop,
-            move: $.noop,
-            end: $.noop,
-            delegate: undefined,
-            context: undefined,
-            events: {
-                start: 'mousedown touchstart',
-                move: 'mousemove touchmove',
-                end: 'mouseup touchend'
+        options: {
+            selectors: {
+                handler: '.draggable-handler'
+            },
+            delay: {
+                revert: 2000
+            },
+            only_handlers: false, //INFO: only an handler can drag it around
+            revertable: false, //INFO: on dragend take it back to the starting position
+            axis: false, //INFO: limit the movements to this axis
+            $constrainer: false, //INFO: if we want to keep the draggable inside this container
+            callbacks: {
+                start: $.noop,
+                move: $.noop,
+                end: $.noop
             }
-        };
+        },
 
-        options = _.extend ( options, custom_options );
+        /* SPECIAL */
 
-        /* VARIABLES */
+        _variables: function () {
 
-        var $trigger,
-            XYs,
-            dragged;
+            this.$draggable = this.$element;
+            this.$handlers = this.$draggable.find ( this.options.selectors.handler );
 
-        /* FUNCTIONS */
+        },
 
-        var start = function ( event ) {
+        _events: function () {
 
-            $trigger = $(this);
+            if ( !this.options.only_handlers ) {
 
-            XYs = {
-                start: {},
-                move: {},
-                end: {},
-                delta: {}
+                this._on ( $.Pointer.dragstart, this._start );
+                this._on ( $.Pointer.dragmove, this._move );
+                this._on ( $.Pointer.dragend, this._end );
+
+            }
+
+            this._on ( this.$handlers, $.Pointer.dragstart, this._start );
+            this._on ( this.$handlers, $.Pointer.dragmove, this._move );
+            this._on ( this.$handlers, $.Pointer.dragend, this._end );
+
+        },
+
+        /* PRIVATE */
+
+        _start: function ( event, data ) {
+
+            this.motion = false;
+
+            var transform_str = this.$draggable.css ( 'transform' ),
+                matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
+
+            this.extraXY = {
+                X: parseInt ( matrix[4], 10 ),
+                Y: parseInt ( matrix[5], 10 )
             };
 
-            dragged = false;
+            this._trigger ( 'start', data );
 
-            XYs.start = $.eventXY ( event );
+        },
 
-            options.start.bind ( options.context || this )( event, this, XYs );
+        _move: function ( event, data ) {
 
-            $document.on ( options.events.move, move );
-            $document.on ( options.events.end, end );
+            if ( this.motion === false ) {
 
-        };
+                this.motion = true;
 
-        var move = function ( event ) {
+                if ( this.options.$constrainer ) {
 
-            XYs.move = $.eventXY ( event );
-            XYs.delta = {
-                X: XYs.move.X - XYs.start.X,
-                Y: XYs.move.Y - XYs.start.Y
-            };
+                    var constrainer_offset = this.options.$constrainer.offset (),
+                        draggable_offset = this.$draggable.offset ();
 
-            options.move.bind ( options.context || this )( event, this, XYs );
+                    this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.extraXY.X );
+                    this.translateX_max = constrainer_offset.left + this.options.$constrainer.width () - ( ( draggable_offset.left - this.extraXY.X ) + this.$draggable.width () );
 
-            if ( dragged === false ) {
+                    this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.extraXY.Y );
+                    this.translateY_max = constrainer_offset.top + this.options.$constrainer.height () - ( ( draggable_offset.top - this.extraXY.Y ) + this.$draggable.height () );
 
-                dragged = true;
+                }
 
                 $html.addClass ( 'dragging' );
-                $trigger.addClass ( 'dragging' );
+                this.$draggable.addClass ( 'dragging' );
 
             }
 
-        };
+            var translateX = this.extraXY.X + ( ( this.options.axis !== 'y' ) ? data.deltaXY.X : 0 ),
+                translateY = this.extraXY.Y + ( ( this.options.axis !== 'x' ) ? data.deltaXY.Y : 0 );
 
-        var end = function ( event ) {
+            if ( this.options.$constrainer ) {
 
-            XYs.end = $.eventXY ( event );
+                translateX = _.clamp ( this.translateX_min, translateX, this.translateX_max );
+                translateY = _.clamp ( this.translateY_min, translateY, this.translateY_max );
 
-            options.end.bind ( options.context || this )( event, this, XYs );
+            }
 
-            if ( dragged === true ) {
+            this.$draggable.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+
+            this._trigger ( 'move', data );
+
+        },
+
+        _end: function ( event, data ) {
+
+            if ( this.motion === true ) {
 
                 $html.removeClass ( 'dragging' );
-                $trigger.removeClass ( 'dragging' );
+                this.$draggable.removeClass ( 'dragging' );
+
+                if ( this.options.revertable ) {
+
+                    this.$draggable.css ( 'transform', 'translate3d(0,0,0)' ); //TODO: animate it
+
+                }
 
             }
 
-            $document.off ( options.events.move, move );
-            $document.off ( options.events.end, end );
+            this._trigger ( 'end', data );
 
-        };
+        }
 
-        /* START DRAGGING */
+    });
 
-        this.on ( options.events.start, options.delegate, start );
+    /* READY */
 
-    };
+    $(function () {
+
+        $('.draggable').draggable ();
+
+    });
 
 }( jQuery, _, window, document ));
 
@@ -2024,7 +2062,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             value = value.replace ( '#', '' );
 
-             if ( /^([0-9a-f]{3}){1,2}$/i.test ( value ) ) { //INFO: full 6-chars color
+             if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
 
                 this.hsv = ColorHelper.hex2hsv ({
                     r: value[0] + value[1],
@@ -2374,16 +2412,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         motionThreshold: 5
     };
 
-    var events = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+    var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
         events_namespace = 'pointer';
 
-    _.each ( events, function ( event ) {
+    _.each ( events_names, function ( event_name ) {
 
-        var full_event = events_namespace + event;
+        var full_event = events_namespace + event_name;
 
-        $.Pointer[event] = full_event;
+        $.Pointer[event_name] = full_event;
 
-        $.fn[event] = function ( fn ) {
+        $.fn[event_name] = function ( fn ) {
 
             return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
 
@@ -2455,9 +2493,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         clearTimeout ( press_timeout );
 
         moveXY = $.eventXY ( event );
+
         deltaXY = {
-            X: startXY.X - moveXY.X,
-            Y: startXY.Y - moveXY.Y
+            X: moveXY.X - startXY.X,
+            Y: moveXY.Y - startXY.Y
         };
 
         if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
@@ -2480,8 +2519,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         endXY = $.eventXY ( event );
         deltaXY = {
-            X: startXY.X - endXY.X,
-            Y: startXY.Y - endXY.Y
+            X: endXY.X - startXY.X,
+            Y: endXY.Y - startXY.Y
         };
 
         if ( target === event.target ) {
@@ -2549,6 +2588,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: add dropdown for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)
+//TODO: make it work with checkboxes
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -6149,6 +6189,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
     $(function () {
 
         $body.on ( 'mousedown', '.ripple', function ( event ) {
+
+            console.log("mousedown!");
 
             if ( event.button === $.ui.mouseButton.RIGHT ) return;
 
