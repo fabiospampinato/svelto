@@ -1,0 +1,16 @@
+
+/* PARALLAX */
+
+$parallax-height: 50vh;
+$parallax-perspective: 300px;
+
+/* LAYERS LAVELS */
+
+$parallax-deep-translate-z: - $parallax-perspective * 2;
+$parallax-deep-scale: 3;
+
+$parallax-background-translate-z: - $parallax-perspective;
+$parallax-background-scale: 2;
+
+$parallax-foreground-translate-z: $parallax-perspective / 3.33333;
+$parallax-foreground-scale: 0.7;

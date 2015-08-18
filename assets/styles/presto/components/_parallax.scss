@@ -1,0 +1,51 @@
+
+/* PARALLAX */
+
+.parallax {
+
+    position: relative;
+    margin-bottom: $layout-spacing;
+    height: $parallax-height;
+    overflow-x: hidden;
+    overflow-y: auto;
+    perspective: $parallax-perspective;
+
+    & > .parallax-layers {
+
+        position: relative;
+        height: $parallax-height;
+        transform-style: preserve-3d;
+
+        & > .parallax-layer {
+
+            @include fill-absolutely ();
+
+            &.parallax-layer-deep {
+                transform: translateZ($parallax-deep-translate-z) scale($parallax-deep-scale);
+                z-index: 1;
+            }
+
+            &.parallax-layer-background {
+                transform: translateZ($parallax-background-translate-z) scale($parallax-background-scale);
+                z-index: 2;
+            }
+
+            &.parallax-layer-base {
+                transform: translateZ(0);
+                z-index: 3;
+            }
+
+            &.parallax-layer-foreground {
+                transform: translateZ($parallax-foreground-translate-z) scale($parallax-foreground-scale);
+                z-index: 4;
+            }
+
+            & > .parallax-content-sample { //FIXME: remove it, it shouldn't be needed
+                @include center-transform ();
+            }
+
+        }
+
+    }
+
+}

@@ -15,9 +15,6 @@
             selectors: {
                 handler: '.draggable-handler'
             },
-            delay: {
-                revert: 2000
-            },
             only_handlers: false, //INFO: only an handler can drag it around
             revertable: false, //INFO: on dragend take it back to the starting position
             axis: false, //INFO: limit the movements to this axis
@@ -107,6 +104,8 @@
             }
 
             this.$draggable.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+
+            event.preventDefault (); //INFO: In order to prevent scroll, pull down to refresh etc...
 
             this._trigger ( 'move', data );
 

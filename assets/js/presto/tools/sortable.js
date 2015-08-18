@@ -4,6 +4,7 @@
 //TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: cache the column datas, if possible
 //TODO: add support for sorting other things other than tables
+//TODO: if possible sort using flexbox's `order` property
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -147,7 +148,7 @@
                 for ( var i = 0, l = $trs.length; i < l; i++ ) {
 
                     var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
-                        value = $td.data ( 'sort-value' ) || $td.html ();
+                        value = $td.data ( 'sort-value' ) || $td.text ();
 
                     this.sort_datas[index][i] = [$trs.get ( i ), value];
 

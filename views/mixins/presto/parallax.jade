@@ -1,0 +1,35 @@
+//- parallax.jade
+
+mixin parallax
+    .parallax&attributes(attributes)
+        block
+
+mixin parallax-layers
+    .parallax-layers&attributes(attributes)
+        block
+
+mixin parallax-layer
+    .parallax-layer&attributes(attributes)
+        block
+
+mixin parallax-content-sample
+    .parallax-content-sample&attributes(attributes)
+        block
+
+//- Layers levels
+
+mixin parallax-layer-deep
+    +parallax-layer&attributes(attributes).parallax-layer-deep
+        block
+
+mixin parallax-layer-background
+    +parallax-layer&attributes(attributes).parallax-layer-background
+        block
+
+mixin parallax-layer-base
+    +parallax-layer&attributes(attributes).parallax-layer-base
+        block
+
+mixin parallax-layer-foreground
+    +parallax-layer&attributes(attributes).parallax-layer-foreground
+        block

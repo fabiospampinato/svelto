@@ -1609,9 +1609,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             selectors: {
                 handler: '.draggable-handler'
             },
-            delay: {
-                revert: 2000
-            },
             only_handlers: false, //INFO: only an handler can drag it around
             revertable: false, //INFO: on dragend take it back to the starting position
             axis: false, //INFO: limit the movements to this axis
@@ -1701,6 +1698,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             }
 
             this.$draggable.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+
+            event.preventDefault (); //INFO: In order to prevent scroll, pull down to refresh etc...
 
             this._trigger ( 'move', data );
 
@@ -2904,6 +2903,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 //TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: cache the column datas, if possible
 //TODO: add support for sorting other things other than tables
+//TODO: if possible sort using flexbox's `order` property
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3047,7 +3047,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 for ( var i = 0, l = $trs.length; i < l; i++ ) {
 
                     var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
-                        value = $td.data ( 'sort-value' ) || $td.html ();
+                        value = $td.data ( 'sort-value' ) || $td.text ();
 
                     this.sort_datas[index][i] = [$trs.get ( i ), value];
 

@@ -1,0 +1,15 @@
+//- css/parallax.jade
+
+extends ../../layout.jade
+
+append main
+    +parallax.gray
+        +parallax-layers
+            +parallax-layer-deep
+                +parallax-content-sample Deep
+            +parallax-layer-background
+                +parallax-content-sample Background
+            +parallax-layer-base
+                +parallax-content-sample Base
+            +parallax-layer-foreground
+                +parallax-content-sample Foreground
