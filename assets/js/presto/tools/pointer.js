@@ -73,7 +73,7 @@
 
         motion = false;
 
-        press_timeout = setTimeout ( pressHandler, $.Pointer.pressDuration );
+        press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
 
         $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
             startXY: startXY
@@ -84,7 +84,7 @@
 
     };
 
-    var pressHandler = function () {
+    var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
 
         $target.trigger ( createEvent ( $.Pointer.press, event ) );
 

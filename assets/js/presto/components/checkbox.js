@@ -93,6 +93,8 @@
 
                 this.$input.prop ( 'checked', force ).trigger ( 'change' );
 
+                this._trigger ( force ? 'checked' : 'unchecked' ); //FIXME: is triggered twice per toggle
+
             }
 
         },

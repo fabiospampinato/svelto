@@ -34,7 +34,8 @@ function pointer_dragstart () {
     pointer_check ( 'dragstart' );
 }
 
-function pointer_dragmove () {
+function pointer_dragmove ( event ) {
+    event.preventDefault ();
     pointer_check ( 'dragmove' );
 }
 
@@ -42,8 +43,9 @@ function pointer_dragend () {
     pointer_check ( 'dragend' );
 }
 
-function pointer_flick  () {
+function pointer_flick  ( event, data ) {
     pointer_check ( 'flick ' );
+    $.noty("Flick orientation: " + data.orientation + ", direction: " + data.direction );
 }</script><script>window.onerror = function ( message, file, line ) {
     try {
         $.noty({body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red'});

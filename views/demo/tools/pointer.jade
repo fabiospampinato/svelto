@@ -60,7 +60,8 @@ append body-end
             pointer_check ( 'dragstart' );
         }
 
-        function pointer_dragmove () {
+        function pointer_dragmove ( event ) {
+            event.preventDefault ();
             pointer_check ( 'dragmove' );
         }
 
@@ -68,6 +69,7 @@ append body-end
             pointer_check ( 'dragend' );
         }
 
-        function pointer_flick  () {
+        function pointer_flick  ( event, data ) {
             pointer_check ( 'flick ' );
+            $.noty("Flick orientation: " + data.orientation + ", direction: " + data.direction );
         }

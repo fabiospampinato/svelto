@@ -13,8 +13,7 @@
 
         options: {
             callbacks: {
-                checked: $.noop,
-                unchecked: $.noop
+                checked: $.noop
             }
         },
 
@@ -102,6 +101,8 @@
             if ( !this.get () ) {
 
                 this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+                this._trigger ( 'checked' );
 
             }
 
