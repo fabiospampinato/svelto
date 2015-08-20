@@ -30,6 +30,7 @@
 
         _variables: function () {
 
+            this.draggable = this.element;
             this.$draggable = this.$element;
             this.$handlers = this.$draggable.find ( this.options.selectors.handler );
 
@@ -65,7 +66,7 @@
                 Y: parseInt ( matrix[5], 10 )
             };
 
-            this._trigger ( 'start', data );
+            this._trigger ( 'start', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
         },
 
@@ -107,7 +108,7 @@
 
             event.preventDefault (); //INFO: In order to prevent scroll, pull down to refresh etc...
 
-            this._trigger ( 'move', data );
+            this._trigger ( 'move', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
         },
 
@@ -126,7 +127,7 @@
 
             }
 
-            this._trigger ( 'end', data );
+            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
         }
 

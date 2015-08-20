@@ -1624,6 +1624,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
+            this.draggable = this.element;
             this.$draggable = this.$element;
             this.$handlers = this.$draggable.find ( this.options.selectors.handler );
 
@@ -1659,7 +1660,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 Y: parseInt ( matrix[5], 10 )
             };
 
-            this._trigger ( 'start', data );
+            this._trigger ( 'start', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
         },
 
@@ -1701,7 +1702,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             event.preventDefault (); //INFO: In order to prevent scroll, pull down to refresh etc...
 
-            this._trigger ( 'move', data );
+            this._trigger ( 'move', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
         },
 
@@ -1720,7 +1721,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._trigger ( 'end', data );
+            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
         }
 

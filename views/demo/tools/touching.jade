@@ -54,6 +54,8 @@ append main
 append body-end
     +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })
     +script.
+        // Populate
+
         function get_squares_html ( nr ) {
 
             var html = '';
@@ -84,87 +86,35 @@ append body-end
 
         }
 
-        // General drag
+        // Dragging
 
-        var drag_options,
-            $squares,
-            $target;
+        function dragging ( selector, select ) {
 
-        function drag_start ( options, event, target ) {
+            var $squares = $(selector);
 
-            drag_options = options;
-
-            $target = $(target);
-
-            $squares = $target.parent ().find ( '.square' );
-
-        }
-
-        function drag_move ( event, target, XYs ) {
-
-            $target.css ( 'z-index', 1000 );
-            $target.css ( 'transform', 'translate3d(' + ( XYs.move.X - XYs.start.X ) + 'px,' + ( XYs.move.Y - XYs.start.Y ) + 'px,0)' );
-
-            if ( drag_options === 'punctual' ) {
-
-                $squares.removeClass ( 'green' ).touching ( { point: XYs.move, $not: $target } ).addClass ( 'green' );
-
-            } else {
-
-                $squares.removeClass ( 'green' ).touching ( _.extend ( { $comparer: $target, $not: $target }, drag_options ) ).addClass ( 'green' );
-
-            }
-
-        }
-
-        function drag_end () {
-
-            $target.css ( 'transform', 'translate3d(0,0,0)' );
-            $target.css ( 'z-index', 1 );
-
-            $squares.removeClass ( 'green' );
-
-        }
-
-        // Specific drag
-
-        function drag_start_all ( event, target ) {
-
-            drag_start ( { select: 'all' }, event, target );
-
-        }
-
-        function drag_start_most ( event, target ) {
-
-            drag_start ( { select: 'most' }, event, target );
-
-        }
-
-        function drag_start_punctual ( event, target ) {
-
-            drag_start ( 'punctual', event, target );
+            $squares.draggable ({
+                revertable: true,
+                callbacks: {
+                    move: function ( data ) {
+                        $squares.removeClass ( 'green' );
+                        if ( select === 'punctual') {
+                            $squares.touching ({ point: data.moveXY, $not: data.$draggable }).addClass ( 'green' );
+                        } else {
+                            $squares.touching ({ $comparer: data.$draggable, $not: data.$draggable, select: select }).addClass ( 'green' );
+                        }
+                    },
+                    end: function () {
+                        $squares.removeClass ( 'green' );
+                    }
+                }
+            });
 
         }
 
         // Ready
 
         $(function () {
-            $('.squares_all').draggable ({
-                start: drag_start_all,
-                move: drag_move,
-                end: drag_end,
-                delegate: '.square'
-            });
-            $('.squares_most').draggable ({
-                start: drag_start_most,
-                move: drag_move,
-                end: drag_end,
-                delegate: '.square'
-            });
-            $('.squares_punctual').draggable ({
-                start: drag_start_punctual,
-                move: drag_move,
-                end: drag_end,
-                delegate: '.square'
-            });
+            dragging ( '.squares_all .square', 'all' );
+            dragging ( '.squares_most .square', 'most' );
+            dragging ( '.squares_punctual .square', 'punctual' );
         });
