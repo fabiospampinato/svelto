@@ -7088,19 +7088,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
+            /* CHANGE */
+
             this._on ( true, this.$input, 'change', this._handler_change );
 
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
+            /* KEYS */
 
-            this._on ( 'click', this._handler_click );
+            this._on ( 'mouseenter', this._handler_keys_in );
+            this._on ( 'mouseleave', this._handler_keys_out );
 
-            this.$handler.draggable ({
-                start: this._handler_drag_start,
-                move: this._handler_drag_move,
-                end: this._handler_drag_end,
-                context: this
-            });
+            /* CLICK */
+
+            this._on ( this.$bar, 'click', this._handler_click );
+
+            /* DRAG */
+
+            // this.$handler.draggable ({
+            //     start: this._handler_drag_start,
+            //     move: this._handler_drag_move,
+            //     end: this._handler_drag_end,
+            //     context: this
+            // });
 
         },
 
@@ -7120,21 +7128,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        /* LEFT / RIGHT ARROWS */
+        /* KEYS */
 
-        _handler_arrows_in: function () {
+        _handler_keys_in: function () {
 
-            this._on ( $document, 'keydown', this._handler_arrows_keydown );
-
-        },
-
-        _handler_arrows_out: function () {
-
-            this._off ( $document, 'keydown', this._handler_arrows_keydown );
+            this._on ( $document, 'keydown', this._handler_keys_keydown );
 
         },
 
-        _handler_arrows_keydown: function ( event ) {
+        _handler_keys_out: function () {
+
+            this._off ( $document, 'keydown', this._handler_keys_keydown );
+
+        },
+
+        _handler_keys_keydown: function ( event ) {
 
             if ( event.keyCode === $.ui.keyCode.LEFT ) {
 

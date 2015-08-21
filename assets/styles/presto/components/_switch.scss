@@ -12,6 +12,7 @@
 
     & > .switch-bar {
 
+        display: inline-block;
         position: relative;
         width: $switch-bar-width;
         height: $switch-bar-height;
