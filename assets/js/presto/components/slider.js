@@ -31,8 +31,10 @@
             this.$min = this.$slider.find ( '.slider-min' );
             this.$max = this.$slider.find ( '.slider-max' );
             this.$input = this.$slider.find ( 'input' );
+            this.$bar = this.$slider.find ( '.slider-bar' );
             this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
             this.$highlighted = this.$slider.find ( '.slider-highlighted' );
+            this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
             this.$handler = this.$slider.find ( '.slider-handler' );
             this.$label = this.$handler.find ( '.slider-label' );
 
@@ -72,10 +74,12 @@
 
             /* DRAG */
 
-            this.$handler.draggable ({
-                start: this._handler_drag_start,
-                move: this._handler_drag_move,
-                context: this
+            this.$handler_wrp.draggable ({
+                axis: 'x',
+                $constrainer: this.$bar,
+                callbacks: {
+                    move: this._handler_drag_move
+                }
             });
 
             /* CLICK */
@@ -163,27 +167,21 @@
 
         /* DRAG */
 
-        _handler_drag_start: function () {
+        _handler_drag_move: function ( data ) {
 
-            this.current_move = 0;
+            // var delta_move = XYs.delta.X - this.current_move;
 
-        },
+            // if ( Math.abs ( delta_move ) >= 1 ) {
 
-        _handler_drag_move: function ( event, trigger, XYs ) {
+            //     var moved = this.navigate_distance ( delta_move );
 
-            var delta_move = XYs.delta.X - this.current_move;
+            //     if ( moved !== false ) {
 
-            if ( Math.abs ( delta_move ) >= 1 ) {
+            //         this.current_move += moved;
 
-                var moved = this.navigate_distance ( delta_move );
+            //     }
 
-                if ( moved !== false ) {
-
-                    this.current_move += moved;
-
-                }
-
-            }
+            // }
 
         },
 

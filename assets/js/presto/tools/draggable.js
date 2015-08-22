@@ -1,6 +1,8 @@
 
 /* DRAGGABLE */
 
+//TODO: add also a constrainer in pixels
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -127,7 +129,7 @@
 
             }
 
-            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
+            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
 
         }
 

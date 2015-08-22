@@ -33,45 +33,49 @@
                 border-radius: inherit;
             }
 
-            & > .slider-handler {
+            & > .slider-handler-wrp {
 
-                @include color ( $slider-handler-color, $slider-handler-color-basic );
-                @include z-depth ( $slider-handler-z-depth );
-                @include center-absolutely ( false, $slider-handler-size );
-                z-index: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: $slider-handler-size;
-                height: $slider-handler-size;
-                margin-left: - $slider-handler-half-size;
-                transition: transform $slider-transition-all-duration;
-                transform: scale(1);
-                border-radius: $slider-handler-border-radius;
+                & > .slider-handler {
 
-                &:before {
-                    position: absolute;
-                    z-index: -1;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    content: '';
-                    transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
-                    transition-duration: $slider-transition-all-duration;
-                    transition-property: opacity, transform;
-                    transform: scale($switch-handler-before-scale-inactive);
-                    opacity: 0;
-                    border-radius: 50%;
-                    background-color: inherit;
-                }
+                    @include color ( $slider-handler-color, $slider-handler-color-basic );
+                    @include z-depth ( $slider-handler-z-depth );
+                    @include center-absolutely ( false, $slider-handler-size );
+                    z-index: 0;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: $slider-handler-size;
+                    height: $slider-handler-size;
+                    margin-left: - $slider-handler-half-size;
+                    transition: transform $slider-transition-all-duration;
+                    transform: scale(1);
+                    border-radius: $slider-handler-border-radius;
 
-                & > .slider-label {
-                    font-size: $slider-handler-label-font-size;
-                    transition-duration: $slider-transition-all-duration;
-                    transition-property: opacity, transform;
-                    transform: scale(0);
-                    opacity: 0;
+                    &:before {
+                        position: absolute;
+                        z-index: -1;
+                        top: 0;
+                        right: 0;
+                        bottom: 0;
+                        left: 0;
+                        content: '';
+                        transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
+                        transition-duration: $slider-transition-all-duration;
+                        transition-property: opacity, transform;
+                        transform: scale($switch-handler-before-scale-inactive);
+                        opacity: 0;
+                        border-radius: 50%;
+                        background-color: inherit;
+                    }
+
+                    & > .slider-label {
+                        font-size: $slider-handler-label-font-size;
+                        transition-duration: $slider-transition-all-duration;
+                        transition-property: opacity, transform;
+                        transform: scale(0);
+                        opacity: 0;
+                    }
+
                 }
 
             }

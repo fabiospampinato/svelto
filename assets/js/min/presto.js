@@ -1595,6 +1595,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* DRAGGABLE */
 
+//TODO: add also a constrainer in pixels
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -1721,7 +1723,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
+            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
 
         }
 
@@ -6607,8 +6609,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$min = this.$slider.find ( '.slider-min' );
             this.$max = this.$slider.find ( '.slider-max' );
             this.$input = this.$slider.find ( 'input' );
+            this.$bar = this.$slider.find ( '.slider-bar' );
             this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
             this.$highlighted = this.$slider.find ( '.slider-highlighted' );
+            this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
             this.$handler = this.$slider.find ( '.slider-handler' );
             this.$label = this.$handler.find ( '.slider-label' );
 
@@ -6648,10 +6652,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* DRAG */
 
-            this.$handler.draggable ({
-                start: this._handler_drag_start,
-                move: this._handler_drag_move,
-                context: this
+            this.$handler_wrp.draggable ({
+                axis: 'x',
+                $constrainer: this.$bar,
+                callbacks: {
+                    move: this._handler_drag_move
+                }
             });
 
             /* CLICK */
@@ -6739,27 +6745,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* DRAG */
 
-        _handler_drag_start: function () {
+        _handler_drag_move: function ( data ) {
 
-            this.current_move = 0;
+            // var delta_move = XYs.delta.X - this.current_move;
 
-        },
+            // if ( Math.abs ( delta_move ) >= 1 ) {
 
-        _handler_drag_move: function ( event, trigger, XYs ) {
+            //     var moved = this.navigate_distance ( delta_move );
 
-            var delta_move = XYs.delta.X - this.current_move;
+            //     if ( moved !== false ) {
 
-            if ( Math.abs ( delta_move ) >= 1 ) {
+            //         this.current_move += moved;
 
-                var moved = this.navigate_distance ( delta_move );
+            //     }
 
-                if ( moved !== false ) {
-
-                    this.current_move += moved;
-
-                }
-
-            }
+            // }
 
         },
 
@@ -7068,15 +7068,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$switch = this.$element;
             this.$input = this.$switch.find ( 'input' );
+            this.$bar_wrp = this.$switch.find ( '.switch-bar-wrp' );
             this.$bar = this.$switch.find ( '.switch-bar' );
             this.$handler = this.$switch.find ( '.switch-handler' );
             this.$icon = this.$handler.find ( '.icon' );
 
             this.checked = this.$input.prop ( 'checked' );
             this.dragging = false;
-
-            this.bar_width = false,
-            this.start_percentage = false;
 
         },
 
@@ -7103,12 +7101,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* DRAG */
 
-            // this.$handler.draggable ({
-            //     start: this._handler_drag_start,
-            //     move: this._handler_drag_move,
-            //     end: this._handler_drag_end,
-            //     context: this
-            // });
+            this.$handler.draggable ({
+                axis: 'x',
+                $constrainer: this.$bar_wrp,
+                callbacks: {
+                    end: this._handler_drag_end.bind ( this )
+                }
+            });
 
         },
 
@@ -7177,32 +7176,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* DRAG */
 
-        _handler_drag_start: function () {
+        _handler_drag_end: function ( data ) {
 
-            this.start_percentage = this.checked ? 100 : 0;
+            if ( data.dragged ) {
 
-            this.bar_width = this.$bar.width ();
+                this.dragging = true;
 
-        },
+                var checked = ( this.$handler.offset ().left - this.$bar_wrp.offset ().left + ( this.$handler.width () / 2 ) ) >= ( this.$bar_wrp.width () / 2 );
 
-        _handler_drag_move: function ( event, trigger, XYs ) {
-
-            this.dragging = true;
-
-            var abs_distance = Math.max ( - this.bar_width, Math.min ( Math.abs ( XYs.delta.X ), this.bar_width ) ),
-                percentage = abs_distance * 100 / this.bar_width;
-
-            this.drag_percentage = ( XYs.delta.X >= 0 ) ? this.start_percentage + percentage : this.start_percentage - percentage;
-
-            this.$handler.css ( 'left', _.clamp ( 0, this.drag_percentage, 100 ) + '%' );
-
-        },
-
-        _handler_drag_end: function () {
-
-            if ( this.dragging ) {
-
-                this.checked = ( this.drag_percentage >= 50 ) ? true : false;
+                this.checked = ( checked ) ? true : false;
 
                 this._set_check ( this.checked, true );
 
@@ -7216,7 +7198,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 this.$switch.toggleClass ( 'checked', checked );
 
-                this.$handler.css ( 'left', checked ? '100%' : 0 );
+                this.$handler.css ( 'transform', 'translate3d(' + ( checked ? '1.73333em' : '0' ) + ',0,0)' );
 
                 this.$bar.toggleClass ( this.options.colors.on, checked );
                 this.$handler.toggleClass ( this.options.colors.on, checked );
