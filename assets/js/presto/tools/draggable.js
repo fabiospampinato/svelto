@@ -21,7 +21,13 @@
             revertable: false, //INFO: on dragend take it back to the starting position
             axis: false, //INFO: limit the movements to this axis
             $constrainer: false, //INFO: if we want to keep the draggable inside this container
+            constrainer_axis: false, //INFO: if we want to constrain the draggable only in a specific axis
+            updaters: { //TODO: rename this ugly name, it should something like updatable_checker
+                x: _.true, //TODO: add support for setting a custom value from this function
+                y: _.true //TODO: add support for setting a custom value from this function
+            },
             callbacks: {
+                beforestart: $.noop,
                 start: $.noop,
                 move: $.noop,
                 end: $.noop
@@ -57,6 +63,8 @@
         /* PRIVATE */
 
         _start: function ( event, data ) {
+
+            this._trigger ( 'beforestart' );
 
             this.motion = false;
 
@@ -101,14 +109,24 @@
 
             if ( this.options.$constrainer ) {
 
-                translateX = _.clamp ( this.translateX_min, translateX, this.translateX_max );
-                translateY = _.clamp ( this.translateY_min, translateY, this.translateY_max );
+                if ( this.options.constrainer_axis !== 'y' ) {
+
+                    translateX = _.clamp ( this.translateX_min, translateX, this.translateX_max );
+
+                }
+
+                if ( this.options.constrainer_axis !== 'x' ) {
+
+                    translateY = _.clamp ( this.translateY_min, translateY, this.translateY_max );
+
+                }
 
             }
 
-            this.$draggable.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+            var updatable_x = this.options.updaters.x ( translateX ),
+                updatable_y = this.options.updaters.y ( translateY );
 
-            event.preventDefault (); //INFO: In order to prevent scroll, pull down to refresh etc...
+            this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( updatable_x ) ? ( updatable_x ? translateX : this.extraXY.X ) : updatable_x ) + 'px,' + ( _.isBoolean ( updatable_y ) ? ( updatable_y ? translateY : this.extraXY.Y ) : updatable_y ) + 'px,0)' );
 
             this._trigger ( 'move', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 

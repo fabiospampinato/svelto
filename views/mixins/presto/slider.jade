@@ -5,9 +5,10 @@ mixin slider(name, min, value, max)
         input(type="number", name=name, value=value)
         .slider-min(title="Decrease", data-min=min)
         .slider-max(title="Increase", data-max=max)
-        .slider-bar
-            .slider-unhighlighted
-                .slider-highlighted
-                .slider-handler-wrp
-                    .slider-handler
-                        .slider-label= value
+        .slider-bar-wrp
+            .slider-bar
+                .slider-unhighlighted
+                    .slider-highlighted
+            .slider-handler-wrp
+                .slider-handler
+                    .slider-label= value

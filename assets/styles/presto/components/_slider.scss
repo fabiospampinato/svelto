@@ -2,6 +2,7 @@
 /* SLIDER */
 
 //TODO: maybe use a map pointer with the number inside instead of the handler we are using right now
+//TODO: add a switch-like border when the handler is active (using :before)
 
 .slider {
 
@@ -14,68 +15,79 @@
         display: none;
     }
 
-    & > .slider-bar {
+    & > .slider-bar-wrp {
 
         flex-grow: 1;
         order: 1;
 
-        & > .slider-unhighlighted {
+        & > .slider-bar {
 
-            @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
-            position: relative;
-            height: $slider-unhighlighted-height;
-            margin: 0 $slider-handler-half-size;
-            border-radius: $slider-unhighlighted-border-radius;
+            & > .slider-unhighlighted {
 
-            & > .slider-highlighted {
-                @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
-                height: 100%;
-                border-radius: inherit;
+                @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
+                overflow: hidden;
+                position: relative;
+                height: $slider-unhighlighted-height;
+                margin: 0 $slider-handler-half-size;
+                border-radius: $slider-unhighlighted-border-radius;
+
+                & > .slider-highlighted {
+                    @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
+                    height: 100%;
+                    width: 100%;
+                    position: absolute;
+                    right: 100%;
+                    border-radius: inherit;
+                }
+
             }
 
-            & > .slider-handler-wrp {
+        }
 
-                & > .slider-handler {
+        & > .slider-handler-wrp {
 
-                    @include color ( $slider-handler-color, $slider-handler-color-basic );
-                    @include z-depth ( $slider-handler-z-depth );
-                    @include center-absolutely ( false, $slider-handler-size );
-                    z-index: 0;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: $slider-handler-size;
-                    height: $slider-handler-size;
-                    margin-left: - $slider-handler-half-size;
-                    transition: transform $slider-transition-all-duration;
-                    transform: scale(1);
-                    border-radius: $slider-handler-border-radius;
+            opacity: 0.5;
+            position: absolute;
+            margin-top: - ( $slider-handler-half-size + ( $slider-unhighlighted-height / 2 ) );
+            margin-left: - $slider-handler-half-size;
 
-                    &:before {
-                        position: absolute;
-                        z-index: -1;
-                        top: 0;
-                        right: 0;
-                        bottom: 0;
-                        left: 0;
-                        content: '';
-                        transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
-                        transition-duration: $slider-transition-all-duration;
-                        transition-property: opacity, transform;
-                        transform: scale($switch-handler-before-scale-inactive);
-                        opacity: 0;
-                        border-radius: 50%;
-                        background-color: inherit;
-                    }
+            & > .slider-handler {
 
-                    & > .slider-label {
-                        font-size: $slider-handler-label-font-size;
-                        transition-duration: $slider-transition-all-duration;
-                        transition-property: opacity, transform;
-                        transform: scale(0);
-                        opacity: 0;
-                    }
+                @include color ( $slider-handler-color, $slider-handler-color-basic );
+                @include z-depth ( $slider-handler-z-depth );
+                z-index: 0;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: $slider-handler-size;
+                height: $slider-handler-size;
+                transition: transform $slider-transition-all-duration;
+                transform: scale(1);
+                border-radius: $slider-handler-border-radius;
 
+                &:before {
+                    position: absolute;
+                    z-index: -1;
+                    top: 0;
+                    right: 0;
+                    bottom: 0;
+                    left: 0;
+                    content: '';
+                    transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
+                    transition-duration: $slider-transition-all-duration;
+                    transition-property: opacity, transform;
+                    transform: scale($switch-handler-before-scale-inactive);
+                    opacity: 0;
+                    border-radius: 50%;
+                    background-color: inherit;
+                }
+
+                & > .slider-label {
+                    font-size: $slider-handler-label-font-size;
+                    transition-duration: $slider-transition-all-duration;
+                    transition-property: opacity, transform;
+                    transform: scale(0);
+                    opacity: 0;
                 }
 
             }
@@ -101,7 +113,7 @@
 
     & > .slider-max {
 
-        order: 3;
+        order: 2;
 
         &:after {
             content: attr(data-max)
@@ -111,55 +123,67 @@
 
     &:not(.slider-disabled) {
 
-        &:not(.dragging) {
+        & > .slider-min, & > .slider-max {
 
-            & > .slider-min, & > .slider-max {
+            cursor: pointer;
 
-                cursor: pointer;
-
-                &:hover:after {
-                    @extend %icon;
-                }
-
-            }
-
-            & > .slider-min {
-
-                &:hover:after {
-                    @extend .icon-content-remove:before;
-                }
-
-            }
-
-            & > .slider-max {
-
-                &:hover:after {
-                    @extend .icon-content-add:before;
-                }
-
+            &:hover:after {
+                @extend %icon;
             }
 
         }
 
-        & > .slider-bar > .slider-unhighlighted {
+        & > .slider-min {
 
-            cursor: pointer;
-
-            & > .slider-highlighted {
-                cursor: pointer;
+            &:hover:after {
+                @extend .icon-content-remove:before;
             }
 
-            & > .slider-handler {
+        }
+
+        & > .slider-max {
+
+            &:hover:after {
+                @extend .icon-content-add:before;
+            }
+
+        }
+
+        & > .slider-bar-wrp {
+
+            & > .slider-bar > .slider-unhighlighted {
+
+                cursor: pointer;
+
+                & > .slider-highlighted {
+                    cursor: pointer;
+                }
+
+            }
+
+            & > .slider-handler-wrp {
 
                 cursor: move;
 
                 &:active {
-                    transform: scale($slider-handler-active-transform-scale) !important;
+
+                    & > .slider-handler {
+
+                        transform: scale($slider-handler-active-transform-scale) !important;
+
+                    }
+
                 }
 
                 &:active:before {
-                    transform: scale($switch-handler-before-scale-active);
-                    opacity: $switch-handler-before-active-opacity;
+
+                    & > .slider-handler {
+
+                        transform: scale($switch-handler-before-scale-active);
+                        opacity: $switch-handler-before-active-opacity;
+
+                    }
+
                 }
 
             }

@@ -1615,7 +1615,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             revertable: false, //INFO: on dragend take it back to the starting position
             axis: false, //INFO: limit the movements to this axis
             $constrainer: false, //INFO: if we want to keep the draggable inside this container
+            constrainer_axis: false, //INFO: if we want to constrain the draggable only in a specific axis
+            updaters: { //TODO: rename this ugly name, it should something like updatable_checker
+                x: _.true, //TODO: add support for setting a custom value from this function
+                y: _.true //TODO: add support for setting a custom value from this function
+            },
             callbacks: {
+                beforestart: $.noop,
                 start: $.noop,
                 move: $.noop,
                 end: $.noop
@@ -1651,6 +1657,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* PRIVATE */
 
         _start: function ( event, data ) {
+
+            this._trigger ( 'beforestart' );
 
             this.motion = false;
 
@@ -1695,14 +1703,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.options.$constrainer ) {
 
-                translateX = _.clamp ( this.translateX_min, translateX, this.translateX_max );
-                translateY = _.clamp ( this.translateY_min, translateY, this.translateY_max );
+                if ( this.options.constrainer_axis !== 'y' ) {
+
+                    translateX = _.clamp ( this.translateX_min, translateX, this.translateX_max );
+
+                }
+
+                if ( this.options.constrainer_axis !== 'x' ) {
+
+                    translateY = _.clamp ( this.translateY_min, translateY, this.translateY_max );
+
+                }
 
             }
 
-            this.$draggable.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+            var updatable_x = this.options.updaters.x ( translateX ),
+                updatable_y = this.options.updaters.y ( translateY );
 
-            event.preventDefault (); //INFO: In order to prevent scroll, pull down to refresh etc...
+            this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( updatable_x ) ? ( updatable_x ? translateX : this.extraXY.X ) : updatable_x ) + 'px,' + ( _.isBoolean ( updatable_y ) ? ( updatable_y ? translateY : this.extraXY.Y ) : updatable_y ) + 'px,0)' );
 
             this._trigger ( 'move', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
 
@@ -6609,24 +6627,23 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$min = this.$slider.find ( '.slider-min' );
             this.$max = this.$slider.find ( '.slider-max' );
             this.$input = this.$slider.find ( 'input' );
-            this.$bar = this.$slider.find ( '.slider-bar' );
+            this.$bar_wrp = this.$slider.find ( '.slider-bar-wrp' );
             this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
             this.$highlighted = this.$slider.find ( '.slider-highlighted' );
             this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
-            this.$handler = this.$slider.find ( '.slider-handler' );
-            this.$label = this.$handler.find ( '.slider-label' );
+            this.$label = this.$handler_wrp.find ( '.slider-label' );
 
             this.unhighlighted_width = this.$unhighlighted.width ();
             this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
             this.required_step_width = this.options.step * this.one_step_width;
 
-            this.current_move = 0;
+            this.dragging = false;
 
         },
 
         _init: function () {
 
-            this.set_value ( this.options.value, true );
+            this.set ( this.options.value, true );
 
         },
 
@@ -6645,7 +6662,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
             this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
 
-            /* INCREASE / DECREASE */
+            /* MIN / MAX BUTTONS */
 
             this._on ( this.$min, 'click', this.decrease );
             this._on ( this.$max, 'click', this.increase );
@@ -6654,9 +6671,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$handler_wrp.draggable ({
                 axis: 'x',
-                $constrainer: this.$bar,
+                $constrainer: this.$bar_wrp,
+                constrainer_axis: 'x',
+                updaters: {
+                    x: this._updatable.bind ( this ),
+                    y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
+                },
                 callbacks: {
-                    move: this._handler_drag_move
+                    beforestart: this._handler_drag_beforestart.bind ( this ),
+                    end: this._handler_drag_end.bind ( this )
                 }
             });
 
@@ -6674,34 +6697,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _round_distance: function ( distance ) {
-
-            var mod = distance % this.required_step_width,
-                extra_step;
-
-            if ( mod > 0 ) {
-
-                extra_step = ( mod >= this.required_step_width / 2 ) ? 1 : 0;
-
-                distance = ( Math.floor ( distance / this.required_step_width ) + extra_step ) * this.required_step_width;
-
-            } else if ( mod < 0 ) {
-
-                extra_step = ( mod <= - ( this.required_step_width / 2 ) ) ? -1 : 0;
-
-                distance = ( Math.ceil ( distance / this.required_step_width ) + extra_step ) * this.required_step_width;
-
-            }
-
-            return distance;
-
-        },
-
         /* CHANGE */
 
         _handler_change: function () {
 
-            this.set_value ( this.$input.val () );
+            this.set ( this.$input.val () );
 
         },
 
@@ -6745,21 +6745,28 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* DRAG */
 
-        _handler_drag_move: function ( data ) {
+        _updatable: function ( distance ) {
 
-            // var delta_move = XYs.delta.X - this.current_move;
+            return Math.ceil ( distance / this.one_step_width ) * this.one_step_width;
 
-            // if ( Math.abs ( delta_move ) >= 1 ) {
+        },
 
-            //     var moved = this.navigate_distance ( delta_move );
+        _handler_drag_beforestart: function () {
 
-            //     if ( moved !== false ) {
+            this.$handler_wrp.css ({
+                left: 0,
+                transform: 'translateX(' + parseFloat ( this.$handler_wrp.css ( 'left' ), 10 ) + 'px)'
+            });
 
-            //         this.current_move += moved;
+        },
 
-            //     }
+        _handler_drag_end: function ( data ) {
 
-            // }
+            var transform_str = this.$handler_wrp.css ( 'transform' ),
+                matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
+
+            this.set ( Math.ceil ( parseFloat ( matrix[4], 10 ) / this.one_step_width ) * this.options.step, true );
+
 
         },
 
@@ -6767,7 +6774,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_click: function ( event ) {
 
-            if ( event.target === this.$handler.get ( 0 ) ) return; //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
+            if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
             var click_pos = $.eventXY ( event ),
                 distance = click_pos.X - ( this.$highlighted.offset ().left + this.$highlighted.width () );
@@ -6778,23 +6785,39 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* PUBLIC */
 
-        set_value: function ( value, force ) {
+        get: function () {
 
-            value = this._round_value ( value );
+            return this.options.value;
 
-            if ( value >= this.options.min && value <= this.options.max && ( value !== this.options.value || force ) ) {
+        },
 
-                this.options.value = value;
+        set: function ( value, force ) {
+
+            return;
+
+            value = _.clamp ( this.options.min, this._round_value ( value ), this.options.max );
+
+            if ( value !== this.options.value || force ) {
 
                 var width = ( ( value - this.options.min ) * 100 / ( this.options.max - this.options.min ) ) + '%';
 
-                this.$handler.css ( 'left', width );
+                this.$handler_wrp.css ({
+                    transform: 'none',
+                    left: width
+                });
+
                 this.$highlighted.css ( 'width', width );
 
+                var callback = ( value > this.options.value ) ? 'increased' : 'decreased';
+
+                this.options.value = value;
+
                 this.$input.val ( value ).trigger ( 'change' );
+
                 this.$label.html ( value );
 
-                this._trigger ( value > this.options.value ? 'increased' : 'decreased' );
+                this._trigger ( callback );
+
 
             }
 
@@ -6802,41 +6825,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         increase: function () {
 
-            this.navigate ( this.options.step );
+            this.set ( this.options.value + this.options.step );
 
         },
 
         decrease: function () {
 
-            this.navigate ( - this.options.step );
-
-        },
-
-        navigate: function ( modifier ) {
-
-            var new_value = this.options.value + modifier;
-
-            this.set_value ( new_value );
-
-        },
-
-        navigate_distance: function ( distance ) {
-
-            distance = this._round_distance ( distance );
-
-            if ( distance !== 0 ) {
-
-                var new_value = this.options.value + ( distance / this.one_step_width );
-
-                new_value = Math.max ( this.options.min, Math.min ( this.options.max, new_value ) );
-
-                this.set_value ( new_value );
-
-                return distance; //FIXME: Should we check if the values as changed before?
-
-            }
-
-            return false;
+            this.set ( this.options.value - this.options.step );
 
         }
 
