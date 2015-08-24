@@ -166,7 +166,7 @@
 
             options = generate_options.apply ( null, arguments );
 
-            this.options = _.merge ( this.options, options );
+            _.merge ( this.options, options ); //FIXME: does the merge work here? or we modify the original options?
 
             this._update ();
 

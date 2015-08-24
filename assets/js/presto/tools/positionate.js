@@ -13,7 +13,7 @@
 
         // OPTIONS
 
-        var options = {
+        var options = _.merge ({
             direction: false, //INFO: Set a preferred direction
             axis: false, //INFO: Set a preferred axis
             $anchor: false, //INFO: Positionate next to an $anchor element
@@ -26,9 +26,7 @@
             callbacks: {
                 positionated: $.noop
             }
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         // RESETTING
 

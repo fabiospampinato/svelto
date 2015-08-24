@@ -35,7 +35,7 @@
 
         /* OPTIONS */
 
-        var options = {
+        var options = _.merge ({
             startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
             point: false, //INFO: Used for the punctual search
             binarySearch: true, //INFO: toggle the binary search when performing a punctual search
@@ -46,9 +46,7 @@
             $comparer: false, //INFO: Used for the overlapping search
             $not: false,
             select: 'all'
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         /* SEARCHABLE */
 

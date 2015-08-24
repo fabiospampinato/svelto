@@ -490,7 +490,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.initializationType === 'element' ) {
 
-                this.options = _.merge ( this.options, $(element).data ( this.widgetName ) );
+                _.merge ( this.options, $(element).data ( this.widgetName ) ); //FIXME: does it work? Expecially with multiple instantiations, I'm not sure about that `_.merge` call
 
             }
 
@@ -580,7 +580,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( arguments.length === 0 ) {
 
-                return _.extend ( {}, this.options ); //FIXME: maybe just clone it
+                return _.cloneDeep ( this.options );
 
             }
 
@@ -912,8 +912,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
 
-        constructor = _.merge ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ), //FIXME: maybe just clone
+        _.extend ( constructor, existingConstructor, {
+            _proto: _.extend ( {}, prototype ),
             _childConstructors: []
         });
 
@@ -921,7 +921,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         basePrototype = new base ();
 
-        basePrototype.options = _.extend ( {}, basePrototype.options );
+        basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
         /* PROXIED PROTOTYPE */
 
@@ -967,7 +967,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CONSTRUCTOR PROTOTYPE */
 
-        constructor.prototype = _.merge ( basePrototype, proxiedPrototype, {
+        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
             widgetOriginalName: originalName,
@@ -1076,7 +1076,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( args.length ) {
 
-                    options = _.merge.apply ( null, [options].concat ( args ) );
+                    options = _.extend.apply ( null, [options].concat ( args ) );
 
                 }
 
@@ -1668,6 +1668,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
+            console.log("------------");
+            console.log("this.options: ", this.options);
+            console.log("this.options.only_handlers: ", this.options.only_handlers);
+
             this.draggable = this.element;
             this.$draggable = this.$element;
 
@@ -1683,11 +1687,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.options.only_handlers ) {
 
+                console.log("binding events on handlers");
+
                 this._on ( this.$handlers, $.Pointer.dragstart, this._start );
                 this._on ( this.$handlers, $.Pointer.dragmove, this._move );
                 this._on ( this.$handlers, $.Pointer.dragend, this._end );
 
             } else {
+
+                console.log("binding events");
 
                 this._on ( $.Pointer.dragstart, this._start );
                 this._on ( $.Pointer.dragmove, this._move );
@@ -1701,7 +1709,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _start: function ( event, data ) {
 
+            console.log("starting");
+
             if ( !this.options.draggable () ) return;
+
+            console.log("started");
 
             this._trigger ( 'beforestart' );
 
@@ -1720,6 +1732,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         _move: function ( event, data ) { //TODO: make it more performant
+
+            console.log("moving");
 
             if ( !this.options.draggable () ) return;
 
@@ -1802,6 +1816,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         _end: function ( event, data ) {
+
+            console.log("end");
 
             if ( !this.options.draggable () ) return;
 
@@ -2225,14 +2241,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // OPTIONS
 
-        var options = {
+        var options = _.merge ({
             color: {
                 wrapper: 'inherit',
                 spinner: 'secondary'
             }
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         // LOADING
 
@@ -2300,13 +2314,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // OPTIONS
 
-        var options = {
+        var options = _.merge ({
             title: false,
             body: false,
             img: false
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         // NOTIFICATION
 
@@ -2373,7 +2385,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else if ( _.isPlainObject ( custom_options ) ) {
 
-            options = _.merge ( options, custom_options );
+            _.merge ( options, custom_options );
 
         }
 
@@ -2695,7 +2707,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // OPTIONS
 
-        var options = {
+        var options = _.merge ({
             direction: false, //INFO: Set a preferred direction
             axis: false, //INFO: Set a preferred axis
             $anchor: false, //INFO: Positionate next to an $anchor element
@@ -2708,9 +2720,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             callbacks: {
                 positionated: $.noop
             }
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         // RESETTING
 
@@ -3743,7 +3753,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* OPTIONS */
 
-        var options = {
+        var options = _.merge ({
             startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
             point: false, //INFO: Used for the punctual search
             binarySearch: true, //INFO: toggle the binary search when performing a punctual search
@@ -3754,9 +3764,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             $comparer: false, //INFO: Used for the overlapping search
             $not: false,
             select: 'all'
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         /* SEARCHABLE */
 
@@ -5750,7 +5758,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else if ( _.isPlainObject ( custom_options ) ) {
 
-            options = _.merge ( options, custom_options );
+            _.merge ( options, custom_options );
 
         }
 
@@ -6197,7 +6205,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             options = generate_options.apply ( null, arguments );
 
-            this.options = _.merge ( this.options, options );
+            _.merge ( this.options, options ); //FIXME: does the merge work here? or we modify the original options?
 
             this._update ();
 
@@ -6718,7 +6726,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _init: function () {
 
-            // this._update_positions ();
+            // this._update_positions (); //FIXME
 
         },
 
@@ -6745,12 +6753,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             /* DRAG */
 
             this.$handler_wrp.draggable ({
-                axis: 'x',
-                $constrainer: this.$bar_wrp,
-                constrainer_axis: 'x',
                 draggable: this._draggable.bind ( this ),
-                updaters: {
-                    x: this._updatable.bind ( this ),
+                axis: 'x',
+                constrainer: {
+                    $element: this.$bar_wrp,
+                    axis: 'x'
+                },
+                modifiers: {
+                    x: this.modifier_x.bind ( this ),
                     y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
                 },
                 callbacks: {
@@ -6850,7 +6860,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _updatable: function ( distance ) {
+        modifier_x: function ( distance ) {
 
             var left = distance % this.step_width;
 
@@ -6868,8 +6878,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_drag_beforestart: function () {
 
-            console.log("beforestart");
-
             var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
 
             this.$handler_wrp.css ({
@@ -6886,8 +6894,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_drag_move: function ( data ) {
 
-            console.log("move");
-
             this.$highlighted.css ( 'transform', 'translate3d(' + data.updatable_x + 'px,0,0)' );
 
             this.$label.html ( this._round_value ( this.options.min + ( data.updatable_x / this.step_width * this.options.step ) ) );
@@ -6895,8 +6901,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         _handler_drag_end: function ( data ) {
-
-            console.log("end");
 
             var transform_str = this.$handler_wrp.css ( 'transform' ),
                 matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
@@ -6918,7 +6922,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
             var click_pos = $.eventXY ( event ),
-                distance = this._updatable ( click_pos.X - this.unhighlighted_offset.left );
+                distance = this.modifier_x ( click_pos.X - this.unhighlighted_offset.left );
 
             this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
 
@@ -7230,7 +7234,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$handler.draggable ({
                 axis: 'x',
-                $constrainer: this.$bar_wrp,
+                constrainer: {
+                    $element: this.$bar_wrp
+                },
                 callbacks: {
                     end: this._handler_drag_end.bind ( this )
                 }

@@ -11,14 +11,12 @@
 
         // OPTIONS
 
-        var options = {
+        var options = _.merge ({
             color: {
                 wrapper: 'inherit',
                 spinner: 'secondary'
             }
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         // LOADING
 

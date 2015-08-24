@@ -51,6 +51,10 @@
 
         _variables: function () {
 
+            console.log("------------");
+            console.log("this.options: ", this.options);
+            console.log("this.options.only_handlers: ", this.options.only_handlers);
+
             this.draggable = this.element;
             this.$draggable = this.$element;
 
@@ -66,11 +70,15 @@
 
             if ( this.options.only_handlers ) {
 
+                console.log("binding events on handlers");
+
                 this._on ( this.$handlers, $.Pointer.dragstart, this._start );
                 this._on ( this.$handlers, $.Pointer.dragmove, this._move );
                 this._on ( this.$handlers, $.Pointer.dragend, this._end );
 
             } else {
+
+                console.log("binding events");
 
                 this._on ( $.Pointer.dragstart, this._start );
                 this._on ( $.Pointer.dragmove, this._move );
@@ -84,7 +92,11 @@
 
         _start: function ( event, data ) {
 
+            console.log("starting");
+
             if ( !this.options.draggable () ) return;
+
+            console.log("started");
 
             this._trigger ( 'beforestart' );
 
@@ -103,6 +115,8 @@
         },
 
         _move: function ( event, data ) { //TODO: make it more performant
+
+            console.log("moving");
 
             if ( !this.options.draggable () ) return;
 
@@ -185,6 +199,8 @@
         },
 
         _end: function ( event, data ) {
+
+            console.log("end");
 
             if ( !this.options.draggable () ) return;
 

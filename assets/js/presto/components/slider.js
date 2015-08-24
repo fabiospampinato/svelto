@@ -45,7 +45,7 @@
 
         _init: function () {
 
-            // this._update_positions ();
+            // this._update_positions (); //FIXME
 
         },
 
@@ -72,12 +72,14 @@
             /* DRAG */
 
             this.$handler_wrp.draggable ({
-                axis: 'x',
-                $constrainer: this.$bar_wrp,
-                constrainer_axis: 'x',
                 draggable: this._draggable.bind ( this ),
-                updaters: {
-                    x: this._updatable.bind ( this ),
+                axis: 'x',
+                constrainer: {
+                    $element: this.$bar_wrp,
+                    axis: 'x'
+                },
+                modifiers: {
+                    x: this.modifier_x.bind ( this ),
                     y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
                 },
                 callbacks: {
@@ -177,7 +179,7 @@
 
         },
 
-        _updatable: function ( distance ) {
+        modifier_x: function ( distance ) {
 
             var left = distance % this.step_width;
 
@@ -195,8 +197,6 @@
 
         _handler_drag_beforestart: function () {
 
-            console.log("beforestart");
-
             var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
 
             this.$handler_wrp.css ({
@@ -213,8 +213,6 @@
 
         _handler_drag_move: function ( data ) {
 
-            console.log("move");
-
             this.$highlighted.css ( 'transform', 'translate3d(' + data.updatable_x + 'px,0,0)' );
 
             this.$label.html ( this._round_value ( this.options.min + ( data.updatable_x / this.step_width * this.options.step ) ) );
@@ -222,8 +220,6 @@
         },
 
         _handler_drag_end: function ( data ) {
-
-            console.log("end");
 
             var transform_str = this.$handler_wrp.css ( 'transform' ),
                 matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
@@ -245,7 +241,7 @@
             if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
             var click_pos = $.eventXY ( event ),
-                distance = this._updatable ( click_pos.X - this.unhighlighted_offset.left );
+                distance = this.modifier_x ( click_pos.X - this.unhighlighted_offset.left );
 
             this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
 

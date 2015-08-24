@@ -50,7 +50,7 @@
 
             if ( this.initializationType === 'element' ) {
 
-                this.options = _.merge ( this.options, $(element).data ( this.widgetName ) );
+                _.merge ( this.options, $(element).data ( this.widgetName ) ); //FIXME: does it work? Expecially with multiple instantiations, I'm not sure about that `_.merge` call
 
             }
 
@@ -140,7 +140,7 @@
 
             if ( arguments.length === 0 ) {
 
-                return _.extend ( {}, this.options ); //FIXME: maybe just clone it
+                return _.cloneDeep ( this.options );
 
             }
 

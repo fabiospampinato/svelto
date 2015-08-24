@@ -63,7 +63,9 @@
 
             this.$handler.draggable ({
                 axis: 'x',
-                $constrainer: this.$bar_wrp,
+                constrainer: {
+                    $element: this.$bar_wrp
+                },
                 callbacks: {
                     end: this._handler_drag_end.bind ( this )
                 }

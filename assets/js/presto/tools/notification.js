@@ -13,13 +13,11 @@
 
         // OPTIONS
 
-        var options = {
+        var options = _.merge ({
             title: false,
             body: false,
             img: false
-        };
-
-        options = _.merge ( options, custom_options );
+        }, custom_options );
 
         // NOTIFICATION
 

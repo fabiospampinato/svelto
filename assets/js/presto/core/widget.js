@@ -71,8 +71,8 @@
 
         /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
 
-        constructor = _.merge ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ), //FIXME: maybe just clone
+        _.extend ( constructor, existingConstructor, {
+            _proto: _.extend ( {}, prototype ),
             _childConstructors: []
         });
 
@@ -80,7 +80,7 @@
 
         basePrototype = new base ();
 
-        basePrototype.options = _.extend ( {}, basePrototype.options );
+        basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
         /* PROXIED PROTOTYPE */
 
@@ -126,7 +126,7 @@
 
         /* CONSTRUCTOR PROTOTYPE */
 
-        constructor.prototype = _.merge ( basePrototype, proxiedPrototype, {
+        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
             widgetOriginalName: originalName,
@@ -235,7 +235,7 @@
 
                 if ( args.length ) {
 
-                    options = _.merge.apply ( null, [options].concat ( args ) );
+                    options = _.extend.apply ( null, [options].concat ( args ) );
 
                 }
 
