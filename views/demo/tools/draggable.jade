@@ -40,6 +40,7 @@ append body-end
         $('.x-axis').draggable ({ axis: 'x' });
         $('.y-axis').draggable ({ axis: 'y' });
         $('.constrained').draggable ({ constrainer: { $element: $('.constrainer') } });
+        $('.constrained-center').draggable ({ constrainer: { $element: $('.constrainer'), constrain_center: true } });
         $('.constrained-x').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'x' } });
         $('.constrained-y').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'y' } });
         $('.constrained-tollerance').draggable ({ constrainer: { $element: $('.constrainer'), tollerance: { x: 100, y: 50 } } });

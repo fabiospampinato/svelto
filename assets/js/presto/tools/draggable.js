@@ -130,10 +130,13 @@
                         draggable_offset = this.$draggable.offset ();
 
                     this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
-                    this.translateX_max = constrainer_offset.left + this.options.$constrainer.width () - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
+                    this.translateX_max = constrainer_offset.left + this.options.constrainer.$element.width () - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
 
                     this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
-                    this.translateY_max = constrainer_offset.top + this.options.$constrainer.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+                    this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? this.$draggable.height () / 2 : 0 );
+
+                    console.log("this.translateY_min: ", this.translateY_min);
+                    console.log("this.translateY_max: ", this.translateY_max);
 
                 } else if ( this.options.constrainer.coordinates ) {
 
@@ -175,13 +178,15 @@
 
             if ( this.options.constrainer.$element || this.options.constrainer.coordinates ) {
 
-                if ( this.options.constrainer.axis === 'x' ) {
+                if ( this.options.constrainer.axis !== 'y' ) {
 
-                    translateX = _.clamp ( _.isUndefined ( this.translateX_min ) ? undefined : this.translateX_min - this.options.constrainer_tollerance.x, translateX, _.isUndefined ( this.translateX_max ) ? undefined : this.translateX_max + this.options.constrainer_tollerance.x );
+                    translateX = _.clamp ( _.isUndefined ( this.translateX_min ) ? undefined : this.translateX_min - this.options.constrainer.tollerance.x, translateX, _.isUndefined ( this.translateX_max ) ? undefined : this.translateX_max + this.options.constrainer.tollerance.x );
 
-                } else if ( this.options.constrainer.axis === 'y' ) {
+                }
 
-                    translateY = _.clamp ( _.isUndefined ( this.translateY_min ) ? undefined : this.translateY_min - this.options.constrainer_tollerance.y, translateY, _.isUndefined ( this.translateY_max ) ? undefined : this.translateY_max + this.options.constrainer_tollerance.y );
+                if ( this.options.constrainer.axis !== 'x' ) {
+
+                    translateY = _.clamp ( _.isUndefined ( this.translateY_min ) ? undefined : this.translateY_min - this.options.constrainer.tollerance.y, translateY, _.isUndefined ( this.translateY_max ) ? undefined : this.translateY_max + this.options.constrainer.tollerance.y );
 
                 }
 

@@ -140,7 +140,7 @@
 
             if ( !_.isUndefined ( minimum ) ) {
 
-                if ( value > minimum ) {
+                if ( value < minimum ) {
 
                     value = minimum;
 
@@ -150,7 +150,7 @@
 
             if ( !_.isUndefined ( maximum ) ) {
 
-                if ( value < maximum ) {
+                if ( value > maximum ) {
 
                     value = maximum;
 
