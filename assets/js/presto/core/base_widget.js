@@ -27,7 +27,6 @@
         /* OPTIONS */
 
         options: {
-            disabled: false, //TODO: init/set it dinamically on instantiation
             callbacks: {}
         },
 
@@ -47,11 +46,11 @@
 
             /* EXTEND OPTIONS */
 
-            this.options = _.extend ( {}, this.options, this._getCreateOptions (), options );
+            this.options = _.merge ( {}, this.options, this._getCreateOptions (), options );
 
             if ( this.initializationType === 'element' ) {
 
-                _.extend ( this.options, $(element).data ( this.widgetName ) );
+                this.options = _.merge ( this.options, $(element).data ( this.widgetName ) );
 
             }
 
@@ -63,6 +62,10 @@
             this.$element = $(element);
 
             this.guid = _.uniqueId ();
+
+            // DISABLED
+
+            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' ); //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
             // IF THERE'S AN ELEMENT OR A DEFAULT ELEMENT
 
@@ -137,7 +140,7 @@
 
             if ( arguments.length === 0 ) {
 
-                return _.extend ( {}, this.options );
+                return _.extend ( {}, this.options ); //FIXME: maybe just clone it
 
             }
 

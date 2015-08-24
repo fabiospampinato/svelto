@@ -48,7 +48,7 @@
             select: 'all'
         };
 
-        $.extend ( options, custom_options );
+        options = _.merge ( options, custom_options );
 
         /* SEARCHABLE */
 

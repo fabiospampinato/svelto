@@ -104,7 +104,7 @@
 
         _get_tag_html: function ( tag_str ) {
 
-            return this._tmpl ( 'tag', _.extend ( { str: tag_str }, this.options.tag ) );
+            return this._tmpl ( 'tag', _.merge ( { str: tag_str }, this.options.tag ) );
 
         },
 

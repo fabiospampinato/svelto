@@ -1,7 +1,7 @@
 
 /* SLIDER */
 
-//TODO: maybe use a map pointer with the number inside instead of the handler we are using right now
+//TODO: maybe use a map pointer with the number inside instead of the handler we are using right now (or a tooltip)
 //TODO: add a switch-like border when the handler is active (using :before)
 
 .slider {
@@ -17,6 +17,7 @@
 
     & > .slider-bar-wrp {
 
+        position: relative;
         flex-grow: 1;
         order: 1;
 
@@ -25,18 +26,18 @@
             & > .slider-unhighlighted {
 
                 @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
-                overflow: hidden;
                 position: relative;
+                overflow: hidden;
                 height: $slider-unhighlighted-height;
-                margin: 0 $slider-handler-half-size;
+                transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
                 border-radius: $slider-unhighlighted-border-radius;
 
                 & > .slider-highlighted {
                     @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
-                    height: 100%;
-                    width: 100%;
                     position: absolute;
                     right: 100%;
+                    width: 100%;
+                    height: 100%;
                     border-radius: inherit;
                 }
 
@@ -46,10 +47,11 @@
 
         & > .slider-handler-wrp {
 
-            opacity: 0.5;
             position: absolute;
+            left: 0;
             margin-top: - ( $slider-handler-half-size + ( $slider-unhighlighted-height / 2 ) );
-            margin-left: - $slider-handler-half-size;
+            margin-left: - $slider-handler-half-size; //FIXME: is it needed
+            opacity: 0.5; //FIXME: remove it
 
             & > .slider-handler {
 
@@ -97,13 +99,18 @@
     }
 
     & > .slider-min, & > .slider-max {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: $slider-min-max-width;
+        height: $slider-height;
         text-align: center;
     }
 
     & > .slider-min {
 
         order: 0;
+        margin-right: $slider-handler-half-size;
 
         &:after {
             content: attr(data-min)
@@ -114,6 +121,7 @@
     & > .slider-max {
 
         order: 2;
+        margin-left: $slider-handler-half-size;
 
         &:after {
             content: attr(data-max)
@@ -133,20 +141,12 @@
 
         }
 
-        & > .slider-min {
-
-            &:hover:after {
-                @extend .icon-content-remove:before;
-            }
-
+        & > .slider-min:hover:after {
+            @extend .icon-content-remove:before;
         }
 
-        & > .slider-max {
-
-            &:hover:after {
-                @extend .icon-content-add:before;
-            }
-
+        & > .slider-max:hover:after {
+            @extend .icon-content-add:before;
         }
 
         & > .slider-bar-wrp {
@@ -165,25 +165,13 @@
 
                 cursor: move;
 
-                &:active {
-
-                    & > .slider-handler {
-
-                        transform: scale($slider-handler-active-transform-scale) !important;
-
-                    }
-
+                &:active > .slider-handler {
+                    transform: scale($slider-handler-active-transform-scale) !important;
                 }
 
-                &:active:before {
-
-                    & > .slider-handler {
-
-                        transform: scale($switch-handler-before-scale-active);
-                        opacity: $switch-handler-before-active-opacity;
-
-                    }
-
+                &:active > .slider-handler:before {
+                    transform: scale($switch-handler-before-scale-active);
+                    opacity: $switch-handler-before-active-opacity;
                 }
 
             }

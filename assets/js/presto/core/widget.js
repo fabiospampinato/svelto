@@ -71,8 +71,8 @@
 
         /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
 
-        _.extend ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ),
+        constructor = _.merge ( constructor, existingConstructor, {
+            _proto: _.extend ( {}, prototype ), //FIXME: maybe just clone
             _childConstructors: []
         });
 
@@ -126,7 +126,7 @@
 
         /* CONSTRUCTOR PROTOTYPE */
 
-        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+        constructor.prototype = _.merge ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
             widgetOriginalName: originalName,
@@ -235,7 +235,7 @@
 
                 if ( args.length ) {
 
-                    options = _.extend.apply ( null, [options].concat ( args ) );
+                    options = _.merge.apply ( null, [options].concat ( args ) );
 
                 }
 

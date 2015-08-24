@@ -138,7 +138,27 @@
 
         clamp: function ( minimum, value, maximum ) {
 
-            return Math.max ( minimum, Math.min ( maximum, value ) );
+            if ( !_.isUndefined ( minimum ) ) {
+
+                if ( value > minimum ) {
+
+                    value = minimum;
+
+                }
+
+            }
+
+            if ( !_.isUndefined ( maximum ) ) {
+
+                if ( value < maximum ) {
+
+                    value = maximum;
+
+                }
+
+            }
+
+            return value;
 
         },
 

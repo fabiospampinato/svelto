@@ -147,7 +147,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         clamp: function ( minimum, value, maximum ) {
 
-            return Math.max ( minimum, Math.min ( maximum, value ) );
+            if ( !_.isUndefined ( minimum ) ) {
+
+                if ( value > minimum ) {
+
+                    value = minimum;
+
+                }
+
+            }
+
+            if ( !_.isUndefined ( maximum ) ) {
+
+                if ( value < maximum ) {
+
+                    value = maximum;
+
+                }
+
+            }
+
+            return value;
 
         },
 
@@ -447,7 +467,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         /* OPTIONS */
 
         options: {
-            disabled: false, //TODO: init/set it dinamically on instantiation
             callbacks: {}
         },
 
@@ -467,11 +486,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             /* EXTEND OPTIONS */
 
-            this.options = _.extend ( {}, this.options, this._getCreateOptions (), options );
+            this.options = _.merge ( {}, this.options, this._getCreateOptions (), options );
 
             if ( this.initializationType === 'element' ) {
 
-                _.extend ( this.options, $(element).data ( this.widgetName ) );
+                this.options = _.merge ( this.options, $(element).data ( this.widgetName ) );
 
             }
 
@@ -483,6 +502,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$element = $(element);
 
             this.guid = _.uniqueId ();
+
+            // DISABLED
+
+            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' ); //FIXME: are you sure you don't want to use presto.widgetFullName instead?
 
             // IF THERE'S AN ELEMENT OR A DEFAULT ELEMENT
 
@@ -557,7 +580,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( arguments.length === 0 ) {
 
-                return _.extend ( {}, this.options );
+                return _.extend ( {}, this.options ); //FIXME: maybe just clone it
 
             }
 
@@ -889,8 +912,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
 
-        _.extend ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ),
+        constructor = _.merge ( constructor, existingConstructor, {
+            _proto: _.extend ( {}, prototype ), //FIXME: maybe just clone
             _childConstructors: []
         });
 
@@ -944,7 +967,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* CONSTRUCTOR PROTOTYPE */
 
-        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+        constructor.prototype = _.merge ( basePrototype, proxiedPrototype, {
             constructor: constructor,
             namespace: namespace,
             widgetOriginalName: originalName,
@@ -1053,7 +1076,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( args.length ) {
 
-                    options = _.extend.apply ( null, [options].concat ( args ) );
+                    options = _.merge.apply ( null, [options].concat ( args ) );
 
                 }
 
@@ -1595,8 +1618,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* DRAGGABLE */
 
-//TODO: add also a constrainer in pixels
-
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -1611,14 +1632,29 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             selectors: {
                 handler: '.draggable-handler'
             },
+            draggable: _.true, //INFO: checks if we can drag it or not
             only_handlers: false, //INFO: only an handler can drag it around
             revertable: false, //INFO: on dragend take it back to the starting position
             axis: false, //INFO: limit the movements to this axis
-            $constrainer: false, //INFO: if we want to keep the draggable inside this container
-            constrainer_axis: false, //INFO: if we want to constrain the draggable only in a specific axis
-            updaters: { //TODO: rename this ugly name, it should something like updatable_checker
-                x: _.true, //TODO: add support for setting a custom value from this function
-                y: _.true //TODO: add support for setting a custom value from this function
+            constrainer: { //INFO: constrain the drag inside the $element or coordinates
+                $element: false, //INFO: if we want to keep the draggable inside this $element
+                coordinates: false, //INFO: if we want to keep the draggable inside the coordinates //TODO: implement
+                // {
+                //     x1: 0,
+                //     x2: 0,
+                //     y1: 0,
+                //     y2: 0
+                // }
+                constrain_center: false, //INFO: set the constrain type, it will constrain the whole shape, or the center
+                axis: false, //INFO: if we want to constrain the draggable only in a specific axis
+                tollerance: { //INFO: the amount of pixel flexibility that a constrainer has
+                    x: 0,
+                    y: 0
+                }
+            },
+            modifiers: { //INFO: it can modify the setted X and Y transforms values
+                x: _.true,
+                y: _.true
             },
             callbacks: {
                 beforestart: $.noop,
@@ -1634,13 +1670,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.draggable = this.element;
             this.$draggable = this.$element;
-            this.$handlers = this.$draggable.find ( this.options.selectors.handler );
+
+            if ( this.options.only_handlers ) {
+
+                this.$handlers = this.$draggable.find ( this.options.selectors.handler ); //FIXME: does it make sense to have handlers inside the $draggable?
+
+            }
 
         },
 
         _events: function () {
 
-            if ( !this.options.only_handlers ) {
+            if ( this.options.only_handlers ) {
+
+                this._on ( this.$handlers, $.Pointer.dragstart, this._start );
+                this._on ( this.$handlers, $.Pointer.dragmove, this._move );
+                this._on ( this.$handlers, $.Pointer.dragend, this._end );
+
+            } else {
 
                 this._on ( $.Pointer.dragstart, this._start );
                 this._on ( $.Pointer.dragmove, this._move );
@@ -1648,15 +1695,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            this._on ( this.$handlers, $.Pointer.dragstart, this._start );
-            this._on ( this.$handlers, $.Pointer.dragmove, this._move );
-            this._on ( this.$handlers, $.Pointer.dragend, this._end );
-
         },
 
         /* PRIVATE */
 
         _start: function ( event, data ) {
+
+            if ( !this.options.draggable () ) return;
 
             this._trigger ( 'beforestart' );
 
@@ -1665,31 +1710,61 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             var transform_str = this.$draggable.css ( 'transform' ),
                 matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
 
-            this.extraXY = {
+            this.initialXY = {
                 X: parseInt ( matrix[4], 10 ),
                 Y: parseInt ( matrix[5], 10 )
             };
 
-            this._trigger ( 'start', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
+            this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable } ) );
 
         },
 
-        _move: function ( event, data ) {
+        _move: function ( event, data ) { //TODO: make it more performant
+
+            if ( !this.options.draggable () ) return;
 
             if ( this.motion === false ) {
 
                 this.motion = true;
 
-                if ( this.options.$constrainer ) {
+                if ( this.options.constrainer.$element ) {
 
-                    var constrainer_offset = this.options.$constrainer.offset (),
+                    var constrainer_offset = this.options.constrainer.$element.offset (),
                         draggable_offset = this.$draggable.offset ();
 
-                    this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.extraXY.X );
-                    this.translateX_max = constrainer_offset.left + this.options.$constrainer.width () - ( ( draggable_offset.left - this.extraXY.X ) + this.$draggable.width () );
+                    this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
+                    this.translateX_max = constrainer_offset.left + this.options.$constrainer.width () - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
 
-                    this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.extraXY.Y );
-                    this.translateY_max = constrainer_offset.top + this.options.$constrainer.height () - ( ( draggable_offset.top - this.extraXY.Y ) + this.$draggable.height () );
+                    this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+                    this.translateY_max = constrainer_offset.top + this.options.$constrainer.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+
+                } else if ( this.options.constrainer.coordinates ) {
+
+                    var draggable_offset = this.$draggable.offset ();
+
+                    if ( !_.isUndefined ( this.options.constrainer.coordinates.x1 ) ) {
+
+                        this.translateX_min = this.options.constrainer.coordinates.x1 - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
+
+                    }
+
+                    if ( !_.isUndefined ( this.options.constrainer.coordinates.x2 ) ) {
+
+                        this.translateX_max = this.options.constrainer.coordinates.x2 - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
+
+                    }
+
+                    if ( !_.isUndefined ( this.options.constrainer.coordinates.y1 ) ) {
+
+                        this.translateY_min = this.options.constrainer.coordinates.y1 - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+
+                    }
+
+                    if ( !_.isUndefined ( this.options.constrainer.coordinates.y2 ) ) {
+
+                        this.translateY_max = this.options.constrainer.coordinates.y2 - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+
+                    }
 
                 }
 
@@ -1698,35 +1773,37 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             }
 
-            var translateX = this.extraXY.X + ( ( this.options.axis !== 'y' ) ? data.deltaXY.X : 0 ),
-                translateY = this.extraXY.Y + ( ( this.options.axis !== 'x' ) ? data.deltaXY.Y : 0 );
+            var translateX = this.initialXY.X + ( ( this.options.axis === 'y' ) ? 0 : data.deltaXY.X ),
+                translateY = this.initialXY.Y + ( ( this.options.axis === 'x' ) ? 0 : data.deltaXY.Y );
 
-            if ( this.options.$constrainer ) {
+            if ( this.options.constrainer.$element || this.options.constrainer.coordinates ) {
 
-                if ( this.options.constrainer_axis !== 'y' ) {
+                if ( this.options.constrainer.axis === 'x' ) {
 
-                    translateX = _.clamp ( this.translateX_min, translateX, this.translateX_max );
+                    translateX = _.clamp ( _.isUndefined ( this.translateX_min ) ? undefined : this.translateX_min - this.options.constrainer_tollerance.x, translateX, _.isUndefined ( this.translateX_max ) ? undefined : this.translateX_max + this.options.constrainer_tollerance.x );
 
-                }
+                } else if ( this.options.constrainer.axis === 'y' ) {
 
-                if ( this.options.constrainer_axis !== 'x' ) {
-
-                    translateY = _.clamp ( this.translateY_min, translateY, this.translateY_max );
+                    translateY = _.clamp ( _.isUndefined ( this.translateY_min ) ? undefined : this.translateY_min - this.options.constrainer_tollerance.y, translateY, _.isUndefined ( this.translateY_max ) ? undefined : this.translateY_max + this.options.constrainer_tollerance.y );
 
                 }
 
             }
 
-            var updatable_x = this.options.updaters.x ( translateX ),
-                updatable_y = this.options.updaters.y ( translateY );
+            var modifiedXY = {
+                X: this.options.modifiers.x ( translateX ),
+                Y: this.options.modifiers.y ( translateY )
+            };
 
-            this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( updatable_x ) ? ( updatable_x ? translateX : this.extraXY.X ) : updatable_x ) + 'px,' + ( _.isBoolean ( updatable_y ) ? ( updatable_y ? translateY : this.extraXY.Y ) : updatable_y ) + 'px,0)' );
+            this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : this.initialXY.X ) : modifiedXY.X ) + 'px,' + ( _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : this.initialXY.Y ) : modifiedXY.Y ) + 'px,0)' );
 
-            this._trigger ( 'move', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable } ) );
+            this._trigger ( 'move', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, $draggable: this.$draggable } ) );
 
         },
 
         _end: function ( event, data ) {
+
+            if ( !this.options.draggable () ) return;
 
             if ( this.motion === true ) {
 
@@ -1735,13 +1812,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                 if ( this.options.revertable ) {
 
-                    this.$draggable.css ( 'transform', 'translate3d(0,0,0)' ); //TODO: animate it
+                    this.$draggable.css ( 'transform', 'translate3d(' + this.initialXY.X + 'px,' + this.initialXY.Y + 'px,0)' ); //TODO: animate it
 
                 }
 
             }
 
-            this._trigger ( 'end', _.extend ( data, { draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
+            this._trigger ( 'end', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
 
         }
 
@@ -2155,7 +2232,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             }
         };
 
-        $.extend ( options, custom_options );
+        options = _.merge ( options, custom_options );
 
         // LOADING
 
@@ -2229,7 +2306,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             img: false
         };
 
-        $.extend ( options, custom_options );
+        options = _.merge ( options, custom_options );
 
         // NOTIFICATION
 
@@ -2296,7 +2373,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else if ( _.isPlainObject ( custom_options ) ) {
 
-            $.extend ( options, custom_options );
+            options = _.merge ( options, custom_options );
 
         }
 
@@ -2633,7 +2710,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             }
         };
 
-        $.extend ( options, custom_options );
+        options = _.merge ( options, custom_options );
 
         // RESETTING
 
@@ -3679,7 +3756,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             select: 'all'
         };
 
-        $.extend ( options, custom_options );
+        options = _.merge ( options, custom_options );
 
         /* SEARCHABLE */
 
@@ -4248,7 +4325,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* PUBLIC */
 
-        get: function () {
+        get: function () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
 
             return this.$input.prop ( 'checked' );
 
@@ -5673,7 +5750,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         } else if ( _.isPlainObject ( custom_options ) ) {
 
-            $.extend ( options, custom_options );
+            options = _.merge ( options, custom_options );
 
         }
 
@@ -6120,7 +6197,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             options = generate_options.apply ( null, arguments );
 
-            _.extend ( this.options, options );
+            this.options = _.merge ( this.options, options );
 
             this._update ();
 
@@ -6633,17 +6710,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
             this.$label = this.$handler_wrp.find ( '.slider-label' );
 
-            this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
-            this.required_step_width = this.options.step * this.one_step_width;
+            this.steps_nr = ( ( this.options.max - this.options.min ) / this.options.step );
 
-            this.dragging = false;
+            this._update_variables ();
 
         },
 
         _init: function () {
 
-            this.set ( this.options.value, true );
+            // this._update_positions ();
 
         },
 
@@ -6673,12 +6748,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 axis: 'x',
                 $constrainer: this.$bar_wrp,
                 constrainer_axis: 'x',
+                draggable: this._draggable.bind ( this ),
                 updaters: {
                     x: this._updatable.bind ( this ),
                     y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
                 },
                 callbacks: {
                     beforestart: this._handler_drag_beforestart.bind ( this ),
+                    move: this._handler_drag_move.bind ( this ),
                     end: this._handler_drag_end.bind ( this )
                 }
             });
@@ -6697,6 +6774,30 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
+        _update_positions: function () {
+
+            var percentage = ( ( this.options.value - this.options.min ) / this.options.step ) * 100 / this.steps_nr;
+
+            this.$handler_wrp.css ({
+                left: percentage + '%',
+                transform: 'none'
+            });
+
+            this.$highlighted.css ({
+                right: ( 100 - percentage ) + '%',
+                transform: 'none'
+            });
+
+        },
+
+        _update_variables: function () {
+
+            this.unhighlighted_width = this.$unhighlighted.width ();
+            this.unhighlighted_offset = this.$unhighlighted.offset ();
+            this.step_width = this.unhighlighted_width / this.steps_nr;
+
+        },
+
         /* CHANGE */
 
         _handler_change: function () {
@@ -6707,11 +6808,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* RESIZE */
 
-        _handler_resize: function ( event ) {
+        _handler_resize: function () {
 
-            this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
-            this.required_step_width = this.options.step * this.one_step_width;
+            this._update_variables ();
 
         },
 
@@ -6745,28 +6844,70 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         /* DRAG */
 
+        _draggable: function () {
+
+            return !this.options.disabled;
+
+        },
+
         _updatable: function ( distance ) {
 
-            return Math.ceil ( distance / this.one_step_width ) * this.one_step_width;
+            var left = distance % this.step_width;
+
+            if ( left >= this.step_width / 2 ) {
+
+                return distance - left + this.step_width;
+
+            } else {
+
+                return distance - left;
+
+            }
 
         },
 
         _handler_drag_beforestart: function () {
 
+            console.log("beforestart");
+
+            var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
+
             this.$handler_wrp.css ({
                 left: 0,
-                transform: 'translateX(' + parseFloat ( this.$handler_wrp.css ( 'left' ), 10 ) + 'px)'
+                transform: 'translate3d(' + translateX + 'px,0,0)'
             });
+
+            this.$highlighted.css ({
+                right: '100%',
+                transform: 'translate3d(' + translateX + 'px,0,0)'
+            });
+
+        },
+
+        _handler_drag_move: function ( data ) {
+
+            console.log("move");
+
+            this.$highlighted.css ( 'transform', 'translate3d(' + data.updatable_x + 'px,0,0)' );
+
+            this.$label.html ( this._round_value ( this.options.min + ( data.updatable_x / this.step_width * this.options.step ) ) );
 
         },
 
         _handler_drag_end: function ( data ) {
 
+            console.log("end");
+
             var transform_str = this.$handler_wrp.css ( 'transform' ),
                 matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
 
-            this.set ( Math.ceil ( parseFloat ( matrix[4], 10 ) / this.one_step_width ) * this.options.step, true );
+            var setted = this.set ( this.options.min + ( parseFloat ( matrix[4], 10 ) / this.step_width * this.options.step ) );
 
+            if ( !setted ) {
+
+                this._update_positions ();
+
+            }
 
         },
 
@@ -6777,9 +6918,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
             var click_pos = $.eventXY ( event ),
-                distance = click_pos.X - ( this.$highlighted.offset ().left + this.$highlighted.width () );
+                distance = this._updatable ( click_pos.X - this.unhighlighted_offset.left );
 
-            this.navigate_distance ( distance );
+            this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
 
         },
 
@@ -6791,33 +6932,27 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        set: function ( value, force ) {
-
-            return;
+        set: function ( value ) {
 
             value = _.clamp ( this.options.min, this._round_value ( value ), this.options.max );
 
-            if ( value !== this.options.value || force ) {
-
-                var width = ( ( value - this.options.min ) * 100 / ( this.options.max - this.options.min ) ) + '%';
-
-                this.$handler_wrp.css ({
-                    transform: 'none',
-                    left: width
-                });
-
-                this.$highlighted.css ( 'width', width );
+            if ( value !== this.options.value ) {
 
                 var callback = ( value > this.options.value ) ? 'increased' : 'decreased';
 
                 this.options.value = value;
 
-                this.$input.val ( value ).trigger ( 'change' );
+                this._update_positions ();
 
-                this.$label.html ( value );
+                this.$input.val ( value ).trigger ( 'change' );
 
                 this._trigger ( callback );
 
+                return true;
+
+            } else {
+
+                return false;
 
             }
 
@@ -6825,13 +6960,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         increase: function () {
 
-            this.set ( this.options.value + this.options.step );
+            return this.set ( this.options.value + this.options.step );
 
         },
 
         decrease: function () {
 
-            this.set ( this.options.value - this.options.step );
+            return this.set ( this.options.value - this.options.step );
 
         }
 
@@ -6844,13 +6979,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         $('.slider').each ( function () {
 
             var $slider = $(this),
-                $input = $slider.find ( 'input' ),
-                $min = $slider.find ( '.slider-min' ),
-                $max = $slider.find ( '.slider-max' ),
                 options = {
-                    min: Number($min.data ( 'min' ) || 0),
-                    max: Number($max.data ( 'max' ) || 100),
-                    value: Number($input.val () || 0),
+                    min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+                    max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+                    value: Number($slider.find ( 'input' ).val () || 0),
                     step: Number($slider.data ( 'step' ) || 1),
                     decimals: Number($slider.data ( 'decimals' ) || 0)
                 };
@@ -7528,7 +7660,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _get_tag_html: function ( tag_str ) {
 
-            return this._tmpl ( 'tag', _.extend ( { str: tag_str }, this.options.tag ) );
+            return this._tmpl ( 'tag', _.merge ( { str: tag_str }, this.options.tag ) );
 
         },
 

@@ -37,17 +37,15 @@
             this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
             this.$label = this.$handler_wrp.find ( '.slider-label' );
 
-            this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
-            this.required_step_width = this.options.step * this.one_step_width;
+            this.steps_nr = ( ( this.options.max - this.options.min ) / this.options.step );
 
-            this.dragging = false;
+            this._update_variables ();
 
         },
 
         _init: function () {
 
-            this.set ( this.options.value, true );
+            // this._update_positions ();
 
         },
 
@@ -77,12 +75,14 @@
                 axis: 'x',
                 $constrainer: this.$bar_wrp,
                 constrainer_axis: 'x',
+                draggable: this._draggable.bind ( this ),
                 updaters: {
                     x: this._updatable.bind ( this ),
                     y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
                 },
                 callbacks: {
                     beforestart: this._handler_drag_beforestart.bind ( this ),
+                    move: this._handler_drag_move.bind ( this ),
                     end: this._handler_drag_end.bind ( this )
                 }
             });
@@ -101,6 +101,30 @@
 
         },
 
+        _update_positions: function () {
+
+            var percentage = ( ( this.options.value - this.options.min ) / this.options.step ) * 100 / this.steps_nr;
+
+            this.$handler_wrp.css ({
+                left: percentage + '%',
+                transform: 'none'
+            });
+
+            this.$highlighted.css ({
+                right: ( 100 - percentage ) + '%',
+                transform: 'none'
+            });
+
+        },
+
+        _update_variables: function () {
+
+            this.unhighlighted_width = this.$unhighlighted.width ();
+            this.unhighlighted_offset = this.$unhighlighted.offset ();
+            this.step_width = this.unhighlighted_width / this.steps_nr;
+
+        },
+
         /* CHANGE */
 
         _handler_change: function () {
@@ -111,11 +135,9 @@
 
         /* RESIZE */
 
-        _handler_resize: function ( event ) {
+        _handler_resize: function () {
 
-            this.unhighlighted_width = this.$unhighlighted.width ();
-            this.one_step_width = this.unhighlighted_width / ( this.options.max - this.options.min );
-            this.required_step_width = this.options.step * this.one_step_width;
+            this._update_variables ();
 
         },
 
@@ -149,28 +171,70 @@
 
         /* DRAG */
 
+        _draggable: function () {
+
+            return !this.options.disabled;
+
+        },
+
         _updatable: function ( distance ) {
 
-            return Math.ceil ( distance / this.one_step_width ) * this.one_step_width;
+            var left = distance % this.step_width;
+
+            if ( left >= this.step_width / 2 ) {
+
+                return distance - left + this.step_width;
+
+            } else {
+
+                return distance - left;
+
+            }
 
         },
 
         _handler_drag_beforestart: function () {
 
+            console.log("beforestart");
+
+            var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
+
             this.$handler_wrp.css ({
                 left: 0,
-                transform: 'translateX(' + parseFloat ( this.$handler_wrp.css ( 'left' ), 10 ) + 'px)'
+                transform: 'translate3d(' + translateX + 'px,0,0)'
             });
+
+            this.$highlighted.css ({
+                right: '100%',
+                transform: 'translate3d(' + translateX + 'px,0,0)'
+            });
+
+        },
+
+        _handler_drag_move: function ( data ) {
+
+            console.log("move");
+
+            this.$highlighted.css ( 'transform', 'translate3d(' + data.updatable_x + 'px,0,0)' );
+
+            this.$label.html ( this._round_value ( this.options.min + ( data.updatable_x / this.step_width * this.options.step ) ) );
 
         },
 
         _handler_drag_end: function ( data ) {
 
+            console.log("end");
+
             var transform_str = this.$handler_wrp.css ( 'transform' ),
                 matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
 
-            this.set ( Math.ceil ( parseFloat ( matrix[4], 10 ) / this.one_step_width ) * this.options.step, true );
+            var setted = this.set ( this.options.min + ( parseFloat ( matrix[4], 10 ) / this.step_width * this.options.step ) );
 
+            if ( !setted ) {
+
+                this._update_positions ();
+
+            }
 
         },
 
@@ -181,9 +245,9 @@
             if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
 
             var click_pos = $.eventXY ( event ),
-                distance = click_pos.X - ( this.$highlighted.offset ().left + this.$highlighted.width () );
+                distance = this._updatable ( click_pos.X - this.unhighlighted_offset.left );
 
-            this.navigate_distance ( distance );
+            this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
 
         },
 
@@ -195,33 +259,27 @@
 
         },
 
-        set: function ( value, force ) {
-
-            return;
+        set: function ( value ) {
 
             value = _.clamp ( this.options.min, this._round_value ( value ), this.options.max );
 
-            if ( value !== this.options.value || force ) {
-
-                var width = ( ( value - this.options.min ) * 100 / ( this.options.max - this.options.min ) ) + '%';
-
-                this.$handler_wrp.css ({
-                    transform: 'none',
-                    left: width
-                });
-
-                this.$highlighted.css ( 'width', width );
+            if ( value !== this.options.value ) {
 
                 var callback = ( value > this.options.value ) ? 'increased' : 'decreased';
 
                 this.options.value = value;
 
-                this.$input.val ( value ).trigger ( 'change' );
+                this._update_positions ();
 
-                this.$label.html ( value );
+                this.$input.val ( value ).trigger ( 'change' );
 
                 this._trigger ( callback );
 
+                return true;
+
+            } else {
+
+                return false;
 
             }
 
@@ -229,13 +287,13 @@
 
         increase: function () {
 
-            this.set ( this.options.value + this.options.step );
+            return this.set ( this.options.value + this.options.step );
 
         },
 
         decrease: function () {
 
-            this.set ( this.options.value - this.options.step );
+            return this.set ( this.options.value - this.options.step );
 
         }
 
@@ -248,13 +306,10 @@
         $('.slider').each ( function () {
 
             var $slider = $(this),
-                $input = $slider.find ( 'input' ),
-                $min = $slider.find ( '.slider-min' ),
-                $max = $slider.find ( '.slider-max' ),
                 options = {
-                    min: Number($min.data ( 'min' ) || 0),
-                    max: Number($max.data ( 'max' ) || 100),
-                    value: Number($input.val () || 0),
+                    min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+                    max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+                    value: Number($slider.find ( 'input' ).val () || 0),
                     step: Number($slider.data ( 'step' ) || 1),
                     decimals: Number($slider.data ( 'decimals' ) || 0)
                 };

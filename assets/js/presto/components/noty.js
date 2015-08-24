@@ -27,7 +27,7 @@
 
         } else if ( _.isPlainObject ( custom_options ) ) {
 
-            $.extend ( options, custom_options );
+            options = _.merge ( options, custom_options );
 
         }
 

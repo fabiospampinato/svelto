@@ -19,7 +19,7 @@
             img: false
         };
 
-        $.extend ( options, custom_options );
+        options = _.merge ( options, custom_options );
 
         // NOTIFICATION
 

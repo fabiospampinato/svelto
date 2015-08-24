@@ -166,7 +166,7 @@
 
             options = generate_options.apply ( null, arguments );
 
-            _.extend ( this.options, options );
+            this.options = _.merge ( this.options, options );
 
             this._update ();
 

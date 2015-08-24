@@ -73,7 +73,7 @@
 
         /* PUBLIC */
 
-        get: function () {
+        get: function () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
 
             return this.$input.prop ( 'checked' );
 
