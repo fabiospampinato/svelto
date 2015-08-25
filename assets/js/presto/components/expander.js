@@ -21,8 +21,8 @@
                 close: 250
             },
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 

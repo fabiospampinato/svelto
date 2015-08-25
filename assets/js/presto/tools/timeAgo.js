@@ -15,7 +15,7 @@
             timestamp: false,
             title: false,
             callbacks: {
-                update: $.noop
+                update: _.noop
             }
         },
 

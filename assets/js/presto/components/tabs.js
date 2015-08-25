@@ -26,7 +26,7 @@
             },
             indicator_delay: 40,
             callbacks: {
-                select: $.noop
+                select: _.noop
             }
         },
 

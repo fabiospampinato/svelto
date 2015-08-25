@@ -13,10 +13,10 @@
 
         options: {
             callbacks: {
-                add: $.noop,
-                update: $.noop,
-                remove: $.noop,
-                clear: $.noop
+                add: _.noop,
+                update: _.noop,
+                remove: _.noop,
+                clear: _.noop
             }
         },
 

@@ -16,9 +16,9 @@
                 flipper: '.flipper'
             },
             callbacks: {
-                font: $.noop,
-                back: $.noop,
-                flipped: $.noop
+                font: _.noop,
+                back: _.noop,
+                flipped: _.noop
             }
         },
 

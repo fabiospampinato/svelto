@@ -54,9 +54,9 @@
             escape: true, //INFO: Escape potential XSS characters
             deburr: false, //INFO: Replace non latin basic letters
             callbacks: {
-                update: $.noop,
-                add: $.noop,
-                remove: $.noop
+                update: _.noop,
+                add: _.noop,
+                remove: _.noop
             }
         },
 

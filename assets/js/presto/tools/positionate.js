@@ -24,7 +24,7 @@
                 all: ['bottom', 'right', 'left', 'top']
             },
             callbacks: {
-                positionated: $.noop
+                positionated: _.noop
             }
         }, custom_options );
 

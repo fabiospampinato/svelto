@@ -40,10 +40,10 @@
                 y: _.true
             },
             callbacks: {
-                beforestart: $.noop,
-                start: $.noop,
-                move: $.noop,
-                end: $.noop
+                beforestart: _.noop,
+                start: _.noop,
+                move: _.noop,
+                end: _.noop
             }
         },
 

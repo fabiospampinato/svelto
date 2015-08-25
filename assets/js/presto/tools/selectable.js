@@ -35,7 +35,7 @@
             selector: 'tbody tr:not(.empty)',
             selected_class: 'selected',
             callbacks: {
-                select: $.noop
+                select: _.noop
             }
         },
 

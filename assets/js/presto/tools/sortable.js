@@ -31,7 +31,7 @@
                 }
             },
             callbacks: {
-                sort: $.noop
+                sort: _.noop
             }
         },
 

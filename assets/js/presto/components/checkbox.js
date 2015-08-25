@@ -13,8 +13,8 @@
 
         options: {
             callbacks: {
-                checked: $.noop,
-                unchecked: $.noop
+                checked: _.noop,
+                unchecked: _.noop
             }
         },
 

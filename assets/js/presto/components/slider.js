@@ -18,8 +18,8 @@
             step: 1,
             decimals: 0,
             callbacks: {
-                increased: $.noop,
-                decreased: $.noop
+                increased: _.noop,
+                decreased: _.noop
             }
         },
 

@@ -20,7 +20,7 @@
             default_color: '#ff0000',
             live: true,
             callbacks: {
-                change: $.noop
+                change: _.noop
             }
         },
 

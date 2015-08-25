@@ -22,7 +22,7 @@
                 close: 150
             },
             callbacks: {
-                close: $.noop
+                close: _.noop
             }
         },
 

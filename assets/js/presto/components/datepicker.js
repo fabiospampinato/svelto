@@ -26,8 +26,8 @@
                 selected: null
             },
             callbacks: {
-                change: $.noop,
-                refresh: $.noop
+                change: _.noop,
+                refresh: _.noop
             }
         },
 

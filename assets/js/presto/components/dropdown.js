@@ -20,8 +20,8 @@
 
         options: {
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 

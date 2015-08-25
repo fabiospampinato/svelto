@@ -111,12 +111,12 @@
 
         },
 
-        _getCreateOptions: $.noop,
-        _getCreateEventData: $.noop,
-        _create: $.noop,
-        _variables: $.noop,
-        _init: $.noop,
-        _events: $.noop,
+        _getCreateOptions: _.noop,
+        _getCreateEventData: _.noop,
+        _create: _.noop,
+        _variables: _.noop,
+        _init: _.noop,
+        _events: _.noop,
 
         destroy: function () {
 
@@ -126,7 +126,7 @@
 
         },
 
-        _destroy: $.noop,
+        _destroy: _.noop,
 
         widget: function () {
 

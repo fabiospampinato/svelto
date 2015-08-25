@@ -17,7 +17,7 @@
             minimum_width: 0,
             minimum_height: 0,
             callbacks: {
-                update: $.noop
+                update: _.noop
             }
         },
 

@@ -45,9 +45,9 @@
 
         options: {
             callbacks: {
-                open: $.noop,
-                close: $.noop,
-                change: $.noop
+                open: _.noop,
+                close: _.noop,
+                change: _.noop
             }
         },
 

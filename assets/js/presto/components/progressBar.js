@@ -89,8 +89,8 @@
             decimals: 0,
 
             callbacks: {
-                update: $.noop,
-                full: $.noop
+                update: _.noop,
+                full: _.noop
             }
         },
 

@@ -16,8 +16,8 @@
                 closer: '.modal-closer'
             },
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 

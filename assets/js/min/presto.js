@@ -551,12 +551,12 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _getCreateOptions: $.noop,
-        _getCreateEventData: $.noop,
-        _create: $.noop,
-        _variables: $.noop,
-        _init: $.noop,
-        _events: $.noop,
+        _getCreateOptions: _.noop,
+        _getCreateEventData: _.noop,
+        _create: _.noop,
+        _variables: _.noop,
+        _init: _.noop,
+        _events: _.noop,
 
         destroy: function () {
 
@@ -566,7 +566,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _destroy: $.noop,
+        _destroy: _.noop,
 
         widget: function () {
 
@@ -1130,7 +1130,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             minimum_width: 0,
             minimum_height: 0,
             callbacks: {
-                update: $.noop
+                update: _.noop
             }
         },
 
@@ -1657,10 +1657,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 y: _.true
             },
             callbacks: {
-                beforestart: $.noop,
-                start: $.noop,
-                move: $.noop,
-                end: $.noop
+                beforestart: _.noop,
+                start: _.noop,
+                move: _.noop,
+                end: _.noop
             }
         },
 
@@ -2706,7 +2706,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 all: ['bottom', 'right', 'left', 'top']
             },
             callbacks: {
-                positionated: $.noop
+                positionated: _.noop
             }
         }, custom_options );
 
@@ -2845,7 +2845,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             selector: 'tbody tr:not(.empty)',
             selected_class: 'selected',
             callbacks: {
-                select: $.noop
+                select: _.noop
             }
         },
 
@@ -3156,7 +3156,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 }
             },
             callbacks: {
-                sort: $.noop
+                sort: _.noop
             }
         },
 
@@ -3345,10 +3345,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             callbacks: {
-                add: $.noop,
-                update: $.noop,
-                remove: $.noop,
-                clear: $.noop
+                add: _.noop,
+                update: _.noop,
+                remove: _.noop,
+                clear: _.noop
             }
         },
 
@@ -3903,8 +3903,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 close: 250
             },
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 
@@ -4002,9 +4002,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 flipper: '.flipper'
             },
             callbacks: {
-                font: $.noop,
-                back: $.noop,
-                flipped: $.noop
+                font: _.noop,
+                back: _.noop,
+                flipped: _.noop
             }
         },
 
@@ -4076,7 +4076,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 close: 150
             },
             callbacks: {
-                close: $.noop
+                close: _.noop
             }
         },
 
@@ -4261,8 +4261,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             callbacks: {
-                checked: $.noop,
-                unchecked: $.noop
+                checked: _.noop,
+                unchecked: _.noop
             }
         },
 
@@ -4394,7 +4394,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             default_color: '#ff0000',
             live: true,
             callbacks: {
-                change: $.noop
+                change: _.noop
             }
         },
 
@@ -4787,8 +4787,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 selected: null
             },
             callbacks: {
-                change: $.noop,
-                refresh: $.noop
+                change: _.noop,
+                refresh: _.noop
             }
         },
 
@@ -5160,8 +5160,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 
@@ -5542,8 +5542,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 closer: '.modal-closer'
             },
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 
@@ -5631,8 +5631,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 
@@ -5838,7 +5838,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                           size: 'xsmall',
                           css: '',
                           text: '',
-                          onClick: $.noop
+                          onClick: _.noop
                      }],
             */
 
@@ -5849,8 +5849,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             ttl: 3500,
 
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 
@@ -6116,8 +6116,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             decimals: 0,
 
             callbacks: {
-                update: $.noop,
-                full: $.noop
+                update: _.noop,
+                full: _.noop
             }
         },
 
@@ -6248,7 +6248,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             callbacks: {
-                checked: $.noop
+                checked: _.noop
             }
         },
 
@@ -6477,9 +6477,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         options: {
             callbacks: {
-                open: $.noop,
-                close: $.noop,
-                change: $.noop
+                open: _.noop,
+                close: _.noop,
+                change: _.noop
             }
         },
 
@@ -6687,8 +6687,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             step: 1,
             decimals: 0,
             callbacks: {
-                increased: $.noop,
-                decreased: $.noop
+                increased: _.noop,
+                decreased: _.noop
             }
         },
 
@@ -7002,8 +7002,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             step: 1,
             decimals: 0,
             callbacks: {
-                increase: $.noop,
-                decrease: $.noop
+                increase: _.noop,
+                decrease: _.noop
             }
         },
 
@@ -7170,8 +7170,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 off: 'gray'
             },
             callbacks: {
-                checked: $.noop,
-                unchecked: $.noop
+                checked: _.noop,
+                unchecked: _.noop
             }
         },
 
@@ -7403,7 +7403,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             },
             indicator_delay: 40,
             callbacks: {
-                select: $.noop
+                select: _.noop
             }
         },
 
@@ -7598,9 +7598,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             escape: true, //INFO: Escape potential XSS characters
             deburr: false, //INFO: Replace non latin basic letters
             callbacks: {
-                update: $.noop,
-                add: $.noop,
-                remove: $.noop
+                update: _.noop,
+                add: _.noop,
+                remove: _.noop
             }
         },
 
@@ -7986,7 +7986,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             timestamp: false,
             title: false,
             callbacks: {
-                update: $.noop
+                update: _.noop
             }
         },
 

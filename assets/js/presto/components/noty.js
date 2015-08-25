@@ -119,7 +119,7 @@
                           size: 'xsmall',
                           css: '',
                           text: '',
-                          onClick: $.noop
+                          onClick: _.noop
                      }],
             */
 
@@ -130,8 +130,8 @@
             ttl: 3500,
 
             callbacks: {
-                open: $.noop,
-                close: $.noop
+                open: _.noop,
+                close: _.noop
             }
         },
 
