@@ -51,10 +51,6 @@
 
         _variables: function () {
 
-            console.log("------------");
-            console.log("this.options: ", this.options);
-            console.log("this.options.only_handlers: ", this.options.only_handlers);
-
             this.draggable = this.element;
             this.$draggable = this.$element;
 
@@ -70,15 +66,11 @@
 
             if ( this.options.only_handlers ) {
 
-                console.log("binding events on handlers");
-
                 this._on ( this.$handlers, $.Pointer.dragstart, this._start );
                 this._on ( this.$handlers, $.Pointer.dragmove, this._move );
                 this._on ( this.$handlers, $.Pointer.dragend, this._end );
 
             } else {
-
-                console.log("binding events");
 
                 this._on ( $.Pointer.dragstart, this._start );
                 this._on ( $.Pointer.dragmove, this._move );
@@ -92,11 +84,9 @@
 
         _start: function ( event, data ) {
 
-            console.log("starting");
+            this.isDraggable = this.options.draggable ();
 
-            if ( !this.options.draggable () ) return;
-
-            console.log("started");
+            if ( !this.isDraggable ) return;
 
             this._trigger ( 'beforestart' );
 
@@ -116,9 +106,7 @@
 
         _move: function ( event, data ) { //TODO: make it more performant
 
-            console.log("moving");
-
-            if ( !this.options.draggable () ) return;
+            if ( !this.isDraggable ) return;
 
             if ( this.motion === false ) {
 
@@ -134,9 +122,6 @@
 
                     this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
                     this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? this.$draggable.height () / 2 : 0 );
-
-                    console.log("this.translateY_min: ", this.translateY_min);
-                    console.log("this.translateY_max: ", this.translateY_max);
 
                 } else if ( this.options.constrainer.coordinates ) {
 
@@ -205,9 +190,7 @@
 
         _end: function ( event, data ) {
 
-            console.log("end");
-
-            if ( !this.options.draggable () ) return;
+            if ( !this.isDraggable ) return;
 
             if ( this.motion === true ) {
 

@@ -1,8 +1,7 @@
 
 /* SLIDER */
 
-//TODO: maybe use a map pointer with the number inside instead of the handler we are using right now (or a tooltip)
-//TODO: add a switch-like border when the handler is active (using :before)
+//TODO: maybe use a tooltip with the number inside instead of the handler we are using right now
 
 .slider {
 
@@ -50,8 +49,7 @@
             position: absolute;
             left: 0;
             margin-top: - ( $slider-handler-half-size + ( $slider-unhighlighted-height / 2 ) );
-            margin-left: - $slider-handler-half-size; //FIXME: is it needed
-            opacity: 0.5; //FIXME: remove it
+            margin-left: - $slider-handler-half-size;
 
             & > .slider-handler {
 

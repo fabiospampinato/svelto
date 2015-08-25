@@ -1668,10 +1668,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _variables: function () {
 
-            console.log("------------");
-            console.log("this.options: ", this.options);
-            console.log("this.options.only_handlers: ", this.options.only_handlers);
-
             this.draggable = this.element;
             this.$draggable = this.$element;
 
@@ -1687,15 +1683,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.options.only_handlers ) {
 
-                console.log("binding events on handlers");
-
                 this._on ( this.$handlers, $.Pointer.dragstart, this._start );
                 this._on ( this.$handlers, $.Pointer.dragmove, this._move );
                 this._on ( this.$handlers, $.Pointer.dragend, this._end );
 
             } else {
-
-                console.log("binding events");
 
                 this._on ( $.Pointer.dragstart, this._start );
                 this._on ( $.Pointer.dragmove, this._move );
@@ -1709,11 +1701,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _start: function ( event, data ) {
 
-            console.log("starting");
+            this.isDraggable = this.options.draggable ();
 
-            if ( !this.options.draggable () ) return;
-
-            console.log("started");
+            if ( !this.isDraggable ) return;
 
             this._trigger ( 'beforestart' );
 
@@ -1733,9 +1723,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _move: function ( event, data ) { //TODO: make it more performant
 
-            console.log("moving");
-
-            if ( !this.options.draggable () ) return;
+            if ( !this.isDraggable ) return;
 
             if ( this.motion === false ) {
 
@@ -1751,9 +1739,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
                     this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
                     this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? this.$draggable.height () / 2 : 0 );
-
-                    console.log("this.translateY_min: ", this.translateY_min);
-                    console.log("this.translateY_max: ", this.translateY_max);
 
                 } else if ( this.options.constrainer.coordinates ) {
 
@@ -1822,9 +1807,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _end: function ( event, data ) {
 
-            console.log("end");
-
-            if ( !this.options.draggable () ) return;
+            if ( !this.isDraggable ) return;
 
             if ( this.motion === true ) {
 
@@ -6729,12 +6712,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _init: function () {
-
-            // this._update_positions (); //FIXME
-
-        },
-
         _events: function () {
 
             /* INPUT CHANGE */
@@ -6762,11 +6739,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 axis: 'x',
                 constrainer: {
                     $element: this.$bar_wrp,
+                    constrain_center: true,
                     axis: 'x'
                 },
                 modifiers: {
                     x: this.modifier_x.bind ( this ),
-                    y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
                 },
                 callbacks: {
                     beforestart: this._handler_drag_beforestart.bind ( this ),
@@ -6865,7 +6842,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        modifier_x: function ( distance ) {
+        modifier_x: function ( distance ) { //TODO: maybe we should export this function as a lodash mixin
 
             var left = distance % this.step_width;
 
@@ -6899,9 +6876,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _handler_drag_move: function ( data ) {
 
-            this.$highlighted.css ( 'transform', 'translate3d(' + data.updatable_x + 'px,0,0)' );
+            this.$highlighted.css ( 'transform', 'translate3d(' + data.modifiedXY.X + 'px,0,0)' );
 
-            this.$label.html ( this._round_value ( this.options.min + ( data.updatable_x / this.step_width * this.options.step ) ) );
+            this.$label.html ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
 
         },
 

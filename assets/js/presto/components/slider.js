@@ -43,12 +43,6 @@
 
         },
 
-        _init: function () {
-
-            // this._update_positions (); //FIXME
-
-        },
-
         _events: function () {
 
             /* INPUT CHANGE */
@@ -76,11 +70,11 @@
                 axis: 'x',
                 constrainer: {
                     $element: this.$bar_wrp,
+                    constrain_center: true,
                     axis: 'x'
                 },
                 modifiers: {
                     x: this.modifier_x.bind ( this ),
-                    y: _.true //FIXME: should deep extend, I shouldn't be required to add it here
                 },
                 callbacks: {
                     beforestart: this._handler_drag_beforestart.bind ( this ),
@@ -179,7 +173,7 @@
 
         },
 
-        modifier_x: function ( distance ) {
+        modifier_x: function ( distance ) { //TODO: maybe we should export this function as a lodash mixin
 
             var left = distance % this.step_width;
 
@@ -213,9 +207,9 @@
 
         _handler_drag_move: function ( data ) {
 
-            this.$highlighted.css ( 'transform', 'translate3d(' + data.updatable_x + 'px,0,0)' );
+            this.$highlighted.css ( 'transform', 'translate3d(' + data.modifiedXY.X + 'px,0,0)' );
 
-            this.$label.html ( this._round_value ( this.options.min + ( data.updatable_x / this.step_width * this.options.step ) ) );
+            this.$label.html ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
 
         },
 
