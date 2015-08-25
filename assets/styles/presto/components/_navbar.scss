@@ -1,31 +1,38 @@
 
+//TODO: maybe we should wrap header, main and footer into another container, so that it will be easier to do the CSS work here
+
+//INFO: The attached navbar must be placed before the header tag, otherwise the CSS selectors will not work
+
 /* MIXINS */
 
 @mixin open () {
 
-    &.left > .navbar {
-        left: 0;
+    & > .navbar {
+        transform: translate3d(0,0,0) !important;
+        pointer-events: auto;
     }
 
-    &.right > .navbar {
-        right: 0;
-    }
-
-    &.top > .navbar {
-        top: 0;
-    }
-
-    &.bottom > .navbar {
-        bottom: 0;
+    & > .background {
+        pointer-events: auto;
+        opacity: 1;
     }
 
 }
 
 @mixin attach () {
 
+    & > .navbar {
+        @include z-depth ( $navbar-attached-z-depth );
+    }
+
+    & > .background {
+        pointer-events: none;
+        opacity: 0;
+    }
+
     &.left {
 
-        & ~ header, & ~ main {
+        & ~ header, & ~ main, & ~ footer {
             margin-left: $navbar-vertical-width;
         }
 
@@ -35,7 +42,7 @@
 
         &.slim {
 
-            & ~ header, & ~ main {
+            & ~ header, & ~ main, & ~ footer {
                 margin-left: $navbar-slim-vertical-width;
             }
 
@@ -49,7 +56,7 @@
 
     &.right {
 
-        & ~ header, & ~ main {
+        & ~ header, & ~ main, & ~ footer {
             margin-right: $navbar-vertical-width;
         }
 
@@ -59,7 +66,7 @@
 
         &.slim {
 
-            & ~ header, & ~ main {
+            & ~ header, & ~ main, & ~ footer {
                 margin-right: $navbar-slim-vertical-width;
             }
 
@@ -73,22 +80,62 @@
 
     &.top {
 
-        & ~ header, & ~ main {
-            margin-top: $toolbar-height + $layout-spacing + $navbar-horizontal-height;
+        & ~ header {
+            margin-top: $navbar-horizontal-height;
+            margin-bottom: - $navbar-horizontal-height;
         }
 
-        body.fixed-header > & ~ header > .header {
-            top: $navbar-horizontal-height;
+        & ~ main {
+            margin-top: $navbar-horizontal-height + $layout-spacing;
+        }
+
+        body.fixed-header > & {
+
+            & ~ header {
+
+                margin-top: $toolbar-height + $navbar-horizontal-height;
+                margin-bottom: - ( $navbar-horizontal-height - $layout-spacing );
+
+                & > .header {
+                    top: $navbar-horizontal-height;
+                }
+
+            }
+
+            & ~ main {
+                margin-top: $navbar-horizontal-height;
+            }
+
         }
 
         &.slim {
 
-            & ~ header, & ~ main {
-                margin-top: $toolbar-height + $layout-spacing + $navbar-slim-horizontal-height;
+            & ~ header {
+                margin-top: $navbar-slim-horizontal-height;
+                margin-bottom: - $navbar-slim-horizontal-height;
             }
 
-            body.fixed-header > & ~ header > .header {
-                top: $navbar-slim-horizontal-height;
+            & ~ main {
+                margin-top: $navbar-slim-horizontal-height + $layout-spacing;
+            }
+
+            body.fixed-header > & {
+
+                & ~ header {
+
+                    margin-top: $toolbar-height + $navbar-slim-horizontal-height;
+                    margin-bottom: - ( $navbar-slim-horizontal-height - $layout-spacing );
+
+                    & > .header {
+                        top: $navbar-slim-horizontal-height;
+                    }
+
+                }
+
+                & ~ main {
+                    margin-top: $navbar-slim-horizontal-height;
+                }
+
             }
 
         }
@@ -97,13 +144,23 @@
 
     &.bottom {
 
-        & ~ header, & ~ main {
+        & ~ main {
+            margin-bottom: $navbar-horizontal-height;
+        }
+
+        & ~ footer {
+            margin-top: - $navbar-horizontal-height;
             margin-bottom: $navbar-horizontal-height;
         }
 
         &.slim {
 
-            & ~ header, & ~ main {
+            & ~ main {
+                margin-bottom: $navbar-slim-horizontal-height;
+            }
+
+            & ~ footer {
+                margin-top: - $navbar-slim-horizontal-height;
                 margin-bottom: $navbar-slim-horizontal-height;
             }
 
@@ -115,12 +172,7 @@
 
 /* NAVBAR */
 
-//TODO: Use inheritance, don't copy over and over again the mixins content...
-//TODO: Add detached, detached-xs, detached-sm, detached-md, detached-lg
-
 .navbar-wrp {
-
-    float: none !important;
 
     &.left, &.right {
 
@@ -139,11 +191,12 @@
     &.left {
 
         & > .navbar {
-            left: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
+            left: 0;
+            transform: translate3d(-($navbar-vertical-width + $navbar-vertical-extra-distance),0,0);
         }
 
         &.slim > .navbar {
-            left: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
+            transform: translate3d(-($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance),0,0);
         }
 
     }
@@ -151,11 +204,12 @@
     &.right {
 
         & > .navbar {
-            right: - ( $navbar-vertical-width + $navbar-extra-hidden-distance );
+            right: 0;
+            transform: translate3d($navbar-vertical-width + $navbar-vertical-extra-distance,0,0);
         }
 
         &.slim > .navbar {
-            right: - ( $navbar-slim-vertical-width + $navbar-extra-hidden-distance );
+            transform: translate3d($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance,0,0);
         }
 
     }
@@ -163,8 +217,8 @@
     &.top, &.bottom {
 
         & > .navbar {
-            left: 0;
             right: 0;
+            left: 0;
             height: $navbar-horizontal-height;
         }
 
@@ -177,11 +231,12 @@
     &.top {
 
         & > .navbar {
-            top: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
+            top: 0;
+            transform: translate3d(0,-($navbar-horizontal-height + $navbar-horizontal-extra-distance),0);
         }
 
         &.slim > .navbar {
-            top: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
+            transform: translate3d(0,-($navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance),0);
         }
 
     }
@@ -189,54 +244,50 @@
     &.bottom {
 
         & > .navbar {
-            bottom: - ( $navbar-horizontal-height + $navbar-extra-hidden-distance );
+            bottom: 0;
+            transform: translate3d(0,$navbar-horizontal-height + $navbar-horizontal-extra-distance,0);
         }
 
         &.slim > .navbar {
-            bottom: - ( $navbar-slim-horizontal-height + $navbar-extra-hidden-distance );
+            transform: translate3d(0,$navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance,0);
         }
 
     }
 
     & > .navbar {
-        @include z-depth ( 5 );
-        border-width: 0;
-        float: none; //FIXME: this is a fix for the .left and .right classes
-        margin: 0;
+        @include z-depth ( $navbar-z-depth );
         position: fixed;
-        transition: top 0.3s ease 0s, right 0.3s ease 0s, bottom 0.3s ease 0s, left 0.3s ease 0s;
-        z-index: 20;
+        z-index: $navbar-z-index;
+        margin: 0;
+        transition: transform $navbar-transition-transform-duration;
+        pointer-events: none;
+        border-width: 0; //FIXME: when we remove the default container's outlined also remove this one
         border-radius: 0;
     }
 
     & > .background {
-        background-color: rgba(0, 0, 0, 0.5);
+        @include fill-fixed ();
+        z-index: $navbar-background-z-index;
         cursor: pointer;
-        opacity: 0;
-        position: fixed;
-        z-index: 19;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        right: 0;
+        transition: opacity $navbar-background-transition-opacity-duration;
         pointer-events: none;
-        transition: opacity 0.3s ease 0s;
+        opacity: 0;
+        background-color: $navbar-background-color;
     }
 
-    &.opened > .background {
-        pointer-events: auto;
-        opacity: 1;
-    }
+    // OPENED
 
-    &.opened, &.attached-xs {
+    &.opened {
         @include open ();
     }
 
-    //INFO: for the `attached-*` classes to work the navbars must be put before the header
+    // ATTACHED
 
     &.attached-xs {
+        @include open ();
         @include attach ();
     }
+
 
     @include from-small {
 

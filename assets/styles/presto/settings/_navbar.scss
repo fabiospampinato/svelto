@@ -1,10 +1,36 @@
 
 /* NAVBAR */
 
+$navbar-z-depth: 5;
+
+$navbar-z-index: 20;
+
+$navbar-transition-transform-duration: 0.3s;
+
+/* BACKGROUND */
+
+$navbar-background-z-index: 19;
+
+$navbar-background-color: rgba(0, 0, 0, 0.5);
+
+$navbar-background-transition-opacity-duration: 0.3s;
+
+/* SIZES */
+
 $navbar-horizontal-height: 120px;
-$navbar-slim-horizontal-height: 64px;
+$navbar-horizontal-extra-distance: 40px;
 
 $navbar-vertical-width: 240px;
-$navbar-slim-vertical-width: 64px;
+$navbar-vertical-extra-distance: 40px;
 
-$navbar-extra-hidden-distance: 40px;
+/* SLIM SIZES */
+
+$navbar-slim-horizontal-height: 64px;
+$navbar-slim-horizontal-extra-distance: 40px;
+
+$navbar-slim-vertical-width: 64px;
+$navbar-slim-vertical-extra-distance: 40px;
+
+/* ATTACHED */
+
+$navbar-attached-z-depth: 5;

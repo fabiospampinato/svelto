@@ -45,6 +45,17 @@ body {
     flex-direction: column;
     width: 100%;
 
+    & > header, & > main, & > footer {
+        transition-property: margin;
+        transition-duration: $navbar-transition-transform-duration;
+    }
+
+    & > header > .header {
+        transition-property: top, right, bottom, left;
+        transition-duration: $navbar-transition-transform-duration;
+        margin-bottom: 0;
+    }
+
     & > main {
         flex-grow: 1;
         margin-top: $layout-spacing;
@@ -60,16 +71,19 @@ body {
         & > header {
 
             margin-top: $toolbar-height;
-            transition: margin $transition-duration-default;
 
             & > .header {
+
                 position: fixed;
                 z-index: 5;
                 top: 0;
                 right: 0;
                 left: 0;
-                transition-duration: $transition-duration-default;
-                transition-property: top, right, bottom, left;
+
+                & > *:last-child {
+                    margin-bottom: - $layout-spacing !important;
+                }
+
             }
 
         }

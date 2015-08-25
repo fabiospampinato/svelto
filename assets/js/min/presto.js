@@ -5577,7 +5577,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* NAVBAR */
 
-//TODO: make it work better with attachables: se è già aperta non fare niente al background
+//TODO: Add flick capabilities (show and hide on flick in the right direction and starting within the right zone)
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -5601,30 +5601,24 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _variables: function () {
 
             this.$navbar = this.$element;
-            this.id = this.$navbar.attr ( 'id' );
             this.$wrp = this.$navbar.parent ();
+
+            this.id = this.$navbar.attr ( 'id' );
+
             this.$closers = this.$wrp.find ( '.navbar-closer' );
+            this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
 
             this.opened = this.$wrp.hasClass ( 'opened' );
 
-            this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
-
-            this._bind_closer_click ();
-            this._bind_trigger_click ();
-
         },
 
-        /* CLOSER CLICK */
+        _events: function () {
 
-        _bind_closer_click: function () {
+            /* CLOSER CLICK */
 
             this._on ( this.$closers, 'click', this.close );
 
-        },
-
-        /* TRIGGER CLICK */
-
-        _bind_trigger_click: function () {
+            /* TRIGGER CLICK */
 
             this._on ( this.$triggers, 'click', this.open );
 
@@ -5636,19 +5630,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( _.isUndefined ( force ) ) {
 
-                this.opened = !this.opened;
-
-            } else {
-
-                if ( this.opened === force ) return;
-
-                this.opened = force;
+                force = !this.opened;
 
             }
 
-            this.$wrp.toggleClass ( 'opened', this.opened );
+            if ( force !== this.opened ) {
 
-            this._trigger ( this.opened ? 'open' : 'close' );
+                this.opened = force;
+
+                this.$wrp.toggleClass ( 'opened', this.opened );
+
+                this._trigger ( this.opened ? 'open' : 'close' );
+
+            }
 
         },
 

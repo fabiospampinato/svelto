@@ -27,6 +27,13 @@ append main
         +navbar-btn(false, "navigation-expand-more", "bottom-attached")
         +navbar-btn("Right", "navigation-chevron-right", "right-attached")
 
+    +divider Actions
+
+    +multiple
+        +button-simple("navbar_toggle_fixed_header()") Toggle fixed header
+        +button-simple("navbar_remove_header()") Remove header
+        +button-simple("navbar_remove_footer()") Remove footer
+
 append body-start
     +navbar("left-attached", "left", false, "lg" ) Left Attached
     +navbar("top-attached", "top", true, "lg" ) Top Attached
@@ -43,3 +50,17 @@ append body
     +navbar("top-slim", "top", true) Top slim
     +navbar("bottom-slim", "bottom", true) Bottom slim
     +navbar("right-slim", "right", true) Right slim
+
+append body-end
+    +script.
+        function navbar_toggle_fixed_header () {
+            $('body').toggleClass ( 'fixed-header' );
+        }
+
+        function navbar_remove_header () {
+            $('header').remove ();
+        }
+
+        function navbar_remove_footer () {
+            $('footer').remove ();
+        }
