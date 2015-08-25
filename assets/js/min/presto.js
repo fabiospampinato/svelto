@@ -4377,7 +4377,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 //TODO: add support for alpha channel
 //TODO: add a $bgs variable where we update the background
-//TODO: add drag on the wrps, not on the handlers... so that we can also drag if we are not hovering the handler, or even if we are
 //TODO: Add an input inside, so that it works also without an external input
 
 ;(function ( $, _, window, document, undefined ) {
@@ -4414,12 +4413,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             this.color = new HexColor ();
             this.hex = '';
 
-            this.sb_wrp_offset = this.$sb_wrp.offset ();
-            this.sb_wrp_width = this.$sb_wrp.width ();
-            this.sb_wrp_height = this.$sb_wrp.height ();
+            this._update_variables ();
 
-            this.hue_wrp_offset = this.$hue_wrp.offset ();
-            this.hue_wrp_height = this.$hue_wrp.height ();
+            this.sb_wrp_size = this.$sb_wrp.width ();
+
+            this.hue_wrp_height = this.sb_wrp_size;
 
         },
 
@@ -4438,45 +4436,54 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _events: function () {
 
+            /* WINDOW RESIZE */
+
+            this._on ( $window, 'resize', this._handler_resize );
+
             /* INPUTS */
 
             this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
 
-            /* SB WRP */
+            /* SB ARROWS */
 
             this._on ( this.$sb_wrp, 'mouseenter', this._handler_sb_wrp_arrows_in );
             this._on ( this.$sb_wrp, 'mouseleave', this._handler_sb_wrp_arrows_out );
 
-            this._on ( this.$sb_wrp, 'click', this._handler_sb_wrp_click );
+            /* SB DRAG */
 
-            /* SB HANDLER */
+            this._on ( this.$sb_wrp, $.Pointer.dragmove, this._handler_sb_drag_move );
+            this._on ( this.$sb_wrp, $.Pointer.dragend, this._handler_sb_drag_end );
 
-            this.$handler_sb.draggable ({
-                start: this._handler_sb_drag_start,
-                move: this._handler_sb_drag_move,
-                end: this._handler_sb_drag_end,
-                context: this
-            });
-
-            /* HUE WRP */
+            /* HUE ARROWS */
 
             this._on ( this.$hue_wrp, 'mouseenter', this._handler_hue_wrp_arrows_in );
             this._on ( this.$hue_wrp, 'mouseleave', this._handler_hue_wrp_arrows_out );
 
-            this._on ( this.$hue_wrp, 'click', this._handler_hue_wrp_click );
+            /* HUE DRAG */
 
-            /* HUE HANDLER */
-
-            this.$handler_hue.draggable ({
-                start: this._handler_hue_drag_start,
-                move: this._handler_hue_drag_move,
-                end: this._handler_hue_drag_end,
-                context: this
-            });
+            this._on ( this.$hue_wrp, $.Pointer.dragmove, this._handler_hue_drag_move );
+            this._on ( this.$hue_wrp, $.Pointer.dragend, this._handler_hue_drag_end );
 
         },
 
-        /* SB WRP */
+        /* PRIVATE */
+
+        _update_variables: function () {
+
+            this.sb_wrp_offset = this.$sb_wrp.offset ();
+            this.hue_wrp_offset = this.$hue_wrp.offset ();
+
+        },
+
+        /* WINDOW RESIZE */
+
+        _handler_resize: function () {
+
+            this._update_variables ();
+
+        },
+
+        /* SB ARROWS */
 
         _handler_sb_wrp_arrows_in: function () {
 
@@ -4520,36 +4527,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _handler_sb_wrp_click: function ( event ) {
+        /* SB DRAG */
 
-            if ( event.target === this.$handler_sb.get ( 0 ) ) return; //INFO: If we click on the handler it shouldn't count
+        _sb_drag_set: function ( XY, update ) {
 
-            this.color.hsv.s = event.offsetX * 100 / this.sb_wrp_width;
-            this.color.hsv.v = 100 - ( event.offsetY * 100 / this.sb_wrp_height );
-
-            this._update_sb ();
-            this._update_input ();
-
-        },
-
-        /* HANDLER SB */
-
-        _handler_sb_drag_start: function () {
-
-            this.handler_sb_start_position = this.$handler_sb.position ();
-
-        },
-
-        _handler_sb_drag_move: function ( event, target, XYs ) {
-
-            this.isDragging = true;
-
-            this.color.hsv.s =  _.clamp ( 0, this.handler_sb_start_position.left + XYs.delta.X, this.sb_wrp_width ) * 100 / this.sb_wrp_width;
-            this.color.hsv.v =  100 - ( _.clamp ( 0, this.handler_sb_start_position.top + XYs.delta.Y, this.sb_wrp_height ) * 100 / this.sb_wrp_height );
+            this.color.hsv.s =  _.clamp ( 0, XY.X - this.sb_wrp_offset.left, this.sb_wrp_size ) * 100 / this.sb_wrp_size;
+            this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y - this.sb_wrp_offset.top, this.sb_wrp_size ) * 100 / this.sb_wrp_size );
 
             this._update_sb ();
 
-            if ( this.options.live ) {
+            if ( update ) {
 
                 this._update_input ();
 
@@ -4557,23 +4544,19 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _handler_sb_drag_end: function () {
+        _handler_sb_drag_move: function ( event, data ) {
 
-            if ( this.isDragging ) {
-
-                this.isDragging = false;
-
-                if ( !this.options.live ) {
-
-                    this._update_input ();
-
-                }
-
-            }
+            this._sb_drag_set ( data.moveXY, this.options.live );
 
         },
 
-        /* HUE WRP */
+        _handler_sb_drag_end: function ( event, data ) {
+
+            this._sb_drag_set ( data.endXY, true );
+
+        },
+
+        /* HUE ARROWS */
 
         _handler_hue_wrp_arrows_in: function () {
 
@@ -4609,34 +4592,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _handler_hue_wrp_click: function ( event ) {
+        /* HUE DRAG */
 
-            if ( event.target === this.$handler_hue.get ( 0 ) ) return; //INFO: If we click on the handler it shouldn't count
+        _hue_drag_set: function ( XY, update ) {
 
-            this.color.hsv.h = 360 - ( event.offsetY * 360 / this.hue_wrp_height );
-
-            this._update_hue ();
-            this._update_input ();
-
-        },
-
-        /* HANDLER HUE */
-
-        _handler_hue_drag_start: function () {
-
-            this.handler_hue_start_position = this.$handler_hue.position ();
-
-        },
-
-        _handler_hue_drag_move: function ( event, target, XYs ) {
-
-            this.isDragging = true;
-
-            this.color.hsv.h = 359 - Math.min ( 359, ( Math.max ( 0, Math.min ( this.hue_wrp_height, ( this.handler_hue_start_position.top + XYs.delta.Y ) ) ) * 360 / this.hue_wrp_height ) );
+            this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y - this.hue_wrp_offset.top, this.hue_wrp_height ) * 359 / this.hue_wrp_height );
 
             this._update_hue ();
 
-            if ( this.options.live ) {
+            if ( update ) {
 
                 this._update_input ();
 
@@ -4644,19 +4608,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         },
 
-        _handler_hue_drag_end: function () {
+        _handler_hue_drag_move: function ( event, data ) {
 
-            if ( this.isDragging ) {
+            this._hue_drag_set ( data.moveXY, this.options.live );
 
-                this.isDragging = false;
+        },
 
-                if ( !this.options.live ) {
+        _handler_hue_drag_end: function ( event, data ) {
 
-                    this._update_input ();
-
-                }
-
-            }
+            this._hue_drag_set ( data.endXY, true );
 
         },
 
@@ -4693,8 +4653,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
 
             this.$handler_sb.css ({
-                transform: 'translate3d(' + ( this.sb_wrp_width / 100 * this.color.hsv.s ) + 'px,' + ( this.sb_wrp_height / 100 * ( 100 - this.color.hsv.v ) ) + 'px,0)',
-                'background-color': 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)'
+                'background-color': 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)',
+                transform: 'translate3d(' + ( this.sb_wrp_size / 100 * this.color.hsv.s ) + 'px,' + ( this.sb_wrp_size / 100 * ( 100 - this.color.hsv.v ) ) + 'px,0)'
             });
 
         },
@@ -4704,8 +4664,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
 
             this.$handler_hue.css ({
-                transform: 'translate3d(0,' + ( this.hue_wrp_height / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) ) ) + 'px,0)',
-                'background-color': 'hsl(' + this.color.hsv.h + ',100%,50%)'
+                'background-color': 'hsl(' + this.color.hsv.h + ',100%,50%)',
+                transform: 'translate3d(0,' + ( this.hue_wrp_height / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) ) ) + 'px,0)'
             });
 
             this.$handler_sb.css ( 'background-color', 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)' );
