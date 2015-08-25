@@ -7,6 +7,8 @@ append main
 
     +multiple
         +dropdown-btn("Base", "base")
+        +dropdown-btn("Attached", "attached")
+        +dropdown-btn("No tip", "notip")
         +dropdown-btn-icon("action-settings", "base")
         +dropdown-btn-icon("action-settings", "base").rounded
         +dropdown-btn("Dividers", "dividers")
@@ -21,6 +23,12 @@ append body
                 +button-simple("#2").xsmall.sharp Action 2
                 +button-simple("#3").xsmall.sharp Action 3
                 +button-simple("#312313").xsmall.sharp Action 312313
+        +dropdown("attached").attached
+            +container-content
+                p Attached
+        +dropdown("notip").no-tip
+            +container-content
+                p No tip
         +dropdown("dividers")
             +multiple.vertical.stretched.nowrap
                 +button-simple("#1").xsmall.sharp Action 1

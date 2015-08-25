@@ -23,12 +23,11 @@ $dropdown-tip-bg-color: darken($color-white-border, 4) !default;
 
 /* CONTAINER */
 
-$dropdown-container-max-width: calc(100vw - #{$dropdown-padding * 2}) !default;
+$dropdown-container-max-width: calc(73vw - #{$dropdown-padding * 2}) !default;
 
 $dropdown-container-max-height: calc(45vh - #{$dropdown-padding * 2}) !default;
 
-/* OTHERS */
+/* TRANSITIONS */
 
-$dropdown-transition-all-duration: 0.15s;
-
-$dropdown-transition-moving-duration: 0.075s;
+$dropdown-transition-opacity-duration: 0.15s;
+$dropdown-transition-transform-duration: 0.075s;

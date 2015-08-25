@@ -2,6 +2,7 @@
 /* POSITIONATE */
 
 //FIXME: if the anchor is half overflowing the viewport at the left, but still if there's space at the bottom the positionable gets positionated at the bottom, instead of the right: maybe create a new normalized area map, that gives more importance to this thing
+//TODO: add support for a $pointer ( that can also be a function )
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -111,6 +112,11 @@
 
         }
 
+        // CONSTRAIN TO THE WINDOW
+
+        coordinates.top = _.clamp ( 0, coordinates.top, window_height - positionable_height );
+        coordinates.left = _.clamp ( 0, coordinates.left, window_width - positionable_width );
+
         // SETTING TOP AND LEFT
 
         this.css ( 'transform', 'translate3d(' + coordinates.left + 'px,' + coordinates.top + 'px,0)' );
@@ -119,7 +125,12 @@
 
         // CALLBACK
 
-        options.callbacks.positionated ( coordinates );
+        options.callbacks.positionated ({
+            coordinates: coordinates,
+            direction: chosen_direction
+        });
+
+        return this;
 
     };
 
