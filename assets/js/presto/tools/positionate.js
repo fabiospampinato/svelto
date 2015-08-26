@@ -18,6 +18,7 @@
             direction: false, //INFO: Set a preferred direction
             axis: false, //INFO: Set a preferred axis
             $anchor: false, //INFO: Positionate next to an $anchor element
+            $pointer: false, //INFO: The element who is pointing to the anchor
             point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
             ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
                 x: ['right', 'left'],
@@ -114,8 +115,17 @@
 
         // CONSTRAIN TO THE WINDOW
 
+        //TODO: add a viewport check here, we should positionate it to the viewport if the element is outside of it
+
         coordinates.top = _.clamp ( 0, coordinates.top, window_height - positionable_height );
         coordinates.left = _.clamp ( 0, coordinates.left, window_width - positionable_width );
+
+        // DATAS
+
+        var datas = {
+            coordinates: coordinates,
+            direction: chosen_direction
+        };
 
         // SETTING TOP AND LEFT
 
@@ -123,12 +133,45 @@
 
         this.addClass ( 'positionate-' + chosen_direction );
 
+        // SETTING THE POINTER
+
+        if ( options.$anchor && options.$pointer ) {
+
+            var $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+
+            if ( $pointer instanceof $ ) {
+
+                var transform_str = $pointer.css ( 'transform' ),
+                    matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0],
+                    pointer_position = $pointer.position ();
+
+                switch ( chosen_direction ) {
+
+                    case 'top':
+                    case 'bottom':
+                        var pointer_width = $pointer.width (),
+                            translateX = parseInt ( matrix[4], 10 ) + ( ( anchor_offset.left + ( anchor_width / 2 ) - html_scrollLeft ) - ( coordinates.left + pointer_position.left + ( pointer_width / 2 ) ) ),
+                            translateY = parseInt ( matrix[5], 10 );
+                        break;
+
+                    case 'left':
+                    case 'right':
+                        var pointer_height = $pointer.height (),
+                            translateX = parseInt ( matrix[4], 10 ),
+                            translateY = parseInt ( matrix[5], 10 ) + ( ( anchor_offset.top + ( anchor_height / 2 ) - html_scrollTop ) - ( coordinates.top + pointer_position.top + ( pointer_height / 2 ) ) );
+                        break;
+
+                }
+
+                $pointer.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+
+            }
+
+        }
+
         // CALLBACK
 
-        options.callbacks.positionated ({
-            coordinates: coordinates,
-            direction: chosen_direction
-        });
+        options.callbacks.positionated ( datas );
 
         return this;
 

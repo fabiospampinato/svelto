@@ -18,13 +18,11 @@
         templates: {
             base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
                       '<div class="container">' +
-                          '<div class="container-content">' +
-                              '<div class="multiple-wrp vertical stretched nowrap">' +
-                                  '<div class="multiple">' +
-                                      '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                                          '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                                      '{% } %}' +
-                                  '</div>' +
+                          '<div class="multiple-wrp vertical stretched nowrap">' +
+                              '<div class="multiple">' +
+                                  '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                                      '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                                  '{% } %}' +
                               '</div>' +
                           '</div>' +
                       '</div>' +
@@ -34,9 +32,11 @@
                               '{%=o.prop%}' +
                           '</div>' +
                       '</div>',
-            option: '<div class="button actionable xsmall sharp" data-value="{%=o.prop%}">' +
-                        '<div class="label-center">' +
-                            '{%=o.value%}' +
+            option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
+                        '<div class="label actionable xsmall sharp">' +
+                            '<div class="label-center">' +
+                                '{%=o.value%}' +
+                            '</div>' +
                         '</div>' +
                     '</div>'
        },
@@ -56,18 +56,20 @@
         _variables: function () {
 
             this.$trigger = this.$element;
-            this.id = this.$trigger.data ( 'select' );
             this.$select = this.$trigger.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
-            this.select_options = [];
             this.$select_label = this.$trigger.find ( '.select-label' );
             this.$valueholder = this.$trigger.find ( '.valueholder' );
+
+            this.id = this.$trigger.data ( 'select' );
 
             if ( this.$valueholder.length === 0 ) {
 
                 this.$valueholder = this.$select_label;
 
             }
+
+            this.select_options = [];
 
             this.$dropdown = false;
             this.$dropdown_container = false;
@@ -86,8 +88,6 @@
                 this._init_select_options ();
                 this._init_dropdown ();
 
-                this._bind_button_click ();
-
             }
 
         },
@@ -99,15 +99,15 @@
                 this._trigger ( 'change' );
             });
 
+            if ( !$.browser.isMobile ) {
+
+                this._on ( this.$buttons, 'click', this._handler_button_click );
+
+            }
+
         },
 
         /* BUTTON CLICK */
-
-        _bind_button_click: function () {
-
-            this._on ( this.$buttons, 'click', this._handler_button_click );
-
-        },
 
         _handler_button_click: function ( event, button ) {
 
@@ -160,9 +160,9 @@
 
             this.$dropdown = $('#dropdown-' + this.id);
             this.$dropdown_container = this.$dropdown.find ( '.container' );
-            this.$buttons = this.$dropdown.find ( '.button' );
+            this.$buttons = this.$dropdown.find ( '.button-wrp' );
 
-            this.$trigger.addClass ( 'dropdown-trigger' ).data ( 'dropdown', 'dropdown-' + this.id );
+            this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', 'dropdown-' + this.id );
 
             var instance = this;
 

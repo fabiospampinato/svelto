@@ -2700,6 +2700,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             direction: false, //INFO: Set a preferred direction
             axis: false, //INFO: Set a preferred axis
             $anchor: false, //INFO: Positionate next to an $anchor element
+            $pointer: false, //INFO: The element who is pointing to the anchor
             point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
             ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
                 x: ['right', 'left'],
@@ -2796,8 +2797,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         // CONSTRAIN TO THE WINDOW
 
+        //TODO: add a viewport check here, we should positionate it to the viewport if the element is outside of it
+
         coordinates.top = _.clamp ( 0, coordinates.top, window_height - positionable_height );
         coordinates.left = _.clamp ( 0, coordinates.left, window_width - positionable_width );
+
+        // DATAS
+
+        var datas = {
+            coordinates: coordinates,
+            direction: chosen_direction
+        };
 
         // SETTING TOP AND LEFT
 
@@ -2805,12 +2815,45 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         this.addClass ( 'positionate-' + chosen_direction );
 
+        // SETTING THE POINTER
+
+        if ( options.$anchor && options.$pointer ) {
+
+            var $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+
+            if ( $pointer instanceof $ ) {
+
+                var transform_str = $pointer.css ( 'transform' ),
+                    matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0],
+                    pointer_position = $pointer.position ();
+
+                switch ( chosen_direction ) {
+
+                    case 'top':
+                    case 'bottom':
+                        var pointer_width = $pointer.width (),
+                            translateX = parseInt ( matrix[4], 10 ) + ( ( anchor_offset.left + ( anchor_width / 2 ) - html_scrollLeft ) - ( coordinates.left + pointer_position.left + ( pointer_width / 2 ) ) ),
+                            translateY = parseInt ( matrix[5], 10 );
+                        break;
+
+                    case 'left':
+                    case 'right':
+                        var pointer_height = $pointer.height (),
+                            translateX = parseInt ( matrix[4], 10 ),
+                            translateY = parseInt ( matrix[5], 10 ) + ( ( anchor_offset.top + ( anchor_height / 2 ) - html_scrollTop ) - ( coordinates.top + pointer_position.top + ( pointer_height / 2 ) ) );
+                        break;
+
+                }
+
+                $pointer.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
+
+            }
+
+        }
+
         // CALLBACK
 
-        options.callbacks.positionated ({
-            coordinates: coordinates,
-            direction: chosen_direction
-        });
+        options.callbacks.positionated ( datas );
 
         return this;
 
@@ -5235,7 +5278,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 $anchor: $trigger,
                 $pointer: function ( data ) {
                     if ( !no_tip ) {
-                        return instance['$' + data.direction + '_tip'];
+                        return instance['$' + instance._get_opposite_direction ( data.direction ) + '_tip'];
                     }
                 },
                 callbacks: {
@@ -5248,6 +5291,26 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         /* PRIVATE */
+
+        _get_opposite_direction: function ( direction ) {
+
+            switch ( direction ) {
+
+                case 'top':
+                    return 'bottom';
+
+                case 'bottom':
+                    return 'top';
+
+                case 'left':
+                    return 'right';
+
+                case 'right':
+                    return 'left';
+
+            }
+
+        },
 
         _update: function () {
 
@@ -6246,13 +6309,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         templates: {
             base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
                       '<div class="container">' +
-                          '<div class="container-content">' +
-                              '<div class="multiple-wrp vertical stretched nowrap">' +
-                                  '<div class="multiple">' +
-                                      '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                                          '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                                      '{% } %}' +
-                                  '</div>' +
+                          '<div class="multiple-wrp vertical stretched nowrap">' +
+                              '<div class="multiple">' +
+                                  '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                                      '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                                  '{% } %}' +
                               '</div>' +
                           '</div>' +
                       '</div>' +
@@ -6262,9 +6323,11 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                               '{%=o.prop%}' +
                           '</div>' +
                       '</div>',
-            option: '<div class="button actionable xsmall sharp" data-value="{%=o.prop%}">' +
-                        '<div class="label-center">' +
-                            '{%=o.value%}' +
+            option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
+                        '<div class="label actionable xsmall sharp">' +
+                            '<div class="label-center">' +
+                                '{%=o.value%}' +
+                            '</div>' +
                         '</div>' +
                     '</div>'
        },
@@ -6284,18 +6347,20 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         _variables: function () {
 
             this.$trigger = this.$element;
-            this.id = this.$trigger.data ( 'select' );
             this.$select = this.$trigger.find ( 'select' );
             this.$options = this.$select.find ( 'option' );
-            this.select_options = [];
             this.$select_label = this.$trigger.find ( '.select-label' );
             this.$valueholder = this.$trigger.find ( '.valueholder' );
+
+            this.id = this.$trigger.data ( 'select' );
 
             if ( this.$valueholder.length === 0 ) {
 
                 this.$valueholder = this.$select_label;
 
             }
+
+            this.select_options = [];
 
             this.$dropdown = false;
             this.$dropdown_container = false;
@@ -6314,8 +6379,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this._init_select_options ();
                 this._init_dropdown ();
 
-                this._bind_button_click ();
-
             }
 
         },
@@ -6327,15 +6390,15 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 this._trigger ( 'change' );
             });
 
+            if ( !$.browser.isMobile ) {
+
+                this._on ( this.$buttons, 'click', this._handler_button_click );
+
+            }
+
         },
 
         /* BUTTON CLICK */
-
-        _bind_button_click: function () {
-
-            this._on ( this.$buttons, 'click', this._handler_button_click );
-
-        },
 
         _handler_button_click: function ( event, button ) {
 
@@ -6388,9 +6451,9 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this.$dropdown = $('#dropdown-' + this.id);
             this.$dropdown_container = this.$dropdown.find ( '.container' );
-            this.$buttons = this.$dropdown.find ( '.button' );
+            this.$buttons = this.$dropdown.find ( '.button-wrp' );
 
-            this.$trigger.addClass ( 'dropdown-trigger' ).data ( 'dropdown', 'dropdown-' + this.id );
+            this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', 'dropdown-' + this.id );
 
             var instance = this;
 

@@ -124,7 +124,7 @@
                 $anchor: $trigger,
                 $pointer: function ( data ) {
                     if ( !no_tip ) {
-                        return instance['$' + data.direction + '_tip'];
+                        return instance['$' + instance._get_opposite_direction ( data.direction ) + '_tip'];
                     }
                 },
                 callbacks: {
@@ -137,6 +137,26 @@
         },
 
         /* PRIVATE */
+
+        _get_opposite_direction: function ( direction ) {
+
+            switch ( direction ) {
+
+                case 'top':
+                    return 'bottom';
+
+                case 'bottom':
+                    return 'top';
+
+                case 'left':
+                    return 'right';
+
+                case 'right':
+                    return 'left';
+
+            }
+
+        },
 
         _update: function () {
 

@@ -3,6 +3,7 @@
 
 //FIXME: If the content is too long it excedes the visible area
 //FIXME: the container should be scrollable if the content exceedes it
+//TODO: add possibility to change the color of the tips
 
 .dropdown {
 
@@ -14,7 +15,13 @@
     transition: opacity $dropdown-transition-opacity-duration;
 
     &.moving {
+
         transition: transform $dropdown-transition-transform-duration;
+
+        & > .dropdown-tip {
+            transition: transform $dropdown-transition-transform-duration;
+        }
+
     }
 
     &.no-tip, &.attached {
@@ -68,6 +75,7 @@
         display: none;
         width: 0;
         height: 0;
+        transform: translate3d(0,0,0);
 
         &:before, &:after {
             display: block;
