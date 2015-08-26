@@ -69,7 +69,7 @@
 
             // IF THERE'S AN ELEMENT OR A DEFAULT ELEMENT
 
-            if ( element !== this ) {
+            if ( element !== this ) { //FIXME: it MUST be true
 
                 // SAVING INSTANCE
 
@@ -86,12 +86,6 @@
                     }
 
                 });
-
-            } else { //FIXME
-
-                console.log("PAY ATTENCION!!! element === this");
-                alert("PAY ATTENCION!!! element === this");
-                console.log(this);
 
             }
 

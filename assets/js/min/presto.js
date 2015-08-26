@@ -509,7 +509,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             // IF THERE'S AN ELEMENT OR A DEFAULT ELEMENT
 
-            if ( element !== this ) {
+            if ( element !== this ) { //FIXME: it MUST be true
 
                 // SAVING INSTANCE
 
@@ -526,12 +526,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     }
 
                 });
-
-            } else { //FIXME
-
-                console.log("PAY ATTENCION!!! element === this");
-                alert("PAY ATTENCION!!! element === this");
-                console.log(this);
 
             }
 
@@ -6275,8 +6269,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
     $(function () {
 
         $body.on ( 'mousedown', '.ripple', function ( event ) {
-
-            console.log("mousedown!");
 
             if ( event.button === $.ui.mouseButton.RIGHT ) return;
 

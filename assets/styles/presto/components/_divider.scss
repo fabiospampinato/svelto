@@ -15,10 +15,9 @@ hr {
 
 .divider-wrp {
 
-    margin-bottom: $layout-spacing;
-
     &.block {
 
+        margin-bottom: $layout-spacing;
         text-align: center;
 
         & > .divider {
@@ -34,6 +33,7 @@ hr {
 
         display: flex;
         align-items: center;
+        margin-bottom: $layout-spacing;
 
         & > hr {
 
@@ -60,11 +60,21 @@ hr {
 
     &.text {
 
+        margin-bottom: $layout-spacing;
+
         & > .divider {
             @include size ( $divider-text-size );
             font-weight: $divider-text-font-weight;
             margin: 0 $layout-spacing;
             opacity: $divider-text-opacity;
+        }
+
+    }
+
+    &.spacer {
+
+        & > .divider {
+            height: $divider-spacer-height;
         }
 
     }
