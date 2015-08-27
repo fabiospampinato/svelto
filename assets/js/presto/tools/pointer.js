@@ -1,6 +1,8 @@
 
 /* POINTER */
 
+//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';

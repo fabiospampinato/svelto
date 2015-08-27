@@ -18,11 +18,13 @@
         templates: {
             base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
                       '<div class="container">' +
-                          '<div class="multiple-wrp vertical stretched nowrap">' +
-                              '<div class="multiple">' +
-                                  '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                                      '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                                  '{% } %}' +
+                          '<div class="container-content">' +
+                              '<div class="multiple-wrp vertical stretched joined">' +
+                                  '<div class="multiple">' +
+                                      '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                                          '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                                      '{% } %}' +
+                                  '</div>' +
                               '</div>' +
                           '</div>' +
                       '</div>' +

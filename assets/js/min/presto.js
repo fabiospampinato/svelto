@@ -2490,6 +2490,8 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* POINTER */
 
+//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -4121,7 +4123,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                 closer: '.infobar-closer'
             },
             delay: {
-                close: 150
+                close: 250
             },
             callbacks: {
                 close: _.noop
@@ -6301,11 +6303,13 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         templates: {
             base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
                       '<div class="container">' +
-                          '<div class="multiple-wrp vertical stretched nowrap">' +
-                              '<div class="multiple">' +
-                                  '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                                      '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                                  '{% } %}' +
+                          '<div class="container-content">' +
+                              '<div class="multiple-wrp vertical stretched joined">' +
+                                  '<div class="multiple">' +
+                                      '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                                          '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                                      '{% } %}' +
+                                  '</div>' +
                               '</div>' +
                           '</div>' +
                       '</div>' +

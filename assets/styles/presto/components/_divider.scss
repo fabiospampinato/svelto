@@ -24,7 +24,7 @@ hr {
             @include color ( $divider-block-color, $divider-block-color-basic );
             display: inline-block;
             padding: $divider-block-padding;
-            border-radius: 10000px 10000px;
+            border-radius: 10000px 10000px !important; //FIXME: we should use `!important`
         }
 
     }

@@ -1,5 +1,7 @@
 //- bootstrap/dropdown.jade
 
+//- TODO: Maybe add +divider-spacer when appropriate (when there are only buttons for example)
+
 extends ../../layout.jade
 
 append main
@@ -18,11 +20,12 @@ append main
 
 append body
         +dropdown("base")
-            +multiple.vertical.stretched.nowrap
-                +button-simple("#1").xsmall.sharp Action 1
-                +button-simple("#2").xsmall.sharp Action 2
-                +button-simple("#3").xsmall.sharp Action 3
-                +button-simple("#312313").xsmall.sharp Action 312313
+            +container-content
+                +multiple.vertical.stretched.nowrap.joined
+                    +button-simple("#1").xsmall.sharp Action 1
+                    +button-simple("#2").xsmall.sharp Action 2
+                    +button-simple("#3").xsmall.sharp Action 3
+                    +button-simple("#312313").xsmall.sharp Action 312313
         +dropdown("attached").attached
             +container-content
                 p Attached
@@ -30,17 +33,18 @@ append body
             +container-content
                 p No tip
         +dropdown("dividers")
-            +multiple.vertical.stretched.nowrap
-                +button-simple("#1").xsmall.sharp Action 1
-                +divider Divider
-                +button-simple("#2").xsmall.sharp Action 2
-                +divider-linear Divider
-                +button-simple("#3").xsmall.sharp Action 3
-                +divider-linear
-                +button-simple("#4").xsmall.sharp Action 4
-                +divider-linear
-                +divider-text Section
-                +button-simple("#5").xsmall.sharp Action 5
+            +container-content
+                +multiple.vertical.stretched.nowrap
+                    +button-simple("#1").xsmall.sharp Action 1
+                    +divider Divider
+                    +button-simple("#2").xsmall.sharp Action 2
+                    +divider-linear Divider
+                    +button-simple("#3").xsmall.sharp Action 3
+                    +divider-linear
+                    +button-simple("#4").xsmall.sharp Action 4
+                    +divider-linear
+                    +divider-text Section
+                    +button-simple("#5").xsmall.sharp Action 5
         +dropdown("advanced")
             +container-header("Header").inherit
             +container-content Content

@@ -16,9 +16,12 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 2px;
-            background-color: $pagination-current-color;
+            height: 100%;
+            border-bottom: $pagination-current-highlight-size solid $pagination-current-color;
+            pointer-events: none;
             position: absolute;
+            border-bottom-left-radius: inherit;
+            border-bottom-right-radius: inherit;
         }
 
     }

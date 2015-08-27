@@ -17,7 +17,12 @@ $font-size-small: 13px !default;
 $font-size-normal: 15px !default;
 $font-size-large: 17px !default;
 
-$font-size-base: $font-size-normal;
+$font-size-root: $font-size-normal !default;
+$font-size-base: 1em;
+
+/* LINE HEIGHT */
+
+$line-height: 1.428571429; //INFO: 20/14
 
 /* LINK */
 
@@ -73,4 +78,4 @@ $kbd-color-basic: true;
 $kbd-border-width: 1px;
 $kbd-font-size: 90%;
 $kbd-padding-vertical: 2px;
-$kbd-padding-horizontal: 3px;
+$kbd-padding-horizontal: $layout-half-spacing;

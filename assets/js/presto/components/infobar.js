@@ -19,7 +19,7 @@
                 closer: '.infobar-closer'
             },
             delay: {
-                close: 150
+                close: 250
             },
             callbacks: {
                 close: _.noop

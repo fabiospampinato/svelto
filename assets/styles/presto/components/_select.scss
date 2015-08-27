@@ -69,8 +69,12 @@
 
         @include z-depth ( $select-dropdown-z-depth );
 
-        & > .container-content {
-            padding: 0;
+        & .label-wrp + .divider-wrp.block {
+            margin-top: $layout-half-spacing;
+        }
+
+        & .divider-wrp.block {
+            margin-bottom: $layout-half-spacing !important; //FIXME: we should use `!important`
         }
 
     }

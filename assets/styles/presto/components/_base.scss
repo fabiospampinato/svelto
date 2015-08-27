@@ -1,10 +1,4 @@
 
-/* CODEKIT OVERLAYS REMOVER */
-
-#lpckWarningOverlay, #lpckLagWarningOverlay { //INFO: Red and yellow overlay
-    display: none !important;
-}
-
 /* GENERAL */
 
 *, *:before, *:after { //INFO: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw
@@ -19,13 +13,10 @@
 
 html {
 
-    @include color ( $html-color, $html-color-basic );
-    font-family: $font-family;
-    font-size: $font-size-base;
+    font-size: $font-size-root;
     display: flex;
     box-sizing: border-box;
     min-height: 100%;
-    color: $color-base-text;
 
     -webkit-tap-highlight-color: transparent;
     -webkit-touch-callout: none;
@@ -41,6 +32,10 @@ html {
 
 body {
 
+    @include color ( $body-color, $body-color-basic );
+    font-family: $font-family;
+    font-size: $font-size-base;
+    line-height: $line-height;
     display: flex;
     flex-direction: column;
     width: 100%;
