@@ -1,31 +1,69 @@
 
-/* ELEMENTS */
+/* IFRAME / EMBED / VIDEO / OBJECT */
 
 iframe, embed, video, object {
     //TODO: take it from bootstrap
 }
 
+/* IMAGES */
+
 .image-wrp {
 
-    //TODO: add possibility to set a width and scale everything automatically
-
-    position: relative;
-    display: flex; //INFO: In order to remove the extra white space at the bottom of the image
+    @include color ( $image-color, $image-color-basic );
     overflow: hidden;
-    margin-bottom: $layout-spacing;
-    border-radius: $border-radius-medium;
 
     & > img {
-        border: $image-border-width solid $image-border-color;
+        width: 100%;
+        height: auto;
+        order: 2;
     }
 
     & > .image-caption {
+
+        //TODO: generalize the caption as an addon of the `container` component
+        //TODO: add transparentize background
+
         @include color ( $image-caption-color, $image-caption-color-basic );
-        position: absolute;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        padding: $layout-spacing;
+        border-radius: 0;
+        margin-bottom: 0;
+
+        &:not(.attached) {
+
+            position: absolute;
+            left: 0;
+            right: 0;
+
+            &.on-hover {
+                opacity: 0;
+                transition: opacity $image-caption-transition-opacity-duration;
+            }
+
+            &:not(.top) {
+                bottom: 0;
+            }
+
+            &.top {
+                top: 0;
+            }
+
+        }
+
+        &.attached {
+
+            &:not(.top) {
+                order: 1;
+            }
+
+            &.top {
+                order: 3;
+            }
+
+        }
+
+    }
+
+    &:hover > .image-caption:not(.attached).on-hover {
+        opacity: 1;
     }
 
 }

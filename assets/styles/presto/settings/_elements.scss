@@ -1,8 +1,12 @@
 
 /* IMAGE */
 
-$image-border-width: 1px;
-$image-border-color: $color-black;
+$image-color: 'black';
+$image-color-basic: true;
+
+/* CAPTION */
 
 $image-caption-color: 'black';
 $image-caption-color-basic: true;
+
+$image-caption-transition-opacity-duration: 0.1s;

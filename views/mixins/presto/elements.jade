@@ -3,13 +3,14 @@
 //- TODO: add iframe, embed, video, object
 
 mixin image(url)
-    .image-wrp&attributes(attributes)
+    +container&attributes(attributes).image-wrp
         img(src=url)
         block
 
 mixin image-caption
-    .image-caption&attributes(attributes)
-        block
+    +container&attributes(attributes).image-caption
+        +container-content
+            block
 
 mixin image-sample(url)
     +image("/assets/images/presto/sample.png")&attributes(attributes)
