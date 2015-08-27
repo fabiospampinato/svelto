@@ -10,7 +10,7 @@ append main
             - var squares_nr = 64;
             - var nr = 1;
             while nr <= squares_nr
-                +square.xxxxxlarge.centered
+                +square.xxxxxlarge.centerer
                     span.small= nr++
 
     +divider Actions
@@ -35,7 +35,7 @@ append body-end
             var html = '';
 
             for ( var i = 0, l = $('input[name="input_populate"]').val (); i < l; i++ ) {
-                html += '<div class="square xxxxxlarge centered" style=""><span class="small">' + (i + 1) + '</span></div>';
+                html += '<div class="square xxxxxlarge centerer" style=""><span class="small">' + (i + 1) + '</span></div>';
             }
 
             $('.squares .multiple').empty ().append ( html );

@@ -10,7 +10,7 @@ append main
             - var squares_nr = 32;
             - var nr = 1;
             while nr <= squares_nr
-                +square.xxxxxlarge.centered
+                +square.xxxxxlarge.centerer
                     span.small= nr++
 
     +divider Actions
@@ -26,7 +26,7 @@ append main
             - var squares_nr = 32;
             - var nr = 1;
             while nr <= squares_nr
-                +square.xxxxxlarge.centered
+                +square.xxxxxlarge.centerer
                     span.small= nr++
 
     +divider Actions
@@ -42,7 +42,7 @@ append main
             - var squares_nr = 32;
             - var nr = 1;
             while nr <= squares_nr
-                +square.xxxxxlarge.centered
+                +square.xxxxxlarge.centerer
                     span.small= nr++
 
     +divider Actions
@@ -61,7 +61,7 @@ append body-end
             var html = '';
 
             for ( var i = 0; i < Number(nr); i++ ) {
-                html += '<div class="square xxxxxlarge centered" style=""><span class="small">' + (i + 1) + '</span></div>';
+                html += '<div class="square xxxxxlarge centerer" style=""><span class="small">' + (i + 1) + '</span></div>';
             }
 
             return html;
@@ -72,11 +72,15 @@ append body-end
 
             $('.squares_all .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_all"]').val () ) );
 
+            init_drag_all ();
+
         }
 
         function populate_most () {
 
             $('.squares_most .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_most"]').val () ) );
+
+            init_drag_most ();
 
         }
 
@@ -84,9 +88,29 @@ append body-end
 
             $('.squares_punctual .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_punctual"]').val () ) );
 
+            init_drag_punctual ();
+
         }
 
         // Dragging
+
+        function init_drag_all () {
+
+            dragging ( '.squares_all .square', 'all' );
+
+        }
+
+        function init_drag_most () {
+
+            dragging ( '.squares_most .square', 'most' );
+
+        }
+
+        function init_drag_punctual () {
+
+            dragging ( '.squares_punctual .square', 'punctual' );
+
+        }
 
         function dragging ( selector, select ) {
 
@@ -114,7 +138,7 @@ append body-end
         // Ready
 
         $(function () {
-            dragging ( '.squares_all .square', 'all' );
-            dragging ( '.squares_most .square', 'most' );
-            dragging ( '.squares_punctual .square', 'punctual' );
+            init_drag_all ();
+            init_drag_most ();
+            init_drag_punctual ();
         });

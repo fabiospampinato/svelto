@@ -12,6 +12,11 @@ iframe, embed, video, object {
     @include color ( $image-color, $image-color-basic );
     overflow: hidden;
 
+    &.centered {
+        margin-left: auto;
+        margin-right: auto;
+    }
+
     & > img {
         width: 100%;
         height: auto;

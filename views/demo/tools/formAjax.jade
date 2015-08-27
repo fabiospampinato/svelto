@@ -7,10 +7,10 @@ append main
 
     +divider Forms
 
-    +form.centered.ajax
-        +container("This is a form").xs-12.sm-10.md-8.lg-6.xl-4
+    +form.centered.ajax.sm-12.md-10.lg-8.xl-6
+        +container("This is a form")
             +container-content
-                +image("/assets/images/presto/sample.png").centered
+                +image("/assets/images/presto/sample.png").centered.xs-8
                 +input({label: "Input...", name: "input_1"}).fluid.sharp
                 +textarea({label: "Textarea...", name: "textarea_1"}).fluid.sharp.autogrow
                 label Checkboxes:

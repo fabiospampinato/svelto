@@ -9,7 +9,7 @@
     }
 
 mixin pagination(options)
-    +multiple&attributes(attributes).pagination
+    +multiple&attributes(attributes).pagination.joined.centered
 
         if options.total == 1 || options.total == 0
             block

@@ -78,7 +78,13 @@ small, .small {
 }
 
 p {
+
     margin: 0 0 $layout-spacing;
+
+    &.centered {
+        text-align: center;
+    }
+
 }
 
 mark, .mark {
