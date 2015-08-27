@@ -2,6 +2,33 @@
 
 //- TODO: add iframe, embed, video, object
 
+//- EMBEDDED
+
+mixin embedded(src)
+    .embedded&attributes(attributes)
+        if src
+            +iframe(src)
+        else
+            block
+
+//- EMBEDDABLES
+
+mixin iframe(src)
+    iframe(src=src, allowfullscreen)
+
+mixin embed(src)
+    embed(src=src)
+
+mixin video(sources)
+    video
+        each src, type in sources
+            source(src=src, type=type)
+
+mixin object(data)
+    object(data=data)
+
+//- IMAGE
+
 mixin image(url)
     +container&attributes(attributes).image-wrp
         img(src=url)
