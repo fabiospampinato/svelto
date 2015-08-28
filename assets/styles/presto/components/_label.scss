@@ -4,7 +4,7 @@
 .label-wrp {
 
     @include color ( 'inherit', true );
-    display: flex;
+    display: inline-flex;
     align-items: center;
     margin-bottom: $layout-spacing;
     border-radius: inherit;
@@ -341,9 +341,29 @@
         }
 
         &.badge {
+
             position: absolute !important;
-            top: $label-badge-top !important;
-            right: $label-badge-right !important;
+
+            &.top-left {
+                top: $label-badge-spacing !important;
+                left: $label-badge-spacing !important;
+            }
+
+            &.top-right {
+                top: $label-badge-spacing !important;
+                right: $label-badge-spacing !important;
+            }
+
+            &.bottom-left {
+                bottom: $label-badge-spacing !important;
+                left: $label-badge-spacing !important;
+            }
+
+            &.bottom-right {
+                bottom: $label-badge-spacing !important;
+                right: $label-badge-spacing !important;
+            }
+
         }
 
         &.floating {
