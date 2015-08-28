@@ -63,6 +63,11 @@ append main
     +container-simple
         +textarea({label: "No floating"}).fluid.no-floating
 
+    +divider No intial bar
+
+    +container-simple
+        +textarea({label: "No initial bar"}).fluid.no-initial-bar
+
     +divider No bar - No floating
 
     +container-simple
@@ -84,6 +89,9 @@ append main
             +button-icon("action-search")
         +multiple.joined
             +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
+            +button-icon("action-search").secondary
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-initial-bar.no-floating.white No initial bar
             +button-icon("action-search").secondary
         +multiple.joined
             +textarea({label: "Placeholder..."}).no-bar.no-floating.white Value
@@ -112,6 +120,9 @@ append main
         +multiple.joined
             +textarea({label: "Placeholder..."}).no-bar.no-floating.white.outlined Value
             +button-icon("action-search").outlined
+        +multiple.joined
+            +textarea({label: "Placeholder..."}).no-initial-bar.no-floating.white.outlined No initial bar
+            +button-icon("action-search").outlined.secondary
         +multiple.joined
             +textarea({label: "Placeholder...", value: "Compact"}).no-bar.no-floating.white.outlined.compact
             +button-icon("action-search").outlined

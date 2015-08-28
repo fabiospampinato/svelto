@@ -117,6 +117,8 @@
 
     & > .label {
 
+        height: 100%;
+
         & > .label-ribbon-left, & > .label-ribbon-right {
             position: absolute;
             bottom: - $label-ribbon-size;
