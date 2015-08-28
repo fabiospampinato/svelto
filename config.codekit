@@ -3194,15 +3194,6 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/javascript\/accordion.html": {
-		"fileType": 8192,
-		"ignore": 1,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/javascript\/accordion.html",
-		"outputAbbreviatedPath": "No Output Path",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0
-		},
 	"\/views\/demo\/javascript\/accordion.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
