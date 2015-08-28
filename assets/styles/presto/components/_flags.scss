@@ -11,7 +11,7 @@
     display: inline-block;
 }
 
-[class*='flag-']:before {
+[class*=' flag-']:before, [class^='flag-']:before {
     @extend %flag
 }
 

@@ -11,11 +11,11 @@ $input-wrp-border-radius: $border-radius-medium;
 $input-color: 'inherit';
 $input-color-basic: true;
 
-$input-horizontal-padding: 1.5em !default;
-$input-vertical-padding: 0.78571em !default;
+$input-horizontal-padding: $label-horizontal-padding !default;
+$input-vertical-padding: $label-vertical-padding !default;
 
-$input-compact-horizontal-padding: 0.78571em !default;
-$input-compact-vertical-padding: 0.78571em !default;
+$input-compact-horizontal-padding: $label-compact-horizontal-padding !default;
+$input-compact-vertical-padding: $label-compact-vertical-padding !default;
 
 /* LABEL */
 

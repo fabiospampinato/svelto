@@ -369,22 +369,6 @@
             margin-bottom: 0;
         }
 
-        & > * > .icon {
-
-            @extend %icon;
-            font-size: 1.3em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
-            margin: -0.115em; //FIXME: this shouldn't exist... We should increase the base size of icons from their settings instead
-
-            &.left {
-                padding-right: $label-center-icon-extra-spacing;
-            }
-
-            &.right {
-                padding-left: $label-center-icon-extra-spacing;
-            }
-
-        }
-
     }
 
 }

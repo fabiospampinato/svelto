@@ -15,7 +15,7 @@
     -moz-osx-font-smoothing: grayscale;
 }
 
-[class*='icon-'] {
+[class*=' icon-'], [class^='icon-'] {
     @extend %icon;
 }
 

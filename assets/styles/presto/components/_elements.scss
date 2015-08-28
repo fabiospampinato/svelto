@@ -40,7 +40,6 @@
 .image-wrp {
 
     @include color ( $image-color, $image-color-basic );
-    overflow: hidden;
 
     &.centered {
         margin-left: auto;
@@ -51,6 +50,7 @@
         width: 100%;
         height: auto;
         order: 2;
+        border-radius: inherit;
     }
 
     & > .image-caption {

@@ -10,11 +10,11 @@ $label-left-right-bg-color: rgba(0, 0, 0, 0.05);
 
 $label-center-icon-extra-spacing: 0.75em;
 
-$label-horizontal-padding: 1.5em !default;
-$label-vertical-padding: 0.78571em !default;
+$label-horizontal-padding: 1.2em !default;
+$label-vertical-padding: $label-horizontal-padding / 100 * 50 !default;
 
-$label-compact-horizontal-padding: 0.78571em !default;
-$label-compact-vertical-padding: 0.78571em !default;
+$label-compact-horizontal-padding: $label-vertical-padding !default;
+$label-compact-vertical-padding: $label-vertical-padding !default;
 
 $label-badge-spacing: -20%;
 
