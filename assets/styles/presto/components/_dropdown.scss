@@ -40,7 +40,7 @@
 
         &.positionate-top {
 
-            margin-bottom: - $container-border-width;
+            margin-bottom: - $outline-width;
 
             & > .container {
                 border-bottom-right-radius: 0;
@@ -51,7 +51,7 @@
 
         &.positionate-bottom {
 
-            margin-top: - $container-border-width;
+            margin-top: - $outline-width;
 
             & > .container {
                 border-top-left-radius: 0;
@@ -61,11 +61,11 @@
         }
 
         &.positionate-left {
-            margin-right: - $container-border-width;
+            margin-right: - $outline-width;
         }
 
         &.positionate-right {
-            margin-left: - $container-border-width;
+            margin-left: - $outline-width;
         }
 
     }

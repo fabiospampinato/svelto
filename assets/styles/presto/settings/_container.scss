@@ -4,7 +4,7 @@
 $container-color: 'white';
 $container-color-basic: true;
 
-$container-border-width: 1px !default;
+$container-border-width: $outline-width;
 $contianer-border-radius: $border-radius-medium;
 
 /* HEADER */

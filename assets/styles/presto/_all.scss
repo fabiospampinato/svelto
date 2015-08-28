@@ -23,6 +23,8 @@
 @import 'settings/typography';
 @import 'settings/elements';
 
+@import 'settings/outline';
+
 /* MIXINS */
 
 @import 'mixins/centering';
@@ -60,7 +62,6 @@
 @import 'settings/modal';
 @import 'settings/navbar';
 @import 'settings/noty';
-@import 'settings/outline';
 @import 'settings/pagination';
 @import 'settings/parallax';
 @import 'settings/placeholder';

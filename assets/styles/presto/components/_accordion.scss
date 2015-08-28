@@ -13,7 +13,7 @@
 
         &:not(:last-child) {
 
-            margin-bottom: - $container-border-width;
+            margin-bottom: - $outline-width;
             border-bottom-width: 0;
             border-bottom-right-radius: 0;
             border-bottom-left-radius: 0;

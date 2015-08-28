@@ -9,9 +9,9 @@
     @include color ( $container-color, $container-color-basic );
     display: flex;
     flex-direction: column;
-    margin-bottom: $layout-spacing;
     border-width: $container-border-width;
     border-style: solid;
+    margin-bottom: $layout-spacing;
     border-radius: $contianer-border-radius;
     position: relative;
 

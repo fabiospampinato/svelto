@@ -3,30 +3,32 @@
 
 //FIXME: The outlined version has not border at the bottom
 //FIXME: If the placeholder is longer than the value it can exceed the width of the -wrp
+//FIXME: The placeholder and the label are not exatly vertically aligned (UNLESS IS OUTLINED)
 
 .input-wrp {
 
     @include color ( $input-wrp-color, $input-wrp-color-basic );
     position: relative;
-    display: inline-block;
+    display: inline-flex;
     margin-bottom: $layout-spacing;
     border-style: solid;
     border-radius: $input-wrp-border-radius;
+    border-width: 0 0 $input-wrp-border-bottom-width 0;
 
     & > .text-field {
         @include color ( $input-color, $input-color-basic );
         width: 100%;
+        height: 1em + ( $input-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
         padding: $input-vertical-padding $input-horizontal-padding;
         border: none;
         border-radius: inherit;
     }
 
     & > label {
+        @include center-absolutely ( false, $line-height );
         font-size: $input-label-font-size;
-        position: absolute;
-        top: 50%;
+        margin-bottom: 0;
         left: $input-horizontal-padding;
-        margin-top: - $input-label-font-size / 2;
         transition-duration: $input-transition-all-duration;
         transition-property: color, opacity, top, left, font-size, margin;
         pointer-events: none;
@@ -72,10 +74,6 @@
 
     }
 
-    &:not(.outlined) {
-        border-width: 0 0 $input-wrp-border-bottom-width 0;
-    }
-
     &:not(.no-floating) {
 
         & > .text-field {
@@ -92,7 +90,7 @@
 
                 &:focus ~ label, &:valid ~ label {
                     font-size: $input-label-active-font-size;
-                    top: $layout-half-spacing;
+                    top: $layout-half-spacing / 2;
                     left: 0;
                     margin-top: 0;
                     opacity: $input-label-active-opacity;
@@ -172,6 +170,20 @@
 
         & > label {
             left: $input-compact-horizontal-padding;
+        }
+
+    }
+
+    &.outlined {
+
+        &:not(.compact) > .text-field {
+            height: calc(#{1em + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+            padding: calc($input-vertical-padding - #{2 * $outline-width}) $input-horizontal-padding;
+        }
+
+        &.compact > .text-field {
+            height: calc(#{1em + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+            padding: calc($input-compact-vertical-padding - #{2 * $outline-width}) $input-compact-horizontal-padding;
         }
 
     }
