@@ -9,16 +9,36 @@
     @extend .input-wrp;
 
     & > .text-field {
-
         resize: vertical;
+        height: ( $line-height * 3 ) + $input-vertical-padding; //FIXME: It should be fixed... but otherwise the height is greater, why?
+        padding-top: 0 !important;
+    }
 
-        &[disabled] {
-            resize: none;
+    &:not(.no-floating) {
+
+        & > .text-field {
+            margin-top: $input-vertical-padding * 2;
+        }
+
+        &.compact > .text-field {
+            margin-top: $input-compact-vertical-padding * 2;
         }
 
     }
 
-    &.unresizable > .text-field {
+    &.outlined {
+
+        & > .text-field {
+            height: calc(#{( $line-height * 3 ) + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+        }
+
+        &.compact > .text-field {
+            height: calc(#{( $line-height * 3 ) + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+        }
+
+    }
+
+    &.unresizable > .text-field, &.disabled > .text-field {
         resize: none;
     }
 

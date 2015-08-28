@@ -58,6 +58,11 @@ append main
     +container-simple
         +input({label: "No floating"}).fluid.no-floating
 
+    +divider No intial bar
+
+    +container-simple
+        +input({label: "No initial bar"}).fluid.no-initial-bar
+
     +divider No bar - No floating
 
     +container-simple
@@ -79,6 +84,9 @@ append main
             +button-icon("action-search")
         +multiple.joined
             +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
+            +button-icon("action-search").secondary
+        +multiple.joined
+            +input({label: "Placeholder...", value: "No initial bar"}).no-initial-bar.no-floating.white
             +button-icon("action-search").secondary
         +multiple.joined
             +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
@@ -107,6 +115,9 @@ append main
         +multiple.joined
             +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white.outlined
             +button-icon("action-search").outlined
+        +multiple.joined
+            +input({label: "Placeholder...", value: "No initial bar"}).no-initial-bar.no-floating.white.outlined
+            +button-icon("action-search").outlined.secondary
         +multiple.joined
             +input({label: "Placeholder...", value: "Compact"}).no-bar.no-floating.white.outlined.compact
             +button-icon("action-search").outlined

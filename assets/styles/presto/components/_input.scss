@@ -11,35 +11,35 @@
     position: relative;
     display: inline-flex;
     margin-bottom: $layout-spacing;
-    border-style: solid;
     border-radius: $input-wrp-border-radius;
-    border-width: 0 0 $input-wrp-border-bottom-width 0;
 
     & > .text-field {
         @include color ( $input-color, $input-color-basic );
         width: 100%;
-        height: 1em + ( $input-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: $input-vertical-padding $input-horizontal-padding;
         border: none;
         border-radius: inherit;
     }
 
     & > label {
-        @include center-absolutely ( false, $line-height );
+        @include center-absolutely ( false, $input-label-height );
+        @include color ( 'inherit', true );
         font-size: $input-label-font-size;
+        height: $input-label-height;
+        line-height: $input-label-height;
         margin-bottom: 0;
-        left: $input-horizontal-padding;
+        left: 0;
+        padding-left: $input-horizontal-padding;
         transition-duration: $input-transition-all-duration;
-        transition-property: color, opacity, top, left, font-size, margin;
+        transition-property: color, opacity, top, font-size, margin, padding;
         pointer-events: none;
         opacity: $input-label-opacity;
+        width: 100%;
     }
 
     & > .text-field-bar {
         position: absolute;
-        z-index: 1;
+        z-index: $input-bar-z-index;
         right: 0;
-        bottom: - $input-wrp-border-bottom-width;
         left: 0;
         height: 100%;
         content: '';
@@ -76,12 +76,32 @@
 
     &:not(.no-floating) {
 
-        & > .text-field {
-            margin-top: $input-vertical-padding;
+        &:not(.outlined) {
+
+            & > .text-field {
+                height: $line-height + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: ( $input-vertical-padding + ( $input-label-active-height / 2) ) $input-horizontal-padding $input-vertical-padding;
+            }
+
+            &.compact > .text-field {
+                height: $line-height + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: ( $input-compact-vertical-padding + ( $input-label-active-height / 2) ) $input-compact-horizontal-padding $input-compact-vertical-padding;
+            }
+
         }
 
-        &.compact > .text-field {
-            margin-top: $input-compact-vertical-padding;
+        &.outlined {
+
+            & > .text-field {
+                height: calc(#{$line-height + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: calc(#{$input-vertical-padding + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-horizontal-padding $input-vertical-padding;
+            }
+
+            &.compact > .text-field {
+                height: calc(#{$line-height + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: calc(#{$input-compact-vertical-padding + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-compact-horizontal-padding $input-compact-vertical-padding;
+            }
+
         }
 
         &:not(.disabled) {
@@ -89,9 +109,11 @@
             & > .text-field {
 
                 &:focus ~ label, &:valid ~ label {
+                    height: $input-label-active-height;
+                    line-height: $input-label-active-height;
                     font-size: $input-label-active-font-size;
                     top: $layout-half-spacing / 2;
-                    left: 0;
+                    padding-left: 0;
                     margin-top: 0;
                     opacity: $input-label-active-opacity;
                 }
@@ -107,7 +129,7 @@
                 & > .text-field {
 
                     &:focus ~ label, &:valid ~ label {
-                        left: $layout-spacing !important;
+                        padding-left: $layout-spacing !important;
                     }
 
                 }
@@ -117,7 +139,7 @@
                     & > .text-field {
 
                         &:focus ~ label, &:valid ~ label {
-                            left: $layout-half-spacing !important;
+                            padding-left: $layout-half-spacing !important;
                         }
 
                     }
@@ -131,6 +153,34 @@
     }
 
     &.no-floating {
+
+        &:not(.outlined) {
+
+            & > .text-field {
+                height: $line-height + ( $input-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: $input-vertical-padding $input-horizontal-padding;
+            }
+
+            &.compact > .text-field {
+                height: $line-height + ( $input-compact-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
+            }
+
+        }
+
+        &.outlined {
+
+            & > .text-field {
+                height: calc(#{$line-height + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: calc(#{$input-vertical-padding} - #{2 * $outline-width}) $input-horizontal-padding $input-vertical-padding;
+            }
+
+            &.compact > .text-field {
+                height: calc(#{$line-height + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                padding: calc(#{$input-compact-vertical-padding} - #{2 * $outline-width}) $input-compact-horizontal-padding $input-compact-vertical-padding;
+            }
+
+        }
 
         & > .text-field {
 
@@ -146,14 +196,51 @@
 
     }
 
-    &.no-bar {
+    &:not(.no-bar) {
+
+        &:not(.no-initial-bar) {
+
+            border-style: solid;
+            border-width: 0 0 $outline-width 0;
+
+            & > .text-field-bar {
+                bottom: - $outline-width;
+            }
+
+        }
+
+        &:not(.disabled) {
+
+            & > .text-field {
+
+                &:focus ~ .text-field-bar {
+                    transform: scaleX(1);
+                }
+
+            }
+
+        }
+
+    }
+
+    &.no-bar, &.no-initial-bar {
 
         &:not(.outlined) {
             border-bottom-width: 0;
         }
 
+        &.outlined {
+            & > .text-field-bar {
+                bottom: - $outline-width;
+            }
+        }
+
+    }
+
+    &.no-bar {
+
         & > .text-field-bar {
-            display: none;
+            bottom: - $outline-width;
         }
 
     }
@@ -169,33 +256,7 @@
         }
 
         & > label {
-            left: $input-compact-horizontal-padding;
-        }
-
-    }
-
-    &.outlined {
-
-        &:not(.compact) > .text-field {
-            height: calc(#{1em + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
-            padding: calc($input-vertical-padding - #{2 * $outline-width}) $input-horizontal-padding;
-        }
-
-        &.compact > .text-field {
-            height: calc(#{1em + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
-            padding: calc($input-compact-vertical-padding - #{2 * $outline-width}) $input-compact-horizontal-padding;
-        }
-
-    }
-
-    &:not(.disabled) {
-
-        & > .text-field {
-
-            &:focus ~ .text-field-bar {
-                transform: scaleX(1);
-            }
-
+            padding-left: $input-compact-horizontal-padding;
         }
 
     }
