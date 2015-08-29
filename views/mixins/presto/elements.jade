@@ -1,31 +1,35 @@
 //- elements.jade
 
-//- TODO: add iframe, embed, video, object
-
 //- EMBEDDED
 
-mixin embedded(src)
+mixin embedded(src, allowfullscreen)
     .embedded&attributes(attributes)
         if src
-            +iframe(src)
+            +iframe(src, allowfullscreen)
         else
             block
 
 //- EMBEDDABLES
 
-mixin iframe(src)
-    iframe(src=src, allowfullscreen)
+mixin iframe(src, allowfullscreen)
+    if allowfullscreen
+        iframe(src=src, allowfullscreen)&attributes(attributes)
+    else
+        iframe(src=src)&attributes(attributes)
 
 mixin embed(src)
-    embed(src=src)
+    embed(src=src)&attributes(attributes)
 
-mixin video(sources)
-    video
-        each src, type in sources
-            source(src=src, type=type)
+mixin video(sources, type)
+    video&attributes(attributes)
+        if type
+            sources(src=sources, type=type)
+        else
+            each src, type in sources
+                source(src=src, type=type)
 
 mixin object(data)
-    object(data=data)
+    object(data=data)&attributes(attributes)
 
 //- IMAGE
 
