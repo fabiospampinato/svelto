@@ -3,8 +3,8 @@
 
 hr {
     height: 1px;
-    margin-top: - $layout-half-spacing;
-    margin-bottom: $layout-half-spacing;
+    margin-top: - $layout-half-gutter;
+    margin-bottom: $layout-half-gutter;
     border: none;
     background-color: $divider-linear-bg-color;
 }
@@ -17,7 +17,7 @@ hr {
 
     &.block {
 
-        margin-bottom: $layout-spacing;
+        margin-bottom: $layout-gutter;
         text-align: center;
 
         & > .divider {
@@ -33,13 +33,13 @@ hr {
 
         display: flex;
         align-items: center;
-        margin-bottom: $layout-spacing;
+        margin-bottom: $layout-gutter;
 
         & > hr {
 
             flex-grow: 1;
             margin: 0;
-            min-width: $layout-spacing;
+            min-width: $layout-gutter;
 
             &.left {
                 order: 0;
@@ -60,12 +60,12 @@ hr {
 
     &.text {
 
-        margin-bottom: $layout-spacing;
+        margin-bottom: $layout-gutter;
 
         & > .divider {
             @include size ( $divider-text-size );
             font-weight: $divider-text-font-weight;
-            margin: 0 $layout-spacing;
+            margin: 0 $layout-gutter;
             opacity: $divider-text-opacity;
         }
 

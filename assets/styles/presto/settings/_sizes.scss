@@ -1,9 +1,12 @@
 
 /* SIZES */
 
+//TODO: maybe write them using the forumals for getting a good icon size
+
 //INFO: The considered font-size is 15px
 //INFO: A scaling factor of 1.6 for icons was taken into account to produce the sharpest icons possible
 //INFO: The value at the right of the arrow is the resulting icon size
+//INFO: The [RECOMMENDED] sizes are those where the icons look better
 
 $size-xxxxsmall: 0.25rem !default; // -> 6px
 $size-xxxsmall: 0.375rem !default; // -> 9px
@@ -31,4 +34,4 @@ $sizes: (
     'xxlarge': $size-xxlarge,
     'xxxlarge': $size-xxxlarge,
     'xxxxlarge': $size-xxxxlarge
-);
+) !default;

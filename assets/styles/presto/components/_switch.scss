@@ -4,7 +4,7 @@
 .switch {
 
     height: $switch-handler-size;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 
     & > input {
         display: none;

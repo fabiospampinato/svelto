@@ -3,21 +3,25 @@
 
 // XSMALL
 
-.hidden-xs {
-    display: none !important;
-}
+@include xsmall-up {
 
-@each $display in block, inline, inline-block {
+    .hidden-xs {
+        display: none !important;
+    }
 
-    .visible-xs-#{$display} {
-        display: $display !important;
+    @each $display in block, inline, inline-block {
+
+        .visible-xs-#{$display} {
+            display: $display !important;
+        }
+
     }
 
 }
 
 // SMALL
 
-@include from-small {
+@include small-up {
 
     .hidden-sm {
         display: none !important;
@@ -35,7 +39,7 @@
 
 // MEDIUM
 
-@include from-medium {
+@include medium-up {
 
     .hidden-md {
         display: none !important;
@@ -53,7 +57,7 @@
 
 // LARGE
 
-@include from-large {
+@include large-up {
 
     .hidden-lg {
         display: none !important;
@@ -71,7 +75,7 @@
 
 // XLARGE
 
-@include from-xlarge {
+@include xlarge-up {
 
     .hidden-xl {
         display: none !important;
@@ -91,30 +95,34 @@
 
 // XSMALL
 
-@for $nr from 1 through $grid-columns-nr {
+@include xsmall-up {
 
-    .xs-#{$nr} {
-        width: ( 100% / $grid-columns-nr ) * $nr;
-    }
+    @for $nr from 1 through $grid-columns {
 
-    .multiple-wrp:not(.joined) > .multiple > *:not(.multiple-wrp).xs-#{$nr} {
-        width: calc(#{( 100% / $grid-columns-nr ) * $nr} - #{$grid-gutter-width});
+        .xs-#{$nr} {
+            width: ( 100% / $grid-columns ) * $nr;
+        }
+
+        .multiple-wrp:not(.joined) > .multiple > *:not(.multiple-wrp).xs-#{$nr} {
+            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+        }
+
     }
 
 }
 
 // SMALL
 
-@include from-small {
+@include small-up {
 
-    @for $nr from 1 through $grid-columns-nr {
+    @for $nr from 1 through $grid-columns {
 
         .sm-#{$nr} {
-            width: ( 100% / $grid-columns-nr ) * $nr;
+            width: ( 100% / $grid-columns ) * $nr;
         }
 
         .multiple-wrp:not(.joined) > .multiple > *:not(.multiple-wrp).sm-#{$nr} {
-            width: calc(#{( 100% / $grid-columns-nr ) * $nr} - #{$grid-gutter-width});
+            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
         }
 
     }
@@ -123,16 +131,16 @@
 
 // MEDIUM
 
-@include from-medium {
+@include medium-up {
 
-    @for $nr from 1 through $grid-columns-nr {
+    @for $nr from 1 through $grid-columns {
 
         .md-#{$nr} {
-            width: ( 100% / $grid-columns-nr ) * $nr;
+            width: ( 100% / $grid-columns ) * $nr;
         }
 
         .multiple-wrp:not(.joined) > .multiple > *:not(.multiple-wrp).md-#{$nr} {
-            width: calc(#{( 100% / $grid-columns-nr ) * $nr} - #{$grid-gutter-width});
+            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
         }
 
     }
@@ -141,16 +149,16 @@
 
 // LARGE
 
-@include from-large {
+@include large-up {
 
-    @for $nr from 1 through $grid-columns-nr {
+    @for $nr from 1 through $grid-columns {
 
         .lg-#{$nr} {
-            width: ( 100% / $grid-columns-nr ) * $nr;
+            width: ( 100% / $grid-columns ) * $nr;
         }
 
         .multiple-wrp:not(.joined) > .multiple > *:not(.multiple-wrp).lg-#{$nr} {
-            width: calc(#{( 100% / $grid-columns-nr ) * $nr} - #{$grid-gutter-width});
+            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
         }
 
     }
@@ -159,16 +167,16 @@
 
 // XLARGE
 
-@include from-xlarge {
+@include xlarge-up {
 
-    @for $nr from 1 through $grid-columns-nr {
+    @for $nr from 1 through $grid-columns {
 
         .xl-#{$nr} {
-            width: ( 100% / $grid-columns-nr ) * $nr;
+            width: ( 100% / $grid-columns ) * $nr;
         }
 
         .multiple-wrp:not(.joined) > .multiple > *:not(.multiple-wrp).xl-#{$nr} {
-            width: calc(#{( 100% / $grid-columns-nr ) * $nr} - #{$grid-gutter-width});
+            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
         }
 
     }

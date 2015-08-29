@@ -4,7 +4,7 @@
 .datepicker {
 
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 
     & > .datepicker-navigation {
 
@@ -18,7 +18,7 @@
         }
 
         & > .datepicker-navigation-title {
-            margin: 0 $layout-spacing;
+            margin: 0 $layout-gutter;
         }
 
     }

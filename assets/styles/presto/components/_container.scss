@@ -11,7 +11,7 @@
     flex-direction: column;
     border-width: $container-border-width;
     border-style: solid;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
     border-radius: $contianer-border-radius;
     position: relative;
 
@@ -29,7 +29,7 @@
         margin-top: - $container-header-border-width;
         margin-right: - $container-header-border-width;
         margin-left: - $container-header-border-width;
-        padding: $layout-spacing;
+        padding: $layout-gutter;
         border-width: $container-header-border-width;
         border-style: solid;
         border-top-left-radius: inherit;
@@ -52,7 +52,7 @@
         @include color ( $container-content-color, $container-content-color-basic );
         overflow: auto;
         flex-grow: 1;
-        padding: $layout-spacing;
+        padding: $layout-gutter;
         border-radius: inherit;
 
         & > *:last-child {
@@ -68,7 +68,7 @@
         margin-right: - $container-footer-border-width;
         margin-bottom: - $container-footer-border-width;
         margin-left: - $container-footer-border-width;
-        padding: $layout-spacing;
+        padding: $layout-gutter;
         border-width: $container-footer-border-width;
         border-style: solid;
         border-top-left-radius: 0;

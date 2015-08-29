@@ -4,7 +4,7 @@
 .tagbox {
 
     @include color ( $tagbox-color, $tagbox-color-basic );
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 
     & > input {
         display: none;

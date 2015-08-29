@@ -4,7 +4,7 @@
 .header {
 
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 
     &.has-background { //FIXME: it doesn't work if we want to add the shadow also when using the background
         overflow: hidden;

@@ -1,85 +1,131 @@
 
-//TODO: rename them, maybe use just a unique size() mixin e a color() mixin for components and leave this names available for the breakpoints
+/* UP */
 
-/* FROM MINIMUM */
+//INFO: Screen equal or greater than breakpoint
 
-@mixin from-xsmall {
+@mixin xsmall-up {
 
-    @media screen and (min-width: 0) {
+    @media screen and (min-width: map-get($breakpoints, 'xsmall')) {
         @content;
     }
 
 }
 
-@mixin from-small {
+@mixin small-up {
 
-    @media screen and (min-width: $layout-small-min-breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, 'small')) {
         @content;
     }
 
 }
 
-@mixin from-medium {
+@mixin medium-up {
 
-    @media screen and (min-width: $layout-medium-min-breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, 'medium')) {
         @content;
     }
 
 }
 
-@mixin from-large {
+@mixin large-up {
 
-    @media screen and (min-width: $layout-large-min-breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, 'large')) {
         @content;
     }
 
 }
 
-@mixin from-xlarge {
+@mixin xlarge-up {
 
-    @media screen and (min-width: $layout-xlarge-min-breakpoint) {
+    @media screen and (min-width: map-get($breakpoints, 'xlarge')) {
         @content;
     }
 
 }
 
-/* ONLY RANGE */
+/* DROWN */
 
-@mixin range-xsmall {
+//INFO: Screen equal or greater than next breakpoint
 
-    @media screen and (max-width: $layout-xsmall-max-breakpoint) {
+@mixin xsmall-down {
+
+    @media screen and (max-width: map-get($breakpoints, 'small')) {
         @content;
     }
 
 }
 
-@mixin range-small {
+@mixin small-down {
 
-    @media screen and (min-width: $layout-small-min-breakpoint) and (max-width: $layout-small-max-breakpoint) {
+    @media screen and (max-width: map-get($breakpoints, 'medium')) {
         @content;
     }
 
 }
 
-@mixin range-medium {
+@mixin medium-down {
 
-    @media screen and (min-width: $layout-medium-min-breakpoint) and (max-width: $layout-medium-max-breakpoint) {
+    @media screen and (max-width: map-get($breakpoints, 'large')) {
         @content;
     }
 
 }
 
-@mixin range-large {
+@mixin large-down {
 
-    @media screen and (min-width: $layout-large-min-breakpoint) and (max-width: $layout-large-max-breakpoint) {
+    @media screen and (max-width: map-get($breakpoints, 'xlarge')) {
         @content;
     }
 
 }
 
-@mixin range-xlarge {
+@mixin xlarge-down {
 
-    @media screen and (min-width: $layout-xlarge-min-breakpoint) {
+    @media screen {
+        @content;
+    }
+
+}
+
+/* RANGE */
+
+//INFO: Screen within the breakpoint and the next one
+
+@mixin xsmall-range {
+
+    @media screen and (min-width: map-get($breakpoints, 'xsmall')) and (max-width: map-get($breakpoints, 'small')) {
+        @content;
+    }
+
+}
+
+@mixin small-range {
+
+    @media screen and (min-width: map-get($breakpoints, 'small')) and (max-width: map-get($breakpoints, 'medium')) {
+        @content;
+    }
+
+}
+
+@mixin medium-range {
+
+    @media screen and (min-width: map-get($breakpoints, 'medium')) and (max-width: map-get($breakpoints, 'large')) {
+        @content;
+    }
+
+}
+
+@mixin large-range {
+
+    @media screen and (min-width: map-get($breakpoints, 'large')) and (max-width: map-get($breakpoints, 'xlarge')) {
+        @content;
+    }
+
+}
+
+@mixin xlarge-range {
+
+    @media screen and (min-width: map-get($breakpoints, 'xlarge')) {
         @content;
     }
 

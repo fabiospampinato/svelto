@@ -4,4 +4,12 @@
 $body-color: 'base';
 $body-color-basic: true;
 
-$transition-duration-default: 0.3;
+/* TRANSITIONS */
+
+$transition-duration-slow: 0.2s;
+$transition-duration-normal: 0.4s;
+$transition-duration-fast: 0.6s;
+
+$transition-duration: $transition-duration-normal;
+
+$transition-duration-default: $transition-duration; //FIXME: remove it

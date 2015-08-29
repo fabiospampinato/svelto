@@ -6,7 +6,7 @@
 .multiple-wrp {
 
     position: relative;
-    margin: 0 #{- $grid-gutter-half-width} $layout-spacing;
+    margin: 0 #{- $layout-half-gutter} $layout-gutter;
     border-color: inherit;
 
     &[class*="z-depth-"] {
@@ -16,9 +16,9 @@
         &:before {
             position: absolute;
             top: 0;
-            right: $grid-gutter-half-width;
-            bottom: $grid-gutter-width;
-            left: $grid-gutter-half-width;
+            right: $layout-half-gutter;
+            bottom: $layout-gutter;
+            left: $layout-half-gutter;
             content: '';
             pointer-events: none;
             border-radius: $border-radius-medium;
@@ -43,7 +43,7 @@
     }
 
     &.limited > .multiple {
-        max-width: $layout-max-width + $grid-gutter-width; //FIXME: Does it work?
+        // max-width: $layout-max-width + $layout-gutter; //FIXME: Does it work?
         margin-left: auto;
         margin-right: auto;
     }
@@ -157,7 +157,7 @@
         &.vertical > .multiple > * {
 
             &:not(.multiple-wrp) {
-                width: calc(100% - #{$grid-gutter-width});
+                width: calc(100% - #{$layout-gutter});
             }
 
             &.multiple-wrp {
@@ -183,14 +183,14 @@
     & > .multiple {
 
         border-color: inherit;
-        margin-bottom: - $layout-spacing;
+        margin-bottom: - $layout-gutter;
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
 
         & > *:not(.multiple-wrp) {
-            margin-right: $grid-gutter-half-width;
-            margin-left: $grid-gutter-half-width;
+            margin-right: $layout-half-gutter;
+            margin-left: $layout-half-gutter;
         }
 
         & > .multiple-wrp {

@@ -7,8 +7,8 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    margin-bottom: $layout-spacing;
-    padding: $layout-spacing;
+    margin-bottom: $layout-gutter;
+    padding: $layout-gutter;
     transition: opacity $infobar-transition-close-duration;
     border-width: $infobar-border-width;
     border-style: solid;
@@ -73,7 +73,7 @@
 
         order: 4;
         width: 100%;
-        margin-top: $layout-spacing;
+        margin-top: $layout-gutter;
 
         & > *:last-child {
             margin-bottom: 0;
@@ -82,7 +82,7 @@
     }
 
     & > *:not(:first-child):not(.infobar-bottom) {
-        margin-left: $layout-spacing;
+        margin-left: $layout-gutter;
     }
 
 }

@@ -4,7 +4,7 @@
 .colorpicker {
 
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 
     .colorpicker-brightness, .colorpicker-saturation, .colorpicker-hue {
         @include fill ();
@@ -59,7 +59,7 @@
     & > .colorpicker-hue-wrp {
 
         width: $colorpicker-hue-wrp-width;
-        margin-left: $layout-spacing;
+        margin-left: $layout-gutter;
 
         & > .colorpicker-hue {
             background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);

@@ -3,6 +3,6 @@
 
 .placeholder {
     @include color ( $placeholder-color, $placeholder-color-basic );
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
     text-align: center;
 }

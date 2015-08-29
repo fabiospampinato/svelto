@@ -4,7 +4,7 @@
 .toolbar {
 
     height: $toolbar-height;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
     padding: $toolbar-vertical-padding $toolbar-horizontal-padding;
 
     & .multiple-wrp {

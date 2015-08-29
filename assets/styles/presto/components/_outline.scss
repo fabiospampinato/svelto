@@ -1,12 +1,10 @@
 
 /* OUTLINE */
 
-//FIXME: the input has a weird bottom border, it's like half of the size it shoudl have
-
 .outlined:not(.multiple-wrp),
 .outlined.multiple-wrp > .multiple > * {
     border-width: $outline-width;
-    border-style: solid;
+    border-style: $outline-style;
 }
 
 /* UNOUTLINE */

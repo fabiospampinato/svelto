@@ -5,23 +5,23 @@ $roboto-enabled: false !default;
 
 /* FONT FAMILY */
 
+$font-family-roboto-enabled: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$font-family-roboto-disabled: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
 @if $roboto-enabled == true {
-    $font-family: Roboto, Calibri, sans-serif !default;
+    $font-family: $font-family-roboto-enabled;
 } @else {
-    $font-family: Calibri, sans-serif !default;
+    $font-family: $font-family-roboto-disabled;
 }
 
-/* FONT SIZES */
+/* FONT SIZE */
 
 $font-size: 15px !default;
 
-$font-size-root: $font-size !default;
-$font-size-base: 1em;
-
 /* LINE HEIGHT */
 
-$line-height-number: 1.428571429; //INFO: 20/14
-$line-height: 1em * $line-height-number; //INFO: 20/14
+$line-height: 1.4285714286; //INFO: 20/14
+$line-height-em: 1em * $line-height;
 
 /* LINK */
 
@@ -57,7 +57,7 @@ $abbr-border-color: $color-gray-border;
 
 /* BLOCKQUOTE */
 
-$blockquote-border-width: ( $layout-spacing / 2 );
+$blockquote-border-width: ( $layout-gutter / 2 );
 $blockquote-border-color: rgba(47, 47, 47, 0.15) !default;
 
 $blockquote-footer-font-size: 85%;
@@ -77,4 +77,4 @@ $kbd-color-basic: true;
 $kbd-border-width: 1px;
 $kbd-font-size: 90%;
 $kbd-padding-vertical: 2px;
-$kbd-padding-horizontal: $layout-half-spacing;
+$kbd-padding-horizontal: $layout-half-gutter;

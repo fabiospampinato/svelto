@@ -11,10 +11,10 @@
     font-variant: normal;
     text-transform: none;
     transform: scale($icons-scale-amount);
-    height: $line-height;
+    height: $line-height-em;
     line-height: $line-height;
     text-align: center;
-    width: $line-height;
+    width: $line-height-em;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }

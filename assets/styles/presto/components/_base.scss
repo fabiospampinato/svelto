@@ -13,8 +13,7 @@
 
 html {
 
-    font-size: $font-size-root;
-    display: flex;
+    font-size: $font-size;
     box-sizing: border-box;
     min-height: 100%;
 
@@ -34,15 +33,14 @@ body {
 
     @include color ( $body-color, $body-color-basic );
     font-family: $font-family;
-    font-size: $font-size;
+    font-size: 1em;
     line-height: $line-height;
     display: flex;
     flex-direction: column;
     width: 100%;
 
     & > header, & > main, & > footer {
-        transition-property: margin;
-        transition-duration: $navbar-transition-transform-duration;
+        transition: margin $navbar-transition-transform-duration;
     }
 
     & > header > .header {
@@ -53,8 +51,8 @@ body {
 
     & > main {
         flex-grow: 1;
-        margin-top: $layout-spacing;
-        padding: 0 $layout-spacing;
+        margin-top: $layout-gutter;
+        padding: 0 $layout-gutter;
     }
 
     & > footer > .footer {
@@ -76,7 +74,7 @@ body {
                 left: 0;
 
                 & > *:last-child {
-                    margin-bottom: - $layout-spacing !important;
+                    margin-bottom: - $layout-gutter !important;
                 }
 
             }

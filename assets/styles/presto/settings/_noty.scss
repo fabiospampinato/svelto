@@ -13,4 +13,4 @@ $noty-transition-all-duration: 0.2s;
 
 /* BREAKPOINTS */
 
-$noty-full-breakpoint: $layout-xsmall-max-breakpoint !default;
+$noty-full-breakpoint: map-get($breakpoints, 'small') !default;

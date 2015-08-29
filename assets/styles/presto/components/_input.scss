@@ -11,7 +11,7 @@
     @include color ( $input-wrp-color, $input-wrp-color-basic );
     position: relative;
     display: inline-flex;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
     border-radius: $input-wrp-border-radius;
 
     & > .text-field {
@@ -80,12 +80,12 @@
         &:not(.outlined) {
 
             & > .text-field {
-                height: $line-height + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: $line-height-em + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: ( $input-vertical-padding + ( $input-label-active-height / 2) ) $input-horizontal-padding $input-vertical-padding;
             }
 
             &.compact > .text-field {
-                height: $line-height + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: $line-height-em + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: ( $input-compact-vertical-padding + ( $input-label-active-height / 2) ) $input-compact-horizontal-padding $input-compact-vertical-padding;
             }
 
@@ -94,12 +94,12 @@
         &.outlined {
 
             & > .text-field {
-                height: calc(#{$line-height + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: calc(#{$line-height-em + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: calc(#{$input-vertical-padding + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-horizontal-padding $input-vertical-padding;
             }
 
             &.compact > .text-field {
-                height: calc(#{$line-height + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: calc(#{$line-height-em + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: calc(#{$input-compact-vertical-padding + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-compact-horizontal-padding $input-compact-vertical-padding;
             }
 
@@ -113,7 +113,7 @@
                     height: $input-label-active-height;
                     line-height: $input-label-active-height;
                     font-size: $input-label-active-font-size;
-                    top: $layout-half-spacing / 2;
+                    top: $layout-half-gutter / 2;
                     padding-left: 0;
                     margin-top: 0;
                     opacity: $input-label-active-opacity;
@@ -130,7 +130,7 @@
                 & > .text-field {
 
                     &:focus ~ label, &:valid ~ label {
-                        padding-left: $layout-spacing !important;
+                        padding-left: $layout-gutter !important;
                     }
 
                 }
@@ -140,7 +140,7 @@
                     & > .text-field {
 
                         &:focus ~ label, &:valid ~ label {
-                            padding-left: $layout-half-spacing !important;
+                            padding-left: $layout-half-gutter !important;
                         }
 
                     }
@@ -158,12 +158,12 @@
         &:not(.outlined) {
 
             & > .text-field {
-                height: $line-height + ( $input-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: $line-height-em + ( $input-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: $input-vertical-padding $input-horizontal-padding;
             }
 
             &.compact > .text-field {
-                height: $line-height + ( $input-compact-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: $line-height-em + ( $input-compact-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
             }
 
@@ -172,12 +172,12 @@
         &.outlined {
 
             & > .text-field {
-                height: calc(#{$line-height + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: calc(#{$line-height-em + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: calc(#{$input-vertical-padding} - #{2 * $outline-width}) $input-horizontal-padding $input-vertical-padding;
             }
 
             &.compact > .text-field {
-                height: calc(#{$line-height + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
+                height: calc(#{$line-height-em + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
                 padding: calc(#{$input-compact-vertical-padding} - #{2 * $outline-width}) $input-compact-horizontal-padding $input-compact-vertical-padding;
             }
 

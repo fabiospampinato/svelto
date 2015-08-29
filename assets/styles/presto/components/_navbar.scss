@@ -86,7 +86,7 @@
         }
 
         & ~ main {
-            margin-top: $navbar-horizontal-height + $layout-spacing;
+            margin-top: $navbar-horizontal-height + $layout-gutter;
         }
 
         body.fixed-header > & {
@@ -94,7 +94,7 @@
             & ~ header {
 
                 margin-top: $toolbar-height + $navbar-horizontal-height;
-                margin-bottom: - ( $navbar-horizontal-height - $layout-spacing );
+                margin-bottom: - ( $navbar-horizontal-height - $layout-gutter );
 
                 & > .header {
                     top: $navbar-horizontal-height;
@@ -116,7 +116,7 @@
             }
 
             & ~ main {
-                margin-top: $navbar-slim-horizontal-height + $layout-spacing;
+                margin-top: $navbar-slim-horizontal-height + $layout-gutter;
             }
 
             body.fixed-header > & {
@@ -124,7 +124,7 @@
                 & ~ header {
 
                     margin-top: $toolbar-height + $navbar-slim-horizontal-height;
-                    margin-bottom: - ( $navbar-slim-horizontal-height - $layout-spacing );
+                    margin-bottom: - ( $navbar-slim-horizontal-height - $layout-gutter );
 
                     & > .header {
                         top: $navbar-slim-horizontal-height;
@@ -283,13 +283,16 @@
 
     // ATTACHED
 
-    &.attached-xs {
-        @include open ();
-        @include attach ();
+    @include xsmall-up {
+
+        &.attached-xs {
+            @include open ();
+            @include attach ();
+        }
+
     }
 
-
-    @include from-small {
+    @include small-up {
 
         &.attached-sm {
             @include open ();
@@ -298,7 +301,7 @@
 
     }
 
-    @include from-medium {
+    @include medium-up {
 
         &.attached-md {
             @include open ();
@@ -307,7 +310,7 @@
 
     }
 
-    @include from-large {
+    @include large-up {
 
         &.attached-lg {
             @include open ();
@@ -316,7 +319,7 @@
 
     }
 
-    @include from-xlarge {
+    @include xlarge-up {
 
         &.attached-xl {
             @include open ();

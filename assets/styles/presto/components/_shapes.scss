@@ -4,25 +4,25 @@
 .triangle, .triangle-up {
     @include triangle ();
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 }
 
 .triangle-down {
     @include triangle ( 1em, $color-gray, "down" );
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 }
 
 .triangle-right {
     @include triangle ( 1em, $color-gray, "right" );
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 }
 
 .triangle-left {
     @include triangle ( 1em, $color-gray, "left" );
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 }
 
 /* SQUARES */
@@ -30,7 +30,7 @@
 .square {
     @include square ();
     position: relative;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 }
 
 .square-sample {
@@ -38,12 +38,12 @@
     @include square ( 4rem );
     overflow: hidden;
     position: relative;
-    margin-bottom: $layout-spacing;
-    padding: $layout-half-spacing;
+    margin-bottom: $layout-gutter;
+    padding: $layout-half-gutter;
 
     & > p {
         @include size ( 'xsmall' );
-        margin-bottom: $layout-spacing;
+        margin-bottom: $layout-gutter;
         text-align: inherit;
     }
 
@@ -53,5 +53,5 @@
 
 .circle {
     @include circle ();
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
 }

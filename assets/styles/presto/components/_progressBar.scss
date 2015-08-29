@@ -14,7 +14,7 @@
     overflow: hidden;
     flex-wrap: nowrap;
     height: $progress-bar-height;
-    margin-bottom: $layout-spacing;
+    margin-bottom: $layout-gutter;
     transition: opacity $progress-bar-transition-opacity-duration;
     border-radius: 10000px 10000px;
 

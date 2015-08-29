@@ -39,7 +39,7 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
 
-    margin: 0 0 $layout-spacing;
+    margin: 0 0 $layout-gutter;
 
     & > small, & > .small {
         opacity: $header-small-opacity;
@@ -79,7 +79,7 @@ small, .small {
 
 p {
 
-    margin: 0 0 $layout-spacing;
+    margin: 0 0 $layout-gutter;
 
     &.centered {
         text-align: center;
@@ -100,14 +100,14 @@ abbr[title] {
 
 blockquote {
 
-    margin: 0 0 $layout-spacing;
-    padding: $layout-half-spacing $layout-spacing;
+    margin: 0 0 $layout-gutter;
+    padding: $layout-half-gutter $layout-gutter;
     border-left: $blockquote-border-width solid $blockquote-border-color;
 
     & > footer {
 
         font-size: $blockquote-footer-font-size;
-        margin-top: $layout-spacing;
+        margin-top: $layout-gutter;
         opacity: $blockquote-footer-opacity;
 
         &:before {
@@ -128,7 +128,7 @@ blockquote {
 
 ul, ol {
     margin: 0;
-    padding-left: $layout-spacing * 2;
+    padding-left: $layout-gutter * 2;
 }
 
 ul.unstyled {
@@ -147,7 +147,7 @@ dl {
 }
 
 dd {
-    margin-left: $layout-spacing * 2;
+    margin-left: $layout-gutter * 2;
 }
 
 /* CODE */
@@ -156,7 +156,7 @@ code, section, pre {
     display: block;
     overflow-x: auto;
     margin: 0;
-    padding: $layout-spacing;
+    padding: $layout-gutter;
     border: $code-border-width solid $code-border-color;
     border-radius: $border-radius-small;
     background-color: $code-bg-color;
@@ -166,7 +166,7 @@ kbd {
     @include color ( $kbd-color, $kbd-color-basic );
     font-size: $kbd-font-size;
     font-weight: bold;
-    margin: 0 ( $layout-spacing / 2 );
+    margin: 0 ( $layout-gutter / 2 );
     padding: $kbd-padding-vertical $kbd-padding-horizontal;
     border-width: $kbd-border-width;
     border-style: solid;

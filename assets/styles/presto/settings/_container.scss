@@ -4,7 +4,7 @@
 $container-color: 'white';
 $container-color-basic: true;
 
-$container-border-width: $outline-width;
+$container-border-width: 0;
 $contianer-border-radius: $border-radius-medium;
 
 /* HEADER */
@@ -12,7 +12,7 @@ $contianer-border-radius: $border-radius-medium;
 $container-header-color: 'primary';
 $container-header-color-basic: false;
 
-$container-header-border-width: 1px !default;
+$container-header-border-width: 0 !default;
 
 /* CONTENT */
 
@@ -24,4 +24,4 @@ $container-content-color-basic: true;
 $container-footer-color: $container-color;
 $container-footer-color-basic: true;
 
-$container-footer-border-width: 1px !default;
+$container-footer-border-width: 0 !default;

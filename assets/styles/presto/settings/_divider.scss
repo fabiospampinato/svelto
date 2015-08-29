@@ -11,7 +11,7 @@ $divider-block-padding: 0.3em 0.6em !default;
 $divider-linear-bg-color: rgba(0, 0, 0, 0.1);
 
 $divider-linear-vertical-padding: 0;
-$divider-linear-horizontal-padding: $layout-spacing;
+$divider-linear-horizontal-padding: $layout-gutter;
 
 /* TEXT */
 
@@ -23,4 +23,4 @@ $divider-text-font-weight: bold;
 
 /* SPACER */
 
-$divider-spacer-height: $layout-half-spacing;
+$divider-spacer-height: $layout-half-gutter;

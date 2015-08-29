@@ -1,28 +1,21 @@
 
-/* EXTRA SMALL */
+/* BREAKPOINTS */
 
-//INFO: It implicitly starts from 0
+//INFO: The considered font-size is 15px
+//INFO: The value at the right of the arrow is the resulting breakpoint
 
-$layout-xsmall-max-breakpoint: 481px !default;
+$breakpoint-xsmall: 0rem !default; // -> 0px
+$breakpoint-small: 32rem !default; // -> 480px
+$breakpoint-medium: 48rem !default; // -> 720px
+$breakpoint-large: 64rem !default; // -> 960px
+$breakpoint-xlarge: 76rem !default; // -> 1140px
 
-/* SMALL */
+/* BREAKPOINTS */
 
-$layout-small-min-breakpoint: 482px !default;
-$layout-small-max-breakpoint: 767px !default;
-
-/* MEDIUM */
-
-$layout-medium-min-breakpoint: 768px !default;
-$layout-medium-max-breakpoint: 961px !default;
-
-/* LARGE */
-
-$layout-large-min-breakpoint: 962px !default;
-$layout-large-max-breakpoint: 1399px !default;
-
-/* EXTRA LARGE */
-
-//INFO: It implicitly has no ending
-//TODO: add 'xl' related properties
-
-$layout-xlarge-min-breakpoint: 1400px !default;
+$breakpoints: (
+    'xsmall': $breakpoint-xsmall,
+    'small': $breakpoint-small,
+    'medium': $breakpoint-medium,
+    'large': $breakpoint-large,
+    'xlarge': $breakpoint-xlarge
+) !default;

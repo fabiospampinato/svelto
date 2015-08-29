@@ -21,11 +21,11 @@ $input-compact-vertical-padding: $label-compact-vertical-padding !default;
 
 $input-label-opacity: 0.75;
 $input-label-font-size: 1em;
-$input-label-height: $input-label-font-size * $line-height-number;
+$input-label-height: $input-label-font-size * $line-height;
 
 $input-label-active-opacity: 1;
 $input-label-active-font-size: 0.8em;
-$input-label-active-height: $input-label-active-font-size * $line-height-number;
+$input-label-active-height: $input-label-active-font-size * $line-height;
 
 /* BAR */
 

@@ -19,8 +19,8 @@
 
     & > .container-content {
         display: none;
-        padding-top: $layout-spacing;
-        padding-bottom: $layout-spacing;
+        padding-top: $layout-gutter;
+        padding-bottom: $layout-gutter;
         transition-duration: $expander-content-transition-padding-duration;
         transition-property: opacity;
         opacity: 0;
