@@ -970,9 +970,14 @@ $flags: (
         ( 'zw' ),
         ( -108px -390px )
     )
-);
+) !default;
 
-$flags-enabled: ();
+$flags-enabled: () !default;
+
+/* SIZE */
+
+$flag-width: 16px !default;
+$flag-height: 11px !default;
 
 /* OTHERS */
 

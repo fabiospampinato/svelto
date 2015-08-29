@@ -4,11 +4,11 @@
 /* GENERAL */
 
 %flag {
-    background-image: url('/assets/images/presto/flags.png');
-    width: 16px;
-    height: 11px;
-    content: '';
     display: inline-block;
+    width: $flag-width;
+    height: $flag-height;
+    content: '';
+    background-image: url('/assets/images/presto/flags.png');
 }
 
 .flag[class*=" flag-"]:before {
