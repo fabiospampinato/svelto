@@ -1,24 +1,45 @@
 
+/* FUNCTION */
+
+@function get_size ( $icon_size ) {
+
+    //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+
+    @return ( $icon_size / $font-size / $icons-scale-amount ) * 1rem;
+
+}
+
 /* SIZES */
 
-//TODO: maybe write them using the forumals for getting a good icon size
+//INFO: The wanted icon size for the particular size
 
-//INFO: The considered font-size is 15px
-//INFO: A scaling factor of 1.6 for icons was taken into account to produce the sharpest icons possible
-//INFO: The value at the right of the arrow is the resulting icon size
+$size-xxxxsmall-icon: 6px !default;
+$size-xxxsmall-icon: 9px !default;
+$size-xxsmall-icon: 12px !default;
+$size-xsmall-icon: 18px !default;
+$size-small-icon: 21px !default;
+$size-medium-icon: 24px !default;
+$size-large-icon: 30px !default;
+$size-xlarge-icon: 36px !default;
+$size-xxlarge-icon: 42px !default;
+$size-xxxlarge-icon: 48px !default;
+$size-xxxxlarge-icon: 60px !default;
+
+/* SIZES */
+
 //INFO: The [RECOMMENDED] sizes are those where the icons look better
 
-$size-xxxxsmall: 0.25rem !default; // -> 6px
-$size-xxxsmall: 0.375rem !default; // -> 9px
-$size-xxsmall: 0.5rem !default; // -> 12px
-$size-xsmall: 0.75rem !default; // -> 18px [RECOMMENDED]
-$size-small: 0.875rem !default; // -> 21px
-$size-medium: 1rem !default; // -> 24px [RECOMMENDED]
-$size-large: 1.25rem !default; // -> 30px
-$size-xlarge: 1.5rem !default; // -> 36px [RECOMMENDED]
-$size-xxlarge: 1.75em !default; // -> 42px
-$size-xxxlarge: 2rem !default; // -> 48px [RECOMMENDED]
-$size-xxxxlarge: 2.5rem !default; // -> 60px
+$size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
+$size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
+$size-xxsmall: get_size( $size-xxsmall-icon ) !default;
+$size-xsmall: get_size( $size-xsmall-icon ) !default; //- [RECOMMENDED]
+$size-small: get_size( $size-small-icon ) !default;
+$size-medium: get_size( $size-medium-icon ) !default; //- [RECOMMENDED]
+$size-large: get_size( $size-large-icon ) !default;
+$size-xlarge: get_size( $size-xlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxlarge: get_size( $size-xxlarge-icon ) !default;
+$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
 
 /* SIZES */
 

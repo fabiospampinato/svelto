@@ -15,14 +15,16 @@
 @import 'settings/depths';
 @import 'components/depths';
 
-@import 'settings/sizes';
-@import 'components/sizes';
-
 @import 'settings/breakpoints';
 @import 'settings/layout';
 @import 'settings/typography';
 
 @import 'settings/outline';
+
+@import 'settings/icons';
+
+@import 'settings/sizes';
+@import 'components/sizes';
 
 /* MIXINS */
 
@@ -57,7 +59,6 @@
 @import 'settings/header';
 @import 'settings/helpers';
 @import 'settings/highlight';
-@import 'settings/icons';
 @import 'settings/image';
 @import 'settings/infobar';
 @import 'settings/input';

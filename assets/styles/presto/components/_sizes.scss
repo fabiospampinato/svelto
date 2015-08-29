@@ -3,8 +3,6 @@
 
 @mixin size ( $size_name, $extra: '' ) {
 
-    //TODO: set up line-height accordingly
-
     $size: map-get($sizes, $size_name);
 
     font-size: $size #{$extra};
