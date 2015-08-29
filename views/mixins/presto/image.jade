@@ -1,0 +1,15 @@
+//- image.jade
+
+mixin image(url)
+    +container&attributes(attributes).image-wrp
+        img(src=url)
+        block
+
+mixin image-caption
+    +container&attributes(attributes).image-caption
+        +container-content
+            block
+
+mixin image-sample(url)
+    +image("/assets/images/presto/sample.png")&attributes(attributes)
+        block

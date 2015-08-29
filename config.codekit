@@ -1162,15 +1162,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/assets\/styles\/presto\/components\/_elements.scss": {
+	"\/assets\/styles\/presto\/components\/_embedded.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_elements.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_elements.css",
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_embedded.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_embedded.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -1363,6 +1363,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_icons.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_icons.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/components\/_image.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/components\/_image.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_image.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2202,15 +2218,15 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
-	"\/assets\/styles\/presto\/settings\/_elements.scss": {
+	"\/assets\/styles\/presto\/settings\/_embedded.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,
 		"decimalPrecision": 10,
 		"fileType": 4,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_elements.scss",
-		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_elements.css",
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_embedded.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_embedded.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -2403,6 +2419,22 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_icons.scss",
 		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_icons.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
+	"\/assets\/styles\/presto\/settings\/_image.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_image.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_image.css",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 3,
@@ -3217,22 +3249,22 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/demo\/css\/elements.html": {
+	"\/views\/demo\/css\/embedded.html": {
 		"fileType": 8192,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/elements.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/embedded.html",
 		"outputAbbreviatedPath": "No Output Path",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0
 		},
-	"\/views\/demo\/css\/elements.jade": {
+	"\/views\/demo\/css\/embedded.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/demo\/css\/elements.jade",
-		"outputAbbreviatedPath": "\/views\/demo\/css\/elements.html",
+		"inputAbbreviatedPath": "\/views\/demo\/css\/embedded.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/embedded.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -3313,6 +3345,26 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/demo\/css\/icons.jade",
 		"outputAbbreviatedPath": "\/views\/demo\/css\/icons.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/demo\/css\/image.html": {
+		"fileType": 8192,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/css\/image.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
+		},
+	"\/views\/demo\/css\/image.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/demo\/css\/image.jade",
+		"outputAbbreviatedPath": "\/views\/demo\/css\/image.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -4482,13 +4534,13 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
 		},
-	"\/views\/mixins\/presto\/elements.jade": {
+	"\/views\/mixins\/presto\/embedded.jade": {
 		"compileDebug": 0,
 		"fileType": 512,
 		"ignore": 1,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/views\/mixins\/presto\/elements.jade",
-		"outputAbbreviatedPath": "\/views\/mixins\/presto\/elements.html",
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/embedded.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/embedded.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1
@@ -4566,6 +4618,17 @@
 		"ignoreWasSetByUser": 0,
 		"inputAbbreviatedPath": "\/views\/mixins\/presto\/icons.jade",
 		"outputAbbreviatedPath": "\/views\/mixins\/presto\/icons.html",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1
+		},
+	"\/views\/mixins\/presto\/image.jade": {
+		"compileDebug": 0,
+		"fileType": 512,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/views\/mixins\/presto\/image.jade",
+		"outputAbbreviatedPath": "\/views\/mixins\/presto\/image.html",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1

@@ -1,18 +1,13 @@
-//- css/elements.jade
+//- css/image.jade
 
 extends ../../layout.jade
 
 append main
-    +divider Embedded
-
-    +container-simple.limited.sm-12.md-8.lg-6.xl-4
-        +embedded("//www.youtube.com/embed/df-eLzao63I?rel=0", true).ratio-16-9
-
     +divider Images
 
-    +container-simple
+    +container-simple.outlined
         +multiple
-            +image-sample.xs-6.md-3
+            +image-sample.xs-6.md-3.outlined
             +image-sample.xs-6.md-3
                 +image-caption.top
                     p Top caption

@@ -21,7 +21,6 @@
 @import 'settings/breakpoints';
 @import 'settings/layout';
 @import 'settings/typography';
-@import 'settings/elements';
 
 @import 'settings/outline';
 
@@ -48,6 +47,7 @@
 @import 'settings/container';
 @import 'settings/divider';
 @import 'settings/dropdown';
+@import 'settings/embedded';
 @import 'settings/expander';
 @import 'settings/flags';
 @import 'settings/flippable';
@@ -57,8 +57,9 @@
 @import 'settings/header';
 @import 'settings/helpers';
 @import 'settings/highlight';
-@import 'settings/infobar';
 @import 'settings/icons';
+@import 'settings/image';
+@import 'settings/infobar';
 @import 'settings/input';
 @import 'settings/spinner';
 @import 'settings/modal';
@@ -100,7 +101,7 @@
 @import 'components/container';
 @import 'components/divider';
 @import 'components/dropdown';
-@import 'components/elements';
+@import 'components/embedded';
 @import 'components/expander';
 @import 'components/flags';
 @import 'components/flippable';
@@ -110,8 +111,9 @@
 @import 'components/form';
 @import 'components/header';
 @import 'components/highlight';
-@import 'components/infobar';
 @import 'components/icons';
+@import 'components/image';
+@import 'components/infobar';
 @import 'components/input';
 @import 'components/keyframes';
 @import 'components/spinner';
