@@ -20,7 +20,7 @@
 
         & > .parallax-layer {
 
-            @include fill-absolutely ();
+            @include fill-absolute ();
 
             &.parallax-layer-deep {
                 transform: translateZ($parallax-deep-translate-z) scale($parallax-deep-scale);

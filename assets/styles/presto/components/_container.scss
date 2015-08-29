@@ -1,19 +1,22 @@
 
 /* CONTAINER */
 
-//FIXME: it should scroll with overflow: auto;
-//FIXME it should scroll if the height is fixed and the content (not .container-content!) takes more space
+//FIXME: It should scroll with overflow: auto;
+//FIXME: It should scroll if the height is fixed and the content (not .container-content!) takes more space
 
 .container {
 
     @include color ( $container-color, $container-color-basic );
     display: flex;
     flex-direction: column;
-    border-width: $container-border-width;
-    border-style: solid;
     margin-bottom: $layout-gutter;
     border-radius: $contianer-border-radius;
     position: relative;
+
+    &.centered {
+        margin-right: auto;
+        margin-left: auto;
+    }
 
     &.limited {
         max-width: $layout-max-width;
@@ -26,23 +29,17 @@
         @include color ( $container-header-color, $container-header-color-basic );
         font-weight: bold;
         flex-shrink: 0;
-        margin-top: - $container-header-border-width;
-        margin-right: - $container-header-border-width;
-        margin-left: - $container-header-border-width;
         padding: $layout-gutter;
-        border-width: $container-header-border-width;
-        border-style: solid;
+        border-radius: 0;
         border-top-left-radius: inherit;
         border-top-right-radius: inherit;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
 
-        &.actionable {
+        &.actionable { //TODO: Move it to it's own decorator
             cursor: pointer;
         }
 
-        & .multiple-wrp > .multiple > * {
-            margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
+        & > *:last-child {
+            margin-bottom: 0 !important;
         }
 
     }
@@ -53,7 +50,6 @@
         overflow: auto;
         flex-grow: 1;
         padding: $layout-gutter;
-        border-radius: inherit;
 
         & > *:last-child {
             margin-bottom: 0 !important;
@@ -65,14 +61,8 @@
 
         @include color ( $container-footer-color, $container-footer-color-basic );
         flex-shrink: 0;
-        margin-right: - $container-footer-border-width;
-        margin-bottom: - $container-footer-border-width;
-        margin-left: - $container-footer-border-width;
         padding: $layout-gutter;
-        border-width: $container-footer-border-width;
-        border-style: solid;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
+        border-radius: 0;
         border-bottom-right-radius: inherit;
         border-bottom-left-radius: inherit;
 
@@ -90,10 +80,6 @@
     & > *:last-child.container-content {
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
-    }
-
-    & > *:last-child:not(.container-footer) {
-        margin-bottom: 0 !important;
     }
 
 }

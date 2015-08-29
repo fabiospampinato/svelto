@@ -4,7 +4,7 @@
 .highlight {
 
     &:after {
-        @include fill-absolutely ();
+        @include fill-absolute ();
         z-index: $highlight-z-index;
         content: '';
         pointer-events: none;

@@ -12,8 +12,8 @@
 @import 'settings/gradients';
 @import 'components/colors';
 
-@import 'settings/depths';
-@import 'components/depths';
+@import 'settings/z_depths';
+@import 'components/z_depths';
 
 @import 'settings/breakpoints';
 @import 'settings/layout';
@@ -28,13 +28,16 @@
 
 /* MIXINS */
 
-@import 'mixins/centering';
-@import 'mixins/layout';
+@import 'mixins/border_radius';
+@import 'mixins/center';
+@import 'mixins/fill';
+@import 'mixins/gradients';
+@import 'mixins/image';
 @import 'mixins/media_queries';
 @import 'mixins/others';
 @import 'mixins/responsive';
 @import 'mixins/shapes';
-@import 'mixins/typography';
+@import 'mixins/text';
 
 /* SETTINGS */
 

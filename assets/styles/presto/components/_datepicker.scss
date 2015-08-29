@@ -55,7 +55,7 @@
                 transition: color $datepicker-transition-all-duration;
 
                 &:before {
-                    @include center-absolutely ( $datepicker-day-circle-size, $datepicker-day-circle-size );
+                    @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
                     z-index: -1;
                     width: $datepicker-day-circle-size;
                     height: $datepicker-day-circle-size;

@@ -1,0 +1,22 @@
+
+/* GRADIENTS */
+
+@mixin gradient-horizontal ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {
+    background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
+    background-repeat: repeat-x;
+}
+
+@mixin gradient-vertical ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {
+    background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
+    background-repeat: repeat-x;
+}
+
+@mixin gradient-directional ( $start-color, $end-color, $deg: 45deg ) {
+    background-repeat: repeat-x;
+    background-image: linear-gradient($deg, $start-color, $end-color);
+}
+
+@mixin gradient-radial ( $inner-color, $outer-color ) {
+    background-image: radial-gradient(circle, $inner-color, $outer-color);
+    background-repeat: no-repeat;
+}

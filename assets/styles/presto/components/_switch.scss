@@ -26,7 +26,7 @@
             & > .switch-handler {
 
                 @include z-depth ( $switch-handler-z-depth );
-                @include center-absolutely ( false, $switch-handler-size );
+                @include center-absolute ( false, $switch-handler-size );
                 left: 0;
                 z-index: 0;
                 width: $switch-handler-size;

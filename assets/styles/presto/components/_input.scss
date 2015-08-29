@@ -22,7 +22,7 @@
     }
 
     & > label {
-        @include center-absolutely ( false, $input-label-height );
+        @include center-absolute ( false, $input-label-height );
         @include color ( 'inherit', true );
         font-size: $input-label-font-size;
         height: $input-label-height;

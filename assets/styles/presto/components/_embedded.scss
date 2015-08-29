@@ -29,7 +29,7 @@
     /* IFRAME / EMBED / VIDEO / OBJECT */
 
     & > * {
-        @include fill-absolutely ();
+        @include fill-absolute ();
         width: 100%;
         height: 100%;
         border: 0;

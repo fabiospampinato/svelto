@@ -4,15 +4,12 @@
 $container-color: 'white';
 $container-color-basic: true;
 
-$container-border-width: 0;
-$contianer-border-radius: $border-radius-medium;
+$contianer-border-radius: $border-radius;
 
 /* HEADER */
 
 $container-header-color: 'primary';
 $container-header-color-basic: false;
-
-$container-header-border-width: 0 !default;
 
 /* CONTENT */
 
@@ -23,5 +20,3 @@ $container-content-color-basic: true;
 
 $container-footer-color: $container-color;
 $container-footer-color-basic: true;
-
-$container-footer-border-width: 0 !default;

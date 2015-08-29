@@ -1,18 +1,12 @@
 
-/* OTHERS */
-
-@mixin multi-shadow ( $shadows... ) {
-    box-shadow: $shadows;
-}
-
-/* EXPAND */
+/* FILL */
 
 @mixin fill {
     width: 100%;
     height: 100%;
 }
 
-@mixin fill-absolutely {
+@mixin fill-absolute {
     position: absolute;
     top: 0;
     right: 0;
