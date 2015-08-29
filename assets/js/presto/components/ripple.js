@@ -40,7 +40,7 @@
 
             setTimeout ( function () {
 
-                $ripple.addClass ('ripple-circle-hide');
+                $ripple.addClass ( 'ripple-circle-hide' );
 
                 setTimeout ( function () {
 

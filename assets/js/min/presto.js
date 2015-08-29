@@ -6243,7 +6243,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             setTimeout ( function () {
 
-                $ripple.addClass ('ripple-circle-hide');
+                $ripple.addClass ( 'ripple-circle-hide' );
 
                 setTimeout ( function () {
 
