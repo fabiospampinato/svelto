@@ -2362,6 +2362,22 @@
 		"shouldRunBless": 0,
 		"useLibsass": 1
 		},
+	"\/assets\/styles\/presto\/settings\/_helpers.scss": {
+		"createSourceMap": 0,
+		"debugStyle": 0,
+		"decimalPrecision": 10,
+		"fileType": 4,
+		"ignore": 1,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/assets\/styles\/presto\/settings\/_helpers.scss",
+		"outputAbbreviatedPath": "\/assets\/styles\/presto\/css\/_helpers.css",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 3,
+		"shouldRunAutoprefixer": 1,
+		"shouldRunBless": 0,
+		"useLibsass": 1
+		},
 	"\/assets\/styles\/presto\/settings\/_highlight.scss": {
 		"createSourceMap": 0,
 		"debugStyle": 0,

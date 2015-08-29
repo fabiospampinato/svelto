@@ -5,12 +5,12 @@ extends ../../layout.jade
 append main
     +divider Blur
 
-    +container-simple
+    +container-simple.outlined
         +square-sample.blurred
 
     +divider Border
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.no-border
             +square-sample.rounded
@@ -19,28 +19,28 @@ append main
 
     +divider Display
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.show
             +square-sample.hidden
 
     +divider Visibility
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.visible
             +square-sample.invisible
 
     +divider Float
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.left
             +square-sample.right
 
     +divider Text alignment
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.text-left
             +square-sample.text-center
@@ -48,7 +48,7 @@ append main
 
     +divider Text transformation
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.text-lowercase
             +square-sample.text-uppercase
@@ -56,7 +56,7 @@ append main
 
     +divider Padding
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.no-padding
             +square-sample.no-padding-top
@@ -66,7 +66,7 @@ append main
 
     +divider Margin
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.no-margin
             +square-sample.no-margin-top
@@ -76,14 +76,14 @@ append main
 
     +divider Overflow
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.overflow-visible
             +square-sample.overflow-hidden
 
     +divider Flip
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.flipX
             +square-sample.flipY
@@ -91,7 +91,7 @@ append main
 
     +divider Rotate
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +square-sample.rotate-left
             +square-sample.rotate-right
@@ -99,7 +99,7 @@ append main
 
     +divider Other
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +centerer(style="width: 100px; height: 100px;").base
                 +square-sample

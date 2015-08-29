@@ -3,7 +3,7 @@
 
 .blurred {
     filter: url('/assets/images/presto/blur.svg#blur') !important;
-    filter: blur(3px) !important;
+    filter: blur($blurred-blur-amount) !important;
 }
 
 /* BORDER */
@@ -13,15 +13,15 @@
 }
 
 .rounded {
-    border-radius: 10000px 10000px !important;
+    border-radius: $rounded-border-radius $rounded-border-radius !important;
 }
 
 .smooth {
-    border-radius: $border-radius-medium !important;
+    border-radius: $smooth-border-radius !important;
 }
 
 .sharp {
-    border-radius: 0 !important;
+    border-radius: $sharp-border-radius !important;
 }
 
 /* DISPLAY */
@@ -66,6 +66,10 @@
 
 .text-right {
     text-align: right !important;
+}
+
+.text-justify {
+    text-align: justify !important;
 }
 
 /* TEXT TRANSFORMATION */
@@ -161,10 +165,10 @@
 }
 
 .rotating { //TODO: Maybe move to an _helpers_animations
-    animation: rotate 0.9s linear infinite !important;
+    animation: rotate $rotating-animation-duration linear infinite !important;
 }
 
-/* OTHER */
+/* OTHERS */
 
 .centerer {
 
@@ -180,32 +184,10 @@
 }
 
 .spacer {
-    flex-grow: 1000 !important;
+    flex-grow: $spacer-flex-grow !important;
     margin-bottom: $layout-gutter;
 }
 
-/* GROW */
-
-@for $nr from 1 through 12 {
-
-    .grow-#{$nr} {
-        flex-grow: #{$nr} !important;
-    }
-
-}
-
-/* SHRINK */
-
-@for $nr from 1 through 12 {
-
-    .shrink-#{$nr} {
-        flex-shrink: #{$nr} !important;
-    }
-
-}
-
-/* OTHERS */ //TODO: move them to their own file
-
 .dragging {
-    z-index: 1;
+    z-index: $dragging-z-index;
 }

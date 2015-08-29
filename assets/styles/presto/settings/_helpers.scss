@@ -1,0 +1,20 @@
+
+/* BLUR */
+
+$blurred-blur-amount: 3px !default;
+
+/* BORDER */
+
+$rounded-border-radius: 1000000px !default;
+$smooth-border-radius: $border-radius-medium !default;
+$sharp-border-radius: 0 !default;
+
+/* ROTATE */
+
+$rotating-animation-duration: 0.9s !default;
+
+/* OTHERS */
+
+$spacer-flex-grow: 1000000 !default;
+
+$dragging-z-index: 1 !default;
