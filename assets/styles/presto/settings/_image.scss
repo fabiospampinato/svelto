@@ -1,12 +1,12 @@
 
 /* IMAGE */
 
-$image-color: 'black';
-$image-color-basic: true;
+$image-color: 'black' !default;
+$image-color-basic: true !default;
 
 /* CAPTION */
 
-$image-caption-color: 'black';
-$image-caption-color-basic: true;
+$image-caption-color: 'black' !default;
+$image-caption-color-basic: true !default;
 
-$image-caption-transition-opacity-duration: 0.1s;
+$image-caption-transition-opacity-duration: 0.1s !default;

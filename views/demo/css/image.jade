@@ -5,21 +5,24 @@ extends ../../layout.jade
 append main
     +divider Images
 
-    +container-simple.outlined
-        +multiple
-            +image-sample.xs-6.md-3.outlined
-            +image-sample.xs-6.md-3
-                +image-caption.top
-                    p Top caption
-                +image-caption
-                    p Bottom caption
-            +image-sample.xs-6.md-3
-                +image-caption.on-hover.top
-                    p [Hover] Top caption
-                +image-caption.on-hover
-                    p [Hover] Bottom caption
-            +image-sample.xs-6.md-3
-                +image-caption.attached.top
-                    p [Attached] Top caption
-                +image-caption.attached
-                    p [Attached] Bottom caption
+    +multiple
+        +image-sample.xs-6.md-3.outlined
+        +image-sample.xs-6.md-3
+            +image-caption.top
+                p Top caption
+            +image-caption
+                p Bottom caption
+        +image-sample.xs-6.md-3
+            +image-caption.on-hover.top
+                p [Hover] Top caption
+            +image-caption.on-hover
+                p [Hover] Bottom caption
+        +image-sample.xs-6.md-3
+            +image-caption.attached.top
+                p [Attached] Top caption
+            +image-caption.attached
+                p [Attached] Bottom caption
+
+    +divider Centered
+
+    +image-sample.xs-6.md-3.centered
