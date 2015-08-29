@@ -65,3 +65,24 @@ append main
             +paragraph-sample
             +paragraph-sample
         +container-footer.pink Footer
+
+    +divider Actions
+
+    +multiple
+        +button-simple("container_toggle_outlined()").outlined Toggle container outlined
+        +button-simple("header_toggle_outlined()").outlined Toggle header outlined
+        +button-simple("footer_toggle_outlined()").outlined Toggle footer outlined
+
+append body-end
+    +script.
+        function container_toggle_outlined () {
+            $('.container').toggleClass ( 'outlined' );
+        }
+
+        function header_toggle_outlined () {
+            $('.container-header').toggleClass ( 'outlined' );
+        }
+
+        function footer_toggle_outlined () {
+            $('.container-footer').toggleClass ( 'outlined' );
+        }

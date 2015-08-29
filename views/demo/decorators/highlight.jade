@@ -62,3 +62,14 @@ append main
         +button-simple.outlined.highlight.highlight-transparent Transparent
         +button-simple.outlined.highlight.highlight-inherit Inherit
         +button-simple.outlined.highlight.highlight-base Base
+
+    +divider Actions
+
+    +button-simple("toggle_outlined()").outlined Toggle outlined
+
+append body-end
+    +script.
+        function toggle_outlined () {
+            $('.label').toggleClass ( 'outlined' );
+        }
+
