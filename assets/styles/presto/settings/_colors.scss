@@ -79,7 +79,7 @@ $color-white-bg: $color-white !default;
 $color-white-bg-hover: darken( $color-white-bg, 2 ) !default;
 $color-white-bg-active: darken( $color-white-bg, 4 ) !default;
 $color-white-border: darken( $color-white-bg, 20 ) !default;
-$color-white-accent: $color-black !default;
+$color-white-accent: $color-secondary !default;
 $color-white-text: #2f2f2f !default;
 $color-white-link: $color-primary !default;
 $color-white-link-hover: lighten( $color-white-link, 2 ) !default;

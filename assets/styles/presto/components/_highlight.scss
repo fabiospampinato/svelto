@@ -4,11 +4,8 @@
 .highlight {
 
     &:after {
-        position: absolute;
+        @include fill-absolutely ();
         z-index: $highlight-z-index;
-        right: 0;
-        left: 0;
-        height: 100%;
         content: '';
         pointer-events: none;
         border-width: 0;
@@ -16,34 +13,60 @@
         border-radius: inherit;
     }
 
-    &.top, &.all {
+    /* DIRECTIONS */
+
+    &.highlight-top, &.highlight-all {
 
         &:after {
             border-top-width: $highlight-size;
         }
 
+        /* OUTLINED */
+
+        &.outlined:after {
+            top: - $outline-width;
+        }
+
     }
 
-    &.right, &.all {
+    &.highlight-right, &.highlight-all {
 
         &:after {
             border-right-width: $highlight-size;
         }
 
+        /* OUTLINED */
+
+        &.outlined:after {
+            right: - $outline-width;
+        }
+
     }
 
-    &:not(.top):not(.right):not(.left), &.bottom, &.all {
+    &:not(.highlight-top):not(.highlight-right):not(.highlight-left), &.highlight-bottom, &.highlight-all {
 
         &:after {
             border-bottom-width: $highlight-size;
         }
 
+        /* OUTLINED */
+
+        &.outlined:after {
+            bottom: - $outline-width;
+        }
+
     }
 
-    &.left, &.all {
+    &.highlight-left, &.highlight-all {
 
         &:after {
             border-left-width: $highlight-size;
+        }
+
+        /* OUTLINED */
+
+        &.outlined:after {
+            left: - $outline-width;
         }
 
     }
