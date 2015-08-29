@@ -1,8 +1,6 @@
 
 /* EMBEDDED */
 
-//TODO: Move to an `embedded` component
-
 .embedded {
 
     //FIXME: There's an extra pixel at the bottom of the demo video
@@ -15,21 +13,20 @@
     margin-bottom: $layout-gutter;
     padding: 0;
 
-    &.ratio-21-9 {
-        padding-bottom: 42.857143%;
+    /* RATIOS */
+
+    @each $ratio in $embedded-ratios {
+
+        $width: nth($ratio, 1);
+        $height: nth($ratio, 2);
+
+        &.ratio-#{$width}-#{$height} {
+            padding-bottom: ( $height * 100 / $width ) * 1%;
+        }
+
     }
 
-    &.ratio-16-9 {
-        padding-bottom: 56.25%;
-    }
-
-    &.ratio-4-3 {
-        padding-bottom: 75%;
-    }
-
-    &.ratio-1-1 {
-        padding-bottom: 100%;
-    }
+    /* IFRAME / EMBED / VIDEO / OBJECT */
 
     & > * {
         @include fill-absolutely ();
