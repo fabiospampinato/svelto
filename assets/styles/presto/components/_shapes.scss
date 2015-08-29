@@ -42,7 +42,7 @@
     padding: $layout-half-spacing;
 
     & > p {
-        font-size: 0.5rem;
+        @include size ( 'xsmall' );
         margin-bottom: $layout-spacing;
         text-align: inherit;
     }

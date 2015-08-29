@@ -74,7 +74,7 @@
             img: '<div class="noty-img infobar-left">' +
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
-            title: '<p class="infobar-title large">' +
+            title: '<p class="infobar-title">' +
                        '{%#o%}' +
                    '</p>',
             body: '{%#o%}',
@@ -89,7 +89,7 @@
                          '</div>' +
                      '</div>',
             button: '<div class="label-wrp button-wrp">' +
-                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
+                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
                             '<div class="label-center">' +
                                 '{%#(o.text || "")%}' +
                             '</div>' +
@@ -116,7 +116,7 @@
             /*
                    : [{
                           color: 'white',
-                          size: 'xsmall',
+                          size: 'small',
                           css: '',
                           text: '',
                           onClick: _.noop

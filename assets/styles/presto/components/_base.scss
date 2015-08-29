@@ -34,7 +34,7 @@ body {
 
     @include color ( $body-color, $body-color-basic );
     font-family: $font-family;
-    font-size: $font-size-base;
+    font-size: $font-size;
     line-height: $line-height;
     display: flex;
     flex-direction: column;

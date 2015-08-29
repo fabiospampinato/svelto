@@ -5,14 +5,12 @@ extends ../../layout.jade
 append main
     +divider Outlined
 
-    +multiple
-        +label-simple.outlined Label
-        +button-simple.outlined Button
-        +input({label: "Placeholder...", value: "Input"}).outlined.white
-        +textarea({label: "Placeholder..."}).outlined.white Textarea
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Input"}).outlined.no-bar.no-floating.white
-            +button-icon("action-settings").outlined
-        +multiple.joined.outlined
-            +textarea({label: "Placeholder..."}).no-bar.no-floating.white Textarea
-            +button-icon("action-settings")
+    +container-simple.outlined
+        +multiple
+            +label-simple.outlined Label
+            +button-simple.outlined Button
+            +input({label: "Placeholder...", value: "Input"}).outlined.white
+            +textarea({label: "Placeholder..."}).outlined.white Textarea
+            +multiple.joined
+                +input({label: "Placeholder...", value: "Input"}).outlined.no-floating.white
+                +button-icon("action-settings").outlined

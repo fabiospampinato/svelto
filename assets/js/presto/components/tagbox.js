@@ -42,7 +42,7 @@
             tag: {
                 min_length: 3,
                 color: '',
-                size: 'small',
+                size: 'medium',
                 css: 'outlined'
             },
             characters: {

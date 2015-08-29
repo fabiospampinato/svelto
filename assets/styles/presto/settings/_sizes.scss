@@ -1,34 +1,25 @@
 
-/* FUNCTION */
-
-@function get_rem ( $distance ) {
-    @return 1rem + ( $size-step * $distance );
-}
-
-/* STEP */
-
-$size-step: 1 / 14 !default;
-
 /* SIZES */
 
-$size-xxxxxsmall: get_rem( -7 ) !default;
-$size-xxxxsmall: get_rem( -6 ) !default;
-$size-xxxsmall: get_rem( -5 ) !default;
-$size-xxsmall: get_rem( -4 ) !default;
-$size-xsmall: get_rem( -2 ) !default;
-$size-small: get_rem( -1 ) !default;
-$size-medium: get_rem( 0 ) !default;
-$size-large: get_rem( 2 ) !default;
-$size-xlarge: get_rem( 4 ) !default;
-$size-xxlarge: get_rem( 6 ) !default;
-$size-xxxlarge: get_rem( 10 ) !default;
-$size-xxxxlarge: get_rem( 16 ) !default;
-$size-xxxxxlarge: get_rem( 24 ) !default;
+//INFO: The considered font-size is 15px
+//INFO: A scaling factor of 1.6 for icons was taken into account to produce the sharpest icons possible
+//INFO: The value at the right of the arrow is the resulting icon size
+
+$size-xxxxsmall: 0.25rem !default; // -> 6px
+$size-xxxsmall: 0.375rem !default; // -> 9px
+$size-xxsmall: 0.5rem !default; // -> 12px
+$size-xsmall: 0.75rem !default; // -> 18px [RECOMMENDED]
+$size-small: 0.875rem !default; // -> 21px
+$size-medium: 1rem !default; // -> 24px [RECOMMENDED]
+$size-large: 1.25rem !default; // -> 30px
+$size-xlarge: 1.5rem !default; // -> 36px [RECOMMENDED]
+$size-xxlarge: 1.75em !default; // -> 42px
+$size-xxxlarge: 2rem !default; // -> 48px [RECOMMENDED]
+$size-xxxxlarge: 2.5rem !default; // -> 60px
 
 /* SIZES */
 
 $sizes: (
-    'xxxxxsmall': $size-xxxxxsmall,
     'xxxxsmall': $size-xxxxsmall,
     'xxxsmall': $size-xxxsmall,
     'xxsmall': $size-xxsmall,
@@ -39,6 +30,5 @@ $sizes: (
     'xlarge': $size-xlarge,
     'xxlarge': $size-xxlarge,
     'xxxlarge': $size-xxxlarge,
-    'xxxxlarge': $size-xxxxlarge,
-    'xxxxxlarge': $size-xxxxxlarge
+    'xxxxlarge': $size-xxxxlarge
 );

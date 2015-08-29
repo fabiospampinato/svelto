@@ -13,11 +13,9 @@ $roboto-enabled: false !default;
 
 /* FONT SIZES */
 
-$font-size-small: 13px !default;
-$font-size-normal: 15px !default;
-$font-size-large: 17px !default;
+$font-size: 15px !default;
 
-$font-size-root: $font-size-normal !default;
+$font-size-root: $font-size !default;
 $font-size-base: 1em;
 
 /* LINE HEIGHT */

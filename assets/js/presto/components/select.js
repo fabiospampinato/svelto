@@ -35,7 +35,7 @@
                           '</div>' +
                       '</div>',
             option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
-                        '<div class="label actionable xsmall sharp">' +
+                        '<div class="label actionable sharp">' +
                             '<div class="label-center">' +
                                 '{%=o.value%}' +
                             '</div>' +

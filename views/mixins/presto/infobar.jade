@@ -7,14 +7,14 @@ mixin infobar(icon, title, subtitle)
                 if subtitle !== undefined
                     if subtitle
                         +infobar-left
-                            +icon(icon).xxxxxlarge
+                            +icon(icon).xlarge
                         +infobar-center
                             +infobar-title(title)
                             +infobar-subtitle(subtitle)
                             block
                     else
                         +infobar-left
-                            +icon(icon).xxxlarge
+                            +icon(icon)
                         +infobar-center
                             +infobar-title(title)
                             block

@@ -10,7 +10,7 @@ append main
             - var squares_nr = 64;
             - var nr = 1;
             while nr <= squares_nr
-                +square.xxxxxlarge.centerer
+                +square.xxlarge.centerer
                     span.small= nr++
 
     +divider Actions
@@ -35,7 +35,7 @@ append body-end
             var html = '';
 
             for ( var i = 0, l = $('input[name="input_populate"]').val (); i < l; i++ ) {
-                html += '<div class="square xxxxxlarge centerer" style=""><span class="small">' + (i + 1) + '</span></div>';
+                html += '<div class="square xxlarge centerer" style=""><span class="small">' + (i + 1) + '</span></div>';
             }
 
             $('.squares .multiple').empty ().append ( html );
@@ -55,7 +55,7 @@ append body-end
 
             iterations += 1;
 
-            $node.append ( '<div class="label-wrp"><div class="label compact badge xxxsmall rounded inherit"><div class="label-center">' + iterations + '</div></div></div>' );
+            $node.append ( '<div class="label-wrp"><div class="label compact badge top-right xsmall rounded inherit"><div class="label-center">' + iterations + '</div></div></div>' );
 
             if ( found_nr < search_nr ) {
 

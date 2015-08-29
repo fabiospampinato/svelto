@@ -5648,7 +5648,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             img: '<div class="noty-img infobar-left">' +
                      '<img src="{%=o%}" class="smooth" />' +
                  '</div>',
-            title: '<p class="infobar-title large">' +
+            title: '<p class="infobar-title">' +
                        '{%#o%}' +
                    '</p>',
             body: '{%#o%}',
@@ -5663,7 +5663,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                          '</div>' +
                      '</div>',
             button: '<div class="label-wrp button-wrp">' +
-                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "xsmall")%} {%=(o.css || "")%}">' +
+                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
                             '<div class="label-center">' +
                                 '{%#(o.text || "")%}' +
                             '</div>' +
@@ -5690,7 +5690,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             /*
                    : [{
                           color: 'white',
-                          size: 'xsmall',
+                          size: 'small',
                           css: '',
                           text: '',
                           onClick: _.noop
@@ -6320,7 +6320,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                           '</div>' +
                       '</div>',
             option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
-                        '<div class="label actionable xsmall sharp">' +
+                        '<div class="label actionable sharp">' +
                             '<div class="label-center">' +
                                 '{%=o.value%}' +
                             '</div>' +
@@ -7441,7 +7441,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             tag: {
                 min_length: 3,
                 color: '',
-                size: 'small',
+                size: 'medium',
                 css: 'outlined'
             },
             characters: {

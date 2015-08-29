@@ -201,8 +201,10 @@
 
         &:not(.no-initial-bar) {
 
-            border-style: solid;
-            border-width: 0 0 $outline-width 0;
+            &:not(.outlined) {
+                border-style: solid;
+                border-width: 0 0 $outline-width 0;
+            }
 
             & > .text-field-bar {
                 bottom: - $outline-width;

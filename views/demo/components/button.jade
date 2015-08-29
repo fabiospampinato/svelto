@@ -50,7 +50,6 @@ append main
         +button-pointed-simple Normal
         +button-pointed-simple.sharp Sharp
         +button-pointed-simple.primary Colored
-        +button-pointed-simple.secondary.xxsmall Smaller
         +button-pointed-simple.outlined Outlined
         +button-pointed-simple.compact Compact
 
@@ -70,22 +69,21 @@ append main
     +divider Corner
 
     +container-simple
-        +button-corner("top-left").primary.small P
+        +button-corner("top-left").primary P
         +button-corner("top-right", "file-file-download").secondary
-        +button-corner("bottom-right", "action-thumb-up").quaternary.large
-        +button-corner("bottom-left", "action-favorite").tertiary.xlarge
+        +button-corner("bottom-right", "action-thumb-up").quaternary
+        +button-corner("bottom-left", "action-favorite").tertiary
         +paragraph-sample
 
     +divider Badge
 
     +multiple
         +label-icon("action-settings")
-            +button-simple.compact.badge.xxxsmall.red 1
-        +label-icon("action-settings")
-            +button-simple.compact.badge.xxxsmall.rounded.primary 2
-        +label-icon("action-settings").tertiary
-            +button-simple.compact.badge.xxxsmall.rounded.inherit 3
+            +button-simple.compact.badge.xsmall.quaternary.top-left 1
+            +button-simple.compact.badge.xsmall.primary.top-right 2
+            +button-simple.compact.badge.xsmall.tertiary.bottom-left 3
+            +button-simple.compact.badge.xsmall.secondary.bottom-right 4
 
     +divider Floating
 
-    +button-icon('action-settings').floating.rounded.secondary.xxxlarge
+    +button-icon('action-settings').floating.rounded.secondary.large

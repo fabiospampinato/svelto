@@ -47,7 +47,8 @@
         order: 2;
 
         & > .infobar-title {
-            @include size ( $infobar-title-size );
+            // @include size ( $infobar-title-size );
+            font-size: 1.3em; //FIXME: it shouldn't be hard coded
             margin-bottom: $infobar-title-margin-bottom;
         }
 

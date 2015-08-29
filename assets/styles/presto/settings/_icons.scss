@@ -871,3 +871,5 @@ $icons: (
 /* OTHERS */
 
 $icons-only-enabled: $environment-production !default;
+
+$icons-scale-amount: 1.6; //INFO: So that we have a 24px wide icon at medium size
