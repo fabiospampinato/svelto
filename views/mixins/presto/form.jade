@@ -4,7 +4,9 @@ mixin form
     form&attributes(attributes)
         block
 
+
 mixin form-button(href)
+    //- TODO: Make it DRY, we are basically just repeating the button mixin
     button(type="submit")&attributes(attributes).label-wrp.button-wrp
         if href
             if href.slice ( 0, 11 ) === 'javascript:'

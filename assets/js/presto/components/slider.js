@@ -113,6 +113,12 @@
 
         },
 
+        _update_label: function ( value ) {
+
+            this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
+
+        },
+
         _update_variables: function () {
 
             this.unhighlighted_width = this.$unhighlighted.width ();
@@ -209,7 +215,7 @@
 
             this.$highlighted.css ( 'transform', 'translate3d(' + data.modifiedXY.X + 'px,0,0)' );
 
-            this.$label.html ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
+            this._update_label ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
 
         },
 
@@ -260,6 +266,7 @@
                 this.options.value = value;
 
                 this._update_positions ();
+                this._update_label ();
 
                 this.$input.val ( value ).trigger ( 'change' );
 

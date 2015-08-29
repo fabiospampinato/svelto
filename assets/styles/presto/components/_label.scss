@@ -1,4 +1,11 @@
 
+/* DEFAULT */
+
+label {
+    @extend %widget;
+    display: block;
+}
+
 /* LABEL */
 
 .label-wrp {
