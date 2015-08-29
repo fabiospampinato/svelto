@@ -441,7 +441,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /* BASE WIDGET */
 
-//TODO: support for trigger -> preventDefault
+//TODO: Add support for _trigger -> preventDefault
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -462,7 +462,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         widgetFullName: 'widget',
 
         defaultElement: false,
-        templates: {}, //INFO: the `base` template will be used as the constructor
+        templates: {}, //INFO: The `base` template will be used as the constructor
 
         /* OPTIONS */
 
@@ -490,7 +490,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( this.initializationType === 'element' ) {
 
-                _.merge ( this.options, $(element).data ( this.widgetName ) ); //FIXME: does it work? Expecially with multiple instantiations, I'm not sure about that `_.merge` call
+                _.merge ( this.options, $(element).data ( this.widgetName ) );
 
             }
 
@@ -505,31 +505,23 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             // DISABLED
 
-            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' ); //FIXME: are you sure you don't want to use presto.widgetFullName instead?
+            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' );
 
-            // IF THERE'S AN ELEMENT OR A DEFAULT ELEMENT
+            // SAVING INSTANCE
 
-            if ( element !== this ) { //FIXME: it MUST be true
+            $.data ( this.element, this.widgetFullName, this );
 
-                // SAVING INSTANCE
+            // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
-                $.data ( this.element, this.widgetFullName, this );
+            this._on ( true, this.$element, 'remove', function ( event ) {
 
-                // ON $ELEMENT REMOVE -> WIDGET DESTROY
+                if ( event.target === this.element ) {
 
-                this._on ( true, this.$element, 'remove', function ( event ) {
+                    this.destroy ();
 
-                    if ( event.target === this.element ) {
+                }
 
-                        this.destroy ();
-
-                    }
-
-                });
-
-            }
-
-            //TODO: not setting this.document and this.window
+            });
 
             /* CALLBACKS */
 
@@ -556,7 +548,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             this._destroy ();
 
-            $.data ( this.element, this.widgetFullName, null ); //TODO: remove it, not set it to null
+            $.removeData ( this.element, this.widgetFullName );
 
         },
 
@@ -650,7 +642,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             if ( key === 'disabled' ) {
 
-                this.$element.toggleClass ( this.widgetName + '-disabled', !!value ); //FIXME: are you sure you don't want to use presto.widgetFullName instead?
+                this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
 
             }
 
@@ -676,7 +668,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
 
-            //TODO: add support for custom data
+            //TODO: Add support for custom data
 
             var instance = this;
 
@@ -710,7 +702,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
             function handlerProxy () {
 
-                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return; //FIXME: are you sure you don't want to use presto.widgetFullName instead?
+                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return;
 
                 var args = _.slice ( arguments );
 
@@ -751,8 +743,6 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         },
 
         _trigger: function ( events, data ) {
-
-            //FIXME: check if with jQuery UI version
 
             data = data || {};
 

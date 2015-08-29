@@ -1,5 +1,5 @@
 
-//TODO: add transparentize classes, maybe even the transparent-initial class
+//TODO: Add transparentize classes, maybe even the transparent-initial class
 
 /* MIXIN */
 
@@ -38,7 +38,7 @@
                 background: $bg-active #{$extra};
             }
 
-            &:not(.active):not(.dragging):not(.disabled):not([class*="-disabled"]) {
+            &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
 
                 &:hover {
                     background: $bg-hover #{$extra};
@@ -74,9 +74,9 @@
 
     }
 
-    @if $color_name != "inherit" { //INFO: Otherwise it will not work for example under .container-content that has color: inherit
+    @if $color_name != 'inherit' { //INFO: Otherwise it will not work for example under .container-content that has color: `inherit`
 
-        p > a { //FIXME: Should we do it just in `p`s? elsewhere maybe is an unwanted effect...
+        p > a { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
             color: $link #{$extra};
 
