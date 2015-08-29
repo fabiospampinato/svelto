@@ -52,6 +52,10 @@
 
         }
 
+        &.highlight:after {
+            border-color: $accent #{$extra};
+        }
+
     } @else {
 
         @if $gradient == true {

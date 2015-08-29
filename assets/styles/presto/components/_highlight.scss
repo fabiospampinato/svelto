@@ -1,0 +1,63 @@
+
+/* HIGHLIGHT */
+
+.highlight {
+
+    &:after {
+        position: absolute;
+        z-index: $highlight-z-index;
+        right: 0;
+        left: 0;
+        height: 100%;
+        content: '';
+        pointer-events: none;
+        border-width: 0;
+        border-style: solid;
+        border-radius: inherit;
+    }
+
+    &.top, &.all {
+
+        &:after {
+            border-top-width: $highlight-size;
+        }
+
+    }
+
+    &.right, &.all {
+
+        &:after {
+            border-right-width: $highlight-size;
+        }
+
+    }
+
+    &:not(.top):not(.right):not(.left), &.bottom, &.all {
+
+        &:after {
+            border-bottom-width: $highlight-size;
+        }
+
+    }
+
+    &.left, &.all {
+
+        &:after {
+            border-left-width: $highlight-size;
+        }
+
+    }
+
+    /* COLORS */
+
+    @each $name, $datas in $colors {
+
+        $bg: nth($datas, 1);
+
+        &.highlight-#{$name}:after {
+            border-color: $bg !important;
+        }
+
+    }
+
+}
