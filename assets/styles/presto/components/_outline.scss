@@ -1,14 +1,31 @@
 
+//FIXME: Fix these super ugly selectors
+
 /* OUTLINE */
 
 .outlined:not(.multiple-wrp),
-.outlined.multiple-wrp > .multiple > * {
+.outlined.multiple-wrp > .multiple > *:not([class*="wrp"]),
+.outlined.multiple-wrp > .multiple > [class*="wrp"] > * {
     border-width: $outline-width;
     border-style: $outline-style;
 }
 
-/* UNOUTLINE */
+/* STYLES */
 
-.unoutlined {
-    border-width: 0;
+.outlined-solid:not(.multiple-wrp),
+.outlined-solid.multiple-wrp > .multiple > *:not([class*="wrp"]),
+.outlined-solid.multiple-wrp > .multiple > [class*="wrp"] > * {
+    border-style: solid;
+}
+
+.outlined-dotted:not(.multiple-wrp),
+.outlined-dotted.multiple-wrp > .multiple > *:not([class*="wrp"]),
+.outlined-dotted.multiple-wrp > .multiple > [class*="wrp"] > * {
+    border-style: dotted;
+}
+
+.outlined-dashed:not(.multiple-wrp),
+.outlined-dashed.multiple-wrp > .multiple > *:not([class*="wrp"]),
+.outlined-dashed.multiple-wrp > .multiple > [class*="wrp"] > * {
+    border-style: dashed;
 }
