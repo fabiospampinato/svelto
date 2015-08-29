@@ -3,83 +3,59 @@
 
 //FIXME: It should scroll with overflow: auto;
 //FIXME: It should scroll if the height is fixed and the content (not .container-content!) takes more space
+//TODO: The header title isn't that good, it should be bigger, but only if there's just text, maybe create a `.container-header-title` with large size
 
 .container {
 
+    @extend %widget;
     @include color ( $container-color, $container-color-basic );
     display: flex;
     flex-direction: column;
-    margin-bottom: $layout-gutter;
     border-radius: $contianer-border-radius;
-    position: relative;
-
-    &.centered {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    &.limited {
-        max-width: $layout-max-width;
-        margin-right: auto;
-        margin-left: auto;
-    }
 
     & > .container-header {
-
         @include color ( $container-header-color, $container-header-color-basic );
+        @include last-child-gutter-fix ();
         font-weight: bold;
         flex-shrink: 0;
         padding: $layout-gutter;
-        border-radius: 0;
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-
-        &.actionable { //TODO: Move it to it's own decorator
-            cursor: pointer;
-        }
-
-        & > *:last-child {
-            margin-bottom: 0 !important;
-        }
-
     }
 
     & > .container-content {
-
         @include color ( $container-content-color, $container-content-color-basic );
+        @include last-child-gutter-fix ();
         overflow: auto;
         flex-grow: 1;
         padding: $layout-gutter;
-
-        & > *:last-child {
-            margin-bottom: 0 !important;
-        }
-
     }
 
     & > .container-footer {
-
         @include color ( $container-footer-color, $container-footer-color-basic );
+        @include last-child-gutter-fix ();
         flex-shrink: 0;
         padding: $layout-gutter;
-        border-radius: 0;
-        border-bottom-right-radius: inherit;
-        border-bottom-left-radius: inherit;
+    }
 
-        & > *:last-child {
-            margin-bottom: 0 !important;
+    & > *:first-child {
+        @include border-top-radius ( inherit );
+    }
+
+    & > *:last-child {
+        @include border-bottom-radius ( inherit );
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+        & > .container-header.outlined {
+            margin: ( - $outline-width ) ( - $outline-width ) 0;
         }
 
-    }
+        & > .container-footer.outlined {
+            margin: 0 ( - $outline-width ) ( - $outline-width );
+        }
 
-    & > *:first-child.container-content {
-        border-top-left-radius: inherit;
-        border-top-right-radius: inherit;
-    }
-
-    & > *:last-child.container-content {
-        border-bottom-left-radius: inherit;
-        border-bottom-right-radius: inherit;
     }
 
 }

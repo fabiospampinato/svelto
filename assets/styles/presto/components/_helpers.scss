@@ -170,6 +170,8 @@
 
 /* OTHERS */
 
+//TODO: Move to more appropriate files
+
 .centerer {
 
     display: flex;
@@ -190,4 +192,16 @@
 
 .dragging {
     z-index: $dragging-z-index;
+}
+
+.centered { //TODO: Move it to it's own decorator
+    @include center-margin ();
+}
+
+.limited { //TODO: Move it to it's own decorator
+    @include center-margin ( $layout-max-width );
+}
+
+.actionable { //TODO: Move it to it's own decorator
+    cursor: pointer;
 }

@@ -1,0 +1,9 @@
+
+/* WIDGET */
+
+//INFO: Basic widget properties from which every other widget inherit from
+
+%widget {
+    position: relative;
+    margin-bottom: $layout-gutter
+}
