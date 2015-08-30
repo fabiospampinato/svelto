@@ -202,7 +202,7 @@
     @include center-margin ( $layout-max-width );
 }
 
-.actionable { //TODO: Move it to it's own decorator
+.actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator
     cursor: pointer;
 }
 

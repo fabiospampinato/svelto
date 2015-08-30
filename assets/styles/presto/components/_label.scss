@@ -377,6 +377,10 @@ label {
             margin-bottom: 0;
         }
 
+        &.disabled, &.label-disabled {
+            opacity: 0.5;
+        }
+
     }
 
 }

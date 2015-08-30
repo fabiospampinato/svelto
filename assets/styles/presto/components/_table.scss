@@ -1,45 +1,210 @@
 
 /* TABLE */
 
-//FIXME: It shouldn't be always centered
-
 //TODO: Add responsive tables
 //TODO: Add ability to easily set per-columm text alignment
-//TODO: Add $layout-gutter space between columns
+//TODO: add .equal
+//TODO: add .collapse (not width:100%)
+//TODO: add .compact
 
 table.table { //INFO: So that if we need a plain basic table we can, just by don't using the `table` class
 
     @extend %widget;
+    @include color ( $table-color, $table-color-basic );
     width: 100%;
-    text-align: center; //FIXME: Remove it
+
+    /* CELLS */
+
+    & > * {
+
+        border-color: $table-bordered-border-color !important;
+        border-style: solid;
+        border-width: 0;
+
+        & > tr {
+
+            border-color: $table-bordered-border-color !important;
+            border-style: solid;
+            border-width: 0;
+
+            & > * {
+                @include last-child-gutter-fix ();
+                padding: $layout-gutter;
+                text-align: left;
+                border-color: $table-bordered-border-color  !important;
+                border-style: solid;
+                border-width: 0;
+            }
+
+        }
+
+    }
 
     /* THEAD */
 
-    & > thead > tr > th {
-        padding: $table-header-padding;
-        height: $table-header-min-height;
+    & > thead {
+
+        @include color ( $table-header-color, $table-header-color-basic );
+
+        & > tr {
+
+            & > th {
+                height: $table-header-min-height;
+            }
+
+            &:first-child > th {
+
+                &:first-child {
+                    border-top-left-radius: inherit;
+                }
+
+                &:last-child {
+                    border-top-right-radius: inherit;
+                }
+
+            }
+
+        }
+
     }
 
     /* TBODY */
 
-    & > tbody > tr {
+    & > tbody {
 
-        & > td {
-            @include last-child-gutter-fix ();
-            padding: $table-row-padding;
-            height: $table-row-min-height;
+        @include color ( $table-body-color, $table-body-color-basic );
+
+        & > tr {
+
+            & > td {
+                height: $table-row-min-height;
+            }
+
+            &.empty > td {
+                height: $table-row-empty-min-height;
+                text-align: center;
+            }
+
+            &:last-child > th {
+
+                &:first-child {
+                    border-bottom-left-radius: inherit;
+                }
+
+                &:last-child {
+                    border-bottom-right-radius: inherit;
+                }
+
+            }
+
         }
 
-        &.empty > td {
-            height: $table-row-empty-min-height;
+    }
+
+    & > tfoot + tbody > tr:last-child > th {
+
+        &:first-child {
+            border-bottom-left-radius: inherit;
+        }
+
+        &:last-child {
+            border-bottom-right-radius: inherit;
+        }
+
+    }
+
+    /* TFOOT */
+
+    & > tfoot {
+
+        @include color ( $table-footer-color, $table-footer-color-basic );
+
+        & > tr {
+
+            & > td {
+                height: $table-footer-min-height;
+            }
+
+            &:last-child > th {
+
+                &:first-child {
+                    border-bottom-left-radius: inherit;
+                }
+
+                &:last-child {
+                    border-bottom-right-radius: inherit;
+                }
+
+            }
+
+        }
+
+    }
+
+    /* SEPARATED / BORDERED */
+
+    &.separated, &.bordered {
+
+        & > thead > tr {
+            border-bottom-width: ( $table-bordered-border-width * 2 );
+        }
+
+        & > tbody > tr:not(:last-child) {
+            border-bottom-width: $table-bordered-border-width;
+        }
+
+        & > tfoot > tr {
+            border-top-width: ( $table-bordered-border-width * 2 );
         }
 
     }
 
     /* BORDERED */
 
-    &.bordered > tbody > tr {
-        border-bottom: $table-bordered-border-width solid $table-bordered-border-color;
+    &.bordered {
+
+        & > * > tr > * {
+
+            border-left-width: $table-bordered-border-width;
+
+            &:last-child {
+                border-right-width: $table-bordered-border-width;
+            }
+
+        }
+
+        & > tbody > tr {
+
+            &:first-child, &.empty + tr {
+                border-top-width: $table-bordered-border-width;
+            }
+
+            &:last-child {
+                border-bottom-width: $table-bordered-border-width;
+            }
+
+        }
+
+        & > thead {
+
+            border-top-width: $table-bordered-border-width;
+
+            & ~ tbody > tr:first-child, & ~ tbody > tr.empty + tr {
+                border-top-width: 0;
+            }
+
+        }
+
+        & > tfoot {
+
+            border-bottom-width: $table-bordered-border-width;
+
+            & + tbody > tr:last-child {
+                border-bottom-width: 0;
+            }
+
+        }
+
     }
 
     /* STRIPED */

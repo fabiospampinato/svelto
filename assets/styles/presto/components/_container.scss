@@ -9,6 +9,7 @@
 
     @extend %widget;
     @include color ( $container-color, $container-color-basic );
+    @include last-child-gutter-fix ();
     display: flex;
     flex-direction: column;
     border-radius: $contianer-border-radius;

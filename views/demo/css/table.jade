@@ -3,37 +3,51 @@
 extends ../../layout.jade
 
 append main
-    +divider Default
+    +divider Table
 
     +container-simple.outlined
         table.table
             thead
                 tr
-                    th Int
+                    th.xs-1.text-center Int
                     th String
                     th Date
-                    th Options
+                    th.text-center Options
             tfoot
+                tr
+                    td(colspan="100%")
+                        +multiple
+                            +multiple-left
+                                p 20 Rows - Page 3 of 5
+                            +multiple-right
+                                +pagination({ url: '#', total: 5, current: 3, blocks: 10, classes: 'xsmall outlined' })
             tbody
                 +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 5 )
                     tr
-                        td= nr++
+                        td.text-center 1
                         td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
+                        td 753462000
+                        td.text-center -
                     tr
-                        td= nr++
+                        td.text-center 2
                         td Bar
+                        td 16/11/1993
+                        td.text-center
+                            +button-icon('settings').outlined.small.disabled
+                    tr
+                        td.text-center 3
+                        td Baz
                         td 16 Nov 1993
+                        td.text-center
+                            +button-icon('settings').outlined.small
+                    tr
+                        td.text-center 4
+                        td Qux
+                        td November 16th, 1993
                         td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
+                            +multiple.centered.joined
+                                +button-simple.outlined.small Button
+                                +button-icon('more_vert').outlined.small
 
     +divider Empty
 
@@ -45,134 +59,31 @@ append main
                     th String
                     th Date
                     th Options
-            tfoot
             tbody
                 +table-tr-empty
 
-    +divider Bordered
+    +divider Actions
 
-    +container-simple.outlined
-        table.table.bordered
-            thead
-                tr
-                    th Int
-                    th String
-                    th Date
-                    th Options
-            tfoot
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 5 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
+    +multiple
+        +button-simple("toggle_table_class('separated')").outlined Toggle separated
+        +button-simple("toggle_table_class('bordered')").outlined Toggle bordered
+        +button-simple("toggle_table_class('striped')").outlined Toggle striped
+        +button-simple("toggle_table_class('hoverable')").outlined Toggle hoverable
+        +button-simple("remove_thead()").outlined Remove header
+        +button-simple("remove_tbody()").outlined Remove body
+        +button-simple("remove_tfoot()").outlined Remove footer
 
-    +divider Striped
-
-    +container-simple.outlined
-        table.table.striped
-            thead
-                tr
-                    th Int
-                    th String
-                    th Date
-                    th Options
-            tfoot
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 5 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
-
-    +divider Hoverable
-
-    +container-simple.outlined
-        table.table.hoverable
-            thead
-                tr
-                    th Int
-                    th String
-                    th Date
-                    th Options
-            tfoot
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 5 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
-
-    +divider Bordered - Striped - Hoverable
-
-    +container-simple.outlined
-        table.table.bordered.striped.hoverable
-            thead
-                tr
-                    th Int
-                    th String
-                    th Date
-                    th Options
-            tfoot
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 5 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple.outlined.small Btn 1
-                                +button-simple.outlined.small Btn 2
+append body-end
+    +script.
+        function toggle_table_class ( css_class ) {
+            $('table.table').toggleClass ( css_class );
+        }
+        function remove_thead () {
+            $('table.table thead').remove ();
+        }
+        function remove_tbody () {
+            $('table.table tbody').remove ();
+        }
+        function remove_tfoot () {
+            $('table.table tfoot').remove ();
+        }

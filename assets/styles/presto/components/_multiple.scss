@@ -4,6 +4,7 @@
 //TODO: Add a 'lefted', 'righted' classes for aligning the content to the left or right
 //TODO: Don't use a negative margin when not necessary (nowrap)
 //FIXME: Remove the ugly [class*="-wrp"] selectors
+//FIXME: Use `inline-flex` for multiple-wrp, or it will take too much space in tables for example
 
 .multiple-wrp {
 
