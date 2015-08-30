@@ -1,16 +1,20 @@
 
 /* PARALLAX */
 
-$parallax-height: 50vh;
-$parallax-perspective: 300px;
+$parallax-height: 50vh !default;
+$parallax-perspective: 20rem !default;
 
-/* LAYERS LAVELS */
+/* DEEP */
 
-$parallax-deep-translate-z: - $parallax-perspective * 2;
-$parallax-deep-scale: 3;
+$parallax-deep-translate-z: - $parallax-perspective * 2 !default;
+$parallax-deep-scale: 3 !default;
 
-$parallax-background-translate-z: - $parallax-perspective;
-$parallax-background-scale: 2;
+/* BACKGROUND */
 
-$parallax-foreground-translate-z: $parallax-perspective / 3.33333;
-$parallax-foreground-scale: 0.7;
+$parallax-background-translate-z: - $parallax-perspective !default;
+$parallax-background-scale: 2 !default;
+
+/* FOREGROUND */
+
+$parallax-foreground-translate-z: $parallax-perspective / 3.33333 !default;
+$parallax-foreground-scale: 0.7 !default;

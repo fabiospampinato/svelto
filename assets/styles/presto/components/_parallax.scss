@@ -5,8 +5,7 @@
 
 .parallax {
 
-    position: relative;
-    margin-bottom: $layout-gutter;
+    @extend %widget;
     height: $parallax-height;
     overflow-x: hidden;
     overflow-y: auto;
@@ -42,7 +41,7 @@
                 z-index: 4;
             }
 
-            & > .parallax-content-sample { //FIXME: remove it, it shouldn't be needed
+            & > .parallax-content-sample { //FIXME: Remove this component, it shouldn't be needed
                 @include center-transform ();
             }
 
