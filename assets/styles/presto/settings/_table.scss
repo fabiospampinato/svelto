@@ -1,44 +1,24 @@
 
 /* TABLE */
 
-$table-color: 'inherit' !default;
+$table-color: inherit !default;
 $table-color-basic: true !default;
 
-/* HEADER */
-
-$table-header-color: 'inherit' !default;
-$table-header-color-basic: true !default;
-
-$table-header-min-height: 3em !default;
-
-/* BODY */
-
-$table-body-color: 'inherit' !default;
-$table-body-color-basic: true !default;
-/* ROW */
-
-$table-row-min-height: 3em !default;
+$table-header-footer-bg-color: rgba(0, 0, 0, 0.05) !default; //INFO: The same used in label sub left and right
 
 /* EMPTY */
 
-$table-row-empty-min-height: ( $table-row-min-height * 1.5 ) !default;
-
-/* FOOTER */
-
-$table-footer-color: 'inherit' !default;
-$table-footer-color-basic: true !default;
-
-$table-footer-min-height: 3em !default;
+$table-row-empty-height: 4.5em !default;
 
 /* BORDERED */
 
 $table-bordered-border-width: $outline-width !default;
-$table-bordered-border-color: #dddddd !default;
+$table-bordered-border-color: inherit !default;
 
 /* STRIPED */
 
-$table-striped-row-even-color: rgba(0, 0, 0, 0.02) !default;
-$table-striped-row-odd-color: rgba(0, 0, 0, 0) !default;
+$table-striped-row-odd-color: rgba(0, 0, 0, 0.02) !default;
+$table-striped-row-even-color: rgba(0, 0, 0, 0) !default;
 
 /* HOVERABLE */
 

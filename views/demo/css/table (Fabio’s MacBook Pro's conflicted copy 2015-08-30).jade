@@ -5,15 +5,15 @@ extends ../../layout.jade
 append main
     +divider Table
 
-    +container-simple.outlined
-        table.table.bordered
-            thead
+    +container
+        table.table
+            thead.red
                 tr
                     th.xs-1.text-center Int
                     th String
                     th Date
                     th.text-center Options
-            tfoot
+            tfoot.red
                 tr
                     td(colspan="100%")
                         +multiple
@@ -52,7 +52,7 @@ append main
     +divider Empty
 
     +container-simple.outlined
-        table.table.bordered
+        table.table
             thead
                 tr
                     th Int
@@ -65,14 +65,10 @@ append main
     +divider Actions
 
     +multiple
-        +button-simple("toggle_table_class('compact')").outlined Toggle compact
-        +button-simple("toggle_table_class('collapse')").outlined Toggle collapse
-        +button-simple("toggle_table_class('equal')").outlined Toggle equal
         +button-simple("toggle_table_class('separated')").outlined Toggle separated
         +button-simple("toggle_table_class('bordered')").outlined Toggle bordered
         +button-simple("toggle_table_class('striped')").outlined Toggle striped
         +button-simple("toggle_table_class('hoverable')").outlined Toggle hoverable
-        +button-simple("toggle_table_class('outlined')").outlined Toggle outlined
         +button-simple("remove_thead()").outlined Remove header
         +button-simple("remove_tbody()").outlined Remove body
         +button-simple("remove_tfoot()").outlined Remove footer
