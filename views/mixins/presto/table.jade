@@ -1,9 +1,12 @@
 //- table.jade
 
-mixin table-tr-empty
-    tr.empty.hidden
+mixin table-tr-empty ( empty_str )
+    tr.empty.hidden&attributes(attributes)
         td(colspan="100%")
             if block
                 block
             else
-                = "Empty"
+                if empty_str
+                    = empty_str
+                else
+                    = "Empty"
