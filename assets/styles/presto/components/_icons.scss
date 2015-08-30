@@ -1,87 +1,40 @@
 
-// URL: https://www.google.com/design/icons/
-
 /* GENERAL */
 
 %icon {
-    font-family: Material-Design-Icons;
-    speak: none;
-    font-style: normal;
+    // font-family: Material-Design-Icons;
+    // font-weight: normal;
+    // font-style: normal;
+    // font-variant: normal;
+    // line-height: $line-height;
+    // display: inline-block;
+    // width: $line-height-em;
+    // height: $line-height-em;
+    // transform: scale($icons-scale-amount);
+    // text-align: center;
+    // text-transform: none;
+    // speak: none;
+    // -webkit-font-smoothing: antialiased;
+    // -moz-osx-font-smoothing: grayscale;
+
+    font-family: 'Material Icons';
+    font-size: 24px;  /* Preferred icon size */
     font-weight: normal;
-    font-variant: normal;
+    font-style: normal;
+    line-height: 1;
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    letter-spacing: normal;
     text-transform: none;
-    transform: scale($icons-scale-amount);
-    height: $line-height-em;
-    line-height: $line-height;
-    text-align: center;
-    width: $line-height-em;
+    word-wrap: normal;
+
     -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
     -moz-osx-font-smoothing: grayscale;
+    font-feature-settings: 'liga';
 }
 
-.icon[class*=' icon-'] {
+i.icon {
     @extend %icon;
-}
-
-/* FUNCTIONS */
-
-@function dec-to-hex ( $d ) {
-
-    $hexVals: "a" "b" "c" "d" "e" "f";
-    $base: 16;
-    $quotient: $d;
-    $result: "";
-
-    @while $quotient != 0 {
-        $mod: $quotient % $base;
-        $quotient: floor($quotient / $base);
-        @if $mod > 9 {
-            $mod: nth($hexVals, $mod - 9);
-        }
-        @if $d < $base {
-            $result: "00" + $mod;
-        } @else {
-            $result: $mod + $result;
-        }
-    }
-
-    @while str-length($result) < 3 {
-        $result: "0" + $result;
-    }
-
-    @return $result;
-
-}
-
-/* MIXINS */
-
-@mixin variable-icon-font ( $icon-code ) {
-
-    content: #{"\"\\"}#{$icon-code + "\""};
-
-}
-
-/* ICONS */
-
-$index: 0;
-
-@each $category, $cats in $icons {
-
-    $all: nth($cats, 1);
-    $enabled: nth($cats, 2);
-
-    @each $icon_name in $all {
-
-        @if $icons-only-enabled == false or index($enabled, $icon_name) != null {
-
-            .icon-#{$category}-#{$icon_name}:before {
-                @include variable-icon-font ( "f" + dec-to-hex($index) );
-            }
-
-        }
-
-        $index: $index + 1;
-
-    }
-
 }
