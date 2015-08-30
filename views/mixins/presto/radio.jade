@@ -6,12 +6,12 @@ mixin radio(name, title, value, checked)
             input(type="radio", name=name, value=value, checked)
             +button-center
                 = title
-                +icon("toggle-radio-button-on").on.right
-                +icon("toggle-radio-button-off").off.right
+                +icon("radio_button_checked").on.right
+                +icon("radio_button_unchecked").off.right
     else
         +button&attributes(attributes).radio
             input(type="radio", name=name, value=value)
             +button-center
                 = title
-                +icon("toggle-radio-button-on").on.right
-                +icon("toggle-radio-button-off").off.right
+                +icon("radio_button_checked").on.right
+                +icon("radio_button_unchecked").off.right

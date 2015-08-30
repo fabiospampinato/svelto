@@ -8,12 +8,12 @@ mixin checkbox(name, title, value, checked)
             input(type="checkbox", name=name, value=value, checked)
             +button-center
                 = title
-                +icon("toggle-check-box").on.right
-                +icon("toggle-check-box-outline-blank").off.right
+                +icon("check_box").on.right
+                +icon("check_box_outline_blank").off.right
     else
         +button&attributes(attributes).checkbox
             input(type="checkbox", name=name, value=value)
             +button-center
                 = title
-                +icon("toggle-check-box").on.right
-                +icon("toggle-check-box-outline-blank").off.right
+                +icon("check_box").on.right
+                +icon("check_box_outline_blank").off.right

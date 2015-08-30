@@ -6,7 +6,7 @@ mixin dropdown-btn(title, id)
     +button(data-dropdown="dropdown-"+id)&attributes(attributes).dropdown-btn.dropdown-trigger
         +button-center
             = title
-            +icon("navigation-expand-more").right
+            +icon("expand_more").right
 
 mixin dropdown-btn-icon(icon, id)
     +button-icon(icon)(data-dropdown="dropdown-"+id)&attributes(attributes).dropdown-btn.dropdown-trigger

@@ -8,13 +8,13 @@ mixin select-btn(options, selected, id, icon)
         +button-center
             .select-label
                 block
-            +icon(icon || "navigation-unfold-more").right
+            +icon(icon || "reorder").right
             +select(options, selected, id)
 
 mixin select-btn-icon(options, selected, id, icon)
     +button(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes).select-btn.select-trigger
         +button-center
-            +icon(icon || "navigation-unfold-more")
+            +icon(icon || "reorder")
             +select(options, selected, id)
 
 mixin select(options, selected, id)

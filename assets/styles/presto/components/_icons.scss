@@ -2,32 +2,18 @@
 /* GENERAL */
 
 %icon {
-    // font-family: Material-Design-Icons;
-    // font-weight: normal;
-    // font-style: normal;
-    // font-variant: normal;
-    // line-height: $line-height;
-    // display: inline-block;
-    // width: $line-height-em;
-    // height: $line-height-em;
-    // transform: scale($icons-scale-amount);
-    // text-align: center;
-    // text-transform: none;
-    // speak: none;
-    // -webkit-font-smoothing: antialiased;
-    // -moz-osx-font-smoothing: grayscale;
-
     font-family: 'Material Icons';
-    font-size: 24px;  /* Preferred icon size */
     font-weight: normal;
     font-style: normal;
     line-height: 1;
     display: inline-block;
+    overflow: hidden; //INFO: It fixes an overflowing bug in the `icons` demo page, so probably also everywhere else
     width: 1em;
     height: 1em;
+    transform: scale($icons-scale-amount);
     letter-spacing: normal;
     text-transform: none;
-    word-wrap: normal;
+    word-wrap: nowrap;
 
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
