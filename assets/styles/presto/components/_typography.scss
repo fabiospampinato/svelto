@@ -7,23 +7,18 @@ a {
     text-decoration: none;
     color: inherit;
 
-    p > & {
+    p > & { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
-        //TODO: It should also work with mark, basically almost with everything, but sometimes is uneeded
+        //TODO: It should also work with mark, basically almost with anything, but sometimes is uneeded
 
         &:before {
-            position: absolute;
-            z-index: 1;
-            right: 0;
-            bottom: 0;
-            left: 0;
-            height: 100%;
+            @include fill-absolute ();
+            z-index: $a-underline-z-index;
             content: '';
             transition: transform $a-underline-transition-duration;
             transform: scaleX(0);
             pointer-events: none;
-            border-bottom-width: $a-underline-height;
-            border-bottom-style: solid;
+            border-bottom: $a-underline-height solid;
             border-radius: inherit;
         }
 
@@ -41,7 +36,7 @@ h1, h2, h3, h4, h5, h6 {
 
     margin: 0 0 $layout-gutter;
 
-    & > small, & > .small {
+    & > small {
         opacity: $header-small-opacity;
     }
 
@@ -71,55 +66,66 @@ h6 {
     @include size ( $h6-size );
 }
 
-/* OTHER */
+/* SMALL */
 
-small, .small {
+small {
     font-size: $small-font-size;
 }
 
+/* PARAGRAPH */
+
 p {
-
     margin: 0 0 $layout-gutter;
-
-    &.centered {
-        text-align: center;
-    }
-
 }
+
+/* MARK */
 
 mark, .mark {
+    @include color ( $mark-color, $mark-color-basic );
     padding: $mark-padding;
     border-radius: $mark-border-radius;
-    background-color: $mark-bg-color;
 }
 
-abbr[title] {
+/* ABBR */
+
+abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
     cursor: help;
     border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
 }
 
+/* BLOCKQUOTE */
+
 blockquote {
 
-    margin: 0 0 $layout-gutter;
-    padding: $layout-half-gutter $layout-gutter;
-    border-left: $blockquote-border-width solid $blockquote-border-color;
+    @extend %widget;
+    @include last-child-gutter-fix ();
+    padding: $layout-half-gutter $layout-gutter $layout-half-gutter ( $layout-gutter + $blockquote-line-width );
+    border-radius: $blockquote-line-width;
+    background-color: $blockquote-bg-color;
+
+    &:before {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: $blockquote-line-width;
+        content: '';
+        border-radius: $blockquote-line-width;
+        background-color: $blockquote-line-bg-color;
+    }
 
     & > footer {
 
+        @extend %widget;
+        @include last-child-gutter-fix ();
         font-size: $blockquote-footer-font-size;
-        margin-top: $layout-gutter;
         opacity: $blockquote-footer-opacity;
 
         &:before {
             content: '\2014 \00A0';
             opacity: $blockquote-footer-opacity;
-
         }
 
-    }
-
-    & > *:last-child {
-        margin-bottom: 0 !important;
     }
 
 }
@@ -162,13 +168,17 @@ code, section, pre {
     background-color: $code-bg-color;
 }
 
+/* KBD */
+
 kbd {
     @include color ( $kbd-color, $kbd-color-basic );
     font-size: $kbd-font-size;
     font-weight: bold;
-    margin: 0 ( $layout-gutter / 2 );
-    padding: $kbd-padding-vertical $kbd-padding-horizontal;
+    display: inline-block;
+    margin: 0 $layout-half-gutter;
+    padding: $kbd-padding;
+    white-space: nowrap;
     border-width: $kbd-border-width;
-    border-style: solid;
+    border-style: $kbd-border-style;
     border-radius: $border-radius-medium;
 }

@@ -5,12 +5,12 @@ extends ../../layout.jade
 append main
     +divider Link
 
-    +container-simple
+    +container-simple.outlined
         p Inside this paragraph there is a #[+a("#") link], not a #[+a("#").mark marked link], does it look nice?
 
     +divider Headers
 
-    +container-simple
+    +container-simple.outlined
         h1 H1 - Heading title #[small Small subheader]
         h2 H2 - Heading title #[small Small subheader]
         h3 H3 - Heading title #[small Small subheader]
@@ -20,30 +20,30 @@ append main
 
     +divider Paragraph
 
-    +container-simple
+    +container-simple.outlined
         p
             +lorem-ipsum
 
     +divider Formatting
 
-    +container-simple
-        p Nothing #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em em-italics] #[i i-italics]
+    +container-simple.outlined
+        p #[span Nothing] #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em em-italics] #[i i-italics]
 
     +divider Abbr
 
-    +container-simple
+    +container-simple.outlined
         abbr(title="HyperText Markup Language") HTML
 
     +divider Blockquote
 
-    +container-simple
+    +container-simple.outlined
         blockquote
             +paragraph-sample
         blockquote #[+paragraph-sample] #[footer The source is #[cite Someone]]
 
     +divider List - Unordered
 
-    +container-simple
+    +container-simple.outlined
         ul
             li
                 +lorem-ipsum(5, 'words')
@@ -61,7 +61,7 @@ append main
 
     +divider List - Unordered - Unstyled
 
-    +container-simple
+    +container-simple.outlined
         ul.unstyled
             li
                 +lorem-ipsum(5, 'words')
@@ -79,7 +79,7 @@ append main
 
     +divider List - Ordered
 
-    +container-simple
+    +container-simple.outlined
         ol
             li
                 +lorem-ipsum(5, 'words')
@@ -97,7 +97,7 @@ append main
 
     +divider Definition list
 
-    +container-simple
+    +container-simple.outlined
         dl
             dt
                 +lorem-ipsum(5, 'words')
@@ -111,19 +111,19 @@ append main
 
     +divider Code
 
-    +container-simple
+    +container-simple.outlined
         code print ( 'This is an example code block' )
 
     +divider Section
 
-    +container-simple
+    +container-simple.outlined
         section print ( 'This is an example section block' )
 
     +divider Pre
 
-    +container-simple
+    +container-simple.outlined
         pre print ( 'This is an example section block' )
 
     +divider Kbd
 
-    +container-simple #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]
+    +container-simple.outlined #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]

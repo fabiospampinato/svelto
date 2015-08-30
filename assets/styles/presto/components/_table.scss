@@ -10,9 +10,9 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
     @extend %widget;
     @include color ( $table-color, $table-color-basic );
-    border-radius: inherit;
-    border-collapse: separate;
     width: 100%;
+    border-collapse: separate;
+    border-radius: inherit;
 
     /* CELLS */
 
@@ -20,9 +20,9 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
         @include last-child-gutter-fix ();
         padding: $layout-gutter;
         text-align: left;
-        border-color: $table-bordered-border-color ;
-        border-style: solid;
         border-width: 0;
+        border-style: solid;
+        border-color: $table-bordered-border-color ;
     }
 
     /* THEAD */

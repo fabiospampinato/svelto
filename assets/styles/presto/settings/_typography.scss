@@ -20,61 +20,66 @@ $font-size: 15px !default;
 
 /* LINE HEIGHT */
 
-$line-height: 1.4285714286; //INFO: 20/14
-$line-height-em: 1em * $line-height;
+$line-height: 1.4285714286 !default; //INFO: 20/14
+$line-height-em: 1em * $line-height !default;
 
 /* LINK */
 
-$a-underline-transition-duration: 0.2s;
-$a-underline-height: 1px;
+$a-underline-z-index: 1 !default;
+$a-underline-height: 1px !default;
+$a-underline-transition-duration: 0.2s !default;
 
 /* HEADERS */
 
-$h1-size: 'xxlarge';
-$h2-size: 'xlarge';
-$h3-size: 'large';
-$h4-size: 'medium';
-$h5-size: 'small';
-$h6-size: 'xsmall';
+$h1-size: 'xxlarge' !default;
+$h2-size: 'xlarge' !default;
+$h3-size: 'large' !default;
+$h4-size: 'medium' !default;
+$h5-size: 'small' !default;
+$h6-size: 'xsmall' !default;
 
-$header-small-opacity: 0.85;
+$header-small-opacity: 0.85 !default;
 
 /* SMALL */
 
-$small-font-size: 65%;
+$small-font-size: 0.65em !default;
 
 /* MARK */
 
-$mark-padding: 0.2em;
-$mark-bg-color: $color-yellow;
-$mark-border-radius: $border-radius-small;
+$mark-color: 'yellow' !default;
+$mark-color-basic: true !default;
+
+$mark-padding: 0.2em 0.3em !default;
+$mark-border-radius: $border-radius-small !default;
 
 /* ABBR */
 
-$abbr-border-width: 1px;
-$abbr-border-style: 'dotted';
-$abbr-border-color: $color-gray-border;
+$abbr-border-width: 1px !default;
+$abbr-border-style: 'dotted' !default;
+$abbr-border-color: $color-gray-border !default;
 
 /* BLOCKQUOTE */
 
-$blockquote-border-width: ( $layout-gutter / 2 );
-$blockquote-border-color: rgba(47, 47, 47, 0.15) !default;
+$blockquote-bg-color: transparent !default;
+$blockquote-line-width: $layout-half-gutter !default;
+$blockquote-line-bg-color: rgba(0, 0, 0, 0.15) !default;
 
-$blockquote-footer-font-size: 85%;
-$blockquote-footer-opacity: 0.85;
+$blockquote-footer-font-size: 0.85em !default;
+$blockquote-footer-opacity: 0.85 !default;
 
 /* CODE */
 
-$code-bg-color: rgba(47, 47, 47, 0.03) !default;
-$code-border-width: 1px;
-$code-border-color: rgba(47, 47, 47, 0.15) !default;
+$code-bg-color: rgba(0, 0, 0, 0.03) !default;
+$code-border-width: 1px !default;
+$code-border-color: rgba(0, 0, 0, 0.15) !default;
 
 /* KBD */
 
-$kbd-color: 'white';
-$kbd-color-basic: true;
+$kbd-color: 'white' !default;
+$kbd-color-basic: true !default;
 
-$kbd-border-width: 1px;
-$kbd-font-size: 90%;
-$kbd-padding-vertical: 2px;
-$kbd-padding-horizontal: $layout-half-gutter;
+$kbd-border-width: 1px !default;
+$kbd-border-style: solid !default;
+
+$kbd-font-size: 0.9em !default;
+$kbd-padding: 0.2em 0.3em !default;
