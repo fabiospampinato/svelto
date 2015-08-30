@@ -5,8 +5,8 @@ extends ../../layout.jade
 append main
     +divider Default
 
-    +container-simple
-        table
+    +container-simple.outlined
+        table.table
             thead
                 tr
                     th Int
@@ -14,7 +14,6 @@ append main
                     th Date
                     th Options
             tfoot
-
             tbody
                 +table-tr-empty
                 - var nr = 1;
@@ -38,8 +37,8 @@ append main
 
     +divider Empty
 
-    +container-simple
-        table
+    +container-simple.outlined
+        table.table
             thead
                 tr
                     th Int
@@ -47,14 +46,13 @@ append main
                     th Date
                     th Options
             tfoot
-
             tbody
                 +table-tr-empty
 
     +divider Bordered
 
-    +container-simple
-        table.bordered
+    +container-simple.outlined
+        table.table.bordered
             thead
                 tr
                     th Int
@@ -62,7 +60,6 @@ append main
                     th Date
                     th Options
             tfoot
-
             tbody
                 +table-tr-empty
                 - var nr = 1;
@@ -86,8 +83,8 @@ append main
 
     +divider Striped
 
-    +container-simple
-        table.striped
+    +container-simple.outlined
+        table.table.striped
             thead
                 tr
                     th Int
@@ -95,7 +92,6 @@ append main
                     th Date
                     th Options
             tfoot
-
             tbody
                 +table-tr-empty
                 - var nr = 1;
@@ -119,8 +115,8 @@ append main
 
     +divider Hoverable
 
-    +container-simple
-        table.hoverable
+    +container-simple.outlined
+        table.table.hoverable
             thead
                 tr
                     th Int
@@ -128,7 +124,6 @@ append main
                     th Date
                     th Options
             tfoot
-
             tbody
                 +table-tr-empty
                 - var nr = 1;
@@ -152,8 +147,8 @@ append main
 
     +divider Bordered - Striped - Hoverable
 
-    +container-simple
-        table.bordered.striped.hoverable
+    +container-simple.outlined
+        table.table.bordered.striped.hoverable
             thead
                 tr
                     th Int
@@ -161,7 +156,6 @@ append main
                     th Date
                     th Options
             tfoot
-
             tbody
                 +table-tr-empty
                 - var nr = 1;

@@ -1,0 +1,40 @@
+
+/* SORTABLE */
+
+table.table.sortable > thead > tr > th[data-sort] {
+
+    position: relative;
+    padding-right: $table-th-sortable-padding;
+    padding-left: $table-th-sortable-padding;
+    cursor: pointer;
+
+    &:before, &:after {
+        font-size: $table-sortable-icon-font-size;
+        line-height: $table-sortable-icon-font-size;
+        position: absolute;
+        right: 0.5em;
+        text-align: center;
+        opacity: 0;
+    }
+
+    &:before {
+        @extend %icon;
+        @extend .icon-navigation-expand-less:before;
+        top: 1.1em;
+    }
+
+    &:after {
+        @extend %icon;
+        @extend .icon-navigation-expand-more:before;
+        bottom: 1.1em;
+    }
+
+    &:hover:before, &:hover:after, &.desc:before, &.asc:after {
+        opacity: 0.35;
+    }
+
+    &.desc:after, &.asc:before {
+        opacity: 1;
+    }
+
+}

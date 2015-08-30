@@ -1,21 +1,29 @@
 
-/* TABLE */
+/* HEADER */
 
-$table-bordered-width: 1px;
-$table-bordered-color: rgba(0,0,0,0.05);
+$table-header-min-height: 3em !default;
+$table-header-padding: $layout-gutter !default;
 
-$table-row-selected-color: lighten($color-primary-bg, 50);
+/* ROW */
 
-$table-header-block-height: 2.7em !default;
-$table-empty-block-height: 5.4em !default;
+$table-row-min-height: 3em !default;
+$table-row-padding: $layout-gutter 0 !default;
 
-$table-th-sortable-padding: 1.5em !default;
-$table-sortable-icon-font-size: 0.75em !default;
+/* EMPTY */
 
-$table-row-padding: 0.75em 0 !default;
+$table-row-empty-min-height: ( $table-row-min-height * 1.5 ) !default;
 
-$table-row-even-color: rgba(0, 0, 0, 0.015) !default;
-$table-row-even-color-hover: rgba(0, 0, 0, 0.03) !default;
+/* BORDERED */
 
-$table-row-odd-color: rgba(0, 0, 0, 0) !default;
-$table-row-odd-color-hover: rgba(0, 0, 0, 0.03) !default;
+$table-bordered-border-width: $outline-width !default;
+$table-bordered-border-color: rgba(0, 0, 0, 0.05) !default;
+
+/* STRIPED */
+
+$table-striped-row-even-color: rgba(0, 0, 0, 0.02) !default;
+$table-striped-row-odd-color: rgba(0, 0, 0, 0) !default;
+
+/* HOVERABLE */
+
+$table-hoverable-row-odd-color-hover: rgba(0, 0, 0, 0.04) !default;
+$table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;

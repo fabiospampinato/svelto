@@ -38,6 +38,7 @@
 @import 'mixins/margin';
 @import 'mixins/media_queries';
 @import 'mixins/others';
+@import 'mixins/padding';
 @import 'mixins/responsive';
 @import 'mixins/shapes';
 @import 'mixins/text';
@@ -77,7 +78,9 @@
 @import 'settings/progressBar';
 @import 'settings/ripple';
 @import 'settings/select';
+@import 'settings/selectable';
 @import 'settings/slider';
+@import 'settings/sortable';
 @import 'settings/switch';
 @import 'settings/table';
 @import 'settings/tabs';
@@ -134,8 +137,10 @@
 @import 'components/radio';
 @import 'components/ripple';
 @import 'components/select';
+@import 'components/selectable';
 @import 'components/shapes';
 @import 'components/slider';
+@import 'components/sortable';
 @import 'components/stepper';
 @import 'components/switch';
 @import 'components/table';

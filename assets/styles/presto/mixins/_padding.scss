@@ -1,0 +1,12 @@
+
+/* PADDING */
+
+@mixin padding-horizontal ( $padding ) {
+    padding-right: $padding;
+    padding-left: $padding;
+}
+
+@mixin padding-vertical ( $padding ) {
+    padding-top: $padding;
+    padding-bottom: $padding;
+}
