@@ -35,16 +35,14 @@
 
 .square-sample {
 
-    @include square ( 4rem );
+    @include square ( 62px );
     overflow: hidden;
     position: relative;
     margin-bottom: $layout-gutter;
     padding: $layout-half-gutter;
 
     & > p {
-        @include size ( 'xsmall' );
-        margin-bottom: $layout-gutter;
-        text-align: inherit;
+        @include size ( 'xxsmall' );
     }
 
 }

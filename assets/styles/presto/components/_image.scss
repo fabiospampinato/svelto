@@ -5,11 +5,6 @@
 
     @include color ( $image-color, $image-color-basic );
 
-    &.centered {
-        margin-left: auto;
-        margin-right: auto;
-    }
-
     & > img {
         width: 100%;
         height: auto;
@@ -59,13 +54,11 @@
         }
 
         &:not(.top) {
-            border-bottom-left-radius: inherit;
-            border-bottom-right-radius: inherit;
+            @include border-bottom-radius ( inherit );
         }
 
         &.top {
-            border-top-left-radius: inherit;
-            border-top-right-radius: inherit;
+            @include border-top-radius ( inherit );
         }
 
     }
