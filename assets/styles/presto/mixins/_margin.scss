@@ -1,0 +1,12 @@
+
+/* MARGIN */
+
+@mixin margin-horizontal ( $margin ) {
+    margin-right: $margin;
+    margin-left: $margin;
+}
+
+@mixin margin-vertical ( $margin ) {
+    margin-top: $margin;
+    margin-bottom: $margin;
+}

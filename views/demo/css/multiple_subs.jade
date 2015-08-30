@@ -5,7 +5,7 @@ extends ../../layout.jade
 append main
     +divider Normal
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-left
                 p Left
@@ -16,7 +16,7 @@ append main
 
     +divider No left
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-center
                 p Center
@@ -25,7 +25,7 @@ append main
 
     +divider No center
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-left
                 p Left
@@ -34,7 +34,7 @@ append main
 
     +divider No right
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-left
                 p Left
@@ -43,37 +43,36 @@ append main
 
     +divider Only left
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-left
                 p Left
 
     +divider Only center
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-center
                 p Center
 
     +divider Only right
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-right
                 p Right
 
     +divider Advanced
 
-    +container-simple
+    +container-simple.outlined
         +multiple
             +multiple-left
-                +button-icon("navigation-arrow-back")
-                +button-icon('menu')
+                +button-icon('thumb_down')
+                +button-icon('thumb_up')
             +multiple-center
                 p.large Title
             +multiple-right
-                +button-icon('refresh')
+                +button-icon('apps')
+                +button-icon('menu')
                 +button-icon('more_vert')
-
                 +button-icon('refresh')
-                +button-icon('more_vert')

@@ -1,68 +1,127 @@
 
 /* MULTIPLE */
 
-//TODO: add a 'lefted', 'righted' classes for aligning the content to the left or right
+//TODO: Add a 'lefted', 'righted' classes for aligning the content to the left or right
+//TODO: Don't use a negative margin when not necessary (nowrap)
+//FIXME: Remove the ugly [class*="-wrp"] selectors
 
 .multiple-wrp {
 
-    position: relative;
-    margin: 0 #{- $layout-half-gutter} $layout-gutter;
-    border-color: inherit;
+    @extend %widget;
+    @include margin-horizontal ( - $layout-half-gutter );
+    border-color: inherit; //INFO: We may use inherit in the children, so we have to inherit here //TODO: Sure?
 
-    &[class*="z-depth-"] {
-
-        box-shadow: none !important;
-
-        &:before {
-            position: absolute;
-            top: 0;
-            right: $layout-half-gutter;
-            bottom: $layout-gutter;
-            left: $layout-half-gutter;
-            content: '';
-            pointer-events: none;
-            border-radius: $border-radius-medium;
-        }
-
-        @each $depth, $shadow in $z-depths {
-
-            &.z-depth-#{$depth}:before {
-                @include z-depth ( $depth );
-            }
-
-        }
-
-        & > .multiple {
-
-            & > [class*="z-depth-"], & > [class*="-wrp"] > *:first-child:last-child {
-                box-shadow: none !important;
-            }
-
-        }
-
-    }
-
-    &.limited > .multiple {
-        // max-width: $layout-max-width + $layout-gutter; //FIXME: Does it work?
-        margin-left: auto;
-        margin-right: auto;
-    }
+    /* CENTERED */
 
     &.centered > .multiple {
         justify-content: center;
     }
 
+    /* LIMITED */
+
+    &.limited > .multiple {
+        @include center-margin ( $layout-max-width ); //FIXME: does it work?
+    }
+
+    /* NOWRAP */
+
     &.nowrap > .multiple {
         flex-wrap: nowrap;
     }
 
-    &.no-spacers > .multiple > .spacer {
-        display: none;
+    /* FLUID / EQUAL */
+
+    &.fluid, &.equal {
+
+        &:not(.vertical) > .multiple > * {
+            flex-grow: 1;
+        }
+
+        &.vertical > .multiple > * {
+
+            &:not(.multiple-wrp) {
+                width: calc(100% - #{$layout-gutter});
+            }
+
+            &.multiple-wrp {
+                width: 100%;
+            }
+
+        }
+
     }
+
+    /* EQUAL */
 
     &.equal > .multiple > * {
         flex-basis: 0;
     }
+
+    /* JOINED */
+
+    &.joined {
+
+        & > .multiple {
+            flex-wrap: nowrap;
+            align-items: stretch;
+        }
+
+        &:not(.vertical) {
+
+            & > .multiple {
+
+                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
+                    @include border-right-radius ( 0 );
+                    margin-right: 0;
+                    border-right-width: 0;
+                }
+
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+                    @include border-left-radius ( 0 );
+                    margin-left: 0;
+                }
+
+            }
+
+            &.no-separators > .multiple {
+
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+                    border-left-width: 0;
+                }
+
+            }
+
+        }
+
+        &.vertical {
+
+            & > .multiple {
+
+                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
+                    @include border-bottom-radius ( 0 );
+                    margin-bottom: 0;
+                    border-bottom-width: 0;
+                }
+
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+                    @include border-top-radius ( 0 );
+                }
+
+            }
+
+            &.no-separators > .multiple {
+
+                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+                    border-top-width: 0;
+                }
+
+            }
+
+        }
+
+    }
+
+    /* STRETCHED */
 
     &.stretched > .multiple {
 
@@ -86,117 +145,66 @@
 
     }
 
-    &.joined {
-
-        & > .multiple {
-            flex-wrap: nowrap;
-            align-items: stretch;
-        }
-
-        &:not(.vertical) {
-
-            & > .multiple {
-
-                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
-                    margin-right: 0;
-                    border-right-width: 0;
-                    border-top-right-radius: 0;
-                    border-bottom-right-radius: 0;
-                }
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-                    margin-left: 0;
-                    border-top-left-radius: 0;
-                    border-bottom-left-radius: 0;
-                }
-
-            }
-
-            &.no-separators > .multiple {
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-                    border-left-width: 0;
-                }
-
-            }
-
-        }
-
-        &.vertical {
-
-            & > .multiple {
-
-                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
-                    margin-bottom: 0;
-                    border-bottom-width: 0;
-                    border-bottom-left-radius: 0;
-                    border-bottom-right-radius: 0;
-                }
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-                    border-top-left-radius: 0;
-                    border-top-right-radius: 0;
-                }
-
-            }
-
-            &.no-separators > .multiple {
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-                    border-top-width: 0;
-                }
-
-            }
-
-        }
-
-    }
-
-    &.fluid {
-
-        &.vertical > .multiple > * {
-
-            &:not(.multiple-wrp) {
-                width: calc(100% - #{$layout-gutter});
-            }
-
-            &.multiple-wrp {
-                width: 100%;
-            }
-
-        }
-
-        &:not(.vertical) > .multiple > *:not(.nogrow) {
-            flex-grow: 1;
-        }
-
-        & > .multiple > *.noshrink {
-            flex-shrink: 0;
-        }
-
-    }
+    /* VERTICAL */
 
     &.vertical > .multiple {
         flex-direction: column;
     }
 
+    /* Z-DEPTH */
+
+    &[class*="z-depth-"] {
+
+        box-shadow: none !important;
+
+        &:before {
+            position: absolute;
+            top: 0;
+            right: $layout-half-gutter;
+            bottom: $layout-gutter;
+            left: $layout-half-gutter;
+            content: '';
+            pointer-events: none;
+            border-radius: $border-radius;
+        }
+
+        @each $depth, $shadow in $z-depths {
+
+            &.z-depth-#{$depth}:before {
+                @include z-depth ( $depth );
+            }
+
+        }
+
+        & > .multiple {
+
+            & > [class*="z-depth-"], & > [class*="-wrp"] > *:first-child:last-child {
+                box-shadow: none !important;
+            }
+
+        }
+
+    }
+
+    /* MULTIPLE */
+
     & > .multiple {
 
-        border-color: inherit;
+        border-color: inherit; //INFO: We may use inherit in the children, so we have to inherit here //TODO: Sure?
         margin-bottom: - $layout-gutter;
         display: flex;
         flex-wrap: wrap;
         align-items: flex-start;
 
         & > *:not(.multiple-wrp) {
-            margin-right: $layout-half-gutter;
-            margin-left: $layout-half-gutter;
+            @include margin-horizontal ( $layout-half-gutter );
         }
 
         & > .multiple-wrp {
-            margin-left: 0;
-            margin-right: 0;
+            @include margin-horizontal ( 0 );
         }
+
+        /* MULTIPLE SUB SPACER */
 
         & > .multiple-sub-spacer {
 
@@ -219,10 +227,11 @@
 
         }
 
+        /* MULTIPLE SUB */
+
         & > .multiple-sub {
 
-            //FIXME: it doesn't work very well if we don't wran plain text in a p, that has a margin-bottom for example...
-            //FIXME; the alignment of the center part is not always correct
+            //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
 
             align-self: center;
             flex-basis: 0;

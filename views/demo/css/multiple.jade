@@ -6,79 +6,79 @@ append main
     +divider Multiple
 
     +multiple
-        +container-simple 1
-        +container-simple 2
-        +container-simple 3
-        +container-simple 4
-        +container-simple 5
-        +container-simple 6
-        +container-simple 7
-        +container-simple 8
-        +container-simple 9
-        +container-simple 10
+        +container-simple.outlined 1
+        +container-simple.outlined 2
+        +container-simple.outlined 3
+        +container-simple.outlined 4
+        +container-simple.outlined 5
+        +container-simple.outlined 6
+        +container-simple.outlined 7
+        +container-simple.outlined 8
+        +container-simple.outlined 9
+        +container-simple.outlined 10
 
-    +divider Multiple - Limited
-
-    +multiple.limited
-        +container-simple 1
-        +container-simple 2
-        +container-simple 3
-        +container-simple 4
-        +container-simple 5
-        +container-simple 6
-        +container-simple 7
-        +container-simple 8
-        +container-simple 9
-        +container-simple 10
-
-    +divider Multiple - Centered
+    +divider Centered
 
     +multiple.centered
-        +container-simple 1
-        +container-simple 2
-        +container-simple 3
-        +container-simple 4
-        +container-simple 5
-        +container-simple 6
-        +container-simple 7
-        +container-simple 8
-        +container-simple 9
-        +container-simple 10
+        +container-simple.outlined 1
+        +container-simple.outlined 2
+        +container-simple.outlined 3
+        +container-simple.outlined 4
+        +container-simple.outlined 5
+        +container-simple.outlined 6
+        +container-simple.outlined 7
+        +container-simple.outlined 8
+        +container-simple.outlined 9
+        +container-simple.outlined 10
 
-    +divider Multiple - Nowrap
+    +divider Limited
+
+    +multiple.limited
+        +container-simple.outlined 1
+        +container-simple.outlined 2
+        +container-simple.outlined 3
+        +container-simple.outlined 4
+        +container-simple.outlined 5
+        +container-simple.outlined 6
+        +container-simple.outlined 7
+        +container-simple.outlined 8
+        +container-simple.outlined 9
+        +container-simple.outlined 10
+
+    +divider Nowrap
 
     +multiple.nowrap
-        +container-simple 1
-        +container-simple 2
-        +container-simple 3
-        +container-simple 4
-        +container-simple 5
-        +container-simple 6
-        +container-simple 7
-        +container-simple 8
-        +container-simple 9
-        +container-simple 10
-
-    +divider Multiple - Equal
-
-    +multiple.fluid.equal
-        +container-simple ThisIsSupposedToBeAVeryLongText
-        +container-simple 1
-        +container-simple 2
+        +container-simple.outlined 1
+        +container-simple.outlined 2
+        +container-simple.outlined 3
+        +container-simple.outlined 4
+        +container-simple.outlined 5
+        +container-simple.outlined 6
+        +container-simple.outlined 7
+        +container-simple.outlined 8
+        +container-simple.outlined 9
+        +container-simple.outlined 10
 
     +divider Fluid
 
     +multiple.fluid
-        +container-simple Left
-        +container-simple Center
-        +container-simple.nogrow Right (no-grow)
+        +container-simple.outlined Left
+        +container-simple.outlined Center
+        +container-simple.outlined.no-grow Right (no-grow)
+
+    +divider Equal
+
+    +multiple.equal
+        +container-simple.outlined ThisIsSupposedToBeAVeryLongText
+        +container-simple.outlined 1
+        +container-simple.outlined 2
 
     +divider Fluid - Joined
 
     +multiple.fluid.joined
-        +container-simple Left
-        +container-simple Center
-        +container-simple Right
+        +container-simple.outlined Left
+        +container-simple.outlined Center
+        +container-simple.outlined Right
 
     +multiple.fluid.joined
         +button-simple.outlined Left
@@ -88,71 +88,55 @@ append main
     +divider Fluid - Joined - No separators
 
     +multiple.fluid.joined.no-separators
-        +container-simple Left
-        +container-simple Center
-        +container-simple Right
+        +container-simple.outlined Left
+        +container-simple.outlined Center
+        +container-simple.outlined Right
 
     +multiple.fluid.joined.no-separators
         +button-simple.outlined Left
         +button-simple.outlined Center
         +button-simple.outlined Right
 
-    +divider Fluid - Joined - No separators - Shadows
+    +divider Fluid - Joined - No separators - Z-Depth
 
     +multiple.fluid.joined.no-separators.z-depth-2
-        +container-simple.z-depth-4 Left
-        +container-simple.z-depth-4 Center
-        +container-simple.z-depth-4 Right
+        +container-simple.outlined.z-depth-4 Left
+        +container-simple.outlined.z-depth-4 Center
+        +container-simple.outlined.z-depth-4 Right
 
     +multiple.fluid.joined.no-separators.z-depth-2
         +button-simple.z-depth-4.outlined Left
         +button-simple.z-depth-4.outlined Center
         +button-simple.z-depth-4.outlined Right
 
-    +divider Fluid - Joined - Different grows
+    +divider Equal - Joined - Stretched
 
-    //- TODO: add support for different shrinks
-
-    +multiple.fluid.joined
-        +container-simple.grow-1 1
-        +container-simple.grow-2 2
-        +container-simple.grow-3 3
-        +container-simple.grow-4 4
-        +container-simple.grow-5 5
-        +container-simple.grow-6 6
-        +container-simple.grow-7 7
-        +container-simple.grow-8 8
-        +container-simple.grow-9 9
-        +container-simple.grow-10 10
-
-    +divider Fluid - Joined - Stretched - Equal
-
-    +multiple.fluid.joined.stretched.equal
-        +container-simple.noshrink Left
-        +container-simple
+    +multiple.equal.joined.stretched
+        +container-simple.outlined.no-shrink Left
+        +container-simple.outlined
             +paragraph-sample
-        +container-simple.noshrink Right
+        +container-simple.outlined.no-shrink Right
 
     +divider Vertical
 
     +multiple.vertical
-        +container-simple Top
-        +container-simple Middle
-        +container-simple Bottom
+        +container-simple.outlined Top
+        +container-simple.outlined Middle
+        +container-simple.outlined Bottom
 
     +divider Vertical - Fluid
 
     +multiple.vertical.fluid
-        +container-simple Top
-        +container-simple Middle
-        +container-simple Bottom
+        +container-simple.outlined Top
+        +container-simple.outlined Middle
+        +container-simple.outlined Bottom
 
     +divider Vertical - Fluid - Joined
 
     +multiple.vertical.fluid.joined
-        +container-simple Top
-        +container-simple Middle
-        +container-simple Bottom
+        +container-simple.outlined Top
+        +container-simple.outlined Middle
+        +container-simple.outlined Bottom
 
     +multiple.vertical.fluid.joined
         +button-simple.outlined Top
@@ -162,21 +146,21 @@ append main
     +divider Vertical - Fluid - Joined - No separators
 
     +multiple.vertical.fluid.joined.no-separators
-        +container-simple Top
-        +container-simple Middle
-        +container-simple Bottom
+        +container-simple.outlined Top
+        +container-simple.outlined Middle
+        +container-simple.outlined Bottom
 
     +multiple.vertical.fluid.joined.no-separators
         +button-simple.outlined Top
         +button-simple.outlined Middle
         +button-simple.outlined Bottom
 
-    +divider Vertical - Fluid - Joined - No separators - Shadows
+    +divider Vertical - Fluid - Joined - No separators - Z-Depth
 
     +multiple.vertical.fluid.joined.no-separators.z-depth-2
-        +container-simple.z-depth-4 Top
-        +container-simple.z-depth-4 Middle
-        +container-simple.z-depth-4 Bottom
+        +container-simple.outlined.z-depth-4 Top
+        +container-simple.outlined.z-depth-4 Middle
+        +container-simple.outlined.z-depth-4 Bottom
 
     +multiple.vertical.fluid.joined.no-separators.z-depth-2
         +button-simple.z-depth-4.outlined Top

@@ -194,7 +194,7 @@
     z-index: $dragging-z-index;
 }
 
-.centered { //TODO: Move it to it's own decorator
+.centered:not(.multiple-wrp) { //TODO: Move it to it's own decorator
     @include center-margin ();
 }
 
@@ -204,4 +204,12 @@
 
 .actionable { //TODO: Move it to it's own decorator
     cursor: pointer;
+}
+
+.no-grow {
+    flex-grow: 0 !important;
+}
+
+.no-shrink {
+    flex-shrink: 0 !important;
 }
