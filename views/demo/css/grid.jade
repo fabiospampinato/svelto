@@ -5,7 +5,7 @@ extends ../../layout.jade
 append main
     +divider Normal
 
-    +multiple
+    +multiple.fluid
         +container-simple.outlined.xs-1 1
         +container-simple.outlined.xs-1 1
         +container-simple.outlined.xs-1 1
@@ -18,59 +18,22 @@ append main
         +container-simple.outlined.xs-1 1
         +container-simple.outlined.xs-1 1
         +container-simple.outlined.xs-1 1
-    +multiple
+    +multiple.fluid
         +container-simple.outlined.xs-3 3
         +container-simple.outlined.xs-6 6
         +container-simple.outlined.xs-3 3
-    +multiple
+    +multiple.fluid
         +container-simple.outlined.xs-3 3
         +container-simple.outlined.xs-9 9
-    +multiple
+    +multiple.fluid
         +container-simple.outlined.xs-1 1
         +container-simple.outlined.xs-4 4
         +container-simple.outlined.xs-5 5
         +container-simple.outlined.xs-2 2
 
-    +divider Limited
-
-    +multiple.limited
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-        +container-simple.outlined.xs-1 1
-
-    +divider Equal (17)
-
-    +multiple.fluid.equal
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-        +container-simple.outlined 1
-
     +divider Responsive
 
-    +multiple
+    +multiple.fluid
         +container-simple.outlined.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
         +container-simple.outlined.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
         +container-simple.outlined.xs-12.sm-6.md-4.lg-2 xs-12 sm-6 md-4 lg-2
@@ -80,7 +43,7 @@ append main
 
     +divider Responsive 2
 
-    +multiple
+    +multiple.fluid
         +container-simple.outlined.hidden-xs.visible-sm-block.sm-3 hidden-xs visible-sm-block sm-3
         +container-simple.outlined.xs-12.sm-9.md-6.lg-3.hidden-xl xs-12 sm-9 md-6 lg-3 hidden-xl
         +container-simple.outlined.hidden-xs.visible-lg-block.lg-3.xl-6 hidden-xs visible-lg-block lg-3 xl-6
@@ -88,7 +51,7 @@ append main
 
     +divider Complex 1
 
-    +multiple.stretched
+    +multiple.fluid.stretched
         +multiple.vertical.fluid.xs-4
             +container-simple.outlined 4
             +container-simple.outlined 4
@@ -97,7 +60,7 @@ append main
 
     +divider Complex 2
 
-    +multiple.stretched
+    +multiple.fluid.stretched
         +multiple.vertical.fluid.xs-8
             +container-simple.outlined 8
             +multiple.fluid.joined
@@ -108,7 +71,7 @@ append main
 
     +divider Complex 3
 
-    +multiple.stretched
+    +multiple.fluid.stretched
         +multiple.vertical.fluid.xs-9
             +container-simple.outlined 9
             +multiple.fluid.stretched
@@ -124,7 +87,7 @@ append main
 
     +divider Complex 4
 
-    +multiple.stretched
+    +multiple.fluid.stretched
         +multiple.vertical.fluid.xs-7
             +multiple.fluid
                 +container-simple.outlined.xs-8 8 * 7/12

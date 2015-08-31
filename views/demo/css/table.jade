@@ -16,7 +16,7 @@ append main
             tfoot
                 tr
                     td(colspan="100%")
-                        +multiple.stretched.centered
+                        +multiple.fluid.stretched
                             p.centerer 20 Rows - Page 3 of 5
                             +spacer
                             +pagination({ url: '#', total: 5, current: 3, blocks: 10, classes: 'xsmall outlined' })
@@ -43,8 +43,8 @@ append main
                         td.text-center 4
                         td Qux
                         td November 16th, 1993
-                        td
-                            +multiple.centered.joined
+                        td.text-center
+                            +multiple.joined
                                 +button-simple.outlined.small Button
                                 +button-icon('more_vert').outlined.small
 

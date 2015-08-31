@@ -159,7 +159,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
     /* COMPACT */
 
     &.compact > * > tr  > * {
-        padding: $layout-half-gutter;
+        padding: $layout-gutter-half;
     }
 
     /* COLLAPSE */

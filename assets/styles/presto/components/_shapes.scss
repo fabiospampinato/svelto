@@ -39,7 +39,7 @@
     overflow: hidden;
     position: relative;
     margin-bottom: $layout-gutter;
-    padding: $layout-half-gutter;
+    padding: $layout-gutter-half;
 
     & > p {
         @include size ( 'xxsmall' );

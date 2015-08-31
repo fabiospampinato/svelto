@@ -8,7 +8,7 @@ mixin container(title, header_classes)
 
 mixin container-header(title)
     .container-header&attributes(attributes)
-        +multiple
+        +multiple.fluid
             if title
                 +multiple-center
                     p= title

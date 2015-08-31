@@ -4,6 +4,7 @@
 //TODO: add dropdown for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)
 //TODO: make it work with checkboxes
+//FIXME: select multiple with shift, then just click inside the selection, the clicked element doesn't get selected
 
 ;(function ( $, _, window, document, undefined ) {
 

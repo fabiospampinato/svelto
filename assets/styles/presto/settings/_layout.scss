@@ -3,11 +3,11 @@
 
 $layout-max-width: map-get($breakpoints, 'xlarge') !default; //TODO: add and check support for it
 
-/* SPACING */
+/* GUTTER */ //TODO: Remove when no more in use
 
-$layout-gutter: 10px !default; //TODO: switch to rem
-$layout-gutter-rem: 0.6666666667rem !default;
-$layout-half-gutter: $layout-gutter / 2;
+$layout-gutter: 10px !default; //TODO: switch to rem //TODO: Remove when no more in use
+$layout-gutter-rem: 0.6666666667rem !default; //TODO: Remove when no more in use
+$layout-gutter-half: $layout-gutter / 2;
 
 /* BORDER RADIUS */
 

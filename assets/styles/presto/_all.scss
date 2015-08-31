@@ -26,6 +26,9 @@
 @import 'settings/sizes';
 @import 'components/sizes';
 
+@import 'settings/base';
+
+@import 'settings/widget';
 @import 'components/widget';
 
 /* MIXINS */
@@ -45,7 +48,7 @@
 
 /* SETTINGS */
 
-@import 'settings/base';
+
 @import 'settings/label';
 @import 'settings/breadcrumb';
 @import 'settings/button';
@@ -70,6 +73,7 @@
 @import 'settings/input';
 @import 'settings/spinner';
 @import 'settings/modal';
+@import 'settings/multiple';
 @import 'settings/navbar';
 @import 'settings/noty';
 @import 'settings/pagination';

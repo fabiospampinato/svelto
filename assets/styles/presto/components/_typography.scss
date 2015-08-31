@@ -99,7 +99,7 @@ blockquote {
 
     @extend %widget;
     @include last-child-gutter-fix ();
-    padding: $layout-half-gutter $layout-gutter $layout-half-gutter ( $layout-gutter + $blockquote-line-width );
+    padding: $layout-gutter-half $layout-gutter $layout-gutter-half ( $layout-gutter + $blockquote-line-width );
     border-radius: $blockquote-line-width;
     background-color: $blockquote-bg-color;
 
@@ -175,7 +175,7 @@ kbd {
     font-size: $kbd-font-size;
     font-weight: bold;
     display: inline-block;
-    margin: 0 $layout-half-gutter;
+    margin: 0 $layout-gutter-half;
     padding: $kbd-padding;
     white-space: nowrap;
     border-width: $kbd-border-width;

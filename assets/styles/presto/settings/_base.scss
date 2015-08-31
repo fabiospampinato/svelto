@@ -4,6 +4,11 @@
 $body-color: 'base';
 $body-color-basic: true;
 
+/* GUTTER */
+
+$gutter: 10px !default;
+$gutter-half: $gutter / 2;
+
 /* TRANSITIONS */
 
 $transition-duration-slow: 0.2s;

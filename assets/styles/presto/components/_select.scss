@@ -18,7 +18,7 @@
         left: 0;
         top: 0;
         opacity: 0;
-        padding: 0 $layout-half-gutter;
+        padding: 0 $layout-gutter-half;
         width: 100%;
         z-index: 1;
     }
@@ -70,11 +70,11 @@
         @include z-depth ( $select-dropdown-z-depth );
 
         & .label-wrp + .divider-wrp.block {
-            margin-top: $layout-half-gutter;
+            margin-top: $layout-gutter-half;
         }
 
         & .divider-wrp.block {
-            margin-bottom: $layout-half-gutter !important; //FIXME: we should use `!important`
+            margin-bottom: $layout-gutter-half !important; //FIXME: we should use `!important`
         }
 
     }

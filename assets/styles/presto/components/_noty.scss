@@ -142,8 +142,8 @@
         margin-left: $layout-gutter;
 
         &:empty {
-            margin-right: $layout-half-gutter;
-            margin-left: $layout-half-gutter;
+            margin-right: $layout-gutter-half;
+            margin-left: $layout-gutter-half;
         }
 
     }
