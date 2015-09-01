@@ -1,0 +1,38 @@
+{
+  "name": "svelto",
+  "description": "A modular web framework for the world of today",
+  "version": "0.1.0",
+  "keywords": [
+    "css",
+    "js",
+    "html",
+    "framework",
+    "front-end",
+    "responsive"
+  ],
+  "homepage": "http://getsvelto.com",
+  "author": "Fabio Spampinato",
+  "style": "dist/css/svelto.css",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svelto/svelto.git"
+  },
+  "bugs": {
+    "url": "https://github.com/svelto/svelto/issues"
+  },
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^2.3.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-flatten": "^0.2.0",
+    "gulp-jade": "^1.1.0",
+    "gulp-rename": "^1.2.2",
+    "gulp-sourcemaps": "^1.5.2"
+  },
+  "files": [
+    "dist",
+    "gulpfile.js",
+    "LICENSE"
+  ]
+}
