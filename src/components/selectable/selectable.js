@@ -1,5 +1,14 @@
 
-/* SELECTABLE */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/core.js
+ * ====================================================================================== */
 
 //TODO: add dropdown for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)

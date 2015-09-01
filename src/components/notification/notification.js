@@ -1,5 +1,14 @@
 
- /* NOTIFICATION */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../noty/noty.js
+ * ====================================================================================== */
 
 //INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 

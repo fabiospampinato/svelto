@@ -1,5 +1,15 @@
 
-/* DROPDOWN */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/core.js
+ * @requires ../positionate/positionate.js
+ * ====================================================================================== */
 
 //TODO: add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 //TODO: add dropdown-closer

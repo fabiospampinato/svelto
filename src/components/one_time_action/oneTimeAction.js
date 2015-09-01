@@ -1,5 +1,14 @@
 
-/* ONE TIME ACTION */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/cookie.js
+ * ====================================================================================== */
 
 //INFO: the pipe character (|) is forbidden inside a name, cookie's ttl is 1 year
 

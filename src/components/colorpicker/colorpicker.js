@@ -1,5 +1,16 @@
 
-/* COLORPICKER */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/core.js
+ * @requires ../hex_color/hexColor.js
+ * @requires ../color_helper/colorHelper.js
+ * ====================================================================================== */
 
 //TODO: add support for alpha channel
 //TODO: add a $bgs variable where we update the background
