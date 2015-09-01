@@ -50,12 +50,12 @@ body {
     width: 100%;
 
     & > header, & > main, & > footer {
-        transition: margin $navbar-transition-transform-duration;
+        transition: margin 1s; // $navbar-transition-transform-duration;
     }
 
     & > header > .header {
         transition-property: top, right, bottom, left;
-        transition-duration: $navbar-transition-transform-duration;
+        transition-duration: 1s; // $navbar-transition-transform-duration;
         margin-bottom: 0;
     }
 
@@ -73,7 +73,7 @@ body {
 
         & > header {
 
-            margin-top: $toolbar-height;
+            margin-top: $default-toolbar-height;
 
             & > .header {
 

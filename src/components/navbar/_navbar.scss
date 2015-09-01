@@ -9,7 +9,7 @@
  * ======================================================================================
  * @requires _settings.scss
  * ====================================================================================== */
- 
+
 //TODO: maybe we should wrap header, main and footer into another container, so that it will be easier to do the CSS work here
 
 //INFO: The attached navbar must be placed before the header tag, otherwise the CSS selectors will not work
@@ -104,7 +104,7 @@
 
             & ~ header {
 
-                margin-top: $toolbar-height + $navbar-horizontal-height;
+                margin-top: $default-toolbar-height + $navbar-horizontal-height;
                 margin-bottom: - ( $navbar-horizontal-height - $layout-gutter );
 
                 & > .header {
@@ -134,7 +134,7 @@
 
                 & ~ header {
 
-                    margin-top: $toolbar-height + $navbar-slim-horizontal-height;
+                    margin-top: $default-toolbar-height + $navbar-slim-horizontal-height;
                     margin-bottom: - ( $navbar-slim-horizontal-height - $layout-gutter );
 
                     & > .header {

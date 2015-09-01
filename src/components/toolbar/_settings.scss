@@ -9,10 +9,10 @@
  * ======================================================================================
  * @requires ../core/_core.scss
  * ====================================================================================== */
- 
+
 /* TOOLBAR */
 
-$toolbar-height: 64px;
+$toolbar-height: $default-toolbar-height;
 
 $toolbar-vertical-padding: 0;
 $toolbar-horizontal-padding: 1em !default;

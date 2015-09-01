@@ -6,10 +6,8 @@
  * ======================================================================================
  * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
  * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/_core.scss
  * ====================================================================================== */
- 
+
 /* BASE */
 
 $body-color: 'base';
@@ -19,6 +17,10 @@ $body-color-basic: true;
 
 $gutter: 10px !default;
 $gutter-half: $gutter / 2;
+
+/* TOOLBAR */
+
+$default-toolbar-height: 64px;
 
 /* TRANSITIONS */
 

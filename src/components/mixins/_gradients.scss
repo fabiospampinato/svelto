@@ -7,7 +7,19 @@
  * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
  * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
  * ====================================================================================== */
- 
+
+ @mixin gradient ( $color_name, $important: '' ) {
+
+     $colors: map-get($colors, $color_name);
+
+     $start: nth($colors, 2);
+     $end: nth($colors, 3);
+
+     background-color: $start #{$important};
+     background: linear-gradient(to bottom, $start 0%, $end 100%) #{$important};
+
+ }
+
 @mixin gradient-horizontal ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {
     background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
     background-repeat: repeat-x;

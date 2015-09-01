@@ -7,16 +7,17 @@
  * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
  * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
  * ======================================================================================
- * @requires ../core/_core.scss
+ * @requires ../icons/_settings.scss
+ * @requires ../typography/_settings.scss
  * ====================================================================================== */
- 
+
 /* FUNCTION */
 
 @function get_size ( $icon_size ) {
 
     //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
 
-    @return ( $icon_size / $font-size / $icons-scale-amount ) * 1rem;
+    @return ( $icon_size / 15px / $icons-scale-amount ) * 1rem; //FIXME: replace with $font-size
 
 }
 
