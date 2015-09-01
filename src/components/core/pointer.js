@@ -7,7 +7,7 @@
  * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
  * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
  * ======================================================================================
- * @requires eventXY.js
+ * @requires jQuery-extra.js
  * ====================================================================================== */
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)

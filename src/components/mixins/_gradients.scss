@@ -1,6 +1,13 @@
 
-/* GRADIENTS */
-
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ====================================================================================== */
+ 
 @mixin gradient-horizontal ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {
     background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
     background-repeat: repeat-x;

@@ -7,7 +7,7 @@
  * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
  * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
  * ======================================================================================
- * @requires ../code/lodash-extra.js
+ * @requires ../core/lodash-extra.js
  * ====================================================================================== */
 
 ;(function ( $, _, window, document, undefined ) {
