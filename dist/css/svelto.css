@@ -5585,6 +5585,147 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
  * ======================================================================================
  * @requires ../core/_core.scss
  * ====================================================================================== */
+/* INFOBAR */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires _settings.scss
+ * ====================================================================================== */
+/* HEADER */
+.infobar-wrp {
+  border-color: #cccccc ;
+  color: #3f3f3f ;
+  background: #ffffff ;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  -webkit-transition: opacity 0.25s;
+          transition: opacity 0.25s;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 0.2665rem;
+}
+
+.infobar-wrp p > a {
+  color: #2967ab ;
+}
+
+.infobar-wrp p > a:before {
+  border-color: #2b6cb3 ;
+}
+
+.infobar-wrp p > a:hover {
+  color: #2b6cb3 ;
+}
+
+.infobar-wrp.limited {
+  max-width: 76rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.infobar-wrp.inset {
+  border-width: 0;
+  padding: 0;
+}
+
+.infobar-wrp.remove {
+  opacity: 0;
+}
+
+.infobar-wrp > .infobar-left {
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  -webkit-box-ordinal-group: 2;
+  -webkit-order: 1;
+      -ms-flex-order: 1;
+          order: 1;
+}
+
+.infobar-wrp > .infobar-left > *:last-child {
+  margin-bottom: 0;
+}
+
+.infobar-wrp > .infobar-center {
+  -webkit-box-flex: 100;
+  -webkit-flex-grow: 100;
+      -ms-flex-positive: 100;
+          flex-grow: 100;
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
+  -webkit-box-ordinal-group: 3;
+  -webkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2;
+}
+
+.infobar-wrp > .infobar-center > .infobar-title {
+  font-size: 1.3em;
+  margin-bottom: 5px;
+}
+
+.infobar-wrp > .infobar-center > *:last-child {
+  margin-bottom: 0;
+}
+
+.infobar-wrp > .infobar-right {
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3;
+}
+
+.infobar-wrp > .infobar-right > *:last-child {
+  margin-bottom: 0;
+}
+
+.infobar-wrp > .infobar-bottom {
+  -webkit-box-ordinal-group: 5;
+  -webkit-order: 4;
+      -ms-flex-order: 4;
+          order: 4;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.infobar-wrp > .infobar-bottom > *:last-child {
+  margin-bottom: 0;
+}
+
+.infobar-wrp > *:not(:first-child):not(.infobar-bottom) {
+  margin-left: 10px;
+}
+
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/_core.scss
+ * ====================================================================================== */
 /* LABEL */
 /* POINTER */
 /* POINTER CIRCLE */
@@ -5986,147 +6127,6 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 /* RESET NUMBER INPUTS */
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
-}
-
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/_core.scss
- * ====================================================================================== */
-/* INFOBAR */
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires _settings.scss
- * ====================================================================================== */
-/* HEADER */
-.infobar-wrp {
-  border-color: #cccccc ;
-  color: #3f3f3f ;
-  background: #ffffff ;
-  display: -webkit-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: wrap;
-      -ms-flex-wrap: wrap;
-          flex-wrap: wrap;
-  -webkit-box-align: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 10px;
-  padding: 10px;
-  -webkit-transition: opacity 0.25s;
-          transition: opacity 0.25s;
-  border-width: 1px;
-  border-style: solid;
-  border-radius: 0.2665rem;
-}
-
-.infobar-wrp p > a {
-  color: #2967ab ;
-}
-
-.infobar-wrp p > a:before {
-  border-color: #2b6cb3 ;
-}
-
-.infobar-wrp p > a:hover {
-  color: #2b6cb3 ;
-}
-
-.infobar-wrp.limited {
-  max-width: 76rem;
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.infobar-wrp.inset {
-  border-width: 0;
-  padding: 0;
-}
-
-.infobar-wrp.remove {
-  opacity: 0;
-}
-
-.infobar-wrp > .infobar-left {
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  -webkit-box-ordinal-group: 2;
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
-}
-
-.infobar-wrp > .infobar-left > *:last-child {
-  margin-bottom: 0;
-}
-
-.infobar-wrp > .infobar-center {
-  -webkit-box-flex: 100;
-  -webkit-flex-grow: 100;
-      -ms-flex-positive: 100;
-          flex-grow: 100;
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
-  -webkit-box-ordinal-group: 3;
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
-}
-
-.infobar-wrp > .infobar-center > .infobar-title {
-  font-size: 1.3em;
-  margin-bottom: 5px;
-}
-
-.infobar-wrp > .infobar-center > *:last-child {
-  margin-bottom: 0;
-}
-
-.infobar-wrp > .infobar-right {
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  -webkit-box-ordinal-group: 4;
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
-}
-
-.infobar-wrp > .infobar-right > *:last-child {
-  margin-bottom: 0;
-}
-
-.infobar-wrp > .infobar-bottom {
-  -webkit-box-ordinal-group: 5;
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
-  width: 100%;
-  margin-top: 10px;
-}
-
-.infobar-wrp > .infobar-bottom > *:last-child {
-  margin-bottom: 0;
-}
-
-.infobar-wrp > *:not(:first-child):not(.infobar-bottom) {
-  margin-left: 10px;
 }
 
 /* ======================================================================================
@@ -8175,6 +8175,45 @@ label {
  * ======================================================================================
  * @requires ../core/_core.scss
  * ====================================================================================== */
+/* PAGINATION */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires _settings.scss
+ * ====================================================================================== */
+/* PAGINATION */
+.pagination .current > * {
+  color: #ff7043;
+}
+
+.pagination .current:after {
+  content: '';
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  border-bottom: 2px solid #ff7043;
+  pointer-events: none;
+  position: absolute;
+  border-bottom-left-radius: inherit;
+  border-bottom-right-radius: inherit;
+}
+
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/_core.scss
+ * ====================================================================================== */
 /* PARALLAX */
 /* DEEP */
 /* BACKGROUND */
@@ -8247,45 +8286,6 @@ label {
   margin-right: auto;
   -webkit-transform: translate(-50%, -50%);
           transform: translate(-50%, -50%);
-}
-
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/_core.scss
- * ====================================================================================== */
-/* PAGINATION */
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires _settings.scss
- * ====================================================================================== */
-/* PAGINATION */
-.pagination .current > * {
-  color: #ff7043;
-}
-
-.pagination .current:after {
-  content: '';
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 100%;
-  border-bottom: 2px solid #ff7043;
-  pointer-events: none;
-  position: absolute;
-  border-bottom-left-radius: inherit;
-  border-bottom-right-radius: inherit;
 }
 
 /* ======================================================================================

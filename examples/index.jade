@@ -1,100 +1,100 @@
 //- index.jade
 
-extends views/layout.jade
+extends ./layout.jade
 
 append main
     +divider Decorators
 
     +multiple
-        +button-simple("/views/demo/decorators/colors.html").outlined Colors
-        +button-simple("/views/demo/decorators/z-depths.html").outlined Z-Depths
-        +button-simple("/views/demo/decorators/helpers.html").outlined Helpers
-        +button-simple("/views/demo/decorators/highlight.html").outlined Highlight
-        +button-simple("/views/demo/decorators/outline.html").outlined Outline
-        +button-simple("/views/demo/decorators/helpers_responsive.html").outlined Responsive Helpers
-        +button-simple("/views/demo/decorators/ripple.html").outlined Ripple
-        +button-simple("/views/demo/decorators/sizes.html").outlined Sizes
+        +button-simple("/components/colors.html").outlined Colors
+        +button-simple("/components/z-depths.html").outlined Z-Depths
+        +button-simple("/components/helpers.html").outlined Helpers
+        +button-simple("/components/highlight.html").outlined Highlight
+        +button-simple("/components/outline.html").outlined Outline
+        +button-simple("/components/helpers_responsive.html").outlined Responsive Helpers
+        +button-simple("/components/ripple.html").outlined Ripple
+        +button-simple("/components/sizes.html").outlined Sizes
 
     +divider CSS
 
     +multiple
-        +button-simple("/views/demo/css/container.html").outlined Container
-        +button-simple("/views/demo/css/embedded.html").outlined Embedded
-        +button-simple("/views/demo/css/flags.html").outlined Flags
-        +button-simple("/views/demo/css/form.html").outlined.teal Form
-        +button-simple("/views/demo/css/grid.html").outlined Grid
-        +button-simple("/views/demo/css/icons.html").outlined Icons
-        +button-simple("/views/demo/css/image.html").outlined Image
-        +button-simple("/views/demo/css/multiple.html").outlined Multiple
-        +button-simple("/views/demo/css/multiple_subs.html").outlined Multiple subs
-        +button-simple("/views/demo/css/parallax.html").outlined Parallax
-        +button-simple("/views/demo/css/table.html").outlined Table
-        +button-simple("/views/demo/css/typography.html").outlined Typography
+        +button-simple("/components/container.html").outlined Container
+        +button-simple("/components/embedded.html").outlined Embedded
+        +button-simple("/components/flags.html").outlined Flags
+        +button-simple("/components/form.html").outlined.teal Form
+        +button-simple("/components/grid.html").outlined Grid
+        +button-simple("/components/icons.html").outlined Icons
+        +button-simple("/components/image.html").outlined Image
+        +button-simple("/components/multiple.html").outlined Multiple
+        +button-simple("/components/multiple_subs.html").outlined Multiple subs
+        +button-simple("/components/parallax.html").outlined Parallax
+        +button-simple("/components/table.html").outlined Table
+        +button-simple("/components/typography.html").outlined Typography
 
     +divider Components
 
     +multiple
-        +button-simple("/views/demo/components/breadcrumb.html").outlined Breadcrumb
-        +button-simple("/views/demo/components/button.html").outlined.teal Button
-        +button-simple("/views/demo/components/chat.html").outlined.teal Chat
-        +button-simple("/views/demo/components/divider.html").outlined Divider
-        +button-simple("/views/demo/components/footer.html").outlined.teal Footer
-        +button-simple("/views/demo/components/infobar.html").outlined Infobar
-        +button-simple("/views/demo/components/input.html").outlined.teal Input
-        +button-simple("/views/demo/components/label.html").outlined.teal Label
-        +button-simple("/views/demo/components/header.html").outlined.teal Header
-        +button-simple("/views/demo/components/pagination.html").outlined Pagination
-        +button-simple("/views/demo/components/placeholder.html").outlined Placeholder
-        +button-simple("/views/demo/components/progressBar.html").outlined progressBar
-        +button-simple("/views/demo/components/shapes.html").outlined Shapes
-        +button-simple("/views/demo/components/spinner.html").outlined Spinner
-        +button-simple("/views/demo/components/textarea.html").outlined.teal Textarea
-        +button-simple("/views/demo/components/toolbar.html").outlined Toolbar
+        +button-simple("/components/breadcrumb.html").outlined Breadcrumb
+        +button-simple("/components/button.html").outlined.teal Button
+        +button-simple("/components/chat.html").outlined.teal Chat
+        +button-simple("/components/divider.html").outlined Divider
+        +button-simple("/components/footer.html").outlined.teal Footer
+        +button-simple("/components/infobar.html").outlined Infobar
+        +button-simple("/components/input.html").outlined.teal Input
+        +button-simple("/components/label.html").outlined.teal Label
+        +button-simple("/components/header.html").outlined.teal Header
+        +button-simple("/components/pagination.html").outlined Pagination
+        +button-simple("/components/placeholder.html").outlined Placeholder
+        +button-simple("/components/progressBar.html").outlined progressBar
+        +button-simple("/components/shapes.html").outlined Shapes
+        +button-simple("/components/spinner.html").outlined Spinner
+        +button-simple("/components/textarea.html").outlined.teal Textarea
+        +button-simple("/components/toolbar.html").outlined Toolbar
 
     +divider Javascript
 
     +multiple
-        +button-simple("/views/demo/javascript/accordion.html").outlined Accordion
-        +button-simple("/views/demo/javascript/checkbox.html").outlined Checkbox
-        +button-simple("/views/demo/javascript/colorpicker.html").outlined Colorpicker
-        +button-simple("/views/demo/javascript/datepicker.html").outlined Datepicker
-        +button-simple("/views/demo/javascript/dropdown.html").outlined Dropdown
-        +button-simple("/views/demo/javascript/expander.html").outlined Expander
-        +button-simple("/views/demo/javascript/flippable.html").outlined Flippable
-        +button-simple("/views/demo/javascript/modal.html").outlined Modal
-        +button-simple("/views/demo/javascript/navbar.html").outlined Navbar
-        +button-simple("/views/demo/javascript/noty.html").outlined Noty
-        +button-simple("/views/demo/javascript/radio.html").outlined Radio
-        +button-simple("/views/demo/javascript/select.html").outlined Select
-        +button-simple("/views/demo/javascript/slider.html").outlined Slider
-        +button-simple("/views/demo/javascript/stepper.html").outlined Stepper
-        +button-simple("/views/demo/javascript/switch.html").outlined Switch
-        +button-simple("/views/demo/javascript/syntax.html").outlined Syntax
-        +button-simple("/views/demo/javascript/tabs.html").outlined Tabs
-        +button-simple("/views/demo/javascript/tagbox.html").outlined Tagbox
+        +button-simple("/components/accordion.html").outlined Accordion
+        +button-simple("/components/checkbox.html").outlined Checkbox
+        +button-simple("/components/colorpicker.html").outlined Colorpicker
+        +button-simple("/components/datepicker.html").outlined Datepicker
+        +button-simple("/components/dropdown.html").outlined Dropdown
+        +button-simple("/components/expander.html").outlined Expander
+        +button-simple("/components/flippable.html").outlined Flippable
+        +button-simple("/components/modal.html").outlined Modal
+        +button-simple("/components/navbar.html").outlined Navbar
+        +button-simple("/components/noty.html").outlined Noty
+        +button-simple("/components/radio.html").outlined Radio
+        +button-simple("/components/select.html").outlined Select
+        +button-simple("/components/slider.html").outlined Slider
+        +button-simple("/components/stepper.html").outlined Stepper
+        +button-simple("/components/switch.html").outlined Switch
+        +button-simple("/components/syntax.html").outlined Syntax
+        +button-simple("/components/tabs.html").outlined Tabs
+        +button-simple("/components/tagbox.html").outlined Tagbox
 
     +divider Tools
 
     +multiple
-        +button-simple("/views/demo/tools/autogrow.html").outlined Autogrow
-        +button-simple("/views/demo/tools/blurred.html").outlined Blurred
-        +button-simple("/views/demo/tools/browser.html").outlined Browser
-        +button-simple("/views/demo/tools/btEach.html").outlined btEach
-        +button-simple("/views/demo/tools/cookie.html").outlined Cookie
-        +button-simple("/views/demo/tools/draggable.html").outlined Draggable
-        +button-simple("/views/demo/tools/formAjax.html").outlined formAjax
-        +button-simple("/views/demo/tools/formSync.html").outlined formSync
-        +button-simple("/views/demo/tools/loading.html").outlined Loading
-        +button-simple("/views/demo/tools/notification.html").outlined Notification
-        +button-simple("/views/demo/tools/oneTimeAction.html").outlined oneTimeAction
-        +button-simple("/views/demo/tools/pointer.html").outlined Pointer
-        +button-simple("/views/demo/tools/positionate.html").outlined Positionate
-        +button-simple("/views/demo/tools/selectable.html").outlined Selectable
-        +button-simple("/views/demo/tools/sortable.html").outlined Sortable
-        +button-simple("/views/demo/tools/tableHelper.html").outlined tableHelper
-        +button-simple("/views/demo/tools/timeAgo.html").outlined timeAgo
-        +button-simple("/views/demo/tools/timer.html").outlined Timer
-        +button-simple("/views/demo/tools/touching.html").outlined Touching
+        +button-simple("/components/autogrow.html").outlined Autogrow
+        +button-simple("/components/blurred.html").outlined Blurred
+        +button-simple("/components/browser.html").outlined Browser
+        +button-simple("/components/btEach.html").outlined btEach
+        +button-simple("/components/cookie.html").outlined Cookie
+        +button-simple("/components/draggable.html").outlined Draggable
+        +button-simple("/components/formAjax.html").outlined formAjax
+        +button-simple("/components/formSync.html").outlined formSync
+        +button-simple("/components/loading.html").outlined Loading
+        +button-simple("/components/notification.html").outlined Notification
+        +button-simple("/components/oneTimeAction.html").outlined oneTimeAction
+        +button-simple("/components/pointer.html").outlined Pointer
+        +button-simple("/components/positionate.html").outlined Positionate
+        +button-simple("/components/selectable.html").outlined Selectable
+        +button-simple("/components/sortable.html").outlined Sortable
+        +button-simple("/components/tableHelper.html").outlined tableHelper
+        +button-simple("/components/timeAgo.html").outlined timeAgo
+        +button-simple("/components/timer.html").outlined Timer
+        +button-simple("/components/touching.html").outlined Touching
 
     +divider Templates
 
@@ -107,4 +107,4 @@ append main
         +button-simple("/views/responses/500.html").outlined 500
 
 append body-end
-    +noty({ body: '<p>[Green] To update <br/> [Teal] ToDo <br/> [Blue] Make it better <br/> [Red] Problematic</p>', ttl: 'forever' })
+    +noty({ body: '[Teal] To update <br/> [Red] Problematic</p>', ttl: 'forever' })

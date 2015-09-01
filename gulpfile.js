@@ -21,6 +21,7 @@ var gulp = require ( 'gulp' ),
     minify_css = require ( 'gulp-minify-css' ),
     sizediff = require ( 'gulp-sizediff' ),
     bytediff = require ( 'gulp-bytediff' ),
+    minify_html = require ( 'gulp-minify-html' ),
     sass = require ( 'gulp-sass' ),
     clean = require ( 'gulp-clean' ),
     rename = require ( 'gulp-rename' ),
@@ -28,8 +29,10 @@ var gulp = require ( 'gulp' ),
     imagemin = require ( 'gulp-imagemin' ),
     pngquant = require ( 'imagemin-pngquant' ),
     util = require ( 'gulp-util' ),
+    history = require ( 'connect-history-api-fallback' ),
     filesize = require ( 'gulp-filesize' ),
     uglify = require ( 'gulp-uglify' ),
+    browserSync = require ( 'browser-sync' ).create (),
     resolveDependencies = require ( 'gulp-resolve-dependencies' ),
     filelog = require ( 'gulp-filelog' );
 
@@ -60,7 +63,36 @@ gulp.task ( 'images', ['images-clean'], function () {
                }))
                .pipe ( bytediff.stop () )
                .pipe ( flatten () )
-               .pipe ( gulp.dest ( 'dist/images' ) );
+               .pipe ( gulp.dest ( 'dist/images' ) )
+               .pipe ( browserSync.stream () );
+
+});
+
+/* EXAMPLES */
+
+gulp.task ( 'examples-clean', function () {
+
+  'use strict';
+
+  return gulp.src ( 'examples/**/*.html', { read: false } )
+             .pipe ( clean () );
+
+});
+
+gulp.task ( 'examples', ['examples-clean', 'jade'], function () {
+
+  'use strict';
+
+  return gulp.src ( 'examples/**/*.jade' )
+             .pipe ( ignore.exclude ( '**/layout.jade' ) )
+             .pipe ( jade ({
+               locals: {}
+             }))
+             .pipe ( minify_html ({
+               considtionals: true
+             }))
+             .pipe ( gulp.dest ( 'examples' ) )
+             .pipe ( browserSync.stream () );
 
 });
 
@@ -112,7 +144,8 @@ gulp.task ( 'js', ['js-clean'], function () {
                .pipe ( gulp.dest ( 'dist/js' ) )
                .pipe ( sourcemaps.write () )
                .pipe ( rename ( 'svelto.min.js.map' ) )
-               .pipe ( gulp.dest ( 'dist/js' ) );
+               .pipe ( gulp.dest ( 'dist/js' ) )
+               .pipe ( browserSync.stream () );
 
 });
 
@@ -156,14 +189,40 @@ gulp.task ( 'css', ['css-clean'], function () {
              .pipe ( gulp.dest ( 'dist/css' ) )
              .pipe ( sourcemaps.write () )
              .pipe ( rename ( 'svelto.min.css.map' ) )
-             .pipe ( gulp.dest ( 'dist/css' ) );
+             .pipe ( gulp.dest ( 'dist/css' ) )
+             .pipe ( browserSync.stream () );
 
 });
 
 /* CLEAN */
 
-gulp.task ( 'clean', ['images-clean', 'jade-clean', 'js-clean', 'css-clean'] );
+gulp.task ( 'clean', ['images-clean', 'jade-clean', 'js-clean', 'css-clean', 'examples-clean'] );
+
+/* BUILD */
+
+gulp.task ( 'build', ['images', 'js', 'css', 'examples'] );
+
+/* SERVE */
+
+gulp.task ( 'serve', function () {
+
+    'use strict';
+
+    browserSync.init ({
+      server: 'examples',
+      serveStatic: ['dist/images', 'dist/css', 'dist/js'],
+      notify: false
+    });
+
+    gulp.watch ( 'dist/jade/svelto.mixins.jade', ['examples'] );
+    gulp.watch ( 'src/components/**/*.jade', ['jade'] );
+    gulp.watch ( 'src/components/**/*.js', ['js'] );
+    gulp.watch ( 'src/components/**/*.{sass,scss}', ['css'] );
+
+    gulp.watch ( 'examples/**/*.html' ).on ( 'change', browserSync.reload );
+
+});
 
 /* DEFAULT */
 
-gulp.task ( 'default', ['images', 'jade', 'js', 'css'] );
+gulp.task ( 'default', ['build'] );

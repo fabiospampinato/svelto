@@ -51,8 +51,7 @@ mixin head(title, description)
 
         link(rel="sitemap", type="application/xml", title="Sitemap", href="/sitemap.xml")
 
-        +css("/assets/css/presto.css")
-        +css("/assets/css/main.css")
+        +css("/svelto.css")
         block css
 
         +script.
@@ -61,7 +60,7 @@ mixin head(title, description)
         block
 
 mixin css(url, media)
-    link(rel="stylesheet", type="text/css", href!=url, media= ( media || "all"))&attributes(attributes)
+    link(rel="stylesheet" href!=url, media= ( media || "all"))&attributes(attributes)
 
 mixin js(url)
     script(src!=url)&attributes(attributes)
@@ -75,10 +74,9 @@ mixin body
         block body-start
         block body
             block
-        +js("/assets/js/min/lodash-3.10.1.js")
-        +js("/assets/js/min/jQuery-2.1.4.js")
-        +js("/assets/js/min/presto.js")
-        +js("/assets/js/min/main.js")
+        +js("https://cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
+        +js("https://code.jquery.com/jquery-2.1.4.min.js")
+        +js("/svelto.js")
         block js
         block body-end
 
