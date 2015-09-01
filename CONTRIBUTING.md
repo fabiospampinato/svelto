@@ -1,4 +1,4 @@
-# Contributing to Presto
+# Contributing to Svelto
 
 ## Reporting issues
 
