@@ -757,6 +757,13 @@ mixin label-corner(direction, icon)
             if icon
                 block
 
+//- modal.jade
+
+mixin modal
+    .modal&attributes(attributes)
+        .background.modal-closer
+        block
+
 //- multiple.jade
 
 mixin multiple
@@ -806,22 +813,15 @@ mixin navbar(id, direction, slim, attached)
             block
         .background.navbar-closer
 
-//- modal.jade
+//- notification.jade
 
-mixin modal
-    .modal&attributes(attributes)
-        .background.modal-closer
-        block
+mixin notification(options)
+    +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 //- noty.jade
 
 mixin noty(options)
     +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
-
-//- notification.jade
-
-mixin notification(options)
-    +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 //- others.jade
 
@@ -1199,14 +1199,6 @@ mixin table-tr-empty ( empty_str )
                 else
                     = "Empty"
 
-//- tagbox.jade
-
-mixin tagbox(name, tags)
-    +container&attributes(attributes).tagbox
-        input(type="text", name=name, value=tags)
-        +multiple
-            +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
-
 //- tabs.jade
 
 mixin tabs
@@ -1236,6 +1228,14 @@ mixin textarea(options)
         if options.label
             label= options.label
         .text-field-bar
+
+//- tagbox.jade
+
+mixin tagbox(name, tags)
+    +container&attributes(attributes).tagbox
+        input(type="text", name=name, value=tags)
+        +multiple
+            +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
 
 //- toolbar.jade
 
