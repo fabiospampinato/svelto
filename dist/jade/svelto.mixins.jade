@@ -218,6 +218,26 @@ mixin button-corner(direction, icon)
             if icon
                 block
 
+//- checkbox.jade
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+mixin checkbox(name, title, value, checked)
+    if checked
+        +button&attributes(attributes).checkbox.checked
+            input(type="checkbox", name=name, value=value, checked)
+            +button-center
+                = title
+                +icon("check_box").on.right
+                +icon("check_box_outline_blank").off.right
+    else
+        +button&attributes(attributes).checkbox
+            input(type="checkbox", name=name, value=value)
+            +button-center
+                = title
+                +icon("check_box").on.right
+                +icon("check_box_outline_blank").off.right
+
 //- chat.jade
 
 //-
@@ -272,26 +292,6 @@ mixin chat-msg(options)
                             if options.permissions.delete
                                 +button-icon("action-delete")(title="Delete").small.outlined
                 +container-content= options.message.content
-
-//- checkbox.jade
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-mixin checkbox(name, title, value, checked)
-    if checked
-        +button&attributes(attributes).checkbox.checked
-            input(type="checkbox", name=name, value=value, checked)
-            +button-center
-                = title
-                +icon("check_box").on.right
-                +icon("check_box_outline_blank").off.right
-    else
-        +button&attributes(attributes).checkbox
-            input(type="checkbox", name=name, value=value)
-            +button-center
-                = title
-                +icon("check_box").on.right
-                +icon("check_box_outline_blank").off.right
 
 //- colorpicker.jade
 
@@ -570,22 +570,6 @@ mixin header-with-bg(background_image)
 mixin icon(icon)
     i.icon&attributes(attributes)= icon
 
-//- image.jade
-
-mixin image(url)
-    +container&attributes(attributes).image-wrp
-        img(src=url)
-        block
-
-mixin image-caption
-    +container&attributes(attributes).image-caption
-        +container-content
-            block
-
-mixin image-sample(url)
-    +image("/assets/images/presto/sample.png")&attributes(attributes)
-        block
-
 //- header.jade
 
 mixin infobar(icon, title, subtitle)
@@ -658,6 +642,22 @@ mixin input(options)
         if options.label
             label= options.label
         .text-field-bar
+
+//- image.jade
+
+mixin image(url)
+    +container&attributes(attributes).image-wrp
+        img(src=url)
+        block
+
+mixin image-caption
+    +container&attributes(attributes).image-caption
+        +container-content
+            block
+
+mixin image-sample(url)
+    +image("/assets/images/presto/sample.png")&attributes(attributes)
+        block
 
 //- label.jade
 
@@ -1158,6 +1158,14 @@ mixin spinner-multiple(first, second, third, fourth)
             +spinner-no-wrp(class=(third ? third : "yellow"))
             +spinner-no-wrp(class=(fourth ? fourth : "green"))
 
+//- stepper.jade
+
+mixin stepper(name, min, value, max)
+    +multiple(data-min=min, data-max=max)&attributes(attributes).stepper.joined
+        +button-icon("content-remove").stepper-decreaser
+        +input({name: name, value: value}).autogrow.compact
+        +button-icon("content-add").stepper-increaser
+
 //- switch.jade
 
 mixin switch(options, value, checked)
@@ -1177,14 +1185,6 @@ mixin switch(options, value, checked)
                             +icon(options.icons.on).on
                         if options.icons.off
                             +icon(options.icons.off).off
-
-//- stepper.jade
-
-mixin stepper(name, min, value, max)
-    +multiple(data-min=min, data-max=max)&attributes(attributes).stepper.joined
-        +button-icon("content-remove").stepper-decreaser
-        +input({name: name, value: value}).autogrow.compact
-        +button-icon("content-add").stepper-increaser
 
 //- table.jade
 
@@ -1217,6 +1217,14 @@ mixin tabs-containers
     .tabs-containers&attributes(attributes)
         block
 
+//- tagbox.jade
+
+mixin tagbox(name, tags)
+    +container&attributes(attributes).tagbox
+        input(type="text", name=name, value=tags)
+        +multiple
+            +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
+
 //- textarea.jade
 
 mixin textarea(options)
@@ -1228,14 +1236,6 @@ mixin textarea(options)
         if options.label
             label= options.label
         .text-field-bar
-
-//- tagbox.jade
-
-mixin tagbox(name, tags)
-    +container&attributes(attributes).tagbox
-        input(type="text", name=name, value=tags)
-        +multiple
-            +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
 
 //- toolbar.jade
 

@@ -15,27 +15,27 @@ var gulp = require ( 'gulp' ),
     flatten = require ( 'gulp-flatten' ),
     jade = require ( 'gulp-jade' ),
     babel = require ( 'gulp-babel' ),
-    changed = require ( 'gulp-changed' ),
+    // changed = require ( 'gulp-changed' ),
     ignore = require ( 'gulp-ignore' ),
-    rimraf = require ( 'gulp-rimraf' ),
-    watch = require ( 'gulp-watch' ),
+    // rimraf = require ( 'gulp-rimraf' ),
+    // watch = require ( 'gulp-watch' ),
     minify_css = require ( 'gulp-minify-css' ),
-    sizediff = require ( 'gulp-sizediff' ),
+    // sizediff = require ( 'gulp-sizediff' ),
     bytediff = require ( 'gulp-bytediff' ),
-    minify_html = require ( 'gulp-minify-html' ),
+    // minify_html = require ( 'gulp-minify-html' ),
     sass = require ( 'gulp-sass' ),
     clean = require ( 'gulp-clean' ),
-    rename = require ( 'gulp-rename' ),
     rename = require ( 'gulp-rename' ),
     imagemin = require ( 'gulp-imagemin' ),
     pngquant = require ( 'imagemin-pngquant' ),
     util = require ( 'gulp-util' ),
-    history = require ( 'connect-history-api-fallback' ),
-    filesize = require ( 'gulp-filesize' ),
+    // history = require ( 'connect-history-api-fallback' ),
+    // filesize = require ( 'gulp-filesize' ),
     uglify = require ( 'gulp-uglify' ),
     browserSync = require ( 'browser-sync' ).create (),
-    resolveDependencies = require ( 'gulp-resolve-dependencies' ),
-    filelog = require ( 'gulp-filelog' );
+    browserSync_inited = false,
+    resolveDependencies = require ( 'gulp-resolve-dependencies' );
+    // filelog = require ( 'gulp-filelog' );
 
 /* IMAGES */
 
@@ -54,13 +54,13 @@ gulp.task ( 'images', function () {
                .pipe ( bytediff.stop () )
                .pipe ( flatten () )
                .pipe ( gulp.dest ( 'dist/images' ) )
-               .pipe ( browserSync.reload () );
+               .pipe ( browserSync_inited ? browserSync.reload () : util.noop () );
 
 });
 
 /* EXAMPLES */
 
-gulp.task ( 'examples', function () {
+gulp.task ( 'examples', ['jade'], function () {
 
   return gulp.src ( 'examples/**/*.jade' )
              .pipe ( ignore.exclude ( '**/layout.jade' ) )
@@ -72,7 +72,7 @@ gulp.task ( 'examples', function () {
             //    considtionals: true
             //  }))
              .pipe ( gulp.dest ( 'examples' ) )
-             .pipe ( browserSync.reload () );
+             .pipe ( browserSync_inited ? browserSync.reload () : util.noop () );
 
 });
 
@@ -81,7 +81,7 @@ gulp.task ( 'examples', function () {
 gulp.task ( 'jade', function () {
 
     return gulp.src ( 'src/components/**/*.jade' )
-           .pipe ( concat ( 'svelto.mixins.jade ') )
+           .pipe ( concat ( 'svelto.mixins.jade' ) )
            .pipe ( gulp.dest ( 'dist/jade' ) );
 
 });
@@ -95,7 +95,7 @@ gulp.task ( 'js', function () {
                  pattern: /\* @requires [\s-]*(.*\.js)/g
                }))
                .pipe ( sourcemaps.init () )
-              //  .pipe ( babel () )
+               .pipe ( babel () )
                .pipe ( concat ( 'svelto.js' ) )
                .pipe ( gulp.dest ( 'dist/js' ) )
                .pipe ( uglify () )
@@ -104,7 +104,7 @@ gulp.task ( 'js', function () {
                .pipe ( sourcemaps.write () )
                .pipe ( rename ( 'svelto.min.js.map' ) )
                .pipe ( gulp.dest ( 'dist/js' ) )
-               .pipe ( browserSync.stream () );
+               .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
 
 });
 
@@ -138,7 +138,7 @@ gulp.task ( 'css', function () {
              .pipe ( sourcemaps.write () )
              .pipe ( rename ( 'svelto.min.css.map' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( browserSync.stream () );
+             .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
 
 });
 
@@ -146,14 +146,14 @@ gulp.task ( 'css', function () {
 
 gulp.task ( 'clean', function () {
 
-  return gulp.src ( ['dist/**', 'examples/**/*.html'], { read: false } )
+  return gulp.src ( ['dist/*', 'examples/**/*.html'] )
              .pipe ( clean () );
 
 });
 
 /* BUILD */
 
-gulp.task ( 'build', ['images', 'jade', 'js', 'css', 'examples'] );
+gulp.task ( 'build', ['images', 'js', 'css', 'examples'] );
 
 /* WATCH */
 
@@ -178,6 +178,8 @@ gulp.task ( 'serve', function () {
       serveStatic: ['dist/images', 'dist/css', 'dist/js'],
       notify: false
     });
+
+    browserSync_inited = true;
 
     watcher ();
 
