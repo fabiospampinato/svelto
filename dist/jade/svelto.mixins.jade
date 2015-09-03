@@ -256,37 +256,6 @@ mixin container-simple(title, header_classes)
         +container-content
             block
 
-//- divider.jade
-
-mixin divider
-    +divider-block&attributes(attributes)
-        block
-
-mixin divider-block
-    .divider-wrp.block
-        .divider&attributes(attributes)
-            block
-
-mixin divider-linear
-    if block
-        .divider-wrp.linear
-            hr.left
-            .divider&attributes(attributes)
-                block
-            hr.right
-    else
-        hr&attributes(attributes)
-
-mixin divider-text
-    .divider-wrp.text
-        .divider&attributes(attributes)
-            block
-
-mixin divider-spacer
-    .divider-wrp.spacer
-        .divider&attributes(attributes)
-            block
-
 //- datepicker.jade
 
 mixin datepicker
@@ -351,6 +320,37 @@ mixin datepicker
                 .datepicker-day-next 4
                 .datepicker-day-next 5
                 .datepicker-day-next 6
+
+//- divider.jade
+
+mixin divider
+    +divider-block&attributes(attributes)
+        block
+
+mixin divider-block
+    .divider-wrp.block
+        .divider&attributes(attributes)
+            block
+
+mixin divider-linear
+    if block
+        .divider-wrp.linear
+            hr.left
+            .divider&attributes(attributes)
+                block
+            hr.right
+    else
+        hr&attributes(attributes)
+
+mixin divider-text
+    .divider-wrp.text
+        .divider&attributes(attributes)
+            block
+
+mixin divider-spacer
+    .divider-wrp.spacer
+        .divider&attributes(attributes)
+            block
 
 //- dropdown.jade
 
@@ -421,12 +421,6 @@ mixin flag(flag)
     .flag(class="flag-" + flag)&attributes(attributes)
         block
 
-//- footer.jade
-
-mixin footer
-    .footer&attributes(attributes)
-        block
-
 //- flippable.jade
 
 mixin flippable
@@ -440,6 +434,12 @@ mixin flippable-front
 
 mixin flippable-back
     .flippable-back&attributes(attributes)
+        block
+
+//- footer.jade
+
+mixin footer
+    .footer&attributes(attributes)
         block
 
 //- form.jade
@@ -503,7 +503,7 @@ mixin image-caption
             block
 
 mixin image-sample(url)
-    +image("/assets/images/presto/sample.png")&attributes(attributes)
+    +image("/sample.png")&attributes(attributes)
         block
 
 //- header.jade

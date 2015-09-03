@@ -1,0 +1,44 @@
+{
+  "name": "svelto",
+  "description": "A rich, modular, web framework for modern browsers. With jade mixins.",
+  "main": [
+    "dist/css/svelto.css",
+    "dist/js/svelto.js"
+  ],
+  "dependencies": {
+    "jquery": ">=2.0.0",
+    "lodash": ">=3.10.1"
+  },
+  "moduleType": "globals",
+  "keywords": [
+    "css",
+    "js",
+    "html",
+    "jade",
+    "framework",
+    "front-end",
+    "responsive",
+    "modular"
+  ],
+  "authors": [{
+    "name": "Fabio Spampinato",
+    "email": "spampinabio@gmail.com"
+  }],
+  "homepage": "http://getsvelto.com",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/svelto/svelto.git"
+  },
+  "license": "MIT",
+  "ignore": [
+    "examples",
+    "src",
+    "/.*",
+    "composer.json",
+    "CONTRIBUTING.md",
+    "gulpfile.js",
+    "LICENSE",
+    "package.json",
+    "README.md"
+  ]
+}

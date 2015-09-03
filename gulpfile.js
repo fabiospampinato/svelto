@@ -50,7 +50,7 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
 
 gulp.task ( 'images', function () {
 
-  return gulp.src ( 'src/components/**/*.{bmp,gif,jpg,jpeg,png,svg}' )
+  return gulp.src ( 'src/components/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}' )
              .pipe ( newer ({
                dest: 'dist/images',
                map: path.basename
@@ -223,7 +223,7 @@ gulp.task ( 'build', sequence ( 'jade', ['images', 'js', 'css', 'examples'] ) );
 
 var watcher = function () {
 
-  gulp.watch ( 'src/components/**/*.{bmp,gif,jpg,jpeg,png,svg}', ['images'] );
+  gulp.watch ( 'src/components/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}', ['images'] );
   gulp.watch ( 'src/components/**/*.jade', ['jade'] );
   gulp.watch ( 'src/components/**/*.js', ['js'] );
   gulp.watch ( 'src/components/**/*.scss', ['css'] );

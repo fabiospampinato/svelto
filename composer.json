@@ -1,0 +1,25 @@
+{
+  "name": "svelto/svelto",
+  "type": "library",
+  "description": "A rich, modular, web framework for modern browsers. With jade mixins.",
+  "keywords": [
+    "css",
+    "js",
+    "html",
+    "jade",
+    "framework",
+    "front-end",
+    "responsive",
+    "modular"
+  ],
+  "homepage": "http://getsvelto.com",
+  "license": "MIT",
+  "authors": [{
+    "name": "Fabio Spampinato",
+    "email": "spampinabio@gmail.com",
+    "role": "Creator"
+  }],
+  "support": {
+    "issues": "https://github.com/svelto/svelto/issues",
+  }
+}
