@@ -10,20 +10,9 @@
  * @requires ../settings/_settings.scss
  * ========================================================================= */
 
-/* ROBOTO */
-
-$roboto-enabled: false !default;
-
 /* FONT FAMILY */
 
-$font-family-roboto-enabled: Roboto, 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
-$font-family-roboto-disabled: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
-
-@if $roboto-enabled == true {
-    $font-family: $font-family-roboto-enabled;
-} @else {
-    $font-family: $font-family-roboto-disabled;
-}
+$font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
 
 /* FONT SIZE */
 

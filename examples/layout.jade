@@ -1,22 +1,56 @@
-//- layout.jade
+
+//- includes
 
 include ../dist/jade/svelto.mixins.jade
 
-+html
-    +head("Presto")
-    +body.fixed-header
-        header
-            +header
-                +toolbar.primary.z-depth-4
-                    +button-icon('menu')
-                    a.large(href="/") Presto
-                    .spacer
-                    +button-icon('refresh')
-                    +button-icon('more_vert')
-                block header
-        main
-            block main
-        footer
-            +footer.beveled
-                p.text-center Presto, a framework
-                block footer
+//- layout
+
+doctype html
+html(class="no-js" lang="en" xml:lang="en" dir="ltr")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="x-ua-compatible" content="ie=edge")
+    title Presto
+    meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    +css("/svelto.css")
+    block css
+
+    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
+
+    +script.
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+  body.fixed-header
+    block body-start
+    header
+      +header
+        +toolbar.primary.z-depth-4
+          +button-icon('menu')
+          a.large(href="/") Presto
+          +spacer
+          +button-icon('refresh')
+          +button-icon('more_vert')
+        block header
+    main
+        block main
+    footer
+        +footer.beveled
+            p.text-center Presto, a framework
+            block footer
+    block body
+    +js("//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
+    +js("//code.jquery.com/jquery-2.1.4.min.js")
+    +js("/svelto.js")
+    block js
+    block body-end
+      
+    //- INFO: Debug all the errors we found, either via noty, if possible, or via alert
+    script.
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };

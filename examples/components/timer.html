@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp fluid">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="300" name="milliseconds" required="required" class="text-field"/>
+                <label>Milliseconds...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable checkbox checked outlined">
+                  <input type="checkbox" name="autostart" value="1" checked="checked"/>
+                  <div class="label-center">Autostart<i class="icon on right">check_box</i><i class="icon off right">check_box_outline_blank</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:timer_set()" class="label actionable outlined">
+                  <div class="label-center">Set
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="1000" name="milliseconds_once" required="required" class="text-field"/>
+                <label>Milliseconds...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:timer_once()" class="label actionable outlined">
+                  <div class="label-center">Once
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_play()" class="label actionable outlined">
+              <div class="label-center">Play
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_pause()" class="label actionable outlined">
+              <div class="label-center">Pause
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_stop()" class="label actionable outlined">
+              <div class="label-center">Stop
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_toggle()" class="label actionable outlined">
+              <div class="label-center">Toggle
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_reset()" class="label actionable outlined">
+              <div class="label-center">Reset
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_go()" class="label actionable outlined">
+              <div class="label-center">Go
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:timer_remaining()" class="label actionable outlined">
+              <div class="label-center">Remaining
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      var timer = false;
+      
+      function timer_callback () {
+      
+          $.noty ({ body: 'Timer executed!', color: 'green' });
+      
+      }
+      
+      function timer_set () {
+      
+          var milliseconds = Number($('input[name="milliseconds"]').val ()),
+              autostart = $('input[name="autostart"]').prop ( 'checked' );
+      
+          timer = $.timer ( timer_callback, milliseconds, autostart );
+      
+      }
+      
+      function timer_once () {
+      
+          var milliseconds = Number($('input[name="milliseconds_once"]').val ());
+      
+          timer.once ( milliseconds );
+      
+      }
+      
+      function timer_play () {
+      
+          timer.play ();
+      
+      }
+      
+      function timer_pause () {
+      
+          timer.pause ();
+      
+      }
+      
+      function timer_stop () {
+      
+          timer.stop ();
+      
+      }
+      
+      function timer_toggle () {
+      
+          timer.toggle ();
+      
+      }
+      
+      function timer_reset () {
+      
+          timer.reset ();
+      
+      }
+      
+      function timer_go () {
+      
+          timer.go ();
+      
+      }
+      
+      function timer_remaining () {
+      
+          $.noty ( 'Remaining: ' + timer.remaining () );
+      
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

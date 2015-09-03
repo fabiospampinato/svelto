@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp fluid">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Default
+        </div>
+      </div>
+      <div class="container">
+        <div class="container-content">
+          <table class="sortable">
+            <thead>
+              <tr>
+                <th data-sort="int">Int</th>
+                <th data-sort="string">String</th>
+                <th data-sort="string">Date</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tfoot></tfoot>
+            <tbody>
+              <tr class="empty hidden">
+                <td colspan="100%">Empty
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Initial sort
+        </div>
+      </div>
+      <div class="container">
+        <div class="container-content">
+          <table class="sortable">
+            <thead>
+              <tr>
+                <th data-sort="int" class="desc">Int</th>
+                <th data-sort="string">String</th>
+                <th data-sort="string">Date</th>
+                <th>Options</th>
+              </tr>
+            </thead>
+            <tfoot></tfoot>
+            <tbody>
+              <tr class="empty hidden">
+                <td colspan="100%">Empty
+                </td>
+              </tr>
+              <tr>
+                <td>1</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>2</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>3</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>4</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>5</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>6</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>7</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>8</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>9</td>
+                <td>Foo</td>
+                <td>16/11/1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td>10</td>
+                <td>Bar</td>
+                <td>16 Nov 1993</td>
+                <td>
+                  <div class="multiple-wrp centered">
+                    <div class="multiple">
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 1
+                          </div></a>
+                      </div>
+                      <div class="label-wrp button-wrp"><a href="#" class="label actionable outlined small">
+                          <div class="label-center">Btn 2
+                          </div></a>
+                      </div>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

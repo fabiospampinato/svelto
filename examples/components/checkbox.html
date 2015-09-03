@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp fluid">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Checkbox
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox">
+              <input type="checkbox" name="name1" value="4"/>
+              <div class="label-center">Base<i class="icon on right">check_box</i><i class="icon off right">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox checked">
+              <input type="checkbox" name="name2" value="8" checked="checked"/>
+              <div class="label-center">Checked<i class="icon on right">check_box</i><i class="icon off right">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox checked checkbox-disabled">
+              <input type="checkbox" name="name3" value="32" checked="checked"/>
+              <div class="label-center">Disabled<i class="icon on right">check_box</i><i class="icon off right">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:checkbox_get_all()" class="label actionable">
+              <div class="label-center">Get all
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:checkbox_toggle_all()" class="label actionable">
+              <div class="label-center">Toggle all
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:checkbox_check_all()" class="label actionable">
+              <div class="label-center">Check all
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:checkbox_uncheck_all()" class="label actionable">
+              <div class="label-center">Uncheck all
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      function checkbox_get_all () {
+      
+          var gets = _.map ( $('.checkbox'), function ( checkbox ) {
+      
+              return $(checkbox).checkbox ( 'get' );
+      
+          });
+      
+          $.noty ( gets.join ( ' - ' ) );
+      
+      }
+      
+      function checkbox_toggle_all () {
+          $('.checkbox').checkbox ( 'toggle' );
+      }
+      
+      function checkbox_check_all () {
+          $('.checkbox').checkbox ( 'check' );
+      }
+      
+      function checkbox_uncheck_all () {
+          $('.checkbox').checkbox ( 'uncheck' );
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>
