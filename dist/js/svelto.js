@@ -1365,6 +1365,119 @@
  * @requires ../core/core.js
  * ====================================================================================== */
 
+'use strict';
+
+;(function ($, _, window, document, undefined) {
+
+    'use strict';
+
+    /* ACCORDION */
+
+    $.widget('presto.accordion', {
+
+        /* SPECIAL */
+
+        _variables: function _variables() {
+
+            this.$accordion = this.$element;
+            this.$expanders = this.$accordion.children('.expander');
+
+            this.expanders_instances = Array(this.$expanders.length);
+
+            this.isMultiple = this.$accordion.hasClass('multiple');
+        },
+
+        _init: function _init() {
+
+            for (var i = 0, l = this.$expanders.length; i < l; i++) {
+
+                this.expanders_instances[i] = this.$expanders.eq(i).expander('instance');
+            }
+        },
+
+        _events: function _events() {
+
+            this._on('expander:open', '.expander', this._handler_open);
+        },
+
+        /* OPEN */
+
+        _handler_open: function _handler_open(event, data, node) {
+
+            if (!this.isMultiple) {
+
+                for (var i = 0, l = this.$expanders.length; i < l; i++) {
+
+                    if (this.$expanders[i] !== node) {
+
+                        this.expanders_instances[i].close();
+                    }
+                }
+            }
+        },
+
+        /* PUBLIC */
+
+        toggle: function toggle(index) {
+
+            this.expanders_instances[index].toggle();
+        },
+
+        toggleAll: function toggleAll() {
+
+            _.each(this.expanders_instances, function (instance) {
+
+                instance.toggle();
+            });
+        },
+
+        open: function open(index) {
+
+            this.expanders_instances[index].open();
+        },
+
+        openAll: function openAll() {
+
+            _.each(this.expanders_instances, function (instance) {
+
+                instance.open();
+            });
+        },
+
+        close: function close(index) {
+
+            this.expanders_instances[index].close();
+        },
+
+        closeAll: function closeAll() {
+
+            _.each(this.expanders_instances, function (instance) {
+
+                instance.close();
+            });
+        }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.accordion').accordion();
+    });
+})(jQuery, _, window, document);
+
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/core.js
+ * ====================================================================================== */
+
 //INFO: Only works with `box-sizing: border-box`
 
 'use strict';
@@ -1488,119 +1601,6 @@
 
     'use strict';
 
-    /* ACCORDION */
-
-    $.widget('presto.accordion', {
-
-        /* SPECIAL */
-
-        _variables: function _variables() {
-
-            this.$accordion = this.$element;
-            this.$expanders = this.$accordion.children('.expander');
-
-            this.expanders_instances = Array(this.$expanders.length);
-
-            this.isMultiple = this.$accordion.hasClass('multiple');
-        },
-
-        _init: function _init() {
-
-            for (var i = 0, l = this.$expanders.length; i < l; i++) {
-
-                this.expanders_instances[i] = this.$expanders.eq(i).expander('instance');
-            }
-        },
-
-        _events: function _events() {
-
-            this._on('expander:open', '.expander', this._handler_open);
-        },
-
-        /* OPEN */
-
-        _handler_open: function _handler_open(event, data, node) {
-
-            if (!this.isMultiple) {
-
-                for (var i = 0, l = this.$expanders.length; i < l; i++) {
-
-                    if (this.$expanders[i] !== node) {
-
-                        this.expanders_instances[i].close();
-                    }
-                }
-            }
-        },
-
-        /* PUBLIC */
-
-        toggle: function toggle(index) {
-
-            this.expanders_instances[index].toggle();
-        },
-
-        toggleAll: function toggleAll() {
-
-            _.each(this.expanders_instances, function (instance) {
-
-                instance.toggle();
-            });
-        },
-
-        open: function open(index) {
-
-            this.expanders_instances[index].open();
-        },
-
-        openAll: function openAll() {
-
-            _.each(this.expanders_instances, function (instance) {
-
-                instance.open();
-            });
-        },
-
-        close: function close(index) {
-
-            this.expanders_instances[index].close();
-        },
-
-        closeAll: function closeAll() {
-
-            _.each(this.expanders_instances, function (instance) {
-
-                instance.close();
-            });
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('.accordion').accordion();
-    });
-})(jQuery, _, window, document);
-
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/core.js
- * ====================================================================================== */
-
-'use strict';
-
-;(function ($, _, window, document, undefined) {
-
-    'use strict';
-
     /* BLUR */
 
     $.fn.blurred = function (force) {
@@ -1632,6 +1632,127 @@
 
         return _.btEach(this, callback, startIndex);
     };
+})(jQuery, _, window, document);
+
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/core.js
+ * ====================================================================================== */
+
+'use strict';
+
+;(function ($, _, window, document, undefined) {
+
+    'use strict';
+
+    /* CHECKBOX */
+
+    $.widget('presto.checkbox', {
+
+        /* OPTIONS */
+
+        options: {
+            callbacks: {
+                checked: _.noop,
+                unchecked: _.noop
+            }
+        },
+
+        /* SPECIAL */
+
+        _variables: function _variables() {
+
+            this.$checkbox = this.$element;
+            this.$input = this.$checkbox.find('input');
+        },
+
+        _init: function _init() {
+            //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+
+            var hasClass = this.$checkbox.hasClass('checked');
+
+            if (this.get()) {
+
+                if (!hasClass) {
+
+                    this.$checkbox.addClass('checked');
+                }
+            } else if (hasClass) {
+
+                this.$checkbox.removeClass('checked');
+            }
+        },
+
+        _events: function _events() {
+
+            this._on('click', function () {
+
+                this.toggle();
+            });
+
+            this._on(true, 'change', this._handler_change);
+        },
+
+        /* CHANGE */
+
+        _handler_change: function _handler_change() {
+
+            var isChecked = this.get();
+
+            this.$checkbox.toggleClass('checked', isChecked);
+
+            this._trigger(isChecked ? 'checked' : 'unchecked');
+        },
+
+        /* PUBLIC */
+
+        get: function get() {
+            //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
+
+            return this.$input.prop('checked');
+        },
+
+        toggle: function toggle(force) {
+
+            var isChecked = this.get();
+
+            if (_.isUndefined(force)) {
+
+                force = !isChecked;
+            }
+
+            if (force !== isChecked) {
+
+                this.$input.prop('checked', force).trigger('change');
+
+                this._trigger(force ? 'checked' : 'unchecked'); //FIXME: is triggered twice per toggle
+            }
+        },
+
+        check: function check() {
+
+            this.toggle(true);
+        },
+
+        uncheck: function uncheck() {
+
+            this.toggle(false);
+        }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.checkbox').checkbox();
+    });
 })(jQuery, _, window, document);
 
 /* ======================================================================================
@@ -1847,127 +1968,6 @@
 
     };
 })(_, window, document);
-
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/core.js
- * ====================================================================================== */
-
-'use strict';
-
-;(function ($, _, window, document, undefined) {
-
-    'use strict';
-
-    /* CHECKBOX */
-
-    $.widget('presto.checkbox', {
-
-        /* OPTIONS */
-
-        options: {
-            callbacks: {
-                checked: _.noop,
-                unchecked: _.noop
-            }
-        },
-
-        /* SPECIAL */
-
-        _variables: function _variables() {
-
-            this.$checkbox = this.$element;
-            this.$input = this.$checkbox.find('input');
-        },
-
-        _init: function _init() {
-            //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
-
-            var hasClass = this.$checkbox.hasClass('checked');
-
-            if (this.get()) {
-
-                if (!hasClass) {
-
-                    this.$checkbox.addClass('checked');
-                }
-            } else if (hasClass) {
-
-                this.$checkbox.removeClass('checked');
-            }
-        },
-
-        _events: function _events() {
-
-            this._on('click', function () {
-
-                this.toggle();
-            });
-
-            this._on(true, 'change', this._handler_change);
-        },
-
-        /* CHANGE */
-
-        _handler_change: function _handler_change() {
-
-            var isChecked = this.get();
-
-            this.$checkbox.toggleClass('checked', isChecked);
-
-            this._trigger(isChecked ? 'checked' : 'unchecked');
-        },
-
-        /* PUBLIC */
-
-        get: function get() {
-            //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
-
-            return this.$input.prop('checked');
-        },
-
-        toggle: function toggle(force) {
-
-            var isChecked = this.get();
-
-            if (_.isUndefined(force)) {
-
-                force = !isChecked;
-            }
-
-            if (force !== isChecked) {
-
-                this.$input.prop('checked', force).trigger('change');
-
-                this._trigger(force ? 'checked' : 'unchecked'); //FIXME: is triggered twice per toggle
-            }
-        },
-
-        check: function check() {
-
-            this.toggle(true);
-        },
-
-        uncheck: function uncheck() {
-
-            this.toggle(false);
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('.checkbox').checkbox();
-    });
-})(jQuery, _, window, document);
 
 /* ======================================================================================
  * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
@@ -2474,6 +2474,218 @@
  * @requires ../core/core.js
  * ====================================================================================== */
 
+'use strict';
+
+;(function ($, _, window, document, undefined) {
+
+    'use strict';
+
+    /* DRAGGABLE */
+
+    $.widget('presto.draggable', {
+
+        /* OPTIONS */
+
+        options: {
+            selectors: {
+                handler: '.draggable-handler'
+            },
+            draggable: _['true'], //INFO: checks if we can drag it or not
+            only_handlers: false, //INFO: only an handler can drag it around
+            revertable: false, //INFO: on dragend take it back to the starting position
+            axis: false, //INFO: limit the movements to this axis
+            constrainer: { //INFO: constrain the drag inside the $element or coordinates
+                $element: false, //INFO: if we want to keep the draggable inside this $element
+                coordinates: false, //INFO: if we want to keep the draggable inside the coordinates //TODO: implement
+                // {
+                //     x1: 0,
+                //     x2: 0,
+                //     y1: 0,
+                //     y2: 0
+                // }
+                constrain_center: false, //INFO: set the constrain type, it will constrain the whole shape, or the center
+                axis: false, //INFO: if we want to constrain the draggable only in a specific axis
+                tollerance: { //INFO: the amount of pixel flexibility that a constrainer has
+                    x: 0,
+                    y: 0
+                }
+            },
+            modifiers: { //INFO: it can modify the setted X and Y transforms values
+                x: _['true'],
+                y: _['true']
+            },
+            callbacks: {
+                beforestart: _.noop,
+                start: _.noop,
+                move: _.noop,
+                end: _.noop
+            }
+        },
+
+        /* SPECIAL */
+
+        _variables: function _variables() {
+
+            this.draggable = this.element;
+            this.$draggable = this.$element;
+
+            if (this.options.only_handlers) {
+
+                this.$handlers = this.$draggable.find(this.options.selectors.handler); //FIXME: does it make sense to have handlers inside the $draggable?
+            }
+        },
+
+        _events: function _events() {
+
+            if (this.options.only_handlers) {
+
+                this._on(this.$handlers, $.Pointer.dragstart, this._start);
+                this._on(this.$handlers, $.Pointer.dragmove, this._move);
+                this._on(this.$handlers, $.Pointer.dragend, this._end);
+            } else {
+
+                this._on($.Pointer.dragstart, this._start);
+                this._on($.Pointer.dragmove, this._move);
+                this._on($.Pointer.dragend, this._end);
+            }
+        },
+
+        /* PRIVATE */
+
+        _start: function _start(event, data) {
+
+            this.isDraggable = this.options.draggable();
+
+            if (!this.isDraggable) return;
+
+            this._trigger('beforestart');
+
+            this.motion = false;
+
+            var transform_str = this.$draggable.css('transform'),
+                matrix = transform_str !== 'none' ? transform_str.match(/[0-9., -]+/)[0].split(', ') : [0, 0, 0, 0, 0, 0];
+
+            this.initialXY = {
+                X: parseInt(matrix[4], 10),
+                Y: parseInt(matrix[5], 10)
+            };
+
+            this._trigger('start', _.merge(data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable }));
+        },
+
+        _move: function _move(event, data) {
+            //TODO: make it more performant
+
+            if (!this.isDraggable) return;
+
+            if (this.motion === false) {
+
+                this.motion = true;
+
+                if (this.options.constrainer.$element) {
+
+                    var constrainer_offset = this.options.constrainer.$element.offset(),
+                        draggable_offset = this.$draggable.offset();
+
+                    this.translateX_min = constrainer_offset.left - (draggable_offset.left - this.initialXY.X) + (this.options.constrainer.constrain_center ? -this.$draggable.width() / 2 : 0);
+                    this.translateX_max = constrainer_offset.left + this.options.constrainer.$element.width() - (draggable_offset.left - this.initialXY.X + this.$draggable.width()) + (this.options.constrainer.constrain_center ? this.$draggable.width() / 2 : 0);
+
+                    this.translateY_min = constrainer_offset.top - (draggable_offset.top - this.initialXY.Y) + (this.options.constrainer.constrain_center ? -this.$draggable.height() / 2 : 0);
+                    this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height() - (draggable_offset.top - this.initialXY.Y + this.$draggable.height()) + (this.options.constrainer.constrain_center ? this.$draggable.height() / 2 : 0);
+                } else if (this.options.constrainer.coordinates) {
+
+                    var draggable_offset = this.$draggable.offset();
+
+                    if (!_.isUndefined(this.options.constrainer.coordinates.x1)) {
+
+                        this.translateX_min = this.options.constrainer.coordinates.x1 - (draggable_offset.left - this.initialXY.X) + (this.options.constrainer.constrain_center ? -this.$draggable.width() / 2 : 0);
+                    }
+
+                    if (!_.isUndefined(this.options.constrainer.coordinates.x2)) {
+
+                        this.translateX_max = this.options.constrainer.coordinates.x2 - (draggable_offset.left - this.initialXY.X + this.$draggable.width()) + (this.options.constrainer.constrain_center ? this.$draggable.width() / 2 : 0);
+                    }
+
+                    if (!_.isUndefined(this.options.constrainer.coordinates.y1)) {
+
+                        this.translateY_min = this.options.constrainer.coordinates.y1 - (draggable_offset.top - this.initialXY.Y) + (this.options.constrainer.constrain_center ? -this.$draggable.height() / 2 : 0);
+                    }
+
+                    if (!_.isUndefined(this.options.constrainer.coordinates.y2)) {
+
+                        this.translateY_max = this.options.constrainer.coordinates.y2 - (draggable_offset.top - this.initialXY.Y + this.$draggable.height()) + (this.options.constrainer.constrain_center ? -this.$draggable.height() / 2 : 0);
+                    }
+                }
+
+                $html.addClass('dragging');
+                this.$draggable.addClass('dragging');
+            }
+
+            var translateX = this.initialXY.X + (this.options.axis === 'y' ? 0 : data.deltaXY.X),
+                translateY = this.initialXY.Y + (this.options.axis === 'x' ? 0 : data.deltaXY.Y);
+
+            if (this.options.constrainer.$element || this.options.constrainer.coordinates) {
+
+                if (this.options.constrainer.axis !== 'y') {
+
+                    translateX = _.clamp(_.isUndefined(this.translateX_min) ? undefined : this.translateX_min - this.options.constrainer.tollerance.x, translateX, _.isUndefined(this.translateX_max) ? undefined : this.translateX_max + this.options.constrainer.tollerance.x);
+                }
+
+                if (this.options.constrainer.axis !== 'x') {
+
+                    translateY = _.clamp(_.isUndefined(this.translateY_min) ? undefined : this.translateY_min - this.options.constrainer.tollerance.y, translateY, _.isUndefined(this.translateY_max) ? undefined : this.translateY_max + this.options.constrainer.tollerance.y);
+                }
+            }
+
+            var modifiedXY = {
+                X: this.options.modifiers.x(translateX),
+                Y: this.options.modifiers.y(translateY)
+            };
+
+            this.$draggable.css('transform', 'translate3d(' + (_.isBoolean(modifiedXY.X) ? modifiedXY.X ? translateX : this.initialXY.X : modifiedXY.X) + 'px,' + (_.isBoolean(modifiedXY.Y) ? modifiedXY.Y ? translateY : this.initialXY.Y : modifiedXY.Y) + 'px,0)');
+
+            this._trigger('move', _.merge(data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, $draggable: this.$draggable }));
+        },
+
+        _end: function _end(event, data) {
+
+            if (!this.isDraggable) return;
+
+            if (this.motion === true) {
+
+                $html.removeClass('dragging');
+                this.$draggable.removeClass('dragging');
+
+                if (this.options.revertable) {
+
+                    this.$draggable.css('transform', 'translate3d(' + this.initialXY.X + 'px,' + this.initialXY.Y + 'px,0)'); //TODO: animate it
+                }
+            }
+
+            this._trigger('end', _.merge(data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion }));
+        }
+
+    });
+
+    /* READY */
+
+    $(function () {
+
+        $('.draggable').draggable();
+    });
+})(jQuery, _, window, document);
+
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/core.js
+ * ====================================================================================== */
+
 //TODO: deal with UTC time etc...
 //TODO: Add support for min and max date delimiter
 //TODO: Add an input inside, so that it works also without an external input
@@ -2807,218 +3019,6 @@
     $(function () {
 
         $('.datepicker').datepicker();
-    });
-})(jQuery, _, window, document);
-
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/core.js
- * ====================================================================================== */
-
-'use strict';
-
-;(function ($, _, window, document, undefined) {
-
-    'use strict';
-
-    /* DRAGGABLE */
-
-    $.widget('presto.draggable', {
-
-        /* OPTIONS */
-
-        options: {
-            selectors: {
-                handler: '.draggable-handler'
-            },
-            draggable: _['true'], //INFO: checks if we can drag it or not
-            only_handlers: false, //INFO: only an handler can drag it around
-            revertable: false, //INFO: on dragend take it back to the starting position
-            axis: false, //INFO: limit the movements to this axis
-            constrainer: { //INFO: constrain the drag inside the $element or coordinates
-                $element: false, //INFO: if we want to keep the draggable inside this $element
-                coordinates: false, //INFO: if we want to keep the draggable inside the coordinates //TODO: implement
-                // {
-                //     x1: 0,
-                //     x2: 0,
-                //     y1: 0,
-                //     y2: 0
-                // }
-                constrain_center: false, //INFO: set the constrain type, it will constrain the whole shape, or the center
-                axis: false, //INFO: if we want to constrain the draggable only in a specific axis
-                tollerance: { //INFO: the amount of pixel flexibility that a constrainer has
-                    x: 0,
-                    y: 0
-                }
-            },
-            modifiers: { //INFO: it can modify the setted X and Y transforms values
-                x: _['true'],
-                y: _['true']
-            },
-            callbacks: {
-                beforestart: _.noop,
-                start: _.noop,
-                move: _.noop,
-                end: _.noop
-            }
-        },
-
-        /* SPECIAL */
-
-        _variables: function _variables() {
-
-            this.draggable = this.element;
-            this.$draggable = this.$element;
-
-            if (this.options.only_handlers) {
-
-                this.$handlers = this.$draggable.find(this.options.selectors.handler); //FIXME: does it make sense to have handlers inside the $draggable?
-            }
-        },
-
-        _events: function _events() {
-
-            if (this.options.only_handlers) {
-
-                this._on(this.$handlers, $.Pointer.dragstart, this._start);
-                this._on(this.$handlers, $.Pointer.dragmove, this._move);
-                this._on(this.$handlers, $.Pointer.dragend, this._end);
-            } else {
-
-                this._on($.Pointer.dragstart, this._start);
-                this._on($.Pointer.dragmove, this._move);
-                this._on($.Pointer.dragend, this._end);
-            }
-        },
-
-        /* PRIVATE */
-
-        _start: function _start(event, data) {
-
-            this.isDraggable = this.options.draggable();
-
-            if (!this.isDraggable) return;
-
-            this._trigger('beforestart');
-
-            this.motion = false;
-
-            var transform_str = this.$draggable.css('transform'),
-                matrix = transform_str !== 'none' ? transform_str.match(/[0-9., -]+/)[0].split(', ') : [0, 0, 0, 0, 0, 0];
-
-            this.initialXY = {
-                X: parseInt(matrix[4], 10),
-                Y: parseInt(matrix[5], 10)
-            };
-
-            this._trigger('start', _.merge(data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable }));
-        },
-
-        _move: function _move(event, data) {
-            //TODO: make it more performant
-
-            if (!this.isDraggable) return;
-
-            if (this.motion === false) {
-
-                this.motion = true;
-
-                if (this.options.constrainer.$element) {
-
-                    var constrainer_offset = this.options.constrainer.$element.offset(),
-                        draggable_offset = this.$draggable.offset();
-
-                    this.translateX_min = constrainer_offset.left - (draggable_offset.left - this.initialXY.X) + (this.options.constrainer.constrain_center ? -this.$draggable.width() / 2 : 0);
-                    this.translateX_max = constrainer_offset.left + this.options.constrainer.$element.width() - (draggable_offset.left - this.initialXY.X + this.$draggable.width()) + (this.options.constrainer.constrain_center ? this.$draggable.width() / 2 : 0);
-
-                    this.translateY_min = constrainer_offset.top - (draggable_offset.top - this.initialXY.Y) + (this.options.constrainer.constrain_center ? -this.$draggable.height() / 2 : 0);
-                    this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height() - (draggable_offset.top - this.initialXY.Y + this.$draggable.height()) + (this.options.constrainer.constrain_center ? this.$draggable.height() / 2 : 0);
-                } else if (this.options.constrainer.coordinates) {
-
-                    var draggable_offset = this.$draggable.offset();
-
-                    if (!_.isUndefined(this.options.constrainer.coordinates.x1)) {
-
-                        this.translateX_min = this.options.constrainer.coordinates.x1 - (draggable_offset.left - this.initialXY.X) + (this.options.constrainer.constrain_center ? -this.$draggable.width() / 2 : 0);
-                    }
-
-                    if (!_.isUndefined(this.options.constrainer.coordinates.x2)) {
-
-                        this.translateX_max = this.options.constrainer.coordinates.x2 - (draggable_offset.left - this.initialXY.X + this.$draggable.width()) + (this.options.constrainer.constrain_center ? this.$draggable.width() / 2 : 0);
-                    }
-
-                    if (!_.isUndefined(this.options.constrainer.coordinates.y1)) {
-
-                        this.translateY_min = this.options.constrainer.coordinates.y1 - (draggable_offset.top - this.initialXY.Y) + (this.options.constrainer.constrain_center ? -this.$draggable.height() / 2 : 0);
-                    }
-
-                    if (!_.isUndefined(this.options.constrainer.coordinates.y2)) {
-
-                        this.translateY_max = this.options.constrainer.coordinates.y2 - (draggable_offset.top - this.initialXY.Y + this.$draggable.height()) + (this.options.constrainer.constrain_center ? -this.$draggable.height() / 2 : 0);
-                    }
-                }
-
-                $html.addClass('dragging');
-                this.$draggable.addClass('dragging');
-            }
-
-            var translateX = this.initialXY.X + (this.options.axis === 'y' ? 0 : data.deltaXY.X),
-                translateY = this.initialXY.Y + (this.options.axis === 'x' ? 0 : data.deltaXY.Y);
-
-            if (this.options.constrainer.$element || this.options.constrainer.coordinates) {
-
-                if (this.options.constrainer.axis !== 'y') {
-
-                    translateX = _.clamp(_.isUndefined(this.translateX_min) ? undefined : this.translateX_min - this.options.constrainer.tollerance.x, translateX, _.isUndefined(this.translateX_max) ? undefined : this.translateX_max + this.options.constrainer.tollerance.x);
-                }
-
-                if (this.options.constrainer.axis !== 'x') {
-
-                    translateY = _.clamp(_.isUndefined(this.translateY_min) ? undefined : this.translateY_min - this.options.constrainer.tollerance.y, translateY, _.isUndefined(this.translateY_max) ? undefined : this.translateY_max + this.options.constrainer.tollerance.y);
-                }
-            }
-
-            var modifiedXY = {
-                X: this.options.modifiers.x(translateX),
-                Y: this.options.modifiers.y(translateY)
-            };
-
-            this.$draggable.css('transform', 'translate3d(' + (_.isBoolean(modifiedXY.X) ? modifiedXY.X ? translateX : this.initialXY.X : modifiedXY.X) + 'px,' + (_.isBoolean(modifiedXY.Y) ? modifiedXY.Y ? translateY : this.initialXY.Y : modifiedXY.Y) + 'px,0)');
-
-            this._trigger('move', _.merge(data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, $draggable: this.$draggable }));
-        },
-
-        _end: function _end(event, data) {
-
-            if (!this.isDraggable) return;
-
-            if (this.motion === true) {
-
-                $html.removeClass('dragging');
-                this.$draggable.removeClass('dragging');
-
-                if (this.options.revertable) {
-
-                    this.$draggable.css('transform', 'translate3d(' + this.initialXY.X + 'px,' + this.initialXY.Y + 'px,0)'); //TODO: animate it
-                }
-            }
-
-            this._trigger('end', _.merge(data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion }));
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('.draggable').draggable();
     });
 })(jQuery, _, window, document);
 

@@ -10208,6 +10208,76 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * ======================================================================================
  * @requires ../core/_core.scss
  * ====================================================================================== */
+/* TAGBOX */
+/* INPUT */
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires _settings.scss
+ * ====================================================================================== */
+/* TAGBOX */
+.tagbox {
+  border-color: transparent ;
+  color: inerhit ;
+  background: transparent ;
+  margin-bottom: 10px;
+}
+
+.tagbox p > a {
+  color: #ff7043 ;
+}
+
+.tagbox p > a:before {
+  border-color: #ff784d ;
+}
+
+.tagbox p > a:hover {
+  color: #ff784d ;
+}
+
+.tagbox > input {
+  display: none;
+}
+
+.tagbox > .multiple-wrp {
+  margin-bottom: 0;
+}
+
+.tagbox .text-field {
+  border-color: transparent ;
+  color: inerhit ;
+  background: transparent ;
+  font-size: 1rem ;
+  min-width: 6.5em;
+}
+
+.tagbox .text-field p > a {
+  color: #ff7043 ;
+}
+
+.tagbox .text-field p > a:before {
+  border-color: #ff784d ;
+}
+
+.tagbox .text-field p > a:hover {
+  color: #ff784d ;
+}
+
+/* ======================================================================================
+ * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
+ * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
+ * @PROJECT-WEBSITE/@FILE-NAME
+ * ======================================================================================
+ * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
+ * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
+ * ======================================================================================
+ * @requires ../core/_core.scss
+ * ====================================================================================== */
 /* TABS */
 /* ======================================================================================
  * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
@@ -10342,76 +10412,6 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
   border-left-width: 0;
   border-top-left-radius: 0;
   border-bottom-left-radius: 0;
-}
-
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires ../core/_core.scss
- * ====================================================================================== */
-/* TAGBOX */
-/* INPUT */
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
- * @requires _settings.scss
- * ====================================================================================== */
-/* TAGBOX */
-.tagbox {
-  border-color: transparent ;
-  color: inerhit ;
-  background: transparent ;
-  margin-bottom: 10px;
-}
-
-.tagbox p > a {
-  color: #ff7043 ;
-}
-
-.tagbox p > a:before {
-  border-color: #ff784d ;
-}
-
-.tagbox p > a:hover {
-  color: #ff784d ;
-}
-
-.tagbox > input {
-  display: none;
-}
-
-.tagbox > .multiple-wrp {
-  margin-bottom: 0;
-}
-
-.tagbox .text-field {
-  border-color: transparent ;
-  color: inerhit ;
-  background: transparent ;
-  font-size: 1rem ;
-  min-width: 6.5em;
-}
-
-.tagbox .text-field p > a {
-  color: #ff7043 ;
-}
-
-.tagbox .text-field p > a:before {
-  border-color: #ff784d ;
-}
-
-.tagbox .text-field p > a:hover {
-  color: #ff784d ;
 }
 
 /* ======================================================================================

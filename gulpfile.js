@@ -14,6 +14,8 @@ var gulp = require ( 'gulp' ),
     concat = require ( 'gulp-concat' ),
     flatten = require ( 'gulp-flatten' ),
     jade = require ( 'gulp-jade' ),
+    path = require ( 'path' ),
+    newer = require ( 'gulp-newer' ),
     babel = require ( 'gulp-babel' ),
     // changed = require ( 'gulp-changed' ),
     ignore = require ( 'gulp-ignore' ),
@@ -34,14 +36,20 @@ var gulp = require ( 'gulp' ),
     uglify = require ( 'gulp-uglify' ),
     browserSync = require ( 'browser-sync' ).create (),
     browserSync_inited = false,
-    resolveDependencies = require ( 'gulp-resolve-dependencies' );
-    // filelog = require ( 'gulp-filelog' );
+    resolveDependencies = require ( 'gulp-resolve-dependencies' ),
+    filelog = require ( 'gulp-filelog' );
 
 /* IMAGES */
 
 gulp.task ( 'images', function () {
 
     return gulp.src ( 'src/components/**/*.{bmp,gif,jpg,jpeg,png,svg}' )
+               .pipe ( newer ({
+                 dest: 'dist/images',
+                 map: function ( relativePath ) {
+                    return path.basename ( relativePath );
+                 }
+               }))
                .pipe ( bytediff.start () )
                .pipe ( imagemin ({
                  interlaced: true, //INFO: GIF
@@ -104,7 +112,7 @@ gulp.task ( 'js', function () {
                .pipe ( sourcemaps.write () )
                .pipe ( rename ( 'svelto.min.js.map' ) )
                .pipe ( gulp.dest ( 'dist/js' ) )
-               .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
+               .pipe ( browserSync_inited ? browserSync.stream ({ match: '**/*.{js,js.map}' }) : util.noop () );
 
 });
 
@@ -138,7 +146,7 @@ gulp.task ( 'css', function () {
              .pipe ( sourcemaps.write () )
              .pipe ( rename ( 'svelto.min.css.map' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
+             .pipe ( browserSync_inited ? browserSync.stream ({ match: '**/*.{css,css.map}' }) : util.noop () );
 
 });
 

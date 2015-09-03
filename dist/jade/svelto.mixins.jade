@@ -218,26 +218,6 @@ mixin button-corner(direction, icon)
             if icon
                 block
 
-//- checkbox.jade
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-mixin checkbox(name, title, value, checked)
-    if checked
-        +button&attributes(attributes).checkbox.checked
-            input(type="checkbox", name=name, value=value, checked)
-            +button-center
-                = title
-                +icon("check_box").on.right
-                +icon("check_box_outline_blank").off.right
-    else
-        +button&attributes(attributes).checkbox
-            input(type="checkbox", name=name, value=value)
-            +button-center
-                = title
-                +icon("check_box").on.right
-                +icon("check_box_outline_blank").off.right
-
 //- chat.jade
 
 //-
@@ -293,6 +273,26 @@ mixin chat-msg(options)
                                 +button-icon("action-delete")(title="Delete").small.outlined
                 +container-content= options.message.content
 
+//- checkbox.jade
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+mixin checkbox(name, title, value, checked)
+    if checked
+        +button&attributes(attributes).checkbox.checked
+            input(type="checkbox", name=name, value=value, checked)
+            +button-center
+                = title
+                +icon("check_box").on.right
+                +icon("check_box_outline_blank").off.right
+    else
+        +button&attributes(attributes).checkbox
+            input(type="checkbox", name=name, value=value)
+            +button-center
+                = title
+                +icon("check_box").on.right
+                +icon("check_box_outline_blank").off.right
+
 //- colorpicker.jade
 
 mixin colorpicker
@@ -334,6 +334,37 @@ mixin container-simple(title, header_classes)
         if title
             +container-header(title)(class=header_classes)
         +container-content
+            block
+
+//- divider.jade
+
+mixin divider
+    +divider-block&attributes(attributes)
+        block
+
+mixin divider-block
+    .divider-wrp.block
+        .divider&attributes(attributes)
+            block
+
+mixin divider-linear
+    if block
+        .divider-wrp.linear
+            hr.left
+            .divider&attributes(attributes)
+                block
+            hr.right
+    else
+        hr&attributes(attributes)
+
+mixin divider-text
+    .divider-wrp.text
+        .divider&attributes(attributes)
+            block
+
+mixin divider-spacer
+    .divider-wrp.spacer
+        .divider&attributes(attributes)
             block
 
 //- datepicker.jade
@@ -401,37 +432,6 @@ mixin datepicker
                 .datepicker-day-next 5
                 .datepicker-day-next 6
 
-//- divider.jade
-
-mixin divider
-    +divider-block&attributes(attributes)
-        block
-
-mixin divider-block
-    .divider-wrp.block
-        .divider&attributes(attributes)
-            block
-
-mixin divider-linear
-    if block
-        .divider-wrp.linear
-            hr.left
-            .divider&attributes(attributes)
-                block
-            hr.right
-    else
-        hr&attributes(attributes)
-
-mixin divider-text
-    .divider-wrp.text
-        .divider&attributes(attributes)
-            block
-
-mixin divider-spacer
-    .divider-wrp.spacer
-        .divider&attributes(attributes)
-            block
-
 //- dropdown.jade
 
 //- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
@@ -487,18 +487,18 @@ mixin video(sources, type)
 mixin object(data)
     object(data=data)&attributes(attributes)
 
+//- flags.jade
+
+mixin flag(flag)
+    .flag(class="flag-" + flag)&attributes(attributes)
+        block
+
 //- expander.jade
 
 mixin expander(title, header_classes)
     +container&attributes(attributes).expander
         if title
             +container-header(title)(class=header_classes).expander-toggler
-        block
-
-//- flags.jade
-
-mixin flag(flag)
-    .flag(class="flag-" + flag)&attributes(attributes)
         block
 
 //- flippable.jade
@@ -632,17 +632,6 @@ mixin infobar-bottom
     .infobar-bottom&attributes(attributes)
         block
 
-//- input.jade
-
-mixin input(options)
-    if !options
-        - options = {}
-    .input-wrp(class=(!options.label ? 'no-floating' : ''))&attributes(attributes)
-        input.text-field(type=(options.type || "text"), value=(options.value || ""), name=(options.name || ""), required)
-        if options.label
-            label= options.label
-        .text-field-bar
-
 //- image.jade
 
 mixin image(url)
@@ -658,6 +647,17 @@ mixin image-caption
 mixin image-sample(url)
     +image("/assets/images/presto/sample.png")&attributes(attributes)
         block
+
+//- input.jade
+
+mixin input(options)
+    if !options
+        - options = {}
+    .input-wrp(class=(!options.label ? 'no-floating' : ''))&attributes(attributes)
+        input.text-field(type=(options.type || "text"), value=(options.value || ""), name=(options.name || ""), required)
+        if options.label
+            label= options.label
+        .text-field-bar
 
 //- label.jade
 
@@ -823,52 +823,6 @@ mixin notification(options)
 mixin noty(options)
     +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
 
-//- others.jade
-
-//- TODO: add optional third parameter that toggles the randomization process
-mixin lorem-ipsum(amount, type)
-    - var returnLI = '';
-    - var LIText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet tincidunt turpis, in pharetra mi convallis ut. Vivamus eget sodales nibh, eu placerat erat. Vivamus massa urna, volutpat non tempus eget, placerat quis elit. Nullam pretium id arcu sed eleifend. Phasellus sollicitudin quis ante nec ornare. Maecenas nibh eros, vehicula vel eros eget, viverra semper nisi. Nulla facilisi. Praesent pretium porttitor arcu, sit amet consequat neque luctus non. Cras sodales, justo quis tempus dignissim, diam est commodo orci, eget accumsan sem ante vitae sem. Curabitur quam ipsum, porta id sapien in, consectetur auctor nibh. Vivamus egestas ante vel cursus aliquet. In non ante nec velit tempus lacinia nec sollicitudin ex. Phasellus semper lorem a diam scelerisque, sed accumsan erat molestie. Mauris vulputate lacinia erat. Nunc urna risus, facilisis at posuere in, pulvinar quis odio. Maecenas et sollicitudin arcu.\n Proin maximus dui ac felis blandit luctus. Fusce consectetur, nisl vitae blandit viverra, mi nisl posuere lorem, a interdum nisl leo quis massa. Donec et pretium mi. Quisque bibendum urna quis eleifend blandit. Donec pulvinar est eu diam tempus bibendum. Aenean iaculis mi vel magna viverra, ut facilisis velit luctus. Aenean blandit, erat a cursus dignissim, lectus lacus vehicula orci, ut vestibulum risus purus quis libero. Fusce vestibulum risus a erat varius facilisis. Donec tincidunt interdum mattis. Nam mi sapien, dictum a egestas in, efficitur sed sem. Cras dignissim neque dignissim arcu suscipit pellentesque. Praesent euismod vel dui at imperdiet. Vestibulum rhoncus dolor sed bibendum hendrerit. Sed malesuada dolor sed ex porttitor euismod. In id laoreet dui.\n Donec maximus ante vel erat sagittis varius. Quisque auctor varius rhoncus. Nunc efficitur, magna eu venenatis placerat, odio dui sodales nisi, sit amet ultricies sapien eros vel erat. Maecenas tincidunt dolor sit amet nibh gravida, eu iaculis enim hendrerit. Fusce porttitor arcu magna, quis convallis enim suscipit eget. Mauris id lacus pharetra, auctor leo at, pulvinar leo. Sed ex augue, tristique posuere augue sed, aliquet dictum erat.\n Sed lobortis purus non eros bibendum, nec ornare erat euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Quisque ut nulla cursus, vehicula dui vitae, consectetur urna. Sed tincidunt est purus, id auctor risus fringilla in. Vivamus rutrum dictum ligula, scelerisque elementum orci fringilla eget. Suspendisse potenti.\n Phasellus molestie quam a urna ultrices suscipit. Fusce eu elit rutrum dui elementum malesuada. Curabitur porta tincidunt tristique. Nam tellus enim, sodales id est auctor, lobortis elementum sem. Curabitur pharetra convallis bibendum. Curabitur consectetur rhoncus dignissim. Sed vehicula est et lacinia dapibus. Nunc efficitur diam vel mattis posuere.";
-
-    if type === 'characters'
-        - returnLI = LIText.substr ( 0, amount );
-    else if type === 'words'
-        - var LIWords;
-        - LIText = LIText.toLowerCase ();
-        - LIText = LIText.split ( '.' ).join ( '' );
-        - LIText = LIText.split ( ',' ).join ( '' );
-        - lipsumArray = LIText.split ( ' ' );
-        - for ( var i = 0; i < ( amount || 1 ); i++ ) {
-            - returnLI += lipsumArray[i] + ' ';
-        - }
-        - returnLI = returnLI.charAt ( 0 ).toUpperCase () + returnLI.slice ( 1 );
-        - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
-    else
-        - var LISentences = LIText.split ( '\n ' );
-        - for ( var i = 0; i < ( amount || 1 ); i++ ) {
-            - returnLI += LISentences[i] + '\n';
-        - }
-        - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
-
-    =returnLI
-
-mixin paragraph-sample
-    +placeholder('95%', 10, true)&attributes(attributes)
-    +placeholder('92%', 10, true)&attributes(attributes)
-    +placeholder('100%', 10, true)&attributes(attributes)
-    +placeholder('87%', 10, true)&attributes(attributes)
-    +placeholder('97%', 10, true)&attributes(attributes)
-    +placeholder('93%', 10, true)&attributes(attributes)
-    +placeholder('97%', 10, true)&attributes(attributes)
-
-mixin spacer
-    .spacer&attributes(attributes)
-        block
-
-mixin centerer
-    .centerer&attributes(attributes)
-        block
-
 //- pagination.jade
 
 //-
@@ -954,6 +908,52 @@ mixin pagination(options)
 
             block
 
+//- others.jade
+
+//- TODO: add optional third parameter that toggles the randomization process
+mixin lorem-ipsum(amount, type)
+    - var returnLI = '';
+    - var LIText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet tincidunt turpis, in pharetra mi convallis ut. Vivamus eget sodales nibh, eu placerat erat. Vivamus massa urna, volutpat non tempus eget, placerat quis elit. Nullam pretium id arcu sed eleifend. Phasellus sollicitudin quis ante nec ornare. Maecenas nibh eros, vehicula vel eros eget, viverra semper nisi. Nulla facilisi. Praesent pretium porttitor arcu, sit amet consequat neque luctus non. Cras sodales, justo quis tempus dignissim, diam est commodo orci, eget accumsan sem ante vitae sem. Curabitur quam ipsum, porta id sapien in, consectetur auctor nibh. Vivamus egestas ante vel cursus aliquet. In non ante nec velit tempus lacinia nec sollicitudin ex. Phasellus semper lorem a diam scelerisque, sed accumsan erat molestie. Mauris vulputate lacinia erat. Nunc urna risus, facilisis at posuere in, pulvinar quis odio. Maecenas et sollicitudin arcu.\n Proin maximus dui ac felis blandit luctus. Fusce consectetur, nisl vitae blandit viverra, mi nisl posuere lorem, a interdum nisl leo quis massa. Donec et pretium mi. Quisque bibendum urna quis eleifend blandit. Donec pulvinar est eu diam tempus bibendum. Aenean iaculis mi vel magna viverra, ut facilisis velit luctus. Aenean blandit, erat a cursus dignissim, lectus lacus vehicula orci, ut vestibulum risus purus quis libero. Fusce vestibulum risus a erat varius facilisis. Donec tincidunt interdum mattis. Nam mi sapien, dictum a egestas in, efficitur sed sem. Cras dignissim neque dignissim arcu suscipit pellentesque. Praesent euismod vel dui at imperdiet. Vestibulum rhoncus dolor sed bibendum hendrerit. Sed malesuada dolor sed ex porttitor euismod. In id laoreet dui.\n Donec maximus ante vel erat sagittis varius. Quisque auctor varius rhoncus. Nunc efficitur, magna eu venenatis placerat, odio dui sodales nisi, sit amet ultricies sapien eros vel erat. Maecenas tincidunt dolor sit amet nibh gravida, eu iaculis enim hendrerit. Fusce porttitor arcu magna, quis convallis enim suscipit eget. Mauris id lacus pharetra, auctor leo at, pulvinar leo. Sed ex augue, tristique posuere augue sed, aliquet dictum erat.\n Sed lobortis purus non eros bibendum, nec ornare erat euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Quisque ut nulla cursus, vehicula dui vitae, consectetur urna. Sed tincidunt est purus, id auctor risus fringilla in. Vivamus rutrum dictum ligula, scelerisque elementum orci fringilla eget. Suspendisse potenti.\n Phasellus molestie quam a urna ultrices suscipit. Fusce eu elit rutrum dui elementum malesuada. Curabitur porta tincidunt tristique. Nam tellus enim, sodales id est auctor, lobortis elementum sem. Curabitur pharetra convallis bibendum. Curabitur consectetur rhoncus dignissim. Sed vehicula est et lacinia dapibus. Nunc efficitur diam vel mattis posuere.";
+
+    if type === 'characters'
+        - returnLI = LIText.substr ( 0, amount );
+    else if type === 'words'
+        - var LIWords;
+        - LIText = LIText.toLowerCase ();
+        - LIText = LIText.split ( '.' ).join ( '' );
+        - LIText = LIText.split ( ',' ).join ( '' );
+        - lipsumArray = LIText.split ( ' ' );
+        - for ( var i = 0; i < ( amount || 1 ); i++ ) {
+            - returnLI += lipsumArray[i] + ' ';
+        - }
+        - returnLI = returnLI.charAt ( 0 ).toUpperCase () + returnLI.slice ( 1 );
+        - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
+    else
+        - var LISentences = LIText.split ( '\n ' );
+        - for ( var i = 0; i < ( amount || 1 ); i++ ) {
+            - returnLI += LISentences[i] + '\n';
+        - }
+        - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
+
+    =returnLI
+
+mixin paragraph-sample
+    +placeholder('95%', 10, true)&attributes(attributes)
+    +placeholder('92%', 10, true)&attributes(attributes)
+    +placeholder('100%', 10, true)&attributes(attributes)
+    +placeholder('87%', 10, true)&attributes(attributes)
+    +placeholder('97%', 10, true)&attributes(attributes)
+    +placeholder('93%', 10, true)&attributes(attributes)
+    +placeholder('97%', 10, true)&attributes(attributes)
+
+mixin spacer
+    .spacer&attributes(attributes)
+        block
+
+mixin centerer
+    .centerer&attributes(attributes)
+        block
+
 //- parallax.jade
 
 mixin parallax
@@ -1004,12 +1004,6 @@ mixin placeholder(width, height, empty)
             else
                 = width + " - " + height
 
-//- syntax.jade
-
-mixin syntax(language)
-    code(class="language-"+language)&attributes(attributes)
-        block
-
 //- progressBar.jade
 
 mixin progressBar(options, multiple)
@@ -1031,6 +1025,12 @@ mixin progressBar(options, multiple)
                     if options.labeled
                         .progressBar-label= +(percentage.value).toFixed(options.decimals || 0)
         .progressBar-stripes(style=("width: " + total + "%"))
+
+//- syntax.jade
+
+mixin syntax(language)
+    code(class="language-"+language)&attributes(attributes)
+        block
 
 //- radio.jade
 
