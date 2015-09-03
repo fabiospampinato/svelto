@@ -1,2 +1,6 @@
 # Svelto
-A modular web framework for the world of today
+A rich, modular, web framework for modern browsers. With jade mixins.
+
+---
+
+*Currently under heavy development*

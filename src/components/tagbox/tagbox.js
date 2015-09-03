@@ -1,14 +1,14 @@
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add the tag pointer
 //TODO: add support for adding and removing tags by passing: single tag string, single tags string separated by separator, array of tags, multiple parameters

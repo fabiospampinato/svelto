@@ -27,4 +27,6 @@ Thumbs.db
 # Folders to ignore
 bower_components
 node_modules
+
+# Project specific folders to ignore
 .temp

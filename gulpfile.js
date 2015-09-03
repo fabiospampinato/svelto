@@ -1,21 +1,19 @@
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+* Svelto - gulpfile v0.1.0
+* =========================================================================
+* Copyright (c) 2015 Fabio Spampinato
+* Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+* ========================================================================= */
 
 /* REQUIRES */
 
-var _ = require ( 'lodash' ),
+var _           = require ( 'lodash' ),
     browserSync = require ( 'browser-sync' ).create (),
-    browserSync_inited = false,
-    merge = require ( 'merge-stream' ),
-    path = require ( 'path' ),
-    pngquant = require ( 'imagemin-pngquant' );
+    fs          = require ( 'fs' ),
+    merge       = require ( 'merge-stream' ),
+    path        = require ( 'path' ),
+    pngquant    = require ( 'imagemin-pngquant' );
 
 /* GULP */
 
@@ -24,27 +22,27 @@ var gulp = require ( 'gulp' );
 /* GULP PLUGINS */
 
 var autoprefixer = require ( 'gulp-autoprefixer' ),
-    babel = require ( 'gulp-babel' ),
-    bytediff = require ( 'gulp-bytediff' ),
-    clean = require ( 'gulp-clean' ),
-    concat = require ( 'gulp-concat' ),
-    filelog = require ( 'gulp-filelog' ),
-    flatten = require ( 'gulp-flatten' ),
-    foreach = require ( 'gulp-foreach' ),
-    ignore = require ( 'gulp-ignore' ),
-    imagemin = require ( 'gulp-imagemin' ),
-    jade = require ( 'gulp-jade' ),
-    minify_css = require ( 'gulp-minify-css' ),
-    minify_html = require ( 'gulp-minify-html' ),
-    newer = require ( 'gulp-newer' ),
-    rename = require ( 'gulp-rename' ),
-    resolveDependencies = require ( 'gulp-resolve-dependencies' ),
-    sass = require ( 'gulp-sass' ),
-    sequence = require ( 'gulp-sequence' ),
-    sort = require ( 'gulp-sort' ),
-    sourcemaps = require ( 'gulp-sourcemaps' ),
-    uglify = require ( 'gulp-uglify' ),
-    util = require ( 'gulp-util' );
+    babel        = require ( 'gulp-babel' ),
+    bytediff     = require ( 'gulp-bytediff' ),
+    clean        = require ( 'gulp-clean' ),
+    concat       = require ( 'gulp-concat' ),
+    dependencies = require ( 'gulp-resolve-dependencies' ),
+    filelog      = require ( 'gulp-filelog' ),
+    flatten      = require ( 'gulp-flatten' ),
+    foreach      = require ( 'gulp-foreach' ),
+    gutil        = require ( 'gulp-util' ),
+    ignore       = require ( 'gulp-ignore' ),
+    imagemin     = require ( 'gulp-imagemin' ),
+    jade         = require ( 'gulp-jade' ),
+    minify_css   = require ( 'gulp-minify-css' ),
+    minify_html  = require ( 'gulp-minify-html' ),
+    newer        = require ( 'gulp-newer' ),
+    rename       = require ( 'gulp-rename' ),
+    sass         = require ( 'gulp-sass' ),
+    sequence     = require ( 'gulp-sequence' ),
+    sort         = require ( 'gulp-sort' ),
+    sourcemaps   = require ( 'gulp-sourcemaps' ),
+    uglify       = require ( 'gulp-uglify' );
 
 /* IMAGES */
 
@@ -52,24 +50,24 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
 
 gulp.task ( 'images', function () {
 
-    return gulp.src ( 'src/components/**/*.{bmp,gif,jpg,jpeg,png,svg}' )
-               .pipe ( newer ({
-                 dest: 'dist/images',
-                 map: path.basename
-               }))
-               .pipe ( bytediff.start () )
-               .pipe ( imagemin ({
-                 interlaced: true, //INFO: Affects GIF images
-                 progressive: true, //INFO: Affects JPG images
-                 optimizationLevel: 7, //INFO: Affects PNG images
-                 multipass: true, //INFO: Affects SVG images
-                 svgoPlugins: [{ removeViewBox: false}],
-                 use: [pngquant ()]
-               }))
-               .pipe ( bytediff.stop () )
-               .pipe ( flatten () )
-               .pipe ( gulp.dest ( 'dist/images' ) )
-               .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
+  return gulp.src ( 'src/components/**/*.{bmp,gif,jpg,jpeg,png,svg}' )
+             .pipe ( newer ({
+               dest: 'dist/images',
+               map: path.basename
+             }))
+             .pipe ( bytediff.start () )
+             .pipe ( imagemin ({
+               interlaced: true, //INFO: Affects GIF images
+               progressive: true, //INFO: Affects JPG images
+               optimizationLevel: 7, //INFO: Affects PNG images
+               multipass: true, //INFO: Affects SVG images
+               svgoPlugins: [{ removeViewBox: false }],
+               use: [pngquant ()]
+             }))
+             .pipe ( bytediff.stop () )
+             .pipe ( flatten () )
+             .pipe ( gulp.dest ( 'dist/images' ) )
+             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
 
 });
 
@@ -94,11 +92,11 @@ gulp.task ( 'examples', function () {
                locals: {},
                pretty: true
              }))
-            //  .pipe ( minify_html ({
-            //    considtionals: true
-            //  }))
+             //  .pipe ( minify_html ({
+             //    considtionals: true
+             //  }))
              .pipe ( gulp.dest ( 'examples' ) )
-             .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
+             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
 
 });
 
@@ -108,10 +106,10 @@ gulp.task ( 'jade', ['examples-clean'], function () {
 
   //TODO: Only perform `examples-clean` if we update the mixins file
 
-    return gulp.src ( 'src/components/**/*.jade' )
-               .pipe ( newer ( 'dist/jade/svelto.mixins.jade' ) )
-               .pipe ( concat ( 'svelto.mixins.jade' ) )
-               .pipe ( gulp.dest ( 'dist/jade' ) );
+  return gulp.src ( 'src/components/**/*.jade' )
+             .pipe ( newer ( 'dist/jade/svelto.mixins.jade' ) )
+             .pipe ( concat ( 'svelto.mixins.jade' ) )
+             .pipe ( gulp.dest ( 'dist/jade' ) );
 
 });
 
@@ -130,7 +128,7 @@ gulp.task ( 'js-temp', function () {
                return stream;
              }))
              .pipe ( sort () )
-             .pipe ( resolveDependencies ({
+             .pipe ( dependencies ({
                pattern: /\* @requires [\s-]*(.*\.js)/g
              }))
              .pipe ( foreach ( function ( stream, file ) {
@@ -148,7 +146,7 @@ gulp.task ( 'js-temp', function () {
              }) )
              .pipe ( flatten () )
              .pipe ( gulp.dest ( '.temp/js' ) )
-             .pipe ( babel () )
+             .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
              .pipe ( uglify () )
              .pipe ( gulp.dest ( '.temp/js/min' ) );
 
@@ -156,19 +154,19 @@ gulp.task ( 'js-temp', function () {
 
 gulp.task ( 'js', ['js-temp'], function () {
 
-    var unminified = gulp.src ( '.temp/js/*.js' )
-                         .pipe ( sort () )
-                         .pipe ( concat ( 'svelto.js' ) )
-                         .pipe ( gulp.dest ( 'dist/js' ) )
-                         .pipe ( browserSync_inited ? browserSync.stream ({ match: '**/*.{js,js.map}' }) : util.noop () );
+  var unminified = gulp.src ( '.temp/js/*.js' )
+                       .pipe ( sort () )
+                       .pipe ( concat ( 'svelto.js' ) )
+                       .pipe ( gulp.dest ( 'dist/js' ) )
+                       .pipe ( browserSync.active ? browserSync.stream ({ match: '**/*.{js,js.map}' }) : gutil.noop () );
 
-    var minified = gulp.src ( '.temp/js/min/*.js' )
+  var minified = gulp.src ( '.temp/js/min/*.js' )
                      .pipe ( sort () )
                      .pipe ( concat ( 'svelto.min.js' ) )
                      .pipe ( gulp.dest ( 'dist/js' ) )
-                     .pipe ( browserSync_inited ? browserSync.stream ({ match: '**/*.min.{js,js.map}' }) : util.noop () );
+                     .pipe ( browserSync.active ? browserSync.stream ({ match: '**/*.min.{js,js.map}' }) : gutil.noop () );
 
-    return merge ( unminified, minified );
+  return merge ( unminified, minified );
 
 });
 
@@ -182,8 +180,8 @@ gulp.task ( 'css', function () {
   return gulp.src ( 'src/components/**/*.scss' )
              .pipe ( newer ( 'dist/css/svelto.css' ) )
              .pipe ( sort () )
-             .pipe ( resolveDependencies ({
-                 pattern: /\* @requires [\s-]*(.*\.scss)/g
+             .pipe ( dependencies ({
+               pattern: /\* @requires [\s-]*(.*\.scss)/g
              }))
              .pipe ( concat ( 'all' ) )
              .pipe ( sass ({
@@ -197,14 +195,14 @@ gulp.task ( 'css', function () {
              }))
              .pipe ( rename ( 'svelto.css' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( browserSync_inited ? browserSync.stream () : util.noop () )
+             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () )
              .pipe ( minify_css ({
                keepSpecialComments: 0,
                roundingPrecision: -1
              }))
              .pipe ( rename ( 'svelto.min.css' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( browserSync_inited ? browserSync.stream () : util.noop () );
+             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
 
 });
 
@@ -239,15 +237,13 @@ gulp.task ( 'watch', watcher );
 
 gulp.task ( 'serve', function () {
 
-    browserSync.init ({
-      server: 'examples',
-      serveStatic: ['dist/images', 'dist/css', 'dist/js'],
-      notify: false
-    });
+  browserSync.init ({
+    server: 'examples',
+    serveStatic: ['dist/images', 'dist/css', 'dist/js'],
+    notify: false
+  });
 
-    browserSync_inited = true;
-
-    watcher ();
+  watcher ();
 
 });
 

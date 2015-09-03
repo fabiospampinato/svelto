@@ -1,12 +1,12 @@
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 ;(function ( _, window, document, undefined ) {
 
@@ -223,14 +223,14 @@
 }( _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 //INFO: x: nothing, it's here just for compatibility,
 //      t: current time,
@@ -318,16 +318,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../easing/easing.js
- * ====================================================================================== */
+ * ========================================================================= */
  
 ;(function ( $, _, window, document, undefined ) {
 
@@ -377,14 +377,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 /* TMPL - https://github.com/blueimp/JavaScript-Templates */
 
@@ -509,14 +509,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 //TODO: detect browsers, versions, OSes, but... is it useful?
 //TODO: detect: windows phone, smartphone, windows, linux, safari, opera, firefox, lowend
@@ -546,16 +546,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires jQuery-extra.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
 
@@ -743,16 +743,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires tmpl.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: Add support for _trigger -> preventDefault
 
@@ -1136,17 +1136,17 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires base_widget.js
  * @requires tmpl.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1417,14 +1417,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires lodash-extra.js
  * @requires jQuery-extra.js
  * @requires tmpl.js
@@ -1432,7 +1432,7 @@
  * @requires pointer.js
  * @requires base_widget.js
  * @requires widget.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1469,16 +1469,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1600,16 +1600,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //INFO: Only works with `box-sizing: border-box`
 
@@ -1727,16 +1727,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1753,16 +1753,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/lodash-extra.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1779,16 +1779,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -1913,14 +1913,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 ;(function ( _, window, document, undefined ) {
 
@@ -2142,16 +2142,16 @@
 }( _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../color_helper/colorHelper.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( _, window, document, undefined ) {
 
@@ -2218,18 +2218,18 @@
 }( _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
  * @requires ../hex_color/hexColor.js
  * @requires ../color_helper/colorHelper.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add support for alpha channel
 //TODO: add a $bgs variable where we update the background
@@ -2575,14 +2575,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 /* URL: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie */
 
@@ -2678,16 +2678,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: deal with UTC time etc...
 //TODO: Add support for min and max date delimiter
@@ -3065,16 +3065,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3297,14 +3297,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 //FIXME: if the anchor is half overflowing the viewport at the left, but still if there's space at the bottom the positionable gets positionated at the bottom, instead of the right: maybe create a new normalized area map, that gives more importance to this thing
 //TODO: add support for a $pointer ( that can also be a function )
@@ -3485,17 +3485,17 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
  * @requires ../positionate/positionate.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 //TODO: add dropdown-closer
@@ -3731,16 +3731,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3843,16 +3843,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3919,14 +3919,14 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 //TODO: maybe sync at the init time also
 
@@ -4018,16 +4018,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/jQuery-extra.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -4097,16 +4097,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add support for swipe to dismiss in mobile and touchscreen enabled devices
 
@@ -4413,17 +4413,17 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../loading/loading.js
  * @requires ../noty/noty.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: check if it works, also for upload
 
@@ -4549,16 +4549,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: maybe add the ability to open it
 //TODO: maybe just hiding it on close is enough, do we gain a performance benefit this way?
@@ -4628,16 +4628,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -4726,16 +4726,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: Add flick capabilities (show and hide on flick in the right direction and starting within the right zone)
 
@@ -4831,16 +4831,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../noty/noty.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
@@ -4889,16 +4889,16 @@
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../cookie/cookie.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //INFO: the pipe character (|) is forbidden inside a name, cookie's ttl is 1 year
 
@@ -5061,16 +5061,16 @@ Prism.languages.clike={comment:[{pattern:/(^|[^\\])\/\*[\w\W]*?\*\//g,lookbehind
 Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|function|get|if|implements|import|in|instanceof|interface|let|new|null|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/g,number:/\b-?(0x[\dA-Fa-f]+|\d*\.?\d+([Ee]-?\d+)?|NaN|-?Infinity)\b/g}),Prism.languages.insertBefore("javascript","keyword",{regex:{pattern:/(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\r\n])+\/[gim]{0,3}(?=\s*($|[\r\n,.;})]))/g,lookbehind:!0}}),Prism.languages.markup&&Prism.languages.insertBefore("markup","tag",{script:{pattern:/<script[\w\W]*?>[\w\W]*?<\/script>/gi,inside:{tag:{pattern:/<script[\w\W]*?>|<\/script>/gi,inside:Prism.languages.markup.tag.inside},rest:Prism.languages.javascript},alias:"language-javascript"}});;
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the children)
 //TODO: make templates DRY
@@ -5277,16 +5277,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -5408,16 +5408,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -5488,16 +5488,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
@@ -5735,16 +5735,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add dropdown for actions AND/OR right click for action
 //FIXME: make it workable with sorting (update after sorting since we may)
@@ -6059,18 +6059,18 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
  * @requires ../draggable/draggable.js
- * ====================================================================================== */
- 
+ * ========================================================================= */
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -6390,16 +6390,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: cache the column datas, if possible
@@ -6605,16 +6605,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -6782,17 +6782,17 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
  * @requires ../draggable/draggable.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, window, document, undefined ) {
 
@@ -7015,16 +7015,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -7230,16 +7230,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: Maybe switch from the indicator to .button.highlight
 //FIXME: positionate_indicator is too hacky
@@ -7405,16 +7405,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 //TODO: add the tag pointer
 //TODO: add support for adding and removing tags by passing: single tag string, single tags string separated by separator, array of tags, multiple parameters
@@ -7840,16 +7840,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../core/core.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -7933,14 +7933,14 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ====================================================================================== */
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
 
 /* TIMER - http://jchavannes.com/jquery-timer */
 
@@ -8108,16 +8108,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 }( jQuery, _, window, document ));
 
 
-/* ======================================================================================
- * @PROJECT-NAME v@PROJECT-VERSION - @FILE-NAME-UPPERCASED v0.1.0
- * @PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@FILE-PATH
- * @PROJECT-WEBSITE/@FILE-NAME
- * ======================================================================================
- * Copyright @PROJECT-START-YEAR-@CURRENT-YEAR @PROJECT-COPYRIGHT-HOLDER
- * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
- * ======================================================================================
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
  * @requires ../bteach/btEach.js
- * ====================================================================================== */
+ * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
