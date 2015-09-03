@@ -9,6 +9,7 @@
  * ====================================================================================== */
 
 var gulp = require ( 'gulp' ),
+    fs = require('fs'),
     sourcemaps = require ( 'gulp-sourcemaps' ),
     autoprefixer = require ( 'gulp-autoprefixer' ),
     concat = require ( 'gulp-concat' ),
@@ -17,7 +18,8 @@ var gulp = require ( 'gulp' ),
     path = require ( 'path' ),
     newer = require ( 'gulp-newer' ),
     babel = require ( 'gulp-babel' ),
-    // changed = require ( 'gulp-changed' ),
+    sequence = require ( 'gulp-sequence' ),
+    changed = require ( 'gulp-changed' ),
     ignore = require ( 'gulp-ignore' ),
     // rimraf = require ( 'gulp-rimraf' ),
     // watch = require ( 'gulp-watch' ),
@@ -68,10 +70,21 @@ gulp.task ( 'images', function () {
 
 /* EXAMPLES */
 
-gulp.task ( 'examples', ['jade'], function () {
+gulp.task ( 'examples-clean', function () {
+
+  return gulp.src ( 'examples/**/*.html' )
+             .pipe ( clean () );
+
+});
+
+gulp.task ( 'examples', function () {
 
   return gulp.src ( 'examples/**/*.jade' )
              .pipe ( ignore.exclude ( '**/layout.jade' ) )
+             .pipe ( newer ({
+               dest: 'examples',
+               ext: '.html'
+             }) )
              .pipe ( jade ({
                locals: {},
                pretty: true
@@ -86,7 +99,7 @@ gulp.task ( 'examples', ['jade'], function () {
 
 /* JADE */
 
-gulp.task ( 'jade', function () {
+gulp.task ( 'jade', ['examples-clean'], function () {
 
     return gulp.src ( 'src/components/**/*.jade' )
            .pipe ( concat ( 'svelto.mixins.jade' ) )
@@ -161,7 +174,7 @@ gulp.task ( 'clean', function () {
 
 /* BUILD */
 
-gulp.task ( 'build', ['images', 'js', 'css', 'examples'] );
+gulp.task ( 'build', sequence ( ['images', 'js', 'css', 'jade'], 'examples' ) );
 
 /* WATCH */
 
@@ -171,7 +184,7 @@ var watcher = function () {
   gulp.watch ( 'src/components/**/*.jade', ['jade'] );
   gulp.watch ( 'src/components/**/*.js', ['js'] );
   gulp.watch ( 'src/components/**/*.scss', ['css'] );
-  gulp.watch ( 'dist/jade/svelto.mixins.jade', ['examples'] );
+  gulp.watch ( ['dist/jade/svelto.mixins.jade', 'examples/**/*.jade'], ['examples'] );
 
 };
 
