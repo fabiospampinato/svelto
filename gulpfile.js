@@ -8,42 +8,43 @@
  * Licensed under @PROJECT-LICENSE-NAME (@PROJECT-REPOSITORY-URL/@PROJECT-BRANCH/@PROJECT-LICENSE-FILE-PATH)
  * ====================================================================================== */
 
-var gulp = require ( 'gulp' ),
-    fs = require('fs'),
-    sourcemaps = require ( 'gulp-sourcemaps' ),
-    autoprefixer = require ( 'gulp-autoprefixer' ),
-    merge = require ( 'merge-stream' ),
-    concat = require ( 'gulp-concat' ),
-    _ = require ( 'lodash' ),
-    foreach = require ( 'gulp-foreach' ),
-    flatten = require ( 'gulp-flatten' ),
-    sort = require ( 'gulp-sort' ),
-    jade = require ( 'gulp-jade' ),
-    path = require ( 'path' ),
-    newer = require ( 'gulp-newer' ),
-    babel = require ( 'gulp-babel' ),
-    sequence = require ( 'gulp-sequence' ),
-    changed = require ( 'gulp-changed' ),
-    ignore = require ( 'gulp-ignore' ),
-    rimraf = require ( 'gulp-rimraf' ),
-    watch = require ( 'gulp-watch' ),
-    minify_css = require ( 'gulp-minify-css' ),
-    sizediff = require ( 'gulp-sizediff' ),
-    bytediff = require ( 'gulp-bytediff' ),
-    minify_html = require ( 'gulp-minify-html' ),
-    sass = require ( 'gulp-sass' ),
-    clean = require ( 'gulp-clean' ),
-    rename = require ( 'gulp-rename' ),
-    imagemin = require ( 'gulp-imagemin' ),
-    pngquant = require ( 'imagemin-pngquant' ),
-    util = require ( 'gulp-util' ),
-    history = require ( 'connect-history-api-fallback' ),
-    filesize = require ( 'gulp-filesize' ),
-    uglify = require ( 'gulp-uglify' ),
+/* REQUIRES */
+
+var _ = require ( 'lodash' ),
     browserSync = require ( 'browser-sync' ).create (),
     browserSync_inited = false,
+    merge = require ( 'merge-stream' ),
+    path = require ( 'path' ),
+    pngquant = require ( 'imagemin-pngquant' );
+
+/* GULP */
+
+var gulp = require ( 'gulp' );
+
+/* GULP PLUGINS */
+
+var autoprefixer = require ( 'gulp-autoprefixer' ),
+    babel = require ( 'gulp-babel' ),
+    bytediff = require ( 'gulp-bytediff' ),
+    clean = require ( 'gulp-clean' ),
+    concat = require ( 'gulp-concat' ),
+    filelog = require ( 'gulp-filelog' ),
+    flatten = require ( 'gulp-flatten' ),
+    foreach = require ( 'gulp-foreach' ),
+    ignore = require ( 'gulp-ignore' ),
+    imagemin = require ( 'gulp-imagemin' ),
+    jade = require ( 'gulp-jade' ),
+    minify_css = require ( 'gulp-minify-css' ),
+    minify_html = require ( 'gulp-minify-html' ),
+    newer = require ( 'gulp-newer' ),
+    rename = require ( 'gulp-rename' ),
     resolveDependencies = require ( 'gulp-resolve-dependencies' ),
-    filelog = require ( 'gulp-filelog' );
+    sass = require ( 'gulp-sass' ),
+    sequence = require ( 'gulp-sequence' ),
+    sort = require ( 'gulp-sort' ),
+    sourcemaps = require ( 'gulp-sourcemaps' ),
+    uglify = require ( 'gulp-uglify' ),
+    util = require ( 'gulp-util' );
 
 /* IMAGES */
 
@@ -58,10 +59,10 @@ gulp.task ( 'images', function () {
                }))
                .pipe ( bytediff.start () )
                .pipe ( imagemin ({
-                 interlaced: true, //INFO: GIF
-                 progressive: true, //INFO: JPG
-                 optimizationLevel: 7, //INFO: PNG
-                 multipass: true, //INFO: SVG
+                 interlaced: true, //INFO: Affects GIF images
+                 progressive: true, //INFO: Affects JPG images
+                 optimizationLevel: 7, //INFO: Affects PNG images
+                 multipass: true, //INFO: Affects SVG images
                  svgoPlugins: [{ removeViewBox: false}],
                  use: [pngquant ()]
                }))
@@ -114,7 +115,7 @@ gulp.task ( 'jade', ['examples-clean'], function () {
 
 });
 
-/* JAVASCRIPT */
+/* JS */
 
 //TODO: Add support for sourcemaps
 
@@ -173,6 +174,7 @@ gulp.task ( 'js', ['js-temp'], function () {
 
 /* CSS */
 
+//TODO: Add partial compilation
 //TODO: Add support for sourcemaps
 
 gulp.task ( 'css', function () {
