@@ -1,53 +1,46 @@
-//- javascript/expander.jade
 
 extends ../layout.jade
 
+//- Expander
+
 append main
-    +divider Expander
+  +divider Expander
 
-    +expander
-        +container-header("Base").actionable.expander-toggler
-            +multiple-right
-                +button-icon("hardware-keyboard-arrow-down").small
-        +container-content Content of base
+  +expander
+    +container-header("Base").actionable.expander-toggler
+      +multiple-right
+        +button-icon("keyboard_arrow_down").small
+    +container-content Content of base
 
-    +expander
-        +container-header
-            +multiple-left
-                p Base left - Button toggler
-            +multiple-right
-                +button-icon("hardware-keyboard-arrow-down").small.expander-toggler
-        +container-content Content of base left - Button toggler
+  +expander
+    +container-header
+      +multiple-left
+        p Base left - Button toggler
+      +multiple-right
+        +button-icon("keyboard_arrow_down").small.expander-toggler
+    +container-content Content of base left - Button toggler
 
-    +expander
-        +container-header("Icon to the left").actionable.expander-toggler
-            +multiple-left
-                +button-icon("hardware-keyboard-arrow-down").small
-        +container-content Content of icon to the left
+  +expander
+    +container-header("Icon to the left").actionable.expander-toggler
+      +multiple-left
+        +button-icon("keyboard_arrow_down").small
+    +container-content Content of icon to the left
 
-    +expander.opened
-        +container-header("Opened").actionable.expander-toggler
-            +multiple-right
-                +button-icon("hardware-keyboard-arrow-down").small
-        +container-content Content of opened
+  +expander.opened
+    +container-header("Opened").actionable.expander-toggler
+      +multiple-right
+        +button-icon("keyboard_arrow_down").small
+    +container-content Content of opened
 
-    +divider Actions
+  +divider Actions
 
-    +multiple
-        +button-simple("expanders_toggle_all()") Toggle all
-        +button-simple("expanders_open_all()") Open all
-        +button-simple("expanders_close_all()") Close all
+  +multiple
+    +button-simple("accordions_action ( 'toggle' )") Toggle all
+    +button-simple("accordions_action ( 'open' )") Open all
+    +button-simple("accordions_action ( 'close' )") Close all
 
 append body-end
-    script.
-        function expanders_toggle_all () {
-            $('.expander').expander ( 'toggle' );
-        }
-
-        function expanders_open_all () {
-            $('.expander').expander ( 'open' );
-        }
-
-        function expanders_close_all () {
-            $('.expander').expander ( 'close' );
-        }
+  +script.
+    function accordions_action ( action ) {
+      $('.accordion').accordion ( action );
+    }  

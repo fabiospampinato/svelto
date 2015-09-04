@@ -1,58 +1,59 @@
-//- tools/oneTimeAction.jade
 
 extends ../layout.jade
 
+//- oneTimeAction
+
 append main
-    +divider One time action
+  +divider One time action
 
-    +multiple
-        +button-simple(onclick="test_one_time_action_cookie1()").outlined Cookie 'test1'
-        +button-simple(onclick="test_one_time_action_cookie2()").outlined Cookie 'test2'
-        +button-simple(onclick="test_one_time_action_cookie3()").outlined Cookie 'test3' adv
+  +multiple
+    +button-simple("test_one_time_action_cookie1 ()").outlined Cookie 'test1'
+    +button-simple("test_one_time_action_cookie2 ()").outlined Cookie 'test2'
+    +button-simple("test_one_time_action_cookie3 ()").outlined Cookie 'test3' adv
 
-    +divider Action
+  +divider Action
 
-    +multiple
-        +button-simple(onclick="test_one_time_action_reset_cookie1()").outlined Reset 'test1'
-        +button-simple(onclick="test_one_time_action_reset_actions()").outlined Reset all
-        +button-simple(onclick="test_one_time_action_get_string()").outlined Get cookie string
+  +multiple
+    +button-simple("test_one_time_action_reset_cookie1 ()").outlined Reset 'test1'
+    +button-simple("test_one_time_action_reset_actions ()").outlined Reset all
+    +button-simple("test_one_time_action_get_string ()").outlined Get cookie string
 
 append body-end
-    +script.
-        function test_one_time_action_cookie1 () {
-            $.oneTimeAction ( 'test1', function () {
-                $.noty ( "One time action (test1) executed and setted." );
-            });
-        }
-        function test_one_time_action_cookie2 () {
-            $.oneTimeAction ( 'test2', function () {
-                $.noty ( "One time action (test2) executed and setted." );
-            });
-        }
-        function test_one_time_action_cookie3 () {
-            if ( !$.oneTimeAction ( 'test3' ).get () ) {
-                $.noty ({
-                    body: "One time action (test3) executed.",
-                    buttons: [{
-                        text: 'Set',
-                        onClick: function () {
-                            $.oneTimeAction ( 'test3' ).set ();
-                            $.noty ( "One time action (test3) setted." );
-                        }
-                    }, {
-                        text: 'Close'
-                    }]
-                });
+  +script.
+    function test_one_time_action_cookie1 () {
+      $.oneTimeAction ( 'test1', function () {
+        $.noty ( "One time action (test1) executed and setted." );
+      });
+    }
+    function test_one_time_action_cookie2 () {
+      $.oneTimeAction ( 'test2', function () {
+        $.noty ( "One time action (test2) executed and setted." );
+      });
+    }
+    function test_one_time_action_cookie3 () {
+      if ( !$.oneTimeAction ( 'test3' ).get () ) {
+        $.noty ({
+          body: "One time action (test3) executed.",
+          buttons: [{
+            text: 'Set',
+            onClick: function () {
+              $.oneTimeAction ( 'test3' ).set ();
+              $.noty ( "One time action (test3) setted." );
             }
-        }
-        function test_one_time_action_reset_cookie1 () {
-            $.oneTimeAction ( 'test1' ).reset ();
-            $.noty ( '(test1) action have been resetted' );
-        }
-        function test_one_time_action_reset_actions () {
-            $.oneTimeAction ().reset ();
-            $.noty ( 'oneTimeAction-related cookies have been resetted' );
-        }
-        function test_one_time_action_get_string () {
-            $.noty ( $.cookie.get ( 'ota' ) );
-        }
+          }, {
+            text: 'Close'
+          }]
+        });
+      }
+    }
+    function test_one_time_action_reset_cookie1 () {
+      $.oneTimeAction ( 'test1' ).reset ();
+      $.noty ( '(test1) action have been resetted' );
+    }
+    function test_one_time_action_reset_actions () {
+      $.oneTimeAction ().reset ();
+      $.noty ( 'oneTimeAction-related cookies have been resetted' );
+    }
+    function test_one_time_action_get_string () {
+      $.noty ( $.cookie.get ( 'ota' ) );
+    }

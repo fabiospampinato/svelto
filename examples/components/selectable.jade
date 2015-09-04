@@ -3,48 +3,48 @@
 extends ../layout.jade
 
 append main
-    +divider Selectable
+  +divider Selectable
 
-    +container-simple
-        table.selectable
-            thead
-                tr
-                    th Int
-                    th String
-                    th Date
-                    th Options
-            tfoot
+  +container-simple
+    table.selectable
+      thead
+        tr
+          th Int
+          th String
+          th Date
+          th Options
+      tfoot
 
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 10 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple("#").outlined.small Btn 1
-                                +button-simple("#").outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple("#").outlined.small Btn 1
-                                +button-simple("#").outlined.small Btn 2
+      tbody
+        +table-tr-empty
+        - var nr = 1;
+        while ( nr <= 10 )
+          tr
+            td= nr++
+            td Foo
+            td 16/11/1993
+            td
+              +multiple.centered
+                +button-simple("#").outlined.small Btn 1
+                +button-simple("#").outlined.small Btn 2
+          tr
+            td= nr++
+            td Bar
+            td 16 Nov 1993
+            td
+              +multiple.centered
+                +button-simple("#").outlined.small Btn 1
+                +button-simple("#").outlined.small Btn 2
 
-    +divider Other elements
+  +divider Other elements
 
-    +container-simple.other-elements
-        +paragraph-sample
-        +paragraph-sample
+  +container-simple.other-elements
+    +paragraph-sample
+    +paragraph-sample
 
 append body-end
-    script.
-        $('.other-elements').selectable ({
-            selector: '.placeholder',
-            selected_class: 'green'
-        });
+  script.
+    $('.other-elements').selectable ({
+      selector: '.placeholder',
+      selected_class: 'green'
+    });

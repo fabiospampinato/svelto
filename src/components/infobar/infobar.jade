@@ -9,10 +9,11 @@
   }
 
 mixin infobar(options)
+  - options = options || {};
   .infobar-wrp&attributes(attributes)
     if options.icon
       +infobar-left
-        +icon(icon)(class((options.title && options.subtitle) ? "xlarge" : ""))
+        +icon(icon)(class=((options.title && options.subtitle) ? "xlarge" : ""))
     if options.title || options.subtitle
       +infobar-center
         if options.title

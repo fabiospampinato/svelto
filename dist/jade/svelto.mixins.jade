@@ -6,20 +6,6 @@ mixin accordion
     block
 
 
-//- Base
-
-mixin css(url, media)
-  - media = media || "all";
-  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
-
-mixin js(url)
-  script(src!=url)&attributes(attributes)
-
-mixin script
-  script&attributes(attributes)
-    block
-
-
 //- Breadcrumb
 
 mixin breadcrumb
@@ -35,63 +21,65 @@ mixin breadcrumb-divider(icon)
       +icon(icon)
 
 
-//- Chat
+//- Base
+
+mixin css(url, media)
+  - media = media || "all";
+  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
+
+mixin js(url)
+  script(src!=url)&attributes(attributes)
+
+mixin script
+  script&attributes(attributes)
+    block
+
+
+//- Checkbox
+
+//- TODO: the value should be setted to 1 by default if is not provided
 
 //- Options
   {
-    sender: {
-      img: '' // Avatar url
-      name: '', //  Nickname
-      url: '', // Profile url
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
     },
-    permissions: {
-      own: boolean, // Flag that decide if the chat is owned by you
-      reply: boolean, // Flat that decide if you can reply it
-      edit: boolean, // Flag that decide if you can edit it
-      delete: boolean, // Flag that decide if you can delete it
-    },
-    message: {
-      timestamp: number, // Unix timestamp of when the message as been sent
-      content: '', // The message content
-      group: '', // The ID of the group, useful for joining all the messages
-      level: ''
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
     }
   }
 
-mixin chat-msg(options)
-  - options.message.level = options.message.level || 1;
-  - options.sender = options.sender || {};
-  - options.sender.name = options.sender.name || "Unknown";
-  .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
-    if options.sender.img
-      if options.sender.url
-        a(href=options.sender.url title=options.sender.name).chat-msg-img
-          img(src=options.sender.img title=options.sender.name)
+mixin checkbox(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
       else
-        .chat-msg-img
-          img(src=options.sender.img title=options.sender.name)
-      .chat-msg-indicator
-    .chat-msg-content
-      +container
-        +container-header.inherit
-          if options.sender.name !== "Unknown"
-            +multiple-left
-              if options.sender.url
-                a(href=options.sender.url title=options.sender.name)= options.sender.name
-              else
-                = options.sender.name
-          +multiple-right
-            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).small.outlined
-            if options.permissions
-              if options.permissions.own
-                +button-icon("action-account-circle")(title="You are the owner").small.outlined
-              if options.permissions.reply
-                +button-icon("content-reply")(title="Reply").small.outlined
-              if options.permissions.edit
-                +button-icon("editor-mode-edit")(title="Edit").small.outlined
-              if options.permissions.delete
-                +button-icon("action-delete")(title="Delete").small.outlined
-        +container-content= options.message.content
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    +button-center
+      if options.title
+        span options.title
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
 //- Button
@@ -204,51 +192,63 @@ mixin button-corner(direction, icon)
         block
 
 
-//- Checkbox
-
-//- TODO: the value should be setted to 1 by default if is not provided
+//- Chat
 
 //- Options
   {
-    name: '', // Input name
-    title: '', // Checkbox title
-    value: '', // Input value
-    checked: '', // Input checked
-    colors: { // Colors to use for icons
-      on: '', // On color
-      off: '' // Off color
+    sender: {
+      img: '' // Avatar url
+      name: '', //  Nickname
+      url: '', // Profile url
     },
-    icons: { // Icons to use
-      on: '', // On icon
-      off: '' // Off icon
+    permissions: {
+      own: boolean, // Flag that decide if the chat is owned by you
+      reply: boolean, // Flat that decide if you can reply it
+      edit: boolean, // Flag that decide if you can edit it
+      delete: boolean, // Flag that decide if you can delete it
+    },
+    message: {
+      timestamp: number, // Unix timestamp of when the message as been sent
+      content: '', // The message content
+      group: '', // The ID of the group, useful for joining all the messages
+      level: ''
     }
   }
 
-mixin checkbox(options)
-  - options = options || {};
-  - options.value = options.value || "";
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.icons = options.icons || {};
-  - options.icons.on = options.icons.on || "check_box";
-  - options.icons.off = options.icons.off || "check_box_outline_blank";
-  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
-    if options.checked
-      if options.name
-        input(type="radio" name=name value=value checked)
+mixin chat-msg(options)
+  - options.message.level = options.message.level || 1;
+  - options.sender = options.sender || {};
+  - options.sender.name = options.sender.name || "Unknown";
+  .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
+    if options.sender.img
+      if options.sender.url
+        a(href=options.sender.url title=options.sender.name).chat-msg-img
+          img(src=options.sender.img title=options.sender.name)
       else
-        input(type="radio" value=value checked)
-    else
-      if options.name
-        input(type="radio" name=name value=value)
-      else
-        input(type="radio" value=value)
-    +button-center
-      if options.title
-        span options.title
-      +icon(options.icons.on)(class=options.colors.on).icon-on
-      +icon(options.icons.off)(class=options.colors.off).icon-off
+        .chat-msg-img
+          img(src=options.sender.img title=options.sender.name)
+      .chat-msg-indicator
+    .chat-msg-content
+      +container
+        +container-header.inherit
+          if options.sender.name !== "Unknown"
+            +multiple-left
+              if options.sender.url
+                a(href=options.sender.url title=options.sender.name)= options.sender.name
+              else
+                = options.sender.name
+          +multiple-right
+            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).small.outlined
+            if options.permissions
+              if options.permissions.own
+                +button-icon("action-account-circle")(title="You are the owner").small.outlined
+              if options.permissions.reply
+                +button-icon("content-reply")(title="Reply").small.outlined
+              if options.permissions.edit
+                +button-icon("editor-mode-edit")(title="Edit").small.outlined
+              if options.permissions.delete
+                +button-icon("action-delete")(title="Delete").small.outlined
+        +container-content= options.message.content
 
 
 //- Colorpicker
@@ -305,38 +305,6 @@ mixin container-footer
 mixin container-simple(options)
   +container(options)&attributes(attributes)
     +container-content
-      block
-
-
-//- Divider
-
-mixin divider
-  +divider-block&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider-wrp.block
-    .divider&attributes(attributes)
-      block
-
-mixin divider-linear
-  if block
-    .divider-wrp.linear
-      hr.left
-      .divider&attributes(attributes)
-        block
-      hr.right
-  else
-    hr&attributes(attributes)
-
-mixin divider-text
-  .divider-wrp.text
-    .divider&attributes(attributes)
-      block
-
-mixin divider-spacer
-  .divider-wrp.spacer
-    .divider&attributes(attributes)
       block
 
 
@@ -404,6 +372,38 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
+
+
+//- Divider
+
+mixin divider
+  +divider-block&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider-wrp.block
+    .divider&attributes(attributes)
+      block
+
+mixin divider-linear
+  if block
+    .divider-wrp.linear
+      hr.left
+      .divider&attributes(attributes)
+        block
+      hr.right
+  else
+    hr&attributes(attributes)
+
+mixin divider-text
+  .divider-wrp.text
+    .divider&attributes(attributes)
+      block
+
+mixin divider-spacer
+  .divider-wrp.spacer
+    .divider&attributes(attributes)
+      block
 
 
 //- Dropdown
@@ -589,6 +589,28 @@ mixin image-sample
     block
 
 
+//- Input
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value || "";
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name, required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
 //- Infobar
 
 //- Options
@@ -599,10 +621,11 @@ mixin image-sample
   }
 
 mixin infobar(options)
+  - options = options || {};
   .infobar-wrp&attributes(attributes)
     if options.icon
       +infobar-left
-        +icon(icon)(class((options.title && options.subtitle) ? "xlarge" : ""))
+        +icon(icon)(class=((options.title && options.subtitle) ? "xlarge" : ""))
     if options.title || options.subtitle
       +infobar-center
         if options.title
@@ -640,28 +663,6 @@ mixin infobar-right
 mixin infobar-bottom
   .infobar-bottom&attributes(attributes)
     block
-
-
-//- Input
-
-//- Options
-  {
-    type: '', // Input type
-    name: '', // Input name
-    value: '', // Input value
-    label: '' // Label
-  }
-
-mixin input(options)
-  - options = options || {};
-  - options.type = options.type || "text";
-  - options.name = options.name || "";
-  - options.value = options.value || "";
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name, required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- Label
@@ -769,6 +770,40 @@ mixin modal
     block
 
 
+//- Navbar
+
+//- Options
+  {
+    id: '', // Navbar id
+    title: '' // Title
+    icon: '', // Icon to use
+  }
+
+mixin navbar-btn(options)
+  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
+    +button-center
+      if options.title
+        span options.title
+      if options.icon
+        +icon(icon)
+
+//- Options
+  {
+    id: '', // Navbar id
+    direction: '', // Navbar direction
+    slim: '', // Use a slim version or not
+    attached: '' // True or attached-* class
+  }
+
+mixin navbar(options)
+  - options.direction = options.direction || "left";
+  - options.slim = options.slim || false;
+  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )))
+    +container(id="navbar-" + options.id)&attributes(attributes).navbar
+      block
+    .background.navbar-closer
+
+
 //- Multiple
 
 mixin multiple
@@ -800,38 +835,12 @@ mixin multiple-right
   .multiple-sub-spacer
 
 
-//- Navbar
+//- Noty
 
-//- Options
-  {
-    id: '', // Navbar id
-    title: '' // Title
-    icon: '', // Icon to use
-  }
+//- Options: See noty component
 
-mixin navbar-btn(options)
-  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
-    +button-center
-      if options.title
-        span options.title
-      if options.icon
-        +icon(icon)
-
-//- Options
-  {
-    id: '', // Navbar id
-    direction: '', // Navbar direction
-    slim: '', // Use a slim version or not
-    attached: '' // True or attached-* class
-  }
-
-mixin navbar(options)
-  - options.direction = options.direction || "left";
-  - options.slim = options.slim || false;
-  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" ))
-    +container(id="navbar-" + options.id)&attributes(attributes).navbar
-      block
-    .background.navbar-closer
+mixin noty(options)
+  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
 
 
 //- Notification
@@ -845,14 +854,6 @@ mixin navbar(options)
 
 mixin notification(options)
   +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
-
-
-//- Noty
-
-//- Options: See noty component
-
-mixin noty(options)
-  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
 
 
 //- Others
@@ -1075,7 +1076,7 @@ mixin syntax(language)
 
 //- TODO: Write options docs block
 
-mixin progresbar(options, multiple)
+mixin progressbar(options, multiple)
   if typeof multiple !== 'undefined'
     - var new_options = { percentages: Array ( arguments.length ) };
     - for ( var i = 0, l = arguments.length; i < l; i++ ) {
@@ -1086,14 +1087,14 @@ mixin progresbar(options, multiple)
   - options = new_options;
   - options.decimals = options.decimals || 0;
   - var total = 0;
-  .progresbar&attributes(attributes)
-    .progresbar-unhighlighted
+  .progressbar&attributes(attributes)
+    .progressbar-unhighlighted
       each percentage in options.percentages
         - total += percentage.value;
-        .progresbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
+        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
           if options.labeled
-            .progresbar-label= +(percentage.value).toFixed(options.decimals)
-    .progresbar-stripes(style=("width: " + total + "%;"))
+            .progressbar-label= +(percentage.value).toFixed(options.decimals)
+    .progressbar-stripes(style=("width: " + total + "%;"))
 
 
 //- Radio
@@ -1151,6 +1152,7 @@ mixin radio(options)
     options: '', // Select options
     selected: '', // Selected option
     id: '', // Select id
+    name: '', // Select name
     title: '', // Button title
     icon: '', // Button icon
     placeholder: '' // Select placeholder
@@ -1168,7 +1170,7 @@ mixin select-btn(options)
 
 mixin select(options)
   - options.placeholder = options.placeholder || "Select a value...";
-  select(id="select-" + options.id name=options.id, placeholder=options.placeholder)
+  select(id="select-" + options.id name=options.name, placeholder=options.placeholder)
     each val, prop in options.options
       if typeof val === "object"
         optgroup(label=prop)
@@ -1283,7 +1285,7 @@ mixin spinner-multiple(options)
       block
     else
       each color in options
-        +spinner-no-wra(class=color)
+        +spinner-no-wrp(class=color)
 
 
 //- Stepper
@@ -1446,6 +1448,7 @@ mixin toolbar
 //- Link
 
 mixin a(href)
+  - href = href || "#";
   a(href=href)&attributes(attributes)
     block
 

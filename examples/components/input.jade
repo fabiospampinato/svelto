@@ -1,125 +1,126 @@
-//- components/input.jade
 
 extends ../layout.jade
 
+//- Input
+
 append main
-    +divider Normal
+  +divider Normal
 
-    +container-simple
-        +multiple
-            +input({label: "Base"})
-            +input({label: "Compact"}).compact
-            +input({label: "Outlined"}).outlined
-            +input({label: "Rounded"}).rounded
-            +input({label: "Disabled"}).disabled
-
-    +divider Colors
-
-    +container-simple
-        +multiple
-            +input({label: "Primary"}).text-field-primary
-            +input({label: "Secondary"}).text-field-secondary
-            +input({label: "Tertiary"}).text-field-tertiary
-            +input({label: "Quaternary"}).text-field-quaternary
-            +input({label: "White"}).text-field-white
-            +input({label: "Gray"}).text-field-gray
-            +input({label: "Black"}).text-field-black
-            +input({label: "Yellow"}).text-field-yellow
-            +input({label: "Olive"}).text-field-olive
-            +input({label: "Green"}).text-field-green
-            +input({label: "Blue"}).text-field-blue
-            +input({label: "Violet"}).text-field-violet
-            +input({label: "Orange"}).text-field-orange
-            +input({label: "Purple"}).text-field-purple
-            +input({label: "Red"}).text-field-red
-            +input({label: "Pink"}).text-field-pink
-            +input({label: "Teal"}).text-field-teal
-            +input({label: "Brown"}).text-field-brown
-            +input({label: "Transparent"}).text-field-transparent
-            +input({label: "Inherit"}).text-field-inherit
-            +input({label: "Base"}).text-field-base
-
-    +divider Colors advanced
-
-    +container-simple
-        +multiple
-            +input({label: "White - Secondary"}).white.text-field-secondary
-            +input({label: "Primary - Secondary"}).primary.text-field-secondary
-            +input({label: "Red - Yellow"}).red.text-field-yellow
-
-    +divider Fluid
-
-    +container-simple
-        +input({label: "Fluid"}).fluid
-
-    +divider No floating
-
-    +container-simple
-        +input({label: "No floating"}).fluid.no-floating
-
-    +divider No intial bar
-
-    +container-simple
-        +input({label: "No initial bar"}).fluid.no-initial-bar
-
-    +divider No bar - No floating
-
-    +container-simple
-        +input({label: "No bar"}).fluid.no-bar.no-floating
-
-    +divider Inside a container
-
-    +container-simple
-        +input({label: "Inside a container"})
-
-    +container-simple.yellow
-        +input({label: "Inside a yellow container"})
-
-    +divider Toolbar
-
+  +container-simple
     +multiple
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
-            +button-icon("action-search")
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
-            +button-icon("action-search").secondary
-        +multiple.joined
-            +input({label: "Placeholder...", value: "No initial bar"}).no-initial-bar.no-floating.white
-            +button-icon("action-search").secondary
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
-            +button-simple.primary Search
-        +multiple.joined
-            +label-simple.gray http://
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
-        +multiple.joined
-            +label-icon("social-people")
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white
-            +label.compact
-                +label-center
-                    +icon('refresh').rotating
-        +multiple.joined
-            +button.teal
-                +button-left
-                    +icon("maps-local-grocery-store")
-                +button-center Checkout
-            +input({label: "Placeholder...", value: "35.50€"}).no-bar.no-floating.white
+      +input({ label: "Base" })
+      +input({ label: "Compact" }).compact
+      +input({ label: "Outlined" }).outlined
+      +input({ label: "Rounded" }).rounded
+      +input({ label: "Disabled" }).disabled
 
-    +divider Toolbar - Outlined
+  +divider Colors
 
+  +container-simple
     +multiple
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white.outlined
-            +button-icon("action-search").outlined
-        +multiple.joined
-            +input({label: "Placeholder...", value: "No initial bar"}).no-initial-bar.no-floating.white.outlined
-            +button-icon("action-search").outlined.secondary
-        +multiple.joined
-            +input({label: "Placeholder...", value: "Compact"}).no-bar.no-floating.white.outlined.compact
-            +button-icon("action-search").outlined
-        +multiple.joined
-            +label-simple.gray.outlined http://
-            +input({label: "Placeholder...", value: "Value"}).no-bar.no-floating.white.outlined
+      +input({ label: "Primary" }).text-field-primary
+      +input({ label: "Secondary" }).text-field-secondary
+      +input({ label: "Tertiary" }).text-field-tertiary
+      +input({ label: "Quaternary" }).text-field-quaternary
+      +input({ label: "White" }).text-field-white
+      +input({ label: "Gray" }).text-field-gray
+      +input({ label: "Black" }).text-field-black
+      +input({ label: "Yellow" }).text-field-yellow
+      +input({ label: "Olive" }).text-field-olive
+      +input({ label: "Green" }).text-field-green
+      +input({ label: "Blue" }).text-field-blue
+      +input({ label: "Violet" }).text-field-violet
+      +input({ label: "Orange" }).text-field-orange
+      +input({ label: "Purple" }).text-field-purple
+      +input({ label: "Red" }).text-field-red
+      +input({ label: "Pink" }).text-field-pink
+      +input({ label: "Teal" }).text-field-teal
+      +input({ label: "Brown" }).text-field-brown
+      +input({ label: "Transparent" }).text-field-transparent
+      +input({ label: "Inherit" }).text-field-inherit
+      +input({ label: "Base" }).text-field-base
+
+  +divider Colors advanced
+
+  +container-simple
+    +multiple
+      +input({ label: "White - Secondary" }).white.text-field-secondary
+      +input({ label: "Primary - Secondary" }).primary.text-field-secondary
+      +input({ label: "Red - Yellow" }).red.text-field-yellow
+
+  +divider Fluid
+
+  +container-simple
+    +input({ label: "Fluid" }).fluid
+
+  +divider No floating
+
+  +container-simple
+    +input({ label: "No floating" }).fluid.no-floating
+
+  +divider No intial bar
+
+  +container-simple
+    +input({ label: "No initial bar" }).fluid.no-initial-bar
+
+  +divider No bar - No floating
+
+  +container-simple
+    +input({ label: "No bar" }).fluid.no-bar.no-floating
+
+  +divider Inside a container
+
+  +container-simple
+    +input({ label: "Inside a container" })
+
+  +container-simple.yellow
+    +input({ label: "Inside a yellow container" })
+
+  +divider Toolbar
+
+  +multiple
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
+      +button-icon("action-search")
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
+      +button-icon("action-search").secondary
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "No initial bar" }).no-initial-bar.no-floating.white
+      +button-icon("action-search").secondary
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
+      +button-simple.primary Search
+    +multiple.joined
+      +label-simple.gray http://
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
+    +multiple.joined
+      +label-icon("social-people")
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
+      +label.compact
+        +label-center
+          +icon('refresh').rotating
+    +multiple.joined
+      +button.teal
+        +button-left
+          +icon("maps-local-grocery-store")
+        +button-center Checkout
+      +input({ label: "Placeholder...", value: "35.50€" }).no-bar.no-floating.white
+
+  +divider Toolbar - Outlined
+
+  +multiple
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white.outlined
+      +button-icon("action-search").outlined
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "No initial bar" }).no-initial-bar.no-floating.white.outlined
+      +button-icon("action-search").outlined.secondary
+    +multiple.joined
+      +input({ label: "Placeholder...", value: "Compact" }).no-bar.no-floating.white.outlined.compact
+      +button-icon("action-search").outlined
+    +multiple.joined
+      +label-simple.gray.outlined http://
+      +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white.outlined

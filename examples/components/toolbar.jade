@@ -1,59 +1,60 @@
-//- components/toolbar.jade
 
 extends ../layout.jade
 
+//- Toolbar
+
 append main
-    +divider Toolbars
+  +divider Toolbars
 
-    +toolbar.orange
-        +button-icon('menu')
-        span.large Schedule
-        .spacer
-        +button-icon("action-search")
-        +button-icon('more_vert')
+  +toolbar.orange
+    +button-icon('menu')
+    span.large Schedule
+    +spacer
+    +button-icon("search")
+    +button-icon('more_vert')
 
-    +toolbar.violet
-        +button-icon('menu')
-        +breadcrumb.large
-            a(href="#", title="Components") Components
-            +breadcrumb-divider.small
-            a(href="#", title="Toolbars") Toolbars
-        .spacer
-        +button-icon('more_vert')
+  +toolbar.violet
+    +button-icon('menu')
+    +breadcrumb.large
+      +a(title="Components") Components
+      +breadcrumb-divider.small
+        +a(title="Toolbars") Toolbars
+    +spacer
+    +button-icon('more_vert')
 
-    +toolbar.green
-        span.large Toolbar
-        .spacer
-        +button-icon("action-search")
-        +button-icon("social-person")
-        +button-icon('more_vert')
+  +toolbar.green
+    span.large Toolbar
+    +spacer
+    +button-icon("search")
+    +button-icon("social-person")
+    +button-icon('more_vert')
 
-    +toolbar.blue
-        +button-icon("navigation-arrow-back")
-        span.large Main page
-        .spacer
-        +button-icon('more_vert')
+  +toolbar.blue
+    +button-icon("navigation-arrow-back")
+    span.large Main page
+    +spacer
+    +button-icon('more_vert')
 
-    +toolbar.red
-        +button-icon('menu')
-        +icon("image-image").xlarge
-        span.large Title
-        .spacer
-        +switch({name:"name", value:"value", colors:{on:"orange",off:"blue"}, icons:{on:"action-favorite", off:"action-favorite-outline"}})
-        +button-icon("action-search")
+  +toolbar.red
+    +button-icon('menu')
+    +icon("image-image").xlarge
+    span.large Title
+    +spacer
+    +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "action-favorite", off: "action-favorite-outline" } })
+    +button-icon("search")
 
-    +divider With subs
+  +divider With subs
 
-    +toolbar.yellow
-        +multiple-left
-            +button-icon('menu')
-        +multiple-center
-            span.large Application
-        +multiple-right
-            +button-icon('more_vert')
+  +toolbar.yellow
+    +multiple-left
+      +button-icon('menu')
+    +multiple-center
+      span.large Application
+    +multiple-right
+      +button-icon('more_vert')
 
-    +toolbar.brown
-        +multiple-left
-            +button-icon("navigation-arrow-back")
-        +multiple-center
-            span.large This is a page
+  +toolbar.brown
+    +multiple-left
+      +button-icon("arrow_back")
+    +multiple-center
+      span.large This is a page

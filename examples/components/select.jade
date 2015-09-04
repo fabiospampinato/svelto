@@ -1,16 +1,17 @@
-//- bootstrap/select.jade
 
 extends ../layout.jade
 
+//- Select
+
 append main
-    - var elo_options = { public: "Public", private: "Private", Elo: { 1200: "1200+", 1300: "1300+", 1400: "1400+", 1500: "1500+", 1600: "1600+", 1700: "1700+", 1800: "1800+", 1900: "1900+", 2000: "2000+", 2100: "2100+", } };
+  - var elo_options = { public: "Public", private: "Private", Elo: { 1200: "1200+", 1300: "1300+", 1400: "1400+", 1500: "1500+", 1600: "1600+", 1700: "1700+", 1800: "1800+", 1900: "1900+", 2000: "2000+", 2100: "2100+", } };
 
-    +divider Select
+  +divider Select
 
-    +multiple
-        +select-btn(elo_options, "public", "base1").outlined
-        +select-btn(elo_options, "public", "base2").outlined
-            | Valueholder:
-            .valueholder.right
-        +select-btn-icon(elo_options, "public", "base3", "action-settings").outlined
-        +select-btn-icon(elo_options, "public", "base4", "action-settings").outlined.rounded
+  +multiple
+    +select-btn({ options: elo_options, selected: "public", id: "base1", title: "Select" }).outlined
+    +select-btn({ options: elo_options, selected: "public", id: "base2" }).outlined
+      span Valueholder:
+      .valueholder.right
+    +select-btn({ options: elo_options, selected: "public", id: "base3", icon: "settings" }).outlined
+    +select-btn({ options: elo_options, selected: "public", id: "base4", icon: "settings" }).outlined.rounded

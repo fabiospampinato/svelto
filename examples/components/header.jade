@@ -1,48 +1,49 @@
-//- bootstrap/header.jade
 
 extends ../layout.jade
 
+//- Header
+
 append main
-    +divider Header
+  +divider Header
 
-    +header
-        +toolbar.yellow
-            +button-icon('menu')
-            span.large Title
-            .spacer
-            +button-icon('refresh')
-            +button-icon('more_vert')
+  +header
+    +toolbar.yellow
+      +button-icon('menu')
+      span.large Title
+      .spacer
+      +button-icon('refresh')
+      +button-icon('more_vert')
 
-    +header("/assets/images/presto/sample-wide.jpg").has-background
-        +toolbar
-            +button-icon('menu')
-            span.large Title
-            .spacer
-            +button-icon('refresh')
-            +button-icon('more_vert')
-        .header-background.red
+  +header("/sample-wide.jpg").has-background
+    +toolbar
+      +button-icon('menu')
+      span.large Title
+      .spacer
+      +button-icon('refresh')
+      +button-icon('more_vert')
+    .header-background.red
 
-    +header("/assets/images/presto/sample-wide.jpg").has-background
-        +toolbar
-            +button-icon('menu')
-            span.large Title
-            .spacer
-            +button-icon('refresh')
-            +button-icon('more_vert')
-        .header-background.orange.gradient
+  +header("/sample-wide.jpg").has-background
+    +toolbar
+      +button-icon('menu')
+      span.large Title
+      .spacer
+      +button-icon('refresh')
+      +button-icon('more_vert')
+    .header-background.orange.gradient
 
-    +header-with-bg("/assets/images/presto/sample-wide.jpg")(style="height: 150px;")
-        +toolbar
-            +button-icon('menu')
-            span.large Title
-            .spacer
-            +button-icon('refresh')
-            +button-icon('more_vert')
+  +header-with-bg("/sample-wide.jpg")(style="height: 150px;")
+    +toolbar
+      +button-icon('menu')
+      span.large Title
+      .spacer
+      +button-icon('refresh')
+      +button-icon('more_vert')
 
-    +header-with-bg("/assets/images/presto/sample-wide.jpg")(style="height: 300px;")
-        +toolbar
-            +button-icon('menu')
-            span.large Title
-            .spacer
-            +button-icon('refresh')
-            +button-icon('more_vert')
+  +header-with-bg("/sample-wide.jpg")(style="height: 300px;")
+    +toolbar
+      +button-icon('menu')
+      span.large Title
+      .spacer
+      +button-icon('refresh')
+      +button-icon('more_vert')

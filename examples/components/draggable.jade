@@ -1,55 +1,56 @@
-//- tools/draggable.jade
 
 extends ../layout.jade
 
-append main
-    +divider Draggables
+//- Draggable
 
-    +container.constrainer
-        +container-content.overflow-visible
-            +multiple
-                +label-simple.outlined.draggable Draggable
-                +checkbox("checkbox", "Toggable draggable", 1).outlined.toggable-draggable
-                +label.outlined.only-handler
-                    +label-center Only handler
-                    +label-right.draggable-handler
-                        +icon('menu')
-                +label-simple.outlined.revertable Revertable
-                +label-simple.outlined.x-axis X-Axis
-                +label-simple.outlined.y-axis Y-Axis
-                +label-simple.outlined.constrained Constrained
-                +label-simple.outlined.constrained-center Constrained center
-                +label-simple.outlined.constrained-x Constrained X
-                +label-simple.outlined.constrained-y Constrained Y
-                +label-simple.outlined.constrained-tollerance Constrained 100-50 tollerance
-                +label-simple.outlined.constrained-coordinates Constrained 400x200
-                +label-simple.outlined.constrained-coordinate-x Constrained 200+ X
-                +label-simple.outlined.constrained-coordinates-x Constrained 200-600 X
-                +label-simple.outlined.constrained-coordinate-y Constrained 200+ Y
-                +label-simple.outlined.constrained-coordinates-y Constrained 200-600 Y
-                +label-simple.outlined.constrained-coordinates-modifier Modifier 2x
+append main
+  +divider Draggables
+
+  +container.constrainer
+    +container-content.overflow-visible
+      +multiple
+        +label-simple.outlined.draggable Draggable
+        +checkbox({ name: "checkbox", title: "Toggable draggable", value: 1 }).outlined.toggable-draggable
+        +label.outlined.only-handler
+          +label-center Only handler
+          +label-right.draggable-handler
+            +icon('menu')
+        +label-simple.outlined.revertable Revertable
+        +label-simple.outlined.x-axis X-Axis
+        +label-simple.outlined.y-axis Y-Axis
+        +label-simple.outlined.constrained Constrained
+        +label-simple.outlined.constrained-center Constrained center
+        +label-simple.outlined.constrained-x Constrained X
+        +label-simple.outlined.constrained-y Constrained Y
+        +label-simple.outlined.constrained-tollerance Constrained 100-50 tollerance
+        +label-simple.outlined.constrained-coordinates Constrained 400x200
+        +label-simple.outlined.constrained-coordinate-x Constrained 200+ X
+        +label-simple.outlined.constrained-coordinates-x Constrained 200-600 X
+        +label-simple.outlined.constrained-coordinate-y Constrained 200+ Y
+        +label-simple.outlined.constrained-coordinates-y Constrained 200-600 Y
+        +label-simple.outlined.constrained-coordinates-modifier Modifier 2x
 
 append body-end
-    +noty({body: "Drag the labels around", ttl: "forever"})
-    +script.
-        $('.only-handler').draggable ({ only_handlers: true });
-        $('.toggable-draggable').draggable ({ draggable: function () {
-            return !!$('.toggable-draggable').checkbox ( 'instance' ).get ();
-        }});
-        $('.revertable').draggable ({ revertable: true });
-        $('.x-axis').draggable ({ axis: 'x' });
-        $('.y-axis').draggable ({ axis: 'y' });
-        $('.constrained').draggable ({ constrainer: { $element: $('.constrainer') } });
-        $('.constrained-center').draggable ({ constrainer: { $element: $('.constrainer'), constrain_center: true } });
-        $('.constrained-x').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'x' } });
-        $('.constrained-y').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'y' } });
-        $('.constrained-tollerance').draggable ({ constrainer: { $element: $('.constrainer'), tollerance: { x: 100, y: 50 } } });
-        $('.constrained-coordinates').draggable ({ constrainer: { coordinates: { x1: 0, x2: 400, y1: 0, y2: 200 } } });
-        $('.constrained-coordinate-x').draggable ({ constrainer: { coordinates: { x1: 200 } } });
-        $('.constrained-coordinates-x').draggable ({ constrainer: { coordinates: { x1: 200, x2: 600 } } });
-        $('.constrained-coordinate-y').draggable ({ constrainer: { coordinates: { y1: 200 } } });
-        $('.constrained-coordinates-y').draggable ({ constrainer: { coordinates: { y1: 200, y2: 600 } } });
-        $('.constrained-coordinates-modifier').draggable ({ modifiers: {
-            x: function ( x ) { return 2 * x; },
-            y: function ( y ) { return 2 * y; }
-        }});
+  +noty({ body: "Drag the labels around", ttl: "forever" })
+  +script.
+    $('.only-handler').draggable ({ only_handlers: true });
+    $('.toggable-draggable').draggable ({ draggable: function () {
+      return !!$('.toggable-draggable').checkbox ( 'instance' ).get ();
+    }});
+    $('.revertable').draggable ({ revertable: true });
+    $('.x-axis').draggable ({ axis: 'x' });
+    $('.y-axis').draggable ({ axis: 'y' });
+    $('.constrained').draggable ({ constrainer: { $element: $('.constrainer') } });
+    $('.constrained-center').draggable ({ constrainer: { $element: $('.constrainer'), constrain_center: true } });
+    $('.constrained-x').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'x' } });
+    $('.constrained-y').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'y' } });
+    $('.constrained-tollerance').draggable ({ constrainer: { $element: $('.constrainer'), tollerance: { x: 100, y: 50 } } });
+    $('.constrained-coordinates').draggable ({ constrainer: { coordinates: { x1: 0, x2: 400, y1: 0, y2: 200 } } });
+    $('.constrained-coordinate-x').draggable ({ constrainer: { coordinates: { x1: 200 } } });
+    $('.constrained-coordinates-x').draggable ({ constrainer: { coordinates: { x1: 200, x2: 600 } } });
+    $('.constrained-coordinate-y').draggable ({ constrainer: { coordinates: { y1: 200 } } });
+    $('.constrained-coordinates-y').draggable ({ constrainer: { coordinates: { y1: 200, y2: 600 } } });
+    $('.constrained-coordinates-modifier').draggable ({ modifiers: {
+      x: function ( x ) { return 2 * x; },
+      y: function ( y ) { return 2 * y; }
+    }});

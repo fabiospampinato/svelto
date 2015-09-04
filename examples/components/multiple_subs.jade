@@ -1,78 +1,79 @@
-//- css/multiple_subs.jade
 
 extends ../layout.jade
 
+//- Multiple subs
+
 append main
-    +divider Normal
+  +divider Normal
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-left
-                p Left
-            +multiple-center
-                p Center
-            +multiple-right
-                p Right
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-left
+        p Left
+      +multiple-center
+        p Center
+      +multiple-right
+        p Right
 
-    +divider No left
+  +divider No left
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-center
-                p Center
-            +multiple-right
-                p Right
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-center
+        p Center
+      +multiple-right
+        p Right
 
-    +divider No center
+  +divider No center
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-left
-                p Left
-            +multiple-right
-                p Right
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-left
+        p Left
+      +multiple-right
+        p Right
 
-    +divider No right
+  +divider No right
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-left
-                p Left
-            +multiple-center
-                p Center
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-left
+        p Left
+      +multiple-center
+        p Center
 
-    +divider Only left
+  +divider Only left
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-left
-                p Left
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-left
+        p Left
 
-    +divider Only center
+  +divider Only center
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-center
-                p Center
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-center
+        p Center
 
-    +divider Only right
+  +divider Only right
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-right
-                p Right
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-right
+        p Right
 
-    +divider Advanced
+  +divider Advanced
 
-    +container-simple.outlined
-        +multiple.fluid
-            +multiple-left
-                +button-icon('thumb_down').xsmall
-                +button-icon('thumb_up').xsmall
-            +multiple-center
-                p.large Title
-            +multiple-right
-                +button-icon('apps').xsmall
-                +button-icon('menu').xsmall
-                +button-icon('more_vert').xsmall
-                +button-icon('refresh').xsmall
+  +container-simple.outlined
+    +multiple.fluid
+      +multiple-left
+        +button-icon('thumb_down').xsmall
+        +button-icon('thumb_up').xsmall
+      +multiple-center
+        p.large Title
+      +multiple-right
+        +button-icon('apps').xsmall
+        +button-icon('menu').xsmall
+        +button-icon('more_vert').xsmall
+        +button-icon('refresh').xsmall

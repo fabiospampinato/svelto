@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Text
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_short ()" class="label actionable outlined">
+              <div class="label-center">Short
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_medium ()" class="label actionable outlined">
+              <div class="label-center">Medium
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_long ()" class="label actionable outlined">
+              <div class="label-center">Long
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">API calls
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_api_create ()" class="label actionable outlined">
+              <div class="label-center">Create
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_api_open ()" class="label actionable outlined">
+              <div class="label-center">Open
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_api_close ()" class="label actionable outlined">
+              <div class="label-center">Close
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Anchors
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'top', x: 'left' })" class="label actionable outlined">
+              <div class="label-center">Top-Left
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'top', x: 'center' })" class="label actionable outlined">
+              <div class="label-center">Top-Center
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'top', x: 'expanded' })" class="label actionable outlined">
+              <div class="label-center">Top-Expanded
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'top', x: 'right' })" class="label actionable outlined">
+              <div class="label-center">Top-Right
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'bottom', x: 'left' })" class="label actionable outlined">
+              <div class="label-center">Bottom-Left
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'bottom', x: 'center' })" class="label actionable outlined">
+              <div class="label-center">Bottom-Center
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'bottom', x: 'expanded' })" class="label actionable outlined">
+              <div class="label-center">Bottom-Expanded
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_anchor ({ y: 'bottom', x: 'right' })" class="label actionable outlined">
+              <div class="label-center">Bottom-Right
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Buttons
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_btns_one ()" class="label actionable outlined">
+              <div class="label-center">One
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_btns_two ()" class="label actionable outlined">
+              <div class="label-center">Two
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_btns_three ()" class="label actionable outlined">
+              <div class="label-center">Three
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Advanced
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_adv_one ()" class="label actionable outlined">
+              <div class="label-center">Title + Body
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_adv_two ()" class="label actionable outlined">
+              <div class="label-center">Title + Body + Image
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_adv_three ()" class="label actionable outlined">
+              <div class="label-center">Title + Body + Image + Buttons
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:noty_test_adv_four ()" class="label actionable outlined">
+              <div class="label-center">Title + Custom body + Image + Buttons
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Colors
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div class="label actionable primary" noty_test_colored ( 'primary' )="noty_test_colored ( 'primary' )">
+              <div class="label-center">Primary
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable secondary" noty_test_colored ( 'secondary' )="noty_test_colored ( 'secondary' )">
+              <div class="label-center">Secondary
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable tertiary" noty_test_colored ( 'tertiary' )="noty_test_colored ( 'tertiary' )">
+              <div class="label-center">Tertiary
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable quaternary" noty_test_colored ( 'quaternary' )="noty_test_colored ( 'quaternary' )">
+              <div class="label-center">Quaternary
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable white" noty_test_colored ( 'white' )="noty_test_colored ( 'white' )">
+              <div class="label-center">White
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable gray" noty_test_colored ( 'gray' )="noty_test_colored ( 'gray' )">
+              <div class="label-center">Gray
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable black" noty_test_colored ( 'black' )="noty_test_colored ( 'black' )">
+              <div class="label-center">Black
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable yellow" noty_test_colored ( 'yellow' )="noty_test_colored ( 'yellow' )">
+              <div class="label-center">Yellow
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable olive" noty_test_colored ( 'olive' )="noty_test_colored ( 'olive' )">
+              <div class="label-center">Olive
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable green" noty_test_colored ( 'green' )="noty_test_colored ( 'green' )">
+              <div class="label-center">Green
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable blue" noty_test_colored ( 'blue' )="noty_test_colored ( 'blue' )">
+              <div class="label-center">Blue
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable violet" noty_test_colored ( 'violet' )="noty_test_colored ( 'violet' )">
+              <div class="label-center">Violet
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable orange" noty_test_colored ( 'orange' )="noty_test_colored ( 'orange' )">
+              <div class="label-center">Orange
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable purple" noty_test_colored ( 'purple' )="noty_test_colored ( 'purple' )">
+              <div class="label-center">Purple
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable red" noty_test_colored ( 'red' )="noty_test_colored ( 'red' )">
+              <div class="label-center">Red
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable pink" noty_test_colored ( 'pink' )="noty_test_colored ( 'pink' )">
+              <div class="label-center">Pink
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable teal" noty_test_colored ( 'teal' )="noty_test_colored ( 'teal' )">
+              <div class="label-center">Teal
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable brown" noty_test_colored ( 'brown' )="noty_test_colored ( 'brown' )">
+              <div class="label-center">Brown
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable transparent" noty_test_colored ( 'transparent' )="noty_test_colored ( 'transparent' )">
+              <div class="label-center">Transparent
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable inherit" noty_test_colored ( 'inherit' )="noty_test_colored ( 'inherit' )">
+              <div class="label-center">Inherit
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable base" noty_test_colored ( 'base' )="noty_test_colored ( 'base' )">
+              <div class="label-center">Base
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      function noty_test_short () {
+        $.noty ( "Short noty" );
+      }
+      function noty_test_medium () {
+        $.noty ( "A medium noty, maybe some useful infos here" );
+      }
+      function noty_test_long () {
+        $.noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
+      }
+      function noty_test_btns_one () {
+        $.noty ( { body: "Noty with one button", buttons: [{ text: "Foo" }] } );
+      }
+      function noty_test_btns_two () {
+        $.noty ( { body: "Noty with two buttons", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+      }
+      function noty_test_btns_three () {
+        $.noty ( { body: "Noty with three buttons", buttons: [{ text: "Foo" }, { text: "Bar" }, { text: "Baz" }] } );
+      }
+      function noty_test_adv_one () {
+        $.noty ( { title: "Test title", body: "This is just an example body" } );
+      }
+      function noty_test_adv_two () {
+        $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png" } );
+      }
+      function noty_test_adv_three () {
+        $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+      }
+      function noty_test_adv_four () {
+        $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+      }
+      function noty_test_colored ( color ) {
+        $.noty ( { body: "Noty with custom color", color: color } );
+      }
+      var anchor_id = 0;
+      function noty_test_anchor ( anchor ) {
+        $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: { y: `" + anchor.y + "`, x: `" + anchor.x + "`", anchor: anchor } );
+      }
+      var created_noty;
+      function noty_test_api_create () {
+        created_noty = $.noty({ body: 'API noty', autoplay: false });
+      }
+      function noty_test_api_open () {
+        if ( created_noty ) {
+          created_noty.open ();
+        } else {
+          $.noty("You should `Create` it before...");
+        }
+      }
+      function noty_test_api_close () {
+        if ( created_noty ) {
+          created_noty.close ();
+        } else {
+          $.noty("You should `Create` it before...");
+        }
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

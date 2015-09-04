@@ -1,44 +1,45 @@
-//- javascript/tabs.jade
 
 extends ../layout.jade
 
+//- Tabs
+
 append main
-    +divider Tabs
+  +divider Tabs
 
-    +tabs
-        +tabs-buttons
-            +multiple.fluid.joined
-                +button-icon("communication-chat")(title="Tab 1").outlined
-                +button-icon("action-restore")(title="Tab 2").outlined
-                +button-simple(title="Tab 3").outlined.active Text
-                +button-icon('settings')(title="Tab 4").outlined
-        +tabs-containers
-            +tabs-buttons-indicator
-            +container-simple
-                +paragraph-sample.primary
-            +container-simple
-                +paragraph-sample.secondary
-            +container-simple
-                +paragraph-sample.tertiary
-            +container-simple
-                +paragraph-sample.quaternary
+  +tabs
+    +tabs-buttons
+      +multiple.fluid.joined
+        +button-icon("chat").outlined
+        +button-icon("restore").outlined
+        +button-simple.outlined.active Text
+        +button-icon('settings').outlined
+    +tabs-containers
+      +tabs-buttons-indicator
+      +container-simple
+        +paragraph-sample.primary
+      +container-simple
+        +paragraph-sample.secondary
+      +container-simple
+        +paragraph-sample.tertiary
+      +container-simple
+        +paragraph-sample.quaternary
 
-    +divider Tabs - Vertical
+  +divider Tabs - Vertical
 
-    +tabs.vertical
-        +tabs-buttons
-            +multiple.fluid.joined.vertical
-                +button-icon("communication-chat")(title="Tab 1").outlined
-                +button-icon("action-restore")(title="Tab 2").outlined
-                +button-simple(title="Tab 3").outlined Text
-                +button-icon('settings')(title="Tab 4").outlined
-        +tabs-containers
-            +tabs-buttons-indicator
-            +container-simple
-                +paragraph-sample.primary
-            +container-simple
-                +paragraph-sample.secondary
-            +container-simple
-                +paragraph-sample.tertiary
-            +container-simple
-                +paragraph-sample.quaternary
+  +tabs.vertical
+    +tabs-buttons
+      +multiple.fluid.joined.vertical
+        +button-icon("chat").outlined
+        +button-icon("restore").outlined
+        +button-simple.outlined Text
+        +button-icon('settings').outlined
+    +tabs-containers
+      +tabs-buttons-indicator
+      +container-simple
+        +paragraph-sample.primary
+      +container-simple
+        +paragraph-sample.secondary
+      +container-simple
+        +paragraph-sample.tertiary
+      +container-simple
+        +paragraph-sample.quaternary

@@ -1,54 +1,55 @@
-//- components/spinner.jade
 
 extends ../layout.jade
 
+//- Spinner
+
 append main
-    +divider Normal
+  +divider Normal
 
-    +container-simple
-        +multiple
-            +spinner.primary
-            +spinner.secondary
-            +spinner.tertiary
-            +spinner.quaternary
-            +spinner.white
-            +spinner.gray
-            +spinner.black
-            +spinner.yellow
-            +spinner.olive
-            +spinner.green
-            +spinner.blue
-            +spinner.violet
-            +spinner.orange
-            +spinner.purple
-            +spinner.red
-            +spinner.pink
-            +spinner.teal
-            +spinner.brown
-            +spinner.transparent
-            +spinner.inherit
-            +spinner.base
+  +container-simple
+    +multiple
+      +spinner.primary
+      +spinner.secondary
+      +spinner.tertiary
+      +spinner.quaternary
+      +spinner.white
+      +spinner.gray
+      +spinner.black
+      +spinner.yellow
+      +spinner.olive
+      +spinner.green
+      +spinner.blue
+      +spinner.violet
+      +spinner.orange
+      +spinner.purple
+      +spinner.red
+      +spinner.pink
+      +spinner.teal
+      +spinner.brown
+      +spinner.transparent
+      +spinner.inherit
+      +spinner.base
 
-    +divider Multiple
+  +divider Multiple
 
-    +container-simple
-        +spinner-multiple
+  +container-simple
+    +spinner-multiple
 
-    +divider Custom multiple
+  +divider Custom multiple
 
-    +container-simple
-        +multiple
-            +spinner-multiple("primary", "secondary", "tertiary", "quaternary")
-            +spinner-multiple("blue", "red", "blue", "red")
+  +container-simple
+    +multiple
+      +spinner-multiple([ "primary", "secondary", "tertiary", "quaternary" ])
+      +spinner-multiple([ "blue", "red", "blue", "red" ])
 
-    +divider Sizes
+  +divider Sizes
 
-    +container-simple
-        +multiple
-            +spinner.xxsmall
-            +spinner.xsmall
-            +spinner.small
-            +spinner.medium
-            +spinner.large
-            +spinner.xlarge
-            +spinner.xxlarge
+  +container-simple
+    +multiple
+      +spinner.xxsmall
+      +spinner.xsmall
+      +spinner.small
+      +spinner.medium
+      +spinner.large
+      +spinner.xlarge
+      +spinner.xxlarge

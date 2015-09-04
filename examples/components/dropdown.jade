@@ -1,63 +1,64 @@
-//- bootstrap/dropdown.jade
-
-//- TODO: Maybe add +divider-spacer when appropriate (when there are only buttons for example)
 
 extends ../layout.jade
 
-append main
-    +divider Dropdown
+//- Dropdown
 
-    +multiple
-        +dropdown-btn("Base", "base")
-        +dropdown-btn("Attached", "attached")
-        +dropdown-btn("No tip", "notip")
-        +dropdown-btn-icon("action-settings", "base")
-        +dropdown-btn-icon("action-settings", "base").rounded
-        +dropdown-btn("Dividers", "dividers")
-        +dropdown-btn("Advanced", "advanced")
-        +dropdown-btn("Long text", "long_text")
-        +dropdown-btn("Long text 2", "long_text2")
+//- TODO: Maybe add +divider-spacer when appropriate (when there are only buttons for example)
+
+append main
+  +divider Dropdown
+
+  +multiple
+    +dropdown-btn({ title: "Base", id: "base" })
+    +dropdown-btn({ title: "Attached", id: "attached" })
+    +dropdown-btn({ title: "No tip", id: "notip" })
+    +dropdown-btn({ icon: "settings", id: "base" })
+    +dropdown-btn({ icon: "settings", id: "base" }).rounded
+    +dropdown-btn({ title: "Dividers", id: "dividers" })
+    +dropdown-btn({ title: "Advanced", id: "advanced" })
+    +dropdown-btn({ title: "Long text", id: "long_text" })
+    +dropdown-btn({ title: "Long text 2", id: "long_text2" })
 
 append body
-        +dropdown("base")
-            +container-content
-                +multiple.vertical.stretched.nowrap.joined
-                    +button-simple("#1").sharp Action 1
-                    +button-simple("#2").sharp Action 2
-                    +button-simple("#3").sharp Action 3
-                    +button-simple("#312313").sharp Action 312313
-        +dropdown("attached").attached
-            +container-content
-                p Attached
-        +dropdown("notip").no-tip
-            +container-content
-                p No tip
-        +dropdown("dividers")
-            +container-content
-                +multiple.vertical.stretched.nowrap
-                    +button-simple("#1").sharp Action 1
-                    +divider Divider
-                    +button-simple("#2").sharp Action 2
-                    +divider-linear Divider
-                    +button-simple("#3").sharp Action 3
-                    +divider-linear
-                    +button-simple("#4").sharp Action 4
-                    +divider-linear
-                    +divider-text Section
-                    +button-simple("#5").sharp Action 5
-        +dropdown("advanced")
-            +container-header("Header").inherit
-            +container-content Content
-            +container-footer Footer
-        +dropdown("long_text")
-            +container-header("Lorem ipsum").inherit
-            +container-content
-                +lorem-ipsum
-            +container-footer Footer
-        +dropdown("long_text2")
-            +container-header("Lorem ipsum 2").inherit
-            +container-content
-                +lorem-ipsum
-                +lorem-ipsum
-                +lorem-ipsum
-            +container-footer Footer
+    +dropdown("base")
+      +container-content
+        +multiple.vertical.stretched.nowrap.joined
+          +button-simple.sharp Action 1
+          +button-simple.sharp Action 2
+          +button-simple.sharp Action 3
+          +button-simple.sharp Action 312313
+    +dropdown("attached").attached
+      +container-content
+        p Attached
+    +dropdown("notip").no-tip
+      +container-content
+        p No tip
+    +dropdown("dividers")
+      +container-content
+        +multiple.vertical.stretched.nowrap
+          +button-simple.sharp Action 1
+          +divider Divider
+          +button-simple.sharp Action 2
+          +divider-linear Divider
+          +button-simple.sharp Action 3
+          +divider-linear
+          +button-simple.sharp Action 4
+          +divider-linear
+          +divider-text Section
+          +button-simple.sharp Action 5
+    +dropdown("advanced")
+      +container-header("Header").inherit
+      +container-content Content
+      +container-footer Footer
+    +dropdown("long_text")
+      +container-header("Lorem ipsum").inherit
+      +container-content
+        +lorem-ipsum
+      +container-footer Footer
+    +dropdown("long_text2")
+      +container-header("Lorem ipsum 2").inherit
+      +container-content
+        +lorem-ipsum
+        +lorem-ipsum
+        +lorem-ipsum
+      +container-footer Footer

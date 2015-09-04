@@ -1,75 +1,76 @@
-//- css/colors.jade
 
 extends ../layout.jade
 
+//- Colors
+
 append main
-    +divider Base
+  +divider Base
 
-    +multiple
-        +button-simple.outlined.primary Primary
-        +button-simple.outlined.secondary Secondary
-        +button-simple.outlined.tertiary Tertiary
-        +button-simple.outlined.quaternary Quaternary
-        +button-simple.outlined.white White
-        +button-simple.outlined.gray Gray
-        +button-simple.outlined.black Black
-        +button-simple.outlined.yellow Yellow
-        +button-simple.outlined.olive Olive
-        +button-simple.outlined.green Green
-        +button-simple.outlined.blue Blue
-        +button-simple.outlined.violet Violet
-        +button-simple.outlined.orange Orange
-        +button-simple.outlined.purple Purple
-        +button-simple.outlined.red Red
-        +button-simple.outlined.pink Pink
-        +button-simple.outlined.teal Teal
-        +button-simple.outlined.brown Brown
-        +button-simple.outlined.transparent Transparent
-        +button-simple.outlined.inherit Inherit
-        +button-simple.outlined.base Base
+  +multiple
+    +button-simple.outlined.primary Primary
+    +button-simple.outlined.secondary Secondary
+    +button-simple.outlined.tertiary Tertiary
+    +button-simple.outlined.quaternary Quaternary
+    +button-simple.outlined.white White
+    +button-simple.outlined.gray Gray
+    +button-simple.outlined.black Black
+    +button-simple.outlined.yellow Yellow
+    +button-simple.outlined.olive Olive
+    +button-simple.outlined.green Green
+    +button-simple.outlined.blue Blue
+    +button-simple.outlined.violet Violet
+    +button-simple.outlined.orange Orange
+    +button-simple.outlined.purple Purple
+    +button-simple.outlined.red Red
+    +button-simple.outlined.pink Pink
+    +button-simple.outlined.teal Teal
+    +button-simple.outlined.brown Brown
+    +button-simple.outlined.transparent Transparent
+    +button-simple.outlined.inherit Inherit
+    +button-simple.outlined.base Base
 
-    +divider Gradient
+  +divider Gradient
 
-    +multiple
-        +button-simple.outlined.primary.gradient Primary
-        +button-simple.outlined.secondary.gradient Secondary
-        +button-simple.outlined.tertiary.gradient Tertiary
-        +button-simple.outlined.quaternary.gradient Quaternary
-        +button-simple.outlined.white.gradient White
-        +button-simple.outlined.gray.gradient Gray
-        +button-simple.outlined.black.gradient Black
-        +button-simple.outlined.yellow.gradient Yellow
-        +button-simple.outlined.olive.gradient Olive
-        +button-simple.outlined.green.gradient Green
-        +button-simple.outlined.blue.gradient Blue
-        +button-simple.outlined.violet.gradient Violet
-        +button-simple.outlined.orange.gradient Orange
-        +button-simple.outlined.purple.gradient Purple
-        +button-simple.outlined.red.gradient Red
-        +button-simple.outlined.pink.gradient Pink
-        +button-simple.outlined.teal.gradient Teal
-        +button-simple.outlined.brown.gradient Brown
-        +button-simple.outlined.base.gradient Base
+  +multiple
+    +button-simple.outlined.primary.gradient Primary
+    +button-simple.outlined.secondary.gradient Secondary
+    +button-simple.outlined.tertiary.gradient Tertiary
+    +button-simple.outlined.quaternary.gradient Quaternary
+    +button-simple.outlined.white.gradient White
+    +button-simple.outlined.gray.gradient Gray
+    +button-simple.outlined.black.gradient Black
+    +button-simple.outlined.yellow.gradient Yellow
+    +button-simple.outlined.olive.gradient Olive
+    +button-simple.outlined.green.gradient Green
+    +button-simple.outlined.blue.gradient Blue
+    +button-simple.outlined.violet.gradient Violet
+    +button-simple.outlined.orange.gradient Orange
+    +button-simple.outlined.purple.gradient Purple
+    +button-simple.outlined.red.gradient Red
+    +button-simple.outlined.pink.gradient Pink
+    +button-simple.outlined.teal.gradient Teal
+    +button-simple.outlined.brown.gradient Brown
+    +button-simple.outlined.base.gradient Base
 
-    +divider Text
+  +divider Text
 
-    +container-simple.outlined
-        p.text-primary [PRIMARY] #[+lorem-ipsum(10, 'words')]
-        p.text-secondary [SECONDARY] #[+lorem-ipsum(10, 'words')]
-        p.text-tertiary [TERTIARY] #[+lorem-ipsum(10, 'words')]
-        p.text-quaternary [QUATERNARY] #[+lorem-ipsum(10, 'words')]
-        p.text-white [WHITE] #[+lorem-ipsum(10, 'words')]
-        p.text-gray [GRAY] #[+lorem-ipsum(10, 'words')]
-        p.text-black [BLACK] #[+lorem-ipsum(10, 'words')]
-        p.text-yellow [YELLOW] #[+lorem-ipsum(10, 'words')]
-        p.text-olive [OLIVE] #[+lorem-ipsum(10, 'words')]
-        p.text-green [GREEN] #[+lorem-ipsum(10, 'words')]
-        p.text-blue [BLUE] #[+lorem-ipsum(10, 'words')]
-        p.text-violet [VIOLET] #[+lorem-ipsum(10, 'words')]
-        p.text-orange [ORANGE] #[+lorem-ipsum(10, 'words')]
-        p.text-purple [PURPLE] #[+lorem-ipsum(10, 'words')]
-        p.text-red [RED] #[+lorem-ipsum(10, 'words')]
-        p.text-pink [PINK] #[+lorem-ipsum(10, 'words')]
-        p.text-teal [TEAL] #[+lorem-ipsum(10, 'words')]
-        p.text-brown [BROWN] #[+lorem-ipsum(10, 'words')]
-        p.text-transparent [TRANSPARENT] #[+lorem-ipsum(10, 'words')]
+  +container-simple.outlined
+    p.text-primary [PRIMARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-secondary [SECONDARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-tertiary [TERTIARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-quaternary [QUATERNARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-white [WHITE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-gray [GRAY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-black [BLACK] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-yellow [YELLOW] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-olive [OLIVE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-green [GREEN] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-blue [BLUE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-violet [VIOLET] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-orange [ORANGE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-purple [PURPLE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-red [RED] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-pink [PINK] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-teal [TEAL] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-brown [BROWN] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    p.text-transparent [TRANSPARENT] #[+lorem-ipsum({ type: 'words', amount: 10 })]

@@ -1,89 +1,88 @@
-//- bootstrap/buttons.jade
 
 extends ../layout.jade
 
+//- Buttons
+
 append main
-    +divider Simple
+  +divider Simple
 
-    +button-simple Simple
+  +button-simple Simple
 
-    +divider Normal
+  +divider Normal
 
-    +multiple
-        +button-simple Base
-        +button-simple.sharp Sharp
-        +button-simple.rounded Rounded
-        +button-simple.compact Compact
-        +button-simple.active Active
+  +multiple
+    +button-simple Base
+    +button-simple.sharp Sharp
+    +button-simple.rounded Rounded
+    +button-simple.compact Compact
+    +button-simple.active Active
 
-    +divider Icon
+  +divider Icon
 
-    +multiple
-        +button-icon('settings')
-        +button-icon('settings').rounded
-        +button-simple
-            +icon('settings').left
-            | Settings
-        +button-simple
-            | Settings
-            +icon('settings').right
-        +button
-            +button-left
-                +icon('settings')
-            +button-center Settings
-        +button
-            +button-center Settings
-            +button-right
-                +icon('settings')
-        +button.compact
-            +button-left
-                +icon('settings')
-            +button-center Settings
-        +button.compact
-            +button-center Settings
-            +button-right
-                +icon('settings')
+  +multiple
+    +button-icon('settings')
+    +button-icon('settings').rounded
+    +button-simple
+      +icon('settings')
+      span Settings
+    +button-simple
+      span Settings
+      +icon('settings')
+    +button
+      +button-left
+        +icon('settings')
+      +button-center Settings
+    +button
+      +button-center Settings
+      +button-right
+        +icon('settings')
+    +button.compact
+      +button-left
+        +icon('settings')
+      +button-center Settings
+    +button.compact
+      +button-center Settings
+      +button-right
+        +icon('settings')
 
-    +divider Pointed
+  +divider Pointed
 
-    +multiple
-        +button-pointed-simple Normal
-        +button-pointed-simple.sharp Sharp
-        +button-pointed-simple.primary Colored
-        +button-pointed-simple.outlined Outlined
-        +button-pointed-simple.compact Compact
+  +multiple
+    +button-pointed-simple Normal
+    +button-pointed-simple.sharp Sharp
+    +button-pointed-simple.primary Colored
+    +button-pointed-simple.outlined Outlined
+    +button-pointed-simple.compact Compact
 
+  +divider Ribbons
 
-    +divider Ribbons
+  +container-simple.limited.xs-10
+    +button-ribbons-simple.primary Left & Right
+    +paragraph-sample
+    +button-ribbon-left-simple.secondary Left
+    +paragraph-sample
+    +button-ribbon-right-simple.tertiary Right
+    +paragraph-sample
+    +button-ribbons-simple.outlined Outlined
+    +paragraph-sample
 
-    +container-simple.limited.xs-10
-        +button-ribbons-simple.primary Left & Right
-        +paragraph-sample
-        +button-ribbon-left-simple.secondary Left
-        +paragraph-sample
-        +button-ribbon-right-simple.tertiary Right
-        +paragraph-sample
-        +button-ribbons-simple.outlined Outlined
-        +paragraph-sample
+  +divider Corner
 
-    +divider Corner
+  +container-simple
+    +button-corner("top-left").primary P
+    +button-corner("top-right", "file-file-download").secondary
+    +button-corner("bottom-right", "action-thumb-up").quaternary
+    +button-corner("bottom-left", "action-favorite").tertiary
+    +paragraph-sample
 
-    +container-simple
-        +button-corner("top-left").primary P
-        +button-corner("top-right", "file-file-download").secondary
-        +button-corner("bottom-right", "action-thumb-up").quaternary
-        +button-corner("bottom-left", "action-favorite").tertiary
-        +paragraph-sample
+  +divider Badge
 
-    +divider Badge
+  +label-icon('settings')
+    +button-simple.compact.badge.xsmall.quaternary.top-left 1
+    +button-simple.compact.badge.xsmall.primary.top-right 2
+    +button-simple.compact.badge.xsmall.tertiary.bottom-left 3
+    +button-simple.compact.badge.xsmall.secondary.bottom-right 4
 
-    +multiple
-        +label-icon('settings')
-            +button-simple.compact.badge.xsmall.quaternary.top-left 1
-            +button-simple.compact.badge.xsmall.primary.top-right 2
-            +button-simple.compact.badge.xsmall.tertiary.bottom-left 3
-            +button-simple.compact.badge.xsmall.secondary.bottom-right 4
+  +divider Floating
 
-    +divider Floating
-
-    +button-icon('settings').floating.rounded.secondary.large
+  +button-icon('settings').floating.rounded.secondary.large

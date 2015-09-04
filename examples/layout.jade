@@ -12,7 +12,7 @@ html(class="no-js" lang="en" xml:lang="en" dir="ltr")
     meta(name="viewport" content="width=device-width, initial-scale=1")
 
     +css("/svelto.css")
-    +css("https://fonts.googleapis.com/icon?family=Material+Icons")
+    +css("//fonts.googleapis.com/icon?family=Material+Icons")
     block css
 
     +script.
@@ -42,7 +42,7 @@ html(class="no-js" lang="en" xml:lang="en" dir="ltr")
     block js
     block body-end
       
-    //- INFO: Debug all the errors we found, either via noty, if possible, or via alert
+    //- INFO: Debug all the errors we find, either via noty, if possible, or via alert
     script.
       window.onerror = function ( message, file, line ) {
         try {

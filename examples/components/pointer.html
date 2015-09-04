@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Target
+        </div>
+      </div>
+      <div class="centerer">
+        <div class="square xs-9 target" style="height: 300px;">
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Triggered
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox tap">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox dbltap">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox press">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox dragstart">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox dragmove">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox dragend">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div class="label actionable checkbox flick">
+              <input type="radio"/>
+              <div class="label-center"><span>options.title</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="label-wrp button-wrp">
+        <div onclick="javascript:pointer_uncheck_all ()" class="label actionable">
+          <div class="label-center">Reset
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      $('.target').on ({
+        'pointertap' : pointer_tap,
+        'pointerdbltap' : pointer_dbltap,
+        'pointerpress' : pointer_press,
+        'pointerdragstart' : pointer_dragstart,
+        'pointerdragmove' : pointer_dragmove,
+        'pointerdragend' : pointer_dragend,
+        'pointerflick'  : pointer_flick
+      });
+      
+      function pointer_uncheck_all () {
+        $('.checkbox').checkbox ( 'uncheck' );
+      }
+      
+      function pointer_check ( name ) {
+        $('.checkbox.' + name).checkbox ( 'check' );
+      }
+      
+      function pointer_tap () {
+        pointer_check ( 'tap' );
+      }
+      
+      function pointer_dbltap () {
+        pointer_check ( 'dbltap' );
+      }
+      
+      function pointer_press () {
+        pointer_check ( 'press' );
+      }
+      
+      function pointer_dragstart () {
+        pointer_uncheck_all ();
+        pointer_check ( 'dragstart' );
+      }
+      
+      function pointer_dragmove ( event ) {
+        event.preventDefault ();
+        pointer_check ( 'dragmove' );
+      }
+      
+      function pointer_dragend () {
+        pointer_check ( 'dragend' );
+      }
+      
+      function pointer_flick  ( event, data ) {
+        pointer_check ( 'flick ' );
+        $.noty ( "Flick orientation: " + data.orientation + ", direction: " + data.direction );
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

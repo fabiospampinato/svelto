@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Table
+        </div>
+      </div>
+      <div class="container expander">
+        <div class="container-content">
+          <table>
+            <thead>
+              <tr>
+                <th>First</th>
+                <th>Second</th>
+                <th>Third</th>
+                <th>Fourth</th>
+              </tr>
+            </thead>
+            <tfoot></tfoot>
+            <tbody>
+              <tr class="empty hidden">
+                <td colspan="100%">Empty
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:table_init()" class="label actionable outlined">
+              <div class="label-center">Init
+              </div>
+            </div>
+          </div>
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="id_add" required="required" class="text-field"/>
+                <label>ID...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="first_add" required="required" class="text-field"/>
+                <label>First...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="second_add" required="required" class="text-field"/>
+                <label>Second...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="third_add" required="required" class="text-field"/>
+                <label>Third...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="fourth_add" required="required" class="text-field"/>
+                <label>Fourth...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:table_row_add ()" class="label actionable outlined">
+                  <div class="label-center">Add
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="id_update" required="required" class="text-field"/>
+                <label>ID...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="first_update" required="required" class="text-field"/>
+                <label>First...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="second_update" required="required" class="text-field"/>
+                <label>Second...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="third_update" required="required" class="text-field"/>
+                <label>Third...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="fourth_update" required="required" class="text-field"/>
+                <label>Fourth...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:table_row_update ()" class="label actionable outlined">
+                  <div class="label-center">Update
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp white outlined no-floating">
+                <input type="text" value="" name="id_remove" required="required" class="text-field"/>
+                <label>ID...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:table_row_remove ()" class="label actionable outlined">
+                  <div class="label-center">Remove
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:table_clear ()" class="label actionable outlined">
+              <div class="label-center">Clear
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      var tableHelper;
+      
+      function table_init () {
+      
+        tableHelper = $('table').tableHelper ( 'instance' );
+      
+      }
+      
+      function table_row_add () {
+      
+        if ( tableHelper ) {
+      
+          var id = $('input[name="id_add"]').val (),
+              first = $('input[name="first_add"]').val (),
+              second = $('input[name="second_add"]').val (),
+              third = $('input[name="third_add"]').val (),
+              fourth = $('input[name="fourth_add"]').val ();
+      
+          tableHelper.add ( id, first, second, third, fourth );
+      
+        } else {
+      
+          $.noty ( 'You should init the tableHelper before' );
+      
+        }
+      
+      }
+      
+      function table_row_update () {
+      
+        if ( tableHelper ) {
+      
+          var id = $('input[name="id_update"]').val (),
+              first = $('input[name="first_update"]').val (),
+              second = $('input[name="second_update"]').val (),
+              third = $('input[name="third_update"]').val (),
+              fourth = $('input[name="fourth_update"]').val ();
+      
+          tableHelper.update ( id, first, second, third, fourth );
+      
+        } else {
+      
+          $.noty ( 'You should init the tableHelper before' );
+      
+        }
+      
+      }
+      
+      function table_row_remove () {
+      
+        if ( tableHelper ) {
+      
+          var id = $('input[name="id_remove"]').val ();
+      
+          tableHelper.remove ( id );
+      
+        } else {
+      
+          $.noty ( 'You should init the tableHelper before' );
+      
+        }
+      
+      }
+      
+      function table_clear () {
+      
+        if ( tableHelper ) {
+      
+          tableHelper.clear ();
+      
+        } else {
+      
+          $.noty ( 'You should init the tableHelper before' );
+      
+        }
+      
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

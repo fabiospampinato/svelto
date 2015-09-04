@@ -1,49 +1,50 @@
-//- decorators/outline.jade
 
 extends ../layout.jade
 
+//- Outline
+
 append main
-    +divider Outlined
+  +divider Outlined
 
-    +container-simple.outlined
-        +multiple
-            +label-simple.outlined Label
-            +button-simple.outlined Button
-            +label-icon('settings').outlined
-            +input({label: "Placeholder...", value: "Input"}).outlined.white
-            +textarea({label: "Placeholder..."}).outlined.white Textarea
-            +multiple.joined
-                +input({label: "Placeholder...", value: "Input"}).outlined.no-floating.white
-                +button-icon('settings').outlined
-
-    +divider Styles
-
+  +container-simple.outlined
     +multiple
-        +label-simple.outlined.outlined-solid Solid
-        +label-simple.outlined.outlined-dotted Dotted
-        +label-simple.outlined.outlined-dashed Dashed
+      +label-simple.outlined Label
+      +button-simple.outlined Button
+      +label-icon('settings').outlined
+      +input({ label: "Placeholder...", value: "Input" }).outlined.white
+      +textarea({ label: "Placeholder..." }).outlined.white Textarea
+      +multiple.joined
+        +input({ label: "Placeholder...", value: "Input" }).outlined.no-floating.white
+        +button-icon('settings').outlined
 
-    +divider Colors
+  +divider Styles
 
-    +multiple
-        +label-simple.outlined.outlined-primary Primary
-        +label-simple.outlined.outlined-secondary Secondary
-        +label-simple.outlined.outlined-tertiary Tertiary
-        +label-simple.outlined.outlined-quaternary Quaternary
-        +label-simple.outlined.outlined-white White
-        +label-simple.outlined.outlined-gray Gray
-        +label-simple.outlined.outlined-black Black
-        +label-simple.outlined.outlined-yellow Yellow
-        +label-simple.outlined.outlined-olive Olive
-        +label-simple.outlined.outlined-green Green
-        +label-simple.outlined.outlined-blue Blue
-        +label-simple.outlined.outlined-violet Violet
-        +label-simple.outlined.outlined-orange Orange
-        +label-simple.outlined.outlined-purple Purple
-        +label-simple.outlined.outlined-red Red
-        +label-simple.outlined.outlined-pink Pink
-        +label-simple.outlined.outlined-teal Teal
-        +label-simple.outlined.outlined-brown Brown
-        +label-simple.outlined.outlined-transparent Transparent
-        +label-simple.outlined.outlined-inherit Inherit
-        +label-simple.outlined.outlined-base Base
+  +multiple
+    +label-simple.outlined.outlined-solid Solid
+    +label-simple.outlined.outlined-dotted Dotted
+    +label-simple.outlined.outlined-dashed Dashed
+
+  +divider Colors
+
+  +multiple
+    +label-simple.outlined.outlined-primary Primary
+    +label-simple.outlined.outlined-secondary Secondary
+    +label-simple.outlined.outlined-tertiary Tertiary
+    +label-simple.outlined.outlined-quaternary Quaternary
+    +label-simple.outlined.outlined-white White
+    +label-simple.outlined.outlined-gray Gray
+    +label-simple.outlined.outlined-black Black
+    +label-simple.outlined.outlined-yellow Yellow
+    +label-simple.outlined.outlined-olive Olive
+    +label-simple.outlined.outlined-green Green
+    +label-simple.outlined.outlined-blue Blue
+    +label-simple.outlined.outlined-violet Violet
+    +label-simple.outlined.outlined-orange Orange
+    +label-simple.outlined.outlined-purple Purple
+    +label-simple.outlined.outlined-red Red
+    +label-simple.outlined.outlined-pink Pink
+    +label-simple.outlined.outlined-teal Teal
+    +label-simple.outlined.outlined-brown Brown
+    +label-simple.outlined.outlined-transparent Transparent
+    +label-simple.outlined.outlined-inherit Inherit
+    +label-simple.outlined.outlined-base Base

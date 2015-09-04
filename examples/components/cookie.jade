@@ -1,49 +1,50 @@
-//- tools/cookie.jade
 
 extends ../layout.jade
 
+//- Cookie
+
 append main
-    +divider Cookie
+  +divider Cookie
 
-    +multiple.fluid.joined
-        +input({name: "cookie_key", label: "Key..."}).white.outlined.no-floating
-        +input({name: "cookie_value", label: "Value..."}).white.outlined.no-floating
-        +input({name: "cookie_end", label: "End..."}).white.outlined.no-floating
-        +input({name: "cookie_path", label: "Path..."}).white.outlined.no-floating
-        +input({name: "cookie_domain", label: "Domain..."}).white.outlined.no-floating
-        +input({name: "cookie_secure", label: "Secure..."}).white.outlined.no-floating
+  +multiple.fluid.joined
+    +input({ name: "cookie_key", label: "Key..." }).white.outlined.no-floating
+    +input({ name: "cookie_value", label: "Value..." }).white.outlined.no-floating
+    +input({ name: "cookie_end", label: "End..." }).white.outlined.no-floating
+    +input({ name: "cookie_path", label: "Path..." }).white.outlined.no-floating
+    +input({ name: "cookie_domain", label: "Domain..." }).white.outlined.no-floating
+    +input({ name: "cookie_secure", label: "Secure..." }).white.outlined.no-floating
 
-    +divider Actions
+  +divider Actions
 
-    +multiple
-        +button-simple("cookie_get()").outlined Get
-        +button-simple("cookie_set()").outlined Set
-        +button-simple("cookie_remove()").outlined Remove
-        +button-simple("cookie_has()").outlined Has
-        +button-simple("cookie_keys()").outlined Keys
+  +multiple
+    +button-simple("cookie_get ()").outlined Get
+    +button-simple("cookie_set ()").outlined Set
+    +button-simple("cookie_remove ()").outlined Remove
+    +button-simple("cookie_has ()").outlined Has
+    +button-simple("cookie_keys ()").outlined Keys
 
 append body-end
-    +script.
-        function cookie_input ( name ) {
-            return $('input[name="cookie_' + name + '"]').val ();
-        }
+  +script.
+    function cookie_input ( name ) {
+      return $('input[name="cookie_' + name + '"]').val ();
+    }
 
-        function cookie_get () {
-            $.noty ( '' + $.cookie.get ( cookie_input ( 'key' ) ) );
-        }
+    function cookie_get () {
+      $.noty ( '' + $.cookie.get ( cookie_input ( 'key' ) ) );
+    }
 
-        function cookie_set () {
-            $.cookie.set ( cookie_input ( 'key' ), cookie_input ( 'value' ), Number(cookie_input ( 'end' )), cookie_input ( 'path' ), cookie_input ( 'domain' ), cookie_input ( 'secure' ) );
-        }
+    function cookie_set () {
+      $.cookie.set ( cookie_input ( 'key' ), cookie_input ( 'value' ), Number(cookie_input ( 'end' )), cookie_input ( 'path' ), cookie_input ( 'domain' ), cookie_input ( 'secure' ) );
+    }
 
-        function cookie_remove () {
-            $.cookie.remove ( cookie_input ( 'key' ), cookie_input ( 'path' ), cookie_input ( 'domain' ) );
-        }
+    function cookie_remove () {
+      $.cookie.remove ( cookie_input ( 'key' ), cookie_input ( 'path' ), cookie_input ( 'domain' ) );
+    }
 
-        function cookie_has () {
-            $.noty ( '' + $.cookie.has ( cookie_input ( 'key' ) ) );
-        }
+    function cookie_has () {
+      $.noty ( '' + $.cookie.has ( cookie_input ( 'key' ) ) );
+    }
 
-        function cookie_keys () {
-            $.noty ( $.cookie.keys ().join ( ' - ' ) );
-        }
+    function cookie_keys () {
+      $.noty ( $.cookie.keys ().join ( ' - ' ) );
+    }

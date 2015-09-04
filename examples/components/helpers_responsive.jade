@@ -1,61 +1,62 @@
-//- helpers_responsive.jade
 
 extends ../layout.jade
 
+//- Helpers responsive
+
 append main
-    +divider Visible on...
+  +divider Visible on...
 
-    +multiple.equal
-        div
-            +container-simple.outlined.hidden-xs.visible-sm-block X-Small
-            +container-simple.outlined.green.hidden-sm X-Small
-        div
-            +container-simple.outlined.hidden-sm.visible-md-block Small
-            +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-md Small
-        div
-            +container-simple.outlined.hidden-md.visible-lg-block Medium
-            +container-simple.outlined.green.hidden-xs.visible-md-block.hidden-lg Medium
-        div
-            +container-simple.outlined.hidden-lg.visible-xl-block Large
-            +container-simple.outlined.green.hidden-xs.visible-lg-block.hidden-xl Large
-        div
-            +container-simple.outlined.hidden-xl X-Large
-            +container-simple.outlined.green.hidden-xs.visible-xl-block X-Large
+  +multiple.equal
+    div
+      +container-simple.outlined.hidden-xs.visible-sm-block X-Small
+      +container-simple.outlined.green.hidden-sm X-Small
+    div
+      +container-simple.outlined.hidden-sm.visible-md-block Small
+      +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-md Small
+    div
+      +container-simple.outlined.hidden-md.visible-lg-block Medium
+      +container-simple.outlined.green.hidden-xs.visible-md-block.hidden-lg Medium
+    div
+      +container-simple.outlined.hidden-lg.visible-xl-block Large
+      +container-simple.outlined.green.hidden-xs.visible-lg-block.hidden-xl Large
+    div
+      +container-simple.outlined.hidden-xl X-Large
+      +container-simple.outlined.green.hidden-xs.visible-xl-block X-Large
 
-    +divider Visible on...
+  +divider Visible on...
 
-    +multiple.equal
-        +multiple.vertical.fluid
-            div
-                +container-simple.outlined.hidden-xs.visible-md-block X-Small and Small
-                +container-simple.outlined.green.hidden-md X-Small and Small
-            div
-                +container-simple.outlined.hidden-xs.visible-sm-block.hidden-md.visible-lg-block X-Small and Medium
-                +container-simple.outlined.green.hidden-sm.visible-md-block.hidden-lg X-Small and Medium
-            div
-                +container-simple.outlined.hidden-xs.visible-sm-block.hidden-lg.visible-xl-block X-Small and Large
-                +container-simple.outlined.green.hidden-sm.visible-lg-block.hidden-xl X-Small and Large
-            div
-                +container-simple.outlined.hidden-xs.visible-sm-block.hidden-xl X-Small and X-Large
-                +container-simple.outlined.green.hidden-sm.visible-xl-block X-Small and X-Large
-        +multiple.vertical.fluid
-            div
-                +container-simple.outlined.hidden-sm.visible-lg-block Small and Medium
-                +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-lg Small and Medium
-            div
-                +container-simple.outlined.hidden-sm.visible-md-block.hidden-lg.visible-xl-block Small and Large
-                +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-md.visible-lg-block.hidden-xl Small and Large
-            div
-                +container-simple.outlined.hidden-sm.visible-md-block.hidden-xl Small and X-Large
-                +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-md.visible-xl-block Small and X-Large
-        +multiple.vertical.fluid
-            div
-                +container-simple.outlined.hidden-md.visible-xl-block Medium and Large
-                +container-simple.outlined.green.hidden-xs.visible-md-block.hidden-xl Medium and Large
-            div
-                +container-simple.outlined.hidden-md.visible-lg-block.hidden-xl Medium and X-Large
-                +container-simple.outlined.green.hidden-xs.visible-md-block.hidden-lg.visible-xl-block Medium and X-Large
-        +multiple.vertical.fluid
-            div
-                +container-simple.outlined.hidden-lg Large and X-Large
-                +container-simple.outlined.green.hidden-xs.visible-lg-block Large and X-Large
+  +multiple.equal
+    +multiple.vertical.fluid
+      div
+        +container-simple.outlined.hidden-xs.visible-md-block X-Small and Small
+        +container-simple.outlined.green.hidden-md X-Small and Small
+      div
+        +container-simple.outlined.hidden-xs.visible-sm-block.hidden-md.visible-lg-block X-Small and Medium
+        +container-simple.outlined.green.hidden-sm.visible-md-block.hidden-lg X-Small and Medium
+      div
+        +container-simple.outlined.hidden-xs.visible-sm-block.hidden-lg.visible-xl-block X-Small and Large
+        +container-simple.outlined.green.hidden-sm.visible-lg-block.hidden-xl X-Small and Large
+      div
+        +container-simple.outlined.hidden-xs.visible-sm-block.hidden-xl X-Small and X-Large
+        +container-simple.outlined.green.hidden-sm.visible-xl-block X-Small and X-Large
+    +multiple.vertical.fluid
+      div
+        +container-simple.outlined.hidden-sm.visible-lg-block Small and Medium
+        +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-lg Small and Medium
+      div
+        +container-simple.outlined.hidden-sm.visible-md-block.hidden-lg.visible-xl-block Small and Large
+        +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-md.visible-lg-block.hidden-xl Small and Large
+      div
+        +container-simple.outlined.hidden-sm.visible-md-block.hidden-xl Small and X-Large
+        +container-simple.outlined.green.hidden-xs.visible-sm-block.hidden-md.visible-xl-block Small and X-Large
+    +multiple.vertical.fluid
+      div
+        +container-simple.outlined.hidden-md.visible-xl-block Medium and Large
+        +container-simple.outlined.green.hidden-xs.visible-md-block.hidden-xl Medium and Large
+      div
+        +container-simple.outlined.hidden-md.visible-lg-block.hidden-xl Medium and X-Large
+        +container-simple.outlined.green.hidden-xs.visible-md-block.hidden-lg.visible-xl-block Medium and X-Large
+    +multiple.vertical.fluid
+      div
+        +container-simple.outlined.hidden-lg Large and X-Large
+        +container-simple.outlined.green.hidden-xs.visible-lg-block Large and X-Large

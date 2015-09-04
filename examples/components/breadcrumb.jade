@@ -1,88 +1,89 @@
-//- components/breadcrumb.jade
 
 extends ../layout.jade
 
+//- Breadcrumb.jade
+
 append main
-    +divider Base
+  +divider Base
 
-    +container-simple
-        +breadcrumb
-            a(href="#", title="Link 1") Link 1
-            +breadcrumb-divider.small
-            a(href="#", title="Link 2") Link 2
-            +breadcrumb-divider.small
-            a(href="#", title="Link 3").current Link 3
-            +breadcrumb-divider.small
-            a(href="#", title="Link 4") Link 4
-            +breadcrumb-divider.small
-            a(href="#", title="Link 5") Link 5
+  +container-simple
+    +breadcrumb
+      +a(title="Link 1") Link 1
+      +breadcrumb-divider.small
+      +a(title="Link 2") Link 2
+      +breadcrumb-divider.small
+      +a(title="Link 3").current Link 3
+      +breadcrumb-divider.small
+      +a(title="Link 4") Link 4
+      +breadcrumb-divider.small
+      +a(title="Link 5") Link 5
 
-    +divider Text
+  +divider Text
 
-    +container-simple
-        +breadcrumb
-            a(href="#", title="Link 1") Link 1
-            +breadcrumb-divider /
-            a(href="#", title="Link 2") Link 2
-            +breadcrumb-divider /
-            a(href="#", title="Link 3").current Link 3
-            +breadcrumb-divider /
-            a(href="#", title="Link 4") Link 4
-            +breadcrumb-divider /
-            a(href="#", title="Link 5") Link 5
+  +container-simple
+    +breadcrumb
+      +a(title="Link 1") Link 1
+      +breadcrumb-divider /
+      +a(title="Link 2") Link 2
+      +breadcrumb-divider /
+      +a(title="Link 3").current Link 3
+      +breadcrumb-divider /
+      +a(title="Link 4") Link 4
+      +breadcrumb-divider /
+      +a(title="Link 5") Link 5
 
-    +divider Custom icon divider
+  +divider Custom icon divider
 
-    +container-simple
-        +breadcrumb
-            a(href="#", title="Link 1") Link 1
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 2") Link 2
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 3").current Link 3
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 4") Link 4
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 5") Link 5
+  +container-simple
+    +breadcrumb
+      +a(title="Link 1") Link 1
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 2") Link 2
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 3").current Link 3
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 4") Link 4
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 5") Link 5
 
-    +divider Base - Highlighted
+  +divider Base - Highlighted
 
-    +container-simple
-        +breadcrumb.highlighted
-            a(href="#", title="Link 1") Link 1
-            +breadcrumb-divider.small
-            a(href="#", title="Link 2") Link 2
-            +breadcrumb-divider.small
-            a(href="#", title="Link 3").current Link 3
-            +breadcrumb-divider.small
-            a(href="#", title="Link 4") Link 4
-            +breadcrumb-divider.small
-            a(href="#", title="Link 5") Link 5
+  +container-simple
+    +breadcrumb.highlighted
+      +a(title="Link 1") Link 1
+      +breadcrumb-divider.small
+      +a(title="Link 2") Link 2
+      +breadcrumb-divider.small
+      +a(title="Link 3").current Link 3
+      +breadcrumb-divider.small
+      +a(title="Link 4") Link 4
+      +breadcrumb-divider.small
+      +a(title="Link 5") Link 5
 
-    +divider Text - Highlighted
+  +divider Text - Highlighted
 
-    +container-simple
-        +breadcrumb.highlighted
-            a(href="#", title="Link 1") Link 1
-            +breadcrumb-divider /
-            a(href="#", title="Link 2") Link 2
-            +breadcrumb-divider /
-            a(href="#", title="Link 3").current Link 3
-            +breadcrumb-divider /
-            a(href="#", title="Link 4") Link 4
-            +breadcrumb-divider /
-            a(href="#", title="Link 5") Link 5
+  +container-simple
+    +breadcrumb.highlighted
+      +a(title="Link 1") Link 1
+      +breadcrumb-divider /
+      +a(title="Link 2") Link 2
+      +breadcrumb-divider /
+      +a(title="Link 3").current Link 3
+      +breadcrumb-divider /
+      +a(title="Link 4") Link 4
+      +breadcrumb-divider /
+      +a(title="Link 5") Link 5
 
-    +divider Custom icon divider - Highlighted
+  +divider Custom icon divider - Highlighted
 
-    +container-simple
-        +breadcrumb.highlighted
-            a(href="#", title="Link 1") Link 1
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 2") Link 2
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 3").current Link 3
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 4") Link 4
-            +breadcrumb-divider("action-trending-neutral").small
-            a(href="#", title="Link 5") Link 5
+  +container-simple
+    +breadcrumb.highlighted
+      +a(title="Link 1") Link 1
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 2") Link 2
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 3").current Link 3
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 4") Link 4
+      +breadcrumb-divider("action-trending-neutral").small
+      +a(title="Link 5") Link 5

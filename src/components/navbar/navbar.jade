@@ -27,7 +27,7 @@ mixin navbar-btn(options)
 mixin navbar(options)
   - options.direction = options.direction || "left";
   - options.slim = options.slim || false;
-  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" ))
+  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )))
     +container(id="navbar-" + options.id)&attributes(attributes).navbar
       block
     .background.navbar-closer

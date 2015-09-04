@@ -1,66 +1,67 @@
-//- bootstrap/navbar.jade
 
 extends ../layout.jade
 
+//- Navbar
+
 append main
-    +divider Normal
+  +divider Normal
 
-    +multiple
-        +navbar-btn("Left", "navigation-chevron-left", "left")
-        +navbar-btn("Top", "navigation-expand-less", "top")
-        +navbar-btn("Bottom", "navigation-expand-more", "bottom")
-        +navbar-btn("Right", "navigation-chevron-right", "right")
+  +multiple
+    +navbar-btn({ title: "Left", icon: "chevron_left", id: "left" })
+    +navbar-btn({ title: "Top", icon: "expand_less", id: "top" })
+    +navbar-btn({ title: "Bottom", icon: "expand_more", id: "bottom" })
+    +navbar-btn({ title: "Right",icon: "chevron_right", id: "right" })
 
-    +divider Slim
+  +divider Slim
 
-    +multiple
-        +navbar-btn(false, "navigation-chevron-left", "left-slim")
-        +navbar-btn(false, "navigation-expand-less", "top-slim")
-        +navbar-btn(false, "navigation-expand-more", "bottom-slim")
-        +navbar-btn(false, "navigation-chevron-right", "right-slim")
+  +multiple
+    +navbar-btn({ icon: "chevron_left", id: "left-slim" })
+    +navbar-btn({ icon: "expand_less", id: "top-slim" })
+    +navbar-btn({ icon: "expand_more", id: "bottom-slim" })
+    +navbar-btn({ icon: "chevron_right", id: "right-slim" })
 
-    +divider Attached
+  +divider Attached
 
-    +multiple
-        +navbar-btn("Left", "navigation-chevron-left", "left-attached")
-        +navbar-btn(false, "navigation-expand-less", "top-attached")
-        +navbar-btn(false, "navigation-expand-more", "bottom-attached")
-        +navbar-btn("Right", "navigation-chevron-right", "right-attached")
+  +multiple
+    +navbar-btn({ title: "Left", icon: "chevron_left", id: "left-attached" })
+    +navbar-btn({ icon: "expand_less", id: "top-attached" })
+    +navbar-btn({ icon: "expand_more", id: "bottom-attached" })
+    +navbar-btn({ title: "Right", icon: "chevron_right", id: "right-attached" })
 
-    +divider Actions
+  +divider Actions
 
-    +multiple
-        +button-simple("navbar_toggle_fixed_header()") Toggle fixed header
-        +button-simple("navbar_remove_header()") Remove header
-        +button-simple("navbar_remove_footer()") Remove footer
+  +multiple
+    +button-simple("navbar_toggle_fixed_header ()") Toggle fixed header
+    +button-simple("navbar_remove_header ()") Remove header
+    +button-simple("navbar_remove_footer ()") Remove footer
 
 append body-start
-    +navbar("left-attached", "left", false, "lg" ) Left Attached
-    +navbar("top-attached", "top", true, "lg" ) Top Attached
-    +navbar("bottom-attached", "bottom", true, "lg" ) Bottom attached
-    +navbar("right-attached", "right", false, "lg" ) Right Attached
+  +navbar({ id: "left-attached", direction: "left", slim: false, attached: "attached-lg" }) Left Attached
+  +navbar({ id: "top-attached", direction: "top", slim: true, attached: "attached-lg" }) Top Attached
+  +navbar({ id: "bottom-attached", direction: "bottom", slim: true, attached: "attached-lg" }) Bottom attached
+  +navbar({ id: "right-attached", direction: "right", slim: false, attached: "attached-lg" }) Right Attached
 
 append body
-    +navbar("left", "left") Left
-    +navbar("top", "top") Top
-    +navbar("bottom", "bottom") Bottom
-    +navbar("right", "right") Right
+  +navbar({ id: "left", direction: "left" }) Left
+  +navbar({ id: "top", direction: "top" }) Top
+  +navbar({ id: "bottom", direction: "bottom" }) Bottom
+  +navbar({ id: "right", direction: "right" }) Right
 
-    +navbar("left-slim", "left", true) Left slim
-    +navbar("top-slim", "top", true) Top slim
-    +navbar("bottom-slim", "bottom", true) Bottom slim
-    +navbar("right-slim", "right", true) Right slim
+  +navbar({ id: "left-slim", direction: "left", slim: true }) Left slim
+  +navbar({ id: "top-slim", direction: "top", slim: true }) Top slim
+  +navbar({ id: "bottom-slim", direction: "bottom", slim: true }) Bottom slim
+  +navbar({ id: "right-slim", direction: "right", slim: true }) Right slim
 
 append body-end
-    +script.
-        function navbar_toggle_fixed_header () {
-            $('body').toggleClass ( 'fixed-header' );
-        }
+  +script.
+    function navbar_toggle_fixed_header () {
+      $('body').toggleClass ( 'fixed-header' );
+    }
 
-        function navbar_remove_header () {
-            $('header').remove ();
-        }
+    function navbar_remove_header () {
+      $('header').remove ();
+    }
 
-        function navbar_remove_footer () {
-            $('footer').remove ();
-        }
+    function navbar_remove_footer () {
+      $('footer').remove ();
+    }

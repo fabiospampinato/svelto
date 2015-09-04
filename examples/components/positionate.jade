@@ -1,67 +1,68 @@
-//- tools/positionate.jade
-
-//- TODO: add different kind of anchors and positionables, and select those to use using a radio, just to test different configurations (o magari crearne 2 e switchare tra i 2, uno diventa l'anchor e l'altro il positionable)
 
 extends ../layout.jade
 
+//- Positionate
+
+//- TODO: add different kind of anchors and positionables, and select those to use using a radio, just to test different configurations (o magari crearne 2 e switchare tra i 2, uno diventa l'anchor e l'altro il positionable)
+
 append main
-    +divider Anchor
+  +divider Anchor
 
-    +square-sample.anchor.draggable(style="z-index: 100;")
-    +square-sample.positionable.secondary(style="position:fixed; top:0; left: 0; z-index: 101;")
+  +square-sample(style="z-index: 100;").anchor.draggable
+  +square-sample(style="position:fixed; top:0; left: 0; z-index: 101;").positionable.secondary
 
-    +divider Positionate
+  +divider Positionate
 
-    +multiple
-        +checkbox("live", "Live", 1).live
-        +button-simple("positionate2anchor(false)") Auto
-        +button-simple("positionate2anchor('top')") Top
-        +button-simple("positionate2anchor('bottom')") Bottom
-        +button-simple("positionate2anchor('left')") Left
-        +button-simple("positionate2anchor('right')") Right
-        +button-simple("positionate2axis('x')") X Axis
-        +button-simple("positionate2axis('y')") Y Axis
-        +button-simple("positionate2diraxis('x', 'top')") X Top
-        +button-simple("positionate2diraxis('y', 'left')") Y Left
-        +multiple.joined
-            +input({name: "input_x", label: "X axis..."}).no-floating.white
-            +input({name: "input_y", label: "Y axis..."}).no-floating.white
-            +button-simple("positionate2coordinates()").secondary Coordinates
+  +multiple
+    +checkbox({ name: "live", title: "Live", value: 1 }).live
+    +button-simple("positionate2anchor ( false )") Auto
+    +button-simple("positionate2anchor ( 'top' )") Top
+    +button-simple("positionate2anchor ( 'bottom' )") Bottom
+    +button-simple("positionate2anchor ( 'left' )") Left
+    +button-simple("positionate2anchor ( 'right' )") Right
+    +button-simple("positionate2axis ( 'x' )") X Axis
+    +button-simple("positionate2axis ( 'y' )") Y Axis
+    +button-simple("positionate2diraxis ( 'x', 'top' )") X Top
+    +button-simple("positionate2diraxis ( 'y', 'left' )") Y Left
+    +multiple.joined
+      +input({ name: "input_x", label: "X axis..." }).no-floating.white
+      +input({ name: "input_y", label: "Y axis..." }).no-floating.white
+      +button-simple("positionate2coordinates ()").secondary Coordinates
 
 append body-end
-    +noty({body: "The anchor is draggable"})
-    +script.
-        var live_update = false,
-            live_triggered = false;
+  +noty({ body: "The anchor is draggable" })
+  +script.
+    var live_update = false,
+      live_triggered = false;
 
-        function positionate2anchor ( direction ) {
-            $('.positionable').positionate ({ $anchor: $('.anchor'), direction: direction });
-        }
-        function positionate2axis ( axis ) {
-            $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis });
-        }
-        function positionate2diraxis ( axis, direction ) {
-            $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis, direction: direction });
-        }
-        function positionate2coordinates () {
-            $('.positionable').positionate ({ point: { x: Number($('input[name="input_x"]').val ()), y: Number($('input[name="input_y"]').val ()) } });
-        }
-        function positionateLive () {
-            if ( live_update ) {
-                $('.positionable').positionate ({ $anchor: $('.anchor') });
-            }
-        }
+    function positionate2anchor ( direction ) {
+      $('.positionable').positionate ({ $anchor: $('.anchor'), direction: direction });
+    }
+    function positionate2axis ( axis ) {
+      $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis });
+    }
+    function positionate2diraxis ( axis, direction ) {
+      $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis, direction: direction });
+    }
+    function positionate2coordinates () {
+      $('.positionable').positionate ({ point: { x: Number($('input[name="input_x"]').val ()), y: Number($('input[name="input_y"]').val ()) } });
+    }
+    function positionateLive () {
+      if ( live_update ) {
+        $('.positionable').positionate ({ $anchor: $('.anchor') });
+      }
+    }
 
-        $('.live').on ({
-            'checkbox:checked': function () {
-                live_update = true;
-                positionateLive ();
-                if ( !live_triggered ) {
-                    live_triggered = true;
-                    $('.anchor').on ( $.Pointer.dragmove, positionateLive );
-                }
-            },
-            'checkbox:unchecked': function () {
-                live_update = false;
-            }
-        })
+    $('.live').on ({
+      'checkbox:checked': function () {
+        live_update = true;
+        positionateLive ();
+        if ( !live_triggered ) {
+          live_triggered = true;
+          $('.anchor').on ( $.Pointer.dragmove, positionateLive );
+        }
+      },
+      'checkbox:unchecked': function () {
+        live_update = false;
+      }
+    })

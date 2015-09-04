@@ -1,50 +1,52 @@
-//- components/placeholder.jade
 
 extends ../layout.jade
 
+//- Placeholder
+
 append main
-    +divider Advertisements - Horizontal
+  +divider Advertisements - Horizontal
 
-    +container-simple
-        +placeholder(728, 90)
-        +placeholder(320, 100)
-        +placeholder(970, 250)
-        +placeholder(970, 90)
-        +placeholder(468, 60)
-        +placeholder(320, 50)
-        +placeholder(234, 60)
+  +container-simple
+    +placeholder({ width: 728, height: 90 })
+    +placeholder({ width: 320, height: 100 })
+    +placeholder({ width: 970, height: 250 })
+    +placeholder({ width: 970, height: 90 })
+    +placeholder({ width: 468, height: 60 })
+    +placeholder({ width: 320, height: 50 })
+    +placeholder({ width: 234, height: 60 })
 
-    +divider Advertisements - Vertical
+  +divider Advertisements - Vertical
 
-    +container-simple
-        +placeholder(300, 600)
-        +placeholder(300, 1050)
-        +placeholder(160, 600)
-        +placeholder(120, 600)
-        +placeholder(120, 240)
+  +container-simple
+    +placeholder({ width: 300, height: 600 })
+    +placeholder({ width: 300, height: 1050 })
+    +placeholder({ width: 160, height: 600 })
+    +placeholder({ width: 120, height: 600 })
+    +placeholder({ width: 120, height: 240 })
 
-    +divider Advertisements - Square-like
+  +divider Advertisements - Square-like
 
-    +container-simple
-        +placeholder(336, 280)
-        +placeholder(300, 250)
-        +placeholder(250, 250)
-        +placeholder(200, 200)
-        +placeholder(180, 150)
-        +placeholder(125, 125)
+  +container-simple
+    +placeholder({ width: 336, height: 280 })
+    +placeholder({ width: 300, height: 250 })
+    +placeholder({ width: 250, height: 250 })
+    +placeholder({ width: 200, height: 200 })
+    +placeholder({ width: 180, height: 150 })
+    +placeholder({ width: 125, height: 125 })
 
-    +divider Advertisements - Rectangular
+  +divider Advertisements - Rectangular
 
-    +container-simple
-        +placeholder(728, 15)
-        +placeholder(468, 15)
-        +placeholder(200, 90)
-        +placeholder(180, 90)
-        +placeholder(160, 90)
-        +placeholder(120, 90)
+  +container-simple
+    +placeholder({ width: 728, height: 15 })
+    +placeholder({ width: 468, height: 15 })
+    +placeholder({ width: 200, height: 90 })
+    +placeholder({ width: 180, height: 90 })
+    +placeholder({ width: 160, height: 90 })
+    +placeholder({ width: 120, height: 90 })
 
-    +divider Custom
+  +divider Custom
 
-    +container-simple
-        +placeholder(600, 50) 600px - 50px - Custom
-        +placeholder('75%', 50) 75% - 50px - Custom
+  +container-simple
+    +placeholder({ width: 600, height: 50 }) 600px - 50px - Custom
+    +placeholder({ width: '75%', height: 50 }) 75% - 50px - Custom
+    +placeholder({ width: '75%', height: 50, empty: true })

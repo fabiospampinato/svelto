@@ -1,70 +1,71 @@
-//- tools/sortable.jade
 
 extends ../layout.jade
 
+//- Sortable
+
 append main
-    +divider Default
+  +divider Default
 
-    +container-simple
-        table.sortable
-            thead
-                tr
-                    th(data-sort="int") Int
-                    th(data-sort="string") String
-                    th(data-sort="string") Date
-                    th Options
-            tfoot
+  +container-simple
+    table.sortable
+      thead
+        tr
+          th(data-sort="int") Int
+          th(data-sort="string") String
+          th(data-sort="string") Date
+          th Options
+      tfoot
 
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 10 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple("#").outlined.small Btn 1
-                                +button-simple("#").outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple("#").outlined.small Btn 1
-                                +button-simple("#").outlined.small Btn 2
+      tbody
+        +table-tr-empty
+        - var nr = 1;
+        while ( nr <= 10 )
+          tr
+            td= nr++
+            td Foo
+            td 16/11/1993
+            td
+              +multiple.centered
+                +button-simple.outlined.small Btn 1
+                +button-simple.outlined.small Btn 2
+          tr
+            td= nr++
+            td Bar
+            td 16 Nov 1993
+            td
+              +multiple.centered
+                +button-simple.outlined.small Btn 1
+                +button-simple.outlined.small Btn 2
 
-    +divider Initial sort
+  +divider Initial sort
 
-    +container-simple
-        table.sortable
-            thead
-                tr
-                    th.desc(data-sort="int") Int
-                    th(data-sort="string") String
-                    th(data-sort="string") Date
-                    th Options
-            tfoot
+  +container-simple
+    table.sortable
+      thead
+        tr
+          th.desc(data-sort="int") Int
+          th(data-sort="string") String
+          th(data-sort="string") Date
+          th Options
+      tfoot
 
-            tbody
-                +table-tr-empty
-                - var nr = 1;
-                while ( nr <= 10 )
-                    tr
-                        td= nr++
-                        td Foo
-                        td 16/11/1993
-                        td
-                            +multiple.centered
-                                +button-simple("#").outlined.small Btn 1
-                                +button-simple("#").outlined.small Btn 2
-                    tr
-                        td= nr++
-                        td Bar
-                        td 16 Nov 1993
-                        td
-                            +multiple.centered
-                                +button-simple("#").outlined.small Btn 1
-                                +button-simple("#").outlined.small Btn 2
+      tbody
+        +table-tr-empty
+        - var nr = 1;
+        while ( nr <= 10 )
+          tr
+            td= nr++
+            td Foo
+            td 16/11/1993
+            td
+              +multiple.centered
+                +button-simple.outlined.small Btn 1
+                +button-simple.outlined.small Btn 2
+          tr
+            td= nr++
+            td Bar
+            td 16 Nov 1993
+            td
+              +multiple.centered
+                +button-simple.outlined.small Btn 1
+                +button-simple.outlined.small Btn 2

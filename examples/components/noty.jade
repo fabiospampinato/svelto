@@ -1,128 +1,129 @@
-//- javascript/noty.jade
 
 extends ../layout.jade
 
+//- Noty
+
 append main
-    +divider Text
+  +divider Text
 
-    +multiple
-        +button-simple.outlined(onclick="noty_test_short()") Short
-        +button-simple.outlined(onclick="noty_test_medium()") Medium
-        +button-simple.outlined(onclick="noty_test_long()") Long
+  +multiple
+    +button-simple("noty_test_short ()").outlined Short
+    +button-simple("noty_test_medium ()").outlined Medium
+    +button-simple("noty_test_long ()").outlined Long
 
-    +divider API calls
+  +divider API calls
 
-    +multiple
-        +button-simple.outlined(onclick="noty_test_api_create()") Create
-        +button-simple.outlined(onclick="noty_test_api_open()") Open
-        +button-simple.outlined(onclick="noty_test_api_close()") Close
+  +multiple
+    +button-simple("noty_test_api_create ()").outlined Create
+    +button-simple("noty_test_api_open ()").outlined Open
+    +button-simple("noty_test_api_close ()").outlined Close
 
-    +divider Anchors
+  +divider Anchors
 
-    +multiple
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'left'})") Top-Left
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'center'})") Top-Center
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'expanded'})") Top-Expanded
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'top', x: 'right'})") Top-Right
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'left'})") Bottom-Left
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'center'})") Bottom-Center
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'expanded'})") Bottom-Expanded
-        +button-simple.outlined(onclick="noty_test_anchor({y: 'bottom', x: 'right'})") Bottom-Right
+  +multiple
+    +button-simple("noty_test_anchor ({ y: 'top', x: 'left' })").outlined Top-Left
+    +button-simple("noty_test_anchor ({ y: 'top', x: 'center' })").outlined Top-Center
+    +button-simple("noty_test_anchor ({ y: 'top', x: 'expanded' })").outlined Top-Expanded
+    +button-simple("noty_test_anchor ({ y: 'top', x: 'right' })").outlined Top-Right
+    +button-simple("noty_test_anchor ({ y: 'bottom', x: 'left' })").outlined Bottom-Left
+    +button-simple("noty_test_anchor ({ y: 'bottom', x: 'center' })").outlined Bottom-Center
+    +button-simple("noty_test_anchor ({ y: 'bottom', x: 'expanded' })").outlined Bottom-Expanded
+    +button-simple("noty_test_anchor ({ y: 'bottom', x: 'right' })").outlined Bottom-Right
 
-    +divider Buttons
+  +divider Buttons
 
-    +multiple
-        +button-simple.outlined(onclick="noty_test_btns_one()") One
-        +button-simple.outlined(onclick="noty_test_btns_two()") Two
-        +button-simple.outlined(onclick="noty_test_btns_three()") Three
+  +multiple
+    +button-simple("noty_test_btns_one ()").outlined One
+    +button-simple("noty_test_btns_two ()").outlined Two
+    +button-simple("noty_test_btns_three ()").outlined Three
 
-    +divider Advanced
+  +divider Advanced
 
-    +multiple
-        +button-simple.outlined(onclick="noty_test_adv_one()") Title + Body
-        +button-simple.outlined(onclick="noty_test_adv_two()") Title + Body + Image
-        +button-simple.outlined(onclick="noty_test_adv_three()") Title + Body + Image + Buttons
-        +button-simple.outlined(onclick="noty_test_adv_four()") Title + Custom body + Image + Buttons
+  +multiple
+    +button-simple("noty_test_adv_one ()").outlined Title + Body
+    +button-simple("noty_test_adv_two ()").outlined Title + Body + Image
+    +button-simple("noty_test_adv_three ()").outlined Title + Body + Image + Buttons
+    +button-simple("noty_test_adv_four ()").outlined Title + Custom body + Image + Buttons
 
-    +divider Colors
+  +divider Colors
 
-    +multiple
-        +button-simple.primary(onclick="noty_test_colored('primary')") Primary
-        +button-simple.secondary(onclick="noty_test_colored('secondary')") Secondary
-        +button-simple.tertiary(onclick="noty_test_colored('tertiary')") Tertiary
-        +button-simple.quaternary(onclick="noty_test_colored('quaternary')") Quaternary
-        +button-simple.white(onclick="noty_test_colored('white')") White
-        +button-simple.gray(onclick="noty_test_colored('gray')") Gray
-        +button-simple.black(onclick="noty_test_colored('black')") Black
-        +button-simple.yellow(onclick="noty_test_colored('yellow')") Yellow
-        +button-simple.olive(onclick="noty_test_colored('olive')") Olive
-        +button-simple.green(onclick="noty_test_colored('green')") Green
-        +button-simple.blue(onclick="noty_test_colored('blue')") Blue
-        +button-simple.violet(onclick="noty_test_colored('violet')") Violet
-        +button-simple.orange(onclick="noty_test_colored('orange')") Orange
-        +button-simple.purple(onclick="noty_test_colored('purple')") Purple
-        +button-simple.red(onclick="noty_test_colored('red')") Red
-        +button-simple.pink(onclick="noty_test_colored('pink')") Pink
-        +button-simple.teal(onclick="noty_test_colored('teal')") Teal
-        +button-simple.brown(onclick="noty_test_colored('brown')") Brown
-        +button-simple.transparent(onclick="noty_test_colored('transparent')") Transparent
-        +button-simple.inherit(onclick="noty_test_colored('inherit')") Inherit
-        +button-simple.base(onclick="noty_test_colored('base')") Base
+  +multiple
+    +button-simple.primary("noty_test_colored ( 'primary' )") Primary
+    +button-simple.secondary("noty_test_colored ( 'secondary' )") Secondary
+    +button-simple.tertiary("noty_test_colored ( 'tertiary' )") Tertiary
+    +button-simple.quaternary("noty_test_colored ( 'quaternary' )") Quaternary
+    +button-simple.white("noty_test_colored ( 'white' )") White
+    +button-simple.gray("noty_test_colored ( 'gray' )") Gray
+    +button-simple.black("noty_test_colored ( 'black' )") Black
+    +button-simple.yellow("noty_test_colored ( 'yellow' )") Yellow
+    +button-simple.olive("noty_test_colored ( 'olive' )") Olive
+    +button-simple.green("noty_test_colored ( 'green' )") Green
+    +button-simple.blue("noty_test_colored ( 'blue' )") Blue
+    +button-simple.violet("noty_test_colored ( 'violet' )") Violet
+    +button-simple.orange("noty_test_colored ( 'orange' )") Orange
+    +button-simple.purple("noty_test_colored ( 'purple' )") Purple
+    +button-simple.red("noty_test_colored ( 'red' )") Red
+    +button-simple.pink("noty_test_colored ( 'pink' )") Pink
+    +button-simple.teal("noty_test_colored ( 'teal' )") Teal
+    +button-simple.brown("noty_test_colored ( 'brown' )") Brown
+    +button-simple.transparent("noty_test_colored ( 'transparent' )") Transparent
+    +button-simple.inherit("noty_test_colored ( 'inherit' )") Inherit
+    +button-simple.base("noty_test_colored ( 'base' )") Base
 
 append body-end
-    +script.
-        function noty_test_short () {
-            $.noty ( "Short noty" );
-        }
-        function noty_test_medium () {
-            $.noty ( "A medium noty, maybe some useful infos here" );
-        }
-        function noty_test_long () {
-            $.noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
-        }
-        function noty_test_btns_one () {
-            $.noty ( { body: "Noty with one button", buttons: [{ text: "Foo" }] } );
-        }
-        function noty_test_btns_two () {
-            $.noty ( { body: "Noty with two buttons", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
-        }
-        function noty_test_btns_three () {
-            $.noty ( { body: "Noty with three buttons", buttons: [{ text: "Foo" }, { text: "Bar" }, { text: "Baz" }] } );
-        }
-        function noty_test_adv_one () {
-            $.noty ( { title: "Test title", body: "This is just an example body" } );
-        }
-        function noty_test_adv_two () {
-            $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png" } );
-        }
-        function noty_test_adv_three () {
-            $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
-        }
-        function noty_test_adv_four () {
-            $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
-        }
-        function noty_test_colored ( color ) {
-            $.noty ( { body: "Noty with custom color", color: color } );
-        }
-        var anchor_id = 0;
-        function noty_test_anchor ( anchor ) {
-            $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: { y: `" + anchor.y + "`, x: `" + anchor.x + "`", anchor: anchor } );
-        }
-        var created_noty;
-        function noty_test_api_create () {
-            created_noty = $.noty({ body: 'API noty', autoplay: false });
-        }
-        function noty_test_api_open () {
-            if ( created_noty ) {
-                created_noty.open ();
-            } else {
-                $.noty("You should `Create` it before...");
-            }
-        }
-        function noty_test_api_close () {
-            if ( created_noty ) {
-                created_noty.close ();
-            } else {
-                $.noty("You should `Create` it before...");
-            }
-        }
+  +script.
+    function noty_test_short () {
+      $.noty ( "Short noty" );
+    }
+    function noty_test_medium () {
+      $.noty ( "A medium noty, maybe some useful infos here" );
+    }
+    function noty_test_long () {
+      $.noty ( "A very looooooooooong noty, maybe some tips here or whatever takes a long space, how does it fit?" );
+    }
+    function noty_test_btns_one () {
+      $.noty ( { body: "Noty with one button", buttons: [{ text: "Foo" }] } );
+    }
+    function noty_test_btns_two () {
+      $.noty ( { body: "Noty with two buttons", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+    }
+    function noty_test_btns_three () {
+      $.noty ( { body: "Noty with three buttons", buttons: [{ text: "Foo" }, { text: "Bar" }, { text: "Baz" }] } );
+    }
+    function noty_test_adv_one () {
+      $.noty ( { title: "Test title", body: "This is just an example body" } );
+    }
+    function noty_test_adv_two () {
+      $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png" } );
+    }
+    function noty_test_adv_three () {
+      $.noty ( { title: "Test title", body: "This is just an example body", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+    }
+    function noty_test_adv_four () {
+      $.noty ( { title: "Test title", body: "<sub>sub</sub>Something<sup>sup</sup>", img: "/assets/images/presto/sample.png", buttons: [{ text: "Foo" }, { text: "Bar" }] } );
+    }
+    function noty_test_colored ( color ) {
+      $.noty ( { body: "Noty with custom color", color: color } );
+    }
+    var anchor_id = 0;
+    function noty_test_anchor ( anchor ) {
+      $.noty( { body: "Noty[" + ( anchor_id += 1 ) + "] in anchor: { y: `" + anchor.y + "`, x: `" + anchor.x + "`", anchor: anchor } );
+    }
+    var created_noty;
+    function noty_test_api_create () {
+      created_noty = $.noty({ body: 'API noty', autoplay: false });
+    }
+    function noty_test_api_open () {
+      if ( created_noty ) {
+        created_noty.open ();
+      } else {
+        $.noty("You should `Create` it before...");
+      }
+    }
+    function noty_test_api_close () {
+      if ( created_noty ) {
+        created_noty.close ();
+      } else {
+        $.noty("You should `Create` it before...");
+      }
+    }

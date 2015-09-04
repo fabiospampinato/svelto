@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Presto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Presto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Cookie
+        </div>
+      </div>
+      <div class="multiple-wrp fluid joined">
+        <div class="multiple">
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="cookie_key" required="required" class="text-field"/>
+            <label>Key...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="cookie_value" required="required" class="text-field"/>
+            <label>Value...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="cookie_end" required="required" class="text-field"/>
+            <label>End...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="cookie_path" required="required" class="text-field"/>
+            <label>Path...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="cookie_domain" required="required" class="text-field"/>
+            <label>Domain...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="cookie_secure" required="required" class="text-field"/>
+            <label>Secure...</label>
+            <div class="text-field-bar"></div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:cookie_get ()" class="label actionable outlined">
+              <div class="label-center">Get
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:cookie_set ()" class="label actionable outlined">
+              <div class="label-center">Set
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:cookie_remove ()" class="label actionable outlined">
+              <div class="label-center">Remove
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:cookie_has ()" class="label actionable outlined">
+              <div class="label-center">Has
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:cookie_keys ()" class="label actionable outlined">
+              <div class="label-center">Keys
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Presto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      function cookie_input ( name ) {
+        return $('input[name="cookie_' + name + '"]').val ();
+      }
+      
+      function cookie_get () {
+        $.noty ( '' + $.cookie.get ( cookie_input ( 'key' ) ) );
+      }
+      
+      function cookie_set () {
+        $.cookie.set ( cookie_input ( 'key' ), cookie_input ( 'value' ), Number(cookie_input ( 'end' )), cookie_input ( 'path' ), cookie_input ( 'domain' ), cookie_input ( 'secure' ) );
+      }
+      
+      function cookie_remove () {
+        $.cookie.remove ( cookie_input ( 'key' ), cookie_input ( 'path' ), cookie_input ( 'domain' ) );
+      }
+      
+      function cookie_has () {
+        $.noty ( '' + $.cookie.has ( cookie_input ( 'key' ) ) );
+      }
+      
+      function cookie_keys () {
+        $.noty ( $.cookie.keys ().join ( ' - ' ) );
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

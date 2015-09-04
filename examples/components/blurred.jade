@@ -1,21 +1,23 @@
-//- tools/blurred.jade
+
 
 extends ../layout.jade
+
+//- Blurred
 
 //- TODO: Use the CSS function for it, so that we can transitionate it
 
 append main
-    +divider Paragraph
+  +divider Paragraph
 
-    +container-simple
-        +paragraph-sample
+  +container-simple
+    +paragraph-sample
 
-    +divider Action
+  +divider Action
 
-    +button-simple(onclick="blur_test()").outlined Toggle blur
+  +button-simple("blur_test ()").outlined Toggle blur
 
 append body-end
-    +script.
-        function blur_test () {
-            $('.container').blurred ();
-        }
+  +script.
+    function blur_test () {
+      $('.container').blurred ();
+    }

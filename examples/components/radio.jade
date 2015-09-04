@@ -1,35 +1,36 @@
-//- bootstrap/radio.jade
 
 extends ../layout.jade
 
+//- Radio
+
 append main
-    +divider Radio
+  +divider Radio
 
-    +multiple
-        +radio("name", "Base", 4)
-        +radio("name", "Checked", 8, true)
-        +radio("name", "Disabled", 8, true).radio-disabled
+  +multiple
+    +radio({ name: "name", title: "Base", value: 4 })
+    +radio({ name: "name", title: "Checked", value: 8, checked: true })
+    +radio({ name: "name", title: "Disabled", value: 8, checked: true }).radio-disabled
 
-    +divider Actions
+  +divider Actions
 
-    +multiple
-        +button-simple("radios_get_all()") Get all
-        +button-simple("radios_check_all()") Check all
+  +multiple
+    +button-simple("radios_get_all ()") Get all
+    +button-simple("radios_check_all ()") Check all
 
 append body-end
-    script.
-        function radios_get_all () {
+  script.
+    function radios_get_all () {
 
-            var gets = _.map ( $('.radio'), function ( radio ) {
+      var gets = _.map ( $('.radio'), function ( radio ) {
 
-                return $(radio).radio ( 'get' );
+        return $(radio).radio ( 'get' );
 
-            });
+      });
 
-            $.noty ( gets.join ( ' - ' ) );
+      $.noty ( gets.join ( ' - ' ) );
 
-        }
+    }
 
-        function radios_check_all () {
-            $('.radio').radio ( 'check' );
-        }
+    function radios_check_all () {
+      $('.radio').radio ( 'check' );
+    }

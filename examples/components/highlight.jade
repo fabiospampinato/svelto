@@ -1,74 +1,75 @@
-//- css/colors.jade
 
 extends ../layout.jade
 
+//- Highlight
+
 append main
-    +divider Directions
+  +divider Directions
 
-    +multiple
-        +button-simple.outlined.highlight Default
-        +button-simple.outlined.highlight.highlight-top Top
-        +button-simple.outlined.highlight.highlight-right Right
-        +button-simple.outlined.highlight.highlight-bottom Bottom
-        +button-simple.outlined.highlight.highlight-left Left
-        +button-simple.outlined.highlight.highlight-all All
+  +multiple
+    +button-simple.outlined.highlight Default
+    +button-simple.outlined.highlight.highlight-top Top
+    +button-simple.outlined.highlight.highlight-right Right
+    +button-simple.outlined.highlight.highlight-bottom Bottom
+    +button-simple.outlined.highlight.highlight-left Left
+    +button-simple.outlined.highlight.highlight-all All
 
-    +divider Colors
+  +divider Colors
 
-    +multiple
-        +button-simple.outlined.highlight.primary Primary
-        +button-simple.outlined.highlight.secondary Secondary
-        +button-simple.outlined.highlight.tertiary Tertiary
-        +button-simple.outlined.highlight.quaternary Quaternary
-        +button-simple.outlined.highlight.white White
-        +button-simple.outlined.highlight.gray Gray
-        +button-simple.outlined.highlight.black Black
-        +button-simple.outlined.highlight.yellow Yellow
-        +button-simple.outlined.highlight.olive Olive
-        +button-simple.outlined.highlight.green Green
-        +button-simple.outlined.highlight.blue Blue
-        +button-simple.outlined.highlight.violet Violet
-        +button-simple.outlined.highlight.orange Orange
-        +button-simple.outlined.highlight.purple Purple
-        +button-simple.outlined.highlight.red Red
-        +button-simple.outlined.highlight.pink Pink
-        +button-simple.outlined.highlight.teal Teal
-        +button-simple.outlined.highlight.brown Brown
-        +button-simple.outlined.highlight.transparent Transparent
-        +button-simple.outlined.highlight.inherit Inherit
-        +button-simple.outlined.highlight.base Base
+  +multiple
+    +button-simple.outlined.highlight.primary Primary
+    +button-simple.outlined.highlight.secondary Secondary
+    +button-simple.outlined.highlight.tertiary Tertiary
+    +button-simple.outlined.highlight.quaternary Quaternary
+    +button-simple.outlined.highlight.white White
+    +button-simple.outlined.highlight.gray Gray
+    +button-simple.outlined.highlight.black Black
+    +button-simple.outlined.highlight.yellow Yellow
+    +button-simple.outlined.highlight.olive Olive
+    +button-simple.outlined.highlight.green Green
+    +button-simple.outlined.highlight.blue Blue
+    +button-simple.outlined.highlight.violet Violet
+    +button-simple.outlined.highlight.orange Orange
+    +button-simple.outlined.highlight.purple Purple
+    +button-simple.outlined.highlight.red Red
+    +button-simple.outlined.highlight.pink Pink
+    +button-simple.outlined.highlight.teal Teal
+    +button-simple.outlined.highlight.brown Brown
+    +button-simple.outlined.highlight.transparent Transparent
+    +button-simple.outlined.highlight.inherit Inherit
+    +button-simple.outlined.highlight.base Base
 
-    +divider Highlight colors
+  +divider Highlight colors
 
-    +multiple
-        +button-simple.outlined.highlight.highlight-primary Primary
-        +button-simple.outlined.highlight.highlight-secondary Secondary
-        +button-simple.outlined.highlight.highlight-tertiary Tertiary
-        +button-simple.outlined.highlight.highlight-quaternary Quaternary
-        +button-simple.outlined.highlight.highlight-white White
-        +button-simple.outlined.highlight.highlight-gray Gray
-        +button-simple.outlined.highlight.highlight-black Black
-        +button-simple.outlined.highlight.highlight-yellow Yellow
-        +button-simple.outlined.highlight.highlight-olive Olive
-        +button-simple.outlined.highlight.highlight-green Green
-        +button-simple.outlined.highlight.highlight-blue Blue
-        +button-simple.outlined.highlight.highlight-violet Violet
-        +button-simple.outlined.highlight.highlight-orange Orange
-        +button-simple.outlined.highlight.highlight-purple Purple
-        +button-simple.outlined.highlight.highlight-red Red
-        +button-simple.outlined.highlight.highlight-pink Pink
-        +button-simple.outlined.highlight.highlight-teal Teal
-        +button-simple.outlined.highlight.highlight-brown Brown
-        +button-simple.outlined.highlight.highlight-transparent Transparent
-        +button-simple.outlined.highlight.highlight-inherit Inherit
-        +button-simple.outlined.highlight.highlight-base Base
+  +multiple
+    +button-simple.outlined.highlight.highlight-primary Primary
+    +button-simple.outlined.highlight.highlight-secondary Secondary
+    +button-simple.outlined.highlight.highlight-tertiary Tertiary
+    +button-simple.outlined.highlight.highlight-quaternary Quaternary
+    +button-simple.outlined.highlight.highlight-white White
+    +button-simple.outlined.highlight.highlight-gray Gray
+    +button-simple.outlined.highlight.highlight-black Black
+    +button-simple.outlined.highlight.highlight-yellow Yellow
+    +button-simple.outlined.highlight.highlight-olive Olive
+    +button-simple.outlined.highlight.highlight-green Green
+    +button-simple.outlined.highlight.highlight-blue Blue
+    +button-simple.outlined.highlight.highlight-violet Violet
+    +button-simple.outlined.highlight.highlight-orange Orange
+    +button-simple.outlined.highlight.highlight-purple Purple
+    +button-simple.outlined.highlight.highlight-red Red
+    +button-simple.outlined.highlight.highlight-pink Pink
+    +button-simple.outlined.highlight.highlight-teal Teal
+    +button-simple.outlined.highlight.highlight-brown Brown
+    +button-simple.outlined.highlight.highlight-transparent Transparent
+    +button-simple.outlined.highlight.highlight-inherit Inherit
+    +button-simple.outlined.highlight.highlight-base Base
 
-    +divider Actions
+  +divider Actions
 
-    +button-simple("toggle_outlined()").outlined Toggle outlined
+  +button-simple("toggle_outlined ()").outlined Toggle outlined
 
 append body-end
-    +script.
-        function toggle_outlined () {
-            $('.label').toggleClass ( 'outlined' );
-        }
+  +script.
+    function toggle_outlined () {
+      $('.label').toggleClass ( 'outlined' );
+    }

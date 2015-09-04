@@ -1,20 +1,21 @@
-//- tools/browser.jade
 
 extends ../layout.jade
 
-append main
-    +divider Browser
+//- Browser
 
-    +multiple.fluid
-        +container-simple.isMobile isMobile
-        +container-simple.isTablet isTablet
-        +container-simple.isAndroid isAndroid
-        +container-simple.isIOS isIOS
-        +container-simple.isMac isMac
-        +container-simple.isIE isIE
+append main
+  +divider Browser
+
+  +multiple.fluid
+    +container-simple.isMobile isMobile
+    +container-simple.isTablet isTablet
+    +container-simple.isAndroid isAndroid
+    +container-simple.isIOS isIOS
+    +container-simple.isMac isMac
+    +container-simple.isIE isIE
 
 append body-end
-    +script.
-        for ( var prop in $.browser ) {
-            $('.' + prop).toggleClass ( 'green', $.browser[prop] );
-        }
+  +script.
+    for ( var prop in $.browser ) {
+      $('.' + prop).toggleClass ( 'green', $.browser[prop] );
+    }

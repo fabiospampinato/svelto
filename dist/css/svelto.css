@@ -2147,7 +2147,7 @@ body.fixed-header > main {
   border-bottom-left-radius: inherit;
 }
 
-.expander > .container-header .icon-hardware-keyboard-arrow-down {
+.expander > .container-header .icon-keyboard_arrow_down {
   -webkit-transition: -webkit-transform 0.25s;
           transition: transform 0.25s;
 }
@@ -2168,12 +2168,12 @@ body.fixed-header > main {
   border-bottom-left-radius: 0;
 }
 
-.expander.opened > .container-header .multiple-sub.left .icon-hardware-keyboard-arrow-down {
+.expander.opened > .container-header .multiple-sub.left .icon-keyboard_arrow_down {
   -webkit-transform: rotate(-180deg);
           transform: rotate(-180deg);
 }
 
-.expander.opened > .container-header .multiple-sub.right .icon-hardware-keyboard-arrow-down {
+.expander.opened > .container-header .multiple-sub.right .icon-keyboard_arrow_down {
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }

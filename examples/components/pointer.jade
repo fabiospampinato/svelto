@@ -1,75 +1,76 @@
-//- tools/pointer.jade
 
 extends ../layout.jade
 
+//- Pointer
+
 append main
-    +divider Target
+  +divider Target
 
-    +centerer
-        +square(style="height:300px;").xs-9.target
+  +centerer
+    +square(style="height: 300px;").xs-9.target
 
-    +divider Triggered
+  +divider Triggered
 
-    +multiple
-        +checkbox("pointer_tap", "Tap", 1).tap
-        +checkbox("pointer_dbltap", "Double tap", 1).dbltap
-        +checkbox("pointer_press", "Press", 1).press
-        +checkbox("pointer_dragstart", "Drag start", 1).dragstart
-        +checkbox("pointer_dragmove", "Drag move", 1).dragmove
-        +checkbox("pointer_dragend", "Drag end", 1).dragend
-        +checkbox("pointer_flick", "Flick", 1).flick
+  +multiple
+    +checkbox({ name: "pointer_tap", title: "Tap", value: 1 }).tap
+    +checkbox({ name: "pointer_dbltap", title: "Double tap", value: 1 }).dbltap
+    +checkbox({ name: "pointer_press", title: "Press", value: 1 }).press
+    +checkbox({ name: "pointer_dragstart", title: "Drag start", value: 1 }).dragstart
+    +checkbox({ name: "pointer_dragmove", title: "Drag move", value: 1 }).dragmove
+    +checkbox({ name: "pointer_dragend", title: "Drag end", value: 1 }).dragend
+    +checkbox({ name: "pointer_flick", title: "Flick", value: 1 }).flick
 
-    +divider Actions
+  +divider Actions
 
-    +button-simple("pointer_uncheck_all()") Reset
+  +button-simple("pointer_uncheck_all ()") Reset
 
 append body-end
-    +script.
-        $('.target').on ({
-            'pointertap' : pointer_tap,
-            'pointerdbltap' : pointer_dbltap,
-            'pointerpress' : pointer_press,
-            'pointerdragstart' : pointer_dragstart,
-            'pointerdragmove' : pointer_dragmove,
-            'pointerdragend' : pointer_dragend,
-            'pointerflick'  : pointer_flick
-        });
+  +script.
+    $('.target').on ({
+      'pointertap' : pointer_tap,
+      'pointerdbltap' : pointer_dbltap,
+      'pointerpress' : pointer_press,
+      'pointerdragstart' : pointer_dragstart,
+      'pointerdragmove' : pointer_dragmove,
+      'pointerdragend' : pointer_dragend,
+      'pointerflick'  : pointer_flick
+    });
 
-        function pointer_uncheck_all () {
-            $('.checkbox').checkbox ( 'uncheck' );
-        }
+    function pointer_uncheck_all () {
+      $('.checkbox').checkbox ( 'uncheck' );
+    }
 
-        function pointer_check ( name ) {
-            $('.checkbox.' + name).checkbox ( 'check' );
-        }
+    function pointer_check ( name ) {
+      $('.checkbox.' + name).checkbox ( 'check' );
+    }
 
-        function pointer_tap () {
-            pointer_check ( 'tap' );
-        }
+    function pointer_tap () {
+      pointer_check ( 'tap' );
+    }
 
-        function pointer_dbltap () {
-            pointer_check ( 'dbltap' );
-        }
+    function pointer_dbltap () {
+      pointer_check ( 'dbltap' );
+    }
 
-        function pointer_press () {
-            pointer_check ( 'press' );
-        }
+    function pointer_press () {
+      pointer_check ( 'press' );
+    }
 
-        function pointer_dragstart () {
-            pointer_uncheck_all ();
-            pointer_check ( 'dragstart' );
-        }
+    function pointer_dragstart () {
+      pointer_uncheck_all ();
+      pointer_check ( 'dragstart' );
+    }
 
-        function pointer_dragmove ( event ) {
-            event.preventDefault ();
-            pointer_check ( 'dragmove' );
-        }
+    function pointer_dragmove ( event ) {
+      event.preventDefault ();
+      pointer_check ( 'dragmove' );
+    }
 
-        function pointer_dragend () {
-            pointer_check ( 'dragend' );
-        }
+    function pointer_dragend () {
+      pointer_check ( 'dragend' );
+    }
 
-        function pointer_flick  ( event, data ) {
-            pointer_check ( 'flick ' );
-            $.noty("Flick orientation: " + data.orientation + ", direction: " + data.direction );
-        }
+    function pointer_flick  ( event, data ) {
+      pointer_check ( 'flick ' );
+      $.noty ( "Flick orientation: " + data.orientation + ", direction: " + data.direction );
+    }

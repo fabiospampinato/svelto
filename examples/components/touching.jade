@@ -1,144 +1,145 @@
-//- tools/touching.jade
 
 extends ../layout.jade
 
+//- Touching
+
 append main
-    +divider Squares - All matches
+  +divider Squares - All matches
 
-    +container-simple.squares_all
-        +multiple
-            - var squares_nr = 32;
-            - var nr = 1;
-            while nr <= squares_nr
-                +square.xxlarge.centerer
-                    span.small= nr++
+  +container-simple.squares_all
+    +multiple
+      - var squares_nr = 32;
+      - var nr = 1;
+      while nr <= squares_nr
+        +square.xxlarge.centerer
+          .small= nr++
 
-    +divider Actions
+  +divider Actions
 
-    +multiple.joined
-        +input({name: "input_populate_all", label: "Search number..."}).no-floating.white.text-field-secondary
-        +button-simple("populate_all()").secondary Populate
+  +multiple.joined
+    +input({ name: "input_populate_all", label: "Search number..." }).no-floating.white.text-field-secondary
+    +button-simple("populate_all ()").secondary Populate
 
-    +divider Squares - Most significant match
+  +divider Squares - Most significant match
 
-    +container-simple.squares_most
-        +multiple
-            - var squares_nr = 32;
-            - var nr = 1;
-            while nr <= squares_nr
-                +square.xxlarge.centerer
-                    span.small= nr++
+  +container-simple.squares_most
+    +multiple
+      - var squares_nr = 32;
+      - var nr = 1;
+      while nr <= squares_nr
+        +square.xxlarge.centerer
+          .small= nr++
 
-    +divider Actions
+  +divider Actions
 
-    +multiple.joined
-        +input({name: "input_populate_most", label: "Square number..."}).no-floating.white.text-field-secondary
-        +button-simple("populate_most()").secondary Populate
+  +multiple.joined
+    +input({ name: "input_populate_most", label: "Square number..." }).no-floating.white.text-field-secondary
+    +button-simple("populate_most ()").secondary Populate
 
-    +divider Squares - Punctual
+  +divider Squares - Punctual
 
-    +container-simple.squares_punctual
-        +multiple
-            - var squares_nr = 32;
-            - var nr = 1;
-            while nr <= squares_nr
-                +square.xxlarge.centerer
-                    span.small= nr++
+  +container-simple.squares_punctual
+    +multiple
+      - var squares_nr = 32;
+      - var nr = 1;
+      while nr <= squares_nr
+        +square.xxlarge.centerer
+          .small= nr++
 
-    +divider Actions
+  +divider Actions
 
-    +multiple.joined
-        +input({name: "input_populate_punctual", label: "Square number..."}).no-floating.white.text-field-secondary
-        +button-simple("populate_punctual()").secondary Populate
+  +multiple.joined
+    +input({ name: "input_populate_punctual", label: "Square number..." }).no-floating.white.text-field-secondary
+    +button-simple("populate_punctual ()").secondary Populate
 
 append body-end
-    +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })
-    +script.
-        // Populate
+  +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })
+  +script.
+    // Populate
 
-        function get_squares_html ( nr ) {
+    function get_squares_html ( nr ) {
 
-            var html = '';
+      var html = '';
 
-            for ( var i = 0; i < Number(nr); i++ ) {
-                html += '<div class="square xxlarge centerer" style=""><span class="small">' + (i + 1) + '</span></div>';
+      for ( var i = 0; i < Number(nr); i++ ) {
+        html += '<div class="square xxlarge centerer" style=""><div class="small">' + (i + 1) + '</div></div>';
+      }
+
+      return html;
+
+    }
+
+    function populate_all () {
+
+      $('.squares_all .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_all"]').val () ) );
+
+      init_drag_all ();
+
+    }
+
+    function populate_most () {
+
+      $('.squares_most .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_most"]').val () ) );
+
+      init_drag_most ();
+
+    }
+
+    function populate_punctual () {
+
+      $('.squares_punctual .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_punctual"]').val () ) );
+
+      init_drag_punctual ();
+
+    }
+
+    // Dragging
+
+    function init_drag_all () {
+
+      dragging ( '.squares_all .square', 'all' );
+
+    }
+
+    function init_drag_most () {
+
+      dragging ( '.squares_most .square', 'most' );
+
+    }
+
+    function init_drag_punctual () {
+
+      dragging ( '.squares_punctual .square', 'punctual' );
+
+    }
+
+    function dragging ( selector, select ) {
+
+      var $squares = $(selector);
+
+      $squares.draggable ({
+        revertable: true,
+        callbacks: {
+          move: function ( data ) {
+            $squares.removeClass ( 'green' );
+            if ( select === 'punctual') {
+              $squares.touching ({ point: data.moveXY, $not: data.$draggable }).addClass ( 'green' );
+            } else {
+              $squares.touching ({ $comparer: data.$draggable, $not: data.$draggable, select: select }).addClass ( 'green' );
             }
-
-            return html;
-
+          },
+          end: function () {
+            $squares.removeClass ( 'green' );
+          }
         }
+      });
 
-        function populate_all () {
+    }
 
-            $('.squares_all .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_all"]').val () ) );
+    // Ready
 
-            init_drag_all ();
-
-        }
-
-        function populate_most () {
-
-            $('.squares_most .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_most"]').val () ) );
-
-            init_drag_most ();
-
-        }
-
-        function populate_punctual () {
-
-            $('.squares_punctual .multiple').empty ().append ( get_squares_html ( $('input[name="input_populate_punctual"]').val () ) );
-
-            init_drag_punctual ();
-
-        }
-
-        // Dragging
-
-        function init_drag_all () {
-
-            dragging ( '.squares_all .square', 'all' );
-
-        }
-
-        function init_drag_most () {
-
-            dragging ( '.squares_most .square', 'most' );
-
-        }
-
-        function init_drag_punctual () {
-
-            dragging ( '.squares_punctual .square', 'punctual' );
-
-        }
-
-        function dragging ( selector, select ) {
-
-            var $squares = $(selector);
-
-            $squares.draggable ({
-                revertable: true,
-                callbacks: {
-                    move: function ( data ) {
-                        $squares.removeClass ( 'green' );
-                        if ( select === 'punctual') {
-                            $squares.touching ({ point: data.moveXY, $not: data.$draggable }).addClass ( 'green' );
-                        } else {
-                            $squares.touching ({ $comparer: data.$draggable, $not: data.$draggable, select: select }).addClass ( 'green' );
-                        }
-                    },
-                    end: function () {
-                        $squares.removeClass ( 'green' );
-                    }
-                }
-            });
-
-        }
-
-        // Ready
-
-        $(function () {
-            init_drag_all ();
-            init_drag_most ();
-            init_drag_punctual ();
-        });
+    $(function () {
+      init_drag_all ();
+      init_drag_most ();
+      init_drag_punctual ();
+    });

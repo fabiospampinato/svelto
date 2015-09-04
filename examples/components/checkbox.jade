@@ -1,45 +1,38 @@
-//- bootstrap/checkbox.jade
 
 extends ../layout.jade
 
+//- Checkbox
+
 append main
-    +divider Checkbox
+  +divider Checkbox
 
-    +multiple
-        +checkbox("name1", "Base", 4)
-        +checkbox("name2", "Checked", 8, true)
-        +checkbox("name3", "Disabled", 32, true).checkbox-disabled
+  +multiple
+    +checkbox({ name: "name", title: "Base", value: 4 })
+    +checkbox({ name: "name", title: "Checked", value: 8, checked: true })
+    +checkbox({ name: "name", title: "Disabled", value: 32, checked: true }).checkbox-disabled
 
-    +divider Actions
+  +divider Actions
 
-    +multiple
-        +button-simple("checkbox_get_all()") Get all
-        +button-simple("checkbox_toggle_all()") Toggle all
-        +button-simple("checkbox_check_all()") Check all
-        +button-simple("checkbox_uncheck_all()") Uncheck all
+  +multiple
+    +button-simple("checkboxes_get_all ()") Get all
+    +button-simple("checkboxes_action ( 'toggle' )") Toggle all
+    +button-simple("checkboxes_action ( 'check' )") Check all
+    +button-simple("checkboxes_action ( 'uncheck' )") Uncheck all
 
 append body-end
-    script.
-        function checkbox_get_all () {
+  +script.
+    function checkboxes_get_all () {
 
-            var gets = _.map ( $('.checkbox'), function ( checkbox ) {
+      var gets = _.map ( $('.checkbox'), function ( checkbox ) {
 
-                return $(checkbox).checkbox ( 'get' );
+        return $(checkbox).checkbox ( 'get' );
 
-            });
+      });
 
-            $.noty ( gets.join ( ' - ' ) );
+      $.noty ( gets.join ( ' - ' ) );
 
-        }
-
-        function checkbox_toggle_all () {
-            $('.checkbox').checkbox ( 'toggle' );
-        }
-
-        function checkbox_check_all () {
-            $('.checkbox').checkbox ( 'check' );
-        }
-
-        function checkbox_uncheck_all () {
-            $('.checkbox').checkbox ( 'uncheck' );
-        }
+    }
+    
+    function checkboxes_action ( action ) {
+      $('.checkbox').checkbox ( action );
+    }

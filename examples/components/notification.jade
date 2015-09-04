@@ -1,21 +1,22 @@
-//- tools/notification.jade
 
 extends ../layout.jade
 
-append main
-    +divider Notifications
+//- Navigation
 
-    +multiple
-        +button-simple(onclick="notification_test()").outlined Test
-        +button-simple(onclick="notification_test_delayed()").outlined Test delayed (3s)
+append main
+  +divider Notifications
+
+  +multiple
+    +button-simple("notification_test ()").outlined Test
+    +button-simple("notification_test_delayed ()").outlined Test delayed (2s)
 
 append body-end
-    +script.
-        function notification_test ( both ) {
-            $.notification ({ title: "Test title", body: "Test description", img: "/assets/images/presto/sample.png" });
-        }
-        function notification_test_delayed () {
-            setTimeout ( function () {
-                $.notification ({ title: "Test title", body: "Test description", img: "/assets/images/presto/sample.png" });
-            }, 3000 );
-        }
+  +script.
+    function notification_test () {
+      $.notification ({ title: "Test title", body: "Test description", img: "/sample.png" });
+    }
+    function notification_test_delayed () {
+      setTimeout ( function () {
+        $.notification ({ title: "Test title", body: "Test description", img: "/sample.png" });
+      }, 2000 );
+    }

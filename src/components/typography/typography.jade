@@ -2,6 +2,7 @@
 //- Link
 
 mixin a(href)
+  - href = href || "#";
   a(href=href)&attributes(attributes)
     block
 

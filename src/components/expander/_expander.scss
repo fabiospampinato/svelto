@@ -22,7 +22,7 @@
         border-bottom-right-radius: inherit;
         border-bottom-left-radius: inherit;
 
-        & .icon-hardware-keyboard-arrow-down {
+        & .icon-keyboard_arrow_down {
             transition: transform $expander-arrow-transition-rotate-duration;
         }
 
@@ -46,11 +46,11 @@
 
             & .multiple-sub {
 
-                &.left .icon-hardware-keyboard-arrow-down {
+                &.left .icon-keyboard_arrow_down {
                     transform: rotate(-180deg);
                 }
 
-                &.right .icon-hardware-keyboard-arrow-down {
+                &.right .icon-keyboard_arrow_down {
                     transform: rotate(180deg);
                 }
 

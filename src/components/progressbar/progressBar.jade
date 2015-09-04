@@ -3,7 +3,7 @@
 
 //- TODO: Write options docs block
 
-mixin progresbar(options, multiple)
+mixin progressbar(options, multiple)
   if typeof multiple !== 'undefined'
     - var new_options = { percentages: Array ( arguments.length ) };
     - for ( var i = 0, l = arguments.length; i < l; i++ ) {
@@ -14,11 +14,11 @@ mixin progresbar(options, multiple)
   - options = new_options;
   - options.decimals = options.decimals || 0;
   - var total = 0;
-  .progresbar&attributes(attributes)
-    .progresbar-unhighlighted
+  .progressbar&attributes(attributes)
+    .progressbar-unhighlighted
       each percentage in options.percentages
         - total += percentage.value;
-        .progresbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
+        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
           if options.labeled
-            .progresbar-label= +(percentage.value).toFixed(options.decimals)
-    .progresbar-stripes(style=("width: " + total + "%;"))
+            .progressbar-label= +(percentage.value).toFixed(options.decimals)
+    .progressbar-stripes(style=("width: " + total + "%;"))

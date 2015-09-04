@@ -1,31 +1,32 @@
-//- tools/loading.jade
 
 extends ../layout.jade
 
+//- Loading
+
 append main
-    +divider Paragraph
+  +divider Paragraph
 
-    +container-simple
-        +paragraph-sample
+  +container-simple
+    +paragraph-sample
 
-    +divider Action
+  +divider Action
 
-    +multiple
-        +button-simple("loading_test()").outlined Toggle loading
-        +button-simple("loading_test_black()").outlined Toggle black
-        +button-simple("loading_test_brand()").outlined Toggle brand
+  +multiple
+    +button-simple("loading_test ()").outlined Toggle loading
+    +button-simple("loading_test_black ()").outlined Toggle black
+    +button-simple("loading_test_brand ()").outlined Toggle brand
 
 
 append body-end
-    +script.
-        function loading_test () {
-            $('.container' ).loading ();
-        }
+  +script.
+    function loading_test () {
+      $('.container' ).loading ();
+    }
 
-        function loading_test_black () {
-            $('.container' ).loading ( undefined, { color: { wrapper: 'black', spinner: 'white' } } );
-        }
+    function loading_test_black () {
+      $('.container' ).loading ({ colors: { wrapper: 'black', spinner: 'white' } });
+    }
 
-        function loading_test_brand () {
-            $('.container' ).loading ( undefined, { color: { wrapper: 'primary', spinner: 'white' } } );
-        }
+    function loading_test_brand () {
+      $('.container' ).loading ({ colors: { wrapper: 'primary', spinner: 'white' } });
+    }

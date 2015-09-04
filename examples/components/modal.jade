@@ -1,79 +1,80 @@
-//- javascript/modal.jade
 
 extends ../layout.jade
 
-append main
-    +divider Modals
+//- Modal
 
-    +multiple
-        +button-simple(data-modal-trigger="modal-1").outlined Normal
-        +button-simple(data-modal-trigger="modal-2").outlined Closable
-        +button-simple(data-modal-trigger="modal-3").outlined No footer
-        +button-simple(data-modal-trigger="modal-4").outlined No header
-        +button-simple(data-modal-trigger="modal-5").outlined Only content
-        +button-simple(data-modal-trigger="modal-6").outlined With buttons
-        +button-simple(data-modal-trigger="modal-7").outlined Long content
-        +button-simple(data-modal-trigger="modal-8").outlined Fullscreen
+append main
+  +divider Modals
+
+  +multiple
+    +button-simple(data-modal-trigger="modal-1").outlined Normal
+    +button-simple(data-modal-trigger="modal-2").outlined Closable
+    +button-simple(data-modal-trigger="modal-3").outlined No footer
+    +button-simple(data-modal-trigger="modal-4").outlined No header
+    +button-simple(data-modal-trigger="modal-5").outlined Only content
+    +button-simple(data-modal-trigger="modal-6").outlined With buttons
+    +button-simple(data-modal-trigger="modal-7").outlined Long content
+    +button-simple(data-modal-trigger="modal-8").outlined Fullscreen
 
 append body
-    +modal#modal-1
-        +container("Normal").xs-8
-            +container-content
-                +paragraph-sample
-            +container-footer The footer here
+  +modal#modal-1
+    +container("Normal").xs-8
+      +container-content
+        +paragraph-sample
+      +container-footer The footer here
 
-    +modal#modal-2
-        +container.xs-8
-            +container-header("Closable")
-                +multiple-right
-                    +button-icon("navigation-close").small.modal-closer
-            +container-content
-                +paragraph-sample
-            +container-footer The footer here
+  +modal#modal-2
+    +container.xs-8
+      +container-header("Closable")
+        +multiple-right
+          +button-icon("close").small.modal-closer
+      +container-content
+        +paragraph-sample
+      +container-footer The footer here
 
 
-    +modal("No footer")#modal-3
-        +container("No footer").xs-8
-            +container-content
-                +paragraph-sample
+  +modal("No footer")#modal-3
+    +container("No footer").xs-8
+      +container-content
+        +paragraph-sample
 
-    +modal#modal-4
-        +container.xs-8
-            +container-content
-                +paragraph-sample
-            +container-footer The footer here
+  +modal#modal-4
+    +container.xs-8
+      +container-content
+        +paragraph-sample
+      +container-footer The footer here
 
-    +modal#modal-5
-        +container.xs-8
-            +container-content
-                +paragraph-sample
+  +modal#modal-5
+    +container.xs-8
+      +container-content
+        +paragraph-sample
 
-    +modal#modal-6
-        +container("With buttons").xs-8
-            +container-content
-                +paragraph-sample
-            +container-footer
-                +multiple
-                    +button-simple.outlined.modal-closer Closer
-                    +button-simple.primary No Closer
-                    +button-simple.secondary.modal-closer Closer
+  +modal#modal-6
+    +container("With buttons").xs-8
+      +container-content
+        +paragraph-sample
+      +container-footer
+        +multiple
+          +button-simple.outlined.modal-closer Closer
+          +button-simple.primary No Closer
+          +button-simple.secondary.modal-closer Closer
 
-    +modal#modal-7
-        +container("Long content").xs-8
-            +container-content
-                +paragraph-sample
-                +paragraph-sample
-                +paragraph-sample
-                +paragraph-sample
-                +paragraph-sample
-                +paragraph-sample
-            +container-footer The footer here
+  +modal#modal-7
+    +container("Long content").xs-8
+      +container-content
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+      +container-footer The footer here
 
-    +modal#modal-8.fullscreen
-        +container
-            +container-header("Fullscreen")
-                +multiple-right
-                    +button-icon("navigation-close").small.modal-closer
-            +container-content
-                +paragraph-sample
-            +container-footer The footer here
+  +modal#modal-8.fullscreen
+    +container
+      +container-header("Fullscreen")
+        +multiple-right
+          +button-icon("close").small.modal-closer
+      +container-content
+        +paragraph-sample
+      +container-footer The footer here

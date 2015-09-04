@@ -1,13 +1,14 @@
-//- bootstrap/colorpicker.jade
 
 extends ../layout.jade
 
+//- Colorpicker
+
 append main
-    +divider Colorpicker
+  +divider Colorpicker
 
-    +container-simple
-        +colorpicker(id="colorpicker_test")
+  +container-simple
+    +colorpicker(id="colorpicker_test")
 
-    +divider Input
+  +divider Input
 
-    +input({name: "colorpicker_test", label: "Hex color..."}).white.no-floating
+  +input({ name: "colorpicker_test", label: "Hex color..." }).white.no-floating

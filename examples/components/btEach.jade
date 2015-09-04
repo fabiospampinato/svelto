@@ -1,88 +1,92 @@
-//- tools/btEach.jade
 
 extends ../layout.jade
 
+//- btEach
+
 append main
-    +divider Squares
+  +divider Squares
 
-    +container-simple.squares
-        +multiple
-            - var squares_nr = 64;
-            - var nr = 1;
-            while nr <= squares_nr
-                +square.xxlarge.centerer
-                    span.small= nr++
-
-    +divider Actions
-
+  +container-simple.squares
     +multiple
-        +multiple.joined
-            +input({name: "input_search", label: "Search number..."}).no-floating.white.text-field-primary
-            +button-simple("search()").primary Search
-        +multiple.joined
-            +input({name: "input_populate", label: "Square number..."}).no-floating.white.text-field-secondary
-            +button-simple("populate()").secondary Populate
-        +button-simple("reset()").black Reset
+      - var squares_nr = 64;
+      - var nr = 1;
+      while nr <= squares_nr
+        +square.xxlarge.centerer
+          .small= nr++
+
+  +divider Actions
+
+  +multiple
+    +multiple.joined
+      +input({ name: "input_search", label: "Search number..." }).no-floating.white.text-field-primary
+      +button-simple("search ()").primary Search
+    +multiple.joined
+      +input({ name: "input_populate", label: "Square number..." }).no-floating.white.text-field-secondary
+      +button-simple("populate ()").secondary Populate
+    +button-simple("reset ()").black Reset
 
 append body-end
-    +script.
-        var $squares,
-            $input,
-            search_nr,
-            iterations = 0;
+  +script.
+    var $squares,
+        $input_search,
+        search_nr,
+        iterations = 0;
 
-        function populate () {
-            var html = '';
+    function populate () {
+      
+      var html = '';
 
-            for ( var i = 0, l = $('input[name="input_populate"]').val (); i < l; i++ ) {
-                html += '<div class="square xxlarge centerer" style=""><span class="small">' + (i + 1) + '</span></div>';
-            }
+      for ( var i = 0, l = $('input[name="input_populate"]').val (); i < l; i++ ) {
+        html += '<div class="square xxlarge centerer" style=""><div class="small">' + (i + 1) + '</div></div>';
+      }
 
-            $('.squares .multiple').empty ().append ( html );
+      $('.squares .multiple').empty ().append ( html );
 
-            $squares = $document.find ( '.square' );
-        }
+      $squares = $document.find ( '.square' );
+      
+    }
 
-        function search () {
-            reset ();
-            search_nr = Number($input.val ());
-            $squares.btEach ( comparer );
-        }
+    function search () {
+      reset ();
+      search_nr = Number($input_search.val ());
+      $squares.btEach ( comparer );
+    }
 
-        function comparer () {
-            var $node = $(this),
-                found_nr = Number($node.find('span').html ());
+    function comparer () {
+      
+      var $node = $(this),
+          found_nr = Number($node.children ().html ());
 
-            iterations += 1;
+      iterations += 1;
 
-            $node.append ( '<div class="label-wrp"><div class="label compact badge top-right xsmall rounded inherit"><div class="label-center">' + iterations + '</div></div></div>' );
+      $node.append ( '<div class="label-wrp"><div class="label compact badge top-right xsmall rounded inherit"><div class="label-center">' + iterations + '</div></div></div>' );
 
-            if ( found_nr < search_nr ) {
+      if ( found_nr < search_nr ) {
 
-                $node.addClass ( 'red' );
-                return 1;
+        $node.addClass ( 'red' );
+        return 1;
 
-            } else if ( found_nr > search_nr ) {
+      } else if ( found_nr > search_nr ) {
 
-                $node.addClass ( 'red' );
-                return -1;
+        $node.addClass ( 'red' );
+        return -1;
 
-            } else {
+      } else {
 
-                $node.addClass ( 'green' );
-                return false;
+        $node.addClass ( 'green' );
+        return false;
 
-            }
+      }
 
-        }
+    }
 
-        function reset () {
-            iterations = 0;
-            $squares.removeClass ( 'green red' );
-            $squares.find ( '.label-wrp' ).remove ();
-        }
+    function reset () {
+      iterations = 0;
+      $squares.removeClass ( 'red green' );
+      $squares.find ( '.label-wrp' ).remove ();
+    }
 
-        $(function () {
-            $squares = $document.find ( '.square' );
-            $input = $('input[name="input_search"]');
-        });
+    $(function () {
+      $squares = $document.find ( '.square' );
+      $input_search = $('input[name="input_search"]');
+    });

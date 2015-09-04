@@ -92,6 +92,9 @@ gulp.task ( 'examples', function () {
                locals: {},
                pretty: true
              }))
+             .on ( 'error', function ( err ) {
+               console.log ( err.message );
+             })
              //  .pipe ( minify_html ({
              //    considtionals: true
              //  }))

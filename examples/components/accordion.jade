@@ -1,85 +1,78 @@
-//- javascript/accordion.jade
 
 extends ../layout.jade
 
+//- Accordion
+
 append main
-    +divider Accordion
+  +divider Accordion
 
-    +accordion
-        +expander
-            +container-header("Section 1").actionable.expander-toggler
-                +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").small
-            +container-content
-                +paragraph-sample
-        +expander.opened
-            +container-header
-                +multiple-left
-                    p Section 2 - Button toggler
-                +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").small.expander-toggler
-            +container-content
-                +paragraph-sample
-        +expander
-            +container-header("Section 3").actionable.expander-toggler
-                +multiple-left
-                    +button-icon("hardware-keyboard-arrow-down").small
-            +container-content
-                +paragraph-sample
-        +expander
-            +container-header("Section 4").actionable.expander-toggler
-                +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").small
-            +container-content
-                +paragraph-sample
+  +accordion
+    +expander
+      +container-header("Section 1").actionable.expander-toggler
+        +multiple-right
+          +button-icon("keyboard_arrow_down").small
+      +container-content
+        +paragraph-sample
+    +expander.opened
+      +container-header
+        +multiple-left
+          p Section 2 - Button toggler
+        +multiple-right
+          +button-icon("keyboard_arrow_down").small.expander-toggler
+      +container-content
+        +paragraph-sample
+    +expander
+      +container-header("Section 3").actionable.expander-toggler
+        +multiple-left
+          +button-icon("keyboard_arrow_down").small
+      +container-content
+        +paragraph-sample
+    +expander
+      +container-header("Section 4").actionable.expander-toggler
+        +multiple-right
+          +button-icon("keyboard_arrow_down").small
+      +container-content
+        +paragraph-sample
 
-    +divider Accordion - Multiple
+  +divider Accordion - Multiple
 
-    +accordion.multiple
-        +expander
-            +container-header("Section 1").actionable.expander-toggler
-                +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").small
-            +container-content
-                +paragraph-sample
-        +expander.opened
-            +container-header
-                +multiple-left
-                    p Section 2 - Button toggler
-                +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").small.expander-toggler
-            +container-content
-                +paragraph-sample
-        +expander
-            +container-header("Section 3").actionable.expander-toggler
-                +multiple-left
-                    +button-icon("hardware-keyboard-arrow-down").small
-            +container-content
-                +paragraph-sample
-        +expander
-            +container-header("Section 4").actionable.expander-toggler
-                +multiple-right
-                    +button-icon("hardware-keyboard-arrow-down").small
-            +container-content
-                +paragraph-sample
+  +accordion.multiple
+    +expander
+      +container-header("Section 1").actionable.expander-toggler
+        +multiple-right
+          +button-icon("keyboard_arrow_down").small
+      +container-content
+        +paragraph-sample
+    +expander.opened
+      +container-header
+        +multiple-left
+          p Section 2 - Button toggler
+        +multiple-right
+          +button-icon("keyboard_arrow_down").small.expander-toggler
+      +container-content
+        +paragraph-sample
+    +expander
+      +container-header("Section 3").actionable.expander-toggler
+        +multiple-left
+          +button-icon("keyboard_arrow_down").small
+      +container-content
+        +paragraph-sample
+    +expander
+      +container-header("Section 4").actionable.expander-toggler
+        +multiple-right
+          +button-icon("keyboard_arrow_down").small
+      +container-content
+        +paragraph-sample
 
-    +divider Actions
+  +divider Actions
 
-    +multiple
-        +button-simple("accordions_toggle_all()") Toggle all
-        +button-simple("accordions_open_all()") Open all
-        +button-simple("accordions_close_all()") Close all
+  +multiple
+    +button-simple("accordions_action ( 'toggleAll' )") Toggle all
+    +button-simple("accordions_action ( 'openAll' )") Open all
+    +button-simple("accordions_action ( 'closeAll' )") Close all
 
 append body-end
-    script.
-        function accordions_toggle_all () {
-            $('.accordion').accordion ( 'toggleAll' );
-        }
-
-        function accordions_open_all () {
-            $('.accordion').accordion ( 'openAll' );
-        }
-
-        function accordions_close_all () {
-            $('.accordion').accordion ( 'closeAll' );
-        }
+  +script.
+    function accordions_action ( action ) {
+      $('.accordion').accordion ( action );
+    }
