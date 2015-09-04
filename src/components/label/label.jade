@@ -1,97 +1,99 @@
-//- label.jade
+
+//- Label
 
 mixin label-wrp
-    .label-wrp&attributes(attributes)
-        block
+  .label-wrp&attributes(attributes)
+    block
 
 mixin label
-    +label-wrp
-        .label&attributes(attributes)
-            block
+  +label-wrp
+    .label&attributes(attributes)
+      block
 
 mixin label-left
-    .label-left&attributes(attributes)
-        block
+  .label-left&attributes(attributes)
+    block
 
 mixin label-center
-    .label-center&attributes(attributes)
-        block
+  .label-center&attributes(attributes)
+    block
 
 mixin label-right
-    .label-right&attributes(attributes)
-        block
+  .label-right&attributes(attributes)
+    block
 
 mixin label-simple
-    +label&attributes(attributes)
-        +label-center
-            block
+  +label&attributes(attributes)
+    +label-center
+      block
 
 mixin label-icon(icon)
-    +label&attributes(attributes).compact
-        +label-center
-            +icon(icon)
-        block
+  +label&attributes(attributes)
+    +label-center
+      +icon(icon)
+    block
 
 mixin label-pointed
-    +label-wrp
-        +label-pointer&attributes(attributes)
-        .label&attributes(attributes)
-            block
+  +label-wrp
+    +label-pointer&attributes(attributes)
+    .label&attributes(attributes)
+      block
 
 mixin label-pointed-simple
-    +label-pointed&attributes(attributes)
-        +label-center
-            block
+  +label-pointed&attributes(attributes)
+    +label-center
+      block
 
 mixin label-pointer
-    .label-pointer&attributes(attributes)
-        block
+  .label-pointer&attributes(attributes)
+    block
 
 mixin label-ribbons
-    +label-wrp.ribbons
-        .label&attributes(attributes)
-            .label-ribbon-left
-            .label-ribbon-right
-            block
-    +label-simple&attributes(attributes).invisible
+  +label-wrp.ribbons
+    .label&attributes(attributes)
+      .label-ribbon-left
+      .label-ribbon-right
+      block
+  +label-simple&attributes(attributes).invisible
 
 mixin label-ribbon-left
-    +label-wrp.ribbon-left
-        .label&attributes(attributes)
-            .label-ribbon-left
-            block
-    +label-simple&attributes(attributes).invisible
+  +label-wrp.ribbon-left
+    .label&attributes(attributes)
+      .label-ribbon-left
+      block
+  +label-simple&attributes(attributes).invisible
 
 mixin label-ribbon-right
-    +label-wrp.ribbon-right
-        .label&attributes(attributes)
-            .label-ribbon-right
-            block
-    +label-simple&attributes(attributes).invisible
+  +label-wrp.ribbon-right
+    .label&attributes(attributes)
+      .label-ribbon-right
+      block
+  +label-simple&attributes(attributes).invisible
 
 mixin label-ribbons-simple
-    +label-ribbons&attributes(attributes)
-        +label-center
-            block
+  +label-ribbons&attributes(attributes)
+    +label-center
+      block
 
 mixin label-ribbon-left-simple
-    +label-ribbon-left&attributes(attributes)
-        +label-center
-            block
+  +label-ribbon-left&attributes(attributes)
+    +label-center
+      block
 
 mixin label-ribbon-right-simple
-    +label-ribbon-right&attributes(attributes)
-        +label-center
-            block
+  +label-ribbon-right&attributes(attributes)
+    +label-center
+      block
 
 mixin label-corner(direction, icon)
-    +label-wrp(class=(direction || "top-right")).corner
-        .label&attributes(attributes).compact
-            .label-corner
-            +label-center
-                if icon
-                    +icon(icon)
-                else
-                    block
-            if icon
-                block
+  - direction = direction || "";
+  +label-wrp(class=direction).corner
+    .label&attributes(attributes).compact
+      .label-corner
+      +label-center
+        if icon
+          +icon(icon)
+        else
+          block
+      if icon
+        block

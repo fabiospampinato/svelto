@@ -1,18 +1,21 @@
-//- navbar.jade
+
+//- Navbar
 
 mixin navbar-btn(title, icon, id)
-    +button(data-navbar="navbar-"+id, class=(title ? "" : "compact"))&attributes(attributes).navbar-btn.navbar-trigger
-        +button-center
-            if title
-                = title
-            if icon
-                if title
-                    +icon(icon).right
-                else
-                    +icon(icon)
+  +button(data-navbar="navbar-" + id)&attributes(attributes).navbar-btn.navbar-trigger
+    +button-center
+      if title
+        = title
+      if icon
+        if title
+          +icon(icon).right
+        else
+          +icon(icon)
 
 mixin navbar(id, direction, slim, attached)
-    .navbar-wrp(class=(direction || "left") + " " + (slim ? "slim" : "") + " " + (attached ? ( attached === true ? "attached-xs" : "attached-" + attached ) : "" ))
-        +container(id="navbar-"+id)&attributes(attributes).navbar
-            block
-        .background.navbar-closer
+  - direction = direction || "left";
+  - slim = slim || "";
+  .navbar-wrp(class=(direction + " " + slim + " " + (attached ? ( attached === true ? "attached-xs" : "attached-" + attached ) : "" ))
+    +container(id="navbar-" + id)&attributes(attributes).navbar
+      block
+    .background.navbar-closer

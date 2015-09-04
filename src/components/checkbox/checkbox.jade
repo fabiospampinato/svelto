@@ -1,19 +1,20 @@
-//- checkbox.jade
+
+//- Checkbox
 
 //- TODO: the value should be setted to 1 by default if is not provided
 
 mixin checkbox(name, title, value, checked)
-    if checked
-        +button&attributes(attributes).checkbox.checked
-            input(type="checkbox", name=name, value=value, checked)
-            +button-center
-                = title
-                +icon("check_box").on.right
-                +icon("check_box_outline_blank").off.right
-    else
-        +button&attributes(attributes).checkbox
-            input(type="checkbox", name=name, value=value)
-            +button-center
-                = title
-                +icon("check_box").on.right
-                +icon("check_box_outline_blank").off.right
+  if checked
+    +button&attributes(attributes).checkbox.checked
+      input(type="checkbox" name=name value=value checked)
+      +button-center
+        span title
+        +icon("check_box").icon-on
+        +icon("check_box_outline_blank").icon-off
+  else
+    +button&attributes(attributes).checkbox
+      input(type="checkbox" name=name value=value)
+      +button-center
+        span title
+        +icon("check_box").icon-on
+        +icon("check_box_outline_blank").icon-off

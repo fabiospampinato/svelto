@@ -1,28 +1,29 @@
-//- select.jade
+
+//- Select
 
 //- FIXME: Add support for arbitrary number of optgroups levels
 //- TODO: Make the mixin set the defualt value at the compilation time
 
 mixin select-btn(options, selected, id, icon)
-    +button(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes).select-btn.select-trigger
-        +button-center
-            .select-label
-                block
-            +icon(icon || "reorder").right
-            +select(options, selected, id)
+  +button(data-select="select-" + id)&attributes(attributes).select-btn.select-trigger
+    +button-center
+      .select-label
+        block
+      +icon(icon || "reorder").right
+      +select(options, selected, id)
 
 mixin select-btn-icon(options, selected, id, icon)
-    +button(data-select="select-"+id, class=(!block ? "compact" : ""))&attributes(attributes).select-btn.select-trigger
-        +button-center
-            +icon(icon || "reorder")
-            +select(options, selected, id)
+  +button(data-select="select-" + id)&attributes(attributes).select-btn.select-trigger
+    +button-center
+      +icon(icon || "reorder")
+      +select(options, selected, id)
 
 mixin select(options, selected, id)
-    select(id="select-"+id, name=id, placeholder="Select a value...")
-        each val, prop in options
-            if typeof val === "object"
-                optgroup(label=prop)
-                    each subval, subprop in val
-                        option(value=subprop, selected=(subprop === selected))= subval
-            else
-                option(value=prop, selected=(subprop === selected))= val
+  select(id="select-" + id name=id, placeholder="Select a value...")
+    each val, prop in options
+      if typeof val === "object"
+        optgroup(label=prop)
+          each subval, subprop in val
+            option(value=subprop selected=(subprop === selected))= subval
+      else
+        option(value=prop selected=(subprop === selected))= val

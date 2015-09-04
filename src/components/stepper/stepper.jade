@@ -1,7 +1,8 @@
-//- stepper.jade
+
+//- Stepper
 
 mixin stepper(name, min, value, max)
-    +multiple(data-min=min, data-max=max)&attributes(attributes).stepper.joined
-        +button-icon("content-remove").stepper-decreaser
-        +input({name: name, value: value}).autogrow.compact
-        +button-icon("content-add").stepper-increaser
+  +multiple(data-min=min data-max=max)&attributes(attributes).stepper.joined
+    +button-icon("remove").stepper-decreaser
+    +input({name: name, value: value}).autogrow.compact
+    +button-icon("add").stepper-increaser

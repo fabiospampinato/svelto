@@ -1,32 +1,31 @@
-//- embedded.jade
 
 //- EMBEDDED
 
 mixin embedded(src, allowfullscreen)
-    .embedded&attributes(attributes)
-        if src
-            +iframe(src, allowfullscreen)
-        else
-            block
+  .embedded&attributes(attributes)
+    if src
+      +iframe(src, allowfullscreen)
+    else
+      block
 
 //- EMBEDDABLES
 
 mixin iframe(src, allowfullscreen)
-    if allowfullscreen
-        iframe(src=src, allowfullscreen)&attributes(attributes)
-    else
-        iframe(src=src)&attributes(attributes)
+  if allowfullscreen
+    iframe(src=src allowfullscreen)&attributes(attributes)
+  else
+    iframe(src=src)&attributes(attributes)
 
 mixin embed(src)
-    embed(src=src)&attributes(attributes)
+  embed(src=src)&attributes(attributes)
 
 mixin video(sources, type)
-    video&attributes(attributes)
-        if type
-            sources(src=sources, type=type)
-        else
-            each src, type in sources
-                source(src=src, type=type)
+  video&attributes(attributes)
+    if type
+      sources(src=sources type=type)
+    else
+      each src, type in sources
+        source(src=src type=type)
 
 mixin object(data)
-    object(data=data)&attributes(attributes)
+  object(data=data)&attributes(attributes)

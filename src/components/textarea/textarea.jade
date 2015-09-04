@@ -1,11 +1,13 @@
-//- textarea.jade
+
+//- Textarea
 
 mixin textarea(options)
-    if !options
-        - options = {}
-    .textarea-wrp(class=(!options.label ? 'no-floating' : ''))&attributes(attributes)
-        textarea.text-field(type=(options.type || "text"), name=(options.name || ""), required)
-            block
-        if options.label
-            label= options.label
-        .text-field-bar
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating" : ""))&attributes(attributes)
+    textarea.text-field(type=options.type name=options.name, required)
+      block
+    if options.label
+      label= options.label
+    .text-field-bar

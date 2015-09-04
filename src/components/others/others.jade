@@ -1,45 +1,46 @@
-//- others.jade
+
+//- Others
 
 //- TODO: add optional third parameter that toggles the randomization process
 mixin lorem-ipsum(amount, type)
-    - var returnLI = '';
-    - var LIText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet tincidunt turpis, in pharetra mi convallis ut. Vivamus eget sodales nibh, eu placerat erat. Vivamus massa urna, volutpat non tempus eget, placerat quis elit. Nullam pretium id arcu sed eleifend. Phasellus sollicitudin quis ante nec ornare. Maecenas nibh eros, vehicula vel eros eget, viverra semper nisi. Nulla facilisi. Praesent pretium porttitor arcu, sit amet consequat neque luctus non. Cras sodales, justo quis tempus dignissim, diam est commodo orci, eget accumsan sem ante vitae sem. Curabitur quam ipsum, porta id sapien in, consectetur auctor nibh. Vivamus egestas ante vel cursus aliquet. In non ante nec velit tempus lacinia nec sollicitudin ex. Phasellus semper lorem a diam scelerisque, sed accumsan erat molestie. Mauris vulputate lacinia erat. Nunc urna risus, facilisis at posuere in, pulvinar quis odio. Maecenas et sollicitudin arcu.\n Proin maximus dui ac felis blandit luctus. Fusce consectetur, nisl vitae blandit viverra, mi nisl posuere lorem, a interdum nisl leo quis massa. Donec et pretium mi. Quisque bibendum urna quis eleifend blandit. Donec pulvinar est eu diam tempus bibendum. Aenean iaculis mi vel magna viverra, ut facilisis velit luctus. Aenean blandit, erat a cursus dignissim, lectus lacus vehicula orci, ut vestibulum risus purus quis libero. Fusce vestibulum risus a erat varius facilisis. Donec tincidunt interdum mattis. Nam mi sapien, dictum a egestas in, efficitur sed sem. Cras dignissim neque dignissim arcu suscipit pellentesque. Praesent euismod vel dui at imperdiet. Vestibulum rhoncus dolor sed bibendum hendrerit. Sed malesuada dolor sed ex porttitor euismod. In id laoreet dui.\n Donec maximus ante vel erat sagittis varius. Quisque auctor varius rhoncus. Nunc efficitur, magna eu venenatis placerat, odio dui sodales nisi, sit amet ultricies sapien eros vel erat. Maecenas tincidunt dolor sit amet nibh gravida, eu iaculis enim hendrerit. Fusce porttitor arcu magna, quis convallis enim suscipit eget. Mauris id lacus pharetra, auctor leo at, pulvinar leo. Sed ex augue, tristique posuere augue sed, aliquet dictum erat.\n Sed lobortis purus non eros bibendum, nec ornare erat euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Quisque ut nulla cursus, vehicula dui vitae, consectetur urna. Sed tincidunt est purus, id auctor risus fringilla in. Vivamus rutrum dictum ligula, scelerisque elementum orci fringilla eget. Suspendisse potenti.\n Phasellus molestie quam a urna ultrices suscipit. Fusce eu elit rutrum dui elementum malesuada. Curabitur porta tincidunt tristique. Nam tellus enim, sodales id est auctor, lobortis elementum sem. Curabitur pharetra convallis bibendum. Curabitur consectetur rhoncus dignissim. Sed vehicula est et lacinia dapibus. Nunc efficitur diam vel mattis posuere.";
+  - var returnLI = '';
+  - var LIText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet tincidunt turpis, in pharetra mi convallis ut. Vivamus eget sodales nibh, eu placerat erat. Vivamus massa urna, volutpat non tempus eget, placerat quis elit. Nullam pretium id arcu sed eleifend. Phasellus sollicitudin quis ante nec ornare. Maecenas nibh eros, vehicula vel eros eget, viverra semper nisi. Nulla facilisi. Praesent pretium porttitor arcu, sit amet consequat neque luctus non. Cras sodales, justo quis tempus dignissim, diam est commodo orci, eget accumsan sem ante vitae sem. Curabitur quam ipsum, porta id sapien in, consectetur auctor nibh. Vivamus egestas ante vel cursus aliquet. In non ante nec velit tempus lacinia nec sollicitudin ex. Phasellus semper lorem a diam scelerisque, sed accumsan erat molestie. Mauris vulputate lacinia erat. Nunc urna risus, facilisis at posuere in, pulvinar quis odio. Maecenas et sollicitudin arcu.\n Proin maximus dui ac felis blandit luctus. Fusce consectetur, nisl vitae blandit viverra, mi nisl posuere lorem, a interdum nisl leo quis massa. Donec et pretium mi. Quisque bibendum urna quis eleifend blandit. Donec pulvinar est eu diam tempus bibendum. Aenean iaculis mi vel magna viverra, ut facilisis velit luctus. Aenean blandit, erat a cursus dignissim, lectus lacus vehicula orci, ut vestibulum risus purus quis libero. Fusce vestibulum risus a erat varius facilisis. Donec tincidunt interdum mattis. Nam mi sapien, dictum a egestas in, efficitur sed sem. Cras dignissim neque dignissim arcu suscipit pellentesque. Praesent euismod vel dui at imperdiet. Vestibulum rhoncus dolor sed bibendum hendrerit. Sed malesuada dolor sed ex porttitor euismod. In id laoreet dui.\n Donec maximus ante vel erat sagittis varius. Quisque auctor varius rhoncus. Nunc efficitur, magna eu venenatis placerat, odio dui sodales nisi, sit amet ultricies sapien eros vel erat. Maecenas tincidunt dolor sit amet nibh gravida, eu iaculis enim hendrerit. Fusce porttitor arcu magna, quis convallis enim suscipit eget. Mauris id lacus pharetra, auctor leo at, pulvinar leo. Sed ex augue, tristique posuere augue sed, aliquet dictum erat.\n Sed lobortis purus non eros bibendum, nec ornare erat euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Quisque ut nulla cursus, vehicula dui vitae, consectetur urna. Sed tincidunt est purus, id auctor risus fringilla in. Vivamus rutrum dictum ligula, scelerisque elementum orci fringilla eget. Suspendisse potenti.\n Phasellus molestie quam a urna ultrices suscipit. Fusce eu elit rutrum dui elementum malesuada. Curabitur porta tincidunt tristique. Nam tellus enim, sodales id est auctor, lobortis elementum sem. Curabitur pharetra convallis bibendum. Curabitur consectetur rhoncus dignissim. Sed vehicula est et lacinia dapibus. Nunc efficitur diam vel mattis posuere.";
 
-    if type === 'characters'
-        - returnLI = LIText.substr ( 0, amount );
-    else if type === 'words'
-        - var LIWords;
-        - LIText = LIText.toLowerCase ();
-        - LIText = LIText.split ( '.' ).join ( '' );
-        - LIText = LIText.split ( ',' ).join ( '' );
-        - lipsumArray = LIText.split ( ' ' );
-        - for ( var i = 0; i < ( amount || 1 ); i++ ) {
-            - returnLI += lipsumArray[i] + ' ';
-        - }
-        - returnLI = returnLI.charAt ( 0 ).toUpperCase () + returnLI.slice ( 1 );
-        - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
-    else
-        - var LISentences = LIText.split ( '\n ' );
-        - for ( var i = 0; i < ( amount || 1 ); i++ ) {
-            - returnLI += LISentences[i] + '\n';
-        - }
-        - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
+  if type === 'characters'
+    - returnLI = LIText.substr ( 0, amount );
+  else if type === 'words'
+    - var LIWords;
+    - LIText = LIText.toLowerCase ();
+    - LIText = LIText.split ( '.' ).join ( '' );
+    - LIText = LIText.split ( ',' ).join ( '' );
+    - lipsumArray = LIText.split ( ' ' );
+    - for ( var i = 0; i < ( amount || 1 ); i++ ) {
+      - returnLI += lipsumArray[i] + ' ';
+    - }
+    - returnLI = returnLI.charAt ( 0 ).toUpperCase () + returnLI.slice ( 1 );
+    - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
+  else
+    - var LISentences = LIText.split ( '\n ' );
+    - for ( var i = 0; i < ( amount || 1 ); i++ ) {
+      - returnLI += LISentences[i] + '\n';
+    - }
+    - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
 
-    =returnLI
+  = returnLI
 
 mixin paragraph-sample
-    +placeholder('95%', 10, true)&attributes(attributes)
-    +placeholder('92%', 10, true)&attributes(attributes)
-    +placeholder('100%', 10, true)&attributes(attributes)
-    +placeholder('87%', 10, true)&attributes(attributes)
-    +placeholder('97%', 10, true)&attributes(attributes)
-    +placeholder('93%', 10, true)&attributes(attributes)
-    +placeholder('97%', 10, true)&attributes(attributes)
+  +placeholder('95%', 10, true)&attributes(attributes)
+  +placeholder('92%', 10, true)&attributes(attributes)
+  +placeholder('100%', 10, true)&attributes(attributes)
+  +placeholder('87%', 10, true)&attributes(attributes)
+  +placeholder('97%', 10, true)&attributes(attributes)
+  +placeholder('93%', 10, true)&attributes(attributes)
+  +placeholder('97%', 10, true)&attributes(attributes)
 
 mixin spacer
-    .spacer&attributes(attributes)
-        block
+  .spacer&attributes(attributes)
+    block
 
 mixin centerer
-    .centerer&attributes(attributes)
-        block
+  .centerer&attributes(attributes)
+    block

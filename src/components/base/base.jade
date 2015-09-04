@@ -1,11 +1,13 @@
-//- base.jade
+
+//- Base
 
 mixin css(url, media)
-    link(rel="stylesheet" href!=url, media= ( media || "all"))&attributes(attributes)
+  - media = media || "all";
+  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
 
 mixin js(url)
-    script(src!=url)&attributes(attributes)
+  script(src!=url)&attributes(attributes)
 
 mixin script
-    script&attributes(attributes)
-        block
+  script&attributes(attributes)
+    block

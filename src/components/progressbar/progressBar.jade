@@ -1,21 +1,22 @@
-//- progressBar.jade
 
-mixin progressBar(options, multiple)
-    if typeof multiple !== 'undefined'
-        - var new_options = { percentages: Array ( arguments.length ) };
-        - for ( var i = 0, l = arguments.length; i < l; i++ ) {
-            - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
-        - }
-    else
-        - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
-    - options = new_options;
-    - var total = 0;
+//- Progressbar
 
-    .progressBar&attributes(attributes)
-        .progressBar-unhighlighted
-            each percentage in options.percentages
-                - total += percentage.value;
-                .progressBar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%"))
-                    if options.labeled
-                        .progressBar-label= +(percentage.value).toFixed(options.decimals || 0)
-        .progressBar-stripes(style=("width: " + total + "%"))
+mixin progresbar(options, multiple)
+  if typeof multiple !== 'undefined'
+    - var new_options = { percentages: Array ( arguments.length ) };
+    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
+      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
+    - }
+  else
+    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+  - options = new_options;
+  - var total = 0;
+
+  .progresbar&attributes(attributes)
+    .progresbar-unhighlighted
+      each percentage in options.percentages
+        - total += percentage.value;
+        .progresbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
+          if options.labeled
+            .progresbar-label= +(percentage.value).toFixed(options.decimals || 0)
+    .progresbar-stripes(style=("width: " + total + "%;"))

@@ -1,12 +1,13 @@
-//- table.jade
+
+//- Table
 
 mixin table-tr-empty ( empty_str )
-    tr.empty.hidden&attributes(attributes)
-        td(colspan="100%")
-            if block
-                block
-            else
-                if empty_str
-                    = empty_str
-                else
-                    = "Empty"
+  tr&attributes(attributes).empty.hidden
+    td(colspan="100%")
+      if block
+        block
+      else
+        if empty_str
+          = empty_str
+        else
+          = "Empty"

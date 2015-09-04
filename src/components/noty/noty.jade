@@ -1,4 +1,5 @@
-//- noty.jade
+
+//- Noty
 
 mixin noty(options)
-    +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
+  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });

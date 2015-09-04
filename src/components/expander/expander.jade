@@ -1,7 +1,8 @@
-//- expander.jade
+
+//- Expander
 
 mixin expander(title, header_classes)
-    +container&attributes(attributes).expander
-        if title
-            +container-header(title)(class=header_classes).expander-toggler
-        block
+  +container&attributes(attributes).expander
+    if title
+      +container-header(title)(class=header_classes).expander-toggler
+    block

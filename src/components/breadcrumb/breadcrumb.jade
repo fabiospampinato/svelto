@@ -1,12 +1,14 @@
-//- breadcrumb.jade
+
+//- Breadcrumb
 
 mixin breadcrumb
-    .breadcrumb&attributes(attributes)
-        block
+  .breadcrumb&attributes(attributes)
+    block
 
 mixin breadcrumb-divider(icon)
-    .breadcrumb-divider&attributes(attributes)
-        if block
-            block
-        else
-            +icon(icon || "navigation-chevron-right")
+  .breadcrumb-divider&attributes(attributes)
+    if block
+      block
+    else
+      - icon = icon || "chevron_right";
+      +icon(icon)

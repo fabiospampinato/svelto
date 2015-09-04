@@ -1,30 +1,31 @@
-//- divider.jade
+
+//- Divider
 
 mixin divider
-    +divider-block&attributes(attributes)
-        block
+  +divider-block&attributes(attributes)
+    block
 
 mixin divider-block
-    .divider-wrp.block
-        .divider&attributes(attributes)
-            block
+  .divider-wrp.block
+    .divider&attributes(attributes)
+      block
 
 mixin divider-linear
-    if block
-        .divider-wrp.linear
-            hr.left
-            .divider&attributes(attributes)
-                block
-            hr.right
-    else
-        hr&attributes(attributes)
+  if block
+    .divider-wrp.linear
+      hr.left
+      .divider&attributes(attributes)
+        block
+      hr.right
+  else
+    hr&attributes(attributes)
 
 mixin divider-text
-    .divider-wrp.text
-        .divider&attributes(attributes)
-            block
+  .divider-wrp.text
+    .divider&attributes(attributes)
+      block
 
 mixin divider-spacer
-    .divider-wrp.spacer
-        .divider&attributes(attributes)
-            block
+  .divider-wrp.spacer
+    .divider&attributes(attributes)
+      block

@@ -1,61 +1,62 @@
-//- header.jade
+
+//- Infobar
 
 mixin infobar(icon, title, subtitle)
-    .infobar-wrp&attributes(attributes)
-        if icon
-            if title
-                if subtitle !== undefined
-                    if subtitle
-                        +infobar-left
-                            +icon(icon).xlarge
-                        +infobar-center
-                            +infobar-title(title)
-                            +infobar-subtitle(subtitle)
-                            block
-                    else
-                        +infobar-left
-                            +icon(icon)
-                        +infobar-center
-                            +infobar-title(title)
-                            block
-                else
-                    +infobar-center
-                        +infobar-title(icon)
-                        +infobar-subtitle(title)
-                        block
-            else
-                +infobar-center
-                    +infobar-title(icon)
-                    block
+  .infobar-wrp&attributes(attributes)
+    if icon
+      if title
+        if subtitle !== undefined
+          if subtitle
+            +infobar-left
+              +icon(icon).xlarge
+            +infobar-center
+              +infobar-title(title)
+              +infobar-subtitle(subtitle)
+              block
+          else
+            +infobar-left
+              +icon(icon)
+            +infobar-center
+              +infobar-title(title)
+              block
         else
+          +infobar-center
+            +infobar-title(icon)
+            +infobar-subtitle(title)
             block
+      else
+        +infobar-center
+          +infobar-title(icon)
+          block
+    else
+      block
 
 mixin infobar-left
-    .infobar-left&attributes(attributes)
-        block
+  .infobar-left&attributes(attributes)
+    block
 
 mixin infobar-center
-    .infobar-center&attributes(attributes)
-        block
+  .infobar-center&attributes(attributes)
+    block
 
 mixin infobar-title(title)
-    if title
-        p.infobar-title&attributes(attributes)= title
-    else
-        p.infobar-title&attributes(attributes)
-            block
+  if title
+    p.infobar-title&attributes(attributes)= title
+  else
+    p.infobar-title&attributes(attributes)
+      block
 
 mixin infobar-subtitle(subtitle)
-    if subtitle
-        p&attributes(attributes)= subtitle
-    else
-        p&attributes(attributes)
-            block
+  if subtitle
+    p&attributes(attributes)= subtitle
+  else
+    p&attributes(attributes)
+      block
 
 mixin infobar-right
-    .infobar-right&attributes(attributes)
-        block
+  .infobar-right&attributes(attributes)
+    block
 
 mixin infobar-bottom
-    .infobar-bottom&attributes(attributes)
-        block
+  .infobar-bottom&attributes(attributes)
+    block

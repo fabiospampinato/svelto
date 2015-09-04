@@ -1,108 +1,110 @@
-//- button.jade
+
+//- Button
 
 mixin button-wrp
-    .label-wrp.button-wrp&attributes(attributes)
-        block
+  .label-wrp.button-wrp&attributes(attributes)
+    block
 
 mixin button(href)
-    +button-wrp
-        if href
-            if href.slice ( 0, 11 ) === 'javascript:'
-                .label.actionable(onclick=href)&attributes(attributes)
-                    block
-            else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-                .label.actionable(onclick="javascript:"+href)&attributes(attributes)
-                    block
-            else
-                a.label.actionable(href=href)&attributes(attributes)
-                    block
-        else
-            .label.actionable&attributes(attributes)
-                block
+  +button-wrp
+    if href
+      if href.slice ( 0, 11 ) === 'javascript:'
+        .label(onclick=href)&attributes(attributes).actionable
+          block
+      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+        .label(onclick="javascript:" + href)&attributes(attributes).actionable
+          block
+      else
+        a.label(href=href)&attributes(attributes).actionable
+          block
+    else
+      .label&attributes(attributes).actionable
+        block
 
 mixin button-left
-    .label-left&attributes(attributes)
-        block
+  .label-left&attributes(attributes)
+    block
 
 mixin button-center
-    .label-center&attributes(attributes)
-        block
+  .label-center&attributes(attributes)
+    block
 
 mixin button-right
-    .label-right&attributes(attributes)
-        block
+  .label-right&attributes(attributes)
+    block
 
 mixin button-simple(href)
-    +button(href)&attributes(attributes)
-        +button-center
-            block
+  +button(href)&attributes(attributes)
+    +button-center
+      block
 
 mixin button-icon(icon, href)
-    +button(href)&attributes(attributes).compact
-        +button-center
-            +icon(icon)
-        block
+  +button(href)&attributes(attributes)
+    +button-center
+      +icon(icon)
+    block
 
 mixin button-pointed
-    +button-wrp.pointed
-        +button-pointer&attributes(attributes)
-        .label.actionable&attributes(attributes)
-            block
+  +button-wrp.pointed
+    +button-pointer&attributes(attributes)
+    .label&attributes(attributes).actionable
+      block
 
 mixin button-pointed-simple
-    +button-pointed&attributes(attributes)
-        +button-center
-            block
+  +button-pointed&attributes(attributes)
+    +button-center
+      block
 
 mixin button-pointer
-    .label-pointer&attributes(attributes)
-        block
+  .label-pointer&attributes(attributes)
+    block
 
 mixin button-ribbons
-    +button-wrp.ribbons
-        .label.actionable&attributes(attributes)
-            .label-ribbon-left
-            .label-ribbon-right
-            block
-    +button-simple&attributes(attributes).invisible
+  +button-wrp.ribbons
+    .label&attributes(attributes).actionable
+      .label-ribbon-left
+      .label-ribbon-right
+      block
+  +button-simple&attributes(attributes).invisible
 
 mixin button-ribbon-left
-    +button-wrp.ribbon-left
-        .label.actionable&attributes(attributes)
-            .label-ribbon-left
-            block
-    +button-simple&attributes(attributes).invisible
+  +button-wrp.ribbon-left
+    .label&attributes(attributes).actionable
+      .label-ribbon-left
+      block
+  +button-simple&attributes(attributes).invisible
 
 mixin button-ribbon-right
-    +button-wrp.ribbon-right
-        .label.actionable&attributes(attributes)
-            .label-ribbon-right
-            block
-    +button-simple&attributes(attributes).invisible
+  +button-wrp.ribbon-right
+    .label&attributes(attributes).actionable
+      .label-ribbon-right
+      block
+  +button-simple&attributes(attributes).invisible
 
 mixin button-ribbons-simple
-    +button-ribbons&attributes(attributes)
-        +label-center
-            block
+  +button-ribbons&attributes(attributes)
+    +label-center
+      block
 
 mixin button-ribbon-left-simple
-    +button-ribbon-left&attributes(attributes)
-        +label-center
-            block
+  +button-ribbon-left&attributes(attributes)
+    +label-center
+      block
 
 mixin button-ribbon-right-simple
-    +button-ribbon-right&attributes(attributes)
-        +label-center
-            block
+  +button-ribbon-right&attributes(attributes)
+    +label-center
+      block
 
 mixin button-corner(direction, icon)
-    +button-wrp(class=(direction || "top-right")).corner
-        .label.actionable&attributes(attributes).compact
-            .label-corner
-            +button-center
-                if icon
-                    +icon(icon)
-                else
-                    block
-            if icon
-                block
+  - direction = direction || "top-right";
+  +button-wrp(class=direction).corner
+    .label&attributes(attributes).compact.actionable
+      .label-corner
+      +button-center
+        if icon
+          +icon(icon)
+        else
+          block
+      if icon
+        block

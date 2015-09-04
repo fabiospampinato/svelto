@@ -1,15 +1,16 @@
-//- image.jade
+
+//- Image
 
 mixin image(url)
-    +container&attributes(attributes).image-wrp
-        img(src=url)
-        block
+  +container&attributes(attributes).image-wrp
+    img(src=url)
+    block
 
 mixin image-caption
-    +container&attributes(attributes).image-caption
-        +container-content
-            block
+  +container&attributes(attributes).image-caption
+    +container-content
+      block
 
 mixin image-sample(url)
-    +image("/sample.png")&attributes(attributes)
-        block
+  +image("/sample.png")&attributes(attributes)
+    block

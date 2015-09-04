@@ -1,9 +1,7 @@
 
-//- includes
-
 include ../dist/jade/svelto.mixins.jade
 
-//- layout
+//- Layout
 
 doctype html
 html(class="no-js" lang="en" xml:lang="en" dir="ltr")
@@ -14,9 +12,8 @@ html(class="no-js" lang="en" xml:lang="en" dir="ltr")
     meta(name="viewport" content="width=device-width, initial-scale=1")
 
     +css("/svelto.css")
+    +css("https://fonts.googleapis.com/icon?family=Material+Icons")
     block css
-
-    link(href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet")
 
     +script.
       document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';

@@ -1,22 +1,27 @@
-//- spinner.jade
+
+//- Spinner
 
 mixin spinner
-    .spinner-wrp&attributes(attributes)
-        +spinner-no-wrp&attributes(attributes)
+  .spinner-wrp&attributes(attributes)
+    +spinner-no-wrp&attributes(attributes)
 
 mixin spinner-no-wrp
-    .spinner&attributes(attributes)
-        .circle-wrp.left
-            .circle
-        .circle-wrp.right
-            .circle
+  .spinner&attributes(attributes)
+    .circle-wrp.left
+      .circle
+    .circle-wrp.right
+      .circle
 
 mixin spinner-multiple(first, second, third, fourth)
-    .spinner-wrp.multiple&attributes(attributes)
-        if block
-            block
-        else
-            +spinner-no-wrp(class=(first ? first : "blue"))
-            +spinner-no-wrp(class=(second ? second : "red"))
-            +spinner-no-wrp(class=(third ? third : "yellow"))
-            +spinner-no-wrp(class=(fourth ? fourth : "green"))
+  - first = first || "blue";
+  - second = second || "red";
+  - third = third || "yellow";
+  - fourth = fourth || "green";
+  .spinner-wrp.multiple&attributes(attributes)
+    if block
+      block
+    else
+      +spinner-no-wrp(class=first)
+      +spinner-no-wrp(class=second)
+      +spinner-no-wrp(class=third)
+      +spinner-no-wrp(class=fourth)

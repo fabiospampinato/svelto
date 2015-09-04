@@ -1,19 +1,22 @@
-//- switch.jade
+
+//- Switch
+
+//- FIXME: Remove that ugly hard coded `1.73333em`
 
 mixin switch(options, value, checked)
-    if value
-        - var name = options;
-        - options = { name: name, value: value, checked: checked };
+  if value
+    - var name = options;
+    - options = { name: name, value: value, checked: checked };
 
-    - var color_class = ( options.checked ? (options.colors && options.colors.on ? options.colors.on : "secondary") : (options.colors && options.colors.off ? options.colors.off : "gray"));
+  - var color_class = ( options.checked ? (options.colors && options.colors.on ? options.colors.on : "secondary") : (options.colors && options.colors.off ? options.colors.off : "gray"));
 
-    .switch(data-color-on=(options.colors ? options.colors.on : false), data-color-off=(options.colors ? options.colors.off : false), data-icon-on=(options.icons ? options.icons.on : false), data-icon-off=(options.icons ? options.icons.off : false))&attributes(attributes)
-        input(type="checkbox", name=options.name, value=options.value, checked=options.checked)
-        .switch-bar-wrp
-            .switch-bar(class=color_class)
-                .switch-handler(class=color_class, style="transform: translate3d(" + (options.checked ? "1.73333em" : "0" ) + ",0,0)")
-                    if options.icons
-                        if options.icons.on
-                            +icon(options.icons.on).on
-                        if options.icons.off
-                            +icon(options.icons.off).off
+  .switch(data-color-on=(options.colors ? options.colors.on : false) data-color-off=(options.colors ? options.colors.off : false) data-icon-on=(options.icons ? options.icons.on : false) data-icon-off=(options.icons ? options.icons.off : false))&attributes(attributes)
+    input(type="checkbox" name=options.name value=options.value checked=options.checked)
+    .switch-bar-wrp
+      .switch-bar(class=color_class)
+        .switch-handler(class=color_class style="transform: translate3d(" + (options.checked ? "1.73333em" : "0") + ",0,0);")
+          if options.icons
+            if options.icons.on
+              +icon(options.icons.on).icon-on
+            if options.icons.off
+              +icon(options.icons.off).icon-off

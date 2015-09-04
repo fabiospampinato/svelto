@@ -1,17 +1,18 @@
-//- radio.jade
+
+//- Radio
 
 mixin radio(name, title, value, checked)
-    if checked
-        +button&attributes(attributes).radio.checked
-            input(type="radio", name=name, value=value, checked)
-            +button-center
-                = title
-                +icon("radio_button_checked").on.right
-                +icon("radio_button_unchecked").off.right
-    else
-        +button&attributes(attributes).radio
-            input(type="radio", name=name, value=value)
-            +button-center
-                = title
-                +icon("radio_button_checked").on.right
-                +icon("radio_button_unchecked").off.right
+  if checked
+    +button&attributes(attributes).radio.checked
+      input(type="radio" name=name value=value checked)
+      +button-center
+        span title
+        +icon("radio_button_checked").icon-on
+        +icon("radio_button_unchecked").icon-off
+  else
+    +button&attributes(attributes).radio
+      input(type="radio" name=name value=value)
+      +button-center
+        span title
+        +icon("radio_button_checked").icon-on
+        +icon("radio_button_unchecked").icon-off

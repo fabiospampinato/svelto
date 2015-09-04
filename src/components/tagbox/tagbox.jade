@@ -1,7 +1,8 @@
-//- tagbox.jade
+
+//- Tagbox
 
 mixin tagbox(name, tags)
-    +container&attributes(attributes).tagbox
-        input(type="text", name=name, value=tags)
-        +multiple
-            +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
+  +container&attributes(attributes).tagbox
+    input(type="text" name=name value=tags)
+    +multiple
+      +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
