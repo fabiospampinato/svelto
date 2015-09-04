@@ -1,13 +1,21 @@
 
 //- Input
 
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
 mixin input(options)
   - options = options || {};
   - options.type = options.type || "text";
-  - options.value = options.value || "";
   - options.name = options.name || "";
+  - options.value = options.value || "";
   .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input.text-field(type=options.type value=options.value name=options.name, required)
+    input(type=options.type value=options.value name=options.name, required).text-field
     if options.label
       label= options.label
     .text-field-bar

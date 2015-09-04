@@ -1,8 +1,23 @@
 
 //- Stepper
 
-mixin stepper(name, min, value, max)
-  +multiple(data-min=min data-max=max)&attributes(attributes).stepper.joined
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '' // Max value
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
     +button-icon("remove").stepper-decreaser
-    +input({name: name, value: value}).autogrow.compact
+    if options.name
+      +input({ name: name, value: value }).autogrow.compact
+    else
+      +input({ value: value }).autogrow.compact
     +button-icon("add").stepper-increaser

@@ -1,15 +1,23 @@
 
 //- Container
 
+//- Options
+  {
+    title: '', // Title
+    header_classes: '' // Header classes
+  }
+  
 mixin container(title, header_classes)
-  .container&attributes(attributes)
-    if title
-      +container-header(title)(class=header_classes)
+  - options = options || {};
+  - options.header_classes = options.header_classes || "";
+  .container&attributes(attributes).expander
+    if options.title
+      +container-header(options.title)(class=options.header_classes)
     block
 
 mixin container-header(title)
   .container-header&attributes(attributes)
-    +multiple.fluid
+    +multiple.expanded
       if title
         +multiple-center
           p= title
@@ -23,9 +31,13 @@ mixin container-footer
   .container-footer&attributes(attributes)
     block
 
-mixin container-simple(title, header_classes)
-  .container&attributes(attributes)
-    if title
-      +container-header(title)(class=header_classes)
+//- Options
+  {
+    title: '', // Title
+    header_classes: '' // Header classes
+  }
+
+mixin container-simple(options)
+  +container(options)&attributes(attributes)
     +container-content
       block

@@ -1,5 +1,12 @@
 
 //- Notification
 
+//- Options
+  {
+    title: '', // Notification title
+    body: '', // Notification body
+    img: '' // Notification image
+  }
+
 mixin notification(options)
   +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });

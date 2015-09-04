@@ -1,36 +1,26 @@
 
 //- Infobar
 
-mixin infobar(icon, title, subtitle)
-  .infobar-wrp&attributes(attributes)
-    if icon
-      if title
-        if subtitle !== undefined
-          if subtitle
-            +infobar-left
-              +icon(icon).xlarge
-            +infobar-center
-              +infobar-title(title)
-              +infobar-subtitle(subtitle)
-              block
-          else
-            +infobar-left
-              +icon(icon)
-            +infobar-center
-              +infobar-title(title)
-              block
-        else
-          +infobar-center
-            +infobar-title(icon)
-            +infobar-subtitle(title)
-            block
-      else
-        +infobar-center
-          +infobar-title(icon)
-          block
-    else
-      block
+//- Options
+  {
+    icon: '', // Infobar icon
+    title: '', // Infobar title
+    subtitle: '', // Infobar subtitle
+  }
 
+mixin infobar(options)
+  .infobar-wrp&attributes(attributes)
+    if options.icon
+      +infobar-left
+        +icon(icon)(class((options.title && options.subtitle) ? "xlarge" : ""))
+    if options.title || options.subtitle
+      +infobar-center
+        if options.title
+          +infobar-title(options.title)
+        if options.subtitle
+          +infobar-subtitle(options.subtitle)
+    block
+  
 mixin infobar-left
   .infobar-left&attributes(attributes)
     block
@@ -43,14 +33,14 @@ mixin infobar-title(title)
   if title
     p.infobar-title&attributes(attributes)= title
   else
-    p.infobar-title&attributes(attributes)
+    .infobar-title&attributes(attributes)
       block
 
 mixin infobar-subtitle(subtitle)
   if subtitle
-    p&attributes(attributes)= subtitle
+    p.infobar-subtitle&attributes(attributes)= subtitle
   else
-    p&attributes(attributes)
+    .infobar-subtitle&attributes(attributes)
       block
 
 mixin infobar-right

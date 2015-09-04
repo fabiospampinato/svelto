@@ -1,5 +1,7 @@
 
 //- Noty
 
+//- Options: See noty component
+
 mixin noty(options)
   +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });

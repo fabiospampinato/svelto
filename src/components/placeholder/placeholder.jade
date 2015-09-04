@@ -1,14 +1,23 @@
 
 //- Placeholder
 
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
 mixin placeholder(width, height, empty)
-  - width = width || 0;
-  - height = height || 0;
-  - width = isNaN ( width ) ? width : width + 'px';
-  - height = isNaN ( height ) ? height : height + 'px';
-  .placeholder(style="width:" + width + "; height:" + height + "; line-height: " + height + ";")&attributes(attributes)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
     if !empty
       if block
         block
       else
-        = width + " - " + height
+        = options.width + " - " + options.height

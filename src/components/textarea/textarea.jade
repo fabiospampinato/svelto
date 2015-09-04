@@ -1,12 +1,17 @@
 
 //- Textarea
 
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
 mixin textarea(options)
   - options = options || {};
-  - options.type = options.type || "text";
   - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating" : ""))&attributes(attributes)
-    textarea.text-field(type=options.type name=options.name, required)
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
       block
     if options.label
       label= options.label

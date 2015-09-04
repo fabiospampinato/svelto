@@ -2,7 +2,7 @@
 //- Button
 
 mixin button-wrp
-  .label-wrp.button-wrp&attributes(attributes)
+  .label-wrp&attributes(attributes).button-wrp
     block
 
 mixin button(href)
@@ -44,6 +44,8 @@ mixin button-icon(icon, href)
       +icon(icon)
     block
 
+//- FIXME: Add support for href
+
 mixin button-pointed
   +button-wrp.pointed
     +button-pointer&attributes(attributes)
@@ -56,7 +58,7 @@ mixin button-pointed-simple
       block
 
 mixin button-pointer
-  .label-pointer&attributes(attributes)
+  +label-pointer&attributes(attributes)
     block
 
 mixin button-ribbons
@@ -104,7 +106,4 @@ mixin button-corner(direction, icon)
       +button-center
         if icon
           +icon(icon)
-        else
-          block
-      if icon
         block

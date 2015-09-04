@@ -34,7 +34,7 @@ mixin label-icon(icon)
     block
 
 mixin label-pointed
-  +label-wrp
+  +label-wrp.pointed
     +label-pointer&attributes(attributes)
     .label&attributes(attributes)
       block
@@ -93,7 +93,4 @@ mixin label-corner(direction, icon)
       +label-center
         if icon
           +icon(icon)
-        else
-          block
-      if icon
         block

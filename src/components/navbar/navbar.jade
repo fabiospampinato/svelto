@@ -1,21 +1,33 @@
 
 //- Navbar
 
-mixin navbar-btn(title, icon, id)
-  +button(data-navbar="navbar-" + id)&attributes(attributes).navbar-btn.navbar-trigger
-    +button-center
-      if title
-        = title
-      if icon
-        if title
-          +icon(icon).right
-        else
-          +icon(icon)
+//- Options
+  {
+    id: '', // Navbar id
+    title: '' // Title
+    icon: '', // Icon to use
+  }
 
-mixin navbar(id, direction, slim, attached)
-  - direction = direction || "left";
-  - slim = slim || "";
-  .navbar-wrp(class=(direction + " " + slim + " " + (attached ? ( attached === true ? "attached-xs" : "attached-" + attached ) : "" ))
-    +container(id="navbar-" + id)&attributes(attributes).navbar
+mixin navbar-btn(options)
+  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
+    +button-center
+      if options.title
+        span options.title
+      if options.icon
+        +icon(icon)
+
+//- Options
+  {
+    id: '', // Navbar id
+    direction: '', // Navbar direction
+    slim: '', // Use a slim version or not
+    attached: '' // True or attached-* class
+  }
+
+mixin navbar(options)
+  - options.direction = options.direction || "left";
+  - options.slim = options.slim || false;
+  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" ))
+    +container(id="navbar-" + options.id)&attributes(attributes).navbar
       block
     .background.navbar-closer

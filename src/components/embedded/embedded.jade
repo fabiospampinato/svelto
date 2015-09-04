@@ -5,8 +5,7 @@ mixin embedded(src, allowfullscreen)
   .embedded&attributes(attributes)
     if src
       +iframe(src, allowfullscreen)
-    else
-      block
+    block
 
 //- EMBEDDABLES
 

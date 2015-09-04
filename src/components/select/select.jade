@@ -4,26 +4,39 @@
 //- FIXME: Add support for arbitrary number of optgroups levels
 //- TODO: Make the mixin set the defualt value at the compilation time
 
-mixin select-btn(options, selected, id, icon)
-  +button(data-select="select-" + id)&attributes(attributes).select-btn.select-trigger
-    +button-center
-      .select-label
-        block
-      +icon(icon || "reorder").right
-      +select(options, selected, id)
+//- Options
+  {
+    options: '', // Select options
+    selected: '', // Selected option
+    id: '', // Select id
+    title: '', // Button title
+    icon: '', // Button icon
+    placeholder: '' // Select placeholder
+  }
 
-mixin select-btn-icon(options, selected, id, icon)
-  +button(data-select="select-" + id)&attributes(attributes).select-btn.select-trigger
+mixin select-btn(options)
+  - options.icon = options.icon || "reorder";
+  +button(data-select="select-" + options.id)&attributes(attributes).select-btn.select-trigger
     +button-center
-      +icon(icon || "reorder")
-      +select(options, selected, id)
+      if options.title
+        .select-label= options.title
+      if options.icon
+        +icon(options.icon)
+      +select(options)
 
-mixin select(options, selected, id)
-  select(id="select-" + id name=id, placeholder="Select a value...")
-    each val, prop in options
+mixin select(options)
+  - options.placeholder = options.placeholder || "Select a value...";
+  select(id="select-" + options.id name=options.id, placeholder=options.placeholder)
+    each val, prop in options.options
       if typeof val === "object"
         optgroup(label=prop)
           each subval, subprop in val
-            option(value=subprop selected=(subprop === selected))= subval
+            if subprop === selected
+              option(value=subprop selected)= subval
+            else
+              option(value=subprop)= subval
       else
-        option(value=prop selected=(subprop === selected))= val
+        if subprop === selected
+          option(value=prop selected)= val
+        else
+          option(value=prop)= val

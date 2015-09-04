@@ -1,16 +1,29 @@
 
 //- Slider
 
-mixin slider(name, min, value, max, step)
-  - min = min ? min : 0;
-  - value = value ? value : 0;
-  - max = max ? max : 100;
-  - step = step ? step : 1;
-  - var percentage = ( ( value - min ) / step ) * 100 / ( ( max - min ) / step );
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Step amount
+  }
+  
+mixin slider(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
   .slider(data-step=step)&attributes(attributes)
-    input(type="number" name=name value=value)
-    .slider-min(title="Decrease" data-min=min)
-    .slider-max(title="Increase" data-max=max)
+    if options.name
+      input(type="number" name=name value=value)
+    else
+      input(type="number" value=value)
+    .slider-min(title="Decrease" data-min=options.min)
+    .slider-max(title="Increase" data-max=options.max)
     .slider-bar-wrp
       .slider-bar
         .slider-unhighlighted

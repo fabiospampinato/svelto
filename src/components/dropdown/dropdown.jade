@@ -3,14 +3,21 @@
 
 //- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
 
-mixin dropdown-btn(title, id)
-  +button(data-dropdown="dropdown-" + id)&attributes(attributes).dropdown-btn.dropdown-trigger
-    +button-center
-      span title
-      +icon("expand_more")
+//- Options
+  {
+    id: '', // Dropdown id
+    title: '', // Button title
+    icon: '' // Button icon
+  }
 
-mixin dropdown-btn-icon(icon, id)
-  +button-icon(icon)(data-dropdown="dropdown-" + id)&attributes(attributes).dropdown-btn.dropdown-trigger
+mixin dropdown-btn(options)
+  - options.icon = options.icon || "expand_more";
+  +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
+    +button-center
+      if options.title
+        span= title
+      if options.icon
+        +icon(options.icon)
 
 mixin dropdown(id)
   .dropdown(id="dropdown-" + id)&attributes(attributes)

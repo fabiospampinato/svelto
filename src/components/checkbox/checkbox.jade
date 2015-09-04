@@ -3,18 +3,44 @@
 
 //- TODO: the value should be setted to 1 by default if is not provided
 
-mixin checkbox(name, title, value, checked)
-  if checked
-    +button&attributes(attributes).checkbox.checked
-      input(type="checkbox" name=name value=value checked)
-      +button-center
-        span title
-        +icon("check_box").icon-on
-        +icon("check_box_outline_blank").icon-off
-  else
-    +button&attributes(attributes).checkbox
-      input(type="checkbox" name=name value=value)
-      +button-center
-        span title
-        +icon("check_box").icon-on
-        +icon("check_box_outline_blank").icon-off
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+mixin checkbox(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
+      else
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    +button-center
+      if options.title
+        span options.title
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off

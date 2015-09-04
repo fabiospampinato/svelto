@@ -1,8 +1,24 @@
 
 //- Tagbox
 
-mixin tagbox(name, tags)
+//- Options
+  {
+    name: '', // Input name
+    tags: '', // Comma (by default) separated list of tags
+    label: '' // New tag input placeholder
+  }
+
+mixin tagbox(options)
+  - options = options || {};
+  - options.tags = options.tags || "";
+  - options.label = options.label || "Add tag...";
   +container&attributes(attributes).tagbox
-    input(type="text" name=name value=tags)
+    if options.name
+      input(type="text" name=options.name value=options.tags)
+    else
+      input(type="text" value=options.tags)
     +multiple
-      +input({name: "placeholder_" + name, label: "Add tag..."}).autogrow.compact.tagbox-partial.no-floating.no-bar
+      if options.name
+        +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+      else
+        +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar

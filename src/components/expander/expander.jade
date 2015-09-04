@@ -1,8 +1,16 @@
 
 //- Expander
 
-mixin expander(title, header_classes)
+//- Options
+  {
+    title: '', // Title
+    header_classes: '' // Header classes
+  }
+
+mixin expander(options)
+  - options = options || {};
+  - options.header_classes = options.header_classes || "";
   +container&attributes(attributes).expander
-    if title
-      +container-header(title)(class=header_classes).expander-toggler
+    if options.title
+      +container-header(options.title)(class=options.header_classes).expander-toggler
     block
