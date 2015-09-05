@@ -1,4 +1,5 @@
 {
-  "stage": 0,
+  "nonStandard": false,
+  "stage": 2,
   "loose": ["all"]
 }

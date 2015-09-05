@@ -119,6 +119,7 @@ gulp.task ( 'jade', ['examples-clean'], function () {
 /* JS */
 
 //TODO: Add support for sourcemaps
+//TODO: Readd babel support, but with support for partial building (right now it populates the dest file with the same functions multiple times)
 
 gulp.task ( 'js-temp', function () {
 
@@ -149,7 +150,7 @@ gulp.task ( 'js-temp', function () {
              }) )
              .pipe ( flatten () )
              .pipe ( gulp.dest ( '.temp/js' ) )
-             .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
+            //  .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
              .pipe ( uglify () )
              .pipe ( gulp.dest ( '.temp/js/min' ) );
 
@@ -158,12 +159,14 @@ gulp.task ( 'js-temp', function () {
 gulp.task ( 'js', ['js-temp'], function () {
 
   var unminified = gulp.src ( '.temp/js/*.js' )
+                       .pipe ( newer ( 'dist/js/svelto.js' ) )
                        .pipe ( sort () )
                        .pipe ( concat ( 'svelto.js' ) )
                        .pipe ( gulp.dest ( 'dist/js' ) )
                        .pipe ( browserSync.active ? browserSync.stream ({ match: '**/*.{js,js.map}' }) : gutil.noop () );
 
   var minified = gulp.src ( '.temp/js/min/*.js' )
+                     .pipe ( newer ( 'dist/js/svelto.min.js' ) )
                      .pipe ( sort () )
                      .pipe ( concat ( 'svelto.min.js' ) )
                      .pipe ( gulp.dest ( 'dist/js' ) )

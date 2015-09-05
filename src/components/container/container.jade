@@ -10,7 +10,7 @@
 mixin container(title, header_classes)
   - options = options || {};
   - options.header_classes = options.header_classes || "";
-  .container&attributes(attributes).expander
+  .container&attributes(attributes)
     if options.title
       +container-header(options.title)(class=options.header_classes)
     block
