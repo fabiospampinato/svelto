@@ -1,13 +1,11 @@
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Image (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
- 
+
 @mixin image-retina ( $image-width, $image-height, $file-1x, $file-2x, $file-3x: false ) {
 
     background-image: url($file-1x);
