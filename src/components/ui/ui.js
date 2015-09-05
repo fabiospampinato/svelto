@@ -1,19 +1,10 @@
 
 /* =========================================================================
  * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires lodash-extra.js
- * @requires jQuery-extra.js
- * @requires tmpl.js
- * @requires browser.js
- * @requires pointer.js
- * @requires base_widget.js
- * @requires widget.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {

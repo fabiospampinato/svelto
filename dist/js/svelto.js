@@ -386,138 +386,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* TMPL - https://github.com/blueimp/JavaScript-Templates */
-
-/*
- ***************************
- *      Documentation      *
- ***************************
- *
- * Interpolation
- *
- * - Basic
- * <h3>{%=o.title%}</h3>
- *
- * - Unescaped
- * <h3>{%#o.user_id%}</h3>
- *
- * - Result of function call
- * <a href="{%=encodeURI(o.url)%}">Website</a>
- *
- * - Nested properties
- * <strong>{%=o.author.name%}</strong>
- *
- * Evaluation
- *
- * - Print
- * <span>Year: {% var d=new Date(); print(d.getFullYear()); %}</span>
- *
- * - Print unescaped
- * <span>{% print("Fast &amp; powerful", true); %}</span>
- *
- * - Include another template
- * <div>
- *     {% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
- * </div>
- *
- * - If else condition
- * {% if (o.author.url) { %}
- *     <a href="{%=encodeURI(o.author.url)%}">{%=o.author.name%}</a>
- * {% } else { %}
- *     <em>No author url.</em>
- * {% } %}
- *
- * - For loop
- * <ul>
- *     {% for (var i=0; i<o.features.length; i++) { %}
- *         <li>{%=o.features[i]%}</li>
- *     {% } %}
- * </ul>
- *
- ***************************
- */
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* TMPL */
-
-    var tmpl = function ( str, data ) {
-
-        var f = !/[^\w\-\.:]/.test ( str )
-                    ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-                    : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
-
-        return data
-                   ? f ( data, tmpl )
-                   : function ( data ) { return f ( data, tmpl ); };
-
-    };
-
-    tmpl.cache = {};
-
-    tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
-
-    tmpl.func = function ( s, p1, p2, p3, p4, p5 ) {
-
-        if ( p1 ) { // whitespace, quote and backspace in HTML context
-
-            return {
-                '\n': '\\n',
-                '\r': '\\r',
-                '\t': '\\t',
-                ' ' : ' '
-            }[p1] || '\\' + p1;
-
-        }
-
-        if ( p2 ) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
-
-            if ( p2 === '=' ) {
-
-                return "'+_e(" + p3 + ")+'";
-
-            }
-
-            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
-
-        }
-
-        if ( p4 ) { // evaluation start tag: {%
-
-            return "';";
-
-        }
-
-        if ( p5 ) { // evaluation end tag: %}
-
-            return "_s+='";
-
-        }
-
-    };
-
-    tmpl.arg = 'o';
-
-    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
-
-    /* HELPER */
-
-    $.tmpl = tmpl;
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
 //TODO: detect browsers, versions, OSes, but... is it useful?
 //TODO: detect: windows phone, smartphone, windows, linux, safari, opera, firefox, lowend
 
@@ -548,890 +416,10 @@
 
 /* =========================================================================
  * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires jQuery-extra.js
- * ========================================================================= */
-
-//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* POINTER */
-
-    $.Pointer = {
-        pressDuration: 300,
-        doubleTapInterval: 300,
-        flickDuration: 150,
-        motionThreshold: 5
-    };
-
-    var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
-        events_namespace = 'pointer';
-
-    _.each ( events_names, function ( event_name ) {
-
-        var full_event = events_namespace + event_name;
-
-        $.Pointer[event_name] = full_event;
-
-        $.fn[event_name] = function ( fn ) {
-
-            return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
-
-        };
-
-    });
-
-    /* TRIGGERS */
-
-    var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
-        moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
-        endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
-        $html = $(document.documentElement),
-        startXY,
-        moveXY,
-        deltaXY,
-        endXY,
-        target,
-        $target,
-        start_timestamp,
-        end_timestamp,
-        prev_tap_timestamp = 0,
-        motion,
-        orientation,
-        direction,
-        press_timeout;
-
-    var createEvent = function ( name, originalEvent ) {
-
-        var event = $.Event ( name );
-
-        event.originalEvent = originalEvent;
-        event.isPointerEvent = true;
-
-        return event;
-
-    };
-
-    var startHandler = function ( event ) {
-
-        startXY = $.eventXY ( event );
-
-        target = event.target;
-        $target = $(target);
-
-        start_timestamp = event.timeStamp || _.now ();
-
-        motion = false;
-
-        press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
-
-        $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
-            startXY: startXY
-        });
-
-        $html.on ( moveEvents, moveHandler );
-        $html.on ( endEvents, endHandler );
-
-    };
-
-    var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
-
-        $target.trigger ( createEvent ( $.Pointer.press, event ) );
-
-    };
-
-    var moveHandler = function ( event ) {
-
-        clearTimeout ( press_timeout );
-
-        moveXY = $.eventXY ( event );
-
-        deltaXY = {
-            X: moveXY.X - startXY.X,
-            Y: moveXY.Y - startXY.Y
-        };
-
-        if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
-
-            motion = true;
-
-            $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
-                startXY: startXY,
-                moveXY: moveXY,
-                deltaXY: deltaXY
-            });
-
-        }
-
-    };
-
-    var endHandler = function ( event ) {
-
-        clearTimeout ( press_timeout );
-
-        endXY = $.eventXY ( event );
-        deltaXY = {
-            X: endXY.X - startXY.X,
-            Y: endXY.Y - startXY.Y
-        };
-
-        if ( target === event.target ) {
-
-            end_timestamp = event.timeStamp || _.now ();
-
-            if ( !$.browser.hasTouch || !motion ) {
-
-                $target.trigger ( createEvent ( $.Pointer.tap, event ) );
-
-                if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
-
-                    $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
-
-                }
-
-                prev_tap_timestamp = end_timestamp;
-
-            }
-
-            if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
-
-                if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
-
-                    orientation = 'horizontal';
-                    direction = ( deltaXY.X > 0 ) ? 1 : -1;
-
-                } else {
-
-                    orientation = 'vertical';
-                    direction = ( deltaXY.Y > 0 ) ? 1 : -1;
-
-                }
-
-                $target.trigger ( createEvent ( $.Pointer.flick, event ), {
-                    startXY: startXY,
-                    endXY: endXY,
-                    deltaXY: deltaXY,
-                    orientation: orientation,
-                    direction: direction
-                });
-
-            }
-
-        }
-
-        $html.off ( moveEvents, moveHandler );
-        $html.off ( endEvents, endHandler );
-
-        $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
-            startXY: startXY,
-            endXY: endXY,
-            deltaXY: deltaXY
-        });
-
-    };
-
-    $html.on ( startEvents, startHandler );
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires tmpl.js
- * ========================================================================= */
-
-//TODO: Add support for _trigger -> preventDefault
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* BASE WIDGET */
-
-    $.Widget = function ( /* options, element */ ) {};
-
-    $.Widget._childConstructors = [];
-
-    $.Widget.prototype = {
-
-        /* VARIABLES */
-
-        widgetOriginalName: 'widget',
-        widgetName: 'widget',
-        widgetFullName: 'widget',
-
-        defaultElement: false,
-        templates: {}, //INFO: The `base` template will be used as the constructor
-
-        /* OPTIONS */
-
-        options: {
-            callbacks: {}
-        },
-
-        /* WIDGET FUNCTIONS */
-
-        _createWidget: function ( options, element ) {
-
-            // VARIABLES
-
-            this.initializationType = element
-                                          ? 'element'
-                                          : this.defaultElement
-                                              ? 'html'
-                                              : this.templates.base
-                                                  ? 'template'
-                                                  : 'none';
-
-            /* EXTEND OPTIONS */
-
-            this.options = _.merge ( {}, this.options, this._getCreateOptions (), options );
-
-            if ( this.initializationType === 'element' ) {
-
-                _.merge ( this.options, $(element).data ( this.widgetName ) );
-
-            }
-
-            // INIT ELEMENT
-
-            element = $( element || this.defaultElement || ( this.templates.base ? this._tmpl ( 'base', this.options ) : false ) || this ).get ( 0 );
-
-            this.element = element;
-            this.$element = $(element);
-
-            this.guid = _.uniqueId ();
-
-            // DISABLED
-
-            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' );
-
-            // SAVING INSTANCE
-
-            $.data ( this.element, this.widgetFullName, this );
-
-            // ON $ELEMENT REMOVE -> WIDGET DESTROY
-
-            this._on ( true, this.$element, 'remove', function ( event ) {
-
-                if ( event.target === this.element ) {
-
-                    this.destroy ();
-
-                }
-
-            });
-
-            /* CALLBACKS */
-
-            this._create ();
-
-            this._trigger ( 'create', this._getCreateEventData () );
-
-            this._variables ();
-
-            this._init ();
-
-            this._events ();
-
-        },
-
-        _getCreateOptions: _.noop,
-        _getCreateEventData: _.noop,
-        _create: _.noop,
-        _variables: _.noop,
-        _init: _.noop,
-        _events: _.noop,
-
-        destroy: function () {
-
-            this._destroy ();
-
-            $.removeData ( this.element, this.widgetFullName );
-
-        },
-
-        _destroy: _.noop,
-
-        widget: function () {
-
-            return this.$element;
-
-        },
-
-        /* OPTIONS FUNCTIONS */
-
-        option: function ( key, value ) {
-
-            if ( arguments.length === 0 ) {
-
-                return _.cloneDeep ( this.options );
-
-            }
-
-            var options = key,
-                parts,
-                curOption,
-                i;
-
-            if ( typeof key === 'string' ) {
-
-                // handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
-
-                options = {};
-                parts = key.split ( '.' );
-                key = parts.shift ();
-
-                if ( parts.length ) {
-
-                    curOption = options[key] = _.extend ( {}, this.options[key] );
-
-                    for ( i = 0; i < parts.length - 1; i++ ) {
-
-                        curOption[parts[i]] = curOption[parts[i]] || {};
-                        curOption = curOption[parts[i]];
-
-                    }
-
-                    key = parts.pop ();
-
-                    if ( arguments.length === 1 ) {
-
-                        return curOption[key] === undefined ? null : curOption[key];
-
-                    }
-
-                    curOption[key] = value;
-
-                } else {
-
-                    if ( arguments.length === 1 ) {
-
-                        return this.options[key] === undefined ? null : this.options[key];
-
-                    }
-
-                    options[key] = value;
-
-                }
-
-            }
-
-            this._setOptions ( options );
-
-            return this;
-
-        },
-
-        _setOptions: function ( options ) {
-
-            for ( var key in options ) {
-
-                this._setOption ( key, options[key] );
-
-            }
-
-            return this;
-
-        },
-
-        _setOption: function ( key, value ) {
-
-            this.options[key] = value;
-
-            if ( key === 'disabled' ) {
-
-                this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
-
-            }
-
-            return this;
-
-        },
-
-        /* ENABLING / DISABLING */
-
-        enable: function () {
-
-            return this._setOptions ({ disabled: false });
-
-        },
-
-        disable: function () {
-
-            return this._setOptions ({ disabled: true });
-
-        },
-
-        /* EVENTS */
-
-        _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
-
-            //TODO: Add support for custom data
-
-            var instance = this;
-
-            if ( typeof suppressDisabledCheck !== 'boolean' ) {
-
-                handler = selector;
-                selector = events;
-                events = $element;
-                $element = suppressDisabledCheck;
-                suppressDisabledCheck = false;
-
-            }
-
-            if ( !( $element instanceof $ ) ) {
-
-                handler = selector;
-                selector = events;
-                events = $element;
-                $element = this.$element;
-
-            }
-
-            if ( selector && !handler ) {
-
-                handler = selector;
-                selector = false;
-
-            }
-
-            handler = _.isString ( handler ) ? this[handler] : handler;
-
-            function handlerProxy () {
-
-                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return;
-
-                var args = _.slice ( arguments );
-
-                args.push ( this );
-
-                return handler.apply ( instance, args );
-
-            }
-
-            handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
-
-            if ( selector ) {
-
-                $element.on ( events, selector, handlerProxy );
-
-            } else {
-
-                $element.on ( events, handlerProxy );
-
-            }
-
-        },
-
-        _off: function ( $element, events, handler ) {
-
-            if ( !handler ) {
-
-                handler = events;
-                events = $element;
-                $element = this.$element;
-
-            }
-
-            handler = _.isString ( handler ) ? this[handler] : handler;
-
-            $element.off ( events, handler );
-
-        },
-
-        _trigger: function ( events, data ) {
-
-            data = data || {};
-
-            events = events.split ( ' ' );
-
-            for ( var ei = 0, el = events.length; ei < el; ei++ ) {
-
-                this.$element.trigger ( this.widgetName + ':' + events[ei], data );
-
-                if ( typeof this.options.callbacks[events[ei]] === 'function' ) {
-
-                    this.options.callbacks[events[ei]].call ( this.element, data );
-
-                }
-
-            }
-
-        },
-
-        /* DELAYING */
-
-        _delay: function ( handler, delay ) {
-
-            var instance = this;
-
-            return setTimeout ( function () {
-
-                handler.apply ( instance, arguments );
-
-            }, delay || 0 );
-
-        },
-
-        /* TEMPLATE */
-
-        _tmpl: function ( name, options ) {
-
-            return $.tmpl ( this.widgetOriginalName + '.' + name, options );
-
-        },
-
-        /* MANIPULATION */
-
-        insertBefore: function ( selector ) {
-
-            this.$element.insertBefore ( selector );
-
-            return this;
-
-        },
-
-        insertAfter: function ( selector ) {
-
-            this.$element.insertAfter ( selector );
-
-            return this;
-
-        },
-
-        prependTo: function ( selector ) {
-
-            this.$element.prependTo ( selector );
-
-            return this;
-
-        },
-
-        appendTo: function ( selector ) {
-
-            this.$element.appendTo ( selector );
-
-            return this;
-
-        }
-
-    };
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires base_widget.js
- * @requires tmpl.js
- * ========================================================================= */
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* WIDGET FACTORY */
-
-    $.widget = function ( originalName, base, prototype ) {
-
-        /* VARIABLES */
-
-        var fullName,
-            existingConstructor,
-            constructor,
-            basePrototype,
-            proxiedPrototype = {},
-            nameParts = originalName.split ( '.' ),
-            namespace = nameParts.length > 1 ? nameParts[0] : false,
-            name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
-
-        fullName = namespace ? namespace + '-' + name : name;
-
-        /* NO BASE */
-
-        if ( !prototype ) {
-
-            prototype = base;
-            base = $.Widget;
-
-        }
-
-        /* NAMESPACE */
-
-        if ( namespace ) {
-
-            $[namespace] = $[namespace] || {};
-
-        }
-
-        /* CONSTRUCTOR */
-
-        existingConstructor = namespace ? $[namespace][name] : $[name];
-
-        constructor = function ( options, element ) {
-
-            if ( !this._createWidget ) {
-
-                return new constructor ( options, element );
-
-            }
-
-            if ( arguments.length ) {
-
-                this._createWidget ( options, element );
-
-            }
-
-        }
-
-        if ( namespace ) {
-
-            $[namespace][name] = constructor;
-
-        } else {
-
-            $[name] = constructor;
-
-        }
-
-        /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
-
-        _.extend ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ),
-            _childConstructors: []
-        });
-
-        /* BASE PROTOTYPE */
-
-        basePrototype = new base ();
-
-        basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
-
-        /* PROXIED PROTOTYPE */
-
-        for ( var prop in prototype ) {
-
-            if ( typeof prototype[prop] !== 'function' ) {
-
-                proxiedPrototype[prop] = prototype[prop];
-                continue;
-
-            }
-
-            proxiedPrototype[prop] = (function ( prop ) {
-
-                var _super = function () {
-                        return base.prototype[prop].apply ( this, arguments );
-                    },
-                    _superApply = function ( args ) {
-                        return base.prototype[prop].apply ( this, args );
-                    };
-
-                return function () {
-
-                    var __super = this._super,
-                        __superApply = this._superApply,
-                        returnValue;
-
-                    this._super = _super;
-                    this._superApply = _superApply;
-
-                    returnValue = prototype[prop].apply ( this, arguments );
-
-                    this._super = __super;
-                    this._superApply = __superApply;
-
-                    return returnValue;
-
-                };
-
-            })( prop );
-
-        }
-
-        /* CONSTRUCTOR PROTOTYPE */
-
-        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
-            constructor: constructor,
-            namespace: namespace,
-            widgetOriginalName: originalName,
-            widgetName: name,
-            widgetFullName: fullName
-        });
-
-        /* CACHE TEMPLATES */
-
-        for ( var tmpl_name in prototype.templates ) {
-
-            $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
-
-        }
-
-        /* UPDATE PROTOTYPE CHAIN */
-
-        if ( existingConstructor ) {
-
-            for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
-
-                var childPrototype = existingConstructor._childConstructors[i].prototype;
-
-                $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
-
-            }
-
-            delete existingConstructor._childConstructors;
-
-        } else {
-
-            base._childConstructors.push ( constructor );
-
-        }
-
-        /* CONSTRUCT */
-
-        $.widget.bridge ( name, constructor );
-
-        /* RETURN */
-
-        return constructor;
-
-    };
-
-    $.widget.bridge = function ( name, object ) {
-
-        /* VARIABLES */
-
-        var fullName = object.prototype.widgetFullName || name;
-
-        /* PLUGIN */
-
-        $.fn[name] = function ( options ) {
-
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
-
-            var isMethodCall = ( typeof options === 'string' ),
-                args = _.tail ( arguments ),
-                returnValue = this;
-
-            if ( isMethodCall ) {
-
-                /* METHOD CALL */
-
-                this.each ( function () {
-
-                    /* VARIABLES */
-
-                    var methodValue,
-                        instance = $.data ( this, fullName );
-
-                    /* GETTING INSTANCE */
-
-                    if ( options === 'instance' ) {
-
-                        returnValue = instance;
-
-                        return false;
-
-                    }
-
-                    /* CHECKING VALID CALL */
-
-                    if ( !instance ) return; //INFO: No instance found
-
-                    if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
-
-                    /* CALLING */
-
-                    methodValue = instance[options].apply ( instance, args );
-
-                    if ( methodValue !== instance && methodValue !== undefined ) {
-
-                        returnValue = methodValue;
-
-                        return false;
-
-                    }
-
-                });
-
-            } else {
-
-                /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
-
-                if ( args.length ) {
-
-                    options = _.extend.apply ( null, [options].concat ( args ) );
-
-                }
-
-                /* INSTANCIATING */
-
-                this.each ( function () {
-
-                    /* GET INSTANCE */
-
-                    var instance = $.data ( this, fullName );
-
-                    if ( instance ) {
-
-                        instance.option ( options || {} );
-
-                    } else {
-
-                        $.data ( this, fullName, new object ( options, this ) );
-
-                    }
-
-                });
-
-            }
-
-            return returnValue;
-
-        };
-
-    };
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires lodash-extra.js
- * @requires jQuery-extra.js
- * @requires tmpl.js
- * @requires browser.js
- * @requires pointer.js
- * @requires base_widget.js
- * @requires widget.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -1467,6 +455,20 @@
     };
 
 }( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../extras/lodash-extra.js
+ * @requires ../extras/jQuery-extra.js
+ * @requires ../browser/browser.js
+ * @requires ../ui/ui.js
+ * ========================================================================= */
 
 
 /* =========================================================================
@@ -1761,7 +763,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/lodash-extra.js
+ * @requires ../core/core.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -2706,7 +1708,7 @@
 
         options: {
             names: {
-                months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+                months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
             },
             date: {
                 today: false,
@@ -4026,7 +3028,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/jQuery-extra.js
+ * @requires ../core/core.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -5049,6 +4051,203 @@
         }
 
     };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
+
+;(function ( $, _, window, document, undefined ) {
+
+    'use strict';
+
+    /* POINTER */
+
+    $.Pointer = {
+        pressDuration: 300,
+        doubleTapInterval: 300,
+        flickDuration: 150,
+        motionThreshold: 5
+    };
+
+    var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+        events_namespace = 'pointer';
+
+    _.each ( events_names, function ( event_name ) {
+
+        var full_event = events_namespace + event_name;
+
+        $.Pointer[event_name] = full_event;
+
+        $.fn[event_name] = function ( fn ) {
+
+            return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
+
+        };
+
+    });
+
+    /* TRIGGERS */
+
+    var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
+        moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
+        endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
+        $html = $(document.documentElement),
+        startXY,
+        moveXY,
+        deltaXY,
+        endXY,
+        target,
+        $target,
+        start_timestamp,
+        end_timestamp,
+        prev_tap_timestamp = 0,
+        motion,
+        orientation,
+        direction,
+        press_timeout;
+
+    var createEvent = function ( name, originalEvent ) {
+
+        var event = $.Event ( name );
+
+        event.originalEvent = originalEvent;
+        event.isPointerEvent = true;
+
+        return event;
+
+    };
+
+    var startHandler = function ( event ) {
+
+        startXY = $.eventXY ( event );
+
+        target = event.target;
+        $target = $(target);
+
+        start_timestamp = event.timeStamp || _.now ();
+
+        motion = false;
+
+        press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
+
+        $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
+            startXY: startXY
+        });
+
+        $html.on ( moveEvents, moveHandler );
+        $html.on ( endEvents, endHandler );
+
+    };
+
+    var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
+
+        $target.trigger ( createEvent ( $.Pointer.press, event ) );
+
+    };
+
+    var moveHandler = function ( event ) {
+
+        clearTimeout ( press_timeout );
+
+        moveXY = $.eventXY ( event );
+
+        deltaXY = {
+            X: moveXY.X - startXY.X,
+            Y: moveXY.Y - startXY.Y
+        };
+
+        if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
+
+            motion = true;
+
+            $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
+                startXY: startXY,
+                moveXY: moveXY,
+                deltaXY: deltaXY
+            });
+
+        }
+
+    };
+
+    var endHandler = function ( event ) {
+
+        clearTimeout ( press_timeout );
+
+        endXY = $.eventXY ( event );
+        deltaXY = {
+            X: endXY.X - startXY.X,
+            Y: endXY.Y - startXY.Y
+        };
+
+        if ( target === event.target ) {
+
+            end_timestamp = event.timeStamp || _.now ();
+
+            if ( !$.browser.hasTouch || !motion ) {
+
+                $target.trigger ( createEvent ( $.Pointer.tap, event ) );
+
+                if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
+
+                    $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
+
+                }
+
+                prev_tap_timestamp = end_timestamp;
+
+            }
+
+            if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
+
+                if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
+
+                    orientation = 'horizontal';
+                    direction = ( deltaXY.X > 0 ) ? 1 : -1;
+
+                } else {
+
+                    orientation = 'vertical';
+                    direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+
+                }
+
+                $target.trigger ( createEvent ( $.Pointer.flick, event ), {
+                    startXY: startXY,
+                    endXY: endXY,
+                    deltaXY: deltaXY,
+                    orientation: orientation,
+                    direction: direction
+                });
+
+            }
+
+        }
+
+        $html.off ( moveEvents, moveHandler );
+        $html.off ( endEvents, endHandler );
+
+        $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
+            startXY: startXY,
+            endXY: endXY,
+            deltaXY: deltaXY
+        });
+
+    };
+
+    $html.on ( startEvents, startHandler );
 
 }( jQuery, _, window, document ));
 
@@ -6144,7 +5343,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
                     axis: 'x'
                 },
                 modifiers: {
-                    x: this.modifier_x.bind ( this ),
+                    x: this.modifier_x.bind ( this )
                 },
                 callbacks: {
                     beforestart: this._handler_drag_beforestart.bind ( this ),
@@ -7463,7 +6662,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             characters: {
                 forbidden: [ '<', '>', ';', '`' ], //FIXME: add tab, enter, and all the other specials
                 separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-                inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB], //TODO: write them as string, so they are easier to edit and that's the format that the user expects
+                inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //TODO: write them as string, so they are easier to edit and that's the format that the user expects
             },
             sort: false, //INFO: The tags are displayed in sorted order
             escape: true, //INFO: Escape potential XSS characters
@@ -8115,6 +7314,138 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TMPL - https://github.com/blueimp/JavaScript-Templates */
+
+/*
+ ***************************
+ *      Documentation      *
+ ***************************
+ *
+ * Interpolation
+ *
+ * - Basic
+ * <h3>{%=o.title%}</h3>
+ *
+ * - Unescaped
+ * <h3>{%#o.user_id%}</h3>
+ *
+ * - Result of function call
+ * <a href="{%=encodeURI(o.url)%}">Website</a>
+ *
+ * - Nested properties
+ * <strong>{%=o.author.name%}</strong>
+ *
+ * Evaluation
+ *
+ * - Print
+ * <span>Year: {% var d=new Date(); print(d.getFullYear()); %}</span>
+ *
+ * - Print unescaped
+ * <span>{% print("Fast &amp; powerful", true); %}</span>
+ *
+ * - Include another template
+ * <div>
+ *     {% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
+ * </div>
+ *
+ * - If else condition
+ * {% if (o.author.url) { %}
+ *     <a href="{%=encodeURI(o.author.url)%}">{%=o.author.name%}</a>
+ * {% } else { %}
+ *     <em>No author url.</em>
+ * {% } %}
+ *
+ * - For loop
+ * <ul>
+ *     {% for (var i=0; i<o.features.length; i++) { %}
+ *         <li>{%=o.features[i]%}</li>
+ *     {% } %}
+ * </ul>
+ *
+ ***************************
+ */
+
+;(function ( $, _, window, document, undefined ) {
+
+    'use strict';
+
+    /* TMPL */
+
+    var tmpl = function ( str, data ) {
+
+        var f = !/[^\w\-\.:]/.test ( str )
+                    ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
+                    : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
+
+        return data
+                   ? f ( data, tmpl )
+                   : function ( data ) { return f ( data, tmpl ); };
+
+    };
+
+    tmpl.cache = {};
+
+    tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
+
+    tmpl.func = function ( s, p1, p2, p3, p4, p5 ) {
+
+        if ( p1 ) { // whitespace, quote and backspace in HTML context
+
+            return {
+                '\n': '\\n',
+                '\r': '\\r',
+                '\t': '\\t',
+                ' ' : ' '
+            }[p1] || '\\' + p1;
+
+        }
+
+        if ( p2 ) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+
+            if ( p2 === '=' ) {
+
+                return "'+_e(" + p3 + ")+'";
+
+            }
+
+            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
+
+        }
+
+        if ( p4 ) { // evaluation start tag: {%
+
+            return "';";
+
+        }
+
+        if ( p5 ) { // evaluation end tag: %}
+
+            return "_s+='";
+
+        }
+
+    };
+
+    tmpl.arg = 'o';
+
+    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
+
+    /* HELPER */
+
+    $.tmpl = tmpl;
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../bteach/btEach.js
  * ========================================================================= */
@@ -8286,6 +7617,681 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
             }
 
         }
+
+    };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../tmpl/tmpl.js
+ * ========================================================================= */
+
+//TODO: Add support for _trigger -> preventDefault
+
+;(function ( $, _, window, document, undefined ) {
+
+    'use strict';
+
+    /* BASE WIDGET */
+
+    $.Widget = function ( /* options, element */ ) {};
+
+    $.Widget._childConstructors = [];
+
+    $.Widget.prototype = {
+
+        /* VARIABLES */
+
+        widgetOriginalName: 'widget',
+        widgetName: 'widget',
+        widgetFullName: 'widget',
+
+        defaultElement: false,
+        templates: {}, //INFO: The `base` template will be used as the constructor
+
+        /* OPTIONS */
+
+        options: {
+            callbacks: {}
+        },
+
+        /* WIDGET FUNCTIONS */
+
+        _createWidget: function ( options, element ) {
+
+            // VARIABLES
+
+            this.initializationType = element
+                                          ? 'element'
+                                          : this.defaultElement
+                                              ? 'html'
+                                              : this.templates.base
+                                                  ? 'template'
+                                                  : 'none';
+
+            /* EXTEND OPTIONS */
+
+            this.options = _.merge ( {}, this.options, this._getCreateOptions (), options );
+
+            if ( this.initializationType === 'element' ) {
+
+                _.merge ( this.options, $(element).data ( this.widgetName ) );
+
+            }
+
+            // INIT ELEMENT
+
+            element = $( element || this.defaultElement || ( this.templates.base ? this._tmpl ( 'base', this.options ) : false ) || this ).get ( 0 );
+
+            this.element = element;
+            this.$element = $(element);
+
+            this.guid = _.uniqueId ();
+
+            // DISABLED
+
+            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' );
+
+            // SAVING INSTANCE
+
+            $.data ( this.element, this.widgetFullName, this );
+
+            // ON $ELEMENT REMOVE -> WIDGET DESTROY
+
+            this._on ( true, this.$element, 'remove', function ( event ) {
+
+                if ( event.target === this.element ) {
+
+                    this.destroy ();
+
+                }
+
+            });
+
+            /* CALLBACKS */
+
+            this._create ();
+
+            this._trigger ( 'create', this._getCreateEventData () );
+
+            this._variables ();
+
+            this._init ();
+
+            this._events ();
+
+        },
+
+        _getCreateOptions: _.noop,
+        _getCreateEventData: _.noop,
+        _create: _.noop,
+        _variables: _.noop,
+        _init: _.noop,
+        _events: _.noop,
+
+        destroy: function () {
+
+            this._destroy ();
+
+            $.removeData ( this.element, this.widgetFullName );
+
+        },
+
+        _destroy: _.noop,
+
+        widget: function () {
+
+            return this.$element;
+
+        },
+
+        /* OPTIONS FUNCTIONS */
+
+        option: function ( key, value ) {
+
+            if ( arguments.length === 0 ) {
+
+                return _.cloneDeep ( this.options );
+
+            }
+
+            var options = key,
+                parts,
+                curOption,
+                i;
+
+            if ( typeof key === 'string' ) {
+
+                // handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
+
+                options = {};
+                parts = key.split ( '.' );
+                key = parts.shift ();
+
+                if ( parts.length ) {
+
+                    curOption = options[key] = _.extend ( {}, this.options[key] );
+
+                    for ( i = 0; i < parts.length - 1; i++ ) {
+
+                        curOption[parts[i]] = curOption[parts[i]] || {};
+                        curOption = curOption[parts[i]];
+
+                    }
+
+                    key = parts.pop ();
+
+                    if ( arguments.length === 1 ) {
+
+                        return curOption[key] === undefined ? null : curOption[key];
+
+                    }
+
+                    curOption[key] = value;
+
+                } else {
+
+                    if ( arguments.length === 1 ) {
+
+                        return this.options[key] === undefined ? null : this.options[key];
+
+                    }
+
+                    options[key] = value;
+
+                }
+
+            }
+
+            this._setOptions ( options );
+
+            return this;
+
+        },
+
+        _setOptions: function ( options ) {
+
+            for ( var key in options ) {
+
+                this._setOption ( key, options[key] );
+
+            }
+
+            return this;
+
+        },
+
+        _setOption: function ( key, value ) {
+
+            this.options[key] = value;
+
+            if ( key === 'disabled' ) {
+
+                this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
+
+            }
+
+            return this;
+
+        },
+
+        /* ENABLING / DISABLING */
+
+        enable: function () {
+
+            return this._setOptions ({ disabled: false });
+
+        },
+
+        disable: function () {
+
+            return this._setOptions ({ disabled: true });
+
+        },
+
+        /* EVENTS */
+
+        _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
+
+            //TODO: Add support for custom data
+
+            var instance = this;
+
+            if ( typeof suppressDisabledCheck !== 'boolean' ) {
+
+                handler = selector;
+                selector = events;
+                events = $element;
+                $element = suppressDisabledCheck;
+                suppressDisabledCheck = false;
+
+            }
+
+            if ( !( $element instanceof $ ) ) {
+
+                handler = selector;
+                selector = events;
+                events = $element;
+                $element = this.$element;
+
+            }
+
+            if ( selector && !handler ) {
+
+                handler = selector;
+                selector = false;
+
+            }
+
+            handler = _.isString ( handler ) ? this[handler] : handler;
+
+            function handlerProxy () {
+
+                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return;
+
+                var args = _.slice ( arguments );
+
+                args.push ( this );
+
+                return handler.apply ( instance, args );
+
+            }
+
+            handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
+
+            if ( selector ) {
+
+                $element.on ( events, selector, handlerProxy );
+
+            } else {
+
+                $element.on ( events, handlerProxy );
+
+            }
+
+        },
+
+        _off: function ( $element, events, handler ) {
+
+            if ( !handler ) {
+
+                handler = events;
+                events = $element;
+                $element = this.$element;
+
+            }
+
+            handler = _.isString ( handler ) ? this[handler] : handler;
+
+            $element.off ( events, handler );
+
+        },
+
+        _trigger: function ( events, data ) {
+
+            data = data || {};
+
+            events = events.split ( ' ' );
+
+            for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+
+                this.$element.trigger ( this.widgetName + ':' + events[ei], data );
+
+                if ( typeof this.options.callbacks[events[ei]] === 'function' ) {
+
+                    this.options.callbacks[events[ei]].call ( this.element, data );
+
+                }
+
+            }
+
+        },
+
+        /* DELAYING */
+
+        _delay: function ( handler, delay ) {
+
+            var instance = this;
+
+            return setTimeout ( function () {
+
+                handler.apply ( instance, arguments );
+
+            }, delay || 0 );
+
+        },
+
+        /* TEMPLATE */
+
+        _tmpl: function ( name, options ) {
+
+            return $.tmpl ( this.widgetOriginalName + '.' + name, options );
+
+        },
+
+        /* MANIPULATION */
+
+        insertBefore: function ( selector ) {
+
+            this.$element.insertBefore ( selector );
+
+            return this;
+
+        },
+
+        insertAfter: function ( selector ) {
+
+            this.$element.insertAfter ( selector );
+
+            return this;
+
+        },
+
+        prependTo: function ( selector ) {
+
+            this.$element.prependTo ( selector );
+
+            return this;
+
+        },
+
+        appendTo: function ( selector ) {
+
+            this.$element.appendTo ( selector );
+
+            return this;
+
+        }
+
+    };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+  *
+ * http://getsvelto.com/@FILE-NAME
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires base_widget.js
+ * @requires ../pointer/pointer.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+    'use strict';
+
+    /* WIDGET FACTORY */
+
+    $.widget = function ( originalName, base, prototype ) {
+
+        /* VARIABLES */
+
+        var fullName,
+            existingConstructor,
+            constructor,
+            basePrototype,
+            proxiedPrototype = {},
+            nameParts = originalName.split ( '.' ),
+            namespace = nameParts.length > 1 ? nameParts[0] : false,
+            name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+
+        fullName = namespace ? namespace + '-' + name : name;
+
+        /* NO BASE */
+
+        if ( !prototype ) {
+
+            prototype = base;
+            base = $.Widget;
+
+        }
+
+        /* NAMESPACE */
+
+        if ( namespace ) {
+
+            $[namespace] = $[namespace] || {};
+
+        }
+
+        /* CONSTRUCTOR */
+
+        existingConstructor = namespace ? $[namespace][name] : $[name];
+
+        constructor = function ( options, element ) {
+
+            if ( !this._createWidget ) {
+
+                return new constructor ( options, element );
+
+            }
+
+            if ( arguments.length ) {
+
+                this._createWidget ( options, element );
+
+            }
+
+        }
+
+        if ( namespace ) {
+
+            $[namespace][name] = constructor;
+
+        } else {
+
+            $[name] = constructor;
+
+        }
+
+        /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
+
+        _.extend ( constructor, existingConstructor, {
+            _proto: _.extend ( {}, prototype ),
+            _childConstructors: []
+        });
+
+        /* BASE PROTOTYPE */
+
+        basePrototype = new base ();
+
+        basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+
+        /* PROXIED PROTOTYPE */
+
+        for ( var prop in prototype ) {
+
+            if ( typeof prototype[prop] !== 'function' ) {
+
+                proxiedPrototype[prop] = prototype[prop];
+                continue;
+
+            }
+
+            proxiedPrototype[prop] = (function ( prop ) {
+
+                var _super = function () {
+                        return base.prototype[prop].apply ( this, arguments );
+                    },
+                    _superApply = function ( args ) {
+                        return base.prototype[prop].apply ( this, args );
+                    };
+
+                return function () {
+
+                    var __super = this._super,
+                        __superApply = this._superApply,
+                        returnValue;
+
+                    this._super = _super;
+                    this._superApply = _superApply;
+
+                    returnValue = prototype[prop].apply ( this, arguments );
+
+                    this._super = __super;
+                    this._superApply = __superApply;
+
+                    return returnValue;
+
+                };
+
+            })( prop );
+
+        }
+
+        /* CONSTRUCTOR PROTOTYPE */
+
+        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+            constructor: constructor,
+            namespace: namespace,
+            widgetOriginalName: originalName,
+            widgetName: name,
+            widgetFullName: fullName
+        });
+
+        /* CACHE TEMPLATES */
+
+        for ( var tmpl_name in prototype.templates ) {
+
+            $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
+
+        }
+
+        /* UPDATE PROTOTYPE CHAIN */
+
+        if ( existingConstructor ) {
+
+            for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+
+                var childPrototype = existingConstructor._childConstructors[i].prototype;
+
+                $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
+
+            }
+
+            delete existingConstructor._childConstructors;
+
+        } else {
+
+            base._childConstructors.push ( constructor );
+
+        }
+
+        /* CONSTRUCT */
+
+        $.widget.bridge ( name, constructor );
+
+        /* RETURN */
+
+        return constructor;
+
+    };
+
+    $.widget.bridge = function ( name, object ) {
+
+        /* VARIABLES */
+
+        var fullName = object.prototype.widgetFullName || name;
+
+        /* PLUGIN */
+
+        $.fn[name] = function ( options ) {
+
+            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
+
+            var isMethodCall = ( typeof options === 'string' ),
+                args = _.tail ( arguments ),
+                returnValue = this;
+
+            if ( isMethodCall ) {
+
+                /* METHOD CALL */
+
+                this.each ( function () {
+
+                    /* VARIABLES */
+
+                    var methodValue,
+                        instance = $.data ( this, fullName );
+
+                    /* GETTING INSTANCE */
+
+                    if ( options === 'instance' ) {
+
+                        returnValue = instance;
+
+                        return false;
+
+                    }
+
+                    /* CHECKING VALID CALL */
+
+                    if ( !instance ) return; //INFO: No instance found
+
+                    if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
+
+                    /* CALLING */
+
+                    methodValue = instance[options].apply ( instance, args );
+
+                    if ( methodValue !== instance && methodValue !== undefined ) {
+
+                        returnValue = methodValue;
+
+                        return false;
+
+                    }
+
+                });
+
+            } else {
+
+                /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
+
+                if ( args.length ) {
+
+                    options = _.extend.apply ( null, [options].concat ( args ) );
+
+                }
+
+                /* INSTANCIATING */
+
+                this.each ( function () {
+
+                    /* GET INSTANCE */
+
+                    var instance = $.data ( this, fullName );
+
+                    if ( instance ) {
+
+                        instance.option ( options || {} );
+
+                    } else {
+
+                        $.data ( this, fullName, new object ( options, this ) );
+
+                    }
+
+                });
+
+            }
+
+            return returnValue;
+
+        };
 
     };
 

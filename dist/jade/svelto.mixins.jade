@@ -1,0 +1,1459 @@
+
+//- Accordion
+
+mixin accordion
+  .accordion&attributes(attributes)
+    block
+
+
+//- Base
+
+mixin css(url, media)
+  - media = media || "all";
+  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
+
+mixin js(url)
+  script(src!=url)&attributes(attributes)
+
+mixin script
+  script&attributes(attributes)
+    block
+
+
+//- Breadcrumb
+
+mixin breadcrumb
+  .breadcrumb&attributes(attributes)
+    block
+
+mixin breadcrumb-divider(icon)
+  .breadcrumb-divider&attributes(attributes)
+    if block
+      block
+    else
+      - icon = icon || "chevron_right";
+      +icon(icon)
+
+
+//- Button
+
+mixin button-wrp
+  .label-wrp&attributes(attributes).button-wrp
+    block
+
+mixin button(href)
+  +button-wrp
+    if href
+      if href.slice ( 0, 11 ) === 'javascript:'
+        .label(onclick=href)&attributes(attributes).actionable
+          block
+      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+        .label(onclick="javascript:" + href)&attributes(attributes).actionable
+          block
+      else
+        a.label(href=href)&attributes(attributes).actionable
+          block
+    else
+      .label&attributes(attributes).actionable
+        block
+
+mixin button-left
+  .label-left&attributes(attributes)
+    block
+
+mixin button-center
+  .label-center&attributes(attributes)
+    block
+
+mixin button-right
+  .label-right&attributes(attributes)
+    block
+
+mixin button-simple(href)
+  +button(href)&attributes(attributes)
+    +button-center
+      block
+
+mixin button-icon(icon, href)
+  +button(href)&attributes(attributes)
+    +button-center
+      +icon(icon)
+    block
+
+//- FIXME: Add support for href
+
+mixin button-pointed
+  +button-wrp.pointed
+    +button-pointer&attributes(attributes)
+    .label&attributes(attributes).actionable
+      block
+
+mixin button-pointed-simple
+  +button-pointed&attributes(attributes)
+    +button-center
+      block
+
+mixin button-pointer
+  +label-pointer&attributes(attributes)
+    block
+
+mixin button-ribbons
+  +button-wrp.ribbons
+    .label&attributes(attributes).actionable
+      .label-ribbon-left
+      .label-ribbon-right
+      block
+  +button-simple&attributes(attributes).invisible
+
+mixin button-ribbon-left
+  +button-wrp.ribbon-left
+    .label&attributes(attributes).actionable
+      .label-ribbon-left
+      block
+  +button-simple&attributes(attributes).invisible
+
+mixin button-ribbon-right
+  +button-wrp.ribbon-right
+    .label&attributes(attributes).actionable
+      .label-ribbon-right
+      block
+  +button-simple&attributes(attributes).invisible
+
+mixin button-ribbons-simple
+  +button-ribbons&attributes(attributes)
+    +label-center
+      block
+
+mixin button-ribbon-left-simple
+  +button-ribbon-left&attributes(attributes)
+    +label-center
+      block
+
+mixin button-ribbon-right-simple
+  +button-ribbon-right&attributes(attributes)
+    +label-center
+      block
+
+mixin button-corner(direction, icon)
+  - direction = direction || "top-right";
+  +button-wrp(class=direction).corner
+    .label&attributes(attributes).compact.actionable
+      .label-corner
+      +button-center
+        if icon
+          +icon(icon)
+        block
+
+
+//- Chat
+
+//- Options
+  {
+    sender: {
+      img: '' // Avatar url
+      name: '', //  Nickname
+      url: '', // Profile url
+    },
+    permissions: {
+      own: boolean, // Flag that decide if the chat is owned by you
+      reply: boolean, // Flat that decide if you can reply it
+      edit: boolean, // Flag that decide if you can edit it
+      delete: boolean, // Flag that decide if you can delete it
+    },
+    message: {
+      timestamp: number, // Unix timestamp of when the message as been sent
+      content: '', // The message content
+      group: '', // The ID of the group, useful for joining all the messages
+      level: ''
+    }
+  }
+
+mixin chat-msg(options)
+  - options.message.level = options.message.level || 1;
+  - options.sender = options.sender || {};
+  - options.sender.name = options.sender.name || "Unknown";
+  .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
+    if options.sender.img
+      if options.sender.url
+        a(href=options.sender.url title=options.sender.name).chat-msg-img
+          img(src=options.sender.img title=options.sender.name)
+      else
+        .chat-msg-img
+          img(src=options.sender.img title=options.sender.name)
+      .chat-msg-indicator
+    .chat-msg-content
+      +container
+        +container-header.inherit
+          if options.sender.name !== "Unknown"
+            +multiple-left
+              if options.sender.url
+                a(href=options.sender.url title=options.sender.name)= options.sender.name
+              else
+                = options.sender.name
+          +multiple-right
+            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).small.outlined
+            if options.permissions
+              if options.permissions.own
+                +button-icon("action-account-circle")(title="You are the owner").small.outlined
+              if options.permissions.reply
+                +button-icon("content-reply")(title="Reply").small.outlined
+              if options.permissions.edit
+                +button-icon("editor-mode-edit")(title="Edit").small.outlined
+              if options.permissions.delete
+                +button-icon("action-delete")(title="Delete").small.outlined
+        +container-content= options.message.content
+
+
+//- Checkbox
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+mixin checkbox(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
+      else
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    +button-center
+      if options.title
+        span options.title
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off
+
+
+//- Colorpicker
+
+mixin colorpicker
+  .colorpicker&attributes(attributes)
+    .colorpicker-saturation-brightness-wrp
+      .colorpicker-saturation
+      .colorpicker-brightness
+      .colorpicker-handler
+    .colorpicker-hue-wrp
+      .colorpicker-hue
+      .colorpicker-handler
+
+
+//- Container
+
+//- Options
+  {
+    title: '', // Title
+    header_classes: '' // Header classes
+  }
+  
+mixin container(title, header_classes)
+  - options = options || {};
+  - options.header_classes = options.header_classes || "";
+  .container&attributes(attributes)
+    if options.title
+      +container-header(options.title)(class=options.header_classes)
+    block
+
+mixin container-header(title)
+  .container-header&attributes(attributes)
+    +multiple.expanded
+      if title
+        +multiple-center
+          p= title
+      block
+
+mixin container-content
+  .container-content&attributes(attributes)
+    block
+
+mixin container-footer
+  .container-footer&attributes(attributes)
+    block
+
+//- Options
+  {
+    title: '', // Title
+    header_classes: '' // Header classes
+  }
+
+mixin container-simple(options)
+  +container(options)&attributes(attributes)
+    +container-content
+      block
+
+
+//- Datepicker
+
+mixin datepicker
+  .datepicker&attributes(attributes)
+    .datepicker-navigation
+      +button-icon("chevron_left")(title="Previous month").datepicker-navigation-prev
+      .datepicker-navigation-title
+      +button-icon("chevron_right")(title="Next month").datepicker-navigation-next
+    .datepicker-calendar
+      .datepicker-days-names
+        .datepicker-day-name(title="Monday") M
+        .datepicker-day-name(title="Tuesday") T
+        .datepicker-day-name(title="Wednesday") W
+        .datepicker-day-name(title="Thursday") T
+        .datepicker-day-name(title="Friday") F
+        .datepicker-day-name(title="Saturday") S
+        .datepicker-day-name(title="Sunday") S
+      .datepicker-days
+        .datepicker-day-prev 23
+        .datepicker-day-prev 24
+        .datepicker-day-prev 25
+        .datepicker-day-prev 26
+        .datepicker-day-prev 27
+        .datepicker-day-prev 28
+        .datepicker-day-prev 29
+        .datepicker-day-prev 30
+        .datepicker-day-prev 31
+        .datepicker-day 1
+        .datepicker-day 2
+        .datepicker-day 3
+        .datepicker-day 4
+        .datepicker-day 5
+        .datepicker-day 6
+        .datepicker-day 7
+        .datepicker-day 8
+        .datepicker-day 9
+        .datepicker-day 10
+        .datepicker-day 11
+        .datepicker-day 12
+        .datepicker-day 13
+        .datepicker-day 14
+        .datepicker-day 15
+        .datepicker-day 16
+        .datepicker-day 17
+        .datepicker-day 18
+        .datepicker-day 19
+        .datepicker-day 20
+        .datepicker-day 21
+        .datepicker-day 22
+        .datepicker-day 23
+        .datepicker-day 24
+        .datepicker-day 25
+        .datepicker-day 26
+        .datepicker-day 27
+        .datepicker-day 28
+        .datepicker-day 29
+        .datepicker-day 30
+        .datepicker-day 31
+        .datepicker-day-next 1
+        .datepicker-day-next 2
+        .datepicker-day-next 3
+        .datepicker-day-next 4
+        .datepicker-day-next 5
+        .datepicker-day-next 6
+
+
+//- Divider
+
+mixin divider
+  +divider-block&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider-wrp.block
+    .divider&attributes(attributes)
+      block
+
+mixin divider-linear
+  if block
+    .divider-wrp.linear
+      hr.left
+      .divider&attributes(attributes)
+        block
+      hr.right
+  else
+    hr&attributes(attributes)
+
+mixin divider-text
+  .divider-wrp.text
+    .divider&attributes(attributes)
+      block
+
+mixin divider-spacer
+  .divider-wrp.spacer
+    .divider&attributes(attributes)
+      block
+
+
+//- Dropdown
+
+//- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
+
+//- Options
+  {
+    id: '', // Dropdown id
+    title: '', // Button title
+    icon: '' // Button icon
+  }
+
+mixin dropdown-btn(options)
+  - options.icon = options.icon || "expand_more";
+  +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
+    +button-center
+      if options.title
+        span= title
+      if options.icon
+        +icon(options.icon)
+
+mixin dropdown(id)
+  .dropdown(id="dropdown-" + id)&attributes(attributes)
+    .dropdown-tip.top
+    .dropdown-tip.right
+    .dropdown-tip.bottom
+    .dropdown-tip.left
+    +container
+      block
+
+
+//- EMBEDDED
+
+mixin embedded(src, allowfullscreen)
+  .embedded&attributes(attributes)
+    if src
+      +iframe(src, allowfullscreen)
+    block
+
+//- EMBEDDABLES
+
+mixin iframe(src, allowfullscreen)
+  if allowfullscreen
+    iframe(src=src allowfullscreen)&attributes(attributes)
+  else
+    iframe(src=src)&attributes(attributes)
+
+mixin embed(src)
+  embed(src=src)&attributes(attributes)
+
+mixin video(sources, type)
+  video&attributes(attributes)
+    if type
+      sources(src=sources type=type)
+    else
+      each src, type in sources
+        source(src=src type=type)
+
+mixin object(data)
+  object(data=data)&attributes(attributes)
+
+
+//- Expander
+
+//- Options
+  {
+    title: '', // Title
+    header_classes: '' // Header classes
+  }
+
+mixin expander(options)
+  - options = options || {};
+  - options.header_classes = options.header_classes || "";
+  +container&attributes(attributes).expander
+    if options.title
+      +container-header(options.title)(class=options.header_classes).expander-toggler
+    block
+
+
+//- Flags
+
+mixin flag(flag)
+  .flag(class="flag-" + flag)&attributes(attributes)
+    block
+
+
+//- Footer
+
+mixin footer
+  .footer&attributes(attributes)
+    block
+
+
+//- Flippable
+
+mixin flippable
+  .flippable-wrp&attributes(attributes)
+    .flippable
+      block
+
+mixin flippable-front
+  .flippable-front&attributes(attributes)
+    block
+
+mixin flippable-back
+  .flippable-back&attributes(attributes)
+    block
+
+
+//- Form
+
+mixin form
+  form&attributes(attributes)
+    block
+
+mixin form-button(href)
+  //- TODO: Make it DRY, we are basically just repeating the button mixin
+  button(type="submit")&attributes(attributes).label-wrp.button-wrp
+    if href
+      if href.slice ( 0, 11 ) === 'javascript:'
+        .label(onclick=href)&attributes(attributes).actionable
+          block
+      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+        .label(onclick="javascript:" + href)&attributes(attributes).actionable
+          block
+      else
+        a.label(href=href)&attributes(attributes).actionable
+          block
+    else
+      .label&attributes(attributes).actionable
+        block
+
+mixin form-button-simple(href)
+  +form-button(href)&attributes(attributes)
+    +button-center
+      block
+
+mixin form-button-icon(icon, href)
+  +form-button(href)&attributes(attributes)
+    +button-icon(icon)
+      block
+
+
+//- Header
+
+//- FIXME: do not use inline style
+//- FIXME: make it more general, so that not just an image url can be set as a bacground but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
+
+mixin header
+  .header&attributes(attributes)
+    block
+
+mixin header-with-bg(background_image_url)
+  .header.has-background&attributes(attributes)
+    block
+    .header-background(style="background:url(" + background_image_url + ") no-repeat center center fixed;")
+
+
+//- Icons
+
+mixin icon(icon)
+  i.icon&attributes(attributes)
+    if icon
+      = icon
+    block
+
+
+//- Image
+
+mixin image(url)
+  +container&attributes(attributes).image-wrp
+    img(src=url)
+    block
+
+mixin image-caption
+  +container&attributes(attributes).image-caption
+    +container-content
+      block
+
+mixin image-sample
+  +image("/sample.png")&attributes(attributes)
+    block
+
+
+//- Infobar
+
+//- Options
+  {
+    icon: '', // Infobar icon
+    title: '', // Infobar title
+    subtitle: '', // Infobar subtitle
+  }
+
+mixin infobar(options)
+  - options = options || {};
+  .infobar-wrp&attributes(attributes)
+    if options.icon
+      +infobar-left
+        +icon(icon)(class=((options.title && options.subtitle) ? "xlarge" : ""))
+    if options.title || options.subtitle
+      +infobar-center
+        if options.title
+          +infobar-title(options.title)
+        if options.subtitle
+          +infobar-subtitle(options.subtitle)
+    block
+  
+mixin infobar-left
+  .infobar-left&attributes(attributes)
+    block
+
+mixin infobar-center
+  .infobar-center&attributes(attributes)
+    block
+
+mixin infobar-title(title)
+  if title
+    p.infobar-title&attributes(attributes)= title
+  else
+    .infobar-title&attributes(attributes)
+      block
+
+mixin infobar-subtitle(subtitle)
+  if subtitle
+    p.infobar-subtitle&attributes(attributes)= subtitle
+  else
+    .infobar-subtitle&attributes(attributes)
+      block
+
+mixin infobar-right
+  .infobar-right&attributes(attributes)
+    block
+
+mixin infobar-bottom
+  .infobar-bottom&attributes(attributes)
+    block
+
+
+//- Input
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value || "";
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name, required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- Label
+
+mixin label-wrp
+  .label-wrp&attributes(attributes)
+    block
+
+mixin label
+  +label-wrp
+    .label&attributes(attributes)
+      block
+
+mixin label-left
+  .label-left&attributes(attributes)
+    block
+
+mixin label-center
+  .label-center&attributes(attributes)
+    block
+
+mixin label-right
+  .label-right&attributes(attributes)
+    block
+
+mixin label-simple
+  +label&attributes(attributes)
+    +label-center
+      block
+
+mixin label-icon(icon)
+  +label&attributes(attributes)
+    +label-center
+      +icon(icon)
+    block
+
+mixin label-pointed
+  +label-wrp.pointed
+    +label-pointer&attributes(attributes)
+    .label&attributes(attributes)
+      block
+
+mixin label-pointed-simple
+  +label-pointed&attributes(attributes)
+    +label-center
+      block
+
+mixin label-pointer
+  .label-pointer&attributes(attributes)
+    block
+
+mixin label-ribbons
+  +label-wrp.ribbons
+    .label&attributes(attributes)
+      .label-ribbon-left
+      .label-ribbon-right
+      block
+  +label-simple&attributes(attributes).invisible
+
+mixin label-ribbon-left
+  +label-wrp.ribbon-left
+    .label&attributes(attributes)
+      .label-ribbon-left
+      block
+  +label-simple&attributes(attributes).invisible
+
+mixin label-ribbon-right
+  +label-wrp.ribbon-right
+    .label&attributes(attributes)
+      .label-ribbon-right
+      block
+  +label-simple&attributes(attributes).invisible
+
+mixin label-ribbons-simple
+  +label-ribbons&attributes(attributes)
+    +label-center
+      block
+
+mixin label-ribbon-left-simple
+  +label-ribbon-left&attributes(attributes)
+    +label-center
+      block
+
+mixin label-ribbon-right-simple
+  +label-ribbon-right&attributes(attributes)
+    +label-center
+      block
+
+mixin label-corner(direction, icon)
+  - direction = direction || "";
+  +label-wrp(class=direction).corner
+    .label&attributes(attributes).compact
+      .label-corner
+      +label-center
+        if icon
+          +icon(icon)
+        block
+
+
+//- Modal
+
+mixin modal
+  .modal&attributes(attributes)
+    .background.modal-closer
+    block
+
+
+//- Multiple
+
+mixin multiple
+  .multiple-wrp&attributes(attributes)
+    .multiple
+      block
+
+//- Subs
+
+mixin multiple-left
+  .multiple-sub-spacer
+  .multiple-sub&attributes(attributes).left
+    +multiple
+      block
+  .multiple-sub-spacer
+
+mixin multiple-center
+  .multiple-sub-spacer
+  .multiple-sub&attributes(attributes).center
+    +multiple
+      block
+  .multiple-sub-spacer
+
+mixin multiple-right
+  .multiple-sub-spacer
+  .multiple-sub&attributes(attributes).right
+    +multiple
+      block
+  .multiple-sub-spacer
+
+
+//- Navbar
+
+//- Options
+  {
+    id: '', // Navbar id
+    title: '' // Title
+    icon: '', // Icon to use
+  }
+
+mixin navbar-btn(options)
+  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
+    +button-center
+      if options.title
+        span options.title
+      if options.icon
+        +icon(icon)
+
+//- Options
+  {
+    id: '', // Navbar id
+    direction: '', // Navbar direction
+    slim: '', // Use a slim version or not
+    attached: '' // True or attached-* class
+  }
+
+mixin navbar(options)
+  - options.direction = options.direction || "left";
+  - options.slim = options.slim || false;
+  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )))
+    +container(id="navbar-" + options.id)&attributes(attributes).navbar
+      block
+    .background.navbar-closer
+
+
+//- Notification
+
+//- Options
+  {
+    title: '', // Notification title
+    body: '', // Notification body
+    img: '' // Notification image
+  }
+
+mixin notification(options)
+  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
+
+
+//- Noty
+
+//- Options: See noty component
+
+mixin noty(options)
+  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
+
+
+//- Others
+
+//- TODO: add optional third parameter that toggles the randomization process
+
+//- Options
+  {
+    type: '', // Input name
+    amount: '' // Amount of type
+  }
+
+mixin lorem-ipsum(options)
+  - options = options || {};
+  - options.type = options.type || "paragraph";
+  - options.amount = options.amount || 1;
+  
+  - var returnLI = '';
+  - var LIText = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur aliquet tincidunt turpis, in pharetra mi convallis ut. Vivamus eget sodales nibh, eu placerat erat. Vivamus massa urna, volutpat non tempus eget, placerat quis elit. Nullam pretium id arcu sed eleifend. Phasellus sollicitudin quis ante nec ornare. Maecenas nibh eros, vehicula vel eros eget, viverra semper nisi. Nulla facilisi. Praesent pretium porttitor arcu, sit amet consequat neque luctus non. Cras sodales, justo quis tempus dignissim, diam est commodo orci, eget accumsan sem ante vitae sem. Curabitur quam ipsum, porta id sapien in, consectetur auctor nibh. Vivamus egestas ante vel cursus aliquet. In non ante nec velit tempus lacinia nec sollicitudin ex. Phasellus semper lorem a diam scelerisque, sed accumsan erat molestie. Mauris vulputate lacinia erat. Nunc urna risus, facilisis at posuere in, pulvinar quis odio. Maecenas et sollicitudin arcu.\n Proin maximus dui ac felis blandit luctus. Fusce consectetur, nisl vitae blandit viverra, mi nisl posuere lorem, a interdum nisl leo quis massa. Donec et pretium mi. Quisque bibendum urna quis eleifend blandit. Donec pulvinar est eu diam tempus bibendum. Aenean iaculis mi vel magna viverra, ut facilisis velit luctus. Aenean blandit, erat a cursus dignissim, lectus lacus vehicula orci, ut vestibulum risus purus quis libero. Fusce vestibulum risus a erat varius facilisis. Donec tincidunt interdum mattis. Nam mi sapien, dictum a egestas in, efficitur sed sem. Cras dignissim neque dignissim arcu suscipit pellentesque. Praesent euismod vel dui at imperdiet. Vestibulum rhoncus dolor sed bibendum hendrerit. Sed malesuada dolor sed ex porttitor euismod. In id laoreet dui.\n Donec maximus ante vel erat sagittis varius. Quisque auctor varius rhoncus. Nunc efficitur, magna eu venenatis placerat, odio dui sodales nisi, sit amet ultricies sapien eros vel erat. Maecenas tincidunt dolor sit amet nibh gravida, eu iaculis enim hendrerit. Fusce porttitor arcu magna, quis convallis enim suscipit eget. Mauris id lacus pharetra, auctor leo at, pulvinar leo. Sed ex augue, tristique posuere augue sed, aliquet dictum erat.\n Sed lobortis purus non eros bibendum, nec ornare erat euismod. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse potenti. Quisque ut nulla cursus, vehicula dui vitae, consectetur urna. Sed tincidunt est purus, id auctor risus fringilla in. Vivamus rutrum dictum ligula, scelerisque elementum orci fringilla eget. Suspendisse potenti.\n Phasellus molestie quam a urna ultrices suscipit. Fusce eu elit rutrum dui elementum malesuada. Curabitur porta tincidunt tristique. Nam tellus enim, sodales id est auctor, lobortis elementum sem. Curabitur pharetra convallis bibendum. Curabitur consectetur rhoncus dignissim. Sed vehicula est et lacinia dapibus. Nunc efficitur diam vel mattis posuere.";
+
+  if options.type === 'characters'
+    - returnLI = LIText.substr ( 0, options.amount );
+  else if options.type === 'words'
+    - var LIWords;
+    - LIText = LIText.toLowerCase ();
+    - LIText = LIText.split ( '.' ).join ( '' );
+    - LIText = LIText.split ( ',' ).join ( '' );
+    - lipsumArray = LIText.split ( ' ' );
+    - for ( var i = 0; i < options.amount; i++ ) {
+      - returnLI += lipsumArray[i] + ' ';
+    - }
+    - returnLI = returnLI.charAt ( 0 ).toUpperCase () + returnLI.slice ( 1 );
+    - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
+  else if options.type === 'paragraph'
+    - var LISentences = LIText.split ( '\n ' );
+    - for ( var i = 0; i < options.amount; i++ ) {
+      - returnLI += LISentences[i] + '\n';
+    - }
+    - returnLI = returnLI.substr ( 0, returnLI.length - 1 );
+
+  = returnLI
+
+//- Options
+  [
+    0: '', // Rectangle width
+    1: '' // Rectangle width
+    ...
+  ]
+
+mixin paragraph-sample(options)
+  - options = options || ['95%', '92%', '100%', '87%', '97%', '93%', '97%'];
+  each width in options
+    +placeholder({ width: width, height: 10, empty: true })&attributes(attributes)
+
+mixin spacer
+  .spacer&attributes(attributes)
+    block
+
+mixin centerer
+  .centerer&attributes(attributes)
+    block
+
+
+//- Pagination
+
+//- Options
+  {
+    url: '', // The url to transform wih the page number (eighter by appending or or by replacing <page-nr>)
+    total: '', // The total number of pages, or infinite (for example when the content is generated randomly)
+    current: '', // The current page number
+    blocks: '', // The number of blocks to fill
+    classes: '' // Extra classes to add to buttons
+  }
+
+mixin pagination(options)
+  - options.classes = options.classes || "compact";
+  +multiple&attributes(attributes).pagination.centered
+
+    if options.total == 1 || options.total == 0
+      block
+
+    else if options.total == 'infinite'
+      +button-simple(options.url)(class=options.classes) Load more
+      block
+
+    else
+      if options.blocks >= 2
+
+        - var url_to_substitute = ( options.url.indexOf ( '<page-nr>' ) !== -1 );
+
+        if options.current > 1
+          - var page_nr = options.current - 1;
+          - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+          +button-icon("chevron_left", page_url)(title="Previous page" class=options.classes).prev
+          - options.blocks -= 1;
+
+        if options.current < options.total
+          - var need_next_button = true;
+          - options.blocks -= 1;
+        else
+          - var need_next_button = false;
+
+        if options.blocks > 0
+          - var need_current_button = true;
+          - options.blocks -= 1;
+        else
+          - need_current_button = false;
+
+        - var left_blocks = options.current - 1;
+        - var right_blocks = options.total - options.current;
+        - var required_left_blocks = Math.floor ( options.blocks / 2 );
+        - var required_right_blocks = options.blocks - required_left_blocks;
+
+        if left_blocks <= required_left_blocks && right_blocks <= required_right_blocks
+          - var outputed_left_blocks = left_blocks;
+          - var outputed_right_blocks = right_blocks;
+        else if left_blocks <= required_left_blocks
+          - var outputed_left_blocks = left_blocks;
+          - var outputed_right_blocks = Math.min ( right_blocks, options.blocks - outputed_left_blocks );
+        else if right_blocks <= required_right_blocks
+          - var outputed_right_blocks = right_blocks;
+          - var outputed_left_blocks = Math.min ( left_blocks, options.blocks - outputed_right_blocks );
+        else
+          - var outputed_left_blocks = required_left_blocks;
+          - var outputed_right_blocks = required_right_blocks;
+
+        while outputed_left_blocks > 0
+          - var page_nr = options.current - outputed_left_blocks;
+          - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+          +button-simple(page_url)(title="Page " + page_nr class=options.classes)= page_nr
+          - outputed_left_blocks--;
+
+        if need_current_button
+          +label-simple(title="Current page" class=options.classes).current= options.current
+
+        - var counter = 1;
+        while counter <= outputed_right_blocks
+          - var page_nr = options.current + counter;
+          - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+          +button-simple(page_url)(title="Page " + page_nr class=options.classes)= page_nr
+          - counter++;
+
+        if need_next_button
+          - var page_nr = options.current + 1;
+          - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+          +button-icon("chevron_right", page_url)(title="Next page" class=options.classes).next
+
+      block
+
+
+//- Parallax
+
+mixin parallax
+  .parallax&attributes(attributes)
+    block
+
+mixin parallax-layers
+  .parallax-layers&attributes(attributes)
+    block
+
+mixin parallax-layer
+  .parallax-layer&attributes(attributes)
+    block
+
+mixin parallax-content-sample
+  .parallax-content-sample&attributes(attributes)
+    block
+
+//- Layers levels
+
+mixin parallax-layer-deep
+  +parallax-layer&attributes(attributes).parallax-layer-deep
+    block
+
+mixin parallax-layer-background
+  +parallax-layer&attributes(attributes).parallax-layer-background
+    block
+
+mixin parallax-layer-base
+  +parallax-layer&attributes(attributes).parallax-layer-base
+    block
+
+mixin parallax-layer-foreground
+  +parallax-layer&attributes(attributes).parallax-layer-foreground
+    block
+
+
+//- Placeholder
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(width, height, empty)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
+
+
+//- Syntax
+
+mixin syntax(language)
+  code(class="language-" + language)&attributes(attributes)
+    block
+
+
+//- Progressbar
+
+//- TODO: Write options docs block
+
+mixin progressbar(options, multiple)
+  if typeof multiple !== 'undefined'
+    - var new_options = { percentages: Array ( arguments.length ) };
+    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
+      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
+    - }
+  else
+    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+  - options = new_options;
+  - options.decimals = options.decimals || 0;
+  - var total = 0;
+  .progressbar&attributes(attributes)
+    .progressbar-unhighlighted
+      each percentage in options.percentages
+        - total += percentage.value;
+        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
+          if options.labeled
+            .progressbar-label= +(percentage.value).toFixed(options.decimals)
+    .progressbar-stripes(style=("width: " + total + "%;"))
+
+
+//- Radio
+
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+  
+mixin radio(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "radio_button_checked";
+  - options.icons.off = options.icons.off || "radio_button_unchecked";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).radio
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
+      else
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    +button-center
+      if options.title
+        span options.title
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off
+
+
+//- Select
+
+//- FIXME: Add support for arbitrary number of optgroups levels
+//- TODO: Make the mixin set the defualt value at the compilation time
+
+//- Options
+  {
+    options: '', // Select options
+    selected: '', // Selected option
+    id: '', // Select id
+    name: '', // Select name
+    title: '', // Button title
+    icon: '', // Button icon
+    placeholder: '' // Select placeholder
+  }
+
+mixin select-btn(options)
+  - options.icon = options.icon || "reorder";
+  +button(data-select="select-" + options.id)&attributes(attributes).select-btn.select-trigger
+    +button-center
+      if options.title
+        .select-label= options.title
+      if options.icon
+        +icon(options.icon)
+      +select(options)
+
+mixin select(options)
+  - options.placeholder = options.placeholder || "Select a value...";
+  select(id="select-" + options.id name=options.name, placeholder=options.placeholder)
+    each val, prop in options.options
+      if typeof val === "object"
+        optgroup(label=prop)
+          each subval, subprop in val
+            if subprop === selected
+              option(value=subprop selected)= subval
+            else
+              option(value=subprop)= subval
+      else
+        if subprop === selected
+          option(value=prop selected)= val
+        else
+          option(value=prop)= val
+
+
+//- Shapes
+
+mixin triangle
+  .triangle&attributes(attributes)
+    block
+
+mixin triangle-up
+  .triangle-up&attributes(attributes)
+    block
+
+mixin triangle-down
+  .triangle-down&attributes(attributes)
+    block
+
+mixin triangle-right
+  .triangle-right&attributes(attributes)
+    block
+
+mixin triangle-left
+  .triangle-left&attributes(attributes)
+    block
+
+mixin square
+  .square&attributes(attributes)
+    block
+
+mixin square-sample
+  .square-sample&attributes(attributes)
+    p.no-margin
+      +lorem-ipsum(10, 'words')
+    block
+
+mixin circle
+  .circle&attributes(attributes)
+    block
+
+
+//- Slider
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Step amount
+  }
+  
+mixin slider(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
+  .slider(data-step=step)&attributes(attributes)
+    if options.name
+      input(type="number" name=name value=value)
+    else
+      input(type="number" value=value)
+    .slider-min(title="Decrease" data-min=options.min)
+    .slider-max(title="Increase" data-max=options.max)
+    .slider-bar-wrp
+      .slider-bar
+        .slider-unhighlighted
+          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
+      .slider-handler-wrp(style="left:" + percentage + "%;")
+        .slider-handler
+          .slider-label= value
+
+
+//- Spinner
+
+mixin spinner
+  .spinner-wrp&attributes(attributes)
+    +spinner-no-wrp&attributes(attributes)
+
+mixin spinner-no-wrp
+  .spinner&attributes(attributes)
+    .circle-wrp.left
+      .circle
+    .circle-wrp.right
+      .circle
+
+//- Options
+  [
+    0: '', // First spinner color
+    1: '', // Second spinner color
+    2: '', // Third spinner color
+    3: '' // Fourth spinner color
+  ]
+
+mixin spinner-multiple(options)
+  - options = ( options && options.length === 4 ) ? options : ["blue", "red", "yellow", "green"];
+  .spinner-wrp&attributes(attributes).multiple
+    if block
+      block
+    else
+      each color in options
+        +spinner-no-wrp(class=color)
+
+
+//- Stepper
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '' // Max value
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
+    +button-icon("remove").stepper-decreaser
+    if options.name
+      +input({ name: name, value: value }).autogrow.compact
+    else
+      +input({ value: value }).autogrow.compact
+    +button-icon("add").stepper-increaser
+
+
+//- Switch
+
+//- Options
+  {
+    name: '', // Input name
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+//- FIXME: Remove that ugly hard coded `1.73333em`
+
+mixin switch(options)
+  - options = options || {};
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "secondary";
+  - options.colors.off = options.colors.off || "gray";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "false";
+  - options.icons.off = options.icons.off || "false";
+  - var color_class = options.checked ? options.colors.on : options.colors.off;
+  .switch(data-color-on=options.colors.on data-color-off=options.colors.off data-icon-on=options.icons.on data-icon-off=options.icons.off)&attributes(attributes)
+    if options.name
+      if options.value
+        if options.checked
+          input(type="checkbox" name=options.name value=options.value checked=options.checked)
+        else
+          input(type="checkbox" name=options.name value=options.value)
+      else
+        input(type="checkbox" name=options.name)
+    else
+      input(type="checkbox")
+    .switch-bar-wrp
+      .switch-bar(class=color_class)
+        .switch-handler(class=color_class style="transform: translate3d(" + (options.checked ? "1.73333em" : "0") + ",0,0);")
+          if options.icons.on !== "false"
+            +icon(options.icons.on).icon-on
+          if options.icons.off !== "false"
+            +icon(options.icons.off).icon-off
+
+
+//- Table
+
+mixin table-tr-empty ( empty_str )
+  tr&attributes(attributes).empty.hidden
+    td(colspan="100%")
+      if block
+        block
+      else
+        if empty_str
+          = empty_str
+        else
+          = "Empty"
+
+
+//- Tabs
+
+mixin tabs
+  .tabs&attributes(attributes)
+    block
+
+mixin tabs-buttons
+  .tabs-buttons&attributes(attributes)
+    block
+
+mixin tabs-buttons-indicator
+  .tabs-buttons-indicator&attributes(attributes)
+    block
+
+mixin tabs-containers
+  .tabs-containers&attributes(attributes)
+    block
+
+
+//- Tagbox
+
+//- Options
+  {
+    name: '', // Input name
+    tags: '', // Comma (by default) separated list of tags
+    label: '' // New tag input placeholder
+  }
+
+mixin tagbox(options)
+  - options = options || {};
+  - options.tags = options.tags || "";
+  - options.label = options.label || "Add tag...";
+  +container&attributes(attributes).tagbox
+    if options.name
+      input(type="text" name=options.name value=options.tags)
+    else
+      input(type="text" value=options.tags)
+    +multiple
+      if options.name
+        +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+      else
+        +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+
+
+//- Textarea
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- Toolbar
+
+mixin toolbar
+  .toolbar&attributes(attributes)
+    +multiple.expanded
+      block
+
+
+//- Link
+
+mixin a(href)
+  - href = href || "#";
+  a(href=href)&attributes(attributes)
+    block
+
+//- Abbr
+
+mixin abbr(title)
+  abbr(title=title)&attributes(attributes)
+    block

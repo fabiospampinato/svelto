@@ -7,7 +7,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires jQuery-extra.js
+ * @requires ../core/core.js
  * ========================================================================= */
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)

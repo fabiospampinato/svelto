@@ -163,14 +163,14 @@ gulp.task ( 'js', ['js-temp'], function () {
                        .pipe ( sort () )
                        .pipe ( concat ( 'svelto.js' ) )
                        .pipe ( gulp.dest ( 'dist/js' ) )
-                       .pipe ( browserSync.active ? browserSync.stream ({ match: '**/*.{js,js.map}' }) : gutil.noop () );
+                       .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
 
   var minified = gulp.src ( '.temp/js/min/*.js' )
                      .pipe ( newer ( 'dist/js/svelto.min.js' ) )
                      .pipe ( sort () )
                      .pipe ( concat ( 'svelto.min.js' ) )
                      .pipe ( gulp.dest ( 'dist/js' ) )
-                     .pipe ( browserSync.active ? browserSync.stream ({ match: '**/*.min.{js,js.map}' }) : gutil.noop () );
+                     .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
 
   return merge ( unminified, minified );
 
