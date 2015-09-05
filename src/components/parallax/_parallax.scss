@@ -14,48 +14,48 @@
 
 .parallax {
 
-    @extend %widget;
+  @extend %widget;
+  height: $parallax-height;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: $parallax-perspective;
+
+  & > .parallax-layers {
+
+    position: relative;
     height: $parallax-height;
-    overflow-x: hidden;
-    overflow-y: auto;
-    perspective: $parallax-perspective;
+    transform-style: preserve-3d;
 
-    & > .parallax-layers {
+    & > .parallax-layer {
 
-        position: relative;
-        height: $parallax-height;
-        transform-style: preserve-3d;
+      @include fill-absolute ();
 
-        & > .parallax-layer {
+      &.parallax-layer-deep {
+        transform: translateZ($parallax-deep-translate-z) scale($parallax-deep-scale);
+        z-index: 1;
+      }
 
-            @include fill-absolute ();
+      &.parallax-layer-background {
+        transform: translateZ($parallax-background-translate-z) scale($parallax-background-scale);
+        z-index: 2;
+      }
 
-            &.parallax-layer-deep {
-                transform: translateZ($parallax-deep-translate-z) scale($parallax-deep-scale);
-                z-index: 1;
-            }
+      &.parallax-layer-base {
+        transform: translateZ(0);
+        z-index: 3;
+      }
 
-            &.parallax-layer-background {
-                transform: translateZ($parallax-background-translate-z) scale($parallax-background-scale);
-                z-index: 2;
-            }
+      &.parallax-layer-foreground {
+        transform: translateZ($parallax-foreground-translate-z) scale($parallax-foreground-scale);
+        z-index: 4;
+      }
 
-            &.parallax-layer-base {
-                transform: translateZ(0);
-                z-index: 3;
-            }
-
-            &.parallax-layer-foreground {
-                transform: translateZ($parallax-foreground-translate-z) scale($parallax-foreground-scale);
-                z-index: 4;
-            }
-
-            & > .parallax-content-sample { //FIXME: Remove this component, it shouldn't be needed
-                @include center-transform ();
-            }
-
-        }
+      & > .parallax-content-sample { //FIXME: Remove this component, it shouldn't be needed
+        @include center-transform ();
+      }
 
     }
+
+  }
 
 }

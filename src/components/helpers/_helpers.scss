@@ -11,170 +11,170 @@
 /* BLUR */
 
 .blurred {
-    filter: url('/assets/images/presto/blur.svg#blur') !important;
-    filter: blur($blurred-blur-amount) !important;
+  filter: url('/assets/images/presto/blur.svg#blur') !important;
+  filter: blur($blurred-blur-amount) !important;
 }
 
 /* BORDER */
 
 .no-border {
-    border-width: 0 !important;
+  border-width: 0 !important;
 }
 
 .rounded {
-    border-radius: $rounded-border-radius $rounded-border-radius !important;
+  border-radius: $rounded-border-radius $rounded-border-radius !important;
 }
 
 .smooth {
-    border-radius: $smooth-border-radius !important;
+  border-radius: $smooth-border-radius !important;
 }
 
 .sharp {
-    border-radius: $sharp-border-radius !important;
+  border-radius: $sharp-border-radius !important;
 }
 
 /* DISPLAY */
 
 .show {
-    display: block !important;
+  display: block !important;
 }
 
 .hidden {
-    display: none !important;
+  display: none !important;
 }
 
 /* VISIBILITY */
 
 .visible {
-    visibility: visible !important;
+  visibility: visible !important;
 }
 
 .invisible {
-    visibility: hidden !important;
+  visibility: hidden !important;
 }
 
 /* FLOAT */
 
 .float-left {
-    float: left !important;
+  float: left !important;
 }
 
 .float-right {
-    float: right !important;
+  float: right !important;
 }
 
 /* TEXT ALIGNMENT */
 
 .text-left {
-    text-align: left !important;
+  text-align: left !important;
 }
 
 .text-center {
-    text-align: center !important;
+  text-align: center !important;
 }
 
 .text-right {
-    text-align: right !important;
+  text-align: right !important;
 }
 
 .text-justify {
-    text-align: justify !important;
+  text-align: justify !important;
 }
 
 /* TEXT TRANSFORMATION */
 
 .text-lowercase {
-    text-transform: lowercase !important;
+  text-transform: lowercase !important;
 }
 
 .text-uppercase {
-    text-transform: uppercase !important;
+  text-transform: uppercase !important;
 }
 
 .text-capitalize {
-    text-transform: capitalize !important;
+  text-transform: capitalize !important;
 }
 
 /* PADDING */
 
 .no-padding {
-    padding: 0 !important;
+  padding: 0 !important;
 }
 
 .no-padding-top {
-    padding-top: 0 !important;
+  padding-top: 0 !important;
 }
 
 .no-padding-right {
-    padding-right: 0 !important;
+  padding-right: 0 !important;
 }
 
 .no-padding-bottom {
-    padding-bottom: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .no-padding-left {
-    padding-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 /* MARGIN */
 
 .no-margin {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .no-margin-top {
-    margin-top: 0 !important;
+  margin-top: 0 !important;
 }
 
 .no-margin-right {
-    margin-right: 0 !important;
+  margin-right: 0 !important;
 }
 
 .no-margin-bottom {
-    margin-bottom: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 .no-margin-left {
-    margin-left: 0 !important;
+  margin-left: 0 !important;
 }
 
 /* OVERFLOW */
 
 .overflow-hidden {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 .overflow-visible {
-    overflow: visible !important;
+  overflow: visible !important;
 }
 
 /* FLIP */
 
 .flipX {
-    transform: rotateY(180deg) !important;
+  transform: rotateY(180deg) !important;
 }
 
 .flipY {
-    transform: rotateX(180deg) !important;
+  transform: rotateX(180deg) !important;
 }
 
 .flip {
-    transform: rotateY(180deg) rotateX(180deg) !important;
+  transform: rotateY(180deg) rotateX(180deg) !important;
 }
 
 /* ROTATE */
 
 .rotate-left {
-    transform: rotate(-90deg) !important;
+  transform: rotate(-90deg) !important;
 }
 
 .rotate-right {
-    transform: rotate(90deg) !important;
+  transform: rotate(90deg) !important;
 }
 
 .rotating { //TODO: Maybe move to an _helpers_animations
-    animation: rotate $rotating-animation-duration linear infinite !important;
+  animation: rotate $rotating-animation-duration linear infinite !important;
 }
 
 /* OTHERS */
@@ -183,42 +183,42 @@
 
 .centerer {
 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: $layout-gutter;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: $layout-gutter;
 
-    & > *:last-child {
-        margin-bottom: 0 !important;
-    }
+  & > *:last-child {
+    margin-bottom: 0 !important;
+  }
 
 }
 
 .spacer {
-    flex-grow: $spacer-flex-grow !important;
-    margin-bottom: $layout-gutter;
+  flex-grow: $spacer-flex-grow !important;
+  margin-bottom: $layout-gutter;
 }
 
 .dragging {
-    z-index: $dragging-z-index;
+  z-index: $dragging-z-index;
 }
 
 .centered:not(.multiple-wrp) { //TODO: Move it to it's own decorator
-    @include center-margin ();
+  @include center-margin ();
 }
 
 .limited { //TODO: Move it to it's own decorator
-    @include center-margin ( $layout-max-width );
+  @include center-margin ( $layout-max-width );
 }
 
 .actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .no-grow {
-    flex-grow: 0 !important;
+  flex-grow: 0 !important;
 }
 
 .no-shrink {
-    flex-shrink: 0 !important;
+  flex-shrink: 0 !important;
 }

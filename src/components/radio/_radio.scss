@@ -14,10 +14,10 @@
 
 .radio {
 
-    @extend .checkbox;
+  @extend .checkbox;
 
-    &.radio-disabled {
-        @extend .checkbox.checkbox-disabled;
-    }
+  &.radio-disabled {
+    @extend .checkbox.checkbox-disabled;
+  }
 
 }

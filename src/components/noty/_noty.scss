@@ -14,16 +14,16 @@
 
 @mixin expand-queue {
 
+  width: 100%;
+  margin: 0 !important;
+
+  & > .noty {
     width: 100%;
     margin: 0 !important;
-
-    & > .noty {
-        width: 100%;
-        margin: 0 !important;
-        border-right-width: 0;
-        border-left-width: 0;
-        border-radius: 0;
-    }
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+  }
 
 }
 
@@ -31,33 +31,33 @@
 
 @include max-screen ( $noty-full-breakpoint ) {
 
-    .noty-queues {
+  .noty-queues {
 
-        &.top > .noty-queues-row {
+    &.top > .noty-queues-row {
 
-            flex-direction: column;
+      flex-direction: column;
 
-            .noty {
-                border-top-width: 0;
-            }
-
-        }
-
-        &.bottom > .noty-queues-row {
-
-            flex-direction: column-reverse;
-
-            .noty {
-                border-bottom-width: 0;
-            }
-
-        }
+      .noty {
+        border-top-width: 0;
+      }
 
     }
 
-    .noty-queue {
-        @include expand-queue ();
+    &.bottom > .noty-queues-row {
+
+      flex-direction: column-reverse;
+
+      .noty {
+        border-bottom-width: 0;
+      }
+
     }
+
+  }
+
+  .noty-queue {
+    @include expand-queue ();
+  }
 
 }
 
@@ -65,66 +65,66 @@
 
 .noty-queues {
 
-    position: fixed;
-    z-index: $noty-z-index;
-    display: flex;
-    flex-wrap: wrap;
-    width: 100%;
-    pointer-events: none;
+  position: fixed;
+  z-index: $noty-z-index;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  pointer-events: none;
 
-    &.top {
+  &.top {
 
-        top: 0;
-
-        & > .noty-queues-row {
-            align-items: flex-start;
-        }
-
-        .noty-queue {
-
-            flex-direction: column;
-
-            &.expanded {
-                border-top-width: 0;
-            }
-
-            & > .noty {
-                margin-top: $layout-gutter;
-            }
-
-        }
-
-    }
-
-    &.bottom {
-
-        bottom: 0;
-
-        & > .noty-queues-row {
-            align-items: flex-end;
-        }
-
-        .noty-queue {
-
-            flex-direction: column-reverse;
-
-            &.expanded {
-                border-bottom-width: 0;
-            }
-
-            & > .noty {
-                margin-bottom: $layout-gutter;
-            }
-
-        }
-
-    }
+    top: 0;
 
     & > .noty-queues-row {
-        display: flex;
-        justify-content: space-between;
-        width: 100%;
+      align-items: flex-start;
     }
+
+    .noty-queue {
+
+      flex-direction: column;
+
+      &.expanded {
+        border-top-width: 0;
+      }
+
+      & > .noty {
+        margin-top: $layout-gutter;
+      }
+
+    }
+
+  }
+
+  &.bottom {
+
+    bottom: 0;
+
+    & > .noty-queues-row {
+      align-items: flex-end;
+    }
+
+    .noty-queue {
+
+      flex-direction: column-reverse;
+
+      &.expanded {
+        border-bottom-width: 0;
+      }
+
+      & > .noty {
+        margin-bottom: $layout-gutter;
+      }
+
+    }
+
+  }
+
+  & > .noty-queues-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 
 }
 
@@ -132,44 +132,44 @@
 
 .noty-queue {
 
-    display: flex;
+  display: flex;
 
-    &.left {
+  &.left {
 
-        align-items: flex-start;
+    align-items: flex-start;
 
-        &:not(:empty) {
-            margin-left: $layout-gutter;
-        }
-
+    &:not(:empty) {
+      margin-left: $layout-gutter;
     }
 
-    &.center {
+  }
 
-        align-items: center;
-        margin-right: $layout-gutter;
-        margin-left: $layout-gutter;
+  &.center {
 
-        &:empty {
-            margin-right: $layout-gutter-half;
-            margin-left: $layout-gutter-half;
-        }
+    align-items: center;
+    margin-right: $layout-gutter;
+    margin-left: $layout-gutter;
 
+    &:empty {
+      margin-right: $layout-gutter-half;
+      margin-left: $layout-gutter-half;
     }
 
-    &.expanded {
-        @include expand-queue ();
+  }
+
+  &.expanded {
+    @include expand-queue ();
+  }
+
+  &.right {
+
+    align-items: flex-end;
+
+    &:not(:empty) {
+      margin-right: $layout-gutter;
     }
 
-    &.right {
-
-        align-items: flex-end;
-
-        &:not(:empty) {
-            margin-right: $layout-gutter;
-        }
-
-    }
+  }
 
 }
 
@@ -177,39 +177,39 @@
 
 .noty {
 
-    //TODO: Make the background a bit transparent
+  //TODO: Make the background a bit transparent
 
-    @include z-depth ( $noty-z-depth );
-    pointer-events: auto;
+  @include z-depth ( $noty-z-depth );
+  pointer-events: auto;
 
-    &:not(.action) { //TODO: maybe add an actionable class in that case...
-        cursor: pointer;
-    }
+  &:not(.action) { //TODO: maybe add an actionable class in that case...
+    cursor: pointer;
+  }
 
-    .noty-img > img {
-        width: $noty-img-size;
-    }
+  .noty-img > img {
+    width: $noty-img-size;
+  }
 
-    .noty-buttons.multiple-wrp {
-        margin-bottom: - $layout-gutter !important;
-    }
+  .noty-buttons.multiple-wrp {
+    margin-bottom: - $layout-gutter !important;
+  }
 
-    /* ANIMATIONS */
+  /* ANIMATIONS */
 
-    transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties
-    transition-property: opacity, font-size, padding, margin, height;
+  transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties
+  transition-property: opacity, font-size, padding, margin, height;
 
-    &:not(.active) {
-        font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
-        height: 0;
-        margin: 0;
-        padding: 0;
-        transition-delay: 0s, 0s, 0s, 0s, $noty-transition-all-duration;
-        opacity: 0;
-    }
+  &:not(.active) {
+    font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
+    height: 0;
+    margin: 0;
+    padding: 0;
+    transition-delay: 0s, 0s, 0s, 0s, $noty-transition-all-duration;
+    opacity: 0;
+  }
 
-    &.active { //TODO: Fix this showing animation properites
-        transition-delay: 0s;
-    }
+  &.active { //TODO: Fix this showing animation properites
+    transition-delay: 0s;
+  }
 
 }

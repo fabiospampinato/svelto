@@ -11,25 +11,25 @@
 /* GENERAL */
 
 %icon {
-    font-family: 'Material Icons';
-    font-weight: normal;
-    font-style: normal;
-    line-height: 1;
-    display: inline-block;
-    overflow: hidden; //INFO: It fixes an overflowing bug in the `icons` demo page, so probably also everywhere else
-    width: 1em;
-    height: 1em;
-    transform: scale($icons-scale-amount);
-    letter-spacing: normal;
-    text-transform: none;
-    word-wrap: nowrap;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  line-height: 1;
+  display: inline-block;
+  overflow: hidden; //INFO: It fixes an overflowing bug in the `icons` demo page, so probably also everywhere else
+  width: 1em;
+  height: 1em;
+  transform: scale($icons-scale-amount);
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: nowrap;
 
-    -webkit-font-smoothing: antialiased;
-    text-rendering: optimizeLegibility;
-    -moz-osx-font-smoothing: grayscale;
-    font-feature-settings: 'liga';
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: 'liga';
 }
 
 i.icon {
-    @extend %icon;
+  @extend %icon;
 }

@@ -10,165 +10,165 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* STEPPER */
+  /* STEPPER */
 
-    $.widget ( 'presto.stepper', {
+  $.widget ( 'presto.stepper', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            min: 0,
-            max: 100,
-            value: 0,
-            step: 1,
-            decimals: 0,
-            callbacks: {
-                increase: _.noop,
-                decrease: _.noop
-            }
-        },
+    options: {
+      min: 0,
+      max: 100,
+      value: 0,
+      step: 1,
+      decimals: 0,
+      callbacks: {
+        increase: _.noop,
+        decrease: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$stepper = this.$element;
-            this.$input = this.$stepper.find ( 'input' );
-            this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
-            this.$increaser = this.$stepper.find ( '.stepper-increaser' );
+      this.$stepper = this.$element;
+      this.$input = this.$stepper.find ( 'input' );
+      this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
+      this.$increaser = this.$stepper.find ( '.stepper-increaser' );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* INPUT / CHANGE */
+      /* INPUT / CHANGE */
 
-            this._on ( true, this.$input, 'input change', this._handler_input_change );
+      this._on ( true, this.$input, 'input change', this._handler_input_change );
 
-            /* ARROWS */
+      /* ARROWS */
 
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
+      this._on ( 'mouseenter', this._handler_arrows_in );
+      this._on ( 'mouseleave', this._handler_arrows_out );
 
-            /* INCREASE / DECREASE */
+      /* INCREASE / DECREASE */
 
-            this._on ( this.$decreaser, 'click', this.decrease );
+      this._on ( this.$decreaser, 'click', this.decrease );
 
-            this._on ( this.$increaser, 'click', this.increase );
+      this._on ( this.$increaser, 'click', this.increase );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _round_value: function ( value ) {
+    _round_value: function ( value ) {
 
-            return Number(Number(value).toFixed ( this.options.decimals ));
+      return Number(Number(value).toFixed ( this.options.decimals ));
 
-        },
+    },
 
-        /* CHANGE */
+    /* CHANGE */
 
-        _handler_input_change: function () {
+    _handler_input_change: function () {
 
-            this.set_value ( this.$input.val () );
+      this.set_value ( this.$input.val () );
 
-        },
+    },
 
-        /* LEFT / RIGHT ARROWS */
+    /* LEFT / RIGHT ARROWS */
 
-        _handler_arrows_in: function ( event ) {
+    _handler_arrows_in: function ( event ) {
 
-            this._on ( $document, 'keydown', this._handler_arrows_keydown );
+      this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
-        },
+    },
 
-        _handler_arrows_out: function ( event ) {
+    _handler_arrows_out: function ( event ) {
 
-            this._off ( $document, 'keydown', this._handler_arrows_keydown );
+      this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
-        },
+    },
 
-        _handler_arrows_keydown: function ( event ) {
+    _handler_arrows_keydown: function ( event ) {
 
-            if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
+      if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
 
-                this.decrease ();
+        this.decrease ();
 
-            } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
+      } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
 
-                this.increase ();
+        this.increase ();
 
-            }
+      }
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        set_value: function ( value ) {
+    set_value: function ( value ) {
 
-            value = this._round_value ( value );
+      value = this._round_value ( value );
 
-            if ( value !== this.options.value || this.$input.val ().length === 0 ) {
+      if ( value !== this.options.value || this.$input.val ().length === 0 ) {
 
-                var clamped = _.clamp ( this.options.min, value, this.options.max );
+        var clamped = _.clamp ( this.options.min, value, this.options.max );
 
-                this.options.value = clamped;
+        this.options.value = clamped;
 
-                this.$input.val ( clamped ).trigger ( 'change' );
+        this.$input.val ( clamped ).trigger ( 'change' );
 
-                this.$decreaser.toggleClass ( 'disabled', clamped === this.options.min );
-                this.$increaser.toggleClass ( 'disabled', clamped === this.options.max );
+        this.$decreaser.toggleClass ( 'disabled', clamped === this.options.min );
+        this.$increaser.toggleClass ( 'disabled', clamped === this.options.max );
 
-                this._trigger ( clamped > this.options.value ? 'increase' : 'decrease' );
+        this._trigger ( clamped > this.options.value ? 'increase' : 'decrease' );
 
-            }
+      }
 
-        },
+    },
 
-        increase: function () {
+    increase: function () {
 
-            this.navigate ( this.options.step );
+      this.navigate ( this.options.step );
 
-        },
+    },
 
-        decrease: function () {
+    decrease: function () {
 
-            this.navigate ( - this.options.step );
+      this.navigate ( - this.options.step );
 
-        },
+    },
 
-        navigate: function ( modifier ) {
+    navigate: function ( modifier ) {
 
-            var new_value = this.options.value + modifier;
+      var new_value = this.options.value + modifier;
 
-            this.set_value ( new_value );
+      this.set_value ( new_value );
 
-        }
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.stepper').each ( function () {
+
+      var $stepper = $(this),
+        $input = $stepper.find ( 'input' ),
+        options = {
+          min: Number($stepper.data ( 'min' ) || 0),
+          max: Number($stepper.data ( 'max' ) || 100),
+          value: Number($input.val () || 0),
+          step: Number($stepper.data ( 'step' ) || 1),
+          decimals: Number($stepper.data ( 'decimals' ) || 0)
+        };
+
+      $stepper.stepper ( options );
 
     });
 
-    /* READY */
-
-    $(function () {
-
-        $('.stepper').each ( function () {
-
-            var $stepper = $(this),
-                $input = $stepper.find ( 'input' ),
-                options = {
-                    min: Number($stepper.data ( 'min' ) || 0),
-                    max: Number($stepper.data ( 'max' ) || 100),
-                    value: Number($input.val () || 0),
-                    step: Number($stepper.data ( 'step' ) || 1),
-                    decimals: Number($stepper.data ( 'decimals' ) || 0)
-                };
-
-            $stepper.stepper ( options );
-
-        });
-
-    });
+  });
 
 }( jQuery, _, window, document ));

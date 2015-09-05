@@ -16,56 +16,56 @@
 
 .container {
 
-    @extend %widget;
-    @include color ( $container-color, $container-color-basic );
+  @extend %widget;
+  @include color ( $container-color, $container-color-basic );
+  @include last-child-gutter-fix ();
+  display: flex;
+  flex-direction: column;
+  border-radius: $contianer-border-radius;
+
+  & > .container-header {
+    @include color ( $container-header-color, $container-header-color-basic );
     @include last-child-gutter-fix ();
-    display: flex;
-    flex-direction: column;
-    border-radius: $contianer-border-radius;
+    font-weight: bold;
+    flex-shrink: 0;
+    padding: $layout-gutter;
+  }
 
-    & > .container-header {
-        @include color ( $container-header-color, $container-header-color-basic );
-        @include last-child-gutter-fix ();
-        font-weight: bold;
-        flex-shrink: 0;
-        padding: $layout-gutter;
+  & > .container-content {
+    @include color ( $container-content-color, $container-content-color-basic );
+    @include last-child-gutter-fix ();
+    overflow: auto;
+    flex-grow: 1;
+    padding: $layout-gutter;
+  }
+
+  & > .container-footer {
+    @include color ( $container-footer-color, $container-footer-color-basic );
+    @include last-child-gutter-fix ();
+    flex-shrink: 0;
+    padding: $layout-gutter;
+  }
+
+  & > *:first-child {
+    @include border-top-radius ( inherit );
+  }
+
+  & > *:last-child {
+    @include border-bottom-radius ( inherit );
+  }
+
+  /* OUTLINED */
+
+  &.outlined {
+
+    & > .container-header.outlined {
+      margin: ( - $outline-width ) ( - $outline-width ) 0;
     }
 
-    & > .container-content {
-        @include color ( $container-content-color, $container-content-color-basic );
-        @include last-child-gutter-fix ();
-        overflow: auto;
-        flex-grow: 1;
-        padding: $layout-gutter;
+    & > .container-footer.outlined {
+      margin: 0 ( - $outline-width ) ( - $outline-width );
     }
 
-    & > .container-footer {
-        @include color ( $container-footer-color, $container-footer-color-basic );
-        @include last-child-gutter-fix ();
-        flex-shrink: 0;
-        padding: $layout-gutter;
-    }
-
-    & > *:first-child {
-        @include border-top-radius ( inherit );
-    }
-
-    & > *:last-child {
-        @include border-bottom-radius ( inherit );
-    }
-
-    /* OUTLINED */
-
-    &.outlined {
-
-        & > .container-header.outlined {
-            margin: ( - $outline-width ) ( - $outline-width ) 0;
-        }
-
-        & > .container-footer.outlined {
-            margin: 0 ( - $outline-width ) ( - $outline-width );
-        }
-
-    }
+  }
 
 }

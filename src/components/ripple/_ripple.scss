@@ -14,67 +14,67 @@
 
 .ripple {
 
-    position: relative;
-    overflow: hidden;
-    cursor: pointer;
-    transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
 
-    /* CIRCLE */
+  /* CIRCLE */
 
-    & > .ripple-circle {
+  & > .ripple-circle {
 
-        position: absolute;
-        width: $ripple-circle-width;
-        pointer-events: none;
+    position: absolute;
+    width: $ripple-circle-width;
+    pointer-events: none;
 
-        &:before {
-            position: absolute;
-            left: -50%;
-            width: 100%;
-            margin-top: -50%;
-            padding-bottom: 100%;
-            content: '';
-            transition-timing-function: $ripple-transition-timing-function;
-            transition-duration: $ripple-transition-show-duration;
-            transition-property: transform, opacity;
-            transform: scale(0);
-            opacity: 0;
-            border-radius: 50%;
-            background-color: $ripple-color-default;
-        }
-
-        &.ripple-circle-show:before {
-            transform: scale(1);
-            opacity: 1 - $ripple-transparentize-amount;
-        }
-
-        &.ripple-circle-hide:before {
-            transition-duration: $ripple-transition-hide-duration;
-            opacity: 0;
-        }
-
+    &:before {
+      position: absolute;
+      left: -50%;
+      width: 100%;
+      margin-top: -50%;
+      padding-bottom: 100%;
+      content: '';
+      transition-timing-function: $ripple-transition-timing-function;
+      transition-duration: $ripple-transition-show-duration;
+      transition-property: transform, opacity;
+      transform: scale(0);
+      opacity: 0;
+      border-radius: 50%;
+      background-color: $ripple-color-default;
     }
 
-    &.ripple-centered > .ripple-circle {
-        top: 50% !important;
-        left: 50% !important;
-        width: $ripple-centered-circle-width; //FIXME: In this way the behavior is not consistent, but it generally looks better...
+    &.ripple-circle-show:before {
+      transform: scale(1);
+      opacity: 1 - $ripple-transparentize-amount;
     }
 
-    /* COLORS */
-
-    @each $name, $datas in $colors {
-
-        $bg: nth($datas, 1);
-
-        &.ripple-#{$name} > .ripple-circle:before {
-            background-color: $bg;
-        }
-
+    &.ripple-circle-hide:before {
+      transition-duration: $ripple-transition-hide-duration;
+      opacity: 0;
     }
+
+  }
+
+  &.ripple-centered > .ripple-circle {
+    top: 50% !important;
+    left: 50% !important;
+    width: $ripple-centered-circle-width; //FIXME: In this way the behavior is not consistent, but it generally looks better...
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $bg: nth($datas, 1);
+
+    &.ripple-#{$name} > .ripple-circle:before {
+      background-color: $bg;
+    }
+
+  }
 
 }
 
 a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
-    z-index: -1;
+  z-index: -1;
 }

@@ -10,81 +10,81 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TIME AGO */
+  /* TIME AGO */
 
-    $.widget ( 'presto.timeAgo', {
+  $.widget ( 'presto.timeAgo', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            timestamp: false,
-            title: false,
-            callbacks: {
-                update: _.noop
-            }
-        },
+    options: {
+      timestamp: false,
+      title: false,
+      callbacks: {
+        update: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$timeAgo_wrp = this.$element;
+      this.$timeAgo_wrp = this.$element;
 
-            this.options.timestamp = this.$timeAgo_wrp.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
+      this.options.timestamp = this.$timeAgo_wrp.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this._update_loop ( 0 );
+      this._update_loop ( 0 );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _update_loop: function ( wait ) {
+    _update_loop: function ( wait ) {
 
-            this._delay ( function () {
+      this._delay ( function () {
 
-                this._update_loop ( this.update ().next );
+        this._update_loop ( this.update ().next );
 
-            }, wait * 1000 );
+      }, wait * 1000 );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        update: function () {
+    update: function () {
 
-            var timeAgo = _.timeAgo ( this.options.timestamp );
+      var timeAgo = _.timeAgo ( this.options.timestamp );
 
-            if ( this.options.title ) {
+      if ( this.options.title ) {
 
-                this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
+        this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
 
-            } else {
+      } else {
 
-                this.$timeAgo_wrp.html ( timeAgo.str );
+        this.$timeAgo_wrp.html ( timeAgo.str );
 
-            }
+      }
 
-            this._trigger ( 'update' );
+      this._trigger ( 'update' );
 
-            return timeAgo;
+      return timeAgo;
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('[data-timestamp]').timeAgo ();
-        $('[data-timestamp-title]').timeAgo ({ title: true });
+    $('[data-timestamp]').timeAgo ();
+    $('[data-timestamp-title]').timeAgo ({ title: true });
 
-    });
+  });
 
 }( jQuery, _, window, document ));

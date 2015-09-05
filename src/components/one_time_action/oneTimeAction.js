@@ -14,148 +14,148 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* ONE TIME ACTION */
+  /* ONE TIME ACTION */
 
-    $.oneTimeAction = function ( custom_options, action ) {
+  $.oneTimeAction = function ( custom_options, action ) {
 
-        // OPTIONS
+    // OPTIONS
 
-        var options = {
-            container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
-            expiry: Infinity, //INFO: the expire time of the container
-            name: false, //INFO: the action name
-            action: false //INFO: the action to execute
-        };
-
-        if ( _.isString ( custom_options ) ) {
-
-            options.name = custom_options;
-
-            if ( _.isFunction ( action ) ) {
-
-                options.action = action;
-
-            }
-
-        } else if ( _.isPlainObject ( custom_options ) ) {
-
-            _.merge ( options, custom_options );
-
-        }
-
-        // ONE TIME ACTION
-
-        if ( options.name ) {
-
-            var action = new Action ( options.container, options.name );
-
-            if ( options.action && !action.get () ) {
-
-                options.action ();
-
-                action.set ();
-
-            }
-
-            return action;
-
-        } else if ( options.container ) {
-
-            return new Container ( options.container, options.expiry );
-
-        }
-
+    var options = {
+      container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
+      expiry: Infinity, //INFO: the expire time of the container
+      name: false, //INFO: the action name
+      action: false //INFO: the action to execute
     };
 
-    /* CONTAINER OBJ */
+    if ( _.isString ( custom_options ) ) {
 
-    var Container = function ( name, expiry ) {
+      options.name = custom_options;
 
-        this.name = name;
-        this.expiry = expiry;
+      if ( _.isFunction ( action ) ) {
 
-        this.actionsStr = $.cookie.get ( this.name ) || '';
-        this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
+        options.action = action;
 
-    };
+      }
 
-    Container.prototype = {
+    } else if ( _.isPlainObject ( custom_options ) ) {
 
-        get: function ( action ) {
+      _.merge ( options, custom_options );
 
-            return _.contains ( this.actions, action );
+    }
 
-        },
+    // ONE TIME ACTION
 
-        set: function ( action ) {
+    if ( options.name ) {
 
-            if ( !this.get ( action ) ) {
+      var action = new Action ( options.container, options.name );
 
-                this.actions.push ( action );
+      if ( options.action && !action.get () ) {
 
-                this.update ();
+        options.action ();
 
-            }
+        action.set ();
 
-        },
+      }
 
-        update: function () {
+      return action;
 
-            this.actionsStr = this.actions.join ( '|' );
+    } else if ( options.container ) {
 
-            $.cookie.set ( this.name, this.actionsStr, this.expiry );
+      return new Container ( options.container, options.expiry );
 
-        },
+    }
 
-        reset: function ( action ) {
+  };
 
-            if ( action ) {
+  /* CONTAINER OBJ */
 
-                _.pull ( this.actions, action );
+  var Container = function ( name, expiry ) {
 
-                this.update ();
+    this.name = name;
+    this.expiry = expiry;
 
-            } else {
+    this.actionsStr = $.cookie.get ( this.name ) || '';
+    this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
 
-                $.cookie.remove ( this.name );
+  };
 
-            }
+  Container.prototype = {
 
-        }
+    get: function ( action ) {
 
-    };
+      return _.contains ( this.actions, action );
 
-    /* ACTION OBJ */
+    },
 
-    var Action = function ( container, name, action ) {
+    set: function ( action ) {
 
-        this.container = new Container ( container );
-        this.name = name;
+      if ( !this.get ( action ) ) {
 
-    };
+        this.actions.push ( action );
 
-    Action.prototype = {
+        this.update ();
 
-        get: function () {
+      }
 
-            return this.container.get ( this.name );
+    },
 
-        },
+    update: function () {
 
-        set: function () {
+      this.actionsStr = this.actions.join ( '|' );
 
-            this.container.set ( this.name );
+      $.cookie.set ( this.name, this.actionsStr, this.expiry );
 
-        },
+    },
 
-        reset: function () {
+    reset: function ( action ) {
 
-            this.container.reset ( this.name );
+      if ( action ) {
 
-        }
+        _.pull ( this.actions, action );
 
-    };
+        this.update ();
+
+      } else {
+
+        $.cookie.remove ( this.name );
+
+      }
+
+    }
+
+  };
+
+  /* ACTION OBJ */
+
+  var Action = function ( container, name, action ) {
+
+    this.container = new Container ( container );
+    this.name = name;
+
+  };
+
+  Action.prototype = {
+
+    get: function () {
+
+      return this.container.get ( this.name );
+
+    },
+
+    set: function () {
+
+      this.container.set ( this.name );
+
+    },
+
+    reset: function () {
+
+      this.container.reset ( this.name );
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));

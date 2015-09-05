@@ -13,385 +13,385 @@
 /* DEFAULT */
 
 label {
-    @extend %widget;
-    display: block;
+  @extend %widget;
+  display: block;
 }
 
 /* LABEL */
 
 .label-wrp {
 
-    @include color ( 'inherit', true );
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: $layout-gutter;
-    border-radius: inherit;
-    visibility: hidden;
+  @include color ( 'inherit', true );
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: $layout-gutter;
+  border-radius: inherit;
+  visibility: hidden;
 
-    & > * {
-        visibility: visible;
+  & > * {
+    visibility: visible;
+  }
+
+  & > .label-pointer {
+
+    //FIXME: if the angles are rounded we leave more space at the left of the pointer
+    //FIXME: is not pixel-perfect
+
+    @include color ( $label-pointer-color, $label-pointer-color-basic );
+    position: relative;
+    order: 1;
+    transform: translateX(50%) rotate(-45deg);
+
+    &:after {
+      @include color ( $container-color, true );
+      content: '';
+      width: $label-pointer-circle-size;
+      height: $label-pointer-circle-size;
+      border-radius: 50%;
+      top: calc(50% - #{$label-pointer-circle-size});
+      left: calc(50% - #{$label-pointer-circle-size});
+      position: absolute;
+      z-index: 3;
+      box-shadow: $label-pointer-circle-box-shadow;
     }
 
-    & > .label-pointer {
+    &:not(.sharp), &.smooth {
 
-        //FIXME: if the angles are rounded we leave more space at the left of the pointer
-        //FIXME: is not pixel-perfect
+      width: $label-pointer-smooth-size;
+      height: $label-pointer-smooth-size;
+      border-radius: $label-border-radius 0;
+      margin-left: $label-pointer-smooth-margin-left;
 
-        @include color ( $label-pointer-color, $label-pointer-color-basic );
-        position: relative;
-        order: 1;
-        transform: translateX(50%) rotate(-45deg);
+      &.compact {
+        width: $label-pointer-smooth-compact-size;
+        height: $label-pointer-smooth-compact-size;
+        margin-left: $label-pointer-smooth-compact-margin-left;
+      }
 
-        &:after {
-            @include color ( $container-color, true );
-            content: '';
-            width: $label-pointer-circle-size;
-            height: $label-pointer-circle-size;
-            border-radius: 50%;
-            top: calc(50% - #{$label-pointer-circle-size});
-            left: calc(50% - #{$label-pointer-circle-size});
-            position: absolute;
-            z-index: 3;
-            box-shadow: $label-pointer-circle-box-shadow;
-        }
-
-        &:not(.sharp), &.smooth {
-
-            width: $label-pointer-smooth-size;
-            height: $label-pointer-smooth-size;
-            border-radius: $label-border-radius 0;
-            margin-left: $label-pointer-smooth-margin-left;
-
-            &.compact {
-                width: $label-pointer-smooth-compact-size;
-                height: $label-pointer-smooth-compact-size;
-                margin-left: $label-pointer-smooth-compact-margin-left;
-            }
-
-            & + .label {
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-            }
-
-        }
-
-        &.sharp {
-
-            width: $label-pointer-sharp-size;
-            height: $label-pointer-sharp-size;
-            border-radius: $label-border-radius;
-            margin-left: $label-pointer-sharp-margin-left;
-
-            &.compact {
-                width: $label-pointer-sharp-compact-size;
-                height: $label-pointer-sharp-compact-size;
-                margin-left: $label-pointer-sharp-compact-margin-left;
-            }
-
-        }
-
-        &.outlined {
-
-            border-bottom-width: 0;
-            border-right-width: 0;
-
-            & + .label {
-                border-left-width: 0;
-            }
-
-        }
+      & + .label {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
 
     }
 
-    &.ribbons, &.ribbon-left, &.ribbon-right {
-        position: absolute;
-    }
+    &.sharp {
 
-    &.ribbons > .label {
-        width: 100%;
-    }
+      width: $label-pointer-sharp-size;
+      height: $label-pointer-sharp-size;
+      border-radius: $label-border-radius;
+      margin-left: $label-pointer-sharp-margin-left;
 
-    &.ribbon-left, &.ribbons {
-
-        left: - $label-ribbon-size;
-
-        & > .label {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-        }
+      &.compact {
+        width: $label-pointer-sharp-compact-size;
+        height: $label-pointer-sharp-compact-size;
+        margin-left: $label-pointer-sharp-compact-margin-left;
+      }
 
     }
 
-    &.ribbon-right, &.ribbons {
+    &.outlined {
 
-        right: - $label-ribbon-size;
+      border-bottom-width: 0;
+      border-right-width: 0;
 
-        & > .label {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
+      & + .label {
+        border-left-width: 0;
+      }
 
     }
+
+  }
+
+  &.ribbons, &.ribbon-left, &.ribbon-right {
+    position: absolute;
+  }
+
+  &.ribbons > .label {
+    width: 100%;
+  }
+
+  &.ribbon-left, &.ribbons {
+
+    left: - $label-ribbon-size;
 
     & > .label {
-
-        height: 100%;
-
-        & > .label-ribbon-left, & > .label-ribbon-right {
-            position: absolute;
-            bottom: - $label-ribbon-size;
-            border-width: $label-ribbon-size / 2;
-            border-style: solid;
-        }
-
-        & > .label-ribbon-left {
-            left: 0;
-            border-color: transparent;
-            border-top-color: inherit;
-            border-right-width: $label-ribbon-size / 2;
-            border-right-color: inherit;
-        }
-
-        & > .label-ribbon-right {
-            right: 0;
-            border-color: transparent;
-            border-top-color: inherit;
-            border-left-width: $label-ribbon-size / 2;
-            border-left-color: inherit;
-        }
-
-        &.outlined {
-
-            & > .label-ribbon-left, & > .label-ribbon-right {
-                bottom: - ( $label-ribbon-size + $outline-width );
-            }
-
-            & > .label-ribbon-left {
-                left: - $outline-width;
-            }
-
-            & > .label-ribbon-right {
-                right: - $outline-width;
-            }
-
-        }
-
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
     }
 
-    &.corner {
+  }
 
-        position: absolute;
-        margin-bottom: 0;
+  &.ribbon-right, &.ribbons {
 
-        &.top-left {
-
-            top: 0;
-            left: 0;
-
-            & > .label {
-
-                border-top-left-radius: inherit;
-
-                & > .label-corner {
-                    top: 0;
-                    left: 0;
-                    transform: translateX(-50%) translateY(-50%) rotate(45deg);
-                }
-
-                & > .label-center {
-                    transform: translateX(-25%) translateY(-25%);
-                }
-
-            }
-
-        }
-
-        &.top-right {
-
-            top: 0;
-            right: 0;
-
-            & > .label {
-
-                border-top-right-radius: inherit;
-
-                & > .label-corner {
-                    top: 0;
-                    right: 0;
-                    transform: translateX(50%) translateY(-50%) rotate(45deg);
-                }
-
-                & > .label-center {
-                    transform: translateX(25%) translateY(-25%);
-                }
-
-            }
-
-        }
-
-        &.bottom-left {
-
-            bottom: 0;
-            left: 0;
-
-            & > .label {
-
-                border-bottom-left-radius: inherit;
-
-                & > .label-corner {
-                    bottom: 0;
-                    left: 0;
-                    transform: translateX(-50%) translateY(50%) rotate(45deg);
-                }
-
-                & > .label-center {
-                    transform: translateX(-25%) translateY(25%);
-                }
-
-            }
-
-        }
-
-        &.bottom-right {
-
-            right: 0;
-            bottom: 0;
-
-            & > .label {
-
-                border-bottom-right-radius: inherit;
-
-                & > .label-corner {
-                    right: 0;
-                    bottom: 0;
-                    transform: translateX(50%) translateY(50%) rotate(45deg);
-                }
-
-                & > .label-center {
-                    transform: translateX(25%) translateY(25%);
-                }
-
-            }
-
-        }
-
-        & > .label {
-
-            visibility: hidden;
-            overflow: hidden;
-            width: $label-corner-size !important;
-            height: $label-corner-size !important;
-            border-radius: 0;
-
-            & > * {
-                visibility: visible;
-            }
-
-            & > .label-corner {
-                position: absolute;
-                width: 100% * $SQRT2;
-                height: 100% * $SQRT2;
-                background-color: inherit;
-            }
-
-        }
-
-    }
+    right: - $label-ribbon-size;
 
     & > .label {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
-        @include color ( $label-color, $label-color-basic );
-        order: 2;
-        font-weight: bold;
-        position: relative;
-        display: inline-flex;
-        justify-content: center;
-        align-items: center;
-        min-width: $line-height-em + ( $label-horizontal-padding * 2 );
-        height: $line-height-em + ( $label-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        border-radius: $label-border-radius;
+  }
 
-        & > .label-left, & > .label-right {
-            display: flex;
-            align-items: center;
-            align-self: stretch;
-            justify-content: center;
-            min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
-            padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
-            background-color: $label-left-right-bg-color;
-        }
+  & > .label {
 
-        & > .label-left {
-            order: 1;
-            border-top-left-radius: inherit;
-            border-bottom-left-radius: inherit;
+    height: 100%;
+
+    & > .label-ribbon-left, & > .label-ribbon-right {
+      position: absolute;
+      bottom: - $label-ribbon-size;
+      border-width: $label-ribbon-size / 2;
+      border-style: solid;
+    }
+
+    & > .label-ribbon-left {
+      left: 0;
+      border-color: transparent;
+      border-top-color: inherit;
+      border-right-width: $label-ribbon-size / 2;
+      border-right-color: inherit;
+    }
+
+    & > .label-ribbon-right {
+      right: 0;
+      border-color: transparent;
+      border-top-color: inherit;
+      border-left-width: $label-ribbon-size / 2;
+      border-left-color: inherit;
+    }
+
+    &.outlined {
+
+      & > .label-ribbon-left, & > .label-ribbon-right {
+        bottom: - ( $label-ribbon-size + $outline-width );
+      }
+
+      & > .label-ribbon-left {
+        left: - $outline-width;
+      }
+
+      & > .label-ribbon-right {
+        right: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.corner {
+
+    position: absolute;
+    margin-bottom: 0;
+
+    &.top-left {
+
+      top: 0;
+      left: 0;
+
+      & > .label {
+
+        border-top-left-radius: inherit;
+
+        & > .label-corner {
+          top: 0;
+          left: 0;
+          transform: translateX(-50%) translateY(-50%) rotate(45deg);
         }
 
         & > .label-center {
-            display: flex;
-            order: 2;
-            justify-content: space-between;
-            padding: $label-vertical-padding $label-horizontal-padding;
+          transform: translateX(-25%) translateY(-25%);
         }
 
-        & > .label-right {
-            order: 3;
-            border-top-right-radius: inherit;
-            border-bottom-right-radius: inherit;
-        }
-
-        &.compact {
-
-            min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
-            height: $line-height-em + ( $label-compact-vertical-padding * 2 );
-
-            & > .label-center {
-                padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
-            }
-
-        }
-
-        &.badge {
-
-            position: absolute !important;
-
-            &.top-left {
-                top: $label-badge-spacing !important;
-                left: $label-badge-spacing !important;
-            }
-
-            &.top-right {
-                top: $label-badge-spacing !important;
-                right: $label-badge-spacing !important;
-            }
-
-            &.bottom-left {
-                bottom: $label-badge-spacing !important;
-                left: $label-badge-spacing !important;
-            }
-
-            &.bottom-right {
-                bottom: $label-badge-spacing !important;
-                right: $label-badge-spacing !important;
-            }
-
-        }
-
-        &.floating {
-            //TODO: add sub floating actions
-            //TODO: write it closet to the spec, it looks a bit too big, expecially the icon
-            @include z-depth ( $label-floating-z-depth );
-            position: fixed;
-            z-index: 1;
-            right: $label-floating-right;
-            bottom: $label-floating-bottom;
-            margin-bottom: 0;
-        }
-
-        &.disabled, &.label-disabled {
-            opacity: 0.5;
-        }
+      }
 
     }
+
+    &.top-right {
+
+      top: 0;
+      right: 0;
+
+      & > .label {
+
+        border-top-right-radius: inherit;
+
+        & > .label-corner {
+          top: 0;
+          right: 0;
+          transform: translateX(50%) translateY(-50%) rotate(45deg);
+        }
+
+        & > .label-center {
+          transform: translateX(25%) translateY(-25%);
+        }
+
+      }
+
+    }
+
+    &.bottom-left {
+
+      bottom: 0;
+      left: 0;
+
+      & > .label {
+
+        border-bottom-left-radius: inherit;
+
+        & > .label-corner {
+          bottom: 0;
+          left: 0;
+          transform: translateX(-50%) translateY(50%) rotate(45deg);
+        }
+
+        & > .label-center {
+          transform: translateX(-25%) translateY(25%);
+        }
+
+      }
+
+    }
+
+    &.bottom-right {
+
+      right: 0;
+      bottom: 0;
+
+      & > .label {
+
+        border-bottom-right-radius: inherit;
+
+        & > .label-corner {
+          right: 0;
+          bottom: 0;
+          transform: translateX(50%) translateY(50%) rotate(45deg);
+        }
+
+        & > .label-center {
+          transform: translateX(25%) translateY(25%);
+        }
+
+      }
+
+    }
+
+    & > .label {
+
+      visibility: hidden;
+      overflow: hidden;
+      width: $label-corner-size !important;
+      height: $label-corner-size !important;
+      border-radius: 0;
+
+      & > * {
+        visibility: visible;
+      }
+
+      & > .label-corner {
+        position: absolute;
+        width: 100% * $SQRT2;
+        height: 100% * $SQRT2;
+        background-color: inherit;
+      }
+
+    }
+
+  }
+
+  & > .label {
+
+    @include color ( $label-color, $label-color-basic );
+    order: 2;
+    font-weight: bold;
+    position: relative;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-width: $line-height-em + ( $label-horizontal-padding * 2 );
+    height: $line-height-em + ( $label-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
+    border-radius: $label-border-radius;
+
+    & > .label-left, & > .label-right {
+      display: flex;
+      align-items: center;
+      align-self: stretch;
+      justify-content: center;
+      min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
+      padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+      background-color: $label-left-right-bg-color;
+    }
+
+    & > .label-left {
+      order: 1;
+      border-top-left-radius: inherit;
+      border-bottom-left-radius: inherit;
+    }
+
+    & > .label-center {
+      display: flex;
+      order: 2;
+      justify-content: space-between;
+      padding: $label-vertical-padding $label-horizontal-padding;
+    }
+
+    & > .label-right {
+      order: 3;
+      border-top-right-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+    &.compact {
+
+      min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
+      height: $line-height-em + ( $label-compact-vertical-padding * 2 );
+
+      & > .label-center {
+        padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+      }
+
+    }
+
+    &.badge {
+
+      position: absolute !important;
+
+      &.top-left {
+        top: $label-badge-spacing !important;
+        left: $label-badge-spacing !important;
+      }
+
+      &.top-right {
+        top: $label-badge-spacing !important;
+        right: $label-badge-spacing !important;
+      }
+
+      &.bottom-left {
+        bottom: $label-badge-spacing !important;
+        left: $label-badge-spacing !important;
+      }
+
+      &.bottom-right {
+        bottom: $label-badge-spacing !important;
+        right: $label-badge-spacing !important;
+      }
+
+    }
+
+    &.floating {
+      //TODO: add sub floating actions
+      //TODO: write it closet to the spec, it looks a bit too big, expecially the icon
+      @include z-depth ( $label-floating-z-depth );
+      position: fixed;
+      z-index: 1;
+      right: $label-floating-right;
+      bottom: $label-floating-bottom;
+      margin-bottom: 0;
+    }
+
+    &.disabled, &.label-disabled {
+      opacity: 0.5;
+    }
+
+  }
 
 }

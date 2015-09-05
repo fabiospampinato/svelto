@@ -12,86 +12,86 @@
 
 .infobar-wrp {
 
-    @include color ( $infobar-color, $infobar-color-basic );
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    margin-bottom: $layout-gutter;
-    padding: $layout-gutter;
-    transition: opacity $infobar-transition-close-duration;
-    border-width: $infobar-border-width;
-    border-style: solid;
-    border-radius: $infobar-border-radius;
+  @include color ( $infobar-color, $infobar-color-basic );
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: $layout-gutter;
+  padding: $layout-gutter;
+  transition: opacity $infobar-transition-close-duration;
+  border-width: $infobar-border-width;
+  border-style: solid;
+  border-radius: $infobar-border-radius;
 
-    &.limited {
-        max-width: $layout-max-width;
-        margin-right: auto;
-        margin-left: auto;
+  &.limited {
+    max-width: $layout-max-width;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  &.inset {
+    border-width: 0;
+    padding: 0;
+  }
+
+  &.remove {
+    opacity: 0;
+  }
+
+  & > .infobar-left {
+
+    flex-shrink: 0;
+    order: 1;
+
+    & > *:last-child {
+      margin-bottom: 0;
     }
 
-    &.inset {
-        border-width: 0;
-        padding: 0;
+  }
+
+  & > .infobar-center {
+
+    flex-grow: 100;
+    flex-basis: 0;
+    order: 2;
+
+    & > .infobar-title {
+      // @include size ( $infobar-title-size );
+      font-size: 1.3em; //FIXME: it shouldn't be hard coded
+      margin-bottom: $infobar-title-margin-bottom;
     }
 
-    &.remove {
-        opacity: 0;
+    & > *:last-child {
+      margin-bottom: 0;
     }
 
-    & > .infobar-left {
+  }
 
-        flex-shrink: 0;
-        order: 1;
+  & > .infobar-right {
 
-        & > *:last-child {
-            margin-bottom: 0;
-        }
+    flex-shrink: 0;
+    order: 3;
 
+    & > *:last-child {
+      margin-bottom: 0;
     }
 
-    & > .infobar-center {
+  }
 
-        flex-grow: 100;
-        flex-basis: 0;
-        order: 2;
+  & > .infobar-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
 
-        & > .infobar-title {
-            // @include size ( $infobar-title-size );
-            font-size: 1.3em; //FIXME: it shouldn't be hard coded
-            margin-bottom: $infobar-title-margin-bottom;
-        }
+    order: 4;
+    width: 100%;
+    margin-top: $layout-gutter;
 
-        & > *:last-child {
-            margin-bottom: 0;
-        }
-
+    & > *:last-child {
+      margin-bottom: 0;
     }
 
-    & > .infobar-right {
+  }
 
-        flex-shrink: 0;
-        order: 3;
-
-        & > *:last-child {
-            margin-bottom: 0;
-        }
-
-    }
-
-    & > .infobar-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
-
-        order: 4;
-        width: 100%;
-        margin-top: $layout-gutter;
-
-        & > *:last-child {
-            margin-bottom: 0;
-        }
-
-    }
-
-    & > *:not(:first-child):not(.infobar-bottom) {
-        margin-left: $layout-gutter;
-    }
+  & > *:not(:first-child):not(.infobar-bottom) {
+    margin-left: $layout-gutter;
+  }
 
 }

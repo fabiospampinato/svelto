@@ -8,214 +8,214 @@
 
 ;(function ( _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* LODASH EXTRA */
+  /* LODASH EXTRA */
 
-    _.mixin ({
+  _.mixin ({
 
-        /**
-         * Gets the number of seconds that have elapsed since the Unix epoch
-         * (1 January 1970 00:00:00 UTC).
-         *
-         * _.defer(function(stamp) {
-         *   console.log(_.nowSecs() - stamp);
-         * }, _.nowSecs());
-         * // => logs the number of seconds it took for the deferred function to be invoked
-         */
+    /**
+     * Gets the number of seconds that have elapsed since the Unix epoch
+     * (1 January 1970 00:00:00 UTC).
+     *
+     * _.defer(function(stamp) {
+     *   console.log(_.nowSecs() - stamp);
+     * }, _.nowSecs());
+     * // => logs the number of seconds it took for the deferred function to be invoked
+     */
 
-        nowSecs: function () {
+    nowSecs: function () {
 
-            return _.floor ( _.now () / 1000 );
+      return _.floor ( _.now () / 1000 );
 
-        },
+    },
 
-        /**
-         * Gets a string format of number of seconds elapsed.
-         *
-         * _.timeAgo ( _.nowSecs () )
-         * // => Just now
-         */
+    /**
+     * Gets a string format of number of seconds elapsed.
+     *
+     * _.timeAgo ( _.nowSecs () )
+     * // => Just now
+     */
 
-        timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
+    timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
 
-            var elapsed = _.nowSecs () - timestamp,
-                just_now = 5;
+      var elapsed = _.nowSecs () - timestamp,
+        just_now = 5;
 
-            var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
-                times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+      var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+        times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
 
-            if ( elapsed < just_now ) {
+      if ( elapsed < just_now ) {
 
-                return {
-                    str: 'Just now',
-                    next: just_now - elapsed
-                };
+        return {
+          str: 'Just now',
+          next: just_now - elapsed
+        };
 
-            } else {
+      } else {
 
-                for ( var i = 0, l = times.length; i < l; i++ ) {
+        for ( var i = 0, l = times.length; i < l; i++ ) {
 
-                    var name = names[i],
-                        secs = times[i],
-                        number = _.floor ( elapsed / secs );
+          var name = names[i],
+            secs = times[i],
+            number = _.floor ( elapsed / secs );
 
-                    if ( number >= 1 ) {
+          if ( number >= 1 ) {
 
-                        return {
-                            str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
-                            next: secs - ( elapsed - ( number * secs ) )
-                        };
+            return {
+              str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
+              next: secs - ( elapsed - ( number * secs ) )
+            };
 
-                    }
+          }
 
-                }
+        }
 
-            }
+      }
 
-        },
+    },
 
-        /**
-         * Return a boolean if the string is fuzzy matched with the search string.
-         *
-         * _.fuzzyMatch ( 'something', 'smTng' );
-         * // => true
-         *
-         * _.fuzzyMatch ( 'something', 'smTng', false );
-         * // => false
-         *
-         * _.fuzzyMatch ( 'something', 'semthing' );
-         * // => false
-         */
+    /**
+     * Return a boolean if the string is fuzzy matched with the search string.
+     *
+     * _.fuzzyMatch ( 'something', 'smTng' );
+     * // => true
+     *
+     * _.fuzzyMatch ( 'something', 'smTng', false );
+     * // => false
+     *
+     * _.fuzzyMatch ( 'something', 'semthing' );
+     * // => false
+     */
 
-        fuzzyMatch: function ( str, search, isCaseSensitive ) {
+    fuzzyMatch: function ( str, search, isCaseSensitive ) {
 
-            if ( isCaseSensitive !== false ) {
+      if ( isCaseSensitive !== false ) {
 
-                str = str.toLowerCase ();
-                search = search.toLowerCase ();
+        str = str.toLowerCase ();
+        search = search.toLowerCase ();
 
-            }
+      }
 
-            var current_index = -1,
-                str_l = str.length;
+      var current_index = -1,
+        str_l = str.length;
 
-            for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
+      for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-                for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
+        for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
 
-                    if ( str[str_i] === search[search_i] ) {
+          if ( str[str_i] === search[search_i] ) {
 
-                        current_index = str_i;
-                        str_i = str_l + 1;
+            current_index = str_i;
+            str_i = str_l + 1;
 
-                    }
+          }
 
-                }
+        }
 
-                if ( str_i === str_l ) {
+        if ( str_i === str_l ) {
 
-                    return false;
+          return false;
 
-                }
+        }
 
-            }
+      }
 
-            return true;
+      return true;
 
-        },
+    },
 
-        /**
-         * Returns a number clamped between a minimum and maximum value.
-         * If the maximum isn't provided, only clamps from the bottom.
-         *
-         * @param {number} minimum The minimum value.
-         * @param {number} value The value to clamp.
-         * @param {number} maximum The maximum value.
-         * @returns {number} A value between minimum and maximum.
-         *
-         * @example
-         *
-         * _.clamp(2, 4, 6); // => 4
-         * _.clamp(3, 2, 5); // => 3
-         * _.clamp(2, 7, 5); // => 5
-         */
+    /**
+     * Returns a number clamped between a minimum and maximum value.
+     * If the maximum isn't provided, only clamps from the bottom.
+     *
+     * @param {number} minimum The minimum value.
+     * @param {number} value The value to clamp.
+     * @param {number} maximum The maximum value.
+     * @returns {number} A value between minimum and maximum.
+     *
+     * @example
+     *
+     * _.clamp(2, 4, 6); // => 4
+     * _.clamp(3, 2, 5); // => 3
+     * _.clamp(2, 7, 5); // => 5
+     */
 
-        clamp: function ( minimum, value, maximum ) {
+    clamp: function ( minimum, value, maximum ) {
 
-            if ( !_.isUndefined ( minimum ) ) {
+      if ( !_.isUndefined ( minimum ) ) {
 
-                if ( value < minimum ) {
+        if ( value < minimum ) {
 
-                    value = minimum;
+          value = minimum;
 
-                }
+        }
 
-            }
+      }
 
-            if ( !_.isUndefined ( maximum ) ) {
+      if ( !_.isUndefined ( maximum ) ) {
 
-                if ( value > maximum ) {
+        if ( value > maximum ) {
 
-                    value = maximum;
+          value = maximum;
 
-                }
+        }
 
-            }
+      }
 
-            return value;
+      return value;
 
-        },
+    },
 
-        /**
-         * Performs a binary each of the array
-         */
+    /**
+     * Performs a binary each of the array
+     */
 
-        btEach: function ( arr, callback, startIndex ) {
+    btEach: function ( arr, callback, startIndex ) {
 
-            var start = 0,
-                end = arr.length - 1,
-                center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
-                direction;
+      var start = 0,
+        end = arr.length - 1,
+        center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+        direction;
 
-            while ( start <= end ) {
+      while ( start <= end ) {
 
-                direction = callback.call ( arr[center], center, arr[center] );
+        direction = callback.call ( arr[center], center, arr[center] );
 
-                if ( direction < 0 ) {
+        if ( direction < 0 ) {
 
-                    end = center - 1;
+          end = center - 1;
 
-                } else if ( direction > 0 ) {
+        } else if ( direction > 0 ) {
 
-                    start = center + 1;
+          start = center + 1;
 
-                } else {
+        } else {
 
-                    return center;
+          return center;
 
-                }
+        }
 
-                center = _.ceil ( ( start + end ) / 2 );
+        center = _.ceil ( ( start + end ) / 2 );
 
-            }
+      }
 
-            return -1;
+      return -1;
 
-        },
+    },
 
-        /**
-         * Returns true
-         */
+    /**
+     * Returns true
+     */
 
-        true: _.constant ( true ),
+    true: _.constant ( true ),
 
-        /**
-         * Returns false
-         */
+    /**
+     * Returns false
+     */
 
-        false: _.constant ( false )
+    false: _.constant ( false )
 
-    });
+  });
 
 }( _, window, document ));

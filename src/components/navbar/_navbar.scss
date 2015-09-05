@@ -16,166 +16,166 @@
 
 @mixin open () {
 
-    & > .navbar {
-        transform: translate3d(0,0,0) !important;
-        pointer-events: auto;
-    }
+  & > .navbar {
+    transform: translate3d(0,0,0) !important;
+    pointer-events: auto;
+  }
 
-    & > .background {
-        pointer-events: auto;
-        opacity: 1;
-    }
+  & > .background {
+    pointer-events: auto;
+    opacity: 1;
+  }
 
 }
 
 @mixin attach () {
 
-    & > .navbar {
-        @include z-depth ( $navbar-attached-z-depth );
+  & > .navbar {
+    @include z-depth ( $navbar-attached-z-depth );
+  }
+
+  & > .background {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  &.left {
+
+    & ~ header, & ~ main, & ~ footer {
+      margin-left: $navbar-vertical-width;
     }
 
-    & > .background {
-        pointer-events: none;
-        opacity: 0;
+    body.fixed-header > & ~ header > .header {
+      left: $navbar-vertical-width;
     }
 
-    &.left {
+    &.slim {
 
-        & ~ header, & ~ main, & ~ footer {
-            margin-left: $navbar-vertical-width;
-        }
+      & ~ header, & ~ main, & ~ footer {
+        margin-left: $navbar-slim-vertical-width;
+      }
 
-        body.fixed-header > & ~ header > .header {
-            left: $navbar-vertical-width;
-        }
-
-        &.slim {
-
-            & ~ header, & ~ main, & ~ footer {
-                margin-left: $navbar-slim-vertical-width;
-            }
-
-            body.fixed-header > & ~ header > .header {
-                left: $navbar-slim-vertical-width;
-            }
-
-        }
-
-    }
-
-    &.right {
-
-        & ~ header, & ~ main, & ~ footer {
-            margin-right: $navbar-vertical-width;
-        }
-
-        body.fixed-header > & ~ header > .header {
-            right: $navbar-vertical-width;
-        }
-
-        &.slim {
-
-            & ~ header, & ~ main, & ~ footer {
-                margin-right: $navbar-slim-vertical-width;
-            }
-
-            body.fixed-header > & ~ header > .header {
-                right: $navbar-slim-vertical-width;
-            }
-
-        }
+      body.fixed-header > & ~ header > .header {
+        left: $navbar-slim-vertical-width;
+      }
 
     }
 
-    &.top {
+  }
+
+  &.right {
+
+    & ~ header, & ~ main, & ~ footer {
+      margin-right: $navbar-vertical-width;
+    }
+
+    body.fixed-header > & ~ header > .header {
+      right: $navbar-vertical-width;
+    }
+
+    &.slim {
+
+      & ~ header, & ~ main, & ~ footer {
+        margin-right: $navbar-slim-vertical-width;
+      }
+
+      body.fixed-header > & ~ header > .header {
+        right: $navbar-slim-vertical-width;
+      }
+
+    }
+
+  }
+
+  &.top {
+
+    & ~ header {
+      margin-top: $navbar-horizontal-height;
+      margin-bottom: - $navbar-horizontal-height;
+    }
+
+    & ~ main {
+      margin-top: $navbar-horizontal-height + $layout-gutter;
+    }
+
+    body.fixed-header > & {
+
+      & ~ header {
+
+        margin-top: $default-toolbar-height + $navbar-horizontal-height;
+        margin-bottom: - ( $navbar-horizontal-height - $layout-gutter );
+
+        & > .header {
+          top: $navbar-horizontal-height;
+        }
+
+      }
+
+      & ~ main {
+        margin-top: $navbar-horizontal-height;
+      }
+
+    }
+
+    &.slim {
+
+      & ~ header {
+        margin-top: $navbar-slim-horizontal-height;
+        margin-bottom: - $navbar-slim-horizontal-height;
+      }
+
+      & ~ main {
+        margin-top: $navbar-slim-horizontal-height + $layout-gutter;
+      }
+
+      body.fixed-header > & {
 
         & ~ header {
-            margin-top: $navbar-horizontal-height;
-            margin-bottom: - $navbar-horizontal-height;
+
+          margin-top: $default-toolbar-height + $navbar-slim-horizontal-height;
+          margin-bottom: - ( $navbar-slim-horizontal-height - $layout-gutter );
+
+          & > .header {
+            top: $navbar-slim-horizontal-height;
+          }
+
         }
 
         & ~ main {
-            margin-top: $navbar-horizontal-height + $layout-gutter;
+          margin-top: $navbar-slim-horizontal-height;
         }
 
-        body.fixed-header > & {
-
-            & ~ header {
-
-                margin-top: $default-toolbar-height + $navbar-horizontal-height;
-                margin-bottom: - ( $navbar-horizontal-height - $layout-gutter );
-
-                & > .header {
-                    top: $navbar-horizontal-height;
-                }
-
-            }
-
-            & ~ main {
-                margin-top: $navbar-horizontal-height;
-            }
-
-        }
-
-        &.slim {
-
-            & ~ header {
-                margin-top: $navbar-slim-horizontal-height;
-                margin-bottom: - $navbar-slim-horizontal-height;
-            }
-
-            & ~ main {
-                margin-top: $navbar-slim-horizontal-height + $layout-gutter;
-            }
-
-            body.fixed-header > & {
-
-                & ~ header {
-
-                    margin-top: $default-toolbar-height + $navbar-slim-horizontal-height;
-                    margin-bottom: - ( $navbar-slim-horizontal-height - $layout-gutter );
-
-                    & > .header {
-                        top: $navbar-slim-horizontal-height;
-                    }
-
-                }
-
-                & ~ main {
-                    margin-top: $navbar-slim-horizontal-height;
-                }
-
-            }
-
-        }
+      }
 
     }
 
-    &.bottom {
+  }
 
-        & ~ main {
-            margin-bottom: $navbar-horizontal-height;
-        }
+  &.bottom {
 
-        & ~ footer {
-            margin-top: - $navbar-horizontal-height;
-            margin-bottom: $navbar-horizontal-height;
-        }
+    & ~ main {
+      margin-bottom: $navbar-horizontal-height;
+    }
 
-        &.slim {
+    & ~ footer {
+      margin-top: - $navbar-horizontal-height;
+      margin-bottom: $navbar-horizontal-height;
+    }
 
-            & ~ main {
-                margin-bottom: $navbar-slim-horizontal-height;
-            }
+    &.slim {
 
-            & ~ footer {
-                margin-top: - $navbar-slim-horizontal-height;
-                margin-bottom: $navbar-slim-horizontal-height;
-            }
+      & ~ main {
+        margin-bottom: $navbar-slim-horizontal-height;
+      }
 
-        }
+      & ~ footer {
+        margin-top: - $navbar-slim-horizontal-height;
+        margin-bottom: $navbar-slim-horizontal-height;
+      }
 
     }
+
+  }
 
 }
 
@@ -183,158 +183,158 @@
 
 .navbar-wrp {
 
-    &.left, &.right {
-
-        & > .navbar {
-            top: 0;
-            bottom: 0;
-            width: $navbar-vertical-width;
-        }
-
-        &.slim > .navbar {
-            width: $navbar-slim-vertical-width;
-        }
-
-    }
-
-    &.left {
-
-        & > .navbar {
-            left: 0;
-            transform: translate3d(-($navbar-vertical-width + $navbar-vertical-extra-distance),0,0);
-        }
-
-        &.slim > .navbar {
-            transform: translate3d(-($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance),0,0);
-        }
-
-    }
-
-    &.right {
-
-        & > .navbar {
-            right: 0;
-            transform: translate3d($navbar-vertical-width + $navbar-vertical-extra-distance,0,0);
-        }
-
-        &.slim > .navbar {
-            transform: translate3d($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance,0,0);
-        }
-
-    }
-
-    &.top, &.bottom {
-
-        & > .navbar {
-            right: 0;
-            left: 0;
-            height: $navbar-horizontal-height;
-        }
-
-        &.slim > .navbar {
-            height: $navbar-slim-horizontal-height;
-        }
-
-    }
-
-    &.top {
-
-        & > .navbar {
-            top: 0;
-            transform: translate3d(0,-($navbar-horizontal-height + $navbar-horizontal-extra-distance),0);
-        }
-
-        &.slim > .navbar {
-            transform: translate3d(0,-($navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance),0);
-        }
-
-    }
-
-    &.bottom {
-
-        & > .navbar {
-            bottom: 0;
-            transform: translate3d(0,$navbar-horizontal-height + $navbar-horizontal-extra-distance,0);
-        }
-
-        &.slim > .navbar {
-            transform: translate3d(0,$navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance,0);
-        }
-
-    }
+  &.left, &.right {
 
     & > .navbar {
-        @include z-depth ( $navbar-z-depth );
-        position: fixed;
-        z-index: $navbar-z-index;
-        margin: 0;
-        transition: transform $navbar-transition-transform-duration;
-        pointer-events: none;
-        border-width: 0; //FIXME: when we remove the default container's outlined also remove this one
-        border-radius: 0;
+      top: 0;
+      bottom: 0;
+      width: $navbar-vertical-width;
     }
 
-    & > .background {
-        @include fill-fixed ();
-        z-index: $navbar-background-z-index;
-        cursor: pointer;
-        transition: opacity $navbar-background-transition-opacity-duration;
-        pointer-events: none;
-        opacity: 0;
-        background-color: $navbar-background-color;
+    &.slim > .navbar {
+      width: $navbar-slim-vertical-width;
     }
 
-    // OPENED
+  }
 
-    &.opened {
-        @include open ();
+  &.left {
+
+    & > .navbar {
+      left: 0;
+      transform: translate3d(-($navbar-vertical-width + $navbar-vertical-extra-distance),0,0);
     }
 
-    // ATTACHED
-
-    @include xsmall-up {
-
-        &.attached-xs {
-            @include open ();
-            @include attach ();
-        }
-
+    &.slim > .navbar {
+      transform: translate3d(-($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance),0,0);
     }
 
-    @include small-up {
+  }
 
-        &.attached-sm {
-            @include open ();
-            @include attach ();
-        }
+  &.right {
 
+    & > .navbar {
+      right: 0;
+      transform: translate3d($navbar-vertical-width + $navbar-vertical-extra-distance,0,0);
     }
 
-    @include medium-up {
-
-        &.attached-md {
-            @include open ();
-            @include attach ();
-        }
-
+    &.slim > .navbar {
+      transform: translate3d($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance,0,0);
     }
 
-    @include large-up {
+  }
 
-        &.attached-lg {
-            @include open ();
-            @include attach ();
-        }
+  &.top, &.bottom {
 
+    & > .navbar {
+      right: 0;
+      left: 0;
+      height: $navbar-horizontal-height;
     }
 
-    @include xlarge-up {
-
-        &.attached-xl {
-            @include open ();
-            @include attach ();
-        }
-
+    &.slim > .navbar {
+      height: $navbar-slim-horizontal-height;
     }
+
+  }
+
+  &.top {
+
+    & > .navbar {
+      top: 0;
+      transform: translate3d(0,-($navbar-horizontal-height + $navbar-horizontal-extra-distance),0);
+    }
+
+    &.slim > .navbar {
+      transform: translate3d(0,-($navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance),0);
+    }
+
+  }
+
+  &.bottom {
+
+    & > .navbar {
+      bottom: 0;
+      transform: translate3d(0,$navbar-horizontal-height + $navbar-horizontal-extra-distance,0);
+    }
+
+    &.slim > .navbar {
+      transform: translate3d(0,$navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance,0);
+    }
+
+  }
+
+  & > .navbar {
+    @include z-depth ( $navbar-z-depth );
+    position: fixed;
+    z-index: $navbar-z-index;
+    margin: 0;
+    transition: transform $navbar-transition-transform-duration;
+    pointer-events: none;
+    border-width: 0; //FIXME: when we remove the default container's outlined also remove this one
+    border-radius: 0;
+  }
+
+  & > .background {
+    @include fill-fixed ();
+    z-index: $navbar-background-z-index;
+    cursor: pointer;
+    transition: opacity $navbar-background-transition-opacity-duration;
+    pointer-events: none;
+    opacity: 0;
+    background-color: $navbar-background-color;
+  }
+
+  // OPENED
+
+  &.opened {
+    @include open ();
+  }
+
+  // ATTACHED
+
+  @include xsmall-up {
+
+    &.attached-xs {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include small-up {
+
+    &.attached-sm {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include medium-up {
+
+    &.attached-md {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include large-up {
+
+    &.attached-lg {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include xlarge-up {
+
+    &.attached-xl {
+      @include open ();
+      @include attach ();
+    }
+
+  }
 
 }

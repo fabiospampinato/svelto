@@ -12,91 +12,91 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* NAVBAR */
+  /* NAVBAR */
 
-    $.widget ( 'presto.navbar', {
+  $.widget ( 'presto.navbar', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$navbar = this.$element;
-            this.$wrp = this.$navbar.parent ();
+      this.$navbar = this.$element;
+      this.$wrp = this.$navbar.parent ();
 
-            this.id = this.$navbar.attr ( 'id' );
+      this.id = this.$navbar.attr ( 'id' );
 
-            this.$closers = this.$wrp.find ( '.navbar-closer' );
-            this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
+      this.$closers = this.$wrp.find ( '.navbar-closer' );
+      this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
 
-            this.opened = this.$wrp.hasClass ( 'opened' );
+      this.opened = this.$wrp.hasClass ( 'opened' );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* CLOSER CLICK */
+      /* CLOSER CLICK */
 
-            this._on ( this.$closers, 'click', this.close );
+      this._on ( this.$closers, 'click', this.close );
 
-            /* TRIGGER CLICK */
+      /* TRIGGER CLICK */
 
-            this._on ( this.$triggers, 'click', this.open );
+      this._on ( this.$triggers, 'click', this.open );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        toggle: function ( force ) {
+    toggle: function ( force ) {
 
-            if ( _.isUndefined ( force ) ) {
+      if ( _.isUndefined ( force ) ) {
 
-                force = !this.opened;
+        force = !this.opened;
 
-            }
+      }
 
-            if ( force !== this.opened ) {
+      if ( force !== this.opened ) {
 
-                this.opened = force;
+        this.opened = force;
 
-                this.$wrp.toggleClass ( 'opened', this.opened );
+        this.$wrp.toggleClass ( 'opened', this.opened );
 
-                this._trigger ( this.opened ? 'open' : 'close' );
+        this._trigger ( this.opened ? 'open' : 'close' );
 
-            }
+      }
 
-        },
+    },
 
-        open: function () {
+    open: function () {
 
-            this.toggle ( true );
+      this.toggle ( true );
 
-        },
+    },
 
-        close: function () {
+    close: function () {
 
-            this.toggle ( false );
+      this.toggle ( false );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.navbar').navbar ();
+    $('.navbar').navbar ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));

@@ -14,111 +14,111 @@
 
 .tabs {
 
+  position: relative;
+  margin-bottom: $layout-gutter;
+
+  & > .tabs-buttons > .multiple-wrp {
+    margin-bottom: 0;
+  }
+
+  & > .tabs-containers {
+
     position: relative;
-    margin-bottom: $layout-gutter;
+
+    & > .tabs-buttons-indicator {
+      @include color ( $tabs-indicator-color, $tabs-indicator-color-basic );
+      position: absolute;
+       z-index: 1;
+      transition-duration: $tabs-indicator-transition-all-duration;
+      transition-property: top, right, bottom, left;
+    }
+
+    & > .container {
+
+      display: none;
+      margin-bottom: 0;
+
+      &.active {
+        display: block;
+      }
+
+    }
+
+  }
+
+  &:not(.vertical) {
 
     & > .tabs-buttons > .multiple-wrp {
-        margin-bottom: 0;
+
+      margin-right: 0;
+      margin-left: 0;
+
+      & > .multiple > .label-wrp {
+
+        margin-right: 0;
+        margin-left: 0;
+
+        & > .label {
+          border-bottom-right-radius: 0;
+          border-bottom-left-radius: 0;
+        }
+
+      }
+
     }
 
     & > .tabs-containers {
 
-        position: relative;
+      & > .tabs-buttons-indicator {
+        top: - $tabs-indicator-size;
+        right: 100%;
+        left: 0;
+        height: $tabs-indicator-size;
+      }
 
-        & > .tabs-buttons-indicator {
-            @include color ( $tabs-indicator-color, $tabs-indicator-color-basic );
-            position: absolute;
-             z-index: 1;
-            transition-duration: $tabs-indicator-transition-all-duration;
-            transition-property: top, right, bottom, left;
-        }
-
-        & > .container {
-
-            display: none;
-            margin-bottom: 0;
-
-            &.active {
-                display: block;
-            }
-
-        }
+      & > .container {
+        border-top-width: 0;
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
 
     }
 
-    &:not(.vertical) {
+  }
 
-        & > .tabs-buttons > .multiple-wrp {
+  &.vertical {
 
-            margin-right: 0;
-            margin-left: 0;
+    display: flex;
+    align-items: stretch;
 
-            & > .multiple > .label-wrp {
+    & > .tabs-buttons > .multiple-wrp .label {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
 
-                margin-right: 0;
-                margin-left: 0;
+    & > .tabs-containers {
 
-                & > .label {
-                    border-bottom-right-radius: 0;
-                    border-bottom-left-radius: 0;
-                }
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
 
-            }
+      & > .tabs-buttons-indicator {
+        top: 0;
+        bottom: 100%;
+        left: - $tabs-indicator-size;
+        width: $tabs-indicator-size;
+      }
 
-        }
-
-        & > .tabs-containers {
-
-            & > .tabs-buttons-indicator {
-                top: - $tabs-indicator-size;
-                right: 100%;
-                left: 0;
-                height: $tabs-indicator-size;
-            }
-
-            & > .container {
-                border-top-width: 0;
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-            }
-
-        }
+      & > .container {
+        flex-grow: 1;
+        height: 100%;
+        border-left-width: 0;
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+      }
 
     }
 
-    &.vertical {
-
-        display: flex;
-        align-items: stretch;
-
-        & > .tabs-buttons > .multiple-wrp .label {
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-        }
-
-        & > .tabs-containers {
-
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-
-            & > .tabs-buttons-indicator {
-                top: 0;
-                bottom: 100%;
-                left: - $tabs-indicator-size;
-                width: $tabs-indicator-size;
-            }
-
-            & > .container {
-                flex-grow: 1;
-                height: 100%;
-                border-left-width: 0;
-                border-top-left-radius: 0;
-                border-bottom-left-radius: 0;
-            }
-
-        }
-
-    }
+  }
 
 }

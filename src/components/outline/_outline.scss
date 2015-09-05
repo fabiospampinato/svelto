@@ -12,33 +12,33 @@
 
 .outlined {
 
-    border-width: $outline-width;
-    border-style: $outline-style;
+  border-width: $outline-width;
+  border-style: $outline-style;
 
-    /* STYLES */
+  /* STYLES */
 
-    &.outlined-solid {
-        border-style: solid;
+  &.outlined-solid {
+    border-style: solid;
+  }
+
+  &.outlined-dotted {
+    border-style: dotted;
+  }
+
+  &.outlined-dashed {
+    border-style: dashed;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $bg: nth($datas, 1);
+
+    &.outlined-#{$name} {
+      border-color: $bg !important;
     }
 
-    &.outlined-dotted {
-        border-style: dotted;
-    }
-
-    &.outlined-dashed {
-        border-style: dashed;
-    }
-
-    /* COLORS */
-
-    @each $name, $datas in $colors {
-
-        $bg: nth($datas, 1);
-
-        &.outlined-#{$name} {
-            border-color: $bg !important;
-        }
-
-    }
+  }
 
 }

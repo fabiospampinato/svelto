@@ -12,9 +12,9 @@
 
 @mixin size ( $size_name, $extra: '' ) {
 
-    $size: map-get($sizes, $size_name);
+  $size: map-get($sizes, $size_name);
 
-    font-size: $size #{$extra};
+  font-size: $size #{$extra};
 
 }
 
@@ -22,8 +22,8 @@
 
 @each $name, $font-size in $sizes {
 
-    .#{$name} {
-        @include size ( $name, '!important' );
-    }
+  .#{$name} {
+    @include size ( $name, '!important' );
+  }
 
 }

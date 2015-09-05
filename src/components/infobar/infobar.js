@@ -13,64 +13,64 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* INFOBAR */
+  /* INFOBAR */
 
-    $.widget ( 'presto.infobar', {
+  $.widget ( 'presto.infobar', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                closer: '.infobar-closer'
-            },
-            delay: {
-                close: 250
-            },
-            callbacks: {
-                close: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        closer: '.infobar-closer'
+      },
+      delay: {
+        close: 250
+      },
+      callbacks: {
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$infobar = this.$element;
+      this.$infobar = this.$element;
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.closer, this.close );
+      this._on ( 'click', this.options.selectors.closer, this.close );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        close: function () {
+    close: function () {
 
-            this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
+      this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
 
-            this._delay ( function () {
+      this._delay ( function () {
 
-                this.$infobar.remove ();
+        this.$infobar.remove ();
 
-                this._trigger ( 'close' );
+        this._trigger ( 'close' );
 
-            }, this.options.delay.close );
+      }, this.options.delay.close );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.infobar-wrp').infobar ();
+    $('.infobar-wrp').infobar ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));

@@ -12,25 +12,25 @@
 
 .toolbar {
 
-    height: $toolbar-height;
-    margin-bottom: $layout-gutter;
-    padding: $toolbar-vertical-padding $toolbar-horizontal-padding;
+  height: $toolbar-height;
+  margin-bottom: $layout-gutter;
+  padding: $toolbar-vertical-padding $toolbar-horizontal-padding;
 
-    & .multiple-wrp {
+  & .multiple-wrp {
 
-        height: 100%;
+    height: 100%;
 
-        & > .multiple {
+    & > .multiple {
 
-            align-items: center;
-            height: 100%;
+      align-items: center;
+      height: 100%;
 
-            & > * {
-                margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
-            }
-
-        }
+      & > * {
+        margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
+      }
 
     }
+
+  }
 
 }

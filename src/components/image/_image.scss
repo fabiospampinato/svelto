@@ -12,70 +12,70 @@
 
 .image-wrp {
 
-    @include color ( $image-color, $image-color-basic );
+  @include color ( $image-color, $image-color-basic );
 
-    & > img {
-        width: 100%;
-        height: auto;
-        order: 2;
-        border-radius: inherit;
-    }
+  & > img {
+    width: 100%;
+    height: auto;
+    order: 2;
+    border-radius: inherit;
+  }
 
-    /* CAPTION */
+  /* CAPTION */
 
-    & > .image-caption {
+  & > .image-caption {
 
-        //TODO: Generalize the caption as an addon of the `container` component
+    //TODO: Generalize the caption as an addon of the `container` component
 
-        @include color ( $image-caption-color, $image-caption-color-basic );
-        border-radius: 0;
-        margin-bottom: 0;
+    @include color ( $image-caption-color, $image-caption-color-basic );
+    border-radius: 0;
+    margin-bottom: 0;
 
-        &:not(.attached) {
+    &:not(.attached) {
 
-            position: absolute;
-            left: 0;
-            right: 0;
+      position: absolute;
+      left: 0;
+      right: 0;
 
-            &.on-hover {
-                opacity: 0;
-                transition: opacity $image-caption-transition-opacity-duration;
-            }
+      &.on-hover {
+        opacity: 0;
+        transition: opacity $image-caption-transition-opacity-duration;
+      }
 
-            &:not(.top) {
-                bottom: 0;
-            }
+      &:not(.top) {
+        bottom: 0;
+      }
 
-            &.top {
-                top: 0;
-            }
-
-        }
-
-        &.attached {
-
-            &:not(.top) {
-                order: 3;
-            }
-
-            &.top {
-                order: 1;
-            }
-
-        }
-
-        &:not(.top) {
-            @include border-bottom-radius ( inherit );
-        }
-
-        &.top {
-            @include border-top-radius ( inherit );
-        }
+      &.top {
+        top: 0;
+      }
 
     }
 
-    &:hover > .image-caption:not(.attached).on-hover {
-        opacity: 1;
+    &.attached {
+
+      &:not(.top) {
+        order: 3;
+      }
+
+      &.top {
+        order: 1;
+      }
+
     }
+
+    &:not(.top) {
+      @include border-bottom-radius ( inherit );
+    }
+
+    &.top {
+      @include border-top-radius ( inherit );
+    }
+
+  }
+
+  &:hover > .image-caption:not(.attached).on-hover {
+    opacity: 1;
+  }
 
 }

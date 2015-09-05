@@ -12,30 +12,30 @@
 
 a {
 
-    position: relative;
-    text-decoration: none;
-    color: inherit;
+  position: relative;
+  text-decoration: none;
+  color: inherit;
 
-    p > & { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+  p > & { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
-        //TODO: It should also work with mark, basically almost with anything, but sometimes is uneeded
+    //TODO: It should also work with mark, basically almost with anything, but sometimes is uneeded
 
-        &:before {
-            @include fill-absolute ();
-            z-index: $a-underline-z-index;
-            content: '';
-            transition: transform $a-underline-transition-duration;
-            transform: scaleX(0);
-            pointer-events: none;
-            border-bottom: $a-underline-height solid;
-            border-radius: inherit;
-        }
-
-        &:hover:before {
-            transform: scaleX(1);
-        }
-
+    &:before {
+      @include fill-absolute ();
+      z-index: $a-underline-z-index;
+      content: '';
+      transition: transform $a-underline-transition-duration;
+      transform: scaleX(0);
+      pointer-events: none;
+      border-bottom: $a-underline-height solid;
+      border-radius: inherit;
     }
+
+    &:hover:before {
+      transform: scaleX(1);
+    }
+
+  }
 
 }
 
@@ -43,151 +43,151 @@ a {
 
 h1, h2, h3, h4, h5, h6 {
 
-    margin: 0 0 $layout-gutter;
+  margin: 0 0 $layout-gutter;
 
-    & > small {
-        opacity: $header-small-opacity;
-    }
+  & > small {
+    opacity: $header-small-opacity;
+  }
 
 }
 
 h1 {
-    @include size ( $h1-size );
+  @include size ( $h1-size );
 }
 
 h2 {
-    @include size ( $h2-size );
+  @include size ( $h2-size );
 }
 
 h3 {
-    @include size ( $h3-size );
+  @include size ( $h3-size );
 }
 
 h4 {
-    @include size ( $h4-size );
+  @include size ( $h4-size );
 }
 
 h5 {
-    @include size ( $h5-size );
+  @include size ( $h5-size );
 }
 
 h6 {
-    @include size ( $h6-size );
+  @include size ( $h6-size );
 }
 
 /* SMALL */
 
 small {
-    font-size: $small-font-size;
+  font-size: $small-font-size;
 }
 
 /* PARAGRAPH */
 
 p {
-    margin: 0 0 $layout-gutter;
+  margin: 0 0 $layout-gutter;
 }
 
 /* MARK */
 
 mark, .mark {
-    @include color ( $mark-color, $mark-color-basic );
-    padding: $mark-padding;
-    border-radius: $mark-border-radius;
+  @include color ( $mark-color, $mark-color-basic );
+  padding: $mark-padding;
+  border-radius: $mark-border-radius;
 }
 
 /* ABBR */
 
 abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
-    cursor: help;
-    border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
+  cursor: help;
+  border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
 }
 
 /* BLOCKQUOTE */
 
 blockquote {
 
+  @extend %widget;
+  @include last-child-gutter-fix ();
+  padding: $layout-gutter-half $layout-gutter $layout-gutter-half ( $layout-gutter + $blockquote-line-width );
+  border-radius: $blockquote-line-width;
+  background-color: $blockquote-bg-color;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $blockquote-line-width;
+    content: '';
+    border-radius: $blockquote-line-width;
+    background-color: $blockquote-line-bg-color;
+  }
+
+  & > footer {
+
     @extend %widget;
     @include last-child-gutter-fix ();
-    padding: $layout-gutter-half $layout-gutter $layout-gutter-half ( $layout-gutter + $blockquote-line-width );
-    border-radius: $blockquote-line-width;
-    background-color: $blockquote-bg-color;
+    font-size: $blockquote-footer-font-size;
+    opacity: $blockquote-footer-opacity;
 
     &:before {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
-        width: $blockquote-line-width;
-        content: '';
-        border-radius: $blockquote-line-width;
-        background-color: $blockquote-line-bg-color;
+      content: '\2014 \00A0';
+      opacity: $blockquote-footer-opacity;
     }
 
-    & > footer {
-
-        @extend %widget;
-        @include last-child-gutter-fix ();
-        font-size: $blockquote-footer-font-size;
-        opacity: $blockquote-footer-opacity;
-
-        &:before {
-            content: '\2014 \00A0';
-            opacity: $blockquote-footer-opacity;
-        }
-
-    }
+  }
 
 }
 
 /* LIST */
 
 ul, ol {
-    margin: 0;
-    padding-left: $layout-gutter * 2;
+  margin: 0;
+  padding-left: $layout-gutter * 2;
 }
 
 ul.unstyled {
 
-    padding-left: 0;
-    list-style-type: none;
+  padding-left: 0;
+  list-style-type: none;
 
-    ul {
-        list-style-type: none;
-    }
+  ul {
+    list-style-type: none;
+  }
 
 }
 
 dl {
-    margin: 0;
+  margin: 0;
 }
 
 dd {
-    margin-left: $layout-gutter * 2;
+  margin-left: $layout-gutter * 2;
 }
 
 /* CODE */
 
 code, section, pre {
-    display: block;
-    overflow-x: auto;
-    margin: 0;
-    padding: $layout-gutter;
-    border: $code-border-width solid $code-border-color;
-    border-radius: $border-radius-small;
-    background-color: $code-bg-color;
+  display: block;
+  overflow-x: auto;
+  margin: 0;
+  padding: $layout-gutter;
+  border: $code-border-width solid $code-border-color;
+  border-radius: $border-radius-small;
+  background-color: $code-bg-color;
 }
 
 /* KBD */
 
 kbd {
-    @include color ( $kbd-color, $kbd-color-basic );
-    font-size: $kbd-font-size;
-    font-weight: bold;
-    display: inline-block;
-    margin: 0 $layout-gutter-half;
-    padding: $kbd-padding;
-    white-space: nowrap;
-    border-width: $kbd-border-width;
-    border-style: $kbd-border-style;
-    border-radius: $border-radius-medium;
+  @include color ( $kbd-color, $kbd-color-basic );
+  font-size: $kbd-font-size;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 $layout-gutter-half;
+  padding: $kbd-padding;
+  white-space: nowrap;
+  border-width: $kbd-border-width;
+  border-style: $kbd-border-style;
+  border-radius: $border-radius-medium;
 }

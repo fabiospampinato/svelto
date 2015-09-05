@@ -12,268 +12,268 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* WIDGET FACTORY */
+  /* WIDGET FACTORY */
 
-    $.widget = function ( originalName, base, prototype ) {
+  $.widget = function ( originalName, base, prototype ) {
 
-        /* VARIABLES */
+    /* VARIABLES */
 
-        var fullName,
-            existingConstructor,
-            constructor,
-            basePrototype,
-            proxiedPrototype = {},
-            nameParts = originalName.split ( '.' ),
-            namespace = nameParts.length > 1 ? nameParts[0] : false,
-            name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+    var fullName,
+      existingConstructor,
+      constructor,
+      basePrototype,
+      proxiedPrototype = {},
+      nameParts = originalName.split ( '.' ),
+      namespace = nameParts.length > 1 ? nameParts[0] : false,
+      name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
 
-        fullName = namespace ? namespace + '-' + name : name;
+    fullName = namespace ? namespace + '-' + name : name;
 
-        /* NO BASE */
+    /* NO BASE */
 
-        if ( !prototype ) {
+    if ( !prototype ) {
 
-            prototype = base;
-            base = $.Widget;
+      prototype = base;
+      base = $.Widget;
 
-        }
+    }
 
-        /* NAMESPACE */
+    /* NAMESPACE */
 
-        if ( namespace ) {
+    if ( namespace ) {
 
-            $[namespace] = $[namespace] || {};
+      $[namespace] = $[namespace] || {};
 
-        }
+    }
 
-        /* CONSTRUCTOR */
+    /* CONSTRUCTOR */
 
-        existingConstructor = namespace ? $[namespace][name] : $[name];
+    existingConstructor = namespace ? $[namespace][name] : $[name];
 
-        constructor = function ( options, element ) {
+    constructor = function ( options, element ) {
 
-            if ( !this._createWidget ) {
+      if ( !this._createWidget ) {
 
-                return new constructor ( options, element );
+        return new constructor ( options, element );
 
-            }
+      }
 
-            if ( arguments.length ) {
+      if ( arguments.length ) {
 
-                this._createWidget ( options, element );
+        this._createWidget ( options, element );
 
-            }
+      }
 
-        }
+    }
 
-        if ( namespace ) {
+    if ( namespace ) {
 
-            $[namespace][name] = constructor;
+      $[namespace][name] = constructor;
 
-        } else {
+    } else {
 
-            $[name] = constructor;
+      $[name] = constructor;
 
-        }
+    }
 
-        /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
+    /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
 
-        _.extend ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ),
-            _childConstructors: []
-        });
+    _.extend ( constructor, existingConstructor, {
+      _proto: _.extend ( {}, prototype ),
+      _childConstructors: []
+    });
 
-        /* BASE PROTOTYPE */
+    /* BASE PROTOTYPE */
 
-        basePrototype = new base ();
+    basePrototype = new base ();
 
-        basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+    basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
-        /* PROXIED PROTOTYPE */
+    /* PROXIED PROTOTYPE */
 
-        for ( var prop in prototype ) {
+    for ( var prop in prototype ) {
 
-            if ( typeof prototype[prop] !== 'function' ) {
+      if ( typeof prototype[prop] !== 'function' ) {
 
-                proxiedPrototype[prop] = prototype[prop];
-                continue;
+        proxiedPrototype[prop] = prototype[prop];
+        continue;
 
-            }
+      }
 
-            proxiedPrototype[prop] = (function ( prop ) {
+      proxiedPrototype[prop] = (function ( prop ) {
 
-                var _super = function () {
-                        return base.prototype[prop].apply ( this, arguments );
-                    },
-                    _superApply = function ( args ) {
-                        return base.prototype[prop].apply ( this, args );
-                    };
+        var _super = function () {
+            return base.prototype[prop].apply ( this, arguments );
+          },
+          _superApply = function ( args ) {
+            return base.prototype[prop].apply ( this, args );
+          };
 
-                return function () {
+        return function () {
 
-                    var __super = this._super,
-                        __superApply = this._superApply,
-                        returnValue;
+          var __super = this._super,
+            __superApply = this._superApply,
+            returnValue;
 
-                    this._super = _super;
-                    this._superApply = _superApply;
+          this._super = _super;
+          this._superApply = _superApply;
 
-                    returnValue = prototype[prop].apply ( this, arguments );
+          returnValue = prototype[prop].apply ( this, arguments );
 
-                    this._super = __super;
-                    this._superApply = __superApply;
+          this._super = __super;
+          this._superApply = __superApply;
 
-                    return returnValue;
-
-                };
-
-            })( prop );
-
-        }
-
-        /* CONSTRUCTOR PROTOTYPE */
-
-        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
-            constructor: constructor,
-            namespace: namespace,
-            widgetOriginalName: originalName,
-            widgetName: name,
-            widgetFullName: fullName
-        });
-
-        /* CACHE TEMPLATES */
-
-        for ( var tmpl_name in prototype.templates ) {
-
-            $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
-
-        }
-
-        /* UPDATE PROTOTYPE CHAIN */
-
-        if ( existingConstructor ) {
-
-            for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
-
-                var childPrototype = existingConstructor._childConstructors[i].prototype;
-
-                $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
-
-            }
-
-            delete existingConstructor._childConstructors;
-
-        } else {
-
-            base._childConstructors.push ( constructor );
-
-        }
-
-        /* CONSTRUCT */
-
-        $.widget.bridge ( name, constructor );
-
-        /* RETURN */
-
-        return constructor;
-
-    };
-
-    $.widget.bridge = function ( name, object ) {
-
-        /* VARIABLES */
-
-        var fullName = object.prototype.widgetFullName || name;
-
-        /* PLUGIN */
-
-        $.fn[name] = function ( options ) {
-
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
-
-            var isMethodCall = ( typeof options === 'string' ),
-                args = _.tail ( arguments ),
-                returnValue = this;
-
-            if ( isMethodCall ) {
-
-                /* METHOD CALL */
-
-                this.each ( function () {
-
-                    /* VARIABLES */
-
-                    var methodValue,
-                        instance = $.data ( this, fullName );
-
-                    /* GETTING INSTANCE */
-
-                    if ( options === 'instance' ) {
-
-                        returnValue = instance;
-
-                        return false;
-
-                    }
-
-                    /* CHECKING VALID CALL */
-
-                    if ( !instance ) return; //INFO: No instance found
-
-                    if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
-
-                    /* CALLING */
-
-                    methodValue = instance[options].apply ( instance, args );
-
-                    if ( methodValue !== instance && methodValue !== undefined ) {
-
-                        returnValue = methodValue;
-
-                        return false;
-
-                    }
-
-                });
-
-            } else {
-
-                /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
-
-                if ( args.length ) {
-
-                    options = _.extend.apply ( null, [options].concat ( args ) );
-
-                }
-
-                /* INSTANCIATING */
-
-                this.each ( function () {
-
-                    /* GET INSTANCE */
-
-                    var instance = $.data ( this, fullName );
-
-                    if ( instance ) {
-
-                        instance.option ( options || {} );
-
-                    } else {
-
-                        $.data ( this, fullName, new object ( options, this ) );
-
-                    }
-
-                });
-
-            }
-
-            return returnValue;
+          return returnValue;
 
         };
 
+      })( prop );
+
+    }
+
+    /* CONSTRUCTOR PROTOTYPE */
+
+    constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+      constructor: constructor,
+      namespace: namespace,
+      widgetOriginalName: originalName,
+      widgetName: name,
+      widgetFullName: fullName
+    });
+
+    /* CACHE TEMPLATES */
+
+    for ( var tmpl_name in prototype.templates ) {
+
+      $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
+
+    }
+
+    /* UPDATE PROTOTYPE CHAIN */
+
+    if ( existingConstructor ) {
+
+      for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+
+        var childPrototype = existingConstructor._childConstructors[i].prototype;
+
+        $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
+
+      }
+
+      delete existingConstructor._childConstructors;
+
+    } else {
+
+      base._childConstructors.push ( constructor );
+
+    }
+
+    /* CONSTRUCT */
+
+    $.widget.bridge ( name, constructor );
+
+    /* RETURN */
+
+    return constructor;
+
+  };
+
+  $.widget.bridge = function ( name, object ) {
+
+    /* VARIABLES */
+
+    var fullName = object.prototype.widgetFullName || name;
+
+    /* PLUGIN */
+
+    $.fn[name] = function ( options ) {
+
+      if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
+
+      var isMethodCall = ( typeof options === 'string' ),
+        args = _.tail ( arguments ),
+        returnValue = this;
+
+      if ( isMethodCall ) {
+
+        /* METHOD CALL */
+
+        this.each ( function () {
+
+          /* VARIABLES */
+
+          var methodValue,
+            instance = $.data ( this, fullName );
+
+          /* GETTING INSTANCE */
+
+          if ( options === 'instance' ) {
+
+            returnValue = instance;
+
+            return false;
+
+          }
+
+          /* CHECKING VALID CALL */
+
+          if ( !instance ) return; //INFO: No instance found
+
+          if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
+
+          /* CALLING */
+
+          methodValue = instance[options].apply ( instance, args );
+
+          if ( methodValue !== instance && methodValue !== undefined ) {
+
+            returnValue = methodValue;
+
+            return false;
+
+          }
+
+        });
+
+      } else {
+
+        /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
+
+        if ( args.length ) {
+
+          options = _.extend.apply ( null, [options].concat ( args ) );
+
+        }
+
+        /* INSTANCIATING */
+
+        this.each ( function () {
+
+          /* GET INSTANCE */
+
+          var instance = $.data ( this, fullName );
+
+          if ( instance ) {
+
+            instance.option ( options || {} );
+
+          } else {
+
+            $.data ( this, fullName, new object ( options, this ) );
+
+          }
+
+        });
+
+      }
+
+      return returnValue;
+
     };
+
+  };
 
 }( jQuery, _, window, document ));

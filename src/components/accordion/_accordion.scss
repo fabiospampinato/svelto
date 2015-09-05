@@ -13,31 +13,31 @@
 
 .accordion {
 
-    margin-bottom: $layout-gutter;
+  margin-bottom: $layout-gutter;
 
-    & > .expander {
+  & > .expander {
 
-        margin-bottom: 0;
+    margin-bottom: 0;
 
-        &:not(:last-child) {
+    &:not(:last-child) {
 
-            margin-bottom: - $outline-width;
-            border-bottom-width: 0;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
+      margin-bottom: - $outline-width;
+      border-bottom-width: 0;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
 
-            & > .header {
-                border-bottom-right-radius: 0;
-                border-bottom-left-radius: 0;
-            }
-
-        }
-
-        &:not(:first-child) {
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+      & > .header {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
 
     }
+
+    &:not(:first-child) {
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+  }
 
 }

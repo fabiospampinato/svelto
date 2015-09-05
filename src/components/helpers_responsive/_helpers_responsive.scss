@@ -14,17 +14,17 @@
 
 @include xsmall-up {
 
-    .hidden-xs {
-        display: none !important;
+  .hidden-xs {
+    display: none !important;
+  }
+
+  @each $display in block, inline, inline-block {
+
+    .visible-xs-#{$display} {
+      display: $display !important;
     }
 
-    @each $display in block, inline, inline-block {
-
-        .visible-xs-#{$display} {
-            display: $display !important;
-        }
-
-    }
+  }
 
 }
 
@@ -32,17 +32,17 @@
 
 @include small-up {
 
-    .hidden-sm {
-        display: none !important;
+  .hidden-sm {
+    display: none !important;
+  }
+
+  @each $display in block, inline, inline-block {
+
+    .visible-sm-#{$display} {
+      display: $display !important;
     }
 
-    @each $display in block, inline, inline-block {
-
-        .visible-sm-#{$display} {
-            display: $display !important;
-        }
-
-    }
+  }
 
 }
 
@@ -50,17 +50,17 @@
 
 @include medium-up {
 
-    .hidden-md {
-        display: none !important;
+  .hidden-md {
+    display: none !important;
+  }
+
+  @each $display in block, inline, inline-block {
+
+    .visible-md-#{$display} {
+      display: $display !important;
     }
 
-    @each $display in block, inline, inline-block {
-
-        .visible-md-#{$display} {
-            display: $display !important;
-        }
-
-    }
+  }
 
 }
 
@@ -68,17 +68,17 @@
 
 @include large-up {
 
-    .hidden-lg {
-        display: none !important;
+  .hidden-lg {
+    display: none !important;
+  }
+
+  @each $display in block, inline, inline-block {
+
+    .visible-lg-#{$display} {
+      display: $display !important;
     }
 
-    @each $display in block, inline, inline-block {
-
-        .visible-lg-#{$display} {
-            display: $display !important;
-        }
-
-    }
+  }
 
 }
 
@@ -86,17 +86,17 @@
 
 @include xlarge-up {
 
-    .hidden-xl {
-        display: none !important;
+  .hidden-xl {
+    display: none !important;
+  }
+
+  @each $display in block, inline, inline-block {
+
+    .visible-xl-#{$display} {
+      display: $display !important;
     }
 
-    @each $display in block, inline, inline-block {
-
-        .visible-xl-#{$display} {
-            display: $display !important;
-        }
-
-    }
+  }
 
 }
 
@@ -106,17 +106,17 @@
 
 @include xsmall-up {
 
-    @for $nr from 1 through $grid-columns {
+  @for $nr from 1 through $grid-columns {
 
-        .xs-#{$nr} {
-            width: ( 100% / $grid-columns ) * $nr;
-        }
-
-        .multiple-wrp > .multiple > *:not(.multiple-wrp).xs-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
-        }
-
+    .xs-#{$nr} {
+      width: ( 100% / $grid-columns ) * $nr;
     }
+
+    .multiple-wrp > .multiple > *:not(.multiple-wrp).xs-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+    }
+
+  }
 
 }
 
@@ -124,17 +124,17 @@
 
 @include small-up {
 
-    @for $nr from 1 through $grid-columns {
+  @for $nr from 1 through $grid-columns {
 
-        .sm-#{$nr} {
-            width: ( 100% / $grid-columns ) * $nr;
-        }
-
-        .multiple-wrp > .multiple > *:not(.multiple-wrp).sm-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
-        }
-
+    .sm-#{$nr} {
+      width: ( 100% / $grid-columns ) * $nr;
     }
+
+    .multiple-wrp > .multiple > *:not(.multiple-wrp).sm-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+    }
+
+  }
 
 }
 
@@ -142,17 +142,17 @@
 
 @include medium-up {
 
-    @for $nr from 1 through $grid-columns {
+  @for $nr from 1 through $grid-columns {
 
-        .md-#{$nr} {
-            width: ( 100% / $grid-columns ) * $nr;
-        }
-
-        .multiple-wrp > .multiple > *:not(.multiple-wrp).md-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
-        }
-
+    .md-#{$nr} {
+      width: ( 100% / $grid-columns ) * $nr;
     }
+
+    .multiple-wrp > .multiple > *:not(.multiple-wrp).md-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+    }
+
+  }
 
 }
 
@@ -160,17 +160,17 @@
 
 @include large-up {
 
-    @for $nr from 1 through $grid-columns {
+  @for $nr from 1 through $grid-columns {
 
-        .lg-#{$nr} {
-            width: ( 100% / $grid-columns ) * $nr;
-        }
-
-        .multiple-wrp > .multiple > *:not(.multiple-wrp).lg-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
-        }
-
+    .lg-#{$nr} {
+      width: ( 100% / $grid-columns ) * $nr;
     }
+
+    .multiple-wrp > .multiple > *:not(.multiple-wrp).lg-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+    }
+
+  }
 
 }
 
@@ -178,16 +178,16 @@
 
 @include xlarge-up {
 
-    @for $nr from 1 through $grid-columns {
+  @for $nr from 1 through $grid-columns {
 
-        .xl-#{$nr} {
-            width: ( 100% / $grid-columns ) * $nr;
-        }
-
-        .multiple-wrp > .multiple > *:not(.multiple-wrp).xl-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-            width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
-        }
-
+    .xl-#{$nr} {
+      width: ( 100% / $grid-columns ) * $nr;
     }
+
+    .multiple-wrp > .multiple > *:not(.multiple-wrp).xl-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+    }
+
+  }
 
 }

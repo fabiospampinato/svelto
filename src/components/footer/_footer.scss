@@ -12,38 +12,38 @@
 
 .footer {
 
-    position: relative;
-    margin-bottom: $layout-gutter;
-    padding: $layout-gutter;
-    background-color: $footer-bg-color;
+  position: relative;
+  margin-bottom: $layout-gutter;
+  padding: $layout-gutter;
+  background-color: $footer-bg-color;
 
-    &.beveled {
+  &.beveled {
 
-        &:before, &:after {
-            position: absolute;
-            top: -$footer-beveled-size;
-            width: $footer-beveled-size;
-            height: $footer-beveled-size;
-            content: '';
-            pointer-events: none;
-            background-image: radial-gradient(transparent 70.72%, $footer-bg-color 70.72%);
-            background-size: 200% 200%;
-        }
-
-        &:before {
-            left: 0;
-            background-position: bottom left;
-        }
-
-        &:after {
-            right: 0;
-            background-position: bottom right;
-        }
-
+    &:before, &:after {
+      position: absolute;
+      top: -$footer-beveled-size;
+      width: $footer-beveled-size;
+      height: $footer-beveled-size;
+      content: '';
+      pointer-events: none;
+      background-image: radial-gradient(transparent 70.72%, $footer-bg-color 70.72%);
+      background-size: 200% 200%;
     }
 
-    & > *:last-child {
-        margin-bottom: 0;
+    &:before {
+      left: 0;
+      background-position: bottom left;
     }
+
+    &:after {
+      right: 0;
+      background-position: bottom right;
+    }
+
+  }
+
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 
 }

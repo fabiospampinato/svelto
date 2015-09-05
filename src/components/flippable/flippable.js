@@ -10,64 +10,64 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* FLIPPABLE */
+  /* FLIPPABLE */
 
-    $.widget ( 'presto.flippable', {
+  $.widget ( 'presto.flippable', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                flipper: '.flipper'
-            },
-            callbacks: {
-                font: _.noop,
-                back: _.noop,
-                flipped: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        flipper: '.flipper'
+      },
+      callbacks: {
+        font: _.noop,
+        back: _.noop,
+        flipped: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$flippable = this.$element;
-            this.$front = this.$flippable.find ( '.flippable-front' );
-            this.$back = this.$flippable.find ( '.flippable-back' );
+      this.$flippable = this.$element;
+      this.$front = this.$flippable.find ( '.flippable-front' );
+      this.$back = this.$flippable.find ( '.flippable-back' );
 
-            this.isFlipped = this.$flippable.hasClass ( 'flipped' );
+      this.isFlipped = this.$flippable.hasClass ( 'flipped' );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.flipper, this.flip );
+      this._on ( 'click', this.options.selectors.flipper, this.flip );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        flip: function () {
+    flip: function () {
 
-            this.isFlipped = !this.isFlipped;
+      this.isFlipped = !this.isFlipped;
 
-            this.$flippable.toggleClass ( 'flipped', this.isFlipped );
+      this.$flippable.toggleClass ( 'flipped', this.isFlipped );
 
-            this._trigger ( this.isFlipped ? 'front' : 'back' );
-            this._trigger ( 'flipped' );
+      this._trigger ( this.isFlipped ? 'front' : 'back' );
+      this._trigger ( 'flipped' );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.flippable-wrp').flippable ();
+    $('.flippable-wrp').flippable ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));

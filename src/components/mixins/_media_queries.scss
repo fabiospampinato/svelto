@@ -8,25 +8,25 @@
 
 @mixin screen ( $min_width, $max_width ) {
 
-    @media screen and (min-width: $min_width) and (max-width: $max_width) {
-        @content;
-    }
+  @media screen and (min-width: $min_width) and (max-width: $max_width) {
+    @content;
+  }
 
 }
 
 @mixin max-screen ( $width ) {
 
-    @media screen and (max-width: $width) {
-        @content;
-    }
+  @media screen and (max-width: $width) {
+    @content;
+  }
 
 }
 
 @mixin min-screen ( $width ) {
 
-    @media screen and (min-width: $width) {
-        @content;
-    }
+  @media screen and (min-width: $width) {
+    @content;
+  }
 
 }
 
@@ -34,25 +34,25 @@
 
 @mixin screen-height ( $min_height, $max_height ) {
 
-    @media screen and (min-height: $min_height) and (max-height: $max_height)   {
-        @content;
-    }
+  @media screen and (min-height: $min_height) and (max-height: $max_height)   {
+    @content;
+  }
 
 }
 
 @mixin max-screen-height ( $width ) {
 
-    @media screen and (max-height: $width) {
-        @content;
-    }
+  @media screen and (max-height: $width) {
+    @content;
+  }
 
 }
 
 @mixin min-screen-height ( $width ) {
 
-    @media screen and (min-height: $width) {
-        @content;
-    }
+  @media screen and (min-height: $width) {
+    @content;
+  }
 
 }
 
@@ -60,15 +60,15 @@
 
 @mixin hdpi ( $ratio: 2 ) {
 
-    //FIXME: Do we need borwsers prefixes here?
+  //FIXME: Do we need borwsers prefixes here?
 
-    @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
-           only screen and (    min--moz-device-pixel-ratio: $ratio ),
-           only screen and (      -o-min-device-pixel-ratio: #{$ratio}/1 ),
-           only screen and (         min-device-pixel-ratio: #{$ratio} ),
-           only screen and (                 min-resolution: #{round($ratio*96)}dpi ),
-           only screen and (                 min-resolution: #{$ratio}dppx ) {
-        @content;
-    }
+  @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
+       only screen and (  min--moz-device-pixel-ratio: $ratio ),
+       only screen and (    -o-min-device-pixel-ratio: #{$ratio}/1 ),
+       only screen and (     min-device-pixel-ratio: #{$ratio} ),
+       only screen and (         min-resolution: #{round($ratio*96)}dpi ),
+       only screen and (         min-resolution: #{$ratio}dppx ) {
+    @content;
+  }
 
 }

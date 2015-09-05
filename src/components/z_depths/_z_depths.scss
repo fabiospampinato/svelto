@@ -12,9 +12,9 @@
 
 @mixin z-depth ( $depth, $extra: '' ) {
 
-    $z-depth: map-get($z-depths, $depth);
+  $z-depth: map-get($z-depths, $depth);
 
-    box-shadow: $z-depth #{$extra};
+  box-shadow: $z-depth #{$extra};
 
 }
 
@@ -22,8 +22,8 @@
 
 @each $depth, $shadow in $z-depths {
 
-    .z-depth-#{$depth} {
-        @include z-depth ( $depth, '!important' );
-    }
+  .z-depth-#{$depth} {
+    @include z-depth ( $depth, '!important' );
+  }
 
 }

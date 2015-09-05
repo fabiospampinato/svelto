@@ -9,54 +9,54 @@
 /* TRIANGLES */
 
 .triangle, .triangle-up {
-    @include triangle ();
-    position: relative;
-    margin-bottom: $layout-gutter;
+  @include triangle ();
+  position: relative;
+  margin-bottom: $layout-gutter;
 }
 
 .triangle-down {
-    @include triangle ( 1em, $color-gray, "down" );
-    position: relative;
-    margin-bottom: $layout-gutter;
+  @include triangle ( 1em, $color-gray, "down" );
+  position: relative;
+  margin-bottom: $layout-gutter;
 }
 
 .triangle-right {
-    @include triangle ( 1em, $color-gray, "right" );
-    position: relative;
-    margin-bottom: $layout-gutter;
+  @include triangle ( 1em, $color-gray, "right" );
+  position: relative;
+  margin-bottom: $layout-gutter;
 }
 
 .triangle-left {
-    @include triangle ( 1em, $color-gray, "left" );
-    position: relative;
-    margin-bottom: $layout-gutter;
+  @include triangle ( 1em, $color-gray, "left" );
+  position: relative;
+  margin-bottom: $layout-gutter;
 }
 
 /* SQUARES */
 
 .square {
-    @include square ();
-    position: relative;
-    margin-bottom: $layout-gutter;
+  @include square ();
+  position: relative;
+  margin-bottom: $layout-gutter;
 }
 
 .square-sample {
 
-    @include square ( 62px );
-    overflow: hidden;
-    position: relative;
-    margin-bottom: $layout-gutter;
-    padding: $layout-gutter-half;
+  @include square ( 62px );
+  overflow: hidden;
+  position: relative;
+  margin-bottom: $layout-gutter;
+  padding: $layout-gutter-half;
 
-    & > p {
-        @include size ( 'xxsmall' );
-    }
+  & > p {
+    @include size ( 'xxsmall' );
+  }
 
 }
 
 /* CIRCLES */
 
 .circle {
-    @include circle ();
-    margin-bottom: $layout-gutter;
+  @include circle ();
+  margin-bottom: $layout-gutter;
 }

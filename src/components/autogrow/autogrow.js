@@ -12,113 +12,113 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* AUTOGROW */
+  /* AUTOGROW */
 
-    $.widget ( 'presto.autogrow', {
+  $.widget ( 'presto.autogrow', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            minimum_width: 0,
-            minimum_height: 0,
-            callbacks: {
-                update: _.noop
-            }
-        },
+    options: {
+      minimum_width: 0,
+      minimum_height: 0,
+      callbacks: {
+        update: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$growable = this.$element;
+      this.$growable = this.$element;
 
-            this.isInput = this.$growable.is ( 'input' );
-            this.isTextarea = this.$growable.is ( 'textarea' );
+      this.isInput = this.$growable.is ( 'input' );
+      this.isTextarea = this.$growable.is ( 'textarea' );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this.update ();
+      this.update ();
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'input change', this.update );
+      this._on ( 'input change', this.update );
 
-        },
+    },
 
-        /* INPUT */
+    /* INPUT */
 
-        _update_input_width: function () {
+    _update_input_width: function () {
 
-            var needed_width = this._get_input_needed_width ( this.$growable );
+      var needed_width = this._get_input_needed_width ( this.$growable );
 
-            this.$growable.width ( Math.max ( needed_width, this.options.minimum_width ) );
+      this.$growable.width ( Math.max ( needed_width, this.options.minimum_width ) );
 
-        },
+    },
 
-        _get_input_needed_width: function () {
+    _get_input_needed_width: function () {
 
-            var $span = $( '<span>' + this.$growable.val () + '</span>' );
+      var $span = $( '<span>' + this.$growable.val () + '</span>' );
 
-            $span.css ({
-                font: this.$growable.css ( 'font' ),
-                position: 'absolute',
-                opacity: 0
-            });
+      $span.css ({
+        font: this.$growable.css ( 'font' ),
+        position: 'absolute',
+        opacity: 0
+      });
 
-            $span.appendTo ( $body );
+      $span.appendTo ( $body );
 
-            var width = $span.width ();
+      var width = $span.width ();
 
-            $span.remove ();
+      $span.remove ();
 
-            return width;
+      return width;
 
-        },
+    },
 
-        /* TEXTAREA */
+    /* TEXTAREA */
 
-        _update_textarea_height: function () {
+    _update_textarea_height: function () {
 
-            var needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
+      var needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
 
-            this.$growable.height ( Math.max ( needed_height, this.options.minimum_height ) );
+      this.$growable.height ( Math.max ( needed_height, this.options.minimum_height ) );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        update: function () {
+    update: function () {
 
-            if ( this.isInput ) {
+      if ( this.isInput ) {
 
-                this._update_input_width ();
+        this._update_input_width ();
 
-                this._trigger ( 'update' );
+        this._trigger ( 'update' );
 
-            } else if ( this.isTextarea ) {
+      } else if ( this.isTextarea ) {
 
-                this._update_textarea_height ();
+        this._update_textarea_height ();
 
-                this._trigger ( 'update' );
+        this._trigger ( 'update' );
 
-            }
+      }
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
+    $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));

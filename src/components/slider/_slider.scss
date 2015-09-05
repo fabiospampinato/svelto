@@ -15,190 +15,190 @@
 
 .slider {
 
-    display: flex;
-    align-items: center;
-    height: $slider-height;
-    margin-bottom: $layout-gutter;
+  display: flex;
+  align-items: center;
+  height: $slider-height;
+  margin-bottom: $layout-gutter;
 
-    & > input {
-        display: none;
+  & > input {
+    display: none;
+  }
+
+  & > .slider-bar-wrp {
+
+    position: relative;
+    flex-grow: 1;
+    order: 1;
+
+    & > .slider-bar {
+
+      & > .slider-unhighlighted {
+
+        @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
+        position: relative;
+        overflow: hidden;
+        height: $slider-unhighlighted-height;
+        transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
+        border-radius: $slider-unhighlighted-border-radius;
+
+        & > .slider-highlighted {
+          @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
+          position: absolute;
+          right: 100%;
+          width: 100%;
+          height: 100%;
+          border-radius: inherit;
+        }
+
+      }
+
+    }
+
+    & > .slider-handler-wrp {
+
+      position: absolute;
+      left: 0;
+      margin-top: - ( $slider-handler-half-size + ( $slider-unhighlighted-height / 2 ) );
+      margin-left: - $slider-handler-half-size;
+
+      & > .slider-handler {
+
+        @include color ( $slider-handler-color, $slider-handler-color-basic );
+        @include z-depth ( $slider-handler-z-depth );
+        z-index: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: $slider-handler-size;
+        height: $slider-handler-size;
+        transition: transform $slider-transition-all-duration;
+        transform: scale(1);
+        border-radius: $slider-handler-border-radius;
+
+        &:before {
+          position: absolute;
+          z-index: -1;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          content: '';
+          transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
+          transition-duration: $slider-transition-all-duration;
+          transition-property: opacity, transform;
+          transform: scale($switch-handler-before-scale-inactive);
+          opacity: 0;
+          border-radius: 50%;
+          background-color: inherit;
+        }
+
+        & > .slider-label {
+          font-size: $slider-handler-label-font-size;
+          transition-duration: $slider-transition-all-duration;
+          transition-property: opacity, transform;
+          transform: scale(0);
+          opacity: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+  & > .slider-min, & > .slider-max {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: $slider-min-max-width;
+    height: $slider-height;
+    text-align: center;
+  }
+
+  & > .slider-min {
+
+    order: 0;
+    margin-right: $slider-handler-half-size;
+
+    &:after {
+      content: attr(data-min)
+    }
+
+  }
+
+  & > .slider-max {
+
+    order: 2;
+    margin-left: $slider-handler-half-size;
+
+    &:after {
+      content: attr(data-max)
+    }
+
+  }
+
+  &:not(.slider-disabled) {
+
+    & > .slider-min, & > .slider-max {
+
+      cursor: pointer;
+
+      &:hover:after {
+        @extend %icon;
+      }
+
+    }
+
+    & > .slider-min:hover:after {
+      @extend .icon-content-remove:before;
+    }
+
+    & > .slider-max:hover:after {
+      @extend .icon-content-add:before;
     }
 
     & > .slider-bar-wrp {
 
-        position: relative;
-        flex-grow: 1;
-        order: 1;
+      & > .slider-bar > .slider-unhighlighted {
 
-        & > .slider-bar {
+        cursor: pointer;
 
-            & > .slider-unhighlighted {
-
-                @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
-                position: relative;
-                overflow: hidden;
-                height: $slider-unhighlighted-height;
-                transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
-                border-radius: $slider-unhighlighted-border-radius;
-
-                & > .slider-highlighted {
-                    @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
-                    position: absolute;
-                    right: 100%;
-                    width: 100%;
-                    height: 100%;
-                    border-radius: inherit;
-                }
-
-            }
-
+        & > .slider-highlighted {
+          cursor: pointer;
         }
 
-        & > .slider-handler-wrp {
+      }
 
-            position: absolute;
-            left: 0;
-            margin-top: - ( $slider-handler-half-size + ( $slider-unhighlighted-height / 2 ) );
-            margin-left: - $slider-handler-half-size;
+      & > .slider-handler-wrp {
 
-            & > .slider-handler {
+        cursor: move;
 
-                @include color ( $slider-handler-color, $slider-handler-color-basic );
-                @include z-depth ( $slider-handler-z-depth );
-                z-index: 0;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: $slider-handler-size;
-                height: $slider-handler-size;
-                transition: transform $slider-transition-all-duration;
-                transform: scale(1);
-                border-radius: $slider-handler-border-radius;
-
-                &:before {
-                    position: absolute;
-                    z-index: -1;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    content: '';
-                    transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
-                    transition-duration: $slider-transition-all-duration;
-                    transition-property: opacity, transform;
-                    transform: scale($switch-handler-before-scale-inactive);
-                    opacity: 0;
-                    border-radius: 50%;
-                    background-color: inherit;
-                }
-
-                & > .slider-label {
-                    font-size: $slider-handler-label-font-size;
-                    transition-duration: $slider-transition-all-duration;
-                    transition-property: opacity, transform;
-                    transform: scale(0);
-                    opacity: 0;
-                }
-
-            }
-
+        &:active > .slider-handler {
+          transform: scale($slider-handler-active-transform-scale) !important;
         }
+
+        &:active > .slider-handler:before {
+          transform: scale($switch-handler-before-scale-active);
+          opacity: $switch-handler-before-active-opacity;
+        }
+
+      }
 
     }
 
-    & > .slider-min, & > .slider-max {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: $slider-min-max-width;
-        height: $slider-height;
-        text-align: center;
+  }
+
+  &.slider-disabled {
+    opacity: $slider-disabled-opacity;
+  }
+
+  &:hover, &:active {
+
+    .slider-label {
+      transform: scale(1) !important;
+      opacity: 1 !important;
     }
 
-    & > .slider-min {
-
-        order: 0;
-        margin-right: $slider-handler-half-size;
-
-        &:after {
-            content: attr(data-min)
-        }
-
-    }
-
-    & > .slider-max {
-
-        order: 2;
-        margin-left: $slider-handler-half-size;
-
-        &:after {
-            content: attr(data-max)
-        }
-
-    }
-
-    &:not(.slider-disabled) {
-
-        & > .slider-min, & > .slider-max {
-
-            cursor: pointer;
-
-            &:hover:after {
-                @extend %icon;
-            }
-
-        }
-
-        & > .slider-min:hover:after {
-            @extend .icon-content-remove:before;
-        }
-
-        & > .slider-max:hover:after {
-            @extend .icon-content-add:before;
-        }
-
-        & > .slider-bar-wrp {
-
-            & > .slider-bar > .slider-unhighlighted {
-
-                cursor: pointer;
-
-                & > .slider-highlighted {
-                    cursor: pointer;
-                }
-
-            }
-
-            & > .slider-handler-wrp {
-
-                cursor: move;
-
-                &:active > .slider-handler {
-                    transform: scale($slider-handler-active-transform-scale) !important;
-                }
-
-                &:active > .slider-handler:before {
-                    transform: scale($switch-handler-before-scale-active);
-                    opacity: $switch-handler-before-active-opacity;
-                }
-
-            }
-
-        }
-
-    }
-
-    &.slider-disabled {
-        opacity: $slider-disabled-opacity;
-    }
-
-    &:hover, &:active {
-
-        .slider-label {
-            transform: scale(1) !important;
-            opacity: 1 !important;
-        }
-
-    }
+  }
 
 }

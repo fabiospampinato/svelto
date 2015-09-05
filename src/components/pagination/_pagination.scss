@@ -14,25 +14,25 @@
 
 .pagination {
 
-    .current {
+  .current {
 
-        & > * {
-            color: $pagination-current-color;
-        }
-
-        &:after {
-            content: '';
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 100%;
-            border-bottom: $pagination-current-highlight-size solid $pagination-current-color;
-            pointer-events: none;
-            position: absolute;
-            border-bottom-left-radius: inherit;
-            border-bottom-right-radius: inherit;
-        }
-
+    & > * {
+      color: $pagination-current-color;
     }
+
+    &:after {
+      content: '';
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100%;
+      border-bottom: $pagination-current-highlight-size solid $pagination-current-color;
+      pointer-events: none;
+      position: absolute;
+      border-bottom-left-radius: inherit;
+      border-bottom-right-radius: inherit;
+    }
+
+  }
 
 }

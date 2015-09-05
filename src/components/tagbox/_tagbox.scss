@@ -12,21 +12,21 @@
 
 .tagbox {
 
-    @include color ( $tagbox-color, $tagbox-color-basic );
-    margin-bottom: $layout-gutter;
+  @include color ( $tagbox-color, $tagbox-color-basic );
+  margin-bottom: $layout-gutter;
 
-    & > input {
-        display: none;
-    }
+  & > input {
+    display: none;
+  }
 
-    & > .multiple-wrp {
-        margin-bottom: 0;
-    }
+  & > .multiple-wrp {
+    margin-bottom: 0;
+  }
 
-    .text-field {
-        @include color ( $tagbox-input-color, $tagbox-input-color-basic );
-        @include size ( $tagbox-input-size );
-        min-width: $tagbox-input-min-width;
-    }
+  .text-field {
+    @include color ( $tagbox-input-color, $tagbox-input-color-basic );
+    @include size ( $tagbox-input-size );
+    min-width: $tagbox-input-min-width;
+  }
 
 }

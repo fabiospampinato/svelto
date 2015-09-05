@@ -12,43 +12,43 @@
 
 .checkbox {
 
-    transition: opacity $checkbox-transition-opacity-duration;
+  transition: opacity $checkbox-transition-opacity-duration;
 
-    & > input {
-        display: none;
+  & > input {
+    display: none;
+  }
+
+  .icon {
+
+    transition: opacity $checkbox-icon-transition-opacity-duration;
+
+    &.on {
+      @include color-text ( $checkbox-icon-on-color );
+      opacity: 0;
     }
 
-    .icon {
-
-        transition: opacity $checkbox-icon-transition-opacity-duration;
-
-        &.on {
-            @include color-text ( $checkbox-icon-on-color );
-            opacity: 0;
-        }
-
-        &.off {
-            margin-left: -1.635em; //FIXME: it should be hardcoded here...
-            opacity: 1;
-        }
-
+    &.off {
+      margin-left: -1.635em; //FIXME: it should be hardcoded here...
+      opacity: 1;
     }
 
-    &.checked .icon {
+  }
 
-        &.on {
-            opacity: 1;
-        }
+  &.checked .icon {
 
-        &.off {
-            opacity: 0;
-        }
-
+    &.on {
+      opacity: 1;
     }
 
-    &.checkbox-disabled {
-        cursor: default;
-        opacity: $checkbox-disabled-opacity;
+    &.off {
+      opacity: 0;
     }
+
+  }
+
+  &.checkbox-disabled {
+    cursor: default;
+    opacity: $checkbox-disabled-opacity;
+  }
 
 }

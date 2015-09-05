@@ -15,198 +15,198 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* SORTABLE */
+  /* SORTABLE */
 
-    $.widget ( 'presto.sortable', {
+  $.widget ( 'presto.sortable', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            sorters: {
-                int: function ( a, b ) {
-                    return parseInt ( a, 10 ) - parseInt ( b, 10 );
-                },
-                float: function ( a, b ) {
-                    return parseFloat ( a ) - parseFloat ( b );
-                },
-                string: function ( a, b ) {
-                    a = a.toLocaleLowerCase ();
-                    b = b.toLocaleLowerCase ();
-                    return a.localeCompare ( b );
-                }
-            },
-            callbacks: {
-                sort: _.noop
-            }
+    options: {
+      sorters: {
+        int: function ( a, b ) {
+          return parseInt ( a, 10 ) - parseInt ( b, 10 );
         },
-
-        /* SPECIAL */
-
-        _variables: function () {
-
-            this.$table = this.$element;
-            this.$headers = this.$table.find ( 'thead th' );
-            this.$sortables = this.$headers.filter ( '[data-sort]' );
-            this.$tbody = this.$table.find ( 'tbody' );
-
-            this.table = this.element;
-            this.tbody = this.$tbody.get ( 0 );
-
-            this.sort_datas = {}; //INFO: Caching object for datas and references to rows
-
-            this.current_index = false; //INFO: `$headers` index, not `$sortables` index
-            this.current_direction = false;;
-
+        float: function ( a, b ) {
+          return parseFloat ( a ) - parseFloat ( b );
         },
+        string: function ( a, b ) {
+          a = a.toLocaleLowerCase ();
+          b = b.toLocaleLowerCase ();
+          return a.localeCompare ( b );
+        }
+      },
+      callbacks: {
+        sort: _.noop
+      }
+    },
 
-        _init: function () {
+    /* SPECIAL */
 
-            var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
+    _variables: function () {
 
-            if ( $initial.length ) {
+      this.$table = this.$element;
+      this.$headers = this.$table.find ( 'thead th' );
+      this.$sortables = this.$headers.filter ( '[data-sort]' );
+      this.$tbody = this.$table.find ( 'tbody' );
 
-                this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( 'asc' ) ? 'asc' : 'desc' ) );
+      this.table = this.element;
+      this.tbody = this.$tbody.get ( 0 );
 
-            }
+      this.sort_datas = {}; //INFO: Caching object for datas and references to rows
 
-        },
+      this.current_index = false; //INFO: `$headers` index, not `$sortables` index
+      this.current_direction = false;;
 
-        _events: function () {
+    },
 
-            this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
+    _init: function () {
 
-            this._on ( this.$sortables, 'click', this._handler_click );
+      var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
 
-        },
+      if ( $initial.length ) {
 
-        /* CHANGE */
+        this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( 'asc' ) ? 'asc' : 'desc' ) );
 
-        _handler_change: function () {
+      }
 
-            if ( this.current_index ) {
+    },
 
-                this.sort_datas = {};
+    _events: function () {
 
-                this.sort ( this.current_index, this.current_direction );
+      this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
 
-            }
+      this._on ( this.$sortables, 'click', this._handler_click );
 
-        },
+    },
 
-        /* CLICK */
+    /* CHANGE */
 
-        _handler_click: function ( event ) {
+    _handler_change: function () {
 
-            var new_index = this.$headers.index ( event.target ),
-                new_direction = this.current_index === new_index
-                                    ? this.current_direction === 'asc'
-                                        ? 'desc'
-                                        : 'asc'
-                                    : 'asc';
+      if ( this.current_index ) {
 
-            this.sort ( new_index, new_direction );
+        this.sort_datas = {};
 
-        },
+        this.sort ( this.current_index, this.current_direction );
 
-        /* SORT */
+      }
 
-        sort: function ( index, direction ) {
+    },
 
-            // VALIDATE
+    /* CLICK */
 
-            var $sortable = this.$headers.eq ( index );
+    _handler_click: function ( event ) {
 
-            if ( !$sortable.length ) return; // bad index
+      var new_index = this.$headers.index ( event.target ),
+        new_direction = this.current_index === new_index
+                  ? this.current_direction === 'asc'
+                    ? 'desc'
+                    : 'asc'
+                  : 'asc';
 
-            var sorter_name = $sortable.data ( 'sort' );
+      this.sort ( new_index, new_direction );
 
-            if ( !sorter_name ) return; // unsortable column
+    },
 
-            var sorter = this.options.sorters[sorter_name];
+    /* SORT */
 
-            if ( !sorter ) return; // unsupported sorter
+    sort: function ( index, direction ) {
 
-            direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
+      // VALIDATE
 
-            // STYLE
+      var $sortable = this.$headers.eq ( index );
 
-            if ( this.current_index !== false ) {
+      if ( !$sortable.length ) return; // bad index
 
-                this.$sortables.eq ( this.current_index ).removeClass ( this.current_direction );
+      var sorter_name = $sortable.data ( 'sort' );
 
-            }
+      if ( !sorter_name ) return; // unsortable column
 
-            $sortable.addClass ( direction );
+      var sorter = this.options.sorters[sorter_name];
 
-            // CHECKING CACHED DATAS
+      if ( !sorter ) return; // unsupported sorter
 
-            if ( _.isUndefined ( this.sort_datas[index] ) ) {
+      direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
 
-                // VARIABLES
+      // STYLE
 
-                var $trs = this.$tbody.find ( 'tr:not(.empty)' );
+      if ( this.current_index !== false ) {
 
-                this.sort_datas[index] = Array ( $trs.length );
+        this.$sortables.eq ( this.current_index ).removeClass ( this.current_direction );
 
-                // POPULATE
+      }
 
-                for ( var i = 0, l = $trs.length; i < l; i++ ) {
+      $sortable.addClass ( direction );
 
-                    var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
-                        value = $td.data ( 'sort-value' ) || $td.text ();
+      // CHECKING CACHED DATAS
 
-                    this.sort_datas[index][i] = [$trs.get ( i ), value];
+      if ( _.isUndefined ( this.sort_datas[index] ) ) {
 
-                }
+        // VARIABLES
 
-            }
+        var $trs = this.$tbody.find ( 'tr:not(.empty)' );
 
-            // SORT
+        this.sort_datas[index] = Array ( $trs.length );
 
-            this.sort_datas[index].sort ( function ( a, b ) {
+        // POPULATE
 
-                return sorter ( a[1], b[1] );
+        for ( var i = 0, l = $trs.length; i < l; i++ ) {
 
-            });
+          var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
+            value = $td.data ( 'sort-value' ) || $td.text ();
 
-            if ( direction === 'desc' ) this.sort_datas[index].reverse ();
-
-            // APPEND
-
-            this.table.removeChild ( this.tbody ); // detach
-
-            for ( var i = 0, l = this.sort_datas[index].length; i < l; i++ ) {
-
-                this.tbody.appendChild ( this.sort_datas[index][i][0] ); // reorder
-
-            }
-
-            this.table.appendChild ( this.tbody ); // attach
-
-            // UPDATE
-
-            this.current_index = index;
-            this.current_direction = direction;
-
-            // TRIGGER
-
-            this._trigger ( 'sort', {
-                index: this.current_index,
-                direction: this.current_direction
-            });
+          this.sort_datas[index][i] = [$trs.get ( i ), value];
 
         }
 
-    });
+      }
 
-    /* READY */
+      // SORT
 
-    $(function () {
+      this.sort_datas[index].sort ( function ( a, b ) {
 
-        $('table.sortable').sortable ();
+        return sorter ( a[1], b[1] );
 
-    });
+      });
+
+      if ( direction === 'desc' ) this.sort_datas[index].reverse ();
+
+      // APPEND
+
+      this.table.removeChild ( this.tbody ); // detach
+
+      for ( var i = 0, l = this.sort_datas[index].length; i < l; i++ ) {
+
+        this.tbody.appendChild ( this.sort_datas[index][i][0] ); // reorder
+
+      }
+
+      this.table.appendChild ( this.tbody ); // attach
+
+      // UPDATE
+
+      this.current_index = index;
+      this.current_direction = direction;
+
+      // TRIGGER
+
+      this._trigger ( 'sort', {
+        index: this.current_index,
+        direction: this.current_direction
+      });
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('table.sortable').sortable ();
+
+  });
 
 }( jQuery, _, window, document ));

@@ -14,66 +14,66 @@
 
 .chat-msg {
 
-    display: flex;
-    margin-bottom: $layout-gutter;
+  display: flex;
+  margin-bottom: $layout-gutter;
 
-    &.level-3, &[class*='level-'] {
-        margin-left: $chat-msg-level-3-margin-left;
+  &.level-3, &[class*='level-'] {
+    margin-left: $chat-msg-level-3-margin-left;
+  }
+
+  &.level-2 {
+    margin-left: $chat-msg-level-2-margin-left;
+  }
+
+  &.level-1 {
+    margin-left: $chat-msg-level-1-margin-left;
+  }
+
+  & > .chat-msg-img {
+
+    overflow:hidden;
+    order: 1;
+    width: $chat-msg-img-size;
+    height: $chat-msg-img-size;
+    margin-right: $layout-gutter;
+    transition: opacity $chat-msg-img-transition-duration;
+    opacity: 1;
+    border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
+    border-radius: 100%;
+
+    & > img {
+      width: 100%;
+      height: 100%;
     }
 
-    &.level-2 {
-        margin-left: $chat-msg-level-2-margin-left;
+  }
+
+  & > a.chat-msg-img:hover {
+    opacity: $chat-msg-img-opacity-hover;
+  }
+
+  & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
+    @include color ( $chat-msg-color, $chat-msg-color-basic );
+    z-index: 1;
+    order: 2;
+    width: 1em;
+    height: 1em;
+    margin-top: 0.9em;
+    margin-right: -0.5em;
+    transform: rotate(45deg);
+    border-width: 0 0 1px 1px;
+    border-style: solid;
+  }
+
+  & > .chat-msg-content {
+
+    flex-grow: 1;
+    order: 3;
+
+    & > .container {
+      margin-bottom: 0;
     }
 
-    &.level-1 {
-        margin-left: $chat-msg-level-1-margin-left;
-    }
-
-    & > .chat-msg-img {
-
-        overflow:hidden;
-        order: 1;
-        width: $chat-msg-img-size;
-        height: $chat-msg-img-size;
-        margin-right: $layout-gutter;
-        transition: opacity $chat-msg-img-transition-duration;
-        opacity: 1;
-        border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
-        border-radius: 100%;
-
-        & > img {
-            width: 100%;
-            height: 100%;
-        }
-
-    }
-
-    & > a.chat-msg-img:hover {
-        opacity: $chat-msg-img-opacity-hover;
-    }
-
-    & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
-        @include color ( $chat-msg-color, $chat-msg-color-basic );
-        z-index: 1;
-        order: 2;
-        width: 1em;
-        height: 1em;
-        margin-top: 0.9em;
-        margin-right: -0.5em;
-        transform: rotate(45deg);
-        border-width: 0 0 1px 1px;
-        border-style: solid;
-    }
-
-    & > .chat-msg-content {
-
-        flex-grow: 1;
-        order: 3;
-
-        & > .container {
-            margin-bottom: 0;
-        }
-
-    }
+  }
 
 }

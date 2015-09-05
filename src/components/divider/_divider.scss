@@ -11,11 +11,11 @@
 /* DEFAULT DIVIDER */
 
 hr {
-    height: 1px;
-    margin-top: - $layout-gutter-half;
-    margin-bottom: $layout-gutter-half;
-    border: none;
-    background-color: $divider-linear-bg-color;
+  height: 1px;
+  margin-top: - $layout-gutter-half;
+  margin-bottom: $layout-gutter-half;
+  border: none;
+  background-color: $divider-linear-bg-color;
 }
 
 /* DIVIDER */
@@ -24,72 +24,72 @@ hr {
 
 .divider-wrp {
 
-    &.block {
+  &.block {
 
-        margin-bottom: $layout-gutter;
-        text-align: center;
+    margin-bottom: $layout-gutter;
+    text-align: center;
 
-        & > .divider {
-            @include color ( $divider-block-color, $divider-block-color-basic );
-            display: inline-block;
-            padding: $divider-block-padding;
-            border-radius: 10000px 10000px !important; //FIXME: we should use `!important`
-        }
+    & > .divider {
+      @include color ( $divider-block-color, $divider-block-color-basic );
+      display: inline-block;
+      padding: $divider-block-padding;
+      border-radius: 10000px 10000px !important; //FIXME: we should use `!important`
+    }
+
+  }
+
+  &.linear {
+
+    display: flex;
+    align-items: center;
+    margin-bottom: $layout-gutter;
+
+    & > hr {
+
+      flex-grow: 1;
+      margin: 0;
+      min-width: $layout-gutter;
+
+      &.left {
+        order: 0;
+      }
+
+      &.right {
+        order: 2;
+      }
 
     }
 
-    &.linear {
-
-        display: flex;
-        align-items: center;
-        margin-bottom: $layout-gutter;
-
-        & > hr {
-
-            flex-grow: 1;
-            margin: 0;
-            min-width: $layout-gutter;
-
-            &.left {
-                order: 0;
-            }
-
-            &.right {
-                order: 2;
-            }
-
-        }
-
-        & > .divider {
-            order: 1;
-            padding: $divider-linear-vertical-padding $divider-linear-horizontal-padding;
-        }
-
+    & > .divider {
+      order: 1;
+      padding: $divider-linear-vertical-padding $divider-linear-horizontal-padding;
     }
 
-    &.text {
+  }
 
-        margin-bottom: $layout-gutter;
+  &.text {
 
-        & > .divider {
-            @include size ( $divider-text-size );
-            font-weight: $divider-text-font-weight;
-            margin: 0 $layout-gutter;
-            opacity: $divider-text-opacity;
-        }
+    margin-bottom: $layout-gutter;
 
+    & > .divider {
+      @include size ( $divider-text-size );
+      font-weight: $divider-text-font-weight;
+      margin: 0 $layout-gutter;
+      opacity: $divider-text-opacity;
     }
 
-    &.spacer {
+  }
 
-        & > .divider {
-            height: $divider-spacer-height;
-        }
+  &.spacer {
 
+    & > .divider {
+      height: $divider-spacer-height;
     }
 
-    & > .divider > *:last-child {
-        margin-bottom: 0 !important;
-    }
+  }
+
+  & > .divider > *:last-child {
+    margin-bottom: 0 !important;
+  }
 
 }

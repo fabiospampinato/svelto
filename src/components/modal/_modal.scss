@@ -12,73 +12,73 @@
 
 .modal {
 
+  position: fixed;
+  z-index: $modal-z-index;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  &.fullscreen > .container {
+    width: 100vw;
+    max-width: 100vw;
+    height: 100vh;
+    max-height: 100vh;
+    border-radius: 0;
+  }
+
+  & > .background {
     position: fixed;
-    z-index: $modal-z-index;
+    z-index: -1;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    cursor: pointer;
+    transition: background-color $modal-transition-all-duration;
+  }
 
-    &.fullscreen > .container {
-        width: 100vw;
-        max-width: 100vw;
-        height: 100vh;
-        max-height: 100vh;
-        border-radius: 0;
+  & > .container {
+
+    @include z-depth ( $modal-z-depth );
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    max-width: $modal-max-width;
+    max-height: $modal-max-height;
+    margin: auto;
+    transition-property: transform, opacity;
+    transition-duration: $modal-transition-all-duration;
+
+    & > .content {
+      overflow: auto;
     }
 
+  }
+
+  /* ANIMATIONS */
+
+  &:not(.active) {
+
+    pointer-events: none;
+
+    & > .container {
+      transform: translate(-50%, -50%) scale(0.9);
+      opacity: 0;
+    }
+
+  }
+
+  &.active {
+
     & > .background {
-        position: fixed;
-        z-index: -1;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        cursor: pointer;
-        transition: background-color $modal-transition-all-duration;
+      background-color: $modal-background-color;
     }
 
     & > .container {
-
-        @include z-depth ( $modal-z-depth );
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        max-width: $modal-max-width;
-        max-height: $modal-max-height;
-        margin: auto;
-        transition-property: transform, opacity;
-        transition-duration: $modal-transition-all-duration;
-
-        & > .content {
-            overflow: auto;
-        }
-
+      transform: translate(-50%, -50%) scale(1);
     }
 
-    /* ANIMATIONS */
-
-    &:not(.active) {
-
-        pointer-events: none;
-
-        & > .container {
-            transform: translate(-50%, -50%) scale(0.9);
-            opacity: 0;
-        }
-
-    }
-
-    &.active {
-
-        & > .background {
-            background-color: $modal-background-color;
-        }
-
-        & > .container {
-            transform: translate(-50%, -50%) scale(1);
-        }
-
-    }
+  }
 
 }

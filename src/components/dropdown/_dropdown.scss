@@ -18,139 +18,139 @@
 
 .dropdown {
 
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: $dropdown-z-index;
-    padding: $dropdown-padding;
-    transition: opacity $dropdown-transition-opacity-duration;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: $dropdown-z-index;
+  padding: $dropdown-padding;
+  transition: opacity $dropdown-transition-opacity-duration;
 
-    &.moving {
+  &.moving {
 
-        transition: transform $dropdown-transition-transform-duration;
-
-        & > .dropdown-tip {
-            transition: transform $dropdown-transition-transform-duration;
-        }
-
-    }
-
-    &.no-tip, &.attached {
-
-        & > .dropdown-tip {
-            display: none !important;
-        }
-
-    }
-
-    &.attached {
-
-        padding: 0;
-
-        &.positionate-top {
-
-            margin-bottom: - $outline-width;
-
-            & > .container {
-                border-bottom-right-radius: 0;
-                border-bottom-left-radius: 0;
-            }
-
-        }
-
-        &.positionate-bottom {
-
-            margin-top: - $outline-width;
-
-            & > .container {
-                border-top-left-radius: 0;
-                border-top-right-radius: 0;
-            }
-
-        }
-
-        &.positionate-left {
-            margin-right: - $outline-width;
-        }
-
-        &.positionate-right {
-            margin-left: - $outline-width;
-        }
-
-    }
+    transition: transform $dropdown-transition-transform-duration;
 
     & > .dropdown-tip {
+      transition: transform $dropdown-transition-transform-duration;
+    }
 
-        position: absolute;
-        z-index: 1;
-        display: none;
-        width: 0;
-        height: 0;
-        transform: translate3d(0,0,0);
+  }
 
-        &:before, &:after {
-            display: block;
-            content: '';
-        }
+  &.no-tip, &.attached {
 
-        &:before {
-            @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, up );
-            margin-left: - ( $dropdown-tip-bg-size / 2 );
-        }
+    & > .dropdown-tip {
+      display: none !important;
+    }
 
-        &:after {
-            @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, up );
-            margin-top: - ( $dropdown-tip-fg-size / 2 );
-            margin-left: - ( $dropdown-tip-fg-size / 2 );
-        }
+  }
 
-        &.top, &.bottom {
-            left: 50%;
-        }
+  &.attached {
 
-        &.top {
-            top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-        }
+    padding: 0;
 
-        &.bottom {
-            bottom: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-            transform: rotate(180deg);
-        }
+    &.positionate-top {
 
-        &.left, &.right {
-            top: 50%;
-            margin-top: - ( $dropdown-tip-bg-size / 4 );
-        }
+      margin-bottom: - $outline-width;
 
-        &.left {
-            left: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-            transform: rotate(-90deg);
-        }
-
-        &.right {
-            right: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-            transform: rotate(90deg);
-        }
+      & > .container {
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+      }
 
     }
 
-    &.positionate-top > .dropdown-tip.bottom, &.positionate-bottom > .dropdown-tip.top, &.positionate-left > .dropdown-tip.right, &.positionate-right > .dropdown-tip.left {
-        display: block;
+    &.positionate-bottom {
+
+      margin-top: - $outline-width;
+
+      & > .container {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+      }
+
     }
 
-    & > .container {
-        @include z-depth ( $dropdown-z-depth );
-        max-width: $dropdown-container-max-width;
-        max-height: $dropdown-container-max-height;
-        margin-bottom: 0;
-        border-width: $dropdown-border-width;
+    &.positionate-left {
+      margin-right: - $outline-width;
     }
 
-    /* ANIMATIONS */
-
-    &:not(.active) {
-        pointer-events: none;
-        opacity: 0;
+    &.positionate-right {
+      margin-left: - $outline-width;
     }
+
+  }
+
+  & > .dropdown-tip {
+
+    position: absolute;
+    z-index: 1;
+    display: none;
+    width: 0;
+    height: 0;
+    transform: translate3d(0,0,0);
+
+    &:before, &:after {
+      display: block;
+      content: '';
+    }
+
+    &:before {
+      @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, up );
+      margin-left: - ( $dropdown-tip-bg-size / 2 );
+    }
+
+    &:after {
+      @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, up );
+      margin-top: - ( $dropdown-tip-fg-size / 2 );
+      margin-left: - ( $dropdown-tip-fg-size / 2 );
+    }
+
+    &.top, &.bottom {
+      left: 50%;
+    }
+
+    &.top {
+      top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+    }
+
+    &.bottom {
+      bottom: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+      transform: rotate(180deg);
+    }
+
+    &.left, &.right {
+      top: 50%;
+      margin-top: - ( $dropdown-tip-bg-size / 4 );
+    }
+
+    &.left {
+      left: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+      transform: rotate(-90deg);
+    }
+
+    &.right {
+      right: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
+      transform: rotate(90deg);
+    }
+
+  }
+
+  &.positionate-top > .dropdown-tip.bottom, &.positionate-bottom > .dropdown-tip.top, &.positionate-left > .dropdown-tip.right, &.positionate-right > .dropdown-tip.left {
+    display: block;
+  }
+
+  & > .container {
+    @include z-depth ( $dropdown-z-depth );
+    max-width: $dropdown-container-max-width;
+    max-height: $dropdown-container-max-height;
+    margin-bottom: 0;
+    border-width: $dropdown-border-width;
+  }
+
+  /* ANIMATIONS */
+
+  &:not(.active) {
+    pointer-events: none;
+    opacity: 0;
+  }
 
 }

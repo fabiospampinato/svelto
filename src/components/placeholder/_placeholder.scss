@@ -9,11 +9,11 @@
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
- 
+
 /* PLACEHOLDER */
 
 .placeholder {
-    @include color ( $placeholder-color, $placeholder-color-basic );
-    margin-bottom: $layout-gutter;
-    text-align: center;
+  @include color ( $placeholder-color, $placeholder-color-basic );
+  margin-bottom: $layout-gutter;
+  text-align: center;
 }

@@ -12,12 +12,12 @@
 
 table.table.selectable > tbody > tr {
 
-    &:not(.empty) {
-        cursor: pointer;
-    }
+  &:not(.empty) {
+    cursor: pointer;
+  }
 
-    &.selected {
-        background-color: $table-selectable-row-selected-color !important;
-    }
+  &.selected {
+    background-color: $table-selectable-row-selected-color !important;
+  }
 
 }

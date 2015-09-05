@@ -12,44 +12,44 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* NOTIFICATION */
+  /* NOTIFICATION */
 
-    $.notification = function ( custom_options ) {
+  $.notification = function ( custom_options ) {
 
-        // OPTIONS
+    // OPTIONS
 
-        var options = _.merge ({
-            title: false,
-            body: false,
-            img: false
-        }, custom_options );
+    var options = _.merge ({
+      title: false,
+      body: false,
+      img: false
+    }, custom_options );
 
-        // NOTIFICATION
+    // NOTIFICATION
 
-        if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
+    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-            Notification.requestPermission ( function ( status ) {
+      Notification.requestPermission ( function ( status ) {
 
-                if ( status === 'granted' ) {
+        if ( status === 'granted' ) {
 
-                    var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
-
-                } else {
-
-                    $.noty ( options );
-
-                }
-
-            });
+          var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
 
         } else {
 
-            $.noty ( options );
+          $.noty ( options );
 
         }
 
-    };
+      });
+
+    } else {
+
+      $.noty ( options );
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));

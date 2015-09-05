@@ -10,100 +10,100 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* EXPANDER */
+  /* EXPANDER */
 
-    $.widget ( 'presto.expander', {
+  $.widget ( 'presto.expander', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                toggler: '.expander-toggler',
-                content: '.container-content'
-            },
-            delay: {
-                open: 250,
-                close: 250
-            },
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        toggler: '.expander-toggler',
+        content: '.container-content'
+      },
+      delay: {
+        open: 250,
+        close: 250
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$expander = this.$element;
-            this.$content = this.$expander.find ( this.options.selectors.content );
+      this.$expander = this.$element;
+      this.$content = this.$expander.find ( this.options.selectors.content );
 
-            this.opened = false;
+      this.opened = false;
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            if ( this.$expander.hasClass ( 'opened' ) ) {
+      if ( this.$expander.hasClass ( 'opened' ) ) {
 
-                this.open ();
+        this.open ();
 
-            }
+      }
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.toggler, this.toggle );
+      this._on ( 'click', this.options.selectors.toggler, this.toggle );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        toggle: function ( force ) {
+    toggle: function ( force ) {
 
-            if ( !_.isBoolean ( force ) ) {
+      if ( !_.isBoolean ( force ) ) {
 
-                force = !this.opened;
+        force = !this.opened;
 
-            }
+      }
 
-            if ( force !== this.opened ) {
+      if ( force !== this.opened ) {
 
-                this.opened = force;
+        this.opened = force;
 
-                this.$expander.toggleClass ( 'opened', this.opened );
+        this.$expander.toggleClass ( 'opened', this.opened );
 
-                this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
+        this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
 
-                this._trigger ( this.opened ? 'open' : 'close' );
+        this._trigger ( this.opened ? 'open' : 'close' );
 
-            }
+      }
 
-        },
+    },
 
-        open: function () {
+    open: function () {
 
-            this.toggle ( true );
+      this.toggle ( true );
 
-        },
+    },
 
-        close: function () {
+    close: function () {
 
-            this.toggle ( false);
+      this.toggle ( false);
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.expander').expander ();
+    $('.expander').expander ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));

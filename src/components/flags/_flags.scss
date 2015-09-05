@@ -15,38 +15,38 @@
 /* GENERAL */
 
 %flag {
-    display: inline-block;
-    width: $flag-width;
-    height: $flag-height;
-    content: '';
-    background-image: url('/assets/images/presto/flags.png');
+  display: inline-block;
+  width: $flag-width;
+  height: $flag-height;
+  content: '';
+  background-image: url('/assets/images/presto/flags.png');
 }
 
 .flag[class*=" flag-"]:before {
-    @extend %flag
+  @extend %flag
 }
 
 /* FLAGS */
 
 @each $country, $datas in $flags {
 
-    $aliases: nth($datas, 1);
-    $background-position: nth($datas, 2);
+  $aliases: nth($datas, 1);
+  $background-position: nth($datas, 2);
 
-    @if $flags-only-enabled == false or index($flags-enabled, $country) != null {
+  @if $flags-only-enabled == false or index($flags-enabled, $country) != null {
 
-        .flag-#{$country}:before {
-            background-position: $background-position;
-        }
+    .flag-#{$country}:before {
+      background-position: $background-position;
+    }
 
-        @each $alias in $aliases {
+    @each $alias in $aliases {
 
-            .flag-#{$alias}:before {
-                @extend .flag-#{$country}:before;
-            }
-
-        }
+      .flag-#{$alias}:before {
+        @extend .flag-#{$country}:before;
+      }
 
     }
+
+  }
 
 }

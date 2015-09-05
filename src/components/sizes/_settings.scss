@@ -13,9 +13,9 @@
 
 @function get_size ( $icon_size ) {
 
-    //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+  //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
 
-    @return ( $icon_size / 15px / $icons-scale-amount ) * 1rem; //FIXME: replace with $font-size
+  @return ( $icon_size / 15px / $icons-scale-amount ) * 1rem; //FIXME: replace with $font-size
 
 }
 
@@ -54,15 +54,15 @@ $size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
 /* SIZES */
 
 $sizes: (
-    'xxxxsmall': $size-xxxxsmall,
-    'xxxsmall': $size-xxxsmall,
-    'xxsmall': $size-xxsmall,
-    'xsmall': $size-xsmall,
-    'small': $size-small,
-    'medium': $size-medium,
-    'large': $size-large,
-    'xlarge': $size-xlarge,
-    'xxlarge': $size-xxlarge,
-    'xxxlarge': $size-xxxlarge,
-    'xxxxlarge': $size-xxxxlarge
+  'xxxxsmall': $size-xxxxsmall,
+  'xxxsmall': $size-xxxsmall,
+  'xxsmall': $size-xxsmall,
+  'xsmall': $size-xsmall,
+  'small': $size-small,
+  'medium': $size-medium,
+  'large': $size-large,
+  'xlarge': $size-xlarge,
+  'xxlarge': $size-xxlarge,
+  'xxxlarge': $size-xxxlarge,
+  'xxxxlarge': $size-xxxxlarge
 ) !default;

@@ -11,83 +11,83 @@
 /* STRIPES */
 
 %progressBar-stripes {
-    background: linear-gradient(-45deg, $progress-bar-stripe-light-color 25%, $progress-bar-stripe-dark-color 25%, $progress-bar-stripe-dark-color 50%, $progress-bar-stripe-light-color 50%, $progress-bar-stripe-light-color 75%, $progress-bar-stripe-dark-color 75%, $progress-bar-stripe-dark-color);
+  background: linear-gradient(-45deg, $progress-bar-stripe-light-color 25%, $progress-bar-stripe-dark-color 25%, $progress-bar-stripe-dark-color 50%, $progress-bar-stripe-light-color 50%, $progress-bar-stripe-light-color 75%, $progress-bar-stripe-dark-color 75%, $progress-bar-stripe-dark-color);
 }
 
 /* PROGRESS BAR */
 
 .progressBar {
 
-    position: relative;
+  position: relative;
+  display: flex;
+  overflow: hidden;
+  flex-wrap: nowrap;
+  height: $progress-bar-height;
+  margin-bottom: $layout-gutter;
+  transition: opacity $progress-bar-transition-opacity-duration;
+  border-radius: 10000px 10000px;
+
+  & > .progressBar-unhighlighted {
+
+    @include color ( $progress-bar-unhighlighted-color, $progress-bar-unhighlighted-color-basic );
     display: flex;
-    overflow: hidden;
-    flex-wrap: nowrap;
-    height: $progress-bar-height;
-    margin-bottom: $layout-gutter;
-    transition: opacity $progress-bar-transition-opacity-duration;
-    border-radius: 10000px 10000px;
+    width: 100%;
 
-    & > .progressBar-unhighlighted {
+    & > .progressBar-highlighted {
 
-        @include color ( $progress-bar-unhighlighted-color, $progress-bar-unhighlighted-color-basic );
-        display: flex;
-        width: 100%;
+      @include color ( $progress-bar-highlighted-color, $progress-bar-highlighted-color-basic );
+      display: flex;
+      overflow: hidden;
+      justify-content: center;
+      align-items: center;
+      width: 0;
+      transition: width $progress-bar-transition-width-duration;
+      text-align: center;
+      text-overflow: ellipsis;
 
-        & > .progressBar-highlighted {
-
-            @include color ( $progress-bar-highlighted-color, $progress-bar-highlighted-color-basic );
-            display: flex;
-            overflow: hidden;
-            justify-content: center;
-            align-items: center;
-            width: 0;
-            transition: width $progress-bar-transition-width-duration;
-            text-align: center;
-            text-overflow: ellipsis;
-
-            & > .progressBar-label {
-                font-size: $progress-bar-label-font-size;
-                padding: $progress-bar-label-vertical-padding $progress-bar-label-horizontal-padding;
-            }
-
-        }
+      & > .progressBar-label {
+        font-size: $progress-bar-label-font-size;
+        padding: $progress-bar-label-vertical-padding $progress-bar-label-horizontal-padding;
+      }
 
     }
 
-    & > .progressBar-stripes {
-        position: absolute;
-        top: 0;
-        left: 0;
-        display: none;
-        pointer-events: none;
-    }
+  }
 
-    &.striped > .progressBar-stripes {
-        @extend %progressBar-stripes;
-        display: block;
-        width: 0;
-        height: 100%;
-        transition: width $progress-bar-transition-width-duration;
-        background-size: $progress-bar-stripe-size $progress-bar-stripe-size;
-    }
+  & > .progressBar-stripes {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    pointer-events: none;
+  }
 
-    &.striped:not(.progressBar-disabled) > .progressBar-stripes {
-        animation: progressBar-stripes-move $progress-bar-stripes-transition-move-duration linear 0s infinite;
-    }
+  &.striped > .progressBar-stripes {
+    @extend %progressBar-stripes;
+    display: block;
+    width: 0;
+    height: 100%;
+    transition: width $progress-bar-transition-width-duration;
+    background-size: $progress-bar-stripe-size $progress-bar-stripe-size;
+  }
 
-    &.progressBar-disabled {
-        opacity: $progress-bar-inactive-opacity;
-    }
+  &.striped:not(.progressBar-disabled) > .progressBar-stripes {
+    animation: progressBar-stripes-move $progress-bar-stripes-transition-move-duration linear 0s infinite;
+  }
+
+  &.progressBar-disabled {
+    opacity: $progress-bar-inactive-opacity;
+  }
 
 }
 
 /* KEYFRAMES */
 
 @keyframes progressBar-stripes-move {
-    0% {
-        background-position: 0 0;
-    }
-    100% {
-        background-position: $progress-bar-stripe-size $progress-bar-stripe-size;
-    }
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: $progress-bar-stripe-size $progress-bar-stripe-size;
+  }
 }

@@ -12,23 +12,23 @@
 
 .breadcrumb {
 
-    display: flex;
-    align-items: center;
-    margin-bottom: $layout-gutter;
+  display: flex;
+  align-items: center;
+  margin-bottom: $layout-gutter;
 
-    & > .breadcrumb-divider {
-        display: inline-block;
-        padding: $breadcrumb-divider-vertical-padding $breadcrumb-divider-horizontal-padding;
+  & > .breadcrumb-divider {
+    display: inline-block;
+    padding: $breadcrumb-divider-vertical-padding $breadcrumb-divider-horizontal-padding;
+  }
+
+  &.highlighted > .current ~ * {
+
+    opacity: $breadcrumb-after-opacity;
+
+    &:hover {
+      opacity: $breadcrumb-after-opacity-hover;
     }
 
-    &.highlighted > .current ~ * {
-
-        opacity: $breadcrumb-after-opacity;
-
-        &:hover {
-            opacity: $breadcrumb-after-opacity-hover;
-        }
-
-    }
+  }
 
 }

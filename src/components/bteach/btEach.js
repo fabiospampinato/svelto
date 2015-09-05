@@ -10,14 +10,14 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* BINARY TREE .each () */
+  /* BINARY TREE .each () */
 
-    $.fn.btEach = function ( callback, startIndex ) {
+  $.fn.btEach = function ( callback, startIndex ) {
 
-        return _.btEach ( this, callback, startIndex );
+    return _.btEach ( this, callback, startIndex );
 
-    };
+  };
 
 }( jQuery, _, window, document ));

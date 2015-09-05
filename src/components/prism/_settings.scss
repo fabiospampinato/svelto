@@ -12,67 +12,67 @@
 
 code {
 
-    &[class*='language-'] {
+  &[class*='language-'] {
 
-        font-family: Consolas, Monaco, 'Andale Mono', monospace;
-        direction: ltr;
-        text-align: left;
-        white-space: pre;
-        word-spacing: normal;
-        word-break: normal;
-        line-height: 1.5;
-        tab-size: 4;
-        hyphens: none;
+    font-family: Consolas, Monaco, 'Andale Mono', monospace;
+    direction: ltr;
+    text-align: left;
+    white-space: pre;
+    word-spacing: normal;
+    word-break: normal;
+    line-height: 1.5;
+    tab-size: 4;
+    hyphens: none;
 
-        .token {
+    .token {
 
-            &.comment, &.prolog, &.doctype, &.cdata {
-                color: darken($color-teal, 15);
-            }
+      &.comment, &.prolog, &.doctype, &.cdata {
+        color: darken($color-teal, 15);
+      }
 
-            &.punctuation {
-                color: darken($color-gray, 15);
-            }
+      &.punctuation {
+        color: darken($color-gray, 15);
+      }
 
-            &.property, &.tag, &.boolean, &.number, &.constant, &.symbol, &.deleted {
-                color: darken($color-pink, 15);
-            }
+      &.property, &.tag, &.boolean, &.number, &.constant, &.symbol, &.deleted {
+        color: darken($color-pink, 15);
+      }
 
-            &.selector, &.attr-name, &.string, &.char, &.builtin, &.inserted {
-                color: darken($color-green, 15);
-            }
+      &.selector, &.attr-name, &.string, &.char, &.builtin, &.inserted {
+        color: darken($color-green, 15);
+      }
 
-            &.atrule, &.attr-value, &.keyword {
-                color: darken($color-blue, 15);
-            }
+      &.atrule, &.attr-value, &.keyword {
+        color: darken($color-blue, 15);
+      }
 
-            &.function {
-                color: darken($color-red, 15);
-            }
+      &.function {
+        color: darken($color-red, 15);
+      }
 
-            &.regex, &.important, &.variable {
-                color: darken($color-orange, 15);
-            }
+      &.regex, &.important, &.variable {
+        color: darken($color-orange, 15);
+      }
 
-            &.important {
-                font-weight: bold;
-            }
+      &.important {
+        font-weight: bold;
+      }
 
-            &.entity {
-                cursor: help;
-            }
+      &.entity {
+        cursor: help;
+      }
 
-            &.operator, &.entity, &.url {
-                color: darken($color-teal, 15);
-                background: hsla(0, 0%, 100%, .5);
-            }
-
-        }
-
-        .namespace {
-        	opacity: 0.7;
-        }
+      &.operator, &.entity, &.url {
+        color: darken($color-teal, 15);
+        background: hsla(0, 0%, 100%, .5);
+      }
 
     }
+
+    .namespace {
+    	opacity: 0.7;
+    }
+
+  }
 
 }

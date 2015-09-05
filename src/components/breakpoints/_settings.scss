@@ -20,9 +20,9 @@ $breakpoint-xlarge: 76rem !default; // -> 1140px
 /* BREAKPOINTS */
 
 $breakpoints: (
-    'xsmall': $breakpoint-xsmall,
-    'small': $breakpoint-small,
-    'medium': $breakpoint-medium,
-    'large': $breakpoint-large,
-    'xlarge': $breakpoint-xlarge
+  'xsmall': $breakpoint-xsmall,
+  'small': $breakpoint-small,
+  'medium': $breakpoint-medium,
+  'large': $breakpoint-large,
+  'xlarge': $breakpoint-xlarge
 ) !default;

@@ -10,86 +10,86 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* MODAL */
+  /* MODAL */
 
-    $.widget ( 'presto.modal', {
+  $.widget ( 'presto.modal', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                closer: '.modal-closer'
-            },
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        closer: '.modal-closer'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$modal = this.$element;
+      this.$modal = this.$element;
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.closer, this.close );
+      this._on ( 'click', this.options.selectors.closer, this.close );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _handler_esc_keydown: function ( event ) {
+    _handler_esc_keydown: function ( event ) {
 
-            if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
-                this.close ();
+        this.close ();
 
-            }
+      }
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        open: function () {
+    open: function () {
 
-            this.$modal.addClass ( 'active' );
+      this.$modal.addClass ( 'active' );
 
-            this._on ( $document, 'keydown', this._handler_esc_keydown );
+      this._on ( $document, 'keydown', this._handler_esc_keydown );
 
-            this._trigger ( 'open' );
+      this._trigger ( 'open' );
 
-        },
+    },
 
-        close: function () {
+    close: function () {
 
-            this.$modal.removeClass ( 'active' );
+      this.$modal.removeClass ( 'active' );
 
-            this._off ( $document, 'keydown', this._handler_esc_keydown );
+      this._off ( $document, 'keydown', this._handler_esc_keydown );
 
-            this._trigger ( 'close' );
+      this._trigger ( 'close' );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.modal').modal ();
+    $('.modal').modal ();
 
-        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
+    $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
 
-            $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
-
-        });
+      $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
 
     });
+
+  });
 
 }( jQuery, _, window, document ));

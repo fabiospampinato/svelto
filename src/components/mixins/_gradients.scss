@@ -8,32 +8,32 @@
 
  @mixin gradient ( $color_name, $important: '' ) {
 
-     $colors: map-get($colors, $color_name);
+   $colors: map-get($colors, $color_name);
 
-     $start: nth($colors, 2);
-     $end: nth($colors, 3);
+   $start: nth($colors, 2);
+   $end: nth($colors, 3);
 
-     background-color: $start #{$important};
-     background: linear-gradient(to bottom, $start 0%, $end 100%) #{$important};
+   background-color: $start #{$important};
+   background: linear-gradient(to bottom, $start 0%, $end 100%) #{$important};
 
  }
 
 @mixin gradient-horizontal ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {
-    background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
-    background-repeat: repeat-x;
+  background-image: linear-gradient(to right, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
 }
 
 @mixin gradient-vertical ( $start-color, $end-color, $start-percent: 0%, $end-percent: 100% ) {
-    background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
-    background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, $start-color $start-percent, $end-color $end-percent);
+  background-repeat: repeat-x;
 }
 
 @mixin gradient-directional ( $start-color, $end-color, $deg: 45deg ) {
-    background-repeat: repeat-x;
-    background-image: linear-gradient($deg, $start-color, $end-color);
+  background-repeat: repeat-x;
+  background-image: linear-gradient($deg, $start-color, $end-color);
 }
 
 @mixin gradient-radial ( $inner-color, $outer-color ) {
-    background-image: radial-gradient(circle, $inner-color, $outer-color);
-    background-repeat: no-repeat;
+  background-image: radial-gradient(circle, $inner-color, $outer-color);
+  background-repeat: no-repeat;
 }

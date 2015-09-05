@@ -15,381 +15,381 @@
 
 .multiple-wrp {
 
-    @extend %widget;
-    display: inline-flex; //INFO: We use it since a multiple shouldn't take all the available space in some cases, like when inside a table
+  @extend %widget;
+  display: inline-flex; //INFO: We use it since a multiple shouldn't take all the available space in some cases, like when inside a table
+  border-color: inherit; //INFO: We may use inherit in the children, so we have to inherit here //TODO: Sure?
+
+  /* HORIZONTAL GUTTER */
+
+  &:not(.no-wrap):not(.vertical):not(.joined) { //INFO: Here the gutter is not needed
+
+    @include margin-horizontal ( - $multiple-gutter-half );
+
+    & > .multiple > * {
+      @include margin-horizontal ( $multiple-gutter-half );
+    }
+
+  }
+
+  &.no-wrap > .multiple > *:not(.multiple-wrp) { //INFO: We just need the gutter in between
+
+    &:not(:first-child) {
+      margin-left: $multiple-gutter-half;
+    }
+
+    &:not(:last-child) {
+      margin-right: $multiple-gutter-half;
+    }
+
+  }
+
+  &.vertical > .multiple > .multiple-wrp {
+
+    @include margin-horizontal ( 0 );
+
+    & > .multiple > * {
+
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        margin-right: 0;
+      }
+
+    }
+
+  }
+
+  /* CENTERED */
+
+  &.centered { //INFO: The helper class does the rest
+
+    display: flex;
+    justify-content: center;
+
+    & > .multiple {
+      justify-content: center;
+    }
+
+  }
+
+  /* LIMITED */
+
+  &.limited { //INFO: The helper class does the rest
+    display: flex;
+  }
+
+  /* NO WRAP */
+
+  &.no-wrap > .multiple {
+    flex-wrap: nowrap;
+  }
+
+  /* EXPANDED / FLUID / EQUAL */
+
+  &.expanded, &.fluid, &.equal {
+
+    display: flex;
+
+    & > .multiple {
+      width: 100%;
+    }
+
+  }
+
+  /* FLUID / EQUAL */
+
+  &.fluid, &.equal {
+
+    &:not(.vertical) > .multiple > * {
+      flex-grow: 1;
+      flex-shrink: 0;
+    }
+
+    &.vertical > .multiple > * {
+      width: 100%;
+    }
+
+  }
+
+  /* EQUAL */
+
+  &.equal > .multiple > * {
+    flex-basis: 0;
+  }
+
+  /* JOINED */
+
+  &.joined {
+
+    & > .multiple {
+      flex-wrap: nowrap;
+      align-items: stretch;
+    }
+
+    &:not(.vertical) {
+
+      & > .multiple {
+
+        & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
+
+          @include border-right-radius ( 0 );
+          margin-right: 0;
+          border-right-width: 0;
+
+          &.multiple-wrp > .multiple > *:last-child, &.multiple-wrp > .multiple > *:last-child[class*="-wrp"] > *:first-child:last-child, {
+            @include border-right-radius ( 0 );
+          }
+
+        }
+
+        & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+
+          @include border-left-radius ( 0 );
+          margin-left: 0;
+
+          &.multiple-wrp > .multiple > *:not(:last-child), &.multiple-wrp > .multiple > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child, {
+            @include border-left-radius ( 0 );
+          }
+
+        }
+
+      }
+
+      &.no-separators > .multiple {
+
+        & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+
+          border-left-width: 0;
+
+          &.multiple-wrp > .multiple > *, &.multiple-wrp > .multiple > [class*="-wrp"] > *:first-child:last-child, {
+            border-left-width: 0;
+          }
+
+        }
+
+      }
+
+    }
+
+    &.vertical {
+
+      & > .multiple {
+
+        & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
+
+          @include border-bottom-radius ( 0 );
+          margin-bottom: 0;
+          border-bottom-width: 0;
+
+          &.multiple-wrp > .multiple > *:last-child, &.multiple-wrp > .multiple > *:last-child[class*="-wrp"] > *:first-child:last-child, {
+            @include border-bottom-radius ( 0 );
+          }
+
+        }
+
+        & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+
+          @include border-top-radius ( 0 );
+
+          &.multiple-wrp > .multiple > *:not(:last-child), &.multiple-wrp > .multiple > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child, {
+            @include border-top-radius ( 0 );
+          }
+
+        }
+
+      }
+
+      &.no-separators > .multiple {
+
+        & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
+
+          border-top-width: 0;
+
+          &.multiple-wrp > .multiple > *, &.multiple-wrp > .multiple > [class*="-wrp"] > *:first-child:last-child, {
+            border-top-width: 0;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  /* STRETCHED */
+
+  &.stretched > .multiple {
+
+    align-items: stretch;
+
+    & > .multiple-wrp.vertical {
+
+      display: flex;
+
+      & > .multiple {
+
+        flex-grow: 1;
+
+        & > * {
+          flex-grow: 1;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* VERTICAL */
+
+  &.vertical > .multiple {
+    flex-direction: column;
+  }
+
+  /* Z-DEPTH */
+
+  &[class*="z-depth-"] {
+
+    box-shadow: none !important;
+
+    &:before {
+      @include fill-absolute ();
+      z-index: $multiple-z-depth-z-index;
+      content: '';
+      pointer-events: none;
+      border-radius: $border-radius;
+    }
+
+    &:not(.no-wrap):not(.vertical):not(.joined):before {
+      right: $multiple-gutter-half;
+      left: $multiple-gutter-half;
+    }
+
+    & > .multiple {
+
+      & > [class*="z-depth-"], & > [class*="-wrp"] > *:first-child:last-child {
+        box-shadow: none !important;
+      }
+
+    }
+
+    /* Z-DEPTHS */
+
+    @each $depth, $shadow in $z-depths {
+
+      &.z-depth-#{$depth}:before {
+        @include z-depth ( $depth );
+      }
+
+    }
+
+  }
+
+  /* MULTIPLE */
+
+  & > .multiple {
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    margin-bottom: - $multiple-gutter;
     border-color: inherit; //INFO: We may use inherit in the children, so we have to inherit here //TODO: Sure?
 
     /* HORIZONTAL GUTTER */
 
-    &:not(.no-wrap):not(.vertical):not(.joined) { //INFO: Here the gutter is not needed
+    & > .multiple-wrp.no-wrap {
 
-        @include margin-horizontal ( - $multiple-gutter-half );
+      &:not(:first-child) {
+        margin-left: $multiple-gutter-half;
+      }
 
-        & > .multiple > * {
-            @include margin-horizontal ( $multiple-gutter-half );
-        }
-
-    }
-
-    &.no-wrap > .multiple > *:not(.multiple-wrp) { //INFO: We just need the gutter in between
-
-        &:not(:first-child) {
-            margin-left: $multiple-gutter-half;
-        }
-
-        &:not(:last-child) {
-            margin-right: $multiple-gutter-half;
-        }
+      &:not(:last-child) {
+        margin-right: $multiple-gutter-half;
+      }
 
     }
 
-    &.vertical > .multiple > .multiple-wrp {
+    /* MULTIPLE SUB SPACER */
 
-        @include margin-horizontal ( 0 );
+    & > .multiple-sub-spacer {
 
-        & > .multiple > * {
+      display: none;
 
-            &:first-child {
-                margin-left: 0;
-            }
-
-            &:last-child {
-                margin-right: 0;
-            }
-
-        }
-
-    }
-
-    /* CENTERED */
-
-    &.centered { //INFO: The helper class does the rest
-
-        display: flex;
-        justify-content: center;
-
-        & > .multiple {
-            justify-content: center;
-        }
-
-    }
-
-    /* LIMITED */
-
-    &.limited { //INFO: The helper class does the rest
-        display: flex;
-    }
-
-    /* NO WRAP */
-
-    &.no-wrap > .multiple {
-        flex-wrap: nowrap;
-    }
-
-    /* EXPANDED / FLUID / EQUAL */
-
-    &.expanded, &.fluid, &.equal {
-
-        display: flex;
-
-        & > .multiple {
-            width: 100%;
-        }
-
-    }
-
-    /* FLUID / EQUAL */
-
-    &.fluid, &.equal {
-
-        &:not(.vertical) > .multiple > * {
-            flex-grow: 1;
-            flex-shrink: 0;
-        }
-
-        &.vertical > .multiple > * {
-            width: 100%;
-        }
-
-    }
-
-    /* EQUAL */
-
-    &.equal > .multiple > * {
+      &:first-child, &:last-child {
+        display: block;
+        flex-grow: 1;
         flex-basis: 0;
-    }
+        margin: 0;
+      }
 
-    /* JOINED */
+      &:first-child {
+        order: 1;
+      }
 
-    &.joined {
-
-        & > .multiple {
-            flex-wrap: nowrap;
-            align-items: stretch;
-        }
-
-        &:not(.vertical) {
-
-            & > .multiple {
-
-                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
-
-                    @include border-right-radius ( 0 );
-                    margin-right: 0;
-                    border-right-width: 0;
-
-                    &.multiple-wrp > .multiple > *:last-child, &.multiple-wrp > .multiple > *:last-child[class*="-wrp"] > *:first-child:last-child, {
-                        @include border-right-radius ( 0 );
-                    }
-
-                }
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-
-                    @include border-left-radius ( 0 );
-                    margin-left: 0;
-
-                    &.multiple-wrp > .multiple > *:not(:last-child), &.multiple-wrp > .multiple > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child, {
-                        @include border-left-radius ( 0 );
-                    }
-
-                }
-
-            }
-
-            &.no-separators > .multiple {
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-
-                    border-left-width: 0;
-
-                    &.multiple-wrp > .multiple > *, &.multiple-wrp > .multiple > [class*="-wrp"] > *:first-child:last-child, {
-                        border-left-width: 0;
-                    }
-
-                }
-
-            }
-
-        }
-
-        &.vertical {
-
-            & > .multiple {
-
-                & > *:not(:last-child), & > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child {
-
-                    @include border-bottom-radius ( 0 );
-                    margin-bottom: 0;
-                    border-bottom-width: 0;
-
-                    &.multiple-wrp > .multiple > *:last-child, &.multiple-wrp > .multiple > *:last-child[class*="-wrp"] > *:first-child:last-child, {
-                        @include border-bottom-radius ( 0 );
-                    }
-
-                }
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-
-                    @include border-top-radius ( 0 );
-
-                    &.multiple-wrp > .multiple > *:not(:last-child), &.multiple-wrp > .multiple > *:not(:last-child)[class*="-wrp"] > *:first-child:last-child, {
-                        @include border-top-radius ( 0 );
-                    }
-
-                }
-
-            }
-
-            &.no-separators > .multiple {
-
-                & > *:not(:first-child), & > *:not(:first-child)[class*="-wrp"] > *:first-child:last-child {
-
-                    border-top-width: 0;
-
-                    &.multiple-wrp > .multiple > *, &.multiple-wrp > .multiple > [class*="-wrp"] > *:first-child:last-child, {
-                        border-top-width: 0;
-                    }
-
-                }
-
-            }
-
-        }
+      &:last-child {
+        order: 3;
+      }
 
     }
 
-    /* STRETCHED */
+    /* MULTIPLE SUB */
 
-    &.stretched > .multiple {
+    & > .multiple-sub {
 
-        align-items: stretch;
+      //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
 
-        & > .multiple-wrp.vertical {
+      flex-grow: 0 !important;
+      flex-basis: 0;
+      align-self: center;
+      margin: 0;
 
-            display: flex;
-
-            & > .multiple {
-
-                flex-grow: 1;
-
-                & > * {
-                    flex-grow: 1;
-                }
-
-            }
-
-        }
-
-    }
-
-    /* VERTICAL */
-
-    &.vertical > .multiple {
-        flex-direction: column;
-    }
-
-    /* Z-DEPTH */
-
-    &[class*="z-depth-"] {
-
-        box-shadow: none !important;
-
-        &:before {
-            @include fill-absolute ();
-            z-index: $multiple-z-depth-z-index;
-            content: '';
-            pointer-events: none;
-            border-radius: $border-radius;
-        }
-
-        &:not(.no-wrap):not(.vertical):not(.joined):before {
-            right: $multiple-gutter-half;
-            left: $multiple-gutter-half;
-        }
-
-        & > .multiple {
-
-            & > [class*="z-depth-"], & > [class*="-wrp"] > *:first-child:last-child {
-                box-shadow: none !important;
-            }
-
-        }
-
-        /* Z-DEPTHS */
-
-        @each $depth, $shadow in $z-depths {
-
-            &.z-depth-#{$depth}:before {
-                @include z-depth ( $depth );
-            }
-
-        }
-
-    }
-
-    /* MULTIPLE */
-
-    & > .multiple {
-
+      & > .multiple-wrp {
         display: flex;
-        flex-wrap: wrap;
-        align-items: flex-start;
-        margin-bottom: - $multiple-gutter;
-        border-color: inherit; //INFO: We may use inherit in the children, so we have to inherit here //TODO: Sure?
+      }
 
-        /* HORIZONTAL GUTTER */
+      & > .multiple-wrp > .multiple {
 
-        & > .multiple-wrp.no-wrap {
+        flex-wrap: nowrap;
 
-            &:not(:first-child) {
-                margin-left: $multiple-gutter-half;
-            }
-
-            &:not(:last-child) {
-                margin-right: $multiple-gutter-half;
-            }
-
+        & > * {
+          flex-shrink: 0;
         }
 
-        /* MULTIPLE SUB SPACER */
+      }
 
-        & > .multiple-sub-spacer {
+      &.left {
+        order: 0;
+        margin-right: - $multiple-gutter-half;
+        margin-left: $multiple-gutter-half;
+      }
 
-            display: none;
+      &.center {
 
-            &:first-child, &:last-child {
-                display: block;
-                flex-grow: 1;
-                flex-basis: 0;
-                margin: 0;
-            }
+        order: 2;
 
-            &:first-child {
-                order: 1;
-            }
-
-            &:last-child {
-                order: 3;
-            }
-
+        & > .multiple-wrp > .multiple {
+          justify-content: center;
         }
 
-        /* MULTIPLE SUB */
+      }
 
-        & > .multiple-sub {
+      &.right {
 
-            //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
+        order: 4;
+        margin-right: $multiple-gutter-half;
+        margin-left: - $multiple-gutter-half;
 
-            flex-grow: 0 !important;
-            flex-basis: 0;
-            align-self: center;
-            margin: 0;
-
-            & > .multiple-wrp {
-                display: flex;
-            }
-
-            & > .multiple-wrp > .multiple {
-
-                flex-wrap: nowrap;
-
-                & > * {
-                    flex-shrink: 0;
-                }
-
-            }
-
-            &.left {
-                order: 0;
-                margin-right: - $multiple-gutter-half;
-                margin-left: $multiple-gutter-half;
-            }
-
-            &.center {
-
-                order: 2;
-
-                & > .multiple-wrp > .multiple {
-                    justify-content: center;
-                }
-
-            }
-
-            &.right {
-
-                order: 4;
-                margin-right: $multiple-gutter-half;
-                margin-left: - $multiple-gutter-half;
-
-                & > .multiple-wrp > .multiple {
-                    justify-content: flex-end;
-                }
-
-            }
-
+        & > .multiple-wrp > .multiple {
+          justify-content: flex-end;
         }
+
+      }
 
     }
+
+  }
 
 }

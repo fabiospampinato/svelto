@@ -10,14 +10,14 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* BLUR */
+  /* BLUR */
 
-    $.fn.blurred = function ( force ) {
+  $.fn.blurred = function ( force ) {
 
-        return this.toggleClass ( 'blurred', force );
+    return this.toggleClass ( 'blurred', force );
 
-    };
+  };
 
 }( jQuery, _, window, document ));

@@ -10,64 +10,64 @@
 
 ;(function ( _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* HEX COLOR */
+  /* HEX COLOR */
 
-    window.HexColor = function ( value ) {
+  window.HexColor = function ( value ) {
 
-        if ( _.isString ( value ) ) {
+    if ( _.isString ( value ) ) {
 
-            value = value.replace ( '#', '' );
+      value = value.replace ( '#', '' );
 
-             if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
+       if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
 
-                this.hsv = ColorHelper.hex2hsv ({
-                    r: value[0] + value[1],
-                    g: value[2] + value[3],
-                    b: value[4] + value[5]
-                });
+        this.hsv = ColorHelper.hex2hsv ({
+          r: value[0] + value[1],
+          g: value[2] + value[3],
+          b: value[4] + value[5]
+        });
 
-            } else if ( /^[0-9a-f]{3}$/i.test ( value ) ) { //INFO: shorthand 3-chars color
+      } else if ( /^[0-9a-f]{3}$/i.test ( value ) ) { //INFO: shorthand 3-chars color
 
-                this.hsv = ColorHelper.hex2hsv ({
-                    r: value[0] + value[0],
-                    g: value[1] + value[1],
-                    b: value[2] + value[2]
-                });
+        this.hsv = ColorHelper.hex2hsv ({
+          r: value[0] + value[0],
+          g: value[1] + value[1],
+          b: value[2] + value[2]
+        });
 
-            } else {
+      } else {
 
-                return this;
+        return this;
 
-            }
+      }
 
-            this.isValid = true;
+      this.isValid = true;
 
-        }
+    }
 
-    };
+  };
 
-    /* HEX COLOR PROTOTYPE */
+  /* HEX COLOR PROTOTYPE */
 
-    HexColor.prototype = {
+  HexColor.prototype = {
 
-        isValid: false,
+    isValid: false,
 
-        hsv: {
-            h: 0,
-            s: 0,
-            v: 0
-        },
+    hsv: {
+      h: 0,
+      s: 0,
+      v: 0
+    },
 
-        getHexStr: function () {
+    getHexStr: function () {
 
-            var hex = ColorHelper.hsv2hex ( this.hsv );
+      var hex = ColorHelper.hsv2hex ( this.hsv );
 
-            return '#' + hex.r + hex.g + hex.b;
+      return '#' + hex.r + hex.g + hex.b;
 
-        }
+    }
 
-    };
+  };
 
 }( _, window, document ));

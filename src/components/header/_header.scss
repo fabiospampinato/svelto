@@ -12,25 +12,25 @@
 
 .header {
 
-    position: relative;
-    margin-bottom: $layout-gutter;
+  position: relative;
+  margin-bottom: $layout-gutter;
 
-    &.has-background { //FIXME: it doesn't work if we want to add the shadow also when using the background
-        overflow: hidden;
-    }
+  &.has-background { //FIXME: it doesn't work if we want to add the shadow also when using the background
+    overflow: hidden;
+  }
 
-    & > .header-background { //TODO: scale it, make the image fill the space
-        position: absolute;
-        z-index: -1;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        background-size: cover;
-    }
+  & > .header-background { //TODO: scale it, make the image fill the space
+    position: absolute;
+    z-index: -1;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-size: cover;
+  }
 
-    & > *:last-child {
-        margin-bottom: 0;
-    }
+  & > *:last-child {
+    margin-bottom: 0;
+  }
 
 }

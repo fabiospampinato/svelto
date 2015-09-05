@@ -8,61 +8,61 @@
 
 @mixin center-margin ( $max-width: false ) {
 
-    margin-left: auto;
-    margin-right: auto;
+  margin-left: auto;
+  margin-right: auto;
 
-    @if $max-width {
-        max-width: $max-width;
-    }
+  @if $max-width {
+    max-width: $max-width;
+  }
 
 }
 
 @mixin center-absolute ( $width: false, $height: false ) {
 
-    position: absolute;
+  position: absolute;
 
-    @if $width {
-        left: 50%;
-        margin-left: ( - $width / 2 );
-    }
+  @if $width {
+    left: 50%;
+    margin-left: ( - $width / 2 );
+  }
 
-    @if $height {
-        top: 50%;
-        margin-top: ( - $height / 2 );
-    }
+  @if $height {
+    top: 50%;
+    margin-top: ( - $height / 2 );
+  }
 
 }
 
 @mixin center-transform ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
 
-    position: absolute;
+  position: absolute;
 
-    @if $axis != x {
-        top: 50%;
-        margin-top: auto;
-        margin-bottom: auto;
-    }
+  @if $axis != x {
+    top: 50%;
+    margin-top: auto;
+    margin-bottom: auto;
+  }
 
-    @if $axis != y {
-        left: 50%;
-        margin-left: auto;
-        margin-right: auto;
-    }
+  @if $axis != y {
+    left: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
-    $translate-val: null;
+  $translate-val: null;
 
-    @if not($axis) {
-        $translate-val: translate(-50%, -50%);
-    }
+  @if not($axis) {
+    $translate-val: translate(-50%, -50%);
+  }
 
-    @else if $axis != x {
-        $translate-val: translateY(-50%);
-    }
+  @else if $axis != x {
+    $translate-val: translateY(-50%);
+  }
 
-    @else if $axis != y {
-        $translate-val: translateX(-50%);
-    }
+  @else if $axis != y {
+    $translate-val: translateX(-50%);
+  }
 
-    transform: $translate-val;
+  transform: $translate-val;
 
 }

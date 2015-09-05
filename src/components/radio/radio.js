@@ -10,119 +10,119 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* RADIO */
+  /* RADIO */
 
-    $.widget ( 'presto.radio', {
+  $.widget ( 'presto.radio', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                checked: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        checked: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$radio = this.$element;
-            this.$input = this.$radio.find ( 'input' );
+      this.$radio = this.$element;
+      this.$input = this.$radio.find ( 'input' );
 
-            this.name = this.$input.attr ( 'name' );
+      this.name = this.$input.attr ( 'name' );
 
-            this.$container = this.$radio.parents ( 'form' ).first ();
+      this.$container = this.$radio.parents ( 'form' ).first ();
 
-            if ( this.$container.length === 0 ) {
+      if ( this.$container.length === 0 ) {
 
-                this.$container = $document;
+        this.$container = $document;
 
-            }
+      }
 
-            this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
+      this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
 
-        },
+    },
 
-        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-            var hasClass = this.$radio.hasClass ( 'checked' );
+      var hasClass = this.$radio.hasClass ( 'checked' );
 
-            if ( this.get () ) {
+      if ( this.get () ) {
 
-                if ( !hasClass ) {
+        if ( !hasClass ) {
 
-                    this.$radio.addClass ( 'checked' );
-
-                }
-
-            } else if ( hasClass ) {
-
-                this.$radio.removeClass ( 'checked' );
-
-            }
-
-        },
-
-        _events: function () {
-
-            this._on ( 'click', function () {
-
-                this.check ();
-
-            });
-
-            this._on ( true, 'change', this._handler_change );
-
-        },
-
-        /* CHANGE */
-
-        _handler_change: function () {
-
-            var isChecked = this.get ();
-
-            if ( isChecked ) {
-
-                this.$other_radios.removeClass ( 'checked' );
-
-            }
-
-            this.$radio.toggleClass ( 'checked', isChecked );
-
-            this._trigger ( isChecked ? 'checked' : 'unchecked' );
-
-        },
-
-        /* PUBLIC */
-
-        get: function () {
-
-            return this.$input.prop ( 'checked' );
-
-        },
-
-        check: function () {
-
-            if ( !this.get () ) {
-
-                this.$input.prop ( 'checked', true ).trigger ( 'change' );
-
-                this._trigger ( 'checked' );
-
-            }
+          this.$radio.addClass ( 'checked' );
 
         }
 
-    });
+      } else if ( hasClass ) {
 
-    /* READY */
+        this.$radio.removeClass ( 'checked' );
 
-    $(function () {
+      }
 
-        $('.radio').radio ();
+    },
 
-    });
+    _events: function () {
+
+      this._on ( 'click', function () {
+
+        this.check ();
+
+      });
+
+      this._on ( true, 'change', this._handler_change );
+
+    },
+
+    /* CHANGE */
+
+    _handler_change: function () {
+
+      var isChecked = this.get ();
+
+      if ( isChecked ) {
+
+        this.$other_radios.removeClass ( 'checked' );
+
+      }
+
+      this.$radio.toggleClass ( 'checked', isChecked );
+
+      this._trigger ( isChecked ? 'checked' : 'unchecked' );
+
+    },
+
+    /* PUBLIC */
+
+    get: function () {
+
+      return this.$input.prop ( 'checked' );
+
+    },
+
+    check: function () {
+
+      if ( !this.get () ) {
+
+        this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+        this._trigger ( 'checked' );
+
+      }
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.radio').radio ();
+
+  });
 
 }( jQuery, _, window, document ));
