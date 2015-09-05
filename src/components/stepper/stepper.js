@@ -14,7 +14,7 @@
 
   /* STEPPER */
 
-  $.widget ( 'presto.stepper', {
+  $.widget ( 'svelto.stepper', {
 
     /* OPTIONS */
 

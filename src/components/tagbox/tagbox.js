@@ -19,7 +19,7 @@
 
   /* TAGBOX */
 
-  $.widget ( 'presto.tagbox', {
+  $.widget ( 'svelto.tagbox', {
 
     /* TEMPLATES */
 

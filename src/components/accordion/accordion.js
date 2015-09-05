@@ -14,7 +14,7 @@
 
   /* ACCORDION */
 
-  $.widget ( 'presto.accordion', {
+  $.widget ( 'svelto.accordion', {
 
     /* SPECIAL */
 

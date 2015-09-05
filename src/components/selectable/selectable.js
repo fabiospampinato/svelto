@@ -35,7 +35,7 @@
 
   /* SELECTABLE */
 
-  $.widget ( 'presto.selectable', {
+  $.widget ( 'svelto.selectable', {
 
     /* OPTIONS */
 

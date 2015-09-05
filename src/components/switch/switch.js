@@ -15,7 +15,7 @@
 
   /* SWITCH */
 
-  $.widget ( 'presto.switch', {
+  $.widget ( 'svelto.switch', {
 
     /* OPTIONS */
 

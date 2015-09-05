@@ -14,7 +14,7 @@
 
   /* TIME AGO */
 
-  $.widget ( 'presto.timeAgo', {
+  $.widget ( 'svelto.timeAgo', {
 
     /* OPTIONS */
 

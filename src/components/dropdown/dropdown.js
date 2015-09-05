@@ -22,7 +22,7 @@
 
   /* DROPDOWN */
 
-  $.widget ( 'presto.dropdown', {
+  $.widget ( 'svelto.dropdown', {
 
     /* OPTIONS */
 

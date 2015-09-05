@@ -15,7 +15,7 @@
 
   /* SLIDER */
 
-  $.widget ( 'presto.slider', {
+  $.widget ( 'svelto.slider', {
 
     /* OPTIONS */
 

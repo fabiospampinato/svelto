@@ -46,7 +46,7 @@
 
     // NOTY
 
-    var noty = new $.presto.noty ( options );
+    var noty = new $.svelto.noty ( options );
 
     if ( options.autoplay ) {
 
@@ -60,7 +60,7 @@
 
   /* NOTY */
 
-  $.widget ( 'presto.noty', {
+  $.widget ( 'svelto.noty', {
 
     /* TEMPLATES */
 
@@ -68,14 +68,14 @@
       base: '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
             '<div class="container-content">' +
               '<div class="infobar-wrp inset {%=o.color%}">' + //TODO: add back transparentize
-                '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
+                '{% if ( o.img ) include ( "svelto.noty.img", o.img ); %}' +
                 '<div class="infobar-center">' +
-                  '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
-                  '{% if ( o.body ) include ( "presto.noty.body", o.body ); %}' +
+                  '{% if ( o.title ) include ( "svelto.noty.title", o.title ); %}' +
+                  '{% if ( o.body ) include ( "svelto.noty.body", o.body ); %}' +
                 '</div>' +
-                '{% if ( o.buttons.length === 1 ) include ( "presto.noty.single_button", o.buttons[0] ); %}' +
+                '{% if ( o.buttons.length === 1 ) include ( "svelto.noty.single_button", o.buttons[0] ); %}' +
               '</div>' +
-              '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
+              '{% if ( o.buttons.length > 1 ) include ( "svelto.noty.buttons", o.buttons ); %}' +
             '</div>' +
           '</div>',
       img: '<div class="noty-img infobar-left">' +
@@ -86,12 +86,12 @@
            '</p>',
       body: '{%#o%}',
       single_button: '<div class="infobar-right">' +
-                 '{% include ( "presto.noty.button", o ); %}' +
+                 '{% include ( "svelto.noty.button", o ); %}' +
                '</div>',
       buttons: '<div class="noty-buttons multiple-wrp centered">' +
              '<div class="multiple">' +
                '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                 '{% include ( "presto.noty.button", o[i] ); %}' +
+                 '{% include ( "svelto.noty.button", o[i] ); %}' +
                '{% } %}' +
              '</div>' +
            '</div>',

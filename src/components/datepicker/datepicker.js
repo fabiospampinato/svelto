@@ -19,7 +19,7 @@
 
   /* DATEPICKER */
 
-  $.widget ( 'presto.datepicker', {
+  $.widget ( 'svelto.datepicker', {
 
     /* OPTIONS */
 

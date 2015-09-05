@@ -14,7 +14,7 @@
 
   /* EXPANDER */
 
-  $.widget ( 'presto.expander', {
+  $.widget ( 'svelto.expander', {
 
     /* OPTIONS */
 

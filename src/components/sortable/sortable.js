@@ -19,7 +19,7 @@
 
   /* SORTABLE */
 
-  $.widget ( 'presto.sortable', {
+  $.widget ( 'svelto.sortable', {
 
     /* OPTIONS */
 

@@ -14,7 +14,7 @@
 
   /* DRAGGABLE */
 
-  $.widget ( 'presto.draggable', {
+  $.widget ( 'svelto.draggable', {
 
     /* OPTIONS */
 

@@ -17,7 +17,7 @@
 
   /* TABS */
 
-  $.widget ( 'presto.tabs', {
+  $.widget ( 'svelto.tabs', {
 
     /* OPTIONS */
 

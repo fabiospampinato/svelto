@@ -14,7 +14,7 @@
 
   /* FLIPPABLE */
 
-  $.widget ( 'presto.flippable', {
+  $.widget ( 'svelto.flippable', {
 
     /* OPTIONS */
 

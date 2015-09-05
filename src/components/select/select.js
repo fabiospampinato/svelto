@@ -18,7 +18,7 @@
 
   /* SELECT */
 
-  $.widget ( 'presto.select', {
+  $.widget ( 'svelto.select', {
 
     /* TEMPLATES */
 
@@ -29,7 +29,7 @@
                 '<div class="multiple-wrp vertical stretched joined">' +
                   '<div class="multiple">' +
                     '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                      '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                      '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
                     '{% } %}' +
                   '</div>' +
                 '</div>' +

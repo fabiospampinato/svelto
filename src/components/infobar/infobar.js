@@ -17,7 +17,7 @@
 
   /* INFOBAR */
 
-  $.widget ( 'presto.infobar', {
+  $.widget ( 'svelto.infobar', {
 
     /* OPTIONS */
 

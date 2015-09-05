@@ -16,7 +16,7 @@
 
   /* NAVBAR */
 
-  $.widget ( 'presto.navbar', {
+  $.widget ( 'svelto.navbar', {
 
     /* OPTIONS */
 

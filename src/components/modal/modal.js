@@ -14,7 +14,7 @@
 
   /* MODAL */
 
-  $.widget ( 'presto.modal', {
+  $.widget ( 'svelto.modal', {
 
     /* OPTIONS */
 

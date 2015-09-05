@@ -20,7 +20,7 @@
 
   /* COLORPICKER */
 
-  $.widget ( 'presto.colorpicker', {
+  $.widget ( 'svelto.colorpicker', {
 
     /* OPTIONS */
 

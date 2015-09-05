@@ -14,7 +14,7 @@
 
   /* TABLE HELPER */
 
-  $.widget ( 'presto.tableHelper', {
+  $.widget ( 'svelto.tableHelper', {
 
     /* OPTIONS */
 

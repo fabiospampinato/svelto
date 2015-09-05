@@ -16,7 +16,7 @@
 
   /* AUTOGROW */
 
-  $.widget ( 'presto.autogrow', {
+  $.widget ( 'svelto.autogrow', {
 
     /* OPTIONS */
 

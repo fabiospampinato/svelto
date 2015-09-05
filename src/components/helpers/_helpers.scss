@@ -11,7 +11,7 @@
 /* BLUR */
 
 .blurred {
-  filter: url('/assets/images/presto/blur.svg#blur') !important;
+  filter: url('/blur.svg#blur') !important;
   filter: blur($blurred-blur-amount) !important;
 }
 

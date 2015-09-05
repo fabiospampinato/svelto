@@ -14,7 +14,7 @@
 
   /* CHECKBOX */
 
-  $.widget ( 'presto.checkbox', {
+  $.widget ( 'svelto.checkbox', {
 
     /* OPTIONS */
 

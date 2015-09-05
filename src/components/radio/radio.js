@@ -14,7 +14,7 @@
 
   /* RADIO */
 
-  $.widget ( 'presto.radio', {
+  $.widget ( 'svelto.radio', {
 
     /* OPTIONS */
 
