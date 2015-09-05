@@ -6,27 +6,31 @@ extends ../layout.jade
 append main
   +divider Normal
 
-  +pagination({ url:"#", total: 100, current: 4, blocks: 11 })
+  +pagination({ url: "#", total: 100, current: 4, blocks: 11 })
+
+  +divider Additional classes
+
+  +pagination({ url: "#", total: 100, current: 4, blocks: 11, classes: 'primary outlined compact' }).joined
 
   +divider Joined
   
-  +pagination({ url:"#", total: 100, current: 4, blocks: 11 }).joined
+  +pagination({ url: "#", total: 100, current: 4, blocks: 11 }).joined
 
-  +divider Few blocks
+  +divider Joined - Few blocks
 
-  +pagination({ url:"#", total: 100, current: 4, blocks: 2 })
-  +pagination({ url:"#", total: 100, current: 4, blocks: 3 })
+  +pagination({ url: "#", total: 100, current: 4, blocks: 2 }).joined
+  +pagination({ url: "#", total: 100, current: 4, blocks: 3 }).joined
 
-  +divider Infinite
+  +divider Joined - Infinite
 
-  +pagination({ url:"#", total: 'infinite', current: 4, blocks: 2 })
+  +pagination({ url: "#", total: 'infinite', current: 4, blocks: 2 }).joined
 
-  +divider Left
+  +divider Joined - Left
 
-  +pagination({ url:"#<page-nr>_page", total: 100, current: 4, blocks: 11 })
-  +pagination({ url:"#<page-nr>_page", total: 100, current: 1, blocks: 11 })
+  +pagination({ url: "#<page-nr>_page", total: 100, current: 3, blocks: 11 }).joined
+  +pagination({ url: "#<page-nr>_page", total: 100, current: 1, blocks: 11 }).joined
 
-  +divider Right
+  +divider Joined - Right
 
-  +pagination({ url:"#<page-nr>_page", total: 100, current: 100, blocks: 11 })
-  +pagination({ url:"#<page-nr>_page", total: 100, current: 97, blocks: 11 })
+  +pagination({ url: "#<page-nr>_page", total: 100, current: 100, blocks: 11 }).joined
+  +pagination({ url: "#<page-nr>_page", total: 100, current: 98, blocks: 11 }).joined

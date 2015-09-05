@@ -9,7 +9,7 @@ append main
   +divider Form
 
   +form.centered.sm-12.md-10.lg-8.xl-6
-    +container("This is a form")
+    +container("This is a form").outlined
       +container-content
         +image-sample.centered.xs-8
         +input({ label: "Input...", name: "input_1" }).fluid.sharp
@@ -24,6 +24,6 @@ append main
           +radio({ name: "radio_name_1", title: "Radio 2", value: 2, checked: true }).outlined
       +container-footer
         +multiple
-          +form-button-simple.gray Normal
-          +form-button-simple.primary Primary
-          +form-button-simple.secondary Secondary
+          +form-button-simple.gray.outlined Normal
+          +form-button-simple.primary.outlined Primary
+          +form-button-simple.secondary.outlined Secondary

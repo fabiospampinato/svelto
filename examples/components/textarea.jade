@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Normal
 
-  +container-simple
+  +container-simple.outlined
     +multiple
       +textarea({ label: "Base" })
       +textarea({ label: "Compact" }).compact
@@ -15,7 +15,7 @@ append main
 
   +divider Colors
 
-  +container-simple
+  +container-simple.outlined
     +multiple
       +textarea({ label: "Primary" }).text-field-primary Primary
       +textarea({ label: "Secondary" }).text-field-secondary Secondary
@@ -41,7 +41,7 @@ append main
 
   +divider Colors advanced
 
-  +container-simple
+  +container-simple.outlined
     +multiple
       +textarea({ label: "White - Secondary" }).white.text-field-secondary White - Secondary
       +textarea({ label: "Primary - Secondary" }).primary.text-field-secondary Primary - Secondary
@@ -49,33 +49,33 @@ append main
 
   +divider Fluid
 
-  +container-simple
+  +container-simple.outlined
     +textarea({ label: "Fluid" }).fluid
 
   +divider Unresizable
 
-  +container-simple
+  +container-simple.outlined
     +textarea({ label: "Unresizable" }).unresizable
 
   +divider No floating
 
-  +container-simple
+  +container-simple.outlined
     +textarea({ label: "No floating" }).fluid.no-floating
 
   +divider No intial bar
 
-  +container-simple
+  +container-simple.outlined
     +textarea({ label: "No initial bar" }).fluid.no-initial-bar
 
   +divider No bar - No floating
 
-  +container-simple
+  +container-simple.outlined
     +textarea({ label: "No bar" }).fluid.no-bar.no-floating
 
   +divider Inside a container
 
-  +container-simple
+  +container-simple.outlined
     +textarea({ label: "Inside a container" })
 
-  +container-simple.yellow
+  +container-simple.yellow.outlined
     +textarea({ label: "Inside a yellow container" })

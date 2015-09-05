@@ -20,7 +20,7 @@ append main
             +multiple.fluid.stretched
               p.centerer 20 Rows - Page 3 of 5
               +spacer
-              +pagination({ url: '#', total: 5, current: 3, blocks: 10, classes: 'xsmall outlined' }).joined
+              +pagination({ url: '#', total: 5, current: 3, blocks: 10, classes: 'xsmall outlined compact' }).joined
       tbody
         +table-tr-empty
           tr
@@ -33,13 +33,13 @@ append main
             td Bar
             td 16/11/1993
             td.text-center
-              +button-icon('settings').outlined.small.disabled
+              +button-icon('settings').outlined.small.disabled.compact
           tr
             td.text-center 3
             td Baz
             td 16 Nov 1993
             td.text-center
-              +button-icon('settings').outlined.small
+              +button-icon('settings').outlined.small.compact
           tr
             td.text-center 4
             td Qux
@@ -47,7 +47,7 @@ append main
             td.text-center
               +multiple.joined
                 +button-simple.outlined.small Button
-                +button-icon('more_vert').outlined.small
+                +button-icon('more_vert').outlined.small.compact
 
   +divider Empty
 

@@ -6,66 +6,62 @@ extends ../layout.jade
 append main
   +divider Default
 
-  +container-simple
-    table.sortable
+  +container-simple.outlined
+    table.table.bordered
       thead
         tr
-          th(data-sort="int") Int
+          th(data-sort="int").xs-1.text-center Int
           th(data-sort="string") String
           th(data-sort="string") Date
-          th Options
-      tfoot
-
+          th.text-center Options
       tbody
         +table-tr-empty
         - var nr = 1;
         while ( nr <= 10 )
           tr
-            td= nr++
+            td.text-center= nr++
             td Foo
             td 16/11/1993
-            td
+            td.text-center
               +multiple.centered
-                +button-simple.outlined.small Btn 1
-                +button-simple.outlined.small Btn 2
+                +button-simple("#").outlined.small Btn 1
+                +button-simple("#").outlined.small Btn 2
           tr
-            td= nr++
+            td.text-center= nr++
             td Bar
             td 16 Nov 1993
-            td
+            td.text-center
               +multiple.centered
-                +button-simple.outlined.small Btn 1
-                +button-simple.outlined.small Btn 2
+                +button-simple("#").outlined.small Btn 1
+                +button-simple("#").outlined.small Btn 2
 
   +divider Initial sort
 
-  +container-simple
-    table.sortable
+  +container-simple.outlined
+    table.table.bordered
       thead
         tr
-          th.desc(data-sort="int") Int
+          th(data-sort="int").xs-1.text-center.desc Int
           th(data-sort="string") String
           th(data-sort="string") Date
-          th Options
-      tfoot
-
+          th.text-center Options
       tbody
         +table-tr-empty
         - var nr = 1;
         while ( nr <= 10 )
           tr
-            td= nr++
+            td.text-center= nr++
             td Foo
             td 16/11/1993
-            td
+            td.text-center
               +multiple.centered
-                +button-simple.outlined.small Btn 1
-                +button-simple.outlined.small Btn 2
+                +button-simple("#").outlined.small Btn 1
+                +button-simple("#").outlined.small Btn 2
           tr
-            td= nr++
+            td.text-center= nr++
             td Bar
             td 16 Nov 1993
-            td
+            td.text-center
               +multiple.centered
-                +button-simple.outlined.small Btn 1
-                +button-simple.outlined.small Btn 2
+                +button-simple("#").outlined.small Btn 1
+                +button-simple("#").outlined.small Btn 2

@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Normal
 
-  +container-simple
+  +container-simple.outlined
     +multiple
       +input({ label: "Base" })
       +input({ label: "Compact" }).compact
@@ -16,7 +16,7 @@ append main
 
   +divider Colors
 
-  +container-simple
+  +container-simple.outlined
     +multiple
       +input({ label: "Primary" }).text-field-primary
       +input({ label: "Secondary" }).text-field-secondary
@@ -42,7 +42,7 @@ append main
 
   +divider Colors advanced
 
-  +container-simple
+  +container-simple.outlined
     +multiple
       +input({ label: "White - Secondary" }).white.text-field-secondary
       +input({ label: "Primary - Secondary" }).primary.text-field-secondary
@@ -50,30 +50,30 @@ append main
 
   +divider Fluid
 
-  +container-simple
+  +container-simple.outlined
     +input({ label: "Fluid" }).fluid
 
   +divider No floating
 
-  +container-simple
+  +container-simple.outlined
     +input({ label: "No floating" }).fluid.no-floating
 
   +divider No intial bar
 
-  +container-simple
+  +container-simple.outlined
     +input({ label: "No initial bar" }).fluid.no-initial-bar
 
   +divider No bar - No floating
 
-  +container-simple
+  +container-simple.outlined
     +input({ label: "No bar" }).fluid.no-bar.no-floating
 
   +divider Inside a container
 
-  +container-simple
+  +container-simple.outlined
     +input({ label: "Inside a container" })
 
-  +container-simple.yellow
+  +container-simple.yellow.outlined
     +input({ label: "Inside a yellow container" })
 
   +divider Toolbar
@@ -81,13 +81,13 @@ append main
   +multiple
     +multiple.joined
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
-      +button-icon("action-search")
+      +button-icon("search").compact
     +multiple.joined
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
-      +button-icon("action-search").secondary
+      +button-icon("search").secondary.compact
     +multiple.joined
       +input({ label: "Placeholder...", value: "No initial bar" }).no-initial-bar.no-floating.white
-      +button-icon("action-search").secondary
+      +button-icon("search").secondary.compact
     +multiple.joined
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
       +button-simple.primary Search
@@ -105,7 +105,7 @@ append main
     +multiple.joined
       +button.teal
         +button-left
-          +icon("maps-local-grocery-store")
+          +icon("local_grocery_store")
         +button-center Checkout
       +input({ label: "Placeholder...", value: "35.50€" }).no-bar.no-floating.white
 
@@ -114,13 +114,13 @@ append main
   +multiple
     +multiple.joined
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white.outlined
-      +button-icon("action-search").outlined
+      +button-icon("search").outlined.compact
     +multiple.joined
       +input({ label: "Placeholder...", value: "No initial bar" }).no-initial-bar.no-floating.white.outlined
-      +button-icon("action-search").outlined.secondary
+      +button-icon("search").outlined.secondary.compact
     +multiple.joined
       +input({ label: "Placeholder...", value: "Compact" }).no-bar.no-floating.white.outlined.compact
-      +button-icon("action-search").outlined
+      +button-icon("search").outlined.compact
     +multiple.joined
       +label-simple.gray.outlined http://
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white.outlined

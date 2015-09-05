@@ -8,14 +8,14 @@ extends ../layout.jade
 append main
   +divider Base
 
-  +container-simple
+  +container-simple.outlined
     +progressbar(33)
     +progressbar(55).striped
     +progressbar({ percentages: [{ value: 45 }], labeled: true })
 
   +divider Colored
 
-  +container-simple
+  +container-simple.outlined
     +progressbar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' })
     +progressbar({ value: 5, color: 'yellow' }, { value: 5, color: 'green' }, { value: 5, color: 'pink' }, { value: 5, color: 'teal' }).striped
     +progressbar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
@@ -23,7 +23,7 @@ append main
 
   +divider Disabled
 
-  +container-simple
+  +container-simple.outlined
     +progressbar(45).progressbar-disabled
     +progressbar(66).striped.progressbar-disabled
     +progressbar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).progressbar-disabled
@@ -32,7 +32,7 @@ append main
 
   +divider Created
 
-  +container-simple.created
+  +container-simple.created.outlined
 
   +multiple
     +button-simple("progressbar_create ( 22 )").outlined Basic

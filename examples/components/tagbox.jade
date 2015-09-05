@@ -6,21 +6,21 @@ extends ../layout.jade
 append main
   +divider Tagbox
 
-  +container-simple
+  +container-simple.outlined
     +tagbox({ name: "name", tags: "these,are,some,tags" })
 
   +divider Actions
 
   +multiple
-    +button-simple("tagbox_get ()") Get
+    +button-simple("tagbox_get ()").outlined Get
     +multiple.joined
-      +input({ name: "input_add", label: "Add tags..." }).no-floating.white.text-field-primary
-      +button-simple("tagbox_add ()").primary Add
+      +input({ name: "input_add", label: "Add tags..." }).no-floating.white.text-field-primary.outlined
+      +button-simple("tagbox_add ()").primary.outlined Add
     +multiple.joined
-      +input({ name: "input_remove", label: "Remove tags..." }).no-floating.white.text-field-secondary
-      +button-simple("tagbox_remove ()").secondary Remove
-    +button-simple("tagbox_clear ()").black Clear
-    +button-simple("tagbox_reset ()") Reset
+      +input({ name: "input_remove", label: "Remove tags..." }).no-floating.white.text-field-secondary.outlined
+      +button-simple("tagbox_remove ()").secondary.outlined Remove
+    +button-simple("tagbox_clear ()").black.outlined Clear
+    +button-simple("tagbox_reset ()").outlined Reset
 
 append body-end
   +script.

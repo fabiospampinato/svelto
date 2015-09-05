@@ -6,26 +6,26 @@ extends ../layout.jade
 append main
   +divider Datepicker
 
-  +container-simple
+  +container-simple.outlined
     +datepicker(id="datepicker_test")
 
   +divider Input
 
-  +input({ name: "datepicker_test", label: "YYYY-MM-DD" }).white.no-floating
+  +input({ name: "datepicker_test", label: "YYYY-MM-DD" }).white.no-floating.outlined
 
   +divider Actions
 
   +multiple
     +multiple.joined
-      +checkbox({ name: "datepicker_get_formatted", title: "Formatted", value: 1 })
-      +button-simple("datepicker_get ()").primary Get
+      +checkbox({ name: "datepicker_get_formatted", title: "Formatted", value: 1 }).outlined
+      +button-simple("datepicker_get ()").primary.outlined Get
     +multiple.joined
-      +input({ name: "datepicker_delta_months", label: "Delta months..." }).no-floating.white.text-field-secondary
-      +button-simple("datepicker_navigate ()").secondary Navigate
+      +input({ name: "datepicker_delta_months", label: "Delta months..." }).no-floating.white.text-field-secondary.outlined
+      +button-simple("datepicker_navigate ()").secondary.outlined Navigate
     +multiple.joined
-      +button-icon("chevron_left", "datepicker_navigate_prev ()")
-      +label-simple Month
-      +button-icon("chevron_right", "datepicker_navigate_next ()")
+      +button-icon("chevron_left", "datepicker_navigate_prev ()").outlined
+      +label-simple.outlined Month
+      +button-icon("chevron_right", "datepicker_navigate_next ()").outlined
 
 append body-end
   +script.

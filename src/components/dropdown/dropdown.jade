@@ -20,7 +20,7 @@ mixin dropdown-btn(options)
   +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
     +button-center
       if options.title
-        span= title
+        span= options.title
       if options.icon
         +icon(options.icon)
 

@@ -19,7 +19,7 @@
   width: $flag-width;
   height: $flag-height;
   content: '';
-  background-image: url('/assets/images/presto/flags.png');
+  background-image: url('/flags.png');
 }
 
 .flag[class*=" flag-"]:before {

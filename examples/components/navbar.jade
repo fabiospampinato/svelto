@@ -15,17 +15,17 @@ append main
   +divider Slim
 
   +multiple
-    +navbar-btn({ icon: "chevron_left", id: "left-slim" })
-    +navbar-btn({ icon: "expand_less", id: "top-slim" })
-    +navbar-btn({ icon: "expand_more", id: "bottom-slim" })
-    +navbar-btn({ icon: "chevron_right", id: "right-slim" })
+    +navbar-btn({ icon: "chevron_left", id: "left-slim" }).compact
+    +navbar-btn({ icon: "expand_less", id: "top-slim" }).compact
+    +navbar-btn({ icon: "expand_more", id: "bottom-slim" }).compact
+    +navbar-btn({ icon: "chevron_right", id: "right-slim" }).compact
 
   +divider Attached
 
   +multiple
     +navbar-btn({ title: "Left", icon: "chevron_left", id: "left-attached" })
-    +navbar-btn({ icon: "expand_less", id: "top-attached" })
-    +navbar-btn({ icon: "expand_more", id: "bottom-attached" })
+    +navbar-btn({ icon: "expand_less", id: "top-attached" }).compact
+    +navbar-btn({ icon: "expand_more", id: "bottom-attached" }).compact
     +navbar-btn({ title: "Right", icon: "chevron_right", id: "right-attached" })
 
   +divider Actions

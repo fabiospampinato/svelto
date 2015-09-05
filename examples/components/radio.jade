@@ -7,15 +7,15 @@ append main
   +divider Radio
 
   +multiple
-    +radio({ name: "name", title: "Base", value: 4 })
-    +radio({ name: "name", title: "Checked", value: 8, checked: true })
-    +radio({ name: "name", title: "Disabled", value: 8, checked: true }).radio-disabled
+    +radio({ name: "name", title: "Base", value: 4 }).outlined
+    +radio({ name: "name", title: "Checked", value: 8, checked: true }).outlined
+    +radio({ name: "name", title: "Disabled", value: 8, checked: true }).radio-disabled.outlined
 
   +divider Actions
 
   +multiple
-    +button-simple("radios_get_all ()") Get all
-    +button-simple("radios_check_all ()") Check all
+    +button-simple("radios_get_all ()").outlined Get all
+    +button-simple("radios_check_all ()").outlined Check all
 
 append body-end
   script.

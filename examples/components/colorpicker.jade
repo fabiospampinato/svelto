@@ -6,9 +6,9 @@ extends ../layout.jade
 append main
   +divider Colorpicker
 
-  +container-simple
+  +container-simple.outlined
     +colorpicker(id="colorpicker_test")
 
   +divider Input
 
-  +input({ name: "colorpicker_test", label: "Hex color..." }).white.no-floating
+  +input({ name: "colorpicker_test", label: "Hex color..." }).white.no-floating.outlined

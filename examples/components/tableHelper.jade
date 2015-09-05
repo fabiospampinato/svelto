@@ -6,16 +6,14 @@ extends ../layout.jade
 append main
   +divider Table
 
-  +container-simple
-    table
+  +container-simple.outlined
+    table.table.bordered
       thead
         tr
           th First
           th Second
           th Third
           th Fourth
-      tfoot
-
       tbody
         +table-tr-empty
 

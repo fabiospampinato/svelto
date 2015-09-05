@@ -1,7 +1,11 @@
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Settings (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* =========================================================================
+ * Svelto - Normalize v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,7 +14,7 @@
 /**
  * 1. Set default font family to sans-serif.
  * 2. Prevent iOS text size adjust after orientation change, without disabling
- *    user zoom.
+ *  user zoom.
  */
 html {
   font-family: sans-serif;
@@ -228,7 +232,7 @@ samp {
  */
 /**
  * 1. Correct color not being inherited.
- *    Known issue: affects color of disabled elements.
+ *  Known issue: affects color of disabled elements.
  * 2. Correct font properties not being inherited.
  * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
  */
@@ -265,10 +269,10 @@ select {
 
 /**
  * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
- *    and `video` controls.
+ *  and `video` controls.
  * 2. Correct inability to style clickable `input` types in iOS.
  * 3. Improve usability and consistency of cursor style between image-type
- *    `input` and others.
+ *  `input` and others.
  */
 button,
 html input[type="button"], input[type="reset"],
@@ -333,7 +337,7 @@ input[type="number"]::-webkit-outer-spin-button {
 /**
  * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
  * 2. Address `box-sizing` set to `border-box` in Safari and Chrome
- *    (include `-moz` to future-proof).
+ *  (include `-moz` to future-proof).
  */
 input[type="search"] {
   -webkit-appearance: textfield;
@@ -404,57 +408,43 @@ th {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Border Radius (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Center (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Fill (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Gradients (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Image (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Margin (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Media Queries (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -462,17 +452,13 @@ th {
 /* HEIGHT */
 /* HDPI */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Padding (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Responsive (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -481,33 +467,25 @@ th {
 /* DROWN */
 /* RANGE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Shapes (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Text (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Others (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Mixins (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -526,27 +504,21 @@ th {
  * @requires _others.scss
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Constants (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* CONSTANTS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Environment (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* ENVIRONMENT */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Breakpoints (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -554,9 +526,7 @@ th {
 /* BREAKPOINTS */
 /* BREAKPOINTS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Layout (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -567,9 +537,7 @@ th {
 /* GUTTER */
 /* BORDER RADIUS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Colors (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -598,9 +566,7 @@ th {
 /* BASE */
 /* COLORS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Colors v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1510,18 +1476,14 @@ th {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Icons (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* ICONS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Typography (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1540,9 +1502,7 @@ th {
 /* CODE */
 /* KBD */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Sizes (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1555,9 +1515,7 @@ th {
 /* SIZES */
 /* SIZES */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Sizes v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1611,9 +1569,7 @@ th {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Z-Depths (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1621,9 +1577,7 @@ th {
 /* DEPTHS */
 /* DEPTHS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Z-Depths v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1733,27 +1687,21 @@ th {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Outline (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* OUTLINE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Grid (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* GRID */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Typography v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1958,9 +1906,7 @@ kbd p > a:hover {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Base (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1970,9 +1916,7 @@ kbd p > a:hover {
 /* TOOLBAR */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Base v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2090,7 +2034,7 @@ body.fixed-header > main {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+ * Svelto - Core v0.1.0
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2118,9 +2062,7 @@ body.fixed-header > main {
  * @requires ../base/_base.scss
  * ========================================================================= */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Expander (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2129,9 +2071,7 @@ body.fixed-header > main {
  * ========================================================================= */
 /* EXPANDER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Expander v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2182,9 +2122,7 @@ body.fixed-header > main {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Accordion v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2218,9 +2156,7 @@ body.fixed-header > main {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Breadcrumb (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2230,9 +2166,7 @@ body.fixed-header > main {
 /* BREADCRUMB */
 /* DIVIDER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Breadcrumb v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2266,9 +2200,7 @@ body.fixed-header > main {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Button (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2277,9 +2209,7 @@ body.fixed-header > main {
  * ========================================================================= */
 /* BUTTON */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Accordion v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2294,9 +2224,7 @@ button {
 
 /* BUTTON */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Chat (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2305,9 +2233,7 @@ button {
  * ========================================================================= */
 /* CHAT */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Chat v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2407,9 +2333,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Checkbox (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2418,9 +2342,7 @@ button {
  * ========================================================================= */
 /* CHECKBOX */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Checkbox v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2466,9 +2388,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Colorpicker (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2482,9 +2402,7 @@ button {
 /* HANDLER SB */
 /* HANDLER HUE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Colorpicker v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2569,9 +2487,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Container (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2583,9 +2499,7 @@ button {
 /* CONTENT */
 /* FOOTER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Container v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2736,9 +2650,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Datepicker (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2751,9 +2663,7 @@ button {
 /* DAY CIRCLE */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Datepicker v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2889,9 +2799,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Divider (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2903,9 +2811,7 @@ button {
 /* TEXT */
 /* SPACER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Divider v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3011,9 +2917,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Dropdown (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3025,9 +2929,7 @@ hr {
 /* CONTAINER */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Dropdown v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3175,9 +3077,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Embedded (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3186,9 +3086,7 @@ hr {
  * ========================================================================= */
 /* EMBEDDED */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Embedded v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3229,9 +3127,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Flags (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3242,9 +3138,7 @@ hr {
 /* SIZE */
 /* OTHERS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Falgs v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3257,7 +3151,7 @@ hr {
   width: 16px;
   height: 11px;
   content: '';
-  background-image: url("/assets/images/presto/flags.png");
+  background-image: url("/flags.png");
 }
 
 /* FLAGS */
@@ -4226,9 +4120,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Flippable (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4237,9 +4129,7 @@ hr {
  * ========================================================================= */
 /* FLIPPABLE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Flippable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4312,9 +4202,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Footer (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4323,9 +4211,7 @@ hr {
  * ========================================================================= */
 /* FOOTER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Footer v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4367,9 +4253,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Header (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4378,9 +4262,7 @@ hr {
  * ========================================================================= */
 /* HEADER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Header v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4412,9 +4294,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Helpers Responsive v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4934,9 +4814,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Helpers (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4948,9 +4826,7 @@ hr {
 /* ROTATE */
 /* OTHERS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Helpers v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5184,9 +5060,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Highlight (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5195,9 +5069,7 @@ hr {
  * ========================================================================= */
 /* HIGHLIGHT */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Highlight v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5357,9 +5229,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Icons v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5390,9 +5260,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Image (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5402,9 +5270,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 /* IMAGE */
 /* CAPTION */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Image v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5510,9 +5376,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Infobar (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5521,9 +5385,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
  * ========================================================================= */
 /* INFOBAR */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Infobar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5651,9 +5513,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Label (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5667,9 +5527,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 /* CORNER */
 /* FLOATING */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Input (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5684,9 +5542,7 @@ i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.sl
 /* STATES */
 /* OTHERS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Input v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6064,9 +5920,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Keyframes v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6096,9 +5950,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Label v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6584,9 +6436,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Modal (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6595,9 +6445,7 @@ label {
  * ========================================================================= */
 /* MODAL */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Modal v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6673,9 +6521,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Multiple (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6684,9 +6530,7 @@ label {
  * ========================================================================= */
 /* MULTIPLE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Multiple v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7170,9 +7014,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Navbar (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7183,9 +7025,7 @@ label {
 /* SLIM SIZES */
 /* ATTACHED */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Navbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7752,9 +7592,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Noty (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7764,9 +7602,7 @@ label {
 /* NOTY */
 /* BREAKPOINTS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Noty v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7986,9 +7822,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Outline v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8100,9 +7934,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Pagination (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8111,9 +7943,7 @@ label {
  * ========================================================================= */
 /* PAGINATION */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Pagination v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8139,9 +7969,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Parallax (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8153,9 +7981,7 @@ label {
 /* BACKGROUND */
 /* FOREGROUND */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Parallax v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8223,9 +8049,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Placeholder (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8265,9 +8089,7 @@ label {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Prism (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8338,9 +8160,7 @@ code[class*='language-'] .namespace {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Progressbar (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8354,9 +8174,7 @@ code[class*='language-'] .namespace {
 /* STRIPE */
 /* OTHERS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Progressbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8364,13 +8182,13 @@ code[class*='language-'] .namespace {
  * @requires _settings.scss
  * ========================================================================= */
 /* STRIPES */
-.progressBar.striped > .progressBar-stripes {
+.progressbar.striped > .progressbar-stripes {
   background: -webkit-linear-gradient(135deg, rgba(255, 255, 255, 0.075) 25%, rgba(0, 0, 0, 0.075) 25%, rgba(0, 0, 0, 0.075) 50%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.075) 75%, rgba(0, 0, 0, 0.075) 75%, rgba(0, 0, 0, 0.075));
   background: linear-gradient(-45deg, rgba(255, 255, 255, 0.075) 25%, rgba(0, 0, 0, 0.075) 25%, rgba(0, 0, 0, 0.075) 50%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.075) 75%, rgba(0, 0, 0, 0.075) 75%, rgba(0, 0, 0, 0.075));
 }
 
 /* PROGRESS BAR */
-.progressBar {
+.progressbar {
   position: relative;
   display: -webkit-box;
   display: -webkit-flex;
@@ -8387,7 +8205,7 @@ code[class*='language-'] .namespace {
   border-radius: 10000px 10000px;
 }
 
-.progressBar > .progressBar-unhighlighted {
+.progressbar > .progressbar-unhighlighted {
   border-color: #999999 ;
   color: #3f3f3f ;
   background: #cccccc ;
@@ -8398,19 +8216,19 @@ code[class*='language-'] .namespace {
   width: 100%;
 }
 
-.progressBar > .progressBar-unhighlighted p > a {
+.progressbar > .progressbar-unhighlighted p > a {
   color: #ffffff ;
 }
 
-.progressBar > .progressBar-unhighlighted p > a:before {
+.progressbar > .progressbar-unhighlighted p > a:before {
   border-color: white ;
 }
 
-.progressBar > .progressBar-unhighlighted p > a:hover {
+.progressbar > .progressbar-unhighlighted p > a:hover {
   color: white ;
 }
 
-.progressBar > .progressBar-unhighlighted > .progressBar-highlighted {
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted {
   border-color: #dc3500 ;
   color: #ffffff ;
   background: #ff7043 ;
@@ -8434,24 +8252,24 @@ code[class*='language-'] .namespace {
   text-overflow: ellipsis;
 }
 
-.progressBar > .progressBar-unhighlighted > .progressBar-highlighted p > a {
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a {
   color: #2967ab ;
 }
 
-.progressBar > .progressBar-unhighlighted > .progressBar-highlighted p > a:before {
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a:before {
   border-color: #2b6cb3 ;
 }
 
-.progressBar > .progressBar-unhighlighted > .progressBar-highlighted p > a:hover {
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a:hover {
   color: #2b6cb3 ;
 }
 
-.progressBar > .progressBar-unhighlighted > .progressBar-highlighted > .progressBar-label {
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted > .progressbar-label {
   font-size: 0.8em;
   padding: 0 0.5em;
 }
 
-.progressBar > .progressBar-stripes {
+.progressbar > .progressbar-stripes {
   position: absolute;
   top: 0;
   left: 0;
@@ -8459,7 +8277,7 @@ code[class*='language-'] .namespace {
   pointer-events: none;
 }
 
-.progressBar.striped > .progressBar-stripes {
+.progressbar.striped > .progressbar-stripes {
   display: block;
   width: 0;
   height: 100%;
@@ -8468,17 +8286,17 @@ code[class*='language-'] .namespace {
   background-size: 3.33333em 3.33333em;
 }
 
-.progressBar.striped:not(.progressBar-disabled) > .progressBar-stripes {
-  -webkit-animation: progressBar-stripes-move 2s linear 0s infinite;
-          animation: progressBar-stripes-move 2s linear 0s infinite;
+.progressbar.striped:not(.progressbar-disabled) > .progressbar-stripes {
+  -webkit-animation: progressbar-stripes-move 2s linear 0s infinite;
+          animation: progressbar-stripes-move 2s linear 0s infinite;
 }
 
-.progressBar.progressBar-disabled {
+.progressbar.progressbar-disabled {
   opacity: 0.5;
 }
 
 /* KEYFRAMES */
-@-webkit-keyframes progressBar-stripes-move {
+@-webkit-keyframes progressbar-stripes-move {
   0% {
     background-position: 0 0;
   }
@@ -8486,7 +8304,7 @@ code[class*='language-'] .namespace {
     background-position: 3.33333em 3.33333em;
   }
 }
-@keyframes progressBar-stripes-move {
+@keyframes progressbar-stripes-move {
   0% {
     background-position: 0 0;
   }
@@ -8496,9 +8314,7 @@ code[class*='language-'] .namespace {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Radio v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8507,9 +8323,7 @@ code[class*='language-'] .namespace {
  * ========================================================================= */
 /* RADIO */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Ripple (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8520,9 +8334,7 @@ code[class*='language-'] .namespace {
 /* CIRCLE */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Ripple v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8673,9 +8485,7 @@ a.ripple > .ripple-circle {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Select (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8684,9 +8494,7 @@ a.ripple > .ripple-circle {
  * ========================================================================= */
 /* SELECT DROPDOWN */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Select v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8764,9 +8572,7 @@ a.ripple > .ripple-circle {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Selectable (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8775,9 +8581,7 @@ a.ripple > .ripple-circle {
  * ========================================================================= */
 /* SELECTABLE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Selectable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8794,9 +8598,7 @@ table.table.selectable > tbody > tr.selected {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Shapes v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8875,9 +8677,7 @@ table.table.selectable > tbody > tr.selected {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Slider (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8893,9 +8693,7 @@ table.table.selectable > tbody > tr.selected {
 /* LABEL */
 /* OTHERS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Switch (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8907,9 +8705,7 @@ table.table.selectable > tbody > tr.selected {
 /* HANDLER */
 /* OTHERS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Slider v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9152,9 +8948,7 @@ table.table.selectable > tbody > tr.selected {
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Sortable (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9163,9 +8957,7 @@ table.table.selectable > tbody > tr.selected {
  * ========================================================================= */
 /* SORTABLE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Sortable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9206,9 +8998,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Spinner (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9218,9 +9008,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 /* SPINNER */
 /* SPINNER OVERLAY */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Spinner v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9756,18 +9544,14 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Stepper v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* STEPPER */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Switch v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9881,9 +9665,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Table (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9896,9 +9678,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 /* STRIPED */
 /* HOVERABLE */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Table v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10133,9 +9913,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tabs (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10144,9 +9922,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * ========================================================================= */
 /* TABS */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tabs v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10279,9 +10055,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tagbox (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10291,9 +10065,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 /* TAGBOX */
 /* INPUT */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tagbox v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10349,9 +10121,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Textarea (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10360,9 +10130,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * ========================================================================= */
 /* TEXTAREA */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Textarea v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10427,9 +10195,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Toolbar (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10438,9 +10204,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * ========================================================================= */
 /* TOOLBAR */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Toolbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10471,9 +10235,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 }
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Widget (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10482,9 +10244,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * ========================================================================= */
 /* WIDGET */
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Widget v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

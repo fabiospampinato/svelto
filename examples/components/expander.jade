@@ -6,38 +6,38 @@ extends ../layout.jade
 append main
   +divider Expander
 
-  +expander
-    +container-header("Base").actionable.expander-toggler
+  +expander.outlined
+    +container-header("Base").actionable.expander-toggler.outlined
       +multiple-right
-        +button-icon("keyboard_arrow_down").small
+        +button-icon("keyboard_arrow_down").small.compact
     +container-content Content of base
 
-  +expander
-    +container-header
+  +expander.outlined
+    +container-header.outlined
       +multiple-left
         p Base left - Button toggler
       +multiple-right
-        +button-icon("keyboard_arrow_down").small.expander-toggler
+        +button-icon("keyboard_arrow_down").small.expander-toggler.compact
     +container-content Content of base left - Button toggler
 
-  +expander
-    +container-header("Icon to the left").actionable.expander-toggler
+  +expander.outlined
+    +container-header("Icon to the left").actionable.expander-toggler.outlined
       +multiple-left
-        +button-icon("keyboard_arrow_down").small
+        +button-icon("keyboard_arrow_down").small.compact
     +container-content Content of icon to the left
 
-  +expander.opened
-    +container-header("Opened").actionable.expander-toggler
+  +expander.opened.outlined
+    +container-header("Opened").actionable.expander-toggler.outlined
       +multiple-right
-        +button-icon("keyboard_arrow_down").small
+        +button-icon("keyboard_arrow_down").small.compact
     +container-content Content of opened
 
   +divider Actions
 
   +multiple
-    +button-simple("accordions_action ( 'toggle' )") Toggle all
-    +button-simple("accordions_action ( 'open' )") Open all
-    +button-simple("accordions_action ( 'close' )") Close all
+    +button-simple("accordions_action ( 'toggle' )").outlined Toggle all
+    +button-simple("accordions_action ( 'open' )").outlined Open all
+    +button-simple("accordions_action ( 'close' )").outlined Close all
 
 append body-end
   +script.

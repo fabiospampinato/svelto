@@ -1,12 +1,22 @@
 
-//- Accordion
+//- =========================================================================
+//- Svelto - Accordion v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin accordion
   .accordion&attributes(attributes)
     block
 
 
-//- Base
+//- =========================================================================
+//- Svelto - Base v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin css(url, media)
   - media = media || "all";
@@ -20,7 +30,12 @@ mixin script
     block
 
 
-//- Breadcrumb
+//- =========================================================================
+//- Svelto - Breadcrumb v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin breadcrumb
   .breadcrumb&attributes(attributes)
@@ -35,7 +50,12 @@ mixin breadcrumb-divider(icon)
       +icon(icon)
 
 
-//- Button
+//- =========================================================================
+//- Svelto - Button v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin button-wrp
   .label-wrp&attributes(attributes).button-wrp
@@ -145,7 +165,12 @@ mixin button-corner(direction, icon)
         block
 
 
-//- Chat
+//- =========================================================================
+//- Svelto - Chat v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -182,8 +207,8 @@ mixin chat-msg(options)
           img(src=options.sender.img title=options.sender.name)
       .chat-msg-indicator
     .chat-msg-content
-      +container
-        +container-header.inherit
+      +container.outlined
+        +container-header.inherit.outlined
           if options.sender.name !== "Unknown"
             +multiple-left
               if options.sender.url
@@ -191,20 +216,25 @@ mixin chat-msg(options)
               else
                 = options.sender.name
           +multiple-right
-            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).small.outlined
+            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).small.outlined.compact
             if options.permissions
               if options.permissions.own
-                +button-icon("action-account-circle")(title="You are the owner").small.outlined
+                +button-icon("account_circle")(title="You are the owner").small.outlined.compact
               if options.permissions.reply
-                +button-icon("content-reply")(title="Reply").small.outlined
+                +button-icon("reply")(title="Reply").small.outlined.compact
               if options.permissions.edit
-                +button-icon("editor-mode-edit")(title="Edit").small.outlined
+                +button-icon("mode_edit")(title="Edit").small.outlined.compact
               if options.permissions.delete
-                +button-icon("action-delete")(title="Delete").small.outlined
+                +button-icon("delete")(title="Delete").small.outlined.compact
         +container-content= options.message.content
 
 
-//- Checkbox
+//- =========================================================================
+//- Svelto - Checkbox v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- TODO: the value should be setted to 1 by default if is not provided
 
@@ -246,12 +276,17 @@ mixin checkbox(options)
         input(type="radio" value=value)
     +button-center
       if options.title
-        span options.title
+        span= options.title
       +icon(options.icons.on)(class=options.colors.on).icon-on
       +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
-//- Colorpicker
+//- =========================================================================
+//- Svelto - Colorpicker v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin colorpicker
   .colorpicker&attributes(attributes)
@@ -264,7 +299,12 @@ mixin colorpicker
       .colorpicker-handler
 
 
-//- Container
+//- =========================================================================
+//- Svelto - Container v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -308,7 +348,12 @@ mixin container-simple(options)
       block
 
 
-//- Datepicker
+//- =========================================================================
+//- Svelto - Datepicker v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin datepicker
   .datepicker&attributes(attributes)
@@ -374,7 +419,12 @@ mixin datepicker
         .datepicker-day-next 6
 
 
-//- Divider
+//- =========================================================================
+//- Svelto - Divider v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin divider
   +divider-block&attributes(attributes)
@@ -406,7 +456,12 @@ mixin divider-spacer
       block
 
 
-//- Dropdown
+//- =========================================================================
+//- Svelto - Dropdown v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
 
@@ -422,7 +477,7 @@ mixin dropdown-btn(options)
   +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
     +button-center
       if options.title
-        span= title
+        span= options.title
       if options.icon
         +icon(options.icon)
 
@@ -435,6 +490,13 @@ mixin dropdown(id)
     +container
       block
 
+
+//- =========================================================================
+//- Svelto - Embedded v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- EMBEDDED
 
@@ -467,7 +529,12 @@ mixin object(data)
   object(data=data)&attributes(attributes)
 
 
-//- Expander
+//- =========================================================================
+//- Svelto - Expander v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -484,21 +551,24 @@ mixin expander(options)
     block
 
 
-//- Flags
+//- =========================================================================
+//- Svelto - Flags v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin flag(flag)
   .flag(class="flag-" + flag)&attributes(attributes)
     block
 
 
-//- Footer
-
-mixin footer
-  .footer&attributes(attributes)
-    block
-
-
-//- Flippable
+//- =========================================================================
+//- Svelto - Flippable v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin flippable
   .flippable-wrp&attributes(attributes)
@@ -514,7 +584,24 @@ mixin flippable-back
     block
 
 
-//- Form
+//- =========================================================================
+//- Svelto - Footer v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin footer
+  .footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Form v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin form
   form&attributes(attributes)
@@ -548,7 +635,12 @@ mixin form-button-icon(icon, href)
       block
 
 
-//- Header
+//- =========================================================================
+//- Svelto - Header v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- FIXME: do not use inline style
 //- FIXME: make it more general, so that not just an image url can be set as a bacground but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
@@ -563,7 +655,12 @@ mixin header-with-bg(background_image_url)
     .header-background(style="background:url(" + background_image_url + ") no-repeat center center fixed;")
 
 
-//- Icons
+//- =========================================================================
+//- Svelto - Icons v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin icon(icon)
   i.icon&attributes(attributes)
@@ -572,7 +669,12 @@ mixin icon(icon)
     block
 
 
-//- Image
+//- =========================================================================
+//- Svelto - Image v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin image(url)
   +container&attributes(attributes).image-wrp
@@ -589,7 +691,12 @@ mixin image-sample
     block
 
 
-//- Infobar
+//- =========================================================================
+//- Svelto - Infobar v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -603,7 +710,7 @@ mixin infobar(options)
   .infobar-wrp&attributes(attributes)
     if options.icon
       +infobar-left
-        +icon(icon)(class=((options.title && options.subtitle) ? "xlarge" : ""))
+        +icon(options.icon)(class=((options.title && options.subtitle) ? "xxxlarge" : ""))
     if options.title || options.subtitle
       +infobar-center
         if options.title
@@ -643,7 +750,12 @@ mixin infobar-bottom
     block
 
 
-//- Input
+//- =========================================================================
+//- Svelto - Input v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -665,7 +777,12 @@ mixin input(options)
     .text-field-bar
 
 
-//- Label
+//- =========================================================================
+//- Svelto - Label v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin label-wrp
   .label-wrp&attributes(attributes)
@@ -762,7 +879,12 @@ mixin label-corner(direction, icon)
         block
 
 
-//- Modal
+//- =========================================================================
+//- Svelto - Modal v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin modal
   .modal&attributes(attributes)
@@ -770,7 +892,12 @@ mixin modal
     block
 
 
-//- Multiple
+//- =========================================================================
+//- Svelto - Muliple v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin multiple
   .multiple-wrp&attributes(attributes)
@@ -801,7 +928,12 @@ mixin multiple-right
   .multiple-sub-spacer
 
 
-//- Navbar
+//- =========================================================================
+//- Svelto - Navbar v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -814,9 +946,9 @@ mixin navbar-btn(options)
   +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
     +button-center
       if options.title
-        span options.title
+        span= options.title
       if options.icon
-        +icon(icon)
+        +icon(options.icon)
 
 //- Options
   {
@@ -835,7 +967,12 @@ mixin navbar(options)
     .background.navbar-closer
 
 
-//- Notification
+//- =========================================================================
+//- Svelto - Notification v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -848,7 +985,12 @@ mixin notification(options)
   +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 
-//- Noty
+//- =========================================================================
+//- Svelto - Noty v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options: See noty component
 
@@ -856,7 +998,12 @@ mixin noty(options)
   +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
 
 
-//- Others
+//- =========================================================================
+//- Svelto - Others v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- TODO: add optional third parameter that toggles the randomization process
 
@@ -917,7 +1064,12 @@ mixin centerer
     block
 
 
-//- Pagination
+//- =========================================================================
+//- Svelto - Pagination v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1004,7 +1156,12 @@ mixin pagination(options)
       block
 
 
-//- Parallax
+//- =========================================================================
+//- Svelto - Parallax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin parallax
   .parallax&attributes(attributes)
@@ -1041,7 +1198,12 @@ mixin parallax-layer-foreground
     block
 
 
-//- Placeholder
+//- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1050,7 +1212,7 @@ mixin parallax-layer-foreground
     empty: '' // Placeholder is empty or not
   }
 
-mixin placeholder(width, height, empty)
+mixin placeholder(options)
   - options = options || {};
   - options.width = options.width || 0;
   - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
@@ -1058,21 +1220,31 @@ mixin placeholder(width, height, empty)
   - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
   - options.empty = options.empty || false;
   .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !empty
+    if !options.empty
       if block
         block
       else
         = options.width + " - " + options.height
 
 
-//- Syntax
+//- =========================================================================
+//- Svelto - Syntax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin syntax(language)
   code(class="language-" + language)&attributes(attributes)
     block
 
 
-//- Progressbar
+//- =========================================================================
+//- Svelto - Progressbar v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- TODO: Write options docs block
 
@@ -1097,7 +1269,12 @@ mixin progressbar(options, multiple)
     .progressbar-stripes(style=("width: " + total + "%;"))
 
 
-//- Radio
+//- =========================================================================
+//- Svelto - Radio v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1137,12 +1314,17 @@ mixin radio(options)
         input(type="radio" value=value)
     +button-center
       if options.title
-        span options.title
+        span= options.title
       +icon(options.icons.on)(class=options.colors.on).icon-on
       +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
-//- Select
+//- =========================================================================
+//- Svelto - Select v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- FIXME: Add support for arbitrary number of optgroups levels
 //- TODO: Make the mixin set the defualt value at the compilation time
@@ -1186,7 +1368,12 @@ mixin select(options)
           option(value=prop)= val
 
 
-//- Shapes
+//- =========================================================================
+//- Svelto - Shapes v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin triangle
   .triangle&attributes(attributes)
@@ -1215,7 +1402,7 @@ mixin square
 mixin square-sample
   .square-sample&attributes(attributes)
     p.no-margin
-      +lorem-ipsum(10, 'words')
+      +lorem-ipsum({ type: 'words', amount: 10 })
     block
 
 mixin circle
@@ -1223,7 +1410,12 @@ mixin circle
     block
 
 
-//- Slider
+//- =========================================================================
+//- Svelto - Slider v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1257,7 +1449,12 @@ mixin slider(options)
           .slider-label= value
 
 
-//- Spinner
+//- =========================================================================
+//- Svelto - Spinner v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin spinner
   .spinner-wrp&attributes(attributes)
@@ -1288,7 +1485,12 @@ mixin spinner-multiple(options)
         +spinner-no-wrp(class=color)
 
 
-//- Stepper
+//- =========================================================================
+//- Svelto - Stepper v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1312,7 +1514,12 @@ mixin stepper(options)
     +button-icon("add").stepper-increaser
 
 
-//- Switch
+//- =========================================================================
+//- Svelto - Switch v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1360,7 +1567,12 @@ mixin switch(options)
             +icon(options.icons.off).icon-off
 
 
-//- Table
+//- =========================================================================
+//- Svelto - Table v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin table-tr-empty ( empty_str )
   tr&attributes(attributes).empty.hidden
@@ -1374,7 +1586,12 @@ mixin table-tr-empty ( empty_str )
           = "Empty"
 
 
-//- Tabs
+//- =========================================================================
+//- Svelto - Tabs v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin tabs
   .tabs&attributes(attributes)
@@ -1393,7 +1610,12 @@ mixin tabs-containers
     block
 
 
-//- Tagbox
+//- =========================================================================
+//- Svelto - Tagbox v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1418,7 +1640,12 @@ mixin tagbox(options)
         +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
 
 
-//- Textarea
+//- =========================================================================
+//- Svelto - Textarea v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Options
   {
@@ -1437,13 +1664,25 @@ mixin textarea(options)
     .text-field-bar
 
 
-//- Toolbar
+//- =========================================================================
+//- Svelto - Toolbar v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 mixin toolbar
   .toolbar&attributes(attributes)
     +multiple.expanded
       block
 
+
+//- =========================================================================
+//- Svelto - Typography v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
 
 //- Link
 

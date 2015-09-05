@@ -9,15 +9,15 @@ append main
   +divider Dropdown
 
   +multiple
-    +dropdown-btn({ title: "Base", id: "base" })
-    +dropdown-btn({ title: "Attached", id: "attached" })
-    +dropdown-btn({ title: "No tip", id: "notip" })
-    +dropdown-btn({ icon: "settings", id: "base" })
-    +dropdown-btn({ icon: "settings", id: "base" }).rounded
-    +dropdown-btn({ title: "Dividers", id: "dividers" })
-    +dropdown-btn({ title: "Advanced", id: "advanced" })
-    +dropdown-btn({ title: "Long text", id: "long_text" })
-    +dropdown-btn({ title: "Long text 2", id: "long_text2" })
+    +dropdown-btn({ title: "Base", id: "base" }).outlined
+    +dropdown-btn({ title: "Attached", id: "attached" }).outlined
+    +dropdown-btn({ title: "No tip", id: "notip" }).outlined
+    +dropdown-btn({ icon: "settings", id: "base" }).outlined
+    +dropdown-btn({ icon: "settings", id: "base" }).rounded.outlined
+    +dropdown-btn({ title: "Dividers", id: "dividers" }).outlined
+    +dropdown-btn({ title: "Advanced", id: "advanced" }).outlined
+    +dropdown-btn({ title: "Long text", id: "long_text" }).outlined
+    +dropdown-btn({ title: "Long text 2", id: "long_text2" }).outlined
 
 append body
     +dropdown("base")

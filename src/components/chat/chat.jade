@@ -41,8 +41,8 @@ mixin chat-msg(options)
           img(src=options.sender.img title=options.sender.name)
       .chat-msg-indicator
     .chat-msg-content
-      +container
-        +container-header.inherit
+      +container.outlined
+        +container-header.inherit.outlined
           if options.sender.name !== "Unknown"
             +multiple-left
               if options.sender.url
@@ -50,14 +50,14 @@ mixin chat-msg(options)
               else
                 = options.sender.name
           +multiple-right
-            +button-icon("device-access-time")(data-timestamp-title=options.message.timestamp).small.outlined
+            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).small.outlined.compact
             if options.permissions
               if options.permissions.own
-                +button-icon("action-account-circle")(title="You are the owner").small.outlined
+                +button-icon("account_circle")(title="You are the owner").small.outlined.compact
               if options.permissions.reply
-                +button-icon("content-reply")(title="Reply").small.outlined
+                +button-icon("reply")(title="Reply").small.outlined.compact
               if options.permissions.edit
-                +button-icon("editor-mode-edit")(title="Edit").small.outlined
+                +button-icon("mode_edit")(title="Edit").small.outlined.compact
               if options.permissions.delete
-                +button-icon("action-delete")(title="Delete").small.outlined
+                +button-icon("delete")(title="Delete").small.outlined.compact
         +container-content= options.message.content

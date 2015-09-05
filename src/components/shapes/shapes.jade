@@ -33,7 +33,7 @@ mixin square
 mixin square-sample
   .square-sample&attributes(attributes)
     p.no-margin
-      +lorem-ipsum(10, 'words')
+      +lorem-ipsum({ type: 'words', amount: 10 })
     block
 
 mixin circle

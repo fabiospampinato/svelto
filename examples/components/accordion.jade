@@ -7,69 +7,69 @@ append main
   +divider Accordion
 
   +accordion
-    +expander
-      +container-header("Section 1").actionable.expander-toggler
+    +expander.outlined
+      +container-header("Section 1").actionable.expander-toggler.outlined
         +multiple-right
-          +button-icon("keyboard_arrow_down").small
+          +button-icon("keyboard_arrow_down").xsmall.compact
       +container-content
         +paragraph-sample
-    +expander.opened
-      +container-header
+    +expander.opened.outlined
+      +container-header.outlined
         +multiple-left
           p Section 2 - Button toggler
         +multiple-right
-          +button-icon("keyboard_arrow_down").small.expander-toggler
+          +button-icon("keyboard_arrow_down").xsmall.expander-toggler.compact
       +container-content
         +paragraph-sample
-    +expander
-      +container-header("Section 3").actionable.expander-toggler
+    +expander.outlined
+      +container-header("Section 3").actionable.expander-toggler.outlined
         +multiple-left
-          +button-icon("keyboard_arrow_down").small
+          +button-icon("keyboard_arrow_down").xsmall.compact
       +container-content
         +paragraph-sample
-    +expander
-      +container-header("Section 4").actionable.expander-toggler
+    +expander.outlined
+      +container-header("Section 4").actionable.expander-toggler.outlined
         +multiple-right
-          +button-icon("keyboard_arrow_down").small
+          +button-icon("keyboard_arrow_down").xsmall.compact
       +container-content
         +paragraph-sample
 
   +divider Accordion - Multiple
 
   +accordion.multiple
-    +expander
-      +container-header("Section 1").actionable.expander-toggler
+    +expander.outlined
+      +container-header("Section 1").actionable.expander-toggler.outlined
         +multiple-right
-          +button-icon("keyboard_arrow_down").small
+          +button-icon("keyboard_arrow_down").xsmall.compact
       +container-content
         +paragraph-sample
-    +expander.opened
-      +container-header
+    +expander.opened.outlined
+      +container-header.outlined
         +multiple-left
           p Section 2 - Button toggler
         +multiple-right
-          +button-icon("keyboard_arrow_down").small.expander-toggler
+          +button-icon("keyboard_arrow_down").xsmall.expander-toggler.compact
       +container-content
         +paragraph-sample
-    +expander
-      +container-header("Section 3").actionable.expander-toggler
+    +expander.outlined
+      +container-header("Section 3").actionable.expander-toggler.outlined
         +multiple-left
-          +button-icon("keyboard_arrow_down").small
+          +button-icon("keyboard_arrow_down").xsmall.compact
       +container-content
         +paragraph-sample
-    +expander
-      +container-header("Section 4").actionable.expander-toggler
+    +expander.outlined
+      +container-header("Section 4").actionable.expander-toggler.outlined
         +multiple-right
-          +button-icon("keyboard_arrow_down").small
+          +button-icon("keyboard_arrow_down").xsmall.compact
       +container-content
         +paragraph-sample
 
   +divider Actions
 
   +multiple
-    +button-simple("accordions_action ( 'toggleAll' )") Toggle all
-    +button-simple("accordions_action ( 'openAll' )") Open all
-    +button-simple("accordions_action ( 'closeAll' )") Close all
+    +button-simple("accordions_action ( 'toggleAll' )").outlined Toggle all
+    +button-simple("accordions_action ( 'openAll' )").outlined Open all
+    +button-simple("accordions_action ( 'closeAll' )").outlined Close all
 
 append body-end
   +script.

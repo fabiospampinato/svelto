@@ -7,22 +7,22 @@ append main
   +divider Target
 
   +centerer
-    +square(style="height: 300px;").xs-9.target
+    +square(style="height: 300px; width: 75%;").target
 
   +divider Triggered
 
   +multiple
-    +checkbox({ name: "pointer_tap", title: "Tap", value: 1 }).tap
-    +checkbox({ name: "pointer_dbltap", title: "Double tap", value: 1 }).dbltap
-    +checkbox({ name: "pointer_press", title: "Press", value: 1 }).press
-    +checkbox({ name: "pointer_dragstart", title: "Drag start", value: 1 }).dragstart
-    +checkbox({ name: "pointer_dragmove", title: "Drag move", value: 1 }).dragmove
-    +checkbox({ name: "pointer_dragend", title: "Drag end", value: 1 }).dragend
-    +checkbox({ name: "pointer_flick", title: "Flick", value: 1 }).flick
+    +checkbox({ name: "pointer_tap", title: "Tap", value: 1 }).tap.outlined
+    +checkbox({ name: "pointer_dbltap", title: "Double tap", value: 1 }).dbltap.outlined
+    +checkbox({ name: "pointer_press", title: "Press", value: 1 }).press.outlined
+    +checkbox({ name: "pointer_dragstart", title: "Drag start", value: 1 }).dragstart.outlined
+    +checkbox({ name: "pointer_dragmove", title: "Drag move", value: 1 }).dragmove.outlined
+    +checkbox({ name: "pointer_dragend", title: "Drag end", value: 1 }).dragend.outlined
+    +checkbox({ name: "pointer_flick", title: "Flick", value: 1 }).flick.outlined
 
   +divider Actions
 
-  +button-simple("pointer_uncheck_all ()") Reset
+  +button-simple("pointer_uncheck_all ()").outlined Reset
 
 append body-end
   +script.

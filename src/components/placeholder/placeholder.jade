@@ -13,7 +13,7 @@
     empty: '' // Placeholder is empty or not
   }
 
-mixin placeholder(width, height, empty)
+mixin placeholder(options)
   - options = options || {};
   - options.width = options.width || 0;
   - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
@@ -21,7 +21,7 @@ mixin placeholder(width, height, empty)
   - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
   - options.empty = options.empty || false;
   .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !empty
+    if !options.empty
       if block
         block
       else

@@ -7,54 +7,54 @@ append main
   +divider Toolbars
 
   +toolbar.orange
-    +button-icon('menu')
+    +button-icon('menu').compact
     span.large Schedule
     +spacer
-    +button-icon("search")
-    +button-icon('more_vert')
+    +button-icon("search").compact
+    +button-icon('more_vert').compact
 
   +toolbar.violet
-    +button-icon('menu')
+    +button-icon('menu').compact
     +breadcrumb.large
       +a(title="Components") Components
       +breadcrumb-divider.small
         +a(title="Toolbars") Toolbars
     +spacer
-    +button-icon('more_vert')
+    +button-icon('more_vert').compact
 
   +toolbar.green
     span.large Toolbar
     +spacer
-    +button-icon("search")
-    +button-icon("social-person")
-    +button-icon('more_vert')
+    +button-icon("search").compact
+    +button-icon("person").compact
+    +button-icon('more_vert').compact
 
   +toolbar.blue
-    +button-icon("navigation-arrow-back")
+    +button-icon("arrow_back").compact
     span.large Main page
     +spacer
-    +button-icon('more_vert')
+    +button-icon('more_vert').compact
 
   +toolbar.red
-    +button-icon('menu')
+    +button-icon('menu').compact
     +icon("image-image").xlarge
     span.large Title
     +spacer
-    +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "action-favorite", off: "action-favorite-outline" } })
-    +button-icon("search")
+    +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "favorite", off: "favorite-outline" } })
+    +button-icon("search").compact
 
   +divider With subs
 
   +toolbar.yellow
     +multiple-left
-      +button-icon('menu')
+      +button-icon('menu').compact
     +multiple-center
       span.large Application
     +multiple-right
-      +button-icon('more_vert')
+      +button-icon('more_vert').compact
 
   +toolbar.brown
     +multiple-left
-      +button-icon("arrow_back")
+      +button-icon("arrow_back").compact
     +multiple-center
       span.large This is a page

@@ -1,8 +1,6 @@
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Lo-dash (Extras) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,377 +8,371 @@
 
 ;(function ( _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* LODASH EXTRA */
+  /* LODASH EXTRA */
 
-    _.mixin ({
+  _.mixin ({
 
-        /**
-         * Gets the number of seconds that have elapsed since the Unix epoch
-         * (1 January 1970 00:00:00 UTC).
-         *
-         * _.defer(function(stamp) {
-         *   console.log(_.nowSecs() - stamp);
-         * }, _.nowSecs());
-         * // => logs the number of seconds it took for the deferred function to be invoked
-         */
+    /**
+     * Gets the number of seconds that have elapsed since the Unix epoch
+     * (1 January 1970 00:00:00 UTC).
+     *
+     * _.defer(function(stamp) {
+     *   console.log(_.nowSecs() - stamp);
+     * }, _.nowSecs());
+     * // => logs the number of seconds it took for the deferred function to be invoked
+     */
 
-        nowSecs: function () {
+    nowSecs: function () {
 
-            return _.floor ( _.now () / 1000 );
+      return _.floor ( _.now () / 1000 );
 
-        },
+    },
 
-        /**
-         * Gets a string format of number of seconds elapsed.
-         *
-         * _.timeAgo ( _.nowSecs () )
-         * // => Just now
-         */
+    /**
+     * Gets a string format of number of seconds elapsed.
+     *
+     * _.timeAgo ( _.nowSecs () )
+     * // => Just now
+     */
 
-        timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
+    timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
 
-            var elapsed = _.nowSecs () - timestamp,
-                just_now = 5;
+      var elapsed = _.nowSecs () - timestamp,
+        just_now = 5;
 
-            var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
-                times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+      var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+        times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
 
-            if ( elapsed < just_now ) {
+      if ( elapsed < just_now ) {
 
-                return {
-                    str: 'Just now',
-                    next: just_now - elapsed
-                };
+        return {
+          str: 'Just now',
+          next: just_now - elapsed
+        };
 
-            } else {
+      } else {
 
-                for ( var i = 0, l = times.length; i < l; i++ ) {
+        for ( var i = 0, l = times.length; i < l; i++ ) {
 
-                    var name = names[i],
-                        secs = times[i],
-                        number = _.floor ( elapsed / secs );
+          var name = names[i],
+            secs = times[i],
+            number = _.floor ( elapsed / secs );
 
-                    if ( number >= 1 ) {
+          if ( number >= 1 ) {
 
-                        return {
-                            str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
-                            next: secs - ( elapsed - ( number * secs ) )
-                        };
+            return {
+              str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
+              next: secs - ( elapsed - ( number * secs ) )
+            };
 
-                    }
+          }
 
-                }
+        }
 
-            }
+      }
 
-        },
+    },
 
-        /**
-         * Return a boolean if the string is fuzzy matched with the search string.
-         *
-         * _.fuzzyMatch ( 'something', 'smTng' );
-         * // => true
-         *
-         * _.fuzzyMatch ( 'something', 'smTng', false );
-         * // => false
-         *
-         * _.fuzzyMatch ( 'something', 'semthing' );
-         * // => false
-         */
+    /**
+     * Return a boolean if the string is fuzzy matched with the search string.
+     *
+     * _.fuzzyMatch ( 'something', 'smTng' );
+     * // => true
+     *
+     * _.fuzzyMatch ( 'something', 'smTng', false );
+     * // => false
+     *
+     * _.fuzzyMatch ( 'something', 'semthing' );
+     * // => false
+     */
 
-        fuzzyMatch: function ( str, search, isCaseSensitive ) {
+    fuzzyMatch: function ( str, search, isCaseSensitive ) {
 
-            if ( isCaseSensitive !== false ) {
+      if ( isCaseSensitive !== false ) {
 
-                str = str.toLowerCase ();
-                search = search.toLowerCase ();
+        str = str.toLowerCase ();
+        search = search.toLowerCase ();
 
-            }
+      }
 
-            var current_index = -1,
-                str_l = str.length;
+      var current_index = -1,
+        str_l = str.length;
 
-            for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
+      for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-                for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
+        for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
 
-                    if ( str[str_i] === search[search_i] ) {
+          if ( str[str_i] === search[search_i] ) {
 
-                        current_index = str_i;
-                        str_i = str_l + 1;
+            current_index = str_i;
+            str_i = str_l + 1;
 
-                    }
+          }
 
-                }
+        }
 
-                if ( str_i === str_l ) {
+        if ( str_i === str_l ) {
 
-                    return false;
+          return false;
 
-                }
+        }
 
-            }
+      }
 
-            return true;
+      return true;
 
-        },
+    },
 
-        /**
-         * Returns a number clamped between a minimum and maximum value.
-         * If the maximum isn't provided, only clamps from the bottom.
-         *
-         * @param {number} minimum The minimum value.
-         * @param {number} value The value to clamp.
-         * @param {number} maximum The maximum value.
-         * @returns {number} A value between minimum and maximum.
-         *
-         * @example
-         *
-         * _.clamp(2, 4, 6); // => 4
-         * _.clamp(3, 2, 5); // => 3
-         * _.clamp(2, 7, 5); // => 5
-         */
+    /**
+     * Returns a number clamped between a minimum and maximum value.
+     * If the maximum isn't provided, only clamps from the bottom.
+     *
+     * @param {number} minimum The minimum value.
+     * @param {number} value The value to clamp.
+     * @param {number} maximum The maximum value.
+     * @returns {number} A value between minimum and maximum.
+     *
+     * @example
+     *
+     * _.clamp(2, 4, 6); // => 4
+     * _.clamp(3, 2, 5); // => 3
+     * _.clamp(2, 7, 5); // => 5
+     */
 
-        clamp: function ( minimum, value, maximum ) {
+    clamp: function ( minimum, value, maximum ) {
 
-            if ( !_.isUndefined ( minimum ) ) {
+      if ( !_.isUndefined ( minimum ) ) {
 
-                if ( value < minimum ) {
+        if ( value < minimum ) {
 
-                    value = minimum;
+          value = minimum;
 
-                }
+        }
 
-            }
+      }
 
-            if ( !_.isUndefined ( maximum ) ) {
+      if ( !_.isUndefined ( maximum ) ) {
 
-                if ( value > maximum ) {
+        if ( value > maximum ) {
 
-                    value = maximum;
+          value = maximum;
 
-                }
+        }
 
-            }
+      }
 
-            return value;
+      return value;
 
-        },
+    },
 
-        /**
-         * Performs a binary each of the array
-         */
+    /**
+     * Performs a binary each of the array
+     */
 
-        btEach: function ( arr, callback, startIndex ) {
+    btEach: function ( arr, callback, startIndex ) {
 
-            var start = 0,
-                end = arr.length - 1,
-                center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
-                direction;
+      var start = 0,
+        end = arr.length - 1,
+        center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+        direction;
 
-            while ( start <= end ) {
+      while ( start <= end ) {
 
-                direction = callback.call ( arr[center], center, arr[center] );
+        direction = callback.call ( arr[center], center, arr[center] );
 
-                if ( direction < 0 ) {
+        if ( direction < 0 ) {
 
-                    end = center - 1;
+          end = center - 1;
 
-                } else if ( direction > 0 ) {
+        } else if ( direction > 0 ) {
 
-                    start = center + 1;
+          start = center + 1;
 
-                } else {
+        } else {
 
-                    return center;
+          return center;
 
-                }
+        }
 
-                center = _.ceil ( ( start + end ) / 2 );
+        center = _.ceil ( ( start + end ) / 2 );
 
-            }
+      }
 
-            return -1;
+      return -1;
 
-        },
+    },
 
-        /**
-         * Returns true
-         */
+    /**
+     * Returns true
+     */
 
-        true: _.constant ( true ),
+    true: _.constant ( true ),
 
-        /**
-         * Returns false
-         */
+    /**
+     * Returns false
+     */
 
-        false: _.constant ( false )
+    false: _.constant ( false )
 
-    });
+  });
 
 }( _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Easing v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
 //INFO: x: nothing, it's here just for compatibility,
-//      t: current time,
-//      b: start value,
-//      c: end value,
-//      d: duration
+//    t: current time,
+//    b: start value,
+//    c: end value,
+//    d: duration
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* EASING */
+  /* EASING */
 
-    $.easing = {
-        def: 'easeOutQuad',
-        swing: function ( x, t, b, c, d ) {
-            return $.easing[$.easing.def]( x, t, b, c, d );
-        },
-        linear: function ( x, t, b, c, d ) {
-            return ( c - b ) / d * t + b;
-        },
-        easeInQuad: function ( x, t, b, c, d ) {
-            return c * ( t /= d ) * t + b;
-        },
-        easeOutQuad: function ( x, t, b, c, d ) {
-            return -c * ( t /= d ) * ( t - 2 ) + b;
-        },
-        easeInOutQuad: function ( x, t, b, c, d ) {
-            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t + b;
-            return -c / 2 * ( ( --t ) * ( t - 2 ) - 1 ) + b;
-        },
-        easeInCubic: function ( x, t, b, c, d ) {
-            return c * ( t /= d ) * t * t + b;
-        },
-        easeOutCubic: function ( x, t, b, c, d ) {
-            return c * ( ( t = t / d - 1 ) * t * t + 1 ) + b;
-        },
-        easeInOutCubic: function ( x, t, b, c, d ) {
-            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t + b;
-            return c / 2 * ( ( t -= 2 ) * t * t + 2 ) + b;
-        },
-        easeInQuart: function ( x, t, b, c, d ) {
-            return c * ( t /= d ) * t * t * t + b;
-        },
-        easeOutQuart: function ( x, t, b, c, d ) {
-            return -c * ( ( t = t / d - 1 ) * t * t * t - 1 ) + b;
-        },
-        easeInOutQuart: function ( x, t, b, c, d ) {
-            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t + b;
-            return -c / 2 * ( ( t -= 2 ) * t * t * t - 2 ) + b;
-        },
-        easeInQuint: function ( x, t, b, c, d ) {
-            return c * ( t /= d ) * t * t * t * t + b;
-        },
-        easeOutQuint: function ( x, t, b, c, d ) {
-            return c * ( ( t = t / d - 1 ) * t * t * t * t + 1 ) + b;
-        },
-        easeInOutQuint: function ( x, t, b, c, d ) {
-            if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t * t + b;
-            return c / 2 * ( ( t -= 2 ) * t * t * t * t + 2 ) + b;
-        },
-        easeInSine: function ( x, t, b, c, d ) {
-            return -c * Math.cos ( t / d * ( Math.PI / 2 ) ) + c + b;
-        },
-        easeOutSine: function ( x, t, b, c, d ) {
-            return c * Math.sin ( t / d * ( Math.PI / 2 ) ) + b;
-        },
-        easeInOutSine: function ( x, t, b, c, d ) {
-            return -c / 2 * ( Math.cos ( Math.PI * t / d ) - 1 ) + b;
-        },
-        easeInExpo: function ( x, t, b, c, d ) {
-            return ( t == 0 ) ? b : c * Math.pow ( 2, 10 * ( t / d - 1 ) ) + b;
-        },
-        easeOutExpo: function ( x, t, b, c, d ) {
-            return ( t == d ) ? b + c : c * ( -Math.pow ( 2, -10 * t / d ) + 1) + b;
-        },
-        easeInOutExpo: function ( x, t, b, c, d ) {
-            if ( t == 0) return b;
-            if ( t == d) return b + c;
-            if ( ( t /= d / 2 ) < 1) return c / 2 * Math.pow ( 2, 10 * ( t - 1 ) ) + b;
-            return c / 2 * ( -Math.pow ( 2, -10 * --t ) + 2 ) + b;
-        }
-    };
+  $.easing = {
+    def: 'easeOutQuad',
+    swing: function ( x, t, b, c, d ) {
+      return $.easing[$.easing.def]( x, t, b, c, d );
+    },
+    linear: function ( x, t, b, c, d ) {
+      return ( c - b ) / d * t + b;
+    },
+    easeInQuad: function ( x, t, b, c, d ) {
+      return c * ( t /= d ) * t + b;
+    },
+    easeOutQuad: function ( x, t, b, c, d ) {
+      return -c * ( t /= d ) * ( t - 2 ) + b;
+    },
+    easeInOutQuad: function ( x, t, b, c, d ) {
+      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t + b;
+      return -c / 2 * ( ( --t ) * ( t - 2 ) - 1 ) + b;
+    },
+    easeInCubic: function ( x, t, b, c, d ) {
+      return c * ( t /= d ) * t * t + b;
+    },
+    easeOutCubic: function ( x, t, b, c, d ) {
+      return c * ( ( t = t / d - 1 ) * t * t + 1 ) + b;
+    },
+    easeInOutCubic: function ( x, t, b, c, d ) {
+      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t + b;
+      return c / 2 * ( ( t -= 2 ) * t * t + 2 ) + b;
+    },
+    easeInQuart: function ( x, t, b, c, d ) {
+      return c * ( t /= d ) * t * t * t + b;
+    },
+    easeOutQuart: function ( x, t, b, c, d ) {
+      return -c * ( ( t = t / d - 1 ) * t * t * t - 1 ) + b;
+    },
+    easeInOutQuart: function ( x, t, b, c, d ) {
+      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t + b;
+      return -c / 2 * ( ( t -= 2 ) * t * t * t - 2 ) + b;
+    },
+    easeInQuint: function ( x, t, b, c, d ) {
+      return c * ( t /= d ) * t * t * t * t + b;
+    },
+    easeOutQuint: function ( x, t, b, c, d ) {
+      return c * ( ( t = t / d - 1 ) * t * t * t * t + 1 ) + b;
+    },
+    easeInOutQuint: function ( x, t, b, c, d ) {
+      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t * t + b;
+      return c / 2 * ( ( t -= 2 ) * t * t * t * t + 2 ) + b;
+    },
+    easeInSine: function ( x, t, b, c, d ) {
+      return -c * Math.cos ( t / d * ( Math.PI / 2 ) ) + c + b;
+    },
+    easeOutSine: function ( x, t, b, c, d ) {
+      return c * Math.sin ( t / d * ( Math.PI / 2 ) ) + b;
+    },
+    easeInOutSine: function ( x, t, b, c, d ) {
+      return -c / 2 * ( Math.cos ( Math.PI * t / d ) - 1 ) + b;
+    },
+    easeInExpo: function ( x, t, b, c, d ) {
+      return ( t == 0 ) ? b : c * Math.pow ( 2, 10 * ( t / d - 1 ) ) + b;
+    },
+    easeOutExpo: function ( x, t, b, c, d ) {
+      return ( t == d ) ? b + c : c * ( -Math.pow ( 2, -10 * t / d ) + 1) + b;
+    },
+    easeInOutExpo: function ( x, t, b, c, d ) {
+      if ( t == 0) return b;
+      if ( t == d) return b + c;
+      if ( ( t /= d / 2 ) < 1) return c / 2 * Math.pow ( 2, 10 * ( t - 1 ) ) + b;
+      return c / 2 * ( -Math.pow ( 2, -10 * --t ) + 2 ) + b;
+    }
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - jQuery (Extras) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../easing/easing.js
  * ========================================================================= */
- 
+
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* JQUERY EXTRA */
+  /* JQUERY EXTRA */
 
-    $.reflow = function () {
+  $.reflow = function () {
 
-        document.documentElement.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
+    document.documentElement.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
 
+  };
+
+  $.eventXY = function ( event ) {
+
+    if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
+
+      event = event.originalEvent;
+
+    }
+
+    if ( $.browser.hasTouch && event.originalEvent.touches ) {
+
+      event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
+
+    }
+
+    return {
+      X: event.pageX,
+      Y: event.pageY
     };
 
-    $.eventXY = function ( event ) {
+  };
 
-        if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
+  /* COMMON OBJECTS */
 
-            event = event.originalEvent;
+  $(function () {
 
-        }
+    window.$window = $(window);
+    window.$document = $(document);
+    window.$html = $(document.documentElement);
+    window.$body = $(document.body);
+    window.$empty = $();
 
-        if ( $.browser.hasTouch && event.originalEvent.touches ) {
-
-            event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
-
-        }
-
-        return {
-            X: event.pageX,
-            Y: event.pageY
-        };
-
-    };
-
-    /* COMMON OBJECTS */
-
-    $(function () {
-
-        window.$window = $(window);
-        window.$document = $(document);
-        window.$html = $(document.documentElement);
-        window.$body = $(document.body);
-        window.$empty = $();
-
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Browser v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -391,31 +383,31 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* VARIABLES */
+  /* VARIABLES */
 
-    var userAgent = navigator.userAgent.toLowerCase ();
+  var userAgent = navigator.userAgent.toLowerCase ();
 
-    /* BROWSER */
+  /* BROWSER */
 
-    $.browser = {
-        isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
-        isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
-        isAndroid: /android/i.test ( userAgent ),
-        isIOS: /(iphone|ipad|ipod)/i.test ( userAgent ),
-        isMac: /mac/i.test ( userAgent ),
-        isIE: /msie [\w.]+/.test ( userAgent ),
-        isChrome: /chrome/i.test ( userAgent )
-    };
+  $.browser = {
+    isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
+    isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
+    isAndroid: /android/i.test ( userAgent ),
+    isIOS: /(iphone|ipad|ipod)/i.test ( userAgent ),
+    isMac: /mac/i.test ( userAgent ),
+    isIE: /msie [\w.]+/.test ( userAgent ),
+    isChrome: /chrome/i.test ( userAgent )
+  };
 
-    $.browser.hasTouch = ( 'ontouchstart' in window && !($.browser.isChrome && !$.browser.isAndroid) ); //FIXME: Why do we need the second check? Do other libraries do the same?
+  $.browser.hasTouch = ( 'ontouchstart' in window && !($.browser.isChrome && !$.browser.isAndroid) ); //FIXME: Why do we need the second check? Do other libraries do the same?
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+ * Svelto - UI v0.1.0
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -424,41 +416,41 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* UI */
+  /* UI */
 
-    $.ui = {
-        keyCode: {
-            BACKSPACE: 8,
-            COMMA: 188,
-            DELETE: 46,
-            DOWN: 40,
-            END: 35,
-            ENTER: 13,
-            ESCAPE: 27,
-            HOME: 36,
-            LEFT: 37,
-            PAGE_DOWN: 34,
-            PAGE_UP: 33,
-            PERIOD: 190,
-            RIGHT: 39,
-            SPACE: 32,
-            TAB: 9,
-            UP: 38
-        },
-        mouseButton: {
-            LEFT: 0,
-            MIDDLE: 1,
-            RIGHT: 2
-        }
-    };
+  $.ui = {
+    keyCode: {
+      BACKSPACE: 8,
+      COMMA: 188,
+      DELETE: 46,
+      DOWN: 40,
+      END: 35,
+      ENTER: 13,
+      ESCAPE: 27,
+      HOME: 36,
+      LEFT: 37,
+      PAGE_DOWN: 34,
+      PAGE_UP: 33,
+      PERIOD: 190,
+      RIGHT: 39,
+      SPACE: 32,
+      TAB: 9,
+      UP: 38
+    },
+    mouseButton: {
+      LEFT: 0,
+      MIDDLE: 1,
+      RIGHT: 2
+    }
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
+ * Svelto - Core v0.1.0
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -472,9 +464,7 @@
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Accordion v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -484,128 +474,126 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* ACCORDION */
+  /* ACCORDION */
 
-    $.widget ( 'presto.accordion', {
+  $.widget ( 'presto.accordion', {
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$accordion = this.$element;
-            this.$expanders = this.$accordion.children ( '.expander' );
+      this.$accordion = this.$element;
+      this.$expanders = this.$accordion.children ( '.expander' );
 
-            this.expanders_instances = Array ( this.$expanders.length );
+      this.expanders_instances = Array ( this.$expanders.length );
 
-            this.isMultiple = this.$accordion.hasClass ( 'multiple' );
+      this.isMultiple = this.$accordion.hasClass ( 'multiple' );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+      for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
+        this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
 
-            }
+      }
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'expander:open', '.expander', this._handler_open );
+      this._on ( 'expander:open', '.expander', this._handler_open );
 
-        },
+    },
 
-        /* OPEN */
+    /* OPEN */
 
-        _handler_open: function ( event, data, node ) {
+    _handler_open: function ( event, data, node ) {
 
-            if ( !this.isMultiple ) {
+      if ( !this.isMultiple ) {
 
-                for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+        for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-                    if ( this.$expanders[i] !== node ) {
+          if ( this.$expanders[i] !== node ) {
 
-                        this.expanders_instances[i].close ();
+            this.expanders_instances[i].close ();
 
-                    }
-
-                }
-
-            }
-
-        },
-
-        /* PUBLIC */
-
-        toggle: function ( index ) {
-
-            this.expanders_instances[index].toggle ();
-
-        },
-
-        toggleAll: function () {
-
-            _.each ( this.expanders_instances, function ( instance ) {
-
-                instance.toggle ();
-
-            });
-
-        },
-
-        open: function ( index ) {
-
-            this.expanders_instances[index].open ();
-
-        },
-
-        openAll: function () {
-
-            _.each ( this.expanders_instances, function ( instance ) {
-
-                instance.open ();
-
-            });
-
-        },
-
-        close: function ( index ) {
-
-            this.expanders_instances[index].close ();
-
-        },
-
-        closeAll: function () {
-
-            _.each ( this.expanders_instances, function ( instance ) {
-
-                instance.close ();
-
-            });
+          }
 
         }
 
-    });
+      }
 
-    /* READY */
+    },
 
-    $(function () {
+    /* PUBLIC */
 
-        $('.accordion').accordion ();
+    toggle: function ( index ) {
 
-    });
+      this.expanders_instances[index].toggle ();
+
+    },
+
+    toggleAll: function () {
+
+      _.each ( this.expanders_instances, function ( instance ) {
+
+        instance.toggle ();
+
+      });
+
+    },
+
+    open: function ( index ) {
+
+      this.expanders_instances[index].open ();
+
+    },
+
+    openAll: function () {
+
+      _.each ( this.expanders_instances, function ( instance ) {
+
+        instance.open ();
+
+      });
+
+    },
+
+    close: function ( index ) {
+
+      this.expanders_instances[index].close ();
+
+    },
+
+    closeAll: function () {
+
+      _.each ( this.expanders_instances, function ( instance ) {
+
+        instance.close ();
+
+      });
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.accordion').accordion ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Autogrow v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -617,308 +605,300 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* AUTOGROW */
+  /* AUTOGROW */
 
-    $.widget ( 'presto.autogrow', {
+  $.widget ( 'presto.autogrow', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            minimum_width: 0,
-            minimum_height: 0,
-            callbacks: {
-                update: _.noop
-            }
-        },
+    options: {
+      minimum_width: 0,
+      minimum_height: 0,
+      callbacks: {
+        update: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$growable = this.$element;
+      this.$growable = this.$element;
 
-            this.isInput = this.$growable.is ( 'input' );
-            this.isTextarea = this.$growable.is ( 'textarea' );
+      this.isInput = this.$growable.is ( 'input' );
+      this.isTextarea = this.$growable.is ( 'textarea' );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this.update ();
+      this.update ();
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'input change', this.update );
+      this._on ( 'input change', this.update );
 
-        },
+    },
 
-        /* INPUT */
+    /* INPUT */
 
-        _update_input_width: function () {
+    _update_input_width: function () {
 
-            var needed_width = this._get_input_needed_width ( this.$growable );
+      var needed_width = this._get_input_needed_width ( this.$growable );
 
-            this.$growable.width ( Math.max ( needed_width, this.options.minimum_width ) );
+      this.$growable.width ( Math.max ( needed_width, this.options.minimum_width ) );
 
-        },
+    },
 
-        _get_input_needed_width: function () {
+    _get_input_needed_width: function () {
 
-            var $span = $( '<span>' + this.$growable.val () + '</span>' );
+      var $span = $( '<span>' + this.$growable.val () + '</span>' );
 
-            $span.css ({
-                font: this.$growable.css ( 'font' ),
-                position: 'absolute',
-                opacity: 0
-            });
+      $span.css ({
+        font: this.$growable.css ( 'font' ),
+        position: 'absolute',
+        opacity: 0
+      });
 
-            $span.appendTo ( $body );
+      $span.appendTo ( $body );
 
-            var width = $span.width ();
+      var width = $span.width ();
 
-            $span.remove ();
+      $span.remove ();
 
-            return width;
+      return width;
 
-        },
+    },
 
-        /* TEXTAREA */
+    /* TEXTAREA */
 
-        _update_textarea_height: function () {
+    _update_textarea_height: function () {
 
-            var needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
+      var needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
 
-            this.$growable.height ( Math.max ( needed_height, this.options.minimum_height ) );
+      this.$growable.height ( Math.max ( needed_height, this.options.minimum_height ) );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        update: function () {
+    update: function () {
 
-            if ( this.isInput ) {
+      if ( this.isInput ) {
 
-                this._update_input_width ();
+        this._update_input_width ();
 
-                this._trigger ( 'update' );
+        this._trigger ( 'update' );
 
-            } else if ( this.isTextarea ) {
+      } else if ( this.isTextarea ) {
 
-                this._update_textarea_height ();
+        this._update_textarea_height ();
 
-                this._trigger ( 'update' );
+        this._trigger ( 'update' );
 
-            }
+      }
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
+
+  });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Blurred v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* BLUR */
+
+  $.fn.blurred = function ( force ) {
+
+    return this.toggleClass ( 'blurred', force );
+
+  };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - BT Each v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* BINARY TREE .each () */
+
+  $.fn.btEach = function ( callback, startIndex ) {
+
+    return _.btEach ( this, callback, startIndex );
+
+  };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Checkbox v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CHECKBOX */
+
+  $.widget ( 'presto.checkbox', {
+
+    /* OPTIONS */
+
+    options: {
+      callbacks: {
+        checked: _.noop,
+        unchecked: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$checkbox = this.$element;
+      this.$input = this.$checkbox.find ( 'input' );
+
+    },
+
+    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+
+      var hasClass = this.$checkbox.hasClass ( 'checked' );
+
+      if ( this.get () ) {
+
+        if ( !hasClass ) {
+
+          this.$checkbox.addClass ( 'checked' );
 
         }
 
-    });
+      } else if ( hasClass ) {
 
-    /* READY */
+        this.$checkbox.removeClass ( 'checked' );
 
-    $(function () {
+      }
 
-        $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
+    },
 
-    });
+    _events: function () {
+
+      this._on ( 'click', function () {
+
+        this.toggle ();
+
+      });
+
+      this._on ( true, 'change', this._handler_change );
+
+    },
+
+    /* CHANGE */
+
+    _handler_change: function () {
+
+      var isChecked = this.get ();
+
+      this.$checkbox.toggleClass ( 'checked', isChecked );
+
+      this._trigger ( isChecked ? 'checked' : 'unchecked' );
+
+    },
+
+    /* PUBLIC */
+
+    get: function () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
+
+      return this.$input.prop ( 'checked' );
+
+    },
+
+    toggle: function ( force ) {
+
+      var isChecked = this.get ();
+
+      if ( _.isUndefined ( force ) ) {
+
+        force = !isChecked;
+
+      }
+
+      if ( force !== isChecked ) {
+
+        this.$input.prop ( 'checked', force ).trigger ( 'change' );
+
+        this._trigger ( force ? 'checked' : 'unchecked' ); //FIXME: is triggered twice per toggle
+
+      }
+
+    },
+
+    check: function () {
+
+      this.toggle ( true );
+
+    },
+
+    uncheck: function () {
+
+      this.toggle ( false );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.checkbox').checkbox ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * ========================================================================= */
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* BLUR */
-
-    $.fn.blurred = function ( force ) {
-
-        return this.toggleClass ( 'blurred', force );
-
-    };
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * ========================================================================= */
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* BINARY TREE .each () */
-
-    $.fn.btEach = function ( callback, startIndex ) {
-
-        return _.btEach ( this, callback, startIndex );
-
-    };
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * ========================================================================= */
-
-;(function ( $, _, window, document, undefined ) {
-
-    'use strict';
-
-    /* CHECKBOX */
-
-    $.widget ( 'presto.checkbox', {
-
-        /* OPTIONS */
-
-        options: {
-            callbacks: {
-                checked: _.noop,
-                unchecked: _.noop
-            }
-        },
-
-        /* SPECIAL */
-
-        _variables: function () {
-
-            this.$checkbox = this.$element;
-            this.$input = this.$checkbox.find ( 'input' );
-
-        },
-
-        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
-
-            var hasClass = this.$checkbox.hasClass ( 'checked' );
-
-            if ( this.get () ) {
-
-                if ( !hasClass ) {
-
-                    this.$checkbox.addClass ( 'checked' );
-
-                }
-
-            } else if ( hasClass ) {
-
-                this.$checkbox.removeClass ( 'checked' );
-
-            }
-
-        },
-
-        _events: function () {
-
-            this._on ( 'click', function () {
-
-                this.toggle ();
-
-            });
-
-            this._on ( true, 'change', this._handler_change );
-
-        },
-
-        /* CHANGE */
-
-        _handler_change: function () {
-
-            var isChecked = this.get ();
-
-            this.$checkbox.toggleClass ( 'checked', isChecked );
-
-            this._trigger ( isChecked ? 'checked' : 'unchecked' );
-
-        },
-
-        /* PUBLIC */
-
-        get: function () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
-
-            return this.$input.prop ( 'checked' );
-
-        },
-
-        toggle: function ( force ) {
-
-            var isChecked = this.get ();
-
-            if ( _.isUndefined ( force ) ) {
-
-                force = !isChecked;
-
-            }
-
-            if ( force !== isChecked ) {
-
-                this.$input.prop ( 'checked', force ).trigger ( 'change' );
-
-                this._trigger ( force ? 'checked' : 'unchecked' ); //FIXME: is triggered twice per toggle
-
-            }
-
-        },
-
-        check: function () {
-
-            this.toggle ( true );
-
-        },
-
-        uncheck: function () {
-
-            this.toggle ( false );
-
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('.checkbox').checkbox ();
-
-    });
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Color Helper v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -926,228 +906,226 @@
 
 ;(function ( _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* COLOR HELPER */
+  /* COLOR HELPER */
 
-    window.ColorHelper = {
+  window.ColorHelper = {
 
-        /* COLOR SPACES CONVERTERS */
+    /* COLOR SPACES CONVERTERS */
 
-        hex2rgb: function ( hex ) {
+    hex2rgb: function ( hex ) {
 
-            return {
-                r: this.hex2dec ( hex.r ),
-                g: this.hex2dec ( hex.g ),
-                b: this.hex2dec ( hex.b )
-            };
+      return {
+        r: this.hex2dec ( hex.r ),
+        g: this.hex2dec ( hex.g ),
+        b: this.hex2dec ( hex.b )
+      };
 
-        },
+    },
 
-        hex2hsv: function ( hex ) {
+    hex2hsv: function ( hex ) {
 
-            return this.rgb2hsv ( this.hex2rgb ( hex ) );
+      return this.rgb2hsv ( this.hex2rgb ( hex ) );
 
-        },
+    },
 
-        rgb2hex: function ( rgb ) {
+    rgb2hex: function ( rgb ) {
 
-            return {
-                r: this.dec2hex ( rgb.r ),
-                g: this.dec2hex ( rgb.g ),
-                b: this.dec2hex ( rgb.b )
-            };
+      return {
+        r: this.dec2hex ( rgb.r ),
+        g: this.dec2hex ( rgb.g ),
+        b: this.dec2hex ( rgb.b )
+      };
 
-        },
+    },
 
-        rgb2hsv: function ( rgb ) {
+    rgb2hsv: function ( rgb ) {
 
-            var r = rgb.r / 255,
-                g = rgb.g / 255,
-                b = rgb.b / 255,
-                h, s,
-                v = Math.max ( r, g, b ),
-                diff = v - Math.min ( r, g, b ),
-                diffc = function ( c ) {
-                    return ( v - c ) / 6 / diff + 1 / 2;
-                };
+      var r = rgb.r / 255,
+        g = rgb.g / 255,
+        b = rgb.b / 255,
+        h, s,
+        v = Math.max ( r, g, b ),
+        diff = v - Math.min ( r, g, b ),
+        diffc = function ( c ) {
+          return ( v - c ) / 6 / diff + 1 / 2;
+        };
 
-            if ( diff === 0 ) {
+      if ( diff === 0 ) {
 
-                h = s = 0;
+        h = s = 0;
 
-            } else {
+      } else {
 
-                s = diff / v;
+        s = diff / v;
 
-                var rr = diffc ( r ),
-                    gg = diffc ( g ),
-                    bb = diffc ( b );
+        var rr = diffc ( r ),
+          gg = diffc ( g ),
+          bb = diffc ( b );
 
-                if ( r === v ) {
+        if ( r === v ) {
 
-                    h = bb - gg;
+          h = bb - gg;
 
-                } else if ( g === v ) {
+        } else if ( g === v ) {
 
-                    h = ( 1 / 3 ) + rr - bb;
+          h = ( 1 / 3 ) + rr - bb;
 
-                } else if ( b === v ) {
+        } else if ( b === v ) {
 
-                    h = ( 2 / 3 ) + gg - rr;
-
-                }
-
-                if ( h < 0 ) {
-
-                    h += 1;
-
-                } else if ( h > 1 ) {
-
-                    h -= 1;
-                }
-
-            }
-
-            return {
-                h: h * 360, //FIXME: removed Math.round, test if is ok
-                s: s * 100, //FIXME: removed Math.round, test if is ok
-                v: v * 100 //FIXME: removed Math.round, test if is ok
-            };
-
-        },
-
-        hsv2hex: function ( hsv ) {
-
-            return this.rgb2hex ( this.hsv2rgb ( hsv ) );
-
-        },
-
-        hsv2rgb: function ( hsv ) {
-
-            var r, g, b,
-                h = hsv.h,
-                s = hsv.s,
-                v = hsv.v;
-
-            s /= 100;
-            v /= 100;
-
-            if ( s === 0 ) {
-
-                r = g = b = v;
-
-            } else {
-
-                var i, f, p, q, t;
-
-                h /= 60;
-                i = Math.floor ( h );
-                f = h - i;
-                p = v * ( 1 - s );
-                q = v * ( 1 - s * f );
-                t = v * ( 1 - s * ( 1 - f ) );
-
-                switch ( i ) {
-
-                    case 0:
-                        r = v;
-                        g = t;
-                        b = p;
-                        break;
-
-                    case 1:
-                        r = q;
-                        g = v;
-                        b = p;
-                        break;
-
-                    case 2:
-                        r = p;
-                        g = v;
-                        b = t;
-                        break;
-
-                    case 3:
-                        r = p;
-                        g = q;
-                        b = v;
-                        break;
-
-                    case 4:
-                        r = t;
-                        g = p;
-                        b = v;
-                        break;
-
-                    default:
-                        r = v;
-                        g = p;
-                        b = q;
-
-                }
-
-            }
-
-            return {
-                r: Math.round ( r * 255 ),
-                g: Math.round ( g * 255 ),
-                b: Math.round ( b * 255 )
-            };
-
-        },
-
-        hsv2hsl: function ( hsv ) {
-
-            var s = hsv.s / 100,
-                v = hsv.v / 100,
-                tempL = ( 2 - s ) * v,
-                tempS = s * v;
-
-            return {
-                h: hsv.h,
-                s: ( tempS / ( ( tempL <= 1 ) ? tempL : 2 - tempL ) ) * 100,
-                l: ( tempL / 2 ) * 100
-            };
-
-        },
-
-        hsl2hsv: function ( hsl ) {
-
-            var l = hsl.l / 100 * 2,
-                s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
-
-            return {
-                h: hsl.h,
-                s: ( 2 * s ) / ( l + s ) * 100,
-                v: ( l + s ) / 2 * 100
-            };
-
-        },
-
-        /* SCALE CONVERTERS */
-
-        dec2hex: function ( dec ) {
-
-            return _.padLeft ( dec.toString ( 16 ), 2, '0' );
-
-        },
-
-        hex2dec: function ( hex ) {
-
-            return parseInt ( hex, 16 );
+          h = ( 2 / 3 ) + gg - rr;
 
         }
 
-    };
+        if ( h < 0 ) {
+
+          h += 1;
+
+        } else if ( h > 1 ) {
+
+          h -= 1;
+        }
+
+      }
+
+      return {
+        h: h * 360, //FIXME: removed Math.round, test if is ok
+        s: s * 100, //FIXME: removed Math.round, test if is ok
+        v: v * 100 //FIXME: removed Math.round, test if is ok
+      };
+
+    },
+
+    hsv2hex: function ( hsv ) {
+
+      return this.rgb2hex ( this.hsv2rgb ( hsv ) );
+
+    },
+
+    hsv2rgb: function ( hsv ) {
+
+      var r, g, b,
+        h = hsv.h,
+        s = hsv.s,
+        v = hsv.v;
+
+      s /= 100;
+      v /= 100;
+
+      if ( s === 0 ) {
+
+        r = g = b = v;
+
+      } else {
+
+        var i, f, p, q, t;
+
+        h /= 60;
+        i = Math.floor ( h );
+        f = h - i;
+        p = v * ( 1 - s );
+        q = v * ( 1 - s * f );
+        t = v * ( 1 - s * ( 1 - f ) );
+
+        switch ( i ) {
+
+          case 0:
+            r = v;
+            g = t;
+            b = p;
+            break;
+
+          case 1:
+            r = q;
+            g = v;
+            b = p;
+            break;
+
+          case 2:
+            r = p;
+            g = v;
+            b = t;
+            break;
+
+          case 3:
+            r = p;
+            g = q;
+            b = v;
+            break;
+
+          case 4:
+            r = t;
+            g = p;
+            b = v;
+            break;
+
+          default:
+            r = v;
+            g = p;
+            b = q;
+
+        }
+
+      }
+
+      return {
+        r: Math.round ( r * 255 ),
+        g: Math.round ( g * 255 ),
+        b: Math.round ( b * 255 )
+      };
+
+    },
+
+    hsv2hsl: function ( hsv ) {
+
+      var s = hsv.s / 100,
+        v = hsv.v / 100,
+        tempL = ( 2 - s ) * v,
+        tempS = s * v;
+
+      return {
+        h: hsv.h,
+        s: ( tempS / ( ( tempL <= 1 ) ? tempL : 2 - tempL ) ) * 100,
+        l: ( tempL / 2 ) * 100
+      };
+
+    },
+
+    hsl2hsv: function ( hsl ) {
+
+      var l = hsl.l / 100 * 2,
+        s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
+
+      return {
+        h: hsl.h,
+        s: ( 2 * s ) / ( l + s ) * 100,
+        v: ( l + s ) / 2 * 100
+      };
+
+    },
+
+    /* SCALE CONVERTERS */
+
+    dec2hex: function ( dec ) {
+
+      return _.padLeft ( dec.toString ( 16 ), 2, '0' );
+
+    },
+
+    hex2dec: function ( hex ) {
+
+      return parseInt ( hex, 16 );
+
+    }
+
+  };
 
 }( _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Hex Color v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1157,73 +1135,71 @@
 
 ;(function ( _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* HEX COLOR */
+  /* HEX COLOR */
 
-    window.HexColor = function ( value ) {
+  window.HexColor = function ( value ) {
 
-        if ( _.isString ( value ) ) {
+    if ( _.isString ( value ) ) {
 
-            value = value.replace ( '#', '' );
+      value = value.replace ( '#', '' );
 
-             if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
+       if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
 
-                this.hsv = ColorHelper.hex2hsv ({
-                    r: value[0] + value[1],
-                    g: value[2] + value[3],
-                    b: value[4] + value[5]
-                });
+        this.hsv = ColorHelper.hex2hsv ({
+          r: value[0] + value[1],
+          g: value[2] + value[3],
+          b: value[4] + value[5]
+        });
 
-            } else if ( /^[0-9a-f]{3}$/i.test ( value ) ) { //INFO: shorthand 3-chars color
+      } else if ( /^[0-9a-f]{3}$/i.test ( value ) ) { //INFO: shorthand 3-chars color
 
-                this.hsv = ColorHelper.hex2hsv ({
-                    r: value[0] + value[0],
-                    g: value[1] + value[1],
-                    b: value[2] + value[2]
-                });
+        this.hsv = ColorHelper.hex2hsv ({
+          r: value[0] + value[0],
+          g: value[1] + value[1],
+          b: value[2] + value[2]
+        });
 
-            } else {
+      } else {
 
-                return this;
+        return this;
 
-            }
+      }
 
-            this.isValid = true;
+      this.isValid = true;
 
-        }
+    }
 
-    };
+  };
 
-    /* HEX COLOR PROTOTYPE */
+  /* HEX COLOR PROTOTYPE */
 
-    HexColor.prototype = {
+  HexColor.prototype = {
 
-        isValid: false,
+    isValid: false,
 
-        hsv: {
-            h: 0,
-            s: 0,
-            v: 0
-        },
+    hsv: {
+      h: 0,
+      s: 0,
+      v: 0
+    },
 
-        getHexStr: function () {
+    getHexStr: function () {
 
-            var hex = ColorHelper.hsv2hex ( this.hsv );
+      var hex = ColorHelper.hsv2hex ( this.hsv );
 
-            return '#' + hex.r + hex.g + hex.b;
+      return '#' + hex.r + hex.g + hex.b;
 
-        }
+    }
 
-    };
+  };
 
 }( _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Colorpicker v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1239,348 +1215,346 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* COLORPICKER */
+  /* COLORPICKER */
 
-    $.widget ( 'presto.colorpicker', {
+  $.widget ( 'presto.colorpicker', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            default_color: '#ff0000',
-            live: true,
-            callbacks: {
-                change: _.noop
-            }
-        },
+    options: {
+      default_color: '#ff0000',
+      live: true,
+      callbacks: {
+        change: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$colorpicker = this.$element;
-            this.$sb_wrp = this.$colorpicker.find ( '.colorpicker-saturation-brightness-wrp' );
-            this.$handler_sb = this.$sb_wrp.find ( '.colorpicker-handler' );
-            this.$hue_wrp = this.$colorpicker.find ( '.colorpicker-hue-wrp' );
-            this.$handler_hue = this.$hue_wrp.find ( '.colorpicker-handler' );
+      this.$colorpicker = this.$element;
+      this.$sb_wrp = this.$colorpicker.find ( '.colorpicker-saturation-brightness-wrp' );
+      this.$handler_sb = this.$sb_wrp.find ( '.colorpicker-handler' );
+      this.$hue_wrp = this.$colorpicker.find ( '.colorpicker-hue-wrp' );
+      this.$handler_hue = this.$hue_wrp.find ( '.colorpicker-handler' );
 
-            this.id = this.$colorpicker.attr ( 'id' );
-            this.$inputs = $('input[name="' + this.id + '"]');
+      this.id = this.$colorpicker.attr ( 'id' );
+      this.$inputs = $('input[name="' + this.id + '"]');
 
-            this.color = new HexColor ();
-            this.hex = '';
+      this.color = new HexColor ();
+      this.hex = '';
 
-            this._update_variables ();
+      this._update_variables ();
 
-            this.sb_wrp_size = this.$sb_wrp.width ();
+      this.sb_wrp_size = this.$sb_wrp.width ();
 
-            this.hue_wrp_height = this.sb_wrp_size;
+      this.hue_wrp_height = this.sb_wrp_size;
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            if ( !this.set ( this.$inputs.val () ) ) {
+      if ( !this.set ( this.$inputs.val () ) ) {
 
-                this.color = new HexColor ( this.options.default_color );
+        this.color = new HexColor ( this.options.default_color );
 
-                this._update_sb ();
-                this._update_hue ();
+        this._update_sb ();
+        this._update_hue ();
 
-            }
+      }
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* WINDOW RESIZE */
+      /* WINDOW RESIZE */
 
-            this._on ( $window, 'resize', this._handler_resize );
+      this._on ( $window, 'resize', this._handler_resize );
 
-            /* INPUTS */
+      /* INPUTS */
 
-            this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
+      this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
 
-            /* SB ARROWS */
+      /* SB ARROWS */
 
-            this._on ( this.$sb_wrp, 'mouseenter', this._handler_sb_wrp_arrows_in );
-            this._on ( this.$sb_wrp, 'mouseleave', this._handler_sb_wrp_arrows_out );
+      this._on ( this.$sb_wrp, 'mouseenter', this._handler_sb_wrp_arrows_in );
+      this._on ( this.$sb_wrp, 'mouseleave', this._handler_sb_wrp_arrows_out );
 
-            /* SB DRAG */
+      /* SB DRAG */
 
-            this._on ( this.$sb_wrp, $.Pointer.dragmove, this._handler_sb_drag_move );
-            this._on ( this.$sb_wrp, $.Pointer.dragend, this._handler_sb_drag_end );
+      this._on ( this.$sb_wrp, $.Pointer.dragmove, this._handler_sb_drag_move );
+      this._on ( this.$sb_wrp, $.Pointer.dragend, this._handler_sb_drag_end );
 
-            /* HUE ARROWS */
+      /* HUE ARROWS */
 
-            this._on ( this.$hue_wrp, 'mouseenter', this._handler_hue_wrp_arrows_in );
-            this._on ( this.$hue_wrp, 'mouseleave', this._handler_hue_wrp_arrows_out );
+      this._on ( this.$hue_wrp, 'mouseenter', this._handler_hue_wrp_arrows_in );
+      this._on ( this.$hue_wrp, 'mouseleave', this._handler_hue_wrp_arrows_out );
 
-            /* HUE DRAG */
+      /* HUE DRAG */
 
-            this._on ( this.$hue_wrp, $.Pointer.dragmove, this._handler_hue_drag_move );
-            this._on ( this.$hue_wrp, $.Pointer.dragend, this._handler_hue_drag_end );
+      this._on ( this.$hue_wrp, $.Pointer.dragmove, this._handler_hue_drag_move );
+      this._on ( this.$hue_wrp, $.Pointer.dragend, this._handler_hue_drag_end );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _update_variables: function () {
+    _update_variables: function () {
 
-            this.sb_wrp_offset = this.$sb_wrp.offset ();
-            this.hue_wrp_offset = this.$hue_wrp.offset ();
+      this.sb_wrp_offset = this.$sb_wrp.offset ();
+      this.hue_wrp_offset = this.$hue_wrp.offset ();
 
-        },
+    },
 
-        /* WINDOW RESIZE */
+    /* WINDOW RESIZE */
 
-        _handler_resize: function () {
+    _handler_resize: function () {
 
-            this._update_variables ();
+      this._update_variables ();
 
-        },
+    },
 
-        /* SB ARROWS */
+    /* SB ARROWS */
 
-        _handler_sb_wrp_arrows_in: function () {
+    _handler_sb_wrp_arrows_in: function () {
 
-            this._on ( $document, 'keydown', this._handler_sb_wrp_arrows_keydown );
+      this._on ( $document, 'keydown', this._handler_sb_wrp_arrows_keydown );
 
-        },
+    },
 
-        _handler_sb_wrp_arrows_out: function () {
+    _handler_sb_wrp_arrows_out: function () {
 
-            this._off ( $document, 'keydown', this._handler_sb_wrp_arrows_keydown );
+      this._off ( $document, 'keydown', this._handler_sb_wrp_arrows_keydown );
 
-        },
+    },
 
-        _handler_sb_wrp_arrows_keydown: function () {
+    _handler_sb_wrp_arrows_keydown: function () {
 
-            switch ( event.keyCode ) {
+      switch ( event.keyCode ) {
 
-                case $.ui.keyCode.UP:
-                    this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
-                    break;
+        case $.ui.keyCode.UP:
+          this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
+          break;
 
-                case $.ui.keyCode.RIGHT:
-                    this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
-                    break;
+        case $.ui.keyCode.RIGHT:
+          this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
+          break;
 
-                case $.ui.keyCode.DOWN:
-                    this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
-                    break;
+        case $.ui.keyCode.DOWN:
+          this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
+          break;
 
-                case $.ui.keyCode.LEFT:
-                    this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
-                    break;
+        case $.ui.keyCode.LEFT:
+          this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
+          break;
 
-                default:
-                    return;
+        default:
+          return;
 
-            }
+      }
 
-            this._update_sb ();
-            this._update_input ();
+      this._update_sb ();
+      this._update_input ();
 
-        },
+    },
 
-        /* SB DRAG */
+    /* SB DRAG */
 
-        _sb_drag_set: function ( XY, update ) {
+    _sb_drag_set: function ( XY, update ) {
 
-            this.color.hsv.s =  _.clamp ( 0, XY.X - this.sb_wrp_offset.left, this.sb_wrp_size ) * 100 / this.sb_wrp_size;
-            this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y - this.sb_wrp_offset.top, this.sb_wrp_size ) * 100 / this.sb_wrp_size );
+      this.color.hsv.s =  _.clamp ( 0, XY.X - this.sb_wrp_offset.left, this.sb_wrp_size ) * 100 / this.sb_wrp_size;
+      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y - this.sb_wrp_offset.top, this.sb_wrp_size ) * 100 / this.sb_wrp_size );
 
-            this._update_sb ();
+      this._update_sb ();
 
-            if ( update ) {
+      if ( update ) {
 
-                this._update_input ();
+        this._update_input ();
 
-            }
+      }
 
-        },
+    },
 
-        _handler_sb_drag_move: function ( event, data ) {
+    _handler_sb_drag_move: function ( event, data ) {
 
-            this._sb_drag_set ( data.moveXY, this.options.live );
+      this._sb_drag_set ( data.moveXY, this.options.live );
 
-        },
+    },
 
-        _handler_sb_drag_end: function ( event, data ) {
+    _handler_sb_drag_end: function ( event, data ) {
 
-            this._sb_drag_set ( data.endXY, true );
+      this._sb_drag_set ( data.endXY, true );
 
-        },
+    },
 
-        /* HUE ARROWS */
+    /* HUE ARROWS */
 
-        _handler_hue_wrp_arrows_in: function () {
+    _handler_hue_wrp_arrows_in: function () {
 
-            this._on ( $document, 'keydown', this._handler_hue_wrp_arrows_keydown );
+      this._on ( $document, 'keydown', this._handler_hue_wrp_arrows_keydown );
 
-        },
+    },
 
-        _handler_hue_wrp_arrows_out: function () {
+    _handler_hue_wrp_arrows_out: function () {
 
-            this._off ( $document, 'keydown', this._handler_hue_wrp_arrows_keydown );
+      this._off ( $document, 'keydown', this._handler_hue_wrp_arrows_keydown );
 
-        },
+    },
 
-        _handler_hue_wrp_arrows_keydown: function () {
+    _handler_hue_wrp_arrows_keydown: function () {
 
-            switch ( event.keyCode ) {
+      switch ( event.keyCode ) {
 
-                case $.ui.keyCode.UP:
-                    this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
-                    break;
+        case $.ui.keyCode.UP:
+          this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
+          break;
 
-                case $.ui.keyCode.DOWN:
-                    this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
-                    break;
+        case $.ui.keyCode.DOWN:
+          this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
+          break;
 
-                default:
-                    return;
+        default:
+          return;
 
-            }
+      }
 
-            this._update_hue ();
-            this._update_input ();
+      this._update_hue ();
+      this._update_input ();
 
-        },
+    },
 
-        /* HUE DRAG */
+    /* HUE DRAG */
 
-        _hue_drag_set: function ( XY, update ) {
+    _hue_drag_set: function ( XY, update ) {
 
-            this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y - this.hue_wrp_offset.top, this.hue_wrp_height ) * 359 / this.hue_wrp_height );
+      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y - this.hue_wrp_offset.top, this.hue_wrp_height ) * 359 / this.hue_wrp_height );
 
-            this._update_hue ();
+      this._update_hue ();
 
-            if ( update ) {
+      if ( update ) {
 
-                this._update_input ();
+        this._update_input ();
 
-            }
+      }
 
-        },
+    },
 
-        _handler_hue_drag_move: function ( event, data ) {
+    _handler_hue_drag_move: function ( event, data ) {
 
-            this._hue_drag_set ( data.moveXY, this.options.live );
+      this._hue_drag_set ( data.moveXY, this.options.live );
 
-        },
+    },
 
-        _handler_hue_drag_end: function ( event, data ) {
+    _handler_hue_drag_end: function ( event, data ) {
 
-            this._hue_drag_set ( data.endXY, true );
+      this._hue_drag_set ( data.endXY, true );
 
-        },
+    },
 
-        /* INPUT */
+    /* INPUT */
 
-        _handler_input_keydown: function ( event ) {
+    _handler_input_keydown: function ( event ) {
 
-            if ( event.keyCode === $.ui.keyCode.ENTER ) {
+      if ( event.keyCode === $.ui.keyCode.ENTER ) {
 
-                if ( !this.set ( this.$inputs.val () ) ) {
+        if ( !this.set ( this.$inputs.val () ) ) {
 
-                    this.$inputs.val ( this.hex );
-
-                }
-
-            }
-
-        },
-
-        /* OTHERS */
-
-        _update_input: function () {
-
-            this.hex = this.color.getHexStr ();
-
-            this.$inputs.val ( this.hex ).css ( 'background-color', this.hex ).trigger ( 'change' );
-
-            this._trigger ( 'change' );
-
-        },
-
-        _update_sb: function () {
-
-            var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
-
-            this.$handler_sb.css ({
-                'background-color': 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)',
-                transform: 'translate3d(' + ( this.sb_wrp_size / 100 * this.color.hsv.s ) + 'px,' + ( this.sb_wrp_size / 100 * ( 100 - this.color.hsv.v ) ) + 'px,0)'
-            });
-
-        },
-
-        _update_hue: function () {
-
-            var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
-
-            this.$handler_hue.css ({
-                'background-color': 'hsl(' + this.color.hsv.h + ',100%,50%)',
-                transform: 'translate3d(0,' + ( this.hue_wrp_height / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) ) ) + 'px,0)'
-            });
-
-            this.$handler_sb.css ( 'background-color', 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)' );
-
-            this.$sb_wrp.css ( 'background-color', 'hsl(' + this.color.hsv.h + ',100%,50%)' );
-
-        },
-
-        _update: function () {
-
-            this._update_sb ();
-            this._update_hue ();
-            this._update_input ();
-
-        },
-
-        /* PUBLIC */
-
-        get: function () {
-
-            return this.color.getHexStr ();
-
-        },
-
-        set: function ( value ) {
-
-            var new_color = new HexColor ( value );
-
-            if ( new_color.isValid && !_.isEqual ( new_color.hsv, this.color.hsv ) ) {
-
-                this.color = new_color;
-
-                this._update ();
-
-            }
-
-            return new_color.isValid;
+          this.$inputs.val ( this.hex );
 
         }
 
-    });
+      }
 
-    /* READY */
+    },
 
-    $(function () {
+    /* OTHERS */
 
-        $('.colorpicker').colorpicker ();
+    _update_input: function () {
 
-    });
+      this.hex = this.color.getHexStr ();
+
+      this.$inputs.val ( this.hex ).css ( 'background-color', this.hex ).trigger ( 'change' );
+
+      this._trigger ( 'change' );
+
+    },
+
+    _update_sb: function () {
+
+      var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
+
+      this.$handler_sb.css ({
+        'background-color': 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)',
+        transform: 'translate3d(' + ( this.sb_wrp_size / 100 * this.color.hsv.s ) + 'px,' + ( this.sb_wrp_size / 100 * ( 100 - this.color.hsv.v ) ) + 'px,0)'
+      });
+
+    },
+
+    _update_hue: function () {
+
+      var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
+
+      this.$handler_hue.css ({
+        'background-color': 'hsl(' + this.color.hsv.h + ',100%,50%)',
+        transform: 'translate3d(0,' + ( this.hue_wrp_height / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) ) ) + 'px,0)'
+      });
+
+      this.$handler_sb.css ( 'background-color', 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)' );
+
+      this.$sb_wrp.css ( 'background-color', 'hsl(' + this.color.hsv.h + ',100%,50%)' );
+
+    },
+
+    _update: function () {
+
+      this._update_sb ();
+      this._update_hue ();
+      this._update_input ();
+
+    },
+
+    /* PUBLIC */
+
+    get: function () {
+
+      return this.color.getHexStr ();
+
+    },
+
+    set: function ( value ) {
+
+      var new_color = new HexColor ( value );
+
+      if ( new_color.isValid && !_.isEqual ( new_color.hsv, this.color.hsv ) ) {
+
+        this.color = new_color;
+
+        this._update ();
+
+      }
+
+      return new_color.isValid;
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.colorpicker').colorpicker ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Cookie v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1592,98 +1566,96 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* UTILITIES */
+  /* UTILITIES */
 
-    var encode = encodeURIComponent,
-        decode = decodeURIComponent;
+  var encode = encodeURIComponent,
+    decode = decodeURIComponent;
 
-    /* COOKIE */
+  /* COOKIE */
 
-    $.cookie = {
+  $.cookie = {
 
-        get: function ( key ) {
+    get: function ( key ) {
 
-            if ( !key ) return null;
+      if ( !key ) return null;
 
-            return decode ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
+      return decode ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
 
-        },
+    },
 
-        set: function ( key, value, end, path, domain, secure ) {
+    set: function ( key, value, end, path, domain, secure ) {
 
-            if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
+      if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
 
-            var expires = '';
+      var expires = '';
 
-            if ( end ) {
+      if ( end ) {
 
-                switch ( end.constructor ) {
+        switch ( end.constructor ) {
 
-                    case Number:
-                        expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
-                        break;
+          case Number:
+            expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
+            break;
 
-                    case String:
-                        expires = '; expires=' + end;
-                        break;
+          case String:
+            expires = '; expires=' + end;
+            break;
 
-                    case Date:
-                        expires = '; expires=' + end.toUTCString ();
-                        break;
-
-                }
-
-            }
-
-            document.cookie = encode ( key ) + '=' + encode ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
-
-            return true;
-
-        },
-
-        remove: function ( key, path, domain ) {
-
-            if ( !this.has ( key ) ) return false;
-
-            document.cookie = encode ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
-
-            return true;
-
-        },
-
-        has: function ( key ) {
-
-            if ( !key ) return false;
-
-            return ( new RegExp ( '(?:^|;\\s*)' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
-
-        },
-
-        keys: function () {
-
-            var keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
-
-            for ( var i = 0, l = keys.length; i < l; i++ ) {
-
-                keys[i] = decode ( keys[i] );
-
-            }
-
-            return keys;
+          case Date:
+            expires = '; expires=' + end.toUTCString ();
+            break;
 
         }
 
-    };
+      }
+
+      document.cookie = encode ( key ) + '=' + encode ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
+
+      return true;
+
+    },
+
+    remove: function ( key, path, domain ) {
+
+      if ( !this.has ( key ) ) return false;
+
+      document.cookie = encode ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
+
+      return true;
+
+    },
+
+    has: function ( key ) {
+
+      if ( !key ) return false;
+
+      return ( new RegExp ( '(?:^|;\\s*)' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
+
+    },
+
+    keys: function () {
+
+      var keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
+
+      for ( var i = 0, l = keys.length; i < l; i++ ) {
+
+        keys[i] = decode ( keys[i] );
+
+      }
+
+      return keys;
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Datepicker v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1698,379 +1670,377 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* DATEPICKER */
+  /* DATEPICKER */
 
-    $.widget ( 'presto.datepicker', {
+  $.widget ( 'presto.datepicker', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            names: {
-                months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-            },
-            date: {
-                today: false,
-                current: false,
-                selected: null
-            },
-            callbacks: {
-                change: _.noop,
-                refresh: _.noop
-            }
-        },
+    options: {
+      names: {
+        months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+      },
+      date: {
+        today: false,
+        current: false,
+        selected: null
+      },
+      callbacks: {
+        change: _.noop,
+        refresh: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$datepicker = this.$element;
+      this.$datepicker = this.$element;
 
-            this.id = this.$datepicker.attr ( 'id' );
-            this.$inputs = this.id ? $('input[name="' + this.id + '"]') : $empty;
+      this.id = this.$datepicker.attr ( 'id' );
+      this.$inputs = this.id ? $('input[name="' + this.id + '"]') : $empty;
 
-            this.$navigation_prev = this.$datepicker.find ( '.datepicker-navigation-prev' );
-            this.$navigation_title = this.$datepicker.find ( '.datepicker-navigation-title' );
-            this.$navigation_next = this.$datepicker.find ( '.datepicker-navigation-next' );
+      this.$navigation_prev = this.$datepicker.find ( '.datepicker-navigation-prev' );
+      this.$navigation_title = this.$datepicker.find ( '.datepicker-navigation-title' );
+      this.$navigation_next = this.$datepicker.find ( '.datepicker-navigation-next' );
 
-            this.$days_prev = this.$datepicker.find ( '.datepicker-day-prev' );
-            this.$days_current = this.$datepicker.find ( '.datepicker-day' );
-            this.$days_next = this.$datepicker.find ( '.datepicker-day-next' );
-            this.$days_all = this.$days_prev.add ( this.$days_current ).add ( this.$days_next );
+      this.$days_prev = this.$datepicker.find ( '.datepicker-day-prev' );
+      this.$days_current = this.$datepicker.find ( '.datepicker-day' );
+      this.$days_next = this.$datepicker.find ( '.datepicker-day-next' );
+      this.$days_all = this.$days_prev.add ( this.$days_current ).add ( this.$days_next );
 
-            if ( this.options.date.today === false ) {
+      if ( this.options.date.today === false ) {
 
-                this.options.date.today = new Date ();
+        this.options.date.today = new Date ();
 
-            }
+      }
 
-            if ( this.options.date.current === false ) {
+      if ( this.options.date.current === false ) {
 
-                this.options.date.current = new Date ();
+        this.options.date.current = new Date ();
 
-            }
+      }
 
-            this.$day_today = false;
-            this.$day_selected = false;
+      this.$day_today = false;
+      this.$day_selected = false;
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this._refresh ();
+      this._refresh ();
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* DATEPICKER */
+      /* DATEPICKER */
 
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
+      this._on ( 'mouseenter', this._handler_arrows_in );
+      this._on ( 'mouseleave', this._handler_arrows_out );
 
-            /* INPUTS */
+      /* INPUTS */
 
-            this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
+      this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
 
-            /* NAVIGATION */
+      /* NAVIGATION */
 
-            this._on ( this.$navigation_prev, 'click', this._handler_prev_click );
-            this._on ( this.$navigation_next, 'click', this._handler_next_click );
+      this._on ( this.$navigation_prev, 'click', this._handler_prev_click );
+      this._on ( this.$navigation_next, 'click', this._handler_next_click );
 
-            /* SELECTION */
+      /* SELECTION */
 
-            this._on ( 'click', '.datepicker-day', this._handler_day_current_click );
+      this._on ( 'click', '.datepicker-day', this._handler_day_current_click );
 
-        },
+    },
 
-        /* DATEPIKER */
+    /* DATEPIKER */
 
-        _handler_arrows_in: function () {
+    _handler_arrows_in: function () {
 
-            this._on ( $document, 'keydown', this._handler_arrows_keydown );
+      this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
-        },
+    },
 
-        _handler_arrows_out: function () {
+    _handler_arrows_out: function () {
 
-            this._off ( $document, 'keydown', this._handler_arrows_keydown );
+      this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
-        },
+    },
 
-        _handler_arrows_keydown: function ( event ) {
+    _handler_arrows_keydown: function ( event ) {
 
-            switch ( event.keyCode ) {
+      switch ( event.keyCode ) {
 
-                case $.ui.keyCode.UP:
-                case $.ui.keyCode.LEFT:
-                    this.navigate_month ( -1 );
-                    break;
+        case $.ui.keyCode.UP:
+        case $.ui.keyCode.LEFT:
+          this.navigate_month ( -1 );
+          break;
 
-                case $.ui.keyCode.RIGHT:
-                case $.ui.keyCode.DOWN:
-                    this.navigate_month ( 1 );
-                    break;
+        case $.ui.keyCode.RIGHT:
+        case $.ui.keyCode.DOWN:
+          this.navigate_month ( 1 );
+          break;
 
-            }
+      }
 
-        },
+    },
 
-        /* INPUT */
+    /* INPUT */
 
-        _handler_input_keydown: function ( event ) {
+    _handler_input_keydown: function ( event ) {
 
-            if ( event.keyCode === $.ui.keyCode.ENTER ) {
+      if ( event.keyCode === $.ui.keyCode.ENTER ) {
 
-                this.set ( this.$inputs.val () );
+        this.set ( this.$inputs.val () );
 
-            }
+      }
 
-        },
+    },
 
-        /* NAVIGATION */
+    /* NAVIGATION */
 
-        _handler_prev_click: function () {
+    _handler_prev_click: function () {
 
-            this.navigate_month ( -1 )
+      this.navigate_month ( -1 )
 
-        },
+    },
 
-        _handler_next_click: function () {
+    _handler_next_click: function () {
 
-            this.navigate_month ( 1 );
+      this.navigate_month ( 1 );
 
-        },
+    },
 
-        /* SELECTION */
+    /* SELECTION */
 
-        _handler_day_current_click: function ( event, node ) {
+    _handler_day_current_click: function ( event, node ) {
 
-            this._unhighlight_selected ();
+      this._unhighlight_selected ();
 
-            var day = parseInt ( $(node).html (), 10 );
+      var day = parseInt ( $(node).html (), 10 );
 
-            this.options.date.selected = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
+      this.options.date.selected = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
 
-            this._highlight_selected ();
+      this._highlight_selected ();
 
-            this._update_input ();
+      this._update_input ();
 
-        },
+    },
 
-        /* OTHERS */
+    /* OTHERS */
 
-        _build_calendar: function () {
+    _build_calendar: function () {
 
-            var prev_month_days = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
-                current_month_days = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
-                initial_day_of_week = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
+      var prev_month_days = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
+        current_month_days = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
+        initial_day_of_week = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
 
-            initial_day_of_week = ( initial_day_of_week === 0 ) ? 6 : initial_day_of_week - 1; //INFO: We use `Monday` as the 0 index
+      initial_day_of_week = ( initial_day_of_week === 0 ) ? 6 : initial_day_of_week - 1; //INFO: We use `Monday` as the 0 index
 
-            this.$days_all.removeClass ( 'hidden' );
+      this.$days_all.removeClass ( 'hidden' );
 
-            // PREV
+      // PREV
 
-            var exceeding_days = 31 - prev_month_days,
-                needed_days = initial_day_of_week,
-                left_days = 9 - exceeding_days - needed_days;
+      var exceeding_days = 31 - prev_month_days,
+        needed_days = initial_day_of_week,
+        left_days = 9 - exceeding_days - needed_days;
 
-            this.$days_prev.slice ( left_days + needed_days, this.$days_prev.length ).addClass ( 'hidden' );
-            this.$days_prev.slice ( 0, left_days ).addClass ( 'hidden' );
+      this.$days_prev.slice ( left_days + needed_days, this.$days_prev.length ).addClass ( 'hidden' );
+      this.$days_prev.slice ( 0, left_days ).addClass ( 'hidden' );
 
-            // CURRENT
+      // CURRENT
 
-            this.$days_current.slice ( current_month_days, this.$days_current.lenght ).addClass ( 'hidden' );
+      this.$days_current.slice ( current_month_days, this.$days_current.lenght ).addClass ( 'hidden' );
 
-            // NEXT
+      // NEXT
 
-            var left_days = ( ( current_month_days + initial_day_of_week ) % 7 );
+      var left_days = ( ( current_month_days + initial_day_of_week ) % 7 );
 
-            this.$days_next.slice ( ( left_days === 0 ) ? 0 : 7 - left_days ).addClass ( 'hidden' );
+      this.$days_next.slice ( ( left_days === 0 ) ? 0 : 7 - left_days ).addClass ( 'hidden' );
 
-        },
+    },
 
-        _highlight_day: function ( day, css_class ) {
+    _highlight_day: function ( day, css_class ) {
 
-            if ( day && day.getFullYear () === this.options.date.current.getFullYear () ) {
+      if ( day && day.getFullYear () === this.options.date.current.getFullYear () ) {
 
-                var delta_months = day.getMonth () - this.options.date.current.getMonth ();
+        var delta_months = day.getMonth () - this.options.date.current.getMonth ();
 
-                switch ( delta_months ) {
+        switch ( delta_months ) {
 
-                    case -1:
-                        return this.$days_prev.eq ( day.getDate () - 23 ).addClass ( css_class );
+          case -1:
+            return this.$days_prev.eq ( day.getDate () - 23 ).addClass ( css_class );
 
-                    case 0:
-                        return this.$days_current.eq ( day.getDate () - 1 ).addClass ( css_class );
+          case 0:
+            return this.$days_current.eq ( day.getDate () - 1 ).addClass ( css_class );
 
-                    case 1:
-                        return this.$days_next.eq ( day.getDate () - 1 ).addClass ( css_class );
-
-                }
-
-            }
-
-            return false;
-
-        },
-
-        _unhighlight_selected: function () {
-
-            if ( this.$day_selected ) {
-
-                this.$day_selected.removeClass ( 'datepicker-day-selected' );
-
-            }
-
-        },
-
-        _highlight_selected: function () {
-
-            this.$day_selected = this._highlight_day ( this.options.date.selected, 'datepicker-day-selected' );
-
-        },
-
-        _unhighlight_today: function () {
-
-            if ( this.$day_today ) {
-
-                this.$day_today.removeClass ( 'datepicker-day-today' );
-
-            }
-
-        },
-
-        _highlight_today: function () {
-
-            this.$day_today = this._highlight_day ( this.options.date.today, 'datepicker-day-today' );
-
-        },
-
-        _update_title: function () {
-
-            this.$navigation_title.html ( this.options.names.months[this.options.date.current.getMonth ()] + ', ' + this.options.date.current.getFullYear () );
-
-        },
-
-        _update_input: function () {
-
-            if ( this.options.date.selected ) {
-
-                this.$inputs.val ( this.options.date.selected.getFullYear () + '-' + this.options.date.selected.getMonth () + '-' + this.options.date.selected.getDate () ).change ();
-
-            }
-
-        },
-
-        _refresh: function () {
-
-            this._unhighlight_selected ();
-            this._unhighlight_today ();
-            this._build_calendar ();
-            this._highlight_selected ();
-            this._highlight_today ();
-            this._update_title ();
-
-            this._trigger ( 'refresh' );
-
-        },
-
-        /* API */
-
-        get: function ( formatted ) {
-
-            if ( formatted && this.options.date.selected ) {
-
-                return this.options.date.selected.getFullYear () + '-' + this.options.date.selected.getMonth () + '-' + this.options.date.selected.getDate ();
-
-            } else {
-
-                return this.options.date.selected;
-
-            }
-
-        },
-
-        set: function ( date ) {
-
-            if ( _.isString ( date ) ) {
-
-                var segments = date.split ( '-' ),
-                    date = new Date ( segments[0], segments[1], segments[2] );
-
-            } else {
-
-                var date = new Date ( date );
-
-            }
-
-            if ( !_.isNaN ( date.valueOf () ) ) {
-
-                this.options.date.selected = date;
-
-                if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
-
-                    this._unhighlight_selected ();
-                    this._highlight_selected ();
-
-                } else {
-
-                    this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
-                    this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
-
-                    this._refresh ();
-
-                }
-
-                this._update_input ();
-
-            }
-
-        },
-
-        navigate_month: function ( steps ) {
-
-            if ( steps ) {
-
-                this.options.date.current.setMonth ( this.options.date.current.getMonth () + steps );
-
-                this._refresh ();
-
-            }
-
-        },
-
-        prev_month: function () {
-
-            this.navigate_month ( -1 );
-
-        },
-
-        next_month: function () {
-
-            this.navigate_month ( 1 );
+          case 1:
+            return this.$days_next.eq ( day.getDate () - 1 ).addClass ( css_class );
 
         }
 
-    });
+      }
 
-    /* READY */
+      return false;
 
-    $(function () {
+    },
 
-        $('.datepicker').datepicker ();
+    _unhighlight_selected: function () {
 
-    });
+      if ( this.$day_selected ) {
+
+        this.$day_selected.removeClass ( 'datepicker-day-selected' );
+
+      }
+
+    },
+
+    _highlight_selected: function () {
+
+      this.$day_selected = this._highlight_day ( this.options.date.selected, 'datepicker-day-selected' );
+
+    },
+
+    _unhighlight_today: function () {
+
+      if ( this.$day_today ) {
+
+        this.$day_today.removeClass ( 'datepicker-day-today' );
+
+      }
+
+    },
+
+    _highlight_today: function () {
+
+      this.$day_today = this._highlight_day ( this.options.date.today, 'datepicker-day-today' );
+
+    },
+
+    _update_title: function () {
+
+      this.$navigation_title.html ( this.options.names.months[this.options.date.current.getMonth ()] + ', ' + this.options.date.current.getFullYear () );
+
+    },
+
+    _update_input: function () {
+
+      if ( this.options.date.selected ) {
+
+        this.$inputs.val ( this.options.date.selected.getFullYear () + '-' + this.options.date.selected.getMonth () + '-' + this.options.date.selected.getDate () ).change ();
+
+      }
+
+    },
+
+    _refresh: function () {
+
+      this._unhighlight_selected ();
+      this._unhighlight_today ();
+      this._build_calendar ();
+      this._highlight_selected ();
+      this._highlight_today ();
+      this._update_title ();
+
+      this._trigger ( 'refresh' );
+
+    },
+
+    /* API */
+
+    get: function ( formatted ) {
+
+      if ( formatted && this.options.date.selected ) {
+
+        return this.options.date.selected.getFullYear () + '-' + this.options.date.selected.getMonth () + '-' + this.options.date.selected.getDate ();
+
+      } else {
+
+        return this.options.date.selected;
+
+      }
+
+    },
+
+    set: function ( date ) {
+
+      if ( _.isString ( date ) ) {
+
+        var segments = date.split ( '-' ),
+          date = new Date ( segments[0], segments[1], segments[2] );
+
+      } else {
+
+        var date = new Date ( date );
+
+      }
+
+      if ( !_.isNaN ( date.valueOf () ) ) {
+
+        this.options.date.selected = date;
+
+        if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+
+          this._unhighlight_selected ();
+          this._highlight_selected ();
+
+        } else {
+
+          this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
+          this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+
+          this._refresh ();
+
+        }
+
+        this._update_input ();
+
+      }
+
+    },
+
+    navigate_month: function ( steps ) {
+
+      if ( steps ) {
+
+        this.options.date.current.setMonth ( this.options.date.current.getMonth () + steps );
+
+        this._refresh ();
+
+      }
+
+    },
+
+    prev_month: function () {
+
+      this.navigate_month ( -1 );
+
+    },
+
+    next_month: function () {
+
+      this.navigate_month ( 1 );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.datepicker').datepicker ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Draggable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2080,229 +2050,227 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* DRAGGABLE */
+  /* DRAGGABLE */
 
-    $.widget ( 'presto.draggable', {
+  $.widget ( 'presto.draggable', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                handler: '.draggable-handler'
-            },
-            draggable: _.true, //INFO: checks if we can drag it or not
-            only_handlers: false, //INFO: only an handler can drag it around
-            revertable: false, //INFO: on dragend take it back to the starting position
-            axis: false, //INFO: limit the movements to this axis
-            constrainer: { //INFO: constrain the drag inside the $element or coordinates
-                $element: false, //INFO: if we want to keep the draggable inside this $element
-                coordinates: false, //INFO: if we want to keep the draggable inside the coordinates //TODO: implement
-                // {
-                //     x1: 0,
-                //     x2: 0,
-                //     y1: 0,
-                //     y2: 0
-                // }
-                constrain_center: false, //INFO: set the constrain type, it will constrain the whole shape, or the center
-                axis: false, //INFO: if we want to constrain the draggable only in a specific axis
-                tollerance: { //INFO: the amount of pixel flexibility that a constrainer has
-                    x: 0,
-                    y: 0
-                }
-            },
-            modifiers: { //INFO: it can modify the setted X and Y transforms values
-                x: _.true,
-                y: _.true
-            },
-            callbacks: {
-                beforestart: _.noop,
-                start: _.noop,
-                move: _.noop,
-                end: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        handler: '.draggable-handler'
+      },
+      draggable: _.true, //INFO: checks if we can drag it or not
+      only_handlers: false, //INFO: only an handler can drag it around
+      revertable: false, //INFO: on dragend take it back to the starting position
+      axis: false, //INFO: limit the movements to this axis
+      constrainer: { //INFO: constrain the drag inside the $element or coordinates
+        $element: false, //INFO: if we want to keep the draggable inside this $element
+        coordinates: false, //INFO: if we want to keep the draggable inside the coordinates //TODO: implement
+        // {
+        //   x1: 0,
+        //   x2: 0,
+        //   y1: 0,
+        //   y2: 0
+        // }
+        constrain_center: false, //INFO: set the constrain type, it will constrain the whole shape, or the center
+        axis: false, //INFO: if we want to constrain the draggable only in a specific axis
+        tollerance: { //INFO: the amount of pixel flexibility that a constrainer has
+          x: 0,
+          y: 0
+        }
+      },
+      modifiers: { //INFO: it can modify the setted X and Y transforms values
+        x: _.true,
+        y: _.true
+      },
+      callbacks: {
+        beforestart: _.noop,
+        start: _.noop,
+        move: _.noop,
+        end: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.draggable = this.element;
-            this.$draggable = this.$element;
+      this.draggable = this.element;
+      this.$draggable = this.$element;
 
-            if ( this.options.only_handlers ) {
+      if ( this.options.only_handlers ) {
 
-                this.$handlers = this.$draggable.find ( this.options.selectors.handler ); //FIXME: does it make sense to have handlers inside the $draggable?
+        this.$handlers = this.$draggable.find ( this.options.selectors.handler ); //FIXME: does it make sense to have handlers inside the $draggable?
 
-            }
+      }
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            if ( this.options.only_handlers ) {
+      if ( this.options.only_handlers ) {
 
-                this._on ( this.$handlers, $.Pointer.dragstart, this._start );
-                this._on ( this.$handlers, $.Pointer.dragmove, this._move );
-                this._on ( this.$handlers, $.Pointer.dragend, this._end );
+        this._on ( this.$handlers, $.Pointer.dragstart, this._start );
+        this._on ( this.$handlers, $.Pointer.dragmove, this._move );
+        this._on ( this.$handlers, $.Pointer.dragend, this._end );
 
-            } else {
+      } else {
 
-                this._on ( $.Pointer.dragstart, this._start );
-                this._on ( $.Pointer.dragmove, this._move );
-                this._on ( $.Pointer.dragend, this._end );
+        this._on ( $.Pointer.dragstart, this._start );
+        this._on ( $.Pointer.dragmove, this._move );
+        this._on ( $.Pointer.dragend, this._end );
 
-            }
+      }
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _start: function ( event, data ) {
+    _start: function ( event, data ) {
 
-            this.isDraggable = this.options.draggable ();
+      this.isDraggable = this.options.draggable ();
 
-            if ( !this.isDraggable ) return;
+      if ( !this.isDraggable ) return;
 
-            this._trigger ( 'beforestart' );
+      this._trigger ( 'beforestart' );
 
-            this.motion = false;
+      this.motion = false;
 
-            var transform_str = this.$draggable.css ( 'transform' ),
-                matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
+      var transform_str = this.$draggable.css ( 'transform' ),
+        matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
 
-            this.initialXY = {
-                X: parseInt ( matrix[4], 10 ),
-                Y: parseInt ( matrix[5], 10 )
-            };
+      this.initialXY = {
+        X: parseInt ( matrix[4], 10 ),
+        Y: parseInt ( matrix[5], 10 )
+      };
 
-            this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable } ) );
+      this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable } ) );
 
-        },
+    },
 
-        _move: function ( event, data ) { //TODO: make it more performant
+    _move: function ( event, data ) { //TODO: make it more performant
 
-            if ( !this.isDraggable ) return;
+      if ( !this.isDraggable ) return;
 
-            if ( this.motion === false ) {
+      if ( this.motion === false ) {
 
-                this.motion = true;
+        this.motion = true;
 
-                if ( this.options.constrainer.$element ) {
+        if ( this.options.constrainer.$element ) {
 
-                    var constrainer_offset = this.options.constrainer.$element.offset (),
-                        draggable_offset = this.$draggable.offset ();
+          var constrainer_offset = this.options.constrainer.$element.offset (),
+            draggable_offset = this.$draggable.offset ();
 
-                    this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
-                    this.translateX_max = constrainer_offset.left + this.options.constrainer.$element.width () - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
+          this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
+          this.translateX_max = constrainer_offset.left + this.options.constrainer.$element.width () - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
 
-                    this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
-                    this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? this.$draggable.height () / 2 : 0 );
+          this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+          this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? this.$draggable.height () / 2 : 0 );
 
-                } else if ( this.options.constrainer.coordinates ) {
+        } else if ( this.options.constrainer.coordinates ) {
 
-                    var draggable_offset = this.$draggable.offset ();
+          var draggable_offset = this.$draggable.offset ();
 
-                    if ( !_.isUndefined ( this.options.constrainer.coordinates.x1 ) ) {
+          if ( !_.isUndefined ( this.options.constrainer.coordinates.x1 ) ) {
 
-                        this.translateX_min = this.options.constrainer.coordinates.x1 - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
+            this.translateX_min = this.options.constrainer.coordinates.x1 - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
 
-                    }
+          }
 
-                    if ( !_.isUndefined ( this.options.constrainer.coordinates.x2 ) ) {
+          if ( !_.isUndefined ( this.options.constrainer.coordinates.x2 ) ) {
 
-                        this.translateX_max = this.options.constrainer.coordinates.x2 - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
+            this.translateX_max = this.options.constrainer.coordinates.x2 - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
 
-                    }
+          }
 
-                    if ( !_.isUndefined ( this.options.constrainer.coordinates.y1 ) ) {
+          if ( !_.isUndefined ( this.options.constrainer.coordinates.y1 ) ) {
 
-                        this.translateY_min = this.options.constrainer.coordinates.y1 - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+            this.translateY_min = this.options.constrainer.coordinates.y1 - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
 
-                    }
+          }
 
-                    if ( !_.isUndefined ( this.options.constrainer.coordinates.y2 ) ) {
+          if ( !_.isUndefined ( this.options.constrainer.coordinates.y2 ) ) {
 
-                        this.translateY_max = this.options.constrainer.coordinates.y2 - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+            this.translateY_max = this.options.constrainer.coordinates.y2 - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
 
-                    }
-
-                }
-
-                $html.addClass ( 'dragging' );
-                this.$draggable.addClass ( 'dragging' );
-
-            }
-
-            var translateX = this.initialXY.X + ( ( this.options.axis === 'y' ) ? 0 : data.deltaXY.X ),
-                translateY = this.initialXY.Y + ( ( this.options.axis === 'x' ) ? 0 : data.deltaXY.Y );
-
-            if ( this.options.constrainer.$element || this.options.constrainer.coordinates ) {
-
-                if ( this.options.constrainer.axis !== 'y' ) {
-
-                    translateX = _.clamp ( _.isUndefined ( this.translateX_min ) ? undefined : this.translateX_min - this.options.constrainer.tollerance.x, translateX, _.isUndefined ( this.translateX_max ) ? undefined : this.translateX_max + this.options.constrainer.tollerance.x );
-
-                }
-
-                if ( this.options.constrainer.axis !== 'x' ) {
-
-                    translateY = _.clamp ( _.isUndefined ( this.translateY_min ) ? undefined : this.translateY_min - this.options.constrainer.tollerance.y, translateY, _.isUndefined ( this.translateY_max ) ? undefined : this.translateY_max + this.options.constrainer.tollerance.y );
-
-                }
-
-            }
-
-            var modifiedXY = {
-                X: this.options.modifiers.x ( translateX ),
-                Y: this.options.modifiers.y ( translateY )
-            };
-
-            this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : this.initialXY.X ) : modifiedXY.X ) + 'px,' + ( _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : this.initialXY.Y ) : modifiedXY.Y ) + 'px,0)' );
-
-            this._trigger ( 'move', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, $draggable: this.$draggable } ) );
-
-        },
-
-        _end: function ( event, data ) {
-
-            if ( !this.isDraggable ) return;
-
-            if ( this.motion === true ) {
-
-                $html.removeClass ( 'dragging' );
-                this.$draggable.removeClass ( 'dragging' );
-
-                if ( this.options.revertable ) {
-
-                    this.$draggable.css ( 'transform', 'translate3d(' + this.initialXY.X + 'px,' + this.initialXY.Y + 'px,0)' ); //TODO: animate it
-
-                }
-
-            }
-
-            this._trigger ( 'end', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
+          }
 
         }
 
-    });
+        $html.addClass ( 'dragging' );
+        this.$draggable.addClass ( 'dragging' );
 
-    /* READY */
+      }
 
-    $(function () {
+      var translateX = this.initialXY.X + ( ( this.options.axis === 'y' ) ? 0 : data.deltaXY.X ),
+        translateY = this.initialXY.Y + ( ( this.options.axis === 'x' ) ? 0 : data.deltaXY.Y );
 
-        $('.draggable').draggable ();
+      if ( this.options.constrainer.$element || this.options.constrainer.coordinates ) {
 
-    });
+        if ( this.options.constrainer.axis !== 'y' ) {
+
+          translateX = _.clamp ( _.isUndefined ( this.translateX_min ) ? undefined : this.translateX_min - this.options.constrainer.tollerance.x, translateX, _.isUndefined ( this.translateX_max ) ? undefined : this.translateX_max + this.options.constrainer.tollerance.x );
+
+        }
+
+        if ( this.options.constrainer.axis !== 'x' ) {
+
+          translateY = _.clamp ( _.isUndefined ( this.translateY_min ) ? undefined : this.translateY_min - this.options.constrainer.tollerance.y, translateY, _.isUndefined ( this.translateY_max ) ? undefined : this.translateY_max + this.options.constrainer.tollerance.y );
+
+        }
+
+      }
+
+      var modifiedXY = {
+        X: this.options.modifiers.x ( translateX ),
+        Y: this.options.modifiers.y ( translateY )
+      };
+
+      this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : this.initialXY.X ) : modifiedXY.X ) + 'px,' + ( _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : this.initialXY.Y ) : modifiedXY.Y ) + 'px,0)' );
+
+      this._trigger ( 'move', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, $draggable: this.$draggable } ) );
+
+    },
+
+    _end: function ( event, data ) {
+
+      if ( !this.isDraggable ) return;
+
+      if ( this.motion === true ) {
+
+        $html.removeClass ( 'dragging' );
+        this.$draggable.removeClass ( 'dragging' );
+
+        if ( this.options.revertable ) {
+
+          this.$draggable.css ( 'transform', 'translate3d(' + this.initialXY.X + 'px,' + this.initialXY.Y + 'px,0)' ); //TODO: animate it
+
+        }
+
+      }
+
+      this._trigger ( 'end', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.draggable').draggable ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Positionate v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2313,184 +2281,182 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* POSITIONATE */
+  /* POSITIONATE */
 
-    $.fn.positionate = function ( custom_options ) {
+  $.fn.positionate = function ( custom_options ) {
 
-        // OPTIONS
+    // OPTIONS
 
-        var options = _.merge ({
-            direction: false, //INFO: Set a preferred direction
-            axis: false, //INFO: Set a preferred axis
-            $anchor: false, //INFO: Positionate next to an $anchor element
-            $pointer: false, //INFO: The element who is pointing to the anchor
-            point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
-            ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
-                x: ['right', 'left'],
-                y: ['bottom', 'top'],
-                all: ['bottom', 'right', 'left', 'top']
-            },
-            callbacks: {
-                positionated: _.noop
-            }
-        }, custom_options );
+    var options = _.merge ({
+      direction: false, //INFO: Set a preferred direction
+      axis: false, //INFO: Set a preferred axis
+      $anchor: false, //INFO: Positionate next to an $anchor element
+      $pointer: false, //INFO: The element who is pointing to the anchor
+      point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
+      ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
+        x: ['right', 'left'],
+        y: ['bottom', 'top'],
+        all: ['bottom', 'right', 'left', 'top']
+      },
+      callbacks: {
+        positionated: _.noop
+      }
+    }, custom_options );
 
-        // RESETTING
+    // RESETTING
 
-        this.removeClass ( 'positionate-top positionate-bottom positionate-left positionate-right' );
+    this.removeClass ( 'positionate-top positionate-bottom positionate-left positionate-right' );
 
-        // VARIABLES
+    // VARIABLES
 
-        var directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
-            window_width = $window.width (),
-            window_height = $window.height (),
-            html_scrollTop = $html.scrollTop (),
-            html_scrollLeft = $html.scrollLeft (),
-            positionable_offset = this.offset (),
-            positionable_width = this.outerWidth (),
-            positionable_height = this.outerHeight (),
-            anchor_offset = options.$anchor ? options.$anchor.offset () : { top: options.point.y, left: options.point.x },
-            anchor_width = options.$anchor ? options.$anchor.outerWidth () : 0,
-            anchor_height = options.$anchor ? options.$anchor.outerHeight () : 0;
+    var directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
+      window_width = $window.width (),
+      window_height = $window.height (),
+      html_scrollTop = $html.scrollTop (),
+      html_scrollLeft = $html.scrollLeft (),
+      positionable_offset = this.offset (),
+      positionable_width = this.outerWidth (),
+      positionable_height = this.outerHeight (),
+      anchor_offset = options.$anchor ? options.$anchor.offset () : { top: options.point.y, left: options.point.x },
+      anchor_width = options.$anchor ? options.$anchor.outerWidth () : 0,
+      anchor_height = options.$anchor ? options.$anchor.outerHeight () : 0;
 
-        // SPACES
+    // SPACES
 
-        var spaces = _.map ( directions, function ( direction ) {
+    var spaces = _.map ( directions, function ( direction ) {
 
-            switch ( direction ) {
+      switch ( direction ) {
 
-                case 'top':
-                    return anchor_offset.top - html_scrollTop;
+        case 'top':
+          return anchor_offset.top - html_scrollTop;
 
-                case 'bottom':
-                    return window_height - anchor_offset.top - anchor_height + html_scrollTop;
+        case 'bottom':
+          return window_height - anchor_offset.top - anchor_height + html_scrollTop;
 
-                case 'left':
-                    return anchor_offset.left - html_scrollLeft;
+        case 'left':
+          return anchor_offset.left - html_scrollLeft;
 
-                case 'right':
-                    return window_width - anchor_offset.left - anchor_width + html_scrollLeft;
+        case 'right':
+          return window_width - anchor_offset.left - anchor_width + html_scrollLeft;
 
-            }
+      }
 
-        });
+    });
 
-        // AREAS
+    // AREAS
 
-        var areas = _.map ( directions, function ( direction, index ) {
+    var areas = _.map ( directions, function ( direction, index ) {
 
-            switch ( direction ) {
+      switch ( direction ) {
 
-                case 'top':
-                case 'bottom':
-                    return Math.min ( positionable_height, spaces[index] ) * Math.min ( window_width, positionable_width );
+        case 'top':
+        case 'bottom':
+          return Math.min ( positionable_height, spaces[index] ) * Math.min ( window_width, positionable_width );
 
-                case 'left':
-                case 'right':
-                    return Math.min ( positionable_width, spaces[index] ) * Math.min ( window_height, positionable_height );
+        case 'left':
+        case 'right':
+          return Math.min ( positionable_width, spaces[index] ) * Math.min ( window_height, positionable_height );
 
-            }
+      }
 
-        });
+    });
 
-        // CHOOSING A DIRECTION
+    // CHOOSING A DIRECTION
 
-        var chosen_direction = directions[areas.indexOf ( _.max ( areas ) )];
+    var chosen_direction = directions[areas.indexOf ( _.max ( areas ) )];
 
-        // GETTING TOP AND LEFT
+    // GETTING TOP AND LEFT
+
+    switch ( chosen_direction ) {
+
+      case 'top':
+      case 'bottom':
+        var coordinates = {
+          left: anchor_offset.left + ( anchor_width / 2 ) - ( positionable_width / 2 ),
+          top: ( chosen_direction === 'top' ) ? anchor_offset.top - positionable_height : anchor_offset.top + anchor_height
+        };
+        break;
+
+      case 'left':
+      case 'right':
+        var coordinates = {
+          top: anchor_offset.top + ( anchor_height / 2 ) - ( positionable_height / 2 ),
+          left: ( chosen_direction === 'left' ) ? anchor_offset.left - positionable_width : anchor_offset.left + anchor_width
+        };
+
+    }
+
+    // CONSTRAIN TO THE WINDOW
+
+    //TODO: add a viewport check here, we should positionate it to the viewport if the element is outside of it
+
+    coordinates.top = _.clamp ( 0, coordinates.top, window_height - positionable_height );
+    coordinates.left = _.clamp ( 0, coordinates.left, window_width - positionable_width );
+
+    // DATAS
+
+    var datas = {
+      coordinates: coordinates,
+      direction: chosen_direction
+    };
+
+    // SETTING TOP AND LEFT
+
+    this.css ( 'transform', 'translate3d(' + coordinates.left + 'px,' + coordinates.top + 'px,0)' );
+
+    this.addClass ( 'positionate-' + chosen_direction );
+
+    // SETTING THE POINTER
+
+    if ( options.$anchor && options.$pointer ) {
+
+      var $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+
+      if ( $pointer instanceof $ ) {
+
+        var transform_str = $pointer.css ( 'transform' ),
+          matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0],
+          pointer_position = $pointer.position ();
 
         switch ( chosen_direction ) {
 
-            case 'top':
-            case 'bottom':
-                var coordinates = {
-                    left: anchor_offset.left + ( anchor_width / 2 ) - ( positionable_width / 2 ),
-                    top: ( chosen_direction === 'top' ) ? anchor_offset.top - positionable_height : anchor_offset.top + anchor_height
-                };
-                break;
+          case 'top':
+          case 'bottom':
+            var pointer_width = $pointer.width (),
+              translateX = parseInt ( matrix[4], 10 ) + ( ( anchor_offset.left + ( anchor_width / 2 ) - html_scrollLeft ) - ( coordinates.left + pointer_position.left + ( pointer_width / 2 ) ) ),
+              translateY = parseInt ( matrix[5], 10 );
+            break;
 
-            case 'left':
-            case 'right':
-                var coordinates = {
-                    top: anchor_offset.top + ( anchor_height / 2 ) - ( positionable_height / 2 ),
-                    left: ( chosen_direction === 'left' ) ? anchor_offset.left - positionable_width : anchor_offset.left + anchor_width
-                };
-
-        }
-
-        // CONSTRAIN TO THE WINDOW
-
-        //TODO: add a viewport check here, we should positionate it to the viewport if the element is outside of it
-
-        coordinates.top = _.clamp ( 0, coordinates.top, window_height - positionable_height );
-        coordinates.left = _.clamp ( 0, coordinates.left, window_width - positionable_width );
-
-        // DATAS
-
-        var datas = {
-            coordinates: coordinates,
-            direction: chosen_direction
-        };
-
-        // SETTING TOP AND LEFT
-
-        this.css ( 'transform', 'translate3d(' + coordinates.left + 'px,' + coordinates.top + 'px,0)' );
-
-        this.addClass ( 'positionate-' + chosen_direction );
-
-        // SETTING THE POINTER
-
-        if ( options.$anchor && options.$pointer ) {
-
-            var $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
-
-            if ( $pointer instanceof $ ) {
-
-                var transform_str = $pointer.css ( 'transform' ),
-                    matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0],
-                    pointer_position = $pointer.position ();
-
-                switch ( chosen_direction ) {
-
-                    case 'top':
-                    case 'bottom':
-                        var pointer_width = $pointer.width (),
-                            translateX = parseInt ( matrix[4], 10 ) + ( ( anchor_offset.left + ( anchor_width / 2 ) - html_scrollLeft ) - ( coordinates.left + pointer_position.left + ( pointer_width / 2 ) ) ),
-                            translateY = parseInt ( matrix[5], 10 );
-                        break;
-
-                    case 'left':
-                    case 'right':
-                        var pointer_height = $pointer.height (),
-                            translateX = parseInt ( matrix[4], 10 ),
-                            translateY = parseInt ( matrix[5], 10 ) + ( ( anchor_offset.top + ( anchor_height / 2 ) - html_scrollTop ) - ( coordinates.top + pointer_position.top + ( pointer_height / 2 ) ) );
-                        break;
-
-                }
-
-                $pointer.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
-
-            }
+          case 'left':
+          case 'right':
+            var pointer_height = $pointer.height (),
+              translateX = parseInt ( matrix[4], 10 ),
+              translateY = parseInt ( matrix[5], 10 ) + ( ( anchor_offset.top + ( anchor_height / 2 ) - html_scrollTop ) - ( coordinates.top + pointer_position.top + ( pointer_height / 2 ) ) );
+            break;
 
         }
 
-        // CALLBACK
+        $pointer.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
 
-        options.callbacks.positionated ( datas );
+      }
 
-        return this;
+    }
 
-    };
+    // CALLBACK
+
+    options.callbacks.positionated ( datas );
+
+    return this;
+
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Dropdown v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2504,239 +2470,237 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* VARIABLES */
+  /* VARIABLES */
 
-    var assignments = {};
+  var assignments = {};
 
-    /* DROPDOWN */
+  /* DROPDOWN */
 
-    $.widget ( 'presto.dropdown', {
+  $.widget ( 'presto.dropdown', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$dropdown = this.$element;
-            this.$tips = this.$dropdown.find ( '.dropdown-tip' );
-            this.$top_tip = this.$tips.filter ( '.top' );
-            this.$right_tip = this.$tips.filter ( '.right' );
-            this.$bottom_tip = this.$tips.filter ( '.bottom' );
-            this.$left_tip = this.$tips.filter ( '.left' );
-            this.$actionables = this.$dropdown.find ( '.actionable' );
+      this.$dropdown = this.$element;
+      this.$tips = this.$dropdown.find ( '.dropdown-tip' );
+      this.$top_tip = this.$tips.filter ( '.top' );
+      this.$right_tip = this.$tips.filter ( '.right' );
+      this.$bottom_tip = this.$tips.filter ( '.bottom' );
+      this.$left_tip = this.$tips.filter ( '.left' );
+      this.$actionables = this.$dropdown.find ( '.actionable' );
 
-            this.id = this.$dropdown.attr ( 'id' );
+      this.id = this.$dropdown.attr ( 'id' );
 
-            this.$triggers = $('.dropdown-trigger[data-dropdown="' + this.id + '"]');
+      this.$triggers = $('.dropdown-trigger[data-dropdown="' + this.id + '"]');
 
-            this.hasTips = !this.$dropdown.hasClass ( 'no-tip' );
-            this.isAttached = this.$dropdown.hasClass ( 'attached' );
+      this.hasTips = !this.$dropdown.hasClass ( 'no-tip' );
+      this.isAttached = this.$dropdown.hasClass ( 'attached' );
 
-            this.opened = false;
+      this.opened = false;
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( this.$triggers, 'click', this.toggle );
+      this._on ( this.$triggers, 'click', this.toggle );
 
-            this._on ( this.$actionables, 'click', this.close );
+      this._on ( this.$actionables, 'click', this.close );
 
-            // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
+      // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
-        },
+    },
 
-        /* WINDOW RESIZE / SCROLL */
+    /* WINDOW RESIZE / SCROLL */
 
-        _bind_window_resize_scroll: function () {
+    _bind_window_resize_scroll: function () {
 
-            this._on ( $window, 'resize scroll', this._update );
+      this._on ( $window, 'resize scroll', this._update );
 
-        },
+    },
 
-        _unbind_window_resize_scroll: function () {
+    _unbind_window_resize_scroll: function () {
 
-            this._off ( $window, 'resize scroll', this._update );
+      this._off ( $window, 'resize scroll', this._update );
 
-        },
+    },
 
-        /* WINDOW CLICK */
+    /* WINDOW CLICK */
 
-        _bind_window_click: function () {
+    _bind_window_click: function () {
 
-            this._on ( $window, 'click', this._handler_window_click );
+      this._on ( $window, 'click', this._handler_window_click );
 
-        },
+    },
 
-        _unbind_window_click: function () {
+    _unbind_window_click: function () {
 
-            this._off ( $window, 'click', this._handler_window_click );
+      this._off ( $window, 'click', this._handler_window_click );
 
-        },
+    },
 
-        _handler_window_click: function ( event ) {
+    _handler_window_click: function ( event ) {
 
-            var $parents = $(event.target).parents ();
+      var $parents = $(event.target).parents ();
 
-            if ( $parents.index ( this.$dropdown ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
+      if ( $parents.index ( this.$dropdown ) === -1 ) { //INFO: Checking if we clicked inside the dropdown or another trigger for this dropdown
 
-                for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
+        for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
 
-                    if ( event.target === this.$triggers.get ( i ) || $parents.index ( this.$triggers.get ( i ) ) !== -1 ) {
+          if ( event.target === this.$triggers.get ( i ) || $parents.index ( this.$triggers.get ( i ) ) !== -1 ) {
 
-                        return;
+            return;
 
-                    }
-
-                }
-
-                this.close ();
-
-            }
-
-        },
-
-        /* POSITIONATE */
-
-        _positionate: function () {
-
-            // Variables
-
-            var $trigger = $(assignments[this.id]),
-                no_tip = $trigger.hasClass ( 'no-tip' ) || !this.hasTips || this.isAttached,
-                instance = this;
-
-            // Positionate
-
-            this.$dropdown.positionate ({
-                $anchor: $trigger,
-                $pointer: function ( data ) {
-                    if ( !no_tip ) {
-                        return instance['$' + instance._get_opposite_direction ( data.direction ) + '_tip'];
-                    }
-                },
-                callbacks: {
-                    positionated: function ( data ) {
-                        $trigger.addClass ( 'dropdown-trigger-' + data.direction );
-                    }
-                }
-            });
-
-        },
-
-        /* PRIVATE */
-
-        _get_opposite_direction: function ( direction ) {
-
-            switch ( direction ) {
-
-                case 'top':
-                    return 'bottom';
-
-                case 'bottom':
-                    return 'top';
-
-                case 'left':
-                    return 'right';
-
-                case 'right':
-                    return 'left';
-
-            }
-
-        },
-
-        _update: function () {
-
-            if ( this.opened ) {
-
-                this._positionate ();
-
-            }
-
-        },
-
-        /* PUBLIC */
-
-        toggle: function ( event, trigger ) {
-
-            this[( this.opened && assignments[this.id] === trigger ) ? 'close' : 'open']( event, trigger );
-
-        },
-
-        open: function ( event, trigger ) {
-
-            if ( trigger ) {
-
-                $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right active' );
-
-                if ( this.opened && assignments[this.id] !== trigger ) {
-
-                    this.$dropdown.addClass ( 'moving' );
-
-                }
-
-                assignments[this.id] = trigger;
-
-                $(trigger).addClass ( 'active' );
-
-            }
-
-            this._positionate ();
-
-            this.$dropdown.addClass ( 'active' );
-
-            this.opened = true;
-
-            this._delay ( this._bind_window_click ); //FIXME: Why without the delay it doesn't work?
-            this._bind_window_resize_scroll ();
-
-            this._trigger ( 'open' );
-
-        },
-
-        close: function () {
-
-            $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right active' );
-
-            this.$dropdown.removeClass ( 'active moving' );
-
-            this.opened = false;
-
-            this._unbind_window_click ();
-            this._unbind_window_resize_scroll ();
-
-            this._trigger ( 'close' );
+          }
 
         }
 
-    });
+        this.close ();
 
-    /* READY */
+      }
 
-    $(function () {
+    },
 
-        $('.dropdown').dropdown ();
+    /* POSITIONATE */
 
-    });
+    _positionate: function () {
+
+      // Variables
+
+      var $trigger = $(assignments[this.id]),
+        no_tip = $trigger.hasClass ( 'no-tip' ) || !this.hasTips || this.isAttached,
+        instance = this;
+
+      // Positionate
+
+      this.$dropdown.positionate ({
+        $anchor: $trigger,
+        $pointer: function ( data ) {
+          if ( !no_tip ) {
+            return instance['$' + instance._get_opposite_direction ( data.direction ) + '_tip'];
+          }
+        },
+        callbacks: {
+          positionated: function ( data ) {
+            $trigger.addClass ( 'dropdown-trigger-' + data.direction );
+          }
+        }
+      });
+
+    },
+
+    /* PRIVATE */
+
+    _get_opposite_direction: function ( direction ) {
+
+      switch ( direction ) {
+
+        case 'top':
+          return 'bottom';
+
+        case 'bottom':
+          return 'top';
+
+        case 'left':
+          return 'right';
+
+        case 'right':
+          return 'left';
+
+      }
+
+    },
+
+    _update: function () {
+
+      if ( this.opened ) {
+
+        this._positionate ();
+
+      }
+
+    },
+
+    /* PUBLIC */
+
+    toggle: function ( event, trigger ) {
+
+      this[( this.opened && assignments[this.id] === trigger ) ? 'close' : 'open']( event, trigger );
+
+    },
+
+    open: function ( event, trigger ) {
+
+      if ( trigger ) {
+
+        $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right active' );
+
+        if ( this.opened && assignments[this.id] !== trigger ) {
+
+          this.$dropdown.addClass ( 'moving' );
+
+        }
+
+        assignments[this.id] = trigger;
+
+        $(trigger).addClass ( 'active' );
+
+      }
+
+      this._positionate ();
+
+      this.$dropdown.addClass ( 'active' );
+
+      this.opened = true;
+
+      this._delay ( this._bind_window_click ); //FIXME: Why without the delay it doesn't work?
+      this._bind_window_resize_scroll ();
+
+      this._trigger ( 'open' );
+
+    },
+
+    close: function () {
+
+      $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right active' );
+
+      this.$dropdown.removeClass ( 'active moving' );
+
+      this.opened = false;
+
+      this._unbind_window_click ();
+      this._unbind_window_resize_scroll ();
+
+      this._trigger ( 'close' );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.dropdown').dropdown ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Expander v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2746,109 +2710,107 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* EXPANDER */
+  /* EXPANDER */
 
-    $.widget ( 'presto.expander', {
+  $.widget ( 'presto.expander', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                toggler: '.expander-toggler',
-                content: '.container-content'
-            },
-            delay: {
-                open: 250,
-                close: 250
-            },
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        toggler: '.expander-toggler',
+        content: '.container-content'
+      },
+      delay: {
+        open: 250,
+        close: 250
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$expander = this.$element;
-            this.$content = this.$expander.find ( this.options.selectors.content );
+      this.$expander = this.$element;
+      this.$content = this.$expander.find ( this.options.selectors.content );
 
-            this.opened = false;
+      this.opened = false;
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            if ( this.$expander.hasClass ( 'opened' ) ) {
+      if ( this.$expander.hasClass ( 'opened' ) ) {
 
-                this.open ();
+        this.open ();
 
-            }
+      }
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.toggler, this.toggle );
+      this._on ( 'click', this.options.selectors.toggler, this.toggle );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        toggle: function ( force ) {
+    toggle: function ( force ) {
 
-            if ( !_.isBoolean ( force ) ) {
+      if ( !_.isBoolean ( force ) ) {
 
-                force = !this.opened;
+        force = !this.opened;
 
-            }
+      }
 
-            if ( force !== this.opened ) {
+      if ( force !== this.opened ) {
 
-                this.opened = force;
+        this.opened = force;
 
-                this.$expander.toggleClass ( 'opened', this.opened );
+        this.$expander.toggleClass ( 'opened', this.opened );
 
-                this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
+        this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
 
-                this._trigger ( this.opened ? 'open' : 'close' );
+        this._trigger ( this.opened ? 'open' : 'close' );
 
-            }
+      }
 
-        },
+    },
 
-        open: function () {
+    open: function () {
 
-            this.toggle ( true );
+      this.toggle ( true );
 
-        },
+    },
 
-        close: function () {
+    close: function () {
 
-            this.toggle ( false);
+      this.toggle ( false);
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.expander').expander ();
+    $('.expander').expander ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Flippable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2858,73 +2820,71 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* FLIPPABLE */
+  /* FLIPPABLE */
 
-    $.widget ( 'presto.flippable', {
+  $.widget ( 'presto.flippable', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                flipper: '.flipper'
-            },
-            callbacks: {
-                font: _.noop,
-                back: _.noop,
-                flipped: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        flipper: '.flipper'
+      },
+      callbacks: {
+        font: _.noop,
+        back: _.noop,
+        flipped: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$flippable = this.$element;
-            this.$front = this.$flippable.find ( '.flippable-front' );
-            this.$back = this.$flippable.find ( '.flippable-back' );
+      this.$flippable = this.$element;
+      this.$front = this.$flippable.find ( '.flippable-front' );
+      this.$back = this.$flippable.find ( '.flippable-back' );
 
-            this.isFlipped = this.$flippable.hasClass ( 'flipped' );
+      this.isFlipped = this.$flippable.hasClass ( 'flipped' );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.flipper, this.flip );
+      this._on ( 'click', this.options.selectors.flipper, this.flip );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        flip: function () {
+    flip: function () {
 
-            this.isFlipped = !this.isFlipped;
+      this.isFlipped = !this.isFlipped;
 
-            this.$flippable.toggleClass ( 'flipped', this.isFlipped );
+      this.$flippable.toggleClass ( 'flipped', this.isFlipped );
 
-            this._trigger ( this.isFlipped ? 'front' : 'back' );
-            this._trigger ( 'flipped' );
+      this._trigger ( this.isFlipped ? 'front' : 'back' );
+      this._trigger ( 'flipped' );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.flippable-wrp').flippable ();
+    $('.flippable-wrp').flippable ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Form Sync v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2934,96 +2894,94 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* VARIABLES */
+  /* VARIABLES */
 
-    var synced_groups = [];
+  var synced_groups = [];
 
-    /* FORM SYNC */
+  /* FORM SYNC */
 
-    $.fn.formSync = function () {
+  $.fn.formSync = function () {
 
-        this.each ( function () {
+    this.each ( function () {
 
-            var $form = $(this),
-                sync_group = $form.data ( 'sync-group' );
+      var $form = $(this),
+        sync_group = $form.data ( 'sync-group' );
 
-            if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
+      if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
 
-            synced_groups.push ( sync_group );
+      synced_groups.push ( sync_group );
 
-            var $forms = $('form[data-sync-group="' + sync_group + '"]'),
-                $eles = $forms.find ( 'input, textarea, select' );
+      var $forms = $('form[data-sync-group="' + sync_group + '"]'),
+        $eles = $forms.find ( 'input, textarea, select' );
 
-            $eles.each ( function () {
+      $eles.each ( function () {
 
-                var $ele = $(this),
-                    name = $ele.attr ( 'name' ),
-                    is_checkable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
-                    is_radio = is_checkable && $ele.is ( '[type="radio"]' ),
-                    is_textbox = $ele.is ( 'input, textarea' ),
-                    events = is_textbox ? 'input change' : 'change',
-                    $current_form = $ele.parent ( 'form' ),
-                    $other_forms = $forms.not ( $current_form ),
-                    $other_eles = $other_forms.find ( '[name="' + name + '"]' );
+        var $ele = $(this),
+          name = $ele.attr ( 'name' ),
+          is_checkable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
+          is_radio = is_checkable && $ele.is ( '[type="radio"]' ),
+          is_textbox = $ele.is ( 'input, textarea' ),
+          events = is_textbox ? 'input change' : 'change',
+          $current_form = $ele.parent ( 'form' ),
+          $other_forms = $forms.not ( $current_form ),
+          $other_eles = $other_forms.find ( '[name="' + name + '"]' );
 
-                $ele.on ( events, function () {
+        $ele.on ( events, function () {
 
-                    var current_value = $ele.val (),
-                        current_checked = !!$ele.prop ( 'checked' );
+          var current_value = $ele.val (),
+            current_checked = !!$ele.prop ( 'checked' );
 
-                    $other_eles.each ( function () {
+          $other_eles.each ( function () {
 
-                        var $other_ele = $(this),
-                            other_value = $other_ele.val (),
-                            other_checked = !!$other_ele.prop ( 'checked' );
+            var $other_ele = $(this),
+              other_value = $other_ele.val (),
+              other_checked = !!$other_ele.prop ( 'checked' );
 
-                        if ( is_radio ) {
+            if ( is_radio ) {
 
-                            if ( current_value !== other_value || current_checked === other_checked ) return;
+              if ( current_value !== other_value || current_checked === other_checked ) return;
 
-                        } else if ( current_value === other_value && current_checked === other_checked ) {
+            } else if ( current_value === other_value && current_checked === other_checked ) {
 
-                            return;
+              return;
 
-                        }
+            }
 
-                        if ( is_checkable ) {
+            if ( is_checkable ) {
 
-                            $other_ele.prop ( 'checked', current_checked ).trigger ( 'change' );
+              $other_ele.prop ( 'checked', current_checked ).trigger ( 'change' );
 
-                        } else {
+            } else {
 
-                            $other_ele.val ( current_value ).trigger ( 'change' );
+              $other_ele.val ( current_value ).trigger ( 'change' );
 
-                        }
+            }
 
-                    });
-
-                });
-
-            });
+          });
 
         });
 
-    };
-
-    /* READY */
-
-    $(function () {
-
-        $('form[data-sync-group]').formSync ();
+      });
 
     });
+
+  };
+
+  /* READY */
+
+  $(function () {
+
+    $('form[data-sync-group]').formSync ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Loading v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3033,76 +2991,74 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* LOADING */
+  /* LOADING */
 
-    $.fn.loading = function ( force, custom_options ) {
+  $.fn.loading = function ( force, custom_options ) {
 
-        // OPTIONS
+    // OPTIONS
 
-        var options = _.merge ({
-            color: {
-                wrapper: 'inherit',
-                spinner: 'secondary'
-            }
-        }, custom_options );
+    var options = _.merge ({
+      color: {
+        wrapper: 'inherit',
+        spinner: 'secondary'
+      }
+    }, custom_options );
 
-        // LOADING
+    // LOADING
 
-        this.addClass ( 'spinner-overlay-activable' );
+    this.addClass ( 'spinner-overlay-activable' );
 
-        if ( _.isUndefined ( force ) ) {
+    if ( _.isUndefined ( force ) ) {
 
-            force = !this.hasClass ( 'spinner-overlay-active' );
+      force = !this.hasClass ( 'spinner-overlay-active' );
 
-        }
+    }
 
-        var $overlay = this.children ( '.spinner-overlay' );
+    var $overlay = this.children ( '.spinner-overlay' );
 
-        if ( $overlay.length === 0 ) {
+    if ( $overlay.length === 0 ) {
 
-            this.prepend (
-                '<div class="spinner-overlay ' + options.color.wrapper + '">' +
-                    '<div class="spinner-wrp">' +
-                        '<div class="spinner ' + options.color.spinner + '">' +
-                            '<div class="circle-wrp left">' +
-                                '<div class="circle"></div>' +
-                            '</div>' +
-                            '<div class="circle-wrp right">' +
-                                '<div class="circle"></div>' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>' +
-                '</div>'
-            );
+      this.prepend (
+        '<div class="spinner-overlay ' + options.color.wrapper + '">' +
+          '<div class="spinner-wrp">' +
+            '<div class="spinner ' + options.color.spinner + '">' +
+              '<div class="circle-wrp left">' +
+                '<div class="circle"></div>' +
+              '</div>' +
+              '<div class="circle-wrp right">' +
+                '<div class="circle"></div>' +
+              '</div>' +
+            '</div>' +
+          '</div>' +
+        '</div>'
+      );
 
-        } else {
+    } else {
 
-            if ( force ) {
+      if ( force ) {
 
-                $overlay.attr ( 'class', 'spinner-overlay ' + options.color.wrapper );
-                $overlay.find ( '.spinner' ).attr ( 'class', 'spinner ' + options.color.spinner );
+        $overlay.attr ( 'class', 'spinner-overlay ' + options.color.wrapper );
+        $overlay.find ( '.spinner' ).attr ( 'class', 'spinner ' + options.color.spinner );
 
-            }
+      }
 
-        }
+    }
 
-        $.reflow (); //FIXME: is it needed?
+    $.reflow (); //FIXME: is it needed?
 
-        this.toggleClass ( 'spinner-overlay-active', force );
+    this.toggleClass ( 'spinner-overlay-active', force );
 
-        return this;
+    return this;
 
-    };
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Noty v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3114,311 +3070,309 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* VARIABLES */
+  /* VARIABLES */
 
-    var timers = [];
+  var timers = [];
 
-    /* HELPER */
+  /* HELPER */
 
-    $.noty = function ( custom_options ) {
+  $.noty = function ( custom_options ) {
 
-        // EXTEND
+    // EXTEND
 
-        var options = {
-            autoplay: true
-        };
-
-        if ( _.isString ( custom_options ) ) {
-
-            options.body = custom_options;
-
-        } else if ( _.isPlainObject ( custom_options ) ) {
-
-            _.merge ( options, custom_options );
-
-        }
-
-        if ( options.buttons ) {
-
-            options.type = 'action';
-
-        }
-
-        // NOTY
-
-        var noty = new $.presto.noty ( options );
-
-        if ( options.autoplay ) {
-
-            noty.open ();
-
-        }
-
-        return noty;
-
+    var options = {
+      autoplay: true
     };
 
-    /* NOTY */
-
-    $.widget ( 'presto.noty', {
-
-        /* TEMPLATES */
-
-        templates: {
-            base: '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
-                      '<div class="container-content">' +
-                          '<div class="infobar-wrp inset {%=o.color%}">' + //TODO: add back transparentize
-                              '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
-                              '<div class="infobar-center">' +
-                                  '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
-                                  '{% if ( o.body ) include ( "presto.noty.body", o.body ); %}' +
-                              '</div>' +
-                              '{% if ( o.buttons.length === 1 ) include ( "presto.noty.single_button", o.buttons[0] ); %}' +
-                          '</div>' +
-                          '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
-                      '</div>' +
-                  '</div>',
-            img: '<div class="noty-img infobar-left">' +
-                     '<img src="{%=o%}" class="smooth" />' +
-                 '</div>',
-            title: '<p class="infobar-title">' +
-                       '{%#o%}' +
-                   '</p>',
-            body: '{%#o%}',
-            single_button: '<div class="infobar-right">' +
-                               '{% include ( "presto.noty.button", o ); %}' +
-                           '</div>',
-            buttons: '<div class="noty-buttons multiple-wrp centered">' +
-                         '<div class="multiple">' +
-                             '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                                 '{% include ( "presto.noty.button", o[i] ); %}' +
-                             '{% } %}' +
-                         '</div>' +
-                     '</div>',
-            button: '<div class="label-wrp button-wrp">' +
-                        '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
-                            '<div class="label-center">' +
-                                '{%#(o.text || "")%}' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>'
-        },
+    if ( _.isString ( custom_options ) ) {
+
+      options.body = custom_options;
+
+    } else if ( _.isPlainObject ( custom_options ) ) {
+
+      _.merge ( options, custom_options );
+
+    }
+
+    if ( options.buttons ) {
+
+      options.type = 'action';
+
+    }
+
+    // NOTY
+
+    var noty = new $.presto.noty ( options );
+
+    if ( options.autoplay ) {
+
+      noty.open ();
+
+    }
+
+    return noty;
+
+  };
+
+  /* NOTY */
 
-        /* OPTIONS */
+  $.widget ( 'presto.noty', {
 
-        options: {
-            anchor: {
-                y: 'bottom',
-                x: 'left'
-            },
+    /* TEMPLATES */
 
-            delay: {
-                remove: 200
-            },
+    templates: {
+      base: '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
+            '<div class="container-content">' +
+              '<div class="infobar-wrp inset {%=o.color%}">' + //TODO: add back transparentize
+                '{% if ( o.img ) include ( "presto.noty.img", o.img ); %}' +
+                '<div class="infobar-center">' +
+                  '{% if ( o.title ) include ( "presto.noty.title", o.title ); %}' +
+                  '{% if ( o.body ) include ( "presto.noty.body", o.body ); %}' +
+                '</div>' +
+                '{% if ( o.buttons.length === 1 ) include ( "presto.noty.single_button", o.buttons[0] ); %}' +
+              '</div>' +
+              '{% if ( o.buttons.length > 1 ) include ( "presto.noty.buttons", o.buttons ); %}' +
+            '</div>' +
+          '</div>',
+      img: '<div class="noty-img infobar-left">' +
+           '<img src="{%=o%}" class="smooth" />' +
+         '</div>',
+      title: '<p class="infobar-title">' +
+             '{%#o%}' +
+           '</p>',
+      body: '{%#o%}',
+      single_button: '<div class="infobar-right">' +
+                 '{% include ( "presto.noty.button", o ); %}' +
+               '</div>',
+      buttons: '<div class="noty-buttons multiple-wrp centered">' +
+             '<div class="multiple">' +
+               '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                 '{% include ( "presto.noty.button", o[i] ); %}' +
+               '{% } %}' +
+             '</div>' +
+           '</div>',
+      button: '<div class="label-wrp button-wrp">' +
+            '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
+              '<div class="label-center">' +
+                '{%#(o.text || "")%}' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+    },
 
-            title: false,
-            body: false,
-            img: false,
-            buttons: [],
-            /*
-                   : [{
-                          color: 'white',
-                          size: 'small',
-                          css: '',
-                          text: '',
-                          onClick: _.noop
-                     }],
-            */
+    /* OPTIONS */
 
-            type: 'alert',
-            color: 'black',
-            css: '',
+    options: {
+      anchor: {
+        y: 'bottom',
+        x: 'left'
+      },
 
-            ttl: 3500,
+      delay: {
+        remove: 200
+      },
 
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+      title: false,
+      body: false,
+      img: false,
+      buttons: [],
+      /*
+           : [{
+              color: 'white',
+              size: 'small',
+              css: '',
+              text: '',
+              onClick: _.noop
+           }],
+      */
 
-        /* SPECIAL */
+      type: 'alert',
+      color: 'black',
+      css: '',
 
-        _variables: function () {
+      ttl: 3500,
 
-            this.$noty = this.$element;
-            this.timer = false;
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-            this.isOpen = false;
-            this.neverOpened = true;
+    /* SPECIAL */
 
-        },
+    _variables: function () {
 
-        /* PRIVATE */
+      this.$noty = this.$element;
+      this.timer = false;
 
-        _init_click: function () {
+      this.isOpen = false;
+      this.neverOpened = true;
 
-            if ( !this.options.buttons.length ) {
+    },
 
-                this._on ( 'click', this.close );
+    /* PRIVATE */
 
-            }
+    _init_click: function () {
 
-        },
+      if ( !this.options.buttons.length ) {
 
-        _init_buttons_click: function () {
+        this._on ( 'click', this.close );
 
-            if ( this.options.buttons.length ) {
+      }
 
-                var $buttons = this.$noty.find ( '.button-wrp .label' ),
-                    instance = this;
+    },
 
-                _.each ( this.options.buttons, function ( button, index ) {
+    _init_buttons_click: function () {
 
-                    var $button = $buttons.eq ( index ); //FIXME: it will not work if we add a button to the body manually
+      if ( this.options.buttons.length ) {
 
-                    $button.on ( 'click', function ( event ) {
+        var $buttons = this.$noty.find ( '.button-wrp .label' ),
+          instance = this;
 
-                        if ( button.onClick ) button.onClick.call ( this, event );
+        _.each ( this.options.buttons, function ( button, index ) {
 
-                        instance.close ();
+          var $button = $buttons.eq ( index ); //FIXME: it will not work if we add a button to the body manually
 
-                    });
+          $button.on ( 'click', function ( event ) {
 
-                });
+            if ( button.onClick ) button.onClick.call ( this, event );
 
-            }
+            instance.close ();
 
-        },
+          });
 
-        _init_timer: function () {
+        });
 
-            if ( this.options.buttons.length === 0 && this.options.ttl !== 'forever' ) {
+      }
 
-                this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
+    },
 
-                timers.push ( this.timer );
+    _init_timer: function () {
 
-            }
+      if ( this.options.buttons.length === 0 && this.options.ttl !== 'forever' ) {
 
-        },
+        this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
 
-        _init_hover: function () {
+        timers.push ( this.timer );
 
-            this.$noty.hover ( function () {
+      }
 
-                _.each ( timers, function ( timer ) {
+    },
 
-                    timer.pause ();
+    _init_hover: function () {
 
-                });
+      this.$noty.hover ( function () {
 
-            }, function () {
+        _.each ( timers, function ( timer ) {
 
-                _.each ( timers, function ( timer ) {
+          timer.pause ();
 
-                    timer.remaining ( Math.max ( 1000, timer.remaining () || 0 ) );
+        });
 
-                    timer.play ();
+      }, function () {
 
-                });
+        _.each ( timers, function ( timer ) {
 
-            });
+          timer.remaining ( Math.max ( 1000, timer.remaining () || 0 ) );
 
-        },
+          timer.play ();
 
-        /* PUBLIC */
+        });
 
-        open: function () {
+      });
 
-            if ( !this.isOpen ) {
+    },
 
-                $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).first ().append ( this.$noty );
+    /* PUBLIC */
 
-                $.reflow ();
+    open: function () {
 
-                this.$noty.addClass ( 'active' );
+      if ( !this.isOpen ) {
 
-                if ( this.neverOpened ) {
+        $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).first ().append ( this.$noty );
 
-                    this._init_click ();
-                    this._init_buttons_click ();
-                    this._init_hover ();
+        $.reflow ();
 
-                    this.neverOpened = false;
+        this.$noty.addClass ( 'active' );
 
-                }
+        if ( this.neverOpened ) {
 
-                this._init_timer ();
+          this._init_click ();
+          this._init_buttons_click ();
+          this._init_hover ();
 
-                this._trigger ( 'open' );
-
-                this.isOpen = true;
-
-            }
-
-        },
-
-        close: function () {
-
-            if ( this.timer ) {
-
-                _.pull ( timers, this.timer );
-
-                this.timer.stop ();
-
-            }
-
-            this.$noty.removeClass ( 'active' );
-
-            this._delay ( function () {
-
-                this.$noty.remove ();
-
-            }, this.options.delay.remove );
-
-            this._trigger ( 'close' );
-
-            this.isOpen = false;
+          this.neverOpened = false;
 
         }
 
-    });
+        this._init_timer ();
 
-    /* READY */
+        this._trigger ( 'open' );
 
-    $(function () {
+        this.isOpen = true;
 
-        $body.append (
-            '<div class="noty-queues top">' +
-                '<div class="noty-queue expanded"></div>' +
-                '<div class="noty-queues-row">' +
-                    '<div class="noty-queue left"></div>' +
-                    '<div class="noty-queue center"></div>' +
-                    '<div class="noty-queue right"></div>' +
-                '</div>' +
-            '</div>' +
-            '<div class="noty-queues bottom">' +
-                '<div class="noty-queues-row">' +
-                    '<div class="noty-queue left"></div>' +
-                    '<div class="noty-queue center"></div>' +
-                    '<div class="noty-queue right"></div>' +
-                '</div>' +
-                '<div class="noty-queue expanded"></div>' +
-            '</div>'
-        );
+      }
 
-    });
+    },
+
+    close: function () {
+
+      if ( this.timer ) {
+
+        _.pull ( timers, this.timer );
+
+        this.timer.stop ();
+
+      }
+
+      this.$noty.removeClass ( 'active' );
+
+      this._delay ( function () {
+
+        this.$noty.remove ();
+
+      }, this.options.delay.remove );
+
+      this._trigger ( 'close' );
+
+      this.isOpen = false;
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $body.append (
+      '<div class="noty-queues top">' +
+        '<div class="noty-queue expanded"></div>' +
+        '<div class="noty-queues-row">' +
+          '<div class="noty-queue left"></div>' +
+          '<div class="noty-queue center"></div>' +
+          '<div class="noty-queue right"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="noty-queues bottom">' +
+        '<div class="noty-queues-row">' +
+          '<div class="noty-queue left"></div>' +
+          '<div class="noty-queue center"></div>' +
+          '<div class="noty-queue right"></div>' +
+        '</div>' +
+        '<div class="noty-queue expanded"></div>' +
+      '</div>'
+    );
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Form Ajax v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3431,130 +3385,128 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* FORM AJAX */
+  /* FORM AJAX */
 
-    $.fn.formAjax = function () {
+  $.fn.formAjax = function () {
 
-        this.on ( 'submit', function ( event ) {
+    this.on ( 'submit', function ( event ) {
 
-            var $form = $(this);
+      var $form = $(this);
 
-            event.preventDefault (); //FIXME: Does it work?
+      event.preventDefault (); //FIXME: Does it work?
 
-            $.ajax ({
+      $.ajax ({
 
-                cache: false,
-                contentType: 'multipart/form-data',
-                data: new FormData ( this ),
-                processData: false,
-                type: $form.attr ( 'method' ) || 'POST',
-                url: $form.attr ( 'action' ),
+        cache: false,
+        contentType: 'multipart/form-data',
+        data: new FormData ( this ),
+        processData: false,
+        type: $form.attr ( 'method' ) || 'POST',
+        url: $form.attr ( 'action' ),
 
-                beforeSend: function () {
+        beforeSend: function () {
 
-                    $form.loading ( true );
+          $form.loading ( true );
 
-                },
+        },
 
-                error: function ( res ) {
+        error: function ( res ) {
 
-                    if ( _.isString ( res ) ) {
+          if ( _.isString ( res ) ) {
 
-                        if ( res[0] === '<' ) { //INFO: Is HTML
+            if ( res[0] === '<' ) { //INFO: Is HTML
 
-                            $.noty ( 'There was an error, please try again or report the problem' );
+              $.noty ( 'There was an error, please try again or report the problem' );
 
-                            $body.append ( res );
+              $body.append ( res );
 
-                        } else {
+            } else {
 
-                            $.noty ( res );
+              $.noty ( res );
 
-                        }
+            }
 
-                    } else {
+          } else {
 
-                        $.noty ( 'There was an error, please try again or report the problem' );
+            $.noty ( 'There was an error, please try again or report the problem' );
 
-                    }
+          }
 
-                },
+        },
 
-                success: function ( res ) {
+        success: function ( res ) {
 
-                    if ( _.isString ( res ) ) {
+          if ( _.isString ( res ) ) {
 
-                        if ( res === 'refresh' ) {
+            if ( res === 'refresh' ) {
 
-                            $.noty ( 'Done! Refreshing the page...' );
+              $.noty ( 'Done! Refreshing the page...' );
 
-                            location.reload ();
+              location.reload ();
 
-                        } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
+            } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
 
-                            if ( res === window.location.href || res === window.location.pathname ) {
+              if ( res === window.location.href || res === window.location.pathname ) {
 
-                                $.noty ( 'Done! Refreshing the page...' );
+                $.noty ( 'Done! Refreshing the page...' );
 
-                                location.reload ();
+                location.reload ();
 
-                            } else {
+              } else {
 
-                                $.noty ( 'Done! Redirecting...' );
+                $.noty ( 'Done! Redirecting...' );
 
-                                location.assign ( res );
+                location.assign ( res );
 
-                            }
+              }
 
-                        } else if ( res[0] === '<' ) { //INFO: Is HTML
+            } else if ( res[0] === '<' ) { //INFO: Is HTML
 
-                            $.noty ( 'Done! A page refresh may be needed to see the changes' );
+              $.noty ( 'Done! A page refresh may be needed to see the changes' );
 
-                            $body.append ( res );
+              $body.append ( res );
 
-                        } else {
+            } else {
 
-                            $.noty ( res );
+              $.noty ( res );
 
-                        }
+            }
 
-                    } else {
+          } else {
 
-                        $.noty ( 'Done! A page refresh may be needed to see the changes' );
+            $.noty ( 'Done! A page refresh may be needed to see the changes' );
 
-                    }
+          }
 
-                },
+        },
 
-                complete: function () {
+        complete: function () {
 
-                    $form.loading ( false );
+          $form.loading ( false );
 
-                }
+        }
 
-            });
-
-        });
-
-    };
-
-    /* READY */
-
-    $(function () {
-
-        $('form.ajax').formAjax ();
+      });
 
     });
+
+  };
+
+  /* READY */
+
+  $(function () {
+
+    $('form.ajax').formAjax ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Infobar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3567,73 +3519,71 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* INFOBAR */
+  /* INFOBAR */
 
-    $.widget ( 'presto.infobar', {
+  $.widget ( 'presto.infobar', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                closer: '.infobar-closer'
-            },
-            delay: {
-                close: 250
-            },
-            callbacks: {
-                close: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        closer: '.infobar-closer'
+      },
+      delay: {
+        close: 250
+      },
+      callbacks: {
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$infobar = this.$element;
+      this.$infobar = this.$element;
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.closer, this.close );
+      this._on ( 'click', this.options.selectors.closer, this.close );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        close: function () {
+    close: function () {
 
-            this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
+      this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
 
-            this._delay ( function () {
+      this._delay ( function () {
 
-                this.$infobar.remove ();
+        this.$infobar.remove ();
 
-                this._trigger ( 'close' );
+        this._trigger ( 'close' );
 
-            }, this.options.delay.close );
+      }, this.options.delay.close );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.infobar-wrp').infobar ();
+    $('.infobar-wrp').infobar ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Modal v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3643,95 +3593,93 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* MODAL */
+  /* MODAL */
 
-    $.widget ( 'presto.modal', {
+  $.widget ( 'presto.modal', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                closer: '.modal-closer'
-            },
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        closer: '.modal-closer'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$modal = this.$element;
+      this.$modal = this.$element;
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( 'click', this.options.selectors.closer, this.close );
+      this._on ( 'click', this.options.selectors.closer, this.close );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _handler_esc_keydown: function ( event ) {
+    _handler_esc_keydown: function ( event ) {
 
-            if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
-                this.close ();
+        this.close ();
 
-            }
+      }
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        open: function () {
+    open: function () {
 
-            this.$modal.addClass ( 'active' );
+      this.$modal.addClass ( 'active' );
 
-            this._on ( $document, 'keydown', this._handler_esc_keydown );
+      this._on ( $document, 'keydown', this._handler_esc_keydown );
 
-            this._trigger ( 'open' );
+      this._trigger ( 'open' );
 
-        },
+    },
 
-        close: function () {
+    close: function () {
 
-            this.$modal.removeClass ( 'active' );
+      this.$modal.removeClass ( 'active' );
 
-            this._off ( $document, 'keydown', this._handler_esc_keydown );
+      this._off ( $document, 'keydown', this._handler_esc_keydown );
 
-            this._trigger ( 'close' );
+      this._trigger ( 'close' );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.modal').modal ();
+    $('.modal').modal ();
 
-        $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
+    $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
 
-            $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
-
-        });
+      $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
 
     });
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Navbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3743,100 +3691,98 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* NAVBAR */
+  /* NAVBAR */
 
-    $.widget ( 'presto.navbar', {
+  $.widget ( 'presto.navbar', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                open: _.noop,
-                close: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$navbar = this.$element;
-            this.$wrp = this.$navbar.parent ();
+      this.$navbar = this.$element;
+      this.$wrp = this.$navbar.parent ();
 
-            this.id = this.$navbar.attr ( 'id' );
+      this.id = this.$navbar.attr ( 'id' );
 
-            this.$closers = this.$wrp.find ( '.navbar-closer' );
-            this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
+      this.$closers = this.$wrp.find ( '.navbar-closer' );
+      this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
 
-            this.opened = this.$wrp.hasClass ( 'opened' );
+      this.opened = this.$wrp.hasClass ( 'opened' );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* CLOSER CLICK */
+      /* CLOSER CLICK */
 
-            this._on ( this.$closers, 'click', this.close );
+      this._on ( this.$closers, 'click', this.close );
 
-            /* TRIGGER CLICK */
+      /* TRIGGER CLICK */
 
-            this._on ( this.$triggers, 'click', this.open );
+      this._on ( this.$triggers, 'click', this.open );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        toggle: function ( force ) {
+    toggle: function ( force ) {
 
-            if ( _.isUndefined ( force ) ) {
+      if ( _.isUndefined ( force ) ) {
 
-                force = !this.opened;
+        force = !this.opened;
 
-            }
+      }
 
-            if ( force !== this.opened ) {
+      if ( force !== this.opened ) {
 
-                this.opened = force;
+        this.opened = force;
 
-                this.$wrp.toggleClass ( 'opened', this.opened );
+        this.$wrp.toggleClass ( 'opened', this.opened );
 
-                this._trigger ( this.opened ? 'open' : 'close' );
+        this._trigger ( this.opened ? 'open' : 'close' );
 
-            }
+      }
 
-        },
+    },
 
-        open: function () {
+    open: function () {
 
-            this.toggle ( true );
+      this.toggle ( true );
 
-        },
+    },
 
-        close: function () {
+    close: function () {
 
-            this.toggle ( false );
+      this.toggle ( false );
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('.navbar').navbar ();
+    $('.navbar').navbar ();
 
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Notification v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3848,53 +3794,51 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* NOTIFICATION */
+  /* NOTIFICATION */
 
-    $.notification = function ( custom_options ) {
+  $.notification = function ( custom_options ) {
 
-        // OPTIONS
+    // OPTIONS
 
-        var options = _.merge ({
-            title: false,
-            body: false,
-            img: false
-        }, custom_options );
+    var options = _.merge ({
+      title: false,
+      body: false,
+      img: false
+    }, custom_options );
 
-        // NOTIFICATION
+    // NOTIFICATION
 
-        if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
+    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-            Notification.requestPermission ( function ( status ) {
+      Notification.requestPermission ( function ( status ) {
 
-                if ( status === 'granted' ) {
+        if ( status === 'granted' ) {
 
-                    var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
-
-                } else {
-
-                    $.noty ( options );
-
-                }
-
-            });
+          var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
 
         } else {
 
-            $.noty ( options );
+          $.noty ( options );
 
         }
 
-    };
+      });
+
+    } else {
+
+      $.noty ( options );
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - One Time Action v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3908,157 +3852,155 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* ONE TIME ACTION */
+  /* ONE TIME ACTION */
 
-    $.oneTimeAction = function ( custom_options, action ) {
+  $.oneTimeAction = function ( custom_options, action ) {
 
-        // OPTIONS
+    // OPTIONS
 
-        var options = {
-            container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
-            expiry: Infinity, //INFO: the expire time of the container
-            name: false, //INFO: the action name
-            action: false //INFO: the action to execute
-        };
-
-        if ( _.isString ( custom_options ) ) {
-
-            options.name = custom_options;
-
-            if ( _.isFunction ( action ) ) {
-
-                options.action = action;
-
-            }
-
-        } else if ( _.isPlainObject ( custom_options ) ) {
-
-            _.merge ( options, custom_options );
-
-        }
-
-        // ONE TIME ACTION
-
-        if ( options.name ) {
-
-            var action = new Action ( options.container, options.name );
-
-            if ( options.action && !action.get () ) {
-
-                options.action ();
-
-                action.set ();
-
-            }
-
-            return action;
-
-        } else if ( options.container ) {
-
-            return new Container ( options.container, options.expiry );
-
-        }
-
+    var options = {
+      container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
+      expiry: Infinity, //INFO: the expire time of the container
+      name: false, //INFO: the action name
+      action: false //INFO: the action to execute
     };
 
-    /* CONTAINER OBJ */
+    if ( _.isString ( custom_options ) ) {
 
-    var Container = function ( name, expiry ) {
+      options.name = custom_options;
 
-        this.name = name;
-        this.expiry = expiry;
+      if ( _.isFunction ( action ) ) {
 
-        this.actionsStr = $.cookie.get ( this.name ) || '';
-        this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
+        options.action = action;
 
-    };
+      }
 
-    Container.prototype = {
+    } else if ( _.isPlainObject ( custom_options ) ) {
 
-        get: function ( action ) {
+      _.merge ( options, custom_options );
 
-            return _.contains ( this.actions, action );
+    }
 
-        },
+    // ONE TIME ACTION
 
-        set: function ( action ) {
+    if ( options.name ) {
 
-            if ( !this.get ( action ) ) {
+      var action = new Action ( options.container, options.name );
 
-                this.actions.push ( action );
+      if ( options.action && !action.get () ) {
 
-                this.update ();
+        options.action ();
 
-            }
+        action.set ();
 
-        },
+      }
 
-        update: function () {
+      return action;
 
-            this.actionsStr = this.actions.join ( '|' );
+    } else if ( options.container ) {
 
-            $.cookie.set ( this.name, this.actionsStr, this.expiry );
+      return new Container ( options.container, options.expiry );
 
-        },
+    }
 
-        reset: function ( action ) {
+  };
 
-            if ( action ) {
+  /* CONTAINER OBJ */
 
-                _.pull ( this.actions, action );
+  var Container = function ( name, expiry ) {
 
-                this.update ();
+    this.name = name;
+    this.expiry = expiry;
 
-            } else {
+    this.actionsStr = $.cookie.get ( this.name ) || '';
+    this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
 
-                $.cookie.remove ( this.name );
+  };
 
-            }
+  Container.prototype = {
 
-        }
+    get: function ( action ) {
 
-    };
+      return _.contains ( this.actions, action );
 
-    /* ACTION OBJ */
+    },
 
-    var Action = function ( container, name, action ) {
+    set: function ( action ) {
 
-        this.container = new Container ( container );
-        this.name = name;
+      if ( !this.get ( action ) ) {
 
-    };
+        this.actions.push ( action );
 
-    Action.prototype = {
+        this.update ();
 
-        get: function () {
+      }
 
-            return this.container.get ( this.name );
+    },
 
-        },
+    update: function () {
 
-        set: function () {
+      this.actionsStr = this.actions.join ( '|' );
 
-            this.container.set ( this.name );
+      $.cookie.set ( this.name, this.actionsStr, this.expiry );
 
-        },
+    },
 
-        reset: function () {
+    reset: function ( action ) {
 
-            this.container.reset ( this.name );
+      if ( action ) {
 
-        }
+        _.pull ( this.actions, action );
 
-    };
+        this.update ();
+
+      } else {
+
+        $.cookie.remove ( this.name );
+
+      }
+
+    }
+
+  };
+
+  /* ACTION OBJ */
+
+  var Action = function ( container, name, action ) {
+
+    this.container = new Container ( container );
+    this.name = name;
+
+  };
+
+  Action.prototype = {
+
+    get: function () {
+
+      return this.container.get ( this.name );
+
+    },
+
+    set: function () {
+
+      this.container.set ( this.name );
+
+    },
+
+    reset: function () {
+
+      this.container.reset ( this.name );
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Pointer v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4070,184 +4012,184 @@
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* POINTER */
+  /* POINTER */
 
-    $.Pointer = {
-        pressDuration: 300,
-        doubleTapInterval: 300,
-        flickDuration: 150,
-        motionThreshold: 5
+  $.Pointer = {
+    pressDuration: 300,
+    doubleTapInterval: 300,
+    flickDuration: 150,
+    motionThreshold: 5
+  };
+
+  var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+    events_namespace = 'pointer';
+
+  _.each ( events_names, function ( event_name ) {
+
+    var full_event = events_namespace + event_name;
+
+    $.Pointer[event_name] = full_event;
+
+    $.fn[event_name] = function ( fn ) {
+
+      return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
+
     };
 
-    var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
-        events_namespace = 'pointer';
+  });
 
-    _.each ( events_names, function ( event_name ) {
+  /* TRIGGERS */
 
-        var full_event = events_namespace + event_name;
+  var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
+    moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
+    endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
+    $html = $(document.documentElement),
+    startXY,
+    moveXY,
+    deltaXY,
+    endXY,
+    target,
+    $target,
+    start_timestamp,
+    end_timestamp,
+    prev_tap_timestamp = 0,
+    motion,
+    orientation,
+    direction,
+    press_timeout;
 
-        $.Pointer[event_name] = full_event;
+  var createEvent = function ( name, originalEvent ) {
 
-        $.fn[event_name] = function ( fn ) {
+    var event = $.Event ( name );
 
-            return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
+    event.originalEvent = originalEvent;
+    event.isPointerEvent = true;
 
-        };
+    return event;
 
+  };
+
+  var startHandler = function ( event ) {
+
+    startXY = $.eventXY ( event );
+
+    target = event.target;
+    $target = $(target);
+
+    start_timestamp = event.timeStamp || _.now ();
+
+    motion = false;
+
+    press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
+
+    $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
+      startXY: startXY
     });
 
-    /* TRIGGERS */
+    $html.on ( moveEvents, moveHandler );
+    $html.on ( endEvents, endHandler );
 
-    var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
-        moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
-        endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
-        $html = $(document.documentElement),
-        startXY,
-        moveXY,
-        deltaXY,
-        endXY,
-        target,
-        $target,
-        start_timestamp,
-        end_timestamp,
-        prev_tap_timestamp = 0,
-        motion,
-        orientation,
-        direction,
-        press_timeout;
+  };
 
-    var createEvent = function ( name, originalEvent ) {
+  var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
 
-        var event = $.Event ( name );
+    $target.trigger ( createEvent ( $.Pointer.press, event ) );
 
-        event.originalEvent = originalEvent;
-        event.isPointerEvent = true;
+  };
 
-        return event;
+  var moveHandler = function ( event ) {
 
+    clearTimeout ( press_timeout );
+
+    moveXY = $.eventXY ( event );
+
+    deltaXY = {
+      X: moveXY.X - startXY.X,
+      Y: moveXY.Y - startXY.Y
     };
 
-    var startHandler = function ( event ) {
+    if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
 
-        startXY = $.eventXY ( event );
+      motion = true;
 
-        target = event.target;
-        $target = $(target);
+      $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
+        startXY: startXY,
+        moveXY: moveXY,
+        deltaXY: deltaXY
+      });
 
-        start_timestamp = event.timeStamp || _.now ();
+    }
 
-        motion = false;
+  };
 
-        press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
+  var endHandler = function ( event ) {
 
-        $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
-            startXY: startXY
-        });
+    clearTimeout ( press_timeout );
 
-        $html.on ( moveEvents, moveHandler );
-        $html.on ( endEvents, endHandler );
-
+    endXY = $.eventXY ( event );
+    deltaXY = {
+      X: endXY.X - startXY.X,
+      Y: endXY.Y - startXY.Y
     };
 
-    var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
+    if ( target === event.target ) {
 
-        $target.trigger ( createEvent ( $.Pointer.press, event ) );
+      end_timestamp = event.timeStamp || _.now ();
 
-    };
+      if ( !$.browser.hasTouch || !motion ) {
 
-    var moveHandler = function ( event ) {
+        $target.trigger ( createEvent ( $.Pointer.tap, event ) );
 
-        clearTimeout ( press_timeout );
+        if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
 
-        moveXY = $.eventXY ( event );
-
-        deltaXY = {
-            X: moveXY.X - startXY.X,
-            Y: moveXY.Y - startXY.Y
-        };
-
-        if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
-
-            motion = true;
-
-            $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
-                startXY: startXY,
-                moveXY: moveXY,
-                deltaXY: deltaXY
-            });
+          $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
 
         }
 
-    };
+        prev_tap_timestamp = end_timestamp;
 
-    var endHandler = function ( event ) {
+      }
 
-        clearTimeout ( press_timeout );
+      if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
 
-        endXY = $.eventXY ( event );
-        deltaXY = {
-            X: endXY.X - startXY.X,
-            Y: endXY.Y - startXY.Y
-        };
+        if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
 
-        if ( target === event.target ) {
+          orientation = 'horizontal';
+          direction = ( deltaXY.X > 0 ) ? 1 : -1;
 
-            end_timestamp = event.timeStamp || _.now ();
+        } else {
 
-            if ( !$.browser.hasTouch || !motion ) {
-
-                $target.trigger ( createEvent ( $.Pointer.tap, event ) );
-
-                if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
-
-                    $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
-
-                }
-
-                prev_tap_timestamp = end_timestamp;
-
-            }
-
-            if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
-
-                if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
-
-                    orientation = 'horizontal';
-                    direction = ( deltaXY.X > 0 ) ? 1 : -1;
-
-                } else {
-
-                    orientation = 'vertical';
-                    direction = ( deltaXY.Y > 0 ) ? 1 : -1;
-
-                }
-
-                $target.trigger ( createEvent ( $.Pointer.flick, event ), {
-                    startXY: startXY,
-                    endXY: endXY,
-                    deltaXY: deltaXY,
-                    orientation: orientation,
-                    direction: direction
-                });
-
-            }
+          orientation = 'vertical';
+          direction = ( deltaXY.Y > 0 ) ? 1 : -1;
 
         }
 
-        $html.off ( moveEvents, moveHandler );
-        $html.off ( endEvents, endHandler );
-
-        $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
-            startXY: startXY,
-            endXY: endXY,
-            deltaXY: deltaXY
+        $target.trigger ( createEvent ( $.Pointer.flick, event ), {
+          startXY: startXY,
+          endXY: endXY,
+          deltaXY: deltaXY,
+          orientation: orientation,
+          direction: direction
         });
 
-    };
+      }
 
-    $html.on ( startEvents, startHandler );
+    }
+
+    $html.off ( moveEvents, moveHandler );
+    $html.off ( endEvents, endHandler );
+
+    $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
+      startXY: startXY,
+      endXY: endXY,
+      deltaXY: deltaXY
+    });
+
+  };
+
+  $html.on ( startEvents, startHandler );
 
 }( jQuery, _, window, document ));
 
@@ -4261,9 +4203,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Progressbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4276,210 +4216,208 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
+
+  /* PRIVATE */
+
+  var generate_options = function ( options, multiple ) {
+
+    if ( !_.isUndefined ( multiple ) ) {
+
+      var new_options = { percentages: Array ( arguments.length ) };
+
+      for ( var i = 0, l = arguments.length; i < l; i++ ) {
+
+        new_options.percentages[i] = _.isNumber ( arguments[i] ) ? { value: arguments[i] } : arguments[i];
+
+      }
+
+    } else {
+
+      var new_options = _.isNumber ( options ) ? { percentages: [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+
+    }
+
+    return new_options;
+
+  };
+
+  /* HELPER */
+
+  $.progressBar = function ( options, multiple ) {
+
+    options = generate_options.apply ( null, arguments );
+
+    return new $.presto.progressBar ( options );
+
+  };
+
+  /* PROGRESS BAR */
+
+  $.widget ( 'presto.progressBar', {
+
+    /* TEMPLATES */
+
+    templates: {
+      base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
+            '<div class="progressBar-unhighlighted">' +
+              '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
+            '</div>' +
+            '<div class="progressBar-stripes"></div>' +
+          '</div>',
+      percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+               '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
+             '{% } %}',
+      percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
+                   '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
+                 '{% } %}',
+      percentage: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
+      percentage_labeled: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
+                  '{% include ( "presto.progressBar.label", {} ); %}' +
+                '</div>',
+      label: '<div class="progressBar-label"></div>'
+    },
+
+    /* OPTIONS */
+
+    options: {
+      percentages: [],
+      /*
+             : [{
+               value: 0,
+               color: '',
+               css: ''
+             }],
+      */
+
+      color: '',
+      size: '',
+      css: '',
+
+      striped: false,
+      labeled: false,
+      decimals: 0,
+
+      callbacks: {
+        update: _.noop,
+        full: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$progressBar = this.$element;
+      this.$highlighteds = this.$progressBar.find ( '.progressBar-highlighted' );
+      this.$stripes = this.$progressBar.find ( '.progressBar-stripes' );
+
+    },
+
+    _init: function () {
+
+      if ( this.initializationType !== 'element' ) {
+
+        this._update ();
+
+      }
+
+    },
 
     /* PRIVATE */
 
-    var generate_options = function ( options, multiple ) {
+    _update: function () {
 
-        if ( !_.isUndefined ( multiple ) ) {
+      for ( var i = 0, l = this.options.percentages.length; i < l; i++ ) {
 
-            var new_options = { percentages: Array ( arguments.length ) };
+        var $highlighted = this.$highlighteds.eq ( i );
 
-            for ( var i = 0, l = arguments.length; i < l; i++ ) {
+        $highlighted.width ( this.options.percentages[i].value + '%' );
 
-                new_options.percentages[i] = _.isNumber ( arguments[i] ) ? { value: arguments[i] } : arguments[i];
+        if ( this.options.labeled ) {
 
-            }
+          var $label = $highlighted.find ( '.progressBar-label' );
 
-        } else {
-
-            var new_options = _.isNumber ( options ) ? { percentages: [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+          $label.html ( +(this.options.percentages[i].value).toFixed ( this.options.decimals ) );
 
         }
 
-        return new_options;
+      }
 
-    };
+      var sum = _.clamp ( 0, _.sum ( this.get ().slice ( 0, this.$highlighteds.length ) ), 100 );
 
-    /* HELPER */
+      if ( this.options.striped ) {
 
-    $.progressBar = function ( options, multiple ) {
+        this.$stripes.width ( sum + '%' );
 
-        options = generate_options.apply ( null, arguments );
+      }
 
-        return new $.presto.progressBar ( options );
+      if ( sum === 100 ) {
 
-    };
+        this._trigger ( 'full' );
 
-    /* PROGRESS BAR */
+      }
 
-    $.widget ( 'presto.progressBar', {
+    },
 
-        /* TEMPLATES */
+    /* PUBLIC */
 
-        templates: {
-            base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                      '<div class="progressBar-unhighlighted">' +
-                          '{% include ( "presto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
-                      '</div>' +
-                      '<div class="progressBar-stripes"></div>' +
-                  '</div>',
-            percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                             '{% include ( "presto.progressBar.percentage", o[i] ); %}' +
-                         '{% } %}',
-            percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                                     '{% include ( "presto.progressBar.percentage_labeled", o[i] ); %}' +
-                                 '{% } %}',
-            percentage: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
-            percentage_labeled: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
-                                    '{% include ( "presto.progressBar.label", {} ); %}' +
-                                '</div>',
-            label: '<div class="progressBar-label"></div>'
-        },
+    get: function () {
 
-        /* OPTIONS */
+      return _.map ( this.options.percentages, function ( percentage ) {
 
-        options: {
-            percentages: [],
-            /*
-                       : [{
-                           value: 0,
-                           color: '',
-                           css: ''
-                       }],
-            */
+        return percentage.value;
 
-            color: '',
-            size: '',
-            css: '',
+      });
 
-            striped: false,
-            labeled: false,
-            decimals: 0,
+    },
 
-            callbacks: {
-                update: _.noop,
-                full: _.noop
-            }
-        },
+    set: function ( options, multiple ) {
 
-        /* SPECIAL */
+      options = generate_options.apply ( null, arguments );
 
-        _variables: function () {
+      _.merge ( this.options, options ); //FIXME: does the merge work here? or we modify the original options?
 
-            this.$progressBar = this.$element;
-            this.$highlighteds = this.$progressBar.find ( '.progressBar-highlighted' );
-            this.$stripes = this.$progressBar.find ( '.progressBar-stripes' );
+      this._update ();
 
-        },
+      this._trigger ( 'update' );
 
-        _init: function () {
+    }
 
-            if ( this.initializationType !== 'element' ) {
+  });
 
-                this._update ();
+  /* READY */
 
-            }
+  $(function () {
 
-        },
+    $('.progressBar').each ( function () {
 
-        /* PRIVATE */
+      var $progressBar = $(this),
+        options = {
+          percentages: [],
+          striped: $progressBar.hasClass ( 'striped' ),
+          labeled: !!$progressBar.find ( '.progressBar-label' ).length
+        };
 
-        _update: function () {
+      $progressBar.find ( '.progressBar-highlighted' ).each ( function () {
 
-            for ( var i = 0, l = this.options.percentages.length; i < l; i++ ) {
-
-                var $highlighted = this.$highlighteds.eq ( i );
-
-                $highlighted.width ( this.options.percentages[i].value + '%' );
-
-                if ( this.options.labeled ) {
-
-                    var $label = $highlighted.find ( '.progressBar-label' );
-
-                    $label.html ( +(this.options.percentages[i].value).toFixed ( this.options.decimals ) );
-
-                }
-
-            }
-
-            var sum = _.clamp ( 0, _.sum ( this.get ().slice ( 0, this.$highlighteds.length ) ), 100 );
-
-            if ( this.options.striped ) {
-
-                this.$stripes.width ( sum + '%' );
-
-            }
-
-            if ( sum === 100 ) {
-
-                this._trigger ( 'full' );
-
-            }
-
-        },
-
-        /* PUBLIC */
-
-        get: function () {
-
-            return _.map ( this.options.percentages, function ( percentage ) {
-
-                return percentage.value;
-
-            });
-
-        },
-
-        set: function ( options, multiple ) {
-
-            options = generate_options.apply ( null, arguments );
-
-            _.merge ( this.options, options ); //FIXME: does the merge work here? or we modify the original options?
-
-            this._update ();
-
-            this._trigger ( 'update' );
-
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('.progressBar').each ( function () {
-
-            var $progressBar = $(this),
-                options = {
-                    percentages: [],
-                    striped: $progressBar.hasClass ( 'striped' ),
-                    labeled: !!$progressBar.find ( '.progressBar-label' ).length
-                };
-
-            $progressBar.find ( '.progressBar-highlighted' ).each ( function () {
-
-                options.percentages.push ({
-                    value: parseFloat ( this.style.width )
-                });
-
-            });
-
-            $progressBar.progressBar ( options );
-
+        options.percentages.push ({
+          value: parseFloat ( this.style.width )
         });
 
+      });
+
+      $progressBar.progressBar ( options );
+
     });
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Radio v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4489,128 +4427,126 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* RADIO */
+  /* RADIO */
 
-    $.widget ( 'presto.radio', {
+  $.widget ( 'presto.radio', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                checked: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        checked: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$radio = this.$element;
-            this.$input = this.$radio.find ( 'input' );
+      this.$radio = this.$element;
+      this.$input = this.$radio.find ( 'input' );
 
-            this.name = this.$input.attr ( 'name' );
+      this.name = this.$input.attr ( 'name' );
 
-            this.$container = this.$radio.parents ( 'form' ).first ();
+      this.$container = this.$radio.parents ( 'form' ).first ();
 
-            if ( this.$container.length === 0 ) {
+      if ( this.$container.length === 0 ) {
 
-                this.$container = $document;
+        this.$container = $document;
 
-            }
+      }
 
-            this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
+      this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
 
-        },
+    },
 
-        _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-            var hasClass = this.$radio.hasClass ( 'checked' );
+      var hasClass = this.$radio.hasClass ( 'checked' );
 
-            if ( this.get () ) {
+      if ( this.get () ) {
 
-                if ( !hasClass ) {
+        if ( !hasClass ) {
 
-                    this.$radio.addClass ( 'checked' );
-
-                }
-
-            } else if ( hasClass ) {
-
-                this.$radio.removeClass ( 'checked' );
-
-            }
-
-        },
-
-        _events: function () {
-
-            this._on ( 'click', function () {
-
-                this.check ();
-
-            });
-
-            this._on ( true, 'change', this._handler_change );
-
-        },
-
-        /* CHANGE */
-
-        _handler_change: function () {
-
-            var isChecked = this.get ();
-
-            if ( isChecked ) {
-
-                this.$other_radios.removeClass ( 'checked' );
-
-            }
-
-            this.$radio.toggleClass ( 'checked', isChecked );
-
-            this._trigger ( isChecked ? 'checked' : 'unchecked' );
-
-        },
-
-        /* PUBLIC */
-
-        get: function () {
-
-            return this.$input.prop ( 'checked' );
-
-        },
-
-        check: function () {
-
-            if ( !this.get () ) {
-
-                this.$input.prop ( 'checked', true ).trigger ( 'change' );
-
-                this._trigger ( 'checked' );
-
-            }
+          this.$radio.addClass ( 'checked' );
 
         }
 
-    });
+      } else if ( hasClass ) {
 
-    /* READY */
+        this.$radio.removeClass ( 'checked' );
 
-    $(function () {
+      }
 
-        $('.radio').radio ();
+    },
 
-    });
+    _events: function () {
+
+      this._on ( 'click', function () {
+
+        this.check ();
+
+      });
+
+      this._on ( true, 'change', this._handler_change );
+
+    },
+
+    /* CHANGE */
+
+    _handler_change: function () {
+
+      var isChecked = this.get ();
+
+      if ( isChecked ) {
+
+        this.$other_radios.removeClass ( 'checked' );
+
+      }
+
+      this.$radio.toggleClass ( 'checked', isChecked );
+
+      this._trigger ( isChecked ? 'checked' : 'unchecked' );
+
+    },
+
+    /* PUBLIC */
+
+    get: function () {
+
+      return this.$input.prop ( 'checked' );
+
+    },
+
+    check: function () {
+
+      if ( !this.get () ) {
+
+        this.$input.prop ( 'checked', true ).trigger ( 'change' );
+
+        this._trigger ( 'checked' );
+
+      }
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.radio').radio ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Ripple v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4620,77 +4556,75 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* RIPPLE */
+  /* RIPPLE */
 
-    var Ripple = {
+  var Ripple = {
 
-        delay: {
-            show: 350,
-            hide: 400
-        },
+    delay: {
+      show: 350,
+      hide: 400
+    },
 
-        show: function ( event, $element ) {
+    show: function ( event, $element ) {
 
-            var $ripple = $( '<div class="ripple-circle"></div>' ).appendTo ( $element ),
-                offset = $element.offset (),
-                eventXY = $.eventXY ( event ),
-                now = _.now ();
+      var $ripple = $( '<div class="ripple-circle"></div>' ).appendTo ( $element ),
+        offset = $element.offset (),
+        eventXY = $.eventXY ( event ),
+        now = _.now ();
 
-            $ripple.css ({
-                top: eventXY.Y - offset.top,
-                left: eventXY.X - offset.left
-            }).addClass ( 'ripple-circle-show' );
+      $ripple.css ({
+        top: eventXY.Y - offset.top,
+        left: eventXY.X - offset.left
+      }).addClass ( 'ripple-circle-show' );
 
-            $element.on ( 'mouseup mouseleave', function () {
+      $element.on ( 'mouseup mouseleave', function () {
 
-                Ripple.hide ( $ripple, now );
+        Ripple.hide ( $ripple, now );
 
-            });
+      });
 
-        },
+    },
 
-        hide: function ( $ripple, before ) {
+    hide: function ( $ripple, before ) {
 
-            var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
+      var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
 
-            setTimeout ( function () {
+      setTimeout ( function () {
 
-                $ripple.addClass ( 'ripple-circle-hide' );
+        $ripple.addClass ( 'ripple-circle-hide' );
 
-                setTimeout ( function () {
+        setTimeout ( function () {
 
-                    $ripple.remove ();
+          $ripple.remove ();
 
-                }, Ripple.delay.hide );
+        }, Ripple.delay.hide );
 
-            }, delay );
+      }, delay );
 
-        }
-    };
+    }
+  };
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $body.on ( 'mousedown', '.ripple', function ( event ) {
+    $body.on ( 'mousedown', '.ripple', function ( event ) {
 
-            if ( event.button === $.ui.mouseButton.RIGHT ) return;
+      if ( event.button === $.ui.mouseButton.RIGHT ) return;
 
-            Ripple.show ( event, $(this) );
-
-        });
+      Ripple.show ( event, $(this) );
 
     });
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Select v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4704,240 +4638,238 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* SELECT */
+  /* SELECT */
 
-    $.widget ( 'presto.select', {
+  $.widget ( 'presto.select', {
 
-        /* TEMPLATES */
+    /* TEMPLATES */
 
-        templates: {
-            base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
-                      '<div class="container">' +
-                          '<div class="container-content">' +
-                              '<div class="multiple-wrp vertical stretched joined">' +
-                                  '<div class="multiple">' +
-                                      '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                                          '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                                      '{% } %}' +
-                                  '</div>' +
-                              '</div>' +
-                          '</div>' +
-                      '</div>' +
-                  '</div>',
-            optgroup: '<div class="divider-wrp block">' +
-                          '<div class="divider">' +
-                              '{%=o.prop%}' +
-                          '</div>' +
-                      '</div>',
-            option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
-                        '<div class="label actionable sharp">' +
-                            '<div class="label-center">' +
-                                '{%=o.value%}' +
-                            '</div>' +
-                        '</div>' +
-                    '</div>'
-       },
+    templates: {
+      base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
+            '<div class="container">' +
+              '<div class="container-content">' +
+                '<div class="multiple-wrp vertical stretched joined">' +
+                  '<div class="multiple">' +
+                    '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                      '{% include ( "presto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                    '{% } %}' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>' +
+          '</div>',
+      optgroup: '<div class="divider-wrp block">' +
+              '<div class="divider">' +
+                '{%=o.prop%}' +
+              '</div>' +
+            '</div>',
+      option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
+            '<div class="label actionable sharp">' +
+              '<div class="label-center">' +
+                '{%=o.value%}' +
+              '</div>' +
+            '</div>' +
+          '</div>'
+     },
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                open: _.noop,
-                close: _.noop,
-                change: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        open: _.noop,
+        close: _.noop,
+        change: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$trigger = this.$element;
-            this.$select = this.$trigger.find ( 'select' );
-            this.$options = this.$select.find ( 'option' );
-            this.$select_label = this.$trigger.find ( '.select-label' );
-            this.$valueholder = this.$trigger.find ( '.valueholder' );
+      this.$trigger = this.$element;
+      this.$select = this.$trigger.find ( 'select' );
+      this.$options = this.$select.find ( 'option' );
+      this.$select_label = this.$trigger.find ( '.select-label' );
+      this.$valueholder = this.$trigger.find ( '.valueholder' );
 
-            this.id = this.$trigger.data ( 'select' );
+      this.id = this.$trigger.data ( 'select' );
 
-            if ( this.$valueholder.length === 0 ) {
+      if ( this.$valueholder.length === 0 ) {
 
-                this.$valueholder = this.$select_label;
+        this.$valueholder = this.$select_label;
 
-            }
+      }
 
-            this.select_options = [];
+      this.select_options = [];
 
-            this.$dropdown = false;
-            this.$dropdown_container = false;
-            this.$buttons = false;
+      this.$dropdown = false;
+      this.$dropdown_container = false;
+      this.$buttons = false;
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this._update_valueholder ();
+      this._update_valueholder ();
 
-            if ( !$.browser.isMobile ) {
+      if ( !$.browser.isMobile ) {
 
-                this.$select.addClass ( 'hidden' );
+        this.$select.addClass ( 'hidden' );
 
-                this._init_select_options ();
-                this._init_dropdown ();
+        this._init_select_options ();
+        this._init_dropdown ();
 
-            }
+      }
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( this.$select, 'change', function () {
-                this.update ();
-                this._trigger ( 'change' );
+      this._on ( this.$select, 'change', function () {
+        this.update ();
+        this._trigger ( 'change' );
+      });
+
+      if ( !$.browser.isMobile ) {
+
+        this._on ( this.$buttons, 'click', this._handler_button_click );
+
+      }
+
+    },
+
+    /* BUTTON CLICK */
+
+    _handler_button_click: function ( event, button ) {
+
+      this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
+
+    },
+
+    /* PRIVATE */
+
+    _init_select_options: function () { //FIXME: Add support for arbitrary number of optgroups levels
+
+      var previous_optgroup,
+        current_optgroup;
+
+      for ( var i = 0, l = this.$options.length; i < l; i++ ) {
+
+        var $option = this.$options.eq ( i ),
+          $parent = $option.parent ();
+
+        if ( $parent.is ( 'optgroup' ) ) {
+
+          current_optgroup = $parent.attr ( 'label' );
+
+          if ( current_optgroup !== previous_optgroup ) {
+
+            previous_optgroup = current_optgroup;
+
+            this.select_options.push ({
+              prop: current_optgroup
             });
 
-            if ( !$.browser.isMobile ) {
-
-                this._on ( this.$buttons, 'click', this._handler_button_click );
-
-            }
-
-        },
-
-        /* BUTTON CLICK */
-
-        _handler_button_click: function ( event, button ) {
-
-            this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
-
-        },
-
-        /* PRIVATE */
-
-        _init_select_options: function () { //FIXME: Add support for arbitrary number of optgroups levels
-
-            var previous_optgroup,
-                current_optgroup;
-
-            for ( var i = 0, l = this.$options.length; i < l; i++ ) {
-
-                var $option = this.$options.eq ( i ),
-                    $parent = $option.parent ();
-
-                if ( $parent.is ( 'optgroup' ) ) {
-
-                    current_optgroup = $parent.attr ( 'label' );
-
-                    if ( current_optgroup !== previous_optgroup ) {
-
-                        previous_optgroup = current_optgroup;
-
-                        this.select_options.push ({
-                            prop: current_optgroup
-                        });
-
-                    }
-
-                }
-
-                this.select_options.push ({
-                    value: $option.html (),
-                    prop: $option.attr ( 'value' )
-                });
-
-            }
-
-        },
-
-        _init_dropdown: function () {
-
-            var html = this._tmpl ( 'base', { id: this.id, options: this.select_options } );
-
-            $body.append ( html );
-
-            this.$dropdown = $('#dropdown-' + this.id);
-            this.$dropdown_container = this.$dropdown.find ( '.container' );
-            this.$buttons = this.$dropdown.find ( '.button-wrp' );
-
-            this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', 'dropdown-' + this.id );
-
-            var instance = this;
-
-            this.$dropdown.dropdown ({
-                callbacks: {
-                    open: function () {
-                        instance._set_dropdown_width.bind ( instance )(); //FIXME: is the bind necessary?
-                        instance._trigger ( 'open' );
-                    },
-                    close: instance.options.callbacks.close
-                }
-            });
-
-            this._update_dropdown ();
-
-        },
-
-        _update_valueholder: function () {
-
-            var $selected_option = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
-
-            this.$valueholder.html ( $selected_option.html () );
-
-        },
-
-        _update_dropdown: function () {
-
-            this.$buttons.removeClass ( 'active' );
-
-            this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( 'active' );
-
-        },
-
-        _set_dropdown_width: function () {
-
-            this.$dropdown_container.css ( 'min-width', this.$trigger.width () );
-
-        },
-
-        /* PUBLIC */
-
-        select: function ( value ) {
-
-            this.$buttons.filter ( '[data-value="' + value + '"]' ).click ();
-
-        },
-
-        update: function () {
-
-            if ( !$.browser.isMobile ) {
-
-                this._update_dropdown ();
-
-            }
-
-            this._update_valueholder ();
+          }
 
         }
 
-    });
+        this.select_options.push ({
+          value: $option.html (),
+          prop: $option.attr ( 'value' )
+        });
 
-    /* READY */
+      }
 
-    $(function () {
+    },
 
-        $('.select-trigger').select ();
+    _init_dropdown: function () {
 
-    });
+      var html = this._tmpl ( 'base', { id: this.id, options: this.select_options } );
+
+      $body.append ( html );
+
+      this.$dropdown = $('#dropdown-' + this.id);
+      this.$dropdown_container = this.$dropdown.find ( '.container' );
+      this.$buttons = this.$dropdown.find ( '.button-wrp' );
+
+      this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', 'dropdown-' + this.id );
+
+      var instance = this;
+
+      this.$dropdown.dropdown ({
+        callbacks: {
+          open: function () {
+            instance._set_dropdown_width.bind ( instance )(); //FIXME: is the bind necessary?
+            instance._trigger ( 'open' );
+          },
+          close: instance.options.callbacks.close
+        }
+      });
+
+      this._update_dropdown ();
+
+    },
+
+    _update_valueholder: function () {
+
+      var $selected_option = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
+
+      this.$valueholder.html ( $selected_option.html () );
+
+    },
+
+    _update_dropdown: function () {
+
+      this.$buttons.removeClass ( 'active' );
+
+      this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( 'active' );
+
+    },
+
+    _set_dropdown_width: function () {
+
+      this.$dropdown_container.css ( 'min-width', this.$trigger.width () );
+
+    },
+
+    /* PUBLIC */
+
+    select: function ( value ) {
+
+      this.$buttons.filter ( '[data-value="' + value + '"]' ).click ();
+
+    },
+
+    update: function () {
+
+      if ( !$.browser.isMobile ) {
+
+        this._update_dropdown ();
+
+      }
+
+      this._update_valueholder ();
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.select-trigger').select ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Selectable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4952,316 +4884,314 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
+
+  /* PRIVATE */
+
+  var clear_selection = function () {
+
+    if ( document.selection ) {
+
+      document.selection.empty ();
+
+    } else if ( window.getSelection ) {
+
+      window.getSelection ().removeAllRanges ();
+
+    }
+
+  };
+
+  /* SELECTABLE */
+
+  $.widget ( 'presto.selectable', {
+
+    /* OPTIONS */
+
+    options: {
+      selector: 'tbody tr:not(.empty)',
+      selected_class: 'selected',
+      callbacks: {
+        select: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$rows = this._get_rows ();
+
+      this.$start_row = false;
+      this.$end_row = false;
+
+    },
+
+    _init: function () {
+
+      this._reset_prevs ();
+
+    },
+
+    _events: function () {
+
+      /* KEYS */
+
+      this._on ( 'mouseenter', this._handler_keys_in );
+
+      this._on ( 'mouseleave', this._handler_keys_out );
+
+      /* MOUSE */
+
+      this._on ( 'mousedown', this.options.selector, this._handler_mousedown );
+
+      /* OTHERS */
+
+      //FIXME: add support tableHelper and sortable
+
+      this._on ( 'change sort', this._handler_change );
+
+      this._on ( 'mousedown mouseup', this._handler_clear_selection );
+
+    },
+
+    /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
+
+    _handler_keys_in: function () {
+
+      this._on ( $document, 'keydown', this._handler_keys_keydown );
+
+    },
+
+    _handler_keys_out: function () {
+
+      this._off ( $document, 'keydown', this._handler_keys_keydown );
+
+    },
+
+    _handler_keys_keydown: function ( event ) {
+
+      if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
+
+        if ( event.keyCode === 65 ) { //INFO: A
+
+          event.preventDefault ();
+
+          this._reset_prevs ();
+
+          this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not //FIXME: only works if the last character pushed is the `A`, but is it an unwanted behaviour?
+
+          this._trigger ( 'select' );
+
+        } else if ( event.keyCode === 73 ) { //INFO: I
+
+          event.preventDefault ();
+
+          this._reset_prevs ();
+
+          this.$rows.toggleClass ( this.options.selected_class );
+
+          this._trigger ( 'select' );
+
+        }
+
+      }
+
+    },
+
+    /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
+
+    _handler_mousedown: function ( event ) {
+
+      if ( event.button !== 0 ) return; //INFO: Only the left click is enabled
+
+      this.$start_row = $(event.currentTarget);
+
+      this._on ( $document, 'mousemove', this._handler_mousemove );
+
+      this._on ( 'mouseup', this.options.selector, this._handler_mouseup );
+
+    },
+
+    _handler_mousemove: function ( event ) { // DRAG
+
+      if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
+
+      this._off ( $document, 'mousemove', this._handler_mousemove );
+
+      this._off ( 'mouseup', this._handler_mouseup );
+
+      this._reset_prevs ();
+
+      this.$prev_row = this.$start_row;
+
+      this.$start_row.toggleClass ( this.options.selected_class );
+
+      $html.addClass ( 'dragging' );
+
+      this._on ( 'mouseenter', this.options.selector, this._handler_drag_mouseenter );
+
+      this._on ( $document, 'mouseup', this._handler_drag_mouseup );
+
+      this._trigger ( 'select' );
+
+    },
+
+    _handler_drag_mouseenter: function ( event ) { // DRAG HOVER
+
+      this.$end_row = $(event.currentTarget);
+
+      var start_index = this.$rows.index ( this.$start_row ),
+        end_index = this.$rows.index ( this.$end_row ),
+        min_index = Math.min ( start_index, end_index ),
+        max_index = Math.max ( start_index, end_index );
+
+      if ( min_index === start_index ) { // down
+
+        min_index += 1;
+        max_index += 1;
+
+      }
+
+      var $new_dragged = this.$rows.slice ( min_index, max_index );
+
+      if ( this.$prev_dragged ) {
+
+        $new_dragged.not ( this.$prev_dragged ).toggleClass ( this.options.selected_class );
+
+        this.$prev_dragged.not ( $new_dragged ).toggleClass ( this.options.selected_class );
+
+      } else {
+
+        $new_dragged.toggleClass ( this.options.selected_class );
+
+      }
+
+      this.$prev_dragged = $new_dragged;
+
+      this._trigger ( 'select' );
+
+    },
+
+    _handler_drag_mouseup: function () { // DRAG END
+
+      this._off ( 'mouseenter', this._handler_drag_mouseenter );
+
+      this._off ( $document, 'mouseup', this._handler_drag_mouseup );
+
+      this.$prev_dragged = false;
+
+      $html.removeClass ( 'dragging' );
+
+    },
+
+    _handler_mouseup: function ( event ) { // CLICK
+
+      this._off ( $document, 'mousemove', this._handler_mousemove );
+
+      this._off ( 'mouseup', this._handler_mouseup );
+
+      if ( event.shiftKey ) {
+
+        var start_index = this.$rows.index ( this.$prev_row ),
+          end_index = this.$prev_row ? this.$rows.index ( this.$start_row ) : 0,
+          min_index = Math.min ( start_index, end_index ),
+          max_index = Math.max ( start_index, end_index );
+
+        if ( min_index === start_index ) { // down
+
+          min_index += 1;
+          max_index += 1;
+
+        }
+
+        var $new_shifted = this.$rows.slice ( min_index, max_index );
+
+        if ( this.$prev_shifted ) {
+
+          $new_shifted.not ( this.$prev_shifted ).toggleClass ( this.options.selected_class );
+
+          this.$prev_shifted.not ( $new_shifted ).toggleClass ( this.options.selected_class );
+
+        } else {
+
+          $new_shifted.toggleClass ( this.options.selected_class );
+
+        }
+
+        this.$prev_shifted = $new_shifted;
+
+      } else if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) || $.browser.isMobile ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+
+        this.$start_row.toggleClass ( this.options.selected_class );
+
+        this._reset_prevs ();
+
+        this.$prev_row = this.$start_row;
+
+      } else {
+
+        this.$rows.not ( this.$start_row ).removeClass ( this.options.selected_class );
+
+        this.$start_row.toggleClass ( this.options.selected_class );
+
+        this._reset_prevs ();
+
+        this.$prev_row = this.$start_row;
+
+      }
+
+      this._trigger ( 'select' );
+
+    },
+
+    /* OTHER EVENTS */
+
+    _handler_change: function () {
+
+      this.$rows = this._get_rows ();
+
+    },
+
+    _handler_clear_selection: function () {
+
+      $.reflow ();
+
+      clear_selection ();
+
+    },
 
     /* PRIVATE */
 
-    var clear_selection = function () {
+    _reset_prevs: function () {
 
-        if ( document.selection ) {
+      this.$prev_row = false;
+      this.$prev_shifted = false;
+      this.$prev_dragged = false;
 
-            document.selection.empty ();
+    },
 
-        } else if ( window.getSelection ) {
+    _get_rows: function () {
 
-            window.getSelection ().removeAllRanges ();
+      return this.$element.find ( this.options.selector );
 
-        }
+    }
 
-    };
+  });
 
-    /* SELECTABLE */
+  /* READY */
 
-    $.widget ( 'presto.selectable', {
+  $(function () {
 
-        /* OPTIONS */
+    $('table.selectable').selectable ();
 
-        options: {
-            selector: 'tbody tr:not(.empty)',
-            selected_class: 'selected',
-            callbacks: {
-                select: _.noop
-            }
-        },
-
-        /* SPECIAL */
-
-        _variables: function () {
-
-            this.$rows = this._get_rows ();
-
-            this.$start_row = false;
-            this.$end_row = false;
-
-        },
-
-        _init: function () {
-
-            this._reset_prevs ();
-
-        },
-
-        _events: function () {
-
-            /* KEYS */
-
-            this._on ( 'mouseenter', this._handler_keys_in );
-
-            this._on ( 'mouseleave', this._handler_keys_out );
-
-            /* MOUSE */
-
-            this._on ( 'mousedown', this.options.selector, this._handler_mousedown );
-
-            /* OTHERS */
-
-            //FIXME: add support tableHelper and sortable
-
-            this._on ( 'change sort', this._handler_change );
-
-            this._on ( 'mousedown mouseup', this._handler_clear_selection );
-
-        },
-
-        /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
-
-        _handler_keys_in: function () {
-
-            this._on ( $document, 'keydown', this._handler_keys_keydown );
-
-        },
-
-        _handler_keys_out: function () {
-
-            this._off ( $document, 'keydown', this._handler_keys_keydown );
-
-        },
-
-        _handler_keys_keydown: function ( event ) {
-
-            if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
-
-                if ( event.keyCode === 65 ) { //INFO: A
-
-                    event.preventDefault ();
-
-                    this._reset_prevs ();
-
-                    this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not //FIXME: only works if the last character pushed is the `A`, but is it an unwanted behaviour?
-
-                    this._trigger ( 'select' );
-
-                } else if ( event.keyCode === 73 ) { //INFO: I
-
-                    event.preventDefault ();
-
-                    this._reset_prevs ();
-
-                    this.$rows.toggleClass ( this.options.selected_class );
-
-                    this._trigger ( 'select' );
-
-                }
-
-            }
-
-        },
-
-        /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
-
-        _handler_mousedown: function ( event ) {
-
-            if ( event.button !== 0 ) return; //INFO: Only the left click is enabled
-
-            this.$start_row = $(event.currentTarget);
-
-            this._on ( $document, 'mousemove', this._handler_mousemove );
-
-            this._on ( 'mouseup', this.options.selector, this._handler_mouseup );
-
-        },
-
-        _handler_mousemove: function ( event ) { // DRAG
-
-            if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
-
-            this._off ( $document, 'mousemove', this._handler_mousemove );
-
-            this._off ( 'mouseup', this._handler_mouseup );
-
-            this._reset_prevs ();
-
-            this.$prev_row = this.$start_row;
-
-            this.$start_row.toggleClass ( this.options.selected_class );
-
-            $html.addClass ( 'dragging' );
-
-            this._on ( 'mouseenter', this.options.selector, this._handler_drag_mouseenter );
-
-            this._on ( $document, 'mouseup', this._handler_drag_mouseup );
-
-            this._trigger ( 'select' );
-
-        },
-
-        _handler_drag_mouseenter: function ( event ) { // DRAG HOVER
-
-            this.$end_row = $(event.currentTarget);
-
-            var start_index = this.$rows.index ( this.$start_row ),
-                end_index = this.$rows.index ( this.$end_row ),
-                min_index = Math.min ( start_index, end_index ),
-                max_index = Math.max ( start_index, end_index );
-
-            if ( min_index === start_index ) { // down
-
-                min_index += 1;
-                max_index += 1;
-
-            }
-
-            var $new_dragged = this.$rows.slice ( min_index, max_index );
-
-            if ( this.$prev_dragged ) {
-
-                $new_dragged.not ( this.$prev_dragged ).toggleClass ( this.options.selected_class );
-
-                this.$prev_dragged.not ( $new_dragged ).toggleClass ( this.options.selected_class );
-
-            } else {
-
-                $new_dragged.toggleClass ( this.options.selected_class );
-
-            }
-
-            this.$prev_dragged = $new_dragged;
-
-            this._trigger ( 'select' );
-
-        },
-
-        _handler_drag_mouseup: function () { // DRAG END
-
-            this._off ( 'mouseenter', this._handler_drag_mouseenter );
-
-            this._off ( $document, 'mouseup', this._handler_drag_mouseup );
-
-            this.$prev_dragged = false;
-
-            $html.removeClass ( 'dragging' );
-
-        },
-
-        _handler_mouseup: function ( event ) { // CLICK
-
-            this._off ( $document, 'mousemove', this._handler_mousemove );
-
-            this._off ( 'mouseup', this._handler_mouseup );
-
-            if ( event.shiftKey ) {
-
-                var start_index = this.$rows.index ( this.$prev_row ),
-                    end_index = this.$prev_row ? this.$rows.index ( this.$start_row ) : 0,
-                    min_index = Math.min ( start_index, end_index ),
-                    max_index = Math.max ( start_index, end_index );
-
-                if ( min_index === start_index ) { // down
-
-                    min_index += 1;
-                    max_index += 1;
-
-                }
-
-                var $new_shifted = this.$rows.slice ( min_index, max_index );
-
-                if ( this.$prev_shifted ) {
-
-                    $new_shifted.not ( this.$prev_shifted ).toggleClass ( this.options.selected_class );
-
-                    this.$prev_shifted.not ( $new_shifted ).toggleClass ( this.options.selected_class );
-
-                } else {
-
-                    $new_shifted.toggleClass ( this.options.selected_class );
-
-                }
-
-                this.$prev_shifted = $new_shifted;
-
-            } else if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) || $.browser.isMobile ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
-
-                this.$start_row.toggleClass ( this.options.selected_class );
-
-                this._reset_prevs ();
-
-                this.$prev_row = this.$start_row;
-
-            } else {
-
-                this.$rows.not ( this.$start_row ).removeClass ( this.options.selected_class );
-
-                this.$start_row.toggleClass ( this.options.selected_class );
-
-                this._reset_prevs ();
-
-                this.$prev_row = this.$start_row;
-
-            }
-
-            this._trigger ( 'select' );
-
-        },
-
-        /* OTHER EVENTS */
-
-        _handler_change: function () {
-
-            this.$rows = this._get_rows ();
-
-        },
-
-        _handler_clear_selection: function () {
-
-            $.reflow ();
-
-            clear_selection ();
-
-        },
-
-        /* PRIVATE */
-
-        _reset_prevs: function () {
-
-            this.$prev_row = false;
-            this.$prev_shifted = false;
-            this.$prev_dragged = false;
-
-        },
-
-        _get_rows: function () {
-
-            return this.$element.find ( this.options.selector );
-
-        }
-
-    });
-
-    /* READY */
-
-    $(function () {
-
-        $('table.selectable').selectable ();
-
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Slider v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5272,327 +5202,325 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* SLIDER */
+  /* SLIDER */
 
-    $.widget ( 'presto.slider', {
+  $.widget ( 'presto.slider', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            min: 0,
-            max: 100,
-            value: 0,
-            step: 1,
-            decimals: 0,
-            callbacks: {
-                increased: _.noop,
-                decreased: _.noop
-            }
+    options: {
+      min: 0,
+      max: 100,
+      value: 0,
+      step: 1,
+      decimals: 0,
+      callbacks: {
+        increased: _.noop,
+        decreased: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$slider = this.$element;
+      this.$min = this.$slider.find ( '.slider-min' );
+      this.$max = this.$slider.find ( '.slider-max' );
+      this.$input = this.$slider.find ( 'input' );
+      this.$bar_wrp = this.$slider.find ( '.slider-bar-wrp' );
+      this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
+      this.$highlighted = this.$slider.find ( '.slider-highlighted' );
+      this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
+      this.$label = this.$handler_wrp.find ( '.slider-label' );
+
+      this.steps_nr = ( ( this.options.max - this.options.min ) / this.options.step );
+
+      this._update_variables ();
+
+    },
+
+    _events: function () {
+
+      /* INPUT CHANGE */
+
+      this._on ( true, this.$input, 'change', this._handler_change );
+
+      /* WINDOW RESIZE */
+
+      this._on ( $window, 'resize', this._handler_resize );
+
+      /* ARROWS */
+
+      this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
+      this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
+
+      /* MIN / MAX BUTTONS */
+
+      this._on ( this.$min, 'click', this.decrease );
+      this._on ( this.$max, 'click', this.increase );
+
+      /* DRAG */
+
+      this.$handler_wrp.draggable ({
+        draggable: this._draggable.bind ( this ),
+        axis: 'x',
+        constrainer: {
+          $element: this.$bar_wrp,
+          constrain_center: true,
+          axis: 'x'
         },
-
-        /* SPECIAL */
-
-        _variables: function () {
-
-            this.$slider = this.$element;
-            this.$min = this.$slider.find ( '.slider-min' );
-            this.$max = this.$slider.find ( '.slider-max' );
-            this.$input = this.$slider.find ( 'input' );
-            this.$bar_wrp = this.$slider.find ( '.slider-bar-wrp' );
-            this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
-            this.$highlighted = this.$slider.find ( '.slider-highlighted' );
-            this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
-            this.$label = this.$handler_wrp.find ( '.slider-label' );
-
-            this.steps_nr = ( ( this.options.max - this.options.min ) / this.options.step );
-
-            this._update_variables ();
-
+        modifiers: {
+          x: this.modifier_x.bind ( this )
         },
-
-        _events: function () {
-
-            /* INPUT CHANGE */
-
-            this._on ( true, this.$input, 'change', this._handler_change );
-
-            /* WINDOW RESIZE */
-
-            this._on ( $window, 'resize', this._handler_resize );
-
-            /* ARROWS */
-
-            this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
-            this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
-
-            /* MIN / MAX BUTTONS */
-
-            this._on ( this.$min, 'click', this.decrease );
-            this._on ( this.$max, 'click', this.increase );
-
-            /* DRAG */
-
-            this.$handler_wrp.draggable ({
-                draggable: this._draggable.bind ( this ),
-                axis: 'x',
-                constrainer: {
-                    $element: this.$bar_wrp,
-                    constrain_center: true,
-                    axis: 'x'
-                },
-                modifiers: {
-                    x: this.modifier_x.bind ( this )
-                },
-                callbacks: {
-                    beforestart: this._handler_drag_beforestart.bind ( this ),
-                    move: this._handler_drag_move.bind ( this ),
-                    end: this._handler_drag_end.bind ( this )
-                }
-            });
-
-            /* CLICK */
-
-            this._on ( this.$unhighlighted, 'click', this._handler_click );
-
-        },
-
-        /* PRIVATE */
-
-        _round_value: function ( value ) {
-
-            return Number(Number(value).toFixed ( this.options.decimals ));
-
-        },
-
-        _update_positions: function () {
-
-            var percentage = ( ( this.options.value - this.options.min ) / this.options.step ) * 100 / this.steps_nr;
-
-            this.$handler_wrp.css ({
-                left: percentage + '%',
-                transform: 'none'
-            });
-
-            this.$highlighted.css ({
-                right: ( 100 - percentage ) + '%',
-                transform: 'none'
-            });
-
-        },
-
-        _update_label: function ( value ) {
-
-            this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
-
-        },
-
-        _update_variables: function () {
-
-            this.unhighlighted_width = this.$unhighlighted.width ();
-            this.unhighlighted_offset = this.$unhighlighted.offset ();
-            this.step_width = this.unhighlighted_width / this.steps_nr;
-
-        },
-
-        /* CHANGE */
-
-        _handler_change: function () {
-
-            this.set ( this.$input.val () );
-
-        },
-
-        /* RESIZE */
-
-        _handler_resize: function () {
-
-            this._update_variables ();
-
-        },
-
-        /* LEFT / RIGHT ARROWS */
-
-        _handler_arrows_in: function () {
-
-            this._on ( $document, 'keydown', this._handler_arrows_keydown );
-
-        },
-
-        _handler_arrows_out: function () {
-
-            this._off ( $document, 'keydown', this._handler_arrows_keydown );
-
-        },
-
-        _handler_arrows_keydown: function ( event ) {
-
-            if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
-
-                this.decrease ();
-
-            } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
-
-                this.increase ();
-
-            }
-
-        },
-
-        /* DRAG */
-
-        _draggable: function () {
-
-            return !this.options.disabled;
-
-        },
-
-        modifier_x: function ( distance ) { //TODO: maybe we should export this function as a lodash mixin
-
-            var left = distance % this.step_width;
-
-            if ( left >= this.step_width / 2 ) {
-
-                return distance - left + this.step_width;
-
-            } else {
-
-                return distance - left;
-
-            }
-
-        },
-
-        _handler_drag_beforestart: function () {
-
-            var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
-
-            this.$handler_wrp.css ({
-                left: 0,
-                transform: 'translate3d(' + translateX + 'px,0,0)'
-            });
-
-            this.$highlighted.css ({
-                right: '100%',
-                transform: 'translate3d(' + translateX + 'px,0,0)'
-            });
-
-        },
-
-        _handler_drag_move: function ( data ) {
-
-            this.$highlighted.css ( 'transform', 'translate3d(' + data.modifiedXY.X + 'px,0,0)' );
-
-            this._update_label ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
-
-        },
-
-        _handler_drag_end: function ( data ) {
-
-            var transform_str = this.$handler_wrp.css ( 'transform' ),
-                matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
-
-            var setted = this.set ( this.options.min + ( parseFloat ( matrix[4], 10 ) / this.step_width * this.options.step ) );
-
-            if ( !setted ) {
-
-                this._update_positions ();
-
-            }
-
-        },
-
-        /* CLICK */
-
-        _handler_click: function ( event ) {
-
-            if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
-
-            var click_pos = $.eventXY ( event ),
-                distance = this.modifier_x ( click_pos.X - this.unhighlighted_offset.left );
-
-            this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
-
-        },
-
-        /* PUBLIC */
-
-        get: function () {
-
-            return this.options.value;
-
-        },
-
-        set: function ( value ) {
-
-            value = _.clamp ( this.options.min, this._round_value ( value ), this.options.max );
-
-            if ( value !== this.options.value ) {
-
-                var callback = ( value > this.options.value ) ? 'increased' : 'decreased';
-
-                this.options.value = value;
-
-                this._update_positions ();
-                this._update_label ();
-
-                this.$input.val ( value ).trigger ( 'change' );
-
-                this._trigger ( callback );
-
-                return true;
-
-            } else {
-
-                return false;
-
-            }
-
-        },
-
-        increase: function () {
-
-            return this.set ( this.options.value + this.options.step );
-
-        },
-
-        decrease: function () {
-
-            return this.set ( this.options.value - this.options.step );
-
+        callbacks: {
+          beforestart: this._handler_drag_beforestart.bind ( this ),
+          move: this._handler_drag_move.bind ( this ),
+          end: this._handler_drag_end.bind ( this )
         }
+      });
+
+      /* CLICK */
+
+      this._on ( this.$unhighlighted, 'click', this._handler_click );
+
+    },
+
+    /* PRIVATE */
+
+    _round_value: function ( value ) {
+
+      return Number(Number(value).toFixed ( this.options.decimals ));
+
+    },
+
+    _update_positions: function () {
+
+      var percentage = ( ( this.options.value - this.options.min ) / this.options.step ) * 100 / this.steps_nr;
+
+      this.$handler_wrp.css ({
+        left: percentage + '%',
+        transform: 'none'
+      });
+
+      this.$highlighted.css ({
+        right: ( 100 - percentage ) + '%',
+        transform: 'none'
+      });
+
+    },
+
+    _update_label: function ( value ) {
+
+      this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
+
+    },
+
+    _update_variables: function () {
+
+      this.unhighlighted_width = this.$unhighlighted.width ();
+      this.unhighlighted_offset = this.$unhighlighted.offset ();
+      this.step_width = this.unhighlighted_width / this.steps_nr;
+
+    },
+
+    /* CHANGE */
+
+    _handler_change: function () {
+
+      this.set ( this.$input.val () );
+
+    },
+
+    /* RESIZE */
+
+    _handler_resize: function () {
+
+      this._update_variables ();
+
+    },
+
+    /* LEFT / RIGHT ARROWS */
+
+    _handler_arrows_in: function () {
+
+      this._on ( $document, 'keydown', this._handler_arrows_keydown );
+
+    },
+
+    _handler_arrows_out: function () {
+
+      this._off ( $document, 'keydown', this._handler_arrows_keydown );
+
+    },
+
+    _handler_arrows_keydown: function ( event ) {
+
+      if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
+
+        this.decrease ();
+
+      } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
+
+        this.increase ();
+
+      }
+
+    },
+
+    /* DRAG */
+
+    _draggable: function () {
+
+      return !this.options.disabled;
+
+    },
+
+    modifier_x: function ( distance ) { //TODO: maybe we should export this function as a lodash mixin
+
+      var left = distance % this.step_width;
+
+      if ( left >= this.step_width / 2 ) {
+
+        return distance - left + this.step_width;
+
+      } else {
+
+        return distance - left;
+
+      }
+
+    },
+
+    _handler_drag_beforestart: function () {
+
+      var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
+
+      this.$handler_wrp.css ({
+        left: 0,
+        transform: 'translate3d(' + translateX + 'px,0,0)'
+      });
+
+      this.$highlighted.css ({
+        right: '100%',
+        transform: 'translate3d(' + translateX + 'px,0,0)'
+      });
+
+    },
+
+    _handler_drag_move: function ( data ) {
+
+      this.$highlighted.css ( 'transform', 'translate3d(' + data.modifiedXY.X + 'px,0,0)' );
+
+      this._update_label ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
+
+    },
+
+    _handler_drag_end: function ( data ) {
+
+      var transform_str = this.$handler_wrp.css ( 'transform' ),
+        matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
+
+      var setted = this.set ( this.options.min + ( parseFloat ( matrix[4], 10 ) / this.step_width * this.options.step ) );
+
+      if ( !setted ) {
+
+        this._update_positions ();
+
+      }
+
+    },
+
+    /* CLICK */
+
+    _handler_click: function ( event ) {
+
+      if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
+
+      var click_pos = $.eventXY ( event ),
+        distance = this.modifier_x ( click_pos.X - this.unhighlighted_offset.left );
+
+      this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
+
+    },
+
+    /* PUBLIC */
+
+    get: function () {
+
+      return this.options.value;
+
+    },
+
+    set: function ( value ) {
+
+      value = _.clamp ( this.options.min, this._round_value ( value ), this.options.max );
+
+      if ( value !== this.options.value ) {
+
+        var callback = ( value > this.options.value ) ? 'increased' : 'decreased';
+
+        this.options.value = value;
+
+        this._update_positions ();
+        this._update_label ();
+
+        this.$input.val ( value ).trigger ( 'change' );
+
+        this._trigger ( callback );
+
+        return true;
+
+      } else {
+
+        return false;
+
+      }
+
+    },
+
+    increase: function () {
+
+      return this.set ( this.options.value + this.options.step );
+
+    },
+
+    decrease: function () {
+
+      return this.set ( this.options.value - this.options.step );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.slider').each ( function () {
+
+      var $slider = $(this),
+        options = {
+          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+          value: Number($slider.find ( 'input' ).val () || 0),
+          step: Number($slider.data ( 'step' ) || 1),
+          decimals: Number($slider.data ( 'decimals' ) || 0)
+        };
+
+      $slider.slider ( options );
 
     });
 
-    /* READY */
-
-    $(function () {
-
-        $('.slider').each ( function () {
-
-            var $slider = $(this),
-                options = {
-                    min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-                    max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-                    value: Number($slider.find ( 'input' ).val () || 0),
-                    step: Number($slider.data ( 'step' ) || 1),
-                    decimals: Number($slider.data ( 'decimals' ) || 0)
-                };
-
-            $slider.slider ( options );
-
-        });
-
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Sortable v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5607,207 +5535,205 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* SORTABLE */
+  /* SORTABLE */
 
-    $.widget ( 'presto.sortable', {
+  $.widget ( 'presto.sortable', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            sorters: {
-                int: function ( a, b ) {
-                    return parseInt ( a, 10 ) - parseInt ( b, 10 );
-                },
-                float: function ( a, b ) {
-                    return parseFloat ( a ) - parseFloat ( b );
-                },
-                string: function ( a, b ) {
-                    a = a.toLocaleLowerCase ();
-                    b = b.toLocaleLowerCase ();
-                    return a.localeCompare ( b );
-                }
-            },
-            callbacks: {
-                sort: _.noop
-            }
+    options: {
+      sorters: {
+        int: function ( a, b ) {
+          return parseInt ( a, 10 ) - parseInt ( b, 10 );
         },
-
-        /* SPECIAL */
-
-        _variables: function () {
-
-            this.$table = this.$element;
-            this.$headers = this.$table.find ( 'thead th' );
-            this.$sortables = this.$headers.filter ( '[data-sort]' );
-            this.$tbody = this.$table.find ( 'tbody' );
-
-            this.table = this.element;
-            this.tbody = this.$tbody.get ( 0 );
-
-            this.sort_datas = {}; //INFO: Caching object for datas and references to rows
-
-            this.current_index = false; //INFO: `$headers` index, not `$sortables` index
-            this.current_direction = false;;
-
+        float: function ( a, b ) {
+          return parseFloat ( a ) - parseFloat ( b );
         },
+        string: function ( a, b ) {
+          a = a.toLocaleLowerCase ();
+          b = b.toLocaleLowerCase ();
+          return a.localeCompare ( b );
+        }
+      },
+      callbacks: {
+        sort: _.noop
+      }
+    },
 
-        _init: function () {
+    /* SPECIAL */
 
-            var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
+    _variables: function () {
 
-            if ( $initial.length ) {
+      this.$table = this.$element;
+      this.$headers = this.$table.find ( 'thead th' );
+      this.$sortables = this.$headers.filter ( '[data-sort]' );
+      this.$tbody = this.$table.find ( 'tbody' );
 
-                this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( 'asc' ) ? 'asc' : 'desc' ) );
+      this.table = this.element;
+      this.tbody = this.$tbody.get ( 0 );
 
-            }
+      this.sort_datas = {}; //INFO: Caching object for datas and references to rows
 
-        },
+      this.current_index = false; //INFO: `$headers` index, not `$sortables` index
+      this.current_direction = false;;
 
-        _events: function () {
+    },
 
-            this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
+    _init: function () {
 
-            this._on ( this.$sortables, 'click', this._handler_click );
+      var $initial = this.$headers.filter ( '.asc, .desc' ).first ();
 
-        },
+      if ( $initial.length ) {
 
-        /* CHANGE */
+        this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( 'asc' ) ? 'asc' : 'desc' ) );
 
-        _handler_change: function () {
+      }
 
-            if ( this.current_index ) {
+    },
 
-                this.sort_datas = {};
+    _events: function () {
 
-                this.sort ( this.current_index, this.current_direction );
+      this._on ( true, 'change', this._handler_change ); //TODO: update to support tableHelper
 
-            }
+      this._on ( this.$sortables, 'click', this._handler_click );
 
-        },
+    },
 
-        /* CLICK */
+    /* CHANGE */
 
-        _handler_click: function ( event ) {
+    _handler_change: function () {
 
-            var new_index = this.$headers.index ( event.target ),
-                new_direction = this.current_index === new_index
-                                    ? this.current_direction === 'asc'
-                                        ? 'desc'
-                                        : 'asc'
-                                    : 'asc';
+      if ( this.current_index ) {
 
-            this.sort ( new_index, new_direction );
+        this.sort_datas = {};
 
-        },
+        this.sort ( this.current_index, this.current_direction );
 
-        /* SORT */
+      }
 
-        sort: function ( index, direction ) {
+    },
 
-            // VALIDATE
+    /* CLICK */
 
-            var $sortable = this.$headers.eq ( index );
+    _handler_click: function ( event ) {
 
-            if ( !$sortable.length ) return; // bad index
+      var new_index = this.$headers.index ( event.target ),
+        new_direction = this.current_index === new_index
+                  ? this.current_direction === 'asc'
+                    ? 'desc'
+                    : 'asc'
+                  : 'asc';
 
-            var sorter_name = $sortable.data ( 'sort' );
+      this.sort ( new_index, new_direction );
 
-            if ( !sorter_name ) return; // unsortable column
+    },
 
-            var sorter = this.options.sorters[sorter_name];
+    /* SORT */
 
-            if ( !sorter ) return; // unsupported sorter
+    sort: function ( index, direction ) {
 
-            direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
+      // VALIDATE
 
-            // STYLE
+      var $sortable = this.$headers.eq ( index );
 
-            if ( this.current_index !== false ) {
+      if ( !$sortable.length ) return; // bad index
 
-                this.$sortables.eq ( this.current_index ).removeClass ( this.current_direction );
+      var sorter_name = $sortable.data ( 'sort' );
 
-            }
+      if ( !sorter_name ) return; // unsortable column
 
-            $sortable.addClass ( direction );
+      var sorter = this.options.sorters[sorter_name];
 
-            // CHECKING CACHED DATAS
+      if ( !sorter ) return; // unsupported sorter
 
-            if ( _.isUndefined ( this.sort_datas[index] ) ) {
+      direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
 
-                // VARIABLES
+      // STYLE
 
-                var $trs = this.$tbody.find ( 'tr:not(.empty)' );
+      if ( this.current_index !== false ) {
 
-                this.sort_datas[index] = Array ( $trs.length );
+        this.$sortables.eq ( this.current_index ).removeClass ( this.current_direction );
 
-                // POPULATE
+      }
 
-                for ( var i = 0, l = $trs.length; i < l; i++ ) {
+      $sortable.addClass ( direction );
 
-                    var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
-                        value = $td.data ( 'sort-value' ) || $td.text ();
+      // CHECKING CACHED DATAS
 
-                    this.sort_datas[index][i] = [$trs.get ( i ), value];
+      if ( _.isUndefined ( this.sort_datas[index] ) ) {
 
-                }
+        // VARIABLES
 
-            }
+        var $trs = this.$tbody.find ( 'tr:not(.empty)' );
 
-            // SORT
+        this.sort_datas[index] = Array ( $trs.length );
 
-            this.sort_datas[index].sort ( function ( a, b ) {
+        // POPULATE
 
-                return sorter ( a[1], b[1] );
+        for ( var i = 0, l = $trs.length; i < l; i++ ) {
 
-            });
+          var $td = $trs.eq ( i ) .find ( 'td' ).eq ( index ),
+            value = $td.data ( 'sort-value' ) || $td.text ();
 
-            if ( direction === 'desc' ) this.sort_datas[index].reverse ();
-
-            // APPEND
-
-            this.table.removeChild ( this.tbody ); // detach
-
-            for ( var i = 0, l = this.sort_datas[index].length; i < l; i++ ) {
-
-                this.tbody.appendChild ( this.sort_datas[index][i][0] ); // reorder
-
-            }
-
-            this.table.appendChild ( this.tbody ); // attach
-
-            // UPDATE
-
-            this.current_index = index;
-            this.current_direction = direction;
-
-            // TRIGGER
-
-            this._trigger ( 'sort', {
-                index: this.current_index,
-                direction: this.current_direction
-            });
+          this.sort_datas[index][i] = [$trs.get ( i ), value];
 
         }
 
-    });
+      }
 
-    /* READY */
+      // SORT
 
-    $(function () {
+      this.sort_datas[index].sort ( function ( a, b ) {
 
-        $('table.sortable').sortable ();
+        return sorter ( a[1], b[1] );
 
-    });
+      });
+
+      if ( direction === 'desc' ) this.sort_datas[index].reverse ();
+
+      // APPEND
+
+      this.table.removeChild ( this.tbody ); // detach
+
+      for ( var i = 0, l = this.sort_datas[index].length; i < l; i++ ) {
+
+        this.tbody.appendChild ( this.sort_datas[index][i][0] ); // reorder
+
+      }
+
+      this.table.appendChild ( this.tbody ); // attach
+
+      // UPDATE
+
+      this.current_index = index;
+      this.current_direction = direction;
+
+      // TRIGGER
+
+      this._trigger ( 'sort', {
+        index: this.current_index,
+        direction: this.current_direction
+      });
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('table.sortable').sortable ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Stepper v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5817,174 +5743,172 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* STEPPER */
+  /* STEPPER */
 
-    $.widget ( 'presto.stepper', {
+  $.widget ( 'presto.stepper', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            min: 0,
-            max: 100,
-            value: 0,
-            step: 1,
-            decimals: 0,
-            callbacks: {
-                increase: _.noop,
-                decrease: _.noop
-            }
-        },
+    options: {
+      min: 0,
+      max: 100,
+      value: 0,
+      step: 1,
+      decimals: 0,
+      callbacks: {
+        increase: _.noop,
+        decrease: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$stepper = this.$element;
-            this.$input = this.$stepper.find ( 'input' );
-            this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
-            this.$increaser = this.$stepper.find ( '.stepper-increaser' );
+      this.$stepper = this.$element;
+      this.$input = this.$stepper.find ( 'input' );
+      this.$decreaser = this.$stepper.find ( '.stepper-decreaser' );
+      this.$increaser = this.$stepper.find ( '.stepper-increaser' );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* INPUT / CHANGE */
+      /* INPUT / CHANGE */
 
-            this._on ( true, this.$input, 'input change', this._handler_input_change );
+      this._on ( true, this.$input, 'input change', this._handler_input_change );
 
-            /* ARROWS */
+      /* ARROWS */
 
-            this._on ( 'mouseenter', this._handler_arrows_in );
-            this._on ( 'mouseleave', this._handler_arrows_out );
+      this._on ( 'mouseenter', this._handler_arrows_in );
+      this._on ( 'mouseleave', this._handler_arrows_out );
 
-            /* INCREASE / DECREASE */
+      /* INCREASE / DECREASE */
 
-            this._on ( this.$decreaser, 'click', this.decrease );
+      this._on ( this.$decreaser, 'click', this.decrease );
 
-            this._on ( this.$increaser, 'click', this.increase );
+      this._on ( this.$increaser, 'click', this.increase );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _round_value: function ( value ) {
+    _round_value: function ( value ) {
 
-            return Number(Number(value).toFixed ( this.options.decimals ));
+      return Number(Number(value).toFixed ( this.options.decimals ));
 
-        },
+    },
 
-        /* CHANGE */
+    /* CHANGE */
 
-        _handler_input_change: function () {
+    _handler_input_change: function () {
 
-            this.set_value ( this.$input.val () );
+      this.set_value ( this.$input.val () );
 
-        },
+    },
 
-        /* LEFT / RIGHT ARROWS */
+    /* LEFT / RIGHT ARROWS */
 
-        _handler_arrows_in: function ( event ) {
+    _handler_arrows_in: function ( event ) {
 
-            this._on ( $document, 'keydown', this._handler_arrows_keydown );
+      this._on ( $document, 'keydown', this._handler_arrows_keydown );
 
-        },
+    },
 
-        _handler_arrows_out: function ( event ) {
+    _handler_arrows_out: function ( event ) {
 
-            this._off ( $document, 'keydown', this._handler_arrows_keydown );
+      this._off ( $document, 'keydown', this._handler_arrows_keydown );
 
-        },
+    },
 
-        _handler_arrows_keydown: function ( event ) {
+    _handler_arrows_keydown: function ( event ) {
 
-            if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
+      if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
 
-                this.decrease ();
+        this.decrease ();
 
-            } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
+      } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
 
-                this.increase ();
+        this.increase ();
 
-            }
+      }
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        set_value: function ( value ) {
+    set_value: function ( value ) {
 
-            value = this._round_value ( value );
+      value = this._round_value ( value );
 
-            if ( value !== this.options.value || this.$input.val ().length === 0 ) {
+      if ( value !== this.options.value || this.$input.val ().length === 0 ) {
 
-                var clamped = _.clamp ( this.options.min, value, this.options.max );
+        var clamped = _.clamp ( this.options.min, value, this.options.max );
 
-                this.options.value = clamped;
+        this.options.value = clamped;
 
-                this.$input.val ( clamped ).trigger ( 'change' );
+        this.$input.val ( clamped ).trigger ( 'change' );
 
-                this.$decreaser.toggleClass ( 'disabled', clamped === this.options.min );
-                this.$increaser.toggleClass ( 'disabled', clamped === this.options.max );
+        this.$decreaser.toggleClass ( 'disabled', clamped === this.options.min );
+        this.$increaser.toggleClass ( 'disabled', clamped === this.options.max );
 
-                this._trigger ( clamped > this.options.value ? 'increase' : 'decrease' );
+        this._trigger ( clamped > this.options.value ? 'increase' : 'decrease' );
 
-            }
+      }
 
-        },
+    },
 
-        increase: function () {
+    increase: function () {
 
-            this.navigate ( this.options.step );
+      this.navigate ( this.options.step );
 
-        },
+    },
 
-        decrease: function () {
+    decrease: function () {
 
-            this.navigate ( - this.options.step );
+      this.navigate ( - this.options.step );
 
-        },
+    },
 
-        navigate: function ( modifier ) {
+    navigate: function ( modifier ) {
 
-            var new_value = this.options.value + modifier;
+      var new_value = this.options.value + modifier;
 
-            this.set_value ( new_value );
+      this.set_value ( new_value );
 
-        }
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.stepper').each ( function () {
+
+      var $stepper = $(this),
+        $input = $stepper.find ( 'input' ),
+        options = {
+          min: Number($stepper.data ( 'min' ) || 0),
+          max: Number($stepper.data ( 'max' ) || 100),
+          value: Number($input.val () || 0),
+          step: Number($stepper.data ( 'step' ) || 1),
+          decimals: Number($stepper.data ( 'decimals' ) || 0)
+        };
+
+      $stepper.stepper ( options );
 
     });
 
-    /* READY */
-
-    $(function () {
-
-        $('.stepper').each ( function () {
-
-            var $stepper = $(this),
-                $input = $stepper.find ( 'input' ),
-                options = {
-                    min: Number($stepper.data ( 'min' ) || 0),
-                    max: Number($stepper.data ( 'max' ) || 100),
-                    value: Number($input.val () || 0),
-                    step: Number($stepper.data ( 'step' ) || 1),
-                    decimals: Number($stepper.data ( 'decimals' ) || 0)
-                };
-
-            $stepper.stepper ( options );
-
-        });
-
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Switch v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5995,229 +5919,227 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* SWITCH */
+  /* SWITCH */
 
-    $.widget ( 'presto.switch', {
+  $.widget ( 'presto.switch', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            colors: {
-                on: 'secondary',
-                off: 'gray'
-            },
-            callbacks: {
-                checked: _.noop,
-                unchecked: _.noop
-            }
+    options: {
+      colors: {
+        on: 'secondary',
+        off: 'gray'
+      },
+      callbacks: {
+        checked: _.noop,
+        unchecked: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$switch = this.$element;
+      this.$input = this.$switch.find ( 'input' );
+      this.$bar_wrp = this.$switch.find ( '.switch-bar-wrp' );
+      this.$bar = this.$switch.find ( '.switch-bar' );
+      this.$handler = this.$switch.find ( '.switch-handler' );
+      this.$icon = this.$handler.find ( '.icon' );
+
+      this.checked = this.$input.prop ( 'checked' );
+      this.dragging = false;
+
+    },
+
+    _init: function () {
+
+      this._set_check ( this.checked, true );
+
+    },
+
+    _events: function () {
+
+      /* CHANGE */
+
+      this._on ( true, this.$input, 'change', this._handler_change );
+
+      /* KEYS */
+
+      this._on ( 'mouseenter', this._handler_keys_in );
+      this._on ( 'mouseleave', this._handler_keys_out );
+
+      /* CLICK */
+
+      this._on ( this.$bar, 'click', this._handler_click );
+
+      /* DRAG */
+
+      this.$handler.draggable ({
+        axis: 'x',
+        constrainer: {
+          $element: this.$bar_wrp
         },
-
-        /* SPECIAL */
-
-        _variables: function () {
-
-            this.$switch = this.$element;
-            this.$input = this.$switch.find ( 'input' );
-            this.$bar_wrp = this.$switch.find ( '.switch-bar-wrp' );
-            this.$bar = this.$switch.find ( '.switch-bar' );
-            this.$handler = this.$switch.find ( '.switch-handler' );
-            this.$icon = this.$handler.find ( '.icon' );
-
-            this.checked = this.$input.prop ( 'checked' );
-            this.dragging = false;
-
-        },
-
-        _init: function () {
-
-            this._set_check ( this.checked, true );
-
-        },
-
-        _events: function () {
-
-            /* CHANGE */
-
-            this._on ( true, this.$input, 'change', this._handler_change );
-
-            /* KEYS */
-
-            this._on ( 'mouseenter', this._handler_keys_in );
-            this._on ( 'mouseleave', this._handler_keys_out );
-
-            /* CLICK */
-
-            this._on ( this.$bar, 'click', this._handler_click );
-
-            /* DRAG */
-
-            this.$handler.draggable ({
-                axis: 'x',
-                constrainer: {
-                    $element: this.$bar_wrp
-                },
-                callbacks: {
-                    end: this._handler_drag_end.bind ( this )
-                }
-            });
-
-        },
-
-        /* CHANGE */
-
-        _handler_change: function () {
-
-            var new_checked = this.$input.prop ( 'checked' );
-
-            if ( this.checked !== new_checked ) {
-
-                this.checked = new_checked;
-
-                this._set_check ( this.checked, true );
-
-            }
-
-        },
-
-        /* KEYS */
-
-        _handler_keys_in: function () {
-
-            this._on ( $document, 'keydown', this._handler_keys_keydown );
-
-        },
-
-        _handler_keys_out: function () {
-
-            this._off ( $document, 'keydown', this._handler_keys_keydown );
-
-        },
-
-        _handler_keys_keydown: function ( event ) {
-
-            if ( event.keyCode === $.ui.keyCode.LEFT ) {
-
-                this.uncheck ();
-
-            } else if ( event.keyCode === $.ui.keyCode.RIGHT ) {
-
-                this.check ();
-
-            } else if ( event.keyCode === $.ui.keyCode.SPACE ) {
-
-                this.toggle ();
-
-            }
-
-        },
-
-        /* CLICK */
-
-        _handler_click: function () {
-
-            if ( this.dragging ) {
-
-                this.dragging = false;
-                return;
-
-            }
-
-            this.toggle ();
-
-        },
-
-        /* DRAG */
-
-        _handler_drag_end: function ( data ) {
-
-            if ( data.dragged ) {
-
-                this.dragging = true;
-
-                var checked = ( this.$handler.offset ().left - this.$bar_wrp.offset ().left + ( this.$handler.width () / 2 ) ) >= ( this.$bar_wrp.width () / 2 );
-
-                this.checked = ( checked ) ? true : false;
-
-                this._set_check ( this.checked, true );
-
-            }
-
-        },
-
-        _set_check: function ( checked, force ) {
-
-            if ( checked !== this.$input.prop ( 'checked' ) || force ) {
-
-                this.$switch.toggleClass ( 'checked', checked );
-
-                this.$handler.css ( 'transform', 'translate3d(' + ( checked ? '1.73333em' : '0' ) + ',0,0)' );
-
-                this.$bar.toggleClass ( this.options.colors.on, checked );
-                this.$handler.toggleClass ( this.options.colors.on, checked );
-
-                this.$bar.toggleClass ( this.options.colors.off, !checked );
-                this.$handler.toggleClass ( this.options.colors.off, !checked );
-
-                this.$input.prop ( 'checked', checked ).trigger ( 'change' );
-
-                this._trigger ( checked ? 'checked' : 'unchecked' );
-
-            }
-
-        },
-
-        /* PUBLIC */
-
-        check: function () {
-
-            this._set_check ( true );
-
-        },
-
-        uncheck: function () {
-
-            this._set_check ( false );
-
-        },
-
-        toggle: function () {
-
-            this.checked = !this.checked;
-            this._set_check ( this.checked );
-
+        callbacks: {
+          end: this._handler_drag_end.bind ( this )
         }
+      });
+
+    },
+
+    /* CHANGE */
+
+    _handler_change: function () {
+
+      var new_checked = this.$input.prop ( 'checked' );
+
+      if ( this.checked !== new_checked ) {
+
+        this.checked = new_checked;
+
+        this._set_check ( this.checked, true );
+
+      }
+
+    },
+
+    /* KEYS */
+
+    _handler_keys_in: function () {
+
+      this._on ( $document, 'keydown', this._handler_keys_keydown );
+
+    },
+
+    _handler_keys_out: function () {
+
+      this._off ( $document, 'keydown', this._handler_keys_keydown );
+
+    },
+
+    _handler_keys_keydown: function ( event ) {
+
+      if ( event.keyCode === $.ui.keyCode.LEFT ) {
+
+        this.uncheck ();
+
+      } else if ( event.keyCode === $.ui.keyCode.RIGHT ) {
+
+        this.check ();
+
+      } else if ( event.keyCode === $.ui.keyCode.SPACE ) {
+
+        this.toggle ();
+
+      }
+
+    },
+
+    /* CLICK */
+
+    _handler_click: function () {
+
+      if ( this.dragging ) {
+
+        this.dragging = false;
+        return;
+
+      }
+
+      this.toggle ();
+
+    },
+
+    /* DRAG */
+
+    _handler_drag_end: function ( data ) {
+
+      if ( data.dragged ) {
+
+        this.dragging = true;
+
+        var checked = ( this.$handler.offset ().left - this.$bar_wrp.offset ().left + ( this.$handler.width () / 2 ) ) >= ( this.$bar_wrp.width () / 2 );
+
+        this.checked = ( checked ) ? true : false;
+
+        this._set_check ( this.checked, true );
+
+      }
+
+    },
+
+    _set_check: function ( checked, force ) {
+
+      if ( checked !== this.$input.prop ( 'checked' ) || force ) {
+
+        this.$switch.toggleClass ( 'checked', checked );
+
+        this.$handler.css ( 'transform', 'translate3d(' + ( checked ? '1.73333em' : '0' ) + ',0,0)' );
+
+        this.$bar.toggleClass ( this.options.colors.on, checked );
+        this.$handler.toggleClass ( this.options.colors.on, checked );
+
+        this.$bar.toggleClass ( this.options.colors.off, !checked );
+        this.$handler.toggleClass ( this.options.colors.off, !checked );
+
+        this.$input.prop ( 'checked', checked ).trigger ( 'change' );
+
+        this._trigger ( checked ? 'checked' : 'unchecked' );
+
+      }
+
+    },
+
+    /* PUBLIC */
+
+    check: function () {
+
+      this._set_check ( true );
+
+    },
+
+    uncheck: function () {
+
+      this._set_check ( false );
+
+    },
+
+    toggle: function () {
+
+      this.checked = !this.checked;
+      this._set_check ( this.checked );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.switch').each ( function () {
+
+      var $switch = $(this),
+        options = {
+          colors: {
+            on: $switch.data ( 'color-on' ) || 'secondary',
+            off: $switch.data ( 'color-off' ) || 'gray'
+          }
+        };
+
+      $switch.switch ( options );
 
     });
 
-    /* READY */
-
-    $(function () {
-
-        $('.switch').each ( function () {
-
-            var $switch = $(this),
-                options = {
-                    colors: {
-                        on: $switch.data ( 'color-on' ) || 'secondary',
-                        off: $switch.data ( 'color-off' ) || 'gray'
-                    }
-                };
-
-            $switch.switch ( options );
-
-        });
-
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Table Helper v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6227,212 +6149,210 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TABLE HELPER */
+  /* TABLE HELPER */
 
-    $.widget ( 'presto.tableHelper', {
+  $.widget ( 'presto.tableHelper', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {
-                add: _.noop,
-                update: _.noop,
-                remove: _.noop,
-                clear: _.noop
-            }
-        },
+    options: {
+      callbacks: {
+        add: _.noop,
+        update: _.noop,
+        remove: _.noop,
+        clear: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$table = this.$element;
-            this.$thead = this.$table.find ( 'thead' ),
-            this.$tfoot = this.$table.find ( 'tfoot' ),
-            this.$tbody = this.$table.find ( 'tbody' ),
-            this.$headers = this.$thead.find ( 'th' ),
-            this.$empty_row = this.$tbody.find ( 'tr.empty' ),
-            this.columns_nr = this.$headers.length;
+      this.$table = this.$element;
+      this.$thead = this.$table.find ( 'thead' ),
+      this.$tfoot = this.$table.find ( 'tfoot' ),
+      this.$tbody = this.$table.find ( 'tbody' ),
+      this.$headers = this.$thead.find ( 'th' ),
+      this.$empty_row = this.$tbody.find ( 'tr.empty' ),
+      this.columns_nr = this.$headers.length;
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this._check_empty ();
+      this._check_empty ();
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _check_empty: function () {
+    _check_empty: function () {
 
-            this.$empty_row.toggleClass ( 'hidden', this.$tbody.find ( 'tr:not(.empty)' ).length > 0 );
+      this.$empty_row.toggleClass ( 'hidden', this.$tbody.find ( 'tr:not(.empty)' ).length > 0 );
 
-        },
+    },
 
-        _get_row_id: function ( id ) {
+    _get_row_id: function ( id ) {
 
-            return 'rid_' + this.uuid + '_' + id;
+      return 'rid_' + this.uuid + '_' + id;
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        add: function ( id ) { //INFO: id, datas...
+    add: function ( id ) { //INFO: id, datas...
 
-            var datas = _.tail ( arguments );
+      var datas = _.tail ( arguments );
 
-            if ( datas.length ) {
+      if ( datas.length ) {
 
-                var $fillables = this.$tbody.find ( 'td.fillable' );
+        var $fillables = this.$tbody.find ( 'td.fillable' );
 
-                if ( $fillables.length ) {
+        if ( $fillables.length ) {
 
-                    var datas_fillable = _.slice ( datas, 0, $fillables.length );
+          var datas_fillable = _.slice ( datas, 0, $fillables.length );
 
-                    datas = _.slice ( datas, datas_fillable.length - 1, datas.length );
+          datas = _.slice ( datas, datas_fillable.length - 1, datas.length );
 
-                    for ( var i = 0, l = datas_fillable.length; i < l; i++ ) {
+          for ( var i = 0, l = datas_fillable.length; i < l; i++ ) {
 
-                        $fillables.eq ( i ).html ( datas_fillable[i] ).removeClass ( 'fillable' );
+            $fillables.eq ( i ).html ( datas_fillable[i] ).removeClass ( 'fillable' );
 
-                    }
-
-                }
-
-                if ( id && $( '.' + this._get_row_id ( id ) ).length ) {
-
-                    $.noty ( 'A table cannot contain 2 rows with the same ID' );
-                    return this;
-
-                };
-
-                var chunks = _.chunk ( datas, this.columns_nr );
-
-                for ( var ci = 0, cl = chunks.length; ci < cl; ci++ ) {
-
-                    var chunk = chunks[ci];
-
-                    var row_html = '<tr ' + ( id ? 'class="' + this._get_row_id ( id ) + '"' : '' ) + '>';
-
-                    for ( var i = 0, l = chunk.length; i < l; i++ ) {
-
-                        row_html += '<td>' + ( chunk[i] || '' ) + '</td>';
-
-                    }
-
-                    for ( var i = chunk.length, l = this.columns_nr; i < l; i++ ) {
-
-                        row_html += '<td class="fillable"></td>';
-
-                    }
-
-                    row_html += '</tr>';
-
-                    this.$tbody.append ( row_html );
-
-                }
-
-                this._check_empty ();
-
-                this.$table.trigger ( 'change' );
-
-                this._trigger ( 'add' );
-
-            }
-
-            return this;
-
-        },
-
-        update: function ( id ) { //INFO: id, datas...
-
-            var datas = _.tail ( arguments ),
-                $row = $( '.' + this._get_row_id ( id ) );
-
-            if ( datas.length && $row.length ) {
-
-                var $tds = $row.find ( 'td' );
-
-                _.each ( datas, function ( data, index ) {
-
-                    if ( _.isString ( data ) ) {
-
-                        $tds.eq ( index ).html ( data );
-
-                    }
-
-                });
-
-                this.$table.trigger ( 'change' );
-
-                this._trigger ( 'update' );
-
-            }
-
-            return this;
-
-        },
-
-        remove: function ( id ) {
-
-            var $row = $( '.' + this._get_row_id ( id ) );
-
-            if ( $row.length ) {
-
-                $row.remove ();
-
-                this._check_empty ();
-
-                this.$table.trigger ( 'change' );
-
-                this._trigger ( 'remove' );
-
-            }
-
-            return this;
-
-        },
-
-        clear: function () {
-
-            var $rows = this.$tbody.find ( 'tr:not(.empty)' );
-
-            if ( $rows.length ) {
-
-                $rows.remove ();
-
-                this._check_empty ();
-
-                this.$table.trigger ( 'change' );
-
-                this._trigger ( 'clear' );
-
-            }
-
-            return this;
+          }
 
         }
 
-    });
+        if ( id && $( '.' + this._get_row_id ( id ) ).length ) {
 
-    /* READY */
+          $.noty ( 'A table cannot contain 2 rows with the same ID' );
+          return this;
 
-    $(function () {
+        };
 
-        $('table').tableHelper ();
+        var chunks = _.chunk ( datas, this.columns_nr );
 
-    });
+        for ( var ci = 0, cl = chunks.length; ci < cl; ci++ ) {
+
+          var chunk = chunks[ci];
+
+          var row_html = '<tr ' + ( id ? 'class="' + this._get_row_id ( id ) + '"' : '' ) + '>';
+
+          for ( var i = 0, l = chunk.length; i < l; i++ ) {
+
+            row_html += '<td>' + ( chunk[i] || '' ) + '</td>';
+
+          }
+
+          for ( var i = chunk.length, l = this.columns_nr; i < l; i++ ) {
+
+            row_html += '<td class="fillable"></td>';
+
+          }
+
+          row_html += '</tr>';
+
+          this.$tbody.append ( row_html );
+
+        }
+
+        this._check_empty ();
+
+        this.$table.trigger ( 'change' );
+
+        this._trigger ( 'add' );
+
+      }
+
+      return this;
+
+    },
+
+    update: function ( id ) { //INFO: id, datas...
+
+      var datas = _.tail ( arguments ),
+        $row = $( '.' + this._get_row_id ( id ) );
+
+      if ( datas.length && $row.length ) {
+
+        var $tds = $row.find ( 'td' );
+
+        _.each ( datas, function ( data, index ) {
+
+          if ( _.isString ( data ) ) {
+
+            $tds.eq ( index ).html ( data );
+
+          }
+
+        });
+
+        this.$table.trigger ( 'change' );
+
+        this._trigger ( 'update' );
+
+      }
+
+      return this;
+
+    },
+
+    remove: function ( id ) {
+
+      var $row = $( '.' + this._get_row_id ( id ) );
+
+      if ( $row.length ) {
+
+        $row.remove ();
+
+        this._check_empty ();
+
+        this.$table.trigger ( 'change' );
+
+        this._trigger ( 'remove' );
+
+      }
+
+      return this;
+
+    },
+
+    clear: function () {
+
+      var $rows = this.$tbody.find ( 'tr:not(.empty)' );
+
+      if ( $rows.length ) {
+
+        $rows.remove ();
+
+        this._check_empty ();
+
+        this.$table.trigger ( 'change' );
+
+        this._trigger ( 'clear' );
+
+      }
+
+      return this;
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('table').tableHelper ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tabs v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6445,169 +6365,167 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TABS */
+  /* TABS */
 
-    $.widget ( 'presto.tabs', {
+  $.widget ( 'presto.tabs', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            selectors: {
-                buttons_wrp: '.tabs-buttons',
-                buttons: '.button-wrp > .label',
-                button_active_class: 'active',
-                indicator: '.tabs-buttons-indicator',
-                containers_wrp: '.tabs-containers',
-                containers: '> .container',
-                container_active_class: 'active'
-            },
-            indicator_delay: 40,
-            callbacks: {
-                select: _.noop
-            }
-        },
+    options: {
+      selectors: {
+        buttons_wrp: '.tabs-buttons',
+        buttons: '.button-wrp > .label',
+        button_active_class: 'active',
+        indicator: '.tabs-buttons-indicator',
+        containers_wrp: '.tabs-containers',
+        containers: '> .container',
+        container_active_class: 'active'
+      },
+      indicator_delay: 40,
+      callbacks: {
+        select: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$tabs = this.$element;
+      this.$tabs = this.$element;
 
-            this.isVertical = this.$tabs.hasClass ( 'vertical' );
+      this.isVertical = this.$tabs.hasClass ( 'vertical' );
 
-            this.$tabs_buttons = this.$tabs.find ( this.options.selectors.buttons_wrp );
-            this.$buttons = this.$tabs_buttons.find ( this.options.selectors.buttons );
-            this.$indicator = this.$tabs.find ( this.options.selectors.indicator );
+      this.$tabs_buttons = this.$tabs.find ( this.options.selectors.buttons_wrp );
+      this.$buttons = this.$tabs_buttons.find ( this.options.selectors.buttons );
+      this.$indicator = this.$tabs.find ( this.options.selectors.indicator );
 
-            this.$tabs_containers = this.$tabs.find ( this.options.selectors.containers_wrp );
-            this.$containers = this.$tabs_containers.find ( this.options.selectors.containers );
+      this.$tabs_containers = this.$tabs.find ( this.options.selectors.containers_wrp );
+      this.$containers = this.$tabs_containers.find ( this.options.selectors.containers );
 
-            var $current_button = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ).first ();
+      var $current_button = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ).first ();
 
-            $current_button = ( $current_button.length > 0 ) ? $current_button : this.$buttons.first ();
+      $current_button = ( $current_button.length > 0 ) ? $current_button : this.$buttons.first ();
 
-            this.prev_index = 0;
-            this.current_index = this.$buttons.index ( $current_button );
+      this.prev_index = 0;
+      this.current_index = this.$buttons.index ( $current_button );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this.select ( this.current_index, true );
+      this.select ( this.current_index, true );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            this._on ( this.$tabs_buttons, 'click', this.options.selectors.buttons, this._hander_button_click );
+      this._on ( this.$tabs_buttons, 'click', this.options.selectors.buttons, this._hander_button_click );
 
-            this._on ( $window, 'resize', this._positionate_indicator ); //TODO: throttle or devounce it
+      this._on ( $window, 'resize', this._positionate_indicator ); //TODO: throttle or devounce it
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _hander_button_click: function ( event, node ) {
+    _hander_button_click: function ( event, node ) {
 
-            var new_index = this.$buttons.index ( $(node) );
+      var new_index = this.$buttons.index ( $(node) );
 
-            this.select ( new_index );
+      this.select ( new_index );
 
-        },
+    },
 
-        _positionate_indicator: function () {
+    _positionate_indicator: function () {
 
-            var $active = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ),
-                position = $active.position ();
+      var $active = this.$buttons.filter ( '.' + this.options.selectors.button_active_class ),
+        position = $active.position ();
 
-            if ( this.isVertical ) {
+      if ( this.isVertical ) {
 
-                var total_height = this.$tabs_buttons.height ();
+        var total_height = this.$tabs_buttons.height ();
 
-                this._delay ( function () {
+        this._delay ( function () {
 
-                    var top = position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
+          var top = position.top + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
 
-                    this.$indicator.css ( 'top', ( top * 100 / total_height ) + '%' );
+          this.$indicator.css ( 'top', ( top * 100 / total_height ) + '%' );
 
-                }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
+        }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
-                this._delay ( function () {
+        this._delay ( function () {
 
-                    var bottom = total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
+          var bottom = total_height - position.top - $active.height () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
 
-                    this.$indicator.css ( 'bottom', ( bottom * 100 / total_height ) + '%' );
+          this.$indicator.css ( 'bottom', ( bottom * 100 / total_height ) + '%' );
 
-                }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
+        }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
 
-            } else {
+      } else {
 
-                var total_width = this.$tabs_buttons.width ();
+        var total_width = this.$tabs_buttons.width ();
 
-                this._delay ( function () {
+        this._delay ( function () {
 
-                    var left = position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
+          var left = position.left + ( this.$buttons.index ( $active ) === 0 ? 1 : 0 ); //FIXME: it's hacky
 
-                    this.$indicator.css ( 'left', ( left * 100 / total_width ) + '%' );
+          this.$indicator.css ( 'left', ( left * 100 / total_width ) + '%' );
 
-                }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
+        }, this.current_index > this.prev_index ? this.options.indicator_delay : 0 );
 
-                this._delay ( function () {
+        this._delay ( function () {
 
-                    var right = total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
+          var right = total_width - position.left - $active.width () + ( this.$buttons.index ( $active ) === this.$buttons.length - 1 ? 1 : 0 ); //FIXME: it's hacky
 
-                    this.$indicator.css ( 'right', ( right * 100 / total_width ) + '%' );
+          this.$indicator.css ( 'right', ( right * 100 / total_width ) + '%' );
 
-                }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
+        }, this.current_index > this.prev_index ? 0 : this.options.indicator_delay );
 
-            }
+      }
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        select: function ( index, force ) {
+    select: function ( index, force ) {
 
-            if ( this.current_index !== index || force ) {
+      if ( this.current_index !== index || force ) {
 
-                this.$buttons.eq ( this.current_index ).removeClass ( this.options.selectors.button_active_class );
-                this.$buttons.eq ( index ).addClass ( this.options.selectors.button_active_class );
+        this.$buttons.eq ( this.current_index ).removeClass ( this.options.selectors.button_active_class );
+        this.$buttons.eq ( index ).addClass ( this.options.selectors.button_active_class );
 
-                this.$containers.eq ( this.current_index ).removeClass ( this.options.selectors.container_active_class );
-                this.$containers.eq ( index ).addClass ( this.options.selectors.container_active_class );
+        this.$containers.eq ( this.current_index ).removeClass ( this.options.selectors.container_active_class );
+        this.$containers.eq ( index ).addClass ( this.options.selectors.container_active_class );
 
-                if ( this.current_index !== index ) {
+        if ( this.current_index !== index ) {
 
-                    this.prev_index = this.current_index;
-                    this.current_index = index;
-
-                }
-
-                this._positionate_indicator ();
-
-            }
+          this.prev_index = this.current_index;
+          this.current_index = index;
 
         }
 
-    });
+        this._positionate_indicator ();
 
-    /* READY */
+      }
 
-    $(function () {
+    }
 
-        $('.tabs').tabs ();
+  });
 
-    });
+  /* READY */
+
+  $(function () {
+
+    $('.tabs').tabs ();
+
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tagbox v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6622,427 +6540,425 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TAGBOX */
+  /* TAGBOX */
 
-    $.widget ( 'presto.tagbox', {
+  $.widget ( 'presto.tagbox', {
 
-        /* TEMPLATES */
+    /* TEMPLATES */
 
-        templates: {
-            tag: '<div class="multiple-wrp joined tagbox-tag" data-tag-value="{%=o.str%}">' +
-                     '<div class="multiple">' +
-                         '<div class="label-wrp">' +
-                             '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                                 '<div class="label-center">' +
-                                     '{%=o.str%}' +
-                                     '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
-                                 '</div>' +
-                             '</div>' +
-                         '</div>' +
-                     '</div>' +
-                 '</div>'
-        },
+    templates: {
+      tag: '<div class="multiple-wrp joined tagbox-tag" data-tag-value="{%=o.str%}">' +
+           '<div class="multiple">' +
+             '<div class="label-wrp">' +
+               '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                 '<div class="label-center">' +
+                   '{%=o.str%}' +
+                   '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
+                 '</div>' +
+               '</div>' +
+             '</div>' +
+           '</div>' +
+         '</div>'
+    },
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            tags: {
-                init: '',
-                str: '',
-                arr: []
-            },
-            tag: {
-                min_length: 3,
-                color: '',
-                size: 'medium',
-                css: 'outlined'
-            },
-            characters: {
-                forbidden: [ '<', '>', ';', '`' ], //FIXME: add tab, enter, and all the other specials
-                separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-                inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //TODO: write them as string, so they are easier to edit and that's the format that the user expects
-            },
-            sort: false, //INFO: The tags are displayed in sorted order
-            escape: true, //INFO: Escape potential XSS characters
-            deburr: false, //INFO: Replace non latin basic letters
-            callbacks: {
-                update: _.noop,
-                add: _.noop,
-                remove: _.noop
-            }
-        },
+    options: {
+      tags: {
+        init: '',
+        str: '',
+        arr: []
+      },
+      tag: {
+        min_length: 3,
+        color: '',
+        size: 'medium',
+        css: 'outlined'
+      },
+      characters: {
+        forbidden: [ '<', '>', ';', '`' ], //FIXME: add tab, enter, and all the other specials
+        separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
+        inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //TODO: write them as string, so they are easier to edit and that's the format that the user expects
+      },
+      sort: false, //INFO: The tags are displayed in sorted order
+      escape: true, //INFO: Escape potential XSS characters
+      deburr: false, //INFO: Replace non latin basic letters
+      callbacks: {
+        update: _.noop,
+        add: _.noop,
+        remove: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$tagbox = this.$element;
+      this.$tagbox = this.$element;
 
-            var $inputs = this.$tagbox.find ( 'input' );
+      var $inputs = this.$tagbox.find ( 'input' );
 
-            this.$input = $inputs.eq ( 0 );
-            this.$partial = $inputs.eq ( 1 );
-            this.partial = this.$partial.get ( 0 );
+      this.$input = $inputs.eq ( 0 );
+      this.$partial = $inputs.eq ( 1 );
+      this.partial = this.$partial.get ( 0 );
 
-            this.$partial_wrp = this.$partial.parent ( '.input-wrp' );
+      this.$partial_wrp = this.$partial.parent ( '.input-wrp' );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this.add ( this.options.tags.init );
+      this.add ( this.options.tags.init );
 
-        },
+    },
 
-        _events: function () {
+    _events: function () {
 
-            /* PARTIAL */
+      /* PARTIAL */
 
-            this._on ( this.$partial, 'keypress keydown', this._handler_keypress_keydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
+      this._on ( this.$partial, 'keypress keydown', this._handler_keypress_keydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
 
-            this._on ( this.$partial, 'paste', this._handler_paste );
+      this._on ( this.$partial, 'paste', this._handler_paste );
 
-            /* ON EMPTY */
+      /* ON EMPTY */
 
-            this._on ( 'click', this._handler_click_on_empty );
+      this._on ( 'click', this._handler_click_on_empty );
 
-            /* TAG */
+      /* TAG */
 
-            this._on ( 'click', '.tagbox-tag-remover', this._handler_click_on_tag_remover );
+      this._on ( 'click', '.tagbox-tag-remover', this._handler_click_on_tag_remover );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _get_tag_html: function ( tag_str ) {
+    _get_tag_html: function ( tag_str ) {
 
-            return this._tmpl ( 'tag', _.merge ( { str: tag_str }, this.options.tag ) );
+      return this._tmpl ( 'tag', _.merge ( { str: tag_str }, this.options.tag ) );
 
-        },
+    },
 
-        _update_tags_str: function () {
+    _update_tags_str: function () {
 
-            this.options.tags.str = this.options.tags.arr.join ( this.options.characters.separator );
+      this.options.tags.str = this.options.tags.arr.join ( this.options.characters.separator );
 
-        },
+    },
 
-        _sanitize_tag_str: function ( tag_str ) {
+    _sanitize_tag_str: function ( tag_str ) {
 
-            tag_str = _.trim ( tag_str );
+      tag_str = _.trim ( tag_str );
 
-            if ( this.options.escape ) {
+      if ( this.options.escape ) {
 
-                tag_str = _.escape ( tag_str );
+        tag_str = _.escape ( tag_str );
 
-            }
+      }
 
-            if ( this.options.deburr ) {
+      if ( this.options.deburr ) {
 
-                tag_str = _.deburr ( tag_str );
+        tag_str = _.deburr ( tag_str );
 
-            }
+      }
 
-            return tag_str;
+      return tag_str;
 
-        },
+    },
 
-        _update_input: function () {
+    _update_input: function () {
 
-            this.$input.val ( this.options.tags.str ).trigger ( 'change' );
+      this.$input.val ( this.options.tags.str ).trigger ( 'change' );
 
-        },
+    },
 
-        _clear_partial: function () {
+    _clear_partial: function () {
 
-            this.$partial.val ( '' ).trigger ( 'change' );
+      this.$partial.val ( '' ).trigger ( 'change' );
 
-        },
+    },
 
-        /* TAG */
+    /* TAG */
 
-        _partial_add_tag: function ( tag_str ) {
+    _partial_add_tag: function ( tag_str ) {
 
-            var tag_str_trimmed = _.trim ( tag_str ),
-                tag_str = this._sanitize_tag_str ( tag_str );
+      var tag_str_trimmed = _.trim ( tag_str ),
+        tag_str = this._sanitize_tag_str ( tag_str );
 
-            if ( tag_str_trimmed.length < this.options.tag.min_length ) {
+      if ( tag_str_trimmed.length < this.options.tag.min_length ) {
 
-                if ( tag_str_trimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
+        if ( tag_str_trimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
 
-                    $.noty ( '`' + tag_str + '` is shorter than ' + this.options.tag.min_length + ' characters' );
-
-                }
-
-            } else if ( _.contains ( this.options.tags.arr, tag_str ) ) {
-
-                $.noty ( '`' + tag_str + '` is a duplicate' );
-
-            } else {
-
-                this.options.tags.arr.push ( tag_str );
-
-                if ( this.options.sort ) {
-
-                    this.options.tags.arr.sort ();
-
-                }
-
-                var tag_html = this._get_tag_html ( tag_str );
-
-                if ( this.options.tags.arr.length === 1 || !this.options.sort ) {
-
-                    this.$partial_wrp.before ( tag_html );
-
-                } else {
-
-                    var index = this.options.tags.arr.indexOf ( tag_str );
-
-                    if ( index === 0 ) {
-
-                        this.$tagbox.find ( '.tagbox-tag' ).first ().before ( tag_html );
-
-                    } else {
-
-                        this.$tagbox.find ( '.tagbox-tag' ).eq ( index - 1 ).after ( tag_html );
-
-                    }
-
-                }
-
-                return true;
-
-            }
-
-            return false;
-
-        },
-
-        _partial_remove_tag: function ( $tag, tag_str ) {
-
-            $tag.remove ();
-
-            _.pull ( this.options.tags.arr, tag_str );
-
-        },
-
-        /* KEYPRESS */
-
-        _handler_keypress_keydown: function ( event ) {
-
-            var tag_str = this.$partial.val ();
-
-            if ( _.contains ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
-
-                var added = this.add ( tag_str );
-
-                if ( added ) {
-
-                    this._clear_partial ();
-
-                }
-
-                event.preventDefault ();
-
-            } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
-
-                if ( tag_str.length === 0 && this.options.tags.arr.length > 0 ) {
-
-                    var $tag = this.$tagbox.find ( '.tagbox-tag' ).last (),
-                        edit = !( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
-
-                    this.remove ( $tag, edit );
-
-                    event.preventDefault ();
-
-                }
-
-            } else if ( _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
-
-                $.noty ( 'The character you entered is forbidden' );
-
-                event.preventDefault ();
-
-            }
-
-        },
-
-        /* PASTE */
-
-        _handler_paste: function ( event ) {
-
-            this._delay ( function () { //FIXME: is it necessary?
-
-                this.add ( this.$partial.val () );
-
-                this._clear_partial ();
-
-            });
-
-        },
-
-        /* CLICK ON CLOSE */
-
-        _handler_click_on_tag_remover: function ( event, tag_remover ) {
-
-            var $tag = $(tag_remover).parents ( '.tagbox-tag' );
-
-            this.remove ( $tag );
-
-        },
-
-        /* CLICK ON EMPTY */
-
-        _handler_click_on_empty: function ( event ) {
-
-            if ( document.activeElement !== this.partial && !$(event.target).is ( 'input, .tagbox-tag-label' ) ) {
-
-                this.$partial.focus ();
-
-            }
-
-        },
-
-        /* PUBLIC */
-
-        get: function () {
-
-            return this.options.tags.str;
-
-        },
-
-        add: function ( tags_str ) {
-
-            var tags = tags_str.split ( this.options.characters.separator ),
-                adds = [];
-
-            for ( var i = 0, l = tags.length; i < l; i++ ) {
-
-                adds.push ( this._partial_add_tag ( tags[i] ) );
-
-            }
-
-            var added = ( _.compact ( adds ).length > 0 );
-
-            if ( added ) {
-
-                this._update_tags_str ();
-                this._update_input ();
-
-            }
-
-            return added;
-
-        },
-
-        remove: function ( tags_str, edit ) {
-
-            if ( tags_str instanceof jQuery ) {
-
-                var tags_obj = [tags_str],
-                    tags = [tags_str.data ( 'tag-value' )];
-
-            } else {
-
-                var tags_obj = [],
-                    tags = [];
-
-                tags_str = tags_str.split ( this.options.characters.separator );
-
-                for ( var i = 0, l = tags_str.length; i < l; i++ ) {
-
-                    var tag_str = this._sanitize_tag_str ( tags_str[i] ),
-                        $tag = this.$tagbox.find ( '.tagbox-tag[data-tag-value="' + tag_str + '"]');
-
-                    if ( $tag.length ) {
-
-                        tags_obj.push ( $tag );
-                        tags.push ( tag_str );
-
-                    }
-
-                }
-
-            }
-
-            if ( tags_obj.length ) {
-
-                for ( var i = 0, l = tags_obj.length; i < l; i++ ) {
-
-                    this._partial_remove_tag ( tags_obj[i], tags[i] );
-
-                }
-
-                this._update_tags_str ();
-                this._update_input ();
-
-                if ( l === 1 && edit === true ) {
-
-                    this.$partial.val ( tags[0] ).trigger ( 'change' );
-
-                }
-
-            }
-
-        },
-
-        clear: function () {
-
-            if ( this.options.tags.arr.length ) {
-
-                this.options.tags.str = '';
-                this.options.tags.arr = [];
-
-                this.$tagbox.find ( '.tagbox-tag' ).remove ();
-
-                this._clear_partial ();
-
-                this._update_input ();
-
-            }
-
-        },
-
-        reset: function () {
-
-            this.clear ();
-
-            this._init ();
+          $.noty ( '`' + tag_str + '` is shorter than ' + this.options.tag.min_length + ' characters' );
 
         }
 
+      } else if ( _.contains ( this.options.tags.arr, tag_str ) ) {
+
+        $.noty ( '`' + tag_str + '` is a duplicate' );
+
+      } else {
+
+        this.options.tags.arr.push ( tag_str );
+
+        if ( this.options.sort ) {
+
+          this.options.tags.arr.sort ();
+
+        }
+
+        var tag_html = this._get_tag_html ( tag_str );
+
+        if ( this.options.tags.arr.length === 1 || !this.options.sort ) {
+
+          this.$partial_wrp.before ( tag_html );
+
+        } else {
+
+          var index = this.options.tags.arr.indexOf ( tag_str );
+
+          if ( index === 0 ) {
+
+            this.$tagbox.find ( '.tagbox-tag' ).first ().before ( tag_html );
+
+          } else {
+
+            this.$tagbox.find ( '.tagbox-tag' ).eq ( index - 1 ).after ( tag_html );
+
+          }
+
+        }
+
+        return true;
+
+      }
+
+      return false;
+
+    },
+
+    _partial_remove_tag: function ( $tag, tag_str ) {
+
+      $tag.remove ();
+
+      _.pull ( this.options.tags.arr, tag_str );
+
+    },
+
+    /* KEYPRESS */
+
+    _handler_keypress_keydown: function ( event ) {
+
+      var tag_str = this.$partial.val ();
+
+      if ( _.contains ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
+
+        var added = this.add ( tag_str );
+
+        if ( added ) {
+
+          this._clear_partial ();
+
+        }
+
+        event.preventDefault ();
+
+      } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
+
+        if ( tag_str.length === 0 && this.options.tags.arr.length > 0 ) {
+
+          var $tag = this.$tagbox.find ( '.tagbox-tag' ).last (),
+            edit = !( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
+
+          this.remove ( $tag, edit );
+
+          event.preventDefault ();
+
+        }
+
+      } else if ( _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+
+        $.noty ( 'The character you entered is forbidden' );
+
+        event.preventDefault ();
+
+      }
+
+    },
+
+    /* PASTE */
+
+    _handler_paste: function ( event ) {
+
+      this._delay ( function () { //FIXME: is it necessary?
+
+        this.add ( this.$partial.val () );
+
+        this._clear_partial ();
+
+      });
+
+    },
+
+    /* CLICK ON CLOSE */
+
+    _handler_click_on_tag_remover: function ( event, tag_remover ) {
+
+      var $tag = $(tag_remover).parents ( '.tagbox-tag' );
+
+      this.remove ( $tag );
+
+    },
+
+    /* CLICK ON EMPTY */
+
+    _handler_click_on_empty: function ( event ) {
+
+      if ( document.activeElement !== this.partial && !$(event.target).is ( 'input, .tagbox-tag-label' ) ) {
+
+        this.$partial.focus ();
+
+      }
+
+    },
+
+    /* PUBLIC */
+
+    get: function () {
+
+      return this.options.tags.str;
+
+    },
+
+    add: function ( tags_str ) {
+
+      var tags = tags_str.split ( this.options.characters.separator ),
+        adds = [];
+
+      for ( var i = 0, l = tags.length; i < l; i++ ) {
+
+        adds.push ( this._partial_add_tag ( tags[i] ) );
+
+      }
+
+      var added = ( _.compact ( adds ).length > 0 );
+
+      if ( added ) {
+
+        this._update_tags_str ();
+        this._update_input ();
+
+      }
+
+      return added;
+
+    },
+
+    remove: function ( tags_str, edit ) {
+
+      if ( tags_str instanceof jQuery ) {
+
+        var tags_obj = [tags_str],
+          tags = [tags_str.data ( 'tag-value' )];
+
+      } else {
+
+        var tags_obj = [],
+          tags = [];
+
+        tags_str = tags_str.split ( this.options.characters.separator );
+
+        for ( var i = 0, l = tags_str.length; i < l; i++ ) {
+
+          var tag_str = this._sanitize_tag_str ( tags_str[i] ),
+            $tag = this.$tagbox.find ( '.tagbox-tag[data-tag-value="' + tag_str + '"]');
+
+          if ( $tag.length ) {
+
+            tags_obj.push ( $tag );
+            tags.push ( tag_str );
+
+          }
+
+        }
+
+      }
+
+      if ( tags_obj.length ) {
+
+        for ( var i = 0, l = tags_obj.length; i < l; i++ ) {
+
+          this._partial_remove_tag ( tags_obj[i], tags[i] );
+
+        }
+
+        this._update_tags_str ();
+        this._update_input ();
+
+        if ( l === 1 && edit === true ) {
+
+          this.$partial.val ( tags[0] ).trigger ( 'change' );
+
+        }
+
+      }
+
+    },
+
+    clear: function () {
+
+      if ( this.options.tags.arr.length ) {
+
+        this.options.tags.str = '';
+        this.options.tags.arr = [];
+
+        this.$tagbox.find ( '.tagbox-tag' ).remove ();
+
+        this._clear_partial ();
+
+        this._update_input ();
+
+      }
+
+    },
+
+    reset: function () {
+
+      this.clear ();
+
+      this._init ();
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.tagbox').each ( function () {
+
+      var $tagbox = $(this),
+        $input = $tagbox.find ( 'input' ).eq ( 0 ),
+        options = {
+          tags: {
+            init: $input.val (),
+            str: '',
+            arr: []
+          }
+        };
+
+      $tagbox.tagbox ( options );
+
     });
 
-    /* READY */
-
-    $(function () {
-
-        $('.tagbox').each ( function () {
-
-            var $tagbox = $(this),
-                $input = $tagbox.find ( 'input' ).eq ( 0 ),
-                options = {
-                    tags: {
-                        init: $input.val (),
-                        str: '',
-                        arr: []
-                    }
-                };
-
-            $tagbox.tagbox ( options );
-
-        });
-
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Time Ago v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7052,90 +6968,88 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TIME AGO */
+  /* TIME AGO */
 
-    $.widget ( 'presto.timeAgo', {
+  $.widget ( 'presto.timeAgo', {
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            timestamp: false,
-            title: false,
-            callbacks: {
-                update: _.noop
-            }
-        },
+    options: {
+      timestamp: false,
+      title: false,
+      callbacks: {
+        update: _.noop
+      }
+    },
 
-        /* SPECIAL */
+    /* SPECIAL */
 
-        _variables: function () {
+    _variables: function () {
 
-            this.$timeAgo_wrp = this.$element;
+      this.$timeAgo_wrp = this.$element;
 
-            this.options.timestamp = this.$timeAgo_wrp.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
+      this.options.timestamp = this.$timeAgo_wrp.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
 
-        },
+    },
 
-        _init: function () {
+    _init: function () {
 
-            this._update_loop ( 0 );
+      this._update_loop ( 0 );
 
-        },
+    },
 
-        /* PRIVATE */
+    /* PRIVATE */
 
-        _update_loop: function ( wait ) {
+    _update_loop: function ( wait ) {
 
-            this._delay ( function () {
+      this._delay ( function () {
 
-                this._update_loop ( this.update ().next );
+        this._update_loop ( this.update ().next );
 
-            }, wait * 1000 );
+      }, wait * 1000 );
 
-        },
+    },
 
-        /* PUBLIC */
+    /* PUBLIC */
 
-        update: function () {
+    update: function () {
 
-            var timeAgo = _.timeAgo ( this.options.timestamp );
+      var timeAgo = _.timeAgo ( this.options.timestamp );
 
-            if ( this.options.title ) {
+      if ( this.options.title ) {
 
-                this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
+        this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
 
-            } else {
+      } else {
 
-                this.$timeAgo_wrp.html ( timeAgo.str );
+        this.$timeAgo_wrp.html ( timeAgo.str );
 
-            }
+      }
 
-            this._trigger ( 'update' );
+      this._trigger ( 'update' );
 
-            return timeAgo;
+      return timeAgo;
 
-        }
+    }
 
-    });
+  });
 
-    /* READY */
+  /* READY */
 
-    $(function () {
+  $(function () {
 
-        $('[data-timestamp]').timeAgo ();
-        $('[data-timestamp-title]').timeAgo ({ title: true });
+    $('[data-timestamp]').timeAgo ();
+    $('[data-timestamp-title]').timeAgo ({ title: true });
 
-    });
+  });
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Timer v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7145,172 +7059,170 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TIMER */
+  /* TIMER */
 
-    $.timer = function ( func, time, autostart ) {
+  $.timer = function ( func, time, autostart ) {
 
-        return new Timer ( func, time, autostart );
+    return new Timer ( func, time, autostart );
 
-    };
+  };
 
-    /* TIMER OBJ */
+  /* TIMER OBJ */
 
-    var Timer = function ( func, time, autostart ) {
+  var Timer = function ( func, time, autostart ) {
 
-        return this.set ( func, time, autostart );
+    return this.set ( func, time, autostart );
 
-    };
+  };
 
-    Timer.prototype = {
+  Timer.prototype = {
 
-        set: function ( func, time, autostart ) {
+    set: function ( func, time, autostart ) {
 
-            this.init = true;
-            this.action = func;
+      this.init = true;
+      this.action = func;
 
-            if ( !isNaN ( time ) ) this.intervalTime = time;
+      if ( !isNaN ( time ) ) this.intervalTime = time;
 
-            if ( autostart && !this.isActive ) {
+      if ( autostart && !this.isActive ) {
 
-                this.isActive = true;
-                this.setTimer ();
+        this.isActive = true;
+        this.setTimer ();
 
-            }
+      }
 
-            return this;
+      return this;
 
-        },
+    },
 
-        once: function ( time ) {
+    once: function ( time ) {
 
-            var timer = this;
+      var timer = this;
 
-            if ( isNaN ( time ) ) time = 0;
+      if ( isNaN ( time ) ) time = 0;
 
-            setTimeout ( function () {
+      setTimeout ( function () {
 
-                timer.action ();
+        timer.action ();
 
-            }, time );
+      }, time );
 
-            return this;
+      return this;
 
-        },
+    },
 
-        play: function ( reset ) {
+    play: function ( reset ) {
 
-            if ( !this.isActive ) {
+      if ( !this.isActive ) {
 
-                if ( reset ) this.setTimer ();
-                else this.setTimer ( this.remaining_time );
+        if ( reset ) this.setTimer ();
+        else this.setTimer ( this.remaining_time );
 
-                this.isActive = true;
+        this.isActive = true;
 
-            }
+      }
 
-            return this;
+      return this;
 
-        },
+    },
 
-        pause: function () {
+    pause: function () {
 
-            if ( this.isActive ) {
+      if ( this.isActive ) {
 
-                this.isActive = false;
-                this.remaining_time -= new Date() - this.last;
-                this.clearTimer ();
+        this.isActive = false;
+        this.remaining_time -= new Date() - this.last;
+        this.clearTimer ();
 
-            }
+      }
 
-            return this;
+      return this;
 
-        },
+    },
 
-        stop: function () {
+    stop: function () {
 
-            this.isActive = false;
-            this.remaining_time = this.intervalTime;
-            this.clearTimer ();
+      this.isActive = false;
+      this.remaining_time = this.intervalTime;
+      this.clearTimer ();
 
-            return this;
+      return this;
 
-        },
+    },
 
-        toggle: function ( reset ) {
+    toggle: function ( reset ) {
 
-            if ( this.isActive ) this.pause ();
-            else if ( reset ) this.play ( true );
-            else this.play ();
+      if ( this.isActive ) this.pause ();
+      else if ( reset ) this.play ( true );
+      else this.play ();
 
-            return this;
+      return this;
 
-        },
+    },
 
-        reset: function () {
+    reset: function () {
 
-            this.isActive = false;
-            this.play ( true );
+      this.isActive = false;
+      this.play ( true );
 
-            return this;
+      return this;
 
-        },
+    },
 
-        clearTimer: function () {
+    clearTimer: function () {
 
-            clearTimeout ( this.timeoutObject );
+      clearTimeout ( this.timeoutObject );
 
-        },
+    },
 
-        setTimer: function ( time ) {
+    setTimer: function ( time ) {
 
-            var timer = this;
+      var timer = this;
 
-            if ( isNaN ( time ) ) time = this.intervalTime;
+      if ( isNaN ( time ) ) time = this.intervalTime;
 
-            this.remaining_time = time;
-            this.last = new Date ();
-            this.clearTimer ();
+      this.remaining_time = time;
+      this.last = new Date ();
+      this.clearTimer ();
 
-            this.timeoutObject = setTimeout ( function () {
+      this.timeoutObject = setTimeout ( function () {
 
-                timer.go ()
+        timer.go ()
 
-            }, time );
+      }, time );
 
-        },
+    },
 
-        go: function () {
+    go: function () {
 
-            if ( this.isActive ) {
+      if ( this.isActive ) {
 
-                this.action ();
-                this.setTimer ();
+        this.action ();
+        this.setTimer ();
 
-            }
+      }
 
-        },
+    },
 
-        remaining: function ( value ) {
+    remaining: function ( value ) {
 
-            if ( _.isUndefined ( value ) ) return this.remaining_time;
+      if ( _.isUndefined ( value ) ) return this.remaining_time;
 
-            this.remaining_time = value;
+      this.remaining_time = value;
 
-            return this;
+      return this;
 
-        }
+    }
 
-    };
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Tmpl v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7320,7 +7232,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 /*
  ***************************
- *      Documentation      *
+ *    Documentation    *
  ***************************
  *
  * Interpolation
@@ -7347,21 +7259,21 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
  *
  * - Include another template
  * <div>
- *     {% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
+ *   {% include('tmpl-link', {name: "Website", url: "https://example.org"}); %}
  * </div>
  *
  * - If else condition
  * {% if (o.author.url) { %}
- *     <a href="{%=encodeURI(o.author.url)%}">{%=o.author.name%}</a>
+ *   <a href="{%=encodeURI(o.author.url)%}">{%=o.author.name%}</a>
  * {% } else { %}
- *     <em>No author url.</em>
+ *   <em>No author url.</em>
  * {% } %}
  *
  * - For loop
  * <ul>
- *     {% for (var i=0; i<o.features.length; i++) { %}
- *         <li>{%=o.features[i]%}</li>
- *     {% } %}
+ *   {% for (var i=0; i<o.features.length; i++) { %}
+ *     <li>{%=o.features[i]%}</li>
+ *   {% } %}
  * </ul>
  *
  ***************************
@@ -7369,80 +7281,78 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* TMPL */
+  /* TMPL */
 
-    var tmpl = function ( str, data ) {
+  var tmpl = function ( str, data ) {
 
-        var f = !/[^\w\-\.:]/.test ( str )
-                    ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-                    : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
+    var f = !/[^\w\-\.:]/.test ( str )
+          ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
+          : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
 
-        return data
-                   ? f ( data, tmpl )
-                   : function ( data ) { return f ( data, tmpl ); };
+    return data
+           ? f ( data, tmpl )
+           : function ( data ) { return f ( data, tmpl ); };
 
-    };
+  };
 
-    tmpl.cache = {};
+  tmpl.cache = {};
 
-    tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
+  tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 
-    tmpl.func = function ( s, p1, p2, p3, p4, p5 ) {
+  tmpl.func = function ( s, p1, p2, p3, p4, p5 ) {
 
-        if ( p1 ) { // whitespace, quote and backspace in HTML context
+    if ( p1 ) { // whitespace, quote and backspace in HTML context
 
-            return {
-                '\n': '\\n',
-                '\r': '\\r',
-                '\t': '\\t',
-                ' ' : ' '
-            }[p1] || '\\' + p1;
+      return {
+        '\n': '\\n',
+        '\r': '\\r',
+        '\t': '\\t',
+        ' ' : ' '
+      }[p1] || '\\' + p1;
 
-        }
+    }
 
-        if ( p2 ) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+    if ( p2 ) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
 
-            if ( p2 === '=' ) {
+      if ( p2 === '=' ) {
 
-                return "'+_e(" + p3 + ")+'";
+        return "'+_e(" + p3 + ")+'";
 
-            }
+      }
 
-            return "'+(" + p3 + "==null?'':" + p3 + ")+'";
+      return "'+(" + p3 + "==null?'':" + p3 + ")+'";
 
-        }
+    }
 
-        if ( p4 ) { // evaluation start tag: {%
+    if ( p4 ) { // evaluation start tag: {%
 
-            return "';";
+      return "';";
 
-        }
+    }
 
-        if ( p5 ) { // evaluation end tag: %}
+    if ( p5 ) { // evaluation end tag: %}
 
-            return "_s+='";
+      return "_s+='";
 
-        }
+    }
 
-    };
+  };
 
-    tmpl.arg = 'o';
+  tmpl.arg = 'o';
 
-    tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
+  tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
 
-    /* HELPER */
+  /* HELPER */
 
-    $.tmpl = tmpl;
+  $.tmpl = tmpl;
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Touching v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7452,181 +7362,179 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* UTILITIES */
+  /* UTILITIES */
 
-    var get_coordinates = function ( $ele ) {
+  var get_coordinates = function ( $ele ) {
 
-        var offset = $ele.offset ();
+    var offset = $ele.offset ();
 
-        return {
-            X1: offset.left,
-            X2: offset.left + $ele.width (),
-            Y1: offset.top,
-            Y2: offset.top + $ele.height ()
-        };
-
+    return {
+      X1: offset.left,
+      X2: offset.left + $ele.width (),
+      Y1: offset.top,
+      Y2: offset.top + $ele.height ()
     };
 
-    var get_overlapping_area = function ( c1, c2 ) {
+  };
 
-        var x_overlap = Math.max ( 0, Math.min ( c1.X2, c2.X2 ) - Math.max ( c1.X1, c2.X1 ) ),
-            y_overlap = Math.max ( 0, Math.min ( c1.Y2, c2.Y2 ) - Math.max ( c1.Y1, c2.Y1 ) );
+  var get_overlapping_area = function ( c1, c2 ) {
 
-        return x_overlap * y_overlap;
+    var x_overlap = Math.max ( 0, Math.min ( c1.X2, c2.X2 ) - Math.max ( c1.X1, c2.X1 ) ),
+      y_overlap = Math.max ( 0, Math.min ( c1.Y2, c2.Y2 ) - Math.max ( c1.Y1, c2.Y1 ) );
 
-    };
+    return x_overlap * y_overlap;
 
-    /* TOUCHING */
+  };
 
-    $.fn.touching = function ( custom_options ) {
+  /* TOUCHING */
 
-        /* OPTIONS */
+  $.fn.touching = function ( custom_options ) {
 
-        var options = _.merge ({
-            startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
-            point: false, //INFO: Used for the punctual search
-            binarySearch: true, //INFO: toggle the binary search when performing a punctual search
-            //  {
-            //      X: 0,
-            //      Y: 0
-            //  },
-            $comparer: false, //INFO: Used for the overlapping search
-            $not: false,
-            select: 'all'
-        }, custom_options );
+    /* OPTIONS */
 
-        /* SEARCHABLE */
+    var options = _.merge ({
+      startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+      point: false, //INFO: Used for the punctual search
+      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
+      //  {
+      //    X: 0,
+      //    Y: 0
+      //  },
+      $comparer: false, //INFO: Used for the overlapping search
+      $not: false,
+      select: 'all'
+    }, custom_options );
 
-        var $searchable = options.$not ? this.not ( options.$not ) : this;
+    /* SEARCHABLE */
 
-        /* COMPARER */
+    var $searchable = options.$not ? this.not ( options.$not ) : this;
 
-        if ( options.$comparer ) {
+    /* COMPARER */
 
-            var c1 = get_coordinates ( options.$comparer ),
-                nodes = [],
-                areas = [];
+    if ( options.$comparer ) {
 
-            var result = false;
+      var c1 = get_coordinates ( options.$comparer ),
+        nodes = [],
+        areas = [];
 
-            $searchable.each ( function () {
+      var result = false;
 
-                var c2 = get_coordinates ( $(this) ),
-                    area = get_overlapping_area ( c1, c2 );
+      $searchable.each ( function () {
 
-                if ( area > 0 ) {
+        var c2 = get_coordinates ( $(this) ),
+          area = get_overlapping_area ( c1, c2 );
 
-                    nodes.push ( this );
-                    areas.push ( area );
+        if ( area > 0 ) {
+
+          nodes.push ( this );
+          areas.push ( area );
+
+        }
+
+      });
+
+      switch ( options.select ) {
+
+        case 'all':
+          return $(nodes);
+
+        case 'most':
+          return $(nodes[ areas.indexOf ( _.max ( areas ) )]);
+
+        default:
+          return $empty;
+
+      }
+
+    }
+
+    /* PUNCTUAL */
+
+    if ( options.point ) {
+
+      var $touched;
+
+      if ( options.binarySearch ) {
+
+        $searchable.btEach ( function () {
+
+          var $node = $(this),
+            c = get_coordinates ( $node );
+
+          if ( options.point.Y >= c.Y1 ) {
+
+            if ( options.point.Y <= c.Y2 ) {
+
+              if ( options.point.X >= c.X1 ) {
+
+                if ( options.point.X <= c.X2 ) {
+
+                  $touched = $node;
+
+                  return false;
+
+                } else {
+
+                  return 1;
 
                 }
 
-            });
+              } else {
 
-            switch ( options.select ) {
+                return -1;
 
-                case 'all':
-                    return $(nodes);
-
-                case 'most':
-                    return $(nodes[ areas.indexOf ( _.max ( areas ) )]);
-
-                default:
-                    return $empty;
-
-            }
-
-        }
-
-        /* PUNCTUAL */
-
-        if ( options.point ) {
-
-            var $touched;
-
-            if ( options.binarySearch ) {
-
-                $searchable.btEach ( function () {
-
-                    var $node = $(this),
-                        c = get_coordinates ( $node );
-
-                    if ( options.point.Y >= c.Y1 ) {
-
-                        if ( options.point.Y <= c.Y2 ) {
-
-                            if ( options.point.X >= c.X1 ) {
-
-                                if ( options.point.X <= c.X2 ) {
-
-                                    $touched = $node;
-
-                                    return false;
-
-                                } else {
-
-                                    return 1;
-
-                                }
-
-                            } else {
-
-                                return -1;
-
-                            }
-
-                        } else {
-
-                            return 1;
-
-                        }
-
-
-                    } else {
-
-                        return -1;
-
-                    }
-
-
-                }, options.startIndex );
-
-                return $touched || $empty;
+              }
 
             } else {
 
-                $searchable.each ( function () {
-
-                    var $node = $(this),
-                        c = get_coordinates ( $node );
-
-                    if ( options.point.Y >= c.Y1 && options.point.Y <= c.Y2 && options.point.X >= c.X1 && options.point.X <= c.X2 ) {
-
-                        $touched = $node;
-
-                        return false;
-
-                    }
-
-                });
-
-                return $touched || $empty;
+              return 1;
 
             }
 
-        }
 
-    };
+          } else {
+
+            return -1;
+
+          }
+
+
+        }, options.startIndex );
+
+        return $touched || $empty;
+
+      } else {
+
+        $searchable.each ( function () {
+
+          var $node = $(this),
+            c = get_coordinates ( $node );
+
+          if ( options.point.Y >= c.Y1 && options.point.Y <= c.Y2 && options.point.X >= c.X1 && options.point.X <= c.X2 ) {
+
+            $touched = $node;
+
+            return false;
+
+          }
+
+        });
+
+        return $touched || $empty;
+
+      }
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Base Widget v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7638,388 +7546,386 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* BASE WIDGET */
+  /* BASE WIDGET */
 
-    $.Widget = function ( /* options, element */ ) {};
+  $.Widget = function ( /* options, element */ ) {};
 
-    $.Widget._childConstructors = [];
+  $.Widget._childConstructors = [];
 
-    $.Widget.prototype = {
+  $.Widget.prototype = {
 
-        /* VARIABLES */
+    /* VARIABLES */
 
-        widgetOriginalName: 'widget',
-        widgetName: 'widget',
-        widgetFullName: 'widget',
+    widgetOriginalName: 'widget',
+    widgetName: 'widget',
+    widgetFullName: 'widget',
 
-        defaultElement: false,
-        templates: {}, //INFO: The `base` template will be used as the constructor
+    defaultElement: false,
+    templates: {}, //INFO: The `base` template will be used as the constructor
 
-        /* OPTIONS */
+    /* OPTIONS */
 
-        options: {
-            callbacks: {}
-        },
+    options: {
+      callbacks: {}
+    },
 
-        /* WIDGET FUNCTIONS */
+    /* WIDGET FUNCTIONS */
 
-        _createWidget: function ( options, element ) {
+    _createWidget: function ( options, element ) {
 
-            // VARIABLES
+      // VARIABLES
 
-            this.initializationType = element
-                                          ? 'element'
-                                          : this.defaultElement
-                                              ? 'html'
-                                              : this.templates.base
-                                                  ? 'template'
-                                                  : 'none';
+      this.initializationType = element
+                      ? 'element'
+                      : this.defaultElement
+                        ? 'html'
+                        : this.templates.base
+                          ? 'template'
+                          : 'none';
 
-            /* EXTEND OPTIONS */
+      /* EXTEND OPTIONS */
 
-            this.options = _.merge ( {}, this.options, this._getCreateOptions (), options );
+      this.options = _.merge ( {}, this.options, this._getCreateOptions (), options );
 
-            if ( this.initializationType === 'element' ) {
+      if ( this.initializationType === 'element' ) {
 
-                _.merge ( this.options, $(element).data ( this.widgetName ) );
+        _.merge ( this.options, $(element).data ( this.widgetName ) );
 
-            }
+      }
 
-            // INIT ELEMENT
+      // INIT ELEMENT
 
-            element = $( element || this.defaultElement || ( this.templates.base ? this._tmpl ( 'base', this.options ) : false ) || this ).get ( 0 );
+      element = $( element || this.defaultElement || ( this.templates.base ? this._tmpl ( 'base', this.options ) : false ) || this ).get ( 0 );
 
-            this.element = element;
-            this.$element = $(element);
+      this.element = element;
+      this.$element = $(element);
 
-            this.guid = _.uniqueId ();
+      this.guid = _.uniqueId ();
 
-            // DISABLED
+      // DISABLED
 
-            this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' );
+      this.options.disabled = ( options && options.disabled ) ? options.disabled : this.$element.hasClass ( this.widgetName + '-disabled' );
 
-            // SAVING INSTANCE
+      // SAVING INSTANCE
 
-            $.data ( this.element, this.widgetFullName, this );
+      $.data ( this.element, this.widgetFullName, this );
 
-            // ON $ELEMENT REMOVE -> WIDGET DESTROY
+      // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
-            this._on ( true, this.$element, 'remove', function ( event ) {
+      this._on ( true, this.$element, 'remove', function ( event ) {
 
-                if ( event.target === this.element ) {
+        if ( event.target === this.element ) {
 
-                    this.destroy ();
-
-                }
-
-            });
-
-            /* CALLBACKS */
-
-            this._create ();
-
-            this._trigger ( 'create', this._getCreateEventData () );
-
-            this._variables ();
-
-            this._init ();
-
-            this._events ();
-
-        },
-
-        _getCreateOptions: _.noop,
-        _getCreateEventData: _.noop,
-        _create: _.noop,
-        _variables: _.noop,
-        _init: _.noop,
-        _events: _.noop,
-
-        destroy: function () {
-
-            this._destroy ();
-
-            $.removeData ( this.element, this.widgetFullName );
-
-        },
-
-        _destroy: _.noop,
-
-        widget: function () {
-
-            return this.$element;
-
-        },
-
-        /* OPTIONS FUNCTIONS */
-
-        option: function ( key, value ) {
-
-            if ( arguments.length === 0 ) {
-
-                return _.cloneDeep ( this.options );
-
-            }
-
-            var options = key,
-                parts,
-                curOption,
-                i;
-
-            if ( typeof key === 'string' ) {
-
-                // handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
-
-                options = {};
-                parts = key.split ( '.' );
-                key = parts.shift ();
-
-                if ( parts.length ) {
-
-                    curOption = options[key] = _.extend ( {}, this.options[key] );
-
-                    for ( i = 0; i < parts.length - 1; i++ ) {
-
-                        curOption[parts[i]] = curOption[parts[i]] || {};
-                        curOption = curOption[parts[i]];
-
-                    }
-
-                    key = parts.pop ();
-
-                    if ( arguments.length === 1 ) {
-
-                        return curOption[key] === undefined ? null : curOption[key];
-
-                    }
-
-                    curOption[key] = value;
-
-                } else {
-
-                    if ( arguments.length === 1 ) {
-
-                        return this.options[key] === undefined ? null : this.options[key];
-
-                    }
-
-                    options[key] = value;
-
-                }
-
-            }
-
-            this._setOptions ( options );
-
-            return this;
-
-        },
-
-        _setOptions: function ( options ) {
-
-            for ( var key in options ) {
-
-                this._setOption ( key, options[key] );
-
-            }
-
-            return this;
-
-        },
-
-        _setOption: function ( key, value ) {
-
-            this.options[key] = value;
-
-            if ( key === 'disabled' ) {
-
-                this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
-
-            }
-
-            return this;
-
-        },
-
-        /* ENABLING / DISABLING */
-
-        enable: function () {
-
-            return this._setOptions ({ disabled: false });
-
-        },
-
-        disable: function () {
-
-            return this._setOptions ({ disabled: true });
-
-        },
-
-        /* EVENTS */
-
-        _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
-
-            //TODO: Add support for custom data
-
-            var instance = this;
-
-            if ( typeof suppressDisabledCheck !== 'boolean' ) {
-
-                handler = selector;
-                selector = events;
-                events = $element;
-                $element = suppressDisabledCheck;
-                suppressDisabledCheck = false;
-
-            }
-
-            if ( !( $element instanceof $ ) ) {
-
-                handler = selector;
-                selector = events;
-                events = $element;
-                $element = this.$element;
-
-            }
-
-            if ( selector && !handler ) {
-
-                handler = selector;
-                selector = false;
-
-            }
-
-            handler = _.isString ( handler ) ? this[handler] : handler;
-
-            function handlerProxy () {
-
-                if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return;
-
-                var args = _.slice ( arguments );
-
-                args.push ( this );
-
-                return handler.apply ( instance, args );
-
-            }
-
-            handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
-
-            if ( selector ) {
-
-                $element.on ( events, selector, handlerProxy );
-
-            } else {
-
-                $element.on ( events, handlerProxy );
-
-            }
-
-        },
-
-        _off: function ( $element, events, handler ) {
-
-            if ( !handler ) {
-
-                handler = events;
-                events = $element;
-                $element = this.$element;
-
-            }
-
-            handler = _.isString ( handler ) ? this[handler] : handler;
-
-            $element.off ( events, handler );
-
-        },
-
-        _trigger: function ( events, data ) {
-
-            data = data || {};
-
-            events = events.split ( ' ' );
-
-            for ( var ei = 0, el = events.length; ei < el; ei++ ) {
-
-                this.$element.trigger ( this.widgetName + ':' + events[ei], data );
-
-                if ( typeof this.options.callbacks[events[ei]] === 'function' ) {
-
-                    this.options.callbacks[events[ei]].call ( this.element, data );
-
-                }
-
-            }
-
-        },
-
-        /* DELAYING */
-
-        _delay: function ( handler, delay ) {
-
-            var instance = this;
-
-            return setTimeout ( function () {
-
-                handler.apply ( instance, arguments );
-
-            }, delay || 0 );
-
-        },
-
-        /* TEMPLATE */
-
-        _tmpl: function ( name, options ) {
-
-            return $.tmpl ( this.widgetOriginalName + '.' + name, options );
-
-        },
-
-        /* MANIPULATION */
-
-        insertBefore: function ( selector ) {
-
-            this.$element.insertBefore ( selector );
-
-            return this;
-
-        },
-
-        insertAfter: function ( selector ) {
-
-            this.$element.insertAfter ( selector );
-
-            return this;
-
-        },
-
-        prependTo: function ( selector ) {
-
-            this.$element.prependTo ( selector );
-
-            return this;
-
-        },
-
-        appendTo: function ( selector ) {
-
-            this.$element.appendTo ( selector );
-
-            return this;
+          this.destroy ();
 
         }
 
-    };
+      });
+
+      /* CALLBACKS */
+
+      this._create ();
+
+      this._trigger ( 'create', this._getCreateEventData () );
+
+      this._variables ();
+
+      this._init ();
+
+      this._events ();
+
+    },
+
+    _getCreateOptions: _.noop,
+    _getCreateEventData: _.noop,
+    _create: _.noop,
+    _variables: _.noop,
+    _init: _.noop,
+    _events: _.noop,
+
+    destroy: function () {
+
+      this._destroy ();
+
+      $.removeData ( this.element, this.widgetFullName );
+
+    },
+
+    _destroy: _.noop,
+
+    widget: function () {
+
+      return this.$element;
+
+    },
+
+    /* OPTIONS FUNCTIONS */
+
+    option: function ( key, value ) {
+
+      if ( arguments.length === 0 ) {
+
+        return _.cloneDeep ( this.options );
+
+      }
+
+      var options = key,
+        parts,
+        curOption,
+        i;
+
+      if ( typeof key === 'string' ) {
+
+        // handle nested keys, e.g., "foo.bar" => { foo: { bar: ___ } }
+
+        options = {};
+        parts = key.split ( '.' );
+        key = parts.shift ();
+
+        if ( parts.length ) {
+
+          curOption = options[key] = _.extend ( {}, this.options[key] );
+
+          for ( i = 0; i < parts.length - 1; i++ ) {
+
+            curOption[parts[i]] = curOption[parts[i]] || {};
+            curOption = curOption[parts[i]];
+
+          }
+
+          key = parts.pop ();
+
+          if ( arguments.length === 1 ) {
+
+            return curOption[key] === undefined ? null : curOption[key];
+
+          }
+
+          curOption[key] = value;
+
+        } else {
+
+          if ( arguments.length === 1 ) {
+
+            return this.options[key] === undefined ? null : this.options[key];
+
+          }
+
+          options[key] = value;
+
+        }
+
+      }
+
+      this._setOptions ( options );
+
+      return this;
+
+    },
+
+    _setOptions: function ( options ) {
+
+      for ( var key in options ) {
+
+        this._setOption ( key, options[key] );
+
+      }
+
+      return this;
+
+    },
+
+    _setOption: function ( key, value ) {
+
+      this.options[key] = value;
+
+      if ( key === 'disabled' ) {
+
+        this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
+
+      }
+
+      return this;
+
+    },
+
+    /* ENABLING / DISABLING */
+
+    enable: function () {
+
+      return this._setOptions ({ disabled: false });
+
+    },
+
+    disable: function () {
+
+      return this._setOptions ({ disabled: true });
+
+    },
+
+    /* EVENTS */
+
+    _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
+
+      //TODO: Add support for custom data
+
+      var instance = this;
+
+      if ( typeof suppressDisabledCheck !== 'boolean' ) {
+
+        handler = selector;
+        selector = events;
+        events = $element;
+        $element = suppressDisabledCheck;
+        suppressDisabledCheck = false;
+
+      }
+
+      if ( !( $element instanceof $ ) ) {
+
+        handler = selector;
+        selector = events;
+        events = $element;
+        $element = this.$element;
+
+      }
+
+      if ( selector && !handler ) {
+
+        handler = selector;
+        selector = false;
+
+      }
+
+      handler = _.isString ( handler ) ? this[handler] : handler;
+
+      function handlerProxy () {
+
+        if ( !suppressDisabledCheck && ( instance.options.disabled || instance.$element.hasClass ( instance.widgetName + '-disabled' ) ) ) return;
+
+        var args = _.slice ( arguments );
+
+        args.push ( this );
+
+        return handler.apply ( instance, args );
+
+      }
+
+      handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
+
+      if ( selector ) {
+
+        $element.on ( events, selector, handlerProxy );
+
+      } else {
+
+        $element.on ( events, handlerProxy );
+
+      }
+
+    },
+
+    _off: function ( $element, events, handler ) {
+
+      if ( !handler ) {
+
+        handler = events;
+        events = $element;
+        $element = this.$element;
+
+      }
+
+      handler = _.isString ( handler ) ? this[handler] : handler;
+
+      $element.off ( events, handler );
+
+    },
+
+    _trigger: function ( events, data ) {
+
+      data = data || {};
+
+      events = events.split ( ' ' );
+
+      for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+
+        this.$element.trigger ( this.widgetName + ':' + events[ei], data );
+
+        if ( typeof this.options.callbacks[events[ei]] === 'function' ) {
+
+          this.options.callbacks[events[ei]].call ( this.element, data );
+
+        }
+
+      }
+
+    },
+
+    /* DELAYING */
+
+    _delay: function ( handler, delay ) {
+
+      var instance = this;
+
+      return setTimeout ( function () {
+
+        handler.apply ( instance, arguments );
+
+      }, delay || 0 );
+
+    },
+
+    /* TEMPLATE */
+
+    _tmpl: function ( name, options ) {
+
+      return $.tmpl ( this.widgetOriginalName + '.' + name, options );
+
+    },
+
+    /* MANIPULATION */
+
+    insertBefore: function ( selector ) {
+
+      this.$element.insertBefore ( selector );
+
+      return this;
+
+    },
+
+    insertAfter: function ( selector ) {
+
+      this.$element.insertAfter ( selector );
+
+      return this;
+
+    },
+
+    prependTo: function ( selector ) {
+
+      this.$element.prependTo ( selector );
+
+      return this;
+
+    },
+
+    appendTo: function ( selector ) {
+
+      this.$element.appendTo ( selector );
+
+      return this;
+
+    }
+
+  };
 
 }( jQuery, _, window, document ));
 
 
 /* =========================================================================
- * Svelto - @FILE-NAME-UPPERCASED v0.1.0
-  *
- * http://getsvelto.com/@FILE-NAME
+ * Svelto - Widget v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8031,268 +7937,268 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 ;(function ( $, _, window, document, undefined ) {
 
-    'use strict';
+  'use strict';
 
-    /* WIDGET FACTORY */
+  /* WIDGET FACTORY */
 
-    $.widget = function ( originalName, base, prototype ) {
+  $.widget = function ( originalName, base, prototype ) {
 
-        /* VARIABLES */
+    /* VARIABLES */
 
-        var fullName,
-            existingConstructor,
-            constructor,
-            basePrototype,
-            proxiedPrototype = {},
-            nameParts = originalName.split ( '.' ),
-            namespace = nameParts.length > 1 ? nameParts[0] : false,
-            name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
+    var fullName,
+      existingConstructor,
+      constructor,
+      basePrototype,
+      proxiedPrototype = {},
+      nameParts = originalName.split ( '.' ),
+      namespace = nameParts.length > 1 ? nameParts[0] : false,
+      name = nameParts.length > 1 ? nameParts[1] : nameParts[0];
 
-        fullName = namespace ? namespace + '-' + name : name;
+    fullName = namespace ? namespace + '-' + name : name;
 
-        /* NO BASE */
+    /* NO BASE */
 
-        if ( !prototype ) {
+    if ( !prototype ) {
 
-            prototype = base;
-            base = $.Widget;
+      prototype = base;
+      base = $.Widget;
 
-        }
+    }
 
-        /* NAMESPACE */
+    /* NAMESPACE */
 
-        if ( namespace ) {
+    if ( namespace ) {
 
-            $[namespace] = $[namespace] || {};
+      $[namespace] = $[namespace] || {};
 
-        }
+    }
 
-        /* CONSTRUCTOR */
+    /* CONSTRUCTOR */
 
-        existingConstructor = namespace ? $[namespace][name] : $[name];
+    existingConstructor = namespace ? $[namespace][name] : $[name];
 
-        constructor = function ( options, element ) {
+    constructor = function ( options, element ) {
 
-            if ( !this._createWidget ) {
+      if ( !this._createWidget ) {
 
-                return new constructor ( options, element );
+        return new constructor ( options, element );
 
-            }
+      }
 
-            if ( arguments.length ) {
+      if ( arguments.length ) {
 
-                this._createWidget ( options, element );
+        this._createWidget ( options, element );
 
-            }
+      }
 
-        }
+    }
 
-        if ( namespace ) {
+    if ( namespace ) {
 
-            $[namespace][name] = constructor;
+      $[namespace][name] = constructor;
 
-        } else {
+    } else {
 
-            $[name] = constructor;
+      $[name] = constructor;
 
-        }
+    }
 
-        /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
+    /* EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES */
 
-        _.extend ( constructor, existingConstructor, {
-            _proto: _.extend ( {}, prototype ),
-            _childConstructors: []
-        });
+    _.extend ( constructor, existingConstructor, {
+      _proto: _.extend ( {}, prototype ),
+      _childConstructors: []
+    });
 
-        /* BASE PROTOTYPE */
+    /* BASE PROTOTYPE */
 
-        basePrototype = new base ();
+    basePrototype = new base ();
 
-        basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+    basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
-        /* PROXIED PROTOTYPE */
+    /* PROXIED PROTOTYPE */
 
-        for ( var prop in prototype ) {
+    for ( var prop in prototype ) {
 
-            if ( typeof prototype[prop] !== 'function' ) {
+      if ( typeof prototype[prop] !== 'function' ) {
 
-                proxiedPrototype[prop] = prototype[prop];
-                continue;
+        proxiedPrototype[prop] = prototype[prop];
+        continue;
 
-            }
+      }
 
-            proxiedPrototype[prop] = (function ( prop ) {
+      proxiedPrototype[prop] = (function ( prop ) {
 
-                var _super = function () {
-                        return base.prototype[prop].apply ( this, arguments );
-                    },
-                    _superApply = function ( args ) {
-                        return base.prototype[prop].apply ( this, args );
-                    };
+        var _super = function () {
+            return base.prototype[prop].apply ( this, arguments );
+          },
+          _superApply = function ( args ) {
+            return base.prototype[prop].apply ( this, args );
+          };
 
-                return function () {
+        return function () {
 
-                    var __super = this._super,
-                        __superApply = this._superApply,
-                        returnValue;
+          var __super = this._super,
+            __superApply = this._superApply,
+            returnValue;
 
-                    this._super = _super;
-                    this._superApply = _superApply;
+          this._super = _super;
+          this._superApply = _superApply;
 
-                    returnValue = prototype[prop].apply ( this, arguments );
+          returnValue = prototype[prop].apply ( this, arguments );
 
-                    this._super = __super;
-                    this._superApply = __superApply;
+          this._super = __super;
+          this._superApply = __superApply;
 
-                    return returnValue;
-
-                };
-
-            })( prop );
-
-        }
-
-        /* CONSTRUCTOR PROTOTYPE */
-
-        constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
-            constructor: constructor,
-            namespace: namespace,
-            widgetOriginalName: originalName,
-            widgetName: name,
-            widgetFullName: fullName
-        });
-
-        /* CACHE TEMPLATES */
-
-        for ( var tmpl_name in prototype.templates ) {
-
-            $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
-
-        }
-
-        /* UPDATE PROTOTYPE CHAIN */
-
-        if ( existingConstructor ) {
-
-            for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
-
-                var childPrototype = existingConstructor._childConstructors[i].prototype;
-
-                $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
-
-            }
-
-            delete existingConstructor._childConstructors;
-
-        } else {
-
-            base._childConstructors.push ( constructor );
-
-        }
-
-        /* CONSTRUCT */
-
-        $.widget.bridge ( name, constructor );
-
-        /* RETURN */
-
-        return constructor;
-
-    };
-
-    $.widget.bridge = function ( name, object ) {
-
-        /* VARIABLES */
-
-        var fullName = object.prototype.widgetFullName || name;
-
-        /* PLUGIN */
-
-        $.fn[name] = function ( options ) {
-
-            if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
-
-            var isMethodCall = ( typeof options === 'string' ),
-                args = _.tail ( arguments ),
-                returnValue = this;
-
-            if ( isMethodCall ) {
-
-                /* METHOD CALL */
-
-                this.each ( function () {
-
-                    /* VARIABLES */
-
-                    var methodValue,
-                        instance = $.data ( this, fullName );
-
-                    /* GETTING INSTANCE */
-
-                    if ( options === 'instance' ) {
-
-                        returnValue = instance;
-
-                        return false;
-
-                    }
-
-                    /* CHECKING VALID CALL */
-
-                    if ( !instance ) return; //INFO: No instance found
-
-                    if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
-
-                    /* CALLING */
-
-                    methodValue = instance[options].apply ( instance, args );
-
-                    if ( methodValue !== instance && methodValue !== undefined ) {
-
-                        returnValue = methodValue;
-
-                        return false;
-
-                    }
-
-                });
-
-            } else {
-
-                /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
-
-                if ( args.length ) {
-
-                    options = _.extend.apply ( null, [options].concat ( args ) );
-
-                }
-
-                /* INSTANCIATING */
-
-                this.each ( function () {
-
-                    /* GET INSTANCE */
-
-                    var instance = $.data ( this, fullName );
-
-                    if ( instance ) {
-
-                        instance.option ( options || {} );
-
-                    } else {
-
-                        $.data ( this, fullName, new object ( options, this ) );
-
-                    }
-
-                });
-
-            }
-
-            return returnValue;
+          return returnValue;
 
         };
 
+      })( prop );
+
+    }
+
+    /* CONSTRUCTOR PROTOTYPE */
+
+    constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+      constructor: constructor,
+      namespace: namespace,
+      widgetOriginalName: originalName,
+      widgetName: name,
+      widgetFullName: fullName
+    });
+
+    /* CACHE TEMPLATES */
+
+    for ( var tmpl_name in prototype.templates ) {
+
+      $.tmpl.cache[originalName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
+
+    }
+
+    /* UPDATE PROTOTYPE CHAIN */
+
+    if ( existingConstructor ) {
+
+      for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+
+        var childPrototype = existingConstructor._childConstructors[i].prototype;
+
+        $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
+
+      }
+
+      delete existingConstructor._childConstructors;
+
+    } else {
+
+      base._childConstructors.push ( constructor );
+
+    }
+
+    /* CONSTRUCT */
+
+    $.widget.bridge ( name, constructor );
+
+    /* RETURN */
+
+    return constructor;
+
+  };
+
+  $.widget.bridge = function ( name, object ) {
+
+    /* VARIABLES */
+
+    var fullName = object.prototype.widgetFullName || name;
+
+    /* PLUGIN */
+
+    $.fn[name] = function ( options ) {
+
+      if ( this.length === 0 && !object.prototype.defaultElement && !object.prototype.templates.base ) return; //INFO: nothing to work on //FIXME: create the first element with the defaultElement or the templates.base options, then add the instance to him
+
+      var isMethodCall = ( typeof options === 'string' ),
+        args = _.tail ( arguments ),
+        returnValue = this;
+
+      if ( isMethodCall ) {
+
+        /* METHOD CALL */
+
+        this.each ( function () {
+
+          /* VARIABLES */
+
+          var methodValue,
+            instance = $.data ( this, fullName );
+
+          /* GETTING INSTANCE */
+
+          if ( options === 'instance' ) {
+
+            returnValue = instance;
+
+            return false;
+
+          }
+
+          /* CHECKING VALID CALL */
+
+          if ( !instance ) return; //INFO: No instance found
+
+          if ( !(typeof instance[options] === 'function') || options.charAt ( 0 ) === '_' ) return; //INFO: Private method
+
+          /* CALLING */
+
+          methodValue = instance[options].apply ( instance, args );
+
+          if ( methodValue !== instance && methodValue !== undefined ) {
+
+            returnValue = methodValue;
+
+            return false;
+
+          }
+
+        });
+
+      } else {
+
+        /* SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS */
+
+        if ( args.length ) {
+
+          options = _.extend.apply ( null, [options].concat ( args ) );
+
+        }
+
+        /* INSTANCIATING */
+
+        this.each ( function () {
+
+          /* GET INSTANCE */
+
+          var instance = $.data ( this, fullName );
+
+          if ( instance ) {
+
+            instance.option ( options || {} );
+
+          } else {
+
+            $.data ( this, fullName, new object ( options, this ) );
+
+          }
+
+        });
+
+      }
+
+      return returnValue;
+
     };
+
+  };
 
 }( jQuery, _, window, document ));

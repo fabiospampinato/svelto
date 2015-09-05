@@ -5,33 +5,31 @@ extends ../layout.jade
 append main
   +divider Selectable
 
-  +container-simple
-    table.selectable
+  +container-simple.outlined
+    table.table.bordered
       thead
         tr
-          th Int
+          th.xs-1.text-center Int
           th String
           th Date
-          th Options
-      tfoot
-
+          th.text-center Options
       tbody
         +table-tr-empty
         - var nr = 1;
         while ( nr <= 10 )
           tr
-            td= nr++
+            td.text-center= nr++
             td Foo
             td 16/11/1993
-            td
+            td.text-center
               +multiple.centered
                 +button-simple("#").outlined.small Btn 1
                 +button-simple("#").outlined.small Btn 2
           tr
-            td= nr++
+            td.text-center= nr++
             td Bar
             td 16 Nov 1993
-            td
+            td.text-center
               +multiple.centered
                 +button-simple("#").outlined.small Btn 1
                 +button-simple("#").outlined.small Btn 2
