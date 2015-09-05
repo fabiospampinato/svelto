@@ -5,6 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../core/core.js
  * @requires ../tmpl/tmpl.js
  * ========================================================================= */
 
@@ -18,7 +19,7 @@
 
   $.Widget = function () {};
 
-  $.Widget._childConstructors = [];
+  $.Widget._childConstructors = []; //TODO: Remove if not necessary
 
   /* PROTOTYPE */
 
@@ -26,9 +27,9 @@
 
     /* NAMES */
 
-    widgetOriginalName: 'widget', //TODO: Remove if not necessary
+    namespace: false,
     widgetName: 'widget',
-    widgetFullName: 'widget',
+    widgetFullName: 'widget', //INFO: `namespace-widgetName`
 
     /* TEMPLATES */
 
@@ -389,7 +390,7 @@
 
     _tmpl: function ( name, options ) {
 
-      return $.tmpl ( this.widgetOriginalName + '.' + name, options || {} );
+      return $.tmpl ( this.widgetFullName + '-' + name, options || {} );
 
     },
 
