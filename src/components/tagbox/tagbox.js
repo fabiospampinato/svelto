@@ -57,7 +57,7 @@
             characters: {
                 forbidden: [ '<', '>', ';', '`' ], //FIXME: add tab, enter, and all the other specials
                 separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-                inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB], //TODO: write them as string, so they are easier to edit and that's the format that the user expects
+                inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //TODO: write them as string, so they are easier to edit and that's the format that the user expects
             },
             sort: false, //INFO: The tags are displayed in sorted order
             escape: true, //INFO: Escape potential XSS characters

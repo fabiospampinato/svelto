@@ -84,7 +84,7 @@
                     axis: 'x'
                 },
                 modifiers: {
-                    x: this.modifier_x.bind ( this ),
+                    x: this.modifier_x.bind ( this )
                 },
                 callbacks: {
                     beforestart: this._handler_drag_beforestart.bind ( this ),
