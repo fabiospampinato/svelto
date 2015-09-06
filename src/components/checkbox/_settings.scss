@@ -10,9 +10,9 @@
 
 /* CHECKBOX */
 
-$checkbox-transition-opacity-duration: 0.25s;
+$checkbox-transition-opacity-duration: $transition-druation-fast !default;
 
-$checkbox-icon-transition-opacity-duration: 0.25s;
-$checkbox-icon-on-color: 'secondary';
+/* COLOR */
 
-$checkbox-disabled-opacity: 0.5;
+$checkbox-icon-on-color: 'secondary' !default;
+$checkbox-icon-transition-opacity-duration: $transition-druation-fast !default;

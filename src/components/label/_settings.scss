@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Label (Settings) v0.1.0
+ * Svelto - Label (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,14 +10,12 @@
 
 /* LABEL */
 
-$label-color: 'white';
-$label-color-basic: false;
+$label-color: 'white' !default;
+$label-color-basic: false !default;
 
-$label-border-radius: $border-radius-medium;
+$label-left-right-bg-color: rgba(0, 0, 0, 0.05) !default;
 
-$label-left-right-bg-color: rgba(0, 0, 0, 0.05);
-
-$label-center-icon-extra-spacing: 0.75em;
+$label-center-icon-extra-spacing: 0.75em !default;
 
 $label-horizontal-padding: 1.2em !default;
 $label-vertical-padding: $label-horizontal-padding / 100 * 50 !default;
@@ -25,41 +23,44 @@ $label-vertical-padding: $label-horizontal-padding / 100 * 50 !default;
 $label-compact-horizontal-padding: $label-vertical-padding !default;
 $label-compact-vertical-padding: $label-vertical-padding !default;
 
-$label-badge-spacing: -20%;
+/* BADGE */
+
+$label-badge-spacing: -20% !default;
 
 /* POINTER */
 
-$label-pointer-color: $label-color;
-$label-pointer-color-basic: $label-color-basic;
+$label-pointer-color: $label-color !default;
+$label-pointer-color-basic: $label-color-basic !default;
 
-$label-pointer-sharp-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2;
-$label-pointer-sharp-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-sharp-size ) / 2 + ( $label-pointer-sharp-size / 16 ) );
+$label-pointer-sharp-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2 !default;
+$label-pointer-sharp-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-sharp-size ) / 2 + ( $label-pointer-sharp-size / 16 ) ) !default;
 
-$label-pointer-sharp-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2;
-$label-pointer-sharp-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-sharp-compact-size ) / 2 + ( $label-pointer-sharp-compact-size / 16 ) );
+$label-pointer-sharp-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2 !default;
+$label-pointer-sharp-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-sharp-compact-size ) / 2 + ( $label-pointer-sharp-compact-size / 16 ) ) !default;
 
-$label-pointer-smooth-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2;
-$label-pointer-smooth-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-smooth-size ) / 2 + ( $label-pointer-smooth-size / 16 ) );
+$label-pointer-smooth-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2 !default;
+$label-pointer-smooth-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-smooth-size ) / 2 + ( $label-pointer-smooth-size / 16 ) ) !default;
 
-$label-pointer-smooth-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2;
-$label-pointer-smooth-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-smooth-compact-size ) / 2 + ( $label-pointer-smooth-compact-size / 16 ) );
+$label-pointer-smooth-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2 !default;
+$label-pointer-smooth-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-smooth-compact-size ) / 2 + ( $label-pointer-smooth-compact-size / 16 ) ) !default;
 
 /* POINTER CIRCLE */
 
-$label-pointer-circle-size: 0.5em;
+$label-pointer-circle-size: 0.5em !default;
 
-$label-pointer-circle-box-shadow: 1px -1px 0.5px 0 rgba(0, 0, 0, 0.1);
+$label-pointer-circle-box-shadow: 1px -1px 0.5px 0 rgba(0, 0, 0, 0.1) !default;
 
 /* RIBBONS */
 
-$label-ribbon-size: $layout-gutter * 1.5;
+$label-ribbon-size: $layout-gutter * 1.5 !default;
 
 /* CORNER */
 
-$label-corner-size: 3.5em;
+$label-corner-size: 3.5em !default;
 
 /* FLOATING */
 
-$label-floating-z-depth: 4;
-$label-floating-right: $layout-gutter * 3;
-$label-floating-bottom: $layout-gutter * 3;
+$label-floating-z-depth: 4 !default;
+
+$label-floating-right: $layout-gutter * 3 !default;
+$label-floating-bottom: $layout-gutter * 3 !default;

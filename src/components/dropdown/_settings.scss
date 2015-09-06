@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Dropdown (Settings) v0.1.0
+ * Svelto - Dropdown (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,9 +10,8 @@
 
 /* DROPDOWN */
 
-$dropdown-z-depth: 4;
-
-$dropdown-z-index: 1000;
+$dropdown-z-index: 1000 !default;
+$dropdown-z-depth: 4 !default;
 
 $dropdown-padding: 15px !default;
 
@@ -20,7 +19,7 @@ $dropdown-border-width: 1px !default;
 
 /* TIP */
 
-$dropdown-tip-z-index: 1001;
+$dropdown-tip-z-index: 1001 !default;
 
 $dropdown-tip-border-size: 1px !default;
 
@@ -38,5 +37,5 @@ $dropdown-container-max-height: calc(45vh - #{$dropdown-padding * 2}) !default;
 
 /* TRANSITIONS */
 
-$dropdown-transition-opacity-duration: 0.15s;
-$dropdown-transition-transform-duration: 0.15s;
+$dropdown-transition-opacity-duration: $transition-druation-fast !default;
+$dropdown-transition-transform-duration: $transition-druation-fast !default;

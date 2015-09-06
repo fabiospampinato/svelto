@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner (Settings) v0.1.0
+ * Svelto - Spinner (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,37 +10,37 @@
 
 /* SPINNER */
 
-$spinner-size: 2em;
+$spinner-size: 2em !default;
 
-$spinner-stroke-width: 3px;
+$spinner-stroke-width: 3px !default;
 
-$spinner-default-border-color: $color-blue;
+$spinner-default-border-color: $color-blue !default;
 
-$spinner-arc-size: 270deg;
-$spinner-arc-time: 1333ms;
-$spinner-arc-start-rotation: 216deg;
+$spinner-arc-size: 270deg !default;
+$spinner-arc-time: 1333ms !default;
+$spinner-arc-start-rotation: 216deg !default;
 
-$spinner-container-width: 28px;
+$spinner-container-width: 28px !default;
 
-$spinner-shrink-time: 400ms;
+$spinner-shrink-time: 400ms !default;
 
-$spinner-animation-active-duration: 1568.2352941ms; //INFO: It comes from this formula (5 points star): 360deg * $spinner-arc-time / ( $spinner-arc-start-rotation + ( 360deg - $spinner-arc-size ) )
+$spinner-animation-active-duration: 1568.2352941ms !default; //INFO: It comes from this formula (5 points star): 360deg * $spinner-arc-time / ( $spinner-arc-start-rotation + ( 360deg - $spinner-arc-size ) )
 
-$spinner-animation-all-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1);
+$spinner-animation-all-timing-function: cubic-bezier(0.4, 0.0, 0.2, 1) !default;
 
 /* SPINNER OVERLAY */
 
 //TODO: Move the overlay to another component
 
-$spinner-overlay-color: 'inherit';
-$spinner-overlay-color-basic: true;
+$spinner-overlay-color: 'inherit' !default;
+$spinner-overlay-color-basic: true !default;
 
-$spinner-overlay-z-depth: 5;
+$spinner-overlay-z-depth: 5 !default;
 
-$spinner-overlay-size: 62px;
+$spinner-overlay-size: 62px !default;
 
-$spinner-overlay-spinner-size: 36px;
+$spinner-overlay-spinner-size: 36px !default;
 
-$spinner-overlay-children-opacity: 0.5;
+$spinner-overlay-children-opacity: 0.5 !default;
 
-$spinner-overlay-transition-all-duration: 0.25s;
+$spinner-overlay-transition-all-duration: $transition-duration-fast !default;

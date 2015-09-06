@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Textarea (Settings) v0.1.0
+ * Svelto - Textarea (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,4 +10,4 @@
 
 /* TEXTAREA */
 
-$textarea-lines: 3;
+$textarea-lines: 3 !default;

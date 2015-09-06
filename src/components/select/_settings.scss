@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Select (Settings) v0.1.0
+ * Svelto - Select (Settings) v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,4 +10,4 @@
 
 /* SELECT DROPDOWN */
 
-$select-dropdown-z-depth: 1;
+$select-dropdown-z-depth: 1 !default;

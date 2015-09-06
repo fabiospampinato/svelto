@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Toolbar (Settings) v0.1.0
+ * Svelto - Toolbar (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,7 +10,7 @@
 
 /* TOOLBAR */
 
-$toolbar-height: 64px;
+$toolbar-height: 64px !default;
 
-$toolbar-vertical-padding: 0;
+$toolbar-vertical-padding: 0 !default;
 $toolbar-horizontal-padding: 1em !default;

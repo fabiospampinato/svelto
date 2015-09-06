@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - UI (Settings) v0.1.0
+ * Svelto - UI (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -26,6 +26,14 @@ $border-radius-medium: 0.2665rem !default;
 $border-radius-large: 0.39975rem !default;
 
 $border-radius: $border-radius-medium !default;
+
+/* BORDER WIDTH */
+
+$border-width-small: 0px !default;
+$border-width-medium: 1px !default;
+$border-width-large: 2px !default;
+
+$border-width: $border-width-medium !default;
 
 /* TRANSITIONS */
 

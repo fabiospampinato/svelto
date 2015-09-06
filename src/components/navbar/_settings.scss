@@ -4,40 +4,41 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.scss
  * ========================================================================= */
 
 /* NAVBAR */
 
-$navbar-z-depth: 5;
+$navbar-z-index: 20 !default;
+$navbar-z-depth: 5 !default;
 
-$navbar-z-index: 20;
-
-$navbar-transition-transform-duration: 0.3s;
-
-/* BACKGROUND */
-
-$navbar-background-z-index: 19;
-
-$navbar-background-color: rgba(0, 0, 0, 0.5);
-
-$navbar-background-transition-opacity-duration: 0.3s;
-
-/* SIZES */
-
-$navbar-horizontal-height: 120px;
-$navbar-horizontal-extra-distance: 40px;
-
-$navbar-vertical-width: 240px;
-$navbar-vertical-extra-distance: 40px;
-
-/* SLIM SIZES */
-
-$navbar-slim-horizontal-height: 64px;
-$navbar-slim-horizontal-extra-distance: 40px;
-
-$navbar-slim-vertical-width: 64px;
-$navbar-slim-vertical-extra-distance: 40px;
+$navbar-transition-transform-duration: $transition-duration !default;
 
 /* ATTACHED */
 
-$navbar-attached-z-depth: 5;
+$navbar-attached-z-depth: 5 !default;
+
+/* BACKGROUND */
+
+$navbar-background-z-index: 19 !default;
+
+$navbar-background-color: rgba(0, 0, 0, 0.5) !default;
+
+$navbar-background-transition-opacity-duration: $transition-duration !default;
+
+/* SIZES */
+
+$navbar-horizontal-height: 120px !default;
+$navbar-horizontal-extra-distance: 40px !default;
+
+$navbar-vertical-width: 240px !default;
+$navbar-vertical-extra-distance: 40px !default;
+
+/* SLIM SIZES */
+
+$navbar-slim-horizontal-height: 64px !default;
+$navbar-slim-horizontal-extra-distance: 40px !default;
+
+$navbar-slim-vertical-width: 64px !default;
+$navbar-slim-vertical-extra-distance: 40px !default;

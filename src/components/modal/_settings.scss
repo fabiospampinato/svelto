@@ -1,21 +1,21 @@
 
 /* =========================================================================
- * Svelto - Modal (Settings) v0.1.0
+ * Svelto - Modal (Settings) v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/_core.scss
+ * @requires ../core/core.scss
  * ========================================================================= */
 
 /* MODAL */
 
-$modal-z-index: 50;
-$modal-z-depth: 5;
+$modal-z-index: 50 !default;
+$modal-z-depth: 5 !default;
 
-$modal-transition-all-duration: 0.2s;
-
-$modal-max-width: 80vw;
-$modal-max-height: 80vh;
+$modal-max-width: 80vw !default;
+$modal-max-height: 80vh !default;
 
 $modal-background-color: rgba(0, 0, 0, 0.5) !default;
+
+$modal-transition-all-duration: $transition-duration !default;

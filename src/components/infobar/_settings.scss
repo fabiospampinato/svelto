@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Infobar (Settings) v0.1.0
+ * Svelto - Infobar (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,13 +10,14 @@
 
 /* INFOBAR */
 
-$infobar-color: 'white';
-$infobar-color-basic: true;
+$infobar-color: 'white' !default;
+$infobar-color-basic: true !default;
 
-$infobar-border-width: 1px;
-$infobar-border-radius: $border-radius-medium;
+/* TITLE */
 
-$infobar-title-size: 'xlarge';
-$infobar-title-margin-bottom: $layout-gutter-half;
+$infobar-title-size: 'xlarge' !default;
+$infobar-title-margin-bottom: $layout-gutter-half !default;
 
-$infobar-transition-close-duration: 0.25s;
+/* TRANSITIONS */
+
+$infobar-transition-close-duration: $transition-duration !default;

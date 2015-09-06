@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tabs (Settings) v0.1.0
+ * Svelto - Tabs (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,10 +8,10 @@
  * @requires ../core/_core.scss
  * ========================================================================= */
 
-/* TABS */
+/* TABS INDICATOR */
 
-$tabs-indicator-color: 'secondary';
-$tabs-indicator-color-basic: true;
+$tabs-indicator-color: 'secondary' !default;
+$tabs-indicator-color-basic: true !default;
 
-$tabs-indicator-size: 0.2em;
-$tabs-indicator-transition-all-duration: 0.25s;
+$tabs-indicator-size: 0.2em !default;
+$tabs-indicator-transition-all-duration: $transition-duration-fast !default;

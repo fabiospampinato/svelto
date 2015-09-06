@@ -10,16 +10,16 @@
 
 /* NOTY */
 
-$noty-z-depth: 5;
-$noty-z-index: 100;
-
-$noty-text-size: 15px !default;
+$noty-z-index: 100 !default;
+$noty-z-depth: 5 !default;
 
 $noty-img-size: 38px !default;
-$noty-img-rounded: true !default; //TODO: implement this
+$noty-img-rounded: true !default; //TODO: Implement this
 
-$noty-transition-all-duration: 0.2s;
+$noty-transition-all-duration: $transition-duration !default;
 
 /* BREAKPOINTS */
 
-$noty-full-breakpoint: map-get($breakpoints, 'small') !default;
+$noty-full-enabled: true !default; //TODO: Implement this
+$noty-full-breakpoint-size: 'small' !default;
+$noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !default;

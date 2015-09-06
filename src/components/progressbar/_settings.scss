@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Progressbar (Settings) v0.1.0
+ * Svelto - Progressbar (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -14,19 +14,19 @@ $progress-bar-height: 1.07143em !default;
 
 /* UNHIGHLIGHTED */
 
-$progress-bar-unhighlighted-color: 'gray';
-$progress-bar-unhighlighted-color-basic: true;
+$progress-bar-unhighlighted-color: 'gray' !default;
+$progress-bar-unhighlighted-color-basic: true !default;
 
 /* HIGHLIGHTED */
 
-$progress-bar-highlighted-color: 'secondary';
-$progress-bar-highlighted-color-basic: true;
+$progress-bar-highlighted-color: 'secondary' !default;
+$progress-bar-highlighted-color-basic: true !default;
 
 /* LABEL */
 
 $progress-bar-label-font-size: 0.8em !default;
-$progress-bar-label-vertical-padding: 0;
-$progress-bar-label-horizontal-padding: 0.5em;
+$progress-bar-label-vertical-padding: 0 !default;
+$progress-bar-label-horizontal-padding: 0.5em !default;
 
 /* STRIPE */
 
@@ -35,11 +35,9 @@ $progress-bar-stripe-opacity: 0.075 !default;
 $progress-bar-stripe-light-color: rgba(255, 255, 255, $progress-bar-stripe-opacity) !default;
 $progress-bar-stripe-dark-color: rgba(0, 0, 0, $progress-bar-stripe-opacity) !default;
 
-$progress-bar-stripes-transition-move-duration: 2s;
+$progress-bar-stripes-transition-move-duration: 2s !default;
 
 /* OTHERS */
 
-$progress-bar-transition-opacity-duration: 0.15s;
-$progress-bar-transition-width-duration: 0.15s;
-
-$progress-bar-inactive-opacity: 0.5;
+$progress-bar-transition-opacity-duration: $transition-duration-fast !default;
+$progress-bar-transition-width-duration: $transition-duration-fast !default;

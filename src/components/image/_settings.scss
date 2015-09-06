@@ -18,4 +18,6 @@ $image-color-basic: true !default;
 $image-caption-color: 'black' !default;
 $image-caption-color-basic: true !default;
 
-$image-caption-transition-opacity-duration: 0.1s !default;
+/* TRANSITIONS */
+
+$image-caption-transition-opacity-duration: $transition-duration-fast !default;

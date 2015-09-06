@@ -10,6 +10,6 @@
 
 /* FLIPPABLE */
 
-$flippable-perspective: 1000;
+$flippable-perspective: 1000 !default;
 
-$flippable-transition-flip-duration: 0.5s;
+$flippable-transition-flip-duration: $transition-duration-slow !default;

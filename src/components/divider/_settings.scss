@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Divider (Settings) v0.1.0
+ * Svelto - Divider (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,26 +10,26 @@
 
 /* BLOCK */
 
-$divider-block-color: 'red';
-$divider-block-color-basic: true;
+$divider-block-color: 'red' !default;
+$divider-block-color-basic: true !default;
 
 $divider-block-padding: 0.3em 0.6em !default;
 
 /* LINEAR */
 
-$divider-linear-bg-color: rgba(0, 0, 0, 0.1);
+$divider-linear-bg-color: rgba(0, 0, 0, 0.1) !default;
 
-$divider-linear-vertical-padding: 0;
-$divider-linear-horizontal-padding: $layout-gutter;
+$divider-linear-vertical-padding: 0 !default;
+$divider-linear-horizontal-padding: $gutter !default;
 
 /* TEXT */
 
-$divider-text-size: 'medium';
+$divider-text-size: 'medium' !default;
 
-$divider-text-opacity: 0.75;
+$divider-text-opacity: 0.75 !default;
 
-$divider-text-font-weight: bold;
+$divider-text-font-weight: bold !default;
 
 /* SPACER */
 
-$divider-spacer-height: $layout-gutter-half;
+$divider-spacer-height: $gutter-half !default;

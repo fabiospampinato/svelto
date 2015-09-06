@@ -22,5 +22,5 @@ $ripple-centered-circle-width: 200% !default;
 /* TRANSITIONS */
 
 $ripple-transition-timing-function: ease-out !default;
-$ripple-transition-show-duration: 0.6s !default;
-$ripple-transition-hide-duration: 0.4s !default;
+$ripple-transition-show-duration: $transition-duration-slow !default;
+$ripple-transition-hide-duration: $transition-duration !default;

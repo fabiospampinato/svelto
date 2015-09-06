@@ -10,6 +10,6 @@
 
 /* FOOTER */
 
-$footer-bg-color: darken($color-base-bg, 10);
+$footer-bg-color: darken($color-base-bg, 10) !default;
 
-$footer-beveled-size: 8px;
+$footer-beveled-size: 8px !default;

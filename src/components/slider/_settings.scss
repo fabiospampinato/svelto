@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Slider (Settings) v0.1.0
+ * Svelto - Slider (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -18,38 +18,38 @@ $slider-min-max-width: $slider-height !default;
 
 /* UNHIGHLIGHTED */
 
-$slider-unhighlighted-color: 'gray';
-$slider-unhighlighted-color-basic: true;
+$slider-unhighlighted-color: 'gray' !default;
+$slider-unhighlighted-color-basic: true !default;
 
 $slider-unhighlighted-height: 0.5em !default;
 
-$slider-unhighlighted-border-radius: $slider-unhighlighted-height;
+$slider-unhighlighted-border-radius: $slider-unhighlighted-height !default;
 
 /* HIGHLIGHTED */
 
-$slider-highlighted-color: 'secondary';
-$slider-highlighted-color-basic: true;
+$slider-highlighted-color: 'secondary' !default;
+$slider-highlighted-color-basic: true !default;
 
 /* HANDLER */
 
-$slider-handler-color: 'secondary';
-$slider-handler-color-basic: true;
+$slider-handler-color: 'secondary' !default;
+$slider-handler-color-basic: true !default;
 
-$slider-handler-z-depth: 3;
+$slider-handler-z-depth: 3 !default;
 
-$slider-handler-active-transform-scale: 1.35;
+$slider-handler-active-transform-scale: 1.35 !default;
 
-$slider-handler-border-radius: 50%;
+$slider-handler-border-radius: 50% !default;
 
 $slider-handler-size: 1.55em !default;
 $slider-handler-half-size: $slider-handler-size / 2 !default;
 
 /* HANDLER:BEFORE */
 
-$slider-handler-before-scale-inactive: 0;
-$slider-handler-before-scale-active: 1.8;
+$slider-handler-before-scale-inactive: 0 !default;
+$slider-handler-before-scale-active: 1.8 !default;
 
-$slider-handler-before-active-opacity: 0.25;
+$slider-handler-before-active-opacity: 0.25 !default;
 
 /* LABEL */
 
@@ -57,6 +57,4 @@ $slider-handler-label-font-size: 0.6em !default;
 
 /* OTHERS */
 
-$slider-transition-all-duration: 0.2s;
-
-$slider-disabled-opacity: 0.5;
+$slider-transition-all-duration: $transition-duration-fast !default;

@@ -7,19 +7,18 @@
  * =========================================================================
  * @requires ../core/_core.scss
  * @requires ../label/_settings.scss
+ * @requires ../highlight/_settings.scss
  * ========================================================================= */
 
 /* INPUT WRAPPER */
 
-$input-wrp-color: 'white';
-$input-wrp-color-basic: true;
-
-$input-wrp-border-radius: $border-radius-medium;
+$input-wrp-color: 'white' !default;
+$input-wrp-color-basic: true !default;
 
 /* INPUT */
 
-$input-color: 'inherit';
-$input-color-basic: true;
+$input-color: 'inherit' !default;
+$input-color-basic: true !default;
 
 $input-horizontal-padding: $label-horizontal-padding !default;
 $input-vertical-padding: $label-vertical-padding !default;
@@ -29,25 +28,23 @@ $input-compact-vertical-padding: $label-compact-vertical-padding !default;
 
 /* LABEL */
 
-$input-label-opacity: 0.75;
-$input-label-font-size: 1em;
-$input-label-height: $input-label-font-size * $line-height;
+$input-label-opacity: 0.75 !default;
+$input-label-font-size: 1em !default;
+$input-label-height: $input-label-font-size * $line-height !default;
 
-$input-label-active-opacity: 1;
-$input-label-active-font-size: 0.8em;
-$input-label-active-height: $input-label-active-font-size * $line-height;
+$input-label-active-opacity: 1 !default;
+$input-label-active-font-size: 0.8em !default;
+$input-label-active-height: $input-label-active-font-size * $line-height !default;
 
 /* BAR */
 
-$input-bar-height: 2px;
-$input-bar-z-index: 10;
+$input-bar-z-index: 10 !default;
+$input-bar-height: $highlight-size !default;
 
 /* STATES */
 
-$input-active-color: $color-secondary;
+$input-active-color: $color-secondary !default;
 
 /* OTHERS */
 
-$input-transition-all-duration: 0.2s;
-
-$input-disabled-opacity: 0.5;
+$input-transition-all-duration: $transition-duration-fast !default;

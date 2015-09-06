@@ -10,22 +10,22 @@
 
 /* CONTAINER */
 
-$container-color: 'white';
-$container-color-basic: true;
+$container-color: 'white' !default;
+$container-color-basic: true !default;
 
-$contianer-border-radius: $border-radius;
+$contianer-border-radius: $border-radius !default;
 
 /* HEADER */
 
-$container-header-color: 'primary';
-$container-header-color-basic: false;
+$container-header-color: 'primary' !default;
+$container-header-color-basic: false !default;
 
 /* CONTENT */
 
-$container-content-color: 'inherit';
-$container-content-color-basic: true;
+$container-content-color: 'inherit' !default;
+$container-content-color-basic: true !default;
 
 /* FOOTER */
 
-$container-footer-color: $container-color;
-$container-footer-color-basic: true;
+$container-footer-color: $container-color !default;
+$container-footer-color-basic: true !default;

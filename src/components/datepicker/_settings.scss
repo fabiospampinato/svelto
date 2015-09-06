@@ -10,35 +10,33 @@
 
 /* DATEPICKER */
 
-$datepicker-block-width: 100% / 7;
+$datepicker-block-width: 100% / 7 !default;
 
 /* DAY NAME */
 
-$datepicker-day-name-font-weight: bold;
-$datepicker-day-name-height: 40px;
+$datepicker-day-name-font-weight: bold !default;
+$datepicker-day-name-height: 40px !default;
 
 /* DAY */
 
-$datepicker-day-height: 40px;
-$datepicker-day-prev-next-opacity: 0.25;
-$datepicker-day-prev-next-z-depth: 0;
+$datepicker-day-height: 40px !default;
+$datepicker-day-prev-next-opacity: 0.25 !default;
+$datepicker-day-prev-next-z-depth: 0 !default;
 
 /* DAY CIRCLE */
 
-$datepicker-day-circle-size: 38px;
+$datepicker-day-circle-size: 38px !default;
 
-$datepicker-day-hover-color: $color-secondary-text;
-$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25);
+$datepicker-day-hover-color: $color-secondary-text !default;
+$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25) !default;
 
-$datepicker-day-today-color: $color-secondary-bg;
-$datepicker-day-today-circle-color: transparent;
+$datepicker-day-today-color: $color-secondary-bg !default;
+$datepicker-day-today-circle-color: transparent !default;
 
-$datepicker-day-selected-z-depth: 2;
-$datepicker-day-selected-color: $color-secondary-text;
-$datepicker-day-selected-circle-color: $color-secondary-bg;
+$datepicker-day-selected-z-depth: 2 !default;
+$datepicker-day-selected-color: $color-secondary-text !default;
+$datepicker-day-selected-circle-color: $color-secondary-bg !default;
 
 /* TRANSITIONS */
 
-$datepicker-transition-all-duration: 0.1s;
-
-$datepicker-disabled-opacity: 0.5;
+$datepicker-transition-all-duration: $transition-duration-fast !default;

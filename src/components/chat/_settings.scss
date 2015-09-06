@@ -10,15 +10,19 @@
 
 /* CHAT */
 
-$chat-msg-color: 'white';
-$chat-msg-color-basic: true;
+$chat-msg-color: 'white' !default;
+$chat-msg-color-basic: true !default;
 
-$chat-msg-level-3-margin-left: 9em;
-$chat-msg-level-2-margin-left: 4.5em;
-$chat-msg-level-1-margin-left: 0;
+/* LEVELS */
 
-$chat-msg-img-size: 3em;
-$chat-msg-img-border-width: 1px;
-$chat-msg-img-border-color: $color-black;
-$chat-msg-img-transition-duration: 0.2s;
-$chat-msg-img-opacity-hover: 0.8;
+$chat-msg-level-3-margin-left: 9em !default;
+$chat-msg-level-2-margin-left: 4.5em !default;
+$chat-msg-level-1-margin-left: 0 !default;
+
+/* IMAGE */
+
+$chat-msg-img-size: 3em !default;
+$chat-msg-img-border-width: 1px !default;
+$chat-msg-img-border-color: $color-black !default;
+$chat-msg-img-transition-duration: $transition-duration-fast !default;
+$chat-msg-img-opacity-hover: 0.8 !default;

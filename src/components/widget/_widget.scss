@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widget v0.2.0
+ * Svelto - Widget v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -16,7 +16,8 @@
   margin: 0 0 $widget-gutter;
 
   &.disabled, &[class*="-disabled"] {
-    opacity: $widget-disabled-opacity;
+    cursor: default !important;
+    opacity: $widget-disabled-opacity !important;
   }
 
 }
