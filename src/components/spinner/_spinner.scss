@@ -83,7 +83,7 @@
   overflow: hidden;
   width: $spinner-size;
   height: $spinner-size;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
   animation: spinner-wrp-rotate $spinner-animation-active-duration linear infinite;
   background-color: transparent !important;
 

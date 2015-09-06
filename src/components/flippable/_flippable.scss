@@ -13,7 +13,7 @@
 .flippable-wrp {
 
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
   perspective: $flippable-perspective;
 
   & > .flippable {

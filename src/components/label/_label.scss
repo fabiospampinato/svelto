@@ -24,7 +24,7 @@ label {
   @include color ( 'inherit', true );
   display: inline-flex;
   align-items: center;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
   border-radius: inherit;
   visibility: hidden;
 

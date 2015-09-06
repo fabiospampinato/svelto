@@ -23,7 +23,7 @@
   overflow: hidden;
   flex-wrap: nowrap;
   height: $progress-bar-height;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
   transition: opacity $progress-bar-transition-opacity-duration;
   border-radius: 10000px 10000px;
 
@@ -73,10 +73,6 @@
 
   &.striped:not(.progressbar-disabled) > .progressbar-stripes {
     animation: progressbar-stripes-move $progress-bar-stripes-transition-move-duration linear 0s infinite;
-  }
-
-  &.progressbar-disabled {
-    opacity: $progress-bar-inactive-opacity;
   }
 
 }

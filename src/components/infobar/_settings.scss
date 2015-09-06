@@ -13,10 +13,13 @@
 $infobar-color: 'white' !default;
 $infobar-color-basic: true !default;
 
+$infobar-border-width: $border-width !default;
+$infobar-border-radius: $border-radius !default;
+
 /* TITLE */
 
 $infobar-title-size: 'xlarge' !default;
-$infobar-title-margin-bottom: $layout-gutter-half !default;
+$infobar-title-margin-bottom: $gutter-half !default;
 
 /* TRANSITIONS */
 

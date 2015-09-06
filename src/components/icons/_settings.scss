@@ -5,9 +5,11 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/_core.scss
+ * @requires ../typography/_settings.scss
  * ========================================================================= */
 
 /* ICONS */
+
+//TODO: Import typography and do the calculus
 
 $icons-scale-amount: 1.6 !default; //INFO: So that we have a 24px wide icon at medium size //FIXME: It's a shitty solution

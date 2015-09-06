@@ -36,7 +36,7 @@
     @if $support-gradient == true {
 
       &.gradient {
-        @include gradient-vertical-from-color ( $color_name, $extra );
+        @include gradient-vertical-from-color ( $color_name );
       }
 
     }

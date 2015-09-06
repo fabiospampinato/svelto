@@ -113,7 +113,7 @@
     }
 
     .multiple-wrp > .multiple > *:not(.multiple-wrp).xs-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
     }
 
   }
@@ -131,7 +131,7 @@
     }
 
     .multiple-wrp > .multiple > *:not(.multiple-wrp).sm-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
     }
 
   }
@@ -149,7 +149,7 @@
     }
 
     .multiple-wrp > .multiple > *:not(.multiple-wrp).md-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
     }
 
   }
@@ -167,7 +167,7 @@
     }
 
     .multiple-wrp > .multiple > *:not(.multiple-wrp).lg-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
     }
 
   }
@@ -185,7 +185,7 @@
     }
 
     .multiple-wrp > .multiple > *:not(.multiple-wrp).xl-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$layout-gutter});
+      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
     }
 
   }

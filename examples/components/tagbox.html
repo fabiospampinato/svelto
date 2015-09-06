@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Svelto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Svelto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Tagbox
+        </div>
+      </div>
+      <div class="container outlined">
+        <div class="container-content">
+          <div class="container tagbox">
+            <input type="text" name="name" value="these,are,some,tags"/>
+            <div class="multiple-wrp">
+              <div class="multiple">
+                <div class="input-wrp autogrow compact tagbox-partial no-floating no-bar">
+                  <input type="text" value="" name="placeholder_name" required="required" class="text-field"/>
+                  <label>Add tag...</label>
+                  <div class="text-field-bar"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:tagbox_get ()" class="label actionable outlined">
+              <div class="label-center">Get
+              </div>
+            </div>
+          </div>
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp no-floating white text-field-primary outlined">
+                <input type="text" value="" name="input_add" required="required" class="text-field"/>
+                <label>Add tags...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:tagbox_add ()" class="label actionable primary outlined">
+                  <div class="label-center">Add
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="multiple-wrp joined">
+            <div class="multiple">
+              <div class="input-wrp no-floating white text-field-secondary outlined">
+                <input type="text" value="" name="input_remove" required="required" class="text-field"/>
+                <label>Remove tags...</label>
+                <div class="text-field-bar"></div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div onclick="javascript:tagbox_remove ()" class="label actionable secondary outlined">
+                  <div class="label-center">Remove
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:tagbox_clear ()" class="label actionable black outlined">
+              <div class="label-center">Clear
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:tagbox_reset ()" class="label actionable outlined">
+              <div class="label-center">Reset
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Svelto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      function tagbox_get () {
+        $.noty ( $('.tagbox').tagbox ( 'get' ) );
+      }
+      function tagbox_add () {
+        $('.tagbox').tagbox ( 'add', $('input[name="input_add"]').val () );
+      }
+      function tagbox_remove () {
+        $('.tagbox').tagbox ( 'remove', $('input[name="input_remove"]').val () );
+      }
+      function tagbox_clear () {
+        $('.tagbox').tagbox ( 'clear' )
+      }
+      function tagbox_reset () {
+        $('.tagbox').tagbox ( 'reset' )
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

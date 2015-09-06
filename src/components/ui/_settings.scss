@@ -17,7 +17,7 @@ $gutter-half: $gutter / 2;
 
 $max-width-enabled: true !default;
 $max-width-size: 'xlarge' !default;
-$max-width: map-get($breakpoints, $layout-max-width-size) !default; //TODO: Provide support for it
+$max-width: map-get($breakpoints, $max-width-size) !default; //TODO: Provide support for it
 
 /* BORDER RADIUS */
 

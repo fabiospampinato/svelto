@@ -11,25 +11,25 @@
 .triangle, .triangle-up {
   @include triangle ();
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }
 
 .triangle-down {
   @include triangle ( 1em, $color-gray, "down" );
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }
 
 .triangle-right {
   @include triangle ( 1em, $color-gray, "right" );
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }
 
 .triangle-left {
   @include triangle ( 1em, $color-gray, "left" );
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }
 
 /* SQUARES */
@@ -37,7 +37,7 @@
 .square {
   @include square ();
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }
 
 .square-sample {
@@ -45,8 +45,8 @@
   @include square ( 62px );
   overflow: hidden;
   position: relative;
-  margin-bottom: $layout-gutter;
-  padding: $layout-gutter-half;
+  margin-bottom: $gutter;
+  padding: $gutter-half;
 
   & > p {
     @include size ( 'xxsmall' );
@@ -58,5 +58,5 @@
 
 .circle {
   @include circle ();
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }

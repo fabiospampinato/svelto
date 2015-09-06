@@ -12,6 +12,6 @@
 
 .placeholder {
   @include color ( $placeholder-color, $placeholder-color-basic );
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
   text-align: center;
 }

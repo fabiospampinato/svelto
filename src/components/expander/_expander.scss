@@ -28,8 +28,8 @@
 
   & > .container-content {
     display: none;
-    padding-top: $layout-gutter;
-    padding-bottom: $layout-gutter;
+    padding-top: $gutter;
+    padding-bottom: $gutter;
     transition-duration: $expander-content-transition-padding-duration;
     transition-property: opacity;
     opacity: 0;

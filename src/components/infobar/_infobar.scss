@@ -16,15 +16,15 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: $layout-gutter;
-  padding: $layout-gutter;
+  margin-bottom: $gutter;
+  padding: $gutter;
   transition: opacity $infobar-transition-close-duration;
   border-width: $infobar-border-width;
   border-style: solid;
   border-radius: $infobar-border-radius;
 
   &.limited {
-    max-width: $layout-max-width;
+    max-width: $max-width;
     margin-right: auto;
     margin-left: auto;
   }
@@ -82,7 +82,7 @@
 
     order: 4;
     width: 100%;
-    margin-top: $layout-gutter;
+    margin-top: $gutter;
 
     & > *:last-child {
       margin-bottom: 0;
@@ -91,7 +91,7 @@
   }
 
   & > *:not(:first-child):not(.infobar-bottom) {
-    margin-left: $layout-gutter;
+    margin-left: $gutter;
   }
 
 }

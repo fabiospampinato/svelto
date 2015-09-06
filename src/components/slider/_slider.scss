@@ -18,7 +18,7 @@
   display: flex;
   align-items: center;
   height: $slider-height;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 
   & > input {
     display: none;
@@ -186,10 +186,6 @@
 
     }
 
-  }
-
-  &.slider-disabled {
-    opacity: $slider-disabled-opacity;
   }
 
   &:hover, &:active {

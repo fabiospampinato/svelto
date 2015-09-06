@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Svelto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Svelto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Horizontal
+        </div>
+      </div>
+      <div class="flippable-wrp">
+        <div class="flippable">
+          <div class="flippable-front">
+            <div class="container red outlined">
+              <div class="container-content">
+                <p>Front</p>
+                <div class="label-wrp button-wrp">
+                  <div class="label actionable flipper">
+                    <div class="label-center">Flip
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flippable-back">
+            <div class="container blue outlined">
+              <div class="container-content">
+                <p>Back</p>
+                <div class="label-wrp button-wrp">
+                  <div class="label actionable flipper">
+                    <div class="label-center">Flip
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Vertical
+        </div>
+      </div>
+      <div class="flippable-wrp vertical">
+        <div class="flippable">
+          <div class="flippable-front">
+            <div class="container red outlined">
+              <div class="container-content">
+                <p>Front</p>
+                <div class="label-wrp button-wrp">
+                  <div class="label actionable flipper">
+                    <div class="label-center">Flip
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="flippable-back">
+            <div class="container blue outlined">
+              <div class="container-content">
+                <p>Back</p>
+                <div class="label-wrp button-wrp">
+                  <div class="label actionable flipper">
+                    <div class="label-center">Flip
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Actions
+        </div>
+      </div>
+      <div class="multiple-wrp">
+        <div class="multiple">
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 100, 100 )" class="label actionable outlined">
+              <div class="label-center">100x100
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 200, 200 )" class="label actionable outlined">
+              <div class="label-center">200x200
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 300, 300 )" class="label actionable outlined">
+              <div class="label-center">300x300
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 250, 200 )" class="label actionable outlined">
+              <div class="label-center">250x200
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 400, 200 )" class="label actionable outlined">
+              <div class="label-center">400x200
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 600, 200 )" class="label actionable outlined">
+              <div class="label-center">600x200
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 200, 400 )" class="label actionable outlined">
+              <div class="label-center">200x400
+              </div>
+            </div>
+          </div>
+          <div class="label-wrp button-wrp">
+            <div onclick="javascript:set_size ( 'auto', 'auto' )" class="label actionable outlined">
+              <div class="label-center">Auto
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Svelto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>
+      function set_size ( width, height ) {
+        $(".flippable-wrp").css ({
+          width: width,
+          height: height
+        });
+      }
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

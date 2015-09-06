@@ -13,6 +13,8 @@
 $label-color: 'white' !default;
 $label-color-basic: false !default;
 
+$label-border-radius: $border-radius !default;
+
 $label-left-right-bg-color: rgba(0, 0, 0, 0.05) !default;
 
 $label-center-icon-extra-spacing: 0.75em !default;
@@ -52,7 +54,7 @@ $label-pointer-circle-box-shadow: 1px -1px 0.5px 0 rgba(0, 0, 0, 0.1) !default;
 
 /* RIBBONS */
 
-$label-ribbon-size: $layout-gutter * 1.5 !default;
+$label-ribbon-size: $gutter * 1.5 !default;
 
 /* CORNER */
 
@@ -62,5 +64,5 @@ $label-corner-size: 3.5em !default;
 
 $label-floating-z-depth: 4 !default;
 
-$label-floating-right: $layout-gutter * 3 !default;
-$label-floating-bottom: $layout-gutter * 3 !default;
+$label-floating-right: $gutter * 3 !default;
+$label-floating-bottom: $gutter * 3 !default;

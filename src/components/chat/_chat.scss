@@ -15,7 +15,7 @@
 .chat-msg {
 
   display: flex;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 
   &.level-3, &[class*='level-'] {
     margin-left: $chat-msg-level-3-margin-left;
@@ -35,7 +35,7 @@
     order: 1;
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
-    margin-right: $layout-gutter;
+    margin-right: $gutter;
     transition: opacity $chat-msg-img-transition-duration;
     opacity: 1;
     border: $chat-msg-img-border-width solid $chat-msg-img-border-color;

@@ -13,7 +13,7 @@
 .datepicker {
 
   position: relative;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 
   & > .datepicker-navigation {
 
@@ -27,7 +27,7 @@
     }
 
     & > .datepicker-navigation-title {
-      margin: 0 $layout-gutter;
+      margin: 0 $gutter;
     }
 
   }
@@ -129,10 +129,6 @@
 
     }
 
-  }
-
-  &.datepicker-disabled {
-    opacity: $datepicker-disabled-opacity;
   }
 
 }

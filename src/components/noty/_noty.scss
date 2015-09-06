@@ -89,7 +89,7 @@
       }
 
       & > .noty {
-        margin-top: $layout-gutter;
+        margin-top: $gutter;
       }
 
     }
@@ -113,7 +113,7 @@
       }
 
       & > .noty {
-        margin-bottom: $layout-gutter;
+        margin-bottom: $gutter;
       }
 
     }
@@ -139,7 +139,7 @@
     align-items: flex-start;
 
     &:not(:empty) {
-      margin-left: $layout-gutter;
+      margin-left: $gutter;
     }
 
   }
@@ -147,12 +147,12 @@
   &.center {
 
     align-items: center;
-    margin-right: $layout-gutter;
-    margin-left: $layout-gutter;
+    margin-right: $gutter;
+    margin-left: $gutter;
 
     &:empty {
-      margin-right: $layout-gutter-half;
-      margin-left: $layout-gutter-half;
+      margin-right: $gutter-half;
+      margin-left: $gutter-half;
     }
 
   }
@@ -166,7 +166,7 @@
     align-items: flex-end;
 
     &:not(:empty) {
-      margin-right: $layout-gutter;
+      margin-right: $gutter;
     }
 
   }
@@ -191,7 +191,7 @@
   }
 
   .noty-buttons.multiple-wrp {
-    margin-bottom: - $layout-gutter !important;
+    margin-bottom: - $gutter !important;
   }
 
   /* ANIMATIONS */

@@ -13,7 +13,7 @@
 .switch {
 
   height: $switch-handler-size;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 
   & > input {
     display: none;
@@ -108,10 +108,6 @@
 
     }
 
-  }
-
-  &.switch-disabled {
-    opacity: $switch-disabled-opacity;
   }
 
 }

@@ -186,7 +186,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 
   & > *:last-child {
     margin-bottom: 0 !important;
@@ -196,7 +196,7 @@
 
 .spacer {
   flex-grow: $spacer-flex-grow !important;
-  margin-bottom: $layout-gutter;
+  margin-bottom: $gutter;
 }
 
 .dragging {
@@ -208,7 +208,7 @@
 }
 
 .limited { //TODO: Move it to it's own decorator
-  @include center-margin ( $layout-max-width );
+  @include center-margin ( $max-width );
 }
 
 .actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator

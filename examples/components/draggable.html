@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" dir="ltr" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Svelto</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="/svelto.css" media="all"/>
+    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
+    <script>
+      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+        
+    </script>
+  </head>
+  <body class="fixed-header">
+    <header>
+      <div class="header">
+        <div class="toolbar primary z-depth-4">
+          <div class="multiple-wrp expanded">
+            <div class="multiple">
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div><a href="/" class="large">Svelto</a>
+              <div class="spacer">
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">refresh</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable compact">
+                  <div class="label-center"><i class="icon">more_vert</i>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+    <main>
+      <div class="divider-wrp block">
+        <div class="divider">Draggables
+        </div>
+      </div>
+      <div class="container constrainer">
+        <div class="container-content overflow-visible">
+          <div class="multiple-wrp">
+            <div class="multiple">
+              <div class="label-wrp">
+                <div class="label outlined draggable">
+                  <div class="label-center">Draggable
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp button-wrp">
+                <div class="label actionable checkbox outlined toggable-draggable">
+                  <input type="radio"/>
+                  <div class="label-center"><span>Toggable draggable</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined only-handler">
+                  <div class="label-center">Only handler
+                  </div>
+                  <div class="label-right draggable-handler"><i class="icon">menu</i>
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined revertable">
+                  <div class="label-center">Revertable
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined x-axis">
+                  <div class="label-center">X-Axis
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined y-axis">
+                  <div class="label-center">Y-Axis
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained">
+                  <div class="label-center">Constrained
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-center">
+                  <div class="label-center">Constrained center
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-x">
+                  <div class="label-center">Constrained X
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-y">
+                  <div class="label-center">Constrained Y
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-tollerance">
+                  <div class="label-center">Constrained 100-50 tollerance
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-coordinates">
+                  <div class="label-center">Constrained 400x200
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-coordinate-x">
+                  <div class="label-center">Constrained 200+ X
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-coordinates-x">
+                  <div class="label-center">Constrained 200-600 X
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-coordinate-y">
+                  <div class="label-center">Constrained 200+ Y
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-coordinates-y">
+                  <div class="label-center">Constrained 200-600 Y
+                  </div>
+                </div>
+              </div>
+              <div class="label-wrp">
+                <div class="label outlined constrained-coordinates-modifier">
+                  <div class="label-center">Modifier 2x
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer>
+      <div class="footer beveled">
+        <p class="text-center">Svelto, a framework</p>
+      </div>
+    </footer>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
+    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="/svelto.js"></script>
+    <script>$(function () { $.noty ( {"body":"Drag the labels around","ttl":"forever"} ); });
+    </script>
+    <script>
+      $('.only-handler').draggable ({ only_handlers: true });
+      $('.toggable-draggable').draggable ({ draggable: function () {
+        return !!$('.toggable-draggable').checkbox ( 'instance' ).get ();
+      }});
+      $('.revertable').draggable ({ revertable: true });
+      $('.x-axis').draggable ({ axis: 'x' });
+      $('.y-axis').draggable ({ axis: 'y' });
+      $('.constrained').draggable ({ constrainer: { $element: $('.constrainer') } });
+      $('.constrained-center').draggable ({ constrainer: { $element: $('.constrainer'), constrain_center: true } });
+      $('.constrained-x').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'x' } });
+      $('.constrained-y').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'y' } });
+      $('.constrained-tollerance').draggable ({ constrainer: { $element: $('.constrainer'), tollerance: { x: 100, y: 50 } } });
+      $('.constrained-coordinates').draggable ({ constrainer: { coordinates: { x1: 0, x2: 400, y1: 0, y2: 200 } } });
+      $('.constrained-coordinate-x').draggable ({ constrainer: { coordinates: { x1: 200 } } });
+      $('.constrained-coordinates-x').draggable ({ constrainer: { coordinates: { x1: 200, x2: 600 } } });
+      $('.constrained-coordinate-y').draggable ({ constrainer: { coordinates: { y1: 200 } } });
+      $('.constrained-coordinates-y').draggable ({ constrainer: { coordinates: { y1: 200, y2: 600 } } });
+      $('.constrained-coordinates-modifier').draggable ({ modifiers: {
+        x: function ( x ) { return 2 * x; },
+        y: function ( y ) { return 2 * y; }
+      }});
+    </script>
+    <script>
+      window.onerror = function ( message, file, line ) {
+        try {
+          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+        } catch ( e ) {
+          alert ( file + ':' + line + '\n\n' + message );
+        }
+      };
+    </script>
+  </body>
+</html>

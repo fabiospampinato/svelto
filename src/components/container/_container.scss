@@ -28,7 +28,7 @@
     @include last-child-gutter-fix ();
     font-weight: bold;
     flex-shrink: 0;
-    padding: $layout-gutter;
+    padding: $gutter;
   }
 
   & > .container-content {
@@ -36,14 +36,14 @@
     @include last-child-gutter-fix ();
     overflow: auto;
     flex-grow: 1;
-    padding: $layout-gutter;
+    padding: $gutter;
   }
 
   & > .container-footer {
     @include color ( $container-footer-color, $container-footer-color-basic );
     @include last-child-gutter-fix ();
     flex-shrink: 0;
-    padding: $layout-gutter;
+    padding: $gutter;
   }
 
   & > *:first-child {

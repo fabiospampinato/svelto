@@ -13,8 +13,8 @@
 .footer {
 
   position: relative;
-  margin-bottom: $layout-gutter;
-  padding: $layout-gutter;
+  margin-bottom: $gutter;
+  padding: $gutter;
   background-color: $footer-bg-color;
 
   &.beveled {

@@ -12,8 +12,8 @@
 
 hr {
   height: 1px;
-  margin-top: - $layout-gutter-half;
-  margin-bottom: $layout-gutter-half;
+  margin-top: - $gutter-half;
+  margin-bottom: $gutter-half;
   border: none;
   background-color: $divider-linear-bg-color;
 }
@@ -26,7 +26,7 @@ hr {
 
   &.block {
 
-    margin-bottom: $layout-gutter;
+    margin-bottom: $gutter;
     text-align: center;
 
     & > .divider {
@@ -42,13 +42,13 @@ hr {
 
     display: flex;
     align-items: center;
-    margin-bottom: $layout-gutter;
+    margin-bottom: $gutter;
 
     & > hr {
 
       flex-grow: 1;
       margin: 0;
-      min-width: $layout-gutter;
+      min-width: $gutter;
 
       &.left {
         order: 0;
@@ -69,12 +69,12 @@ hr {
 
   &.text {
 
-    margin-bottom: $layout-gutter;
+    margin-bottom: $gutter;
 
     & > .divider {
       @include size ( $divider-text-size );
       font-weight: $divider-text-font-weight;
-      margin: 0 $layout-gutter;
+      margin: 0 $gutter;
       opacity: $divider-text-opacity;
     }
 

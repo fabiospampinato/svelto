@@ -60,8 +60,8 @@ body {
 
   & > main {
     flex-grow: 1;
-    margin-top: $layout-gutter;
-    padding: 0 $layout-gutter;
+    margin-top: $gutter;
+    padding: 0 $gutter;
   }
 
   & > footer > .footer {
@@ -83,7 +83,7 @@ body {
         left: 0;
 
         & > *:last-child {
-          margin-bottom: - $layout-gutter !important;
+          margin-bottom: - $gutter !important;
         }
 
       }
@@ -91,7 +91,7 @@ body {
     }
 
     & > main {
-      transition: margin $transition-duration-default;
+      transition: margin $transition-duration;
     }
 
   }
