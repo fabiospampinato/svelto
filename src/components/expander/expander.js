@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -14,7 +14,7 @@
 
   /* EXPANDER */
 
-  $.widget ( 'svelto.expander', {
+  $.factory ( 'svelto.expander', {
 
     /* OPTIONS */
 

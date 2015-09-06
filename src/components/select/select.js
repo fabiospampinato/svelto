@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
@@ -18,7 +18,7 @@
 
   /* SELECT */
 
-  $.widget ( 'svelto.select', {
+  $.factory ( 'svelto.select', {
 
     /* TEMPLATES */
 

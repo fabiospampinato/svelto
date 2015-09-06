@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* TIMER - http://jchavannes.com/jquery-timer */
+//SOURCE: http://jchavannes.com/jquery-timer
 
 ;(function ( $, _, window, document, undefined ) {
 

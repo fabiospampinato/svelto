@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the children)
@@ -51,7 +51,7 @@
 
   /* PROGRESS BAR */
 
-  $.widget ( 'svelto.progressBar', {
+  $.factory ( 'svelto.progressBar', {
 
     /* TEMPLATES */
 

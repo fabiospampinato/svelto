@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: add the tag pointer
@@ -19,7 +19,7 @@
 
   /* TAGBOX */
 
-  $.widget ( 'svelto.tagbox', {
+  $.factory ( 'svelto.tagbox', {
 
     /* TEMPLATES */
 

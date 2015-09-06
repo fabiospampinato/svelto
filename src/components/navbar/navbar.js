@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: Add flick capabilities (show and hide on flick in the right direction and starting within the right zone)
@@ -16,7 +16,7 @@
 
   /* NAVBAR */
 
-  $.widget ( 'svelto.navbar', {
+  $.factory ( 'svelto.navbar', {
 
     /* OPTIONS */
 

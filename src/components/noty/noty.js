@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: add support for swipe to dismiss in mobile and touchscreen enabled devices
@@ -60,7 +60,7 @@
 
   /* NOTY */
 
-  $.widget ( 'svelto.noty', {
+  $.factory ( 'svelto.noty', {
 
     /* TEMPLATES */
 

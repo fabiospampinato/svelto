@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: Maybe switch from the indicator to .button.highlight
@@ -17,7 +17,7 @@
 
   /* TABS */
 
-  $.widget ( 'svelto.tabs', {
+  $.factory ( 'svelto.tabs', {
 
     /* OPTIONS */
 

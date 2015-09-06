@@ -1,0 +1,22 @@
+
+/* =========================================================================
+ * Svelto - Expander (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+
+/* HEADER */
+
+$expander-header-transition-border-radius-duration: $transition-duration !default;
+
+/* ARROW */
+
+$expander-arrow-transition-rotate-duration: $transition-duration !default;
+
+/* CONTENT */
+
+$expander-content-transition-padding-duration: $transition-duration !default;
+$expander-content-transition-opacity-duration: $transition-duration !default;

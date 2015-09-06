@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * @requires ../draggable/draggable.js
  * ========================================================================= */
 
@@ -15,7 +15,7 @@
 
   /* SWITCH */
 
-  $.widget ( 'svelto.switch', {
+  $.factory ( 'svelto.switch', {
 
     /* OPTIONS */
 

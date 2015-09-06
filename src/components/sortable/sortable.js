@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 //TODO: add support for tableHelper, just put the new addded row in the right position, good performance gain here!
@@ -19,7 +19,7 @@
 
   /* SORTABLE */
 
-  $.widget ( 'svelto.sortable', {
+  $.factory ( 'svelto.sortable', {
 
     /* OPTIONS */
 
