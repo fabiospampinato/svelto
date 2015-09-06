@@ -90,9 +90,9 @@ append main
       +button-icon("search").secondary.compact
     +multiple.joined
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
-      +button-simple.primary Search
+      +button.primary Search
     +multiple.joined
-      +label-simple.gray http://
+      +label.gray http://
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
     +multiple.joined
       +label-icon("social-people")
@@ -100,13 +100,12 @@ append main
     +multiple.joined
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white
       +label.compact
-        +label-center
-          +icon('refresh').rotating
+        +icon('refresh').rotating
     +multiple.joined
       +button.teal
         +button-left
           +icon("local_grocery_store")
-        +button-center Checkout
+        span Checkout
       +input({ label: "Placeholder...", value: "35.50€" }).no-bar.no-floating.white
 
   +divider Toolbar - Outlined
@@ -122,5 +121,5 @@ append main
       +input({ label: "Placeholder...", value: "Compact" }).no-bar.no-floating.white.outlined.compact
       +button-icon("search").outlined.compact
     +multiple.joined
-      +label-simple.gray.outlined http://
+      +label.gray.outlined http://
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white.outlined

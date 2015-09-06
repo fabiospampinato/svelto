@@ -18,11 +18,10 @@
 mixin dropdown-btn(options)
   - options.icon = options.icon || "expand_more";
   +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
-    +button-center
-      if options.title
-        span= options.title
-      if options.icon
-        +icon(options.icon)
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
 
 mixin dropdown(id)
   .dropdown(id="dropdown-" + id)&attributes(attributes)

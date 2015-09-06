@@ -42,8 +42,7 @@ mixin radio(options)
         input(type="radio" name=name value=value)
       else
         input(type="radio" value=value)
-    +button-center
-      if options.title
-        span= options.title
-      +icon(options.icons.on)(class=options.colors.on).icon-on
-      +icon(options.icons.off)(class=options.colors.off).icon-off
+    if options.title
+      span= options.title
+    +icon(options.icons.on)(class=options.colors.on).icon-on
+    +icon(options.icons.off)(class=options.colors.off).icon-off

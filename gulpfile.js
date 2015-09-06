@@ -194,7 +194,7 @@ gulp.task ( 'css', function () {
                outputStyle: 'expanded',
                precision: 10
              }))
-             .pipe ( autoprefixer ({
+            .pipe ( autoprefixer ({
                browsers: ['Android >= 4', 'Chrome >= 21', 'Firefox >= 28', 'Explorer >= 10', 'Edge >= 1', 'iOS >= 7.1', 'Safari >= 7'],
                cascade: true,
                remove: true

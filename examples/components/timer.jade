@@ -10,17 +10,17 @@ append main
     +multiple.joined
       +input({ name: 'milliseconds', label: 'Milliseconds...', value: 300 }).white.outlined.no-floating
       +checkbox({ name: 'autostart', title: 'Autostart', value: 1, checked: true }).outlined
-      +button-simple("timer_set ()").outlined Set
+      +button("timer_set ()").outlined Set
     +multiple.joined
       +input({ name: 'milliseconds_once', label: 'Milliseconds...', value: 1000 }).white.outlined.no-floating
-      +button-simple("timer_once ()").outlined Once
-    +button-simple("timer_play ()").outlined Play
-    +button-simple("timer_pause ()").outlined Pause
-    +button-simple("timer_stop ()").outlined Stop
-    +button-simple("timer_toggle ()").outlined Toggle
-    +button-simple("timer_reset ()").outlined Reset
-    +button-simple("timer_go ()").outlined Go
-    +button-simple("timer_remaining ()").outlined Remaining
+      +button("timer_once ()").outlined Once
+    +button("timer_play ()").outlined Play
+    +button("timer_pause ()").outlined Pause
+    +button("timer_stop ()").outlined Stop
+    +button("timer_toggle ()").outlined Toggle
+    +button("timer_reset ()").outlined Reset
+    +button("timer_go ()").outlined Go
+    +button("timer_remaining ()").outlined Remaining
 
 append body-end
   +script.

@@ -20,7 +20,7 @@ append main
   +divider Actions
 
   +multiple
-    +button-simple("table_init()").outlined Init
+    +button("table_init()").outlined Init
 
     +multiple.joined
       +input({ name: 'id_add', label: 'ID...' }).white.outlined.no-floating
@@ -28,7 +28,7 @@ append main
       +input({ name: 'second_add', label: 'Second...' }).white.outlined.no-floating
       +input({ name: 'third_add', label: 'Third...' }).white.outlined.no-floating
       +input({ name: 'fourth_add', label: 'Fourth...' }).white.outlined.no-floating
-      +button-simple("table_row_add ()").outlined Add
+      +button("table_row_add ()").outlined Add
 
     +multiple.joined
       +input({ name: 'id_update', label: 'ID...' }).white.outlined.no-floating
@@ -36,13 +36,13 @@ append main
       +input({ name: 'second_update', label: 'Second...' }).white.outlined.no-floating
       +input({ name: 'third_update', label: 'Third...' }).white.outlined.no-floating
       +input({ name: 'fourth_update', label: 'Fourth...' }).white.outlined.no-floating
-      +button-simple("table_row_update ()").outlined Update
+      +button("table_row_update ()").outlined Update
 
     +multiple.joined
       +input({ name: 'id_remove', label: 'ID...' }).white.outlined.no-floating
-      +button-simple("table_row_remove ()").outlined Remove
+      +button("table_row_remove ()").outlined Remove
 
-    +button-simple("table_clear ()").outlined Clear
+    +button("table_clear ()").outlined Clear
 
 append body-end
   +script.

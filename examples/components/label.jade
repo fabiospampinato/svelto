@@ -4,143 +4,132 @@ extends ../layout.jade
 //- Label
 
 append main
-  +divider Simple
-
-  +label-simple Simple
-
   +divider Normal
 
   +multiple
-    +label-simple.primary Primary
-    +label-simple.secondary Secondary
-    +label-simple.tertiary Tertiary
-    +label-simple.quaternary Quaternary
-    +label-simple.white White
-    +label-simple.gray Gray
-    +label-simple.black Black
-    +label-simple.yellow Yellow
-    +label-simple.olive Olive
-    +label-simple.green Green
-    +label-simple.blue Blue
-    +label-simple.violet Violet
-    +label-simple.orange Orange
-    +label-simple.purple Purple
-    +label-simple.red Red
-    +label-simple.pink Pink
-    +label-simple.teal Teal
-    +label-simple.brown Brown
-    +label-simple.transparent Transparent
-    +label-simple.inherit Inherit
-    +label-simple.base Base
+    +label.primary Primary
+    +label.secondary Secondary
+    +label.tertiary Tertiary
+    +label.quaternary Quaternary
+    +label.white White
+    +label.gray Gray
+    +label.black Black
+    +label.yellow Yellow
+    +label.olive Olive
+    +label.green Green
+    +label.blue Blue
+    +label.violet Violet
+    +label.orange Orange
+    +label.purple Purple
+    +label.red Red
+    +label.pink Pink
+    +label.teal Teal
+    +label.brown Brown
+    +label.transparent Transparent
+    +label.inherit Inherit
+    +label.base Base
 
   +divider Advanced
 
   +multiple
     +label-icon('settings')
     +label-icon('settings').rounded
-    +label-simple
-      +icon('settings').left
+    +label
+      +icon('settings')
       span Settings
-    +label-simple
+    +label
       span Settings
-      +icon('settings').right
+      +icon('settings')
     +label
       +label-left
         +icon('settings')
-      +label-center Settings
+      span Settings
     +label
-      +label-center Settings
+      span Settings
       +label-right
         +icon('settings')
 
   +divider Rounded
 
   +multiple
-    +label-simple.rounded.primary 1
-    +label-simple.rounded.secondary 2
-    +label-simple.rounded.tertiary 3
-    +label-simple.rounded.quaternary 4
-    +label-simple.rounded.white 5
-    +label-simple.rounded.gray 6
-    +label-simple.rounded.black 7
-    +label-simple.rounded.yellow 8
-    +label-simple.rounded.olive 9
-    +label-simple.rounded.green 10
-    +label-simple.rounded.blue 11
-    +label-simple.rounded.violet 12
-    +label-simple.rounded.orange 13
-    +label-simple.rounded.purple 14
-    +label-simple.rounded.red 15
-    +label-simple.rounded.pink 16
-    +label-simple.rounded.teal 17
-    +label-simple.rounded.brown 18
-    +label-simple.rounded.transparent 19
-    +label-simple.rounded.inherit 20
-    +label-simple.rounded.base 21
+    +label.rounded.primary 1
+    +label.rounded.secondary 2
+    +label.rounded.tertiary 3
+    +label.rounded.quaternary 4
+    +label.rounded.white 5
+    +label.rounded.gray 6
+    +label.rounded.black 7
+    +label.rounded.yellow 8
+    +label.rounded.olive 9
+    +label.rounded.green 10
+    +label.rounded.blue 11
+    +label.rounded.violet 12
+    +label.rounded.orange 13
+    +label.rounded.purple 14
+    +label.rounded.red 15
+    +label.rounded.pink 16
+    +label.rounded.teal 17
+    +label.rounded.brown 18
+    +label.rounded.transparent 19
+    +label.rounded.inherit 20
+    +label.rounded.base 21
 
-  +divider Compact
-
-  +multiple
-    +label-simple.compact
-      +icon('settings').left
-      span Settings
-    +label-simple.compact
-      span Settings
-      +icon('settings').right
-    +label.compact
-      +label-left
-        +icon('settings')
-      +label-center Settings
-    +label.compact
-      +label-center Settings
-      +label-right
-        +icon('settings')
-    +label-simple.compact.primary Primary
-    +label-simple.compact.secondary Secondary
-    +label-simple.compact.rounded.primary Primary
-    +label-simple.compact.rounded.secondary Secondary
-    +label-simple.compact.rounded.primary 1
-    +label-simple.compact.rounded.secondary 12
-
-  +divider Pointed
+  +divider Tag
 
   +multiple
-    +label-pointed-simple Normal
-    +label-pointed-simple.sharp Sharp
-    +label-pointed-simple.primary Colored
-    +label-pointed-simple.outlined Outlined
-    +label-pointed-simple.compact Compact
+    +label-tag Normal
+    +label-tag.sharp Sharp
+    +label-tag.sharp.outlined Sharp
+    +label-tag.sharp.compact Sharp
+    +label-tag.primary Colored
+    +label-tag.outlined Outlined
+    +label-tag.compact Compact
 
-  +divider Ribbons
+  +divider Ribbon
 
-  +container-simple.limited.xs-10
-    +label-ribbons-simple.primary Left & Right
+  +container-simple.centered.xs-10.outlined.z-depth-1
+    +label-ribbon.ribbon-left.ribbon-right.primary Left & Right
     +paragraph-sample
-    +label-ribbon-left-simple.secondary Left
+    +label-ribbon.ribbon-left.secondary Left
     +paragraph-sample
-    +label-ribbon-right-simple.tertiary Right
+    +label-ribbon.ribbon-right.tertiary Right
     +paragraph-sample
-    +label-ribbons-simple.outlined Outlined
+    +label-ribbon.ribbon-left.ribbon-right.outlined Outlined
     +paragraph-sample
 
   +divider Corner
 
-  +container-simple
+  +container-simple.outlined
     +label-corner("top-left").primary P
-    +label-corner("top-right", "file_download").secondary
-    +label-corner("bottom-right", "thumb_up").quaternary
-    +label-corner("bottom-left", "favorite").tertiary
+    +label-corner("top-right").secondary
+      +icon("file_download")
+    +label-corner("bottom-right").quaternary
+      +icon("thumb_up")
+    +label-corner("bottom-left").tertiary
+      +icon("favorite")
     +paragraph-sample
 
   +divider Badge
 
   +multiple
-    +button-icon('settings')
-      +label-simple.compact.badge.xsmall.quaternary.top-left 1
-      +label-simple.compact.badge.xsmall.primary.top-right 2
-      +label-simple.compact.badge.xsmall.tertiary.bottom-left 3
-      +label-simple.compact.badge.xsmall.secondary.bottom-right 4
+    +button-icon('settings').compact
+      +label.compact.rounded.badge.xxsmall.quaternary.top-left 1
+      +label.compact.rounded.badge.xxsmall.primary.top-right 2
+      +label.compact.rounded.badge.xxsmall.tertiary.bottom-left 3
+      +label.compact.rounded.badge.xxsmall.secondary.bottom-right 4
 
   +divider Floating
 
   +label-icon('settings').floating.rounded.secondary.large
+
+  +divider Actions
+
+  +multiple
+    +button("toggle_class ( 'outlined' )").outlined Toggle outlined
+    +button("toggle_class ( 'compact' )").outlined Toggle compact
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.label').toggleClass ( css_class );
+    }

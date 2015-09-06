@@ -12,15 +12,15 @@ append main
   +divider Actions
 
   +multiple
-    +button-simple("tagbox_get ()").outlined Get
+    +button("tagbox_get ()").outlined Get
     +multiple.joined
       +input({ name: "input_add", label: "Add tags..." }).no-floating.white.text-field-primary.outlined
-      +button-simple("tagbox_add ()").primary.outlined Add
+      +button("tagbox_add ()").primary.outlined Add
     +multiple.joined
       +input({ name: "input_remove", label: "Remove tags..." }).no-floating.white.text-field-secondary.outlined
-      +button-simple("tagbox_remove ()").secondary.outlined Remove
-    +button-simple("tagbox_clear ()").black.outlined Clear
-    +button-simple("tagbox_reset ()").outlined Reset
+      +button("tagbox_remove ()").secondary.outlined Remove
+    +button("tagbox_clear ()").black.outlined Clear
+    +button("tagbox_reset ()").outlined Reset
 
 append body-end
   +script.

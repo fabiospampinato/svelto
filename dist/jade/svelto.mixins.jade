@@ -51,118 +51,55 @@ mixin breadcrumb-divider(icon)
 
 
 //- =========================================================================
-//- Svelto - Button v0.1.0
+//- Svelto - Button v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin button-wrp
-  .label-wrp&attributes(attributes).button-wrp
-    block
-
 mixin button(href)
-  +button-wrp
-    if href
-      if href.slice ( 0, 11 ) === 'javascript:'
-        .label(onclick=href)&attributes(attributes).actionable
-          block
-      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-        .label(onclick="javascript:" + href)&attributes(attributes).actionable
-          block
-      else
-        a.label(href=href)&attributes(attributes).actionable
-          block
-    else
-      .label&attributes(attributes).actionable
+  if href
+    if href.slice ( 0, 11 ) === 'javascript:'
+      .label(onclick=href)&attributes(attributes).button.actionable
         block
+    else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+      .label(onclick="javascript:" + href)&attributes(attributes).button.actionable
+        block
+    else
+      a.label(href=href)&attributes(attributes).button.actionable
+        block
+  else
+    .label&attributes(attributes).button.actionable
+      block
 
 mixin button-left
-  .label-left&attributes(attributes)
+  .label-left&attributes(attributes).button-left
     block
-
-mixin button-center
-  .label-center&attributes(attributes)
-    block
-
+      
 mixin button-right
-  .label-right&attributes(attributes)
+  .label-right&attributes(attributes).button-right
     block
 
-mixin button-simple(href)
-  +button(href)&attributes(attributes)
-    +button-center
-      block
-
-mixin button-icon(icon, href)
-  +button(href)&attributes(attributes)
-    +button-center
-      +icon(icon)
+mixin button-icon(icon)
+  +button&attributes(attributes)
+    +icon(icon)
     block
-
-//- FIXME: Add support for href
-
-mixin button-pointed
-  +button-wrp.pointed
-    +button-pointer&attributes(attributes)
-    .label&attributes(attributes).actionable
-      block
-
-mixin button-pointed-simple
-  +button-pointed&attributes(attributes)
-    +button-center
-      block
-
-mixin button-pointer
-  +label-pointer&attributes(attributes)
+  
+mixin button-ribbon
+  +button&attributes(attributes).ribbon
     block
+  +button.invisible
 
-mixin button-ribbons
-  +button-wrp.ribbons
-    .label&attributes(attributes).actionable
-      .label-ribbon-left
-      .label-ribbon-right
-      block
-  +button-simple&attributes(attributes).invisible
-
-mixin button-ribbon-left
-  +button-wrp.ribbon-left
-    .label&attributes(attributes).actionable
-      .label-ribbon-left
-      block
-  +button-simple&attributes(attributes).invisible
-
-mixin button-ribbon-right
-  +button-wrp.ribbon-right
-    .label&attributes(attributes).actionable
-      .label-ribbon-right
-      block
-  +button-simple&attributes(attributes).invisible
-
-mixin button-ribbons-simple
-  +button-ribbons&attributes(attributes)
-    +label-center
-      block
-
-mixin button-ribbon-left-simple
-  +button-ribbon-left&attributes(attributes)
-    +label-center
-      block
-
-mixin button-ribbon-right-simple
-  +button-ribbon-right&attributes(attributes)
-    +label-center
-      block
-
-mixin button-corner(direction, icon)
+mixin button-corner(direction)
   - direction = direction || "top-right";
-  +button-wrp(class=direction).corner
-    .label&attributes(attributes).compact.actionable
-      .label-corner
-      +button-center
-        if icon
-          +icon(icon)
-        block
+  .label-corner(class=direction)&attributes(attributes).button-corner.actionable
+    +button.compact
+      block
+      
+mixin button-tag
+  .label-tag.button-tag
+    +button&attributes(attributes)
+      block
 
 
 //- =========================================================================
@@ -274,11 +211,10 @@ mixin checkbox(options)
         input(type="radio" name=name value=value)
       else
         input(type="radio" value=value)
-    +button-center
-      if options.title
-        span= options.title
-      +icon(options.icons.on)(class=options.colors.on).icon-on
-      +icon(options.icons.off)(class=options.colors.off).icon-off
+    if options.title
+      span= options.title
+    +icon(options.icons.on)(class=options.colors.on).icon-on
+    +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
 //- =========================================================================
@@ -475,11 +411,10 @@ mixin divider-spacer
 mixin dropdown-btn(options)
   - options.icon = options.icon || "expand_more";
   +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
-    +button-center
-      if options.title
-        span= options.title
-      if options.icon
-        +icon(options.icon)
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
 
 mixin dropdown(id)
   .dropdown(id="dropdown-" + id)&attributes(attributes)
@@ -597,7 +532,7 @@ mixin footer
 
 
 //- =========================================================================
-//- Svelto - Form v0.1.0
+//- Svelto - Form v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -607,32 +542,14 @@ mixin form
   form&attributes(attributes)
     block
 
-mixin form-button(href)
-  //- TODO: Make it DRY, we are basically just repeating the button mixin
-  button(type="submit")&attributes(attributes).label-wrp.button-wrp
-    if href
-      if href.slice ( 0, 11 ) === 'javascript:'
-        .label(onclick=href)&attributes(attributes).actionable
-          block
-      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-        .label(onclick="javascript:" + href)&attributes(attributes).actionable
-          block
-      else
-        a.label(href=href)&attributes(attributes).actionable
-          block
-    else
-      .label&attributes(attributes).actionable
-        block
+mixin form-button
+  button(type="submit")&attributes(attributes).label.button.actionable
+    block
 
-mixin form-button-simple(href)
-  +form-button(href)&attributes(attributes)
-    +button-center
-      block
-
-mixin form-button-icon(icon, href)
-  +form-button(href)&attributes(attributes)
-    +button-icon(icon)
-      block
+mixin form-button-icon(icon)
+  button(type="submit")&attributes(attributes).label.button.actionable
+    +icon(icon)
+    block
 
 
 //- =========================================================================
@@ -779,105 +696,44 @@ mixin input(options)
 
 
 //- =========================================================================
-//- Svelto - Label v0.1.0
+//- Svelto - Label v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin label-wrp
-  .label-wrp&attributes(attributes)
-    block
-
 mixin label
-  +label-wrp
-    .label&attributes(attributes)
-      block
+  .label&attributes(attributes)
+    block
 
 mixin label-left
   .label-left&attributes(attributes)
     block
-
-mixin label-center
-  .label-center&attributes(attributes)
-    block
-
+      
 mixin label-right
   .label-right&attributes(attributes)
     block
 
-mixin label-simple
-  +label&attributes(attributes)
-    +label-center
-      block
-
 mixin label-icon(icon)
   +label&attributes(attributes)
-    +label-center
-      +icon(icon)
+    +icon(icon)
     block
-
-mixin label-pointed
-  +label-wrp.pointed
-    +label-pointer&attributes(attributes)
-    .label&attributes(attributes)
-      block
-
-mixin label-pointed-simple
-  +label-pointed&attributes(attributes)
-    +label-center
-      block
-
-mixin label-pointer
-  .label-pointer&attributes(attributes)
+  
+mixin label-ribbon
+  +label&attributes(attributes).ribbon
     block
+  +label.invisible
 
-mixin label-ribbons
-  +label-wrp.ribbons
-    .label&attributes(attributes)
-      .label-ribbon-left
-      .label-ribbon-right
+mixin label-corner(direction)
+  - direction = direction || "top-right";
+  .label-corner(class=direction)&attributes(attributes)
+    +label.compact
       block
-  +label-simple&attributes(attributes).invisible
-
-mixin label-ribbon-left
-  +label-wrp.ribbon-left
-    .label&attributes(attributes)
-      .label-ribbon-left
+      
+mixin label-tag
+  .label-tag
+    +label&attributes(attributes)
       block
-  +label-simple&attributes(attributes).invisible
-
-mixin label-ribbon-right
-  +label-wrp.ribbon-right
-    .label&attributes(attributes)
-      .label-ribbon-right
-      block
-  +label-simple&attributes(attributes).invisible
-
-mixin label-ribbons-simple
-  +label-ribbons&attributes(attributes)
-    +label-center
-      block
-
-mixin label-ribbon-left-simple
-  +label-ribbon-left&attributes(attributes)
-    +label-center
-      block
-
-mixin label-ribbon-right-simple
-  +label-ribbon-right&attributes(attributes)
-    +label-center
-      block
-
-mixin label-corner(direction, icon)
-  - direction = direction || "";
-  +label-wrp(class=direction).corner
-    .label&attributes(attributes).compact
-      .label-corner
-      +label-center
-        if icon
-          +icon(icon)
-        block
 
 
 //- =========================================================================
@@ -945,11 +801,10 @@ mixin multiple-right
 
 mixin navbar-btn(options)
   +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
-    +button-center
-      if options.title
-        span= options.title
-      if options.icon
-        +icon(options.icon)
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
 
 //- Options
   {
@@ -1089,7 +944,7 @@ mixin pagination(options)
       block
 
     else if options.total == 'infinite'
-      +button-simple(options.url)(class=options.classes) Load more
+      +button(options.url)(class=options.classes) Load more
       block
 
     else
@@ -1136,17 +991,17 @@ mixin pagination(options)
         while outputed_left_blocks > 0
           - var page_nr = options.current - outputed_left_blocks;
           - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
-          +button-simple(page_url)(title="Page " + page_nr class=options.classes)= page_nr
+          +button(page_url)(title="Page " + page_nr class=options.classes)= page_nr
           - outputed_left_blocks--;
 
         if need_current_button
-          +label-simple(title="Current page" class=options.classes).current= options.current
+          +label(title="Current page" class=options.classes).current= options.current
 
         - var counter = 1;
         while counter <= outputed_right_blocks
           - var page_nr = options.current + counter;
           - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
-          +button-simple(page_url)(title="Page " + page_nr class=options.classes)= page_nr
+          +button(page_url)(title="Page " + page_nr class=options.classes)= page_nr
           - counter++;
 
         if need_next_button
@@ -1313,11 +1168,10 @@ mixin radio(options)
         input(type="radio" name=name value=value)
       else
         input(type="radio" value=value)
-    +button-center
-      if options.title
-        span= options.title
-      +icon(options.icons.on)(class=options.colors.on).icon-on
-      +icon(options.icons.off)(class=options.colors.off).icon-off
+    if options.title
+      span= options.title
+    +icon(options.icons.on)(class=options.colors.on).icon-on
+    +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
 //- =========================================================================
@@ -1344,12 +1198,11 @@ mixin radio(options)
 mixin select-btn(options)
   - options.icon = options.icon || "reorder";
   +button(data-select="select-" + options.id)&attributes(attributes).select-btn.select-trigger
-    +button-center
-      if options.title
-        .select-label= options.title
-      if options.icon
-        +icon(options.icon)
-      +select(options)
+    if options.title
+      .select-label= options.title
+    if options.icon
+      +icon(options.icon)
+    +select(options)
 
 mixin select(options)
   - options.placeholder = options.placeholder || "Select a value...";

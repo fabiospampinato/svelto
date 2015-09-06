@@ -1,88 +1,135 @@
 
 extends ../layout.jade
 
-//- Buttons
+//- Button
 
 append main
-  +divider Simple
-
-  +button-simple Simple
-
   +divider Normal
 
   +multiple
-    +button-simple Base
-    +button-simple.sharp Sharp
-    +button-simple.rounded Rounded
-    +button-simple.compact Compact
-    +button-simple.active Active
+    +button.primary Primary
+    +button.secondary Secondary
+    +button.tertiary Tertiary
+    +button.quaternary Quaternary
+    +button.white White
+    +button.gray Gray
+    +button.black Black
+    +button.yellow Yellow
+    +button.olive Olive
+    +button.green Green
+    +button.blue Blue
+    +button.violet Violet
+    +button.orange Orange
+    +button.purple Purple
+    +button.red Red
+    +button.pink Pink
+    +button.teal Teal
+    +button.brown Brown
+    +button.transparent Transparent
+    +button.inherit Inherit
+    +button.base Base
 
-  +divider Icon
+  +divider Advanced
 
   +multiple
     +button-icon('settings')
     +button-icon('settings').rounded
-    +button-simple
+    +button
       +icon('settings')
       span Settings
-    +button-simple
+    +button
       span Settings
       +icon('settings')
     +button
       +button-left
         +icon('settings')
-      +button-center Settings
+      span Settings
     +button
-      +button-center Settings
-      +button-right
-        +icon('settings')
-    +button.compact
-      +button-left
-        +icon('settings')
-      +button-center Settings
-    +button.compact
-      +button-center Settings
+      span Settings
       +button-right
         +icon('settings')
 
-  +divider Pointed
+  +divider Rounded
 
   +multiple
-    +button-pointed-simple Normal
-    +button-pointed-simple.sharp Sharp
-    +button-pointed-simple.primary Colored
-    +button-pointed-simple.outlined Outlined
-    +button-pointed-simple.compact Compact
+    +button.rounded.primary 1
+    +button.rounded.secondary 2
+    +button.rounded.tertiary 3
+    +button.rounded.quaternary 4
+    +button.rounded.white 5
+    +button.rounded.gray 6
+    +button.rounded.black 7
+    +button.rounded.yellow 8
+    +button.rounded.olive 9
+    +button.rounded.green 10
+    +button.rounded.blue 11
+    +button.rounded.violet 12
+    +button.rounded.orange 13
+    +button.rounded.purple 14
+    +button.rounded.red 15
+    +button.rounded.pink 16
+    +button.rounded.teal 17
+    +button.rounded.brown 18
+    +button.rounded.transparent 19
+    +button.rounded.inherit 20
+    +button.rounded.base 21
 
-  +divider Ribbons
+  +divider Tag
 
-  +container-simple.limited.xs-10
-    +button-ribbons-simple.primary Left & Right
+  +multiple
+    +button-tag Normal
+    +button-tag.sharp Sharp
+    +button-tag.sharp.outlined Sharp
+    +button-tag.sharp.compact Sharp
+    +button-tag.primary Colored
+    +button-tag.outlined Outlined
+    +button-tag.compact Compact
+
+  +divider Ribbon
+
+  +container-simple.centered.xs-10.outlined.z-depth-1
+    +button-ribbon.ribbon-left.ribbon-right.primary Left & Right
     +paragraph-sample
-    +button-ribbon-left-simple.secondary Left
+    +button-ribbon.ribbon-left.secondary Left
     +paragraph-sample
-    +button-ribbon-right-simple.tertiary Right
+    +button-ribbon.ribbon-right.tertiary Right
     +paragraph-sample
-    +button-ribbons-simple.outlined Outlined
+    +button-ribbon.ribbon-left.ribbon-right.outlined Outlined
     +paragraph-sample
 
   +divider Corner
 
-  +container-simple
+  +container-simple.outlined
     +button-corner("top-left").primary P
-    +button-corner("top-right", "file_download").secondary
-    +button-corner("bottom-right", "thumb_up").quaternary
-    +button-corner("bottom-left", "favorite").tertiary
+    +button-corner("top-right").secondary
+      +icon("file_download")
+    +button-corner("bottom-right").quaternary
+      +icon("thumb_up")
+    +button-corner("bottom-left").tertiary
+      +icon("favorite")
     +paragraph-sample
 
   +divider Badge
 
-  +label-icon('settings')
-    +button-simple.compact.badge.xsmall.quaternary.top-left 1
-    +button-simple.compact.badge.xsmall.primary.top-right 2
-    +button-simple.compact.badge.xsmall.tertiary.bottom-left 3
-    +button-simple.compact.badge.xsmall.secondary.bottom-right 4
+  +multiple
+    +label-icon('settings').compact
+      +button.compact.rounded.badge.xxsmall.quaternary.top-left 1
+      +button.compact.rounded.badge.xxsmall.primary.top-right 2
+      +button.compact.rounded.badge.xxsmall.tertiary.bottom-left 3
+      +button.compact.rounded.badge.xxsmall.secondary.bottom-right 4
 
   +divider Floating
 
   +button-icon('settings').floating.rounded.secondary.large
+
+  +divider Actions
+
+  +multiple
+    +button("toggle_class ( 'outlined' )").outlined Toggle outlined
+    +button("toggle_class ( 'compact' )").outlined Toggle compact
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.button').toggleClass ( css_class );
+    }

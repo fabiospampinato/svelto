@@ -15,19 +15,19 @@ append main
 
   +multiple
     +checkbox({ name: "live", title: "Live", value: 1 }).live.outlined
-    +button-simple("positionate2anchor ( false )").outlined Auto
-    +button-simple("positionate2anchor ( 'top' )").outlined Top
-    +button-simple("positionate2anchor ( 'bottom' )").outlined Bottom
-    +button-simple("positionate2anchor ( 'left' )").outlined Left
-    +button-simple("positionate2anchor ( 'right' )").outlined Right
-    +button-simple("positionate2axis ( 'x' )").outlined X Axis
-    +button-simple("positionate2axis ( 'y' )").outlined Y Axis
-    +button-simple("positionate2diraxis ( 'x', 'top' )").outlined X Top
-    +button-simple("positionate2diraxis ( 'y', 'left' )").outlined Y Left
+    +button("positionate2anchor ( false )").outlined Auto
+    +button("positionate2anchor ( 'top' )").outlined Top
+    +button("positionate2anchor ( 'bottom' )").outlined Bottom
+    +button("positionate2anchor ( 'left' )").outlined Left
+    +button("positionate2anchor ( 'right' )").outlined Right
+    +button("positionate2axis ( 'x' )").outlined X Axis
+    +button("positionate2axis ( 'y' )").outlined Y Axis
+    +button("positionate2diraxis ( 'x', 'top' )").outlined X Top
+    +button("positionate2diraxis ( 'y', 'left' )").outlined Y Left
     +multiple.joined
       +input({ name: "input_x", label: "X axis..." }).no-floating.white.outlined
       +input({ name: "input_y", label: "Y axis..." }).no-floating.white.outlined
-      +button-simple("positionate2coordinates ()").secondary.outlined Coordinates
+      +button("positionate2coordinates ()").secondary.outlined Coordinates
 
 append body-end
   +noty({ body: "The anchor is draggable" })

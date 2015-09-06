@@ -23,12 +23,11 @@
 mixin select-btn(options)
   - options.icon = options.icon || "reorder";
   +button(data-select="select-" + options.id)&attributes(attributes).select-btn.select-trigger
-    +button-center
-      if options.title
-        .select-label= options.title
-      if options.icon
-        +icon(options.icon)
-      +select(options)
+    if options.title
+      .select-label= options.title
+    if options.icon
+      +icon(options.icon)
+    +select(options)
 
 mixin select(options)
   - options.placeholder = options.placeholder || "Select a value...";

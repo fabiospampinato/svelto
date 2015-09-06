@@ -23,7 +23,7 @@ mixin pagination(options)
       block
 
     else if options.total == 'infinite'
-      +button-simple(options.url)(class=options.classes) Load more
+      +button(options.url)(class=options.classes) Load more
       block
 
     else
@@ -70,17 +70,17 @@ mixin pagination(options)
         while outputed_left_blocks > 0
           - var page_nr = options.current - outputed_left_blocks;
           - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
-          +button-simple(page_url)(title="Page " + page_nr class=options.classes)= page_nr
+          +button(page_url)(title="Page " + page_nr class=options.classes)= page_nr
           - outputed_left_blocks--;
 
         if need_current_button
-          +label-simple(title="Current page" class=options.classes).current= options.current
+          +label(title="Current page" class=options.classes).current= options.current
 
         - var counter = 1;
         while counter <= outputed_right_blocks
           - var page_nr = options.current + counter;
           - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
-          +button-simple(page_url)(title="Page " + page_nr class=options.classes)= page_nr
+          +button(page_url)(title="Page " + page_nr class=options.classes)= page_nr
           - counter++;
 
         if need_next_button

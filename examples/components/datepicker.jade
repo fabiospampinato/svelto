@@ -18,13 +18,13 @@ append main
   +multiple
     +multiple.joined
       +checkbox({ name: "datepicker_get_formatted", title: "Formatted", value: 1 }).outlined
-      +button-simple("datepicker_get ()").primary.outlined Get
+      +button("datepicker_get ()").primary.outlined Get
     +multiple.joined
       +input({ name: "datepicker_delta_months", label: "Delta months..." }).no-floating.white.text-field-secondary.outlined
-      +button-simple("datepicker_navigate ()").secondary.outlined Navigate
+      +button("datepicker_navigate ()").secondary.outlined Navigate
     +multiple.joined
       +button-icon("chevron_left", "datepicker_navigate_prev ()").outlined
-      +label-simple.outlined Month
+      +label.outlined Month
       +button-icon("chevron_right", "datepicker_navigate_next ()").outlined
 
 append body-end

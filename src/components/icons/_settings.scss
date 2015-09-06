@@ -10,6 +10,5 @@
 
 /* ICONS */
 
-//TODO: Import typography and do the calculus
-
-$icon-scale-amount: 1.6 !default; //INFO: So that we have a 24px wide icon at medium size //FIXME: It's a shitty solution
+$icon-best-size: 24px; //INFO: At this size the icons look the best
+$icon-scale-amount: $icon-best-size / $font-size !default; //INFO: This is the scale factor at which the icons are at their best dimensions at the default `medium` size

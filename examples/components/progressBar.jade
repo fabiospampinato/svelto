@@ -35,39 +35,39 @@ append main
   +container-simple.created.outlined
 
   +multiple
-    +button-simple("progressbar_create ( 22 )").outlined Basic
-    +button-simple("progressbar_create ( 0 )").outlined Basic 0
-    +button-simple("progressbar_create ({ percentages: [{ value: 43.21 }], labeled: true })").outlined Labeled
-    +button-simple("progressbar_create ({ percentages: [{ value: 3.12332 }], labeled: true })").outlined Labeled small
-    +button-simple("progressbar_create ({ percentages: [{ value: 31.12382391823 }], labeled: true })").outlined Labeled long
-    +button-simple("progressbar_create ({ percentages: [{ value: 31.12382391823 }], labeled: true, decimals: 10 })").outlined Labeled long 10 decimals
-    +button-simple("progressbar_create ({ percentages: [{ value: 10 }, { value: 55 }], labeled: true })").outlined Multiple
-    +button-simple("progressbar_create ( 10, { value: 55, color: 'pink' })").outlined Multiple colors
-    +button-simple("progressbar_create ({ percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true })").outlined Advanced
+    +button("progressbar_create ( 22 )").outlined Basic
+    +button("progressbar_create ( 0 )").outlined Basic 0
+    +button("progressbar_create ({ percentages: [{ value: 43.21 }], labeled: true })").outlined Labeled
+    +button("progressbar_create ({ percentages: [{ value: 3.12332 }], labeled: true })").outlined Labeled small
+    +button("progressbar_create ({ percentages: [{ value: 31.12382391823 }], labeled: true })").outlined Labeled long
+    +button("progressbar_create ({ percentages: [{ value: 31.12382391823 }], labeled: true, decimals: 10 })").outlined Labeled long 10 decimals
+    +button("progressbar_create ({ percentages: [{ value: 10 }, { value: 55 }], labeled: true })").outlined Multiple
+    +button("progressbar_create ( 10, { value: 55, color: 'pink' })").outlined Multiple colors
+    +button("progressbar_create ({ percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true })").outlined Advanced
 
   +divider Set single
 
   +multiple
-    +button-simple("progressbar_set_single ( 0 )").outlined 0%
-    +button-simple("progressbar_set_single ( 25 )").outlined 25%
-    +button-simple("progressbar_set_single ( 50 )").outlined 50%
-    +button-simple("progressbar_set_single ( 75 )").outlined 75%
-    +button-simple("progressbar_set_single ( 100 )").outlined 100%
+    +button("progressbar_set_single ( 0 )").outlined 0%
+    +button("progressbar_set_single ( 25 )").outlined 25%
+    +button("progressbar_set_single ( 50 )").outlined 50%
+    +button("progressbar_set_single ( 75 )").outlined 75%
+    +button("progressbar_set_single ( 100 )").outlined 100%
 
   +divider Set multiple
 
   +multiple
-    +button-simple("progressbar_set_multiple ( 0, 10, 0, 0 )").outlined 0% 10% 0%
-    +button-simple("progressbar_set_multiple ( 5, 10, 0, 0 )").outlined 5% 10% 0%
-    +button-simple("progressbar_set_multiple ( 20, 5, 10, 5 )").outlined 20% 5% 10% 5%
-    +button-simple("progressbar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
-    +button-simple("progressbar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
+    +button("progressbar_set_multiple ( 0, 10, 0, 0 )").outlined 0% 10% 0%
+    +button("progressbar_set_multiple ( 5, 10, 0, 0 )").outlined 5% 10% 0%
+    +button("progressbar_set_multiple ( 20, 5, 10, 5 )").outlined 20% 5% 10% 5%
+    +button("progressbar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
+    +button("progressbar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
 
   +divider Enable / Disable
 
   +multiple
-    +button-simple("progressbar_enable ()").outlined Enable
-    +button-simple("progressbar_disable ()").outlined Disable
+    +button("progressbar_enable ()").outlined Enable
+    +button("progressbar_disable ()").outlined Disable
 
 append body-end
   +script.

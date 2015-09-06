@@ -21,9 +21,9 @@ $max-width: map-get($breakpoints, $max-width-size) !default; //TODO: Provide sup
 
 /* BORDER RADIUS */
 
-$border-radius-small: 0.13325rem !default;
-$border-radius-medium: 0.2665rem !default;
-$border-radius-large: 0.39975rem !default;
+$border-radius-small: 0.13325em !default;
+$border-radius-medium: 0.2665em !default;
+$border-radius-large: 0.39975em !default;
 
 $border-radius: $border-radius-medium !default;
 

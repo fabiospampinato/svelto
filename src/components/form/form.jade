@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Form v0.1.0
+//- Svelto - Form v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,29 +10,11 @@ mixin form
   form&attributes(attributes)
     block
 
-mixin form-button(href)
-  //- TODO: Make it DRY, we are basically just repeating the button mixin
-  button(type="submit")&attributes(attributes).label-wrp.button-wrp
-    if href
-      if href.slice ( 0, 11 ) === 'javascript:'
-        .label(onclick=href)&attributes(attributes).actionable
-          block
-      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-        .label(onclick="javascript:" + href)&attributes(attributes).actionable
-          block
-      else
-        a.label(href=href)&attributes(attributes).actionable
-          block
-    else
-      .label&attributes(attributes).actionable
-        block
+mixin form-button
+  button(type="submit")&attributes(attributes).label.button.actionable
+    block
 
-mixin form-button-simple(href)
-  +form-button(href)&attributes(attributes)
-    +button-center
-      block
-
-mixin form-button-icon(icon, href)
-  +form-button(href)&attributes(attributes)
-    +button-icon(icon)
-      block
+mixin form-button-icon(icon)
+  button(type="submit")&attributes(attributes).label.button.actionable
+    +icon(icon)
+    block

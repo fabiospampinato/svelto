@@ -1,114 +1,51 @@
 
 //- =========================================================================
-//- Svelto - Button v0.1.0
+//- Svelto - Button v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin button-wrp
-  .label-wrp&attributes(attributes).button-wrp
-    block
-
 mixin button(href)
-  +button-wrp
-    if href
-      if href.slice ( 0, 11 ) === 'javascript:'
-        .label(onclick=href)&attributes(attributes).actionable
-          block
-      else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-        .label(onclick="javascript:" + href)&attributes(attributes).actionable
-          block
-      else
-        a.label(href=href)&attributes(attributes).actionable
-          block
-    else
-      .label&attributes(attributes).actionable
+  if href
+    if href.slice ( 0, 11 ) === 'javascript:'
+      .label(onclick=href)&attributes(attributes).button.actionable
         block
+    else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+      .label(onclick="javascript:" + href)&attributes(attributes).button.actionable
+        block
+    else
+      a.label(href=href)&attributes(attributes).button.actionable
+        block
+  else
+    .label&attributes(attributes).button.actionable
+      block
 
 mixin button-left
-  .label-left&attributes(attributes)
+  .label-left&attributes(attributes).button-left
     block
-
-mixin button-center
-  .label-center&attributes(attributes)
-    block
-
+      
 mixin button-right
-  .label-right&attributes(attributes)
+  .label-right&attributes(attributes).button-right
     block
 
-mixin button-simple(href)
-  +button(href)&attributes(attributes)
-    +button-center
-      block
-
-mixin button-icon(icon, href)
-  +button(href)&attributes(attributes)
-    +button-center
-      +icon(icon)
+mixin button-icon(icon)
+  +button&attributes(attributes)
+    +icon(icon)
     block
-
-//- FIXME: Add support for href
-
-mixin button-pointed
-  +button-wrp.pointed
-    +button-pointer&attributes(attributes)
-    .label&attributes(attributes).actionable
-      block
-
-mixin button-pointed-simple
-  +button-pointed&attributes(attributes)
-    +button-center
-      block
-
-mixin button-pointer
-  +label-pointer&attributes(attributes)
+  
+mixin button-ribbon
+  +button&attributes(attributes).ribbon
     block
+  +button.invisible
 
-mixin button-ribbons
-  +button-wrp.ribbons
-    .label&attributes(attributes).actionable
-      .label-ribbon-left
-      .label-ribbon-right
-      block
-  +button-simple&attributes(attributes).invisible
-
-mixin button-ribbon-left
-  +button-wrp.ribbon-left
-    .label&attributes(attributes).actionable
-      .label-ribbon-left
-      block
-  +button-simple&attributes(attributes).invisible
-
-mixin button-ribbon-right
-  +button-wrp.ribbon-right
-    .label&attributes(attributes).actionable
-      .label-ribbon-right
-      block
-  +button-simple&attributes(attributes).invisible
-
-mixin button-ribbons-simple
-  +button-ribbons&attributes(attributes)
-    +label-center
-      block
-
-mixin button-ribbon-left-simple
-  +button-ribbon-left&attributes(attributes)
-    +label-center
-      block
-
-mixin button-ribbon-right-simple
-  +button-ribbon-right&attributes(attributes)
-    +label-center
-      block
-
-mixin button-corner(direction, icon)
+mixin button-corner(direction)
   - direction = direction || "top-right";
-  +button-wrp(class=direction).corner
-    .label&attributes(attributes).compact.actionable
-      .label-corner
-      +button-center
-        if icon
-          +icon(icon)
-        block
+  .label-corner(class=direction)&attributes(attributes).button-corner.actionable
+    +button.compact
+      block
+      
+mixin button-tag
+  .label-tag.button-tag
+    +button&attributes(attributes)
+      block

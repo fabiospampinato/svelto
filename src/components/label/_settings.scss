@@ -18,6 +18,7 @@ $label-border-radius: $border-radius !default;
 $label-left-right-bg-color: rgba(0, 0, 0, 0.05) !default;
 
 $label-center-icon-extra-spacing: 0.75em !default;
+$label-compact-center-icon-extra-spacing: 0.5em !default;
 
 $label-horizontal-padding: 1.2em !default;
 $label-vertical-padding: $label-horizontal-padding / 100 * 50 !default;
@@ -25,40 +26,34 @@ $label-vertical-padding: $label-horizontal-padding / 100 * 50 !default;
 $label-compact-horizontal-padding: $label-vertical-padding !default;
 $label-compact-vertical-padding: $label-vertical-padding !default;
 
+$label-floating-horizontal-padding: $label-vertical-padding * 1.8 !default;
+$label-floating-vertical-padding: $label-vertical-padding * 1.8 !default;
+
+$label-corner-horizontal-padding: $label-compact-horizontal-padding * 2 !default;
+$label-corner-vertical-padding: $label-compact-vertical-padding * 2 !default;
+
 /* BADGE */
 
 $label-badge-spacing: -20% !default;
 
-/* POINTER */
+/* TAG */
 
-$label-pointer-color: $label-color !default;
-$label-pointer-color-basic: $label-color-basic !default;
+$label-tag-sharp-size: ( $line-height-em + ( $label-vertical-padding * 2 ) ) / $SQRT2 !default;
+$label-tag-sharp-compact-size: ( $line-height-em + ( $label-compact-vertical-padding * 2 ) ) / $SQRT2 !default;
 
-$label-pointer-sharp-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2 !default;
-$label-pointer-sharp-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-sharp-size ) / 2 + ( $label-pointer-sharp-size / 16 ) ) !default;
+$label-tag-smooth-size: $label-tag-sharp-size + ( $label-border-radius / 2 ) !default;
+$label-tag-smooth-compact-size:$label-tag-sharp-compact-size + ( $label-border-radius / 2 ) !default;
 
-$label-pointer-sharp-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2 !default;
-$label-pointer-sharp-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-sharp-compact-size ) / 2 + ( $label-pointer-sharp-compact-size / 16 ) ) !default;
+/* TAG CIRCLE */
 
-$label-pointer-smooth-size: ( ( 2 * $label-vertical-padding ) + 1 ) / $SQRT2 !default;
-$label-pointer-smooth-margin-left: - ( ( ( 1em + ( $label-vertical-padding * 2 ) ) - $label-pointer-smooth-size ) / 2 + ( $label-pointer-smooth-size / 16 ) ) !default;
-
-$label-pointer-smooth-compact-size: ( ( 2 * $label-compact-vertical-padding ) + 1 ) / $SQRT2 !default;
-$label-pointer-smooth-compact-margin-left: - ( ( ( 1em + ( $label-compact-vertical-padding * 2 ) ) - $label-pointer-smooth-compact-size ) / 2 + ( $label-pointer-smooth-compact-size / 16 ) ) !default;
-
-/* POINTER CIRCLE */
-
-$label-pointer-circle-size: 0.5em !default;
-
-$label-pointer-circle-box-shadow: 1px -1px 0.5px 0 rgba(0, 0, 0, 0.1) !default;
+$label-tag-circle-scale: 0.25 !default;
+$label-tab-circle-background-color: $color-base !default;
+$label-tag-circle-box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.3) !default;
 
 /* RIBBONS */
 
-$label-ribbon-size: $gutter * 1.5 !default;
+$label-ribbon-size: 8px !default;
 
-/* CORNER */
-
-$label-corner-size: 3.5em !default;
 
 /* FLOATING */
 
