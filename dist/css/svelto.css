@@ -5032,36 +5032,43 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - Icons v0.1.0
+ * Svelto - Icons v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-/* GENERAL */
-i.icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.slider-disabled) > .slider-max:hover:after, table.table.sortable > thead > tr > th[data-sort]:before, table.table.sortable > thead > tr > th[data-sort]:after {
+/* PLACEHOLDER */
+.icon-wrp {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.icon-wrp > .icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.slider-disabled) > .slider-max:hover:after, table.table.sortable > thead > tr > th[data-sort]:before, table.table.sortable > thead > tr > th[data-sort]:after {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  line-height: 1;
-  display: inline-block;
-  overflow: hidden;
+  font-size: 1.6em;
   width: 1em;
   height: 1em;
-  -webkit-transform: scale(1.6);
-          transform: scale(1.6);
+  line-height: 1;
   letter-spacing: normal;
   text-transform: none;
-  word-wrap: nowrap;
+  word-wrap: normal;
+  /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
+  /* Support for all WebKit browsers */
   text-rendering: optimizeLegibility;
+  /* Support for all WebKit browsers */
   -moz-osx-font-smoothing: grayscale;
+  /* Support for all WebKit browsers */
   -webkit-font-feature-settings: 'liga';
      -moz-font-feature-settings: 'liga';
           font-feature-settings: 'liga';
 }
 
+/* ICON */
 /* =========================================================================
  * Svelto - Image (Settings) v0.1.0
  * =========================================================================

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Icons v0.1.0
+ * Svelto - Icons v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,28 +8,43 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-/* GENERAL */
+/* PLACEHOLDER */
+
+%icon-wrp {
+  display: inline-block;
+  vertical-align: middle;
+}
 
 %icon {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  line-height: 1;
-  display: inline-block;
-  overflow: hidden; //INFO: It fixes an overflowing bug in the `icons` demo page, so probably also everywhere else
+  font-size: $icon-scale-amount * 1em;
   width: 1em;
   height: 1em;
-  transform: scale($icons-scale-amount);
+  line-height: 1;
   letter-spacing: normal;
   text-transform: none;
-  word-wrap: nowrap;
+  word-wrap: normal;
 
+  /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
+  /* Support for all WebKit browsers */
   text-rendering: optimizeLegibility;
+  /* Support for all WebKit browsers */
   -moz-osx-font-smoothing: grayscale;
+  /* Support for all WebKit browsers */
   font-feature-settings: 'liga';
 }
 
-i.icon {
-  @extend %icon;
+/* ICON */
+
+.icon-wrp {
+
+  @extend %icon-wrp;
+
+  > .icon {
+    @extend %icon;
+  }
+
 }
