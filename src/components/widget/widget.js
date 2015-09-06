@@ -28,8 +28,8 @@
     /* NAMES */
 
     namespace: false,
-    widgetName: 'widget',
-    widgetFullName: 'widget', //INFO: `namespace-widgetName`
+    name: 'widget',
+    fullName: 'widget', //INFO: `namespace.name`
 
     /* TEMPLATES */
 
@@ -74,11 +74,11 @@
 
       // SET DISABLED
 
-      this.options.disabled = this.options.disabled || this.$element.hasClass ( this.widgetName + '-disabled' );
+      this.options.disabled = this.options.disabled || this.$element.hasClass ( this.name + '-disabled' );
 
       // SAVE WIDGET INSTANCE
 
-      $.data ( this.element, this.widgetFullName, this );
+      $.data ( this.element, this.fullName, this );
 
       // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
@@ -112,7 +112,7 @@
 
       this._destroy ();
 
-      $.removeData ( this.element, this.widgetFullName );
+      $.removeData ( this.element, this.fullName );
 
     },
 
@@ -202,7 +202,7 @@
 
       if ( key === 'disabled' ) {
 
-        this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
+        this.$element.toggleClass ( this.name + '-disabled', !!value );
 
       }
 
@@ -334,7 +334,7 @@
 
       for ( var ei = 0, el = events.length; ei < el; ei++ ) {
 
-        this.$element.trigger ( this.widgetName + ':' + events[ei], data );
+        this.$element.trigger ( this.name + ':' + events[ei], data );
 
         if ( _.isFunction ( this.options.callbacks[events[ei]] ) ) {
 
@@ -390,7 +390,7 @@
 
     _tmpl: function ( name, options ) {
 
-      return $.tmpl ( this.widgetFullName + '-' + name, options || {} );
+      return $.tmpl ( this.fullName + '.' + name, options || {} );
 
     },
 

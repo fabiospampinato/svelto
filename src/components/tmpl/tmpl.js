@@ -6,11 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* TMPL - https://github.com/blueimp/JavaScript-Templates */
+//SOURCE: - https://github.com/blueimp/JavaScript-Templates
 
 /*
  ***************************
- *    Documentation    *
+ *      Documentation      *
  ***************************
  *
  * Interpolation
@@ -66,12 +66,12 @@
   var tmpl = function ( str, data ) {
 
     var f = !/[^\w\-\.:]/.test ( str )
-          ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-          : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
+              ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
+              : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
 
     return data
-           ? f ( data, tmpl )
-           : function ( data ) { return f ( data, tmpl ); };
+             ? f ( data, tmpl )
+             : function ( data ) { return f ( data, tmpl ); };
 
   };
 

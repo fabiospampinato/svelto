@@ -1369,6 +1369,45 @@ mixin select(options)
 
 
 //- =========================================================================
+//- Svelto - Slider v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Step amount
+  }
+  
+mixin slider(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
+  .slider(data-step=step)&attributes(attributes)
+    if options.name
+      input(type="number" name=name value=value)
+    else
+      input(type="number" value=value)
+    .slider-min(title="Decrease" data-min=options.min)
+    .slider-max(title="Increase" data-max=options.max)
+    .slider-bar-wrp
+      .slider-bar
+        .slider-unhighlighted
+          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
+      .slider-handler-wrp(style="left:" + percentage + "%;")
+        .slider-handler
+          .slider-label= value
+
+
+//- =========================================================================
 //- Svelto - Shapes v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1411,74 +1450,6 @@ mixin circle
 
 
 //- =========================================================================
-//- Svelto - Slider v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '', // Max value
-    step: '' // Step amount
-  }
-  
-mixin slider(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value || options.min;
-  - options.max = options.max || 100;
-  - options.step = options.step || 1;
-  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
-  .slider(data-step=step)&attributes(attributes)
-    if options.name
-      input(type="number" name=name value=value)
-    else
-      input(type="number" value=value)
-    .slider-min(title="Decrease" data-min=options.min)
-    .slider-max(title="Increase" data-max=options.max)
-    .slider-bar-wrp
-      .slider-bar
-        .slider-unhighlighted
-          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
-      .slider-handler-wrp(style="left:" + percentage + "%;")
-        .slider-handler
-          .slider-label= value
-
-
-//- =========================================================================
-//- Svelto - Stepper v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '' // Max value
-  }
-
-mixin stepper(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value || options.min;
-  - options.max = options.max || 100;
-  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
-    +button-icon("remove").stepper-decreaser
-    if options.name
-      +input({ name: name, value: value }).autogrow.compact
-    else
-      +input({ value: value }).autogrow.compact
-    +button-icon("add").stepper-increaser
-
-
-//- =========================================================================
 //- Svelto - Spinner v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1512,6 +1483,35 @@ mixin spinner-multiple(options)
     else
       each color in options
         +spinner-no-wrp(class=color)
+
+
+//- =========================================================================
+//- Svelto - Stepper v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '' // Max value
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
+    +button-icon("remove").stepper-decreaser
+    if options.name
+      +input({ name: name, value: value }).autogrow.compact
+    else
+      +input({ value: value }).autogrow.compact
+    +button-icon("add").stepper-increaser
 
 
 //- =========================================================================
@@ -1587,6 +1587,30 @@ mixin table-tr-empty ( empty_str )
 
 
 //- =========================================================================
+//- Svelto - Tabs v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin tabs
+  .tabs&attributes(attributes)
+    block
+
+mixin tabs-buttons
+  .tabs-buttons&attributes(attributes)
+    block
+
+mixin tabs-buttons-indicator
+  .tabs-buttons-indicator&attributes(attributes)
+    block
+
+mixin tabs-containers
+  .tabs-containers&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Tagbox v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1614,30 +1638,6 @@ mixin tagbox(options)
         +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
       else
         +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
-
-
-//- =========================================================================
-//- Svelto - Tabs v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin tabs
-  .tabs&attributes(attributes)
-    block
-
-mixin tabs-buttons
-  .tabs-buttons&attributes(attributes)
-    block
-
-mixin tabs-buttons-indicator
-  .tabs-buttons-indicator&attributes(attributes)
-    block
-
-mixin tabs-containers
-  .tabs-containers&attributes(attributes)
-    block
 
 
 //- =========================================================================

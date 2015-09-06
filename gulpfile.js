@@ -93,7 +93,7 @@ gulp.task ( 'examples', function () {
                pretty: true
              }))
              .on ( 'error', function ( err ) {
-               console.log ( err.message );
+               gutil.log ( err.message );
              })
              //  .pipe ( minify_html ({
              //    considtionals: true

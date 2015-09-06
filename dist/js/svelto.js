@@ -434,11 +434,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* TMPL - https://github.com/blueimp/JavaScript-Templates */
+//SOURCE: - https://github.com/blueimp/JavaScript-Templates
 
 /*
  ***************************
- *    Documentation    *
+ *      Documentation      *
  ***************************
  *
  * Interpolation
@@ -494,12 +494,12 @@
   var tmpl = function ( str, data ) {
 
     var f = !/[^\w\-\.:]/.test ( str )
-          ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-          : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
+              ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
+              : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
 
     return data
-           ? f ( data, tmpl )
-           : function ( data ) { return f ( data, tmpl ); };
+             ? f ( data, tmpl )
+             : function ( data ) { return f ( data, tmpl ); };
 
   };
 
@@ -586,8 +586,8 @@
     /* NAMES */
 
     namespace: false,
-    widgetName: 'widget',
-    widgetFullName: 'widget', //INFO: `namespace-widgetName`
+    name: 'widget',
+    fullName: 'widget', //INFO: `namespace.name`
 
     /* TEMPLATES */
 
@@ -632,11 +632,11 @@
 
       // SET DISABLED
 
-      this.options.disabled = this.options.disabled || this.$element.hasClass ( this.widgetName + '-disabled' );
+      this.options.disabled = this.options.disabled || this.$element.hasClass ( this.name + '-disabled' );
 
       // SAVE WIDGET INSTANCE
 
-      $.data ( this.element, this.widgetFullName, this );
+      $.data ( this.element, this.fullName, this );
 
       // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
@@ -670,7 +670,7 @@
 
       this._destroy ();
 
-      $.removeData ( this.element, this.widgetFullName );
+      $.removeData ( this.element, this.fullName );
 
     },
 
@@ -760,7 +760,7 @@
 
       if ( key === 'disabled' ) {
 
-        this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
+        this.$element.toggleClass ( this.name + '-disabled', !!value );
 
       }
 
@@ -892,7 +892,7 @@
 
       for ( var ei = 0, el = events.length; ei < el; ei++ ) {
 
-        this.$element.trigger ( this.widgetName + ':' + events[ei], data );
+        this.$element.trigger ( this.name + ':' + events[ei], data );
 
         if ( _.isFunction ( this.options.callbacks[events[ei]] ) ) {
 
@@ -948,7 +948,7 @@
 
     _tmpl: function ( name, options ) {
 
-      return $.tmpl ( this.widgetFullName + '-' + name, options || {} );
+      return $.tmpl ( this.fullName + '.' + name, options || {} );
 
     },
 
@@ -987,6 +987,41 @@
     }
 
   };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Browser v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: detect browsers, versions, OSes, but... is it useful?
+//TODO: detect: windows phone, smartphone, windows, linux, safari, opera, firefox, lowend
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var userAgent = navigator.userAgent.toLowerCase ();
+
+  /* BROWSER */
+
+  $.browser = {
+    isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
+    isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
+    isAndroid: /android/i.test ( userAgent ),
+    isIOS: /(iphone|ipad|ipod)/i.test ( userAgent ),
+    isMac: /mac/i.test ( userAgent ),
+    isIE: /msie [\w.]+/.test ( userAgent ),
+    isChrome: /chrome/i.test ( userAgent )
+  };
+
+  $.browser.hasTouch = ( 'ontouchstart' in window && !($.browser.isChrome && !$.browser.isAndroid) ); //FIXME: Why do we need the second check? Do other libraries do the same?
 
 }( jQuery, _, window, document ));
 
@@ -1470,6 +1505,604 @@
 
 
 /* =========================================================================
+ * Svelto - Pointer v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../browser/browser.js
+ * ========================================================================= */
+
+//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* POINTER */
+
+  $.Pointer = {
+    pressDuration: 300,
+    doubleTapInterval: 300,
+    flickDuration: 150,
+    motionThreshold: 5
+  };
+
+  var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+    events_namespace = 'pointer';
+
+  _.each ( events_names, function ( event_name ) {
+
+    var full_event = events_namespace + event_name;
+
+    $.Pointer[event_name] = full_event;
+
+    $.fn[event_name] = function ( fn ) {
+
+      return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
+
+    };
+
+  });
+
+  /* TRIGGERS */
+
+  var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
+    moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
+    endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
+    $html = $(document.documentElement),
+    startXY,
+    moveXY,
+    deltaXY,
+    endXY,
+    target,
+    $target,
+    start_timestamp,
+    end_timestamp,
+    prev_tap_timestamp = 0,
+    motion,
+    orientation,
+    direction,
+    press_timeout;
+
+  var createEvent = function ( name, originalEvent ) {
+
+    var event = $.Event ( name );
+
+    event.originalEvent = originalEvent;
+    event.isPointerEvent = true;
+
+    return event;
+
+  };
+
+  var startHandler = function ( event ) {
+
+    startXY = $.eventXY ( event );
+
+    target = event.target;
+    $target = $(target);
+
+    start_timestamp = event.timeStamp || _.now ();
+
+    motion = false;
+
+    press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
+
+    $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
+      startXY: startXY
+    });
+
+    $html.on ( moveEvents, moveHandler );
+    $html.on ( endEvents, endHandler );
+
+  };
+
+  var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
+
+    $target.trigger ( createEvent ( $.Pointer.press, event ) );
+
+  };
+
+  var moveHandler = function ( event ) {
+
+    clearTimeout ( press_timeout );
+
+    moveXY = $.eventXY ( event );
+
+    deltaXY = {
+      X: moveXY.X - startXY.X,
+      Y: moveXY.Y - startXY.Y
+    };
+
+    if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
+
+      motion = true;
+
+      $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
+        startXY: startXY,
+        moveXY: moveXY,
+        deltaXY: deltaXY
+      });
+
+    }
+
+  };
+
+  var endHandler = function ( event ) {
+
+    clearTimeout ( press_timeout );
+
+    endXY = $.eventXY ( event );
+    deltaXY = {
+      X: endXY.X - startXY.X,
+      Y: endXY.Y - startXY.Y
+    };
+
+    if ( target === event.target ) {
+
+      end_timestamp = event.timeStamp || _.now ();
+
+      if ( !$.browser.hasTouch || !motion ) {
+
+        $target.trigger ( createEvent ( $.Pointer.tap, event ) );
+
+        if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
+
+          $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
+
+        }
+
+        prev_tap_timestamp = end_timestamp;
+
+      }
+
+      if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
+
+        if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
+
+          orientation = 'horizontal';
+          direction = ( deltaXY.X > 0 ) ? 1 : -1;
+
+        } else {
+
+          orientation = 'vertical';
+          direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+
+        }
+
+        $target.trigger ( createEvent ( $.Pointer.flick, event ), {
+          startXY: startXY,
+          endXY: endXY,
+          deltaXY: deltaXY,
+          orientation: orientation,
+          direction: direction
+        });
+
+      }
+
+    }
+
+    $html.off ( moveEvents, moveHandler );
+    $html.off ( endEvents, endHandler );
+
+    $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
+      startXY: startXY,
+      endXY: endXY,
+      deltaXY: deltaXY
+    });
+
+  };
+
+  $html.on ( startEvents, startHandler );
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Accordion v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* ACCORDION */
+
+  $.factory ( 'svelto.accordion', {
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$accordion = this.$element;
+      this.$expanders = this.$accordion.children ( '.expander' );
+
+      this.expanders_instances = Array ( this.$expanders.length );
+
+      this.isMultiple = this.$accordion.hasClass ( 'multiple' );
+
+    },
+
+    _init: function () {
+
+      for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+
+        this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
+
+      }
+
+    },
+
+    _events: function () {
+
+      this._on ( 'expander:open', '.expander', this._handler_open );
+
+    },
+
+    /* OPEN */
+
+    _handler_open: function ( event, data, node ) {
+
+      if ( !this.isMultiple ) {
+
+        for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+
+          if ( this.$expanders[i] !== node ) {
+
+            this.expanders_instances[i].close ();
+
+          }
+
+        }
+
+      }
+
+    },
+
+    /* PUBLIC */
+
+    toggle: function ( index ) {
+
+      this.expanders_instances[index].toggle ();
+
+    },
+
+    toggleAll: function () {
+
+      _.each ( this.expanders_instances, function ( instance ) {
+
+        instance.toggle ();
+
+      });
+
+    },
+
+    open: function ( index ) {
+
+      this.expanders_instances[index].open ();
+
+    },
+
+    openAll: function () {
+
+      _.each ( this.expanders_instances, function ( instance ) {
+
+        instance.open ();
+
+      });
+
+    },
+
+    close: function ( index ) {
+
+      this.expanders_instances[index].close ();
+
+    },
+
+    closeAll: function () {
+
+      _.each ( this.expanders_instances, function ( instance ) {
+
+        instance.close ();
+
+      });
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.accordion').accordion ();
+
+  });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Factory v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires Widget.js
+ * @requires ../tmpl/tmpl.js
+ * @requires ../pointer/Pointer.js
+ *=========================================================================*/
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* FACTORY */
+
+  $.factory = function ( originalName, base, prototype ) {
+
+    // NAME
+
+    var nameParts = originalName.split ( '.' ),
+        namespace = nameParts.length > 1 ? nameParts[0] : false,
+        name = nameParts.length > 1 ? nameParts[1] : nameParts[0],
+        fullName = namespace ? namespace + '.' + name : name;
+
+    // NO BASE -> DEFAULT WIDGET BASE
+
+    if ( !prototype ) {
+
+      prototype = base;
+      base = $.Widget;
+
+    }
+
+    // INIT NAMESPACE
+
+    if ( namespace ) {
+
+      $[namespace] = $[namespace] || {};
+
+    }
+
+    // CONSTRUCTOR
+
+    var existingConstructor = namespace ? $[namespace][name] : $[name];
+
+    var constructor = function ( options, element ) {
+
+      this._create ( options, element );
+
+    };
+
+    // SET CONSTRUCTOR
+
+    if ( namespace ) {
+
+      $[namespace][name] = constructor;
+
+    } else {
+
+      $[name] = constructor;
+
+    }
+
+    // EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES
+
+    _.extend ( constructor, existingConstructor, {
+      _proto: _.extend ( {}, prototype ),
+      _childConstructors: []
+    });
+
+    // BASE PROTOTYPE
+
+    var basePrototype = new base ();
+
+    basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+
+    // PROXIED PROTOTYPE
+
+    var proxiedPrototype = {};
+
+    for ( var prop in prototype ) {
+
+      if ( !_.isFunction ( prototype[prop] ) ) {
+
+        proxiedPrototype[prop] = prototype[prop];
+
+      } else {
+
+        proxiedPrototype[prop] = (function ( prop ) {
+
+          var _super = function () {
+              return base.prototype[prop].apply ( this, arguments );
+            },
+            _superApply = function ( args ) {
+              return base.prototype[prop].apply ( this, args );
+            };
+
+          return function () {
+
+            var __super = this._super,
+                __superApply = this._superApply,
+                returnValue;
+
+            this._super = _super;
+            this._superApply = _superApply;
+
+            returnValue = prototype[prop].apply ( this, arguments );
+
+            this._super = __super;
+            this._superApply = __superApply;
+
+            return returnValue;
+
+          };
+
+        })( prop );
+
+      }
+
+    }
+
+    // CONSTRUCTOR PROTOTYPE
+
+    constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+      constructor: constructor,
+      namespace: namespace,
+      name: name,
+      fullName: fullName
+    });
+
+    // CACHE TEMPLATES
+
+    for ( var tmpl_name in prototype.templates ) {
+
+      if ( prototype.templates[tmpl_name] ) {
+
+        $.tmpl.cache[fullName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
+
+      }
+
+    }
+
+    // UPDATE PROTOTYPE CHAIN
+
+    if ( existingConstructor ) {
+
+      for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+
+        var childPrototype = existingConstructor._childConstructors[i].prototype;
+
+        $.factory ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.name : childPrototype.name ), constructor, existingConstructor._childConstructors[i]._proto );
+
+      }
+
+      delete existingConstructor._childConstructors;
+
+    } else {
+
+      base._childConstructors.push ( constructor );
+
+    }
+
+    // CONSTRUCT
+
+    $.factory.bridge ( name, constructor );
+
+    // RETURN
+
+    return constructor;
+
+  };
+
+  /* FACTORY BRIDGE */
+
+  $.factory.bridge = function ( name, object ) {
+
+    // NAME
+
+    var fullName = object.prototype.fullName;
+
+    // PLUGIN
+
+    $.fn[name] = function ( options ) {
+
+      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: nothing to work on
+
+      var isMethodCall = _.isString ( options ),
+          args = _.tail ( arguments ),
+          returnValue = this;
+
+      if ( isMethodCall ) {
+
+        // METHOD CALL
+
+        this.each ( function () {
+
+          // VARIABLES
+
+          var methodValue,
+              instance = $.data ( this, fullName );
+
+          // GETTING INSTANCE
+
+          if ( options === 'instance' ) {
+
+            returnValue = instance;
+
+            return false;
+
+          }
+
+          // CHECKING VALID CALL
+
+          if ( !instance ) return; //INFO: No instance found
+
+          if ( !_.isFunction ( instance[options] ) || options.charAt ( 0 ) === '_' ) return; //INFO: Private method or property
+
+          // CALLING
+
+          methodValue = instance[options].apply ( instance, args );
+
+          if ( methodValue !== instance && !_.isUndefined ( methodValue ) ) {
+
+            returnValue = methodValue;
+
+            return false;
+
+          }
+
+        });
+
+      } else {
+
+        // SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS
+
+        if ( args.length ) {
+
+          options = _.extend.apply ( null, [options].concat ( args ) );
+
+        }
+
+        this.each ( function () {
+
+          // GET INSTANCE
+
+          var instance = $.data ( this, fullName );
+
+          if ( instance ) { // SET OPTIONS
+
+            instance.option ( options || {} );
+
+          } else { // INSTANCIATE
+
+            $.data ( this, fullName, new object ( options, this ) );
+
+          }
+
+        });
+
+      }
+
+      return returnValue;
+
+    };
+
+  };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
  * Svelto - Accordion v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -1719,6 +2352,155 @@
     $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
 
   });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Autogrow v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * ========================================================================= */
+
+//INFO: Only works with `box-sizing: border-box`
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* AUTOGROW */
+
+  $.factory ( 'svelto.autogrow', {
+
+    /* OPTIONS */
+
+    options: {
+      minimum_width: 0,
+      minimum_height: 0,
+      callbacks: {
+        update: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$growable = this.$element;
+
+      this.isInput = this.$growable.is ( 'input' );
+      this.isTextarea = this.$growable.is ( 'textarea' );
+
+    },
+
+    _init: function () {
+
+      this.update ();
+
+    },
+
+    _events: function () {
+
+      this._on ( 'input change', this.update );
+
+    },
+
+    /* INPUT */
+
+    _update_input_width: function () {
+
+      var needed_width = this._get_input_needed_width ( this.$growable );
+
+      this.$growable.width ( Math.max ( needed_width, this.options.minimum_width ) );
+
+    },
+
+    _get_input_needed_width: function () {
+
+      var $span = $( '<span>' + this.$growable.val () + '</span>' );
+
+      $span.css ({
+        font: this.$growable.css ( 'font' ),
+        position: 'absolute',
+        opacity: 0
+      });
+
+      $span.appendTo ( $body );
+
+      var width = $span.width ();
+
+      $span.remove ();
+
+      return width;
+
+    },
+
+    /* TEXTAREA */
+
+    _update_textarea_height: function () {
+
+      var needed_height = this.$growable.height ( 1 ).get ( 0 ).scrollHeight - parseFloat ( this.$growable.css ( 'padding-top' ) ) - parseFloat ( this.$growable.css ( 'padding-bottom' ) );
+
+      this.$growable.height ( Math.max ( needed_height, this.options.minimum_height ) );
+
+    },
+
+    /* PUBLIC */
+
+    update: function () {
+
+      if ( this.isInput ) {
+
+        this._update_input_width ();
+
+        this._trigger ( 'update' );
+
+      } else if ( this.isTextarea ) {
+
+        this._update_textarea_height ();
+
+        this._trigger ( 'update' );
+
+      }
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('input.autogrow, textarea.autogrow, .input-wrp.autogrow input, .textarea-wrp.autogrow textarea').autogrow ();
+
+  });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Blurred v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* BLUR */
+
+  $.fn.blurred = function ( force ) {
+
+    return this.toggleClass ( 'blurred', force );
+
+  };
 
 }( jQuery, _, window, document ));
 
@@ -5719,6 +6501,327 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 }( jQuery, _, window, document ));
 
+
+/* =========================================================================
+ * Svelto - Selectable v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * ========================================================================= */
+
+//TODO: add dropdown for actions AND/OR right click for action
+//FIXME: make it workable with sorting (update after sorting since we may)
+//TODO: make it work with checkboxes
+//FIXME: select multiple with shift, then just click inside the selection, the clicked element doesn't get selected
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* PRIVATE */
+
+  var clear_selection = function () {
+
+    if ( document.selection ) {
+
+      document.selection.empty ();
+
+    } else if ( window.getSelection ) {
+
+      window.getSelection ().removeAllRanges ();
+
+    }
+
+  };
+
+  /* SELECTABLE */
+
+  $.factory ( 'svelto.selectable', {
+
+    /* OPTIONS */
+
+    options: {
+      selector: 'tbody tr:not(.empty)',
+      selected_class: 'selected',
+      callbacks: {
+        select: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$rows = this._get_rows ();
+
+      this.$start_row = false;
+      this.$end_row = false;
+
+    },
+
+    _init: function () {
+
+      this._reset_prevs ();
+
+    },
+
+    _events: function () {
+
+      /* KEYS */
+
+      this._on ( 'mouseenter', this._handler_keys_in );
+
+      this._on ( 'mouseleave', this._handler_keys_out );
+
+      /* MOUSE */
+
+      this._on ( 'mousedown', this.options.selector, this._handler_mousedown );
+
+      /* OTHERS */
+
+      //FIXME: add support tableHelper and sortable
+
+      this._on ( 'change sort', this._handler_change );
+
+      this._on ( 'mousedown mouseup', this._handler_clear_selection );
+
+    },
+
+    /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
+
+    _handler_keys_in: function () {
+
+      this._on ( $document, 'keydown', this._handler_keys_keydown );
+
+    },
+
+    _handler_keys_out: function () {
+
+      this._off ( $document, 'keydown', this._handler_keys_keydown );
+
+    },
+
+    _handler_keys_keydown: function ( event ) {
+
+      if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
+
+        if ( event.keyCode === 65 ) { //INFO: A
+
+          event.preventDefault ();
+
+          this._reset_prevs ();
+
+          this.$rows.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not //FIXME: only works if the last character pushed is the `A`, but is it an unwanted behaviour?
+
+          this._trigger ( 'select' );
+
+        } else if ( event.keyCode === 73 ) { //INFO: I
+
+          event.preventDefault ();
+
+          this._reset_prevs ();
+
+          this.$rows.toggleClass ( this.options.selected_class );
+
+          this._trigger ( 'select' );
+
+        }
+
+      }
+
+    },
+
+    /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
+
+    _handler_mousedown: function ( event ) {
+
+      if ( event.button !== 0 ) return; //INFO: Only the left click is enabled
+
+      this.$start_row = $(event.currentTarget);
+
+      this._on ( $document, 'mousemove', this._handler_mousemove );
+
+      this._on ( 'mouseup', this.options.selector, this._handler_mouseup );
+
+    },
+
+    _handler_mousemove: function ( event ) { // DRAG
+
+      if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
+
+      this._off ( $document, 'mousemove', this._handler_mousemove );
+
+      this._off ( 'mouseup', this._handler_mouseup );
+
+      this._reset_prevs ();
+
+      this.$prev_row = this.$start_row;
+
+      this.$start_row.toggleClass ( this.options.selected_class );
+
+      $html.addClass ( 'dragging' );
+
+      this._on ( 'mouseenter', this.options.selector, this._handler_drag_mouseenter );
+
+      this._on ( $document, 'mouseup', this._handler_drag_mouseup );
+
+      this._trigger ( 'select' );
+
+    },
+
+    _handler_drag_mouseenter: function ( event ) { // DRAG HOVER
+
+      this.$end_row = $(event.currentTarget);
+
+      var start_index = this.$rows.index ( this.$start_row ),
+        end_index = this.$rows.index ( this.$end_row ),
+        min_index = Math.min ( start_index, end_index ),
+        max_index = Math.max ( start_index, end_index );
+
+      if ( min_index === start_index ) { // down
+
+        min_index += 1;
+        max_index += 1;
+
+      }
+
+      var $new_dragged = this.$rows.slice ( min_index, max_index );
+
+      if ( this.$prev_dragged ) {
+
+        $new_dragged.not ( this.$prev_dragged ).toggleClass ( this.options.selected_class );
+
+        this.$prev_dragged.not ( $new_dragged ).toggleClass ( this.options.selected_class );
+
+      } else {
+
+        $new_dragged.toggleClass ( this.options.selected_class );
+
+      }
+
+      this.$prev_dragged = $new_dragged;
+
+      this._trigger ( 'select' );
+
+    },
+
+    _handler_drag_mouseup: function () { // DRAG END
+
+      this._off ( 'mouseenter', this._handler_drag_mouseenter );
+
+      this._off ( $document, 'mouseup', this._handler_drag_mouseup );
+
+      this.$prev_dragged = false;
+
+      $html.removeClass ( 'dragging' );
+
+    },
+
+    _handler_mouseup: function ( event ) { // CLICK
+
+      this._off ( $document, 'mousemove', this._handler_mousemove );
+
+      this._off ( 'mouseup', this._handler_mouseup );
+
+      if ( event.shiftKey ) {
+
+        var start_index = this.$rows.index ( this.$prev_row ),
+          end_index = this.$prev_row ? this.$rows.index ( this.$start_row ) : 0,
+          min_index = Math.min ( start_index, end_index ),
+          max_index = Math.max ( start_index, end_index );
+
+        if ( min_index === start_index ) { // down
+
+          min_index += 1;
+          max_index += 1;
+
+        }
+
+        var $new_shifted = this.$rows.slice ( min_index, max_index );
+
+        if ( this.$prev_shifted ) {
+
+          $new_shifted.not ( this.$prev_shifted ).toggleClass ( this.options.selected_class );
+
+          this.$prev_shifted.not ( $new_shifted ).toggleClass ( this.options.selected_class );
+
+        } else {
+
+          $new_shifted.toggleClass ( this.options.selected_class );
+
+        }
+
+        this.$prev_shifted = $new_shifted;
+
+      } else if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) || $.browser.isMobile ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+
+        this.$start_row.toggleClass ( this.options.selected_class );
+
+        this._reset_prevs ();
+
+        this.$prev_row = this.$start_row;
+
+      } else {
+
+        this.$rows.not ( this.$start_row ).removeClass ( this.options.selected_class );
+
+        this.$start_row.toggleClass ( this.options.selected_class );
+
+        this._reset_prevs ();
+
+        this.$prev_row = this.$start_row;
+
+      }
+
+      this._trigger ( 'select' );
+
+    },
+
+    /* OTHER EVENTS */
+
+    _handler_change: function () {
+
+      this.$rows = this._get_rows ();
+
+    },
+
+    _handler_clear_selection: function () {
+
+      $.reflow ();
+
+      clear_selection ();
+
+    },
+
+    /* PRIVATE */
+
+    _reset_prevs: function () {
+
+      this.$prev_row = false;
+      this.$prev_shifted = false;
+      this.$prev_dragged = false;
+
+    },
+
+    _get_rows: function () {
+
+      return this.$element.find ( this.options.selector );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('table.selectable').selectable ();
+
+  });
+
+}( jQuery, _, window, document ));
 
 
 /* =========================================================================

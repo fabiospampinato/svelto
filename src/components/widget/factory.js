@@ -24,7 +24,7 @@
     var nameParts = originalName.split ( '.' ),
         namespace = nameParts.length > 1 ? nameParts[0] : false,
         name = nameParts.length > 1 ? nameParts[1] : nameParts[0],
-        fullName = namespace ? namespace + '-' + name : name;
+        fullName = namespace ? namespace + '.' + name : name;
 
     // NO BASE -> DEFAULT WIDGET BASE
 
@@ -48,16 +48,6 @@
     var existingConstructor = namespace ? $[namespace][name] : $[name];
 
     var constructor = function ( options, element ) {
-
-      if ( !this._create ) {
-
-        console.error ( 'No _create' ); //FIXME: Remove it
-
-        return new constructor ( options, element );
-
-      }
-
-      console.error ( 'There\'s a _create' ); //FIXME: Remove it
 
       this._create ( options, element );
 
@@ -138,8 +128,8 @@
     constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
       constructor: constructor,
       namespace: namespace,
-      widgetName: name,
-      widgetFullName: fullName
+      name: name,
+      fullName: fullName
     });
 
     // CACHE TEMPLATES
@@ -148,7 +138,7 @@
 
       if ( prototype.templates[tmpl_name] ) {
 
-        $.tmpl.cache[fullName + '-' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
+        $.tmpl.cache[fullName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
 
       }
 
@@ -162,7 +152,7 @@
 
         var childPrototype = existingConstructor._childConstructors[i].prototype;
 
-        $.factory ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
+        $.factory ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.name : childPrototype.name ), constructor, existingConstructor._childConstructors[i]._proto );
 
       }
 
@@ -188,9 +178,9 @@
 
   $.factory.bridge = function ( name, object ) {
 
-    // VARIABLES
+    // NAME
 
-    var fullName = object.prototype.widgetFullName || name;
+    var fullName = object.prototype.fullName;
 
     // PLUGIN
 

@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
+ * @requires ../browser/browser.js
  * ========================================================================= */
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)

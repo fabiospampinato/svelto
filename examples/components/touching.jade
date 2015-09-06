@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Squares - All matches
 
-  +container-simple.squares_all
+  +container-simple.squares_all.outlined
     +multiple
       - var squares_nr = 32;
       - var nr = 1;
@@ -17,12 +17,12 @@ append main
   +divider Actions
 
   +multiple.joined
-    +input({ name: "input_populate_all", label: "Search number..." }).no-floating.white.text-field-secondary
-    +button-simple("populate_all ()").secondary Populate
+    +input({ name: "input_populate_all", label: "Search number..." }).no-floating.white.text-field-secondary.outlined
+    +button-simple("populate_all ()").secondary.outlined Populate
 
   +divider Squares - Most significant match
 
-  +container-simple.squares_most
+  +container-simple.squares_most.outlined
     +multiple
       - var squares_nr = 32;
       - var nr = 1;
@@ -33,12 +33,12 @@ append main
   +divider Actions
 
   +multiple.joined
-    +input({ name: "input_populate_most", label: "Square number..." }).no-floating.white.text-field-secondary
-    +button-simple("populate_most ()").secondary Populate
+    +input({ name: "input_populate_most", label: "Square number..." }).no-floating.white.text-field-secondary.outlined
+    +button-simple("populate_most ()").secondary.outlined Populate
 
   +divider Squares - Punctual
 
-  +container-simple.squares_punctual
+  +container-simple.squares_punctual.outlined
     +multiple
       - var squares_nr = 32;
       - var nr = 1;
@@ -49,8 +49,8 @@ append main
   +divider Actions
 
   +multiple.joined
-    +input({ name: "input_populate_punctual", label: "Square number..." }).no-floating.white.text-field-secondary
-    +button-simple("populate_punctual ()").secondary Populate
+    +input({ name: "input_populate_punctual", label: "Square number..." }).no-floating.white.text-field-secondary.outlined
+    +button-simple("populate_punctual ()").secondary.outlined Populate
 
 append body-end
   +noty({ body: 'Drag the squares, the green ones are the returned ones', ttl: 'forever' })
