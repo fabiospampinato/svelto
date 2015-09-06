@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Base v0.1.0
+ * Svelto - Base v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../toolbar/_settings.scss
  * ========================================================================= */
 
 *, *:before, *:after { //INFO: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw
@@ -71,7 +72,7 @@ body {
 
     & > header {
 
-      margin-top: $default-toolbar-height;
+      margin-top: $toolbar-height;
 
       & > .header {
 

@@ -8,6 +8,5 @@
  * =========================================================================
  * @requires ../extras/lodash-extra.js
  * @requires ../extras/jQuery-extra.js
- * @requires ../browser/browser.js
  * @requires ../ui/ui.js
  * ========================================================================= */

@@ -1,31 +1,12 @@
 
 /* =========================================================================
- * Svelto - Base (Settings) v0.1.0
+ * Svelto - Base (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* BASE */
+/* BODY */
 
 $body-color: 'base';
 $body-color-basic: true;
-
-/* GUTTER */
-
-$gutter: 10px !default;
-$gutter-half: $gutter / 2;
-
-/* TOOLBAR */
-
-$default-toolbar-height: 64px;
-
-/* TRANSITIONS */
-
-$transition-duration-slow: 0.2s;
-$transition-duration-normal: 0.4s;
-$transition-duration-fast: 0.6s;
-
-$transition-duration: $transition-duration-normal;
-
-$transition-duration-default: $transition-duration; //FIXME: remove it

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widget (Settings) v0.1.0
+ * Svelto - Widget (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,3 +11,7 @@
 /* WIDGET */
 
 $widget-gutter: $gutter !default;
+
+/* DISABLED */
+
+$widget-disabled-opacity: 0.5 !default;

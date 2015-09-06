@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Layout (Settings) v0.1.0
+ * Svelto - UI (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,15 +8,16 @@
  * @requires ../breakpoints/_settings.scss
  * ========================================================================= */
 
+/* GUTTER */
+
+$gutter: 10px !default;
+$gutter-half: $gutter / 2;
+
 /* MAX WIDTH */
 
-$layout-max-width: map-get($breakpoints, 'xlarge') !default; //TODO: add and check support for it
-
-/* GUTTER */ //TODO: Remove when no more in use
-
-$layout-gutter: 10px !default; //TODO: switch to rem //TODO: Remove when no more in use
-$layout-gutter-rem: 0.6666666667rem !default; //TODO: Remove when no more in use
-$layout-gutter-half: $layout-gutter / 2;
+$max-width-enabled: true !default;
+$max-width-size: 'xlarge' !default;
+$max-width: map-get($breakpoints, $layout-max-width-size) !default; //TODO: Provide support for it
 
 /* BORDER RADIUS */
 
@@ -25,3 +26,11 @@ $border-radius-medium: 0.2665rem !default;
 $border-radius-large: 0.39975rem !default;
 
 $border-radius: $border-radius-medium !default;
+
+/* TRANSITIONS */
+
+$transition-duration-slow: 0.5s !default;
+$transition-duration-normal: 0.35s !default;
+$transition-duration-fast: 0.15s !default;
+
+$transition-duration: $transition-duration-normal !default;

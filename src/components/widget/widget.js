@@ -6,276 +6,427 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
- * @requires base_widget.js
  * @requires ../tmpl/tmpl.js
- * @requires ../pointer/pointer.js
- *=========================================================================*/
+ * ========================================================================= */
+
+//TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
 
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
-  /* WIDGET FACTORY */
+  /* WIDGET */
 
-  $.widget = function ( originalName, base, prototype ) {
+  $.Widget = function () {};
 
-    // NAME
+  $.Widget._childConstructors = []; //TODO: Remove if not necessary
 
-    var nameParts = originalName.split ( '.' ),
-        namespace = nameParts.length > 1 ? nameParts[0] : false,
-        name = nameParts.length > 1 ? nameParts[1] : nameParts[0],
-        fullName = namespace ? namespace + '-' + name : name;
+  /* PROTOTYPE */
 
-    // NO BASE -> DEFAULT WIDGET BASE
+  $.Widget.prototype = {
 
-    if ( !prototype ) {
+    /* NAMES */
 
-      prototype = base;
-      base = $.Widget;
+    namespace: false,
+    widgetName: 'widget',
+    widgetFullName: 'widget', //INFO: `namespace-widgetName`
 
-    }
+    /* TEMPLATES */
 
-    // INIT NAMESPACE
+    templates: {
+      base: false //INFO: It will be used as the constructor if no element is provided
+    },
 
-    if ( namespace ) {
+    /* OPTIONS */
 
-      $[namespace] = $[namespace] || {};
+    options: {
+      selectors: {}, //INFO: Selectors to use inside the widget
+      classes: {}, //INFO: CSS classes to attach inside the widget
+      animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
+      callbacks: {}, //INFO: Callbacks to trigger on specific events
+      disabled: false //INFO: Determines if the widget is enabled or disabled
+    },
 
-    }
+    /* WIDGET METHODS */
 
-    // CONSTRUCTOR
+    _create: function ( options, element ) {
 
-    var existingConstructor = namespace ? $[namespace][name] : $[name];
+      // CHECK IF INITIALIZABLE
 
-    var constructor = function ( options, element ) {
+      if ( !element && !this.templates.base ) {
 
-      if ( !this._create ) {
-
-        console.error ( 'No _create' ); //FIXME: Remove it
-
-        return new constructor ( options, element );
-
-      }
-
-      console.error ( 'There\'s a _create' ); //FIXME: Remove it
-
-      this._create ( options, element );
-
-    };
-
-    // SET CONSTRUCTOR
-
-    if ( namespace ) {
-
-      $[namespace][name] = constructor;
-
-    } else {
-
-      $[name] = constructor;
-
-    }
-
-    // EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES
-
-    _.extend ( constructor, existingConstructor, {
-      _proto: _.extend ( {}, prototype ),
-      _childConstructors: []
-    });
-
-    // BASE PROTOTYPE
-
-    var basePrototype = new base ();
-
-    basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
-
-    // PROXIED PROTOTYPE
-
-    var proxiedPrototype = {};
-
-    for ( var prop in prototype ) {
-
-      if ( !_.isFunction ( prototype[prop] ) ) {
-
-        proxiedPrototype[prop] = prototype[prop];
-
-      } else {
-
-        proxiedPrototype[prop] = (function ( prop ) {
-
-          var _super = function () {
-              return base.prototype[prop].apply ( this, arguments );
-            },
-            _superApply = function ( args ) {
-              return base.prototype[prop].apply ( this, args );
-            };
-
-          return function () {
-
-            var __super = this._super,
-                __superApply = this._superApply,
-                returnValue;
-
-            this._super = _super;
-            this._superApply = _superApply;
-
-            returnValue = prototype[prop].apply ( this, arguments );
-
-            this._super = __super;
-            this._superApply = __superApply;
-
-            return returnValue;
-
-          };
-
-        })( prop );
+        throw 'WidgetUninitializable';
 
       }
 
-    }
+      // MERGE OPTIONS
 
-    // CONSTRUCTOR PROTOTYPE
+      this.options = _.merge ( {}, this.options, this._createOptions (), options );
 
-    constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
-      constructor: constructor,
-      namespace: namespace,
-      widgetName: name,
-      widgetFullName: fullName
-    });
+      // INIT ELEMENT
 
-    // CACHE TEMPLATES
+      this.$element = $(element || this._tmpl ( 'base', this.options ));
+      this.element = this.$element[0];
 
-    for ( var tmpl_name in prototype.templates ) {
+      // SET GUID
 
-      if ( prototype.templates[tmpl_name] ) {
+      this.guid = $.guid++;
 
-        $.tmpl.cache[fullName + '-' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
+      // SET DISABLED
 
-      }
+      this.options.disabled = this.options.disabled || this.$element.hasClass ( this.widgetName + '-disabled' );
 
-    }
+      // SAVE WIDGET INSTANCE
 
-    // UPDATE PROTOTYPE CHAIN
+      $.data ( this.element, this.widgetFullName, this );
 
-    if ( existingConstructor ) {
+      // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
-      for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+      this._on ( true, 'remove', function ( event ) {
 
-        var childPrototype = existingConstructor._childConstructors[i].prototype;
+        if ( event.target === this.element ) {
 
-        $.widget ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.widgetName : childPrototype.widgetName ), constructor, existingConstructor._childConstructors[i]._proto );
-
-      }
-
-      delete existingConstructor._childConstructors;
-
-    } else {
-
-      base._childConstructors.push ( constructor );
-
-    }
-
-    // CONSTRUCT
-
-    $.widget.bridge ( name, constructor );
-
-    // RETURN
-
-    return constructor;
-
-  };
-
-  /* WIDGET BRIDGE */
-
-  $.widget.bridge = function ( name, object ) {
-
-    // VARIABLES
-
-    var fullName = object.prototype.widgetFullName || name;
-
-    // PLUGIN
-
-    $.fn[name] = function ( options ) {
-
-      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: nothing to work on
-
-      var isMethodCall = _.isString ( options ),
-          args = _.tail ( arguments ),
-          returnValue = this;
-
-      if ( isMethodCall ) {
-
-        // METHOD CALL
-
-        this.each ( function () {
-
-          // VARIABLES
-
-          var methodValue,
-              instance = $.data ( this, fullName );
-
-          // GETTING INSTANCE
-
-          if ( options === 'instance' ) {
-
-            returnValue = instance;
-
-            return false;
-
-          }
-
-          // CHECKING VALID CALL
-
-          if ( !instance ) return; //INFO: No instance found
-
-          if ( !_.isFunction ( instance[options] ) || options.charAt ( 0 ) === '_' ) return; //INFO: Private method or property
-
-          // CALLING
-
-          methodValue = instance[options].apply ( instance, args );
-
-          if ( methodValue !== instance && !_.isUndefined ( methodValue ) ) {
-
-            returnValue = methodValue;
-
-            return false;
-
-          }
-
-        });
-
-      } else {
-
-        // SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS
-
-        if ( args.length ) {
-
-          options = _.extend.apply ( null, [options].concat ( args ) );
+          this.destroy ( event );
 
         }
 
-        this.each ( function () {
+      });
 
-          // GET INSTANCE
+      // CALLBACKS
 
-          var instance = $.data ( this, fullName );
+      this._variables ();
 
-          if ( instance ) { // SET OPTIONS
+      this._init ();
 
-            instance.option ( options || {} );
+      this._events ();
 
-          } else { // INSTANCIATE
+    },
 
-            $.data ( this, fullName, new object ( options, this ) );
+    _createOptions: _.noop, //INFO: Returns an options object that will be used for the current widget instance, generated during widget instantiation
 
-          }
+    _variables: _.noop, //INFO: Init your variables inside this function
+    _init: _.noop, //INFO: Perform the init stuff inside this function
+    _events: _.noop, //INFO: Bind the event handlers inside this function
 
-        });
+    destroy: function () {
+
+      this._destroy ();
+
+      $.removeData ( this.element, this.widgetFullName );
+
+    },
+
+    _destroy: _.noop,
+
+    widget: function () {
+
+      return this.$element;
+
+    },
+
+    /* OPTIONS METHODS */
+
+    option: function ( key, value ) {
+
+      if ( arguments.length === 0 ) { //INFO: Returns a clone of the options object
+
+        return _.cloneDeep ( this.options );
 
       }
 
-      return returnValue;
+      if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
 
-    };
+        var options = {},
+            parts = key.split ( '.' );
+
+        key = parts.shift ();
+
+        if ( parts.length ) {
+
+          var curOption = options[key] = _.extend ( {}, this.options[key] );
+
+          for ( var i = 0; i < parts.length - 1; i++ ) {
+
+            curOption[parts[i]] = curOption[parts[i]] || {};
+            curOption = curOption[parts[i]];
+
+          }
+
+          key = parts.pop ();
+
+          if ( arguments.length === 1 ) {
+
+            return _.isUndefined ( curOption[key] ) ? null : curOption[key];
+
+          }
+
+          curOption[key] = value;
+
+        } else { //INFO: Handle single level property
+
+          if ( arguments.length === 1 ) {
+
+            return _.isUndefined ( this.options[key] ) ? null : this.options[key];
+
+          }
+
+          options[key] = value;
+
+        }
+
+      } else if ( _.isPlainObject ( key ) ) { //INFO: Set multiple properties
+
+        this._setOptions ( key );
+
+      }
+
+      return this;
+
+    },
+
+    _setOptions: function ( options ) {
+
+      for ( var key in options ) {
+
+        this._setOption ( key, options[key] );
+
+      }
+
+      return this;
+
+    },
+
+    _setOption: function ( key, value ) {
+
+      this.options[key] = value;
+
+      if ( key === 'disabled' ) {
+
+        this.$element.toggleClass ( this.widgetName + '-disabled', !!value );
+
+      }
+
+      return this;
+
+    },
+
+    /* ENABLING */
+
+    enable: function () {
+
+      return this._setOptions ({ disabled: false });
+
+    },
+
+    /* DISABLING */
+
+    disable: function () {
+
+      return this._setOptions ({ disabled: true });
+
+    },
+
+    /* EVENTS */
+
+    _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
+
+      //TODO: Add support for custom data
+
+      // SAVE A REFERENCE TO THIS
+
+      var instance = this;
+
+      // NORMALIZING OPTIONS
+
+      if ( !_.isBoolean ( suppressDisabledCheck ) ) {
+
+        handler = selector;
+        selector = events;
+        events = $element;
+        $element = suppressDisabledCheck;
+        suppressDisabledCheck = false;
+
+      }
+
+      if ( !( $element instanceof $ ) ) {
+
+        handler = selector;
+        selector = events;
+        events = $element;
+        $element = this.$element;
+
+      }
+
+      if ( selector && !handler ) {
+
+        handler = selector;
+        selector = false;
+
+      }
+
+      // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
+
+      handler = _.isString ( handler ) ? this[handler] : handler;
+
+      // PROXY
+
+      function handlerProxy () {
+
+        if ( !suppressDisabledCheck && instance.options.disabled ) return;
+
+        var args = _.slice ( arguments );
+
+        args.push ( this );
+
+        return handler.apply ( instance, args );
+
+      }
+
+      // PROXY GUID
+
+      handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
+
+      // TRIGGERING
+
+      if ( selector ) { // DELEGATED
+
+        $element.on ( events, selector, handlerProxy );
+
+      } else { // NORMAL
+
+        $element.on ( events, handlerProxy );
+
+      }
+
+      return this;
+
+    },
+
+    _off: function ( $element, events, handler ) {
+
+      // NORMALIZING OPTIONS
+
+      if ( !handler ) {
+
+        handler = events;
+        events = $element;
+        $element = this.$element;
+
+      }
+
+      // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
+
+      handler = _.isString ( handler ) ? this[handler] : handler;
+
+      // REMOVING HANDLER
+
+      $element.off ( events, handler );
+
+      return this;
+
+    },
+
+    _trigger: function ( events, data ) {
+
+      data = data || {};
+
+      events = events.split ( ' ' );
+
+      for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+
+        this.$element.trigger ( this.widgetName + ':' + events[ei], data );
+
+        if ( _.isFunction ( this.options.callbacks[events[ei]] ) ) {
+
+          this.options.callbacks[events[ei]].call ( this.element, data );
+
+        }
+
+      }
+
+      return this;
+
+    },
+
+    /* DELAYING */
+
+    _delay: function ( fn, delay ) {
+
+      var instance = this;
+
+      return setTimeout ( function () {
+
+        fn.apply ( instance, arguments );
+
+      }, delay || 0 );
+
+    },
+
+    /* DEFER */
+
+    _defer: function ( fn ) {
+
+      return this._delay ( fn );
+
+    },
+
+    /* DEBOUNCING */
+
+    _debounce: function ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+
+      return _.debounce ( fn, wait, options );
+
+    },
+
+    /* THROTTLING */
+
+    _throttle: function ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+
+      return _.throttle ( fn, wait, options );
+
+    },
+
+    /* TEMPLATE */
+
+    _tmpl: function ( name, options ) {
+
+      return $.tmpl ( this.widgetFullName + '-' + name, options || {} );
+
+    },
+
+    /* INSERTION */
+
+    insertBefore: function ( selector ) {
+
+      this.$element.insertBefore ( selector );
+
+      return this;
+
+    },
+
+    insertAfter: function ( selector ) {
+
+      this.$element.insertAfter ( selector );
+
+      return this;
+
+    },
+
+    prependTo: function ( selector ) {
+
+      this.$element.prependTo ( selector );
+
+      return this;
+
+    },
+
+    appendTo: function ( selector ) {
+
+      this.$element.appendTo ( selector );
+
+      return this;
+
+    }
 
   };
 

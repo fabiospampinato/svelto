@@ -1,10 +1,12 @@
 
 /* =========================================================================
- * Svelto - Media Queries (Mixins) v0.1.0
+ * Svelto - Media Queries (Mixins) v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
+
+/* WIDTH */
 
 @mixin screen ( $min_width, $max_width ) {
 
@@ -63,11 +65,11 @@
   //FIXME: Do we need borwsers prefixes here?
 
   @media only screen and ( -webkit-min-device-pixel-ratio: $ratio ),
-       only screen and (  min--moz-device-pixel-ratio: $ratio ),
-       only screen and (    -o-min-device-pixel-ratio: #{$ratio}/1 ),
-       only screen and (     min-device-pixel-ratio: #{$ratio} ),
-       only screen and (         min-resolution: #{round($ratio*96)}dpi ),
-       only screen and (         min-resolution: #{$ratio}dppx ) {
+         only screen and (    min--moz-device-pixel-ratio: $ratio ),
+         only screen and (      -o-min-device-pixel-ratio: #{$ratio}/1 ),
+         only screen and (         min-device-pixel-ratio: #{$ratio} ),
+         only screen and (                 min-resolution: #{round($ratio*96)}dpi ),
+         only screen and (                 min-resolution: #{$ratio}dppx ) {
     @content;
   }
 

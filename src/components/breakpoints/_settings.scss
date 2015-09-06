@@ -8,14 +8,11 @@
 
 /* BREAKPOINTS */
 
-//INFO: The considered font-size is 15px
-//INFO: The value at the right of the arrow is the resulting breakpoint
-
-$breakpoint-xsmall: 0rem !default; // -> 0px
-$breakpoint-small: 32rem !default; // -> 480px
-$breakpoint-medium: 48rem !default; // -> 720px
-$breakpoint-large: 64rem !default; // -> 960px
-$breakpoint-xlarge: 76rem !default; // -> 1140px
+$breakpoint-xsmall: 0rem !default;
+$breakpoint-small: 32rem !default;
+$breakpoint-medium: 48rem !default;
+$breakpoint-large: 64rem !default;
+$breakpoint-xlarge: 76rem !default;
 
 /* BREAKPOINTS */
 
