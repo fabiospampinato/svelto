@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Divider
 
 append main
-  +divider Dividers
+  +divider Horizontal
 
   +container-simple.outlined
     +divider Block
@@ -14,3 +14,13 @@ append main
     +divider-linear
     +divider-text Text
     +divider-spacer.gray
+
+  +divider Vertical
+  
+  +container-simple.outlined
+    +multiple.fluid
+      +container-simple
+        +paragraph-sample
+      +divider-linear.vertical OR
+      +container-simple
+        +paragraph-sample

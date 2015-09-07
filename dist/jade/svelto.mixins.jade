@@ -103,70 +103,6 @@ mixin button-tag
 
 
 //- =========================================================================
-//- Svelto - Chat v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    sender: {
-      img: '' // Avatar url
-      name: '', //  Nickname
-      url: '', // Profile url
-    },
-    permissions: {
-      own: boolean, // Flag that decide if the chat is owned by you
-      reply: boolean, // Flat that decide if you can reply it
-      edit: boolean, // Flag that decide if you can edit it
-      delete: boolean, // Flag that decide if you can delete it
-    },
-    message: {
-      timestamp: number, // Unix timestamp of when the message as been sent
-      content: '', // The message content
-      group: '', // The ID of the group, useful for joining all the messages
-      level: ''
-    }
-  }
-
-mixin chat-msg(options)
-  - options.message.level = options.message.level || 1;
-  - options.sender = options.sender || {};
-  - options.sender.name = options.sender.name || "Unknown";
-  .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
-    if options.sender.img
-      if options.sender.url
-        a(href=options.sender.url title=options.sender.name).chat-msg-img
-          img(src=options.sender.img title=options.sender.name)
-      else
-        .chat-msg-img
-          img(src=options.sender.img title=options.sender.name)
-      .chat-msg-indicator
-    .chat-msg-content
-      +container.outlined
-        +container-header.inherit.outlined.compact
-          if options.sender.name !== "Unknown"
-            +multiple-left
-              if options.sender.url
-                a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
-              else
-                = options.sender.name
-          +multiple-right
-            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).small.outlined.compact
-            if options.permissions
-              if options.permissions.own
-                +button-icon("account_circle")(title="You are the owner").small.outlined.compact
-              if options.permissions.reply
-                +button-icon("reply")(title="Reply").small.outlined.compact
-              if options.permissions.edit
-                +button-icon("mode_edit")(title="Edit").small.outlined.compact
-              if options.permissions.delete
-                +button-icon("delete")(title="Delete").small.outlined.compact
-        +container-content= options.message.content
-
-
-//- =========================================================================
 //- Svelto - Checkbox v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -215,6 +151,69 @@ mixin checkbox(options)
       span= options.title
     +icon(options.icons.on)(class=options.colors.on).icon-on
     +icon(options.icons.off)(class=options.colors.off).icon-off
+
+
+//- =========================================================================
+//- Svelto - Chat v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    sender: {
+      img: '' // Avatar url
+      name: '', //  Nickname
+      url: '', // Profile url
+    },
+    permissions: {
+      own: boolean, // Flag that decide if the chat is owned by you
+      reply: boolean, // Flat that decide if you can reply it
+      edit: boolean, // Flag that decide if you can edit it
+      delete: boolean, // Flag that decide if you can delete it
+    },
+    message: {
+      timestamp: number, // Unix timestamp of when the message as been sent
+      content: '', // The message content
+      group: '', // The ID of the group, useful for joining all the messages
+      level: ''
+    }
+  }
+
+mixin chat-msg(options)
+  - options.message.level = options.message.level || 1;
+  - options.sender = options.sender || {};
+  - options.sender.name = options.sender.name || "Unknown";
+  .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
+    if options.sender.img
+      if options.sender.url
+        +a(options.sender.url)(title=options.sender.name).chat-msg-img
+          +image(options.sender.img)(title=options.sender.name).rounded
+      else
+        +image(options.sender.img)(title=options.sender.name).chat-msg-img.rounded
+    .chat-msg-indicator
+    .chat-msg-content
+      +container.outlined
+        +container-header.inherit.outlined.compact
+          if options.sender.name !== "Unknown"
+            +multiple-left
+              if options.sender.url
+                a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
+              else
+                = options.sender.name
+          +multiple-right
+            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).small.outlined.compact
+            if options.permissions
+              if options.permissions.own
+                +button-icon("account_circle")(title="You are the owner").small.outlined.compact
+              if options.permissions.reply
+                +button-icon("reply")(title="Reply").small.outlined.compact
+              if options.permissions.edit
+                +button-icon("mode_edit")(title="Edit").small.outlined.compact
+              if options.permissions.delete
+                +button-icon("delete")(title="Delete").small.outlined.compact
+        +container-content= options.message.content
 
 
 //- =========================================================================
@@ -356,6 +355,43 @@ mixin datepicker
 
 
 //- =========================================================================
+//- Svelto - Divider v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  +divider-block&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider-wrp.block
+    .divider&attributes(attributes)
+      block
+
+mixin divider-linear
+  if block
+    .divider-wrp&attributes(attributes).linear
+      hr
+      .divider
+        block
+      hr
+  else
+    hr&attributes(attributes)
+
+mixin divider-text
+  .divider-wrp.text
+    .divider&attributes(attributes)
+      block
+
+mixin divider-spacer
+  .divider-wrp.spacer
+    .divider&attributes(attributes)
+      block
+
+
+//- =========================================================================
 //- Svelto - Dropdown v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -386,43 +422,6 @@ mixin dropdown(id)
     .dropdown-tip.bottom
     .dropdown-tip.left
     +container
-      block
-
-
-//- =========================================================================
-//- Svelto - Divider v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  +divider-block&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider-wrp.block
-    .divider&attributes(attributes)
-      block
-
-mixin divider-linear
-  if block
-    .divider-wrp.linear
-      hr.left
-      .divider&attributes(attributes)
-        block
-      hr.right
-  else
-    hr&attributes(attributes)
-
-mixin divider-text
-  .divider-wrp.text
-    .divider&attributes(attributes)
-      block
-
-mixin divider-spacer
-  .divider-wrp.spacer
-    .divider&attributes(attributes)
       block
 
 
@@ -1223,45 +1222,6 @@ mixin select(options)
 
 
 //- =========================================================================
-//- Svelto - Slider v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '', // Max value
-    step: '' // Step amount
-  }
-  
-mixin slider(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value || options.min;
-  - options.max = options.max || 100;
-  - options.step = options.step || 1;
-  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
-  .slider(data-step=step)&attributes(attributes)
-    if options.name
-      input(type="number" name=name value=value)
-    else
-      input(type="number" value=value)
-    .slider-min(title="Decrease" data-min=options.min)
-    .slider-max(title="Increase" data-max=options.max)
-    .slider-bar-wrp
-      .slider-bar
-        .slider-unhighlighted
-          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
-      .slider-handler-wrp(style="left:" + percentage + "%;")
-        .slider-handler
-          .slider-label= value
-
-
-//- =========================================================================
 //- Svelto - Shapes v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1304,6 +1264,45 @@ mixin circle
 
 
 //- =========================================================================
+//- Svelto - Slider v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Step amount
+  }
+  
+mixin slider(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
+  .slider(data-step=step)&attributes(attributes)
+    if options.name
+      input(type="number" name=name value=value)
+    else
+      input(type="number" value=value)
+    .slider-min(title="Decrease" data-min=options.min)
+    .slider-max(title="Increase" data-max=options.max)
+    .slider-bar-wrp
+      .slider-bar
+        .slider-unhighlighted
+          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
+      .slider-handler-wrp(style="left:" + percentage + "%;")
+        .slider-handler
+          .slider-label= value
+
+
+//- =========================================================================
 //- Svelto - Spinner v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1337,6 +1336,35 @@ mixin spinner-multiple(options)
     else
       each color in options
         +spinner-no-wrp(class=color)
+
+
+//- =========================================================================
+//- Svelto - Stepper v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '' // Max value
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
+    +button-icon("remove").stepper-decreaser
+    if options.name
+      +input({ name: name, value: value }).autogrow.compact
+    else
+      +input({ value: value }).autogrow.compact
+    +button-icon("add").stepper-increaser
 
 
 //- =========================================================================
@@ -1393,35 +1421,6 @@ mixin switch(options)
 
 
 //- =========================================================================
-//- Svelto - Stepper v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '' // Max value
-  }
-
-mixin stepper(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value || options.min;
-  - options.max = options.max || 100;
-  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
-    +button-icon("remove").stepper-decreaser
-    if options.name
-      +input({ name: name, value: value }).autogrow.compact
-    else
-      +input({ value: value }).autogrow.compact
-    +button-icon("add").stepper-increaser
-
-
-//- =========================================================================
 //- Svelto - Table v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1465,30 +1464,6 @@ mixin tabs-containers
 
 
 //- =========================================================================
-//- Svelto - Textarea v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Textarea name
-    label: '', // Label
-  }
-
-mixin textarea(options)
-  - options = options || {};
-  - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
-
-
-//- =========================================================================
 //- Svelto - Tagbox v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1516,6 +1491,30 @@ mixin tagbox(options)
         +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
       else
         +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+
+
+//- =========================================================================
+//- Svelto - Textarea v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
 
 
 //- =========================================================================

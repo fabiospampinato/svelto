@@ -2068,25 +2068,26 @@ button {
 }
 
 .chat-msg > .chat-msg-img {
-  overflow: hidden;
   -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1;
   width: 3em;
   height: 3em;
   margin-right: 10px;
+}
+
+.chat-msg > .chat-msg-img > .image-wrp {
   transition: opacity 0.15s;
-  opacity: 1;
-  border: 1px solid #222222;
+}
+
+.chat-msg > .chat-msg-img > .image-wrp > img {
   border-radius: 100%;
+  width: 3em;
+  height: 3em;
+  border: 1px solid #222222;
 }
 
-.chat-msg > .chat-msg-img > img {
-  width: 100%;
-  height: 100%;
-}
-
-.chat-msg > a.chat-msg-img:hover {
+.chat-msg > a.chat-msg-img:hover > .image-wrp {
   opacity: 0.8;
 }
 
@@ -2594,7 +2595,7 @@ button {
 /* TEXT */
 /* SPACER */
 /* =========================================================================
- * Svelto - Divider v0.1.0
+ * Svelto - Divider v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2622,7 +2623,7 @@ hr {
   background: #f2443c ;
   display: inline-block;
   padding: 0.3em 0.6em;
-  border-radius: 10000px 10000px !important;
+  border-radius: 10000px 10000px;
 }
 
 .divider-wrp.block > .divider p > a {
@@ -2652,26 +2653,34 @@ hr {
       -ms-flex-positive: 1;
           flex-grow: 1;
   margin: 0;
+}
+
+.divider-wrp.linear:not(.vertical) > hr {
   min-width: 10px;
 }
 
-.divider-wrp.linear > hr.left {
-  -webkit-order: 0;
-      -ms-flex-order: 0;
-          order: 0;
-}
-
-.divider-wrp.linear > hr.right {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
-}
-
-.divider-wrp.linear > .divider {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
+.divider-wrp.linear:not(.vertical) > .divider {
   padding: 0 10px;
+}
+
+.divider-wrp.linear.vertical {
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-flex-grow: 0 !important;
+      -ms-flex-positive: 0 !important;
+          flex-grow: 0 !important;
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch;
+}
+
+.divider-wrp.linear.vertical > hr {
+  width: 1px;
+}
+
+.divider-wrp.linear.vertical > .divider {
+  padding: 10px 0;
 }
 
 .divider-wrp.text {

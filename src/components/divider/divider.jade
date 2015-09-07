@@ -17,11 +17,11 @@ mixin divider-block
 
 mixin divider-linear
   if block
-    .divider-wrp.linear
-      hr.left
-      .divider&attributes(attributes)
+    .divider-wrp&attributes(attributes).linear
+      hr
+      .divider
         block
-      hr.right
+      hr
   else
     hr&attributes(attributes)
 

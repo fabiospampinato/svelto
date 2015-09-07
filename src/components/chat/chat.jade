@@ -34,12 +34,11 @@ mixin chat-msg(options)
   .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
     if options.sender.img
       if options.sender.url
-        a(href=options.sender.url title=options.sender.name).chat-msg-img
-          img(src=options.sender.img title=options.sender.name)
+        +a(options.sender.url)(title=options.sender.name).chat-msg-img
+          +image(options.sender.img)(title=options.sender.name).rounded
       else
-        .chat-msg-img
-          img(src=options.sender.img title=options.sender.name)
-      .chat-msg-indicator
+        +image(options.sender.img)(title=options.sender.name).chat-msg-img.rounded
+    .chat-msg-indicator
     .chat-msg-content
       +container.outlined
         +container-header.inherit.outlined.compact

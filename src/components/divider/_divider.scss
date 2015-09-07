@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Divider v0.1.0
+ * Svelto - Divider v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -33,7 +33,7 @@ hr {
       @include color ( $divider-block-color, $divider-block-color-basic );
       display: inline-block;
       padding: $divider-block-padding;
-      border-radius: 10000px 10000px !important; //FIXME: we should use `!important`
+      border-radius: 10000px 10000px;
     }
 
   }
@@ -45,24 +45,36 @@ hr {
     margin-bottom: $gutter;
 
     & > hr {
-
       flex-grow: 1;
       margin: 0;
-      min-width: $gutter;
+    }
 
-      &.left {
-        order: 0;
+    &:not(.vertical) {
+
+      & > hr {
+        min-width: $gutter;
       }
 
-      &.right {
-        order: 2;
+      & > .divider {
+        padding: $divider-linear-vertical-padding $divider-linear-horizontal-padding;
       }
 
     }
 
-    & > .divider {
-      order: 1;
-      padding: $divider-linear-vertical-padding $divider-linear-horizontal-padding;
+    &.vertical {
+
+      flex-direction: column;
+      flex-grow: 0 !important;
+      align-self: stretch;
+
+      & > hr {
+        width: 1px;
+      }
+
+      & > .divider {
+        padding: $divider-linear-horizontal-padding $divider-linear-vertical-padding;
+      }
+
     }
 
   }
@@ -88,8 +100,8 @@ hr {
 
   }
 
-  & > .divider > *:last-child {
-    margin-bottom: 0 !important;
+  & > .divider {
+    @include last-child-gutter-fix ();
   }
 
 }

@@ -36,24 +36,27 @@
 
   & > .chat-msg-img {
 
-    overflow:hidden;
     order: 1;
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
     margin-right: $gutter;
-    transition: opacity $chat-msg-img-transition-duration;
-    opacity: 1;
-    border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
-    border-radius: 100%;
 
-    & > img {
-      width: 100%;
-      height: 100%;
+    & > .image-wrp {
+
+      transition: opacity $chat-msg-img-transition-duration;
+
+      & > img {
+        border-radius: 100%;
+        width: $chat-msg-img-size;
+        height: $chat-msg-img-size;
+        border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
+      }
+
     }
 
   }
 
-  & > a.chat-msg-img:hover {
+  & > a.chat-msg-img:hover > .image-wrp {
     opacity: $chat-msg-img-opacity-hover;
   }
 
