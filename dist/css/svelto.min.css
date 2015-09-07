@@ -770,7 +770,7 @@ th {
 
 .white {
   border-color: #cccccc !important;
-  color: #3f3f3f !important;
+  color: #4c4c4c !important;
   background: #ffffff !important;
 }
 
@@ -813,7 +813,7 @@ th {
 
 .gray {
   border-color: #aaaaaa !important;
-  color: #3f3f3f !important;
+  color: #383838 !important;
   background: #dddddd !important;
 }
 
@@ -899,7 +899,7 @@ th {
 
 .yellow {
   border-color: #e5ca01 !important;
-  color: #ffffff !important;
+  color: #3f3f3f !important;
   background: #fee94e !important;
 }
 
@@ -942,7 +942,7 @@ th {
 
 .olive {
   border-color: #929d20 !important;
-  color: #ffffff !important;
+  color: #303030 !important;
   background: #cdda49 !important;
 }
 
@@ -2058,7 +2058,7 @@ button {
 
 .chat-msg > .chat-msg-indicator {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   z-index: 1;
   -webkit-order: 2;
@@ -2265,7 +2265,7 @@ button {
 /* CONTAINER */
 .container {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -2358,7 +2358,7 @@ button {
 
 .container > .container-footer {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
@@ -5064,7 +5064,7 @@ hr {
 /* HEADER */
 .infobar-wrp {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -5218,7 +5218,7 @@ hr {
 /* INPUT */
 .input-wrp, .textarea-wrp {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   position: relative;
   display: block;
@@ -5643,7 +5643,7 @@ label {
 /* LABEL */
 .label {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   font-weight: bold;
   display: -webkit-inline-flex;
@@ -7691,7 +7691,7 @@ label {
 /* PLACEHOLDER */
 .placeholder {
   border-color: #aaaaaa ;
-  color: #3f3f3f ;
+  color: #383838 ;
   background: #dddddd ;
   margin-bottom: 10px;
   text-align: center;
@@ -7824,7 +7824,7 @@ code[class*='language-'] .namespace {
 
 .progressbar > .progressbar-unhighlighted {
   border-color: #aaaaaa ;
-  color: #3f3f3f ;
+  color: #383838 ;
   background: #dddddd ;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8345,7 +8345,7 @@ table.table.selectable > tbody > tr.selected {
 
 .slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted {
   border-color: #aaaaaa ;
-  color: #3f3f3f ;
+  color: #383838 ;
   background: #dddddd ;
   position: relative;
   overflow: hidden;
@@ -9861,7 +9861,7 @@ p {
 /* MARK */
 mark, .mark {
   border-color: #e5ca01 ;
-  color: #ffffff ;
+  color: #3f3f3f ;
   background: #fee94e ;
   padding: 0.2em 0.3em;
   border-radius: 0.13325em;
@@ -9958,7 +9958,7 @@ code, section, pre {
 /* KBD */
 kbd {
   border-color: #cccccc ;
-  color: #3f3f3f ;
+  color: #4c4c4c ;
   background: #ffffff ;
   font-size: 0.9em;
   font-weight: bold;
