@@ -65,7 +65,7 @@
         </div>
       </div>
       <div class="multiple-wrp">
-        <div class="multiple"><a href="/components/breadcrumb.html" class="label button actionable outlined">Breadcrumb</a><a href="/components/button.html" class="label button actionable outlined">Button</a><a href="/components/chat.html" class="label button actionable outlined">Chat</a><a href="/components/divider.html" class="label button actionable outlined">Divider</a><a href="/components/footer.html" class="label button actionable outlined teal">Footer</a><a href="/components/infobar.html" class="label button actionable outlined teal">Infobar</a><a href="/components/input.html" class="label button actionable outlined teal">Input</a><a href="/components/label.html" class="label button actionable outlined teal">Label</a><a href="/components/header.html" class="label button actionable outlined teal">Header</a><a href="/components/pagination.html" class="label button actionable outlined teal">Pagination</a><a href="/components/placeholder.html" class="label button actionable outlined teal">Placeholder</a><a href="/components/progressbar.html" class="label button actionable outlined teal">Progressbar</a><a href="/components/shapes.html" class="label button actionable outlined teal">Shapes</a><a href="/components/spinner.html" class="label button actionable outlined teal">Spinner</a><a href="/components/textarea.html" class="label button actionable outlined teal">Textarea</a><a href="/components/toolbar.html" class="label button actionable outlined teal">Toolbar</a>
+        <div class="multiple"><a href="/components/breadcrumb.html" class="label button actionable outlined">Breadcrumb</a><a href="/components/button.html" class="label button actionable outlined">Button</a><a href="/components/chat.html" class="label button actionable outlined">Chat</a><a href="/components/divider.html" class="label button actionable outlined">Divider</a><a href="/components/footer.html" class="label button actionable outlined">Footer</a><a href="/components/infobar.html" class="label button actionable outlined teal">Infobar</a><a href="/components/input.html" class="label button actionable outlined teal">Input</a><a href="/components/label.html" class="label button actionable outlined teal">Label</a><a href="/components/header.html" class="label button actionable outlined teal">Header</a><a href="/components/pagination.html" class="label button actionable outlined teal">Pagination</a><a href="/components/placeholder.html" class="label button actionable outlined teal">Placeholder</a><a href="/components/progressbar.html" class="label button actionable outlined teal">Progressbar</a><a href="/components/shapes.html" class="label button actionable outlined teal">Shapes</a><a href="/components/spinner.html" class="label button actionable outlined teal">Spinner</a><a href="/components/textarea.html" class="label button actionable outlined teal">Textarea</a><a href="/components/toolbar.html" class="label button actionable outlined teal">Toolbar</a>
         </div>
       </div>
       <div class="divider-wrp block">
@@ -93,7 +93,23 @@
     <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="/svelto.js"></script>
-    <script>$(function () { $.noty ( {"body":"[Teal] To update <br/> [Red] Problematic</p>","ttl":"forever"} ); });
+    <script>
+      $(function(){
+        var $buttons = $('main .button'),
+            green_nr = $buttons.filter ( '.green' ).length,
+            teal_nr = $buttons.filter ( '.teal' ).length,
+            red_nr = $buttons.filter ( '.red' ).length,
+            others_nr = $buttons.length - green_nr - teal_nr - red_nr;
+        $.noty ({
+          body: '<p>' +
+                  '<span class="text-green">Ready (' + green_nr + ')</span><br/>' +
+                  '<span class="text-teal">To update (' + teal_nr + ')</span><br/>' +
+                  '<span class="text-red">Problematic (' + red_nr + ')</span><br/>' +
+                  '<span>Others (' + others_nr + ')</span>' +
+                '</p>',
+          ttl: 'forever'
+        });
+      });
     </script>
     <script>
       window.onerror = function ( message, file, line ) {

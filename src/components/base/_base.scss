@@ -91,7 +91,7 @@ body {
     }
 
     & > main {
-      transition: margin $transition-duration;
+      transition: margin $transition-duration-normal;
     }
 
   }

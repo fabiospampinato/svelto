@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* INFOBAR */
@@ -14,13 +15,13 @@ $infobar-color: 'white' !default;
 $infobar-color-basic: true !default;
 
 $infobar-border-width: $outline-width !default;
-$infobar-border-radius: $border-radius !default;
+$infobar-border-radius: $border-radius-medium !default;
 
 /* TITLE */
 
-$infobar-title-size: 'xlarge' !default;
-$infobar-title-margin-bottom: $gutter-half !default;
+$infobar-title-size: 'large' !default;
+$infobar-title-margin-bottom: $widget-gutter-half !default;
 
 /* TRANSITIONS */
 
-$infobar-transition-close-duration: $transition-duration !default;
+$infobar-transition-close-duration: $transition-duration-normal !default;

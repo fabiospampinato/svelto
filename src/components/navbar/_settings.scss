@@ -13,7 +13,7 @@
 $navbar-z-index: 20 !default;
 $navbar-z-depth: 5 !default;
 
-$navbar-transition-transform-duration: $transition-duration !default;
+$navbar-transition-transform-duration: $transition-duration-normal !default;
 
 /* ATTACHED */
 
@@ -25,7 +25,7 @@ $navbar-background-z-index: 19 !default;
 
 $navbar-background-color: rgba(0, 0, 0, 0.5) !default;
 
-$navbar-background-transition-opacity-duration: $transition-duration !default;
+$navbar-background-transition-opacity-duration: $transition-duration-normal !default;
 
 /* SIZES */
 

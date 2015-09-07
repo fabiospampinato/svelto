@@ -6,92 +6,74 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* HEADER */
 
 .infobar-wrp {
 
+  @extend %widget;
   @include color ( $infobar-color, $infobar-color-basic );
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: $gutter;
-  padding: $gutter;
+  padding: $widget-gutter;
   transition: opacity $infobar-transition-close-duration;
   border-width: $infobar-border-width;
   border-style: solid;
   border-radius: $infobar-border-radius;
 
-  &.limited {
-    max-width: $max-width;
-    margin-right: auto;
-    margin-left: auto;
-  }
+  /* INSET */
 
   &.inset {
     border-width: 0;
     padding: 0;
   }
 
+  /* REMOVE */
+
   &.remove {
     opacity: 0;
   }
 
-  & > .infobar-left {
+  /* SECTIONS */
 
+  & > .infobar-left, & > .infobar-center, .infobar-title, .infobar-subtitle, & > .infobar-right, & > .infobar-bottom {
+    @include last-child-gutter-fix ();
+  }
+
+  & > .infobar-left {
     flex-shrink: 0;
     order: 1;
-
-    & > *:last-child {
-      margin-bottom: 0;
-    }
-
   }
 
   & > .infobar-center {
 
-    flex-grow: 100;
+    flex-grow: 1;
     flex-basis: 0;
     order: 2;
 
     & > .infobar-title {
-      // @include size ( $infobar-title-size );
-      font-size: 1.3em; //FIXME: it shouldn't be hard coded
+      @include size ( $infobar-title-size );
       margin-bottom: $infobar-title-margin-bottom;
-    }
-
-    & > *:last-child {
-      margin-bottom: 0;
     }
 
   }
 
   & > .infobar-right {
-
     flex-shrink: 0;
     order: 3;
-
-    & > *:last-child {
-      margin-bottom: 0;
-    }
-
   }
 
   & > .infobar-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
-
     order: 4;
     width: 100%;
-    margin-top: $gutter;
-
-    & > *:last-child {
-      margin-bottom: 0;
-    }
-
+    margin-top: $widget-gutter;
   }
 
-  & > *:not(:first-child):not(.infobar-bottom) {
-    margin-left: $gutter;
+  & > :not(:first-child):not(.infobar-bottom) {
+    margin-left: $widget-gutter;
   }
 
 }

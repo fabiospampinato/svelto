@@ -40,7 +40,7 @@ append main
     +button("/components/button.html").outlined Button
     +button("/components/chat.html").outlined Chat
     +button("/components/divider.html").outlined Divider
-    +button("/components/footer.html").outlined.teal Footer
+    +button("/components/footer.html").outlined Footer
     +button("/components/infobar.html").outlined.teal Infobar
     +button("/components/input.html").outlined.teal Input
     +button("/components/label.html").outlined.teal Label
@@ -99,4 +99,20 @@ append main
     +button("/components/touching.html").outlined.teal Touching
 
 append body-end
-  +noty({ body: '[Teal] To update <br/> [Red] Problematic</p>', ttl: 'forever' })
+  +script.
+    $(function(){
+      var $buttons = $('main .button'),
+          green_nr = $buttons.filter ( '.green' ).length,
+          teal_nr = $buttons.filter ( '.teal' ).length,
+          red_nr = $buttons.filter ( '.red' ).length,
+          others_nr = $buttons.length - green_nr - teal_nr - red_nr;
+      $.noty ({
+        body: '<p>' +
+                '<span class="text-green">Ready (' + green_nr + ')</span><br/>' +
+                '<span class="text-teal">To update (' + teal_nr + ')</span><br/>' +
+                '<span class="text-red">Problematic (' + red_nr + ')</span><br/>' +
+                '<span>Others (' + others_nr + ')</span>' +
+              '</p>',
+        ttl: 'forever'
+      });
+    });

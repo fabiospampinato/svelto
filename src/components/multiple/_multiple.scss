@@ -272,7 +272,7 @@
       z-index: $multiple-z-depth-z-index;
       content: '';
       pointer-events: none;
-      border-radius: $border-radius;
+      border-radius: $border-radius-medium;
     }
 
     &:not(.no-wrap):not(.vertical):not(.joined):before {

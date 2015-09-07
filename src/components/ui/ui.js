@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - UI v0.1.0
+ * Svelto - UI v0.2.0
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -37,6 +37,14 @@
       MIDDLE: 1,
       RIGHT: 2
     }
+  };
+
+  /* ANIMATION */
+
+  $.ui.animation = {
+    slow: 500,
+    normal: 350,
+    fast: 150
   };
 
 }( jQuery, _, window, document ));

@@ -25,12 +25,8 @@ $border-radius-small: 0.13325em !default;
 $border-radius-medium: 0.2665em !default;
 $border-radius-large: 0.39975em !default;
 
-$border-radius: $border-radius-medium !default;
-
 /* TRANSITIONS */
 
 $transition-duration-slow: 0.5s !default;
 $transition-duration-normal: 0.35s !default;
 $transition-duration-fast: 0.15s !default;
-
-$transition-duration: $transition-duration-normal !default;

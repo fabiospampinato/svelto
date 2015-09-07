@@ -26,7 +26,7 @@
         closer: '.infobar-closer'
       },
       delay: {
-        close: 250
+        close: $.ui.animation.normal
       },
       callbacks: {
         close: _.noop

@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Infobar v0.1.0
+//- Svelto - Infobar v0.1.1
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -37,14 +37,14 @@ mixin infobar-center
 
 mixin infobar-title(title)
   if title
-    p.infobar-title&attributes(attributes)= title
+    .infobar-title&attributes(attributes)= title
   else
     .infobar-title&attributes(attributes)
       block
 
 mixin infobar-subtitle(subtitle)
   if subtitle
-    p.infobar-subtitle&attributes(attributes)= subtitle
+    .infobar-subtitle&attributes(attributes)= subtitle
   else
     .infobar-subtitle&attributes(attributes)
       block
