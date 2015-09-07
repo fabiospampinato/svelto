@@ -84,6 +84,16 @@ label {
 
   }
 
+  /* ICON */ //FIXME: Ugly fix for keeping the label height consistent
+
+  .icon-wrp > .icon {
+    margin: ( - ( $icon-scale-amount - 1 ) / 2 * 1em ) 0;
+  }
+
+  & > .icon-wrp:first-child:last-child > .icon {
+    margin: - ( $icon-scale-amount - 1 ) / 2 * 1em;
+  }
+
   /* BADGE */
 
   &.badge {
