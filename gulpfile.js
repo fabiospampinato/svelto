@@ -9,6 +9,7 @@
 /* REQUIRES */
 
 var _           = require ( 'lodash' ),
+    argv        = require ( 'yargs' ).argv,
     browserSync = require ( 'browser-sync' ).create (),
     fs          = require ( 'fs' ),
     merge       = require ( 'merge-stream' ),
@@ -26,10 +27,12 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
     bytediff     = require ( 'gulp-bytediff' ),
     clean        = require ( 'gulp-clean' ),
     concat       = require ( 'gulp-concat' ),
+    csso         = require ( 'gulp-csso' ),
     dependencies = require ( 'gulp-resolve-dependencies' ),
     filelog      = require ( 'gulp-filelog' ),
     flatten      = require ( 'gulp-flatten' ),
     foreach      = require ( 'gulp-foreach' ),
+    gulpif       = require ( 'gulp-if' ),
     gutil        = require ( 'gulp-util' ),
     ignore       = require ( 'gulp-ignore' ),
     imagemin     = require ( 'gulp-imagemin' ),
@@ -44,6 +47,11 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
     sourcemaps   = require ( 'gulp-sourcemaps' ),
     uglify       = require ( 'gulp-uglify' );
 
+/* FLAGS */
+
+var isDevelopment = !!argv.development,
+    isProduction = !isDevelopment;
+
 /* IMAGES */
 
 //FIXME: It doesn't work with SVGs, the blur.svg doesn't work anymore after
@@ -55,16 +63,16 @@ gulp.task ( 'images', function () {
                dest: 'dist/images',
                map: path.basename
              }))
-             .pipe ( bytediff.start () )
-             .pipe ( imagemin ({
+             .pipe ( gulpif ( isProduction, bytediff.start () ) )
+             .pipe ( gulpif ( isProduction, imagemin ({
                interlaced: true, //INFO: Affects GIF images
                progressive: true, //INFO: Affects JPG images
                optimizationLevel: 7, //INFO: Affects PNG images
                multipass: true, //INFO: Affects SVG images
                svgoPlugins: [{ removeViewBox: false }],
                use: [pngquant ()]
-             }))
-             .pipe ( bytediff.stop () )
+             })))
+             .pipe ( gulpif ( isProduction, bytediff.stop () ) )
              .pipe ( flatten () )
              .pipe ( gulp.dest ( 'dist/images' ) )
              .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
@@ -95,9 +103,6 @@ gulp.task ( 'examples', function () {
              .on ( 'error', function ( err ) {
                gutil.log ( err.message );
              })
-             //  .pipe ( minify_html ({
-             //    considtionals: true
-             //  }))
              .pipe ( gulp.dest ( 'examples' ) )
              .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
 
@@ -150,8 +155,7 @@ gulp.task ( 'js-temp', function () {
              }) )
              .pipe ( flatten () )
              .pipe ( gulp.dest ( '.temp/js' ) )
-            //  .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
-             .pipe ( uglify () )
+             .pipe ( gulpif ( isProduction, uglify () ) )
              .pipe ( gulp.dest ( '.temp/js/min' ) );
 
 });
@@ -202,10 +206,11 @@ gulp.task ( 'css', function () {
              .pipe ( rename ( 'svelto.css' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
              .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () )
-             .pipe ( minify_css ({
+             .pipe ( gulpif ( isProduction, csso () ) )
+             .pipe ( gulpif ( isProduction, minify_css ({
                keepSpecialComments: 0,
                roundingPrecision: -1
-             }))
+             })))
              .pipe ( rename ( 'svelto.min.css' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
              .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
