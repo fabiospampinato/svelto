@@ -573,21 +573,6 @@ mixin header-with-bg(background_image_url)
 
 
 //- =========================================================================
-//- Svelto - Icons v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin icon(icon)
-  .icon-wrp&attributes(attributes)
-    .icon
-      if icon
-        = icon
-      block
-
-
-//- =========================================================================
 //- Svelto - Image v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -607,6 +592,21 @@ mixin image-caption
 mixin image-sample
   +image("/sample.png")&attributes(attributes)
     block
+
+
+//- =========================================================================
+//- Svelto - Icons v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin icon(icon)
+  .icon-wrp&attributes(attributes)
+    .icon
+      if icon
+        = icon
+      block
 
 
 //- =========================================================================

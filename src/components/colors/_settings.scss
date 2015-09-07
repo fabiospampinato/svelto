@@ -255,7 +255,7 @@ $color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
 $color-transparent-bg-active: darken( $color-transparent-bg, 4 ) !default;
 $color-transparent-border: darken( $color-transparent-bg, 20 ) !default;
 $color-transparent-accent: $color-secondary !default;
-$color-transparent-text: inerhit !default;
+$color-transparent-text: inherit !default;
 $color-transparent-link: $color-transparent-accent !default;
 $color-transparent-link-hover: lighten( $color-transparent-link, 2 ) !default;
 $color-transparent-support-gradient: false !default;

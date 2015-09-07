@@ -1393,7 +1393,7 @@ th {
 
 .transparent {
   border-color: transparent !important;
-  color: inerhit !important;
+  color: inherit !important;
   background: transparent !important;
 }
 
@@ -1944,7 +1944,7 @@ body > footer > .footer {
 }
 
 body.fixed-header > header {
-  margin-top: 64px;
+  margin-top: 56px;
 }
 
 body.fixed-header > header > .header {
@@ -7046,7 +7046,7 @@ label {
     margin-top: 130px;
   }
   body.fixed-header > .navbar-wrp.attached-xs.top ~ header {
-    margin-top: 184px;
+    margin-top: 176px;
     margin-bottom: -110px;
   }
   body.fixed-header > .navbar-wrp.attached-xs.top ~ header > .header {
@@ -7063,7 +7063,7 @@ label {
     margin-top: 74px;
   }
   body.fixed-header > .navbar-wrp.attached-xs.top.slim ~ header {
-    margin-top: 128px;
+    margin-top: 120px;
     margin-bottom: -54px;
   }
   body.fixed-header > .navbar-wrp.attached-xs.top.slim ~ header > .header {
@@ -7137,7 +7137,7 @@ label {
     margin-top: 130px;
   }
   body.fixed-header > .navbar-wrp.attached-sm.top ~ header {
-    margin-top: 184px;
+    margin-top: 176px;
     margin-bottom: -110px;
   }
   body.fixed-header > .navbar-wrp.attached-sm.top ~ header > .header {
@@ -7154,7 +7154,7 @@ label {
     margin-top: 74px;
   }
   body.fixed-header > .navbar-wrp.attached-sm.top.slim ~ header {
-    margin-top: 128px;
+    margin-top: 120px;
     margin-bottom: -54px;
   }
   body.fixed-header > .navbar-wrp.attached-sm.top.slim ~ header > .header {
@@ -7228,7 +7228,7 @@ label {
     margin-top: 130px;
   }
   body.fixed-header > .navbar-wrp.attached-md.top ~ header {
-    margin-top: 184px;
+    margin-top: 176px;
     margin-bottom: -110px;
   }
   body.fixed-header > .navbar-wrp.attached-md.top ~ header > .header {
@@ -7245,7 +7245,7 @@ label {
     margin-top: 74px;
   }
   body.fixed-header > .navbar-wrp.attached-md.top.slim ~ header {
-    margin-top: 128px;
+    margin-top: 120px;
     margin-bottom: -54px;
   }
   body.fixed-header > .navbar-wrp.attached-md.top.slim ~ header > .header {
@@ -7319,7 +7319,7 @@ label {
     margin-top: 130px;
   }
   body.fixed-header > .navbar-wrp.attached-lg.top ~ header {
-    margin-top: 184px;
+    margin-top: 176px;
     margin-bottom: -110px;
   }
   body.fixed-header > .navbar-wrp.attached-lg.top ~ header > .header {
@@ -7336,7 +7336,7 @@ label {
     margin-top: 74px;
   }
   body.fixed-header > .navbar-wrp.attached-lg.top.slim ~ header {
-    margin-top: 128px;
+    margin-top: 120px;
     margin-bottom: -54px;
   }
   body.fixed-header > .navbar-wrp.attached-lg.top.slim ~ header > .header {
@@ -7410,7 +7410,7 @@ label {
     margin-top: 130px;
   }
   body.fixed-header > .navbar-wrp.attached-xl.top ~ header {
-    margin-top: 184px;
+    margin-top: 176px;
     margin-bottom: -110px;
   }
   body.fixed-header > .navbar-wrp.attached-xl.top ~ header > .header {
@@ -7427,7 +7427,7 @@ label {
     margin-top: 74px;
   }
   body.fixed-header > .navbar-wrp.attached-xl.top.slim ~ header {
-    margin-top: 128px;
+    margin-top: 120px;
     margin-bottom: -54px;
   }
   body.fixed-header > .navbar-wrp.attached-xl.top.slim ~ header > .header {
@@ -9904,7 +9904,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 /* TAGBOX */
 .tagbox {
   border-color: transparent ;
-  color: inerhit ;
+  color: inherit ;
   background: transparent ;
   margin-bottom: 10px;
 }
@@ -9931,7 +9931,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 
 .tagbox .text-field {
   border-color: transparent ;
-  color: inerhit ;
+  color: inherit ;
   background: transparent ;
   font-size: 1rem ;
   min-width: 6.5em;
@@ -10033,7 +10033,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * ========================================================================= */
 /* TOOLBAR */
 .toolbar {
-  height: 64px;
+  height: 56px;
   margin-bottom: 10px;
   padding: 0 1em;
 }
