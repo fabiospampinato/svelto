@@ -207,16 +207,30 @@
   @include center-margin ();
 }
 
-.limited { //TODO: Move it to it's own decorator
-  @include center-margin ( $max-width );
+.limited:not(.multiple-wrp) { //TODO: Move it to it's own decorator
+
+  @if $max-width-enabled {
+
+    @include center-margin ( $max-width );
+
+  }
+
 }
 
 .actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator
   cursor: pointer;
 }
 
+.grow {
+  flex-grow: 1 !important;
+}
+
 .no-grow {
   flex-grow: 0 !important;
+}
+
+.shrink {
+  flex-shrink: 1 !important;
 }
 
 .no-shrink {

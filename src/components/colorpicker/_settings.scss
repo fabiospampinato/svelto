@@ -14,7 +14,7 @@ $colorpicker-height: 170px !default;
 
 /* WRAPPERS */
 
-$colorpicker-wrp-border-width: $border-width !default;
+$colorpicker-wrp-border-width: 2px !default;
 $colorpicker-wrp-border-color: black !default;
 
 /* WRAPPER HUE */
@@ -23,7 +23,7 @@ $colorpicker-hue-wrp-width: 25px !default;
 
 /* HANDLER */
 
-$colorpicker-handler-border-width: $border-width-large !default;
+$colorpicker-handler-border-width: 2px !default;
 $colorpicker-handler-border-color: white !default;
 
 $colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.2) !default;

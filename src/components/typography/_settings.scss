@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../ui/_settings.scss
+ * @requires ../outline/_settings.scss
  * ========================================================================= */
 
 /* FONT FAMILY */
@@ -23,7 +24,6 @@ $line-height-em: 1em * $line-height !default;
 
 /* LINK */
 
-$a-underline-z-index: 1 !default;
 $a-underline-height: 1px !default;
 $a-underline-transition-duration: $transition-duration-fast !default;
 
@@ -47,7 +47,7 @@ $small-font-size: 0.65em !default;
 $mark-color: 'yellow' !default;
 $mark-color-basic: true !default;
 
-$mark-padding: 0.2em 0.3em !default;
+$mark-padding: 0.3em 0.325em !default;
 $mark-border-radius: $border-radius-small !default;
 
 /* ABBR */
@@ -68,7 +68,8 @@ $blockquote-footer-opacity: 0.85 !default;
 /* CODE */
 
 $code-bg-color: rgba(0, 0, 0, 0.03) !default;
-$code-border-width: $border-radius !default;
+$code-border-radius: $border-radius !default;
+$code-border-width: $outline-width !default;
 $code-border-color: rgba(0, 0, 0, 0.15) !default;
 
 /* KBD */
@@ -76,8 +77,9 @@ $code-border-color: rgba(0, 0, 0, 0.15) !default;
 $kbd-color: 'white' !default;
 $kbd-color-basic: true !default;
 
-$kbd-border-width: $border-radius !default;
+$kbd-border-width: $outline-width !default;
 $kbd-border-style: solid !default;
+$kdb-border-radius: $border-radius !default;
 
 $kbd-font-size: 0.9em !default;
 $kbd-padding: 0.2em 0.3em !default;

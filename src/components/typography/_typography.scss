@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../highlight/_highlight.scss
  * ========================================================================= */
 
 /* LINK */
@@ -18,20 +19,14 @@ a {
 
   p > & { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
-    //TODO: It should also work with mark, basically almost with anything, but sometimes is uneeded
-
-    &:before {
-      @include fill-absolute ();
-      z-index: $a-underline-z-index;
-      content: '';
+    &:after {
+      @extend %highlight-after;
+      border-bottom-width: $a-underline-height;
       transition: transform $a-underline-transition-duration;
       transform: scaleX(0);
-      pointer-events: none;
-      border-bottom: $a-underline-height solid;
-      border-radius: inherit;
     }
 
-    &:hover:before {
+    &:hover:after {
       transform: scaleX(1);
     }
 
@@ -173,7 +168,7 @@ code, section, pre {
   margin: 0;
   padding: $gutter;
   border: $code-border-width solid $code-border-color;
-  border-radius: $border-radius-small;
+  border-radius: $code-border-radius;
   background-color: $code-bg-color;
 }
 
@@ -189,5 +184,5 @@ kbd {
   white-space: nowrap;
   border-width: $kbd-border-width;
   border-style: $kbd-border-style;
-  border-radius: $border-radius-medium;
+  border-radius: $kdb-border-radius;
 }

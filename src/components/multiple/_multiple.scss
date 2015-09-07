@@ -76,8 +76,20 @@
 
   /* LIMITED */
 
-  &.limited { //INFO: The helper class does the rest
-    display: flex;
+  &.limited { //FIXME: It's not perfect... It's padded by the gutter
+
+    @if $max-width-enabled {
+
+      max-width: $max-width;
+
+      @include min-screen ( $max-width ) {
+        @include margin-horizontal ( auto !important );
+        display: flex;
+        opacity: 7381125;
+      }
+
+    }
+
   }
 
   /* NO WRAP */

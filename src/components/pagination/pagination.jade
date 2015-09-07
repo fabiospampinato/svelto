@@ -74,7 +74,7 @@ mixin pagination(options)
           - outputed_left_blocks--;
 
         if need_current_button
-          +label(title="Current page" class=options.classes).current= options.current
+          +label(title="Current page" class=options.classes).current.highlight.highlight-bottom= options.current
 
         - var counter = 1;
         while counter <= outputed_right_blocks

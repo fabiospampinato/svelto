@@ -31,6 +31,10 @@ label {
   min-height: $line-height-em + ( $label-vertical-padding * 2 );
   min-width: $line-height-em + ( $label-horizontal-padding * 2 );
 
+  & > :last-child:not(.label-left):not(.label-right) {
+    margin-bottom: 0 !important;
+  }
+
   /* COMPACT */
 
   &.compact {
@@ -39,10 +43,18 @@ label {
     min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
   }
 
+  /* SPAN */
+
+  & > span {
+    flex-grow: 1;
+  }
+
   /* LEFT / RIGHT */
 
   & > .label-left, & > .label-right {
+    @include last-child-gutter-fix ();
     display: inline-flex;
+    align-self: stretch;
     align-items: center;
     justify-content: center;
     background-color: $label-left-right-bg-color;

@@ -8,18 +8,24 @@
  * @requires _settings.scss
  * ========================================================================= */
 
+/* HIGHLIGHT AFTER */
+
+%highlight-after {
+  @include fill-absolute ();
+  z-index: $highlight-z-index;
+  content: '';
+  pointer-events: none;
+  border-width: 0;
+  border-style: solid;
+  border-radius: inherit;
+}
+
 /* HIGHLIGHT */
 
 .highlight {
 
   &:after {
-    @include fill-absolute ();
-    z-index: $highlight-z-index;
-    content: '';
-    pointer-events: none;
-    border-width: 0;
-    border-style: solid;
-    border-radius: inherit;
+    @extend %highlight-after;
   }
 
   /* DIRECTIONS */

@@ -51,58 +51,6 @@ mixin breadcrumb-divider(icon)
 
 
 //- =========================================================================
-//- Svelto - Button v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin button(href)
-  if href
-    if href.slice ( 0, 11 ) === 'javascript:'
-      .label(onclick=href)&attributes(attributes).button.actionable
-        block
-    else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-      .label(onclick="javascript:" + href)&attributes(attributes).button.actionable
-        block
-    else
-      a.label(href=href)&attributes(attributes).button.actionable
-        block
-  else
-    .label&attributes(attributes).button.actionable
-      block
-
-mixin button-left
-  .label-left&attributes(attributes).button-left
-    block
-      
-mixin button-right
-  .label-right&attributes(attributes).button-right
-    block
-
-mixin button-icon(icon)
-  +button&attributes(attributes)
-    +icon(icon)
-    block
-  
-mixin button-ribbon
-  +button&attributes(attributes).ribbon
-    block
-  +button.invisible
-
-mixin button-corner(direction)
-  - direction = direction || "top-right";
-  .label-corner(class=direction)&attributes(attributes).button-corner.actionable
-    +button.compact
-      block
-      
-mixin button-tag
-  .label-tag.button-tag
-    +button&attributes(attributes)
-      block
-
-
-//- =========================================================================
 //- Svelto - Chat v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -164,6 +112,58 @@ mixin chat-msg(options)
               if options.permissions.delete
                 +button-icon("delete")(title="Delete").small.outlined.compact
         +container-content= options.message.content
+
+
+//- =========================================================================
+//- Svelto - Button v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin button(href)
+  if href
+    if href.slice ( 0, 11 ) === 'javascript:'
+      .label(onclick=href)&attributes(attributes).button.actionable
+        block
+    else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+      .label(onclick="javascript:" + href)&attributes(attributes).button.actionable
+        block
+    else
+      a.label(href=href)&attributes(attributes).button.actionable
+        block
+  else
+    .label&attributes(attributes).button.actionable
+      block
+
+mixin button-left
+  .label-left&attributes(attributes).button-left
+    block
+      
+mixin button-right
+  .label-right&attributes(attributes).button-right
+    block
+
+mixin button-icon(icon)
+  +button&attributes(attributes)
+    +icon(icon)
+    block
+  
+mixin button-ribbon
+  +button&attributes(attributes).ribbon
+    block
+  +button.invisible
+
+mixin button-corner(direction)
+  - direction = direction || "top-right";
+  .label-corner(class=direction)&attributes(attributes).button-corner.actionable
+    +button.compact
+      block
+      
+mixin button-tag
+  .label-tag.button-tag
+    +button&attributes(attributes)
+      block
 
 
 //- =========================================================================
@@ -995,7 +995,7 @@ mixin pagination(options)
           - outputed_left_blocks--;
 
         if need_current_button
-          +label(title="Current page" class=options.classes).current= options.current
+          +label(title="Current page" class=options.classes).current.highlight.highlight-bottom= options.current
 
         - var counter = 1;
         while counter <= outputed_right_blocks
@@ -1096,36 +1096,6 @@ mixin syntax(language)
 
 
 //- =========================================================================
-//- Svelto - Progressbar v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: Write options docs block
-
-mixin progressbar(options, multiple)
-  if typeof multiple !== 'undefined'
-    - var new_options = { percentages: Array ( arguments.length ) };
-    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
-      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
-    - }
-  else
-    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
-  - options = new_options;
-  - options.decimals = options.decimals || 0;
-  - var total = 0;
-  .progressbar&attributes(attributes)
-    .progressbar-unhighlighted
-      each percentage in options.percentages
-        - total += percentage.value;
-        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
-          if options.labeled
-            .progressbar-label= +(percentage.value).toFixed(options.decimals)
-    .progressbar-stripes(style=("width: " + total + "%;"))
-
-
-//- =========================================================================
 //- Svelto - Radio v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1172,6 +1142,36 @@ mixin radio(options)
       span= options.title
     +icon(options.icons.on)(class=options.colors.on).icon-on
     +icon(options.icons.off)(class=options.colors.off).icon-off
+
+
+//- =========================================================================
+//- Svelto - Progressbar v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: Write options docs block
+
+mixin progressbar(options, multiple)
+  if typeof multiple !== 'undefined'
+    - var new_options = { percentages: Array ( arguments.length ) };
+    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
+      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
+    - }
+  else
+    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+  - options = new_options;
+  - options.decimals = options.decimals || 0;
+  - var total = 0;
+  .progressbar&attributes(attributes)
+    .progressbar-unhighlighted
+      each percentage in options.percentages
+        - total += percentage.value;
+        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
+          if options.labeled
+            .progressbar-label= +(percentage.value).toFixed(options.decimals)
+    .progressbar-stripes(style=("width: " + total + "%;"))
 
 
 //- =========================================================================
