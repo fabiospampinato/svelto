@@ -5708,8 +5708,19 @@ label {
 }
 
 .label > .label-left, .label > .label-right {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   background-color: rgba(0, 0, 0, 0.05);
   padding: 0.495em 0.495em;
+  min-height: 2.4185714286em;
+  min-width: 2.4185714286em;
 }
 
 .label > .label-left {
@@ -5750,7 +5761,7 @@ label {
   margin: -0.25em 0;
 }
 
-.label > .icon-wrp:first-child:last-child > .icon {
+.label > .icon-wrp:first-child:last-child > .icon, .label > .label-left > .icon-wrp:first-child:last-child > .icon, .label > .label-right > .icon-wrp:first-child:last-child > .icon {
   margin: -0.25em;
 }
 

@@ -42,8 +42,13 @@ label {
   /* LEFT / RIGHT */
 
   & > .label-left, & > .label-right {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     background-color: $label-left-right-bg-color;
     padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
+    min-height: $line-height-em + ( $label-compact-vertical-padding * 2 );
+    min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
   }
 
   & > .label-left {
@@ -90,8 +95,12 @@ label {
     margin: ( - ( $icon-scale-amount - 1 ) / 2 * 1em ) 0;
   }
 
-  & > .icon-wrp:first-child:last-child > .icon {
-    margin: - ( $icon-scale-amount - 1 ) / 2 * 1em;
+  &, & > .label-left, & > .label-right {
+
+    & > .icon-wrp:first-child:last-child > .icon {
+      margin: - ( $icon-scale-amount - 1 ) / 2 * 1em;
+    }
+
   }
 
   /* BADGE */
