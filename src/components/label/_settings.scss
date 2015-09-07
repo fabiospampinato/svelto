@@ -63,8 +63,8 @@ $label-corner-vertical-padding: $label-compact-vertical-padding * 2 !default;
 
 $label-floating-z-depth: 4 !default;
 
-$label-floating-horizontal-padding: $label-vertical-padding * 2 !default;
-$label-floating-vertical-padding: $label-vertical-padding * 2 !default;
+$label-floating-horizontal-padding: $label-vertical-padding * 1.6 !default;
+$label-floating-vertical-padding: $label-vertical-padding * 1.6 !default;
 
-$label-floating-right: 20px !default;
-$label-floating-bottom: 20px !default;
+$label-floating-right: 24px !default;
+$label-floating-bottom: 24px !default;

@@ -5774,12 +5774,12 @@ label {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   position: fixed;
   z-index: 1;
-  right: 20px;
-  bottom: 20px;
+  right: 24px;
+  bottom: 24px;
   margin-bottom: 0;
-  padding: 0.99em 0.99em;
-  min-height: 3.4085714286em;
-  min-width: 3.4085714286em;
+  padding: 0.792em 0.792em;
+  min-height: 3.0125714286em;
+  min-width: 3.0125714286em;
 }
 
 .label.ribbon {
