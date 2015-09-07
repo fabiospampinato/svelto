@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colors (Settings) v0.1.0
+ * Svelto - Colors (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -61,7 +61,7 @@ $color-secondary-support-gradient: true !default;
 /* TERTIARY */
 
 $color-tertiary-bg: $color-tertiary !default;
-$color-tertiary-bg-hover: lighten( $color-tertiary-bg, 2 ) !default;
+$color-tertiary-bg-hover: lighten( $color-tertiary-bg, 3 ) !default;
 $color-tertiary-bg-active: darken( $color-tertiary-bg, 4 ) !default;
 $color-tertiary-border: darken( $color-tertiary-bg, 20 ) !default;
 $color-tertiary-accent: $color-quaternary !default;
@@ -110,7 +110,7 @@ $color-gray-support-gradient: true !default;
 
 $color-black-bg: $color-black !default;
 $color-black-bg-hover: lighten( $color-black-bg, 4 ) !default;
-$color-black-bg-active: lighten( $color-black-bg, 10 ) !default;
+$color-black-bg-active: darken( $color-black-bg, 4 ) !default;
 $color-black-border: darken( $color-black-bg, 20 ) !default;
 $color-black-accent: $color-white !default;
 $color-black-text: #ffffff !default; //INFO: Contrast ratio: 15.9
@@ -121,7 +121,7 @@ $color-black-support-gradient: true !default;
 /* YELLOW */
 
 $color-yellow-bg: $color-yellow !default;
-$color-yellow-bg-hover: lighten( $color-yellow-bg, 2 ) !default;
+$color-yellow-bg-hover: lighten( $color-yellow-bg, 4 ) !default;
 $color-yellow-bg-active: darken( $color-yellow-bg, 4 ) !default;
 $color-yellow-border: darken( $color-yellow-bg, 20 ) !default;
 $color-yellow-accent: $color-red !default;
@@ -133,7 +133,7 @@ $color-yellow-support-gradient: true !default;
 /* OLIVE */
 
 $color-olive-bg: $color-olive !default;
-$color-olive-bg-hover: lighten( $color-olive-bg, 2 ) !default;
+$color-olive-bg-hover: lighten( $color-olive-bg, 4 ) !default;
 $color-olive-bg-active: darken( $color-olive-bg, 4 ) !default;
 $color-olive-border: darken( $color-olive-bg, 20 ) !default;
 $color-olive-accent: $color-orange !default;
@@ -211,7 +211,7 @@ $color-red-border: darken( $color-red-bg, 20 ) !default;
 $color-red-accent: $color-yellow !default;
 $color-red-text: #ffffff !default; //INFO: Contrast ratio: 3.7
 $color-red-link: $color-red-accent !default;
-$color-red-link-hover: lighten( $color-red-link, 2 ) !default;
+$color-red-link-hover: lighten( $color-red-link, 4 ) !default;
 $color-red-support-gradient: true !default;
 
 /* PINK */

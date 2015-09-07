@@ -425,7 +425,7 @@ th {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - Colors (Settings) v0.1.0
+ * Svelto - Colors (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -689,7 +689,7 @@ th {
 }
 
 .tertiary.gradient {
-  background-image: linear-gradient(to bottom, #840df2 0%, #740bd5 100%);
+  background-image: linear-gradient(to bottom, #8711f3 0%, #740bd5 100%);
   background-repeat: repeat-x;
 }
 
@@ -698,7 +698,7 @@ th {
 }
 
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #840df2 !important;
+  background: #8711f3 !important;
 }
 
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
@@ -861,12 +861,12 @@ th {
 }
 
 .black.gradient {
-  background-image: linear-gradient(to bottom, #2c2c2c 0%, #3c3c3c 100%);
+  background-image: linear-gradient(to bottom, #2c2c2c 0%, #181818 100%);
   background-repeat: repeat-x;
 }
 
 .black.actionable.active {
-  background: #3c3c3c !important;
+  background: #181818 !important;
 }
 
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
@@ -874,7 +874,7 @@ th {
 }
 
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #3c3c3c !important;
+  background: #181818 !important;
 }
 
 .black.highlight:after {
@@ -904,7 +904,7 @@ th {
 }
 
 .yellow.gradient {
-  background-image: linear-gradient(to bottom, #feea58 0%, #fee63a 100%);
+  background-image: linear-gradient(to bottom, #feec62 0%, #fee63a 100%);
   background-repeat: repeat-x;
 }
 
@@ -913,7 +913,7 @@ th {
 }
 
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #feea58 !important;
+  background: #feec62 !important;
 }
 
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
@@ -947,7 +947,7 @@ th {
 }
 
 .olive.gradient {
-  background-image: linear-gradient(to bottom, #cfdc51 0%, #c8d738 100%);
+  background-image: linear-gradient(to bottom, #d2dd5a 0%, #c8d738 100%);
   background-repeat: repeat-x;
 }
 
@@ -956,7 +956,7 @@ th {
 }
 
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #cfdc51 !important;
+  background: #d2dd5a !important;
 }
 
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
@@ -1230,11 +1230,11 @@ th {
 }
 
 .red p > a:before {
-  border-color: #feea58 !important;
+  border-color: #feec62 !important;
 }
 
 .red p > a:hover {
-  color: #feea58 !important;
+  color: #feec62 !important;
 }
 
 .text-red {
@@ -2586,11 +2586,11 @@ hr {
 }
 
 .divider-wrp.block > .divider p > a:before {
-  border-color: #feea58 ;
+  border-color: #feec62 ;
 }
 
 .divider-wrp.block > .divider p > a:hover {
-  color: #feea58 ;
+  color: #feec62 ;
 }
 
 .divider-wrp.linear {
