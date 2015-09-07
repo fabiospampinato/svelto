@@ -5182,10 +5182,14 @@ hr {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* LABEL */
+/* LEFT / RIGHT */
+/* CENTER ICON */
+/* COMPACT */
 /* BADGE */
 /* TAG */
 /* TAG CIRCLE */
-/* RIBBONS */
+/* RIBBON */
+/* CORNER */
 /* FLOATING */
 /* =========================================================================
  * Svelto - Input (Settings) v0.1.0
@@ -5256,7 +5260,7 @@ hr {
   line-height: 1.4285714286em;
   margin-bottom: 0;
   left: 0;
-  padding-left: 1.2em;
+  padding-left: 0.9em;
   transition-duration: 0.15s;
   transition-property: color, opacity, top, font-size, margin, padding;
   pointer-events: none;
@@ -5449,23 +5453,23 @@ hr {
 }
 
 .input-wrp:not(.no-floating):not(.outlined) > .text-field, .textarea-wrp:not(.no-floating):not(.outlined) > .text-field {
-  height: 3.2em;
-  padding: 1.1714285714em 1.2em 0.6em;
+  height: 2.99em;
+  padding: 1.0664285714em 0.9em 0.495em;
 }
 
 .input-wrp:not(.no-floating):not(.outlined).compact > .text-field, .textarea-wrp:not(.no-floating):not(.outlined).compact > .text-field {
-  height: 3.2em;
-  padding: 1.1714285714em 0.6em 0.6em;
+  height: 2.99em;
+  padding: 1.0664285714em 0.495em 0.495em;
 }
 
 .input-wrp:not(.no-floating).outlined > .text-field, .textarea-wrp:not(.no-floating).outlined > .text-field {
-  height: calc(3.2em - 2px);
-  padding: calc(1.1714285714em - 2px) 1.2em 0.6em;
+  height: calc(2.99em - 2px);
+  padding: calc(1.0664285714em - 2px) 0.9em 0.495em;
 }
 
 .input-wrp:not(.no-floating).outlined.compact > .text-field, .textarea-wrp:not(.no-floating).outlined.compact > .text-field {
-  height: calc(3.2em - 2px);
-  padding: calc(1.1714285714em - 2px) 0.6em 0.6em;
+  height: calc(2.99em - 2px);
+  padding: calc(1.0664285714em - 2px) 0.495em 0.495em;
 }
 
 .input-wrp:not(.no-floating):not(.disabled) > .text-field:focus ~ label, .textarea-wrp:not(.no-floating):not(.disabled) > .text-field:focus ~ label, .input-wrp:not(.no-floating):not(.disabled) > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled) > .text-field:valid ~ label {
@@ -5491,23 +5495,23 @@ hr {
 }
 
 .input-wrp.no-floating:not(.outlined) > .text-field, .no-floating.textarea-wrp:not(.outlined) > .text-field {
-  height: 2.6285714286em;
-  padding: 0.6em 1.2em;
+  height: 2.4185714286em;
+  padding: 0.495em 0.9em;
 }
 
 .input-wrp.no-floating:not(.outlined).compact > .text-field, .no-floating.textarea-wrp:not(.outlined).compact > .text-field {
-  height: 2.6285714286em;
-  padding: 0.6em 0.6em;
+  height: 2.4185714286em;
+  padding: 0.495em 0.495em;
 }
 
 .input-wrp.no-floating.outlined > .text-field, .no-floating.outlined.textarea-wrp > .text-field {
-  height: calc(2.6285714286em - 2px);
-  padding: calc(0.6em - 2px) 1.2em 0.6em;
+  height: calc(2.4185714286em - 2px);
+  padding: calc(0.495em - 2px) 0.9em 0.495em;
 }
 
 .input-wrp.no-floating.outlined.compact > .text-field, .no-floating.outlined.compact.textarea-wrp > .text-field {
-  height: calc(2.6285714286em - 2px);
-  padding: calc(0.6em - 2px) 0.6em 0.6em;
+  height: calc(2.4185714286em - 2px);
+  padding: calc(0.495em - 2px) 0.495em 0.495em;
 }
 
 .input-wrp.no-floating > .text-field:valid ~ label, .no-floating.textarea-wrp > .text-field:valid ~ label {
@@ -5549,11 +5553,11 @@ hr {
 }
 
 .input-wrp.compact > .text-field, .compact.textarea-wrp > .text-field {
-  padding: 0.6em 0.6em;
+  padding: 0.495em 0.495em;
 }
 
 .input-wrp.compact > label, .compact.textarea-wrp > label {
-  padding-left: 0.6em;
+  padding-left: 0.495em;
 }
 
 .input-wrp.disabled > .text-field, .disabled.textarea-wrp > .text-field {
@@ -5652,9 +5656,9 @@ label {
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 0.2665em;
-  padding: 0.6em 1.2em;
-  min-height: 2.6285714286em;
-  min-width: 3.8285714286em;
+  padding: 0.495em 0.9em;
+  min-height: 2.4185714286em;
+  min-width: 3.2285714286em;
   /* COMPACT */
   /* LEFT / RIGHT */
   /* CENTER */
@@ -5697,14 +5701,14 @@ label {
 }
 
 .label.compact {
-  padding: 0.6em 0.6em;
-  min-height: 2.6285714286em;
-  min-width: 2.6285714286em;
+  padding: 0.495em 0.495em;
+  min-height: 2.4185714286em;
+  min-width: 2.4185714286em;
 }
 
 .label > .label-left, .label > .label-right {
   background-color: rgba(0, 0, 0, 0.05);
-  padding: 0.6em 0.6em;
+  padding: 0.495em 0.495em;
 }
 
 .label > .label-left {
@@ -5713,7 +5717,7 @@ label {
   -webkit-order: 0;
       -ms-flex-order: 0;
           order: 0;
-  margin: -0.6em 1.2em -0.6em -1.2em;
+  margin: -0.495em 0.9em -0.495em -0.9em;
 }
 
 .label > .label-right {
@@ -5722,15 +5726,15 @@ label {
   -webkit-order: 100;
       -ms-flex-order: 100;
           order: 100;
-  margin: -0.6em -1.2em -0.6em 1.2em;
+  margin: -0.495em -0.9em -0.495em 0.9em;
 }
 
 .label.compact > .label-left {
-  margin: -0.6em 0.6em -0.6em -0.6em;
+  margin: -0.495em 0.495em -0.495em -0.495em;
 }
 
 .label.compact > .label-right {
-  margin: -0.6em -0.6em -0.6em 0.6em;
+  margin: -0.495em -0.495em -0.495em 0.495em;
 }
 
 .label > .icon-wrp + span, .label > span + .icon-wrp {
@@ -5773,9 +5777,9 @@ label {
   right: 30px;
   bottom: 30px;
   margin-bottom: 0;
-  padding: 1.08em 1.08em;
-  min-height: 3.5885714286em;
-  min-width: 3.5885714286em;
+  padding: 0.891em 0.891em;
+  min-height: 3.2105714286em;
+  min-width: 3.2105714286em;
 }
 
 .label.ribbon {
@@ -5795,7 +5799,7 @@ label {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   left: -16px;
-  padding-left: calc(1.2em + 10px);
+  padding-left: calc(0.9em + 10px);
 }
 
 .label.ribbon.ribbon-left:before {
@@ -5807,7 +5811,7 @@ label {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   right: -16px;
-  padding-right: calc(1.2em + 10px);
+  padding-right: calc(0.9em + 10px);
 }
 
 .label.ribbon.ribbon-right:after {
@@ -5816,11 +5820,11 @@ label {
 }
 
 .label.ribbon.compact.ribbon-left {
-  padding-left: calc(0.6em + 10px);
+  padding-left: calc(0.495em + 10px);
 }
 
 .label.ribbon.compact.ribbon-right {
-  padding-right: calc(0.6em + 10px);
+  padding-right: calc(0.495em + 10px);
 }
 
 .label.ribbon.outlined.ribbon-left:before, .label.ribbon.outlined.ribbon-right:after {
@@ -5851,15 +5855,15 @@ label {
 }
 
 .label-corner.top-left > .label {
-  -webkit-transform: translateX(-0.7785714286em) translateY(-0.7785714286em);
-          transform: translateX(-0.7785714286em) translateY(-0.7785714286em);
+  -webkit-transform: translateX(-0.6735714286em) translateY(-0.6735714286em);
+          transform: translateX(-0.6735714286em) translateY(-0.6735714286em);
 }
 
 .label-corner.top-left:before {
   top: 0;
   left: 0;
-  -webkit-transform: translateX(-2.7072088194em) translateY(-2.7072088194em) rotate(45deg);
-          transform: translateX(-2.7072088194em) translateY(-2.7072088194em) rotate(45deg);
+  -webkit-transform: translateX(-2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
+          transform: translateX(-2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
 }
 
 .label-corner.top-right {
@@ -5869,15 +5873,15 @@ label {
 }
 
 .label-corner.top-right > .label {
-  -webkit-transform: translateX(0.7785714286em) translateY(-0.7785714286em);
-          transform: translateX(0.7785714286em) translateY(-0.7785714286em);
+  -webkit-transform: translateX(0.6735714286em) translateY(-0.6735714286em);
+          transform: translateX(0.6735714286em) translateY(-0.6735714286em);
 }
 
 .label-corner.top-right:before {
   top: 0;
   right: 0;
-  -webkit-transform: translateX(2.7072088194em) translateY(-2.7072088194em) rotate(45deg);
-          transform: translateX(2.7072088194em) translateY(-2.7072088194em) rotate(45deg);
+  -webkit-transform: translateX(2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
+          transform: translateX(2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
 }
 
 .label-corner.bottom-left {
@@ -5887,15 +5891,15 @@ label {
 }
 
 .label-corner.bottom-left > .label {
-  -webkit-transform: translateX(-0.7785714286em) translateY(0.7785714286em);
-          transform: translateX(-0.7785714286em) translateY(0.7785714286em);
+  -webkit-transform: translateX(-0.6735714286em) translateY(0.6735714286em);
+          transform: translateX(-0.6735714286em) translateY(0.6735714286em);
 }
 
 .label-corner.bottom-left:before {
   bottom: 0;
   left: 0;
-  -webkit-transform: translateX(-2.7072088194em) translateY(2.7072088194em) rotate(45deg);
-          transform: translateX(-2.7072088194em) translateY(2.7072088194em) rotate(45deg);
+  -webkit-transform: translateX(-2.4102239713em) translateY(2.4102239713em) rotate(45deg);
+          transform: translateX(-2.4102239713em) translateY(2.4102239713em) rotate(45deg);
 }
 
 .label-corner.bottom-right {
@@ -5905,31 +5909,31 @@ label {
 }
 
 .label-corner.bottom-right > .label {
-  -webkit-transform: translateX(0.7785714286em) translateY(0.7785714286em);
-          transform: translateX(0.7785714286em) translateY(0.7785714286em);
+  -webkit-transform: translateX(0.6735714286em) translateY(0.6735714286em);
+          transform: translateX(0.6735714286em) translateY(0.6735714286em);
 }
 
 .label-corner.bottom-right:before {
   bottom: 0;
   right: 0;
-  -webkit-transform: translateX(2.7072088194em) translateY(2.7072088194em) rotate(45deg);
-          transform: translateX(2.7072088194em) translateY(2.7072088194em) rotate(45deg);
+  -webkit-transform: translateX(2.4102239713em) translateY(2.4102239713em) rotate(45deg);
+          transform: translateX(2.4102239713em) translateY(2.4102239713em) rotate(45deg);
 }
 
 .label-corner:before {
   position: absolute;
   content: '';
-  height: 5.4144176389em;
-  width: 5.4144176389em;
+  height: 4.8204479427em;
+  width: 4.8204479427em;
   background-color: inherit;
   visibility: visible;
   pointer-events: auto;
 }
 
 .label-corner > .label {
-  padding: 1.2em 1.2em;
-  height: 3.8285714286em;
-  width: 3.8285714286em;
+  padding: 0.99em 0.99em;
+  height: 3.4085714286em;
+  width: 3.4085714286em;
   margin: 0;
   border-radius: 0;
   background-color: transparent !important;
@@ -5944,7 +5948,7 @@ label {
 }
 
 .label-tag > .label {
-  margin-left: 1.1420076929em;
+  margin-left: 1.0370076929em;
   margin-bottom: 0;
   /* COLORS */
 }
@@ -5953,8 +5957,8 @@ label {
   content: '';
   position: absolute;
   top: 50%;
-  height: 1.991930682em;
-  width: 1.991930682em;
+  height: 1.8434382579em;
+  width: 1.8434382579em;
   -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg);
           transform: translateX(50%) translateY(-50%) rotate(45deg);
 }
@@ -5991,12 +5995,12 @@ label {
 }
 
 .label-tag > .label.compact {
-  margin-left: 1.1420076929em;
+  margin-left: 1.0370076929em;
 }
 
 .label-tag > .label.compact:before, .label-tag > .label.compact:after {
-  height: 1.991930682em;
-  width: 1.991930682em;
+  height: 1.8434382579em;
+  width: 1.8434382579em;
 }
 
 .label-tag > .label.outlined {
@@ -6017,22 +6021,22 @@ label {
 }
 
 .label-tag > .label.sharp {
-  margin-left: 1.3142857143em;
+  margin-left: 1.2092857143em;
 }
 
 .label-tag > .label.sharp:before, .label-tag > .label.sharp:after {
-  height: 1.858680682em;
-  width: 1.858680682em;
+  height: 1.7101882579em;
+  width: 1.7101882579em;
   right: 100%;
 }
 
 .label-tag > .label.sharp.compact {
-  margin-left: 1.3142857143em;
+  margin-left: 1.2092857143em;
 }
 
 .label-tag > .label.sharp.compact:before, .label-tag > .label.sharp.compact:after {
-  height: 1.858680682em;
-  width: 1.858680682em;
+  height: 1.7101882579em;
+  width: 1.7101882579em;
 }
 
 .label-tag > .label.tag-circle-primary:after {
@@ -9701,43 +9705,43 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 }
 
 .textarea-wrp:not(.no-floating):not(.outlined) > .text-field {
-  height: 6.0571428572em;
-  padding: 1.1714285714em 1.2em 0.6em;
+  height: 5.8471428572em;
+  padding: 1.0664285714em 0.9em 0.495em;
 }
 
 .textarea-wrp:not(.no-floating):not(.outlined).compact > .text-field {
-  height: 6.0571428572em;
-  padding: 1.1714285714em 0.6em 0.6em;
+  height: 5.8471428572em;
+  padding: 1.0664285714em 0.495em 0.495em;
 }
 
 .textarea-wrp:not(.no-floating).outlined > .text-field {
-  height: calc(6.0571428572em - 2px);
-  padding: calc(1.1714285714em - 2px) 1.2em 0.6em;
+  height: calc(5.8471428572em - 2px);
+  padding: calc(1.0664285714em - 2px) 0.9em 0.495em;
 }
 
 .textarea-wrp:not(.no-floating).outlined.compact > .text-field {
-  height: calc(6.0571428572em - 2px);
-  padding: calc(1.1714285714em - 2px) 0.6em 0.6em;
+  height: calc(5.8471428572em - 2px);
+  padding: calc(1.0664285714em - 2px) 0.495em 0.495em;
 }
 
 .textarea-wrp.no-floating:not(.outlined) > .text-field {
-  height: 5.4857142858em;
-  padding: 0.6em 1.2em;
+  height: 5.2757142858em;
+  padding: 0.495em 0.9em;
 }
 
 .textarea-wrp.no-floating:not(.outlined).compact > .text-field {
-  height: 5.4857142858em;
-  padding: 0.6em 0.6em;
+  height: 5.2757142858em;
+  padding: 0.495em 0.495em;
 }
 
 .textarea-wrp.no-floating.outlined > .text-field {
-  height: calc(5.4857142858em - 2px);
-  padding: calc(0.6em - 2px) 1.2em 0.6em;
+  height: calc(5.2757142858em - 2px);
+  padding: calc(0.495em - 2px) 0.9em 0.495em;
 }
 
 .textarea-wrp.no-floating.outlined.compact > .text-field {
-  height: calc(5.4857142858em - 2px);
-  padding: calc(0.6em - 2px) 0.6em 0.6em;
+  height: calc(5.2757142858em - 2px);
+  padding: calc(0.495em - 2px) 0.495em 0.495em;
 }
 
 .textarea-wrp.unresizable > .text-field, .textarea-wrp.disabled > .text-field {
