@@ -9,6 +9,8 @@
  * @requires ../z_depths/_z_depths.scss
  * ========================================================================= */
 
+//INFO: The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
+
 /* MIXIN */
 
 @mixin z-depth-raised ( $depth, $extra: '' ) {

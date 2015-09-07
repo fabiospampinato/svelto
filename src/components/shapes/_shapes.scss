@@ -43,6 +43,7 @@
 .square-sample {
 
   @include square ( 62px );
+  @include color ( 'gray', true );
   overflow: hidden;
   position: relative;
   margin-bottom: $gutter;

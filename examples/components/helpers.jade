@@ -13,31 +13,31 @@ append main
 
   +container-simple.outlined
     +multiple
-      +square-sample.no-border
-      +square-sample.rounded
-      +square-sample.smooth
-      +square-sample.sharp
+      +square-sample.outlined.no-border
+      +square-sample.outlined.rounded
+      +square-sample.outlined.smooth
+      +square-sample.outlined.sharp
 
   +divider Display
 
   +container-simple.outlined
     +multiple
-      +square-sample.show
       +square-sample.hidden
+      +square-sample.show
 
   +divider Visibility
 
   +container-simple.outlined
     +multiple
-      +square-sample.visible
       +square-sample.invisible
+      +square-sample.visible
 
   +divider Float
 
   +container-simple.outlined
     +multiple
-      +square-sample.left
-      +square-sample.right
+      +square-sample.float-left
+      +square-sample.float-right
 
   +divider Text alignment
 
@@ -46,6 +46,7 @@ append main
       +square-sample.text-left
       +square-sample.text-center
       +square-sample.text-right
+      +square-sample.text-justify
 
   +divider Text transformation
 
@@ -102,6 +103,6 @@ append main
 
   +container-simple.outlined
     +multiple.fluid
-      +centerer(style="width: 100px; height: 100px;").base
+      +centerer(style="padding: 20px;").outlined.outlined-gray
         +square-sample
-      +spacer.base Spacer
+      +spacer.outlined.outlined-gray Spacer

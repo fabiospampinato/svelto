@@ -8436,10 +8436,25 @@ table.table.selectable > tbody > tr.selected {
   width: 62px;
   height: 62px;
   background-color: #dddddd;
+  border-color: #aaaaaa ;
+  color: #383838 ;
+  background: #dddddd ;
   overflow: hidden;
   position: relative;
   margin-bottom: 10px;
   padding: 5px;
+}
+
+.square-sample p > a {
+  color: #ffffff ;
+}
+
+.square-sample p > a:before {
+  border-color: white ;
+}
+
+.square-sample p > a:hover {
+  color: white ;
 }
 
 .square-sample > p {
