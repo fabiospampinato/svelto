@@ -24,11 +24,17 @@
   border-radius: $contianer-border-radius;
 
   & > .container-header {
+
     @include color ( $container-header-color, $container-header-color-basic );
     @include last-child-gutter-fix ();
     font-weight: bold;
     flex-shrink: 0;
-    padding: $gutter;
+    padding: $container-header-vertical-padding $container-header-horizontal-padding;
+
+    &.compact {
+      padding: $container-header-compact-vertical-padding $container-header-compact-horizontal-padding;
+    }
+
   }
 
   & > .container-content {
@@ -40,10 +46,16 @@
   }
 
   & > .container-footer {
+
     @include color ( $container-footer-color, $container-footer-color-basic );
     @include last-child-gutter-fix ();
     flex-shrink: 0;
-    padding: $gutter;
+    padding: $container-footer-vertical-padding $container-footer-horizontal-padding;
+
+    &.compact {
+      padding: $container-footer-compact-vertical-padding $container-footer-compact-horizontal-padding;
+    }
+
   }
 
   & > *:first-child {

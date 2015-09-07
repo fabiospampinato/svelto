@@ -2005,12 +2005,42 @@ button {
 /* LEVELS */
 /* IMAGE */
 /* =========================================================================
+ * Svelto - Widget (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../base/_base.scss
+ * ========================================================================= */
+/* WIDGET */
+/* DISABLED */
+/* =========================================================================
+ * Svelto - Widget v0.3.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* WIDGET */
+.chat-msg .chat-msg-sender-name, .container, .embedded, label, .label, .multiple-wrp, .parallax, table.table, blockquote, blockquote > footer {
+  position: relative;
+  margin: 0 0 10px;
+}
+
+.chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+  cursor: default !important;
+  opacity: 0.5 !important;
+}
+
+/* =========================================================================
  * Svelto - Chat v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* CHAT */
 .chat-msg {
@@ -2018,6 +2048,11 @@ button {
   display: -ms-flexbox;
   display: flex;
   margin-bottom: 10px;
+  /* LEVELS */
+  /* IMAGE */
+  /* SENDER */
+  /* INDICATOR */
+  /* CONTENT */
 }
 
 .chat-msg.level-3, .chat-msg[class*='level-'] {
@@ -2251,8 +2286,10 @@ button {
  * ========================================================================= */
 /* CONTAINER */
 /* HEADER */
+/* HEADER COMPACT */
 /* CONTENT */
 /* FOOTER */
+/* FOOTER COMPACT */
 /* =========================================================================
  * Svelto - Container v0.1.0
  * =========================================================================
@@ -2300,7 +2337,7 @@ button {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-  padding: 10px;
+  padding: 10px 10px;
 }
 
 .container > .container-header.gradient {
@@ -2340,6 +2377,10 @@ button {
   margin-bottom: 0 !important;
 }
 
+.container > .container-header.compact {
+  padding: 5px 10px;
+}
+
 .container > .container-content {
   border-color: inherit ;
   color: inherit ;
@@ -2362,7 +2403,7 @@ button {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-  padding: 10px;
+  padding: 10px 10px;
 }
 
 .container > .container-footer p > a {
@@ -2379,6 +2420,10 @@ button {
 
 .container > .container-footer > *:last-child {
   margin-bottom: 0 !important;
+}
+
+.container > .container-footer.compact {
+  padding: 5px 10px;
 }
 
 .container > *:first-child {
@@ -5607,35 +5652,6 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
-}
-
-/* =========================================================================
- * Svelto - Widget (Settings) v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../base/_base.scss
- * ========================================================================= */
-/* WIDGET */
-/* DISABLED */
-/* =========================================================================
- * Svelto - Widget v0.3.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* WIDGET */
-.container, .embedded, label, .label, .multiple-wrp, .parallax, table.table, blockquote, blockquote > footer {
-  position: relative;
-  margin: 0 0 10px;
-}
-
-.disabled.container, .disabled.embedded, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, [class*="-disabled"].container, [class*="-disabled"].embedded, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
-  cursor: default !important;
-  opacity: 0.5 !important;
 }
 
 /* =========================================================================

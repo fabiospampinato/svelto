@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* CHAT */
@@ -16,6 +17,8 @@
 
   display: flex;
   margin-bottom: $gutter;
+
+  /* LEVELS */
 
   &.level-3, &[class*='level-'] {
     margin-left: $chat-msg-level-3-margin-left;
@@ -28,6 +31,8 @@
   &.level-1 {
     margin-left: $chat-msg-level-1-margin-left;
   }
+
+  /* IMAGE */
 
   & > .chat-msg-img {
 
@@ -52,6 +57,14 @@
     opacity: $chat-msg-img-opacity-hover;
   }
 
+  /* SENDER */
+
+  .chat-msg-sender-name {
+    @extend %widget;
+  }
+
+  /* INDICATOR */
+
   & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
     @include color ( $chat-msg-color, $chat-msg-color-basic );
     z-index: 1;
@@ -64,6 +77,8 @@
     border-width: 0 0 1px 1px;
     border-style: solid;
   }
+
+  /* CONTENT */
 
   & > .chat-msg-content {
 

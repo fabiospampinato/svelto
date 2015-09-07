@@ -42,11 +42,11 @@ mixin chat-msg(options)
       .chat-msg-indicator
     .chat-msg-content
       +container.outlined
-        +container-header.inherit.outlined
+        +container-header.inherit.outlined.compact
           if options.sender.name !== "Unknown"
             +multiple-left
               if options.sender.url
-                a(href=options.sender.url title=options.sender.name)= options.sender.name
+                a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
               else
                 = options.sender.name
           +multiple-right
