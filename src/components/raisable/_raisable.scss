@@ -1,0 +1,43 @@
+
+/* =========================================================================
+ * Svelto - Raisable v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../z_depths/_z_depths.scss
+ * ========================================================================= */
+
+/* MIXIN */
+
+@mixin z-depth-raised ( $depth, $extra: '' ) {
+
+  @include z-depth ( min($depth + $raisable-raise-amount, length(map-keys($z-depths)) - 1), $extra );
+
+  transition: box-shadow $raisable-transition-box-shadow-duration;
+  opacity: min($depth + $raisable-raise-amount, length(map-keys($z-depths)) - 1);
+
+}
+
+/* RAISABLE */
+
+.raisable {
+
+  @each $depth, $shadow in $z-depths {
+
+    @if $depth == 0 { //INFO: Raise it even if the `.z-depth-0` class has not been included
+
+      &:active {
+        @include z-depth-raised ( $depth, '!important' );
+      }
+
+    }
+
+    &.z-depth-#{$depth}:active {
+      @include z-depth-raised ( $depth, '!important' );
+    }
+
+  }
+
+}
