@@ -5749,6 +5749,14 @@ label {
   margin: -0.495em -0.495em -0.495em 0.495em;
 }
 
+.label.outlined > .label-left {
+  border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.label.outlined > .label-right {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
 .label > .icon-wrp + span, .label > span + .icon-wrp {
   padding-left: 0.75em;
 }

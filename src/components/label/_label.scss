@@ -75,6 +75,18 @@ label {
 
   }
 
+  &.outlined {
+
+    & > .label-left {
+      border-right: 1px solid $label-left-right-border-color;
+    }
+
+    & > .label-right {
+      border-left: 1px solid $label-left-right-border-color;
+    }
+
+  }
+
   /* CENTER */
 
   & > .icon-wrp + span, & > span + .icon-wrp {
