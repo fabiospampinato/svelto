@@ -199,7 +199,7 @@ gulp.task ( 'css', function () {
                precision: 10
              }))
             .pipe ( autoprefixer ({
-               browsers: ['Android >= 4', 'Chrome >= 21', 'Firefox >= 28', 'Explorer >= 10', 'Edge >= 1', 'iOS >= 7.1', 'Safari >= 7'],
+               browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'],
                cascade: true,
                remove: true
              }))
