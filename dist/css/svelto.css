@@ -596,7 +596,7 @@ th {
 /* CODE */
 /* KBD */
 /* =========================================================================
- * Svelto - Colors v0.2.0
+ * Svelto - Colors v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2275,12 +2275,12 @@ button {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, table.table, blockquote, blockquote > footer {
+.widget, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, .square, .square-sample, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
-.widget.disabled, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+.widget.disabled, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, .disabled.square, .disabled.square-sample, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, [class*="-disabled"].square, [class*="-disabled"].square-sample, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -4806,7 +4806,7 @@ hr {
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-/* BLUR */
+/* BLURRED */
 .blurred {
   -webkit-filter: url("/blur.svg#blur") !important;
           filter: url("/blur.svg#blur") !important;
@@ -4931,12 +4931,12 @@ hr {
 }
 
 /* OVERFLOW */
-.overflow-hidden {
-  overflow: hidden !important;
-}
-
 .overflow-visible {
   overflow: visible !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
 }
 
 /* FLIP */
@@ -4969,6 +4969,32 @@ hr {
 .rotating {
   -webkit-animation: rotate 0.9s linear infinite !important;
           animation: rotate 0.9s linear infinite !important;
+}
+
+/* GROW */
+.grow {
+  -webkit-flex-grow: 1 !important;
+      -ms-flex-positive: 1 !important;
+          flex-grow: 1 !important;
+}
+
+.no-grow {
+  -webkit-flex-grow: 0 !important;
+      -ms-flex-positive: 0 !important;
+          flex-grow: 0 !important;
+}
+
+/* SHRINK */
+.shrink {
+  -webkit-flex-shrink: 1 !important;
+      -ms-flex-negative: 1 !important;
+          flex-shrink: 1 !important;
+}
+
+.no-shrink {
+  -webkit-flex-shrink: 0 !important;
+      -ms-flex-negative: 0 !important;
+          flex-shrink: 0 !important;
 }
 
 /* OTHERS */
@@ -5015,30 +5041,6 @@ hr {
   cursor: pointer;
 }
 
-.grow {
-  -webkit-flex-grow: 1 !important;
-      -ms-flex-positive: 1 !important;
-          flex-grow: 1 !important;
-}
-
-.no-grow {
-  -webkit-flex-grow: 0 !important;
-      -ms-flex-positive: 0 !important;
-          flex-grow: 0 !important;
-}
-
-.shrink {
-  -webkit-flex-shrink: 1 !important;
-      -ms-flex-negative: 1 !important;
-          flex-shrink: 1 !important;
-}
-
-.no-shrink {
-  -webkit-flex-shrink: 0 !important;
-      -ms-flex-negative: 0 !important;
-          flex-shrink: 0 !important;
-}
-
 /* =========================================================================
  * Svelto - Highlight (Settings) v0.1.1
  * =========================================================================
@@ -5073,8 +5075,21 @@ hr {
 
 /* HIGHLIGHT */
 .highlight {
+  /* STYLES */
   /* DIRECTIONS */
   /* COLORS */
+}
+
+.highlight.highlight-solid:after {
+  border-style: solid;
+}
+
+.highlight.highlight-dotted:after {
+  border-style: dotted;
+}
+
+.highlight.highlight-dashed:after {
+  border-style: dashed;
 }
 
 .highlight.highlight-top, .highlight.highlight-all {
@@ -8711,6 +8726,8 @@ table.table.selectable > tbody > tr.selected {
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* TRIANGLES */
 .triangle, .triangle-up {
@@ -8758,8 +8775,6 @@ table.table.selectable > tbody > tr.selected {
   width: 1em;
   height: 1em;
   background-color: #dddddd;
-  position: relative;
-  margin-bottom: 10px;
 }
 
 .square-sample {
@@ -8770,8 +8785,6 @@ table.table.selectable > tbody > tr.selected {
   color: #383838 ;
   background: #dddddd ;
   overflow: hidden;
-  position: relative;
-  margin-bottom: 10px;
   padding: 5px;
 }
 
@@ -8787,8 +8800,8 @@ table.table.selectable > tbody > tr.selected {
   color: white ;
 }
 
-.square-sample > p {
-  font-size: 0.5rem ;
+.square-sample > *:last-child {
+  margin-bottom: 0 !important;
 }
 
 /* CIRCLES */

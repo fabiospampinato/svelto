@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colors v0.2.0
+ * Svelto - Colors v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -72,7 +72,7 @@
 
       @if $support-gradient == true {
 
-        @include gradient ( $color_name, $extra );
+        @include gradient-vertical-from-color ( $color_name, #{$extra} );
 
       }
 
@@ -84,7 +84,7 @@
 
   }
 
-  @if $color_name != 'inherit' { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
+  @if $color_name != inherit { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
     p > a { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
@@ -138,7 +138,7 @@
 @each $name, $datas in $colors {
 
   .#{$name} {
-    @include color ( $name, false, false, '!important' );
+    @include color ( $name, false, false, !important );
   }
 
   .text-#{$name} {
@@ -146,7 +146,7 @@
   }
 
   .link-#{$name} {
-    @include color-link ( $name, '!important' );
+    @include color-link ( $name, !important );
   }
 
 }

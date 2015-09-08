@@ -8,39 +8,39 @@ append main
 
   +multiple
     +button("/components/colors.html").outlined.green Colors
-    +button("/components/z-depths.html").outlined Z-Depths
-    +button("/components/helpers.html").outlined Helpers
-    +button("/components/highlight.html").outlined Highlight
+    +button("/components/z-depths.html").outlined.teal Z-Depths
+    +button("/components/helpers.html").outlined.teal Helpers
+    +button("/components/highlight.html").outlined.teal Highlight
     +button("/components/outline.html").outlined.teal Outline
-    +button("/components/raisable.html").outlined Raisable
-    +button("/components/helpers_responsive.html").outlined Responsive Helpers
+    +button("/components/raisable.html").outlined.teal Raisable
+    +button("/components/helpers_responsive.html").outlined.teal Responsive Helpers
     +button("/components/ripple.html").outlined.teal Ripple
-    +button("/components/sizes.html").outlined Sizes
+    +button("/components/sizes.html").outlined.teal Sizes
 
   +divider CSS
 
   +multiple
     +button("/components/container.html").outlined.teal Container
-    +button("/components/embedded.html").outlined Embedded
-    +button("/components/flags.html").outlined Flags
+    +button("/components/embedded.html").outlined.teal Embedded
+    +button("/components/flags.html").outlined.teal Flags
     +button("/components/form.html").outlined.teal Form
-    +button("/components/grid.html").outlined Grid
-    +button("/components/icons.html").outlined Icons
-    +button("/components/image.html").outlined Image
-    +button("/components/multiple.html").outlined Multiple
-    +button("/components/multiple_subs.html").outlined Multiple subs
-    +button("/components/parallax.html").outlined Parallax
-    +button("/components/table.html").outlined Table
+    +button("/components/grid.html").outlined.teal Grid
+    +button("/components/icons.html").outlined.teal Icons
+    +button("/components/image.html").outlined.teal Image
+    +button("/components/multiple.html").outlined.teal Multiple
+    +button("/components/multiple_subs.html").outlined.teal Multiple subs
+    +button("/components/parallax.html").outlined.teal Parallax
+    +button("/components/table.html").outlined.teal Table
     +button("/components/typography.html").outlined.teal Typography
 
   +divider Components
 
   +multiple
-    +button("/components/breadcrumb.html").outlined Breadcrumb
-    +button("/components/button.html").outlined Button
-    +button("/components/chat.html").outlined Chat
-    +button("/components/divider.html").outlined Divider
-    +button("/components/footer.html").outlined Footer
+    +button("/components/breadcrumb.html").outlined.teal Breadcrumb
+    +button("/components/button.html").outlined.teal Button
+    +button("/components/chat.html").outlined.teal Chat
+    +button("/components/divider.html").outlined.teal Divider
+    +button("/components/footer.html").outlined.teal Footer
     +button("/components/infobar.html").outlined.teal Infobar
     +button("/components/input.html").outlined.teal Input
     +button("/components/label.html").outlined.teal Label
@@ -102,13 +102,15 @@ append body-end
   +script.
     $(function(){
       var $buttons = $('main .button'),
+          yellow_nr = $buttons.filter ( '.yellow' ).length,
           green_nr = $buttons.filter ( '.green' ).length,
           teal_nr = $buttons.filter ( '.teal' ).length,
           red_nr = $buttons.filter ( '.red' ).length,
-          others_nr = $buttons.length - green_nr - teal_nr - red_nr;
+          others_nr = $buttons.length - yellow_nr - green_nr - teal_nr - red_nr;
       $.noty ({
         body: '<p>' +
-                '<span class="text-green">Ready (' + green_nr + ')</span><br/>' +
+                '<span class="text-yellow">Tested (' + yellow_nr + ')</span><br/>' +
+                '<span class="text-green">Finalized (' + green_nr + ')</span><br/>' +
                 '<span class="text-teal">To update (' + teal_nr + ')</span><br/>' +
                 '<span class="text-red">Problematic (' + red_nr + ')</span><br/>' +
                 '<span>Others (' + others_nr + ')</span>' +

@@ -28,6 +28,20 @@
     @extend %highlight-after;
   }
 
+  /* STYLES */
+
+  &.highlight-solid:after {
+    border-style: solid;
+  }
+
+  &.highlight-dotted:after {
+    border-style: dotted;
+  }
+
+  &.highlight-dashed:after {
+    border-style: dashed;
+  }
+
   /* DIRECTIONS */
 
   &.highlight-top, &.highlight-all {

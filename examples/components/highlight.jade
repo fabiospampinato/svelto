@@ -4,72 +4,71 @@ extends ../layout.jade
 //- Highlight
 
 append main
-  +divider Directions
+  +divider Highlight
 
   +multiple
-    +label.outlined.highlight Default
-    +label.outlined.highlight.highlight-top Top
-    +label.outlined.highlight.highlight-right Right
-    +label.outlined.highlight.highlight-bottom Bottom
-    +label.outlined.highlight.highlight-left Left
-    +label.outlined.highlight.highlight-all All
-
-  +divider Colors
-
-  +multiple
-    +label.outlined.highlight.primary Primary
-    +label.outlined.highlight.secondary Secondary
-    +label.outlined.highlight.tertiary Tertiary
-    +label.outlined.highlight.quaternary Quaternary
-    +label.outlined.highlight.white White
-    +label.outlined.highlight.gray Gray
-    +label.outlined.highlight.black Black
-    +label.outlined.highlight.yellow Yellow
-    +label.outlined.highlight.olive Olive
-    +label.outlined.highlight.green Green
-    +label.outlined.highlight.blue Blue
-    +label.outlined.highlight.violet Violet
-    +label.outlined.highlight.orange Orange
-    +label.outlined.highlight.purple Purple
-    +label.outlined.highlight.red Red
-    +label.outlined.highlight.pink Pink
-    +label.outlined.highlight.teal Teal
-    +label.outlined.highlight.brown Brown
-    +label.outlined.highlight.transparent Transparent
-    +label.outlined.highlight.inherit Inherit
-    +label.outlined.highlight.base Base
+    +label.highlight.primary Primary
+    +label.highlight.secondary Secondary
+    +label.highlight.tertiary Tertiary
+    +label.highlight.quaternary Quaternary
+    +label.highlight.white White
+    +label.highlight.gray Gray
+    +label.highlight.black Black
+    +label.highlight.yellow Yellow
+    +label.highlight.olive Olive
+    +label.highlight.green Green
+    +label.highlight.blue Blue
+    +label.highlight.violet Violet
+    +label.highlight.orange Orange
+    +label.highlight.purple Purple
+    +label.highlight.red Red
+    +label.highlight.pink Pink
+    +label.highlight.teal Teal
+    +label.highlight.brown Brown
+    +label.highlight.transparent Transparent
+    +label.highlight.inherit Inherit
+    +label.highlight.base Base
 
   +divider Highlight colors
 
   +multiple
-    +label.outlined.highlight.highlight-primary Primary
-    +label.outlined.highlight.highlight-secondary Secondary
-    +label.outlined.highlight.highlight-tertiary Tertiary
-    +label.outlined.highlight.highlight-quaternary Quaternary
-    +label.outlined.highlight.highlight-white White
-    +label.outlined.highlight.highlight-gray Gray
-    +label.outlined.highlight.highlight-black Black
-    +label.outlined.highlight.highlight-yellow Yellow
-    +label.outlined.highlight.highlight-olive Olive
-    +label.outlined.highlight.highlight-green Green
-    +label.outlined.highlight.highlight-blue Blue
-    +label.outlined.highlight.highlight-violet Violet
-    +label.outlined.highlight.highlight-orange Orange
-    +label.outlined.highlight.highlight-purple Purple
-    +label.outlined.highlight.highlight-red Red
-    +label.outlined.highlight.highlight-pink Pink
-    +label.outlined.highlight.highlight-teal Teal
-    +label.outlined.highlight.highlight-brown Brown
-    +label.outlined.highlight.highlight-transparent Transparent
-    +label.outlined.highlight.highlight-inherit Inherit
-    +label.outlined.highlight.highlight-base Base
+    +label.highlight.highlight-primary Primary
+    +label.highlight.highlight-secondary Secondary
+    +label.highlight.highlight-tertiary Tertiary
+    +label.highlight.highlight-quaternary Quaternary
+    +label.highlight.highlight-white White
+    +label.highlight.highlight-gray Gray
+    +label.highlight.highlight-black Black
+    +label.highlight.highlight-yellow Yellow
+    +label.highlight.highlight-olive Olive
+    +label.highlight.highlight-green Green
+    +label.highlight.highlight-blue Blue
+    +label.highlight.highlight-violet Violet
+    +label.highlight.highlight-orange Orange
+    +label.highlight.highlight-purple Purple
+    +label.highlight.highlight-red Red
+    +label.highlight.highlight-pink Pink
+    +label.highlight.highlight-teal Teal
+    +label.highlight.highlight-brown Brown
+    +label.highlight.highlight-transparent Transparent
+    +label.highlight.highlight-inherit Inherit
+    +label.highlight.highlight-base Base
 
   +divider Actions
 
-  +button("toggle_outlined ()").outlined Toggle outlined
+  +multiple.actions
+    +button("toggle_class ( 'outlined' )").outlined Toggle outlined
+    +button("toggle_class ( 'highlight-top' )").outlined Toggle highlight-top
+    +button("toggle_class ( 'highlight-right' )").outlined Toggle highlight-right
+    +button("toggle_class ( 'highlight-bottom' )").outlined Toggle highlight-bottom
+    +button("toggle_class ( 'highlight-left' )").outlined Toggle highlight-left
+    +button("toggle_class ( 'highlight-all' )").outlined Toggle highlight-all
+    +button("toggle_class ( 'highlight-solid' )").outlined Toggle highlight-solid
+    +button("toggle_class ( 'highlight-dotted' )").outlined Toggle highlight-dotted
+    +button("toggle_class ( 'highlight-dashed' )").outlined Toggle highlight-dashed
 
 append body-end
   +script.
-    function toggle_outlined () {
-      $('.label').toggleClass ( 'outlined' );
+    function toggle_class ( css_class ) {
+      $('.label').not('.actions .button').toggleClass ( css_class );
     }

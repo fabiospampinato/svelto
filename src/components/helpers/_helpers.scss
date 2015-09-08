@@ -8,7 +8,7 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-/* BLUR */
+/* BLURRED */
 
 .blurred {
   filter: url('/blur.svg#blur') !important;
@@ -48,6 +48,7 @@
 .visible {
   visibility: visible !important;
 }
+
 
 .invisible {
   visibility: hidden !important;
@@ -141,12 +142,12 @@
 
 /* OVERFLOW */
 
-.overflow-hidden {
-  overflow: hidden !important;
-}
-
 .overflow-visible {
   overflow: visible !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
 }
 
 /* FLIP */
@@ -175,6 +176,26 @@
 
 .rotating { //TODO: Maybe move to an _helpers_animations
   animation: rotate $rotating-animation-duration linear infinite !important;
+}
+
+/* GROW */
+
+.grow {
+  flex-grow: 1 !important;
+}
+
+.no-grow {
+  flex-grow: 0 !important;
+}
+
+/* SHRINK */
+
+.shrink {
+  flex-shrink: 1 !important;
+}
+
+.no-shrink {
+  flex-shrink: 0 !important;
 }
 
 /* OTHERS */
@@ -219,20 +240,4 @@
 
 .actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator
   cursor: pointer;
-}
-
-.grow {
-  flex-grow: 1 !important;
-}
-
-.no-grow {
-  flex-grow: 0 !important;
-}
-
-.shrink {
-  flex-shrink: 1 !important;
-}
-
-.no-shrink {
-  flex-shrink: 0 !important;
 }

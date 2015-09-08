@@ -31,7 +31,7 @@
   "devDependencies": {
     "browser-sync": "^2.8.2",
     "gulp": "^3.9.0",
-    "gulp-autoprefixer": "^2.3.1",
+    "gulp-autoprefixer": "^3.0.1",
     "gulp-babel": "^5.2.1",
     "gulp-bytediff": "^1.0.0",
     "gulp-clean": "^0.3.1",

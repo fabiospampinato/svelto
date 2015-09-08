@@ -23,7 +23,7 @@
 @each $depth, $shadow in $z-depths {
 
   .z-depth-#{$depth} {
-    @include z-depth ( $depth, '!important' );
+    @include z-depth ( $depth, !important );
   }
 
 }

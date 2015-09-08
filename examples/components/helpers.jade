@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Helpers
 
 append main
-  +divider Blur
+  +divider Blurred
 
   +container-simple.outlined
     +square-sample.blurred
@@ -80,8 +80,8 @@ append main
 
   +container-simple.outlined
     +multiple
-      +square-sample.overflow-visible
       +square-sample.overflow-hidden
+      +square-sample.overflow-visible
 
   +divider Flip
 
@@ -99,7 +99,21 @@ append main
       +square-sample.rotate-right
       +square-sample.rotating
 
-  +divider Other
+  +divider Grow
+
+  +container-simple.outlined
+    +multiple.expanded
+      .widget.outlined.outlined-gray.grow Grow
+      .widget.outlined.outlined-gray.no-grow No grow
+
+  +divider Shrink
+
+  +container-simple.outlined
+    +multiple.fluid
+      .widget.outlined.outlined-gray.xs-8.no-shrink No shrink
+      .widget.outlined.outlined-gray.shrink Shrink
+
+  +divider Others
 
   +container-simple.outlined
     +multiple.fluid

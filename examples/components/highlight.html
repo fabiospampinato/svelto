@@ -45,72 +45,52 @@
     </header>
     <main>
       <div class="divider-wrp block">
-        <div class="divider">Directions
+        <div class="divider">Highlight
         </div>
       </div>
       <div class="multiple-wrp">
         <div class="multiple">
-          <div class="label outlined highlight">Default
+          <div class="label highlight primary">Primary
           </div>
-          <div class="label outlined highlight highlight-top">Top
+          <div class="label highlight secondary">Secondary
           </div>
-          <div class="label outlined highlight highlight-right">Right
+          <div class="label highlight tertiary">Tertiary
           </div>
-          <div class="label outlined highlight highlight-bottom">Bottom
+          <div class="label highlight quaternary">Quaternary
           </div>
-          <div class="label outlined highlight highlight-left">Left
+          <div class="label highlight white">White
           </div>
-          <div class="label outlined highlight highlight-all">All
+          <div class="label highlight gray">Gray
           </div>
-        </div>
-      </div>
-      <div class="divider-wrp block">
-        <div class="divider">Colors
-        </div>
-      </div>
-      <div class="multiple-wrp">
-        <div class="multiple">
-          <div class="label outlined highlight primary">Primary
+          <div class="label highlight black">Black
           </div>
-          <div class="label outlined highlight secondary">Secondary
+          <div class="label highlight yellow">Yellow
           </div>
-          <div class="label outlined highlight tertiary">Tertiary
+          <div class="label highlight olive">Olive
           </div>
-          <div class="label outlined highlight quaternary">Quaternary
+          <div class="label highlight green">Green
           </div>
-          <div class="label outlined highlight white">White
+          <div class="label highlight blue">Blue
           </div>
-          <div class="label outlined highlight gray">Gray
+          <div class="label highlight violet">Violet
           </div>
-          <div class="label outlined highlight black">Black
+          <div class="label highlight orange">Orange
           </div>
-          <div class="label outlined highlight yellow">Yellow
+          <div class="label highlight purple">Purple
           </div>
-          <div class="label outlined highlight olive">Olive
+          <div class="label highlight red">Red
           </div>
-          <div class="label outlined highlight green">Green
+          <div class="label highlight pink">Pink
           </div>
-          <div class="label outlined highlight blue">Blue
+          <div class="label highlight teal">Teal
           </div>
-          <div class="label outlined highlight violet">Violet
+          <div class="label highlight brown">Brown
           </div>
-          <div class="label outlined highlight orange">Orange
+          <div class="label highlight transparent">Transparent
           </div>
-          <div class="label outlined highlight purple">Purple
+          <div class="label highlight inherit">Inherit
           </div>
-          <div class="label outlined highlight red">Red
-          </div>
-          <div class="label outlined highlight pink">Pink
-          </div>
-          <div class="label outlined highlight teal">Teal
-          </div>
-          <div class="label outlined highlight brown">Brown
-          </div>
-          <div class="label outlined highlight transparent">Transparent
-          </div>
-          <div class="label outlined highlight inherit">Inherit
-          </div>
-          <div class="label outlined highlight base">Base
+          <div class="label highlight base">Base
           </div>
         </div>
       </div>
@@ -120,47 +100,47 @@
       </div>
       <div class="multiple-wrp">
         <div class="multiple">
-          <div class="label outlined highlight highlight-primary">Primary
+          <div class="label highlight highlight-primary">Primary
           </div>
-          <div class="label outlined highlight highlight-secondary">Secondary
+          <div class="label highlight highlight-secondary">Secondary
           </div>
-          <div class="label outlined highlight highlight-tertiary">Tertiary
+          <div class="label highlight highlight-tertiary">Tertiary
           </div>
-          <div class="label outlined highlight highlight-quaternary">Quaternary
+          <div class="label highlight highlight-quaternary">Quaternary
           </div>
-          <div class="label outlined highlight highlight-white">White
+          <div class="label highlight highlight-white">White
           </div>
-          <div class="label outlined highlight highlight-gray">Gray
+          <div class="label highlight highlight-gray">Gray
           </div>
-          <div class="label outlined highlight highlight-black">Black
+          <div class="label highlight highlight-black">Black
           </div>
-          <div class="label outlined highlight highlight-yellow">Yellow
+          <div class="label highlight highlight-yellow">Yellow
           </div>
-          <div class="label outlined highlight highlight-olive">Olive
+          <div class="label highlight highlight-olive">Olive
           </div>
-          <div class="label outlined highlight highlight-green">Green
+          <div class="label highlight highlight-green">Green
           </div>
-          <div class="label outlined highlight highlight-blue">Blue
+          <div class="label highlight highlight-blue">Blue
           </div>
-          <div class="label outlined highlight highlight-violet">Violet
+          <div class="label highlight highlight-violet">Violet
           </div>
-          <div class="label outlined highlight highlight-orange">Orange
+          <div class="label highlight highlight-orange">Orange
           </div>
-          <div class="label outlined highlight highlight-purple">Purple
+          <div class="label highlight highlight-purple">Purple
           </div>
-          <div class="label outlined highlight highlight-red">Red
+          <div class="label highlight highlight-red">Red
           </div>
-          <div class="label outlined highlight highlight-pink">Pink
+          <div class="label highlight highlight-pink">Pink
           </div>
-          <div class="label outlined highlight highlight-teal">Teal
+          <div class="label highlight highlight-teal">Teal
           </div>
-          <div class="label outlined highlight highlight-brown">Brown
+          <div class="label highlight highlight-brown">Brown
           </div>
-          <div class="label outlined highlight highlight-transparent">Transparent
+          <div class="label highlight highlight-transparent">Transparent
           </div>
-          <div class="label outlined highlight highlight-inherit">Inherit
+          <div class="label highlight highlight-inherit">Inherit
           </div>
-          <div class="label outlined highlight highlight-base">Base
+          <div class="label highlight highlight-base">Base
           </div>
         </div>
       </div>
@@ -168,7 +148,27 @@
         <div class="divider">Actions
         </div>
       </div>
-      <div onclick="javascript:toggle_outlined ()" class="label button actionable outlined">Toggle outlined
+      <div class="multiple-wrp actions">
+        <div class="multiple">
+          <div onclick="javascript:toggle_class ( 'outlined' )" class="label button actionable outlined">Toggle outlined
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-top' )" class="label button actionable outlined">Toggle highlight-top
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-right' )" class="label button actionable outlined">Toggle highlight-right
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-bottom' )" class="label button actionable outlined">Toggle highlight-bottom
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-left' )" class="label button actionable outlined">Toggle highlight-left
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-all' )" class="label button actionable outlined">Toggle highlight-all
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-solid' )" class="label button actionable outlined">Toggle highlight-solid
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-dotted' )" class="label button actionable outlined">Toggle highlight-dotted
+          </div>
+          <div onclick="javascript:toggle_class ( 'highlight-dashed' )" class="label button actionable outlined">Toggle highlight-dashed
+          </div>
+        </div>
       </div>
     </main>
     <footer>
@@ -180,8 +180,8 @@
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="/svelto.js"></script>
     <script>
-      function toggle_outlined () {
-        $('.label').toggleClass ( 'outlined' );
+      function toggle_class ( css_class ) {
+        $('.label').not('.actions .button').toggleClass ( css_class );
       }
     </script>
     <script>

@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* TRIANGLES */
@@ -35,24 +37,17 @@
 /* SQUARES */
 
 .square {
+  @extend .widget;
   @include square ();
-  position: relative;
-  margin-bottom: $gutter;
 }
 
 .square-sample {
-
+  @extend .widget;
   @include square ( 62px );
   @include color ( 'gray', true );
+  @include last-child-gutter-fix ();
   overflow: hidden;
-  position: relative;
-  margin-bottom: $gutter;
   padding: $gutter-half;
-
-  & > p {
-    @include size ( 'xxsmall' );
-  }
-
 }
 
 /* CIRCLES */
