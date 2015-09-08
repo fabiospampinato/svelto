@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Helpers v0.1.0
+ * Svelto - Helpers v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -94,6 +94,18 @@
 
 .text-capitalize {
   text-transform: capitalize !important;
+}
+
+/* TEXT OTHERS */
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis, .truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /* PADDING */
@@ -220,7 +232,7 @@
   margin-bottom: $gutter;
 }
 
-.dragging {
+.dragging { //TODO: Move it to it's own decorator
   z-index: $dragging-z-index;
 }
 
