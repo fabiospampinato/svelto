@@ -1,38 +1,40 @@
 
 /* =========================================================================
- * Svelto - Shapes (Mixins) v0.1.0
+ * Svelto - Shapes (Mixins) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/_settings.scss
  * ========================================================================= */
 
 @mixin triangle ( $size: 1em, $color: $color-gray, $direction: up ) {
 
-  height: 0;
-  width: 0;
-  $width: nth($size, 1);
-  $height: nth($size, length($size));
-  $foreground-color: nth($color, 1);
-  $background-color: if(length($color) == 2, nth($color, 2), transparent);
-  $width: $width / 2;
-  $height: if(length($size) > 1, $height, $height/2);
+  $size: $size / 2;
+  border: $size solid transparent;
 
   @if $direction == up {
-    border-left: $width dotted $background-color;
-    border-right: $width dotted $background-color;
-    border-bottom: $height solid $foreground-color;
+
+    border-top-width: 0;
+    border-bottom-color: $color;
+
   } @else if $direction == right {
-    border-top: $width dotted $background-color;
-    border-bottom: $width dotted $background-color;
-    border-left: $height solid $foreground-color;
-  } @else if $direction == down {
-    border-left: $width dotted $background-color;
-    border-right: $width dotted $background-color;
-    border-top: $height solid $foreground-color;
+
+    border-right-width: 0;
+    border-left-color: $color;
+
+
   } @else if $direction == left {
-    border-top: $width dotted $background-color;
-    border-bottom: $width dotted $background-color;
-    border-right: $height solid $foreground-color;
+
+    border-left-width: 0;
+    border-right-color: $color;
+
+
+  } @else { //INFO: Defaulting to `down`
+
+    border-bottom-width: 0;
+    border-top-color: $color;
+
   }
 
 }
@@ -44,8 +46,6 @@
 }
 
 @mixin circle ( $size: 1em, $color: $color-gray ) {
-  width: $size;
-  height: $size;
-  background-color: $color;
+  @include square ( $size, $color );
   border-radius: 50%;
 }

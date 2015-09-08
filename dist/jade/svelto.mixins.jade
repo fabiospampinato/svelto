@@ -103,6 +103,57 @@ mixin button-tag
 
 
 //- =========================================================================
+//- Svelto - Checkbox v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+mixin checkbox(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
+      else
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    if options.title
+      span= options.title
+    +icon(options.icons.on)(class=options.colors.on).icon-on
+    +icon(options.icons.off)(class=options.colors.off).icon-off
+
+
+//- =========================================================================
 //- Svelto - Chat v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -163,57 +214,6 @@ mixin chat-msg(options)
               if options.permissions.delete
                 +button-icon("delete")(title="Delete").small.outlined.compact
         +container-content= options.message.content
-
-
-//- =========================================================================
-//- Svelto - Checkbox v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-//- Options
-  {
-    name: '', // Input name
-    title: '', // Checkbox title
-    value: '', // Input value
-    checked: '', // Input checked
-    colors: { // Colors to use for icons
-      on: '', // On color
-      off: '' // Off color
-    },
-    icons: { // Icons to use
-      on: '', // On icon
-      off: '' // Off icon
-    }
-  }
-
-mixin checkbox(options)
-  - options = options || {};
-  - options.value = options.value || "";
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.icons = options.icons || {};
-  - options.icons.on = options.icons.on || "check_box";
-  - options.icons.off = options.icons.off || "check_box_outline_blank";
-  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
-    if options.checked
-      if options.name
-        input(type="radio" name=name value=value checked)
-      else
-        input(type="radio" value=value checked)
-    else
-      if options.name
-        input(type="radio" name=name value=value)
-      else
-        input(type="radio" value=value)
-    if options.title
-      span= options.title
-    +icon(options.icons.on)(class=options.colors.on).icon-on
-    +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
 //- =========================================================================
@@ -486,18 +486,6 @@ mixin expander(options)
 
 
 //- =========================================================================
-//- Svelto - Flags v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flag(flag)
-  .flag(class="flag-" + flag)&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Flippable v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -515,6 +503,18 @@ mixin flippable-front
 
 mixin flippable-back
   .flippable-back&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Flags v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flag(flag)
+  .flag(class="flag-" + flag)&attributes(attributes)
     block
 
 
@@ -1222,31 +1222,35 @@ mixin select(options)
 
 
 //- =========================================================================
-//- Svelto - Shapes v0.1.0
+//- Svelto - Shapes v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
+
+//- TRIANGLES
 
 mixin triangle
   .triangle&attributes(attributes)
     block
 
 mixin triangle-up
-  .triangle-up&attributes(attributes)
+  .triangle&attributes(attributes).up
     block
 
 mixin triangle-down
-  .triangle-down&attributes(attributes)
-    block
-
-mixin triangle-right
-  .triangle-right&attributes(attributes)
+  .triangle&attributes(attributes).down
     block
 
 mixin triangle-left
-  .triangle-left&attributes(attributes)
+  .triangle&attributes(attributes).left
     block
+      
+mixin triangle-right
+  .triangle&attributes(attributes).right
+    block
+
+//- SQUARES
 
 mixin square
   .square&attributes(attributes)
@@ -1254,9 +1258,11 @@ mixin square
 
 mixin square-sample
   .square-sample&attributes(attributes)
-    p.xxsmall
+    p
       +lorem-ipsum({ type: 'words', amount: 10 })
     block
+
+//- CIRCLE
 
 mixin circle
   .circle&attributes(attributes)
@@ -1339,6 +1345,35 @@ mixin spinner-multiple(options)
 
 
 //- =========================================================================
+//- Svelto - Stepper v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '' // Max value
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value || options.min;
+  - options.max = options.max || 100;
+  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
+    +button-icon("remove").stepper-decreaser
+    if options.name
+      +input({ name: name, value: value }).autogrow.compact
+    else
+      +input({ value: value }).autogrow.compact
+    +button-icon("add").stepper-increaser
+
+
+//- =========================================================================
 //- Svelto - Switch v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1392,35 +1427,6 @@ mixin switch(options)
 
 
 //- =========================================================================
-//- Svelto - Stepper v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '' // Max value
-  }
-
-mixin stepper(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value || options.min;
-  - options.max = options.max || 100;
-  +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
-    +button-icon("remove").stepper-decreaser
-    if options.name
-      +input({ name: name, value: value }).autogrow.compact
-    else
-      +input({ value: value }).autogrow.compact
-    +button-icon("add").stepper-increaser
-
-
-//- =========================================================================
 //- Svelto - Table v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1437,6 +1443,30 @@ mixin table-tr-empty ( empty_str )
           = empty_str
         else
           = "Empty"
+
+
+//- =========================================================================
+//- Svelto - Tabs v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin tabs
+  .tabs&attributes(attributes)
+    block
+
+mixin tabs-buttons
+  .tabs-buttons&attributes(attributes)
+    block
+
+mixin tabs-buttons-indicator
+  .tabs-buttons-indicator&attributes(attributes)
+    block
+
+mixin tabs-containers
+  .tabs-containers&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1467,30 +1497,6 @@ mixin tagbox(options)
         +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
       else
         +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
-
-
-//- =========================================================================
-//- Svelto - Tabs v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin tabs
-  .tabs&attributes(attributes)
-    block
-
-mixin tabs-buttons
-  .tabs-buttons&attributes(attributes)
-    block
-
-mixin tabs-buttons-indicator
-  .tabs-buttons-indicator&attributes(attributes)
-    block
-
-mixin tabs-containers
-  .tabs-containers&attributes(attributes)
-    block
 
 
 //- =========================================================================

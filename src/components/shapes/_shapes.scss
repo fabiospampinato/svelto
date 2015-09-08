@@ -1,37 +1,37 @@
 
 /* =========================================================================
- * Svelto - Shapes v0.1.0
+ * Svelto - Shapes v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../settings/_settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-/* TRIANGLES */
+/* TRIANGLE */
 
-.triangle, .triangle-up {
-  @include triangle ();
-  position: relative;
-  margin-bottom: $gutter;
-}
+.triangle {
 
-.triangle-down {
-  @include triangle ( 1em, $color-gray, "down" );
-  position: relative;
-  margin-bottom: $gutter;
-}
+  @extend .widget;
 
-.triangle-right {
-  @include triangle ( 1em, $color-gray, "right" );
-  position: relative;
-  margin-bottom: $gutter;
-}
+  &.up {
+    @include triangle ( $triangle-size, $triangle-color, up );
+  }
 
-.triangle-left {
-  @include triangle ( 1em, $color-gray, "left" );
-  position: relative;
-  margin-bottom: $gutter;
+  &:not(.up):not(.left):not(.right), //INFO: Default direction if no one has been specified
+  &.down {
+    @include triangle ( $triangle-size, $triangle-color, down );
+  }
+
+  &.left {
+    @include triangle ( $triangle-size, $triangle-color, left );
+  }
+
+  &.right {
+    @include triangle ( $triangle-size, $triangle-color, right );
+  }
+
 }
 
 /* SQUARES */
@@ -42,17 +42,23 @@
 }
 
 .square-sample {
+
   @extend .widget;
-  @include square ( 62px );
-  @include color ( 'gray', true );
+  @include square ( $square-sample-size );
+  @include color ( $square-sample-color, true );
   @include last-child-gutter-fix ();
   overflow: hidden;
   padding: $gutter-half;
+
+  p {
+    @include size ( $square-sample-p-size );
+  }
+
 }
 
 /* CIRCLES */
 
 .circle {
+  @extend .widget;
   @include circle ();
-  margin-bottom: $gutter;
 }

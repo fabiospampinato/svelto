@@ -5,30 +5,15 @@ extends ../layout.jade
 
 append main
 
-  +divider Triangle
+  +divider Triangles
 
   +container-simple.outlined
-    +triangle
-
-  +divider Triangle up
-
-  +container-simple.outlined
-    +triangle-up
-
-  +divider Triangle down
-
-  +container-simple.outlined
-    +triangle-down
-
-  +divider Triangle right
-
-  +container-simple.outlined
-    +triangle-right
-
-  +divider Triangle left
-
-  +container-simple.outlined
-    +triangle-left
+    +multiple.expanded
+      +triangle
+      +triangle-up
+      +triangle-down
+      +triangle-right
+      +triangle-left
 
   +divider Square
 
@@ -48,7 +33,7 @@ append main
   +divider Window actions
 
   +container-simple.outlined
-    +multiple.small
+    +multiple.expanded
       +circle.red
       +circle.yellow
       +circle.green

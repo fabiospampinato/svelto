@@ -504,10 +504,12 @@ th {
 /* DROWN */
 /* RANGE */
 /* =========================================================================
- * Svelto - Shapes (Mixins) v0.1.0
+ * Svelto - Shapes (Mixins) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/_settings.scss
  * ========================================================================= */
 /* =========================================================================
  * Svelto - Text (Mixins) v0.1.0
@@ -515,45 +517,6 @@ th {
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-/* =========================================================================
- * Svelto - Others (Mixins) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* =========================================================================
- * Svelto - Mixins (Mixins) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _border_radius.scss
- * @requires _center.scss
- * @requires _fill.scss
- * @requires _gradients.scss
- * @requires _image.scss
- * @requires _margin.scss
- * @requires _media_queries.scss
- * @requires _padding.scss
- * @requires _responsive.scss
- * @requires _shapes.scss
- * @requires _text.scss
- * @requires _others.scss
- * ========================================================================= */
-/* =========================================================================
- * Svelto - Constants (Settings) v0.1.1
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* CONSTANTS */
-/* =========================================================================
- * Svelto - Environment (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* ENVIRONMENT */
 /* =========================================================================
  * Svelto - UI (Settings) v0.2.0
  * =========================================================================
@@ -595,6 +558,47 @@ th {
 /* BLOCKQUOTE */
 /* CODE */
 /* KBD */
+/* =========================================================================
+ * Svelto - Others (Mixins) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../typography/_settings.scss
+ * ========================================================================= */
+/* =========================================================================
+ * Svelto - Mixins (Mixins) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _border_radius.scss
+ * @requires _center.scss
+ * @requires _fill.scss
+ * @requires _gradients.scss
+ * @requires _image.scss
+ * @requires _margin.scss
+ * @requires _media_queries.scss
+ * @requires _padding.scss
+ * @requires _responsive.scss
+ * @requires _shapes.scss
+ * @requires _text.scss
+ * @requires _others.scss
+ * ========================================================================= */
+/* =========================================================================
+ * Svelto - Constants (Settings) v0.1.1
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* CONSTANTS */
+/* =========================================================================
+ * Svelto - Environment (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* ENVIRONMENT */
 /* =========================================================================
  * Svelto - Colors v0.3.0
  * =========================================================================
@@ -2275,12 +2279,12 @@ button {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, .square, .square-sample, table.table, blockquote, blockquote > footer {
+.widget, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
-.widget.disabled, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, .disabled.square, .disabled.square-sample, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, [class*="-disabled"].square, [class*="-disabled"].square-sample, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+.widget.disabled, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3045,20 +3049,16 @@ hr {
 }
 
 .dropdown > .dropdown-tip:before {
-  height: 0;
-  width: 0;
-  border-left: 10.5px dotted transparent;
-  border-right: 10.5px dotted transparent;
-  border-bottom: 10.5px solid #c2c2c2;
+  border: 10.5px solid transparent;
+  border-top-width: 0;
+  border-bottom-color: #c2c2c2;
   margin-left: -10.5px;
 }
 
 .dropdown > .dropdown-tip:after {
-  height: 0;
-  width: 0;
-  border-left: 9.5px dotted transparent;
-  border-right: 9.5px dotted transparent;
-  border-bottom: 9.5px solid #ffffff;
+  border: 9.5px solid transparent;
+  border-top-width: 0;
+  border-bottom-color: #ffffff;
   margin-top: -9.5px;
   margin-left: -9.5px;
 }
@@ -8709,52 +8709,49 @@ table.table.selectable > tbody > tr.selected {
 }
 
 /* =========================================================================
- * Svelto - Shapes v0.1.0
+ * Svelto - Shapes (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @include ../colors/_settings.scss
+ * ========================================================================= */
+/* TRIANGLE */
+/* SQUARE */
+/* CIRCLE */
+/* SQUARE SAMPLE */
+/* =========================================================================
+ * Svelto - Shapes v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../settings/_settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
-/* TRIANGLES */
-.triangle, .triangle-up {
-  height: 0;
-  width: 0;
-  border-left: 0.5em dotted transparent;
-  border-right: 0.5em dotted transparent;
-  border-bottom: 0.5em solid #dddddd;
-  position: relative;
-  margin-bottom: 10px;
+/* TRIANGLE */
+.triangle.up {
+  border: 0.5em solid transparent;
+  border-top-width: 0;
+  border-bottom-color: #dddddd;
 }
 
-.triangle-down {
-  height: 0;
-  width: 0;
-  border-left: 0.5em dotted transparent;
-  border-right: 0.5em dotted transparent;
-  border-top: 0.5em solid #dddddd;
-  position: relative;
-  margin-bottom: 10px;
+.triangle:not(.up):not(.left):not(.right), .triangle.down {
+  border: 0.5em solid transparent;
+  border-bottom-width: 0;
+  border-top-color: #dddddd;
 }
 
-.triangle-right {
-  height: 0;
-  width: 0;
-  border-top: 0.5em dotted transparent;
-  border-bottom: 0.5em dotted transparent;
-  border-left: 0.5em solid #dddddd;
-  position: relative;
-  margin-bottom: 10px;
+.triangle.left {
+  border: 0.5em solid transparent;
+  border-left-width: 0;
+  border-right-color: #dddddd;
 }
 
-.triangle-left {
-  height: 0;
-  width: 0;
-  border-top: 0.5em dotted transparent;
-  border-bottom: 0.5em dotted transparent;
-  border-right: 0.5em solid #dddddd;
-  position: relative;
-  margin-bottom: 10px;
+.triangle.right {
+  border: 0.5em solid transparent;
+  border-right-width: 0;
+  border-left-color: #dddddd;
 }
 
 /* SQUARES */
@@ -8765,8 +8762,8 @@ table.table.selectable > tbody > tr.selected {
 }
 
 .square-sample {
-  width: 62px;
-  height: 62px;
+  width: 4em;
+  height: 4em;
   background-color: #dddddd;
   border-color: #aaaaaa ;
   color: #383838 ;
@@ -8791,13 +8788,16 @@ table.table.selectable > tbody > tr.selected {
   margin-bottom: 0 !important;
 }
 
+.square-sample p {
+  font-size: 0.5em ;
+}
+
 /* CIRCLES */
 .circle {
   width: 1em;
   height: 1em;
   background-color: #dddddd;
   border-radius: 50%;
-  margin-bottom: 10px;
 }
 
 /* =========================================================================
