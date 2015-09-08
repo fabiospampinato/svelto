@@ -8,7 +8,7 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-/* HIGHLIGHT AFTER */
+/* HIGHLIGHT:AFTER */
 
 %highlight-after {
   @include fill-absolute ();
@@ -44,7 +44,8 @@
 
   /* DIRECTIONS */
 
-  &.highlight-top, &.highlight-all {
+  &.highlight-top,
+  &.highlight-all {
 
     &:after {
       border-top-width: $highlight-size;
@@ -58,7 +59,8 @@
 
   }
 
-  &.highlight-right, &.highlight-all {
+  &.highlight-right,
+  &.highlight-all {
 
     &:after {
       border-right-width: $highlight-size;
@@ -71,7 +73,9 @@
 
   }
 
-  &:not(.highlight-top):not(.highlight-right):not(.highlight-left), &.highlight-bottom, &.highlight-all {
+  &:not(.highlight-top):not(.highlight-right):not(.highlight-left), //INFO: Default direction if no one has been specified
+  &.highlight-bottom,
+  &.highlight-all {
 
     &:after {
       border-bottom-width: $highlight-size;

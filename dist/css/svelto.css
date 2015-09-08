@@ -5058,7 +5058,7 @@ hr {
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-/* HIGHLIGHT AFTER */
+/* HIGHLIGHT:AFTER */
 .highlight:after, .link:after, p > a:after {
   position: absolute;
   top: 0;
@@ -5092,39 +5092,48 @@ hr {
   border-style: dashed;
 }
 
-.highlight.highlight-top, .highlight.highlight-all {
+.highlight.highlight-top,
+.highlight.highlight-all {
   /* OUTLINED */
 }
 
-.highlight.highlight-top:after, .highlight.highlight-all:after {
+.highlight.highlight-top:after,
+.highlight.highlight-all:after {
   border-top-width: 2px;
 }
 
-.highlight.highlight-top.outlined:after, .highlight.highlight-all.outlined:after {
+.highlight.highlight-top.outlined:after,
+.highlight.highlight-all.outlined:after {
   top: -1px;
 }
 
-.highlight.highlight-right, .highlight.highlight-all {
+.highlight.highlight-right,
+.highlight.highlight-all {
   /* OUTLINED */
 }
 
-.highlight.highlight-right:after, .highlight.highlight-all:after {
+.highlight.highlight-right:after,
+.highlight.highlight-all:after {
   border-right-width: 2px;
 }
 
-.highlight.highlight-right.outlined:after, .highlight.highlight-all.outlined:after {
+.highlight.highlight-right.outlined:after,
+.highlight.highlight-all.outlined:after {
   right: -1px;
 }
 
-.highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left), .highlight.highlight-bottom, .highlight.highlight-all {
+.highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left), .highlight.highlight-bottom,
+.highlight.highlight-all {
   /* OUTLINED */
 }
 
-.highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left):after, .highlight.highlight-bottom:after, .highlight.highlight-all:after {
+.highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left):after, .highlight.highlight-bottom:after,
+.highlight.highlight-all:after {
   border-bottom-width: 2px;
 }
 
-.highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left).outlined:after, .highlight.highlight-bottom.outlined:after, .highlight.highlight-all.outlined:after {
+.highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left).outlined:after, .highlight.highlight-bottom.outlined:after,
+.highlight.highlight-all.outlined:after {
   bottom: -1px;
 }
 
