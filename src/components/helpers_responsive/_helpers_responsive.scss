@@ -8,186 +8,90 @@
  * @requires ../core/_core.scss
  * ========================================================================= */
 
-/* VISIBILITY CLASSES */
+/* HIDDEN-*-UP */
 
-// XSMALL
-
-@include xsmall-up {
-
-  .hidden-xs {
-    display: none !important;
-  }
-
-  @each $display in block, inline, inline-block {
-
-    .visible-xs-#{$display} {
-      display: $display !important;
-    }
-
-  }
-
-}
-
-// SMALL
-
-@include small-up {
-
-  .hidden-sm {
-    display: none !important;
-  }
-
-  @each $display in block, inline, inline-block {
-
-    .visible-sm-#{$display} {
-      display: $display !important;
-    }
-
-  }
-
-}
-
-// MEDIUM
-
-@include medium-up {
-
-  .hidden-md {
-    display: none !important;
-  }
-
-  @each $display in block, inline, inline-block {
-
-    .visible-md-#{$display} {
-      display: $display !important;
-    }
-
-  }
-
-}
-
-// LARGE
-
-@include large-up {
-
-  .hidden-lg {
-    display: none !important;
-  }
-
-  @each $display in block, inline, inline-block {
-
-    .visible-lg-#{$display} {
-      display: $display !important;
-    }
-
-  }
-
-}
-
-// XLARGE
-
-@include xlarge-up {
-
-  .hidden-xl {
-    display: none !important;
-  }
-
-  @each $display in block, inline, inline-block {
-
-    .visible-xl-#{$display} {
-      display: $display !important;
-    }
-
-  }
-
-}
-
-/* WIDTH GRID */
-
-// XSMALL
+//INFO: Screen equal or greater than breakpoint
 
 @include xsmall-up {
 
-  @for $nr from 1 through $grid-columns {
-
-    .xs-#{$nr} {
-      width: ( 100% / $grid-columns ) * $nr;
-    }
-
-    .multiple-wrp > .multiple > *:not(.multiple-wrp).xs-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
-    }
-
+  .hidden-xs-up {
+    display: none !important;
   }
 
 }
-
-// SMALL
 
 @include small-up {
 
-  @for $nr from 1 through $grid-columns {
-
-    .sm-#{$nr} {
-      width: ( 100% / $grid-columns ) * $nr;
-    }
-
-    .multiple-wrp > .multiple > *:not(.multiple-wrp).sm-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
-    }
-
+  .hidden-sm-up {
+    display: none !important;
   }
 
 }
-
-// MEDIUM
 
 @include medium-up {
 
-  @for $nr from 1 through $grid-columns {
-
-    .md-#{$nr} {
-      width: ( 100% / $grid-columns ) * $nr;
-    }
-
-    .multiple-wrp > .multiple > *:not(.multiple-wrp).md-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
-    }
-
+  .hidden-md-up {
+    display: none !important;
   }
 
 }
-
-// LARGE
 
 @include large-up {
 
-  @for $nr from 1 through $grid-columns {
-
-    .lg-#{$nr} {
-      width: ( 100% / $grid-columns ) * $nr;
-    }
-
-    .multiple-wrp > .multiple > *:not(.multiple-wrp).lg-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
-    }
-
+  .hidden-lg-up {
+    display: none !important;
   }
 
 }
 
-// XLARGE
-
 @include xlarge-up {
 
-  @for $nr from 1 through $grid-columns {
+  .hidden-xl-up {
+    display: none !important;
+  }
 
-    .xl-#{$nr} {
-      width: ( 100% / $grid-columns ) * $nr;
-    }
+}
 
-    .multiple-wrp > .multiple > *:not(.multiple-wrp).xl-#{$nr}, .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too many CSS
-      width: calc(#{( 100% / $grid-columns ) * $nr} - #{$gutter});
-    }
+/* HIDDEN-*-DOWN */
 
+//INFO: Screen equal or lesser than next breakpoint
+
+@include xsmall-down {
+
+  .hidden-xs-down {
+    display: none !important;
+  }
+
+}
+
+@include small-down {
+
+  .hidden-sm-down {
+    display: none !important;
+  }
+
+}
+
+@include medium-down {
+
+  .hidden-md-down {
+    display: none !important;
+  }
+
+}
+
+@include large-down {
+
+  .hidden-lg-down {
+    display: none !important;
+  }
+
+}
+
+@include xlarge-down {
+
+  .hidden-xl-down {
+    display: none !important;
   }
 
 }

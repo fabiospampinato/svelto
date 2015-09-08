@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Responsive (Mixins) v0.1.1
+ * Svelto - Responsive (Mixins) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -52,13 +52,13 @@
 
 }
 
-/* DROWN */
+/* DOWN */
 
-//INFO: Screen equal or greater than next breakpoint
+//INFO: Screen equal or lesser than next breakpoint
 
 @mixin xsmall-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'small')) {
+  @media screen and (max-width: map-get($breakpoints, 'small') - 0.01rem) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -66,7 +66,7 @@
 
 @mixin small-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'medium')) {
+  @media screen and (max-width: map-get($breakpoints, 'medium') - 0.01rem) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -74,7 +74,7 @@
 
 @mixin medium-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'large')) {
+  @media screen and (max-width: map-get($breakpoints, 'large') - 0.01rem) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
@@ -82,7 +82,7 @@
 
 @mixin large-down {
 
-  @media screen and (max-width: map-get($breakpoints, 'xlarge')) {
+  @media screen and (max-width: map-get($breakpoints, 'xlarge') - 0.01rem) { //INFO: So that it's not possible that both the `*-up` and the `*-down` versions are true
     @content;
   }
 
