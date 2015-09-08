@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Sizes v0.1.0
+ * Svelto - Sizes v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -23,7 +23,7 @@
 @each $name, $font-size in $sizes {
 
   .#{$name} {
-    @include size ( $name, '!important' );
+    @include size ( $name, !important );
   }
 
 }

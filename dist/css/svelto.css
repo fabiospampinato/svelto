@@ -1761,7 +1761,7 @@ th {
 /* SIZES */
 /* SIZES */
 /* =========================================================================
- * Svelto - Sizes v0.1.0
+ * Svelto - Sizes v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1771,57 +1771,57 @@ th {
 /* MIXIN */
 /* SIZES */
 .xxxxsmall {
-  font-size: 0.25rem !important;
+  font-size: 0.25em !important;
 }
 
 .xxxsmall {
-  font-size: 0.375rem !important;
+  font-size: 0.375em !important;
 }
 
 .xxsmall {
-  font-size: 0.5rem !important;
+  font-size: 0.5em !important;
 }
 
 .xsmall {
-  font-size: 0.75rem !important;
+  font-size: 0.75em !important;
 }
 
 .small {
-  font-size: 0.875rem !important;
+  font-size: 0.875em !important;
 }
 
 .medium {
-  font-size: 1rem !important;
+  font-size: 1em !important;
 }
 
 .large {
-  font-size: 1.25rem !important;
+  font-size: 1.25em !important;
 }
 
 .xlarge {
-  font-size: 1.5rem !important;
+  font-size: 1.5em !important;
 }
 
 .xxlarge {
-  font-size: 1.75rem !important;
+  font-size: 1.75em !important;
 }
 
 .xxxlarge {
-  font-size: 2rem !important;
+  font-size: 2em !important;
 }
 
 .xxxxlarge {
-  font-size: 2.5rem !important;
+  font-size: 2.5em !important;
 }
 
 /* =========================================================================
- * Svelto - Z-Depths (Settings) v0.1.0
+ * Svelto - Z-Depths (Settings) v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-/* DEPTHS */
-/* DEPTHS */
+/* Z-DEPTHS */
+/* Z-DEPTHS */
 /* =========================================================================
  * Svelto - Z-Depths v0.1.1
  * =========================================================================
@@ -2940,7 +2940,7 @@ hr {
 }
 
 .divider-wrp.text > .divider {
-  font-size: 1rem ;
+  font-size: 1em ;
   font-weight: bold;
   margin: 0 10px;
   opacity: 0.75;
@@ -5467,7 +5467,7 @@ hr {
 }
 
 .infobar-wrp > .infobar-center > .infobar-title {
-  font-size: 1.25rem ;
+  font-size: 1.25em ;
   margin-bottom: 5px;
 }
 
@@ -10199,7 +10199,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
   border-color: transparent ;
   color: inherit ;
   background: transparent ;
-  font-size: 1rem ;
+  font-size: 1em ;
   min-width: 6.5em;
 }
 
@@ -10355,27 +10355,27 @@ h1 > small, h2 > small, h3 > small, h4 > small, h5 > small, h6 > small {
 }
 
 h1 {
-  font-size: 1.75rem ;
+  font-size: 1.75em ;
 }
 
 h2 {
-  font-size: 1.5rem ;
+  font-size: 1.5em ;
 }
 
 h3 {
-  font-size: 1.25rem ;
+  font-size: 1.25em ;
 }
 
 h4 {
-  font-size: 1rem ;
+  font-size: 1em ;
 }
 
 h5 {
-  font-size: 0.875rem ;
+  font-size: 0.875em ;
 }
 
 h6 {
-  font-size: 0.75rem ;
+  font-size: 0.75em ;
 }
 
 /* SMALL */

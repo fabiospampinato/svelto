@@ -15,24 +15,25 @@
 
   //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
 
-  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1rem;
+  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
 
 }
 
 /* ICON SIZES */
 
 //INFO: The wanted icon size for the particular size
+//INFO: The [RECOMMENDED] sizes are those where the icons look better
 
 $size-xxxxsmall-icon: 6px !default;
 $size-xxxsmall-icon: 9px !default;
 $size-xxsmall-icon: 12px !default;
-$size-xsmall-icon: 18px !default;
+$size-xsmall-icon: 18px !default; //- [RECOMMENDED]
 $size-small-icon: 21px !default;
-$size-medium-icon: 24px !default;
+$size-medium-icon: 24px !default; //- [RECOMMENDED]
 $size-large-icon: 30px !default;
-$size-xlarge-icon: 36px !default;
+$size-xlarge-icon: 36px !default; //- [RECOMMENDED]
 $size-xxlarge-icon: 42px !default;
-$size-xxxlarge-icon: 48px !default;
+$size-xxxlarge-icon: 48px !default; //- [RECOMMENDED]
 $size-xxxxlarge-icon: 60px !default;
 
 /* SIZES */

@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Z-Depths (Settings) v0.1.0
+ * Svelto - Z-Depths (Settings) v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* DEPTHS */
+/* Z-DEPTHS */
 
 $z-depth-0: none !default;
 $z-depth-1: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !default;
@@ -34,7 +34,7 @@ $z-depth-22: 0 22px 36px 4px rgba(0, 0, 0, 0.14), 0 7px 42px 8px rgba(0, 0, 0, 0
 $z-depth-23: 0 23px 38px 4px rgba(0, 0, 0, 0.14), 0 7px 44px 8px rgba(0, 0, 0, 0.12), 0 10px 13px -7px rgba(0, 0, 0, 0.4) !default;
 $z-depth-24: 0 24px 40px 4px rgba(0, 0, 0, 0.14), 0 8px 46px 9px rgba(0, 0, 0, 0.12), 0 10px 10px -8px rgba(0, 0, 0, 0.4) !default;
 
-/* DEPTHS */
+/* Z-DEPTHS */
 
 $z-depths: (
   0: $z-depth-0,
