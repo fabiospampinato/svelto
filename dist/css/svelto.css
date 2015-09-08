@@ -454,7 +454,7 @@ th {
 /* BASE */
 /* COLORS */
 /* =========================================================================
- * Svelto - Gradients (Mixins) v0.2.0
+ * Svelto - Gradients (Mixins) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -596,7 +596,7 @@ th {
 /* CODE */
 /* KBD */
 /* =========================================================================
- * Svelto - Colors v0.1.0
+ * Svelto - Colors v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -612,8 +612,8 @@ th {
 }
 
 .primary.gradient {
-  background-image: linear-gradient(to bottom, #2b6cb3 0%, #255d9b 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #2b6cb3 0%, #255d9b 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .primary.actionable.active {
@@ -648,6 +648,18 @@ th {
   color: #2967ab;
 }
 
+.link-primary {
+  color: #2967ab !important;
+}
+
+.link-primary:after {
+  border-color: #2b6cb3 !important;
+}
+
+.link-primary:hover {
+  color: #2b6cb3 !important;
+}
+
 .secondary {
   border-color: #dc3500 !important;
   color: #ffffff !important;
@@ -655,8 +667,8 @@ th {
 }
 
 .secondary.gradient {
-  background-image: linear-gradient(to bottom, #ff784d 0%, #ff602f 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #ff784d 0%, #ff602f 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .secondary.actionable.active {
@@ -691,6 +703,18 @@ th {
   color: #ff7043;
 }
 
+.link-secondary {
+  color: #ff7043 !important;
+}
+
+.link-secondary:after {
+  border-color: #ff784d !important;
+}
+
+.link-secondary:hover {
+  color: #ff784d !important;
+}
+
 .tertiary {
   border-color: #4a0787 !important;
   color: #ffffff !important;
@@ -698,8 +722,8 @@ th {
 }
 
 .tertiary.gradient {
-  background-image: linear-gradient(to bottom, #8711f3 0%, #740bd5 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #8711f3 0%, #740bd5 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .tertiary.actionable.active {
@@ -734,6 +758,18 @@ th {
   color: #7f0ce8;
 }
 
+.link-tertiary {
+  color: #7f0ce8 !important;
+}
+
+.link-tertiary:after {
+  border-color: #8711f3 !important;
+}
+
+.link-tertiary:hover {
+  color: #8711f3 !important;
+}
+
 .quaternary {
   border-color: #0e540f !important;
   color: #ffffff !important;
@@ -741,8 +777,8 @@ th {
 }
 
 .quaternary.gradient {
-  background-image: linear-gradient(to bottom, #1eb420 0%, #1a9a1b 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #1eb420 0%, #1a9a1b 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .quaternary.actionable.active {
@@ -777,6 +813,18 @@ th {
   color: #1dab1e;
 }
 
+.link-quaternary {
+  color: #1dab1e !important;
+}
+
+.link-quaternary:after {
+  border-color: #1eb420 !important;
+}
+
+.link-quaternary:hover {
+  color: #1eb420 !important;
+}
+
 .white {
   border-color: #cccccc !important;
   color: #4c4c4c !important;
@@ -784,8 +832,8 @@ th {
 }
 
 .white.gradient {
-  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .white.actionable.active {
@@ -820,6 +868,18 @@ th {
   color: #ffffff;
 }
 
+.link-white {
+  color: #ffffff !important;
+}
+
+.link-white:after {
+  border-color: #fafafa !important;
+}
+
+.link-white:hover {
+  color: #fafafa !important;
+}
+
 .gray {
   border-color: #aaaaaa !important;
   color: #383838 !important;
@@ -827,8 +887,8 @@ th {
 }
 
 .gray.gradient {
-  background-image: linear-gradient(to bottom, #e2e2e2 0%, lightgray 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #e2e2e2 0%, lightgray 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .gray.actionable.active {
@@ -863,6 +923,18 @@ th {
   color: #dddddd;
 }
 
+.link-gray {
+  color: #dddddd !important;
+}
+
+.link-gray:after {
+  border-color: #e2e2e2 !important;
+}
+
+.link-gray:hover {
+  color: #e2e2e2 !important;
+}
+
 .black {
   border-color: black !important;
   color: #ffffff !important;
@@ -870,8 +942,8 @@ th {
 }
 
 .black.gradient {
-  background-image: linear-gradient(to bottom, #2c2c2c 0%, #181818 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #2c2c2c 0%, #181818 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .black.actionable.active {
@@ -906,6 +978,18 @@ th {
   color: #222222;
 }
 
+.link-black {
+  color: #222222 !important;
+}
+
+.link-black:after {
+  border-color: #2c2c2c !important;
+}
+
+.link-black:hover {
+  color: #2c2c2c !important;
+}
+
 .yellow {
   border-color: #e5ca01 !important;
   color: #3f3f3f !important;
@@ -913,8 +997,8 @@ th {
 }
 
 .yellow.gradient {
-  background-image: linear-gradient(to bottom, #feec62 0%, #fee63a 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #feec62 0%, #fee63a 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .yellow.actionable.active {
@@ -949,6 +1033,18 @@ th {
   color: #fee94e;
 }
 
+.link-yellow {
+  color: #fee94e !important;
+}
+
+.link-yellow:after {
+  border-color: #feec62 !important;
+}
+
+.link-yellow:hover {
+  color: #feec62 !important;
+}
+
 .olive {
   border-color: #929d20 !important;
   color: #303030 !important;
@@ -956,8 +1052,8 @@ th {
 }
 
 .olive.gradient {
-  background-image: linear-gradient(to bottom, #d2dd5a 0%, #c8d738 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #d2dd5a 0%, #c8d738 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .olive.actionable.active {
@@ -992,6 +1088,18 @@ th {
   color: #cdda49;
 }
 
+.link-olive {
+  color: #cdda49 !important;
+}
+
+.link-olive:after {
+  border-color: #d2dd5a !important;
+}
+
+.link-olive:hover {
+  color: #d2dd5a !important;
+}
+
 .green {
   border-color: #306833 !important;
   color: #ffffff !important;
@@ -999,8 +1107,8 @@ th {
 }
 
 .green.gradient {
-  background-image: linear-gradient(to bottom, #57b25b 0%, #4aa04e 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #57b25b 0%, #4aa04e 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .green.actionable.active {
@@ -1035,6 +1143,18 @@ th {
   color: #50ae55;
 }
 
+.link-green {
+  color: #50ae55 !important;
+}
+
+.link-green:after {
+  border-color: #57b25b !important;
+}
+
+.link-green:hover {
+  color: #57b25b !important;
+}
+
 .blue {
   border-color: #0c63a9 !important;
   color: #ffffff !important;
@@ -1042,8 +1162,8 @@ th {
 }
 
 .blue.gradient {
-  background-image: linear-gradient(to bottom, #359df1 0%, #188fef 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #359df1 0%, #188fef 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .blue.actionable.active {
@@ -1078,6 +1198,18 @@ th {
   color: #2b98f0;
 }
 
+.link-blue {
+  color: #2b98f0 !important;
+}
+
+.link-blue:after {
+  border-color: #359df1 !important;
+}
+
+.link-blue:hover {
+  color: #359df1 !important;
+}
+
 .violet {
   border-color: #53195e !important;
   color: #ffffff !important;
@@ -1085,8 +1217,8 @@ th {
 }
 
 .violet.gradient {
-  background-image: linear-gradient(to bottom, #a231b6 0%, #8d2b9e 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #a231b6 0%, #8d2b9e 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .violet.actionable.active {
@@ -1121,6 +1253,18 @@ th {
   color: #9b2fae;
 }
 
+.link-violet {
+  color: #9b2fae !important;
+}
+
+.link-violet:after {
+  border-color: #a231b6 !important;
+}
+
+.link-violet:hover {
+  color: #a231b6 !important;
+}
+
 .orange {
   border-color: #bc6302 !important;
   color: #ffffff !important;
@@ -1128,8 +1272,8 @@ th {
 }
 
 .orange.gradient {
-  background-image: linear-gradient(to bottom, #fd9c31 0%, #fd8d13 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #fd9c31 0%, #fd8d13 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .orange.actionable.active {
@@ -1164,6 +1308,18 @@ th {
   color: #fd9727;
 }
 
+.link-orange {
+  color: #fd9727 !important;
+}
+
+.link-orange:after {
+  border-color: #fd9c31 !important;
+}
+
+.link-orange:hover {
+  color: #fd9c31 !important;
+}
+
 .purple {
   border-color: #3c2568 !important;
   color: #ffffff !important;
@@ -1171,8 +1327,8 @@ th {
 }
 
 .purple.gradient {
-  background-image: linear-gradient(to bottom, #6b42bc 0%, #5e3aa5 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #6b42bc 0%, #5e3aa5 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .purple.actionable.active {
@@ -1207,6 +1363,18 @@ th {
   color: #673fb4;
 }
 
+.link-purple {
+  color: #673fb4 !important;
+}
+
+.link-purple:after {
+  border-color: #6b42bc !important;
+}
+
+.link-purple:hover {
+  color: #6b42bc !important;
+}
+
 .red {
   border-color: #bc140d !important;
   color: #ffffff !important;
@@ -1214,8 +1382,8 @@ th {
 }
 
 .red.gradient {
-  background-image: linear-gradient(to bottom, #f34d46 0%, #f13229 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #f34d46 0%, #f13229 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .red.actionable.active {
@@ -1250,6 +1418,18 @@ th {
   color: #f2443c;
 }
 
+.link-red {
+  color: #f2443c !important;
+}
+
+.link-red:after {
+  border-color: #f34d46 !important;
+}
+
+.link-red:hover {
+  color: #f34d46 !important;
+}
+
 .pink {
   border-color: #b91171 !important;
   color: #ffffff !important;
@@ -1257,8 +1437,8 @@ th {
 }
 
 .pink.gradient {
-  background-image: linear-gradient(to bottom, #ef4ba9 0%, #ec2f9b 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #ef4ba9 0%, #ec2f9b 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .pink.actionable.active {
@@ -1293,6 +1473,18 @@ th {
   color: #ee42a4;
 }
 
+.link-pink {
+  color: #ee42a4 !important;
+}
+
+.link-pink:after {
+  border-color: #ef4ba9 !important;
+}
+
+.link-pink:hover {
+  color: #ef4ba9 !important;
+}
+
 .teal {
   border-color: #126c79 !important;
   color: #ffffff !important;
@@ -1300,8 +1492,8 @@ th {
 }
 
 .teal.gradient {
-  background-image: linear-gradient(to bottom, #20c4db 0%, #1cacc0 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #20c4db 0%, #1cacc0 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .teal.actionable.active {
@@ -1336,6 +1528,18 @@ th {
   color: #1fbcd2;
 }
 
+.link-teal {
+  color: #1fbcd2 !important;
+}
+
+.link-teal:after {
+  border-color: #20c4db !important;
+}
+
+.link-teal:hover {
+  color: #20c4db !important;
+}
+
 .brown {
   border-color: #392822 !important;
   color: #ffffff !important;
@@ -1343,8 +1547,8 @@ th {
 }
 
 .brown.gradient {
-  background-image: linear-gradient(to bottom, #7e594d 0%, #6b4c41 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #7e594d 0%, #6b4c41 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .brown.actionable.active {
@@ -1377,6 +1581,18 @@ th {
 
 .text-brown {
   color: #785549;
+}
+
+.link-brown {
+  color: #785549 !important;
+}
+
+.link-brown:after {
+  border-color: #7e594d !important;
+}
+
+.link-brown:hover {
+  color: #7e594d !important;
 }
 
 .transparent {
@@ -1417,6 +1633,18 @@ th {
   color: transparent;
 }
 
+.link-transparent {
+  color: transparent !important;
+}
+
+.link-transparent:after {
+  border-color: rgba(5, 5, 5, 0) !important;
+}
+
+.link-transparent:hover {
+  color: rgba(5, 5, 5, 0) !important;
+}
+
 .inherit {
   border-color: inherit !important;
   color: inherit !important;
@@ -1443,6 +1671,18 @@ th {
   color: inherit;
 }
 
+.link-inherit {
+  color: inherit !important;
+}
+
+.link-inherit:after {
+  border-color: inherit !important;
+}
+
+.link-inherit:hover {
+  color: inherit !important;
+}
+
 .base {
   border-color: #bcbcbc !important;
   color: #3f3f3f !important;
@@ -1450,8 +1690,8 @@ th {
 }
 
 .base.gradient {
-  background-image: linear-gradient(to bottom, #eaeaea 0%, #e5e5e5 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #eaeaea 0%, #e5e5e5 100%) !important;
+  background-repeat: repeat-x !important;
 }
 
 .base.actionable.active {
@@ -1484,6 +1724,18 @@ th {
 
 .text-base {
   color: #efefef;
+}
+
+.link-base {
+  color: #efefef !important;
+}
+
+.link-base:after {
+  border-color: #eaeaea !important;
+}
+
+.link-base:hover {
+  color: #eaeaea !important;
 }
 
 /* =========================================================================
@@ -2023,12 +2275,12 @@ button {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, table.table, blockquote, blockquote > footer {
+.widget, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
-.chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+.widget.disabled, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -2342,8 +2594,8 @@ button {
 }
 
 .container > .container-header.gradient {
-  background-image: linear-gradient(to bottom, #2b6cb3 0%, #255d9b 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #2b6cb3 0%, #255d9b 100%) ;
+  background-repeat: repeat-x ;
 }
 
 .container > .container-header.actionable.active {
@@ -4805,7 +5057,7 @@ hr {
  * @requires _settings.scss
  * ========================================================================= */
 /* HIGHLIGHT AFTER */
-.highlight:after, p > a:after {
+.highlight:after, .link:after, p > a:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -5693,8 +5945,8 @@ label {
 }
 
 .label.gradient {
-  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%);
-  background-repeat: repeat-x;
+  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) ;
+  background-repeat: repeat-x ;
 }
 
 .label.actionable.active {
@@ -10056,13 +10308,18 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * @requires ../highlight/_highlight.scss
  * ========================================================================= */
 /* LINK */
-a {
+a, .link {
   position: relative;
   text-decoration: none;
   color: inherit;
 }
 
-p > a:after {
+.link, p > a {
+  display: inline-block;
+  cursor: pointer;
+}
+
+.link:after, p > a:after {
   border-bottom-width: 1px;
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
@@ -10070,7 +10327,7 @@ p > a:after {
           transform: scaleX(0);
 }
 
-p > a:hover:after {
+.link:hover:after, p > a:hover:after {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
 }

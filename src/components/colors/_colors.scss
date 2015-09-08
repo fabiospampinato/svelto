@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colors v0.1.0
+ * Svelto - Colors v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,7 +8,8 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-//TODO: Add transparentize classes, maybe even the transparent-initial class
+//TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
+//TODO: Mabybe Add support for `transparentize` class
 
 /* MIXIN */
 
@@ -36,7 +37,7 @@
     @if $support-gradient == true {
 
       &.gradient {
-        @include gradient-vertical-from-color ( $color_name );
+        @include gradient-vertical-from-color ( $color_name, #{$extra} );
       }
 
     }
@@ -83,7 +84,7 @@
 
   }
 
-  @if $color_name != 'inherit' { //INFO: Otherwise it will not work for example under .container-content that has color: `inherit`
+  @if $color_name != 'inherit' { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
     p > a { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
@@ -101,8 +102,6 @@
 
   }
 
-  //TODO: Add support for things like `a.mark`
-
 }
 
 @mixin color-text ( $color_name, $extra: '' ) {
@@ -112,6 +111,26 @@
   $bg: nth($colors, 1);
 
   color: $bg #{$extra};
+
+}
+
+@mixin color-link ( $color_name, $extra: '' ) {
+
+  $colors: map-get($colors, $color_name);
+
+  $bg: nth($colors, 1);
+  $bg-hover: nth($colors, 2);
+
+  color: $bg #{$extra};
+
+  &:after {
+    border-color: $bg-hover #{$extra};
+  }
+
+  &:hover {
+    color: $bg-hover #{$extra};
+  }
+
 }
 
 /* COLORS */
@@ -124,6 +143,10 @@
 
   .text-#{$name} {
     color: nth($datas, 1);
+  }
+
+  .link-#{$name} {
+    @include color-link ( $name, '!important' );
   }
 
 }

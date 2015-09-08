@@ -15,7 +15,7 @@
 
 .multiple-wrp {
 
-  @extend %widget;
+  @extend .widget;
   display: inline-flex; //INFO: We use it since a multiple shouldn't take all the available space in some cases, like when inside a table
   border-color: inherit; //INFO: We may use inherit in the children, so we have to inherit here //TODO: Sure?
 

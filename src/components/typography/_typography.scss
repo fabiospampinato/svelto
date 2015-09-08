@@ -11,25 +11,26 @@
 
 /* LINK */
 
-a {
-
+a, .link {
   position: relative;
   text-decoration: none;
   color: inherit;
+}
 
-  p > & { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+.link, p > a { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
-    &:after {
-      @extend %highlight-after;
-      border-bottom-width: $a-underline-height;
-      transition: transform $a-underline-transition-duration;
-      transform: scaleX(0);
-    }
+  display: inline-block;
+  cursor: pointer;
 
-    &:hover:after {
-      transform: scaleX(1);
-    }
+  &:after {
+    @extend %highlight-after;
+    border-bottom-width: $a-underline-height;
+    transition: transform $a-underline-transition-duration;
+    transform: scaleX(0);
+  }
 
+  &:hover:after {
+    transform: scaleX(1);
   }
 
 }
@@ -101,7 +102,7 @@ abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe e
 
 blockquote {
 
-  @extend %widget;
+  @extend .widget;
   @include last-child-gutter-fix ();
   padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
   border-radius: $blockquote-line-width;
@@ -120,7 +121,7 @@ blockquote {
 
   & > footer {
 
-    @extend %widget;
+    @extend .widget;
     @include last-child-gutter-fix ();
     font-size: $blockquote-footer-font-size;
     opacity: $blockquote-footer-opacity;

@@ -12,7 +12,7 @@
 /* DEFAULT */
 
 label {
-  @extend %widget;
+  @extend .widget;
   display: block;
 }
 
@@ -20,7 +20,7 @@ label {
 
 .label {
 
-  @extend %widget;
+  @extend .widget;
   @include color ( $label-color, $label-color-basic );
   font-weight: bold;
   display: inline-flex;

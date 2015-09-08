@@ -13,7 +13,7 @@
 
 .infobar-wrp {
 
-  @extend %widget;
+  @extend .widget;
   @include color ( $infobar-color, $infobar-color-basic );
   display: flex;
   flex-wrap: wrap;

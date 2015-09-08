@@ -4,73 +4,92 @@ extends ../layout.jade
 //- Colors
 
 append main
-  +divider Base
+  +divider Colors
 
   +multiple
-    +button.outlined.primary Primary
-    +button.outlined.secondary Secondary
-    +button.outlined.tertiary Tertiary
-    +button.outlined.quaternary Quaternary
-    +button.outlined.white White
-    +button.outlined.gray Gray
-    +button.outlined.black Black
-    +button.outlined.yellow Yellow
-    +button.outlined.olive Olive
-    +button.outlined.green Green
-    +button.outlined.blue Blue
-    +button.outlined.violet Violet
-    +button.outlined.orange Orange
-    +button.outlined.purple Purple
-    +button.outlined.red Red
-    +button.outlined.pink Pink
-    +button.outlined.teal Teal
-    +button.outlined.brown Brown
-    +button.outlined.transparent Transparent
-    +button.outlined.inherit Inherit
-    +button.outlined.base Base
+    +button.primary Primary
+    +button.secondary Secondary
+    +button.tertiary Tertiary
+    +button.quaternary Quaternary
+    +button.white White
+    +button.gray Gray
+    +button.black Black
+    +button.yellow Yellow
+    +button.olive Olive
+    +button.green Green
+    +button.blue Blue
+    +button.violet Violet
+    +button.orange Orange
+    +button.purple Purple
+    +button.red Red
+    +button.pink Pink
+    +button.teal Teal
+    +button.brown Brown
+    +button.transparent Transparent
+    +button.inherit Inherit
+    +button.base Base
 
-  +divider Gradient
-
-  +multiple
-    +button.outlined.primary.gradient Primary
-    +button.outlined.secondary.gradient Secondary
-    +button.outlined.tertiary.gradient Tertiary
-    +button.outlined.quaternary.gradient Quaternary
-    +button.outlined.white.gradient White
-    +button.outlined.gray.gradient Gray
-    +button.outlined.black.gradient Black
-    +button.outlined.yellow.gradient Yellow
-    +button.outlined.olive.gradient Olive
-    +button.outlined.green.gradient Green
-    +button.outlined.blue.gradient Blue
-    +button.outlined.violet.gradient Violet
-    +button.outlined.orange.gradient Orange
-    +button.outlined.purple.gradient Purple
-    +button.outlined.red.gradient Red
-    +button.outlined.pink.gradient Pink
-    +button.outlined.teal.gradient Teal
-    +button.outlined.brown.gradient Brown
-    +button.outlined.base.gradient Base
-
-  +divider Text
+  +divider Text colors
 
   +container-simple.outlined
-    p.text-primary [PRIMARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-secondary [SECONDARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-tertiary [TERTIARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-quaternary [QUATERNARY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-white [WHITE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-gray [GRAY] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-black [BLACK] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-yellow [YELLOW] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-olive [OLIVE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-green [GREEN] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-blue [BLUE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-violet [VIOLET] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-orange [ORANGE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-purple [PURPLE] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-red [RED] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-pink [PINK] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-teal [TEAL] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-brown [BROWN] #[+lorem-ipsum({ type: 'words', amount: 10 })]
-    p.text-transparent [TRANSPARENT] #[+lorem-ipsum({ type: 'words', amount: 10 })]
+    +multiple
+      .widget.text-primary Primary
+      .widget.text-secondary Secondary
+      .widget.text-tertiary Tertiary
+      .widget.text-quaternary Quaternary
+      .widget.text-white White
+      .widget.text-gray Gray
+      .widget.text-black Black
+      .widget.text-yellow Yellow
+      .widget.text-olive Olive
+      .widget.text-green Green
+      .widget.text-blue Blue
+      .widget.text-violet Violet
+      .widget.text-orange Orange
+      .widget.text-purple Purple
+      .widget.text-red Red
+      .widget.text-pink Pink
+      .widget.text-teal Teal
+      .widget.text-brown Brown
+      .widget.text-transparent Transparent
+      .widget.text-inherit Inherit
+      .widget.text-base Base
+
+  +divider Links colors
+  
+  +container-simple.outlined
+    +multiple
+      .widget.link.link-primary Primary
+      .widget.link.link-secondary Secondary
+      .widget.link.link-tertiary Tertiary
+      .widget.link.link-quaternary Quaternary
+      .widget.link.link-white White
+      .widget.link.link-gray Gray
+      .widget.link.link-black Black
+      .widget.link.link-yellow Yellow
+      .widget.link.link-olive Olive
+      .widget.link.link-green Green
+      .widget.link.link-blue Blue
+      .widget.link.link-violet Violet
+      .widget.link.link-orange Orange
+      .widget.link.link-purple Purple
+      .widget.link.link-red Red
+      .widget.link.link-pink Pink
+      .widget.link.link-teal Teal
+      .widget.link.link-brown Brown
+      .widget.link.link-transparent Transparent
+      .widget.link.link-inherit Inherit
+      .widget.link.link-base Base
+
+  +divider Actions
+
+  +multiple.actions
+    +button("toggle_class ( 'gradient' )").outlined Toggle gradient
+    +button("toggle_class ( 'highlight' )").outlined Toggle highlight
+    +button("toggle_class ( 'outlined' )").outlined Toggle outlined
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('main .button').not('.actions .button').toggleClass ( css_class );
+    }

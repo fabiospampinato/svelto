@@ -63,7 +63,7 @@
   /* SENDER */
 
   .chat-msg-sender-name {
-    @extend %widget;
+    @extend .widget;
   }
 
   /* INDICATOR */

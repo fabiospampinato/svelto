@@ -13,7 +13,7 @@
 
 .footer {
 
-  @extend %widget;
+  @extend .widget;
   @include last-child-gutter-fix ();
   padding: $gutter;
   background-color: $footer-bg-color;
