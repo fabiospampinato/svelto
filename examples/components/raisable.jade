@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Raisables
 
-  +multiple.centered.z-depths
+  +multiple.centered.raisables
     +button.z-depth-0.raisable 0
     +button.z-depth-1.raisable 1
     +button.z-depth-2.raisable 2
@@ -35,4 +35,4 @@ append main
 
 append body-end
   +script.
-    $('.z-depths .button').wrap ( '<div class="centerer" style="width: 150px; height: 150px;"></div>' );
+    $('.raisables .button').wrap ( '<div class="centerer" style="width: 150px; height: 150px;"></div>' );

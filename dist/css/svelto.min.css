@@ -8283,7 +8283,7 @@ code[class*='language-'] .namespace {
 /* RAISABLE */
 /* TRANSIITION */
 /* =========================================================================
- * Svelto - Raisable v0.1.0
+ * Svelto - Raisable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8293,160 +8293,138 @@ code[class*='language-'] .namespace {
  * ========================================================================= */
 /* MIXIN */
 /* RAISABLE */
-.raisable:active {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !important;
+.raisable {
   transition: box-shadow 0.35s;
-  opacity: 2;
 }
 
-.raisable.z-depth-0:active {
+.raisable:hover {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !important;
   transition: box-shadow 0.35s;
-  opacity: 2;
 }
 
-.raisable.z-depth-1:active {
+.raisable.z-depth-0:hover {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !important;
+  transition: box-shadow 0.35s;
+}
+
+.raisable.z-depth-1:hover {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 3;
 }
 
-.raisable.z-depth-2:active {
+.raisable.z-depth-2:hover {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 4;
 }
 
-.raisable.z-depth-3:active {
+.raisable.z-depth-3:hover {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 5;
 }
 
-.raisable.z-depth-4:active {
+.raisable.z-depth-4:hover {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 6;
 }
 
-.raisable.z-depth-5:active {
+.raisable.z-depth-5:hover {
   box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 2px 16px 2px rgba(0, 0, 0, 0.12), 0 4px 5px -3px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 7;
 }
 
-.raisable.z-depth-6:active {
+.raisable.z-depth-6:hover {
   box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 8;
 }
 
-.raisable.z-depth-7:active {
+.raisable.z-depth-7:hover {
   box-shadow: 0 9px 12px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 6px -3px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 9;
 }
 
-.raisable.z-depth-8:active {
+.raisable.z-depth-8:hover {
   box-shadow: 0 10px 13px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 6px 6px -3px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 10;
 }
 
-.raisable.z-depth-9:active {
+.raisable.z-depth-9:hover {
   box-shadow: 0 11px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 14px 3px rgba(0, 0, 0, 0.12), 0 6px 7px -4px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 11;
 }
 
-.raisable.z-depth-10:active {
+.raisable.z-depth-10:hover {
   box-shadow: 0 12px 16px 1px rgba(0, 0, 0, 0.14), 0 4px 14px 3px rgba(0, 0, 0, 0.12), 0 6px 8px -4px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 12;
 }
 
-.raisable.z-depth-11:active {
+.raisable.z-depth-11:hover {
   box-shadow: 0 13px 18px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 13;
 }
 
-.raisable.z-depth-12:active {
+.raisable.z-depth-12:hover {
   box-shadow: 0 14px 20px 1px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 14;
 }
 
-.raisable.z-depth-13:active {
+.raisable.z-depth-13:hover {
   box-shadow: 0 15px 22px 1px rgba(0, 0, 0, 0.14), 0 5px 26px 4px rgba(0, 0, 0, 0.12), 0 7px 9px -5px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 15;
 }
 
-.raisable.z-depth-14:active {
+.raisable.z-depth-14:hover {
   box-shadow: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 5px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 16;
 }
 
-.raisable.z-depth-15:active {
+.raisable.z-depth-15:hover {
   box-shadow: 0 17px 26px 3px rgba(0, 0, 0, 0.14), 0 5px 32px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 17;
 }
 
-.raisable.z-depth-16:active {
+.raisable.z-depth-16:hover {
   box-shadow: 0 18px 28px 3px rgba(0, 0, 0, 0.14), 0 6px 34px 6px rgba(0, 0, 0, 0.12), 0 8px 11px -5px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 18;
 }
 
-.raisable.z-depth-17:active {
+.raisable.z-depth-17:hover {
   box-shadow: 0 19px 30px 3px rgba(0, 0, 0, 0.14), 0 6px 36px 6px rgba(0, 0, 0, 0.12), 0 9px 11px -6px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 19;
 }
 
-.raisable.z-depth-18:active {
+.raisable.z-depth-18:hover {
   box-shadow: 0 20px 32px 3px rgba(0, 0, 0, 0.14), 0 6px 38px 7px rgba(0, 0, 0, 0.12), 0 9px 12px -6px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 20;
 }
 
-.raisable.z-depth-19:active {
+.raisable.z-depth-19:hover {
   box-shadow: 0 21px 34px 4px rgba(0, 0, 0, 0.14), 0 7px 40px 7px rgba(0, 0, 0, 0.12), 0 9px 12px -6px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 21;
 }
 
-.raisable.z-depth-20:active {
+.raisable.z-depth-20:hover {
   box-shadow: 0 22px 36px 4px rgba(0, 0, 0, 0.14), 0 7px 42px 8px rgba(0, 0, 0, 0.12), 0 10px 13px -6px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 22;
 }
 
-.raisable.z-depth-21:active {
+.raisable.z-depth-21:hover {
   box-shadow: 0 23px 38px 4px rgba(0, 0, 0, 0.14), 0 7px 44px 8px rgba(0, 0, 0, 0.12), 0 10px 13px -7px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 23;
 }
 
-.raisable.z-depth-22:active {
+.raisable.z-depth-22:hover {
   box-shadow: 0 24px 40px 4px rgba(0, 0, 0, 0.14), 0 8px 46px 9px rgba(0, 0, 0, 0.12), 0 10px 10px -8px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 24;
 }
 
-.raisable.z-depth-23:active {
+.raisable.z-depth-23:hover {
   box-shadow: 0 24px 40px 4px rgba(0, 0, 0, 0.14), 0 8px 46px 9px rgba(0, 0, 0, 0.12), 0 10px 10px -8px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 24;
 }
 
-.raisable.z-depth-24:active {
+.raisable.z-depth-24:hover {
   box-shadow: 0 24px 40px 4px rgba(0, 0, 0, 0.14), 0 8px 46px 9px rgba(0, 0, 0, 0.12), 0 10px 10px -8px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
-  opacity: 24;
 }
 
 /* =========================================================================
