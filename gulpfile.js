@@ -1,6 +1,6 @@
 
 /* =========================================================================
-* Svelto - gulpfile v0.1.0
+* Svelto - Gulpfile v0.1.1
 * =========================================================================
 * Copyright (c) 2015 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -124,26 +124,18 @@ gulp.task ( 'jade', ['examples-clean'], function () {
 /* JS */
 
 //TODO: Add support for sourcemaps
-//TODO: Readd babel support, but with support for partial building (right now it populates the dest file with the same functions multiple times)
+//TODO: Re-add babel support, but with support for partial building (right now it populates the dest file with the same functions multiple times)
 
 gulp.task ( 'js-temp', function () {
 
-  var dependencyIndex = 0,
-      mtimes = {};
+  var dependencyIndex = 0;
 
   return gulp.src ( 'src/components/**/*.js' )
-             .pipe ( foreach ( function ( stream, file ) {
-               mtimes[file.path] = _.cloneDeep ( file.stat.mtime );
-               return stream;
-             }))
              .pipe ( sort () )
              .pipe ( dependencies ({
                pattern: /\* @requires [\s-]*(.*\.js)/g
              }))
              .pipe ( foreach ( function ( stream, file ) {
-               file.stat = {
-                 mtime: mtimes[file.path]
-               };
                var basename = path.basename ( file.path );
                file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex, 3, 0 ) + '-' + basename );
                dependencyIndex++;

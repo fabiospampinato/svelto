@@ -103,57 +103,6 @@ mixin button-tag
 
 
 //- =========================================================================
-//- Svelto - Checkbox v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-//- Options
-  {
-    name: '', // Input name
-    title: '', // Checkbox title
-    value: '', // Input value
-    checked: '', // Input checked
-    colors: { // Colors to use for icons
-      on: '', // On color
-      off: '' // Off color
-    },
-    icons: { // Icons to use
-      on: '', // On icon
-      off: '' // Off icon
-    }
-  }
-
-mixin checkbox(options)
-  - options = options || {};
-  - options.value = options.value || "";
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.icons = options.icons || {};
-  - options.icons.on = options.icons.on || "check_box";
-  - options.icons.off = options.icons.off || "check_box_outline_blank";
-  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
-    if options.checked
-      if options.name
-        input(type="radio" name=name value=value checked)
-      else
-        input(type="radio" value=value checked)
-    else
-      if options.name
-        input(type="radio" name=name value=value)
-      else
-        input(type="radio" value=value)
-    if options.title
-      span= options.title
-    +icon(options.icons.on)(class=options.colors.on).icon-on
-    +icon(options.icons.off)(class=options.colors.off).icon-off
-
-
-//- =========================================================================
 //- Svelto - Chat v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -214,6 +163,57 @@ mixin chat-msg(options)
               if options.permissions.delete
                 +button-icon("delete")(title="Delete").small.outlined.compact
         +container-content= options.message.content
+
+
+//- =========================================================================
+//- Svelto - Checkbox v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+mixin checkbox(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
+      else
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    if options.title
+      span= options.title
+    +icon(options.icons.on)(class=options.colors.on).icon-on
+    +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
 //- =========================================================================
@@ -486,6 +486,18 @@ mixin expander(options)
 
 
 //- =========================================================================
+//- Svelto - Flags v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flag(flag)
+  .flag(class="flag-" + flag)&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Flippable v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -503,18 +515,6 @@ mixin flippable-front
 
 mixin flippable-back
   .flippable-back&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Flags v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flag(flag)
-  .flag(class="flag-" + flag)&attributes(attributes)
     block
 
 
@@ -1012,6 +1012,35 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(options)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !options.empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
+
+
+//- =========================================================================
 //- Svelto - Parallax v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1051,35 +1080,6 @@ mixin parallax-layer-base
 mixin parallax-layer-foreground
   +parallax-layer&attributes(attributes).parallax-layer-foreground
     block
-
-
-//- =========================================================================
-//- Svelto - Placeholder v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    width: '', // Placeholder width
-    height: '', // Placeholder height
-    empty: '' // Placeholder is empty or not
-  }
-
-mixin placeholder(options)
-  - options = options || {};
-  - options.width = options.width || 0;
-  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
-  - options.height = options.height || 0;
-  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
-  - options.empty = options.empty || false;
-  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !options.empty
-      if block
-        block
-      else
-        = options.width + " - " + options.height
 
 
 //- =========================================================================
