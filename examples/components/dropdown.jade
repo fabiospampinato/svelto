@@ -21,20 +21,20 @@ append main
 
 append body
     +dropdown("base")
-      +container-content
+      +card-block
         +multiple.vertical.stretched.nowrap.joined
           +button.sharp Action 1
           +button.sharp Action 2
           +button.sharp Action 3
           +button.sharp Action 312313
     +dropdown("attached").attached
-      +container-content
+      +card-block
         p Attached
     +dropdown("notip").no-tip
-      +container-content
+      +card-block
         p No tip
     +dropdown("dividers")
-      +container-content
+      +card-block
         +multiple.vertical.stretched.nowrap
           +button.sharp Action 1
           +divider Divider
@@ -47,18 +47,18 @@ append body
           +divider-text Section
           +button.sharp Action 5
     +dropdown("advanced")
-      +container-header("Header").inherit
-      +container-content Content
-      +container-footer Footer
+      +card-header("Header").inherit
+      +card-block Content
+      +card-footer Footer
     +dropdown("long_text")
-      +container-header("Lorem ipsum").inherit
-      +container-content
+      +card-header("Lorem ipsum").inherit
+      +card-block
         +lorem-ipsum
-      +container-footer Footer
+      +card-footer Footer
     +dropdown("long_text2")
-      +container-header("Lorem ipsum 2").inherit
-      +container-content
+      +card-header("Lorem ipsum 2").inherit
+      +card-block
         +lorem-ipsum
         +lorem-ipsum
         +lorem-ipsum
-      +container-footer Footer
+      +card-footer Footer

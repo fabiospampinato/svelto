@@ -1,0 +1,47 @@
+
+/* =========================================================================
+ * Svelto - Card (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+
+/* CARD */
+
+$card-color: 'white' !default;
+$card-color-basic: true !default;
+
+$contianer-border-radius: $border-radius-medium !default;
+
+/* HEADER */
+
+$card-header-color: 'primary' !default;
+$card-header-color-basic: false !default;
+
+$card-header-horizontal-padding: $gutter !default;
+$card-header-vertical-padding: $gutter !default;
+
+/* HEADER COMPACT */
+
+$card-header-compact-horizontal-padding: $gutter !default;
+$card-header-compact-vertical-padding: $gutter-half !default;
+
+/* CONTENT */
+
+$card-content-color: 'inherit' !default;
+$card-content-color-basic: true !default;
+
+/* FOOTER */
+
+$card-footer-color: $card-color !default;
+$card-footer-color-basic: true !default;
+
+$card-footer-horizontal-padding: $gutter !default;
+$card-footer-vertical-padding: $gutter !default;
+
+/* FOOTER COMPACT */
+
+$card-footer-compact-horizontal-padding: $gutter !default;
+$card-footer-compact-vertical-padding: $gutter-half !default;

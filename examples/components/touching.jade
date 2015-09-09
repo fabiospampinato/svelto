@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Squares - All matches
 
-  +container-simple.squares_all.outlined
+  +container.squares_all.outlined
     +multiple
       - var squares_nr = 32;
       - var nr = 1;
@@ -22,7 +22,7 @@ append main
 
   +divider Squares - Most significant match
 
-  +container-simple.squares_most.outlined
+  +container.squares_most.outlined
     +multiple
       - var squares_nr = 32;
       - var nr = 1;
@@ -38,7 +38,7 @@ append main
 
   +divider Squares - Punctual
 
-  +container-simple.squares_punctual.outlined
+  +container.squares_punctual.outlined
     +multiple
       - var squares_nr = 32;
       - var nr = 1;

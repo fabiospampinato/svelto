@@ -41,7 +41,7 @@ mixin chat-msg(options)
     .chat-msg-indicator
     .chat-msg-content
       +container.outlined
-        +container-header.inherit.outlined.compact
+        +card-header.inherit.outlined.compact
           if options.sender.name !== "Unknown"
             +multiple-left
               if options.sender.url
@@ -59,4 +59,4 @@ mixin chat-msg(options)
                 +button-icon("mode_edit")(title="Edit").small.outlined.compact
               if options.permissions.delete
                 +button-icon("delete")(title="Delete").small.outlined.compact
-        +container-content= options.message.content
+        +card-block= options.message.content

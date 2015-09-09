@@ -6,12 +6,12 @@ extends ../layout.jade
 append main
   +divider Link
 
-  +container-simple.outlined
+  +container.outlined
     p Inside this paragraph there is a #[+a link], not a #[+a.mark marked link], does it look nice?
 
   +divider Headers
 
-  +container-simple.outlined
+  +container.outlined
     h1 H1 - Heading title #[small Small subheader]
     h2 H2 - Heading title #[small Small subheader]
     h3 H3 - Heading title #[small Small subheader]
@@ -21,30 +21,30 @@ append main
 
   +divider Paragraph
 
-  +container-simple.outlined
+  +container.outlined
     p
       +lorem-ipsum
 
   +divider Formatting
 
-  +container-simple.outlined
+  +container.outlined
     p #[span Nothing] #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em empathize] #[i italics]
 
   +divider Abbr
 
-  +container-simple.outlined
+  +container.outlined
     +abbr("HyperText Markup Language") HTML
 
   +divider Blockquote
 
-  +container-simple.outlined
+  +container.outlined
     blockquote
       +paragraph-sample
     blockquote #[+paragraph-sample] #[footer The source is #[cite Someone]]
 
   +divider List - Unordered
 
-  +container-simple.outlined
+  +container.outlined
     ul
       li
         +lorem-ipsum({ type: 'words', amount: 5 })
@@ -62,7 +62,7 @@ append main
 
   +divider List - Unordered - Unstyled
 
-  +container-simple.outlined
+  +container.outlined
     ul.unstyled
       li
         +lorem-ipsum({ type: 'words', amount: 5 })
@@ -80,7 +80,7 @@ append main
 
   +divider List - Ordered
 
-  +container-simple.outlined
+  +container.outlined
     ol
       li
         +lorem-ipsum({ type: 'words', amount: 5 })
@@ -98,7 +98,7 @@ append main
 
   +divider Definition list
 
-  +container-simple.outlined
+  +container.outlined
     dl
       dt
         +lorem-ipsum({ type: 'words', amount: 5 })
@@ -112,19 +112,19 @@ append main
 
   +divider Code
 
-  +container-simple.outlined
+  +container.outlined
     code print ( 'This is an example code block' )
 
   +divider Section
 
-  +container-simple.outlined
+  +container.outlined
     section print ( 'This is an example section block' )
 
   +divider Pre
 
-  +container-simple.outlined
+  +container.outlined
     pre print ( 'This is an example section block' )
 
   +divider Kbd
 
-  +container-simple.outlined #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]
+  +container.outlined #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]

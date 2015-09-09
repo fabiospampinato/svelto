@@ -1,62 +1,53 @@
 
 extends ../layout.jade
 
-//- Container
+//- Card
 
 append main
-  +divider Simple
+  +divider Card
+  
 
-  +container-simple Simple
-
-  +divider Nested
-
-  +container-simple
-    p Outside
-    +container-simple.teal
-      p Inside
-      +container-simple.pink
-        p Insider
 
   +divider With header
 
-  +container-simple("Header") Content
+  +container("Header") Content
 
   +divider With advanced header
 
   +container
-    +container-header.secondary
+    +card-header.secondary
       +multiple-right
         p Right
       +multiple-left
         p Left
       +multiple-center
         p Center
-    +container-content Content
+    +card-block Content
 
   +divider With footer
 
   +container
-    +container-content Content
-    +container-footer.teal Footer
+    +card-block Content
+    +card-footer.teal Footer
 
   +divider With header & footer
 
   +container
-    +container-header("Header").green
-    +container-content Content
-    +container-footer Footer
+    +card-header("Header").green
+    +card-block Content
+    +card-footer Footer
 
   +divider With compact header & footer
 
   +container
-    +container-header("Header").olive.compact
-    +container-content Content
-    +container-footer.compact Footer
+    +card-header("Header").olive.compact
+    +card-block Content
+    +card-footer.compact Footer
 
   +divider Advanced
 
   +container(style="height: 250px;")
-    +container-header("Header")
+    +card-header("Header")
       +multiple-left
         +button-icon('thumb_down').xsmall.compact
         +button-icon("thumb_up").xsmall.compact
@@ -65,10 +56,10 @@ append main
         +button-icon('menu').xsmall.compact
         +button-icon('more_vert').xsmall.compact
         +button-icon('refresh').xsmall.compact
-    +container-content
+    +card-block
       +paragraph-sample
       +paragraph-sample
-    +container-footer.pink Footer
+    +card-footer.pink Footer
 
   +divider Actions
 

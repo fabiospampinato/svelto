@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Normal
 
-  +container-simple.outlined
+  +container.outlined
     +multiple
       +input({ label: "Base" })
       +input({ label: "Compact" }).compact
@@ -16,7 +16,7 @@ append main
 
   +divider Colors
 
-  +container-simple.outlined
+  +container.outlined
     +multiple
       +input({ label: "Primary" }).text-field-primary
       +input({ label: "Secondary" }).text-field-secondary
@@ -42,7 +42,7 @@ append main
 
   +divider Colors advanced
 
-  +container-simple.outlined
+  +container.outlined
     +multiple
       +input({ label: "White - Secondary" }).white.text-field-secondary
       +input({ label: "Primary - Secondary" }).primary.text-field-secondary
@@ -50,30 +50,30 @@ append main
 
   +divider Fluid
 
-  +container-simple.outlined
+  +container.outlined
     +input({ label: "Fluid" }).fluid
 
   +divider No floating
 
-  +container-simple.outlined
+  +container.outlined
     +input({ label: "No floating" }).fluid.no-floating
 
   +divider No intial bar
 
-  +container-simple.outlined
+  +container.outlined
     +input({ label: "No initial bar" }).fluid.no-initial-bar
 
   +divider No bar - No floating
 
-  +container-simple.outlined
+  +container.outlined
     +input({ label: "No bar" }).fluid.no-bar.no-floating
 
   +divider Inside a container
 
-  +container-simple.outlined
+  +container.outlined
     +input({ label: "Inside a container" })
 
-  +container-simple.yellow.outlined
+  +container.yellow.outlined
     +input({ label: "Inside a yellow container" })
 
   +divider Toolbar

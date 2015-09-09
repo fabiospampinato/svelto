@@ -17,5 +17,5 @@ mixin expander(options)
   - options.header_classes = options.header_classes || "";
   +container&attributes(attributes).expander
     if options.title
-      +container-header(options.title)(class=options.header_classes).expander-toggler
+      +card-header(options.title)(class=options.header_classes).expander-toggler
     block

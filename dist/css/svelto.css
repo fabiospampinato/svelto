@@ -2250,6 +2250,174 @@ button {
 
 /* BUTTON */
 /* =========================================================================
+ * Svelto - Card (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* CARD */
+/* HEADER */
+/* HEADER COMPACT */
+/* CONTENT */
+/* FOOTER */
+/* FOOTER COMPACT */
+/* =========================================================================
+ * Svelto - Card v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* CARD */
+.card {
+  border-color: #cccccc ;
+  color: #4c4c4c ;
+  background: #ffffff ;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  border-radius: 0.2665em;
+  /* OUTLINED */
+}
+
+.card p > a {
+  color: #2967ab ;
+}
+
+.card p > a:after {
+  border-color: #2b6cb3 ;
+}
+
+.card p > a:hover {
+  color: #2b6cb3 ;
+}
+
+.card > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.card > .card-header {
+  border-color: #153559 ;
+  color: #ffffff ;
+  background: #2967ab ;
+  font-weight: bold;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  padding: 10px 10px;
+}
+
+.card > .card-header.gradient {
+  background-image: linear-gradient(to bottom, #2b6cb3 0%, #255d9b 100%) ;
+  background-repeat: repeat-x ;
+}
+
+.card > .card-header.actionable.active {
+  background: #255d9b ;
+}
+
+.card > .card-header.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: #2b6cb3 ;
+}
+
+.card > .card-header.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: #255d9b ;
+}
+
+.card > .card-header.highlight:after {
+  border-color: #ff7043 ;
+}
+
+.card > .card-header p > a {
+  color: #ff7043 ;
+}
+
+.card > .card-header p > a:after {
+  border-color: #ff784d ;
+}
+
+.card > .card-header p > a:hover {
+  color: #ff784d ;
+}
+
+.card > .card-header > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.card > .card-header.compact {
+  padding: 5px 10px;
+}
+
+.card > .card-content {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
+  overflow: auto;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 10px;
+}
+
+.card > .card-content > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.card > .card-footer {
+  border-color: #cccccc ;
+  color: #4c4c4c ;
+  background: #ffffff ;
+  -webkit-flex-shrink: 0;
+      -ms-flex-negative: 0;
+          flex-shrink: 0;
+  padding: 10px 10px;
+}
+
+.card > .card-footer p > a {
+  color: #2967ab ;
+}
+
+.card > .card-footer p > a:after {
+  border-color: #2b6cb3 ;
+}
+
+.card > .card-footer p > a:hover {
+  color: #2b6cb3 ;
+}
+
+.card > .card-footer > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.card > .card-footer.compact {
+  padding: 5px 10px;
+}
+
+.card > *:first-child {
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
+}
+
+.card > *:last-child {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.card.outlined > .card-header.outlined {
+  margin: -1px -1px 0;
+}
+
+.card.outlined > .card-footer.outlined {
+  margin: 0 -1px -1px;
+}
+
+/* =========================================================================
  * Svelto - Chat (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2271,7 +2439,7 @@ button {
 /* WIDGET */
 /* DISABLED */
 /* =========================================================================
- * Svelto - Widget v0.3.0
+ * Svelto - Widget v0.3.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2279,12 +2447,16 @@ button {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .multiple-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.widget, .card, .chat-msg .chat-msg-sender-name, .container, .embedded, .footer, .infobar-wrp, label, .label, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
-.widget.disabled, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.multiple-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].multiple-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+.widget > *:last-child, .card > *:last-child, .chat-msg .chat-msg-sender-name > *:last-child, .container > *:last-child, .embedded > *:last-child, .footer > *:last-child, .infobar-wrp > *:last-child, label > *:last-child, .label > *:last-child, .parallax > *:last-child, .triangle > *:last-child, .square > *:last-child, .square-sample > *:last-child, .circle > *:last-child, table.table > *:last-child, blockquote > *:last-child, blockquote > footer > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.widget.disabled, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .disabled.embedded, .disabled.footer, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -2540,34 +2712,25 @@ button {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* CONTAINER */
-/* HEADER */
-/* HEADER COMPACT */
-/* CONTENT */
-/* FOOTER */
-/* FOOTER COMPACT */
 /* =========================================================================
- * Svelto - Container v0.1.0
+ * Svelto - Container v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* CONTAINER */
 .container {
   border-color: #cccccc ;
   color: #4c4c4c ;
   background: #ffffff ;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
   border-radius: 0.2665em;
-  /* OUTLINED */
+  padding: 10px;
 }
 
 .container p > a {
@@ -2580,125 +2743,6 @@ button {
 
 .container p > a:hover {
   color: #2b6cb3 ;
-}
-
-.container > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.container > .container-header {
-  border-color: #153559 ;
-  color: #ffffff ;
-  background: #2967ab ;
-  font-weight: bold;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  padding: 10px 10px;
-}
-
-.container > .container-header.gradient {
-  background-image: linear-gradient(to bottom, #2b6cb3 0%, #255d9b 100%) ;
-  background-repeat: repeat-x ;
-}
-
-.container > .container-header.actionable.active {
-  background: #255d9b ;
-}
-
-.container > .container-header.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #2b6cb3 ;
-}
-
-.container > .container-header.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #255d9b ;
-}
-
-.container > .container-header.highlight:after {
-  border-color: #ff7043 ;
-}
-
-.container > .container-header p > a {
-  color: #ff7043 ;
-}
-
-.container > .container-header p > a:after {
-  border-color: #ff784d ;
-}
-
-.container > .container-header p > a:hover {
-  color: #ff784d ;
-}
-
-.container > .container-header > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.container > .container-header.compact {
-  padding: 5px 10px;
-}
-
-.container > .container-content {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  overflow: auto;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  padding: 10px;
-}
-
-.container > .container-content > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.container > .container-footer {
-  border-color: #cccccc ;
-  color: #4c4c4c ;
-  background: #ffffff ;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  padding: 10px 10px;
-}
-
-.container > .container-footer p > a {
-  color: #2967ab ;
-}
-
-.container > .container-footer p > a:after {
-  border-color: #2b6cb3 ;
-}
-
-.container > .container-footer p > a:hover {
-  color: #2b6cb3 ;
-}
-
-.container > .container-footer > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.container > .container-footer.compact {
-  padding: 5px 10px;
-}
-
-.container > *:first-child {
-  border-top-right-radius: inherit;
-  border-top-left-radius: inherit;
-}
-
-.container > *:last-child {
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: inherit;
-}
-
-.container.outlined > .container-header.outlined {
-  margin: -1px -1px 0;
-}
-
-.container.outlined > .container-footer.outlined {
-  margin: 0 -1px -1px;
 }
 
 /* =========================================================================
@@ -6576,6 +6620,8 @@ label {
  * ========================================================================= */
 /* MULTIPLE */
 .multiple-wrp {
+  position: relative;
+  margin-bottom: 10px;
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;

@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider Slider
 
-  +container-simple.outlined
+  +container.outlined
     +slider({ name: "name1", min: 0, value: 23, max: 100 }).outl
     +slider({ name: "name2", min: -100, value: -20, max: 100 }).outl
     +slider({ name: "name3", min: 0, value: 60, max: 100, step: 5 }).outl

@@ -1,48 +1,12 @@
 
 //- =========================================================================
-//- Svelto - Container v0.1.0
+//- Svelto - Container v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-//- Options
-  {
-    title: '', // Title
-    header_classes: '' // Header classes
-  }
-  
-mixin container(title, header_classes)
-  - options = options || {};
-  - options.header_classes = options.header_classes || "";
+mixin container
   .container&attributes(attributes)
-    if options.title
-      +container-header(options.title)(class=options.header_classes)
     block
-
-mixin container-header(title)
-  .container-header&attributes(attributes)
-    +multiple.expanded
-      if title
-        +multiple-center
-          p= title
-      block
-
-mixin container-content
-  .container-content&attributes(attributes)
-    block
-
-mixin container-footer
-  .container-footer&attributes(attributes)
-    block
-
-//- Options
-  {
-    title: '', // Title
-    header_classes: '' // Header classes
-  }
-
-mixin container-simple(options)
-  +container(options)&attributes(attributes)
-    +container-content
-      block
+      

@@ -103,6 +103,30 @@ mixin button-tag
 
 
 //- =========================================================================
+//- Svelto - Card v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin card
+  .card&attributes(attributes)
+    block
+
+mixin card-header
+  .card-header&attributes(attributes)
+      block
+
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Chat v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -144,7 +168,7 @@ mixin chat-msg(options)
     .chat-msg-indicator
     .chat-msg-content
       +container.outlined
-        +container-header.inherit.outlined.compact
+        +card-header.inherit.outlined.compact
           if options.sender.name !== "Unknown"
             +multiple-left
               if options.sender.url
@@ -162,7 +186,7 @@ mixin chat-msg(options)
                 +button-icon("mode_edit")(title="Edit").small.outlined.compact
               if options.permissions.delete
                 +button-icon("delete")(title="Delete").small.outlined.compact
-        +container-content= options.message.content
+        +card-block= options.message.content
 
 
 //- =========================================================================
@@ -235,52 +259,16 @@ mixin colorpicker
 
 
 //- =========================================================================
-//- Svelto - Container v0.1.0
+//- Svelto - Container v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-//- Options
-  {
-    title: '', // Title
-    header_classes: '' // Header classes
-  }
-  
-mixin container(title, header_classes)
-  - options = options || {};
-  - options.header_classes = options.header_classes || "";
+mixin container
   .container&attributes(attributes)
-    if options.title
-      +container-header(options.title)(class=options.header_classes)
     block
-
-mixin container-header(title)
-  .container-header&attributes(attributes)
-    +multiple.expanded
-      if title
-        +multiple-center
-          p= title
-      block
-
-mixin container-content
-  .container-content&attributes(attributes)
-    block
-
-mixin container-footer
-  .container-footer&attributes(attributes)
-    block
-
-//- Options
-  {
-    title: '', // Title
-    header_classes: '' // Header classes
-  }
-
-mixin container-simple(options)
-  +container(options)&attributes(attributes)
-    +container-content
-      block
+      
 
 
 //- =========================================================================
@@ -481,19 +469,7 @@ mixin expander(options)
   - options.header_classes = options.header_classes || "";
   +container&attributes(attributes).expander
     if options.title
-      +container-header(options.title)(class=options.header_classes).expander-toggler
-    block
-
-
-//- =========================================================================
-//- Svelto - Flags v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flag(flag)
-  .flag(class="flag-" + flag)&attributes(attributes)
+      +card-header(options.title)(class=options.header_classes).expander-toggler
     block
 
 
@@ -515,6 +491,18 @@ mixin flippable-front
 
 mixin flippable-back
   .flippable-back&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Flags v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flag(flag)
+  .flag(class="flag-" + flag)&attributes(attributes)
     block
 
 
@@ -600,7 +588,7 @@ mixin image(url)
 
 mixin image-caption
   +container&attributes(attributes).image-caption
-    +container-content
+    +card-block
       block
 
 mixin image-sample
@@ -1012,35 +1000,6 @@ mixin pagination(options)
 
 
 //- =========================================================================
-//- Svelto - Placeholder v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    width: '', // Placeholder width
-    height: '', // Placeholder height
-    empty: '' // Placeholder is empty or not
-  }
-
-mixin placeholder(options)
-  - options = options || {};
-  - options.width = options.width || 0;
-  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
-  - options.height = options.height || 0;
-  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
-  - options.empty = options.empty || false;
-  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !options.empty
-      if block
-        block
-      else
-        = options.width + " - " + options.height
-
-
-//- =========================================================================
 //- Svelto - Parallax v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1080,6 +1039,35 @@ mixin parallax-layer-base
 mixin parallax-layer-foreground
   +parallax-layer&attributes(attributes).parallax-layer-foreground
     block
+
+
+//- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(options)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !options.empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
 
 
 //- =========================================================================

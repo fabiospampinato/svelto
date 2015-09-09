@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* CONTAINER */
@@ -13,35 +14,6 @@
 $container-color: 'white' !default;
 $container-color-basic: true !default;
 
-$contianer-border-radius: $border-radius-medium !default;
+$container-border-radius: $border-radius-medium !default;
 
-/* HEADER */
-
-$container-header-color: 'primary' !default;
-$container-header-color-basic: false !default;
-
-$container-header-horizontal-padding: $gutter !default;
-$container-header-vertical-padding: $gutter !default;
-
-/* HEADER COMPACT */
-
-$container-header-compact-horizontal-padding: $gutter !default;
-$container-header-compact-vertical-padding: $gutter-half !default;
-
-/* CONTENT */
-
-$container-content-color: 'inherit' !default;
-$container-content-color-basic: true !default;
-
-/* FOOTER */
-
-$container-footer-color: $container-color !default;
-$container-footer-color-basic: true !default;
-
-$container-footer-horizontal-padding: $gutter !default;
-$container-footer-vertical-padding: $gutter !default;
-
-/* FOOTER COMPACT */
-
-$container-footer-compact-horizontal-padding: $gutter !default;
-$container-footer-compact-vertical-padding: $gutter-half !default;
+$container-padding: $widget-gutter !default;

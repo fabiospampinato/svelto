@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Container v0.1.0
+ * Svelto - Card v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,52 +8,52 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-/* CONTAINER */
+/* CARD */
 
 //FIXME: It should scroll with overflow: auto;
-//FIXME: It should scroll if the height is fixed and the content (not .container-content!) takes more space
-//TODO: The header title isn't that good, it should be bigger, but only if there's just text, maybe create a `.container-header-title` with large size
+//FIXME: It should scroll if the height is fixed and the content (not .card-content!) takes more space
+//TODO: The header title isn't that good, it should be bigger, but only if there's just text, maybe create a `.card-header-title` with large size
 
-.container {
+.card {
 
   @extend .widget;
-  @include color ( $container-color, $container-color-basic );
+  @include color ( $card-color, $card-color-basic );
   @include last-child-gutter-fix ();
   display: flex;
   flex-direction: column;
   border-radius: $contianer-border-radius;
 
-  & > .container-header {
+  & > .card-header {
 
-    @include color ( $container-header-color, $container-header-color-basic );
+    @include color ( $card-header-color, $card-header-color-basic );
     @include last-child-gutter-fix ();
     font-weight: bold;
     flex-shrink: 0;
-    padding: $container-header-vertical-padding $container-header-horizontal-padding;
+    padding: $card-header-vertical-padding $card-header-horizontal-padding;
 
     &.compact {
-      padding: $container-header-compact-vertical-padding $container-header-compact-horizontal-padding;
+      padding: $card-header-compact-vertical-padding $card-header-compact-horizontal-padding;
     }
 
   }
 
-  & > .container-content {
-    @include color ( $container-content-color, $container-content-color-basic );
+  & > .card-content {
+    @include color ( $card-content-color, $card-content-color-basic );
     @include last-child-gutter-fix ();
     overflow: auto;
     flex-grow: 1;
     padding: $gutter;
   }
 
-  & > .container-footer {
+  & > .card-footer {
 
-    @include color ( $container-footer-color, $container-footer-color-basic );
+    @include color ( $card-footer-color, $card-footer-color-basic );
     @include last-child-gutter-fix ();
     flex-shrink: 0;
-    padding: $container-footer-vertical-padding $container-footer-horizontal-padding;
+    padding: $card-footer-vertical-padding $card-footer-horizontal-padding;
 
     &.compact {
-      padding: $container-footer-compact-vertical-padding $container-footer-compact-horizontal-padding;
+      padding: $card-footer-compact-vertical-padding $card-footer-compact-horizontal-padding;
     }
 
   }
@@ -70,11 +70,11 @@
 
   &.outlined {
 
-    & > .container-header.outlined {
+    & > .card-header.outlined {
       margin: ( - $outline-width ) ( - $outline-width ) 0;
     }
 
-    & > .container-footer.outlined {
+    & > .card-footer.outlined {
       margin: 0 ( - $outline-width ) ( - $outline-width );
     }
 

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Widget v0.3.0
+ * Svelto - Widget v0.3.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,6 +12,7 @@
 
 .widget {
 
+  @include last-child-gutter-fix ();
   position: relative;
   margin: 0 0 $widget-gutter;
 

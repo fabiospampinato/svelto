@@ -1,21 +1,23 @@
 
 //- =========================================================================
-//- Svelto - Image v0.1.0
+//- Svelto - Card v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin image(url)
-  +container&attributes(attributes).image-wrp
-    img(src=url)
+mixin card
+  .card&attributes(attributes)
     block
 
-mixin image-caption
-  +container&attributes(attributes).image-caption
-    +card-block
+mixin card-header
+  .card-header&attributes(attributes)
       block
 
-mixin image-sample
-  +image("/sample.png")&attributes(attributes)
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
     block
