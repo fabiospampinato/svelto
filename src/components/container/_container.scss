@@ -1,19 +1,19 @@
 
 /* =========================================================================
- * Svelto - Others (Mixins) v0.1.1
+ * Svelto - Container v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../typography/_settings.scss
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-//TODO: Move to their own proper file
+/* CONTAINER */
 
-@mixin last-child-gutter-fix () {
-
-  & > :last-child {
-    margin-bottom: 0 !important;
-  }
-
+.container {
+  @extend .widget;
+  @include color ( $container-color, $container-color-basic );
+  border-radius: $container-border-radius;
+  padding: $container-padding;
 }

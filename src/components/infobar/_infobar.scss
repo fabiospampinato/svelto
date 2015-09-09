@@ -20,8 +20,8 @@
   align-items: center;
   padding: $widget-gutter;
   transition: opacity $infobar-transition-close-duration;
-  border-width: $infobar-border-width;
-  border-style: solid;
+  // border-width: $infobar-border-width;
+  // border-style: solid;
   border-radius: $infobar-border-radius;
 
   /* INSET */

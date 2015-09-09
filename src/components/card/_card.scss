@@ -18,51 +18,72 @@
 
   @extend .widget;
   @include color ( $card-color, $card-color-basic );
-  @include last-child-gutter-fix ();
   display: flex;
   flex-direction: column;
-  border-radius: $contianer-border-radius;
+  border-radius: $card-border-radius;
 
-  & > .card-header {
+  /* HEADER */
 
+  &-header {
+
+    @extend .widget;
     @include color ( $card-header-color, $card-header-color-basic );
-    @include last-child-gutter-fix ();
-    font-weight: bold;
-    flex-shrink: 0;
+    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
     padding: $card-header-vertical-padding $card-header-horizontal-padding;
 
+    .card.compact &,
     &.compact {
       padding: $card-header-compact-vertical-padding $card-header-compact-horizontal-padding;
     }
 
   }
 
-  & > .card-content {
-    @include color ( $card-content-color, $card-content-color-basic );
-    @include last-child-gutter-fix ();
-    overflow: auto;
-    flex-grow: 1;
-    padding: $gutter;
+  /* BLOCK */
+
+  &-block {
+
+    @extend .widget;
+    @include color ( $card-block-color, $card-block-color-basic );
+    overflow: auto; //INFO: So that when there's an overflow it should scrolls
+    flex-grow: 1; //INFO: Takes the remaining space, if any
+    padding: $card-block-vertical-padding $card-block-horizontal-padding;
+
+    .card.compact &,
+    &.compact {
+      padding: $card-block-compact-vertical-padding $card-block-compact-horizontal-padding;
+    }
+
   }
 
-  & > .card-footer {
+  /* FOOTER */
 
+  &-footer {
+
+    @extend .widget;
     @include color ( $card-footer-color, $card-footer-color-basic );
-    @include last-child-gutter-fix ();
-    flex-shrink: 0;
+    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
     padding: $card-footer-vertical-padding $card-footer-horizontal-padding;
 
+    .card.compact &,
     &.compact {
       padding: $card-footer-compact-vertical-padding $card-footer-compact-horizontal-padding;
     }
 
   }
 
-  & > *:first-child {
+  /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
+
+  > * {
+    margin-bottom: 0 !important; //FIXME: The `!important` shouldn't be necessary
+  }
+
+  /* BORDER RADIUS INHERITANCE */
+
+  > :first-child {
     @include border-top-radius ( inherit );
   }
 
-  & > *:last-child {
+  > :last-child {
     @include border-bottom-radius ( inherit );
   }
 
@@ -70,12 +91,29 @@
 
   &.outlined {
 
-    & > .card-header.outlined {
-      margin: ( - $outline-width ) ( - $outline-width ) 0;
+    /* INSET OUTLINED */
+
+    > .outlined {
+
+      margin-left: - $outline-width;
+      margin-right: - $outline-width;
+
+      /* FIRST / LAST */
+
+      &:first-child {
+        margin-top: - $outline-width;
+      }
+
+      &:last-child {
+        margin-bottom: - $outline-width !important; //FIXME: The `!important` shouldn't be necessary
+      }
+
     }
 
-    & > .card-footer.outlined {
-      margin: 0 ( - $outline-width ) ( - $outline-width );
+    /* INSET IMAGE */ //FIXME: Ugly fix for better supporting inset outlined unwrapped images
+
+    > img.outlined {
+      width: calc(100% + #{$outline-width * 2}) !important;
     }
 
   }

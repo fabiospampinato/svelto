@@ -1,17 +1,5 @@
 
 //- =========================================================================
-//- Svelto - Accordion v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin accordion
-  .accordion&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Base v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -27,6 +15,18 @@ mixin js(url)
 
 mixin script
   script&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Accordion v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin accordion
+  .accordion&attributes(attributes)
     block
 
 
@@ -474,6 +474,18 @@ mixin expander(options)
 
 
 //- =========================================================================
+//- Svelto - Flags v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flag(flag)
+  .flag(class="flag-" + flag)&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Flippable v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -491,18 +503,6 @@ mixin flippable-front
 
 mixin flippable-back
   .flippable-back&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Flags v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flag(flag)
-  .flag(class="flag-" + flag)&attributes(attributes)
     block
 
 
@@ -575,21 +575,20 @@ mixin icon(icon)
 
 
 //- =========================================================================
-//- Svelto - Image v0.1.0
+//- Svelto - Image v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
 mixin image(url)
-  +container&attributes(attributes).image-wrp
+  .image-wrp&attributes(attributes)
     img(src=url)
     block
 
 mixin image-caption
-  +container&attributes(attributes).image-caption
-    +card-block
-      block
+  .image-caption&attributes(attributes)
+    block
 
 mixin image-sample
   +image("/sample.png")&attributes(attributes)

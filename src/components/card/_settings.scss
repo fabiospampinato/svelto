@@ -13,11 +13,11 @@
 $card-color: 'white' !default;
 $card-color-basic: true !default;
 
-$contianer-border-radius: $border-radius-medium !default;
+$card-border-radius: $border-radius-medium !default;
 
 /* HEADER */
 
-$card-header-color: 'primary' !default;
+$card-header-color: 'inherit' !default;
 $card-header-color-basic: false !default;
 
 $card-header-horizontal-padding: $gutter !default;
@@ -28,10 +28,18 @@ $card-header-vertical-padding: $gutter !default;
 $card-header-compact-horizontal-padding: $gutter !default;
 $card-header-compact-vertical-padding: $gutter-half !default;
 
-/* CONTENT */
+/* BLOCK */
 
-$card-content-color: 'inherit' !default;
-$card-content-color-basic: true !default;
+$card-block-color: 'inherit' !default;
+$card-block-color-basic: true !default;
+
+$card-block-horizontal-padding: $gutter !default;
+$card-block-vertical-padding: $gutter !default;
+
+/* BLOCK COMPACT */
+
+$card-block-compact-horizontal-padding: $gutter !default;
+$card-block-compact-vertical-padding: $gutter-half !default;
 
 /* FOOTER */
 

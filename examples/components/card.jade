@@ -5,57 +5,60 @@ extends ../layout.jade
 
 append main
   +divider Card
+
+  +card
+    +card-header.green Header
+    +card-block Block
+    +card-footer.olive Footer
+
+  +divider With image
   
-
-
-  +divider With header
-
-  +container("Header") Content
-
-  +divider With advanced header
-
-  +container
-    +card-header.secondary
-      +multiple-right
-        p Right
-      +multiple-left
-        p Left
-      +multiple-center
-        p Center
-    +card-block Content
-
-  +divider With footer
-
-  +container
-    +card-block Content
-    +card-footer.teal Footer
-
-  +divider With header & footer
-
-  +container
-    +card-header("Header").green
-    +card-block Content
-    +card-footer Footer
-
-  +divider With compact header & footer
-
-  +container
-    +card-header("Header").olive.compact
-    +card-block Content
-    +card-footer.compact Footer
+  +multiple.expanded
+    +card.xs-12.sm-6.md-3
+      +infobar.small
+        +infobar-left
+          +icon('settings').xxxlarge
+        +infobar-center
+          +infobar-title
+            +lorem-ipsum({ type: 'words', amount: 1 })
+          +infobar-subtitle
+            +lorem-ipsum({ type: 'words', amount: 2 })
+        +infobar-right
+          +button-icon('more_vert').outlined.compact
+      img(src="/sample-wide.jpg")
+      +card-block Block
+      +card-footer Footer
+    +card.xs-12.sm-6.md-3
+      +image('/sample-wide.jpg')
+        +image-caption.top.on-hover Caption
+      +card-block Block
+    +card.xs-12.sm-6.md-3
+      +image('/sample-wide.jpg')
+        +image-caption.top.transparent
+          +multiple.expanded
+            +multiple-right
+              +button-icon("more_vert").compact.xsmall.black
+      +card-footer Footer    
+    +card.xs-12.sm-6.md-3
+      +card-header Header
+      img(src="/sample-wide.jpg")
+      +card-block Block
 
   +divider Advanced
 
-  +container(style="height: 250px;")
-    +card-header("Header")
-      +multiple-left
-        +button-icon('thumb_down').xsmall.compact
-        +button-icon("thumb_up").xsmall.compact
-      +multiple-right
-        +button-icon('apps').xsmall.compact
-        +button-icon('menu').xsmall.compact
-        +button-icon('more_vert').xsmall.compact
-        +button-icon('refresh').xsmall.compact
+  +card(style="height: 250px;")
+    +card-header.teal
+      +multiple.expanded
+        +multiple-left
+          +button-icon('thumb_down').compact.xsmall
+          +button-icon("thumb_up").compact.xsmall
+        +multiple-center 
+          p Header
+        +multiple-right
+          +button-icon('apps').compact.xsmall
+          +button-icon('menu').compact.xsmall
+          +button-icon('more_vert').compact.xsmall
+          +button-icon('refresh').compact.xsmall
     +card-block
       +paragraph-sample
       +paragraph-sample
@@ -64,12 +67,24 @@ append main
   +divider Actions
 
   +multiple
-    +button("toggle_outline ( '.container' )").outlined Toggle container outlined
-    +button("toggle_outline ( '.container-header' )").outlined Toggle header outlined
-    +button("toggle_outline ( '.container-footer' )").outlined Toggle footer outlined
+    +button("remove_element ( '.card .image-wrp, .card > img' )").outlined Remove image
+    +button("remove_element ( '.card-header' )").outlined Remove header
+    +button("remove_element ( '.card-block' )").outlined Remove block
+    +button("remove_element ( '.card-footer' )").outlined Remove footer
+    +button("toggle_class ( '.card', 'outlined' )").outlined Toggle card outline
+    +button("toggle_class ( '.card .image-wrp, .card > img', 'outlined' )").outlined Toggle image outline
+    +button("toggle_class ( '.card-header', 'outlined' )").outlined Toggle header outline
+    +button("toggle_class ( '.card-footer', 'outlined' )").outlined Toggle footer outline
+    +button("toggle_class ( '.card', 'compact' )").outlined Toggle card compact
+    +button("toggle_class ( '.card-header', 'compact' )").outlined Toggle header compact
+    +button("toggle_class ( '.card-block', 'compact' )").outlined Toggle block compact
+    +button("toggle_class ( '.card-footer', 'compact' )").outlined Toggle footer compact
 
 append body-end
   +script.
-    function toggle_outline ( selector ) {
-      $(selector).toggleClass ( 'outlined' );
+    function toggle_class ( selector, css_class ) {
+      $(selector).toggleClass ( css_class );
+    }
+    function remove_element ( selector ) {
+      $(selector).remove ();
     }
