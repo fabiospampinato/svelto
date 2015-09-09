@@ -13,8 +13,8 @@
 $label-color: 'white' !default;
 $label-color-basic: false !default;
 
-$label-horizontal-padding: 0.9em !default;
-$label-vertical-padding: $label-horizontal-padding / 100 * 55 !default;
+$label-vertical-padding: 0.495em !default;
+$label-horizontal-padding: $label-vertical-padding * 2 !default;
 
 $label-border-radius: $border-radius-medium !default;
 
@@ -30,8 +30,8 @@ $label-compact-center-icon-extra-spacing: 0.5em !default;
 
 /* COMPACT */
 
-$label-compact-horizontal-padding: $label-vertical-padding !default;
 $label-compact-vertical-padding: $label-vertical-padding !default;
+$label-compact-horizontal-padding: $label-vertical-padding !default;
 
 /* BADGE */
 
@@ -57,15 +57,15 @@ $label-ribbon-size: 8px !default;
 
 /* CORNER */
 
-$label-corner-horizontal-padding: $label-compact-horizontal-padding * 2 !default;
 $label-corner-vertical-padding: $label-compact-vertical-padding * 2 !default;
+$label-corner-horizontal-padding: $label-compact-horizontal-padding * 2 !default;
 
 /* FLOATING */
 
 $label-floating-z-depth: 4 !default;
 
-$label-floating-horizontal-padding: $label-vertical-padding * 1.6 !default;
 $label-floating-vertical-padding: $label-vertical-padding * 1.6 !default;
+$label-floating-horizontal-padding: $label-vertical-padding * 1.6 !default;
 
 $label-floating-right: 24px !default;
 $label-floating-bottom: 24px !default;

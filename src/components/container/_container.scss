@@ -12,8 +12,15 @@
 /* CONTAINER */
 
 .container {
+
   @extend .widget;
   @include color ( $container-color, $container-color-basic );
   border-radius: $container-border-radius;
-  padding: $container-padding;
+  padding: $container-vertical-padding $container-horizontal-padding;
+  overflow: auto;
+
+  &.compact {
+    padding: $container-compact-vertical-padding $container-compact-horizontal-padding;
+  }
+
 }

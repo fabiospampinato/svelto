@@ -1,18 +1,15 @@
 
 /* =========================================================================
- * Svelto - Card v0.1.0
+ * Svelto - Card v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 
 /* CARD */
-
-//FIXME: It should scroll with overflow: auto;
-//FIXME: It should scroll if the height is fixed and the content (not .card-content!) takes more space
-//TODO: The header title isn't that good, it should be bigger, but only if there's just text, maybe create a `.card-header-title` with large size
 
 .card {
 
@@ -22,53 +19,32 @@
   flex-direction: column;
   border-radius: $card-border-radius;
 
-  /* HEADER */
+  /* SECTIONS */
 
-  &-header {
+  &-header,
+  &-block,
+  &-footer {
 
-    @extend .widget;
-    @include color ( $card-header-color, $card-header-color-basic );
-    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
-    padding: $card-header-vertical-padding $card-header-horizontal-padding;
+    @extend .container;
+    border-radius: 0;
 
-    .card.compact &,
-    &.compact {
-      padding: $card-header-compact-vertical-padding $card-header-compact-horizontal-padding;
+    .card.compact & {
+      @extend .container.compact;
     }
 
+  }
+
+  /* HEADER / FOOTER */
+
+  &-header,
+  &-footer {
+    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
   }
 
   /* BLOCK */
 
   &-block {
-
-    @extend .widget;
-    @include color ( $card-block-color, $card-block-color-basic );
-    overflow: auto; //INFO: So that when there's an overflow it should scrolls
     flex-grow: 1; //INFO: Takes the remaining space, if any
-    padding: $card-block-vertical-padding $card-block-horizontal-padding;
-
-    .card.compact &,
-    &.compact {
-      padding: $card-block-compact-vertical-padding $card-block-compact-horizontal-padding;
-    }
-
-  }
-
-  /* FOOTER */
-
-  &-footer {
-
-    @extend .widget;
-    @include color ( $card-footer-color, $card-footer-color-basic );
-    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
-    padding: $card-footer-vertical-padding $card-footer-horizontal-padding;
-
-    .card.compact &,
-    &.compact {
-      padding: $card-footer-compact-vertical-padding $card-footer-compact-horizontal-padding;
-    }
-
   }
 
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */

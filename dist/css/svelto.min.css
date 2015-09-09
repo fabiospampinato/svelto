@@ -2250,27 +2250,122 @@ button {
 
 /* BUTTON */
 /* =========================================================================
- * Svelto - Card (Settings) v0.1.0
+ * Svelto - Widget (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/_core.scss
+ * @requires ../base/_base.scss
  * ========================================================================= */
-/* CARD */
-/* HEADER */
-/* HEADER COMPACT */
-/* BLOCK */
-/* BLOCK COMPACT */
-/* FOOTER */
-/* FOOTER COMPACT */
+/* WIDGET */
+/* DISABLED */
 /* =========================================================================
- * Svelto - Card v0.1.0
+ * Svelto - Widget v0.3.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * ========================================================================= */
+/* WIDGET */
+.widget, .container, .card-header,
+.card-block,
+.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, .image-wrp, .infobar-wrp, label, .label, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+  position: relative;
+  margin: 0 0 10px;
+}
+
+.widget > :last-child, .container > :last-child, .card-header > :last-child,
+.card-block > :last-child,
+.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, label > :last-child, .label > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.widget.disabled, .disabled.container, .disabled.card-header,
+.disabled.card-block,
+.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, .disabled.image-wrp, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], [class*="-disabled"].container, [class*="-disabled"].card-header,
+[class*="-disabled"].card-block,
+[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+  cursor: default !important;
+  opacity: 0.5 !important;
+}
+
+/* =========================================================================
+ * Svelto - Container (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+/* CONTAINER */
+/* CONTAINER COMPACT */
+/* =========================================================================
+ * Svelto - Card (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
+ * ========================================================================= */
+/* CARD */
+/* =========================================================================
+ * Svelto - Container v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+/* CONTAINER */
+.container, .card-header,
+.card-block,
+.card-footer, .image-wrp .image-caption {
+  border-color: #cccccc ;
+  color: #4c4c4c ;
+  background: #ffffff ;
+  border-radius: 0.2665em;
+  padding: 10px 10px;
+  overflow: auto;
+}
+
+.container p > a, .card-header p > a,
+.card-block p > a,
+.card-footer p > a, .image-wrp .image-caption p > a {
+  color: #2967ab ;
+}
+
+.container p > a:after, .card-header p > a:after,
+.card-block p > a:after,
+.card-footer p > a:after, .image-wrp .image-caption p > a:after {
+  border-color: #2b6cb3 ;
+}
+
+.container p > a:hover, .card-header p > a:hover,
+.card-block p > a:hover,
+.card-footer p > a:hover, .image-wrp .image-caption p > a:hover {
+  color: #2b6cb3 ;
+}
+
+.container.compact, .compact.card-header,
+.compact.card-block,
+.compact.card-footer, .card.compact .card-header,
+.card.compact .card-block,
+.card.compact .card-footer, .image-wrp .compact.image-caption {
+  padding: 5px 10px;
+}
+
+/* =========================================================================
+ * Svelto - Card v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 /* CARD */
 .card {
@@ -2284,9 +2379,9 @@ button {
       -ms-flex-direction: column;
           flex-direction: column;
   border-radius: 0.2665em;
-  /* HEADER */
+  /* SECTIONS */
+  /* HEADER / FOOTER */
   /* BLOCK */
-  /* FOOTER */
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
   /* BORDER RADIUS INHERITANCE */
   /* OUTLINED */
@@ -2304,78 +2399,23 @@ button {
   color: #2b6cb3 ;
 }
 
-.card-header {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
+.card-header,
+.card-block,
+.card-footer {
+  border-radius: 0;
+}
+
+.card-header,
+.card-footer {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
-  padding: 10px 10px;
-}
-
-.card-header.actionable.active {
-  background: inherit ;
-}
-
-.card-header.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit ;
-}
-
-.card-header.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit ;
-}
-
-.card-header.highlight:after {
-  border-color: inherit ;
-}
-
-.card.compact .card-header,
-.card-header.compact {
-  padding: 5px 10px;
 }
 
 .card-block {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  overflow: auto;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  padding: 10px 10px;
-}
-
-.card.compact .card-block,
-.card-block.compact {
-  padding: 5px 10px;
-}
-
-.card-footer {
-  border-color: #cccccc ;
-  color: #4c4c4c ;
-  background: #ffffff ;
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-  padding: 10px 10px;
-}
-
-.card-footer p > a {
-  color: #2967ab ;
-}
-
-.card-footer p > a:after {
-  border-color: #2b6cb3 ;
-}
-
-.card-footer p > a:hover {
-  color: #2b6cb3 ;
-}
-
-.card.compact .card-footer,
-.card-footer.compact {
-  padding: 5px 10px;
 }
 
 .card > * {
@@ -2426,39 +2466,6 @@ button {
 /* CHAT */
 /* LEVELS */
 /* IMAGE */
-/* =========================================================================
- * Svelto - Widget (Settings) v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../base/_base.scss
- * ========================================================================= */
-/* WIDGET */
-/* DISABLED */
-/* =========================================================================
- * Svelto - Widget v0.3.1
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* WIDGET */
-.widget, .card, .card-header, .card-block, .card-footer, .chat-msg .chat-msg-sender-name, .container, .image-wrp .image-caption, .embedded, .footer, .image-wrp, .infobar-wrp, label, .label, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
-  position: relative;
-  margin: 0 0 10px;
-}
-
-.widget > :last-child, .card > :last-child, .card-header > :last-child, .card-block > :last-child, .card-footer > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .container > :last-child, .image-wrp .image-caption > :last-child, .embedded > :last-child, .footer > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, label > :last-child, .label > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
-  margin-bottom: 0 !important;
-}
-
-.widget.disabled, .disabled.card, .disabled.card-header, .disabled.card-block, .disabled.card-footer, .chat-msg .disabled.chat-msg-sender-name, .disabled.container, .image-wrp .disabled.image-caption, .disabled.embedded, .disabled.footer, .disabled.image-wrp, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], [class*="-disabled"].card, [class*="-disabled"].card-header, [class*="-disabled"].card-block, [class*="-disabled"].card-footer, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].container, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
-  cursor: default !important;
-  opacity: 0.5 !important;
-}
-
 /* =========================================================================
  * Svelto - Chat v0.1.0
  * =========================================================================
@@ -2556,7 +2563,7 @@ button {
           order: 3;
 }
 
-.chat-msg > .chat-msg-content > .container, .image-wrp .chat-msg > .chat-msg-content > .image-caption {
+.chat-msg > .chat-msg-content > .container, .chat-msg > .chat-msg-content > .card-header, .chat-msg > .chat-msg-content > .card-block, .chat-msg > .chat-msg-content > .card-footer, .image-wrp .chat-msg > .chat-msg-content > .image-caption {
   margin-bottom: 0;
 }
 
@@ -2701,46 +2708,6 @@ button {
   margin-top: -4.5px;
   cursor: ns-resize;
   border-radius: 0.13325em;
-}
-
-/* =========================================================================
- * Svelto - Container (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * @requires ../widget/_widget.scss
- * ========================================================================= */
-/* CONTAINER */
-/* =========================================================================
- * Svelto - Container v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * @requires ../widget/_widget.scss
- * ========================================================================= */
-/* CONTAINER */
-.container, .image-wrp .image-caption {
-  border-color: #cccccc ;
-  color: #4c4c4c ;
-  background: #ffffff ;
-  border-radius: 0.2665em;
-  padding: 10px;
-}
-
-.container p > a, .image-wrp .image-caption p > a {
-  color: #2967ab ;
-}
-
-.container p > a:after, .image-wrp .image-caption p > a:after {
-  border-color: #2b6cb3 ;
-}
-
-.container p > a:hover, .image-wrp .image-caption p > a:hover {
-  color: #2b6cb3 ;
 }
 
 /* =========================================================================
@@ -3053,7 +3020,7 @@ hr {
   margin-bottom: -1px;
 }
 
-.dropdown.attached.positionate-top > .container, .image-wrp .dropdown.attached.positionate-top > .image-caption {
+.dropdown.attached.positionate-top > .container, .dropdown.attached.positionate-top > .card-header, .dropdown.attached.positionate-top > .card-block, .dropdown.attached.positionate-top > .card-footer, .image-wrp .dropdown.attached.positionate-top > .image-caption {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -3062,7 +3029,7 @@ hr {
   margin-top: -1px;
 }
 
-.dropdown.attached.positionate-bottom > .container, .image-wrp .dropdown.attached.positionate-bottom > .image-caption {
+.dropdown.attached.positionate-bottom > .container, .dropdown.attached.positionate-bottom > .card-header, .dropdown.attached.positionate-bottom > .card-block, .dropdown.attached.positionate-bottom > .card-footer, .image-wrp .dropdown.attached.positionate-bottom > .image-caption {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -3140,7 +3107,7 @@ hr {
   display: block;
 }
 
-.dropdown > .container, .image-wrp .dropdown > .image-caption {
+.dropdown > .container, .dropdown > .card-header, .dropdown > .card-block, .dropdown > .card-footer, .image-wrp .dropdown > .image-caption {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   max-width: calc(73vw - 30px);
   max-height: calc(45vh - 30px);
@@ -4236,7 +4203,7 @@ hr {
           backface-visibility: hidden;
 }
 
-.flippable-wrp > .flippable > .flippable-front > .container, .image-wrp .flippable-wrp > .flippable > .flippable-front > .image-caption, .flippable-wrp > .flippable > .flippable-back > .container, .image-wrp .flippable-wrp > .flippable > .flippable-back > .image-caption {
+.flippable-wrp > .flippable > .flippable-front > .container, .flippable-wrp > .flippable > .flippable-front > .card-header, .flippable-wrp > .flippable > .flippable-front > .card-block, .flippable-wrp > .flippable > .flippable-front > .card-footer, .image-wrp .flippable-wrp > .flippable > .flippable-front > .image-caption, .flippable-wrp > .flippable > .flippable-back > .container, .flippable-wrp > .flippable > .flippable-back > .card-header, .flippable-wrp > .flippable > .flippable-back > .card-block, .flippable-wrp > .flippable > .flippable-back > .card-footer, .image-wrp .flippable-wrp > .flippable > .flippable-back > .image-caption {
   width: 100%;
   height: 100%;
 }
@@ -5648,7 +5615,7 @@ img {
   line-height: 1.4285714286em;
   margin-bottom: 0;
   left: 0;
-  padding-left: 0.9em;
+  padding-left: 0.99em;
   transition-duration: 0.15s;
   transition-property: color, opacity, top, font-size, margin, padding;
   pointer-events: none;
@@ -5842,7 +5809,7 @@ img {
 
 .input-wrp:not(.no-floating):not(.outlined) > .text-field, .textarea-wrp:not(.no-floating):not(.outlined) > .text-field {
   height: 2.99em;
-  padding: 1.0664285714em 0.9em 0.495em;
+  padding: 1.0664285714em 0.99em 0.495em;
 }
 
 .input-wrp:not(.no-floating):not(.outlined).compact > .text-field, .textarea-wrp:not(.no-floating):not(.outlined).compact > .text-field {
@@ -5852,7 +5819,7 @@ img {
 
 .input-wrp:not(.no-floating).outlined > .text-field, .textarea-wrp:not(.no-floating).outlined > .text-field {
   height: calc(2.99em - 2px);
-  padding: calc(1.0664285714em - 2px) 0.9em 0.495em;
+  padding: calc(1.0664285714em - 2px) 0.99em 0.495em;
 }
 
 .input-wrp:not(.no-floating).outlined.compact > .text-field, .textarea-wrp:not(.no-floating).outlined.compact > .text-field {
@@ -5884,7 +5851,7 @@ img {
 
 .input-wrp.no-floating:not(.outlined) > .text-field, .no-floating.textarea-wrp:not(.outlined) > .text-field {
   height: 2.4185714286em;
-  padding: 0.495em 0.9em;
+  padding: 0.495em 0.99em;
 }
 
 .input-wrp.no-floating:not(.outlined).compact > .text-field, .no-floating.textarea-wrp:not(.outlined).compact > .text-field {
@@ -5894,7 +5861,7 @@ img {
 
 .input-wrp.no-floating.outlined > .text-field, .no-floating.outlined.textarea-wrp > .text-field {
   height: calc(2.4185714286em - 2px);
-  padding: calc(0.495em - 2px) 0.9em 0.495em;
+  padding: calc(0.495em - 2px) 0.99em 0.495em;
 }
 
 .input-wrp.no-floating.outlined.compact > .text-field, .no-floating.outlined.compact.textarea-wrp > .text-field {
@@ -6015,9 +5982,9 @@ label {
       -ms-flex-pack: center;
           justify-content: center;
   border-radius: 0.2665em;
-  padding: 0.495em 0.9em;
+  padding: 0.495em 0.99em;
   min-height: 2.4185714286em;
-  min-width: 3.2285714286em;
+  min-width: 3.4085714286em;
   /* COMPACT */
   /* SPAN */
   /* LEFT / RIGHT */
@@ -6106,7 +6073,7 @@ label {
   -webkit-order: 0;
       -ms-flex-order: 0;
           order: 0;
-  margin: -0.495em 0.9em -0.495em -0.9em;
+  margin: -0.495em 0.99em -0.495em -0.99em;
 }
 
 .label > .label-right {
@@ -6115,7 +6082,7 @@ label {
   -webkit-order: 100;
       -ms-flex-order: 100;
           order: 100;
-  margin: -0.495em -0.9em -0.495em 0.9em;
+  margin: -0.495em -0.99em -0.495em 0.99em;
 }
 
 .label.compact > .label-left {
@@ -6204,7 +6171,7 @@ label {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
   left: -16px;
-  padding-left: calc(0.9em + 10px);
+  padding-left: calc(0.99em + 10px);
 }
 
 .label.ribbon.ribbon-left:before {
@@ -6216,7 +6183,7 @@ label {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
   right: -16px;
-  padding-right: calc(0.9em + 10px);
+  padding-right: calc(0.99em + 10px);
 }
 
 .label.ribbon.ribbon-right:after {
@@ -6556,7 +6523,7 @@ label {
   /* ANIMATIONS */
 }
 
-.modal.fullscreen > .container, .image-wrp .modal.fullscreen > .image-caption {
+.modal.fullscreen > .container, .modal.fullscreen > .card-header, .modal.fullscreen > .card-block, .modal.fullscreen > .card-footer, .image-wrp .modal.fullscreen > .image-caption {
   width: 100vw;
   max-width: 100vw;
   height: 100vh;
@@ -6575,7 +6542,7 @@ label {
   transition: background-color 0.35s;
 }
 
-.modal > .container, .image-wrp .modal > .image-caption {
+.modal > .container, .modal > .card-header, .modal > .card-block, .modal > .card-footer, .image-wrp .modal > .image-caption {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   position: absolute;
   top: 50%;
@@ -6588,7 +6555,7 @@ label {
   transition-duration: 0.35s;
 }
 
-.modal > .container > .content, .image-wrp .modal > .image-caption > .content {
+.modal > .container > .content, .modal > .card-header > .content, .modal > .card-block > .content, .modal > .card-footer > .content, .image-wrp .modal > .image-caption > .content {
   overflow: auto;
 }
 
@@ -6596,7 +6563,7 @@ label {
   pointer-events: none;
 }
 
-.modal:not(.active) > .container, .image-wrp .modal:not(.active) > .image-caption {
+.modal:not(.active) > .container, .modal:not(.active) > .card-header, .modal:not(.active) > .card-block, .modal:not(.active) > .card-footer, .image-wrp .modal:not(.active) > .image-caption {
   -webkit-transform: translate(-50%, -50%) scale(0.9);
           transform: translate(-50%, -50%) scale(0.9);
   opacity: 0;
@@ -6606,7 +6573,7 @@ label {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal.active > .container, .image-wrp .modal.active > .image-caption {
+.modal.active > .container, .modal.active > .card-header, .modal.active > .card-block, .modal.active > .card-footer, .image-wrp .modal.active > .image-caption {
   -webkit-transform: translate(-50%, -50%) scale(1);
           transform: translate(-50%, -50%) scale(1);
 }
@@ -8732,15 +8699,15 @@ a.ripple > .ripple-circle {
   padding: 0;
 }
 
-.select-dropdown > .container, .image-wrp .select-dropdown > .image-caption {
+.select-dropdown > .container, .select-dropdown > .card-header, .select-dropdown > .card-block, .select-dropdown > .card-footer, .image-wrp .select-dropdown > .image-caption {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
 }
 
-.select-dropdown > .container .label-wrp + .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .label-wrp + .divider-wrp.block {
+.select-dropdown > .container .label-wrp + .divider-wrp.block, .select-dropdown > .card-header .label-wrp + .divider-wrp.block, .select-dropdown > .card-block .label-wrp + .divider-wrp.block, .select-dropdown > .card-footer .label-wrp + .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .label-wrp + .divider-wrp.block {
   margin-top: 5px;
 }
 
-.select-dropdown > .container .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .divider-wrp.block {
+.select-dropdown > .container .divider-wrp.block, .select-dropdown > .card-header .divider-wrp.block, .select-dropdown > .card-block .divider-wrp.block, .select-dropdown > .card-footer .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .divider-wrp.block {
   margin-bottom: 5px !important;
 }
 
@@ -10118,12 +10085,12 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
   color: #2b6cb3 ;
 }
 
-.tabs > .tabs-containers > .container, .image-wrp .tabs > .tabs-containers > .image-caption {
+.tabs > .tabs-containers > .container, .tabs > .tabs-containers > .card-header, .tabs > .tabs-containers > .card-block, .tabs > .tabs-containers > .card-footer, .image-wrp .tabs > .tabs-containers > .image-caption {
   display: none;
   margin-bottom: 0;
 }
 
-.tabs > .tabs-containers > .container.active, .image-wrp .tabs > .tabs-containers > .active.image-caption {
+.tabs > .tabs-containers > .container.active, .tabs > .tabs-containers > .active.card-header, .tabs > .tabs-containers > .active.card-block, .tabs > .tabs-containers > .active.card-footer, .image-wrp .tabs > .tabs-containers > .active.image-caption {
   display: block;
 }
 
@@ -10149,7 +10116,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
   height: 0.2em;
 }
 
-.tabs:not(.vertical) > .tabs-containers > .container, .image-wrp .tabs:not(.vertical) > .tabs-containers > .image-caption {
+.tabs:not(.vertical) > .tabs-containers > .container, .tabs:not(.vertical) > .tabs-containers > .card-header, .tabs:not(.vertical) > .tabs-containers > .card-block, .tabs:not(.vertical) > .tabs-containers > .card-footer, .image-wrp .tabs:not(.vertical) > .tabs-containers > .image-caption {
   border-top-width: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -10188,7 +10155,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
   width: 0.2em;
 }
 
-.tabs.vertical > .tabs-containers > .container, .image-wrp .tabs.vertical > .tabs-containers > .image-caption {
+.tabs.vertical > .tabs-containers > .container, .tabs.vertical > .tabs-containers > .card-header, .tabs.vertical > .tabs-containers > .card-block, .tabs.vertical > .tabs-containers > .card-footer, .image-wrp .tabs.vertical > .tabs-containers > .image-caption {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
@@ -10288,7 +10255,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 
 .textarea-wrp:not(.no-floating):not(.outlined) > .text-field {
   height: 5.8471428572em;
-  padding: 1.0664285714em 0.9em 0.495em;
+  padding: 1.0664285714em 0.99em 0.495em;
 }
 
 .textarea-wrp:not(.no-floating):not(.outlined).compact > .text-field {
@@ -10298,7 +10265,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 
 .textarea-wrp:not(.no-floating).outlined > .text-field {
   height: calc(5.8471428572em - 2px);
-  padding: calc(1.0664285714em - 2px) 0.9em 0.495em;
+  padding: calc(1.0664285714em - 2px) 0.99em 0.495em;
 }
 
 .textarea-wrp:not(.no-floating).outlined.compact > .text-field {
@@ -10308,7 +10275,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 
 .textarea-wrp.no-floating:not(.outlined) > .text-field {
   height: 5.2757142858em;
-  padding: 0.495em 0.9em;
+  padding: 0.495em 0.99em;
 }
 
 .textarea-wrp.no-floating:not(.outlined).compact > .text-field {
@@ -10318,7 +10285,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 
 .textarea-wrp.no-floating.outlined > .text-field {
   height: calc(5.2757142858em - 2px);
-  padding: calc(0.495em - 2px) 0.9em 0.495em;
+  padding: calc(0.495em - 2px) 0.99em 0.495em;
 }
 
 .textarea-wrp.no-floating.outlined.compact > .text-field {

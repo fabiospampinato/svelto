@@ -1,55 +1,17 @@
 
 /* =========================================================================
- * Svelto - Card (Settings) v0.1.0
+ * Svelto - Card (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * ========================================================================= */
 
 /* CARD */
 
-$card-color: 'white' !default;
-$card-color-basic: true !default;
+$card-color: $container-color !default;
+$card-color-basic: $container-color-basic !default;
 
-$card-border-radius: $border-radius-medium !default;
-
-/* HEADER */
-
-$card-header-color: 'inherit' !default;
-$card-header-color-basic: false !default;
-
-$card-header-horizontal-padding: $gutter !default;
-$card-header-vertical-padding: $gutter !default;
-
-/* HEADER COMPACT */
-
-$card-header-compact-horizontal-padding: $gutter !default;
-$card-header-compact-vertical-padding: $gutter-half !default;
-
-/* BLOCK */
-
-$card-block-color: 'inherit' !default;
-$card-block-color-basic: true !default;
-
-$card-block-horizontal-padding: $gutter !default;
-$card-block-vertical-padding: $gutter !default;
-
-/* BLOCK COMPACT */
-
-$card-block-compact-horizontal-padding: $gutter !default;
-$card-block-compact-vertical-padding: $gutter-half !default;
-
-/* FOOTER */
-
-$card-footer-color: $card-color !default;
-$card-footer-color-basic: true !default;
-
-$card-footer-horizontal-padding: $gutter !default;
-$card-footer-vertical-padding: $gutter !default;
-
-/* FOOTER COMPACT */
-
-$card-footer-compact-horizontal-padding: $gutter !default;
-$card-footer-compact-vertical-padding: $gutter-half !default;
+$card-border-radius: $container-border-radius !default;
