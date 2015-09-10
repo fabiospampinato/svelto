@@ -1,266 +1,274 @@
 
 /* =========================================================================
- * Svelto - Colors (Settings) v0.2.0
+ * Svelto - Colors (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//SOURCE: Colors taken from the here: http://zavoloklom.github.io/material-design-color-palette/colors.html
 //URL: Constrast ratio calculator: http://leaverou.github.io/contrast-ratio
+
+/* MODIFIERS */
+
+$color-hover-lighten-amount: 2 !default;
+$color-active-darken-amount: $color-hover-lighten-amount !default;
+$color-border-darken-amount: 20 !default;
+$color-link-hover-lighten-amount: $color-hover-lighten-amount !default;
 
 /* BASE */
 
-$color-primary: #2967ab !default;
-$color-secondary: #ff7043 !default;
-$color-tertiary: #7f0ce8 !default;
-$color-quaternary: #1dab1e !default;
+$color-primary: #1565c0 !default; //INFO: Blue-800
+$color-secondary: #ef6c00 !default; //INFO: Orange-800
+$color-tertiary: #6a1b9a !default; //INFO: Purple-800
+$color-quaternary: #2e7d32 !default; //INFO: Green-800
 
 $color-white: #ffffff !default;
-$color-gray: #dddddd !default;
-$color-black: #222222 !default;
-$color-yellow: #fee94e !default;
-$color-olive: #cdda49 !default;
-$color-green: #50ae55 !default;
-$color-blue: #2b98f0 !default;
-$color-violet: #673fb4 !default;
-$color-orange: #fd9727 !default;
-$color-purple: #9b2fae !default;
-$color-red: #f2443c !default;
-$color-pink: #ee42a4 !default;
-$color-teal: #1fbcd2 !default;
-$color-brown: #785549 !default;
+$color-gray: #e0e0e0 !default; //INFO: Gray-300
+$color-black: #212121 !default; //INFO: Gray-900
+$color-yellow: #fabf40 !default; //INFO: Yellow-700
+$color-olive: #cddc39 !default; //INFO: Lime-500
+$color-green: #4caf50 !default; //INFO: Green-500
+$color-blue: #2196f3 !default; //INFO: Blue-500
+$color-violet: #673ab7 !default; //INFO: Deep-Purple-500
+$color-orange: #ff9800 !default; //INFO: Orange-500
+$color-purple: #9c27b0 !default; //INFO: Purple-500
+$color-red: #f44336 !default; //INFO: Red-500
+$color-pink: #e91e63 !default; //INFO: Pink-500
+$color-teal: #009688 !default; //INFO: Teal-500
+$color-brown: #795548 !default; //INFO: Brown-500
 
 $color-transparent: rgba(0, 0, 0, 0) !default;
 $color-inherit: inherit !default;
-$color-base: #efefef !default;
+$color-base: #eceff1 !default; //INFO: Blue-Gray-50
 
 /* PRIMARY */
 
 $color-primary-bg: $color-primary !default;
-$color-primary-bg-hover: lighten( $color-primary-bg, 2 ) !default;
-$color-primary-bg-active: darken( $color-primary-bg, 4 ) !default;
-$color-primary-border: darken( $color-primary-bg, 20 ) !default;
+$color-primary-bg-hover: lighten( $color-primary-bg, $color-hover-lighten-amount ) !default;
+$color-primary-bg-active: darken( $color-primary-bg, $color-active-darken-amount ) !default;
+$color-primary-border: darken( $color-primary-bg, $color-border-darken-amount ) !default;
 $color-primary-accent: $color-secondary !default;
-$color-primary-text: #ffffff !default; //INFO: Contrast ratio: 5.8
+$color-primary-text: #ffffff !default; //INFO: Contrast ratio: 5.7
 $color-primary-link: $color-primary-accent !default;
-$color-primary-link-hover: lighten( $color-primary-link, 2 ) !default;
-$color-primary-support-gradient: true !default;
+$color-primary-link-hover: lighten( $color-primary-link, $color-link-hover-lighten-amount ) !default;
+$color-primary-supports-gradient: true !default;
 
 /* SECONDARY */
 
 $color-secondary-bg: $color-secondary !default;
-$color-secondary-bg-hover: lighten( $color-secondary-bg, 2 ) !default;
-$color-secondary-bg-active: darken( $color-secondary-bg, 4 ) !default;
-$color-secondary-border: darken( $color-secondary-bg, 20 ) !default;
+$color-secondary-bg-hover: lighten( $color-secondary-bg, $color-hover-lighten-amount ) !default;
+$color-secondary-bg-active: darken( $color-secondary-bg, $color-active-darken-amount ) !default;
+$color-secondary-border: darken( $color-secondary-bg, $color-border-darken-amount ) !default;
 $color-secondary-accent: $color-primary !default;
-$color-secondary-text: #ffffff !default; //INFO: Contrast ratio: 2.7
+$color-secondary-text: #ffffff !default; //INFO: Contrast ratio: 3.1
 $color-secondary-link: $color-secondary-accent !default;
-$color-secondary-link-hover: lighten( $color-secondary-link, 2 ) !default;
-$color-secondary-support-gradient: true !default;
+$color-secondary-link-hover: lighten( $color-secondary-link, $color-link-hover-lighten-amount ) !default;
+$color-secondary-supports-gradient: true !default;
 
 /* TERTIARY */
 
 $color-tertiary-bg: $color-tertiary !default;
-$color-tertiary-bg-hover: lighten( $color-tertiary-bg, 3 ) !default;
-$color-tertiary-bg-active: darken( $color-tertiary-bg, 4 ) !default;
-$color-tertiary-border: darken( $color-tertiary-bg, 20 ) !default;
+$color-tertiary-bg-hover: lighten( $color-tertiary-bg, $color-hover-lighten-amount ) !default;
+$color-tertiary-bg-active: darken( $color-tertiary-bg, $color-active-darken-amount ) !default;
+$color-tertiary-border: darken( $color-tertiary-bg, $color-border-darken-amount ) !default;
 $color-tertiary-accent: $color-quaternary !default;
-$color-tertiary-text: #ffffff !default; //INFO: Contrast ratio: 6.7
+$color-tertiary-text: #ffffff !default; //INFO: Contrast ratio: 9.4
 $color-tertiary-link: $color-tertiary-accent !default;
-$color-tertiary-link-hover: lighten( $color-tertiary-link, 2 ) !default;
-$color-tertiary-support-gradient: true !default;
+$color-tertiary-link-hover: lighten( $color-tertiary-link, $color-link-hover-lighten-amount ) !default;
+$color-tertiary-supports-gradient: true !default;
 
 /* QUATERNARY */
 
 $color-quaternary-bg: $color-quaternary !default;
-$color-quaternary-bg-hover: lighten( $color-quaternary-bg, 2 ) !default;
-$color-quaternary-bg-active: darken( $color-quaternary-bg, 4 ) !default;
-$color-quaternary-border: darken( $color-quaternary-bg, 20 ) !default;
+$color-quaternary-bg-hover: lighten( $color-quaternary-bg, $color-hover-lighten-amount ) !default;
+$color-quaternary-bg-active: darken( $color-quaternary-bg, $color-active-darken-amount ) !default;
+$color-quaternary-border: darken( $color-quaternary-bg, $color-border-darken-amount ) !default;
 $color-quaternary-accent: $color-tertiary !default;
-$color-quaternary-text: #ffffff !default; //INFO: Contrast ratio: 3
+$color-quaternary-text: #ffffff !default; //INFO: Contrast ratio: 5.1
 $color-quaternary-link: $color-quaternary-accent !default;
-$color-quaternary-link-hover: lighten( $color-quaternary-link, 2 ) !default;
-$color-quaternary-support-gradient: true !default;
+$color-quaternary-link-hover: lighten( $color-quaternary-link, $color-link-hover-lighten-amount ) !default;
+$color-quaternary-supports-gradient: true !default;
 
 /* WHITE */
 
 $color-white-bg: $color-white !default;
-$color-white-bg-hover: darken( $color-white-bg, 2 ) !default;
-$color-white-bg-active: darken( $color-white-bg, 4 ) !default;
-$color-white-border: darken( $color-white-bg, 20 ) !default;
+$color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !default;
+$color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount ) !default;
+$color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
 $color-white-accent: $color-secondary !default;
-$color-white-text: #4c4c4c !default; //INFO: Contrast ratio: 8.6
+$color-white-text: #3f3f3f !default; //INFO: Contrast ratio: 10.5
 $color-white-link: $color-primary !default;
-$color-white-link-hover: lighten( $color-white-link, 2 ) !default;
-$color-white-support-gradient: true !default;
+$color-white-link-hover: lighten( $color-white-link, $color-link-hover-lighten-amount ) !default;
+$color-white-supports-gradient: true !default;
 
 /* GRAY */
 
 $color-gray-bg: $color-gray !default;
-$color-gray-bg-hover: lighten( $color-gray-bg, 2 ) !default;
-$color-gray-bg-active: darken( $color-gray-bg, 4 ) !default;
-$color-gray-border: darken( $color-gray-bg, 20 ) !default;
+$color-gray-bg-hover: lighten( $color-gray-bg, $color-hover-lighten-amount ) !default;
+$color-gray-bg-active: darken( $color-gray-bg, $color-active-darken-amount ) !default;
+$color-gray-border: darken( $color-gray-bg, $color-border-darken-amount ) !default;
 $color-gray-accent: $color-black !default;
-$color-gray-text: #383838 !default; //INFO: Contrast ratio: 8.6
+$color-gray-text: #3f3f3f !default; //INFO: Contrast ratio: 8
 $color-gray-link: $color-white !default;
-$color-gray-link-hover: lighten( $color-gray-link, 2 ) !default;
-$color-gray-support-gradient: true !default;
+$color-gray-link-hover: lighten( $color-gray-link, $color-link-hover-lighten-amount ) !default;
+$color-gray-supports-gradient: true !default;
 
 /* BLACK */
 
 $color-black-bg: $color-black !default;
-$color-black-bg-hover: lighten( $color-black-bg, 4 ) !default;
-$color-black-bg-active: darken( $color-black-bg, 4 ) !default;
-$color-black-border: darken( $color-black-bg, 20 ) !default;
+$color-black-bg-hover: lighten( $color-black-bg, $color-hover-lighten-amount ) !default;
+$color-black-bg-active: darken( $color-black-bg, $color-active-darken-amount ) !default;
+$color-black-border: darken( $color-black-bg, $color-border-darken-amount ) !default;
 $color-black-accent: $color-white !default;
-$color-black-text: #ffffff !default; //INFO: Contrast ratio: 15.9
+$color-black-text: #ffffff !default; //INFO: Contrast ratio: 16.1
 $color-black-link: $color-gray !default;
-$color-black-link-hover: lighten( $color-black-link, 2 ) !default;
-$color-black-support-gradient: true !default;
+$color-black-link-hover: lighten( $color-black-link, $color-link-hover-lighten-amount ) !default;
+$color-black-supports-gradient: true !default;
 
 /* YELLOW */
 
 $color-yellow-bg: $color-yellow !default;
-$color-yellow-bg-hover: lighten( $color-yellow-bg, 4 ) !default;
-$color-yellow-bg-active: darken( $color-yellow-bg, 4 ) !default;
-$color-yellow-border: darken( $color-yellow-bg, 20 ) !default;
+$color-yellow-bg-hover: lighten( $color-yellow-bg, $color-hover-lighten-amount ) !default;
+$color-yellow-bg-active: darken( $color-yellow-bg, $color-active-darken-amount ) !default;
+$color-yellow-border: darken( $color-yellow-bg, $color-border-darken-amount ) !default;
 $color-yellow-accent: $color-red !default;
-$color-yellow-text: #3f3f3f !default; //INFO: Contrast ratio 8.5
+$color-yellow-text: #ffffff !default; //INFO: Contrast ratio 1.7
 $color-yellow-link: $color-yellow-accent !default;
-$color-yellow-link-hover: lighten( $color-yellow-link, 2 ) !default;
-$color-yellow-support-gradient: true !default;
+$color-yellow-link-hover: lighten( $color-yellow-link, $color-link-hover-lighten-amount ) !default;
+$color-yellow-supports-gradient: true !default;
 
 /* OLIVE */
 
 $color-olive-bg: $color-olive !default;
-$color-olive-bg-hover: lighten( $color-olive-bg, 4 ) !default;
-$color-olive-bg-active: darken( $color-olive-bg, 4 ) !default;
-$color-olive-border: darken( $color-olive-bg, 20 ) !default;
+$color-olive-bg-hover: lighten( $color-olive-bg, $color-hover-lighten-amount ) !default;
+$color-olive-bg-active: darken( $color-olive-bg, $color-active-darken-amount ) !default;
+$color-olive-border: darken( $color-olive-bg, $color-border-darken-amount ) !default;
 $color-olive-accent: $color-orange !default;
-$color-olive-text: #303030 !default; //INFO: Contrast ratio: 8.6
+$color-olive-text: #ffffff !default; //INFO: Contrast ratio: 1.7
 $color-olive-link: $color-olive-accent !default;
-$color-olive-link-hover: lighten( $color-olive-link, 2 ) !default;
-$color-olive-support-gradient: true !default;
+$color-olive-link-hover: lighten( $color-olive-link, $color-link-hover-lighten-amount ) !default;
+$color-olive-supports-gradient: true !default;
 
 /* GREEN */
 
 $color-green-bg: $color-green !default;
-$color-green-bg-hover: lighten( $color-green-bg, 2 ) !default;
-$color-green-bg-active: darken( $color-green-bg, 4 ) !default;
-$color-green-border: darken( $color-green-bg, 20 ) !default;
+$color-green-bg-hover: lighten( $color-green-bg, $color-hover-lighten-amount ) !default;
+$color-green-bg-active: darken( $color-green-bg, $color-active-darken-amount ) !default;
+$color-green-border: darken( $color-green-bg, $color-border-darken-amount ) !default;
 $color-green-accent: $color-violet !default;
 $color-green-text: #ffffff !default; //INFO: Contrast ratio: 2.8
 $color-green-link: $color-green-accent !default;
-$color-green-link-hover: lighten( $color-green-link, 2 ) !default;
-$color-green-support-gradient: true !default;
+$color-green-link-hover: lighten( $color-green-link, $color-link-hover-lighten-amount ) !default;
+$color-green-supports-gradient: true !default;
 
 /* BLUE */
 
 $color-blue-bg: $color-blue !default;
-$color-blue-bg-hover: lighten( $color-blue-bg, 2 ) !default;
-$color-blue-bg-active: darken( $color-blue-bg, 4 ) !default;
-$color-blue-border: darken( $color-blue-bg, 20 ) !default;
+$color-blue-bg-hover: lighten( $color-blue-bg, $color-hover-lighten-amount ) !default;
+$color-blue-bg-active: darken( $color-blue-bg, $color-active-darken-amount ) !default;
+$color-blue-border: darken( $color-blue-bg, $color-border-darken-amount ) !default;
 $color-blue-accent: $color-red !default;
 $color-blue-text: #ffffff !default; //INFO: Contrast ratio: 3.1
 $color-blue-link: $color-blue-accent !default;
-$color-blue-link-hover: lighten( $color-blue-link, 2 ) !default;
-$color-blue-support-gradient: true !default;
+$color-blue-link-hover: lighten( $color-blue-link, $color-link-hover-lighten-amount ) !default;
+$color-blue-supports-gradient: true !default;
 
 /* VIOLET */
 
 $color-violet-bg: $color-violet !default;
-$color-violet-bg-hover: lighten( $color-violet-bg, 2 ) !default;
-$color-violet-bg-active: darken( $color-violet-bg, 4 ) !default;
-$color-violet-border: darken( $color-violet-bg, 20 ) !default;
+$color-violet-bg-hover: lighten( $color-violet-bg, $color-hover-lighten-amount ) !default;
+$color-violet-bg-active: darken( $color-violet-bg, $color-active-darken-amount ) !default;
+$color-violet-border: darken( $color-violet-bg, $color-border-darken-amount ) !default;
 $color-violet-accent: $color-orange !default;
-$color-violet-text: #ffffff !default; //INFO: Contrast ratio: 6.2
+$color-violet-text: #ffffff !default; //INFO: Contrast ratio: 7.1
 $color-violet-link: $color-violet-accent !default;
-$color-violet-link-hover: lighten( $color-violet-link, 2 ) !default;
-$color-violet-support-gradient: true !default;
+$color-violet-link-hover: lighten( $color-violet-link, $color-link-hover-lighten-amount ) !default;
+$color-violet-supports-gradient: true !default;
 
 /* ORANGE */
 
 $color-orange-bg: $color-orange !default;
-$color-orange-bg-hover: lighten( $color-orange-bg, 2 ) !default;
-$color-orange-bg-active: darken( $color-orange-bg, 4 ) !default;
-$color-orange-border: darken( $color-orange-bg, 20 ) !default;
+$color-orange-bg-hover: lighten( $color-orange-bg, $color-hover-lighten-amount ) !default;
+$color-orange-bg-active: darken( $color-orange-bg, $color-active-darken-amount ) !default;
+$color-orange-border: darken( $color-orange-bg, $color-border-darken-amount ) !default;
 $color-orange-accent: $color-blue !default;
 $color-orange-text: #ffffff !default; //INFO: Contrast ratio 2.2
 $color-orange-link: $color-orange-accent !default;
-$color-orange-link-hover: lighten( $color-orange-link, 2 ) !default;
-$color-orange-support-gradient: true !default;
+$color-orange-link-hover: lighten( $color-orange-link, $color-link-hover-lighten-amount ) !default;
+$color-orange-supports-gradient: true !default;
 
 /* PURPLE */
 
 $color-purple-bg: $color-purple !default;
-$color-purple-bg-hover: lighten( $color-purple-bg, 2 ) !default;
-$color-purple-bg-active: darken( $color-purple-bg, 4 ) !default;
-$color-purple-border: darken( $color-purple-bg, 20 ) !default;
+$color-purple-bg-hover: lighten( $color-purple-bg, $color-hover-lighten-amount ) !default;
+$color-purple-bg-active: darken( $color-purple-bg, $color-active-darken-amount ) !default;
+$color-purple-border: darken( $color-purple-bg, $color-border-darken-amount ) !default;
 $color-purple-accent: $color-yellow !default;
-$color-purple-text: #ffffff !default; //INFO: Contrast ratio: 7.1
+$color-purple-text: #ffffff !default; //INFO: Contrast ratio: 6.3
 $color-purple-link: $color-purple-accent !default;
-$color-purple-link-hover: lighten( $color-purple-link, 2 ) !default;
-$color-purple-support-gradient: true !default;
+$color-purple-link-hover: lighten( $color-purple-link, $color-link-hover-lighten-amount ) !default;
+$color-purple-supports-gradient: true !default;
 
 /* RED */
 
 $color-red-bg: $color-red !default;
-$color-red-bg-hover: lighten( $color-red-bg, 2 ) !default;
-$color-red-bg-active: darken( $color-red-bg, 4 ) !default;
-$color-red-border: darken( $color-red-bg, 20 ) !default;
+$color-red-bg-hover: lighten( $color-red-bg, $color-hover-lighten-amount ) !default;
+$color-red-bg-active: darken( $color-red-bg, $color-active-darken-amount ) !default;
+$color-red-border: darken( $color-red-bg, $color-border-darken-amount ) !default;
 $color-red-accent: $color-yellow !default;
 $color-red-text: #ffffff !default; //INFO: Contrast ratio: 3.7
 $color-red-link: $color-red-accent !default;
-$color-red-link-hover: lighten( $color-red-link, 4 ) !default;
-$color-red-support-gradient: true !default;
+$color-red-link-hover: lighten( $color-red-link, $color-link-hover-lighten-amount ) !default;
+$color-red-supports-gradient: true !default;
 
 /* PINK */
 
 $color-pink-bg: $color-pink !default;
-$color-pink-bg-hover: lighten( $color-pink-bg, 2 ) !default;
-$color-pink-bg-active: darken( $color-pink-bg, 4 ) !default;
-$color-pink-border: darken( $color-pink-bg, 20 ) !default;
+$color-pink-bg-hover: lighten( $color-pink-bg, $color-hover-lighten-amount ) !default;
+$color-pink-bg-active: darken( $color-pink-bg, $color-active-darken-amount ) !default;
+$color-pink-border: darken( $color-pink-bg, $color-border-darken-amount ) !default;
 $color-pink-accent: $color-teal !default;
-$color-pink-text: #ffffff !default; //INFO: Contrast ratio: 6
+$color-pink-text: #ffffff !default; //INFO: Contrast ratio: 4.3
 $color-pink-link: $color-pink-accent !default;
-$color-pink-link-hover: lighten( $color-pink-link, 2 ) !default;
-$color-pink-support-gradient: true !default;
+$color-pink-link-hover: lighten( $color-pink-link, $color-link-hover-lighten-amount ) !default;
+$color-pink-supports-gradient: true !default;
 
 /* TEAL */
 
 $color-teal-bg: $color-teal !default;
-$color-teal-bg-hover: lighten( $color-teal-bg, 2 ) !default;
-$color-teal-bg-active: darken( $color-teal-bg, 4 ) !default;
-$color-teal-border: darken( $color-teal-bg, 20 ) !default;
+$color-teal-bg-hover: lighten( $color-teal-bg, $color-hover-lighten-amount ) !default;
+$color-teal-bg-active: darken( $color-teal-bg, $color-active-darken-amount ) !default;
+$color-teal-border: darken( $color-teal-bg, $color-border-darken-amount ) !default;
 $color-teal-accent: $color-pink !default;
-$color-teal-text: #ffffff !default; //INFO: Contrast ratio: 2.3
+$color-teal-text: #ffffff !default; //INFO: Contrast ratio: 3.7
 $color-teal-link: $color-teal-accent !default;
-$color-teal-link-hover: lighten( $color-teal-link, 2 ) !default;
-$color-teal-support-gradient: true !default;
+$color-teal-link-hover: lighten( $color-teal-link, $color-link-hover-lighten-amount ) !default;
+$color-teal-supports-gradient: true !default;
 
 /* BROWN */
 
 $color-brown-bg: $color-brown !default;
-$color-brown-bg-hover: lighten( $color-brown-bg, 2 ) !default;
-$color-brown-bg-active: darken( $color-brown-bg, 4 ) !default;
-$color-brown-border: darken( $color-brown-bg, 20 ) !default;
+$color-brown-bg-hover: lighten( $color-brown-bg, $color-hover-lighten-amount ) !default;
+$color-brown-bg-active: darken( $color-brown-bg, $color-active-darken-amount ) !default;
+$color-brown-border: darken( $color-brown-bg, $color-border-darken-amount ) !default;
 $color-brown-accent: $color-orange !default;
 $color-brown-text: #ffffff !default; //INFO: Contrast ratio: 6.6
 $color-brown-link: $color-brown-accent !default;
-$color-brown-link-hover: lighten( $color-brown-link, 2 ) !default;
-$color-brown-support-gradient: true !default;
+$color-brown-link-hover: lighten( $color-brown-link, $color-link-hover-lighten-amount ) !default;
+$color-brown-supports-gradient: true !default;
 
 /* TRANSPARENT */
 
 $color-transparent-bg: $color-transparent !default;
-$color-transparent-bg-hover: lighten( $color-transparent-bg, 2 ) !default;
-$color-transparent-bg-active: darken( $color-transparent-bg, 4 ) !default;
-$color-transparent-border: darken( $color-transparent-bg, 20 ) !default;
+$color-transparent-bg-hover: lighten( $color-transparent-bg, $color-hover-lighten-amount ) !default;
+$color-transparent-bg-active: darken( $color-transparent-bg, $color-active-darken-amount ) !default;
+$color-transparent-border: darken( $color-transparent-bg, $color-border-darken-amount ) !default;
 $color-transparent-accent: $color-secondary !default;
 $color-transparent-text: inherit !default;
 $color-transparent-link: $color-transparent-accent !default;
-$color-transparent-link-hover: lighten( $color-transparent-link, 2 ) !default;
-$color-transparent-support-gradient: false !default;
+$color-transparent-link-hover: lighten( $color-transparent-link, $color-link-hover-lighten-amount ) !default;
+$color-transparent-supports-gradient: false !default;
 
 /* INHERIT */
 
@@ -272,42 +280,42 @@ $color-inherit-accent: $color-inherit !default;
 $color-inherit-text: $color-inherit !default;
 $color-inherit-link: $color-inherit !default;
 $color-inherit-link-hover: $color-inherit !default;
-$color-inherit-support-gradient: false !default;
+$color-inherit-supports-gradient: false !default;
 
 /* BASE */
 
 $color-base-bg: $color-base !default;
-$color-base-bg-hover: darken( $color-base-bg, 2 ) !default;
-$color-base-bg-active: darken( $color-base-bg, 4 ) !default;
-$color-base-border: darken( $color-base-bg, 20 ) !default;
+$color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
+$color-base-bg-active: darken( $color-base-bg,  $color-active-darken-amount ) !default;
+$color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
 $color-base-accent: $color-secondary !default;
-$color-base-text: #3f3f3f !default; //INFO: Contrast ratio:
+$color-base-text: #3f3f3f !default; //INFO: Contrast ratio: 9.1
 $color-base-link: $color-base-accent !default;
-$color-base-link-hover: lighten( $color-base-link, 2 ) !default;
-$color-base-support-gradient: true !default;
+$color-base-link-hover: lighten( $color-base-link, $color-link-hover-lighten-amount ) !default;
+$color-base-supports-gradient: true !default;
 
 /* COLORS */
 
 $colors: (
-  'primary' : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text, $color-primary-link, $color-primary-link-hover , $color-primary-support-gradient),
-  'secondary' : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text, $color-secondary-link, $color-secondary-link-hover , $color-secondary-support-gradient),
-  'tertiary' : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text, $color-tertiary-link, $color-tertiary-link-hover , $color-tertiary-support-gradient),
-  'quaternary' : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text, $color-quaternary-link, $color-quaternary-link-hover , $color-quaternary-support-gradient),
-  'white' : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover , $color-white-support-gradient),
-  'gray' : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover , $color-gray-support-gradient),
-  'black' : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover , $color-black-support-gradient),
-  'yellow' : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover , $color-yellow-support-gradient),
-  'olive' : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover , $color-olive-support-gradient),
-  'green' : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover , $color-green-support-gradient),
-  'blue' : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover , $color-blue-support-gradient),
-  'violet' : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover , $color-violet-support-gradient),
-  'orange' : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover , $color-orange-support-gradient),
-  'purple' : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover , $color-purple-support-gradient),
-  'red' : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover , $color-red-support-gradient),
-  'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover , $color-pink-support-gradient),
-  'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover , $color-teal-support-gradient),
-  'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover , $color-brown-support-gradient),
-  'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover , $color-transparent-support-gradient),
-  'inherit' : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text, $color-inherit-link, $color-inherit-link-hover , $color-inherit-support-gradient),
-  'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover, $color-base-support-gradient )
+  'primary' : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text, $color-primary-link, $color-primary-link-hover , $color-primary-supports-gradient),
+  'secondary' : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text, $color-secondary-link, $color-secondary-link-hover , $color-secondary-supports-gradient),
+  'tertiary' : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text, $color-tertiary-link, $color-tertiary-link-hover , $color-tertiary-supports-gradient),
+  'quaternary' : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text, $color-quaternary-link, $color-quaternary-link-hover , $color-quaternary-supports-gradient),
+  'white' : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover , $color-white-supports-gradient),
+  'gray' : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover , $color-gray-supports-gradient),
+  'black' : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover , $color-black-supports-gradient),
+  'yellow' : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover , $color-yellow-supports-gradient),
+  'olive' : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover , $color-olive-supports-gradient),
+  'green' : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover , $color-green-supports-gradient),
+  'blue' : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover , $color-blue-supports-gradient),
+  'violet' : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover , $color-violet-supports-gradient),
+  'orange' : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover , $color-orange-supports-gradient),
+  'purple' : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover , $color-purple-supports-gradient),
+  'red' : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover , $color-red-supports-gradient),
+  'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover , $color-pink-supports-gradient),
+  'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover , $color-teal-supports-gradient),
+  'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover , $color-brown-supports-gradient),
+  'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover , $color-transparent-supports-gradient),
+  'inherit' : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text, $color-inherit-link, $color-inherit-link-hover , $color-inherit-supports-gradient),
+  'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover, $color-base-supports-gradient )
 ) !default;
