@@ -17,8 +17,8 @@
   position: relative;
   margin-bottom: $gutter;
 
-  & > .tabs-buttons > .multiple-wrp {
-    margin-bottom: 0;
+  & > .tabs-buttons > .multiple {
+    margin-bottom: -10px; //FIXME: We shouldn't hard core it
   }
 
   & > .tabs-containers {
@@ -48,12 +48,12 @@
 
   &:not(.vertical) {
 
-    & > .tabs-buttons > .multiple-wrp {
+    & > .tabs-buttons > .multiple {
 
       margin-right: 0;
       margin-left: 0;
 
-      & > .multiple > .label-wrp {
+      & > .label-wrp {
 
         margin-right: 0;
         margin-left: 0;
@@ -91,7 +91,7 @@
     display: flex;
     align-items: stretch;
 
-    & > .tabs-buttons > .multiple-wrp .label {
+    & > .tabs-buttons > .multiple .label {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
     }

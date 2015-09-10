@@ -43,12 +43,12 @@ mixin chat-msg(options)
       +container.outlined
         +card-header.inherit.outlined.compact
           if options.sender.name !== "Unknown"
-            +multiple-left
+            +multiple-sub-left
               if options.sender.url
                 a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
               else
                 = options.sender.name
-          +multiple-right
+          +multiple-sub-right
             +button-icon("access_time")(data-timestamp-title=options.message.timestamp).small.outlined.compact
             if options.permissions
               if options.permissions.own

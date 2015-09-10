@@ -52,7 +52,7 @@ label {
   /* LEFT / RIGHT */
 
   & > .label-left, & > .label-right {
-    @include last-child-gutter-fix ();
+    @include last-child-no-gutter ();
     display: inline-flex;
     align-self: stretch;
     align-items: center;
@@ -121,7 +121,7 @@ label {
 
   &, & > .label-left, & > .label-right {
 
-    & > .icon-wrp:first-child:last-child > .icon {
+    & > .icon-wrp:only-child > .icon {
       margin: - ( $icon-scale-amount - 1 ) / 2 * 1em;
     }
 

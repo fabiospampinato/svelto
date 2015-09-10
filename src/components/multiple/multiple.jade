@@ -1,33 +1,32 @@
 
 //- =========================================================================
-//- Svelto - Muliple v0.1.0
+//- Svelto - Multiple v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
 mixin multiple
-  .multiple-wrp&attributes(attributes)
-    .multiple
-      block
+  .multiple&attributes(attributes)
+    block
 
-//- Subs
+//- Multiple Subs
 
-mixin multiple-left
+mixin multiple-sub-left
   .multiple-sub-spacer
   .multiple-sub&attributes(attributes).left
     +multiple
       block
   .multiple-sub-spacer
 
-mixin multiple-center
+mixin multiple-sub-center
   .multiple-sub-spacer
   .multiple-sub&attributes(attributes).center
     +multiple
       block
   .multiple-sub-spacer
 
-mixin multiple-right
+mixin multiple-sub-right
   .multiple-sub-spacer
   .multiple-sub&attributes(attributes).right
     +multiple

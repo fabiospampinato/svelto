@@ -24,18 +24,16 @@
     /* TEMPLATES */
 
     templates: {
-      tag: '<div class="multiple-wrp joined tagbox-tag" data-tag-value="{%=o.str%}">' +
-           '<div class="multiple">' +
-             '<div class="label-wrp">' +
-               '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                 '<div class="label-center">' +
-                   '{%=o.str%}' +
-                   '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
-                 '</div>' +
-               '</div>' +
-             '</div>' +
-           '</div>' +
-         '</div>'
+      tag: '<div class="multiple joined tagbox-tag" data-tag-value="{%=o.str%}">' +
+              '<div class="label-wrp">' +
+                '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                  '<div class="label-center">' +
+                    '{%=o.str%}' +
+                    '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>'
     },
 
     /* OPTIONS */

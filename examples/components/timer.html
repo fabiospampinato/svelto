@@ -16,26 +16,24 @@
     <header>
       <div class="header">
         <div class="toolbar primary z-depth-4">
-          <div class="multiple-wrp expanded">
-            <div class="multiple">
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">menu
-                  </div>
-                </div>
-              </div><a href="/" class="large">Svelto</a>
-              <div class="spacer">
-              </div>
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">refresh
-                  </div>
+          <div class="multiple">
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">menu
                 </div>
               </div>
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">more_vert
-                  </div>
+            </div><a href="/" class="large">Svelto</a>
+            <div class="spacer">
+            </div>
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">refresh
+                </div>
+              </div>
+            </div>
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">more_vert
                 </div>
               </div>
             </div>
@@ -48,55 +46,49 @@
         <div class="divider">Actions
         </div>
       </div>
-      <div class="multiple-wrp">
-        <div class="multiple">
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="300" name="milliseconds" required="required" class="text-field"/>
-                <label>Milliseconds...</label>
-                <div class="text-field-bar"></div>
+      <div class="multiple">
+        <div class="multiple joined">
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="300" name="milliseconds" required="required" class="text-field"/>
+            <label>Milliseconds...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="label button actionable checked checkbox outlined">
+            <input type="radio" checked="checked"/><span>Autostart</span>
+            <div class="icon-wrp icon-on">
+              <div class="icon">check_box
               </div>
-              <div class="label button actionable checked checkbox outlined">
-                <input type="radio" checked="checked"/><span>Autostart</span>
-                <div class="icon-wrp icon-on">
-                  <div class="icon">check_box
-                  </div>
-                </div>
-                <div class="icon-wrp icon-off">
-                  <div class="icon">check_box_outline_blank
-                  </div>
-                </div>
-              </div>
-              <div onclick="javascript:timer_set ()" class="label button actionable outlined">Set
+            </div>
+            <div class="icon-wrp icon-off">
+              <div class="icon">check_box_outline_blank
               </div>
             </div>
           </div>
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="1000" name="milliseconds_once" required="required" class="text-field"/>
-                <label>Milliseconds...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div onclick="javascript:timer_once ()" class="label button actionable outlined">Once
-              </div>
-            </div>
+          <div onclick="javascript:timer_set ()" class="label button actionable outlined">Set
           </div>
-          <div onclick="javascript:timer_play ()" class="label button actionable outlined">Play
+        </div>
+        <div class="multiple joined">
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="1000" name="milliseconds_once" required="required" class="text-field"/>
+            <label>Milliseconds...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div onclick="javascript:timer_pause ()" class="label button actionable outlined">Pause
+          <div onclick="javascript:timer_once ()" class="label button actionable outlined">Once
           </div>
-          <div onclick="javascript:timer_stop ()" class="label button actionable outlined">Stop
-          </div>
-          <div onclick="javascript:timer_toggle ()" class="label button actionable outlined">Toggle
-          </div>
-          <div onclick="javascript:timer_reset ()" class="label button actionable outlined">Reset
-          </div>
-          <div onclick="javascript:timer_go ()" class="label button actionable outlined">Go
-          </div>
-          <div onclick="javascript:timer_remaining ()" class="label button actionable outlined">Remaining
-          </div>
+        </div>
+        <div onclick="javascript:timer_play ()" class="label button actionable outlined">Play
+        </div>
+        <div onclick="javascript:timer_pause ()" class="label button actionable outlined">Pause
+        </div>
+        <div onclick="javascript:timer_stop ()" class="label button actionable outlined">Stop
+        </div>
+        <div onclick="javascript:timer_toggle ()" class="label button actionable outlined">Toggle
+        </div>
+        <div onclick="javascript:timer_reset ()" class="label button actionable outlined">Reset
+        </div>
+        <div onclick="javascript:timer_go ()" class="label button actionable outlined">Go
+        </div>
+        <div onclick="javascript:timer_remaining ()" class="label button actionable outlined">Remaining
         </div>
       </div>
     </main>

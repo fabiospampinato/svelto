@@ -88,12 +88,10 @@
       single_button: '<div class="infobar-right">' +
                  '{% include ( "svelto.noty.button", o ); %}' +
                '</div>',
-      buttons: '<div class="noty-buttons multiple-wrp centered">' +
-             '<div class="multiple">' +
+      buttons: '<div class="noty-buttons multiple centered">' +
                '{% for ( var i = 0; i < o.length; i++ ) { %}' +
                  '{% include ( "svelto.noty.button", o[i] ); %}' +
                '{% } %}' +
-             '</div>' +
            '</div>',
       button: '<div class="label-wrp button-wrp">' +
             '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +

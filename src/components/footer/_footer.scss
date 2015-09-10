@@ -14,7 +14,7 @@
 .footer {
 
   @extend .widget;
-  @include last-child-gutter-fix ();
+  @include last-child-no-gutter ();
   padding: $gutter;
   background-color: $footer-bg-color;
 

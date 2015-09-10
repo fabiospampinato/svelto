@@ -16,26 +16,24 @@
     <header>
       <div class="header">
         <div class="toolbar primary z-depth-4">
-          <div class="multiple-wrp expanded">
-            <div class="multiple">
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">menu
-                  </div>
-                </div>
-              </div><a href="/" class="large">Svelto</a>
-              <div class="spacer">
-              </div>
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">refresh
-                  </div>
+          <div class="multiple">
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">menu
                 </div>
               </div>
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">more_vert
-                  </div>
+            </div><a href="/" class="large">Svelto</a>
+            <div class="spacer">
+            </div>
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">refresh
+                </div>
+              </div>
+            </div>
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">more_vert
                 </div>
               </div>
             </div>
@@ -70,85 +68,77 @@
         <div class="divider">Actions
         </div>
       </div>
-      <div class="multiple-wrp">
-        <div class="multiple">
-          <div onclick="javascript:table_init()" class="label button actionable outlined">Init
+      <div class="multiple">
+        <div onclick="javascript:table_init()" class="label button actionable outlined">Init
+        </div>
+        <div class="multiple joined">
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="id_add" required="required" class="text-field"/>
+            <label>ID...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="id_add" required="required" class="text-field"/>
-                <label>ID...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="first_add" required="required" class="text-field"/>
-                <label>First...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="second_add" required="required" class="text-field"/>
-                <label>Second...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="third_add" required="required" class="text-field"/>
-                <label>Third...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="fourth_add" required="required" class="text-field"/>
-                <label>Fourth...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div onclick="javascript:table_row_add ()" class="label button actionable outlined">Add
-              </div>
-            </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="first_add" required="required" class="text-field"/>
+            <label>First...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="id_update" required="required" class="text-field"/>
-                <label>ID...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="first_update" required="required" class="text-field"/>
-                <label>First...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="second_update" required="required" class="text-field"/>
-                <label>Second...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="third_update" required="required" class="text-field"/>
-                <label>Third...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="fourth_update" required="required" class="text-field"/>
-                <label>Fourth...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div onclick="javascript:table_row_update ()" class="label button actionable outlined">Update
-              </div>
-            </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="second_add" required="required" class="text-field"/>
+            <label>Second...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp white outlined no-floating">
-                <input type="text" value="" name="id_remove" required="required" class="text-field"/>
-                <label>ID...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div onclick="javascript:table_row_remove ()" class="label button actionable outlined">Remove
-              </div>
-            </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="third_add" required="required" class="text-field"/>
+            <label>Third...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div onclick="javascript:table_clear ()" class="label button actionable outlined">Clear
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="fourth_add" required="required" class="text-field"/>
+            <label>Fourth...</label>
+            <div class="text-field-bar"></div>
           </div>
+          <div onclick="javascript:table_row_add ()" class="label button actionable outlined">Add
+          </div>
+        </div>
+        <div class="multiple joined">
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="id_update" required="required" class="text-field"/>
+            <label>ID...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="first_update" required="required" class="text-field"/>
+            <label>First...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="second_update" required="required" class="text-field"/>
+            <label>Second...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="third_update" required="required" class="text-field"/>
+            <label>Third...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="fourth_update" required="required" class="text-field"/>
+            <label>Fourth...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div onclick="javascript:table_row_update ()" class="label button actionable outlined">Update
+          </div>
+        </div>
+        <div class="multiple joined">
+          <div class="input-wrp white outlined no-floating">
+            <input type="text" value="" name="id_remove" required="required" class="text-field"/>
+            <label>ID...</label>
+            <div class="text-field-bar"></div>
+          </div>
+          <div onclick="javascript:table_row_remove ()" class="label button actionable outlined">Remove
+          </div>
+        </div>
+        <div onclick="javascript:table_clear ()" class="label button actionable outlined">Clear
         </div>
       </div>
     </main>

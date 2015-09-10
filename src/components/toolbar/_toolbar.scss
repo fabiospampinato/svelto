@@ -16,19 +16,13 @@
   margin-bottom: $gutter;
   padding: $toolbar-vertical-padding $toolbar-horizontal-padding;
 
-  & .multiple-wrp {
+  & > .multiple {
 
+    align-items: center;
     height: 100%;
 
-    & > .multiple {
-
-      align-items: center;
-      height: 100%;
-
-      & > * {
-        margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
-      }
-
+    & > * {
+      margin-bottom: 0; //FIXME: We shouldn't need to add this everytime
     }
 
   }

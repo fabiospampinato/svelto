@@ -26,7 +26,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
   /* CELLS */
 
   & > * > tr > * {
-    @include last-child-gutter-fix ();
+    @include last-child-no-gutter ();
     padding: $gutter;
     text-align: left;
     border-width: 0;

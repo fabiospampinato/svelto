@@ -16,26 +16,24 @@
     <header>
       <div class="header">
         <div class="toolbar primary z-depth-4">
-          <div class="multiple-wrp expanded">
-            <div class="multiple">
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">menu
-                  </div>
-                </div>
-              </div><a href="/" class="large">Svelto</a>
-              <div class="spacer">
-              </div>
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">refresh
-                  </div>
+          <div class="multiple">
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">menu
                 </div>
               </div>
-              <div class="label button actionable compact transparent">
-                <div class="icon-wrp">
-                  <div class="icon">more_vert
-                  </div>
+            </div><a href="/" class="large">Svelto</a>
+            <div class="spacer">
+            </div>
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">refresh
+                </div>
+              </div>
+            </div>
+            <div class="label button actionable compact transparent">
+              <div class="icon-wrp">
+                <div class="icon">more_vert
                 </div>
               </div>
             </div>
@@ -51,13 +49,11 @@
       <div class="container outlined">
         <div class="container tagbox">
           <input type="text" name="name" value="these,are,some,tags"/>
-          <div class="multiple-wrp">
-            <div class="multiple">
-              <div class="input-wrp autogrow compact tagbox-partial no-floating no-bar">
-                <input type="text" value="" name="placeholder_name" required="required" class="text-field"/>
-                <label>Add tag...</label>
-                <div class="text-field-bar"></div>
-              </div>
+          <div class="multiple">
+            <div class="input-wrp autogrow compact tagbox-partial no-floating no-bar">
+              <input type="text" value="" name="placeholder_name" required="required" class="text-field"/>
+              <label>Add tag...</label>
+              <div class="text-field-bar"></div>
             </div>
           </div>
         </div>
@@ -66,36 +62,30 @@
         <div class="divider">Actions
         </div>
       </div>
-      <div class="multiple-wrp">
-        <div class="multiple">
-          <div onclick="javascript:tagbox_get ()" class="label button actionable outlined">Get
+      <div class="multiple">
+        <div onclick="javascript:tagbox_get ()" class="label button actionable outlined">Get
+        </div>
+        <div class="multiple joined">
+          <div class="input-wrp no-floating white text-field-primary outlined">
+            <input type="text" value="" name="input_add" required="required" class="text-field"/>
+            <label>Add tags...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp no-floating white text-field-primary outlined">
-                <input type="text" value="" name="input_add" required="required" class="text-field"/>
-                <label>Add tags...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div onclick="javascript:tagbox_add ()" class="label button actionable primary outlined">Add
-              </div>
-            </div>
+          <div onclick="javascript:tagbox_add ()" class="label button actionable primary outlined">Add
           </div>
-          <div class="multiple-wrp joined">
-            <div class="multiple">
-              <div class="input-wrp no-floating white text-field-secondary outlined">
-                <input type="text" value="" name="input_remove" required="required" class="text-field"/>
-                <label>Remove tags...</label>
-                <div class="text-field-bar"></div>
-              </div>
-              <div onclick="javascript:tagbox_remove ()" class="label button actionable secondary outlined">Remove
-              </div>
-            </div>
+        </div>
+        <div class="multiple joined">
+          <div class="input-wrp no-floating white text-field-secondary outlined">
+            <input type="text" value="" name="input_remove" required="required" class="text-field"/>
+            <label>Remove tags...</label>
+            <div class="text-field-bar"></div>
           </div>
-          <div onclick="javascript:tagbox_clear ()" class="label button actionable black outlined">Clear
+          <div onclick="javascript:tagbox_remove ()" class="label button actionable secondary outlined">Remove
           </div>
-          <div onclick="javascript:tagbox_reset ()" class="label button actionable outlined">Reset
-          </div>
+        </div>
+        <div onclick="javascript:tagbox_clear ()" class="label button actionable black outlined">Clear
+        </div>
+        <div onclick="javascript:tagbox_reset ()" class="label button actionable outlined">Reset
         </div>
       </div>
     </main>

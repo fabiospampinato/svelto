@@ -4190,12 +4190,10 @@
       single_button: '<div class="infobar-right">' +
                  '{% include ( "svelto.noty.button", o ); %}' +
                '</div>',
-      buttons: '<div class="noty-buttons multiple-wrp centered">' +
-             '<div class="multiple">' +
+      buttons: '<div class="noty-buttons multiple centered">' +
                '{% for ( var i = 0; i < o.length; i++ ) { %}' +
                  '{% include ( "svelto.noty.button", o[i] ); %}' +
                '{% } %}' +
-             '</div>' +
            '</div>',
       button: '<div class="label-wrp button-wrp">' +
             '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
@@ -5501,12 +5499,10 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
       base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
             '<div class="container">' +
               '<div class="container-content">' +
-                '<div class="multiple-wrp vertical stretched joined">' +
-                  '<div class="multiple">' +
+                '<div class="multiple vertical stretched joined">' +
                     '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
                       '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
                     '{% } %}' +
-                  '</div>' +
                 '</div>' +
               '</div>' +
             '</div>' +
@@ -7400,18 +7396,16 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
     /* TEMPLATES */
 
     templates: {
-      tag: '<div class="multiple-wrp joined tagbox-tag" data-tag-value="{%=o.str%}">' +
-           '<div class="multiple">' +
-             '<div class="label-wrp">' +
-               '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
-                 '<div class="label-center">' +
-                   '{%=o.str%}' +
-                   '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
-                 '</div>' +
-               '</div>' +
-             '</div>' +
-           '</div>' +
-         '</div>'
+      tag: '<div class="multiple joined tagbox-tag" data-tag-value="{%=o.str%}">' +
+              '<div class="label-wrp">' +
+                '<div class="label compact {%=(o.color ? o.color : "")%} {%=(o.size ? o.size : "")%} {%=(o.css ? o.css : "")%}">' +
+                  '<div class="label-center">' +
+                    '{%=o.str%}' +
+                    '<div class="icon icon-navigation-close right tagbox-tag-remover"></div>' +
+                  '</div>' +
+                '</div>' +
+              '</div>' +
+            '</div>'
     },
 
     /* OPTIONS */

@@ -46,7 +46,7 @@
   @extend .widget;
   @include square ( $square-sample-size );
   @include color ( $square-sample-color, true );
-  @include last-child-gutter-fix ();
+  @include last-child-no-gutter ();
   overflow: hidden;
   padding: $gutter-half;
 

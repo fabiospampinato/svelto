@@ -23,8 +23,8 @@
       width: $percentage;
     }
 
-    .multiple-wrp > .multiple > :not(.multiple-wrp).xs-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > :not(.multiple).xs-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
       width: calc(#{$percentage} - #{$gutter});
     }
 
@@ -44,8 +44,8 @@
       width: $percentage;
     }
 
-    .multiple-wrp > .multiple > :not(.multiple-wrp).sm-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > :not(.multiple).sm-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
       width: calc(#{$percentage} - #{$gutter});
     }
 
@@ -65,8 +65,8 @@
       width: $percentage;
     }
 
-    .multiple-wrp > .multiple > :not(.multiple-wrp).md-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > :not(.multiple).md-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
       width: calc(#{$percentage} - #{$gutter});
     }
 
@@ -86,8 +86,8 @@
       width: $percentage;
     }
 
-    .multiple-wrp > .multiple > :not(.multiple-wrp).lg-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > :not(.multiple).lg-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
       width: calc(#{$percentage} - #{$gutter});
     }
 
@@ -107,8 +107,8 @@
       width: $percentage;
     }
 
-    .multiple-wrp > .multiple > :not(.multiple-wrp).xl-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple-wrp > .multiple > .multiple-wrp:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > :not(.multiple).xl-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
+    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
       width: calc(#{$percentage} - #{$gutter});
     }
 

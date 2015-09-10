@@ -19,8 +19,8 @@
     display: none;
   }
 
-  & > .multiple-wrp {
-    margin-bottom: 0;
+  & > .multiple {
+    margin-bottom: -10px; //FIXME: We shouldn't hard core it
   }
 
   .text-field {

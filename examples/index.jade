@@ -105,13 +105,15 @@ append body-end
       var $buttons = $('main .button'),
           yellow_nr = $buttons.filter ( '.yellow' ).length,
           green_nr = $buttons.filter ( '.green' ).length,
+          orange_nr = $buttons.filter ( '.orange' ).length,
           teal_nr = $buttons.filter ( '.teal' ).length,
           red_nr = $buttons.filter ( '.red' ).length,
-          others_nr = $buttons.length - yellow_nr - green_nr - teal_nr - red_nr;
+          others_nr = $buttons.length - yellow_nr - green_nr - orange_nr - teal_nr - red_nr;
       $.noty ({
         body: '<p>' +
                 '<span class="text-yellow">Tested (' + yellow_nr + ')</span><br/>' +
                 '<span class="text-green">Finalized (' + green_nr + ')</span><br/>' +
+                '<span class="text-orange">Almost ready (' + orange_nr + ')</span><br/>' +
                 '<span class="text-teal">To update (' + teal_nr + ')</span><br/>' +
                 '<span class="text-red">Problematic (' + red_nr + ')</span><br/>' +
                 '<span>Others (' + others_nr + ')</span>' +

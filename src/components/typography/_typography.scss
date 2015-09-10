@@ -103,7 +103,7 @@ abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe e
 blockquote {
 
   @extend .widget;
-  @include last-child-gutter-fix ();
+  @include last-child-no-gutter ();
   padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
   border-radius: $blockquote-line-width;
   background-color: $blockquote-bg-color;
@@ -122,7 +122,7 @@ blockquote {
   & > footer {
 
     @extend .widget;
-    @include last-child-gutter-fix ();
+    @include last-child-no-gutter ();
     font-size: $blockquote-footer-font-size;
     opacity: $blockquote-footer-opacity;
 

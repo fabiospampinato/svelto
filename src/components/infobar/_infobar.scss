@@ -18,7 +18,7 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: $widget-gutter;
+  padding: $gutter;
   transition: opacity $infobar-transition-close-duration;
   // border-width: $infobar-border-width;
   // border-style: solid;
@@ -40,7 +40,7 @@
   /* SECTIONS */
 
   & > .infobar-left, & > .infobar-center, .infobar-title, .infobar-subtitle, & > .infobar-right, & > .infobar-bottom {
-    @include last-child-gutter-fix ();
+    @include last-child-no-gutter ();
   }
 
   & > .infobar-left {
@@ -69,11 +69,11 @@
   & > .infobar-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
     order: 4;
     width: 100%;
-    margin-top: $widget-gutter;
+    margin-top: $gutter;
   }
 
   & > :not(:first-child):not(.infobar-bottom) {
-    margin-left: $widget-gutter;
+    margin-left: $gutter;
   }
 
 }
