@@ -1128,19 +1128,19 @@ th {
 }
 
 .green.highlight:after {
-  border-color: #9b2fae !important;
+  border-color: #673fb4 !important;
 }
 
 .green p > a {
-  color: #9b2fae !important;
+  color: #673fb4 !important;
 }
 
 .green p > a:after {
-  border-color: #a231b6 !important;
+  border-color: #6b42bc !important;
 }
 
 .green p > a:hover {
-  color: #a231b6 !important;
+  color: #6b42bc !important;
 }
 
 .text-green {
@@ -1215,58 +1215,58 @@ th {
 }
 
 .violet {
-  border-color: #53195e !important;
+  border-color: #3c2568 !important;
   color: #ffffff !important;
-  background: #9b2fae !important;
+  background: #673fb4 !important;
 }
 
 .violet.gradient {
-  background-image: linear-gradient(to bottom, #a231b6 0%, #8d2b9e 100%) !important;
+  background-image: linear-gradient(to bottom, #6b42bc 0%, #5e3aa5 100%) !important;
   background-repeat: repeat-x !important;
 }
 
 .violet.actionable.active {
-  background: #8d2b9e !important;
+  background: #5e3aa5 !important;
 }
 
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #a231b6 !important;
+  background: #6b42bc !important;
 }
 
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #8d2b9e !important;
+  background: #5e3aa5 !important;
 }
 
 .violet.highlight:after {
-  border-color: #fee94e !important;
+  border-color: #fd9727 !important;
 }
 
 .violet p > a {
-  color: #fee94e !important;
+  color: #fd9727 !important;
 }
 
 .violet p > a:after {
-  border-color: #feea58 !important;
+  border-color: #fd9c31 !important;
 }
 
 .violet p > a:hover {
-  color: #feea58 !important;
+  color: #fd9c31 !important;
 }
 
 .text-violet {
-  color: #9b2fae;
+  color: #673fb4;
 }
 
 .link-violet {
-  color: #9b2fae !important;
+  color: #673fb4 !important;
 }
 
 .link-violet:after {
-  border-color: #a231b6 !important;
+  border-color: #6b42bc !important;
 }
 
 .link-violet:hover {
-  color: #a231b6 !important;
+  color: #6b42bc !important;
 }
 
 .orange {
@@ -1325,58 +1325,58 @@ th {
 }
 
 .purple {
-  border-color: #3c2568 !important;
+  border-color: #53195e !important;
   color: #ffffff !important;
-  background: #673fb4 !important;
+  background: #9b2fae !important;
 }
 
 .purple.gradient {
-  background-image: linear-gradient(to bottom, #6b42bc 0%, #5e3aa5 100%) !important;
+  background-image: linear-gradient(to bottom, #a231b6 0%, #8d2b9e 100%) !important;
   background-repeat: repeat-x !important;
 }
 
 .purple.actionable.active {
-  background: #5e3aa5 !important;
+  background: #8d2b9e !important;
 }
 
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #6b42bc !important;
+  background: #a231b6 !important;
 }
 
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #5e3aa5 !important;
+  background: #8d2b9e !important;
 }
 
 .purple.highlight:after {
-  border-color: #fd9727 !important;
+  border-color: #fee94e !important;
 }
 
 .purple p > a {
-  color: #fd9727 !important;
+  color: #fee94e !important;
 }
 
 .purple p > a:after {
-  border-color: #fd9c31 !important;
+  border-color: #feea58 !important;
 }
 
 .purple p > a:hover {
-  color: #fd9c31 !important;
+  color: #feea58 !important;
 }
 
 .text-purple {
-  color: #673fb4;
+  color: #9b2fae;
 }
 
 .link-purple {
-  color: #673fb4 !important;
+  color: #9b2fae !important;
 }
 
 .link-purple:after {
-  border-color: #6b42bc !important;
+  border-color: #a231b6 !important;
 }
 
 .link-purple:hover {
-  color: #6b42bc !important;
+  color: #a231b6 !important;
 }
 
 .red {
@@ -5222,7 +5222,7 @@ hr {
 }
 
 .highlight.highlight-violet:after {
-  border-color: #9b2fae !important;
+  border-color: #673fb4 !important;
 }
 
 .highlight.highlight-orange:after {
@@ -5230,7 +5230,7 @@ hr {
 }
 
 .highlight.highlight-purple:after {
-  border-color: #673fb4 !important;
+  border-color: #9b2fae !important;
 }
 
 .highlight.highlight-red:after {
@@ -5791,11 +5791,11 @@ img {
 }
 
 .input-wrp.text-field-violet > .text-field:focus ~ label, .text-field-violet.textarea-wrp > .text-field:focus ~ label {
-  color: #9b2fae !important;
+  color: #673fb4 !important;
 }
 
 .input-wrp.text-field-violet > .text-field-bar, .text-field-violet.textarea-wrp > .text-field-bar {
-  border-bottom-color: #9b2fae !important;
+  border-bottom-color: #673fb4 !important;
 }
 
 .input-wrp.text-field-orange > .text-field:focus ~ label, .text-field-orange.textarea-wrp > .text-field:focus ~ label {
@@ -5807,11 +5807,11 @@ img {
 }
 
 .input-wrp.text-field-purple > .text-field:focus ~ label, .text-field-purple.textarea-wrp > .text-field:focus ~ label {
-  color: #673fb4 !important;
+  color: #9b2fae !important;
 }
 
 .input-wrp.text-field-purple > .text-field-bar, .text-field-purple.textarea-wrp > .text-field-bar {
-  border-bottom-color: #673fb4 !important;
+  border-bottom-color: #9b2fae !important;
 }
 
 .input-wrp.text-field-red > .text-field:focus ~ label, .text-field-red.textarea-wrp > .text-field:focus ~ label {
@@ -6546,7 +6546,7 @@ label {
 }
 
 .label-tag > .label.tag-circle-violet:after {
-  background-color: #9b2fae;
+  background-color: #673fb4;
 }
 
 .label-tag > .label.tag-circle-orange:after {
@@ -6554,7 +6554,7 @@ label {
 }
 
 .label-tag > .label.tag-circle-purple:after {
-  background-color: #673fb4;
+  background-color: #9b2fae;
 }
 
 .label-tag > .label.tag-circle-red:after {
@@ -7975,7 +7975,7 @@ table td .multiple:only-child {
 }
 
 .outlined.outlined-violet {
-  border-color: #9b2fae !important;
+  border-color: #673fb4 !important;
 }
 
 .outlined.outlined-orange {
@@ -7983,7 +7983,7 @@ table td .multiple:only-child {
 }
 
 .outlined.outlined-purple {
-  border-color: #673fb4 !important;
+  border-color: #9b2fae !important;
 }
 
 .outlined.outlined-red {
@@ -8639,7 +8639,7 @@ code[class*='language-'] .namespace {
 }
 
 .ripple.ripple-violet > .ripple-circle:before {
-  background-color: #9b2fae;
+  background-color: #673fb4;
 }
 
 .ripple.ripple-orange > .ripple-circle:before {
@@ -8647,7 +8647,7 @@ code[class*='language-'] .namespace {
 }
 
 .ripple.ripple-purple > .ripple-circle:before {
-  background-color: #673fb4;
+  background-color: #9b2fae;
 }
 
 .ripple.ripple-red > .ripple-circle:before {
@@ -9383,7 +9383,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 .spinner-wrp > .spinner.violet {
-  border-color: #9b2fae !important;
+  border-color: #673fb4 !important;
 }
 
 .spinner-wrp > .spinner.orange {
@@ -9391,7 +9391,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 .spinner-wrp > .spinner.purple {
-  border-color: #673fb4 !important;
+  border-color: #9b2fae !important;
 }
 
 .spinner-wrp > .spinner.red {
