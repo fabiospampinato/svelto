@@ -1,12 +1,13 @@
 
 /* =========================================================================
- * Svelto - Label v0.2.0
+ * Svelto - Label v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * @requires ../widget/_widget.scss
+ * @requires ../icons/_settings.scss
  * ========================================================================= */
 
 /* DEFAULT */
@@ -31,27 +32,50 @@ label {
   min-height: $line-height-em + ( $label-vertical-padding * 2 );
   min-width: $line-height-em + ( $label-horizontal-padding * 2 );
 
-  & > :last-child:not(.label-left):not(.label-right) {
+  /* CHILDREN NO MARGIN BOTTOM */
+
+  > :not(.label-left):not(.label-right) {
     margin-bottom: 0 !important;
+  }
+
+  /* TEXT GROW */
+
+  > :not(.label-left):not(.label-right):not(i.icon) {
+    flex-grow: 1;
+  }
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-height: calc(#{$line-height-em + ( $label-vertical-padding * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $label-horizontal-padding * 2 )} + #{$outline-width * 2});
   }
 
   /* COMPACT */
 
   &.compact {
+
     padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
     min-height: $line-height-em + ( $label-compact-vertical-padding * 2 );
     min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-height: calc(#{$line-height-em + ( $label-compact-vertical-padding * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $label-compact-horizontal-padding * 2 )} + #{$outline-width * 2});
+    }
+
   }
 
-  /* SPAN */
+  /* FLUID */
 
-  & > span {
-    flex-grow: 1;
+  &.fluid {
+    display: flex;
   }
 
   /* LEFT / RIGHT */
 
-  & > .label-left, & > .label-right {
+  > .label-left,
+  > .label-right {
     @include last-child-no-gutter ();
     display: inline-flex;
     align-self: stretch;
@@ -63,66 +87,60 @@ label {
     min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
   }
 
-  & > .label-left {
+  > .label-left {
     @include border-left-radius ( inherit );
-    order: 0;
-    margin: ( - $label-vertical-padding ) $label-horizontal-padding ( - $label-vertical-padding ) ( - $label-horizontal-padding );
+    margin: ( - $label-vertical-padding ) $label-horizontal-padding ( - $label-vertical-padding ) ( - $label-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
   }
 
-  & > .label-right {
+  > .label-right {
     @include border-right-radius ( inherit );
-    order: 100;
-    margin: ( - $label-vertical-padding ) ( - $label-horizontal-padding ) ( - $label-vertical-padding ) $label-horizontal-padding;
+    margin: ( - $label-vertical-padding ) ( - $label-horizontal-padding ) ( - $label-vertical-padding ) $label-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
   }
 
   &.compact {
 
-    & > .label-left {
-      margin: ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding );
+    > .label-left {
+      margin: ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
     }
 
-    & > .label-right {
-      margin: ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding;
+    > .label-right {
+      margin: ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
     }
 
   }
 
   &.outlined {
 
-    & > .label-left {
-      border-right: 1px solid $label-left-right-border-color;
+    > .label-left {
+      border-right: 1px solid;
+      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
     }
 
-    & > .label-right {
-      border-left: 1px solid $label-left-right-border-color;
+    > .label-right {
+      border-left: 1px solid;
+      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
     }
 
   }
 
   /* CENTER */
 
-  & > .icon-wrp + span, & > span + .icon-wrp {
-    padding-left: $label-center-icon-extra-spacing;
+  > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
+    padding-left: $label-center-extra-spacing;
+  }
+
+  > :not(.label):not(.label-left) + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+    padding-left: $label-center-extra-spacing / $icon-scale-amount;
   }
 
   &.compact {
 
-    & > .icon-wrp + span, & > span + .icon-wrp {
-      padding-left: $label-compact-center-icon-extra-spacing;
+    > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
+      padding-left: $label-compact-center-extra-spacing;
     }
 
-  }
-
-  /* ICON */ //FIXME: Ugly fix for keeping the label height consistent
-
-  .icon-wrp > .icon {
-    margin: ( - ( $icon-scale-amount - 1 ) / 2 * 1em ) 0;
-  }
-
-  &, & > .label-left, & > .label-right {
-
-    & > .icon-wrp:only-child > .icon {
-      margin: - ( $icon-scale-amount - 1 ) / 2 * 1em;
+    > :not(.label):not(.label-left) + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+      padding-left: $label-compact-center-extra-spacing / $icon-scale-amount;
     }
 
   }
@@ -159,17 +177,24 @@ label {
   /* FLOATING */
 
   &.floating {
+
     //TODO: add sub floating actions
-    //TODO: write it closet to the spec, it looks a bit too big, expecially the icon
     @include z-depth ( $label-floating-z-depth );
     position: fixed;
-    z-index: 1;
+    z-index: 10;
     right: $label-floating-right;
     bottom: $label-floating-bottom;
     margin-bottom: 0;
     padding: $label-floating-vertical-padding $label-floating-horizontal-padding;
     min-height: $line-height-em + ( $label-floating-vertical-padding * 2 );
     min-width: $line-height-em + ( $label-floating-horizontal-padding * 2 );
+
+    &.compact {
+      padding: $label-floating-compact-vertical-padding $label-floating-compact-horizontal-padding;
+      min-height: $line-height-em + ( $label-floating-compact-vertical-padding * 2 );
+      min-width: $line-height-em + ( $label-floating-compact-horizontal-padding * 2 );
+    }
+
   }
 
   /* RIBBON */
@@ -178,7 +203,8 @@ label {
 
     position: absolute;
 
-    &.ribbon-left:before, &.ribbon-right:after {
+    &.ribbon-left:before,
+    &.ribbon-right:after {
       position: absolute;
       z-index: -1;
       content: '';
@@ -213,21 +239,10 @@ label {
 
     }
 
-    &.compact {
-
-      &.ribbon-left {
-        padding-left: calc(#{$label-compact-horizontal-padding} + #{$gutter});
-      }
-
-      &.ribbon-right {
-        padding-right: calc(#{$label-compact-horizontal-padding} + #{$gutter});
-      }
-
-    }
-
     &.outlined {
 
-      &.ribbon-left:before, &.ribbon-right:after {
+      &.ribbon-left:before,
+      &.ribbon-right:after {
         bottom: - ( $label-ribbon-size * 2 + $outline-width );
       }
 
@@ -279,7 +294,7 @@ label {
     right: 0;
     border-top-right-radius: inherit;
 
-    & > .label {
+    > .label {
       transform: translateX($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8));
     }
 
@@ -297,7 +312,7 @@ label {
     left: 0;
     border-bottom-left-radius: inherit;
 
-    & > .label {
+    > .label {
       transform: translateX(-($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8)) translateY($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8);
     }
 
@@ -315,7 +330,7 @@ label {
     right: 0;
     border-bottom-right-radius: inherit;
 
-    & > .label {
+    > .label {
       transform: translateX($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8) translateY($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8);
     }
 
@@ -337,7 +352,7 @@ label {
     pointer-events: auto;
   }
 
-  & > .label {
+  > .label {
     padding: $label-corner-vertical-padding $label-corner-horizontal-padding;
     height: $line-height-em + ( $label-corner-vertical-padding * 2 );
     width: $line-height-em + ( $label-corner-horizontal-padding * 2 );
@@ -362,7 +377,8 @@ label {
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;
 
-    &:before, &:after {
+    &:before,
+    &:after {
       content: '';
       position: absolute;
       top: 50%;
@@ -387,7 +403,8 @@ label {
 
       margin-left: ( $label-tag-smooth-compact-size * $SQRT2 ) / 2 - $label-border-radius;
 
-      &:before, &:after {
+      &:before,
+      &:after {
         height: $label-tag-smooth-compact-size;
         width: $label-tag-smooth-compact-size;
       }
@@ -407,7 +424,8 @@ label {
 
     &:not(.sharp) {
 
-      &:before, &:after {
+      &:before,
+      &:after {
         right: calc(100% - #{$label-border-radius / 2});
       }
 
@@ -421,7 +439,8 @@ label {
 
       margin-left: ( $label-tag-sharp-size * $SQRT2 ) / 2;
 
-      &:before, &:after {
+      &:before,
+      &:after {
         height: $label-tag-sharp-size;
         width: $label-tag-sharp-size;
         right: 100%;
@@ -431,7 +450,8 @@ label {
 
         margin-left: ( $label-tag-sharp-compact-size * $SQRT2 ) / 2;
 
-        &:before, &:after {
+        &:before,
+        &:after {
           height: $label-tag-sharp-compact-size;
           width: $label-tag-sharp-compact-size;
         }

@@ -44,6 +44,7 @@ img {
     @include color ( $image-caption-color, $image-caption-color-basic );
     border-radius: 0;
     margin-bottom: 0;
+    overflow: auto;
 
     &:not(.attached) {
 

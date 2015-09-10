@@ -4,8 +4,16 @@ extends ../layout.jade
 //- Button
 
 append main
-  +divider Normal
-
+  +divider Button
+  
+  +button Button
+  
+  +divider Fluid
+  
+  +button.fluid Fluid
+  
+  +divider Colors
+  
   +multiple
     +button.primary Primary
     +button.secondary Secondary
@@ -79,11 +87,7 @@ append main
   +multiple
     +button-tag Normal
     +button-tag.sharp Sharp
-    +button-tag.sharp.outlined Sharp
-    +button-tag.sharp.compact Sharp
-    +button-tag.primary Colored
-    +button-tag.outlined Outlined
-    +button-tag.compact Compact
+    +button-tag.primary.tag-circle-white Colored
 
   +divider Ribbon
 
@@ -94,19 +98,17 @@ append main
     +paragraph-sample
     +button-ribbon.ribbon-right.tertiary Right
     +paragraph-sample
-    +button-ribbon.ribbon-left.ribbon-right.outlined Outlined
-    +paragraph-sample
 
   +divider Corner
 
   +container.outlined
-    +button-corner("top-left").primary P
+    +button-corner("top-left").primary S
     +button-corner("top-right").secondary
-      +icon("file_download")
+      +icon("file_download").small
     +button-corner("bottom-right").quaternary
-      +icon("thumb_up")
+      +icon("thumb_up").small
     +button-corner("bottom-left").tertiary
-      +icon("favorite")
+      +icon("favorite").small
     +paragraph-sample
 
   +divider Badge
@@ -124,12 +126,12 @@ append main
 
   +divider Actions
 
-  +multiple
+  +multiple.actions
     +button("toggle_class ( 'outlined' )").outlined Toggle outlined
     +button("toggle_class ( 'compact' )").outlined Toggle compact
 
 append body-end
   +script.
     function toggle_class ( css_class ) {
-      $('.button').toggleClass ( css_class );
+      $('.label').not ( '.actions .button').toggleClass ( css_class );
     }

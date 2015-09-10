@@ -31,7 +31,19 @@
     </header>
     <main>
       <div class="divider-wrp block">
-        <div class="divider">Normal
+        <div class="divider">Button
+        </div>
+      </div>
+      <div class="label button actionable">Button
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Fluid
+        </div>
+      </div>
+      <div class="label button actionable fluid">Fluid
+      </div>
+      <div class="divider-wrp block">
+        <div class="divider">Colors
         </div>
       </div>
       <div class="multiple">
@@ -162,23 +174,7 @@
           </div>
         </div>
         <div class="label-tag button-tag">
-          <div class="label button actionable sharp outlined">Sharp
-          </div>
-        </div>
-        <div class="label-tag button-tag">
-          <div class="label button actionable sharp compact">Sharp
-          </div>
-        </div>
-        <div class="label-tag button-tag">
-          <div class="label button actionable primary">Colored
-          </div>
-        </div>
-        <div class="label-tag button-tag">
-          <div class="label button actionable outlined">Outlined
-          </div>
-        </div>
-        <div class="label-tag button-tag">
-          <div class="label button actionable compact">Compact
+          <div class="label button actionable primary tag-circle-white">Colored
           </div>
         </div>
       </div>
@@ -241,24 +237,6 @@
         </div>
         <div style="width:97%; height:10px;" class="placeholder">
         </div>
-        <div class="label button actionable ribbon ribbon-left ribbon-right outlined">Outlined
-        </div>
-        <div class="label button actionable invisible">
-        </div>
-        <div style="width:95%; height:10px;" class="placeholder">
-        </div>
-        <div style="width:92%; height:10px;" class="placeholder">
-        </div>
-        <div style="width:100%; height:10px;" class="placeholder">
-        </div>
-        <div style="width:87%; height:10px;" class="placeholder">
-        </div>
-        <div style="width:97%; height:10px;" class="placeholder">
-        </div>
-        <div style="width:93%; height:10px;" class="placeholder">
-        </div>
-        <div style="width:97%; height:10px;" class="placeholder">
-        </div>
       </div>
       <div class="divider-wrp block">
         <div class="divider">Corner
@@ -266,19 +244,19 @@
       </div>
       <div class="container outlined">
         <div class="label-corner top-left button-corner actionable primary">
-          <div class="label button actionable compact">P
+          <div class="label button actionable compact">S
           </div>
         </div>
         <div class="label-corner top-right button-corner actionable secondary">
-          <div class="label button actionable compact"><i class="icon">file_download</i>
+          <div class="label button actionable compact"><i class="icon small">file_download</i>
           </div>
         </div>
         <div class="label-corner bottom-right button-corner actionable quaternary">
-          <div class="label button actionable compact"><i class="icon">thumb_up</i>
+          <div class="label button actionable compact"><i class="icon small">thumb_up</i>
           </div>
         </div>
         <div class="label-corner bottom-left button-corner actionable tertiary">
-          <div class="label button actionable compact"><i class="icon">favorite</i>
+          <div class="label button actionable compact"><i class="icon small">favorite</i>
           </div>
         </div>
         <div style="width:95%; height:10px;" class="placeholder">
@@ -322,7 +300,7 @@
         <div class="divider">Actions
         </div>
       </div>
-      <div class="multiple">
+      <div class="multiple actions">
         <div onclick="javascript:toggle_class ( 'outlined' )" class="label button actionable outlined">Toggle outlined
         </div>
         <div onclick="javascript:toggle_class ( 'compact' )" class="label button actionable outlined">Toggle compact
@@ -339,7 +317,7 @@
     <script src="/svelto.js"></script>
     <script>
       function toggle_class ( css_class ) {
-        $('.button').toggleClass ( css_class );
+        $('.label').not ( '.actions .button').toggleClass ( css_class );
       }
     </script>
     <script>

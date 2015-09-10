@@ -2334,7 +2334,6 @@ button {
   background: #ffffff ;
   border-radius: 0.2665em;
   padding: 10px 10px;
-  overflow: auto;
 }
 
 .container p > a, .card-header p > a,
@@ -2421,6 +2420,7 @@ button {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  overflow: auto;
 }
 
 .card > * {
@@ -5262,7 +5262,7 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - Icons v0.3.0
+ * Svelto - Icons v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5279,8 +5279,8 @@ i.icon {
   font-weight: normal;
   font-style: normal;
   font-size: 1.5em;
-  width: 1em;
-  height: 1em;
+  min-width: 1em;
+  min-height: 1em;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -5410,6 +5410,7 @@ img {
   background: #222222 ;
   border-radius: 0;
   margin-bottom: 0;
+  overflow: auto;
 }
 
 .image-wrp .image-caption p > a {
@@ -5595,17 +5596,19 @@ img {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * ========================================================================= */
 /* LABEL */
+/* LABEL COMPACT */
 /* LEFT / RIGHT */
-/* CENTER ICON */
-/* COMPACT */
+/* CENTER EXTRA SPACING */
 /* BADGE */
 /* TAG */
 /* TAG CIRCLE */
 /* RIBBON */
 /* CORNER */
 /* FLOATING */
+/* FLOATING COMPACT */
 /* =========================================================================
  * Svelto - Input (Settings) v0.1.0
  * =========================================================================
@@ -6013,13 +6016,14 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 /* =========================================================================
- * Svelto - Label v0.2.0
+ * Svelto - Label v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * @requires ../widget/_widget.scss
+ * @requires ../icons/_settings.scss
  * ========================================================================= */
 /* DEFAULT */
 label {
@@ -6045,11 +6049,13 @@ label {
   padding: 0.495em 0.99em;
   min-height: 2.4185714286em;
   min-width: 3.4085714286em;
+  /* CHILDREN NO MARGIN BOTTOM */
+  /* TEXT GROW */
+  /* OUTLINED */
   /* COMPACT */
-  /* SPAN */
+  /* FLUID */
   /* LEFT / RIGHT */
   /* CENTER */
-  /* ICON */
   /* BADGE */
   /* FLOATING */
   /* RIBBON */
@@ -6088,8 +6094,19 @@ label {
   color: #2b6cb3 ;
 }
 
-.label > :last-child:not(.label-left):not(.label-right) {
+.label > :not(.label-left):not(.label-right) {
   margin-bottom: 0 !important;
+}
+
+.label > :not(.label-left):not(.label-right):not(i.icon) {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.label.outlined {
+  min-height: calc(2.4185714286em + 2px);
+  min-width: calc(3.4085714286em + 2px);
 }
 
 .label.compact {
@@ -6098,13 +6115,19 @@ label {
   min-width: 2.4185714286em;
 }
 
-.label > span {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
+.label.compact.outlined {
+  min-height: calc(2.4185714286em + 2px);
+  min-width: calc(2.4185714286em + 2px);
 }
 
-.label > .label-left, .label > .label-right {
+.label.fluid {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.label > .label-left,
+.label > .label-right {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -6123,62 +6146,60 @@ label {
   min-width: 2.4185714286em;
 }
 
-.label > .label-left > :last-child, .label > .label-right > :last-child {
+.label > .label-left > :last-child,
+.label > .label-right > :last-child {
   margin-bottom: 0 !important;
 }
 
-.label > .label-left > :last-child.multiple, .label > .label-right > :last-child.multiple {
+.label > .label-left > :last-child.multiple,
+.label > .label-right > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
 .label > .label-left {
   border-bottom-left-radius: inherit;
   border-top-left-radius: inherit;
-  -webkit-order: 0;
-      -ms-flex-order: 0;
-          order: 0;
-  margin: -0.495em 0.99em -0.495em -0.99em;
+  margin: -0.495em 0.99em -0.495em -0.99em !important;
 }
 
 .label > .label-right {
   border-bottom-right-radius: inherit;
   border-top-right-radius: inherit;
-  -webkit-order: 100;
-      -ms-flex-order: 100;
-          order: 100;
-  margin: -0.495em -0.99em -0.495em 0.99em;
+  margin: -0.495em -0.99em -0.495em 0.99em !important;
 }
 
 .label.compact > .label-left {
-  margin: -0.495em 0.495em -0.495em -0.495em;
+  margin: -0.495em 0.495em -0.495em -0.495em !important;
 }
 
 .label.compact > .label-right {
-  margin: -0.495em -0.495em -0.495em 0.495em;
+  margin: -0.495em -0.495em -0.495em 0.495em !important;
 }
 
 .label.outlined > .label-left {
-  border-right: 1px solid rgba(0, 0, 0, 0.1);
+  border-right: 1px solid;
+  border-color: inherit !important;
 }
 
 .label.outlined > .label-right {
-  border-left: 1px solid rgba(0, 0, 0, 0.1);
+  border-left: 1px solid;
+  border-color: inherit !important;
 }
 
-.label > .icon-wrp + span, .label > span + .icon-wrp {
+.label > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
   padding-left: 0.75em;
 }
 
-.label.compact > .icon-wrp + span, .label.compact > span + .icon-wrp {
+.label > :not(.label):not(.label-left) + i.icon {
   padding-left: 0.5em;
 }
 
-.label .icon-wrp > .icon {
-  margin: -0.25em 0;
+.label.compact > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
+  padding-left: 0.5em;
 }
 
-.label > .icon-wrp:only-child > .icon, .label > .label-left > .icon-wrp:only-child > .icon, .label > .label-right > .icon-wrp:only-child > .icon {
-  margin: -0.25em;
+.label.compact > :not(.label):not(.label-left) + i.icon {
+  padding-left: 0.3333333333em;
 }
 
 .label.badge {
@@ -6209,7 +6230,7 @@ label {
 .label.floating {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   position: fixed;
-  z-index: 1;
+  z-index: 10;
   right: 24px;
   bottom: 24px;
   margin-bottom: 0;
@@ -6218,11 +6239,18 @@ label {
   min-width: 3.0125714286em;
 }
 
+.label.floating.compact {
+  padding: 0.396em 0.396em;
+  min-height: 2.2205714286em;
+  min-width: 2.2205714286em;
+}
+
 .label.ribbon {
   position: absolute;
 }
 
-.label.ribbon.ribbon-left:before, .label.ribbon.ribbon-right:after {
+.label.ribbon.ribbon-left:before,
+.label.ribbon.ribbon-right:after {
   position: absolute;
   z-index: -1;
   content: '';
@@ -6255,15 +6283,8 @@ label {
   border-left-color: inherit;
 }
 
-.label.ribbon.compact.ribbon-left {
-  padding-left: calc(0.495em + 10px);
-}
-
-.label.ribbon.compact.ribbon-right {
-  padding-right: calc(0.495em + 10px);
-}
-
-.label.ribbon.outlined.ribbon-left:before, .label.ribbon.outlined.ribbon-right:after {
+.label.ribbon.outlined.ribbon-left:before,
+.label.ribbon.outlined.ribbon-right:after {
   bottom: -17px;
 }
 
@@ -6389,7 +6410,8 @@ label {
   /* COLORS */
 }
 
-.label-tag > .label:before, .label-tag > .label:after {
+.label-tag > .label:before,
+.label-tag > .label:after {
   content: '';
   position: absolute;
   top: 50%;
@@ -6434,7 +6456,8 @@ label {
   margin-left: 1.0370076929em;
 }
 
-.label-tag > .label.compact:before, .label-tag > .label.compact:after {
+.label-tag > .label.compact:before,
+.label-tag > .label.compact:after {
   height: 1.8434382579em;
   width: 1.8434382579em;
 }
@@ -6448,7 +6471,8 @@ label {
   border-style: solid;
 }
 
-.label-tag > .label:not(.sharp):before, .label-tag > .label:not(.sharp):after {
+.label-tag > .label:not(.sharp):before,
+.label-tag > .label:not(.sharp):after {
   right: calc(100% - 0.13325em);
 }
 
@@ -6460,7 +6484,8 @@ label {
   margin-left: 1.2092857143em;
 }
 
-.label-tag > .label.sharp:before, .label-tag > .label.sharp:after {
+.label-tag > .label.sharp:before,
+.label-tag > .label.sharp:after {
   height: 1.7101882579em;
   width: 1.7101882579em;
   right: 100%;
@@ -6470,7 +6495,8 @@ label {
   margin-left: 1.2092857143em;
 }
 
-.label-tag > .label.sharp.compact:before, .label-tag > .label.sharp.compact:after {
+.label-tag > .label.sharp.compact:before,
+.label-tag > .label.sharp.compact:after {
   height: 1.7101882579em;
   width: 1.7101882579em;
 }

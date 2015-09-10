@@ -15,13 +15,9 @@ append main
   +multiple
     +button("toggle_class ( 'outlined' )").outlined Toggle outline
     +button("toggle_class ( 'compact' )").outlined Toggle compact
-    +button("limit_height ()").outlined Limit height
 
 append body-end
   +script.
     function toggle_class ( css_class ) {
       $('.container').toggleClass ( css_class );
-    }
-    function limit_height () {
-      $('.container').height ( 100 );
     }

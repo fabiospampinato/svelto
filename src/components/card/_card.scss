@@ -45,6 +45,7 @@
 
   &-block {
     flex-grow: 1; //INFO: Takes the remaining space, if any
+    overflow: auto;
   }
 
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */

@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * ========================================================================= */
 
 /* LABEL */
@@ -13,25 +14,24 @@
 $label-color: 'white' !default;
 $label-color-basic: false !default;
 
+$label-border-radius: $container-border-radius !default;
+
 $label-vertical-padding: 0.495em !default;
 $label-horizontal-padding: $label-vertical-padding * 2 !default;
 
-$label-border-radius: $border-radius-medium !default;
+/* LABEL COMPACT */
+
+$label-compact-vertical-padding: $label-vertical-padding !default;
+$label-compact-horizontal-padding: $label-vertical-padding !default;
 
 /* LEFT / RIGHT */
 
 $label-left-right-bg-color: rgba(0, 0, 0, 0.05) !default;
-$label-left-right-border-color: rgba(0, 0, 0, 0.1) !default;
 
-/* CENTER ICON */
+/* CENTER EXTRA SPACING */
 
-$label-center-icon-extra-spacing: 0.75em !default;
-$label-compact-center-icon-extra-spacing: 0.5em !default;
-
-/* COMPACT */
-
-$label-compact-vertical-padding: $label-vertical-padding !default;
-$label-compact-horizontal-padding: $label-vertical-padding !default;
+$label-center-extra-spacing: 0.75em !default;
+$label-compact-center-extra-spacing: 0.5em !default;
 
 /* BADGE */
 
@@ -69,3 +69,8 @@ $label-floating-horizontal-padding: $label-vertical-padding * 1.6 !default;
 
 $label-floating-right: 24px !default;
 $label-floating-bottom: 24px !default;
+
+/* FLOATING COMPACT */
+
+$label-floating-compact-vertical-padding: $label-floating-vertical-padding / 2 !default;
+$label-floating-compact-horizontal-padding: $label-floating-horizontal-padding / 2 !default;
