@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Button v0.2.0
+//- Svelto - Button v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,24 +9,24 @@
 mixin button(href)
   if href
     if href.slice ( 0, 11 ) === 'javascript:'
-      .label(onclick=href)&attributes(attributes).button.actionable
+      .button(onclick=href)&attributes(attributes)
         block
     else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
-      .label(onclick="javascript:" + href)&attributes(attributes).button.actionable
+      .button(onclick="javascript:" + href)&attributes(attributes)
         block
     else
-      a.label(href=href)&attributes(attributes).button.actionable
+      a(href=href)&attributes(attributes).button
         block
   else
-    .label&attributes(attributes).button.actionable
+    .button&attributes(attributes)
       block
 
-mixin button-left
-  .label-left&attributes(attributes).button-left
+mixin button-sub-left
+  .sub&attributes(attributes).left
     block
-      
-mixin button-right
-  .label-right&attributes(attributes).button-right
+
+mixin button-sub-right
+  .sub&attributes(attributes).right
     block
 
 mixin button-icon(icon)
@@ -41,11 +41,25 @@ mixin button-ribbon
 
 mixin button-corner(direction)
   - direction = direction || "top-right";
-  .label-corner(class=direction)&attributes(attributes).button-corner.actionable
-    +button.compact
-      block
-      
+  if href
+    if href.slice ( 0, 11 ) === 'javascript:'
+      .button-corner(onclick=href class=direction)&attributes(attributes)
+        .button.compact
+          block
+    else if href[href.length-1] === ')' || href.slice ( -2 ) === ');'
+      .button-corner(onclick="javascript:" + href class=direction)&attributes(attributes)
+        .button.compact
+          block
+    else
+      a(href=href class=direction)&attributes(attributes).button-corner
+        .button.compact
+          block
+  else
+    .button-corner(class=direction)&attributes(attributes)
+      .button.compact
+        block
+  
 mixin button-tag
-  .label-tag.button-tag
+  .button-tag
     +button&attributes(attributes)
       block

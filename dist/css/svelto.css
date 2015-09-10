@@ -621,15 +621,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.primary.actionable.active {
+.primary.actionable.active,
+.primary.active.button,
+.primary.active.button-corner,
+.primary.button.active,
+.primary.button-corner.active {
   background: #1460b7 !important;
 }
 
-.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #166ac9 !important;
 }
 
-.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #1460b7 !important;
 }
 
@@ -676,15 +688,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.secondary.actionable.active {
+.secondary.actionable.active,
+.secondary.active.button,
+.secondary.active.button-corner,
+.secondary.button.active,
+.secondary.button-corner.active {
   background: #e56700 !important;
 }
 
-.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #f97100 !important;
 }
 
-.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #e56700 !important;
 }
 
@@ -731,15 +755,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.tertiary.actionable.active {
+.tertiary.actionable.active,
+.tertiary.active.button,
+.tertiary.active.button-corner,
+.tertiary.button.active,
+.tertiary.button-corner.active {
   background: #641991 !important;
 }
 
-.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #701da3 !important;
 }
 
-.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #641991 !important;
 }
 
@@ -786,15 +822,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.quaternary.actionable.active {
+.quaternary.actionable.active,
+.quaternary.active.button,
+.quaternary.active.button-corner,
+.quaternary.button.active,
+.quaternary.button-corner.active {
   background: #2b762f !important;
 }
 
-.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #318435 !important;
 }
 
-.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #2b762f !important;
 }
 
@@ -837,20 +885,32 @@ th {
 }
 
 .white.gradient {
-  background-image: linear-gradient(to bottom, #fafafa 0%, #fafafa 100%) !important;
+  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) !important;
   background-repeat: repeat-x !important;
 }
 
-.white.actionable.active {
+.white.actionable.active,
+.white.active.button,
+.white.active.button-corner,
+.white.button.active,
+.white.button-corner.active {
+  background: whitesmoke !important;
+}
+
+.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fafafa !important;
 }
 
-.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fafafa !important;
-}
-
-.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #fafafa !important;
+.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: whitesmoke !important;
 }
 
 .white.highlight:after {
@@ -896,15 +956,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.gray.actionable.active {
+.gray.actionable.active,
+.gray.active.button,
+.gray.active.button-corner,
+.gray.button.active,
+.gray.button-corner.active {
   background: #dbdbdb !important;
 }
 
-.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #e5e5e5 !important;
 }
 
-.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #dbdbdb !important;
 }
 
@@ -951,15 +1023,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.black.actionable.active {
+.black.actionable.active,
+.black.active.button,
+.black.active.button-corner,
+.black.button.active,
+.black.button-corner.active {
   background: #1c1c1c !important;
 }
 
-.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #262626 !important;
 }
 
-.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #1c1c1c !important;
 }
 
@@ -1006,15 +1090,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.yellow.actionable.active {
+.yellow.actionable.active,
+.yellow.active.button,
+.yellow.active.button-corner,
+.yellow.button.active,
+.yellow.button-corner.active {
   background: #fabc36 !important;
 }
 
-.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fac24a !important;
 }
 
-.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #fabc36 !important;
 }
 
@@ -1061,15 +1157,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.olive.actionable.active {
+.olive.actionable.active,
+.olive.active.button,
+.olive.active.button-corner,
+.olive.button.active,
+.olive.button-corner.active {
   background: #cbda30 !important;
 }
 
-.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #cfde42 !important;
 }
 
-.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #cbda30 !important;
 }
 
@@ -1116,15 +1224,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.green.actionable.active {
+.green.actionable.active,
+.green.active.button,
+.green.active.button-corner,
+.green.button.active,
+.green.button-corner.active {
   background: #49a84d !important;
 }
 
-.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #52b455 !important;
 }
 
-.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #49a84d !important;
 }
 
@@ -1171,15 +1291,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.blue.actionable.active {
+.blue.actionable.active,
+.blue.active.button,
+.blue.active.button-corner,
+.blue.button.active,
+.blue.button-corner.active {
   background: #1791f2 !important;
 }
 
-.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #2b9bf4 !important;
 }
 
-.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #1791f2 !important;
 }
 
@@ -1226,15 +1358,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.violet.actionable.active {
+.violet.actionable.active,
+.violet.active.button,
+.violet.active.button-corner,
+.violet.button.active,
+.violet.button-corner.active {
   background: #6338af !important;
 }
 
-.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #6b3cbf !important;
 }
 
-.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #6338af !important;
 }
 
@@ -1281,15 +1425,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.orange.actionable.active {
+.orange.actionable.active,
+.orange.active.button,
+.orange.active.button-corner,
+.orange.button.active,
+.orange.button-corner.active {
   background: #f59200 !important;
 }
 
-.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #ff9c0a !important;
 }
 
-.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #f59200 !important;
 }
 
@@ -1336,15 +1492,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.purple.actionable.active {
+.purple.actionable.active,
+.purple.active.button,
+.purple.active.button-corner,
+.purple.button.active,
+.purple.button-corner.active {
   background: #9525a8 !important;
 }
 
-.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #a329b8 !important;
 }
 
-.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #9525a8 !important;
 }
 
@@ -1391,15 +1559,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.red.actionable.active {
+.red.actionable.active,
+.red.active.button,
+.red.active.button-corner,
+.red.button.active,
+.red.button-corner.active {
   background: #f33a2c !important;
 }
 
-.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #f54c40 !important;
 }
 
-.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #f33a2c !important;
 }
 
@@ -1446,15 +1626,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.pink.actionable.active {
+.pink.actionable.active,
+.pink.active.button,
+.pink.active.button-corner,
+.pink.button.active,
+.pink.button-corner.active {
   background: #e6175d !important;
 }
 
-.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #ea2769 !important;
 }
 
-.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #e6175d !important;
 }
 
@@ -1501,15 +1693,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.teal.actionable.active {
+.teal.actionable.active,
+.teal.active.button,
+.teal.active.button-corner,
+.teal.button.active,
+.teal.button-corner.active {
   background: #008c7f !important;
 }
 
-.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #00a091 !important;
 }
 
-.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #008c7f !important;
 }
 
@@ -1556,15 +1760,27 @@ th {
   background-repeat: repeat-x !important;
 }
 
-.brown.actionable.active {
+.brown.actionable.active,
+.brown.active.button,
+.brown.active.button-corner,
+.brown.button.active,
+.brown.button-corner.active {
   background: #735144 !important;
 }
 
-.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #7f594c !important;
 }
 
-.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #735144 !important;
 }
 
@@ -1606,15 +1822,27 @@ th {
   background: transparent !important;
 }
 
-.transparent.actionable.active {
+.transparent.actionable.active,
+.transparent.active.button,
+.transparent.active.button-corner,
+.transparent.button.active,
+.transparent.button-corner.active {
   background: transparent !important;
 }
 
-.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: rgba(5, 5, 5, 0) !important;
 }
 
-.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: transparent !important;
 }
 
@@ -1656,15 +1884,27 @@ th {
   background: inherit !important;
 }
 
-.inherit.actionable.active {
+.inherit.actionable.active,
+.inherit.active.button,
+.inherit.active.button-corner,
+.inherit.button.active,
+.inherit.button-corner.active {
   background: inherit !important;
 }
 
-.inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: inherit !important;
 }
 
-.inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: inherit !important;
 }
 
@@ -1695,20 +1935,32 @@ th {
 }
 
 .base.gradient {
-  background-image: linear-gradient(to bottom, #e6eaed 0%, #e6eaed 100%) !important;
+  background-image: linear-gradient(to bottom, #e6eaed 0%, #e0e5e8 100%) !important;
   background-repeat: repeat-x !important;
 }
 
-.base.actionable.active {
+.base.actionable.active,
+.base.active.button,
+.base.active.button-corner,
+.base.button.active,
+.base.button-corner.active {
+  background: #e0e5e8 !important;
+}
+
+.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #e6eaed !important;
 }
 
-.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #e6eaed !important;
-}
-
-.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e6eaed !important;
+.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: #e0e5e8 !important;
 }
 
 .base.highlight:after {
@@ -2227,30 +2479,6 @@ body.fixed-header > main {
 }
 
 /* =========================================================================
- * Svelto - Button (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* BUTTON */
-/* =========================================================================
- * Svelto - Accordion v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* DEFAULT BUTTON */
-button {
-  border: none;
-  padding: 0;
-}
-
-/* BUTTON */
-/* =========================================================================
  * Svelto - Widget (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2268,30 +2496,30 @@ button {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .container, .card-header,
+.widget, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, i.icon, .image-wrp, .infobar-wrp, label, .label, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, i.icon, .image-wrp, .infobar-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
-.widget > :last-child, .container > :last-child, .card-header > :last-child,
+.widget > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, label > :last-child, .label > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
+.widget > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.container, .disabled.card-header,
+.widget.disabled, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], [class*="-disabled"].container, [class*="-disabled"].card-header,
+.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -2307,6 +2535,921 @@ button {
  * ========================================================================= */
 /* CONTAINER */
 /* CONTAINER COMPACT */
+/* =========================================================================
+ * Svelto - Label (Settings) v0.2.1
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
+ * ========================================================================= */
+/* LABEL */
+/* LABEL COMPACT */
+/* LEFT / RIGHT */
+/* CENTER EXTRA SPACING */
+/* BADGE */
+/* TAG */
+/* TAG CIRCLE */
+/* RIBBON */
+/* CORNER */
+/* FLOATING */
+/* FLOATING COMPACT */
+/* =========================================================================
+ * Svelto - Label v0.4.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * @requires ../icons/_settings.scss
+ * ========================================================================= */
+/* DEFAULT */
+label {
+  display: block;
+}
+
+/* LABEL */
+.label, .button {
+  border-color: #d9d9d9 ;
+  color: #3f3f3f ;
+  background: #ffffff ;
+  font-weight: bold;
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border-radius: 0.2665em;
+  padding: 0.495em 0.99em;
+  min-height: 2.4185714286em;
+  min-width: 3.4085714286em;
+  /* CHILDREN NO MARGIN BOTTOM */
+  /* TEXT GROW */
+  /* OUTLINED */
+  /* COMPACT */
+  /* FLUID */
+  /* LEFT / RIGHT */
+  /* CENTER */
+  /* BADGE */
+  /* FLOATING */
+  /* RIBBON */
+}
+
+.label.gradient, .gradient.button {
+  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) ;
+  background-repeat: repeat-x ;
+}
+
+.label.actionable.active,
+.active.button,
+.label.active.button-corner,
+.label.button.active,
+.button.active,
+.label.button-corner.active, .button-corner.active.button {
+  background: whitesmoke ;
+}
+
+.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: #fafafa ;
+}
+
+.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: whitesmoke ;
+}
+
+.label.highlight:after, .highlight.button:after {
+  border-color: #ef6c00 ;
+}
+
+.label p > a, .button p > a {
+  color: #1565c0 ;
+}
+
+.label p > a:after, .button p > a:after {
+  border-color: #166ac9 ;
+}
+
+.label p > a:hover, .button p > a:hover {
+  color: #166ac9 ;
+}
+
+.label > :not(.sub), .button > :not(.sub) {
+  margin-bottom: 0 !important;
+}
+
+.label > :not(.sub):not(i.icon), .button > :not(.sub):not(i.icon) {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+.label.outlined, .outlined.button {
+  min-height: calc(2.4185714286em + 2px);
+  min-width: calc(3.4085714286em + 2px);
+}
+
+.label.compact, .compact.button {
+  padding: 0.495em 0.495em;
+  min-height: 2.4185714286em;
+  min-width: 2.4185714286em;
+}
+
+.label.compact.outlined, .compact.outlined.button {
+  min-height: calc(2.4185714286em + 2px);
+  min-width: calc(2.4185714286em + 2px);
+}
+
+.label.fluid, .fluid.button {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.label > .sub, .button > .sub {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.495em 0.495em;
+  min-height: 2.4185714286em;
+  min-width: 2.4185714286em;
+}
+
+.label > .sub > :last-child, .button > .sub > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+.label > .sub.left, .button > .sub.left {
+  border-bottom-left-radius: inherit;
+  border-top-left-radius: inherit;
+  margin: -0.495em 0.99em -0.495em -0.99em !important;
+}
+
+.label > .sub.right, .button > .sub.right {
+  border-bottom-right-radius: inherit;
+  border-top-right-radius: inherit;
+  margin: -0.495em -0.99em -0.495em 0.99em !important;
+}
+
+.label.compact > .sub.left, .compact.button > .sub.left {
+  margin: -0.495em 0.495em -0.495em -0.495em !important;
+}
+
+.label.compact > .sub.right, .compact.button > .sub.right {
+  margin: -0.495em -0.495em -0.495em 0.495em !important;
+}
+
+.label.outlined > .sub.left, .outlined.button > .sub.left {
+  border-right: 1px solid;
+  border-color: inherit !important;
+}
+
+.label.outlined > .sub.right, .outlined.button > .sub.right {
+  border-left: 1px solid;
+  border-color: inherit !important;
+}
+
+.label > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon), .button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon) {
+  padding-left: 0.75em;
+}
+
+.label > :not(.label):not(.button):not(.sub.left) + i.icon, .button > :not(.label):not(.button):not(.sub.left) + i.icon {
+  padding-left: 0.5em;
+}
+
+.label.compact > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon), .compact.button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon) {
+  padding-left: 0.5em;
+}
+
+.label.compact > :not(.label):not(.button):not(.sub.left) + i.icon, .compact.button > :not(.label):not(.button):not(.sub.left) + i.icon {
+  padding-left: 0.3333333333em;
+}
+
+.label.badge, .badge.button {
+  position: absolute;
+  margin: 0;
+}
+
+.label.badge.top-left, .badge.top-left.button {
+  top: -20%;
+  left: -20%;
+}
+
+.label.badge.top-right, .badge.top-right.button {
+  top: -20%;
+  right: -20%;
+}
+
+.label.badge.bottom-left, .badge.bottom-left.button {
+  bottom: -20%;
+  left: -20%;
+}
+
+.label.badge.bottom-right, .badge.bottom-right.button {
+  bottom: -20%;
+  right: -20%;
+}
+
+.label.floating, .floating.button {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
+  position: fixed;
+  z-index: 10;
+  right: 24px;
+  bottom: 24px;
+  margin-bottom: 0;
+  padding: 0.792em 0.792em;
+  min-height: 3.0125714286em;
+  min-width: 3.0125714286em;
+}
+
+.label.floating.compact, .floating.compact.button {
+  padding: 0.396em 0.396em;
+  min-height: 2.2205714286em;
+  min-width: 2.2205714286em;
+}
+
+.label.ribbon, .ribbon.button {
+  position: absolute;
+}
+
+.label.ribbon.ribbon-left:before,
+.ribbon.ribbon-left.button:before,
+.label.ribbon.ribbon-right:after, .ribbon.ribbon-right.button:after {
+  position: absolute;
+  z-index: -1;
+  content: '';
+  border: 8px solid transparent;
+  border-top-color: inherit;
+  bottom: -16px;
+}
+
+.label.ribbon.ribbon-left, .ribbon.ribbon-left.button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  left: -16px;
+  padding-left: calc(0.99em + 10px);
+}
+
+.label.ribbon.ribbon-left:before, .ribbon.ribbon-left.button:before {
+  left: 0;
+  border-right-color: inherit;
+}
+
+.label.ribbon.ribbon-right, .ribbon.ribbon-right.button {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  right: -16px;
+  padding-right: calc(0.99em + 10px);
+}
+
+.label.ribbon.ribbon-right:after, .ribbon.ribbon-right.button:after {
+  right: 0;
+  border-left-color: inherit;
+}
+
+.label.ribbon.outlined.ribbon-left:before,
+.ribbon.outlined.ribbon-left.button:before,
+.label.ribbon.outlined.ribbon-right:after, .ribbon.outlined.ribbon-right.button:after {
+  bottom: -17px;
+}
+
+.label.ribbon.outlined.ribbon-left:before, .ribbon.outlined.ribbon-left.button:before {
+  left: -1px;
+}
+
+.label.ribbon.outlined.ribbon-right:after, .ribbon.outlined.ribbon-right.button:after {
+  right: -1px;
+}
+
+/* LABEL CORNER */
+.label-corner, .button-corner {
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.label-corner.top-left, .top-left.button-corner {
+  top: 0;
+  left: 0;
+  border-top-left-radius: inherit;
+}
+
+.label-corner.top-left > *, .top-left.button-corner > * {
+  -webkit-transform: translateX(-0.6735714286em) translateY(-0.6735714286em);
+          transform: translateX(-0.6735714286em) translateY(-0.6735714286em);
+}
+
+.label-corner.top-left:before, .top-left.button-corner:before {
+  top: 0;
+  left: 0;
+  -webkit-transform: translateX(-2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
+          transform: translateX(-2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
+}
+
+.label-corner.top-right, .top-right.button-corner {
+  top: 0;
+  right: 0;
+  border-top-right-radius: inherit;
+}
+
+.label-corner.top-right > *, .top-right.button-corner > * {
+  -webkit-transform: translateX(0.6735714286em) translateY(-0.6735714286em);
+          transform: translateX(0.6735714286em) translateY(-0.6735714286em);
+}
+
+.label-corner.top-right:before, .top-right.button-corner:before {
+  top: 0;
+  right: 0;
+  -webkit-transform: translateX(2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
+          transform: translateX(2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
+}
+
+.label-corner.bottom-left, .bottom-left.button-corner {
+  bottom: 0;
+  left: 0;
+  border-bottom-left-radius: inherit;
+}
+
+.label-corner.bottom-left > *, .bottom-left.button-corner > * {
+  -webkit-transform: translateX(-0.6735714286em) translateY(0.6735714286em);
+          transform: translateX(-0.6735714286em) translateY(0.6735714286em);
+}
+
+.label-corner.bottom-left:before, .bottom-left.button-corner:before {
+  bottom: 0;
+  left: 0;
+  -webkit-transform: translateX(-2.4102239713em) translateY(2.4102239713em) rotate(45deg);
+          transform: translateX(-2.4102239713em) translateY(2.4102239713em) rotate(45deg);
+}
+
+.label-corner.bottom-right, .bottom-right.button-corner {
+  bottom: 0;
+  right: 0;
+  border-bottom-right-radius: inherit;
+}
+
+.label-corner.bottom-right > *, .bottom-right.button-corner > * {
+  -webkit-transform: translateX(0.6735714286em) translateY(0.6735714286em);
+          transform: translateX(0.6735714286em) translateY(0.6735714286em);
+}
+
+.label-corner.bottom-right:before, .bottom-right.button-corner:before {
+  bottom: 0;
+  right: 0;
+  -webkit-transform: translateX(2.4102239713em) translateY(2.4102239713em) rotate(45deg);
+          transform: translateX(2.4102239713em) translateY(2.4102239713em) rotate(45deg);
+}
+
+.label-corner:before, .button-corner:before {
+  pointer-events: auto;
+  position: absolute;
+  content: '';
+  height: 4.8204479427em;
+  width: 4.8204479427em;
+  background-color: inherit;
+  visibility: visible;
+}
+
+.label-corner > *, .button-corner > * {
+  padding: 0.99em 0.99em;
+  height: 3.4085714286em;
+  width: 3.4085714286em;
+  margin: 0;
+  border-radius: 0;
+  background-color: transparent !important;
+  color: inherit;
+  margin: 0;
+  visibility: visible;
+}
+
+/* LABEL TAG */
+.label-tag, .button-tag {
+  margin-bottom: 10px;
+}
+
+.label-tag > *, .button-tag > * {
+  margin-left: 1.0370076929em;
+  margin-bottom: 0;
+  /* COLORS */
+}
+
+.label-tag > *:before,
+.button-tag > *:before,
+.label-tag > *:after, .button-tag > *:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  height: 1.8434382579em;
+  width: 1.8434382579em;
+  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg);
+          transform: translateX(50%) translateY(-50%) rotate(45deg);
+}
+
+.label-tag > *:before, .button-tag > *:before {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
+  z-index: -1;
+}
+
+.label-tag > *:before.actionable.active,
+.button-tag > *:before.actionable.active,
+.label-tag > *.button:before.active,
+.button-tag > *.button:before.active,
+.label-tag > *.button-corner:before.active,
+.button-tag > *.button-corner:before.active,
+.label-tag > *:before.button.active,
+.button-tag > *:before.button.active,
+.label-tag > *:before.button-corner.active, .button-tag > *:before.button-corner.active {
+  background: inherit ;
+}
+
+.label-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.button-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.button-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.button-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.button-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.label-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: inherit ;
+}
+
+.label-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.button-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.button-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.button-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.button-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.label-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: inherit ;
+}
+
+.label-tag > *:before.highlight:after, .button-tag > *:before.highlight:after {
+  border-color: inherit ;
+}
+
+.label-tag > *:after, .button-tag > *:after {
+  background-color: #eceff1;
+  border-radius: 50%;
+  box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.3);
+  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg) scale(0.25);
+          transform: translateX(50%) translateY(-50%) rotate(45deg) scale(0.25);
+}
+
+.label-tag > *.compact, .button-tag > *.compact {
+  margin-left: 1.0370076929em;
+}
+
+.label-tag > *.compact:before,
+.button-tag > *.compact:before,
+.label-tag > *.compact:after, .button-tag > *.compact:after {
+  height: 1.8434382579em;
+  width: 1.8434382579em;
+}
+
+.label-tag > *.outlined, .button-tag > *.outlined {
+  border-left-width: 0;
+}
+
+.label-tag > *.outlined:before, .button-tag > *.outlined:before {
+  border-width: 1px;
+  border-style: solid;
+}
+
+.label-tag > *:not(.sharp):before,
+.button-tag > *:not(.sharp):before,
+.label-tag > *:not(.sharp):after, .button-tag > *:not(.sharp):after {
+  right: calc(100% - 0.13325em);
+}
+
+.label-tag > *:not(.sharp):before, .button-tag > *:not(.sharp):before {
+  border-radius: 0.2665em;
+}
+
+.label-tag > *.sharp, .button-tag > *.sharp {
+  margin-left: 1.2092857143em;
+}
+
+.label-tag > *.sharp:before,
+.button-tag > *.sharp:before,
+.label-tag > *.sharp:after, .button-tag > *.sharp:after {
+  height: 1.7101882579em;
+  width: 1.7101882579em;
+  right: 100%;
+}
+
+.label-tag > *.sharp.compact, .button-tag > *.sharp.compact {
+  margin-left: 1.2092857143em;
+}
+
+.label-tag > *.sharp.compact:before,
+.button-tag > *.sharp.compact:before,
+.label-tag > *.sharp.compact:after, .button-tag > *.sharp.compact:after {
+  height: 1.7101882579em;
+  width: 1.7101882579em;
+}
+
+.label-tag > *.tag-circle-primary:after, .button-tag > *.tag-circle-primary:after {
+  background-color: #1565c0;
+}
+
+.label-tag > *.tag-circle-secondary:after, .button-tag > *.tag-circle-secondary:after {
+  background-color: #ef6c00;
+}
+
+.label-tag > *.tag-circle-tertiary:after, .button-tag > *.tag-circle-tertiary:after {
+  background-color: #6a1b9a;
+}
+
+.label-tag > *.tag-circle-quaternary:after, .button-tag > *.tag-circle-quaternary:after {
+  background-color: #2e7d32;
+}
+
+.label-tag > *.tag-circle-white:after, .button-tag > *.tag-circle-white:after {
+  background-color: #ffffff;
+}
+
+.label-tag > *.tag-circle-gray:after, .button-tag > *.tag-circle-gray:after {
+  background-color: #e0e0e0;
+}
+
+.label-tag > *.tag-circle-black:after, .button-tag > *.tag-circle-black:after {
+  background-color: #212121;
+}
+
+.label-tag > *.tag-circle-yellow:after, .button-tag > *.tag-circle-yellow:after {
+  background-color: #fabf40;
+}
+
+.label-tag > *.tag-circle-olive:after, .button-tag > *.tag-circle-olive:after {
+  background-color: #cddc39;
+}
+
+.label-tag > *.tag-circle-green:after, .button-tag > *.tag-circle-green:after {
+  background-color: #4caf50;
+}
+
+.label-tag > *.tag-circle-blue:after, .button-tag > *.tag-circle-blue:after {
+  background-color: #2196f3;
+}
+
+.label-tag > *.tag-circle-violet:after, .button-tag > *.tag-circle-violet:after {
+  background-color: #673ab7;
+}
+
+.label-tag > *.tag-circle-orange:after, .button-tag > *.tag-circle-orange:after {
+  background-color: #ff9800;
+}
+
+.label-tag > *.tag-circle-purple:after, .button-tag > *.tag-circle-purple:after {
+  background-color: #9c27b0;
+}
+
+.label-tag > *.tag-circle-red:after, .button-tag > *.tag-circle-red:after {
+  background-color: #f44336;
+}
+
+.label-tag > *.tag-circle-pink:after, .button-tag > *.tag-circle-pink:after {
+  background-color: #e91e63;
+}
+
+.label-tag > *.tag-circle-teal:after, .button-tag > *.tag-circle-teal:after {
+  background-color: #009688;
+}
+
+.label-tag > *.tag-circle-brown:after, .button-tag > *.tag-circle-brown:after {
+  background-color: #795548;
+}
+
+.label-tag > *.tag-circle-transparent:after, .button-tag > *.tag-circle-transparent:after {
+  background-color: transparent;
+}
+
+.label-tag > *.tag-circle-inherit:after, .button-tag > *.tag-circle-inherit:after {
+  background-color: inherit;
+}
+
+.label-tag > *.tag-circle-base:after, .button-tag > *.tag-circle-base:after {
+  background-color: #eceff1;
+}
+
+/* =========================================================================
+ * Svelto - Helpers (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* BLUR */
+/* BORDER */
+/* ROTATE */
+/* OTHERS */
+/* =========================================================================
+ * Svelto - Helpers v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* BLURRED */
+.blurred {
+  -webkit-filter: url("/blur.svg#blur") !important;
+          filter: url("/blur.svg#blur") !important;
+  -webkit-filter: blur(3px) !important;
+          filter: blur(3px) !important;
+}
+
+/* BORDER */
+.no-border {
+  border-width: 0 !important;
+}
+
+.rounded {
+  border-radius: 1000000px 1000000px !important;
+}
+
+.smooth {
+  border-radius: 0.2665em !important;
+}
+
+.sharp {
+  border-radius: 0 !important;
+}
+
+/* DISPLAY */
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* VISIBILITY */
+.visible {
+  visibility: visible !important;
+}
+
+.invisible {
+  visibility: hidden !important;
+}
+
+/* FLOAT */
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+/* TEXT ALIGNMENT */
+.text-left {
+  text-align: left !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-right {
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* TEXT TRANSFORMATION */
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* TEXT OTHERS */
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis, .truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* PADDING */
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+/* MARGIN */
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.no-margin-right {
+  margin-right: 0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+/* OVERFLOW */
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+/* FLIP */
+.flipX {
+  -webkit-transform: rotateY(180deg) !important;
+          transform: rotateY(180deg) !important;
+}
+
+.flipY {
+  -webkit-transform: rotateX(180deg) !important;
+          transform: rotateX(180deg) !important;
+}
+
+.flip {
+  -webkit-transform: rotateY(180deg) rotateX(180deg) !important;
+          transform: rotateY(180deg) rotateX(180deg) !important;
+}
+
+/* ROTATE */
+.rotate-left {
+  -webkit-transform: rotate(-90deg) !important;
+          transform: rotate(-90deg) !important;
+}
+
+.rotate-right {
+  -webkit-transform: rotate(90deg) !important;
+          transform: rotate(90deg) !important;
+}
+
+.rotating {
+  -webkit-animation: rotate 0.9s linear infinite !important;
+          animation: rotate 0.9s linear infinite !important;
+}
+
+/* GROW */
+.grow {
+  -webkit-flex-grow: 1 !important;
+      -ms-flex-positive: 1 !important;
+          flex-grow: 1 !important;
+}
+
+.no-grow {
+  -webkit-flex-grow: 0 !important;
+      -ms-flex-positive: 0 !important;
+          flex-grow: 0 !important;
+}
+
+/* SHRINK */
+.shrink {
+  -webkit-flex-shrink: 1 !important;
+      -ms-flex-negative: 1 !important;
+          flex-shrink: 1 !important;
+}
+
+.no-shrink {
+  -webkit-flex-shrink: 0 !important;
+      -ms-flex-negative: 0 !important;
+          flex-shrink: 0 !important;
+}
+
+/* OTHERS */
+.centerer {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+.centerer > *:last-child {
+  margin-bottom: 0 !important;
+}
+
+.spacer {
+  -webkit-flex-grow: 1000000 !important;
+      -ms-flex-positive: 1000000 !important;
+          flex-grow: 1000000 !important;
+  margin-bottom: 10px;
+}
+
+.dragging {
+  z-index: 1000000;
+}
+
+.centered:not(.multiple) {
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.limited:not(.multiple) {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: 76rem;
+}
+
+.actionable:not([class*="disabled"]):not(.dragging), .button:not([class*="disabled"]):not(.dragging), .button-corner:not([class*="disabled"]):not(.dragging) {
+  cursor: pointer;
+}
+
+/* =========================================================================
+ * Svelto - Button v0.3.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../label/_label.scss
+ * @requires ../helpers/_helpers.scss
+ * ========================================================================= */
+/* DEFAULT BUTTON */
+button {
+  border: none;
+  padding: 0;
+}
+
+/* BUTTON */
 /* =========================================================================
  * Svelto - Card (Settings) v0.2.0
  * =========================================================================
@@ -4805,272 +5948,6 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - Helpers (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* BLUR */
-/* BORDER */
-/* ROTATE */
-/* OTHERS */
-/* =========================================================================
- * Svelto - Helpers v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* BLURRED */
-.blurred {
-  -webkit-filter: url("/blur.svg#blur") !important;
-          filter: url("/blur.svg#blur") !important;
-  -webkit-filter: blur(3px) !important;
-          filter: blur(3px) !important;
-}
-
-/* BORDER */
-.no-border {
-  border-width: 0 !important;
-}
-
-.rounded {
-  border-radius: 1000000px 1000000px !important;
-}
-
-.smooth {
-  border-radius: 0.2665em !important;
-}
-
-.sharp {
-  border-radius: 0 !important;
-}
-
-/* DISPLAY */
-.show {
-  display: block !important;
-}
-
-.hidden {
-  display: none !important;
-}
-
-/* VISIBILITY */
-.visible {
-  visibility: visible !important;
-}
-
-.invisible {
-  visibility: hidden !important;
-}
-
-/* FLOAT */
-.float-left {
-  float: left !important;
-}
-
-.float-right {
-  float: right !important;
-}
-
-/* TEXT ALIGNMENT */
-.text-left {
-  text-align: left !important;
-}
-
-.text-center {
-  text-align: center !important;
-}
-
-.text-right {
-  text-align: right !important;
-}
-
-.text-justify {
-  text-align: justify !important;
-}
-
-/* TEXT TRANSFORMATION */
-.text-lowercase {
-  text-transform: lowercase !important;
-}
-
-.text-uppercase {
-  text-transform: uppercase !important;
-}
-
-.text-capitalize {
-  text-transform: capitalize !important;
-}
-
-/* TEXT OTHERS */
-.text-nowrap {
-  white-space: nowrap !important;
-}
-
-.text-ellipsis, .truncate {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-}
-
-/* PADDING */
-.no-padding {
-  padding: 0 !important;
-}
-
-.no-padding-top {
-  padding-top: 0 !important;
-}
-
-.no-padding-right {
-  padding-right: 0 !important;
-}
-
-.no-padding-bottom {
-  padding-bottom: 0 !important;
-}
-
-.no-padding-left {
-  padding-left: 0 !important;
-}
-
-/* MARGIN */
-.no-margin {
-  margin: 0 !important;
-}
-
-.no-margin-top {
-  margin-top: 0 !important;
-}
-
-.no-margin-right {
-  margin-right: 0 !important;
-}
-
-.no-margin-bottom {
-  margin-bottom: 0 !important;
-}
-
-.no-margin-left {
-  margin-left: 0 !important;
-}
-
-/* OVERFLOW */
-.overflow-visible {
-  overflow: visible !important;
-}
-
-.overflow-hidden {
-  overflow: hidden !important;
-}
-
-/* FLIP */
-.flipX {
-  -webkit-transform: rotateY(180deg) !important;
-          transform: rotateY(180deg) !important;
-}
-
-.flipY {
-  -webkit-transform: rotateX(180deg) !important;
-          transform: rotateX(180deg) !important;
-}
-
-.flip {
-  -webkit-transform: rotateY(180deg) rotateX(180deg) !important;
-          transform: rotateY(180deg) rotateX(180deg) !important;
-}
-
-/* ROTATE */
-.rotate-left {
-  -webkit-transform: rotate(-90deg) !important;
-          transform: rotate(-90deg) !important;
-}
-
-.rotate-right {
-  -webkit-transform: rotate(90deg) !important;
-          transform: rotate(90deg) !important;
-}
-
-.rotating {
-  -webkit-animation: rotate 0.9s linear infinite !important;
-          animation: rotate 0.9s linear infinite !important;
-}
-
-/* GROW */
-.grow {
-  -webkit-flex-grow: 1 !important;
-      -ms-flex-positive: 1 !important;
-          flex-grow: 1 !important;
-}
-
-.no-grow {
-  -webkit-flex-grow: 0 !important;
-      -ms-flex-positive: 0 !important;
-          flex-grow: 0 !important;
-}
-
-/* SHRINK */
-.shrink {
-  -webkit-flex-shrink: 1 !important;
-      -ms-flex-negative: 1 !important;
-          flex-shrink: 1 !important;
-}
-
-.no-shrink {
-  -webkit-flex-shrink: 0 !important;
-      -ms-flex-negative: 0 !important;
-          flex-shrink: 0 !important;
-}
-
-/* OTHERS */
-.centerer {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  margin-bottom: 10px;
-}
-
-.centerer > *:last-child {
-  margin-bottom: 0 !important;
-}
-
-.spacer {
-  -webkit-flex-grow: 1000000 !important;
-      -ms-flex-positive: 1000000 !important;
-          flex-grow: 1000000 !important;
-  margin-bottom: 10px;
-}
-
-.dragging {
-  z-index: 1000000;
-}
-
-.centered:not(.multiple) {
-  margin-right: auto;
-  margin-left: auto;
-}
-
-.limited:not(.multiple) {
-  margin-right: auto;
-  margin-left: auto;
-  max-width: 76rem;
-}
-
-.actionable:not([class*="disabled"]):not(.dragging) {
-  cursor: pointer;
-}
-
-/* =========================================================================
  * Svelto - Highlight (Settings) v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -5591,26 +6468,6 @@ img {
 }
 
 /* =========================================================================
- * Svelto - Label (Settings) v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * @requires ../container/_settings.scss
- * ========================================================================= */
-/* LABEL */
-/* LABEL COMPACT */
-/* LEFT / RIGHT */
-/* CENTER EXTRA SPACING */
-/* BADGE */
-/* TAG */
-/* TAG CIRCLE */
-/* RIBBON */
-/* CORNER */
-/* FLOATING */
-/* FLOATING COMPACT */
-/* =========================================================================
  * Svelto - Input (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -6014,576 +6871,6 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
     -webkit-transform: rotate(360deg);
             transform: rotate(360deg);
   }
-}
-
-/* =========================================================================
- * Svelto - Label v0.3.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * @requires ../widget/_widget.scss
- * @requires ../icons/_settings.scss
- * ========================================================================= */
-/* DEFAULT */
-label {
-  display: block;
-}
-
-/* LABEL */
-.label {
-  border-color: #d9d9d9 ;
-  color: #3f3f3f ;
-  background: #ffffff ;
-  font-weight: bold;
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  border-radius: 0.2665em;
-  padding: 0.495em 0.99em;
-  min-height: 2.4185714286em;
-  min-width: 3.4085714286em;
-  /* CHILDREN NO MARGIN BOTTOM */
-  /* TEXT GROW */
-  /* OUTLINED */
-  /* COMPACT */
-  /* FLUID */
-  /* LEFT / RIGHT */
-  /* CENTER */
-  /* BADGE */
-  /* FLOATING */
-  /* RIBBON */
-}
-
-.label.gradient {
-  background-image: linear-gradient(to bottom, #fafafa 0%, #fafafa 100%) ;
-  background-repeat: repeat-x ;
-}
-
-.label.actionable.active {
-  background: #fafafa ;
-}
-
-.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fafafa ;
-}
-
-.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #fafafa ;
-}
-
-.label.highlight:after {
-  border-color: #ef6c00 ;
-}
-
-.label p > a {
-  color: #1565c0 ;
-}
-
-.label p > a:after {
-  border-color: #166ac9 ;
-}
-
-.label p > a:hover {
-  color: #166ac9 ;
-}
-
-.label > :not(.label-left):not(.label-right) {
-  margin-bottom: 0 !important;
-}
-
-.label > :not(.label-left):not(.label-right):not(i.icon) {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-}
-
-.label.outlined {
-  min-height: calc(2.4185714286em + 2px);
-  min-width: calc(3.4085714286em + 2px);
-}
-
-.label.compact {
-  padding: 0.495em 0.495em;
-  min-height: 2.4185714286em;
-  min-width: 2.4185714286em;
-}
-
-.label.compact.outlined {
-  min-height: calc(2.4185714286em + 2px);
-  min-width: calc(2.4185714286em + 2px);
-}
-
-.label.fluid {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-}
-
-.label > .label-left,
-.label > .label-right {
-  display: -webkit-inline-flex;
-  display: -ms-inline-flexbox;
-  display: inline-flex;
-  -webkit-align-self: stretch;
-      -ms-flex-item-align: stretch;
-          align-self: stretch;
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-  background-color: rgba(0, 0, 0, 0.05);
-  padding: 0.495em 0.495em;
-  min-height: 2.4185714286em;
-  min-width: 2.4185714286em;
-}
-
-.label > .label-left > :last-child,
-.label > .label-right > :last-child {
-  margin-bottom: 0 !important;
-}
-
-.label > .label-left > :last-child.multiple,
-.label > .label-right > :last-child.multiple {
-  margin-bottom: -10px !important;
-}
-
-.label > .label-left {
-  border-bottom-left-radius: inherit;
-  border-top-left-radius: inherit;
-  margin: -0.495em 0.99em -0.495em -0.99em !important;
-}
-
-.label > .label-right {
-  border-bottom-right-radius: inherit;
-  border-top-right-radius: inherit;
-  margin: -0.495em -0.99em -0.495em 0.99em !important;
-}
-
-.label.compact > .label-left {
-  margin: -0.495em 0.495em -0.495em -0.495em !important;
-}
-
-.label.compact > .label-right {
-  margin: -0.495em -0.495em -0.495em 0.495em !important;
-}
-
-.label.outlined > .label-left {
-  border-right: 1px solid;
-  border-color: inherit !important;
-}
-
-.label.outlined > .label-right {
-  border-left: 1px solid;
-  border-color: inherit !important;
-}
-
-.label > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
-  padding-left: 0.75em;
-}
-
-.label > :not(.label):not(.label-left) + i.icon {
-  padding-left: 0.5em;
-}
-
-.label.compact > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
-  padding-left: 0.5em;
-}
-
-.label.compact > :not(.label):not(.label-left) + i.icon {
-  padding-left: 0.3333333333em;
-}
-
-.label.badge {
-  position: absolute;
-  margin: 0;
-}
-
-.label.badge.top-left {
-  top: -20%;
-  left: -20%;
-}
-
-.label.badge.top-right {
-  top: -20%;
-  right: -20%;
-}
-
-.label.badge.bottom-left {
-  bottom: -20%;
-  left: -20%;
-}
-
-.label.badge.bottom-right {
-  bottom: -20%;
-  right: -20%;
-}
-
-.label.floating {
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
-  position: fixed;
-  z-index: 10;
-  right: 24px;
-  bottom: 24px;
-  margin-bottom: 0;
-  padding: 0.792em 0.792em;
-  min-height: 3.0125714286em;
-  min-width: 3.0125714286em;
-}
-
-.label.floating.compact {
-  padding: 0.396em 0.396em;
-  min-height: 2.2205714286em;
-  min-width: 2.2205714286em;
-}
-
-.label.ribbon {
-  position: absolute;
-}
-
-.label.ribbon.ribbon-left:before,
-.label.ribbon.ribbon-right:after {
-  position: absolute;
-  z-index: -1;
-  content: '';
-  border: 8px solid transparent;
-  border-top-color: inherit;
-  bottom: -16px;
-}
-
-.label.ribbon.ribbon-left {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
-  left: -16px;
-  padding-left: calc(0.99em + 10px);
-}
-
-.label.ribbon.ribbon-left:before {
-  left: 0;
-  border-right-color: inherit;
-}
-
-.label.ribbon.ribbon-right {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
-  right: -16px;
-  padding-right: calc(0.99em + 10px);
-}
-
-.label.ribbon.ribbon-right:after {
-  right: 0;
-  border-left-color: inherit;
-}
-
-.label.ribbon.outlined.ribbon-left:before,
-.label.ribbon.outlined.ribbon-right:after {
-  bottom: -17px;
-}
-
-.label.ribbon.outlined.ribbon-left:before {
-  left: -1px;
-}
-
-.label.ribbon.outlined.ribbon-right:after {
-  right: -1px;
-}
-
-/* LABEL CORNER */
-.label-corner {
-  position: absolute;
-  z-index: 10;
-  visibility: hidden;
-  overflow: hidden;
-  pointer-events: none;
-}
-
-.label-corner.top-left {
-  top: 0;
-  left: 0;
-  border-top-left-radius: inherit;
-}
-
-.label-corner.top-left > .label {
-  -webkit-transform: translateX(-0.6735714286em) translateY(-0.6735714286em);
-          transform: translateX(-0.6735714286em) translateY(-0.6735714286em);
-}
-
-.label-corner.top-left:before {
-  top: 0;
-  left: 0;
-  -webkit-transform: translateX(-2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
-          transform: translateX(-2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
-}
-
-.label-corner.top-right {
-  top: 0;
-  right: 0;
-  border-top-right-radius: inherit;
-}
-
-.label-corner.top-right > .label {
-  -webkit-transform: translateX(0.6735714286em) translateY(-0.6735714286em);
-          transform: translateX(0.6735714286em) translateY(-0.6735714286em);
-}
-
-.label-corner.top-right:before {
-  top: 0;
-  right: 0;
-  -webkit-transform: translateX(2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
-          transform: translateX(2.4102239713em) translateY(-2.4102239713em) rotate(45deg);
-}
-
-.label-corner.bottom-left {
-  bottom: 0;
-  left: 0;
-  border-bottom-left-radius: inherit;
-}
-
-.label-corner.bottom-left > .label {
-  -webkit-transform: translateX(-0.6735714286em) translateY(0.6735714286em);
-          transform: translateX(-0.6735714286em) translateY(0.6735714286em);
-}
-
-.label-corner.bottom-left:before {
-  bottom: 0;
-  left: 0;
-  -webkit-transform: translateX(-2.4102239713em) translateY(2.4102239713em) rotate(45deg);
-          transform: translateX(-2.4102239713em) translateY(2.4102239713em) rotate(45deg);
-}
-
-.label-corner.bottom-right {
-  bottom: 0;
-  right: 0;
-  border-bottom-right-radius: inherit;
-}
-
-.label-corner.bottom-right > .label {
-  -webkit-transform: translateX(0.6735714286em) translateY(0.6735714286em);
-          transform: translateX(0.6735714286em) translateY(0.6735714286em);
-}
-
-.label-corner.bottom-right:before {
-  bottom: 0;
-  right: 0;
-  -webkit-transform: translateX(2.4102239713em) translateY(2.4102239713em) rotate(45deg);
-          transform: translateX(2.4102239713em) translateY(2.4102239713em) rotate(45deg);
-}
-
-.label-corner:before {
-  position: absolute;
-  content: '';
-  height: 4.8204479427em;
-  width: 4.8204479427em;
-  background-color: inherit;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.label-corner > .label {
-  padding: 0.99em 0.99em;
-  height: 3.4085714286em;
-  width: 3.4085714286em;
-  margin: 0;
-  border-radius: 0;
-  background-color: transparent !important;
-  color: inherit;
-  margin: 0;
-  visibility: visible;
-}
-
-/* LABEL TAG */
-.label-tag {
-  margin-bottom: 10px;
-}
-
-.label-tag > .label {
-  margin-left: 1.0370076929em;
-  margin-bottom: 0;
-  /* COLORS */
-}
-
-.label-tag > .label:before,
-.label-tag > .label:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  height: 1.8434382579em;
-  width: 1.8434382579em;
-  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg);
-          transform: translateX(50%) translateY(-50%) rotate(45deg);
-}
-
-.label-tag > .label:before {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  z-index: -1;
-}
-
-.label-tag > .label:before.actionable.active {
-  background: inherit ;
-}
-
-.label-tag > .label:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit ;
-}
-
-.label-tag > .label:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit ;
-}
-
-.label-tag > .label:before.highlight:after {
-  border-color: inherit ;
-}
-
-.label-tag > .label:after {
-  background-color: #eceff1;
-  border-radius: 50%;
-  box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.3);
-  -webkit-transform: translateX(50%) translateY(-50%) rotate(45deg) scale(0.25);
-          transform: translateX(50%) translateY(-50%) rotate(45deg) scale(0.25);
-}
-
-.label-tag > .label.compact {
-  margin-left: 1.0370076929em;
-}
-
-.label-tag > .label.compact:before,
-.label-tag > .label.compact:after {
-  height: 1.8434382579em;
-  width: 1.8434382579em;
-}
-
-.label-tag > .label.outlined {
-  border-left-width: 0;
-}
-
-.label-tag > .label.outlined:before {
-  border-width: 1px;
-  border-style: solid;
-}
-
-.label-tag > .label:not(.sharp):before,
-.label-tag > .label:not(.sharp):after {
-  right: calc(100% - 0.13325em);
-}
-
-.label-tag > .label:not(.sharp):before {
-  border-radius: 0.2665em;
-}
-
-.label-tag > .label.sharp {
-  margin-left: 1.2092857143em;
-}
-
-.label-tag > .label.sharp:before,
-.label-tag > .label.sharp:after {
-  height: 1.7101882579em;
-  width: 1.7101882579em;
-  right: 100%;
-}
-
-.label-tag > .label.sharp.compact {
-  margin-left: 1.2092857143em;
-}
-
-.label-tag > .label.sharp.compact:before,
-.label-tag > .label.sharp.compact:after {
-  height: 1.7101882579em;
-  width: 1.7101882579em;
-}
-
-.label-tag > .label.tag-circle-primary:after {
-  background-color: #1565c0;
-}
-
-.label-tag > .label.tag-circle-secondary:after {
-  background-color: #ef6c00;
-}
-
-.label-tag > .label.tag-circle-tertiary:after {
-  background-color: #6a1b9a;
-}
-
-.label-tag > .label.tag-circle-quaternary:after {
-  background-color: #2e7d32;
-}
-
-.label-tag > .label.tag-circle-white:after {
-  background-color: #ffffff;
-}
-
-.label-tag > .label.tag-circle-gray:after {
-  background-color: #e0e0e0;
-}
-
-.label-tag > .label.tag-circle-black:after {
-  background-color: #212121;
-}
-
-.label-tag > .label.tag-circle-yellow:after {
-  background-color: #fabf40;
-}
-
-.label-tag > .label.tag-circle-olive:after {
-  background-color: #cddc39;
-}
-
-.label-tag > .label.tag-circle-green:after {
-  background-color: #4caf50;
-}
-
-.label-tag > .label.tag-circle-blue:after {
-  background-color: #2196f3;
-}
-
-.label-tag > .label.tag-circle-violet:after {
-  background-color: #673ab7;
-}
-
-.label-tag > .label.tag-circle-orange:after {
-  background-color: #ff9800;
-}
-
-.label-tag > .label.tag-circle-purple:after {
-  background-color: #9c27b0;
-}
-
-.label-tag > .label.tag-circle-red:after {
-  background-color: #f44336;
-}
-
-.label-tag > .label.tag-circle-pink:after {
-  background-color: #e91e63;
-}
-
-.label-tag > .label.tag-circle-teal:after {
-  background-color: #009688;
-}
-
-.label-tag > .label.tag-circle-brown:after {
-  background-color: #795548;
-}
-
-.label-tag > .label.tag-circle-transparent:after {
-  background-color: transparent;
-}
-
-.label-tag > .label.tag-circle-inherit:after {
-  background-color: inherit;
-}
-
-.label-tag > .label.tag-circle-base:after {
-  background-color: #eceff1;
 }
 
 /* =========================================================================
@@ -10171,7 +10458,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
   margin-left: 0;
 }
 
-.tabs:not(.vertical) > .tabs-buttons > .multiple > .label-wrp > .label {
+.tabs:not(.vertical) > .tabs-buttons > .multiple > .label-wrp > .label, .tabs:not(.vertical) > .tabs-buttons > .multiple > .label-wrp > .button {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -10198,7 +10485,7 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
           align-items: stretch;
 }
 
-.tabs.vertical > .tabs-buttons > .multiple .label {
+.tabs.vertical > .tabs-buttons > .multiple .label, .tabs.vertical > .tabs-buttons > .multiple .button {
   border-top-right-radius: 0;
   border-bottom-right-radius: 0;
 }

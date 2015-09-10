@@ -49,12 +49,12 @@ append main
       span Settings
       +icon('settings')
     +button
-      +button-left
+      +button-sub-left
         +icon('settings')
       span Settings
     +button
       span Settings
-      +button-right
+      +button-sub-right
         +icon('settings')
 
   +divider Rounded
@@ -133,5 +133,5 @@ append main
 append body-end
   +script.
     function toggle_class ( css_class ) {
-      $('.label').not ( '.actions .button').toggleClass ( css_class );
+      $('.button').not ( '.actions .button').toggleClass ( css_class );
     }

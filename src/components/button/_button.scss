@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Accordion v0.1.0
+ * Svelto - Button v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires _settings.scss
+ * @requires ../label/_label.scss
+ * @requires ../helpers/_helpers.scss
  * ========================================================================= */
 
 /* DEFAULT BUTTON */
@@ -17,5 +18,16 @@ button {
 
 /* BUTTON */
 
-//FIXME: Pointed buttons doen't work as expected, the pointer is not clickable and it doesn't react to a click to the actual button
-//TODO
+.button {
+  @extend .label;
+  @extend .actionable;
+}
+
+.button-corner {
+  @extend .label-corner;
+  @extend .actionable;
+}
+
+.button-tag {
+  @extend .label-tag;
+}

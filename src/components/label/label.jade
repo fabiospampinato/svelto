@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Label v0.2.0
+//- Svelto - Label v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,12 +10,12 @@ mixin label
   .label&attributes(attributes)
     block
 
-mixin label-left
-  .label-left&attributes(attributes)
+mixin label-sub-left
+  .sub&attributes(attributes).left
     block
       
-mixin label-right
-  .label-right&attributes(attributes)
+mixin label-sub-right
+  .sub&attributes(attributes).right
     block
 
 mixin label-icon(icon)

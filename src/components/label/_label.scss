@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Label v0.3.0
+ * Svelto - Label v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -34,13 +34,13 @@ label {
 
   /* CHILDREN NO MARGIN BOTTOM */
 
-  > :not(.label-left):not(.label-right) {
+  > :not(.sub) {
     margin-bottom: 0 !important;
   }
 
   /* TEXT GROW */
 
-  > :not(.label-left):not(.label-right):not(i.icon) {
+  > :not(.sub):not(i.icon) {
     flex-grow: 1;
   }
 
@@ -74,49 +74,50 @@ label {
 
   /* LEFT / RIGHT */
 
-  > .label-left,
-  > .label-right {
+  > .sub {
+
     @include last-child-no-gutter ();
     display: inline-flex;
     align-self: stretch;
     align-items: center;
     justify-content: center;
-    background-color: $label-left-right-bg-color;
+    background-color: $label-sub-bg-color;
     padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
     min-height: $line-height-em + ( $label-compact-vertical-padding * 2 );
     min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
+
+    &.left {
+      @include border-left-radius ( inherit );
+      margin: ( - $label-vertical-padding ) $label-horizontal-padding ( - $label-vertical-padding ) ( - $label-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      @include border-right-radius ( inherit );
+      margin: ( - $label-vertical-padding ) ( - $label-horizontal-padding ) ( - $label-vertical-padding ) $label-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
+    }
+
   }
 
-  > .label-left {
-    @include border-left-radius ( inherit );
-    margin: ( - $label-vertical-padding ) $label-horizontal-padding ( - $label-vertical-padding ) ( - $label-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
-  }
+  &.compact > .sub {
 
-  > .label-right {
-    @include border-right-radius ( inherit );
-    margin: ( - $label-vertical-padding ) ( - $label-horizontal-padding ) ( - $label-vertical-padding ) $label-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
-  }
-
-  &.compact {
-
-    > .label-left {
+    &.left {
       margin: ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
     }
 
-    > .label-right {
+    &.right {
       margin: ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
     }
 
   }
 
-  &.outlined {
+  &.outlined > .sub {
 
-    > .label-left {
+    &.left {
       border-right: 1px solid;
       border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
     }
 
-    > .label-right {
+    &.right {
       border-left: 1px solid;
       border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
     }
@@ -125,22 +126,30 @@ label {
 
   /* CENTER */
 
-  > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
-    padding-left: $label-center-extra-spacing;
-  }
+  > :not(.label):not(.button):not(.sub.left) { //INFO: Both `.label` and `.button`
 
-  > :not(.label):not(.label-left) + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
-    padding-left: $label-center-extra-spacing / $icon-scale-amount;
+    & + :not(.sub.right):not(i.icon) {
+      padding-left: $label-center-extra-spacing;
+    }
+
+    & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+      padding-left: $label-center-extra-spacing / $icon-scale-amount;
+    }
+
   }
 
   &.compact {
 
-    > :not(.label):not(.label-left) + :not(.label-right):not(i.icon) {
-      padding-left: $label-compact-center-extra-spacing;
-    }
+    > :not(.label):not(.button):not(.sub.left) { //INFO: Both `.label` and `.button`
 
-    > :not(.label):not(.label-left) + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
-      padding-left: $label-compact-center-extra-spacing / $icon-scale-amount;
+      & + :not(.sub.right):not(i.icon) {
+        padding-left: $label-compact-center-extra-spacing;
+      }
+
+      & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+        padding-left: $label-compact-center-extra-spacing / $icon-scale-amount;
+      }
+
     }
 
   }
@@ -276,7 +285,7 @@ label {
     left: 0;
     border-top-left-radius: inherit;
 
-    & > .label {
+    > * { //INFO: Both `.label` and `.button`
       transform: translateX(-($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8 ));
     }
 
@@ -294,7 +303,7 @@ label {
     right: 0;
     border-top-right-radius: inherit;
 
-    > .label {
+    > * { //INFO: Both `.label` and `.button`
       transform: translateX($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8));
     }
 
@@ -312,7 +321,7 @@ label {
     left: 0;
     border-bottom-left-radius: inherit;
 
-    > .label {
+    > * { //INFO: Both `.label` and `.button`
       transform: translateX(-($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8)) translateY($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8);
     }
 
@@ -330,7 +339,7 @@ label {
     right: 0;
     border-bottom-right-radius: inherit;
 
-    > .label {
+    > * { //INFO: Both `.label` and `.button`
       transform: translateX($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8) translateY($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8);
     }
 
@@ -343,16 +352,16 @@ label {
   }
 
   &:before {
+    pointer-events: auto;
     position: absolute;
     content: '';
     height: ( $line-height-em + ( $label-corner-vertical-padding * 2 ) ) * $SQRT2;
     width: ( $line-height-em + ( $label-corner-horizontal-padding * 2 ) ) * $SQRT2;
     background-color: inherit;
     visibility: visible;
-    pointer-events: auto;
   }
 
-  > .label {
+  > * { //INFO: Both `.label` and `.button`
     padding: $label-corner-vertical-padding $label-corner-horizontal-padding;
     height: $line-height-em + ( $label-corner-vertical-padding * 2 );
     width: $line-height-em + ( $label-corner-horizontal-padding * 2 );
@@ -372,7 +381,7 @@ label {
 
   margin-bottom: $gutter;
 
-  & > .label {
+  & > * { //INFO: Both `.label` and `.button`
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;

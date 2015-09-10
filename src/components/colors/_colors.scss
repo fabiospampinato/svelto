@@ -42,7 +42,9 @@
 
     }
 
-    &.actionable {
+    &.actionable,
+    &.button,
+    &.button-corner {
 
       &.active {
         background: $bg-active #{$extra};
