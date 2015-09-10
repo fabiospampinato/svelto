@@ -2269,28 +2269,28 @@ button {
 /* WIDGET */
 .widget, .container, .card-header,
 .card-block,
-.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, .image-wrp, .infobar-wrp, label, .label, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, i.icon, .image-wrp, .infobar-wrp, label, .label, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, label > :last-child, .label > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, label > :last-child, .label > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
 .widget.disabled, .disabled.container, .disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, .disabled.image-wrp, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], [class*="-disabled"].container, [class*="-disabled"].card-header,
+.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, label.disabled, .disabled.label, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -5262,20 +5262,19 @@ hr {
 }
 
 /* =========================================================================
- * Svelto - Icons v0.2.0
+ * Svelto - Icons v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../sizes/_settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
-/* PLACEHOLDER */
-.icon-wrp {
+/* ICON */
+i.icon {
   display: inline-block;
   vertical-align: middle;
-}
-
-.icon-wrp > .icon, .slider:not(.slider-disabled) > .slider-min:hover:after, .slider:not(.slider-disabled) > .slider-max:hover:after, table.table.sortable > thead > tr > th[data-sort]:before, table.table.sortable > thead > tr > th[data-sort]:after {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
@@ -5296,9 +5295,53 @@ hr {
   -webkit-font-feature-settings: 'liga';
      -moz-font-feature-settings: 'liga';
           font-feature-settings: 'liga';
+  /* SCALED SIZES */
 }
 
-/* ICON */
+i.icon.xxxxsmall {
+  font-size: 0.375em !important;
+}
+
+i.icon.xxxsmall {
+  font-size: 0.5625em !important;
+}
+
+i.icon.xxsmall {
+  font-size: 0.75em !important;
+}
+
+i.icon.xsmall {
+  font-size: 1.125em !important;
+}
+
+i.icon.small {
+  font-size: 1.3125em !important;
+}
+
+i.icon.medium {
+  font-size: 1.5em !important;
+}
+
+i.icon.large {
+  font-size: 1.875em !important;
+}
+
+i.icon.xlarge {
+  font-size: 2.25em !important;
+}
+
+i.icon.xxlarge {
+  font-size: 2.625em !important;
+}
+
+i.icon.xxxlarge {
+  font-size: 3em !important;
+}
+
+i.icon.xxxxlarge {
+  font-size: 3.75em !important;
+}
+
 /* =========================================================================
  * Svelto - Image (Settings) v0.1.0
  * =========================================================================

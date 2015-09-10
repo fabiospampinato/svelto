@@ -1,21 +1,22 @@
 
 /* =========================================================================
- * Svelto - Icons v0.2.0
+ * Svelto - Icons v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../sizes/_settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-/* PLACEHOLDER */
+/* ICON */
 
-%icon-wrp {
+i.icon {
+
+  @extend .widget;
   display: inline-block;
   vertical-align: middle;
-}
-
-%icon {
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
@@ -35,16 +36,15 @@
   -moz-osx-font-smoothing: grayscale;
   /* Support for all WebKit browsers */
   font-feature-settings: 'liga';
-}
 
-/* ICON */
+  /* SCALED SIZES */
 
-.icon-wrp {
+  @each $name, $font-size in $sizes {
 
-  @extend %icon-wrp;
+    &.#{$name} {
+      font-size: ( $font-size * $icon-scale-amount ) !important;
+    }
 
-  > .icon {
-    @extend %icon;
   }
 
 }

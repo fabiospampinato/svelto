@@ -1,14 +1,13 @@
 
 //- =========================================================================
-//- Svelto - Icons v0.1.0
+//- Svelto - Icons v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
 mixin icon(icon)
-  .icon-wrp&attributes(attributes)
-    .icon
-      if icon
-        = icon
-      block
+  i&attributes(attributes).icon
+    if icon
+      = icon
+    block
