@@ -98,7 +98,7 @@ gulp.task ( 'examples', function () {
              }) )
              .pipe ( jade ({
                locals: {},
-               pretty: true
+               pretty: false //INFO: Otherwise there are some bugs for example when outputting a block inside a textarea, it gets unneeed extra whitespaces at the beginning
              }))
              .on ( 'error', function ( err ) {
                gutil.log ( err.message );

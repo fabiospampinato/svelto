@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * @requires ../highlight/_highlight.scss
  * ========================================================================= */
 
 /* INPUT */
@@ -17,47 +19,46 @@
 
 .input-wrp {
 
+  @extend .widget;
   @include color ( $input-wrp-color, $input-wrp-color-basic );
-  position: relative;
-  display: block; //FIXME: there are problems with inline-flex or flex (in `outlined` theme when the textarea pushed the bottom height whe have overflow problems)
-  margin-bottom: $gutter;
+  display: flex; //INFO: For some reasons it fixes a border problem, without it there might be a missing border at the bottom when outlined
+  align-items: center;
   border-radius: $input-wrp-border-radius;
 
-  & > .text-field {
-    @include color ( $input-color, $input-color-basic );
+  /* TEXT FIELD */
+
+  > .text-field {
+    @include color ( 'inherit', true );
     width: 100%;
     border: none;
     border-radius: inherit;
+    display: inline-block;
   }
 
-  & > label {
+  /* LABEL */
+
+  > label {
     @include center-absolute ( false, $input-label-height );
     @include color ( 'inherit', true );
-    font-size: $input-label-font-size;
-    height: $input-label-height;
-    line-height: $input-label-height;
-    margin-bottom: 0;
+    @include border-top-radius ( inherit );
     left: 0;
-    padding-left: $input-horizontal-padding;
+    margin-bottom: 0;
+    padding-left: $input-padding-horizontal;
     transition-duration: $input-transition-all-duration;
     transition-property: color, opacity, top, font-size, margin, padding;
     pointer-events: none;
     opacity: $input-label-opacity;
-    width: calc(100% - #{$SCROLLBAR-WIDTH});
+    width: 100%; //FIXME: It maybe go over the scrollbar in a textarea
   }
 
-  & > .text-field-bar {
-    position: absolute;
-    z-index: $input-bar-z-index;
-    right: 0;
-    left: 0;
-    height: 100%;
-    content: '';
+  /* BAR */
+
+  > .text-field-bar {
+    @extend %highlight-after;
     transition: transform $input-transition-all-duration;
+    border-bottom-width: $highlight-size;
+    border-color: $input-active-color;
     transform: scaleX(0);
-    pointer-events: none;
-    border-bottom: $input-bar-height solid $input-active-color;
-    border-radius: inherit;
   }
 
   /* COLORS */
@@ -68,7 +69,7 @@
 
     &.text-field-#{$name} {
 
-      & > .text-field {
+      > .text-field {
 
         &:focus ~ label {
           color: $bg !important;
@@ -76,7 +77,7 @@
 
       }
 
-      & > .text-field-bar {
+      > .text-field-bar {
         border-bottom-color: $bg !important;
       }
 
@@ -84,45 +85,55 @@
 
   }
 
+  /* FLOATING */
+
   &:not(.no-floating) {
+
+    /* UNOUTLINED */
 
     &:not(.outlined) {
 
-      & > .text-field {
-        height: $line-height-em + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: ( $input-vertical-padding + ( $input-label-active-height / 2) ) $input-horizontal-padding $input-vertical-padding;
+      > .text-field {
+        padding: ( $input-padding-vertical + ( $input-label-active-height / 2) ) $input-padding-horizontal $input-padding-vertical;
+        height: $line-height-em + ( $input-padding-vertical * 2 ) + ( $input-label-active-height / 2); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
       }
 
       &.compact > .text-field {
-        height: $line-height-em + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: ( $input-compact-vertical-padding + ( $input-label-active-height / 2) ) $input-compact-horizontal-padding $input-compact-vertical-padding;
+        padding: ( $input-compact-padding-vertical + ( $input-label-active-height / 2) ) $input-compact-padding-horizontal $input-compact-padding-vertical;
+        height: $line-height-em + ( $input-compact-padding-vertical * 2 ) + ( $input-label-active-height / 2); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
       }
 
     }
+
+    /* OUTLINED */
 
     &.outlined {
 
-      & > .text-field {
-        height: calc(#{$line-height-em + ( $input-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-vertical-padding + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-horizontal-padding $input-vertical-padding;
+      > .text-field {
+        padding: ( $input-padding-vertical + ( $input-label-active-height / 2 ) ) $input-padding-horizontal $input-padding-vertical;
+        height: ( $line-height-em + ( $input-padding-vertical * 2 ) ) + ( $input-label-active-height / 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
       }
 
       &.compact > .text-field {
-        height: calc(#{$line-height-em + ( $input-compact-vertical-padding * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-compact-vertical-padding + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-compact-horizontal-padding $input-compact-vertical-padding;
+        padding: ( $input-compact-padding-vertical + ( $input-label-active-height / 2 ) ) $input-compact-padding-horizontal $input-compact-padding-vertical;
+        height: ( $line-height-em + ( $input-compact-padding-vertical * 2 ) ) + ( $input-label-active-height / 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
       }
 
     }
 
+    /* ENABLED */
+
     &:not(.disabled) {
 
-      & > .text-field {
+      > .text-field {
 
-        &:focus ~ label, &:valid ~ label {
-          height: $input-label-active-height;
+        &:focus ~ label,
+        &:valid ~ label {
+          height: calc(#{$input-label-active-height} + #{$gutter-half});
           line-height: $input-label-active-height;
           font-size: $input-label-active-font-size;
-          top: $gutter-half / 2;
+          top: 0;
+          padding-bottom: $gutter-half;
           padding-left: 0;
           margin-top: 0;
           opacity: $input-label-active-opacity;
@@ -134,21 +145,28 @@
 
       }
 
+      /* OUTLINED */
+
       &.outlined {
 
-        & > .text-field {
+        > .text-field {
 
-          &:focus ~ label, &:valid ~ label {
+          &:focus ~ label,
+          &:valid ~ label {
+            padding-top: $gutter-half !important;
             padding-left: $gutter !important;
           }
 
         }
 
+        /* COMPACT */
+
         &.compact {
 
-          & > .text-field {
+          > .text-field {
 
-            &:focus ~ label, &:valid ~ label {
+            &:focus ~ label,
+            &:valid ~ label {
               padding-left: $gutter-half !important;
             }
 
@@ -162,37 +180,45 @@
 
   }
 
+  /* NO FLOATING */
+
   &.no-floating {
+
+    /* UNOUTLINED */
 
     &:not(.outlined) {
 
-      & > .text-field {
-        height: $line-height-em + ( $input-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: $input-vertical-padding $input-horizontal-padding;
+      > .text-field {
+        height: $line-height-em + ( $input-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+        padding: $input-padding-vertical $input-padding-horizontal;
       }
 
       &.compact > .text-field {
-        height: $line-height-em + ( $input-compact-vertical-padding * 2 ); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
+        height: $line-height-em + ( $input-compact-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+        padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
       }
 
     }
+
+    /* OUTLINED */
 
     &.outlined {
 
-      & > .text-field {
-        height: calc(#{$line-height-em + ( $input-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-vertical-padding} - #{2 * $outline-width}) $input-horizontal-padding $input-vertical-padding;
+      > .text-field {
+        height: $line-height-em + ( $input-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+        padding: $input-padding-vertical $input-padding-horizontal;
       }
 
       &.compact > .text-field {
-        height: calc(#{$line-height-em + ( $input-compact-vertical-padding * 2 )} - #{2 * $outline-width}); //FIXME: It should be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-compact-vertical-padding} - #{2 * $outline-width}) $input-compact-horizontal-padding $input-compact-vertical-padding;
+        height: $line-height-em + ( $input-compact-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+        padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
       }
 
     }
 
-    & > .text-field {
+    /* TEXT FIELD */
+
+    > .text-field {
 
       &:valid ~ label {
         opacity: 0;
@@ -200,13 +226,19 @@
 
     }
 
-    & > label {
+    /* LABEL */
+
+    > label {
       transition-duration: $input-transition-all-duration / 2;
     }
 
   }
 
+  /* WITH BAR */
+
   &:not(.no-bar) {
+
+    /* NO INITIAL */
 
     &:not(.no-initial-bar) {
 
@@ -215,15 +247,17 @@
         border-width: 0 0 $outline-width 0;
       }
 
-      & > .text-field-bar {
+      > .text-field-bar {
         bottom: - $outline-width;
       }
 
     }
 
+    /* ENABLED */
+
     &:not(.disabled) {
 
-      & > .text-field {
+      > .text-field {
 
         &:focus ~ .text-field-bar {
           transform: scaleX(1);
@@ -235,6 +269,8 @@
 
   }
 
+  /* NO INITIAL BAR */
+
   &.no-bar, &.no-initial-bar {
 
     &:not(.outlined) {
@@ -242,40 +278,50 @@
     }
 
     &.outlined {
-      & > .text-field-bar {
+
+      > .text-field-bar {
         bottom: - $outline-width;
       }
+
     }
 
   }
 
+  /* NO BAR */
+
   &.no-bar {
 
-    & > .text-field-bar {
+    > .text-field-bar {
       bottom: - $outline-width;
     }
 
   }
 
+  /* FLUID */
+
   &.fluid {
     width: 100%;
   }
 
+  /* COMPACT */
+
   &.compact {
 
-    & > .text-field {
-      padding: $input-compact-vertical-padding $input-compact-horizontal-padding;
+    > .text-field {
+      padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
     }
 
-    & > label {
-      padding-left: $input-compact-horizontal-padding;
+    > label {
+      padding-left: $input-compact-padding-horizontal;
     }
 
   }
 
+  /* DISABLED */
+
   &.disabled {
 
-    & > .text-field {
+    > .text-field {
       visibility: hidden;
     }
 

@@ -2498,28 +2498,28 @@ body.fixed-header > main {
 /* WIDGET */
 .widget, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, i.icon, .image-wrp, .infobar-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, i.icon, .image-wrp, .infobar-wrp, .input-wrp, .textarea-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
 .widget.disabled, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
+.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -5965,7 +5965,7 @@ hr {
  * @requires _settings.scss
  * ========================================================================= */
 /* HIGHLIGHT:AFTER */
-.highlight:after, .link:after, p > a:after {
+.highlight:after, .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar, .link:after, p > a:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -6157,8 +6157,8 @@ i.icon {
   font-weight: normal;
   font-style: normal;
   font-size: 1.5em;
-  min-width: 1em;
-  min-height: 1em;
+  width: 1em;
+  height: 1em;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
@@ -6468,20 +6468,23 @@ img {
 }
 
 /* =========================================================================
- * Svelto - Input (Settings) v0.1.0
+ * Svelto - Input (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * @requires ../label/_settings.scss
  * @requires ../highlight/_settings.scss
  * ========================================================================= */
 /* INPUT WRAPPER */
 /* INPUT */
+/* INPUT COMPACT */
+/* INPUT ACTIVE */
 /* LABEL */
+/* LABEL ACTIVE */
 /* BAR */
-/* STATES */
 /* OTHERS */
 /* =========================================================================
  * Svelto - Input v0.1.0
@@ -6490,17 +6493,33 @@ img {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * @requires ../highlight/_highlight.scss
  * ========================================================================= */
 /* INPUT */
 .input-wrp, .textarea-wrp {
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
   background: #ffffff ;
-  position: relative;
-  display: block;
-  margin-bottom: 10px;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   border-radius: 0.2665em;
+  /* TEXT FIELD */
+  /* LABEL */
+  /* BAR */
   /* COLORS */
+  /* FLOATING */
+  /* NO FLOATING */
+  /* WITH BAR */
+  /* NO INITIAL BAR */
+  /* NO BAR */
+  /* FLUID */
+  /* COMPACT */
+  /* DISABLED */
 }
 
 .input-wrp p > a, .textarea-wrp p > a {
@@ -6522,6 +6541,7 @@ img {
   width: 100%;
   border: none;
   border-radius: inherit;
+  display: inline-block;
 }
 
 .input-wrp > label, .textarea-wrp > label {
@@ -6531,33 +6551,25 @@ img {
   border-color: inherit ;
   color: inherit ;
   background: inherit ;
-  font-size: 1em;
-  height: 1.4285714286em;
-  line-height: 1.4285714286em;
-  margin-bottom: 0;
+  border-top-right-radius: inherit;
+  border-top-left-radius: inherit;
   left: 0;
+  margin-bottom: 0;
   padding-left: 0.99em;
   transition-duration: 0.15s;
   transition-property: color, opacity, top, font-size, margin, padding;
   pointer-events: none;
   opacity: 0.75;
-  width: calc(100% - 17px);
+  width: 100%;
 }
 
 .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar {
-  position: absolute;
-  z-index: 10;
-  right: 0;
-  left: 0;
-  height: 100%;
-  content: '';
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
+  border-bottom-width: 2px;
+  border-color: #ef6c00;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
-  pointer-events: none;
-  border-bottom: 2px solid #ef6c00;
-  border-radius: inherit;
 }
 
 .input-wrp.text-field-primary > .text-field:focus ~ label, .text-field-primary.textarea-wrp > .text-field:focus ~ label {
@@ -6728,31 +6740,44 @@ img {
   border-bottom-color: #eceff1 !important;
 }
 
+.input-wrp:not(.no-floating), .textarea-wrp:not(.no-floating) {
+  /* UNOUTLINED */
+  /* OUTLINED */
+  /* ENABLED */
+}
+
 .input-wrp:not(.no-floating):not(.outlined) > .text-field, .textarea-wrp:not(.no-floating):not(.outlined) > .text-field {
-  height: 2.99em;
   padding: 1.0664285714em 0.99em 0.495em;
+  height: 2.99em;
 }
 
 .input-wrp:not(.no-floating):not(.outlined).compact > .text-field, .textarea-wrp:not(.no-floating):not(.outlined).compact > .text-field {
-  height: 2.99em;
   padding: 1.0664285714em 0.495em 0.495em;
+  height: 2.99em;
 }
 
 .input-wrp:not(.no-floating).outlined > .text-field, .textarea-wrp:not(.no-floating).outlined > .text-field {
-  height: calc(2.99em - 2px);
-  padding: calc(1.0664285714em - 2px) 0.99em 0.495em;
+  padding: 1.0664285714em 0.99em 0.495em;
+  height: 2.99em;
 }
 
 .input-wrp:not(.no-floating).outlined.compact > .text-field, .textarea-wrp:not(.no-floating).outlined.compact > .text-field {
-  height: calc(2.99em - 2px);
-  padding: calc(1.0664285714em - 2px) 0.495em 0.495em;
+  padding: 1.0664285714em 0.495em 0.495em;
+  height: 2.99em;
 }
 
-.input-wrp:not(.no-floating):not(.disabled) > .text-field:focus ~ label, .textarea-wrp:not(.no-floating):not(.disabled) > .text-field:focus ~ label, .input-wrp:not(.no-floating):not(.disabled) > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled) > .text-field:valid ~ label {
-  height: 1.1428571429em;
+.input-wrp:not(.no-floating):not(.disabled), .textarea-wrp:not(.no-floating):not(.disabled) {
+  /* OUTLINED */
+}
+
+.input-wrp:not(.no-floating):not(.disabled) > .text-field:focus ~ label,
+.textarea-wrp:not(.no-floating):not(.disabled) > .text-field:focus ~ label,
+.input-wrp:not(.no-floating):not(.disabled) > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled) > .text-field:valid ~ label {
+  height: calc(1.1428571429em + 5px);
   line-height: 1.1428571429em;
   font-size: 0.8em;
-  top: 2.5px;
+  top: 0;
+  padding-bottom: 5px;
   padding-left: 0;
   margin-top: 0;
   opacity: 1;
@@ -6762,12 +6787,28 @@ img {
   color: #ef6c00;
 }
 
-.input-wrp:not(.no-floating):not(.disabled).outlined > .text-field:focus ~ label, .textarea-wrp:not(.no-floating):not(.disabled).outlined > .text-field:focus ~ label, .input-wrp:not(.no-floating):not(.disabled).outlined > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled).outlined > .text-field:valid ~ label {
+.input-wrp:not(.no-floating):not(.disabled).outlined, .textarea-wrp:not(.no-floating):not(.disabled).outlined {
+  /* COMPACT */
+}
+
+.input-wrp:not(.no-floating):not(.disabled).outlined > .text-field:focus ~ label,
+.textarea-wrp:not(.no-floating):not(.disabled).outlined > .text-field:focus ~ label,
+.input-wrp:not(.no-floating):not(.disabled).outlined > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled).outlined > .text-field:valid ~ label {
+  padding-top: 5px !important;
   padding-left: 10px !important;
 }
 
-.input-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:focus ~ label, .textarea-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:focus ~ label, .input-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:valid ~ label {
+.input-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:focus ~ label,
+.textarea-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:focus ~ label,
+.input-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:valid ~ label, .textarea-wrp:not(.no-floating):not(.disabled).outlined.compact > .text-field:valid ~ label {
   padding-left: 5px !important;
+}
+
+.input-wrp.no-floating, .no-floating.textarea-wrp {
+  /* UNOUTLINED */
+  /* OUTLINED */
+  /* TEXT FIELD */
+  /* LABEL */
 }
 
 .input-wrp.no-floating:not(.outlined) > .text-field, .no-floating.textarea-wrp:not(.outlined) > .text-field {
@@ -6781,13 +6822,13 @@ img {
 }
 
 .input-wrp.no-floating.outlined > .text-field, .no-floating.outlined.textarea-wrp > .text-field {
-  height: calc(2.4185714286em - 2px);
-  padding: calc(0.495em - 2px) 0.99em 0.495em;
+  height: 2.4185714286em;
+  padding: 0.495em 0.99em;
 }
 
 .input-wrp.no-floating.outlined.compact > .text-field, .no-floating.outlined.compact.textarea-wrp > .text-field {
-  height: calc(2.4185714286em - 2px);
-  padding: calc(0.495em - 2px) 0.495em 0.495em;
+  height: 2.4185714286em;
+  padding: 0.495em 0.495em;
 }
 
 .input-wrp.no-floating > .text-field:valid ~ label, .no-floating.textarea-wrp > .text-field:valid ~ label {
@@ -6796,6 +6837,11 @@ img {
 
 .input-wrp.no-floating > label, .no-floating.textarea-wrp > label {
   transition-duration: 0.075s;
+}
+
+.input-wrp:not(.no-bar), .textarea-wrp:not(.no-bar) {
+  /* NO INITIAL */
+  /* ENABLED */
 }
 
 .input-wrp:not(.no-bar):not(.no-initial-bar):not(.outlined), .textarea-wrp:not(.no-bar):not(.no-initial-bar):not(.outlined) {

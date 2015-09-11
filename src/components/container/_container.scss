@@ -16,10 +16,10 @@
   @extend .widget;
   @include color ( $container-color, $container-color-basic );
   border-radius: $container-border-radius;
-  padding: $container-vertical-padding $container-horizontal-padding;
+  padding: $container-padding-vertical $container-padding-horizontal;
 
   &.compact {
-    padding: $container-compact-vertical-padding $container-compact-horizontal-padding;
+    padding: $container-compact-padding-vertical $container-compact-padding-horizontal;
   }
 
 }

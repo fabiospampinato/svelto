@@ -28,9 +28,9 @@ label {
   align-items: center;
   justify-content: center;
   border-radius: $label-border-radius;
-  padding: $label-vertical-padding $label-horizontal-padding;
-  min-height: $line-height-em + ( $label-vertical-padding * 2 );
-  min-width: $line-height-em + ( $label-horizontal-padding * 2 );
+  padding: $label-padding-vertical $label-padding-horizontal;
+  min-height: $line-height-em + ( $label-padding-vertical * 2 );
+  min-width: $line-height-em + ( $label-padding-horizontal * 2 );
 
   /* CHILDREN NO MARGIN BOTTOM */
 
@@ -47,21 +47,21 @@ label {
   /* OUTLINED */
 
   &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-    min-height: calc(#{$line-height-em + ( $label-vertical-padding * 2 )} + #{$outline-width * 2});
-    min-width: calc(#{$line-height-em + ( $label-horizontal-padding * 2 )} + #{$outline-width * 2});
+    min-height: calc(#{$line-height-em + ( $label-padding-vertical * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $label-padding-horizontal * 2 )} + #{$outline-width * 2});
   }
 
   /* COMPACT */
 
   &.compact {
 
-    padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
-    min-height: $line-height-em + ( $label-compact-vertical-padding * 2 );
-    min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
+    padding: $label-compact-padding-vertical $label-compact-padding-horizontal;
+    min-height: $line-height-em + ( $label-compact-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-compact-padding-horizontal * 2 );
 
     &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-      min-height: calc(#{$line-height-em + ( $label-compact-vertical-padding * 2 )} + #{$outline-width * 2});
-      min-width: calc(#{$line-height-em + ( $label-compact-horizontal-padding * 2 )} + #{$outline-width * 2});
+      min-height: calc(#{$line-height-em + ( $label-compact-padding-vertical * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $label-compact-padding-horizontal * 2 )} + #{$outline-width * 2});
     }
 
   }
@@ -82,18 +82,18 @@ label {
     align-items: center;
     justify-content: center;
     background-color: $label-sub-bg-color;
-    padding: $label-compact-vertical-padding $label-compact-horizontal-padding;
-    min-height: $line-height-em + ( $label-compact-vertical-padding * 2 );
-    min-width: $line-height-em + ( $label-compact-horizontal-padding * 2 );
+    padding: $label-compact-padding-vertical $label-compact-padding-horizontal;
+    min-height: $line-height-em + ( $label-compact-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-compact-padding-horizontal * 2 );
 
     &.left {
       @include border-left-radius ( inherit );
-      margin: ( - $label-vertical-padding ) $label-horizontal-padding ( - $label-vertical-padding ) ( - $label-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
+      margin: ( - $label-padding-vertical ) $label-padding-horizontal ( - $label-padding-vertical ) ( - $label-padding-horizontal ) !important; //FIXME: The `!important` shouldn't be needed
     }
 
     &.right {
       @include border-right-radius ( inherit );
-      margin: ( - $label-vertical-padding ) ( - $label-horizontal-padding ) ( - $label-vertical-padding ) $label-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
+      margin: ( - $label-padding-vertical ) ( - $label-padding-horizontal ) ( - $label-padding-vertical ) $label-padding-horizontal !important; //FIXME: The `!important` shouldn't be needed
     }
 
   }
@@ -101,11 +101,11 @@ label {
   &.compact > .sub {
 
     &.left {
-      margin: ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) !important; //FIXME: The `!important` shouldn't be needed
+      margin: ( - $label-compact-padding-vertical ) $label-compact-padding-horizontal ( - $label-compact-padding-vertical ) ( - $label-compact-padding-horizontal ) !important; //FIXME: The `!important` shouldn't be needed
     }
 
     &.right {
-      margin: ( - $label-compact-vertical-padding ) ( - $label-compact-horizontal-padding ) ( - $label-compact-vertical-padding ) $label-compact-horizontal-padding !important; //FIXME: The `!important` shouldn't be needed
+      margin: ( - $label-compact-padding-vertical ) ( - $label-compact-padding-horizontal ) ( - $label-compact-padding-vertical ) $label-compact-padding-horizontal !important; //FIXME: The `!important` shouldn't be needed
     }
 
   }
@@ -194,14 +194,14 @@ label {
     right: $label-floating-right;
     bottom: $label-floating-bottom;
     margin-bottom: 0;
-    padding: $label-floating-vertical-padding $label-floating-horizontal-padding;
-    min-height: $line-height-em + ( $label-floating-vertical-padding * 2 );
-    min-width: $line-height-em + ( $label-floating-horizontal-padding * 2 );
+    padding: $label-floating-padding-vertical $label-floating-padding-horizontal;
+    min-height: $line-height-em + ( $label-floating-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-floating-padding-horizontal * 2 );
 
     &.compact {
-      padding: $label-floating-compact-vertical-padding $label-floating-compact-horizontal-padding;
-      min-height: $line-height-em + ( $label-floating-compact-vertical-padding * 2 );
-      min-width: $line-height-em + ( $label-floating-compact-horizontal-padding * 2 );
+      padding: $label-floating-compact-padding-vertical $label-floating-compact-padding-horizontal;
+      min-height: $line-height-em + ( $label-floating-compact-padding-vertical * 2 );
+      min-width: $line-height-em + ( $label-floating-compact-padding-horizontal * 2 );
     }
 
   }
@@ -226,7 +226,7 @@ label {
 
       @include border-left-radius ( 0 );
       left: - ( $gutter + $label-ribbon-size - ( $outline-width * 2 ) );
-      padding-left: calc(#{$label-horizontal-padding} + #{$gutter});
+      padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
 
       &:before {
         left: 0;
@@ -239,7 +239,7 @@ label {
 
       @include border-right-radius ( 0 );
       right: - ( $gutter + $label-ribbon-size - ( $outline-width * 2 ) );
-      padding-right: calc(#{$label-horizontal-padding} + #{$gutter});
+      padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
 
       &:after {
         right: 0;
@@ -286,13 +286,13 @@ label {
     border-top-left-radius: inherit;
 
     > * { //INFO: Both `.label` and `.button`
-      transform: translateX(-($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8 ));
+      transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8 ));
     }
 
     &:before {
       top: 0;
       left: 0;
-      transform: translateX(-( $line-height-em + ( $label-corner-horizontal-padding * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-vertical-padding * 2 ) ) / $SQRT2) rotate(45deg);
+      transform: translateX(-( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
     }
 
   }
@@ -304,13 +304,13 @@ label {
     border-top-right-radius: inherit;
 
     > * { //INFO: Both `.label` and `.button`
-      transform: translateX($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8));
+      transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8));
     }
 
     &:before {
       top: 0;
       right: 0;
-      transform: translateX(( $line-height-em + ( $label-corner-horizontal-padding * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-vertical-padding * 2 ) ) / $SQRT2) rotate(45deg);
+      transform: translateX(( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
     }
 
   }
@@ -322,13 +322,13 @@ label {
     border-bottom-left-radius: inherit;
 
     > * { //INFO: Both `.label` and `.button`
-      transform: translateX(-($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8)) translateY($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8);
+      transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
     &:before {
       bottom: 0;
       left: 0;
-      transform: translateX(-( $line-height-em + ( $label-corner-horizontal-padding * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-vertical-padding * 2 ) ) / $SQRT2) rotate(45deg);
+      transform: translateX(-( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
     }
 
   }
@@ -340,13 +340,13 @@ label {
     border-bottom-right-radius: inherit;
 
     > * { //INFO: Both `.label` and `.button`
-      transform: translateX($label-corner-horizontal-padding * 2 / 4 + $line-height-em / 8) translateY($label-corner-vertical-padding * 2 / 4 + $line-height-em / 8);
+      transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
     }
 
     &:before {
       bottom: 0;
       right: 0;
-      transform: translateX(( $line-height-em + ( $label-corner-horizontal-padding * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-vertical-padding * 2 ) ) / $SQRT2) rotate(45deg);
+      transform: translateX(( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
     }
 
   }
@@ -355,16 +355,16 @@ label {
     pointer-events: auto;
     position: absolute;
     content: '';
-    height: ( $line-height-em + ( $label-corner-vertical-padding * 2 ) ) * $SQRT2;
-    width: ( $line-height-em + ( $label-corner-horizontal-padding * 2 ) ) * $SQRT2;
+    height: ( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) * $SQRT2;
+    width: ( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) * $SQRT2;
     background-color: inherit;
     visibility: visible;
   }
 
   > * { //INFO: Both `.label` and `.button`
-    padding: $label-corner-vertical-padding $label-corner-horizontal-padding;
-    height: $line-height-em + ( $label-corner-vertical-padding * 2 );
-    width: $line-height-em + ( $label-corner-horizontal-padding * 2 );
+    padding: $label-corner-padding-vertical $label-corner-padding-horizontal;
+    height: $line-height-em + ( $label-corner-padding-vertical * 2 );
+    width: $line-height-em + ( $label-corner-padding-horizontal * 2 );
     margin: 0;
     border-radius: 0;
     background-color: transparent !important;

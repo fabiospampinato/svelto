@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Input (Settings) v0.1.0
+ * Svelto - Input (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * @requires ../label/_settings.scss
  * @requires ../highlight/_settings.scss
  * ========================================================================= */
@@ -15,18 +16,21 @@
 $input-wrp-color: 'white' !default;
 $input-wrp-color-basic: true !default;
 
-$input-wrp-border-radius: $border-radius-medium !default;
+$input-wrp-border-radius: $container-border-radius !default;
 
 /* INPUT */
 
-$input-color: 'inherit' !default;
-$input-color-basic: true !default;
+$input-padding-vertical: $label-padding-vertical !default;
+$input-padding-horizontal: $label-padding-horizontal !default;
 
-$input-vertical-padding: $label-vertical-padding !default;
-$input-horizontal-padding: $label-horizontal-padding !default;
+/* INPUT COMPACT */
 
-$input-compact-vertical-padding: $label-compact-vertical-padding !default;
-$input-compact-horizontal-padding: $label-compact-horizontal-padding !default;
+$input-compact-padding-vertical: $label-compact-padding-vertical !default;
+$input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
+
+/* INPUT ACTIVE */
+
+$input-active-color: $color-secondary !default;
 
 /* LABEL */
 
@@ -34,18 +38,16 @@ $input-label-opacity: 0.75 !default;
 $input-label-font-size: 1em !default;
 $input-label-height: $input-label-font-size * $line-height !default;
 
+/* LABEL ACTIVE */
+
 $input-label-active-opacity: 1 !default;
 $input-label-active-font-size: 0.8em !default;
 $input-label-active-height: $input-label-active-font-size * $line-height !default;
 
 /* BAR */
 
-$input-bar-z-index: 10 !default;
+$input-bar-z-index: 2 !default;
 $input-bar-height: $highlight-size !default;
-
-/* STATES */
-
-$input-active-color: $color-secondary !default;
 
 /* OTHERS */
 

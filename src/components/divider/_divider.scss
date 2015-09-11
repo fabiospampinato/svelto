@@ -56,7 +56,7 @@ hr {
       }
 
       & > .divider {
-        padding: $divider-linear-vertical-padding $divider-linear-horizontal-padding;
+        padding: $divider-linear-padding-vertical $divider-linear-padding-horizontal;
       }
 
     }
@@ -72,7 +72,7 @@ hr {
       }
 
       & > .divider {
-        padding: $divider-linear-horizontal-padding $divider-linear-vertical-padding;
+        padding: $divider-linear-padding-horizontal $divider-linear-padding-vertical;
       }
 
     }

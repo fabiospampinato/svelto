@@ -47,7 +47,7 @@
 
       & > .progressbar-label {
         font-size: $progress-bar-label-font-size;
-        padding: $progress-bar-label-vertical-padding $progress-bar-label-horizontal-padding;
+        padding: $progress-bar-label-padding-vertical $progress-bar-label-padding-horizontal;
       }
 
     }

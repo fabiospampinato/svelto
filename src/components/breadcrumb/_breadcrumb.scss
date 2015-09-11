@@ -17,7 +17,7 @@
 
   & > .breadcrumb-divider {
     align-self: center;
-    padding: $breadcrumb-divider-vertical-padding $breadcrumb-divider-horizontal-padding;
+    padding: $breadcrumb-divider-padding-vertical $breadcrumb-divider-padding-horizontal;
   }
 
   &.highlighted > .current ~ * {

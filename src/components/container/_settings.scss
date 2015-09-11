@@ -16,10 +16,10 @@ $container-color-basic: true !default;
 
 $container-border-radius: $border-radius-medium !default;
 
-$container-vertical-padding: $gutter !default;
-$container-horizontal-padding: $gutter !default;
+$container-padding-vertical: $gutter !default;
+$container-padding-horizontal: $gutter !default;
 
 /* CONTAINER COMPACT */
 
-$container-compact-vertical-padding: $gutter-half !default;
-$container-compact-horizontal-padding: $gutter !default;
+$container-compact-padding-vertical: $gutter-half !default;
+$container-compact-padding-horizontal: $gutter !default;

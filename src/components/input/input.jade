@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Input v0.1.0
+//- Svelto - Input v0.1.1
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -20,7 +20,7 @@ mixin input(options)
   - options.name = options.name || "";
   - options.value = options.value || "";
   .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name, required).text-field
+    input(type=options.type value=options.value name=options.name required).text-field
     if options.label
       label= options.label
     .text-field-bar
