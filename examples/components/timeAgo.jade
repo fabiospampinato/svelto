@@ -4,26 +4,26 @@ extends ../layout.jade
 //- timeAgo
 
 append main
-  +divider TimeAgo
+  +divider-block TimeAgo
 
   +container.outlined
     span(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 )}")
 
-  +divider TimeAgo -90
+  +divider-block TimeAgo -90
 
   +container.outlined
     span(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 90 )}")
 
-  +divider TimeAgo -120
+  +divider-block TimeAgo -120
 
   +container.outlined
     span(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 120 )}")
 
-  +divider TimeAgo -3600
+  +divider-block TimeAgo -3600
 
   +container.outlined
     span(data-timestamp="#{Math.round ( new Date ().getTime () / 1000 - 3600 )}")
 
-  +divider TimeAgo title -7200
+  +divider-block TimeAgo title -7200
 
   +label-icon("access_time")(data-timestamp-title="#{Math.round ( new Date ().getTime () / 1000 - 7200 )}").outlined.compact

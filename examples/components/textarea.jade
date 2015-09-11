@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Textarea
 
 append main
-  +divider Normal
+  +divider-block Normal
 
   +container.outlined
     +multiple
@@ -13,7 +13,7 @@ append main
       +textarea({ label: "Outlined" }).outlined
       +textarea({ label: "Disabled" }).disabled
 
-  +divider Colors
+  +divider-block Colors
 
   +container.outlined
     +multiple
@@ -39,7 +39,7 @@ append main
       +textarea({ label: "Inherit" }).text-field-inherit Inherit
       +textarea({ label: "Base" }).text-field-base Base
 
-  +divider Colors advanced
+  +divider-block Colors advanced
 
   +container.outlined
     +multiple
@@ -47,32 +47,32 @@ append main
       +textarea({ label: "Primary - Secondary" }).primary.text-field-secondary Primary - Secondary
       +textarea({ label: "Red - Yellow" }).red.text-field-yellow Red - Yellow
 
-  +divider Fluid
+  +divider-block Fluid
 
   +container.outlined
     +textarea({ label: "Fluid" }).fluid
 
-  +divider Unresizable
+  +divider-block Unresizable
 
   +container.outlined
     +textarea({ label: "Unresizable" }).unresizable
 
-  +divider No floating
+  +divider-block No floating
 
   +container.outlined
     +textarea({ label: "No floating" }).fluid.no-floating
 
-  +divider No intial bar
+  +divider-block No intial bar
 
   +container.outlined
     +textarea({ label: "No initial bar" }).fluid.no-initial-bar
 
-  +divider No bar - No floating
+  +divider-block No bar - No floating
 
   +container.outlined
     +textarea({ label: "No bar" }).fluid.no-bar.no-floating
 
-  +divider Inside a container
+  +divider-block Inside a container
 
   +container.outlined
     +textarea({ label: "Inside a container" })

@@ -4,23 +4,30 @@ extends ../layout.jade
 //- Divider
 
 append main
-  +divider Horizontal
+  +divider-block Horizontal
 
   +container.outlined
-    +divider Block
-    +divider-linear Linear
-    +divider-linear
-      +infobar({ icon: 'settings', title: 'Advanced linear', subtitle: 'very...' }).inset
-    +divider-linear
+    +divider
+    +divider Divider
+    +divider
+      +multiple
+        +icon("settings")
+        span With icon
+    +divider
+      +infobar({ icon: 'settings', title: 'An infobar inside', subtitle: 'Versatile...' }).inset
+    +divider-block Block
     +divider-text Text
     +divider-spacer.gray
 
-  +divider Vertical
+  +divider-block Vertical
   
   +container.outlined
     +multiple.fluid
       +container
         +paragraph-sample
-      +divider-linear.vertical OR
+      +divider.vertical
+      +container
+        +paragraph-sample
+      +divider.vertical OR
       +container
         +paragraph-sample

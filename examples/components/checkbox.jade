@@ -4,14 +4,14 @@ extends ../layout.jade
 //- Checkbox
 
 append main
-  +divider Checkbox
+  +divider-block Checkbox
 
   +multiple
     +checkbox({ name: "name", title: "Base", value: 4 }).outlined
     +checkbox({ name: "name", title: "Checked", value: 8, checked: true }).outlined
     +checkbox({ name: "name", title: "Disabled", value: 32, checked: true }).checkbox-disabled.outlined
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("checkboxes_get_all ()").outlined Get all

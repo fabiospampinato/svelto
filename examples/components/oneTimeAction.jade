@@ -4,14 +4,14 @@ extends ../layout.jade
 //- oneTimeAction
 
 append main
-  +divider One time action
+  +divider-block One time action
 
   +multiple
     +button("test_one_time_action_cookie1 ()").outlined Cookie 'test1'
     +button("test_one_time_action_cookie2 ()").outlined Cookie 'test2'
     +button("test_one_time_action_cookie3 ()").outlined Cookie 'test3' adv
 
-  +divider Action
+  +divider-block Action
 
   +multiple
     +button("test_one_time_action_reset_cookie1 ()").outlined Reset 'test1'

@@ -6,14 +6,14 @@ extends ../layout.jade
 //- TODO: add an infinite linear loading progressbar, like before downloading something from the play store
 
 append main
-  +divider Base
+  +divider-block Base
 
   +container.outlined
     +progressbar(33)
     +progressbar(55).striped
     +progressbar({ percentages: [{ value: 45 }], labeled: true })
 
-  +divider Colored
+  +divider-block Colored
 
   +container.outlined
     +progressbar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' })
@@ -21,7 +21,7 @@ append main
     +progressbar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
     +progressbar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' })
 
-  +divider Disabled
+  +divider-block Disabled
 
   +container.outlined
     +progressbar(45).progressbar-disabled
@@ -30,7 +30,7 @@ append main
     +progressbar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' }).progressbar-disabled
     +progressbar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' }).progressbar-disabled
 
-  +divider Created
+  +divider-block Created
 
   +container.created.outlined
 
@@ -45,7 +45,7 @@ append main
     +button("progressbar_create ( 10, { value: 55, color: 'pink' })").outlined Multiple colors
     +button("progressbar_create ({ percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true })").outlined Advanced
 
-  +divider Set single
+  +divider-block Set single
 
   +multiple
     +button("progressbar_set_single ( 0 )").outlined 0%
@@ -54,7 +54,7 @@ append main
     +button("progressbar_set_single ( 75 )").outlined 75%
     +button("progressbar_set_single ( 100 )").outlined 100%
 
-  +divider Set multiple
+  +divider-block Set multiple
 
   +multiple
     +button("progressbar_set_multiple ( 0, 10, 0, 0 )").outlined 0% 10% 0%
@@ -63,7 +63,7 @@ append main
     +button("progressbar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
     +button("progressbar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
 
-  +divider Enable / Disable
+  +divider-block Enable / Disable
 
   +multiple
     +button("progressbar_enable ()").outlined Enable

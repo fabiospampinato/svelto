@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Toolbar
 
 append main
-  +divider Toolbars
+  +divider-block Toolbars
 
   +toolbar.orange
     +button-icon('menu').compact
@@ -43,7 +43,7 @@ append main
     +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "favorite", off: "favorite-outline" } })
     +button-icon("search").compact
 
-  +divider With subs
+  +divider-block With subs
 
   +toolbar.yellow
     +multiple-sub-left

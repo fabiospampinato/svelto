@@ -1,36 +1,24 @@
 
 //- =========================================================================
-//- Svelto - Divider v0.1.0
+//- Svelto - Divider v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
 mixin divider
-  +divider-block&attributes(attributes)
+  .divider&attributes(attributes)
     block
 
 mixin divider-block
-  .divider-wrp.block
-    .divider&attributes(attributes)
+  .divider.block
+    .divider-content&attributes(attributes)
       block
-
-mixin divider-linear
-  if block
-    .divider-wrp&attributes(attributes).linear
-      hr
-      .divider
-        block
-      hr
-  else
-    hr&attributes(attributes)
 
 mixin divider-text
-  .divider-wrp.text
-    .divider&attributes(attributes)
-      block
+  .divider&attributes(attributes).text
+    block
 
 mixin divider-spacer
-  .divider-wrp.spacer
-    .divider&attributes(attributes)
-      block
+  .divider&attributes(attributes).spacer
+    block

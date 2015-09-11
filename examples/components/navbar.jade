@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Navbar
 
 append main
-  +divider Normal
+  +divider-block Normal
 
   +multiple
     +navbar-btn({ title: "Left", icon: "chevron_left", id: "left" }).outlined
@@ -12,7 +12,7 @@ append main
     +navbar-btn({ title: "Bottom", icon: "expand_more", id: "bottom" }).outlined
     +navbar-btn({ title: "Right",icon: "chevron_right", id: "right" }).outlined
 
-  +divider Slim
+  +divider-block Slim
 
   +multiple
     +navbar-btn({ icon: "chevron_left", id: "left-slim" }).compact.outlined
@@ -20,7 +20,7 @@ append main
     +navbar-btn({ icon: "expand_more", id: "bottom-slim" }).compact.outlined
     +navbar-btn({ icon: "chevron_right", id: "right-slim" }).compact.outlined
 
-  +divider Attached
+  +divider-block Attached
 
   +multiple
     +navbar-btn({ title: "Left", icon: "chevron_left", id: "left-attached" }).outlined
@@ -28,7 +28,7 @@ append main
     +navbar-btn({ icon: "expand_more", id: "bottom-attached" }).compact.outlined
     +navbar-btn({ title: "Right", icon: "chevron_right", id: "right-attached" }).outlined
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("toggle_fixed_header ()").outlined Toggle fixed header

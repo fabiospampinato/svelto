@@ -3,10 +3,10 @@ extends ../layout.jade
 
 //- Dropdown
 
-//- TODO: Maybe add +divider-spacer when appropriate (when there are only buttons for example)
+//- TODO: Maybe add +divider-block -spacer when appropriate (when there are only buttons for example)
 
 append main
-  +divider Dropdown
+  +divider-block Dropdown
 
   +multiple
     +dropdown-btn({ title: "Base", id: "base" }).outlined
@@ -37,14 +37,14 @@ append body
       +card-block
         +multiple.vertical.stretched.nowrap
           +button.sharp Action 1
-          +divider Divider
+          +divider-block Divider
           +button.sharp Action 2
-          +divider-linear Divider
+          +divider-block -linear Divider
           +button.sharp Action 3
-          +divider-linear
+          +divider-block -linear
           +button.sharp Action 4
-          +divider-linear
-          +divider-text Section
+          +divider-block -linear
+          +divider-block -text Section
           +button.sharp Action 5
     +dropdown("advanced")
       +card-header("Header").inherit

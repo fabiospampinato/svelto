@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Expander
 
 append main
-  +divider Expander
+  +divider-block Expander
 
   +expander.outlined
     +card-header("Base").actionable.expander-toggler.outlined
@@ -32,7 +32,7 @@ append main
         +button-icon("keyboard_arrow_down").small.compact
     +card-block Content of opened
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("accordions_action ( 'toggle' )").outlined Toggle all

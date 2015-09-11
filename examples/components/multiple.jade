@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Multiple
 
 append main
-  +divider Multiple
+  +divider-block Multiple
 
   +multiple
     +container.outlined 1
@@ -18,7 +18,7 @@ append main
     +container.outlined 9
     +container.outlined 10
 
-  +divider Centered
+  +divider-block Centered
 
   +multiple.centered
     +container.outlined 1
@@ -32,7 +32,7 @@ append main
     +container.outlined 9
     +container.outlined 10
 
-  +divider Limited
+  +divider-block Limited
 
   +multiple.limited
     +container.outlined 1
@@ -46,7 +46,7 @@ append main
     +container.outlined 9
     +container.outlined 10
 
-  +divider No wrap
+  +divider-block No wrap
 
   +multiple.no-wrap
     +container.outlined 1
@@ -60,21 +60,21 @@ append main
     +container.outlined 9
     +container.outlined 10
 
-  +divider Fluid
+  +divider-block Fluid
 
   +multiple.fluid
     +container.outlined Left
     +container.outlined Center
     +container.outlined.no-grow Right (no-grow)
 
-  +divider Equal
+  +divider-block Equal
 
   +multiple.equal
     +container.outlined ThisIsSupposedToBeAVeryLongText
     +container.outlined 1
     +container.outlined 2
 
-  +divider Fluid - Joined
+  +divider-block Fluid - Joined
 
   +multiple.fluid.joined
     +container.outlined Left
@@ -86,7 +86,7 @@ append main
     +button.outlined Center
     +button.outlined Right
 
-  +divider Fluid - Joined - No separators
+  +divider-block Fluid - Joined - No separators
 
   +multiple.fluid.joined.no-separators
     +container.outlined Left
@@ -98,7 +98,7 @@ append main
     +button.outlined Center
     +button.outlined Right
 
-  +divider Fluid - Joined - No separators - Z-Depth
+  +divider-block Fluid - Joined - No separators - Z-Depth
 
   +multiple.fluid.joined.no-separators.z-depth-2
     +container.outlined.z-depth-4 Left
@@ -110,7 +110,7 @@ append main
     +button.z-depth-4.outlined Center
     +button.z-depth-4.outlined Right
 
-  +divider Equal - Joined - Stretched
+  +divider-block Equal - Joined - Stretched
 
   +multiple.equal.joined.stretched
     +container.outlined.no-shrink Left
@@ -118,21 +118,21 @@ append main
       +paragraph-sample
     +container.outlined.no-shrink Right
 
-  +divider Vertical
+  +divider-block Vertical
 
   +multiple.vertical
     +container.outlined Top
     +container.outlined Middle
     +container.outlined Bottom
 
-  +divider Vertical - Fluid
+  +divider-block Vertical - Fluid
 
   +multiple.vertical.fluid
     +container.outlined Top
     +container.outlined Middle
     +container.outlined Bottom
 
-  +divider Vertical - Fluid - Joined
+  +divider-block Vertical - Fluid - Joined
 
   +multiple.vertical.fluid.joined
     +container.outlined Top
@@ -144,7 +144,7 @@ append main
     +button.outlined Middle
     +button.outlined Bottom
 
-  +divider Vertical - Fluid - Joined - No separators
+  +divider-block Vertical - Fluid - Joined - No separators
 
   +multiple.vertical.fluid.joined.no-separators
     +container.outlined Top
@@ -156,7 +156,7 @@ append main
     +button.outlined Middle
     +button.outlined Bottom
 
-  +divider Vertical - Fluid - Joined - No separators - Z-Depth
+  +divider-block Vertical - Fluid - Joined - No separators - Z-Depth
 
   +multiple.vertical.fluid.joined.no-separators.z-depth-2
     +container.outlined.z-depth-4 Top
@@ -168,13 +168,13 @@ append main
     +button.z-depth-4.outlined Middle
     +button.z-depth-4.outlined Bottom
 
-  +divider Tricky uses
+  +divider-block Tricky uses
 
   //- CONCAT
 
   +expander({ title: "Concat", header_classes: "outlined" }).outlined
     +card-block
-      +divider Concat no wrap
+      +divider-block Concat no wrap
 
       +multiple
         +multiple.no-wrap
@@ -190,7 +190,7 @@ append main
           +container.outlined 3
           +container.outlined 3
 
-      +divider Concat vertical
+      +divider-block Concat vertical
 
       +multiple
         +multiple.vertical.fluid
@@ -206,7 +206,7 @@ append main
           +container.outlined 3
           +container.outlined 3
 
-      +divider Concat joined
+      +divider-block Concat joined
 
       +multiple
         +multiple.joined
@@ -224,7 +224,7 @@ append main
 
   +expander({ title: "Concat fixed", header_classes: "outlined" }).outlined
     +card-block
-      +divider Concat no wrap - FIXED
+      +divider-block Concat no wrap - FIXED
 
       +multiple.fluid
         +multiple.no-wrap.xs-4
@@ -240,7 +240,7 @@ append main
           +container.outlined 3
           +container.outlined 3
 
-      +divider Concat vertical - FIXED
+      +divider-block Concat vertical - FIXED
 
       +multiple.fluid
         +multiple.vertical.fluid.xs-4
@@ -256,7 +256,7 @@ append main
           +container.outlined 3
           +container.outlined 3
 
-      +divider Concat joined - FIXED
+      +divider-block Concat joined - FIXED
 
       +multiple.fluid
         +multiple.joined.xs-4
@@ -274,7 +274,7 @@ append main
 
   +expander({ title: "Nested", header_classes: "outlined" }).outlined
     +card-block
-      +divider Nested no wrap
+      +divider-block Nested no wrap
 
       +multiple.no-wrap.fluid
         +container.outlined 1
@@ -289,7 +289,7 @@ append main
             +container.outlined 3
             +container.outlined 3
 
-      +divider Nested vertical
+      +divider-block Nested vertical
 
       +multiple.vertical.fluid
         +container.outlined 1
@@ -304,7 +304,7 @@ append main
             +container.outlined 3
             +container.outlined 3
 
-      +divider Nested joined
+      +divider-block Nested joined
 
       +multiple.joined
         +container.outlined 1
@@ -321,7 +321,7 @@ append main
 
   +expander({ title: "Nested fixed", header_classes: "outlined" }).outlined
     +card-block
-      +divider Nested no wrap
+      +divider-block Nested no wrap
 
       +multiple.no-wrap.fluid
         +container.outlined.xs-1 1
@@ -336,7 +336,7 @@ append main
             +container.outlined.xs-3 3
             +container.outlined.xs-3 3
 
-      +divider Nested vertical
+      +divider-block Nested vertical
 
       +multiple.fluid
         +container.outlined.xs-1 1
@@ -359,7 +359,7 @@ append main
               +container.outlined 5
               +container.outlined 5
 
-      +divider Nested joined
+      +divider-block Nested joined
 
       +multiple.joined.fluid
         +container.outlined.xs-3 1

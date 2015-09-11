@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Ripple
 
 append main
-  +divider Colors
+  +divider-block Colors
 
   +multiple
     +button.ripple.ripple-primary Primary
@@ -29,7 +29,7 @@ append main
     +button.ripple.ripple-inherit Inherit
     +button.ripple.ripple-base Base
 
-  +divider Other shapes
+  +divider-block Other shapes
 
   +multiple
     +button.rounded.ripple.ripple-primary Test
@@ -38,7 +38,7 @@ append main
     +button-icon('settings').transparent.rounded.ripple.ripple-tertiary
     +button.sharp.ripple.ripple-quaternary Test
 
-  +divider Centered
+  +divider-block Centered
 
   +multiple
     +button.rounded.ripple.ripple-primary.ripple-centered Test
@@ -47,14 +47,14 @@ append main
     +button-icon('settings').transparent.rounded.ripple.ripple-tertiary.ripple-centered
     +button.sharp.ripple.ripple-quaternary.ripple-centered Test
 
-  +divider Images
+  +divider-block Images
 
   +multiple
     +image-sample.ripple.xs-4.rounded
     +image-sample.ripple.ripple-centered.xs-4.rounded
     +image-sample.ripple.ripple-white.xs-4
 
-  +divider Paragraph
+  +divider-block Paragraph
 
   +container.ripple.ripple-black.outlined
     +paragraph-sample

@@ -4,14 +4,14 @@ extends ../layout.jade
 //- Radio
 
 append main
-  +divider Radio
+  +divider-block Radio
 
   +multiple
     +radio({ name: "name", title: "Base", value: 4 }).outlined
     +radio({ name: "name", title: "Checked", value: 8, checked: true }).outlined
     +radio({ name: "name", title: "Disabled", value: 8, checked: true }).radio-disabled.outlined
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("radios_get_all ()").outlined Get all

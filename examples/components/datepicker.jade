@@ -4,16 +4,16 @@ extends ../layout.jade
 //- Datepicker
 
 append main
-  +divider Datepicker
+  +divider-block Datepicker
 
   +container.outlined
     +datepicker(id="datepicker_test")
 
-  +divider Input
+  +divider-block Input
 
   +input({ name: "datepicker_test", label: "YYYY-MM-DD" }).white.no-floating.outlined
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +multiple.joined

@@ -4,7 +4,7 @@ extends ../layout.jade
 //- tableHelper
 
 append main
-  +divider Table
+  +divider-block Table
 
   +container.outlined
     table.table.bordered
@@ -17,7 +17,7 @@ append main
       tbody
         +table-tr-empty
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("table_init()").outlined Init

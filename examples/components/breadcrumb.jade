@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Breadcrumb.jade
 
 append main
-  +divider Base
+  +divider-block Base
 
   +container.outlined
     +breadcrumb
@@ -18,7 +18,7 @@ append main
       +breadcrumb-divider.xsmall
       +a(title="Link 5") Link 5
 
-  +divider Custom text divider
+  +divider-block Custom text divider
 
   +container.outlined
     +breadcrumb
@@ -32,7 +32,7 @@ append main
       +breadcrumb-divider /
       +a(title="Link 5") Link 5
 
-  +divider Custom icon divider
+  +divider-block Custom icon divider
 
   +container.outlined
     +breadcrumb
@@ -46,7 +46,7 @@ append main
       +breadcrumb-divider("trending_flat").xsmall
       +a(title="Link 5") Link 5
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.actions
     +button("toggle_class ( 'highlighted' )").outlined Toggle highlighted

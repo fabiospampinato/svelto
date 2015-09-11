@@ -4,12 +4,12 @@ extends ../layout.jade
 //- Tagbox
 
 append main
-  +divider Tagbox
+  +divider-block Tagbox
 
   +container.outlined
     +tagbox({ name: "name", tags: "these,are,some,tags" })
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("tagbox_get ()").outlined Get

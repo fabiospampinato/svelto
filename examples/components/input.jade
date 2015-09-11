@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Input
 
 append main
-  +divider Normal
+  +divider-block Normal
 
   +container.outlined
     +multiple
@@ -14,7 +14,7 @@ append main
       +input({ label: "Rounded" }).rounded
       +input({ label: "Disabled" }).disabled
 
-  +divider Colors
+  +divider-block Colors
 
   +container.outlined
     +multiple
@@ -40,7 +40,7 @@ append main
       +input({ label: "Inherit" }).text-field-inherit
       +input({ label: "Base" }).text-field-base
 
-  +divider Colors advanced
+  +divider-block Colors advanced
 
   +container.outlined
     +multiple
@@ -48,27 +48,27 @@ append main
       +input({ label: "Primary - Secondary" }).primary.text-field-secondary
       +input({ label: "Red - Yellow" }).red.text-field-yellow
 
-  +divider Fluid
+  +divider-block Fluid
 
   +container.outlined
     +input({ label: "Fluid" }).fluid
 
-  +divider No floating
+  +divider-block No floating
 
   +container.outlined
     +input({ label: "No floating" }).fluid.no-floating
 
-  +divider No intial bar
+  +divider-block No intial bar
 
   +container.outlined
     +input({ label: "No initial bar" }).fluid.no-initial-bar
 
-  +divider No bar - No floating
+  +divider-block No bar - No floating
 
   +container.outlined
     +input({ label: "No bar" }).fluid.no-bar.no-floating
 
-  +divider Inside a container
+  +divider-block Inside a container
 
   +container.outlined
     +input({ label: "Inside a container" })
@@ -76,7 +76,7 @@ append main
   +container.yellow.outlined
     +input({ label: "Inside a yellow container" })
 
-  +divider Toolbar
+  +divider-block Toolbar
 
   +multiple
     +multiple.joined
@@ -108,7 +108,7 @@ append main
         span Checkout
       +input({ label: "Placeholder...", value: "35.50€" }).no-bar.no-floating.white
 
-  +divider Toolbar - Outlined
+  +divider-block Toolbar - Outlined
 
   +multiple
     +multiple.joined

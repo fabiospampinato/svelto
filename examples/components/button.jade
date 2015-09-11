@@ -4,15 +4,15 @@ extends ../layout.jade
 //- Button
 
 append main
-  +divider Button
+  +divider-block Button
   
   +button Button
   
-  +divider Fluid
+  +divider-block Fluid
   
   +button.fluid Fluid
   
-  +divider Colors
+  +divider-block Colors
   
   +multiple
     +button.primary Primary
@@ -37,7 +37,7 @@ append main
     +button.inherit Inherit
     +button.base Base
 
-  +divider Advanced
+  +divider-block Advanced
 
   +multiple
     +button-icon('settings')
@@ -57,7 +57,7 @@ append main
       +button-sub-right
         +icon('settings')
 
-  +divider Rounded
+  +divider-block Rounded
 
   +multiple
     +button.rounded.primary 1
@@ -82,14 +82,14 @@ append main
     +button.rounded.inherit 20
     +button.rounded.base 21
 
-  +divider Tag
+  +divider-block Tag
 
   +multiple
     +button-tag Normal
     +button-tag.sharp Sharp
     +button-tag.primary.tag-circle-white Colored
 
-  +divider Ribbon
+  +divider-block Ribbon
 
   +container.centered.xs-10.outlined.z-depth-1
     +button-ribbon.ribbon-left.ribbon-right.primary Left & Right
@@ -99,7 +99,7 @@ append main
     +button-ribbon.ribbon-right.tertiary Right
     +paragraph-sample
 
-  +divider Corner
+  +divider-block Corner
 
   +container.outlined
     +button-corner("top-left").primary S
@@ -111,7 +111,7 @@ append main
       +icon("favorite").small
     +paragraph-sample
 
-  +divider Badge
+  +divider-block Badge
 
   +multiple
     +label-icon('settings').compact
@@ -120,11 +120,11 @@ append main
       +button.compact.rounded.badge.xxsmall.tertiary.bottom-left 3
       +button.compact.rounded.badge.xxsmall.secondary.bottom-right 4
 
-  +divider Floating
+  +divider-block Floating
 
   +button-icon('settings').floating.rounded.secondary.large
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.actions
     +button("toggle_class ( 'outlined' )").outlined Toggle outlined

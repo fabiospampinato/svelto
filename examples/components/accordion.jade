@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Accordion
 
 append main
-  +divider Accordion
+  +divider-block Accordion
 
   +accordion
     +expander.outlined
@@ -34,7 +34,7 @@ append main
       +card-block
         +paragraph-sample
 
-  +divider Accordion - Multiple
+  +divider-block Accordion - Multiple
 
   +accordion.multiple
     +expander.outlined
@@ -64,7 +64,7 @@ append main
       +card-block
         +paragraph-sample
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("accordions_action ( 'toggleAll' )").outlined Toggle all

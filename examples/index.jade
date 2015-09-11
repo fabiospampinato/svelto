@@ -4,7 +4,7 @@ extends ./layout.jade
 //- Index
 
 append main
-  +divider Decorators
+  +divider-block Decorators
 
   +multiple
     +button("/components/colors.html").outlined.green Colors
@@ -17,7 +17,7 @@ append main
     +button("/components/sizes.html").outlined.green Sizes
     +button("/components/z-depths.html").outlined.green Z-Depths
 
-  +divider Base
+  +divider-block Base
 
   +multiple
     +button("/components/grid.html").outlined.orange Grid
@@ -25,10 +25,10 @@ append main
     +button("/components/multiple_subs.html").outlined.orange Multiple subs
     +button("/components/typography.html").outlined.green Typography
 
-  +divider Components
+  +divider-block Components
 
   +multiple
-    +button("/components/breadcrumb.html").outlined.blue Breadcrumb
+    +button("/components/breadcrumb.html").outlined.green Breadcrumb
     +button("/components/button.html").outlined.green Button
     +button("/components/card.html").outlined.green Card
     +button("/components/chat.html").outlined.blue Chat
@@ -52,7 +52,7 @@ append main
     +button("/components/textarea.html").outlined.green Textarea
     +button("/components/toolbar.html").outlined.blue Toolbar
     
-  +divider Widgets
+  +divider-block Widgets
     
   +multiple
     +button("/components/accordion.html").outlined.blue Accordion
@@ -76,7 +76,7 @@ append main
     +button("/components/tabs.html").outlined.blue Tabs
     +button("/components/tagbox.html").outlined.blue Tagbox
     
-  +divider Tools
+  +divider-block Tools
     
   +multiple
     +button("/components/autogrow.html").outlined.blue Autogrow

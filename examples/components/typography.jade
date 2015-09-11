@@ -4,12 +4,12 @@ extends ../layout.jade
 //- Typography
 
 append main
-  +divider Link
+  +divider-block Link
 
   +container.outlined
     p Inside this paragraph there is a #[+a link], does it look nice?
 
-  +divider Headers
+  +divider-block Headers
 
   +container.outlined
     h1 H1 - Heading title #[small Small subheader]
@@ -19,30 +19,30 @@ append main
     h5 H5 - Heading title #[small Small subheader]
     h6 H6 - Heading title #[small Small subheader]
 
-  +divider Paragraph
+  +divider-block Paragraph
 
   +container.outlined
     p
       +lorem-ipsum
 
-  +divider Formatting
+  +divider-block Formatting
 
   +container.outlined
     p #[span Nothing] #[mark marked] #[del deleted] #[s striked] #[ins inserted] #[u underlined] #[small small] #[strong bold] #[em empathize] #[i italics]
 
-  +divider Abbr
+  +divider-block Abbr
 
   +container.outlined
     +abbr("HyperText Markup Language") HTML
 
-  +divider Blockquote
+  +divider-block Blockquote
 
   +container.outlined
     blockquote
       +paragraph-sample
     blockquote #[+paragraph-sample] #[footer The source is #[cite Someone]]
 
-  +divider List - Unordered
+  +divider-block List - Unordered
 
   +container.outlined
     ul
@@ -60,7 +60,7 @@ append main
       li
         +lorem-ipsum({ type: 'words', amount: 5 })
 
-  +divider List - Unordered - Unstyled
+  +divider-block List - Unordered - Unstyled
 
   +container.outlined
     ul.unstyled
@@ -78,7 +78,7 @@ append main
       li
         +lorem-ipsum({ type: 'words', amount: 5 })
 
-  +divider List - Ordered
+  +divider-block List - Ordered
 
   +container.outlined
     ol
@@ -96,7 +96,7 @@ append main
       li
         +lorem-ipsum({ type: 'words', amount: 5 })
 
-  +divider Definition list
+  +divider-block Definition list
 
   +container.outlined
     dl
@@ -110,21 +110,21 @@ append main
       dd
         +lorem-ipsum({ type: 'words', amount: 5 })
 
-  +divider Code
+  +divider-block Code
 
   +container.outlined
     code print ( 'This is an example code block' )
 
-  +divider Section
+  +divider-block Section
 
   +container.outlined
     section print ( 'This is an example section block' )
 
-  +divider Pre
+  +divider-block Pre
 
   +container.outlined
     pre print ( 'This is an example section block' )
 
-  +divider Kbd
+  +divider-block Kbd
 
   +container.outlined #[kbd ctrl] + #[kbd alt] + #[kbd canc], #[kbd ctrl + alt + canc]

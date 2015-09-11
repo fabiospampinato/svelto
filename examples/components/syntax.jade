@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Syntax
 
 append main
-  +divider HTML
+  +divider-block HTML
 
   +container.outlined
     +syntax("markup").
@@ -21,7 +21,7 @@ append main
         &lt;/div&gt;
       &lt;/div&gt;
 
-  +divider CSS
+  +divider-block CSS
 
   +container.outlined
     +syntax("css").
@@ -36,7 +36,7 @@ append main
         box-sizing: border-box;
       }
 
-  +divider Javascript
+  +divider-block Javascript
 
   +container.outlined
     +syntax("javascript").

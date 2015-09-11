@@ -4085,15 +4085,17 @@ button {
 /* TEXT */
 /* SPACER */
 /* =========================================================================
- * Svelto - Divider v0.2.0
+ * Svelto - Divider v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
-/* DEFAULT DIVIDER */
-hr {
+/* DIVIDER */
+hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not(.text):not(.spacer):not(:empty):before,
+.divider:not(.block):not(.text):not(.spacer):not(:empty):after {
   height: 1px;
   margin-top: -5px;
   margin-bottom: 5px;
@@ -4101,59 +4103,75 @@ hr {
   background-color: rgba(0, 0, 0, 0.1);
 }
 
+/* DEFAULT DIVIDER */
 /* DIVIDER */
-.divider-wrp.block {
+.divider {
+  /* LINEAR */
+  /* BLOCK */
+  /* TEXT */
+  /* SPACER */
+}
+
+.divider:not(.block):not(.text):not(.spacer) {
+  /* EMPTY */
+  /* ADVANCED */
+  /* VERTICAL */
+}
+
+.divider:not(.block):not(.text):not(.spacer):not(:empty) {
   margin-bottom: 10px;
-  text-align: center;
-}
-
-.divider-wrp.block > .divider {
-  border-color: #d2190b ;
-  color: #ffffff ;
-  background: #f44336 ;
-  display: inline-block;
-  padding: 0.3em 0.6em;
-  border-radius: 10000px 10000px;
-}
-
-.divider-wrp.block > .divider p > a {
-  color: #fabf40 ;
-}
-
-.divider-wrp.block > .divider p > a:after {
-  border-color: #fac24a ;
-}
-
-.divider-wrp.block > .divider p > a:hover {
-  color: #fac24a ;
-}
-
-.divider-wrp.linear {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 10px;
 }
 
-.divider-wrp.linear > hr {
+.divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+.divider:not(.block):not(.text):not(.spacer):not(:empty):before,
+.divider:not(.block):not(.text):not(.spacer):not(:empty):after {
+  content: '';
+  margin: 0;
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-  margin: 0;
-}
-
-.divider-wrp.linear:not(.vertical) > hr {
   min-width: 10px;
 }
 
-.divider-wrp.linear:not(.vertical) > .divider {
-  padding: 0 10px;
+.divider:not(.block):not(.text):not(.spacer):not(:empty):before {
+  margin-right: 10px;
 }
 
-.divider-wrp.linear.vertical {
+.divider:not(.block):not(.text):not(.spacer):not(:empty):after {
+  margin-left: 10px;
+}
+
+.divider:not(.block):not(.text):not(.spacer).vertical {
+  /* EMPTY */
+  /* ADVANCED */
+}
+
+.divider:not(.block):not(.text):not(.spacer).vertical:empty {
+  height: auto;
+  width: 1px;
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch;
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
+  margin: 0 5px 10px;
+}
+
+.divider:not(.block):not(.text):not(.spacer).vertical:not(:empty) {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
@@ -4163,37 +4181,72 @@ hr {
   -webkit-align-self: stretch;
       -ms-flex-item-align: stretch;
           align-self: stretch;
+  margin: 0 5px 10px;
 }
 
-.divider-wrp.linear.vertical > hr {
+.divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):before,
+.divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):after {
+  margin: 0;
+  min-width: 0;
   width: 1px;
+  min-height: 10px;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
 }
 
-.divider-wrp.linear.vertical > .divider {
-  padding: 10px 0;
+.divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):before {
+  margin-bottom: 5px;
 }
 
-.divider-wrp.text {
+.divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):after {
+  margin-top: 5px;
+}
+
+.divider.block {
   margin-bottom: 10px;
+  text-align: center;
+  /* CONTENT */
 }
 
-.divider-wrp.text > .divider {
-  font-size: 1em ;
-  font-weight: bold;
-  margin: 0 10px;
-  opacity: 0.75;
+.divider.block > .divider-content {
+  border-color: #d2190b ;
+  color: #ffffff ;
+  background: #f44336 ;
+  display: inline-block;
+  padding: 0.3em 0.6em;
+  border-radius: 10000px 10000px;
 }
 
-.divider-wrp.spacer > .divider {
-  height: 5px;
+.divider.block > .divider-content p > a {
+  color: #fabf40 ;
 }
 
-.divider-wrp > .divider > :last-child {
+.divider.block > .divider-content p > a:after {
+  border-color: #fac24a ;
+}
+
+.divider.block > .divider-content p > a:hover {
+  color: #fac24a ;
+}
+
+.divider.block > .divider-content > :last-child {
   margin-bottom: 0 !important;
 }
 
-.divider-wrp > .divider > :last-child.multiple {
+.divider.block > .divider-content > :last-child.multiple {
   margin-bottom: -10px !important;
+}
+
+.divider.text {
+  font-size: 1em ;
+  font-weight: bold;
+  margin: 0 5px 5px;
+  opacity: 0.75;
+}
+
+.divider.spacer {
+  height: 5px;
 }
 
 /* =========================================================================

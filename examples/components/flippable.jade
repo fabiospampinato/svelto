@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Flippable
 
 append main
-  +divider Horizontal
+  +divider-block Horizontal
 
   +flippable
     +flippable-front
@@ -16,7 +16,7 @@ append main
         p Back
         +button.flipper Flip
 
-  +divider Vertical
+  +divider-block Vertical
 
   +flippable.vertical
     +flippable-front
@@ -28,7 +28,7 @@ append main
         p Back
         +button.flipper Flip
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("set_size ( 100, 100 )").outlined 100x100

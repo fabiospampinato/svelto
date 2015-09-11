@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Highlight
 
 append main
-  +divider Highlight
+  +divider-block Highlight
 
   +multiple
     +label.highlight.primary Primary
@@ -29,7 +29,7 @@ append main
     +label.highlight.inherit Inherit
     +label.highlight.base Base
 
-  +divider Highlight colors
+  +divider-block Highlight colors
 
   +multiple
     +label.highlight.highlight-primary Primary
@@ -54,7 +54,7 @@ append main
     +label.highlight.highlight-inherit Inherit
     +label.highlight.highlight-base Base
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.actions
     +button("toggle_class ( 'outlined' )").outlined Toggle outlined

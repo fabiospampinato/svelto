@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Table
 
 append main
-  +divider Table
+  +divider-block Table
 
   +container.outlined
     table.table.bordered
@@ -49,7 +49,7 @@ append main
                 +button.outlined.small Button
                 +button-icon('more_vert').outlined.small.compact
 
-  +divider Empty
+  +divider-block Empty
 
   +container.outlined
     table.table.bordered
@@ -62,7 +62,7 @@ append main
       tbody
         +table-tr-empty
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("toggle_table_class( 'compact' )").outlined Toggle compact

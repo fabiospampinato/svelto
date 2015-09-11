@@ -4,21 +4,21 @@ extends ../layout.jade
 //- Noty
 
 append main
-  +divider Text
+  +divider-block Text
 
   +multiple
     +button("noty_test_short ()").outlined Short
     +button("noty_test_medium ()").outlined Medium
     +button("noty_test_long ()").outlined Long
 
-  +divider API calls
+  +divider-block API calls
 
   +multiple
     +button("noty_test_api_create ()").outlined Create
     +button("noty_test_api_open ()").outlined Open
     +button("noty_test_api_close ()").outlined Close
 
-  +divider Anchors
+  +divider-block Anchors
 
   +multiple
     +button("noty_test_anchor ({ y: 'top', x: 'left' })").outlined Top-Left
@@ -30,14 +30,14 @@ append main
     +button("noty_test_anchor ({ y: 'bottom', x: 'expanded' })").outlined Bottom-Expanded
     +button("noty_test_anchor ({ y: 'bottom', x: 'right' })").outlined Bottom-Right
 
-  +divider Buttons
+  +divider-block Buttons
 
   +multiple
     +button("noty_test_btns_one ()").outlined One
     +button("noty_test_btns_two ()").outlined Two
     +button("noty_test_btns_three ()").outlined Three
 
-  +divider Advanced
+  +divider-block Advanced
 
   +multiple
     +button("noty_test_adv_one ()").outlined Title + Body
@@ -45,7 +45,7 @@ append main
     +button("noty_test_adv_three ()").outlined Title + Body + Image + Buttons
     +button("noty_test_adv_four ()").outlined Title + Custom body + Image + Buttons
 
-  +divider Colors
+  +divider-block Colors
 
   +multiple
     +button.primary.outlined("noty_test_colored ( 'primary' )") Primary

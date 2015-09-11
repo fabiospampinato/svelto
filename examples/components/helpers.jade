@@ -4,12 +4,12 @@ extends ../layout.jade
 //- Helpers
 
 append main
-  +divider Blurred
+  +divider-block Blurred
 
   +container.outlined
     +square-sample.blurred
 
-  +divider Border
+  +divider-block Border
 
   +container.outlined
     +multiple
@@ -18,28 +18,28 @@ append main
       +square-sample.outlined.smooth
       +square-sample.outlined.sharp
 
-  +divider Display
+  +divider-block Display
 
   +container.outlined
     +multiple
       +square-sample.hidden
       +square-sample.show
 
-  +divider Visibility
+  +divider-block Visibility
 
   +container.outlined
     +multiple
       +square-sample.invisible
       +square-sample.visible
 
-  +divider Float
+  +divider-block Float
 
   +container.outlined
       +square-sample.no-margin.float-left
       +square-sample.no-margin.float-right
       +square-sample.invisible
 
-  +divider Text alignment
+  +divider-block Text alignment
 
   +container.outlined
     +multiple
@@ -48,7 +48,7 @@ append main
       +square-sample.text-right
       +square-sample.text-justify
 
-  +divider Text transformation
+  +divider-block Text transformation
 
   +container.outlined
     +multiple
@@ -56,7 +56,7 @@ append main
       +square-sample.text-uppercase
       +square-sample.text-capitalize
 
-  +divider Text others
+  +divider-block Text others
   
   +container.outlined
     +multiple
@@ -64,7 +64,7 @@ append main
       p.text-ellipsis
         +lorem-ipsum
 
-  +divider Padding
+  +divider-block Padding
 
   +container.outlined
     +multiple
@@ -74,7 +74,7 @@ append main
       +square-sample.no-padding-bottom
       +square-sample.no-padding-left
 
-  +divider Margin
+  +divider-block Margin
 
   +container.outlined
     +multiple
@@ -84,14 +84,14 @@ append main
       +square-sample.no-margin-bottom
       +square-sample.no-margin-left
 
-  +divider Overflow
+  +divider-block Overflow
 
   +container.outlined
     +multiple
       +square-sample.overflow-hidden
       +square-sample.overflow-visible
 
-  +divider Flip
+  +divider-block Flip
 
   +container.outlined
     +multiple
@@ -99,7 +99,7 @@ append main
       +square-sample.flipY
       +square-sample.flip
 
-  +divider Rotate
+  +divider-block Rotate
 
   +container.outlined
     +multiple
@@ -107,21 +107,21 @@ append main
       +square-sample.rotate-right
       +square-sample.rotating
 
-  +divider Grow
+  +divider-block Grow
 
   +container.outlined
     +multiple
       .widget.outlined.outlined-gray.grow Grow
       .widget.outlined.outlined-gray.no-grow No grow
 
-  +divider Shrink
+  +divider-block Shrink
 
   +container.outlined
     +multiple.fluid
       .widget.outlined.outlined-gray.xs-4.no-shrink No shrink
       .widget.outlined.outlined-gray.shrink Shrink
 
-  +divider Others
+  +divider-block Others
 
   +container.outlined
     +multiple.fluid

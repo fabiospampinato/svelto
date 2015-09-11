@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Colors
 
 append main
-  +divider Colors
+  +divider-block Colors
 
   +multiple
     +button.primary Primary
@@ -29,7 +29,7 @@ append main
     +button.inherit Inherit
     +button.base Base
 
-  +divider Text colors
+  +divider-block Text colors
 
   +container.outlined
     +multiple
@@ -55,7 +55,7 @@ append main
       .widget.text-inherit Inherit
       .widget.text-base Base
 
-  +divider Links colors
+  +divider-block Links colors
   
   +container.outlined
     +multiple
@@ -81,7 +81,7 @@ append main
       .widget.link.link-inherit Inherit
       .widget.link.link-base Base
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.actions
     +button("toggle_class ( 'gradient' )").outlined Toggle gradient

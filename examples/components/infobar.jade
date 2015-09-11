@@ -4,11 +4,11 @@ extends ../layout.jade
 //- Infobar
 
 append main
-  +divider Limited
+  +divider-block Limited
 
   +infobar({ name: 'settings', title: 'Lorem ipsum dolor sit amet consectetur adipiscing elit' }).outlined.limited
 
-  +divider Closable
+  +divider-block Closable
 
   +infobar.outlined
     +infobar-left
@@ -21,7 +21,7 @@ append main
     +infobar-right
       +button-icon("clear").red.outlined.infobar-closer.compact
 
-  +divider Outside
+  +divider-block Outside
 
   +infobar({ title: 'Lorem ipsum dolor sit amet consectetur adipiscing elit' }).outlined.limited
 
@@ -92,7 +92,7 @@ append main
         +button.outlined Top rated
         +button.outlined Top favourited
 
-  +divider Inside
+  +divider-block Inside
 
   +container
     +infobar({ name: 'settings', title: 'Lorem ipsum dolor sit amet consectetur adipiscing elit', subtitle: 'Lorem ipsum dolor sit amet consectetur adipiscing elit' }).gray

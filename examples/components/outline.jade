@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Outline
 
 append main
-  +divider Outlined
+  +divider-block Outlined
 
   +container.outlined
     +multiple
@@ -20,14 +20,14 @@ append main
         +input({ label: "Placeholder...", value: "Input" }).outlined.no-floating.white
         +button-icon('settings').outlined.compact
 
-  +divider Styles
+  +divider-block Styles
 
   +multiple
     +label.outlined.outlined-solid Solid
     +label.outlined.outlined-dotted Dotted
     +label.outlined.outlined-dashed Dashed
 
-  +divider Colors
+  +divider-block Colors
 
   +multiple
     +label.outlined.outlined-primary Primary

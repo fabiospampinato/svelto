@@ -1,16 +1,17 @@
 
 /* =========================================================================
- * Svelto - Divider v0.2.0
+ * Svelto - Divider v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-/* DEFAULT DIVIDER */
+/* DIVIDER */
 
-hr {
+%divider {
   height: 1px;
   margin-top: - $gutter-half;
   margin-bottom: $gutter-half;
@@ -18,90 +19,133 @@ hr {
   background-color: $divider-linear-bg-color;
 }
 
+/* DEFAULT DIVIDER */
+
+hr {
+  @extend %divider;
+}
+
 /* DIVIDER */
 
-//TODO: add vertical divider
+.divider {
 
-.divider-wrp {
+  /* LINEAR */
+
+  &:not(.block):not(.text):not(.spacer) { //INFO: The default one
+
+    /* EMPTY */
+
+    &:empty {
+      @extend %divider;
+    }
+
+    /* ADVANCED */
+
+    &:not(:empty) {
+
+      @include last-child-no-gutter ();
+      margin-bottom: $gutter;
+      display: flex;
+      align-items: center;
+
+      &:before,
+      &:after {
+        @extend %divider;
+        content: '';
+        margin: 0;
+        flex-grow: 1;
+        min-width: $gutter;
+      }
+
+      &:before {
+        margin-right: $gutter;
+      }
+
+      &:after {
+        margin-left: $gutter;
+      }
+
+    }
+
+    /* VERTICAL */
+
+    &.vertical {
+
+      /* EMPTY */
+
+      &:empty {
+        height: auto;
+        width: 1px;
+        align-self: stretch;
+        flex-grow: 0;
+        margin: 0 $gutter-half $gutter;
+      }
+
+      /* ADVANCED */
+
+      &:not(:empty) {
+
+        flex-direction: column;
+        flex-grow: 0 !important;
+        align-self: stretch;
+        // justify-content: center;
+        margin: 0 $gutter-half $gutter;
+
+        &:before,
+        &:after {
+          margin: 0;
+          min-width: 0;
+          width: 1px;
+          min-height: $gutter;
+          flex-grow: 1;
+        }
+
+        &:before {
+          margin-bottom: $gutter-half;
+        }
+
+        &:after {
+          margin-top: $gutter-half;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* BLOCK */
 
   &.block {
 
     margin-bottom: $gutter;
     text-align: center;
 
-    & > .divider {
+    /* CONTENT */
+
+    > .divider-content {
       @include color ( $divider-block-color, $divider-block-color-basic );
+      @include last-child-no-gutter ();
       display: inline-block;
-      padding: $divider-block-padding;
+      padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
       border-radius: 10000px 10000px;
     }
 
   }
 
-  &.linear {
-
-    display: flex;
-    align-items: center;
-    margin-bottom: $gutter;
-
-    & > hr {
-      flex-grow: 1;
-      margin: 0;
-    }
-
-    &:not(.vertical) {
-
-      & > hr {
-        min-width: $gutter;
-      }
-
-      & > .divider {
-        padding: $divider-linear-padding-vertical $divider-linear-padding-horizontal;
-      }
-
-    }
-
-    &.vertical {
-
-      flex-direction: column;
-      flex-grow: 0 !important;
-      align-self: stretch;
-
-      & > hr {
-        width: 1px;
-      }
-
-      & > .divider {
-        padding: $divider-linear-padding-horizontal $divider-linear-padding-vertical;
-      }
-
-    }
-
-  }
+  /* TEXT */
 
   &.text {
-
-    margin-bottom: $gutter;
-
-    & > .divider {
-      @include size ( $divider-text-size );
-      font-weight: $divider-text-font-weight;
-      margin: 0 $gutter;
-      opacity: $divider-text-opacity;
-    }
-
+    @include size ( $divider-text-size );
+    font-weight: $divider-text-font-weight;
+    margin: 0 $gutter-half $gutter-half;
+    opacity: $divider-text-opacity;
   }
 
-  &.spacer {
+  /* SPACER */
 
-    & > .divider {
-      height: $divider-spacer-height;
-    }
-
-  }
-
-  & > .divider {
-    @include last-child-no-gutter ();
+  &.spacer { //TODO: Maybe remove it, it's not very useful nor required...
+    height: $divider-spacer-height;
   }
 
 }

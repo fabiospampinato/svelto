@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Touching
 
 append main
-  +divider Squares - All matches
+  +divider-block Squares - All matches
 
   +container.squares_all.outlined
     +multiple
@@ -14,13 +14,13 @@ append main
         +square.xxxxlarge.centerer
           .small= nr++
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.joined
     +input({ name: "input_populate_all", label: "Search number..." }).no-floating.white.text-field-secondary.outlined
     +button("populate_all ()").secondary.outlined Populate
 
-  +divider Squares - Most significant match
+  +divider-block Squares - Most significant match
 
   +container.squares_most.outlined
     +multiple
@@ -30,13 +30,13 @@ append main
         +square.xxxxlarge.centerer
           .small= nr++
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.joined
     +input({ name: "input_populate_most", label: "Square number..." }).no-floating.white.text-field-secondary.outlined
     +button("populate_most ()").secondary.outlined Populate
 
-  +divider Squares - Punctual
+  +divider-block Squares - Punctual
 
   +container.squares_punctual.outlined
     +multiple
@@ -46,7 +46,7 @@ append main
         +square.xxxxlarge.centerer
           .small= nr++
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple.joined
     +input({ name: "input_populate_punctual", label: "Square number..." }).no-floating.white.text-field-secondary.outlined

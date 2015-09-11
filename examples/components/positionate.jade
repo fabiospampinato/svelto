@@ -6,12 +6,12 @@ extends ../layout.jade
 //- TODO: add different kind of anchors and positionables, and select those to use using a radio, just to test different configurations (o magari crearne 2 e switchare tra i 2, uno diventa l'anchor e l'altro il positionable)
 
 append main
-  +divider Anchor
+  +divider-block Anchor
 
   +square-sample(style="z-index: 100;").anchor.draggable
   +square-sample(style="position:fixed; top:0; left: 0; z-index: 101;").positionable.secondary
 
-  +divider Positionate
+  +divider-block Positionate
 
   +multiple
     +checkbox({ name: "live", title: "Live", value: 1 }).live.outlined

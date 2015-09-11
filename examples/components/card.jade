@@ -4,14 +4,14 @@ extends ../layout.jade
 //- Card
 
 append main
-  +divider Card
+  +divider-block Card
 
   +card
     +card-header.green Header
     +card-block Block
     +card-footer.olive Footer
 
-  +divider With image
+  +divider-block With image
   
   +multiple
     +card.xs-12.sm-6.md-3
@@ -44,7 +44,7 @@ append main
       img(src="/sample-wide.jpg")
       +card-block Block
 
-  +divider Advanced
+  +divider-block Advanced
 
   +card(style="height: 250px;")
     +card-header.teal
@@ -64,7 +64,7 @@ append main
       +paragraph-sample
     +card-footer.pink Footer
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("remove_element ( '.card .image-wrp, .card > img' )").outlined Remove image

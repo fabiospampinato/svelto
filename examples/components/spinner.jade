@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Spinner
 
 append main
-  +divider Normal
+  +divider-block Normal
 
   +container.outlined
     +multiple
@@ -30,19 +30,19 @@ append main
       +spinner.inherit
       +spinner.base
 
-  +divider Multiple
+  +divider-block Multiple
 
   +container.outlined
     +spinner-multiple
 
-  +divider Custom multiple
+  +divider-block Custom multiple
 
   +container.outlined
     +multiple
       +spinner-multiple([ "primary", "secondary", "tertiary", "quaternary" ])
       +spinner-multiple([ "blue", "red", "blue", "red" ])
 
-  +divider Sizes
+  +divider-block Sizes
 
   +container.outlined
     +multiple

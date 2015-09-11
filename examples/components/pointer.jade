@@ -4,12 +4,12 @@ extends ../layout.jade
 //- Pointer
 
 append main
-  +divider Target
+  +divider-block Target
 
   +centerer
     +square(style="height: 300px; width: 75%;").target
 
-  +divider Triggered
+  +divider-block Triggered
 
   +multiple
     +checkbox({ name: "pointer_tap", title: "Tap", value: 1 }).tap.outlined
@@ -20,7 +20,7 @@ append main
     +checkbox({ name: "pointer_dragend", title: "Drag end", value: 1 }).dragend.outlined
     +checkbox({ name: "pointer_flick", title: "Flick", value: 1 }).flick.outlined
 
-  +divider Actions
+  +divider-block Actions
 
   +button("pointer_uncheck_all ()").outlined Reset
 

@@ -4,7 +4,7 @@ extends ../layout.jade
 //- Cookie
 
 append main
-  +divider Cookie
+  +divider-block Cookie
 
   +multiple.fluid.joined
     +input({ name: "cookie_key", label: "Key..." }).white.outlined.no-floating
@@ -14,7 +14,7 @@ append main
     +input({ name: "cookie_domain", label: "Domain..." }).white.outlined.no-floating
     +input({ name: "cookie_secure", label: "Secure..." }).white.outlined.no-floating
 
-  +divider Actions
+  +divider-block Actions
 
   +multiple
     +button("cookie_get ()").outlined Get
