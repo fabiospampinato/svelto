@@ -2571,7 +2571,7 @@ body p > a:hover {
 /* BREADCRUMB */
 /* DIVIDER */
 /* =========================================================================
- * Svelto - Breadcrumb v0.1.1
+ * Svelto - Breadcrumb v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2583,14 +2583,24 @@ body p > a:hover {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
   margin-bottom: 10px;
+  /* DIVIDER */
+  /* HIGHLIGHTED */
 }
 
-.breadcrumb > .breadcrumb-divider {
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
+.breadcrumb-divider {
   padding: 0 0.75em;
+}
+
+.breadcrumb-divider > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.breadcrumb-divider > :last-child.multiple {
+  margin-bottom: -10px !important;
 }
 
 .breadcrumb.highlighted > .current ~ * {
@@ -10758,7 +10768,7 @@ mark p > a:hover,
 /* ABBR */
 abbr[title] {
   cursor: help;
-  border-bottom: 0.2665em "dotted" #bababa;
+  border-bottom: 1px "dotted" #bababa;
 }
 
 /* BLOCKQUOTE */

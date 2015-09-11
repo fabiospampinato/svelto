@@ -18,7 +18,7 @@ append main
       +breadcrumb-divider.xsmall
       +a(title="Link 5") Link 5
 
-  +divider Text
+  +divider Custom text divider
 
   +container.outlined
     +breadcrumb
@@ -46,44 +46,13 @@ append main
       +breadcrumb-divider("trending_flat").xsmall
       +a(title="Link 5") Link 5
 
-  +divider Base - Highlighted
+  +divider Actions
 
-  +container.outlined
-    +breadcrumb.highlighted
-      +a(title="Link 1") Link 1
-      +breadcrumb-divider.xsmall
-      +a(title="Link 2") Link 2
-      +breadcrumb-divider.xsmall
-      +a(title="Link 3").current Link 3
-      +breadcrumb-divider.xsmall
-      +a(title="Link 4") Link 4
-      +breadcrumb-divider.xsmall
-      +a(title="Link 5") Link 5
+  +multiple.actions
+    +button("toggle_class ( 'highlighted' )").outlined Toggle highlighted
 
-  +divider Text - Highlighted
-
-  +container.outlined
-    +breadcrumb.highlighted
-      +a(title="Link 1") Link 1
-      +breadcrumb-divider /
-      +a(title="Link 2") Link 2
-      +breadcrumb-divider /
-      +a(title="Link 3").current Link 3
-      +breadcrumb-divider /
-      +a(title="Link 4") Link 4
-      +breadcrumb-divider /
-      +a(title="Link 5") Link 5
-
-  +divider Custom icon divider - Highlighted
-
-  +container.outlined
-    +breadcrumb.highlighted
-      +a(title="Link 1") Link 1
-      +breadcrumb-divider("trending_flat").xsmall
-      +a(title="Link 2") Link 2
-      +breadcrumb-divider("trending_flat").xsmall
-      +a(title="Link 3").current Link 3
-      +breadcrumb-divider("trending_flat").xsmall
-      +a(title="Link 4") Link 4
-      +breadcrumb-divider("trending_flat").xsmall
-      +a(title="Link 5") Link 5
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.breadcrumb').toggleClass ( css_class );
+    }
