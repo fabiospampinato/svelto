@@ -598,6 +598,7 @@ th {
 /* MARK */
 /* ABBR */
 /* BLOCKQUOTE */
+/* LIST */
 /* CODE */
 /* KBD */
 /* =========================================================================
@@ -6030,7 +6031,8 @@ header > *:last-child {
  * @requires _settings.scss
  * ========================================================================= */
 /* HIGHLIGHT:AFTER */
-.highlight:after, .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar, .link:after, p > a:after {
+.highlight:after, .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar, p > a:after,
+.link:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -8033,6 +8035,7 @@ table td .multiple:only-child {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
+  left: 0;
   -webkit-flex-wrap: wrap;
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
@@ -10656,18 +10659,21 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
  * @requires ../highlight/_highlight.scss
  * ========================================================================= */
 /* LINK */
-a, .link {
+a,
+.link {
   position: relative;
   text-decoration: none;
   color: inherit;
 }
 
-.link, p > a {
+p > a,
+.link {
   display: inline-block;
   cursor: pointer;
 }
 
-.link:after, p > a:after {
+p > a:after,
+.link:after {
   border-bottom-width: 1px;
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
@@ -10675,7 +10681,8 @@ a, .link {
           transform: scaleX(0);
 }
 
-.link:hover:after, p > a:hover:after {
+p > a:hover:after,
+.link:hover:after {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
 }
@@ -10724,7 +10731,8 @@ p {
 }
 
 /* MARK */
-mark, .mark {
+mark,
+.mark {
   border-color: #e7a006 ;
   color: #ffffff ;
   background: #fabf40 ;
@@ -10732,15 +10740,18 @@ mark, .mark {
   border-radius: 0.13325em;
 }
 
-mark p > a, .mark p > a {
+mark p > a,
+.mark p > a {
   color: #f44336 ;
 }
 
-mark p > a:after, .mark p > a:after {
+mark p > a:after,
+.mark p > a:after {
   border-color: #f54c40 ;
 }
 
-mark p > a:hover, .mark p > a:hover {
+mark p > a:hover,
+.mark p > a:hover {
   color: #f54c40 ;
 }
 
@@ -10777,6 +10788,8 @@ blockquote:before {
 }
 
 blockquote > footer {
+  background-color: transparent;
+  padding: 0 0;
   font-size: 0.85em;
   opacity: 0.85;
 }
@@ -10836,7 +10849,6 @@ kbd {
   font-size: 0.9em;
   font-weight: bold;
   display: inline-block;
-  margin: 0 5px;
   padding: 0.2em 0.3em;
   white-space: nowrap;
   border-width: 1px;

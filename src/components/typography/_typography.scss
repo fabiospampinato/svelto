@@ -11,13 +11,15 @@
 
 /* LINK */
 
-a, .link {
+a,
+.link {
   position: relative;
   text-decoration: none;
   color: inherit;
 }
 
-.link, p > a { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+p > a,
+.link { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
 
   display: inline-block;
   cursor: pointer;
@@ -85,7 +87,8 @@ p {
 
 /* MARK */
 
-mark, .mark {
+mark,
+.mark {
   @include color ( $mark-color, $mark-color-basic );
   padding: $mark-padding;
   border-radius: $mark-border-radius;
@@ -123,6 +126,8 @@ blockquote {
 
     @extend .widget;
     @include last-child-no-gutter ();
+    background-color: $blockquote-footer-bg-color;
+    padding: $blockquote-footer-padding-vertical $blockquote-footer-padding-horizontal;
     font-size: $blockquote-footer-font-size;
     opacity: $blockquote-footer-opacity;
 
@@ -139,7 +144,7 @@ blockquote {
 
 ul, ol {
   margin: 0;
-  padding-left: $gutter * 2;
+  padding-left: $list-padding-left;
 }
 
 ul.unstyled {
@@ -180,7 +185,6 @@ kbd {
   font-size: $kbd-font-size;
   font-weight: bold;
   display: inline-block;
-  margin: 0 $gutter-half;
   padding: $kbd-padding;
   white-space: nowrap;
   border-width: $kbd-border-width;

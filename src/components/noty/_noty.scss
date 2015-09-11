@@ -68,6 +68,7 @@
   position: fixed;
   z-index: $noty-z-index;
   display: flex;
+  left: 0;
   flex-wrap: wrap;
   width: 100%;
   pointer-events: none;

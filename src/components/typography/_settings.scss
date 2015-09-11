@@ -52,7 +52,7 @@ $mark-border-radius: $border-radius-small !default;
 
 /* ABBR */
 
-$abbr-border-width: $border-radius-medium !default;
+$abbr-border-width: 1px !default;
 $abbr-border-style: 'dotted' !default;
 $abbr-border-color: $color-gray-border !default;
 
@@ -64,6 +64,13 @@ $blockquote-line-bg-color: rgba(0, 0, 0, 0.15) !default;
 
 $blockquote-footer-font-size: 0.85em !default;
 $blockquote-footer-opacity: 0.85 !default;
+$blockquote-footer-bg-color: transparent !default;
+$blockquote-footer-padding-vertical: 0 !default;
+$blockquote-footer-padding-horizontal: 0 !default;
+
+/* LIST */
+
+$list-padding-left: $gutter * 2 !default;
 
 /* CODE */
 
