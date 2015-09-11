@@ -7,39 +7,39 @@ append main
   +divider Normal
 
   +multiple
-    +navbar-btn({ title: "Left", icon: "chevron_left", id: "left" })
-    +navbar-btn({ title: "Top", icon: "expand_less", id: "top" })
-    +navbar-btn({ title: "Bottom", icon: "expand_more", id: "bottom" })
-    +navbar-btn({ title: "Right",icon: "chevron_right", id: "right" })
+    +navbar-btn({ title: "Left", icon: "chevron_left", id: "left" }).outlined
+    +navbar-btn({ title: "Top", icon: "expand_less", id: "top" }).outlined
+    +navbar-btn({ title: "Bottom", icon: "expand_more", id: "bottom" }).outlined
+    +navbar-btn({ title: "Right",icon: "chevron_right", id: "right" }).outlined
 
   +divider Slim
 
   +multiple
-    +navbar-btn({ icon: "chevron_left", id: "left-slim" }).compact
-    +navbar-btn({ icon: "expand_less", id: "top-slim" }).compact
-    +navbar-btn({ icon: "expand_more", id: "bottom-slim" }).compact
-    +navbar-btn({ icon: "chevron_right", id: "right-slim" }).compact
+    +navbar-btn({ icon: "chevron_left", id: "left-slim" }).compact.outlined
+    +navbar-btn({ icon: "expand_less", id: "top-slim" }).compact.outlined
+    +navbar-btn({ icon: "expand_more", id: "bottom-slim" }).compact.outlined
+    +navbar-btn({ icon: "chevron_right", id: "right-slim" }).compact.outlined
 
   +divider Attached
 
   +multiple
-    +navbar-btn({ title: "Left", icon: "chevron_left", id: "left-attached" })
-    +navbar-btn({ icon: "expand_less", id: "top-attached" }).compact
-    +navbar-btn({ icon: "expand_more", id: "bottom-attached" }).compact
-    +navbar-btn({ title: "Right", icon: "chevron_right", id: "right-attached" })
+    +navbar-btn({ title: "Left", icon: "chevron_left", id: "left-attached" }).outlined
+    +navbar-btn({ icon: "expand_less", id: "top-attached" }).compact.outlined
+    +navbar-btn({ icon: "expand_more", id: "bottom-attached" }).compact.outlined
+    +navbar-btn({ title: "Right", icon: "chevron_right", id: "right-attached" }).outlined
 
   +divider Actions
 
   +multiple
-    +button("navbar_toggle_fixed_header ()") Toggle fixed header
-    +button("navbar_remove_header ()") Remove header
-    +button("navbar_remove_footer ()") Remove footer
+    +button("toggle_fixed_header ()").outlined Toggle fixed header
+    +button("remove_element ( 'header' )").outlined Remove header
+    +button("remove_element ( 'footer' )").outlined Remove footer
 
 append body-start
-  +navbar({ id: "left-attached", direction: "left", slim: false, attached: "attached-lg" }) Left Attached
+  +navbar({ id: "left-attached", direction: "left", slim: false, attached: "attached-lg", flickable: true }) Left Attached
   +navbar({ id: "top-attached", direction: "top", slim: true, attached: "attached-lg" }) Top Attached
   +navbar({ id: "bottom-attached", direction: "bottom", slim: true, attached: "attached-lg" }) Bottom attached
-  +navbar({ id: "right-attached", direction: "right", slim: false, attached: "attached-lg" }) Right Attached
+  +navbar({ id: "right-attached", direction: "right", slim: false, attached: "attached-lg", flickable: true }) Right Attached
 
 append body
   +navbar({ id: "left", direction: "left" }) Left
@@ -54,14 +54,9 @@ append body
 
 append body-end
   +script.
-    function navbar_toggle_fixed_header () {
-      $('body').toggleClass ( 'fixed-header' );
+    function toggle_fixed_header () {
+      $('header').toggleClass ( 'fixed' );
     }
-
-    function navbar_remove_header () {
-      $('header').remove ();
-    }
-
-    function navbar_remove_footer () {
-      $('footer').remove ();
+    function remove_element ( selector ) {
+      $(selector).remove ();
     }

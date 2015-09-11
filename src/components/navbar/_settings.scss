@@ -6,12 +6,16 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * ========================================================================= */
 
 /* NAVBAR */
 
-$navbar-z-index: 20 !default;
+$navbar-z-index: 120 !default;
 $navbar-z-depth: 5 !default;
+
+$navbar-color: $container-color !default;
+$navbar-color-basic: $container-color-basic !default;
 
 $navbar-transition-transform-duration: $transition-duration-normal !default;
 
@@ -21,7 +25,7 @@ $navbar-attached-z-depth: 5 !default;
 
 /* BACKGROUND */
 
-$navbar-background-z-index: 19 !default;
+$navbar-background-z-index: 119 !default;
 
 $navbar-background-color: rgba(0, 0, 0, 0.5) !default;
 
@@ -31,14 +35,18 @@ $navbar-background-transition-opacity-duration: $transition-duration-normal !def
 
 $navbar-horizontal-height: 120px !default;
 $navbar-horizontal-extra-distance: 40px !default;
+$navbar-closed-horizontal-spacing: $navbar-horizontal-height + $navbar-horizontal-extra-distance !default;
 
 $navbar-vertical-width: 240px !default;
 $navbar-vertical-extra-distance: 40px !default;
+$navbar-closed-vertical-spacing: $navbar-vertical-width + $navbar-vertical-extra-distance !default;
 
 /* SLIM SIZES */
 
 $navbar-slim-horizontal-height: 64px !default;
 $navbar-slim-horizontal-extra-distance: 40px !default;
+$navbar-slim-closed-horizontal-spacing: $navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance !default;
 
 $navbar-slim-vertical-width: 64px !default;
 $navbar-slim-vertical-extra-distance: 40px !default;
+$navbar-slim-closed-vertical-spacing: $navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance !default;

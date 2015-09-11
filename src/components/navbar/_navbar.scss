@@ -10,18 +10,16 @@
 
 //TODO: maybe we should wrap header, main and footer into another container, so that it will be easier to do the CSS work here
 
-//INFO: The attached navbar must be placed before the header tag, otherwise the CSS selectors will not work
+//INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
 
 /* MIXINS */
 
 @mixin open () {
 
-  & > .navbar {
-    transform: translate3d(0,0,0) !important;
-    pointer-events: auto;
-  }
+  transform: translateX(0) translateY(0) !important;
+  pointer-events: auto;
 
-  & > .background {
+  + .navbar-background {
     pointer-events: auto;
     opacity: 1;
   }
@@ -30,33 +28,35 @@
 
 @mixin attach () {
 
-  & > .navbar {
-    @include z-depth ( $navbar-attached-z-depth );
-  }
+  @include z-depth ( $navbar-attached-z-depth );
 
-  & > .background {
+  + .navbar-background {
     pointer-events: none;
     opacity: 0;
   }
 
   &.left {
 
-    & ~ header, & ~ main, & ~ footer {
-      margin-left: $navbar-vertical-width;
-    }
+    ~ #content {
 
-    body.fixed-header > & ~ header > .header {
-      left: $navbar-vertical-width;
+      margin-left: $navbar-vertical-width;
+
+      > header.fixed {
+        left: $navbar-vertical-width;
+      }
+
     }
 
     &.slim {
 
-      & ~ header, & ~ main, & ~ footer {
-        margin-left: $navbar-slim-vertical-width;
-      }
+      ~ #content {
 
-      body.fixed-header > & ~ header > .header {
-        left: $navbar-slim-vertical-width;
+        margin-left: $navbar-slim-vertical-width;
+
+        > header.fixed {
+          left: $navbar-slim-vertical-width;
+        }
+
       }
 
     }
@@ -65,22 +65,26 @@
 
   &.right {
 
-    & ~ header, & ~ main, & ~ footer {
-      margin-right: $navbar-vertical-width;
-    }
+    ~ #content {
 
-    body.fixed-header > & ~ header > .header {
-      right: $navbar-vertical-width;
+      margin-right: $navbar-vertical-width;
+
+      > header.fixed {
+        right: $navbar-vertical-width;
+      }
+
     }
 
     &.slim {
 
-      & ~ header, & ~ main, & ~ footer {
-        margin-right: $navbar-slim-vertical-width;
-      }
+      ~ #content {
 
-      body.fixed-header > & ~ header > .header {
-        right: $navbar-slim-vertical-width;
+        margin-right: $navbar-slim-vertical-width;
+
+        > header.fixed {
+          right: $navbar-slim-vertical-width;
+        }
+
       }
 
     }
@@ -89,60 +93,24 @@
 
   &.top {
 
-    & ~ header {
+    ~ #content {
+
       margin-top: $navbar-horizontal-height;
-      margin-bottom: - $navbar-horizontal-height;
-    }
 
-    & ~ main {
-      margin-top: $navbar-horizontal-height + $gutter;
-    }
-
-    body.fixed-header > & {
-
-      & ~ header {
-
-        margin-top: $toolbar-height + $navbar-horizontal-height;
-        margin-bottom: - ( $navbar-horizontal-height - $gutter );
-
-        & > .header {
-          top: $navbar-horizontal-height;
-        }
-
-      }
-
-      & ~ main {
-        margin-top: $navbar-horizontal-height;
+      > header.fixed {
+        top: $navbar-horizontal-height;
       }
 
     }
 
     &.slim {
 
-      & ~ header {
+      ~ #content {
+
         margin-top: $navbar-slim-horizontal-height;
-        margin-bottom: - $navbar-slim-horizontal-height;
-      }
 
-      & ~ main {
-        margin-top: $navbar-slim-horizontal-height + $gutter;
-      }
-
-      body.fixed-header > & {
-
-        & ~ header {
-
-          margin-top: $toolbar-height + $navbar-slim-horizontal-height;
-          margin-bottom: - ( $navbar-slim-horizontal-height - $gutter );
-
-          & > .header {
-            top: $navbar-slim-horizontal-height;
-          }
-
-        }
-
-        & ~ main {
-          margin-top: $navbar-slim-horizontal-height;
+        > header.fixed {
+          top: $navbar-slim-horizontal-height;
         }
 
       }
@@ -153,24 +121,26 @@
 
   &.bottom {
 
-    & ~ main {
-      margin-bottom: $navbar-horizontal-height;
-    }
+    ~ #content {
 
-    & ~ footer {
-      margin-top: - $navbar-horizontal-height;
       margin-bottom: $navbar-horizontal-height;
+
+      > header.fixed {
+        bottom: $navbar-horizontal-height;
+      }
+
     }
 
     &.slim {
 
-      & ~ main {
-        margin-bottom: $navbar-slim-horizontal-height;
-      }
+      ~ #content {
 
-      & ~ footer {
-        margin-top: - $navbar-slim-horizontal-height;
         margin-bottom: $navbar-slim-horizontal-height;
+
+        > header.fixed {
+          bottom: $navbar-slim-horizontal-height;
+        }
+
       }
 
     }
@@ -181,17 +151,25 @@
 
 /* NAVBAR */
 
-.navbar-wrp {
+.navbar {
+
+  @include color ( $navbar-color, $navbar-color-basic );
+  @include z-depth ( $navbar-z-depth );
+  @include last-child-no-gutter ();
+  position: fixed;
+  z-index: $navbar-z-index;
+  transition: transform $navbar-transition-transform-duration;
+  pointer-events: none;
 
   &.left, &.right {
 
-    & > .navbar {
-      top: 0;
-      bottom: 0;
-      width: $navbar-vertical-width;
-    }
+    top: 0;
+    bottom: 0;
+    width: $navbar-vertical-width;
 
-    &.slim > .navbar {
+    /* SLIM */
+
+    &.slim {
       width: $navbar-slim-vertical-width;
     }
 
@@ -199,39 +177,39 @@
 
   &.left {
 
-    & > .navbar {
-      left: 0;
-      transform: translate3d(-($navbar-vertical-width + $navbar-vertical-extra-distance),0,0);
-    }
+    left: 0;
+    transform: translateX(- $navbar-closed-vertical-spacing);
 
-    &.slim > .navbar {
-      transform: translate3d(-($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance),0,0);
+    /* SLIM */
+
+    &.slim {
+      transform: translateX(- $navbar-slim-closed-vertical-spacing);
     }
 
   }
 
   &.right {
 
-    & > .navbar {
-      right: 0;
-      transform: translate3d($navbar-vertical-width + $navbar-vertical-extra-distance,0,0);
-    }
+    right: 0;
+    transform: translateX($navbar-closed-vertical-spacing);
 
-    &.slim > .navbar {
-      transform: translate3d($navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance,0,0);
+    /* SLIM */
+
+    &.slim {
+      transform: translateX($navbar-slim-closed-vertical-spacing);
     }
 
   }
 
   &.top, &.bottom {
 
-    & > .navbar {
-      right: 0;
-      left: 0;
-      height: $navbar-horizontal-height;
-    }
+    right: 0;
+    left: 0;
+    height: $navbar-horizontal-height;
 
-    &.slim > .navbar {
+    /* SLIM */
+
+    &.slim {
       height: $navbar-slim-horizontal-height;
     }
 
@@ -239,49 +217,28 @@
 
   &.top {
 
-    & > .navbar {
-      top: 0;
-      transform: translate3d(0,-($navbar-horizontal-height + $navbar-horizontal-extra-distance),0);
-    }
+    top: 0;
+    transform: translateY(- $navbar-closed-horizontal-spacing);
 
-    &.slim > .navbar {
-      transform: translate3d(0,-($navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance),0);
+    /* SLIM */
+
+    &.slim {
+      transform: translateY(- $navbar-slim-closed-horizontal-spacing);
     }
 
   }
 
   &.bottom {
 
-    & > .navbar {
-      bottom: 0;
-      transform: translate3d(0,$navbar-horizontal-height + $navbar-horizontal-extra-distance,0);
+    bottom: 0;
+    transform: translateY($navbar-closed-horizontal-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateY($navbar-slim-closed-horizontal-spacing);
     }
 
-    &.slim > .navbar {
-      transform: translate3d(0,$navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance,0);
-    }
-
-  }
-
-  & > .navbar {
-    @include z-depth ( $navbar-z-depth );
-    position: fixed;
-    z-index: $navbar-z-index;
-    margin: 0;
-    transition: transform $navbar-transition-transform-duration;
-    pointer-events: none;
-    border-width: 0; //FIXME: when we remove the default container's outlined also remove this one
-    border-radius: 0;
-  }
-
-  & > .background {
-    @include fill-fixed ();
-    z-index: $navbar-background-z-index;
-    cursor: pointer;
-    transition: opacity $navbar-background-transition-opacity-duration;
-    pointer-events: none;
-    opacity: 0;
-    background-color: $navbar-background-color;
   }
 
   // OPENED
@@ -335,6 +292,18 @@
       @include attach ();
     }
 
+  }
+
+  /* BACKGROUND */
+
+  &-background {
+    @include fill-fixed ();
+    z-index: $navbar-background-z-index;
+    cursor: pointer;
+    transition: opacity $navbar-background-transition-opacity-duration;
+    opacity: 0;
+    pointer-events: none;
+    background-color: $navbar-background-color;
   }
 
 }

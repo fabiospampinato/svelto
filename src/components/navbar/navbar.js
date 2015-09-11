@@ -8,7 +8,8 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-//TODO: Add flick capabilities (show and hide on flick in the right direction and starting within the right zone)
+//TODO: Replace flickable support with a smooth moving navbar, so operate on drag
+//TODO: Support esc key to close it
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -21,6 +22,7 @@
     /* OPTIONS */
 
     options: {
+      flickableArea: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
       callbacks: {
         open: _.noop,
         close: _.noop
@@ -32,14 +34,15 @@
     _variables: function () {
 
       this.$navbar = this.$element;
-      this.$wrp = this.$navbar.parent ();
 
       this.id = this.$navbar.attr ( 'id' );
 
-      this.$closers = this.$wrp.find ( '.navbar-closer' );
+      this.$closers = this.$navbar.find ( '.navbar-closer, + .navbar-background' );
       this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
 
-      this.opened = this.$wrp.hasClass ( 'opened' );
+      this.direction = this.$navbar.data ( 'direction' );
+      this.isFlickable = this.$navbar.hasClass ( 'flickable' );
+      this.opened = this.$navbar.hasClass ( 'opened' );
 
     },
 
@@ -47,11 +50,69 @@
 
       /* CLOSER CLICK */
 
-      this._on ( this.$closers, 'click', this.close );
+      this._on ( this.$closers, $.Pointer.tap, this.close );
 
       /* TRIGGER CLICK */
 
-      this._on ( this.$triggers, 'click', this.open );
+      this._on ( this.$triggers, $.Pointer.tap, this.open );
+
+      /* FLICK */
+
+      if ( this.isFlickable ) {
+
+        this._on ( $document, $.Pointer.flick, this._handler_flick );
+
+      }
+
+    },
+
+    /* PRIVATE */
+
+    _handler_flick: function ( event, data ) {
+
+      if ( this.opened ) return;
+
+      switch ( this.direction ) {
+
+        case 'left':
+        case 'right':
+          if ( data.orientation === 'horizontal' ) {
+            if ( this.direction === 'left' ) {
+              if ( data.direction === 1 ) {
+                if ( data.startXY.X <= this.options.flickableArea ) {
+                  this.open ();
+                }
+              }
+            } else if ( this.direction === 'right' ) {
+              if ( data.direction === -1 ) {
+                if ( $window.width () - data.startXY.X <= this.options.flickableArea ) {
+                  this.open ();
+                }
+              }
+            }
+          }
+          break;
+
+        case 'top':
+        case 'bottom':
+          if ( data.orientation === 'vertical' ) {
+            if ( this.direction === 'top' ) {
+              if ( data.direction === -1 ) {
+                if ( data.startXY.Y <= this.options.flickableArea ) {
+                  this.open ();
+                }
+              }
+            } else if ( this.direction === 'bottom' ) {
+              if ( data.direction === 1 ) {
+                if ( $window.height () - data.startXY.Y <= this.options.flickableArea ) {
+                  this.open ();
+                }
+              }
+            }
+          }
+          break;
+
+      }
 
     },
 
@@ -69,7 +130,7 @@
 
         this.opened = force;
 
-        this.$wrp.toggleClass ( 'opened', this.opened );
+        this.$navbar.toggleClass ( 'opened', this.opened );
 
         this._trigger ( this.opened ? 'open' : 'close' );
 

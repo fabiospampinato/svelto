@@ -25,13 +25,13 @@ mixin navbar-btn(options)
     id: '', // Navbar id
     direction: '', // Navbar direction
     slim: '', // Use a slim version or not
-    attached: '' // True or attached-* class
+    attached: '', // True or attached-* class
+    flickable: '' // Defined if the navbar can be triggered with a flick gesture
   }
 
 mixin navbar(options)
   - options.direction = options.direction || "left";
   - options.slim = options.slim || false;
-  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )))
-    +container(id="navbar-" + options.id)&attributes(attributes).navbar
-      block
-    .background.navbar-closer
+  .navbar(id="navbar-" + options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
+    block
+  .navbar-background

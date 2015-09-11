@@ -2355,12 +2355,66 @@ th {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
- * @requires ../colors/_settings.scss
  * @requires ../toolbar/_toolbar.scss
  * ========================================================================= */
 /* BASE */
 /* BODY */
 /* MAIN HEADER */
+/* =========================================================================
+ * Svelto - Widget (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* WIDGET */
+/* =========================================================================
+ * Svelto - Widget v0.3.1
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* WIDGET */
+.widget, label, .label, .button, .container, .card-header,
+.card-block,
+.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, footer, i.icon, .image-wrp, .infobar-wrp, .input-wrp, .textarea-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+  position: relative;
+  margin: 0 0 10px;
+}
+
+.widget > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
+.card-block > :last-child,
+.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.widget > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
+.card-block > :last-child.multiple,
+.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+.widget.disabled, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
+.disabled.card-block,
+.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, footer.disabled, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
+[class*="-disabled"].card-block,
+[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, footer[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
+  cursor: default !important;
+  opacity: 0.5 !important;
+}
+
+/* =========================================================================
+ * Svelto - Container (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+/* CONTAINER */
+/* CONTAINER COMPACT */
 /* =========================================================================
  * Svelto - Navbar (Settings) v0.1.0
  * =========================================================================
@@ -2368,6 +2422,7 @@ th {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_settings.scss
  * ========================================================================= */
 /* NAVBAR */
 /* ATTACHED */
@@ -2458,12 +2513,17 @@ body p > a:hover {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  min-height: 100%;
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
           flex-direction: column;
   transition: margin 0.35s;
-  min-width: 100%;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+}
+
+#content > header {
+  margin-bottom: 0;
 }
 
 #content > header.fixed {
@@ -2540,63 +2600,6 @@ body p > a:hover {
   opacity: 0.75;
 }
 
-/* =========================================================================
- * Svelto - Widget (Settings) v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../base/_base.scss
- * ========================================================================= */
-/* WIDGET */
-/* =========================================================================
- * Svelto - Widget v0.3.1
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* WIDGET */
-.widget, label, .label, .button, .container, .card-header,
-.card-block,
-.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, footer, i.icon, .image-wrp, .infobar-wrp, .input-wrp, .textarea-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
-  position: relative;
-  margin: 0 0 10px;
-}
-
-.widget > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
-.card-block > :last-child,
-.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
-  margin-bottom: 0 !important;
-}
-
-.widget > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
-.card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
-  margin-bottom: -10px !important;
-}
-
-.widget.disabled, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
-.disabled.card-block,
-.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, footer.disabled, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
-[class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, footer[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
-  cursor: default !important;
-  opacity: 0.5 !important;
-}
-
-/* =========================================================================
- * Svelto - Container (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * @requires ../widget/_widget.scss
- * ========================================================================= */
-/* CONTAINER */
-/* CONTAINER COMPACT */
 /* =========================================================================
  * Svelto - Label (Settings) v0.2.1
  * =========================================================================
@@ -7520,560 +7523,457 @@ table td .multiple:only-child {
  * ========================================================================= */
 /* MIXINS */
 /* NAVBAR */
-.navbar-wrp.left > .navbar, .navbar-wrp.right > .navbar {
-  top: 0;
-  bottom: 0;
-  width: 240px;
-}
-
-.navbar-wrp.left.slim > .navbar, .navbar-wrp.right.slim > .navbar {
-  width: 64px;
-}
-
-.navbar-wrp.left > .navbar {
-  left: 0;
-  -webkit-transform: translate3d(-280px, 0, 0);
-          transform: translate3d(-280px, 0, 0);
-}
-
-.navbar-wrp.left.slim > .navbar {
-  -webkit-transform: translate3d(-104px, 0, 0);
-          transform: translate3d(-104px, 0, 0);
-}
-
-.navbar-wrp.right > .navbar {
-  right: 0;
-  -webkit-transform: translate3d(280px, 0, 0);
-          transform: translate3d(280px, 0, 0);
-}
-
-.navbar-wrp.right.slim > .navbar {
-  -webkit-transform: translate3d(104px, 0, 0);
-          transform: translate3d(104px, 0, 0);
-}
-
-.navbar-wrp.top > .navbar, .navbar-wrp.bottom > .navbar {
-  right: 0;
-  left: 0;
-  height: 120px;
-}
-
-.navbar-wrp.top.slim > .navbar, .navbar-wrp.bottom.slim > .navbar {
-  height: 64px;
-}
-
-.navbar-wrp.top > .navbar {
-  top: 0;
-  -webkit-transform: translate3d(0, -160px, 0);
-          transform: translate3d(0, -160px, 0);
-}
-
-.navbar-wrp.top.slim > .navbar {
-  -webkit-transform: translate3d(0, -104px, 0);
-          transform: translate3d(0, -104px, 0);
-}
-
-.navbar-wrp.bottom > .navbar {
-  bottom: 0;
-  -webkit-transform: translate3d(0, 160px, 0);
-          transform: translate3d(0, 160px, 0);
-}
-
-.navbar-wrp.bottom.slim > .navbar {
-  -webkit-transform: translate3d(0, 104px, 0);
-          transform: translate3d(0, 104px, 0);
-}
-
-.navbar-wrp > .navbar {
+.navbar {
+  border-color: #d9d9d9 ;
+  color: #3f3f3f ;
+  background: #ffffff ;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   position: fixed;
-  z-index: 20;
-  margin: 0;
+  z-index: 120;
   transition: -webkit-transform 0.35s;
   transition: transform 0.35s;
   pointer-events: none;
-  border-width: 0;
-  border-radius: 0;
+  /* BACKGROUND */
 }
 
-.navbar-wrp > .background {
-  position: fixed;
+.navbar p > a {
+  color: #1565c0 ;
+}
+
+.navbar p > a:after {
+  border-color: #166ac9 ;
+}
+
+.navbar p > a:hover {
+  color: #166ac9 ;
+}
+
+.navbar > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.navbar > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+.navbar.left, .navbar.right {
   top: 0;
-  right: 0;
   bottom: 0;
-  left: 0;
-  z-index: 19;
-  cursor: pointer;
-  transition: opacity 0.35s;
-  pointer-events: none;
-  opacity: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  width: 240px;
+  /* SLIM */
 }
 
-.navbar-wrp.opened > .navbar {
-  -webkit-transform: translate3d(0, 0, 0) !important;
-          transform: translate3d(0, 0, 0) !important;
+.navbar.left.slim, .navbar.right.slim {
+  width: 64px;
+}
+
+.navbar.left {
+  left: 0;
+  -webkit-transform: translateX(-280px);
+          transform: translateX(-280px);
+  /* SLIM */
+}
+
+.navbar.left.slim {
+  -webkit-transform: translateX(-104px);
+          transform: translateX(-104px);
+}
+
+.navbar.right {
+  right: 0;
+  -webkit-transform: translateX(280px);
+          transform: translateX(280px);
+  /* SLIM */
+}
+
+.navbar.right.slim {
+  -webkit-transform: translateX(104px);
+          transform: translateX(104px);
+}
+
+.navbar.top, .navbar.bottom {
+  right: 0;
+  left: 0;
+  height: 120px;
+  /* SLIM */
+}
+
+.navbar.top.slim, .navbar.bottom.slim {
+  height: 64px;
+}
+
+.navbar.top {
+  top: 0;
+  -webkit-transform: translateY(-160px);
+          transform: translateY(-160px);
+  /* SLIM */
+}
+
+.navbar.top.slim {
+  -webkit-transform: translateY(-104px);
+          transform: translateY(-104px);
+}
+
+.navbar.bottom {
+  bottom: 0;
+  -webkit-transform: translateY(160px);
+          transform: translateY(160px);
+  /* SLIM */
+}
+
+.navbar.bottom.slim {
+  -webkit-transform: translateY(104px);
+          transform: translateY(104px);
+}
+
+.navbar.opened {
+  -webkit-transform: translateX(0) translateY(0) !important;
+          transform: translateX(0) translateY(0) !important;
   pointer-events: auto;
 }
 
-.navbar-wrp.opened > .background {
+.navbar.opened + .navbar-background {
   pointer-events: auto;
   opacity: 1;
 }
 
 @media screen and (min-width: 0rem) {
-  .navbar-wrp.attached-xs > .navbar {
-    -webkit-transform: translate3d(0, 0, 0) !important;
-            transform: translate3d(0, 0, 0) !important;
+  .navbar.attached-xs {
+    -webkit-transform: translateX(0) translateY(0) !important;
+            transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   }
-  .navbar-wrp.attached-xs > .background {
+  .navbar.attached-xs + .navbar-background {
     pointer-events: auto;
     opacity: 1;
   }
-  .navbar-wrp.attached-xs > .navbar {
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  }
-  .navbar-wrp.attached-xs > .background {
+  .navbar.attached-xs + .navbar-background {
     pointer-events: none;
     opacity: 0;
   }
-  .navbar-wrp.attached-xs.left ~ header, .navbar-wrp.attached-xs.left ~ main, .navbar-wrp.attached-xs.left ~ footer {
+  .navbar.attached-xs.left ~ #content {
     margin-left: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-xs.left ~ header > .header {
+  .navbar.attached-xs.left ~ #content > header.fixed {
     left: 240px;
   }
-  .navbar-wrp.attached-xs.left.slim ~ header, .navbar-wrp.attached-xs.left.slim ~ main, .navbar-wrp.attached-xs.left.slim ~ footer {
+  .navbar.attached-xs.left.slim ~ #content {
     margin-left: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-xs.left.slim ~ header > .header {
+  .navbar.attached-xs.left.slim ~ #content > header.fixed {
     left: 64px;
   }
-  .navbar-wrp.attached-xs.right ~ header, .navbar-wrp.attached-xs.right ~ main, .navbar-wrp.attached-xs.right ~ footer {
+  .navbar.attached-xs.right ~ #content {
     margin-right: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-xs.right ~ header > .header {
+  .navbar.attached-xs.right ~ #content > header.fixed {
     right: 240px;
   }
-  .navbar-wrp.attached-xs.right.slim ~ header, .navbar-wrp.attached-xs.right.slim ~ main, .navbar-wrp.attached-xs.right.slim ~ footer {
+  .navbar.attached-xs.right.slim ~ #content {
     margin-right: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-xs.right.slim ~ header > .header {
+  .navbar.attached-xs.right.slim ~ #content > header.fixed {
     right: 64px;
   }
-  .navbar-wrp.attached-xs.top ~ header {
+  .navbar.attached-xs.top ~ #content {
     margin-top: 120px;
-    margin-bottom: -120px;
   }
-  .navbar-wrp.attached-xs.top ~ main {
-    margin-top: 130px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xs.top ~ header {
-    margin-top: 176px;
-    margin-bottom: -110px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xs.top ~ header > .header {
+  .navbar.attached-xs.top ~ #content > header.fixed {
     top: 120px;
   }
-  body.fixed-header > .navbar-wrp.attached-xs.top ~ main {
-    margin-top: 120px;
-  }
-  .navbar-wrp.attached-xs.top.slim ~ header {
+  .navbar.attached-xs.top.slim ~ #content {
     margin-top: 64px;
-    margin-bottom: -64px;
   }
-  .navbar-wrp.attached-xs.top.slim ~ main {
-    margin-top: 74px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xs.top.slim ~ header {
-    margin-top: 120px;
-    margin-bottom: -54px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xs.top.slim ~ header > .header {
+  .navbar.attached-xs.top.slim ~ #content > header.fixed {
     top: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-xs.top.slim ~ main {
-    margin-top: 64px;
-  }
-  .navbar-wrp.attached-xs.bottom ~ main {
+  .navbar.attached-xs.bottom ~ #content {
     margin-bottom: 120px;
   }
-  .navbar-wrp.attached-xs.bottom ~ footer {
-    margin-top: -120px;
-    margin-bottom: 120px;
+  .navbar.attached-xs.bottom ~ #content > header.fixed {
+    bottom: 120px;
   }
-  .navbar-wrp.attached-xs.bottom.slim ~ main {
+  .navbar.attached-xs.bottom.slim ~ #content {
     margin-bottom: 64px;
   }
-  .navbar-wrp.attached-xs.bottom.slim ~ footer {
-    margin-top: -64px;
-    margin-bottom: 64px;
+  .navbar.attached-xs.bottom.slim ~ #content > header.fixed {
+    bottom: 64px;
   }
 }
 
 @media screen and (min-width: 32rem) {
-  .navbar-wrp.attached-sm > .navbar {
-    -webkit-transform: translate3d(0, 0, 0) !important;
-            transform: translate3d(0, 0, 0) !important;
+  .navbar.attached-sm {
+    -webkit-transform: translateX(0) translateY(0) !important;
+            transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   }
-  .navbar-wrp.attached-sm > .background {
+  .navbar.attached-sm + .navbar-background {
     pointer-events: auto;
     opacity: 1;
   }
-  .navbar-wrp.attached-sm > .navbar {
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  }
-  .navbar-wrp.attached-sm > .background {
+  .navbar.attached-sm + .navbar-background {
     pointer-events: none;
     opacity: 0;
   }
-  .navbar-wrp.attached-sm.left ~ header, .navbar-wrp.attached-sm.left ~ main, .navbar-wrp.attached-sm.left ~ footer {
+  .navbar.attached-sm.left ~ #content {
     margin-left: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-sm.left ~ header > .header {
+  .navbar.attached-sm.left ~ #content > header.fixed {
     left: 240px;
   }
-  .navbar-wrp.attached-sm.left.slim ~ header, .navbar-wrp.attached-sm.left.slim ~ main, .navbar-wrp.attached-sm.left.slim ~ footer {
+  .navbar.attached-sm.left.slim ~ #content {
     margin-left: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-sm.left.slim ~ header > .header {
+  .navbar.attached-sm.left.slim ~ #content > header.fixed {
     left: 64px;
   }
-  .navbar-wrp.attached-sm.right ~ header, .navbar-wrp.attached-sm.right ~ main, .navbar-wrp.attached-sm.right ~ footer {
+  .navbar.attached-sm.right ~ #content {
     margin-right: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-sm.right ~ header > .header {
+  .navbar.attached-sm.right ~ #content > header.fixed {
     right: 240px;
   }
-  .navbar-wrp.attached-sm.right.slim ~ header, .navbar-wrp.attached-sm.right.slim ~ main, .navbar-wrp.attached-sm.right.slim ~ footer {
+  .navbar.attached-sm.right.slim ~ #content {
     margin-right: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-sm.right.slim ~ header > .header {
+  .navbar.attached-sm.right.slim ~ #content > header.fixed {
     right: 64px;
   }
-  .navbar-wrp.attached-sm.top ~ header {
+  .navbar.attached-sm.top ~ #content {
     margin-top: 120px;
-    margin-bottom: -120px;
   }
-  .navbar-wrp.attached-sm.top ~ main {
-    margin-top: 130px;
-  }
-  body.fixed-header > .navbar-wrp.attached-sm.top ~ header {
-    margin-top: 176px;
-    margin-bottom: -110px;
-  }
-  body.fixed-header > .navbar-wrp.attached-sm.top ~ header > .header {
+  .navbar.attached-sm.top ~ #content > header.fixed {
     top: 120px;
   }
-  body.fixed-header > .navbar-wrp.attached-sm.top ~ main {
-    margin-top: 120px;
-  }
-  .navbar-wrp.attached-sm.top.slim ~ header {
+  .navbar.attached-sm.top.slim ~ #content {
     margin-top: 64px;
-    margin-bottom: -64px;
   }
-  .navbar-wrp.attached-sm.top.slim ~ main {
-    margin-top: 74px;
-  }
-  body.fixed-header > .navbar-wrp.attached-sm.top.slim ~ header {
-    margin-top: 120px;
-    margin-bottom: -54px;
-  }
-  body.fixed-header > .navbar-wrp.attached-sm.top.slim ~ header > .header {
+  .navbar.attached-sm.top.slim ~ #content > header.fixed {
     top: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-sm.top.slim ~ main {
-    margin-top: 64px;
-  }
-  .navbar-wrp.attached-sm.bottom ~ main {
+  .navbar.attached-sm.bottom ~ #content {
     margin-bottom: 120px;
   }
-  .navbar-wrp.attached-sm.bottom ~ footer {
-    margin-top: -120px;
-    margin-bottom: 120px;
+  .navbar.attached-sm.bottom ~ #content > header.fixed {
+    bottom: 120px;
   }
-  .navbar-wrp.attached-sm.bottom.slim ~ main {
+  .navbar.attached-sm.bottom.slim ~ #content {
     margin-bottom: 64px;
   }
-  .navbar-wrp.attached-sm.bottom.slim ~ footer {
-    margin-top: -64px;
-    margin-bottom: 64px;
+  .navbar.attached-sm.bottom.slim ~ #content > header.fixed {
+    bottom: 64px;
   }
 }
 
 @media screen and (min-width: 48rem) {
-  .navbar-wrp.attached-md > .navbar {
-    -webkit-transform: translate3d(0, 0, 0) !important;
-            transform: translate3d(0, 0, 0) !important;
+  .navbar.attached-md {
+    -webkit-transform: translateX(0) translateY(0) !important;
+            transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   }
-  .navbar-wrp.attached-md > .background {
+  .navbar.attached-md + .navbar-background {
     pointer-events: auto;
     opacity: 1;
   }
-  .navbar-wrp.attached-md > .navbar {
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  }
-  .navbar-wrp.attached-md > .background {
+  .navbar.attached-md + .navbar-background {
     pointer-events: none;
     opacity: 0;
   }
-  .navbar-wrp.attached-md.left ~ header, .navbar-wrp.attached-md.left ~ main, .navbar-wrp.attached-md.left ~ footer {
+  .navbar.attached-md.left ~ #content {
     margin-left: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-md.left ~ header > .header {
+  .navbar.attached-md.left ~ #content > header.fixed {
     left: 240px;
   }
-  .navbar-wrp.attached-md.left.slim ~ header, .navbar-wrp.attached-md.left.slim ~ main, .navbar-wrp.attached-md.left.slim ~ footer {
+  .navbar.attached-md.left.slim ~ #content {
     margin-left: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-md.left.slim ~ header > .header {
+  .navbar.attached-md.left.slim ~ #content > header.fixed {
     left: 64px;
   }
-  .navbar-wrp.attached-md.right ~ header, .navbar-wrp.attached-md.right ~ main, .navbar-wrp.attached-md.right ~ footer {
+  .navbar.attached-md.right ~ #content {
     margin-right: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-md.right ~ header > .header {
+  .navbar.attached-md.right ~ #content > header.fixed {
     right: 240px;
   }
-  .navbar-wrp.attached-md.right.slim ~ header, .navbar-wrp.attached-md.right.slim ~ main, .navbar-wrp.attached-md.right.slim ~ footer {
+  .navbar.attached-md.right.slim ~ #content {
     margin-right: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-md.right.slim ~ header > .header {
+  .navbar.attached-md.right.slim ~ #content > header.fixed {
     right: 64px;
   }
-  .navbar-wrp.attached-md.top ~ header {
+  .navbar.attached-md.top ~ #content {
     margin-top: 120px;
-    margin-bottom: -120px;
   }
-  .navbar-wrp.attached-md.top ~ main {
-    margin-top: 130px;
-  }
-  body.fixed-header > .navbar-wrp.attached-md.top ~ header {
-    margin-top: 176px;
-    margin-bottom: -110px;
-  }
-  body.fixed-header > .navbar-wrp.attached-md.top ~ header > .header {
+  .navbar.attached-md.top ~ #content > header.fixed {
     top: 120px;
   }
-  body.fixed-header > .navbar-wrp.attached-md.top ~ main {
-    margin-top: 120px;
-  }
-  .navbar-wrp.attached-md.top.slim ~ header {
+  .navbar.attached-md.top.slim ~ #content {
     margin-top: 64px;
-    margin-bottom: -64px;
   }
-  .navbar-wrp.attached-md.top.slim ~ main {
-    margin-top: 74px;
-  }
-  body.fixed-header > .navbar-wrp.attached-md.top.slim ~ header {
-    margin-top: 120px;
-    margin-bottom: -54px;
-  }
-  body.fixed-header > .navbar-wrp.attached-md.top.slim ~ header > .header {
+  .navbar.attached-md.top.slim ~ #content > header.fixed {
     top: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-md.top.slim ~ main {
-    margin-top: 64px;
-  }
-  .navbar-wrp.attached-md.bottom ~ main {
+  .navbar.attached-md.bottom ~ #content {
     margin-bottom: 120px;
   }
-  .navbar-wrp.attached-md.bottom ~ footer {
-    margin-top: -120px;
-    margin-bottom: 120px;
+  .navbar.attached-md.bottom ~ #content > header.fixed {
+    bottom: 120px;
   }
-  .navbar-wrp.attached-md.bottom.slim ~ main {
+  .navbar.attached-md.bottom.slim ~ #content {
     margin-bottom: 64px;
   }
-  .navbar-wrp.attached-md.bottom.slim ~ footer {
-    margin-top: -64px;
-    margin-bottom: 64px;
+  .navbar.attached-md.bottom.slim ~ #content > header.fixed {
+    bottom: 64px;
   }
 }
 
 @media screen and (min-width: 64rem) {
-  .navbar-wrp.attached-lg > .navbar {
-    -webkit-transform: translate3d(0, 0, 0) !important;
-            transform: translate3d(0, 0, 0) !important;
+  .navbar.attached-lg {
+    -webkit-transform: translateX(0) translateY(0) !important;
+            transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   }
-  .navbar-wrp.attached-lg > .background {
+  .navbar.attached-lg + .navbar-background {
     pointer-events: auto;
     opacity: 1;
   }
-  .navbar-wrp.attached-lg > .navbar {
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  }
-  .navbar-wrp.attached-lg > .background {
+  .navbar.attached-lg + .navbar-background {
     pointer-events: none;
     opacity: 0;
   }
-  .navbar-wrp.attached-lg.left ~ header, .navbar-wrp.attached-lg.left ~ main, .navbar-wrp.attached-lg.left ~ footer {
+  .navbar.attached-lg.left ~ #content {
     margin-left: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-lg.left ~ header > .header {
+  .navbar.attached-lg.left ~ #content > header.fixed {
     left: 240px;
   }
-  .navbar-wrp.attached-lg.left.slim ~ header, .navbar-wrp.attached-lg.left.slim ~ main, .navbar-wrp.attached-lg.left.slim ~ footer {
+  .navbar.attached-lg.left.slim ~ #content {
     margin-left: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-lg.left.slim ~ header > .header {
+  .navbar.attached-lg.left.slim ~ #content > header.fixed {
     left: 64px;
   }
-  .navbar-wrp.attached-lg.right ~ header, .navbar-wrp.attached-lg.right ~ main, .navbar-wrp.attached-lg.right ~ footer {
+  .navbar.attached-lg.right ~ #content {
     margin-right: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-lg.right ~ header > .header {
+  .navbar.attached-lg.right ~ #content > header.fixed {
     right: 240px;
   }
-  .navbar-wrp.attached-lg.right.slim ~ header, .navbar-wrp.attached-lg.right.slim ~ main, .navbar-wrp.attached-lg.right.slim ~ footer {
+  .navbar.attached-lg.right.slim ~ #content {
     margin-right: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-lg.right.slim ~ header > .header {
+  .navbar.attached-lg.right.slim ~ #content > header.fixed {
     right: 64px;
   }
-  .navbar-wrp.attached-lg.top ~ header {
+  .navbar.attached-lg.top ~ #content {
     margin-top: 120px;
-    margin-bottom: -120px;
   }
-  .navbar-wrp.attached-lg.top ~ main {
-    margin-top: 130px;
-  }
-  body.fixed-header > .navbar-wrp.attached-lg.top ~ header {
-    margin-top: 176px;
-    margin-bottom: -110px;
-  }
-  body.fixed-header > .navbar-wrp.attached-lg.top ~ header > .header {
+  .navbar.attached-lg.top ~ #content > header.fixed {
     top: 120px;
   }
-  body.fixed-header > .navbar-wrp.attached-lg.top ~ main {
-    margin-top: 120px;
-  }
-  .navbar-wrp.attached-lg.top.slim ~ header {
+  .navbar.attached-lg.top.slim ~ #content {
     margin-top: 64px;
-    margin-bottom: -64px;
   }
-  .navbar-wrp.attached-lg.top.slim ~ main {
-    margin-top: 74px;
-  }
-  body.fixed-header > .navbar-wrp.attached-lg.top.slim ~ header {
-    margin-top: 120px;
-    margin-bottom: -54px;
-  }
-  body.fixed-header > .navbar-wrp.attached-lg.top.slim ~ header > .header {
+  .navbar.attached-lg.top.slim ~ #content > header.fixed {
     top: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-lg.top.slim ~ main {
-    margin-top: 64px;
-  }
-  .navbar-wrp.attached-lg.bottom ~ main {
+  .navbar.attached-lg.bottom ~ #content {
     margin-bottom: 120px;
   }
-  .navbar-wrp.attached-lg.bottom ~ footer {
-    margin-top: -120px;
-    margin-bottom: 120px;
+  .navbar.attached-lg.bottom ~ #content > header.fixed {
+    bottom: 120px;
   }
-  .navbar-wrp.attached-lg.bottom.slim ~ main {
+  .navbar.attached-lg.bottom.slim ~ #content {
     margin-bottom: 64px;
   }
-  .navbar-wrp.attached-lg.bottom.slim ~ footer {
-    margin-top: -64px;
-    margin-bottom: 64px;
+  .navbar.attached-lg.bottom.slim ~ #content > header.fixed {
+    bottom: 64px;
   }
 }
 
 @media screen and (min-width: 76rem) {
-  .navbar-wrp.attached-xl > .navbar {
-    -webkit-transform: translate3d(0, 0, 0) !important;
-            transform: translate3d(0, 0, 0) !important;
+  .navbar.attached-xl {
+    -webkit-transform: translateX(0) translateY(0) !important;
+            transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   }
-  .navbar-wrp.attached-xl > .background {
+  .navbar.attached-xl + .navbar-background {
     pointer-events: auto;
     opacity: 1;
   }
-  .navbar-wrp.attached-xl > .navbar {
-    box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  }
-  .navbar-wrp.attached-xl > .background {
+  .navbar.attached-xl + .navbar-background {
     pointer-events: none;
     opacity: 0;
   }
-  .navbar-wrp.attached-xl.left ~ header, .navbar-wrp.attached-xl.left ~ main, .navbar-wrp.attached-xl.left ~ footer {
+  .navbar.attached-xl.left ~ #content {
     margin-left: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-xl.left ~ header > .header {
+  .navbar.attached-xl.left ~ #content > header.fixed {
     left: 240px;
   }
-  .navbar-wrp.attached-xl.left.slim ~ header, .navbar-wrp.attached-xl.left.slim ~ main, .navbar-wrp.attached-xl.left.slim ~ footer {
+  .navbar.attached-xl.left.slim ~ #content {
     margin-left: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-xl.left.slim ~ header > .header {
+  .navbar.attached-xl.left.slim ~ #content > header.fixed {
     left: 64px;
   }
-  .navbar-wrp.attached-xl.right ~ header, .navbar-wrp.attached-xl.right ~ main, .navbar-wrp.attached-xl.right ~ footer {
+  .navbar.attached-xl.right ~ #content {
     margin-right: 240px;
   }
-  body.fixed-header > .navbar-wrp.attached-xl.right ~ header > .header {
+  .navbar.attached-xl.right ~ #content > header.fixed {
     right: 240px;
   }
-  .navbar-wrp.attached-xl.right.slim ~ header, .navbar-wrp.attached-xl.right.slim ~ main, .navbar-wrp.attached-xl.right.slim ~ footer {
+  .navbar.attached-xl.right.slim ~ #content {
     margin-right: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-xl.right.slim ~ header > .header {
+  .navbar.attached-xl.right.slim ~ #content > header.fixed {
     right: 64px;
   }
-  .navbar-wrp.attached-xl.top ~ header {
+  .navbar.attached-xl.top ~ #content {
     margin-top: 120px;
-    margin-bottom: -120px;
   }
-  .navbar-wrp.attached-xl.top ~ main {
-    margin-top: 130px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xl.top ~ header {
-    margin-top: 176px;
-    margin-bottom: -110px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xl.top ~ header > .header {
+  .navbar.attached-xl.top ~ #content > header.fixed {
     top: 120px;
   }
-  body.fixed-header > .navbar-wrp.attached-xl.top ~ main {
-    margin-top: 120px;
-  }
-  .navbar-wrp.attached-xl.top.slim ~ header {
+  .navbar.attached-xl.top.slim ~ #content {
     margin-top: 64px;
-    margin-bottom: -64px;
   }
-  .navbar-wrp.attached-xl.top.slim ~ main {
-    margin-top: 74px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xl.top.slim ~ header {
-    margin-top: 120px;
-    margin-bottom: -54px;
-  }
-  body.fixed-header > .navbar-wrp.attached-xl.top.slim ~ header > .header {
+  .navbar.attached-xl.top.slim ~ #content > header.fixed {
     top: 64px;
   }
-  body.fixed-header > .navbar-wrp.attached-xl.top.slim ~ main {
-    margin-top: 64px;
-  }
-  .navbar-wrp.attached-xl.bottom ~ main {
+  .navbar.attached-xl.bottom ~ #content {
     margin-bottom: 120px;
   }
-  .navbar-wrp.attached-xl.bottom ~ footer {
-    margin-top: -120px;
-    margin-bottom: 120px;
+  .navbar.attached-xl.bottom ~ #content > header.fixed {
+    bottom: 120px;
   }
-  .navbar-wrp.attached-xl.bottom.slim ~ main {
+  .navbar.attached-xl.bottom.slim ~ #content {
     margin-bottom: 64px;
   }
-  .navbar-wrp.attached-xl.bottom.slim ~ footer {
-    margin-top: -64px;
-    margin-bottom: 64px;
+  .navbar.attached-xl.bottom.slim ~ #content > header.fixed {
+    bottom: 64px;
   }
+}
+
+.navbar-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 119;
+  cursor: pointer;
+  transition: opacity 0.35s;
+  opacity: 0;
+  pointer-events: none;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* =========================================================================

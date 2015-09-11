@@ -69,23 +69,28 @@ body {
 #content {
 
   display: flex;
-  min-height: 100%;
   flex-direction: column;
   transition: margin $navbar-transition-transform-duration;
-  min-width: 100%;
+  flex-grow: 1;
 
-  > header.fixed {
+  > header {
 
-    position: fixed;
-    z-index: 100;
-    top: 0;
-    right: 0;
-    left: 0;
-    transition-property: top, right, left;
-    transition-duration: $navbar-transition-transform-duration;
+    margin-bottom: 0;
 
-    + main {
-      margin-top: $main-header-height;
+    &.fixed {
+
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      left: 0;
+      transition-property: top, right, left;
+      transition-duration: $navbar-transition-transform-duration;
+
+      + main {
+        margin-top: $main-header-height;
+      }
+
     }
 
   }

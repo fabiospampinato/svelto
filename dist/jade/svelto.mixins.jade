@@ -784,24 +784,6 @@ mixin multiple-sub-right
 
 
 //- =========================================================================
-//- Svelto - Notification v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    title: '', // Notification title
-    body: '', // Notification body
-    img: '' // Notification image
-  }
-
-mixin notification(options)
-  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
-
-
-//- =========================================================================
 //- Svelto - Navbar v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -827,16 +809,34 @@ mixin navbar-btn(options)
     id: '', // Navbar id
     direction: '', // Navbar direction
     slim: '', // Use a slim version or not
-    attached: '' // True or attached-* class
+    attached: '', // True or attached-* class
+    flickable: '' // Defined if the navbar can be triggered with a flick gesture
   }
 
 mixin navbar(options)
   - options.direction = options.direction || "left";
   - options.slim = options.slim || false;
-  .navbar-wrp(class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )))
-    +container(id="navbar-" + options.id)&attributes(attributes).navbar
-      block
-    .background.navbar-closer
+  .navbar(id="navbar-" + options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
+    block
+  .navbar-background
+
+
+//- =========================================================================
+//- Svelto - Notification v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    title: '', // Notification title
+    body: '', // Notification body
+    img: '' // Notification image
+  }
+
+mixin notification(options)
+  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 
 //- =========================================================================
@@ -1094,6 +1094,36 @@ mixin syntax(language)
 
 
 //- =========================================================================
+//- Svelto - Progressbar v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: Write options docs block
+
+mixin progressbar(options, multiple)
+  if typeof multiple !== 'undefined'
+    - var new_options = { percentages: Array ( arguments.length ) };
+    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
+      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
+    - }
+  else
+    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+  - options = new_options;
+  - options.decimals = options.decimals || 0;
+  - var total = 0;
+  .progressbar&attributes(attributes)
+    .progressbar-unhighlighted
+      each percentage in options.percentages
+        - total += percentage.value;
+        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
+          if options.labeled
+            .progressbar-label= +(percentage.value).toFixed(options.decimals)
+    .progressbar-stripes(style=("width: " + total + "%;"))
+
+
+//- =========================================================================
 //- Svelto - Radio v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1140,36 +1170,6 @@ mixin radio(options)
       span= options.title
     +icon(options.icons.on)(class=options.colors.on).icon-on
     +icon(options.icons.off)(class=options.colors.off).icon-off
-
-
-//- =========================================================================
-//- Svelto - Progressbar v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: Write options docs block
-
-mixin progressbar(options, multiple)
-  if typeof multiple !== 'undefined'
-    - var new_options = { percentages: Array ( arguments.length ) };
-    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
-      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
-    - }
-  else
-    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
-  - options = new_options;
-  - options.decimals = options.decimals || 0;
-  - var total = 0;
-  .progressbar&attributes(attributes)
-    .progressbar-unhighlighted
-      each percentage in options.percentages
-        - total += percentage.value;
-        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
-          if options.labeled
-            .progressbar-label= +(percentage.value).toFixed(options.decimals)
-    .progressbar-stripes(style=("width: " + total + "%;"))
 
 
 //- =========================================================================
