@@ -2318,7 +2318,10 @@ th {
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/_settings.scss
  * ========================================================================= */
+/* BASE */
 /* BODY */
 /* =========================================================================
  * Svelto - Toolbar (Settings) v0.2.0
@@ -2344,6 +2347,16 @@ th {
 
 *:focus {
   outline: none;
+}
+
+::-moz-selection {
+  background: #d9e9fb;
+  text-shadow: none;
+}
+
+::selection {
+  background: #d9e9fb;
+  text-shadow: none;
 }
 
 /* HTML */

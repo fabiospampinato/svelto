@@ -17,6 +17,11 @@
   outline: none;
 }
 
+::selection {
+    background: $base-selection-bg-color;
+    text-shadow: none;
+}
+
 /* HTML */
 
 html {

@@ -4,7 +4,13 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/_settings.scss
  * ========================================================================= */
+
+/* BASE */
+
+$base-selection-bg-color: lighten($color-primary-bg, 50) !default;
 
 /* BODY */
 
