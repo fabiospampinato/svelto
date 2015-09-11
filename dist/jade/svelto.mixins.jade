@@ -286,43 +286,6 @@ mixin container
 
 
 //- =========================================================================
-//- Svelto - Divider v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  +divider-block&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider-wrp.block
-    .divider&attributes(attributes)
-      block
-
-mixin divider-linear
-  if block
-    .divider-wrp&attributes(attributes).linear
-      hr
-      .divider
-        block
-      hr
-  else
-    hr&attributes(attributes)
-
-mixin divider-text
-  .divider-wrp.text
-    .divider&attributes(attributes)
-      block
-
-mixin divider-spacer
-  .divider-wrp.spacer
-    .divider&attributes(attributes)
-      block
-
-
-//- =========================================================================
 //- Svelto - Datepicker v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -391,6 +354,43 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
+
+
+//- =========================================================================
+//- Svelto - Divider v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  +divider-block&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider-wrp.block
+    .divider&attributes(attributes)
+      block
+
+mixin divider-linear
+  if block
+    .divider-wrp&attributes(attributes).linear
+      hr
+      .divider
+        block
+      hr
+  else
+    hr&attributes(attributes)
+
+mixin divider-text
+  .divider-wrp.text
+    .divider&attributes(attributes)
+      block
+
+mixin divider-spacer
+  .divider-wrp.spacer
+    .divider&attributes(attributes)
+      block
 
 
 //- =========================================================================
@@ -528,7 +528,7 @@ mixin flippable-back
 //- =========================================================================
 
 mixin footer
-  .footer&attributes(attributes)
+  footer&attributes(attributes)
     block
 
 
@@ -564,11 +564,11 @@ mixin form-button-icon(icon)
 //- FIXME: make it more general, so that not just an image url can be set as a bacground but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
 
 mixin header
-  .header&attributes(attributes)
+  header&attributes(attributes)
     block
 
 mixin header-with-bg(background_image_url)
-  .header.has-background&attributes(attributes)
+  header&attributes(attributes).has-background
     block
     .header-background(style="background:url(" + background_image_url + ") no-repeat center center fixed;")
 
@@ -606,33 +606,6 @@ mixin image-caption
 mixin image-sample
   +image("/sample.png")&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Input v0.1.1
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    type: '', // Input type
-    name: '', // Input name
-    value: '', // Input value
-    label: '' // Label
-  }
-
-mixin input(options)
-  - options = options || {};
-  - options.type = options.type || "text";
-  - options.name = options.name || "";
-  - options.value = options.value || "";
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- =========================================================================
@@ -692,6 +665,33 @@ mixin infobar-right
 mixin infobar-bottom
   .infobar-bottom&attributes(attributes)
     block
+
+
+//- =========================================================================
+//- Svelto - Input v0.1.1
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value || "";
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
 
 
 //- =========================================================================
@@ -784,6 +784,24 @@ mixin multiple-sub-right
 
 
 //- =========================================================================
+//- Svelto - Notification v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    title: '', // Notification title
+    body: '', // Notification body
+    img: '' // Notification image
+  }
+
+mixin notification(options)
+  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
+
+
+//- =========================================================================
 //- Svelto - Navbar v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -819,24 +837,6 @@ mixin navbar(options)
     +container(id="navbar-" + options.id)&attributes(attributes).navbar
       block
     .background.navbar-closer
-
-
-//- =========================================================================
-//- Svelto - Notification v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    title: '', // Notification title
-    body: '', // Notification body
-    img: '' // Notification image
-  }
-
-mixin notification(options)
-  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 
 //- =========================================================================

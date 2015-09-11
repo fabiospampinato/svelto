@@ -10,10 +10,10 @@
 //- FIXME: make it more general, so that not just an image url can be set as a bacground but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
 
 mixin header
-  .header&attributes(attributes)
+  header&attributes(attributes)
     block
 
 mixin header-with-bg(background_image_url)
-  .header.has-background&attributes(attributes)
+  header&attributes(attributes).has-background
     block
     .header-background(style="background:url(" + background_image_url + ") no-repeat center center fixed;")

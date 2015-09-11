@@ -1,143 +1,41 @@
-<!DOCTYPE html>
-<html lang="en" xml:lang="en" dir="ltr" class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Svelto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/svelto.css" media="all"/>
-    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
-    <script>
-      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
-        
-    </script>
-  </head>
-  <body class="fixed-header">
-    <header>
-      <div class="header">
-        <div class="toolbar primary z-depth-4">
-          <div class="multiple">
-            <div class="button compact transparent"><i class="icon">menu</i>
-            </div><a href="/" class="large">Svelto</a>
-            <div class="spacer">
-            </div>
-            <div class="button compact transparent"><i class="icon">refresh</i>
-            </div>
-            <div class="button compact transparent"><i class="icon">more_vert</i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main>
-      <div class="divider-wrp block">
-        <div class="divider">Anchor
-        </div>
-      </div>
-      <div class="square-sample anchor draggable" style="z-index: 100;">
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur aliquet
-        </p>
-      </div>
-      <div class="square-sample positionable secondary" style="position:fixed; top:0; left: 0; z-index: 101;">
-        <p>Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur aliquet
-        </p>
-      </div>
-      <div class="divider-wrp block">
-        <div class="divider">Positionate
-        </div>
-      </div>
-      <div class="multiple">
-        <div class="button checkbox live outlined">
-          <input type="radio"/><span>Live</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
-        </div>
-        <div onclick="javascript:positionate2anchor ( false )" class="button outlined">Auto
-        </div>
-        <div onclick="javascript:positionate2anchor ( 'top' )" class="button outlined">Top
-        </div>
-        <div onclick="javascript:positionate2anchor ( 'bottom' )" class="button outlined">Bottom
-        </div>
-        <div onclick="javascript:positionate2anchor ( 'left' )" class="button outlined">Left
-        </div>
-        <div onclick="javascript:positionate2anchor ( 'right' )" class="button outlined">Right
-        </div>
-        <div onclick="javascript:positionate2axis ( 'x' )" class="button outlined">X Axis
-        </div>
-        <div onclick="javascript:positionate2axis ( 'y' )" class="button outlined">Y Axis
-        </div>
-        <div onclick="javascript:positionate2diraxis ( 'x', 'top' )" class="button outlined">X Top
-        </div>
-        <div onclick="javascript:positionate2diraxis ( 'y', 'left' )" class="button outlined">Y Left
-        </div>
-        <div class="multiple joined">
-          <div class="input-wrp no-floating white outlined">
-            <input type="text" value="" name="input_x" required="required" class="text-field"/>
-            <label>X axis...</label>
-            <div class="text-field-bar"></div>
-          </div>
-          <div class="input-wrp no-floating white outlined">
-            <input type="text" value="" name="input_y" required="required" class="text-field"/>
-            <label>Y axis...</label>
-            <div class="text-field-bar"></div>
-          </div>
-          <div onclick="javascript:positionate2coordinates ()" class="button secondary outlined">Coordinates
-          </div>
-        </div>
-      </div>
-    </main>
-    <footer>
-      <div class="footer beveled">
-        <p class="text-center">Svelto, a framework</p>
-      </div>
-    </footer>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="/svelto.js"></script>
-    <script>$(function () { $.noty ( {"body":"The anchor is draggable"} ); });
-    </script>
-    <script>
-      var live_update = false,
-        live_triggered = false;
-      
-      function positionate2anchor ( direction ) {
-        $('.positionable').positionate ({ $anchor: $('.anchor'), direction: direction });
-      }
-      function positionate2axis ( axis ) {
-        $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis });
-      }
-      function positionate2diraxis ( axis, direction ) {
-        $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis, direction: direction });
-      }
-      function positionate2coordinates () {
-        $('.positionable').positionate ({ point: { x: Number($('input[name="input_x"]').val ()), y: Number($('input[name="input_y"]').val ()) } });
-      }
-      function positionateLive () {
-        if ( live_update ) {
-          $('.positionable').positionate ({ $anchor: $('.anchor') });
-        }
-      }
-      
-      $('.live').on ({
-        'checkbox:checked': function () {
-          live_update = true;
-          positionateLive ();
-          if ( !live_triggered ) {
-            live_triggered = true;
-            $('.anchor').on ( $.Pointer.dragmove, positionateLive );
-          }
-        },
-        'checkbox:unchecked': function () {
-          live_update = false;
-        }
-      })
-    </script>
-    <script>
-      window.onerror = function ( message, file, line ) {
-        try {
-          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
-        } catch ( e ) {
-          alert ( file + ':' + line + '\n\n' + message );
-        }
-      };
-    </script>
-  </body>
-</html>
+<!DOCTYPE html><html lang="en" dir="ltr" class="no-js"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><title>Svelto</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><link rel="stylesheet" href="/svelto.css" media="all"/><link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/><script>document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+  </script></head><body><div id="content"><header class="fixed"><div class="toolbar primary z-depth-4"><div class="multiple"><div class="button compact transparent"><i class="icon">menu</i></div><a href="/" class="large">Svelto</a><div class="spacer"></div><div class="button compact transparent"><i class="icon">refresh</i></div><div class="button compact transparent"><i class="icon">more_vert</i></div></div></div></header><main><div class="divider-wrp block"><div class="divider">Anchor</div></div><div class="square-sample anchor draggable" style="z-index: 100;"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur aliquet</p></div><div class="square-sample positionable secondary" style="position:fixed; top:0; left: 0; z-index: 101;"><p>Lorem ipsum dolor sit amet consectetur adipiscing elit curabitur aliquet</p></div><div class="divider-wrp block"><div class="divider">Positionate</div></div><div class="multiple"><div class="button checkbox live outlined"><input type="radio"/><span>Live</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><div onclick="javascript:positionate2anchor ( false )" class="button outlined">Auto</div><div onclick="javascript:positionate2anchor ( 'top' )" class="button outlined">Top</div><div onclick="javascript:positionate2anchor ( 'bottom' )" class="button outlined">Bottom</div><div onclick="javascript:positionate2anchor ( 'left' )" class="button outlined">Left</div><div onclick="javascript:positionate2anchor ( 'right' )" class="button outlined">Right</div><div onclick="javascript:positionate2axis ( 'x' )" class="button outlined">X Axis</div><div onclick="javascript:positionate2axis ( 'y' )" class="button outlined">Y Axis</div><div onclick="javascript:positionate2diraxis ( 'x', 'top' )" class="button outlined">X Top</div><div onclick="javascript:positionate2diraxis ( 'y', 'left' )" class="button outlined">Y Left</div><div class="multiple joined"><div class="input-wrp no-floating white outlined"><input type="text" value="" name="input_x" required="required" class="text-field"/><label>X axis...</label><div class="text-field-bar"></div></div><div class="input-wrp no-floating white outlined"><input type="text" value="" name="input_y" required="required" class="text-field"/><label>Y axis...</label><div class="text-field-bar"></div></div><div onclick="javascript:positionate2coordinates ()" class="button secondary outlined">Coordinates</div></div></div></main><footer class="beveled"><p class="text-center">Svelto, a framework</p></footer></div><script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script src="//code.jquery.com/jquery-2.1.4.min.js"></script><script src="/svelto.js"></script><script>$(function () { $.noty ( {"body":"The anchor is draggable"} ); });</script><script>var live_update = false,
+  live_triggered = false;
+
+function positionate2anchor ( direction ) {
+  $('.positionable').positionate ({ $anchor: $('.anchor'), direction: direction });
+}
+function positionate2axis ( axis ) {
+  $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis });
+}
+function positionate2diraxis ( axis, direction ) {
+  $('.positionable').positionate ({ $anchor: $('.anchor'), axis: axis, direction: direction });
+}
+function positionate2coordinates () {
+  $('.positionable').positionate ({ point: { x: Number($('input[name="input_x"]').val ()), y: Number($('input[name="input_y"]').val ()) } });
+}
+function positionateLive () {
+  if ( live_update ) {
+    $('.positionable').positionate ({ $anchor: $('.anchor') });
+  }
+}
+
+$('.live').on ({
+  'checkbox:checked': function () {
+    live_update = true;
+    positionateLive ();
+    if ( !live_triggered ) {
+      live_triggered = true;
+      $('.anchor').on ( $.Pointer.dragmove, positionateLive );
+    }
+  },
+  'checkbox:unchecked': function () {
+    live_update = false;
+  }
+})</script><script>window.onerror = function ( message, file, line ) {
+  try {
+    $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+  } catch ( e ) {
+    alert ( file + ':' + line + '\n\n' + message );
+  }
+};</script></body></html>

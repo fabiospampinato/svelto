@@ -1,161 +1,73 @@
-<!DOCTYPE html>
-<html lang="en" xml:lang="en" dir="ltr" class="no-js">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Svelto</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="/svelto.css" media="all"/>
-    <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/>
-    <script>
-      document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
-        
-    </script>
-  </head>
-  <body class="fixed-header">
-    <header>
-      <div class="header">
-        <div class="toolbar primary z-depth-4">
-          <div class="multiple">
-            <div class="button compact transparent"><i class="icon">menu</i>
-            </div><a href="/" class="large">Svelto</a>
-            <div class="spacer">
-            </div>
-            <div class="button compact transparent"><i class="icon">refresh</i>
-            </div>
-            <div class="button compact transparent"><i class="icon">more_vert</i>
-            </div>
-          </div>
-        </div>
-      </div>
-    </header>
-    <main>
-      <div class="divider-wrp block">
-        <div class="divider">Actions
-        </div>
-      </div>
-      <div class="multiple">
-        <div class="multiple joined">
-          <div class="input-wrp white outlined no-floating">
-            <input type="text" value="300" name="milliseconds" required="required" class="text-field"/>
-            <label>Milliseconds...</label>
-            <div class="text-field-bar"></div>
-          </div>
-          <div class="button checked checkbox outlined">
-            <input type="radio" checked="checked"/><span>Autostart</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i>
-          </div>
-          <div onclick="javascript:timer_set ()" class="button outlined">Set
-          </div>
-        </div>
-        <div class="multiple joined">
-          <div class="input-wrp white outlined no-floating">
-            <input type="text" value="1000" name="milliseconds_once" required="required" class="text-field"/>
-            <label>Milliseconds...</label>
-            <div class="text-field-bar"></div>
-          </div>
-          <div onclick="javascript:timer_once ()" class="button outlined">Once
-          </div>
-        </div>
-        <div onclick="javascript:timer_play ()" class="button outlined">Play
-        </div>
-        <div onclick="javascript:timer_pause ()" class="button outlined">Pause
-        </div>
-        <div onclick="javascript:timer_stop ()" class="button outlined">Stop
-        </div>
-        <div onclick="javascript:timer_toggle ()" class="button outlined">Toggle
-        </div>
-        <div onclick="javascript:timer_reset ()" class="button outlined">Reset
-        </div>
-        <div onclick="javascript:timer_go ()" class="button outlined">Go
-        </div>
-        <div onclick="javascript:timer_remaining ()" class="button outlined">Remaining
-        </div>
-      </div>
-    </main>
-    <footer>
-      <div class="footer beveled">
-        <p class="text-center">Svelto, a framework</p>
-      </div>
-    </footer>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script>
-    <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-    <script src="/svelto.js"></script>
-    <script>
-      var timer = false;
-      
-      function timer_callback () {
-      
-        $.noty ({ body: 'Timer executed!', color: 'green' });
-      
-      }
-      
-      function timer_set () {
-      
-        var milliseconds = Number($('input[name="milliseconds"]').val ()),
-          autostart = $('input[name="autostart"]').prop ( 'checked' );
-      
-        timer = $.timer ( timer_callback, milliseconds, autostart );
-      
-      }
-      
-      function timer_once () {
-      
-        var milliseconds = Number($('input[name="milliseconds_once"]').val ());
-      
-        timer.once ( milliseconds );
-      
-      }
-      
-      function timer_play () {
-      
-        timer.play ();
-      
-      }
-      
-      function timer_pause () {
-      
-        timer.pause ();
-      
-      }
-      
-      function timer_stop () {
-      
-        timer.stop ();
-      
-      }
-      
-      function timer_toggle () {
-      
-        timer.toggle ();
-      
-      }
-      
-      function timer_reset () {
-      
-        timer.reset ();
-      
-      }
-      
-      function timer_go () {
-      
-        timer.go ();
-      
-      }
-      
-      function timer_remaining () {
-      
-        $.noty ( 'Remaining: ' + timer.remaining () );
-      
-      }
-    </script>
-    <script>
-      window.onerror = function ( message, file, line ) {
-        try {
-          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
-        } catch ( e ) {
-          alert ( file + ':' + line + '\n\n' + message );
-        }
-      };
-    </script>
-  </body>
-</html>
+<!DOCTYPE html><html lang="en" dir="ltr" class="no-js"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><title>Svelto</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><link rel="stylesheet" href="/svelto.css" media="all"/><link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/><script>document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
+  </script></head><body><div id="content"><header class="fixed"><div class="toolbar primary z-depth-4"><div class="multiple"><div class="button compact transparent"><i class="icon">menu</i></div><a href="/" class="large">Svelto</a><div class="spacer"></div><div class="button compact transparent"><i class="icon">refresh</i></div><div class="button compact transparent"><i class="icon">more_vert</i></div></div></div></header><main><div class="divider-wrp block"><div class="divider">Actions</div></div><div class="multiple"><div class="multiple joined"><div class="input-wrp white outlined no-floating"><input type="text" value="300" name="milliseconds" required="required" class="text-field"/><label>Milliseconds...</label><div class="text-field-bar"></div></div><div class="button checked checkbox outlined"><input type="radio" checked="checked"/><span>Autostart</span><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><div onclick="javascript:timer_set ()" class="button outlined">Set</div></div><div class="multiple joined"><div class="input-wrp white outlined no-floating"><input type="text" value="1000" name="milliseconds_once" required="required" class="text-field"/><label>Milliseconds...</label><div class="text-field-bar"></div></div><div onclick="javascript:timer_once ()" class="button outlined">Once</div></div><div onclick="javascript:timer_play ()" class="button outlined">Play</div><div onclick="javascript:timer_pause ()" class="button outlined">Pause</div><div onclick="javascript:timer_stop ()" class="button outlined">Stop</div><div onclick="javascript:timer_toggle ()" class="button outlined">Toggle</div><div onclick="javascript:timer_reset ()" class="button outlined">Reset</div><div onclick="javascript:timer_go ()" class="button outlined">Go</div><div onclick="javascript:timer_remaining ()" class="button outlined">Remaining</div></div></main><footer class="beveled"><p class="text-center">Svelto, a framework</p></footer></div><script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script src="//code.jquery.com/jquery-2.1.4.min.js"></script><script src="/svelto.js"></script><script>var timer = false;
+
+function timer_callback () {
+
+  $.noty ({ body: 'Timer executed!', color: 'green' });
+
+}
+
+function timer_set () {
+
+  var milliseconds = Number($('input[name="milliseconds"]').val ()),
+    autostart = $('input[name="autostart"]').prop ( 'checked' );
+
+  timer = $.timer ( timer_callback, milliseconds, autostart );
+
+}
+
+function timer_once () {
+
+  var milliseconds = Number($('input[name="milliseconds_once"]').val ());
+
+  timer.once ( milliseconds );
+
+}
+
+function timer_play () {
+
+  timer.play ();
+
+}
+
+function timer_pause () {
+
+  timer.pause ();
+
+}
+
+function timer_stop () {
+
+  timer.stop ();
+
+}
+
+function timer_toggle () {
+
+  timer.toggle ();
+
+}
+
+function timer_reset () {
+
+  timer.reset ();
+
+}
+
+function timer_go () {
+
+  timer.go ();
+
+}
+
+function timer_remaining () {
+
+  $.noty ( 'Remaining: ' + timer.remaining () );
+
+}</script><script>window.onerror = function ( message, file, line ) {
+  try {
+    $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+  } catch ( e ) {
+    alert ( file + ':' + line + '\n\n' + message );
+  }
+};</script></body></html>

@@ -5,7 +5,9 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../core/_core.scss
  * @requires ../colors/_settings.scss
+ * @requires ../toolbar/_toolbar.scss
  * ========================================================================= */
 
 /* BASE */
@@ -16,3 +18,7 @@ $base-selection-bg-color: lighten($color-primary-bg, 50) !default;
 
 $body-color: 'base' !default;
 $body-color-basic: true !default;
+
+/* MAIN HEADER */
+
+$main-header-height: $toolbar-height !default;

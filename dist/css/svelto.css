@@ -2314,16 +2314,6 @@ th {
 }
 
 /* =========================================================================
- * Svelto - Base (Settings) v0.3.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../colors/_settings.scss
- * ========================================================================= */
-/* BASE */
-/* BODY */
-/* =========================================================================
  * Svelto - Toolbar (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2333,27 +2323,83 @@ th {
  * ========================================================================= */
 /* TOOLBAR */
 /* =========================================================================
- * Svelto - Base v0.1.1
+ * Svelto - Toolbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
- * @requires ../toolbar/_settings.scss
  * ========================================================================= */
-*, *:before, *:after {
+/* TOOLBAR */
+.toolbar {
+  height: 56px;
+  margin-bottom: 10px;
+  padding: 0 1em;
+}
+
+.toolbar > .multiple {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  height: 100%;
+}
+
+.toolbar > .multiple > * {
+  margin-bottom: 0;
+}
+
+/* =========================================================================
+ * Svelto - Base (Settings) v0.3.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../colors/_settings.scss
+ * @requires ../toolbar/_toolbar.scss
+ * ========================================================================= */
+/* BASE */
+/* BODY */
+/* MAIN HEADER */
+/* =========================================================================
+ * Svelto - Navbar (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* NAVBAR */
+/* ATTACHED */
+/* BACKGROUND */
+/* SIZES */
+/* SLIM SIZES */
+/* =========================================================================
+ * Svelto - Base v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../navbar/_settings.scss
+ * ========================================================================= */
+/* RESETTING BOX SIZING */
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
 
+/* NO OUTLINE ON FOCUS */
 *:focus {
   outline: none;
 }
 
+/* CUSTOM SELECTION COLOR */
 ::-moz-selection {
   background: #d9e9fb;
   text-shadow: none;
 }
-
 ::selection {
   background: #d9e9fb;
   text-shadow: none;
@@ -2362,10 +2408,11 @@ th {
 /* HTML */
 html {
   font-size: 16px;
+  box-sizing: border-box;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  box-sizing: border-box;
+  min-width: 100%;
   min-height: 100%;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -2390,10 +2437,8 @@ body {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  width: 100%;
+  min-width: 100%;
+  min-height: 100%;
 }
 
 body p > a {
@@ -2408,46 +2453,50 @@ body p > a:hover {
   color: #f97100 ;
 }
 
-body > header, body > main, body > footer {
-  transition: margin 1s;
+/* #CONTENT */
+#content {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  min-height: 100%;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  transition: margin 0.35s;
+  min-width: 100%;
 }
 
-body > header > .header {
-  transition-property: top, right, bottom, left;
-  transition-duration: 1s;
-  margin-bottom: 0;
-}
-
-body > main {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  margin-top: 10px;
-  padding: 0 10px;
-}
-
-body > footer > .footer {
-  margin-bottom: 0;
-}
-
-body.fixed-header > header {
-  margin-top: 56px;
-}
-
-body.fixed-header > header > .header {
+#content > header.fixed {
   position: fixed;
-  z-index: 5;
+  z-index: 100;
   top: 0;
   right: 0;
   left: 0;
+  transition-property: top, right, left;
+  transition-duration: 0.35s;
 }
 
-body.fixed-header > header > .header > *:last-child {
+#content > header.fixed + main {
+  margin-top: 56px;
+}
+
+#content > main {
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  padding: 10px;
+}
+
+#content > main > :last-child {
+  margin-bottom: 0 !important;
+}
+
+#content > main > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
-body.fixed-header > main {
-  transition: margin 0.35s;
+#content > footer {
+  margin-bottom: 0;
 }
 
 /* =========================================================================
@@ -2511,28 +2560,28 @@ body.fixed-header > main {
 /* WIDGET */
 .widget, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, .footer, i.icon, .image-wrp, .infobar-wrp, .input-wrp, .textarea-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, footer, i.icon, .image-wrp, .infobar-wrp, .input-wrp, .textarea-wrp, .parallax, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, footer > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, footer > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
 .widget.disabled, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.footer, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, blockquote > footer.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
+.disabled.card-footer, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, footer.disabled, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, .widget[class*="-disabled"], label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].footer, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"], blockquote > footer[class*="-disabled"] {
+[class*="-disabled"].card-footer, .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, footer[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -5430,20 +5479,20 @@ hr {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* FOOTER */
-.footer {
+footer {
   padding: 10px;
   background-color: #cfd6db;
 }
 
-.footer > :last-child {
+footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.footer > :last-child.multiple {
+footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
-.footer.beveled:before, .footer.beveled:after {
+footer.beveled:before, footer.beveled:after {
   position: absolute;
   top: -8px;
   width: 8px;
@@ -5454,12 +5503,12 @@ hr {
   background-size: 200% 200%;
 }
 
-.footer.beveled:before {
+footer.beveled:before {
   left: 0;
   background-position: bottom left;
 }
 
-.footer.beveled:after {
+footer.beveled:after {
   right: 0;
   background-position: bottom right;
 }
@@ -5867,16 +5916,16 @@ hr {
  * @requires _settings.scss
  * ========================================================================= */
 /* HEADER */
-.header {
+header {
   position: relative;
   margin-bottom: 10px;
 }
 
-.header.has-background {
+header.has-background {
   overflow: hidden;
 }
 
-.header > .header-background {
+header > .header-background {
   position: absolute;
   z-index: -1;
   top: 0;
@@ -5886,7 +5935,7 @@ hr {
   background-size: cover;
 }
 
-.header > *:last-child {
+header > *:last-child {
   margin-bottom: 0;
 }
 
@@ -7461,19 +7510,6 @@ table td .multiple:only-child {
   display: inline-flex;
 }
 
-/* =========================================================================
- * Svelto - Navbar (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* NAVBAR */
-/* ATTACHED */
-/* BACKGROUND */
-/* SIZES */
-/* SLIM SIZES */
 /* =========================================================================
  * Svelto - Navbar v0.1.0
  * =========================================================================
@@ -10708,32 +10744,6 @@ table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-chil
 
 .textarea-wrp.unresizable > .text-field, .textarea-wrp.disabled > .text-field {
   resize: none;
-}
-
-/* =========================================================================
- * Svelto - Toolbar v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* TOOLBAR */
-.toolbar {
-  height: 56px;
-  margin-bottom: 10px;
-  padding: 0 1em;
-}
-
-.toolbar > .multiple {
-  -webkit-align-items: center;
-      -ms-flex-align: center;
-          align-items: center;
-  height: 100%;
-}
-
-.toolbar > .multiple > * {
-  margin-bottom: 0;
 }
 
 /* =========================================================================

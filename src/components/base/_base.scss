@@ -1,21 +1,31 @@
 
 /* =========================================================================
- * Svelto - Base v0.1.1
+ * Svelto - Base v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
- * @requires ../toolbar/_settings.scss
+ * @requires ../navbar/_settings.scss
  * ========================================================================= */
 
-*, *:before, *:after { //INFO: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw
+/* RESETTING BOX SIZING */
+
+//SOURCE: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw
+
+*,
+*:before,
+*:after {
   box-sizing: inherit;
 }
+
+/* NO OUTLINE ON FOCUS */
 
 *:focus {
   outline: none;
 }
+
+/* CUSTOM SELECTION COLOR */
 
 ::selection {
     background: $base-selection-bg-color;
@@ -27,8 +37,9 @@
 html {
 
   font-size: $font-size;
-  display: flex;
   box-sizing: border-box;
+  display: flex;
+  min-width: 100%;
   min-height: 100%;
 
   -webkit-tap-highlight-color: transparent;
@@ -44,61 +55,49 @@ html {
 /* BODY */
 
 body {
-
   @include color ( $body-color, $body-color-basic );
   font-family: $font-family;
   font-size: 1em;
   line-height: $line-height;
   display: flex;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+/* #CONTENT */
+
+#content {
+
+  display: flex;
+  min-height: 100%;
   flex-direction: column;
-  width: 100%;
+  transition: margin $navbar-transition-transform-duration;
+  min-width: 100%;
 
-  & > header, & > main, & > footer {
-    transition: margin 1s; // $navbar-transition-transform-duration;
+  > header.fixed {
+
+    position: fixed;
+    z-index: 100;
+    top: 0;
+    right: 0;
+    left: 0;
+    transition-property: top, right, left;
+    transition-duration: $navbar-transition-transform-duration;
+
+    + main {
+      margin-top: $main-header-height;
+    }
+
   }
 
-  & > header > .header {
-    transition-property: top, right, bottom, left;
-    transition-duration: 1s; // $navbar-transition-transform-duration;
-    margin-bottom: 0;
-  }
-
-  & > main {
+  > main {
+    @include last-child-no-gutter ();
     flex-grow: 1;
-    margin-top: $gutter;
-    padding: 0 $gutter;
+    padding: $gutter;
   }
 
-  & > footer > .footer {
+  > footer {
     margin-bottom: 0;
-  }
-
-  &.fixed-header {
-
-    & > header {
-
-      margin-top: $toolbar-height;
-
-      & > .header {
-
-        position: fixed;
-        z-index: 5;
-        top: 0;
-        right: 0;
-        left: 0;
-
-        & > *:last-child {
-          margin-bottom: - $gutter !important;
-        }
-
-      }
-
-    }
-
-    & > main {
-      transition: margin $transition-duration-normal;
-    }
-
   }
 
 }

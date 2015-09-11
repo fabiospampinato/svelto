@@ -11,7 +11,7 @@
 
 /* FOOTER */
 
-.footer {
+footer {
 
   @extend .widget;
   @include last-child-no-gutter ();

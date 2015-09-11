@@ -4,7 +4,7 @@ include ../dist/jade/svelto.mixins.jade
 //- Layout
 
 doctype html
-html(class="no-js" lang="en" xml:lang="en" dir="ltr")
+html(class="no-js" lang="en" dir="ltr")
   head
     meta(charset="utf-8")
     meta(http-equiv="x-ua-compatible" content="ie=edge")
@@ -18,10 +18,10 @@ html(class="no-js" lang="en" xml:lang="en" dir="ltr")
     +script.
       document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
         
-  body.fixed-header
+  body
     block body-start
-    header
-      +header
+    #content
+      +header.fixed
         +toolbar.primary.z-depth-4
           +button-icon('menu').compact.transparent
           a.large(href="/") Svelto
@@ -29,12 +29,11 @@ html(class="no-js" lang="en" xml:lang="en" dir="ltr")
           +button-icon('refresh').compact.transparent
           +button-icon('more_vert').compact.transparent
         block header
-    main
-        block main
-    footer
-        +footer.beveled
-            p.text-center Svelto, a framework
-            block footer
+      main
+          block main
+      +footer.beveled
+        p.text-center Svelto, a framework
+        block footer
     block body
     +js("//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js")
     +js("//code.jquery.com/jquery-2.1.4.min.js")
