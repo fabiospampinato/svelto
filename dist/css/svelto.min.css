@@ -8485,24 +8485,6 @@ table td .multiple:only-child {
 }
 
 /* =========================================================================
- * Svelto - Pagination (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* PAGINATION */
-/* =========================================================================
- * Svelto - Pagination v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* PAGINATION */
-/* =========================================================================
  * Svelto - Parallax (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -8515,12 +8497,13 @@ table td .multiple:only-child {
 /* BACKGROUND */
 /* FOREGROUND */
 /* =========================================================================
- * Svelto - Parallax v0.1.0
+ * Svelto - Parallax v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* PARALLAX */
 .parallax {
@@ -8529,48 +8512,52 @@ table td .multiple:only-child {
   overflow-y: auto;
   -webkit-perspective: 20rem;
           perspective: 20rem;
+  /* LAYERS */
+  /* LAYER */
+  /* SAMPLE CONTENT */
 }
 
-.parallax > .parallax-layers {
+.parallax-layers {
   position: relative;
-  height: 50vh;
+  height: 100%;
   -webkit-transform-style: preserve-3d;
           transform-style: preserve-3d;
 }
 
-.parallax > .parallax-layers > .parallax-layer {
+.parallax-layer {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  /* LAYER LEVEL */
 }
 
-.parallax > .parallax-layers > .parallax-layer.parallax-layer-deep {
+.parallax-layer-deep {
   -webkit-transform: translateZ(-40rem) scale(3);
           transform: translateZ(-40rem) scale(3);
   z-index: 1;
 }
 
-.parallax > .parallax-layers > .parallax-layer.parallax-layer-background {
+.parallax-layer-background {
   -webkit-transform: translateZ(-20rem) scale(2);
           transform: translateZ(-20rem) scale(2);
   z-index: 2;
 }
 
-.parallax > .parallax-layers > .parallax-layer.parallax-layer-base {
+.parallax-layer-base {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
   z-index: 3;
 }
 
-.parallax > .parallax-layers > .parallax-layer.parallax-layer-foreground {
+.parallax-layer-foreground {
   -webkit-transform: translateZ(6.000006rem) scale(0.7);
           transform: translateZ(6.000006rem) scale(0.7);
   z-index: 4;
 }
 
-.parallax > .parallax-layers > .parallax-layer > .parallax-content-sample {
+.parallax-content-sample {
   position: absolute;
   margin-top: auto;
   margin-bottom: auto;
