@@ -4412,7 +4412,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * ========================================================================= */
 /* EMBEDDED */
 /* =========================================================================
- * Svelto - Embedded v0.1.0
+ * Svelto - Embedded v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4421,6 +4421,10 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * ========================================================================= */
 /* EMBEDDED */
 .embedded {
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
   /* RATIOS */
   /* IFRAME / EMBED / VIDEO / OBJECT */
 }
