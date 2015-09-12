@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Pagination v0.1.0
+//- Svelto - Pagination v0.1.1
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -16,7 +16,7 @@
   }
 
 mixin pagination(options)
-  - options.classes = options.classes || "compact";
+  - options.classes = options.classes || "";
   +multiple&attributes(attributes).pagination.centered
 
     if options.total == 1 || options.total == 0
