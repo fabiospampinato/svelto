@@ -10,44 +10,44 @@ append main
     table.table.bordered
       thead
         tr
-          th.xs-1.text-center Int
+          th.text-center.xs-1 Int
           th String
           th Date
           th.text-center Options
       tfoot
         tr
           td(colspan="100%")
-            +multiple.fluid.stretched
-              p.centerer 20 Rows - Page 3 of 5
+            +multiple.stretched
+              .centerer 20 Rows - Page 3 of 5
               +spacer
               +pagination({ url: '#', total: 5, current: 3, blocks: 10, classes: 'xsmall outlined compact' }).joined
       tbody
-        +table-tr-empty
-          tr
-            td.text-center 1
-            td Foo
-            td 753462000
-            td.text-center -
-          tr
-            td.text-center 2
-            td Bar
-            td 16/11/1993
-            td.text-center
-              +button-icon('settings').outlined.small.disabled.compact
-          tr
-            td.text-center 3
-            td Baz
-            td 16 Nov 1993
-            td.text-center
-              +button-icon('settings').outlined.small.compact
-          tr
-            td.text-center 4
-            td Qux
-            td November 16th, 1993
-            td.text-center
-              +multiple.joined
-                +button.outlined.small Button
-                +button-icon('more_vert').outlined.small.compact
+        +table-row-empty
+        tr
+          td.text-center 1
+          td Foo
+          td 753462000
+          td.text-center -
+        tr
+          td.text-center 2
+          td Bar
+          td 16/11/1993
+          td.text-center
+            +button-icon('settings').outlined.small.disabled.compact
+        tr
+          td.text-center 3
+          td Baz
+          td 16 Nov 1993
+          td.text-center
+            +button-icon('settings').outlined.small.compact
+        tr
+          td.text-center 4
+          td Qux
+          td November 16th, 1993
+          td.text-center
+            +multiple.joined
+              +button.outlined.small Button
+              +button-icon('more_vert').outlined.small.compact
 
   +divider-block Empty
 
@@ -60,26 +60,26 @@ append main
           th Date
           th Options
       tbody
-        +table-tr-empty
+        +table-row-empty
 
   +divider-block Actions
 
   +multiple
-    +button("toggle_table_class( 'compact' )").outlined Toggle compact
-    +button("toggle_table_class( 'collapse' )").outlined Toggle collapse
-    +button("toggle_table_class( 'equal' )").outlined Toggle equal
-    +button("toggle_table_class( 'separated' )").outlined Toggle separated
-    +button("toggle_table_class( 'bordered' )").outlined Toggle bordered
-    +button("toggle_table_class( 'striped' )").outlined Toggle striped
-    +button("toggle_table_class( 'hoverable' )").outlined Toggle hoverable
-    +button("toggle_table_class( 'outlined' )").outlined Toggle outlined
+    +button("toggle_class( 'compact' )").outlined Toggle compact
+    +button("toggle_class( 'collapse' )").outlined Toggle collapse
+    +button("toggle_class( 'equal' )").outlined Toggle equal
+    +button("toggle_class( 'separated' )").outlined Toggle separated
+    +button("toggle_class( 'bordered' )").outlined Toggle bordered
+    +button("toggle_class( 'striped' )").outlined Toggle striped
+    +button("toggle_class( 'hoverable' )").outlined Toggle hoverable
+    +button("toggle_class( 'outlined' )").outlined Toggle outlined
     +button("remove_thead ()").outlined Remove header
     +button("remove_tbody ()").outlined Remove body
     +button("remove_tfoot ()").outlined Remove footer
 
 append body-end
   +script.
-    function toggle_table_class ( css_class ) {
+    function toggle_class ( css_class ) {
       $('table.table').toggleClass ( css_class );
     }
     function remove_thead () {

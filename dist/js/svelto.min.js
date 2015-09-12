@@ -7083,7 +7083,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
       this.$tfoot = this.$table.find ( 'tfoot' ),
       this.$tbody = this.$table.find ( 'tbody' ),
       this.$headers = this.$thead.find ( 'th' ),
-      this.$empty_row = this.$tbody.find ( 'tr.empty' ),
+      this.$empty_row = this.$tbody.find ( 'tr.table-row-empty' ),
       this.columns_nr = this.$headers.length;
 
     },
@@ -7098,7 +7098,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     _check_empty: function () {
 
-      this.$empty_row.toggleClass ( 'hidden', this.$tbody.find ( 'tr:not(.empty)' ).length > 0 );
+      this.$empty_row.toggleClass ( 'hidden', this.$tbody.find ( 'tr:not(.table-row-empty)' ).length > 0 );
 
     },
 
@@ -7228,7 +7228,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     clear: function () {
 
-      var $rows = this.$tbody.find ( 'tr:not(.empty)' );
+      var $rows = this.$tbody.find ( 'tr:not(.table-row-empty)' );
 
       if ( $rows.length ) {
 

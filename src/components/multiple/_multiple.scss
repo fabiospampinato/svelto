@@ -351,6 +351,6 @@
 
 /* MULTIPLE IN TABLE CELL */
 
-table td .multiple:only-child { //INFO: Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
+table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
   display: inline-flex;
 }

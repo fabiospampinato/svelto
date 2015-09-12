@@ -3495,7 +3495,7 @@ label {
   z-index: 1000000;
 }
 
-.centered:not(.multiple) {
+.centered:not(.multiple):not(table.table thead th) {
   margin-right: auto;
   margin-left: auto;
 }
@@ -7693,7 +7693,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 /* MULTIPLE IN TABLE CELL */
-table td .multiple:only-child {
+table > :not(tfoot) td .multiple:only-child {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
@@ -10325,7 +10325,7 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 /* STRIPED */
 /* HOVERABLE */
 /* =========================================================================
- * Svelto - Table v0.1.0
+ * Svelto - Table v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10354,7 +10354,7 @@ table.table {
   /* STRIPED & HOVERABLE */
 }
 
-table.table > * > tr > * {
+table.table tr > * {
   padding: 10px;
   text-align: left;
   border-width: 0;
@@ -10362,104 +10362,109 @@ table.table > * > tr > * {
   border-color: inherit;
 }
 
-table.table > * > tr > * > :last-child {
+table.table tr > * > :last-child {
   margin-bottom: 0 !important;
 }
 
-table.table > * > tr > * > :last-child.multiple {
+table.table tr > * > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
-table.table > thead {
+table.table thead {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-table.table > thead > tr {
+table.table thead tr {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
 
-table.table > thead > tr:first-child > th:first-child {
+table.table thead tr:first-child th:first-child {
   border-top-left-radius: inherit;
 }
 
-table.table > thead > tr:first-child > th:last-child {
+table.table thead tr:first-child th:last-child {
   border-top-right-radius: inherit;
 }
 
-table.table > tbody {
+table.table tbody {
   border-radius: inherit;
 }
 
-table.table > tbody > tr.empty > td {
+table.table tbody tr.table-row-empty td {
   height: 4.5em;
   text-align: center;
 }
 
-table.table > tbody > tr:first-child, table.table > tbody > tr.empty + tr {
+table.table tbody tr:first-child,
+table.table tbody tr.table-row-empty + tr {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
 
-table.table > tbody > tr:first-child > td:first-child, table.table > tbody > tr.empty + tr > td:first-child {
+table.table tbody tr:first-child td:first-child,
+table.table tbody tr.table-row-empty + tr td:first-child {
   border-top-left-radius: inherit;
 }
 
-table.table > tbody > tr:first-child > td:last-child, table.table > tbody > tr.empty + tr > td:last-child {
+table.table tbody tr:first-child td:last-child,
+table.table tbody tr.table-row-empty + tr td:last-child {
   border-top-right-radius: inherit;
 }
 
-table.table > tbody > tr:last-child {
+table.table tbody tr:last-child {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
 
-table.table > tbody > tr:last-child > td:first-child {
+table.table tbody tr:last-child td:first-child {
   border-bottom-left-radius: inherit;
 }
 
-table.table > tbody > tr:last-child > td:last-child {
+table.table tbody tr:last-child td:last-child {
   border-bottom-right-radius: inherit;
 }
 
-table.table > thead ~ tbody > tr:first-child > td:first-child, table.table > thead ~ tbody > .empty + tr > td:first-child {
+table.table thead ~ tbody tr:first-child td:first-child,
+table.table thead ~ tbody .table-row-empty + tr td:first-child {
   border-top-left-radius: 0;
 }
 
-table.table > thead ~ tbody > tr:first-child > td:last-child, table.table > thead ~ tbody > .empty + tr > td:last-child {
+table.table thead ~ tbody tr:first-child td:last-child,
+table.table thead ~ tbody .table-row-empty + tr td:last-child {
   border-top-right-radius: 0;
 }
 
-table.table > tfoot + tbody > tr:last-child > td:first-child {
+table.table tfoot + tbody tr:last-child td:first-child {
   border-bottom-left-radius: 0;
 }
 
-table.table > tfoot + tbody > tr:last-child > td:last-child {
+table.table tfoot + tbody tr:last-child td:last-child {
   border-bottom-right-radius: 0;
 }
 
-table.table > tfoot {
+table.table tfoot {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
   background-color: rgba(0, 0, 0, 0.05);
 }
 
-table.table > tfoot > tr {
+table.table tfoot tr {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
 
-table.table > tfoot > tr:last-child > td:first-child {
+table.table tfoot tr:last-child td:first-child {
   border-bottom-left-radius: inherit;
 }
 
-table.table > tfoot > tr:last-child > td:last-child {
+table.table tfoot tr:last-child td:last-child {
   border-bottom-right-radius: inherit;
 }
 
-table.table.compact > * > tr > * {
+table.table.compact tr > * {
   padding: 5px;
 }
 
@@ -10471,95 +10476,100 @@ table.table.equal {
   table-layout: fixed;
 }
 
-table.table.equal > * > tr > * {
+table.table.equal tr > * {
   width: 100%;
 }
 
-table.table.separated > thead > tr > th, table.table.bordered > thead > tr > th {
+table.table.separated thead th,
+table.table.bordered thead th {
   border-bottom-width: 1px;
 }
 
-table.table.separated > tbody > tr:not(:last-child) > td, table.table.bordered > tbody > tr:not(:last-child) > td {
+table.table.separated tbody tr:not(:last-child) td,
+table.table.bordered tbody tr:not(:last-child) td {
   border-bottom-width: 1px;
 }
 
-table.table.separated > tfoot > tr > td, table.table.bordered > tfoot > tr > td {
+table.table.separated tfoot td,
+table.table.bordered tfoot td {
   border-top-width: 1px;
 }
 
-table.table.bordered > * > tr > * {
+table.table.bordered tr > * {
   border-left-width: 1px;
 }
 
-table.table.bordered > * > tr > *:last-child {
+table.table.bordered tr > *:last-child {
   border-right-width: 1px;
 }
 
-table.table.bordered > tbody > tr:first-child > td, table.table.bordered > tbody > tr.empty + tr > td {
+table.table.bordered tbody tr:first-child td,
+table.table.bordered tbody tr.table-row-empty + tr td {
   border-top-width: 1px;
 }
 
-table.table.bordered > tbody > tr:last-child > td {
+table.table.bordered tbody tr:last-child td {
   border-bottom-width: 1px;
 }
 
-table.table.bordered > thead > tr > th {
+table.table.bordered thead th {
   border-top-width: 1px;
 }
 
-table.table.bordered > thead ~ tbody > tr:first-child > td, table.table.bordered > thead ~ tbody > tr.empty + tr > td {
+table.table.bordered thead ~ tbody tr:first-child td,
+table.table.bordered thead ~ tbody tr.table-row-empty + tr td {
   border-top-width: 0;
 }
 
-table.table.bordered > tfoot > tr > td {
+table.table.bordered tfoot td {
   border-bottom-width: 1px;
 }
 
-table.table.bordered > tfoot + tbody > tr:last-child > td {
+table.table.bordered tfoot + tbody tr:last-child td {
   border-bottom-width: 0;
 }
 
-table.table.striped > tbody > tr:first-child.empty ~ tr:nth-child(even) {
+table.table.striped tbody tr:first-child.table-row-empty ~ tr:nth-child(even) {
   background-color: transparent;
 }
 
-table.table.striped > tbody > tr:first-child.empty ~ tr:nth-child(odd) {
+table.table.striped tbody tr:first-child.table-row-empty ~ tr:nth-child(odd) {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-table.table.striped > tbody > tr:first-child:not(.empty) {
+table.table.striped tbody tr:first-child:not(.table-row-empty) {
   background-color: transparent;
 }
 
-table.table.striped > tbody > tr:first-child:not(.empty) ~ tr:nth-child(odd) {
+table.table.striped tbody tr:first-child:not(.table-row-empty) ~ tr:nth-child(odd) {
   background-color: transparent;
 }
 
-table.table.striped > tbody > tr:first-child:not(.empty) ~ tr:nth-child(even) {
+table.table.striped tbody tr:first-child:not(.table-row-empty) ~ tr:nth-child(even) {
   background-color: rgba(0, 0, 0, 0.02);
 }
 
-table.table.hoverable > tbody > tr:not(.empty):hover {
+table.table.hoverable tbody tr:not(.table-row-empty):hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-table.table.striped.hoverable > tbody > tr:first-child.empty ~ tr:nth-child(even):hover {
+table.table.striped.hoverable tbody tr:first-child.table-row-empty ~ tr:nth-child(even):hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-table.table.striped.hoverable > tbody > tr:first-child.empty ~ tr:nth-child(odd):hover {
+table.table.striped.hoverable tbody tr:first-child.table-row-empty ~ tr:nth-child(odd):hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-table.table.striped.hoverable > tbody > tr:first-child:not(.empty):hover {
+table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty):hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-child(odd):hover {
+table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nth-child(odd):hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-table.table.striped.hoverable > tbody > tr:first-child:not(.empty) ~ tr:nth-child(even):hover {
+table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nth-child(even):hover {
   background-color: rgba(0, 0, 0, 0.04);
 }
 

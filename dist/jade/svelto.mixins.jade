@@ -180,6 +180,30 @@ mixin chat-msg(options)
 
 
 //- =========================================================================
+//- Svelto - Card v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin card
+  .card&attributes(attributes)
+    block
+
+mixin card-header
+  .card-header&attributes(attributes)
+      block
+
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Checkbox v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -259,30 +283,6 @@ mixin container
   .container&attributes(attributes)
     block
       
-
-
-//- =========================================================================
-//- Svelto - Card v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin card
-  .card&attributes(attributes)
-    block
-
-mixin card-header
-  .card-header&attributes(attributes)
-      block
-
-mixin card-block
-  .card-block&attributes(attributes)
-    block
-
-mixin card-footer
-  .card-footer&attributes(attributes)
-    block
 
 
 //- =========================================================================
@@ -476,30 +476,6 @@ mixin expander(options)
 
 
 //- =========================================================================
-//- Svelto - Flags v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flag(flag)
-  div(class="flag-" + flag)&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Footer v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin footer
-  footer&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Flippable v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -521,6 +497,18 @@ mixin flippable-back
 
 
 //- =========================================================================
+//- Svelto - Footer v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin footer
+  footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Form v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -538,6 +526,18 @@ mixin form-button
 mixin form-button-icon(icon)
   button(type="submit")&attributes(attributes).label.button.actionable
     +icon(icon)
+    block
+
+
+//- =========================================================================
+//- Svelto - Flags v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flag(flag)
+  div(class="flag-" + flag)&attributes(attributes)
     block
 
 
@@ -737,6 +737,41 @@ mixin modal
 
 
 //- =========================================================================
+//- Svelto - Multiple v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin multiple
+  .multiple&attributes(attributes)
+    block
+
+//- Multiple Subs
+
+mixin multiple-sub-left
+  .multiple-sub-spacer
+  .multiple-sub&attributes(attributes).left
+    +multiple
+      block
+  .multiple-sub-spacer
+
+mixin multiple-sub-center
+  .multiple-sub-spacer
+  .multiple-sub&attributes(attributes).center
+    +multiple
+      block
+  .multiple-sub-spacer
+
+mixin multiple-sub-right
+  .multiple-sub-spacer
+  .multiple-sub&attributes(attributes).right
+    +multiple
+      block
+  .multiple-sub-spacer
+
+
+//- =========================================================================
 //- Svelto - Navbar v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -772,41 +807,6 @@ mixin navbar(options)
   .navbar(id="navbar-" + options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
     block
   .navbar-background
-
-
-//- =========================================================================
-//- Svelto - Multiple v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin multiple
-  .multiple&attributes(attributes)
-    block
-
-//- Multiple Subs
-
-mixin multiple-sub-left
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).left
-    +multiple
-      block
-  .multiple-sub-spacer
-
-mixin multiple-sub-center
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).center
-    +multiple
-      block
-  .multiple-sub-spacer
-
-mixin multiple-sub-right
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).right
-    +multiple
-      block
-  .multiple-sub-spacer
 
 
 //- =========================================================================
@@ -1414,14 +1414,14 @@ mixin switch(options)
 
 
 //- =========================================================================
-//- Svelto - Table v0.1.0
+//- Svelto - Table v0.1.2
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin table-tr-empty ( empty_str )
-  tr&attributes(attributes).empty.hidden
+mixin table-row-empty(empty_str)
+  tr&attributes(attributes).table-row-empty.hidden
     td(colspan="100%")
       if block
         block

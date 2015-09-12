@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Table v0.1.0
+ * Svelto - Table v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,10 +12,8 @@
 
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
-//TODO: Better .outlined support, we should outlined the header and footer and use their borders
-//TODO: Add ability to easily set per-columm text alignment
 
-table.table { //INFO: So that if we need a plain basic table we can, just by don't using the `table` class
+table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
 
   @extend .widget;
   @include color ( $table-color, $table-color-basic );
@@ -25,27 +23,27 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* CELLS */
 
-  & > * > tr > * {
+  tr > * {
     @include last-child-no-gutter ();
     padding: $gutter;
     text-align: left;
     border-width: 0;
     border-style: solid;
-    border-color: $table-bordered-border-color ;
+    border-color: $table-bordered-border-color;
   }
 
   /* THEAD */
 
-  & > thead {
+  thead {
 
     @include border-top-radius ( inherit );
     background-color: $table-header-footer-bg-color;
 
-    & > tr {
+    tr {
 
       @include border-top-radius ( inherit );
 
-      &:first-child > th {
+      &:first-child th {
 
         &:first-child {
           border-top-left-radius: inherit;
@@ -63,22 +61,23 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* TBODY */
 
-  & > tbody {
+  tbody {
 
     border-radius: inherit;
 
-    & > tr {
+    tr {
 
-      &.empty > td {
+      &.table-row-empty td {
         height: $table-row-empty-height;
         text-align: center;
       }
 
-      &:first-child, &.empty + tr {
+      &:first-child,
+      &.table-row-empty + tr {
 
         @include border-top-radius ( inherit );
 
-        & > td {
+        td {
 
           &:first-child {
             border-top-left-radius: inherit;
@@ -96,7 +95,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
         @include border-bottom-radius ( inherit );
 
-        & > td {
+        td {
 
           &:first-child {
             border-bottom-left-radius: inherit;
@@ -114,7 +113,8 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   }
 
-  & > thead ~ tbody > tr:first-child > td, & > thead ~ tbody > .empty + tr > td {
+  thead ~ tbody tr:first-child td,
+  thead ~ tbody .table-row-empty + tr td {
 
     &:first-child {
       border-top-left-radius: 0;
@@ -126,7 +126,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   }
 
-  & > tfoot + tbody > tr:last-child > td {
+  tfoot + tbody tr:last-child td {
 
     &:first-child {
       border-bottom-left-radius: 0;
@@ -140,16 +140,16 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* TFOOT */
 
-  & > tfoot {
+  tfoot {
 
     @include border-bottom-radius ( inherit );
     background-color: $table-header-footer-bg-color;
 
-    & > tr {
+    tr {
 
       @include border-bottom-radius ( inherit );
 
-      &:last-child > td {
+      &:last-child td {
 
         &:first-child {
           border-bottom-left-radius: inherit;
@@ -167,7 +167,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* COMPACT */
 
-  &.compact > * > tr  > * {
+  &.compact tr > * {
     padding: $gutter-half;
   }
 
@@ -183,7 +183,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
     table-layout: fixed;
 
-    & > * > tr  > * {
+    tr > * {
       width: 100%;
     }
 
@@ -191,17 +191,18 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* SEPARATED / BORDERED */
 
-  &.separated, &.bordered {
+  &.separated,
+  &.bordered {
 
-    & > thead > tr > th {
+    thead th {
       border-bottom-width: $table-bordered-border-width;
     }
 
-    & > tbody > tr:not(:last-child) > td {
+    tbody tr:not(:last-child) td {
       border-bottom-width: $table-bordered-border-width;
     }
 
-    & > tfoot > tr > td {
+    tfoot td {
       border-top-width: $table-bordered-border-width;
     }
 
@@ -211,7 +212,7 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   &.bordered {
 
-    & > * > tr > * {
+    tr > * {
 
       border-left-width: $table-bordered-border-width;
 
@@ -221,37 +222,39 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
     }
 
-    & > tbody > tr {
+    tbody tr {
 
-      &:first-child > td, &.empty + tr > td {
+      &:first-child td,
+      &.table-row-empty + tr td {
         border-top-width: $table-bordered-border-width;
       }
 
-      &:last-child > td {
+      &:last-child td {
         border-bottom-width: $table-bordered-border-width;
       }
 
     }
 
-    & > thead {
+    thead {
 
-      & > tr > th {
+      th {
         border-top-width: $table-bordered-border-width;
       }
 
-      & ~ tbody > tr:first-child > td, & ~ tbody > tr.empty + tr > td {
+      ~ tbody tr:first-child td,
+      ~ tbody tr.table-row-empty + tr td {
         border-top-width: 0;
       }
 
     }
 
-    & > tfoot {
+    tfoot {
 
-      & > tr > td {
+      td {
         border-bottom-width: $table-bordered-border-width;
       }
 
-      & + tbody > tr:last-child > td {
+      + tbody tr:last-child td {
         border-bottom-width: 0;
       }
 
@@ -261,9 +264,9 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* STRIPED */
 
-  &.striped > tbody > tr {
+  &.striped tbody tr {
 
-    &:first-child.empty ~ tr {
+    &:first-child.table-row-empty ~ tr {
 
       &:nth-child(even) {
         background-color: $table-striped-row-even-color;
@@ -275,11 +278,11 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
     }
 
-    &:first-child:not(.empty) {
+    &:first-child:not(.table-row-empty) {
 
       background-color: $table-striped-row-even-color;
 
-      & ~ tr {
+      ~ tr {
 
         &:nth-child(odd) {
           background-color: $table-striped-row-even-color;
@@ -297,15 +300,15 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
   /* HOVERABLE */
 
-  &.hoverable > tbody > tr:not(.empty):hover {
+  &.hoverable tbody tr:not(.table-row-empty):hover {
     background-color: $table-hoverable-row-even-color-hover;
   }
 
   /* STRIPED & HOVERABLE */
 
-  &.striped.hoverable > tbody > tr {
+  &.striped.hoverable tbody tr {
 
-    &:first-child.empty ~ tr {
+    &:first-child.table-row-empty ~ tr {
 
       &:nth-child(even):hover {
         background-color: $table-hoverable-row-even-color-hover;
@@ -317,13 +320,13 @@ table.table { //INFO: So that if we need a plain basic table we can, just by don
 
     }
 
-    &:first-child:not(.empty) {
+    &:first-child:not(.table-row-empty) {
 
       &:hover {
         background-color: $table-hoverable-row-even-color-hover;
       }
 
-      & ~ tr {
+      ~ tr {
 
         &:nth-child(odd):hover {
           background-color: $table-hoverable-row-even-color-hover;
