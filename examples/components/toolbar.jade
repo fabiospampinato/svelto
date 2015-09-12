@@ -4,52 +4,51 @@ extends ../layout.jade
 //- Toolbar
 
 append main
-  +divider-block Toolbars
+  +divider-block Toolbar
+  
+  +toolbar.primary Toolbar
+
+  +divider-block Multiple
 
   +toolbar.orange
     +button-icon('menu').compact
-    span.large Schedule
-    +spacer
+    .spacer.large Schedule
     +button-icon("search").compact
     +button-icon('more_vert').compact
 
   +toolbar.violet
     +button-icon('menu').compact
-    +breadcrumb.large
+    +breadcrumb.spacer.large
       +a(title="Components") Components
-      +breadcrumb-divider.small
-        +a(title="Toolbars") Toolbars
-    +spacer
+      +breadcrumb-divider.xsmall
+      +a(title="Toolbars") Toolbars
     +button-icon('more_vert').compact
 
   +toolbar.green
-    span.large Toolbar
-    +spacer
+    .spacer.large Toolbar
     +button-icon("search").compact
     +button-icon("person").compact
     +button-icon('more_vert').compact
 
   +toolbar.blue
     +button-icon("arrow_back").compact
-    span.large Main page
-    +spacer
+    .spacer.large Main page
     +button-icon('more_vert').compact
 
   +toolbar.red
     +button-icon('menu').compact
-    +icon("image-image").xlarge
-    span.large Title
-    +spacer
+    +icon("image").xlarge
+    .spacer.large Title
     +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "favorite", off: "favorite-outline" } })
     +button-icon("search").compact
 
-  +divider-block With subs
+  +divider-block Multiple subs
 
   +toolbar.yellow
     +multiple-sub-left
       +button-icon('menu').compact
     +multiple-sub-center
-      span.large Application
+      .large Application
     +multiple-sub-right
       +button-icon('more_vert').compact
 
@@ -57,4 +56,4 @@ append main
     +multiple-sub-left
       +button-icon("arrow_back").compact
     +multiple-sub-center
-      span.large This is a page
+      .large This is a page
