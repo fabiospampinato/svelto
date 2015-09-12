@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Flags v0.1.0
+ * Svelto - Flags v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,45 +8,25 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-//SOURCE: http://semantic-ui.com/elements/flag.html
-//TODO: Use this ones: https://www.flag-sprites.com
-//TODO: Or use this others (SVG): https://github.com/lipis/flag-icon-css
+//SOURCE: https://www.flag-sprites.com
 
-/* GENERAL */
+/* FLAG */
 
-%flag {
+[class^="flag-"] {
   display: inline-block;
   width: $flag-width;
   height: $flag-height;
-  content: '';
   background-image: url('/flags.png');
-}
-
-.flag[class*=" flag-"]:before {
-  @extend %flag
 }
 
 /* FLAGS */
 
 @each $country, $datas in $flags {
 
-  $aliases: nth($datas, 1);
   $background-position: nth($datas, 2);
 
-  @if $flags-only-enabled == false or index($flags-enabled, $country) != null {
-
-    .flag-#{$country}:before {
-      background-position: $background-position;
-    }
-
-    @each $alias in $aliases {
-
-      .flag-#{$alias}:before {
-        @extend .flag-#{$country}:before;
-      }
-
-    }
-
+  .flag-#{$country} {
+    background-position: $background-position;
   }
 
 }
