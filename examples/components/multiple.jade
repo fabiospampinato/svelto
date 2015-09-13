@@ -172,8 +172,12 @@ append main
 
   //- CONCAT
 
-  .card.expanded Concat
-    +card-block
+  +card.outlined.expander
+    +card-header.outlined.actionable.primary.expander-toggler
+      +multiple
+        .spacer Concat
+        +button-icon("keyboard_arrow_down").xsmall.compact
+    +card-block.expander-content
       +divider-block Concat no wrap
 
       +multiple
@@ -222,8 +226,12 @@ append main
           +container.outlined 3
           +container.outlined 3
 
-  .card.expanded Concat fixed
-    +card-block
+  +card.outlined.expander
+    +card-header.outlined.actionable.primary.expander-toggler
+      +multiple
+        .spacer Concat fixed
+        +button-icon("keyboard_arrow_down").xsmall.compact
+    +card-block.expander-content
       +divider-block Concat no wrap - FIXED
 
       +multiple.fluid
@@ -272,8 +280,12 @@ append main
           +container.outlined 3
           +container.outlined 3
 
-  .card.expanded Nested
-    +card-block
+  +card.outlined.expander
+    +card-header.outlined.actionable.primary.expander-toggler
+      +multiple
+        .spacer Nested
+        +button-icon("keyboard_arrow_down").xsmall.compact
+    +card-block.expander-content
       +divider-block Nested no wrap
 
       +multiple.no-wrap.fluid
@@ -319,8 +331,12 @@ append main
             +container.outlined 3
             +container.outlined 3
 
-  .card.expanded Nested fixed
-    +card-block
+  +card.outlined.expander
+    +card-header.outlined.actionable.primary.expander-toggler
+      +multiple
+        .spacer Nested fixed
+        +button-icon("keyboard_arrow_down").xsmall.compact
+    +card-block.expander-content
       +divider-block Nested no wrap
 
       +multiple.no-wrap.fluid
