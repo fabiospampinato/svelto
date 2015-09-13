@@ -241,7 +241,7 @@
         if ( tag_str.length === 0 && this.options.tags.arr.length > 0 ) {
 
           var $tag = this.$tagbox.find ( '.tagbox-tag' ).last (),
-            edit = !( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
+            edit = !( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
 
           this.remove ( $tag, edit );
 

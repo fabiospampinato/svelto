@@ -88,7 +88,7 @@
 
       this._update_valueholder ();
 
-      if ( !$.browser.isMobile ) {
+      if ( !$.browser.is.touchDevice ) {
 
         this.$select.addClass ( 'hidden' );
 
@@ -106,7 +106,7 @@
         this._trigger ( 'change' );
       });
 
-      if ( !$.browser.isMobile ) {
+      if ( !$.browser.is.touchDevice ) {
 
         this._on ( this.$buttons, 'click', this._handler_button_click );
 
@@ -219,7 +219,7 @@
 
     update: function () {
 
-      if ( !$.browser.isMobile ) {
+      if ( !$.browser.is.touchDevice ) {
 
         this._update_dropdown ();
 

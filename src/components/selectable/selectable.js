@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Selectable v0.1.0
+ * Svelto - Selectable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -102,7 +102,7 @@
 
     _handler_keys_keydown: function ( event ) {
 
-      if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
+      if ( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
 
         if ( event.keyCode === 65 ) { //INFO: A
 
@@ -146,7 +146,7 @@
 
     _handler_mousemove: function ( event ) { // DRAG
 
-      if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
+      if ( ( $.browser.is.mac && !event.metaKey ) || ( !$.browser.is.mac && !event.ctrlKey ) ) return;
 
       this._off ( $document, 'mousemove', this._handler_mousemove );
 
@@ -252,7 +252,7 @@
 
         this.$prev_shifted = $new_shifted;
 
-      } else if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) || $.browser.isMobile ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+      } else if ( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) || $.browser.is.touchDevice ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
 
         this.$start_row.toggleClass ( this.options.selected_class );
 

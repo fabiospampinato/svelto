@@ -26,7 +26,7 @@
 
     }
 
-    if ( $.browser.hasTouch && event.originalEvent.touches ) {
+    if ( $.browser.is.touchDevice && event.originalEvent.touches ) {
 
       event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
 

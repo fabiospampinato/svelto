@@ -248,7 +248,7 @@
 
     }
 
-    if ( $.browser.hasTouch && event.originalEvent.touches ) {
+    if ( $.browser.is.touchDevice && event.originalEvent.touches ) {
 
       event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
 
@@ -905,14 +905,11 @@
 
 
 /* =========================================================================
- * Svelto - Browser v0.1.0
+ * Svelto - Browser v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-
-//TODO: detect browsers, versions, OSes, but... is it useful?
-//TODO: detect: windows phone, smartphone, windows, linux, safari, opera, firefox, lowend
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -920,21 +917,59 @@
 
   /* VARIABLES */
 
-  var userAgent = navigator.userAgent.toLowerCase ();
+  var userAgent = navigator.userAgent.toLowerCase (),
+      vendor = navigator.vendor.toLowerCase (),
+      appVersion = navigator.appVersion.toLowerCase ();
+
+  /* CHECKS */
+
+  var is_iphone = /iphone/i.test ( userAgent ),
+      is_ipad = /ipad/i.test ( userAgent ),
+      is_ipod = /ipod/i.test ( userAgent ),
+      is_android = /android/i.test ( userAgent ),
+      is_androidPhone = is_android && /mobile/i.test ( userAgent ),
+      is_androidTablet = is_android && !is_androidPhone,
+      is_blackberry = /blackberry/i.test ( userAgent ) || /BB10/i.test ( userAgent ),
+      is_windows = /win/i.test ( appVersion ),
+      is_windowsPhone = is_windows && /phone/i.test ( userAgent ),
+      is_windowsTablet = is_windows && !is_windowsPhone && /touch/i.test ( userAgent ),
+      is_mobile = is_iphone || is_ipod || is_androidPhone || is_blackberry || is_windowsPhone,
+      is_tablet = is_ipad || is_androidTablet || is_windowsTablet;
 
   /* BROWSER */
 
   $.browser = {
-    isMobile: /iphone|ipad|android|ipod|opera mini|opera mobile|blackberry|iemobile|webos|windows phone|playbook|tablet|kindle/i.test ( userAgent ),
-    isTablet: /ipad|playbook|tablet|kindle/i.test ( userAgent ),
-    isAndroid: /android/i.test ( userAgent ),
-    isIOS: /(iphone|ipad|ipod)/i.test ( userAgent ),
-    isMac: /mac/i.test ( userAgent ),
-    isIE: /msie [\w.]+/.test ( userAgent ),
-    isChrome: /chrome/i.test ( userAgent )
+    is: {
+      chrome: /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
+      firefox: /firefox/i.test ( userAgent ),
+      ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
+      opera:  /^Opera\//.test ( userAgent ) || /\x20OPR\//.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
+      safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
+      iphone: is_iphone,
+      ipad: is_ipad,
+      ipod: is_ipod,
+      ios: is_iphone || is_ipad || is_ipod,
+      android: is_android,
+      androidPhone: is_androidPhone,
+      androidTablet: is_androidTablet,
+      blackberry: is_blackberry,
+      linux: /linux/i.test ( appVersion ),
+      mac: /mac/i.test ( appVersion ),
+      windows: is_windows,
+      windowsPhone: is_windowsPhone,
+      windowsTablet: is_windowsTablet,
+      mobile: is_mobile,
+      tablet: is_tablet,
+      desktop: !is_mobile && !is_tablet,
+      online: function () {
+        return navigator.onLine;
+      },
+      offline: function () {
+        return !navigator.onLine;
+      },
+      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof DocumentTouch )
+    }
   };
-
-  $.browser.hasTouch = ( 'ontouchstart' in window && !($.browser.isChrome && !$.browser.isAndroid) ); //FIXME: Why do we need the second check? Do other libraries do the same?
 
 }( jQuery, _, window, document ));
 
@@ -5532,7 +5567,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
       this._update_valueholder ();
 
-      if ( !$.browser.isMobile ) {
+      if ( !$.browser.is.touchDevice ) {
 
         this.$select.addClass ( 'hidden' );
 
@@ -5550,7 +5585,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         this._trigger ( 'change' );
       });
 
-      if ( !$.browser.isMobile ) {
+      if ( !$.browser.is.touchDevice ) {
 
         this._on ( this.$buttons, 'click', this._handler_button_click );
 
@@ -5663,7 +5698,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     update: function () {
 
-      if ( !$.browser.isMobile ) {
+      if ( !$.browser.is.touchDevice ) {
 
         this._update_dropdown ();
 
@@ -5687,7 +5722,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 /* =========================================================================
- * Svelto - Selectable v0.1.0
+ * Svelto - Selectable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5789,7 +5824,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     _handler_keys_keydown: function ( event ) {
 
-      if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
+      if ( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
 
         if ( event.keyCode === 65 ) { //INFO: A
 
@@ -5833,7 +5868,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
     _handler_mousemove: function ( event ) { // DRAG
 
-      if ( ( $.browser.isMac && !event.metaKey ) || ( !$.browser.isMac && !event.ctrlKey ) ) return;
+      if ( ( $.browser.is.mac && !event.metaKey ) || ( !$.browser.is.mac && !event.ctrlKey ) ) return;
 
       this._off ( $document, 'mousemove', this._handler_mousemove );
 
@@ -5939,7 +5974,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
         this.$prev_shifted = $new_shifted;
 
-      } else if ( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) || $.browser.isMobile ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+      } else if ( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) || $.browser.is.touchDevice ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
 
         this.$start_row.toggleClass ( this.options.selected_class );
 
@@ -7584,7 +7619,7 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
         if ( tag_str.length === 0 && this.options.tags.arr.length > 0 ) {
 
           var $tag = this.$tagbox.find ( '.tagbox-tag' ).last (),
-            edit = !( ( $.browser.isMac && event.metaKey ) || ( !$.browser.isMac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
+            edit = !( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) ); //INFO: With `ctrl` not on a Mac or `cmd` on Mac: remove it completelly, otherwise: copy it to the input
 
           this.remove ( $tag, edit );
 

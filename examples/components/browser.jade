@@ -4,18 +4,56 @@ extends ../layout.jade
 //- Browser
 
 append main
-  +divider-block Browser
+  +divider-block Browsers
 
   +multiple.fluid
-    +container.outlined.isMobile isMobile
-    +container.outlined.isTablet isTablet
-    +container.outlined.isAndroid isAndroid
-    +container.outlined.isIOS isIOS
-    +container.outlined.isMac isMac
-    +container.outlined.isIE isIE
+    +container.outlined.chrome Chrome
+    +container.outlined.firefox Firefox
+    +container.outlined.ie IE
+    +container.outlined.opera Opera
+    +container.outlined.safari Safari
+    
+  +divider-block OS
+    
+  +multiple.fluid
+    +container.outlined.ios iOS
+    +container.outlined.android Android
+    +container.outlined.blackberry Blackberry
+    +container.outlined.linux Linux
+    +container.outlined.mac Mac
+    +container.outlined.windows Windows
+
+  +divider-block Mobile
+  
+  +multiple.fluid
+    +container.outlined.mobile Mobile
+    +container.outlined.ipod iPod
+    +container.outlined.iphone iPhone
+    +container.outlined.androidPhone Android phone
+    +container.outlined.windowsPhone Windows phone
+  
+  +divider-block Tablet
+  
+  +multiple.fluid
+    +container.outlined.tablet Tablet
+    +container.outlined.ipad iPad
+    +container.outlined.androidTablet Android tablet
+    +container.outlined.windowsTablet Windows tablet
+  
+  +divider-block Others
+
+  +multiple.fluid
+    +container.outlined.desktop Desktop
+    +container.outlined.touchDevice Touch device
+  
+  +divider-block Connectivity
+  
+  +multiple.fluid
+    +container.outlined.online Online
+    +container.outlined.offline Offline
 
 append body-end
   +script.
-    for ( var prop in $.browser ) {
-      $('.' + prop).toggleClass ( 'green', $.browser[prop] );
+    for ( var prop in $.browser.is ) {
+      $('.' + prop).toggleClass ( 'green', ( _.isFunction ( $.browser.is[prop] ) ? $.browser.is[prop]() : $.browser.is[prop] ) );
     }
