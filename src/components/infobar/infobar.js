@@ -8,8 +8,7 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-//TODO: maybe add the ability to open it
-//TODO: maybe just hiding it on close is enough, do we gain a performance benefit this way?
+//TODO: Maybe add the ability to open it
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -25,9 +24,6 @@
       selectors: {
         closer: '.infobar-closer'
       },
-      delay: {
-        close: $.ui.animation.normal
-      },
       callbacks: {
         close: _.noop
       }
@@ -38,12 +34,13 @@
     _variables: function () {
 
       this.$infobar = this.$element;
+      this.$closers = this.$infobar.find ( this.options.selectors.closer );
 
     },
 
     _events: function () {
 
-      this._on ( 'click', this.options.selectors.closer, this.close );
+      this._on ( this.$closers, $.Pointer.tap, this.close );
 
     },
 
@@ -51,15 +48,9 @@
 
     close: function () {
 
-      this.$infobar.addClass ( 'remove' ).slideUp ( this.options.delay.close ); //FIXME: the animation is too expensive
+      this.$infobar.remove ();
 
-      this._delay ( function () {
-
-        this.$infobar.remove ();
-
-        this._trigger ( 'close' );
-
-      }, this.options.delay.close );
+      this._trigger ( 'close' );
 
     }
 
@@ -69,7 +60,7 @@
 
   $(function () {
 
-    $('.infobar-wrp').infobar ();
+    $('.infobar').infobar ();
 
   });
 

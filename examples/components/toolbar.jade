@@ -6,7 +6,8 @@ extends ../layout.jade
 append main
   +divider-block Toolbar
   
-  +toolbar.primary Toolbar
+  +toolbar.primary 
+    span Toolbar
 
   +divider-block Multiple
 
@@ -48,7 +49,7 @@ append main
     +multiple-sub-left
       +button-icon('menu').compact
     +multiple-sub-center
-      .large Application
+      span.large Application
     +multiple-sub-right
       +button-icon('more_vert').compact
 
@@ -56,4 +57,4 @@ append main
     +multiple-sub-left
       +button-icon("arrow_back").compact
     +multiple-sub-center
-      .large This is a page
+      span.large This is a page

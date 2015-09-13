@@ -1,79 +1,77 @@
 
 /* =========================================================================
- * Svelto - Infobar v0.1.0
+ * Svelto - Infobar v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
- * @requires ../widget/_widget.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 
-/* HEADER */
+/* INFOBAR */
 
-.infobar-wrp {
+.infobar {
 
-  @extend .widget;
-  @include color ( $infobar-color, $infobar-color-basic );
+  @extend .container;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding: $gutter;
-  transition: opacity $infobar-transition-close-duration;
-  // border-width: $infobar-border-width;
-  // border-style: solid;
-  border-radius: $infobar-border-radius;
 
   /* INSET */
 
   &.inset {
-    border-width: 0;
     padding: 0;
-  }
-
-  /* REMOVE */
-
-  &.remove {
-    opacity: 0;
   }
 
   /* SECTIONS */
 
-  & > .infobar-left, & > .infobar-center, .infobar-title, .infobar-subtitle, & > .infobar-right, & > .infobar-bottom {
+  > * {
     @include last-child-no-gutter ();
   }
 
-  & > .infobar-left {
-    flex-shrink: 0;
-    order: 1;
+  /* SECTIONS GUTTER */
+
+  > :not(:first-child):not(.infobar-bottom) {
+    margin-left: $gutter;
   }
 
-  & > .infobar-center {
+  /* LEFT */
+
+  &-left {
+    flex-shrink: 0;
+    order: 0;
+  }
+
+  /* CENTER */
+
+  &-center {
 
     flex-grow: 1;
     flex-basis: 0;
-    order: 2;
+    order: 1;
 
-    & > .infobar-title {
+    /* TITLE */
+
+    .infobar-title {
       @include size ( $infobar-title-size );
-      margin-bottom: $infobar-title-margin-bottom;
     }
 
   }
 
-  & > .infobar-right {
+  /* RIGHT */
+
+  &-right {
     flex-shrink: 0;
-    order: 3;
+    order: 2;
   }
 
-  & > .infobar-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
-    order: 4;
+  /* BOTTOM */
+
+  &-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
+    order: 3;
     width: 100%;
     margin-top: $gutter;
-  }
-
-  & > :not(:first-child):not(.infobar-bottom) {
-    margin-left: $gutter;
   }
 
 }

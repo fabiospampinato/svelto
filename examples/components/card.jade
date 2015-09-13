@@ -46,7 +46,7 @@ append main
 
   +divider-block Advanced
 
-  +card(style="height: 250px;")
+  +card.advanced
     +card-header.teal
       +multiple
         +multiple-sub-left
@@ -79,6 +79,7 @@ append main
     +button("toggle_class ( '.card-header', 'compact' )").outlined Toggle header compact
     +button("toggle_class ( '.card-block', 'compact' )").outlined Toggle block compact
     +button("toggle_class ( '.card-footer', 'compact' )").outlined Toggle footer compact
+    +button("toggle_height_limit ()").outlined Toggle advanced height limit
 
 append body-end
   +script.
@@ -88,3 +89,10 @@ append body-end
     function remove_element ( selector ) {
       $(selector).remove ();
     }
+    var height_limited = false;
+    function toggle_height_limit () {
+      $('.card.advanced').height ( height_limited ? 'auto' : 250 );
+      height_limited = !height_limited;
+    }
+    toggle_height_limit ();
+    
