@@ -2554,7 +2554,7 @@ body p > a:hover {
 /* BREADCRUMB */
 /* DIVIDER */
 /* =========================================================================
- * Svelto - Breadcrumb v0.2.0
+ * Svelto - Breadcrumb v0.2.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2570,8 +2570,13 @@ body p > a:hover {
       -ms-flex-align: center;
           align-items: center;
   margin-bottom: 10px;
+  /* CHILDREN */
   /* DIVIDER */
   /* HIGHLIGHTED */
+}
+
+.breadcrumb > * {
+  margin-bottom: 0;
 }
 
 .breadcrumb-divider {
