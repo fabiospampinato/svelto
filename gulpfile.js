@@ -191,7 +191,7 @@ gulp.task ( 'css', function () {
                precision: 10
              }))
             .pipe ( autoprefixer ({
-               browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'],
+               browsers: ['ie >= 11', 'ie_mob >= 11', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
                cascade: true,
                remove: true
              }))

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Modal v0.1.0
+ * Svelto - Modal v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,71 +12,64 @@
 
 .modal {
 
+  @include z-depth ( $modal-z-depth );
   position: fixed;
   z-index: $modal-z-index;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  transition-property: transform, opacity;
+  transition-duration: $modal-transition-all-duration;
+  margin: 0;
 
-  &.fullscreen > .container {
-    width: 100vw;
-    max-width: 100vw;
-    height: 100vh;
-    max-height: 100vh;
-    border-radius: 0;
-  }
+  /* NOT FULLSCREEN */
 
-  & > .background {
-    position: fixed;
-    z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    cursor: pointer;
-    transition: background-color $modal-transition-all-duration;
-  }
-
-  & > .container {
-
-    @include z-depth ( $modal-z-depth );
-    position: absolute;
+  &:not(.fullscreen) {
+    transform: translate(-50%, -50%) scale(1);
     top: 50%;
     left: 50%;
     max-width: $modal-max-width;
     max-height: $modal-max-height;
-    margin: auto;
-    transition-property: transform, opacity;
-    transition-duration: $modal-transition-all-duration;
-
-    & > .content {
-      overflow: auto;
-    }
-
   }
 
-  /* ANIMATIONS */
+  /* FULLSCREEN */
 
-  &:not(.active) {
+  &.fullscreen {
+    @include fill-fixed ();
+    transform: scale(1);
+    border-width: 0;
+    border-radius: 0;
+  }
 
-    pointer-events: none;
+  /* BACKGROUND */
 
-    & > .container {
-      transform: translate(-50%, -50%) scale(0.9);
+  &-background {
+    @include fill-fixed ();
+    z-index: $modal-background-z-index;
+    cursor: pointer;
+    transition: opacity $modal-transition-all-duration;
+    background-color: $modal-background-color;
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+
+    /* MODAL & BACKGROUND */
+
+    &,
+    + .modal-background {
+      pointer-events: none;
       opacity: 0;
     }
 
-  }
+    /* NOT FULLSCREEN */
 
-  &.active {
-
-    & > .background {
-      background-color: $modal-background-color;
+    &:not(.fullscreen) {
+      transform: translate(-50%, -50%) scale($modal-closed-scale);
     }
 
-    & > .container {
-      transform: translate(-50%, -50%) scale(1);
+    /* FULLSCREEN */
+
+    &.fullscreen {
+      transform: scale($modal-closed-scale);
     }
 
   }

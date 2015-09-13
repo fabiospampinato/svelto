@@ -4588,7 +4588,7 @@
 
 
 /* =========================================================================
- * Svelto - Modal v0.1.0
+ * Svelto - Modal v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4607,8 +4607,13 @@
     /* OPTIONS */
 
     options: {
+      classes: {
+        open: 'open'
+      },
       selectors: {
-        closer: '.modal-closer'
+        trigger: '.modal-trigger',
+        closer: '.modal-closer',
+        background: '.modal-background'
       },
       callbacks: {
         open: _.noop,
@@ -4622,17 +4627,31 @@
 
       this.$modal = this.$element;
 
+      this.id = this.$modal.attr ( 'id' );
+
+      this.$triggers = $(this.options.selectors.trigger + '[data-modal="' + this.id + '"]');
+      this.$closers = this.$modal.find ( this.options.selectors.closer );
+      this.$background = this.$modal.next ( this.options.selectors.background );
+
+      this._isOpen = this.$modal.hasClass ( this.options.classes.open );
+
     },
 
     _events: function () {
 
-      this._on ( 'click', this.options.selectors.closer, this.close );
+      /* TRIGGER */
+
+      this._on ( this.$triggers, $.Pointer.tap, this.open );
+
+      /* CLOSER & BACKGROUND */
+
+      this._on ( this.$closers.add ( this.$background ), $.Pointer.tap, this.close );
 
     },
 
     /* PRIVATE */
 
-    _handler_esc_keydown: function ( event ) {
+    __keydown: function ( event ) {
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
@@ -4644,23 +4663,43 @@
 
     /* PUBLIC */
 
+    isOpen: function () {
+
+      return this._isOpen;
+
+    },
+
+    toggle: function ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this._isOpen = force;
+
+        this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
+
+        this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
+
+        this._trigger ( this._isOpen ? 'open' : 'close' );
+
+      }
+
+    },
+
     open: function () {
 
-      this.$modal.addClass ( 'active' );
-
-      this._on ( $document, 'keydown', this._handler_esc_keydown );
-
-      this._trigger ( 'open' );
+      this.toggle ( true );
 
     },
 
     close: function () {
 
-      this.$modal.removeClass ( 'active' );
-
-      this._off ( $document, 'keydown', this._handler_esc_keydown );
-
-      this._trigger ( 'close' );
+      this.toggle ( false );
 
     }
 
@@ -4671,12 +4710,6 @@
   $(function () {
 
     $('.modal').modal ();
-
-    $('[data-modal-trigger]').on ( 'click', function () { //TODO: maybe do something like this for the other triggable widgets... so that we don't care if a trigger changes or is added dynamically //TODO: use delegation
-
-      $('#' + $(this).data ( 'modal-trigger' )).modal ( 'instance' ).open ();
-
-    });
 
   });
 

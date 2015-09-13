@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Center (Mixins) v0.1.1
+ * Svelto - Center (Mixins) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -34,32 +34,64 @@
 
 }
 
-@mixin center-transform ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+@mixin center-transform-absolute ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: absolute;
 
   @if $axis != x {
-    @include margin-vertical ( auto );
     top: 50%;
   }
 
   @if $axis != y {
-    @include margin-horizontal ( auto );
     left: 50%;
   }
 
   $translate-val: null;
 
   @if not($axis) {
+
     $translate-val: translate(-50%, -50%);
-  }
 
-  @else if $axis != x {
+  } @else if $axis != x {
+
     $translate-val: translateY(-50%);
+
+  } @else if $axis != y {
+
+    $translate-val: translateX(-50%);
+
   }
 
-  @else if $axis != y {
+  transform: $translate-val;
+
+}
+
+@mixin center-transform-fixed ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
+
+  position: fixed;
+
+  @if $axis != x {
+    top: 50%;
+  }
+
+  @if $axis != y {
+    left: 50%;
+  }
+
+  $translate-val: null;
+
+  @if not($axis) {
+
+    $translate-val: translate(-50%, -50%);
+
+  } @else if $axis != x {
+
+    $translate-val: translateY(-50%);
+
+  } @else if $axis != y {
+
     $translate-val: translateX(-50%);
+
   }
 
   transform: $translate-val;

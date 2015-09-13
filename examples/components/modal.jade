@@ -7,74 +7,80 @@ append main
   +divider-block Modals
 
   +multiple
-    +button(data-modal-trigger="modal-1").outlined Normal
-    +button(data-modal-trigger="modal-2").outlined Closable
-    +button(data-modal-trigger="modal-3").outlined No footer
-    +button(data-modal-trigger="modal-4").outlined No header
-    +button(data-modal-trigger="modal-5").outlined Only content
-    +button(data-modal-trigger="modal-6").outlined With buttons
-    +button(data-modal-trigger="modal-7").outlined Long content
-    +button(data-modal-trigger="modal-8").outlined Fullscreen
+    +modal-btn({ id: "1", title: "Normal" }).outlined 
+    +modal-btn({ id: "2", title: "Closable" }).outlined 
+    +modal-btn({ id: "3", title: "No footer" }).outlined 
+    +modal-btn({ id: "4", title: "No header" }).outlined 
+    +modal-btn({ id: "5", title: "Only content" }).outlined 
+    +modal-btn({ id: "6", title: "With buttons" }).outlined 
+    +modal-btn({ id: "7", title: "Long content" }).outlined 
+    +modal-btn({ id: "8", title: "Fullscreen" }).outlined 
 
 append body
-  +modal#modal-1
-    +container("Normal").xs-8
-      +card-block
-        +paragraph-sample
-      +card-footer The footer here
+  +card(id="modal-1").modal.xs-8
+    +card-header Header
+    +card-block
+      +paragraph-sample
+    +card-footer Footer
+  .modal-background
+  
+  +card(id="modal-2").modal.xs-8
+    +card-header 
+      +multiple
+        .spacer Closable
+        +button-icon("close").small.modal-closer.compact
+    +card-block
+      +paragraph-sample
+    +card-footer Footer
+  .modal-background
 
-  +modal#modal-2
-    +container.xs-8
-      +card-header("Closable")
-        +multiple-sub-right
-          +button-icon("close").small.modal-closer
-      +card-block
-        +paragraph-sample
-      +card-footer The footer here
+  +card(id="modal-3").modal.xs-8
+    +card-header No footer
+    +card-block
+      +paragraph-sample
+  .modal-background
 
+  +card(id="modal-4").modal.xs-8
+    +card-block
+      +paragraph-sample
+    +card-footer No header
+  .modal-background
 
-  +modal("No footer")#modal-3
-    +container("No footer").xs-8
-      +card-block
-        +paragraph-sample
+  +card(id="modal-5").modal.xs-8
+    +card-header Header
+    +card-block
+      +paragraph-sample
+  .modal-background
 
-  +modal#modal-4
-    +container.xs-8
-      +card-block
-        +paragraph-sample
-      +card-footer The footer here
+  +card(id="modal-6").modal.xs-8
+    +card-header Header
+    +card-block
+      +paragraph-sample
+    +card-footer 
+      +multiple
+        +button.outlined.modal-closer Closer
+        +button.primary No Closer
+        +button.secondary.modal-closer Closer
+  .modal-background
 
-  +modal#modal-5
-    +container.xs-8
-      +card-block
+  +card(id="modal-7").modal.xs-8
+    +card-header Long content
+    +card-block
         +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+        +paragraph-sample
+    +card-footer Footer
+  .modal-background
 
-  +modal#modal-6
-    +container("With buttons").xs-8
-      +card-block
+  +card(id="modal-8").modal.fullscreen
+    +card-header 
+      +multiple
+        .spacer Fullscreen
+        +button-icon("close").small.modal-closer.compact
+    +card-block
         +paragraph-sample
-      +card-footer
-        +multiple
-          +button.outlined.modal-closer Closer
-          +button.primary No Closer
-          +button.secondary.modal-closer Closer
-
-  +modal#modal-7
-    +container("Long content").xs-8
-      +card-block
-        +paragraph-sample
-        +paragraph-sample
-        +paragraph-sample
-        +paragraph-sample
-        +paragraph-sample
-        +paragraph-sample
-      +card-footer The footer here
-
-  +modal#modal-8.fullscreen
-    +container
-      +card-header("Fullscreen")
-        +multiple-sub-right
-          +button-icon("close").small.modal-closer
-      +card-block
-        +paragraph-sample
-      +card-footer The footer here
+    +card-footer Footer
+  .modal-background

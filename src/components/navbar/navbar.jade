@@ -14,7 +14,7 @@
   }
 
 mixin navbar-btn(options)
-  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-btn.navbar-trigger
+  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-trigger
     if options.title
       span= options.title
     if options.icon
