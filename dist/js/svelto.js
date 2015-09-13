@@ -3797,7 +3797,7 @@
 
 
 /* =========================================================================
- * Svelto - Flippable v0.1.0
+ * Svelto - Flippable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3816,13 +3816,17 @@
     /* OPTIONS */
 
     options: {
+      classes: {
+        flip: 'flipped'
+      },
       selectors: {
-        flipper: '.flipper'
+        front: '.flippable-front',
+        back: '.flippable-back',
+        flipper: '.flippable-trigger'
       },
       callbacks: {
         font: _.noop,
-        back: _.noop,
-        flipped: _.noop
+        back: _.noop
       }
     },
 
@@ -3831,29 +3835,51 @@
     _variables: function () {
 
       this.$flippable = this.$element;
-      this.$front = this.$flippable.find ( '.flippable-front' );
-      this.$back = this.$flippable.find ( '.flippable-back' );
+      this.$front = this.$flippable.find ( this.options.selectors.front );
+      this.$back = this.$flippable.find ( this.options.selectors.back );
+      this.$flippers = this.$flippable.find ( this.options.selectors.flipper );
 
-      this.isFlipped = this.$flippable.hasClass ( 'flipped' );
+      this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
 
     },
 
     _events: function () {
 
-      this._on ( 'click', this.options.selectors.flipper, this.flip );
+      this._on ( this.$flippers, $.Pointer.tap, this.flip );
 
     },
 
     /* PUBLIC */
 
-    flip: function () {
+    flip: function ( force ) {
 
-      this.isFlipped = !this.isFlipped;
+      if ( !_.isBoolean ( force ) ) {
 
-      this.$flippable.toggleClass ( 'flipped', this.isFlipped );
+        force = !this.isFlipped;
 
-      this._trigger ( this.isFlipped ? 'front' : 'back' );
-      this._trigger ( 'flipped' );
+      }
+
+      if ( force !== this.isFlipped ) {
+
+        this.isFlipped = force;
+
+        this.$flippable.toggleClass ( this.options.classes.flip, this.isFlipped );
+
+        this._trigger ( this.isFlipped ? 'back' : 'front' );
+
+      }
+
+    },
+
+    front: function () {
+
+      this.flip ( false );
+
+    },
+
+    back: function () {
+
+      this.flip ( true );
 
     }
 
@@ -3863,7 +3889,7 @@
 
   $(function () {
 
-    $('.flippable-wrp').flippable ();
+    $('.flippable').flippable ();
 
   });
 

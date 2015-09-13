@@ -1,71 +1,79 @@
 
 /* =========================================================================
- * Svelto - Flippable v0.1.0
+ * Svelto - Flippable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* FLIPPABLE */
 
-.flippable-wrp {
+.flippable {
 
-  position: relative;
-  margin-bottom: $gutter;
+  @extend .widget;
   perspective: $flippable-perspective;
 
-  & > .flippable {
+  /* SIDES */
 
-    transition: $flippable-transition-flip-duration;
-    transform-style: preserve-3d;
+  &-sides {
     @include fill ();
+    transition: transform $flippable-transition-flip-duration;
+    transform-style: preserve-3d;
+  }
 
-    & > .flippable-front, & > .flippable-back {
+  /* FRONT / BACK */
 
+  &-front,
+  &-back {
+
+    @include fill ();
+    @include last-child-no-gutter ();
+    backface-visibility: hidden;
+
+    > :only-child {
       @include fill ();
-      backface-visibility: hidden;
-
-      & > .container {
-        @include fill ();
-      }
-
-      & > *:last-child {
-        margin-bottom: 0 !important;
-      }
-
-    }
-
-    & > .flippable-front {
-      transform: rotateY(0deg);
-    }
-
-    & > .flippable-back {
-      position: absolute;
-      top: 0;
-      transform: rotateY(180deg);
     }
 
   }
 
-  &:not(.vertical).flipped > .flippable {
+  /* FRONT */
+
+  &-front {
+    transform: rotateY(0deg);
+  }
+
+  /* BACK */
+
+  &-back {
+    position: absolute;
+    top: 0;
     transform: rotateY(180deg);
   }
 
+  /* HORIZONTAL */
+
+  &:not(.vertical).flipped .flippable-sides {
+    transform: rotateY(180deg);
+  }
+
+  /* VERTICAL */
+
   &.vertical {
 
-    & > .flippable {
+    .flippable-sides {
 
-       transform-origin: 100% 50%;
+      transform-origin: 100% 50%;
 
-      & > .flippable-back {
+      .flippable-back {
         transform: rotateX(180deg);
       }
 
     }
 
-    &.flipped > .flippable {
+    &.flipped .flippable-sides {
       transform: rotateX(-180deg);
     }
 

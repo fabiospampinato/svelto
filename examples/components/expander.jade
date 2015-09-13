@@ -42,7 +42,7 @@ append body-end
   +script.
     function expanders_get_all () {
       var gets = _.map ( $('.expander'), function ( expander ) {
-        return $(expander).expander ( 'instance' ).isOpen ();
+        return $(expander).expander ( 'isOpen' );
       });
       $.noty ( gets.join ( ' - ' ) );
     }

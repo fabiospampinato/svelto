@@ -70,14 +70,14 @@ append body-end
   +script.
     function accordions_get_all () {
       _.each ( $('.accordion'), function ( accordion ) {
-        $.noty ( $(accordion).accordion ( 'instance' ).areOpen ().join ( ' - ' ) );
+        $.noty ( $(accordion).accordion ( 'areOpen' ).join ( ' - ' ) );
       });
     }
     function accordion_api_all ( action ) {
       $('.accordion').each ( function () {
         var $accordion = $(this);
         $accordion.children ( '.expander' ).each ( function ( index ) {
-          $accordion.accordion ( 'instance' )[action]( index );
+          $accordion.accordion ( action, index );
         });
       })
     }

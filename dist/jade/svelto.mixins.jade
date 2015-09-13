@@ -51,30 +51,6 @@ mixin breadcrumb-divider(icon)
 
 
 //- =========================================================================
-//- Svelto - Card v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin card
-  .card&attributes(attributes)
-    block
-
-mixin card-header
-  .card-header&attributes(attributes)
-      block
-
-mixin card-block
-  .card-block&attributes(attributes)
-    block
-
-mixin card-footer
-  .card-footer&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Button v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -141,6 +117,81 @@ mixin button-tag
 
 
 //- =========================================================================
+//- Svelto - Card v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin card
+  .card&attributes(attributes)
+    block
+
+mixin card-header
+  .card-header&attributes(attributes)
+      block
+
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Checkbox v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+mixin checkbox(options)
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.checked
+      if options.name
+        input(type="radio" name=name value=value checked)
+      else
+        input(type="radio" value=value checked)
+    else
+      if options.name
+        input(type="radio" name=name value=value)
+      else
+        input(type="radio" value=value)
+    if options.title
+      span= options.title
+    +icon(options.icons.on)(class=options.colors.on).icon-on
+    +icon(options.icons.off)(class=options.colors.off).icon-off
+
+
+//- =========================================================================
 //- Svelto - Chat v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -201,57 +252,6 @@ mixin chat-msg(options)
               if options.permissions.delete
                 +button-icon("delete")(title="Delete").small.outlined.compact
         +card-block= options.message.content
-
-
-//- =========================================================================
-//- Svelto - Checkbox v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-//- Options
-  {
-    name: '', // Input name
-    title: '', // Checkbox title
-    value: '', // Input value
-    checked: '', // Input checked
-    colors: { // Colors to use for icons
-      on: '', // On color
-      off: '' // Off color
-    },
-    icons: { // Icons to use
-      on: '', // On icon
-      off: '' // Off icon
-    }
-  }
-
-mixin checkbox(options)
-  - options = options || {};
-  - options.value = options.value || "";
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.icons = options.icons || {};
-  - options.icons.on = options.icons.on || "check_box";
-  - options.icons.off = options.icons.off || "check_box_outline_blank";
-  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
-    if options.checked
-      if options.name
-        input(type="radio" name=name value=value checked)
-      else
-        input(type="radio" value=value checked)
-    else
-      if options.name
-        input(type="radio" name=name value=value)
-      else
-        input(type="radio" value=value)
-    if options.title
-      span= options.title
-    +icon(options.icons.on)(class=options.colors.on).icon-on
-    +icon(options.icons.off)(class=options.colors.off).icon-off
 
 
 //- =========================================================================
@@ -466,15 +466,15 @@ mixin flag(flag)
 
 
 //- =========================================================================
-//- Svelto - Flippable v0.1.0
+//- Svelto - Flippable v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
 mixin flippable
-  .flippable-wrp&attributes(attributes)
-    .flippable
+  .flippable&attributes(attributes)
+    .flippable-sides
       block
 
 mixin flippable-front
@@ -977,6 +977,35 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(options)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !options.empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
+
+
+//- =========================================================================
 //- Svelto - Parallax v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1016,35 +1045,6 @@ mixin parallax-layer-base
 mixin parallax-layer-foreground
   +parallax-layer&attributes(attributes).parallax-layer-foreground
     block
-
-
-//- =========================================================================
-//- Svelto - Placeholder v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    width: '', // Placeholder width
-    height: '', // Placeholder height
-    empty: '' // Placeholder is empty or not
-  }
-
-mixin placeholder(options)
-  - options = options || {};
-  - options.width = options.width || 0;
-  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
-  - options.height = options.height || 0;
-  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
-  - options.empty = options.empty || false;
-  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !options.empty
-      if block
-        block
-      else
-        = options.width + " - " + options.height
 
 
 //- =========================================================================
