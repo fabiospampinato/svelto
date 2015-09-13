@@ -23,9 +23,26 @@
       width: $percentage;
     }
 
-    .multiple > :not(.multiple).xs-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).xs-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    //FIXME: Is too ugly, and we generate too much CSS
+
+    %xs-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
+    }
+
+    .multiple > .xs-#{$nr} {
+
+      &:not(.multiple) {
+        @extend %xs-#{$nr}-without-gutter;
+      }
+
+      &.multiple {
+
+        &.no-wrap, &.vertical, &.joined {
+          @extend %xs-#{$nr}-without-gutter;
+        }
+
+      }
+
     }
 
   }
@@ -44,9 +61,26 @@
       width: $percentage;
     }
 
-    .multiple > :not(.multiple).sm-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).sm-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    //FIXME: Is too ugly, and we generate too much CSS
+
+    %sm-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
+    }
+
+    .multiple > .sm-#{$nr} {
+
+      &:not(.multiple) {
+        @extend %sm-#{$nr}-without-gutter;
+      }
+
+      &.multiple {
+
+        &.no-wrap, &.vertical, &.joined {
+          @extend %sm-#{$nr}-without-gutter;
+        }
+
+      }
+
     }
 
   }
@@ -65,9 +99,26 @@
       width: $percentage;
     }
 
-    .multiple > :not(.multiple).md-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).md-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    //FIXME: Is too ugly, and we generate too much CSS
+
+    %md-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
+    }
+
+    .multiple > .md-#{$nr} {
+
+      &:not(.multiple) {
+        @extend %md-#{$nr}-without-gutter;
+      }
+
+      &.multiple {
+
+        &.no-wrap, &.vertical, &.joined {
+          @extend %md-#{$nr}-without-gutter;
+        }
+
+      }
+
     }
 
   }
@@ -86,9 +137,26 @@
       width: $percentage;
     }
 
-    .multiple > :not(.multiple).lg-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).lg-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    //FIXME: Is too ugly, and we generate too much CSS
+
+    %lg-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
+    }
+
+    .multiple > .lg-#{$nr} {
+
+      &:not(.multiple) {
+        @extend %lg-#{$nr}-without-gutter;
+      }
+
+      &.multiple {
+
+        &.no-wrap, &.vertical, &.joined {
+          @extend %lg-#{$nr}-without-gutter;
+        }
+
+      }
+
     }
 
   }
@@ -107,9 +175,26 @@
       width: $percentage;
     }
 
-    .multiple > :not(.multiple).xl-#{$nr}, //FIXME: Is too ugly, and we generate too much CSS
-    .multiple > .multiple:not(:not(.no-wrap):not(.vertical):not(.joined)).xl-#{$nr} { //FIXME: Is too ugly, and we generate too much CSS
+    //FIXME: Is too ugly, and we generate too much CSS
+
+    %xl-#{$nr}-without-gutter {
       width: calc(#{$percentage} - #{$gutter});
+    }
+
+    .multiple > .xl-#{$nr} {
+
+      &:not(.multiple) {
+        @extend %xl-#{$nr}-without-gutter;
+      }
+
+      &.multiple {
+
+        &.no-wrap, &.vertical, &.joined {
+          @extend %xl-#{$nr}-without-gutter;
+        }
+
+      }
+
     }
 
   }

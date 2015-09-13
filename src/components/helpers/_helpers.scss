@@ -237,7 +237,7 @@
   z-index: $dragging-z-index;
 }
 
-.centered:not(.multiple):not(table.table thead th) { //TODO: Move it to it's own decorator
+.centered:not(.multiple) { //TODO: Move it to it's own decorator
   @include center-margin ();
 }
 
