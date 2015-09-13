@@ -37,6 +37,21 @@ p > a,
 
 }
 
+
+/* SPAN / A */ //FIXME: Ugly fix for making them widgets when they are not in a paragraph 
+
+span,
+a {
+
+  margin-bottom: $gutter;
+
+  p > span,
+  p > a {
+    margin-bottom: 0;
+  }
+
+}
+
 /* HEADERS */
 
 h1, h2, h3, h4, h5, h6 {

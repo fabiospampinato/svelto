@@ -135,7 +135,7 @@
       Y: endXY.Y - startXY.Y
     };
 
-    if ( target === event.target ) {
+    if ( target === event.target && ( event.type === 'touchend' || ( event.type === 'mouseup' && event.button === 0 ) ) ) {
 
       end_timestamp = event.timeStamp || _.now ();
 

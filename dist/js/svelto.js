@@ -222,105 +222,10 @@
 
 
 /* =========================================================================
- * Svelto - Easing v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-//INFO: x: nothing, it's here just for compatibility,
-//    t: current time,
-//    b: start value,
-//    c: end value,
-//    d: duration
-
-;(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* EASING */
-
-  $.easing = {
-    def: 'easeOutQuad',
-    swing: function ( x, t, b, c, d ) {
-      return $.easing[$.easing.def]( x, t, b, c, d );
-    },
-    linear: function ( x, t, b, c, d ) {
-      return ( c - b ) / d * t + b;
-    },
-    easeInQuad: function ( x, t, b, c, d ) {
-      return c * ( t /= d ) * t + b;
-    },
-    easeOutQuad: function ( x, t, b, c, d ) {
-      return -c * ( t /= d ) * ( t - 2 ) + b;
-    },
-    easeInOutQuad: function ( x, t, b, c, d ) {
-      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t + b;
-      return -c / 2 * ( ( --t ) * ( t - 2 ) - 1 ) + b;
-    },
-    easeInCubic: function ( x, t, b, c, d ) {
-      return c * ( t /= d ) * t * t + b;
-    },
-    easeOutCubic: function ( x, t, b, c, d ) {
-      return c * ( ( t = t / d - 1 ) * t * t + 1 ) + b;
-    },
-    easeInOutCubic: function ( x, t, b, c, d ) {
-      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t + b;
-      return c / 2 * ( ( t -= 2 ) * t * t + 2 ) + b;
-    },
-    easeInQuart: function ( x, t, b, c, d ) {
-      return c * ( t /= d ) * t * t * t + b;
-    },
-    easeOutQuart: function ( x, t, b, c, d ) {
-      return -c * ( ( t = t / d - 1 ) * t * t * t - 1 ) + b;
-    },
-    easeInOutQuart: function ( x, t, b, c, d ) {
-      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t + b;
-      return -c / 2 * ( ( t -= 2 ) * t * t * t - 2 ) + b;
-    },
-    easeInQuint: function ( x, t, b, c, d ) {
-      return c * ( t /= d ) * t * t * t * t + b;
-    },
-    easeOutQuint: function ( x, t, b, c, d ) {
-      return c * ( ( t = t / d - 1 ) * t * t * t * t + 1 ) + b;
-    },
-    easeInOutQuint: function ( x, t, b, c, d ) {
-      if ( ( t /= d / 2 ) < 1 ) return c / 2 * t * t * t * t * t + b;
-      return c / 2 * ( ( t -= 2 ) * t * t * t * t + 2 ) + b;
-    },
-    easeInSine: function ( x, t, b, c, d ) {
-      return -c * Math.cos ( t / d * ( Math.PI / 2 ) ) + c + b;
-    },
-    easeOutSine: function ( x, t, b, c, d ) {
-      return c * Math.sin ( t / d * ( Math.PI / 2 ) ) + b;
-    },
-    easeInOutSine: function ( x, t, b, c, d ) {
-      return -c / 2 * ( Math.cos ( Math.PI * t / d ) - 1 ) + b;
-    },
-    easeInExpo: function ( x, t, b, c, d ) {
-      return ( t == 0 ) ? b : c * Math.pow ( 2, 10 * ( t / d - 1 ) ) + b;
-    },
-    easeOutExpo: function ( x, t, b, c, d ) {
-      return ( t == d ) ? b + c : c * ( -Math.pow ( 2, -10 * t / d ) + 1) + b;
-    },
-    easeInOutExpo: function ( x, t, b, c, d ) {
-      if ( t == 0) return b;
-      if ( t == d) return b + c;
-      if ( ( t /= d / 2 ) < 1) return c / 2 * Math.pow ( 2, 10 * ( t - 1 ) ) + b;
-      return c / 2 * ( -Math.pow ( 2, -10 * --t ) + 2 ) + b;
-    }
-  };
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
  * Svelto - jQuery (Extras) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../easing/easing.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -606,8 +511,8 @@
     /* OPTIONS */
 
     options: {
-      selectors: {}, //INFO: Selectors to use inside the widget
       classes: {}, //INFO: CSS classes to attach inside the widget
+      selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       callbacks: {}, //INFO: Callbacks to trigger on specific events
       disabled: false //INFO: Determines if the widget is enabled or disabled
@@ -1170,7 +1075,7 @@
       Y: endXY.Y - startXY.Y
     };
 
-    if ( target === event.target ) {
+    if ( target === event.target && ( event.type === 'touchend' || ( event.type === 'mouseup' && event.button === 0 ) ) ) {
 
       end_timestamp = event.timeStamp || _.now ();
 
@@ -1417,13 +1322,15 @@
 
     $.fn[name] = function ( options ) {
 
-      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: nothing to work on
+      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: Nothing to work on
 
       var isMethodCall = _.isString ( options ),
           args = _.tail ( arguments ),
           returnValue = this;
 
       if ( isMethodCall ) {
+
+        console.lo
 
         // METHOD CALL
 
@@ -1504,7 +1411,7 @@
 
 
 /* =========================================================================
- * Svelto - Accordion v0.1.0
+ * Svelto - Expander v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1516,52 +1423,166 @@
 
   'use strict';
 
+  /* EXPANDER */
+
+  $.factory ( 'svelto.expander', {
+
+    /* OPTIONS */
+
+    options: {
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        expander: '.expander',
+        toggler: '.expander-toggler'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$expander = this.$element;
+      this.$togglers = this.$expander.find ( this.options.selectors.toggler );
+
+      this._isOpen = this.$expander.hasClass ( this.options.classes.open );
+
+    },
+
+    _events: function () {
+
+      this._on ( this.$togglers, $.Pointer.tap, this.toggle );
+
+    },
+
+    /* PUBLIC */
+
+    isOpen: function () {
+
+      return this._isOpen;
+
+    },
+
+    toggle: function ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this._isOpen = force;
+
+        this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
+
+        this._trigger ( this._isOpen ? 'open' : 'close' );
+
+      }
+
+    },
+
+    open: function () {
+
+      this.toggle ( true );
+
+    },
+
+    close: function () {
+
+      this.toggle ( false );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.expander').expander ();
+
+  });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Accordion v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * @requires ../expander/expander.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
   /* ACCORDION */
 
   $.factory ( 'svelto.accordion', {
+
+    /* OPTIONS */
+
+    options: {
+      classes: {
+        multiple: 'multiple-open'
+      },
+      selectors: {
+        expander: '.expander'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
 
     /* SPECIAL */
 
     _variables: function () {
 
       this.$accordion = this.$element;
-      this.$expanders = this.$accordion.children ( '.expander' );
+      this.$expanders = this.$accordion.children ( this.options.selectors.expander );
+      this.expandersNr = this.$expanders.length;
 
-      this.expanders_instances = Array ( this.$expanders.length );
+      this.expandersInstances = _.map ( this.$expanders, function ( expander ) {
 
-      this.isMultiple = this.$accordion.hasClass ( 'multiple' );
+        return $(expander).expander ( 'instance' );
 
-    },
+      });
 
-    _init: function () {
-
-      for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
-
-        this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
-
-      }
+      this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
 
     },
 
     _events: function () {
 
-      this._on ( 'expander:open', '.expander', this._handler_open );
+      if ( !this.isMultiple ) {
+
+        this._on ( this.$expanders, 'expander:open', this.__close_others );
+
+      }
 
     },
 
     /* OPEN */
 
-    _handler_open: function ( event, data, node ) {
+    __close_others: function ( event, data, node ) {
 
-      if ( !this.isMultiple ) {
+      for ( var i = 0; i < this.expandersNr; i++ ) {
 
-        for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+        if ( this.$expanders[i] !== node ) {
 
-          if ( this.$expanders[i] !== node ) {
-
-            this.expanders_instances[i].close ();
-
-          }
+          this.expandersInstances[i].close ();
 
         }
 
@@ -1571,51 +1592,50 @@
 
     /* PUBLIC */
 
-    toggle: function ( index ) {
+    areOpen: function () {
 
-      this.expanders_instances[index].toggle ();
+      return _.map ( this.expandersInstances, function ( instance ) {
+
+        return instance.isOpen ();
+
+      });
 
     },
 
-    toggleAll: function () {
+    toggle: function ( index, force ) {
 
-      _.each ( this.expanders_instances, function ( instance ) {
+      var instance = this.expandersInstances[index],
+          isOpen = instance.isOpen ();
 
-        instance.toggle ();
+      if ( !_.isBoolean ( force ) ) {
 
-      });
+        force = !isOpen;
+
+      }
+
+      if ( force !== isOpen ) {
+
+        var action = force ? 'open' : 'close';
+
+        instance[action]();
+
+        this._trigger ( action, {
+          index: index
+        });
+
+      }
 
     },
 
     open: function ( index ) {
 
-      this.expanders_instances[index].open ();
-
-    },
-
-    openAll: function () {
-
-      _.each ( this.expanders_instances, function ( instance ) {
-
-        instance.open ();
-
-      });
+      this.toggle ( index, true );
 
     },
 
     close: function ( index ) {
 
-      this.expanders_instances[index].close ();
-
-    },
-
-    closeAll: function () {
-
-      _.each ( this.expanders_instances, function ( instance ) {
-
-        instance.close ();
-
-      });
+      this.toggle ( index, false );
 
     }
 
@@ -1758,7 +1778,7 @@
 
 
 /* =========================================================================
- * Svelto - Blurred v0.1.0
+ * Svelto - Blurred v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1770,7 +1790,7 @@
 
   'use strict';
 
-  /* BLUR */
+  /* BLURRED */
 
   $.fn.blurred = function ( force ) {
 
@@ -3735,116 +3755,6 @@
   $(function () {
 
     $('.dropdown').dropdown ();
-
-  });
-
-}( jQuery, _, window, document ));
-
-
-/* =========================================================================
- * Svelto - Expander v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../widget/factory.js
- * ========================================================================= */
-
-;(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* EXPANDER */
-
-  $.factory ( 'svelto.expander', {
-
-    /* OPTIONS */
-
-    options: {
-      selectors: {
-        toggler: '.expander-toggler',
-        content: '.container-content'
-      },
-      delay: {
-        open: 250,
-        close: 250
-      },
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    },
-
-    /* SPECIAL */
-
-    _variables: function () {
-
-      this.$expander = this.$element;
-      this.$content = this.$expander.find ( this.options.selectors.content );
-
-      this.opened = false;
-
-    },
-
-    _init: function () {
-
-      if ( this.$expander.hasClass ( 'opened' ) ) {
-
-        this.open ();
-
-      }
-
-    },
-
-    _events: function () {
-
-      this._on ( 'click', this.options.selectors.toggler, this.toggle );
-
-    },
-
-    /* PUBLIC */
-
-    toggle: function ( force ) {
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this.opened;
-
-      }
-
-      if ( force !== this.opened ) {
-
-        this.opened = force;
-
-        this.$expander.toggleClass ( 'opened', this.opened );
-
-        this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
-
-        this._trigger ( this.opened ? 'open' : 'close' );
-
-      }
-
-    },
-
-    open: function () {
-
-      this.toggle ( true );
-
-    },
-
-    close: function () {
-
-      this.toggle ( false);
-
-    }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.expander').expander ();
 
   });
 

@@ -13,6 +13,7 @@
 .blurred {
   filter: url('/blur.svg#blur') !important;
   filter: blur($blurred-blur-amount) !important;
+  transition: filter $blurred-transition-duration !important;
 }
 
 /* BORDER */

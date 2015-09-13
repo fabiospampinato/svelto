@@ -40,8 +40,8 @@
     /* OPTIONS */
 
     options: {
-      selectors: {}, //INFO: Selectors to use inside the widget
       classes: {}, //INFO: CSS classes to attach inside the widget
+      selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       callbacks: {}, //INFO: Callbacks to trigger on specific events
       disabled: false //INFO: Determines if the widget is enabled or disabled

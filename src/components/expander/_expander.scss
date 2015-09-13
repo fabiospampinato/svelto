@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Expander v0.1.0
+ * Svelto - Expander v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,54 +10,38 @@
 
 /* EXPANDER */
 
-//TODO: add support for vertical expander
+//TODO: Add support for horizontal expander -> basically add support for horizontal cards
+//TODO: Add ability to rotate the proper icons (the pointing arrow for example) if the expander is open or close
+//TODO: Add a sliding animation
 
 .expander {
 
-  & > .container-header {
+  /* TOGGLER */
 
-    transition: border-radius $expander-header-transition-border-radius-duration;
-    border-bottom-right-radius: inherit;
-    border-bottom-left-radius: inherit;
+  //INFO: The toggler should also have the `actionable` class to provide a better feedback
 
-    & .icon-keyboard_arrow_down {
-      transition: transform $expander-arrow-transition-rotate-duration;
-    }
-
+  &-toggler {
+    cursor: pointer;
   }
 
-  & > .container-content {
-    display: none;
-    padding-top: $gutter;
-    padding-bottom: $gutter;
-    transition-duration: $expander-content-transition-padding-duration;
-    transition-property: opacity;
-    opacity: 0;
-  }
+  /* CLOSED */
 
-  &.opened {
+  &:not(.open) {
 
-    & > .container-header {
+    /* IS A CARD */
 
-      border-bottom-right-radius: 0;
-      border-bottom-left-radius: 0;
+    &.card {
 
-      & .multiple-sub {
-
-        &.left .icon-keyboard_arrow_down {
-          transform: rotate(-180deg);
-        }
-
-        &.right .icon-keyboard_arrow_down {
-          transform: rotate(180deg);
-        }
-
+      .card-header {
+        @include border-bottom-radius ( inherit );
       }
 
     }
 
-    & > .container-content {
-      opacity: 1;
+    /* CONTENT */
+
+    .expander-content {
+      display: none;
     }
 
   }

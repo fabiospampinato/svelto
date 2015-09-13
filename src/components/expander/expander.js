@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Expander v0.1.0
+ * Svelto - Expander v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -19,13 +19,12 @@
     /* OPTIONS */
 
     options: {
-      selectors: {
-        toggler: '.expander-toggler',
-        content: '.container-content'
+      classes: {
+        open: 'open'
       },
-      delay: {
-        open: 250,
-        close: 250
+      selectors: {
+        expander: '.expander',
+        toggler: '.expander-toggler'
       },
       callbacks: {
         open: _.noop,
@@ -38,47 +37,41 @@
     _variables: function () {
 
       this.$expander = this.$element;
-      this.$content = this.$expander.find ( this.options.selectors.content );
+      this.$togglers = this.$expander.find ( this.options.selectors.toggler );
 
-      this.opened = false;
-
-    },
-
-    _init: function () {
-
-      if ( this.$expander.hasClass ( 'opened' ) ) {
-
-        this.open ();
-
-      }
+      this._isOpen = this.$expander.hasClass ( this.options.classes.open );
 
     },
 
     _events: function () {
 
-      this._on ( 'click', this.options.selectors.toggler, this.toggle );
+      this._on ( this.$togglers, $.Pointer.tap, this.toggle );
 
     },
 
     /* PUBLIC */
 
+    isOpen: function () {
+
+      return this._isOpen;
+
+    },
+
     toggle: function ( force ) {
 
       if ( !_.isBoolean ( force ) ) {
 
-        force = !this.opened;
+        force = !this._isOpen;
 
       }
 
-      if ( force !== this.opened ) {
+      if ( force !== this._isOpen ) {
 
-        this.opened = force;
+        this._isOpen = force;
 
-        this.$expander.toggleClass ( 'opened', this.opened );
+        this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
 
-        this.$content[this.opened ? 'slideDown' : 'slideUp']( this.options.delay.close ); //FIXME: the animation is too expensive
-
-        this._trigger ( this.opened ? 'open' : 'close' );
+        this._trigger ( this._isOpen ? 'open' : 'close' );
 
       }
 
@@ -92,7 +85,7 @@
 
     close: function () {
 
-      this.toggle ( false);
+      this.toggle ( false );
 
     }
 

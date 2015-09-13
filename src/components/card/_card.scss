@@ -11,6 +11,8 @@
 
 /* CARD */
 
+//FIXME: There's an overflow bug when scrolling the block-content, it goes a bit over the footer
+
 .card {
 
   @extend .widget;
@@ -38,6 +40,7 @@
 
   &-header,
   &-footer {
+    @include sub-multiple-centered ();
     flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
   }
 

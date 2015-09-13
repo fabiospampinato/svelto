@@ -519,7 +519,7 @@ th {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
- * Svelto - Others (Mixins) v0.1.1
+ * Svelto - Others (Mixins) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2222,108 +2222,6 @@ th {
  * @requires ../outline/_settings.scss
  * ========================================================================= */
 /* =========================================================================
- * Svelto - Expander (Settings) v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* HEADER */
-/* ARROW */
-/* CONTENT */
-/* =========================================================================
- * Svelto - Expander v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* EXPANDER */
-.expander > .container-header {
-  transition: border-radius 0.35s;
-  border-bottom-right-radius: inherit;
-  border-bottom-left-radius: inherit;
-}
-
-.expander > .container-header .icon-keyboard_arrow_down {
-  transition: -webkit-transform 0.35s;
-  transition: transform 0.35s;
-}
-
-.expander > .container-content {
-  display: none;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  transition-duration: 0.35s;
-  transition-property: opacity;
-  opacity: 0;
-}
-
-.expander.opened > .container-header {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.expander.opened > .container-header .multiple-sub.left .icon-keyboard_arrow_down {
-  -webkit-transform: rotate(-180deg);
-          transform: rotate(-180deg);
-}
-
-.expander.opened > .container-header .multiple-sub.right .icon-keyboard_arrow_down {
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-}
-
-.expander.opened > .container-content {
-  opacity: 1;
-}
-
-/* =========================================================================
- * Svelto - Accordion v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * @requires ../expander/_expander.scss
- * ========================================================================= */
-.accordion {
-  margin-bottom: 10px;
-}
-
-.accordion > .expander {
-  margin-bottom: 0;
-}
-
-.accordion > .expander:not(:last-child) {
-  margin-bottom: -1px;
-  border-bottom-width: 0;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.accordion > .expander:not(:last-child) > .header {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
-.accordion > .expander:not(:first-child) {
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
-}
-
-/* =========================================================================
- * Svelto - Toolbar (Settings) v0.2.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* TOOLBAR */
-/* =========================================================================
  * Svelto - Widget (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2339,28 +2237,28 @@ th {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .toolbar, label, .label, .button, .container, .card-header,
+.widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
 .card-footer, footer, .image-wrp .image-caption, .card, .chat-msg .chat-msg-sender-name, .embedded, i.icon, .image-wrp, .infobar-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
-.widget > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
+.widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
 .card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, i.icon > :last-child, .image-wrp > :last-child, .infobar-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
+.widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
 .card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .infobar-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.toolbar, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
+.widget.disabled, .disabled.accordion, .disabled.toolbar, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.placeholder, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, .widget[class*="-disabled"], [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
+.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, i.disabled.icon, .disabled.image-wrp, .disabled.infobar-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.placeholder, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
 [class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].infobar-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
   cursor: default !important;
@@ -2368,7 +2266,98 @@ th {
 }
 
 /* =========================================================================
- * Svelto - Toolbar v0.2.0
+ * Svelto - Expander (Settings) v0.3.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* EXPANDER */
+/* =========================================================================
+ * Svelto - Expander v0.3.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* EXPANDER */
+.expander {
+  /* TOGGLER */
+  /* CLOSED */
+}
+
+.expander-toggler {
+  cursor: pointer;
+}
+
+.expander:not(.open) {
+  /* IS A CARD */
+  /* CONTENT */
+}
+
+.expander:not(.open).card .card-header {
+  border-bottom-right-radius: inherit;
+  border-bottom-left-radius: inherit;
+}
+
+.expander:not(.open) .expander-content {
+  display: none;
+}
+
+/* =========================================================================
+ * Svelto - Accordion v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../widget/_widget.scss
+ * @requires ../expander/_expander.scss
+ * ========================================================================= */
+.accordion {
+  /* EXPANDER */
+}
+
+.accordion .expander {
+  margin-bottom: 0;
+}
+
+.accordion .expander:not(:first-child) {
+  /* IS CARD */
+  /* OUTLINED */
+}
+
+.accordion .expander:not(:first-child).card .card-header {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.accordion .expander:not(:first-child).outlined {
+  margin-top: -2px;
+}
+
+.accordion .expander:not(:last-child) {
+  /* IS CARD */
+}
+
+.accordion .expander:not(:last-child).card .card-header {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+/* =========================================================================
+ * Svelto - Toolbar (Settings) v0.3.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* TOOLBAR */
+/* =========================================================================
+ * Svelto - Toolbar v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2378,24 +2367,13 @@ th {
  * ========================================================================= */
 /* TOOLBAR */
 .toolbar {
-  height: 56px;
-  padding: 0 1em;
-  /* MULTIPLE */
+  padding: 0.5em 1em;
 }
 
 .toolbar .multiple {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-  height: 100%;
-  /* CHILDREN */
-}
-
-.toolbar .multiple > * {
-  margin-bottom: 0;
 }
 
 /* =========================================================================
@@ -3275,6 +3253,7 @@ label {
           filter: url("/blur.svg#blur") !important;
   -webkit-filter: blur(3px) !important;
           filter: blur(3px) !important;
+  transition: -webkit-filter 0.15s, filter 0.15s !important;
 }
 
 /* BORDER */
@@ -3639,6 +3618,13 @@ button {
   -webkit-flex-shrink: 0;
       -ms-flex-negative: 0;
           flex-shrink: 0;
+}
+
+.card-header .multiple,
+.card-footer .multiple {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .card-block {
@@ -10879,6 +10865,19 @@ p > a:hover:after,
 .link:hover:after {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
+}
+
+/* SPAN / A */
+span,
+a {
+  margin-bottom: 10px;
+}
+
+span p > span,
+span p > a,
+a p > span,
+a p > a {
+  margin-bottom: 0;
 }
 
 /* HEADERS */

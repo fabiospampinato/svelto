@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Accordion v0.1.0
+ * Svelto - Accordion v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
+ * @requires ../expander/expander.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -16,48 +17,58 @@
 
   $.factory ( 'svelto.accordion', {
 
+    /* OPTIONS */
+
+    options: {
+      classes: {
+        multiple: 'multiple-open'
+      },
+      selectors: {
+        expander: '.expander'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
+
     /* SPECIAL */
 
     _variables: function () {
 
       this.$accordion = this.$element;
-      this.$expanders = this.$accordion.children ( '.expander' );
+      this.$expanders = this.$accordion.children ( this.options.selectors.expander );
+      this.expandersNr = this.$expanders.length;
 
-      this.expanders_instances = Array ( this.$expanders.length );
+      this.expandersInstances = _.map ( this.$expanders, function ( expander ) {
 
-      this.isMultiple = this.$accordion.hasClass ( 'multiple' );
+        return $(expander).expander ( 'instance' );
 
-    },
+      });
 
-    _init: function () {
-
-      for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
-
-        this.expanders_instances[i] = this.$expanders.eq ( i ).expander ( 'instance' );
-
-      }
+      this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
 
     },
 
     _events: function () {
 
-      this._on ( 'expander:open', '.expander', this._handler_open );
+      if ( !this.isMultiple ) {
+
+        this._on ( this.$expanders, 'expander:open', this.__close_others );
+
+      }
 
     },
 
     /* OPEN */
 
-    _handler_open: function ( event, data, node ) {
+    __close_others: function ( event, data, node ) {
 
-      if ( !this.isMultiple ) {
+      for ( var i = 0; i < this.expandersNr; i++ ) {
 
-        for ( var i = 0, l = this.$expanders.length; i < l; i++ ) {
+        if ( this.$expanders[i] !== node ) {
 
-          if ( this.$expanders[i] !== node ) {
-
-            this.expanders_instances[i].close ();
-
-          }
+          this.expandersInstances[i].close ();
 
         }
 
@@ -67,51 +78,50 @@
 
     /* PUBLIC */
 
-    toggle: function ( index ) {
+    areOpen: function () {
 
-      this.expanders_instances[index].toggle ();
+      return _.map ( this.expandersInstances, function ( instance ) {
+
+        return instance.isOpen ();
+
+      });
 
     },
 
-    toggleAll: function () {
+    toggle: function ( index, force ) {
 
-      _.each ( this.expanders_instances, function ( instance ) {
+      var instance = this.expandersInstances[index],
+          isOpen = instance.isOpen ();
 
-        instance.toggle ();
+      if ( !_.isBoolean ( force ) ) {
 
-      });
+        force = !isOpen;
+
+      }
+
+      if ( force !== isOpen ) {
+
+        var action = force ? 'open' : 'close';
+
+        instance[action]();
+
+        this._trigger ( action, {
+          index: index
+        });
+
+      }
 
     },
 
     open: function ( index ) {
 
-      this.expanders_instances[index].open ();
-
-    },
-
-    openAll: function () {
-
-      _.each ( this.expanders_instances, function ( instance ) {
-
-        instance.open ();
-
-      });
+      this.toggle ( index, true );
 
     },
 
     close: function ( index ) {
 
-      this.expanders_instances[index].close ();
-
-    },
-
-    closeAll: function () {
-
-      _.each ( this.expanders_instances, function ( instance ) {
-
-        instance.close ();
-
-      });
+      this.toggle ( index, false );
 
     }
 

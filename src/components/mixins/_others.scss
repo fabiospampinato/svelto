@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Others (Mixins) v0.1.1
+ * Svelto - Others (Mixins) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,7 +8,7 @@
  * @asdrsaedsquires ../widget/_settings.scss
  * ========================================================================= */
 
-//TODO: Move to their own proper file
+//TODO: Move to their own proper files
 
 @mixin last-child-no-gutter () {
 
@@ -20,6 +20,14 @@
       margin-bottom: -10px !important; //FIXME: We should inherit this from the settings
     }
 
+  }
+
+}
+
+@mixin sub-multiple-centered () {
+
+  .multiple { //INFO: Both the immediate child and those inside a `.multiple-sub`
+    align-items: center;
   }
 
 }

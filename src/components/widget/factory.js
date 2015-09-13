@@ -186,13 +186,15 @@
 
     $.fn[name] = function ( options ) {
 
-      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: nothing to work on
+      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: Nothing to work on
 
       var isMethodCall = _.isString ( options ),
           args = _.tail ( arguments ),
           returnValue = this;
 
       if ( isMethodCall ) {
+
+        console.lo
 
         // METHOD CALL
 

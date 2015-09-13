@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Toolbar v0.2.0
+ * Svelto - Toolbar v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,25 +12,7 @@
 /* TOOLBAR */
 
 .toolbar {
-
   @extend .widget;
-  height: $toolbar-height;
+  @include sub-multiple-centered ();
   padding: $toolbar-padding-vertical $toolbar-padding-horizontal;
-
-  /* MULTIPLE */
-
-  .multiple { //INFO: Both the immediate child and those inside a `.multiple-sub`
-
-    align-items: center;
-    flex-wrap: nowrap;
-    height: 100%;
-
-    /* CHILDREN */
-
-    > * {
-      margin-bottom: 0; //INFO: In order to properly center them
-    }
-
-  }
-
 }
