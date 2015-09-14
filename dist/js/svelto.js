@@ -6833,6 +6833,8 @@ $(function () {
 
     $('.stepper').each ( function () {
 
+      return;
+
       var $stepper = $(this),
         $input = $stepper.find ( 'input' ),
         options = {

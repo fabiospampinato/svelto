@@ -45,6 +45,12 @@
 
   &.striped {
 
+    transform: translateZ(0);
+
+    .progressbar-highlight {
+      transform: translateZ(0);
+    }
+
     .progressbar-highlight:before {
       @include fill-absolute ();
       background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);

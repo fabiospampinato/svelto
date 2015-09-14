@@ -58,7 +58,7 @@
     transition: transform $input-transition-all-duration;
     border-bottom-width: $highlight-size;
     border-color: $input-active-color;
-    transform: scaleX(0) translateZ(0);
+    transform: scaleX(0);
   }
 
   /* COLORS */

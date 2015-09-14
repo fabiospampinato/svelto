@@ -7588,8 +7588,8 @@ img {
   transition: transform 0.15s;
   border-bottom-width: 2px;
   border-color: #ef6c00;
-  -webkit-transform: scaleX(0) translateZ(0);
-          transform: scaleX(0) translateZ(0);
+  -webkit-transform: scaleX(0);
+          transform: scaleX(0);
 }
 
 .input-wrp.text-field-primary > .text-field:focus ~ label, .text-field-primary.textarea-wrp > .text-field:focus ~ label {
@@ -9576,6 +9576,16 @@ code[class*='language-'] .namespace {
 .progressbar-label {
   font-size: 0.75em;
   padding: 0 5px;
+}
+
+.progressbar.striped {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+}
+
+.progressbar.striped .progressbar-highlight {
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
 }
 
 .progressbar.striped .progressbar-highlight:before {

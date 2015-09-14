@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Stepper v0.1.0
+//- Svelto - Stepper v0.1.1
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -20,9 +20,9 @@ mixin stepper(options)
   - options.value = options.value || options.min;
   - options.max = options.max || 100;
   +multiple(data-min=options.min data-max=options.max)&attributes(attributes).stepper.joined
-    +button-icon("remove").stepper-decreaser
+    +button-icon("remove").compact.stepper-decreaser
     if options.name
-      +input({ name: name, value: value }).autogrow.compact
+      +input({ name: name, value: value }).no-initial-bar.autogrow.compact.stepper-input
     else
-      +input({ value: value }).autogrow.compact
-    +button-icon("add").stepper-increaser
+      +input({ value: value }).stepper-input.autogrow.compact
+    +button-icon("add").compact.stepper-increaser
