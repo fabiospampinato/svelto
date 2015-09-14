@@ -8,6 +8,8 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
+//TODO: Disable scrolling while the modal is open
+
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -66,6 +68,8 @@
     __keydown: function ( event ) {
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+
+        event.stopImmediatePropagation ();
 
         this.close ();
 

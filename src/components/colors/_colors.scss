@@ -9,7 +9,6 @@
  * ========================================================================= */
 
 //TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
-//TODO: Mabybe Add support for `transparentize` class
 //FIXME: .actionable should do it's work only it it's not child of .disabled or -disabled
 
 /* MIXIN */
@@ -31,9 +30,25 @@
   border-color: $border #{$extra};
   color: $text #{$extra};
 
+  @if $color_name != inherit {
+
+    &.transparentize {
+      border-color: transparentize($border, $color-transparentize-amount) #{$extra};
+    }
+
+  }
+
   @if $basic == false {
 
     background: $bg #{$extra};
+
+  @if $color_name != inherit {
+
+    &.transparentize {
+      background: transparentize($bg, $color-transparentize-amount) #{$extra};
+    }
+
+  }
 
     @if $support-gradient == true {
 
@@ -48,17 +63,47 @@
     &.button-corner {
 
       &.active {
+
         background: $bg-active #{$extra};
+
+        @if $color_name != inherit {
+
+          &.transparentize {
+              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+          }
+
+        }
+
       }
 
       &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
 
         &:hover {
+
           background: $bg-hover #{$extra};
+
+          @if $color_name != inherit {
+
+            &.transparentize {
+              background: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
+            }
+
+          }
+
         }
 
         &:not(.ripple):active {
+
           background: $bg-active #{$extra};
+
+          @if $color_name != inherit {
+
+            &.transparentize {
+              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+            }
+
+          }
+
         }
 
       }
@@ -66,7 +111,17 @@
     }
 
     &.highlight:after {
+
       border-color: $accent #{$extra};
+
+      @if $color_name != inherit {
+
+        &.transparentize {
+          border-color: transparentize($accent, $color-transparentize-amount) #{$extra};
+        }
+
+      }
+
     }
 
   } @else {
@@ -82,6 +137,14 @@
     } @else {
 
       background: $bg #{$extra};
+
+      @if $color_name != inherit {
+
+        &.transparentize {
+          background: transparentize($bg, $color-transparentize-amount) #{$extra};
+        }
+
+      }
 
     }
 

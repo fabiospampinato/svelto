@@ -6,20 +6,27 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 
 /* NOTY */
 
-$noty-z-index: 100 !default;
-$noty-z-depth: 5 !default;
+$noty-z-index: 1000 !default;
+$noty-z-depth: 8 !default;
+
+$noty-border-radius: $container-border-radius !default;
+
+/* IMG */
 
 $noty-img-size: 38px !default;
-$noty-img-rounded: true !default; //TODO: Implement this
+$noty-img-rounded: false !default;
+
+/* TRANSITIONS */
 
 $noty-transition-all-duration: $transition-duration-normal !default;
 
 /* BREAKPOINTS */
 
-$noty-full-enabled: true !default; //TODO: Implement this
+$noty-full-enabled: true !default;
 $noty-full-breakpoint-size: 'small' !default;
 $noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !default;

@@ -39,6 +39,12 @@
 
   };
 
+  $.frame = function ( callback ) {
+
+    return requestAnimationFrame ( callback );
+
+  };
+
   /* COMMON OBJECTS */
 
   $(function () {

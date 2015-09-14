@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Noty v0.1.0
+ * Svelto - Noty v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,16 +8,16 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-//TODO: maybe add the material design animation made with the rounded borders
-
 /* MIXINS */
 
 @mixin expand-queue {
 
+  @include z-depth ( $noty-z-depth );
   width: 100%;
   margin: 0 !important;
 
-  & > .noty {
+  .noty {
+    @include z-depth ( 0 );
     width: 100%;
     margin: 0 !important;
     border-right-width: 0;
@@ -29,34 +29,63 @@
 
 /* MEDIA QUERIES */
 
-@include max-screen ( $noty-full-breakpoint ) {
+@if $noty-full-enabled == true {
 
-  .noty-queues {
+  @include max-screen ( $noty-full-breakpoint ) {
 
-    &.top > .noty-queues-row {
+    /* QUEUES */
 
-      flex-direction: column;
+    .noty-queues {
 
-      .noty {
-        border-top-width: 0;
+      @include z-depth ( $noty-z-depth );
+
+      /* TOP */
+
+      &.top {
+
+        /* ROW */
+
+        .noty-queues-row {
+          flex-direction: column;
+        }
+
+        /* NOTY */
+
+        .noty {
+          border-top-width: 0;
+          border-bottom-width: $outline-width;
+          border-bottom-style: solid;
+        }
+
+      }
+
+      /* BOTTOM */
+
+      &.bottom {
+
+        /* ROW */
+
+        .noty-queues-row {
+          flex-direction: column-reverse;
+        }
+
+        /* NOTY */
+
+        .noty {
+          border-bottom-width: 0;
+          border-top-width: $outline-width;
+          border-top-style: solid;
+        }
+
       }
 
     }
 
-    &.bottom > .noty-queues-row {
-
-      flex-direction: column-reverse;
-
-      .noty {
-        border-bottom-width: 0;
-      }
-
+    .noty-queue {
+      @include expand-queue ();
+      box-shadow: none !important;
     }
 
-  }
-
-  .noty-queue {
-    @include expand-queue ();
   }
 
 }
@@ -73,55 +102,81 @@
   width: 100%;
   pointer-events: none;
 
+  /* TOP */
+
   &.top {
 
     top: 0;
 
-    & > .noty-queues-row {
+    /* ROW */
+
+    .noty-queues-row {
       align-items: flex-start;
     }
+
+    /* QUEUE */
 
     .noty-queue {
 
       flex-direction: column;
 
-      &.expanded {
-        border-top-width: 0;
+      /* NOTY */
+
+      .noty {
+        margin-top: $gutter;
       }
 
-      & > .noty {
-        margin-top: $gutter;
+      /* EXPANDED */
+
+      &.expanded .noty {
+        border-top-width: 0;
+        border-bottom-width: $outline-width;
+        border-bottom-style: solid;
       }
 
     }
 
   }
+
+  /* BOTTOM */
 
   &.bottom {
 
     bottom: 0;
 
-    & > .noty-queues-row {
+    /* ROW */
+
+    .noty-queues-row {
       align-items: flex-end;
     }
+
+    /* QUEUE */
 
     .noty-queue {
 
       flex-direction: column-reverse;
 
-      &.expanded {
-        border-bottom-width: 0;
+      /* NOTY */
+
+      .noty {
+        margin-bottom: $gutter;
       }
 
-      & > .noty {
-        margin-bottom: $gutter;
+      /* EXPANDED */
+
+      &.expanded .noty {
+        border-bottom-width: 0;
+        border-top-width: $outline-width;
+        border-top-style: solid;
       }
 
     }
 
   }
 
-  & > .noty-queues-row {
+  /* ROW */
+
+  &-row {
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -135,6 +190,8 @@
 
   display: flex;
 
+  /* LEFT */
+
   &.left {
 
     align-items: flex-start;
@@ -144,6 +201,8 @@
     }
 
   }
+
+  /* CENTER */
 
   &.center {
 
@@ -158,9 +217,7 @@
 
   }
 
-  &.expanded {
-    @include expand-queue ();
-  }
+  /* RIGHT */
 
   &.right {
 
@@ -172,45 +229,62 @@
 
   }
 
+  /* EXPANDED */
+
+  &.expanded {
+    @include expand-queue ();
+  }
+
 }
 
 /* NOTY */
 
 .noty {
 
-  //TODO: Make the background a bit transparent
-
   @include z-depth ( $noty-z-depth );
+  border-radius: $noty-border-radius;
   pointer-events: auto;
+  transition-property: opacity, font-size, padding, margin;
+  transition-duration: $noty-transition-all-duration;
+  transform: translateZ(0);
 
-  &:not(.action) { //TODO: maybe add an actionable class in that case...
-    cursor: pointer;
+  /* INFOBAR */
+
+  .infobar {
+    background-color: transparent;
+    color: inherit;
+    margin-bottom: 0;
+    border-radius: inherit;
   }
 
-  .noty-img > img {
+  /* BUTTONS */
+
+  &-buttons {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+
+  /* IMG */
+
+  &-img {
+
     width: $noty-img-size;
+
+    @if $noty-img-rounded == true {
+      border-radius: 10000px 10000px;
+    } @else {
+      border-radius: $noty-border-radius;
+    }
+
   }
 
-  .noty-buttons.multiple {
-    margin-bottom: - $gutter !important;
-  }
+  /* CLOSED */
 
-  /* ANIMATIONS */
-
-  transition-duration: $noty-transition-all-duration; //TODO: Fix this hiding animation properties
-  transition-property: opacity, font-size, padding, margin, height;
-
-  &:not(.active) {
-    font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
-    height: 0;
-    margin: 0;
-    padding: 0;
-    transition-delay: 0s, 0s, 0s, 0s, $noty-transition-all-duration;
+  &:not(.open) {
     opacity: 0;
-  }
-
-  &.active { //TODO: Fix this showing animation properites
-    transition-delay: 0s;
+    font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
+    padding: 0;
+    margin: 0;
   }
 
 }

@@ -25,11 +25,11 @@
   };
 
   var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
-    events_namespace = 'pointer';
+      events_prefix = 'pointer';
 
   _.each ( events_names, function ( event_name ) {
 
-    var full_event = events_namespace + event_name;
+    var full_event = events_prefix + event_name;
 
     $.Pointer[event_name] = full_event;
 
@@ -43,23 +43,23 @@
 
   /* TRIGGERS */
 
-  var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
-    moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
-    endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
-    $html = $(document.documentElement),
-    startXY,
-    moveXY,
-    deltaXY,
-    endXY,
-    target,
-    $target,
-    start_timestamp,
-    end_timestamp,
-    prev_tap_timestamp = 0,
-    motion,
-    orientation,
-    direction,
-    press_timeout;
+  var startEvents = $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
+      moveEvents = $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
+      endEvents = $.browser.is.touchDevice ? 'touchend touchcancel' : 'mouseup mouseleave',
+      $html = $(document.documentElement),
+      startXY,
+      moveXY,
+      deltaXY,
+      endXY,
+      target,
+      $target,
+      start_timestamp,
+      end_timestamp,
+      prev_tap_timestamp = 0,
+      motion,
+      orientation,
+      direction,
+      press_timeout;
 
   var createEvent = function ( name, originalEvent ) {
 
@@ -139,7 +139,7 @@
 
       end_timestamp = event.timeStamp || _.now ();
 
-      if ( !$.browser.hasTouch || !motion ) {
+      if ( !$.browser.is.touchDevice || !motion ) {
 
         $target.trigger ( createEvent ( $.Pointer.tap, event ) );
 

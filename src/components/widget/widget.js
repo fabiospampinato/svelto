@@ -356,7 +356,7 @@
 
       return setTimeout ( function () {
 
-        fn.apply ( instance, arguments );
+        fn.apply ( instance );
 
       }, delay || 0 );
 
@@ -367,6 +367,20 @@
     _defer: function ( fn ) {
 
       return this._delay ( fn );
+
+    },
+
+    /* FRAME */
+
+    _frame: function ( fn ) {
+
+      var instance = this;
+
+      return $.frame ( function () {
+
+        fn.apply ( instance );
+
+      });
 
     },
 

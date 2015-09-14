@@ -617,6 +617,14 @@ th {
   background: #1565c0 !important;
 }
 
+.primary.transparentize {
+  border-color: rgba(13, 65, 123, 0.95) !important;
+}
+
+.primary.transparentize {
+  background: rgba(21, 101, 192, 0.95) !important;
+}
+
 .primary.gradient {
   background-image: linear-gradient(to bottom, #166ac9 0%, #1460b7 100%) !important;
   background-repeat: repeat-x !important;
@@ -630,12 +638,28 @@ th {
   background: #1460b7 !important;
 }
 
+.primary.actionable.active.transparentize,
+.primary.active.transparentize.button,
+.primary.active.transparentize.button-corner,
+.primary.button.active.transparentize,
+.primary.button-corner.active.transparentize {
+  background: rgba(20, 96, 183, 0.95) !important;
+}
+
 .primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #166ac9 !important;
+}
+
+.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(22, 106, 201, 0.95) !important;
 }
 
 .primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -646,8 +670,20 @@ th {
   background: #1460b7 !important;
 }
 
+.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(20, 96, 183, 0.95) !important;
+}
+
 .primary.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.primary.highlight:after.transparentize {
+  border-color: rgba(239, 108, 0, 0.95) !important;
 }
 
 .primary p > a {
@@ -684,6 +720,14 @@ th {
   background: #ef6c00 !important;
 }
 
+.secondary.transparentize {
+  border-color: rgba(163, 73, 0, 0.95) !important;
+}
+
+.secondary.transparentize {
+  background: rgba(239, 108, 0, 0.95) !important;
+}
+
 .secondary.gradient {
   background-image: linear-gradient(to bottom, #f97100 0%, #e56700 100%) !important;
   background-repeat: repeat-x !important;
@@ -697,12 +741,28 @@ th {
   background: #e56700 !important;
 }
 
+.secondary.actionable.active.transparentize,
+.secondary.active.transparentize.button,
+.secondary.active.transparentize.button-corner,
+.secondary.button.active.transparentize,
+.secondary.button-corner.active.transparentize {
+  background: rgba(229, 103, 0, 0.95) !important;
+}
+
 .secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #f97100 !important;
+}
+
+.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(249, 113, 0, 0.95) !important;
 }
 
 .secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -713,8 +773,20 @@ th {
   background: #e56700 !important;
 }
 
+.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(229, 103, 0, 0.95) !important;
+}
+
 .secondary.highlight:after {
   border-color: #1565c0 !important;
+}
+
+.secondary.highlight:after.transparentize {
+  border-color: rgba(21, 101, 192, 0.95) !important;
 }
 
 .secondary p > a {
@@ -751,6 +823,14 @@ th {
   background: #6a1b9a !important;
 }
 
+.tertiary.transparentize {
+  border-color: rgba(61, 16, 89, 0.95) !important;
+}
+
+.tertiary.transparentize {
+  background: rgba(106, 27, 154, 0.95) !important;
+}
+
 .tertiary.gradient {
   background-image: linear-gradient(to bottom, #701da3 0%, #641991 100%) !important;
   background-repeat: repeat-x !important;
@@ -764,12 +844,28 @@ th {
   background: #641991 !important;
 }
 
+.tertiary.actionable.active.transparentize,
+.tertiary.active.transparentize.button,
+.tertiary.active.transparentize.button-corner,
+.tertiary.button.active.transparentize,
+.tertiary.button-corner.active.transparentize {
+  background: rgba(100, 25, 145, 0.95) !important;
+}
+
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #701da3 !important;
+}
+
+.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(112, 29, 163, 0.95) !important;
 }
 
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -780,8 +876,20 @@ th {
   background: #641991 !important;
 }
 
+.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(100, 25, 145, 0.95) !important;
+}
+
 .tertiary.highlight:after {
   border-color: #2e7d32 !important;
+}
+
+.tertiary.highlight:after.transparentize {
+  border-color: rgba(46, 125, 50, 0.95) !important;
 }
 
 .tertiary p > a {
@@ -818,6 +926,14 @@ th {
   background: #2e7d32 !important;
 }
 
+.quaternary.transparentize {
+  border-color: rgba(25, 69, 28, 0.95) !important;
+}
+
+.quaternary.transparentize {
+  background: rgba(46, 125, 50, 0.95) !important;
+}
+
 .quaternary.gradient {
   background-image: linear-gradient(to bottom, #318435 0%, #2b762f 100%) !important;
   background-repeat: repeat-x !important;
@@ -831,12 +947,28 @@ th {
   background: #2b762f !important;
 }
 
+.quaternary.actionable.active.transparentize,
+.quaternary.active.transparentize.button,
+.quaternary.active.transparentize.button-corner,
+.quaternary.button.active.transparentize,
+.quaternary.button-corner.active.transparentize {
+  background: rgba(43, 118, 47, 0.95) !important;
+}
+
 .quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #318435 !important;
+}
+
+.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(49, 132, 53, 0.95) !important;
 }
 
 .quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -847,8 +979,20 @@ th {
   background: #2b762f !important;
 }
 
+.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(43, 118, 47, 0.95) !important;
+}
+
 .quaternary.highlight:after {
   border-color: #6a1b9a !important;
+}
+
+.quaternary.highlight:after.transparentize {
+  border-color: rgba(106, 27, 154, 0.95) !important;
 }
 
 .quaternary p > a {
@@ -885,6 +1029,14 @@ th {
   background: #ffffff !important;
 }
 
+.white.transparentize {
+  border-color: rgba(217, 217, 217, 0.95) !important;
+}
+
+.white.transparentize {
+  background: rgba(255, 255, 255, 0.95) !important;
+}
+
 .white.gradient {
   background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) !important;
   background-repeat: repeat-x !important;
@@ -898,12 +1050,28 @@ th {
   background: whitesmoke !important;
 }
 
+.white.actionable.active.transparentize,
+.white.active.transparentize.button,
+.white.active.transparentize.button-corner,
+.white.button.active.transparentize,
+.white.button-corner.active.transparentize {
+  background: rgba(245, 245, 245, 0.95) !important;
+}
+
 .white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fafafa !important;
+}
+
+.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(250, 250, 250, 0.95) !important;
 }
 
 .white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -914,8 +1082,20 @@ th {
   background: whitesmoke !important;
 }
 
+.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(245, 245, 245, 0.95) !important;
+}
+
 .white.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.white.highlight:after.transparentize {
+  border-color: rgba(239, 108, 0, 0.95) !important;
 }
 
 .white p > a {
@@ -952,6 +1132,14 @@ th {
   background: #e0e0e0 !important;
 }
 
+.gray.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) !important;
+}
+
+.gray.transparentize {
+  background: rgba(224, 224, 224, 0.95) !important;
+}
+
 .gray.gradient {
   background-image: linear-gradient(to bottom, #e5e5e5 0%, #dbdbdb 100%) !important;
   background-repeat: repeat-x !important;
@@ -965,12 +1153,28 @@ th {
   background: #dbdbdb !important;
 }
 
+.gray.actionable.active.transparentize,
+.gray.active.transparentize.button,
+.gray.active.transparentize.button-corner,
+.gray.button.active.transparentize,
+.gray.button-corner.active.transparentize {
+  background: rgba(219, 219, 219, 0.95) !important;
+}
+
 .gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #e5e5e5 !important;
+}
+
+.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(229, 229, 229, 0.95) !important;
 }
 
 .gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -981,8 +1185,20 @@ th {
   background: #dbdbdb !important;
 }
 
+.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(219, 219, 219, 0.95) !important;
+}
+
 .gray.highlight:after {
   border-color: #212121 !important;
+}
+
+.gray.highlight:after.transparentize {
+  border-color: rgba(33, 33, 33, 0.95) !important;
 }
 
 .gray p > a {
@@ -1019,6 +1235,14 @@ th {
   background: #212121 !important;
 }
 
+.black.transparentize {
+  border-color: rgba(0, 0, 0, 0.95) !important;
+}
+
+.black.transparentize {
+  background: rgba(33, 33, 33, 0.95) !important;
+}
+
 .black.gradient {
   background-image: linear-gradient(to bottom, #262626 0%, #1c1c1c 100%) !important;
   background-repeat: repeat-x !important;
@@ -1032,12 +1256,28 @@ th {
   background: #1c1c1c !important;
 }
 
+.black.actionable.active.transparentize,
+.black.active.transparentize.button,
+.black.active.transparentize.button-corner,
+.black.button.active.transparentize,
+.black.button-corner.active.transparentize {
+  background: rgba(28, 28, 28, 0.95) !important;
+}
+
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #262626 !important;
+}
+
+.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(38, 38, 38, 0.95) !important;
 }
 
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1048,8 +1288,20 @@ th {
   background: #1c1c1c !important;
 }
 
+.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(28, 28, 28, 0.95) !important;
+}
+
 .black.highlight:after {
   border-color: #ffffff !important;
+}
+
+.black.highlight:after.transparentize {
+  border-color: rgba(255, 255, 255, 0.95) !important;
 }
 
 .black p > a {
@@ -1086,6 +1338,14 @@ th {
   background: #fabf40 !important;
 }
 
+.yellow.transparentize {
+  border-color: rgba(231, 160, 6, 0.95) !important;
+}
+
+.yellow.transparentize {
+  background: rgba(250, 191, 64, 0.95) !important;
+}
+
 .yellow.gradient {
   background-image: linear-gradient(to bottom, #fac24a 0%, #fabc36 100%) !important;
   background-repeat: repeat-x !important;
@@ -1099,12 +1359,28 @@ th {
   background: #fabc36 !important;
 }
 
+.yellow.actionable.active.transparentize,
+.yellow.active.transparentize.button,
+.yellow.active.transparentize.button-corner,
+.yellow.button.active.transparentize,
+.yellow.button-corner.active.transparentize {
+  background: rgba(250, 188, 54, 0.95) !important;
+}
+
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fac24a !important;
+}
+
+.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(250, 194, 74, 0.95) !important;
 }
 
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1115,8 +1391,20 @@ th {
   background: #fabc36 !important;
 }
 
+.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(250, 188, 54, 0.95) !important;
+}
+
 .yellow.highlight:after {
   border-color: #f44336 !important;
+}
+
+.yellow.highlight:after.transparentize {
+  border-color: rgba(244, 67, 54, 0.95) !important;
 }
 
 .yellow p > a {
@@ -1153,6 +1441,14 @@ th {
   background: #cddc39 !important;
 }
 
+.olive.transparentize {
+  border-color: rgba(157, 170, 30, 0.95) !important;
+}
+
+.olive.transparentize {
+  background: rgba(205, 220, 57, 0.95) !important;
+}
+
 .olive.gradient {
   background-image: linear-gradient(to bottom, #cfde42 0%, #cbda30 100%) !important;
   background-repeat: repeat-x !important;
@@ -1166,12 +1462,28 @@ th {
   background: #cbda30 !important;
 }
 
+.olive.actionable.active.transparentize,
+.olive.active.transparentize.button,
+.olive.active.transparentize.button-corner,
+.olive.button.active.transparentize,
+.olive.button-corner.active.transparentize {
+  background: rgba(203, 218, 48, 0.95) !important;
+}
+
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #cfde42 !important;
+}
+
+.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(207, 222, 66, 0.95) !important;
 }
 
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1182,8 +1494,20 @@ th {
   background: #cbda30 !important;
 }
 
+.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(203, 218, 48, 0.95) !important;
+}
+
 .olive.highlight:after {
   border-color: #ff9800 !important;
+}
+
+.olive.highlight:after.transparentize {
+  border-color: rgba(255, 152, 0, 0.95) !important;
 }
 
 .olive p > a {
@@ -1220,6 +1544,14 @@ th {
   background: #4caf50 !important;
 }
 
+.green.transparentize {
+  border-color: rgba(53, 122, 56, 0.95) !important;
+}
+
+.green.transparentize {
+  background: rgba(76, 175, 80, 0.95) !important;
+}
+
 .green.gradient {
   background-image: linear-gradient(to bottom, #52b455 0%, #49a84d 100%) !important;
   background-repeat: repeat-x !important;
@@ -1233,12 +1565,28 @@ th {
   background: #49a84d !important;
 }
 
+.green.actionable.active.transparentize,
+.green.active.transparentize.button,
+.green.active.transparentize.button-corner,
+.green.button.active.transparentize,
+.green.button-corner.active.transparentize {
+  background: rgba(73, 168, 77, 0.95) !important;
+}
+
 .green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #52b455 !important;
+}
+
+.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(82, 180, 85, 0.95) !important;
 }
 
 .green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1249,8 +1597,20 @@ th {
   background: #49a84d !important;
 }
 
+.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(73, 168, 77, 0.95) !important;
+}
+
 .green.highlight:after {
   border-color: #673ab7 !important;
+}
+
+.green.highlight:after.transparentize {
+  border-color: rgba(103, 58, 183, 0.95) !important;
 }
 
 .green p > a {
@@ -1287,6 +1647,14 @@ th {
   background: #2196f3 !important;
 }
 
+.blue.transparentize {
+  border-color: rgba(10, 110, 189, 0.95) !important;
+}
+
+.blue.transparentize {
+  background: rgba(33, 150, 243, 0.95) !important;
+}
+
 .blue.gradient {
   background-image: linear-gradient(to bottom, #2b9bf4 0%, #1791f2 100%) !important;
   background-repeat: repeat-x !important;
@@ -1300,12 +1668,28 @@ th {
   background: #1791f2 !important;
 }
 
+.blue.actionable.active.transparentize,
+.blue.active.transparentize.button,
+.blue.active.transparentize.button-corner,
+.blue.button.active.transparentize,
+.blue.button-corner.active.transparentize {
+  background: rgba(23, 145, 242, 0.95) !important;
+}
+
 .blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #2b9bf4 !important;
+}
+
+.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(43, 155, 244, 0.95) !important;
 }
 
 .blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1316,8 +1700,20 @@ th {
   background: #1791f2 !important;
 }
 
+.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(23, 145, 242, 0.95) !important;
+}
+
 .blue.highlight:after {
   border-color: #f44336 !important;
+}
+
+.blue.highlight:after.transparentize {
+  border-color: rgba(244, 67, 54, 0.95) !important;
 }
 
 .blue p > a {
@@ -1354,6 +1750,14 @@ th {
   background: #673ab7 !important;
 }
 
+.violet.transparentize {
+  border-color: rgba(70, 40, 125, 0.95) !important;
+}
+
+.violet.transparentize {
+  background: rgba(103, 58, 183, 0.95) !important;
+}
+
 .violet.gradient {
   background-image: linear-gradient(to bottom, #6b3cbf 0%, #6338af 100%) !important;
   background-repeat: repeat-x !important;
@@ -1367,12 +1771,28 @@ th {
   background: #6338af !important;
 }
 
+.violet.actionable.active.transparentize,
+.violet.active.transparentize.button,
+.violet.active.transparentize.button-corner,
+.violet.button.active.transparentize,
+.violet.button-corner.active.transparentize {
+  background: rgba(99, 56, 175, 0.95) !important;
+}
+
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #6b3cbf !important;
+}
+
+.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(107, 60, 191, 0.95) !important;
 }
 
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1383,8 +1803,20 @@ th {
   background: #6338af !important;
 }
 
+.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(99, 56, 175, 0.95) !important;
+}
+
 .violet.highlight:after {
   border-color: #ff9800 !important;
+}
+
+.violet.highlight:after.transparentize {
+  border-color: rgba(255, 152, 0, 0.95) !important;
 }
 
 .violet p > a {
@@ -1421,6 +1853,14 @@ th {
   background: #ff9800 !important;
 }
 
+.orange.transparentize {
+  border-color: rgba(179, 106, 0, 0.95) !important;
+}
+
+.orange.transparentize {
+  background: rgba(255, 152, 0, 0.95) !important;
+}
+
 .orange.gradient {
   background-image: linear-gradient(to bottom, #ff9c0a 0%, #f59200 100%) !important;
   background-repeat: repeat-x !important;
@@ -1434,12 +1874,28 @@ th {
   background: #f59200 !important;
 }
 
+.orange.actionable.active.transparentize,
+.orange.active.transparentize.button,
+.orange.active.transparentize.button-corner,
+.orange.button.active.transparentize,
+.orange.button-corner.active.transparentize {
+  background: rgba(245, 146, 0, 0.95) !important;
+}
+
 .orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #ff9c0a !important;
+}
+
+.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(255, 156, 10, 0.95) !important;
 }
 
 .orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1450,8 +1906,20 @@ th {
   background: #f59200 !important;
 }
 
+.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(245, 146, 0, 0.95) !important;
+}
+
 .orange.highlight:after {
   border-color: #2196f3 !important;
+}
+
+.orange.highlight:after.transparentize {
+  border-color: rgba(33, 150, 243, 0.95) !important;
 }
 
 .orange p > a {
@@ -1488,6 +1956,14 @@ th {
   background: #9c27b0 !important;
 }
 
+.purple.transparentize {
+  border-color: rgba(100, 25, 113, 0.95) !important;
+}
+
+.purple.transparentize {
+  background: rgba(156, 39, 176, 0.95) !important;
+}
+
 .purple.gradient {
   background-image: linear-gradient(to bottom, #a329b8 0%, #9525a8 100%) !important;
   background-repeat: repeat-x !important;
@@ -1501,12 +1977,28 @@ th {
   background: #9525a8 !important;
 }
 
+.purple.actionable.active.transparentize,
+.purple.active.transparentize.button,
+.purple.active.transparentize.button-corner,
+.purple.button.active.transparentize,
+.purple.button-corner.active.transparentize {
+  background: rgba(149, 37, 168, 0.95) !important;
+}
+
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #a329b8 !important;
+}
+
+.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(163, 41, 184, 0.95) !important;
 }
 
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1517,8 +2009,20 @@ th {
   background: #9525a8 !important;
 }
 
+.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(149, 37, 168, 0.95) !important;
+}
+
 .purple.highlight:after {
   border-color: #fabf40 !important;
+}
+
+.purple.highlight:after.transparentize {
+  border-color: rgba(250, 191, 64, 0.95) !important;
 }
 
 .purple p > a {
@@ -1555,6 +2059,14 @@ th {
   background: #f44336 !important;
 }
 
+.red.transparentize {
+  border-color: rgba(210, 25, 11, 0.95) !important;
+}
+
+.red.transparentize {
+  background: rgba(244, 67, 54, 0.95) !important;
+}
+
 .red.gradient {
   background-image: linear-gradient(to bottom, #f54c40 0%, #f33a2c 100%) !important;
   background-repeat: repeat-x !important;
@@ -1568,12 +2080,28 @@ th {
   background: #f33a2c !important;
 }
 
+.red.actionable.active.transparentize,
+.red.active.transparentize.button,
+.red.active.transparentize.button-corner,
+.red.button.active.transparentize,
+.red.button-corner.active.transparentize {
+  background: rgba(243, 58, 44, 0.95) !important;
+}
+
 .red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #f54c40 !important;
+}
+
+.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(245, 76, 64, 0.95) !important;
 }
 
 .red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1584,8 +2112,20 @@ th {
   background: #f33a2c !important;
 }
 
+.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(243, 58, 44, 0.95) !important;
+}
+
 .red.highlight:after {
   border-color: #fabf40 !important;
+}
+
+.red.highlight:after.transparentize {
+  border-color: rgba(250, 191, 64, 0.95) !important;
 }
 
 .red p > a {
@@ -1622,6 +2162,14 @@ th {
   background: #e91e63 !important;
 }
 
+.pink.transparentize {
+  border-color: rgba(170, 17, 69, 0.95) !important;
+}
+
+.pink.transparentize {
+  background: rgba(233, 30, 99, 0.95) !important;
+}
+
 .pink.gradient {
   background-image: linear-gradient(to bottom, #ea2769 0%, #e6175d 100%) !important;
   background-repeat: repeat-x !important;
@@ -1635,12 +2183,28 @@ th {
   background: #e6175d !important;
 }
 
+.pink.actionable.active.transparentize,
+.pink.active.transparentize.button,
+.pink.active.transparentize.button-corner,
+.pink.button.active.transparentize,
+.pink.button-corner.active.transparentize {
+  background: rgba(230, 23, 93, 0.95) !important;
+}
+
 .pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #ea2769 !important;
+}
+
+.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(234, 39, 105, 0.95) !important;
 }
 
 .pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1651,8 +2215,20 @@ th {
   background: #e6175d !important;
 }
 
+.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(230, 23, 93, 0.95) !important;
+}
+
 .pink.highlight:after {
   border-color: #009688 !important;
+}
+
+.pink.highlight:after.transparentize {
+  border-color: rgba(0, 150, 136, 0.95) !important;
 }
 
 .pink p > a {
@@ -1689,6 +2265,14 @@ th {
   background: #009688 !important;
 }
 
+.teal.transparentize {
+  border-color: rgba(0, 74, 67, 0.95) !important;
+}
+
+.teal.transparentize {
+  background: rgba(0, 150, 136, 0.95) !important;
+}
+
 .teal.gradient {
   background-image: linear-gradient(to bottom, #00a091 0%, #008c7f 100%) !important;
   background-repeat: repeat-x !important;
@@ -1702,12 +2286,28 @@ th {
   background: #008c7f !important;
 }
 
+.teal.actionable.active.transparentize,
+.teal.active.transparentize.button,
+.teal.active.transparentize.button-corner,
+.teal.button.active.transparentize,
+.teal.button-corner.active.transparentize {
+  background: rgba(0, 140, 127, 0.95) !important;
+}
+
 .teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #00a091 !important;
+}
+
+.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(0, 160, 145, 0.95) !important;
 }
 
 .teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1718,8 +2318,20 @@ th {
   background: #008c7f !important;
 }
 
+.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(0, 140, 127, 0.95) !important;
+}
+
 .teal.highlight:after {
   border-color: #e91e63 !important;
+}
+
+.teal.highlight:after.transparentize {
+  border-color: rgba(233, 30, 99, 0.95) !important;
 }
 
 .teal p > a {
@@ -1756,6 +2368,14 @@ th {
   background: #795548 !important;
 }
 
+.brown.transparentize {
+  border-color: rgba(73, 51, 43, 0.95) !important;
+}
+
+.brown.transparentize {
+  background: rgba(121, 85, 72, 0.95) !important;
+}
+
 .brown.gradient {
   background-image: linear-gradient(to bottom, #7f594c 0%, #735144 100%) !important;
   background-repeat: repeat-x !important;
@@ -1769,12 +2389,28 @@ th {
   background: #735144 !important;
 }
 
+.brown.actionable.active.transparentize,
+.brown.active.transparentize.button,
+.brown.active.transparentize.button-corner,
+.brown.button.active.transparentize,
+.brown.button-corner.active.transparentize {
+  background: rgba(115, 81, 68, 0.95) !important;
+}
+
 .brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #7f594c !important;
+}
+
+.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(127, 89, 76, 0.95) !important;
 }
 
 .brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1785,8 +2421,20 @@ th {
   background: #735144 !important;
 }
 
+.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(115, 81, 68, 0.95) !important;
+}
+
 .brown.highlight:after {
   border-color: #ff9800 !important;
+}
+
+.brown.highlight:after.transparentize {
+  border-color: rgba(255, 152, 0, 0.95) !important;
 }
 
 .brown p > a {
@@ -1823,11 +2471,27 @@ th {
   background: transparent !important;
 }
 
+.transparent.transparentize {
+  border-color: transparent !important;
+}
+
+.transparent.transparentize {
+  background: transparent !important;
+}
+
 .transparent.actionable.active,
 .transparent.active.button,
 .transparent.active.button-corner,
 .transparent.button.active,
 .transparent.button-corner.active {
+  background: transparent !important;
+}
+
+.transparent.actionable.active.transparentize,
+.transparent.active.transparentize.button,
+.transparent.active.transparentize.button-corner,
+.transparent.button.active.transparentize,
+.transparent.button-corner.active.transparentize {
   background: transparent !important;
 }
 
@@ -1839,6 +2503,14 @@ th {
   background: rgba(5, 5, 5, 0) !important;
 }
 
+.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(5, 5, 5, 0) !important;
+}
+
 .transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1847,8 +2519,20 @@ th {
   background: transparent !important;
 }
 
+.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: transparent !important;
+}
+
 .transparent.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.transparent.highlight:after.transparentize {
+  border-color: rgba(239, 108, 0, 0.95) !important;
 }
 
 .transparent p > a {
@@ -1935,6 +2619,14 @@ th {
   background: #eceff1 !important;
 }
 
+.base.transparentize {
+  border-color: rgba(192, 202, 209, 0.95) !important;
+}
+
+.base.transparentize {
+  background: rgba(236, 239, 241, 0.95) !important;
+}
+
 .base.gradient {
   background-image: linear-gradient(to bottom, #e6eaed 0%, #e0e5e8 100%) !important;
   background-repeat: repeat-x !important;
@@ -1948,12 +2640,28 @@ th {
   background: #e0e5e8 !important;
 }
 
+.base.actionable.active.transparentize,
+.base.active.transparentize.button,
+.base.active.transparentize.button-corner,
+.base.button.active.transparentize,
+.base.button-corner.active.transparentize {
+  background: rgba(224, 229, 232, 0.95) !important;
+}
+
 .base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #e6eaed !important;
+}
+
+.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(230, 234, 237, 0.95) !important;
 }
 
 .base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -1964,8 +2672,20 @@ th {
   background: #e0e5e8 !important;
 }
 
+.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(224, 229, 232, 0.95) !important;
+}
+
 .base.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.base.highlight:after.transparentize {
+  border-color: rgba(239, 108, 0, 0.95) !important;
 }
 
 .base p > a {
@@ -2256,9 +2976,30 @@ th {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, .disabled.toolbar, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
+.widget.disabled,
+.disabled.accordion,
+.disabled.toolbar,
+label.disabled,
+.disabled.label,
+.disabled.button, .disabled.container,
+.disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.card, .chat-msg .disabled.chat-msg-sender-name, .disabled.embedded, .disabled.flippable, i.disabled.icon, .disabled.image-wrp, .disabled.input-wrp, .disabled.textarea-wrp, .disabled.parallax, .disabled.placeholder, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, table.disabled.table, blockquote.disabled, .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
+.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.card,
+.chat-msg .disabled.chat-msg-sender-name,
+.disabled.embedded,
+.disabled.flippable,
+i.disabled.icon,
+.disabled.image-wrp,
+.disabled.input-wrp,
+.disabled.textarea-wrp, .disabled.parallax,
+.disabled.placeholder,
+.disabled.triangle,
+.disabled.square,
+.disabled.square-sample,
+.disabled.circle,
+table.disabled.table,
+blockquote.disabled,
+.widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
 [class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
   cursor: default !important;
@@ -2477,6 +3218,14 @@ body {
   min-height: 100%;
 }
 
+body.transparentize {
+  border-color: rgba(192, 202, 209, 0.95) ;
+}
+
+body.transparentize {
+  background: rgba(236, 239, 241, 0.95) ;
+}
+
 body p > a {
   color: #ef6c00 ;
 }
@@ -2653,6 +3402,14 @@ label {
   /* RIBBON */
 }
 
+.label.transparentize, .transparentize.button {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.label.transparentize, .transparentize.button {
+  background: rgba(255, 255, 255, 0.95) ;
+}
+
 .label.gradient, .gradient.button {
   background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) ;
   background-repeat: repeat-x ;
@@ -2667,6 +3424,15 @@ label {
   background: whitesmoke ;
 }
 
+.label.actionable.active.transparentize,
+.active.transparentize.button,
+.label.active.transparentize.button-corner,
+.label.button.active.transparentize,
+.button.active.transparentize,
+.label.button-corner.active.transparentize, .button-corner.active.transparentize.button {
+  background: rgba(245, 245, 245, 0.95) ;
+}
+
 .label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
@@ -2674,6 +3440,15 @@ label {
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fafafa ;
+}
+
+.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(250, 250, 250, 0.95) ;
 }
 
 .label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
@@ -2685,8 +3460,21 @@ label {
   background: whitesmoke ;
 }
 
+.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(245, 245, 245, 0.95) ;
+}
+
 .label.highlight:after, .highlight.button:after {
   border-color: #ef6c00 ;
+}
+
+.label.highlight:after.transparentize, .highlight.button:after.transparentize {
+  border-color: rgba(239, 108, 0, 0.95) ;
 }
 
 .label p > a, .button p > a {
@@ -3519,6 +4307,18 @@ button {
   padding: 10px 10px;
 }
 
+.container.transparentize, .transparentize.card-header,
+.transparentize.card-block,
+.transparentize.card-footer, footer.transparentize, .image-wrp .transparentize.image-caption, .transparentize.infobar {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.container.transparentize, .transparentize.card-header,
+.transparentize.card-block,
+.transparentize.card-footer, footer.transparentize, .image-wrp .transparentize.image-caption, .transparentize.infobar {
+  background: rgba(255, 255, 255, 0.95) ;
+}
+
 .container p > a, .card-header p > a,
 .card-block p > a,
 .card-footer p > a, footer p > a, .image-wrp .image-caption p > a, .infobar p > a {
@@ -3570,6 +4370,14 @@ button {
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
   /* BORDER RADIUS INHERITANCE */
   /* OUTLINED */
+}
+
+.card.transparentize {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.card.transparentize {
+  background: rgba(255, 255, 255, 0.95) ;
 }
 
 .card p > a {
@@ -3727,6 +4535,14 @@ button {
           transform: rotate(45deg);
   border-width: 0 0 1px 1px;
   border-style: solid;
+}
+
+.chat-msg > .chat-msg-indicator.transparentize {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.chat-msg > .chat-msg-indicator.transparentize {
+  background: rgba(255, 255, 255, 0.95) ;
 }
 
 .chat-msg > .chat-msg-indicator p > a {
@@ -4161,6 +4977,14 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   display: inline-block;
   padding: 0.3em 0.6em;
   border-radius: 10000px 10000px;
+}
+
+.divider.block > .divider-content.transparentize {
+  border-color: rgba(210, 25, 11, 0.95) ;
+}
+
+.divider.block > .divider-content.transparentize {
+  background: rgba(244, 67, 54, 0.95) ;
 }
 
 .divider.block > .divider-content p > a {
@@ -6471,6 +7295,14 @@ img {
   /* CAPTION */
 }
 
+.image-wrp.transparentize {
+  border-color: rgba(0, 0, 0, 0.95) ;
+}
+
+.image-wrp.transparentize {
+  background: rgba(33, 33, 33, 0.95) ;
+}
+
 .image-wrp p > a {
   color: #e0e0e0 ;
 }
@@ -6496,6 +7328,14 @@ img {
   border-radius: 0;
   margin-bottom: 0;
   overflow: auto;
+}
+
+.image-wrp .image-caption.transparentize {
+  border-color: rgba(0, 0, 0, 0.95) ;
+}
+
+.image-wrp .image-caption.transparentize {
+  background: rgba(33, 33, 33, 0.95) ;
 }
 
 .image-wrp .image-caption p > a {
@@ -6691,6 +7531,14 @@ img {
   /* FLUID */
   /* COMPACT */
   /* DISABLED */
+}
+
+.input-wrp.transparentize, .transparentize.textarea-wrp {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.input-wrp.transparentize, .transparentize.textarea-wrp {
+  background: rgba(255, 255, 255, 0.95) ;
 }
 
 .input-wrp p > a, .textarea-wrp p > a {
@@ -7618,6 +8466,14 @@ table > :not(tfoot) td .multiple:only-child {
   /* BACKGROUND */
 }
 
+.navbar.transparentize {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.navbar.transparentize {
+  background: rgba(255, 255, 255, 0.95) ;
+}
+
 .navbar p > a {
   color: #1565c0 ;
 }
@@ -8065,11 +8921,14 @@ table > :not(tfoot) td .multiple:only-child {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 /* NOTY */
+/* IMG */
+/* TRANSITIONS */
 /* BREAKPOINTS */
 /* =========================================================================
- * Svelto - Noty v0.1.0
+ * Svelto - Noty v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8079,25 +8938,46 @@ table > :not(tfoot) td .multiple:only-child {
 /* MIXINS */
 /* MEDIA QUERIES */
 @media screen and (max-width: 32rem) {
-  .noty-queues.top > .noty-queues-row {
+  /* QUEUES */
+  .noty-queues {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
+    /* TOP */
+    /* BOTTOM */
+  }
+  .noty-queues.top {
+    /* ROW */
+    /* NOTY */
+  }
+  .noty-queues.top .noty-queues-row {
     -webkit-flex-direction: column;
             flex-direction: column;
   }
-  .noty-queues.top > .noty-queues-row .noty {
+  .noty-queues.top .noty {
     border-top-width: 0;
+    border-bottom-width: 1px;
+    border-bottom-style: solid;
   }
-  .noty-queues.bottom > .noty-queues-row {
+  .noty-queues.bottom {
+    /* ROW */
+    /* NOTY */
+  }
+  .noty-queues.bottom .noty-queues-row {
     -webkit-flex-direction: column-reverse;
             flex-direction: column-reverse;
   }
-  .noty-queues.bottom > .noty-queues-row .noty {
+  .noty-queues.bottom .noty {
     border-bottom-width: 0;
+    border-top-width: 1px;
+    border-top-style: solid;
   }
   .noty-queue {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
     width: 100%;
     margin: 0 !important;
+    box-shadow: none !important;
   }
-  .noty-queue > .noty {
+  .noty-queue .noty {
+    box-shadow: none ;
     width: 100%;
     margin: 0 !important;
     border-right-width: 0;
@@ -8109,7 +8989,7 @@ table > :not(tfoot) td .multiple:only-child {
 /* NOTY QUEUES */
 .noty-queues {
   position: fixed;
-  z-index: 100;
+  z-index: 1000;
   display: -webkit-flex;
   display: flex;
   left: 0;
@@ -8117,13 +8997,18 @@ table > :not(tfoot) td .multiple:only-child {
           flex-wrap: wrap;
   width: 100%;
   pointer-events: none;
+  /* TOP */
+  /* BOTTOM */
+  /* ROW */
 }
 
 .noty-queues.top {
   top: 0;
+  /* ROW */
+  /* QUEUE */
 }
 
-.noty-queues.top > .noty-queues-row {
+.noty-queues.top .noty-queues-row {
   -webkit-align-items: flex-start;
           align-items: flex-start;
 }
@@ -8131,21 +9016,27 @@ table > :not(tfoot) td .multiple:only-child {
 .noty-queues.top .noty-queue {
   -webkit-flex-direction: column;
           flex-direction: column;
+  /* NOTY */
+  /* EXPANDED */
 }
 
-.noty-queues.top .noty-queue.expanded {
-  border-top-width: 0;
-}
-
-.noty-queues.top .noty-queue > .noty {
+.noty-queues.top .noty-queue .noty {
   margin-top: 10px;
+}
+
+.noty-queues.top .noty-queue.expanded .noty {
+  border-top-width: 0;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
 }
 
 .noty-queues.bottom {
   bottom: 0;
+  /* ROW */
+  /* QUEUE */
 }
 
-.noty-queues.bottom > .noty-queues-row {
+.noty-queues.bottom .noty-queues-row {
   -webkit-align-items: flex-end;
           align-items: flex-end;
 }
@@ -8153,17 +9044,21 @@ table > :not(tfoot) td .multiple:only-child {
 .noty-queues.bottom .noty-queue {
   -webkit-flex-direction: column-reverse;
           flex-direction: column-reverse;
+  /* NOTY */
+  /* EXPANDED */
 }
 
-.noty-queues.bottom .noty-queue.expanded {
-  border-bottom-width: 0;
-}
-
-.noty-queues.bottom .noty-queue > .noty {
+.noty-queues.bottom .noty-queue .noty {
   margin-bottom: 10px;
 }
 
-.noty-queues > .noty-queues-row {
+.noty-queues.bottom .noty-queue.expanded .noty {
+  border-bottom-width: 0;
+  border-top-width: 1px;
+  border-top-style: solid;
+}
+
+.noty-queues-row {
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-between;
@@ -8175,6 +9070,10 @@ table > :not(tfoot) td .multiple:only-child {
 .noty-queue {
   display: -webkit-flex;
   display: flex;
+  /* LEFT */
+  /* CENTER */
+  /* RIGHT */
+  /* EXPANDED */
 }
 
 .noty-queue.left {
@@ -8198,19 +9097,6 @@ table > :not(tfoot) td .multiple:only-child {
   margin-left: 5px;
 }
 
-.noty-queue.expanded {
-  width: 100%;
-  margin: 0 !important;
-}
-
-.noty-queue.expanded > .noty {
-  width: 100%;
-  margin: 0 !important;
-  border-right-width: 0;
-  border-left-width: 0;
-  border-radius: 0;
-}
-
 .noty-queue.right {
   -webkit-align-items: flex-end;
           align-items: flex-end;
@@ -8220,38 +9106,58 @@ table > :not(tfoot) td .multiple:only-child {
   margin-right: 10px;
 }
 
+.noty-queue.expanded {
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
+  width: 100%;
+  margin: 0 !important;
+}
+
+.noty-queue.expanded .noty {
+  box-shadow: none ;
+  width: 100%;
+  margin: 0 !important;
+  border-right-width: 0;
+  border-left-width: 0;
+  border-radius: 0;
+}
+
 /* NOTY */
 .noty {
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
+  border-radius: 0.2665em;
   pointer-events: auto;
-  /* ANIMATIONS */
+  transition-property: opacity, font-size, padding, margin;
   transition-duration: 0.35s;
-  transition-property: opacity, font-size, padding, margin, height;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  /* INFOBAR */
+  /* BUTTONS */
+  /* IMG */
+  /* CLOSED */
 }
 
-.noty:not(.action) {
-  cursor: pointer;
+.noty .infobar {
+  background-color: transparent;
+  color: inherit;
+  margin-bottom: 0;
+  border-radius: inherit;
 }
 
-.noty .noty-img > img {
+.noty-buttons {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.noty-img {
   width: 38px;
+  border-radius: 0.2665em;
 }
 
-.noty .noty-buttons.multiple {
-  margin-bottom: -10px !important;
-}
-
-.noty:not(.active) {
-  font-size: 0;
-  height: 0;
-  margin: 0;
-  padding: 0;
-  transition-delay: 0s, 0s, 0s, 0s, 0.35s;
+.noty:not(.open) {
   opacity: 0;
-}
-
-.noty.active {
-  transition-delay: 0s;
+  font-size: 0;
+  padding: 0;
+  margin: 0;
 }
 
 /* =========================================================================
@@ -8478,6 +9384,14 @@ table > :not(tfoot) td .multiple:only-child {
           justify-content: center;
 }
 
+.placeholder.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) ;
+}
+
+.placeholder.transparentize {
+  background: rgba(224, 224, 224, 0.95) ;
+}
+
 .placeholder p > a {
   color: #ffffff ;
 }
@@ -8610,6 +9524,14 @@ code[class*='language-'] .namespace {
   width: 100%;
 }
 
+.progressbar > .progressbar-unhighlighted.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) ;
+}
+
+.progressbar > .progressbar-unhighlighted.transparentize {
+  background: rgba(224, 224, 224, 0.95) ;
+}
+
 .progressbar > .progressbar-unhighlighted p > a {
   color: #ffffff ;
 }
@@ -8637,6 +9559,14 @@ code[class*='language-'] .namespace {
   transition: width 0.15s;
   text-align: center;
   text-overflow: ellipsis;
+}
+
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted.transparentize {
+  border-color: rgba(163, 73, 0, 0.95) ;
+}
+
+.progressbar > .progressbar-unhighlighted > .progressbar-highlighted.transparentize {
+  background: rgba(239, 108, 0, 0.95) ;
 }
 
 .progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a {
@@ -9193,6 +10123,14 @@ table.table.selectable > tbody > tr.selected {
   padding: 5px;
 }
 
+.square-sample.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) ;
+}
+
+.square-sample.transparentize {
+  background: rgba(224, 224, 224, 0.95) ;
+}
+
 .square-sample p > a {
   color: #ffffff ;
 }
@@ -9296,6 +10234,14 @@ table.table.selectable > tbody > tr.selected {
   border-radius: 0.5em;
 }
 
+.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) ;
+}
+
+.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted.transparentize {
+  background: rgba(224, 224, 224, 0.95) ;
+}
+
 .slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted p > a {
   color: #ffffff ;
 }
@@ -9317,6 +10263,14 @@ table.table.selectable > tbody > tr.selected {
   width: 100%;
   height: 100%;
   border-radius: inherit;
+}
+
+.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted.transparentize {
+  border-color: rgba(163, 73, 0, 0.95) ;
+}
+
+.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted.transparentize {
+  background: rgba(239, 108, 0, 0.95) ;
 }
 
 .slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted p > a {
@@ -9357,6 +10311,14 @@ table.table.selectable > tbody > tr.selected {
   -webkit-transform: scale(1);
           transform: scale(1);
   border-radius: 50%;
+}
+
+.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler.transparentize {
+  border-color: rgba(163, 73, 0, 0.95) ;
+}
+
+.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler.transparentize {
+  background: rgba(239, 108, 0, 0.95) ;
 }
 
 .slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler p > a {
@@ -10471,6 +11433,14 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   transition-property: top, right, bottom, left;
 }
 
+.tabs > .tabs-containers > .tabs-buttons-indicator.transparentize {
+  border-color: rgba(163, 73, 0, 0.95) ;
+}
+
+.tabs > .tabs-containers > .tabs-buttons-indicator.transparentize {
+  background: rgba(239, 108, 0, 0.95) ;
+}
+
 .tabs > .tabs-containers > .tabs-buttons-indicator p > a {
   color: #1565c0 ;
 }
@@ -10583,6 +11553,14 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   margin-bottom: 10px;
 }
 
+.tagbox.transparentize {
+  border-color: transparent ;
+}
+
+.tagbox.transparentize {
+  background: transparent ;
+}
+
 .tagbox p > a {
   color: #ef6c00 ;
 }
@@ -10609,6 +11587,14 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   background: transparent ;
   font-size: 1em ;
   min-width: 6.5em;
+}
+
+.tagbox .text-field.transparentize {
+  border-color: transparent ;
+}
+
+.tagbox .text-field.transparentize {
+  background: transparent ;
 }
 
 .tagbox .text-field p > a {
@@ -10793,6 +11779,16 @@ mark,
   border-radius: 0.13325em;
 }
 
+mark.transparentize,
+.mark.transparentize {
+  border-color: rgba(231, 160, 6, 0.95) ;
+}
+
+mark.transparentize,
+.mark.transparentize {
+  background: rgba(250, 191, 64, 0.95) ;
+}
+
 mark p > a,
 .mark p > a {
   color: #f44336 ;
@@ -10907,6 +11903,14 @@ kbd {
   border-width: 1px;
   border-style: solid;
   border-radius: 0.2665em;
+}
+
+kbd.transparentize {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+kbd.transparentize {
+  background: rgba(255, 255, 255, 0.95) ;
 }
 
 kbd p > a {

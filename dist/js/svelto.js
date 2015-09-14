@@ -261,6 +261,12 @@
 
   };
 
+  $.frame = function ( callback ) {
+
+    return requestAnimationFrame ( callback );
+
+  };
+
   /* COMMON OBJECTS */
 
   $(function () {
@@ -827,7 +833,7 @@
 
       return setTimeout ( function () {
 
-        fn.apply ( instance, arguments );
+        fn.apply ( instance );
 
       }, delay || 0 );
 
@@ -838,6 +844,20 @@
     _defer: function ( fn ) {
 
       return this._delay ( fn );
+
+    },
+
+    /* FRAME */
+
+    _frame: function ( fn ) {
+
+      var instance = this;
+
+      return $.frame ( function () {
+
+        fn.apply ( instance );
+
+      });
 
     },
 
@@ -1000,11 +1020,11 @@
   };
 
   var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
-    events_namespace = 'pointer';
+      events_prefix = 'pointer';
 
   _.each ( events_names, function ( event_name ) {
 
-    var full_event = events_namespace + event_name;
+    var full_event = events_prefix + event_name;
 
     $.Pointer[event_name] = full_event;
 
@@ -1018,23 +1038,23 @@
 
   /* TRIGGERS */
 
-  var startEvents = $.browser.hasTouch ? 'touchstart' : 'mousedown',
-    moveEvents = $.browser.hasTouch ? 'touchmove' : 'mousemove',
-    endEvents = $.browser.hasTouch ? 'touchend touchcancel' : 'mouseup mouseleave',
-    $html = $(document.documentElement),
-    startXY,
-    moveXY,
-    deltaXY,
-    endXY,
-    target,
-    $target,
-    start_timestamp,
-    end_timestamp,
-    prev_tap_timestamp = 0,
-    motion,
-    orientation,
-    direction,
-    press_timeout;
+  var startEvents = $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
+      moveEvents = $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
+      endEvents = $.browser.is.touchDevice ? 'touchend touchcancel' : 'mouseup mouseleave',
+      $html = $(document.documentElement),
+      startXY,
+      moveXY,
+      deltaXY,
+      endXY,
+      target,
+      $target,
+      start_timestamp,
+      end_timestamp,
+      prev_tap_timestamp = 0,
+      motion,
+      orientation,
+      direction,
+      press_timeout;
 
   var createEvent = function ( name, originalEvent ) {
 
@@ -1114,7 +1134,7 @@
 
       end_timestamp = event.timeStamp || _.now ();
 
-      if ( !$.browser.hasTouch || !motion ) {
+      if ( !$.browser.is.touchDevice || !motion ) {
 
         $target.trigger ( createEvent ( $.Pointer.tap, event ) );
 
@@ -4073,7 +4093,7 @@
 
 
 /* =========================================================================
- * Svelto - Noty v0.1.0
+ * Svelto - Noty v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4081,7 +4101,7 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-//TODO: add support for swipe to dismiss in mobile and touchscreen enabled devices
+//TODO: Add better support for swipe to dismiss
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -4089,27 +4109,15 @@
 
   /* VARIABLES */
 
-  var timers = [];
+  var notiesTimers = [];
 
   /* HELPER */
 
-  $.noty = function ( custom_options ) {
+  $.noty = function ( options ) {
 
-    // EXTEND
+    /* OPTIONS */
 
-    var options = {
-      autoplay: true
-    };
-
-    if ( _.isString ( custom_options ) ) {
-
-      options.body = custom_options;
-
-    } else if ( _.isPlainObject ( custom_options ) ) {
-
-      _.merge ( options, custom_options );
-
-    }
+    options = _.isString ( options ) ? { body: options } : ( options || {} );
 
     if ( options.buttons ) {
 
@@ -4117,17 +4125,9 @@
 
     }
 
-    // NOTY
+    /* NOTY */
 
-    var noty = new $.svelto.noty ( options );
-
-    if ( options.autoplay ) {
-
-      noty.open ();
-
-    }
-
-    return noty;
+    return new $.svelto.noty ( options );
 
   };
 
@@ -4138,41 +4138,40 @@
     /* TEMPLATES */
 
     templates: {
-      base: '<div class="noty container {%=o.type%} {%=o.color%} {%=o.css%}">' + //TODO: add back transparentize
-            '<div class="container-content">' +
-              '<div class="infobar-wrp inset {%=o.color%}">' + //TODO: add back transparentize
-                '{% if ( o.img ) include ( "svelto.noty.img", o.img ); %}' +
-                '<div class="infobar-center">' +
-                  '{% if ( o.title ) include ( "svelto.noty.title", o.title ); %}' +
-                  '{% if ( o.body ) include ( "svelto.noty.body", o.body ); %}' +
+      base: '<div class="noty {%=(o.transparentize ? "transparentize" : "")%} {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
+              '<div class="infobar">' +
+                '{% if ( o.img ) { %}' +
+                  '<img src="{%=o.img%}" class="noty-img infobar-left" />' +
+                '{% } %}' +
+                '{% if ( o.title || o.body ) { %}' +
+                  '<div class="infobar-center">' +
+                    '{% if ( o.title ) { %}' +
+                      '<p class="infobar-title">' +
+                         '{%#o.title%}' +
+                       '</p>' +
+                    '{% } %}' +
+                    '{% if ( o.body ) { %}' +
+                      '{%#o.body%}' +
+                    '{% } %}' +
+                  '</div>' +
+                '{% } %}' +
+                '{% if ( o.buttons.length === 1 ) { %}' +
+                  '<div class="infobar-right">' +
+                    '{% include ( "svelto.noty.button", o.buttons[0] ); %}' +
+                  '</div>' +
+                '{% } %}' +
+              '</div>' +
+              '{% if ( o.buttons.length > 1 ) { %}' +
+                '<div class="noty-buttons multiple centered">' +
+                  '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' +
+                    '{% include ( "svelto.noty.button", o.buttons[i] ); %}' +
+                  '{% } %}' +
                 '</div>' +
-                '{% if ( o.buttons.length === 1 ) include ( "svelto.noty.single_button", o.buttons[0] ); %}' +
-              '</div>' +
-              '{% if ( o.buttons.length > 1 ) include ( "svelto.noty.buttons", o.buttons ); %}' +
-            '</div>' +
-          '</div>',
-      img: '<div class="noty-img infobar-left">' +
-           '<img src="{%=o%}" class="smooth" />' +
-         '</div>',
-      title: '<p class="infobar-title">' +
-             '{%#o%}' +
-           '</p>',
-      body: '{%#o%}',
-      single_button: '<div class="infobar-right">' +
-                 '{% include ( "svelto.noty.button", o ); %}' +
-               '</div>',
-      buttons: '<div class="noty-buttons multiple centered">' +
-               '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                 '{% include ( "svelto.noty.button", o[i] ); %}' +
-               '{% } %}' +
-           '</div>',
-      button: '<div class="label-wrp button-wrp">' +
-            '<div class="label actionable {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
-              '<div class="label-center">' +
+              '{% } %}' +
+            '</div>',
+      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
                 '{%#(o.text || "")%}' +
-              '</div>' +
-            '</div>' +
-          '</div>'
+              '</div>'
     },
 
     /* OPTIONS */
@@ -4183,29 +4182,40 @@
         x: 'left'
       },
 
-      delay: {
-        remove: 200
-      },
-
       title: false,
       body: false,
       img: false,
       buttons: [],
       /*
-           : [{
-              color: 'white',
-              size: 'small',
-              css: '',
-              text: '',
-              onClick: _.noop
-           }],
+             : [{
+                color: 'white',
+                size: 'small',
+                css: '',
+                text: '',
+                onClick: _.noop
+             }],
       */
 
       type: 'alert',
       color: 'black',
+      transparentize: true,
       css: '',
 
       ttl: 3500,
+      autoplay: true,
+      timerMinimumRemaining: 1000,
+
+      classes: {
+        open: 'open'
+      },
+
+      selectors: {
+        button: '.noty-buttons .button, .infobar-right .button'
+      },
+
+      animations: {
+        remove: $.ui.animation.normal
+      },
 
       callbacks: {
         open: _.noop,
@@ -4218,67 +4228,75 @@
     _variables: function () {
 
       this.$noty = this.$element;
-      this.timer = false;
+      this.$buttons = this.$noty.find ( this.options.selectors.button );
 
-      this.isOpen = false;
+      this.timer = false;
+      this._isOpen = false;
       this.neverOpened = true;
+
+    },
+
+    _init: function () {
+
+      if ( this.options.autoplay ) {
+
+        this.open ();
+
+      }
 
     },
 
     /* PRIVATE */
 
-    _init_click: function () {
+    ___click: function () {
 
-      if ( !this.options.buttons.length ) {
+      if ( this.options.type !== 'action' ) {
 
-        this._on ( 'click', this.close );
+        this._on ( $.Pointer.tap, this.close );
 
       }
 
     },
 
-    _init_buttons_click: function () {
+    ___buttonClick: function () {
 
-      if ( this.options.buttons.length ) {
+      _.each ( this.options.buttons, function ( button, index ) {
 
-        var $buttons = this.$noty.find ( '.button-wrp .label' ),
-          instance = this;
+        this._on ( this.$buttons.eq ( index ), $.Pointer.tap, function ( event, data ) {
 
-        _.each ( this.options.buttons, function ( button, index ) {
+          if ( button.onClick ) {
 
-          var $button = $buttons.eq ( index ); //FIXME: it will not work if we add a button to the body manually
+            if ( button.onClick.apply ( this.$buttons.get ( index ), [event, data] ) === false ) return;
 
-          $button.on ( 'click', function ( event ) {
+          }
 
-            if ( button.onClick ) button.onClick.call ( this, event );
-
-            instance.close ();
-
-          });
+          this.close ();
 
         });
 
-      }
+      }, this );
 
     },
 
     _init_timer: function () {
 
-      if ( this.options.buttons.length === 0 && this.options.ttl !== 'forever' ) {
+      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
         this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
 
-        timers.push ( this.timer );
+        notiesTimers.push ( this.timer );
 
       }
 
     },
 
-    _init_hover: function () {
+    ___hover: function () {
+
+      var instance = this;
 
       this.$noty.hover ( function () {
 
-        _.each ( timers, function ( timer ) {
+        _.each ( notiesTimers, function ( timer ) {
 
           timer.pause ();
 
@@ -4286,9 +4304,9 @@
 
       }, function () {
 
-        _.each ( timers, function ( timer ) {
+        _.each ( notiesTimers, function ( timer ) {
 
-          timer.remaining ( Math.max ( 1000, timer.remaining () || 0 ) );
+          timer.remaining ( Math.max ( instance.options.timerMinimumRemaining, timer.remaining () || 0 ) );
 
           timer.play ();
 
@@ -4298,23 +4316,66 @@
 
     },
 
+    ___flick: function () {
+
+      if ( this.options.type !== 'action' ) {
+
+        this._on ( $.Pointer.flick, function ( event, data ) {
+
+          if ( data.orientation === 'horizontal' ) {
+
+            this.close ();
+
+          }
+
+        });
+
+      }
+
+    },
+
+    __keydown: function ( event ) {
+
+      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+
+        event.stopImmediatePropagation ();
+
+        this.close ();
+
+      }
+
+    },
+
     /* PUBLIC */
+
+    isOpen: function () {
+
+      return this._isOpen;
+
+    },
 
     open: function () {
 
-      if ( !this.isOpen ) {
+      if ( !this._isOpen ) {
 
-        $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).first ().append ( this.$noty );
+        this._frame ( function () {
 
-        $.reflow ();
+            $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append ( this.$noty );
 
-        this.$noty.addClass ( 'active' );
+            this._frame ( function () {
+
+              this.$noty.addClass ( this.options.classes.open );
+
+            });
+
+        });
 
         if ( this.neverOpened ) {
 
-          this._init_click ();
-          this._init_buttons_click ();
-          this._init_hover ();
+          this.___click ();
+          this.___flick ();
+          this.___buttonClick ();
+          this.___hover ();
 
           this.neverOpened = false;
 
@@ -4322,9 +4383,11 @@
 
         this._init_timer ();
 
-        this._trigger ( 'open' );
+        this._on ( $document, 'keydown', this.__keydown );
 
-        this.isOpen = true;
+        this._isOpen = true;
+
+        this._trigger ( 'open' );
 
       }
 
@@ -4332,25 +4395,32 @@
 
     close: function () {
 
-      if ( this.timer ) {
+      if ( this._isOpen ) {
 
-        _.pull ( timers, this.timer );
 
-        this.timer.stop ();
+        this.$noty.removeClass ( this.options.classes.open );
+
+        this._delay ( function () {
+
+          this.$noty.detach ();
+
+        }, this.options.animations.remove );
+
+        if ( this.timer ) {
+
+          _.pull ( notiesTimers, this.timer );
+
+          this.timer.stop ();
+
+        }
+
+        this._off ( $document, 'keydown', this.__keydown );
+
+        this._isOpen = false;
+
+        this._trigger ( 'close' );
 
       }
-
-      this.$noty.removeClass ( 'active' );
-
-      this._delay ( function () {
-
-        this.$noty.remove ();
-
-      }, this.options.delay.remove );
-
-      this._trigger ( 'close' );
-
-      this.isOpen = false;
 
     }
 
@@ -4596,6 +4666,8 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
+//TODO: Disable scrolling while the modal is open
+
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -4654,6 +4726,8 @@
     __keydown: function ( event ) {
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+
+        event.stopImmediatePropagation ();
 
         this.close ();
 
