@@ -1,78 +1,86 @@
 
 /* =========================================================================
- * Svelto - Progressbar v0.1.0
+ * Svelto - Progressbar v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-/* STRIPES */
+//- TODO: Add an infinite linear loading progressbar, like before downloading something from the play store
 
-%progressbar-stripes {
-  background: linear-gradient(-45deg, $progress-bar-stripe-light-color 25%, $progress-bar-stripe-dark-color 25%, $progress-bar-stripe-dark-color 50%, $progress-bar-stripe-light-color 50%, $progress-bar-stripe-light-color 75%, $progress-bar-stripe-dark-color 75%, $progress-bar-stripe-dark-color);
-}
-
-/* PROGRESS BAR */
+/* PROGRESSBAR */
 
 .progressbar {
 
-  position: relative;
+  @extend .widget;
+  @include color ( $progressbar-color, $progressbar-color-basic );
   display: flex;
   overflow: hidden;
-  flex-wrap: nowrap;
-  height: $progress-bar-height;
-  margin-bottom: $gutter;
-  transition: opacity $progress-bar-transition-opacity-duration;
-  border-radius: 10000px 10000px;
+  height: $progressbar-height;
+  border-radius: $progressbar-border-radius;
 
-  & > .progressbar-unhighlighted {
+  /* HIGHLIGHT */
 
-    @include color ( $progress-bar-unhighlighted-color, $progress-bar-unhighlighted-color-basic );
+  &-highlight {
+    @include color ( $progressbar-highlight-color, $progressbar-highlight-color-basic );
+    @include text-truncate ();
+    position: relative;
     display: flex;
-    width: 100%;
+    justify-content: center;
+    align-items: center;
+    transition: width $progressbar-transition-all-duration;
+  }
 
-    & > .progressbar-highlighted {
+  /* LABEL */
 
-      @include color ( $progress-bar-highlighted-color, $progress-bar-highlighted-color-basic );
-      display: flex;
-      overflow: hidden;
-      justify-content: center;
-      align-items: center;
-      width: 0;
-      transition: width $progress-bar-transition-width-duration;
-      text-align: center;
-      text-overflow: ellipsis;
+  &-label {
+    font-size: $progressbar-label-font-size;
+    padding: 0 $gutter-half;
+  }
 
-      & > .progressbar-label {
-        font-size: $progress-bar-label-font-size;
-        padding: $progress-bar-label-padding-vertical $progress-bar-label-padding-horizontal;
-      }
+  /* STRIPED */
 
+  &.striped {
+
+    .progressbar-highlight:before {
+      @include fill-absolute ();
+      background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
+      content: '';
+      pointer-events: none;
+      background-size: $progressbar-stripe-size $progressbar-stripe-size;
+    }
+
+    &:not(.disabled):not([class*="-disabled"]) .progressbar-highlight:before {
+      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear 0s infinite;
     }
 
   }
 
-  & > .progressbar-stripes {
-    position: absolute;
-    top: 0;
-    left: 0;
-    display: none;
-    pointer-events: none;
+  /* COMPACT */
+
+  &.compact {
+
+    height: $progressbar-compact-height;
+
+    .progressbar-label {
+      font-size: $progressbar-compact-label-font-size;
+    }
+
   }
 
-  &.striped > .progressbar-stripes {
-    @extend %progressbar-stripes;
-    display: block;
-    width: 0;
-    height: 100%;
-    transition: width $progress-bar-transition-width-duration;
-    background-size: $progress-bar-stripe-size $progress-bar-stripe-size;
-  }
+  /* SLIM */
 
-  &.striped:not(.progressbar-disabled) > .progressbar-stripes {
-    animation: progressbar-stripes-move $progress-bar-stripes-transition-move-duration linear 0s infinite;
+  &.slim {
+
+    height: $progressbar-slim-height;
+
+    .progressbar-label {
+      font-size: $progressbar-slim-label-font-size;
+    }
+
   }
 
 }
@@ -84,6 +92,6 @@
     background-position: 0 0;
   }
   100% {
-    background-position: $progress-bar-stripe-size $progress-bar-stripe-size;
+    background-position: $progressbar-stripe-size $progressbar-stripe-size;
   }
 }

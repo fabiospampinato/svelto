@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2993,6 +2993,7 @@ i.disabled.icon,
 .disabled.input-wrp,
 .disabled.textarea-wrp, .disabled.parallax,
 .disabled.placeholder,
+.disabled.progressbar,
 .disabled.triangle,
 .disabled.square,
 .disabled.square-sample,
@@ -3001,7 +3002,7 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -4110,7 +4111,7 @@ label {
   white-space: nowrap !important;
 }
 
-.text-ellipsis, .truncate {
+.truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
@@ -9482,129 +9483,132 @@ code[class*='language-'] .namespace {
  * =========================================================================
  * @requires ../core/_core.scss
  * ========================================================================= */
-/* PROGRESS BAR */
-/* UNHIGHLIGHTED */
-/* HIGHLIGHTED */
+/* PROGRESSBAR */
+/* COMPACT */
+/* SLIM */
+/* HIGHLIGHT */
 /* LABEL */
 /* STRIPE */
 /* OTHERS */
 /* =========================================================================
- * Svelto - Progressbar v0.1.0
+ * Svelto - Progressbar v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
-/* STRIPES */
-.progressbar.striped > .progressbar-stripes {
-  background: linear-gradient(-45deg, rgba(255, 255, 255, 0.075) 25%, rgba(0, 0, 0, 0.075) 25%, rgba(0, 0, 0, 0.075) 50%, rgba(255, 255, 255, 0.075) 50%, rgba(255, 255, 255, 0.075) 75%, rgba(0, 0, 0, 0.075) 75%, rgba(0, 0, 0, 0.075));
-}
-
-/* PROGRESS BAR */
+/* PROGRESSBAR */
 .progressbar {
-  position: relative;
-  display: -webkit-flex;
-  display: flex;
-  overflow: hidden;
-  -webkit-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-  height: 1.07143em;
-  margin-bottom: 10px;
-  transition: opacity 0.15s;
-  border-radius: 10000px 10000px;
-}
-
-.progressbar > .progressbar-unhighlighted {
   border-color: #bababa ;
   color: #3f3f3f ;
   background: #e0e0e0 ;
   display: -webkit-flex;
   display: flex;
-  width: 100%;
+  overflow: hidden;
+  height: 1em;
+  border-radius: 1em;
+  /* HIGHLIGHT */
+  /* LABEL */
+  /* STRIPED */
+  /* COMPACT */
+  /* SLIM */
 }
 
-.progressbar > .progressbar-unhighlighted.transparentize {
+.progressbar.transparentize {
   border-color: rgba(186, 186, 186, 0.95) ;
 }
 
-.progressbar > .progressbar-unhighlighted.transparentize {
+.progressbar.transparentize {
   background: rgba(224, 224, 224, 0.95) ;
 }
 
-.progressbar > .progressbar-unhighlighted p > a {
+.progressbar p > a {
   color: #ffffff ;
 }
 
-.progressbar > .progressbar-unhighlighted p > a:after {
+.progressbar p > a:after {
   border-color: white ;
 }
 
-.progressbar > .progressbar-unhighlighted p > a:hover {
+.progressbar p > a:hover {
   color: white ;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted {
+.progressbar-highlight {
   border-color: #a34900 ;
   color: #ffffff ;
   background: #ef6c00 ;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
   display: -webkit-flex;
   display: flex;
-  overflow: hidden;
   -webkit-justify-content: center;
           justify-content: center;
   -webkit-align-items: center;
           align-items: center;
-  width: 0;
   transition: width 0.15s;
-  text-align: center;
-  text-overflow: ellipsis;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted.transparentize {
+.progressbar-highlight.transparentize {
   border-color: rgba(163, 73, 0, 0.95) ;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted.transparentize {
+.progressbar-highlight.transparentize {
   background: rgba(239, 108, 0, 0.95) ;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a {
+.progressbar-highlight p > a {
   color: #1565c0 ;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a:after {
+.progressbar-highlight p > a:after {
   border-color: #166ac9 ;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted p > a:hover {
+.progressbar-highlight p > a:hover {
   color: #166ac9 ;
 }
 
-.progressbar > .progressbar-unhighlighted > .progressbar-highlighted > .progressbar-label {
-  font-size: 0.8em;
-  padding: 0 0.5em;
+.progressbar-label {
+  font-size: 0.75em;
+  padding: 0 5px;
 }
 
-.progressbar > .progressbar-stripes {
+.progressbar.striped .progressbar-highlight:before {
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
   left: 0;
-  display: none;
+  background: linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05));
+  content: '';
   pointer-events: none;
-}
-
-.progressbar.striped > .progressbar-stripes {
-  display: block;
-  width: 0;
-  height: 100%;
-  transition: width 0.15s;
   background-size: 3.33333em 3.33333em;
 }
 
-.progressbar.striped:not(.progressbar-disabled) > .progressbar-stripes {
-  -webkit-animation: progressbar-stripes-move 2s linear 0s infinite;
-          animation: progressbar-stripes-move 2s linear 0s infinite;
+.progressbar.striped:not(.disabled):not([class*="-disabled"]) .progressbar-highlight:before {
+  -webkit-animation: progressbar-stripes-move 1s linear 0s infinite;
+          animation: progressbar-stripes-move 1s linear 0s infinite;
+}
+
+.progressbar.compact {
+  height: 0.5em;
+}
+
+.progressbar.compact .progressbar-label {
+  font-size: 0.5em;
+}
+
+.progressbar.slim {
+  height: 0.25em;
+}
+
+.progressbar.slim .progressbar-label {
+  font-size: 0;
 }
 
 /* KEYFRAMES */

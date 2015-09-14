@@ -194,8 +194,6 @@
 
       if ( isMethodCall ) {
 
-        console.lo
-
         // METHOD CALL
 
         this.each ( function () {

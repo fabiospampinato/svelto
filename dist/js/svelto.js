@@ -1385,8 +1385,6 @@
 
       if ( isMethodCall ) {
 
-        console.lo
-
         // METHOD CALL
 
         this.each ( function () {
@@ -5182,215 +5180,185 @@ Prism.languages.javascript=Prism.languages.extend("clike",{keyword:/\b(break|cas
 
 
 /* =========================================================================
- * Svelto - Progressbar v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../widget/factory.js
- * ========================================================================= */
-
-//TODO: this way of exenting the property erases previous setted styles (synce a array is extended with a copy, we are not extending the children)
-//TODO: make templates DRY
+* Svelto - Progressbar v0.2.0
+* =========================================================================
+* Copyright (c) 2015 Fabio Spampinato
+* Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+* =========================================================================
+* @requires ../widget/factory.js
+* ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
-  'use strict';
+'use strict';
+
+/* HELPER */
+
+$.progressbar = function ( options ) {
+
+  options = _.isNumber ( options ) ? { value: options } : options;
+
+  return new $.svelto.progressbar ( options );
+
+};
+
+/* PROGRESSBAR */
+
+$.factory ( 'svelto.progressbar', {
+
+  /* TEMPLATES */
+
+  templates: {
+    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+            '<div class="progressbar-highlight {%=o.colors.on%}">' +
+              '{% if ( o.labeled ) { %}' +
+                '<div class="progressbar-label"></div>' +
+              '{% } %}' +
+            '</div>' +
+          '</div>'
+  },
+
+  /* OPTIONS */
+
+  options: {
+    value: 0, // Percentage
+    colors: { // Colors to use for the progressbar
+      on: '', // Color of `.progressbar-highlight`
+      off: '' // Color of `.progressbar`
+    },
+    striped: '', // Draw striped over it
+    labeled: '', // Draw a label inside
+    decimals: 0, // Amount of decimals to round the label value to
+    size: '', // Size of the progressbar: '', 'compact', 'slim'
+    css: '',
+    selectors: {
+      highlight: '.progressbar-highlight',
+      label: '.progressbar-label'
+    },
+    callbacks: {
+      change: _.noop,
+      empty: _.noop,
+      full: _.noop
+    }
+  },
+
+  /* SPECIAL */
+
+  _variables: function () {
+
+    this.$progressbar = this.$element;
+    this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
+    this.$label = this.$progressbar.find ( this.options.selectors.label );
+
+  },
+
+  _init: function () {
+
+    this.options.value = this._sanitizeValue ( this.options.value );
+
+    this._updateWidth ();
+    this._updateLabel ();
+
+  },
 
   /* PRIVATE */
 
-  var generate_options = function ( options, multiple ) {
+  _sanitizeValue: function ( value ) {
 
-    if ( !_.isUndefined ( multiple ) ) {
+    var nr = Number ( value );
 
-      var new_options = { percentages: Array ( arguments.length ) };
+    return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
 
-      for ( var i = 0, l = arguments.length; i < l; i++ ) {
+  },
 
-        new_options.percentages[i] = _.isNumber ( arguments[i] ) ? { value: arguments[i] } : arguments[i];
+  _roundValue: function ( value ) {
 
-      }
+    return value.toFixed ( this.options.decimals );
 
-    } else {
+  },
 
-      var new_options = _.isNumber ( options ) ? { percentages: [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
+  _updateWidth: function () {
 
-    }
+    this.$highlight.css ( 'min-width', this.options.value + '%' );
 
-    return new_options;
+  },
 
-  };
+  _updateLabel: function () {
 
-  /* HELPER */
+    this.$label.html ( this._roundValue ( this.options.value ) + '%' );
 
-  $.progressBar = function ( options, multiple ) {
+  },
 
-    options = generate_options.apply ( null, arguments );
+  _update: function () {
 
-    return new $.svelto.progressBar ( options );
+    this._updateWidth ();
+    this._updateLabel ();
 
-  };
+  },
 
-  /* PROGRESS BAR */
+  /* PUBLIC */
 
-  $.factory ( 'svelto.progressBar', {
+  get: function () {
 
-    /* TEMPLATES */
+    return this.options.value;
 
-    templates: {
-      base: '<div class="progressBar {%=(o.striped ? "striped" : "")%} {%=o.color%} {%=o.size%} {%=o.css%}">' +
-            '<div class="progressBar-unhighlighted">' +
-              '{% include ( "svelto.progressBar.percentages" + ( o.labeled ? "_labeled" : "" ), o.percentages ); %}' +
-            '</div>' +
-            '<div class="progressBar-stripes"></div>' +
-          '</div>',
-      percentages: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-               '{% include ( "svelto.progressBar.percentage", o[i] ); %}' +
-             '{% } %}',
-      percentages_labeled: '{% for ( var i = 0; i < o.length; i++ ) { %}' +
-                   '{% include ( "svelto.progressBar.percentage_labeled", o[i] ); %}' +
-                 '{% } %}',
-      percentage: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}"></div>',
-      percentage_labeled: '<div class="progressBar-highlighted {%=(o.color || "")%} {%=(o.css || "")%}">' +
-                  '{% include ( "svelto.progressBar.label", {} ); %}' +
-                '</div>',
-      label: '<div class="progressBar-label"></div>'
-    },
+  },
 
-    /* OPTIONS */
+  set: function ( value ) {
 
-    options: {
-      percentages: [],
-      /*
-             : [{
-               value: 0,
-               color: '',
-               css: ''
-             }],
-      */
+    value = Number ( value );
 
-      color: '',
-      size: '',
-      css: '',
+    if ( !_.isNaN ( value ) ) {
 
-      striped: false,
-      labeled: false,
-      decimals: 0,
+      value = this._sanitizeValue ( value );
 
-      callbacks: {
-        update: _.noop,
-        full: _.noop
-      }
-    },
+      if ( value !== this.options.value ) {
 
-    /* SPECIAL */
+        var data = {
+          previous: this.options.value,
+          value: value
+        };
 
-    _variables: function () {
-
-      this.$progressBar = this.$element;
-      this.$highlighteds = this.$progressBar.find ( '.progressBar-highlighted' );
-      this.$stripes = this.$progressBar.find ( '.progressBar-stripes' );
-
-    },
-
-    _init: function () {
-
-      if ( this.initializationType !== 'element' ) {
+        this.options.value = value;
 
         this._update ();
 
-      }
+        this._trigger  ( 'change', data );
 
-    },
+        if ( this.options.value === 0 ) {
 
-    /* PRIVATE */
+          this._trigger  ( 'empty', data );
 
-    _update: function () {
+        } else if ( this.options.value === 100 ) {
 
-      for ( var i = 0, l = this.options.percentages.length; i < l; i++ ) {
-
-        var $highlighted = this.$highlighteds.eq ( i );
-
-        $highlighted.width ( this.options.percentages[i].value + '%' );
-
-        if ( this.options.labeled ) {
-
-          var $label = $highlighted.find ( '.progressBar-label' );
-
-          $label.html ( +(this.options.percentages[i].value).toFixed ( this.options.decimals ) );
+          this._trigger  ( 'full', data );
 
         }
 
       }
 
-      var sum = _.clamp ( 0, _.sum ( this.get ().slice ( 0, this.$highlighteds.length ) ), 100 );
-
-      if ( this.options.striped ) {
-
-        this.$stripes.width ( sum + '%' );
-
-      }
-
-      if ( sum === 100 ) {
-
-        this._trigger ( 'full' );
-
-      }
-
-    },
-
-    /* PUBLIC */
-
-    get: function () {
-
-      return _.map ( this.options.percentages, function ( percentage ) {
-
-        return percentage.value;
-
-      });
-
-    },
-
-    set: function ( options, multiple ) {
-
-      options = generate_options.apply ( null, arguments );
-
-      _.merge ( this.options, options ); //FIXME: does the merge work here? or we modify the original options?
-
-      this._update ();
-
-      this._trigger ( 'update' );
-
     }
 
-  });
+  }
 
-  /* READY */
+});
 
-  $(function () {
+/* READY */
 
-    $('.progressBar').each ( function () {
+$(function () {
 
-      var $progressBar = $(this),
-        options = {
-          percentages: [],
-          striped: $progressBar.hasClass ( 'striped' ),
-          labeled: !!$progressBar.find ( '.progressBar-label' ).length
-        };
+  $('.progressbar').each ( function () {
 
-      $progressBar.find ( '.progressBar-highlighted' ).each ( function () {
+    var $progressbar = $(this);
 
-        options.percentages.push ({
-          value: parseFloat ( this.style.width )
-        });
-
-      });
-
-      $progressBar.progressBar ( options );
-
+    $progressbar.progressbar ({
+      value: $progressbar.data ( 'value' ),
+      decimals: $progressbar.data ( 'decimals ')
     });
 
   });
+
+});
 
 }( jQuery, _, window, document ));
 

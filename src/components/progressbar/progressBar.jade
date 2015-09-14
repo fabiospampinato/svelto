@@ -1,29 +1,32 @@
 
 //- =========================================================================
-//- Svelto - Progressbar v0.1.0
+//- Svelto - Progressbar v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-//- TODO: Write options docs block
+//- Options
+  {
+    value: '', // Percentage
+    colors: { // Colors to use for the progressbar
+      on: '', // Color of the highlight part
+      off: '' // Color of the unhighlighted part
+    },
+    striped: '', // Draw striped over it
+    labeled: '', // Draw a label inside
+    decimals: '' // Amount of decimals to round the label value to
+  }
 
-mixin progressbar(options, multiple)
-  if typeof multiple !== 'undefined'
-    - var new_options = { percentages: Array ( arguments.length ) };
-    - for ( var i = 0, l = arguments.length; i < l; i++ ) {
-      - new_options.percentages[i] = ( typeof arguments[i] === 'number' ) ? { value: arguments[i] } : arguments[i];
-    - }
-  else
-    - var new_options = ( typeof options === 'number' ) ? { percentages : [{ value: options }] } : ( options.percentages ? options : { percentages: [options] } );
-  - options = new_options;
+mixin progressbar(options)
+  - options = typeof options === "number" ? { value: options } : ( options || {} );
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.striped = options.striped || false;
+  - options.labeled = options.labeled || false;
   - options.decimals = options.decimals || 0;
-  - var total = 0;
-  .progressbar&attributes(attributes)
-    .progressbar-unhighlighted
-      each percentage in options.percentages
-        - total += percentage.value;
-        .progressbar-highlighted(class=(percentage.color || ""), style=("width: " + percentage.value + "%;"))
-          if options.labeled
-            .progressbar-label= +(percentage.value).toFixed(options.decimals)
-    .progressbar-stripes(style=("width: " + total + "%;"))
+  .progressbar(class=((options.striped ? "striped" : "") + " " + options.colors.off) data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
+    .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
+      if options.labeled
+        .progressbar-label= +(options.value).toFixed(options.decimals)

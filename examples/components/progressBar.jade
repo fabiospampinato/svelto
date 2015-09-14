@@ -3,94 +3,78 @@ extends ../layout.jade
 
 //- Progressbar
 
-//- TODO: add an infinite linear loading progressbar, like before downloading something from the play store
-
 append main
   +divider-block Base
 
   +container.outlined
+    +progressbar(0)
     +progressbar(33)
-    +progressbar(55).striped
-    +progressbar({ percentages: [{ value: 45 }], labeled: true })
+    +progressbar({ value: 55, striped: true })
+    +progressbar({ value: 45.12, labeled: true })
+    +progressbar({ value: 45.12, labeled: true, decimals: 2 })
 
-  +divider-block Colored
-
-  +container.outlined
-    +progressbar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' })
-    +progressbar({ value: 5, color: 'yellow' }, { value: 5, color: 'green' }, { value: 5, color: 'pink' }, { value: 5, color: 'teal' }).striped
-    +progressbar({ percentages: [{ value: 7, color: 'yellow' }, { value: 7, color: 'green' }, { value: 7, color: 'pink' }, { value: 7, color: 'teal' }], labeled: true })
-    +progressbar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' })
-
-  +divider-block Disabled
+  +divider-block Colors
 
   +container.outlined
-    +progressbar(45).progressbar-disabled
-    +progressbar(66).striped.progressbar-disabled
-    +progressbar({ value: 6, color: 'yellow' }, { value: 6, color: 'green' }, { value: 6, color: 'pink' }, { value: 6, color: 'teal' }).progressbar-disabled
-    +progressbar({ value: 17.5, color: 'yellow' }, { value: 17.5, color: 'green' }, { value: 17.5, color: 'pink' }, { value: 17.5, color: 'teal' }).progressbar-disabled
-    +progressbar({ value: 10, color: 'yellow' }, { value: 20, color: 'green' }, { value: 30, color: 'pink' }, { value: 40, color: 'teal' }).progressbar-disabled
-
+    +progressbar({ value: 0, colors: { on: 'green', off: 'olive' } })
+    +progressbar({ value: 33, colors: { on: 'green', off: 'olive' } })
+    +progressbar({ value: 55, colors: { on: 'green', off: 'olive' }, striped: true })
+    +progressbar({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true })
+    +progressbar({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true, decimals: 2 })
+  
   +divider-block Created
 
-  +container.created.outlined
+  +container.outlined.created
 
   +multiple
-    +button("progressbar_create ( 22 )").outlined Basic
-    +button("progressbar_create ( 0 )").outlined Basic 0
-    +button("progressbar_create ({ percentages: [{ value: 43.21 }], labeled: true })").outlined Labeled
-    +button("progressbar_create ({ percentages: [{ value: 3.12332 }], labeled: true })").outlined Labeled small
-    +button("progressbar_create ({ percentages: [{ value: 31.12382391823 }], labeled: true })").outlined Labeled long
-    +button("progressbar_create ({ percentages: [{ value: 31.12382391823 }], labeled: true, decimals: 10 })").outlined Labeled long 10 decimals
-    +button("progressbar_create ({ percentages: [{ value: 10 }, { value: 55 }], labeled: true })").outlined Multiple
-    +button("progressbar_create ( 10, { value: 55, color: 'pink' })").outlined Multiple colors
-    +button("progressbar_create ({ percentages: [{ value: 10, color: 'yellow' }, { value: 55, color: 'green' }, { value: 12, color: 'pink' }, { value: 7, color: 'teal' }], striped: true, labeled: true })").outlined Advanced
+    +button("progressbar_create( 0 )").outlined Base 0
+    +button("progressbar_create( 33 )").outlined Base 33
+    +button("progressbar_create({ value: 55, striped: true })").outlined Base 55 - Striped
+    +button("progressbar_create({ value: 45.12, labeled: true })").outlined Base 45.12 - Labeled
+    +button("progressbar_create({ value: 45.12, labeled: true, decimals: 2 })").outlined Base 45.12 - Labeled - 2 Decimals
+    +button("progressbar_create({ value: 0, colors: { on: 'green', off: 'olive' } })").outlined Colors 0
+    +button("progressbar_create({ value: 33, colors: { on: 'green', off: 'olive' } })").outlined Colors 33
+    +button("progressbar_create({ value: 55, colors: { on: 'green', off: 'olive' }, striped: true })").outlined Colors 55 - Striped
+    +button("progressbar_create({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true })").outlined Colors 45.12 - Labeled
+    +button("progressbar_create({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true, decimals: 2 })").outlined Colors 45.12 - Labeled - 2 Decimals
 
-  +divider-block Set single
+  +divider-block Actions
 
-  +multiple
-    +button("progressbar_set_single ( 0 )").outlined 0%
-    +button("progressbar_set_single ( 25 )").outlined 25%
-    +button("progressbar_set_single ( 50 )").outlined 50%
-    +button("progressbar_set_single ( 75 )").outlined 75%
-    +button("progressbar_set_single ( 100 )").outlined 100%
-
-  +divider-block Set multiple
-
-  +multiple
-    +button("progressbar_set_multiple ( 0, 10, 0, 0 )").outlined 0% 10% 0%
-    +button("progressbar_set_multiple ( 5, 10, 0, 0 )").outlined 5% 10% 0%
-    +button("progressbar_set_multiple ( 20, 5, 10, 5 )").outlined 20% 5% 10% 5%
-    +button("progressbar_set_multiple ( 40, 10, 5, 45 )").outlined 40% 10% 5% 45%
-    +button("progressbar_set_multiple ( 10, 20, 30, 40 )").outlined 10% 20% 30% 40%
-
-  +divider-block Enable / Disable
-
-  +multiple
-    +button("progressbar_enable ()").outlined Enable
-    +button("progressbar_disable ()").outlined Disable
+  +multiple.actions
+    +button("toggle_class ( 'compact' )").outlined Toggle compact
+    +button("toggle_class ( 'slim' )").outlined Toggle slim
+    +button("toggle_gradient ()").outlined Toggle gradient
+    +button("toggle_class ( 'outlined' )").outlined Toggle outlined
+    +button("progressbar_get_all ()").outlined Get all
+    +multiple.joined
+      +input({ name: "set_value", label: "Value..." }).outlined.no-floating
+      +button("progressbar_set_all ()").outlined.secondary Set all
 
 append body-end
   +script.
-    function progressbar_set_single ( percentage ) {
-      $(".progressbar").each ( function () {
-        $(this).progressbar ( 'instance' ).set ( percentage, 0, 0, 0 );
+    function toggle_class ( css_class ) {
+      $('.progressbar').toggleClass ( css_class );
+    }
+    function toggle_gradient () {
+      $('.progressbar, .progressbar .progressbar-highlight').toggleClass ( 'gradient' );
+    }
+    function progressbar_get_all () {
+      _.each ( $('.container'), function ( container ) {
+        var gets = [];
+        _.each ( $(container).find ( '.progressbar' ), function ( progressbar ) {
+          gets.push ( $(progressbar).progressbar ( 'get' ) );
+        });
+        if ( gets.length > 0 ) {
+          $.noty ( gets.join ( ' - ' ) );
+        }
       });
     }
-    function progressbar_set_multiple ( one, two, three, four ) {
+    function progressbar_set_all () {
+      var value = $('input[name="set_value"]').val ();
       $(".progressbar").each ( function () {
-        $(this).progressbar ( 'instance' ).set ( one, two, three, four );
+        $(this).progressbar ( 'set', value );
       });
     }
-    function progressbar_create () {
-      $.progressbar.apply ( null, arguments ).appendTo ( '.container.created .container-content' );
-    }
-    function progressbar_enable () {
-      $(".progressbar").each ( function () {
-        $(this).progressbar ( 'instance' ).enable ();
-      });
-    }
-    function progressbar_disable () {
-      $(".progressbar").each ( function () {
-        $(this).progressbar ( 'instance' ).disable ();
-      });
+    function progressbar_create ( options ) {
+      $.progressbar ( options ).appendTo ( '.container.created' );
     }
