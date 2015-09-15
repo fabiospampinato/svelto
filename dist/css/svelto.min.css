@@ -11035,12 +11035,19 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 /* =========================================================================
- * Svelto - Stepper v0.1.0
+ * Svelto - Stepper v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* STEPPER */
+.stepper .input-wrp, .stepper .textarea-wrp {
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  -webkit-justify-content: center;
+          justify-content: center;
+}
+
 /* =========================================================================
  * Svelto - Switch v0.1.0
  * =========================================================================
