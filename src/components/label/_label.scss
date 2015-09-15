@@ -380,6 +380,7 @@ label {
 .label-tag {
 
   margin-bottom: $gutter;
+  z-index: 1;
 
   & > * { //INFO: Both `.label` and `.button`
 

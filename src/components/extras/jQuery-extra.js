@@ -49,7 +49,7 @@
 
   $.hasCtrlOrCmd = function ( event ) {
 
-    return ( !$.browser.isMac && event.ctrlKey ) || ( $.browser.isMac && event.metaKey );
+    return ( !$.browser.is.mac && event.ctrlKey ) || ( $.browser.is.mac && event.metaKey );
 
   };
 

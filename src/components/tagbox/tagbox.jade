@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Tagbox v0.1.0
+//- Svelto - Tagbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,20 +10,20 @@
   {
     name: '', // Input name
     tags: '', // Comma (by default) separated list of tags
-    label: '' // New tag input placeholder
+    label: '' // New tag input partial
   }
 
 mixin tagbox(options)
   - options = options || {};
   - options.tags = options.tags || "";
   - options.label = options.label || "Add tag...";
-  +container&attributes(attributes).tagbox
+  .tagbox&attributes(attributes)
     if options.name
-      input(type="text" name=options.name value=options.tags)
+      input(type="text" name=options.name value=options.tags).hidden
     else
-      input(type="text" value=options.tags)
-    +multiple
+      input(type="text" value=options.tags).hidden
+    +multiple.tagbox-tags
       if options.name
-        +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+        +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
-        +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+        +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar

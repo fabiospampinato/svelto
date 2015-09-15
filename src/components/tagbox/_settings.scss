@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tagbox (Settings) v0.2.0
+ * Svelto - Tagbox (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,16 +8,6 @@
  * @requires ../core/_core.scss
  * ========================================================================= */
 
-/* TAGBOX */
-
-$tagbox-color: 'transparent' !default;
-$tagbox-color-basic: true !default;
-
-/* INPUT */
-
-$tagbox-input-color: 'transparent' !default;
-$tagbox-input-color-basic: true !default;
-
-$tagbox-input-size: 'medium' !default;
+/* PARTIAL */
 
 $tagbox-input-min-width: 6.5em !default;

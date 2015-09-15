@@ -1062,6 +1062,18 @@ mixin placeholder(options)
 
 
 //- =========================================================================
+//- Svelto - Syntax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin syntax(language)
+  code(class="language-" + language)&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Progressbar v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1092,18 +1104,6 @@ mixin progressbar(options)
     .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
       if options.labeled
         .progressbar-label= +(options.value).toFixed(options.decimals)
-
-
-//- =========================================================================
-//- Svelto - Syntax v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin syntax(language)
-  code(class="language-" + language)&attributes(attributes)
-    block
 
 
 //- =========================================================================
@@ -1358,25 +1358,6 @@ mixin stepper(options)
 
 
 //- =========================================================================
-//- Svelto - Table v0.1.2
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin table-row-empty(empty_str)
-  tr&attributes(attributes).table-row-empty.hidden
-    td(colspan="100%")
-      if block
-        block
-      else
-        if empty_str
-          = empty_str
-        else
-          = "Empty"
-
-
-//- =========================================================================
 //- Svelto - Switch v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1430,6 +1411,25 @@ mixin switch(options)
 
 
 //- =========================================================================
+//- Svelto - Table v0.1.2
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin table-row-empty(empty_str)
+  tr&attributes(attributes).table-row-empty.hidden
+    td(colspan="100%")
+      if block
+        block
+      else
+        if empty_str
+          = empty_str
+        else
+          = "Empty"
+
+
+//- =========================================================================
 //- Svelto - Tabs v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1454,7 +1454,7 @@ mixin tabs-containers
 
 
 //- =========================================================================
-//- Svelto - Tagbox v0.1.0
+//- Svelto - Tagbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1464,23 +1464,23 @@ mixin tabs-containers
   {
     name: '', // Input name
     tags: '', // Comma (by default) separated list of tags
-    label: '' // New tag input placeholder
+    label: '' // New tag input partial
   }
 
 mixin tagbox(options)
   - options = options || {};
   - options.tags = options.tags || "";
   - options.label = options.label || "Add tag...";
-  +container&attributes(attributes).tagbox
+  .tagbox&attributes(attributes)
     if options.name
-      input(type="text" name=options.name value=options.tags)
+      input(type="text" name=options.name value=options.tags).hidden
     else
-      input(type="text" value=options.tags)
-    +multiple
+      input(type="text" value=options.tags).hidden
+    +multiple.tagbox-tags
       if options.name
-        +input({ name: "placeholder_" + options.name, label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+        +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
-        +input({ name: "placeholder", label: options.label }).autogrow.compact.tagbox-partial.no-floating.no-bar
+        +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
 
 
 //- =========================================================================

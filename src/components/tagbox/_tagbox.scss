@@ -1,31 +1,24 @@
 
 /* =========================================================================
- * Svelto - Tagbox v0.1.0
+ * Svelto - Tagbox v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 
 /* TAGBOX */
 
 .tagbox {
 
-  @include color ( $tagbox-color, $tagbox-color-basic );
-  margin-bottom: $gutter;
+  @extend .container;
 
-  & > input {
-    display: none;
-  }
+  /* PARTIAL */
 
-  & > .multiple {
-    margin-bottom: -10px; //FIXME: We shouldn't hard core it
-  }
-
-  .text-field {
-    @include color ( $tagbox-input-color, $tagbox-input-color-basic );
-    @include size ( $tagbox-input-size );
+  &-partial {
+    @include color ( inherit, true );
     min-width: $tagbox-input-min-width;
   }
 

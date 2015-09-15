@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2984,7 +2984,7 @@ label.disabled,
 .disabled.button, .disabled.container,
 .disabled.card-header,
 .disabled.card-block,
-.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.card,
+.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card,
 .chat-msg .disabled.chat-msg-sender-name,
 .disabled.embedded,
 .disabled.flippable,
@@ -3002,7 +3002,7 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3791,6 +3791,7 @@ label {
 /* LABEL TAG */
 .label-tag, .button-tag {
   margin-bottom: 10px;
+  z-index: 1;
 }
 
 .label-tag > *, .button-tag > * {
@@ -4300,7 +4301,7 @@ button {
 /* CONTAINER */
 .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox {
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
   background: #ffffff ;
@@ -4310,31 +4311,31 @@ button {
 
 .container.transparentize, .transparentize.card-header,
 .transparentize.card-block,
-.transparentize.card-footer, footer.transparentize, .image-wrp .transparentize.image-caption, .transparentize.infobar {
+.transparentize.card-footer, footer.transparentize, .image-wrp .transparentize.image-caption, .transparentize.infobar, .transparentize.tagbox {
   border-color: rgba(217, 217, 217, 0.95) ;
 }
 
 .container.transparentize, .transparentize.card-header,
 .transparentize.card-block,
-.transparentize.card-footer, footer.transparentize, .image-wrp .transparentize.image-caption, .transparentize.infobar {
+.transparentize.card-footer, footer.transparentize, .image-wrp .transparentize.image-caption, .transparentize.infobar, .transparentize.tagbox {
   background: rgba(255, 255, 255, 0.95) ;
 }
 
 .container p > a, .card-header p > a,
 .card-block p > a,
-.card-footer p > a, footer p > a, .image-wrp .image-caption p > a, .infobar p > a {
+.card-footer p > a, footer p > a, .image-wrp .image-caption p > a, .infobar p > a, .tagbox p > a {
   color: #1565c0 ;
 }
 
 .container p > a:after, .card-header p > a:after,
 .card-block p > a:after,
-.card-footer p > a:after, footer p > a:after, .image-wrp .image-caption p > a:after, .infobar p > a:after {
+.card-footer p > a:after, footer p > a:after, .image-wrp .image-caption p > a:after, .infobar p > a:after, .tagbox p > a:after {
   border-color: #166ac9 ;
 }
 
 .container p > a:hover, .card-header p > a:hover,
 .card-block p > a:hover,
-.card-footer p > a:hover, footer p > a:hover, .image-wrp .image-caption p > a:hover, .infobar p > a:hover {
+.card-footer p > a:hover, footer p > a:hover, .image-wrp .image-caption p > a:hover, .infobar p > a:hover, .tagbox p > a:hover {
   color: #166ac9 ;
 }
 
@@ -4342,7 +4343,7 @@ button {
 .compact.card-block,
 .compact.card-footer, .card.compact .card-header,
 .card.compact .card-block,
-.card.compact .card-footer, footer.compact, .image-wrp .compact.image-caption, .compact.infobar {
+.card.compact .card-footer, footer.compact, .image-wrp .compact.image-caption, .compact.infobar, .compact.tagbox {
   padding: 5px 10px;
 }
 
@@ -4565,7 +4566,7 @@ button {
           order: 3;
 }
 
-.chat-msg > .chat-msg-content > .container, .chat-msg > .chat-msg-content > .card-header, .chat-msg > .chat-msg-content > .card-block, .chat-msg > .chat-msg-content > .card-footer, .chat-msg > .chat-msg-content > footer, .image-wrp .chat-msg > .chat-msg-content > .image-caption, .chat-msg > .chat-msg-content > .infobar {
+.chat-msg > .chat-msg-content > .container, .chat-msg > .chat-msg-content > .card-header, .chat-msg > .chat-msg-content > .card-block, .chat-msg > .chat-msg-content > .card-footer, .chat-msg > .chat-msg-content > footer, .image-wrp .chat-msg > .chat-msg-content > .image-caption, .chat-msg > .chat-msg-content > .infobar, .chat-msg > .chat-msg-content > .tagbox {
   margin-bottom: 0;
 }
 
@@ -5072,7 +5073,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin-bottom: -1px;
 }
 
-.dropdown.attached.positionate-top > .container, .dropdown.attached.positionate-top > .card-header, .dropdown.attached.positionate-top > .card-block, .dropdown.attached.positionate-top > .card-footer, .dropdown.attached.positionate-top > footer, .image-wrp .dropdown.attached.positionate-top > .image-caption, .dropdown.attached.positionate-top > .infobar {
+.dropdown.attached.positionate-top > .container, .dropdown.attached.positionate-top > .card-header, .dropdown.attached.positionate-top > .card-block, .dropdown.attached.positionate-top > .card-footer, .dropdown.attached.positionate-top > footer, .image-wrp .dropdown.attached.positionate-top > .image-caption, .dropdown.attached.positionate-top > .infobar, .dropdown.attached.positionate-top > .tagbox {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -5081,7 +5082,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin-top: -1px;
 }
 
-.dropdown.attached.positionate-bottom > .container, .dropdown.attached.positionate-bottom > .card-header, .dropdown.attached.positionate-bottom > .card-block, .dropdown.attached.positionate-bottom > .card-footer, .dropdown.attached.positionate-bottom > footer, .image-wrp .dropdown.attached.positionate-bottom > .image-caption, .dropdown.attached.positionate-bottom > .infobar {
+.dropdown.attached.positionate-bottom > .container, .dropdown.attached.positionate-bottom > .card-header, .dropdown.attached.positionate-bottom > .card-block, .dropdown.attached.positionate-bottom > .card-footer, .dropdown.attached.positionate-bottom > footer, .image-wrp .dropdown.attached.positionate-bottom > .image-caption, .dropdown.attached.positionate-bottom > .infobar, .dropdown.attached.positionate-bottom > .tagbox {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -5159,7 +5160,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   display: block;
 }
 
-.dropdown > .container, .dropdown > .card-header, .dropdown > .card-block, .dropdown > .card-footer, .dropdown > footer, .image-wrp .dropdown > .image-caption, .dropdown > .infobar {
+.dropdown > .container, .dropdown > .card-header, .dropdown > .card-block, .dropdown > .card-footer, .dropdown > footer, .image-wrp .dropdown > .image-caption, .dropdown > .infobar, .dropdown > .tagbox {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   max-width: calc(73vw - 30px);
   max-height: calc(45vh - 30px);
@@ -10035,15 +10036,15 @@ a.ripple > .ripple-circle {
   padding: 0;
 }
 
-.select-dropdown > .container, .select-dropdown > .card-header, .select-dropdown > .card-block, .select-dropdown > .card-footer, .select-dropdown > footer, .image-wrp .select-dropdown > .image-caption, .select-dropdown > .infobar {
+.select-dropdown > .container, .select-dropdown > .card-header, .select-dropdown > .card-block, .select-dropdown > .card-footer, .select-dropdown > footer, .image-wrp .select-dropdown > .image-caption, .select-dropdown > .infobar, .select-dropdown > .tagbox {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
 }
 
-.select-dropdown > .container .label-wrp + .divider-wrp.block, .select-dropdown > .card-header .label-wrp + .divider-wrp.block, .select-dropdown > .card-block .label-wrp + .divider-wrp.block, .select-dropdown > .card-footer .label-wrp + .divider-wrp.block, .select-dropdown > footer .label-wrp + .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .label-wrp + .divider-wrp.block, .select-dropdown > .infobar .label-wrp + .divider-wrp.block {
+.select-dropdown > .container .label-wrp + .divider-wrp.block, .select-dropdown > .card-header .label-wrp + .divider-wrp.block, .select-dropdown > .card-block .label-wrp + .divider-wrp.block, .select-dropdown > .card-footer .label-wrp + .divider-wrp.block, .select-dropdown > footer .label-wrp + .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .label-wrp + .divider-wrp.block, .select-dropdown > .infobar .label-wrp + .divider-wrp.block, .select-dropdown > .tagbox .label-wrp + .divider-wrp.block {
   margin-top: 5px;
 }
 
-.select-dropdown > .container .divider-wrp.block, .select-dropdown > .card-header .divider-wrp.block, .select-dropdown > .card-block .divider-wrp.block, .select-dropdown > .card-footer .divider-wrp.block, .select-dropdown > footer .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .divider-wrp.block, .select-dropdown > .infobar .divider-wrp.block {
+.select-dropdown > .container .divider-wrp.block, .select-dropdown > .card-header .divider-wrp.block, .select-dropdown > .card-block .divider-wrp.block, .select-dropdown > .card-footer .divider-wrp.block, .select-dropdown > footer .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .divider-wrp.block, .select-dropdown > .infobar .divider-wrp.block, .select-dropdown > .tagbox .divider-wrp.block {
   margin-bottom: 5px !important;
 }
 
@@ -11474,12 +11475,12 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   color: #166ac9 ;
 }
 
-.tabs > .tabs-containers > .container, .tabs > .tabs-containers > .card-header, .tabs > .tabs-containers > .card-block, .tabs > .tabs-containers > .card-footer, .tabs > .tabs-containers > footer, .image-wrp .tabs > .tabs-containers > .image-caption, .tabs > .tabs-containers > .infobar {
+.tabs > .tabs-containers > .container, .tabs > .tabs-containers > .card-header, .tabs > .tabs-containers > .card-block, .tabs > .tabs-containers > .card-footer, .tabs > .tabs-containers > footer, .image-wrp .tabs > .tabs-containers > .image-caption, .tabs > .tabs-containers > .infobar, .tabs > .tabs-containers > .tagbox {
   display: none;
   margin-bottom: 0;
 }
 
-.tabs > .tabs-containers > .container.active, .tabs > .tabs-containers > .active.card-header, .tabs > .tabs-containers > .active.card-block, .tabs > .tabs-containers > .active.card-footer, .tabs > .tabs-containers > footer.active, .image-wrp .tabs > .tabs-containers > .active.image-caption, .tabs > .tabs-containers > .active.infobar {
+.tabs > .tabs-containers > .container.active, .tabs > .tabs-containers > .active.card-header, .tabs > .tabs-containers > .active.card-block, .tabs > .tabs-containers > .active.card-footer, .tabs > .tabs-containers > footer.active, .image-wrp .tabs > .tabs-containers > .active.image-caption, .tabs > .tabs-containers > .active.infobar, .tabs > .tabs-containers > .active.tagbox {
   display: block;
 }
 
@@ -11505,7 +11506,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   height: 0.2em;
 }
 
-.tabs:not(.vertical) > .tabs-containers > .container, .tabs:not(.vertical) > .tabs-containers > .card-header, .tabs:not(.vertical) > .tabs-containers > .card-block, .tabs:not(.vertical) > .tabs-containers > .card-footer, .tabs:not(.vertical) > .tabs-containers > footer, .image-wrp .tabs:not(.vertical) > .tabs-containers > .image-caption, .tabs:not(.vertical) > .tabs-containers > .infobar {
+.tabs:not(.vertical) > .tabs-containers > .container, .tabs:not(.vertical) > .tabs-containers > .card-header, .tabs:not(.vertical) > .tabs-containers > .card-block, .tabs:not(.vertical) > .tabs-containers > .card-footer, .tabs:not(.vertical) > .tabs-containers > footer, .image-wrp .tabs:not(.vertical) > .tabs-containers > .image-caption, .tabs:not(.vertical) > .tabs-containers > .infobar, .tabs:not(.vertical) > .tabs-containers > .tagbox {
   border-top-width: 0;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
@@ -11539,7 +11540,7 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   width: 0.2em;
 }
 
-.tabs.vertical > .tabs-containers > .container, .tabs.vertical > .tabs-containers > .card-header, .tabs.vertical > .tabs-containers > .card-block, .tabs.vertical > .tabs-containers > .card-footer, .tabs.vertical > .tabs-containers > footer, .image-wrp .tabs.vertical > .tabs-containers > .image-caption, .tabs.vertical > .tabs-containers > .infobar {
+.tabs.vertical > .tabs-containers > .container, .tabs.vertical > .tabs-containers > .card-header, .tabs.vertical > .tabs-containers > .card-block, .tabs.vertical > .tabs-containers > .card-footer, .tabs.vertical > .tabs-containers > footer, .image-wrp .tabs.vertical > .tabs-containers > .image-caption, .tabs.vertical > .tabs-containers > .infobar, .tabs.vertical > .tabs-containers > .tagbox {
   -webkit-flex-grow: 1;
           flex-grow: 1;
   height: 100%;
@@ -11549,85 +11550,33 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
 }
 
 /* =========================================================================
- * Svelto - Tagbox (Settings) v0.2.0
+ * Svelto - Tagbox (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
  * ========================================================================= */
-/* TAGBOX */
-/* INPUT */
+/* PARTIAL */
 /* =========================================================================
- * Svelto - Tagbox v0.1.0
+ * Svelto - Tagbox v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../container/_container.scss
  * ========================================================================= */
 /* TAGBOX */
 .tagbox {
-  border-color: transparent ;
+  /* PARTIAL */
+}
+
+.tagbox-partial {
+  border-color: inherit ;
   color: inherit ;
-  background: transparent ;
-  margin-bottom: 10px;
-}
-
-.tagbox.transparentize {
-  border-color: transparent ;
-}
-
-.tagbox.transparentize {
-  background: transparent ;
-}
-
-.tagbox p > a {
-  color: #ef6c00 ;
-}
-
-.tagbox p > a:after {
-  border-color: #f97100 ;
-}
-
-.tagbox p > a:hover {
-  color: #f97100 ;
-}
-
-.tagbox > input {
-  display: none;
-}
-
-.tagbox > .multiple {
-  margin-bottom: -10px;
-}
-
-.tagbox .text-field {
-  border-color: transparent ;
-  color: inherit ;
-  background: transparent ;
-  font-size: 1em ;
+  background: inherit ;
   min-width: 6.5em;
-}
-
-.tagbox .text-field.transparentize {
-  border-color: transparent ;
-}
-
-.tagbox .text-field.transparentize {
-  background: transparent ;
-}
-
-.tagbox .text-field p > a {
-  color: #ef6c00 ;
-}
-
-.tagbox .text-field p > a:after {
-  border-color: #f97100 ;
-}
-
-.tagbox .text-field p > a:hover {
-  color: #f97100 ;
 }
 
 /* =========================================================================
