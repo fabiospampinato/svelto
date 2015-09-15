@@ -1,34 +1,38 @@
 <!DOCTYPE html><html lang="en" dir="ltr" class="no-js"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><title>Svelto</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><link rel="stylesheet" href="/svelto.css" media="all"/><link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/><script>document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
-  </script></head><body><div id="content"><header class="fixed"><div class="toolbar primary z-depth-4"><div class="multiple"><div class="button compact transparent"><i class="icon">menu</i></div><a href="/" class="large">Svelto</a><div class="spacer"></div><div class="button compact transparent"><i class="icon">refresh</i></div><div class="button compact transparent"><i class="icon">more_vert</i></div></div></div></header><main><div class="divider block"><div class="divider-content">HTML</div></div><div class="container outlined"><code class="language-markup">&lt;div class="separator_wrp"&gt;
-  &lt;div class="separator"&gt;HTML&lt;/div&gt;
+  </script></head><body><div id="content"><header class="fixed"><div class="toolbar primary z-depth-4"><div class="multiple"><div class="button compact transparent"><i class="icon">menu</i></div><a href="/" class="large">Svelto</a><div class="spacer"></div><div class="button compact transparent"><i class="icon">refresh</i></div><div class="button compact transparent"><i class="icon">more_vert</i></div></div></div></header><main><div class="divider block"><div class="divider-content">HTML</div></div><div class="container outlined"><code class="language-markup">&lt;div class="divider"&gt;
+  &lt;b&gt;HTML&lt;/b&gt; 
 &lt;/div&gt;
-&lt;div class="grid"&gt;
-  &lt;div class="grid_cols limited"&gt;
-    &lt;div class="grid_col"&gt;
-      &lt;div class="container"&gt;
-        Something
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
+&lt;div class="multiple"&gt;
+  &lt;div class="label"&gt;Label&lt;/div&gt;
+  &lt;div class="button"&gt;Button&lt;/div&gt;
+  &lt;div class="container"&gt;Container&lt;/div&gt;
 &lt;/div&gt;
-</code></div><div class="divider block"><div class="divider-content">CSS</div></div><div class="container outlined"><code class="language-css">.sections_wrp {
-  margin: 0 -5px;
-  font-size: 0px;
-}
+</code></div><div class="divider block"><div class="divider-content">CSS</div></div><div class="container outlined"><code class="language-css">.widget {
 
-.section {
-  padding: 0 5px;
-  margin-bottom: 10px;
-  box-sizing: border-box;
-}
-</code></div><div class="divider block"><div class="divider-content">Javascript</div></div><div class="container outlined"><code class="language-javascript">/* Library */
+  @include last-child-no-gutter ();
+  position: relative;
+  margin: 0 0 $gutter;
 
-window.library = {
-  user: {
-    id: $.cookie.get ( 'user_id' ),
-    nickname: $.cookie.get ( 'nickname' )
+  &.disabled,
+  &[class*="-disabled"] {
+    cursor: default !important;
+    opacity: $widget-disabled-opacity !important;
   }
-};</code></div></main><footer class="beveled"><p class="text-center">Svelto, a framework</p></footer></div><script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><script src="/svelto.js"></script><script>window.onerror = function ( message, file, line ) {
+
+}
+</code></div><div class="divider block"><div class="divider-content">Javascript</div></div><div class="container outlined"><code class="language-javascript">;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* ANIMATION */
+
+  $.ui.animation = {
+    slow: 500,
+    normal: 350,
+    fast: 150
+  };
+
+}( jQuery, _, window, document ));</code></div></main><footer class="beveled"><p class="text-center">Svelto, a framework</p></footer></div><script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.min.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.min.js"></script><script src="/svelto.js"></script><script>window.onerror = function ( message, file, line ) {
   try {
     $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
   } catch ( e ) {

@@ -31,6 +31,26 @@ mixin script
 
 
 //- =========================================================================
+//- Svelto - Breadcrumb v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin breadcrumb
+  .breadcrumb&attributes(attributes)
+    block
+
+mixin breadcrumb-divider(icon)
+  .breadcrumb-divider&attributes(attributes)
+    if block
+      block
+    else
+      - icon = icon || "chevron_right";
+      +icon(icon)
+
+
+//- =========================================================================
 //- Svelto - Button v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -118,26 +138,6 @@ mixin card-block
 mixin card-footer
   .card-footer&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Breadcrumb v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin breadcrumb
-  .breadcrumb&attributes(attributes)
-    block
-
-mixin breadcrumb-divider(icon)
-  .breadcrumb-divider&attributes(attributes)
-    if block
-      block
-    else
-      - icon = icon || "chevron_right";
-      +icon(icon)
 
 
 //- =========================================================================
@@ -1062,18 +1062,6 @@ mixin placeholder(options)
 
 
 //- =========================================================================
-//- Svelto - Syntax v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin syntax(language)
-  code(class="language-" + language)&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Progressbar v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1104,6 +1092,18 @@ mixin progressbar(options)
     .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
       if options.labeled
         .progressbar-label= +(options.value).toFixed(options.decimals)
+
+
+//- =========================================================================
+//- Svelto - Syntax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin syntax(language)
+  code(class="language-" + language)&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1358,6 +1358,25 @@ mixin stepper(options)
 
 
 //- =========================================================================
+//- Svelto - Table v0.1.2
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin table-row-empty(empty_str)
+  tr&attributes(attributes).table-row-empty.hidden
+    td(colspan="100%")
+      if block
+        block
+      else
+        if empty_str
+          = empty_str
+        else
+          = "Empty"
+
+
+//- =========================================================================
 //- Svelto - Switch v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1408,25 +1427,6 @@ mixin switch(options)
             +icon(options.icons.on).icon-on
           if options.icons.off !== "false"
             +icon(options.icons.off).icon-off
-
-
-//- =========================================================================
-//- Svelto - Table v0.1.2
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin table-row-empty(empty_str)
-  tr&attributes(attributes).table-row-empty.hidden
-    td(colspan="100%")
-      if block
-        block
-      else
-        if empty_str
-          = empty_str
-        else
-          = "Empty"
 
 
 //- =========================================================================

@@ -1,9 +1,11 @@
 
 /* =========================================================================
- * Svelto - jQuery (Extras) v0.1.0
+ * Svelto - jQuery (Extras) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../browser/browser.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
@@ -42,6 +44,12 @@
   $.frame = function ( callback ) {
 
     return requestAnimationFrame ( callback );
+
+  };
+
+  $.hasCtrlOrCmd = function ( event ) {
+
+    return ( !$.browser.isMac && event.ctrlKey ) || ( $.browser.isMac && event.metaKey );
 
   };
 
