@@ -6,11 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
+ * @requires ../noty/noty.js
  * ========================================================================= */
 
 //FIXME: Do we handle the insertion of characters like `&` or `'` propertly?
 //FIXME: Should we forbid characters or just escape them?
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
+//FIXME: Partial's text cursor is not visible whan it's empty
 
 ;(function ( $, _, window, document, undefined ) {
 

@@ -6,8 +6,8 @@ extends ../layout.jade
 append main
   +divider-block Input
 
-  +input({ value: "Value" }).autogrow.white.outlined
+  +input({ value: "Value", label: "Label..." }).autogrow.white.outlined
 
   +divider-block Textarea
 
-  +textarea.autogrow.white.outlined Value
+  +textarea({ label: "Label..." }).autogrow.white.outlined Value

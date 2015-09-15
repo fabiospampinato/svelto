@@ -21,7 +21,7 @@
 
   @extend .widget;
   @include color ( $input-wrp-color, $input-wrp-color-basic );
-  display: flex; //INFO: For some reasons it fixes a border problem, without it there might be a missing border at the bottom when outlined
+  display: inline-flex; //INFO: For some reasons it fixes a border problem, without it there might be a missing border at the bottom when outlined
   align-items: center;
   border-radius: $input-wrp-border-radius;
 
