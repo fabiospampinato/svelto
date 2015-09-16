@@ -47,4 +47,10 @@
     fast: 150
   };
 
+  /* SVELTO */
+
+  window.Svelto = {
+    version: '0.1.0'
+  };
+
 }( jQuery, _, window, document ));

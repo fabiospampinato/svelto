@@ -1,0 +1,49 @@
+
+extends ../layout.jade
+
+//- nTimesAction
+
+append main
+  +divider-block Settings
+  
+  +multiple.equal.joined
+    +input({ name: "nta_group", label: "Group..." }).white.outlined.no-floating
+    +input({ name: "nta_action", label: "Action..." }).white.outlined.no-floating
+    +input({ name: "nta_times", label: "Times..." }).white.outlined.no-floating
+  
+  +divider-block Actions
+        
+  +multiple.actions
+    +button("nta_run ()").outlined Run
+    +button("nta_run ( false )").outlined Run (Return false)
+    +button("nta_get ()").outlined Get
+    +button("nta_set ()").outlined Set
+    +button("nta_reset ()").outlined Reset
+    
+append body-end
+  +script.
+    function nta_input ( name ) {
+      return $('input[name="nta_' + name + '"]').val ();
+    }
+    function nta_run ( returnValue ) {
+      $.nTimesAction ({
+        group: nta_input('group'),
+        action: nta_input('action'),
+        times: Number(nta_input('times')),
+        fn: function ( data ) {
+          $.noty ( data.group + '`s action: ' + data.action + ' has been executed for the ' + data.time + ' time' );
+          return returnValue;
+        }
+      });
+    }
+    function nta_get () {
+      $.noty ( $.nTimesAction ({ group: nta_input('group'), action: nta_input('action') }).get () + ' times' );
+    }
+    function nta_set () {
+      $.nTimesAction ({ group: nta_input('group'), action: nta_input('action') }).set ( Number(nta_input('times')) );
+      $.noty ( 'Setted ' + nta_input('times') + ' times' );
+    }
+    function nta_reset () {
+      $.nTimesAction ({ group: nta_input('group'), action: nta_input('action') }).reset ();
+      $.noty ( 'Resetted' );
+    }

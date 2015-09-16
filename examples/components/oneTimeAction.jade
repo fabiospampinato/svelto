@@ -4,56 +4,58 @@ extends ../layout.jade
 //- oneTimeAction
 
 append main
-  +divider-block One time action
+  +divider-block One Time Actions
 
   +multiple
-    +button("test_one_time_action_cookie1 ()").outlined Cookie 'test1'
-    +button("test_one_time_action_cookie2 ()").outlined Cookie 'test2'
-    +button("test_one_time_action_cookie3 ()").outlined Cookie 'test3' adv
+    +button("ota_test1 ()").outlined Test1
+    +button("ota_test2 ()").outlined Test2
+    +button("ota_test3 ()").outlined Test3 (Advanced)
 
-  +divider-block Action
+  +divider-block Actions
 
-  +multiple
-    +button("test_one_time_action_reset_cookie1 ()").outlined Reset 'test1'
-    +button("test_one_time_action_reset_actions ()").outlined Reset all
-    +button("test_one_time_action_get_string ()").outlined Get cookie string
+  +multiple.actions
+    +button("ota_reset_test1 ()").outlined Reset test1
+    +button("ota_reset_actions ()").outlined Reset all
+    +button("ota_get_string ()").outlined Get cookie string
 
 append body-end
   +script.
-    function test_one_time_action_cookie1 () {
-      $.oneTimeAction ( 'test1', function () {
-        $.noty ( "One time action (test1) executed and setted." );
-      });
+    function ota_test1 () {
+      $.oneTimeAction ({ action: 'test1', fn: function () {
+        $.noty ( "One time action (test1) executed and setted" );
+      }});
     }
-    function test_one_time_action_cookie2 () {
-      $.oneTimeAction ( 'test2', function () {
-        $.noty ( "One time action (test2) executed and setted." );
-      });
+    function ota_test2 () {
+      $.oneTimeAction ({ action: 'test2', fn: function () {
+        $.noty ( "One time action (test2) executed and setted" );
+      }});
     }
-    function test_one_time_action_cookie3 () {
-      if ( !$.oneTimeAction ( 'test3' ).get () ) {
+    function ota_test3 () {
+      $.oneTimeAction ({ action: 'test3', fn: function () {
         $.noty ({
-          body: "One time action (test3) executed.",
+          body: "One time action (test3) executed",
           buttons: [{
-            text: 'Set',
-            onClick: function () {
-              $.oneTimeAction ( 'test3' ).set ();
-              $.noty ( "One time action (test3) setted." );
-            }
-          }, {
-            text: 'Close'
-          }]
+              text: 'Close'
+            },
+            {
+              text: 'Set',
+              onClick: function () {
+                $.oneTimeAction ({ action: 'test3' }).set ( 1 );
+                $.noty ( "One time action (test3) setted" );
+                }
+            }]
         });
-      }
+        return false;
+      }});
     }
-    function test_one_time_action_reset_cookie1 () {
-      $.oneTimeAction ( 'test1' ).reset ();
-      $.noty ( '(test1) action have been resetted' );
+    function ota_reset_test1 () {
+      $.oneTimeAction ({ action: 'test1' }).reset ();
+      $.noty ( '(test1) action has been resetted' );
     }
-    function test_one_time_action_reset_actions () {
+    function ota_reset_actions () {
       $.oneTimeAction ().reset ();
-      $.noty ( 'oneTimeAction-related cookies have been resetted' );
+      $.noty ( 'oneTimeAction-related cookies has been resetted' );
     }
-    function test_one_time_action_get_string () {
+    function ota_get_string () {
       $.noty ( $.cookie.get ( 'ota' ) );
     }

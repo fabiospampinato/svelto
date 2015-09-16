@@ -408,6 +408,12 @@
     fast: 150
   };
 
+  /* SVELTO */
+
+  window.Svelto = {
+    version: '0.1.0'
+  };
+
 }( jQuery, _, window, document ));
 
 
@@ -4849,6 +4855,237 @@
 
 
 /* =========================================================================
+ * Svelto - N Times Action (Group) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../cookie/cookie.js
+ * ========================================================================= */
+
+//TODO: Add support for cookie settable parameters
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* GROUP */
+
+  var Group = function ( name ) {
+
+    this.name = name;
+    this.actions = this.unserialize ( $.cookie.get ( this.name ) || '{}' );
+
+  };
+
+  /* METHODS */
+
+  Group.prototype = {
+
+    /* SERIALIZER */
+
+    serialize: JSON.stringify,
+
+    unserialize: JSON.parse,
+
+    /* API */
+
+    get: function ( action ) {
+
+      return this.actions[action] || 0;
+
+    },
+
+    set: function ( action, times ) {
+
+      times = Number(times);
+
+      if ( !_.isNaN ( times ) ) {
+
+        if ( times === 0 ) {
+
+          this.reset ( action );
+
+        } else {
+
+          this.actions[action] = times;
+
+          this.update ();
+
+        }
+
+      }
+
+    },
+
+    update: function () {
+
+      $.cookie.set ( this.name, this.serialize ( this.actions ), Infinity );
+
+    },
+
+    reset: function ( action ) {
+
+      if ( action ) {
+
+        delete this.actions[action];
+
+        this.update ();
+
+      } else {
+
+        this.actions = {};
+
+        $.cookie.remove ( this.name );
+
+      }
+
+    }
+
+  };
+
+  /* BINDING */
+
+  Svelto.NTA = {
+    Group: Group
+  };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - N Times Action (Action) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires NTA.Group.js
+ * ========================================================================= */
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* ACTION */
+
+  var Action = function ( options ) {
+
+    this.group = new Svelto.NTA.Group ( options.group );
+    this.name = options.name;
+
+  };
+
+  /* METHODS */
+
+  Action.prototype = {
+
+    /* API */
+
+    get: function () {
+
+      return this.group.get ( this.name );
+
+    },
+
+    set: function ( times ) {
+
+      this.group.set ( this.name, times );
+
+    },
+
+    reset: function () {
+
+      this.group.reset ( this.name );
+
+    }
+
+  };
+
+  /* BINDING */
+
+  Svelto.NTA.Action = Action;
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - N Times Action v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires NTA.Action.js
+ * ========================================================================= */
+
+//TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
+
+;(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* N TIMES ACTION */
+
+  $.nTimesAction = function ( options ) {
+
+    /* OPTIONS */
+
+    options = _.merge ({
+      group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
+      action: false, //INFO: The action name
+      times: Infinity, //INFO: The times an action can be executed
+      fn: false //INFO: The function to execute
+    }, options );
+
+    /* NORMALIZING TIMES */
+
+    options.times = Number(options.times);
+
+    if ( _.isNaN ( options.times ) ) {
+
+      options.times = 0;
+
+    }
+
+    /* N TIMES ACTION */
+
+    if ( options.action ) {
+
+      var action = new Svelto.NTA.Action ({ group: options.group, name: options.action }),
+          actionTimes = action.get ();
+
+      if ( options.fn && actionTimes < options.times ) {
+
+        var value = options.fn ({
+          group: options.group,
+          action: options.action,
+          time: actionTimes + 1
+        });
+
+        if ( value !== false ) {
+
+          action.set ( actionTimes + 1 );
+
+        }
+
+      }
+
+      return action;
+
+    } else if ( options.group ) {
+
+      return new Svelto.NTA.Group ( options.group );
+
+    }
+
+  };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
  * Svelto - Navbar v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -5070,17 +5307,13 @@
 
 
 /* =========================================================================
- * Svelto - One Time Action v0.1.0
+ * Svelto - One Time Action v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../cookie/cookie.js
+ * @requires ../n_times_action/nTimesAction.js
  * ========================================================================= */
-
-//INFO: the pipe character (|) is forbidden inside a name, cookie's ttl is 1 year
-
-//TODO: add support for other cookie settable parameters
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -5088,143 +5321,9 @@
 
   /* ONE TIME ACTION */
 
-  $.oneTimeAction = function ( custom_options, action ) {
+  $.oneTimeAction = function ( options ) {
 
-    // OPTIONS
-
-    var options = {
-      container: 'ota', //INFO: the cookie name that holds the actions, a namespace for related actions basically
-      expiry: Infinity, //INFO: the expire time of the container
-      name: false, //INFO: the action name
-      action: false //INFO: the action to execute
-    };
-
-    if ( _.isString ( custom_options ) ) {
-
-      options.name = custom_options;
-
-      if ( _.isFunction ( action ) ) {
-
-        options.action = action;
-
-      }
-
-    } else if ( _.isPlainObject ( custom_options ) ) {
-
-      _.merge ( options, custom_options );
-
-    }
-
-    // ONE TIME ACTION
-
-    if ( options.name ) {
-
-      var action = new Action ( options.container, options.name );
-
-      if ( options.action && !action.get () ) {
-
-        options.action ();
-
-        action.set ();
-
-      }
-
-      return action;
-
-    } else if ( options.container ) {
-
-      return new Container ( options.container, options.expiry );
-
-    }
-
-  };
-
-  /* CONTAINER OBJ */
-
-  var Container = function ( name, expiry ) {
-
-    this.name = name;
-    this.expiry = expiry;
-
-    this.actionsStr = $.cookie.get ( this.name ) || '';
-    this.actions = this.actionsStr.length > 0 ? this.actionsStr.split ( '|' ) : [];
-
-  };
-
-  Container.prototype = {
-
-    get: function ( action ) {
-
-      return _.contains ( this.actions, action );
-
-    },
-
-    set: function ( action ) {
-
-      if ( !this.get ( action ) ) {
-
-        this.actions.push ( action );
-
-        this.update ();
-
-      }
-
-    },
-
-    update: function () {
-
-      this.actionsStr = this.actions.join ( '|' );
-
-      $.cookie.set ( this.name, this.actionsStr, this.expiry );
-
-    },
-
-    reset: function ( action ) {
-
-      if ( action ) {
-
-        _.pull ( this.actions, action );
-
-        this.update ();
-
-      } else {
-
-        $.cookie.remove ( this.name );
-
-      }
-
-    }
-
-  };
-
-  /* ACTION OBJ */
-
-  var Action = function ( container, name, action ) {
-
-    this.container = new Container ( container );
-    this.name = name;
-
-  };
-
-  Action.prototype = {
-
-    get: function () {
-
-      return this.container.get ( this.name );
-
-    },
-
-    set: function () {
-
-      this.container.set ( this.name );
-
-    },
-
-    reset: function () {
-
-      this.container.reset ( this.name );
-
-    }
+    return $.nTimesAction ( _.merge ( { group: 'ota' }, options, { times: 1 } ) );
 
   };
 
