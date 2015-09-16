@@ -40,16 +40,16 @@
     timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
 
       var elapsed = _.nowSecs () - timestamp,
-        just_now = 5;
+          justNow = 5;
 
       var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
-        times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
+          times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
 
-      if ( elapsed < just_now ) {
+      if ( elapsed < justNow ) {
 
         return {
           str: 'Just now',
-          next: just_now - elapsed
+          next: justNow - elapsed
         };
 
       } else {
@@ -57,8 +57,8 @@
         for ( var i = 0, l = times.length; i < l; i++ ) {
 
           var name = names[i],
-            secs = times[i],
-            number = _.floor ( elapsed / secs );
+              secs = times[i],
+              number = _.floor ( elapsed / secs );
 
           if ( number >= 1 ) {
 
@@ -98,7 +98,7 @@
       }
 
       var current_index = -1,
-        str_l = str.length;
+          str_l = str.length;
 
       for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
@@ -174,9 +174,9 @@
     btEach: function ( arr, callback, startIndex ) {
 
       var start = 0,
-        end = arr.length - 1,
-        center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
-        direction;
+          end = arr.length - 1,
+          center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+          direction;
 
       while ( start <= end ) {
 

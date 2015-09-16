@@ -55,10 +55,12 @@
 
   > .text-field-bar {
     @extend %highlight-after;
-    transition: transform $input-transition-all-duration;
+    transition-property: opacity, transform;
+    transition-duration: $input-transition-all-duration;
     border-bottom-width: $highlight-size;
     border-color: $input-active-color;
     transform: scaleX(0);
+    opacity: 0;
   }
 
   /* COLORS */
@@ -261,6 +263,7 @@
 
         &:focus ~ .text-field-bar {
           transform: scaleX(1);
+          opacity: 1;
         }
 
       }

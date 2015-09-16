@@ -7585,12 +7585,14 @@ img {
 }
 
 .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar {
-  transition: -webkit-transform 0.15s;
-  transition: transform 0.15s;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-duration: 0.15s;
   border-bottom-width: 2px;
   border-color: #ef6c00;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
+  opacity: 0;
 }
 
 .input-wrp.text-field-primary > .text-field:focus ~ label, .text-field-primary.textarea-wrp > .text-field:focus ~ label {
@@ -7877,6 +7879,7 @@ img {
 .input-wrp:not(.no-bar):not(.disabled) > .text-field:focus ~ .text-field-bar, .textarea-wrp:not(.no-bar):not(.disabled) > .text-field:focus ~ .text-field-bar {
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
+  opacity: 1;
 }
 
 .input-wrp.no-bar:not(.outlined), .no-bar.textarea-wrp:not(.outlined), .input-wrp.no-initial-bar:not(.outlined), .no-initial-bar.textarea-wrp:not(.outlined) {
