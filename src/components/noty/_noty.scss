@@ -12,9 +12,12 @@
 
 @mixin expand-queue {
 
-  @include z-depth ( $noty-z-depth );
   width: 100%;
   margin: 0 !important;
+
+  &:not(:empty) {
+    @include z-depth ( $noty-z-depth );
+  }
 
   .noty {
     @include z-depth ( 0 );
@@ -37,7 +40,7 @@
 
     .noty-queues {
 
-      @include z-depth ( $noty-z-depth );
+      // @include z-depth ( $noty-z-depth ); //FIXME: We should attach the z-depth only if actually there are some noties
 
       /* TOP */
 

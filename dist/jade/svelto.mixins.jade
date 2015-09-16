@@ -12,25 +12,6 @@ mixin accordion
 
 
 //- =========================================================================
-//- Svelto - Base v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin css(url, media)
-  - media = media || "all";
-  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
-
-mixin js(url)
-  script(src!=url)&attributes(attributes)
-
-mixin script
-  script&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Breadcrumb v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -48,6 +29,25 @@ mixin breadcrumb-divider(icon)
     else
       - icon = icon || "chevron_right";
       +icon(icon)
+
+
+//- =========================================================================
+//- Svelto - Base v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin css(url, media)
+  - media = media || "all";
+  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
+
+mixin js(url)
+  script(src!=url)&attributes(attributes)
+
+mixin script
+  script&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1291,42 +1291,6 @@ mixin slider(options)
 
 
 //- =========================================================================
-//- Svelto - Spinner v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin spinner
-  .spinner-wrp&attributes(attributes)
-    +spinner-no-wrp&attributes(attributes)
-
-mixin spinner-no-wrp
-  .spinner&attributes(attributes)
-    .circle-wrp.left
-      .circle
-    .circle-wrp.right
-      .circle
-
-//- Options
-  [
-    0: '', // First spinner color
-    1: '', // Second spinner color
-    2: '', // Third spinner color
-    3: '' // Fourth spinner color
-  ]
-
-mixin spinner-multiple(options)
-  - options = ( options && options.length === 4 ) ? options : ["blue", "red", "yellow", "green"];
-  .spinner-wrp&attributes(attributes).multiple
-    if block
-      block
-    else
-      each color in options
-        +spinner-no-wrp(class=color)
-
-
-//- =========================================================================
 //- Svelto - Stepper v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1430,27 +1394,39 @@ mixin table-row-empty(empty_str)
 
 
 //- =========================================================================
-//- Svelto - Tabs v0.1.0
+//- Svelto - Spinner v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin tabs
-  .tabs&attributes(attributes)
-    block
+mixin spinner
+  .spinner-wrp&attributes(attributes)
+    +spinner-no-wrp&attributes(attributes)
 
-mixin tabs-buttons
-  .tabs-buttons&attributes(attributes)
-    block
+mixin spinner-no-wrp
+  .spinner&attributes(attributes)
+    .circle-wrp.left
+      .circle
+    .circle-wrp.right
+      .circle
 
-mixin tabs-buttons-indicator
-  .tabs-buttons-indicator&attributes(attributes)
-    block
+//- Options
+  [
+    0: '', // First spinner color
+    1: '', // Second spinner color
+    2: '', // Third spinner color
+    3: '' // Fourth spinner color
+  ]
 
-mixin tabs-containers
-  .tabs-containers&attributes(attributes)
-    block
+mixin spinner-multiple(options)
+  - options = ( options && options.length === 4 ) ? options : ["blue", "red", "yellow", "green"];
+  .spinner-wrp&attributes(attributes).multiple
+    if block
+      block
+    else
+      each color in options
+        +spinner-no-wrp(class=color)
 
 
 //- =========================================================================
@@ -1481,6 +1457,30 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+
+
+//- =========================================================================
+//- Svelto - Tabs v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin tabs
+  .tabs&attributes(attributes)
+    block
+
+mixin tabs-buttons
+  .tabs-buttons&attributes(attributes)
+    block
+
+mixin tabs-buttons-indicator
+  .tabs-buttons-indicator&attributes(attributes)
+    block
+
+mixin tabs-containers
+  .tabs-containers&attributes(attributes)
+    block
 
 
 //- =========================================================================

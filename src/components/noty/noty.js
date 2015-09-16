@@ -304,7 +304,6 @@
 
       if ( this._isOpen ) {
 
-
         this.$noty.removeClass ( this.options.classes.open );
 
         this._delay ( function () {
