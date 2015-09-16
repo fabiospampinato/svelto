@@ -2734,7 +2734,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-/* URL: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie */
+//SORUCE: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
 
 /* COOKIE */
 
@@ -2745,7 +2745,7 @@
   /* UTILITIES */
 
   var encode = encodeURIComponent,
-    decode = decodeURIComponent;
+      decode = decodeURIComponent;
 
   /* COOKIE */
 

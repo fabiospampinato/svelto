@@ -6,7 +6,7 @@ extends ../layout.jade
 append main
   +divider-block Cookie
 
-  +multiple.fluid.joined
+  +multiple.equal.joined
     +input({ name: "cookie_key", label: "Key..." }).white.outlined.no-floating
     +input({ name: "cookie_value", label: "Value..." }).white.outlined.no-floating
     +input({ name: "cookie_end", label: "End..." }).white.outlined.no-floating
@@ -28,23 +28,18 @@ append body-end
     function cookie_input ( name ) {
       return $('input[name="cookie_' + name + '"]').val ();
     }
-
     function cookie_get () {
       $.noty ( '' + $.cookie.get ( cookie_input ( 'key' ) ) );
     }
-
     function cookie_set () {
       $.cookie.set ( cookie_input ( 'key' ), cookie_input ( 'value' ), Number(cookie_input ( 'end' )), cookie_input ( 'path' ), cookie_input ( 'domain' ), cookie_input ( 'secure' ) );
     }
-
     function cookie_remove () {
       $.cookie.remove ( cookie_input ( 'key' ), cookie_input ( 'path' ), cookie_input ( 'domain' ) );
     }
-
     function cookie_has () {
       $.noty ( '' + $.cookie.has ( cookie_input ( 'key' ) ) );
     }
-
     function cookie_keys () {
       $.noty ( $.cookie.keys ().join ( ' - ' ) );
     }
