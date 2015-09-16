@@ -6,17 +6,17 @@ extends ../layout.jade
 append main
   +divider-block Notifications
 
-  +multiple
-    +button("notification_test ()").outlined Test
-    +button("notification_test_delayed ()").outlined Test delayed (2s)
+  +multiple.actions
+    +button("notification_trigger ()").outlined Trigger
+    +button("notification_trigger_delayed ( 2000 )").outlined Trigger delayed (2s)
 
 append body-end
   +script.
-    function notification_test () {
+    function notification_trigger () {
       $.notification ({ title: "Test title", body: "Test description", img: "/sample.png" });
     }
-    function notification_test_delayed () {
+    function notification_trigger_delayed ( delay ) {
       setTimeout ( function () {
-        $.notification ({ title: "Test title", body: "Test description", img: "/sample.png" });
-      }, 2000 );
+        notification_trigger ();
+      }, delay );
     }

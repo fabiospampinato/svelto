@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Notification v0.1.0
+ * Svelto - Notification v0.1.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -17,17 +17,17 @@
 
   /* NOTIFICATION */
 
-  $.notification = function ( custom_options ) {
+  $.notification = function ( options ) {
 
-    // OPTIONS
+    /* OPTIONS */
 
-    var options = _.merge ({
+    options = _.merge ({
       title: false,
       body: false,
       img: false
-    }, custom_options );
+    }, options );
 
-    // NOTIFICATION
+    /* NOTIFICATIONS */
 
     if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
