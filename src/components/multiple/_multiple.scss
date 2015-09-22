@@ -90,9 +90,18 @@
 
   &.fluid, &.equal {
 
-    &:not(.vertical) > * {
-      flex-grow: 1;
-      flex-shrink: 0;
+    &:not(.vertical) {
+
+      > * {
+        flex-grow: 1;
+        flex-shrink: 0;
+      }
+
+      > .input-wrp,
+      > input {
+        flex-basis: 0
+      }
+
     }
 
     &.vertical > * {

@@ -8135,6 +8135,15 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
           flex-shrink: 0;
 }
 
+.multiple.fluid:not(.vertical) > .input-wrp,
+.multiple.fluid:not(.vertical) > .textarea-wrp,
+.multiple.fluid:not(.vertical) > input, .multiple.equal:not(.vertical) > .input-wrp,
+.multiple.equal:not(.vertical) > .textarea-wrp,
+.multiple.equal:not(.vertical) > input {
+  -webkit-flex-basis: 0;
+          flex-basis: 0;
+}
+
 .multiple.fluid.vertical > *, .multiple.equal.vertical > * {
   width: 100%;
 }
