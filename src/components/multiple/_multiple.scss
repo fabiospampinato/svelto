@@ -163,7 +163,7 @@
         margin-bottom: 0;
         border-bottom-width: 0;
 
-        &.multiple > :last-child {
+        &.multiple > * {
           @include border-bottom-radius ( 0 );
         }
 
@@ -173,7 +173,7 @@
 
         @include border-top-radius ( 0 );
 
-        &.multiple > :not(:last-child) {
+        &.multiple > * {
           @include border-top-radius ( 0 );
         }
 

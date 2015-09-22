@@ -8,7 +8,7 @@ function nta_run ( returnValue ) {
     action: nta_input('action'),
     times: Number(nta_input('times')),
     fn: function ( data ) {
-      $.noty ( data.group + '`s action: ' + data.action + ' has been executed for the ' + data.time+ ' time' );
+      $.noty ( data.group + '`s action: ' + data.action + ' has been executed for the ' + data.time + ' time' );
       return returnValue;
     }
   });

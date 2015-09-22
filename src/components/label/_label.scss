@@ -40,7 +40,7 @@ label {
 
   /* TEXT GROW */
 
-  > :not(.sub):not(i.icon) {
+  > :not(.sub):not(.icon) {
     flex-grow: 1;
   }
 
@@ -128,7 +128,7 @@ label {
 
   > :not(.label):not(.button):not(.sub.left) { //INFO: Both `.label` and `.button`
 
-    & + :not(.sub.right):not(i.icon) {
+    & + :not(.sub.right):not(.icon) {
       padding-left: $label-center-extra-spacing;
     }
 
@@ -142,7 +142,7 @@ label {
 
     > :not(.label):not(.button):not(.sub.left) { //INFO: Both `.label` and `.button`
 
-      & + :not(.sub.right):not(i.icon) {
+      & + :not(.sub.right):not(.icon) {
         padding-left: $label-compact-center-extra-spacing;
       }
 

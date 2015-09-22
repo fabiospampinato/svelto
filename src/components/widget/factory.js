@@ -11,6 +11,8 @@
  * @requires ../pointer/Pointer.js
  *=========================================================================*/
 
+//FIXME: Extending widgets is not working!
+
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';

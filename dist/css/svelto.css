@@ -3494,7 +3494,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > :not(.sub):not(i.icon), .button > :not(.sub):not(i.icon) {
+.label > :not(.sub):not(.icon), .button > :not(.sub):not(.icon) {
   -webkit-flex-grow: 1;
           flex-grow: 1;
 }
@@ -3573,7 +3573,7 @@ label {
   border-color: inherit !important;
 }
 
-.label > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon), .button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon) {
+.label > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon), .button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon) {
   padding-left: 0.75em;
 }
 
@@ -3581,7 +3581,7 @@ label {
   padding-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon), .compact.button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(i.icon) {
+.label.compact > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon), .compact.button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon) {
   padding-left: 0.5em;
 }
 
@@ -8189,7 +8189,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   border-bottom-width: 0;
 }
 
-.multiple.joined.vertical > :not(:last-child).multiple > :last-child {
+.multiple.joined.vertical > :not(:last-child).multiple > * {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
@@ -8199,7 +8199,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   border-top-left-radius: 0;
 }
 
-.multiple.joined.vertical > :not(:first-child).multiple > :not(:last-child) {
+.multiple.joined.vertical > :not(:first-child).multiple > * {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
