@@ -1,39 +1,46 @@
 
 /* =========================================================================
- * Svelto - Tabs v0.1.0
+ * Svelto - Tabs v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* TABS */
 
-//FIXME: in order to positionate the indicator the .multiple-wrp and > .multiple get too hacky, by manually removing the margin
-
 .tabs {
 
-  position: relative;
-  margin-bottom: $gutter;
+  @extend .widget;
 
-  & > .tabs-buttons > .multiple {
-    margin-bottom: -10px; //FIXME: We shouldn't hard core it
+  /* TRIGGERS */
+
+  &-triggers {
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: row;
+
+    /* TRIGGER */
+
+    > * {
+      margin-bottom: 0;
+      flex-grow: 1;
+    }
+
   }
 
-  & > .tabs-containers {
+  /* CONTAINERS */
+
+  &-containers {
 
     position: relative;
 
-    & > .tabs-buttons-indicator {
-      @include color ( $tabs-indicator-color, $tabs-indicator-color-basic );
-      position: absolute;
-       z-index: 1;
-      transition-duration: $tabs-indicator-transition-all-duration;
-      transition-property: top, right, bottom, left;
-    }
+    /* CONTAINER */
 
-    & > .container {
+    > * {
 
       display: none;
       margin-bottom: 0;
@@ -46,75 +53,99 @@
 
   }
 
+  /* HORIZONTAL */
+
   &:not(.vertical) {
 
-    & > .tabs-buttons > .multiple {
+    /* TRIGGERS */
 
-      margin-right: 0;
-      margin-left: 0;
+    .tabs-triggers {
 
-      & > .label-wrp {
+      /* TRIGGER */
 
-        margin-right: 0;
-        margin-left: 0;
+      > :first-child {
+        border-bottom-left-radius: 0;
+      }
 
-        & > .label {
-          border-bottom-right-radius: 0;
-          border-bottom-left-radius: 0;
-        }
+      > :not(:first-child) {
+        @include border-left-radius ( 0 );
+        border-left-width: 0;
+      }
 
+      > :not(:last-child) {
+        @include border-right-radius ( 0 );
+      }
+
+      > :last-child {
+        border-bottom-right-radius: 0;
       }
 
     }
 
-    & > .tabs-containers {
+    /* CONTAINERS */
 
-      & > .tabs-buttons-indicator {
-        top: - $tabs-indicator-size;
-        right: 100%;
-        left: 0;
-        height: $tabs-indicator-size;
-      }
+    .tabs-containers {
 
-      & > .container {
+      /* CONTAINER */
+
+      > * {
+        @include border-top-radius ( 0 );
         border-top-width: 0;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
       }
 
     }
 
   }
 
+  /* VERTICAL */
+
   &.vertical {
 
     display: flex;
     align-items: stretch;
+    flex-direction: row;
 
-    & > .tabs-buttons > .multiple .label {
-      border-top-right-radius: 0;
-      border-bottom-right-radius: 0;
+    /* TRIGGERS */
+
+    .tabs-triggers {
+
+      flex-direction: column;
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-top-right-radius: 0;
+      }
+
+      > :not(:first-child) {
+        @include border-top-radius ( 0 );
+        border-top-width: 0;
+      }
+
+      > :not(:last-child) {
+        @include border-bottom-radius ( 0 );
+      }
+
+      > :last-child {
+        border-bottom-right-radius: 0;
+      }
+
     }
 
-    & > .tabs-containers {
+    /* CONTAINERS */
+
+    .tabs-containers {
 
       display: flex;
       flex-direction: column;
       flex-grow: 1;
 
-      & > .tabs-buttons-indicator {
-        top: 0;
-        bottom: 100%;
-        left: - $tabs-indicator-size;
-        width: $tabs-indicator-size;
-      }
+      /* CONTAINER */
 
-      & > .container {
+      > * {
+        @include border-left-radius ( 0 );
         flex-grow: 1;
-        height: 100%;
         border-left-width: 0;
-        border-top-left-radius: 0;
-        border-bottom-left-radius: 0;
       }
 
     }

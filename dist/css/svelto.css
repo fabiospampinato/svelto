@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2999,10 +2999,11 @@ i.disabled.icon,
 .disabled.square-sample,
 .disabled.circle,
 table.disabled.table,
+.disabled.tabs,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -11431,101 +11432,97 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
 }
 
 /* =========================================================================
- * Svelto - Tabs (Settings) v0.2.0
+ * Svelto - Tabs (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
  * ========================================================================= */
-/* TABS INDICATOR */
 /* =========================================================================
- * Svelto - Tabs v0.1.0
+ * Svelto - Tabs v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* TABS */
 .tabs {
+  /* TRIGGERS */
+  /* CONTAINERS */
+  /* HORIZONTAL */
+  /* VERTICAL */
+}
+
+.tabs-triggers {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-align-items: stretch;
+          align-items: stretch;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  /* TRIGGER */
+}
+
+.tabs-triggers > * {
+  margin-bottom: 0;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+}
+
+.tabs-containers {
   position: relative;
-  margin-bottom: 10px;
+  /* CONTAINER */
 }
 
-.tabs > .tabs-buttons > .multiple {
-  margin-bottom: -10px;
-}
-
-.tabs > .tabs-containers {
-  position: relative;
-}
-
-.tabs > .tabs-containers > .tabs-buttons-indicator {
-  border-color: #a34900 ;
-  color: #ffffff ;
-  background: #ef6c00 ;
-  position: absolute;
-  z-index: 1;
-  transition-duration: 0.15s;
-  transition-property: top, right, bottom, left;
-}
-
-.tabs > .tabs-containers > .tabs-buttons-indicator.transparentize {
-  border-color: rgba(163, 73, 0, 0.95) ;
-}
-
-.tabs > .tabs-containers > .tabs-buttons-indicator.transparentize {
-  background: rgba(239, 108, 0, 0.95) ;
-}
-
-.tabs > .tabs-containers > .tabs-buttons-indicator p > a {
-  color: #1565c0 ;
-}
-
-.tabs > .tabs-containers > .tabs-buttons-indicator p > a:after {
-  border-color: #166ac9 ;
-}
-
-.tabs > .tabs-containers > .tabs-buttons-indicator p > a:hover {
-  color: #166ac9 ;
-}
-
-.tabs > .tabs-containers > .container, .tabs > .tabs-containers > .card-header, .tabs > .tabs-containers > .card-block, .tabs > .tabs-containers > .card-footer, .tabs > .tabs-containers > footer, .image-wrp .tabs > .tabs-containers > .image-caption, .tabs > .tabs-containers > .infobar, .tabs > .tabs-containers > .tagbox {
+.tabs-containers > * {
   display: none;
   margin-bottom: 0;
 }
 
-.tabs > .tabs-containers > .container.active, .tabs > .tabs-containers > .active.card-header, .tabs > .tabs-containers > .active.card-block, .tabs > .tabs-containers > .active.card-footer, .tabs > .tabs-containers > footer.active, .image-wrp .tabs > .tabs-containers > .active.image-caption, .tabs > .tabs-containers > .active.infobar, .tabs > .tabs-containers > .active.tagbox {
+.tabs-containers > *.active {
   display: block;
 }
 
-.tabs:not(.vertical) > .tabs-buttons > .multiple {
-  margin-right: 0;
-  margin-left: 0;
+.tabs:not(.vertical) {
+  /* TRIGGERS */
+  /* CONTAINERS */
 }
 
-.tabs:not(.vertical) > .tabs-buttons > .multiple > .label-wrp {
-  margin-right: 0;
-  margin-left: 0;
+.tabs:not(.vertical) .tabs-triggers {
+  /* TRIGGER */
 }
 
-.tabs:not(.vertical) > .tabs-buttons > .multiple > .label-wrp > .label, .tabs:not(.vertical) > .tabs-buttons > .multiple > .label-wrp > .button {
-  border-bottom-right-radius: 0;
+.tabs:not(.vertical) .tabs-triggers > :first-child {
   border-bottom-left-radius: 0;
 }
 
-.tabs:not(.vertical) > .tabs-containers > .tabs-buttons-indicator {
-  top: -0.2em;
-  right: 100%;
-  left: 0;
-  height: 0.2em;
+.tabs:not(.vertical) .tabs-triggers > :not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-left-width: 0;
 }
 
-.tabs:not(.vertical) > .tabs-containers > .container, .tabs:not(.vertical) > .tabs-containers > .card-header, .tabs:not(.vertical) > .tabs-containers > .card-block, .tabs:not(.vertical) > .tabs-containers > .card-footer, .tabs:not(.vertical) > .tabs-containers > footer, .image-wrp .tabs:not(.vertical) > .tabs-containers > .image-caption, .tabs:not(.vertical) > .tabs-containers > .infobar, .tabs:not(.vertical) > .tabs-containers > .tagbox {
-  border-top-width: 0;
-  border-top-left-radius: 0;
+.tabs:not(.vertical) .tabs-triggers > :not(:last-child) {
+  border-bottom-right-radius: 0;
   border-top-right-radius: 0;
+}
+
+.tabs:not(.vertical) .tabs-triggers > :last-child {
+  border-bottom-right-radius: 0;
+}
+
+.tabs:not(.vertical) .tabs-containers {
+  /* CONTAINER */
+}
+
+.tabs:not(.vertical) .tabs-containers > * {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-width: 0;
 }
 
 .tabs.vertical {
@@ -11533,36 +11530,53 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   display: flex;
   -webkit-align-items: stretch;
           align-items: stretch;
+  -webkit-flex-direction: row;
+          flex-direction: row;
+  /* TRIGGERS */
+  /* CONTAINERS */
 }
 
-.tabs.vertical > .tabs-buttons > .multiple .label, .tabs.vertical > .tabs-buttons > .multiple .button {
+.tabs.vertical .tabs-triggers {
+  -webkit-flex-direction: column;
+          flex-direction: column;
+  /* TRIGGER */
+}
+
+.tabs.vertical .tabs-triggers > :first-child {
   border-top-right-radius: 0;
+}
+
+.tabs.vertical .tabs-triggers > :not(:first-child) {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+  border-top-width: 0;
+}
+
+.tabs.vertical .tabs-triggers > :not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.tabs.vertical .tabs-triggers > :last-child {
   border-bottom-right-radius: 0;
 }
 
-.tabs.vertical > .tabs-containers {
+.tabs.vertical .tabs-containers {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
           flex-direction: column;
   -webkit-flex-grow: 1;
           flex-grow: 1;
+  /* CONTAINER */
 }
 
-.tabs.vertical > .tabs-containers > .tabs-buttons-indicator {
-  top: 0;
-  bottom: 100%;
-  left: -0.2em;
-  width: 0.2em;
-}
-
-.tabs.vertical > .tabs-containers > .container, .tabs.vertical > .tabs-containers > .card-header, .tabs.vertical > .tabs-containers > .card-block, .tabs.vertical > .tabs-containers > .card-footer, .tabs.vertical > .tabs-containers > footer, .image-wrp .tabs.vertical > .tabs-containers > .image-caption, .tabs.vertical > .tabs-containers > .infobar, .tabs.vertical > .tabs-containers > .tagbox {
+.tabs.vertical .tabs-containers > * {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
   -webkit-flex-grow: 1;
           flex-grow: 1;
-  height: 100%;
   border-left-width: 0;
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
 }
 
 /* =========================================================================

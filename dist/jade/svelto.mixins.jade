@@ -1074,6 +1074,39 @@ mixin syntax(language)
 
 
 //- =========================================================================
+//- Svelto - Progressbar v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    value: '', // Percentage
+    colors: { // Colors to use for the progressbar
+      on: '', // Color of the highlight part
+      off: '' // Color of the unhighlighted part
+    },
+    striped: '', // Draw striped over it
+    labeled: '', // Draw a label inside
+    decimals: '' // Amount of decimals to round the label value to
+  }
+
+mixin progressbar(options)
+  - options = typeof options === "number" ? { value: options } : ( options || {} );
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.striped = options.striped || false;
+  - options.labeled = options.labeled || false;
+  - options.decimals = options.decimals || 0;
+  .progressbar(class=((options.striped ? "striped" : "") + " " + options.colors.off) data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
+    .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
+      if options.labeled
+        .progressbar-label= +(options.value).toFixed(options.decimals)
+
+
+//- =========================================================================
 //- Svelto - Radio v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1120,39 +1153,6 @@ mixin radio(options)
       span= options.title
     +icon(options.icons.on)(class=options.colors.on).icon-on
     +icon(options.icons.off)(class=options.colors.off).icon-off
-
-
-//- =========================================================================
-//- Svelto - Progressbar v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    value: '', // Percentage
-    colors: { // Colors to use for the progressbar
-      on: '', // Color of the highlight part
-      off: '' // Color of the unhighlighted part
-    },
-    striped: '', // Draw striped over it
-    labeled: '', // Draw a label inside
-    decimals: '' // Amount of decimals to round the label value to
-  }
-
-mixin progressbar(options)
-  - options = typeof options === "number" ? { value: options } : ( options || {} );
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.striped = options.striped || false;
-  - options.labeled = options.labeled || false;
-  - options.decimals = options.decimals || 0;
-  .progressbar(class=((options.striped ? "striped" : "") + " " + options.colors.off) data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
-    .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
-      if options.labeled
-        .progressbar-label= +(options.value).toFixed(options.decimals)
 
 
 //- =========================================================================
@@ -1430,7 +1430,7 @@ mixin table-row-empty(empty_str)
 
 
 //- =========================================================================
-//- Svelto - Tabs v0.1.0
+//- Svelto - Tabs v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1440,41 +1440,13 @@ mixin tabs
   .tabs&attributes(attributes)
     block
 
-mixin tabs-buttons
-  .tabs-buttons&attributes(attributes)
-    block
-
-mixin tabs-buttons-indicator
-  .tabs-buttons-indicator&attributes(attributes)
+mixin tabs-triggers
+  .tabs-triggers&attributes(attributes)
     block
 
 mixin tabs-containers
   .tabs-containers&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Textarea v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Textarea name
-    label: '', // Label
-  }
-
-mixin textarea(options)
-  - options = options || {};
-  - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- =========================================================================
@@ -1505,6 +1477,30 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+
+
+//- =========================================================================
+//- Svelto - Textarea v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
 
 
 //- =========================================================================
