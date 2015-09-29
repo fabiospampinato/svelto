@@ -8795,7 +8795,7 @@ $(function () {
 
 
 /* =========================================================================
- * Svelto - Time Ago v0.1.0
+ * Svelto - Time Ago v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8817,7 +8817,7 @@ $(function () {
       timestamp: false,
       title: false,
       callbacks: {
-        update: _.noop
+        change: _.noop
       }
     },
 
@@ -8825,47 +8825,49 @@ $(function () {
 
     _variables: function () {
 
-      this.$timeAgo_wrp = this.$element;
+      this.$timeAgoElement = this.$element;
 
-      this.options.timestamp = this.$timeAgo_wrp.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
+      if ( !this.options.timestamp ) {
+
+        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
+
+      }
 
     },
 
     _init: function () {
 
-      this._update_loop ( 0 );
+      this._loop ( 0 );
 
     },
 
     /* PRIVATE */
 
-    _update_loop: function ( wait ) {
+    _loop: function ( wait ) {
 
       this._delay ( function () {
 
-        this._update_loop ( this.update ().next );
+        this._loop ( this._update ().next );
 
       }, wait * 1000 );
 
     },
 
-    /* PUBLIC */
-
-    update: function () {
+    _update: function () {
 
       var timeAgo = _.timeAgo ( this.options.timestamp );
 
       if ( this.options.title ) {
 
-        this.$timeAgo_wrp.attr ( 'title', timeAgo.str );
+        this.$timeAgoElement.attr ( 'title', timeAgo.str );
 
       } else {
 
-        this.$timeAgo_wrp.html ( timeAgo.str );
+        this.$timeAgoElement.html ( timeAgo.str );
 
       }
 
-      this._trigger ( 'update' );
+      this._trigger ( 'change' );
 
       return timeAgo;
 
