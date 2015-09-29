@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Pointer v0.1.0
+ * Svelto - Pointer v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,39 +9,41 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later)
+//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
 
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
-  /* POINTER */
+  /* SETTINGS */
 
-  $.Pointer = {
+  window.Pointer = {
     pressDuration: 300,
     doubleTapInterval: 300,
     flickDuration: 150,
     motionThreshold: 5
   };
 
-  var events_names = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
-      events_prefix = 'pointer';
+  /* EVENTS METHODS */
 
-  _.each ( events_names, function ( event_name ) {
+  var eventsNames = ['tap', 'dbltap', 'press', 'dragstart', 'dragmove', 'dragend', 'flick'],
+      eventsPrefix = 'pointer';
 
-    var full_event = events_prefix + event_name;
+  _.each ( eventsNames, function ( name ) {
 
-    $.Pointer[event_name] = full_event;
+    var fullName = eventsPrefix + name;
 
-    $.fn[event_name] = function ( fn ) {
+    Pointer[name] = fullName;
 
-      return fn ? this.on ( full_event, fn ) : this.trigger ( full_event );
+    $.fn[name] = function ( fn ) {
+
+      return fn ? this.on ( fullName, fn ) : this.trigger ( fullName );
 
     };
 
   });
 
-  /* TRIGGERS */
+  /* VARIABLES */
 
   var startEvents = $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
       moveEvents = $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
@@ -53,13 +55,15 @@
       endXY,
       target,
       $target,
-      start_timestamp,
-      end_timestamp,
-      prev_tap_timestamp = 0,
+      startTimestamp,
+      endTimestamp,
+      prevTapTimestamp = 0,
       motion,
       orientation,
       direction,
-      press_timeout;
+      pressTimeout;
+
+  /* HANDLERS */
 
   var createEvent = function ( name, originalEvent ) {
 
@@ -79,13 +83,13 @@
     target = event.target;
     $target = $(target);
 
-    start_timestamp = event.timeStamp || _.now ();
+    startTimestamp = event.timeStamp || _.now ();
 
     motion = false;
 
-    press_timeout = setTimeout ( _.wrap ( event, pressHandler ), $.Pointer.pressDuration );
+    pressTimeout = setTimeout ( _.wrap ( event, pressHandler ), Pointer.pressDuration );
 
-    $target.trigger ( createEvent ( $.Pointer.dragstart, event ), {
+    $target.trigger ( createEvent ( Pointer.dragstart, event ), {
       startXY: startXY
     });
 
@@ -96,13 +100,13 @@
 
   var pressHandler = function ( event ) { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
 
-    $target.trigger ( createEvent ( $.Pointer.press, event ) );
+    $target.trigger ( createEvent ( Pointer.press, event ) );
 
   };
 
   var moveHandler = function ( event ) {
 
-    clearTimeout ( press_timeout );
+    clearTimeout ( pressTimeout );
 
     moveXY = $.eventXY ( event );
 
@@ -111,11 +115,11 @@
       Y: moveXY.Y - startXY.Y
     };
 
-    if ( Math.abs ( deltaXY.X ) > $.Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > $.Pointer.motionThreshold ) {
+    if ( Math.abs ( deltaXY.X ) > Pointer.motionThreshold || Math.abs ( deltaXY.Y ) > Pointer.motionThreshold ) {
 
       motion = true;
 
-      $target.trigger ( createEvent ( $.Pointer.dragmove, event ), {
+      $target.trigger ( createEvent ( Pointer.dragmove, event ), {
         startXY: startXY,
         moveXY: moveXY,
         deltaXY: deltaXY
@@ -127,7 +131,7 @@
 
   var endHandler = function ( event ) {
 
-    clearTimeout ( press_timeout );
+    clearTimeout ( pressTimeout );
 
     endXY = $.eventXY ( event );
     deltaXY = {
@@ -137,23 +141,23 @@
 
     if ( target === event.target && ( event.type === 'touchend' || ( event.type === 'mouseup' && event.button === 0 ) ) ) {
 
-      end_timestamp = event.timeStamp || _.now ();
+      endTimestamp = event.timeStamp || _.now ();
 
       if ( !$.browser.is.touchDevice || !motion ) {
 
-        $target.trigger ( createEvent ( $.Pointer.tap, event ) );
+        $target.trigger ( createEvent ( Pointer.tap, event ) );
 
-        if ( end_timestamp - prev_tap_timestamp <= $.Pointer.doubleTapInterval ) {
+        if ( endTimestamp - prevTapTimestamp <= Pointer.doubleTapInterval ) {
 
-          $target.trigger ( createEvent ( $.Pointer.dbltap, event ) );
+          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
         }
 
-        prev_tap_timestamp = end_timestamp;
+        prevTapTimestamp = endTimestamp;
 
       }
 
-      if ( motion && ( end_timestamp - start_timestamp <= $.Pointer.flickDuration ) ) {
+      if ( motion && ( endTimestamp - startTimestamp <= Pointer.flickDuration ) ) {
 
         if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
 
@@ -167,7 +171,7 @@
 
         }
 
-        $target.trigger ( createEvent ( $.Pointer.flick, event ), {
+        $target.trigger ( createEvent ( Pointer.flick, event ), {
           startXY: startXY,
           endXY: endXY,
           deltaXY: deltaXY,
@@ -182,13 +186,15 @@
     $html.off ( moveEvents, moveHandler );
     $html.off ( endEvents, endHandler );
 
-    $target.trigger ( createEvent ( $.Pointer.dragend, event ), {
+    $target.trigger ( createEvent ( Pointer.dragend, event ), {
       startXY: startXY,
       endXY: endXY,
       deltaXY: deltaXY
     });
 
   };
+
+  /* BIND */
 
   $html.on ( startEvents, startHandler );
 

@@ -67,11 +67,11 @@
 
       /* INCREASE */
 
-      this._on ( this.$decreaser, $.Pointer.tap, this.decrease );
+      this._on ( this.$decreaser, Pointer.tap, this.decrease );
 
       /* DECREASE */
 
-      this._on ( this.$increaser, $.Pointer.tap, this.increase );
+      this._on ( this.$increaser, Pointer.tap, this.increase );
 
     },
 

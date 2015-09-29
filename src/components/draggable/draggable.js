@@ -73,15 +73,15 @@
 
       if ( this.options.only_handlers ) {
 
-        this._on ( this.$handlers, $.Pointer.dragstart, this._start );
-        this._on ( this.$handlers, $.Pointer.dragmove, this._move );
-        this._on ( this.$handlers, $.Pointer.dragend, this._end );
+        this._on ( this.$handlers, Pointer.dragstart, this._start );
+        this._on ( this.$handlers, Pointer.dragmove, this._move );
+        this._on ( this.$handlers, Pointer.dragend, this._end );
 
       } else {
 
-        this._on ( $.Pointer.dragstart, this._start );
-        this._on ( $.Pointer.dragmove, this._move );
-        this._on ( $.Pointer.dragend, this._end );
+        this._on ( Pointer.dragstart, this._start );
+        this._on ( Pointer.dragmove, this._move );
+        this._on ( Pointer.dragend, this._end );
 
       }
 

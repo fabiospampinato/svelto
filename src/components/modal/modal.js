@@ -55,11 +55,11 @@
 
       /* TRIGGER */
 
-      this._on ( this.$triggers, $.Pointer.tap, this.open );
+      this._on ( this.$triggers, Pointer.tap, this.open );
 
       /* CLOSER & BACKGROUND */
 
-      this._on ( this.$closers.add ( this.$background ), $.Pointer.tap, this.close );
+      this._on ( this.$closers.add ( this.$background ), Pointer.tap, this.close );
 
     },
 

@@ -68,7 +68,7 @@
 
       /* TRIGGERS */
 
-      this._on ( this.$triggers, $.Pointer.tap, this.__triggerClick );
+      this._on ( this.$triggers, Pointer.tap, this.__triggerClick );
 
     },
 

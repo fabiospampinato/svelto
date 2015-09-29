@@ -99,11 +99,11 @@
 
       /* CLICK ON EMPTY */
 
-      this._on ( $.Pointer.tap, this.__clickOnEmpty );
+      this._on ( Pointer.tap, this.__clickOnEmpty );
 
       /* CLICK ON TAG REMOVER */
 
-      this._on ( $.Pointer.tap, this.options.selectors.tagRemover, this.__clickOnTagRemover );
+      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__clickOnTagRemover );
 
     },
 

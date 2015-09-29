@@ -159,7 +159,7 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this._on ( $.Pointer.tap, this.close );
+        this._on ( Pointer.tap, this.close );
 
       }
 
@@ -169,7 +169,7 @@
 
       _.each ( this.options.buttons, function ( button, index ) {
 
-        this._on ( this.$buttons.eq ( index ), $.Pointer.tap, function ( event, data ) {
+        this._on ( this.$buttons.eq ( index ), Pointer.tap, function ( event, data ) {
 
           if ( button.onClick ) {
 
@@ -227,7 +227,7 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this._on ( $.Pointer.flick, function ( event, data ) {
+        this._on ( Pointer.flick, function ( event, data ) {
 
           if ( data.orientation === 'horizontal' ) {
 

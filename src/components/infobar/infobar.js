@@ -40,7 +40,7 @@
 
     _events: function () {
 
-      this._on ( this.$closers, $.Pointer.tap, this.close );
+      this._on ( this.$closers, Pointer.tap, this.close );
 
     },
 

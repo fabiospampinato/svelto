@@ -48,7 +48,7 @@
 
     _events: function () {
 
-      this._on ( this.$flippers, $.Pointer.tap, this.flip );
+      this._on ( this.$flippers, Pointer.tap, this.flip );
 
     },
 

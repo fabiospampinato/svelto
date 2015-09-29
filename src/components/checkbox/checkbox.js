@@ -56,7 +56,7 @@
 
       /* CLICK */
 
-      this._on ( $.Pointer.tap, _.wrap ( undefined, this.toggle ) );
+      this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
 
     },
 

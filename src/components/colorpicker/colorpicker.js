@@ -86,8 +86,8 @@
 
       /* SB DRAG */
 
-      this._on ( this.$sb_wrp, $.Pointer.dragmove, this._handler_sb_drag_move );
-      this._on ( this.$sb_wrp, $.Pointer.dragend, this._handler_sb_drag_end );
+      this._on ( this.$sb_wrp, Pointer.dragmove, this._handler_sb_drag_move );
+      this._on ( this.$sb_wrp, Pointer.dragend, this._handler_sb_drag_end );
 
       /* HUE ARROWS */
 
@@ -96,8 +96,8 @@
 
       /* HUE DRAG */
 
-      this._on ( this.$hue_wrp, $.Pointer.dragmove, this._handler_hue_drag_move );
-      this._on ( this.$hue_wrp, $.Pointer.dragend, this._handler_hue_drag_end );
+      this._on ( this.$hue_wrp, Pointer.dragmove, this._handler_hue_drag_move );
+      this._on ( this.$hue_wrp, Pointer.dragend, this._handler_hue_drag_end );
 
     },
 

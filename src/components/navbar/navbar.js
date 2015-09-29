@@ -50,17 +50,17 @@
 
       /* CLOSER CLICK */
 
-      this._on ( this.$closers, $.Pointer.tap, this.close );
+      this._on ( this.$closers, Pointer.tap, this.close );
 
       /* TRIGGER CLICK */
 
-      this._on ( this.$triggers, $.Pointer.tap, this.open );
+      this._on ( this.$triggers, Pointer.tap, this.open );
 
       /* FLICK */
 
       if ( this.isFlickable ) {
 
-        this._on ( $document, $.Pointer.flick, this._handler_flick );
+        this._on ( $document, Pointer.flick, this._handler_flick );
 
       }
 
