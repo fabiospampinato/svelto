@@ -49,8 +49,8 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
 
 /* FLAGS */
 
-var isDevelopment = !!argv.development || !!argv.dev,
-    isProduction = !isDevelopment;
+var isProduction = !!argv.production,
+    isDevelopment = !isProduction;
 
 /* IMAGES */
 
