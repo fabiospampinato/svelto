@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Checkbox v0.1.0
+ * Svelto - Checkbox v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,36 +12,61 @@
 
 .checkbox {
 
-  transition: opacity $checkbox-transition-opacity-duration;
+  /* INPUT */
 
-  & > input {
+  > input {
     display: none;
   }
 
-  .icon {
+  /* ICONS */
 
-    transition: opacity $checkbox-icon-transition-opacity-duration;
+  &-icons {
 
-    &.on {
-      @include color-text ( $checkbox-icon-on-color );
-      opacity: 0;
-    }
+    position: relative;
 
-    &.off {
-      margin-left: -1.635em; //FIXME: it should be hardcoded here...
-      opacity: 1;
+    /* ICON */
+
+    .icon {
+
+      margin-bottom: 0;
+      transition: opacity $checkbox-icon-transition-opacity-duration;
+
+      &.icon-on {
+        @include color-text ( $checkbox-icon-on-color );
+        opacity: 0;
+        z-index: 1;
+      }
+
+      &.icon-off {
+        @include fill-absolute ();
+      }
+
     }
 
   }
 
-  &.checked .icon {
+  /* CHECKED */
 
-    &.on {
-      opacity: 1;
-    }
+  &.checked {
 
-    &.off {
-      opacity: 0;
+    /* ICONS */
+
+    .checkbox-icons {
+
+      /* ICON */
+
+      .icon {
+
+        &.icon-on {
+          opacity: 1;
+        }
+
+        &.icon-off {
+          opacity: 0;
+        }
+
+      }
+
     }
 
   }

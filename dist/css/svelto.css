@@ -3574,20 +3574,20 @@ label {
   border-color: inherit !important;
 }
 
-.label > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon), .button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon) {
-  padding-left: 0.75em;
+.label > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon), .button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon) {
+  margin-left: 0.75em;
 }
 
-.label > :not(.label):not(.button):not(.sub.left) + i.icon, .button > :not(.label):not(.button):not(.sub.left) + i.icon {
-  padding-left: 0.5em;
+.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon {
+  margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon), .compact.button > :not(.label):not(.button):not(.sub.left) + :not(.sub.right):not(.icon) {
-  padding-left: 0.5em;
+.label.compact > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon), .compact.button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon) {
+  margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub.left) + i.icon, .compact.button > :not(.label):not(.button):not(.sub.left) + i.icon {
-  padding-left: 0.3333333333em;
+.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon {
+  margin-left: 0.3333333333em;
 }
 
 .label.badge, .badge.button {
@@ -4580,9 +4580,8 @@ button {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* CHECKBOX */
-/* COLOR */
 /* =========================================================================
- * Svelto - Checkbox v0.1.0
+ * Svelto - Checkbox v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4591,32 +4590,52 @@ button {
  * ========================================================================= */
 /* CHECKBOX */
 .checkbox, .radio {
-  transition: opacity 0.15s;
+  /* INPUT */
+  /* ICONS */
+  /* CHECKED */
 }
 
 .checkbox > input, .radio > input {
   display: none;
 }
 
-.checkbox .icon, .radio .icon {
+.checkbox-icons {
+  position: relative;
+  /* ICON */
+}
+
+.checkbox-icons .icon {
+  margin-bottom: 0;
   transition: opacity 0.15s;
 }
 
-.checkbox .icon.on, .radio .icon.on {
+.checkbox-icons .icon.icon-on {
   color: #ef6c00 ;
   opacity: 0;
+  z-index: 1;
 }
 
-.checkbox .icon.off, .radio .icon.off {
-  margin-left: -1.635em;
+.checkbox-icons .icon.icon-off {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.checkbox.checked, .checked.radio {
+  /* ICONS */
+}
+
+.checkbox.checked .checkbox-icons, .checked.radio .checkbox-icons {
+  /* ICON */
+}
+
+.checkbox.checked .checkbox-icons .icon.icon-on, .checked.radio .checkbox-icons .icon.icon-on {
   opacity: 1;
 }
 
-.checkbox.checked .icon.on, .checked.radio .icon.on {
-  opacity: 1;
-}
-
-.checkbox.checked .icon.off, .checked.radio .icon.off {
+.checkbox.checked .checkbox-icons .icon.icon-off, .checked.radio .checkbox-icons .icon.icon-off {
   opacity: 0;
 }
 
@@ -11431,14 +11450,6 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   background-color: rgba(0, 0, 0, 0.04);
 }
 
-/* =========================================================================
- * Svelto - Tabs (Settings) v0.3.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
 /* =========================================================================
  * Svelto - Tabs v0.2.0
  * =========================================================================

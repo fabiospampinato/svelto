@@ -126,28 +126,28 @@ label {
 
   /* CENTER */
 
-  > :not(.label):not(.button):not(.sub.left) { //INFO: Both `.label` and `.button`
+  > :not(.label):not(.button):not(.sub) { //INFO: Both `.label` and `.button`
 
-    & + :not(.sub.right):not(.icon) {
-      padding-left: $label-center-extra-spacing;
+    & + :not(.sub):not(.icon) {
+      margin-left: $label-center-extra-spacing;
     }
 
     & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
-      padding-left: $label-center-extra-spacing / $icon-scale-amount;
+      margin-left: $label-center-extra-spacing / $icon-scale-amount;
     }
 
   }
 
   &.compact {
 
-    > :not(.label):not(.button):not(.sub.left) { //INFO: Both `.label` and `.button`
+    > :not(.label):not(.button):not(.sub) { //INFO: Both `.label` and `.button`
 
-      & + :not(.sub.right):not(.icon) {
-        padding-left: $label-compact-center-extra-spacing;
+      & + :not(.sub):not(.icon) {
+        margin-left: $label-compact-center-extra-spacing;
       }
 
       & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
-        padding-left: $label-compact-center-extra-spacing / $icon-scale-amount;
+        margin-left: $label-compact-center-extra-spacing / $icon-scale-amount;
       }
 
     }

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Checkbox v0.1.0
+ * Svelto - Checkbox v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -20,8 +20,9 @@
 
     options: {
       callbacks: {
-        checked: _.noop,
-        unchecked: _.noop
+        change: _.noop,
+        check: _.noop,
+        uncheck: _.noop
       }
     },
 
@@ -36,19 +37,12 @@
 
     _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-      var hasClass = this.$checkbox.hasClass ( 'checked' );
+      var isChecked = this.get (),
+          hasClass = this.$checkbox.hasClass ( 'checked' );
 
-      if ( this.get () ) {
+      if ( isChecked !== hasClass ) {
 
-        if ( !hasClass ) {
-
-          this.$checkbox.addClass ( 'checked' );
-
-        }
-
-      } else if ( hasClass ) {
-
-        this.$checkbox.removeClass ( 'checked' );
+        this.$checkbox.toggleclass ( 'checked', isChecked );
 
       }
 
@@ -56,25 +50,26 @@
 
     _events: function () {
 
-      this._on ( 'click', function () {
+      /* CHANGE */
 
-        this.toggle ();
+      this._on ( true, 'change', this.__change );
 
-      });
+      /* CLICK */
 
-      this._on ( true, 'change', this._handler_change );
+      this._on ( $.Pointer.tap, _.wrap ( undefined, this.toggle ) );
 
     },
 
     /* CHANGE */
 
-    _handler_change: function () {
+    __change: function () {
 
       var isChecked = this.get ();
 
       this.$checkbox.toggleClass ( 'checked', isChecked );
 
-      this._trigger ( isChecked ? 'checked' : 'unchecked' );
+      this._trigger ( 'change', { checked: isChecked } );
+      this._trigger ( isChecked ? 'check' : 'uncheck' );
 
     },
 
@@ -100,7 +95,8 @@
 
         this.$input.prop ( 'checked', force ).trigger ( 'change' );
 
-        this._trigger ( force ? 'checked' : 'unchecked' ); //FIXME: is triggered twice per toggle
+        this._trigger ( 'change', { checked: force } );
+        this._trigger ( force ? 'check' : 'uncheck' ); //FIXME: is triggered twice per toggle
 
       }
 
