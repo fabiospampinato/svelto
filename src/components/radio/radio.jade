@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Radio v0.1.0
+//- Svelto - Radio v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -32,17 +32,18 @@ mixin radio(options)
   - options.icons.on = options.icons.on || "radio_button_checked";
   - options.icons.off = options.icons.off || "radio_button_unchecked";
   +button(class=(options.checked ? "checked" : ""))&attributes(attributes).radio
-    if options.checked
-      if options.name
-        input(type="radio" name=name value=value checked)
-      else
-        input(type="radio" value=value checked)
-    else
-      if options.name
-        input(type="radio" name=name value=value)
-      else
-        input(type="radio" value=value)
     if options.title
       span= options.title
-    +icon(options.icons.on)(class=options.colors.on).icon-on
-    +icon(options.icons.off)(class=options.colors.off).icon-off
+    .icons
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off
+    if options.checked
+      if options.name
+        input(type="radio" name=options.name value=options.value checked)
+      else
+        input(type="radio" value=options.value checked)
+    else
+      if options.name
+        input(type="radio" name=options.name value=options.value)
+      else
+        input(type="radio" value=options.value)

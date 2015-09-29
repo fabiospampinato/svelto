@@ -36,16 +36,16 @@ mixin checkbox(options)
   +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
     if options.title
       span= options.title
-    .checkbox-icons
+    .icons
       +icon(options.icons.on)(class=options.colors.on).icon-on
       +icon(options.icons.off)(class=options.colors.off).icon-off
     if options.checked
       if options.name
-        input(type="radio" name=name value=value checked)
+        input(type="checkbox" name=options.name value=options.value checked)
       else
-        input(type="radio" value=value checked)
+        input(type="checkbox" value=options.value checked)
     else
       if options.name
-        input(type="radio" name=name value=value)
+        input(type="checkbox" name=options.name value=options.value)
       else
-        input(type="radio" value=value)
+        input(type="checkbox" value=options.value)

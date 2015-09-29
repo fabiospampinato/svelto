@@ -4599,23 +4599,23 @@ button {
   display: none;
 }
 
-.checkbox-icons {
+.checkbox .icons, .radio .icons {
   position: relative;
   /* ICON */
 }
 
-.checkbox-icons .icon {
+.checkbox .icons .icon, .radio .icons .icon {
   margin-bottom: 0;
   transition: opacity 0.15s;
 }
 
-.checkbox-icons .icon.icon-on {
+.checkbox .icons .icon.icon-on, .radio .icons .icon.icon-on {
   color: #ef6c00 ;
   opacity: 0;
   z-index: 1;
 }
 
-.checkbox-icons .icon.icon-off {
+.checkbox .icons .icon.icon-off, .radio .icons .icon.icon-off {
   position: absolute;
   top: 0;
   right: 0;
@@ -4627,15 +4627,15 @@ button {
   /* ICONS */
 }
 
-.checkbox.checked .checkbox-icons, .checked.radio .checkbox-icons {
+.checkbox.checked .icons, .checked.radio .icons {
   /* ICON */
 }
 
-.checkbox.checked .checkbox-icons .icon.icon-on, .checked.radio .checkbox-icons .icon.icon-on {
+.checkbox.checked .icons .icon.icon-on, .checked.radio .icons .icon.icon-on {
   opacity: 1;
 }
 
-.checkbox.checked .checkbox-icons .icon.icon-off, .checked.radio .checkbox-icons .icon.icon-off {
+.checkbox.checked .icons .icon.icon-off, .checked.radio .icons .icon.icon-off {
   opacity: 0;
 }
 

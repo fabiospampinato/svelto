@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Radio v0.1.0
+ * Svelto - Radio v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -20,7 +20,9 @@
 
     options: {
       callbacks: {
-        checked: _.noop
+        change: _.noop,
+        check: _.noop,
+        uncheck: _.noop
       }
     },
 
@@ -41,25 +43,18 @@
 
       }
 
-      this.$other_radios = this.$container.find ( 'input[name="' + this.name + '"]' ).parent ( '.radio' ).not ( this.$radio );
+      this.$otherRadios = this.$container.find ( this.name ? 'input[type="radio"][name="' + this.name + '"]' : 'input[type="radio"]' ).parent ( '.radio' ).not ( this.$radio );
 
     },
 
     _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-      var hasClass = this.$radio.hasClass ( 'checked' );
+      var isChecked = this. get (),
+          hasClass = this.$radio.hasClass ( 'checked' );
 
-      if ( this.get () ) {
+      if ( isChecked !== hasClass ) {
 
-        if ( !hasClass ) {
-
-          this.$radio.addClass ( 'checked' );
-
-        }
-
-      } else if ( hasClass ) {
-
-        this.$radio.removeClass ( 'checked' );
+        this.$radio.toggleClass ( 'checked', isChecked );
 
       }
 
@@ -67,31 +62,32 @@
 
     _events: function () {
 
-      this._on ( 'click', function () {
+      /* CHANGE */
 
-        this.check ();
+      this._on ( true, this.$input, 'change', this.__change );
 
-      });
+      /* CLICK */
 
-      this._on ( true, 'change', this._handler_change );
+      this._on ( 'click', this.check );
 
     },
 
     /* CHANGE */
 
-    _handler_change: function () {
+    __change: function () {
 
       var isChecked = this.get ();
 
       if ( isChecked ) {
 
-        this.$other_radios.removeClass ( 'checked' );
+        this.$otherRadios.removeClass ( 'checked' );
 
       }
 
       this.$radio.toggleClass ( 'checked', isChecked );
 
-      this._trigger ( isChecked ? 'checked' : 'unchecked' );
+      this._trigger ( 'change', { checked: isChecked } );
+      this._trigger ( isChecked ? 'check' : 'uncheck' );
 
     },
 
@@ -105,11 +101,14 @@
 
     check: function () {
 
-      if ( !this.get () ) {
+      var isChecked = this.get ();
+
+      if ( !isChecked ) {
 
         this.$input.prop ( 'checked', true ).trigger ( 'change' );
 
-        this._trigger ( 'checked' );
+        this._trigger ( 'change', { checked: true } );
+        this._trigger ( 'check' );
 
       }
 
