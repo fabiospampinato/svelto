@@ -205,6 +205,16 @@
     },
 
     /**
+     * Move the item at `from` index inside the array to the `to` index
+     */
+
+     move: function ( arr, from, to ) {
+
+       arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
+
+     },
+
+    /**
      * Returns true
      */
 

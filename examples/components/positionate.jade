@@ -29,11 +29,18 @@ append main
       +input({ name: "input_y", label: "Y axis..." }).no-floating.white.outlined
       +button("positionate2coordinates ()").secondary.outlined Coordinates
 
+  +divider-block Actions
+
+  +multiple.actions
+    +button("xxxsmall_positionable ()").outlined XXX-Small positionable
+    +button("medium_positionable ()").outlined Medium positionable
+    +button("xxxlarge_positionable ()").outlined XXX-Large positionable
+
 append body-end
   +noty({ body: "The anchor is draggable" })
   +script.
-    var live_update = false,
-      live_triggered = false;
+    var liveUpdate = false,
+        liveTriggered = false;
 
     function positionate2anchor ( direction ) {
       $('.positionable').positionate ({ $anchor: $('.anchor'), direction: direction });
@@ -48,21 +55,30 @@ append body-end
       $('.positionable').positionate ({ point: { x: Number($('input[name="input_x"]').val ()), y: Number($('input[name="input_y"]').val ()) } });
     }
     function positionateLive () {
-      if ( live_update ) {
+      if ( liveUpdate ) {
         $('.positionable').positionate ({ $anchor: $('.anchor') });
       }
     }
+    function xxxsmall_positionable () {
+      $('.positionable').removeClass ( 'xxxlarge' ).addClass ( 'xxxsmall' );
+    }
+    function medium_positionable () {
+      $('.positionable').removeClass ( 'xxxsmall xxxlarge' );
+    }
+    function xxxlarge_positionable () {
+      $('.positionable').removeClass ( 'xxxsmall' ).addClass ( 'xxxlarge' );
+    }
 
     $('.live').on ({
-      'checkbox:checked': function () {
-        live_update = true;
+      'checkbox:check': function () {
+        liveUpdate = true;
         positionateLive ();
-        if ( !live_triggered ) {
-          live_triggered = true;
+        if ( !liveTriggered ) {
+          liveTriggered = true;
           $('.anchor').on ( Pointer.dragmove, positionateLive );
         }
       },
-      'checkbox:unchecked': function () {
-        live_update = false;
+      'checkbox:uncheck': function () {
+        liveUpdate = false;
       }
     })

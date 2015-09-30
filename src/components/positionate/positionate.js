@@ -1,28 +1,53 @@
 
 /* =========================================================================
- * Svelto - Positionate v0.1.0
+ * Svelto - Positionate v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
+ * @requires ../transform/transform.js
  * ========================================================================= */
-
-//FIXME: if the anchor is half overflowing the viewport at the left, but still if there's space at the bottom the positionable gets positionated at the bottom, instead of the right: maybe create a new normalized area map, that gives more importance to this thing
-//TODO: add support for a $pointer ( that can also be a function )
 
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
+  /* UTILITES */
+
+  var isHorizontal = function ( direction ) {
+
+    return direction === 'left' || direction === 'right';
+
+  };
+
+  var isVertical = function ( direction ) {
+
+    return !isHorizontal ( direction );
+
+  };
+
+  var getOpposite = function ( direction ) {
+
+    var opposites = {
+      'top': 'bottom',
+      'bottom': 'top',
+      'left': 'right',
+      'right': 'left'
+    };
+
+    return opposites[direction];
+
+  };
+
   /* POSITIONATE */
 
-  $.fn.positionate = function ( custom_options ) {
+  $.fn.positionate = function ( options ) {
 
-    // OPTIONS
+    /* OPTIONS */
 
-    var options = _.merge ({
-      direction: false, //INFO: Set a preferred direction
+    options = _.merge ({
+      direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
       axis: false, //INFO: Set a preferred axis
       $anchor: false, //INFO: Positionate next to an $anchor element
       $pointer: false, //INFO: The element who is pointing to the anchor
@@ -33,114 +58,134 @@
         all: ['bottom', 'right', 'left', 'top']
       },
       callbacks: {
-        positionated: _.noop
+        change: _.noop
       }
-    }, custom_options );
+    }, options );
 
-    // RESETTING
+    /* RESET */
 
     this.removeClass ( 'positionate-top positionate-bottom positionate-left positionate-right' );
 
-    // VARIABLES
+    /* VARIABLES */
 
     var directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
-      window_width = $window.width (),
-      window_height = $window.height (),
-      html_scrollTop = $html.scrollTop (),
-      html_scrollLeft = $html.scrollLeft (),
-      positionable_offset = this.offset (),
-      positionable_width = this.outerWidth (),
-      positionable_height = this.outerHeight (),
-      anchor_offset = options.$anchor ? options.$anchor.offset () : { top: options.point.y, left: options.point.x },
-      anchor_width = options.$anchor ? options.$anchor.outerWidth () : 0,
-      anchor_height = options.$anchor ? options.$anchor.outerHeight () : 0;
+        windowWidth = $window.width (),
+        windowHeight = $window.height (),
+        htmlScrollTop = $html.scrollTop (),
+        htmlScrollLeft = $html.scrollLeft (),
+        positionableOffset = this.offset (),
+        positionableWidth = this.outerWidth (),
+        positionableHeight = this.outerHeight (),
+        anchorOffset = options.$anchor ? options.$anchor.offset () : { top: options.point.y, left: options.point.x },
+        anchorWidth = options.$anchor ? options.$anchor.outerWidth () : 0,
+        anchorHeight = options.$anchor ? options.$anchor.outerHeight () : 0;
 
-    // SPACES
+    /* SPACES */
 
-    var spaces = _.map ( directions, function ( direction ) {
+    var spaces = directions.map ( function ( direction ) {
 
       switch ( direction ) {
 
         case 'top':
-          return anchor_offset.top - html_scrollTop;
+          return anchorOffset.top - htmlScrollTop;
 
         case 'bottom':
-          return window_height - anchor_offset.top - anchor_height + html_scrollTop;
+          return windowHeight - anchorOffset.top - anchorHeight + htmlScrollTop;
 
         case 'left':
-          return anchor_offset.left - html_scrollLeft;
+          return anchorOffset.left - htmlScrollLeft;
 
         case 'right':
-          return window_width - anchor_offset.left - anchor_width + html_scrollLeft;
+          return windowWidth - anchorOffset.left - anchorWidth + htmlScrollLeft;
 
       }
 
     });
 
-    // AREAS
+    /* SPACES PRIORITIZATION */
 
-    var areas = _.map ( directions, function ( direction, index ) {
+    spaces.forEach ( function ( space, index ) {
 
-      switch ( direction ) {
+      if ( space < 0 ) {
 
-        case 'top':
-        case 'bottom':
-          return Math.min ( positionable_height, spaces[index] ) * Math.min ( window_width, positionable_width );
+        var opposite = getOpposite ( directions[index] ),
+            oppositeIndex = directions.indexOf ( opposite );
 
-        case 'left':
-        case 'right':
-          return Math.min ( positionable_width, spaces[index] ) * Math.min ( window_height, positionable_height );
+        _.move ( directions, oppositeIndex, 0 );
+        _.move ( spaces, oppositeIndex, 0 );
 
       }
 
     });
 
-    // CHOOSING A DIRECTION
+    /* AREAS */
 
-    var chosen_direction = directions[areas.indexOf ( _.max ( areas ) )];
+    var areas = directions.map ( function ( direction, index ) {
 
-    // GETTING TOP AND LEFT
+      switch ( direction ) {
 
-    switch ( chosen_direction ) {
+        case 'top':
+        case 'bottom':
+          return Math.min ( positionableHeight, spaces[index] ) * Math.min ( windowWidth, positionableWidth );
+
+        case 'left':
+        case 'right':
+          return Math.min ( positionableWidth, spaces[index] ) * Math.min ( windowHeight, positionableHeight );
+
+      }
+
+    });
+
+    /* BEST DIRECTION */
+
+    var bestIndex = areas.indexOf ( _.max ( areas ) ),
+        bestDirection = directions[bestIndex];
+
+    /* TOP / LEFT */
+
+    switch ( bestDirection ) {
 
       case 'top':
       case 'bottom':
         var coordinates = {
-          left: anchor_offset.left + ( anchor_width / 2 ) - ( positionable_width / 2 ),
-          top: ( chosen_direction === 'top' ) ? anchor_offset.top - positionable_height : anchor_offset.top + anchor_height
+          top: ( bestDirection === 'top' ) ? anchorOffset.top - positionableHeight : anchorOffset.top + anchorHeight,
+          left: anchorOffset.left + ( anchorWidth / 2 ) - ( positionableWidth / 2 )
         };
         break;
 
       case 'left':
       case 'right':
         var coordinates = {
-          top: anchor_offset.top + ( anchor_height / 2 ) - ( positionable_height / 2 ),
-          left: ( chosen_direction === 'left' ) ? anchor_offset.left - positionable_width : anchor_offset.left + anchor_width
+          top: anchorOffset.top + ( anchorHeight / 2 ) - ( positionableHeight / 2 ),
+          left: ( bestDirection === 'left' ) ? anchorOffset.left - positionableWidth : anchorOffset.left + anchorWidth
         };
 
     }
 
-    // CONSTRAIN TO THE WINDOW
+    /* CONSTRAIN TO THE WINDOW */
 
-    //TODO: add a viewport check here, we should positionate it to the viewport if the element is outside of it
+    if ( options.$anchor ) {
 
-    coordinates.top = _.clamp ( 0, coordinates.top, window_height - positionable_height );
-    coordinates.left = _.clamp ( 0, coordinates.left, window_width - positionable_width );
+      var oppositeSpace = spaces[bestIndex],
+          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
-    // DATAS
+      if ( isAnchorVisible ) {
+
+        coordinates.top = _.clamp ( 0, coordinates.top, windowHeight - positionableHeight );
+        coordinates.left = _.clamp ( 0, coordinates.left, windowWidth - positionableWidth );
+
+      }
+
+    }
+
+    /* DATAS */
 
     var datas = {
       coordinates: coordinates,
-      direction: chosen_direction
+      direction: bestDirection
     };
 
-    // SETTING TOP AND LEFT
-
-    this.css ( 'transform', 'translate3d(' + coordinates.left + 'px,' + coordinates.top + 'px,0)' );
-
-    this.addClass ( 'positionate-' + chosen_direction );
-
-    // SETTING THE POINTER
+    /* POINTER TOP / LEFT */
 
     if ( options.$anchor && options.$pointer ) {
 
@@ -148,37 +193,45 @@
 
       if ( $pointer instanceof $ ) {
 
-        var transform_str = $pointer.css ( 'transform' ),
-          matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0],
-          pointer_position = $pointer.position ();
+        var pointerPosition = $pointer.position ();
 
-        switch ( chosen_direction ) {
+        switch ( bestDirection ) {
 
           case 'top':
           case 'bottom':
-            var pointer_width = $pointer.width (),
-              translateX = parseInt ( matrix[4], 10 ) + ( ( anchor_offset.left + ( anchor_width / 2 ) - html_scrollLeft ) - ( coordinates.left + pointer_position.left + ( pointer_width / 2 ) ) ),
-              translateY = parseInt ( matrix[5], 10 );
+            var pointerWidth = $pointer.width (),
+                translateType = 'translateX',
+                translateValue = $pointer.translateX () + ( ( anchorOffset.left + ( anchorWidth / 2 ) - htmlScrollLeft ) - ( coordinates.left + pointerPosition.left + ( pointerWidth / 2 ) ) );
             break;
 
           case 'left':
           case 'right':
-            var pointer_height = $pointer.height (),
-              translateX = parseInt ( matrix[4], 10 ),
-              translateY = parseInt ( matrix[5], 10 ) + ( ( anchor_offset.top + ( anchor_height / 2 ) - html_scrollTop ) - ( coordinates.top + pointer_position.top + ( pointer_height / 2 ) ) );
+            var pointerHeight = $pointer.height (),
+                translateType = 'translateY',
+                translateValue = $pointer.translateY () + ( ( anchorOffset.top + ( anchorHeight / 2 ) - htmlScrollTop ) - ( coordinates.top + pointerPosition.top + ( pointerHeight / 2 ) ) );
             break;
 
         }
-
-        $pointer.css ( 'transform', 'translate3d(' + translateX + 'px,' + translateY + 'px,0)' );
 
       }
 
     }
 
-    // CALLBACK
+    /* SETTING */
 
-    options.callbacks.positionated ( datas );
+    this.translateX ( coordinates.left ).translateY ( coordinates.top );
+
+    this.addClass ( 'positionate-' + bestDirection );
+
+    if ( options.$anchor && options.$pointer && $pointer instanceof $ ) {
+
+      $pointer[translateType] ( translateValue );
+
+    }
+
+    /* CALLBACK */
+
+    options.callbacks.change ( datas );
 
     return this;
 
