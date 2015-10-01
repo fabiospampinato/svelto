@@ -215,6 +215,28 @@
      },
 
     /**
+     * Shorten the numer using common K and M syntax
+     */
+
+     mkize: function ( number ) {
+
+    	if ( number >= 1000000 ) {
+
+    		return ( number / 1000000 ) + 'M';
+
+    	} else if ( number >= 1000 ) {
+
+    		return ( number / 1000 ) + 'K';
+
+    	} else {
+
+    		return number;
+
+    	}
+
+    },
+
+    /**
      * Returns true
      */
 
