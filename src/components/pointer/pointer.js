@@ -78,6 +78,8 @@
 
   var startHandler = function ( event ) {
 
+    if ( event.type === 'mousedown' && event.button !== 0 ) return;
+
     startXY = $.eventXY ( event );
 
     target = event.target;

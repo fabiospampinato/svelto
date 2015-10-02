@@ -1119,6 +1119,8 @@
 
   var startHandler = function ( event ) {
 
+    if ( event.type === 'mousedown' && event.button !== 0 ) return;
+
     startXY = $.eventXY ( event );
 
     target = event.target;
@@ -3256,7 +3258,7 @@
 
 
 /* =========================================================================
- * Svelto - Draggable v0.1.0
+ * Svelto - Draggable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3264,9 +3266,17 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
+//TODO: Add page autoscroll capabilities
+//TODO: [MAYBE] Add support for handlers outside of the draggable element itself
+//TODO: Add unhandlers
+
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
+
+  /* VARIABLES */
+
+  var isDragging = false;
 
   /* DRAGGABLE */
 
@@ -3278,32 +3288,25 @@
       selectors: {
         handler: '.draggable-handler'
       },
-      draggable: _.true, //INFO: checks if we can drag it or not
-      only_handlers: false, //INFO: only an handler can drag it around
-      revertable: false, //INFO: on dragend take it back to the starting position
-      axis: false, //INFO: limit the movements to this axis
-      constrainer: { //INFO: constrain the drag inside the $element or coordinates
-        $element: false, //INFO: if we want to keep the draggable inside this $element
-        coordinates: false, //INFO: if we want to keep the draggable inside the coordinates //TODO: implement
-        // {
-        //   x1: 0,
-        //   x2: 0,
-        //   y1: 0,
-        //   y2: 0
-        // }
-        constrain_center: false, //INFO: set the constrain type, it will constrain the whole shape, or the center
-        axis: false, //INFO: if we want to constrain the draggable only in a specific axis
-        tollerance: { //INFO: the amount of pixel flexibility that a constrainer has
+      draggable: _.true, //INFO: Checks if we can drag it or not
+      onlyHandlers: false, //INFO: Only an handler can drag it around
+      revertable: false, //INFO: On dragend take it back to the starting position
+      axis: false, //INFO: Limit the movements to this axis
+      $proxy: false, //INFO: Drag the element also when we are triggering a drag from the `$proxy` element
+      constrainer: { //INFO: Constrain the drag inside the $element
+        $element: false, //INFO: If we want to keep the draggable inside this $element
+        constrainCenter: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
+        tollerance: { //INFO: The amount of pixel flexibility that a constrainer has
           x: 0,
           y: 0
         }
       },
-      modifiers: { //INFO: it can modify the setted X and Y transforms values
+      modifiers: { //INFO: It can modify the setted X and Y transforms values
         x: _.true,
         y: _.true
       },
       callbacks: {
-        beforestart: _.noop,
+        beforestart: _.noop, //FIXME: Is it needed?
         start: _.noop,
         move: _.noop,
         end: _.noop
@@ -3317,59 +3320,44 @@
       this.draggable = this.element;
       this.$draggable = this.$element;
 
-      if ( this.options.only_handlers ) {
-
-        this.$handlers = this.$draggable.find ( this.options.selectors.handler ); //FIXME: does it make sense to have handlers inside the $draggable?
-
-      }
+      this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
+      this.$unhandlers = this.$draggable.find ( this.options.selectors.unhandler );
 
     },
 
     _events: function () {
 
-      if ( this.options.only_handlers ) {
+      this._on ( this.$handlers, Pointer.dragstart, this._start );
 
-        this._on ( this.$handlers, Pointer.dragstart, this._start );
-        this._on ( this.$handlers, Pointer.dragmove, this._move );
-        this._on ( this.$handlers, Pointer.dragend, this._end );
+      if ( this.options.$proxy ) {
 
-      } else {
-
-        this._on ( Pointer.dragstart, this._start );
-        this._on ( Pointer.dragmove, this._move );
-        this._on ( Pointer.dragend, this._end );
+        this._on ( this.options.$proxy, Pointer.dragstart, this._start );
 
       }
 
     },
 
-    /* PRIVATE */
+    /* ACTIONS */
 
-    _start: function ( event, data ) {
+    _centerToPoint ( point, suppressClasses ) {
 
-      this.isDraggable = this.options.draggable ();
+      var draggableOffset = this.$draggable.offset ();
 
-      if ( !this.isDraggable ) return;
-
-      this._trigger ( 'beforestart' );
-
-      this.motion = false;
-
-      var transform_str = this.$draggable.css ( 'transform' ),
-        matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
-
-      this.initialXY = {
-        X: parseInt ( matrix[4], 10 ),
-        Y: parseInt ( matrix[5], 10 )
+      var deltaXY = {
+        X: point.X - ( draggableOffset.left - $html.scrollLeft () + ( this.$draggable.outerWidth () / 2 ) ),
+        Y: point.Y - ( draggableOffset.top - $html.scrollTop () + ( this.$draggable.outerHeight () / 2 ) )
       };
 
-      this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable } ) );
+      return this._actionMove ( deltaXY, suppressClasses );
 
     },
 
-    _move: function ( event, data ) { //TODO: make it more performant
+    _actionMove ( deltaXY, suppressClasses ) {
 
-      if ( !this.isDraggable ) return;
+      var baseXY = {
+        X: this.proxyXY ? this.proxyXY.X : this.initialXY.X,
+        Y: this.proxyXY ? this.proxyXY.Y : this.initialXY.Y
+      };
 
       if ( this.motion === false ) {
 
@@ -3377,64 +3365,60 @@
 
         if ( this.options.constrainer.$element ) {
 
-          var constrainer_offset = this.options.constrainer.$element.offset (),
-            draggable_offset = this.$draggable.offset ();
+          var constrainerOffset = this.options.constrainer.$element.offset (),
+              draggableOffset = this.$draggable.offset ();
 
-          this.translateX_min = constrainer_offset.left - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
-          this.translateX_max = constrainer_offset.left + this.options.constrainer.$element.width () - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
+          if ( this.options.axis !== 'y' ) {
 
-          this.translateY_min = constrainer_offset.top - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
-          this.translateY_max = constrainer_offset.top + this.options.constrainer.$element.height () - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? this.$draggable.height () / 2 : 0 );
+            var halfWidth = this.options.constrainer.constrainCenter ? this.$draggable.outerWidth () / 2 : 0;
 
-        } else if ( this.options.constrainer.coordinates ) {
-
-          var draggable_offset = this.$draggable.offset ();
-
-          if ( !_.isUndefined ( this.options.constrainer.coordinates.x1 ) ) {
-
-            this.translateX_min = this.options.constrainer.coordinates.x1 - ( draggable_offset.left - this.initialXY.X ) + ( this.options.constrainer.constrain_center ? - this.$draggable.width () / 2 : 0 );
+            this.translateX_min = constrainerOffset.left - ( draggableOffset.left - baseXY.X ) - halfWidth;
+            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( draggableOffset.left - baseXY.X ) + this.$draggable.outerWidth () ) + halfWidth;
 
           }
 
-          if ( !_.isUndefined ( this.options.constrainer.coordinates.x2 ) ) {
+          if ( this.options.axis !== 'x' ) {
 
-            this.translateX_max = this.options.constrainer.coordinates.x2 - ( ( draggable_offset.left - this.initialXY.X ) + this.$draggable.width () ) + ( this.options.constrainer.constrain_center ? this.$draggable.width () / 2 : 0 );
+            var halfHeight = this.options.constrainer.constrainCenter ? this.$draggable.outerHeight () / 2 : 0;
 
-          }
-
-          if ( !_.isUndefined ( this.options.constrainer.coordinates.y1 ) ) {
-
-            this.translateY_min = this.options.constrainer.coordinates.y1 - ( draggable_offset.top - this.initialXY.Y ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
-
-          }
-
-          if ( !_.isUndefined ( this.options.constrainer.coordinates.y2 ) ) {
-
-            this.translateY_max = this.options.constrainer.coordinates.y2 - ( ( draggable_offset.top - this.initialXY.Y ) + this.$draggable.height () ) + ( this.options.constrainer.constrain_center ? - this.$draggable.height () / 2 : 0 );
+            this.translateY_min = constrainerOffset.top - ( draggableOffset.top - baseXY.Y ) - halfHeight;
+            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( draggableOffset.top - baseXY.Y ) + this.$draggable.outerHeight () ) + halfHeight;
 
           }
 
         }
 
-        $html.addClass ( 'dragging' );
-        this.$draggable.addClass ( 'dragging' );
+        if ( ! suppressClasses ) {
+
+          $html.addClass ( 'dragging' );
+          this.$draggable.addClass ( 'dragging' );
+
+        }
 
       }
 
-      var translateX = this.initialXY.X + ( ( this.options.axis === 'y' ) ? 0 : data.deltaXY.X ),
-        translateY = this.initialXY.Y + ( ( this.options.axis === 'x' ) ? 0 : data.deltaXY.Y );
+      var translateX = baseXY.X,
+          translateY = baseXY.Y;
 
-      if ( this.options.constrainer.$element || this.options.constrainer.coordinates ) {
+      if ( this.options.axis !== 'y' ) {
 
-        if ( this.options.constrainer.axis !== 'y' ) {
+        translateX += deltaXY.X;
 
-          translateX = _.clamp ( _.isUndefined ( this.translateX_min ) ? undefined : this.translateX_min - this.options.constrainer.tollerance.x, translateX, _.isUndefined ( this.translateX_max ) ? undefined : this.translateX_max + this.options.constrainer.tollerance.x );
+        if ( this.options.constrainer.$element ) {
+
+          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tollerance.x, translateX, this.translateX_max + this.options.constrainer.tollerance.x );
 
         }
 
-        if ( this.options.constrainer.axis !== 'x' ) {
+      }
 
-          translateY = _.clamp ( _.isUndefined ( this.translateY_min ) ? undefined : this.translateY_min - this.options.constrainer.tollerance.y, translateY, _.isUndefined ( this.translateY_max ) ? undefined : this.translateY_max + this.options.constrainer.tollerance.y );
+      if ( this.options.axis !== 'x' ) {
+
+        translateY += deltaXY.Y;
+
+        if ( this.options.constrainer.$element ) {
+
+          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tollerance.y, translateY, this.translateY_max + this.options.constrainer.tollerance.y );
 
         }
 
@@ -3445,30 +3429,83 @@
         Y: this.options.modifiers.y ( translateY )
       };
 
-      this.$draggable.css ( 'transform', 'translate3d(' + ( _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : this.initialXY.X ) : modifiedXY.X ) + 'px,' + ( _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : this.initialXY.Y ) : modifiedXY.Y ) + 'px,0)' );
+      this.$draggable.translate2d ( _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X, _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y );
 
-      this._trigger ( 'move', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, $draggable: this.$draggable } ) );
+      return modifiedXY;
+
+    },
+
+    /* HANDLERS */
+
+    _start: function ( event, data, trigger ) {
+
+      if ( !isDragging && this.options.draggable () ) {
+
+        this.$trigger = $(trigger);
+
+        this._trigger ( 'beforestart' );
+
+        isDragging = true;
+
+        this.motion = false;
+
+        this.isProxyed = ( this.options.$proxy && this.$trigger.get ( 0 ) === this.options.$proxy.get ( 0 ) );
+        this.proxyXY = false;
+
+        this.initialXY = this.$draggable.translate2d ();
+
+        this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable } ) );
+
+        this._on ( this.$trigger, Pointer.dragmove, this._move );
+        this._on ( this.$trigger, Pointer.dragend, this._end );
+
+      }
+
+    },
+
+    _move: function ( event, data ) {
+
+      if ( this.isProxyed && this.motion === false ) {
+
+        var modifiedXY = this._centerToPoint ( data.startXY );
+
+        this.proxyXY = this.$draggable.translate2d ();
+
+      }
+
+      var modifiedXY = this._actionMove ( data.deltaXY );
+
+      this._trigger ( 'move', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable } ) );
 
     },
 
     _end: function ( event, data ) {
 
-      if ( !this.isDraggable ) return;
-
       if ( this.motion === true ) {
-
+        
         $html.removeClass ( 'dragging' );
         this.$draggable.removeClass ( 'dragging' );
 
         if ( this.options.revertable ) {
 
-          this.$draggable.css ( 'transform', 'translate3d(' + this.initialXY.X + 'px,' + this.initialXY.Y + 'px,0)' ); //TODO: animate it
+          this.$draggable.translate2d ( this.initialXY.X, this.initialXY.Y ); //TODO: Animate it
 
         }
 
+        var modifiedXY = { X: 0, Y: 0 };
+
+      } else if ( this.isProxyed ) {
+
+        var modifiedXY = this._centerToPoint ( data.endXY, true );
+
       }
 
-      this._trigger ( 'end', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable, $draggable: this.$draggable, dragged: this.motion } ) );
+      isDragging = false;
+
+      this._trigger ( 'end', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, motion: this.motion } ) );
+
+      this._off ( this.$trigger, Pointer.dragmove, this._move );
+      this._off ( this.$trigger, Pointer.dragend, this._end );
 
     }
 
@@ -3486,6 +3523,8 @@
 
 
 /* TRANSFORM UTILITIES */
+
+//FIXME: Do we need to support -webkit- prefixing?
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -3521,9 +3560,9 @@
 
          return function ( value ) {
 
-           if ( !_.isUndefined ( value ) ) {
+           var matrix = this.matrix ();
 
-             var matrix = this.matrix ();
+           if ( !_.isUndefined ( value ) ) {
 
              matrix[index] = value;
 
@@ -3531,7 +3570,7 @@
 
            } else {
 
-             return this.matrix ()[index];
+             return matrix[index];
 
            }
 
@@ -3540,6 +3579,30 @@
        })( i );
 
     }
+
+    /* TRANSLATE 2D */
+
+    $.fn.translate2d = function ( X, Y ) {
+
+      var matrix = this.matrix ();
+
+      if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
+
+        matrix[4] = X;
+        matrix[5] = Y;
+
+        return this.matrix ( matrix );
+
+      } else {
+
+        return {
+          X: matrix[4],
+          Y: matrix[5]
+        };
+
+      }
+
+    };
 
 }( jQuery, _, window, document ));
 
@@ -3764,7 +3827,7 @@
 
     /* SETTING */
 
-    this.translateX ( coordinates.left ).translateY ( coordinates.top );
+    this.translate2d ( coordinates.left, coordinates.top );
 
     this.addClass ( 'positionate-' + bestDirection );
 

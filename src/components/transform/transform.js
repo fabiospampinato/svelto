@@ -1,6 +1,8 @@
 
 /* TRANSFORM UTILITIES */
 
+//FIXME: Do we need to support -webkit- prefixing?
+
 ;(function ( $, _, window, document, undefined ) {
 
     'use strict';
@@ -35,9 +37,9 @@
 
          return function ( value ) {
 
-           if ( !_.isUndefined ( value ) ) {
+           var matrix = this.matrix ();
 
-             var matrix = this.matrix ();
+           if ( !_.isUndefined ( value ) ) {
 
              matrix[index] = value;
 
@@ -45,7 +47,7 @@
 
            } else {
 
-             return this.matrix ()[index];
+             return matrix[index];
 
            }
 
@@ -54,5 +56,29 @@
        })( i );
 
     }
+
+    /* TRANSLATE 2D */
+
+    $.fn.translate2d = function ( X, Y ) {
+
+      var matrix = this.matrix ();
+
+      if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
+
+        matrix[4] = X;
+        matrix[5] = Y;
+
+        return this.matrix ( matrix );
+
+      } else {
+
+        return {
+          X: matrix[4],
+          Y: matrix[5]
+        };
+
+      }
+
+    };
 
 }( jQuery, _, window, document ));
