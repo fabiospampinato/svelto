@@ -383,6 +383,15 @@
 
   };
 
+  $.fn.hsl = function ( h, s, l ) {
+
+    //INFO: It only works for setting
+    //FIXME: I'm not sure if this plugin should exists
+
+    return this.css ( 'background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)' );
+
+  };
+
   /* COMMON OBJECTS */
 
   $(function () {
@@ -1155,7 +1164,12 @@
 
   var moveHandler = function ( event ) {
 
-    clearTimeout ( pressTimeout );
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+      pressTimeout = false;
+
+    }
 
     moveXY = $.eventXY ( event );
 
@@ -1180,7 +1194,12 @@
 
   var endHandler = function ( event ) {
 
-    clearTimeout ( pressTimeout );
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+      pressTimeout = false;
+
+    }
 
     endXY = $.eventXY ( event );
     deltaXY = {
@@ -2423,7 +2442,7 @@
 
 
 /* =========================================================================
- * Svelto - Colorpicker v0.1.0
+ * Svelto - Colorpicker v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2433,9 +2452,8 @@
  * @requires ../color_helper/colorHelper.js
  * ========================================================================= */
 
-//TODO: add support for alpha channel
-//TODO: add a $bgs variable where we update the background
-//TODO: Add an input inside, so that it works also without an external input
+//TODO: Add support for alpha channel
+//TODO: Add a $bgs variable where we update the background
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -2448,8 +2466,19 @@
     /* OPTIONS */
 
     options: {
-      default_color: '#ff0000',
-      live: true,
+      defaultColor: '#ff0000',
+      live: false,
+      selectors: {
+        sb: {
+          wrp: '.colorpicker-saturation-brightness-wrp',
+          handler: '.colorpicker-handler'
+        },
+        hue: {
+          wrp: '.colorpicker-hue-wrp',
+          handler: '.colorpicker-handler'
+        },
+        input: 'input'
+      },
       callbacks: {
         change: _.noop
       }
@@ -2460,33 +2489,32 @@
     _variables: function () {
 
       this.$colorpicker = this.$element;
-      this.$sb_wrp = this.$colorpicker.find ( '.colorpicker-saturation-brightness-wrp' );
-      this.$handler_sb = this.$sb_wrp.find ( '.colorpicker-handler' );
-      this.$hue_wrp = this.$colorpicker.find ( '.colorpicker-hue-wrp' );
-      this.$handler_hue = this.$hue_wrp.find ( '.colorpicker-handler' );
+      this.$sbWrp = this.$colorpicker.find ( this.options.selectors.sb.wrp );
+      this.$sbHandler = this.$sbWrp.find ( this.options.selectors.sb.handler );
+      this.$hueWrp = this.$colorpicker.find ( this.options.selectors.hue.wrp );
+      this.$hueHandler = this.$hueWrp.find ( this.options.selectors.hue.handler );
 
-      this.id = this.$colorpicker.attr ( 'id' );
-      this.$inputs = $('input[name="' + this.id + '"]');
+      this.$input = this.$colorpicker.find ( this.options.selectors.input );
+
+      this.sbWrpOffset = this.$sbWrp.offset ();
+      this.sbWrpSize = this.$sbWrp.width ();
+
+      this.hueWrpOffset = this.$hueWrp.offset ();
+      this.hueWrpHeight = this.sbWrpSize;
 
       this.color = new HexColor ();
       this.hex = '';
-
-      this._update_variables ();
-
-      this.sb_wrp_size = this.$sb_wrp.width ();
-
-      this.hue_wrp_height = this.sb_wrp_size;
 
     },
 
     _init: function () {
 
-      if ( !this.set ( this.$inputs.val () ) ) {
+      if ( !this.set ( this.$input.val () ) ) {
 
-        this.color = new HexColor ( this.options.default_color );
+        this.color = new HexColor ( this.options.defaultColor );
 
-        this._update_sb ();
-        this._update_hue ();
+        this._updateSb ();
+        this._updateHue ();
 
       }
 
@@ -2494,68 +2522,43 @@
 
     _events: function () {
 
-      /* WINDOW RESIZE */
-
-      this._on ( $window, 'resize', this._handler_resize );
-
-      /* INPUTS */
-
-      this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
-
       /* SB ARROWS */
 
-      this._on ( this.$sb_wrp, 'mouseenter', this._handler_sb_wrp_arrows_in );
-      this._on ( this.$sb_wrp, 'mouseleave', this._handler_sb_wrp_arrows_out );
+      this._on ( this.$sbWrp, 'mouseenter', this.__sbIn );
+      this._on ( this.$sbWrp, 'mouseleave', this.__sbOut );
 
       /* SB DRAG */
 
-      this._on ( this.$sb_wrp, Pointer.dragmove, this._handler_sb_drag_move );
-      this._on ( this.$sb_wrp, Pointer.dragend, this._handler_sb_drag_end );
+      this._on ( this.$sbWrp, Pointer.dragmove, this.__sbDragMove );
+      this._on ( this.$sbWrp, Pointer.dragend, this.__sbDragEnd );
 
       /* HUE ARROWS */
 
-      this._on ( this.$hue_wrp, 'mouseenter', this._handler_hue_wrp_arrows_in );
-      this._on ( this.$hue_wrp, 'mouseleave', this._handler_hue_wrp_arrows_out );
+      this._on ( this.$hueWrp, 'mouseenter', this.__hueIn );
+      this._on ( this.$hueWrp, 'mouseleave', this.__hueOut );
 
       /* HUE DRAG */
 
-      this._on ( this.$hue_wrp, Pointer.dragmove, this._handler_hue_drag_move );
-      this._on ( this.$hue_wrp, Pointer.dragend, this._handler_hue_drag_end );
-
-    },
-
-    /* PRIVATE */
-
-    _update_variables: function () {
-
-      this.sb_wrp_offset = this.$sb_wrp.offset ();
-      this.hue_wrp_offset = this.$hue_wrp.offset ();
-
-    },
-
-    /* WINDOW RESIZE */
-
-    _handler_resize: function () {
-
-      this._update_variables ();
+      this._on ( this.$hueWrp, Pointer.dragmove, this.__hueDragMove );
+      this._on ( this.$hueWrp, Pointer.dragend, this.__hueDragEnd );
 
     },
 
     /* SB ARROWS */
 
-    _handler_sb_wrp_arrows_in: function () {
+    __sbIn: function () {
 
-      this._on ( $document, 'keydown', this._handler_sb_wrp_arrows_keydown );
-
-    },
-
-    _handler_sb_wrp_arrows_out: function () {
-
-      this._off ( $document, 'keydown', this._handler_sb_wrp_arrows_keydown );
+      this._on ( $document, 'keydown', this.__sbKeydown );
 
     },
 
-    _handler_sb_wrp_arrows_keydown: function () {
+    __sbOut: function () {
+
+      this._off ( $document, 'keydown', this.__sbKeydown );
+
+    },
+
+    __sbKeydown: function () {
 
       switch ( event.keyCode ) {
 
@@ -2580,55 +2583,55 @@
 
       }
 
-      this._update_sb ();
-      this._update_input ();
+      this._updateSb ();
+      this._updateInput ();
 
     },
 
     /* SB DRAG */
 
-    _sb_drag_set: function ( XY, update ) {
+    _sbDragSet: function ( XY, update ) {
 
-      this.color.hsv.s =  _.clamp ( 0, XY.X - this.sb_wrp_offset.left, this.sb_wrp_size ) * 100 / this.sb_wrp_size;
-      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y - this.sb_wrp_offset.top, this.sb_wrp_size ) * 100 / this.sb_wrp_size );
+      this.color.hsv.s =  _.clamp ( 0, XY.X - this.sbWrpOffset.left, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y - this.sbWrpOffset.top, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
-      this._update_sb ();
+      this._updateSb ();
 
       if ( update ) {
 
-        this._update_input ();
+        this._updateInput ();
 
       }
 
     },
 
-    _handler_sb_drag_move: function ( event, data ) {
+    __sbDragMove: function ( event, data ) {
 
-      this._sb_drag_set ( data.moveXY, this.options.live );
+      this._sbDragSet ( data.moveXY, this.options.live );
 
     },
 
-    _handler_sb_drag_end: function ( event, data ) {
+    __sbDragEnd: function ( event, data ) {
 
-      this._sb_drag_set ( data.endXY, true );
+      this._sbDragSet ( data.endXY, true );
 
     },
 
     /* HUE ARROWS */
 
-    _handler_hue_wrp_arrows_in: function () {
+    __hueIn: function () {
 
-      this._on ( $document, 'keydown', this._handler_hue_wrp_arrows_keydown );
-
-    },
-
-    _handler_hue_wrp_arrows_out: function () {
-
-      this._off ( $document, 'keydown', this._handler_hue_wrp_arrows_keydown );
+      this._on ( $document, 'keydown', this.__hueKeydown );
 
     },
 
-    _handler_hue_wrp_arrows_keydown: function () {
+    __hueOut: function () {
+
+      this._off ( $document, 'keydown', this.__hueKeydown );
+
+    },
+
+    __hueKeydown: function () {
 
       switch ( event.keyCode ) {
 
@@ -2645,98 +2648,77 @@
 
       }
 
-      this._update_hue ();
-      this._update_input ();
+      this._updateHue ();
+      this._updateInput ();
 
     },
 
     /* HUE DRAG */
 
-    _hue_drag_set: function ( XY, update ) {
+    _hueDragSet: function ( XY, update ) {
 
-      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y - this.hue_wrp_offset.top, this.hue_wrp_height ) * 359 / this.hue_wrp_height );
+      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y - this.hueWrpOffset.top, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
-      this._update_hue ();
+      this._updateHue ();
 
       if ( update ) {
 
-        this._update_input ();
+        this._updateInput ();
 
       }
 
     },
 
-    _handler_hue_drag_move: function ( event, data ) {
+    __hueDragMove: function ( event, data ) {
 
-      this._hue_drag_set ( data.moveXY, this.options.live );
-
-    },
-
-    _handler_hue_drag_end: function ( event, data ) {
-
-      this._hue_drag_set ( data.endXY, true );
+      this._hueDragSet ( data.moveXY, this.options.live );
 
     },
 
-    /* INPUT */
+    __hueDragEnd: function ( event, data ) {
 
-    _handler_input_keydown: function ( event ) {
-
-      if ( event.keyCode === $.ui.keyCode.ENTER ) {
-
-        if ( !this.set ( this.$inputs.val () ) ) {
-
-          this.$inputs.val ( this.hex );
-
-        }
-
-      }
+      this._hueDragSet ( data.endXY, true );
 
     },
 
-    /* OTHERS */
+    /* UPDATE */
 
-    _update_input: function () {
+    _updateSb: function () {
+
+      var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
+          translateX = this.sbWrpSize / 100 * this.color.hsv.s,
+          translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
+
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate2d ( translateX, translateY );
+
+    },
+
+    _updateHue: function () {
+
+      var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
+          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) );
+
+      this.$hueHandler.hsl ( this.color.hsv.h, 100, 50 ).translateY ( translateY );
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
+      this.$sbWrp.hsl ( this.color.hsv.h, 100, 50 );
+
+    },
+
+    _updateInput: function () {
 
       this.hex = this.color.getHexStr ();
 
-      this.$inputs.val ( this.hex ).css ( 'background-color', this.hex ).trigger ( 'change' );
+      this.$input.val ( this.hex ).trigger ( 'change' );
 
-      this._trigger ( 'change' );
-
-    },
-
-    _update_sb: function () {
-
-      var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
-
-      this.$handler_sb.css ({
-        'background-color': 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)',
-        transform: 'translate3d(' + ( this.sb_wrp_size / 100 * this.color.hsv.s ) + 'px,' + ( this.sb_wrp_size / 100 * ( 100 - this.color.hsv.v ) ) + 'px,0)'
-      });
-
-    },
-
-    _update_hue: function () {
-
-      var hsl = ColorHelper.hsv2hsl ( this.color.hsv );
-
-      this.$handler_hue.css ({
-        'background-color': 'hsl(' + this.color.hsv.h + ',100%,50%)',
-        transform: 'translate3d(0,' + ( this.hue_wrp_height / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) ) ) + 'px,0)'
-      });
-
-      this.$handler_sb.css ( 'background-color', 'hsl(' + hsl.h + ',' + hsl.s + '%,' + hsl.l + '%)' );
-
-      this.$sb_wrp.css ( 'background-color', 'hsl(' + this.color.hsv.h + ',100%,50%)' );
+      this._trigger ( 'change', { color: this.hex } );
 
     },
 
     _update: function () {
 
-      this._update_sb ();
-      this._update_hue ();
-      this._update_input ();
+      this._updateSb ();
+      this._updateHue ();
+      this._updateInput ();
 
     },
 
@@ -2748,19 +2730,19 @@
 
     },
 
-    set: function ( value ) {
+    set: function ( color ) {
 
-      var new_color = new HexColor ( value );
+      var newColor = new HexColor ( color );
 
-      if ( new_color.isValid && !_.isEqual ( new_color.hsv, this.color.hsv ) ) {
+      if ( newColor.isValid && !_.isEqual ( newColor.hsv, this.color.hsv ) ) {
 
-        this.color = new_color;
+        this.color = newColor;
 
         this._update ();
 
       }
 
-      return new_color.isValid;
+      return newColor.isValid;
 
     }
 
@@ -2930,7 +2912,8 @@
           prev: '.datepicker-day-prev',
           current: '.datepicker-day',
           next: '.datepicker-day-next'
-        }
+        },
+        input: 'input'
       },
       callbacks: {
         change: _.noop,
@@ -2943,7 +2926,7 @@
     _variables: function () {
 
       this.$datepicker = this.$element;
-      this.$input = this.$datepicker.find ( 'input' );
+      this.$input = this.$datepicker.find ( this.options.selectors.input );
 
       this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.prev );
       this.$navigationTitle = this.$datepicker.find ( this.options.selectors.navigation.title );

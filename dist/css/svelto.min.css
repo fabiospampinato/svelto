@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, .tabs, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2986,6 +2986,7 @@ label.disabled,
 .disabled.card-block,
 .disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card,
 .chat-msg .disabled.chat-msg-sender-name,
+.disabled.colorpicker,
 .disabled.datepicker,
 .disabled.embedded,
 .disabled.flippable,
@@ -3004,7 +3005,7 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -4641,7 +4642,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - Colorpicker (Settings) v0.1.0
+ * Svelto - Colorpicker (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4655,81 +4656,100 @@ button {
 /* HANDLER SB */
 /* HANDLER HUE */
 /* =========================================================================
- * Svelto - Colorpicker v0.1.0
+ * Svelto - Colorpicker v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* COLORPICKER */
 .colorpicker {
-  position: relative;
-  margin-bottom: 10px;
+  display: -webkit-flex;
+  display: flex;
+  /* INPUT */
+  /* BRIGHTNESS / SATURATION / HUE */
+  /* HANDLER */
+  /* WRAPPERS */
+  /* SATURATION & BRIGHTNESS WRAPPER */
+  /* HUE WRAPPER */
 }
 
-.colorpicker .colorpicker-brightness, .colorpicker .colorpicker-saturation, .colorpicker .colorpicker-hue {
-  width: 100%;
-  height: 100%;
+.colorpicker input {
+  display: none;
+}
+
+.colorpicker-brightness,
+.colorpicker-saturation,
+.colorpicker-hue {
   position: absolute;
   top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   pointer-events: none;
 }
 
-.colorpicker .colorpicker-handler {
+.colorpicker-handler {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ,0 0 0px 1px rgba(0, 0, 0, 0.2);
   position: absolute;
   z-index: 2;
   box-sizing: border-box;
   border: 2px solid white;
-  background-color: white;
 }
 
-.colorpicker > .colorpicker-saturation-brightness-wrp, .colorpicker > .colorpicker-hue-wrp {
+.colorpicker-saturation-brightness-wrp,
+.colorpicker-hue-wrp {
   position: relative;
-  display: inline-block;
   box-sizing: content-box;
-  height: 170px;
+  height: 11em;
   cursor: pointer;
-  vertical-align: top;
-  border: 2px solid black;
+  border: 1px solid black;
 }
 
-.colorpicker > .colorpicker-saturation-brightness-wrp {
-  width: 170px;
+.colorpicker-saturation-brightness-wrp {
+  width: 11em;
   background-color: red;
+  /* BRIGHTNESS */
+  /* SATURATION */
+  /* HANDLER */
 }
 
-.colorpicker > .colorpicker-saturation-brightness-wrp > .colorpicker-brightness {
-  background: linear-gradient(to right, white 0%, rgba(255, 255, 255, 0) 100%);
+.colorpicker-saturation-brightness-wrp .colorpicker-brightness {
+  background-image: linear-gradient(to right, white 0%, transparent 100%) ;
+  background-repeat: repeat-x ;
 }
 
-.colorpicker > .colorpicker-saturation-brightness-wrp > .colorpicker-saturation {
-  background: linear-gradient(to bottom, transparent 0%, black 100%);
+.colorpicker-saturation-brightness-wrp .colorpicker-saturation {
+  background-image: linear-gradient(to bottom, transparent 0%, black 100%) ;
+  background-repeat: repeat-x ;
   z-index: 1;
 }
 
-.colorpicker > .colorpicker-saturation-brightness-wrp > .colorpicker-handler {
-  width: 16px;
-  height: 16px;
-  margin: -8px 0 0-8px;
+.colorpicker-saturation-brightness-wrp .colorpicker-handler {
+  width: 1em;
+  height: 1em;
+  margin: -0.5em 0 0 -0.5em;
   cursor: move;
   border-radius: 50%;
 }
 
-.colorpicker > .colorpicker-hue-wrp {
-  width: 25px;
+.colorpicker-hue-wrp {
+  width: 1.5em;
   margin-left: 10px;
+  /* HUE */
+  /* HANDLER */
 }
 
-.colorpicker > .colorpicker-hue-wrp > .colorpicker-hue {
+.colorpicker-hue-wrp .colorpicker-hue {
   background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);
 }
 
-.colorpicker > .colorpicker-hue-wrp > .colorpicker-handler {
+.colorpicker-hue-wrp .colorpicker-handler {
   width: 100%;
-  height: 9px;
-  margin-top: -4.5px;
+  height: 0.5em;
+  margin-top: -0.25em;
   cursor: ns-resize;
   border-radius: 0.13325em;
 }

@@ -108,7 +108,12 @@
 
   var moveHandler = function ( event ) {
 
-    clearTimeout ( pressTimeout );
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+      pressTimeout = false;
+
+    }
 
     moveXY = $.eventXY ( event );
 
@@ -133,7 +138,12 @@
 
   var endHandler = function ( event ) {
 
-    clearTimeout ( pressTimeout );
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+      pressTimeout = false;
+
+    }
 
     endXY = $.eventXY ( event );
     deltaXY = {

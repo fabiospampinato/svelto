@@ -51,7 +51,8 @@
           prev: '.datepicker-day-prev',
           current: '.datepicker-day',
           next: '.datepicker-day-next'
-        }
+        },
+        input: 'input'
       },
       callbacks: {
         change: _.noop,
@@ -64,7 +65,7 @@
     _variables: function () {
 
       this.$datepicker = this.$element;
-      this.$input = this.$datepicker.find ( 'input' );
+      this.$input = this.$datepicker.find ( this.options.selectors.input );
 
       this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.prev );
       this.$navigationTitle = this.$datepicker.find ( this.options.selectors.navigation.title );

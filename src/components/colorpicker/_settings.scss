@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colorpicker (Settings) v0.1.0
+ * Svelto - Colorpicker (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,33 +10,33 @@
 
 /* COLORPICKER */
 
-$colorpicker-height: 170px !default;
+$colorpicker-height: 11em !default;
 
 /* WRAPPERS */
 
-$colorpicker-wrp-border-width: 2px !default;
+$colorpicker-wrp-border-width: $outline-width !default;
 $colorpicker-wrp-border-color: black !default;
 
 /* WRAPPER HUE */
 
-$colorpicker-hue-wrp-width: 25px !default;
+$colorpicker-hue-wrp-width: 1.5em !default;
 
 /* HANDLER */
 
-$colorpicker-handler-border-width: 2px !default;
+$colorpicker-handler-border-width: ( $outline-width * 2 ) !default;
 $colorpicker-handler-border-color: white !default;
 
 $colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.2) !default;
 
 /* HANDLER SB */
 
-$colorpicker-handler-sb-height: 16px !default;
-$colorpicker-handler-sb-width: 16px !default;
+$colorpicker-handler-sb-height: 1em !default;
+$colorpicker-handler-sb-width: 1em !default;
 
 $colorpicker-handler-sb-border-radius: 50% !default;
 
 /* HANDLER HUE */
 
-$colorpicker-handler-hue-height: 9px !default;
+$colorpicker-handler-hue-height: 0.5em !default;
 
 $colorpicker-handler-hue-border-radius: $border-radius-small !default;

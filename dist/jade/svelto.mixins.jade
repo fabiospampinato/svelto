@@ -12,6 +12,25 @@ mixin accordion
 
 
 //- =========================================================================
+//- Svelto - Base v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin css(url, media)
+  - media = media || "all";
+  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
+
+mixin js(url)
+  script(src!=url)&attributes(attributes)
+
+mixin script
+  script&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Breadcrumb v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -29,25 +48,6 @@ mixin breadcrumb-divider(icon)
     else
       - icon = icon || "chevron_right";
       +icon(icon)
-
-
-//- =========================================================================
-//- Svelto - Base v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin css(url, media)
-  - media = media || "all";
-  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
-
-mixin js(url)
-  script(src!=url)&attributes(attributes)
-
-mixin script
-  script&attributes(attributes)
-    block
 
 
 //- =========================================================================
@@ -256,7 +256,7 @@ mixin checkbox(options)
 
 
 //- =========================================================================
-//- Svelto - Colorpicker v0.1.0
+//- Svelto - Colorpicker v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -264,6 +264,7 @@ mixin checkbox(options)
 
 mixin colorpicker
   .colorpicker&attributes(attributes)
+    input(type=text name="colorpicker")
     .colorpicker-saturation-brightness-wrp
       .colorpicker-saturation
       .colorpicker-brightness
@@ -577,6 +578,33 @@ mixin image-sample
 
 
 //- =========================================================================
+//- Svelto - Input v0.1.1
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value === undefined ? "" : options.value;
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- =========================================================================
 //- Svelto - Infobar v0.1.2
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -633,33 +661,6 @@ mixin infobar-right
 mixin infobar-bottom
   .infobar-bottom&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Input v0.1.1
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    type: '', // Input type
-    name: '', // Input name
-    value: '', // Input value
-    label: '' // Label
-  }
-
-mixin input(options)
-  - options = options || {};
-  - options.type = options.type || "text";
-  - options.name = options.name || "";
-  - options.value = options.value === undefined ? "" : options.value;
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- =========================================================================
@@ -1330,6 +1331,37 @@ mixin spinner-multiple(options)
 
 
 //- =========================================================================
+//- Svelto - Stepper v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Decreasing step
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value === undefined ? options.min : options.value;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
+    +button-icon("remove").compact.stepper-decreaser
+    if options.name
+      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
+    else
+      +input({ value: options.value }).stepper-input.autogrow.compact
+    +button-icon("add").compact.stepper-increaser
+
+
+//- =========================================================================
 //- Svelto - Switch v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1399,37 +1431,6 @@ mixin table-row-empty(empty_str)
           = empty_str
         else
           = "Empty"
-
-
-//- =========================================================================
-//- Svelto - Stepper v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '', // Max value
-    step: '' // Decreasing step
-  }
-
-mixin stepper(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value === undefined ? options.min : options.value;
-  - options.max = options.max || 100;
-  - options.step = options.step || 1;
-  +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
-    +button-icon("remove").compact.stepper-decreaser
-    if options.name
-      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
-    else
-      +input({ value: options.value }).stepper-input.autogrow.compact
-    +button-icon("add").compact.stepper-increaser
 
 
 //- =========================================================================

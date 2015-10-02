@@ -7,8 +7,24 @@ append main
   +divider-block Colorpicker
 
   +container.outlined
-    +colorpicker(id="colorpicker_test")
+    +colorpicker
 
-  +divider-block Input
+  +divider-block Actions
 
-  +input({ name: "colorpicker_test", label: "Hex color..." }).white.no-floating.outlined
+  +multiple
+    +button("colorpicker_get ()").outlined Get
+    +multiple.joined
+      +input({ name: "color", label: "Color..." }).outlined.no-floating
+      +button("colorpicker_set ()").secondary.outlined Set
+
+append body-end
+  +script.
+    function colorpicker_get () {
+      var color = $('.colorpicker').colorpicker ( 'get' );
+      $.noty ({ body: '<div class="circle" style="background-color:' + color + '"></div>' });
+      $.noty ( color );
+    }
+    function colorpicker_set () {
+      var color = $("input[name='color']").val ();
+      $('.colorpicker').colorpicker ( 'set', color );
+    }

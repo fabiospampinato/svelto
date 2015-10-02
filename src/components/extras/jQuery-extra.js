@@ -59,6 +59,15 @@
 
   };
 
+  $.fn.hsl = function ( h, s, l ) {
+
+    //INFO: It only works for setting
+    //FIXME: I'm not sure if this plugin should exists
+
+    return this.css ( 'background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)' );
+
+  };
+
   /* COMMON OBJECTS */
 
   $(function () {
