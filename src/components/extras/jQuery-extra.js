@@ -53,6 +53,12 @@
 
   };
 
+  $.fn.getRect = function () {
+
+    return this.length > 0 ? this[0].getBoundingClientRect () : undefined;
+
+  };
+
   /* COMMON OBJECTS */
 
   $(function () {
