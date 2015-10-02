@@ -12,25 +12,6 @@ mixin accordion
 
 
 //- =========================================================================
-//- Svelto - Base v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin css(url, media)
-  - media = media || "all";
-  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
-
-mixin js(url)
-  script(src!=url)&attributes(attributes)
-
-mixin script
-  script&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Breadcrumb v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -48,6 +29,25 @@ mixin breadcrumb-divider(icon)
     else
       - icon = icon || "chevron_right";
       +icon(icon)
+
+
+//- =========================================================================
+//- Svelto - Base v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin css(url, media)
+  - media = media || "all";
+  link(rel="stylesheet" href!=url media=media)&attributes(attributes)
+
+mixin js(url)
+  script(src!=url)&attributes(attributes)
+
+mixin script
+  script&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -80,8 +80,8 @@ mixin button-sub-right
   .sub&attributes(attributes).right
     block
 
-mixin button-icon(icon)
-  +button&attributes(attributes)
+mixin button-icon(icon, href)
+  +button(href)&attributes(attributes)
     +icon(icon)
     block
   
@@ -204,24 +204,6 @@ mixin chat-msg(options)
 
 
 //- =========================================================================
-//- Svelto - Colorpicker v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin colorpicker
-  .colorpicker&attributes(attributes)
-    .colorpicker-saturation-brightness-wrp
-      .colorpicker-saturation
-      .colorpicker-brightness
-      .colorpicker-handler
-    .colorpicker-hue-wrp
-      .colorpicker-hue
-      .colorpicker-handler
-
-
-//- =========================================================================
 //- Svelto - Checkbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -274,6 +256,24 @@ mixin checkbox(options)
 
 
 //- =========================================================================
+//- Svelto - Colorpicker v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin colorpicker
+  .colorpicker&attributes(attributes)
+    .colorpicker-saturation-brightness-wrp
+      .colorpicker-saturation
+      .colorpicker-brightness
+      .colorpicker-handler
+    .colorpicker-hue-wrp
+      .colorpicker-hue
+      .colorpicker-handler
+
+
+//- =========================================================================
 //- Svelto - Container v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -287,32 +287,7 @@ mixin container
 
 
 //- =========================================================================
-//- Svelto - Divider v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  .divider&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider.block
-    .divider-content&attributes(attributes)
-      block
-
-mixin divider-text
-  .divider&attributes(attributes).text
-    block
-
-mixin divider-spacer
-  .divider&attributes(attributes).spacer
-    block
-
-
-//- =========================================================================
-//- Svelto - Datepicker v0.1.0
+//- Svelto - Datepicker v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -320,6 +295,7 @@ mixin divider-spacer
 
 mixin datepicker
   .datepicker&attributes(attributes)
+    input(type=text name="datepicker")
     .datepicker-navigation
       +button-icon("chevron_left")(title="Previous month").datepicker-navigation-prev
       .datepicker-navigation-title
@@ -380,6 +356,31 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
+
+
+//- =========================================================================
+//- Svelto - Divider v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  .divider&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider.block
+    .divider-content&attributes(attributes)
+      block
+
+mixin divider-text
+  .divider&attributes(attributes).text
+    block
+
+mixin divider-spacer
+  .divider&attributes(attributes).spacer
+    block
 
 
 //- =========================================================================
@@ -1329,37 +1330,6 @@ mixin spinner-multiple(options)
 
 
 //- =========================================================================
-//- Svelto - Stepper v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '', // Max value
-    step: '' // Decreasing step
-  }
-
-mixin stepper(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value === undefined ? options.min : options.value;
-  - options.max = options.max || 100;
-  - options.step = options.step || 1;
-  +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
-    +button-icon("remove").compact.stepper-decreaser
-    if options.name
-      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
-    else
-      +input({ value: options.value }).stepper-input.autogrow.compact
-    +button-icon("add").compact.stepper-increaser
-
-
-//- =========================================================================
 //- Svelto - Switch v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1413,6 +1383,56 @@ mixin switch(options)
 
 
 //- =========================================================================
+//- Svelto - Table v0.1.2
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin table-row-empty(empty_str)
+  tr&attributes(attributes).table-row-empty.hidden
+    td(colspan="100%")
+      if block
+        block
+      else
+        if empty_str
+          = empty_str
+        else
+          = "Empty"
+
+
+//- =========================================================================
+//- Svelto - Stepper v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Decreasing step
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value === undefined ? options.min : options.value;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
+    +button-icon("remove").compact.stepper-decreaser
+    if options.name
+      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
+    else
+      +input({ value: options.value }).stepper-input.autogrow.compact
+    +button-icon("add").compact.stepper-increaser
+
+
+//- =========================================================================
 //- Svelto - Tabs v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1430,25 +1450,6 @@ mixin tabs-triggers
 mixin tabs-containers
   .tabs-containers&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Table v0.1.2
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin table-row-empty(empty_str)
-  tr&attributes(attributes).table-row-empty.hidden
-    td(colspan="100%")
-      if block
-        block
-      else
-        if empty_str
-          = empty_str
-        else
-          = "Empty"
 
 
 //- =========================================================================

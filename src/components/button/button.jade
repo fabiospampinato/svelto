@@ -29,8 +29,8 @@ mixin button-sub-right
   .sub&attributes(attributes).right
     block
 
-mixin button-icon(icon)
-  +button&attributes(attributes)
+mixin button-icon(icon, href)
+  +button(href)&attributes(attributes)
     +icon(icon)
     block
   

@@ -2879,7 +2879,7 @@
 
 
 /* =========================================================================
- * Svelto - Datepicker v0.1.0
+ * Svelto - Datepicker v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2887,10 +2887,11 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-//TODO: deal with UTC time etc...
+//TODO: Deal with UTC time etc...
 //TODO: Add support for min and max date delimiter
-//TODO: Add an input inside, so that it works also without an external input
-//FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor
+//FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
+//TODO: Add support for setting first day of the week
+//INFO: We use the ormat: YYYY-MM-DD
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -2911,6 +2912,26 @@
         current: false,
         selected: null
       },
+      format: {
+        type: 'YYYYMMDD',
+        separator: '/'
+      },
+      classes: {
+        today: 'datepicker-day-today',
+        selected: 'datepicker-day-selected'
+      },
+      selectors: {
+        navigation: {
+          prev: '.datepicker-navigation-prev',
+          title: '.datepicker-navigation-title',
+          next: '.datepicker-navigation-next'
+        },
+        day: {
+          prev: '.datepicker-day-prev',
+          current: '.datepicker-day',
+          next: '.datepicker-day-next'
+        }
+      },
       callbacks: {
         change: _.noop,
         refresh: _.noop
@@ -2922,33 +2943,31 @@
     _variables: function () {
 
       this.$datepicker = this.$element;
+      this.$input = this.$datepicker.find ( 'input' );
 
-      this.id = this.$datepicker.attr ( 'id' );
-      this.$inputs = this.id ? $('input[name="' + this.id + '"]') : $empty;
+      this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.prev );
+      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.navigation.title );
+      this.$navigationNext = this.$datepicker.find ( this.options.selectors.navigation.next );
 
-      this.$navigation_prev = this.$datepicker.find ( '.datepicker-navigation-prev' );
-      this.$navigation_title = this.$datepicker.find ( '.datepicker-navigation-title' );
-      this.$navigation_next = this.$datepicker.find ( '.datepicker-navigation-next' );
+      this.$daysPrev = this.$datepicker.find ( this.options.selectors.day.prev );
+      this.$daysCurrent = this.$datepicker.find ( this.options.selectors.day.current );
+      this.$daysNext = this.$datepicker.find ( this.options.selectors.day.next );
+      this.$daysAll = this.$daysPrev.add ( this.$daysCurrent ).add ( this.$daysNext );
 
-      this.$days_prev = this.$datepicker.find ( '.datepicker-day-prev' );
-      this.$days_current = this.$datepicker.find ( '.datepicker-day' );
-      this.$days_next = this.$datepicker.find ( '.datepicker-day-next' );
-      this.$days_all = this.$days_prev.add ( this.$days_current ).add ( this.$days_next );
-
-      if ( this.options.date.today === false ) {
+      if ( !(this.options.date.today instanceof Date) ) {
 
         this.options.date.today = new Date ();
 
       }
 
-      if ( this.options.date.current === false ) {
+      if ( !(this.options.date.current instanceof Date) ) {
 
         this.options.date.current = new Date ();
 
       }
 
-      this.$day_today = false;
-      this.$day_selected = false;
+      this.$dayToday = false;
+      this.$daySelected = false;
 
     },
 
@@ -2960,65 +2979,49 @@
 
     _events: function () {
 
-      /* DATEPICKER */
+      /* ARROWS */
 
-      this._on ( 'mouseenter', this._handler_arrows_in );
-      this._on ( 'mouseleave', this._handler_arrows_out );
+      this._on ( 'mouseenter', this.__arrowsIn );
+      this._on ( 'mouseleave', this.__arrowsOut );
 
-      /* INPUTS */
+      /* NAVIGATION PREV / NEXT */
 
-      this._on ( this.$inputs, 'keydown', this._handler_input_keydown );
+      this._on ( this.$navigationPrev, Pointer.tap, this.__prevClick );
+      this._on ( this.$navigationNext, Pointer.tap, this.__nextClick );
 
-      /* NAVIGATION */
+      /* DAY CLICK */
 
-      this._on ( this.$navigation_prev, 'click', this._handler_prev_click );
-      this._on ( this.$navigation_next, 'click', this._handler_next_click );
-
-      /* SELECTION */
-
-      this._on ( 'click', '.datepicker-day', this._handler_day_current_click );
+      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayClick );
 
     },
 
     /* DATEPIKER */
 
-    _handler_arrows_in: function () {
+    __arrowsIn: function () {
 
-      this._on ( $document, 'keydown', this._handler_arrows_keydown );
-
-    },
-
-    _handler_arrows_out: function () {
-
-      this._off ( $document, 'keydown', this._handler_arrows_keydown );
+      this._on ( $document, 'keydown', this.__arrowsKeydown );
 
     },
 
-    _handler_arrows_keydown: function ( event ) {
+    __arrowsOut: function () {
+
+      this._off ( $document, 'keydown', this.__arrowsKeydown );
+
+    },
+
+    __arrowsKeydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
         case $.ui.keyCode.UP:
         case $.ui.keyCode.LEFT:
-          this.navigate_month ( -1 );
+          this.prevMonth ();
           break;
 
         case $.ui.keyCode.RIGHT:
         case $.ui.keyCode.DOWN:
-          this.navigate_month ( 1 );
+          this.nextMonth ();
           break;
-
-      }
-
-    },
-
-    /* INPUT */
-
-    _handler_input_keydown: function ( event ) {
-
-      if ( event.keyCode === $.ui.keyCode.ENTER ) {
-
-        this.set ( this.$inputs.val () );
 
       }
 
@@ -3026,83 +3029,83 @@
 
     /* NAVIGATION */
 
-    _handler_prev_click: function () {
+    __prevClick: function () {
 
-      this.navigate_month ( -1 )
+      this.prevMonth ();
 
     },
 
-    _handler_next_click: function () {
+    __nextClick: function () {
 
-      this.navigate_month ( 1 );
+      this.nextMonth ();
 
     },
 
     /* SELECTION */
 
-    _handler_day_current_click: function ( event, node ) {
-
-      this._unhighlight_selected ();
+    __dayClick: function ( event, node ) {
 
       var day = parseInt ( $(node).html (), 10 );
 
+      this._unhighlightSelected ();
+
       this.options.date.selected = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
 
-      this._highlight_selected ();
+      this._highlightSelected ();
 
-      this._update_input ();
+      this._updateInput ();
 
     },
 
     /* OTHERS */
 
-    _build_calendar: function () {
+    _buildCalendar: function () {
 
-      var prev_month_days = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
-        current_month_days = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
-        initial_day_of_week = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
+      var prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
+          currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
+          initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
 
-      initial_day_of_week = ( initial_day_of_week === 0 ) ? 6 : initial_day_of_week - 1; //INFO: We use `Monday` as the 0 index
+      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: We use `Monday` as the 0 index
 
-      this.$days_all.removeClass ( 'hidden' );
+      this.$daysAll.removeClass ( 'hidden' );
 
-      // PREV
+      /* PREV */
 
-      var exceeding_days = 31 - prev_month_days,
-        needed_days = initial_day_of_week,
-        left_days = 9 - exceeding_days - needed_days;
+      var exceedingDays = 31 - prevMonthDays,
+          neededDays = initialDayOfWeek,
+          leftDays = 9 - exceedingDays - neededDays;
 
-      this.$days_prev.slice ( left_days + needed_days, this.$days_prev.length ).addClass ( 'hidden' );
-      this.$days_prev.slice ( 0, left_days ).addClass ( 'hidden' );
+      this.$daysPrev.slice ( leftDays + neededDays, this.$daysPrev.length ).addClass ( 'hidden' );
+      this.$daysPrev.slice ( 0, leftDays ).addClass ( 'hidden' );
 
-      // CURRENT
+      /* CURRENT */
 
-      this.$days_current.slice ( current_month_days, this.$days_current.lenght ).addClass ( 'hidden' );
+      this.$daysCurrent.slice ( currentMonthDays, this.$daysCurrent.lenght ).addClass ( 'hidden' );
 
-      // NEXT
+      /* NEXT */
 
-      var left_days = ( ( current_month_days + initial_day_of_week ) % 7 );
+      var leftDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
 
-      this.$days_next.slice ( ( left_days === 0 ) ? 0 : 7 - left_days ).addClass ( 'hidden' );
+      this.$daysNext.slice ( ( leftDays === 0 ) ? 0 : 7 - leftDays ).addClass ( 'hidden' );
 
     },
 
-    _highlight_day: function ( day, css_class ) {
+    _highlightDay: function ( day, cssClass ) {
 
       if ( day && day.getFullYear () === this.options.date.current.getFullYear () ) {
 
-        var delta_months = day.getMonth () - this.options.date.current.getMonth ();
+        var deltaMonths = day.getMonth () - this.options.date.current.getMonth ();
 
-        switch ( delta_months ) {
+        switch ( deltaMonths ) {
 
           case -1:
-            return this.$days_prev.eq ( day.getDate () - 23 ).addClass ( css_class );
+            return this.$daysPrev.eq ( day.getDate () - 23 ).addClass ( cssClass );
 
           case 0:
-            return this.$days_current.eq ( day.getDate () - 1 ).addClass ( css_class );
+            return this.$daysCurrent.eq ( day.getDate () - 1 ).addClass ( cssClass );
 
           case 1:
-            return this.$days_next.eq ( day.getDate () - 1 ).addClass ( css_class );
+            return this.$daysNext.eq ( day.getDate () - 1 ).addClass ( cssClass );
 
         }
 
@@ -3112,49 +3115,86 @@
 
     },
 
-    _unhighlight_selected: function () {
+    _unhighlightSelected: function () {
 
-      if ( this.$day_selected ) {
+      if ( this.$daySelected ) {
 
-        this.$day_selected.removeClass ( 'datepicker-day-selected' );
-
-      }
-
-    },
-
-    _highlight_selected: function () {
-
-      this.$day_selected = this._highlight_day ( this.options.date.selected, 'datepicker-day-selected' );
-
-    },
-
-    _unhighlight_today: function () {
-
-      if ( this.$day_today ) {
-
-        this.$day_today.removeClass ( 'datepicker-day-today' );
+        this.$daySelected.removeClass ( this.options.classes.selected );
 
       }
 
     },
 
-    _highlight_today: function () {
+    _highlightSelected: function () {
 
-      this.$day_today = this._highlight_day ( this.options.date.today, 'datepicker-day-today' );
-
-    },
-
-    _update_title: function () {
-
-      this.$navigation_title.html ( this.options.names.months[this.options.date.current.getMonth ()] + ', ' + this.options.date.current.getFullYear () );
+      this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
 
     },
 
-    _update_input: function () {
+    _unhighlightToday: function () {
+
+      if ( this.$dayToday ) {
+
+        this.$dayToday.removeClass ( this.options.classes.today );
+
+      }
+
+    },
+
+    _highlightToday: function () {
+
+      this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
+
+    },
+
+    _updateTitle: function () {
+
+      this.$navigationTitle.html ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
+
+    },
+
+    _updateInput: function () {
 
       if ( this.options.date.selected ) {
 
-        this.$inputs.val ( this.options.date.selected.getFullYear () + '-' + this.options.date.selected.getMonth () + '-' + this.options.date.selected.getDate () ).change ();
+        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ();
+
+      }
+
+    },
+
+    _exportDate: function ( date )  {
+
+      switch ( this.options.format.type ) {
+
+        case 'YYYYMMDD':
+          return [date.getFullYear (), parseInt ( date.getMonth (), 10 ) + 1, date.getDate ()].join ( this.options.format.separator );
+
+        default:
+          return date.toUTCString ();
+
+      }
+
+    },
+
+    _importDate: function ( date )  {
+
+      if ( _.isString ( date ) ) {
+
+        switch ( this.options.format.type ) {
+
+          case 'YYYYMMDD':
+            var segments = date.split ( this.options.format.separator );
+            return new Date ( segments[0], parseInt ( segments[1], 10 ) - 1, segments[2] );
+
+          default:
+            return new Date ( date );
+
+        }
+
+      } else {
+
+        return new Date ( date );
 
       }
 
@@ -3162,14 +3202,14 @@
 
     _refresh: function () {
 
-      this._unhighlight_selected ();
-      this._unhighlight_today ();
-      this._build_calendar ();
-      this._highlight_selected ();
-      this._highlight_today ();
-      this._update_title ();
+      this._unhighlightSelected ();
+      this._unhighlightToday ();
+      this._buildCalendar ();
+      this._highlightSelected ();
+      this._highlightToday ();
+      this._updateTitle ();
 
-      this._trigger ( 'refresh' );
+      this._trigger ( 'refresh', this.options.date );
 
     },
 
@@ -3179,7 +3219,7 @@
 
       if ( formatted && this.options.date.selected ) {
 
-        return this.options.date.selected.getFullYear () + '-' + this.options.date.selected.getMonth () + '-' + this.options.date.selected.getDate ();
+        return this._exportDate ( this.options.date.selected );
 
       } else {
 
@@ -3191,16 +3231,7 @@
 
     set: function ( date ) {
 
-      if ( _.isString ( date ) ) {
-
-        var segments = date.split ( '-' ),
-          date = new Date ( segments[0], segments[1], segments[2] );
-
-      } else {
-
-        var date = new Date ( date );
-
-      }
+      date = this._importDate ( date );
 
       if ( !_.isNaN ( date.valueOf () ) ) {
 
@@ -3208,8 +3239,8 @@
 
         if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-          this._unhighlight_selected ();
-          this._highlight_selected ();
+          this._unhighlightSelected ();
+          this._highlightSelected ();
 
         } else {
 
@@ -3220,17 +3251,19 @@
 
         }
 
-        this._update_input ();
+        this._updateInput ();
+
+        this._trigger ( 'change', this.options.date );
 
       }
 
     },
 
-    navigate_month: function ( steps ) {
+    navigateMonth: function ( modifier ) {
 
-      if ( steps ) {
+      if ( modifier ) {
 
-        this.options.date.current.setMonth ( this.options.date.current.getMonth () + steps );
+        this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
 
         this._refresh ();
 
@@ -3238,15 +3271,15 @@
 
     },
 
-    prev_month: function () {
+    prevMonth: function () {
 
-      this.navigate_month ( -1 );
+      this.navigateMonth ( -1 );
 
     },
 
-    next_month: function () {
+    nextMonth: function () {
 
-      this.navigate_month ( 1 );
+      this.navigateMonth ( 1 );
 
     }
 

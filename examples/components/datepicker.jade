@@ -9,10 +9,6 @@ append main
   +container.outlined
     +datepicker(id="datepicker_test")
 
-  +divider-block Input
-
-  +input({ name: "datepicker_test", label: "YYYY-MM-DD" }).white.no-floating.outlined
-
   +divider-block Actions
 
   +multiple
@@ -23,27 +19,27 @@ append main
       +input({ name: "datepicker_delta_months", label: "Delta months..." }).no-floating.white.text-field-secondary.outlined
       +button("datepicker_navigate ()").secondary.outlined Navigate
     +multiple.joined
-      +button-icon("chevron_left", "datepicker_navigate_prev ()").outlined
+      +button-icon("chevron_left", "datepicker_navigate_prev ()").compact.outlined
       +label.outlined Month
-      +button-icon("chevron_right", "datepicker_navigate_next ()").outlined
+      +button-icon("chevron_right", "datepicker_navigate_next ()").compact.outlined
 
 append body-end
   +script.
     function datepicker_get () {
       var formatted = $("input[name='datepicker_get_formatted']").prop ( 'checked' );
-      var date = $('.datepicker').datepicker ( 'instance' ).get ( formatted );
-      $.noty ( date ? ( formatted ? date : date.toLocaleString () ) : 'No one' );
+      var date = $('.datepicker').datepicker ( 'get', formatted );
+      $.noty ( date ? ( formatted ? date : date.toLocaleString () ) : 'Null' );
     }
 
     function datepicker_navigate () {
       var delta_months = Number($("input[name='datepicker_delta_months']").val ());
-      $('.datepicker').datepicker ( 'instance' ).navigate_month ( delta_months );
+      $('.datepicker').datepicker ( 'navigateMonth', delta_months );
     }
 
     function datepicker_navigate_prev () {
-      $('.datepicker').datepicker ( 'instance' ).prev_month ();
+      $('.datepicker').datepicker ( 'prevMonth' );
     }
 
     function datepicker_navigate_next () {
-      $('.datepicker').datepicker ( 'instance' ).next_month ();
+      $('.datepicker').datepicker ( 'nextMonth' );
     }

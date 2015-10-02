@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Datepicker (Settings) v0.1.0
+ * Svelto - Datepicker (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -15,17 +15,16 @@ $datepicker-block-width: 100% / 7 !default;
 /* DAY NAME */
 
 $datepicker-day-name-font-weight: bold !default;
-$datepicker-day-name-height: 40px !default;
+$datepicker-day-name-height: 2.5em !default;
 
 /* DAY */
 
-$datepicker-day-height: 40px !default;
+$datepicker-day-height: 2.5em !default;
 $datepicker-day-prev-next-opacity: 0.25 !default;
-$datepicker-day-prev-next-z-depth: 0 !default;
 
 /* DAY CIRCLE */
 
-$datepicker-day-circle-size: 38px !default;
+$datepicker-day-circle-size: 2.375em !default;
 
 $datepicker-day-hover-color: $color-secondary-text !default;
 $datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25) !default;

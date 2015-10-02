@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, .tabs, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2986,6 +2986,7 @@ label.disabled,
 .disabled.card-block,
 .disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card,
 .chat-msg .disabled.chat-msg-sender-name,
+.disabled.datepicker,
 .disabled.embedded,
 .disabled.flippable,
 i.disabled.icon,
@@ -3003,7 +3004,7 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -4734,7 +4735,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - Datepicker (Settings) v0.1.0
+ * Svelto - Datepicker (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4747,120 +4748,142 @@ button {
 /* DAY CIRCLE */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - Datepicker v0.1.0
+ * Svelto - Datepicker v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* DATEPICKER */
 .datepicker {
-  position: relative;
-  margin-bottom: 10px;
+  /* INPUT */
+  /* NAVIGATION */
+  /* CALENDAR */
 }
 
-.datepicker > .datepicker-navigation {
+.datepicker input {
+  display: none;
+}
+
+.datepicker-navigation {
   display: -webkit-flex;
   display: flex;
   -webkit-justify-content: space-between;
           justify-content: space-between;
   -webkit-align-items: center;
           align-items: center;
+  /* BUTTON */
+  /* TITLE */
 }
 
-.datepicker > .datepicker-navigation > .button-wrp {
+.datepicker-navigation > .button {
   width: 14.2857142857%;
   margin-bottom: 0;
 }
 
-.datepicker > .datepicker-navigation > .datepicker-navigation-title {
+.datepicker-navigation-title {
   margin: 0 10px;
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days-names {
-  display: -webkit-flex;
-  display: flex;
+.datepicker-calendar {
+  /* DAY NAMES */
+  /* DAYS */
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days-names > .datepicker-day-name {
+.datepicker-calendar .datepicker-days-names {
+  display: -webkit-flex;
+  display: flex;
+  height: 2.5em;
+  -webkit-align-items: center;
+          align-items: center;
+  /* DAY NAME */
+}
+
+.datepicker-calendar .datepicker-days-names .datepicker-day-name {
   font-weight: bold;
-  line-height: 40px;
   width: 14.2857142857%;
-  height: 40px;
   text-align: center;
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days {
+.datepicker-calendar .datepicker-days {
   display: -webkit-flex;
   display: flex;
   -webkit-flex-wrap: wrap;
           flex-wrap: wrap;
+  /* DAY */
+  /* PREV / NEXT */
+  /* DAY */
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day'] {
-  line-height: 40px;
+.datepicker-calendar .datepicker-days [class*='datepicker-day'] {
+  line-height: 2.5em;
   position: relative;
   z-index: 1;
   width: 14.2857142857%;
-  height: 40px;
+  height: 2.5em;
   text-align: center;
-  transition: color 0.15s;
+  /* BEFORE */
+  /* TODAY */
+  /* SELECTED */
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day']:before {
+.datepicker-calendar .datepicker-days [class*='datepicker-day']:before {
   position: absolute;
   left: 50%;
-  margin-left: -19px;
+  margin-left: -1.1875em;
   top: 50%;
-  margin-top: -19px;
+  margin-top: -1.1875em;
   z-index: -1;
-  width: 38px;
-  height: 38px;
+  width: 2.375em;
+  height: 2.375em;
   content: '';
   border-radius: 50%;
   background-color: transparent;
+}
+
+.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-today {
+  color: #ef6c00;
+  /* BEFORE */
+}
+
+.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-today:before {
+  background-color: transparent;
+}
+
+.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-selected {
+  color: #ffffff;
+  transition: color 0.15s;
+  /* BEFORE */
+}
+
+.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-selected:not(.datepicker-day-prev):not(.datepicker-day-next):before {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
+}
+
+.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-selected:before {
+  background-color: #ef6c00;
   transition-property: box-shadow, background-color;
   transition-duration: 0.15s;
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day'].datepicker-day-today {
-  color: #ef6c00;
-}
-
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day'].datepicker-day-today:before {
-  background-color: transparent;
-}
-
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day'].datepicker-day-selected {
-  color: #ffffff;
-}
-
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day'].datepicker-day-selected:not(.datepicker-day-prev):not(.datepicker-day-next):before {
-  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
-}
-
-.datepicker > .datepicker-calendar > .datepicker-days > [class*='datepicker-day'].datepicker-day-selected:before {
-  background-color: #ef6c00;
-}
-
-.datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day-prev, .datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day-next {
+.datepicker-calendar .datepicker-days .datepicker-day-prev,
+.datepicker-calendar .datepicker-days .datepicker-day-next {
   opacity: 0.25;
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day-prev:before, .datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day-next:before {
-  box-shadow: none ;
-}
-
-.datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day {
+.datepicker-calendar .datepicker-days .datepicker-day {
   cursor: pointer;
+  /* HOVER */
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day:not(.datepicker-day-selected):hover {
+.datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover {
   color: #ffffff;
+  /* BEFORE */
 }
 
-.datepicker > .datepicker-calendar > .datepicker-days > .datepicker-day:not(.datepicker-day-selected):hover:before {
+.datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover:before {
   background-color: rgba(239, 108, 0, 0.75);
 }
 
