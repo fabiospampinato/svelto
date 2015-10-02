@@ -53,9 +53,24 @@
 
   };
 
+  $.getRect = function ( node ) {
+
+    return node.getBoundingClientRect ();
+
+  };
+
   $.fn.getRect = function () {
 
     return this.length > 0 ? this[0].getBoundingClientRect () : undefined;
+
+  };
+
+  $.getOverlappingArea = function ( rect1, rect2 ) {
+
+    var overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
+        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
+
+    return overlapX * overlapY;
 
   };
 

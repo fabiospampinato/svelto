@@ -377,9 +377,24 @@
 
   };
 
+  $.getRect = function ( node ) {
+
+    return node.getBoundingClientRect ();
+
+  };
+
   $.fn.getRect = function () {
 
     return this.length > 0 ? this[0].getBoundingClientRect () : undefined;
+
+  };
+
+  $.getOverlappingArea = function ( rect1, rect2 ) {
+
+    var overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
+        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
+
+    return overlapX * overlapY;
 
   };
 
@@ -9303,48 +9318,32 @@ $(function () {
 
   'use strict';
 
-  /* UTILITIES */
-
-  var get_coordinates = function ( $ele ) {
-
-    var offset = $ele.offset ();
-
-    return {
-      X1: offset.left,
-      X2: offset.left + $ele.width (),
-      Y1: offset.top,
-      Y2: offset.top + $ele.height ()
-    };
-
-  };
-
-  var get_overlapping_area = function ( c1, c2 ) {
-
-    var x_overlap = Math.max ( 0, Math.min ( c1.X2, c2.X2 ) - Math.max ( c1.X1, c2.X1 ) ),
-      y_overlap = Math.max ( 0, Math.min ( c1.Y2, c2.Y2 ) - Math.max ( c1.Y1, c2.Y1 ) );
-
-    return x_overlap * y_overlap;
-
-  };
+// var $squares = $('.squares_all .square');
+// var $comparer = $squares.eq ( 31 );
+// console.time('touching');
+// for ( var i = 0, l = 10000; i < l; i++ ) {
+//   $squares.touching ({ $comparer: $comparer, $not: $comparer });
+// }
+// console.timeEnd('touching');
 
   /* TOUCHING */
 
-  $.fn.touching = function ( custom_options ) {
+  $.fn.touching = function ( options ) {
 
     /* OPTIONS */
 
-    var options = _.merge ({
+    options = _.merge ({
       startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
       point: false, //INFO: Used for the punctual search
-      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
       //  {
       //    X: 0,
       //    Y: 0
       //  },
+      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
       $comparer: false, //INFO: Used for the overlapping search
       $not: false,
-      select: 'all'
-    }, custom_options );
+      onlyBest: false
+    }, options );
 
     /* SEARCHABLE */
 
@@ -9354,38 +9353,27 @@ $(function () {
 
     if ( options.$comparer ) {
 
-      var c1 = get_coordinates ( options.$comparer ),
-        nodes = [],
-        areas = [];
+      var rect1 = options.$comparer.getRect (),
+          nodes = [],
+          areas = [];
 
       var result = false;
 
-      $searchable.each ( function () {
+      for ( var i = 0, l = $searchable.length; i < l; i++ ) {
 
-        var c2 = get_coordinates ( $(this) ),
-          area = get_overlapping_area ( c1, c2 );
+        var rect2 = $.getRect ( $searchable[i] ),
+            area = $.getOverlappingArea ( rect1, rect2 );
 
         if ( area > 0 ) {
 
-          nodes.push ( this );
+          nodes.push ( $searchable[i] );
           areas.push ( area );
 
         }
 
-      });
-
-      switch ( options.select ) {
-
-        case 'all':
-          return $(nodes);
-
-        case 'most':
-          return $(nodes[ areas.indexOf ( _.max ( areas ) )]);
-
-        default:
-          return $empty;
-
       }
+
+      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) )]) : $(nodes);
 
     }
 
@@ -9399,18 +9387,17 @@ $(function () {
 
         $searchable.btEach ( function () {
 
-          var $node = $(this),
-            c = get_coordinates ( $node );
+          var rect = $.getRect ( this );
 
-          if ( options.point.Y >= c.Y1 ) {
+          if ( options.point.Y >= rect.top ) {
 
-            if ( options.point.Y <= c.Y2 ) {
+            if ( options.point.Y <= rect.bottom ) {
 
-              if ( options.point.X >= c.X1 ) {
+              if ( options.point.X >= rect.left ) {
 
-                if ( options.point.X <= c.X2 ) {
+                if ( options.point.X <= rect.right ) {
 
-                  $touched = $node;
+                  $touched = $(this);
 
                   return false;
 
@@ -9446,20 +9433,19 @@ $(function () {
 
       } else {
 
-        $searchable.each ( function () {
+        for ( var i = 0, l = $searchable.length; i < l; i++ ) {
 
-          var $node = $(this),
-            c = get_coordinates ( $node );
+          var rect = $.getRect ( $searchable[i] );
 
-          if ( options.point.Y >= c.Y1 && options.point.Y <= c.Y2 && options.point.X >= c.X1 && options.point.X <= c.X2 ) {
+          if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
 
-            $touched = $node;
+            $touched = $searchable.eq ( i );
 
-            return false;
+            break;
 
           }
 
-        });
+        }
 
         return $touched || $empty;
 

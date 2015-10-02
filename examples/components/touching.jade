@@ -12,7 +12,7 @@ append main
       - var nr = 1;
       while nr <= squares_nr
         +square.xxxxlarge.centerer
-          .small= nr++
+          .xxxsmall= nr++
 
   +divider-block Actions
 
@@ -28,7 +28,7 @@ append main
       - var nr = 1;
       while nr <= squares_nr
         +square.xxxxlarge.centerer
-          .small= nr++
+          .xxxsmall= nr++
 
   +divider-block Actions
 
@@ -44,7 +44,7 @@ append main
       - var nr = 1;
       while nr <= squares_nr
         +square.xxxxlarge.centerer
-          .small= nr++
+          .xxxsmall= nr++
 
   +divider-block Actions
 
@@ -62,7 +62,7 @@ append body-end
       var html = '';
 
       for ( var i = 0; i < Number(nr); i++ ) {
-        html += '<div class="square xxxxlarge centerer" style=""><div class="small">' + (i + 1) + '</div></div>';
+        html += '<div class="square xxxxlarge centerer" style=""><div class="xxxsmall">' + (i + 1) + '</div></div>';
       }
 
       return html;
@@ -123,9 +123,9 @@ append body-end
           move: function ( data ) {
             $squares.removeClass ( 'green' );
             if ( select === 'punctual') {
-              $squares.touching ({ point: data.moveXY, $not: data.$draggable }).addClass ( 'green' );
+              $squares.touching ({ point: { X: data.moveXY.X - $body.scrollLeft (), Y: data.moveXY.Y - $body.scrollTop () }, $not: $(data.draggable) }).addClass ( 'green' );
             } else {
-              $squares.touching ({ $comparer: data.$draggable, $not: data.$draggable, select: select }).addClass ( 'green' );
+              $squares.touching ({ $comparer: $(data.draggable), $not: $(data.draggable), onlyBest: select === 'most' }).addClass ( 'green' );
             }
           },
           end: function () {
