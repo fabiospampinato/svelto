@@ -4,9 +4,9 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
  * ========================================================================= */
-
-//SOURCE: - https://github.com/blueimp/JavaScript-Templates
 
 /*
  ***************************
