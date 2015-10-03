@@ -210,7 +210,7 @@
 
     },
 
-    /* ENABLING */
+    /* ENABLED */
 
     enable: function () {
 
@@ -218,11 +218,23 @@
 
     },
 
-    /* DISABLING */
+    isEnabled: function () {
+
+      return !this.options.disabled;
+
+    },
+
+    /* DISABLED */
 
     disable: function () {
 
       return this._setOptions ({ disabled: true });
+
+    },
+
+    isDisabled: function () {
+
+      return this.options.disabled;
 
     },
 

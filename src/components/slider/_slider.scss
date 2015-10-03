@@ -1,145 +1,166 @@
 
 /* =========================================================================
- * Svelto - Slider v0.1.0
+ * Svelto - Slider v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * @requires ../switch/_settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* SLIDER */
 
-//TODO: maybe use a tooltip with the number inside instead of the handler we are using right now
+//TODO: Maybe use a tooltip with the number inside instead of the handler we are using right now
 
 .slider {
 
+  @extend .widget;
+  @include color ( $slider-color, $slider-color-basic );
   display: flex;
-  align-items: center;
+  align-items: stretch;
   height: $slider-height;
-  margin-bottom: $gutter;
+  border-radius: $border-radius-medium;
 
-  & > input {
+  /* OUTLINED */
+
+  &.outlined {
+
+    .slider-min {
+      padding-left: $gutter;
+    }
+
+    .slider-max {
+      padding-right: $gutter;
+    }
+
+  }
+
+  /* INPUT */
+
+  input {
     display: none;
   }
 
-  & > .slider-bar-wrp {
+  /* MIN / MAX */
 
-    position: relative;
-    flex-grow: 1;
-    order: 1;
-
-    & > .slider-bar {
-
-      & > .slider-unhighlighted {
-
-        @include color ( $slider-unhighlighted-color, $slider-unhighlighted-color-basic );
-        position: relative;
-        overflow: hidden;
-        height: $slider-unhighlighted-height;
-        transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
-        border-radius: $slider-unhighlighted-border-radius;
-
-        & > .slider-highlighted {
-          @include color ( $slider-highlighted-color, $slider-highlighted-color-basic );
-          position: absolute;
-          right: 100%;
-          width: 100%;
-          height: 100%;
-          border-radius: inherit;
-        }
-
-      }
-
-    }
-
-    & > .slider-handler-wrp {
-
-      position: absolute;
-      left: 0;
-      margin-top: - ( $slider-handler-half-size + ( $slider-unhighlighted-height / 2 ) );
-      margin-left: - $slider-handler-half-size;
-
-      & > .slider-handler {
-
-        @include color ( $slider-handler-color, $slider-handler-color-basic );
-        @include z-depth ( $slider-handler-z-depth );
-        z-index: 0;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: $slider-handler-size;
-        height: $slider-handler-size;
-        transition: transform $slider-transition-all-duration;
-        transform: scale(1);
-        border-radius: $slider-handler-border-radius;
-
-        &:before {
-          position: absolute;
-          z-index: -1;
-          top: 0;
-          right: 0;
-          bottom: 0;
-          left: 0;
-          content: '';
-          transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
-          transition-duration: $slider-transition-all-duration;
-          transition-property: opacity, transform;
-          transform: scale($switch-handler-before-scale-inactive);
-          opacity: 0;
-          border-radius: 50%;
-          background-color: inherit;
-        }
-
-        & > .slider-label {
-          font-size: $slider-handler-label-font-size;
-          transition-duration: $slider-transition-all-duration;
-          transition-property: opacity, transform;
-          transform: scale(0);
-          opacity: 0;
-        }
-
-      }
-
-    }
-
-  }
-
-  & > .slider-min, & > .slider-max {
+  &-min,
+  &-max {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: $slider-min-max-width;
-    height: $slider-height;
-    text-align: center;
+    min-width: $slider-min-max-min-width;
   }
 
-  & > .slider-min {
+  /* MIN */
 
-    order: 0;
+  &-min {
+
     margin-right: $slider-handler-half-size;
 
     &:after {
-      content: attr(data-min)
+      content: attr(data-min);
     }
 
   }
 
-  & > .slider-max {
+  /* MAX */
 
-    order: 2;
+  &-max {
+
     margin-left: $slider-handler-half-size;
 
     &:after {
-      content: attr(data-max)
+      content: attr(data-max);
     }
 
   }
 
+  /* BAR */
+
+  &-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-grow: 1;
+  }
+
+  /* UNHIGHLIGHT */
+
+  &-unhighlight {
+    @include color ( $slider-unhighlight-color, $slider-unhighlight-color-basic );
+    position: relative;
+    overflow: hidden;
+    height: $slider-unhighlight-height;
+    border-radius: $slider-unhighlight-border-radius;
+    width: 100%;
+  }
+
+  /* HIGHLIGHT */
+
+  &-highlight {
+    @include color ( $slider-highlight-color, $slider-highlight-color-basic );
+    position: absolute;
+    right: 100%;
+    width: 100%;
+    height: 100%;
+  }
+
+  /* HANDLER WRAPPER */
+
+  &-handler-wrp {
+    @include center-absolute ( false, $slider-handler-size );
+    left: 0;
+    margin-left: - $slider-handler-half-size;
+  }
+
+  /* HANDLER */
+
+  &-handler {
+
+    @include color ( $slider-handler-color, $slider-handler-color-basic );
+    @include z-depth ( $slider-handler-z-depth );
+    z-index: 1;
+    width: $slider-handler-size;
+    height: $slider-handler-size;
+    transition: transform $slider-transition-all-duration;
+    border-radius: $slider-handler-border-radius;
+    text-align: center;
+
+    &:before {
+      @include fill-absolute ();
+      z-index: -1;
+      content: '';
+      transition-property: opacity, transform;
+      transition-duration: $slider-transition-all-duration;
+      transform: scale($switch-handler-before-scale-inactive);
+      opacity: 0;
+      border-radius: $slider-handler-border-radius;
+      background-color: inherit;
+    }
+
+  }
+
+  &-label {
+    display: inline-block;
+    vertical-align: middle;
+    font-size: $slider-handler-label-font-size;
+    transition-property: opacity, transform;
+    transition-duration: $slider-transition-all-duration;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  /* ACTIVE */
+
+  &:not(.disabled),
   &:not(.slider-disabled) {
 
-    & > .slider-min, & > .slider-max {
+    /* MIN / MAX */
+
+    .slider-min,
+    .slider-max {
 
       cursor: pointer;
 
@@ -149,50 +170,61 @@
 
     }
 
-    & > .slider-min:hover:after {
+    /* MIN */
+
+    .slider-min:hover:after {
       @extend .icon-content-remove:before;
     }
 
-    & > .slider-max:hover:after {
+    /* MAX */
+
+    .slider-max:hover:after {
       @extend .icon-content-add:before;
     }
 
-    & > .slider-bar-wrp {
+    /* BAR */
 
-      & > .slider-bar > .slider-unhighlighted {
+    .slider-bar {
 
-        cursor: pointer;
+      cursor: pointer;
 
-        & > .slider-highlighted {
-          cursor: pointer;
+      &:active,
+      .slider-handler-wrp.dragging {
+
+        .slider-handler {
+
+          transform: scale($slider-handler-active-transform-scale);
+
+          &:before {
+            transform: scale($switch-handler-before-scale-active);
+            opacity: $switch-handler-before-active-opacity;
+          }
+
         }
 
       }
 
-      & > .slider-handler-wrp {
+    }
 
-        cursor: move;
+    /* HANDLER */
 
-        &:active > .slider-handler {
-          transform: scale($slider-handler-active-transform-scale) !important;
-        }
-
-        &:active > .slider-handler:before {
-          transform: scale($switch-handler-before-scale-active);
-          opacity: $switch-handler-before-active-opacity;
-        }
-
-      }
-
+    .slider-handler {
+      cursor: move;
     }
 
   }
 
-  &:hover, &:active {
+  /* HOVER / ACTIVE */
+
+  &:hover,
+  &:active,
+  .slider-handler-wrp.dragging {
+
+    /* LABEL */
 
     .slider-label {
-      transform: scale(1) !important;
-      opacity: 1 !important;
+      transform: scale(1);
+      opacity: 1;
     }
 
   }

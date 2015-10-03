@@ -7,7 +7,32 @@ append main
   +divider-block Slider
 
   +container.outlined
-    +slider({ name: "name1", min: 0, value: 23, max: 100 }).outl
-    +slider({ name: "name2", min: -100, value: -20, max: 100 }).outl
-    +slider({ name: "name3", min: 0, value: 60, max: 100, step: 5 }).outl
-    +slider({ name: "name4", min: 0, value: 75, max: 100 }).slider-disabled.outl
+    +slider({ name: "name1", min: 0, value: 23, max: 100 })
+    +slider({ name: "name2", min: -100, value: -20, max: 100 })
+    +slider({ name: "name3", min: 0, value: 60, max: 100, step: 5 })
+
+  +divider-block Actions
+
+  +multiple
+    +button("slider_get_all ()").outlined Get all
+    +multiple.joined
+      +input({ name: "value", label: "Value..." }).outlined.no-floating
+      +button("slider_set_all ()").secondary.outlined Set all
+    +button("slider_api ( 'increase' )").outlined Increase all
+    +button("slider_api ( 'decrease' )").outlined Decrease all
+
+append body-end
+  +script.
+    function slider_get_all () {
+      var gets = _.map ( $('.slider'), function ( slider ) {
+        return $(slider).slider ( 'get' );
+      });
+      $.noty ( gets.join ( ' - ' ) );
+    }
+    function slider_set_all () {
+      var value = $("input[name='value']").val ();
+      $('.slider').slider ( 'set', value );
+    }
+    function slider_api ( action ) {
+      $('.slider').slider ( action );
+    }  

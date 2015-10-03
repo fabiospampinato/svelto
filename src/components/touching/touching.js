@@ -13,14 +13,6 @@
 
   'use strict';
 
-// var $squares = $('.squares_all .square');
-// var $comparer = $squares.eq ( 31 );
-// console.time('touching');
-// for ( var i = 0, l = 10000; i < l; i++ ) {
-//   $squares.touching ({ $comparer: $comparer, $not: $comparer });
-// }
-// console.timeEnd('touching');
-
   /* TOUCHING */
 
   $.fn.touching = function ( options ) {

@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, table.table, .tabs, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -3000,12 +3000,13 @@ i.disabled.icon,
 .disabled.square,
 .disabled.square-sample,
 .disabled.circle,
+.disabled.slider,
 table.disabled.table,
 .disabled.tabs,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -10260,19 +10261,19 @@ table.table.selectable > tbody > tr.selected {
 }
 
 /* =========================================================================
- * Svelto - Slider (Settings) v0.2.0
+ * Svelto - Slider (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../label/_settings.scss
  * ========================================================================= */
 /* SLIDER */
 /* MIN / MAX */
-/* UNHIGHLIGHTED */
-/* HIGHLIGHTED */
+/* UNHIGHLIGHT */
+/* HIGHLIGHT */
 /* HANDLER */
-/* HANDLER:BEFORE */
 /* LABEL */
 /* OTHERS */
 /* =========================================================================
@@ -10288,69 +10289,121 @@ table.table.selectable > tbody > tr.selected {
 /* HANDLER */
 /* OTHERS */
 /* =========================================================================
- * Svelto - Slider v0.1.0
+ * Svelto - Slider v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * @requires ../switch/_settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* SLIDER */
 .slider {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: stretch;
+          align-items: stretch;
+  height: 2.4185714286em;
+  border-radius: 0.2665em;
+  /* OUTLINED */
+  /* INPUT */
+  /* MIN / MAX */
+  /* MIN */
+  /* MAX */
+  /* BAR */
+  /* UNHIGHLIGHT */
+  /* HIGHLIGHT */
+  /* HANDLER WRAPPER */
+  /* HANDLER */
+  /* ACTIVE */
+  /* HOVER / ACTIVE */
+}
+
+.slider.outlined .slider-min {
+  padding-left: 10px;
+}
+
+.slider.outlined .slider-max {
+  padding-right: 10px;
+}
+
+.slider input {
+  display: none;
+}
+
+.slider-min,
+.slider-max {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-justify-content: center;
+          justify-content: center;
+  -webkit-align-items: center;
+          align-items: center;
+  min-width: 2.4185714286em;
+}
+
+.slider-min {
+  margin-right: 0.775em;
+}
+
+.slider-min:after {
+  content: attr(data-min);
+}
+
+.slider-max {
+  margin-left: 0.775em;
+}
+
+.slider-max:after {
+  content: attr(data-max);
+}
+
+.slider-bar {
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
           align-items: center;
-  height: 2.66667em;
-  margin-bottom: 10px;
-}
-
-.slider > input {
-  display: none;
-}
-
-.slider > .slider-bar-wrp {
   position: relative;
   -webkit-flex-grow: 1;
           flex-grow: 1;
-  -webkit-order: 1;
-          order: 1;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted {
+.slider-unhighlight {
   border-color: #bababa ;
   color: #3f3f3f ;
   background: #e0e0e0 ;
   position: relative;
   overflow: hidden;
   height: 0.5em;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
   border-radius: 0.5em;
+  width: 100%;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted.transparentize {
+.slider-unhighlight.transparentize {
   border-color: rgba(186, 186, 186, 0.95) ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted.transparentize {
+.slider-unhighlight.transparentize {
   background: rgba(224, 224, 224, 0.95) ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted p > a {
+.slider-unhighlight p > a {
   color: #ffffff ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted p > a:after {
+.slider-unhighlight p > a:after {
   border-color: white ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted p > a:hover {
+.slider-unhighlight p > a:hover {
   color: white ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted {
+.slider-highlight {
   border-color: #a34900 ;
   color: #ffffff ;
   background: #ef6c00 ;
@@ -10358,89 +10411,81 @@ table.table.selectable > tbody > tr.selected {
   right: 100%;
   width: 100%;
   height: 100%;
-  border-radius: inherit;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted.transparentize {
+.slider-highlight.transparentize {
   border-color: rgba(163, 73, 0, 0.95) ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted.transparentize {
+.slider-highlight.transparentize {
   background: rgba(239, 108, 0, 0.95) ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted p > a {
+.slider-highlight p > a {
   color: #1565c0 ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted p > a:after {
+.slider-highlight p > a:after {
   border-color: #166ac9 ;
 }
 
-.slider > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted p > a:hover {
+.slider-highlight p > a:hover {
   color: #166ac9 ;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp {
+.slider-handler-wrp {
   position: absolute;
+  top: 50%;
+  margin-top: -0.775em;
   left: 0;
-  margin-top: -1.025em;
   margin-left: -0.775em;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler {
+.slider-handler {
   border-color: #a34900 ;
   color: #ffffff ;
   background: #ef6c00 ;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
-  z-index: 0;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-align-items: center;
-          align-items: center;
+  z-index: 1;
   width: 1.55em;
   height: 1.55em;
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
-  -webkit-transform: scale(1);
-          transform: scale(1);
   border-radius: 50%;
+  text-align: center;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler.transparentize {
+.slider-handler.transparentize {
   border-color: rgba(163, 73, 0, 0.95) ;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler.transparentize {
+.slider-handler.transparentize {
   background: rgba(239, 108, 0, 0.95) ;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler p > a {
+.slider-handler p > a {
   color: #1565c0 ;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler p > a:after {
+.slider-handler p > a:after {
   border-color: #166ac9 ;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler p > a:hover {
+.slider-handler p > a:hover {
   color: #166ac9 ;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler:before {
+.slider-handler:before {
   position: absolute;
-  z-index: -1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: -1;
   content: '';
-  transition-delay: 0.05s;
-  transition-duration: 0.15s;
   transition-property: opacity, -webkit-transform;
   transition-property: opacity, transform;
+  transition-duration: 0.15s;
   -webkit-transform: scale(0);
           transform: scale(0);
   opacity: 0;
@@ -10448,79 +10493,73 @@ table.table.selectable > tbody > tr.selected {
   background-color: inherit;
 }
 
-.slider > .slider-bar-wrp > .slider-handler-wrp > .slider-handler > .slider-label {
+.slider-label {
+  display: inline-block;
+  vertical-align: middle;
   font-size: 0.6em;
-  transition-duration: 0.15s;
   transition-property: opacity, -webkit-transform;
   transition-property: opacity, transform;
+  transition-duration: 0.15s;
   -webkit-transform: scale(0);
           transform: scale(0);
   opacity: 0;
 }
 
-.slider > .slider-min, .slider > .slider-max {
-  display: -webkit-flex;
-  display: flex;
-  -webkit-justify-content: center;
-          justify-content: center;
-  -webkit-align-items: center;
-          align-items: center;
-  width: 2.66667em;
-  height: 2.66667em;
-  text-align: center;
+.slider:not(.disabled),
+.slider:not(.slider-disabled) {
+  /* MIN / MAX */
+  /* MIN */
+  /* MAX */
+  /* BAR */
+  /* HANDLER */
 }
 
-.slider > .slider-min {
-  -webkit-order: 0;
-          order: 0;
-  margin-right: 0.775em;
-}
-
-.slider > .slider-min:after {
-  content: attr(data-min);
-}
-
-.slider > .slider-max {
-  -webkit-order: 2;
-          order: 2;
-  margin-left: 0.775em;
-}
-
-.slider > .slider-max:after {
-  content: attr(data-max);
-}
-
-.slider:not(.slider-disabled) > .slider-min, .slider:not(.slider-disabled) > .slider-max {
+.slider:not(.disabled) .slider-min,
+.slider:not(.disabled) .slider-max,
+.slider:not(.slider-disabled) .slider-min,
+.slider:not(.slider-disabled) .slider-max {
   cursor: pointer;
 }
 
-.slider:not(.slider-disabled) > .slider-bar-wrp > .slider-bar > .slider-unhighlighted {
+.slider:not(.disabled) .slider-bar,
+.slider:not(.slider-disabled) .slider-bar {
   cursor: pointer;
 }
 
-.slider:not(.slider-disabled) > .slider-bar-wrp > .slider-bar > .slider-unhighlighted > .slider-highlighted {
-  cursor: pointer;
+.slider:not(.disabled) .slider-bar:active .slider-handler,
+.slider:not(.disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler,
+.slider:not(.slider-disabled) .slider-bar:active .slider-handler,
+.slider:not(.slider-disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler {
+  -webkit-transform: scale(1.35);
+          transform: scale(1.35);
 }
 
-.slider:not(.slider-disabled) > .slider-bar-wrp > .slider-handler-wrp {
-  cursor: move;
-}
-
-.slider:not(.slider-disabled) > .slider-bar-wrp > .slider-handler-wrp:active > .slider-handler {
-  -webkit-transform: scale(1.35) !important;
-          transform: scale(1.35) !important;
-}
-
-.slider:not(.slider-disabled) > .slider-bar-wrp > .slider-handler-wrp:active > .slider-handler:before {
+.slider:not(.disabled) .slider-bar:active .slider-handler:before,
+.slider:not(.disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler:before,
+.slider:not(.slider-disabled) .slider-bar:active .slider-handler:before,
+.slider:not(.slider-disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler:before {
   -webkit-transform: scale(1.8);
           transform: scale(1.8);
   opacity: 0.25;
 }
 
-.slider:hover .slider-label, .slider:active .slider-label {
-  -webkit-transform: scale(1) !important;
-          transform: scale(1) !important;
-  opacity: 1 !important;
+.slider:not(.disabled) .slider-handler,
+.slider:not(.slider-disabled) .slider-handler {
+  cursor: move;
+}
+
+.slider:hover,
+.slider:active,
+.slider .slider-handler-wrp.dragging {
+  /* LABEL */
+}
+
+.slider:hover .slider-label,
+.slider:active .slider-label,
+.slider .slider-handler-wrp.dragging .slider-label {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
 }
 
 /* =========================================================================

@@ -237,6 +237,25 @@
     },
 
     /**
+     * Round `number` so that it becames the closer `step` multiple
+     */
+
+    roundCloser ( number, step ) {
+
+      if ( _.isUndefined ( step ) ) {
+
+        step = 1;
+
+      }
+
+      var left = ( number % step ),
+          halfStep = step / 2;
+
+      return number - left + ( left >= halfStep ? step : 0 );
+
+    },
+
+    /**
      * Returns true
      */
 
@@ -833,7 +852,7 @@
 
     },
 
-    /* ENABLING */
+    /* ENABLED */
 
     enable: function () {
 
@@ -841,11 +860,23 @@
 
     },
 
-    /* DISABLING */
+    isEnabled: function () {
+
+      return !this.options.disabled;
+
+    },
+
+    /* DISABLED */
 
     disable: function () {
 
       return this._setOptions ({ disabled: true });
+
+    },
+
+    isDisabled: function () {
+
+      return this.options.disabled;
 
     },
 
@@ -3343,7 +3374,6 @@
         y: _.true
       },
       callbacks: {
-        beforestart: _.noop, //FIXME: Is it needed?
         start: _.noop,
         move: _.noop,
         end: _.noop
@@ -3480,8 +3510,6 @@
 
         this.$trigger = $(trigger);
 
-        this._trigger ( 'beforestart' );
-
         isDragging = true;
 
         this.motion = false;
@@ -3489,7 +3517,7 @@
         this.isProxyed = ( this.options.$proxy && this.$trigger.get ( 0 ) === this.options.$proxy.get ( 0 ) );
         this.proxyXY = false;
 
-        this.initialXY = this.$draggable.translate2d ();
+        this.initialXY = this.$draggable.translate2d ();;
 
         this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable } ) );
 
@@ -3519,7 +3547,7 @@
     _end: function ( event, data ) {
 
       if ( this.motion === true ) {
-        
+
         $html.removeClass ( 'dragging' );
         this.$draggable.removeClass ( 'dragging' );
 
@@ -3581,7 +3609,7 @@
 
         var transformStr = this.css ( 'transform' );
 
-        return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., -]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value, 10 ); } ) : [1, 0, 0, 1, 0, 0];
+        return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., -]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value ); } ) : [1, 0, 0, 1, 0, 0];
 
       }
 
@@ -7148,14 +7176,18 @@ $(function () {
 
 
 /* =========================================================================
- * Svelto - Slider v0.1.0
+ * Svelto - Slider v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
  * @requires ../draggable/draggable.js
+ * @requires ../transform/transform.js
  * ========================================================================= */
+
+//TODO: Add vertical slider
+//TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -7173,9 +7205,18 @@ $(function () {
       value: 0,
       step: 1,
       decimals: 0,
+      selectors: {
+        input: 'input',
+        min: '.slider-min',
+        max: '.slider-max',
+        bar: '.slider-bar',
+        unhighlight: '.slider-unhighlight',
+        highlight: '.slider-highlight',
+        handlerWrp: '.slider-handler-wrp',
+        label: '.slider-label'
+      },
       callbacks: {
-        increased: _.noop,
-        decreased: _.noop
+        change: _.noop
       }
     },
 
@@ -7184,18 +7225,24 @@ $(function () {
     _variables: function () {
 
       this.$slider = this.$element;
-      this.$min = this.$slider.find ( '.slider-min' );
-      this.$max = this.$slider.find ( '.slider-max' );
-      this.$input = this.$slider.find ( 'input' );
-      this.$bar_wrp = this.$slider.find ( '.slider-bar-wrp' );
-      this.$unhighlighted = this.$slider.find ( '.slider-unhighlighted' );
-      this.$highlighted = this.$slider.find ( '.slider-highlighted' );
-      this.$handler_wrp = this.$slider.find ( '.slider-handler-wrp' );
-      this.$label = this.$handler_wrp.find ( '.slider-label' );
+      this.$input = this.$slider.find ( this.options.selectors.input );
+      this.$min = this.$slider.find ( this.options.selectors.min );
+      this.$max = this.$slider.find ( this.options.selectors.max );
+      this.$bar = this.$slider.find ( this.options.selectors.bar );
+      this.$unhighlight = this.$slider.find ( this.options.selectors.unhighlight );
+      this.$highlight = this.$slider.find ( this.options.selectors.highlight );
+      this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
+      this.$label = this.$handlerWrp.find ( this.options.selectors.label );
 
-      this.steps_nr = ( ( this.options.max - this.options.min ) / this.options.step );
+      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
 
-      this._update_variables ();
+      this._updateVariables ();
+
+    },
+
+    _init: function () {
+
+      this._updatePositions ();
 
     },
 
@@ -7203,89 +7250,85 @@ $(function () {
 
       /* INPUT CHANGE */
 
-      this._on ( true, this.$input, 'change', this._handler_change );
+      this._on ( true, this.$input, 'change', this.__change );
 
       /* WINDOW RESIZE */
 
-      this._on ( $window, 'resize', this._handler_resize );
+      this._on ( true, $window, 'resize', this.__resize );
 
       /* ARROWS */
 
-      this._on ( this.$slider, 'mouseenter', this._handler_arrows_in );
-      this._on ( this.$slider, 'mouseleave', this._handler_arrows_out );
+      this._on ( this.$slider, 'mouseenter', this.__arrowsIn );
+      this._on ( this.$slider, 'mouseleave', this.__arrowsOut );
 
       /* MIN / MAX BUTTONS */
 
-      this._on ( this.$min, 'click', this.decrease );
-      this._on ( this.$max, 'click', this.increase );
+      this._on ( this.$min, Pointer.tap, this.decrease );
+      this._on ( this.$max, Pointer.tap, this.increase );
 
       /* DRAG */
 
-      this.$handler_wrp.draggable ({
-        draggable: this._draggable.bind ( this ),
+      this.$handlerWrp.draggable ({
+        draggable: this.isEnabled.bind ( this ),
         axis: 'x',
+        $proxy: this.$bar,
         constrainer: {
-          $element: this.$bar_wrp,
-          constrain_center: true,
-          axis: 'x'
+          $element: this.$bar,
+          constrainCenter: true
         },
         modifiers: {
-          x: this.modifier_x.bind ( this )
+          x: this._dragModifierX.bind ( this )
         },
         callbacks: {
-          beforestart: this._handler_drag_beforestart.bind ( this ),
-          move: this._handler_drag_move.bind ( this ),
-          end: this._handler_drag_end.bind ( this )
+          move: this.__dragMove.bind ( this ),
+          end: this.__dragEnd.bind ( this )
         }
       });
-
-      /* CLICK */
-
-      this._on ( this.$unhighlighted, 'click', this._handler_click );
 
     },
 
     /* PRIVATE */
 
-    _round_value: function ( value ) {
+    _roundValue: function ( value ) {
 
-      return Number(Number(value).toFixed ( this.options.decimals ));
-
-    },
-
-    _update_positions: function () {
-
-      var percentage = ( ( this.options.value - this.options.min ) / this.options.step ) * 100 / this.steps_nr;
-
-      this.$handler_wrp.css ({
-        left: percentage + '%',
-        transform: 'none'
-      });
-
-      this.$highlighted.css ({
-        right: ( 100 - percentage ) + '%',
-        transform: 'none'
-      });
+      return Number ( Number ( value ).toFixed ( this.options.decimals ) );
 
     },
 
-    _update_label: function ( value ) {
+    _updateVariables: function () {
+
+      this.unhighlightWidth = this.$unhighlight.width ();
+
+      this.stepWidth = this.unhighlightWidth / this.stepsNr;
+
+    },
+
+    _updatePositions: function () {
+
+      var percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
+          translateX = this.unhighlightWidth / 100 * percentage;
+
+      this.$handlerWrp.translateX ( translateX );
+
+      this.$highlight.translateX ( translateX );
+
+    },
+
+    _updateLabel: function ( value ) {
 
       this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
 
     },
 
-    _update_variables: function () {
+    _updateInput: function () {
 
-      this.unhighlighted_width = this.$unhighlighted.width ();
-      this.unhighlighted_offset = this.$unhighlighted.offset ();
-      this.step_width = this.unhighlighted_width / this.steps_nr;
+      this.$input.val ( this.options.value ).trigger ( 'change' );
 
     },
 
     /* CHANGE */
 
-    _handler_change: function () {
+    __change: function () {
 
       this.set ( this.$input.val () );
 
@@ -7293,35 +7336,40 @@ $(function () {
 
     /* RESIZE */
 
-    _handler_resize: function () {
+    __resize: function () {
 
-      this._update_variables ();
+      this._updateVariables ();
+      this._updatePositions ();
 
     },
 
     /* LEFT / RIGHT ARROWS */
 
-    _handler_arrows_in: function () {
+    __arrowsIn: function () {
 
-      this._on ( $document, 'keydown', this._handler_arrows_keydown );
-
-    },
-
-    _handler_arrows_out: function () {
-
-      this._off ( $document, 'keydown', this._handler_arrows_keydown );
+      this._on ( $document, 'keydown', this.__arrowsKeydown );
 
     },
 
-    _handler_arrows_keydown: function ( event ) {
+    __arrowsOut: function () {
 
-      if ( event.keyCode === $.ui.keyCode.LEFT || event.keyCode === $.ui.keyCode.DOWN ) {
+      this._off ( $document, 'keydown', this.__arrowsKeydown );
 
-        this.decrease ();
+    },
 
-      } else if ( event.keyCode === $.ui.keyCode.RIGHT || event.keyCode === $.ui.keyCode.UP ) {
+    __arrowsKeydown: function ( event ) {
 
-        this.increase ();
+      switch ( event.keyCode ) {
+
+        case $.ui.keyCode.LEFT:
+        case $.ui.keyCode.DOWN:
+          this.decrease ();
+          break;
+
+        case $.ui.keyCode.RIGHT:
+        case $.ui.keyCode.UP:
+          this.increase ();
+          break;
 
       }
 
@@ -7329,81 +7377,27 @@ $(function () {
 
     /* DRAG */
 
-    _draggable: function () {
+    _dragModifierX: function ( distance ) {
 
-      return !this.options.disabled;
-
-    },
-
-    modifier_x: function ( distance ) { //TODO: maybe we should export this function as a lodash mixin
-
-      var left = distance % this.step_width;
-
-      if ( left >= this.step_width / 2 ) {
-
-        return distance - left + this.step_width;
-
-      } else {
-
-        return distance - left;
-
-      }
+      return _.roundCloser ( distance, this.stepWidth );
 
     },
 
-    _handler_drag_beforestart: function () {
+    __dragMove: function ( data ) {
 
-      var translateX = parseFloat ( this.$handler_wrp.css ( 'left' ), 10 );
+      this.$highlight.translateX ( data.modifiedXY.X );
 
-      this.$handler_wrp.css ({
-        left: 0,
-        transform: 'translate3d(' + translateX + 'px,0,0)'
-      });
-
-      this.$highlighted.css ({
-        right: '100%',
-        transform: 'translate3d(' + translateX + 'px,0,0)'
-      });
+      this._updateLabel ( this._roundValue ( this.options.min + ( data.modifiedXY.X / this.stepWidth * this.options.step ) ) );
 
     },
 
-    _handler_drag_move: function ( data ) {
+    __dragEnd: function ( data ) {
 
-      this.$highlighted.css ( 'transform', 'translate3d(' + data.modifiedXY.X + 'px,0,0)' );
-
-      this._update_label ( this._round_value ( this.options.min + ( data.modifiedXY.X / this.step_width * this.options.step ) ) );
+      this.set ( this.options.min + ( this.$handlerWrp.translateX () / this.stepWidth * this.options.step ) );
 
     },
 
-    _handler_drag_end: function ( data ) {
-
-      var transform_str = this.$handler_wrp.css ( 'transform' ),
-        matrix =  ( transform_str !== 'none' ) ? transform_str.match ( /[0-9., -]+/ )[0].split ( ', ' ) : [0, 0, 0, 0, 0, 0];
-
-      var setted = this.set ( this.options.min + ( parseFloat ( matrix[4], 10 ) / this.step_width * this.options.step ) );
-
-      if ( !setted ) {
-
-        this._update_positions ();
-
-      }
-
-    },
-
-    /* CLICK */
-
-    _handler_click: function ( event ) {
-
-      if ( event.target === this.$handler_wrp.get ( 0 ) ) return; //INFO: shouldn't work if we click on the handler //INFO: Maybe we are dragging, shouldn't be handled as a click on the unhighlited bar
-
-      var click_pos = $.eventXY ( event ),
-        distance = this.modifier_x ( click_pos.X - this.unhighlighted_offset.left );
-
-      this.set ( this.options.min + ( distance / this.step_width * this.options.step ) );
-
-    },
-
-    /* PUBLIC */
+    /* API */
 
     get: function () {
 
@@ -7413,26 +7407,22 @@ $(function () {
 
     set: function ( value ) {
 
-      value = _.clamp ( this.options.min, this._round_value ( value ), this.options.max );
+      value = _.clamp ( this.options.min, this._roundValue ( value ), this.options.max );
 
       if ( value !== this.options.value ) {
 
-        var callback = ( value > this.options.value ) ? 'increased' : 'decreased';
+        var prevValue = this.options.value;
 
         this.options.value = value;
 
-        this._update_positions ();
-        this._update_label ();
+        this._updatePositions ();
+        this._updateLabel ();
+        this._updateInput ();
 
-        this.$input.val ( value ).trigger ( 'change' );
-
-        this._trigger ( callback );
-
-        return true;
-
-      } else {
-
-        return false;
+        this._trigger ( 'change', {
+          previous: prevValue,
+          value: this.options.value
+        });
 
       }
 
@@ -7440,13 +7430,13 @@ $(function () {
 
     increase: function () {
 
-      return this.set ( this.options.value + this.options.step );
+      this.set ( this.options.value + this.options.step );
 
     },
 
     decrease: function () {
 
-      return this.set ( this.options.value - this.options.step );
+      this.set ( this.options.value - this.options.step );
 
     }
 
@@ -7458,16 +7448,15 @@ $(function () {
 
     $('.slider').each ( function () {
 
-      var $slider = $(this),
-        options = {
-          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-          value: Number($slider.find ( 'input' ).val () || 0),
-          step: Number($slider.data ( 'step' ) || 1),
-          decimals: Number($slider.data ( 'decimals' ) || 0)
-        };
+      var $slider = $(this);
 
-      $slider.slider ( options );
+      $slider.slider ({
+        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+        value: Number($slider.find ( 'input' ).val () || 0),
+        step: Number($slider.data ( 'step' ) || 1),
+        decimals: Number($slider.data ( 'decimals' ) || 0)
+      });
 
     });
 
@@ -9317,14 +9306,6 @@ $(function () {
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
-
-// var $squares = $('.squares_all .square');
-// var $comparer = $squares.eq ( 31 );
-// console.time('touching');
-// for ( var i = 0, l = 10000; i < l; i++ ) {
-//   $squares.touching ({ $comparer: $comparer, $not: $comparer });
-// }
-// console.timeEnd('touching');
 
   /* TOUCHING */
 

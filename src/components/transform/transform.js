@@ -21,7 +21,7 @@
 
         var transformStr = this.css ( 'transform' );
 
-        return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., -]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value, 10 ); } ) : [1, 0, 0, 1, 0, 0];
+        return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., -]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value ); } ) : [1, 0, 0, 1, 0, 0];
 
       }
 

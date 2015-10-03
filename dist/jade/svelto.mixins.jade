@@ -385,40 +385,6 @@ mixin divider-spacer
 
 
 //- =========================================================================
-//- Svelto - Dropdown v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
-
-//- Options
-  {
-    id: '', // Dropdown id
-    title: '', // Button title
-    icon: '' // Button icon
-  }
-
-mixin dropdown-btn(options)
-  - options.icon = options.icon || "expand_more";
-  +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
-    if options.title
-      span= options.title
-    if options.icon
-      +icon(options.icon)
-
-mixin dropdown(id)
-  .dropdown(id="dropdown-" + id)&attributes(attributes)
-    .dropdown-tip.top
-    .dropdown-tip.right
-    .dropdown-tip.bottom
-    .dropdown-tip.left
-    +container
-      block
-
-
-//- =========================================================================
 //- Svelto - Embedded v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -454,6 +420,40 @@ mixin video(sources, type)
 
 mixin object(data)
   object(data=data)&attributes(attributes)
+
+
+//- =========================================================================
+//- Svelto - Dropdown v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: automatically recognize if we are passing a title or an icon (if the icon is in the allowed arrays then ok, if not print it as a title)
+
+//- Options
+  {
+    id: '', // Dropdown id
+    title: '', // Button title
+    icon: '' // Button icon
+  }
+
+mixin dropdown-btn(options)
+  - options.icon = options.icon || "expand_more";
+  +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
+
+mixin dropdown(id)
+  .dropdown(id="dropdown-" + id)&attributes(attributes)
+    .dropdown-tip.top
+    .dropdown-tip.right
+    .dropdown-tip.bottom
+    .dropdown-tip.left
+    +container
+      block
 
 
 //- =========================================================================
@@ -578,33 +578,6 @@ mixin image-sample
 
 
 //- =========================================================================
-//- Svelto - Input v0.1.1
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    type: '', // Input type
-    name: '', // Input name
-    value: '', // Input value
-    label: '' // Label
-  }
-
-mixin input(options)
-  - options = options || {};
-  - options.type = options.type || "text";
-  - options.name = options.name || "";
-  - options.value = options.value === undefined ? "" : options.value;
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
-
-
-//- =========================================================================
 //- Svelto - Infobar v0.1.2
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -664,6 +637,33 @@ mixin infobar-bottom
 
 
 //- =========================================================================
+//- Svelto - Input v0.1.1
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value === undefined ? "" : options.value;
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- =========================================================================
 //- Svelto - Label v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -705,33 +705,6 @@ mixin label-tag
 
 
 //- =========================================================================
-//- Svelto - Modal v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    id: '', // Modal id
-    title: '' // Title
-    icon: '', // Icon to use
-  }
-
-mixin modal-btn(options)
-  +button(data-modal="modal-" + options.id)&attributes(attributes).modal-trigger
-    if options.title
-      span= options.title
-    if options.icon
-      +icon(options.icon)
-
-mixin modal(id)
-  .modal(id="modal-" + id)&attributes(attributes)
-    block
-  .modal-background
-
-
-//- =========================================================================
 //- Svelto - Multiple v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -764,6 +737,33 @@ mixin multiple-sub-right
     +multiple
       block
   .multiple-sub-spacer
+
+
+//- =========================================================================
+//- Svelto - Modal v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    id: '', // Modal id
+    title: '' // Title
+    icon: '', // Icon to use
+  }
+
+mixin modal-btn(options)
+  +button(data-modal="modal-" + options.id)&attributes(attributes).modal-trigger
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
+
+mixin modal(id)
+  .modal(id="modal-" + id)&attributes(attributes)
+    block
+  .modal-background
 
 
 //- =========================================================================
@@ -1256,7 +1256,7 @@ mixin circle
 
 
 //- =========================================================================
-//- Svelto - Slider v0.1.0
+//- Svelto - Slider v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1270,28 +1270,26 @@ mixin circle
     max: '', // Max value
     step: '' // Step amount
   }
-  
+
 mixin slider(options)
   - options = options || {};
   - options.min = options.min || 0;
   - options.value = options.value || options.min;
   - options.max = options.max || 100;
   - options.step = options.step || 1;
-  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
-  .slider(data-step=step)&attributes(attributes)
+  .slider(data-step=options.step)&attributes(attributes)
     if options.name
-      input(type="number" name=name value=value)
+      input(type="number" name=options.name value=options.value)
     else
-      input(type="number" value=value)
+      input(type="number" value=options.value)
     .slider-min(title="Decrease" data-min=options.min)
-    .slider-max(title="Increase" data-max=options.max)
-    .slider-bar-wrp
-      .slider-bar
-        .slider-unhighlighted
-          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
-      .slider-handler-wrp(style="left:" + percentage + "%;")
+    .slider-bar
+      .slider-unhighlight
+        .slider-highlight
+      .slider-handler-wrp
         .slider-handler
-          .slider-label= value
+          .slider-label= options.value
+    .slider-max(title="Increase" data-max=options.max)
 
 
 //- =========================================================================

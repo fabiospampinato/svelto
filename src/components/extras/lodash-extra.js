@@ -237,6 +237,25 @@
     },
 
     /**
+     * Round `number` so that it becames the closer `step` multiple
+     */
+
+    roundCloser ( number, step ) {
+
+      if ( _.isUndefined ( step ) ) {
+
+        step = 1;
+
+      }
+
+      var left = ( number % step ),
+          halfStep = step / 2;
+
+      return number - left + ( left >= halfStep ? step : 0 );
+
+    },
+
+    /**
      * Returns true
      */
 

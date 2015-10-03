@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Slider v0.1.0
+//- Svelto - Slider v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -14,25 +14,23 @@
     max: '', // Max value
     step: '' // Step amount
   }
-  
+
 mixin slider(options)
   - options = options || {};
   - options.min = options.min || 0;
   - options.value = options.value || options.min;
   - options.max = options.max || 100;
   - options.step = options.step || 1;
-  - var percentage = ( ( options.value - options.min ) / options.step ) * 100 / ( ( options.max - options.min ) / options.step );
-  .slider(data-step=step)&attributes(attributes)
+  .slider(data-step=options.step)&attributes(attributes)
     if options.name
-      input(type="number" name=name value=value)
+      input(type="number" name=options.name value=options.value)
     else
-      input(type="number" value=value)
+      input(type="number" value=options.value)
     .slider-min(title="Decrease" data-min=options.min)
-    .slider-max(title="Increase" data-max=options.max)
-    .slider-bar-wrp
-      .slider-bar
-        .slider-unhighlighted
-          .slider-highlighted(style="right:" + (100 - percentage) + "%;")
-      .slider-handler-wrp(style="left:" + percentage + "%;")
+    .slider-bar
+      .slider-unhighlight
+        .slider-highlight
+      .slider-handler-wrp
         .slider-handler
-          .slider-label= value
+          .slider-label= options.value
+    .slider-max(title="Increase" data-max=options.max)

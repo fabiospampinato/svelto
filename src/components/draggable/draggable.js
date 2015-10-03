@@ -48,7 +48,6 @@
         y: _.true
       },
       callbacks: {
-        beforestart: _.noop, //FIXME: Is it needed?
         start: _.noop,
         move: _.noop,
         end: _.noop
@@ -185,8 +184,6 @@
 
         this.$trigger = $(trigger);
 
-        this._trigger ( 'beforestart' );
-
         isDragging = true;
 
         this.motion = false;
@@ -194,7 +191,7 @@
         this.isProxyed = ( this.options.$proxy && this.$trigger.get ( 0 ) === this.options.$proxy.get ( 0 ) );
         this.proxyXY = false;
 
-        this.initialXY = this.$draggable.translate2d ();
+        this.initialXY = this.$draggable.translate2d ();;
 
         this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable } ) );
 
@@ -224,7 +221,7 @@
     _end: function ( event, data ) {
 
       if ( this.motion === true ) {
-        
+
         $html.removeClass ( 'dragging' );
         this.$draggable.removeClass ( 'dragging' );
 
