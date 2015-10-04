@@ -3361,6 +3361,7 @@
       revertable: false, //INFO: On dragend take it back to the starting position
       axis: false, //INFO: Limit the movements to this axis
       $proxy: false, //INFO: Drag the element also when we are triggering a drag from the `$proxy` element
+      proxyWithoutMotion: true, //INFO: If enabled even if there's no motion the proxied draggable will get positionated to the dragend point event
       constrainer: { //INFO: Constrain the drag inside the $element
         $element: false, //INFO: If we want to keep the draggable inside this $element
         constrainCenter: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
@@ -3455,7 +3456,7 @@
 
         }
 
-        if ( ! suppressClasses ) {
+        if ( !suppressClasses ) {
 
           $html.addClass ( 'dragging' );
           this.$draggable.addClass ( 'dragging' );
@@ -3561,7 +3562,11 @@
 
       } else if ( this.isProxyed ) {
 
-        var modifiedXY = this._centerToPoint ( data.endXY, true );
+        if ( this.options.proxyWithoutMotion ) {
+
+          var modifiedXY = this._centerToPoint ( data.endXY, true );
+
+        }
 
       }
 
@@ -3609,7 +3614,7 @@
 
         var transformStr = this.css ( 'transform' );
 
-        return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., -]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value ); } ) : [1, 0, 0, 1, 0, 0];
+        return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value ); } ) : [1, 0, 0, 1, 0, 0];
 
       }
 
@@ -7924,13 +7929,14 @@ $(function () {
 
 
 /* =========================================================================
- * Svelto - Switch v0.1.0
+ * Svelto - Switch v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
  * @requires ../draggable/draggable.js
+ * @requires ../transform/transform.js
  * ========================================================================= */
 
 ;(function ( $, window, document, undefined ) {
@@ -7948,9 +7954,18 @@ $(function () {
         on: 'secondary',
         off: 'gray'
       },
+      classes: {
+        checked: 'checked'
+      },
+      selectors: {
+        input: 'input',
+        bar: '.switch-bar',
+        handler: '.switch-handler'
+      },
       callbacks: {
-        checked: _.noop,
-        unchecked: _.noop
+        change: _.noop,
+        check: _.noop,
+        uncheck: _.noop
       }
     },
 
@@ -7959,20 +7974,24 @@ $(function () {
     _variables: function () {
 
       this.$switch = this.$element;
-      this.$input = this.$switch.find ( 'input' );
-      this.$bar_wrp = this.$switch.find ( '.switch-bar-wrp' );
-      this.$bar = this.$switch.find ( '.switch-bar' );
-      this.$handler = this.$switch.find ( '.switch-handler' );
-      this.$icon = this.$handler.find ( '.icon' );
+      this.$input = this.$switch.find ( this.options.selectors.input );
+      this.$bar = this.$switch.find ( this.options.selectors.bar );
+      this.$handler = this.$switch.find ( this.options.selectors.handler );
 
-      this.checked = this.$input.prop ( 'checked' );
-      this.dragging = false;
+      this.isChecked = false;
+
+      this.switchWidth = this.$switch.width ();
+      this.handlerWidth = this.$handler.width ();
 
     },
 
     _init: function () {
 
-      this._set_check ( this.checked, true );
+      if ( this.$input.prop ( 'checked' ) ) {
+
+        this.check ();
+
+      }
 
     },
 
@@ -7980,26 +7999,24 @@ $(function () {
 
       /* CHANGE */
 
-      this._on ( true, this.$input, 'change', this._handler_change );
+      this._on ( true, this.$input, 'change', this.__change );
 
       /* KEYS */
 
-      this._on ( 'mouseenter', this._handler_keys_in );
-      this._on ( 'mouseleave', this._handler_keys_out );
-
-      /* CLICK */
-
-      this._on ( this.$bar, 'click', this._handler_click );
+      this._on ( 'mouseenter', this.__keysIn );
+      this._on ( 'mouseleave', this.__keysOut );
 
       /* DRAG */
 
       this.$handler.draggable ({
         axis: 'x',
+        $proxy: this.$switch,
+        proxyWithoutMotion: false,
         constrainer: {
-          $element: this.$bar_wrp
+          $element: this.$switch
         },
         callbacks: {
-          end: this._handler_drag_end.bind ( this )
+          end: this.__dragEnd.bind ( this )
         }
       });
 
@@ -8007,45 +8024,57 @@ $(function () {
 
     /* CHANGE */
 
-    _handler_change: function () {
+    __change: function () {
 
-      var new_checked = this.$input.prop ( 'checked' );
-
-      if ( this.checked !== new_checked ) {
-
-        this.checked = new_checked;
-
-        this._set_check ( this.checked, true );
-
-      }
+      this.toggle ( this.$input.prop ( 'checked' ) );
 
     },
 
     /* KEYS */
 
-    _handler_keys_in: function () {
+    __keysIn: function () {
 
-      this._on ( $document, 'keydown', this._handler_keys_keydown );
-
-    },
-
-    _handler_keys_out: function () {
-
-      this._off ( $document, 'keydown', this._handler_keys_keydown );
+      this._on ( $document, 'keydown', this.__keydown );
 
     },
 
-    _handler_keys_keydown: function ( event ) {
+    __keysOut: function () {
 
-      if ( event.keyCode === $.ui.keyCode.LEFT ) {
+      this._off ( $document, 'keydown', this.__keydown );
 
-        this.uncheck ();
+    },
 
-      } else if ( event.keyCode === $.ui.keyCode.RIGHT ) {
+    __keydown: function ( event ) {
 
-        this.check ();
+      switch ( event.keyCode ) {
 
-      } else if ( event.keyCode === $.ui.keyCode.SPACE ) {
+        case $.ui.keyCode.LEFT:
+          this.uncheck ();
+          break;
+
+        case $.ui.keyCode.RIGHT:
+          this.check ();
+          break;
+
+        case $.ui.keyCode.SPACE:
+          this.toggle ();
+          break;
+
+      }
+
+    },
+
+    /* DRAG */
+
+    __dragEnd: function ( data ) {
+
+      if ( data.motion ) {
+
+        var isChecked = ( this.$handler.translateX () + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+
+        this.toggle ( isChecked, true );
+
+      } else {
 
         this.toggle ();
 
@@ -8053,79 +8082,82 @@ $(function () {
 
     },
 
-    /* CLICK */
+    /* UPDATE */
 
-    _handler_click: function () {
+    _updatePosition: function () {
 
-      if ( this.dragging ) {
-
-        this.dragging = false;
-        return;
-
-      }
-
-      this.toggle ();
+      this.$handler.translateX ( this.isChecked ? this.switchWidth - this.handlerWidth : 0 );
 
     },
 
-    /* DRAG */
+    _updateColors: function () {
 
-    _handler_drag_end: function ( data ) {
+      this.$bar.toggleClass ( this.options.colors.on, this.isChecked );
+      this.$bar.toggleClass ( this.options.colors.off, !this.isChecked );
 
-      if ( data.dragged ) {
+      this.$handler.toggleClass ( this.options.colors.on, this.isChecked );
+      this.$handler.toggleClass ( this.options.colors.off, !this.isChecked );
 
-        this.dragging = true;
+    },
 
-        var checked = ( this.$handler.offset ().left - this.$bar_wrp.offset ().left + ( this.$handler.width () / 2 ) ) >= ( this.$bar_wrp.width () / 2 );
+    _updateInput: function () {
 
-        this.checked = ( checked ) ? true : false;
+      this.$input.prop ( 'checked', this.isChecked ).trigger ( 'change' );
 
-        this._set_check ( this.checked, true );
+    },
+
+    /* API */
+
+    get: function () {
+
+      return this.isChecked;
+
+    },
+
+    toggle: function ( force, reset ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this.isChecked;
+
+      }
+
+      if ( force !== this.isChecked ) {
+
+        var prevChecked = this.isChecked;
+
+        this.isChecked = force;
+
+        this.$switch.toggleClass ( this.options.classes.checked, this.isChecked );
+
+        this._updatePosition ();
+        this._updateColors ();
+        this._updateInput ();
+
+        this._trigger ( 'change', {
+          previous: prevChecked,
+          checked: this.isChecked
+        });
+
+        this._trigger ( this.isChecked ? 'check' : 'uncheck' );
+
+      } else if ( reset ) {
+
+        this._updatePosition ();
 
       }
 
     },
-
-    _set_check: function ( checked, force ) {
-
-      if ( checked !== this.$input.prop ( 'checked' ) || force ) {
-
-        this.$switch.toggleClass ( 'checked', checked );
-
-        this.$handler.css ( 'transform', 'translate3d(' + ( checked ? '1.73333em' : '0' ) + ',0,0)' );
-
-        this.$bar.toggleClass ( this.options.colors.on, checked );
-        this.$handler.toggleClass ( this.options.colors.on, checked );
-
-        this.$bar.toggleClass ( this.options.colors.off, !checked );
-        this.$handler.toggleClass ( this.options.colors.off, !checked );
-
-        this.$input.prop ( 'checked', checked ).trigger ( 'change' );
-
-        this._trigger ( checked ? 'checked' : 'unchecked' );
-
-      }
-
-    },
-
-    /* PUBLIC */
 
     check: function () {
 
-      this._set_check ( true );
+      this.toggle ( true );
 
     },
 
     uncheck: function () {
 
-      this._set_check ( false );
-
-    },
-
-    toggle: function () {
-
-      this.checked = !this.checked;
-      this._set_check ( this.checked );
+      this.toggle ( false );
 
     }
 
@@ -8137,15 +8169,14 @@ $(function () {
 
     $('.switch').each ( function () {
 
-      var $switch = $(this),
-        options = {
-          colors: {
-            on: $switch.data ( 'color-on' ) || 'secondary',
-            off: $switch.data ( 'color-off' ) || 'gray'
-          }
-        };
+      var $switch = $(this);
 
-      $switch.switch ( options );
+      $switch.switch ({
+        colors: {
+          on: $switch.data ( 'color-on' ) || 'secondary',
+          off: $switch.data ( 'color-off' ) || 'gray'
+        }
+      });
 
     });
 

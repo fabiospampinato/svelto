@@ -2959,20 +2959,20 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, table.table, .tabs, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -3001,12 +3001,13 @@ i.disabled.icon,
 .disabled.square-sample,
 .disabled.circle,
 .disabled.slider,
+.disabled.switch,
 table.disabled.table,
 .disabled.tabs,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -10287,6 +10288,8 @@ table.table.selectable > tbody > tr.selected {
 /* SWITCH */
 /* BAR */
 /* HANDLER */
+/* HANDLER ICON */
+/* HANDLER:BEFORE */
 /* OTHERS */
 /* =========================================================================
  * Svelto - Slider v0.2.0
@@ -10319,7 +10322,7 @@ table.table.selectable > tbody > tr.selected {
   /* HIGHLIGHT */
   /* HANDLER WRAPPER */
   /* HANDLER */
-  /* ACTIVE */
+  /* ENABLED */
   /* HOVER / ACTIVE */
 }
 
@@ -10485,9 +10488,9 @@ table.table.selectable > tbody > tr.selected {
   content: '';
   transition-property: opacity, -webkit-transform;
   transition-property: opacity, transform;
-  transition-duration: 0.15s;
   -webkit-transform: scale(0);
           transform: scale(0);
+  transition-duration: 0.15s;
   opacity: 0;
   border-radius: 50%;
   background-color: inherit;
@@ -10538,8 +10541,8 @@ table.table.selectable > tbody > tr.selected {
 .slider:not(.disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler:before,
 .slider:not(.slider-disabled) .slider-bar:active .slider-handler:before,
 .slider:not(.slider-disabled) .slider-bar .slider-handler-wrp.dragging .slider-handler:before {
-  -webkit-transform: scale(1.8);
-          transform: scale(1.8);
+  -webkit-transform: scale(1.618);
+          transform: scale(1.618);
   opacity: 0.25;
 }
 
@@ -11170,61 +11173,66 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
 }
 
 /* =========================================================================
- * Svelto - Switch v0.1.0
+ * Svelto - Switch v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* SWITCH */
 .switch {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
   height: 1.33333em;
-  margin-bottom: 10px;
+  width: 3.06666em;
+  /* INPUT */
+  /* BAR */
+  /* HANDLER */
+  /* ICON ON / OFF */
+  /* ENABLED */
 }
 
-.switch > input {
+.switch input {
   display: none;
 }
 
-.switch > .switch-bar-wrp {
-  display: inline-block;
-}
-
-.switch > .switch-bar-wrp > .switch-bar {
-  position: relative;
+.switch-bar {
   width: 1.73333em;
   height: 0.93333em;
-  margin: 0.2em 0.666665em;
-  transition: background-color 0.15s;
   border-radius: 0.93333em;
+  transition: background-color 0.15s;
 }
 
-.switch > .switch-bar-wrp > .switch-bar > .switch-handler {
+.switch-handler {
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
   position: absolute;
-  top: 50%;
-  margin-top: -0.666665em;
   left: 0;
-  z-index: 0;
+  z-index: 1;
   width: 1.33333em;
   height: 1.33333em;
-  margin-left: -0.666665em;
+  border-radius: 1.33333em;
+  transition-property: background-color, -webkit-transform;
+  transition-property: background-color, transform;
   transition-duration: 0.15s;
-  transition-property: background-color, -webkit-transform, box-shadow;
-  transition-property: background-color, transform, box-shadow;
-  border-radius: 50%;
+  /* DRAGGING */
+  /* ICON */
 }
 
-.switch > .switch-bar-wrp > .switch-bar > .switch-handler:before {
-  background-color: inherit;
-  content: '';
+.switch-handler:before {
   position: absolute;
   top: 0;
   right: 0;
-  left: 0;
   bottom: 0;
-  border-radius: 50%;
+  left: 0;
+  background-color: inherit;
+  content: '';
+  border-radius: 1.33333em;
   z-index: -1;
   opacity: 0;
   -webkit-transform: scale(0);
@@ -11232,44 +11240,47 @@ table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortab
   transition-property: opacity, -webkit-transform, background-color;
   transition-property: opacity, transform, background-color;
   transition-duration: 0.15s;
-  transition-delay: 0.05s;
 }
 
-.switch > .switch-bar-wrp > .switch-bar > .switch-handler.dragging {
-  transition-property: background-color, box-shadow;
+.switch-handler.dragging {
+  transition-property: background-color;
 }
 
-.switch > .switch-bar-wrp > .switch-bar > .switch-handler > .icon {
+.switch-handler .icon {
+  position: absolute;
   font-size: 0.8em;
-  line-height: 1.66667em;
   width: 1.66667em;
   height: 1.66667em;
+  line-height: 1.66667em;
   text-align: center;
   transition-property: opacity, color;
   transition-duration: 0.15s;
   opacity: 0;
 }
 
-.switch > .switch-bar-wrp > .switch-bar > .switch-handler > .icon.off {
-  margin-top: -1.66667em;
-}
-
-.switch:not(.checked) .icon.off, .switch.checked .icon.on {
+.switch:not(.checked) .icon-off,
+.switch.checked .icon-on {
   opacity: 1 !important;
 }
 
-.switch:not(.switch-disabled) > .switch-bar-wrp > .switch-bar {
+.switch:not(.disabled),
+.switch:not(.switch-disabled) {
   cursor: pointer;
+  /* HANDLER */
 }
 
-.switch:not(.switch-disabled) > .switch-bar-wrp > .switch-bar > .switch-handler {
-  cursor: pointer;
+.switch:not(.disabled) .switch-handler,
+.switch:not(.switch-disabled) .switch-handler {
+  cursor: move;
 }
 
-.switch:not(.switch-disabled) > .switch-bar-wrp > .switch-bar > .switch-handler:active:before {
+.switch:not(.disabled) .switch-handler:active:before,
+.switch:not(.disabled) .switch-handler.dragging:before,
+.switch:not(.switch-disabled) .switch-handler:active:before,
+.switch:not(.switch-disabled) .switch-handler.dragging:before {
   opacity: 0.25;
-  -webkit-transform: scale(1.8);
-          transform: scale(1.8);
+  -webkit-transform: scale(1.618);
+          transform: scale(1.618);
 }
 
 /* =========================================================================

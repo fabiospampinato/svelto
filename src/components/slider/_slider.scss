@@ -133,8 +133,8 @@
       z-index: -1;
       content: '';
       transition-property: opacity, transform;
-      transition-duration: $slider-transition-all-duration;
       transform: scale($switch-handler-before-scale-inactive);
+      transition-duration: $slider-transition-all-duration;
       opacity: 0;
       border-radius: $slider-handler-border-radius;
       background-color: inherit;
@@ -152,7 +152,7 @@
     opacity: 0;
   }
 
-  /* ACTIVE */
+  /* ENABLED */
 
   &:not(.disabled),
   &:not(.slider-disabled) {

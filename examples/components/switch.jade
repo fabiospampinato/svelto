@@ -7,9 +7,27 @@ append main
   +divider-block Switch
 
   +container.outlined
-    +switch({ name: "name", value: "Value" })
-    +switch({ name: "name2", value: "Value2", checked: true }).switch-disabled
-    +switch({ name: "name3", value: "Value3", icons: { on: "add" } })
-    +switch({ name: "name4", value: "Value4", icons: { on: "add" }}).switch-disabled
-    +switch({ name: "name5", value: "Value5", checked: true, colors: { on: "green", off: "red" } })
-    +switch({ name: "name6", value: "Value6", colors: { on: "green", off: "red" }, icons: { on: "favorite", off: "favorite_outline" } })
+    +switch({ name: "name1", value: "Value" })
+    +switch({ name: "name2", value: "Value3", icons: { on: "add" } })
+    +switch({ name: "name3", value: "Value5", checked: true, colors: { on: "green", off: "red" } })
+    +switch({ name: "name4", value: "Value6", colors: { on: "green", off: "red" }, icons: { on: "favorite", off: "favorite_outline" } })
+    
+  +divider-block Actions
+
+  +multiple
+    +button("switch_get_all ()").outlined Get all
+    +button("switch_api ( 'check' )").outlined Check all
+    +button("switch_api ( 'uncheck' )").outlined Uncheck all
+    +button("switch_api ( 'toggle' )").outlined Toggle all
+
+append body-end
+  +script.
+    function switch_get_all () {
+      var gets = _.map ( $('.switch'), function ( switchEle ) {
+        return $(switchEle).switch ( 'get' );
+      });
+      $.noty ( gets.join ( ' - ' ) );
+    }
+    function switch_api ( action ) {
+      $('.switch').switch ( action );
+    }  

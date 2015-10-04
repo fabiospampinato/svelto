@@ -1,109 +1,116 @@
 
 /* =========================================================================
- * Svelto - Switch v0.1.0
+ * Svelto - Switch v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* SWITCH */
 
 .switch {
 
+  @extend .widget;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   height: $switch-handler-size;
-  margin-bottom: $gutter;
+  width: $switch-bar-width + $switch-handler-size;
 
-  & > input {
+  /* INPUT */
+
+  input {
     display: none;
   }
 
-  & > .switch-bar-wrp {
+  /* BAR */
 
-    display: inline-block;
+  &-bar {
+    width: $switch-bar-width;
+    height: $switch-bar-height;
+    border-radius: $switch-bar-height;
+    transition: background-color $switch-transition-all-duration;
+  }
 
-    & > .switch-bar {
+  /* HANDLER */
 
-      position: relative;
-      width: $switch-bar-width;
-      height: $switch-bar-height;
-      margin: ( $switch-handler-size - $switch-bar-height ) / 2 $switch-handler-half-size;
-      transition: background-color $switch-transition-all-duration;
-      border-radius: $switch-bar-height;
+  &-handler {
 
-      & > .switch-handler {
+    @include z-depth ( $switch-handler-z-depth );
+    position: absolute;
+    left: 0;
+    z-index: 1;
+    width: $switch-handler-size;
+    height: $switch-handler-size;
+    border-radius: $switch-handler-size;
+    transition-property: background-color, transform;
+    transition-duration: $switch-transition-all-duration;
 
-        @include z-depth ( $switch-handler-z-depth );
-        @include center-absolute ( false, $switch-handler-size );
-        left: 0;
-        z-index: 0;
-        width: $switch-handler-size;
-        height: $switch-handler-size;
-        margin-left: - $switch-handler-half-size;
-        transition-duration: $switch-transition-all-duration;
-        transition-property: background-color, transform, box-shadow;
-        border-radius: 50%;
+    &:before {
+      @include fill-absolute ();
+      background-color: inherit;
+      content: '';
+      border-radius: $switch-handler-size;
+      z-index: -1;
+      opacity: 0;
+      transform: scale($switch-handler-before-scale-inactive);
+      transition-property: opacity, transform, background-color;
+      transition-duration: $switch-transition-all-duration;
+    }
 
-        &:before {
-          background-color: inherit;
-          content: '';
-          position: absolute;
-          top: 0;
-          right: 0;
-          left: 0;
-          bottom: 0;
-          border-radius: 50%;
-          z-index: -1;
-          opacity: 0;
-          transform: scale($switch-handler-before-scale-inactive);
-          transition-property: opacity, transform, background-color;
-          transition-duration: $switch-transition-all-duration;
-          transition-delay: 0.05s; //INFO: This avoids that it's showed also when clicking
-        }
+    /* DRAGGING */
 
-        &.dragging {
-          transition-property: background-color, box-shadow;
-        }
+    &.dragging {
+      transition-property: background-color;
+    }
 
-        & > .icon {
+    /* ICON */
 
-          font-size: $switch-handler-icon-font-size;
-          line-height: $switch-handler-icon-size;
-          width: $switch-handler-icon-size;
-          height: $switch-handler-icon-size;
-          text-align: center;
-          transition-property: opacity, color;
-          transition-duration: $switch-transition-all-duration;
-          opacity: 0;
-
-          &.off {
-            margin-top: - $switch-handler-icon-size;
-          }
-
-        }
-
-      }
-
+    .icon {
+      position: absolute;
+      font-size: $switch-handler-icon-font-size;
+      width: $switch-handler-icon-size;
+      height: $switch-handler-icon-size;
+      line-height: $switch-handler-icon-size;
+      text-align: center;
+      transition-property: opacity, color;
+      transition-duration: $switch-transition-all-duration;
+      opacity: 0;
     }
 
   }
 
-  &:not(.checked) .icon.off, &.checked .icon.on {
+  /* ICON ON / OFF */
+
+  &:not(.checked) .icon-off,
+  &.checked .icon-on {
     opacity: 1 !important;
   }
 
-  &:not(.switch-disabled) > .switch-bar-wrp > .switch-bar {
+  /* ENABLED */
+
+  &:not(.disabled),
+  &:not(.switch-disabled) {
 
     cursor: pointer;
 
-    & > .switch-handler {
+    /* HANDLER */
 
-      cursor: pointer;
+    .switch-handler {
 
-      &:active:before {
-        opacity: $switch-handler-before-active-opacity;
-        transform: scale($switch-handler-before-scale-active);
+      cursor: move;
+
+      &:active,
+      &.dragging {
+
+        &:before {
+          opacity: $switch-handler-before-active-opacity;
+          transform: scale($switch-handler-before-scale-active);
+        }
+
       }
 
     }

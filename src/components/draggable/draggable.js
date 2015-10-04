@@ -35,6 +35,7 @@
       revertable: false, //INFO: On dragend take it back to the starting position
       axis: false, //INFO: Limit the movements to this axis
       $proxy: false, //INFO: Drag the element also when we are triggering a drag from the `$proxy` element
+      proxyWithoutMotion: true, //INFO: If enabled even if there's no motion the proxied draggable will get positionated to the dragend point event
       constrainer: { //INFO: Constrain the drag inside the $element
         $element: false, //INFO: If we want to keep the draggable inside this $element
         constrainCenter: false, //INFO: Set the constrain type, it will constrain the whole shape, or the center
@@ -129,7 +130,7 @@
 
         }
 
-        if ( ! suppressClasses ) {
+        if ( !suppressClasses ) {
 
           $html.addClass ( 'dragging' );
           this.$draggable.addClass ( 'dragging' );
@@ -235,7 +236,11 @@
 
       } else if ( this.isProxyed ) {
 
-        var modifiedXY = this._centerToPoint ( data.endXY, true );
+        if ( this.options.proxyWithoutMotion ) {
+
+          var modifiedXY = this._centerToPoint ( data.endXY, true );
+
+        }
 
       }
 
