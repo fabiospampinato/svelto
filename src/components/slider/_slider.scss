@@ -8,6 +8,7 @@
  * @requires _settings.scss
  * @requires ../switch/_settings.scss
  * @requires ../widget/_widget.scss
+ * @requires ../icons/_icons.scss
  * ========================================================================= */
 
 /* SLIDER */
@@ -165,7 +166,8 @@
       cursor: pointer;
 
       &:hover:after {
-        @extend %icon;
+        @extend i.icon;
+        margin-bottom: 0;
       }
 
     }
@@ -173,13 +175,13 @@
     /* MIN */
 
     .slider-min:hover:after {
-      @extend .icon-content-remove:before;
+      content: 'remove';
     }
 
     /* MAX */
 
     .slider-max:hover:after {
-      @extend .icon-content-add:before;
+      content: 'add';
     }
 
     /* BAR */

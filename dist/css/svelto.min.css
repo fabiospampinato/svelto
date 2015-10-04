@@ -2959,20 +2959,29 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .slider:not(.disabled) .slider-min:hover:after,
+.slider:not(.disabled) .slider-max:hover:after,
+.slider:not(.slider-disabled) .slider-min:hover:after,
+.slider:not(.slider-disabled) .slider-max:hover:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
+.slider:not(.disabled) .slider-max:hover:after > :last-child,
+.slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
+.slider:not(.slider-disabled) .slider-max:hover:after > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
+.slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
+.slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
+.slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2991,7 +3000,10 @@ label.disabled,
 .disabled.embedded,
 .disabled.flippable,
 i.disabled.icon,
-.disabled.image-wrp,
+.slider:not(.disabled) .disabled.slider-min:hover:after,
+.slider:not(.disabled) .disabled.slider-max:hover:after,
+.slider:not(.slider-disabled) .disabled.slider-min:hover:after,
+.slider:not(.slider-disabled) .disabled.slider-max:hover:after, .disabled.image-wrp,
 .disabled.input-wrp,
 .disabled.textarea-wrp, .disabled.parallax,
 .disabled.placeholder,
@@ -3007,7 +3019,10 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
+.slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
+.slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
+.slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3582,7 +3597,13 @@ label {
   margin-left: 0.75em;
 }
 
-.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon {
+.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
+.slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
+.slider:not(.slider-disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.slider-disabled) .button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.slider-disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.slider-disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after {
   margin-left: 0.5em;
 }
 
@@ -3590,7 +3611,13 @@ label {
   margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon {
+.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
+.slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
+.slider:not(.slider-disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.slider-disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.slider:not(.slider-disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.slider-disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after {
   margin-left: 0.3333333333em;
 }
 
@@ -7253,7 +7280,10 @@ header > *:last-child {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* ICON */
-i.icon {
+i.icon, .slider:not(.disabled) .slider-min:hover:after,
+.slider:not(.disabled) .slider-max:hover:after,
+.slider:not(.slider-disabled) .slider-min:hover:after,
+.slider:not(.slider-disabled) .slider-max:hover:after {
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
@@ -7279,47 +7309,80 @@ i.icon {
   /* SCALED SIZES */
 }
 
-i.icon.xxxxsmall {
+i.icon.xxxxsmall, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
+.slider:not(.disabled) .xxxxsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxxsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after {
   font-size: 0.375em !important;
 }
 
-i.icon.xxxsmall {
+i.icon.xxxsmall, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
+.slider:not(.disabled) .xxxsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after {
   font-size: 0.5625em !important;
 }
 
-i.icon.xxsmall {
+i.icon.xxsmall, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
+.slider:not(.disabled) .xxsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxsmall.slider-max:hover:after {
   font-size: 0.75em !important;
 }
 
-i.icon.xsmall {
+i.icon.xsmall, .slider:not(.disabled) .xsmall.slider-min:hover:after,
+.slider:not(.disabled) .xsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xsmall.slider-max:hover:after {
   font-size: 1.125em !important;
 }
 
-i.icon.small {
+i.icon.small, .slider:not(.disabled) .small.slider-min:hover:after,
+.slider:not(.disabled) .small.slider-max:hover:after,
+.slider:not(.slider-disabled) .small.slider-min:hover:after,
+.slider:not(.slider-disabled) .small.slider-max:hover:after {
   font-size: 1.3125em !important;
 }
 
-i.icon.medium {
+i.icon.medium, .slider:not(.disabled) .medium.slider-min:hover:after,
+.slider:not(.disabled) .medium.slider-max:hover:after,
+.slider:not(.slider-disabled) .medium.slider-min:hover:after,
+.slider:not(.slider-disabled) .medium.slider-max:hover:after {
   font-size: 1.5em !important;
 }
 
-i.icon.large {
+i.icon.large, .slider:not(.disabled) .large.slider-min:hover:after,
+.slider:not(.disabled) .large.slider-max:hover:after,
+.slider:not(.slider-disabled) .large.slider-min:hover:after,
+.slider:not(.slider-disabled) .large.slider-max:hover:after {
   font-size: 1.875em !important;
 }
 
-i.icon.xlarge {
+i.icon.xlarge, .slider:not(.disabled) .xlarge.slider-min:hover:after,
+.slider:not(.disabled) .xlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xlarge.slider-max:hover:after {
   font-size: 2.25em !important;
 }
 
-i.icon.xxlarge {
+i.icon.xxlarge, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
+.slider:not(.disabled) .xxlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxlarge.slider-max:hover:after {
   font-size: 2.625em !important;
 }
 
-i.icon.xxxlarge {
+i.icon.xxxlarge, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
+.slider:not(.disabled) .xxxlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after {
   font-size: 3em !important;
 }
 
-i.icon.xxxxlarge {
+i.icon.xxxxlarge, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
+.slider:not(.disabled) .xxxxlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxxlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after {
   font-size: 3.75em !important;
 }
 
@@ -10300,6 +10363,7 @@ table.table.selectable > tbody > tr.selected {
  * @requires _settings.scss
  * @requires ../switch/_settings.scss
  * @requires ../widget/_widget.scss
+ * @requires ../icons/_icons.scss
  * ========================================================================= */
 /* SLIDER */
 .slider {
@@ -10522,6 +10586,23 @@ table.table.selectable > tbody > tr.selected {
 .slider:not(.slider-disabled) .slider-min,
 .slider:not(.slider-disabled) .slider-max {
   cursor: pointer;
+}
+
+.slider:not(.disabled) .slider-min:hover:after,
+.slider:not(.disabled) .slider-max:hover:after,
+.slider:not(.slider-disabled) .slider-min:hover:after,
+.slider:not(.slider-disabled) .slider-max:hover:after {
+  margin-bottom: 0;
+}
+
+.slider:not(.disabled) .slider-min:hover:after,
+.slider:not(.slider-disabled) .slider-min:hover:after {
+  content: 'remove';
+}
+
+.slider:not(.disabled) .slider-max:hover:after,
+.slider:not(.slider-disabled) .slider-max:hover:after {
+  content: 'add';
 }
 
 .slider:not(.disabled) .slider-bar,
