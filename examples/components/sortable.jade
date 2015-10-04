@@ -7,17 +7,17 @@ append main
   +divider-block Default
 
   +container.outlined
-    table.table.bordered
+    table.table.sortable.bordered
       thead
         tr
-          th(data-sort="int").xs-1.text-center Int
+          th(data-sort="int").xs-1.text-center.sort-desc Int
           th(data-sort="string") String
           th(data-sort="string") Date
           th.text-center Options
       tbody
         +table-row-empty
         - var nr = 1;
-        while ( nr <= 10 )
+        while ( nr <= 1000 )
           tr
             td.text-center= nr++
             td Foo
@@ -35,33 +35,111 @@ append main
                 +button("#").outlined.small Btn 1
                 +button("#").outlined.small Btn 2
 
-  +divider-block Initial sort
+  //- Actions toolbox taken from `tableHelper`
 
-  +container.outlined
-    table.table.bordered
-      thead
-        tr
-          th(data-sort="int").xs-1.text-center.desc Int
-          th(data-sort="string") String
-          th(data-sort="string") Date
-          th.text-center Options
-      tbody
-        +table-row-empty
-        - var nr = 1;
-        while ( nr <= 10 )
-          tr
-            td.text-center= nr++
-            td Foo
-            td 16/11/1993
-            td.text-center
-              +multiple.centered
-                +button("#").outlined.small Btn 1
-                +button("#").outlined.small Btn 2
-          tr
-            td.text-center= nr++
-            td Bar
-            td 16 Nov 1993
-            td.text-center
-              +multiple.centered
-                +button("#").outlined.small Btn 1
-                +button("#").outlined.small Btn 2
+  +divider-block Actions
+
+  +multiple
+    +button("table_init()").outlined Init
+
+    +multiple.joined
+      +input({ name: 'id_add', label: 'ID...' }).white.outlined.no-floating
+      +input({ name: 'first_add', label: 'First...' }).white.outlined.no-floating
+      +input({ name: 'second_add', label: 'Second...' }).white.outlined.no-floating
+      +input({ name: 'third_add', label: 'Third...' }).white.outlined.no-floating
+      +input({ name: 'fourth_add', label: 'Fourth...' }).white.outlined.no-floating
+      +button("table_row_add ()").primary.outlined Add
+
+    +multiple.joined
+      +input({ name: 'id_update', label: 'ID...' }).white.outlined.no-floating
+      +input({ name: 'first_update', label: 'First...' }).white.outlined.no-floating
+      +input({ name: 'second_update', label: 'Second...' }).white.outlined.no-floating
+      +input({ name: 'third_update', label: 'Third...' }).white.outlined.no-floating
+      +input({ name: 'fourth_update', label: 'Fourth...' }).white.outlined.no-floating
+      +button("table_row_update ()").secondary.outlined Update
+
+    +multiple.joined
+      +input({ name: 'id_remove', label: 'ID...' }).white.outlined.no-floating
+      +button("table_row_remove ()").red.outlined Remove
+
+    +button("table_clear ()").black.outlined Clear
+
+append body-end
+  +script.
+    var tableHelper;
+
+    function table_init () {
+
+      tableHelper = $('table').tableHelper ( 'instance' );
+
+    }
+
+    function table_row_add () {
+
+      if ( tableHelper ) {
+
+        var id = $('input[name="id_add"]').val (),
+            first = $('input[name="first_add"]').val (),
+            second = $('input[name="second_add"]').val (),
+            third = $('input[name="third_add"]').val (),
+            fourth = $('input[name="fourth_add"]').val ();
+
+        tableHelper.add ( id, first, second, third, fourth );
+
+      } else {
+
+        $.noty ( 'You should init the tableHelper before' );
+
+      }
+
+    }
+
+    function table_row_update () {
+
+      if ( tableHelper ) {
+
+        var id = $('input[name="id_update"]').val (),
+            first = $('input[name="first_update"]').val (),
+            second = $('input[name="second_update"]').val (),
+            third = $('input[name="third_update"]').val (),
+            fourth = $('input[name="fourth_update"]').val ();
+
+        tableHelper.update ( id, first, second, third, fourth );
+
+      } else {
+
+        $.noty ( 'You should init the tableHelper before' );
+
+      }
+
+    }
+
+    function table_row_remove () {
+
+      if ( tableHelper ) {
+
+        var id = $('input[name="id_remove"]').val ();
+
+        tableHelper.remove ( id );
+
+      } else {
+
+        $.noty ( 'You should init the tableHelper before' );
+
+      }
+
+    }
+
+    function table_clear () {
+
+      if ( tableHelper ) {
+
+        tableHelper.clear ();
+
+      } else {
+
+        $.noty ( 'You should init the tableHelper before' );
+
+      }
+
+    }

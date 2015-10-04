@@ -2962,7 +2962,8 @@ th {
 .card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .chat-msg .chat-msg-sender-name, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
-.slider:not(.slider-disabled) .slider-max:hover:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
+.slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
+table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
 }
@@ -2972,7 +2973,8 @@ th {
 .card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .chat-msg .chat-msg-sender-name > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
-.slider:not(.slider-disabled) .slider-max:hover:after > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
+table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
@@ -2981,7 +2983,8 @@ th {
 .card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .chat-msg .chat-msg-sender-name > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
-.slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
+table.table.sortable th[data-sort]:after > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -3003,7 +3006,8 @@ i.disabled.icon,
 .slider:not(.disabled) .disabled.slider-min:hover:after,
 .slider:not(.disabled) .disabled.slider-max:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-min:hover:after,
-.slider:not(.slider-disabled) .disabled.slider-max:hover:after, .disabled.image-wrp,
+.slider:not(.slider-disabled) .disabled.slider-max:hover:after, table.table.sortable th.disabled[data-sort]:before,
+table.table.sortable th.disabled[data-sort]:after, .disabled.image-wrp,
 .disabled.input-wrp,
 .disabled.textarea-wrp, .disabled.parallax,
 .disabled.placeholder,
@@ -3022,7 +3026,8 @@ blockquote.disabled,
 [class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, .chat-msg [class*="-disabled"].chat-msg-sender-name, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
-.slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+.slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
+table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3603,7 +3608,9 @@ label {
 .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
 .slider:not(.slider-disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.slider-disabled) .button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
-.slider:not(.slider-disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.slider-disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after {
+.slider:not(.slider-disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.slider-disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
+table.table.sortable .button > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
+table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort]:after, table.table.sortable .button > :not(.label):not(.button):not(.sub) + th[data-sort]:after {
   margin-left: 0.5em;
 }
 
@@ -3617,7 +3624,9 @@ label {
 .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
 .slider:not(.slider-disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.slider-disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
-.slider:not(.slider-disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.slider-disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after {
+.slider:not(.slider-disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.slider-disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
+table.table.sortable .compact.button > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
+table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[data-sort]:after, table.table.sortable .compact.button > :not(.label):not(.button):not(.sub) + th[data-sort]:after {
   margin-left: 0.3333333333em;
 }
 
@@ -7283,7 +7292,8 @@ header > *:last-child {
 i.icon, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
-.slider:not(.slider-disabled) .slider-max:hover:after {
+.slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
+table.table.sortable th[data-sort]:after {
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
@@ -7312,77 +7322,88 @@ i.icon, .slider:not(.disabled) .slider-min:hover:after,
 i.icon.xxxxsmall, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxxsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after {
+.slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after, table.table.sortable th.xxxxsmall[data-sort]:before,
+table.table.sortable th.xxxxsmall[data-sort]:after {
   font-size: 0.375em !important;
 }
 
 i.icon.xxxsmall, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after {
+.slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after, table.table.sortable th.xxxsmall[data-sort]:before,
+table.table.sortable th.xxxsmall[data-sort]:after {
   font-size: 0.5625em !important;
 }
 
 i.icon.xxsmall, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxsmall.slider-max:hover:after {
+.slider:not(.slider-disabled) .xxsmall.slider-max:hover:after, table.table.sortable th.xxsmall[data-sort]:before,
+table.table.sortable th.xxsmall[data-sort]:after {
   font-size: 0.75em !important;
 }
 
 i.icon.xsmall, .slider:not(.disabled) .xsmall.slider-min:hover:after,
 .slider:not(.disabled) .xsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xsmall.slider-max:hover:after {
+.slider:not(.slider-disabled) .xsmall.slider-max:hover:after, table.table.sortable th.xsmall[data-sort]:before,
+table.table.sortable th.xsmall[data-sort]:after {
   font-size: 1.125em !important;
 }
 
 i.icon.small, .slider:not(.disabled) .small.slider-min:hover:after,
 .slider:not(.disabled) .small.slider-max:hover:after,
 .slider:not(.slider-disabled) .small.slider-min:hover:after,
-.slider:not(.slider-disabled) .small.slider-max:hover:after {
+.slider:not(.slider-disabled) .small.slider-max:hover:after, table.table.sortable th.small[data-sort]:before,
+table.table.sortable th.small[data-sort]:after {
   font-size: 1.3125em !important;
 }
 
 i.icon.medium, .slider:not(.disabled) .medium.slider-min:hover:after,
 .slider:not(.disabled) .medium.slider-max:hover:after,
 .slider:not(.slider-disabled) .medium.slider-min:hover:after,
-.slider:not(.slider-disabled) .medium.slider-max:hover:after {
+.slider:not(.slider-disabled) .medium.slider-max:hover:after, table.table.sortable th.medium[data-sort]:before,
+table.table.sortable th.medium[data-sort]:after {
   font-size: 1.5em !important;
 }
 
 i.icon.large, .slider:not(.disabled) .large.slider-min:hover:after,
 .slider:not(.disabled) .large.slider-max:hover:after,
 .slider:not(.slider-disabled) .large.slider-min:hover:after,
-.slider:not(.slider-disabled) .large.slider-max:hover:after {
+.slider:not(.slider-disabled) .large.slider-max:hover:after, table.table.sortable th.large[data-sort]:before,
+table.table.sortable th.large[data-sort]:after {
   font-size: 1.875em !important;
 }
 
 i.icon.xlarge, .slider:not(.disabled) .xlarge.slider-min:hover:after,
 .slider:not(.disabled) .xlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xlarge.slider-max:hover:after {
+.slider:not(.slider-disabled) .xlarge.slider-max:hover:after, table.table.sortable th.xlarge[data-sort]:before,
+table.table.sortable th.xlarge[data-sort]:after {
   font-size: 2.25em !important;
 }
 
 i.icon.xxlarge, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxlarge.slider-max:hover:after {
+.slider:not(.slider-disabled) .xxlarge.slider-max:hover:after, table.table.sortable th.xxlarge[data-sort]:before,
+table.table.sortable th.xxlarge[data-sort]:after {
   font-size: 2.625em !important;
 }
 
 i.icon.xxxlarge, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after {
+.slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after, table.table.sortable th.xxxlarge[data-sort]:before,
+table.table.sortable th.xxxlarge[data-sort]:after {
   font-size: 3em !important;
 }
 
 i.icon.xxxxlarge, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxxlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after {
+.slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after, table.table.sortable th.xxxxlarge[data-sort]:before,
+table.table.sortable th.xxxxlarge[data-sort]:after {
   font-size: 3.75em !important;
 }
 
@@ -10647,52 +10668,80 @@ table.table.selectable > tbody > tr.selected {
 }
 
 /* =========================================================================
- * Svelto - Sortable (Settings) v0.1.0
+ * Svelto - Sortable (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../icons/_settings.scss
  * ========================================================================= */
-/* SORTABLE */
+/* SORTABLE TABLE HEADER */
+/* SORTABLE TABLE HEADER ICON */
 /* =========================================================================
- * Svelto - Sortable v0.1.0
+ * Svelto - Sortable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-/* SORTABLE */
-table.table.sortable > thead > tr > th[data-sort] {
-  position: relative;
-  padding-right: 1.5em;
-  padding-left: 1.5em;
-  cursor: pointer;
+/* SORTABLE TABLE */
+table.table.sortable {
+  /* HEADER */
 }
 
-table.table.sortable > thead > tr > th[data-sort]:before, table.table.sortable > thead > tr > th[data-sort]:after {
-  font-size: 0.75em;
-  line-height: 0.75em;
+table.table.sortable th[data-sort] {
+  position: relative;
+  cursor: pointer;
+  padding-left: 1.75em;
+  padding-right: 1.75em;
+  /* HOVER */
+  /* ACTIVE */
+  /* BEFORE / AFTER */
+  /* BEFORE */
+  /* AFTER */
+  /* INACTIVE OPACITY */
+  /* ACTIVE OPACITY */
+}
+
+table.table.sortable th[data-sort]:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+table.table.sortable th[data-sort]:active {
+  background-color: rgba(0, 0, 0, 0.025);
+}
+
+table.table.sortable th[data-sort]:before,
+table.table.sortable th[data-sort]:after {
   position: absolute;
-  right: 0.5em;
-  text-align: center;
+  right: 0.15em;
+  top: 0;
+  bottom: 0;
+  margin: auto;
   opacity: 0;
 }
 
-table.table.sortable > thead > tr > th[data-sort]:before {
-  top: 1.1em;
+table.table.sortable th[data-sort]:before {
+  content: 'arrow_drop_down';
+  top: 0.35em;
 }
 
-table.table.sortable > thead > tr > th[data-sort]:after {
-  bottom: 1.1em;
+table.table.sortable th[data-sort]:after {
+  content: 'arrow_drop_up';
+  bottom: 0.35em;
 }
 
-table.table.sortable > thead > tr > th[data-sort]:hover:before, table.table.sortable > thead > tr > th[data-sort]:hover:after, table.table.sortable > thead > tr > th[data-sort].desc:before, table.table.sortable > thead > tr > th[data-sort].asc:after {
+table.table.sortable th[data-sort]:hover:before,
+table.table.sortable th[data-sort]:hover:after,
+table.table.sortable th[data-sort].sort-desc:before,
+table.table.sortable th[data-sort].sort-asc:after {
   opacity: 0.35;
 }
 
-table.table.sortable > thead > tr > th[data-sort].desc:after, table.table.sortable > thead > tr > th[data-sort].asc:before {
+table.table.sortable th[data-sort].sort-desc:after,
+table.table.sortable th[data-sort].sort-asc:before {
   opacity: 1;
 }
 
