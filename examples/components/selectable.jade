@@ -6,7 +6,7 @@ append main
   +divider-block Selectable
 
   +container.outlined
-    table.table.bordered
+    table.table.selectable.bordered
       thead
         tr
           th.xs-1.text-center Int
@@ -43,6 +43,10 @@ append main
 append body-end
   script.
     $('.other-elements').selectable ({
-      selector: '.placeholder',
-      selected_class: 'green'
+      selectors: {
+        element: '.placeholder'
+      },
+      classes: {
+        selected: 'green'
+      }
     });

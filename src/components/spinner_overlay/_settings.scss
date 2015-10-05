@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner (Settings) v0.2.0
+ * Svelto - Spinner (Overlay) (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,20 +8,19 @@
  * @requires ../core/_core.scss
  * ========================================================================= */
 
-/* SPINNER */
+/* SPINNER OVERLAY */
 
-$spinner-size: 3.25em !default;
+//TODO: Move the overlay to another component
 
-$spinner-radius: 1.25em !default;
+$spinner-overlay-color: 'inherit' !default;
+$spinner-overlay-color-basic: true !default;
 
-/* STROKE */
+$spinner-overlay-z-depth: 5 !default;
 
-$spinner-stroke-width: 0.1875em !default;
+$spinner-overlay-size: 62px !default;
 
-$spinner-stroke-color: $color-blue !default;
+$spinner-overlay-spinner-size: 36px !default;
 
-/* ANIMATION */
+$spinner-overlay-children-opacity: 0.5 !default;
 
-$spinner-animation-rotate-duration: 2s !default;
-
-$spinner-stroke-animation-dash-duration: 1.5s !default;
+$spinner-overlay-transition-all-duration: $transition-duration-fast !default;

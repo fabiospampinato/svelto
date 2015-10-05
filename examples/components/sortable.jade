@@ -2,6 +2,7 @@
 extends ../layout.jade
 
 //- Sortable
+//- TODO: Add toolbox of utilites for triggering a sort
 
 append main
   +divider-block Default
@@ -17,7 +18,7 @@ append main
       tbody
         +table-row-empty
         - var nr = 1;
-        while ( nr <= 1000 )
+        while ( nr <= 10 )
           tr
             td.text-center= nr++
             td Foo

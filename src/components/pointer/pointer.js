@@ -9,6 +9,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
+//TODO: Abstract more events, like mousedown, mouseup, mouseleave (See the proposed draft and mimic it)
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
 
 ;(function ( $, _, window, document, undefined ) {

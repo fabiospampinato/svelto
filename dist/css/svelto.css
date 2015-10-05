@@ -10216,7 +10216,7 @@ a.ripple > .ripple-circle {
 }
 
 /* =========================================================================
- * Svelto - Selectable (Settings) v0.1.0
+ * Svelto - Selectable (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10225,19 +10225,28 @@ a.ripple > .ripple-circle {
  * ========================================================================= */
 /* SELECTABLE */
 /* =========================================================================
- * Svelto - Selectable v0.1.0
+ * Svelto - Selectable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-/* SELECTABLE */
-table.table.selectable > tbody > tr:not(.empty) {
+/* SELECTABLE TABLE */
+table.table.selectable {
+  /* ROW */
+}
+
+table.table.selectable tr {
+  /* SELECTABLE */
+  /* SELECTED */
+}
+
+table.table.selectable tr:not(.empty) {
   cursor: pointer;
 }
 
-table.table.selectable > tbody > tr.selected {
+table.table.selectable tr.selected {
   background-color: #d9e9fb !important;
 }
 
@@ -10746,338 +10755,28 @@ table.table.sortable th[data-sort].sort-asc:before {
 }
 
 /* =========================================================================
- * Svelto - Spinner (Settings) v0.2.0
+ * Svelto - Spinner (Multicolor) (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
  * ========================================================================= */
-/* SPINNER */
-/* SPINNER OVERLAY */
+/* SPINNER MULTICOLOR */
 /* =========================================================================
- * Svelto - Spinner v0.1.0
+ * Svelto - Spinner (Multicolor) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-/* SPINNER OVERLAY */
-.spinner-overlay-activable {
-  position: relative;
-}
-
-.spinner-overlay-activable > *:not(.spinner-overlay) {
-  transition: opacity 0.15s;
-}
-
-.spinner-overlay-activable.spinner-overlay-active > .spinner-overlay {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  opacity: 1;
-}
-
-.spinner-overlay-activable.spinner-overlay-active > *:not(.spinner-overlay) {
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.spinner-overlay, .spinner-overlay:before, .spinner-overlay > .spinner-wrp {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  z-index: 1;
-}
-
-.spinner-overlay {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  visibility: hidden;
-  transition-duration: 0.15s;
-  transition-property: opacity, transfrom;
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  pointer-events: none;
-  opacity: 0;
-}
-
-.spinner-overlay:before {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  visibility: visible;
-  width: 62px;
-  height: 62px;
-  content: '';
-  border-radius: 50%;
-}
-
-.spinner-overlay > .spinner-wrp {
-  visibility: visible;
-  width: 36px;
-  height: 36px;
-}
-
-/* SPINNER */
-.spinner-wrp {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  width: 2em;
-  height: 2em;
-  margin-bottom: 10px;
-  -webkit-animation: spinner-wrp-rotate 1568.2352941ms linear infinite;
-          animation: spinner-wrp-rotate 1568.2352941ms linear infinite;
-  background-color: transparent !important;
-}
-
-.spinner-wrp > .spinner {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  border-color: #2196f3;
-  background-color: transparent !important;
-  /* COLORS */
-}
-
-.spinner-wrp > .spinner > .circle-wrp {
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
-  width: 50%;
-  height: 100%;
-  border-color: inherit;
-}
-
-.spinner-wrp > .spinner > .circle-wrp > .circle {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 200%;
-  height: 100%;
-  border-width: 3px;
-  border-style: solid;
-  border-color: inherit;
-  border-bottom-color: transparent !important;
-  border-radius: 50%;
-  background-color: transparent;
-}
-
-.spinner-wrp > .spinner > .circle-wrp.left > .circle {
-  left: 0;
-  -webkit-transform: rotate(129deg);
-          transform: rotate(129deg);
-  -webkit-animation: left-circle-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: left-circle-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  border-right-color: transparent !important;
-}
-
-.spinner-wrp > .spinner > .circle-wrp.right > .circle {
-  left: -100%;
-  -webkit-transform: rotate(-129deg);
-          transform: rotate(-129deg);
-  -webkit-animation: right-circle-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: right-circle-spin 1333ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-  border-left-color: transparent !important;
-}
-
-.spinner-wrp > .spinner.primary {
-  border-color: #1565c0 !important;
-}
-
-.spinner-wrp > .spinner.secondary {
-  border-color: #ef6c00 !important;
-}
-
-.spinner-wrp > .spinner.tertiary {
-  border-color: #6a1b9a !important;
-}
-
-.spinner-wrp > .spinner.quaternary {
-  border-color: #2e7d32 !important;
-}
-
-.spinner-wrp > .spinner.white {
-  border-color: #ffffff !important;
-}
-
-.spinner-wrp > .spinner.gray {
-  border-color: #e0e0e0 !important;
-}
-
-.spinner-wrp > .spinner.black {
-  border-color: #212121 !important;
-}
-
-.spinner-wrp > .spinner.yellow {
-  border-color: #fabf40 !important;
-}
-
-.spinner-wrp > .spinner.olive {
-  border-color: #cddc39 !important;
-}
-
-.spinner-wrp > .spinner.green {
-  border-color: #4caf50 !important;
-}
-
-.spinner-wrp > .spinner.blue {
-  border-color: #2196f3 !important;
-}
-
-.spinner-wrp > .spinner.violet {
-  border-color: #673ab7 !important;
-}
-
-.spinner-wrp > .spinner.orange {
-  border-color: #ff9800 !important;
-}
-
-.spinner-wrp > .spinner.purple {
-  border-color: #9c27b0 !important;
-}
-
-.spinner-wrp > .spinner.red {
-  border-color: #f44336 !important;
-}
-
-.spinner-wrp > .spinner.pink {
-  border-color: #e91e63 !important;
-}
-
-.spinner-wrp > .spinner.teal {
-  border-color: #009688 !important;
-}
-
-.spinner-wrp > .spinner.brown {
-  border-color: #795548 !important;
-}
-
-.spinner-wrp > .spinner.transparent {
-  border-color: transparent !important;
-}
-
-.spinner-wrp > .spinner.inherit {
-  border-color: inherit !important;
-}
-
-.spinner-wrp > .spinner.base {
-  border-color: #eceff1 !important;
-}
-
-.spinner-wrp.multiple > .spinner:nth-child(1) {
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, first-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, first-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-wrp.multiple > .spinner:nth-child(2) {
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, second-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, second-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-wrp.multiple > .spinner:nth-child(3) {
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, third-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, third-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-}
-
-.spinner-wrp.multiple > .spinner:nth-child(4) {
-  -webkit-animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, fourth-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
-          animation: fill-unfill-rotate 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both, fourth-fade-in-out 5332ms cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+/* SPINNER MULTICOLOR */
+.spinner.multicolor {
+  /* CIRCLE */
 }
 
 /* KEYFRAMES */
-@-webkit-keyframes spinner-wrp-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-@keyframes spinner-wrp-rotate {
-  100% {
-    -webkit-transform: rotate(360deg);
-            transform: rotate(360deg);
-  }
-}
-
-@-webkit-keyframes fill-unfill-rotate {
-  12.5% {
-    -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-  }
-  25% {
-    -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-  }
-  37.5% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg);
-  }
-  50% {
-    -webkit-transform: rotate(540deg);
-            transform: rotate(540deg);
-  }
-  62.5% {
-    -webkit-transform: rotate(675deg);
-            transform: rotate(675deg);
-  }
-  75% {
-    -webkit-transform: rotate(810deg);
-            transform: rotate(810deg);
-  }
-  87.5% {
-    -webkit-transform: rotate(945deg);
-            transform: rotate(945deg);
-  }
-  100% {
-    -webkit-transform: rotate(1080deg);
-            transform: rotate(1080deg);
-  }
-}
-
-@keyframes fill-unfill-rotate {
-  12.5% {
-    -webkit-transform: rotate(135deg);
-            transform: rotate(135deg);
-  }
-  25% {
-    -webkit-transform: rotate(270deg);
-            transform: rotate(270deg);
-  }
-  37.5% {
-    -webkit-transform: rotate(405deg);
-            transform: rotate(405deg);
-  }
-  50% {
-    -webkit-transform: rotate(540deg);
-            transform: rotate(540deg);
-  }
-  62.5% {
-    -webkit-transform: rotate(675deg);
-            transform: rotate(675deg);
-  }
-  75% {
-    -webkit-transform: rotate(810deg);
-            transform: rotate(810deg);
-  }
-  87.5% {
-    -webkit-transform: rotate(945deg);
-            transform: rotate(945deg);
-  }
-  100% {
-    -webkit-transform: rotate(1080deg);
-            transform: rotate(1080deg);
-  }
-}
-
 @-webkit-keyframes first-fade-in-out {
   0% {
     opacity: 1;
@@ -11098,7 +10797,6 @@ table.table.sortable th[data-sort].sort-asc:before {
     opacity: 1;
   }
 }
-
 @keyframes first-fade-in-out {
   0% {
     opacity: 1;
@@ -11228,63 +10926,250 @@ table.table.sortable th[data-sort].sort-asc:before {
   }
 }
 
-@-webkit-keyframes left-circle-spin {
-  0% {
-    -webkit-transform: rotate(130deg);
-            transform: rotate(130deg);
-  }
-  50% {
-    -webkit-transform: rotate(-5deg);
-            transform: rotate(-5deg);
-  }
+/* =========================================================================
+ * Svelto - Spinner (Overlay) (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* SPINNER OVERLAY */
+/* =========================================================================
+ * Svelto - Spinner (Overlay) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* SPINNER OVERLAY */
+.spinner-overlay-activable {
+  position: relative;
+}
+
+.spinner-overlay-activable > *:not(.spinner-overlay) {
+  transition: opacity 0.15s;
+}
+
+.spinner-overlay-activable.spinner-overlay-active > .spinner-overlay {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+}
+
+.spinner-overlay-activable.spinner-overlay-active > *:not(.spinner-overlay) {
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.spinner-overlay, .spinner-overlay:before, .spinner-overlay > .spinner-wrp {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 1;
+}
+
+.spinner-overlay {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
+  visibility: hidden;
+  transition-duration: 0.15s;
+  transition-property: opacity, transfrom;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  pointer-events: none;
+  opacity: 0;
+}
+
+.spinner-overlay:before {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+  visibility: visible;
+  width: 62px;
+  height: 62px;
+  content: '';
+  border-radius: 50%;
+}
+
+.spinner-overlay > .spinner-wrp {
+  visibility: visible;
+  width: 36px;
+  height: 36px;
+}
+
+/* =========================================================================
+ * Svelto - Spinner (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* SPINNER */
+/* STROKE */
+/* ANIMATION */
+/* =========================================================================
+ * Svelto - Spinner v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * Fork of http://codepen.io/Bodokh/pen/jEadzj - Eran Bodokh
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* SPINNER */
+.spinner {
+  width: 3.25em;
+  height: 3.25em;
+  background-color: transparent !important;
+  margin-bottom: 10px;
+  -webkit-animation: rotate 2s linear infinite;
+          animation: rotate 2s linear infinite;
+  /* CIRCLE */
+  /* COLORS */
+}
+
+.spinner circle {
+  cx: 1.625em;
+  cy: 1.625em;
+  r: 1.25em;
+  fill: none;
+  stroke-width: 0.1875em;
+  stroke-dasharray: 0%, 240%;
+  stroke-dashoffset: 0;
+  stroke: #2196f3;
+  stroke-linecap: round;
+  -webkit-animation: dash 1.5s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite;
+}
+
+.spinner.primary circle {
+  stroke: #1565c0 !important;
+}
+
+.spinner.secondary circle {
+  stroke: #ef6c00 !important;
+}
+
+.spinner.tertiary circle {
+  stroke: #6a1b9a !important;
+}
+
+.spinner.quaternary circle {
+  stroke: #2e7d32 !important;
+}
+
+.spinner.white circle {
+  stroke: #ffffff !important;
+}
+
+.spinner.gray circle {
+  stroke: #e0e0e0 !important;
+}
+
+.spinner.black circle {
+  stroke: #212121 !important;
+}
+
+.spinner.yellow circle {
+  stroke: #fabf40 !important;
+}
+
+.spinner.olive circle {
+  stroke: #cddc39 !important;
+}
+
+.spinner.green circle {
+  stroke: #4caf50 !important;
+}
+
+.spinner.blue circle {
+  stroke: #2196f3 !important;
+}
+
+.spinner.violet circle {
+  stroke: #673ab7 !important;
+}
+
+.spinner.orange circle {
+  stroke: #ff9800 !important;
+}
+
+.spinner.purple circle {
+  stroke: #9c27b0 !important;
+}
+
+.spinner.red circle {
+  stroke: #f44336 !important;
+}
+
+.spinner.pink circle {
+  stroke: #e91e63 !important;
+}
+
+.spinner.teal circle {
+  stroke: #009688 !important;
+}
+
+.spinner.brown circle {
+  stroke: #795548 !important;
+}
+
+.spinner.transparent circle {
+  stroke: transparent !important;
+}
+
+.spinner.inherit circle {
+  stroke: inherit !important;
+}
+
+.spinner.base circle {
+  stroke: #eceff1 !important;
+}
+
+/* KEYFRAMES */
+@keyframes rotate {
   100% {
-    -webkit-transform: rotate(130deg);
-            transform: rotate(130deg);
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
   }
 }
 
-@keyframes left-circle-spin {
+@-webkit-keyframes dash {
   0% {
-    -webkit-transform: rotate(130deg);
-            transform: rotate(130deg);
+    stroke-dasharray: 0%, 240%;
+    stroke-dashoffset: 0;
   }
   50% {
-    -webkit-transform: rotate(-5deg);
-            transform: rotate(-5deg);
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -60%;
   }
   100% {
-    -webkit-transform: rotate(130deg);
-            transform: rotate(130deg);
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -240%;
   }
 }
 
-@-webkit-keyframes right-circle-spin {
+@keyframes dash {
   0% {
-    -webkit-transform: rotate(-130deg);
-            transform: rotate(-130deg);
+    stroke-dasharray: 0%, 240%;
+    stroke-dashoffset: 0;
   }
   50% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -60%;
   }
   100% {
-    -webkit-transform: rotate(-130deg);
-            transform: rotate(-130deg);
-  }
-}
-
-@keyframes right-circle-spin {
-  0% {
-    -webkit-transform: rotate(-130deg);
-            transform: rotate(-130deg);
-  }
-  50% {
-    -webkit-transform: rotate(5deg);
-            transform: rotate(5deg);
-  }
-  100% {
-    -webkit-transform: rotate(-130deg);
-            transform: rotate(-130deg);
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -240%;
   }
 }
 

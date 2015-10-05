@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Selectable v0.1.0
+ * Svelto - Selectable v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,16 +8,26 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-/* SELECTABLE */
+/* SELECTABLE TABLE */
 
-table.table.selectable > tbody > tr {
+table.table.selectable {
 
-  &:not(.empty) {
-    cursor: pointer;
-  }
+  /* ROW */
 
-  &.selected {
-    background-color: $table-selectable-row-selected-color !important;
+  tr {
+
+    /* SELECTABLE */
+
+    &:not(.empty) {
+      cursor: pointer;
+    }
+
+    /* SELECTED */
+
+    &.selected {
+      background-color: $table-selectable-row-selected-color !important;
+    }
+
   }
 
 }
