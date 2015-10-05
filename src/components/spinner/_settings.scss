@@ -16,9 +16,16 @@ $spinner-radius: 1.25em !default;
 
 /* STROKE */
 
-$spinner-stroke-width: 0.1875em !default;
+$spinner-stroke-width: 0.25em !default;
 
 $spinner-stroke-color: $color-blue !default;
+
+/* MULTICOLOR */
+
+$spinner-multicolor-stroke-color1: $color-blue !default;
+$spinner-multicolor-stroke-color2: $color-red !default;
+$spinner-multicolor-stroke-color3: $color-yellow !default;
+$spinner-multicolor-stroke-color4: $color-green !default;
 
 /* ANIMATION */
 

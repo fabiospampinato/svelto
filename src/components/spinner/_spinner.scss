@@ -12,12 +12,12 @@
 
 /* SPINNER */
 
-.spinner {
+svg.spinner {
 
   width: $spinner-size;
   height: $spinner-size;
-  background-color: transparent !important;
   margin-bottom: $gutter;
+  background-color: transparent !important;
   animation: rotate $spinner-animation-rotate-duration linear infinite;
 
   /* CIRCLE */
@@ -28,8 +28,6 @@
     r: $spinner-radius;
     fill: none;
     stroke-width: $spinner-stroke-width;
-    stroke-dasharray: 0%, 240%;
-    stroke-dashoffset: 0;
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
     animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
@@ -43,6 +41,19 @@
 
     &.#{$name} circle {
       stroke: $bg !important;
+    }
+
+  }
+
+  /* MULTICOLOR */
+
+  &.multicolor {
+
+    /* CIRCLE */
+
+    circle {
+      animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
+                 multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
     }
 
   }
@@ -69,5 +80,20 @@
   100% {
     stroke-dasharray: 181%, 240%;
     stroke-dashoffset: -240%;
+  }
+}
+
+@keyframes multicolor {
+  0%, 24% {
+    stroke: $spinner-multicolor-stroke-color1;
+  }
+  25%, 49% {
+    stroke: $spinner-multicolor-stroke-color2;
+  }
+  50%, 74% {
+    stroke: $spinner-multicolor-stroke-color3;
+  }
+  75%, 99% {
+    stroke: $spinner-multicolor-stroke-color4;
   }
 }

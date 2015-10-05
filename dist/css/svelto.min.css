@@ -10755,178 +10755,6 @@ table.table.sortable th[data-sort].sort-asc:before {
 }
 
 /* =========================================================================
- * Svelto - Spinner (Multicolor) (Settings) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* SPINNER MULTICOLOR */
-/* =========================================================================
- * Svelto - Spinner (Multicolor) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
- * ========================================================================= */
-/* SPINNER MULTICOLOR */
-.spinner.multicolor {
-  /* CIRCLE */
-}
-
-/* KEYFRAMES */
-@-webkit-keyframes first-fade-in-out {
-  0% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 1;
-  }
-  26% {
-    opacity: 0;
-  }
-  89% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-@keyframes first-fade-in-out {
-  0% {
-    opacity: 1;
-  }
-  25% {
-    opacity: 1;
-  }
-  26% {
-    opacity: 0;
-  }
-  89% {
-    opacity: 0;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 1;
-  }
-}
-
-@-webkit-keyframes second-fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  15% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  51% {
-    opacity: 0;
-  }
-}
-
-@keyframes second-fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  15% {
-    opacity: 0;
-  }
-  25% {
-    opacity: 1;
-  }
-  50% {
-    opacity: 1;
-  }
-  51% {
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes third-fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  76% {
-    opacity: 0;
-  }
-}
-
-@keyframes third-fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  40% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  75% {
-    opacity: 1;
-  }
-  76% {
-    opacity: 0;
-  }
-}
-
-@-webkit-keyframes fourth-fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-@keyframes fourth-fade-in-out {
-  0% {
-    opacity: 0;
-  }
-  65% {
-    opacity: 0;
-  }
-  75% {
-    opacity: 1;
-  }
-  90% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* =========================================================================
  * Svelto - Spinner (Overlay) (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -11014,6 +10842,7 @@ table.table.sortable th[data-sort].sort-asc:before {
  * ========================================================================= */
 /* SPINNER */
 /* STROKE */
+/* MULTICOLOR */
 /* ANIMATION */
 /* =========================================================================
  * Svelto - Spinner v0.2.0
@@ -11026,113 +10855,121 @@ table.table.sortable th[data-sort].sort-asc:before {
  * @requires _settings.scss
  * ========================================================================= */
 /* SPINNER */
-.spinner {
+svg.spinner {
   width: 3.25em;
   height: 3.25em;
-  background-color: transparent !important;
   margin-bottom: 10px;
+  background-color: transparent !important;
   -webkit-animation: rotate 2s linear infinite;
           animation: rotate 2s linear infinite;
   /* CIRCLE */
   /* COLORS */
+  /* MULTICOLOR */
 }
 
-.spinner circle {
+svg.spinner circle {
   cx: 1.625em;
   cy: 1.625em;
   r: 1.25em;
   fill: none;
-  stroke-width: 0.1875em;
-  stroke-dasharray: 0%, 240%;
-  stroke-dashoffset: 0;
+  stroke-width: 0.25em;
   stroke: #2196f3;
   stroke-linecap: round;
   -webkit-animation: dash 1.5s ease-in-out infinite;
           animation: dash 1.5s ease-in-out infinite;
 }
 
-.spinner.primary circle {
+svg.spinner.primary circle {
   stroke: #1565c0 !important;
 }
 
-.spinner.secondary circle {
+svg.spinner.secondary circle {
   stroke: #ef6c00 !important;
 }
 
-.spinner.tertiary circle {
+svg.spinner.tertiary circle {
   stroke: #6a1b9a !important;
 }
 
-.spinner.quaternary circle {
+svg.spinner.quaternary circle {
   stroke: #2e7d32 !important;
 }
 
-.spinner.white circle {
+svg.spinner.white circle {
   stroke: #ffffff !important;
 }
 
-.spinner.gray circle {
+svg.spinner.gray circle {
   stroke: #e0e0e0 !important;
 }
 
-.spinner.black circle {
+svg.spinner.black circle {
   stroke: #212121 !important;
 }
 
-.spinner.yellow circle {
+svg.spinner.yellow circle {
   stroke: #fabf40 !important;
 }
 
-.spinner.olive circle {
+svg.spinner.olive circle {
   stroke: #cddc39 !important;
 }
 
-.spinner.green circle {
+svg.spinner.green circle {
   stroke: #4caf50 !important;
 }
 
-.spinner.blue circle {
+svg.spinner.blue circle {
   stroke: #2196f3 !important;
 }
 
-.spinner.violet circle {
+svg.spinner.violet circle {
   stroke: #673ab7 !important;
 }
 
-.spinner.orange circle {
+svg.spinner.orange circle {
   stroke: #ff9800 !important;
 }
 
-.spinner.purple circle {
+svg.spinner.purple circle {
   stroke: #9c27b0 !important;
 }
 
-.spinner.red circle {
+svg.spinner.red circle {
   stroke: #f44336 !important;
 }
 
-.spinner.pink circle {
+svg.spinner.pink circle {
   stroke: #e91e63 !important;
 }
 
-.spinner.teal circle {
+svg.spinner.teal circle {
   stroke: #009688 !important;
 }
 
-.spinner.brown circle {
+svg.spinner.brown circle {
   stroke: #795548 !important;
 }
 
-.spinner.transparent circle {
+svg.spinner.transparent circle {
   stroke: transparent !important;
 }
 
-.spinner.inherit circle {
+svg.spinner.inherit circle {
   stroke: inherit !important;
 }
 
-.spinner.base circle {
+svg.spinner.base circle {
   stroke: #eceff1 !important;
+}
+
+svg.spinner.multicolor {
+  /* CIRCLE */
+}
+
+svg.spinner.multicolor circle {
+  -webkit-animation: dash 1.5s ease-in-out infinite, multicolor 6s ease-in-out infinite;
+          animation: dash 1.5s ease-in-out infinite, multicolor 6s ease-in-out infinite;
 }
 
 /* KEYFRAMES */
@@ -11170,6 +11007,36 @@ table.table.sortable th[data-sort].sort-asc:before {
   100% {
     stroke-dasharray: 181%, 240%;
     stroke-dashoffset: -240%;
+  }
+}
+
+@-webkit-keyframes multicolor {
+  0%, 24% {
+    stroke: #2196f3;
+  }
+  25%, 49% {
+    stroke: #f44336;
+  }
+  50%, 74% {
+    stroke: #fabf40;
+  }
+  75%, 99% {
+    stroke: #4caf50;
+  }
+}
+
+@keyframes multicolor {
+  0%, 24% {
+    stroke: #2196f3;
+  }
+  25%, 49% {
+    stroke: #f44336;
+  }
+  50%, 74% {
+    stroke: #fabf40;
+  }
+  75%, 99% {
+    stroke: #4caf50;
   }
 }
 
