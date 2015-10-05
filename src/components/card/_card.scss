@@ -53,13 +53,14 @@
 
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
 
-  > * {
+  > :not(.spinner-overlay) {
     margin-bottom: 0 !important; //FIXME: The `!important` shouldn't be necessary
   }
 
   /* BORDER RADIUS INHERITANCE */
 
-  > :first-child {
+  > :first-child:not(.spinner-overlay),
+  > .spinner-overlay + * {
     @include border-top-radius ( inherit );
   }
 

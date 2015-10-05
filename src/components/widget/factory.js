@@ -205,6 +205,16 @@
           var methodValue,
               instance = $.data ( this, fullName );
 
+          // NO INSTANCE
+
+          if ( !instance ) {
+
+            instance = new object ( {}, this );
+
+            $.data ( this, fullName, instance );
+
+          }
+
           // GETTING INSTANCE
 
           if ( options === 'instance' ) {

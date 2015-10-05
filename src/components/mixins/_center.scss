@@ -5,6 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires _fill.scss
  * @requires _margin.scss
  * ========================================================================= */
 
@@ -32,6 +33,13 @@
     margin-top: ( - $height / 2 );
   }
 
+}
+
+@mixin center-absolute-fill () {
+
+  @include fill-absolute ();
+  margin: auto;
+  
 }
 
 @mixin center-transform-absolute ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both

@@ -1522,6 +1522,16 @@
           var methodValue,
               instance = $.data ( this, fullName );
 
+          // NO INSTANCE
+
+          if ( !instance ) {
+
+            instance = new object ( {}, this );
+
+            $.data ( this, fullName, instance );
+
+          }
+
           // GETTING INSTANCE
 
           if ( options === 'instance' ) {
@@ -4363,78 +4373,101 @@
 
 
 /* =========================================================================
- * Svelto - Loading v0.1.0
+ * Svelto - Spinner Overlay v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
-  /* LOADING */
+  /* SPINNER OVERLAY */
 
-  $.fn.loading = function ( force, custom_options ) {
+  $.factory ( 'svelto.spinnerOverlay', {
 
-    // OPTIONS
+    /* TEMPLATES */
 
-    var options = _.merge ({
-      color: {
-        wrapper: 'inherit',
+    templates: {
+      overlay: '<div class="spinner-overlay {%=o.colors.overlay%}">' +
+                 '<svg class="spinner {%=(o.multicolor ? "multicolor" : o.colors.spinner)%}">' +
+                   '<circle />' +
+                 '</svg>' +
+               '</div>'
+    },
+
+    /* OPTIONS */
+
+    options: {
+      multicolor: false,
+      colors: {
+        overlay: 'inherit',
         spinner: 'secondary'
+      },
+      classes: {
+        active: 'active'
+      },
+      callbacks: {
+        show: _.noop,
+        hide: _.noop
       }
-    }, custom_options );
+    },
 
-    // LOADING
+    /* SPECIAL */
 
-    this.addClass ( 'spinner-overlay-activable' );
+    _variables: function () {
 
-    if ( _.isUndefined ( force ) ) {
+      this.$overlayed = this.$element;
+      this.$overlay = $(this._tmpl ( 'overlay', this.options ));
 
-      force = !this.hasClass ( 'spinner-overlay-active' );
+    },
+
+    _init: function () {
+
+      this.$overlayed.prepend ( this.$overlay );
+
+    },
+
+    /* API */
+
+    isActive: function () {
+
+      return this.$overlay.hasClass ( this.options.classes.active );
+
+    },
+
+    toggle: function ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this.isActive ();
+
+      }
+
+      this._frame ( function () {
+
+        this.$overlay.toggleClass ( this.options.classes.active, force );
+
+      });
+
+    },
+
+    show: function () {
+
+      this.toggle ( true );
+
+    },
+
+    hide: function () {
+
+      this.toggle ( false );
 
     }
 
-    var $overlay = this.children ( '.spinner-overlay' );
-
-    if ( $overlay.length === 0 ) {
-
-      this.prepend (
-        '<div class="spinner-overlay ' + options.color.wrapper + '">' +
-          '<div class="spinner-wrp">' +
-            '<div class="spinner ' + options.color.spinner + '">' +
-              '<div class="circle-wrp left">' +
-                '<div class="circle"></div>' +
-              '</div>' +
-              '<div class="circle-wrp right">' +
-                '<div class="circle"></div>' +
-              '</div>' +
-            '</div>' +
-          '</div>' +
-        '</div>'
-      );
-
-    } else {
-
-      if ( force ) {
-
-        $overlay.attr ( 'class', 'spinner-overlay ' + options.color.wrapper );
-        $overlay.find ( '.spinner' ).attr ( 'class', 'spinner ' + options.color.spinner );
-
-      }
-
-    }
-
-    $.reflow (); //FIXME: is it needed?
-
-    this.toggleClass ( 'spinner-overlay-active', force );
-
-    return this;
-
-  };
+  });
 
 }( jQuery, _, window, document ));
 
@@ -4807,7 +4840,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
- * @requires ../loading/loading.js
+ * @requires ../spinner_overlay/spinnerOverlay.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 

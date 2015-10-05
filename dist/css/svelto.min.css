@@ -405,6 +405,12 @@ th {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
+ * Svelto - Fill (Mixins) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* =========================================================================
  * Svelto - Margin (Mixins) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -416,13 +422,8 @@ th {
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires _fill.scss
  * @requires _margin.scss
- * ========================================================================= */
-/* =========================================================================
- * Svelto - Fill (Mixins) v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* =========================================================================
  * Svelto - Colors (Settings) v0.3.0
@@ -4459,11 +4460,12 @@ button {
   overflow: auto;
 }
 
-.card > * {
+.card > :not(.spinner-overlay) {
   margin-bottom: 0 !important;
 }
 
-.card > :first-child {
+.card > :first-child:not(.spinner-overlay),
+.card > .spinner-overlay + * {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
@@ -10755,7 +10757,7 @@ table.table.sortable th[data-sort].sort-asc:before {
 }
 
 /* =========================================================================
- * Svelto - Spinner (Overlay) (Settings) v0.2.0
+ * Svelto - Spinner Overlay (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10763,8 +10765,10 @@ table.table.sortable th[data-sort].sort-asc:before {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* SPINNER OVERLAY */
+/* SIBLINGS */
+/* TRANSITIONS */
 /* =========================================================================
- * Svelto - Spinner (Overlay) v0.1.0
+ * Svelto - Spinner Overlay v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10772,64 +10776,69 @@ table.table.sortable th[data-sort].sort-asc:before {
  * @requires _settings.scss
  * ========================================================================= */
 /* SPINNER OVERLAY */
-.spinner-overlay-activable {
-  position: relative;
-}
-
-.spinner-overlay-activable > *:not(.spinner-overlay) {
-  transition: opacity 0.15s;
-}
-
-.spinner-overlay-activable.spinner-overlay-active > .spinner-overlay {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  opacity: 1;
-}
-
-.spinner-overlay-activable.spinner-overlay-active > *:not(.spinner-overlay) {
-  pointer-events: none;
-  opacity: 0.5;
-}
-
-.spinner-overlay, .spinner-overlay:before, .spinner-overlay > .spinner-wrp {
+.spinner-overlay {
   position: absolute;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
   margin: auto;
-  z-index: 1;
-}
-
-.spinner-overlay {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  visibility: hidden;
-  transition-duration: 0.15s;
-  transition-property: opacity, transfrom;
+  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  width: 4.25rem;
+  height: 4.25rem;
+  border-radius: 50% !important;
+  z-index: 50;
   -webkit-transform: scale(0);
           transform: scale(0);
-  pointer-events: none;
   opacity: 0;
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-duration: 0.35s;
+  /* SPINNER */
+  /* SIBLINGS */
+  /* INACTIVE */
+  /* ACTIVE */
 }
 
-.spinner-overlay:before {
-  border-color: inherit ;
-  color: inherit ;
-  background: inherit ;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  visibility: visible;
-  width: 62px;
-  height: 62px;
-  content: '';
-  border-radius: 50%;
+.spinner-overlay .spinner {
+  margin-bottom: 0;
 }
 
-.spinner-overlay > .spinner-wrp {
-  visibility: visible;
-  width: 36px;
-  height: 36px;
+.spinner-overlay ~ * {
+  transition: opacity 0.35s;
+}
+
+.spinner-overlay:not(.active) {
+  /* SPINNER */
+}
+
+.spinner-overlay:not(.active) .spinner {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+  /* CIRCLE */
+}
+
+.spinner-overlay:not(.active) .spinner circle {
+  -webkit-animation-play-state: paused;
+          animation-play-state: paused;
+}
+
+.spinner-overlay.active {
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  opacity: 1;
+  /* SIBLINGS */
+}
+
+.spinner-overlay.active ~ * {
+  opacity: 0.5;
+  pointer-events: none;
 }
 
 /* =========================================================================

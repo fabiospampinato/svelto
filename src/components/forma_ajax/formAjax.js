@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
- * @requires ../loading/loading.js
+ * @requires ../spinner_overlay/spinnerOverlay.js
  * @requires ../noty/noty.js
  * ========================================================================= */
 

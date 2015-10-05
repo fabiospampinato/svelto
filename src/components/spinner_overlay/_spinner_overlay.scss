@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner (Overlay) v0.1.0
+ * Svelto - Spinner Overlay v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,66 +10,68 @@
 
 /* SPINNER OVERLAY */
 
-//TODO: Move the overlay to a new component
-
-.spinner-overlay-activable {
-
-  position: relative;
-
-  & > *:not(.spinner-overlay) {
-    transition: opacity $spinner-overlay-transition-all-duration;
-  }
-
-  &.spinner-overlay-active {
-
-    & > .spinner-overlay {
-      transform: scale(1);
-      opacity: 1;
-    }
-
-    & > *:not(.spinner-overlay) {
-      pointer-events: none;
-      opacity: $spinner-overlay-children-opacity;
-    }
-
-  }
-
-}
-
-.spinner-overlay, .spinner-overlay:before, .spinner-overlay > .spinner-wrp {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  z-index: 1;
-}
-
 .spinner-overlay {
 
-  @include color ( $spinner-overlay-color, $spinner-overlay-color-basic );
-  visibility: hidden;
-  transition-duration: $spinner-overlay-transition-all-duration;
-  transition-property: opacity, transfrom;
+  @include center-absolute-fill ();
+  @include z-depth ( $spinner-overlay-z-depth );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: $spinner-overlay-size;
+  height: $spinner-overlay-size;
+  border-radius: $spinner-overlay-border-radius !important;
+  z-index: $spinner-overlay-z-index;
   transform: scale(0);
-  pointer-events: none;
   opacity: 0;
+  transition-property: opacity, transform;
+  transition-duration: $spinner-overlay-transition-all-duration;
 
-  &:before {
-    @include color ( $spinner-overlay-color, $spinner-overlay-color-basic );
-    @include z-depth ( $spinner-overlay-z-depth );
-    visibility: visible;
-    width: $spinner-overlay-size;
-    height: $spinner-overlay-size;
-    content: '';
-    border-radius: 50%;
+  /* SPINNER */
+
+  .spinner {
+    margin-bottom: 0;
   }
 
-  & > .spinner-wrp {
-    visibility: visible;
-    width: $spinner-overlay-spinner-size;
-    height: $spinner-overlay-spinner-size;
+  /* SIBLINGS */
+
+  ~ * {
+    transition: opacity $spinner-overlay-transition-all-duration; //INFO: It interferes with other widgets probably
+  }
+
+  /* INACTIVE */
+
+  &:not(.active) {
+
+    /* SPINNER */
+
+    .spinner {
+
+      animation-play-state: paused;
+
+      /* CIRCLE */
+
+      circle {
+        animation-play-state: paused;
+      }
+
+    }
+
+  }
+
+  /* ACTIVE */
+
+  &.active {
+
+    transform: scale(1);
+    opacity: 1;
+
+    /* SIBLINGS */
+
+    ~ * {
+      opacity: $spinner-overlay-siblings-opacity;
+      pointer-events: none;
+    }
+
   }
 
 }

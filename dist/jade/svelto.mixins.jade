@@ -902,6 +902,48 @@ mixin centerer
 
 
 //- =========================================================================
+//- Svelto - Parallax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin parallax
+  .parallax&attributes(attributes)
+    block
+
+mixin parallax-layers
+  .parallax-layers&attributes(attributes)
+    block
+
+mixin parallax-layer
+  .parallax-layer&attributes(attributes)
+    block
+
+mixin parallax-content-sample
+  .parallax-content-sample&attributes(attributes)
+    block
+
+//- Layers levels
+
+mixin parallax-layer-deep
+  +parallax-layer&attributes(attributes).parallax-layer-deep
+    block
+
+mixin parallax-layer-background
+  +parallax-layer&attributes(attributes).parallax-layer-background
+    block
+
+mixin parallax-layer-base
+  +parallax-layer&attributes(attributes).parallax-layer-base
+    block
+
+mixin parallax-layer-foreground
+  +parallax-layer&attributes(attributes).parallax-layer-foreground
+    block
+
+
+//- =========================================================================
 //- Svelto - Pagination v0.1.1
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -991,48 +1033,6 @@ mixin pagination(options)
           +button-icon("chevron_right", page_url)(title="Next page" class=options.classes).next
 
       block
-
-
-//- =========================================================================
-//- Svelto - Parallax v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin parallax
-  .parallax&attributes(attributes)
-    block
-
-mixin parallax-layers
-  .parallax-layers&attributes(attributes)
-    block
-
-mixin parallax-layer
-  .parallax-layer&attributes(attributes)
-    block
-
-mixin parallax-content-sample
-  .parallax-content-sample&attributes(attributes)
-    block
-
-//- Layers levels
-
-mixin parallax-layer-deep
-  +parallax-layer&attributes(attributes).parallax-layer-deep
-    block
-
-mixin parallax-layer-background
-  +parallax-layer&attributes(attributes).parallax-layer-background
-    block
-
-mixin parallax-layer-base
-  +parallax-layer&attributes(attributes).parallax-layer-base
-    block
-
-mixin parallax-layer-foreground
-  +parallax-layer&attributes(attributes).parallax-layer-foreground
-    block
 
 
 //- =========================================================================
@@ -1301,21 +1301,6 @@ mixin slider(options)
 
 mixin spinner
   svg.spinner&attributes(attributes)
-    circle
-
-
-//- =========================================================================
-//- Svelto - Spinner (Multicolor) v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-    
-mixin spinner-multicolor
-  svg.spinner.multicolor&attributes(attributes)
-    circle
-    circle
-    circle
     circle
 
 

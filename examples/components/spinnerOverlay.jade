@@ -1,0 +1,49 @@
+
+extends ../layout.jade
+
+//- Spinner Overlay
+
+append main
+  +divider-block Overlayerables
+
+  +container.outlined.overlayerable
+    +paragraph-sample
+
+  //- INFO: Card taken from `card.jade`#advanced
+  
+  +card.advanced.outlined.overlayerable
+    +card-header.outlined.teal
+      +multiple
+        +multiple-sub-left
+          +button-icon('thumb_down').compact.xsmall
+          +button-icon("thumb_up").compact.xsmall
+        +multiple-sub-center 
+          p Header
+        +multiple-sub-right
+          +button-icon('apps').compact.xsmall
+          +button-icon('menu').compact.xsmall
+          +button-icon('more_vert').compact.xsmall
+          +button-icon('refresh').compact.xsmall
+    +card-block
+      +paragraph-sample
+    +card-footer.outlined.pink Footer
+
+  +divider-block Action
+
+  +multiple
+    +button("spinnerOverlay_get_all ()").outlined Get All
+    +button("spinnerOverlay_api ( 'toggle' )").outlined Toggle All
+    +button("spinnerOverlay_api ( 'show' )").outlined Show All
+    +button("spinnerOverlay_api ( 'hide' )").outlined Hide All
+
+append body-end
+  +script.
+    function spinnerOverlay_get_all () {
+      var gets = _.map ( $('.overlayerable'), function ( overlayerable ) {
+        return $(overlayerable).spinnerOverlay ( 'isActive' );
+      });
+      $.noty ( gets.join ( ' - ' ) );
+    }
+    function spinnerOverlay_api ( action ) {
+      $('.overlayerable' ).spinnerOverlay ( action );
+    }
