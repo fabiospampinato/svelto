@@ -32,7 +32,8 @@
         interval: 300
       },
       flick: {
-        duration: 150
+        duration: 150,
+        threshold: 5
       }
     }
   };
@@ -101,8 +102,6 @@
 
     var downHandler = function ( event ) {
 
-      if ( event.type === 'mousedown' && event.button !== 0 ) return; //INFO: Only left click is allowed
-
       target = event.target;
       $target = $(target);
 
@@ -113,14 +112,17 @@
 
       pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
 
-      $target.on ( Pointer.move, moveHandler );
-      $target.on ( Pointer.up, upHandler );
+      $target.one ( Pointer.move, moveHandler );
+      $target.one ( Pointer.up, upHandler );
+      $target.one ( Pointer.cancel, cancelHandler );
 
     };
 
     var pressHandler = function () { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
 
       $target.trigger ( createEvent ( Pointer.press, startEvent ) );
+
+      pressTimeout = false;
 
     };
 
@@ -131,9 +133,9 @@
         clearTimeout ( pressTimeout );
         pressTimeout = false;
 
-        this.motion = true;
-
       }
+
+      motion = true;
 
     };
 
@@ -145,34 +147,38 @@
 
       }
 
-      if ( !( event.type === 'mousedown' && event.button !== 0 ) ) { //FIXME: Isn't it filtered by the downHandler?
+      downTimestamp = event.timeStamp || Date.now ();
 
-        downTimestamp = event.timeStamp || Date.now ();
+      if ( !$.browser.is.touchDevice || !motion ) {
 
-        if ( !$.browser.is.touchDevice || !motion ) {
+        $target.trigger ( createEvent ( Pointer.tap, event ) );
 
-          $target.trigger ( createEvent ( Pointer.tap, event ) );
+        if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
-          if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-            $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
-          }
-
-          prevTapTimestamp = downTimestamp;
+          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
         }
 
-        if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
+        prevTapTimestamp = downTimestamp;
 
-          var startXY = $.eventXY ( startEvent ),
-              endXY = $.eventXY ( event ),
-              deltaXY = {
-                X: endXY.X - startXY.X,
-                Y: endXY.Y - startXY.Y
-              };
+      }
 
-          if ( Math.abs ( deltaXY.X ) > Math.abs ( deltaXY.Y ) ) {
+      if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
+
+        var startXY = $.eventXY ( startEvent ),
+            endXY = $.eventXY ( event ),
+            deltaXY = {
+              X: endXY.X - startXY.X,
+              Y: endXY.Y - startXY.Y
+            },
+            absDeltaXY = {
+              X: Math.abs ( deltaXY.X ),
+              Y: Math.abs ( deltaXY.Y )
+            };
+
+        if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
+
+          if ( absDeltaXY.X > absDeltaXY.Y ) {
 
             var orientation = 'horizontal',
                 direction = ( deltaXY.X > 0 ) ? 1 : -1;
@@ -193,7 +199,30 @@
 
       }
 
-      $target.off ( Pointer.move, moveHandler );
+      if ( !motion ) {
+
+        $target.off ( Pointer.move, moveHandler );
+
+      }
+
+      $target.off ( Pointer.cancel, cancelHandler );
+
+    };
+
+    var cancelHandler = function () {
+
+      if ( pressTimeout ) {
+
+        clearTimeout ( pressTimeout );
+
+      }
+
+      if ( !motion ) {
+
+        $target.off ( Pointer.move, moveHandler );
+
+      }
+
       $target.off ( Pointer.up, upHandler );
 
     };
