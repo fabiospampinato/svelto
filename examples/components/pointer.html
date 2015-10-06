@@ -1,51 +1,22 @@
 <!DOCTYPE html><html lang="en" dir="ltr" class="no-js"><head><meta charset="utf-8"><meta http-equiv="x-ua-compatible" content="ie=edge"><title>Svelto</title><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"><link rel="stylesheet" href="/svelto.css" media="all"/><link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons" media="all"/><script>document.documentElement.className = document.documentElement.className.replace ( /\bno-js\b/, '' ) + ' js';
-  </script></head><body><div id="content"><header class="fixed"><div class="toolbar primary z-depth-4"><div class="multiple"><div class="button compact transparent"><i class="icon">menu</i></div><a href="/" class="large">Svelto</a><div class="spacer"></div><div class="button compact transparent"><i class="icon">refresh</i></div><div class="button compact transparent"><i class="icon">more_vert</i></div></div></div></header><main><div class="divider block"><div class="divider-content">Target</div></div><div class="centerer"><div class="square outlined target" style="height: 300px; width: 75%;"></div></div><div class="divider block"><div class="divider-content">Triggered</div></div><div class="multiple"><div class="button checkbox tap outlined"><span>Tap</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_tap" value="1"/></div><div class="button checkbox dbltap outlined"><span>Double tap</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_dbltap" value="1"/></div><div class="button checkbox press outlined"><span>Press</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_press" value="1"/></div><div class="button checkbox dragstart outlined"><span>Drag start</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_dragstart" value="1"/></div><div class="button checkbox dragmove outlined"><span>Drag move</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_dragmove" value="1"/></div><div class="button checkbox dragend outlined"><span>Drag end</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_dragend" value="1"/></div><div class="button checkbox flick outlined"><span>Flick</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_flick" value="1"/></div></div><div class="divider block"><div class="divider-content">Actions</div></div><div onclick="javascript:pointer_uncheck_all ()" class="button outlined">Reset</div></main><footer class="beveled"><p class="text-center">Svelto, a framework</p></footer></div><script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script><script src="/svelto.js"></script><script>$('.target').on ({
-  'pointertap' : pointer_tap,
-  'pointerdbltap' : pointer_dbltap,
-  'pointerpress' : pointer_press,
-  'pointerdragstart' : pointer_dragstart,
-  'pointerdragmove' : pointer_dragmove,
-  'pointerdragend' : pointer_dragend,
-  'pointerflick'  : pointer_flick
-});
+  </script></head><body><div id="content"><header class="fixed"><div class="toolbar primary z-depth-4"><div class="multiple"><div class="button compact transparent"><i class="icon">menu</i></div><a href="/" class="large">Svelto</a><div class="spacer"></div><div class="button compact transparent"><i class="icon">refresh</i></div><div class="button compact transparent"><i class="icon">more_vert</i></div></div></div></header><main><div class="divider block"><div class="divider-content">Target</div></div><div class="centerer"><div class="square outlined target" style="height: 300px; width: 75%;"></div></div><div class="divider block"><div class="divider-content">Triggered</div></div><div class="multiple"><div class="button checkbox tap outlined"><span>Tap</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_tap" value="1"/></div><div class="button checkbox dbltap outlined"><span>Double tap</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_dbltap" value="1"/></div><div class="button checkbox press outlined"><span>Press</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_press" value="1"/></div><div class="button checkbox flick outlined"><span>Flick</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_flick" value="1"/></div><div class="button checkbox down outlined"><span>Down</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_down" value="1"/></div><div class="button checkbox move outlined"><span>Move</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_move" value="1"/></div><div class="button checkbox up outlined"><span>Up</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_up" value="1"/></div><div class="button checkbox cancel outlined"><span>Cancel</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_cancel" value="1"/></div><div class="button checkbox over outlined"><span>Over</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_over" value="1"/></div><div class="button checkbox enter outlined"><span>Enter</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_enter" value="1"/></div><div class="button checkbox out outlined"><span>Out</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_out" value="1"/></div><div class="button checkbox leave outlined"><span>Leave</span><div class="icons"><i class="icon icon-on">check_box</i><i class="icon icon-off">check_box_outline_blank</i></div><input type="checkbox" name="pointer_leave" value="1"/></div></div><div class="divider block"><div class="divider-content">Actions</div></div><div onclick="javascript:pointer_uncheck_all ()" class="button outlined">Reset</div></main><footer class="beveled"><p class="text-center">Svelto, a framework</p></footer></div><script src="//cdnjs.cloudflare.com/ajax/libs/lodash.js/3.10.1/lodash.js"></script><script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-alpha1/jquery.js"></script><script src="/svelto.js"></script><script>for ( var prop in Pointer ) {
+  if ( prop !== 'options' ) {
+    $('.target').on ( Pointer[prop], { name: prop }, pointer_handler );  
+  }
+}
 
 function pointer_uncheck_all () {
   $('.checkbox').checkbox ( 'uncheck' );
 }
 
-function pointer_check ( name ) {
+function pointer_handler ( event, data ) {
+  var name = event.data.name;
+  if ( name === 'down' ) {
+    pointer_uncheck_all ();
+  } else if ( name === 'flick' ) {
+    $.noty ( "Flick orientation: " + data.orientation + ", direction: " + data.direction );
+  }
   $('.checkbox.' + name).checkbox ( 'check' );
-}
-
-function pointer_tap () {
-  pointer_check ( 'tap' );
-}
-
-function pointer_dbltap () {
-  pointer_check ( 'dbltap' );
-}
-
-function pointer_press () {
-  pointer_check ( 'press' );
-}
-
-function pointer_dragstart () {
-  pointer_uncheck_all ();
-  pointer_check ( 'dragstart' );
-}
-
-function pointer_dragmove ( event ) {
-  event.preventDefault ();
-  pointer_check ( 'dragmove' );
-}
-
-function pointer_dragend () {
-  pointer_check ( 'dragend' );
-}
-
-function pointer_flick  ( event, data ) {
-  pointer_check ( 'flick ' );
-  $.noty ( "Flick orientation: " + data.orientation + ", direction: " + data.direction );
 }</script><script>window.onerror = function ( message, file, line ) {
   try {
     $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
