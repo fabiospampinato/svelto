@@ -626,11 +626,6 @@ th {
   background: rgba(21, 101, 192, 0.95) !important;
 }
 
-.primary.gradient {
-  background-image: linear-gradient(to bottom, #166ac9 0%, #1460b7 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .primary.actionable.active,
 .primary.active.button,
 .primary.active.button-corner,
@@ -727,11 +722,6 @@ th {
 
 .secondary.transparentize {
   background: rgba(239, 108, 0, 0.95) !important;
-}
-
-.secondary.gradient {
-  background-image: linear-gradient(to bottom, #f97100 0%, #e56700 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .secondary.actionable.active,
@@ -832,11 +822,6 @@ th {
   background: rgba(106, 27, 154, 0.95) !important;
 }
 
-.tertiary.gradient {
-  background-image: linear-gradient(to bottom, #701da3 0%, #641991 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .tertiary.actionable.active,
 .tertiary.active.button,
 .tertiary.active.button-corner,
@@ -933,11 +918,6 @@ th {
 
 .quaternary.transparentize {
   background: rgba(46, 125, 50, 0.95) !important;
-}
-
-.quaternary.gradient {
-  background-image: linear-gradient(to bottom, #318435 0%, #2b762f 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .quaternary.actionable.active,
@@ -1038,11 +1018,6 @@ th {
   background: rgba(255, 255, 255, 0.95) !important;
 }
 
-.white.gradient {
-  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .white.actionable.active,
 .white.active.button,
 .white.active.button-corner,
@@ -1139,11 +1114,6 @@ th {
 
 .gray.transparentize {
   background: rgba(224, 224, 224, 0.95) !important;
-}
-
-.gray.gradient {
-  background-image: linear-gradient(to bottom, #e5e5e5 0%, #dbdbdb 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .gray.actionable.active,
@@ -1244,11 +1214,6 @@ th {
   background: rgba(33, 33, 33, 0.95) !important;
 }
 
-.black.gradient {
-  background-image: linear-gradient(to bottom, #262626 0%, #1c1c1c 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .black.actionable.active,
 .black.active.button,
 .black.active.button-corner,
@@ -1345,11 +1310,6 @@ th {
 
 .yellow.transparentize {
   background: rgba(250, 191, 64, 0.95) !important;
-}
-
-.yellow.gradient {
-  background-image: linear-gradient(to bottom, #fac24a 0%, #fabc36 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .yellow.actionable.active,
@@ -1450,11 +1410,6 @@ th {
   background: rgba(205, 220, 57, 0.95) !important;
 }
 
-.olive.gradient {
-  background-image: linear-gradient(to bottom, #cfde42 0%, #cbda30 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .olive.actionable.active,
 .olive.active.button,
 .olive.active.button-corner,
@@ -1551,11 +1506,6 @@ th {
 
 .green.transparentize {
   background: rgba(76, 175, 80, 0.95) !important;
-}
-
-.green.gradient {
-  background-image: linear-gradient(to bottom, #52b455 0%, #49a84d 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .green.actionable.active,
@@ -1656,11 +1606,6 @@ th {
   background: rgba(33, 150, 243, 0.95) !important;
 }
 
-.blue.gradient {
-  background-image: linear-gradient(to bottom, #2b9bf4 0%, #1791f2 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .blue.actionable.active,
 .blue.active.button,
 .blue.active.button-corner,
@@ -1757,11 +1702,6 @@ th {
 
 .violet.transparentize {
   background: rgba(103, 58, 183, 0.95) !important;
-}
-
-.violet.gradient {
-  background-image: linear-gradient(to bottom, #6b3cbf 0%, #6338af 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .violet.actionable.active,
@@ -1862,11 +1802,6 @@ th {
   background: rgba(255, 152, 0, 0.95) !important;
 }
 
-.orange.gradient {
-  background-image: linear-gradient(to bottom, #ff9c0a 0%, #f59200 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .orange.actionable.active,
 .orange.active.button,
 .orange.active.button-corner,
@@ -1963,11 +1898,6 @@ th {
 
 .purple.transparentize {
   background: rgba(156, 39, 176, 0.95) !important;
-}
-
-.purple.gradient {
-  background-image: linear-gradient(to bottom, #a329b8 0%, #9525a8 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .purple.actionable.active,
@@ -2068,11 +1998,6 @@ th {
   background: rgba(244, 67, 54, 0.95) !important;
 }
 
-.red.gradient {
-  background-image: linear-gradient(to bottom, #f54c40 0%, #f33a2c 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .red.actionable.active,
 .red.active.button,
 .red.active.button-corner,
@@ -2169,11 +2094,6 @@ th {
 
 .pink.transparentize {
   background: rgba(233, 30, 99, 0.95) !important;
-}
-
-.pink.gradient {
-  background-image: linear-gradient(to bottom, #ea2769 0%, #e6175d 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .pink.actionable.active,
@@ -2274,11 +2194,6 @@ th {
   background: rgba(0, 150, 136, 0.95) !important;
 }
 
-.teal.gradient {
-  background-image: linear-gradient(to bottom, #00a091 0%, #008c7f 100%) !important;
-  background-repeat: repeat-x !important;
-}
-
 .teal.actionable.active,
 .teal.active.button,
 .teal.active.button-corner,
@@ -2375,11 +2290,6 @@ th {
 
 .brown.transparentize {
   background: rgba(121, 85, 72, 0.95) !important;
-}
-
-.brown.gradient {
-  background-image: linear-gradient(to bottom, #7f594c 0%, #735144 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .brown.actionable.active,
@@ -2626,11 +2536,6 @@ th {
 
 .base.transparentize {
   background: rgba(236, 239, 241, 0.95) !important;
-}
-
-.base.gradient {
-  background-image: linear-gradient(to bottom, #e6eaed 0%, #e0e5e8 100%) !important;
-  background-repeat: repeat-x !important;
 }
 
 .base.actionable.active,
@@ -3435,11 +3340,6 @@ label {
 
 .label.transparentize, .transparentize.button {
   background: rgba(255, 255, 255, 0.95) ;
-}
-
-.label.gradient, .gradient.button {
-  background-image: linear-gradient(to bottom, #fafafa 0%, whitesmoke 100%) ;
-  background-repeat: repeat-x ;
 }
 
 .label.actionable.active,

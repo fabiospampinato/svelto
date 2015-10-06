@@ -13,7 +13,7 @@
 
 /* MIXIN */
 
-@mixin color ( $color_name, $basic: false, $gradient: false, $extra: '' ) {
+@mixin color ( $color_name, $basic: false, $extra: '' ) {
 
   $colors: map-get($colors, $color_name);
 
@@ -25,7 +25,6 @@
   $text: nth($colors, 6);
   $link: nth($colors, 7);
   $link-hover: nth($colors, 8);
-  $support-gradient: nth($colors, 9);
 
   border-color: $border #{$extra};
   color: $text #{$extra};
@@ -42,18 +41,10 @@
 
     background: $bg #{$extra};
 
-  @if $color_name != inherit {
+    @if $color_name != inherit {
 
-    &.transparentize {
-      background: transparentize($bg, $color-transparentize-amount) #{$extra};
-    }
-
-  }
-
-    @if $support-gradient == true {
-
-      &.gradient {
-        @include gradient-vertical-from-color ( $color_name, #{$extra} );
+      &.transparentize {
+        background: transparentize($bg, $color-transparentize-amount) #{$extra};
       }
 
     }
@@ -126,24 +117,12 @@
 
   } @else {
 
-    @if $gradient == true {
+    background: $bg #{$extra};
 
-      @if $support-gradient == true {
+    @if $color_name != inherit {
 
-        @include gradient-vertical-from-color ( $color_name, #{$extra} );
-
-      }
-
-    } @else {
-
-      background: $bg #{$extra};
-
-      @if $color_name != inherit {
-
-        &.transparentize {
-          background: transparentize($bg, $color-transparentize-amount) #{$extra};
-        }
-
+      &.transparentize {
+        background: transparentize($bg, $color-transparentize-amount) #{$extra};
       }
 
     }
@@ -204,7 +183,7 @@
 @each $name, $datas in $colors {
 
   .#{$name} {
-    @include color ( $name, false, false, !important );
+    @include color ( $name, false, !important );
   }
 
   .text-#{$name} {
