@@ -985,13 +985,13 @@
 
       this._on ( Pointer.enter, function () {
 
-        this._on ( args );
+        this._on.apply ( this, args );
 
       });
 
       this._on ( Pointer.leave, function () {
 
-        this._off ( args );
+        this._off.apply ( this, args );
 
       });
 
@@ -2644,20 +2644,18 @@
 
     _events: function () {
 
-      /* SB ARROWS */
+      /* SB KEYDOWN */
 
-      this._on ( this.$sbWrp, Pointer.enter, this.__sbIn );
-      this._on ( this.$sbWrp, Pointer.leave, this.__sbOut );
+      this._onHover ( $document, 'keydown', this.__sbKeydown );
 
       /* SB DRAG */
 
       this._on ( this.$sbWrp, Pointer.dragmove, this.__sbDragMove );
       this._on ( this.$sbWrp, Pointer.dragend, this.__sbDragEnd );
 
-      /* HUE ARROWS */
+      /* HUE KEYDOWN */
 
-      this._on ( this.$hueWrp, Pointer.enter, this.__hueIn );
-      this._on ( this.$hueWrp, Pointer.leave, this.__hueOut );
+      this._onHover ( $document, 'keydown', this.__hueKeydown );
 
       /* HUE DRAG */
 
@@ -2667,18 +2665,6 @@
     },
 
     /* SB ARROWS */
-
-    __sbIn: function () {
-
-      this._on ( $document, 'keydown', this.__sbKeydown );
-
-    },
-
-    __sbOut: function () {
-
-      this._off ( $document, 'keydown', this.__sbKeydown );
-
-    },
 
     __sbKeydown: function () {
 
@@ -2740,18 +2726,6 @@
     },
 
     /* HUE ARROWS */
-
-    __hueIn: function () {
-
-      this._on ( $document, 'keydown', this.__hueKeydown );
-
-    },
-
-    __hueOut: function () {
-
-      this._off ( $document, 'keydown', this.__hueKeydown );
-
-    },
 
     __hueKeydown: function () {
 
@@ -3084,10 +3058,9 @@
 
     _events: function () {
 
-      /* ARROWS */
+      /* KEYDOWN */
 
-      this._on ( Pointer.enter, this.__arrowsIn );
-      this._on ( Pointer.leave, this.__arrowsOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* NAVIGATION PREV / NEXT */
 
@@ -3102,19 +3075,7 @@
 
     /* DATEPIKER */
 
-    __arrowsIn: function () {
-
-      this._on ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsOut: function () {
-
-      this._off ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsKeydown: function ( event ) {
+    __keydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -7379,10 +7340,9 @@ $(function () {
 
       this._on ( true, $window, 'resize', this.__resize );
 
-      /* ARROWS */
+      /* KEYDOWN */
 
-      this._on ( this.$slider, Pointer.enter, this.__arrowsIn );
-      this._on ( this.$slider, Pointer.leave, this.__arrowsOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* MIN / MAX BUTTONS */
 
@@ -7468,19 +7428,7 @@ $(function () {
 
     /* LEFT / RIGHT ARROWS */
 
-    __arrowsIn: function () {
-
-      this._on ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsOut: function () {
-
-      this._off ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsKeydown: function ( event ) {
+    __keydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -7913,10 +7861,9 @@ $(function () {
 
       this._on ( true, this.$input, 'input change', this.__inputChange );
 
-      /* ARROWS */
+      /* KEYDOWN */
 
-      this._on ( Pointer.enter, this.__arrowsIn );
-      this._on ( Pointer.leave, this.__arrowsOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* INCREASE */
 
@@ -7985,18 +7932,6 @@ $(function () {
     },
 
     /* LEFT / RIGHT ARROWS */
-
-    __arrowsIn: function ( event ) {
-
-      this._on ( $document, 'keydown', this.__keydown );
-
-    },
-
-    __arrowsOut: function ( event ) {
-
-      this._off ( $document, 'keydown', this.__keydown );
-
-    },
 
     __keydown: function ( event ) {
 
@@ -8170,10 +8105,9 @@ $(function () {
 
       this._on ( true, this.$input, 'change', this.__change );
 
-      /* KEYS */
+      /* KEYDOWN */
 
-      this._on ( 'mouseenter', this.__keysIn );
-      this._on ( 'mouseleave', this.__keysOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* DRAG */
 
@@ -8200,18 +8134,6 @@ $(function () {
     },
 
     /* KEYS */
-
-    __keysIn: function () {
-
-      this._on ( $document, 'keydown', this.__keydown );
-
-    },
-
-    __keysOut: function () {
-
-      this._off ( $document, 'keydown', this.__keydown );
-
-    },
 
     __keydown: function ( event ) {
 

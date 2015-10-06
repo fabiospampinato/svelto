@@ -101,10 +101,9 @@
 
     _events: function () {
 
-      /* ARROWS */
+      /* KEYDOWN */
 
-      this._on ( Pointer.enter, this.__arrowsIn );
-      this._on ( Pointer.leave, this.__arrowsOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* NAVIGATION PREV / NEXT */
 
@@ -119,19 +118,7 @@
 
     /* DATEPIKER */
 
-    __arrowsIn: function () {
-
-      this._on ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsOut: function () {
-
-      this._off ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsKeydown: function ( event ) {
+    __keydown: function ( event ) {
 
       switch ( event.keyCode ) {
 

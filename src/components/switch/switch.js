@@ -72,10 +72,9 @@
 
       this._on ( true, this.$input, 'change', this.__change );
 
-      /* KEYS */
+      /* KEYDOWN */
 
-      this._on ( 'mouseenter', this.__keysIn );
-      this._on ( 'mouseleave', this.__keysOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* DRAG */
 
@@ -102,18 +101,6 @@
     },
 
     /* KEYS */
-
-    __keysIn: function () {
-
-      this._on ( $document, 'keydown', this.__keydown );
-
-    },
-
-    __keysOut: function () {
-
-      this._off ( $document, 'keydown', this.__keydown );
-
-    },
 
     __keydown: function ( event ) {
 

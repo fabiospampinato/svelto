@@ -80,10 +80,9 @@
 
       this._on ( true, $window, 'resize', this.__resize );
 
-      /* ARROWS */
+      /* KEYDOWN */
 
-      this._on ( this.$slider, Pointer.enter, this.__arrowsIn );
-      this._on ( this.$slider, Pointer.leave, this.__arrowsOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* MIN / MAX BUTTONS */
 
@@ -169,19 +168,7 @@
 
     /* LEFT / RIGHT ARROWS */
 
-    __arrowsIn: function () {
-
-      this._on ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsOut: function () {
-
-      this._off ( $document, 'keydown', this.__arrowsKeydown );
-
-    },
-
-    __arrowsKeydown: function ( event ) {
+    __keydown: function ( event ) {
 
       switch ( event.keyCode ) {
 

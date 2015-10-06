@@ -60,10 +60,9 @@
 
       this._on ( true, this.$input, 'input change', this.__inputChange );
 
-      /* ARROWS */
+      /* KEYDOWN */
 
-      this._on ( Pointer.enter, this.__arrowsIn );
-      this._on ( Pointer.leave, this.__arrowsOut );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* INCREASE */
 
@@ -132,18 +131,6 @@
     },
 
     /* LEFT / RIGHT ARROWS */
-
-    __arrowsIn: function ( event ) {
-
-      this._on ( $document, 'keydown', this.__keydown );
-
-    },
-
-    __arrowsOut: function ( event ) {
-
-      this._off ( $document, 'keydown', this.__keydown );
-
-    },
 
     __keydown: function ( event ) {
 

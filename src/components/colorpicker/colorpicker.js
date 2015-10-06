@@ -80,20 +80,18 @@
 
     _events: function () {
 
-      /* SB ARROWS */
+      /* SB KEYDOWN */
 
-      this._on ( this.$sbWrp, Pointer.enter, this.__sbIn );
-      this._on ( this.$sbWrp, Pointer.leave, this.__sbOut );
+      this._onHover ( $document, 'keydown', this.__sbKeydown );
 
       /* SB DRAG */
 
       this._on ( this.$sbWrp, Pointer.dragmove, this.__sbDragMove );
       this._on ( this.$sbWrp, Pointer.dragend, this.__sbDragEnd );
 
-      /* HUE ARROWS */
+      /* HUE KEYDOWN */
 
-      this._on ( this.$hueWrp, Pointer.enter, this.__hueIn );
-      this._on ( this.$hueWrp, Pointer.leave, this.__hueOut );
+      this._onHover ( $document, 'keydown', this.__hueKeydown );
 
       /* HUE DRAG */
 
@@ -103,18 +101,6 @@
     },
 
     /* SB ARROWS */
-
-    __sbIn: function () {
-
-      this._on ( $document, 'keydown', this.__sbKeydown );
-
-    },
-
-    __sbOut: function () {
-
-      this._off ( $document, 'keydown', this.__sbKeydown );
-
-    },
 
     __sbKeydown: function () {
 
@@ -176,18 +162,6 @@
     },
 
     /* HUE ARROWS */
-
-    __hueIn: function () {
-
-      this._on ( $document, 'keydown', this.__hueKeydown );
-
-    },
-
-    __hueOut: function () {
-
-      this._off ( $document, 'keydown', this.__hueKeydown );
-
-    },
 
     __hueKeydown: function () {
 

@@ -322,13 +322,13 @@
 
       this._on ( Pointer.enter, function () {
 
-        this._on ( args );
+        this._on.apply ( this, args );
 
       });
 
       this._on ( Pointer.leave, function () {
 
-        this._off ( args );
+        this._off.apply ( this, args );
 
       });
 
