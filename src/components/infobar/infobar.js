@@ -40,6 +40,8 @@
 
     _events: function () {
 
+      /* CLOSER */
+
       this._on ( this.$closers, Pointer.tap, this.close );
 
     },

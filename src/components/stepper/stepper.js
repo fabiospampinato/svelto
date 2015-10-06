@@ -62,8 +62,8 @@
 
       /* ARROWS */
 
-      this._on ( 'mouseenter', this.__arrowsIn );
-      this._on ( 'mouseleave', this.__arrowsOut );
+      this._on ( Pointer.enter, this.__arrowsIn );
+      this._on ( Pointer.leave, this.__arrowsOut );
 
       /* INCREASE */
 

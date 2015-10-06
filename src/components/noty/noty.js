@@ -165,7 +165,7 @@
 
     },
 
-    ___buttonClick: function () {
+    ___buttonTap: function () {
 
       _.each ( this.options.buttons, function ( button, index ) {
 
@@ -185,7 +185,7 @@
 
     },
 
-    _init_timer: function () {
+    ___timer: function () {
 
       if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
@@ -281,14 +281,14 @@
 
           this.___click ();
           this.___flick ();
-          this.___buttonClick ();
+          this.___buttonTap ();
           this.___hover ();
 
           this.neverOpened = false;
 
         }
 
-        this._init_timer ();
+        this.___timer ();
 
         this._on ( $document, 'keydown', this.__keydown );
 

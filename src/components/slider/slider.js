@@ -82,8 +82,8 @@
 
       /* ARROWS */
 
-      this._on ( this.$slider, 'mouseenter', this.__arrowsIn );
-      this._on ( this.$slider, 'mouseleave', this.__arrowsOut );
+      this._on ( this.$slider, Pointer.enter, this.__arrowsIn );
+      this._on ( this.$slider, Pointer.leave, this.__arrowsOut );
 
       /* MIN / MAX BUTTONS */
 

@@ -103,13 +103,13 @@
 
       /* ARROWS */
 
-      this._on ( 'mouseenter', this.__arrowsIn );
-      this._on ( 'mouseleave', this.__arrowsOut );
+      this._on ( Pointer.enter, this.__arrowsIn );
+      this._on ( Pointer.leave, this.__arrowsOut );
 
       /* NAVIGATION PREV / NEXT */
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.__prevClick );
-      this._on ( this.$navigationNext, Pointer.tap, this.__nextClick );
+      this._on ( this.$navigationPrev, Pointer.tap, this.__prevTap );
+      this._on ( this.$navigationNext, Pointer.tap, this.__nextTap );
 
       /* DAY CLICK */
 
@@ -151,13 +151,13 @@
 
     /* NAVIGATION */
 
-    __prevClick: function () {
+    __prevTap: function () {
 
       this.prevMonth ();
 
     },
 
-    __nextClick: function () {
+    __nextTap: function () {
 
       this.nextMonth ();
 

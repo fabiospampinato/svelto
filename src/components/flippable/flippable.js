@@ -48,6 +48,8 @@
 
     _events: function () {
 
+      /* FLIPPER */
+
       this._on ( this.$flippers, Pointer.tap, this.flip );
 
     },

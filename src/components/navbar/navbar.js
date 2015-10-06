@@ -48,11 +48,11 @@
 
     _events: function () {
 
-      /* CLOSER CLICK */
+      /* CLOSER TAP */
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
-      /* TRIGGER CLICK */
+      /* TRIGGER TAP */
 
       this._on ( this.$triggers, Pointer.tap, this.open );
 

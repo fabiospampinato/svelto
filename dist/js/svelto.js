@@ -1669,6 +1669,8 @@
 
     _events: function () {
 
+      /* TOGGLER */
+
       this._on ( this.$togglers, Pointer.tap, this.toggle );
 
     },
@@ -2146,7 +2148,7 @@
 
       this._on ( true, 'change', this.__change );
 
-      /* CLICK */
+      /* TAP */
 
       this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
 
@@ -2603,8 +2605,8 @@
 
       /* SB ARROWS */
 
-      this._on ( this.$sbWrp, 'mouseenter', this.__sbIn );
-      this._on ( this.$sbWrp, 'mouseleave', this.__sbOut );
+      this._on ( this.$sbWrp, Pointer.enter, this.__sbIn );
+      this._on ( this.$sbWrp, Pointer.leave, this.__sbOut );
 
       /* SB DRAG */
 
@@ -2613,8 +2615,8 @@
 
       /* HUE ARROWS */
 
-      this._on ( this.$hueWrp, 'mouseenter', this.__hueIn );
-      this._on ( this.$hueWrp, 'mouseleave', this.__hueOut );
+      this._on ( this.$hueWrp, Pointer.enter, this.__hueIn );
+      this._on ( this.$hueWrp, Pointer.leave, this.__hueOut );
 
       /* HUE DRAG */
 
@@ -3043,13 +3045,13 @@
 
       /* ARROWS */
 
-      this._on ( 'mouseenter', this.__arrowsIn );
-      this._on ( 'mouseleave', this.__arrowsOut );
+      this._on ( Pointer.enter, this.__arrowsIn );
+      this._on ( Pointer.leave, this.__arrowsOut );
 
       /* NAVIGATION PREV / NEXT */
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.__prevClick );
-      this._on ( this.$navigationNext, Pointer.tap, this.__nextClick );
+      this._on ( this.$navigationPrev, Pointer.tap, this.__prevTap );
+      this._on ( this.$navigationNext, Pointer.tap, this.__nextTap );
 
       /* DAY CLICK */
 
@@ -3091,13 +3093,13 @@
 
     /* NAVIGATION */
 
-    __prevClick: function () {
+    __prevTap: function () {
 
       this.prevMonth ();
 
     },
 
-    __nextClick: function () {
+    __nextTap: function () {
 
       this.nextMonth ();
 
@@ -4244,6 +4246,8 @@
 
     _events: function () {
 
+      /* FLIPPER */
+
       this._on ( this.$flippers, Pointer.tap, this.flip );
 
     },
@@ -4660,7 +4664,7 @@
 
     },
 
-    ___buttonClick: function () {
+    ___buttonTap: function () {
 
       _.each ( this.options.buttons, function ( button, index ) {
 
@@ -4680,7 +4684,7 @@
 
     },
 
-    _init_timer: function () {
+    ___timer: function () {
 
       if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
@@ -4776,14 +4780,14 @@
 
           this.___click ();
           this.___flick ();
-          this.___buttonClick ();
+          this.___buttonTap ();
           this.___hover ();
 
           this.neverOpened = false;
 
         }
 
-        this._init_timer ();
+        this.___timer ();
 
         this._on ( $document, 'keydown', this.__keydown );
 
@@ -5030,6 +5034,8 @@
     },
 
     _events: function () {
+
+      /* CLOSER */
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
@@ -5471,11 +5477,11 @@
 
     _events: function () {
 
-      /* CLOSER CLICK */
+      /* CLOSER TAP */
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
-      /* TRIGGER CLICK */
+      /* TRIGGER TAP */
 
       this._on ( this.$triggers, Pointer.tap, this.open );
 
@@ -7334,8 +7340,8 @@ $(function () {
 
       /* ARROWS */
 
-      this._on ( this.$slider, 'mouseenter', this.__arrowsIn );
-      this._on ( this.$slider, 'mouseleave', this.__arrowsOut );
+      this._on ( this.$slider, Pointer.enter, this.__arrowsIn );
+      this._on ( this.$slider, Pointer.leave, this.__arrowsOut );
 
       /* MIN / MAX BUTTONS */
 
@@ -7636,9 +7642,9 @@ $(function () {
 
       this._on ( true, 'change', this.__change ); //TODO: Update to support tableHelper
 
-      /* CLICK */
+      /* TAP */
 
-      this._on ( this.$sortables, Pointer.tap, this.__click );
+      this._on ( this.$sortables, Pointer.tap, this.__tap );
 
     },
 
@@ -7659,7 +7665,7 @@ $(function () {
 
     /* CLICK */
 
-    __click: function ( event ) {
+    __tap: function ( event ) {
 
       var newIndex = this.$headers.index ( event.target ),
           newDirection = this.currentIndex === newIndex
@@ -7868,8 +7874,8 @@ $(function () {
 
       /* ARROWS */
 
-      this._on ( 'mouseenter', this.__arrowsIn );
-      this._on ( 'mouseleave', this.__arrowsOut );
+      this._on ( Pointer.enter, this.__arrowsIn );
+      this._on ( Pointer.leave, this.__arrowsOut );
 
       /* INCREASE */
 
@@ -8591,13 +8597,13 @@ $(function () {
 
       /* TRIGGERS */
 
-      this._on ( this.$triggers, Pointer.tap, this.__triggerClick );
+      this._on ( this.$triggers, Pointer.tap, this.__tap );
 
     },
 
     /* PRIVATE */
 
-    __triggerClick: function ( event, node ) {
+    __tap: function ( event, node ) {
 
       var newIndex = this.$triggers.index ( $(node) );
 
@@ -8768,13 +8774,13 @@ $(function () {
 
       this._on ( this.$partial, 'paste', this.__paste );
 
-      /* CLICK ON EMPTY */
+      /* TAP ON EMPTY */
 
-      this._on ( Pointer.tap, this.__clickOnEmpty );
+      this._on ( Pointer.tap, this.__tapOnEmpty );
 
-      /* CLICK ON TAG REMOVER */
+      /* TAP ON TAG REMOVER */
 
-      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__clickOnTagRemover );
+      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
 
     },
 
@@ -8942,9 +8948,9 @@ $(function () {
 
     },
 
-    /* CLICK ON CLOSE */
+    /* TAP ON CLOSE */
 
-    __clickOnTagRemover: function ( event, tagRemover ) {
+    __tapOnTagRemover: function ( event, tagRemover ) {
 
       var $tag = $(tagRemover).parents ( this.options.selectors.tag );
 
@@ -8952,9 +8958,9 @@ $(function () {
 
     },
 
-    /* CLICK ON EMPTY */
+    /* TAP ON EMPTY */
 
-    __clickOnEmpty: function ( event ) {
+    __tapOnEmpty: function ( event ) {
 
       if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( 'input, ' + this.options.selectors.tagLabel ) ) {
 

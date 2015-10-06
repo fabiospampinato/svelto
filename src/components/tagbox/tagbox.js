@@ -97,13 +97,13 @@
 
       this._on ( this.$partial, 'paste', this.__paste );
 
-      /* CLICK ON EMPTY */
+      /* TAP ON EMPTY */
 
-      this._on ( Pointer.tap, this.__clickOnEmpty );
+      this._on ( Pointer.tap, this.__tapOnEmpty );
 
-      /* CLICK ON TAG REMOVER */
+      /* TAP ON TAG REMOVER */
 
-      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__clickOnTagRemover );
+      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
 
     },
 
@@ -271,9 +271,9 @@
 
     },
 
-    /* CLICK ON CLOSE */
+    /* TAP ON CLOSE */
 
-    __clickOnTagRemover: function ( event, tagRemover ) {
+    __tapOnTagRemover: function ( event, tagRemover ) {
 
       var $tag = $(tagRemover).parents ( this.options.selectors.tag );
 
@@ -281,9 +281,9 @@
 
     },
 
-    /* CLICK ON EMPTY */
+    /* TAP ON EMPTY */
 
-    __clickOnEmpty: function ( event ) {
+    __tapOnEmpty: function ( event ) {
 
       if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( 'input, ' + this.options.selectors.tagLabel ) ) {
 

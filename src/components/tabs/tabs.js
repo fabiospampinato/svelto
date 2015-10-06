@@ -68,13 +68,13 @@
 
       /* TRIGGERS */
 
-      this._on ( this.$triggers, Pointer.tap, this.__triggerClick );
+      this._on ( this.$triggers, Pointer.tap, this.__tap );
 
     },
 
     /* PRIVATE */
 
-    __triggerClick: function ( event, node ) {
+    __tap: function ( event, node ) {
 
       var newIndex = this.$triggers.index ( $(node) );
 

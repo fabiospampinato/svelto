@@ -54,7 +54,7 @@
 
       this._on ( true, 'change', this.__change );
 
-      /* CLICK */
+      /* TAP */
 
       this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
 

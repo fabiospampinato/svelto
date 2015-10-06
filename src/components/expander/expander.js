@@ -45,6 +45,8 @@
 
     _events: function () {
 
+      /* TOGGLER */
+
       this._on ( this.$togglers, Pointer.tap, this.toggle );
 
     },

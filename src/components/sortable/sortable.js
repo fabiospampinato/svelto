@@ -94,9 +94,9 @@
 
       this._on ( true, 'change', this.__change ); //TODO: Update to support tableHelper
 
-      /* CLICK */
+      /* TAP */
 
-      this._on ( this.$sortables, Pointer.tap, this.__click );
+      this._on ( this.$sortables, Pointer.tap, this.__tap );
 
     },
 
@@ -117,7 +117,7 @@
 
     /* CLICK */
 
-    __click: function ( event ) {
+    __tap: function ( event ) {
 
       var newIndex = this.$headers.index ( event.target ),
           newDirection = this.currentIndex === newIndex

@@ -82,8 +82,8 @@
 
       /* SB ARROWS */
 
-      this._on ( this.$sbWrp, 'mouseenter', this.__sbIn );
-      this._on ( this.$sbWrp, 'mouseleave', this.__sbOut );
+      this._on ( this.$sbWrp, Pointer.enter, this.__sbIn );
+      this._on ( this.$sbWrp, Pointer.leave, this.__sbOut );
 
       /* SB DRAG */
 
@@ -92,8 +92,8 @@
 
       /* HUE ARROWS */
 
-      this._on ( this.$hueWrp, 'mouseenter', this.__hueIn );
-      this._on ( this.$hueWrp, 'mouseleave', this.__hueOut );
+      this._on ( this.$hueWrp, Pointer.enter, this.__hueIn );
+      this._on ( this.$hueWrp, Pointer.leave, this.__hueOut );
 
       /* HUE DRAG */
 
