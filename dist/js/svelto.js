@@ -426,6 +426,27 @@
 
   };
 
+  $.fn.onHover = function () {
+
+    //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+
+    var args = arguments,
+        self = this;
+
+    this.on ( Pointer.enter, function () {
+
+      self.on ( args );
+
+    });
+
+    this.on ( Pointer.leave, function () {
+
+      self.off ( args );
+
+    });
+
+  };
+
   /* COMMON OBJECTS */
 
   $(function () {
@@ -953,6 +974,26 @@
       }
 
       return this;
+
+    },
+
+    _onHover: function () {
+
+      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+
+      var args = arguments;
+
+      this._on ( Pointer.enter, function () {
+
+        this._on ( args );
+
+      });
+
+      this._on ( Pointer.leave, function () {
+
+        this._off ( args );
+
+      });
 
     },
 
