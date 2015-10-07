@@ -180,7 +180,7 @@
 
       this.$draggable.translate ( endXY.X, endXY.Y );
 
-      return modifiedXY;
+      return endXY;
 
     },
 
@@ -268,11 +268,11 @@
 
       isDragging = false;
 
-      this._trigger ( 'end', { initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
-
       this._off ( $document, Pointer.move, this.__move );
       this._off ( $document, Pointer.up, this.__up );
       this._off ( $document, Pointer.cancel, this.__cancel );
+
+      this._trigger ( 'end', { initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
     },
 

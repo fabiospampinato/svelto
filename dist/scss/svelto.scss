@@ -3824,6 +3824,7 @@ $colorpicker-handler-hue-border-radius: $border-radius-small !default;
     z-index: 2;
     box-sizing: border-box;
     border: $colorpicker-handler-border-width solid $colorpicker-handler-border-color;
+    background-color: $colorpicker-handler-border-color;
   }
 
   /* WRAPPERS */

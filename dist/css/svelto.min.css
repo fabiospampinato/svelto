@@ -4639,6 +4639,7 @@ button {
   z-index: 2;
   box-sizing: border-box;
   border: 2px solid white;
+  background-color: white;
 }
 
 .colorpicker-saturation-brightness-wrp,

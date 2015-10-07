@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colorpicker v0.2.0
+ * Svelto - Colorpicker v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -86,8 +86,18 @@
 
       /* SB DRAG */
 
-      this._on ( this.$sbWrp, Pointer.dragmove, this.__sbDragMove );
-      this._on ( this.$sbWrp, Pointer.dragend, this.__sbDragEnd );
+      this.$sbHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        $proxy: this.$sbWrp,
+        constrainer: {
+          $element: this.$sbWrp,
+          constrainCenter: true
+        },
+        callbacks: {
+          move: this.__sbDragMove.bind ( this ),
+          end: this.__sbDragEnd.bind ( this )
+        }
+      });
 
       /* HUE KEYDOWN */
 
@@ -95,8 +105,18 @@
 
       /* HUE DRAG */
 
-      this._on ( this.$hueWrp, Pointer.dragmove, this.__hueDragMove );
-      this._on ( this.$hueWrp, Pointer.dragend, this.__hueDragEnd );
+      this.$hueHandler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
+        axis: 'y',
+        $proxy: this.$hueWrp,
+        constrainer: {
+          $element: this.$hueWrp
+        },
+        callbacks: {
+          move: this.__hueDragMove.bind ( this ),
+          end: this.__hueDragEnd.bind ( this )
+        }
+      });
 
     },
 
@@ -136,8 +156,8 @@
 
     _sbDragSet: function ( XY, update ) {
 
-      this.color.hsv.s =  _.clamp ( 0, XY.X - this.sbWrpOffset.left, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y - this.sbWrpOffset.top, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.color.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
       this._updateSb ();
 
@@ -149,13 +169,13 @@
 
     },
 
-    __sbDragMove: function ( event, data ) {
+    __sbDragMove: function ( data ) {
 
       this._sbDragSet ( data.moveXY, this.options.live );
 
     },
 
-    __sbDragEnd: function ( event, data ) {
+    __sbDragEnd: function ( data ) {
 
       this._sbDragSet ( data.endXY, true );
 
@@ -189,7 +209,7 @@
 
     _hueDragSet: function ( XY, update ) {
 
-      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y - this.hueWrpOffset.top, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
       this._updateHue ();
 
@@ -201,13 +221,13 @@
 
     },
 
-    __hueDragMove: function ( event, data ) {
+    __hueDragMove: function ( data ) {
 
       this._hueDragSet ( data.moveXY, this.options.live );
 
     },
 
-    __hueDragEnd: function ( event, data ) {
+    __hueDragEnd: function ( data ) {
 
       this._hueDragSet ( data.endXY, true );
 
