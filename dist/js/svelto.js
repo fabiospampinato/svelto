@@ -2785,7 +2785,7 @@
           translateX = this.sbWrpSize / 100 * this.color.hsv.s,
           translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
 
-      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate2d ( translateX, translateY );
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
 
     },
 
@@ -3363,7 +3363,7 @@
 
 
 /* =========================================================================
- * Svelto - Draggable v0.2.0
+ * Svelto - Draggable v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3426,17 +3426,20 @@
       this.$draggable = this.$element;
 
       this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
-      this.$unhandlers = this.$draggable.find ( this.options.selectors.unhandler );
 
     },
 
     _events: function () {
 
-      this._on ( this.$handlers, Pointer.dragstart, this._start );
+      /* DOWN */
+
+      this._on ( this.$handlers, Pointer.down, this.__down );
+
+      /* PROXY */
 
       if ( this.options.$proxy ) {
 
-        this._on ( this.options.$proxy, Pointer.dragstart, this._start );
+        this._on ( this.options.$proxy, Pointer.down, this.__down );
 
       }
 
@@ -3530,11 +3533,15 @@
       }
 
       var modifiedXY = {
-        X: this.options.modifiers.x ( translateX ),
-        Y: this.options.modifiers.y ( translateY )
-      };
+            X: this.options.modifiers.x ( translateX ),
+            Y: this.options.modifiers.y ( translateY )
+          },
+          endXY = {
+            X: _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X,
+            Y: _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y
+          };
 
-      this.$draggable.translate2d ( _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X, _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y );
+      this.$draggable.translate ( endXY.X, endXY.Y );
 
       return modifiedXY;
 
@@ -3542,66 +3549,81 @@
 
     /* HANDLERS */
 
-    _start: function ( event, data, trigger ) {
+    __down: function ( event, trigger ) {
 
       if ( !isDragging && this.options.draggable () ) {
 
-        this.$trigger = $(trigger);
+        event.preventDefault ();
 
         isDragging = true;
 
         this.motion = false;
 
-        this.isProxyed = ( this.options.$proxy && this.$trigger.get ( 0 ) === this.options.$proxy.get ( 0 ) );
+        this.startXY = $.eventXY ( event );
+        this.initialXY = this.$draggable.translate ();
+
+        this.isProxyed = ( this.options.$proxy && trigger === this.options.$proxy[0] );
         this.proxyXY = false;
 
-        this.initialXY = this.$draggable.translate2d ();;
+        this._trigger ( 'start', { initialXY: this.initialXY } );
 
-        this._trigger ( 'start', _.merge ( data, { initialXY: this.initialXY, draggable: this.draggable } ) );
-
-        this._on ( this.$trigger, Pointer.dragmove, this._move );
-        this._on ( this.$trigger, Pointer.dragend, this._end );
+        this._on ( $document, Pointer.move, this.__move );
+        this._on ( $document, Pointer.up, this.__up );
+        this._on ( $document, Pointer.cancel, this.__cancel );
 
       }
 
     },
 
-    _move: function ( event, data ) {
+    __move: function ( event ) {
 
       if ( this.isProxyed && this.motion === false ) {
 
-        var modifiedXY = this._centerToPoint ( data.startXY );
+        var modifiedXY = this._centerToPoint ( this.startXY );
 
-        this.proxyXY = this.$draggable.translate2d ();
+        this.proxyXY = this.$draggable.translate ();
 
       }
 
-      var modifiedXY = this._actionMove ( data.deltaXY );
+      var moveXY = $.eventXY ( event ),
+          deltaXY = {
+            X: moveXY.X - this.startXY.X,
+            Y: moveXY.Y - this.startXY.Y
+          };
 
-      this._trigger ( 'move', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable } ) );
+      var modifiedXY = this._actionMove ( deltaXY );
+
+      this._trigger ( 'move', { initialXY: this.initialXY, moveXY: modifiedXY } );
 
     },
 
-    _end: function ( event, data ) {
+    __up: function ( event ) {
+
+      var modifiedXY = this.initialXY;
 
       if ( this.motion === true ) {
 
         $html.removeClass ( 'dragging' );
         this.$draggable.removeClass ( 'dragging' );
 
+        /* REVERTABLE */
+
         if ( this.options.revertable ) {
 
-          this.$draggable.translate2d ( this.initialXY.X, this.initialXY.Y ); //TODO: Animate it
+          this.$draggable.translate ( this.initialXY.X, this.initialXY.Y ); //TODO: Animate it
+
+        } else {
+
+          var modifiedXY = this.$draggable.translate ();
 
         }
 
-        var modifiedXY = { X: 0, Y: 0 };
-
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxyWithoutMotion ) {
+        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === 0 ) ) {
 
-          var modifiedXY = this._centerToPoint ( data.endXY, true );
+          var endXY = $.eventXY ( event ),
+              modifiedXY = this._centerToPoint ( endXY, true );
 
         }
 
@@ -3609,10 +3631,21 @@
 
       isDragging = false;
 
-      this._trigger ( 'end', _.merge ( data, { initialXY: this.initialXY, modifiedXY: modifiedXY, draggable: this.draggable, motion: this.motion } ) );
+      this._trigger ( 'end', { initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
-      this._off ( this.$trigger, Pointer.dragmove, this._move );
-      this._off ( this.$trigger, Pointer.dragend, this._end );
+      this._off ( $document, Pointer.move, this.__move );
+      this._off ( $document, Pointer.up, this.__up );
+      this._off ( $document, Pointer.cancel, this.__cancel );
+
+    },
+
+    __cancel () {
+
+      isDragging = false;
+
+      this._off ( $document, Pointer.move, this.__move );
+      this._off ( $document, Pointer.up, this.__up );
+      this._off ( $document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -3687,9 +3720,9 @@
 
     }
 
-    /* TRANSLATE 2D */
+    /* TRANSLATE */
 
-    $.fn.translate2d = function ( X, Y ) {
+    $.fn.translate = function ( X, Y ) {
 
       var matrix = this.matrix ();
 
@@ -3934,7 +3967,7 @@
 
     /* SETTING */
 
-    this.translate2d ( coordinates.left, coordinates.top );
+    this.translate ( coordinates.left, coordinates.top );
 
     this.addClass ( 'positionate-' + bestDirection );
 

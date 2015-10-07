@@ -19,8 +19,6 @@ append main
       +label.outlined.y-axis Y-Axis
       +label.outlined.constrained Constrained
       +label.outlined.constrained-center Constrained center
-      +label.outlined.constrained-x Constrained X
-      +label.outlined.constrained-y Constrained Y
       +label.outlined.constrained-tollerance Constrained 100-50 tollerance
       +label.outlined.constrained-coordinates-modifier Modifier 2x
       +label.outlined.proxyed Proxy
@@ -46,8 +44,6 @@ append body-end
     $('.y-axis').draggable ({ axis: 'y' });
     $('.constrained').draggable ({ constrainer: { $element: $('.constrainer') } });
     $('.constrained-center').draggable ({ constrainer: { $element: $('.constrainer'), constrainCenter: true } });
-    $('.constrained-x').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'x' } });
-    $('.constrained-y').draggable ({ constrainer: { $element: $('.constrainer'), axis: 'y' } });
     $('.constrained-tollerance').draggable ({ constrainer: { $element: $('.constrainer'), tollerance: { x: 100, y: 50 } } });
     $('.constrained-coordinates-modifier').draggable ({ modifiers: {
       x: function ( x ) { return 2 * x; },

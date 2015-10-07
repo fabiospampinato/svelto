@@ -219,7 +219,7 @@
 
     /* SETTING */
 
-    this.translate2d ( coordinates.left, coordinates.top );
+    this.translate ( coordinates.left, coordinates.top );
 
     this.addClass ( 'positionate-' + bestDirection );
 

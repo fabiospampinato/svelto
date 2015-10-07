@@ -185,7 +185,8 @@ gulp.task ( 'css', function () {
              .pipe ( dependencies ({
                pattern: /\* @requires [\s-]*(.*\.scss)/g
              }))
-             .pipe ( concat ( 'all' ) )
+             .pipe ( concat ( 'svelto.scss' ) )
+             .pipe ( gulp.dest ( 'dist/scss' ) )
              .pipe ( sass ({
                outputStyle: 'expanded',
                precision: 10

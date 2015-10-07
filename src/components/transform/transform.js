@@ -57,9 +57,9 @@
 
     }
 
-    /* TRANSLATE 2D */
+    /* TRANSLATE */
 
-    $.fn.translate2d = function ( X, Y ) {
+    $.fn.translate = function ( X, Y ) {
 
       var matrix = this.matrix ();
 

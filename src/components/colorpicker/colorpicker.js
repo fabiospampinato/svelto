@@ -221,7 +221,7 @@
           translateX = this.sbWrpSize / 100 * this.color.hsv.s,
           translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
 
-      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate2d ( translateX, translateY );
+      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
 
     },
 

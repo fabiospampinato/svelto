@@ -290,31 +290,6 @@ mixin container
 
 
 //- =========================================================================
-//- Svelto - Divider v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  .divider&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider.block
-    .divider-content&attributes(attributes)
-      block
-
-mixin divider-text
-  .divider&attributes(attributes).text
-    block
-
-mixin divider-spacer
-  .divider&attributes(attributes).spacer
-    block
-
-
-//- =========================================================================
 //- Svelto - Datepicker v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -384,6 +359,31 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
+
+
+//- =========================================================================
+//- Svelto - Divider v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  .divider&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider.block
+    .divider-content&attributes(attributes)
+      block
+
+mixin divider-text
+  .divider&attributes(attributes).text
+    block
+
+mixin divider-spacer
+  .divider&attributes(attributes).spacer
+    block
 
 
 //- =========================================================================
@@ -546,6 +546,20 @@ mixin header-with-bg(background_image_url)
 
 
 //- =========================================================================
+//- Svelto - Icons v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin icon(icon)
+  i&attributes(attributes).icon
+    if icon
+      = icon
+    block
+
+
+//- =========================================================================
 //- Svelto - Image v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -564,20 +578,6 @@ mixin image-caption
 
 mixin image-sample
   +image("/sample.png")&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Icons v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin icon(icon)
-  i&attributes(attributes).icon
-    if icon
-      = icon
     block
 
 
@@ -1000,6 +1000,35 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(options)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !options.empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
+
+
+//- =========================================================================
 //- Svelto - Parallax v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1039,35 +1068,6 @@ mixin parallax-layer-base
 mixin parallax-layer-foreground
   +parallax-layer&attributes(attributes).parallax-layer-foreground
     block
-
-
-//- =========================================================================
-//- Svelto - Placeholder v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    width: '', // Placeholder width
-    height: '', // Placeholder height
-    empty: '' // Placeholder is empty or not
-  }
-
-mixin placeholder(options)
-  - options = options || {};
-  - options.width = options.width || 0;
-  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
-  - options.height = options.height || 0;
-  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
-  - options.empty = options.empty || false;
-  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !options.empty
-      if block
-        block
-      else
-        = options.width + " - " + options.height
 
 
 //- =========================================================================
