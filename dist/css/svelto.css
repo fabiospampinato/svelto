@@ -10148,16 +10148,16 @@ table.table.selectable {
   /* ROW */
 }
 
-table.table.selectable tr {
+table.table.selectable tbody tr {
   /* SELECTABLE */
   /* SELECTED */
 }
 
-table.table.selectable tr:not(.empty) {
+table.table.selectable tbody tr:not(.empty) {
   cursor: pointer;
 }
 
-table.table.selectable tr.selected {
+table.table.selectable tbody tr.selected {
   background-color: #d9e9fb !important;
 }
 

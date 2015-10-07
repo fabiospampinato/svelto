@@ -42,11 +42,13 @@ append main
 
 append body-end
   script.
-    $('.other-elements').selectable ({
-      selectors: {
-        element: '.placeholder'
-      },
-      classes: {
-        selected: 'green'
-      }
+    $(function (){
+      $('.other-elements').selectable ({
+        selectors: {
+          element: '.placeholder'
+        },
+        classes: {
+          selected: 'green'
+        }
+      });
     });

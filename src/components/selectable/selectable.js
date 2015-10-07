@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Selectable v0.2.0
+ * Svelto - Selectable v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,36 +8,13 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-
-// ------------------------------------------------------------------------------------------------
-//TODO: Abstract mousedown, mouseup, mousemove etc with the pointer, then write `selectable` better
-// ------------------------------------------------------------------------------------------------
-
-
 //TODO: Add dropdown for actions AND/OR right click for action
-//FIXME: Make it workable with sorting (update after sorting since we may)
+//FIXME: Add support tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
-//FIXME: Select multiple with shift, then just click inside the selection, the clicked element doesn't get selected
 
 ;(function ( $, _, window, document, undefined ) {
 
   'use strict';
-
-  /* PRIVATE */
-
-  var clearSelection = function () {
-
-    if ( document.selection ) {
-
-      document.selection.empty ();
-
-    } else if ( window.getSelection ) {
-
-      window.getSelection ().removeAllRanges ();
-
-    }
-
-  };
 
   /* SELECTABLE */
 
@@ -67,49 +44,29 @@
       this.$startElement = false;
       this.$endElement = false;
 
-      this._resetPrev ();
-
     },
 
     _events: function () {
 
-      /* KEYS */
+      /* KEYDOWN */
 
-      this._on ( 'mouseenter', this.__keysIn );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
-      this._on ( 'mouseleave', this.__keysOut );
+      /* POINTER */
 
-      /* MOUSE */
-
-      this._on ( 'mousedown', this.options.selectors.element, this.__mousedown );
+      this._on ( Pointer.down, this.options.selectors.element, this.__down );
 
       /* OTHERS */
 
-      //FIXME: Add support tableHelper and sortable
-
       this._on ( 'change sort', this.__change );
-
-      this._on ( 'mousedown mouseup', this.__clearSelection );
 
     },
 
     /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
-    __keysIn: function () {
+    __keydown: function ( event ) {
 
-      this._on ( $document, 'keydown', this.__keysKeydown );
-
-    },
-
-    __keysOut: function () {
-
-      this._off ( $document, 'keydown', this.__keysKeydown );
-
-    },
-
-    __keysKeydown: function ( event ) {
-
-      if ( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) ) { //INFO: COMMAND or CTRL, is we are on Mac or not
+      if ( $.hasCtrlOrCmd ( event ) ) {
 
         if ( event.keyCode === 65 ) { //INFO: A
 
@@ -117,9 +74,9 @@
 
           this._resetPrev ();
 
-          this.$elements.toggleClass ( this.options.selected_class, !event.shiftKey ); //INFO: SHIFT or not //FIXME: only works if the last character pushed is the `A`, but is it an unwanted behaviour?
+          this.$elements.toggleClass ( this.options.classes.selected, !event.shiftKey ); //INFO: SHIFT or not //FIXME: It only works if the last character pushed is the `A`, but is it an unwanted behaviour?
 
-          this._trigger ( 'select' );
+          this._trigger ( 'change' );
 
         } else if ( event.keyCode === 73 ) { //INFO: I
 
@@ -127,9 +84,9 @@
 
           this._resetPrev ();
 
-          this.$elements.toggleClass ( this.options.selected_class );
+          this.$elements.toggleClass ( this.options.classes.selected );
 
-          this._trigger ( 'select' );
+          this._trigger ( 'change' );
 
         }
 
@@ -137,131 +94,137 @@
 
     },
 
-    /* CLICK / CTRL + CLICK / SHIFT + CLICK / CTRL + CLICK -> DRAG */
+    /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
-    __mousedown: function ( event ) {
+    __down: function ( event ) {
 
-      if ( event.button !== 0 ) return; //INFO: Only the left click is enabled
+      if ( event.button && event.button !== 0 ) return; //INFO: Only the left click is allowed
+
+      event.preventDefault ();
 
       this.$startElement = $(event.currentTarget);
 
-      this._on ( $document, 'mousemove', this.__mousemove );
+      if ( !$.browser.is.touchDevice ) {
 
-      this._on ( 'mouseup', this.options.selector, this.__mouseUp );
+        this._on ( $document, Pointer.move, this.__move );
+
+      }
+
+      this._on ( Pointer.up, this.options.selectors.element, this.__up );
 
     },
 
-    __mousemove: function ( event ) { // DRAG
+    __move: function ( event ) {
 
-      if ( ( $.browser.is.mac && !event.metaKey ) || ( !$.browser.is.mac && !event.ctrlKey ) ) return;
+      event.preventDefault ();
 
-      this._off ( $document, 'mousemove', this.__mousemove );
+      this._off ( $document, Pointer.move, this.__move );
 
-      this._off ( 'mouseup', this.__mouseUp );
+      this._off ( Pointer.up, this.__up );
+
+      this.$elements.not ( this.$startElement ).removeClass ( this.options.classes.selected );
 
       this._resetPrev ();
 
       this.$prevElement = this.$startElement;
 
-      this.$startElement.toggleClass ( this.options.selected_class );
+      this.$startElement.toggleClass ( this.options.classes.selected );
 
-      $html.addClass ( 'dragging' );
+      this._on ( Pointer.enter, this.options.selectors.element, this.__dragEnter );
 
-      this._on ( 'mouseenter', this.options.selector, this.__dragMouseenter );
+      this._on ( $document, Pointer.up, this.__dragMouseup );
 
-      this._on ( $document, 'mouseup', this.__dragMouseup );
-
-      this._trigger ( 'select' );
+      this._trigger ( 'change' );
 
     },
 
-    __dragMouseenter: function ( event ) { // DRAG HOVER
+    __dragEnter: function ( event ) {
+
+      //TODO: Remove previous
 
       this.$endElement = $(event.currentTarget);
 
-      var start_index = this.$elements.index ( this.$startElement ),
-        end_index = this.$elements.index ( this.$endElement ),
-        min_index = Math.min ( start_index, end_index ),
-        max_index = Math.max ( start_index, end_index );
+      var startIndex = this.$elements.index ( this.$startElement ),
+          endIndex = this.$elements.index ( this.$endElement ),
+          minIndex = Math.min ( startIndex, endIndex ),
+          maxIndex = Math.max ( startIndex, endIndex );
 
-      if ( min_index === start_index ) { // down
+      if ( minIndex === startIndex ) { //INFO: Direction: down
 
-        min_index += 1;
-        max_index += 1;
+        minIndex += 1;
+        maxIndex += 1;
 
       }
 
-      var $new_dragged = this.$elements.slice ( min_index, max_index );
+      var $newDragged = this.$elements.slice ( minIndex, maxIndex );
 
       if ( this.$prevDragged ) {
 
-        $new_dragged.not ( this.$prevDragged ).toggleClass ( this.options.selected_class );
+        $newDragged.not ( this.$prevDragged ).toggleClass ( this.options.classes.selected );
 
-        this.$prevDragged.not ( $new_dragged ).toggleClass ( this.options.selected_class );
+        this.$prevDragged.not ( $newDragged ).toggleClass ( this.options.classes.selected );
 
       } else {
 
-        $new_dragged.toggleClass ( this.options.selected_class );
+        $newDragged.toggleClass ( this.options.classes.selected );
 
       }
 
-      this.$prevDragged = $new_dragged;
+      this.$prevDragged = $newDragged;
 
-      this._trigger ( 'select' );
+      this._trigger ( 'change' );
 
     },
 
-    __dragMouseup: function () { // DRAG END
+    __dragMouseup: function () {
 
-      this._off ( 'mouseenter', this.__dragMouseenter );
+      this._off ( Pointer.enter, this.__dragEnter );
 
-      this._off ( $document, 'mouseup', this.__dragMouseup );
+      this._off ( $document, Pointer.up, this.__dragMouseup );
 
       this.$prevDragged = false;
 
-      $html.removeClass ( 'dragging' );
-
     },
 
-    __mouseUp: function ( event ) { // CLICK
+    __up: function ( event ) {
 
-      this._off ( $document, 'mousemove', this.__mousemove );
+      this._off ( $document, Pointer.move, this.__move );
 
-      this._off ( 'mouseup', this.__mouseUp );
+      this._off ( Pointer.up, this.__up );
 
       if ( event.shiftKey ) {
 
-        var start_index = this.$elements.index ( this.$prevElement ),
-          end_index = this.$prevElement ? this.$elements.index ( this.$startElement ) : 0,
-          min_index = Math.min ( start_index, end_index ),
-          max_index = Math.max ( start_index, end_index );
+        var startIndex = this.$elements.index ( this.$prevElement ),
+            endIndex = this.$prevElement ? this.$elements.index ( this.$startElement ) : 0,
+            minIndex = Math.min ( startIndex, endIndex ),
+            maxIndex = Math.max ( startIndex, endIndex );
 
-        if ( min_index === start_index ) { // down
+        if ( minIndex === startIndex ) { //INFO: Direction: down
 
-          min_index += 1;
-          max_index += 1;
+          minIndex += 1;
+          maxIndex += 1;
 
         }
 
-        var $new_shifted = this.$elements.slice ( min_index, max_index );
+        var $newShifted = this.$elements.slice ( minIndex, maxIndex );
 
         if ( this.$prevShifted ) {
 
-          $new_shifted.not ( this.$prevShifted ).toggleClass ( this.options.selected_class );
+          $newShifted.not ( this.$prevShifted ).toggleClass ( this.options.classes.selected );
 
-          this.$prevShifted.not ( $new_shifted ).toggleClass ( this.options.selected_class );
+          this.$prevShifted.not ( $newShifted ).toggleClass ( this.options.classes.selected );
 
         } else {
 
-          $new_shifted.toggleClass ( this.options.selected_class );
+          $newShifted.toggleClass ( this.options.classes.selected );
 
         }
 
-        this.$prevShifted = $new_shifted;
+        this.$prevShifted = $newShifted;
 
-      } else if ( ( $.browser.is.mac && event.metaKey ) || ( !$.browser.is.mac && event.ctrlKey ) || $.browser.is.touchDevice ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+      } else if ( $.hasCtrlOrCmd ( event ) || $.browser.is.touchDevice ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
 
-        this.$startElement.toggleClass ( this.options.selected_class );
+        this.$startElement.toggleClass ( this.options.classes.selected );
 
         this._resetPrev ();
 
@@ -269,9 +232,17 @@
 
       } else {
 
-        this.$elements.not ( this.$startElement ).removeClass ( this.options.selected_class );
+        var $selected = this.$elements.not ( this.$startElement );
 
-        this.$startElement.toggleClass ( this.options.selected_class );
+        if ( $selected.length > 0 ) {
+
+          $selected.removeClass ( this.options.classes.selected );
+
+        } else {
+
+          this.$startElement.removeClass ( this.options.classes.selected );
+
+        }
 
         this._resetPrev ();
 
@@ -279,7 +250,7 @@
 
       }
 
-      this._trigger ( 'select' );
+      this._trigger ( 'change' );
 
     },
 
@@ -289,13 +260,7 @@
 
       this.$elements = this._getElements ();
 
-    },
-
-    __clearSelection: function () {
-
-      $.reflow ();
-
-      clearSelection ();
+      this._resetPrev ();
 
     },
 
@@ -311,7 +276,7 @@
 
     _getElements: function () {
 
-      return this.$element.find ( this.options.selector );
+      return this.$element.find ( this.options.selectors.element );
 
     },
 
@@ -319,7 +284,7 @@
 
     get: function () {
 
-      //TODO: Return selected rows
+      return this.$elements.filter ( '.' + this.options.selectors.selected );
 
     }
 
