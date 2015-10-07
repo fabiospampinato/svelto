@@ -8223,7 +8223,7 @@ $(function () {
 
       if ( data.motion ) {
 
-        var isChecked = ( this.$handler.translateX () + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+        var isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
 
         this.toggle ( isChecked, true );
 
