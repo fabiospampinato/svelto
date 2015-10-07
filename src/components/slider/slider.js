@@ -196,15 +196,15 @@
 
     __dragMove: function ( data ) {
 
-      this.$highlight.translateX ( data.modifiedXY.X );
+      this.$highlight.translateX ( data.moveXY.X );
 
-      this._updateLabel ( this._roundValue ( this.options.min + ( data.modifiedXY.X / this.stepWidth * this.options.step ) ) );
+      this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
 
     },
 
     __dragEnd: function ( data ) {
 
-      this.set ( this.options.min + ( this.$handlerWrp.translateX () / this.stepWidth * this.options.step ) );
+      this.set ( this.options.min + ( data.endXY.X / this.stepWidth * this.options.step ) );
 
     },
 
