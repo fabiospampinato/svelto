@@ -29,12 +29,8 @@ $.factory ( 'svelto.progressbar', {
   /* TEMPLATES */
 
   templates: {
-    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
-            '<div class="progressbar-highlight {%=o.colors.on%}">' +
-              '{% if ( o.labeled ) { %}' +
-                '<div class="progressbar-label"></div>' +
-              '{% } %}' +
-            '</div>' +
+    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+            '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
           '</div>'
   },
 
@@ -46,14 +42,13 @@ $.factory ( 'svelto.progressbar', {
       on: '', // Color of `.progressbar-highlight`
       off: '' // Color of `.progressbar`
     },
-    striped: '', // Draw striped over it
-    labeled: '', // Draw a label inside
+    striped: false, // Draw striped over it
+    labeled: false, // Draw a label inside
     decimals: 0, // Amount of decimals to round the label value to
     size: '', // Size of the progressbar: '', 'compact', 'slim'
     css: '',
     selectors: {
-      highlight: '.progressbar-highlight',
-      label: '.progressbar-label'
+      highlight: '.progressbar-highlight'
     },
     callbacks: {
       change: _.noop,
@@ -68,7 +63,6 @@ $.factory ( 'svelto.progressbar', {
 
     this.$progressbar = this.$element;
     this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
-    this.$label = this.$progressbar.find ( this.options.selectors.label );
 
   },
 
@@ -105,7 +99,7 @@ $.factory ( 'svelto.progressbar', {
 
   _updateLabel: function () {
 
-    this.$label.html ( this._roundValue ( this.options.value ) + '%' );
+    this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
 
   },
 

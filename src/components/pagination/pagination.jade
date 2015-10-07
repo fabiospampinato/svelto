@@ -16,6 +16,7 @@
   }
 
 mixin pagination(options)
+  //- TODO: Don't use multiple here, just .pagination
   - options.classes = options.classes || "";
   +multiple&attributes(attributes).pagination.centered
 

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Modal v0.2.0
+ * Svelto - Modal v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -18,6 +18,20 @@
   transition-property: transform, opacity;
   transition-duration: $modal-transition-all-duration;
   margin: 0;
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 400vw;
+    height: 400vh;
+    top: -200vh;
+    left: -200vw;
+    z-index: -1;
+    cursor: pointer;
+    background-color: $modal-background-color;
+  }
 
   /* NOT FULLSCREEN */
 
@@ -38,24 +52,13 @@
     border-radius: 0;
   }
 
-  /* BACKGROUND */
-
-  &-background {
-    @include fill-fixed ();
-    z-index: $modal-background-z-index;
-    cursor: pointer;
-    transition: opacity $modal-transition-all-duration;
-    background-color: $modal-background-color;
-  }
-
   /* CLOSED */
 
   &:not(.open) {
 
     /* MODAL & BACKGROUND */
 
-    &,
-    + .modal-background {
+    & {
       pointer-events: none;
       opacity: 0;
     }

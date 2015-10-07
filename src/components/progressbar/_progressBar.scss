@@ -34,11 +34,18 @@
     transition: width $progressbar-transition-all-duration;
   }
 
-  /* LABEL */
+  /* LABELED */
 
-  &-label {
-    font-size: $progressbar-label-font-size;
-    padding: 0 $gutter-half;
+  &.labeled {
+
+    /* AFTER (LABEL) */
+
+    .progressbar-highlight:after {
+      content: attr(data-value);
+      font-size: $progressbar-label-font-size;
+      padding: 0 $gutter-half;
+    }
+
   }
 
   /* STRIPED */
@@ -71,7 +78,9 @@
 
     height: $progressbar-compact-height;
 
-    .progressbar-label {
+    /* AFTER (LABEL) */
+
+    .progressbar-highlight:after {
       font-size: $progressbar-compact-label-font-size;
     }
 
@@ -83,7 +92,9 @@
 
     height: $progressbar-slim-height;
 
-    .progressbar-label {
+    /* AFTER (LABEL) */
+
+    .progressbar-highlight:after {
       font-size: $progressbar-slim-label-font-size;
     }
 

@@ -4221,6 +4221,8 @@ button {
 }
 
 /* BUTTON */
+/* BUTTON CORNER */
+/* BUTTON TAG */
 /* =========================================================================
  * Svelto - Card (Settings) v0.2.0
  * =========================================================================
@@ -5251,8 +5253,9 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * @requires _settings.scss
  * ========================================================================= */
 /* FLAG */
-[class^="flag-"] {
+i[class^="flag-"] {
   display: inline-block;
+  vertical-align: middle;
   width: 16px;
   height: 11px;
   background-image: url("/flags.png");
@@ -7005,8 +7008,7 @@ header > *:last-child {
  * @requires _settings.scss
  * ========================================================================= */
 /* HIGHLIGHT:AFTER */
-.highlight:after, .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar, p > a:after,
-.link:after {
+.highlight:after, .input-wrp > .text-field-bar, .textarea-wrp > .text-field-bar, p > a:after, .link:after {
   position: absolute;
   top: 0;
   right: 0;
@@ -7997,7 +7999,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
 }
 
 /* =========================================================================
- * Svelto - Modal (Settings) v0.2.0
+ * Svelto - Modal (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8006,10 +8008,10 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
  * ========================================================================= */
 /* MODAL */
 /* NOT FULLSCREEN */
-/* BACKGROUND */
+/* BEFORE (BACKGROUND) */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - Modal v0.2.0
+ * Svelto - Modal v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8025,10 +8027,22 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   transition-property: transform, opacity;
   transition-duration: 0.35s;
   margin: 0;
+  /* BEFORE (BACKGROUND) */
   /* NOT FULLSCREEN */
   /* FULLSCREEN */
-  /* BACKGROUND */
   /* CLOSED */
+}
+
+.modal:before {
+  content: '';
+  position: absolute;
+  width: 400vw;
+  height: 400vh;
+  top: -200vh;
+  left: -200vw;
+  z-index: -1;
+  cursor: pointer;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .modal:not(.fullscreen) {
@@ -8052,26 +8066,13 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   border-radius: 0;
 }
 
-.modal-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 199;
-  cursor: pointer;
-  transition: opacity 0.35s;
-  background-color: rgba(0, 0, 0, 0.5);
-}
-
 .modal:not(.open) {
   /* MODAL & BACKGROUND */
   /* NOT FULLSCREEN */
   /* FULLSCREEN */
 }
 
-.modal:not(.open),
-.modal:not(.open) + .modal-background {
+.modal:not(.open) {
   pointer-events: none;
   opacity: 0;
 }
@@ -9580,7 +9581,7 @@ code[class*='language-'] .namespace {
   height: 1em;
   border-radius: 1em;
   /* HIGHLIGHT */
-  /* LABEL */
+  /* LABELED */
   /* STRIPED */
   /* COMPACT */
   /* SLIM */
@@ -9643,7 +9644,12 @@ code[class*='language-'] .namespace {
   color: #166ac9 ;
 }
 
-.progressbar-label {
+.progressbar.labeled {
+  /* AFTER (LABEL) */
+}
+
+.progressbar.labeled .progressbar-highlight:after {
+  content: attr(data-value);
   font-size: 0.75em;
   padding: 0 5px;
 }
@@ -9677,17 +9683,19 @@ code[class*='language-'] .namespace {
 
 .progressbar.compact {
   height: 0.5em;
+  /* AFTER (LABEL) */
 }
 
-.progressbar.compact .progressbar-label {
+.progressbar.compact .progressbar-highlight:after {
   font-size: 0.5em;
 }
 
 .progressbar.slim {
   height: 0.25em;
+  /* AFTER (LABEL) */
 }
 
-.progressbar.slim .progressbar-label {
+.progressbar.slim .progressbar-highlight:after {
   font-size: 0;
 }
 
@@ -11589,23 +11597,23 @@ a,
   color: inherit;
 }
 
-p > a,
-.link {
+p > a, .link {
   display: inline-block;
   cursor: pointer;
 }
 
-p > a:after,
-.link:after {
+p > a:after, .link:after {
   border-bottom-width: 1px;
-  transition: -webkit-transform 0.15s;
-  transition: transform 0.15s;
+  opacity: 0;
   -webkit-transform: scaleX(0);
           transform: scaleX(0);
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-duration: 0.15s;
 }
 
-p > a:hover:after,
-.link:hover:after {
+p > a:hover:after, .link:hover:after {
+  opacity: 1;
   -webkit-transform: scaleX(1);
           transform: scaleX(1);
 }
@@ -11616,10 +11624,8 @@ a {
   margin-bottom: 10px;
 }
 
-span p > span,
-span p > a,
-a p > span,
-a p > a {
+p > span,
+p > a {
   margin-bottom: 0;
 }
 
@@ -11754,7 +11760,8 @@ blockquote > footer:before {
 }
 
 /* LIST */
-ul, ol {
+ul,
+ol {
   margin: 0;
   padding-left: 20px;
 }
@@ -11777,7 +11784,9 @@ dd {
 }
 
 /* CODE */
-code, section, pre {
+code,
+section,
+pre {
   display: block;
   overflow-x: auto;
   margin: 0;

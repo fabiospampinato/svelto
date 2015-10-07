@@ -12,8 +12,9 @@
 
 /* FLAG */
 
-[class^="flag-"] {
+i[class^="flag-"] {
   display: inline-block;
+  vertical-align: middle;
   width: $flag-width;
   height: $flag-height;
   background-image: url('/flags.png');

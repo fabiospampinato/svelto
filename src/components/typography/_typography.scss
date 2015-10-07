@@ -18,8 +18,8 @@ a,
   color: inherit;
 }
 
-p > a,
-.link { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+.link {
 
   display: inline-block;
   cursor: pointer;
@@ -27,29 +27,30 @@ p > a,
   &:after {
     @extend %highlight-after;
     border-bottom-width: $a-underline-height;
-    transition: transform $a-underline-transition-duration;
+    opacity: 0;
     transform: scaleX(0);
+    transition-property: opacity, transform;
+    transition-duration: $a-underline-transition-duration;
   }
 
   &:hover:after {
+    opacity: 1;
     transform: scaleX(1);
   }
 
 }
 
 
-/* SPAN / A */ //FIXME: Ugly fix for making them widgets when they are not in a paragraph 
+/* SPAN / A */ //FIXME: Ugly fix for making them widgets when they are not in a paragraph
 
 span,
 a {
-
   margin-bottom: $gutter;
+}
 
-  p > span,
-  p > a {
-    margin-bottom: 0;
-  }
-
+p > span,
+p > a {
+  margin-bottom: 0;
 }
 
 /* HEADERS */
@@ -137,7 +138,7 @@ blockquote {
     background-color: $blockquote-line-bg-color;
   }
 
-  & > footer {
+  > footer {
 
     @extend .widget;
     @include last-child-no-gutter ();
@@ -157,7 +158,8 @@ blockquote {
 
 /* LIST */
 
-ul, ol {
+ul,
+ol {
   margin: 0;
   padding-left: $list-padding-left;
 }
@@ -183,7 +185,9 @@ dd {
 
 /* CODE */
 
-code, section, pre {
+code,
+section,
+pre {
   display: block;
   overflow-x: auto;
   margin: 0;

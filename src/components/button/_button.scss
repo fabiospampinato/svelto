@@ -23,10 +23,14 @@ button {
   @extend .actionable;
 }
 
+/* BUTTON CORNER */
+
 .button-corner {
   @extend .label-corner;
   @extend .actionable;
 }
+
+/* BUTTON TAG */
 
 .button-tag {
   @extend .label-tag;

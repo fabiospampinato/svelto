@@ -9,18 +9,16 @@ append main
   +container.outlined
     +progressbar(0)
     +progressbar(33)
-    +progressbar({ value: 55, striped: true })
-    +progressbar({ value: 45.12, labeled: true })
-    +progressbar({ value: 45.12, labeled: true, decimals: 2 })
+    +progressbar({ value: 45.12 })
+    +progressbar({ value: 45.12, decimals: 2 })
 
   +divider-block Colors
 
   +container.outlined
     +progressbar({ value: 0, colors: { on: 'green', off: 'olive' } })
     +progressbar({ value: 33, colors: { on: 'green', off: 'olive' } })
-    +progressbar({ value: 55, colors: { on: 'green', off: 'olive' }, striped: true })
-    +progressbar({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true })
-    +progressbar({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true, decimals: 2 })
+    +progressbar({ value: 45.12, colors: { on: 'green', off: 'olive' } })
+    +progressbar({ value: 45.12, colors: { on: 'green', off: 'olive' }, decimals: 2 })
   
   +divider-block Created
 
@@ -29,21 +27,20 @@ append main
   +multiple
     +button("progressbar_create( 0 )").outlined Base 0
     +button("progressbar_create( 33 )").outlined Base 33
-    +button("progressbar_create({ value: 55, striped: true })").outlined Base 55 - Striped
-    +button("progressbar_create({ value: 45.12, labeled: true })").outlined Base 45.12 - Labeled
-    +button("progressbar_create({ value: 45.12, labeled: true, decimals: 2 })").outlined Base 45.12 - Labeled - 2 Decimals
+    +button("progressbar_create({ value: 45.12 })").outlined Base 45.12
+    +button("progressbar_create({ value: 45.12, decimals: 2 })").outlined Base 45.12 - 2 Decimals
     +button("progressbar_create({ value: 0, colors: { on: 'green', off: 'olive' } })").outlined Colors 0
     +button("progressbar_create({ value: 33, colors: { on: 'green', off: 'olive' } })").outlined Colors 33
-    +button("progressbar_create({ value: 55, colors: { on: 'green', off: 'olive' }, striped: true })").outlined Colors 55 - Striped
-    +button("progressbar_create({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true })").outlined Colors 45.12 - Labeled
-    +button("progressbar_create({ value: 45.12, colors: { on: 'green', off: 'olive' }, labeled: true, decimals: 2 })").outlined Colors 45.12 - Labeled - 2 Decimals
+    +button("progressbar_create({ value: 45.12, colors: { on: 'green', off: 'olive' } })").outlined Colors 45.12
+    +button("progressbar_create({ value: 45.12, colors: { on: 'green', off: 'olive' }, decimals: 2 })").outlined Colors 45.12 - 2 Decimals
 
   +divider-block Actions
 
   +multiple.actions
+    +button("toggle_class ( 'striped' )").outlined Toggle striped
+    +button("toggle_class ( 'labeled' )").outlined Toggle labeled
     +button("toggle_class ( 'compact' )").outlined Toggle compact
     +button("toggle_class ( 'slim' )").outlined Toggle slim
-    +button("toggle_gradient ()").outlined Toggle gradient
     +button("toggle_class ( 'outlined' )").outlined Toggle outlined
     +button("progressbar_get_all ()").outlined Get all
     +multiple.joined
@@ -54,9 +51,6 @@ append body-end
   +script.
     function toggle_class ( css_class ) {
       $('.progressbar').toggleClass ( css_class );
-    }
-    function toggle_gradient () {
-      $('.progressbar, .progressbar .progressbar-highlight').toggleClass ( 'gradient' );
     }
     function progressbar_get_all () {
       _.each ( $('.container'), function ( container ) {

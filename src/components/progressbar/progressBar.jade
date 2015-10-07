@@ -13,8 +13,6 @@
       on: '', // Color of the highlight part
       off: '' // Color of the unhighlighted part
     },
-    striped: '', // Draw striped over it
-    labeled: '', // Draw a label inside
     decimals: '' // Amount of decimals to round the label value to
   }
 
@@ -23,10 +21,6 @@ mixin progressbar(options)
   - options.colors = options.colors || {};
   - options.colors.on = options.colors.on || "";
   - options.colors.off = options.colors.off || "";
-  - options.striped = options.striped || false;
-  - options.labeled = options.labeled || false;
   - options.decimals = options.decimals || 0;
-  .progressbar(class=((options.striped ? "striped" : "") + " " + options.colors.off) data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
+  .progressbar(class=options.colors.off data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
     .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
-      if options.labeled
-        .progressbar-label= +(options.value).toFixed(options.decimals)

@@ -13,6 +13,7 @@
   }
 
 mixin textarea(options)
+  //- TODO: Make the markup lighter
   - options = options || {};
   - options.name = options.name || "";
   .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)

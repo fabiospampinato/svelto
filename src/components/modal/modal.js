@@ -1,12 +1,14 @@
 
 /* =========================================================================
- * Svelto - Modal v0.2.0
+ * Svelto - Modal v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
+
+//INFO: Since we check the `event.target` in order to detect a click on the background it will fail when using a `.container` as a modal, so effectively we are shrinking the supported groups of element to `card` and `card`-like
 
 //TODO: Disable scrolling while the modal is open
 
@@ -26,8 +28,7 @@
       },
       selectors: {
         trigger: '.modal-trigger',
-        closer: '.modal-closer',
-        background: '.modal-background'
+        closer: '.modal-closer'
       },
       callbacks: {
         open: _.noop,
@@ -39,13 +40,13 @@
 
     _variables: function () {
 
+      this.modal = this.element;
       this.$modal = this.$element;
 
       this.id = this.$modal.attr ( 'id' );
 
       this.$triggers = $(this.options.selectors.trigger + '[data-modal="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
-      this.$background = this.$modal.next ( this.options.selectors.background );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
@@ -57,13 +58,27 @@
 
       this._on ( this.$triggers, Pointer.tap, this.open );
 
-      /* CLOSER & BACKGROUND */
+      /* TAP */
 
-      this._on ( this.$closers.add ( this.$background ), Pointer.tap, this.close );
+      this._on ( Pointer.tap, this.__tap );
+
+      /* CLOSER */
+
+      this._on ( this.$closers, Pointer.tap, this.close );
 
     },
 
     /* PRIVATE */
+
+    __tap: function ( event ) {
+
+      if ( event.target === this.modal ) {
+
+        this.close ();
+
+      }
+
+    },
 
     __keydown: function ( event ) {
 

@@ -2860,9 +2860,9 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * Fork of https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie - Mozilla
  * ========================================================================= */
-
-//SORUCE: https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie
 
 /* COOKIE */
 
@@ -5067,13 +5067,15 @@
 
 
 /* =========================================================================
- * Svelto - Modal v0.2.0
+ * Svelto - Modal v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
+
+//INFO: Since we check the `event.target` in order to detect a click on the background it will fail when using a `.container` as a modal, so effectively we are shrinking the supported groups of element to `card` and `card`-like
 
 //TODO: Disable scrolling while the modal is open
 
@@ -5093,8 +5095,7 @@
       },
       selectors: {
         trigger: '.modal-trigger',
-        closer: '.modal-closer',
-        background: '.modal-background'
+        closer: '.modal-closer'
       },
       callbacks: {
         open: _.noop,
@@ -5106,13 +5107,13 @@
 
     _variables: function () {
 
+      this.modal = this.element;
       this.$modal = this.$element;
 
       this.id = this.$modal.attr ( 'id' );
 
       this.$triggers = $(this.options.selectors.trigger + '[data-modal="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
-      this.$background = this.$modal.next ( this.options.selectors.background );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
@@ -5124,13 +5125,27 @@
 
       this._on ( this.$triggers, Pointer.tap, this.open );
 
-      /* CLOSER & BACKGROUND */
+      /* TAP */
 
-      this._on ( this.$closers.add ( this.$background ), Pointer.tap, this.close );
+      this._on ( Pointer.tap, this.__tap );
+
+      /* CLOSER */
+
+      this._on ( this.$closers, Pointer.tap, this.close );
 
     },
 
     /* PRIVATE */
+
+    __tap: function ( event ) {
+
+      if ( event.target === this.modal ) {
+
+        this.close ();
+
+      }
+
+    },
 
     __keydown: function ( event ) {
 
@@ -6319,12 +6334,8 @@ $.factory ( 'svelto.progressbar', {
   /* TEMPLATES */
 
   templates: {
-    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
-            '<div class="progressbar-highlight {%=o.colors.on%}">' +
-              '{% if ( o.labeled ) { %}' +
-                '<div class="progressbar-label"></div>' +
-              '{% } %}' +
-            '</div>' +
+    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+            '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
           '</div>'
   },
 
@@ -6336,14 +6347,13 @@ $.factory ( 'svelto.progressbar', {
       on: '', // Color of `.progressbar-highlight`
       off: '' // Color of `.progressbar`
     },
-    striped: '', // Draw striped over it
-    labeled: '', // Draw a label inside
+    striped: false, // Draw striped over it
+    labeled: false, // Draw a label inside
     decimals: 0, // Amount of decimals to round the label value to
     size: '', // Size of the progressbar: '', 'compact', 'slim'
     css: '',
     selectors: {
-      highlight: '.progressbar-highlight',
-      label: '.progressbar-label'
+      highlight: '.progressbar-highlight'
     },
     callbacks: {
       change: _.noop,
@@ -6358,7 +6368,6 @@ $.factory ( 'svelto.progressbar', {
 
     this.$progressbar = this.$element;
     this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
-    this.$label = this.$progressbar.find ( this.options.selectors.label );
 
   },
 
@@ -6395,7 +6404,7 @@ $.factory ( 'svelto.progressbar', {
 
   _updateLabel: function () {
 
-    this.$label.html ( this._roundValue ( this.options.value ) + '%' );
+    this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
 
   },
 

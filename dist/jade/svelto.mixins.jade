@@ -86,6 +86,8 @@ mixin button-icon(icon, href)
     block
   
 mixin button-ribbon
+  //- TODO: Make the markup lighter
+  //- TODO: User transform instead
   +button&attributes(attributes).ribbon
     block
   +button.invisible
@@ -229,6 +231,7 @@ mixin chat-msg(options)
   }
 
 mixin checkbox(options)
+  //- TODO: Make the markup lighter
   - options = options || {};
   - options.value = options.value || "";
   - options.colors = options.colors || {};
@@ -284,7 +287,31 @@ mixin colorpicker
 mixin container
   .container&attributes(attributes)
     block
-      
+
+
+//- =========================================================================
+//- Svelto - Divider v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  .divider&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider.block
+    .divider-content&attributes(attributes)
+      block
+
+mixin divider-text
+  .divider&attributes(attributes).text
+    block
+
+mixin divider-spacer
+  .divider&attributes(attributes).spacer
+    block
 
 
 //- =========================================================================
@@ -360,31 +387,6 @@ mixin datepicker
 
 
 //- =========================================================================
-//- Svelto - Divider v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  .divider&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider.block
-    .divider-content&attributes(attributes)
-      block
-
-mixin divider-text
-  .divider&attributes(attributes).text
-    block
-
-mixin divider-spacer
-  .divider&attributes(attributes).spacer
-    block
-
-
-//- =========================================================================
 //- Svelto - Dropdown v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -457,14 +459,14 @@ mixin object(data)
 
 
 //- =========================================================================
-//- Svelto - Flags v0.2.0
+//- Svelto - Flags v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
 mixin flag(flag)
-  div(class="flag-" + flag)&attributes(attributes)
+  i(class="flag-" + flag)&attributes(attributes)
     block
 
 
@@ -476,6 +478,7 @@ mixin flag(flag)
 //- =========================================================================
 
 mixin flippable
+  //- TODO: Make the markup lighter, remove the need for that "flippable-sizes"
   .flippable&attributes(attributes)
     .flippable-sides
       block
@@ -543,20 +546,6 @@ mixin header-with-bg(background_image_url)
 
 
 //- =========================================================================
-//- Svelto - Icons v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin icon(icon)
-  i&attributes(attributes).icon
-    if icon
-      = icon
-    block
-
-
-//- =========================================================================
 //- Svelto - Image v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -564,6 +553,7 @@ mixin icon(icon)
 //- =========================================================================
 
 mixin image(url)
+  //- TODO: Make the markup lighter
   .image-wrp&attributes(attributes)
     img(src=url)
     block
@@ -574,6 +564,20 @@ mixin image-caption
 
 mixin image-sample
   +image("/sample.png")&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Icons v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin icon(icon)
+  i&attributes(attributes).icon
+    if icon
+      = icon
     block
 
 
@@ -652,6 +656,7 @@ mixin infobar-bottom
   }
 
 mixin input(options)
+  //- TODO: Make the markup lighter
   - options = options || {};
   - options.type = options.type || "text";
   - options.name = options.name || "";
@@ -688,6 +693,7 @@ mixin label-icon(icon)
     block
   
 mixin label-ribbon
+  //- TODO: Make the markup lighter
   +label&attributes(attributes).ribbon
     block
   +label.invisible
@@ -705,7 +711,7 @@ mixin label-tag
 
 
 //- =========================================================================
-//- Svelto - Modal v0.2.0
+//- Svelto - Modal v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -728,7 +734,6 @@ mixin modal-btn(options)
 mixin modal(id)
   .modal(id="modal-" + id)&attributes(attributes)
     block
-  .modal-background
 
 
 //- =========================================================================
@@ -902,48 +907,6 @@ mixin centerer
 
 
 //- =========================================================================
-//- Svelto - Parallax v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin parallax
-  .parallax&attributes(attributes)
-    block
-
-mixin parallax-layers
-  .parallax-layers&attributes(attributes)
-    block
-
-mixin parallax-layer
-  .parallax-layer&attributes(attributes)
-    block
-
-mixin parallax-content-sample
-  .parallax-content-sample&attributes(attributes)
-    block
-
-//- Layers levels
-
-mixin parallax-layer-deep
-  +parallax-layer&attributes(attributes).parallax-layer-deep
-    block
-
-mixin parallax-layer-background
-  +parallax-layer&attributes(attributes).parallax-layer-background
-    block
-
-mixin parallax-layer-base
-  +parallax-layer&attributes(attributes).parallax-layer-base
-    block
-
-mixin parallax-layer-foreground
-  +parallax-layer&attributes(attributes).parallax-layer-foreground
-    block
-
-
-//- =========================================================================
 //- Svelto - Pagination v0.1.1
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -960,6 +923,7 @@ mixin parallax-layer-foreground
   }
 
 mixin pagination(options)
+  //- TODO: Don't use multiple here, just .pagination
   - options.classes = options.classes || "";
   +multiple&attributes(attributes).pagination.centered
 
@@ -1036,6 +1000,48 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Parallax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin parallax
+  .parallax&attributes(attributes)
+    block
+
+mixin parallax-layers
+  .parallax-layers&attributes(attributes)
+    block
+
+mixin parallax-layer
+  .parallax-layer&attributes(attributes)
+    block
+
+mixin parallax-content-sample
+  .parallax-content-sample&attributes(attributes)
+    block
+
+//- Layers levels
+
+mixin parallax-layer-deep
+  +parallax-layer&attributes(attributes).parallax-layer-deep
+    block
+
+mixin parallax-layer-background
+  +parallax-layer&attributes(attributes).parallax-layer-background
+    block
+
+mixin parallax-layer-base
+  +parallax-layer&attributes(attributes).parallax-layer-base
+    block
+
+mixin parallax-layer-foreground
+  +parallax-layer&attributes(attributes).parallax-layer-foreground
+    block
+
+
+//- =========================================================================
 //- Svelto - Placeholder v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1090,8 +1096,6 @@ mixin syntax(language)
       on: '', // Color of the highlight part
       off: '' // Color of the unhighlighted part
     },
-    striped: '', // Draw striped over it
-    labeled: '', // Draw a label inside
     decimals: '' // Amount of decimals to round the label value to
   }
 
@@ -1100,13 +1104,9 @@ mixin progressbar(options)
   - options.colors = options.colors || {};
   - options.colors.on = options.colors.on || "";
   - options.colors.off = options.colors.off || "";
-  - options.striped = options.striped || false;
-  - options.labeled = options.labeled || false;
   - options.decimals = options.decimals || 0;
-  .progressbar(class=((options.striped ? "striped" : "") + " " + options.colors.off) data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
+  .progressbar(class=options.colors.off data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
     .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
-      if options.labeled
-        .progressbar-label= +(options.value).toFixed(options.decimals)
 
 
 //- =========================================================================
@@ -1133,6 +1133,7 @@ mixin progressbar(options)
   }
   
 mixin radio(options)
+  //- TODO: Make the markup lighter
   - options = options || {};
   - options.value = options.value || "";
   - options.colors = options.colors || {};
@@ -1467,6 +1468,7 @@ mixin tagbox(options)
   }
 
 mixin textarea(options)
+  //- TODO: Make the markup lighter
   - options = options || {};
   - options.name = options.name || "";
   .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)

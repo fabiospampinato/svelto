@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Modal (Settings) v0.2.0
+ * Svelto - Modal (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -20,9 +20,7 @@ $modal-closed-scale: 0.7 !default;
 $modal-max-width: 90vw !default;
 $modal-max-height: 90vh !default;
 
-/* BACKGROUND */
-
-$modal-background-z-index: $modal-z-index - 1 !default;
+/* BEFORE (BACKGROUND) */
 
 $modal-background-color: rgba(0, 0, 0, 0.5) !default;
 
