@@ -5039,7 +5039,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
 /* CONTAINER */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - Dropdown v0.1.0
+ * Svelto - Dropdown v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5054,25 +5054,41 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   z-index: 1000;
   padding: 15px;
   transition: opacity 0.15s;
-  /* ANIMATIONS */
+  /* MOVING */
+  /* NO TIP / ATTACHED */
+  /* ATTACHED */
+  /* TOP */
+  /* TIP TO SHOW */
+  /* CLOSED */
 }
 
 .dropdown.moving {
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
+  /* TIP */
 }
 
-.dropdown.moving > .dropdown-tip {
+.dropdown.moving .dropdown-tip {
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
 }
 
-.dropdown.no-tip > .dropdown-tip, .dropdown.attached > .dropdown-tip {
+.dropdown.no-tip,
+.dropdown.attached {
+  /* TIP */
+}
+
+.dropdown.no-tip .dropdown-tip,
+.dropdown.attached .dropdown-tip {
   display: none !important;
 }
 
 .dropdown.attached {
   padding: 0;
+  /* TOP */
+  /* BOTTOM */
+  /* LEFT */
+  /* RIGHT */
 }
 
 .dropdown.attached.positionate-top {
@@ -5101,29 +5117,39 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin-left: -1px;
 }
 
-.dropdown > .dropdown-tip {
+.dropdown-tip {
   position: absolute;
   z-index: 1;
   display: none;
   width: 0;
   height: 0;
-  -webkit-transform: translate3d(0, 0, 0);
-          transform: translate3d(0, 0, 0);
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
+  /* BEFORE / AFTER */
+  /* BEFORE */
+  /* AFTER */
+  /* TOP / BOTTOM */
+  /* TOP */
+  /* BOTTOM */
+  /* LEFT / RIGHT  */
+  /* LEFT */
+  /* RIGHT */
 }
 
-.dropdown > .dropdown-tip:before, .dropdown > .dropdown-tip:after {
+.dropdown-tip:before,
+.dropdown-tip:after {
   display: block;
   content: '';
 }
 
-.dropdown > .dropdown-tip:before {
+.dropdown-tip:before {
   border: 10.5px solid transparent;
   border-top-width: 0;
   border-bottom-color: #cfcfcf;
   margin-left: -10.5px;
 }
 
-.dropdown > .dropdown-tip:after {
+.dropdown-tip:after {
   border: 9.5px solid transparent;
   border-top-width: 0;
   border-bottom-color: #ffffff;
@@ -5131,38 +5157,37 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin-left: -9.5px;
 }
 
-.dropdown > .dropdown-tip.top, .dropdown > .dropdown-tip.bottom {
-  left: 50%;
-}
-
-.dropdown > .dropdown-tip.top {
+.dropdown-tip.top {
   top: 5.5px;
 }
 
-.dropdown > .dropdown-tip.bottom {
+.dropdown-tip.bottom {
   bottom: 5.5px;
   -webkit-transform: rotate(180deg);
           transform: rotate(180deg);
 }
 
-.dropdown > .dropdown-tip.left, .dropdown > .dropdown-tip.right {
-  top: 50%;
+.dropdown-tip.left,
+.dropdown-tip.right {
   margin-top: -5.25px;
 }
 
-.dropdown > .dropdown-tip.left {
+.dropdown-tip.left {
   left: 5.5px;
   -webkit-transform: rotate(-90deg);
           transform: rotate(-90deg);
 }
 
-.dropdown > .dropdown-tip.right {
+.dropdown-tip.right {
   right: 5.5px;
   -webkit-transform: rotate(90deg);
           transform: rotate(90deg);
 }
 
-.dropdown.positionate-top > .dropdown-tip.bottom, .dropdown.positionate-bottom > .dropdown-tip.top, .dropdown.positionate-left > .dropdown-tip.right, .dropdown.positionate-right > .dropdown-tip.left {
+.dropdown.positionate-top .dropdown-tip.bottom,
+.dropdown.positionate-bottom .dropdown-tip.top,
+.dropdown.positionate-left .dropdown-tip.right,
+.dropdown.positionate-right .dropdown-tip.left {
   display: block;
 }
 
@@ -5174,7 +5199,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   border-width: 1px;
 }
 
-.dropdown:not(.active) {
+.dropdown:not(.open) {
   pointer-events: none;
   opacity: 0;
 }

@@ -111,6 +111,7 @@
     window.$window = $(window);
     window.$document = $(document);
     window.$html = $(document.documentElement);
+    window.$head = $(document.head);
     window.$body = $(document.body);
     window.$empty = $();
 

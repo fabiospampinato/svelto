@@ -15,13 +15,13 @@ $dropdown-z-depth: 4 !default;
 
 $dropdown-padding: 15px !default;
 
-$dropdown-border-width: 1px !default;
+$dropdown-border-width: $outline-width !default;
 
 /* TIP */
 
 $dropdown-tip-z-index: 1001 !default;
 
-$dropdown-tip-border-size: 1px !default;
+$dropdown-tip-border-size: $dropdown-border-width !default;
 
 $dropdown-tip-fg-size: 19px !default;
 $dropdown-tip-fg-color: $color-white-bg !default;
@@ -37,5 +37,4 @@ $dropdown-container-max-height: calc(45vh - #{$dropdown-padding * 2}) !default;
 
 /* TRANSITIONS */
 
-$dropdown-transition-opacity-duration: $transition-duration-fast !default;
-$dropdown-transition-transform-duration: $transition-duration-fast !default;
+$dropdown-transition-all-duration: $transition-duration-fast !default;

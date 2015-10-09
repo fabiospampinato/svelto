@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Dropdown v0.1.0
+ * Svelto - Dropdown v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,13 +8,13 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-/* DROPDOWN */
-
 //FIXME: If the content is too long it excedes the visible area
-//FIXME: the container should be scrollable if the content exceedes it
-//TODO: add possibility to change the color of the tips
-//FIXME: fix the scrollbars when setting .no-padding to a dropdown containing a vertical fluid joined multiple (liek our `base` praticamente)
-//FIXME a diveder inside looks crappy, it should have a full width
+//FIXME: The container should be scrollable if the content exceedes it
+//TODO: Add possibility to change the color of the tips
+//FIXME: Fix the scrollbars when setting .no-padding to a dropdown containing a vertical fluid joined multiple (liek our `base` praticamente)
+//FIXME A diveder inside looks crappy, it should have a full width
+
+/* DROPDOWN */
 
 .dropdown {
 
@@ -23,29 +23,42 @@
   left: 0;
   z-index: $dropdown-z-index;
   padding: $dropdown-padding;
-  transition: opacity $dropdown-transition-opacity-duration;
+  transition: opacity $dropdown-transition-all-duration;
+
+  /* MOVING */
 
   &.moving {
 
-    transition: transform $dropdown-transition-transform-duration;
+    transition: transform $dropdown-transition-all-duration;
 
-    & > .dropdown-tip {
-      transition: transform $dropdown-transition-transform-duration;
+    /* TIP */
+
+    .dropdown-tip {
+      transition: transform $dropdown-transition-all-duration;
     }
 
   }
 
-  &.no-tip, &.attached {
+  /* NO TIP / ATTACHED */
 
-    & > .dropdown-tip {
+  &.no-tip,
+  &.attached {
+
+    /* TIP */
+
+    .dropdown-tip {
       display: none !important;
     }
 
   }
 
+  /* ATTACHED */
+
   &.attached {
 
     padding: 0;
+
+    /* TOP */
 
     &.positionate-top {
 
@@ -58,6 +71,8 @@
 
     }
 
+    /* BOTTOM */
+
     &.positionate-bottom {
 
       margin-top: - $outline-width;
@@ -69,9 +84,13 @@
 
     }
 
+    /* LEFT */
+
     &.positionate-left {
       margin-right: - $outline-width;
     }
+
+    /* RIGHT */
 
     &.positionate-right {
       margin-left: - $outline-width;
@@ -79,24 +98,33 @@
 
   }
 
-  & > .dropdown-tip {
+  /* TOP */
+
+  &-tip {
 
     position: absolute;
     z-index: 1;
     display: none;
     width: 0;
     height: 0;
-    transform: translate3d(0,0,0);
+    transform: translateZ(0);
 
-    &:before, &:after {
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
       display: block;
       content: '';
     }
+
+    /* BEFORE */
 
     &:before {
       @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, up );
       margin-left: - ( $dropdown-tip-bg-size / 2 );
     }
+
+    /* AFTER */
 
     &:after {
       @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, up );
@@ -104,28 +132,40 @@
       margin-left: - ( $dropdown-tip-fg-size / 2 );
     }
 
-    &.top, &.bottom {
-      left: 50%;
+    /* TOP / BOTTOM */
+
+    &.top,
+    &.bottom {
     }
+
+    /* TOP */
 
     &.top {
       top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
     }
+
+    /* BOTTOM */
 
     &.bottom {
       bottom: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
       transform: rotate(180deg);
     }
 
-    &.left, &.right {
-      top: 50%;
+    /* LEFT / RIGHT  */
+
+    &.left,
+    &.right {
       margin-top: - ( $dropdown-tip-bg-size / 4 );
     }
+
+    /* LEFT */
 
     &.left {
       left: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
       transform: rotate(-90deg);
     }
+
+    /* RIGHT */
 
     &.right {
       right: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
@@ -134,11 +174,16 @@
 
   }
 
-  &.positionate-top > .dropdown-tip.bottom, &.positionate-bottom > .dropdown-tip.top, &.positionate-left > .dropdown-tip.right, &.positionate-right > .dropdown-tip.left {
+  /* TIP TO SHOW */
+
+  &.positionate-top .dropdown-tip.bottom,
+  &.positionate-bottom .dropdown-tip.top,
+  &.positionate-left .dropdown-tip.right,
+  &.positionate-right .dropdown-tip.left {
     display: block;
   }
 
-  & > .container {
+  > .container {
     @include z-depth ( $dropdown-z-depth );
     max-width: $dropdown-container-max-width;
     max-height: $dropdown-container-max-height;
@@ -146,9 +191,9 @@
     border-width: $dropdown-border-width;
   }
 
-  /* ANIMATIONS */
+  /* CLOSED */
 
-  &:not(.active) {
+  &:not(.open) {
     pointer-events: none;
     opacity: 0;
   }

@@ -182,7 +182,8 @@
 
     var datas = {
       coordinates: coordinates,
-      direction: bestDirection
+      direction: bestDirection,
+      oppositeDirection: getOpposite ( bestDirection )
     };
 
     /* POINTER TOP / LEFT */
@@ -193,22 +194,18 @@
 
       if ( $pointer instanceof $ ) {
 
-        var pointerPosition = $pointer.position ();
-
         switch ( bestDirection ) {
 
           case 'top':
           case 'bottom':
-            var pointerWidth = $pointer.width (),
-                translateType = 'translateX',
-                translateValue = $pointer.translateX () + ( ( anchorOffset.left + ( anchorWidth / 2 ) - htmlScrollLeft ) - ( coordinates.left + pointerPosition.left + ( pointerWidth / 2 ) ) );
+            var translateType = 'translateX',
+                translateValue = ( anchorOffset.left + ( anchorWidth / 2 ) - htmlScrollLeft ) - ( coordinates.left + ( $pointer.width () / 2 ) );
             break;
 
           case 'left':
           case 'right':
-            var pointerHeight = $pointer.height (),
-                translateType = 'translateY',
-                translateValue = $pointer.translateY () + ( ( anchorOffset.top + ( anchorHeight / 2 ) - htmlScrollTop ) - ( coordinates.top + pointerPosition.top + ( pointerHeight / 2 ) ) );
+            var translateType = 'translateY',
+                translateValue = ( anchorOffset.top + ( anchorHeight / 2 ) - htmlScrollTop ) - ( coordinates.top+ ( $pointer.height () / 2 ) );
             break;
 
         }

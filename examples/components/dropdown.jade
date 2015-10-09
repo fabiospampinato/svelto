@@ -12,29 +12,35 @@ append main
     +dropdown-btn({ title: "Base", id: "base" }).outlined
     +dropdown-btn({ title: "Attached", id: "attached" }).outlined
     +dropdown-btn({ title: "No tip", id: "notip" }).outlined
-    +dropdown-btn({ icon: "settings", id: "base" }).outlined
-    +dropdown-btn({ icon: "settings", id: "base" }).rounded.outlined
+    +dropdown-btn({ icon: "settings", id: "base" }).outlined.compact
+    +dropdown-btn({ icon: "settings", id: "base" }).rounded.outlined.compact
     +dropdown-btn({ title: "Dividers", id: "dividers" }).outlined
     +dropdown-btn({ title: "Advanced", id: "advanced" }).outlined
     +dropdown-btn({ title: "Long text", id: "long_text" }).outlined
     +dropdown-btn({ title: "Long text 2", id: "long_text2" }).outlined
 
+append body-end
+  +script.
+
 append body
     +dropdown("base")
-      +card-block
+      +container
         +multiple.vertical.stretched.nowrap.joined
           +button.sharp Action 1
           +button.sharp Action 2
           +button.sharp Action 3
           +button.sharp Action 312313
+            
     +dropdown("attached").attached
-      +card-block
+      +container
         p Attached
+          
     +dropdown("notip").no-tip
-      +card-block
+      +container
         p No tip
+        
     +dropdown("dividers")
-      +card-block
+      +container
         +multiple.vertical.stretched.nowrap
           +button.sharp Action 1
           +divider-block Divider
@@ -46,19 +52,25 @@ append body
           +divider-block -linear
           +divider-block -text Section
           +button.sharp Action 5
+          
     +dropdown("advanced")
-      +card-header("Header").inherit
-      +card-block Content
-      +card-footer Footer
+      +card
+        +card-header.inherit Header
+        +card-block Content
+        +card-footer Footer
+        
     +dropdown("long_text")
-      +card-header("Lorem ipsum").inherit
-      +card-block
-        +lorem-ipsum
-      +card-footer Footer
+      +card
+        +card-header.inherit Lorem Ipsum
+        +card-block
+          +lorem-ipsum
+        +card-footer Footer
+        
     +dropdown("long_text2")
-      +card-header("Lorem ipsum 2").inherit
-      +card-block
-        +lorem-ipsum
-        +lorem-ipsum
-        +lorem-ipsum
-      +card-footer Footer
+      +card
+        +card-header.inherit Lorem Ipsum 2
+        +card-block
+          +lorem-ipsum
+          +lorem-ipsum
+          +lorem-ipsum
+        +card-footer Footer

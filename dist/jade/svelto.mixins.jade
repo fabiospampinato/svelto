@@ -31,26 +31,6 @@ mixin script
 
 
 //- =========================================================================
-//- Svelto - Breadcrumb v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin breadcrumb
-  .breadcrumb&attributes(attributes)
-    block
-
-mixin breadcrumb-divider(icon)
-  .breadcrumb-divider&attributes(attributes)
-    if block
-      block
-    else
-      - icon = icon || "chevron_right";
-      +icon(icon)
-
-
-//- =========================================================================
 //- Svelto - Button v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -206,6 +186,45 @@ mixin chat-msg(options)
 
 
 //- =========================================================================
+//- Svelto - Breadcrumb v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin breadcrumb
+  .breadcrumb&attributes(attributes)
+    block
+
+mixin breadcrumb-divider(icon)
+  .breadcrumb-divider&attributes(attributes)
+    if block
+      block
+    else
+      - icon = icon || "chevron_right";
+      +icon(icon)
+
+
+//- =========================================================================
+//- Svelto - Colorpicker v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin colorpicker
+  .colorpicker&attributes(attributes)
+    input(type=text name="colorpicker")
+    .colorpicker-saturation-brightness-wrp
+      .colorpicker-saturation
+      .colorpicker-brightness
+      .colorpicker-handler
+    .colorpicker-hue-wrp
+      .colorpicker-hue
+      .colorpicker-handler
+
+
+//- =========================================================================
 //- Svelto - Checkbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -256,25 +275,6 @@ mixin checkbox(options)
         input(type="checkbox" name=options.name value=options.value)
       else
         input(type="checkbox" value=options.value)
-
-
-//- =========================================================================
-//- Svelto - Colorpicker v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin colorpicker
-  .colorpicker&attributes(attributes)
-    input(type=text name="colorpicker")
-    .colorpicker-saturation-brightness-wrp
-      .colorpicker-saturation
-      .colorpicker-brightness
-      .colorpicker-handler
-    .colorpicker-hue-wrp
-      .colorpicker-hue
-      .colorpicker-handler
 
 
 //- =========================================================================
@@ -416,8 +416,7 @@ mixin dropdown(id)
     .dropdown-tip.right
     .dropdown-tip.bottom
     .dropdown-tip.left
-    +container
-      block
+    block
 
 
 //- =========================================================================
