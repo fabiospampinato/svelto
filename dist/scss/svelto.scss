@@ -4310,27 +4310,14 @@ hr {
 $dropdown-z-index: 1000 !default;
 $dropdown-z-depth: 4 !default;
 
-$dropdown-padding: 15px !default;
+$dropdown-margin: 0.75em !default;
 
-$dropdown-border-width: $outline-width !default;
+$dropdown-max-width: calc(73vw - #{$dropdown-margin * 2}) !default;
+$dropdown-max-height: calc(45vh - #{$dropdown-margin * 2}) !default;
 
 /* TIP */
 
-$dropdown-tip-z-index: 1001 !default;
-
-$dropdown-tip-border-size: $dropdown-border-width !default;
-
-$dropdown-tip-fg-size: 19px !default;
-$dropdown-tip-fg-color: $color-white-bg !default;
-
-$dropdown-tip-bg-size: $dropdown-tip-fg-size + ( 2 * $dropdown-tip-border-size ) !default;
-$dropdown-tip-bg-color: darken($color-white-border, 4) !default;
-
-/* CONTAINER */
-
-$dropdown-container-max-width: calc(73vw - #{$dropdown-padding * 2}) !default;
-
-$dropdown-container-max-height: calc(45vh - #{$dropdown-padding * 2}) !default;
+$dropdown-tip-size: 0.75em !default;
 
 /* TRANSITIONS */
 
@@ -4338,7 +4325,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
 
 /* =========================================================================
- * Svelto - Dropdown v0.2.0
+ * Svelto - Dropdown v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4350,18 +4337,26 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 //FIXME: The container should be scrollable if the content exceedes it
 //TODO: Add possibility to change the color of the tips
 //FIXME: Fix the scrollbars when setting .no-padding to a dropdown containing a vertical fluid joined multiple (liek our `base` praticamente)
-//FIXME A diveder inside looks crappy, it should have a full width
-
+//FIXME: A diveder inside looks crappy, it should have a full width
+//TODO: Add tip shadow
 /* DROPDOWN */
 
 .dropdown {
 
+  @include z-depth ( $dropdown-z-depth );
+  z-index: $dropdown-z-index;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: $dropdown-z-index;
-  padding: $dropdown-padding;
+  max-width: $dropdown-max-width;
+  margin: $dropdown-margin;
   transition: opacity $dropdown-transition-all-duration;
+
+  /* NOT CONTAINER */
+
+  &:not(.container) {
+    max-height: $dropdown-max-height;
+  }
 
   /* MOVING */
 
@@ -4371,7 +4366,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
     /* TIP */
 
-    .dropdown-tip {
+    &:before {
       transition: transform $dropdown-transition-all-duration;
     }
 
@@ -4384,7 +4379,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
     /* TIP */
 
-    .dropdown-tip {
+    &:before {
       display: none !important;
     }
 
@@ -4399,27 +4394,17 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
     /* TOP */
 
     &.positionate-top {
-
       margin-bottom: - $outline-width;
-
-      & > .container {
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-      }
-
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
     }
 
     /* BOTTOM */
 
     &.positionate-bottom {
-
       margin-top: - $outline-width;
-
-      & > .container {
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-      }
-
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
     }
 
     /* LEFT */
@@ -4436,97 +4421,94 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
   }
 
-  /* TOP */
+  /* TIP */
 
-  &-tip {
-
+  &:before {
+    @include square ( $dropdown-tip-size, inherit );
+    transform: rotate(45deg);
     position: absolute;
+    content: '';
     z-index: 1;
-    display: none;
-    width: 0;
-    height: 0;
-    transform: translateZ(0);
+  }
 
-    /* BEFORE / AFTER */
+  /* TIP (OUTLINED) */
 
-    &:before,
-    &:after {
-      display: block;
-      content: '';
-    }
+  &.outlined:before {
+    border-width: $outline-width;
+    border-style: solid;
+    border-color: inherit;
+  }
 
-    /* BEFORE */
+  /* TIP (POSITION-RELATED) */
+
+  &.positionate-top {
 
     &:before {
-      @include triangle ( $dropdown-tip-bg-size, $dropdown-tip-bg-color, up );
-      margin-left: - ( $dropdown-tip-bg-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      bottom: - ( $dropdown-tip-size / 2 );
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
     }
 
-    /* AFTER */
+    /* OUTLINED */
 
-    &:after {
-      @include triangle ( $dropdown-tip-fg-size, $dropdown-tip-fg-color, up );
-      margin-top: - ( $dropdown-tip-fg-size / 2 );
-      margin-left: - ( $dropdown-tip-fg-size / 2 );
-    }
+    &.outlined {
 
-    /* TOP / BOTTOM */
+      &:before {
+        margin-bottom: - $outline-width;
+      }
 
-    &.top,
-    &.bottom {
-    }
-
-    /* TOP */
-
-    &.top {
-      top: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-    }
-
-    /* BOTTOM */
-
-    &.bottom {
-      bottom: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-      transform: rotate(180deg);
-    }
-
-    /* LEFT / RIGHT  */
-
-    &.left,
-    &.right {
-      margin-top: - ( $dropdown-tip-bg-size / 4 );
-    }
-
-    /* LEFT */
-
-    &.left {
-      left: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-      transform: rotate(-90deg);
-    }
-
-    /* RIGHT */
-
-    &.right {
-      right: $dropdown-padding - ( $dropdown-tip-bg-size / 2 ) + $dropdown-border-width;
-      transform: rotate(90deg);
     }
 
   }
 
-  /* TIP TO SHOW */
+  &.positionate-bottom {
 
-  &.positionate-top .dropdown-tip.bottom,
-  &.positionate-bottom .dropdown-tip.top,
-  &.positionate-left .dropdown-tip.right,
-  &.positionate-right .dropdown-tip.left {
-    display: block;
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      clip-path: polygon(100% 0, 0 0, 0 100%);
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-top: $outline-width;
+      }
+
+    }
+
   }
 
-  > .container {
-    @include z-depth ( $dropdown-z-depth );
-    max-width: $dropdown-container-max-width;
-    max-height: $dropdown-container-max-height;
-    margin-bottom: 0;
-    border-width: $dropdown-border-width;
+  &.positionate-left {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      right: - ( $dropdown-tip-size / 2 );
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-right: $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-right {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+    }
+
   }
 
   /* CLOSED */

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Dropdown v0.1.0
+ * Svelto - Dropdown v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -33,7 +33,6 @@
         open: 'open'
       },
       selectors: {
-        tip: '.dropdown-tip',
         closer: '.button, .dropdown-closer',
         trigger: '.dropdown-trigger'
       },
@@ -48,13 +47,12 @@
     _variables: function () {
 
       this.$dropdown = this.$element;
-      this.$tips = this.$dropdown.find ( this.options.selectors.tip );
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.id = this.$dropdown.attr ( 'id' );
       this.$triggers = $(this.options.selectors.trigger + '[data-dropdown="' + this.id + '"]');
 
-      this.hasTips = !this.$dropdown.hasClass ( this.options.classes.noTip );
+      this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
 
       this._isOpen = false;
@@ -132,25 +130,29 @@
       /* VARIABLES */
 
       var $trigger = $(assignments[this.id]),
-          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTips || this.isAttached,
+          $mockTip = $('<div>'),
+          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
           self = this;
 
       /* POSITIONATE */
 
       this.$dropdown.positionate ({
         $anchor: $trigger,
-        $pointer: function ( data ) {
-          if ( !noTip ) {
-            var $tip = self.$tips.filter ( '.' + data.oppositeDirection );
-            return $tip.length === 1 ? $tip : false;
-          }
-        },
+        $pointer: noTip ? false : $mockTip,
         callbacks: {
           positionated: function ( data ) {
             $trigger.addClass ( 'dropdown-trigger-' + data.direction );
           }
         }
       });
+
+      /* MOCK TIP */
+
+      if ( !noTip ) {
+
+        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: A bit to hacky, expecially that `rotate(45deg)`
+
+      }
 
     },
 

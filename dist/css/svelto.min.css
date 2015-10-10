@@ -5036,10 +5036,9 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * ========================================================================= */
 /* DROPDOWN */
 /* TIP */
-/* CONTAINER */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - Dropdown v0.2.0
+ * Svelto - Dropdown v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5048,18 +5047,26 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * ========================================================================= */
 /* DROPDOWN */
 .dropdown {
+  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
+  z-index: 1000;
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000;
-  padding: 15px;
+  max-width: calc(73vw - 1.5em);
+  margin: 0.75em;
   transition: opacity 0.15s;
+  /* NOT CONTAINER */
   /* MOVING */
   /* NO TIP / ATTACHED */
   /* ATTACHED */
-  /* TOP */
-  /* TIP TO SHOW */
+  /* TIP */
+  /* TIP (OUTLINED) */
+  /* TIP (POSITION-RELATED) */
   /* CLOSED */
+}
+
+.dropdown:not(.container) {
+  max-height: calc(45vh - 1.5em);
 }
 
 .dropdown.moving {
@@ -5068,7 +5075,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   /* TIP */
 }
 
-.dropdown.moving .dropdown-tip {
+.dropdown.moving:before {
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
 }
@@ -5078,8 +5085,8 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   /* TIP */
 }
 
-.dropdown.no-tip .dropdown-tip,
-.dropdown.attached .dropdown-tip {
+.dropdown.no-tip:before,
+.dropdown.attached:before {
   display: none !important;
 }
 
@@ -5093,18 +5100,12 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
 
 .dropdown.attached.positionate-top {
   margin-bottom: -1px;
-}
-
-.dropdown.attached.positionate-top > .container, .dropdown.attached.positionate-top > .card-header, .dropdown.attached.positionate-top > .card-block, .dropdown.attached.positionate-top > .card-footer, .dropdown.attached.positionate-top > footer, .image-wrp .dropdown.attached.positionate-top > .image-caption, .dropdown.attached.positionate-top > .infobar, .dropdown.attached.positionate-top > .tagbox {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
 .dropdown.attached.positionate-bottom {
   margin-top: -1px;
-}
-
-.dropdown.attached.positionate-bottom > .container, .dropdown.attached.positionate-bottom > .card-header, .dropdown.attached.positionate-bottom > .card-block, .dropdown.attached.positionate-bottom > .card-footer, .dropdown.attached.positionate-bottom > footer, .image-wrp .dropdown.attached.positionate-bottom > .image-caption, .dropdown.attached.positionate-bottom > .infobar, .dropdown.attached.positionate-bottom > .tagbox {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
@@ -5117,86 +5118,73 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin-left: -1px;
 }
 
-.dropdown-tip {
+.dropdown:before {
+  width: 0.75em;
+  height: 0.75em;
+  background-color: inherit;
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
   position: absolute;
-  z-index: 1;
-  display: none;
-  width: 0;
-  height: 0;
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
-  /* BEFORE / AFTER */
-  /* BEFORE */
-  /* AFTER */
-  /* TOP / BOTTOM */
-  /* TOP */
-  /* BOTTOM */
-  /* LEFT / RIGHT  */
-  /* LEFT */
-  /* RIGHT */
-}
-
-.dropdown-tip:before,
-.dropdown-tip:after {
-  display: block;
   content: '';
+  z-index: 1;
 }
 
-.dropdown-tip:before {
-  border: 10.5px solid transparent;
-  border-top-width: 0;
-  border-bottom-color: #cfcfcf;
-  margin-left: -10.5px;
-}
-
-.dropdown-tip:after {
-  border: 9.5px solid transparent;
-  border-top-width: 0;
-  border-bottom-color: #ffffff;
-  margin-top: -9.5px;
-  margin-left: -9.5px;
-}
-
-.dropdown-tip.top {
-  top: 5.5px;
-}
-
-.dropdown-tip.bottom {
-  bottom: 5.5px;
-  -webkit-transform: rotate(180deg);
-          transform: rotate(180deg);
-}
-
-.dropdown-tip.left,
-.dropdown-tip.right {
-  margin-top: -5.25px;
-}
-
-.dropdown-tip.left {
-  left: 5.5px;
-  -webkit-transform: rotate(-90deg);
-          transform: rotate(-90deg);
-}
-
-.dropdown-tip.right {
-  right: 5.5px;
-  -webkit-transform: rotate(90deg);
-          transform: rotate(90deg);
-}
-
-.dropdown.positionate-top .dropdown-tip.bottom,
-.dropdown.positionate-bottom .dropdown-tip.top,
-.dropdown.positionate-left .dropdown-tip.right,
-.dropdown.positionate-right .dropdown-tip.left {
-  display: block;
-}
-
-.dropdown > .container, .dropdown > .card-header, .dropdown > .card-block, .dropdown > .card-footer, .dropdown > footer, .image-wrp .dropdown > .image-caption, .dropdown > .infobar, .dropdown > .tagbox {
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
-  max-width: calc(73vw - 30px);
-  max-height: calc(45vh - 30px);
-  margin-bottom: 0;
+.dropdown.outlined:before {
   border-width: 1px;
+  border-style: solid;
+  border-color: inherit;
+}
+
+.dropdown.positionate-top {
+  /* OUTLINED */
+}
+
+.dropdown.positionate-top:before {
+  left: -0.375em;
+  bottom: -0.375em;
+  -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
+          clip-path: polygon(0 100%, 100% 100%, 100% 0);
+}
+
+.dropdown.positionate-top.outlined:before {
+  margin-bottom: -1px;
+}
+
+.dropdown.positionate-bottom {
+  /* OUTLINED */
+}
+
+.dropdown.positionate-bottom:before {
+  top: -0.375em;
+  left: -0.375em;
+  -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
+          clip-path: polygon(100% 0, 0 0, 0 100%);
+}
+
+.dropdown.positionate-bottom.outlined:before {
+  margin-top: 1px;
+}
+
+.dropdown.positionate-left {
+  /* OUTLINED */
+}
+
+.dropdown.positionate-left:before {
+  top: -0.375em;
+  right: -0.375em;
+  -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
+          clip-path: polygon(0 0, 100% 100%, 100% 0);
+}
+
+.dropdown.positionate-left.outlined:before {
+  margin-right: 1px;
+}
+
+.dropdown.positionate-right:before {
+  top: -0.375em;
+  left: -0.375em;
+  -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
+          clip-path: polygon(0 0, 100% 100%, 0 100%);
 }
 
 .dropdown:not(.open) {

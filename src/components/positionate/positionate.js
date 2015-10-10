@@ -199,13 +199,13 @@
           case 'top':
           case 'bottom':
             var translateType = 'translateX',
-                translateValue = ( anchorOffset.left + ( anchorWidth / 2 ) - htmlScrollLeft ) - ( coordinates.left + ( $pointer.width () / 2 ) );
+                translateValue = ( anchorOffset.left + ( anchorWidth / 2 ) - htmlScrollLeft ) - coordinates.left;
             break;
 
           case 'left':
           case 'right':
             var translateType = 'translateY',
-                translateValue = ( anchorOffset.top + ( anchorHeight / 2 ) - htmlScrollTop ) - ( coordinates.top+ ( $pointer.height () / 2 ) );
+                translateValue = ( anchorOffset.top + ( anchorHeight / 2 ) - htmlScrollTop ) - coordinates.top;
             break;
 
         }

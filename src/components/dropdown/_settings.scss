@@ -13,27 +13,14 @@
 $dropdown-z-index: 1000 !default;
 $dropdown-z-depth: 4 !default;
 
-$dropdown-padding: 15px !default;
+$dropdown-margin: 0.75em !default;
 
-$dropdown-border-width: $outline-width !default;
+$dropdown-max-width: calc(73vw - #{$dropdown-margin * 2}) !default;
+$dropdown-max-height: calc(45vh - #{$dropdown-margin * 2}) !default;
 
 /* TIP */
 
-$dropdown-tip-z-index: 1001 !default;
-
-$dropdown-tip-border-size: $dropdown-border-width !default;
-
-$dropdown-tip-fg-size: 19px !default;
-$dropdown-tip-fg-color: $color-white-bg !default;
-
-$dropdown-tip-bg-size: $dropdown-tip-fg-size + ( 2 * $dropdown-tip-border-size ) !default;
-$dropdown-tip-bg-color: darken($color-white-border, 4) !default;
-
-/* CONTAINER */
-
-$dropdown-container-max-width: calc(73vw - #{$dropdown-padding * 2}) !default;
-
-$dropdown-container-max-height: calc(45vh - #{$dropdown-padding * 2}) !default;
+$dropdown-tip-size: 0.75em !default;
 
 /* TRANSITIONS */
 

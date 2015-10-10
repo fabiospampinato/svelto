@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Dropdown v0.1.0
+//- Svelto - Dropdown v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -17,16 +17,12 @@
 
 mixin dropdown-btn(options)
   - options.icon = options.icon || "expand_more";
-  +button(data-dropdown="dropdown-" + options.id)&attributes(attributes).dropdown-btn.dropdown-trigger
+  +button(data-dropdown=options.id)&attributes(attributes).dropdown-trigger
     if options.title
       span= options.title
     if options.icon
       +icon(options.icon)
 
 mixin dropdown(id)
-  .dropdown(id="dropdown-" + id)&attributes(attributes)
-    .dropdown-tip.top
-    .dropdown-tip.right
-    .dropdown-tip.bottom
-    .dropdown-tip.left
+  .container(id=id)&attributes(attributes).dropdown
     block
