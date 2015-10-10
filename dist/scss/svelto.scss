@@ -3214,6 +3214,16 @@ $dragging-z-index: 1000000 !default;
   padding-left: 0 !important;
 }
 
+.no-padding-horizontal {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-vertical {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* MARGIN */
 
 .no-margin {
@@ -3234,6 +3244,16 @@ $dragging-z-index: 1000000 !default;
 
 .no-margin-left {
   margin-left: 0 !important;
+}
+
+.no-margin-horizontal {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.no-margin-vertical {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* OVERFLOW */
@@ -4297,7 +4317,7 @@ hr {
 
 
 /* =========================================================================
- * Svelto - Dropdown (Settings) v0.2.0
+ * Svelto - Dropdown (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4305,19 +4325,26 @@ hr {
  * @requires ../core/_core.scss
  * ========================================================================= */
 
+//FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
+
 /* DROPDOWN */
 
 $dropdown-z-index: 1000 !default;
 $dropdown-z-depth: 4 !default;
 
-$dropdown-margin: 0.75em !default;
-
-$dropdown-max-width: calc(73vw - #{$dropdown-margin * 2}) !default;
-$dropdown-max-height: calc(45vh - #{$dropdown-margin * 2}) !default;
+$dropdown-max-width: 70vw !default;
+$dropdown-max-height: 40vh !default;
 
 /* TIP */
 
 $dropdown-tip-size: 0.75em !default;
+
+/* TIP BOX SHADOW */
+
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7) !default;
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1) !default;
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default;
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default;
 
 /* TRANSITIONS */
 
@@ -4333,11 +4360,6 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
  * @requires _settings.scss
  * ========================================================================= */
 
-//FIXME: If the content is too long it excedes the visible area
-//FIXME: The container should be scrollable if the content exceedes it
-//FIXME: Fix the scrollbars when setting .no-padding to a dropdown containing a vertical fluid joined multiple (liek our `base` praticamente)
-//FIXME: A diveder inside looks crappy, it should have a full width
-//TODO: Add possibility to change the color of the tips
 //TODO: Add tip shadow
 
 /* DROPDOWN */
@@ -4350,7 +4372,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
   top: 0;
   left: 0;
   max-width: $dropdown-max-width;
-  margin: $dropdown-margin;
+  margin-bottom: 0;
   transition: opacity $dropdown-transition-all-duration;
 
   /* NOT CONTAINER */
@@ -4390,8 +4412,6 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
   &.attached {
 
-    padding: 0;
-
     /* TOP */
 
     &.positionate-top {
@@ -4430,6 +4450,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
     position: absolute;
     content: '';
     z-index: 1;
+    box-sizing: content-box;
   }
 
   /* TIP (OUTLINED) */
@@ -4448,6 +4469,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
+      box-shadow: $dropdown-top-tip-box-shadow;
     }
 
     /* OUTLINED */
@@ -4456,6 +4478,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
       &:before {
         margin-bottom: - $outline-width;
+        margin-left: - $outline-width;
       }
 
     }
@@ -4468,6 +4491,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(100% 0, 0 0, 0 100%);
+      box-shadow: $dropdown-bottom-tip-box-shadow;
     }
 
     /* OUTLINED */
@@ -4475,7 +4499,8 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
     &.outlined {
 
       &:before {
-        margin-top: $outline-width;
+        margin-top: - $outline-width;
+        margin-left: - $outline-width;
       }
 
     }
@@ -4488,6 +4513,7 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(0 0, 100% 100%, 100% 0);
+      box-shadow: $dropdown-left-tip-box-shadow;
     }
 
     /* OUTLINED */
@@ -4495,7 +4521,8 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
     &.outlined {
 
       &:before {
-        margin-right: $outline-width;
+        margin-right: - $outline-width;
+        margin-top: - $outline-width;
       }
 
     }
@@ -4508,6 +4535,18 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(0 0, 100% 100%, 0 100%);
+      box-shadow: $dropdown-right-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-left: - $outline-width;
+        margin-top: - $outline-width;
+      }
+
     }
 
   }

@@ -3,8 +3,6 @@ extends ../layout.jade
 
 //- Dropdown
 
-//- TODO: Maybe add +divider-block -spacer when appropriate (when there are only buttons for example)
-
 append main
   +divider-block Dropdown
 
@@ -17,7 +15,6 @@ append main
     +dropdown-btn({ title: "Dividers", id: "dividers" }).outlined
     +dropdown-btn({ title: "Advanced", id: "advanced" }).outlined
     +dropdown-btn({ title: "Long text", id: "long_text" }).outlined
-    +dropdown-btn({ title: "Long text 2", id: "long_text2" }).outlined
 
 append body
   #base.dropdown.container
@@ -36,31 +33,26 @@ append body
   #dividers.dropdown.container
     +multiple.vertical.stretched.nowrap
       +button.sharp Action 1
-      +divider-block Divider
+      +divider
       +button.sharp Action 2
-      +divider-block -linear Divider
+      +divider Divider
       +button.sharp Action 3
-      +divider-block -linear
+      +divider-block Block
       +button.sharp Action 4
-      +divider-block -linear
-      +divider-block -text Section
+      +divider-text Text
       +button.sharp Action 5
+      +divider-spacer
+      +button.sharp Action 6
       
   #advanced.dropdown.card
     +card-header.inherit Header
     +card-block Content
     +card-footer Footer
     
-  #long_text.dropdown.card
-    +card-header.inherit Lorem Ipsum
-    +card-block
-      +lorem-ipsum
-    +card-footer Footer
-      
-  #long_text2.dropdown.card
-    +card-header.inherit Lorem Ipsum 2
+  #long_text.dropdown.card.outlined
+    +card-header.outlined Lorem Ipsum
     +card-block
       +lorem-ipsum
       +lorem-ipsum
       +lorem-ipsum
-    +card-footer Footer
+    +card-footer.outlined Footer

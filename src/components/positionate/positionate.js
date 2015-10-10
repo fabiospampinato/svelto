@@ -52,6 +52,7 @@
       $anchor: false, //INFO: Positionate next to an $anchor element
       $pointer: false, //INFO: The element who is pointing to the anchor
       point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
+      spacing: 0, //INFO: Extra space to leave around the positionable element
       ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
         x: ['right', 'left'],
         y: ['bottom', 'top'],
@@ -142,7 +143,7 @@
       case 'top':
       case 'bottom':
         var coordinates = {
-          top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height : anchorRect.bottom,
+          top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
           left: anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 )
         };
         break;
@@ -151,7 +152,7 @@
       case 'right':
         var coordinates = {
           top: anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 ),
-          left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width : anchorRect.right
+          left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
         };
 
     }
@@ -165,8 +166,8 @@
 
       if ( isAnchorVisible ) {
 
-        coordinates.top = _.clamp ( 0, coordinates.top, windowHeight - positionableRect.height );
-        coordinates.left = _.clamp ( 0, coordinates.left, windowWidth - positionableRect.width );
+        coordinates.top = _.clamp ( options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing );
+        coordinates.left = _.clamp ( options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing );
 
       }
 

@@ -8,11 +8,6 @@
  * @requires _settings.scss
  * ========================================================================= */
 
-//FIXME: If the content is too long it excedes the visible area
-//FIXME: The container should be scrollable if the content exceedes it
-//FIXME: Fix the scrollbars when setting .no-padding to a dropdown containing a vertical fluid joined multiple (liek our `base` praticamente)
-//FIXME: A diveder inside looks crappy, it should have a full width
-//TODO: Add possibility to change the color of the tips
 //TODO: Add tip shadow
 
 /* DROPDOWN */
@@ -25,7 +20,7 @@
   top: 0;
   left: 0;
   max-width: $dropdown-max-width;
-  margin: $dropdown-margin;
+  margin-bottom: 0;
   transition: opacity $dropdown-transition-all-duration;
 
   /* NOT CONTAINER */
@@ -65,8 +60,6 @@
 
   &.attached {
 
-    padding: 0;
-
     /* TOP */
 
     &.positionate-top {
@@ -105,6 +98,7 @@
     position: absolute;
     content: '';
     z-index: 1;
+    box-sizing: content-box;
   }
 
   /* TIP (OUTLINED) */
@@ -123,6 +117,7 @@
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
+      box-shadow: $dropdown-top-tip-box-shadow;
     }
 
     /* OUTLINED */
@@ -131,6 +126,7 @@
 
       &:before {
         margin-bottom: - $outline-width;
+        margin-left: - $outline-width;
       }
 
     }
@@ -143,6 +139,7 @@
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(100% 0, 0 0, 0 100%);
+      box-shadow: $dropdown-bottom-tip-box-shadow;
     }
 
     /* OUTLINED */
@@ -150,7 +147,8 @@
     &.outlined {
 
       &:before {
-        margin-top: $outline-width;
+        margin-top: - $outline-width;
+        margin-left: - $outline-width;
       }
 
     }
@@ -163,6 +161,7 @@
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(0 0, 100% 100%, 100% 0);
+      box-shadow: $dropdown-left-tip-box-shadow;
     }
 
     /* OUTLINED */
@@ -170,7 +169,8 @@
     &.outlined {
 
       &:before {
-        margin-right: $outline-width;
+        margin-right: - $outline-width;
+        margin-top: - $outline-width;
       }
 
     }
@@ -183,6 +183,18 @@
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
       clip-path: polygon(0 0, 100% 100%, 0 100%);
+      box-shadow: $dropdown-right-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-left: - $outline-width;
+        margin-top: - $outline-width;
+      }
+
     }
 
   }

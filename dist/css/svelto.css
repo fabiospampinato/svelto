@@ -4081,6 +4081,16 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
   padding-left: 0 !important;
 }
 
+.no-padding-horizontal {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-vertical {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* MARGIN */
 .no-margin {
   margin: 0 !important;
@@ -4100,6 +4110,16 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
 
 .no-margin-left {
   margin-left: 0 !important;
+}
+
+.no-margin-horizontal {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.no-margin-vertical {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* OVERFLOW */
@@ -5027,7 +5047,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
 }
 
 /* =========================================================================
- * Svelto - Dropdown (Settings) v0.2.0
+ * Svelto - Dropdown (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5036,6 +5056,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * ========================================================================= */
 /* DROPDOWN */
 /* TIP */
+/* TIP BOX SHADOW */
 /* TRANSITIONS */
 /* =========================================================================
  * Svelto - Dropdown v0.3.0
@@ -5052,8 +5073,8 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   position: fixed;
   top: 0;
   left: 0;
-  max-width: calc(73vw - 1.5em);
-  margin: 0.75em;
+  max-width: 70vw;
+  margin-bottom: 0;
   transition: opacity 0.15s;
   /* NOT CONTAINER */
   /* MOVING */
@@ -5066,7 +5087,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
 }
 
 .dropdown:not(.container) {
-  max-height: calc(45vh - 1.5em);
+  max-height: 40vh;
 }
 
 .dropdown.moving {
@@ -5091,7 +5112,6 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
 }
 
 .dropdown.attached {
-  padding: 0;
   /* TOP */
   /* BOTTOM */
   /* LEFT */
@@ -5127,6 +5147,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   position: absolute;
   content: '';
   z-index: 1;
+  box-sizing: content-box;
 }
 
 .dropdown.outlined:before {
@@ -5144,10 +5165,12 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   bottom: -0.375em;
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
+  box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7);
 }
 
 .dropdown.positionate-top.outlined:before {
   margin-bottom: -1px;
+  margin-left: -1px;
 }
 
 .dropdown.positionate-bottom {
@@ -5159,10 +5182,12 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   left: -0.375em;
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
 .dropdown.positionate-bottom.outlined:before {
-  margin-top: 1px;
+  margin-top: -1px;
+  margin-left: -1px;
 }
 
 .dropdown.positionate-left {
@@ -5174,10 +5199,16 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   right: -0.375em;
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35);
 }
 
 .dropdown.positionate-left.outlined:before {
-  margin-right: 1px;
+  margin-right: -1px;
+  margin-top: -1px;
+}
+
+.dropdown.positionate-right {
+  /* OUTLINED */
 }
 
 .dropdown.positionate-right:before {
@@ -5185,6 +5216,12 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   left: -0.375em;
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
+  box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35);
+}
+
+.dropdown.positionate-right.outlined:before {
+  margin-left: -1px;
+  margin-top: -1px;
 }
 
 .dropdown:not(.open) {

@@ -26,6 +26,11 @@
     /* OPTIONS */
 
     options: {
+      spacing: {
+        attached: 0,
+        noTip: 7,
+        normal: 14
+      },
       classes: {
         noTip: 'no-tip',
         attached: 'attached',
@@ -139,6 +144,7 @@
       this.$dropdown.positionate ({
         $anchor: $trigger,
         $pointer: noTip ? false : $mockTip,
+        spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
           positionated: function ( data ) {
             $trigger.addClass ( 'dropdown-trigger-' + data.direction );
