@@ -4335,10 +4335,11 @@ $dropdown-transition-all-duration: $transition-duration-fast !default;
 
 //FIXME: If the content is too long it excedes the visible area
 //FIXME: The container should be scrollable if the content exceedes it
-//TODO: Add possibility to change the color of the tips
 //FIXME: Fix the scrollbars when setting .no-padding to a dropdown containing a vertical fluid joined multiple (liek our `base` praticamente)
 //FIXME: A diveder inside looks crappy, it should have a full width
+//TODO: Add possibility to change the color of the tips
 //TODO: Add tip shadow
+
 /* DROPDOWN */
 
 .dropdown {

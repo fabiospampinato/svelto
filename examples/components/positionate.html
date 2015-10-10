@@ -35,7 +35,7 @@ $('.live').on ({
     positionateLive ();
     if ( !liveTriggered ) {
       liveTriggered = true;
-      $('.anchor').on ( Pointer.dragmove, positionateLive );
+      $('.anchor').on ( Pointer.move, positionateLive );
     }
   },
   'checkbox:uncheck': function () {

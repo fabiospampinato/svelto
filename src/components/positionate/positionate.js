@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Positionate v0.2.0
+ * Svelto - Positionate v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -71,14 +71,8 @@
     var directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
         windowWidth = $window.width (),
         windowHeight = $window.height (),
-        htmlScrollTop = $html.scrollTop (),
-        htmlScrollLeft = $html.scrollLeft (),
-        positionableOffset = this.offset (),
-        positionableWidth = this.outerWidth (),
-        positionableHeight = this.outerHeight (),
-        anchorOffset = options.$anchor ? options.$anchor.offset () : { top: options.point.y, left: options.point.x },
-        anchorWidth = options.$anchor ? options.$anchor.outerWidth () : 0,
-        anchorHeight = options.$anchor ? options.$anchor.outerHeight () : 0;
+        positionableRect = this.getRect (),
+        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
 
     /* SPACES */
 
@@ -87,16 +81,16 @@
       switch ( direction ) {
 
         case 'top':
-          return anchorOffset.top - htmlScrollTop;
+          return anchorRect.top;
 
         case 'bottom':
-          return windowHeight - anchorOffset.top - anchorHeight + htmlScrollTop;
+          return windowHeight - anchorRect.bottom;
 
         case 'left':
-          return anchorOffset.left - htmlScrollLeft;
+          return anchorRect.left;
 
         case 'right':
-          return windowWidth - anchorOffset.left - anchorWidth + htmlScrollLeft;
+          return windowWidth - anchorRect.right;
 
       }
 
@@ -126,11 +120,11 @@
 
         case 'top':
         case 'bottom':
-          return Math.min ( positionableHeight, spaces[index] ) * Math.min ( windowWidth, positionableWidth );
+          return Math.min ( positionableRect.height, spaces[index] ) * Math.min ( windowWidth, positionableRect.width );
 
         case 'left':
         case 'right':
-          return Math.min ( positionableWidth, spaces[index] ) * Math.min ( windowHeight, positionableHeight );
+          return Math.min ( positionableRect.width, spaces[index] ) * Math.min ( windowHeight, positionableRect.height );
 
       }
 
@@ -148,16 +142,16 @@
       case 'top':
       case 'bottom':
         var coordinates = {
-          top: ( bestDirection === 'top' ) ? anchorOffset.top - positionableHeight : anchorOffset.top + anchorHeight,
-          left: anchorOffset.left + ( anchorWidth / 2 ) - ( positionableWidth / 2 )
+          top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height : anchorRect.bottom,
+          left: anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 )
         };
         break;
 
       case 'left':
       case 'right':
         var coordinates = {
-          top: anchorOffset.top + ( anchorHeight / 2 ) - ( positionableHeight / 2 ),
-          left: ( bestDirection === 'left' ) ? anchorOffset.left - positionableWidth : anchorOffset.left + anchorWidth
+          top: anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 ),
+          left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width : anchorRect.right
         };
 
     }
@@ -171,8 +165,8 @@
 
       if ( isAnchorVisible ) {
 
-        coordinates.top = _.clamp ( 0, coordinates.top, windowHeight - positionableHeight );
-        coordinates.left = _.clamp ( 0, coordinates.left, windowWidth - positionableWidth );
+        coordinates.top = _.clamp ( 0, coordinates.top, windowHeight - positionableRect.height );
+        coordinates.left = _.clamp ( 0, coordinates.left, windowWidth - positionableRect.width );
 
       }
 
@@ -199,13 +193,13 @@
           case 'top':
           case 'bottom':
             var translateType = 'translateX',
-                translateValue = ( anchorOffset.left + ( anchorWidth / 2 ) - htmlScrollLeft ) - coordinates.left;
+                translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
             break;
 
           case 'left':
           case 'right':
             var translateType = 'translateY',
-                translateValue = ( anchorOffset.top + ( anchorHeight / 2 ) - htmlScrollTop ) - coordinates.top;
+                translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
             break;
 
         }
