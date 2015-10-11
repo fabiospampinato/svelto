@@ -1,28 +1,31 @@
 
 /* =========================================================================
- * Svelto - Chat (Settings) v0.1.0
+ * Svelto - Chat (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../dropdown/_settings.scss
  * ========================================================================= */
 
-/* CHAT */
+/* TIP */
 
-$chat-msg-color: 'white' !default;
-$chat-msg-color-basic: true !default;
+$chat-tip-size: $dropdown-tip-size !default;
 
 /* LEVELS */
 
-$chat-msg-level-3-margin-left: 9em !default;
-$chat-msg-level-2-margin-left: 4.5em !default;
-$chat-msg-level-1-margin-left: 0 !default;
+$chat-msg-level-3-spacing: 9em !default;
+$chat-msg-level-2-spacing: 4.5em !default;
+$chat-msg-level-1-spacing: 0 !default;
 
 /* IMAGE */
 
 $chat-msg-img-size: 3em !default;
-$chat-msg-img-border-width: 1px !default;
+$chat-msg-img-border-width: $outline-width !default;
 $chat-msg-img-border-color: $color-black !default;
-$chat-msg-img-transition-duration: $transition-duration-fast !default;
 $chat-msg-img-opacity-hover: 0.8 !default;
+
+/* TRANSITIONS */
+
+$chat-msg-img-transition-duration: $transition-duration-fast !default;

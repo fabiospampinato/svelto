@@ -9,6 +9,21 @@ append main
   +container.outlined
     +chat-msg({
       sender: {
+        name: 'Fabio'
+      },
+      permissions: {
+        own: true,
+        edit: true,
+        'delete': true
+      },
+      message: {
+        timestamp: Math.round ( new Date ().getTime () / 1000 - 270 ),
+        content: 'No avatar!',
+        group: '1'
+      }
+    })
+    +chat-msg({
+      sender: {
         name: 'Fabio',
         url: '/',
         img: '/sample.png'
@@ -103,5 +118,40 @@ append main
         timestamp: Math.round ( new Date ().getTime () / 1000 - 270 ),
         content: 'Is this a chat?',
         group: '2'
+      }
+    })
+    +chat-msg({
+      sender: {
+        name: 'Fabio',
+        url: '/',
+        img: '/sample.png'
+      },
+      permissions: {
+        own: true,
+        edit: true,
+        'delete': true
+      },
+      message: {
+        timestamp: Math.round ( new Date ().getTime () / 1000 - 300 ),
+        content: 'Yes, it is!',
+        group: '1',
+        direction: 'right'
+      }
+    })
+    +chat-msg({
+      sender: {
+        name: 'Fabio',
+        url: '/'
+      },
+      permissions: {
+        own: true,
+        edit: true,
+        'delete': true
+      },
+      message: {
+        timestamp: Math.round ( new Date ().getTime () / 1000 - 300 ),
+        content: 'No avatar!',
+        group: '1',
+        direction: 'right'
       }
     })

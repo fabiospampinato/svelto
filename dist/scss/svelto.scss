@@ -3545,7 +3545,7 @@ $card-border-radius: $container-border-radius !default;
 
 
 /* =========================================================================
- * Svelto - Chat (Settings) v0.1.0
+ * Svelto - Dropdown (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3553,28 +3553,66 @@ $card-border-radius: $container-border-radius !default;
  * @requires ../core/_core.scss
  * ========================================================================= */
 
-/* CHAT */
+//FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
 
-$chat-msg-color: 'white' !default;
-$chat-msg-color-basic: true !default;
+/* DROPDOWN */
+
+$dropdown-z-index: 1000 !default;
+$dropdown-z-depth: 4 !default;
+
+$dropdown-max-width: 70vw !default;
+$dropdown-max-height: 40vh !default;
+
+/* TIP */
+
+$dropdown-tip-size: 0.75em !default;
+
+/* TIP BOX SHADOW */
+
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7) !default;
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1) !default;
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default;
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default;
+
+/* TRANSITIONS */
+
+$dropdown-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Chat (Settings) v0.2.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../dropdown/_settings.scss
+ * ========================================================================= */
+
+/* TIP */
+
+$chat-tip-size: $dropdown-tip-size !default;
 
 /* LEVELS */
 
-$chat-msg-level-3-margin-left: 9em !default;
-$chat-msg-level-2-margin-left: 4.5em !default;
-$chat-msg-level-1-margin-left: 0 !default;
+$chat-msg-level-3-spacing: 9em !default;
+$chat-msg-level-2-spacing: 4.5em !default;
+$chat-msg-level-1-spacing: 0 !default;
 
 /* IMAGE */
 
 $chat-msg-img-size: 3em !default;
-$chat-msg-img-border-width: 1px !default;
+$chat-msg-img-border-width: $outline-width !default;
 $chat-msg-img-border-color: $color-black !default;
-$chat-msg-img-transition-duration: $transition-duration-fast !default;
 $chat-msg-img-opacity-hover: 0.8 !default;
+
+/* TRANSITIONS */
+
+$chat-msg-img-transition-duration: $transition-duration-fast !default;
 
 
 /* =========================================================================
- * Svelto - Chat v0.1.0
+ * Svelto - Chat v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3585,41 +3623,23 @@ $chat-msg-img-opacity-hover: 0.8 !default;
 
 /* CHAT */
 
-//FIXME: The header is too big. img, indicator and header should be aligned
-
 .chat-msg {
 
   display: flex;
   margin-bottom: $gutter;
 
-  /* LEVELS */
-
-  &.level-3, &[class*='level-'] {
-    margin-left: $chat-msg-level-3-margin-left;
-  }
-
-  &.level-2 {
-    margin-left: $chat-msg-level-2-margin-left;
-  }
-
-  &.level-1 {
-    margin-left: $chat-msg-level-1-margin-left;
-  }
-
   /* IMAGE */
 
-  & > .chat-msg-img {
+  .chat-msg-img {
 
-    order: 1;
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
-    margin-right: $gutter;
 
-    & > .image-wrp {
+    .image-wrp {
 
       transition: opacity $chat-msg-img-transition-duration;
 
-      & > img {
+      img {
         border-radius: 100%;
         width: $chat-msg-img-size;
         height: $chat-msg-img-size;
@@ -3628,42 +3648,170 @@ $chat-msg-img-opacity-hover: 0.8 !default;
 
     }
 
+    /* TIP */
+
+    + .chat-msg-content .card-header:before {
+      display: block;
+    }
+
   }
 
-  & > a.chat-msg-img:hover > .image-wrp {
+  a.chat-msg-img:hover .image-wrp {
     opacity: $chat-msg-img-opacity-hover;
-  }
-
-  /* SENDER */
-
-  .chat-msg-sender-name {
-    @extend .widget;
-  }
-
-  /* INDICATOR */
-
-  & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
-    @include color ( $chat-msg-color, $chat-msg-color-basic );
-    z-index: 1;
-    order: 2;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.9em;
-    margin-right: -0.5em;
-    transform: rotate(45deg);
-    border-width: 0 0 1px 1px;
-    border-style: solid;
   }
 
   /* CONTENT */
 
-  & > .chat-msg-content {
+  .chat-msg-content {
 
     flex-grow: 1;
-    order: 3;
+    margin-bottom: 0;
 
-    & > .container {
-      margin-bottom: 0;
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        @include square ( $chat-tip-size, inherit );
+        display: none;
+        transform: rotate(45deg);
+        position: absolute;
+        content: '';
+        z-index: 1;
+        box-sizing: content-box;
+        top: 50%;
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        border-width: $outline-width;
+        border-style: solid;
+        border-color: inherit;
+      }
+
+    }
+
+  }
+
+  /* NO TIP */
+
+  &.no-tip {
+
+    /* TIP */
+
+    .chat-msg-content .card-header:before {
+      display: none;
+    }
+
+  }
+
+  /* LEFT */
+
+  &:not(.direction-right) {
+
+    /* LEVELS */
+
+    &.level-3,
+    &[class*='level-'] {
+      margin-left: $chat-msg-level-3-spacing;
+    }
+
+    &.level-2 {
+      margin-left: $chat-msg-level-2-spacing;
+    }
+
+    &.level-1 {
+      margin-left: $chat-msg-level-1-spacing;
+    }
+
+    /* IMAGE */
+
+    .chat-msg-img {
+      order: 1;
+      margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* CONTENT */
+
+    .chat-msg-content {
+      order: 2;
+    }
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        left: - ( $dropdown-tip-size / 2 );
+        margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: polygon(0 0, 100% 100%, 0 100%);
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.direction-right {
+
+    /* LEVELS */
+
+    &.level-3,
+    &[class*='level-'] {
+      margin-right: $chat-msg-level-3-spacing;
+    }
+
+    &.level-2 {
+      margin-right: $chat-msg-level-2-spacing;
+    }
+
+    &.level-1 {
+      margin-right: $chat-msg-level-1-spacing;
+    }
+
+    /* IMAGE */
+
+    .chat-msg-img {
+      order: 2;
+      margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* CONTENT */
+
+    .chat-msg-content {
+      order: 1;
+    }
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        right: - ( $dropdown-tip-size / 2 );
+        margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: polygon(0 0, 100% 100%, 100% 0);
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        margin-right: - $outline-width;
+      }
+
     }
 
   }
@@ -4314,41 +4462,6 @@ hr {
   }
 
 }
-
-
-/* =========================================================================
- * Svelto - Dropdown (Settings) v0.3.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-
-//FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
-
-/* DROPDOWN */
-
-$dropdown-z-index: 1000 !default;
-$dropdown-z-depth: 4 !default;
-
-$dropdown-max-width: 70vw !default;
-$dropdown-max-height: 40vh !default;
-
-/* TIP */
-
-$dropdown-tip-size: 0.75em !default;
-
-/* TIP BOX SHADOW */
-
-$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7) !default;
-$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1) !default;
-$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default;
-$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default;
-
-/* TRANSITIONS */
-
-$dropdown-transition-all-duration: $transition-duration-fast !default;
 
 
 /* =========================================================================

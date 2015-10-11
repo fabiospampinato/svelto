@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Chat v0.1.0
+//- Svelto - Chat v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -23,40 +23,42 @@
       timestamp: number, // Unix timestamp of when the message as been sent
       content: '', // The message content
       group: '', // The ID of the group, useful for joining all the messages
-      level: ''
+      level: '',
+      direction: 'left' // The direction of the message
     }
   }
 
 mixin chat-msg(options)
   - options.message.level = options.message.level || 1;
+  - options.message.direction = options.message.direction || 'left';
   - options.sender = options.sender || {};
   - options.sender.name = options.sender.name || "Unknown";
-  .chat-msg(class=("level-" + options.message.level + " sender-" + options.sender.name))&attributes(attributes)
+  .chat-msg(class=("level-" + options.message.level + " direction-" + options.message.direction + " sender-" + options.sender.name))&attributes(attributes)
     if options.sender.img
       if options.sender.url
         +a(options.sender.url)(title=options.sender.name).chat-msg-img
           +image(options.sender.img)(title=options.sender.name).rounded
       else
         +image(options.sender.img)(title=options.sender.name).chat-msg-img.rounded
-    .chat-msg-indicator
-    .chat-msg-content
-      +container.outlined
-        +card-header.inherit.outlined.compact
+    .chat-msg-content.card.outlined
+      +card-header.inherit.outlined.compact
+        +multiple
           if options.sender.name !== "Unknown"
             +multiple-sub-left
               if options.sender.url
                 a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
               else
-                = options.sender.name
+                span= options.sender.name
           +multiple-sub-right
-            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).small.outlined.compact
+            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).xsmall.outlined.compact
             if options.permissions
               if options.permissions.own
-                +button-icon("account_circle")(title="You are the owner").small.outlined.compact
+                +button-icon("account_circle")(title="You are the owner").xsmall.outlined.compact
               if options.permissions.reply
-                +button-icon("reply")(title="Reply").small.outlined.compact
+                +button-icon("reply")(title="Reply").xsmall.outlined.compact
               if options.permissions.edit
-                +button-icon("mode_edit")(title="Edit").small.outlined.compact
+                +button-icon("mode_edit")(title="Edit").xsmall.outlined.compact
               if options.permissions.delete
-                +button-icon("delete")(title="Delete").small.outlined.compact
-        +card-block= options.message.content
+                +button-icon("delete")(title="Delete").xsmall.outlined.compact
+      +card-block
+        p= options.message.content

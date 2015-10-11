@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Chat v0.1.0
+ * Svelto - Chat v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,41 +11,23 @@
 
 /* CHAT */
 
-//FIXME: The header is too big. img, indicator and header should be aligned
-
 .chat-msg {
 
   display: flex;
   margin-bottom: $gutter;
 
-  /* LEVELS */
-
-  &.level-3, &[class*='level-'] {
-    margin-left: $chat-msg-level-3-margin-left;
-  }
-
-  &.level-2 {
-    margin-left: $chat-msg-level-2-margin-left;
-  }
-
-  &.level-1 {
-    margin-left: $chat-msg-level-1-margin-left;
-  }
-
   /* IMAGE */
 
-  & > .chat-msg-img {
+  .chat-msg-img {
 
-    order: 1;
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
-    margin-right: $gutter;
 
-    & > .image-wrp {
+    .image-wrp {
 
       transition: opacity $chat-msg-img-transition-duration;
 
-      & > img {
+      img {
         border-radius: 100%;
         width: $chat-msg-img-size;
         height: $chat-msg-img-size;
@@ -54,42 +36,170 @@
 
     }
 
+    /* TIP */
+
+    + .chat-msg-content .card-header:before {
+      display: block;
+    }
+
   }
 
-  & > a.chat-msg-img:hover > .image-wrp {
+  a.chat-msg-img:hover .image-wrp {
     opacity: $chat-msg-img-opacity-hover;
-  }
-
-  /* SENDER */
-
-  .chat-msg-sender-name {
-    @extend .widget;
-  }
-
-  /* INDICATOR */
-
-  & > .chat-msg-indicator { //TODO: make it better, a volte va dentro l'header, a volte fuori, a volte è ok
-    @include color ( $chat-msg-color, $chat-msg-color-basic );
-    z-index: 1;
-    order: 2;
-    width: 1em;
-    height: 1em;
-    margin-top: 0.9em;
-    margin-right: -0.5em;
-    transform: rotate(45deg);
-    border-width: 0 0 1px 1px;
-    border-style: solid;
   }
 
   /* CONTENT */
 
-  & > .chat-msg-content {
+  .chat-msg-content {
 
     flex-grow: 1;
-    order: 3;
+    margin-bottom: 0;
 
-    & > .container {
-      margin-bottom: 0;
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        @include square ( $chat-tip-size, inherit );
+        display: none;
+        transform: rotate(45deg);
+        position: absolute;
+        content: '';
+        z-index: 1;
+        box-sizing: content-box;
+        top: 50%;
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        border-width: $outline-width;
+        border-style: solid;
+        border-color: inherit;
+      }
+
+    }
+
+  }
+
+  /* NO TIP */
+
+  &.no-tip {
+
+    /* TIP */
+
+    .chat-msg-content .card-header:before {
+      display: none;
+    }
+
+  }
+
+  /* LEFT */
+
+  &:not(.direction-right) {
+
+    /* LEVELS */
+
+    &.level-3,
+    &[class*='level-'] {
+      margin-left: $chat-msg-level-3-spacing;
+    }
+
+    &.level-2 {
+      margin-left: $chat-msg-level-2-spacing;
+    }
+
+    &.level-1 {
+      margin-left: $chat-msg-level-1-spacing;
+    }
+
+    /* IMAGE */
+
+    .chat-msg-img {
+      order: 1;
+      margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* CONTENT */
+
+    .chat-msg-content {
+      order: 2;
+    }
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        left: - ( $dropdown-tip-size / 2 );
+        margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: polygon(0 0, 100% 100%, 0 100%);
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.direction-right {
+
+    /* LEVELS */
+
+    &.level-3,
+    &[class*='level-'] {
+      margin-right: $chat-msg-level-3-spacing;
+    }
+
+    &.level-2 {
+      margin-right: $chat-msg-level-2-spacing;
+    }
+
+    &.level-1 {
+      margin-right: $chat-msg-level-1-spacing;
+    }
+
+    /* IMAGE */
+
+    .chat-msg-img {
+      order: 2;
+      margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* CONTENT */
+
+    .chat-msg-content {
+      order: 1;
+    }
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        right: - ( $dropdown-tip-size / 2 );
+        margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: polygon(0 0, 100% 100%, 100% 0);
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        margin-right: - $outline-width;
+      }
+
     }
 
   }
