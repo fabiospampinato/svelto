@@ -101,6 +101,10 @@
 
     _events: function () {
 
+      /* CHANGE */
+
+      this._on ( this.$input, 'change', this.__change );
+
       /* KEYDOWN */
 
       this._onHover ( $document, 'keydown', this.__keydown );
@@ -116,7 +120,15 @@
 
     },
 
-    /* DATEPIKER */
+    /* CHANGE */
+
+    __change: function () {
+
+      this.set ( this.$input.val () );
+
+    },
+
+    /* KEYDOWN */
 
     __keydown: function ( event ) {
 
@@ -344,25 +356,29 @@
 
       if ( !_.isNaN ( date.valueOf () ) ) {
 
-        this.options.date.selected = date;
+        if ( !this.options.date.selected || date.getTime () !== this.options.date.selected.getTime () ) {
 
-        if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+          this.options.date.selected = date;
 
-          this._unhighlightSelected ();
-          this._highlightSelected ();
+          if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-        } else {
+            this._unhighlightSelected ();
+            this._highlightSelected ();
 
-          this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
-          this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+          } else {
 
-          this._refresh ();
+            this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
+            this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+
+            this._refresh ();
+
+          }
+
+          this._updateInput ();
+
+          this._trigger ( 'change', this.options.date );
 
         }
-
-        this._updateInput ();
-
-        this._trigger ( 'change', this.options.date );
 
       }
 

@@ -80,6 +80,10 @@
 
     _events: function () {
 
+      /* CHANGE */
+
+      this._on ( this.$input, 'change', this.__change );
+
       /* SB KEYDOWN */
 
       this._onHover ( $document, 'keydown', this.__sbKeydown );
@@ -117,6 +121,14 @@
           end: this.__hueDragEnd.bind ( this )
         }
       });
+
+    },
+
+    /* CHANGE */
+
+    __change: function () {
+
+      this.set ( this.$input.val () );
 
     },
 

@@ -2731,6 +2731,10 @@
 
     _events: function () {
 
+      /* CHANGE */
+
+      this._on ( this.$input, 'change', this.__change );
+
       /* SB KEYDOWN */
 
       this._onHover ( $document, 'keydown', this.__sbKeydown );
@@ -2768,6 +2772,14 @@
           end: this.__hueDragEnd.bind ( this )
         }
       });
+
+    },
+
+    /* CHANGE */
+
+    __change: function () {
+
+      this.set ( this.$input.val () );
 
     },
 
@@ -3165,6 +3177,10 @@
 
     _events: function () {
 
+      /* CHANGE */
+
+      this._on ( this.$input, 'change', this.__change );
+
       /* KEYDOWN */
 
       this._onHover ( $document, 'keydown', this.__keydown );
@@ -3180,7 +3196,15 @@
 
     },
 
-    /* DATEPIKER */
+    /* CHANGE */
+
+    __change: function () {
+
+      this.set ( this.$input.val () );
+
+    },
+
+    /* KEYDOWN */
 
     __keydown: function ( event ) {
 
@@ -3408,25 +3432,29 @@
 
       if ( !_.isNaN ( date.valueOf () ) ) {
 
-        this.options.date.selected = date;
+        if ( !this.options.date.selected || date.getTime () !== this.options.date.selected.getTime () ) {
 
-        if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+          this.options.date.selected = date;
 
-          this._unhighlightSelected ();
-          this._highlightSelected ();
+          if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
 
-        } else {
+            this._unhighlightSelected ();
+            this._highlightSelected ();
 
-          this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
-          this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+          } else {
 
-          this._refresh ();
+            this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
+            this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+
+            this._refresh ();
+
+          }
+
+          this._updateInput ();
+
+          this._trigger ( 'change', this.options.date );
 
         }
-
-        this._updateInput ();
-
-        this._trigger ( 'change', this.options.date );
 
       }
 
@@ -4441,7 +4469,7 @@
 
 
 /* =========================================================================
- * Svelto - Form Sync v0.1.0
+ * Svelto - Form Sync v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4449,7 +4477,7 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-//TODO: maybe sync at the init time also
+//TODO: Maybe sync at the init time also
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -4457,7 +4485,7 @@
 
   /* VARIABLES */
 
-  var synced_groups = [];
+  var groups = [];
 
   /* FORM SYNC */
 
@@ -4466,55 +4494,55 @@
     this.each ( function () {
 
       var $form = $(this),
-        sync_group = $form.data ( 'sync-group' );
+          group = $form.data ( 'sync-group' );
 
-      if ( synced_groups.indexOf ( sync_group ) !== -1 ) return;
+      if ( groups.indexOf ( group ) !== -1 ) return;
 
-      synced_groups.push ( sync_group );
+      groups.push ( group );
 
-      var $forms = $('form[data-sync-group="' + sync_group + '"]'),
-        $eles = $forms.find ( 'input, textarea, select' );
+      var $forms = $('form[data-sync-group="' + group + '"]'),
+          $eles = $forms.find ( 'input, textarea, select' );
 
       $eles.each ( function () {
 
         var $ele = $(this),
-          name = $ele.attr ( 'name' ),
-          is_checkable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
-          is_radio = is_checkable && $ele.is ( '[type="radio"]' ),
-          is_textbox = $ele.is ( 'input, textarea' ),
-          events = is_textbox ? 'input change' : 'change',
-          $current_form = $ele.parent ( 'form' ),
-          $other_forms = $forms.not ( $current_form ),
-          $other_eles = $other_forms.find ( '[name="' + name + '"]' );
+            name = $ele.attr ( 'name' ),
+            isCheckable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
+            isRadio = isCheckable && $ele.is ( '[type="radio"]' ),
+            isTextfield = $ele.is ( 'input, textarea' ),
+            events = isTextfield ? 'input change' : 'change',
+            $currentForm = $ele.parent ( 'form' ),
+            $otherForms = $forms.not ( $currentForm ),
+            $otherEles = $otherForms.find ( '[name="' + name + '"]' );
 
         $ele.on ( events, function () {
 
-          var current_value = $ele.val (),
-            current_checked = !!$ele.prop ( 'checked' );
+          var currentValue = $ele.val (),
+              currentChecked = !!$ele.prop ( 'checked' );
 
-          $other_eles.each ( function () {
+          $otherEles.each ( function () {
 
-            var $other_ele = $(this),
-              other_value = $other_ele.val (),
-              other_checked = !!$other_ele.prop ( 'checked' );
+            var $otherEle = $(this),
+                otherValue = $otherEle.val (),
+                otherChecked = !!$otherEle.prop ( 'checked' );
 
-            if ( is_radio ) {
+            if ( isRadio ) {
 
-              if ( current_value !== other_value || current_checked === other_checked ) return;
+              if ( currentValue !== otherValue || currentChecked === otherChecked ) return;
 
-            } else if ( current_value === other_value && current_checked === other_checked ) {
+            } else if ( currentValue === otherValue && currentChecked === otherChecked ) {
 
               return;
 
             }
 
-            if ( is_checkable ) {
+            if ( isCheckable ) {
 
-              $other_ele.prop ( 'checked', current_checked ).trigger ( 'change' );
+              $otherEle.prop ( 'checked', currentChecked ).trigger ( 'change' );
 
             } else {
 
-              $other_ele.val ( current_value ).trigger ( 'change' );
+              $otherEle.val ( currentValue ).trigger ( 'change' );
 
             }
 
@@ -6946,6 +6974,8 @@ $(function () {
     __change: function () {
 
       this._update ();
+
+      console.log("CHANGED!");
 
       this._trigger ( 'change' );
 

@@ -119,6 +119,8 @@
 
       this._update ();
 
+      console.log("CHANGED!");
+
       this._trigger ( 'change' );
 
     },
