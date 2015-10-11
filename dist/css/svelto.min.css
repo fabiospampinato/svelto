@@ -3420,7 +3420,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > :not(.sub):not(.icon), .button > :not(.sub):not(.icon) {
+.label > :not(.sub):not(.icon):not(.icons), .button > :not(.sub):not(.icon):not(.icons) {
   -webkit-flex-grow: 1;
           flex-grow: 1;
 }

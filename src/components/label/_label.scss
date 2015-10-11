@@ -40,7 +40,7 @@ label {
 
   /* TEXT GROW */
 
-  > :not(.sub):not(.icon) {
+  > :not(.sub):not(.icon):not(.icons) {
     flex-grow: 1;
   }
 
