@@ -10090,16 +10090,16 @@ a.ripple > .ripple-circle {
 }
 
 /* =========================================================================
- * Svelto - Select (Settings) v0.1.1
+ * Svelto - Select (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
  * ========================================================================= */
-/* SELECT DROPDOWN */
+/* SELECT */
 /* =========================================================================
- * Svelto - Select v0.1.0
+ * Svelto - Select v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10108,72 +10108,76 @@ a.ripple > .ripple-circle {
  * ========================================================================= */
 /* SELECT BTN */
 .select-btn {
-  position: relative;
+  /* DEFAULT SELECT */
+  /* VALUEHOLDER */
+  /* TRIGGER DIRECTION */
 }
 
 .select-btn select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   border: none;
-  -moz-appearance: none;
   -webkit-appearance: none;
-  appearance: none;
-  border-radius: 0.2665em;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: inherit;
   cursor: pointer;
   font-size: 16px;
-  position: absolute;
-  height: 100%;
-  left: 0;
-  top: 0;
   opacity: 0;
-  padding: 0 5px;
-  width: 100%;
   z-index: 1;
 }
 
-.select-btn .select-label > .valueholder {
-  text-transform: none;
-  font-weight: bold;
+.select-btn .valueholder {
   display: inline-block;
 }
 
-.select-btn .select-label > .valueholder.right:before, .select-btn .select-label > .valueholder.left:before {
+.select-btn .valueholder.right:before, .select-btn .valueholder.left:before {
   content: '\a0';
 }
 
 .select-btn.dropdown-trigger-top {
-  border-top-left-radius: 0;
   border-top-right-radius: 0;
+  border-top-left-radius: 0;
 }
 
 .select-btn.dropdown-trigger-bottom {
-  border-bottom-left-radius: 0;
   border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 .select-btn.dropdown-trigger-right {
-  border-top-right-radius: 0;
   border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
 }
 
 .select-btn.dropdown-trigger-left {
-  border-top-left-radius: 0;
   border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
 }
 
 /* SELECT DROPDOWN */
 .select-dropdown {
-  padding: 0;
-}
-
-.select-dropdown > .container, .select-dropdown > .card-header, .select-dropdown > .card-block, .select-dropdown > .card-footer, .select-dropdown > footer, .image-wrp .select-dropdown > .image-caption, .select-dropdown > .infobar, .select-dropdown > .tagbox {
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
+  /* CARD BLOCK */
+  /* BUTTON */
+  /* DIVIDER */
 }
 
-.select-dropdown > .container .label-wrp + .divider-wrp.block, .select-dropdown > .card-header .label-wrp + .divider-wrp.block, .select-dropdown > .card-block .label-wrp + .divider-wrp.block, .select-dropdown > .card-footer .label-wrp + .divider-wrp.block, .select-dropdown > footer .label-wrp + .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .label-wrp + .divider-wrp.block, .select-dropdown > .infobar .label-wrp + .divider-wrp.block, .select-dropdown > .tagbox .label-wrp + .divider-wrp.block {
+.select-dropdown .card-block {
+  padding: 5px 0;
+}
+
+.select-dropdown .button {
+  display: block;
+  border-radius: 0;
+  margin-bottom: 0;
+}
+
+.select-dropdown .divider {
   margin-top: 5px;
-}
-
-.select-dropdown > .container .divider-wrp.block, .select-dropdown > .card-header .divider-wrp.block, .select-dropdown > .card-block .divider-wrp.block, .select-dropdown > .card-footer .divider-wrp.block, .select-dropdown > footer .divider-wrp.block, .image-wrp .select-dropdown > .image-caption .divider-wrp.block, .select-dropdown > .infobar .divider-wrp.block, .select-dropdown > .tagbox .divider-wrp.block {
-  margin-bottom: 5px !important;
 }
 
 /* =========================================================================

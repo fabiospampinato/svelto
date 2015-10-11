@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Select v0.1.0
+ * Svelto - Select v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,30 +12,23 @@
 
 .select-btn {
 
-  position: relative;
+  /* DEFAULT SELECT */
 
   select {
+    @include fill-absolute ();
     border: none;
-    -moz-appearance: none;
-    -webkit-appearance: none;
     appearance: none;
-    border-radius: $border-radius-medium;
+    border-radius: inherit;
     cursor: pointer;
     font-size: $font-size;
-    position: absolute;
-    height: 100%;
-    left: 0;
-    top: 0;
     opacity: 0;
-    padding: 0 $gutter-half;
-    width: 100%;
     z-index: 1;
   }
 
-  .select-label > .valueholder {
+  /* VALUEHOLDER */
 
-    text-transform: none;
-    font-weight: bold;
+  .valueholder {
+
     display: inline-block;
 
     &.right:before, &.left:before {
@@ -44,48 +37,50 @@
 
   }
 
+  /* TRIGGER DIRECTION */
+
   &.dropdown-trigger-top {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+    @include border-top-radius ( 0 );
   }
 
   &.dropdown-trigger-bottom {
-    border-bottom-left-radius: 0;
-    border-bottom-right-radius: 0;
+    @include border-bottom-radius ( 0 );
   }
 
   &.dropdown-trigger-right {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+    @include border-right-radius ( 0 );
   }
 
   &.dropdown-trigger-left {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
+    @include border-left-radius ( 0 );
   }
 
 }
 
 /* SELECT DROPDOWN */
 
-//FIXME: why the hell does it scroll vertically and horizontally???
-
 .select-dropdown {
 
-  padding: 0;
+  @include z-depth ( $select-z-depth );
 
-  & > .container {
+  /* CARD BLOCK */
 
-    @include z-depth ( $select-dropdown-z-depth );
+  .card-block {
+    padding: $gutter-half 0;
+  }
 
-    & .label-wrp + .divider-wrp.block {
-      margin-top: $gutter-half;
-    }
+  /* BUTTON */
 
-    & .divider-wrp.block {
-      margin-bottom: $gutter-half !important; //FIXME: we should use `!important`
-    }
+  .button {
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
 
+  /* DIVIDER */
+
+  .divider {
+    margin-top: $gutter-half;
   }
 
 }

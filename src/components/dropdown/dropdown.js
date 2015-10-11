@@ -42,6 +42,7 @@
         trigger: '.dropdown-trigger'
       },
       callbacks: {
+        beforeopen: _.noop,
         open: _.noop,
         close: _.noop
       }
@@ -146,7 +147,7 @@
         $pointer: noTip ? false : $mockTip,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
-          positionated: function ( data ) {
+          change: function ( data ) {
             $trigger.addClass ( 'dropdown-trigger-' + data.direction );
           }
         }
@@ -205,6 +206,8 @@
         $(trigger).addClass ( this.options.classes.open );
 
       }
+
+      this._trigger ( 'beforeopen' );
 
       this._positionate ();
 

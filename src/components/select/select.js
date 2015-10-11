@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Select v0.1.0
+ * Svelto - Select v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,7 +10,6 @@
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
-//TODO: add select-closer
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -23,34 +22,34 @@
     /* TEMPLATES */
 
     templates: {
-      base: '<div id="dropdown-{%=o.id%}" class="dropdown select-dropdown attached">' +
-            '<div class="container">' +
-              '<div class="container-content">' +
-                '<div class="multiple vertical stretched joined">' +
-                    '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                      '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                    '{% } %}' +
-                '</div>' +
-              '</div>' +
-            '</div>' +
-          '</div>',
-      optgroup: '<div class="divider-wrp block">' +
-              '<div class="divider">' +
-                '{%=o.prop%}' +
+      base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
+              '<div class="card-block">' +
+                '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
+                  '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                '{% } %}' +
               '</div>' +
             '</div>',
-      option: '<div class="label-wrp button-wrp" data-value="{%=o.prop%}">' +
-            '<div class="label actionable sharp">' +
-              '<div class="label-center">' +
+      optgroup: '<div class="divider">' +
+                  '{%=o.prop%}' +
+                '</div>',
+      option: '<div class="button" data-value="{%=o.prop%}">' +
                 '{%=o.value%}' +
-              '</div>' +
-            '</div>' +
-          '</div>'
+              '</div>'
      },
 
     /* OPTIONS */
 
     options: {
+      classes: {
+        selected: 'active'
+      },
+      selectors: {
+        select: 'select',
+        option: 'option',
+        label: '.select-label',
+        valueholder: '.valueholder',
+        button: '.button'
+      },
       callbacks: {
         open: _.noop,
         close: _.noop,
@@ -63,37 +62,36 @@
     _variables: function () {
 
       this.$trigger = this.$element;
-      this.$select = this.$trigger.find ( 'select' );
-      this.$options = this.$select.find ( 'option' );
-      this.$select_label = this.$trigger.find ( '.select-label' );
-      this.$valueholder = this.$trigger.find ( '.valueholder' );
+      this.$select = this.$trigger.find ( this.options.selectors.select );
+      this.$options = this.$select.find ( this.options.selectors.option );
+      this.$label = this.$trigger.find ( this.options.selectors.label );
+      this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
 
       this.id = this.$trigger.data ( 'select' );
 
       if ( this.$valueholder.length === 0 ) {
 
-        this.$valueholder = this.$select_label;
+        this.$valueholder = this.$label;
 
       }
 
-      this.select_options = [];
+      this.selectOptions = [];
 
       this.$dropdown = false;
-      this.$dropdown_container = false;
       this.$buttons = false;
 
     },
 
     _init: function () {
 
-      this._update_valueholder ();
+      this._updateValueholder ();
 
       if ( !$.browser.is.touchDevice ) {
 
         this.$select.addClass ( 'hidden' );
 
-        this._init_select_options ();
-        this._init_dropdown ();
+        this.___selectOptions ();
+        this.___dropdown ();
 
       }
 
@@ -101,22 +99,33 @@
 
     _events: function () {
 
-      this._on ( this.$select, 'change', function () {
-        this.update ();
-        this._trigger ( 'change' );
-      });
+      /* CHANGE */
+
+      this._on ( this.$select, 'change', this.__change );
 
       if ( !$.browser.is.touchDevice ) {
 
-        this._on ( this.$buttons, 'click', this._handler_button_click );
+        /* BUTTON TAP */
+
+        this._on ( this.$buttons, Pointer.tap, this.__tap );
 
       }
 
     },
 
-    /* BUTTON CLICK */
+    /* CHANGE */
 
-    _handler_button_click: function ( event, button ) {
+    __change: function () {
+
+      this._update ();
+
+      this._trigger ( 'change' );
+
+    },
+
+    /* BUTTON TAP */
+
+    __tap: function ( event, button ) {
 
       this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
 
@@ -124,33 +133,33 @@
 
     /* PRIVATE */
 
-    _init_select_options: function () { //FIXME: Add support for arbitrary number of optgroups levels
+    ___selectOptions: function () { //FIXME: Add support for arbitrary number of optgroups levels
 
-      var previous_optgroup,
-        current_optgroup;
+      var previousOptgroup,
+          currentOptgroup;
 
       for ( var i = 0, l = this.$options.length; i < l; i++ ) {
 
         var $option = this.$options.eq ( i ),
-          $parent = $option.parent ();
+            $parent = $option.parent ();
 
         if ( $parent.is ( 'optgroup' ) ) {
 
-          current_optgroup = $parent.attr ( 'label' );
+          currentOptgroup = $parent.attr ( 'label' );
 
-          if ( current_optgroup !== previous_optgroup ) {
+          if ( currentOptgroup !== previousOptgroup ) {
 
-            previous_optgroup = current_optgroup;
+            previousOptgroup = currentOptgroup;
 
-            this.select_options.push ({
-              prop: current_optgroup
+            this.selectOptions.push ({
+              prop: currentOptgroup
             });
 
           }
 
         }
 
-        this.select_options.push ({
+        this.selectOptions.push ({
           value: $option.html (),
           prop: $option.attr ( 'value' )
         });
@@ -159,73 +168,83 @@
 
     },
 
-    _init_dropdown: function () {
+    ___dropdown: function () {
 
-      var html = this._tmpl ( 'base', { id: this.id, options: this.select_options } );
+      var html = this._tmpl ( 'base', { id: this.id, options: this.selectOptions } );
 
-      $body.append ( html );
+      this.$dropdown = $(html).appendTo ( $body );
+      this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
-      this.$dropdown = $('#dropdown-' + this.id);
-      this.$dropdown_container = this.$dropdown.find ( '.container' );
-      this.$buttons = this.$dropdown.find ( '.button-wrp' );
+      this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', this.id );
 
-      this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', 'dropdown-' + this.id );
-
-      var instance = this;
+      var self = this;
 
       this.$dropdown.dropdown ({
         callbacks: {
-          open: function () {
-            instance._set_dropdown_width.bind ( instance )(); //FIXME: is the bind necessary?
-            instance._trigger ( 'open' );
+          beforeopen: function () {
+            self._setDropdownWidth ();
           },
-          close: instance.options.callbacks.close
+          open: function () {
+            self._trigger ( 'open' );
+          },
+          close: function () {
+            self._trigger ( 'close' );
+          }
         }
       });
 
-      this._update_dropdown ();
+      this._updateDropdown ();
 
     },
 
-    _update_valueholder: function () {
+    _setDropdownWidth: function () {
 
-      var $selected_option = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
-
-      this.$valueholder.html ( $selected_option.html () );
+      this.$dropdown.css ( 'min-width', this.$trigger.outerWidth () );
 
     },
 
-    _update_dropdown: function () {
+    /* UPDATE */
 
-      this.$buttons.removeClass ( 'active' );
+    _updateValueholder: function () {
 
-      this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( 'active' );
+      var $selectedOption = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
+
+      this.$valueholder.html ( $selectedOption.html () );
 
     },
 
-    _set_dropdown_width: function () {
+    _updateDropdown: function () {
 
-      this.$dropdown_container.css ( 'min-width', this.$trigger.width () );
+      this.$buttons.removeClass ( this.options.classes.selected );
+
+      this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
+
+    },
+
+
+    _update: function () {
+
+      this._updateValueholder ();
+
+      if ( !$.browser.is.touchDevice ) {
+
+        this._updateDropdown ();
+
+      }
 
     },
 
     /* PUBLIC */
 
-    select: function ( value ) {
+    get: function () {
 
-      this.$buttons.filter ( '[data-value="' + value + '"]' ).click ();
+      return this.$select.val ();
 
     },
 
-    update: function () {
+    select: function ( value ) {
 
-      if ( !$.browser.is.touchDevice ) {
-
-        this._update_dropdown ();
-
-      }
-
-      this._update_valueholder ();
+      this.$buttons.filter ( '[data-value="' + value + '"]' ).tap ();
 
     }
 
