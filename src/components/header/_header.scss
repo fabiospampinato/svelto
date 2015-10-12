@@ -1,36 +1,28 @@
 
 /* =========================================================================
- * Svelto - Header v0.1.0
+ * Svelto - Header v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* HEADER */
 
 header {
 
-  position: relative;
-  margin-bottom: $gutter;
+  @extend .widget;
 
-  &.has-background { //FIXME: it doesn't work if we want to add the shadow also when using the background
-    overflow: hidden;
-  }
+  /* BAKGROUND */
 
-  & > .header-background { //TODO: scale it, make the image fill the space
-    position: absolute;
+  .header-background { //TODO: scale it, make the image fill the space
+    @include fill-absolute ();
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; //FIXME: Not supported by IE, not even Edge
     z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-  }
-
-  & > *:last-child {
-    margin-bottom: 0;
   }
 
 }

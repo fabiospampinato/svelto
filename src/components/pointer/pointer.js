@@ -192,7 +192,9 @@
 
           $target.trigger ( createEvent ( Pointer.flick, event ), {
             orientation: orientation,
-            direction: direction
+            direction: direction,
+            startXY: startXY,
+            endXY: endXY
           });
 
         }

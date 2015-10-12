@@ -6,44 +6,40 @@ extends ../layout.jade
 append main
   +divider-block Header
 
-  +header
-    +toolbar.yellow
+  +header.yellow
+    +toolbar
       +button-icon('menu').compact
-      span.large Title
-      .spacer
+      span.large.spacer Title
       +button-icon('refresh').compact
       +button-icon('more_vert').compact
 
-  +header("/sample-wide.jpg").has-background
+  +header.red
     +toolbar
       +button-icon('menu').compact
-      span.large Title
-      .spacer
-      +button-icon('refresh').compact
-      +button-icon('more_vert').compact
-    .header-background.red
-
-  +header("/sample-wide.jpg").has-background
-    +toolbar
-      +button-icon('menu').compact
-      span.large Title
-      .spacer
-      +button-icon('refresh').compact
-      +button-icon('more_vert').compact
-    .header-background.orange.gradient
-
-  +header-with-bg("/sample-wide.jpg")(style="height: 150px;")
-    +toolbar
-      +button-icon('menu').compact
-      span.large Title
-      .spacer
+      span.large.spacer Title
       +button-icon('refresh').compact
       +button-icon('more_vert').compact
 
-  +header-with-bg("/sample-wide.jpg")(style="height: 300px;")
+  +header.has-background
+    +header-bg("/sample-wide.jpg")
     +toolbar
       +button-icon('menu').compact
-      span.large Title
-      .spacer
+      span.large.spacer Title
+      +button-icon('refresh').compact
+      +button-icon('more_vert').compact
+
+  +header(style="height: 150px;").has-background
+    +header-bg("/sample-wide.jpg")
+    +toolbar.white
+      +button-icon('menu').compact
+      span.large.spacer Title
+      +button-icon('refresh').compact
+      +button-icon('more_vert').compact
+
+  +header(style="height: 300px;").has-background
+    +header-bg("/sample-wide.jpg")
+    +toolbar
+      +button-icon('menu').compact
+      span.large.spacer Title
       +button-icon('refresh').compact
       +button-icon('more_vert').compact

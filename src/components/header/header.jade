@@ -1,19 +1,16 @@
 
 //- =========================================================================
-//- Svelto - Header v0.1.0
+//- Svelto - Header v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-//- FIXME: do not use inline style
-//- FIXME: make it more general, so that not just an image url can be set as a bacground but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
+//- FIXME: Make it more general, so that not just an image url can be set as a background but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
 
 mixin header
   header&attributes(attributes)
     block
 
-mixin header-with-bg(background_image_url)
-  header&attributes(attributes).has-background
-    block
-    .header-background(style="background:url(" + background_image_url + ") no-repeat center center fixed;")
+mixin header-bg(url)
+  img(src=url).header-background

@@ -36,21 +36,33 @@ append main
     +button("remove_element ( 'footer' )").outlined Remove footer
 
 append body-start
-  +navbar({ id: "left-attached", direction: "left", slim: false, attached: "attached-lg", flickable: true }) Left Attached
-  +navbar({ id: "top-attached", direction: "top", slim: true, attached: "attached-lg" }) Top Attached
-  +navbar({ id: "bottom-attached", direction: "bottom", slim: true, attached: "attached-lg" }) Bottom attached
-  +navbar({ id: "right-attached", direction: "right", slim: false, attached: "attached-lg", flickable: true }) Right Attached
+  +navbar({ id: "left-attached", direction: "left", slim: false, attached: "attached-lg", flickable: true }).card
+    +card-block Left Attached
+  +navbar({ id: "top-attached", direction: "top", slim: true, attached: "attached-lg" }).card
+    +card-block Top Attached
+  +navbar({ id: "bottom-attached", direction: "bottom", slim: true, attached: "attached-lg" }).card
+    +card-block Bottom attached
+  +navbar({ id: "right-attached", direction: "right", slim: false, attached: "attached-lg", flickable: true }).card
+    +card-block Right Attached
 
 append body
-  +navbar({ id: "left", direction: "left" }) Left
-  +navbar({ id: "top", direction: "top" }) Top
-  +navbar({ id: "bottom", direction: "bottom" }) Bottom
-  +navbar({ id: "right", direction: "right" }) Right
+  +navbar({ id: "left", direction: "left" }).card
+    +card-block Left
+  +navbar({ id: "top", direction: "top" }).card
+    +card-block Top
+  +navbar({ id: "bottom", direction: "bottom" }).card
+    +card-block Bottom
+  +navbar({ id: "right", direction: "right" }).card
+    +card-block Right
 
-  +navbar({ id: "left-slim", direction: "left", slim: true }) Left slim
-  +navbar({ id: "top-slim", direction: "top", slim: true }) Top slim
-  +navbar({ id: "bottom-slim", direction: "bottom", slim: true }) Bottom slim
-  +navbar({ id: "right-slim", direction: "right", slim: true }) Right slim
+  +navbar({ id: "left-slim", direction: "left", slim: true }).card
+    +card-block Left slim
+  +navbar({ id: "top-slim", direction: "top", slim: true }).card
+    +card-block Top slim
+  +navbar({ id: "bottom-slim", direction: "bottom", slim: true }).card
+    +card-block Bottom slim
+  +navbar({ id: "right-slim", direction: "right", slim: true }).card
+    +card-block Right slim
 
 append body-end
   +script.

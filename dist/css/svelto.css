@@ -2865,7 +2865,7 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, i.icon, .slider:not(.disabled) .slider-min:hover:after,
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, header, i.icon, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
@@ -2876,7 +2876,7 @@ table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp,
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, i.icon > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, i.icon > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
@@ -2886,7 +2886,7 @@ table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, i.icon > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
@@ -2907,6 +2907,7 @@ label.disabled,
 .disabled.datepicker,
 .disabled.embedded,
 .disabled.flippable,
+header.disabled,
 i.disabled.icon,
 .slider:not(.disabled) .disabled.slider-min:hover:after,
 .slider:not(.disabled) .disabled.slider-max:hover:after,
@@ -2928,7 +2929,7 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, i[class*="-disabled"].icon, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, header[class*="-disabled"], i[class*="-disabled"].icon, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
@@ -3071,7 +3072,7 @@ table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled
 /* CONTAINER */
 /* CONTAINER COMPACT */
 /* =========================================================================
- * Svelto - Navbar (Settings) v0.1.0
+ * Svelto - Navbar (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7008,44 +7009,29 @@ footer.beveled.base:after {
 }
 
 /* =========================================================================
- * Svelto - Header (Settings) v0.1.0
+ * Svelto - Header v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* HEADER */
-/* =========================================================================
- * Svelto - Header v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* HEADER */
 header {
-  position: relative;
-  margin-bottom: 10px;
+  /* BAKGROUND */
 }
 
-header.has-background {
-  overflow: hidden;
-}
-
-header > .header-background {
+header .header-background {
   position: absolute;
-  z-index: -1;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background-size: cover;
-}
-
-header > *:last-child {
-  margin-bottom: 0;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
 }
 
 /* =========================================================================
@@ -8640,7 +8626,7 @@ table > :not(tfoot) td .multiple:only-child {
 }
 
 /* =========================================================================
- * Svelto - Navbar v0.1.0
+ * Svelto - Navbar v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8650,125 +8636,109 @@ table > :not(tfoot) td .multiple:only-child {
 /* MIXINS */
 /* NAVBAR */
 .navbar {
-  border-color: #d9d9d9 ;
-  color: #3f3f3f ;
-  background: #ffffff ;
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   position: fixed;
   z-index: 120;
+  margin-bottom: 0;
+  border-radius: 0;
+  pointer-events: none;
   transition: -webkit-transform 0.35s;
   transition: transform 0.35s;
-  pointer-events: none;
-  /* BACKGROUND */
+  /* LEFT / RIGHT */
+  /* LEFT */
+  /* RIGHT */
+  /* TOP / BOTTOM */
+  /* TOP */
+  /* BOTTOM */
+  /* OPEN */
+  /* ATTACHED */
+  /* BEFORE (BACKGROUND) */
 }
 
-.navbar.transparentize {
-  border-color: rgba(217, 217, 217, 0.95) ;
-}
-
-.navbar.transparentize {
-  background: rgba(255, 255, 255, 0.95) ;
-}
-
-.navbar p > a {
-  color: #1565c0 ;
-}
-
-.navbar p > a:after {
-  border-color: #166ac9 ;
-}
-
-.navbar p > a:hover {
-  color: #166ac9 ;
-}
-
-.navbar > :last-child {
-  margin-bottom: 0 !important;
-}
-
-.navbar > :last-child.multiple {
-  margin-bottom: -10px !important;
-}
-
-.navbar.left, .navbar.right {
+.navbar.left,
+.navbar.right {
   top: 0;
   bottom: 0;
-  width: 240px;
+  width: 15rem;
   /* SLIM */
 }
 
-.navbar.left.slim, .navbar.right.slim {
-  width: 64px;
+.navbar.left.slim,
+.navbar.right.slim {
+  width: 4.2666666667rem;
 }
 
 .navbar.left {
   left: 0;
-  -webkit-transform: translateX(-280px);
-          transform: translateX(-280px);
+  -webkit-transform: translateX(-17.6666666667rem);
+          transform: translateX(-17.6666666667rem);
   /* SLIM */
 }
 
 .navbar.left.slim {
-  -webkit-transform: translateX(-104px);
-          transform: translateX(-104px);
+  -webkit-transform: translateX(-6.9333333334rem);
+          transform: translateX(-6.9333333334rem);
 }
 
 .navbar.right {
   right: 0;
-  -webkit-transform: translateX(280px);
-          transform: translateX(280px);
+  -webkit-transform: translateX(17.6666666667rem);
+          transform: translateX(17.6666666667rem);
   /* SLIM */
 }
 
 .navbar.right.slim {
-  -webkit-transform: translateX(104px);
-          transform: translateX(104px);
+  -webkit-transform: translateX(6.9333333334rem);
+          transform: translateX(6.9333333334rem);
 }
 
-.navbar.top, .navbar.bottom {
+.navbar.top,
+.navbar.bottom {
   right: 0;
   left: 0;
-  height: 120px;
+  height: 7.5rem;
   /* SLIM */
 }
 
-.navbar.top.slim, .navbar.bottom.slim {
-  height: 64px;
+.navbar.top.slim,
+.navbar.bottom.slim {
+  height: 4.2666666667rem;
 }
 
 .navbar.top {
   top: 0;
-  -webkit-transform: translateY(-160px);
-          transform: translateY(-160px);
+  -webkit-transform: translateY(-10.1666666667rem);
+          transform: translateY(-10.1666666667rem);
   /* SLIM */
 }
 
 .navbar.top.slim {
-  -webkit-transform: translateY(-104px);
-          transform: translateY(-104px);
+  -webkit-transform: translateY(-6.9333333334rem);
+          transform: translateY(-6.9333333334rem);
 }
 
 .navbar.bottom {
   bottom: 0;
-  -webkit-transform: translateY(160px);
-          transform: translateY(160px);
+  -webkit-transform: translateY(10.1666666667rem);
+          transform: translateY(10.1666666667rem);
   /* SLIM */
 }
 
 .navbar.bottom.slim {
-  -webkit-transform: translateY(104px);
-          transform: translateY(104px);
+  -webkit-transform: translateY(6.9333333334rem);
+          transform: translateY(6.9333333334rem);
 }
 
-.navbar.opened {
+.navbar.open {
   -webkit-transform: translateX(0) translateY(0) !important;
           transform: translateX(0) translateY(0) !important;
   pointer-events: auto;
+  /* BEFORE (BACKGROUND) */
 }
 
-.navbar.opened + .navbar-background {
-  pointer-events: auto;
+.navbar.open:before {
   opacity: 1;
+  pointer-events: auto;
 }
 
 @media screen and (min-width: 0rem) {
@@ -8776,63 +8746,105 @@ table > :not(tfoot) td .multiple:only-child {
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+    /* BEFORE (BACKGROUND) */
+    /* LEFT */
+    /* RIGHT */
+    /* TOP */
+    /* BOTTOM */
   }
-  .navbar.attached-xs + .navbar-background {
-    pointer-events: auto;
+  .navbar.attached-xs:before {
     opacity: 1;
+    pointer-events: auto;
   }
-  .navbar.attached-xs + .navbar-background {
+  .navbar.attached-xs:before {
     pointer-events: none;
     opacity: 0;
   }
+  .navbar.attached-xs.left {
+    /* CONTENT */
+    /* SLIM */
+  }
   .navbar.attached-xs.left ~ #content {
-    margin-left: 240px;
+    margin-left: 15rem;
+    /* HEADER */
   }
   .navbar.attached-xs.left ~ #content > header.fixed {
-    left: 240px;
+    left: 15rem;
+  }
+  .navbar.attached-xs.left.slim {
+    /* CONTENT */
   }
   .navbar.attached-xs.left.slim ~ #content {
-    margin-left: 64px;
+    margin-left: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xs.left.slim ~ #content > header.fixed {
-    left: 64px;
+    left: 4.2666666667rem;
+  }
+  .navbar.attached-xs.right {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-xs.right ~ #content {
-    margin-right: 240px;
+    margin-right: 15rem;
+    /* HEADER */
   }
   .navbar.attached-xs.right ~ #content > header.fixed {
-    right: 240px;
+    right: 15rem;
+  }
+  .navbar.attached-xs.right.slim {
+    /* CONTENT */
   }
   .navbar.attached-xs.right.slim ~ #content {
-    margin-right: 64px;
+    margin-right: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xs.right.slim ~ #content > header.fixed {
-    right: 64px;
+    right: 4.2666666667rem;
+  }
+  .navbar.attached-xs.top {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-xs.top ~ #content {
-    margin-top: 120px;
+    margin-top: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-xs.top ~ #content > header.fixed {
-    top: 120px;
+    top: 7.5rem;
+  }
+  .navbar.attached-xs.top.slim {
+    /* CONTENT */
   }
   .navbar.attached-xs.top.slim ~ #content {
-    margin-top: 64px;
+    margin-top: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xs.top.slim ~ #content > header.fixed {
-    top: 64px;
+    top: 4.2666666667rem;
+  }
+  .navbar.attached-xs.bottom {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-xs.bottom ~ #content {
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-xs.bottom ~ #content > header.fixed {
-    bottom: 120px;
+    bottom: 7.5rem;
+  }
+  .navbar.attached-xs.bottom.slim {
+    /* CONTENT */
   }
   .navbar.attached-xs.bottom.slim ~ #content {
-    margin-bottom: 64px;
+    margin-bottom: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xs.bottom.slim ~ #content > header.fixed {
-    bottom: 64px;
+    bottom: 4.2666666667rem;
   }
 }
 
@@ -8841,63 +8853,105 @@ table > :not(tfoot) td .multiple:only-child {
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+    /* BEFORE (BACKGROUND) */
+    /* LEFT */
+    /* RIGHT */
+    /* TOP */
+    /* BOTTOM */
   }
-  .navbar.attached-sm + .navbar-background {
-    pointer-events: auto;
+  .navbar.attached-sm:before {
     opacity: 1;
+    pointer-events: auto;
   }
-  .navbar.attached-sm + .navbar-background {
+  .navbar.attached-sm:before {
     pointer-events: none;
     opacity: 0;
   }
+  .navbar.attached-sm.left {
+    /* CONTENT */
+    /* SLIM */
+  }
   .navbar.attached-sm.left ~ #content {
-    margin-left: 240px;
+    margin-left: 15rem;
+    /* HEADER */
   }
   .navbar.attached-sm.left ~ #content > header.fixed {
-    left: 240px;
+    left: 15rem;
+  }
+  .navbar.attached-sm.left.slim {
+    /* CONTENT */
   }
   .navbar.attached-sm.left.slim ~ #content {
-    margin-left: 64px;
+    margin-left: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-sm.left.slim ~ #content > header.fixed {
-    left: 64px;
+    left: 4.2666666667rem;
+  }
+  .navbar.attached-sm.right {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-sm.right ~ #content {
-    margin-right: 240px;
+    margin-right: 15rem;
+    /* HEADER */
   }
   .navbar.attached-sm.right ~ #content > header.fixed {
-    right: 240px;
+    right: 15rem;
+  }
+  .navbar.attached-sm.right.slim {
+    /* CONTENT */
   }
   .navbar.attached-sm.right.slim ~ #content {
-    margin-right: 64px;
+    margin-right: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-sm.right.slim ~ #content > header.fixed {
-    right: 64px;
+    right: 4.2666666667rem;
+  }
+  .navbar.attached-sm.top {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-sm.top ~ #content {
-    margin-top: 120px;
+    margin-top: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-sm.top ~ #content > header.fixed {
-    top: 120px;
+    top: 7.5rem;
+  }
+  .navbar.attached-sm.top.slim {
+    /* CONTENT */
   }
   .navbar.attached-sm.top.slim ~ #content {
-    margin-top: 64px;
+    margin-top: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-sm.top.slim ~ #content > header.fixed {
-    top: 64px;
+    top: 4.2666666667rem;
+  }
+  .navbar.attached-sm.bottom {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-sm.bottom ~ #content {
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-sm.bottom ~ #content > header.fixed {
-    bottom: 120px;
+    bottom: 7.5rem;
+  }
+  .navbar.attached-sm.bottom.slim {
+    /* CONTENT */
   }
   .navbar.attached-sm.bottom.slim ~ #content {
-    margin-bottom: 64px;
+    margin-bottom: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-sm.bottom.slim ~ #content > header.fixed {
-    bottom: 64px;
+    bottom: 4.2666666667rem;
   }
 }
 
@@ -8906,63 +8960,105 @@ table > :not(tfoot) td .multiple:only-child {
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+    /* BEFORE (BACKGROUND) */
+    /* LEFT */
+    /* RIGHT */
+    /* TOP */
+    /* BOTTOM */
   }
-  .navbar.attached-md + .navbar-background {
-    pointer-events: auto;
+  .navbar.attached-md:before {
     opacity: 1;
+    pointer-events: auto;
   }
-  .navbar.attached-md + .navbar-background {
+  .navbar.attached-md:before {
     pointer-events: none;
     opacity: 0;
   }
+  .navbar.attached-md.left {
+    /* CONTENT */
+    /* SLIM */
+  }
   .navbar.attached-md.left ~ #content {
-    margin-left: 240px;
+    margin-left: 15rem;
+    /* HEADER */
   }
   .navbar.attached-md.left ~ #content > header.fixed {
-    left: 240px;
+    left: 15rem;
+  }
+  .navbar.attached-md.left.slim {
+    /* CONTENT */
   }
   .navbar.attached-md.left.slim ~ #content {
-    margin-left: 64px;
+    margin-left: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-md.left.slim ~ #content > header.fixed {
-    left: 64px;
+    left: 4.2666666667rem;
+  }
+  .navbar.attached-md.right {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-md.right ~ #content {
-    margin-right: 240px;
+    margin-right: 15rem;
+    /* HEADER */
   }
   .navbar.attached-md.right ~ #content > header.fixed {
-    right: 240px;
+    right: 15rem;
+  }
+  .navbar.attached-md.right.slim {
+    /* CONTENT */
   }
   .navbar.attached-md.right.slim ~ #content {
-    margin-right: 64px;
+    margin-right: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-md.right.slim ~ #content > header.fixed {
-    right: 64px;
+    right: 4.2666666667rem;
+  }
+  .navbar.attached-md.top {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-md.top ~ #content {
-    margin-top: 120px;
+    margin-top: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-md.top ~ #content > header.fixed {
-    top: 120px;
+    top: 7.5rem;
+  }
+  .navbar.attached-md.top.slim {
+    /* CONTENT */
   }
   .navbar.attached-md.top.slim ~ #content {
-    margin-top: 64px;
+    margin-top: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-md.top.slim ~ #content > header.fixed {
-    top: 64px;
+    top: 4.2666666667rem;
+  }
+  .navbar.attached-md.bottom {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-md.bottom ~ #content {
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-md.bottom ~ #content > header.fixed {
-    bottom: 120px;
+    bottom: 7.5rem;
+  }
+  .navbar.attached-md.bottom.slim {
+    /* CONTENT */
   }
   .navbar.attached-md.bottom.slim ~ #content {
-    margin-bottom: 64px;
+    margin-bottom: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-md.bottom.slim ~ #content > header.fixed {
-    bottom: 64px;
+    bottom: 4.2666666667rem;
   }
 }
 
@@ -8971,63 +9067,105 @@ table > :not(tfoot) td .multiple:only-child {
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+    /* BEFORE (BACKGROUND) */
+    /* LEFT */
+    /* RIGHT */
+    /* TOP */
+    /* BOTTOM */
   }
-  .navbar.attached-lg + .navbar-background {
-    pointer-events: auto;
+  .navbar.attached-lg:before {
     opacity: 1;
+    pointer-events: auto;
   }
-  .navbar.attached-lg + .navbar-background {
+  .navbar.attached-lg:before {
     pointer-events: none;
     opacity: 0;
   }
+  .navbar.attached-lg.left {
+    /* CONTENT */
+    /* SLIM */
+  }
   .navbar.attached-lg.left ~ #content {
-    margin-left: 240px;
+    margin-left: 15rem;
+    /* HEADER */
   }
   .navbar.attached-lg.left ~ #content > header.fixed {
-    left: 240px;
+    left: 15rem;
+  }
+  .navbar.attached-lg.left.slim {
+    /* CONTENT */
   }
   .navbar.attached-lg.left.slim ~ #content {
-    margin-left: 64px;
+    margin-left: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-lg.left.slim ~ #content > header.fixed {
-    left: 64px;
+    left: 4.2666666667rem;
+  }
+  .navbar.attached-lg.right {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-lg.right ~ #content {
-    margin-right: 240px;
+    margin-right: 15rem;
+    /* HEADER */
   }
   .navbar.attached-lg.right ~ #content > header.fixed {
-    right: 240px;
+    right: 15rem;
+  }
+  .navbar.attached-lg.right.slim {
+    /* CONTENT */
   }
   .navbar.attached-lg.right.slim ~ #content {
-    margin-right: 64px;
+    margin-right: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-lg.right.slim ~ #content > header.fixed {
-    right: 64px;
+    right: 4.2666666667rem;
+  }
+  .navbar.attached-lg.top {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-lg.top ~ #content {
-    margin-top: 120px;
+    margin-top: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-lg.top ~ #content > header.fixed {
-    top: 120px;
+    top: 7.5rem;
+  }
+  .navbar.attached-lg.top.slim {
+    /* CONTENT */
   }
   .navbar.attached-lg.top.slim ~ #content {
-    margin-top: 64px;
+    margin-top: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-lg.top.slim ~ #content > header.fixed {
-    top: 64px;
+    top: 4.2666666667rem;
+  }
+  .navbar.attached-lg.bottom {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-lg.bottom ~ #content {
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-lg.bottom ~ #content > header.fixed {
-    bottom: 120px;
+    bottom: 7.5rem;
+  }
+  .navbar.attached-lg.bottom.slim {
+    /* CONTENT */
   }
   .navbar.attached-lg.bottom.slim ~ #content {
-    margin-bottom: 64px;
+    margin-bottom: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-lg.bottom.slim ~ #content > header.fixed {
-    bottom: 64px;
+    bottom: 4.2666666667rem;
   }
 }
 
@@ -9036,78 +9174,121 @@ table > :not(tfoot) td .multiple:only-child {
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
     pointer-events: auto;
+    /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+    /* BEFORE (BACKGROUND) */
+    /* LEFT */
+    /* RIGHT */
+    /* TOP */
+    /* BOTTOM */
   }
-  .navbar.attached-xl + .navbar-background {
-    pointer-events: auto;
+  .navbar.attached-xl:before {
     opacity: 1;
+    pointer-events: auto;
   }
-  .navbar.attached-xl + .navbar-background {
+  .navbar.attached-xl:before {
     pointer-events: none;
     opacity: 0;
   }
+  .navbar.attached-xl.left {
+    /* CONTENT */
+    /* SLIM */
+  }
   .navbar.attached-xl.left ~ #content {
-    margin-left: 240px;
+    margin-left: 15rem;
+    /* HEADER */
   }
   .navbar.attached-xl.left ~ #content > header.fixed {
-    left: 240px;
+    left: 15rem;
+  }
+  .navbar.attached-xl.left.slim {
+    /* CONTENT */
   }
   .navbar.attached-xl.left.slim ~ #content {
-    margin-left: 64px;
+    margin-left: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xl.left.slim ~ #content > header.fixed {
-    left: 64px;
+    left: 4.2666666667rem;
+  }
+  .navbar.attached-xl.right {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-xl.right ~ #content {
-    margin-right: 240px;
+    margin-right: 15rem;
+    /* HEADER */
   }
   .navbar.attached-xl.right ~ #content > header.fixed {
-    right: 240px;
+    right: 15rem;
+  }
+  .navbar.attached-xl.right.slim {
+    /* CONTENT */
   }
   .navbar.attached-xl.right.slim ~ #content {
-    margin-right: 64px;
+    margin-right: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xl.right.slim ~ #content > header.fixed {
-    right: 64px;
+    right: 4.2666666667rem;
+  }
+  .navbar.attached-xl.top {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-xl.top ~ #content {
-    margin-top: 120px;
+    margin-top: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-xl.top ~ #content > header.fixed {
-    top: 120px;
+    top: 7.5rem;
+  }
+  .navbar.attached-xl.top.slim {
+    /* CONTENT */
   }
   .navbar.attached-xl.top.slim ~ #content {
-    margin-top: 64px;
+    margin-top: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xl.top.slim ~ #content > header.fixed {
-    top: 64px;
+    top: 4.2666666667rem;
+  }
+  .navbar.attached-xl.bottom {
+    /* CONTENT */
+    /* SLIM */
   }
   .navbar.attached-xl.bottom ~ #content {
-    margin-bottom: 120px;
+    margin-bottom: 7.5rem;
+    /* HEADER */
   }
   .navbar.attached-xl.bottom ~ #content > header.fixed {
-    bottom: 120px;
+    bottom: 7.5rem;
+  }
+  .navbar.attached-xl.bottom.slim {
+    /* CONTENT */
   }
   .navbar.attached-xl.bottom.slim ~ #content {
-    margin-bottom: 64px;
+    margin-bottom: 4.2666666667rem;
+    /* HEADER */
   }
   .navbar.attached-xl.bottom.slim ~ #content > header.fixed {
-    bottom: 64px;
+    bottom: 4.2666666667rem;
   }
 }
 
-.navbar-background {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  z-index: 119;
-  cursor: pointer;
-  transition: opacity 0.35s;
+.navbar:before {
+  content: '';
+  position: absolute;
   opacity: 0;
   pointer-events: none;
+  width: 400vw;
+  height: 400vh;
+  top: -200vh;
+  left: -200vw;
+  z-index: -1;
+  cursor: pointer;
   background-color: rgba(0, 0, 0, 0.5);
+  transition: opacity 0.35s;
 }
 
 /* =========================================================================

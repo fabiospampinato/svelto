@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Navbar v0.1.0
+ * Svelto - Navbar v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,7 +9,7 @@
  * ========================================================================= */
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-//TODO: Support esc key to close it
+//TODO: Disable scrolling while the navbar is open
 
 ;(function ( $, _, window, document, undefined ) {
 
@@ -22,7 +22,18 @@
     /* OPTIONS */
 
     options: {
-      flickableArea: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
+      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
+      datas: {
+        direction: 'direction'
+      },
+      classes: {
+        open: 'open',
+        flickable: 'flickable'
+      },
+      selectors: {
+        closer: '.navbar-closer',
+        trigger: '.navbar-trigger'
+      },
       callbacks: {
         open: _.noop,
         close: _.noop
@@ -33,44 +44,80 @@
 
     _variables: function () {
 
+      this.navbar = this.element;
       this.$navbar = this.$element;
 
       this.id = this.$navbar.attr ( 'id' );
 
-      this.$closers = this.$navbar.find ( '.navbar-closer, + .navbar-background' );
-      this.$triggers = $('.navbar-trigger[data-navbar="' + this.id + '"]');
+      this.$closers = this.$navbar.find ( this.options.selectors.closer );
+      this.$triggers = $(this.options.selectors.trigger + '[data-navbar="' + this.id + '"]');
 
-      this.direction = this.$navbar.data ( 'direction' );
-      this.isFlickable = this.$navbar.hasClass ( 'flickable' );
-      this.opened = this.$navbar.hasClass ( 'opened' );
+      this.direction = this.$navbar.data ( this.options.datas.direction );
+      this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
+      this.isFlickable = this.$navbar.hasClass ( this.options.classes.flickable );
 
     },
 
     _events: function () {
 
-      /* CLOSER TAP */
+      /* TAP */
+
+      this._on ( Pointer.tap, this.__tap );
+
+      /* TRIGGER */
+
+      this._on ( this.$triggers, Pointer.tap, this.open );
+
+      /* CLOSER */
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
-      /* TRIGGER TAP */
+      /* KEYDOWN */
 
-      this._on ( this.$triggers, Pointer.tap, this.open );
+      this._onHover ( $document, 'keydown', this.__keydown );
 
       /* FLICK */
 
       if ( this.isFlickable ) {
 
-        this._on ( $document, Pointer.flick, this._handler_flick );
+        this._on ( $document, Pointer.flick, this.__flick );
 
       }
 
     },
 
-    /* PRIVATE */
+    /* TAP */
 
-    _handler_flick: function ( event, data ) {
+    __tap: function ( event ) {
 
-      if ( this.opened ) return;
+      if ( event.target === this.navbar ) {
+
+        this.close ();
+
+      }
+
+    },
+
+    /* KEYDOWN */
+
+    __keydown: function ( event ) {
+
+      switch ( event.keyCode ) {
+
+        case $.ui.keyCode.ESCAPE:
+          event.stopImmediatePropagation ();
+          this.close ();
+          break;
+
+      }
+
+    },
+
+    /* FLICK */
+
+    __flick: function ( event, data ) {
+
+      if ( this._isOpen ) return;
 
       switch ( this.direction ) {
 
@@ -79,13 +126,13 @@
           if ( data.orientation === 'horizontal' ) {
             if ( this.direction === 'left' ) {
               if ( data.direction === 1 ) {
-                if ( data.startXY.X <= this.options.flickableArea ) {
+                if ( data.startXY.X <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
             } else if ( this.direction === 'right' ) {
               if ( data.direction === -1 ) {
-                if ( $window.width () - data.startXY.X <= this.options.flickableArea ) {
+                if ( $window.width () - data.startXY.X <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
@@ -98,13 +145,13 @@
           if ( data.orientation === 'vertical' ) {
             if ( this.direction === 'top' ) {
               if ( data.direction === -1 ) {
-                if ( data.startXY.Y <= this.options.flickableArea ) {
+                if ( data.startXY.Y <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
             } else if ( this.direction === 'bottom' ) {
               if ( data.direction === 1 ) {
-                if ( $window.height () - data.startXY.Y <= this.options.flickableArea ) {
+                if ( $window.height () - data.startXY.Y <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
@@ -118,21 +165,27 @@
 
     /* PUBLIC */
 
+    isOpen: function () {
+
+      return this._isOpen;
+
+    },
+
     toggle: function ( force ) {
 
       if ( _.isUndefined ( force ) ) {
 
-        force = !this.opened;
+        force = !this._isOpen;
 
       }
 
-      if ( force !== this.opened ) {
+      if ( force !== this._isOpen ) {
 
-        this.opened = force;
+        this._isOpen = force;
 
-        this.$navbar.toggleClass ( 'opened', this.opened );
+        this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
 
-        this._trigger ( this.opened ? 'open' : 'close' );
+        this._trigger ( this._isOpen ? 'open' : 'close' );
 
       }
 

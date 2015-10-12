@@ -2259,7 +2259,7 @@ $container-compact-padding-horizontal: $gutter !default;
 
 
 /* =========================================================================
- * Svelto - Navbar (Settings) v0.1.0
+ * Svelto - Navbar (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2273,9 +2273,6 @@ $container-compact-padding-horizontal: $gutter !default;
 $navbar-z-index: 120 !default;
 $navbar-z-depth: 5 !default;
 
-$navbar-color: $container-color !default;
-$navbar-color-basic: $container-color-basic !default;
-
 $navbar-transition-transform-duration: $transition-duration-normal !default;
 
 /* ATTACHED */
@@ -2284,30 +2281,28 @@ $navbar-attached-z-depth: 5 !default;
 
 /* BACKGROUND */
 
-$navbar-background-z-index: 119 !default;
-
 $navbar-background-color: rgba(0, 0, 0, 0.5) !default;
 
 $navbar-background-transition-opacity-duration: $transition-duration-normal !default;
 
 /* SIZES */
 
-$navbar-horizontal-height: 120px !default;
-$navbar-horizontal-extra-distance: 40px !default;
+$navbar-horizontal-height: 7.5rem !default;
+$navbar-horizontal-extra-distance: 2.6666666667rem !default;
 $navbar-closed-horizontal-spacing: $navbar-horizontal-height + $navbar-horizontal-extra-distance !default;
 
-$navbar-vertical-width: 240px !default;
-$navbar-vertical-extra-distance: 40px !default;
+$navbar-vertical-width: 15rem !default;
+$navbar-vertical-extra-distance: 2.6666666667rem !default;
 $navbar-closed-vertical-spacing: $navbar-vertical-width + $navbar-vertical-extra-distance !default;
 
 /* SLIM SIZES */
 
-$navbar-slim-horizontal-height: 64px !default;
-$navbar-slim-horizontal-extra-distance: 40px !default;
+$navbar-slim-horizontal-height: 4.2666666667rem !default;
+$navbar-slim-horizontal-extra-distance: 2.6666666667rem !default;
 $navbar-slim-closed-horizontal-spacing: $navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance !default;
 
-$navbar-slim-vertical-width: 64px !default;
-$navbar-slim-vertical-extra-distance: 40px !default;
+$navbar-slim-vertical-width: 4.2666666667rem !default;
+$navbar-slim-vertical-extra-distance: 2.6666666667rem !default;
 $navbar-slim-closed-vertical-spacing: $navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance !default;
 
 
@@ -6152,51 +6147,29 @@ footer {
 
 
 /* =========================================================================
- * Svelto - Header (Settings) v0.1.0
+ * Svelto - Header v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-
-/* HEADER */
-
-//TODO
-
-
-/* =========================================================================
- * Svelto - Header v0.1.0
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* HEADER */
 
 header {
 
-  position: relative;
-  margin-bottom: $gutter;
+  @extend .widget;
 
-  &.has-background { //FIXME: it doesn't work if we want to add the shadow also when using the background
-    overflow: hidden;
-  }
+  /* BAKGROUND */
 
-  & > .header-background { //TODO: scale it, make the image fill the space
-    position: absolute;
+  .header-background { //TODO: scale it, make the image fill the space
+    @include fill-absolute ();
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; //FIXME: Not supported by IE, not even Edge
     z-index: -1;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-size: cover;
-  }
-
-  & > *:last-child {
-    margin-bottom: 0;
   }
 
 }
@@ -7606,15 +7579,13 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
 
 /* =========================================================================
- * Svelto - Navbar v0.1.0
+ * Svelto - Navbar v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-
-//TODO: maybe we should wrap header, main and footer into another container, so that it will be easier to do the CSS work here
 
 //INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
 
@@ -7625,9 +7596,11 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   transform: translateX(0) translateY(0) !important;
   pointer-events: auto;
 
-  + .navbar-background {
-    pointer-events: auto;
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
     opacity: 1;
+    pointer-events: auto;
   }
 
 }
@@ -7636,16 +7609,24 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   @include z-depth ( $navbar-attached-z-depth );
 
-  + .navbar-background {
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
     pointer-events: none;
     opacity: 0;
   }
 
+  /* LEFT */
+
   &.left {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-left: $navbar-vertical-width;
+
+      /* HEADER */
 
       > header.fixed {
         left: $navbar-vertical-width;
@@ -7653,11 +7634,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-left: $navbar-slim-vertical-width;
+
+        /* HEADER */
 
         > header.fixed {
           left: $navbar-slim-vertical-width;
@@ -7669,11 +7656,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
+  /* RIGHT */
+
   &.right {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-right: $navbar-vertical-width;
+
+      /* HEADER */
 
       > header.fixed {
         right: $navbar-vertical-width;
@@ -7681,11 +7674,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-right: $navbar-slim-vertical-width;
+
+        /* HEADER */
 
         > header.fixed {
           right: $navbar-slim-vertical-width;
@@ -7697,11 +7696,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
+  /* TOP */
+
   &.top {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-top: $navbar-horizontal-height;
+
+      /* HEADER */
 
       > header.fixed {
         top: $navbar-horizontal-height;
@@ -7709,11 +7714,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-top: $navbar-slim-horizontal-height;
+
+        /* HEADER */
 
         > header.fixed {
           top: $navbar-slim-horizontal-height;
@@ -7725,11 +7736,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
+  /* BOTTOM */
+
   &.bottom {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-bottom: $navbar-horizontal-height;
+
+      /* HEADER */
 
       > header.fixed {
         bottom: $navbar-horizontal-height;
@@ -7737,11 +7754,17 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-bottom: $navbar-slim-horizontal-height;
+
+        /* HEADER */
 
         > header.fixed {
           bottom: $navbar-slim-horizontal-height;
@@ -7759,15 +7782,18 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
 .navbar {
 
-  @include color ( $navbar-color, $navbar-color-basic );
   @include z-depth ( $navbar-z-depth );
-  @include last-child-no-gutter ();
   position: fixed;
   z-index: $navbar-z-index;
-  transition: transform $navbar-transition-transform-duration;
+  margin-bottom: 0;
+  border-radius: 0;
   pointer-events: none;
+  transition: transform $navbar-transition-transform-duration;
 
-  &.left, &.right {
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right {
 
     top: 0;
     bottom: 0;
@@ -7780,6 +7806,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
     }
 
   }
+
+  /* LEFT */
 
   &.left {
 
@@ -7794,6 +7822,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
+  /* RIGHT */
+
   &.right {
 
     right: 0;
@@ -7807,7 +7837,10 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
-  &.top, &.bottom {
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
 
     right: 0;
     left: 0;
@@ -7820,6 +7853,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
     }
 
   }
+
+  /* TOP */
 
   &.top {
 
@@ -7834,6 +7869,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
+  /* BOTTOM */
+
   &.bottom {
 
     bottom: 0;
@@ -7847,13 +7884,13 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
-  // OPENED
+  /* OPEN */
 
-  &.opened {
+  &.open {
     @include open ();
   }
 
-  // ATTACHED
+  /* ATTACHED */
 
   @include xsmall-up {
 
@@ -7900,16 +7937,21 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
-  /* BACKGROUND */
+  /* BEFORE (BACKGROUND) */
 
-  &-background {
-    @include fill-fixed ();
-    z-index: $navbar-background-z-index;
-    cursor: pointer;
-    transition: opacity $navbar-background-transition-opacity-duration;
+  &:before {
+    content: '';
+    position: absolute;
     opacity: 0;
     pointer-events: none;
+    width: 400vw;
+    height: 400vh;
+    top: -200vh;
+    left: -200vw;
+    z-index: -1;
+    cursor: pointer;
     background-color: $navbar-background-color;
+    transition: opacity $navbar-background-transition-opacity-duration;
   }
 
 }

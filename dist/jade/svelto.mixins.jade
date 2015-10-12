@@ -292,31 +292,6 @@ mixin container
 
 
 //- =========================================================================
-//- Svelto - Divider v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  .divider&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider.block
-    .divider-content&attributes(attributes)
-      block
-
-mixin divider-text
-  .divider&attributes(attributes).text
-    block
-
-mixin divider-spacer
-  .divider&attributes(attributes).spacer
-    block
-
-
-//- =========================================================================
 //- Svelto - Datepicker v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -386,6 +361,31 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
+
+
+//- =========================================================================
+//- Svelto - Divider v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  .divider&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider.block
+    .divider-content&attributes(attributes)
+      block
+
+mixin divider-text
+  .divider&attributes(attributes).text
+    block
+
+mixin divider-spacer
+  .divider&attributes(attributes).spacer
+    block
 
 
 //- =========================================================================
@@ -523,23 +523,34 @@ mixin form-button-icon(icon)
 
 
 //- =========================================================================
-//- Svelto - Header v0.1.0
+//- Svelto - Header v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-//- FIXME: do not use inline style
-//- FIXME: make it more general, so that not just an image url can be set as a bacground but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
+//- FIXME: Make it more general, so that not just an image url can be set as a background but pretty much everything... but maybe we can do it manually without a mixin, there cannot be a mixin for everything (sure?)...
 
 mixin header
   header&attributes(attributes)
     block
 
-mixin header-with-bg(background_image_url)
-  header&attributes(attributes).has-background
+mixin header-bg(url)
+  img(src=url).header-background
+
+
+//- =========================================================================
+//- Svelto - Icons v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin icon(icon)
+  i&attributes(attributes).icon
+    if icon
+      = icon
     block
-    .header-background(style="background:url(" + background_image_url + ") no-repeat center center fixed;")
 
 
 //- =========================================================================
@@ -561,20 +572,6 @@ mixin image-caption
 
 mixin image-sample
   +image("/sample.png")&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Icons v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin icon(icon)
-  i&attributes(attributes).icon
-    if icon
-      = icon
     block
 
 
@@ -769,7 +766,7 @@ mixin multiple-sub-right
 
 
 //- =========================================================================
-//- Svelto - Navbar v0.1.0
+//- Svelto - Navbar v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -778,12 +775,12 @@ mixin multiple-sub-right
 //- Options
   {
     id: '', // Navbar id
-    title: '' // Title
-    icon: '', // Icon to use
+    title: '', // Title
+    icon: '' // Icon to use
   }
 
 mixin navbar-btn(options)
-  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-trigger
+  +button(data-navbar=options.id)&attributes(attributes).navbar-trigger
     if options.title
       span= options.title
     if options.icon
@@ -801,9 +798,8 @@ mixin navbar-btn(options)
 mixin navbar(options)
   - options.direction = options.direction || "left";
   - options.slim = options.slim || false;
-  .navbar(id="navbar-" + options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
+  .navbar(id=options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
     block
-  .navbar-background
 
 
 //- =========================================================================
@@ -1422,6 +1418,31 @@ mixin tabs-containers
 
 
 //- =========================================================================
+//- Svelto - Textarea v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- =========================================================================
 //- Svelto - Tagbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1449,31 +1470,6 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
-
-
-//- =========================================================================
-//- Svelto - Textarea v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Textarea name
-    label: '', // Label
-  }
-
-mixin textarea(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- =========================================================================

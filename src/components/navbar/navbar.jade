@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Navbar v0.1.0
+//- Svelto - Navbar v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9,12 +9,12 @@
 //- Options
   {
     id: '', // Navbar id
-    title: '' // Title
-    icon: '', // Icon to use
+    title: '', // Title
+    icon: '' // Icon to use
   }
 
 mixin navbar-btn(options)
-  +button(data-navbar="navbar-" + options.id)&attributes(attributes).navbar-trigger
+  +button(data-navbar=options.id)&attributes(attributes).navbar-trigger
     if options.title
       span= options.title
     if options.icon
@@ -32,6 +32,5 @@ mixin navbar-btn(options)
 mixin navbar(options)
   - options.direction = options.direction || "left";
   - options.slim = options.slim || false;
-  .navbar(id="navbar-" + options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
+  .navbar(id=options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
     block
-  .navbar-background

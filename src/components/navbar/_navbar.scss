@@ -1,14 +1,12 @@
 
 /* =========================================================================
- * Svelto - Navbar v0.1.0
+ * Svelto - Navbar v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
-
-//TODO: maybe we should wrap header, main and footer into another container, so that it will be easier to do the CSS work here
 
 //INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
 
@@ -19,9 +17,11 @@
   transform: translateX(0) translateY(0) !important;
   pointer-events: auto;
 
-  + .navbar-background {
-    pointer-events: auto;
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
     opacity: 1;
+    pointer-events: auto;
   }
 
 }
@@ -30,16 +30,24 @@
 
   @include z-depth ( $navbar-attached-z-depth );
 
-  + .navbar-background {
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
     pointer-events: none;
     opacity: 0;
   }
 
+  /* LEFT */
+
   &.left {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-left: $navbar-vertical-width;
+
+      /* HEADER */
 
       > header.fixed {
         left: $navbar-vertical-width;
@@ -47,11 +55,17 @@
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-left: $navbar-slim-vertical-width;
+
+        /* HEADER */
 
         > header.fixed {
           left: $navbar-slim-vertical-width;
@@ -63,11 +77,17 @@
 
   }
 
+  /* RIGHT */
+
   &.right {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-right: $navbar-vertical-width;
+
+      /* HEADER */
 
       > header.fixed {
         right: $navbar-vertical-width;
@@ -75,11 +95,17 @@
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-right: $navbar-slim-vertical-width;
+
+        /* HEADER */
 
         > header.fixed {
           right: $navbar-slim-vertical-width;
@@ -91,11 +117,17 @@
 
   }
 
+  /* TOP */
+
   &.top {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-top: $navbar-horizontal-height;
+
+      /* HEADER */
 
       > header.fixed {
         top: $navbar-horizontal-height;
@@ -103,11 +135,17 @@
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-top: $navbar-slim-horizontal-height;
+
+        /* HEADER */
 
         > header.fixed {
           top: $navbar-slim-horizontal-height;
@@ -119,11 +157,17 @@
 
   }
 
+  /* BOTTOM */
+
   &.bottom {
+
+    /* CONTENT */
 
     ~ #content {
 
       margin-bottom: $navbar-horizontal-height;
+
+      /* HEADER */
 
       > header.fixed {
         bottom: $navbar-horizontal-height;
@@ -131,11 +175,17 @@
 
     }
 
+    /* SLIM */
+
     &.slim {
+
+      /* CONTENT */
 
       ~ #content {
 
         margin-bottom: $navbar-slim-horizontal-height;
+
+        /* HEADER */
 
         > header.fixed {
           bottom: $navbar-slim-horizontal-height;
@@ -153,15 +203,18 @@
 
 .navbar {
 
-  @include color ( $navbar-color, $navbar-color-basic );
   @include z-depth ( $navbar-z-depth );
-  @include last-child-no-gutter ();
   position: fixed;
   z-index: $navbar-z-index;
-  transition: transform $navbar-transition-transform-duration;
+  margin-bottom: 0;
+  border-radius: 0;
   pointer-events: none;
+  transition: transform $navbar-transition-transform-duration;
 
-  &.left, &.right {
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right {
 
     top: 0;
     bottom: 0;
@@ -174,6 +227,8 @@
     }
 
   }
+
+  /* LEFT */
 
   &.left {
 
@@ -188,6 +243,8 @@
 
   }
 
+  /* RIGHT */
+
   &.right {
 
     right: 0;
@@ -201,7 +258,10 @@
 
   }
 
-  &.top, &.bottom {
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
 
     right: 0;
     left: 0;
@@ -214,6 +274,8 @@
     }
 
   }
+
+  /* TOP */
 
   &.top {
 
@@ -228,6 +290,8 @@
 
   }
 
+  /* BOTTOM */
+
   &.bottom {
 
     bottom: 0;
@@ -241,13 +305,13 @@
 
   }
 
-  // OPENED
+  /* OPEN */
 
-  &.opened {
+  &.open {
     @include open ();
   }
 
-  // ATTACHED
+  /* ATTACHED */
 
   @include xsmall-up {
 
@@ -294,16 +358,21 @@
 
   }
 
-  /* BACKGROUND */
+  /* BEFORE (BACKGROUND) */
 
-  &-background {
-    @include fill-fixed ();
-    z-index: $navbar-background-z-index;
-    cursor: pointer;
-    transition: opacity $navbar-background-transition-opacity-duration;
+  &:before {
+    content: '';
+    position: absolute;
     opacity: 0;
     pointer-events: none;
+    width: 400vw;
+    height: 400vh;
+    top: -200vh;
+    left: -200vw;
+    z-index: -1;
+    cursor: pointer;
     background-color: $navbar-background-color;
+    transition: opacity $navbar-background-transition-opacity-duration;
   }
 
 }

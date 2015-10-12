@@ -49,8 +49,9 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
 
 /* FLAGS */
 
-var isProduction = !!argv.production,
-    isDevelopment = !isProduction;
+var isProduction  = !!argv.production,
+    isDevelopment = !isProduction,
+    browserOpen   = !!argv.open;
 
 /* IMAGES */
 
@@ -242,6 +243,8 @@ gulp.task ( 'watch', watcher );
 gulp.task ( 'serve', function () {
 
   browserSync.init ({
+    browser: "google chrome",
+    open: browserOpen,
     server: 'examples',
     serveStatic: ['dist/images', 'dist/css', 'dist/js'],
     notify: false
