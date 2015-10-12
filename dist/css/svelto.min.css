@@ -3041,11 +3041,17 @@ table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled
 /* TOOLBAR */
 .toolbar {
   padding: 0.5em 1em;
+  /* MULTIPLE */
 }
 
 .toolbar .multiple {
   -webkit-align-items: center;
           align-items: center;
+}
+
+.toolbar > .multiple {
+  -webkit-flex-wrap: nowrap;
+          flex-wrap: nowrap;
 }
 
 /* =========================================================================
@@ -3420,7 +3426,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > :not(.sub):not(.icon):not(.icons), .button > :not(.sub):not(.icon):not(.icons) {
+.label > :not(.sub):not(.icon):not(.icons):not(.ripple-circle), .button > :not(.sub):not(.icon):not(.icons):not(.ripple-circle) {
   -webkit-flex-grow: 1;
           flex-grow: 1;
 }
@@ -3499,7 +3505,7 @@ label {
   border-color: inherit !important;
 }
 
-.label > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon), .button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon) {
+.label > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle), .button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle) {
   margin-left: 0.75em;
 }
 
@@ -3515,7 +3521,7 @@ table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort
   margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon), .compact.button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon) {
+.label.compact > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle), .compact.button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle) {
   margin-left: 0.5em;
 }
 
@@ -10200,7 +10206,7 @@ code[class*='language-'] .namespace {
 /* CIRCLE */
 /* TRANSITIONS */
 /* =========================================================================
- * Svelto - Ripple v0.1.0
+ * Svelto - Ripple v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10215,6 +10221,7 @@ code[class*='language-'] .namespace {
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
   /* CIRCLE */
+  /* CENTEED */
   /* COLORS */
 }
 
@@ -10222,6 +10229,8 @@ code[class*='language-'] .namespace {
   position: absolute;
   width: 300%;
   pointer-events: none;
+  /* SHOW */
+  /* HIDE */
 }
 
 .ripple > .ripple-circle:before {
@@ -10231,10 +10240,10 @@ code[class*='language-'] .namespace {
   margin-top: -50%;
   padding-bottom: 100%;
   content: '';
-  transition-timing-function: ease-out;
-  transition-duration: 0.5s;
   transition-property: -webkit-transform, opacity;
   transition-property: transform, opacity;
+  transition-duration: 0.5s;
+  transition-timing-function: ease-out;
   -webkit-transform: scale(0);
           transform: scale(0);
   opacity: 0;
@@ -10253,7 +10262,7 @@ code[class*='language-'] .namespace {
   opacity: 0;
 }
 
-.ripple.ripple-centered > .ripple-circle {
+.ripple-centered > .ripple-circle {
   top: 50% !important;
   left: 50% !important;
   width: 200%;

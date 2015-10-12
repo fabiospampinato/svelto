@@ -6833,7 +6833,7 @@ $(function () {
 
 
 /* =========================================================================
- * Svelto - Ripple v0.1.0
+ * Svelto - Ripple v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6856,17 +6856,17 @@ $(function () {
 
     show: function ( event, $element ) {
 
-      var $ripple = $( '<div class="ripple-circle"></div>' ).appendTo ( $element ),
-        offset = $element.offset (),
-        eventXY = $.eventXY ( event ),
-        now = _.now ();
+      var $ripple = $( '<div class="ripple-circle">' ).appendTo ( $element ),
+          offset = $element.offset (),
+          eventXY = $.eventXY ( event ),
+          now = _.now ();
 
       $ripple.css ({
         top: eventXY.Y - offset.top,
         left: eventXY.X - offset.left
       }).addClass ( 'ripple-circle-show' );
 
-      $element.on ( 'mouseup mouseleave', function () {
+      $element.on ( Pointer.up + ' ' + Pointer.cancel, function () {
 
         Ripple.hide ( $ripple, now );
 
@@ -6897,7 +6897,7 @@ $(function () {
 
   $(function () {
 
-    $body.on ( 'mousedown', '.ripple', function ( event ) {
+    $body.on ( Pointer.down, '.ripple', function ( event ) {
 
       if ( event.button === $.ui.mouseButton.RIGHT ) return;
 

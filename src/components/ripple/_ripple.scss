@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Ripple v0.1.0
+ * Svelto - Ripple v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -21,7 +21,7 @@
 
   /* CIRCLE */
 
-  & > .ripple-circle {
+  > .ripple-circle {
 
     position: absolute;
     width: $ripple-circle-width;
@@ -34,19 +34,23 @@
       margin-top: -50%;
       padding-bottom: 100%;
       content: '';
-      transition-timing-function: $ripple-transition-timing-function;
-      transition-duration: $ripple-transition-show-duration;
       transition-property: transform, opacity;
+      transition-duration: $ripple-transition-show-duration;
+      transition-timing-function: $ripple-transition-timing-function;
       transform: scale(0);
       opacity: 0;
       border-radius: 50%;
       background-color: $ripple-color-default;
     }
 
+    /* SHOW */
+
     &.ripple-circle-show:before {
       transform: scale(1);
       opacity: 1 - $ripple-transparentize-amount;
     }
+
+    /* HIDE */
 
     &.ripple-circle-hide:before {
       transition-duration: $ripple-transition-hide-duration;
@@ -55,7 +59,9 @@
 
   }
 
-  &.ripple-centered > .ripple-circle {
+  /* CENTEED */
+
+  &-centered > .ripple-circle {
     top: 50% !important;
     left: 50% !important;
     width: $ripple-centered-circle-width; //FIXME: In this way the behavior is not consistent, but it generally looks better...

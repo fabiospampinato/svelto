@@ -2202,9 +2202,17 @@ $toolbar-padding-horizontal: 1em !default;
 /* TOOLBAR */
 
 .toolbar {
+
   @extend .widget;
   @include sub-multiple-centered ();
   padding: $toolbar-padding-vertical $toolbar-padding-horizontal;
+
+  /* MULTIPLE */
+
+  > .multiple {
+    flex-wrap: nowrap;
+  }
+
 }
 
 
@@ -2598,7 +2606,7 @@ label {
 
   /* TEXT GROW */
 
-  > :not(.sub):not(.icon):not(.icons) {
+  > :not(.sub):not(.icon):not(.icons):not(.ripple-circle) {
     flex-grow: 1;
   }
 
@@ -2686,7 +2694,7 @@ label {
 
   > :not(.label):not(.button):not(.sub) { //INFO: Both `.label` and `.button`
 
-    & + :not(.sub):not(.icon) {
+    & + :not(.sub):not(.icon):not(.ripple-circle) {
       margin-left: $label-center-extra-spacing;
     }
 
@@ -2700,7 +2708,7 @@ label {
 
     > :not(.label):not(.button):not(.sub) { //INFO: Both `.label` and `.button`
 
-      & + :not(.sub):not(.icon) {
+      & + :not(.sub):not(.icon):not(.ripple-circle) {
         margin-left: $label-compact-center-extra-spacing;
       }
 
@@ -8830,7 +8838,7 @@ $ripple-transition-hide-duration: $transition-duration-normal !default;
 
 
 /* =========================================================================
- * Svelto - Ripple v0.1.0
+ * Svelto - Ripple v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8851,7 +8859,7 @@ $ripple-transition-hide-duration: $transition-duration-normal !default;
 
   /* CIRCLE */
 
-  & > .ripple-circle {
+  > .ripple-circle {
 
     position: absolute;
     width: $ripple-circle-width;
@@ -8864,19 +8872,23 @@ $ripple-transition-hide-duration: $transition-duration-normal !default;
       margin-top: -50%;
       padding-bottom: 100%;
       content: '';
-      transition-timing-function: $ripple-transition-timing-function;
-      transition-duration: $ripple-transition-show-duration;
       transition-property: transform, opacity;
+      transition-duration: $ripple-transition-show-duration;
+      transition-timing-function: $ripple-transition-timing-function;
       transform: scale(0);
       opacity: 0;
       border-radius: 50%;
       background-color: $ripple-color-default;
     }
 
+    /* SHOW */
+
     &.ripple-circle-show:before {
       transform: scale(1);
       opacity: 1 - $ripple-transparentize-amount;
     }
+
+    /* HIDE */
 
     &.ripple-circle-hide:before {
       transition-duration: $ripple-transition-hide-duration;
@@ -8885,7 +8897,9 @@ $ripple-transition-hide-duration: $transition-duration-normal !default;
 
   }
 
-  &.ripple-centered > .ripple-circle {
+  /* CENTEED */
+
+  &-centered > .ripple-circle {
     top: 50% !important;
     left: 50% !important;
     width: $ripple-centered-circle-width; //FIXME: In this way the behavior is not consistent, but it generally looks better...
