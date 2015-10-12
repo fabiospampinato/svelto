@@ -50,7 +50,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* POINTER */
 
@@ -71,6 +71,7 @@
         if ( event.keyCode === 65 ) { //INFO: A
 
           event.preventDefault ();
+          event.stopImmediatePropagation ();
 
           this._resetPrev ();
 
@@ -81,6 +82,7 @@
         } else if ( event.keyCode === 73 ) { //INFO: I
 
           event.preventDefault ();
+          event.stopImmediatePropagation ();
 
           this._resetPrev ();
 
@@ -98,7 +100,7 @@
 
     __down: function ( event ) {
 
-      if ( event.button && event.button !== 0 ) return; //INFO: Only the left click is allowed
+      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
 
       event.preventDefault ();
 

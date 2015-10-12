@@ -123,9 +123,10 @@ append body-end
           move: function ( data ) {
             $squares.removeClass ( 'green' );
             if ( select === 'punctual') {
-              $squares.touching ({ point: { X: data.moveXY.X - $body.scrollLeft (), Y: data.moveXY.Y - $body.scrollTop () }, $not: $(data.draggable) }).addClass ( 'green' );
+              var pointXY = $.eventXY ( data.event );
+              $squares.touching ({ point: { X: pointXY.X - $window.scrollLeft (), Y: pointXY.Y - $window.scrollTop () }, $not: $(this) }).addClass ( 'green' );
             } else {
-              $squares.touching ({ $comparer: $(data.draggable), $not: $(data.draggable), onlyBest: select === 'most' }).addClass ( 'green' );
+              $squares.touching ({ $comparer: $(this), $not: $(this), onlyBest: select === 'most' }).addClass ( 'green' );
             }
           },
           end: function () {

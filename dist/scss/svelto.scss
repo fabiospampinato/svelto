@@ -2009,7 +2009,7 @@ $grid-columns: 12 !default;
 
 
 /* =========================================================================
- * Svelto - Widget (Settings) v0.2.0
+ * Svelto - Widget (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2019,9 +2019,13 @@ $grid-columns: 12 !default;
 
 $widget-disabled-opacity: 0.5 !default;
 
+/* TRANSITION */
+
+$widget-transition-opacity-duration: $transition-duration-fast !default;
+
 
 /* =========================================================================
- * Svelto - Widget v0.3.1
+ * Svelto - Widget v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2036,7 +2040,8 @@ $widget-disabled-opacity: 0.5 !default;
   @include last-child-no-gutter ();
   position: relative;
   margin: 0 0 $gutter;
-
+  transition: opacity $widget-transition-opacity-duration;
+  
   &.disabled,
   &[class*="-disabled"] {
     cursor: default !important;

@@ -89,8 +89,8 @@
       var draggableOffset = this.$draggable.offset ();
 
       var deltaXY = {
-        X: point.X - ( draggableOffset.left - $html.scrollLeft () + ( this.$draggable.outerWidth () / 2 ) ),
-        Y: point.Y - ( draggableOffset.top - $html.scrollTop () + ( this.$draggable.outerHeight () / 2 ) )
+        X: point.X - ( draggableOffset.left + ( this.$draggable.outerWidth () / 2 ) ),
+        Y: point.Y - ( draggableOffset.top + ( this.$draggable.outerHeight () / 2 ) )
       };
 
       return this._actionMove ( deltaXY, suppressClasses );
@@ -202,7 +202,7 @@
         this.isProxyed = ( this.options.$proxy && trigger === this.options.$proxy[0] );
         this.proxyXY = false;
 
-        this._trigger ( 'start', { initialXY: this.initialXY } );
+        this._trigger ( 'start', { event: event, draggable: this.draggable, initialXY: this.initialXY } );
 
         this._on ( $document, Pointer.move, this.__move );
         this._on ( $document, Pointer.up, this.__up );
@@ -230,7 +230,7 @@
 
       var modifiedXY = this._actionMove ( deltaXY );
 
-      this._trigger ( 'move', { initialXY: this.initialXY, moveXY: modifiedXY } );
+      this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
 
     },
 
@@ -257,7 +257,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === 0 ) ) {
+        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === $.ui.mouseButton.LEFT ) ) {
 
           var endXY = $.eventXY ( event ),
               modifiedXY = this._centerToPoint ( endXY, true );
@@ -272,7 +272,7 @@
       this._off ( $document, Pointer.up, this.__up );
       this._off ( $document, Pointer.cancel, this.__cancel );
 
-      this._trigger ( 'end', { initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
+      this._trigger ( 'end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
     },
 

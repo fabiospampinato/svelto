@@ -107,7 +107,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* NAVIGATION PREV / NEXT */
 
@@ -144,7 +144,13 @@
           this.nextMonth ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 

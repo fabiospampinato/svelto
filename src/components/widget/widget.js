@@ -240,7 +240,7 @@
 
     /* EVENTS */
 
-    _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
+    _on: function ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
 
       //TODO: Add support for custom data
 
@@ -252,6 +252,7 @@
 
       if ( !_.isBoolean ( suppressDisabledCheck ) ) {
 
+        onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -262,6 +263,7 @@
 
       if ( !( $element instanceof $ ) ) {
 
+        onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -269,8 +271,9 @@
 
       }
 
-      if ( selector && !handler ) {
+      if ( !_.isString ( selector ) ) {
 
+        onlyOne = handler;
         handler = selector;
         selector = false;
 
@@ -302,11 +305,11 @@
 
       if ( selector ) { // DELEGATED
 
-        $element.on ( events, selector, handlerProxy );
+        $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
       } else { // NORMAL
 
-        $element.on ( events, handlerProxy );
+        $element[onlyOne ? 'one' : 'on'] ( events, handlerProxy );
 
       }
 
@@ -314,19 +317,34 @@
 
     },
 
-    _onHover: function () {
-
-      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+    _one: function () {
 
       var args = arguments;
 
-      this._on ( Pointer.enter, function () {
+      Array.prototype.push.call ( args, true );
+
+      this._on.apply ( this, args );
+
+    },
+
+    _onHover: function ( $element, args ) {
+
+      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+
+      if ( !args ) {
+
+        args = $element;
+        $element = this.$element;
+
+      }
+
+      this._on ( $element, Pointer.enter, function () {
 
         this._on.apply ( this, args );
 
       });
 
-      this._on ( Pointer.leave, function () {
+      this._on ( $element, Pointer.leave, function () {
 
         this._off.apply ( this, args );
 

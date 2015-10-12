@@ -74,7 +74,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* FLICK */
 
@@ -105,11 +105,16 @@
       switch ( event.keyCode ) {
 
         case $.ui.keyCode.ESCAPE:
-          event.stopImmediatePropagation ();
           this.close ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 

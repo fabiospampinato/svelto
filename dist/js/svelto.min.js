@@ -990,7 +990,7 @@
 
     /* EVENTS */
 
-    _on: function ( suppressDisabledCheck, $element, events, selector, handler ) {
+    _on: function ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
 
       //TODO: Add support for custom data
 
@@ -1002,6 +1002,7 @@
 
       if ( !_.isBoolean ( suppressDisabledCheck ) ) {
 
+        onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -1012,6 +1013,7 @@
 
       if ( !( $element instanceof $ ) ) {
 
+        onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
@@ -1019,8 +1021,9 @@
 
       }
 
-      if ( selector && !handler ) {
+      if ( !_.isString ( selector ) ) {
 
+        onlyOne = handler;
         handler = selector;
         selector = false;
 
@@ -1052,11 +1055,11 @@
 
       if ( selector ) { // DELEGATED
 
-        $element.on ( events, selector, handlerProxy );
+        $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
       } else { // NORMAL
 
-        $element.on ( events, handlerProxy );
+        $element[onlyOne ? 'one' : 'on'] ( events, handlerProxy );
 
       }
 
@@ -1064,19 +1067,34 @@
 
     },
 
-    _onHover: function () {
-
-      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+    _one: function () {
 
       var args = arguments;
 
-      this._on ( Pointer.enter, function () {
+      Array.prototype.push.call ( args, true );
+
+      this._on.apply ( this, args );
+
+    },
+
+    _onHover: function ( $element, args ) {
+
+      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+
+      if ( !args ) {
+
+        args = $element;
+        $element = this.$element;
+
+      }
+
+      this._on ( $element, Pointer.enter, function () {
 
         this._on.apply ( this, args );
 
       });
 
-      this._on ( Pointer.leave, function () {
+      this._on ( $element, Pointer.leave, function () {
 
         this._off.apply ( this, args );
 
@@ -2707,10 +2725,8 @@
 
       this.$input = this.$colorpicker.find ( this.options.selectors.input );
 
-      this.sbWrpOffset = this.$sbWrp.offset ();
       this.sbWrpSize = this.$sbWrp.width ();
 
-      this.hueWrpOffset = this.$hueWrp.offset ();
       this.hueWrpHeight = this.sbWrpSize;
 
       this.color = new HexColor ();
@@ -2739,7 +2755,7 @@
 
       /* SB KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__sbKeydown );
+      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
 
       /* SB DRAG */
 
@@ -2758,7 +2774,7 @@
 
       /* HUE KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__hueKeydown );
+      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
 
       /* HUE DRAG */
 
@@ -2787,7 +2803,7 @@
 
     /* SB ARROWS */
 
-    __sbKeydown: function () {
+    __sbKeydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -2811,6 +2827,9 @@
           return;
 
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this._updateSb ();
       this._updateInput ();
@@ -2848,7 +2867,7 @@
 
     /* HUE ARROWS */
 
-    __hueKeydown: function () {
+    __hueKeydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -2864,6 +2883,9 @@
           return;
 
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this._updateHue ();
       this._updateInput ();
@@ -3185,7 +3207,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* NAVIGATION PREV / NEXT */
 
@@ -3222,7 +3244,13 @@
           this.nextMonth ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 
@@ -3589,8 +3617,8 @@
       var draggableOffset = this.$draggable.offset ();
 
       var deltaXY = {
-        X: point.X - ( draggableOffset.left - $html.scrollLeft () + ( this.$draggable.outerWidth () / 2 ) ),
-        Y: point.Y - ( draggableOffset.top - $html.scrollTop () + ( this.$draggable.outerHeight () / 2 ) )
+        X: point.X - ( draggableOffset.left + ( this.$draggable.outerWidth () / 2 ) ),
+        Y: point.Y - ( draggableOffset.top + ( this.$draggable.outerHeight () / 2 ) )
       };
 
       return this._actionMove ( deltaXY, suppressClasses );
@@ -3702,7 +3730,7 @@
         this.isProxyed = ( this.options.$proxy && trigger === this.options.$proxy[0] );
         this.proxyXY = false;
 
-        this._trigger ( 'start', { initialXY: this.initialXY } );
+        this._trigger ( 'start', { event: event, draggable: this.draggable, initialXY: this.initialXY } );
 
         this._on ( $document, Pointer.move, this.__move );
         this._on ( $document, Pointer.up, this.__up );
@@ -3730,7 +3758,7 @@
 
       var modifiedXY = this._actionMove ( deltaXY );
 
-      this._trigger ( 'move', { initialXY: this.initialXY, moveXY: modifiedXY } );
+      this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
 
     },
 
@@ -3757,7 +3785,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === 0 ) ) {
+        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === $.ui.mouseButton.LEFT ) ) {
 
           var endXY = $.eventXY ( event ),
               modifiedXY = this._centerToPoint ( endXY, true );
@@ -3772,7 +3800,7 @@
       this._off ( $document, Pointer.up, this.__up );
       this._off ( $document, Pointer.cancel, this.__cancel );
 
-      this._trigger ( 'end', { initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
+      this._trigger ( 'end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
     },
 
@@ -4744,7 +4772,7 @@
 
           if ( button.onClick ) {
 
-            if ( button.onClick.apply ( this.$buttons.get ( index ), [event, data] ) === false ) return;
+            if ( button.onClick.apply ( this.$buttons[index], [event, data] ) === false ) return;
 
           }
 
@@ -4816,6 +4844,7 @@
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
+        event.preventDefault ();
         event.stopImmediatePropagation ();
 
         this.close ();
@@ -5290,14 +5319,13 @@
 
     _events: function () {
 
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.open );
-
       /* TAP */
 
       this._on ( Pointer.tap, this.__tap );
 
+      /* TRIGGER */
+
+      this._on ( this.$triggers, Pointer.tap, this.open );
       /* CLOSER */
 
       this._on ( this.$closers, Pointer.tap, this.close );
@@ -5320,6 +5348,7 @@
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
+        event.preventDefault ();
         event.stopImmediatePropagation ();
 
         this.close ();
@@ -5689,7 +5718,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* FLICK */
 
@@ -5720,11 +5749,16 @@
       switch ( event.keyCode ) {
 
         case $.ui.keyCode.ESCAPE:
-          event.stopImmediatePropagation ();
           this.close ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 
@@ -7225,7 +7259,7 @@ $(function () {
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* POINTER */
 
@@ -7246,6 +7280,7 @@ $(function () {
         if ( event.keyCode === 65 ) { //INFO: A
 
           event.preventDefault ();
+          event.stopImmediatePropagation ();
 
           this._resetPrev ();
 
@@ -7256,6 +7291,7 @@ $(function () {
         } else if ( event.keyCode === 73 ) { //INFO: I
 
           event.preventDefault ();
+          event.stopImmediatePropagation ();
 
           this._resetPrev ();
 
@@ -7273,7 +7309,7 @@ $(function () {
 
     __down: function ( event ) {
 
-      if ( event.button && event.button !== 0 ) return; //INFO: Only the left click is allowed
+      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
 
       event.preventDefault ();
 
@@ -7559,7 +7595,7 @@ $(function () {
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* MIN / MAX BUTTONS */
 
@@ -7659,7 +7695,13 @@ $(function () {
           this.increase ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 
@@ -8080,7 +8122,7 @@ $(function () {
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* INCREASE */
 
@@ -8162,7 +8204,13 @@ $(function () {
           this.decrease ();
           break;
 
+        default:
+          break;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 
@@ -8324,7 +8372,7 @@ $(function () {
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* DRAG */
 
@@ -8368,7 +8416,13 @@ $(function () {
           this.toggle ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 
@@ -9094,6 +9148,7 @@ $(function () {
         }
 
         event.preventDefault ();
+        event.stopImmediatePropagation ();
 
       } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
 
@@ -9105,6 +9160,7 @@ $(function () {
           this.remove ( $tag, edit );
 
           event.preventDefault ();
+          event.stopImmediatePropagation ();
 
         }
 
@@ -9113,6 +9169,7 @@ $(function () {
         $.noty ( 'The character you entered is forbidden' );
 
         event.preventDefault ();
+        event.stopImmediatePropagation ();
 
       }
 

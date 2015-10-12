@@ -237,6 +237,7 @@
         }
 
         event.preventDefault ();
+        event.stopImmediatePropagation ();
 
       } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
 
@@ -248,6 +249,7 @@
           this.remove ( $tag, edit );
 
           event.preventDefault ();
+          event.stopImmediatePropagation ();
 
         }
 
@@ -256,6 +258,7 @@
         $.noty ( 'The character you entered is forbidden' );
 
         event.preventDefault ();
+        event.stopImmediatePropagation ();
 
       }
 

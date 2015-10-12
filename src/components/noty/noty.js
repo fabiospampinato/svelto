@@ -173,7 +173,7 @@
 
           if ( button.onClick ) {
 
-            if ( button.onClick.apply ( this.$buttons.get ( index ), [event, data] ) === false ) return;
+            if ( button.onClick.apply ( this.$buttons[index], [event, data] ) === false ) return;
 
           }
 
@@ -245,6 +245,7 @@
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
+        event.preventDefault ();
         event.stopImmediatePropagation ();
 
         this.close ();

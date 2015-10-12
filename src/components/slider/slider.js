@@ -82,7 +82,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* MIN / MAX BUTTONS */
 
@@ -182,7 +182,13 @@
           this.increase ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 

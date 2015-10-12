@@ -74,7 +74,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* DRAG */
 
@@ -118,7 +118,13 @@
           this.toggle ();
           break;
 
+        default:
+          return;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 

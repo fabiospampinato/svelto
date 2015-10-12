@@ -62,7 +62,7 @@
 
       /* KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__keydown );
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
       /* INCREASE */
 
@@ -144,7 +144,13 @@
           this.decrease ();
           break;
 
+        default:
+          break;
+
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
     },
 

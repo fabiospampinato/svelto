@@ -54,14 +54,13 @@
 
     _events: function () {
 
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.open );
-
       /* TAP */
 
       this._on ( Pointer.tap, this.__tap );
 
+      /* TRIGGER */
+
+      this._on ( this.$triggers, Pointer.tap, this.open );
       /* CLOSER */
 
       this._on ( this.$closers, Pointer.tap, this.close );
@@ -84,6 +83,7 @@
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
+        event.preventDefault ();
         event.stopImmediatePropagation ();
 
         this.close ();

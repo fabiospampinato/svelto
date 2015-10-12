@@ -2848,14 +2848,15 @@ th {
  * @requires ../outline/_settings.scss
  * ========================================================================= */
 /* =========================================================================
- * Svelto - Widget (Settings) v0.2.0
+ * Svelto - Widget (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* WIDGET */
+/* TRANSITION */
 /* =========================================================================
- * Svelto - Widget v0.3.1
+ * Svelto - Widget v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2872,6 +2873,7 @@ th {
 table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
+  transition: opacity 0.15s;
 }
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,

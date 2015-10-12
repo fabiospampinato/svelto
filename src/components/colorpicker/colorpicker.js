@@ -54,10 +54,8 @@
 
       this.$input = this.$colorpicker.find ( this.options.selectors.input );
 
-      this.sbWrpOffset = this.$sbWrp.offset ();
       this.sbWrpSize = this.$sbWrp.width ();
 
-      this.hueWrpOffset = this.$hueWrp.offset ();
       this.hueWrpHeight = this.sbWrpSize;
 
       this.color = new HexColor ();
@@ -86,7 +84,7 @@
 
       /* SB KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__sbKeydown );
+      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
 
       /* SB DRAG */
 
@@ -105,7 +103,7 @@
 
       /* HUE KEYDOWN */
 
-      this._onHover ( $document, 'keydown', this.__hueKeydown );
+      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
 
       /* HUE DRAG */
 
@@ -134,7 +132,7 @@
 
     /* SB ARROWS */
 
-    __sbKeydown: function () {
+    __sbKeydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -158,6 +156,9 @@
           return;
 
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this._updateSb ();
       this._updateInput ();
@@ -195,7 +196,7 @@
 
     /* HUE ARROWS */
 
-    __hueKeydown: function () {
+    __hueKeydown: function ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -211,6 +212,9 @@
           return;
 
       }
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
 
       this._updateHue ();
       this._updateInput ();
