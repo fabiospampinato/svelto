@@ -1,0 +1,106 @@
+
+/* =========================================================================
+ * Svelto - Rater v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+
+/* RATER */
+
+.rater {
+
+  @extend .widget;
+  display: flex;
+  width: 0; //FIXME: $('.rater').outerWidth () returns 0 because of this, but this fixes the :hover on empty space
+
+  /* STAR */
+
+  &-star {
+
+    /* BEFORE (ICON) */
+
+    &:before {
+      @extend i.icon;
+      content: 'star_border';
+      margin-bottom: 0;
+    }
+
+    /* ACTIVE */
+
+    &.active {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: 'star';
+        color: $rater-star-active-color;
+      }
+
+    }
+
+    /* HALF ACTIVE */
+
+    &.half-active {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: 'star_half';
+        color: $rater-star-active-color;
+      }
+
+    }
+
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* HOVER / ACTIVE */
+
+    &:hover,
+    &:active {
+
+      /* STAR */
+
+      .rater-star {
+
+        /* BEFORE (ICON) */
+
+        &:before {
+          content: 'star';
+          color: $rater-star-active-color;
+        }
+
+        /* NEXT STARS */
+
+        &:hover ~ .rater-star,
+        &:active ~ .rater-star {
+
+          /* BEFORE (ICON) */
+
+          &:before {
+            content: 'star_border';
+            color: inherit;
+          }
+
+        }
+
+      }
+
+    }
+
+    /* STAR */
+
+    .rater-star {
+      cursor: pointer;
+    }
+
+  }
+
+}

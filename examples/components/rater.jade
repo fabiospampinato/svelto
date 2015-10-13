@@ -1,0 +1,14 @@
+
+extends ../layout.jade
+
+//- Rater
+
+append main
+  +divider-block Rater
+
+  +container.outlined
+    +rater
+    +rater({ value: 3 })
+    +rater({ value: 1.5 })
+    +rater({ value: 2, amount: 10 })
+    +rater({ value: 7.5, amount: 10 })

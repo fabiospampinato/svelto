@@ -2866,11 +2866,11 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, header, i.icon, .slider:not(.disabled) .slider-min:hover:after,
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, header, i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
-table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
+table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
@@ -2878,21 +2878,21 @@ table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp,
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, i.icon > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, i.icon > :last-child, .rater-star:before > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
-table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .rater-star:before > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
-table.table.sortable th[data-sort]:after > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+table.table.sortable th[data-sort]:after > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2911,7 +2911,7 @@ label.disabled,
 .disabled.flippable,
 header.disabled,
 i.disabled.icon,
-.slider:not(.disabled) .disabled.slider-min:hover:after,
+.disabled.rater-star:before, .slider:not(.disabled) .disabled.slider-min:hover:after,
 .slider:not(.disabled) .disabled.slider-max:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-min:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-max:hover:after, table.table.sortable th.disabled[data-sort]:before,
@@ -2920,6 +2920,7 @@ table.table.sortable th.disabled[data-sort]:after, .disabled.image-wrp,
 .disabled.textarea-wrp, .disabled.parallax,
 .disabled.placeholder,
 .disabled.progressbar,
+.disabled.rater,
 .disabled.triangle,
 .disabled.square,
 .disabled.square-sample,
@@ -2931,11 +2932,11 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, header[class*="-disabled"], i[class*="-disabled"].icon, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, header[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].rater-star:before, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
-table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].rater, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3511,7 +3512,7 @@ label {
   margin-left: 0.75em;
 }
 
-.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon, .label > :not(.label):not(.button):not(.sub) + .rater-star:before, .button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
 .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
@@ -3527,7 +3528,7 @@ table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort
   margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon, .label.compact > :not(.label):not(.button):not(.sub) + .rater-star:before, .compact.button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
 .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
@@ -7315,7 +7316,7 @@ header .header-background {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* ICON */
-i.icon, .slider:not(.disabled) .slider-min:hover:after,
+i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
@@ -7345,7 +7346,7 @@ table.table.sortable th[data-sort]:after {
   /* SCALED SIZES */
 }
 
-i.icon.xxxxsmall, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
+i.icon.xxxxsmall, .xxxxsmall.rater-star:before, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxxsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after, table.table.sortable th.xxxxsmall[data-sort]:before,
@@ -7353,7 +7354,7 @@ table.table.sortable th.xxxxsmall[data-sort]:after {
   font-size: 0.375em !important;
 }
 
-i.icon.xxxsmall, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
+i.icon.xxxsmall, .xxxsmall.rater-star:before, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after, table.table.sortable th.xxxsmall[data-sort]:before,
@@ -7361,7 +7362,7 @@ table.table.sortable th.xxxsmall[data-sort]:after {
   font-size: 0.5625em !important;
 }
 
-i.icon.xxsmall, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
+i.icon.xxsmall, .xxsmall.rater-star:before, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxsmall.slider-max:hover:after, table.table.sortable th.xxsmall[data-sort]:before,
@@ -7369,7 +7370,7 @@ table.table.sortable th.xxsmall[data-sort]:after {
   font-size: 0.75em !important;
 }
 
-i.icon.xsmall, .slider:not(.disabled) .xsmall.slider-min:hover:after,
+i.icon.xsmall, .xsmall.rater-star:before, .slider:not(.disabled) .xsmall.slider-min:hover:after,
 .slider:not(.disabled) .xsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xsmall.slider-max:hover:after, table.table.sortable th.xsmall[data-sort]:before,
@@ -7377,7 +7378,7 @@ table.table.sortable th.xsmall[data-sort]:after {
   font-size: 1.125em !important;
 }
 
-i.icon.small, .slider:not(.disabled) .small.slider-min:hover:after,
+i.icon.small, .small.rater-star:before, .slider:not(.disabled) .small.slider-min:hover:after,
 .slider:not(.disabled) .small.slider-max:hover:after,
 .slider:not(.slider-disabled) .small.slider-min:hover:after,
 .slider:not(.slider-disabled) .small.slider-max:hover:after, table.table.sortable th.small[data-sort]:before,
@@ -7385,7 +7386,7 @@ table.table.sortable th.small[data-sort]:after {
   font-size: 1.3125em !important;
 }
 
-i.icon.medium, .slider:not(.disabled) .medium.slider-min:hover:after,
+i.icon.medium, .medium.rater-star:before, .slider:not(.disabled) .medium.slider-min:hover:after,
 .slider:not(.disabled) .medium.slider-max:hover:after,
 .slider:not(.slider-disabled) .medium.slider-min:hover:after,
 .slider:not(.slider-disabled) .medium.slider-max:hover:after, table.table.sortable th.medium[data-sort]:before,
@@ -7393,7 +7394,7 @@ table.table.sortable th.medium[data-sort]:after {
   font-size: 1.5em !important;
 }
 
-i.icon.large, .slider:not(.disabled) .large.slider-min:hover:after,
+i.icon.large, .large.rater-star:before, .slider:not(.disabled) .large.slider-min:hover:after,
 .slider:not(.disabled) .large.slider-max:hover:after,
 .slider:not(.slider-disabled) .large.slider-min:hover:after,
 .slider:not(.slider-disabled) .large.slider-max:hover:after, table.table.sortable th.large[data-sort]:before,
@@ -7401,7 +7402,7 @@ table.table.sortable th.large[data-sort]:after {
   font-size: 1.875em !important;
 }
 
-i.icon.xlarge, .slider:not(.disabled) .xlarge.slider-min:hover:after,
+i.icon.xlarge, .xlarge.rater-star:before, .slider:not(.disabled) .xlarge.slider-min:hover:after,
 .slider:not(.disabled) .xlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xlarge.slider-max:hover:after, table.table.sortable th.xlarge[data-sort]:before,
@@ -7409,7 +7410,7 @@ table.table.sortable th.xlarge[data-sort]:after {
   font-size: 2.25em !important;
 }
 
-i.icon.xxlarge, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
+i.icon.xxlarge, .xxlarge.rater-star:before, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxlarge.slider-max:hover:after, table.table.sortable th.xxlarge[data-sort]:before,
@@ -7417,7 +7418,7 @@ table.table.sortable th.xxlarge[data-sort]:after {
   font-size: 2.625em !important;
 }
 
-i.icon.xxxlarge, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
+i.icon.xxxlarge, .xxxlarge.rater-star:before, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after, table.table.sortable th.xxxlarge[data-sort]:before,
@@ -7425,7 +7426,7 @@ table.table.sortable th.xxxlarge[data-sort]:after {
   font-size: 3em !important;
 }
 
-i.icon.xxxxlarge, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
+i.icon.xxxxlarge, .xxxxlarge.rater-star:before, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxxlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after, table.table.sortable th.xxxxlarge[data-sort]:before,
@@ -10194,6 +10195,103 @@ code[class*='language-'] .namespace {
 .raisable.z-depth-24:hover {
   box-shadow: 0 24px 40px 4px rgba(0, 0, 0, 0.14), 0 8px 46px 9px rgba(0, 0, 0, 0.12), 0 10px 10px -8px rgba(0, 0, 0, 0.4) !important;
   transition: box-shadow 0.35s;
+}
+
+/* =========================================================================
+ * Svelto - Rater (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* RATER */
+/* =========================================================================
+ * Svelto - Rater v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+/* RATER */
+.rater {
+  display: -webkit-flex;
+  display: flex;
+  width: 0;
+  /* STAR */
+  /* ENABLED */
+}
+
+.rater-star {
+  /* BEFORE (ICON) */
+  /* ACTIVE */
+  /* HALF ACTIVE */
+}
+
+.rater-star:before {
+  content: 'star_border';
+  margin-bottom: 0;
+}
+
+.rater-star.active {
+  /* BEFORE (ICON) */
+}
+
+.rater-star.active:before {
+  content: 'star';
+  color: #ef6c00;
+}
+
+.rater-star.half-active {
+  /* BEFORE (ICON) */
+}
+
+.rater-star.half-active:before {
+  content: 'star_half';
+  color: #ef6c00;
+}
+
+.rater:not(.disabled) {
+  /* HOVER / ACTIVE */
+  /* STAR */
+}
+
+.rater:not(.disabled):hover,
+.rater:not(.disabled):active {
+  /* STAR */
+}
+
+.rater:not(.disabled):hover .rater-star,
+.rater:not(.disabled):active .rater-star {
+  /* BEFORE (ICON) */
+  /* NEXT STARS */
+}
+
+.rater:not(.disabled):hover .rater-star:before,
+.rater:not(.disabled):active .rater-star:before {
+  content: 'star';
+  color: #ef6c00;
+}
+
+.rater:not(.disabled):hover .rater-star:hover ~ .rater-star,
+.rater:not(.disabled):hover .rater-star:active ~ .rater-star,
+.rater:not(.disabled):active .rater-star:hover ~ .rater-star,
+.rater:not(.disabled):active .rater-star:active ~ .rater-star {
+  /* BEFORE (ICON) */
+}
+
+.rater:not(.disabled):hover .rater-star:hover ~ .rater-star:before,
+.rater:not(.disabled):hover .rater-star:active ~ .rater-star:before,
+.rater:not(.disabled):active .rater-star:hover ~ .rater-star:before,
+.rater:not(.disabled):active .rater-star:active ~ .rater-star:before {
+  content: 'star_border';
+  color: inherit;
+}
+
+.rater:not(.disabled) .rater-star {
+  cursor: pointer;
 }
 
 /* =========================================================================
