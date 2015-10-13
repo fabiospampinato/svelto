@@ -1418,31 +1418,6 @@ mixin tabs-containers
 
 
 //- =========================================================================
-//- Svelto - Textarea v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Textarea name
-    label: '', // Label
-  }
-
-mixin textarea(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
-
-
-//- =========================================================================
 //- Svelto - Tagbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1470,6 +1445,31 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+
+
+//- =========================================================================
+//- Svelto - Textarea v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
 
 
 //- =========================================================================

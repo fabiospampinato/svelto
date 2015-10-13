@@ -40,6 +40,8 @@
     /* OPTIONS */
 
     options: {
+      errors: {}, //INFO: It contains all the errors that a widget can trigger
+      datas: {}, //INFO: CSS data-* names
       classes: {}, //INFO: CSS classes to attach inside the widget
       selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur

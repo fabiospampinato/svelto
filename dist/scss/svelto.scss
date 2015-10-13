@@ -9117,11 +9117,18 @@ $square-sample-p-size: 'xxsmall' !default;
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
+/* SHAPE */
+
+%shape {
+  flex-grow: 0 !important;
+}
+
 /* TRIANGLE */
 
 .triangle {
 
   @extend .widget;
+  @extend %shape;
 
   &.up {
     @include triangle ( $triangle-size, $triangle-color, up );
@@ -9146,12 +9153,14 @@ $square-sample-p-size: 'xxsmall' !default;
 
 .square {
   @extend .widget;
+  @extend %shape;
   @include square ();
 }
 
 .square-sample {
 
   @extend .widget;
+  @extend %shape;
   @include square ( $square-sample-size );
   @include color ( $square-sample-color, true );
   @include last-child-no-gutter ();
@@ -9168,6 +9177,7 @@ $square-sample-p-size: 'xxsmall' !default;
 
 .circle {
   @extend .widget;
+  @extend %shape;
   @include circle ();
 }
 

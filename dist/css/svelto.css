@@ -10505,6 +10505,12 @@ table.table.selectable tbody tr.selected {
  * @requires ../settings/_settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
+/* SHAPE */
+.triangle, .square, .square-sample, .circle {
+  -webkit-flex-grow: 0 !important;
+          flex-grow: 0 !important;
+}
+
 /* TRIANGLE */
 .triangle.up {
   border: 0.5em solid transparent;
