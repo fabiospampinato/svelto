@@ -1,0 +1,22 @@
+
+extends ../layout.jade
+
+//- Pager
+
+append main
+  +divider-block Normal
+
+  +pager({ url: "#", total: 100, current: 4 })
+
+  +divider-block Additional classes
+
+  +pager({ url: "#", total: 100, current: 4, classes: 'primary outlined' }).joined
+
+  +divider-block Joined
+  
+  +pager({ url: "#", total: 100, current: 4 }).joined
+
+  +divider-block Edge case
+  
+  +pager({ url: "#<page-nr>_page", total: 100, current: 100 }).joined
+  +pager({ url: "#<page-nr>_page", total: 100, current: 1 }).joined

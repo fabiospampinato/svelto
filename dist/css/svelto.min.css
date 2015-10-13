@@ -9663,6 +9663,22 @@ table > :not(tfoot) td .multiple:only-child {
 }
 
 /* =========================================================================
+ * Svelto - Pager v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* PAGER */
+.pager {
+  /* SEPARATED */
+}
+
+.pager:not(.joined) {
+  -webkit-justify-content: space-between !important;
+          justify-content: space-between !important;
+}
+
+/* =========================================================================
  * Svelto - Parallax (Settings) v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato

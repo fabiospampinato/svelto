@@ -1,0 +1,43 @@
+
+//- =========================================================================
+//- Svelto - Pager v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    url: '', // The url to transform wih the page number (eighter by appending or or by replacing <page-nr>)
+    total: '', // The total number of pages, or infinite (for example when the content is generated randomly)
+    current: '', // The current page number
+    classes: '' // Extra classes to add to buttons
+  }
+
+mixin pager(options)
+  //- TODO: Don't use multiple here, just .pager
+  - options.classes = options.classes || "";
+  +multiple&attributes(attributes).pager.centered
+
+    if options.total == 1 || options.total == 0
+      block
+
+    else
+
+      - var url_to_substitute = ( options.url.indexOf ( '<page-nr>' ) !== -1 );
+
+      if options.current > 1
+        - var page_nr = options.current - 1;
+        - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+        +button(page_url)(title="Previous page" class=options.classes).prev
+          i.icon chevron_left
+          span Prev
+
+      if options.current < options.total
+        - var page_nr = options.current + 1;
+        - var page_url = url_to_substitute ? options.url.replace ( "<page-nr>", page_nr) : options.url + page_nr;
+        +button(page_url)(title="Next page" class=options.classes).next
+          span Next
+          i.icon chevron_right
+
+    block
