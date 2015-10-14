@@ -114,9 +114,9 @@
       this._on ( this.$navigationPrev, Pointer.tap, this.__prevTap );
       this._on ( this.$navigationNext, Pointer.tap, this.__nextTap );
 
-      /* DAY CLICK */
+      /* DAY TAP */
 
-      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayClick );
+      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
 
     },
 
@@ -170,7 +170,9 @@
 
     /* SELECTION */
 
-    __dayClick: function ( event, node ) {
+    __dayTap: function ( event, node ) {
+
+      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
 
       var day = parseInt ( $(node).html (), 10 );
 

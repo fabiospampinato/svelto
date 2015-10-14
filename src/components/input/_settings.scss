@@ -32,6 +32,14 @@ $input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
 
 $input-active-color: $color-secondary !default;
 
+/* INPUT INVALID */
+
+$input-invalid-color: $color-red !default;
+
+/* INPUT VALID */
+
+$input-valid-color: $color-green !default;
+
 /* LABEL */
 
 $input-label-opacity: 0.75 !default;

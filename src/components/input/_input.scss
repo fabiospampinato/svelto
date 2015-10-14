@@ -87,6 +87,54 @@
 
   }
 
+  /* INVALID / VALID */
+
+  &.invalid,
+  &.valid {
+
+    > .text-field-bar {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    > .text-field {
+
+      ~ label {
+        color: $input-invalid-color !important;
+      }
+
+    }
+
+    > .text-field-bar {
+      border-bottom-color: $input-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    > .text-field {
+
+      ~ label {
+        color: $input-valid-color !important;
+      }
+
+    }
+
+    > .text-field-bar {
+      border-bottom-color: $input-valid-color !important;
+    }
+
+  }
+
   /* FLOATING */
 
   &:not(.no-floating) {

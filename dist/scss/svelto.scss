@@ -5957,6 +5957,22 @@ footer {
 
 
 /* =========================================================================
+ * Svelto - Form v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+
+/* DEFAULT FORM */
+
+form {
+  @extend .widget;
+}
+
+
+/* =========================================================================
  * Svelto - Grid v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -6719,6 +6735,14 @@ $input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
 
 $input-active-color: $color-secondary !default;
 
+/* INPUT INVALID */
+
+$input-invalid-color: $color-red !default;
+
+/* INPUT VALID */
+
+$input-valid-color: $color-green !default;
+
 /* LABEL */
 
 $input-label-opacity: 0.75 !default;
@@ -6825,6 +6849,54 @@ $input-transition-all-duration: $transition-duration-fast !default;
         border-bottom-color: $bg !important;
       }
 
+    }
+
+  }
+
+  /* INVALID / VALID */
+
+  &.invalid,
+  &.valid {
+
+    > .text-field-bar {
+      transform: scaleX(1);
+      opacity: 1;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    > .text-field {
+
+      ~ label {
+        color: $input-invalid-color !important;
+      }
+
+    }
+
+    > .text-field-bar {
+      border-bottom-color: $input-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    > .text-field {
+
+      ~ label {
+        color: $input-valid-color !important;
+      }
+
+    }
+
+    > .text-field-bar {
+      border-bottom-color: $input-valid-color !important;
     }
 
   }

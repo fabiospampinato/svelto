@@ -155,9 +155,11 @@
 
     /* PRIVATE */
 
-    ___click: function () {
+    ___tap: function () {
 
       if ( this.options.type !== 'action' ) {
+
+        //FIXME: If mouse only if left mouse button click
 
         this._on ( Pointer.tap, this.close );
 
@@ -280,7 +282,7 @@
 
         if ( this.neverOpened ) {
 
-          this.___click ();
+          this.___tap ();
           this.___flick ();
           this.___buttonTap ();
           this.___hover ();

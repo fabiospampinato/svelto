@@ -9,8 +9,8 @@
  * @requires ../noty/noty.js
  * ========================================================================= */
 
-//TODO: Make it working
-//TODO: Add special validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
+//TODO: Show error message
+//TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
 
 (function ( $, _, window, document, undefined ) {
 
@@ -24,105 +24,88 @@
 
     options: {
       validators: {
-        required: function ( val ) {
-            return ( val.trim() != "" ) ? true : "This field is required";
+        /* TYPE */
+        alpha: function ( value ) {
+          var re = /^[a-zA-Z]+$/;
+          return value.match ( re ) ? true : 'Only alphabetical characters are allowed';
         },
-        email: function ( val ) {
-            var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-            return ( val.match(re) ) ? true : "Enter a valid email";
+        alphanumeric: function ( value ) {
+          var re = /^([a-zA-Z0-9]+)$/;
+          return value.match ( re ) ? true : 'Only alphanumeric characters are allowed';
         },
-        captcha: function ( val, captcha ) {
-            return ( val == captcha ) ? true : "The captcha is wrong";
+        hexadecimal: function ( value ) {
+          var re = /^[0-9a-fA-F]+$/;
+          return value.match ( re ) ? true : 'Only hexadecimal characters are allowed';
         },
-        matches: function ( val, allowed ) {
-            return ( $.isArray ( allowed ) ? $.inArray ( val, allowed ) !== -1 : val == allowed ) ? true : "This value is not allowed";
+        number: function ( value ) {
+          var re = /^-?[0-9]+$/; //FIXME: It is supposed to match both integers and floats, but it doesn't
+          return value.match ( re ) ? true : 'Only numbers are allowed';
         },
-        notMatches: function ( val, disallowed ) {
-            return ( $.isArray ( disallowed ) ? $.inArray ( val, disallowed ) === -1 : val != disallowed ) ? true : "This value is not allowed";
+        integer: function ( value ) {
+          var re = /^(?:-?(?:0|[1-9][0-9]*))$/;
+          return value.match ( re ) ? true : 'Only integers numbers are allowed';
         },
-        matchesField: function ( val, field_name ) {
-            var field = $(this),
-                other_field = field.closest("form").find('[name='+field_name+']');
-            return ( val == other_field.val() ) ? true : "The two fields don't match each other";
+        float: function ( value ) {
+          var re = /^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/; //FIXME: We are also matching the scientific notation here, this might be unwanted, expecially if a language that doesn't support this notation has to take care of it
+          return value.match ( re ) ? true : 'Only floating point numbers are allowed';
         },
-        matchesPassword: function ( val, field_name ) {
-            var field = $(this),
-                other_field = field.closest("form").find('[name='+field_name+']');
-            return ( val == other_field.val() ) ? true : "The two passwords don't match each other";
+        /* NUMBER */
+        min: function ( value, min ) {
+          return ( Number ( value ) >= Number ( min ) ) ? true : 'The number must be at least ' + min;
         },
-        creditCard: function ( val ) {
-            var re = /^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35\d{3})\d{11})$/;
-            return ( val.match(re) ) ? true : "Enter a valid credit card number";
+        max: function ( value, max ) {
+          return ( Number ( value ) <= Number ( max ) ) ? true : 'The number must be at maximum ' + max;
         },
-        ip: function ( val ) {
-            var re_ipv4 = /^(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)\.(\d?\d?\d)$/,
-                re_ipv6 = /^::|^::1|^([a-fA-F0-9]{1,4}::?){1,7}([a-fA-F0-9]{1,4})$/;
-            return ( val.match(re_ipv4) || val.match(re_ipv6) ) ? true: "Enter a valid IP address";
+        range: function ( value, min, max ) {
+          value = Number ( value );
+          return ( value >= Number ( min ) && value <= Number ( max ) ) ? true : 'The number must be between ' + min + ' and ' + max;
         },
-        alpha: function ( val ) {
-            var re = /^[a-zA-Z]+$/;
-            return ( val.match(re) ) ? true : "Only alphabetical characters are allowed";
+        /* STRING */
+        minLength: function ( value, minLength ) {
+          return ( value.trim ().length >= Number ( minLength ) ) ? true : 'The lenght must be at least ' + minLength;
         },
-        alphanumeric: function ( val ) {
-            var re = /^([a-zA-Z0-9]+)$/;
-            return ( val.match(re) ) ? true : "Only alphanumeric characters are allowed";
+        maxLength: function ( value, maxLength ) {
+          return ( value.trim ().length <= Number ( maxLength ) ) ? true : 'The lenght must be at maximum ' + maxLength;
         },
-        numeric: function ( val ) {
-            var re = /^-?[0-9]+$/;
-            return ( val.match(re) ) ? true : "Only numerical characters are allowed";
+        rangeLength: function ( value, minLength, maxLength ) {
+          value = value.trim ();
+          return ( value.length >= Number ( minLength ) && value.length <= Number ( maxLength ) ) ? true : 'The length must be between ' + minLength + ' and ' + maxLength;
         },
-        integer_nr: function ( val ) {
-            var re = /^(?:-?(?:0|[1-9][0-9]*))$/;
-            return ( val.match(re) ) ? true : "Only integers are allowed";
+        exactLength: function ( value, length ) {
+          return ( value.trim ().length === Number ( length ) ) ? true : 'The length must be exactly ' + length;
         },
-        float_nr: function ( val ) {
-            var re = /^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/;
-            return ( val.match(re) ) ? true : "Only float numbers are allowed";
+        /* THINGS */
+        email: function ( value ) {
+          var re = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+          return value.match ( re ) ? true : 'Enter a valid email address';
         },
-        hexcolor: function ( val ) {
-            var re = /^#?([0-9a-fA-F]{3}|[0-9a-fA-F]{6})$/;
-            return ( val.match(re) ) ? true : "Enter a valid hex color";
+        cc: function ( value ) {
+          var re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
+          return value.match ( re ) ? true : 'Enter a valid credit card number';
         },
-        resolution: function ( val ) {
-            var re = /^(\d+x\d+)/i;
-            return ( val.match(re) ) ? true : "Enter a valid resolution";
+        ssn: function ( value ) {
+          var re = /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
+          return value.match ( re ) ? true : 'Enter a valid Social Security Number';
         },
-        url: function ( val ) {
-            var re = /^((http|https):\/\/(\w+:{0,1}\w*@)?(\S+)|)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?$/;
-            return ( val.match(re) ) ? true : "Enter a valid url";
+        ipv4: function ( value ) {
+          var re = /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
+          return value.match ( re ) ? true : 'Enter a valid IPv4 address';
         },
-        date: function ( val ) {
-            var re = /^(\d{4})-(\d{1,2})-(\d{1,2})$/;
-            return ( val.match(re) ) ? true : "Enter a valid date";
+        url: function ( value ) {
+          var re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
+          return value.match ( re ) ? true : 'Enter a valid URL';
         },
-        phone: function ( val ) {
-            var re = /^[2-9]\d{2}-\d{3}-\d{4}$/;
-            return ( val.match(re) ) ? true : "Enter a valid phone number";
+        /* OTHERS */
+        required: function ( value ) {
+          return ( value.trim ().length > 0 ) ? true : 'This field is required';
         },
-        min: function ( val, min_value ) {
-            return ( val >= min_value ) ? true : "The minimum allowed value is: " + min_value;
+        matches: function ( value ) {
+          var matches = _.slice ( arguments, 1 );
+          return ( matches.indexOf ( value.toLowerCase () ) !== -1 ) ? true : 'This value is not allowed';
         },
-        max: function ( val, max_value ) {
-            return ( val <= max_value ) ? true : "The maximum allowed value is: " + max_value;
-        },
-        range: function ( val, range ) {
-            var min_value = range[0],
-                 max_value = range[1];
-            return ( val >= min_value && val <= max_value ) ? true : "The value must be between " + min_value + " and " + max_value;
-        },
-        minLength: function ( val, min_value ) {
-            return ( val.length >= min_value ) ? true : "The minimum allowed length is: " + min_value;
-        },
-        maxLength: function ( val, max_value ) {
-            return ( val.length <= max_value ) ? true : "The maximum allowed length is: " + max_value;
-        },
-        rangeLength: function ( val, range ) {
-            var min_value = range[0],
-                 max_value = range[1];
-            return ( val.length >= min_value && val.length <= max_value ) ? true : "The length must be between " + min_value + " and " + max_value;
-        },
-        exactLength: function ( val, length ) {
-            return ( val.length == length ) ? true : "The length bust be exactly equals to: " + length;
+        matchesField: function ( value, fieldName ) {
+          var fieldValue = _.find ( this, { name: fieldName } ).value;
+          return ( value === fieldValue ) ? true : 'The two fields don\'t match';
         }
       },
       characters: {
@@ -143,10 +126,12 @@
         valid: 'valid'
       },
       selectors: {
-        elements: 'input, textarea',
-        submitter: ':submit',
+        element: 'input, textarea',
+        wrapper: '.input-wrp, .textarea-wrp, .button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
+        submitter: 'input[type="submit"], button[type="submit"]'
       },
       callbacks: {
+        //TODO: Add some callbacks
       }
     },
 
@@ -155,18 +140,26 @@
     _variables: function () {
 
       this.$form = this.$element;
-      this.$elements = this.$element.find ( this.options.selectors.elements );
+      this.$elements = this.$element.find ( this.options.selectors.element );
       this.$submitters = this.$element.find ( this.options.selectors.submitter );
 
-    },
-
-    _init: function () {
-
-      this._validateForm ();
+      this.___elements ();
 
     },
 
     _events: function () {
+
+      /* CHANGE */
+
+      this._on ( this.$elements, 'change', this.__change );
+
+      /* FOCUS */
+
+      this._on ( this.$elements, 'focus', this.__focus );
+
+      /* BLUR */
+
+      this._on ( this.$elements, 'blur', this.__blur );
 
       /* SUBMIT */
 
@@ -174,89 +167,250 @@
 
     },
 
+    /* ELEMENTS */
+
+    ___elements: function () {
+
+      this.elements = {};
+
+      for ( var i = 0, l = this.$elements.length; i < l; i++ ) {
+
+        var element = this.$elements[i],
+            $element = $(element),
+            name = element.name,
+            validationsStr = $element.data ( this.options.datas.validations );
+
+        if ( validationsStr ) {
+
+          var validations = {};
+
+          var validationsArr = validationsStr.split ( this.options.characters.separators.validations );
+
+          for ( var vi = 0, vl = validationsArr.length; vi < vl; vi++ ) {
+
+            var validationStr = validationsArr[vi],
+                matches = validationStr.match ( this.options.regexes.validation );
+
+            if ( !matches ) continue;
+
+            var validationName = matches[1],
+                validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
+                validator = this.options.validators[validationName];
+
+            if ( !validator ) continue;
+
+            validations[validationName] = {
+              args: validationArgs,
+              validator: validator
+            };
+
+          }
+
+          if ( _.size ( validations ) === 0 ) {
+
+            validations = false;
+
+          }
+
+        } else {
+
+          var validations = false;
+
+        }
+
+        this.elements[name] = {
+          $element: $element,
+          $wrapper: $element.parents ( this.options.selectors.wrapper ).first (),
+          name: name,
+          dirty: false,
+          value: $element.val (),
+          validations: validations,
+          isValid: undefined
+        };
+
+      }
+
+    },
+
+    /* CHANGE */
+
+    __change: function ( event, element ) {
+
+      var elementObj = this.elements[element.name];
+
+      elementObj.dirty = true;
+
+      if ( elementObj.isValid !== undefined ) {
+
+        elementObj.isValid = undefined;
+
+        this.__indeterminate ( elementObj );
+
+      }
+
+      for ( var name in this.elements ) {
+
+        var relativeElementObj = this.elements[name];
+
+        if ( relativeElementObj.validations && relativeElementObj.validations['matchesField'] && relativeElementObj.validations['matchesField'].args.indexOf ( elementObj.name ) !== -1 ) {
+
+          this.__indeterminate ( relativeElementObj );
+
+        }
+
+      }
+
+      if ( document.activeElement !== element ) {
+
+        this._validateWorker ( elementObj );
+
+      }
+
+    },
+
+    /* FOCUS */
+
+    __focus: function ( event, element ) {
+
+      var elementObj = this.elements[element.name];
+
+      elementObj.isValid = undefined;
+
+      this.__indeterminate ( elementObj );
+
+    },
+
+    /* BLUR */
+
+    __blur: function ( event, element ) {
+
+      var elementObj = this.elements[element.name];
+
+      this._validateWorker ( elementObj );
+
+    },
+
     /* SUBMIT */
 
     __submit: function ( event ) {
 
-      if ( this._validateForm () !== true ) {
+      if ( !this.isValid () ) {
 
-        event.prenvetDefault ();
+        event.preventDefault ();
         event.stopImmediatePropagation ();
 
-        $.noty ( 'The form contains come errors, check it again' );
-
       }
 
     },
 
-    _validateForm: function () {
+    /* ELEMENT */
 
-      var errors = {};
+    _validateWorker: function ( elementObj ) {
 
-      for ( var i = 0, l = this.$elements.length; i < l; i++ ) {
+      if ( elementObj.isValid === undefined ) {
 
-        var $element = this.$elements.eq ( i ),
-            name = $element.attr ( 'name' ),
-            validations = $element.data ( this.options.datas.validations );
+        var result = this._validate ( elementObj ),
+            isValid = ( result === true );
 
-        if ( !validations ) continue;
+        elementObj.isValid = isValid;
 
-        var result = this._validateElement ( $element, validations );
+        if ( isValid ) {
 
-        if ( result !== true ) {
+          this.__valid ( elementObj );
 
-          errors[name] = result;
+        } else {
+
+          this.__invalid ( elementObj, result );
 
         }
 
       }
 
-      return ( _.size ( errors ) === 0 ) ? true : errors;
-
     },
 
-    _validateElement: function ( $element, validations ) {
+    _validate: function ( elementObj ) {
 
-      var errors = {};
+      var errors = {},
+          validations = elementObj.validations;
 
-      validations = validations.split ( this.options.characters.separators.validations );
+      if ( elementObj.dirty ) {
 
-      for ( var i = 0, l = validations.length; i < l; i++ ) {
+        elementObj.value = elementObj.$element.val ();
 
-        var validation = validations[i],
-            matches = validation.match ( this.options.regexes.validation );
+        elementObj.dirty = false;
 
-        if ( !matches ) continue;
+      }
 
-        var name = matches[1],
-            args = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : undefined,
-            validator = this.options.validators[name];
+      if ( validations ) {
 
-        if ( !validator ) continue;
+        for ( var name in validations ) {
 
-        var result = validator.apply ( this.$form, args ? [$element].concat ( args ) : [$element] );
+          var validation = validations[name],
+              result = validation.validator.apply ( this.elements, [elementObj.value].concat ( validation.args ) );
 
-        if ( result !== true ) {
+          if ( result !== true ) {
 
-          errors[name] = result;
+            errors[name] = !_.isString ( result ) ? 'This value is not valid' : result;
+
+          }
 
         }
 
       }
 
-      return ( _.size ( errors ) === 0 ) ? true : errors;
+      var isValid = ( _.size ( errors ) === 0 );
+
+      return isValid ? true : errors;
 
     },
 
-    __invalid: function ( errors ) {
+    __indeterminate: function ( elementObj ) {
 
-      this.$submitters.addClass ( this.options.classes.disabled );
+      elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
 
     },
 
-    __valid : function () {
+    __valid: function ( elementObj ) {
 
-      this.$submitters.removeClass ( this.options.classes.disabled );
+      elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
+
+    },
+
+    __invalid: function ( elementObj, errors ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
+
+    },
+
+    /* API */
+
+    isValid: function () {
+
+      for ( var name in this.elements ) {
+
+        var elementObj = this.elements[name];
+
+        if ( elementObj.isValid === undefined ) {
+
+          this._validateWorker ( elementObj );
+
+        }
+
+      }
+
+      for ( var name in this.elements ) {
+
+        var elementObj = this.elements[name];
+
+        if ( elementObj.isValid === false ) {
+
+          return false;
+
+        }
+
+      }
+
+      return true;
 
     }
 
@@ -266,7 +420,7 @@
 
   $(function () {
 
-    $('.form.validate').formValidate ();
+    $('[data-validations]').parents ( 'form' ).formValidate ();
 
   });
 

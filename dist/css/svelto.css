@@ -2866,7 +2866,7 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, header, i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, form, header, i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
@@ -2878,7 +2878,7 @@ table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp,
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, i.icon > :last-child, .rater-star:before > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, form > :last-child, header > :last-child, i.icon > :last-child, .rater-star:before > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
@@ -2888,7 +2888,7 @@ table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .rater-star:before > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, form > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .rater-star:before > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
@@ -2909,6 +2909,7 @@ label.disabled,
 .disabled.datepicker,
 .disabled.embedded,
 .disabled.flippable,
+form.disabled,
 header.disabled,
 i.disabled.icon,
 .disabled.rater-star:before, .slider:not(.disabled) .disabled.slider-min:hover:after,
@@ -2932,7 +2933,7 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, header[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].rater-star:before, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, form[class*="-disabled"], header[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].rater-star:before, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
@@ -6633,6 +6634,15 @@ footer.beveled.base:after {
 }
 
 /* =========================================================================
+ * Svelto - Form v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+/* DEFAULT FORM */
+/* =========================================================================
  * Svelto - Grid v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -7675,6 +7685,8 @@ img {
 /* INPUT */
 /* INPUT COMPACT */
 /* INPUT ACTIVE */
+/* INPUT INVALID */
+/* INPUT VALID */
 /* LABEL */
 /* LABEL ACTIVE */
 /* BAR */
@@ -7703,6 +7715,9 @@ img {
   /* LABEL */
   /* BAR */
   /* COLORS */
+  /* INVALID / VALID */
+  /* INVALID */
+  /* VALID */
   /* FLOATING */
   /* NO FLOATING */
   /* WITH BAR */
@@ -7939,6 +7954,30 @@ img {
 
 .input-wrp.text-field-base > .text-field-bar, .text-field-base.textarea-wrp > .text-field-bar {
   border-bottom-color: #eceff1 !important;
+}
+
+.input-wrp.invalid > .text-field-bar,
+.invalid.textarea-wrp > .text-field-bar,
+.input-wrp.valid > .text-field-bar, .valid.textarea-wrp > .text-field-bar {
+  -webkit-transform: scaleX(1);
+          transform: scaleX(1);
+  opacity: 1;
+}
+
+.input-wrp.invalid > .text-field ~ label, .invalid.textarea-wrp > .text-field ~ label {
+  color: #f44336 !important;
+}
+
+.input-wrp.invalid > .text-field-bar, .invalid.textarea-wrp > .text-field-bar {
+  border-bottom-color: #f44336 !important;
+}
+
+.input-wrp.valid > .text-field ~ label, .valid.textarea-wrp > .text-field ~ label {
+  color: #4caf50 !important;
+}
+
+.input-wrp.valid > .text-field-bar, .valid.textarea-wrp > .text-field-bar {
+  border-bottom-color: #4caf50 !important;
 }
 
 .input-wrp:not(.no-floating), .textarea-wrp:not(.no-floating) {

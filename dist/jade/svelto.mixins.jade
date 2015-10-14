@@ -705,32 +705,6 @@ mixin label-tag
 
 
 //- =========================================================================
-//- Svelto - Modal v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    id: '', // Modal id
-    title: '' // Title
-    icon: '', // Icon to use
-  }
-
-mixin modal-btn(options)
-  +button(data-modal="modal-" + options.id)&attributes(attributes).modal-trigger
-    if options.title
-      span= options.title
-    if options.icon
-      +icon(options.icon)
-
-mixin modal(id)
-  .modal(id="modal-" + id)&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Multiple v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -763,6 +737,32 @@ mixin multiple-sub-right
     +multiple
       block
   .multiple-sub-spacer
+
+
+//- =========================================================================
+//- Svelto - Modal v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    id: '', // Modal id
+    title: '' // Title
+    icon: '', // Icon to use
+  }
+
+mixin modal-btn(options)
+  +button(data-modal="modal-" + options.id)&attributes(attributes).modal-trigger
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
+
+mixin modal(id)
+  .modal(id="modal-" + id)&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1037,6 +1037,35 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(options)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !options.empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
+
+
+//- =========================================================================
 //- Svelto - Parallax v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1076,35 +1105,6 @@ mixin parallax-layer-base
 mixin parallax-layer-foreground
   +parallax-layer&attributes(attributes).parallax-layer-foreground
     block
-
-
-//- =========================================================================
-//- Svelto - Placeholder v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    width: '', // Placeholder width
-    height: '', // Placeholder height
-    empty: '' // Placeholder is empty or not
-  }
-
-mixin placeholder(options)
-  - options = options || {};
-  - options.width = options.width || 0;
-  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
-  - options.height = options.height || 0;
-  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
-  - options.empty = options.empty || false;
-  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !options.empty
-      if block
-        block
-      else
-        = options.width + " - " + options.height
 
 
 //- =========================================================================
@@ -1355,18 +1355,6 @@ mixin slider(options)
 
 
 //- =========================================================================
-//- Svelto - Spinner v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin spinner
-  svg.spinner&attributes(attributes)
-    circle
-
-
-//- =========================================================================
 //- Svelto - Stepper v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1395,6 +1383,18 @@ mixin stepper(options)
     else
       +input({ value: options.value }).stepper-input.autogrow.compact
     +button-icon("add").compact.stepper-increaser
+
+
+//- =========================================================================
+//- Svelto - Spinner v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin spinner
+  svg.spinner&attributes(attributes)
+    circle
 
 
 //- =========================================================================
