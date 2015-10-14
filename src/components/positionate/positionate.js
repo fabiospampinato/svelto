@@ -9,7 +9,7 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

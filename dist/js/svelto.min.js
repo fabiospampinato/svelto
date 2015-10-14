@@ -279,7 +279,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -351,7 +351,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -468,7 +468,7 @@
 //TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
 //TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -556,7 +556,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -677,7 +677,7 @@
  ***************************
  */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -761,7 +761,7 @@
 
 //TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -1264,7 +1264,7 @@
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -1502,7 +1502,7 @@
 
 //FIXME: Extending widgets is not working!
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -1782,7 +1782,7 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -1888,7 +1888,7 @@
  * @requires ../expander/expander.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -2030,7 +2030,7 @@
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -2131,7 +2131,7 @@
 //FIXME: Does it work with `.large` textareas?
 //TODO: Make it the same height as a normal input at minimum, for beautiness
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -2204,7 +2204,7 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -2228,7 +2228,7 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -2252,7 +2252,7 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -2686,7 +2686,7 @@
 //TODO: Add support for alpha channel
 //TODO: Add a $bgs variable where we update the background
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -3011,7 +3011,7 @@
 
 /* COOKIE */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -3116,7 +3116,7 @@
 //TODO: Add support for setting first day of the week
 //INFO: We use the ormat: YYYY-MM-DD
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -3542,7 +3542,7 @@
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -3833,7 +3833,7 @@
 
 //FIXME: Do we need to support -webkit- prefixing?
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -3924,7 +3924,7 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -4159,7 +4159,7 @@
 
 //TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -4409,7 +4409,7 @@
 
 //TODO: Add a anction on hovering
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -4489,7 +4489,7 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -4591,7 +4591,7 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -4693,7 +4693,7 @@
 
 //TODO: Add better support for swipe to dismiss
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5057,7 +5057,7 @@
 
 //TODO: Check if it works, also for upload
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5190,7 +5190,7 @@
 
 //TODO: Maybe sync at the init time also
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5289,7 +5289,7 @@
 
 //TODO: Maybe add the ability to open it
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5361,7 +5361,7 @@
 
 //TODO: Disable scrolling while the modal is open
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5508,7 +5508,7 @@
 
 //TODO: Add support for cookie settable parameters
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5606,7 +5606,7 @@
  * @requires NTA.Group.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5664,7 +5664,7 @@
 
 //TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5739,7 +5739,7 @@
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Disable scrolling while the navbar is open
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -5961,7 +5961,7 @@
 
 //INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -6015,7 +6015,7 @@
  * @requires ../n_times_action/nTimesAction.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -6653,7 +6653,7 @@ Prism.languages.js = Prism.languages.javascript;
 * @requires ../widget/factory.js
 * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
 'use strict';
 
@@ -6831,7 +6831,7 @@ $(function () {
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -6959,7 +6959,7 @@ $(function () {
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -7112,7 +7112,7 @@ $(function () {
  * @requires ../core/core.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -7193,7 +7193,7 @@ $(function () {
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -7458,7 +7458,7 @@ $(function () {
 //FIXME: Add support tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -7763,7 +7763,7 @@ $(function () {
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -8045,7 +8045,7 @@ $(function () {
 //TODO: Add support for sorting other things other than tables
 //TODO: If possible sort using flexbox's `order` property
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -8305,7 +8305,7 @@ $(function () {
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -8793,7 +8793,7 @@ $(function () {
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -9010,7 +9010,7 @@ $(function () {
 
 //TODO: Add again the indicator
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -9162,7 +9162,7 @@ $(function () {
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
 //FIXME: Partial's text cursor is not visible whan it's empty
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -9671,7 +9671,7 @@ $(function () {
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -9764,7 +9764,7 @@ $(function () {
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
@@ -9938,7 +9938,7 @@ $(function () {
  * @requires ../bteach/btEach.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

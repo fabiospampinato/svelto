@@ -8,7 +8,7 @@
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

@@ -12,7 +12,7 @@
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

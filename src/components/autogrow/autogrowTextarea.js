@@ -12,7 +12,7 @@
 //FIXME: Does it work with `.large` textareas?
 //TODO: Make it the same height as a normal input at minimum, for beautiness
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

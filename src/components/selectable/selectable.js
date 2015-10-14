@@ -12,7 +12,7 @@
 //FIXME: Add support tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

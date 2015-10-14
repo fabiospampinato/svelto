@@ -13,7 +13,7 @@
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

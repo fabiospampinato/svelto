@@ -14,7 +14,7 @@
 //TODO: Add support for setting first day of the week
 //INFO: We use the ormat: YYYY-MM-DD
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

@@ -10,7 +10,7 @@
 
 //TODO: Add better support for swipe to dismiss
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

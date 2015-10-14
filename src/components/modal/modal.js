@@ -12,7 +12,7 @@
 
 //TODO: Disable scrolling while the modal is open
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

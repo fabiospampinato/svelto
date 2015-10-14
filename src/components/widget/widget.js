@@ -11,7 +11,7 @@
 
 //TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

@@ -11,7 +11,7 @@
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Disable scrolling while the navbar is open
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

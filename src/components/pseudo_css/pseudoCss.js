@@ -4,7 +4,7 @@
 //TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
 //TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

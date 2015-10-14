@@ -11,7 +11,7 @@
 
 //TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

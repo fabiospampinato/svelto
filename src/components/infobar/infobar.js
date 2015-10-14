@@ -10,7 +10,7 @@
 
 //TODO: Maybe add the ability to open it
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

@@ -13,7 +13,7 @@
 
 //FIXME: Extending widgets is not working!
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

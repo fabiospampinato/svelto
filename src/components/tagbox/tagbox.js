@@ -14,7 +14,7 @@
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
 //FIXME: Partial's text cursor is not visible whan it's empty
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

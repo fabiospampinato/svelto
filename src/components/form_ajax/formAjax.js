@@ -12,7 +12,7 @@
 
 //TODO: Check if it works, also for upload
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

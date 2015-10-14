@@ -10,7 +10,7 @@
 
 //TODO: Add a anction on hovering
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

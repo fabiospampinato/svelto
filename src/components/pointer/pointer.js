@@ -14,7 +14,7 @@
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

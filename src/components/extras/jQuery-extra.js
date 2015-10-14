@@ -8,7 +8,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

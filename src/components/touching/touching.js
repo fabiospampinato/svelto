@@ -9,7 +9,7 @@
  * @requires ../bteach/btEach.js
  * ========================================================================= */
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

@@ -11,7 +11,7 @@
 
 //TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

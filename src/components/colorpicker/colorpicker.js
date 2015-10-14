@@ -13,7 +13,7 @@
 //TODO: Add support for alpha channel
 //TODO: Add a $bgs variable where we update the background
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

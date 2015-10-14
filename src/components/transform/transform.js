@@ -3,7 +3,7 @@
 
 //FIXME: Do we need to support -webkit- prefixing?
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

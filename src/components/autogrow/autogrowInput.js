@@ -12,7 +12,7 @@
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

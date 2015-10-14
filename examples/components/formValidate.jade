@@ -1,0 +1,19 @@
+
+extends ../layout.jade
+
+//- formValidate
+
+append main
+  - var elo_options = { public: "Public", private: "Private", Elo: { 1200: "1200+", 1300: "1300+", 1400: "1400+", 1500: "1500+", 1600: "1600+", 1700: "1700+", 1800: "1800+", 1900: "1900+", 2000: "2000+", 2100: "2100+", } };
+
+  +divider-block Form
+
+  +form.centered.sm-12.md-10.lg-8.xl-6
+    +card.outlined
+      +card-header.primary.outlined Form
+      +card-block
+      +card-footer.outlined
+        +multiple
+          +form-button.gray.outlined Normal
+          +form-button.primary.outlined Primary
+          +form-button.secondary.outlined Secondary

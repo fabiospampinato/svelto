@@ -12,7 +12,7 @@
 //TODO: Add support for sorting other things other than tables
 //TODO: If possible sort using flexbox's `order` property
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

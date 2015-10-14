@@ -10,7 +10,7 @@
 
 //TODO: Maybe sync at the init time also
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 

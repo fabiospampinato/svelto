@@ -11,7 +11,7 @@
 
 //TODO: Add support for cookie settable parameters
 
-;(function ( $, _, window, document, undefined ) {
+(function ( $, _, window, document, undefined ) {
 
   'use strict';
 
