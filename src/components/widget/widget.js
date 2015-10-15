@@ -31,6 +31,10 @@
     name: 'widget',
     fullName: 'widget', //INFO: `namespace.name`
 
+    /* HTML */
+
+    html: '<div>', //INFO: It will be used as a constructor if no element or base template is provided
+
     /* TEMPLATES */
 
     templates: {
@@ -55,7 +59,7 @@
 
       // CHECK IF INITIALIZABLE
 
-      if ( !element && !this.templates.base ) {
+      if ( !element && !this.templates.base && !this.html ) {
 
         throw 'WidgetUninitializable';
 
@@ -67,7 +71,7 @@
 
       // INIT ELEMENT
 
-      this.$element = $(element || this._tmpl ( 'base', this.options ));
+      this.$element = $(element || ( this.templates.base ? this._tmpl ( 'base', this.options ) : this.html ) );
       this.element = this.$element[0];
 
       // SET GUID

@@ -78,7 +78,8 @@
 
     var basePrototype = new base ();
 
-    basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+    basePrototype.templates = _.merge ( {}, basePrototype.templates, prototype.templates ); //INFO: We need to make the templates hash a property directly on the new instance otherwise we'll modify the templates hash on the prototype that we're inheriting from
+    basePrototype.options = _.merge ( {}, basePrototype.options, prototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
     // PROXIED PROTOTYPE
 
@@ -88,7 +89,11 @@
 
       if ( !_.isFunction ( prototype[prop] ) ) {
 
-        proxiedPrototype[prop] = prototype[prop];
+        if ( !_.isPlainObject ( prototype[prop] ) ) {
+
+          proxiedPrototype[prop] = prototype[prop];
+
+        }
 
       } else {
 
@@ -96,24 +101,18 @@
 
           var _super = function () {
               return base.prototype[prop].apply ( this, arguments );
-            },
-            _superApply = function ( args ) {
-              return base.prototype[prop].apply ( this, args );
             };
 
           return function () {
 
             var __super = this._super,
-                __superApply = this._superApply,
                 returnValue;
 
             this._super = _super;
-            this._superApply = _superApply;
 
             returnValue = prototype[prop].apply ( this, arguments );
 
             this._super = __super;
-            this._superApply = __superApply;
 
             return returnValue;
 

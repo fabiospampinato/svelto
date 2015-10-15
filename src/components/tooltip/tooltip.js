@@ -12,39 +12,23 @@
 
   'use strict';
 
-  /* SELECT */
+  /* TOOLTIP */
 
-  $.factory ( 'svelto.tooltip', {
-
-    /* TEMPLATES */
-
-    templates: {
-      base: ''
-     },
+  $.factory ( 'svelto.tooltip', $.svelto.dropdown, {
 
     /* OPTIONS */
 
     options: {
-      classes: {
+      hover: {
+        triggerable: true
+      },
+      datas: {
+        element: 'tooltip'
       },
       selectors: {
-      },
-      callbacks: {
+        closer: '.button, .tooltip-closer',
+        trigger: '.tooltip-trigger'
       }
-    },
-
-    /* SPECIAL */
-
-    _variables: function () {
-
-    },
-
-    _init: function () {
-
-    },
-
-    _events: function () {
-
     }
 
   });
@@ -53,7 +37,7 @@
 
   $(function () {
 
-    // $('.tooltip').tooltip ();
+    $('.tooltip').tooltip ();
 
   });
 

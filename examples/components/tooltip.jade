@@ -7,17 +7,23 @@ append main
   +divider-block Tooltip
 
   +multiple
+    +tooltip-btn({ title: "Basic", id: "basic" }).outlined
+    +tooltip-btn({ title: "Tipless", id: "tipless" }).outlined
     +tooltip-btn({ title: "Text", id: "text" }).outlined
     +tooltip-btn({ title: "Image", id: "image" }).outlined
     +tooltip-btn({ title: "Image2", id: "image2" }).outlined
     +tooltip-btn({ title: "Advanced", id: "advanced" }).outlined
     
 append body
+  #basic.tooltip.container Hello there!
+  
+  #tipless.tooltip.container.no-tip Tipless!
+    
   #text.tooltip.container
     P 
-      +lorem-ipsum
+      +lorem-ipsum    
       
-  #image.tooltip.container
+  #image.tooltip.container.outlined
     img(src="/sample.png")  
 
   #image2.tooltip.container

@@ -781,6 +781,10 @@
     name: 'widget',
     fullName: 'widget', //INFO: `namespace.name`
 
+    /* HTML */
+
+    html: '<div>', //INFO: It will be used as a constructor if no element or base template is provided
+
     /* TEMPLATES */
 
     templates: {
@@ -805,7 +809,7 @@
 
       // CHECK IF INITIALIZABLE
 
-      if ( !element && !this.templates.base ) {
+      if ( !element && !this.templates.base && !this.html ) {
 
         throw 'WidgetUninitializable';
 
@@ -817,7 +821,7 @@
 
       // INIT ELEMENT
 
-      this.$element = $(element || this._tmpl ( 'base', this.options ));
+      this.$element = $(element || ( this.templates.base ? this._tmpl ( 'base', this.options ) : this.html ) );
       this.element = this.$element[0];
 
       // SET GUID
@@ -1567,7 +1571,8 @@
 
     var basePrototype = new base ();
 
-    basePrototype.options = _.extend ( {}, basePrototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+    basePrototype.templates = _.merge ( {}, basePrototype.templates, prototype.templates ); //INFO: We need to make the templates hash a property directly on the new instance otherwise we'll modify the templates hash on the prototype that we're inheriting from
+    basePrototype.options = _.merge ( {}, basePrototype.options, prototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
     // PROXIED PROTOTYPE
 
@@ -1577,7 +1582,11 @@
 
       if ( !_.isFunction ( prototype[prop] ) ) {
 
-        proxiedPrototype[prop] = prototype[prop];
+        if ( !_.isPlainObject ( prototype[prop] ) ) {
+
+          proxiedPrototype[prop] = prototype[prop];
+
+        }
 
       } else {
 
@@ -1585,24 +1594,18 @@
 
           var _super = function () {
               return base.prototype[prop].apply ( this, arguments );
-            },
-            _superApply = function ( args ) {
-              return base.prototype[prop].apply ( this, args );
             };
 
           return function () {
 
             var __super = this._super,
-                __superApply = this._superApply,
                 returnValue;
 
             this._super = _super;
-            this._superApply = _superApply;
 
             returnValue = prototype[prop].apply ( this, arguments );
 
             this._super = __super;
-            this._superApply = __superApply;
 
             return returnValue;
 
@@ -3927,6 +3930,7 @@
  * ========================================================================= */
 
 //TODO: Add allignment, that is, if possibile don't center the dropdown but align it to one of the trigger edges
+//FIXME: Big elements gets positionated badly, for example try some tooltips in a small viewport
 
 (function ( $, _, window, document, undefined ) {
 
@@ -4163,6 +4167,8 @@
 
 //TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 
+//FIXME: Hover open, enter the dropdown and click it, it gets closed...
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -4179,7 +4185,7 @@
 
     options: {
       hover: {
-        triggerable: true,
+        triggerable: false,
         delays: {
           open: 750,
           close: 250
@@ -4189,6 +4195,9 @@
         attached: 0,
         noTip: 7,
         normal: 14
+      },
+      datas: {
+        element: 'dropdown'
       },
       classes: {
         noTip: 'no-tip',
@@ -4215,7 +4224,7 @@
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.id = this.$dropdown.attr ( 'id' );
-      this.$triggers = $(this.options.selectors.trigger + '[data-dropdown="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
@@ -4250,8 +4259,6 @@
 
     __hoverTriggerEnter: function ( event, trigger ) {
 
-      console.log('__hoverTriggerEnter');
-
       if ( !this._isOpen ) {
 
         this._isHoverOpen = false;
@@ -4267,8 +4274,6 @@
 
     __hoverOpen: function () {
 
-      console.log('__hoverOpen');
-
       if ( !this._isOpen ) {
 
         this.open ( false, this._hoverTrigger );
@@ -4282,8 +4287,6 @@
     },
 
     __hoverTriggerLeave: function ( event, trigger ) {
-
-      console.log('__hoverTriggerLeave');
 
       if ( this.hoverOpenTimeout ) {
 
@@ -4305,8 +4308,6 @@
 
     __hoverClose: function () {
 
-      console.log('__hoverClose');
-
       if ( this._isHoverOpen ) {
 
         this.close ();
@@ -4322,8 +4323,6 @@
     },
 
     __hoverDropdownEnter: function () {
-
-      console.log('__hoverDropdownEnter');
 
       if ( this.hoverCloseTimeout ) {
 
@@ -4342,8 +4341,6 @@
     },
 
     __hoverDropdownLeave: function () {
-
-      console.log('__hoverDropdownLeave');
 
       if ( this._isHoverOpen ) {
 
@@ -10497,39 +10494,23 @@ $(function () {
 
   'use strict';
 
-  /* SELECT */
+  /* TOOLTIP */
 
-  $.factory ( 'svelto.tooltip', {
-
-    /* TEMPLATES */
-
-    templates: {
-      base: ''
-     },
+  $.factory ( 'svelto.tooltip', $.svelto.dropdown, {
 
     /* OPTIONS */
 
     options: {
-      classes: {
+      hover: {
+        triggerable: true
+      },
+      datas: {
+        element: 'tooltip'
       },
       selectors: {
-      },
-      callbacks: {
+        closer: '.button, .tooltip-closer',
+        trigger: '.tooltip-trigger'
       }
-    },
-
-    /* SPECIAL */
-
-    _variables: function () {
-
-    },
-
-    _init: function () {
-
-    },
-
-    _events: function () {
-
     }
 
   });
@@ -10538,7 +10519,7 @@ $(function () {
 
   $(function () {
 
-    // $('.tooltip').tooltip ();
+    $('.tooltip').tooltip ();
 
   });
 

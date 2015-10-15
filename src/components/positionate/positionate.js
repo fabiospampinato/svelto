@@ -10,6 +10,7 @@
  * ========================================================================= */
 
 //TODO: Add allignment, that is, if possibile don't center the dropdown but align it to one of the trigger edges
+//FIXME: Big elements gets positionated badly, for example try some tooltips in a small viewport
 
 (function ( $, _, window, document, undefined ) {
 

@@ -11,6 +11,8 @@
 
 //TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
 
+//FIXME: Hover open, enter the dropdown and click it, it gets closed...
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -27,7 +29,7 @@
 
     options: {
       hover: {
-        triggerable: true,
+        triggerable: false,
         delays: {
           open: 750,
           close: 250
@@ -37,6 +39,9 @@
         attached: 0,
         noTip: 7,
         normal: 14
+      },
+      datas: {
+        element: 'dropdown'
       },
       classes: {
         noTip: 'no-tip',
@@ -63,7 +68,7 @@
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.id = this.$dropdown.attr ( 'id' );
-      this.$triggers = $(this.options.selectors.trigger + '[data-dropdown="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
@@ -98,8 +103,6 @@
 
     __hoverTriggerEnter: function ( event, trigger ) {
 
-      console.log('__hoverTriggerEnter');
-
       if ( !this._isOpen ) {
 
         this._isHoverOpen = false;
@@ -115,8 +118,6 @@
 
     __hoverOpen: function () {
 
-      console.log('__hoverOpen');
-
       if ( !this._isOpen ) {
 
         this.open ( false, this._hoverTrigger );
@@ -130,8 +131,6 @@
     },
 
     __hoverTriggerLeave: function ( event, trigger ) {
-
-      console.log('__hoverTriggerLeave');
 
       if ( this.hoverOpenTimeout ) {
 
@@ -153,8 +152,6 @@
 
     __hoverClose: function () {
 
-      console.log('__hoverClose');
-
       if ( this._isHoverOpen ) {
 
         this.close ();
@@ -170,8 +167,6 @@
     },
 
     __hoverDropdownEnter: function () {
-
-      console.log('__hoverDropdownEnter');
 
       if ( this.hoverCloseTimeout ) {
 
@@ -190,8 +185,6 @@
     },
 
     __hoverDropdownLeave: function () {
-
-      console.log('__hoverDropdownLeave');
 
       if ( this._isHoverOpen ) {
 

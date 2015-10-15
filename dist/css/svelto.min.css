@@ -7469,6 +7469,8 @@ table.table.sortable th.xxxxlarge[data-sort]:after {
  * ========================================================================= */
 /* DEFAULT */
 img {
+  display: -webkit-flex;
+  display: flex;
   border-color: black;
   width: 100%;
   height: auto;
@@ -12066,14 +12068,28 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
 }
 
 /* =========================================================================
+ * Svelto - Tooltip (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+/* TOOLTIP */
+/* =========================================================================
  * Svelto - Toolip v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires _settings.scss
  * @requires ../dropdown/_dropdown.scss
  * ========================================================================= */
 /* TOOLTIP */
+.tooltip {
+  max-width: 20rem;
+}
+
 /* =========================================================================
  * Svelto - Typography v0.1.0
  * =========================================================================
