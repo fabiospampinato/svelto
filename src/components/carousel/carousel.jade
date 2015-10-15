@@ -1,0 +1,34 @@
+
+//- =========================================================================
+//- Svelto - Carousel v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin carousel
+  .carousel&attributes(attributes)
+    block
+
+mixin carousel-indicators(amount)
+  .carousel-indicators&attributes(attributes)
+    - var nr = 1;
+    while nr <= amount
+      +carousel-indicator
+      - nr++;
+
+mixin carousel-indicator
+  .carousel-indicator&attributes(attributes)
+    block
+
+mixin carousel-prev
+  .carousel-prev&attributes(attributes)
+    block
+
+mixin carousel-next
+  .carousel-next&attributes(attributes)
+    block
+
+mixin carousel-items
+  .carousel-items&attributes(attributes)
+    block

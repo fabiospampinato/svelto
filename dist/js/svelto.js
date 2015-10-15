@@ -2247,6 +2247,59 @@
 
 
 /* =========================================================================
+ * Svelto - Carousel v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CAROUSEL */
+
+  $.factory ( 'svelto.carousel', {
+
+    /* OPTIONS */
+
+    options: {
+      selectors: {
+      },
+      callbacks: {
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+    },
+
+    _init: function () {
+
+    },
+
+    _events: function () {
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.carousel').carousel ();
+
+  });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
  * Svelto - Checkbox v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -6291,6 +6344,7 @@
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Disable scrolling while the navbar is open
+//TODO: Close with a flick
 
 (function ( $, _, window, document, undefined ) {
 

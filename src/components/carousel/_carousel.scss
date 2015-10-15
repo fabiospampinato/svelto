@@ -1,0 +1,292 @@
+
+/* =========================================================================
+ * Svelto - Carousel v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+
+//TODO: When inset add proper dark shadow at the left and the right
+
+/* CAROUSEL */
+
+.carousel {
+
+  @extend .widget;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-height: $carousel-min-height;
+
+  /* PREVIOUS / NEXT */
+
+  &-prev,
+  &-next {
+
+    /* AFTER (ICON) */
+
+    &:after {
+      @extend i.icon;
+      margin-bottom: 0;
+    }
+
+  }
+
+  /* PREVIOUS */
+
+  &-prev {
+
+    /* AFTER (ICON) */
+
+    &:after {
+      content: 'chevron_left';
+    }
+
+  }
+
+  /* NEXT */
+
+  &-next {
+
+    /* AFTER (ICON) */
+
+    &:after {
+      content: 'chevron_right';
+    }
+
+  }
+
+  /* INDICATORS */
+
+  &-indicators {
+    z-index: $carousel-indicators-z-index;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-self: center;
+    padding: $gutter;
+  }
+
+  /* INDICATOR */
+
+  &-indicator {
+
+    width: $carousel-indicator-size;
+    height: $carousel-indicator-size;
+    border: $carousel-indicator-border-width solid $carousel-indicator-color;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: $carousel-indicator-opacity;
+    transition-property: background-color, opacity;
+    transition-duration: $carousel-indicator-transition-all-duration;
+
+    /* HOVER */
+
+    &:hover {
+      opacity: $carousel-indicator-hover-opacity !important;
+    }
+
+    /* NOT FIRST */
+
+    &:not(:first-child) {
+      margin-left: $gutter-half / 2;
+    }
+
+    /* NOT LAST */
+
+    &:not(:last-child) {
+      margin-right: $gutter-half / 2;
+    }
+
+    /* ACTIVE */
+
+    &.active {
+      background-color: $carousel-indicator-color;
+    }
+
+  }
+
+  /* ITEMS */
+
+  &-items {
+
+    position: relative;
+    flex-grow: 1;
+
+    /* ITEM */
+
+    > * {
+
+      @include fill-absolute ();
+      margin-bottom: 0 !important;
+      border-radius: inherit;
+
+      /* FIRST */
+
+      &:first-child { //INFO: So that when not initialized the one visible is always the first
+        z-index: 1;
+      }
+
+      /* INACTIVE */
+
+      &:not(.active) {
+
+      }
+
+      /* ACTIVE */
+
+      &.active {
+
+      }
+
+    }
+
+  }
+
+  /* HOVER */
+
+  &:hover {
+
+    /* INDICATORS */
+
+    .carousel-indicators {
+
+      /* INDICATOR */
+
+      .carousel-indicator {
+        opacity: $carousel-hover-indicator-opacity;
+      }
+
+    }
+
+  }
+
+  /* OUTSET */
+
+  &:not(.inset) {
+
+    /* PREV / NEXT */
+
+    .carousel-prev,
+    .carousel-next {
+      @extend .widget;
+      @extend .actionable;
+      @include z-depth ( $carousel-outset-prev-next-z-depth );
+      @include color ( $carousel-outset-prev-next-color, $carousel-outset-prev-next-color-basic );
+      align-self: center;
+      padding: $carousel-outset-prev-next-padding-vertical $carousel-outset-prev-next-padding-horizontal;
+      border-radius: 50%;
+    }
+
+    /* PREV */
+
+    .carousel-prev {
+      order: 1;
+      margin-left: $gutter;
+      margin-right: $gutter;
+    }
+
+    /* NEXT */
+
+    .carousel-next {
+      order: 3;
+      margin-left: $gutter;
+      margin-right: $gutter;
+    }
+
+    /* ITEMS */
+
+    .carousel-items {
+      order: 2;
+    }
+
+  }
+
+  /* INSET */
+
+  &.inset {
+
+    /* PREV / NEXT */
+
+    .carousel-prev,
+    .carousel-next {
+
+      position: absolute;
+      z-index: $carousel-inset-prev-next-z-index;
+      display: flex;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+      font-size: $carousel-inset-prev-next-font-size;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        color: $carousel-inset-prev-next-color;
+        opacity: $carousel-inset-prev-next-opacity;
+        transition: opacity $carousel-inset-prev-next-transition-opacity-duration;
+      }
+
+    }
+
+    /* PREV */
+
+    .carousel-prev {
+      justify-content: flex-start;
+      left: 0;
+      padding-left: $gutter;
+      width: $carousel-inset-prev-width;
+    }
+
+    /* NEXT */
+
+    .carousel-next {
+      justify-content: flex-end;
+      right: 0;
+      padding-right: $gutter;
+      width: $carousel-inset-next-width;
+    }
+
+    /* HOVER */
+
+    &:hover {
+
+      /* PREV / NEXT */
+
+      .carousel-prev,
+      .carousel-next {
+
+        /* AFTER (ICON) */
+
+        &:after {
+          opacity: $carousel-inset-hover-prev-next-opacity;
+        }
+
+        /* HOVER */
+
+        &:hover {
+
+          /* AFTER (ICON) */
+
+          &:after {
+            opacity: $carousel-inset-prev-next-hover-opacity;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

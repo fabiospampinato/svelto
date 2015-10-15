@@ -10,6 +10,7 @@
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Disable scrolling while the navbar is open
+//TODO: Close with a flick
 
 (function ( $, _, window, document, undefined ) {
 

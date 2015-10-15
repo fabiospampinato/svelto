@@ -1,0 +1,37 @@
+
+extends ../layout.jade
+
+//- Carousel
+
+append main
+  +divider-block Carousel
+  
+  +carousel
+    +carousel-prev
+    +carousel-next
+    +carousel-indicators(5)
+    +carousel-items
+      +container.primary.centerer
+        p.text-center 1
+      +container.secondary.centerer
+        p.text-center 2
+      +container.tertiary.centerer
+        p.text-center 3
+      +container.quaternary.centerer
+        p.text-center 4
+
+  +divider-block Inset
+
+  +carousel.inset
+    +carousel-prev
+    +carousel-next
+    +carousel-indicators(5)
+    +carousel-items
+      +container.primary.centerer
+        p.text-center 1
+      +container.secondary.centerer
+        p.text-center 2
+      +container.tertiary.centerer
+        p.text-center 3
+      +container.quaternary.centerer
+        p.text-center 4

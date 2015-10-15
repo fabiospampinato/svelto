@@ -1,0 +1,57 @@
+
+/* =========================================================================
+ * Svelto - Carousel (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../icons/_settings.scss
+ * @requires ../label/_settings.scss
+ * ========================================================================= */
+
+/* CAROUSEL */
+
+$carousel-min-height: 200px !default;
+
+/* INDICATOR */
+
+$carousel-indicators-z-index: 101 !default;
+
+$carousel-indicator-color: $color-white !default;
+
+$carousel-indicator-size: 10px !default;
+$carousel-indicator-border-width: 2px !default;
+
+$carousel-indicator-opacity: 0.25 !default;
+$carousel-hover-indicator-opacity: 0.5 !default;
+$carousel-indicator-hover-opacity: 1 !default;
+
+$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
+
+/* OUTSET (PREV / NEXT) */
+
+$carousel-outset-prev-next-z-depth: 2 !default;
+
+$carousel-outset-prev-next-color: 'white' !default;
+$carousel-outset-prev-next-color-basic: false !default;
+
+$carousel-outset-prev-next-padding-vertical: $label-compact-padding-vertical !default;
+$carousel-outset-prev-next-padding-horizontal: $label-compact-padding-horizontal !default;
+
+/* INSET (PREV / NEXT) */
+
+$carousel-inset-prev-next-z-index: 100 !default;
+
+$carousel-inset-prev-next-font-size: 1em * $icon-scale-amount !default;
+
+$carousel-inset-prev-width: 20% !default;
+$carousel-inset-next-width: 100% - $carousel-inset-prev-width !default;
+
+$carousel-inset-prev-next-color: $carousel-indicator-color !default;
+
+$carousel-inset-prev-next-opacity: $carousel-indicator-opacity !default;
+$carousel-inset-hover-prev-next-opacity: $carousel-hover-indicator-opacity !default;
+$carousel-inset-prev-next-hover-opacity: $carousel-indicator-hover-opacity !default;
+
+$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-normal !default;

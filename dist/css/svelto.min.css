@@ -629,6 +629,8 @@ th {
 .primary.actionable.active,
 .primary.active.button,
 .primary.active.button-corner,
+.carousel:not(.inset) .primary.active.carousel-prev,
+.carousel:not(.inset) .primary.active.carousel-next,
 .primary.button.active,
 .primary.button-corner.active {
   background: #1460b7 !important;
@@ -637,6 +639,8 @@ th {
 .primary.actionable.active.transparentize,
 .primary.active.transparentize.button,
 .primary.active.transparentize.button-corner,
+.carousel:not(.inset) .primary.active.transparentize.carousel-prev,
+.carousel:not(.inset) .primary.active.transparentize.carousel-next,
 .primary.button.active.transparentize,
 .primary.button-corner.active.transparentize {
   background: rgba(20, 96, 183, 0.95) !important;
@@ -645,6 +649,8 @@ th {
 .primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .primary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .primary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #166ac9 !important;
@@ -653,6 +659,8 @@ th {
 .primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .primary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .primary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(22, 106, 201, 0.95) !important;
@@ -661,6 +669,8 @@ th {
 .primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .primary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .primary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #1460b7 !important;
@@ -669,6 +679,8 @@ th {
 .primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .primary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .primary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(20, 96, 183, 0.95) !important;
@@ -727,6 +739,8 @@ th {
 .secondary.actionable.active,
 .secondary.active.button,
 .secondary.active.button-corner,
+.carousel:not(.inset) .secondary.active.carousel-prev,
+.carousel:not(.inset) .secondary.active.carousel-next,
 .secondary.button.active,
 .secondary.button-corner.active {
   background: #e56700 !important;
@@ -735,6 +749,8 @@ th {
 .secondary.actionable.active.transparentize,
 .secondary.active.transparentize.button,
 .secondary.active.transparentize.button-corner,
+.carousel:not(.inset) .secondary.active.transparentize.carousel-prev,
+.carousel:not(.inset) .secondary.active.transparentize.carousel-next,
 .secondary.button.active.transparentize,
 .secondary.button-corner.active.transparentize {
   background: rgba(229, 103, 0, 0.95) !important;
@@ -743,6 +759,8 @@ th {
 .secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .secondary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .secondary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #f97100 !important;
@@ -751,6 +769,8 @@ th {
 .secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .secondary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .secondary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(249, 113, 0, 0.95) !important;
@@ -759,6 +779,8 @@ th {
 .secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .secondary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .secondary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #e56700 !important;
@@ -767,6 +789,8 @@ th {
 .secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .secondary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .secondary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(229, 103, 0, 0.95) !important;
@@ -825,6 +849,8 @@ th {
 .tertiary.actionable.active,
 .tertiary.active.button,
 .tertiary.active.button-corner,
+.carousel:not(.inset) .tertiary.active.carousel-prev,
+.carousel:not(.inset) .tertiary.active.carousel-next,
 .tertiary.button.active,
 .tertiary.button-corner.active {
   background: #641991 !important;
@@ -833,6 +859,8 @@ th {
 .tertiary.actionable.active.transparentize,
 .tertiary.active.transparentize.button,
 .tertiary.active.transparentize.button-corner,
+.carousel:not(.inset) .tertiary.active.transparentize.carousel-prev,
+.carousel:not(.inset) .tertiary.active.transparentize.carousel-next,
 .tertiary.button.active.transparentize,
 .tertiary.button-corner.active.transparentize {
   background: rgba(100, 25, 145, 0.95) !important;
@@ -841,6 +869,8 @@ th {
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .tertiary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .tertiary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #701da3 !important;
@@ -849,6 +879,8 @@ th {
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .tertiary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .tertiary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(112, 29, 163, 0.95) !important;
@@ -857,6 +889,8 @@ th {
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .tertiary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .tertiary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #641991 !important;
@@ -865,6 +899,8 @@ th {
 .tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .tertiary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .tertiary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(100, 25, 145, 0.95) !important;
@@ -923,6 +959,8 @@ th {
 .quaternary.actionable.active,
 .quaternary.active.button,
 .quaternary.active.button-corner,
+.carousel:not(.inset) .quaternary.active.carousel-prev,
+.carousel:not(.inset) .quaternary.active.carousel-next,
 .quaternary.button.active,
 .quaternary.button-corner.active {
   background: #2b762f !important;
@@ -931,6 +969,8 @@ th {
 .quaternary.actionable.active.transparentize,
 .quaternary.active.transparentize.button,
 .quaternary.active.transparentize.button-corner,
+.carousel:not(.inset) .quaternary.active.transparentize.carousel-prev,
+.carousel:not(.inset) .quaternary.active.transparentize.carousel-next,
 .quaternary.button.active.transparentize,
 .quaternary.button-corner.active.transparentize {
   background: rgba(43, 118, 47, 0.95) !important;
@@ -939,6 +979,8 @@ th {
 .quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .quaternary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .quaternary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #318435 !important;
@@ -947,6 +989,8 @@ th {
 .quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .quaternary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .quaternary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(49, 132, 53, 0.95) !important;
@@ -955,6 +999,8 @@ th {
 .quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .quaternary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .quaternary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #2b762f !important;
@@ -963,6 +1009,8 @@ th {
 .quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .quaternary.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .quaternary.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(43, 118, 47, 0.95) !important;
@@ -1021,6 +1069,8 @@ th {
 .white.actionable.active,
 .white.active.button,
 .white.active.button-corner,
+.carousel:not(.inset) .white.active.carousel-prev,
+.carousel:not(.inset) .white.active.carousel-next,
 .white.button.active,
 .white.button-corner.active {
   background: whitesmoke !important;
@@ -1029,6 +1079,8 @@ th {
 .white.actionable.active.transparentize,
 .white.active.transparentize.button,
 .white.active.transparentize.button-corner,
+.carousel:not(.inset) .white.active.transparentize.carousel-prev,
+.carousel:not(.inset) .white.active.transparentize.carousel-next,
 .white.button.active.transparentize,
 .white.button-corner.active.transparentize {
   background: rgba(245, 245, 245, 0.95) !important;
@@ -1037,6 +1089,8 @@ th {
 .white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .white.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .white.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fafafa !important;
@@ -1045,6 +1099,8 @@ th {
 .white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .white.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .white.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(250, 250, 250, 0.95) !important;
@@ -1053,6 +1109,8 @@ th {
 .white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .white.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .white.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: whitesmoke !important;
@@ -1061,6 +1119,8 @@ th {
 .white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .white.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .white.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(245, 245, 245, 0.95) !important;
@@ -1119,6 +1179,8 @@ th {
 .gray.actionable.active,
 .gray.active.button,
 .gray.active.button-corner,
+.carousel:not(.inset) .gray.active.carousel-prev,
+.carousel:not(.inset) .gray.active.carousel-next,
 .gray.button.active,
 .gray.button-corner.active {
   background: #dbdbdb !important;
@@ -1127,6 +1189,8 @@ th {
 .gray.actionable.active.transparentize,
 .gray.active.transparentize.button,
 .gray.active.transparentize.button-corner,
+.carousel:not(.inset) .gray.active.transparentize.carousel-prev,
+.carousel:not(.inset) .gray.active.transparentize.carousel-next,
 .gray.button.active.transparentize,
 .gray.button-corner.active.transparentize {
   background: rgba(219, 219, 219, 0.95) !important;
@@ -1135,6 +1199,8 @@ th {
 .gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .gray.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .gray.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #e5e5e5 !important;
@@ -1143,6 +1209,8 @@ th {
 .gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .gray.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .gray.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(229, 229, 229, 0.95) !important;
@@ -1151,6 +1219,8 @@ th {
 .gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .gray.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .gray.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #dbdbdb !important;
@@ -1159,6 +1229,8 @@ th {
 .gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .gray.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .gray.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(219, 219, 219, 0.95) !important;
@@ -1217,6 +1289,8 @@ th {
 .black.actionable.active,
 .black.active.button,
 .black.active.button-corner,
+.carousel:not(.inset) .black.active.carousel-prev,
+.carousel:not(.inset) .black.active.carousel-next,
 .black.button.active,
 .black.button-corner.active {
   background: #1c1c1c !important;
@@ -1225,6 +1299,8 @@ th {
 .black.actionable.active.transparentize,
 .black.active.transparentize.button,
 .black.active.transparentize.button-corner,
+.carousel:not(.inset) .black.active.transparentize.carousel-prev,
+.carousel:not(.inset) .black.active.transparentize.carousel-next,
 .black.button.active.transparentize,
 .black.button-corner.active.transparentize {
   background: rgba(28, 28, 28, 0.95) !important;
@@ -1233,6 +1309,8 @@ th {
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .black.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .black.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #262626 !important;
@@ -1241,6 +1319,8 @@ th {
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .black.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .black.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(38, 38, 38, 0.95) !important;
@@ -1249,6 +1329,8 @@ th {
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .black.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .black.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #1c1c1c !important;
@@ -1257,6 +1339,8 @@ th {
 .black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .black.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .black.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(28, 28, 28, 0.95) !important;
@@ -1315,6 +1399,8 @@ th {
 .yellow.actionable.active,
 .yellow.active.button,
 .yellow.active.button-corner,
+.carousel:not(.inset) .yellow.active.carousel-prev,
+.carousel:not(.inset) .yellow.active.carousel-next,
 .yellow.button.active,
 .yellow.button-corner.active {
   background: #fabc36 !important;
@@ -1323,6 +1409,8 @@ th {
 .yellow.actionable.active.transparentize,
 .yellow.active.transparentize.button,
 .yellow.active.transparentize.button-corner,
+.carousel:not(.inset) .yellow.active.transparentize.carousel-prev,
+.carousel:not(.inset) .yellow.active.transparentize.carousel-next,
 .yellow.button.active.transparentize,
 .yellow.button-corner.active.transparentize {
   background: rgba(250, 188, 54, 0.95) !important;
@@ -1331,6 +1419,8 @@ th {
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .yellow.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .yellow.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #fac24a !important;
@@ -1339,6 +1429,8 @@ th {
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .yellow.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .yellow.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(250, 194, 74, 0.95) !important;
@@ -1347,6 +1439,8 @@ th {
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .yellow.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .yellow.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #fabc36 !important;
@@ -1355,6 +1449,8 @@ th {
 .yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .yellow.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .yellow.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(250, 188, 54, 0.95) !important;
@@ -1413,6 +1509,8 @@ th {
 .olive.actionable.active,
 .olive.active.button,
 .olive.active.button-corner,
+.carousel:not(.inset) .olive.active.carousel-prev,
+.carousel:not(.inset) .olive.active.carousel-next,
 .olive.button.active,
 .olive.button-corner.active {
   background: #cbda30 !important;
@@ -1421,6 +1519,8 @@ th {
 .olive.actionable.active.transparentize,
 .olive.active.transparentize.button,
 .olive.active.transparentize.button-corner,
+.carousel:not(.inset) .olive.active.transparentize.carousel-prev,
+.carousel:not(.inset) .olive.active.transparentize.carousel-next,
 .olive.button.active.transparentize,
 .olive.button-corner.active.transparentize {
   background: rgba(203, 218, 48, 0.95) !important;
@@ -1429,6 +1529,8 @@ th {
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .olive.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .olive.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #cfde42 !important;
@@ -1437,6 +1539,8 @@ th {
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .olive.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .olive.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(207, 222, 66, 0.95) !important;
@@ -1445,6 +1549,8 @@ th {
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .olive.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .olive.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #cbda30 !important;
@@ -1453,6 +1559,8 @@ th {
 .olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .olive.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .olive.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(203, 218, 48, 0.95) !important;
@@ -1511,6 +1619,8 @@ th {
 .green.actionable.active,
 .green.active.button,
 .green.active.button-corner,
+.carousel:not(.inset) .green.active.carousel-prev,
+.carousel:not(.inset) .green.active.carousel-next,
 .green.button.active,
 .green.button-corner.active {
   background: #49a84d !important;
@@ -1519,6 +1629,8 @@ th {
 .green.actionable.active.transparentize,
 .green.active.transparentize.button,
 .green.active.transparentize.button-corner,
+.carousel:not(.inset) .green.active.transparentize.carousel-prev,
+.carousel:not(.inset) .green.active.transparentize.carousel-next,
 .green.button.active.transparentize,
 .green.button-corner.active.transparentize {
   background: rgba(73, 168, 77, 0.95) !important;
@@ -1527,6 +1639,8 @@ th {
 .green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .green.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .green.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #52b455 !important;
@@ -1535,6 +1649,8 @@ th {
 .green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .green.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .green.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(82, 180, 85, 0.95) !important;
@@ -1543,6 +1659,8 @@ th {
 .green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .green.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .green.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #49a84d !important;
@@ -1551,6 +1669,8 @@ th {
 .green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .green.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .green.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(73, 168, 77, 0.95) !important;
@@ -1609,6 +1729,8 @@ th {
 .blue.actionable.active,
 .blue.active.button,
 .blue.active.button-corner,
+.carousel:not(.inset) .blue.active.carousel-prev,
+.carousel:not(.inset) .blue.active.carousel-next,
 .blue.button.active,
 .blue.button-corner.active {
   background: #1791f2 !important;
@@ -1617,6 +1739,8 @@ th {
 .blue.actionable.active.transparentize,
 .blue.active.transparentize.button,
 .blue.active.transparentize.button-corner,
+.carousel:not(.inset) .blue.active.transparentize.carousel-prev,
+.carousel:not(.inset) .blue.active.transparentize.carousel-next,
 .blue.button.active.transparentize,
 .blue.button-corner.active.transparentize {
   background: rgba(23, 145, 242, 0.95) !important;
@@ -1625,6 +1749,8 @@ th {
 .blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .blue.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .blue.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #2b9bf4 !important;
@@ -1633,6 +1759,8 @@ th {
 .blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .blue.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .blue.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(43, 155, 244, 0.95) !important;
@@ -1641,6 +1769,8 @@ th {
 .blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .blue.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .blue.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #1791f2 !important;
@@ -1649,6 +1779,8 @@ th {
 .blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .blue.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .blue.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(23, 145, 242, 0.95) !important;
@@ -1707,6 +1839,8 @@ th {
 .violet.actionable.active,
 .violet.active.button,
 .violet.active.button-corner,
+.carousel:not(.inset) .violet.active.carousel-prev,
+.carousel:not(.inset) .violet.active.carousel-next,
 .violet.button.active,
 .violet.button-corner.active {
   background: #6338af !important;
@@ -1715,6 +1849,8 @@ th {
 .violet.actionable.active.transparentize,
 .violet.active.transparentize.button,
 .violet.active.transparentize.button-corner,
+.carousel:not(.inset) .violet.active.transparentize.carousel-prev,
+.carousel:not(.inset) .violet.active.transparentize.carousel-next,
 .violet.button.active.transparentize,
 .violet.button-corner.active.transparentize {
   background: rgba(99, 56, 175, 0.95) !important;
@@ -1723,6 +1859,8 @@ th {
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .violet.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .violet.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #6b3cbf !important;
@@ -1731,6 +1869,8 @@ th {
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .violet.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .violet.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(107, 60, 191, 0.95) !important;
@@ -1739,6 +1879,8 @@ th {
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .violet.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .violet.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #6338af !important;
@@ -1747,6 +1889,8 @@ th {
 .violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .violet.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .violet.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(99, 56, 175, 0.95) !important;
@@ -1805,6 +1949,8 @@ th {
 .orange.actionable.active,
 .orange.active.button,
 .orange.active.button-corner,
+.carousel:not(.inset) .orange.active.carousel-prev,
+.carousel:not(.inset) .orange.active.carousel-next,
 .orange.button.active,
 .orange.button-corner.active {
   background: #f59200 !important;
@@ -1813,6 +1959,8 @@ th {
 .orange.actionable.active.transparentize,
 .orange.active.transparentize.button,
 .orange.active.transparentize.button-corner,
+.carousel:not(.inset) .orange.active.transparentize.carousel-prev,
+.carousel:not(.inset) .orange.active.transparentize.carousel-next,
 .orange.button.active.transparentize,
 .orange.button-corner.active.transparentize {
   background: rgba(245, 146, 0, 0.95) !important;
@@ -1821,6 +1969,8 @@ th {
 .orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .orange.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .orange.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #ff9c0a !important;
@@ -1829,6 +1979,8 @@ th {
 .orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .orange.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .orange.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(255, 156, 10, 0.95) !important;
@@ -1837,6 +1989,8 @@ th {
 .orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .orange.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .orange.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #f59200 !important;
@@ -1845,6 +1999,8 @@ th {
 .orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .orange.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .orange.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(245, 146, 0, 0.95) !important;
@@ -1903,6 +2059,8 @@ th {
 .purple.actionable.active,
 .purple.active.button,
 .purple.active.button-corner,
+.carousel:not(.inset) .purple.active.carousel-prev,
+.carousel:not(.inset) .purple.active.carousel-next,
 .purple.button.active,
 .purple.button-corner.active {
   background: #9525a8 !important;
@@ -1911,6 +2069,8 @@ th {
 .purple.actionable.active.transparentize,
 .purple.active.transparentize.button,
 .purple.active.transparentize.button-corner,
+.carousel:not(.inset) .purple.active.transparentize.carousel-prev,
+.carousel:not(.inset) .purple.active.transparentize.carousel-next,
 .purple.button.active.transparentize,
 .purple.button-corner.active.transparentize {
   background: rgba(149, 37, 168, 0.95) !important;
@@ -1919,6 +2079,8 @@ th {
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .purple.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .purple.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #a329b8 !important;
@@ -1927,6 +2089,8 @@ th {
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .purple.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .purple.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(163, 41, 184, 0.95) !important;
@@ -1935,6 +2099,8 @@ th {
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .purple.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .purple.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #9525a8 !important;
@@ -1943,6 +2109,8 @@ th {
 .purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .purple.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .purple.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(149, 37, 168, 0.95) !important;
@@ -2001,6 +2169,8 @@ th {
 .red.actionable.active,
 .red.active.button,
 .red.active.button-corner,
+.carousel:not(.inset) .red.active.carousel-prev,
+.carousel:not(.inset) .red.active.carousel-next,
 .red.button.active,
 .red.button-corner.active {
   background: #f33a2c !important;
@@ -2009,6 +2179,8 @@ th {
 .red.actionable.active.transparentize,
 .red.active.transparentize.button,
 .red.active.transparentize.button-corner,
+.carousel:not(.inset) .red.active.transparentize.carousel-prev,
+.carousel:not(.inset) .red.active.transparentize.carousel-next,
 .red.button.active.transparentize,
 .red.button-corner.active.transparentize {
   background: rgba(243, 58, 44, 0.95) !important;
@@ -2017,6 +2189,8 @@ th {
 .red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .red.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .red.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #f54c40 !important;
@@ -2025,6 +2199,8 @@ th {
 .red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .red.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .red.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(245, 76, 64, 0.95) !important;
@@ -2033,6 +2209,8 @@ th {
 .red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .red.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .red.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #f33a2c !important;
@@ -2041,6 +2219,8 @@ th {
 .red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .red.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .red.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(243, 58, 44, 0.95) !important;
@@ -2099,6 +2279,8 @@ th {
 .pink.actionable.active,
 .pink.active.button,
 .pink.active.button-corner,
+.carousel:not(.inset) .pink.active.carousel-prev,
+.carousel:not(.inset) .pink.active.carousel-next,
 .pink.button.active,
 .pink.button-corner.active {
   background: #e6175d !important;
@@ -2107,6 +2289,8 @@ th {
 .pink.actionable.active.transparentize,
 .pink.active.transparentize.button,
 .pink.active.transparentize.button-corner,
+.carousel:not(.inset) .pink.active.transparentize.carousel-prev,
+.carousel:not(.inset) .pink.active.transparentize.carousel-next,
 .pink.button.active.transparentize,
 .pink.button-corner.active.transparentize {
   background: rgba(230, 23, 93, 0.95) !important;
@@ -2115,6 +2299,8 @@ th {
 .pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .pink.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .pink.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #ea2769 !important;
@@ -2123,6 +2309,8 @@ th {
 .pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .pink.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .pink.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(234, 39, 105, 0.95) !important;
@@ -2131,6 +2319,8 @@ th {
 .pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .pink.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .pink.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #e6175d !important;
@@ -2139,6 +2329,8 @@ th {
 .pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .pink.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .pink.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(230, 23, 93, 0.95) !important;
@@ -2197,6 +2389,8 @@ th {
 .teal.actionable.active,
 .teal.active.button,
 .teal.active.button-corner,
+.carousel:not(.inset) .teal.active.carousel-prev,
+.carousel:not(.inset) .teal.active.carousel-next,
 .teal.button.active,
 .teal.button-corner.active {
   background: #008c7f !important;
@@ -2205,6 +2399,8 @@ th {
 .teal.actionable.active.transparentize,
 .teal.active.transparentize.button,
 .teal.active.transparentize.button-corner,
+.carousel:not(.inset) .teal.active.transparentize.carousel-prev,
+.carousel:not(.inset) .teal.active.transparentize.carousel-next,
 .teal.button.active.transparentize,
 .teal.button-corner.active.transparentize {
   background: rgba(0, 140, 127, 0.95) !important;
@@ -2213,6 +2409,8 @@ th {
 .teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .teal.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .teal.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #00a091 !important;
@@ -2221,6 +2419,8 @@ th {
 .teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .teal.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .teal.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(0, 160, 145, 0.95) !important;
@@ -2229,6 +2429,8 @@ th {
 .teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .teal.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .teal.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #008c7f !important;
@@ -2237,6 +2439,8 @@ th {
 .teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .teal.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .teal.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(0, 140, 127, 0.95) !important;
@@ -2295,6 +2499,8 @@ th {
 .brown.actionable.active,
 .brown.active.button,
 .brown.active.button-corner,
+.carousel:not(.inset) .brown.active.carousel-prev,
+.carousel:not(.inset) .brown.active.carousel-next,
 .brown.button.active,
 .brown.button-corner.active {
   background: #735144 !important;
@@ -2303,6 +2509,8 @@ th {
 .brown.actionable.active.transparentize,
 .brown.active.transparentize.button,
 .brown.active.transparentize.button-corner,
+.carousel:not(.inset) .brown.active.transparentize.carousel-prev,
+.carousel:not(.inset) .brown.active.transparentize.carousel-next,
 .brown.button.active.transparentize,
 .brown.button-corner.active.transparentize {
   background: rgba(115, 81, 68, 0.95) !important;
@@ -2311,6 +2519,8 @@ th {
 .brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .brown.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .brown.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #7f594c !important;
@@ -2319,6 +2529,8 @@ th {
 .brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .brown.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .brown.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(127, 89, 76, 0.95) !important;
@@ -2327,6 +2539,8 @@ th {
 .brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .brown.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .brown.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #735144 !important;
@@ -2335,6 +2549,8 @@ th {
 .brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .brown.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .brown.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(115, 81, 68, 0.95) !important;
@@ -2393,6 +2609,8 @@ th {
 .transparent.actionable.active,
 .transparent.active.button,
 .transparent.active.button-corner,
+.carousel:not(.inset) .transparent.active.carousel-prev,
+.carousel:not(.inset) .transparent.active.carousel-next,
 .transparent.button.active,
 .transparent.button-corner.active {
   background: transparent !important;
@@ -2401,6 +2619,8 @@ th {
 .transparent.actionable.active.transparentize,
 .transparent.active.transparentize.button,
 .transparent.active.transparentize.button-corner,
+.carousel:not(.inset) .transparent.active.transparentize.carousel-prev,
+.carousel:not(.inset) .transparent.active.transparentize.carousel-next,
 .transparent.button.active.transparentize,
 .transparent.button-corner.active.transparentize {
   background: transparent !important;
@@ -2409,6 +2629,8 @@ th {
 .transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .transparent.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .transparent.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: rgba(5, 5, 5, 0) !important;
@@ -2417,6 +2639,8 @@ th {
 .transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .transparent.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .transparent.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(5, 5, 5, 0) !important;
@@ -2425,6 +2649,8 @@ th {
 .transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .transparent.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .transparent.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: transparent !important;
@@ -2433,6 +2659,8 @@ th {
 .transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .transparent.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .transparent.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: transparent !important;
@@ -2483,6 +2711,8 @@ th {
 .inherit.actionable.active,
 .inherit.active.button,
 .inherit.active.button-corner,
+.carousel:not(.inset) .inherit.active.carousel-prev,
+.carousel:not(.inset) .inherit.active.carousel-next,
 .inherit.button.active,
 .inherit.button-corner.active {
   background: inherit !important;
@@ -2491,6 +2721,8 @@ th {
 .inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .inherit.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .inherit.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: inherit !important;
@@ -2499,6 +2731,8 @@ th {
 .inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .inherit.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .inherit.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: inherit !important;
@@ -2541,6 +2775,8 @@ th {
 .base.actionable.active,
 .base.active.button,
 .base.active.button-corner,
+.carousel:not(.inset) .base.active.carousel-prev,
+.carousel:not(.inset) .base.active.carousel-next,
 .base.button.active,
 .base.button-corner.active {
   background: #e0e5e8 !important;
@@ -2549,6 +2785,8 @@ th {
 .base.actionable.active.transparentize,
 .base.active.transparentize.button,
 .base.active.transparentize.button-corner,
+.carousel:not(.inset) .base.active.transparentize.carousel-prev,
+.carousel:not(.inset) .base.active.transparentize.carousel-next,
 .base.button.active.transparentize,
 .base.button-corner.active.transparentize {
   background: rgba(224, 229, 232, 0.95) !important;
@@ -2557,6 +2795,8 @@ th {
 .base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .base.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .base.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: #e6eaed !important;
@@ -2565,6 +2805,8 @@ th {
 .base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .base.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .base.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
   background: rgba(230, 234, 237, 0.95) !important;
@@ -2573,6 +2815,8 @@ th {
 .base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .base.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .base.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: #e0e5e8 !important;
@@ -2581,6 +2825,8 @@ th {
 .base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .base.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .base.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
   background: rgba(224, 229, 232, 0.95) !important;
@@ -2866,7 +3112,9 @@ th {
 /* WIDGET */
 .widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
 .card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .colorpicker, .datepicker, .embedded, .flippable, form, header, i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
+.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .carousel, .carousel:not(.inset) .carousel-prev,
+.carousel:not(.inset) .carousel-next, .colorpicker, .datepicker, .embedded, .flippable, form, header, i.icon, .carousel-prev:after,
+.carousel-next:after, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
@@ -2878,7 +3126,9 @@ table.table.sortable th[data-sort]:after, .icons, .image-wrp, .input-wrp, .texta
 
 .widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
 .card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, form > :last-child, header > :last-child, i.icon > :last-child, .rater-star:before > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
+.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .carousel > :last-child, .carousel:not(.inset) .carousel-prev > :last-child,
+.carousel:not(.inset) .carousel-next > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, form > :last-child, header > :last-child, i.icon > :last-child, .carousel-prev:after > :last-child,
+.carousel-next:after > :last-child, .rater-star:before > :last-child, .slider:not(.disabled) .slider-min:hover:after > :last-child,
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
@@ -2888,7 +3138,9 @@ table.table.sortable th[data-sort]:after > :last-child, .icons > :last-child, .i
 
 .widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
 .card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, form > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .rater-star:before > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
+.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .carousel > :last-child.multiple, .carousel:not(.inset) .carousel-prev > :last-child.multiple,
+.carousel:not(.inset) .carousel-next > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, form > :last-child.multiple, header > :last-child.multiple, i.icon > :last-child.multiple, .carousel-prev:after > :last-child.multiple,
+.carousel-next:after > :last-child.multiple, .rater-star:before > :last-child.multiple, .slider:not(.disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
@@ -2905,6 +3157,9 @@ label.disabled,
 .disabled.card-header,
 .disabled.card-block,
 .disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card,
+.disabled.carousel,
+.carousel:not(.inset) .disabled.carousel-prev,
+.carousel:not(.inset) .disabled.carousel-next,
 .disabled.colorpicker,
 .disabled.datepicker,
 .disabled.embedded,
@@ -2912,7 +3167,8 @@ label.disabled,
 form.disabled,
 header.disabled,
 i.disabled.icon,
-.disabled.rater-star:before, .slider:not(.disabled) .disabled.slider-min:hover:after,
+.disabled.carousel-prev:after,
+.disabled.carousel-next:after, .disabled.rater-star:before, .slider:not(.disabled) .disabled.slider-min:hover:after,
 .slider:not(.disabled) .disabled.slider-max:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-min:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-max:hover:after, table.table.sortable th.disabled[data-sort]:before,
@@ -2934,7 +3190,9 @@ table.disabled.table,
 blockquote.disabled,
 .widget[class*="-disabled"], [class*="-disabled"].accordion, [class*="-disabled"].toolbar, label[class*="-disabled"], [class*="-disabled"].label, [class*="-disabled"].button, [class*="-disabled"].container, [class*="-disabled"].card-header,
 [class*="-disabled"].card-block,
-[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, form[class*="-disabled"], header[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].rater-star:before, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
+[class*="-disabled"].card-footer, footer[class*="-disabled"], .image-wrp [class*="-disabled"].image-caption, [class*="-disabled"].infobar, [class*="-disabled"].tagbox, [class*="-disabled"].card, [class*="-disabled"].carousel, .carousel:not(.inset) [class*="-disabled"].carousel-prev,
+.carousel:not(.inset) [class*="-disabled"].carousel-next, [class*="-disabled"].colorpicker, [class*="-disabled"].datepicker, [class*="-disabled"].embedded, [class*="-disabled"].flippable, form[class*="-disabled"], header[class*="-disabled"], i[class*="-disabled"].icon, [class*="-disabled"].carousel-prev:after,
+[class*="-disabled"].carousel-next:after, [class*="-disabled"].rater-star:before, .slider:not(.disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
@@ -3356,6 +3614,10 @@ label {
 .label.actionable.active,
 .active.button,
 .label.active.button-corner,
+.carousel:not(.inset) .label.active.carousel-prev,
+.carousel:not(.inset) .active.carousel-prev.button,
+.carousel:not(.inset) .label.active.carousel-next,
+.carousel:not(.inset) .active.carousel-next.button,
 .label.button.active,
 .button.active,
 .label.button-corner.active, .button-corner.active.button {
@@ -3365,6 +3627,8 @@ label {
 .label.actionable.active.transparentize,
 .active.transparentize.button,
 .label.active.transparentize.button-corner,
+.carousel:not(.inset) .label.active.transparentize.carousel-prev,
+.carousel:not(.inset) .label.active.transparentize.carousel-next,
 .label.button.active.transparentize,
 .button.active.transparentize,
 .label.button-corner.active.transparentize, .button-corner.active.transparentize.button {
@@ -3374,6 +3638,8 @@ label {
 .label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
@@ -3383,6 +3649,8 @@ label {
 .label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
@@ -3392,6 +3660,8 @@ label {
 .label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
@@ -3401,6 +3671,8 @@ label {
 .label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
 .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize, .button-corner.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
@@ -3514,7 +3786,7 @@ label {
   margin-left: 0.75em;
 }
 
-.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon, .label > :not(.label):not(.button):not(.sub) + .rater-star:before, .button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon, .label > :not(.label):not(.button):not(.sub) + .carousel-prev:after, .button > :not(.label):not(.button):not(.sub) + .carousel-prev:after, .label > :not(.label):not(.button):not(.sub) + .carousel-next:after, .button > :not(.label):not(.button):not(.sub) + .carousel-next:after, .label > :not(.label):not(.button):not(.sub) + .rater-star:before, .button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
 .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
@@ -3530,7 +3802,7 @@ table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort
   margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon, .label.compact > :not(.label):not(.button):not(.sub) + .rater-star:before, .compact.button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
+.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon, .label.compact > :not(.label):not(.button):not(.sub) + .carousel-prev:after, .compact.button > :not(.label):not(.button):not(.sub) + .carousel-prev:after, .label.compact > :not(.label):not(.button):not(.sub) + .carousel-next:after, .compact.button > :not(.label):not(.button):not(.sub) + .carousel-next:after, .label.compact > :not(.label):not(.button):not(.sub) + .rater-star:before, .compact.button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
 .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
 .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after,
@@ -3778,7 +4050,9 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
 .button-tag > *.button:before.active,
 .label-tag > *.button-corner:before.active,
 .button-tag > *.button-corner:before.active,
-.label-tag > *:before.button.active,
+.carousel:not(.inset) .label-tag > *.carousel-prev:before.active,
+.carousel:not(.inset) .button-tag > *.carousel-prev:before.active,
+.carousel:not(.inset) .label-tag > *.carousel-next:before.active, .carousel:not(.inset) .button-tag > *.carousel-next:before.active, .label-tag > *:before.button.active,
 .button-tag > *:before.button.active,
 .label-tag > *:before.button-corner.active, .button-tag > *:before.button-corner.active {
   background: inherit ;
@@ -3790,7 +4064,9 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
 .button-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .button-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.label-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .label-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .button-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .label-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .button-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .button-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
 .label-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
   background: inherit ;
@@ -3802,7 +4078,9 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
 .button-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .label-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .button-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.label-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .label-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .button-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .label-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .button-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .button-tag > *:before.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
 .label-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *:before.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
   background: inherit ;
@@ -4232,7 +4510,8 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
   max-width: 76rem;
 }
 
-.actionable:not([class*="disabled"]):not(.dragging), .button:not([class*="disabled"]):not(.dragging), .button-corner:not([class*="disabled"]):not(.dragging) {
+.actionable:not([class*="disabled"]):not(.dragging), .button:not([class*="disabled"]):not(.dragging), .button-corner:not([class*="disabled"]):not(.dragging), .carousel:not(.inset) .carousel-prev:not([class*="disabled"]):not(.dragging),
+.carousel:not(.inset) .carousel-next:not([class*="disabled"]):not(.dragging) {
   cursor: pointer;
 }
 
@@ -4429,6 +4708,361 @@ button {
 
 .card.outlined > img.outlined {
   width: calc(100% + 2px) !important;
+}
+
+/* =========================================================================
+ * Svelto - Carousel (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../icons/_settings.scss
+ * @requires ../label/_settings.scss
+ * ========================================================================= */
+/* CAROUSEL */
+/* INDICATOR */
+/* OUTSET (PREV / NEXT) */
+/* INSET (PREV / NEXT) */
+/* =========================================================================
+ * Svelto - Carousel v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+/* CAROUSEL */
+.carousel {
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+  overflow: hidden;
+  min-height: 200px;
+  /* PREVIOUS / NEXT */
+  /* PREVIOUS */
+  /* NEXT */
+  /* INDICATORS */
+  /* INDICATOR */
+  /* ITEMS */
+  /* HOVER */
+  /* OUTSET */
+  /* INSET */
+}
+
+.carousel-prev,
+.carousel-next {
+  /* AFTER (ICON) */
+}
+
+.carousel-prev:after,
+.carousel-next:after {
+  margin-bottom: 0;
+}
+
+.carousel-prev {
+  /* AFTER (ICON) */
+}
+
+.carousel-prev:after {
+  content: 'chevron_left';
+}
+
+.carousel-next {
+  /* AFTER (ICON) */
+}
+
+.carousel-next:after {
+  content: 'chevron_right';
+}
+
+.carousel-indicators {
+  z-index: 101;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  -webkit-justify-content: center;
+          justify-content: center;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+          transform: translateX(-50%);
+  justify-self: center;
+  padding: 10px;
+}
+
+.carousel-indicator {
+  width: 10px;
+  height: 10px;
+  border: 2px solid #ffffff;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  opacity: 0.25;
+  transition-property: background-color, opacity;
+  transition-duration: 0.35s;
+  /* HOVER */
+  /* NOT FIRST */
+  /* NOT LAST */
+  /* ACTIVE */
+}
+
+.carousel-indicator:hover {
+  opacity: 1 !important;
+}
+
+.carousel-indicator:not(:first-child) {
+  margin-left: 2.5px;
+}
+
+.carousel-indicator:not(:last-child) {
+  margin-right: 2.5px;
+}
+
+.carousel-indicator.active {
+  background-color: #ffffff;
+}
+
+.carousel-items {
+  position: relative;
+  -webkit-flex-grow: 1;
+          flex-grow: 1;
+  /* ITEM */
+}
+
+.carousel-items > * {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin-bottom: 0 !important;
+  border-radius: inherit;
+  /* FIRST */
+  /* INACTIVE */
+  /* ACTIVE */
+}
+
+.carousel-items > *:first-child {
+  z-index: 1;
+}
+
+.carousel:hover {
+  /* INDICATORS */
+}
+
+.carousel:hover .carousel-indicators {
+  /* INDICATOR */
+}
+
+.carousel:hover .carousel-indicators .carousel-indicator {
+  opacity: 0.5;
+}
+
+.carousel:not(.inset) {
+  /* PREV / NEXT */
+  /* PREV */
+  /* NEXT */
+  /* ITEMS */
+}
+
+.carousel:not(.inset) .carousel-prev,
+.carousel:not(.inset) .carousel-next {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
+  border-color: #d9d9d9 ;
+  color: #3f3f3f ;
+  background: #ffffff ;
+  -webkit-align-self: center;
+          align-self: center;
+  padding: 0.495em 0.495em;
+  border-radius: 50%;
+}
+
+.carousel:not(.inset) .carousel-prev.transparentize,
+.carousel:not(.inset) .carousel-next.transparentize {
+  border-color: rgba(217, 217, 217, 0.95) ;
+}
+
+.carousel:not(.inset) .carousel-prev.transparentize,
+.carousel:not(.inset) .carousel-next.transparentize {
+  background: rgba(255, 255, 255, 0.95) ;
+}
+
+.carousel:not(.inset) .carousel-prev.actionable.active,
+.carousel:not(.inset) .carousel-prev.active,
+.carousel:not(.inset) .carousel-prev.button.active,
+.carousel:not(.inset) .carousel-prev.button-corner.active,
+.carousel:not(.inset) .carousel-next.actionable.active,
+.carousel:not(.inset) .carousel-next.active, .carousel:not(.inset) .carousel-next.button.active,
+.carousel:not(.inset) .carousel-next.button-corner.active {
+  background: whitesmoke ;
+}
+
+.carousel:not(.inset) .carousel-prev.actionable.active.transparentize,
+.carousel:not(.inset) .carousel-prev.active.transparentize,
+.carousel:not(.inset) .carousel-prev.button.active.transparentize,
+.carousel:not(.inset) .carousel-prev.button-corner.active.transparentize,
+.carousel:not(.inset) .carousel-next.actionable.active.transparentize,
+.carousel:not(.inset) .carousel-next.active.transparentize, .carousel:not(.inset) .carousel-next.button.active.transparentize,
+.carousel:not(.inset) .carousel-next.button-corner.active.transparentize {
+  background: rgba(245, 245, 245, 0.95) ;
+}
+
+.carousel:not(.inset) .carousel-prev.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .carousel-prev.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .carousel-prev.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .carousel-next.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .carousel-next.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .carousel-next.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: #fafafa ;
+}
+
+.carousel:not(.inset) .carousel-prev.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .carousel-prev.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .carousel-prev.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .carousel-next.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize, .carousel:not(.inset) .carousel-next.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .carousel-next.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(250, 250, 250, 0.95) ;
+}
+
+.carousel:not(.inset) .carousel-prev.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .carousel-prev.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .carousel-prev.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .carousel-next.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .carousel-next.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .carousel-next.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: whitesmoke ;
+}
+
+.carousel:not(.inset) .carousel-prev.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .carousel-prev.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .carousel-prev.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .carousel-next.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize, .carousel:not(.inset) .carousel-next.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .carousel-next.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(245, 245, 245, 0.95) ;
+}
+
+.carousel:not(.inset) .carousel-prev.highlight:after,
+.carousel:not(.inset) .carousel-next.highlight:after {
+  border-color: #ef6c00 ;
+}
+
+.carousel:not(.inset) .carousel-prev.highlight:after.transparentize,
+.carousel:not(.inset) .carousel-next.highlight:after.transparentize {
+  border-color: rgba(239, 108, 0, 0.95) ;
+}
+
+.carousel:not(.inset) .carousel-prev p > a,
+.carousel:not(.inset) .carousel-next p > a {
+  color: #1565c0 ;
+}
+
+.carousel:not(.inset) .carousel-prev p > a:after,
+.carousel:not(.inset) .carousel-next p > a:after {
+  border-color: #166ac9 ;
+}
+
+.carousel:not(.inset) .carousel-prev p > a:hover,
+.carousel:not(.inset) .carousel-next p > a:hover {
+  color: #166ac9 ;
+}
+
+.carousel:not(.inset) .carousel-prev {
+  -webkit-order: 1;
+          order: 1;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.carousel:not(.inset) .carousel-next {
+  -webkit-order: 3;
+          order: 3;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.carousel:not(.inset) .carousel-items {
+  -webkit-order: 2;
+          order: 2;
+}
+
+.carousel.inset {
+  /* PREV / NEXT */
+  /* PREV */
+  /* NEXT */
+  /* HOVER */
+}
+
+.carousel.inset .carousel-prev,
+.carousel.inset .carousel-next {
+  position: absolute;
+  z-index: 100;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+          align-items: center;
+  top: 0;
+  bottom: 0;
+  cursor: pointer;
+  font-size: 1.5em;
+  /* AFTER (ICON) */
+}
+
+.carousel.inset .carousel-prev:after,
+.carousel.inset .carousel-next:after {
+  color: #ffffff;
+  opacity: 0.25;
+  transition: opacity 0.35s;
+}
+
+.carousel.inset .carousel-prev {
+  -webkit-justify-content: flex-start;
+          justify-content: flex-start;
+  left: 0;
+  padding-left: 10px;
+  width: 20%;
+}
+
+.carousel.inset .carousel-next {
+  -webkit-justify-content: flex-end;
+          justify-content: flex-end;
+  right: 0;
+  padding-right: 10px;
+  width: 80%;
+}
+
+.carousel.inset:hover {
+  /* PREV / NEXT */
+}
+
+.carousel.inset:hover .carousel-prev,
+.carousel.inset:hover .carousel-next {
+  /* AFTER (ICON) */
+  /* HOVER */
+}
+
+.carousel.inset:hover .carousel-prev:after,
+.carousel.inset:hover .carousel-next:after {
+  opacity: 0.5;
+}
+
+.carousel.inset:hover .carousel-prev:hover,
+.carousel.inset:hover .carousel-next:hover {
+  /* AFTER (ICON) */
+}
+
+.carousel.inset:hover .carousel-prev:hover:after,
+.carousel.inset:hover .carousel-next:hover:after {
+  opacity: 1;
 }
 
 /* =========================================================================
@@ -7319,7 +7953,8 @@ header .header-background {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* SCALED ICON SIZES */
-i.xxxxsmall.icon, .xxxxsmall.rater-star:before, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
+i.xxxxsmall.icon, .xxxxsmall.carousel-prev:after,
+.xxxxsmall.carousel-next:after, .xxxxsmall.rater-star:before, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxxsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after, table.table.sortable th.xxxxsmall[data-sort]:before,
@@ -7327,7 +7962,8 @@ table.table.sortable th.xxxxsmall[data-sort]:after, .xxxxsmall.icons {
   font-size: 0.375em !important;
 }
 
-i.xxxsmall.icon, .xxxsmall.rater-star:before, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
+i.xxxsmall.icon, .xxxsmall.carousel-prev:after,
+.xxxsmall.carousel-next:after, .xxxsmall.rater-star:before, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after, table.table.sortable th.xxxsmall[data-sort]:before,
@@ -7335,7 +7971,8 @@ table.table.sortable th.xxxsmall[data-sort]:after, .xxxsmall.icons {
   font-size: 0.5625em !important;
 }
 
-i.xxsmall.icon, .xxsmall.rater-star:before, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
+i.xxsmall.icon, .xxsmall.carousel-prev:after,
+.xxsmall.carousel-next:after, .xxsmall.rater-star:before, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
 .slider:not(.disabled) .xxsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxsmall.slider-max:hover:after, table.table.sortable th.xxsmall[data-sort]:before,
@@ -7343,7 +7980,8 @@ table.table.sortable th.xxsmall[data-sort]:after, .xxsmall.icons {
   font-size: 0.75em !important;
 }
 
-i.xsmall.icon, .xsmall.rater-star:before, .slider:not(.disabled) .xsmall.slider-min:hover:after,
+i.xsmall.icon, .xsmall.carousel-prev:after,
+.xsmall.carousel-next:after, .xsmall.rater-star:before, .slider:not(.disabled) .xsmall.slider-min:hover:after,
 .slider:not(.disabled) .xsmall.slider-max:hover:after,
 .slider:not(.slider-disabled) .xsmall.slider-min:hover:after,
 .slider:not(.slider-disabled) .xsmall.slider-max:hover:after, table.table.sortable th.xsmall[data-sort]:before,
@@ -7351,7 +7989,8 @@ table.table.sortable th.xsmall[data-sort]:after, .xsmall.icons {
   font-size: 1.125em !important;
 }
 
-i.small.icon, .small.rater-star:before, .slider:not(.disabled) .small.slider-min:hover:after,
+i.small.icon, .small.carousel-prev:after,
+.small.carousel-next:after, .small.rater-star:before, .slider:not(.disabled) .small.slider-min:hover:after,
 .slider:not(.disabled) .small.slider-max:hover:after,
 .slider:not(.slider-disabled) .small.slider-min:hover:after,
 .slider:not(.slider-disabled) .small.slider-max:hover:after, table.table.sortable th.small[data-sort]:before,
@@ -7359,7 +7998,8 @@ table.table.sortable th.small[data-sort]:after, .small.icons {
   font-size: 1.3125em !important;
 }
 
-i.medium.icon, .medium.rater-star:before, .slider:not(.disabled) .medium.slider-min:hover:after,
+i.medium.icon, .medium.carousel-prev:after,
+.medium.carousel-next:after, .medium.rater-star:before, .slider:not(.disabled) .medium.slider-min:hover:after,
 .slider:not(.disabled) .medium.slider-max:hover:after,
 .slider:not(.slider-disabled) .medium.slider-min:hover:after,
 .slider:not(.slider-disabled) .medium.slider-max:hover:after, table.table.sortable th.medium[data-sort]:before,
@@ -7367,7 +8007,8 @@ table.table.sortable th.medium[data-sort]:after, .medium.icons {
   font-size: 1.5em !important;
 }
 
-i.large.icon, .large.rater-star:before, .slider:not(.disabled) .large.slider-min:hover:after,
+i.large.icon, .large.carousel-prev:after,
+.large.carousel-next:after, .large.rater-star:before, .slider:not(.disabled) .large.slider-min:hover:after,
 .slider:not(.disabled) .large.slider-max:hover:after,
 .slider:not(.slider-disabled) .large.slider-min:hover:after,
 .slider:not(.slider-disabled) .large.slider-max:hover:after, table.table.sortable th.large[data-sort]:before,
@@ -7375,7 +8016,8 @@ table.table.sortable th.large[data-sort]:after, .large.icons {
   font-size: 1.875em !important;
 }
 
-i.xlarge.icon, .xlarge.rater-star:before, .slider:not(.disabled) .xlarge.slider-min:hover:after,
+i.xlarge.icon, .xlarge.carousel-prev:after,
+.xlarge.carousel-next:after, .xlarge.rater-star:before, .slider:not(.disabled) .xlarge.slider-min:hover:after,
 .slider:not(.disabled) .xlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xlarge.slider-max:hover:after, table.table.sortable th.xlarge[data-sort]:before,
@@ -7383,7 +8025,8 @@ table.table.sortable th.xlarge[data-sort]:after, .xlarge.icons {
   font-size: 2.25em !important;
 }
 
-i.xxlarge.icon, .xxlarge.rater-star:before, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
+i.xxlarge.icon, .xxlarge.carousel-prev:after,
+.xxlarge.carousel-next:after, .xxlarge.rater-star:before, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxlarge.slider-max:hover:after, table.table.sortable th.xxlarge[data-sort]:before,
@@ -7391,7 +8034,8 @@ table.table.sortable th.xxlarge[data-sort]:after, .xxlarge.icons {
   font-size: 2.625em !important;
 }
 
-i.xxxlarge.icon, .xxxlarge.rater-star:before, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
+i.xxxlarge.icon, .xxxlarge.carousel-prev:after,
+.xxxlarge.carousel-next:after, .xxxlarge.rater-star:before, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after, table.table.sortable th.xxxlarge[data-sort]:before,
@@ -7399,7 +8043,8 @@ table.table.sortable th.xxxlarge[data-sort]:after, .xxxlarge.icons {
   font-size: 3em !important;
 }
 
-i.xxxxlarge.icon, .xxxxlarge.rater-star:before, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
+i.xxxxlarge.icon, .xxxxlarge.carousel-prev:after,
+.xxxxlarge.carousel-next:after, .xxxxlarge.rater-star:before, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
 .slider:not(.disabled) .xxxxlarge.slider-max:hover:after,
 .slider:not(.slider-disabled) .xxxxlarge.slider-min:hover:after,
 .slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after, table.table.sortable th.xxxxlarge[data-sort]:before,
@@ -7408,7 +8053,8 @@ table.table.sortable th.xxxxlarge[data-sort]:after, .xxxxlarge.icons {
 }
 
 /* ICON */
-i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
+i.icon, .carousel-prev:after,
+.carousel-next:after, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
