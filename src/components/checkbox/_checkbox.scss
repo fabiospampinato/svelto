@@ -22,23 +22,16 @@
 
   .icons {
 
-    position: relative;
-
     /* ICON */
 
     .icon {
 
-      margin-bottom: 0;
       transition: opacity $checkbox-icon-transition-opacity-duration;
 
       &.icon-on {
         @include color-text ( $checkbox-icon-on-color );
         opacity: 0;
         z-index: 1;
-      }
-
-      &.icon-off {
-        @include fill-absolute ();
       }
 
     }

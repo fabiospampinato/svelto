@@ -2870,7 +2870,7 @@ th {
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
-table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
+table.table.sortable th[data-sort]:after, .icons, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
@@ -2882,7 +2882,7 @@ table.table.sortable th[data-sort]:after, .image-wrp, .input-wrp, .textarea-wrp,
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
-table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+table.table.sortable th[data-sort]:after > :last-child, .icons > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
@@ -2892,7 +2892,7 @@ table.table.sortable th[data-sort]:after > :last-child, .image-wrp > :last-child
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
-table.table.sortable th[data-sort]:after > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+table.table.sortable th[data-sort]:after > :last-child.multiple, .icons > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2916,7 +2916,8 @@ i.disabled.icon,
 .slider:not(.disabled) .disabled.slider-max:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-min:hover:after,
 .slider:not(.slider-disabled) .disabled.slider-max:hover:after, table.table.sortable th.disabled[data-sort]:before,
-table.table.sortable th.disabled[data-sort]:after, .disabled.image-wrp,
+table.table.sortable th.disabled[data-sort]:after, .disabled.icons,
+.disabled.image-wrp,
 .disabled.input-wrp,
 .disabled.textarea-wrp, .disabled.parallax,
 .disabled.placeholder,
@@ -2937,7 +2938,7 @@ blockquote.disabled,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
-table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].rater, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].icons, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].rater, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -4664,12 +4665,10 @@ button {
 }
 
 .checkbox .icons, .radio .icons {
-  position: relative;
   /* ICON */
 }
 
 .checkbox .icons .icon, .radio .icons .icon {
-  margin-bottom: 0;
   transition: opacity 0.15s;
 }
 
@@ -4677,14 +4676,6 @@ button {
   color: #ef6c00 ;
   opacity: 0;
   z-index: 1;
-}
-
-.checkbox .icons .icon.icon-off, .radio .icons .icon.icon-off {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
 }
 
 .checkbox.checked, .checked.radio {
@@ -7327,6 +7318,95 @@ header .header-background {
  * @requires ../sizes/_settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
+/* SCALED ICON SIZES */
+i.xxxxsmall.icon, .xxxxsmall.rater-star:before, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
+.slider:not(.disabled) .xxxxsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxxsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after, table.table.sortable th.xxxxsmall[data-sort]:before,
+table.table.sortable th.xxxxsmall[data-sort]:after, .xxxxsmall.icons {
+  font-size: 0.375em !important;
+}
+
+i.xxxsmall.icon, .xxxsmall.rater-star:before, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
+.slider:not(.disabled) .xxxsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after, table.table.sortable th.xxxsmall[data-sort]:before,
+table.table.sortable th.xxxsmall[data-sort]:after, .xxxsmall.icons {
+  font-size: 0.5625em !important;
+}
+
+i.xxsmall.icon, .xxsmall.rater-star:before, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
+.slider:not(.disabled) .xxsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxsmall.slider-max:hover:after, table.table.sortable th.xxsmall[data-sort]:before,
+table.table.sortable th.xxsmall[data-sort]:after, .xxsmall.icons {
+  font-size: 0.75em !important;
+}
+
+i.xsmall.icon, .xsmall.rater-star:before, .slider:not(.disabled) .xsmall.slider-min:hover:after,
+.slider:not(.disabled) .xsmall.slider-max:hover:after,
+.slider:not(.slider-disabled) .xsmall.slider-min:hover:after,
+.slider:not(.slider-disabled) .xsmall.slider-max:hover:after, table.table.sortable th.xsmall[data-sort]:before,
+table.table.sortable th.xsmall[data-sort]:after, .xsmall.icons {
+  font-size: 1.125em !important;
+}
+
+i.small.icon, .small.rater-star:before, .slider:not(.disabled) .small.slider-min:hover:after,
+.slider:not(.disabled) .small.slider-max:hover:after,
+.slider:not(.slider-disabled) .small.slider-min:hover:after,
+.slider:not(.slider-disabled) .small.slider-max:hover:after, table.table.sortable th.small[data-sort]:before,
+table.table.sortable th.small[data-sort]:after, .small.icons {
+  font-size: 1.3125em !important;
+}
+
+i.medium.icon, .medium.rater-star:before, .slider:not(.disabled) .medium.slider-min:hover:after,
+.slider:not(.disabled) .medium.slider-max:hover:after,
+.slider:not(.slider-disabled) .medium.slider-min:hover:after,
+.slider:not(.slider-disabled) .medium.slider-max:hover:after, table.table.sortable th.medium[data-sort]:before,
+table.table.sortable th.medium[data-sort]:after, .medium.icons {
+  font-size: 1.5em !important;
+}
+
+i.large.icon, .large.rater-star:before, .slider:not(.disabled) .large.slider-min:hover:after,
+.slider:not(.disabled) .large.slider-max:hover:after,
+.slider:not(.slider-disabled) .large.slider-min:hover:after,
+.slider:not(.slider-disabled) .large.slider-max:hover:after, table.table.sortable th.large[data-sort]:before,
+table.table.sortable th.large[data-sort]:after, .large.icons {
+  font-size: 1.875em !important;
+}
+
+i.xlarge.icon, .xlarge.rater-star:before, .slider:not(.disabled) .xlarge.slider-min:hover:after,
+.slider:not(.disabled) .xlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xlarge.slider-max:hover:after, table.table.sortable th.xlarge[data-sort]:before,
+table.table.sortable th.xlarge[data-sort]:after, .xlarge.icons {
+  font-size: 2.25em !important;
+}
+
+i.xxlarge.icon, .xxlarge.rater-star:before, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
+.slider:not(.disabled) .xxlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxlarge.slider-max:hover:after, table.table.sortable th.xxlarge[data-sort]:before,
+table.table.sortable th.xxlarge[data-sort]:after, .xxlarge.icons {
+  font-size: 2.625em !important;
+}
+
+i.xxxlarge.icon, .xxxlarge.rater-star:before, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
+.slider:not(.disabled) .xxxlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after, table.table.sortable th.xxxlarge[data-sort]:before,
+table.table.sortable th.xxxlarge[data-sort]:after, .xxxlarge.icons {
+  font-size: 3em !important;
+}
+
+i.xxxxlarge.icon, .xxxxlarge.rater-star:before, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
+.slider:not(.disabled) .xxxxlarge.slider-max:hover:after,
+.slider:not(.slider-disabled) .xxxxlarge.slider-min:hover:after,
+.slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after, table.table.sortable th.xxxxlarge[data-sort]:before,
+table.table.sortable th.xxxxlarge[data-sort]:after, .xxxxlarge.icons {
+  font-size: 3.75em !important;
+}
+
 /* ICON */
 i.icon, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
 .slider:not(.disabled) .slider-max:hover:after,
@@ -7355,95 +7435,58 @@ table.table.sortable th[data-sort]:after {
   -webkit-font-feature-settings: 'liga';
      -moz-font-feature-settings: 'liga';
           font-feature-settings: 'liga';
-  /* SCALED SIZES */
 }
 
-i.icon.xxxxsmall, .xxxxsmall.rater-star:before, .slider:not(.disabled) .xxxxsmall.slider-min:hover:after,
-.slider:not(.disabled) .xxxxsmall.slider-max:hover:after,
-.slider:not(.slider-disabled) .xxxxsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxxsmall.slider-max:hover:after, table.table.sortable th.xxxxsmall[data-sort]:before,
-table.table.sortable th.xxxxsmall[data-sort]:after {
-  font-size: 0.375em !important;
+/* ICONS */
+.icons {
+  display: inline-block;
+  width: 1.5em;
+  height: 1.5em;
+  position: relative;
+  /* ICON */
 }
 
-i.icon.xxxsmall, .xxxsmall.rater-star:before, .slider:not(.disabled) .xxxsmall.slider-min:hover:after,
-.slider:not(.disabled) .xxxsmall.slider-max:hover:after,
-.slider:not(.slider-disabled) .xxxsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxsmall.slider-max:hover:after, table.table.sortable th.xxxsmall[data-sort]:before,
-table.table.sortable th.xxxsmall[data-sort]:after {
-  font-size: 0.5625em !important;
+.icons .icon {
+  margin-bottom: 0;
+  /* NOT CORNER */
+  /* CORNER */
 }
 
-i.icon.xxsmall, .xxsmall.rater-star:before, .slider:not(.disabled) .xxsmall.slider-min:hover:after,
-.slider:not(.disabled) .xxsmall.slider-max:hover:after,
-.slider:not(.slider-disabled) .xxsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxsmall.slider-max:hover:after, table.table.sortable th.xxsmall[data-sort]:before,
-table.table.sortable th.xxsmall[data-sort]:after {
-  font-size: 0.75em !important;
+.icons .icon:not(.corner) {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 }
 
-i.icon.xsmall, .xsmall.rater-star:before, .slider:not(.disabled) .xsmall.slider-min:hover:after,
-.slider:not(.disabled) .xsmall.slider-max:hover:after,
-.slider:not(.slider-disabled) .xsmall.slider-min:hover:after,
-.slider:not(.slider-disabled) .xsmall.slider-max:hover:after, table.table.sortable th.xsmall[data-sort]:before,
-table.table.sortable th.xsmall[data-sort]:after {
-  font-size: 1.125em !important;
+.icons .icon.corner {
+  position: absolute;
+  font-size: 0.75em;
+  /* TOP LEFT */
+  /* TOP RIGHT */
+  /* BOTTOM RIGHT */
+  /* BOTTOM LEFT */
 }
 
-i.icon.small, .small.rater-star:before, .slider:not(.disabled) .small.slider-min:hover:after,
-.slider:not(.disabled) .small.slider-max:hover:after,
-.slider:not(.slider-disabled) .small.slider-min:hover:after,
-.slider:not(.slider-disabled) .small.slider-max:hover:after, table.table.sortable th.small[data-sort]:before,
-table.table.sortable th.small[data-sort]:after {
-  font-size: 1.3125em !important;
+.icons .icon.corner.top-left {
+  top: 0;
+  left: 0;
 }
 
-i.icon.medium, .medium.rater-star:before, .slider:not(.disabled) .medium.slider-min:hover:after,
-.slider:not(.disabled) .medium.slider-max:hover:after,
-.slider:not(.slider-disabled) .medium.slider-min:hover:after,
-.slider:not(.slider-disabled) .medium.slider-max:hover:after, table.table.sortable th.medium[data-sort]:before,
-table.table.sortable th.medium[data-sort]:after {
-  font-size: 1.5em !important;
+.icons .icon.corner.top-right {
+  top: 0;
+  right: 0;
 }
 
-i.icon.large, .large.rater-star:before, .slider:not(.disabled) .large.slider-min:hover:after,
-.slider:not(.disabled) .large.slider-max:hover:after,
-.slider:not(.slider-disabled) .large.slider-min:hover:after,
-.slider:not(.slider-disabled) .large.slider-max:hover:after, table.table.sortable th.large[data-sort]:before,
-table.table.sortable th.large[data-sort]:after {
-  font-size: 1.875em !important;
+.icons .icon.corner.bottom-right {
+  bottom: 0;
+  right: 0;
 }
 
-i.icon.xlarge, .xlarge.rater-star:before, .slider:not(.disabled) .xlarge.slider-min:hover:after,
-.slider:not(.disabled) .xlarge.slider-max:hover:after,
-.slider:not(.slider-disabled) .xlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xlarge.slider-max:hover:after, table.table.sortable th.xlarge[data-sort]:before,
-table.table.sortable th.xlarge[data-sort]:after {
-  font-size: 2.25em !important;
-}
-
-i.icon.xxlarge, .xxlarge.rater-star:before, .slider:not(.disabled) .xxlarge.slider-min:hover:after,
-.slider:not(.disabled) .xxlarge.slider-max:hover:after,
-.slider:not(.slider-disabled) .xxlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxlarge.slider-max:hover:after, table.table.sortable th.xxlarge[data-sort]:before,
-table.table.sortable th.xxlarge[data-sort]:after {
-  font-size: 2.625em !important;
-}
-
-i.icon.xxxlarge, .xxxlarge.rater-star:before, .slider:not(.disabled) .xxxlarge.slider-min:hover:after,
-.slider:not(.disabled) .xxxlarge.slider-max:hover:after,
-.slider:not(.slider-disabled) .xxxlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxlarge.slider-max:hover:after, table.table.sortable th.xxxlarge[data-sort]:before,
-table.table.sortable th.xxxlarge[data-sort]:after {
-  font-size: 3em !important;
-}
-
-i.icon.xxxxlarge, .xxxxlarge.rater-star:before, .slider:not(.disabled) .xxxxlarge.slider-min:hover:after,
-.slider:not(.disabled) .xxxxlarge.slider-max:hover:after,
-.slider:not(.slider-disabled) .xxxxlarge.slider-min:hover:after,
-.slider:not(.slider-disabled) .xxxxlarge.slider-max:hover:after, table.table.sortable th.xxxxlarge[data-sort]:before,
-table.table.sortable th.xxxxlarge[data-sort]:after {
-  font-size: 3.75em !important;
+.icons .icon.corner.bottom-left {
+  bottom: 0;
+  left: 0;
 }
 
 /* =========================================================================

@@ -10,24 +10,37 @@
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
+/* SCALED ICON SIZES */
+
+%scaled-icon-sizes {
+
+  @each $name, $font-size in $sizes {
+
+    &.#{$name} {
+      font-size: ( $font-size * $icon-scale-amount ) !important;
+    }
+
+  }
+
+}
+
 /* ICON */
 
 i.icon {
-
   @extend .widget;
+  @extend %scaled-icon-sizes;
   display: inline-block;
   vertical-align: middle;
   font-family: 'Material Icons';
   font-weight: normal;
   font-style: normal;
-  font-size: $icon-scale-amount * 1em;
+  font-size: 1em * $icon-scale-amount;
   width: 1em;
   height: 1em;
   line-height: 1;
   letter-spacing: normal;
   text-transform: none;
   word-wrap: normal;
-
   /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
   /* Support for all WebKit browsers */
@@ -36,13 +49,66 @@ i.icon {
   -moz-osx-font-smoothing: grayscale;
   /* Support for all WebKit browsers */
   font-feature-settings: 'liga';
+}
 
-  /* SCALED SIZES */
+/* ICONS */
 
-  @each $name, $font-size in $sizes {
+.icons {
 
-    &.#{$name} {
-      font-size: ( $font-size * $icon-scale-amount ) !important;
+  @extend .widget;
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  width: 1em * $icon-scale-amount;
+  height: 1em * $icon-scale-amount;
+  position: relative;
+
+  /* ICON */
+
+  .icon {
+
+    margin-bottom: 0;
+
+    /* NOT CORNER */
+
+    &:not(.corner) {
+      @include fill-absolute ();
+    }
+
+    /* CORNER */
+
+    &.corner {
+
+      position: absolute;
+      font-size: 1em * $icon-scale-amount / 2;
+
+      /* TOP LEFT */
+
+      &.top-left {
+        top: 0;
+        left: 0;
+      }
+
+      /* TOP RIGHT */
+
+      &.top-right {
+        top: 0;
+        right: 0;
+      }
+
+      /* BOTTOM RIGHT */
+
+      &.bottom-right {
+        bottom: 0;
+        right: 0;
+      }
+
+      /* BOTTOM LEFT */
+
+      &.bottom-left {
+        bottom: 0;
+        left: 0;
+      }
+
     }
 
   }

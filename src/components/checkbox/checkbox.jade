@@ -37,7 +37,7 @@ mixin checkbox(options)
   +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
     if options.title
       span= options.title
-    .icons
+    +icons
       +icon(options.icons.on)(class=options.colors.on).icon-on
       +icon(options.icons.off)(class=options.colors.off).icon-off
     if options.checked

@@ -245,7 +245,7 @@ mixin checkbox(options)
   +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
     if options.title
       span= options.title
-    .icons
+    +icons
       +icon(options.icons.on)(class=options.colors.on).icon-on
       +icon(options.icons.off)(class=options.colors.off).icon-off
     if options.checked
@@ -540,7 +540,7 @@ mixin header-bg(url)
 
 
 //- =========================================================================
-//- Svelto - Icons v0.3.0
+//- Svelto - Icons v0.4.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -550,6 +550,10 @@ mixin icon(icon)
   i&attributes(attributes).icon
     if icon
       = icon
+    block
+
+mixin icons
+  .icons&attributes(attributes)
     block
 
 
@@ -1037,6 +1041,35 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Placeholder v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    width: '', // Placeholder width
+    height: '', // Placeholder height
+    empty: '' // Placeholder is empty or not
+  }
+
+mixin placeholder(options)
+  - options = options || {};
+  - options.width = options.width || 0;
+  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
+  - options.height = options.height || 0;
+  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
+  - options.empty = options.empty || false;
+  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
+    if !options.empty
+      if block
+        block
+      else
+        = options.width + " - " + options.height
+
+
+//- =========================================================================
 //- Svelto - Parallax v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1079,47 +1112,6 @@ mixin parallax-layer-foreground
 
 
 //- =========================================================================
-//- Svelto - Placeholder v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    width: '', // Placeholder width
-    height: '', // Placeholder height
-    empty: '' // Placeholder is empty or not
-  }
-
-mixin placeholder(options)
-  - options = options || {};
-  - options.width = options.width || 0;
-  - options.width = isNaN ( options.width ) ? options.width : options.width + 'px';
-  - options.height = options.height || 0;
-  - options.height = isNaN ( options.height ) ? options.height : options.height + 'px';
-  - options.empty = options.empty || false;
-  .placeholder(style="width:" + options.width + "; height:" + options.height + ";")&attributes(attributes)
-    if !options.empty
-      if block
-        block
-      else
-        = options.width + " - " + options.height
-
-
-//- =========================================================================
-//- Svelto - Syntax v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin syntax(language)
-  code(class="language-" + language)&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Progressbar v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1144,6 +1136,18 @@ mixin progressbar(options)
   - options.decimals = options.decimals || 0;
   .progressbar(class=options.colors.off data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
     .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
+
+
+//- =========================================================================
+//- Svelto - Syntax v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin syntax(language)
+  code(class="language-" + language)&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1486,6 +1490,31 @@ mixin tabs-containers
 
 
 //- =========================================================================
+//- Svelto - Textarea v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- =========================================================================
 //- Svelto - Tagbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1513,31 +1542,6 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
-
-
-//- =========================================================================
-//- Svelto - Textarea v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Textarea name
-    label: '', // Label
-  }
-
-mixin textarea(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- =========================================================================

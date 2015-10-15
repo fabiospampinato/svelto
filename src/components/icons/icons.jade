@@ -1,6 +1,6 @@
 
 //- =========================================================================
-//- Svelto - Icons v0.3.0
+//- Svelto - Icons v0.4.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10,4 +10,8 @@ mixin icon(icon)
   i&attributes(attributes).icon
     if icon
       = icon
+    block
+
+mixin icons
+  .icons&attributes(attributes)
     block

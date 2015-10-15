@@ -11,6 +11,8 @@
 
 /* RATER */
 
+//FIXME: Only do the rating stuff if .ratable
+
 .rater {
 
   @extend .widget;
