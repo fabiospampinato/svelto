@@ -3567,15 +3567,15 @@ $card-border-radius: $container-border-radius !default;
 
 /* CAROUSEL */
 
-$carousel-min-height: 200px !default;
+$carousel-min-height: 12.5em !default;
 
 /* INDICATOR */
 
-$carousel-indicators-z-index: 101 !default;
+$carousel-indicators-z-index: 3 !default;
 
 $carousel-indicator-color: $color-white !default;
 
-$carousel-indicator-size: 10px !default;
+$carousel-indicator-size: 0.625em !default;
 $carousel-indicator-border-width: 2px !default;
 
 $carousel-indicator-opacity: 0.25 !default;
@@ -3596,7 +3596,7 @@ $carousel-outset-prev-next-padding-horizontal: $label-compact-padding-horizontal
 
 /* INSET (PREV / NEXT) */
 
-$carousel-inset-prev-next-z-index: 100 !default;
+$carousel-inset-prev-next-z-index: 2 !default;
 
 $carousel-inset-prev-next-font-size: 1em * $icon-scale-amount !default;
 

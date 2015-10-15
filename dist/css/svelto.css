@@ -4739,7 +4739,7 @@ button {
   display: flex;
   position: relative;
   overflow: hidden;
-  min-height: 200px;
+  min-height: 12.5em;
   /* PREVIOUS / NEXT */
   /* PREVIOUS */
   /* NEXT */
@@ -4778,7 +4778,7 @@ button {
 }
 
 .carousel-indicators {
-  z-index: 101;
+  z-index: 3;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -4795,8 +4795,8 @@ button {
 }
 
 .carousel-indicator {
-  width: 10px;
-  height: 10px;
+  width: 0.625em;
+  height: 0.625em;
   border: 2px solid #ffffff;
   border-radius: 50%;
   background-color: transparent;
@@ -5005,7 +5005,7 @@ button {
 .carousel.inset .carousel-prev,
 .carousel.inset .carousel-next {
   position: absolute;
-  z-index: 100;
+  z-index: 2;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
