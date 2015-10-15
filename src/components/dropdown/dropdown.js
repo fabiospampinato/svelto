@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Dropdown v0.2.0
+ * Svelto - Dropdown v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -26,6 +26,13 @@
     /* OPTIONS */
 
     options: {
+      hover: {
+        triggerable: true,
+        delays: {
+          open: 750,
+          close: 250
+        }
+      },
       spacing: {
         attached: 0,
         noTip: 7,
@@ -76,6 +83,121 @@
       this._on ( this.$closers, Pointer.tap, this.close );
 
       // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
+
+      /* HOVER */
+
+      if ( this.options.hover.triggerable ) {
+
+        this._on ( this.$triggers, Pointer.enter, this.__hoverTriggerEnter );
+
+      }
+
+    },
+
+    /* HOVER */
+
+    __hoverTriggerEnter: function ( event, trigger ) {
+
+      console.log('__hoverTriggerEnter');
+
+      if ( !this._isOpen ) {
+
+        this._isHoverOpen = false;
+        this._hoverTrigger = trigger;
+
+        this.hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+
+        this._one ( $(trigger), Pointer.leave, this.__hoverTriggerLeave );
+
+      }
+
+    },
+
+    __hoverOpen: function () {
+
+      console.log('__hoverOpen');
+
+      if ( !this._isOpen ) {
+
+        this.open ( false, this._hoverTrigger );
+
+        this._isHoverOpen = true;
+
+        this.hoverOpenTimeout = false;
+
+      }
+
+    },
+
+    __hoverTriggerLeave: function ( event, trigger ) {
+
+      console.log('__hoverTriggerLeave');
+
+      if ( this.hoverOpenTimeout ) {
+
+        clearTimeout ( this.hoverOpenTimeout );
+
+        this.hoverOpenTimeout = false;
+
+      }
+
+      if ( this._isHoverOpen ) {
+
+        this.hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+        this._on ( Pointer.enter, this.__hoverDropdownEnter );
+
+      }
+
+    },
+
+    __hoverClose: function () {
+
+      console.log('__hoverClose');
+
+      if ( this._isHoverOpen ) {
+
+        this.close ();
+
+        this._isHoverOpen = false;
+
+        this.hoverCloseTimeout = false;
+
+      }
+
+      this._off ( Pointer.enter, this.__hoverDropdownEnter );
+
+    },
+
+    __hoverDropdownEnter: function () {
+
+      console.log('__hoverDropdownEnter');
+
+      if ( this.hoverCloseTimeout ) {
+
+        clearTimeout ( this.hoverCloseTimeout );
+
+        this.hoverCloseTimeout = false;
+
+      }
+
+      if ( this._isHoverOpen ) {
+
+        this._one ( Pointer.leave, this.__hoverDropdownLeave );
+
+      }
+
+    },
+
+    __hoverDropdownLeave: function () {
+
+      console.log('__hoverDropdownLeave');
+
+      if ( this._isHoverOpen ) {
+
+        this.hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+      }
 
     },
 

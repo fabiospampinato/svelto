@@ -1,0 +1,30 @@
+
+extends ../layout.jade
+
+//- Tooltip
+
+append main
+  +divider-block Tooltip
+
+  +multiple
+    +tooltip-btn({ title: "Text", id: "text" }).outlined
+    +tooltip-btn({ title: "Image", id: "image" }).outlined
+    +tooltip-btn({ title: "Image2", id: "image2" }).outlined
+    +tooltip-btn({ title: "Advanced", id: "advanced" }).outlined
+    
+append body
+  #text.tooltip.container
+    P 
+      +lorem-ipsum
+      
+  #image.tooltip.container
+    img(src="/sample.png")  
+
+  #image2.tooltip.container
+    +image-sample
+
+  #advanced.tooltip.card
+    +card-header.inherit Header
+    +card-block Content
+    +card-footer Footer
+    

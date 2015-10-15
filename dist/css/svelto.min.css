@@ -5155,7 +5155,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
  * @requires _settings.scss
  * ========================================================================= */
 /* DROPDOWN */
-.dropdown {
+.dropdown, .tooltip {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   z-index: 1000;
   position: fixed;
@@ -5174,59 +5174,61 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   /* CLOSED */
 }
 
-.dropdown:not(.container) {
+.dropdown:not(.container), .tooltip:not(.container) {
   max-height: 40vh;
 }
 
-.dropdown.moving {
+.dropdown.moving, .moving.tooltip {
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
   /* TIP */
 }
 
-.dropdown.moving:before {
+.dropdown.moving:before, .moving.tooltip:before {
   transition: -webkit-transform 0.15s;
   transition: transform 0.15s;
 }
 
 .dropdown.no-tip,
-.dropdown.attached {
+.no-tip.tooltip,
+.dropdown.attached, .attached.tooltip {
   /* TIP */
 }
 
 .dropdown.no-tip:before,
-.dropdown.attached:before {
+.no-tip.tooltip:before,
+.dropdown.attached:before, .attached.tooltip:before {
   display: none !important;
 }
 
-.dropdown.attached {
+.dropdown.attached, .attached.tooltip {
   /* TOP */
   /* BOTTOM */
   /* LEFT */
   /* RIGHT */
 }
 
-.dropdown.attached.positionate-top {
+.dropdown.attached.positionate-top, .attached.positionate-top.tooltip {
   margin-bottom: -1px;
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.dropdown.attached.positionate-bottom {
+.dropdown.attached.positionate-bottom, .attached.positionate-bottom.tooltip {
   margin-top: -1px;
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
 
-.dropdown.attached.positionate-left {
+.dropdown.attached.positionate-left, .attached.positionate-left.tooltip {
   margin-right: -1px;
 }
 
-.dropdown.attached.positionate-right {
+.dropdown.attached.positionate-right, .attached.positionate-right.tooltip {
   margin-left: -1px;
 }
 
-.dropdown:before {
+.dropdown:before, .tooltip:before {
   width: 0.75em;
   height: 0.75em;
   background-color: inherit;
@@ -5238,17 +5240,17 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   box-sizing: content-box;
 }
 
-.dropdown.outlined:before {
+.dropdown.outlined:before, .outlined.tooltip:before {
   border-width: 1px;
   border-style: solid;
   border-color: inherit;
 }
 
-.dropdown.positionate-top {
+.dropdown.positionate-top, .positionate-top.tooltip {
   /* OUTLINED */
 }
 
-.dropdown.positionate-top:before {
+.dropdown.positionate-top:before, .positionate-top.tooltip:before {
   left: -0.375em;
   bottom: -0.375em;
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
@@ -5256,16 +5258,16 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7);
 }
 
-.dropdown.positionate-top.outlined:before {
+.dropdown.positionate-top.outlined:before, .positionate-top.outlined.tooltip:before {
   margin-bottom: -1px;
   margin-left: -1px;
 }
 
-.dropdown.positionate-bottom {
+.dropdown.positionate-bottom, .positionate-bottom.tooltip {
   /* OUTLINED */
 }
 
-.dropdown.positionate-bottom:before {
+.dropdown.positionate-bottom:before, .positionate-bottom.tooltip:before {
   top: -0.375em;
   left: -0.375em;
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
@@ -5273,16 +5275,16 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
 }
 
-.dropdown.positionate-bottom.outlined:before {
+.dropdown.positionate-bottom.outlined:before, .positionate-bottom.outlined.tooltip:before {
   margin-top: -1px;
   margin-left: -1px;
 }
 
-.dropdown.positionate-left {
+.dropdown.positionate-left, .positionate-left.tooltip {
   /* OUTLINED */
 }
 
-.dropdown.positionate-left:before {
+.dropdown.positionate-left:before, .positionate-left.tooltip:before {
   top: -0.375em;
   right: -0.375em;
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
@@ -5290,16 +5292,16 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35);
 }
 
-.dropdown.positionate-left.outlined:before {
+.dropdown.positionate-left.outlined:before, .positionate-left.outlined.tooltip:before {
   margin-right: -1px;
   margin-top: -1px;
 }
 
-.dropdown.positionate-right {
+.dropdown.positionate-right, .positionate-right.tooltip {
   /* OUTLINED */
 }
 
-.dropdown.positionate-right:before {
+.dropdown.positionate-right:before, .positionate-right.tooltip:before {
   top: -0.375em;
   left: -0.375em;
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
@@ -5307,12 +5309,12 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35);
 }
 
-.dropdown.positionate-right.outlined:before {
+.dropdown.positionate-right.outlined:before, .positionate-right.outlined.tooltip:before {
   margin-left: -1px;
   margin-top: -1px;
 }
 
-.dropdown:not(.open) {
+.dropdown:not(.open), .tooltip:not(.open) {
   pointer-events: none;
   opacity: 0;
 }
@@ -12063,6 +12065,15 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   resize: none;
 }
 
+/* =========================================================================
+ * Svelto - Toolip v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../dropdown/_dropdown.scss
+ * ========================================================================= */
+/* TOOLTIP */
 /* =========================================================================
  * Svelto - Typography v0.1.0
  * =========================================================================

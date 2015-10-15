@@ -9,6 +9,8 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
+//TODO: Add allignment, that is, if possibile don't center the dropdown but align it to one of the trigger edges
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';

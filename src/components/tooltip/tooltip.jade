@@ -1,0 +1,26 @@
+
+//- =========================================================================
+//- Svelto - Tooltip v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    id: '', // Tooltip id
+    title: '', // Button title
+    icon: '' // Button icon
+  }
+  
+mixin tooltip-btn(options)
+  - options.icon = options.icon || "info_outline";
+  +button(data-tooltip=options.id)&attributes(attributes).tooltip-trigger
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
+
+mixin tooltip(id)
+  .container(id=id)&attributes(attributes).tooltip
+    block
