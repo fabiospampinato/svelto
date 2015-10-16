@@ -149,20 +149,6 @@
 
       downTimestamp = event.timeStamp || Date.now ();
 
-      if ( !$.browser.is.touchDevice || !motion ) {
-
-        $target.trigger ( createEvent ( Pointer.tap, event ) );
-
-        if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
-        }
-
-        prevTapTimestamp = downTimestamp;
-
-      }
-
       if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
 
         var startXY = $.eventXY ( startEvent ),
@@ -198,6 +184,20 @@
           });
 
         }
+
+      }
+
+      if ( !$.browser.is.touchDevice || !motion ) {
+
+        $target.trigger ( createEvent ( Pointer.tap, event ) );
+
+        if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+
+          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
+
+        }
+
+        prevTapTimestamp = downTimestamp;
 
       }
 

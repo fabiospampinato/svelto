@@ -4711,7 +4711,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - Carousel (Settings) v0.1.0
+ * Svelto - Carousel (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4727,7 +4727,7 @@ button {
 /* SLIDE */
 /* FADE */
 /* =========================================================================
- * Svelto - Carousel v0.1.0
+ * Svelto - Carousel v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4747,7 +4747,8 @@ button {
   /* INDICATORS */
   /* INDICATOR */
   /* ITEMS */
-  /* SLIDE */
+  /* SLIDE HORIZONTAL */
+  /* SLIDE VERTICAL */
   /* FADE */
   /* HOVER */
   /* OUTSET */
@@ -4806,7 +4807,7 @@ button {
   cursor: pointer;
   opacity: 0.25;
   transition-property: background-color, opacity;
-  transition-duration: 0.15s;
+  transition-duration: 0.35s;
   /* HOVER */
   /* NOT FIRST */
   /* NOT LAST */
@@ -4834,6 +4835,7 @@ button {
   overflow: hidden;
   -webkit-flex-grow: 1;
           flex-grow: 1;
+  background-color: #212121;
   /* ITEM */
 }
 
@@ -4845,49 +4847,84 @@ button {
   left: 0;
   margin-bottom: 0 !important;
   border-radius: inherit;
-  /* FIRST */
 }
 
-.carousel-items > *:first-child {
-  z-index: 1;
-}
-
-.carousel:not(.fade) {
+.carousel.slide,
+.carousel.slide-horizontal,
+.carousel:not(.slide-vertical):not(.fade) {
   /* ITEMS */
 }
 
-.carousel:not(.fade) .carousel-items {
+.carousel.slide .carousel-items,
+.carousel.slide-horizontal .carousel-items,
+.carousel:not(.slide-vertical):not(.fade) .carousel-items {
   /* ITEM */
-  /* SPECIAL ITEMS */
   /* PREV */
   /* CURRENT */
-  /* NEXT */
 }
 
-.carousel:not(.fade) .carousel-items > * {
-  transition: -webkit-transform 0.15s;
-  transition: transform 0.15s;
-}
-
-.carousel:not(.fade) .carousel-items > .prev,
-.carousel:not(.fade) .carousel-items > .next {
-  z-index: 2;
-}
-
-.carousel:not(.fade) .carousel-items > .prev {
+.carousel.slide .carousel-items > *,
+.carousel.slide-horizontal .carousel-items > *,
+.carousel:not(.slide-vertical):not(.fade) .carousel-items > * {
+  transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
   -webkit-transform: translateX(-100%);
           transform: translateX(-100%);
 }
 
-.carousel:not(.fade) .carousel-items > .current {
+.carousel.slide .carousel-items > .prev,
+.carousel.slide-horizontal .carousel-items > .prev,
+.carousel:not(.slide-vertical):not(.fade) .carousel-items > .prev {
+  z-index: 2;
+}
+
+.carousel.slide .carousel-items > .current,
+.carousel.slide-horizontal .carousel-items > .current,
+.carousel:not(.slide-vertical):not(.fade) .carousel-items > .current {
   z-index: 3;
   -webkit-transform: translateX(0);
           transform: translateX(0);
+  /* FOLLOWING */
 }
 
-.carousel:not(.fade) .carousel-items > .next {
+.carousel.slide .carousel-items > .current ~ *,
+.carousel.slide-horizontal .carousel-items > .current ~ *,
+.carousel:not(.slide-vertical):not(.fade) .carousel-items > .current ~ * {
   -webkit-transform: translateX(100%);
           transform: translateX(100%);
+}
+
+.carousel.slide-vertical {
+  /* ITEMS */
+}
+
+.carousel.slide-vertical .carousel-items {
+  /* ITEM */
+  /* PREV */
+  /* CURRENT */
+}
+
+.carousel.slide-vertical .carousel-items > * {
+  transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
+  -webkit-transform: translateY(-100%);
+          transform: translateY(-100%);
+}
+
+.carousel.slide-vertical .carousel-items > .prev {
+  z-index: 2;
+}
+
+.carousel.slide-vertical .carousel-items > .current {
+  z-index: 3;
+  -webkit-transform: translateY(0);
+          transform: translateY(0);
+  /* FOLLOWING */
+}
+
+.carousel.slide-vertical .carousel-items > .current ~ * {
+  -webkit-transform: translateY(100%);
+          transform: translateY(100%);
 }
 
 .carousel.fade {
@@ -4896,10 +4933,23 @@ button {
 
 .carousel.fade .carousel-items {
   /* ITEM */
+  /* PREV */
+  /* CURRENT */
 }
 
 .carousel.fade .carousel-items > * {
-  transition: opacity 0.15s;
+  opacity: 0;
+  transition: opacity 0.35s;
+}
+
+.carousel.fade .carousel-items > .prev {
+  z-index: 2;
+  opacity: 0;
+}
+
+.carousel.fade .carousel-items > .current {
+  z-index: 3;
+  opacity: 1;
 }
 
 .carousel:hover {
@@ -5073,7 +5123,7 @@ button {
 .carousel.inset .carousel-next:after {
   color: #ffffff;
   opacity: 0.25;
-  transition: opacity 0.15s;
+  transition: opacity 0.35s;
 }
 
 .carousel.inset .carousel-prev {

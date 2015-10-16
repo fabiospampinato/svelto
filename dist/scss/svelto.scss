@@ -3555,7 +3555,7 @@ $card-border-radius: $container-border-radius !default;
 
 
 /* =========================================================================
- * Svelto - Carousel (Settings) v0.1.0
+ * Svelto - Carousel (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3568,6 +3568,8 @@ $card-border-radius: $container-border-radius !default;
 /* CAROUSEL */
 
 $carousel-min-height: 12.5em !default;
+
+$carousel-bg-color: $color-black !default;
 
 /* INDICATOR */
 
@@ -3582,7 +3584,7 @@ $carousel-indicator-opacity: 0.25 !default;
 $carousel-hover-indicator-opacity: 0.5 !default;
 $carousel-indicator-hover-opacity: 1 !default;
 
-$carousel-indicator-transition-all-duration: $transition-duration-fast !default;
+$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
 
 /* OUTSET (PREV / NEXT) */
 
@@ -3609,19 +3611,19 @@ $carousel-inset-prev-next-opacity: $carousel-indicator-opacity !default;
 $carousel-inset-hover-prev-next-opacity: $carousel-hover-indicator-opacity !default;
 $carousel-inset-prev-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-fast !default;
+$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-normal !default;
 
 /* SLIDE */
 
-$carousel-slide-transition-transform-duration: $transition-duration-fast !default;
+$carousel-slide-transition-transform-duration: $transition-duration-normal !default;
 
 /* FADE */
 
-$carousel-fade-transition-opacity-duration: $transition-duration-fast !default;
+$carousel-fade-transition-opacity-duration: $transition-duration-normal !default;
 
 
 /* =========================================================================
- * Svelto - Carousel v0.1.0
+ * Svelto - Carousel v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3630,8 +3632,8 @@ $carousel-fade-transition-opacity-duration: $transition-duration-fast !default;
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-//TODO: Add animation support
 //TODO: When inset add proper dark shadow at the left and the right
+//TODO: Add better support for img tags, .image-wrp, container and card
 
 /* CAROUSEL */
 
@@ -3742,28 +3744,23 @@ $carousel-fade-transition-opacity-duration: $transition-duration-fast !default;
     position: relative;
     overflow: hidden;
     flex-grow: 1;
+    background-color: $carousel-bg-color;
 
     /* ITEM */
 
     > * {
-
       @include fill-absolute ();
       margin-bottom: 0 !important;
       border-radius: inherit;
-
-      /* FIRST */
-
-      &:first-child { //INFO: So that when not initialized the one visible is always the first
-        z-index: 1;
-      }
-
     }
 
   }
 
-  /* SLIDE */
+  /* SLIDE HORIZONTAL */
 
-  &:not(.fade) {
+  &.slide,
+  &.slide-horizontal,
+  &:not(.slide-vertical):not(.fade) {
 
     /* ITEMS */
 
@@ -3773,32 +3770,68 @@ $carousel-fade-transition-opacity-duration: $transition-duration-fast !default;
 
       > * {
         transition: transform $carousel-slide-transition-transform-duration;
-      }
-
-      /* SPECIAL ITEMS */
-
-      > .prev,
-      > .next {
-        z-index: 2;
+        transform: translateX(-100%);
       }
 
       /* PREV */
 
       > .prev {
-        transform: translateX(-100%);
+        z-index: 2;
       }
 
       /* CURRENT */
 
       > .current {
+
         z-index: 3;
         transform: translateX(0);
+
+        /* FOLLOWING */
+
+        & ~ * {
+          transform: translateX(100%);
+        }
+
       }
 
-      /* NEXT */
+    }
 
-      > .next {
-        transform: translateX(100%);
+  }
+
+  /* SLIDE VERTICAL */
+
+  &.slide-vertical {
+
+    /* ITEMS */
+
+    .carousel-items {
+
+      /* ITEM */
+
+      > * {
+        transition: transform $carousel-slide-transition-transform-duration;
+        transform: translateY(-100%);
+      }
+
+      /* PREV */
+
+      > .prev {
+        z-index: 2;
+      }
+
+      /* CURRENT */
+
+      > .current {
+
+        z-index: 3;
+        transform: translateY(0);
+
+        /* FOLLOWING */
+
+        & ~ * {
+          transform: translateY(100%);
+        }
+
       }
 
     }
@@ -3816,7 +3849,22 @@ $carousel-fade-transition-opacity-duration: $transition-duration-fast !default;
       /* ITEM */
 
       > * {
+        opacity: 0;
         transition: opacity $carousel-fade-transition-opacity-duration;
+      }
+
+      /* PREV */
+
+      > .prev {
+        z-index: 2;
+        opacity: 0;
+      }
+
+      /* CURRENT */
+
+      > .current {
+        z-index: 3;
+        opacity: 1;
       }
 
     }

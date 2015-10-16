@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Carousel (Settings) v0.1.0
+ * Svelto - Carousel (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -13,6 +13,8 @@
 /* CAROUSEL */
 
 $carousel-min-height: 12.5em !default;
+
+$carousel-bg-color: $color-black !default;
 
 /* INDICATOR */
 
@@ -27,7 +29,7 @@ $carousel-indicator-opacity: 0.25 !default;
 $carousel-hover-indicator-opacity: 0.5 !default;
 $carousel-indicator-hover-opacity: 1 !default;
 
-$carousel-indicator-transition-all-duration: $transition-duration-fast !default;
+$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
 
 /* OUTSET (PREV / NEXT) */
 
@@ -54,12 +56,12 @@ $carousel-inset-prev-next-opacity: $carousel-indicator-opacity !default;
 $carousel-inset-hover-prev-next-opacity: $carousel-hover-indicator-opacity !default;
 $carousel-inset-prev-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-fast !default;
+$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-normal !default;
 
 /* SLIDE */
 
-$carousel-slide-transition-transform-duration: $transition-duration-fast !default;
+$carousel-slide-transition-transform-duration: $transition-duration-normal !default;
 
 /* FADE */
 
-$carousel-fade-transition-opacity-duration: $transition-duration-fast !default;
+$carousel-fade-transition-opacity-duration: $transition-duration-normal !default;
