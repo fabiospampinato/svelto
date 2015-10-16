@@ -4724,6 +4724,8 @@ button {
 /* INDICATOR */
 /* OUTSET (PREV / NEXT) */
 /* INSET (PREV / NEXT) */
+/* SLIDE */
+/* FADE */
 /* =========================================================================
  * Svelto - Carousel v0.1.0
  * =========================================================================
@@ -4738,7 +4740,6 @@ button {
   display: -webkit-flex;
   display: flex;
   position: relative;
-  overflow: hidden;
   min-height: 12.5em;
   /* PREVIOUS / NEXT */
   /* PREVIOUS */
@@ -4746,6 +4747,8 @@ button {
   /* INDICATORS */
   /* INDICATOR */
   /* ITEMS */
+  /* SLIDE */
+  /* FADE */
   /* HOVER */
   /* OUTSET */
   /* INSET */
@@ -4778,7 +4781,7 @@ button {
 }
 
 .carousel-indicators {
-  z-index: 3;
+  z-index: 10;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -4803,11 +4806,11 @@ button {
   cursor: pointer;
   opacity: 0.25;
   transition-property: background-color, opacity;
-  transition-duration: 0.35s;
+  transition-duration: 0.15s;
   /* HOVER */
   /* NOT FIRST */
   /* NOT LAST */
-  /* ACTIVE */
+  /* CURRENT */
 }
 
 .carousel-indicator:hover {
@@ -4822,12 +4825,13 @@ button {
   margin-right: 2.5px;
 }
 
-.carousel-indicator.active {
+.carousel-indicator.current {
   background-color: #ffffff;
 }
 
 .carousel-items {
   position: relative;
+  overflow: hidden;
   -webkit-flex-grow: 1;
           flex-grow: 1;
   /* ITEM */
@@ -4842,12 +4846,60 @@ button {
   margin-bottom: 0 !important;
   border-radius: inherit;
   /* FIRST */
-  /* INACTIVE */
-  /* ACTIVE */
 }
 
 .carousel-items > *:first-child {
   z-index: 1;
+}
+
+.carousel:not(.fade) {
+  /* ITEMS */
+}
+
+.carousel:not(.fade) .carousel-items {
+  /* ITEM */
+  /* SPECIAL ITEMS */
+  /* PREV */
+  /* CURRENT */
+  /* NEXT */
+}
+
+.carousel:not(.fade) .carousel-items > * {
+  transition: -webkit-transform 0.15s;
+  transition: transform 0.15s;
+}
+
+.carousel:not(.fade) .carousel-items > .prev,
+.carousel:not(.fade) .carousel-items > .next {
+  z-index: 2;
+}
+
+.carousel:not(.fade) .carousel-items > .prev {
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+.carousel:not(.fade) .carousel-items > .current {
+  z-index: 3;
+  -webkit-transform: translateX(0);
+          transform: translateX(0);
+}
+
+.carousel:not(.fade) .carousel-items > .next {
+  -webkit-transform: translateX(100%);
+          transform: translateX(100%);
+}
+
+.carousel.fade {
+  /* ITEMS */
+}
+
+.carousel.fade .carousel-items {
+  /* ITEM */
+}
+
+.carousel.fade .carousel-items > * {
+  transition: opacity 0.15s;
 }
 
 .carousel:hover {
@@ -5005,7 +5057,7 @@ button {
 .carousel.inset .carousel-prev,
 .carousel.inset .carousel-next {
   position: absolute;
-  z-index: 2;
+  z-index: 9;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -5021,7 +5073,7 @@ button {
 .carousel.inset .carousel-next:after {
   color: #ffffff;
   opacity: 0.25;
-  transition: opacity 0.35s;
+  transition: opacity 0.15s;
 }
 
 .carousel.inset .carousel-prev {

@@ -39,3 +39,33 @@ append main
         p.text-center 3
       +container.quaternary.centerer
         p.text-center 4
+
+  +divider-block Actions
+
+  +multiple.actions
+    +button("toggle_class ( 'fade' )").outlined Toggle fade
+    +button("carousel_get_all ()").outlined Get all
+    +button("carousel_api ( 'previous' )").outlined Previous all
+    +button("carousel_api ( 'next' )").outlined Next all
+    +multiple.joined
+      +input({ name: "input_index", label: "Set index..." }).no-floating.white.outlined
+      +button("carousel_set ()").outlined.secondary Set
+
+
+append body-end
+  +script.
+    function carousel_get_all () {
+      var gets = _.map ( $('.carousel'), function ( carousel ) {
+        return $(carousel).carousel ( 'get' );
+      });
+      $.noty ( gets.join ( ' - ' ) );
+    }
+    function toggle_class ( css_class ) {
+      $('.carousel').toggleClass ( css_class );
+    }
+    function carousel_api ( action ) {
+      $('.carousel').carousel ( action );
+    }  
+    function carousel_set () {
+      $('.carousel').carousel ( 'set', Number($('input[name="input_index"]').val ()) );
+    }

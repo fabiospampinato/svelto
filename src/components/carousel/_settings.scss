@@ -16,7 +16,7 @@ $carousel-min-height: 12.5em !default;
 
 /* INDICATOR */
 
-$carousel-indicators-z-index: 3 !default;
+$carousel-indicators-z-index: 10 !default;
 
 $carousel-indicator-color: $color-white !default;
 
@@ -27,7 +27,7 @@ $carousel-indicator-opacity: 0.25 !default;
 $carousel-hover-indicator-opacity: 0.5 !default;
 $carousel-indicator-hover-opacity: 1 !default;
 
-$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
+$carousel-indicator-transition-all-duration: $transition-duration-fast !default;
 
 /* OUTSET (PREV / NEXT) */
 
@@ -41,7 +41,7 @@ $carousel-outset-prev-next-padding-horizontal: $label-compact-padding-horizontal
 
 /* INSET (PREV / NEXT) */
 
-$carousel-inset-prev-next-z-index: 2 !default;
+$carousel-inset-prev-next-z-index: 9 !default;
 
 $carousel-inset-prev-next-font-size: 1em * $icon-scale-amount !default;
 
@@ -54,4 +54,12 @@ $carousel-inset-prev-next-opacity: $carousel-indicator-opacity !default;
 $carousel-inset-hover-prev-next-opacity: $carousel-hover-indicator-opacity !default;
 $carousel-inset-prev-next-hover-opacity: $carousel-indicator-hover-opacity !default;
 
-$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-normal !default;
+$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-fast !default;
+
+/* SLIDE */
+
+$carousel-slide-transition-transform-duration: $transition-duration-fast !default;
+
+/* FADE */
+
+$carousel-fade-transition-opacity-duration: $transition-duration-fast !default;

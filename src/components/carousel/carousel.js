@@ -21,12 +21,12 @@
     /* OPTIONS */
 
     options: {
-      cycle: true,
+      cycle: false,
       interval: 5000,
       intervalMinimumRemaining: 1000,
       classes: {
         prev: 'prev',
-        current: 'active',
+        current: 'current',
         next: 'next',
         disabled: 'disabled'
       },
@@ -190,7 +190,11 @@
 
       //FIXME: Fix animation when jumping without cycling
 
-      if ( !this._current || index !== this._current.index ) {
+      index = Number ( index );
+
+      if ( !this._setting && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
+
+        this._setting = true; //FIXME: Is it really needed?
 
         if ( this._previous ) {
 
@@ -221,6 +225,24 @@
         this._current.$indicator.addClass ( this.options.classes.current );
 
         this._next.$item.addClass ( this.options.classes.next );
+
+        if ( this.options.timer ) {
+
+          this.timer.stop ();
+
+        }
+
+        this._delay ( function () {
+
+          this._setting = false;
+
+          if ( this.options.timer ) {
+
+            this.timer.play ();
+
+          }
+
+        }, this.options.animations.cycle );
 
       }
 
