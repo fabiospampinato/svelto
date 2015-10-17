@@ -12071,7 +12071,7 @@ table.table.sortable th[data-sort].sort-asc:before {
 }
 
 /* =========================================================================
- * Svelto - Spinner Overlay (Settings) v0.2.0
+ * Svelto - Spinner Overlay (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12079,10 +12079,8 @@ table.table.sortable th[data-sort].sort-asc:before {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* SPINNER OVERLAY */
-/* SIBLINGS */
-/* TRANSITIONS */
 /* =========================================================================
- * Svelto - Spinner Overlay v0.2.0
+ * Svelto - Spinner Overlay v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12091,41 +12089,21 @@ table.table.sortable th[data-sort].sort-asc:before {
  * ========================================================================= */
 /* SPINNER OVERLAY */
 .spinner-overlay {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
-  display: -webkit-flex;
-  display: flex;
   -webkit-align-items: center;
           align-items: center;
   -webkit-justify-content: center;
           justify-content: center;
-  width: 4.25rem;
-  height: 4.25rem;
-  border-radius: 50% !important;
-  z-index: 50;
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  opacity: 0;
-  transition-property: opacity, -webkit-transform;
-  transition-property: opacity, transform;
-  transition-duration: 0.35s;
-  /* SPINNER */
-  /* SIBLINGS */
+  /* SPINNER LABEL */
   /* INACTIVE */
   /* ACTIVE */
 }
 
-.spinner-overlay .spinner {
+.spinner-overlay .spinner-label {
   margin-bottom: 0;
-}
-
-.spinner-overlay ~ * {
-  transition: opacity 0.35s;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition: -webkit-transform 0.35s;
+  transition: transform 0.35s;
 }
 
 .spinner-overlay:not(.active) {
@@ -12144,15 +12122,12 @@ table.table.sortable th[data-sort].sort-asc:before {
 }
 
 .spinner-overlay.active {
-  -webkit-transform: scale(1);
-          transform: scale(1);
-  opacity: 1;
-  /* SIBLINGS */
+  /* SPINNER LABEL */
 }
 
-.spinner-overlay.active ~ * {
-  opacity: 0.5;
-  pointer-events: none;
+.spinner-overlay.active .spinner-label {
+  -webkit-transform: scale(1);
+          transform: scale(1);
 }
 
 /* =========================================================================

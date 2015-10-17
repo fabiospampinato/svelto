@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner Overlay v0.2.0
+ * Svelto - Spinner Overlay v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -19,21 +19,22 @@
     /* TEMPLATES */
 
     templates: {
-      overlay: '<div class="spinner-overlay {%=o.colors.overlay%}">' +
-                 '<svg class="spinner {%=(o.multicolor ? "multicolor" : o.colors.spinner)%}">' +
-                   '<circle />' +
-                 '</svg>' +
+      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' +
+                 '<div class="spinner-label {%=(o.multicolor ? "" : o.color)%}">' +
+                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : "")%}">' +
+                     '<circle />' +
+                   '</svg>' +
+                 '</div>' +
                '</div>'
     },
 
     /* OPTIONS */
 
     options: {
+      dimmer: false,
+      blurrer: false,
       multicolor: false,
-      colors: {
-        overlay: 'inherit',
-        spinner: 'secondary'
-      },
+      color: 'white',
       classes: {
         active: 'active'
       },

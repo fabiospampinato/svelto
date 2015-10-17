@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner Overlay v0.2.0
+ * Svelto - Spinner Overlay v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,30 +12,15 @@
 
 .spinner-overlay {
 
-  @include center-absolute-fill ();
-  @include z-depth ( $spinner-overlay-z-depth );
-  display: flex;
   align-items: center;
   justify-content: center;
-  width: $spinner-overlay-size;
-  height: $spinner-overlay-size;
-  border-radius: $spinner-overlay-border-radius !important;
-  z-index: $spinner-overlay-z-index;
-  transform: scale(0);
-  opacity: 0;
-  transition-property: opacity, transform;
-  transition-duration: $spinner-overlay-transition-all-duration;
 
-  /* SPINNER */
+  /* SPINNER LABEL */
 
-  .spinner {
+  .spinner-label {
     margin-bottom: 0;
-  }
-
-  /* SIBLINGS */
-
-  ~ * {
-    transition: opacity $spinner-overlay-transition-all-duration; //INFO: It interferes with other widgets probably
+    transform: scale(0);
+    transition: transform $spinner-overlay-transition-transform-duration;
   }
 
   /* INACTIVE */
@@ -62,14 +47,10 @@
 
   &.active {
 
-    transform: scale(1);
-    opacity: 1;
+    /* SPINNER LABEL */
 
-    /* SIBLINGS */
-
-    ~ * {
-      opacity: $spinner-overlay-siblings-opacity;
-      pointer-events: none;
+    .spinner-label {
+      transform: scale(1);
     }
 
   }
