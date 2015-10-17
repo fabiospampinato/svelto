@@ -5524,7 +5524,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - Colorpicker (Settings) v0.2.0
+ * Svelto - Colorpicker (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5532,13 +5532,15 @@ button {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* COLORPICKER */
+/* INVALID */
+/* VALID */
 /* WRAPPERS */
 /* WRAPPER HUE */
 /* HANDLER */
 /* HANDLER SB */
 /* HANDLER HUE */
 /* =========================================================================
- * Svelto - Colorpicker v0.2.0
+ * Svelto - Colorpicker v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5556,6 +5558,8 @@ button {
   /* WRAPPERS */
   /* SATURATION & BRIGHTNESS WRAPPER */
   /* HUE WRAPPER */
+  /* INVALID */
+  /* VALID */
 }
 
 .colorpicker input {
@@ -5635,6 +5639,24 @@ button {
   margin-top: -0.25em;
   cursor: ns-resize;
   border-radius: 0.13325em;
+}
+
+.colorpicker.invalid {
+  /* SATURATION & BRIGHTNESS WRAPPER */
+}
+
+.colorpicker.invalid .colorpicker-saturation-brightness-wrp,
+.colorpicker.invalid .colorpicker-hue-wrp {
+  border: 1px solid #f44336 !important;
+}
+
+.colorpicker.valid {
+  /* SATURATION & BRIGHTNESS WRAPPER */
+}
+
+.colorpicker.valid .colorpicker-saturation-brightness-wrp,
+.colorpicker.valid .colorpicker-hue-wrp {
+  border: 1px solid #4caf50 !important;
 }
 
 /* =========================================================================

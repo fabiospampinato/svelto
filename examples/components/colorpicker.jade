@@ -16,6 +16,8 @@ append main
     +multiple.joined
       +input({ name: "color", label: "Color..." }).outlined.no-floating
       +button("colorpicker_set ()").secondary.outlined Set
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
 
 append body-end
   +script.
@@ -27,4 +29,7 @@ append body-end
     function colorpicker_set () {
       var color = $("input[name='color']").val ();
       $('.colorpicker').colorpicker ( 'set', color );
+    }
+    function toggle_class ( css_class ) {
+      $('.colorpicker').toggleClass ( css_class );
     }

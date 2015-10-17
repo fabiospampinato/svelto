@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colorpicker (Settings) v0.2.0
+ * Svelto - Colorpicker (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,6 +11,14 @@
 /* COLORPICKER */
 
 $colorpicker-height: 11em !default;
+
+/* INVALID */
+
+$colorpicker-invalid-color: $color-red !default;
+
+/* VALID */
+
+$colorpicker-valid-color: $color-green !default;
 
 /* WRAPPERS */
 

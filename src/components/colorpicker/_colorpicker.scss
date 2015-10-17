@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Colorpicker v0.2.0
+ * Svelto - Colorpicker v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -106,6 +106,32 @@
       margin-top: - ( $colorpicker-handler-hue-height / 2 );
       cursor: ns-resize;
       border-radius: $colorpicker-handler-hue-border-radius;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* SATURATION & BRIGHTNESS WRAPPER */
+
+    .colorpicker-saturation-brightness-wrp,
+    .colorpicker-hue-wrp {
+      border: $outline-width solid $colorpicker-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* SATURATION & BRIGHTNESS WRAPPER */
+
+    .colorpicker-saturation-brightness-wrp,
+    .colorpicker-hue-wrp {
+      border: $outline-width solid $colorpicker-valid-color !important;
     }
 
   }
