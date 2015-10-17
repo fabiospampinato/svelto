@@ -13,26 +13,25 @@ append main
 
   +divider-block Actions
 
-  +multiple
+  +multiple.actions
     +button("checkboxes_get_all ()").outlined Get all
     +button("checkboxes_action ( 'toggle' )").outlined Toggle all
     +button("checkboxes_action ( 'check' )").outlined Check all
     +button("checkboxes_action ( 'uncheck' )").outlined Uncheck all
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
 
 append body-end
   +script.
     function checkboxes_get_all () {
-
       var gets = _.map ( $('.checkbox'), function ( checkbox ) {
-
         return $(checkbox).checkbox ( 'get' );
-
       });
-
       $.noty ( gets.join ( ' - ' ) );
-
     }
-    
     function checkboxes_action ( action ) {
       $('.checkbox').checkbox ( action );
+    }
+    function toggle_class ( css_class ) {
+      $('.checkbox').toggleClass ( css_class );
     }

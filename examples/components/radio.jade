@@ -13,24 +13,23 @@ append main
 
   +divider-block Actions
 
-  +multiple
+  +multiple.actions
     +button("radios_get_all ()").outlined Get all
     +button("radios_check_all ()").outlined Check all
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
 
 append body-end
-  script.
+  +script.
     function radios_get_all () {
-
       var gets = _.map ( $('.radio'), function ( radio ) {
-
         return $(radio).radio ( 'get' );
-
       });
-
       $.noty ( gets.join ( ' - ' ) );
-
     }
-
     function radios_check_all () {
       $('.radio').radio ( 'check' );
+    }
+    function toggle_class ( css_class ) {
+      $('.radio').toggleClass ( css_class );
     }

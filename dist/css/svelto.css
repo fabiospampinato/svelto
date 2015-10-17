@@ -5438,7 +5438,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - Checkbox (Settings) v0.1.0
+ * Svelto - Checkbox (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5446,6 +5446,8 @@ button {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* CHECKBOX */
+/* INVALID */
+/* VALID */
 /* =========================================================================
  * Svelto - Checkbox v0.2.0
  * =========================================================================
@@ -5458,6 +5460,8 @@ button {
 .checkbox, .radio {
   /* INPUT */
   /* ICONS */
+  /* INVALID */
+  /* VALID */
   /* CHECKED */
 }
 
@@ -5477,6 +5481,30 @@ button {
   color: #ef6c00 ;
   opacity: 0;
   z-index: 1;
+}
+
+.checkbox.invalid, .invalid.radio {
+  /* ICONS */
+}
+
+.checkbox.invalid .icons, .invalid.radio .icons {
+  /* ICON */
+}
+
+.checkbox.invalid .icons .icon, .invalid.radio .icons .icon {
+  color: #f44336;
+}
+
+.checkbox.valid, .valid.radio {
+  /* ICONS */
+}
+
+.checkbox.valid .icons, .valid.radio .icons {
+  /* ICON */
+}
+
+.checkbox.valid .icons .icon, .valid.radio .icons .icon {
+  color: #4caf50;
 }
 
 .checkbox.checked, .checked.radio {

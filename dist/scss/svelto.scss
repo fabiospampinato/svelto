@@ -4360,7 +4360,7 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
 
 
 /* =========================================================================
- * Svelto - Checkbox (Settings) v0.1.0
+ * Svelto - Checkbox (Settings) v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4372,6 +4372,14 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
 
 $checkbox-icon-on-color: 'secondary' !default;
 $checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
+
+/* INVALID */
+
+$checkbox-invalid-color: $color-red !default;
+
+/* VALID */
+
+$checkbox-valid-color: $color-green !default;
 
 
 /* =========================================================================
@@ -4407,6 +4415,42 @@ $checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
         @include color-text ( $checkbox-icon-on-color );
         opacity: 0;
         z-index: 1;
+      }
+
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* ICONS */
+
+    .icons {
+
+      /* ICON */
+
+      .icon {
+        color: $checkbox-invalid-color;
+      }
+
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* ICONS */
+
+    .icons {
+
+      /* ICON */
+
+      .icon {
+        color: $checkbox-valid-color;
       }
 
     }
