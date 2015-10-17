@@ -10263,7 +10263,7 @@ $slider-transition-all-duration: $transition-duration-fast !default;
 
 
 /* =========================================================================
- * Svelto - Switch (Settings) v0.2.0
+ * Svelto - Switch (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10274,6 +10274,14 @@ $slider-transition-all-duration: $transition-duration-fast !default;
 /* SWITCH */
 
 $switch-width: 2.26667em !default;
+
+/* INVALID */
+
+$switch-invalid-color: $color-red !default;
+
+/* VALID */
+
+$switch-valid-color: $color-green !default;
 
 /* BAR */
 
@@ -11032,6 +11040,42 @@ svg.spinner {
       transition-property: opacity, color;
       transition-duration: $switch-transition-all-duration;
       opacity: 0;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* BAR */
+
+    .switch-bar {
+      background-color: $switch-invalid-color !important;
+    }
+
+    /* HANDLER */
+
+    .switch-handler {
+      background-color: $switch-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* BAR */
+
+    .switch-bar {
+      background-color: $switch-valid-color !important;
+    }
+
+    /* HANDLER */
+
+    .switch-handler {
+      background-color: $switch-valid-color !important;
     }
 
   }

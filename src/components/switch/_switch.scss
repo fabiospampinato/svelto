@@ -83,6 +83,42 @@
 
   }
 
+  /* INVALID */
+
+  &.invalid {
+
+    /* BAR */
+
+    .switch-bar {
+      background-color: $switch-invalid-color !important;
+    }
+
+    /* HANDLER */
+
+    .switch-handler {
+      background-color: $switch-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* BAR */
+
+    .switch-bar {
+      background-color: $switch-valid-color !important;
+    }
+
+    /* HANDLER */
+
+    .switch-handler {
+      background-color: $switch-valid-color !important;
+    }
+
+  }
+
   /* ICON ON / OFF */
 
   &:not(.checked) .icon-off,

@@ -11799,7 +11799,7 @@ table.table.selectable tbody tr.selected {
 /* VALID */
 /* OTHERS */
 /* =========================================================================
- * Svelto - Switch (Settings) v0.2.0
+ * Svelto - Switch (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11807,6 +11807,8 @@ table.table.selectable tbody tr.selected {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* SWITCH */
+/* INVALID */
+/* VALID */
 /* BAR */
 /* HANDLER */
 /* HANDLER ICON */
@@ -12653,6 +12655,8 @@ svg.spinner.multicolor circle {
   /* INPUT */
   /* BAR */
   /* HANDLER */
+  /* INVALID */
+  /* VALID */
   /* ICON ON / OFF */
   /* ENABLED */
 }
@@ -12715,6 +12719,32 @@ svg.spinner.multicolor circle {
   transition-property: opacity, color;
   transition-duration: 0.15s;
   opacity: 0;
+}
+
+.switch.invalid {
+  /* BAR */
+  /* HANDLER */
+}
+
+.switch.invalid .switch-bar {
+  background-color: #f44336 !important;
+}
+
+.switch.invalid .switch-handler {
+  background-color: #f44336 !important;
+}
+
+.switch.valid {
+  /* BAR */
+  /* HANDLER */
+}
+
+.switch.valid .switch-bar {
+  background-color: #4caf50 !important;
+}
+
+.switch.valid .switch-handler {
+  background-color: #4caf50 !important;
 }
 
 .switch:not(.checked) .icon-off,

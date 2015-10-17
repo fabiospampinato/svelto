@@ -19,6 +19,8 @@ append main
     +button("switch_api ( 'check' )").outlined Check all
     +button("switch_api ( 'uncheck' )").outlined Uncheck all
     +button("switch_api ( 'toggle' )").outlined Toggle all
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
 
 append body-end
   +script.
@@ -31,3 +33,6 @@ append body-end
     function switch_api ( action ) {
       $('.switch').switch ( action );
     }  
+    function toggle_class ( css_class ) {
+      $('.switch').toggleClass ( css_class );
+    }
