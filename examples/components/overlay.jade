@@ -1,0 +1,69 @@
+
+extends ../layout.jade
+
+//- Overlay
+
+append main
+  +divider-block Overlay
+
+  +container.outlined
+    +overlay.container
+      p
+        +lorem-ipsum
+    +paragraph-sample
+
+  //- INFO: Card taken from `card.jade`#advanced
+  
+  +card.advanced.outlined
+    +overlay.centerer
+      .xxlarge
+        +icon("thumb_up").xxxxlarge
+    +card-header.outlined.teal
+      +multiple
+        +multiple-sub-left
+          +button-icon('thumb_down').compact.xsmall
+          +button-icon("thumb_up").compact.xsmall
+        +multiple-sub-center 
+          p Header
+        +multiple-sub-right
+          +button-icon('apps').compact.xsmall
+          +button-icon('menu').compact.xsmall
+          +button-icon('more_vert').compact.xsmall
+          +button-icon('refresh').compact.xsmall
+    +card-block
+      +paragraph-sample
+    +card-footer.outlined.pink Footer
+
+  //- INFO: Card taken from `card.jade`#advanced
+
+  +container.outlined
+    +overlay.card.advanced
+      +card-header.outlined.teal
+        +multiple
+          +multiple-sub-left
+            +button-icon('thumb_down').compact.xsmall
+            +button-icon("thumb_up").compact.xsmall
+          +multiple-sub-center 
+            p Header
+          +multiple-sub-right
+            +button-icon('apps').compact.xsmall
+            +button-icon('menu').compact.xsmall
+            +button-icon('more_vert').compact.xsmall
+            +button-icon('refresh').compact.xsmall
+      +card-block
+        +paragraph-sample
+      +card-footer.outlined.pink Footer
+    +paragraph-sample
+    
+  +divider-block Actions
+
+  +multiple.actions
+    +button("toggle_class ( 'active' )").outlined Toggle
+    +button("toggle_class ( 'dimmer' )").outlined Toggle dimmer
+    +button("toggle_class ( 'blurrer' )").outlined Toggle blurrer
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.overlay').toggleClass ( css_class );
+    }

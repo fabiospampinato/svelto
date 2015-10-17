@@ -10,9 +10,13 @@
 
 /* BLURRED */
 
-.blurred {
+%blurred {
   filter: url('/blur.svg#blur') !important;
   filter: blur($blurred-blur-amount) !important;
+}
+
+.blurred {
+  @extend %blurred;
   transition: filter $blurred-transition-duration !important;
   //TODO: If mobile remove the transition, it greatly improves performance
 }

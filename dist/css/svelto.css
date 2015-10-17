@@ -4257,11 +4257,14 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
  * @requires _settings.scss
  * ========================================================================= */
 /* BLURRED */
-.blurred {
+.blurred, .overlay.active.blurrer ~ * {
   -webkit-filter: url("/blur.svg#blur") !important;
           filter: url("/blur.svg#blur") !important;
   -webkit-filter: blur(3px) !important;
           filter: blur(3px) !important;
+}
+
+.blurred {
   transition: -webkit-filter 0.15s, filter 0.15s !important;
 }
 
@@ -4603,7 +4606,7 @@ button {
 }
 
 /* =========================================================================
- * Svelto - Card v0.2.0
+ * Svelto - Card v0.2.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4673,12 +4676,12 @@ button {
   overflow: auto;
 }
 
-.card > :not(.spinner-overlay) {
+.card > :not(.overlay) {
   margin-bottom: 0 !important;
 }
 
-.card > :first-child:not(.spinner-overlay),
-.card > .spinner-overlay + * {
+.card > :first-child:not(.overlay),
+.card > .overlay + * {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
@@ -10498,6 +10501,127 @@ table > :not(tfoot) td .multiple:only-child {
 
 .outlined.outlined-base {
   border-color: #eceff1 !important;
+}
+
+/* =========================================================================
+ * Svelto - Overlay (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../widget/_settings.scss
+ * ========================================================================= */
+/* OVERLAY */
+/* SIBLINGS */
+/* DIMMER */
+/* =========================================================================
+ * Svelto - Overlay v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+/* OVERLAY */
+.overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+  z-index: 50;
+  display: -webkit-flex;
+  display: flex;
+  opacity: 0;
+  transition: opacity 0.15s;
+  pointer-events: none;
+  background-color: transparent;
+  border-radius: inherit;
+  /* OUTLINED PARENT */
+  /* CONTAINER */
+  /* SIBLINGS */
+  /* DIMMER */
+  /* BLURRER */
+  /* ACTIVE */
+}
+
+.overlay > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.overlay > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+.outlined > .overlay {
+  top: -1px;
+  right: -1px;
+  bottom: -1px;
+  left: -1px;
+}
+
+.overlay.container, .overlay.card-header,
+.overlay.card-block,
+.overlay.card-footer, footer.overlay, .image-wrp .overlay.image-caption, .overlay.infobar, .overlay.tagbox {
+  overflow: auto;
+}
+
+.overlay ~ * {
+  transition: opacity 0.15s;
+}
+
+.overlay.dimmer {
+  border-color: black ;
+  color: #ffffff ;
+  background: #212121 ;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.overlay.dimmer.transparentize {
+  border-color: rgba(0, 0, 0, 0.95) ;
+}
+
+.overlay.dimmer.transparentize {
+  background: rgba(33, 33, 33, 0.95) ;
+}
+
+.overlay.dimmer p > a {
+  color: #e0e0e0 ;
+}
+
+.overlay.dimmer p > a:after {
+  border-color: #e5e5e5 ;
+}
+
+.overlay.dimmer p > a:hover {
+  color: #e5e5e5 ;
+}
+
+.overlay.blurrer {
+  /* SIBLINGS */
+}
+
+.overlay.blurrer ~ * {
+  transition-property: opacity, -webkit-filter, opacity, filter !important;
+  transition-duration: 0.15s !important;
+}
+
+.overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+  /* SIBLINGS */
+  /* BLURRER */
+}
+
+.overlay.active ~ * {
+  opacity: 0.2;
+  pointer-events: none;
+}
+
+.overlay.active.blurrer {
+  /* SIBLINGS */
 }
 
 /* =========================================================================

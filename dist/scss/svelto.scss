@@ -3102,9 +3102,13 @@ $dragging-z-index: 1000000 !default;
 
 /* BLURRED */
 
-.blurred {
+%blurred {
   filter: url('/blur.svg#blur') !important;
   filter: blur($blurred-blur-amount) !important;
+}
+
+.blurred {
+  @extend %blurred;
   transition: filter $blurred-transition-duration !important;
   //TODO: If mobile remove the transition, it greatly improves performance
 }
@@ -3452,7 +3456,7 @@ $card-border-radius: $container-border-radius !default;
 
 
 /* =========================================================================
- * Svelto - Card v0.2.0
+ * Svelto - Card v0.2.1
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3505,14 +3509,14 @@ $card-border-radius: $container-border-radius !default;
 
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
 
-  > :not(.spinner-overlay) {
+  > :not(.overlay) {
     margin-bottom: 0 !important; //FIXME: The `!important` shouldn't be necessary
   }
 
   /* BORDER RADIUS INHERITANCE */
 
-  > :first-child:not(.spinner-overlay),
-  > .spinner-overlay + * {
+  > :first-child:not(.overlay),
+  > .overlay + * {
     @include border-top-radius ( inherit );
   }
 
@@ -3788,7 +3792,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
         /* FOLLOWING */
 
-        & ~ * {
+        ~ * {
           transform: translateX(100%);
         }
 
@@ -3828,7 +3832,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
         /* FOLLOWING */
 
-        & ~ * {
+        ~ * {
           transform: translateY(100%);
         }
 
@@ -8936,6 +8940,134 @@ $noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !defaul
 
 
 /* =========================================================================
+ * Svelto - Overlay (Settings) v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * @requires ../widget/_settings.scss
+ * ========================================================================= */
+
+/* OVERLAY */
+
+$overlay-z-index: 50 !default;
+
+$overlay-transition-opacity-duration: $widget-transition-opacity-duration !default;
+
+/* SIBLINGS */
+
+$overlay-siblings-opacity: 0.2 !default;
+$overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-duration !default;
+
+/* DIMMER */
+
+$overlay-dimmer-color: 'black' !default;
+$overlay-dimmer-color-basic: true !default;
+
+$overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacity) !default;
+
+
+/* =========================================================================
+ * Svelto - Overlay v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+
+//INFO: An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
+//FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
+
+/* OVERLAY */
+
+.overlay {
+
+  @include center-absolute-fill ();
+  @include last-child-no-gutter ();
+  z-index: $overlay-z-index;
+  display: flex;
+  opacity: 0;
+  transition: opacity $overlay-transition-opacity-duration;
+  pointer-events: none;
+  background-color: transparent;
+  border-radius: inherit;
+
+  /* OUTLINED PARENT */
+
+  .outlined > & {
+    top: - $outline-width;
+    right: - $outline-width;
+    bottom: - $outline-width;
+    left: - $outline-width;
+  }
+
+  /* CONTAINER */
+
+  &.container {
+    overflow: auto;
+  }
+
+  /* SIBLINGS */
+
+  ~ * {
+    transition: opacity $overlay-siblings-transition-opacity-duration; //INFO: It interferes with other widgets probably //FIXME
+  }
+
+  /* DIMMER */
+
+  &.dimmer {
+    @include color ( $overlay-dimmer-color, $overlay-dimmer-color-basic );
+    background-color: $overlay-dimmer-background-color;
+  }
+
+  /* BLURRER */
+
+  &.blurrer {
+
+    /* SIBLINGS */
+
+    ~ * {
+      transition-property: opacity, filter !important;
+      transition-duration: $overlay-siblings-transition-opacity-duration !important;
+    }
+
+  }
+
+  /* ACTIVE */
+
+  &.active {
+
+    opacity: 1;
+    pointer-events: auto;
+
+    /* SIBLINGS */
+
+    ~ * {
+      opacity: $overlay-siblings-opacity;
+      pointer-events: none;
+    }
+
+
+    /* BLURRER */
+
+    &.blurrer {
+
+      /* SIBLINGS */
+
+      ~ * {
+        @extend %blurred;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Pager v0.1.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -10524,6 +10656,8 @@ $spinner-label-border-radius: 50% !default;
  * @requires _settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
+
+//TODO: Add support for icon at the center of the spinner, sometimes might be useful
 
 /* SPINNER */
 

@@ -165,7 +165,7 @@
 
         /* FOLLOWING */
 
-        & ~ * {
+        ~ * {
           transform: translateX(100%);
         }
 
@@ -205,7 +205,7 @@
 
         /* FOLLOWING */
 
-        & ~ * {
+        ~ * {
           transform: translateY(100%);
         }
 
