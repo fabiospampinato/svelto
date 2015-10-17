@@ -4456,6 +4456,55 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
           animation: rotate 0.9s linear infinite !important;
 }
 
+/* ATTACHED */
+.attached-top, .attached-right, .attached-bottom, .attached-left {
+  margin-bottom: 0;
+}
+
+.attached-top {
+  border-top-right-radius: inherit !important;
+  border-top-left-radius: inherit !important;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.attached-right {
+  border-bottom-right-radius: inherit !important;
+  border-top-right-radius: inherit !important;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.attached-bottom {
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
+  border-bottom-right-radius: inherit !important;
+  border-bottom-left-radius: inherit !important;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.attached-left {
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
+  border-bottom-left-radius: inherit !important;
+  border-top-left-radius: inherit !important;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
 /* GROW */
 .grow {
   -webkit-flex-grow: 1 !important;
@@ -10876,6 +10925,8 @@ code[class*='language-'] .namespace {
   overflow: hidden;
   height: 1em;
   border-radius: 1em;
+  -webkit-transform: translateZ(0);
+          transform: translateZ(0);
   /* HIGHLIGHT */
   /* LABELED */
   /* STRIPED */
@@ -10917,7 +10968,7 @@ code[class*='language-'] .namespace {
           justify-content: center;
   -webkit-align-items: center;
           align-items: center;
-  transition: width 0.15s;
+  transition: min-width 0.15s;
 }
 
 .progressbar-highlight.transparentize {
@@ -10948,11 +10999,6 @@ code[class*='language-'] .namespace {
   content: attr(data-value);
   font-size: 0.75em;
   padding: 0 5px;
-}
-
-.progressbar.striped {
-  -webkit-transform: translateZ(0);
-          transform: translateZ(0);
 }
 
 .progressbar.striped .progressbar-highlight {

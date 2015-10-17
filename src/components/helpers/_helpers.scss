@@ -216,6 +216,54 @@
   animation: rotate $rotating-animation-duration linear infinite !important;
 }
 
+/* ATTACHED */
+
+//INFO: The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+
+%attached {
+  margin-bottom: 0;
+}
+
+.attached-top {
+  @extend %attached;
+  @include border-top-radius ( inherit !important );
+  @include border-bottom-radius ( 0 !important );
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.attached-right {
+  @extend %attached;
+  @include border-right-radius ( inherit !important );
+  @include border-left-radius ( 0 !important );
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.attached-bottom {
+  @extend %attached;
+  @include border-top-radius ( 0 !important );
+  @include border-bottom-radius ( inherit !important );
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.attached-left {
+  @extend %attached;
+  @include border-right-radius ( 0 !important );
+  @include border-left-radius ( inherit !important );
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
 /* GROW */
 
 .grow {

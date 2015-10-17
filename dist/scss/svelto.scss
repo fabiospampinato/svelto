@@ -3308,6 +3308,54 @@ $dragging-z-index: 1000000 !default;
   animation: rotate $rotating-animation-duration linear infinite !important;
 }
 
+/* ATTACHED */
+
+//INFO: The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+
+%attached {
+  margin-bottom: 0;
+}
+
+.attached-top {
+  @extend %attached;
+  @include border-top-radius ( inherit !important );
+  @include border-bottom-radius ( 0 !important );
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.attached-right {
+  @extend %attached;
+  @include border-right-radius ( inherit !important );
+  @include border-left-radius ( 0 !important );
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.attached-bottom {
+  @extend %attached;
+  @include border-top-radius ( 0 !important );
+  @include border-bottom-radius ( inherit !important );
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.attached-left {
+  @extend %attached;
+  @include border-right-radius ( 0 !important );
+  @include border-left-radius ( inherit !important );
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
 /* GROW */
 
 .grow {
@@ -9366,7 +9414,8 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-//- TODO: Add an infinite linear loading progressbar, like before downloading something from the play store
+//TODO: Add support for vertical progressbar (not particularly useful, but when attached it will be an appropriate example of horizontally attached widget)
+//TODO: Add an infinite linear loading progressbar, like before downloading something from the play store
 
 /* PROGRESSBAR */
 
@@ -9378,6 +9427,7 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
   overflow: hidden;
   height: $progressbar-height;
   border-radius: $progressbar-border-radius;
+  transform: translateZ(0); //INFO: Fixes an overflowing bug, it happens only on helpers -> attached as far as I could see
 
   /* HIGHLIGHT */
 
@@ -9388,7 +9438,7 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
     display: flex;
     justify-content: center;
     align-items: center;
-    transition: width $progressbar-transition-all-duration;
+    transition: min-width $progressbar-transition-all-duration;
   }
 
   /* LABELED */
@@ -9408,8 +9458,6 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
   /* STRIPED */
 
   &.striped {
-
-    transform: translateZ(0);
 
     .progressbar-highlight {
       transform: translateZ(0);
