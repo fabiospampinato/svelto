@@ -624,7 +624,7 @@ th {
 
 
 /* =========================================================================
- * Svelto - Colors (Settings) v0.3.0
+ * Svelto - Colors (Settings) v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -662,6 +662,10 @@ $color-red: #f44336 !default; //INFO: Red-500
 $color-pink: #e91e63 !default; //INFO: Pink-500
 $color-teal: #009688 !default; //INFO: Teal-500
 $color-brown: #795548 !default; //INFO: Brown-500
+
+$color-error: $color-red !default;
+$color-warning: $color-yellow !default;
+$color-success: $color-green !default;
 
 $color-transparent: rgba(0, 0, 0, 0) !default;
 $color-inherit: inherit !default;
@@ -865,6 +869,39 @@ $color-brown-text: #ffffff !default; //INFO: Contrast ratio: 6.6
 $color-brown-link: $color-brown-accent !default;
 $color-brown-link-hover: lighten( $color-brown-link, $color-link-hover-lighten-amount ) !default;
 
+/* ERROR */
+
+$color-error-bg: $color-error !default;
+$color-error-bg-hover: lighten( $color-error-bg, $color-hover-lighten-amount ) !default;
+$color-error-bg-active: darken( $color-error-bg, $color-active-darken-amount ) !default;
+$color-error-border: darken( $color-error-bg, $color-border-darken-amount ) !default;
+$color-error-accent: $color-yellow !default;
+$color-error-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-error-link: $color-error-accent !default;
+$color-error-link-hover: lighten( $color-error-link, $color-link-hover-lighten-amount ) !default;
+
+/* WARNING */
+
+$color-warning-bg: $color-warning !default;
+$color-warning-bg-hover: lighten( $color-warning-bg, $color-hover-lighten-amount ) !default;
+$color-warning-bg-active: darken( $color-warning-bg, $color-active-darken-amount ) !default;
+$color-warning-border: darken( $color-warning-bg, $color-border-darken-amount ) !default;
+$color-warning-accent: $color-red !default;
+$color-warning-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-warning-link: $color-warning-accent !default;
+$color-warning-link-hover: lighten( $color-warning-link, $color-link-hover-lighten-amount ) !default;
+
+/* SUCCESS */
+
+$color-success-bg: $color-success !default;
+$color-success-bg-hover: lighten( $color-success-bg, $color-hover-lighten-amount ) !default;
+$color-success-bg-active: darken( $color-success-bg, $color-active-darken-amount ) !default;
+$color-success-border: darken( $color-success-bg, $color-border-darken-amount ) !default;
+$color-success-accent: $color-violet !default;
+$color-success-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-success-link: $color-success-accent !default;
+$color-success-link-hover: lighten( $color-success-link, $color-link-hover-lighten-amount ) !default;
+
 /* TRANSPARENT */
 
 $color-transparent-bg: $color-transparent !default;
@@ -919,6 +956,9 @@ $colors: (
   'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover ),
   'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover ),
   'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover ),
+  'error' : ( $color-error-bg, $color-error-bg-hover, $color-error-bg-active, $color-error-border, $color-error-accent, $color-error-text, $color-error-link, $color-error-link-hover ),
+  'warning' : ( $color-warning-bg, $color-warning-bg-hover, $color-warning-bg-active, $color-warning-border, $color-warning-accent, $color-warning-text, $color-warning-link, $color-warning-link-hover ),
+  'success' : ( $color-success-bg, $color-success-bg-hover, $color-success-bg-active, $color-success-border, $color-success-accent, $color-success-text, $color-success-link, $color-success-link-hover ),
   'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover ),
   'inherit' : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text, $color-inherit-link, $color-inherit-link-hover ),
   'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover )
@@ -11221,6 +11261,7 @@ $table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;
 
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
+//FIXME: The striped table doesn't work anymore
 
 table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
 
@@ -11562,6 +11603,8 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
  * =========================================================================
  * @requires ../widget/_widget.scss
  * ========================================================================= */
+
+//TODO: Add support for tabs in all directions
 
 /* TABS */
 

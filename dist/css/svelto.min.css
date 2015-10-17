@@ -426,7 +426,7 @@ th {
  * @requires _margin.scss
  * ========================================================================= */
 /* =========================================================================
- * Svelto - Colors (Settings) v0.3.0
+ * Svelto - Colors (Settings) v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -451,6 +451,9 @@ th {
 /* PINK */
 /* TEAL */
 /* BROWN */
+/* ERROR */
+/* WARNING */
+/* SUCCESS */
 /* TRANSPARENT */
 /* INHERIT */
 /* BASE */
@@ -2592,6 +2595,336 @@ th {
   color: #7f594c !important;
 }
 
+.error {
+  border-color: #d2190b !important;
+  color: #ffffff !important;
+  background: #f44336 !important;
+}
+
+.error.transparentize {
+  border-color: rgba(210, 25, 11, 0.95) !important;
+}
+
+.error.transparentize {
+  background: rgba(244, 67, 54, 0.95) !important;
+}
+
+.error.actionable.active,
+.error.active.button,
+.error.active.button-corner,
+.carousel:not(.inset) .error.active.carousel-prev,
+.carousel:not(.inset) .error.active.carousel-next,
+.error.button.active,
+.error.button-corner.active {
+  background: #f33a2c !important;
+}
+
+.error.actionable.active.transparentize,
+.error.active.transparentize.button,
+.error.active.transparentize.button-corner,
+.carousel:not(.inset) .error.active.transparentize.carousel-prev,
+.carousel:not(.inset) .error.active.transparentize.carousel-next,
+.error.button.active.transparentize,
+.error.button-corner.active.transparentize {
+  background: rgba(243, 58, 44, 0.95) !important;
+}
+
+.error.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .error.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .error.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: #f54c40 !important;
+}
+
+.error.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .error.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .error.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(245, 76, 64, 0.95) !important;
+}
+
+.error.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .error.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .error.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: #f33a2c !important;
+}
+
+.error.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .error.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .error.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(243, 58, 44, 0.95) !important;
+}
+
+.error.highlight:after {
+  border-color: #fabf40 !important;
+}
+
+.error.highlight:after.transparentize {
+  border-color: rgba(250, 191, 64, 0.95) !important;
+}
+
+.error p > a {
+  color: #fabf40 !important;
+}
+
+.error p > a:after {
+  border-color: #fac24a !important;
+}
+
+.error p > a:hover {
+  color: #fac24a !important;
+}
+
+.text-error {
+  color: #f44336;
+}
+
+.link-error {
+  color: #f44336 !important;
+}
+
+.link-error:after {
+  border-color: #f54c40 !important;
+}
+
+.link-error:hover {
+  color: #f54c40 !important;
+}
+
+.warning {
+  border-color: #e7a006 !important;
+  color: #ffffff !important;
+  background: #fabf40 !important;
+}
+
+.warning.transparentize {
+  border-color: rgba(231, 160, 6, 0.95) !important;
+}
+
+.warning.transparentize {
+  background: rgba(250, 191, 64, 0.95) !important;
+}
+
+.warning.actionable.active,
+.warning.active.button,
+.warning.active.button-corner,
+.carousel:not(.inset) .warning.active.carousel-prev,
+.carousel:not(.inset) .warning.active.carousel-next,
+.warning.button.active,
+.warning.button-corner.active {
+  background: #fabc36 !important;
+}
+
+.warning.actionable.active.transparentize,
+.warning.active.transparentize.button,
+.warning.active.transparentize.button-corner,
+.carousel:not(.inset) .warning.active.transparentize.carousel-prev,
+.carousel:not(.inset) .warning.active.transparentize.carousel-next,
+.warning.button.active.transparentize,
+.warning.button-corner.active.transparentize {
+  background: rgba(250, 188, 54, 0.95) !important;
+}
+
+.warning.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .warning.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .warning.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: #fac24a !important;
+}
+
+.warning.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .warning.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .warning.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(250, 194, 74, 0.95) !important;
+}
+
+.warning.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .warning.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .warning.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: #fabc36 !important;
+}
+
+.warning.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .warning.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .warning.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(250, 188, 54, 0.95) !important;
+}
+
+.warning.highlight:after {
+  border-color: #f44336 !important;
+}
+
+.warning.highlight:after.transparentize {
+  border-color: rgba(244, 67, 54, 0.95) !important;
+}
+
+.warning p > a {
+  color: #f44336 !important;
+}
+
+.warning p > a:after {
+  border-color: #f54c40 !important;
+}
+
+.warning p > a:hover {
+  color: #f54c40 !important;
+}
+
+.text-warning {
+  color: #fabf40;
+}
+
+.link-warning {
+  color: #fabf40 !important;
+}
+
+.link-warning:after {
+  border-color: #fac24a !important;
+}
+
+.link-warning:hover {
+  color: #fac24a !important;
+}
+
+.success {
+  border-color: #357a38 !important;
+  color: #ffffff !important;
+  background: #4caf50 !important;
+}
+
+.success.transparentize {
+  border-color: rgba(53, 122, 56, 0.95) !important;
+}
+
+.success.transparentize {
+  background: rgba(76, 175, 80, 0.95) !important;
+}
+
+.success.actionable.active,
+.success.active.button,
+.success.active.button-corner,
+.carousel:not(.inset) .success.active.carousel-prev,
+.carousel:not(.inset) .success.active.carousel-next,
+.success.button.active,
+.success.button-corner.active {
+  background: #49a84d !important;
+}
+
+.success.actionable.active.transparentize,
+.success.active.transparentize.button,
+.success.active.transparentize.button-corner,
+.carousel:not(.inset) .success.active.transparentize.carousel-prev,
+.carousel:not(.inset) .success.active.transparentize.carousel-next,
+.success.button.active.transparentize,
+.success.button-corner.active.transparentize {
+  background: rgba(73, 168, 77, 0.95) !important;
+}
+
+.success.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .success.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .success.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: #52b455 !important;
+}
+
+.success.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .success.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.carousel:not(.inset) .success.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover.transparentize {
+  background: rgba(82, 180, 85, 0.95) !important;
+}
+
+.success.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .success.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .success.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: #49a84d !important;
+}
+
+.success.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .success.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.carousel:not(.inset) .success.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize,
+.success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active.transparentize {
+  background: rgba(73, 168, 77, 0.95) !important;
+}
+
+.success.highlight:after {
+  border-color: #673ab7 !important;
+}
+
+.success.highlight:after.transparentize {
+  border-color: rgba(103, 58, 183, 0.95) !important;
+}
+
+.success p > a {
+  color: #673ab7 !important;
+}
+
+.success p > a:after {
+  border-color: #6b3cbf !important;
+}
+
+.success p > a:hover {
+  color: #6b3cbf !important;
+}
+
+.text-success {
+  color: #4caf50;
+}
+
+.link-success {
+  color: #4caf50 !important;
+}
+
+.link-success:after {
+  border-color: #52b455 !important;
+}
+
+.link-success:hover {
+  color: #52b455 !important;
+}
+
 .transparent {
   border-color: transparent !important;
   color: inherit !important;
@@ -4234,6 +4567,18 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
 
 .label-tag > *.tag-circle-brown:after, .button-tag > *.tag-circle-brown:after {
   background-color: #795548;
+}
+
+.label-tag > *.tag-circle-error:after, .button-tag > *.tag-circle-error:after {
+  background-color: #f44336;
+}
+
+.label-tag > *.tag-circle-warning:after, .button-tag > *.tag-circle-warning:after {
+  background-color: #fabf40;
+}
+
+.label-tag > *.tag-circle-success:after, .button-tag > *.tag-circle-success:after {
+  background-color: #4caf50;
 }
 
 .label-tag > *.tag-circle-transparent:after, .button-tag > *.tag-circle-transparent:after {
@@ -7475,6 +7820,21 @@ footer.beveled.brown:after {
   background-image: radial-gradient(transparent 70.72%, #795548 70.72%);
 }
 
+footer.beveled.error:before,
+footer.beveled.error:after {
+  background-image: radial-gradient(transparent 70.72%, #f44336 70.72%);
+}
+
+footer.beveled.warning:before,
+footer.beveled.warning:after {
+  background-image: radial-gradient(transparent 70.72%, #fabf40 70.72%);
+}
+
+footer.beveled.success:before,
+footer.beveled.success:after {
+  background-image: radial-gradient(transparent 70.72%, #4caf50 70.72%);
+}
+
 footer.beveled.transparent:before,
 footer.beveled.transparent:after {
   background-image: radial-gradient(transparent 70.72%, transparent 70.72%);
@@ -8158,6 +8518,18 @@ header .header-background {
 
 .highlight.highlight-brown:after {
   border-color: #795548 !important;
+}
+
+.highlight.highlight-error:after {
+  border-color: #f44336 !important;
+}
+
+.highlight.highlight-warning:after {
+  border-color: #fabf40 !important;
+}
+
+.highlight.highlight-success:after {
+  border-color: #4caf50 !important;
 }
 
 .highlight.highlight-transparent:after {
@@ -8853,6 +9225,30 @@ img {
 
 .input-wrp.text-field-brown > .text-field-bar, .text-field-brown.textarea-wrp > .text-field-bar {
   border-bottom-color: #795548 !important;
+}
+
+.input-wrp.text-field-error > .text-field:focus ~ label, .text-field-error.textarea-wrp > .text-field:focus ~ label {
+  color: #f44336 !important;
+}
+
+.input-wrp.text-field-error > .text-field-bar, .text-field-error.textarea-wrp > .text-field-bar {
+  border-bottom-color: #f44336 !important;
+}
+
+.input-wrp.text-field-warning > .text-field:focus ~ label, .text-field-warning.textarea-wrp > .text-field:focus ~ label {
+  color: #fabf40 !important;
+}
+
+.input-wrp.text-field-warning > .text-field-bar, .text-field-warning.textarea-wrp > .text-field-bar {
+  border-bottom-color: #fabf40 !important;
+}
+
+.input-wrp.text-field-success > .text-field:focus ~ label, .text-field-success.textarea-wrp > .text-field:focus ~ label {
+  color: #4caf50 !important;
+}
+
+.input-wrp.text-field-success > .text-field-bar, .text-field-success.textarea-wrp > .text-field-bar {
+  border-bottom-color: #4caf50 !important;
 }
 
 .input-wrp.text-field-transparent > .text-field:focus ~ label, .text-field-transparent.textarea-wrp > .text-field:focus ~ label {
@@ -10619,6 +11015,18 @@ table > :not(tfoot) td .multiple:only-child {
   border-color: #795548 !important;
 }
 
+.outlined.outlined-error {
+  border-color: #f44336 !important;
+}
+
+.outlined.outlined-warning {
+  border-color: #fabf40 !important;
+}
+
+.outlined.outlined-success {
+  border-color: #4caf50 !important;
+}
+
 .outlined.outlined-transparent {
   border-color: transparent !important;
 }
@@ -11543,6 +11951,18 @@ code[class*='language-'] .namespace {
   background-color: #795548;
 }
 
+.ripple.ripple-error > .ripple-circle:before {
+  background-color: #f44336;
+}
+
+.ripple.ripple-warning > .ripple-circle:before {
+  background-color: #fabf40;
+}
+
+.ripple.ripple-success > .ripple-circle:before {
+  background-color: #4caf50;
+}
+
 .ripple.ripple-transparent > .ripple-circle:before {
   background-color: transparent;
 }
@@ -12429,6 +12849,18 @@ svg.spinner.brown circle {
   stroke: #795548 !important;
 }
 
+svg.spinner.error circle {
+  stroke: #f44336 !important;
+}
+
+svg.spinner.warning circle {
+  stroke: #fabf40 !important;
+}
+
+svg.spinner.success circle {
+  stroke: #4caf50 !important;
+}
+
 svg.spinner.transparent circle {
   stroke: transparent !important;
 }
@@ -12572,6 +13004,18 @@ svg.spinner.multicolor circle {
 
 .spinner-label.brown .spinner circle {
   stroke: #ff9800 !important;
+}
+
+.spinner-label.error .spinner circle {
+  stroke: #fabf40 !important;
+}
+
+.spinner-label.warning .spinner circle {
+  stroke: #f44336 !important;
+}
+
+.spinner-label.success .spinner circle {
+  stroke: #673ab7 !important;
 }
 
 .spinner-label.transparent .spinner circle {

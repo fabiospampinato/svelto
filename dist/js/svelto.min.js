@@ -8487,6 +8487,10 @@ $(function () {
 //FIXME: Add support tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 
+
+//FIXME: It doens't work without the cmd/ctrl key on desktop
+
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
