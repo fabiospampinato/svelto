@@ -123,3 +123,15 @@ append main
     +multiple.joined
       +label.gray.outlined http://
       +input({ label: "Placeholder...", value: "Value" }).no-bar.no-floating.white.outlined
+
+  +divider-block Actions
+
+  +multiple.actions
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.input-wrp').toggleClass ( css_class );
+    }

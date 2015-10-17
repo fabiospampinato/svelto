@@ -8812,7 +8812,9 @@ img {
   opacity: 1;
 }
 
-.input-wrp.invalid > .text-field ~ label, .invalid.textarea-wrp > .text-field ~ label {
+.input-wrp.invalid > .text-field ~ label,
+.invalid.textarea-wrp > .text-field ~ label,
+.input-wrp.invalid > .text-field:focus ~ label, .invalid.textarea-wrp > .text-field:focus ~ label {
   color: #f44336 !important;
 }
 
@@ -8820,7 +8822,9 @@ img {
   border-bottom-color: #f44336 !important;
 }
 
-.input-wrp.valid > .text-field ~ label, .valid.textarea-wrp > .text-field ~ label {
+.input-wrp.valid > .text-field ~ label,
+.valid.textarea-wrp > .text-field ~ label,
+.input-wrp.valid > .text-field:focus ~ label, .valid.textarea-wrp > .text-field:focus ~ label {
   color: #4caf50 !important;
 }
 

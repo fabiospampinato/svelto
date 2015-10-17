@@ -7443,7 +7443,8 @@ $input-transition-all-duration: $transition-duration-fast !default;
 
     > .text-field {
 
-      ~ label {
+      ~ label,
+      &:focus ~ label {
         color: $input-invalid-color !important;
       }
 
@@ -7461,7 +7462,8 @@ $input-transition-all-duration: $transition-duration-fast !default;
 
     > .text-field {
 
-      ~ label {
+      ~ label,
+      &:focus ~ label {
         color: $input-valid-color !important;
       }
 
