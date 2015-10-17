@@ -9912,7 +9912,7 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
 
 /* =========================================================================
- * Svelto - Select (Settings) v0.2.0
+ * Svelto - Select (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9924,9 +9924,17 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
 $select-z-depth: 1 !default;
 
+/* INVALID */
+
+$select-invalid-color: $color-red !default;
+
+/* VALID */
+
+$select-valid-color: $color-green !default;
+
 
 /* =========================================================================
- * Svelto - Select v0.2.0
+ * Svelto - Select v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9949,6 +9957,30 @@ $select-z-depth: 1 !default;
     font-size: $font-size;
     opacity: 0;
     z-index: 1;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* ICON */
+
+    .icon {
+      color: $checkbox-invalid-color;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* ICON */
+
+    .icon {
+      color: $checkbox-valid-color;
+    }
+
   }
 
   /* VALUEHOLDER */
@@ -10217,6 +10249,14 @@ $slider-handler-active-transform-scale: 1.35 !default;
 
 $slider-handler-label-font-size: 0.6em !default;
 
+/* INVALID */
+
+$slider-invalid-color: $color-red !default;
+
+/* VALID */
+
+$slider-valid-color: $color-green !default;
+
 /* OTHERS */
 
 $slider-transition-all-duration: $transition-duration-fast !default;
@@ -10416,6 +10456,42 @@ $switch-transition-all-duration: $transition-duration-fast !default;
     transition-duration: $slider-transition-all-duration;
     transform: scale(0);
     opacity: 0;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* HIGHLIGHT */
+
+    .slider-highlight {
+      background-color: $slider-invalid-color !important;
+    }
+
+    /* HANDLER */
+
+    .slider-handler {
+      background-color: $slider-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* HIGHLIGHT */
+
+    .slider-highlight {
+      background-color: $slider-valid-color !important;
+    }
+
+    /* HANDLER */
+
+    .slider-handler {
+      background-color: $slider-valid-color !important;
+    }
+
   }
 
   /* ENABLED */

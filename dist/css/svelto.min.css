@@ -11525,7 +11525,7 @@ a.ripple > .ripple-circle {
 }
 
 /* =========================================================================
- * Svelto - Select (Settings) v0.2.0
+ * Svelto - Select (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11533,8 +11533,10 @@ a.ripple > .ripple-circle {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* SELECT */
+/* INVALID */
+/* VALID */
 /* =========================================================================
- * Svelto - Select v0.2.0
+ * Svelto - Select v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11544,6 +11546,8 @@ a.ripple > .ripple-circle {
 /* SELECT BTN */
 .select-btn {
   /* DEFAULT SELECT */
+  /* INVALID */
+  /* VALID */
   /* VALUEHOLDER */
   /* TRIGGER DIRECTION */
 }
@@ -11563,6 +11567,22 @@ a.ripple > .ripple-circle {
   font-size: 16px;
   opacity: 0;
   z-index: 1;
+}
+
+.select-btn.invalid {
+  /* ICON */
+}
+
+.select-btn.invalid .icon {
+  color: #f44336;
+}
+
+.select-btn.valid {
+  /* ICON */
+}
+
+.select-btn.valid .icon {
+  color: #4caf50;
 }
 
 .select-btn .valueholder {
@@ -11775,6 +11795,8 @@ table.table.selectable tbody tr.selected {
 /* HIGHLIGHT */
 /* HANDLER */
 /* LABEL */
+/* INVALID */
+/* VALID */
 /* OTHERS */
 /* =========================================================================
  * Svelto - Switch (Settings) v0.2.0
@@ -11822,6 +11844,8 @@ table.table.selectable tbody tr.selected {
   /* HIGHLIGHT */
   /* HANDLER WRAPPER */
   /* HANDLER */
+  /* INVALID */
+  /* VALID */
   /* ENABLED */
   /* HOVER / ACTIVE */
 }
@@ -12006,6 +12030,32 @@ table.table.selectable tbody tr.selected {
   -webkit-transform: scale(0);
           transform: scale(0);
   opacity: 0;
+}
+
+.slider.invalid {
+  /* HIGHLIGHT */
+  /* HANDLER */
+}
+
+.slider.invalid .slider-highlight {
+  background-color: #f44336 !important;
+}
+
+.slider.invalid .slider-handler {
+  background-color: #f44336 !important;
+}
+
+.slider.valid {
+  /* HIGHLIGHT */
+  /* HANDLER */
+}
+
+.slider.valid .slider-highlight {
+  background-color: #4caf50 !important;
+}
+
+.slider.valid .slider-handler {
+  background-color: #4caf50 !important;
 }
 
 .slider:not(.disabled),

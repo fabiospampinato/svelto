@@ -153,6 +153,42 @@
     opacity: 0;
   }
 
+  /* INVALID */
+
+  &.invalid {
+
+    /* HIGHLIGHT */
+
+    .slider-highlight {
+      background-color: $slider-invalid-color !important;
+    }
+
+    /* HANDLER */
+
+    .slider-handler {
+      background-color: $slider-invalid-color !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* HIGHLIGHT */
+
+    .slider-highlight {
+      background-color: $slider-valid-color !important;
+    }
+
+    /* HANDLER */
+
+    .slider-handler {
+      background-color: $slider-valid-color !important;
+    }
+
+  }
+
   /* ENABLED */
 
   &:not(.disabled),

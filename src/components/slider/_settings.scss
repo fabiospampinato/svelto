@@ -52,6 +52,14 @@ $slider-handler-active-transform-scale: 1.35 !default;
 
 $slider-handler-label-font-size: 0.6em !default;
 
+/* INVALID */
+
+$slider-invalid-color: $color-red !default;
+
+/* VALID */
+
+$slider-valid-color: $color-green !default;
+
 /* OTHERS */
 
 $slider-transition-all-duration: $transition-duration-fast !default;

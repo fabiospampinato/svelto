@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Select (Settings) v0.2.0
+ * Svelto - Select (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,3 +11,11 @@
 /* SELECT */
 
 $select-z-depth: 1 !default;
+
+/* INVALID */
+
+$select-invalid-color: $color-red !default;
+
+/* VALID */
+
+$select-valid-color: $color-green !default;

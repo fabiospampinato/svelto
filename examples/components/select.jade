@@ -15,3 +15,15 @@ append main
       .valueholder.right
     +select-btn({ options: elo_options, selected: "public", id: "name3", icon: "settings" }).outlined.compact
     +select-btn({ options: elo_options, selected: "public", id: "name4", icon: "settings" }).outlined.rounded.compact
+
+  +divider-block Actions
+
+  +multiple.actions
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.select-btn').toggleClass ( css_class );
+    }

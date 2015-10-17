@@ -8,6 +8,8 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
+//TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';

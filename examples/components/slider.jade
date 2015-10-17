@@ -20,6 +20,8 @@ append main
       +button("slider_set_all ()").secondary.outlined Set all
     +button("slider_api ( 'increase' )").outlined Increase all
     +button("slider_api ( 'decrease' )").outlined Decrease all
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
 
 append body-end
   +script.
@@ -36,3 +38,6 @@ append body-end
     function slider_api ( action ) {
       $('.slider').slider ( action );
     }  
+    function toggle_class ( css_class ) {
+      $('.slider').toggleClass ( css_class );
+    }
