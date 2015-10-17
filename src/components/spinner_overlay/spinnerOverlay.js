@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner Overlay v0.3.0
+ * Svelto - Spinner Overlay v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -35,12 +35,8 @@
       blurrer: false,
       multicolor: false,
       color: 'white',
-      classes: {
-        active: 'active'
-      },
       callbacks: {
-        show: _.noop,
-        hide: _.noop
+        //TODO: Add callbacks, mimic those from $.svelto.overlay
       }
     },
 
@@ -49,49 +45,35 @@
     _variables: function () {
 
       this.$overlayed = this.$element;
-      this.$overlay = $(this._tmpl ( 'overlay', this.options ));
+      this.$overlay = $(this._tmpl ( 'overlay', this.options )).prependTo ( this.$overlayed );
 
-    },
-
-    _init: function () {
-
-      this.$overlayed.prepend ( this.$overlay );
+      this.overlay = this.$overlay.overlay ( 'instance' );
 
     },
 
     /* API */
 
-    isActive: function () {
+    isOpen: function () {
 
-      return this.$overlay.hasClass ( this.options.classes.active );
+      return this.overlay.isOpen ();
 
     },
 
     toggle: function ( force ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this.isActive ();
-
-      }
-
-      this._frame ( function () {
-
-        this.$overlay.toggleClass ( this.options.classes.active, force );
-
-      });
+      this.overlay.toggle ( force );
 
     },
 
-    show: function () {
+    open: function () {
 
-      this.toggle ( true );
+      this.overlay.open ();
 
     },
 
-    hide: function () {
+    close: function () {
 
-      this.toggle ( false );
+      this.overlay.close ();
 
     }
 

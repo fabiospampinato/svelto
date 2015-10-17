@@ -9035,9 +9035,9 @@ $overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacit
 
   }
 
-  /* ACTIVE */
+  /* OPEN */
 
-  &.active {
+  &.open {
 
     opacity: 1;
     pointer-events: auto;
@@ -10530,9 +10530,9 @@ $spinner-overlay-transition-transform-duration: $transition-duration-normal !def
     transition: transform $spinner-overlay-transition-transform-duration;
   }
 
-  /* INACTIVE */
+  /* CLOSE */
 
-  &:not(.active) {
+  &:not(.open) {
 
     /* SPINNER */
 
@@ -10550,9 +10550,9 @@ $spinner-overlay-transition-transform-duration: $transition-duration-normal !def
 
   }
 
-  /* ACTIVE */
+  /* OPEN */
 
-  &.active {
+  &.open {
 
     /* SPINNER LABEL */
 

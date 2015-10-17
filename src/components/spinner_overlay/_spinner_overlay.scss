@@ -23,9 +23,9 @@
     transition: transform $spinner-overlay-transition-transform-duration;
   }
 
-  /* INACTIVE */
+  /* CLOSE */
 
-  &:not(.active) {
+  &:not(.open) {
 
     /* SPINNER */
 
@@ -43,9 +43,9 @@
 
   }
 
-  /* ACTIVE */
+  /* OPEN */
 
-  &.active {
+  &.open {
 
     /* SPINNER LABEL */
 

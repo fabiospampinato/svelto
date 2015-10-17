@@ -4257,7 +4257,7 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
  * @requires _settings.scss
  * ========================================================================= */
 /* BLURRED */
-.blurred, .overlay.active.blurrer ~ * {
+.blurred, .overlay.open.blurrer ~ * {
   -webkit-filter: url("/blur.svg#blur") !important;
           filter: url("/blur.svg#blur") !important;
   -webkit-filter: blur(3px) !important;
@@ -10544,7 +10544,7 @@ table > :not(tfoot) td .multiple:only-child {
   /* SIBLINGS */
   /* DIMMER */
   /* BLURRER */
-  /* ACTIVE */
+  /* OPEN */
 }
 
 .overlay > :last-child {
@@ -10608,19 +10608,19 @@ table > :not(tfoot) td .multiple:only-child {
   transition-duration: 0.15s !important;
 }
 
-.overlay.active {
+.overlay.open {
   opacity: 1;
   pointer-events: auto;
   /* SIBLINGS */
   /* BLURRER */
 }
 
-.overlay.active ~ * {
+.overlay.open ~ * {
   opacity: 0.2;
   pointer-events: none;
 }
 
-.overlay.active.blurrer {
+.overlay.open.blurrer {
   /* SIBLINGS */
 }
 
@@ -12094,8 +12094,8 @@ table.table.sortable th[data-sort].sort-asc:before {
   -webkit-justify-content: center;
           justify-content: center;
   /* SPINNER LABEL */
-  /* INACTIVE */
-  /* ACTIVE */
+  /* CLOSE */
+  /* OPEN */
 }
 
 .spinner-overlay .spinner-label {
@@ -12106,26 +12106,26 @@ table.table.sortable th[data-sort].sort-asc:before {
   transition: transform 0.35s;
 }
 
-.spinner-overlay:not(.active) {
+.spinner-overlay:not(.open) {
   /* SPINNER */
 }
 
-.spinner-overlay:not(.active) .spinner {
+.spinner-overlay:not(.open) .spinner {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
   /* CIRCLE */
 }
 
-.spinner-overlay:not(.active) .spinner circle {
+.spinner-overlay:not(.open) .spinner circle {
   -webkit-animation-play-state: paused;
           animation-play-state: paused;
 }
 
-.spinner-overlay.active {
+.spinner-overlay.open {
   /* SPINNER LABEL */
 }
 
-.spinner-overlay.active .spinner-label {
+.spinner-overlay.open .spinner-label {
   -webkit-transform: scale(1);
           transform: scale(1);
 }

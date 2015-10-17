@@ -108,7 +108,7 @@
         this._isHoverOpen = false;
         this._hoverTrigger = trigger;
 
-        this.hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
 
         this._one ( $(trigger), Pointer.leave, this.__hoverTriggerLeave );
 
@@ -124,7 +124,7 @@
 
         this._isHoverOpen = true;
 
-        this.hoverOpenTimeout = false;
+        this._hoverOpenTimeout = false;
 
       }
 
@@ -132,17 +132,17 @@
 
     __hoverTriggerLeave: function ( event, trigger ) {
 
-      if ( this.hoverOpenTimeout ) {
+      if ( this._hoverOpenTimeout ) {
 
-        clearTimeout ( this.hoverOpenTimeout );
+        clearTimeout ( this._hoverOpenTimeout );
 
-        this.hoverOpenTimeout = false;
+        this._hoverOpenTimeout = false;
 
       }
 
       if ( this._isHoverOpen ) {
 
-        this.hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
         this._on ( Pointer.enter, this.__hoverDropdownEnter );
 
@@ -158,7 +158,7 @@
 
         this._isHoverOpen = false;
 
-        this.hoverCloseTimeout = false;
+        this._hoverCloseTimeout = false;
 
       }
 
@@ -168,11 +168,11 @@
 
     __hoverDropdownEnter: function () {
 
-      if ( this.hoverCloseTimeout ) {
+      if ( this._hoverCloseTimeout ) {
 
-        clearTimeout ( this.hoverCloseTimeout );
+        clearTimeout ( this._hoverCloseTimeout );
 
-        this.hoverCloseTimeout = false;
+        this._hoverCloseTimeout = false;
 
       }
 
@@ -188,7 +188,7 @@
 
       if ( this._isHoverOpen ) {
 
-        this.hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
       }
 

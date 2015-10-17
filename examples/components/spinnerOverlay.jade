@@ -31,19 +31,19 @@ append main
   +divider-block Actions
 
   +multiple.actions
-    +button("spinnerOverlay_get_all ()").outlined Get All
-    +button("spinnerOverlay_api ( 'toggle' )").outlined Toggle All
-    +button("spinnerOverlay_api ( 'show' )").outlined Show All
-    +button("spinnerOverlay_api ( 'hide' )").outlined Hide All
+    +button("spinnerOverlays_get_all ()").outlined Get all
+    +button("spinnerOverlay_api ( 'toggle' )").outlined Toggle all
+    +button("spinnerOverlay_api ( 'open' )").outlined Open all
+    +button("spinnerOverlay_api ( 'close' )").outlined Close all
 
 append body-end
   +script.
-    function spinnerOverlay_get_all () {
+    function spinnerOverlays_get_all () {
       var gets = _.map ( $('.overlayerable'), function ( overlayerable ) {
-        return $(overlayerable).spinnerOverlay ( 'isActive' );
+        return $(overlayerable).spinnerOverlay ( 'isOpen' );
       });
       $.noty ( gets.join ( ' - ' ) );
     }
     function spinnerOverlay_api ( action ) {
-      $('.overlayerable' ).spinnerOverlay ( action );
-    }
+      $('.overlayerable').spinnerOverlay ( action );
+    }  

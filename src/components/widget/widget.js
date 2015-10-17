@@ -10,6 +10,7 @@
  * ========================================================================= */
 
 //TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
+//TODO: Add support for element-level options via `data-name-options`
 
 (function ( $, _, window, document, undefined ) {
 

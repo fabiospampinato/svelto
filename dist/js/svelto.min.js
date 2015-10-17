@@ -760,6 +760,7 @@
  * ========================================================================= */
 
 //TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
+//TODO: Add support for element-level options via `data-name-options`
 
 (function ( $, _, window, document, undefined ) {
 
@@ -4560,7 +4561,7 @@
         this._isHoverOpen = false;
         this._hoverTrigger = trigger;
 
-        this.hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
 
         this._one ( $(trigger), Pointer.leave, this.__hoverTriggerLeave );
 
@@ -4576,7 +4577,7 @@
 
         this._isHoverOpen = true;
 
-        this.hoverOpenTimeout = false;
+        this._hoverOpenTimeout = false;
 
       }
 
@@ -4584,17 +4585,17 @@
 
     __hoverTriggerLeave: function ( event, trigger ) {
 
-      if ( this.hoverOpenTimeout ) {
+      if ( this._hoverOpenTimeout ) {
 
-        clearTimeout ( this.hoverOpenTimeout );
+        clearTimeout ( this._hoverOpenTimeout );
 
-        this.hoverOpenTimeout = false;
+        this._hoverOpenTimeout = false;
 
       }
 
       if ( this._isHoverOpen ) {
 
-        this.hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
         this._on ( Pointer.enter, this.__hoverDropdownEnter );
 
@@ -4610,7 +4611,7 @@
 
         this._isHoverOpen = false;
 
-        this.hoverCloseTimeout = false;
+        this._hoverCloseTimeout = false;
 
       }
 
@@ -4620,11 +4621,11 @@
 
     __hoverDropdownEnter: function () {
 
-      if ( this.hoverCloseTimeout ) {
+      if ( this._hoverCloseTimeout ) {
 
-        clearTimeout ( this.hoverCloseTimeout );
+        clearTimeout ( this._hoverCloseTimeout );
 
-        this.hoverCloseTimeout = false;
+        this._hoverCloseTimeout = false;
 
       }
 
@@ -4640,7 +4641,7 @@
 
       if ( this._isHoverOpen ) {
 
-        this.hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
       }
 
@@ -5002,7 +5003,7 @@
 
 
 /* =========================================================================
- * Svelto - Spinner Overlay v0.3.0
+ * Svelto - Spinner Overlay v0.4.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5037,12 +5038,8 @@
       blurrer: false,
       multicolor: false,
       color: 'white',
-      classes: {
-        active: 'active'
-      },
       callbacks: {
-        show: _.noop,
-        hide: _.noop
+        //TODO: Add callbacks, mimic those from $.svelto.overlay
       }
     },
 
@@ -5051,49 +5048,35 @@
     _variables: function () {
 
       this.$overlayed = this.$element;
-      this.$overlay = $(this._tmpl ( 'overlay', this.options ));
+      this.$overlay = $(this._tmpl ( 'overlay', this.options )).prependTo ( this.$overlayed );
 
-    },
-
-    _init: function () {
-
-      this.$overlayed.prepend ( this.$overlay );
+      this.overlay = this.$overlay.overlay ( 'instance' );
 
     },
 
     /* API */
 
-    isActive: function () {
+    isOpen: function () {
 
-      return this.$overlay.hasClass ( this.options.classes.active );
+      return this.overlay.isOpen ();
 
     },
 
     toggle: function ( force ) {
 
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !this.isActive ();
-
-      }
-
-      this._frame ( function () {
-
-        this.$overlay.toggleClass ( this.options.classes.active, force );
-
-      });
+      this.overlay.toggle ( force );
 
     },
 
-    show: function () {
+    open: function () {
 
-      this.toggle ( true );
+      this.overlay.open ();
 
     },
 
-    hide: function () {
+    close: function () {
 
-      this.toggle ( false );
+      this.overlay.close ();
 
     }
 
@@ -6877,6 +6860,199 @@
     return $.nTimesAction ( _.merge ( { group: 'ota' }, options, { times: 1 } ) );
 
   };
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Overlay v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* OVERLAY */
+
+  $.factory ( 'svelto.overlay', {
+
+    /* OPTIONS */
+
+    options: {
+      hover: {
+        triggerable: false,
+        delays: {
+          open: 750,
+          close: 250
+        }
+      },
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        trigger: '.overlay-trigger',
+        closer: '.overlay-closer'
+      },
+      callbacks: {
+        open: _.noop,
+        close: _.noop
+      }
+    },
+
+    /* SPECIAL */
+
+    _variables: function () {
+
+      this.$overlay = this.$element;
+      this.$overlayed = this.$overlay.parent ();
+
+      this.$triggers = this.$overlayed.find ( this.options.selectors.trigger );
+      this.$closers = this.$overlayed.find ( this.options.selectors.closer );
+
+      this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
+
+    },
+
+    _events: function () {
+
+      /* TRIGGER */
+
+      this._on ( this.$triggers, Pointer.tap, this.open );
+
+      /* CLOSER */
+
+      this._on ( this.$closers, Pointer.tap, this.close );
+
+      /* HOVER */
+
+      if ( this.options.hover.triggerable ) {
+
+        this._on ( this.$overlayed, Pointer.enter, this.__hoverEnter );
+
+      }
+
+    },
+
+    /* HOVER */
+
+    __hoverEnter: function () {
+
+      if ( !this._isOpen ) {
+
+        this._isHoverOpen = false;
+
+        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+
+        this._one ( this.$overlayed, Pointer.leave, this.__hoverLeave );
+
+      }
+
+    },
+
+    __hoverOpen: function () {
+
+      if ( !this._isOpen ) {
+
+        this.open ();
+
+        this._isHoverOpen = true;
+
+        this._hoverOpenTimeout = false;
+
+      }
+
+    },
+
+    __hoverLeave: function () {
+
+      if ( this._hoverOpenTimeout ) {
+
+        clearTimeout ( this._hoverOpenTimeout );
+
+        this._hoverOpenTimeout = false;
+
+      }
+
+      if ( this._isHoverOpen ) {
+
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+      }
+
+    },
+
+    __hoverClose: function () {
+
+      if ( this._isHoverOpen ) {
+
+        this.close ();
+
+        this._isHoverOpen = false;
+
+        this._hoverCloseTimeout = false;
+
+      }
+
+    },
+
+    /* API */
+
+    isOpen: function () {
+
+      return this._isOpen;
+
+    },
+
+    toggle: function ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this._isOpen = force;
+
+        this._frame ( function () {
+
+          this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
+
+          this._trigger ( this._isOpen ? 'open' : 'close' );
+
+        });
+
+      }
+
+    },
+
+    open: function () {
+
+      this.toggle ( true );
+
+    },
+
+    close: function () {
+
+      this.toggle ( false );
+
+    }
+
+  });
+
+  /* READY */
+
+  $(function () {
+
+    $('.overlay').overlay ();
+
+  });
 
 }( jQuery, _, window, document ));
 

@@ -55,15 +55,37 @@ append main
       +card-footer.outlined.pink Footer
     +paragraph-sample
     
+  +divider-block Advanced
+  
+  +card.outlined
+    +overlay.centerer
+      +button.secondary.overlay-closer Closer
+    +card-block
+      +paragraph-sample
+    +card-footer.outlined.centerer
+      +button.primary.overlay-trigger Trigger
+    
   +divider-block Actions
 
   +multiple.actions
-    +button("toggle_class ( 'active' )").outlined Toggle
+    +button("overlays_get_all ()").outlined Get all
+    +button("overlay_api ( 'toggle' )").outlined Toggle all
+    +button("overlay_api ( 'open' )").outlined Open all
+    +button("overlay_api ( 'close' )").outlined Close all
     +button("toggle_class ( 'dimmer' )").outlined Toggle dimmer
     +button("toggle_class ( 'blurrer' )").outlined Toggle blurrer
 
 append body-end
   +script.
+    function overlays_get_all () {
+      var gets = _.map ( $('.overlay'), function ( overlay ) {
+        return $(overlay).overlay ( 'isOpen' );
+      });
+      $.noty ( gets.join ( ' - ' ) );
+    }
+    function overlay_api ( action ) {
+      $('.overlay').overlay ( action );
+    }  
     function toggle_class ( css_class ) {
       $('.overlay').toggleClass ( css_class );
     }

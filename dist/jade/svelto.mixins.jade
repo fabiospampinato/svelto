@@ -119,6 +119,30 @@ mixin button-tag
 
 
 //- =========================================================================
+//- Svelto - Card v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin card
+  .card&attributes(attributes)
+    block
+
+mixin card-header
+  .card-header&attributes(attributes)
+      block
+
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Carousel v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -154,27 +178,56 @@ mixin carousel-items
 
 
 //- =========================================================================
-//- Svelto - Card v0.1.0
+//- Svelto - Checkbox v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin card
-  .card&attributes(attributes)
-    block
+//- TODO: the value should be setted to 1 by default if is not provided
 
-mixin card-header
-  .card-header&attributes(attributes)
-      block
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
 
-mixin card-block
-  .card-block&attributes(attributes)
-    block
-
-mixin card-footer
-  .card-footer&attributes(attributes)
-    block
+mixin checkbox(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.title
+      span= options.title
+    +icons
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off
+    if options.checked
+      if options.name
+        input(type="checkbox" name=options.name value=options.value checked)
+      else
+        input(type="checkbox" value=options.value checked)
+    else
+      if options.name
+        input(type="checkbox" name=options.name value=options.value)
+      else
+        input(type="checkbox" value=options.value)
 
 
 //- =========================================================================
@@ -240,59 +293,6 @@ mixin chat-msg(options)
                 +button-icon("delete")(title="Delete").xsmall.outlined.compact
       +card-block
         p= options.message.content
-
-
-//- =========================================================================
-//- Svelto - Checkbox v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-//- Options
-  {
-    name: '', // Input name
-    title: '', // Checkbox title
-    value: '', // Input value
-    checked: '', // Input checked
-    colors: { // Colors to use for icons
-      on: '', // On color
-      off: '' // Off color
-    },
-    icons: { // Icons to use
-      on: '', // On icon
-      off: '' // Off icon
-    }
-  }
-
-mixin checkbox(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.value = options.value || "";
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.icons = options.icons || {};
-  - options.icons.on = options.icons.on || "check_box";
-  - options.icons.off = options.icons.off || "check_box_outline_blank";
-  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
-    if options.title
-      span= options.title
-    +icons
-      +icon(options.icons.on)(class=options.colors.on).icon-on
-      +icon(options.icons.off)(class=options.colors.off).icon-off
-    if options.checked
-      if options.name
-        input(type="checkbox" name=options.name value=options.value checked)
-      else
-        input(type="checkbox" value=options.value checked)
-    else
-      if options.name
-        input(type="checkbox" name=options.name value=options.value)
-      else
-        input(type="checkbox" value=options.value)
 
 
 //- =========================================================================
@@ -615,6 +615,34 @@ mixin image-sample
 
 
 //- =========================================================================
+//- Svelto - Input v0.1.1
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value === undefined ? "" : options.value;
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
+
+
+//- =========================================================================
 //- Svelto - Infobar v0.1.2
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -671,34 +699,6 @@ mixin infobar-right
 mixin infobar-bottom
   .infobar-bottom&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Input v0.1.1
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    type: '', // Input type
-    name: '', // Input name
-    value: '', // Input value
-    label: '' // Label
-  }
-
-mixin input(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.type = options.type || "text";
-  - options.name = options.name || "";
-  - options.value = options.value === undefined ? "" : options.value;
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
 
 
 //- =========================================================================
@@ -842,19 +842,6 @@ mixin navbar(options)
 
 
 //- =========================================================================
-//- Svelto - Noty v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options: See noty component
-
-mixin noty(options)
-  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
-
-
-//- =========================================================================
 //- Svelto - Notification v0.1.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -870,6 +857,19 @@ mixin noty(options)
 
 mixin notification(options)
   +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
+
+
+//- =========================================================================
+//- Svelto - Noty v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options: See noty component
+
+mixin noty(options)
+  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
 
 
 //- =========================================================================
@@ -1422,6 +1422,37 @@ mixin spinner-label
 
 
 //- =========================================================================
+//- Svelto - Stepper v0.2.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Input name
+    min: '', // Min value
+    value: '', // Value
+    max: '', // Max value
+    step: '' // Decreasing step
+  }
+
+mixin stepper(options)
+  - options = options || {};
+  - options.min = options.min || 0;
+  - options.value = options.value === undefined ? options.min : options.value;
+  - options.max = options.max || 100;
+  - options.step = options.step || 1;
+  +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
+    +button-icon("remove").compact.stepper-decreaser
+    if options.name
+      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
+    else
+      +input({ value: options.value }).stepper-input.autogrow.compact
+    +button-icon("add").compact.stepper-increaser
+
+
+//- =========================================================================
 //- Svelto - Switch v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1468,37 +1499,6 @@ mixin switch(options)
         +icon(options.icons.on).icon-on
       if options.icons.off !== "false"
         +icon(options.icons.off).icon-off
-
-
-//- =========================================================================
-//- Svelto - Stepper v0.2.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Input name
-    min: '', // Min value
-    value: '', // Value
-    max: '', // Max value
-    step: '' // Decreasing step
-  }
-
-mixin stepper(options)
-  - options = options || {};
-  - options.min = options.min || 0;
-  - options.value = options.value === undefined ? options.min : options.value;
-  - options.max = options.max || 100;
-  - options.step = options.step || 1;
-  +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
-    +button-icon("remove").compact.stepper-decreaser
-    if options.name
-      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
-    else
-      +input({ value: options.value }).stepper-input.autogrow.compact
-    +button-icon("add").compact.stepper-increaser
 
 
 //- =========================================================================
