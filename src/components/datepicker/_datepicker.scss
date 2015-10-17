@@ -14,11 +14,24 @@
 .datepicker {
 
   @extend .widget;
+  border-radius: $border-radius-medium;
 
   /* INPUT */
 
   input {
     display: none;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+    border: $outline-width solid $datepicker-invalid-color;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border: $outline-width solid $datepicker-valid-color;
   }
 
   /* NAVIGATION */

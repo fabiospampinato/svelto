@@ -5649,6 +5649,8 @@ button {
 /* DAY NAME */
 /* DAY */
 /* DAY CIRCLE */
+/* INVALID */
+/* VALID */
 /* TRANSITIONS */
 /* =========================================================================
  * Svelto - Datepicker v0.2.0
@@ -5661,13 +5663,24 @@ button {
  * ========================================================================= */
 /* DATEPICKER */
 .datepicker {
+  border-radius: 0.2665em;
   /* INPUT */
+  /* INVALID */
+  /* VALID */
   /* NAVIGATION */
   /* CALENDAR */
 }
 
 .datepicker input {
   display: none;
+}
+
+.datepicker.invalid {
+  border: 1px solid #f44336;
+}
+
+.datepicker.valid {
+  border: 1px solid #4caf50;
 }
 
 .datepicker-navigation {
