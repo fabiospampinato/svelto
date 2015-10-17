@@ -51,6 +51,18 @@ label {
     min-width: calc(#{$line-height-em + ( $label-padding-horizontal * 2 )} + #{$outline-width * 2});
   }
 
+  /* INVALID */
+
+  &.invalid {
+    border: $outline-width solid $label-invalid-color !important;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border: $outline-width solid $label-valid-color !important;
+  }
+
   /* COMPACT */
 
   &.compact {

@@ -2571,6 +2571,14 @@ $label-floating-bottom: 24px !default;
 $label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
 $label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
 
+/* INVALID */
+
+$label-invalid-color: $color-red !default;
+
+/* VALID */
+
+$label-valid-color: $color-green !default;
+
 
 /* =========================================================================
  * Svelto - Label v0.4.0
@@ -2622,6 +2630,18 @@ label {
   &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
     min-height: calc(#{$line-height-em + ( $label-padding-vertical * 2 )} + #{$outline-width * 2});
     min-width: calc(#{$line-height-em + ( $label-padding-horizontal * 2 )} + #{$outline-width * 2});
+  }
+
+  /* INVALID */
+
+  &.invalid {
+    border: $outline-width solid $label-invalid-color !important;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border: $outline-width solid $label-valid-color !important;
   }
 
   /* COMPACT */

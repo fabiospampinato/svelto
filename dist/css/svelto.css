@@ -3561,6 +3561,8 @@ body p > a:hover {
 /* CORNER */
 /* FLOATING */
 /* FLOATING COMPACT */
+/* INVALID */
+/* VALID */
 /* =========================================================================
  * Svelto - Label v0.4.0
  * =========================================================================
@@ -3595,6 +3597,8 @@ label {
   /* CHILDREN NO MARGIN BOTTOM */
   /* TEXT GROW */
   /* OUTLINED */
+  /* INVALID */
+  /* VALID */
   /* COMPACT */
   /* FLUID */
   /* LEFT / RIGHT */
@@ -3712,6 +3716,14 @@ label {
 .label.outlined, .outlined.button {
   min-height: calc(2.4185714286em + 2px);
   min-width: calc(3.4085714286em + 2px);
+}
+
+.label.invalid, .invalid.button {
+  border: 1px solid #f44336 !important;
+}
+
+.label.valid, .valid.button {
+  border: 1px solid #4caf50 !important;
 }
 
 .label.compact, .compact.button {

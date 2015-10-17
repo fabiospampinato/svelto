@@ -74,3 +74,11 @@ $label-floating-bottom: 24px !default;
 
 $label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
 $label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
+
+/* INVALID */
+
+$label-invalid-color: $color-red !default;
+
+/* VALID */
+
+$label-valid-color: $color-green !default;

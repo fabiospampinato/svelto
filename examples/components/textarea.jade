@@ -79,3 +79,15 @@ append main
 
   +container.yellow.outlined
     +textarea({ label: "Inside a yellow container" })
+
+  +divider-block Actions
+
+  +multiple.actions
+    +button("toggle_class ( 'invalid' )").outlined Toggle Invalid
+    +button("toggle_class ( 'valid' )").outlined Toggle valid
+
+append body-end
+  +script.
+    function toggle_class ( css_class ) {
+      $('.textarea-wrp').toggleClass ( css_class );
+    }
