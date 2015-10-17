@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner v0.2.0
+ * Svelto - Spinner v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,6 +8,7 @@
  * Fork of http://codepen.io/Bodokh/pen/jEadzj - Eran Bodokh
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 
 /* SPINNER */
@@ -54,6 +55,37 @@ svg.spinner {
     circle {
       animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
                  multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
+    }
+
+  }
+
+}
+
+/* SPINNER LABEL */
+
+.spinner-label {
+
+  @extend .widget;
+  @include color ( $spinner-label-color, $spinner-label-color-basic );
+  @include z-depth ( $spinner-label-z-depth );
+  display: flex;
+  border-radius: $spinner-label-border-radius !important;
+  padding: $spinner-label-padding-vertical $spinner-label-padding-horizontal;
+
+  /* SPINNER */
+
+  .spinner {
+    margin-bottom: 0;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $accent: nth($datas, 5);
+
+    &.#{$name} .spinner circle {
+      stroke: $accent !important;
     }
 
   }

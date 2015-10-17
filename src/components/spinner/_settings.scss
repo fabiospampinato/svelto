@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Spinner (Settings) v0.2.0
+ * Svelto - Spinner (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../label/_settings.scss
  * ========================================================================= */
 
 /* SPINNER */
@@ -18,7 +19,7 @@ $spinner-radius: 1.25em !default;
 
 $spinner-stroke-width: 0.25em !default;
 
-$spinner-stroke-color: $color-blue !default;
+$spinner-stroke-color: $color-secondary !default;
 
 /* MULTICOLOR */
 
@@ -32,3 +33,15 @@ $spinner-multicolor-stroke-color4: $color-green !default;
 $spinner-animation-rotate-duration: 2s !default;
 
 $spinner-stroke-animation-dash-duration: 1.5s !default;
+
+/* SPINNER LABEL */
+
+$spinner-label-z-depth: 3 !default;
+
+$spinner-label-color: 'inherit' !default;
+$spinner-label-color-basic: false !default;
+
+$spinner-label-padding-vertical: $label-compact-padding-vertical !default;
+$spinner-label-padding-horizontal: $label-compact-padding-horizontal !default;
+
+$spinner-label-border-radius: 50% !default;

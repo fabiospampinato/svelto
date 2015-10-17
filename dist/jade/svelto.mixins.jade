@@ -143,41 +143,6 @@ mixin card-footer
 
 
 //- =========================================================================
-//- Svelto - Carousel v0.1.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin carousel
-  .carousel&attributes(attributes)
-    block
-
-mixin carousel-indicators(amount)
-  .carousel-indicators&attributes(attributes)
-    - var nr = 1;
-    while nr <= amount
-      +carousel-indicator
-      - nr++;
-
-mixin carousel-indicator
-  .carousel-indicator&attributes(attributes)
-    block
-
-mixin carousel-prev
-  .carousel-prev&attributes(attributes)
-    block
-
-mixin carousel-next
-  .carousel-next&attributes(attributes)
-    block
-
-mixin carousel-items
-  .carousel-items&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Chat v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -296,6 +261,41 @@ mixin checkbox(options)
 
 
 //- =========================================================================
+//- Svelto - Carousel v0.1.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin carousel
+  .carousel&attributes(attributes)
+    block
+
+mixin carousel-indicators(amount)
+  .carousel-indicators&attributes(attributes)
+    - var nr = 1;
+    while nr <= amount
+      +carousel-indicator
+      - nr++;
+
+mixin carousel-indicator
+  .carousel-indicator&attributes(attributes)
+    block
+
+mixin carousel-prev
+  .carousel-prev&attributes(attributes)
+    block
+
+mixin carousel-next
+  .carousel-next&attributes(attributes)
+    block
+
+mixin carousel-items
+  .carousel-items&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Colorpicker v0.2.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -323,6 +323,31 @@ mixin colorpicker
 
 mixin container
   .container&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Divider v0.3.0
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  .divider&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider.block
+    .divider-content&attributes(attributes)
+      block
+
+mixin divider-text
+  .divider&attributes(attributes).text
+    block
+
+mixin divider-spacer
+  .divider&attributes(attributes).spacer
     block
 
 
@@ -396,31 +421,6 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
-
-
-//- =========================================================================
-//- Svelto - Divider v0.3.0
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  .divider&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider.block
-    .divider-content&attributes(attributes)
-      block
-
-mixin divider-text
-  .divider&attributes(attributes).text
-    block
-
-mixin divider-spacer
-  .divider&attributes(attributes).spacer
-    block
 
 
 //- =========================================================================
@@ -1394,7 +1394,7 @@ mixin slider(options)
 
 
 //- =========================================================================
-//- Svelto - Spinner v0.2.0
+//- Svelto - Spinner v0.3.0
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1403,6 +1403,10 @@ mixin slider(options)
 mixin spinner
   svg.spinner&attributes(attributes)
     circle
+
+mixin spinner-label
+  .spinner-label&attributes(attributes)
+    +spinner
 
 
 //- =========================================================================

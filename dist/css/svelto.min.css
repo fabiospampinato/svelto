@@ -3118,7 +3118,7 @@ th {
 .slider:not(.disabled) .slider-max:hover:after,
 .slider:not(.slider-disabled) .slider-min:hover:after,
 .slider:not(.slider-disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before,
-table.table.sortable th[data-sort]:after, .icons, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .switch, table.table, .tabs, blockquote, blockquote > footer {
+table.table.sortable th[data-sort]:after, .icons, .image-wrp, .input-wrp, .textarea-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
@@ -3132,7 +3132,7 @@ table.table.sortable th[data-sort]:after, .icons, .image-wrp, .input-wrp, .texta
 .slider:not(.disabled) .slider-max:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child, table.table.sortable th[data-sort]:before > :last-child,
-table.table.sortable th[data-sort]:after > :last-child, .icons > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+table.table.sortable th[data-sort]:after > :last-child, .icons > :last-child, .image-wrp > :last-child, .input-wrp > :last-child, .textarea-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
@@ -3144,7 +3144,7 @@ table.table.sortable th[data-sort]:after > :last-child, .icons > :last-child, .i
 .slider:not(.disabled) .slider-max:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-min:hover:after > :last-child.multiple,
 .slider:not(.slider-disabled) .slider-max:hover:after > :last-child.multiple, table.table.sortable th[data-sort]:before > :last-child.multiple,
-table.table.sortable th[data-sort]:after > :last-child.multiple, .icons > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+table.table.sortable th[data-sort]:after > :last-child.multiple, .icons > :last-child.multiple, .image-wrp > :last-child.multiple, .input-wrp > :last-child.multiple, .textarea-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -3184,6 +3184,7 @@ table.table.sortable th.disabled[data-sort]:after, .disabled.icons,
 .disabled.square-sample,
 .disabled.circle,
 .disabled.slider,
+.disabled.spinner-label,
 .disabled.switch,
 table.disabled.table,
 .disabled.tabs,
@@ -3196,7 +3197,7 @@ blockquote.disabled,
 .slider:not(.disabled) [class*="-disabled"].slider-max:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-min:hover:after,
 .slider:not(.slider-disabled) [class*="-disabled"].slider-max:hover:after, table.table.sortable th[class*="-disabled"][data-sort]:before,
-table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].icons, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].rater, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
+table.table.sortable th[class*="-disabled"][data-sort]:after, [class*="-disabled"].icons, [class*="-disabled"].image-wrp, [class*="-disabled"].input-wrp, [class*="-disabled"].textarea-wrp, [class*="-disabled"].parallax, [class*="-disabled"].placeholder, [class*="-disabled"].progressbar, [class*="-disabled"].rater, [class*="-disabled"].triangle, [class*="-disabled"].square, [class*="-disabled"].square-sample, [class*="-disabled"].circle, [class*="-disabled"].slider, [class*="-disabled"].spinner-label, [class*="-disabled"].switch, table[class*="-disabled"].table, [class*="-disabled"].tabs, blockquote[class*="-disabled"] {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -9063,6 +9064,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
  * ========================================================================= */
 /* MULTIPLE */
 .multiple {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
   position: relative;
   display: -webkit-flex;
   display: flex;
@@ -12028,19 +12032,21 @@ table.table.sortable th[data-sort].sort-asc:before {
 }
 
 /* =========================================================================
- * Svelto - Spinner (Settings) v0.2.0
+ * Svelto - Spinner (Settings) v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
+ * @requires ../label/_settings.scss
  * ========================================================================= */
 /* SPINNER */
 /* STROKE */
 /* MULTICOLOR */
 /* ANIMATION */
+/* SPINNER LABEL */
 /* =========================================================================
- * Svelto - Spinner v0.2.0
+ * Svelto - Spinner v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12048,6 +12054,7 @@ table.table.sortable th[data-sort].sort-asc:before {
  * Fork of http://codepen.io/Bodokh/pen/jEadzj - Eran Bodokh
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* SPINNER */
 svg.spinner {
@@ -12068,7 +12075,7 @@ svg.spinner circle {
   r: 1.25em;
   fill: none;
   stroke-width: 0.25em;
-  stroke: #2196f3;
+  stroke: #ef6c00;
   stroke-linecap: round;
   -webkit-animation: dash 1.5s ease-in-out infinite;
           animation: dash 1.5s ease-in-out infinite;
@@ -12165,6 +12172,142 @@ svg.spinner.multicolor {
 svg.spinner.multicolor circle {
   -webkit-animation: dash 1.5s ease-in-out infinite, multicolor 6s ease-in-out infinite;
           animation: dash 1.5s ease-in-out infinite, multicolor 6s ease-in-out infinite;
+}
+
+/* SPINNER LABEL */
+.spinner-label {
+  border-color: inherit ;
+  color: inherit ;
+  background: inherit ;
+  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
+  display: -webkit-flex;
+  display: flex;
+  border-radius: 50% !important;
+  padding: 0.495em 0.495em;
+  /* SPINNER */
+  /* COLORS */
+}
+
+.spinner-label.actionable.active,
+.spinner-label.active.button,
+.spinner-label.active.button-corner,
+.carousel:not(.inset) .spinner-label.active.carousel-prev,
+.carousel:not(.inset) .spinner-label.active.carousel-next,
+.spinner-label.button.active,
+.spinner-label.button-corner.active {
+  background: inherit ;
+}
+
+.spinner-label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.spinner-label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.spinner-label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .spinner-label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.carousel:not(.inset) .spinner-label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.spinner-label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
+.spinner-label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+  background: inherit ;
+}
+
+.spinner-label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.spinner-label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.spinner-label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .spinner-label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.carousel:not(.inset) .spinner-label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.spinner-label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
+.spinner-label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+  background: inherit ;
+}
+
+.spinner-label.highlight:after {
+  border-color: inherit ;
+}
+
+.spinner-label .spinner {
+  margin-bottom: 0;
+}
+
+.spinner-label.primary .spinner circle {
+  stroke: #ef6c00 !important;
+}
+
+.spinner-label.secondary .spinner circle {
+  stroke: #1565c0 !important;
+}
+
+.spinner-label.tertiary .spinner circle {
+  stroke: #2e7d32 !important;
+}
+
+.spinner-label.quaternary .spinner circle {
+  stroke: #6a1b9a !important;
+}
+
+.spinner-label.white .spinner circle {
+  stroke: #ef6c00 !important;
+}
+
+.spinner-label.gray .spinner circle {
+  stroke: #212121 !important;
+}
+
+.spinner-label.black .spinner circle {
+  stroke: #ffffff !important;
+}
+
+.spinner-label.yellow .spinner circle {
+  stroke: #f44336 !important;
+}
+
+.spinner-label.olive .spinner circle {
+  stroke: #ff9800 !important;
+}
+
+.spinner-label.green .spinner circle {
+  stroke: #673ab7 !important;
+}
+
+.spinner-label.blue .spinner circle {
+  stroke: #f44336 !important;
+}
+
+.spinner-label.violet .spinner circle {
+  stroke: #ff9800 !important;
+}
+
+.spinner-label.orange .spinner circle {
+  stroke: #2196f3 !important;
+}
+
+.spinner-label.purple .spinner circle {
+  stroke: #fabf40 !important;
+}
+
+.spinner-label.red .spinner circle {
+  stroke: #fabf40 !important;
+}
+
+.spinner-label.pink .spinner circle {
+  stroke: #009688 !important;
+}
+
+.spinner-label.teal .spinner circle {
+  stroke: #e91e63 !important;
+}
+
+.spinner-label.brown .spinner circle {
+  stroke: #ff9800 !important;
+}
+
+.spinner-label.transparent .spinner circle {
+  stroke: #ef6c00 !important;
+}
+
+.spinner-label.inherit .spinner circle {
+  stroke: inherit !important;
+}
+
+.spinner-label.base .spinner circle {
+  stroke: #ef6c00 !important;
 }
 
 /* KEYFRAMES */
