@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Footer v0.1.2
+ * Svelto - Footer v0.2.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -12,50 +12,7 @@
 /* FOOTER */
 
 footer {
-
   @extend .container;
   border-radius: 0;
   background-color: $footer-bg-color;
-
-  /* BEVELED */
-
-  &.beveled {
-
-    &:before,
-    &:after {
-      position: absolute;
-      top: -$footer-beveled-size;
-      width: $footer-beveled-size;
-      height: $footer-beveled-size;
-      content: '';
-      pointer-events: none;
-      background-image: radial-gradient(transparent 70.72%, $footer-bg-color 70.72%);
-      background-size: 200% 200%;
-    }
-
-    &:before {
-      left: 0;
-      background-position: bottom left;
-    }
-
-    &:after {
-      right: 0;
-      background-position: bottom right;
-    }
-
-    /* COLORS */
-
-    @each $name, $datas in $colors {
-
-      $bg: nth($datas, 1);
-
-      &.#{$name}:before,
-      &.#{$name}:after {
-        background-image: radial-gradient(transparent 70.72%, $bg 70.72%);
-      }
-
-    }
-
-  }
-
 }
