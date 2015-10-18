@@ -45,7 +45,7 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.rater' ).each ( function () {
 
@@ -61,7 +61,7 @@
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$rater = this.$element;
 
@@ -70,7 +70,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TAP */
 
@@ -80,7 +80,7 @@
 
     /* TAP */
 
-    __tap: function ( event, star ) {
+    __tap ( event, star ) {
 
       if ( !this.alreadyRated && !this.doingAjax && this.options.url ) {
 
@@ -93,13 +93,13 @@
           type: 'POST',
           url: this.options.url,
 
-          beforeSend: function () {
+          beforeSend () {
 
             self.doingAjax = true;
 
           },
 
-          success: function ( res ) {
+          success ( res ) {
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
@@ -118,13 +118,13 @@
 
           },
 
-          error: function ( res ) {
+          error ( res ) {
 
             throw 'RatingError';
 
           },
 
-          complete: function () {
+          complete () {
 
             self.doingAjax = false;
 
@@ -138,7 +138,7 @@
 
     /* API */
 
-    get: function () {
+    get () {
 
       return {
         value: this.options.value,

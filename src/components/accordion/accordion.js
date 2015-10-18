@@ -34,41 +34,37 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.accordion' ).accordion ();
-      
+
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$accordion = this.$element;
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
       this.expandersNr = this.$expanders.length;
 
-      this.expandersInstances = _.map ( this.$expanders, function ( expander ) {
-
-        return $(expander).expander ( 'instance' );
-
-      });
+      this.expandersInstances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
 
       this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
 
     },
 
-    _events: function () {
+    _events () {
 
       if ( !this.isMultiple ) {
 
-        this._on ( this.$expanders, 'expander:open', this.__close_others );
+        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
 
       }
 
     },
 
-    /* OPEN */
+    /* EXPANDER OPEN */
 
-    __close_others: function ( event, data, node ) {
+    __closeOthers ( event, data, node ) {
 
       for ( var i = 0; i < this.expandersNr; i++ ) {
 
@@ -84,17 +80,13 @@
 
     /* PUBLIC */
 
-    areOpen: function () {
+    areOpen () {
 
-      return _.map ( this.expandersInstances, function ( instance ) {
-
-        return instance.isOpen ();
-
-      });
+      return this.expandersInstances.map ( instance => instance.isOpen () );
 
     },
 
-    toggle: function ( index, force ) {
+    toggle ( index, force ) {
 
       var instance = this.expandersInstances[index],
           isOpen = instance.isOpen ();
@@ -119,13 +111,13 @@
 
     },
 
-    open: function ( index ) {
+    open ( index ) {
 
       this.toggle ( index, true );
 
     },
 
-    close: function ( index ) {
+    close ( index ) {
 
       this.toggle ( index, false );
 

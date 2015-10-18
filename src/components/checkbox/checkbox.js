@@ -28,20 +28,20 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.checkbox' ).checkbox ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$checkbox = this.$element;
       this.$input = this.$checkbox.find ( 'input' );
 
     },
 
-    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
       var isChecked = this.get (),
           hasClass = this.$checkbox.hasClass ( 'checked' );
@@ -54,7 +54,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -68,7 +68,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       var isChecked = this.get ();
 
@@ -81,13 +81,13 @@
 
     /* PUBLIC */
 
-    get: function () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
+    get () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
 
       return this.$input.prop ( 'checked' );
 
     },
 
-    toggle: function ( force ) {
+    toggle ( force ) {
 
       var isChecked = this.get ();
 
@@ -108,13 +108,13 @@
 
     },
 
-    check: function () {
+    check () {
 
       this.toggle ( true );
 
     },
 
-    uncheck: function () {
+    uncheck () {
 
       this.toggle ( false );
 

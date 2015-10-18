@@ -59,7 +59,7 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.progressbar' ).each ( function () {
 
@@ -74,14 +74,14 @@
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$progressbar = this.$element;
       this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
 
     },
 
-    _init: function () {
+    _init () {
 
       this.options.value = this._sanitizeValue ( this.options.value );
 
@@ -92,7 +92,7 @@
 
     /* PRIVATE */
 
-    _sanitizeValue: function ( value ) {
+    _sanitizeValue ( value ) {
 
       var nr = Number ( value );
 
@@ -100,25 +100,25 @@
 
     },
 
-    _roundValue: function ( value ) {
+    _roundValue ( value ) {
 
       return value.toFixed ( this.options.decimals );
 
     },
 
-    _updateWidth: function () {
+    _updateWidth () {
 
       this.$highlight.css ( 'min-width', this.options.value + '%' );
 
     },
 
-    _updateLabel: function () {
+    _updateLabel () {
 
       this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
 
     },
 
-    _update: function () {
+    _update () {
 
       this._updateWidth ();
       this._updateLabel ();
@@ -127,13 +127,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return this.options.value;
 
     },
 
-    set: function ( value ) {
+    set ( value ) {
 
       value = Number ( value );
 

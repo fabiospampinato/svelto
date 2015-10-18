@@ -24,7 +24,7 @@
      * // => logs the number of seconds it took for the deferred function to be invoked
      */
 
-    nowSecs: function () {
+    nowSecs () {
 
       return _.floor ( _.now () / 1000 );
 
@@ -37,7 +37,7 @@
      * // => Just now
      */
 
-    timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
+    timeAgo ( timestamp ) { //INFO: Timestamp is required in seconds
 
       var elapsed = _.nowSecs () - timestamp,
           justNow = 5;
@@ -88,7 +88,7 @@
      * // => false
      */
 
-    fuzzyMatch: function ( str, search, isCaseSensitive ) {
+    fuzzyMatch ( str, search, isCaseSensitive ) {
 
       if ( isCaseSensitive !== false ) {
 
@@ -141,7 +141,7 @@
      * _.clamp(2, 7, 5); // => 5
      */
 
-    clamp: function ( minimum, value, maximum ) {
+    clamp ( minimum, value, maximum ) {
 
       if ( !_.isUndefined ( minimum ) ) {
 
@@ -171,7 +171,7 @@
      * Performs a binary each of the array
      */
 
-    btEach: function ( arr, callback, startIndex ) {
+    btEach ( arr, callback, startIndex ) {
 
       var start = 0,
           end = arr.length - 1,
@@ -208,7 +208,7 @@
      * Move the item at `from` index inside the array to the `to` index
      */
 
-     move: function ( arr, from, to ) {
+     move ( arr, from, to ) {
 
        arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
 
@@ -218,7 +218,7 @@
      * Shorten the numer using common K and M syntax
      */
 
-     mkize: function ( number ) {
+     mkize ( number ) {
 
     	if ( number >= 1000000 ) {
 

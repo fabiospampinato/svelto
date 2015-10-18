@@ -38,13 +38,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.modal' ).modal ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.modal = this.element;
       this.$modal = this.$element;
@@ -58,7 +58,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TAP */
 
@@ -75,7 +75,7 @@
 
     /* PRIVATE */
 
-    __tap: function ( event ) {
+    __tap ( event ) {
 
       if ( event.target === this.modal ) {
 
@@ -85,7 +85,7 @@
 
     },
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
@@ -100,13 +100,13 @@
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen () {
 
       return this._isOpen;
 
     },
 
-    toggle: function ( force ) {
+    toggle ( force ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -128,13 +128,13 @@
 
     },
 
-    open: function () {
+    open () {
 
       this.toggle ( true );
 
     },
 
-    close: function () {
+    close () {
 
       this.toggle ( false );
 

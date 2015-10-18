@@ -46,13 +46,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.carousel' ).carousel ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$carousel = this.$element;
       this.$prev = this.$carousel.find ( this.options.selectors.prev );
@@ -74,7 +74,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       var $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
 
@@ -92,7 +92,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* PREV */
 
@@ -127,7 +127,7 @@
 
     /* KEYDOWN */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -154,13 +154,13 @@
 
     /* CYCLE */
 
-    __cycleEnter: function () {
+    __cycleEnter () {
 
       this.timer.pause ();
 
     },
 
-    __cycleLeave: function () {
+    __cycleLeave () {
 
       this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
 
@@ -170,7 +170,7 @@
 
     /* INDICATOR TAP */
 
-    __indicatorTap: function ( event, indicator ) {
+    __indicatorTap ( event, indicator ) {
 
       this.set ( this.$indicators.index ( indicator ) );
 
@@ -178,7 +178,7 @@
 
     /* FLICK */
 
-    __flick: function ( event, data ) {
+    __flick ( event, data ) {
 
       if ( data.orientation === 'horizontal' ) {
 
@@ -219,13 +219,13 @@
 
     /* API */
 
-    get: function () {
+    get () {
 
       return this._current.index;
 
     },
 
-    set: function ( index ) {
+    set ( index ) {
 
       index = Number ( index );
 
@@ -276,13 +276,13 @@
 
     },
 
-    previous: function () {
+    previous () {
 
       this.set ( this._getPrevIndex ( this._current.index ) );
 
     },
 
-    next: function () {
+    next () {
 
       this.set ( this._getNextIndex ( this._current.index ) );
 

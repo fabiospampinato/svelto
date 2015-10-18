@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Maybe sync at the init time also
+//TODO: Update to a widget
 
 (function ( $, _, window, document, undefined ) {
 
@@ -20,9 +21,9 @@
 
   /* FORM SYNC */
 
-  $.fn.formSync = function () {
+  $.fn.formSync () {
 
-    this.each ( function () {
+    this.each ( () => {
 
       var $form = $(this),
           group = $form.data ( 'sync-group' );
@@ -34,7 +35,7 @@
       var $forms = $('form[data-sync-group="' + group + '"]'),
           $eles = $forms.find ( 'input, textarea, select' );
 
-      $eles.each ( function () {
+      $eles.each ( () => {
 
         var $ele = $(this),
             name = $ele.attr ( 'name' ),
@@ -46,12 +47,12 @@
             $otherForms = $forms.not ( $currentForm ),
             $otherEles = $otherForms.find ( '[name="' + name + '"]' );
 
-        $ele.on ( events, function () {
+        $ele.on ( events, () => {
 
           var currentValue = $ele.val (),
               currentChecked = !!$ele.prop ( 'checked' );
 
-          $otherEles.each ( function () {
+          $otherEles.each ( () => {
 
             var $otherEle = $(this),
                 otherValue = $otherEle.val (),

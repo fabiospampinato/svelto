@@ -59,13 +59,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.select-trigger' ).select ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$trigger = this.$element;
       this.$select = this.$trigger.find ( this.options.selectors.select );
@@ -88,7 +88,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       this._updateValueholder ();
 
@@ -103,7 +103,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -121,7 +121,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       this._update ();
 
@@ -133,7 +133,7 @@
 
     /* BUTTON TAP */
 
-    __tap: function ( event, button ) {
+    __tap ( event, button ) {
 
       this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
 
@@ -141,7 +141,7 @@
 
     /* PRIVATE */
 
-    ___selectOptions: function () { //FIXME: Add support for arbitrary number of optgroups levels
+    ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups levels
 
       var previousOptgroup,
           currentOptgroup;
@@ -176,7 +176,7 @@
 
     },
 
-    ___dropdown: function () {
+    ___dropdown () {
 
       var html = this._tmpl ( 'base', { id: this.id, options: this.selectOptions } );
 
@@ -189,13 +189,13 @@
 
       this.$dropdown.dropdown ({
         callbacks: {
-          beforeopen: function () {
+          beforeopen () {
             self._setDropdownWidth ();
           },
-          open: function () {
+          open () {
             self._trigger ( 'open' );
           },
-          close: function () {
+          close () {
             self._trigger ( 'close' );
           }
         }
@@ -205,7 +205,7 @@
 
     },
 
-    _setDropdownWidth: function () {
+    _setDropdownWidth () {
 
       this.$dropdown.css ( 'min-width', this.$trigger.outerWidth () );
 
@@ -213,7 +213,7 @@
 
     /* UPDATE */
 
-    _updateValueholder: function () {
+    _updateValueholder () {
 
       var $selectedOption = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
 
@@ -221,7 +221,7 @@
 
     },
 
-    _updateDropdown: function () {
+    _updateDropdown () {
 
       this.$buttons.removeClass ( this.options.classes.selected );
 
@@ -230,7 +230,7 @@
     },
 
 
-    _update: function () {
+    _update () {
 
       this._updateValueholder ();
 
@@ -244,13 +244,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return this.$select.val ();
 
     },
 
-    select: function ( value ) {
+    select ( value ) {
 
       this.$buttons.filter ( '[data-value="' + value + '"]' ).tap ();
 

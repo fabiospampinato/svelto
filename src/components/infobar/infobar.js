@@ -31,20 +31,20 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.infobar' ).infobar ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$infobar = this.$element;
       this.$closers = this.$infobar.find ( this.options.selectors.closer );
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CLOSER */
 
@@ -54,7 +54,7 @@
 
     /* PUBLIC */
 
-    close: function () {
+    close () {
 
       this.$infobar.remove ();
 

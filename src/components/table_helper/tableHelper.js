@@ -53,13 +53,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( 'table.table' ).tableHelper ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$table = this.$element;
       this.$header = this.$table.find ( this.options.selectors.header );
@@ -71,7 +71,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       this._checkEmpty ();
 
@@ -79,7 +79,7 @@
 
     /* PRIVATE */
 
-    _checkEmpty: function () {
+    _checkEmpty () {
 
       var hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
 
@@ -87,7 +87,7 @@
 
     },
 
-    _getRowId: function ( id ) {
+    _getRowId ( id ) {
 
       return this.options.rowIdPrefix + '_' + this.guid + '_' + id;
 
@@ -95,7 +95,7 @@
 
     /* PUBLIC */
 
-    add: function ( id ) { //INFO: id, datas...
+    add ( id ) { //INFO: id, datas...
 
       var datas = _.tail ( arguments ),
           rowId = id ? this._getRowId ( id ) : false;
@@ -132,7 +132,7 @@
 
     },
 
-    update: function ( id ) { //INFO: id, datas...
+    update ( id ) { //INFO: id, datas...
 
       var datas = _.tail ( arguments ),
           $row = $( '.' + this._getRowId ( id ) );
@@ -163,7 +163,7 @@
 
     },
 
-    remove: function ( id ) {
+    remove ( id ) {
 
       var $row = $( '.' + this._getRowId ( id ) );
 
@@ -185,7 +185,7 @@
 
     },
 
-    clear: function () {
+    clear () {
 
       var $rows = this.$body.find ( this.options.selectors.notEmptyRow );
 

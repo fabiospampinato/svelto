@@ -17,7 +17,7 @@
 
   /* NOTIFICATION */
 
-  $.notification = function ( options ) {
+  $.notification ( options ) {
 
     /* OPTIONS */
 
@@ -31,7 +31,7 @@
 
     if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-      Notification.requestPermission ( function ( status ) {
+      Notification.requestPermission ( ( status ) => {
 
         if ( status === 'granted' ) {
 

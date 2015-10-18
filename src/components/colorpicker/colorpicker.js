@@ -44,13 +44,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.colorpicker' ).colorpicker ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$colorpicker = this.$element;
       this.$sbWrp = this.$colorpicker.find ( this.options.selectors.sb.wrp );
@@ -69,7 +69,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       if ( !this.set ( this.$input.val () ) ) {
 
@@ -82,7 +82,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -130,7 +130,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       this.set ( this.$input.val () );
 
@@ -138,7 +138,7 @@
 
     /* SB ARROWS */
 
-    __sbKeydown: function ( event ) {
+    __sbKeydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -173,7 +173,7 @@
 
     /* SB DRAG */
 
-    _sbDragSet: function ( XY, update ) {
+    _sbDragSet ( XY, update ) {
 
       this.color.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
       this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
@@ -188,13 +188,13 @@
 
     },
 
-    __sbDragMove: function ( data ) {
+    __sbDragMove ( data ) {
 
       this._sbDragSet ( data.moveXY, this.options.live );
 
     },
 
-    __sbDragEnd: function ( data ) {
+    __sbDragEnd ( data ) {
 
       this._sbDragSet ( data.endXY, true );
 
@@ -202,7 +202,7 @@
 
     /* HUE ARROWS */
 
-    __hueKeydown: function ( event ) {
+    __hueKeydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -229,7 +229,7 @@
 
     /* HUE DRAG */
 
-    _hueDragSet: function ( XY, update ) {
+    _hueDragSet ( XY, update ) {
 
       this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
@@ -243,13 +243,13 @@
 
     },
 
-    __hueDragMove: function ( data ) {
+    __hueDragMove ( data ) {
 
       this._hueDragSet ( data.moveXY, this.options.live );
 
     },
 
-    __hueDragEnd: function ( data ) {
+    __hueDragEnd ( data ) {
 
       this._hueDragSet ( data.endXY, true );
 
@@ -257,7 +257,7 @@
 
     /* UPDATE */
 
-    _updateSb: function () {
+    _updateSb () {
 
       var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
           translateX = this.sbWrpSize / 100 * this.color.hsv.s,
@@ -267,7 +267,7 @@
 
     },
 
-    _updateHue: function () {
+    _updateHue () {
 
       var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
           translateY = this.hueWrpHeight / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) );
@@ -278,7 +278,7 @@
 
     },
 
-    _updateInput: function () {
+    _updateInput () {
 
       this.hex = this.color.getHexStr ();
 
@@ -288,7 +288,7 @@
 
     },
 
-    _update: function () {
+    _update () {
 
       this._updateSb ();
       this._updateHue ();
@@ -298,13 +298,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return this.color.getHexStr ();
 
     },
 
-    set: function ( color ) {
+    set ( color ) {
 
       var newColor = new HexColor ( color );
 

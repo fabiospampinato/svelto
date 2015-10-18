@@ -40,13 +40,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.tabs' ).tabs ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$tabs = this.$element;
       this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
@@ -58,7 +58,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       var $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
 
@@ -70,7 +70,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TRIGGERS */
 
@@ -80,7 +80,7 @@
 
     /* PRIVATE */
 
-    __tap: function ( event, node ) {
+    __tap ( event, node ) {
 
       var newIndex = this.$triggers.index ( $(node) );
 
@@ -90,13 +90,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return this.index;
 
     },
 
-    set: function ( index ) {
+    set ( index ) {
 
       if ( this.index !== index ) {
 

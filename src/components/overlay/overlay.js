@@ -41,13 +41,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.overlay' ).overlay ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$overlay = this.$element;
       this.$overlayed = this.$overlay.parent ();
@@ -59,7 +59,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TRIGGER */
 
@@ -81,7 +81,7 @@
 
     /* HOVER */
 
-    __hoverEnter: function () {
+    __hoverEnter () {
 
       if ( !this._isOpen ) {
 
@@ -95,7 +95,7 @@
 
     },
 
-    __hoverOpen: function () {
+    __hoverOpen () {
 
       if ( !this._isOpen ) {
 
@@ -109,7 +109,7 @@
 
     },
 
-    __hoverLeave: function () {
+    __hoverLeave () {
 
       if ( this._hoverOpenTimeout ) {
 
@@ -127,7 +127,7 @@
 
     },
 
-    __hoverClose: function () {
+    __hoverClose () {
 
       if ( this._isHoverOpen ) {
 
@@ -143,13 +143,13 @@
 
     /* API */
 
-    isOpen: function () {
+    isOpen () {
 
       return this._isOpen;
 
     },
 
-    toggle: function ( force ) {
+    toggle ( force ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -173,13 +173,13 @@
 
     },
 
-    open: function () {
+    open () {
 
       this.toggle ( true );
 
     },
 
-    close: function () {
+    close () {
 
       this.toggle ( false );
 

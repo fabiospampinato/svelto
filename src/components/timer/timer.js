@@ -30,7 +30,7 @@
 
   Timer.prototype = {
 
-    set: function ( func, time, autostart ) {
+    set ( func, time, autostart ) {
 
       this.init = true;
       this.action = func;
@@ -48,7 +48,7 @@
 
     },
 
-    once: function ( time ) {
+    once ( time ) {
 
       var timer = this;
 
@@ -64,7 +64,7 @@
 
     },
 
-    play: function ( reset ) {
+    play ( reset ) {
 
       if ( !this.isActive ) {
 
@@ -79,7 +79,7 @@
 
     },
 
-    pause: function () {
+    pause () {
 
       if ( this.isActive ) {
 
@@ -93,7 +93,7 @@
 
     },
 
-    stop: function () {
+    stop () {
 
       this.isActive = false;
       this.remaining_time = this.intervalTime;
@@ -103,7 +103,7 @@
 
     },
 
-    toggle: function ( reset ) {
+    toggle ( reset ) {
 
       if ( this.isActive ) this.pause ();
       else if ( reset ) this.play ( true );
@@ -113,7 +113,7 @@
 
     },
 
-    reset: function () {
+    reset () {
 
       this.isActive = false;
       this.play ( true );
@@ -122,13 +122,13 @@
 
     },
 
-    clearTimer: function () {
+    clearTimer () {
 
       clearTimeout ( this.timeoutObject );
 
     },
 
-    setTimer: function ( time ) {
+    setTimer ( time ) {
 
       var timer = this;
 
@@ -146,7 +146,7 @@
 
     },
 
-    go: function () {
+    go () {
 
       if ( this.isActive ) {
 
@@ -157,7 +157,7 @@
 
     },
 
-    remaining: function ( value ) {
+    remaining ( value ) {
 
       if ( _.isUndefined ( value ) ) return this.remaining_time;
 

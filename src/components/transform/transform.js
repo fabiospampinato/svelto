@@ -9,7 +9,7 @@
 
   /* MATRIX */
 
-  $.fn.matrix = function ( values ) {
+  $.fn.matrix ( values ) {
 
     if ( values ) {
 
@@ -59,7 +59,7 @@
 
   /* TRANSLATE */
 
-  $.fn.translate = function ( X, Y ) {
+  $.fn.translate ( X, Y ) {
 
     var matrix = this.matrix ();
 

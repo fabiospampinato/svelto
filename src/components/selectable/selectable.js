@@ -40,13 +40,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( 'table.selectable' ).selectable ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$selectable = this.$element;
       this.$elements = this._getElements ();
@@ -56,7 +56,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* KEYDOWN */
 
@@ -74,7 +74,7 @@
 
     /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       if ( $.hasCtrlOrCmd ( event ) ) {
 
@@ -108,7 +108,7 @@
 
     /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
-    __down: function ( event ) {
+    __down ( event ) {
 
       if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
 
@@ -126,7 +126,7 @@
 
     },
 
-    __move: function ( event ) {
+    __move ( event ) {
 
       event.preventDefault ();
 
@@ -150,7 +150,7 @@
 
     },
 
-    __dragEnter: function ( event ) {
+    __dragEnter ( event ) {
 
       //TODO: Remove previous
 
@@ -188,7 +188,7 @@
 
     },
 
-    __dragMouseup: function () {
+    __dragMouseup () {
 
       this._off ( Pointer.enter, this.__dragEnter );
 
@@ -198,7 +198,7 @@
 
     },
 
-    __up: function ( event ) {
+    __up ( event ) {
 
       this._off ( $document, Pointer.move, this.__move );
 
@@ -268,7 +268,7 @@
 
     /* OTHER EVENTS */
 
-    __change: function () {
+    __change () {
 
       this.$elements = this._getElements ();
 
@@ -278,7 +278,7 @@
 
     /* PRIVATE */
 
-    _resetPrev: function () {
+    _resetPrev () {
 
       this.$prevElement = false;
       this.$prevShifted = false;
@@ -286,7 +286,7 @@
 
     },
 
-    _getElements: function () {
+    _getElements () {
 
       return this.$element.find ( this.options.selectors.element );
 
@@ -294,7 +294,7 @@
 
     /* API */
 
-    get: function () {
+    get () {
 
       return this.$elements.filter ( '.' + this.options.selectors.selected );
 

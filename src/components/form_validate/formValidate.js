@@ -25,85 +25,85 @@
     options: {
       validators: {
         /* TYPE */
-        alpha: function ( value ) {
+        alpha ( value ) {
           var re = /^[a-zA-Z]+$/;
           return value.match ( re ) ? true : 'Only alphabetical characters are allowed';
         },
-        alphanumeric: function ( value ) {
+        alphanumeric ( value ) {
           var re = /^([a-zA-Z0-9]+)$/;
           return value.match ( re ) ? true : 'Only alphanumeric characters are allowed';
         },
-        hexadecimal: function ( value ) {
+        hexadecimal ( value ) {
           var re = /^[0-9a-fA-F]+$/;
           return value.match ( re ) ? true : 'Only hexadecimal characters are allowed';
         },
-        number: function ( value ) {
+        number ( value ) {
           var re = /^-?[0-9]+$/; //FIXME: It is supposed to match both integers and floats, but it doesn't
           return value.match ( re ) ? true : 'Only numbers are allowed';
         },
-        integer: function ( value ) {
+        integer ( value ) {
           var re = /^(?:-?(?:0|[1-9][0-9]*))$/;
           return value.match ( re ) ? true : 'Only integers numbers are allowed';
         },
-        float: function ( value ) {
+        float ( value ) {
           var re = /^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/; //FIXME: We are also matching the scientific notation here, this might be unwanted, expecially if a language that doesn't support this notation has to take care of it
           return value.match ( re ) ? true : 'Only floating point numbers are allowed';
         },
         /* NUMBER */
-        min: function ( value, min ) {
+        min ( value, min ) {
           return ( Number ( value ) >= Number ( min ) ) ? true : 'The number must be at least ' + min;
         },
-        max: function ( value, max ) {
+        max ( value, max ) {
           return ( Number ( value ) <= Number ( max ) ) ? true : 'The number must be at maximum ' + max;
         },
-        range: function ( value, min, max ) {
+        range ( value, min, max ) {
           value = Number ( value );
           return ( value >= Number ( min ) && value <= Number ( max ) ) ? true : 'The number must be between ' + min + ' and ' + max;
         },
         /* STRING */
-        minLength: function ( value, minLength ) {
+        minLength ( value, minLength ) {
           return ( value.trim ().length >= Number ( minLength ) ) ? true : 'The lenght must be at least ' + minLength;
         },
-        maxLength: function ( value, maxLength ) {
+        maxLength ( value, maxLength ) {
           return ( value.trim ().length <= Number ( maxLength ) ) ? true : 'The lenght must be at maximum ' + maxLength;
         },
-        rangeLength: function ( value, minLength, maxLength ) {
+        rangeLength ( value, minLength, maxLength ) {
           value = value.trim ();
           return ( value.length >= Number ( minLength ) && value.length <= Number ( maxLength ) ) ? true : 'The length must be between ' + minLength + ' and ' + maxLength;
         },
-        exactLength: function ( value, length ) {
+        exactLength ( value, length ) {
           return ( value.trim ().length === Number ( length ) ) ? true : 'The length must be exactly ' + length;
         },
         /* THINGS */
-        email: function ( value ) {
+        email ( value ) {
           var re = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
           return value.match ( re ) ? true : 'Enter a valid email address';
         },
-        cc: function ( value ) {
+        cc ( value ) {
           var re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
           return value.match ( re ) ? true : 'Enter a valid credit card number';
         },
-        ssn: function ( value ) {
+        ssn ( value ) {
           var re = /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
           return value.match ( re ) ? true : 'Enter a valid Social Security Number';
         },
-        ipv4: function ( value ) {
+        ipv4 ( value ) {
           var re = /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
           return value.match ( re ) ? true : 'Enter a valid IPv4 address';
         },
-        url: function ( value ) {
+        url ( value ) {
           var re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
           return value.match ( re ) ? true : 'Enter a valid URL';
         },
         /* OTHERS */
-        required: function ( value ) {
+        required ( value ) {
           return ( value.trim ().length > 0 ) ? true : 'This field is required';
         },
-        matches: function ( value ) {
+        matches ( value ) {
           var matches = _.slice ( arguments, 1 );
           return ( matches.indexOf ( value.toLowerCase () ) !== -1 ) ? true : 'This value is not allowed';
         },
-        matchesField: function ( value, fieldName ) {
+        matchesField ( value, fieldName ) {
           var fieldValue = _.find ( this, { name: fieldName } ).value;
           return ( value === fieldValue ) ? true : 'The two fields don\'t match';
         }
@@ -137,13 +137,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$form = this.$element;
       this.$elements = this.$element.find ( this.options.selectors.element );
@@ -153,7 +153,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -175,7 +175,7 @@
 
     /* ELEMENTS */
 
-    ___elements: function () {
+    ___elements () {
 
       this.elements = {};
 
@@ -240,7 +240,7 @@
 
     /* CHANGE */
 
-    __change: function ( event, element ) {
+    __change ( event, element ) {
 
       var elementObj = this.elements[element.name];
 
@@ -276,7 +276,7 @@
 
     /* FOCUS */
 
-    __focus: function ( event, element ) {
+    __focus ( event, element ) {
 
       var elementObj = this.elements[element.name];
 
@@ -288,7 +288,7 @@
 
     /* BLUR */
 
-    __blur: function ( event, element ) {
+    __blur ( event, element ) {
 
       var elementObj = this.elements[element.name];
 
@@ -298,7 +298,7 @@
 
     /* SUBMIT */
 
-    __submit: function ( event ) {
+    __submit ( event ) {
 
       if ( !this.isValid () ) {
 
@@ -311,7 +311,7 @@
 
     /* ELEMENT */
 
-    _validateWorker: function ( elementObj ) {
+    _validateWorker ( elementObj ) {
 
       if ( elementObj.isValid === undefined ) {
 
@@ -334,7 +334,7 @@
 
     },
 
-    _validate: function ( elementObj ) {
+    _validate ( elementObj ) {
 
       var errors = {},
           validations = elementObj.validations;
@@ -370,19 +370,19 @@
 
     },
 
-    __indeterminate: function ( elementObj ) {
+    __indeterminate ( elementObj ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
 
     },
 
-    __valid: function ( elementObj ) {
+    __valid ( elementObj ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
 
     },
 
-    __invalid: function ( elementObj, errors ) {
+    __invalid ( elementObj, errors ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
 
@@ -390,7 +390,7 @@
 
     /* API */
 
-    isValid: function () {
+    isValid () {
 
       for ( var name in this.elements ) {
 

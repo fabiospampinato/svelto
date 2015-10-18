@@ -14,7 +14,7 @@
 
   /* HEX COLOR */
 
-  window.HexColor = function ( value ) {
+  window.HexColor = ( value ) => {
 
     if ( _.isString ( value ) ) {
 
@@ -60,7 +60,7 @@
       v: 0
     },
 
-    getHexStr: function () {
+    getHexStr () {
 
       var hex = ColorHelper.hsv2hex ( this.hsv );
 

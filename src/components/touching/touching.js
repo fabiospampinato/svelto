@@ -15,7 +15,7 @@
 
   /* TOUCHING */
 
-  $.fn.touching = function ( options ) {
+  $.fn.touching ( options ) {
 
     /* OPTIONS */
 

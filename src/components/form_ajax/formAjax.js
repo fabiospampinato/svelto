@@ -11,6 +11,7 @@
  * ========================================================================= */
 
 //TODO: Check if it works, also for upload
+//TODO: Update to a widget
 
 (function ( $, _, window, document, undefined ) {
 
@@ -18,9 +19,9 @@
 
   /* FORM AJAX */
 
-  $.fn.formAjax = function () {
+  $.fn.formAjax () {
 
-    this.on ( 'submit', function ( event ) {
+    this.on ( 'submit', ( event ) => {
 
       event.preventDefault ();
 
@@ -35,13 +36,13 @@
         type: $form.attr ( 'method' ) || 'POST',
         url: $form.attr ( 'action' ),
 
-        beforeSend: function () {
+        beforeSend () {
 
           $form.spinnerOverlay ( 'show' );
 
         },
 
-        error: function ( res ) {
+        error ( res ) {
 
           if ( _.isString ( res ) ) {
 
@@ -65,7 +66,7 @@
 
         },
 
-        success: function ( res ) {
+        success ( res ) {
 
           if ( _.isString ( res ) ) {
 
@@ -111,7 +112,7 @@
 
         },
 
-        complete: function () {
+        complete () {
 
           $form.spinnerOverlay ( 'hide' );
 

@@ -57,13 +57,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.draggable' ).draggable ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.draggable = this.element;
       this.$draggable = this.$element;
@@ -72,7 +72,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* DOWN */
 
@@ -192,7 +192,7 @@
 
     /* HANDLERS */
 
-    __down: function ( event, trigger ) {
+    __down ( event, trigger ) {
 
       if ( !isDragging && this.options.draggable () ) {
 
@@ -218,7 +218,7 @@
 
     },
 
-    __move: function ( event ) {
+    __move ( event ) {
 
       if ( this.isProxyed && this.motion === false ) {
 
@@ -240,7 +240,7 @@
 
     },
 
-    __up: function ( event ) {
+    __up ( event ) {
 
       var modifiedXY = this.initialXY;
 

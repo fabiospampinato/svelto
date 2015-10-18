@@ -43,13 +43,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.navbar' ).navbar ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.navbar = this.element;
       this.$navbar = this.$element;
@@ -65,7 +65,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TAP */
 
@@ -95,7 +95,7 @@
 
     /* TAP */
 
-    __tap: function ( event ) {
+    __tap ( event ) {
 
       if ( event.target === this.navbar ) {
 
@@ -107,7 +107,7 @@
 
     /* KEYDOWN */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -127,7 +127,7 @@
 
     /* FLICK */
 
-    __flick: function ( event, data ) {
+    __flick ( event, data ) {
 
       if ( this._isOpen ) return;
 
@@ -177,13 +177,13 @@
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen () {
 
       return this._isOpen;
 
     },
 
-    toggle: function ( force ) {
+    toggle ( force ) {
 
       if ( _.isUndefined ( force ) ) {
 
@@ -203,13 +203,13 @@
 
     },
 
-    open: function () {
+    open () {
 
       this.toggle ( true );
 
     },
 
-    close: function () {
+    close () {
 
       this.toggle ( false );
 

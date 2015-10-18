@@ -37,7 +37,7 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.stepper' ).each ( function () {
 
@@ -54,7 +54,7 @@
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$stepper = this.$element;
       this.$decreaser = this.$stepper.find ( this.options.selectors.decreaser );
@@ -65,13 +65,13 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       this._updateButtons ();
 
     },
 
-    _events: function () {
+    _events () {
 
       /* INPUT / CHANGE */
 
@@ -93,7 +93,7 @@
 
     /* PRIVATE */
 
-    _sanitizeValue: function ( value ) {
+    _sanitizeValue ( value ) {
 
       var nr = Number ( value );
 
@@ -109,13 +109,13 @@
 
     /* UPDATE */
 
-    _updateInput: function () {
+    _updateInput () {
 
       this.$input.val ( this.options.value ).trigger ( 'change' );
 
     },
 
-    _updateButtons: function ( previous ) {
+    _updateButtons ( previous ) {
 
       var isMin = ( this.options.value === this.options.min ),
           isMax = ( this.options.value === this.options.max );
@@ -132,7 +132,7 @@
 
     },
 
-    _update: function ( previous ) {
+    _update ( previous ) {
 
       this._updateInput ();
       this._updateButtons ( previous );
@@ -141,7 +141,7 @@
 
     /* CHANGE */
 
-    __inputChange: function () {
+    __inputChange () {
 
       this.set ( this.$input.val () );
 
@@ -149,7 +149,7 @@
 
     /* LEFT / RIGHT ARROWS */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -173,13 +173,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return this.options.value;
 
     },
 
-    set: function ( value ) {
+    set ( value ) {
 
       value = Number ( value );
 
@@ -218,13 +218,13 @@
 
     },
 
-    increase: function () {
+    increase () {
 
       this.set ( this.options.value + this.options.step );
 
     },
 
-    decrease: function () {
+    decrease () {
 
       this.set ( this.options.value - this.options.step );
 

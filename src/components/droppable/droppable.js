@@ -29,19 +29,19 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.droppable' ).droppable ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$droppable = this.$element;
 
     },
 
-    _events: function () {
+    _events () {
 
       /* DRAG END */
 
@@ -51,7 +51,7 @@
 
     /* PRIVATE */
 
-    __dragEnd: function ( event, data ) {
+    __dragEnd ( event, data ) {
 
       var $draggable = $(data.draggable);
 

@@ -46,7 +46,7 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.slider' ).each ( function () {
 
@@ -64,7 +64,7 @@
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$slider = this.$element;
       this.$input = this.$slider.find ( this.options.selectors.input );
@@ -82,13 +82,13 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       this._updatePositions ();
 
     },
 
-    _events: function () {
+    _events () {
 
       /* INPUT CHANGE */
 
@@ -130,13 +130,13 @@
 
     /* PRIVATE */
 
-    _roundValue: function ( value ) {
+    _roundValue ( value ) {
 
       return Number ( Number ( value ).toFixed ( this.options.decimals ) );
 
     },
 
-    _updateVariables: function () {
+    _updateVariables () {
 
       this.unhighlightWidth = this.$unhighlight.width ();
 
@@ -144,7 +144,7 @@
 
     },
 
-    _updatePositions: function () {
+    _updatePositions () {
 
       var percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
           translateX = this.unhighlightWidth / 100 * percentage;
@@ -155,13 +155,13 @@
 
     },
 
-    _updateLabel: function ( value ) {
+    _updateLabel ( value ) {
 
       this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
 
     },
 
-    _updateInput: function () {
+    _updateInput () {
 
       this.$input.val ( this.options.value ).trigger ( 'change' );
 
@@ -169,7 +169,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       this.set ( this.$input.val () );
 
@@ -177,7 +177,7 @@
 
     /* RESIZE */
 
-    __resize: function () {
+    __resize () {
 
       this._updateVariables ();
       this._updatePositions ();
@@ -186,7 +186,7 @@
 
     /* LEFT / RIGHT ARROWS */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -212,13 +212,13 @@
 
     /* DRAG */
 
-    _dragModifierX: function ( distance ) {
+    _dragModifierX ( distance ) {
 
       return _.roundCloser ( distance, this.stepWidth );
 
     },
 
-    __dragMove: function ( data ) {
+    __dragMove ( data ) {
 
       this.$highlight.translateX ( data.moveXY.X );
 
@@ -226,7 +226,7 @@
 
     },
 
-    __dragEnd: function ( data ) {
+    __dragEnd ( data ) {
 
       this.set ( this.options.min + ( data.endXY.X / this.stepWidth * this.options.step ) );
 
@@ -234,13 +234,13 @@
 
     /* API */
 
-    get: function () {
+    get () {
 
       return this.options.value;
 
     },
 
-    set: function ( value ) {
+    set ( value ) {
 
       value = _.clamp ( this.options.min, this._roundValue ( value ), this.options.max );
 
@@ -263,13 +263,13 @@
 
     },
 
-    increase: function () {
+    increase () {
 
       this.set ( this.options.value + this.options.step );
 
     },
 
-    decrease: function () {
+    decrease () {
 
       this.set ( this.options.value - this.options.step );
 

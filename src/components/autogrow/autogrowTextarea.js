@@ -31,25 +31,25 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$textarea = this.$element;
 
     },
 
-    _init: function () {
+    _init () {
 
       this.update ();
 
     },
 
-    _events: function () {
+    _events () {
 
       /* INPUT / CHANGE */
 
@@ -59,7 +59,7 @@
 
     /* PUBLIC */
 
-    update: function () {
+    update () {
 
       var neededHeight = this.$textarea.height ( 1 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
 

@@ -62,13 +62,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.dropdown' ).dropdown ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
@@ -83,7 +83,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TRIGGER */
 
@@ -107,7 +107,7 @@
 
     /* HOVER */
 
-    __hoverTriggerEnter: function ( event, trigger ) {
+    __hoverTriggerEnter ( event, trigger ) {
 
       if ( !this._isOpen ) {
 
@@ -122,7 +122,7 @@
 
     },
 
-    __hoverOpen: function () {
+    __hoverOpen () {
 
       if ( !this._isOpen ) {
 
@@ -136,7 +136,7 @@
 
     },
 
-    __hoverTriggerLeave: function ( event, trigger ) {
+    __hoverTriggerLeave ( event, trigger ) {
 
       if ( this._hoverOpenTimeout ) {
 
@@ -156,7 +156,7 @@
 
     },
 
-    __hoverClose: function () {
+    __hoverClose () {
 
       if ( this._isHoverOpen ) {
 
@@ -172,7 +172,7 @@
 
     },
 
-    __hoverDropdownEnter: function () {
+    __hoverDropdownEnter () {
 
       if ( this._hoverCloseTimeout ) {
 
@@ -190,7 +190,7 @@
 
     },
 
-    __hoverDropdownLeave: function () {
+    __hoverDropdownLeave () {
 
       if ( this._isHoverOpen ) {
 
@@ -202,13 +202,13 @@
 
     /* WINDOW RESIZE / SCROLL */
 
-    _bindWindowResizeScroll: function () {
+    _bindWindowResizeScroll () {
 
       this._on ( $window, 'resize scroll', this._update );
 
     },
 
-    _unbindWindowResizeScroll: function () {
+    _unbindWindowResizeScroll () {
 
       this._off ( $window, 'resize scroll', this._update );
 
@@ -216,19 +216,19 @@
 
     /* WINDOW TAP */
 
-    _bindWindowTap: function () {
+    _bindWindowTap () {
 
       this._on ( $window, Pointer.tap, this.__windowTap );
 
     },
 
-    _unbindWindowTap: function () {
+    _unbindWindowTap () {
 
       this._off ( $window, Pointer.tap, this.__windowTap );
 
     },
 
-    __windowTap: function ( event ) {
+    __windowTap ( event ) {
 
       var $parents = $(event.target).parents ();
 
@@ -252,7 +252,7 @@
 
     /* POSITIONATE */
 
-    _positionate: function () {
+    _positionate () {
 
       /* VARIABLES */
 
@@ -268,7 +268,7 @@
         $pointer: noTip ? false : $mockTip,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
-          change: function ( data ) {
+          change ( data ) {
             $trigger.addClass ( 'dropdown-trigger-' + data.direction );
           }
         }
@@ -286,7 +286,7 @@
 
     /* PRIVATE */
 
-    _update: function () {
+    _update () {
 
       if ( this._isOpen ) {
 
@@ -298,19 +298,19 @@
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen () {
 
       return this._isOpen
 
     },
 
-    toggle: function ( event, trigger ) {
+    toggle ( event, trigger ) {
 
       this[( this._isOpen && assignments[this.id] === trigger ) ? 'close' : 'open']( event, trigger );
 
     },
 
-    open: function ( event, trigger ) {
+    open ( event, trigger ) {
 
       if ( trigger ) {
 
@@ -343,7 +343,7 @@
 
     },
 
-    close: function () {
+    close () {
 
       $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
 

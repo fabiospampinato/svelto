@@ -42,7 +42,7 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.switch' ).each ( function () {
 
@@ -59,7 +59,7 @@
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$switch = this.$element;
       this.$input = this.$switch.find ( this.options.selectors.input );
@@ -73,7 +73,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       if ( this.$input.prop ( 'checked' ) ) {
 
@@ -83,7 +83,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -111,7 +111,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       this.toggle ( this.$input.prop ( 'checked' ) );
 
@@ -119,7 +119,7 @@
 
     /* KEYS */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -147,7 +147,7 @@
 
     /* DRAG */
 
-    __dragEnd: function ( data ) {
+    __dragEnd ( data ) {
 
       if ( data.motion ) {
 
@@ -165,13 +165,13 @@
 
     /* UPDATE */
 
-    _updatePosition: function () {
+    _updatePosition () {
 
       this.$handler.translateX ( this.isChecked ? this.switchWidth - this.handlerWidth : 0 );
 
     },
 
-    _updateColors: function () {
+    _updateColors () {
 
       this.$bar.toggleClass ( this.options.colors.on, this.isChecked );
       this.$bar.toggleClass ( this.options.colors.off, !this.isChecked );
@@ -181,7 +181,7 @@
 
     },
 
-    _updateInput: function () {
+    _updateInput () {
 
       this.$input.prop ( 'checked', this.isChecked ).trigger ( 'change' );
 
@@ -189,13 +189,13 @@
 
     /* API */
 
-    get: function () {
+    get () {
 
       return this.isChecked;
 
     },
 
-    toggle: function ( force, reset ) {
+    toggle ( force, reset ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -230,13 +230,13 @@
 
     },
 
-    check: function () {
+    check () {
 
       this.toggle ( true );
 
     },
 
-    uncheck: function () {
+    uncheck () {
 
       this.toggle ( false );
 

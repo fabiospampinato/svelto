@@ -36,13 +36,13 @@
 
     /* API */
 
-    get: function ( action ) {
+    get ( action ) {
 
       return this.actions[action] || 0;
 
     },
 
-    set: function ( action, times ) {
+    set ( action, times ) {
 
       times = Number(times);
 
@@ -64,13 +64,13 @@
 
     },
 
-    update: function () {
+    update () {
 
       $.cookie.set ( this.name, this.serialize ( this.actions ), Infinity );
 
     },
 
-    reset: function ( action ) {
+    reset ( action ) {
 
       if ( action ) {
 

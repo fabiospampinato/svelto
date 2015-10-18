@@ -23,7 +23,7 @@
 
   $.cookie = {
 
-    get: function ( key ) {
+    get ( key ) {
 
       if ( !key ) return null;
 
@@ -31,7 +31,7 @@
 
     },
 
-    set: function ( key, value, end, path, domain, secure ) {
+    set ( key, value, end, path, domain, secure ) {
 
       if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
 
@@ -63,7 +63,7 @@
 
     },
 
-    remove: function ( key, path, domain ) {
+    remove ( key, path, domain ) {
 
       if ( !this.has ( key ) ) return false;
 
@@ -73,7 +73,7 @@
 
     },
 
-    has: function ( key ) {
+    has ( key ) {
 
       if ( !key ) return false;
 
@@ -81,7 +81,7 @@
 
     },
 
-    keys: function () {
+    keys () {
 
       var keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
 

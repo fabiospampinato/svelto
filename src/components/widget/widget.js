@@ -56,7 +56,7 @@
 
     /* WIDGET METHODS */
 
-    _create: function ( options, element ) {
+    _create ( options, element ) {
 
       // CHECK IF INITIALIZABLE
 
@@ -116,7 +116,7 @@
     _init: _.noop, //INFO: Perform the init stuff inside this function
     _events: _.noop, //INFO: Bind the event handlers inside this function
 
-    destroy: function () {
+    destroy () {
 
       this._destroy ();
 
@@ -126,7 +126,7 @@
 
     _destroy: _.noop,
 
-    widget: function () {
+    widget () {
 
       return this.$element;
 
@@ -134,7 +134,7 @@
 
     /* OPTIONS METHODS */
 
-    option: function ( key, value ) {
+    option ( key, value ) {
 
       if ( arguments.length === 0 ) { //INFO: Returns a clone of the options object
 
@@ -192,7 +192,7 @@
 
     },
 
-    _setOptions: function ( options ) {
+    _setOptions ( options ) {
 
       for ( var key in options ) {
 
@@ -204,7 +204,7 @@
 
     },
 
-    _setOption: function ( key, value ) {
+    _setOption ( key, value ) {
 
       this.options[key] = value;
 
@@ -220,13 +220,13 @@
 
     /* ENABLED */
 
-    enable: function () {
+    enable () {
 
       return this._setOptions ({ disabled: false });
 
     },
 
-    isEnabled: function () {
+    isEnabled () {
 
       return !this.options.disabled;
 
@@ -234,13 +234,13 @@
 
     /* DISABLED */
 
-    disable: function () {
+    disable () {
 
       return this._setOptions ({ disabled: true });
 
     },
 
-    isDisabled: function () {
+    isDisabled () {
 
       return this.options.disabled;
 
@@ -248,7 +248,7 @@
 
     /* EVENTS */
 
-    _on: function ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
+    _on ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
 
       //TODO: Add support for custom data
 
@@ -325,7 +325,7 @@
 
     },
 
-    _one: function () {
+    _one () {
 
       var args = arguments;
 
@@ -335,7 +335,7 @@
 
     },
 
-    _onHover: function ( $element, args ) {
+    _onHover ( $element, args ) {
 
       //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
 
@@ -360,7 +360,7 @@
 
     },
 
-    _off: function ( $element, events, handler ) {
+    _off ( $element, events, handler ) {
 
       // NORMALIZING OPTIONS
 
@@ -384,7 +384,7 @@
 
     },
 
-    _trigger: function ( events, data ) {
+    _trigger ( events, data ) {
 
       data = data || {};
 
@@ -408,7 +408,7 @@
 
     /* DELAYING */
 
-    _delay: function ( fn, delay ) {
+    _delay ( fn, delay ) {
 
       var instance = this;
 
@@ -422,7 +422,7 @@
 
     /* DEFER */
 
-    _defer: function ( fn ) {
+    _defer ( fn ) {
 
       return this._delay ( fn );
 
@@ -430,7 +430,7 @@
 
     /* FRAME */
 
-    _frame: function ( fn ) {
+    _frame ( fn ) {
 
       var instance = this;
 
@@ -444,7 +444,7 @@
 
     /* DEBOUNCING */
 
-    _debounce: function ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _debounce ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
 
       return _.debounce ( fn, wait, options );
 
@@ -452,7 +452,7 @@
 
     /* THROTTLING */
 
-    _throttle: function ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _throttle ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
 
       return _.throttle ( fn, wait, options );
 
@@ -460,7 +460,7 @@
 
     /* TEMPLATE */
 
-    _tmpl: function ( name, options ) {
+    _tmpl ( name, options ) {
 
       return $.tmpl ( this.fullName + '.' + name, options || {} );
 
@@ -468,7 +468,7 @@
 
     /* INSERTION */
 
-    insertBefore: function ( selector ) {
+    insertBefore ( selector ) {
 
       this.$element.insertBefore ( selector );
 
@@ -476,7 +476,7 @@
 
     },
 
-    insertAfter: function ( selector ) {
+    insertAfter ( selector ) {
 
       this.$element.insertAfter ( selector );
 
@@ -484,7 +484,7 @@
 
     },
 
-    prependTo: function ( selector ) {
+    prependTo ( selector ) {
 
       this.$element.prependTo ( selector );
 
@@ -492,7 +492,7 @@
 
     },
 
-    appendTo: function ( selector ) {
+    appendTo ( selector ) {
 
       this.$element.appendTo ( selector );
 

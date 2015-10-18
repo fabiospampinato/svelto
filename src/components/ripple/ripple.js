@@ -21,7 +21,7 @@
       hide: 400
     },
 
-    show: function ( event, $element ) {
+    show ( event, $element ) {
 
       var $ripple = $( '<div class="ripple-circle">' ).appendTo ( $element ),
           offset = $element.offset (),
@@ -41,7 +41,7 @@
 
     },
 
-    hide: function ( $ripple, before ) {
+    hide ( $ripple, before ) {
 
       var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
 

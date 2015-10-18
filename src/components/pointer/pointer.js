@@ -57,11 +57,11 @@
 
   /* EVENTS METHODS */
 
-  _.each ( events, function ( alias, name ) {
+  events.forEach ( ( alias, name ) => {
 
     Pointer[name] = alias;
 
-    $.fn[name] = function ( fn ) {
+    $.fn[name] ( fn ) {
 
       return fn ? this.on ( alias, fn ) : this.trigger ( alias );
 

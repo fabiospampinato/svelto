@@ -1829,8 +1829,7 @@
       this.$expanders = this.$accordion.children(this.options.selectors.expander);
       this.expandersNr = this.$expanders.length;
 
-      this.expandersInstances = _.map(this.$expanders, function (expander) {
-
+      this.expandersInstances = this.$expanders.toArray().map(function (expander) {
         return $(expander).expander('instance');
       });
 
@@ -1841,13 +1840,13 @@
 
       if (!this.isMultiple) {
 
-        this._on(this.$expanders, 'expander:open', this.__close_others);
+        this._on(this.$expanders, 'expander:open', this.__closeOthers);
       }
     },
 
-    /* OPEN */
+    /* EXPANDER OPEN */
 
-    __close_others: function __close_others(event, data, node) {
+    __closeOthers: function __closeOthers(event, data, node) {
 
       for (var i = 0; i < this.expandersNr; i++) {
 
@@ -1862,8 +1861,7 @@
 
     areOpen: function areOpen() {
 
-      return _.map(this.expandersInstances, function (instance) {
-
+      return this.expandersInstances.map(function (instance) {
         return instance.isOpen();
       });
     },

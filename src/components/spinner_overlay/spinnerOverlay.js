@@ -42,7 +42,7 @@
 
     /* SPECIAL */
 
-    _variables: function () {
+    _variables () {
 
       this.$overlayed = this.$element;
       this.$overlay = $(this._tmpl ( 'overlay', this.options )).prependTo ( this.$overlayed );
@@ -53,25 +53,25 @@
 
     /* API */
 
-    isOpen: function () {
+    isOpen () {
 
       return this.overlay.isOpen ();
 
     },
 
-    toggle: function ( force ) {
+    toggle ( force ) {
 
       this.overlay.toggle ( force );
 
     },
 
-    open: function () {
+    open () {
 
       this.overlay.open ();
 
     },
 
-    close: function () {
+    close () {
 
       this.overlay.close ();
 

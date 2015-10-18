@@ -12,8 +12,8 @@
 
   /* VARIABLES */
 
-  var userAgent = navigator.userAgent.toLowerCase (),
-      vendor = navigator.vendor.toLowerCase (),
+  var userAgent  = navigator.userAgent.toLowerCase (),
+      vendor     = navigator.vendor.toLowerCase (),
       appVersion = navigator.appVersion.toLowerCase ();
 
   /* CHECKS */
@@ -56,10 +56,10 @@
       mobile: is_mobile,
       tablet: is_tablet,
       desktop: !is_mobile && !is_tablet,
-      online: function () {
+      online () {
         return navigator.onLine;
       },
-      offline: function () {
+      offline () {
         return !navigator.onLine;
       },
       touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof DocumentTouch )

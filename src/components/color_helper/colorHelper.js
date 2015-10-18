@@ -16,7 +16,7 @@
 
     /* COLOR SPACES CONVERTERS */
 
-    hex2rgb: function ( hex ) {
+    hex2rgb ( hex ) {
 
       return {
         r: this.hex2dec ( hex.r ),
@@ -26,13 +26,13 @@
 
     },
 
-    hex2hsv: function ( hex ) {
+    hex2hsv ( hex ) {
 
       return this.rgb2hsv ( this.hex2rgb ( hex ) );
 
     },
 
-    rgb2hex: function ( rgb ) {
+    rgb2hex ( rgb ) {
 
       return {
         r: this.dec2hex ( rgb.r ),
@@ -42,17 +42,18 @@
 
     },
 
-    rgb2hsv: function ( rgb ) {
+    rgb2hsv ( rgb ) {
 
       var r = rgb.r / 255,
-        g = rgb.g / 255,
-        b = rgb.b / 255,
-        h, s,
-        v = Math.max ( r, g, b ),
-        diff = v - Math.min ( r, g, b ),
-        diffc = function ( c ) {
-          return ( v - c ) / 6 / diff + 1 / 2;
-        };
+          g = rgb.g / 255,
+          b = rgb.b / 255,
+          h,
+          s,
+          v = Math.max ( r, g, b ),
+          diff = v - Math.min ( r, g, b ),
+          diffc ( c ) {
+            return ( v - c ) / 6 / diff + 1 / 2;
+          };
 
       if ( diff === 0 ) {
 
@@ -63,8 +64,8 @@
         s = diff / v;
 
         var rr = diffc ( r ),
-          gg = diffc ( g ),
-          bb = diffc ( b );
+            gg = diffc ( g ),
+            bb = diffc ( b );
 
         if ( r === v ) {
 
@@ -99,18 +100,20 @@
 
     },
 
-    hsv2hex: function ( hsv ) {
+    hsv2hex ( hsv ) {
 
       return this.rgb2hex ( this.hsv2rgb ( hsv ) );
 
     },
 
-    hsv2rgb: function ( hsv ) {
+    hsv2rgb ( hsv ) {
 
-      var r, g, b,
-        h = hsv.h,
-        s = hsv.s,
-        v = hsv.v;
+      var r,
+          g,
+          b,
+          h = hsv.h,
+          s = hsv.s,
+          v = hsv.v;
 
       s /= 100;
       v /= 100;
@@ -179,12 +182,12 @@
 
     },
 
-    hsv2hsl: function ( hsv ) {
+    hsv2hsl ( hsv ) {
 
       var s = hsv.s / 100,
-        v = hsv.v / 100,
-        tempL = ( 2 - s ) * v,
-        tempS = s * v;
+          v = hsv.v / 100,
+          tempL = ( 2 - s ) * v,
+          tempS = s * v;
 
       return {
         h: hsv.h,
@@ -194,10 +197,10 @@
 
     },
 
-    hsl2hsv: function ( hsl ) {
+    hsl2hsv ( hsl ) {
 
       var l = hsl.l / 100 * 2,
-        s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
+          s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
 
       return {
         h: hsl.h,
@@ -209,13 +212,13 @@
 
     /* SCALE CONVERTERS */
 
-    dec2hex: function ( dec ) {
+    dec2hex ( dec ) {
 
       return _.padLeft ( dec.toString ( 16 ), 2, '0' );
 
     },
 
-    hex2dec: function ( hex ) {
+    hex2dec ( hex ) {
 
       return parseInt ( hex, 16 );
 

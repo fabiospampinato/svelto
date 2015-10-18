@@ -28,14 +28,14 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '[data-timestamp]' ).timeAgo ();
       $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$timeAgoElement = this.$element;
 
@@ -47,7 +47,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       this._loop ( 0 );
 
@@ -55,7 +55,7 @@
 
     /* PRIVATE */
 
-    _loop: function ( wait ) {
+    _loop ( wait ) {
 
       this._delay ( function () {
 
@@ -65,7 +65,7 @@
 
     },
 
-    _update: function () {
+    _update () {
 
       var timeAgo = _.timeAgo ( this.options.timestamp );
 

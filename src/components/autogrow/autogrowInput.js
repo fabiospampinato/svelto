@@ -31,25 +31,25 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$input = this.$element;
 
     },
 
-    _init: function () {
+    _init () {
 
       this.update ();
 
     },
 
-    _events: function () {
+    _events () {
 
       /* INPUT / CHANGE */
 
@@ -59,7 +59,7 @@
 
     /* PRIVATE */
 
-    _getNeededWidth: function () {
+    _getNeededWidth () {
 
       //FIXME: Isn't it better to just detach it, or to leave it in the DOM?
 
@@ -83,7 +83,7 @@
 
     /* PUBLIC */
 
-    update: function () {
+    update () {
 
       var neededWidth = this._getNeededWidth ( this.$input );
 

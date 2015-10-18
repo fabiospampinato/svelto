@@ -34,13 +34,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.expander' ).expander ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$expander = this.$element;
       this.$togglers = this.$expander.find ( this.options.selectors.toggler );
@@ -49,7 +49,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* TOGGLER */
 
@@ -59,13 +59,13 @@
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen () {
 
       return this._isOpen;
 
     },
 
-    toggle: function ( force ) {
+    toggle ( force ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -85,13 +85,13 @@
 
     },
 
-    open: function () {
+    open () {
 
       this.toggle ( true );
 
     },
 
-    close: function () {
+    close () {
 
       this.toggle ( false );
 

@@ -74,7 +74,7 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.tagbox' ).each ( function () {
 
@@ -86,7 +86,7 @@
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$tagbox = this.$element;
       this.$tags = this.$tagbox.find ( this.options.selectors.tags );
@@ -95,13 +95,13 @@
 
     },
 
-    _init: function ( suppressTriggers ) {
+    _init ( suppressTriggers ) {
 
       this.add ( this.options.init, suppressTriggers );
 
     },
 
-    _events: function () {
+    _events () {
 
       /* PARTIAL */
 
@@ -121,7 +121,7 @@
 
     /* PRIVATE */
 
-    _sanitizeTag: function ( value ) {
+    _sanitizeTag ( value ) {
 
       value = _.trim ( value );
 
@@ -141,13 +141,13 @@
 
     },
 
-    _getTagHtml: function ( value ) {
+    _getTagHtml ( value ) {
 
       return this._tmpl ( 'tag', _.merge ( { value: value }, this.options.tag ) );
 
     },
 
-    _clearPartial: function () {
+    _clearPartial () {
 
       this.$partial.val ( '' ).trigger ( 'change' );
 
@@ -155,7 +155,7 @@
 
     /* UPDATE */
 
-    _updateInput: function () {
+    _updateInput () {
 
       this.$input.val ( this.options.tags.join ( this.options.characters.separator ) ).trigger ( 'change' );
 
@@ -163,7 +163,7 @@
 
     /* TAG */
 
-    _add: function ( value ) {
+    _add ( value ) {
 
       var valueTrimmed = _.trim ( value ),
           value = this._sanitizeTag ( value );
@@ -224,7 +224,7 @@
 
     },
 
-    _remove: function ( $tag, tag ) {
+    _remove ( $tag, tag ) {
 
       $tag.remove ();
 
@@ -234,7 +234,7 @@
 
     /* KEYPRESS / KEYDOWN */
 
-    __keypressKeydown: function ( event ) {
+    __keypressKeydown ( event ) {
 
       var value = this.$partial.val ();
 
@@ -278,7 +278,7 @@
 
     /* PASTE */
 
-    __paste: function ( event ) {
+    __paste ( event ) {
 
         this.add ( event.originalEvent.clipboardData.getData ( 'text' ) );
 
@@ -288,7 +288,7 @@
 
     /* TAP ON CLOSE */
 
-    __tapOnTagRemover: function ( event, tagRemover ) {
+    __tapOnTagRemover ( event, tagRemover ) {
 
       var $tag = $(tagRemover).parents ( this.options.selectors.tag );
 
@@ -298,7 +298,7 @@
 
     /* TAP ON EMPTY */
 
-    __tapOnEmpty: function ( event ) {
+    __tapOnEmpty ( event ) {
 
       if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( 'input, ' + this.options.selectors.tagLabel ) ) {
 
@@ -310,13 +310,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return _.clone ( this.options.tags );
 
     },
 
-    add: function ( tag, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
+    add ( tag, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
       if ( _.isArray ( tag ) ) {
 
@@ -356,7 +356,7 @@
 
     },
 
-    remove: function ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
+    remove ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
       if ( tag instanceof $ ) {
 
@@ -431,7 +431,7 @@
 
     },
 
-    clear: function ( suppressTriggers ) {
+    clear ( suppressTriggers ) {
 
       if ( this.options.tags.length > 0 ) {
 
@@ -466,7 +466,7 @@
 
     },
 
-    reset: function () {
+    reset () {
 
       var previous = _.clone ( this.options.tags );
 

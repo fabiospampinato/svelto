@@ -12,7 +12,7 @@
 //TODO: Add support for min and max date delimiter
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
 //TODO: Add support for setting first day of the week
-//INFO: We use the ormat: YYYY-MM-DD
+//INFO: We use the format: YYYYMMDD
 
 (function ( $, _, window, document, undefined ) {
 
@@ -62,13 +62,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.datepicker' ).datepicker ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$datepicker = this.$element;
       this.$input = this.$datepicker.find ( this.options.selectors.input );
@@ -99,13 +99,13 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       this._refresh ();
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -128,7 +128,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       this.set ( this.$input.val () );
 
@@ -136,7 +136,7 @@
 
     /* KEYDOWN */
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       switch ( event.keyCode ) {
 
@@ -162,13 +162,13 @@
 
     /* NAVIGATION */
 
-    __prevTap: function () {
+    __prevTap () {
 
       this.prevMonth ();
 
     },
 
-    __nextTap: function () {
+    __nextTap () {
 
       this.nextMonth ();
 
@@ -176,7 +176,7 @@
 
     /* SELECTION */
 
-    __dayTap: function ( event, node ) {
+    __dayTap ( event, node ) {
 
       if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
 
@@ -194,7 +194,7 @@
 
     /* OTHERS */
 
-    _buildCalendar: function () {
+    _buildCalendar () {
 
       var prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
           currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
@@ -225,7 +225,7 @@
 
     },
 
-    _highlightDay: function ( day, cssClass ) {
+    _highlightDay ( day, cssClass ) {
 
       if ( day && day.getFullYear () === this.options.date.current.getFullYear () ) {
 
@@ -250,7 +250,7 @@
 
     },
 
-    _unhighlightSelected: function () {
+    _unhighlightSelected () {
 
       if ( this.$daySelected ) {
 
@@ -260,13 +260,13 @@
 
     },
 
-    _highlightSelected: function () {
+    _highlightSelected () {
 
       this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
 
     },
 
-    _unhighlightToday: function () {
+    _unhighlightToday () {
 
       if ( this.$dayToday ) {
 
@@ -276,19 +276,19 @@
 
     },
 
-    _highlightToday: function () {
+    _highlightToday () {
 
       this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
 
     },
 
-    _updateTitle: function () {
+    _updateTitle () {
 
       this.$navigationTitle.html ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
     },
 
-    _updateInput: function () {
+    _updateInput () {
 
       if ( this.options.date.selected ) {
 
@@ -298,7 +298,7 @@
 
     },
 
-    _exportDate: function ( date )  {
+    _exportDate ( date )  {
 
       switch ( this.options.format.type ) {
 
@@ -312,7 +312,7 @@
 
     },
 
-    _importDate: function ( date )  {
+    _importDate ( date )  {
 
       if ( _.isString ( date ) ) {
 
@@ -335,7 +335,7 @@
 
     },
 
-    _refresh: function () {
+    _refresh () {
 
       this._unhighlightSelected ();
       this._unhighlightToday ();
@@ -350,7 +350,7 @@
 
     /* API */
 
-    get: function ( formatted ) {
+    get ( formatted ) {
 
       if ( formatted && this.options.date.selected ) {
 
@@ -364,7 +364,7 @@
 
     },
 
-    set: function ( date ) {
+    set ( date ) {
 
       date = this._importDate ( date );
 
@@ -398,7 +398,7 @@
 
     },
 
-    navigateMonth: function ( modifier ) {
+    navigateMonth ( modifier ) {
 
       if ( modifier ) {
 
@@ -410,13 +410,13 @@
 
     },
 
-    prevMonth: function () {
+    prevMonth () {
 
       this.navigateMonth ( -1 );
 
     },
 
-    nextMonth: function () {
+    nextMonth () {
 
       this.navigateMonth ( 1 );
 

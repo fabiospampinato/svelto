@@ -28,13 +28,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.radio' ).radio ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$radio = this.$element;
       this.$input = this.$radio.find ( 'input' );
@@ -53,7 +53,7 @@
 
     },
 
-    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
       var isChecked = this. get (),
           hasClass = this.$radio.hasClass ( 'checked' );
@@ -66,7 +66,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -80,7 +80,7 @@
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       var isChecked = this.get ();
 
@@ -99,13 +99,13 @@
 
     /* PUBLIC */
 
-    get: function () {
+    get () {
 
       return this.$input.prop ( 'checked' );
 
     },
 
-    check: function () {
+    check () {
 
       var isChecked = this.get ();
 

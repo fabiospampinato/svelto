@@ -35,13 +35,13 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( '.flippable' ).flippable ();
 
     },
 
-    _variables: function () {
+    _variables () {
 
       this.$flippable = this.$element;
       this.$front = this.$flippable.find ( this.options.selectors.front );
@@ -52,7 +52,7 @@
 
     },
 
-    _events: function () {
+    _events () {
 
       /* FLIPPER */
 
@@ -62,7 +62,7 @@
 
     /* PUBLIC */
 
-    flip: function ( force ) {
+    flip ( force ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -82,13 +82,13 @@
 
     },
 
-    front: function () {
+    front () {
 
       this.flip ( false );
 
     },
 
-    back: function () {
+    back () {
 
       this.flip ( true );
 

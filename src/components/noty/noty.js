@@ -20,7 +20,7 @@
 
   /* HELPER */
 
-  $.noty = function ( options ) {
+  $.noty ( options ) {
 
     /* OPTIONS */
 
@@ -133,7 +133,7 @@
 
     //TODO: Add a `_widgetize` special function
 
-    _variables: function () {
+    _variables () {
 
       this.$noty = this.$element;
       this.$buttons = this.$noty.find ( this.options.selectors.button );
@@ -144,7 +144,7 @@
 
     },
 
-    _init: function () {
+    _init () {
 
       if ( this.options.autoplay ) {
 
@@ -156,7 +156,7 @@
 
     /* PRIVATE */
 
-    ___tap: function () {
+    ___tap () {
 
       if ( this.options.type !== 'action' ) {
 
@@ -168,7 +168,7 @@
 
     },
 
-    ___buttonTap: function () {
+    ___buttonTap () {
 
       _.each ( this.options.buttons, function ( button, index ) {
 
@@ -188,7 +188,7 @@
 
     },
 
-    ___timer: function () {
+    ___timer () {
 
       if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
@@ -200,21 +200,17 @@
 
     },
 
-    ___hover: function () {
+    ___hover () {
 
       var instance = this;
 
-      this.$noty.hover ( function () {
+      this.$noty.hover ( () => {
 
-        _.each ( notiesTimers, function ( timer ) {
+        notiesTimers.forEach ( timer.pause );
 
-          timer.pause ();
+      }, () => {
 
-        });
-
-      }, function () {
-
-        _.each ( notiesTimers, function ( timer ) {
+        notiesTimers.forEach ( timer => {
 
           timer.remaining ( Math.max ( instance.options.timerMinimumRemaining, timer.remaining () || 0 ) );
 
@@ -226,7 +222,7 @@
 
     },
 
-    ___flick: function () {
+    ___flick () {
 
       if ( this.options.type !== 'action' ) {
 
@@ -244,7 +240,7 @@
 
     },
 
-    __keydown: function ( event ) {
+    __keydown ( event ) {
 
       if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
 
@@ -259,13 +255,13 @@
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen () {
 
       return this._isOpen;
 
     },
 
-    open: function () {
+    open () {
 
       if ( !this._isOpen ) {
 
@@ -304,7 +300,7 @@
 
     },
 
-    close: function () {
+    close () {
 
       if ( this._isOpen ) {
 

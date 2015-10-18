@@ -28,19 +28,19 @@
 
     /* API */
 
-    get: function () {
+    get () {
 
       return this.group.get ( this.name );
 
     },
 
-    set: function ( times ) {
+    set ( times ) {
 
       this.group.set ( this.name, times );
 
     },
 
-    reset: function () {
+    reset () {
 
       this.group.reset ( this.name );
 
