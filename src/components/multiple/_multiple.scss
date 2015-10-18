@@ -231,42 +231,6 @@
     flex-direction: column;
   }
 
-  /* Z-DEPTH */
-
-  &[class*="z-depth-"] {
-
-    box-shadow: none !important;
-
-    &:before {
-      @include fill-absolute ();
-      z-index: $multiple-z-depth-z-index;
-      content: '';
-      pointer-events: none;
-      border-radius: $border-radius-medium;
-      bottom: $gutter;
-    }
-
-    &:not(.no-wrap):not(.vertical):not(.joined):before {
-      right: $gutter-half;
-      left: $gutter-half;
-    }
-
-    > [class*="z-depth-"] {
-      box-shadow: none !important;
-    }
-
-    /* Z-DEPTHS */
-
-    @each $depth, $shadow in $z-depths {
-
-      &.z-depth-#{$depth}:before {
-        @include z-depth ( $depth );
-      }
-
-    }
-
-  }
-
   /* HORIZONTAL GUTTER */
 
   > .multiple.no-wrap {
