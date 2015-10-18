@@ -1651,9 +1651,7 @@ $kbd-padding: 0.2em 0.3em !default;
 
     }
 
-    &.actionable,
-    &.button,
-    &.button-corner {
+    &.actionable {
 
       &.active {
 
@@ -1662,7 +1660,7 @@ $kbd-padding: 0.2em 0.3em !default;
         @if $color_name != inherit {
 
           &.transparentize {
-              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+            background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
           }
 
         }
@@ -1711,6 +1709,72 @@ $kbd-padding: 0.2em 0.3em !default;
 
         &.transparentize {
           border-color: transparentize($accent, $color-transparentize-amount) #{$extra};
+        }
+
+      }
+
+    }
+
+    &.inverted {
+
+      background: transparent #{$extra};
+      border-color: $bg #{$extra};
+      color: $bg #{$extra};
+
+      &.actionable {
+
+        &.active {
+
+          background: $bg-active #{$extra};
+          border-color: $bg-active #{$extra};
+          color: $text #{$extra};
+
+          @if $color_name != inherit {
+
+            &.transparentize {
+              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+              border-color: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+            }
+
+          }
+
+        }
+
+        &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
+
+          &:hover {
+
+            background: $bg-hover #{$extra};
+            border-color: $bg-hover #{$extra};
+            color: $text #{$extra};
+
+            @if $color_name != inherit {
+
+              &.transparentize {
+                background: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
+                border-color: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
+              }
+
+            }
+
+          }
+
+          &:not(.ripple):active {
+
+            background: $bg-active #{$extra};
+            border-color: $bg-active #{$extra};
+
+            @if $color_name != inherit {
+
+              &.transparentize {
+                background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+                border-color: transparentize($bg-active, $color-transparentize-amount) #{$extra};
+              }
+
+            }
+
+          }
+
         }
 
       }
