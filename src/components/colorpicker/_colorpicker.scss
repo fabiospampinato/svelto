@@ -118,7 +118,7 @@
 
     .colorpicker-saturation-brightness-wrp,
     .colorpicker-hue-wrp {
-      border: $outline-width solid $colorpicker-invalid-color !important;
+      border: $outline-width solid $color-error !important;
     }
 
   }
@@ -131,7 +131,7 @@
 
     .colorpicker-saturation-brightness-wrp,
     .colorpicker-hue-wrp {
-      border: $outline-width solid $colorpicker-valid-color !important;
+      border: $outline-width solid $color-success !important;
     }
 
   }

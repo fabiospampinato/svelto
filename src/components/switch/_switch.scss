@@ -29,6 +29,7 @@
   /* BAR */
 
   &-bar {
+    @include color ( $switch-color, true );
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-height;
@@ -39,6 +40,7 @@
 
   &-handler {
 
+    @include color ( $switch-color, true );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
     left: 0;
@@ -87,16 +89,11 @@
 
   &.invalid {
 
-    /* BAR */
+    /* BAR / HANDLER */
 
-    .switch-bar {
-      background-color: $switch-invalid-color !important;
-    }
-
-    /* HANDLER */
-
+    .switch-bar,
     .switch-handler {
-      background-color: $switch-invalid-color !important;
+      @include color ( 'error', true, !important );
     }
 
   }
@@ -105,16 +102,11 @@
 
   &.valid {
 
-    /* BAR */
+    /* BAR / HANDLER */
 
-    .switch-bar {
-      background-color: $switch-valid-color !important;
-    }
-
-    /* HANDLER */
-
+    .switch-bar,
     .switch-handler {
-      background-color: $switch-valid-color !important;
+      @include color ( 'success', true, !important );
     }
 
   }

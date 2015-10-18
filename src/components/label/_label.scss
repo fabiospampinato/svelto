@@ -54,13 +54,29 @@ label {
   /* INVALID */
 
   &.invalid {
-    border: $outline-width solid $label-invalid-color !important;
+
+    border: $outline-width solid $color-error !important;
+
+    /* ICON */
+
+    .icon {
+      color: $color-error !important;
+    }
+
   }
 
   /* VALID */
 
   &.valid {
-    border: $outline-width solid $label-valid-color !important;
+
+    border: $outline-width solid $color-success !important;
+
+    /* ICON */
+
+    .icon {
+      color: $color-success !important;
+    }
+
   }
 
   /* COMPACT */

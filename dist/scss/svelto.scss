@@ -2611,14 +2611,6 @@ $label-floating-bottom: 24px !default;
 $label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
 $label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
 
-/* INVALID */
-
-$label-invalid-color: $color-red !default;
-
-/* VALID */
-
-$label-valid-color: $color-green !default;
-
 
 /* =========================================================================
  * Svelto - Label v0.4.0
@@ -2675,13 +2667,29 @@ label {
   /* INVALID */
 
   &.invalid {
-    border: $outline-width solid $label-invalid-color !important;
+
+    border: $outline-width solid $color-error !important;
+
+    /* ICON */
+
+    .icon {
+      color: $color-error !important;
+    }
+
   }
 
   /* VALID */
 
   &.valid {
-    border: $outline-width solid $label-valid-color !important;
+
+    border: $outline-width solid $color-success !important;
+
+    /* ICON */
+
+    .icon {
+      color: $color-success !important;
+    }
+
   }
 
   /* COMPACT */
@@ -4413,14 +4421,6 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
 $checkbox-icon-on-color: 'secondary' !default;
 $checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
 
-/* INVALID */
-
-$checkbox-invalid-color: $color-red !default;
-
-/* VALID */
-
-$checkbox-valid-color: $color-green !default;
-
 
 /* =========================================================================
  * Svelto - Checkbox v0.2.0
@@ -4455,42 +4455,6 @@ $checkbox-valid-color: $color-green !default;
         @include color-text ( $checkbox-icon-on-color );
         opacity: 0;
         z-index: 1;
-      }
-
-    }
-
-  }
-
-  /* INVALID */
-
-  &.invalid {
-
-    /* ICONS */
-
-    .icons {
-
-      /* ICON */
-
-      .icon {
-        color: $checkbox-invalid-color;
-      }
-
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* ICONS */
-
-    .icons {
-
-      /* ICON */
-
-      .icon {
-        color: $checkbox-valid-color;
       }
 
     }
@@ -4538,14 +4502,6 @@ $checkbox-valid-color: $color-green !default;
 /* COLORPICKER */
 
 $colorpicker-height: 11em !default;
-
-/* INVALID */
-
-$colorpicker-invalid-color: $color-red !default;
-
-/* VALID */
-
-$colorpicker-valid-color: $color-green !default;
 
 /* WRAPPERS */
 
@@ -4696,7 +4652,7 @@ $colorpicker-handler-hue-border-radius: $border-radius-small !default;
 
     .colorpicker-saturation-brightness-wrp,
     .colorpicker-hue-wrp {
-      border: $outline-width solid $colorpicker-invalid-color !important;
+      border: $outline-width solid $color-error !important;
     }
 
   }
@@ -4709,7 +4665,7 @@ $colorpicker-handler-hue-border-radius: $border-radius-small !default;
 
     .colorpicker-saturation-brightness-wrp,
     .colorpicker-hue-wrp {
-      border: $outline-width solid $colorpicker-valid-color !important;
+      border: $outline-width solid $color-success !important;
     }
 
   }
@@ -4754,14 +4710,6 @@ $datepicker-day-selected-z-depth: 2 !default;
 $datepicker-day-selected-color: $color-secondary-text !default;
 $datepicker-day-selected-circle-color: $color-secondary-bg !default;
 
-/* INVALID */
-
-$datepicker-invalid-color: $color-red !default;
-
-/* VALID */
-
-$datepicker-valid-color: $color-green !default;
-
 /* TRANSITIONS */
 
 $datepicker-transition-all-duration: $transition-duration-fast !default;
@@ -4793,13 +4741,13 @@ $datepicker-transition-all-duration: $transition-duration-fast !default;
   /* INVALID */
 
   &.invalid {
-    border: $outline-width solid $datepicker-invalid-color;
+    border: $outline-width solid $color-error;
   }
 
   /* VALID */
 
   &.valid {
-    border: $outline-width solid $datepicker-valid-color;
+    border: $outline-width solid $color-success;
   }
 
   /* NAVIGATION */
@@ -7466,14 +7414,6 @@ $input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
 
 $input-active-color: $color-secondary !default;
 
-/* INPUT INVALID */
-
-$input-invalid-color: $color-red !default;
-
-/* INPUT VALID */
-
-$input-valid-color: $color-green !default;
-
 /* LABEL */
 
 $input-label-opacity: 0.75 !default;
@@ -7604,13 +7544,13 @@ $input-transition-all-duration: $transition-duration-fast !default;
 
       ~ label,
       &:focus ~ label {
-        color: $input-invalid-color !important;
+        color: $color-error !important;
       }
 
     }
 
     > .text-field-bar {
-      border-bottom-color: $input-invalid-color !important;
+      border-bottom-color: $color-error !important;
     }
 
   }
@@ -7623,13 +7563,13 @@ $input-transition-all-duration: $transition-duration-fast !default;
 
       ~ label,
       &:focus ~ label {
-        color: $input-valid-color !important;
+        color: $color-success !important;
       }
 
     }
 
     > .text-field-bar {
-      border-bottom-color: $input-valid-color !important;
+      border-bottom-color: $color-success !important;
     }
 
   }
@@ -10019,14 +9959,6 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
 $select-z-depth: 1 !default;
 
-/* INVALID */
-
-$select-invalid-color: $color-red !default;
-
-/* VALID */
-
-$select-valid-color: $color-green !default;
-
 
 /* =========================================================================
  * Svelto - Select v0.3.0
@@ -10052,30 +9984,6 @@ $select-valid-color: $color-green !default;
     font-size: $font-size;
     opacity: 0;
     z-index: 1;
-  }
-
-  /* INVALID */
-
-  &.invalid {
-
-    /* ICON */
-
-    .icon {
-      color: $checkbox-invalid-color;
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* ICON */
-
-    .icon {
-      color: $checkbox-valid-color;
-    }
-
   }
 
   /* VALUEHOLDER */
@@ -10344,14 +10252,6 @@ $slider-handler-active-transform-scale: 1.35 !default;
 
 $slider-handler-label-font-size: 0.6em !default;
 
-/* INVALID */
-
-$slider-invalid-color: $color-red !default;
-
-/* VALID */
-
-$slider-valid-color: $color-green !default;
-
 /* OTHERS */
 
 $slider-transition-all-duration: $transition-duration-fast !default;
@@ -10370,13 +10270,7 @@ $slider-transition-all-duration: $transition-duration-fast !default;
 
 $switch-width: 2.26667em !default;
 
-/* INVALID */
-
-$switch-invalid-color: $color-red !default;
-
-/* VALID */
-
-$switch-valid-color: $color-green !default;
+$switch-color: 'gray' !default;
 
 /* BAR */
 
@@ -10514,6 +10408,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
     right: 100%;
     width: 100%;
     height: 100%;
+    transition: background-color $slider-transition-all-duration;
   }
 
   /* HANDLER WRAPPER */
@@ -10533,7 +10428,8 @@ $switch-transition-all-duration: $transition-duration-fast !default;
     z-index: 1;
     width: $slider-handler-size;
     height: $slider-handler-size;
-    transition: transform $slider-transition-all-duration;
+    transition-property: transform, background-color;
+    transition-duration: $slider-transition-all-duration;
     border-radius: $slider-handler-border-radius;
     text-align: center;
 
@@ -10565,16 +10461,11 @@ $switch-transition-all-duration: $transition-duration-fast !default;
 
   &.invalid {
 
-    /* HIGHLIGHT */
+    /* HIGHLIGHT / HANDLER */
 
-    .slider-highlight {
-      background-color: $slider-invalid-color !important;
-    }
-
-    /* HANDLER */
-
+    .slider-highlight,
     .slider-handler {
-      background-color: $slider-invalid-color !important;
+      @include color ( 'error', true, !important );
     }
 
   }
@@ -10583,16 +10474,11 @@ $switch-transition-all-duration: $transition-duration-fast !default;
 
   &.valid {
 
-    /* HIGHLIGHT */
+    /* HIGHLIGHT / HANDLER */
 
-    .slider-highlight {
-      background-color: $slider-valid-color !important;
-    }
-
-    /* HANDLER */
-
+    .slider-highlight,
     .slider-handler {
-      background-color: $slider-valid-color !important;
+      @include color ( 'success', true, !important );
     }
 
   }
@@ -11085,6 +10971,7 @@ svg.spinner {
   /* BAR */
 
   &-bar {
+    @include color ( $switch-color, true );
     width: $switch-bar-width;
     height: $switch-bar-height;
     border-radius: $switch-bar-height;
@@ -11095,6 +10982,7 @@ svg.spinner {
 
   &-handler {
 
+    @include color ( $switch-color, true );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
     left: 0;
@@ -11143,16 +11031,11 @@ svg.spinner {
 
   &.invalid {
 
-    /* BAR */
+    /* BAR / HANDLER */
 
-    .switch-bar {
-      background-color: $switch-invalid-color !important;
-    }
-
-    /* HANDLER */
-
+    .switch-bar,
     .switch-handler {
-      background-color: $switch-invalid-color !important;
+      @include color ( 'error', true, !important );
     }
 
   }
@@ -11161,16 +11044,11 @@ svg.spinner {
 
   &.valid {
 
-    /* BAR */
+    /* BAR / HANDLER */
 
-    .switch-bar {
-      background-color: $switch-valid-color !important;
-    }
-
-    /* HANDLER */
-
+    .switch-bar,
     .switch-handler {
-      background-color: $switch-valid-color !important;
+      @include color ( 'success', true, !important );
     }
 
   }

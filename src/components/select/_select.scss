@@ -25,30 +25,6 @@
     z-index: 1;
   }
 
-  /* INVALID */
-
-  &.invalid {
-
-    /* ICON */
-
-    .icon {
-      color: $checkbox-invalid-color;
-    }
-
-  }
-
-  /* VALID */
-
-  &.valid {
-
-    /* ICON */
-
-    .icon {
-      color: $checkbox-valid-color;
-    }
-
-  }
-
   /* VALUEHOLDER */
 
   .valueholder {

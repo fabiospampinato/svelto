@@ -107,13 +107,13 @@
 
       ~ label,
       &:focus ~ label {
-        color: $input-invalid-color !important;
+        color: $color-error !important;
       }
 
     }
 
     > .text-field-bar {
-      border-bottom-color: $input-invalid-color !important;
+      border-bottom-color: $color-error !important;
     }
 
   }
@@ -126,13 +126,13 @@
 
       ~ label,
       &:focus ~ label {
-        color: $input-valid-color !important;
+        color: $color-success !important;
       }
 
     }
 
     > .text-field-bar {
-      border-bottom-color: $input-valid-color !important;
+      border-bottom-color: $color-success !important;
     }
 
   }

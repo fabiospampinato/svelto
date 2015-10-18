@@ -25,13 +25,13 @@
   /* INVALID */
 
   &.invalid {
-    border: $outline-width solid $datepicker-invalid-color;
+    border: $outline-width solid $color-error;
   }
 
   /* VALID */
 
   &.valid {
-    border: $outline-width solid $datepicker-valid-color;
+    border: $outline-width solid $color-success;
   }
 
   /* NAVIGATION */

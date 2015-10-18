@@ -3894,8 +3894,6 @@ body p > a:hover {
 /* CORNER */
 /* FLOATING */
 /* FLOATING COMPACT */
-/* INVALID */
-/* VALID */
 /* =========================================================================
  * Svelto - Label v0.4.0
  * =========================================================================
@@ -4053,10 +4051,20 @@ label {
 
 .label.invalid, .invalid.button {
   border: 1px solid #f44336 !important;
+  /* ICON */
+}
+
+.label.invalid .icon, .invalid.button .icon {
+  color: #f44336 !important;
 }
 
 .label.valid, .valid.button {
   border: 1px solid #4caf50 !important;
+  /* ICON */
+}
+
+.label.valid .icon, .valid.button .icon {
+  color: #4caf50 !important;
 }
 
 .label.compact, .compact.button {
@@ -5791,8 +5799,6 @@ button {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* CHECKBOX */
-/* INVALID */
-/* VALID */
 /* =========================================================================
  * Svelto - Checkbox v0.2.0
  * =========================================================================
@@ -5805,8 +5811,6 @@ button {
 .checkbox, .radio {
   /* INPUT */
   /* ICONS */
-  /* INVALID */
-  /* VALID */
   /* CHECKED */
 }
 
@@ -5826,30 +5830,6 @@ button {
   color: #ef6c00 ;
   opacity: 0;
   z-index: 1;
-}
-
-.checkbox.invalid, .invalid.radio {
-  /* ICONS */
-}
-
-.checkbox.invalid .icons, .invalid.radio .icons {
-  /* ICON */
-}
-
-.checkbox.invalid .icons .icon, .invalid.radio .icons .icon {
-  color: #f44336;
-}
-
-.checkbox.valid, .valid.radio {
-  /* ICONS */
-}
-
-.checkbox.valid .icons, .valid.radio .icons {
-  /* ICON */
-}
-
-.checkbox.valid .icons .icon, .valid.radio .icons .icon {
-  color: #4caf50;
 }
 
 .checkbox.checked, .checked.radio {
@@ -5877,8 +5857,6 @@ button {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* COLORPICKER */
-/* INVALID */
-/* VALID */
 /* WRAPPERS */
 /* WRAPPER HUE */
 /* HANDLER */
@@ -6016,8 +5994,6 @@ button {
 /* DAY NAME */
 /* DAY */
 /* DAY CIRCLE */
-/* INVALID */
-/* VALID */
 /* TRANSITIONS */
 /* =========================================================================
  * Svelto - Datepicker v0.2.0
@@ -8980,8 +8956,6 @@ img {
 /* INPUT */
 /* INPUT COMPACT */
 /* INPUT ACTIVE */
-/* INPUT INVALID */
-/* INPUT VALID */
 /* LABEL */
 /* LABEL ACTIVE */
 /* BAR */
@@ -11988,8 +11962,6 @@ a.ripple > .ripple-circle {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* SELECT */
-/* INVALID */
-/* VALID */
 /* =========================================================================
  * Svelto - Select v0.3.0
  * =========================================================================
@@ -12001,8 +11973,6 @@ a.ripple > .ripple-circle {
 /* SELECT BTN */
 .select-btn {
   /* DEFAULT SELECT */
-  /* INVALID */
-  /* VALID */
   /* VALUEHOLDER */
   /* TRIGGER DIRECTION */
 }
@@ -12022,22 +11992,6 @@ a.ripple > .ripple-circle {
   font-size: 16px;
   opacity: 0;
   z-index: 1;
-}
-
-.select-btn.invalid {
-  /* ICON */
-}
-
-.select-btn.invalid .icon {
-  color: #f44336;
-}
-
-.select-btn.valid {
-  /* ICON */
-}
-
-.select-btn.valid .icon {
-  color: #4caf50;
 }
 
 .select-btn .valueholder {
@@ -12250,8 +12204,6 @@ table.table.selectable tbody tr.selected {
 /* HIGHLIGHT */
 /* HANDLER */
 /* LABEL */
-/* INVALID */
-/* VALID */
 /* OTHERS */
 /* =========================================================================
  * Svelto - Switch (Settings) v0.3.0
@@ -12262,8 +12214,6 @@ table.table.selectable tbody tr.selected {
  * @requires ../core/_core.scss
  * ========================================================================= */
 /* SWITCH */
-/* INVALID */
-/* VALID */
 /* BAR */
 /* HANDLER */
 /* HANDLER ICON */
@@ -12395,6 +12345,7 @@ table.table.selectable tbody tr.selected {
   right: 100%;
   width: 100%;
   height: 100%;
+  transition: background-color 0.15s;
 }
 
 .slider-highlight.transparentize {
@@ -12433,8 +12384,9 @@ table.table.selectable tbody tr.selected {
   z-index: 1;
   width: 1.55em;
   height: 1.55em;
-  transition: -webkit-transform 0.15s;
-  transition: transform 0.15s;
+  transition-property: -webkit-transform, background-color;
+  transition-property: transform, background-color;
+  transition-duration: 0.15s;
   border-radius: 50%;
   text-align: center;
 }
@@ -12490,29 +12442,75 @@ table.table.selectable tbody tr.selected {
 }
 
 .slider.invalid {
-  /* HIGHLIGHT */
-  /* HANDLER */
+  /* HIGHLIGHT / HANDLER */
 }
 
-.slider.invalid .slider-highlight {
-  background-color: #f44336 !important;
-}
-
+.slider.invalid .slider-highlight,
 .slider.invalid .slider-handler {
-  background-color: #f44336 !important;
+  border-color: #d2190b !important;
+  color: #ffffff !important;
+  background: #f44336 !important;
+}
+
+.slider.invalid .slider-highlight.transparentize,
+.slider.invalid .slider-handler.transparentize {
+  border-color: rgba(210, 25, 11, 0.95) !important;
+}
+
+.slider.invalid .slider-highlight.transparentize,
+.slider.invalid .slider-handler.transparentize {
+  background: rgba(244, 67, 54, 0.95) !important;
+}
+
+.slider.invalid .slider-highlight p > a,
+.slider.invalid .slider-handler p > a {
+  color: #fabf40 !important;
+}
+
+.slider.invalid .slider-highlight p > a:after,
+.slider.invalid .slider-handler p > a:after {
+  border-color: #fac24a !important;
+}
+
+.slider.invalid .slider-highlight p > a:hover,
+.slider.invalid .slider-handler p > a:hover {
+  color: #fac24a !important;
 }
 
 .slider.valid {
-  /* HIGHLIGHT */
-  /* HANDLER */
+  /* HIGHLIGHT / HANDLER */
 }
 
-.slider.valid .slider-highlight {
-  background-color: #4caf50 !important;
-}
-
+.slider.valid .slider-highlight,
 .slider.valid .slider-handler {
-  background-color: #4caf50 !important;
+  border-color: #357a38 !important;
+  color: #ffffff !important;
+  background: #4caf50 !important;
+}
+
+.slider.valid .slider-highlight.transparentize,
+.slider.valid .slider-handler.transparentize {
+  border-color: rgba(53, 122, 56, 0.95) !important;
+}
+
+.slider.valid .slider-highlight.transparentize,
+.slider.valid .slider-handler.transparentize {
+  background: rgba(76, 175, 80, 0.95) !important;
+}
+
+.slider.valid .slider-highlight p > a,
+.slider.valid .slider-handler p > a {
+  color: #673ab7 !important;
+}
+
+.slider.valid .slider-highlight p > a:after,
+.slider.valid .slider-handler p > a:after {
+  border-color: #6b3cbf !important;
+}
+
+.slider.valid .slider-highlight p > a:hover,
+.slider.valid .slider-handler p > a:hover {
+  color: #6b3cbf !important;
 }
 
 .slider:not(.disabled),
@@ -13145,13 +13143,39 @@ svg.spinner.multicolor circle {
 }
 
 .switch-bar {
+  border-color: #bababa ;
+  color: #3f3f3f ;
+  background: #e0e0e0 ;
   width: 1.73333em;
   height: 0.93333em;
   border-radius: 0.93333em;
   transition: background-color 0.15s;
 }
 
+.switch-bar.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) ;
+}
+
+.switch-bar.transparentize {
+  background: rgba(224, 224, 224, 0.95) ;
+}
+
+.switch-bar p > a {
+  color: #ffffff ;
+}
+
+.switch-bar p > a:after {
+  border-color: white ;
+}
+
+.switch-bar p > a:hover {
+  color: white ;
+}
+
 .switch-handler {
+  border-color: #bababa ;
+  color: #3f3f3f ;
+  background: #e0e0e0 ;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
   position: absolute;
   left: 0;
@@ -13164,6 +13188,26 @@ svg.spinner.multicolor circle {
   transition-duration: 0.15s;
   /* DRAGGING */
   /* ICON */
+}
+
+.switch-handler.transparentize {
+  border-color: rgba(186, 186, 186, 0.95) ;
+}
+
+.switch-handler.transparentize {
+  background: rgba(224, 224, 224, 0.95) ;
+}
+
+.switch-handler p > a {
+  color: #ffffff ;
+}
+
+.switch-handler p > a:after {
+  border-color: white ;
+}
+
+.switch-handler p > a:hover {
+  color: white ;
 }
 
 .switch-handler:before {
@@ -13201,29 +13245,75 @@ svg.spinner.multicolor circle {
 }
 
 .switch.invalid {
-  /* BAR */
-  /* HANDLER */
+  /* BAR / HANDLER */
 }
 
-.switch.invalid .switch-bar {
-  background-color: #f44336 !important;
-}
-
+.switch.invalid .switch-bar,
 .switch.invalid .switch-handler {
-  background-color: #f44336 !important;
+  border-color: #d2190b !important;
+  color: #ffffff !important;
+  background: #f44336 !important;
+}
+
+.switch.invalid .switch-bar.transparentize,
+.switch.invalid .switch-handler.transparentize {
+  border-color: rgba(210, 25, 11, 0.95) !important;
+}
+
+.switch.invalid .switch-bar.transparentize,
+.switch.invalid .switch-handler.transparentize {
+  background: rgba(244, 67, 54, 0.95) !important;
+}
+
+.switch.invalid .switch-bar p > a,
+.switch.invalid .switch-handler p > a {
+  color: #fabf40 !important;
+}
+
+.switch.invalid .switch-bar p > a:after,
+.switch.invalid .switch-handler p > a:after {
+  border-color: #fac24a !important;
+}
+
+.switch.invalid .switch-bar p > a:hover,
+.switch.invalid .switch-handler p > a:hover {
+  color: #fac24a !important;
 }
 
 .switch.valid {
-  /* BAR */
-  /* HANDLER */
+  /* BAR / HANDLER */
 }
 
-.switch.valid .switch-bar {
-  background-color: #4caf50 !important;
-}
-
+.switch.valid .switch-bar,
 .switch.valid .switch-handler {
-  background-color: #4caf50 !important;
+  border-color: #357a38 !important;
+  color: #ffffff !important;
+  background: #4caf50 !important;
+}
+
+.switch.valid .switch-bar.transparentize,
+.switch.valid .switch-handler.transparentize {
+  border-color: rgba(53, 122, 56, 0.95) !important;
+}
+
+.switch.valid .switch-bar.transparentize,
+.switch.valid .switch-handler.transparentize {
+  background: rgba(76, 175, 80, 0.95) !important;
+}
+
+.switch.valid .switch-bar p > a,
+.switch.valid .switch-handler p > a {
+  color: #673ab7 !important;
+}
+
+.switch.valid .switch-bar p > a:after,
+.switch.valid .switch-handler p > a:after {
+  border-color: #6b3cbf !important;
+}
+
+.switch.valid .switch-bar p > a:hover,
+.switch.valid .switch-handler p > a:hover {
+  color: #6b3cbf !important;
 }
 
 .switch:not(.checked) .icon-off,
