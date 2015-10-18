@@ -25,10 +25,18 @@ mixin carousel-prev
   .carousel-prev&attributes(attributes)
     block
 
+mixin carousel-prev-btn
+  .button.compact.rounded.white.z-depth-2.carousel-prev&attributes(attributes)
+    +icon("chevron_left")
+
 mixin carousel-next
   .carousel-next&attributes(attributes)
     block
 
+mixin carousel-next-btn
+  .button.compact.rounded.white.z-depth-2.carousel-next&attributes(attributes)
+    +icon("chevron_right")
+    
 mixin carousel-items
   .carousel-items&attributes(attributes)
     block

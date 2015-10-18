@@ -7,8 +7,8 @@ append main
   +divider-block Carousel
   
   +carousel
-    +carousel-prev
-    +carousel-next
+    +carousel-prev-btn
+    +carousel-next-btn
     +carousel-indicators(5)
     +carousel-items
       +container.black.centerer
@@ -52,7 +52,6 @@ append main
     +multiple.joined
       +input({ name: "input_index", label: "Set index..." }).no-floating.white.outlined
       +button("carousel_set ()").outlined.secondary Set
-
 
 append body-end
   +script.

@@ -5131,7 +5131,7 @@
     /* TEMPLATES */
 
     templates: {
-      base: '<div class="noty {%=(o.transparentize ? "transparentize" : "")%} {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
+      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
               '<div class="infobar">' +
                 '{% if ( o.img ) { %}' +
                   '<img src="{%=o.img%}" class="noty-img infobar-left" />' +
@@ -5191,7 +5191,6 @@
 
       type: 'alert',
       color: 'black',
-      transparentize: true,
       css: '',
 
       ttl: 3500,

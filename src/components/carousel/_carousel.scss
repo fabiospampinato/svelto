@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Carousel v0.2.0
+ * Svelto - Carousel v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,6 +11,7 @@
 
 //TODO: When inset add proper dark shadow at the left and the right
 //TODO: Add better support for img tags, .image-wrp, container and card
+//TODO: Add support for custom buttons as prev/next or fall back to a default
 
 /* CAROUSEL */
 
@@ -20,44 +21,6 @@
   display: flex;
   position: relative;
   min-height: $carousel-min-height;
-
-  /* PREVIOUS / NEXT */
-
-  &-prev,
-  &-next {
-
-    /* AFTER (ICON) */
-
-    &:after {
-      @extend i.icon;
-      margin-bottom: 0;
-    }
-
-  }
-
-  /* PREVIOUS */
-
-  &-prev {
-
-    /* AFTER (ICON) */
-
-    &:after {
-      content: 'chevron_left';
-    }
-
-  }
-
-  /* NEXT */
-
-  &-next {
-
-    /* AFTER (ICON) */
-
-    &:after {
-      content: 'chevron_right';
-    }
-
-  }
 
   /* INDICATORS */
 
@@ -274,13 +237,8 @@
 
     .carousel-prev,
     .carousel-next {
-      @extend .widget;
-      @extend .actionable;
-      @include z-depth ( $carousel-outset-prev-next-z-depth );
-      @include color ( $carousel-outset-prev-next-color, $carousel-outset-prev-next-color-basic );
       align-self: center;
-      padding: $carousel-outset-prev-next-padding-vertical $carousel-outset-prev-next-padding-horizontal;
-      border-radius: 50%;
+      margin-bottom: 0;
     }
 
     /* PREV */
@@ -328,6 +286,8 @@
       /* AFTER (ICON) */
 
       &:after {
+        @extend i.icon;
+        margin-bottom: 0;
         color: $carousel-inset-prev-next-color;
         opacity: $carousel-inset-prev-next-opacity;
         transition: opacity $carousel-inset-prev-next-transition-opacity-duration;
@@ -338,19 +298,35 @@
     /* PREV */
 
     .carousel-prev {
+
       justify-content: flex-start;
       left: 0;
       padding-left: $gutter;
       width: $carousel-inset-prev-width;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        content: 'chevron_left';
+      }
+
     }
 
     /* NEXT */
 
     .carousel-next {
+
       justify-content: flex-end;
       right: 0;
       padding-right: $gutter;
       width: $carousel-inset-next-width;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        content: 'chevron_right';
+      }
+
     }
 
     /* HOVER */

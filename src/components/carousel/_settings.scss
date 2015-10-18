@@ -31,16 +31,6 @@ $carousel-indicator-hover-opacity: 1 !default;
 
 $carousel-indicator-transition-all-duration: $transition-duration-normal !default;
 
-/* OUTSET (PREV / NEXT) */
-
-$carousel-outset-prev-next-z-depth: 2 !default;
-
-$carousel-outset-prev-next-color: 'white' !default;
-$carousel-outset-prev-next-color-basic: false !default;
-
-$carousel-outset-prev-next-padding-vertical: $label-compact-padding-vertical !default;
-$carousel-outset-prev-next-padding-horizontal: $label-compact-padding-horizontal !default;
-
 /* INSET (PREV / NEXT) */
 
 $carousel-inset-prev-next-z-index: 9 !default;

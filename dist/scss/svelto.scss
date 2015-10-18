@@ -639,7 +639,6 @@ $color-hover-lighten-amount: 2 !default;
 $color-active-darken-amount: $color-hover-lighten-amount !default;
 $color-border-darken-amount: 15 !default;
 $color-link-hover-lighten-amount: $color-hover-lighten-amount !default;
-$color-transparentize-amount: 0.05 !default;
 
 /* BASE */
 
@@ -1629,70 +1628,24 @@ $kbd-padding: 0.2em 0.3em !default;
   border-color: $border #{$extra};
   color: $text #{$extra};
 
-  @if $color_name != inherit {
-
-    &.transparentize {
-      border-color: transparentize($border, $color-transparentize-amount) #{$extra};
-    }
-
-  }
-
   @if $basic == false {
 
     background: $bg #{$extra};
 
-    @if $color_name != inherit {
-
-      &.transparentize {
-        background: transparentize($bg, $color-transparentize-amount) #{$extra};
-      }
-
-    }
-
     &.actionable {
 
       &.active {
-
         background: $bg-active #{$extra};
-
-        @if $color_name != inherit {
-
-          &.transparentize {
-            background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-          }
-
-        }
-
       }
 
       &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
 
         &:hover {
-
           background: $bg-hover #{$extra};
-
-          @if $color_name != inherit {
-
-            &.transparentize {
-              background: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
-            }
-
-          }
-
         }
 
         &:not(.ripple):active {
-
           background: $bg-active #{$extra};
-
-          @if $color_name != inherit {
-
-            &.transparentize {
-              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-            }
-
-          }
-
         }
 
       }
@@ -1700,17 +1653,7 @@ $kbd-padding: 0.2em 0.3em !default;
     }
 
     &.highlight:after {
-
       border-color: $accent #{$extra};
-
-      @if $color_name != inherit {
-
-        &.transparentize {
-          border-color: transparentize($accent, $color-transparentize-amount) #{$extra};
-        }
-
-      }
-
     }
 
     &.inverted {
@@ -1722,55 +1665,22 @@ $kbd-padding: 0.2em 0.3em !default;
       &.actionable {
 
         &.active {
-
           background: $bg-active #{$extra};
           border-color: $bg-active #{$extra};
           color: $text #{$extra};
-
-          @if $color_name != inherit {
-
-            &.transparentize {
-              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-              border-color: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-            }
-
-          }
-
         }
 
         &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
 
           &:hover {
-
             background: $bg-hover #{$extra};
             border-color: $bg-hover #{$extra};
             color: $text #{$extra};
-
-            @if $color_name != inherit {
-
-              &.transparentize {
-                background: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
-                border-color: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
-              }
-
-            }
-
           }
 
           &:not(.ripple):active {
-
             background: $bg-active #{$extra};
             border-color: $bg-active #{$extra};
-
-            @if $color_name != inherit {
-
-              &.transparentize {
-                background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-                border-color: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-              }
-
-            }
-
           }
 
         }
@@ -1782,14 +1692,6 @@ $kbd-padding: 0.2em 0.3em !default;
   } @else {
 
     background: $bg #{$extra};
-
-    @if $color_name != inherit {
-
-      &.transparentize {
-        background: transparentize($bg, $color-transparentize-amount) #{$extra};
-      }
-
-    }
 
   }
 
@@ -3765,16 +3667,6 @@ $carousel-indicator-hover-opacity: 1 !default;
 
 $carousel-indicator-transition-all-duration: $transition-duration-normal !default;
 
-/* OUTSET (PREV / NEXT) */
-
-$carousel-outset-prev-next-z-depth: 2 !default;
-
-$carousel-outset-prev-next-color: 'white' !default;
-$carousel-outset-prev-next-color-basic: false !default;
-
-$carousel-outset-prev-next-padding-vertical: $label-compact-padding-vertical !default;
-$carousel-outset-prev-next-padding-horizontal: $label-compact-padding-horizontal !default;
-
 /* INSET (PREV / NEXT) */
 
 $carousel-inset-prev-next-z-index: 9 !default;
@@ -3802,7 +3694,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
 
 /* =========================================================================
- * Svelto - Carousel v0.2.0
+ * Svelto - Carousel v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3813,6 +3705,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
 //TODO: When inset add proper dark shadow at the left and the right
 //TODO: Add better support for img tags, .image-wrp, container and card
+//TODO: Add support for custom buttons as prev/next or fall back to a default
 
 /* CAROUSEL */
 
@@ -3822,44 +3715,6 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
   display: flex;
   position: relative;
   min-height: $carousel-min-height;
-
-  /* PREVIOUS / NEXT */
-
-  &-prev,
-  &-next {
-
-    /* AFTER (ICON) */
-
-    &:after {
-      @extend i.icon;
-      margin-bottom: 0;
-    }
-
-  }
-
-  /* PREVIOUS */
-
-  &-prev {
-
-    /* AFTER (ICON) */
-
-    &:after {
-      content: 'chevron_left';
-    }
-
-  }
-
-  /* NEXT */
-
-  &-next {
-
-    /* AFTER (ICON) */
-
-    &:after {
-      content: 'chevron_right';
-    }
-
-  }
 
   /* INDICATORS */
 
@@ -4076,13 +3931,8 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
     .carousel-prev,
     .carousel-next {
-      @extend .widget;
-      @extend .actionable;
-      @include z-depth ( $carousel-outset-prev-next-z-depth );
-      @include color ( $carousel-outset-prev-next-color, $carousel-outset-prev-next-color-basic );
       align-self: center;
-      padding: $carousel-outset-prev-next-padding-vertical $carousel-outset-prev-next-padding-horizontal;
-      border-radius: 50%;
+      margin-bottom: 0;
     }
 
     /* PREV */
@@ -4130,6 +3980,8 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
       /* AFTER (ICON) */
 
       &:after {
+        @extend i.icon;
+        margin-bottom: 0;
         color: $carousel-inset-prev-next-color;
         opacity: $carousel-inset-prev-next-opacity;
         transition: opacity $carousel-inset-prev-next-transition-opacity-duration;
@@ -4140,19 +3992,35 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
     /* PREV */
 
     .carousel-prev {
+
       justify-content: flex-start;
       left: 0;
       padding-left: $gutter;
       width: $carousel-inset-prev-width;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        content: 'chevron_left';
+      }
+
     }
 
     /* NEXT */
 
     .carousel-next {
+
       justify-content: flex-end;
       right: 0;
       padding-right: $gutter;
       width: $carousel-inset-next-width;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        content: 'chevron_right';
+      }
+
     }
 
     /* HOVER */
@@ -8786,6 +8654,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 $noty-z-index: 1000 !default;
 $noty-z-depth: 8 !default;
 
+$noty-transparentize-amount: 0.05 !default; //TODO: Implement it
+
 $noty-border-radius: $container-border-radius !default;
 
 /* IMG */
@@ -8812,6 +8682,8 @@ $noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !defaul
  * =========================================================================
  * @requires _settings.scss
  * ========================================================================= */
+
+//TODO: Add transparentize back, in a wise, space efficient way
 
 /* MIXINS */
 

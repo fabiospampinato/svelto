@@ -29,70 +29,24 @@
   border-color: $border #{$extra};
   color: $text #{$extra};
 
-  @if $color_name != inherit {
-
-    &.transparentize {
-      border-color: transparentize($border, $color-transparentize-amount) #{$extra};
-    }
-
-  }
-
   @if $basic == false {
 
     background: $bg #{$extra};
 
-    @if $color_name != inherit {
-
-      &.transparentize {
-        background: transparentize($bg, $color-transparentize-amount) #{$extra};
-      }
-
-    }
-
     &.actionable {
 
       &.active {
-
         background: $bg-active #{$extra};
-
-        @if $color_name != inherit {
-
-          &.transparentize {
-            background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-          }
-
-        }
-
       }
 
       &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
 
         &:hover {
-
           background: $bg-hover #{$extra};
-
-          @if $color_name != inherit {
-
-            &.transparentize {
-              background: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
-            }
-
-          }
-
         }
 
         &:not(.ripple):active {
-
           background: $bg-active #{$extra};
-
-          @if $color_name != inherit {
-
-            &.transparentize {
-              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-            }
-
-          }
-
         }
 
       }
@@ -100,17 +54,7 @@
     }
 
     &.highlight:after {
-
       border-color: $accent #{$extra};
-
-      @if $color_name != inherit {
-
-        &.transparentize {
-          border-color: transparentize($accent, $color-transparentize-amount) #{$extra};
-        }
-
-      }
-
     }
 
     &.inverted {
@@ -122,55 +66,22 @@
       &.actionable {
 
         &.active {
-
           background: $bg-active #{$extra};
           border-color: $bg-active #{$extra};
           color: $text #{$extra};
-
-          @if $color_name != inherit {
-
-            &.transparentize {
-              background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-              border-color: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-            }
-
-          }
-
         }
 
         &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
 
           &:hover {
-
             background: $bg-hover #{$extra};
             border-color: $bg-hover #{$extra};
             color: $text #{$extra};
-
-            @if $color_name != inherit {
-
-              &.transparentize {
-                background: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
-                border-color: transparentize($bg-hover, $color-transparentize-amount) #{$extra};
-              }
-
-            }
-
           }
 
           &:not(.ripple):active {
-
             background: $bg-active #{$extra};
             border-color: $bg-active #{$extra};
-
-            @if $color_name != inherit {
-
-              &.transparentize {
-                background: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-                border-color: transparentize($bg-active, $color-transparentize-amount) #{$extra};
-              }
-
-            }
-
           }
 
         }
@@ -182,14 +93,6 @@
   } @else {
 
     background: $bg #{$extra};
-
-    @if $color_name != inherit {
-
-      &.transparentize {
-        background: transparentize($bg, $color-transparentize-amount) #{$extra};
-      }
-
-    }
 
   }
 
