@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Lo-dash (Extras) v0.1.0
+ * Svelto - Lo-dash (Extras)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -273,7 +273,7 @@
 
 
 /* =========================================================================
- * Svelto - Browser v0.3.0
+ * Svelto - Browser
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -343,7 +343,7 @@
 
 
 /* =========================================================================
- * Svelto - jQuery (Extras) v0.2.0
+ * Svelto - jQuery (Extras)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -541,7 +541,7 @@
 
 
 /* =========================================================================
- * Svelto - UI v0.2.0
+ * Svelto - UI
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -598,7 +598,7 @@
 
 
 /* =========================================================================
- * Svelto - Core v0.2.0
+ * Svelto - Core
  * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -612,7 +612,7 @@
 
 
 /* =========================================================================
- * Svelto - Tmpl v0.1.0
+ * Svelto - Tmpl
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -742,7 +742,7 @@
 
 
 /* =========================================================================
- * Svelto - Widget v0.2.0
+ * Svelto - Widget
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1248,7 +1248,7 @@
 
 
 /* =========================================================================
- * Svelto - Widgetize v0.1.0
+ * Svelto - Widgetize
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1312,7 +1312,7 @@
 
 
 /* =========================================================================
- * Svelto - Pointer v0.3.0
+ * Svelto - Pointer
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1551,7 +1551,7 @@
 
 
 /* =========================================================================
- * Svelto - Factory v0.2.0
+ * Svelto - Factory
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1838,7 +1838,7 @@
 
 
 /* =========================================================================
- * Svelto - Expander v0.2.0
+ * Svelto - Expander
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -1941,7 +1941,7 @@
 
 
 /* =========================================================================
- * Svelto - Accordion v0.2.0
+ * Svelto - Accordion
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2078,7 +2078,7 @@
 
 
 /* =========================================================================
- * Svelto - Autogrow (Input) v0.1.0
+ * Svelto - Autogrow (Input)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2177,7 +2177,7 @@
 
 
 /* =========================================================================
- * Svelto - Autogrow (Textarea) v0.1.0
+ * Svelto - Autogrow (Textarea)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2252,7 +2252,7 @@
 
 
 /* =========================================================================
- * Svelto - Blurred v0.1.1
+ * Svelto - Blurred
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2276,7 +2276,7 @@
 
 
 /* =========================================================================
- * Svelto - BT Each v0.1.0
+ * Svelto - BT Each
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2300,7 +2300,7 @@
 
 
 /* =========================================================================
- * Svelto - Carousel v0.2.0
+ * Svelto - Carousel
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2594,7 +2594,7 @@
 
 
 /* =========================================================================
- * Svelto - Checkbox v0.2.0
+ * Svelto - Checkbox
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2720,7 +2720,7 @@
 
 
 /* =========================================================================
- * Svelto - Color Helper v0.1.0
+ * Svelto - Color Helper
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2947,7 +2947,7 @@
 
 
 /* =========================================================================
- * Svelto - Hex Color v0.1.0
+ * Svelto - Hex Color
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3021,7 +3021,7 @@
 
 
 /* =========================================================================
- * Svelto - Colorpicker v0.3.0
+ * Svelto - Colorpicker
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3347,7 +3347,7 @@
 
 
 /* =========================================================================
- * Svelto - Cookie v0.1.0
+ * Svelto - Cookie
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3448,7 +3448,7 @@
 
 
 /* =========================================================================
- * Svelto - Datepicker v0.2.0
+ * Svelto - Datepicker
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -3876,7 +3876,7 @@
 
 
 /* =========================================================================
- * Svelto - Draggable v0.3.0
+ * Svelto - Draggable
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4259,7 +4259,7 @@
 
 
 /* =========================================================================
- * Svelto - Positionate v0.3.0
+ * Svelto - Positionate
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4495,7 +4495,7 @@
 
 
 /* =========================================================================
- * Svelto - Dropdown v0.3.0
+ * Svelto - Dropdown
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4859,7 +4859,7 @@
 
 
 /* =========================================================================
- * Svelto - Droppable v0.1.0
+ * Svelto - Droppable
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4939,7 +4939,7 @@
 
 
 /* =========================================================================
- * Svelto - Flippable v0.2.0
+ * Svelto - Flippable
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5039,7 +5039,7 @@
 
 
 /* =========================================================================
- * Svelto - Spinner Overlay v0.4.0
+ * Svelto - Spinner Overlay
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5122,7 +5122,7 @@
 
 
 /* =========================================================================
- * Svelto - Noty v0.2.0
+ * Svelto - Noty
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5487,7 +5487,7 @@
 
 
 /* =========================================================================
- * Svelto - Form Ajax v0.2.0
+ * Svelto - Form Ajax
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5622,7 +5622,7 @@
 
 
 /* =========================================================================
- * Svelto - Form Sync v0.2.0
+ * Svelto - Form Sync
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -5721,7 +5721,7 @@
 
 
 /* =========================================================================
- * Svelto - formValidate v0.1.0
+ * Svelto - formValidate
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6147,7 +6147,7 @@
 
 
 /* =========================================================================
- * Svelto - Helpers v0.1.0
+ * Svelto - Helpers
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6176,7 +6176,7 @@
 
 
 /* =========================================================================
- * Svelto - Infobar v0.1.0
+ * Svelto - Infobar
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6244,7 +6244,7 @@
 
 
 /* =========================================================================
- * Svelto - Modal v0.3.0
+ * Svelto - Modal
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6390,7 +6390,7 @@
 
 
 /* =========================================================================
- * Svelto - N Times Action (Group) v0.1.0
+ * Svelto - N Times Action (Group)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6490,7 +6490,7 @@
 
 
 /* =========================================================================
- * Svelto - N Times Action (Action) v0.1.0
+ * Svelto - N Times Action (Action)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6546,7 +6546,7 @@
 
 
 /* =========================================================================
- * Svelto - N Times Action v0.1.0
+ * Svelto - N Times Action
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6621,7 +6621,7 @@
 
 
 /* =========================================================================
- * Svelto - Navbar v0.2.0
+ * Svelto - Navbar
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6842,7 +6842,7 @@
 
 
 /* =========================================================================
- * Svelto - Notification v0.1.1
+ * Svelto - Notification
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6899,7 +6899,7 @@
 
 
 /* =========================================================================
- * Svelto - One Time Action v0.3.0
+ * Svelto - One Time Action
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -6923,7 +6923,7 @@
 
 
 /* =========================================================================
- * Svelto - Overlay v0.1.0
+ * Svelto - Overlay
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7728,7 +7728,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
-* Svelto - Progressbar v0.2.0
+* Svelto - Progressbar
 * =========================================================================
 * Copyright (c) 2015 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -7904,7 +7904,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Radio v0.2.0
+ * Svelto - Radio
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8030,7 +8030,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Rater v0.1.0
+ * Svelto - Rater
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8183,7 +8183,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Ripple v0.2.0
+ * Svelto - Ripple
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8261,7 +8261,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Select v0.2.0
+ * Svelto - Select
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8523,7 +8523,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Selectable v0.3.0
+ * Svelto - Selectable
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8829,7 +8829,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Slider v0.2.0
+ * Svelto - Slider
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9110,7 +9110,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Sortable v0.2.0
+ * Svelto - Sortable
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9372,7 +9372,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Stepper v0.2.0
+ * Svelto - Stepper
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9608,7 +9608,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Switch v0.2.0
+ * Svelto - Switch
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9856,7 +9856,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Table Helper v0.2.0
+ * Svelto - Table Helper
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10069,7 +10069,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Tabs v0.2.0
+ * Svelto - Tabs
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10215,7 +10215,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Tagbox v0.3.0
+ * Svelto - Tagbox
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10728,7 +10728,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Time Ago v0.2.0
+ * Svelto - Time Ago
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10819,7 +10819,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Timer v0.1.0
+ * Svelto - Timer
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -10992,7 +10992,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Tooltip v0.1.0
+ * Svelto - Tooltip
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11037,7 +11037,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 
 /* =========================================================================
- * Svelto - Touching v0.2.0
+ * Svelto - Touching
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

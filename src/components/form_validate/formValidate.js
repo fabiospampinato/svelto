@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - formValidate v0.1.0
+ * Svelto - formValidate
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

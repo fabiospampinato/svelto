@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - N Times Action (Group) v0.1.0
+ * Svelto - N Times Action (Group)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

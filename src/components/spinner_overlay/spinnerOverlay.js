@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Spinner Overlay v0.4.0
+ * Svelto - Spinner Overlay
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)

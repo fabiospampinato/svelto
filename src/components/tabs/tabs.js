@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Tabs v0.2.0
+ * Svelto - Tabs
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
