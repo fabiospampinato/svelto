@@ -7,6 +7,7 @@
  * =========================================================================
  * @requires ../core/core.js
  * @requires Widget.js
+ * @requires Widgetize.js
  * @requires ../tmpl/tmpl.js
  * @requires ../pointer/Pointer.js
  *=========================================================================*/
@@ -168,6 +169,8 @@
     // CONSTRUCT
 
     $.factory.bridge ( name, constructor );
+
+    Widgetize.add ( constructor.prototype._widgetize );
 
     // RETURN
 

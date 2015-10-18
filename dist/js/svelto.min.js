@@ -853,6 +853,7 @@
 
     _createOptions: _.noop, //INFO: Returns an options object that will be used for the current widget instance, generated during widget instantiation
 
+    _widgetize: _.noop, //INFO: Gets a parent node, from it find and initialize all the widgets
     _variables: _.noop, //INFO: Init your variables inside this function
     _init: _.noop, //INFO: Perform the init stuff inside this function
     _events: _.noop, //INFO: Bind the event handlers inside this function
@@ -1247,6 +1248,70 @@
 
 
 /* =========================================================================
+ * Svelto - Widgetize v0.1.0
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var widgetizers = [];
+
+  /* WIDGETIZE */
+
+  window.Widgetize = function ( $root ) {
+
+    for ( var i = 0, l = widgetizers.length; i < l; i++ ) {
+
+      widgetizers[i]( $root );
+
+    }
+
+  };
+
+  /* METHODS */
+
+  Widgetize.add = function ( widgetizer ) {
+
+    widgetizers.push ( widgetizer );
+
+  };
+
+  Widgetize.get = function () {
+
+    return widgetizers;
+
+  };
+
+  /* JQUERY PLUGIN */
+
+  $.fn.widgetize = function () {
+
+    Widgetize ( this );
+
+    return this;
+
+  };
+
+  /* READY */
+
+  $(function () {
+
+    $body.widgetize ();
+
+  });
+
+}( jQuery, _, window, document ));
+
+
+/* =========================================================================
  * Svelto - Pointer v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -1493,6 +1558,7 @@
  * =========================================================================
  * @requires ../core/core.js
  * @requires Widget.js
+ * @requires Widgetize.js
  * @requires ../tmpl/tmpl.js
  * @requires ../pointer/Pointer.js
  *=========================================================================*/
@@ -1654,6 +1720,8 @@
     // CONSTRUCT
 
     $.factory.bridge ( name, constructor );
+
+    Widgetize.add ( constructor.prototype._widgetize );
 
     // RETURN
 

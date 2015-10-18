@@ -111,6 +111,7 @@
 
     _createOptions: _.noop, //INFO: Returns an options object that will be used for the current widget instance, generated during widget instantiation
 
+    _widgetize: _.noop, //INFO: Gets a parent node, from it find and initialize all the widgets
     _variables: _.noop, //INFO: Init your variables inside this function
     _init: _.noop, //INFO: Perform the init stuff inside this function
     _events: _.noop, //INFO: Bind the event handlers inside this function
