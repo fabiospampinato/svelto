@@ -28,6 +28,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.radio' ).radio ();
+
+    },
+
     _variables: function () {
 
       this.$radio = this.$element;
@@ -113,14 +119,6 @@
       }
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.radio').radio ();
 
   });
 

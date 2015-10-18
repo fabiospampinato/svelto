@@ -40,6 +40,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'table.selectable' ).selectable ();
+
+    },
+
     _variables: function () {
 
       this.$selectable = this.$element;
@@ -293,14 +299,6 @@
       return this.$elements.filter ( '.' + this.options.selectors.selected );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('table.table.selectable').selectable ();
 
   });
 

@@ -46,6 +46,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.carousel' ).carousel ();
+
+    },
+
     _variables: function () {
 
       this.$carousel = this.$element;
@@ -281,14 +287,6 @@
       this.set ( this._getNextIndex ( this._current.index ) );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.carousel').carousel ();
 
   });
 

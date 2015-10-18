@@ -44,6 +44,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.colorpicker' ).colorpicker ();
+
+    },
+
     _variables: function () {
 
       this.$colorpicker = this.$element;
@@ -313,14 +319,6 @@
       return newColor.isValid;
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.colorpicker').colorpicker ();
 
   });
 

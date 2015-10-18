@@ -35,6 +35,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.flippable' ).flippable ();
+
+    },
+
     _variables: function () {
 
       this.$flippable = this.$element;
@@ -87,14 +93,6 @@
       this.flip ( true );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.flippable').flippable ();
 
   });
 

@@ -137,6 +137,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
+
+    },
+
     _variables: function () {
 
       this.$form = this.$element;
@@ -413,14 +419,6 @@
       return true;
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('[data-validations]').parents ( 'form' ).formValidate ();
 
   });
 

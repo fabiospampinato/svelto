@@ -62,6 +62,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.datepicker' ).datepicker ();
+
+    },
+
     _variables: function () {
 
       this.$datepicker = this.$element;
@@ -415,14 +421,6 @@
       this.navigateMonth ( 1 );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.datepicker').datepicker ();
 
   });
 

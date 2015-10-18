@@ -10,142 +10,159 @@
 
 (function ( $, _, window, document, undefined ) {
 
-'use strict';
+  'use strict';
 
-/* HELPER */
+  /* HELPER */
 
-$.progressbar = function ( options ) {
+  $.progressbar = function ( options ) {
 
-  options = _.isNumber ( options ) ? { value: options } : options;
+    options = _.isNumber ( options ) ? { value: options } : options;
 
-  return new $.svelto.progressbar ( options );
+    return new $.svelto.progressbar ( options );
 
-};
+  };
 
-/* PROGRESSBAR */
+  /* PROGRESSBAR */
 
-$.factory ( 'svelto.progressbar', {
+  $.factory ( 'svelto.progressbar', {
 
-  /* TEMPLATES */
+    /* TEMPLATES */
 
-  templates: {
-    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
-            '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
-          '</div>'
-  },
-
-  /* OPTIONS */
-
-  options: {
-    value: 0, // Percentage
-    colors: { // Colors to use for the progressbar
-      on: '', // Color of `.progressbar-highlight`
-      off: '' // Color of `.progressbar`
+    templates: {
+      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+              '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
+            '</div>'
     },
-    striped: false, // Draw striped over it
-    labeled: false, // Draw a label inside
-    decimals: 0, // Amount of decimals to round the label value to
-    size: '', // Size of the progressbar: '', 'compact', 'slim'
-    css: '',
-    selectors: {
-      highlight: '.progressbar-highlight'
+
+    /* OPTIONS */
+
+    options: {
+      value: 0, // Percentage
+      colors: { // Colors to use for the progressbar
+        on: '', // Color of `.progressbar-highlight`
+        off: '' // Color of `.progressbar`
+      },
+      striped: false, // Draw striped over it
+      labeled: false, // Draw a label inside
+      decimals: 0, // Amount of decimals to round the label value to
+      size: '', // Size of the progressbar: '', 'compact', 'slim'
+      css: '',
+      selectors: {
+        highlight: '.progressbar-highlight'
+      },
+      callbacks: {
+        change: _.noop,
+        empty: _.noop,
+        full: _.noop
+      }
     },
-    callbacks: {
-      change: _.noop,
-      empty: _.noop,
-      full: _.noop
-    }
-  },
 
-  /* SPECIAL */
+    /* SPECIAL */
 
-  _variables: function () {
+    _widgetize: function ( $root ) {
 
-    this.$progressbar = this.$element;
-    this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
+      $root.find ( '.progressbar' ).each ( function () {
 
-  },
+        var $progressbar = $(this);
 
-  _init: function () {
+        $progressbar.progressbar ({
+          value: $progressbar.data ( 'value' ),
+          decimals: $progressbar.data ( 'decimals ')
+        });
 
-    this.options.value = this._sanitizeValue ( this.options.value );
+      });
 
-    this._updateWidth ();
-    this._updateLabel ();
+    },
 
-  },
+    _variables: function () {
 
-  /* PRIVATE */
+      this.$progressbar = this.$element;
+      this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
 
-  _sanitizeValue: function ( value ) {
+    },
 
-    var nr = Number ( value );
+    _init: function () {
 
-    return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
+      this.options.value = this._sanitizeValue ( this.options.value );
 
-  },
+      this._updateWidth ();
+      this._updateLabel ();
 
-  _roundValue: function ( value ) {
+    },
 
-    return value.toFixed ( this.options.decimals );
+    /* PRIVATE */
 
-  },
+    _sanitizeValue: function ( value ) {
 
-  _updateWidth: function () {
+      var nr = Number ( value );
 
-    this.$highlight.css ( 'min-width', this.options.value + '%' );
+      return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
 
-  },
+    },
 
-  _updateLabel: function () {
+    _roundValue: function ( value ) {
 
-    this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
+      return value.toFixed ( this.options.decimals );
 
-  },
+    },
 
-  _update: function () {
+    _updateWidth: function () {
 
-    this._updateWidth ();
-    this._updateLabel ();
+      this.$highlight.css ( 'min-width', this.options.value + '%' );
 
-  },
+    },
 
-  /* PUBLIC */
+    _updateLabel: function () {
 
-  get: function () {
+      this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
 
-    return this.options.value;
+    },
 
-  },
+    _update: function () {
 
-  set: function ( value ) {
+      this._updateWidth ();
+      this._updateLabel ();
 
-    value = Number ( value );
+    },
 
-    if ( !_.isNaN ( value ) ) {
+    /* PUBLIC */
 
-      value = this._sanitizeValue ( value );
+    get: function () {
 
-      if ( value !== this.options.value ) {
+      return this.options.value;
 
-        var data = {
-          previous: this.options.value,
-          value: value
-        };
+    },
 
-        this.options.value = value;
+    set: function ( value ) {
 
-        this._update ();
+      value = Number ( value );
 
-        this._trigger  ( 'change', data );
+      if ( !_.isNaN ( value ) ) {
 
-        if ( this.options.value === 0 ) {
+        value = this._sanitizeValue ( value );
 
-          this._trigger  ( 'empty', data );
+        if ( value !== this.options.value ) {
 
-        } else if ( this.options.value === 100 ) {
+          var data = {
+            previous: this.options.value,
+            value: value
+          };
 
-          this._trigger  ( 'full', data );
+          this.options.value = value;
+
+          this._update ();
+
+          this._trigger  ( 'change', data );
+
+          if ( this.options.value === 0 ) {
+
+            this._trigger  ( 'empty', data );
+
+          } else if ( this.options.value === 100 ) {
+
+            this._trigger  ( 'full', data );
+
+          }
 
         }
 
@@ -153,25 +170,6 @@ $.factory ( 'svelto.progressbar', {
 
     }
 
-  }
-
-});
-
-/* READY */
-
-$(function () {
-
-  $('.progressbar').each ( function () {
-
-    var $progressbar = $(this);
-
-    $progressbar.progressbar ({
-      value: $progressbar.data ( 'value' ),
-      decimals: $progressbar.data ( 'decimals ')
-    });
-
   });
-
-});
 
 }( jQuery, _, window, document ));

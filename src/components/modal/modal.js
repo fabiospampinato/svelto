@@ -38,6 +38,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.modal' ).modal ();
+
+    },
+
     _variables: function () {
 
       this.modal = this.element;
@@ -133,14 +139,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.modal').modal ();
 
   });
 

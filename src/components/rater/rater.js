@@ -45,6 +45,22 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.rater' ).each ( function () {
+
+        var $rater = $(this);
+
+        $rater.rater ({
+          value: Number($rater.data ( 'value' ) || 0),
+          amount: Number($rater.data ( 'amount' ) || 5),
+          url: Number($rater.data ( 'url' ) || false)
+        });
+
+      });
+
+    },
+
     _variables: function () {
 
       this.$rater = this.$element;
@@ -130,24 +146,6 @@
       };
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.rater').each ( function () {
-
-      var $rater = $(this);
-
-      $rater.rater ({
-        value: Number($rater.data ( 'value' ) || 0),
-        amount: Number($rater.data ( 'amount' ) || 5),
-        url: Number($rater.data ( 'url' ) || false)
-      });
-
-    });
 
   });
 

@@ -43,6 +43,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.navbar' ).navbar ();
+
+    },
+
     _variables: function () {
 
       this.navbar = this.element;
@@ -208,14 +214,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.navbar').navbar ();
 
   });
 

@@ -37,6 +37,23 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.stepper' ).each ( function () {
+
+        var $stepper = $(this);
+
+        $stepper.stepper ({
+          min: Number($stepper.data ( 'min' ) || 0),
+          max: Number($stepper.data ( 'max' ) || 100),
+          value: Number($stepper.find ( '.stepper-input' ).val () || 0),
+          step: Number($stepper.data ( 'step' ) || 1)
+        });
+
+      });
+
+    },
+
     _variables: function () {
 
       this.$stepper = this.$element;
@@ -212,25 +229,6 @@
       this.set ( this.options.value - this.options.step );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.stepper').each ( function () {
-
-      var $stepper = $(this);
-
-      $stepper.stepper ({
-        min: Number($stepper.data ( 'min' ) || 0),
-        max: Number($stepper.data ( 'max' ) || 100),
-        value: Number($stepper.find ( '.stepper-input' ).val () || 0),
-        step: Number($stepper.data ( 'step' ) || 1)
-      });
-
-    });
 
   });
 

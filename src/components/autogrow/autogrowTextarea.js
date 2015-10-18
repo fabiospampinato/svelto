@@ -31,6 +31,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
+
+    },
+
     _variables: function () {
 
       this.$textarea = this.$element;
@@ -62,14 +68,6 @@
       this._trigger ( 'update' );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('textarea.autogrow, .textarea-wrp.autogrow textarea').autogrowTextarea ();
 
   });
 

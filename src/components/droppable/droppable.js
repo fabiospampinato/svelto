@@ -29,6 +29,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.droppable' ).droppable ();
+
+    },
+
     _variables: function () {
 
       this.$droppable = this.$element;
@@ -67,14 +73,6 @@
       }
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.droppable').droppable ();
 
   });
 

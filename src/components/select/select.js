@@ -59,6 +59,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.select-trigger' ).select ();
+
+    },
+
     _variables: function () {
 
       this.$trigger = this.$element;
@@ -249,14 +255,6 @@
       this.$buttons.filter ( '[data-value="' + value + '"]' ).tap ();
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.select-trigger').select ();
 
   });
 

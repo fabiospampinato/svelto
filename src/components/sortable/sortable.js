@@ -57,6 +57,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'table.sortable' ).sortable ();
+
+    },
+
     _variables: function () {
 
       this.$table = this.$element;
@@ -249,14 +255,6 @@
       });
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('table.table.sortable').sortable ();
 
   });
 

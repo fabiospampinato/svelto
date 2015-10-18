@@ -40,6 +40,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.tabs' ).tabs ();
+
+    },
+
     _variables: function () {
 
       this.$tabs = this.$element;
@@ -133,14 +139,6 @@
       }
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.tabs').tabs ();
 
   });
 

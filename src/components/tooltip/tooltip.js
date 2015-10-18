@@ -29,15 +29,15 @@
         closer: '.button, .tooltip-closer',
         trigger: '.tooltip-trigger'
       }
+    },
+
+    /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.tooltip' ).tooltip ();
+
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.tooltip').tooltip ();
 
   });
 

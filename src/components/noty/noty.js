@@ -131,6 +131,8 @@
 
     /* SPECIAL */
 
+    //TODO: Add a `_widgetize` special function
+
     _variables: function () {
 
       this.$noty = this.$element;

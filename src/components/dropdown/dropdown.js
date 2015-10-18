@@ -62,6 +62,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.dropdown' ).dropdown ();
+
+    },
+
     _variables: function () {
 
       this.$dropdown = this.$element;
@@ -351,14 +357,6 @@
       this._trigger ( 'close' );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.dropdown').dropdown ();
 
   });
 

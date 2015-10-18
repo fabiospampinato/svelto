@@ -34,6 +34,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.expander' ).expander ();
+
+    },
+
     _variables: function () {
 
       this.$expander = this.$element;
@@ -90,14 +96,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.expander').expander ();
 
   });
 

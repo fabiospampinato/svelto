@@ -28,6 +28,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.checkbox' ).checkbox ();
+
+    },
+
     _variables: function () {
 
       this.$checkbox = this.$element;
@@ -113,14 +119,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.checkbox').checkbox ();
 
   });
 

@@ -31,6 +31,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.infobar' ).infobar ();
+
+    },
+
     _variables: function () {
 
       this.$infobar = this.$element;
@@ -55,14 +61,6 @@
       this._trigger ( 'close' );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.infobar').infobar ();
 
   });
 

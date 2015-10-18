@@ -57,6 +57,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.draggable' ).draggable ();
+
+    },
+
     _variables: function () {
 
       this.draggable = this.element;
@@ -285,14 +291,6 @@
       this._off ( $document, Pointer.cancel, this.__cancel );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.draggable').draggable ();
 
   });
 

@@ -41,6 +41,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.overlay' ).overlay ();
+
+    },
+
     _variables: function () {
 
       this.$overlay = this.$element;
@@ -178,14 +184,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.overlay').overlay ();
 
   });
 

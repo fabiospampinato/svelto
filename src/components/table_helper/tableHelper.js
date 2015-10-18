@@ -53,6 +53,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'table.table' ).tableHelper ();
+
+    },
+
     _variables: function () {
 
       this.$table = this.$element;
@@ -200,14 +206,6 @@
       return this;
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('table.table').tableHelper ();
 
   });
 

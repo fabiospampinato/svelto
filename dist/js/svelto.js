@@ -1872,6 +1872,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.expander' ).expander ();
+
+    },
+
     _variables: function () {
 
       this.$expander = this.$element;
@@ -1931,14 +1937,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.expander').expander ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -1976,6 +1974,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.accordion' ).accordion ();
+      
+    },
 
     _variables: function () {
 
@@ -2070,14 +2074,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.accordion').accordion ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -2112,6 +2108,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
+
+    },
 
     _variables: function () {
 
@@ -2171,14 +2173,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('input.autogrow, .input-wrp.autogrow input').autogrowInput ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -2214,6 +2208,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
+
+    },
+
     _variables: function () {
 
       this.$textarea = this.$element;
@@ -2245,14 +2245,6 @@
       this._trigger ( 'update' );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('textarea.autogrow, .textarea-wrp.autogrow textarea').autogrowTextarea ();
 
   });
 
@@ -2353,6 +2345,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.carousel' ).carousel ();
+
+    },
 
     _variables: function () {
 
@@ -2592,14 +2590,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.carousel').carousel ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -2631,6 +2621,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.checkbox' ).checkbox ();
+
+    },
 
     _variables: function () {
 
@@ -2717,14 +2713,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.checkbox').checkbox ();
 
   });
 
@@ -3077,6 +3065,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.colorpicker' ).colorpicker ();
+
+    },
+
     _variables: function () {
 
       this.$colorpicker = this.$element;
@@ -3349,14 +3343,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.colorpicker').colorpicker ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -3523,6 +3509,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.datepicker' ).datepicker ();
+
+    },
 
     _variables: function () {
 
@@ -3880,14 +3872,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.datepicker').datepicker ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -3948,6 +3932,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.draggable' ).draggable ();
+
+    },
 
     _variables: function () {
 
@@ -4177,14 +4167,6 @@
       this._off ( $document, Pointer.cancel, this.__cancel );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.draggable').draggable ();
 
   });
 
@@ -4575,6 +4557,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.dropdown' ).dropdown ();
+
+    },
+
     _variables: function () {
 
       this.$dropdown = this.$element;
@@ -4867,14 +4855,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.dropdown').dropdown ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -4907,6 +4887,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.droppable' ).droppable ();
+
+    },
 
     _variables: function () {
 
@@ -4949,14 +4935,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.droppable').droppable ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -4995,6 +4973,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.flippable' ).flippable ();
+
+    },
 
     _variables: function () {
 
@@ -5048,14 +5032,6 @@
       this.flip ( true );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.flippable').flippable ();
 
   });
 
@@ -5276,6 +5252,8 @@
     },
 
     /* SPECIAL */
+
+    //TODO: Add a `_widgetize` special function
 
     _variables: function () {
 
@@ -5880,6 +5858,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
+
+    },
+
     _variables: function () {
 
       this.$form = this.$element;
@@ -6159,14 +6143,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('[data-validations]').parents ( 'form' ).formValidate ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -6231,6 +6207,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.infobar' ).infobar ();
+
+    },
+
     _variables: function () {
 
       this.$infobar = this.$element;
@@ -6255,14 +6237,6 @@
       this._trigger ( 'close' );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.infobar').infobar ();
 
   });
 
@@ -6307,6 +6281,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.modal' ).modal ();
+
+    },
 
     _variables: function () {
 
@@ -6403,14 +6383,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.modal').modal ();
 
   });
 
@@ -6692,6 +6664,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.navbar' ).navbar ();
+
+    },
+
     _variables: function () {
 
       this.navbar = this.element;
@@ -6860,14 +6838,6 @@
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.navbar').navbar ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -6993,6 +6963,12 @@
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.overlay' ).overlay ();
+
+    },
 
     _variables: function () {
 
@@ -7131,14 +7107,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.overlay').overlay ();
 
   });
 
@@ -7770,142 +7738,159 @@ Prism.languages.js = Prism.languages.javascript;
 
 (function ( $, _, window, document, undefined ) {
 
-'use strict';
+  'use strict';
 
-/* HELPER */
+  /* HELPER */
 
-$.progressbar = function ( options ) {
+  $.progressbar = function ( options ) {
 
-  options = _.isNumber ( options ) ? { value: options } : options;
+    options = _.isNumber ( options ) ? { value: options } : options;
 
-  return new $.svelto.progressbar ( options );
+    return new $.svelto.progressbar ( options );
 
-};
+  };
 
-/* PROGRESSBAR */
+  /* PROGRESSBAR */
 
-$.factory ( 'svelto.progressbar', {
+  $.factory ( 'svelto.progressbar', {
 
-  /* TEMPLATES */
+    /* TEMPLATES */
 
-  templates: {
-    base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
-            '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
-          '</div>'
-  },
-
-  /* OPTIONS */
-
-  options: {
-    value: 0, // Percentage
-    colors: { // Colors to use for the progressbar
-      on: '', // Color of `.progressbar-highlight`
-      off: '' // Color of `.progressbar`
+    templates: {
+      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+              '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
+            '</div>'
     },
-    striped: false, // Draw striped over it
-    labeled: false, // Draw a label inside
-    decimals: 0, // Amount of decimals to round the label value to
-    size: '', // Size of the progressbar: '', 'compact', 'slim'
-    css: '',
-    selectors: {
-      highlight: '.progressbar-highlight'
+
+    /* OPTIONS */
+
+    options: {
+      value: 0, // Percentage
+      colors: { // Colors to use for the progressbar
+        on: '', // Color of `.progressbar-highlight`
+        off: '' // Color of `.progressbar`
+      },
+      striped: false, // Draw striped over it
+      labeled: false, // Draw a label inside
+      decimals: 0, // Amount of decimals to round the label value to
+      size: '', // Size of the progressbar: '', 'compact', 'slim'
+      css: '',
+      selectors: {
+        highlight: '.progressbar-highlight'
+      },
+      callbacks: {
+        change: _.noop,
+        empty: _.noop,
+        full: _.noop
+      }
     },
-    callbacks: {
-      change: _.noop,
-      empty: _.noop,
-      full: _.noop
-    }
-  },
 
-  /* SPECIAL */
+    /* SPECIAL */
 
-  _variables: function () {
+    _widgetize: function ( $root ) {
 
-    this.$progressbar = this.$element;
-    this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
+      $root.find ( '.progressbar' ).each ( function () {
 
-  },
+        var $progressbar = $(this);
 
-  _init: function () {
+        $progressbar.progressbar ({
+          value: $progressbar.data ( 'value' ),
+          decimals: $progressbar.data ( 'decimals ')
+        });
 
-    this.options.value = this._sanitizeValue ( this.options.value );
+      });
 
-    this._updateWidth ();
-    this._updateLabel ();
+    },
 
-  },
+    _variables: function () {
 
-  /* PRIVATE */
+      this.$progressbar = this.$element;
+      this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
 
-  _sanitizeValue: function ( value ) {
+    },
 
-    var nr = Number ( value );
+    _init: function () {
 
-    return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
+      this.options.value = this._sanitizeValue ( this.options.value );
 
-  },
+      this._updateWidth ();
+      this._updateLabel ();
 
-  _roundValue: function ( value ) {
+    },
 
-    return value.toFixed ( this.options.decimals );
+    /* PRIVATE */
 
-  },
+    _sanitizeValue: function ( value ) {
 
-  _updateWidth: function () {
+      var nr = Number ( value );
 
-    this.$highlight.css ( 'min-width', this.options.value + '%' );
+      return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
 
-  },
+    },
 
-  _updateLabel: function () {
+    _roundValue: function ( value ) {
 
-    this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
+      return value.toFixed ( this.options.decimals );
 
-  },
+    },
 
-  _update: function () {
+    _updateWidth: function () {
 
-    this._updateWidth ();
-    this._updateLabel ();
+      this.$highlight.css ( 'min-width', this.options.value + '%' );
 
-  },
+    },
 
-  /* PUBLIC */
+    _updateLabel: function () {
 
-  get: function () {
+      this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
 
-    return this.options.value;
+    },
 
-  },
+    _update: function () {
 
-  set: function ( value ) {
+      this._updateWidth ();
+      this._updateLabel ();
 
-    value = Number ( value );
+    },
 
-    if ( !_.isNaN ( value ) ) {
+    /* PUBLIC */
 
-      value = this._sanitizeValue ( value );
+    get: function () {
 
-      if ( value !== this.options.value ) {
+      return this.options.value;
 
-        var data = {
-          previous: this.options.value,
-          value: value
-        };
+    },
 
-        this.options.value = value;
+    set: function ( value ) {
 
-        this._update ();
+      value = Number ( value );
 
-        this._trigger  ( 'change', data );
+      if ( !_.isNaN ( value ) ) {
 
-        if ( this.options.value === 0 ) {
+        value = this._sanitizeValue ( value );
 
-          this._trigger  ( 'empty', data );
+        if ( value !== this.options.value ) {
 
-        } else if ( this.options.value === 100 ) {
+          var data = {
+            previous: this.options.value,
+            value: value
+          };
 
-          this._trigger  ( 'full', data );
+          this.options.value = value;
+
+          this._update ();
+
+          this._trigger  ( 'change', data );
+
+          if ( this.options.value === 0 ) {
+
+            this._trigger  ( 'empty', data );
+
+          } else if ( this.options.value === 100 ) {
+
+            this._trigger  ( 'full', data );
+
+          }
 
         }
 
@@ -7913,26 +7898,7 @@ $.factory ( 'svelto.progressbar', {
 
     }
 
-  }
-
-});
-
-/* READY */
-
-$(function () {
-
-  $('.progressbar').each ( function () {
-
-    var $progressbar = $(this);
-
-    $progressbar.progressbar ({
-      value: $progressbar.data ( 'value' ),
-      decimals: $progressbar.data ( 'decimals ')
-    });
-
   });
-
-});
 
 }( jQuery, _, window, document ));
 
@@ -7965,6 +7931,12 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.radio' ).radio ();
+
+    },
 
     _variables: function () {
 
@@ -8054,14 +8026,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.radio').radio ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -8110,6 +8074,22 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.rater' ).each ( function () {
+
+        var $rater = $(this);
+
+        $rater.rater ({
+          value: Number($rater.data ( 'value' ) || 0),
+          amount: Number($rater.data ( 'amount' ) || 5),
+          url: Number($rater.data ( 'url' ) || false)
+        });
+
+      });
+
+    },
 
     _variables: function () {
 
@@ -8196,24 +8176,6 @@ $(function () {
       };
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.rater').each ( function () {
-
-      var $rater = $(this);
-
-      $rater.rater ({
-        value: Number($rater.data ( 'value' ) || 0),
-        amount: Number($rater.data ( 'amount' ) || 5),
-        url: Number($rater.data ( 'url' ) || false)
-      });
-
-    });
 
   });
 
@@ -8357,6 +8319,12 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.select-trigger' ).select ();
+
+    },
 
     _variables: function () {
 
@@ -8551,14 +8519,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.select-trigger').select ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -8602,6 +8562,12 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'table.selectable' ).selectable ();
+
+    },
 
     _variables: function () {
 
@@ -8859,14 +8825,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('table.table.selectable').selectable ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -8916,6 +8874,24 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.slider' ).each ( function () {
+
+        var $slider = $(this);
+
+        $slider.slider ({
+          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+          value: Number($slider.find ( 'input' ).val () || 0),
+          step: Number($slider.data ( 'step' ) || 1),
+          decimals: Number($slider.data ( 'decimals' ) || 0)
+        });
+
+      });
+
+    },
 
     _variables: function () {
 
@@ -9130,26 +9106,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.slider').each ( function () {
-
-      var $slider = $(this);
-
-      $slider.slider ({
-        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-        value: Number($slider.find ( 'input' ).val () || 0),
-        step: Number($slider.data ( 'step' ) || 1),
-        decimals: Number($slider.data ( 'decimals' ) || 0)
-      });
-
-    });
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -9210,6 +9166,12 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'table.sortable' ).sortable ();
+
+    },
 
     _variables: function () {
 
@@ -9406,14 +9368,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('table.table.sortable').sortable ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -9454,6 +9408,23 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.stepper' ).each ( function () {
+
+        var $stepper = $(this);
+
+        $stepper.stepper ({
+          min: Number($stepper.data ( 'min' ) || 0),
+          max: Number($stepper.data ( 'max' ) || 100),
+          value: Number($stepper.find ( '.stepper-input' ).val () || 0),
+          step: Number($stepper.data ( 'step' ) || 1)
+        });
+
+      });
+
+    },
 
     _variables: function () {
 
@@ -9633,25 +9604,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.stepper').each ( function () {
-
-      var $stepper = $(this);
-
-      $stepper.stepper ({
-        min: Number($stepper.data ( 'min' ) || 0),
-        max: Number($stepper.data ( 'max' ) || 100),
-        value: Number($stepper.find ( '.stepper-input' ).val () || 0),
-        step: Number($stepper.data ( 'step' ) || 1)
-      });
-
-    });
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -9697,6 +9649,23 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.switch' ).each ( function () {
+
+        var $switch = $(this);
+
+        $switch.switch ({
+          colors: {
+            on: $switch.data ( 'color-on' ) || 'secondary',
+            off: $switch.data ( 'color-off' ) || 'gray'
+          }
+        });
+
+      });
+
+    },
 
     _variables: function () {
 
@@ -9883,25 +9852,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.switch').each ( function () {
-
-      var $switch = $(this);
-
-      $switch.switch ({
-        colors: {
-          on: $switch.data ( 'color-on' ) || 'secondary',
-          off: $switch.data ( 'color-off' ) || 'gray'
-        }
-      });
-
-    });
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -9958,6 +9908,12 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'table.table' ).tableHelper ();
+
+    },
 
     _variables: function () {
 
@@ -10109,14 +10065,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('table.table').tableHelper ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -10160,6 +10108,12 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.tabs' ).tabs ();
+
+    },
 
     _variables: function () {
 
@@ -10257,14 +10211,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.tabs').tabs ();
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -10342,6 +10288,18 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.tagbox' ).each ( function () {
+
+        var $tagbox = $(this);
+
+        $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
+
+      });
+
+    },
 
     _variables: function () {
 
@@ -10766,20 +10724,6 @@ $(function () {
 
   });
 
-  /* READY */
-
-  $(function () {
-
-    $('.tagbox').each ( function () {
-
-      var $tagbox = $(this);
-
-      $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
-
-    });
-
-  });
-
 }( jQuery, _, window, document ));
 
 
@@ -10811,6 +10755,13 @@ $(function () {
     },
 
     /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '[data-timestamp]' ).timeAgo ();
+      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+
+    },
 
     _variables: function () {
 
@@ -10861,15 +10812,6 @@ $(function () {
       return timeAgo;
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('[data-timestamp]').timeAgo ();
-    $('[data-timestamp-title]').timeAgo ({ title: true });
 
   });
 
@@ -11079,15 +11021,15 @@ $(function () {
         closer: '.button, .tooltip-closer',
         trigger: '.tooltip-trigger'
       }
+    },
+
+    /* SPECIAL */
+
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.tooltip' ).tooltip ();
+
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.tooltip').tooltip ();
 
   });
 

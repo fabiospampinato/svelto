@@ -34,6 +34,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.accordion' ).accordion ();
+      
+    },
+
     _variables: function () {
 
       this.$accordion = this.$element;
@@ -124,14 +130,6 @@
       this.toggle ( index, false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.accordion').accordion ();
 
   });
 

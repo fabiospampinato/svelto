@@ -46,6 +46,24 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.slider' ).each ( function () {
+
+        var $slider = $(this);
+
+        $slider.slider ({
+          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+          value: Number($slider.find ( 'input' ).val () || 0),
+          step: Number($slider.data ( 'step' ) || 1),
+          decimals: Number($slider.data ( 'decimals' ) || 0)
+        });
+
+      });
+
+    },
+
     _variables: function () {
 
       this.$slider = this.$element;
@@ -256,26 +274,6 @@
       this.set ( this.options.value - this.options.step );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.slider').each ( function () {
-
-      var $slider = $(this);
-
-      $slider.slider ({
-        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-        value: Number($slider.find ( 'input' ).val () || 0),
-        step: Number($slider.data ( 'step' ) || 1),
-        decimals: Number($slider.data ( 'decimals' ) || 0)
-      });
-
-    });
 
   });
 

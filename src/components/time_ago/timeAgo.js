@@ -28,6 +28,13 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '[data-timestamp]' ).timeAgo ();
+      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+
+    },
+
     _variables: function () {
 
       this.$timeAgoElement = this.$element;
@@ -77,15 +84,6 @@
       return timeAgo;
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('[data-timestamp]').timeAgo ();
-    $('[data-timestamp-title]').timeAgo ({ title: true });
 
   });
 

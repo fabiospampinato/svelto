@@ -31,6 +31,12 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
+
+    },
+
     _variables: function () {
 
       this.$input = this.$element;
@@ -86,14 +92,6 @@
       this._trigger ( 'update' );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('input.autogrow, .input-wrp.autogrow input').autogrowInput ();
 
   });
 

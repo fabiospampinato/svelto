@@ -74,6 +74,18 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.tagbox' ).each ( function () {
+
+        var $tagbox = $(this);
+
+        $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
+
+      });
+
+    },
+
     _variables: function () {
 
       this.$tagbox = this.$element;
@@ -494,20 +506,6 @@
       }
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.tagbox').each ( function () {
-
-      var $tagbox = $(this);
-
-      $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
-
-    });
 
   });
 

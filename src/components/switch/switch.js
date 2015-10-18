@@ -42,6 +42,23 @@
 
     /* SPECIAL */
 
+    _widgetize: function ( $root ) {
+
+      $root.find ( '.switch' ).each ( function () {
+
+        var $switch = $(this);
+
+        $switch.switch ({
+          colors: {
+            on: $switch.data ( 'color-on' ) || 'secondary',
+            off: $switch.data ( 'color-off' ) || 'gray'
+          }
+        });
+
+      });
+
+    },
+
     _variables: function () {
 
       this.$switch = this.$element;
@@ -224,25 +241,6 @@
       this.toggle ( false );
 
     }
-
-  });
-
-  /* READY */
-
-  $(function () {
-
-    $('.switch').each ( function () {
-
-      var $switch = $(this);
-
-      $switch.switch ({
-        colors: {
-          on: $switch.data ( 'color-on' ) || 'secondary',
-          off: $switch.data ( 'color-off' ) || 'gray'
-        }
-      });
-
-    });
 
   });
 
