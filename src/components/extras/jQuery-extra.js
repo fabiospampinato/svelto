@@ -12,14 +12,6 @@
 
   'use strict';
 
-  /* JQUERY EXTRA */
-
-  $.reflow = function () {
-
-    document.documentElement.offsetHeight; //INFO: Requesting the `offsetHeight` property triggers a reflow. Necessary, so that the deferred callback will be executed in another cycle
-
-  };
-
   $.eventXY = function ( event ) {
 
     if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
