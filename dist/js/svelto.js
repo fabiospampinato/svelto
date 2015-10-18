@@ -6,13 +6,15 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-;(function ( _, window, document, undefined ) {
+'use strict';
+
+;(function (_, window, document, undefined) {
 
   'use strict';
 
   /* LODASH EXTRA */
 
-  _.mixin ({
+  _.mixin({
 
     /**
      * Gets the number of seconds that have elapsed since the Unix epoch
@@ -24,10 +26,9 @@
      * // => logs the number of seconds it took for the deferred function to be invoked
      */
 
-    nowSecs: function () {
+    nowSecs: function nowSecs() {
 
-      return _.floor ( _.now () / 1000 );
-
+      return _.floor(_.now() / 1000);
     },
 
     /**
@@ -37,42 +38,38 @@
      * // => Just now
      */
 
-    timeAgo: function ( timestamp ) { //INFO: Timestamp is required in seconds
+    timeAgo: function timeAgo(timestamp) {
+      //INFO: Timestamp is required in seconds
 
-      var elapsed = _.nowSecs () - timestamp,
+      var elapsed = _.nowSecs() - timestamp,
           justNow = 5;
 
       var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
           times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
 
-      if ( elapsed < justNow ) {
+      if (elapsed < justNow) {
 
         return {
           str: 'Just now',
           next: justNow - elapsed
         };
-
       } else {
 
-        for ( var i = 0, l = times.length; i < l; i++ ) {
+        for (var i = 0, l = times.length; i < l; i++) {
 
           var name = names[i],
               secs = times[i],
-              number = _.floor ( elapsed / secs );
+              number = _.floor(elapsed / secs);
 
-          if ( number >= 1 ) {
+          if (number >= 1) {
 
             return {
-              str: number + ' ' + name + ( number > 1 ? 's' : '' ) + ' ago',
-              next: secs - ( elapsed - ( number * secs ) )
+              str: number + ' ' + name + (number > 1 ? 's' : '') + ' ago',
+              next: secs - (elapsed - number * secs)
             };
-
           }
-
         }
-
       }
-
     },
 
     /**
@@ -88,41 +85,35 @@
      * // => false
      */
 
-    fuzzyMatch: function ( str, search, isCaseSensitive ) {
+    fuzzyMatch: function fuzzyMatch(str, search, isCaseSensitive) {
 
-      if ( isCaseSensitive !== false ) {
+      if (isCaseSensitive !== false) {
 
-        str = str.toLowerCase ();
-        search = search.toLowerCase ();
-
+        str = str.toLowerCase();
+        search = search.toLowerCase();
       }
 
       var current_index = -1,
           str_l = str.length;
 
-      for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
+      for (var search_i = 0, search_l = search.length; search_i < search_l; search_i++) {
 
-        for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
+        for (var str_i = current_index + 1; str_i < str_l; str_i++) {
 
-          if ( str[str_i] === search[search_i] ) {
+          if (str[str_i] === search[search_i]) {
 
             current_index = str_i;
             str_i = str_l + 1;
-
           }
-
         }
 
-        if ( str_i === str_l ) {
+        if (str_i === str_l) {
 
           return false;
-
         }
-
       }
 
       return true;
-
     },
 
     /**
@@ -141,136 +132,117 @@
      * _.clamp(2, 7, 5); // => 5
      */
 
-    clamp: function ( minimum, value, maximum ) {
+    clamp: function clamp(minimum, value, maximum) {
 
-      if ( !_.isUndefined ( minimum ) ) {
+      if (!_.isUndefined(minimum)) {
 
-        if ( value < minimum ) {
+        if (value < minimum) {
 
           value = minimum;
-
         }
-
       }
 
-      if ( !_.isUndefined ( maximum ) ) {
+      if (!_.isUndefined(maximum)) {
 
-        if ( value > maximum ) {
+        if (value > maximum) {
 
           value = maximum;
-
         }
-
       }
 
       return value;
-
     },
 
     /**
      * Performs a binary each of the array
      */
 
-    btEach: function ( arr, callback, startIndex ) {
+    btEach: function btEach(arr, callback, startIndex) {
 
       var start = 0,
           end = arr.length - 1,
-          center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+          center = _.isNumber(startIndex) ? startIndex : _.ceil((start + end) / 2),
           direction;
 
-      while ( start <= end ) {
+      while (start <= end) {
 
-        direction = callback.call ( arr[center], center, arr[center] );
+        direction = callback.call(arr[center], center, arr[center]);
 
-        if ( direction < 0 ) {
+        if (direction < 0) {
 
           end = center - 1;
-
-        } else if ( direction > 0 ) {
+        } else if (direction > 0) {
 
           start = center + 1;
-
         } else {
 
           return center;
-
         }
 
-        center = _.ceil ( ( start + end ) / 2 );
-
+        center = _.ceil((start + end) / 2);
       }
 
       return -1;
-
     },
 
     /**
      * Move the item at `from` index inside the array to the `to` index
      */
 
-     move: function ( arr, from, to ) {
+    move: function move(arr, from, to) {
 
-       arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
-
-     },
+      arr.splice(to, 0, arr.splice(from, 1)[0]);
+    },
 
     /**
      * Shorten the numer using common K and M syntax
      */
 
-     mkize: function ( number ) {
+    mkize: function mkize(number) {
 
-    	if ( number >= 1000000 ) {
+      if (number >= 1000000) {
 
-    		return ( number / 1000000 ) + 'M';
+        return number / 1000000 + 'M';
+      } else if (number >= 1000) {
 
-    	} else if ( number >= 1000 ) {
+        return number / 1000 + 'K';
+      } else {
 
-    		return ( number / 1000 ) + 'K';
-
-    	} else {
-
-    		return number;
-
-    	}
-
+        return number;
+      }
     },
 
     /**
      * Round `number` so that it becames the closer `step` multiple
      */
 
-    roundCloser ( number, step ) {
+    roundCloser: function roundCloser(number, step) {
 
-      if ( _.isUndefined ( step ) ) {
+      if (_.isUndefined(step)) {
 
         step = 1;
-
       }
 
-      var left = ( number % step ),
+      var left = number % step,
           halfStep = step / 2;
 
-      return number - left + ( left >= halfStep ? step : 0 );
-
+      return number - left + (left >= halfStep ? step : 0);
     },
 
     /**
      * Returns true
      */
 
-    true: _.constant ( true ),
+    'true': _.constant(true),
 
     /**
      * Returns false
      */
 
-    false: _.constant ( false )
+    'false': _.constant(false)
 
   });
-
-}( _, window, document ));
-
+})(_, window, document);
 
 /* =========================================================================
  * Svelto - Browser
@@ -279,28 +251,30 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* VARIABLES */
 
-  var userAgent = navigator.userAgent.toLowerCase (),
-      vendor = navigator.vendor.toLowerCase (),
-      appVersion = navigator.appVersion.toLowerCase ();
+  var userAgent = navigator.userAgent.toLowerCase(),
+      vendor = navigator.vendor.toLowerCase(),
+      appVersion = navigator.appVersion.toLowerCase();
 
   /* CHECKS */
 
-  var is_iphone = /iphone/i.test ( userAgent ),
-      is_ipad = /ipad/i.test ( userAgent ),
-      is_ipod = /ipod/i.test ( userAgent ),
-      is_android = /android/i.test ( userAgent ),
-      is_androidPhone = is_android && /mobile/i.test ( userAgent ),
+  var is_iphone = /iphone/i.test(userAgent),
+      is_ipad = /ipad/i.test(userAgent),
+      is_ipod = /ipod/i.test(userAgent),
+      is_android = /android/i.test(userAgent),
+      is_androidPhone = is_android && /mobile/i.test(userAgent),
       is_androidTablet = is_android && !is_androidPhone,
-      is_blackberry = /blackberry/i.test ( userAgent ) || /BB10/i.test ( userAgent ),
-      is_windows = /win/i.test ( appVersion ),
-      is_windowsPhone = is_windows && /phone/i.test ( userAgent ),
-      is_windowsTablet = is_windows && !is_windowsPhone && /touch/i.test ( userAgent ),
+      is_blackberry = /blackberry/i.test(userAgent) || /BB10/i.test(userAgent),
+      is_windows = /win/i.test(appVersion),
+      is_windowsPhone = is_windows && /phone/i.test(userAgent),
+      is_windowsTablet = is_windows && !is_windowsPhone && /touch/i.test(userAgent),
       is_mobile = is_iphone || is_ipod || is_androidPhone || is_blackberry || is_windowsPhone,
       is_tablet = is_ipad || is_androidTablet || is_windowsTablet;
 
@@ -308,11 +282,11 @@
 
   $.browser = {
     is: {
-      chrome: /chrome|chromium/i.test ( userAgent ) && /google inc/.test ( vendor ),
-      firefox: /firefox/i.test ( userAgent ),
-      ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
-      opera:  /^Opera\//.test ( userAgent ) || /\x20OPR\//.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
-      safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
+      chrome: /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor),
+      firefox: /firefox/i.test(userAgent),
+      ie: /msie/i.test(userAgent) || 'ActiveXObject' in window, /* IE || EDGE */
+      opera: /^Opera\//.test(userAgent) || /\x20OPR\//.test(userAgent), /* Opera <= 12 || Opera >= 15 */
+      safari: /safari/i.test(userAgent) && /apple computer/i.test(vendor),
       iphone: is_iphone,
       ipad: is_ipad,
       ipod: is_ipod,
@@ -321,26 +295,24 @@
       androidPhone: is_androidPhone,
       androidTablet: is_androidTablet,
       blackberry: is_blackberry,
-      linux: /linux/i.test ( appVersion ),
-      mac: /mac/i.test ( appVersion ),
+      linux: /linux/i.test(appVersion),
+      mac: /mac/i.test(appVersion),
       windows: is_windows,
       windowsPhone: is_windowsPhone,
       windowsTablet: is_windowsTablet,
       mobile: is_mobile,
       tablet: is_tablet,
       desktop: !is_mobile && !is_tablet,
-      online: function () {
+      online: function online() {
         return navigator.onLine;
       },
-      offline: function () {
+      offline: function offline() {
         return !navigator.onLine;
       },
-      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof DocumentTouch )
+      touchDevice: 'ontouchstart' in window || 'DocumentTouch' in window && document instanceof DocumentTouch
     }
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - jQuery (Extras)
@@ -351,71 +323,65 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
-  $.eventXY = function ( event ) {
+  $.eventXY = function (event) {
 
-    if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
+    if (event.isPointerEvent) {
+      //INFO: Has been created using the `Pointer` abstraction
 
       event = event.originalEvent;
-
     }
 
-    if ( $.browser.is.touchDevice && event.originalEvent.touches ) {
+    if ($.browser.is.touchDevice && event.originalEvent.touches) {
 
       event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
-
     }
 
     return {
       X: event.pageX,
       Y: event.pageY
     };
-
   };
 
-  $.frame = function ( callback ) {
+  $.frame = function (callback) {
 
-    return requestAnimationFrame ( callback );
-
+    return requestAnimationFrame(callback);
   };
 
-  $.hasCtrlOrCmd = function ( event ) {
+  $.hasCtrlOrCmd = function (event) {
 
-    return ( !$.browser.is.mac && event.ctrlKey ) || ( $.browser.is.mac && event.metaKey );
-
+    return !$.browser.is.mac && event.ctrlKey || $.browser.is.mac && event.metaKey;
   };
 
-  $.getRect = function ( node ) {
+  $.getRect = function (node) {
 
-    return node.getBoundingClientRect ();
-
+    return node.getBoundingClientRect();
   };
 
   $.fn.getRect = function () {
 
-    return this.length > 0 ? this[0].getBoundingClientRect () : undefined;
-
+    return this.length > 0 ? this[0].getBoundingClientRect() : undefined;
   };
 
-  $.getOverlappingArea = function ( rect1, rect2 ) {
+  $.getOverlappingArea = function (rect1, rect2) {
 
-    var overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
-        overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
+    var overlapX = Math.max(0, Math.min(rect1.right, rect2.right) - Math.max(rect1.left, rect2.left)),
+        overlapY = Math.max(0, Math.min(rect1.bottom, rect2.bottom) - Math.max(rect1.top, rect2.top));
 
     return overlapX * overlapY;
-
   };
 
-  $.fn.hsl = function ( h, s, l ) {
+  $.fn.hsl = function (h, s, l) {
 
     //INFO: It only works for setting
     //FIXME: I'm not sure if this plugin should exists
 
-    return this.css ( 'background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)' );
-
+    return this.css('background-color', 'hsl(' + h + ',' + s + '%,' + l + '%)');
   };
 
   $.fn.onHover = function () {
@@ -425,18 +391,15 @@
     var args = arguments,
         self = this;
 
-    this.on ( Pointer.enter, function () {
+    this.on(Pointer.enter, function () {
 
-      self.on ( args );
-
+      self.on(args);
     });
 
-    this.on ( Pointer.leave, function () {
+    this.on(Pointer.leave, function () {
 
-      self.off ( args );
-
+      self.off(args);
     });
-
   };
 
   /* COMMON OBJECTS */
@@ -449,18 +412,17 @@
     window.$head = $(document.head);
     window.$body = $(document.body);
     window.$empty = $();
-
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* PSEUDO CSS */
 
 //TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
 //TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -471,74 +433,62 @@
 
   /* UTILITIES */
 
-  var cssfy = function ( tree ) {
+  var cssfy = function cssfy(tree) {
 
     var css = '';
 
-    for ( var selector in tree ) {
+    for (var selector in tree) {
 
       css += selector + '{';
 
-      if ( _.isString ( tree[selector] ) ) {
+      if (_.isString(tree[selector])) {
 
         css += tree[selector];
-
       } else {
 
-        for ( var property in tree[selector] ) {
+        for (var property in tree[selector]) {
 
           css += property + ':' + tree[selector][property] + ';';
-
         }
-
       }
 
       css += '}';
-
     }
 
     return css;
-
   };
 
-  var update = function () {
+  var update = function update() {
 
-    var css = cssfy ( tree );
+    var css = cssfy(tree);
 
-    $stylesheet.html ( css );
-
+    $stylesheet.html(css);
   };
 
   /* PSEUDO CSS */
 
-  $.pseudoCSS = function ( selector, property, value ) {
+  $.pseudoCSS = function (selector, property, value) {
 
-    if ( _.isString ( property ) ) {
+    if (_.isString(property)) {
 
       tree[selector] = property;
-
     } else {
 
-      var rule = _.isUndefined ( value ) ? property : { property: value };
+      var rule = _.isUndefined(value) ? property : { property: value };
 
-      tree[selector] = _.merge ( _.isString ( tree[selector] ) ? {} : tree[selector] || {}, rule );
-
+      tree[selector] = _.merge(_.isString(tree[selector]) ? {} : tree[selector] || {}, rule);
     }
 
-    update ();
-
+    update();
   };
 
   /* READY */
 
   $(function () {
 
-    $stylesheet = $('<style />').appendTo ( $head );
-
+    $stylesheet = $('<style />').appendTo($head);
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - UI
@@ -548,7 +498,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -593,9 +545,8 @@
   window.Svelto = {
     version: '0.1.0'
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
+"use strict";
 
 /* =========================================================================
  * Svelto - Core
@@ -609,7 +560,6 @@
  * @requires ../pseudo_css/pseudoCss.js
  * @requires ../ui/ui.js
  * ========================================================================= */
-
 
 /* =========================================================================
  * Svelto - Tmpl
@@ -669,65 +619,62 @@
  ***************************
  */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TMPL */
 
-  var tmpl = function ( str, data ) {
+  var tmpl = function tmpl(str, data) {
 
-    var f = !/[^\w\-\.:]/.test ( str )
-              ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
-              : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
+    var f = !/[^\w\-\.:]/.test(str) ? tmpl.cache[str] = tmpl.cache[str] || tmpl(document.getElementById(str).innerHTML) : new Function(tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace(tmpl.regexp, tmpl.func) + "';return _s;");
 
-    return data
-             ? f ( data, tmpl )
-             : function ( data ) { return f ( data, tmpl ); };
-
+    return data ? f(data, tmpl) : function (data) {
+      return f(data, tmpl);
+    };
   };
 
   tmpl.cache = {};
 
   tmpl.regexp = /([\s'\\])(?!(?:[^{]|\{(?!%))*%\})|(?:\{%(=|#)([\s\S]+?)%\})|(\{%)|(%\})/g;
 
-  tmpl.func = function ( s, p1, p2, p3, p4, p5 ) {
+  tmpl.func = function (s, p1, p2, p3, p4, p5) {
 
-    if ( p1 ) { // whitespace, quote and backspace in HTML context
+    if (p1) {
+      // whitespace, quote and backspace in HTML context
 
-      return {
+      return ({
         '\n': '\\n',
         '\r': '\\r',
         '\t': '\\t',
-        ' ' : ' '
-      }[p1] || '\\' + p1;
-
+        ' ': ' '
+      })[p1] || '\\' + p1;
     }
 
-    if ( p2 ) { // interpolation: {%=prop%}, or unescaped: {%#prop%}
+    if (p2) {
+      // interpolation: {%=prop%}, or unescaped: {%#prop%}
 
-      if ( p2 === '=' ) {
+      if (p2 === '=') {
 
         return "'+_e(" + p3 + ")+'";
-
       }
 
       return "'+(" + p3 + "==null?'':" + p3 + ")+'";
-
     }
 
-    if ( p4 ) { // evaluation start tag: {%
+    if (p4) {
+      // evaluation start tag: {%
 
       return "';";
-
     }
 
-    if ( p5 ) { // evaluation end tag: %}
+    if (p5) {
+      // evaluation end tag: %}
 
       return "_s+='";
-
     }
-
   };
 
   tmpl.arg = 'o';
@@ -737,9 +684,7 @@
   /* HELPER */
 
   $.tmpl = tmpl;
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Widget
@@ -754,7 +699,9 @@
 //TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
 //TODO: Add support for element-level options via `data-name-options`
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -798,23 +745,22 @@
 
     /* WIDGET METHODS */
 
-    _create: function ( options, element ) {
+    _create: function _create(options, element) {
 
       // CHECK IF INITIALIZABLE
 
-      if ( !element && !this.templates.base && !this.html ) {
+      if (!element && !this.templates.base && !this.html) {
 
         throw 'WidgetUninitializable';
-
       }
 
       // MERGE OPTIONS
 
-      this.options = _.merge ( {}, this.options, this._createOptions (), options );
+      this.options = _.merge({}, this.options, this._createOptions(), options);
 
       // INIT ELEMENT
 
-      this.$element = $(element || ( this.templates.base ? this._tmpl ( 'base', this.options ) : this.html ) );
+      this.$element = $(element || (this.templates.base ? this._tmpl('base', this.options) : this.html));
       this.element = this.$element[0];
 
       // SET GUID
@@ -823,32 +769,29 @@
 
       // SET DISABLED
 
-      this.options.disabled = this.options.disabled || this.$element.hasClass ( 'disabled' );
+      this.options.disabled = this.options.disabled || this.$element.hasClass('disabled');
 
       // SAVE WIDGET INSTANCE
 
-      $.data ( this.element, this.fullName, this );
+      $.data(this.element, this.fullName, this);
 
       // ON $ELEMENT REMOVE -> WIDGET DESTROY
 
-      this._on ( true, 'remove', function ( event ) {
+      this._on(true, 'remove', function (event) {
 
-        if ( event.target === this.element ) {
+        if (event.target === this.element) {
 
-          this.destroy ( event );
-
+          this.destroy(event);
         }
-
       });
 
       // CALLBACKS
 
-      this._variables ();
+      this._variables();
 
-      this._init ();
+      this._init();
 
-      this._events ();
-
+      this._events();
     },
 
     _createOptions: _.noop, //INFO: Returns an options object that will be used for the current widget instance, generated during widget instantiation
@@ -858,139 +801,124 @@
     _init: _.noop, //INFO: Perform the init stuff inside this function
     _events: _.noop, //INFO: Bind the event handlers inside this function
 
-    destroy: function () {
+    destroy: function destroy() {
 
-      this._destroy ();
+      this._destroy();
 
-      $.removeData ( this.element, this.fullName );
-
+      $.removeData(this.element, this.fullName);
     },
 
     _destroy: _.noop,
 
-    widget: function () {
+    widget: function widget() {
 
       return this.$element;
-
     },
 
     /* OPTIONS METHODS */
 
-    option: function ( key, value ) {
+    option: function option(key, value) {
 
-      if ( arguments.length === 0 ) { //INFO: Returns a clone of the options object
+      if (arguments.length === 0) {
+        //INFO: Returns a clone of the options object
 
-        return _.cloneDeep ( this.options );
-
+        return _.cloneDeep(this.options);
       }
 
-      if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
+      if (_.isString(key)) {
+        //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
 
         var options = {},
-            parts = key.split ( '.' );
+            parts = key.split('.');
 
-        key = parts.shift ();
+        key = parts.shift();
 
-        if ( parts.length ) {
+        if (parts.length) {
 
-          var curOption = options[key] = _.extend ( {}, this.options[key] );
+          var curOption = options[key] = _.extend({}, this.options[key]);
 
-          for ( var i = 0; i < parts.length - 1; i++ ) {
+          for (var i = 0; i < parts.length - 1; i++) {
 
             curOption[parts[i]] = curOption[parts[i]] || {};
             curOption = curOption[parts[i]];
-
           }
 
-          key = parts.pop ();
+          key = parts.pop();
 
-          if ( arguments.length === 1 ) {
+          if (arguments.length === 1) {
 
-            return _.isUndefined ( curOption[key] ) ? null : curOption[key];
-
+            return _.isUndefined(curOption[key]) ? null : curOption[key];
           }
 
           curOption[key] = value;
+        } else {
+          //INFO: Handle single level property
 
-        } else { //INFO: Handle single level property
+          if (arguments.length === 1) {
 
-          if ( arguments.length === 1 ) {
-
-            return _.isUndefined ( this.options[key] ) ? null : this.options[key];
-
+            return _.isUndefined(this.options[key]) ? null : this.options[key];
           }
 
           options[key] = value;
-
         }
+      } else if (_.isPlainObject(key)) {
+        //INFO: Set multiple properties
 
-      } else if ( _.isPlainObject ( key ) ) { //INFO: Set multiple properties
-
-        this._setOptions ( key );
-
+        this._setOptions(key);
       }
 
       return this;
-
     },
 
-    _setOptions: function ( options ) {
+    _setOptions: function _setOptions(options) {
 
-      for ( var key in options ) {
+      for (var key in options) {
 
-        this._setOption ( key, options[key] );
-
+        this._setOption(key, options[key]);
       }
 
       return this;
-
     },
 
-    _setOption: function ( key, value ) {
+    _setOption: function _setOption(key, value) {
 
       this.options[key] = value;
 
-      if ( key === 'disabled' ) {
+      if (key === 'disabled') {
 
-        this.$element.toggleClass ( 'disabled', !!value );
-
+        this.$element.toggleClass('disabled', !!value);
       }
 
       return this;
-
     },
 
     /* ENABLED */
 
-    enable: function () {
+    enable: function enable() {
 
-      return this._setOptions ({ disabled: false });
-
+      return this._setOptions({ disabled: false });
     },
 
-    isEnabled: function () {
+    isEnabled: function isEnabled() {
 
       return !this.options.disabled;
-
     },
 
     /* DISABLED */
 
-    disable: function () {
+    disable: function disable() {
 
-      return this._setOptions ({ disabled: true });
-
+      return this._setOptions({ disabled: true });
     },
 
-    isDisabled: function () {
+    isDisabled: function isDisabled() {
 
       return this.options.disabled;
-
     },
 
     /* EVENTS */
 
-    _on: function ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
+    _on: function _on(suppressDisabledCheck, $element, events, selector, handler, onlyOne) {
 
       //TODO: Add support for custom data
 
@@ -1000,7 +928,7 @@
 
       // NORMALIZING OPTIONS
 
-      if ( !_.isBoolean ( suppressDisabledCheck ) ) {
+      if (!_.isBoolean(suppressDisabledCheck)) {
 
         onlyOne = handler;
         handler = selector;
@@ -1008,244 +936,217 @@
         events = $element;
         $element = suppressDisabledCheck;
         suppressDisabledCheck = false;
-
       }
 
-      if ( !( $element instanceof $ ) ) {
+      if (!($element instanceof $)) {
 
         onlyOne = handler;
         handler = selector;
         selector = events;
         events = $element;
         $element = this.$element;
-
       }
 
-      if ( !_.isString ( selector ) ) {
+      if (!_.isString(selector)) {
 
         onlyOne = handler;
         handler = selector;
         selector = false;
-
       }
 
       // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
 
-      handler = _.isString ( handler ) ? this[handler] : handler;
+      handler = _.isString(handler) ? this[handler] : handler;
 
       // PROXY
 
-      function handlerProxy () {
+      function handlerProxy() {
 
-        if ( !suppressDisabledCheck && instance.options.disabled ) return;
+        if (!suppressDisabledCheck && instance.options.disabled) return;
 
-        var args = _.slice ( arguments );
+        var args = _.slice(arguments);
 
-        args.push ( this );
+        args.push(this);
 
-        return handler.apply ( instance, args );
-
+        return handler.apply(instance, args);
       }
 
       // PROXY GUID
 
-      handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
+      handlerProxy.guid = handler.guid = handler.guid || handlerProxy.guid || $.guid++;
 
       // TRIGGERING
 
-      if ( selector ) { // DELEGATED
+      if (selector) {
+        // DELEGATED
 
-        $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
+        $element[onlyOne ? 'one' : 'on'](events, selector, handlerProxy);
+      } else {
+        // NORMAL
 
-      } else { // NORMAL
-
-        $element[onlyOne ? 'one' : 'on'] ( events, handlerProxy );
-
+        $element[onlyOne ? 'one' : 'on'](events, handlerProxy);
       }
 
       return this;
-
     },
 
-    _one: function () {
+    _one: function _one() {
 
       var args = arguments;
 
-      Array.prototype.push.call ( args, true );
+      Array.prototype.push.call(args, true);
 
-      this._on.apply ( this, args );
-
+      this._on.apply(this, args);
     },
 
-    _onHover: function ( $element, args ) {
+    _onHover: function _onHover($element, args) {
 
       //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
 
-      if ( !args ) {
+      if (!args) {
 
         args = $element;
         $element = this.$element;
-
       }
 
-      this._on ( $element, Pointer.enter, function () {
+      this._on($element, Pointer.enter, function () {
 
-        this._on.apply ( this, args );
-
+        this._on.apply(this, args);
       });
 
-      this._on ( $element, Pointer.leave, function () {
+      this._on($element, Pointer.leave, function () {
 
-        this._off.apply ( this, args );
-
+        this._off.apply(this, args);
       });
-
     },
 
-    _off: function ( $element, events, handler ) {
+    _off: function _off($element, events, handler) {
 
       // NORMALIZING OPTIONS
 
-      if ( !handler ) {
+      if (!handler) {
 
         handler = events;
         events = $element;
         $element = this.$element;
-
       }
 
       // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
 
-      handler = _.isString ( handler ) ? this[handler] : handler;
+      handler = _.isString(handler) ? this[handler] : handler;
 
       // REMOVING HANDLER
 
-      $element.off ( events, handler );
+      $element.off(events, handler);
 
       return this;
-
     },
 
-    _trigger: function ( events, data ) {
+    _trigger: function _trigger(events, data) {
 
       data = data || {};
 
-      events = events.split ( ' ' );
+      events = events.split(' ');
 
-      for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+      for (var ei = 0, el = events.length; ei < el; ei++) {
 
-        this.$element.trigger ( this.name + ':' + events[ei], data );
+        this.$element.trigger(this.name + ':' + events[ei], data);
 
-        if ( _.isFunction ( this.options.callbacks[events[ei]] ) ) {
+        if (_.isFunction(this.options.callbacks[events[ei]])) {
 
-          this.options.callbacks[events[ei]].call ( this.element, data );
-
+          this.options.callbacks[events[ei]].call(this.element, data);
         }
-
       }
 
       return this;
-
     },
 
     /* DELAYING */
 
-    _delay: function ( fn, delay ) {
+    _delay: function _delay(fn, delay) {
 
       var instance = this;
 
-      return setTimeout ( function () {
+      return setTimeout(function () {
 
-        fn.apply ( instance );
-
-      }, delay || 0 );
-
+        fn.apply(instance);
+      }, delay || 0);
     },
 
     /* DEFER */
 
-    _defer: function ( fn ) {
+    _defer: function _defer(fn) {
 
-      return this._delay ( fn );
-
+      return this._delay(fn);
     },
 
     /* FRAME */
 
-    _frame: function ( fn ) {
+    _frame: function _frame(fn) {
 
       var instance = this;
 
-      return $.frame ( function () {
+      return $.frame(function () {
 
-        fn.apply ( instance );
-
+        fn.apply(instance);
       });
-
     },
 
     /* DEBOUNCING */
 
-    _debounce: function ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _debounce: function _debounce(fn, wait, options) {
+      //TODO: Test it, expecially regarding the `this` variable
 
-      return _.debounce ( fn, wait, options );
-
+      return _.debounce(fn, wait, options);
     },
 
     /* THROTTLING */
 
-    _throttle: function ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _throttle: function _throttle(fn, wait, options) {
+      //TODO: Test it, expecially regarding the `this` variable
 
-      return _.throttle ( fn, wait, options );
-
+      return _.throttle(fn, wait, options);
     },
 
     /* TEMPLATE */
 
-    _tmpl: function ( name, options ) {
+    _tmpl: function _tmpl(name, options) {
 
-      return $.tmpl ( this.fullName + '.' + name, options || {} );
-
+      return $.tmpl(this.fullName + '.' + name, options || {});
     },
 
     /* INSERTION */
 
-    insertBefore: function ( selector ) {
+    insertBefore: function insertBefore(selector) {
 
-      this.$element.insertBefore ( selector );
+      this.$element.insertBefore(selector);
 
       return this;
-
     },
 
-    insertAfter: function ( selector ) {
+    insertAfter: function insertAfter(selector) {
 
-      this.$element.insertAfter ( selector );
+      this.$element.insertAfter(selector);
 
       return this;
-
     },
 
-    prependTo: function ( selector ) {
+    prependTo: function prependTo(selector) {
 
-      this.$element.prependTo ( selector );
+      this.$element.prependTo(selector);
 
       return this;
-
     },
 
-    appendTo: function ( selector ) {
+    appendTo: function appendTo(selector) {
 
-      this.$element.appendTo ( selector );
+      this.$element.appendTo(selector);
 
       return this;
-
     }
 
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Widgetize
@@ -1256,7 +1157,9 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -1266,50 +1169,42 @@
 
   /* WIDGETIZE */
 
-  window.Widgetize = function ( $root ) {
+  window.Widgetize = function ($root) {
 
-    for ( var i = 0, l = widgetizers.length; i < l; i++ ) {
+    for (var i = 0, l = widgetizers.length; i < l; i++) {
 
-      widgetizers[i]( $root );
-
+      widgetizers[i]($root);
     }
-
   };
 
   /* METHODS */
 
-  Widgetize.add = function ( widgetizer ) {
+  Widgetize.add = function (widgetizer) {
 
-    widgetizers.push ( widgetizer );
-
+    widgetizers.push(widgetizer);
   };
 
   Widgetize.get = function () {
 
     return widgetizers;
-
   };
 
   /* JQUERY PLUGIN */
 
   $.fn.widgetize = function () {
 
-    Widgetize ( this );
+    Widgetize(this);
 
     return this;
-
   };
 
   /* READY */
 
   $(function () {
 
-    $body.widgetize ();
-
+    $body.widgetize();
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Pointer
@@ -1326,7 +1221,9 @@
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -1369,21 +1266,20 @@
 
   /* EVENTS METHODS */
 
-  _.each ( events, function ( alias, name ) {
+  _.each(events, function (alias, name) {
 
     Pointer[name] = alias;
 
-    $.fn[name] = function ( fn ) {
+    $.fn[name] = function (fn) {
 
-      return fn ? this.on ( alias, fn ) : this.trigger ( alias );
-
+      return fn ? this.on(alias, fn) : this.trigger(alias);
     };
-
   });
 
   /* POINTER LOGIC */
 
-  (function () { //TODO: Maybe remove this
+  (function () {
+    //TODO: Maybe remove this
 
     /* VARIABLES */
 
@@ -1399,156 +1295,137 @@
 
     /* EVENT CREATOR */
 
-    var createEvent = function ( name, originalEvent ) {
+    var createEvent = function createEvent(name, originalEvent) {
 
-      var event = $.Event ( name );
+      var event = $.Event(name);
 
       event.originalEvent = originalEvent;
       event.isPointerEvent = true;
 
       return event;
-
     };
 
     /* HANDLERS */
 
-    var downHandler = function ( event ) {
+    var downHandler = function downHandler(event) {
 
       target = event.target;
       $target = $(target);
 
       startEvent = event;
-      startTimestamp = event.timeStamp || Date.now ();
+      startTimestamp = event.timeStamp || Date.now();
 
       motion = false;
 
-      pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
+      pressTimeout = setTimeout(pressHandler, Pointer.options.press.duration);
 
-      $target.one ( Pointer.move, moveHandler );
-      $target.one ( Pointer.up, upHandler );
-      $target.one ( Pointer.cancel, cancelHandler );
-
+      $target.one(Pointer.move, moveHandler);
+      $target.one(Pointer.up, upHandler);
+      $target.one(Pointer.cancel, cancelHandler);
     };
 
-    var pressHandler = function () { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
+    var pressHandler = function pressHandler() {
+      //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
 
-      $target.trigger ( createEvent ( Pointer.press, startEvent ) );
+      $target.trigger(createEvent(Pointer.press, startEvent));
 
       pressTimeout = false;
-
     };
 
-    var moveHandler = function () {
+    var moveHandler = function moveHandler() {
 
-      if ( pressTimeout ) {
+      if (pressTimeout) {
 
-        clearTimeout ( pressTimeout );
+        clearTimeout(pressTimeout);
         pressTimeout = false;
-
       }
 
       motion = true;
-
     };
 
-    var upHandler = function ( event ) {
+    var upHandler = function upHandler(event) {
 
-      if ( pressTimeout ) {
+      if (pressTimeout) {
 
-        clearTimeout ( pressTimeout );
-
+        clearTimeout(pressTimeout);
       }
 
-      downTimestamp = event.timeStamp || Date.now ();
+      downTimestamp = event.timeStamp || Date.now();
 
-      if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
+      if (motion && downTimestamp - startTimestamp <= Pointer.options.flick.duration) {
 
-        var startXY = $.eventXY ( startEvent ),
-            endXY = $.eventXY ( event ),
+        var startXY = $.eventXY(startEvent),
+            endXY = $.eventXY(event),
             deltaXY = {
-              X: endXY.X - startXY.X,
-              Y: endXY.Y - startXY.Y
-            },
+          X: endXY.X - startXY.X,
+          Y: endXY.Y - startXY.Y
+        },
             absDeltaXY = {
-              X: Math.abs ( deltaXY.X ),
-              Y: Math.abs ( deltaXY.Y )
-            };
+          X: Math.abs(deltaXY.X),
+          Y: Math.abs(deltaXY.Y)
+        };
 
-        if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
+        if (absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold) {
 
-          if ( absDeltaXY.X > absDeltaXY.Y ) {
+          if (absDeltaXY.X > absDeltaXY.Y) {
 
             var orientation = 'horizontal',
-                direction = ( deltaXY.X > 0 ) ? 1 : -1;
-
+                direction = deltaXY.X > 0 ? 1 : -1;
           } else {
 
             var orientation = 'vertical',
-                direction = ( deltaXY.Y > 0 ) ? 1 : -1;
-
+                direction = deltaXY.Y > 0 ? 1 : -1;
           }
 
-          $target.trigger ( createEvent ( Pointer.flick, event ), {
+          $target.trigger(createEvent(Pointer.flick, event), {
             orientation: orientation,
             direction: direction,
             startXY: startXY,
             endXY: endXY
           });
-
         }
-
       }
 
-      if ( !$.browser.is.touchDevice || !motion ) {
+      if (!$.browser.is.touchDevice || !motion) {
 
-        $target.trigger ( createEvent ( Pointer.tap, event ) );
+        $target.trigger(createEvent(Pointer.tap, event));
 
-        if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+        if (downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval) {
 
-          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
+          $target.trigger(createEvent(Pointer.dbltap, event));
         }
 
         prevTapTimestamp = downTimestamp;
-
       }
 
-      if ( !motion ) {
+      if (!motion) {
 
-        $target.off ( Pointer.move, moveHandler );
-
+        $target.off(Pointer.move, moveHandler);
       }
 
-      $target.off ( Pointer.cancel, cancelHandler );
-
+      $target.off(Pointer.cancel, cancelHandler);
     };
 
-    var cancelHandler = function () {
+    var cancelHandler = function cancelHandler() {
 
-      if ( pressTimeout ) {
+      if (pressTimeout) {
 
-        clearTimeout ( pressTimeout );
-
+        clearTimeout(pressTimeout);
       }
 
-      if ( !motion ) {
+      if (!motion) {
 
-        $target.off ( Pointer.move, moveHandler );
-
+        $target.off(Pointer.move, moveHandler);
       }
 
-      $target.off ( Pointer.up, upHandler );
-
+      $target.off(Pointer.up, upHandler);
     };
 
     /* BIND */
 
-    $document.on ( Pointer.down, downHandler );
-
+    $document.on(Pointer.down, downHandler);
   })();
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Factory
@@ -1565,95 +1442,90 @@
 
 //FIXME: Extending widgets is not working!
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* FACTORY */
 
-  $.factory = function ( originalName, base, prototype ) {
+  $.factory = function (originalName, base, prototype) {
 
     // NAME
 
-    var nameParts = originalName.split ( '.' ),
+    var nameParts = originalName.split('.'),
         namespace = nameParts.length > 1 ? nameParts[0] : false,
         name = nameParts.length > 1 ? nameParts[1] : nameParts[0],
         fullName = namespace ? namespace + '.' + name : name;
 
     // NO BASE -> DEFAULT WIDGET BASE
 
-    if ( !prototype ) {
+    if (!prototype) {
 
       prototype = base;
       base = $.Widget;
-
     }
 
     // INIT NAMESPACE
 
-    if ( namespace ) {
+    if (namespace) {
 
       $[namespace] = $[namespace] || {};
-
     }
 
     // CONSTRUCTOR
 
     var existingConstructor = namespace ? $[namespace][name] : $[name];
 
-    var constructor = function ( options, element ) {
+    var constructor = function constructor(options, element) {
 
-      this._create ( options, element );
-
+      this._create(options, element);
     };
 
     // SET CONSTRUCTOR
 
-    if ( namespace ) {
+    if (namespace) {
 
       $[namespace][name] = constructor;
-
     } else {
 
       $[name] = constructor;
-
     }
 
     // EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES
 
-    _.extend ( constructor, existingConstructor, {
-      _proto: _.extend ( {}, prototype ),
+    _.extend(constructor, existingConstructor, {
+      _proto: _.extend({}, prototype),
       _childConstructors: []
     });
 
     // BASE PROTOTYPE
 
-    var basePrototype = new base ();
+    var basePrototype = new base();
 
-    basePrototype.templates = _.merge ( {}, basePrototype.templates, prototype.templates ); //INFO: We need to make the templates hash a property directly on the new instance otherwise we'll modify the templates hash on the prototype that we're inheriting from
-    basePrototype.options = _.merge ( {}, basePrototype.options, prototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
+    basePrototype.templates = _.merge({}, basePrototype.templates, prototype.templates); //INFO: We need to make the templates hash a property directly on the new instance otherwise we'll modify the templates hash on the prototype that we're inheriting from
+    basePrototype.options = _.merge({}, basePrototype.options, prototype.options); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
 
     // PROXIED PROTOTYPE
 
     var proxiedPrototype = {};
 
-    for ( var prop in prototype ) {
+    for (var prop in prototype) {
 
-      if ( !_.isFunction ( prototype[prop] ) ) {
+      if (!_.isFunction(prototype[prop])) {
 
-        if ( !_.isPlainObject ( prototype[prop] ) ) {
+        if (!_.isPlainObject(prototype[prop])) {
 
           proxiedPrototype[prop] = prototype[prop];
-
         }
-
       } else {
 
-        proxiedPrototype[prop] = (function ( prop ) {
+        proxiedPrototype[prop] = (function (prop) {
 
-          var _super = function () {
-              return base.prototype[prop].apply ( this, arguments );
-            };
+          var _super = function _super() {
+            return base.prototype[prop].apply(this, arguments);
+          };
 
           return function () {
 
@@ -1662,23 +1534,19 @@
 
             this._super = _super;
 
-            returnValue = prototype[prop].apply ( this, arguments );
+            returnValue = prototype[prop].apply(this, arguments);
 
             this._super = __super;
 
             return returnValue;
-
           };
-
-        })( prop );
-
+        })(prop);
       }
-
     }
 
     // CONSTRUCTOR PROTOTYPE
 
-    constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
+    constructor.prototype = _.extend(basePrototype, proxiedPrototype, {
       constructor: constructor,
       namespace: namespace,
       name: name,
@@ -1687,51 +1555,45 @@
 
     // CACHE TEMPLATES
 
-    for ( var tmpl_name in prototype.templates ) {
+    for (var tmpl_name in prototype.templates) {
 
-      if ( prototype.templates[tmpl_name] ) {
+      if (prototype.templates[tmpl_name]) {
 
-        $.tmpl.cache[fullName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
-
+        $.tmpl.cache[fullName + '.' + tmpl_name] = $.tmpl(prototype.templates[tmpl_name]);
       }
-
     }
 
     // UPDATE PROTOTYPE CHAIN
 
-    if ( existingConstructor ) {
+    if (existingConstructor) {
 
-      for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
+      for (var i = 0, l = existingConstructor._childConstructors.length; i < l; i++) {
 
         var childPrototype = existingConstructor._childConstructors[i].prototype;
 
-        $.factory ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.name : childPrototype.name ), constructor, existingConstructor._childConstructors[i]._proto );
-
+        $.factory(childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.name : childPrototype.name, constructor, existingConstructor._childConstructors[i]._proto);
       }
 
       delete existingConstructor._childConstructors;
-
     } else {
 
-      base._childConstructors.push ( constructor );
-
+      base._childConstructors.push(constructor);
     }
 
     // CONSTRUCT
 
-    $.factory.bridge ( name, constructor );
+    $.factory.bridge(name, constructor);
 
-    Widgetize.add ( constructor.prototype._widgetize );
+    Widgetize.add(constructor.prototype._widgetize);
 
     // RETURN
 
     return constructor;
-
   };
 
   /* FACTORY BRIDGE */
 
-  $.factory.bridge = function ( name, object ) {
+  $.factory.bridge = function (name, object) {
 
     // NAME
 
@@ -1739,103 +1601,91 @@
 
     // PLUGIN
 
-    $.fn[name] = function ( options ) {
+    $.fn[name] = function (options) {
 
-      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: Nothing to work on
+      if (this.length === 0 && !object.prototype.templates.base) return; //INFO: Nothing to work on
 
-      var isMethodCall = _.isString ( options ),
-          args = _.tail ( arguments ),
+      var isMethodCall = _.isString(options),
+          args = _.tail(arguments),
           returnValue = this;
 
-      if ( isMethodCall ) {
+      if (isMethodCall) {
 
         // METHOD CALL
 
-        this.each ( function () {
+        this.each(function () {
 
           // VARIABLES
 
           var methodValue,
-              instance = $.data ( this, fullName );
+              instance = $.data(this, fullName);
 
           // NO INSTANCE
 
-          if ( !instance ) {
+          if (!instance) {
 
-            instance = new object ( {}, this );
+            instance = new object({}, this);
 
-            $.data ( this, fullName, instance );
-
+            $.data(this, fullName, instance);
           }
 
           // GETTING INSTANCE
 
-          if ( options === 'instance' ) {
+          if (options === 'instance') {
 
             returnValue = instance;
 
             return false;
-
           }
 
           // CHECKING VALID CALL
 
-          if ( !instance ) return; //INFO: No instance found
+          if (!instance) return; //INFO: No instance found
 
-          if ( !_.isFunction ( instance[options] ) || options.charAt ( 0 ) === '_' ) return; //INFO: Private method or property
+          if (!_.isFunction(instance[options]) || options.charAt(0) === '_') return; //INFO: Private method or property
 
           // CALLING
 
-          methodValue = instance[options].apply ( instance, args );
+          methodValue = instance[options].apply(instance, args);
 
-          if ( methodValue !== instance && !_.isUndefined ( methodValue ) ) {
+          if (methodValue !== instance && !_.isUndefined(methodValue)) {
 
             returnValue = methodValue;
 
             return false;
-
           }
-
         });
-
       } else {
 
         // SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS
 
-        if ( args.length ) {
+        if (args.length) {
 
-          options = _.extend.apply ( null, [options].concat ( args ) );
-
+          options = _.extend.apply(null, [options].concat(args));
         }
 
-        this.each ( function () {
+        this.each(function () {
 
           // GET INSTANCE
 
-          var instance = $.data ( this, fullName );
+          var instance = $.data(this, fullName);
 
-          if ( instance ) { // SET OPTIONS
+          if (instance) {
+            // SET OPTIONS
 
-            instance.option ( options || {} );
+            instance.option(options || {});
+          } else {
+            // INSTANCIATE
 
-          } else { // INSTANCIATE
-
-            $.data ( this, fullName, new object ( options, this ) );
-
+            $.data(this, fullName, new object(options, this));
           }
-
         });
-
       }
 
       return returnValue;
-
     };
-
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Expander
@@ -1846,13 +1696,15 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* EXPANDER */
 
-  $.factory ( 'svelto.expander', {
+  $.factory('svelto.expander', {
 
     /* OPTIONS */
 
@@ -1872,73 +1724,62 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.expander' ).expander ();
-
+      $root.find('.expander').expander();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$expander = this.$element;
-      this.$togglers = this.$expander.find ( this.options.selectors.toggler );
+      this.$togglers = this.$expander.find(this.options.selectors.toggler);
 
-      this._isOpen = this.$expander.hasClass ( this.options.classes.open );
-
+      this._isOpen = this.$expander.hasClass(this.options.classes.open);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TOGGLER */
 
-      this._on ( this.$togglers, Pointer.tap, this.toggle );
-
+      this._on(this.$togglers, Pointer.tap, this.toggle);
     },
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
       return this._isOpen;
-
     },
 
-    toggle: function ( force ) {
+    toggle: function toggle(force) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if (!_.isBoolean(force)) {
 
         force = !this._isOpen;
-
       }
 
-      if ( force !== this._isOpen ) {
+      if (force !== this._isOpen) {
 
         this._isOpen = force;
 
-        this.$expander.toggleClass ( this.options.classes.open, this._isOpen );
+        this.$expander.toggleClass(this.options.classes.open, this._isOpen);
 
-        this._trigger ( this._isOpen ? 'open' : 'close' );
-
+        this._trigger(this._isOpen ? 'open' : 'close');
       }
-
     },
 
-    open: function () {
+    open: function open() {
 
-      this.toggle ( true );
-
+      this.toggle(true);
     },
 
-    close: function () {
+    close: function close() {
 
-      this.toggle ( false );
-
+      this.toggle(false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Accordion
@@ -1950,13 +1791,15 @@
  * @requires ../expander/expander.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* ACCORDION */
 
-  $.factory ( 'svelto.accordion', {
+  $.factory('svelto.accordion', {
 
     /* OPTIONS */
 
@@ -1975,107 +1818,90 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.accordion' ).accordion ();
-      
+      $root.find('.accordion').accordion();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$accordion = this.$element;
-      this.$expanders = this.$accordion.children ( this.options.selectors.expander );
+      this.$expanders = this.$accordion.children(this.options.selectors.expander);
       this.expandersNr = this.$expanders.length;
 
-      this.expandersInstances = _.map ( this.$expanders, function ( expander ) {
+      this.expandersInstances = _.map(this.$expanders, function (expander) {
 
-        return $(expander).expander ( 'instance' );
-
+        return $(expander).expander('instance');
       });
 
-      this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
-
+      this.isMultiple = this.$accordion.hasClass(this.options.classes.multiple);
     },
 
-    _events: function () {
+    _events: function _events() {
 
-      if ( !this.isMultiple ) {
+      if (!this.isMultiple) {
 
-        this._on ( this.$expanders, 'expander:open', this.__close_others );
-
+        this._on(this.$expanders, 'expander:open', this.__close_others);
       }
-
     },
 
     /* OPEN */
 
-    __close_others: function ( event, data, node ) {
+    __close_others: function __close_others(event, data, node) {
 
-      for ( var i = 0; i < this.expandersNr; i++ ) {
+      for (var i = 0; i < this.expandersNr; i++) {
 
-        if ( this.$expanders[i] !== node ) {
+        if (this.$expanders[i] !== node) {
 
-          this.expandersInstances[i].close ();
-
+          this.expandersInstances[i].close();
         }
-
       }
-
     },
 
     /* PUBLIC */
 
-    areOpen: function () {
+    areOpen: function areOpen() {
 
-      return _.map ( this.expandersInstances, function ( instance ) {
+      return _.map(this.expandersInstances, function (instance) {
 
-        return instance.isOpen ();
-
+        return instance.isOpen();
       });
-
     },
 
-    toggle: function ( index, force ) {
+    toggle: function toggle(index, force) {
 
       var instance = this.expandersInstances[index],
-          isOpen = instance.isOpen ();
+          isOpen = instance.isOpen();
 
-      if ( !_.isBoolean ( force ) ) {
+      if (!_.isBoolean(force)) {
 
         force = !isOpen;
-
       }
 
-      if ( force !== isOpen ) {
+      if (force !== isOpen) {
 
         var action = force ? 'open' : 'close';
 
         instance[action]();
 
-        this._trigger ( action, {
+        this._trigger(action, {
           index: index
         });
-
       }
-
     },
 
-    open: function ( index ) {
+    open: function open(index) {
 
-      this.toggle ( index, true );
-
+      this.toggle(index, true);
     },
 
-    close: function ( index ) {
+    close: function close(index) {
 
-      this.toggle ( index, false );
-
+      this.toggle(index, false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Autogrow (Input)
@@ -2090,13 +1916,15 @@
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* AUTOGROW INPUT */
 
-  $.factory ( 'svelto.autogrowInput', {
+  $.factory('svelto.autogrowInput', {
 
     /* OPTIONS */
 
@@ -2109,72 +1937,64 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
-
+      $root.find('input.autogrow, .input-wrp.autogrow input').autogrowInput();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$input = this.$element;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this.update ();
-
+      this.update();
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* INPUT / CHANGE */
 
-      this._on ( 'input change', this.update );
-
+      this._on('input change', this.update);
     },
 
     /* PRIVATE */
 
-    _getNeededWidth: function () {
+    _getNeededWidth: function _getNeededWidth() {
 
       //FIXME: Isn't it better to just detach it, or to leave it in the DOM?
 
-      var $span = $( '<span>' + this.$input.val () + '</span>' );
+      var $span = $('<span>' + this.$input.val() + '</span>');
 
-      $span.css ({
-        font: this.$input.css ( 'font' ),
+      $span.css({
+        font: this.$input.css('font'),
         position: 'absolute',
         opacity: 0
       });
 
-      $span.appendTo ( $body );
+      $span.appendTo($body);
 
-      var width = $span.width ();
+      var width = $span.width();
 
-      $span.remove ();
+      $span.remove();
 
       return width;
-
     },
 
     /* PUBLIC */
 
-    update: function () {
+    update: function update() {
 
-      var neededWidth = this._getNeededWidth ( this.$input );
+      var neededWidth = this._getNeededWidth(this.$input);
 
-      this.$input.width ( Math.max ( neededWidth, this.options.minWidth ) );
+      this.$input.width(Math.max(neededWidth, this.options.minWidth));
 
-      this._trigger ( 'update' );
-
+      this._trigger('update');
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Autogrow (Textarea)
@@ -2189,13 +2009,15 @@
 //FIXME: Does it work with `.large` textareas?
 //TODO: Make it the same height as a normal input at minimum, for beautiness
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* AUTOGROW */
 
-  $.factory ( 'svelto.autogrowTextarea', {
+  $.factory('svelto.autogrowTextarea', {
 
     /* OPTIONS */
 
@@ -2208,48 +2030,41 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
-
+      $root.find('textarea.autogrow, .textarea-wrp.autogrow textarea').autogrowTextarea();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$textarea = this.$element;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this.update ();
-
+      this.update();
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* INPUT / CHANGE */
 
-      this._on ( 'input change', this.update );
-
+      this._on('input change', this.update);
     },
 
     /* PUBLIC */
 
-    update: function () {
+    update: function update() {
 
-      var neededHeight = this.$textarea.height ( 1 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
+      var neededHeight = this.$textarea.height(1)[0].scrollHeight - parseFloat(this.$textarea.css('padding-top')) - parseFloat(this.$textarea.css('padding-bottom'));
 
-      this.$textarea.height ( Math.max ( neededHeight, this.options.minHeight ) );
+      this.$textarea.height(Math.max(neededHeight, this.options.minHeight));
 
-      this._trigger ( 'update' );
-
+      this._trigger('update');
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Blurred
@@ -2260,20 +2075,19 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* BLURRED */
 
-  $.fn.blurred = function ( force ) {
+  $.fn.blurred = function (force) {
 
-    return this.toggleClass ( 'blurred', force );
-
+    return this.toggleClass('blurred', force);
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - BT Each
@@ -2284,20 +2098,19 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* BINARY TREE .each () */
 
-  $.fn.btEach = function ( callback, startIndex ) {
+  $.fn.btEach = function (callback, startIndex) {
 
-    return _.btEach ( this, callback, startIndex );
-
+    return _.btEach(this, callback, startIndex);
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Carousel
@@ -2310,13 +2123,15 @@
 
 //TODO: Add drag support instead of flick
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* CAROUSEL */
 
-  $.factory ( 'svelto.carousel', {
+  $.factory('svelto.carousel', {
 
     /* OPTIONS */
 
@@ -2346,100 +2161,92 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.carousel' ).carousel ();
-
+      $root.find('.carousel').carousel();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$carousel = this.$element;
-      this.$prev = this.$carousel.find ( this.options.selectors.prev );
-      this.$next = this.$carousel.find ( this.options.selectors.next );
-      this.$indicators = this.$carousel.find ( this.options.selectors.indicator );
-      this.$itemsWrp = this.$carousel.find ( this.options.selectors.itemsWrp );
-      this.$items = this.$itemsWrp.find ( this.options.selectors.item );
+      this.$prev = this.$carousel.find(this.options.selectors.prev);
+      this.$next = this.$carousel.find(this.options.selectors.next);
+      this.$indicators = this.$carousel.find(this.options.selectors.indicator);
+      this.$itemsWrp = this.$carousel.find(this.options.selectors.itemsWrp);
+      this.$items = this.$itemsWrp.find(this.options.selectors.item);
 
       this.maxIndex = this.$items.length - 1;
 
       this._previous = false;
       this._current = false;
 
-      if ( this.options.cycle ) {
+      if (this.options.cycle) {
 
-        this.timer = $.timer ( this.next.bind ( this ), this.options.interval, true );
-
+        this.timer = $.timer(this.next.bind(this), this.options.interval, true);
       }
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      var $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
+      var $current = this.$items.filter('.' + this.options.classes.current).first();
 
       console.log($current.toArray());
 
-      if ( $current.length > 0 ) {
+      if ($current.length > 0) {
 
-        this._current = this._getItemObj ( this.$items.index ( $current ) );
-
+        this._current = this._getItemObj(this.$items.index($current));
       } else {
 
-        this.set ( this.options.startingIndex );
-
+        this.set(this.options.startingIndex);
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* PREV */
 
-      this._on ( this.$prev, Pointer.tap, this.previous );
+      this._on(this.$prev, Pointer.tap, this.previous);
 
       /* NEXT */
 
-      this._on ( this.$next, Pointer.tap, this.next );
+      this._on(this.$next, Pointer.tap, this.next);
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* INDICATOR TAP */
 
-      this._on ( this.$indicators, Pointer.tap, this.__indicatorTap );
+      this._on(this.$indicators, Pointer.tap, this.__indicatorTap);
 
       /* FLICK */
 
-      this._on ( Pointer.flick, this.__flick );
+      this._on(Pointer.flick, this.__flick);
 
       /* CYCLE */
 
-      if ( this.options.cycle ) {
+      if (this.options.cycle) {
 
-        this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
-        this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
-
+        this._on(this.$itemsWrp, Pointer.enter, this.__cycleEnter);
+        this._on(this.$itemsWrp, Pointer.leave, this.__cycleLeave);
       }
-
     },
 
     /* KEYDOWN */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.LEFT:
         case $.ui.keyCode.UP:
-          this.previous ();
+          this.previous();
           break;
 
         case $.ui.keyCode.RIGHT:
         case $.ui.keyCode.DOWN:
         case $.ui.keyCode.SPACE:
-          this.next ();
+          this.next();
           break;
 
         default:
@@ -2447,151 +2254,130 @@
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
-
+      event.preventDefault();
+      event.stopImmediatePropagation();
     },
 
     /* CYCLE */
 
-    __cycleEnter: function () {
+    __cycleEnter: function __cycleEnter() {
 
-      this.timer.pause ();
-
+      this.timer.pause();
     },
 
-    __cycleLeave: function () {
+    __cycleLeave: function __cycleLeave() {
 
-      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      this.timer.remaining(Math.max(this.options.intervalMinimumRemaining, this.timer.remaining() || 0));
 
-      this.timer.play ();
-
+      this.timer.play();
     },
 
     /* INDICATOR TAP */
 
-    __indicatorTap: function ( event, indicator ) {
+    __indicatorTap: function __indicatorTap(event, indicator) {
 
-      this.set ( this.$indicators.index ( indicator ) );
-
+      this.set(this.$indicators.index(indicator));
     },
 
     /* FLICK */
 
-    __flick: function ( event, data ) {
+    __flick: function __flick(event, data) {
 
-      if ( data.orientation === 'horizontal' ) {
+      if (data.orientation === 'horizontal') {
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
         this[data.direction === -1 ? 'next' : 'previous']();
-
       }
-
     },
 
     /* ITEM OBJ */
 
-    _getItemObj ( index ) {
+    _getItemObj: function _getItemObj(index) {
 
       return {
         index: index,
-        $item: this.$items.eq ( index ),
-        $indicator: this.$indicators.eq ( index )
+        $item: this.$items.eq(index),
+        $indicator: this.$indicators.eq(index)
       };
-
     },
 
     /* INDEX */
 
-    _getPrevIndex ( index ) {
+    _getPrevIndex: function _getPrevIndex(index) {
 
-      return ( index > 0 ) ? index - 1 : this.maxIndex;
-
+      return index > 0 ? index - 1 : this.maxIndex;
     },
 
-    _getNextIndex ( index ) {
+    _getNextIndex: function _getNextIndex(index) {
 
-      return ( index < this.maxIndex ) ? index + 1 : 0;
-
+      return index < this.maxIndex ? index + 1 : 0;
     },
 
     /* API */
 
-    get: function () {
+    get: function get() {
 
       return this._current.index;
-
     },
 
-    set: function ( index ) {
+    set: function set(index) {
 
-      index = Number ( index );
+      index = Number(index);
 
-      if ( !this._setting && !_.isNaN ( index ) && index >= 0 && index <= this.maxIndex && ( !this._current || index !== this._current.index ) ) {
+      if (!this._setting && !_.isNaN(index) && index >= 0 && index <= this.maxIndex && (!this._current || index !== this._current.index)) {
 
         this._setting = true;
 
-        if ( this._current ) {
+        if (this._current) {
 
-          this._current.$item.removeClass ( this.options.classes.current ).addClass ( this.options.classes.prev );
-          this._current.$indicator.removeClass ( this.options.classes.current );
+          this._current.$item.removeClass(this.options.classes.current).addClass(this.options.classes.prev);
+          this._current.$indicator.removeClass(this.options.classes.current);
 
           this._previous = this._current;
-
         }
 
-        this._current = this._getItemObj ( index );
-        this._current.$item.addClass ( this.options.classes.current );
-        this._current.$indicator.addClass ( this.options.classes.current );
+        this._current = this._getItemObj(index);
+        this._current.$item.addClass(this.options.classes.current);
+        this._current.$indicator.addClass(this.options.classes.current);
 
-        if ( this.options.timer ) {
+        if (this.options.timer) {
 
-          this.timer.stop ();
-
+          this.timer.stop();
         }
 
-        this._delay ( function () {
+        this._delay(function () {
 
           this._setting = false;
 
-          if ( this._previous ) {
+          if (this._previous) {
 
-            this._previous.$item.removeClass ( this.options.classes.prev );
-
+            this._previous.$item.removeClass(this.options.classes.prev);
           }
 
-          if ( this.options.timer ) {
+          if (this.options.timer) {
 
-            this.timer.play ();
-
+            this.timer.play();
           }
+        }, this.options.animations.cycle);
 
-        }, this.options.animations.cycle );
-
-        this._trigger ( 'change' );
-
+        this._trigger('change');
       }
-
     },
 
-    previous: function () {
+    previous: function previous() {
 
-      this.set ( this._getPrevIndex ( this._current.index ) );
-
+      this.set(this._getPrevIndex(this._current.index));
     },
 
-    next: function () {
+    next: function next() {
 
-      this.set ( this._getNextIndex ( this._current.index ) );
-
+      this.set(this._getNextIndex(this._current.index));
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Checkbox
@@ -2602,13 +2388,15 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* CHECKBOX */
 
-  $.factory ( 'svelto.checkbox', {
+  $.factory('svelto.checkbox', {
 
     /* OPTIONS */
 
@@ -2622,102 +2410,90 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.checkbox' ).checkbox ();
-
+      $root.find('.checkbox').checkbox();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$checkbox = this.$element;
-      this.$input = this.$checkbox.find ( 'input' );
-
+      this.$input = this.$checkbox.find('input');
     },
 
-    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init: function _init() {
+      //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-      var isChecked = this.get (),
-          hasClass = this.$checkbox.hasClass ( 'checked' );
+      var isChecked = this.get(),
+          hasClass = this.$checkbox.hasClass('checked');
 
-      if ( isChecked !== hasClass ) {
+      if (isChecked !== hasClass) {
 
-        this.$checkbox.toggleclass ( 'checked', isChecked );
-
+        this.$checkbox.toggleclass('checked', isChecked);
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( true, 'change', this.__change );
+      this._on(true, 'change', this.__change);
 
       /* TAP */
 
-      this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
-
+      this._on(Pointer.tap, _.wrap(undefined, this.toggle));
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      var isChecked = this.get ();
+      var isChecked = this.get();
 
-      this.$checkbox.toggleClass ( 'checked', isChecked );
+      this.$checkbox.toggleClass('checked', isChecked);
 
-      this._trigger ( 'change', { checked: isChecked } );
-      this._trigger ( isChecked ? 'check' : 'uncheck' );
-
+      this._trigger('change', { checked: isChecked });
+      this._trigger(isChecked ? 'check' : 'uncheck');
     },
 
     /* PUBLIC */
 
-    get: function () { //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
+    get: function get() {
+      //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
 
-      return this.$input.prop ( 'checked' );
-
+      return this.$input.prop('checked');
     },
 
-    toggle: function ( force ) {
+    toggle: function toggle(force) {
 
-      var isChecked = this.get ();
+      var isChecked = this.get();
 
-      if ( _.isUndefined ( force ) ) {
+      if (_.isUndefined(force)) {
 
         force = !isChecked;
-
       }
 
-      if ( force !== isChecked ) {
+      if (force !== isChecked) {
 
-        this.$input.prop ( 'checked', force ).trigger ( 'change' );
+        this.$input.prop('checked', force).trigger('change');
 
-        this._trigger ( 'change', { checked: force } );
-        this._trigger ( force ? 'check' : 'uncheck' ); //FIXME: is triggered twice per toggle
-
+        this._trigger('change', { checked: force });
+        this._trigger(force ? 'check' : 'uncheck'); //FIXME: is triggered twice per toggle
       }
-
     },
 
-    check: function () {
+    check: function check() {
 
-      this.toggle ( true );
-
+      this.toggle(true);
     },
 
-    uncheck: function () {
+    uncheck: function uncheck() {
 
-      this.toggle ( false );
-
+      this.toggle(false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Color Helper
@@ -2726,7 +2502,9 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-;(function ( _, window, document, undefined ) {
+'use strict';
+
+;(function (_, window, document, undefined) {
 
   'use strict';
 
@@ -2736,79 +2514,71 @@
 
     /* COLOR SPACES CONVERTERS */
 
-    hex2rgb: function ( hex ) {
+    hex2rgb: function hex2rgb(hex) {
 
       return {
-        r: this.hex2dec ( hex.r ),
-        g: this.hex2dec ( hex.g ),
-        b: this.hex2dec ( hex.b )
+        r: this.hex2dec(hex.r),
+        g: this.hex2dec(hex.g),
+        b: this.hex2dec(hex.b)
       };
-
     },
 
-    hex2hsv: function ( hex ) {
+    hex2hsv: function hex2hsv(hex) {
 
-      return this.rgb2hsv ( this.hex2rgb ( hex ) );
-
+      return this.rgb2hsv(this.hex2rgb(hex));
     },
 
-    rgb2hex: function ( rgb ) {
+    rgb2hex: function rgb2hex(rgb) {
 
       return {
-        r: this.dec2hex ( rgb.r ),
-        g: this.dec2hex ( rgb.g ),
-        b: this.dec2hex ( rgb.b )
+        r: this.dec2hex(rgb.r),
+        g: this.dec2hex(rgb.g),
+        b: this.dec2hex(rgb.b)
       };
-
     },
 
-    rgb2hsv: function ( rgb ) {
+    rgb2hsv: function rgb2hsv(rgb) {
 
       var r = rgb.r / 255,
-        g = rgb.g / 255,
-        b = rgb.b / 255,
-        h, s,
-        v = Math.max ( r, g, b ),
-        diff = v - Math.min ( r, g, b ),
-        diffc = function ( c ) {
-          return ( v - c ) / 6 / diff + 1 / 2;
-        };
+          g = rgb.g / 255,
+          b = rgb.b / 255,
+          h,
+          s,
+          v = Math.max(r, g, b),
+          diff = v - Math.min(r, g, b),
+          diffc = function diffc(c) {
+        return (v - c) / 6 / diff + 1 / 2;
+      };
 
-      if ( diff === 0 ) {
+      if (diff === 0) {
 
         h = s = 0;
-
       } else {
 
         s = diff / v;
 
-        var rr = diffc ( r ),
-          gg = diffc ( g ),
-          bb = diffc ( b );
+        var rr = diffc(r),
+            gg = diffc(g),
+            bb = diffc(b);
 
-        if ( r === v ) {
+        if (r === v) {
 
           h = bb - gg;
+        } else if (g === v) {
 
-        } else if ( g === v ) {
+          h = 1 / 3 + rr - bb;
+        } else if (b === v) {
 
-          h = ( 1 / 3 ) + rr - bb;
-
-        } else if ( b === v ) {
-
-          h = ( 2 / 3 ) + gg - rr;
-
+          h = 2 / 3 + gg - rr;
         }
 
-        if ( h < 0 ) {
+        if (h < 0) {
 
           h += 1;
-
-        } else if ( h > 1 ) {
+        } else if (h > 1) {
 
           h -= 1;
         }
-
       }
 
       return {
@@ -2816,41 +2586,40 @@
         s: s * 100, //FIXME: removed Math.round, test if is ok
         v: v * 100 //FIXME: removed Math.round, test if is ok
       };
-
     },
 
-    hsv2hex: function ( hsv ) {
+    hsv2hex: function hsv2hex(hsv) {
 
-      return this.rgb2hex ( this.hsv2rgb ( hsv ) );
-
+      return this.rgb2hex(this.hsv2rgb(hsv));
     },
 
-    hsv2rgb: function ( hsv ) {
+    hsv2rgb: function hsv2rgb(hsv) {
 
-      var r, g, b,
-        h = hsv.h,
-        s = hsv.s,
-        v = hsv.v;
+      var r,
+          g,
+          b,
+          h = hsv.h,
+          s = hsv.s,
+          v = hsv.v;
 
       s /= 100;
       v /= 100;
 
-      if ( s === 0 ) {
+      if (s === 0) {
 
         r = g = b = v;
-
       } else {
 
         var i, f, p, q, t;
 
         h /= 60;
-        i = Math.floor ( h );
+        i = Math.floor(h);
         f = h - i;
-        p = v * ( 1 - s );
-        q = v * ( 1 - s * f );
-        t = v * ( 1 - s * ( 1 - f ) );
+        p = v * (1 - s);
+        q = v * (1 - s * f);
+        t = v * (1 - s * (1 - f));
 
-        switch ( i ) {
+        switch (i) {
 
           case 0:
             r = v;
@@ -2888,63 +2657,55 @@
             b = q;
 
         }
-
       }
 
       return {
-        r: Math.round ( r * 255 ),
-        g: Math.round ( g * 255 ),
-        b: Math.round ( b * 255 )
+        r: Math.round(r * 255),
+        g: Math.round(g * 255),
+        b: Math.round(b * 255)
       };
-
     },
 
-    hsv2hsl: function ( hsv ) {
+    hsv2hsl: function hsv2hsl(hsv) {
 
       var s = hsv.s / 100,
-        v = hsv.v / 100,
-        tempL = ( 2 - s ) * v,
-        tempS = s * v;
+          v = hsv.v / 100,
+          tempL = (2 - s) * v,
+          tempS = s * v;
 
       return {
         h: hsv.h,
-        s: ( tempS / ( ( tempL <= 1 ) ? tempL : 2 - tempL ) ) * 100,
-        l: ( tempL / 2 ) * 100
+        s: tempS / (tempL <= 1 ? tempL : 2 - tempL) * 100,
+        l: tempL / 2 * 100
       };
-
     },
 
-    hsl2hsv: function ( hsl ) {
+    hsl2hsv: function hsl2hsv(hsl) {
 
       var l = hsl.l / 100 * 2,
-        s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
+          s = hsl.s / 100 * (l <= 1 ? l : 2 - l);
 
       return {
         h: hsl.h,
-        s: ( 2 * s ) / ( l + s ) * 100,
-        v: ( l + s ) / 2 * 100
+        s: 2 * s / (l + s) * 100,
+        v: (l + s) / 2 * 100
       };
-
     },
 
     /* SCALE CONVERTERS */
 
-    dec2hex: function ( dec ) {
+    dec2hex: function dec2hex(dec) {
 
-      return _.padLeft ( dec.toString ( 16 ), 2, '0' );
-
+      return _.padLeft(dec.toString(16), 2, '0');
     },
 
-    hex2dec: function ( hex ) {
+    hex2dec: function hex2dec(hex) {
 
-      return parseInt ( hex, 16 );
-
+      return parseInt(hex, 16);
     }
 
   };
-
-}( _, window, document ));
-
+})(_, window, document);
 
 /* =========================================================================
  * Svelto - Hex Color
@@ -2955,44 +2716,43 @@
  * @requires ../color_helper/colorHelper.js
  * ========================================================================= */
 
-;(function ( _, window, document, undefined ) {
+'use strict';
+
+;(function (_, window, document, undefined) {
 
   'use strict';
 
   /* HEX COLOR */
 
-  window.HexColor = function ( value ) {
+  window.HexColor = function (value) {
 
-    if ( _.isString ( value ) ) {
+    if (_.isString(value)) {
 
-      value = value.replace ( '#', '' );
+      value = value.replace('#', '');
 
-       if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
+      if (/^([0-9a-f]{3}){2}$/i.test(value)) {
+        //INFO: full 6-chars color
 
-        this.hsv = ColorHelper.hex2hsv ({
+        this.hsv = ColorHelper.hex2hsv({
           r: value[0] + value[1],
           g: value[2] + value[3],
           b: value[4] + value[5]
         });
+      } else if (/^[0-9a-f]{3}$/i.test(value)) {
+        //INFO: shorthand 3-chars color
 
-      } else if ( /^[0-9a-f]{3}$/i.test ( value ) ) { //INFO: shorthand 3-chars color
-
-        this.hsv = ColorHelper.hex2hsv ({
+        this.hsv = ColorHelper.hex2hsv({
           r: value[0] + value[0],
           g: value[1] + value[1],
           b: value[2] + value[2]
         });
-
       } else {
 
         return this;
-
       }
 
       this.isValid = true;
-
     }
-
   };
 
   /* HEX COLOR PROTOTYPE */
@@ -3007,18 +2767,15 @@
       v: 0
     },
 
-    getHexStr: function () {
+    getHexStr: function getHexStr() {
 
-      var hex = ColorHelper.hsv2hex ( this.hsv );
+      var hex = ColorHelper.hsv2hex(this.hsv);
 
       return '#' + hex.r + hex.g + hex.b;
-
     }
 
   };
-
-}( _, window, document ));
-
+})(_, window, document);
 
 /* =========================================================================
  * Svelto - Colorpicker
@@ -3034,13 +2791,15 @@
 //TODO: Add support for alpha channel
 //TODO: Add a $bgs variable where we update the background
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* COLORPICKER */
 
-  $.factory ( 'svelto.colorpicker', {
+  $.factory('svelto.colorpicker', {
 
     /* OPTIONS */
 
@@ -3065,118 +2824,112 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.colorpicker' ).colorpicker ();
-
+      $root.find('.colorpicker').colorpicker();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$colorpicker = this.$element;
-      this.$sbWrp = this.$colorpicker.find ( this.options.selectors.sb.wrp );
-      this.$sbHandler = this.$sbWrp.find ( this.options.selectors.sb.handler );
-      this.$hueWrp = this.$colorpicker.find ( this.options.selectors.hue.wrp );
-      this.$hueHandler = this.$hueWrp.find ( this.options.selectors.hue.handler );
+      this.$sbWrp = this.$colorpicker.find(this.options.selectors.sb.wrp);
+      this.$sbHandler = this.$sbWrp.find(this.options.selectors.sb.handler);
+      this.$hueWrp = this.$colorpicker.find(this.options.selectors.hue.wrp);
+      this.$hueHandler = this.$hueWrp.find(this.options.selectors.hue.handler);
 
-      this.$input = this.$colorpicker.find ( this.options.selectors.input );
+      this.$input = this.$colorpicker.find(this.options.selectors.input);
 
-      this.sbWrpSize = this.$sbWrp.width ();
+      this.sbWrpSize = this.$sbWrp.width();
 
       this.hueWrpHeight = this.sbWrpSize;
 
-      this.color = new HexColor ();
+      this.color = new HexColor();
       this.hex = '';
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      if ( !this.set ( this.$input.val () ) ) {
+      if (!this.set(this.$input.val())) {
 
-        this.color = new HexColor ( this.options.defaultColor );
+        this.color = new HexColor(this.options.defaultColor);
 
-        this._updateSb ();
-        this._updateHue ();
-
+        this._updateSb();
+        this._updateHue();
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( this.$input, 'change', this.__change );
+      this._on(this.$input, 'change', this.__change);
 
       /* SB KEYDOWN */
 
-      this._onHover ( this.$sbWrp, [$document, 'keydown', this.__sbKeydown] );
+      this._onHover(this.$sbWrp, [$document, 'keydown', this.__sbKeydown]);
 
       /* SB DRAG */
 
-      this.$sbHandler.draggable ({
-        draggable: this.isEnabled.bind ( this ),
+      this.$sbHandler.draggable({
+        draggable: this.isEnabled.bind(this),
         $proxy: this.$sbWrp,
         constrainer: {
           $element: this.$sbWrp,
           constrainCenter: true
         },
         callbacks: {
-          move: this.__sbDragMove.bind ( this ),
-          end: this.__sbDragEnd.bind ( this )
+          move: this.__sbDragMove.bind(this),
+          end: this.__sbDragEnd.bind(this)
         }
       });
 
       /* HUE KEYDOWN */
 
-      this._onHover ( this.$hueWrp, [$document, 'keydown', this.__hueKeydown] );
+      this._onHover(this.$hueWrp, [$document, 'keydown', this.__hueKeydown]);
 
       /* HUE DRAG */
 
-      this.$hueHandler.draggable ({
-        draggable: this.isEnabled.bind ( this ),
+      this.$hueHandler.draggable({
+        draggable: this.isEnabled.bind(this),
         axis: 'y',
         $proxy: this.$hueWrp,
         constrainer: {
           $element: this.$hueWrp
         },
         callbacks: {
-          move: this.__hueDragMove.bind ( this ),
-          end: this.__hueDragEnd.bind ( this )
+          move: this.__hueDragMove.bind(this),
+          end: this.__hueDragEnd.bind(this)
         }
       });
-
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      this.set ( this.$input.val () );
-
+      this.set(this.$input.val());
     },
 
     /* SB ARROWS */
 
-    __sbKeydown: function ( event ) {
+    __sbKeydown: function __sbKeydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.UP:
-          this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
+          this.color.hsv.v = Math.min(100, this.color.hsv.v + 1);
           break;
 
         case $.ui.keyCode.RIGHT:
-          this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
+          this.color.hsv.s = Math.min(100, this.color.hsv.s + 1);
           break;
 
         case $.ui.keyCode.DOWN:
-          this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
+          this.color.hsv.v = Math.max(0, this.color.hsv.v - 1);
           break;
 
         case $.ui.keyCode.LEFT:
-          this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
+          this.color.hsv.s = Math.max(0, this.color.hsv.s - 1);
           break;
 
         default:
@@ -3184,55 +2937,50 @@
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
+      event.preventDefault();
+      event.stopImmediatePropagation();
 
-      this._updateSb ();
-      this._updateInput ();
-
+      this._updateSb();
+      this._updateInput();
     },
 
     /* SB DRAG */
 
-    _sbDragSet: function ( XY, update ) {
+    _sbDragSet: function _sbDragSet(XY, update) {
 
-      this.color.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.color.hsv.s = _.clamp(0, XY.X, this.sbWrpSize) * 100 / this.sbWrpSize;
+      this.color.hsv.v = 100 - _.clamp(0, XY.Y, this.sbWrpSize) * 100 / this.sbWrpSize;
 
-      this._updateSb ();
+      this._updateSb();
 
-      if ( update ) {
+      if (update) {
 
-        this._updateInput ();
-
+        this._updateInput();
       }
-
     },
 
-    __sbDragMove: function ( data ) {
+    __sbDragMove: function __sbDragMove(data) {
 
-      this._sbDragSet ( data.moveXY, this.options.live );
-
+      this._sbDragSet(data.moveXY, this.options.live);
     },
 
-    __sbDragEnd: function ( data ) {
+    __sbDragEnd: function __sbDragEnd(data) {
 
-      this._sbDragSet ( data.endXY, true );
-
+      this._sbDragSet(data.endXY, true);
     },
 
     /* HUE ARROWS */
 
-    __hueKeydown: function ( event ) {
+    __hueKeydown: function __hueKeydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.UP:
-          this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
+          this.color.hsv.h = Math.min(359, this.color.hsv.h + 1);
           break;
 
         case $.ui.keyCode.DOWN:
-          this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
+          this.color.hsv.h = Math.max(0, this.color.hsv.h - 1);
           break;
 
         default:
@@ -3240,111 +2988,97 @@
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
+      event.preventDefault();
+      event.stopImmediatePropagation();
 
-      this._updateHue ();
-      this._updateInput ();
-
+      this._updateHue();
+      this._updateInput();
     },
 
     /* HUE DRAG */
 
-    _hueDragSet: function ( XY, update ) {
+    _hueDragSet: function _hueDragSet(XY, update) {
 
-      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.color.hsv.h = 359 - _.clamp(0, XY.Y, this.hueWrpHeight) * 359 / this.hueWrpHeight;
 
-      this._updateHue ();
+      this._updateHue();
 
-      if ( update ) {
+      if (update) {
 
-        this._updateInput ();
-
+        this._updateInput();
       }
-
     },
 
-    __hueDragMove: function ( data ) {
+    __hueDragMove: function __hueDragMove(data) {
 
-      this._hueDragSet ( data.moveXY, this.options.live );
-
+      this._hueDragSet(data.moveXY, this.options.live);
     },
 
-    __hueDragEnd: function ( data ) {
+    __hueDragEnd: function __hueDragEnd(data) {
 
-      this._hueDragSet ( data.endXY, true );
-
+      this._hueDragSet(data.endXY, true);
     },
 
     /* UPDATE */
 
-    _updateSb: function () {
+    _updateSb: function _updateSb() {
 
-      var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
+      var hsl = ColorHelper.hsv2hsl(this.color.hsv),
           translateX = this.sbWrpSize / 100 * this.color.hsv.s,
-          translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
+          translateY = this.sbWrpSize / 100 * (100 - this.color.hsv.v);
 
-      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
-
+      this.$sbHandler.hsl(hsl.h, hsl.s, hsl.l).translate(translateX, translateY);
     },
 
-    _updateHue: function () {
+    _updateHue: function _updateHue() {
 
-      var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
-          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) );
+      var hsl = ColorHelper.hsv2hsl(this.color.hsv),
+          translateY = this.hueWrpHeight / 100 * (100 - this.color.hsv.h / 360 * 100);
 
-      this.$hueHandler.hsl ( this.color.hsv.h, 100, 50 ).translateY ( translateY );
-      this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
-      this.$sbWrp.hsl ( this.color.hsv.h, 100, 50 );
-
+      this.$hueHandler.hsl(this.color.hsv.h, 100, 50).translateY(translateY);
+      this.$sbHandler.hsl(hsl.h, hsl.s, hsl.l);
+      this.$sbWrp.hsl(this.color.hsv.h, 100, 50);
     },
 
-    _updateInput: function () {
+    _updateInput: function _updateInput() {
 
-      this.hex = this.color.getHexStr ();
+      this.hex = this.color.getHexStr();
 
-      this.$input.val ( this.hex ).trigger ( 'change' );
+      this.$input.val(this.hex).trigger('change');
 
-      this._trigger ( 'change', { color: this.hex } );
-
+      this._trigger('change', { color: this.hex });
     },
 
-    _update: function () {
+    _update: function _update() {
 
-      this._updateSb ();
-      this._updateHue ();
-      this._updateInput ();
-
+      this._updateSb();
+      this._updateHue();
+      this._updateInput();
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
-      return this.color.getHexStr ();
-
+      return this.color.getHexStr();
     },
 
-    set: function ( color ) {
+    set: function set(color) {
 
-      var newColor = new HexColor ( color );
+      var newColor = new HexColor(color);
 
-      if ( newColor.isValid && !_.isEqual ( newColor.hsv, this.color.hsv ) ) {
+      if (newColor.isValid && !_.isEqual(newColor.hsv, this.color.hsv)) {
 
         this.color = newColor;
 
-        this._update ();
-
+        this._update();
       }
 
       return newColor.isValid;
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Cookie
@@ -3357,7 +3091,9 @@
 
 /* COOKIE */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -3370,26 +3106,25 @@
 
   $.cookie = {
 
-    get: function ( key ) {
+    get: function get(key) {
 
-      if ( !key ) return null;
+      if (!key) return null;
 
-      return decode ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
-
+      return decode(document.cookie.replace(new RegExp('(?:(?:^|.*;)\\s*' + encode(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=\\s*([^;]*).*$)|^.*$'), '$1')) || null;
     },
 
-    set: function ( key, value, end, path, domain, secure ) {
+    set: function set(key, value, end, path, domain, secure) {
 
-      if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
+      if (!key || /^(?:expires|max\-age|path|domain|secure)$/i.test(key)) return false;
 
       var expires = '';
 
-      if ( end ) {
+      if (end) {
 
-        switch ( end.constructor ) {
+        switch (end.constructor) {
 
           case Number:
-            expires = ( end === Infinity ) ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
+            expires = end === Infinity ? '; expires=Fri, 31 Dec 9999 23:59:59 GMT' : '; max-age=' + end;
             break;
 
           case String:
@@ -3397,55 +3132,47 @@
             break;
 
           case Date:
-            expires = '; expires=' + end.toUTCString ();
+            expires = '; expires=' + end.toUTCString();
             break;
 
         }
-
       }
 
-      document.cookie = encode ( key ) + '=' + encode ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
+      document.cookie = encode(key) + '=' + encode(value) + expires + (domain ? '; domain=' + domain : '') + (path ? '; path=' + path : '') + (secure ? '; secure' : '');
 
       return true;
-
     },
 
-    remove: function ( key, path, domain ) {
+    remove: function remove(key, path, domain) {
 
-      if ( !this.has ( key ) ) return false;
+      if (!this.has(key)) return false;
 
-      document.cookie = encode ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
+      document.cookie = encode(key) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + (domain ? '; domain=' + domain : '') + (path ? '; path=' + path : '');
 
       return true;
-
     },
 
-    has: function ( key ) {
+    has: function has(key) {
 
-      if ( !key ) return false;
+      if (!key) return false;
 
-      return ( new RegExp ( '(?:^|;\\s*)' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
-
+      return new RegExp('(?:^|;\\s*)' + encode(key).replace(/[\-\.\+\*]/g, '\\$&') + '\\s*\\=').test(document.cookie);
     },
 
-    keys: function () {
+    keys: function keys() {
 
-      var keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
+      var keys = document.cookie.replace(/((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '').split(/\s*(?:\=[^;]*)?;\s*/);
 
-      for ( var i = 0, l = keys.length; i < l; i++ ) {
+      for (var i = 0, l = keys.length; i < l; i++) {
 
-        keys[i] = decode ( keys[i] );
-
+        keys[i] = decode(keys[i]);
       }
 
       return keys;
-
     }
 
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Datepicker
@@ -3462,13 +3189,15 @@
 //TODO: Add support for setting first day of the week
 //INFO: We use the ormat: YYYY-MM-DD
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* DATEPICKER */
 
-  $.factory ( 'svelto.datepicker', {
+  $.factory('svelto.datepicker', {
 
     /* OPTIONS */
 
@@ -3510,92 +3239,85 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.datepicker' ).datepicker ();
-
+      $root.find('.datepicker').datepicker();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$datepicker = this.$element;
-      this.$input = this.$datepicker.find ( this.options.selectors.input );
+      this.$input = this.$datepicker.find(this.options.selectors.input);
 
-      this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.prev );
-      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.navigation.title );
-      this.$navigationNext = this.$datepicker.find ( this.options.selectors.navigation.next );
+      this.$navigationPrev = this.$datepicker.find(this.options.selectors.navigation.prev);
+      this.$navigationTitle = this.$datepicker.find(this.options.selectors.navigation.title);
+      this.$navigationNext = this.$datepicker.find(this.options.selectors.navigation.next);
 
-      this.$daysPrev = this.$datepicker.find ( this.options.selectors.day.prev );
-      this.$daysCurrent = this.$datepicker.find ( this.options.selectors.day.current );
-      this.$daysNext = this.$datepicker.find ( this.options.selectors.day.next );
-      this.$daysAll = this.$daysPrev.add ( this.$daysCurrent ).add ( this.$daysNext );
+      this.$daysPrev = this.$datepicker.find(this.options.selectors.day.prev);
+      this.$daysCurrent = this.$datepicker.find(this.options.selectors.day.current);
+      this.$daysNext = this.$datepicker.find(this.options.selectors.day.next);
+      this.$daysAll = this.$daysPrev.add(this.$daysCurrent).add(this.$daysNext);
 
-      if ( !(this.options.date.today instanceof Date) ) {
+      if (!(this.options.date.today instanceof Date)) {
 
-        this.options.date.today = new Date ();
-
+        this.options.date.today = new Date();
       }
 
-      if ( !(this.options.date.current instanceof Date) ) {
+      if (!(this.options.date.current instanceof Date)) {
 
-        this.options.date.current = new Date ();
-
+        this.options.date.current = new Date();
       }
 
       this.$dayToday = false;
       this.$daySelected = false;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this._refresh ();
-
+      this._refresh();
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( this.$input, 'change', this.__change );
+      this._on(this.$input, 'change', this.__change);
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* NAVIGATION PREV / NEXT */
 
-      this._on ( this.$navigationPrev, Pointer.tap, this.__prevTap );
-      this._on ( this.$navigationNext, Pointer.tap, this.__nextTap );
+      this._on(this.$navigationPrev, Pointer.tap, this.__prevTap);
+      this._on(this.$navigationNext, Pointer.tap, this.__nextTap);
 
       /* DAY TAP */
 
-      this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
-
+      this._on(Pointer.tap, this.options.selectors.day.current, this.__dayTap);
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      this.set ( this.$input.val () );
-
+      this.set(this.$input.val());
     },
 
     /* KEYDOWN */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.UP:
         case $.ui.keyCode.LEFT:
-          this.prevMonth ();
+          this.prevMonth();
           break;
 
         case $.ui.keyCode.RIGHT:
         case $.ui.keyCode.DOWN:
-          this.nextMonth ();
+          this.nextMonth();
           break;
 
         default:
@@ -3603,54 +3325,50 @@
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
-
+      event.preventDefault();
+      event.stopImmediatePropagation();
     },
 
     /* NAVIGATION */
 
-    __prevTap: function () {
+    __prevTap: function __prevTap() {
 
-      this.prevMonth ();
-
+      this.prevMonth();
     },
 
-    __nextTap: function () {
+    __nextTap: function __nextTap() {
 
-      this.nextMonth ();
-
+      this.nextMonth();
     },
 
     /* SELECTION */
 
-    __dayTap: function ( event, node ) {
+    __dayTap: function __dayTap(event, node) {
 
-      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
+      if (event.button && event.button !== $.ui.mouseButton.LEFT) return;
 
-      var day = parseInt ( $(node).html (), 10 );
+      var day = parseInt($(node).html(), 10);
 
-      this._unhighlightSelected ();
+      this._unhighlightSelected();
 
-      this.options.date.selected = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), day );
+      this.options.date.selected = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), day);
 
-      this._highlightSelected ();
+      this._highlightSelected();
 
-      this._updateInput ();
-
+      this._updateInput();
     },
 
     /* OTHERS */
 
-    _buildCalendar: function () {
+    _buildCalendar: function _buildCalendar() {
 
-      var prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
-          currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
-          initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
+      var prevMonthDays = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), 0).getDate(),
+          currentMonthDays = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth() + 1, 0).getDate(),
+          initialDayOfWeek = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), 1).getDay();
 
-      initialDayOfWeek = ( initialDayOfWeek === 0 ) ? 6 : initialDayOfWeek - 1; //INFO: We use `Monday` as the 0 index
+      initialDayOfWeek = initialDayOfWeek === 0 ? 6 : initialDayOfWeek - 1; //INFO: We use `Monday` as the 0 index
 
-      this.$daysAll.removeClass ( 'hidden' );
+      this.$daysAll.removeClass('hidden');
 
       /* PREV */
 
@@ -3658,222 +3376,191 @@
           neededDays = initialDayOfWeek,
           leftDays = 9 - exceedingDays - neededDays;
 
-      this.$daysPrev.slice ( leftDays + neededDays, this.$daysPrev.length ).addClass ( 'hidden' );
-      this.$daysPrev.slice ( 0, leftDays ).addClass ( 'hidden' );
+      this.$daysPrev.slice(leftDays + neededDays, this.$daysPrev.length).addClass('hidden');
+      this.$daysPrev.slice(0, leftDays).addClass('hidden');
 
       /* CURRENT */
 
-      this.$daysCurrent.slice ( currentMonthDays, this.$daysCurrent.lenght ).addClass ( 'hidden' );
+      this.$daysCurrent.slice(currentMonthDays, this.$daysCurrent.lenght).addClass('hidden');
 
       /* NEXT */
 
-      var leftDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
+      var leftDays = (currentMonthDays + initialDayOfWeek) % 7;
 
-      this.$daysNext.slice ( ( leftDays === 0 ) ? 0 : 7 - leftDays ).addClass ( 'hidden' );
-
+      this.$daysNext.slice(leftDays === 0 ? 0 : 7 - leftDays).addClass('hidden');
     },
 
-    _highlightDay: function ( day, cssClass ) {
+    _highlightDay: function _highlightDay(day, cssClass) {
 
-      if ( day && day.getFullYear () === this.options.date.current.getFullYear () ) {
+      if (day && day.getFullYear() === this.options.date.current.getFullYear()) {
 
-        var deltaMonths = day.getMonth () - this.options.date.current.getMonth ();
+        var deltaMonths = day.getMonth() - this.options.date.current.getMonth();
 
-        switch ( deltaMonths ) {
+        switch (deltaMonths) {
 
           case -1:
-            return this.$daysPrev.eq ( day.getDate () - 23 ).addClass ( cssClass );
+            return this.$daysPrev.eq(day.getDate() - 23).addClass(cssClass);
 
           case 0:
-            return this.$daysCurrent.eq ( day.getDate () - 1 ).addClass ( cssClass );
+            return this.$daysCurrent.eq(day.getDate() - 1).addClass(cssClass);
 
           case 1:
-            return this.$daysNext.eq ( day.getDate () - 1 ).addClass ( cssClass );
+            return this.$daysNext.eq(day.getDate() - 1).addClass(cssClass);
 
         }
-
       }
 
       return false;
-
     },
 
-    _unhighlightSelected: function () {
+    _unhighlightSelected: function _unhighlightSelected() {
 
-      if ( this.$daySelected ) {
+      if (this.$daySelected) {
 
-        this.$daySelected.removeClass ( this.options.classes.selected );
-
+        this.$daySelected.removeClass(this.options.classes.selected);
       }
-
     },
 
-    _highlightSelected: function () {
+    _highlightSelected: function _highlightSelected() {
 
-      this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
-
+      this.$daySelected = this._highlightDay(this.options.date.selected, this.options.classes.selected);
     },
 
-    _unhighlightToday: function () {
+    _unhighlightToday: function _unhighlightToday() {
 
-      if ( this.$dayToday ) {
+      if (this.$dayToday) {
 
-        this.$dayToday.removeClass ( this.options.classes.today );
-
+        this.$dayToday.removeClass(this.options.classes.today);
       }
-
     },
 
-    _highlightToday: function () {
+    _highlightToday: function _highlightToday() {
 
-      this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
-
+      this.$dayToday = this._highlightDay(this.options.date.today, this.options.classes.today);
     },
 
-    _updateTitle: function () {
+    _updateTitle: function _updateTitle() {
 
-      this.$navigationTitle.html ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
-
+      this.$navigationTitle.html(this.options.names.months[this.options.date.current.getMonth()] + ' ' + this.options.date.current.getFullYear());
     },
 
-    _updateInput: function () {
+    _updateInput: function _updateInput() {
 
-      if ( this.options.date.selected ) {
+      if (this.options.date.selected) {
 
-        this.$input.val ( this._exportDate ( this.options.date.selected ) ).change ();
-
+        this.$input.val(this._exportDate(this.options.date.selected)).change();
       }
-
     },
 
-    _exportDate: function ( date )  {
+    _exportDate: function _exportDate(date) {
 
-      switch ( this.options.format.type ) {
+      switch (this.options.format.type) {
 
         case 'YYYYMMDD':
-          return [date.getFullYear (), parseInt ( date.getMonth (), 10 ) + 1, date.getDate ()].join ( this.options.format.separator );
+          return [date.getFullYear(), parseInt(date.getMonth(), 10) + 1, date.getDate()].join(this.options.format.separator);
 
         default:
-          return date.toUTCString ();
+          return date.toUTCString();
 
       }
-
     },
 
-    _importDate: function ( date )  {
+    _importDate: function _importDate(date) {
 
-      if ( _.isString ( date ) ) {
+      if (_.isString(date)) {
 
-        switch ( this.options.format.type ) {
+        switch (this.options.format.type) {
 
           case 'YYYYMMDD':
-            var segments = date.split ( this.options.format.separator );
-            return new Date ( segments[0], parseInt ( segments[1], 10 ) - 1, segments[2] );
+            var segments = date.split(this.options.format.separator);
+            return new Date(segments[0], parseInt(segments[1], 10) - 1, segments[2]);
 
           default:
-            return new Date ( date );
+            return new Date(date);
 
         }
-
       } else {
 
-        return new Date ( date );
-
+        return new Date(date);
       }
-
     },
 
-    _refresh: function () {
+    _refresh: function _refresh() {
 
-      this._unhighlightSelected ();
-      this._unhighlightToday ();
-      this._buildCalendar ();
-      this._highlightSelected ();
-      this._highlightToday ();
-      this._updateTitle ();
+      this._unhighlightSelected();
+      this._unhighlightToday();
+      this._buildCalendar();
+      this._highlightSelected();
+      this._highlightToday();
+      this._updateTitle();
 
-      this._trigger ( 'refresh', this.options.date );
-
+      this._trigger('refresh', this.options.date);
     },
 
     /* API */
 
-    get: function ( formatted ) {
+    get: function get(formatted) {
 
-      if ( formatted && this.options.date.selected ) {
+      if (formatted && this.options.date.selected) {
 
-        return this._exportDate ( this.options.date.selected );
-
+        return this._exportDate(this.options.date.selected);
       } else {
 
         return this.options.date.selected;
-
       }
-
     },
 
-    set: function ( date ) {
+    set: function set(date) {
 
-      date = this._importDate ( date );
+      date = this._importDate(date);
 
-      if ( !_.isNaN ( date.valueOf () ) ) {
+      if (!_.isNaN(date.valueOf())) {
 
-        if ( !this.options.date.selected || date.getTime () !== this.options.date.selected.getTime () ) {
+        if (!this.options.date.selected || date.getTime() !== this.options.date.selected.getTime()) {
 
           this.options.date.selected = date;
 
-          if ( this.options.date.selected.getFullYear () === this.options.date.current.getFullYear () && this.options.date.selected.getMonth () === this.options.date.current.getMonth () ) {
+          if (this.options.date.selected.getFullYear() === this.options.date.current.getFullYear() && this.options.date.selected.getMonth() === this.options.date.current.getMonth()) {
 
-            this._unhighlightSelected ();
-            this._highlightSelected ();
-
+            this._unhighlightSelected();
+            this._highlightSelected();
           } else {
 
-            this.options.date.current.setFullYear ( this.options.date.selected.getFullYear () );
-            this.options.date.current.setMonth ( this.options.date.selected.getMonth () );
+            this.options.date.current.setFullYear(this.options.date.selected.getFullYear());
+            this.options.date.current.setMonth(this.options.date.selected.getMonth());
 
-            this._refresh ();
-
+            this._refresh();
           }
 
-          this._updateInput ();
+          this._updateInput();
 
-          this._trigger ( 'change', this.options.date );
-
+          this._trigger('change', this.options.date);
         }
-
       }
-
     },
 
-    navigateMonth: function ( modifier ) {
+    navigateMonth: function navigateMonth(modifier) {
 
-      if ( modifier ) {
+      if (modifier) {
 
-        this.options.date.current.setMonth ( this.options.date.current.getMonth () + modifier );
+        this.options.date.current.setMonth(this.options.date.current.getMonth() + modifier);
 
-        this._refresh ();
-
+        this._refresh();
       }
-
     },
 
-    prevMonth: function () {
+    prevMonth: function prevMonth() {
 
-      this.navigateMonth ( -1 );
-
+      this.navigateMonth(-1);
     },
 
-    nextMonth: function () {
+    nextMonth: function nextMonth() {
 
-      this.navigateMonth ( 1 );
-
+      this.navigateMonth(1);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Draggable
@@ -3888,7 +3575,9 @@
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -3898,7 +3587,7 @@
 
   /* DRAGGABLE */
 
-  $.factory ( 'svelto.draggable', {
+  $.factory('svelto.draggable', {
 
     /* OPTIONS */
 
@@ -3906,7 +3595,7 @@
       selectors: {
         handler: '.draggable-handler'
       },
-      draggable: _.true, //INFO: Checks if we can drag it or not
+      draggable: _['true'], //INFO: Checks if we can drag it or not
       onlyHandlers: false, //INFO: Only an handler can drag it around
       revertable: false, //INFO: On dragend take it back to the starting position
       axis: false, //INFO: Limit the movements to this axis
@@ -3921,8 +3610,8 @@
         }
       },
       modifiers: { //INFO: It can modify the setted X and Y transforms values
-        x: _.true,
-        y: _.true
+        x: _['true'],
+        y: _['true']
       },
       callbacks: {
         start: _.noop,
@@ -3933,330 +3622,293 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.draggable' ).draggable ();
-
+      $root.find('.draggable').draggable();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.draggable = this.element;
       this.$draggable = this.$element;
 
-      this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
-
+      this.$handlers = this.options.onlyHandlers ? this.$draggable.find(this.options.selectors.handler) : this.$draggable;
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* DOWN */
 
-      this._on ( this.$handlers, Pointer.down, this.__down );
+      this._on(this.$handlers, Pointer.down, this.__down);
 
       /* PROXY */
 
-      if ( this.options.$proxy ) {
+      if (this.options.$proxy) {
 
-        this._on ( this.options.$proxy, Pointer.down, this.__down );
-
+        this._on(this.options.$proxy, Pointer.down, this.__down);
       }
-
     },
 
     /* ACTIONS */
 
-    _centerToPoint ( point, suppressClasses ) {
+    _centerToPoint: function _centerToPoint(point, suppressClasses) {
 
-      var draggableOffset = this.$draggable.offset ();
+      var draggableOffset = this.$draggable.offset();
 
       var deltaXY = {
-        X: point.X - ( draggableOffset.left + ( this.$draggable.outerWidth () / 2 ) ),
-        Y: point.Y - ( draggableOffset.top + ( this.$draggable.outerHeight () / 2 ) )
+        X: point.X - (draggableOffset.left + this.$draggable.outerWidth() / 2),
+        Y: point.Y - (draggableOffset.top + this.$draggable.outerHeight() / 2)
       };
 
-      return this._actionMove ( deltaXY, suppressClasses );
-
+      return this._actionMove(deltaXY, suppressClasses);
     },
 
-    _actionMove ( deltaXY, suppressClasses ) {
+    _actionMove: function _actionMove(deltaXY, suppressClasses) {
 
       var baseXY = {
         X: this.proxyXY ? this.proxyXY.X : this.initialXY.X,
         Y: this.proxyXY ? this.proxyXY.Y : this.initialXY.Y
       };
 
-      if ( this.motion === false ) {
+      if (this.motion === false) {
 
         this.motion = true;
 
-        if ( this.options.constrainer.$element ) {
+        if (this.options.constrainer.$element) {
 
-          var constrainerOffset = this.options.constrainer.$element.offset (),
-              draggableOffset = this.$draggable.offset ();
+          var constrainerOffset = this.options.constrainer.$element.offset(),
+              draggableOffset = this.$draggable.offset();
 
-          if ( this.options.axis !== 'y' ) {
+          if (this.options.axis !== 'y') {
 
-            var halfWidth = this.options.constrainer.constrainCenter ? this.$draggable.outerWidth () / 2 : 0;
+            var halfWidth = this.options.constrainer.constrainCenter ? this.$draggable.outerWidth() / 2 : 0;
 
-            this.translateX_min = constrainerOffset.left - ( draggableOffset.left - baseXY.X ) - halfWidth;
-            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( draggableOffset.left - baseXY.X ) + this.$draggable.outerWidth () ) + halfWidth;
-
+            this.translateX_min = constrainerOffset.left - (draggableOffset.left - baseXY.X) - halfWidth;
+            this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth() - (draggableOffset.left - baseXY.X + this.$draggable.outerWidth()) + halfWidth;
           }
 
-          if ( this.options.axis !== 'x' ) {
+          if (this.options.axis !== 'x') {
 
-            var halfHeight = this.options.constrainer.constrainCenter ? this.$draggable.outerHeight () / 2 : 0;
+            var halfHeight = this.options.constrainer.constrainCenter ? this.$draggable.outerHeight() / 2 : 0;
 
-            this.translateY_min = constrainerOffset.top - ( draggableOffset.top - baseXY.Y ) - halfHeight;
-            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( draggableOffset.top - baseXY.Y ) + this.$draggable.outerHeight () ) + halfHeight;
-
+            this.translateY_min = constrainerOffset.top - (draggableOffset.top - baseXY.Y) - halfHeight;
+            this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight() - (draggableOffset.top - baseXY.Y + this.$draggable.outerHeight()) + halfHeight;
           }
-
         }
 
-        if ( !suppressClasses ) {
+        if (!suppressClasses) {
 
-          $html.addClass ( 'dragging' );
-          this.$draggable.addClass ( 'dragging' );
-
+          $html.addClass('dragging');
+          this.$draggable.addClass('dragging');
         }
-
       }
 
       var translateX = baseXY.X,
           translateY = baseXY.Y;
 
-      if ( this.options.axis !== 'y' ) {
+      if (this.options.axis !== 'y') {
 
         translateX += deltaXY.X;
 
-        if ( this.options.constrainer.$element ) {
+        if (this.options.constrainer.$element) {
 
-          translateX = _.clamp ( this.translateX_min - this.options.constrainer.tollerance.x, translateX, this.translateX_max + this.options.constrainer.tollerance.x );
-
+          translateX = _.clamp(this.translateX_min - this.options.constrainer.tollerance.x, translateX, this.translateX_max + this.options.constrainer.tollerance.x);
         }
-
       }
 
-      if ( this.options.axis !== 'x' ) {
+      if (this.options.axis !== 'x') {
 
         translateY += deltaXY.Y;
 
-        if ( this.options.constrainer.$element ) {
+        if (this.options.constrainer.$element) {
 
-          translateY = _.clamp ( this.translateY_min - this.options.constrainer.tollerance.y, translateY, this.translateY_max + this.options.constrainer.tollerance.y );
-
+          translateY = _.clamp(this.translateY_min - this.options.constrainer.tollerance.y, translateY, this.translateY_max + this.options.constrainer.tollerance.y);
         }
-
       }
 
       var modifiedXY = {
-            X: this.options.modifiers.x ( translateX ),
-            Y: this.options.modifiers.y ( translateY )
-          },
+        X: this.options.modifiers.x(translateX),
+        Y: this.options.modifiers.y(translateY)
+      },
           endXY = {
-            X: _.isBoolean ( modifiedXY.X ) ? ( modifiedXY.X ? translateX : baseXY.X ) : modifiedXY.X,
-            Y: _.isBoolean ( modifiedXY.Y ) ? ( modifiedXY.Y ? translateY : baseXY.Y ) : modifiedXY.Y
-          };
+        X: _.isBoolean(modifiedXY.X) ? modifiedXY.X ? translateX : baseXY.X : modifiedXY.X,
+        Y: _.isBoolean(modifiedXY.Y) ? modifiedXY.Y ? translateY : baseXY.Y : modifiedXY.Y
+      };
 
-      this.$draggable.translate ( endXY.X, endXY.Y );
+      this.$draggable.translate(endXY.X, endXY.Y);
 
       return endXY;
-
     },
 
     /* HANDLERS */
 
-    __down: function ( event, trigger ) {
+    __down: function __down(event, trigger) {
 
-      if ( !isDragging && this.options.draggable () ) {
+      if (!isDragging && this.options.draggable()) {
 
-        event.preventDefault ();
+        event.preventDefault();
 
         isDragging = true;
 
         this.motion = false;
 
-        this.startXY = $.eventXY ( event );
-        this.initialXY = this.$draggable.translate ();
+        this.startXY = $.eventXY(event);
+        this.initialXY = this.$draggable.translate();
 
-        this.isProxyed = ( this.options.$proxy && trigger === this.options.$proxy[0] );
+        this.isProxyed = this.options.$proxy && trigger === this.options.$proxy[0];
         this.proxyXY = false;
 
-        this._trigger ( 'start', { event: event, draggable: this.draggable, initialXY: this.initialXY } );
+        this._trigger('start', { event: event, draggable: this.draggable, initialXY: this.initialXY });
 
-        this._on ( $document, Pointer.move, this.__move );
-        this._on ( $document, Pointer.up, this.__up );
-        this._on ( $document, Pointer.cancel, this.__cancel );
-
+        this._on($document, Pointer.move, this.__move);
+        this._on($document, Pointer.up, this.__up);
+        this._on($document, Pointer.cancel, this.__cancel);
       }
-
     },
 
-    __move: function ( event ) {
+    __move: function __move(event) {
 
-      if ( this.isProxyed && this.motion === false ) {
+      if (this.isProxyed && this.motion === false) {
 
-        var modifiedXY = this._centerToPoint ( this.startXY );
+        var modifiedXY = this._centerToPoint(this.startXY);
 
-        this.proxyXY = this.$draggable.translate ();
-
+        this.proxyXY = this.$draggable.translate();
       }
 
-      var moveXY = $.eventXY ( event ),
+      var moveXY = $.eventXY(event),
           deltaXY = {
-            X: moveXY.X - this.startXY.X,
-            Y: moveXY.Y - this.startXY.Y
-          };
+        X: moveXY.X - this.startXY.X,
+        Y: moveXY.Y - this.startXY.Y
+      };
 
-      var modifiedXY = this._actionMove ( deltaXY );
+      var modifiedXY = this._actionMove(deltaXY);
 
-      this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
-
+      this._trigger('move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY });
     },
 
-    __up: function ( event ) {
+    __up: function __up(event) {
 
       var modifiedXY = this.initialXY;
 
-      if ( this.motion === true ) {
+      if (this.motion === true) {
 
-        $html.removeClass ( 'dragging' );
-        this.$draggable.removeClass ( 'dragging' );
+        $html.removeClass('dragging');
+        this.$draggable.removeClass('dragging');
 
         /* REVERTABLE */
 
-        if ( this.options.revertable ) {
+        if (this.options.revertable) {
 
-          this.$draggable.translate ( this.initialXY.X, this.initialXY.Y ); //TODO: Animate it
-
+          this.$draggable.translate(this.initialXY.X, this.initialXY.Y); //TODO: Animate it
         } else {
 
-          var modifiedXY = this.$draggable.translate ();
+            var modifiedXY = this.$draggable.translate();
+          }
+      } else if (this.isProxyed) {
 
+        if (this.options.proxyWithoutMotion && (!event.button || event.button === $.ui.mouseButton.LEFT)) {
+
+          var endXY = $.eventXY(event),
+              modifiedXY = this._centerToPoint(endXY, true);
         }
-
-      } else if ( this.isProxyed ) {
-
-        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === $.ui.mouseButton.LEFT ) ) {
-
-          var endXY = $.eventXY ( event ),
-              modifiedXY = this._centerToPoint ( endXY, true );
-
-        }
-
       }
 
       isDragging = false;
 
-      this._off ( $document, Pointer.move, this.__move );
-      this._off ( $document, Pointer.up, this.__up );
-      this._off ( $document, Pointer.cancel, this.__cancel );
+      this._off($document, Pointer.move, this.__move);
+      this._off($document, Pointer.up, this.__up);
+      this._off($document, Pointer.cancel, this.__cancel);
 
-      this._trigger ( 'end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
-
+      this._trigger('end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion });
     },
 
-    __cancel () {
+    __cancel: function __cancel() {
 
       isDragging = false;
 
-      this._off ( $document, Pointer.move, this.__move );
-      this._off ( $document, Pointer.up, this.__up );
-      this._off ( $document, Pointer.cancel, this.__cancel );
-
+      this._off($document, Pointer.move, this.__move);
+      this._off($document, Pointer.up, this.__up);
+      this._off($document, Pointer.cancel, this.__cancel);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* TRANSFORM UTILITIES */
 
 //FIXME: Do we need to support -webkit- prefixing?
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* MATRIX */
 
-  $.fn.matrix = function ( values ) {
+  $.fn.matrix = function (values) {
 
-    if ( values ) {
+    if (values) {
 
-      this.css ( 'transform', 'matrix(' + values.join ( ',' ) + ')' );
+      this.css('transform', 'matrix(' + values.join(',') + ')');
 
       return this;
-
     } else {
 
-      var transformStr = this.css ( 'transform' );
+      var transformStr = this.css('transform');
 
-      return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value ); } ) : [1, 0, 0, 1, 0, 0];
-
+      return transformStr && transformStr !== 'none' ? transformStr.match(/[0-9., e-]+/)[0].split(', ').map(function (value) {
+        return parseFloat(value);
+      }) : [1, 0, 0, 1, 0, 0];
     }
-
   };
 
   /* TRANSFORMATIONS */
 
   var transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //FIXME: Their index is also the corresponsing index when applying `transform: matrix()`
 
-  for ( var i = 0, l = transformations.length; i < l; i++ ) {
+  for (var i = 0, l = transformations.length; i < l; i++) {
 
-    $.fn[transformations[i]] = (function ( index ) {
+    $.fn[transformations[i]] = (function (index) {
 
-       return function ( value ) {
+      return function (value) {
 
-         var matrix = this.matrix ();
+        var matrix = this.matrix();
 
-         if ( !_.isUndefined ( value ) ) {
+        if (!_.isUndefined(value)) {
 
-           matrix[index] = value;
+          matrix[index] = value;
 
-           return this.matrix ( matrix );
+          return this.matrix(matrix);
+        } else {
 
-         } else {
-
-           return matrix[index];
-
-         }
-
-       };
-
-     })( i );
-
+          return matrix[index];
+        }
+      };
+    })(i);
   }
 
   /* TRANSLATE */
 
-  $.fn.translate = function ( X, Y ) {
+  $.fn.translate = function (X, Y) {
 
-    var matrix = this.matrix ();
+    var matrix = this.matrix();
 
-    if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
+    if (!_.isUndefined(X) && !_.isUndefined(Y)) {
 
       matrix[4] = X;
       matrix[5] = Y;
 
-      return this.matrix ( matrix );
-
+      return this.matrix(matrix);
     } else {
 
       return {
         X: matrix[4],
         Y: matrix[5]
       };
-
     }
-
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Positionate
@@ -4271,25 +3923,25 @@
 //TODO: Add allignment, that is, if possibile don't center the dropdown but align it to one of the trigger edges
 //FIXME: Big elements gets positionated badly, for example try some tooltips in a small viewport
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* UTILITES */
 
-  var isHorizontal = function ( direction ) {
+  var isHorizontal = function isHorizontal(direction) {
 
     return direction === 'left' || direction === 'right';
-
   };
 
-  var isVertical = function ( direction ) {
+  var isVertical = function isVertical(direction) {
 
-    return !isHorizontal ( direction );
-
+    return !isHorizontal(direction);
   };
 
-  var getOpposite = function ( direction ) {
+  var getOpposite = function getOpposite(direction) {
 
     var opposites = {
       'top': 'bottom',
@@ -4299,16 +3951,15 @@
     };
 
     return opposites[direction];
-
   };
 
   /* POSITIONATE */
 
-  $.fn.positionate = function ( options ) {
+  $.fn.positionate = function (options) {
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.merge({
       direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
       axis: false, //INFO: Set a preferred axis
       $anchor: false, //INFO: Positionate next to an $anchor element
@@ -4323,25 +3974,25 @@
       callbacks: {
         change: _.noop
       }
-    }, options );
+    }, options);
 
     /* RESET */
 
-    this.removeClass ( 'positionate-top positionate-bottom positionate-left positionate-right' );
+    this.removeClass('positionate-top positionate-bottom positionate-left positionate-right');
 
     /* VARIABLES */
 
-    var directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
-        windowWidth = $window.width (),
-        windowHeight = $window.height (),
-        positionableRect = this.getRect (),
-        anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
+    var directions = _.unique(_.union(options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all)),
+        windowWidth = $window.width(),
+        windowHeight = $window.height(),
+        positionableRect = this.getRect(),
+        anchorRect = options.$anchor ? options.$anchor.getRect() : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
 
     /* SPACES */
 
-    var spaces = directions.map ( function ( direction ) {
+    var spaces = directions.map(function (direction) {
 
-      switch ( direction ) {
+      switch (direction) {
 
         case 'top':
           return anchorRect.top;
@@ -4356,83 +4007,77 @@
           return windowWidth - anchorRect.right;
 
       }
-
     });
 
     /* SPACES PRIORITIZATION */
 
-    spaces.forEach ( function ( space, index ) {
+    spaces.forEach(function (space, index) {
 
-      if ( space < 0 ) {
+      if (space < 0) {
 
-        var opposite = getOpposite ( directions[index] ),
-            oppositeIndex = directions.indexOf ( opposite );
+        var opposite = getOpposite(directions[index]),
+            oppositeIndex = directions.indexOf(opposite);
 
-        _.move ( directions, oppositeIndex, 0 );
-        _.move ( spaces, oppositeIndex, 0 );
-
+        _.move(directions, oppositeIndex, 0);
+        _.move(spaces, oppositeIndex, 0);
       }
-
     });
 
     /* AREAS */
 
-    var areas = directions.map ( function ( direction, index ) {
+    var areas = directions.map(function (direction, index) {
 
-      switch ( direction ) {
+      switch (direction) {
 
         case 'top':
         case 'bottom':
-          return Math.min ( positionableRect.height, spaces[index] ) * Math.min ( windowWidth, positionableRect.width );
+          return Math.min(positionableRect.height, spaces[index]) * Math.min(windowWidth, positionableRect.width);
 
         case 'left':
         case 'right':
-          return Math.min ( positionableRect.width, spaces[index] ) * Math.min ( windowHeight, positionableRect.height );
+          return Math.min(positionableRect.width, spaces[index]) * Math.min(windowHeight, positionableRect.height);
 
       }
-
     });
 
     /* BEST DIRECTION */
 
-    var bestIndex = areas.indexOf ( _.max ( areas ) ),
+    var bestIndex = areas.indexOf(_.max(areas)),
         bestDirection = directions[bestIndex];
 
     /* TOP / LEFT */
 
-    switch ( bestDirection ) {
+    switch (bestDirection) {
 
       case 'top':
       case 'bottom':
         var coordinates = {
-          top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
-          left: anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 )
+          top: bestDirection === 'top' ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
+          left: anchorRect.left + anchorRect.width / 2 - positionableRect.width / 2
         };
         break;
 
       case 'left':
       case 'right':
         var coordinates = {
-          top: anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 ),
-          left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
+          top: anchorRect.top + anchorRect.height / 2 - positionableRect.height / 2,
+          left: bestDirection === 'left' ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
         };
 
     }
 
     /* CONSTRAIN TO THE WINDOW */
 
-    if ( options.$anchor ) {
+    if (options.$anchor) {
 
       var oppositeSpace = spaces[bestIndex],
-          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+          isAnchorVisible = isVertical(bestDirection) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
-      if ( isAnchorVisible ) {
+      if (isAnchorVisible) {
 
-        coordinates.top = _.clamp ( options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing );
-        coordinates.left = _.clamp ( options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing );
-
+        coordinates.top = _.clamp(options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing);
+        coordinates.left = _.clamp(options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing);
       }
-
     }
 
     /* DATAS */
@@ -4440,59 +4085,53 @@
     var datas = {
       coordinates: coordinates,
       direction: bestDirection,
-      oppositeDirection: getOpposite ( bestDirection )
+      oppositeDirection: getOpposite(bestDirection)
     };
 
     /* POINTER TOP / LEFT */
 
-    if ( options.$anchor && options.$pointer ) {
+    if (options.$anchor && options.$pointer) {
 
-      var $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+      var $pointer = _.isFunction(options.$pointer) ? options.$pointer(datas) : options.$pointer;
 
-      if ( $pointer instanceof $ ) {
+      if ($pointer instanceof $) {
 
-        switch ( bestDirection ) {
+        switch (bestDirection) {
 
           case 'top':
           case 'bottom':
             var translateType = 'translateX',
-                translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
+                translateValue = anchorRect.left - coordinates.left + anchorRect.width / 2;
             break;
 
           case 'left':
           case 'right':
             var translateType = 'translateY',
-                translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
+                translateValue = anchorRect.top - coordinates.top + anchorRect.height / 2;
             break;
 
         }
-
       }
-
     }
 
     /* SETTING */
 
-    this.translate ( coordinates.left, coordinates.top );
+    this.translate(coordinates.left, coordinates.top);
 
-    this.addClass ( 'positionate-' + bestDirection );
+    this.addClass('positionate-' + bestDirection);
 
-    if ( options.$anchor && options.$pointer && $pointer instanceof $ ) {
+    if (options.$anchor && options.$pointer && $pointer instanceof $) {
 
-      $pointer[translateType] ( translateValue );
-
+      $pointer[translateType](translateValue);
     }
 
     /* CALLBACK */
 
-    options.callbacks.change ( datas );
+    options.callbacks.change(datas);
 
     return this;
-
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Dropdown
@@ -4508,7 +4147,9 @@
 
 //FIXME: Hover open, enter the dropdown and click it, it gets closed...
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -4518,7 +4159,7 @@
 
   /* DROPDOWN */
 
-  $.factory ( 'svelto.dropdown', {
+  $.factory('svelto.dropdown', {
 
     /* OPTIONS */
 
@@ -4557,306 +4198,270 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.dropdown' ).dropdown ();
-
+      $root.find('.dropdown').dropdown();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$dropdown = this.$element;
-      this.$closers = this.$dropdown.find ( this.options.selectors.closer );
+      this.$closers = this.$dropdown.find(this.options.selectors.closer);
 
-      this.id = this.$dropdown.attr ( 'id' );
+      this.id = this.$dropdown.attr('id');
       this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
 
-      this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
-      this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
+      this.hasTip = !this.$dropdown.hasClass(this.options.classes.noTip);
+      this.isAttached = this.$dropdown.hasClass(this.options.classes.attached);
 
       this._isOpen = false;
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TRIGGER */
 
-      this._on ( this.$triggers, Pointer.tap, this.toggle );
+      this._on(this.$triggers, Pointer.tap, this.toggle);
 
       /* CLOSER */
 
-      this._on ( this.$closers, Pointer.tap, this.close );
+      this._on(this.$closers, Pointer.tap, this.close);
 
       // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
       /* HOVER */
 
-      if ( this.options.hover.triggerable ) {
+      if (this.options.hover.triggerable) {
 
-        this._on ( this.$triggers, Pointer.enter, this.__hoverTriggerEnter );
-
+        this._on(this.$triggers, Pointer.enter, this.__hoverTriggerEnter);
       }
-
     },
 
     /* HOVER */
 
-    __hoverTriggerEnter: function ( event, trigger ) {
+    __hoverTriggerEnter: function __hoverTriggerEnter(event, trigger) {
 
-      if ( !this._isOpen ) {
+      if (!this._isOpen) {
 
         this._isHoverOpen = false;
         this._hoverTrigger = trigger;
 
-        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+        this._hoverOpenTimeout = this._delay(this.__hoverOpen, this.options.hover.delays.open);
 
-        this._one ( $(trigger), Pointer.leave, this.__hoverTriggerLeave );
-
+        this._one($(trigger), Pointer.leave, this.__hoverTriggerLeave);
       }
-
     },
 
-    __hoverOpen: function () {
+    __hoverOpen: function __hoverOpen() {
 
-      if ( !this._isOpen ) {
+      if (!this._isOpen) {
 
-        this.open ( false, this._hoverTrigger );
+        this.open(false, this._hoverTrigger);
 
         this._isHoverOpen = true;
 
         this._hoverOpenTimeout = false;
-
       }
-
     },
 
-    __hoverTriggerLeave: function ( event, trigger ) {
+    __hoverTriggerLeave: function __hoverTriggerLeave(event, trigger) {
 
-      if ( this._hoverOpenTimeout ) {
+      if (this._hoverOpenTimeout) {
 
-        clearTimeout ( this._hoverOpenTimeout );
+        clearTimeout(this._hoverOpenTimeout);
 
         this._hoverOpenTimeout = false;
-
       }
 
-      if ( this._isHoverOpen ) {
+      if (this._isHoverOpen) {
 
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+        this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
 
-        this._on ( Pointer.enter, this.__hoverDropdownEnter );
-
+        this._on(Pointer.enter, this.__hoverDropdownEnter);
       }
-
     },
 
-    __hoverClose: function () {
+    __hoverClose: function __hoverClose() {
 
-      if ( this._isHoverOpen ) {
+      if (this._isHoverOpen) {
 
-        this.close ();
+        this.close();
 
         this._isHoverOpen = false;
 
         this._hoverCloseTimeout = false;
-
       }
 
-      this._off ( Pointer.enter, this.__hoverDropdownEnter );
-
+      this._off(Pointer.enter, this.__hoverDropdownEnter);
     },
 
-    __hoverDropdownEnter: function () {
+    __hoverDropdownEnter: function __hoverDropdownEnter() {
 
-      if ( this._hoverCloseTimeout ) {
+      if (this._hoverCloseTimeout) {
 
-        clearTimeout ( this._hoverCloseTimeout );
+        clearTimeout(this._hoverCloseTimeout);
 
         this._hoverCloseTimeout = false;
-
       }
 
-      if ( this._isHoverOpen ) {
+      if (this._isHoverOpen) {
 
-        this._one ( Pointer.leave, this.__hoverDropdownLeave );
-
+        this._one(Pointer.leave, this.__hoverDropdownLeave);
       }
-
     },
 
-    __hoverDropdownLeave: function () {
+    __hoverDropdownLeave: function __hoverDropdownLeave() {
 
-      if ( this._isHoverOpen ) {
+      if (this._isHoverOpen) {
 
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
+        this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
       }
-
     },
 
     /* WINDOW RESIZE / SCROLL */
 
-    _bindWindowResizeScroll: function () {
+    _bindWindowResizeScroll: function _bindWindowResizeScroll() {
 
-      this._on ( $window, 'resize scroll', this._update );
-
+      this._on($window, 'resize scroll', this._update);
     },
 
-    _unbindWindowResizeScroll: function () {
+    _unbindWindowResizeScroll: function _unbindWindowResizeScroll() {
 
-      this._off ( $window, 'resize scroll', this._update );
-
+      this._off($window, 'resize scroll', this._update);
     },
 
     /* WINDOW TAP */
 
-    _bindWindowTap: function () {
+    _bindWindowTap: function _bindWindowTap() {
 
-      this._on ( $window, Pointer.tap, this.__windowTap );
-
+      this._on($window, Pointer.tap, this.__windowTap);
     },
 
-    _unbindWindowTap: function () {
+    _unbindWindowTap: function _unbindWindowTap() {
 
-      this._off ( $window, Pointer.tap, this.__windowTap );
-
+      this._off($window, Pointer.tap, this.__windowTap);
     },
 
-    __windowTap: function ( event ) {
+    __windowTap: function __windowTap(event) {
 
-      var $parents = $(event.target).parents ();
+      var $parents = $(event.target).parents();
 
-      if ( $parents.index ( this.$dropdown ) === -1 ) { //INFO: Outside of the dropdown
+      if ($parents.index(this.$dropdown) === -1) {
+        //INFO: Outside of the dropdown
 
-        for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
+        for (var i = 0, l = this.$triggers.length; i < l; i++) {
 
-          if ( event.target === this.$triggers[i] || $parents.index ( this.$triggers[i] ) !== -1 ) { //INFO: Another trigger or child of a another trigger
+          if (event.target === this.$triggers[i] || $parents.index(this.$triggers[i]) !== -1) {
+            //INFO: Another trigger or child of a another trigger
 
             return;
-
           }
-
         }
 
-        this.close ();
-
+        this.close();
       }
-
     },
 
     /* POSITIONATE */
 
-    _positionate: function () {
+    _positionate: function _positionate() {
 
       /* VARIABLES */
 
       var $trigger = $(assignments[this.id]),
           $mockTip = $('<div>'),
-          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
+          noTip = $trigger.hasClass(this.options.classes.noTip) || !this.hasTip || this.isAttached,
           self = this;
 
       /* POSITIONATE */
 
-      this.$dropdown.positionate ({
+      this.$dropdown.positionate({
         $anchor: $trigger,
         $pointer: noTip ? false : $mockTip,
-        spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
+        spacing: this.isAttached ? this.options.spacing.attached : noTip ? this.options.spacing.noTip : this.options.spacing.normal,
         callbacks: {
-          change: function ( data ) {
-            $trigger.addClass ( 'dropdown-trigger-' + data.direction );
+          change: function change(data) {
+            $trigger.addClass('dropdown-trigger-' + data.direction);
           }
         }
       });
 
       /* MOCK TIP */
 
-      if ( !noTip ) {
+      if (!noTip) {
 
-        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: A bit to hacky, expecially that `rotate(45deg)`
-
+        $.pseudoCSS('#' + this.id + ':before', $mockTip.attr('style').slice(0, -1) + ' rotate(45deg)'); //FIXME: A bit to hacky, expecially that `rotate(45deg)`
       }
-
     },
 
     /* PRIVATE */
 
-    _update: function () {
+    _update: function _update() {
 
-      if ( this._isOpen ) {
+      if (this._isOpen) {
 
-        this._positionate ();
-
+        this._positionate();
       }
-
     },
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
-      return this._isOpen
-
+      return this._isOpen;
     },
 
-    toggle: function ( event, trigger ) {
+    toggle: function toggle(event, trigger) {
 
-      this[( this._isOpen && assignments[this.id] === trigger ) ? 'close' : 'open']( event, trigger );
-
+      this[this._isOpen && assignments[this.id] === trigger ? 'close' : 'open'](event, trigger);
     },
 
-    open: function ( event, trigger ) {
+    open: function open(event, trigger) {
 
-      if ( trigger ) {
+      if (trigger) {
 
-        $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+        $(assignments[this.id]).removeClass('dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open);
 
-        if ( this._isOpen && assignments[this.id] !== trigger ) {
+        if (this._isOpen && assignments[this.id] !== trigger) {
 
-          this.$dropdown.addClass ( this.options.classes.moving );
-
+          this.$dropdown.addClass(this.options.classes.moving);
         }
 
         assignments[this.id] = trigger;
 
-        $(trigger).addClass ( this.options.classes.open );
-
+        $(trigger).addClass(this.options.classes.open);
       }
 
-      this._trigger ( 'beforeopen' );
+      this._trigger('beforeopen');
 
-      this._positionate ();
+      this._positionate();
 
-      this.$dropdown.addClass ( this.options.classes.open );
+      this.$dropdown.addClass(this.options.classes.open);
 
       this._isOpen = true;
 
-      this._delay ( this._bindWindowTap ); //FIXME: Why without the delay it doesn't work?
-      this._bindWindowResizeScroll ();
+      this._delay(this._bindWindowTap); //FIXME: Why without the delay it doesn't work?
+      this._bindWindowResizeScroll();
 
-      this._trigger ( 'open' );
-
+      this._trigger('open');
     },
 
-    close: function () {
+    close: function close() {
 
-      $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+      $(assignments[this.id]).removeClass('dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open);
 
-      this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
+      this.$dropdown.removeClass(this.options.classes.open + ' ' + this.options.classes.moving);
 
       this._isOpen = false;
 
-      this._unbindWindowTap ();
-      this._unbindWindowResizeScroll ();
+      this._unbindWindowTap();
+      this._unbindWindowResizeScroll();
 
-      this._trigger ( 'close' );
-
+      this._trigger('close');
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Droppable
@@ -4869,13 +4474,15 @@
 
 //TODO: Add a anction on hovering
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* DROPPABLE */
 
-  $.factory ( 'svelto.droppable', {
+  $.factory('svelto.droppable', {
 
     /* OPTIONS */
 
@@ -4888,55 +4495,47 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.droppable' ).droppable ();
-
+      $root.find('.droppable').droppable();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$droppable = this.$element;
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* DRAG END */
 
-      this._on ( $document, 'draggable:end', this.__dragEnd );
-
+      this._on($document, 'draggable:end', this.__dragEnd);
     },
 
     /* PRIVATE */
 
-    __dragEnd: function ( event, data ) {
+    __dragEnd: function __dragEnd(event, data) {
 
       var $draggable = $(data.draggable);
 
-      if ( $draggable.is ( this.options.selector ) ) {
+      if ($draggable.is(this.options.selector)) {
 
-        var rect = this.$droppable.getRect (),
-            eventXY = $.eventXY ( data.event ),
+        var rect = this.$droppable.getRect(),
+            eventXY = $.eventXY(data.event),
             pointXY = {
-              X: eventXY.X - $window.scrollTop (),
-              Y: eventXY.Y - $window.scrollLeft ()
-            };
+          X: eventXY.X - $window.scrollTop(),
+          Y: eventXY.Y - $window.scrollLeft()
+        };
 
-        if ( pointXY.X >= rect.left && pointXY.X <= rect.right && pointXY.Y >= rect.top && pointXY.Y <= rect.bottom ) {
+        if (pointXY.X >= rect.left && pointXY.X <= rect.right && pointXY.Y >= rect.top && pointXY.Y <= rect.bottom) {
 
-          this._trigger ( 'drop', { draggable: data.draggable, droppable: this.element } );
-
+          this._trigger('drop', { draggable: data.draggable, droppable: this.element });
         }
-
       }
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Flippable
@@ -4947,13 +4546,15 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* FLIPPABLE */
 
-  $.factory ( 'svelto.flippable', {
+  $.factory('svelto.flippable', {
 
     /* OPTIONS */
 
@@ -4974,69 +4575,59 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.flippable' ).flippable ();
-
+      $root.find('.flippable').flippable();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$flippable = this.$element;
-      this.$front = this.$flippable.find ( this.options.selectors.front );
-      this.$back = this.$flippable.find ( this.options.selectors.back );
-      this.$flippers = this.$flippable.find ( this.options.selectors.flipper );
+      this.$front = this.$flippable.find(this.options.selectors.front);
+      this.$back = this.$flippable.find(this.options.selectors.back);
+      this.$flippers = this.$flippable.find(this.options.selectors.flipper);
 
-      this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
-
+      this.isFlipped = this.$flippable.hasClass(this.options.classes.flip);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* FLIPPER */
 
-      this._on ( this.$flippers, Pointer.tap, this.flip );
-
+      this._on(this.$flippers, Pointer.tap, this.flip);
     },
 
     /* PUBLIC */
 
-    flip: function ( force ) {
+    flip: function flip(force) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if (!_.isBoolean(force)) {
 
         force = !this.isFlipped;
-
       }
 
-      if ( force !== this.isFlipped ) {
+      if (force !== this.isFlipped) {
 
         this.isFlipped = force;
 
-        this.$flippable.toggleClass ( this.options.classes.flip, this.isFlipped );
+        this.$flippable.toggleClass(this.options.classes.flip, this.isFlipped);
 
-        this._trigger ( this.isFlipped ? 'back' : 'front' );
-
+        this._trigger(this.isFlipped ? 'back' : 'front');
       }
-
     },
 
-    front: function () {
+    front: function front() {
 
-      this.flip ( false );
-
+      this.flip(false);
     },
 
-    back: function () {
+    back: function back() {
 
-      this.flip ( true );
-
+      this.flip(true);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Spinner Overlay
@@ -5047,24 +4638,20 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* SPINNER OVERLAY */
 
-  $.factory ( 'svelto.spinnerOverlay', {
+  $.factory('svelto.spinnerOverlay', {
 
     /* TEMPLATES */
 
     templates: {
-      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' +
-                 '<div class="spinner-label {%=(o.multicolor ? "" : o.color)%}">' +
-                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : "")%}">' +
-                     '<circle />' +
-                   '</svg>' +
-                 '</div>' +
-               '</div>'
+      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' + '<div class="spinner-label {%=(o.multicolor ? "" : o.color)%}">' + '<svg class="spinner {%=(o.multicolor ? "multicolor" : "")%}">' + '<circle />' + '</svg>' + '</div>' + '</div>'
     },
 
     /* OPTIONS */
@@ -5081,45 +4668,38 @@
 
     /* SPECIAL */
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$overlayed = this.$element;
-      this.$overlay = $(this._tmpl ( 'overlay', this.options )).prependTo ( this.$overlayed );
+      this.$overlay = $(this._tmpl('overlay', this.options)).prependTo(this.$overlayed);
 
-      this.overlay = this.$overlay.overlay ( 'instance' );
-
+      this.overlay = this.$overlay.overlay('instance');
     },
 
     /* API */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
-      return this.overlay.isOpen ();
-
+      return this.overlay.isOpen();
     },
 
-    toggle: function ( force ) {
+    toggle: function toggle(force) {
 
-      this.overlay.toggle ( force );
-
+      this.overlay.toggle(force);
     },
 
-    open: function () {
+    open: function open() {
 
-      this.overlay.open ();
-
+      this.overlay.open();
     },
 
-    close: function () {
+    close: function close() {
 
-      this.overlay.close ();
-
+      this.overlay.close();
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Noty
@@ -5132,7 +4712,9 @@
 
 //TODO: Add better support for swipe to dismiss
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -5142,65 +4724,31 @@
 
   /* HELPER */
 
-  $.noty = function ( options ) {
+  $.noty = function (options) {
 
     /* OPTIONS */
 
-    options = _.isString ( options ) ? { body: options } : ( options || {} );
+    options = _.isString(options) ? { body: options } : options || {};
 
-    if ( options.buttons ) {
+    if (options.buttons) {
 
       options.type = 'action';
-
     }
 
     /* NOTY */
 
-    return new $.svelto.noty ( options );
-
+    return new $.svelto.noty(options);
   };
 
   /* NOTY */
 
-  $.factory ( 'svelto.noty', {
+  $.factory('svelto.noty', {
 
     /* TEMPLATES */
 
     templates: {
-      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
-              '<div class="infobar">' +
-                '{% if ( o.img ) { %}' +
-                  '<img src="{%=o.img%}" class="noty-img infobar-left" />' +
-                '{% } %}' +
-                '{% if ( o.title || o.body ) { %}' +
-                  '<div class="infobar-center">' +
-                    '{% if ( o.title ) { %}' +
-                      '<p class="infobar-title">' +
-                         '{%#o.title%}' +
-                       '</p>' +
-                    '{% } %}' +
-                    '{% if ( o.body ) { %}' +
-                      '{%#o.body%}' +
-                    '{% } %}' +
-                  '</div>' +
-                '{% } %}' +
-                '{% if ( o.buttons.length === 1 ) { %}' +
-                  '<div class="infobar-right">' +
-                    '{% include ( "svelto.noty.button", o.buttons[0] ); %}' +
-                  '</div>' +
-                '{% } %}' +
-              '</div>' +
-              '{% if ( o.buttons.length > 1 ) { %}' +
-                '<div class="noty-buttons multiple centered">' +
-                  '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' +
-                    '{% include ( "svelto.noty.button", o.buttons[i] ); %}' +
-                  '{% } %}' +
-                '</div>' +
-              '{% } %}' +
-            '</div>',
-      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
-                '{%#(o.text || "")%}' +
-              '</div>'
+      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' + '<div class="infobar">' + '{% if ( o.img ) { %}' + '<img src="{%=o.img%}" class="noty-img infobar-left" />' + '{% } %}' + '{% if ( o.title || o.body ) { %}' + '<div class="infobar-center">' + '{% if ( o.title ) { %}' + '<p class="infobar-title">' + '{%#o.title%}' + '</p>' + '{% } %}' + '{% if ( o.body ) { %}' + '{%#o.body%}' + '{% } %}' + '</div>' + '{% } %}' + '{% if ( o.buttons.length === 1 ) { %}' + '<div class="infobar-right">' + '{% include ( "svelto.noty.button", o.buttons[0] ); %}' + '</div>' + '{% } %}' + '</div>' + '{% if ( o.buttons.length > 1 ) { %}' + '<div class="noty-buttons multiple centered">' + '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' + '{% include ( "svelto.noty.button", o.buttons[i] ); %}' + '{% } %}' + '</div>' + '{% } %}' + '</div>',
+      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' + '{%#(o.text || "")%}' + '</div>'
     },
 
     /* OPTIONS */
@@ -5255,205 +4803,173 @@
 
     //TODO: Add a `_widgetize` special function
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$noty = this.$element;
-      this.$buttons = this.$noty.find ( this.options.selectors.button );
+      this.$buttons = this.$noty.find(this.options.selectors.button);
 
       this.timer = false;
       this._isOpen = false;
       this.neverOpened = true;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      if ( this.options.autoplay ) {
+      if (this.options.autoplay) {
 
-        this.open ();
-
+        this.open();
       }
-
     },
 
     /* PRIVATE */
 
-    ___tap: function () {
+    ___tap: function ___tap() {
 
-      if ( this.options.type !== 'action' ) {
+      if (this.options.type !== 'action') {
 
         //FIXME: If mouse only if left mouse button click
 
-        this._on ( Pointer.tap, this.close );
-
+        this._on(Pointer.tap, this.close);
       }
-
     },
 
-    ___buttonTap: function () {
+    ___buttonTap: function ___buttonTap() {
 
-      _.each ( this.options.buttons, function ( button, index ) {
+      _.each(this.options.buttons, function (button, index) {
 
-        this._on ( this.$buttons.eq ( index ), Pointer.tap, function ( event, data ) {
+        this._on(this.$buttons.eq(index), Pointer.tap, function (event, data) {
 
-          if ( button.onClick ) {
+          if (button.onClick) {
 
-            if ( button.onClick.apply ( this.$buttons[index], [event, data] ) === false ) return;
-
+            if (button.onClick.apply(this.$buttons[index], [event, data]) === false) return;
           }
 
-          this.close ();
-
+          this.close();
         });
-
-      }, this );
-
+      }, this);
     },
 
-    ___timer: function () {
+    ___timer: function ___timer() {
 
-      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+      if (this.options.type !== 'action' && _.isNumber(this.options.ttl) && this.options.ttl !== Infinity) {
 
-        this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
+        this.timer = $.timer(this.close.bind(this), this.options.ttl, true);
 
-        notiesTimers.push ( this.timer );
-
+        notiesTimers.push(this.timer);
       }
-
     },
 
-    ___hover: function () {
+    ___hover: function ___hover() {
 
       var instance = this;
 
-      this.$noty.hover ( function () {
+      this.$noty.hover(function () {
 
-        _.each ( notiesTimers, function ( timer ) {
+        _.each(notiesTimers, function (timer) {
 
-          timer.pause ();
-
+          timer.pause();
         });
-
       }, function () {
 
-        _.each ( notiesTimers, function ( timer ) {
+        _.each(notiesTimers, function (timer) {
 
-          timer.remaining ( Math.max ( instance.options.timerMinimumRemaining, timer.remaining () || 0 ) );
+          timer.remaining(Math.max(instance.options.timerMinimumRemaining, timer.remaining() || 0));
 
-          timer.play ();
-
+          timer.play();
         });
-
       });
-
     },
 
-    ___flick: function () {
+    ___flick: function ___flick() {
 
-      if ( this.options.type !== 'action' ) {
+      if (this.options.type !== 'action') {
 
-        this._on ( Pointer.flick, function ( event, data ) {
+        this._on(Pointer.flick, function (event, data) {
 
-          if ( data.orientation === 'horizontal' ) {
+          if (data.orientation === 'horizontal') {
 
-            this.close ();
-
+            this.close();
           }
-
         });
-
       }
-
     },
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+      if (event.keyCode === $.ui.keyCode.ESCAPE) {
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
-        this.close ();
-
+        this.close();
       }
-
     },
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
       return this._isOpen;
-
     },
 
-    open: function () {
+    open: function open() {
 
-      if ( !this._isOpen ) {
+      if (!this._isOpen) {
 
-        this._frame ( function () {
+        this._frame(function () {
 
-            $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append ( this.$noty );
+          $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append(this.$noty);
 
-            this._frame ( function () {
+          this._frame(function () {
 
-              this.$noty.addClass ( this.options.classes.open );
-
-            });
-
+            this.$noty.addClass(this.options.classes.open);
+          });
         });
 
-        if ( this.neverOpened ) {
+        if (this.neverOpened) {
 
-          this.___tap ();
-          this.___flick ();
-          this.___buttonTap ();
-          this.___hover ();
+          this.___tap();
+          this.___flick();
+          this.___buttonTap();
+          this.___hover();
 
           this.neverOpened = false;
-
         }
 
-        this.___timer ();
+        this.___timer();
 
-        this._on ( $document, 'keydown', this.__keydown );
+        this._on($document, 'keydown', this.__keydown);
 
         this._isOpen = true;
 
-        this._trigger ( 'open' );
-
+        this._trigger('open');
       }
-
     },
 
-    close: function () {
+    close: function close() {
 
-      if ( this._isOpen ) {
+      if (this._isOpen) {
 
-        this.$noty.removeClass ( this.options.classes.open );
+        this.$noty.removeClass(this.options.classes.open);
 
-        this._delay ( function () {
+        this._delay(function () {
 
-          this.$noty.detach ();
+          this.$noty.detach();
+        }, this.options.animations.remove);
 
-        }, this.options.animations.remove );
+        if (this.timer) {
 
-        if ( this.timer ) {
+          _.pull(notiesTimers, this.timer);
 
-          _.pull ( notiesTimers, this.timer );
-
-          this.timer.stop ();
-
+          this.timer.stop();
         }
 
-        this._off ( $document, 'keydown', this.__keydown );
+        this._off($document, 'keydown', this.__keydown);
 
         this._isOpen = false;
 
-        this._trigger ( 'close' );
-
+        this._trigger('close');
       }
-
     }
 
   });
@@ -5462,29 +4978,9 @@
 
   $(function () {
 
-    $body.append (
-      '<div class="noty-queues top">' +
-        '<div class="noty-queue expanded"></div>' +
-        '<div class="noty-queues-row">' +
-          '<div class="noty-queue left"></div>' +
-          '<div class="noty-queue center"></div>' +
-          '<div class="noty-queue right"></div>' +
-        '</div>' +
-      '</div>' +
-      '<div class="noty-queues bottom">' +
-        '<div class="noty-queues-row">' +
-          '<div class="noty-queue left"></div>' +
-          '<div class="noty-queue center"></div>' +
-          '<div class="noty-queue right"></div>' +
-        '</div>' +
-        '<div class="noty-queue expanded"></div>' +
-      '</div>'
-    );
-
+    $body.append('<div class="noty-queues top">' + '<div class="noty-queue expanded"></div>' + '<div class="noty-queues-row">' + '<div class="noty-queue left"></div>' + '<div class="noty-queue center"></div>' + '<div class="noty-queue right"></div>' + '</div>' + '</div>' + '<div class="noty-queues bottom">' + '<div class="noty-queues-row">' + '<div class="noty-queue left"></div>' + '<div class="noty-queue center"></div>' + '<div class="noty-queue right"></div>' + '</div>' + '<div class="noty-queue expanded"></div>' + '</div>');
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Form Ajax
@@ -5499,7 +4995,9 @@
 
 //TODO: Check if it works, also for upload
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -5507,119 +5005,101 @@
 
   $.fn.formAjax = function () {
 
-    this.on ( 'submit', function ( event ) {
+    this.on('submit', function (event) {
 
-      event.preventDefault ();
+      event.preventDefault();
 
       var $form = $(this);
 
-      $.ajax ({
+      $.ajax({
 
         cache: false,
         contentType: 'multipart/form-data',
-        data: new FormData ( this ),
+        data: new FormData(this),
         processData: false,
-        type: $form.attr ( 'method' ) || 'POST',
-        url: $form.attr ( 'action' ),
+        type: $form.attr('method') || 'POST',
+        url: $form.attr('action'),
 
-        beforeSend: function () {
+        beforeSend: function beforeSend() {
 
-          $form.spinnerOverlay ( 'show' );
-
+          $form.spinnerOverlay('show');
         },
 
-        error: function ( res ) {
+        error: function error(res) {
 
-          if ( _.isString ( res ) ) {
+          if (_.isString(res)) {
 
-            if ( res[0] === '<' ) { //INFO: Is HTML
+            if (res[0] === '<') {
+              //INFO: Is HTML
 
-              $.noty ( 'There was an error, please try again later' );
+              $.noty('There was an error, please try again later');
 
-              $body.append ( res );
-
+              $body.append(res);
             } else {
 
-              $.noty ( res );
-
+              $.noty(res);
             }
-
           } else {
 
-            $.noty ( 'There was an error, please try again later' );
-
+            $.noty('There was an error, please try again later');
           }
-
         },
 
-        success: function ( res ) {
+        success: function success(res) {
 
-          if ( _.isString ( res ) ) {
+          if (_.isString(res)) {
 
-            if ( res === 'refresh' ) {
+            if (res === 'refresh') {
 
-              $.noty ( 'Done! Refreshing the page...' );
+              $.noty('Done! Refreshing the page...');
 
-              location.reload ();
+              location.reload();
+            } else if (/^((\S*)?:\/\/)?\/?\S*$/.test(res)) {
+              //INFO: Is an url, either absolute or relative
 
-            } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
+              if (res === window.location.href || res === window.location.pathname) {
 
-              if ( res === window.location.href || res === window.location.pathname ) {
+                $.noty('Done! Refreshing the page...');
 
-                $.noty ( 'Done! Refreshing the page...' );
-
-                location.reload ();
-
+                location.reload();
               } else {
 
-                $.noty ( 'Done! Redirecting...' );
+                $.noty('Done! Redirecting...');
 
-                location.assign ( res );
-
+                location.assign(res);
               }
+            } else if (res[0] === '<') {
+              //INFO: Is HTML
 
-            } else if ( res[0] === '<' ) { //INFO: Is HTML
+              $.noty('Done! A page refresh may be needed');
 
-              $.noty ( 'Done! A page refresh may be needed' );
-
-              $body.append ( res );
-
+              $body.append(res);
             } else {
 
-              $.noty ( res );
-
+              $.noty(res);
             }
-
           } else {
 
-            $.noty ( 'Done! A page refresh may be needed' );
-
+            $.noty('Done! A page refresh may be needed');
           }
-
         },
 
-        complete: function () {
+        complete: function complete() {
 
-          $form.spinnerOverlay ( 'hide' );
-
+          $form.spinnerOverlay('hide');
         }
 
       });
-
     });
-
   };
 
   /* READY */
 
   $(function () {
 
-    $('form.ajax').formAjax ();
-
+    $('form.ajax').formAjax();
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Form Sync
@@ -5632,7 +5112,9 @@
 
 //TODO: Maybe sync at the init time also
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -5644,81 +5126,69 @@
 
   $.fn.formSync = function () {
 
-    this.each ( function () {
+    this.each(function () {
 
       var $form = $(this),
-          group = $form.data ( 'sync-group' );
+          group = $form.data('sync-group');
 
-      if ( groups.indexOf ( group ) !== -1 ) return;
+      if (groups.indexOf(group) !== -1) return;
 
-      groups.push ( group );
+      groups.push(group);
 
       var $forms = $('form[data-sync-group="' + group + '"]'),
-          $eles = $forms.find ( 'input, textarea, select' );
+          $eles = $forms.find('input, textarea, select');
 
-      $eles.each ( function () {
+      $eles.each(function () {
 
         var $ele = $(this),
-            name = $ele.attr ( 'name' ),
-            isCheckable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
-            isRadio = isCheckable && $ele.is ( '[type="radio"]' ),
-            isTextfield = $ele.is ( 'input, textarea' ),
+            name = $ele.attr('name'),
+            isCheckable = $ele.is('[type="radio"], [type="checkbox"]'),
+            isRadio = isCheckable && $ele.is('[type="radio"]'),
+            isTextfield = $ele.is('input, textarea'),
             events = isTextfield ? 'input change' : 'change',
-            $currentForm = $ele.parent ( 'form' ),
-            $otherForms = $forms.not ( $currentForm ),
-            $otherEles = $otherForms.find ( '[name="' + name + '"]' );
+            $currentForm = $ele.parent('form'),
+            $otherForms = $forms.not($currentForm),
+            $otherEles = $otherForms.find('[name="' + name + '"]');
 
-        $ele.on ( events, function () {
+        $ele.on(events, function () {
 
-          var currentValue = $ele.val (),
-              currentChecked = !!$ele.prop ( 'checked' );
+          var currentValue = $ele.val(),
+              currentChecked = !!$ele.prop('checked');
 
-          $otherEles.each ( function () {
+          $otherEles.each(function () {
 
             var $otherEle = $(this),
-                otherValue = $otherEle.val (),
-                otherChecked = !!$otherEle.prop ( 'checked' );
+                otherValue = $otherEle.val(),
+                otherChecked = !!$otherEle.prop('checked');
 
-            if ( isRadio ) {
+            if (isRadio) {
 
-              if ( currentValue !== otherValue || currentChecked === otherChecked ) return;
-
-            } else if ( currentValue === otherValue && currentChecked === otherChecked ) {
+              if (currentValue !== otherValue || currentChecked === otherChecked) return;
+            } else if (currentValue === otherValue && currentChecked === otherChecked) {
 
               return;
-
             }
 
-            if ( isCheckable ) {
+            if (isCheckable) {
 
-              $otherEle.prop ( 'checked', currentChecked ).trigger ( 'change' );
-
+              $otherEle.prop('checked', currentChecked).trigger('change');
             } else {
 
-              $otherEle.val ( currentValue ).trigger ( 'change' );
-
+              $otherEle.val(currentValue).trigger('change');
             }
-
           });
-
         });
-
       });
-
     });
-
   };
 
   /* READY */
 
   $(function () {
 
-    $('form[data-sync-group]').formSync ();
-
+    $('form[data-sync-group]').formSync();
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - formValidate
@@ -5733,100 +5203,102 @@
 //TODO: Show error message
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* FORM VALIDATE */
 
-  $.factory ( 'svelto.formValidate', {
+  $.factory('svelto.formValidate', {
 
     /* OPTIONS */
 
     options: {
       validators: {
         /* TYPE */
-        alpha: function ( value ) {
+        alpha: function alpha(value) {
           var re = /^[a-zA-Z]+$/;
-          return value.match ( re ) ? true : 'Only alphabetical characters are allowed';
+          return value.match(re) ? true : 'Only alphabetical characters are allowed';
         },
-        alphanumeric: function ( value ) {
+        alphanumeric: function alphanumeric(value) {
           var re = /^([a-zA-Z0-9]+)$/;
-          return value.match ( re ) ? true : 'Only alphanumeric characters are allowed';
+          return value.match(re) ? true : 'Only alphanumeric characters are allowed';
         },
-        hexadecimal: function ( value ) {
+        hexadecimal: function hexadecimal(value) {
           var re = /^[0-9a-fA-F]+$/;
-          return value.match ( re ) ? true : 'Only hexadecimal characters are allowed';
+          return value.match(re) ? true : 'Only hexadecimal characters are allowed';
         },
-        number: function ( value ) {
+        number: function number(value) {
           var re = /^-?[0-9]+$/; //FIXME: It is supposed to match both integers and floats, but it doesn't
-          return value.match ( re ) ? true : 'Only numbers are allowed';
+          return value.match(re) ? true : 'Only numbers are allowed';
         },
-        integer: function ( value ) {
+        integer: function integer(value) {
           var re = /^(?:-?(?:0|[1-9][0-9]*))$/;
-          return value.match ( re ) ? true : 'Only integers numbers are allowed';
+          return value.match(re) ? true : 'Only integers numbers are allowed';
         },
-        float: function ( value ) {
+        float: function float(value) {
           var re = /^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/; //FIXME: We are also matching the scientific notation here, this might be unwanted, expecially if a language that doesn't support this notation has to take care of it
-          return value.match ( re ) ? true : 'Only floating point numbers are allowed';
+          return value.match(re) ? true : 'Only floating point numbers are allowed';
         },
         /* NUMBER */
-        min: function ( value, min ) {
-          return ( Number ( value ) >= Number ( min ) ) ? true : 'The number must be at least ' + min;
+        min: function min(value, _min) {
+          return Number(value) >= Number(_min) ? true : 'The number must be at least ' + _min;
         },
-        max: function ( value, max ) {
-          return ( Number ( value ) <= Number ( max ) ) ? true : 'The number must be at maximum ' + max;
+        max: function max(value, _max) {
+          return Number(value) <= Number(_max) ? true : 'The number must be at maximum ' + _max;
         },
-        range: function ( value, min, max ) {
-          value = Number ( value );
-          return ( value >= Number ( min ) && value <= Number ( max ) ) ? true : 'The number must be between ' + min + ' and ' + max;
+        range: function range(value, min, max) {
+          value = Number(value);
+          return value >= Number(min) && value <= Number(max) ? true : 'The number must be between ' + min + ' and ' + max;
         },
         /* STRING */
-        minLength: function ( value, minLength ) {
-          return ( value.trim ().length >= Number ( minLength ) ) ? true : 'The lenght must be at least ' + minLength;
+        minLength: function minLength(value, _minLength) {
+          return value.trim().length >= Number(_minLength) ? true : 'The lenght must be at least ' + _minLength;
         },
-        maxLength: function ( value, maxLength ) {
-          return ( value.trim ().length <= Number ( maxLength ) ) ? true : 'The lenght must be at maximum ' + maxLength;
+        maxLength: function maxLength(value, _maxLength) {
+          return value.trim().length <= Number(_maxLength) ? true : 'The lenght must be at maximum ' + _maxLength;
         },
-        rangeLength: function ( value, minLength, maxLength ) {
-          value = value.trim ();
-          return ( value.length >= Number ( minLength ) && value.length <= Number ( maxLength ) ) ? true : 'The length must be between ' + minLength + ' and ' + maxLength;
+        rangeLength: function rangeLength(value, minLength, maxLength) {
+          value = value.trim();
+          return value.length >= Number(minLength) && value.length <= Number(maxLength) ? true : 'The length must be between ' + minLength + ' and ' + maxLength;
         },
-        exactLength: function ( value, length ) {
-          return ( value.trim ().length === Number ( length ) ) ? true : 'The length must be exactly ' + length;
+        exactLength: function exactLength(value, length) {
+          return value.trim().length === Number(length) ? true : 'The length must be exactly ' + length;
         },
         /* THINGS */
-        email: function ( value ) {
+        email: function email(value) {
           var re = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
-          return value.match ( re ) ? true : 'Enter a valid email address';
+          return value.match(re) ? true : 'Enter a valid email address';
         },
-        cc: function ( value ) {
+        cc: function cc(value) {
           var re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
-          return value.match ( re ) ? true : 'Enter a valid credit card number';
+          return value.match(re) ? true : 'Enter a valid credit card number';
         },
-        ssn: function ( value ) {
+        ssn: function ssn(value) {
           var re = /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
-          return value.match ( re ) ? true : 'Enter a valid Social Security Number';
+          return value.match(re) ? true : 'Enter a valid Social Security Number';
         },
-        ipv4: function ( value ) {
+        ipv4: function ipv4(value) {
           var re = /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
-          return value.match ( re ) ? true : 'Enter a valid IPv4 address';
+          return value.match(re) ? true : 'Enter a valid IPv4 address';
         },
-        url: function ( value ) {
+        url: function url(value) {
           var re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
-          return value.match ( re ) ? true : 'Enter a valid URL';
+          return value.match(re) ? true : 'Enter a valid URL';
         },
         /* OTHERS */
-        required: function ( value ) {
-          return ( value.trim ().length > 0 ) ? true : 'This field is required';
+        required: function required(value) {
+          return value.trim().length > 0 ? true : 'This field is required';
         },
-        matches: function ( value ) {
-          var matches = _.slice ( arguments, 1 );
-          return ( matches.indexOf ( value.toLowerCase () ) !== -1 ) ? true : 'This value is not allowed';
+        matches: function matches(value) {
+          var matches = _.slice(arguments, 1);
+          return matches.indexOf(value.toLowerCase()) !== -1 ? true : 'This value is not allowed';
         },
-        matchesField: function ( value, fieldName ) {
-          var fieldValue = _.find ( this, { name: fieldName } ).value;
-          return ( value === fieldValue ) ? true : 'The two fields don\'t match';
+        matchesField: function matchesField(value, fieldName) {
+          var fieldValue = _.find(this, { name: fieldName }).value;
+          return value === fieldValue ? true : 'The two fields don\'t match';
         }
       },
       characters: {
@@ -5858,293 +5330,256 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
-
+      $root.find('[data-validations]').parents('form').formValidate();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$form = this.$element;
-      this.$elements = this.$element.find ( this.options.selectors.element );
-      this.$submitters = this.$element.find ( this.options.selectors.submitter );
+      this.$elements = this.$element.find(this.options.selectors.element);
+      this.$submitters = this.$element.find(this.options.selectors.submitter);
 
-      this.___elements ();
-
+      this.___elements();
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( this.$elements, 'change', this.__change );
+      this._on(this.$elements, 'change', this.__change);
 
       /* FOCUS */
 
-      this._on ( this.$elements, 'focus', this.__focus );
+      this._on(this.$elements, 'focus', this.__focus);
 
       /* BLUR */
 
-      this._on ( this.$elements, 'blur', this.__blur );
+      this._on(this.$elements, 'blur', this.__blur);
 
       /* SUBMIT */
 
-      this._on ( 'submit', this.__submit );
-
+      this._on('submit', this.__submit);
     },
 
     /* ELEMENTS */
 
-    ___elements: function () {
+    ___elements: function ___elements() {
 
       this.elements = {};
 
-      for ( var i = 0, l = this.$elements.length; i < l; i++ ) {
+      for (var i = 0, l = this.$elements.length; i < l; i++) {
 
         var element = this.$elements[i],
             $element = $(element),
             name = element.name,
-            validationsStr = $element.data ( this.options.datas.validations );
+            validationsStr = $element.data(this.options.datas.validations);
 
-        if ( validationsStr ) {
+        if (validationsStr) {
 
           var validations = {};
 
-          var validationsArr = validationsStr.split ( this.options.characters.separators.validations );
+          var validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
-          for ( var vi = 0, vl = validationsArr.length; vi < vl; vi++ ) {
+          for (var vi = 0, vl = validationsArr.length; vi < vl; vi++) {
 
             var validationStr = validationsArr[vi],
-                matches = validationStr.match ( this.options.regexes.validation );
+                matches = validationStr.match(this.options.regexes.validation);
 
-            if ( !matches ) continue;
+            if (!matches) continue;
 
             var validationName = matches[1],
-                validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
+                validationArgs = matches[2] ? matches[2].split(this.options.characters.separators.arguments) : [],
                 validator = this.options.validators[validationName];
 
-            if ( !validator ) continue;
+            if (!validator) continue;
 
             validations[validationName] = {
               args: validationArgs,
               validator: validator
             };
-
           }
 
-          if ( _.size ( validations ) === 0 ) {
+          if (_.size(validations) === 0) {
 
             validations = false;
-
           }
-
         } else {
 
           var validations = false;
-
         }
 
         this.elements[name] = {
           $element: $element,
-          $wrapper: $element.parents ( this.options.selectors.wrapper ).first (),
+          $wrapper: $element.parents(this.options.selectors.wrapper).first(),
           name: name,
           dirty: false,
-          value: $element.val (),
+          value: $element.val(),
           validations: validations,
           isValid: undefined
         };
-
       }
-
     },
 
     /* CHANGE */
 
-    __change: function ( event, element ) {
+    __change: function __change(event, element) {
 
       var elementObj = this.elements[element.name];
 
       elementObj.dirty = true;
 
-      if ( elementObj.isValid !== undefined ) {
+      if (elementObj.isValid !== undefined) {
 
         elementObj.isValid = undefined;
 
-        this.__indeterminate ( elementObj );
-
+        this.__indeterminate(elementObj);
       }
 
-      for ( var name in this.elements ) {
+      for (var name in this.elements) {
 
         var relativeElementObj = this.elements[name];
 
-        if ( relativeElementObj.validations && relativeElementObj.validations['matchesField'] && relativeElementObj.validations['matchesField'].args.indexOf ( elementObj.name ) !== -1 ) {
+        if (relativeElementObj.validations && relativeElementObj.validations['matchesField'] && relativeElementObj.validations['matchesField'].args.indexOf(elementObj.name) !== -1) {
 
-          this.__indeterminate ( relativeElementObj );
-
+          this.__indeterminate(relativeElementObj);
         }
-
       }
 
-      if ( document.activeElement !== element ) {
+      if (document.activeElement !== element) {
 
-        this._validateWorker ( elementObj );
-
+        this._validateWorker(elementObj);
       }
-
     },
 
     /* FOCUS */
 
-    __focus: function ( event, element ) {
+    __focus: function __focus(event, element) {
 
       var elementObj = this.elements[element.name];
 
       elementObj.isValid = undefined;
 
-      this.__indeterminate ( elementObj );
-
+      this.__indeterminate(elementObj);
     },
 
     /* BLUR */
 
-    __blur: function ( event, element ) {
+    __blur: function __blur(event, element) {
 
       var elementObj = this.elements[element.name];
 
-      this._validateWorker ( elementObj );
-
+      this._validateWorker(elementObj);
     },
 
     /* SUBMIT */
 
-    __submit: function ( event ) {
+    __submit: function __submit(event) {
 
-      if ( !this.isValid () ) {
+      if (!this.isValid()) {
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
+        event.preventDefault();
+        event.stopImmediatePropagation();
       }
-
     },
 
     /* ELEMENT */
 
-    _validateWorker: function ( elementObj ) {
+    _validateWorker: function _validateWorker(elementObj) {
 
-      if ( elementObj.isValid === undefined ) {
+      if (elementObj.isValid === undefined) {
 
-        var result = this._validate ( elementObj ),
-            isValid = ( result === true );
+        var result = this._validate(elementObj),
+            isValid = result === true;
 
         elementObj.isValid = isValid;
 
-        if ( isValid ) {
+        if (isValid) {
 
-          this.__valid ( elementObj );
-
+          this.__valid(elementObj);
         } else {
 
-          this.__invalid ( elementObj, result );
-
+          this.__invalid(elementObj, result);
         }
-
       }
-
     },
 
-    _validate: function ( elementObj ) {
+    _validate: function _validate(elementObj) {
 
       var errors = {},
           validations = elementObj.validations;
 
-      if ( elementObj.dirty ) {
+      if (elementObj.dirty) {
 
-        elementObj.value = elementObj.$element.val ();
+        elementObj.value = elementObj.$element.val();
 
         elementObj.dirty = false;
-
       }
 
-      if ( validations ) {
+      if (validations) {
 
-        for ( var name in validations ) {
+        for (var name in validations) {
 
           var validation = validations[name],
-              result = validation.validator.apply ( this.elements, [elementObj.value].concat ( validation.args ) );
+              result = validation.validator.apply(this.elements, [elementObj.value].concat(validation.args));
 
-          if ( result !== true ) {
+          if (result !== true) {
 
-            errors[name] = !_.isString ( result ) ? 'This value is not valid' : result;
-
+            errors[name] = !_.isString(result) ? 'This value is not valid' : result;
           }
-
         }
-
       }
 
-      var isValid = ( _.size ( errors ) === 0 );
+      var isValid = _.size(errors) === 0;
 
       return isValid ? true : errors;
-
     },
 
-    __indeterminate: function ( elementObj ) {
+    __indeterminate: function __indeterminate(elementObj) {
 
-      elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
-
+      elementObj.$wrapper.removeClass(this.options.classes.invalid + ' ' + this.options.classes.valid);
     },
 
-    __valid: function ( elementObj ) {
+    __valid: function __valid(elementObj) {
 
-      elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
-
+      elementObj.$wrapper.removeClass(this.options.classes.invalid).addClass(this.options.classes.valid);
     },
 
-    __invalid: function ( elementObj, errors ) {
+    __invalid: function __invalid(elementObj, errors) {
 
-      elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
-
+      elementObj.$wrapper.removeClass(this.options.classes.valid).addClass(this.options.classes.invalid);
     },
 
     /* API */
 
-    isValid: function () {
+    isValid: function isValid() {
 
-      for ( var name in this.elements ) {
+      for (var name in this.elements) {
 
         var elementObj = this.elements[name];
 
-        if ( elementObj.isValid === undefined ) {
+        if (elementObj.isValid === undefined) {
 
-          this._validateWorker ( elementObj );
-
+          this._validateWorker(elementObj);
         }
-
       }
 
-      for ( var name in this.elements ) {
+      for (var name in this.elements) {
 
         var elementObj = this.elements[name];
 
-        if ( elementObj.isValid === false ) {
+        if (elementObj.isValid === false) {
 
           return false;
-
         }
-
       }
 
       return true;
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Helpers
@@ -6156,7 +5591,9 @@
  * @requires ../pointer/Pointer.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -6164,16 +5601,12 @@
 
   $(function () {
 
-    $('.scroll-to-top').on ( Pointer.tap, function () {
+    $('.scroll-to-top').on(Pointer.tap, function () {
 
-      $body.animate ({ scrollTop: 0 }, $.ui.animation.normal );
-
+      $body.animate({ scrollTop: 0 }, $.ui.animation.normal);
     });
-
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Infobar
@@ -6186,13 +5619,15 @@
 
 //TODO: Maybe add the ability to open it
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* INFOBAR */
 
-  $.factory ( 'svelto.infobar', {
+  $.factory('svelto.infobar', {
 
     /* OPTIONS */
 
@@ -6207,41 +5642,35 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.infobar' ).infobar ();
-
+      $root.find('.infobar').infobar();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$infobar = this.$element;
-      this.$closers = this.$infobar.find ( this.options.selectors.closer );
-
+      this.$closers = this.$infobar.find(this.options.selectors.closer);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CLOSER */
 
-      this._on ( this.$closers, Pointer.tap, this.close );
-
+      this._on(this.$closers, Pointer.tap, this.close);
     },
 
     /* PUBLIC */
 
-    close: function () {
+    close: function close() {
 
-      this.$infobar.remove ();
+      this.$infobar.remove();
 
-      this._trigger ( 'close' );
-
+      this._trigger('close');
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Modal
@@ -6256,13 +5685,15 @@
 
 //TODO: Disable scrolling while the modal is open
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* MODAL */
 
-  $.factory ( 'svelto.modal', {
+  $.factory('svelto.modal', {
 
     /* OPTIONS */
 
@@ -6282,112 +5713,97 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.modal' ).modal ();
-
+      $root.find('.modal').modal();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.id = this.$modal.attr ( 'id' );
+      this.id = this.$modal.attr('id');
 
       this.$triggers = $(this.options.selectors.trigger + '[data-modal="' + this.id + '"]');
-      this.$closers = this.$modal.find ( this.options.selectors.closer );
+      this.$closers = this.$modal.find(this.options.selectors.closer);
 
-      this._isOpen = this.$modal.hasClass ( this.options.classes.open );
-
+      this._isOpen = this.$modal.hasClass(this.options.classes.open);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TAP */
 
-      this._on ( Pointer.tap, this.__tap );
+      this._on(Pointer.tap, this.__tap);
 
       /* TRIGGER */
 
-      this._on ( this.$triggers, Pointer.tap, this.open );
+      this._on(this.$triggers, Pointer.tap, this.open);
       /* CLOSER */
 
-      this._on ( this.$closers, Pointer.tap, this.close );
-
+      this._on(this.$closers, Pointer.tap, this.close);
     },
 
     /* PRIVATE */
 
-    __tap: function ( event ) {
+    __tap: function __tap(event) {
 
-      if ( event.target === this.modal ) {
+      if (event.target === this.modal) {
 
-        this.close ();
-
+        this.close();
       }
-
     },
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+      if (event.keyCode === $.ui.keyCode.ESCAPE) {
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
+        event.preventDefault();
+        event.stopImmediatePropagation();
 
-        this.close ();
-
+        this.close();
       }
-
     },
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
       return this._isOpen;
-
     },
 
-    toggle: function ( force ) {
+    toggle: function toggle(force) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if (!_.isBoolean(force)) {
 
         force = !this._isOpen;
-
       }
 
-      if ( force !== this._isOpen ) {
+      if (force !== this._isOpen) {
 
         this._isOpen = force;
 
-        this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
+        this.$modal.toggleClass(this.options.classes.open, this._isOpen);
 
-        this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
+        this[this._isOpen ? '_on' : '_off']($document, 'keydown', this.__keydown);
 
-        this._trigger ( this._isOpen ? 'open' : 'close' );
-
+        this._trigger(this._isOpen ? 'open' : 'close');
       }
-
     },
 
-    open: function () {
+    open: function open() {
 
-      this.toggle ( true );
-
+      this.toggle(true);
     },
 
-    close: function () {
+    close: function close() {
 
-      this.toggle ( false );
-
+      this.toggle(false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - N Times Action (Group)
@@ -6401,17 +5817,18 @@
 
 //TODO: Add support for cookie settable parameters
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* GROUP */
 
-  var Group = function ( name ) {
+  var Group = function Group(name) {
 
     this.name = name;
-    this.actions = this.unserialize ( $.cookie.get ( this.name ) || '{}' );
-
+    this.actions = this.unserialize($.cookie.get(this.name) || '{}');
   };
 
   /* METHODS */
@@ -6426,56 +5843,47 @@
 
     /* API */
 
-    get: function ( action ) {
+    get: function get(action) {
 
       return this.actions[action] || 0;
-
     },
 
-    set: function ( action, times ) {
+    set: function set(action, times) {
 
       times = Number(times);
 
-      if ( !_.isNaN ( times ) ) {
+      if (!_.isNaN(times)) {
 
-        if ( times === 0 ) {
+        if (times === 0) {
 
-          this.reset ( action );
-
+          this.reset(action);
         } else {
 
           this.actions[action] = times;
 
-          this.update ();
-
+          this.update();
         }
-
       }
-
     },
 
-    update: function () {
+    update: function update() {
 
-      $.cookie.set ( this.name, this.serialize ( this.actions ), Infinity );
-
+      $.cookie.set(this.name, this.serialize(this.actions), Infinity);
     },
 
-    reset: function ( action ) {
+    reset: function reset(action) {
 
-      if ( action ) {
+      if (action) {
 
         delete this.actions[action];
 
-        this.update ();
-
+        this.update();
       } else {
 
         this.actions = {};
 
-        $.cookie.remove ( this.name );
-
+        $.cookie.remove(this.name);
       }
-
     }
 
   };
@@ -6485,9 +5893,7 @@
   Svelto.NTA = {
     Group: Group
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - N Times Action (Action)
@@ -6499,17 +5905,18 @@
  * @requires NTA.Group.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* ACTION */
 
-  var Action = function ( options ) {
+  var Action = function Action(options) {
 
-    this.group = new Svelto.NTA.Group ( options.group );
+    this.group = new Svelto.NTA.Group(options.group);
     this.name = options.name;
-
   };
 
   /* METHODS */
@@ -6518,22 +5925,19 @@
 
     /* API */
 
-    get: function () {
+    get: function get() {
 
-      return this.group.get ( this.name );
-
+      return this.group.get(this.name);
     },
 
-    set: function ( times ) {
+    set: function set(times) {
 
-      this.group.set ( this.name, times );
-
+      this.group.set(this.name, times);
     },
 
-    reset: function () {
+    reset: function reset() {
 
-      this.group.reset ( this.name );
-
+      this.group.reset(this.name);
     }
 
   };
@@ -6541,9 +5945,7 @@
   /* BINDING */
 
   Svelto.NTA.Action = Action;
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - N Times Action
@@ -6557,68 +5959,62 @@
 
 //TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* N TIMES ACTION */
 
-  $.nTimesAction = function ( options ) {
+  $.nTimesAction = function (options) {
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.merge({
       group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
       action: false, //INFO: The action name
       times: Infinity, //INFO: The times an action can be executed
       fn: false //INFO: The function to execute
-    }, options );
+    }, options);
 
     /* NORMALIZING TIMES */
 
     options.times = Number(options.times);
 
-    if ( _.isNaN ( options.times ) ) {
+    if (_.isNaN(options.times)) {
 
       options.times = 0;
-
     }
 
     /* N TIMES ACTION */
 
-    if ( options.action ) {
+    if (options.action) {
 
-      var action = new Svelto.NTA.Action ({ group: options.group, name: options.action }),
-          actionTimes = action.get ();
+      var action = new Svelto.NTA.Action({ group: options.group, name: options.action }),
+          actionTimes = action.get();
 
-      if ( options.fn && actionTimes < options.times ) {
+      if (options.fn && actionTimes < options.times) {
 
-        var value = options.fn ({
+        var value = options.fn({
           group: options.group,
           action: options.action,
           time: actionTimes + 1
         });
 
-        if ( value !== false ) {
+        if (value !== false) {
 
-          action.set ( actionTimes + 1 );
-
+          action.set(actionTimes + 1);
         }
-
       }
 
       return action;
+    } else if (options.group) {
 
-    } else if ( options.group ) {
-
-      return new Svelto.NTA.Group ( options.group );
-
+      return new Svelto.NTA.Group(options.group);
     }
-
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Navbar
@@ -6633,13 +6029,15 @@
 //TODO: Disable scrolling while the navbar is open
 //TODO: Close with a flick
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* NAVBAR */
 
-  $.factory ( 'svelto.navbar', {
+  $.factory('svelto.navbar', {
 
     /* OPTIONS */
 
@@ -6664,76 +6062,70 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.navbar' ).navbar ();
-
+      $root.find('.navbar').navbar();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.navbar = this.element;
       this.$navbar = this.$element;
 
-      this.id = this.$navbar.attr ( 'id' );
+      this.id = this.$navbar.attr('id');
 
-      this.$closers = this.$navbar.find ( this.options.selectors.closer );
+      this.$closers = this.$navbar.find(this.options.selectors.closer);
       this.$triggers = $(this.options.selectors.trigger + '[data-navbar="' + this.id + '"]');
 
-      this.direction = this.$navbar.data ( this.options.datas.direction );
-      this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
-      this.isFlickable = this.$navbar.hasClass ( this.options.classes.flickable );
-
+      this.direction = this.$navbar.data(this.options.datas.direction);
+      this._isOpen = this.$navbar.hasClass(this.options.classes.open);
+      this.isFlickable = this.$navbar.hasClass(this.options.classes.flickable);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TAP */
 
-      this._on ( Pointer.tap, this.__tap );
+      this._on(Pointer.tap, this.__tap);
 
       /* TRIGGER */
 
-      this._on ( this.$triggers, Pointer.tap, this.open );
+      this._on(this.$triggers, Pointer.tap, this.open);
 
       /* CLOSER */
 
-      this._on ( this.$closers, Pointer.tap, this.close );
+      this._on(this.$closers, Pointer.tap, this.close);
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* FLICK */
 
-      if ( this.isFlickable ) {
+      if (this.isFlickable) {
 
-        this._on ( $document, Pointer.flick, this.__flick );
-
+        this._on($document, Pointer.flick, this.__flick);
       }
-
     },
 
     /* TAP */
 
-    __tap: function ( event ) {
+    __tap: function __tap(event) {
 
-      if ( event.target === this.navbar ) {
+      if (event.target === this.navbar) {
 
-        this.close ();
-
+        this.close();
       }
-
     },
 
     /* KEYDOWN */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.ESCAPE:
-          this.close ();
+          this.close();
           break;
 
         default:
@@ -6741,32 +6133,31 @@
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
-
+      event.preventDefault();
+      event.stopImmediatePropagation();
     },
 
     /* FLICK */
 
-    __flick: function ( event, data ) {
+    __flick: function __flick(event, data) {
 
-      if ( this._isOpen ) return;
+      if (this._isOpen) return;
 
-      switch ( this.direction ) {
+      switch (this.direction) {
 
         case 'left':
         case 'right':
-          if ( data.orientation === 'horizontal' ) {
-            if ( this.direction === 'left' ) {
-              if ( data.direction === 1 ) {
-                if ( data.startXY.X <= this.options.flickableRange ) {
-                  this.open ();
+          if (data.orientation === 'horizontal') {
+            if (this.direction === 'left') {
+              if (data.direction === 1) {
+                if (data.startXY.X <= this.options.flickableRange) {
+                  this.open();
                 }
               }
-            } else if ( this.direction === 'right' ) {
-              if ( data.direction === -1 ) {
-                if ( $window.width () - data.startXY.X <= this.options.flickableRange ) {
-                  this.open ();
+            } else if (this.direction === 'right') {
+              if (data.direction === -1) {
+                if ($window.width() - data.startXY.X <= this.options.flickableRange) {
+                  this.open();
                 }
               }
             }
@@ -6775,17 +6166,17 @@
 
         case 'top':
         case 'bottom':
-          if ( data.orientation === 'vertical' ) {
-            if ( this.direction === 'top' ) {
-              if ( data.direction === -1 ) {
-                if ( data.startXY.Y <= this.options.flickableRange ) {
-                  this.open ();
+          if (data.orientation === 'vertical') {
+            if (this.direction === 'top') {
+              if (data.direction === -1) {
+                if (data.startXY.Y <= this.options.flickableRange) {
+                  this.open();
                 }
               }
-            } else if ( this.direction === 'bottom' ) {
-              if ( data.direction === 1 ) {
-                if ( $window.height () - data.startXY.Y <= this.options.flickableRange ) {
-                  this.open ();
+            } else if (this.direction === 'bottom') {
+              if (data.direction === 1) {
+                if ($window.height() - data.startXY.Y <= this.options.flickableRange) {
+                  this.open();
                 }
               }
             }
@@ -6793,53 +6184,44 @@
           break;
 
       }
-
     },
 
     /* PUBLIC */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
       return this._isOpen;
-
     },
 
-    toggle: function ( force ) {
+    toggle: function toggle(force) {
 
-      if ( _.isUndefined ( force ) ) {
+      if (_.isUndefined(force)) {
 
         force = !this._isOpen;
-
       }
 
-      if ( force !== this._isOpen ) {
+      if (force !== this._isOpen) {
 
         this._isOpen = force;
 
-        this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
+        this.$navbar.toggleClass(this.options.classes.open, this._isOpen);
 
-        this._trigger ( this._isOpen ? 'open' : 'close' );
-
+        this._trigger(this._isOpen ? 'open' : 'close');
       }
-
     },
 
-    open: function () {
+    open: function open() {
 
-      this.toggle ( true );
-
+      this.toggle(true);
     },
 
-    close: function () {
+    close: function close() {
 
-      this.toggle ( false );
-
+      this.toggle(false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Notification
@@ -6853,50 +6235,44 @@
 
 //INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* NOTIFICATION */
 
-  $.notification = function ( options ) {
+  $.notification = function (options) {
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.merge({
       title: false,
       body: false,
       img: false
-    }, options );
+    }, options);
 
     /* NOTIFICATIONS */
 
-    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
+    if (!document.hasFocus() && window.Notification && Notification.permission !== 'denied') {
 
-      Notification.requestPermission ( function ( status ) {
+      Notification.requestPermission(function (status) {
 
-        if ( status === 'granted' ) {
+        if (status === 'granted') {
 
-          var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
-
+          var notification = new Notification(options.title, { body: options.body, icon: options.img });
         } else {
 
-          $.noty ( options );
-
+          $.noty(options);
         }
-
       });
-
     } else {
 
-      $.noty ( options );
-
+      $.noty(options);
     }
-
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - One Time Action
@@ -6907,20 +6283,19 @@
  * @requires ../n_times_action/nTimesAction.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* ONE TIME ACTION */
 
-  $.oneTimeAction = function ( options ) {
+  $.oneTimeAction = function (options) {
 
-    return $.nTimesAction ( _.merge ( { group: 'ota' }, options, { times: 1 } ) );
-
+    return $.nTimesAction(_.merge({ group: 'ota' }, options, { times: 1 }));
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Overlay
@@ -6931,13 +6306,15 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* OVERLAY */
 
-  $.factory ( 'svelto.overlay', {
+  $.factory('svelto.overlay', {
 
     /* OPTIONS */
 
@@ -6964,162 +6341,139 @@
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.overlay' ).overlay ();
-
+      $root.find('.overlay').overlay();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$overlay = this.$element;
-      this.$overlayed = this.$overlay.parent ();
+      this.$overlayed = this.$overlay.parent();
 
-      this.$triggers = this.$overlayed.find ( this.options.selectors.trigger );
-      this.$closers = this.$overlayed.find ( this.options.selectors.closer );
+      this.$triggers = this.$overlayed.find(this.options.selectors.trigger);
+      this.$closers = this.$overlayed.find(this.options.selectors.closer);
 
-      this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
-
+      this._isOpen = this.$overlay.hasClass(this.options.classes.open);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TRIGGER */
 
-      this._on ( this.$triggers, Pointer.tap, this.open );
+      this._on(this.$triggers, Pointer.tap, this.open);
 
       /* CLOSER */
 
-      this._on ( this.$closers, Pointer.tap, this.close );
+      this._on(this.$closers, Pointer.tap, this.close);
 
       /* HOVER */
 
-      if ( this.options.hover.triggerable ) {
+      if (this.options.hover.triggerable) {
 
-        this._on ( this.$overlayed, Pointer.enter, this.__hoverEnter );
-
+        this._on(this.$overlayed, Pointer.enter, this.__hoverEnter);
       }
-
     },
 
     /* HOVER */
 
-    __hoverEnter: function () {
+    __hoverEnter: function __hoverEnter() {
 
-      if ( !this._isOpen ) {
+      if (!this._isOpen) {
 
         this._isHoverOpen = false;
 
-        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+        this._hoverOpenTimeout = this._delay(this.__hoverOpen, this.options.hover.delays.open);
 
-        this._one ( this.$overlayed, Pointer.leave, this.__hoverLeave );
-
+        this._one(this.$overlayed, Pointer.leave, this.__hoverLeave);
       }
-
     },
 
-    __hoverOpen: function () {
+    __hoverOpen: function __hoverOpen() {
 
-      if ( !this._isOpen ) {
+      if (!this._isOpen) {
 
-        this.open ();
+        this.open();
 
         this._isHoverOpen = true;
 
         this._hoverOpenTimeout = false;
-
       }
-
     },
 
-    __hoverLeave: function () {
+    __hoverLeave: function __hoverLeave() {
 
-      if ( this._hoverOpenTimeout ) {
+      if (this._hoverOpenTimeout) {
 
-        clearTimeout ( this._hoverOpenTimeout );
+        clearTimeout(this._hoverOpenTimeout);
 
         this._hoverOpenTimeout = false;
-
       }
 
-      if ( this._isHoverOpen ) {
+      if (this._isHoverOpen) {
 
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
+        this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
       }
-
     },
 
-    __hoverClose: function () {
+    __hoverClose: function __hoverClose() {
 
-      if ( this._isHoverOpen ) {
+      if (this._isHoverOpen) {
 
-        this.close ();
+        this.close();
 
         this._isHoverOpen = false;
 
         this._hoverCloseTimeout = false;
-
       }
-
     },
 
     /* API */
 
-    isOpen: function () {
+    isOpen: function isOpen() {
 
       return this._isOpen;
-
     },
 
-    toggle: function ( force ) {
+    toggle: function toggle(force) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if (!_.isBoolean(force)) {
 
         force = !this._isOpen;
-
       }
 
-      if ( force !== this._isOpen ) {
+      if (force !== this._isOpen) {
 
         this._isOpen = force;
 
-        this._frame ( function () {
+        this._frame(function () {
 
-          this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
+          this.$overlay.toggleClass(this.options.classes.open, this._isOpen);
 
-          this._trigger ( this._isOpen ? 'open' : 'close' );
-
+          this._trigger(this._isOpen ? 'open' : 'close');
         });
-
       }
-
     },
 
-    open: function () {
+    open: function open() {
 
-      this.toggle ( true );
-
+      this.toggle(true);
     },
 
-    close: function () {
+    close: function close() {
 
-      this.toggle ( false );
-
+      this.toggle(false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
-var _self = (typeof window !== 'undefined')
-	? window   // if in browser
-	: (
-		(typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope)
-		? self // if in worker
-		: {}   // if in node js
-	);
+'use strict';
+
+var _self = typeof window !== 'undefined' ? window // if in browser
+: typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope ? self // if in worker
+: {} // if in node js
+;
 
 /**
  * Prism: Lightweight, robust, elegant syntax highlighting
@@ -7127,416 +6481,417 @@ var _self = (typeof window !== 'undefined')
  * @author Lea Verou http://lea.verou.me
  */
 
-var Prism = (function(){
+var Prism = (function () {
 
-// Private helper vars
-var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+	// Private helper vars
+	var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
 
-var _ = _self.Prism = {
-	util: {
-		encode: function (tokens) {
-			if (tokens instanceof Token) {
-				return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
-			} else if (_.util.type(tokens) === 'Array') {
-				return tokens.map(_.util.encode);
-			} else {
-				return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-			}
-		},
-
-		type: function (o) {
-			return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
-		},
-
-		// Deep clone a language definition (e.g. to extend it)
-		clone: function (o) {
-			var type = _.util.type(o);
-
-			switch (type) {
-				case 'Object':
-					var clone = {};
-
-					for (var key in o) {
-						if (o.hasOwnProperty(key)) {
-							clone[key] = _.util.clone(o[key]);
-						}
-					}
-
-					return clone;
-
-				case 'Array':
-					// Check for existence for IE8
-					return o.map && o.map(function(v) { return _.util.clone(v); });
-			}
-
-			return o;
-		}
-	},
-
-	languages: {
-		extend: function (id, redef) {
-			var lang = _.util.clone(_.languages[id]);
-
-			for (var key in redef) {
-				lang[key] = redef[key];
-			}
-
-			return lang;
-		},
-
-		/**
-		 * Insert a token before another token in a language literal
-		 * As this needs to recreate the object (we cannot actually insert before keys in object literals),
-		 * we cannot just provide an object, we need anobject and a key.
-		 * @param inside The key (or language id) of the parent
-		 * @param before The key to insert before. If not provided, the function appends instead.
-		 * @param insert Object with the key/value pairs to insert
-		 * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
-		 */
-		insertBefore: function (inside, before, insert, root) {
-			root = root || _.languages;
-			var grammar = root[inside];
-
-			if (arguments.length == 2) {
-				insert = arguments[1];
-
-				for (var newToken in insert) {
-					if (insert.hasOwnProperty(newToken)) {
-						grammar[newToken] = insert[newToken];
-					}
+	var _ = _self.Prism = {
+		util: {
+			encode: function encode(tokens) {
+				if (tokens instanceof Token) {
+					return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+				} else if (_.util.type(tokens) === 'Array') {
+					return tokens.map(_.util.encode);
+				} else {
+					return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
 				}
+			},
 
-				return grammar;
-			}
+			type: function type(o) {
+				return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
+			},
 
-			var ret = {};
+			// Deep clone a language definition (e.g. to extend it)
+			clone: function clone(o) {
+				var type = _.util.type(o);
 
-			for (var token in grammar) {
+				switch (type) {
+					case 'Object':
+						var clone = {};
 
-				if (grammar.hasOwnProperty(token)) {
-
-					if (token == before) {
-
-						for (var newToken in insert) {
-
-							if (insert.hasOwnProperty(newToken)) {
-								ret[newToken] = insert[newToken];
+						for (var key in o) {
+							if (o.hasOwnProperty(key)) {
+								clone[key] = _.util.clone(o[key]);
 							}
 						}
-					}
 
-					ret[token] = grammar[token];
+						return clone;
+
+					case 'Array':
+						// Check for existence for IE8
+						return o.map && o.map(function (v) {
+							return _.util.clone(v);
+						});
 				}
+
+				return o;
 			}
-
-			// Update references in other language definitions
-			_.languages.DFS(_.languages, function(key, value) {
-				if (value === root[inside] && key != inside) {
-					this[key] = ret;
-				}
-			});
-
-			return root[inside] = ret;
 		},
 
-		// Traverse a language definition with Depth First Search
-		DFS: function(o, callback, type) {
-			for (var i in o) {
-				if (o.hasOwnProperty(i)) {
-					callback.call(o, i, o[i], type || i);
+		languages: {
+			extend: function extend(id, redef) {
+				var lang = _.util.clone(_.languages[id]);
 
-					if (_.util.type(o[i]) === 'Object') {
-						_.languages.DFS(o[i], callback);
+				for (var key in redef) {
+					lang[key] = redef[key];
+				}
+
+				return lang;
+			},
+
+			/**
+    * Insert a token before another token in a language literal
+    * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+    * we cannot just provide an object, we need anobject and a key.
+    * @param inside The key (or language id) of the parent
+    * @param before The key to insert before. If not provided, the function appends instead.
+    * @param insert Object with the key/value pairs to insert
+    * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+    */
+			insertBefore: function insertBefore(inside, before, insert, root) {
+				root = root || _.languages;
+				var grammar = root[inside];
+
+				if (arguments.length == 2) {
+					insert = arguments[1];
+
+					for (var newToken in insert) {
+						if (insert.hasOwnProperty(newToken)) {
+							grammar[newToken] = insert[newToken];
+						}
 					}
-					else if (_.util.type(o[i]) === 'Array') {
-						_.languages.DFS(o[i], callback, i);
+
+					return grammar;
+				}
+
+				var ret = {};
+
+				for (var token in grammar) {
+
+					if (grammar.hasOwnProperty(token)) {
+
+						if (token == before) {
+
+							for (var newToken in insert) {
+
+								if (insert.hasOwnProperty(newToken)) {
+									ret[newToken] = insert[newToken];
+								}
+							}
+						}
+
+						ret[token] = grammar[token];
+					}
+				}
+
+				// Update references in other language definitions
+				_.languages.DFS(_.languages, function (key, value) {
+					if (value === root[inside] && key != inside) {
+						this[key] = ret;
+					}
+				});
+
+				return root[inside] = ret;
+			},
+
+			// Traverse a language definition with Depth First Search
+			DFS: function DFS(o, callback, type) {
+				for (var i in o) {
+					if (o.hasOwnProperty(i)) {
+						callback.call(o, i, o[i], type || i);
+
+						if (_.util.type(o[i]) === 'Object') {
+							_.languages.DFS(o[i], callback);
+						} else if (_.util.type(o[i]) === 'Array') {
+							_.languages.DFS(o[i], callback, i);
+						}
 					}
 				}
 			}
-		}
-	},
-	plugins: {},
+		},
+		plugins: {},
 
-	highlightAll: function(async, callback) {
-		var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
+		highlightAll: function highlightAll(async, callback) {
+			var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
 
-		for (var i=0, element; element = elements[i++];) {
-			_.highlightElement(element, async === true, callback);
-		}
-	},
+			for (var i = 0, element; element = elements[i++];) {
+				_.highlightElement(element, async === true, callback);
+			}
+		},
 
-	highlightElement: function(element, async, callback) {
-		// Find language
-		var language, grammar, parent = element;
+		highlightElement: function highlightElement(element, async, callback) {
+			// Find language
+			var language,
+			    grammar,
+			    parent = element;
 
-		while (parent && !lang.test(parent.className)) {
-			parent = parent.parentNode;
-		}
+			while (parent && !lang.test(parent.className)) {
+				parent = parent.parentNode;
+			}
 
-		if (parent) {
-			language = (parent.className.match(lang) || [,''])[1];
-			grammar = _.languages[language];
-		}
+			if (parent) {
+				language = (parent.className.match(lang) || [, ''])[1];
+				grammar = _.languages[language];
+			}
 
-		// Set language on the element, if not present
-		element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+			// Set language on the element, if not present
+			element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
 
-		// Set language on the parent, for styling
-		parent = element.parentNode;
+			// Set language on the parent, for styling
+			parent = element.parentNode;
 
-		if (/pre/i.test(parent.nodeName)) {
-			parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-		}
+			if (/pre/i.test(parent.nodeName)) {
+				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+			}
 
-		var code = element.textContent;
+			var code = element.textContent;
 
-		var env = {
-			element: element,
-			language: language,
-			grammar: grammar,
-			code: code
-		};
+			var env = {
+				element: element,
+				language: language,
+				grammar: grammar,
+				code: code
+			};
 
-		if (!code || !grammar) {
-			_.hooks.run('complete', env);
-			return;
-		}
+			if (!code || !grammar) {
+				_.hooks.run('complete', env);
+				return;
+			}
 
-		_.hooks.run('before-highlight', env);
+			_.hooks.run('before-highlight', env);
 
-		if (async && _self.Worker) {
-			var worker = new Worker(_.filename);
+			if (async && _self.Worker) {
+				var worker = new Worker(_.filename);
 
-			worker.onmessage = function(evt) {
-				env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
+				worker.onmessage = function (evt) {
+					env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
+
+					_.hooks.run('before-insert', env);
+
+					env.element.innerHTML = env.highlightedCode;
+
+					callback && callback.call(env.element);
+					_.hooks.run('after-highlight', env);
+					_.hooks.run('complete', env);
+				};
+
+				worker.postMessage(JSON.stringify({
+					language: env.language,
+					code: env.code,
+					immediateClose: true
+				}));
+			} else {
+				env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
 
 				_.hooks.run('before-insert', env);
 
 				env.element.innerHTML = env.highlightedCode;
 
-				callback && callback.call(env.element);
+				callback && callback.call(element);
+
 				_.hooks.run('after-highlight', env);
 				_.hooks.run('complete', env);
-			};
+			}
+		},
 
-			worker.postMessage(JSON.stringify({
-				language: env.language,
-				code: env.code,
-				immediateClose: true
-			}));
-		}
-		else {
-			env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
+		highlight: function highlight(text, grammar, language) {
+			var tokens = _.tokenize(text, grammar);
+			return Token.stringify(_.util.encode(tokens), language);
+		},
 
-			_.hooks.run('before-insert', env);
+		tokenize: function tokenize(text, grammar, language) {
+			var Token = _.Token;
 
-			env.element.innerHTML = env.highlightedCode;
+			var strarr = [text];
 
-			callback && callback.call(element);
+			var rest = grammar.rest;
 
-			_.hooks.run('after-highlight', env);
-			_.hooks.run('complete', env);
-		}
-	},
+			if (rest) {
+				for (var token in rest) {
+					grammar[token] = rest[token];
+				}
 
-	highlight: function (text, grammar, language) {
-		var tokens = _.tokenize(text, grammar);
-		return Token.stringify(_.util.encode(tokens), language);
-	},
-
-	tokenize: function(text, grammar, language) {
-		var Token = _.Token;
-
-		var strarr = [text];
-
-		var rest = grammar.rest;
-
-		if (rest) {
-			for (var token in rest) {
-				grammar[token] = rest[token];
+				delete grammar.rest;
 			}
 
-			delete grammar.rest;
-		}
+			tokenloop: for (var token in grammar) {
+				if (!grammar.hasOwnProperty(token) || !grammar[token]) {
+					continue;
+				}
 
-		tokenloop: for (var token in grammar) {
-			if(!grammar.hasOwnProperty(token) || !grammar[token]) {
-				continue;
-			}
+				var patterns = grammar[token];
+				patterns = _.util.type(patterns) === "Array" ? patterns : [patterns];
 
-			var patterns = grammar[token];
-			patterns = (_.util.type(patterns) === "Array") ? patterns : [patterns];
+				for (var j = 0; j < patterns.length; ++j) {
+					var pattern = patterns[j],
+					    inside = pattern.inside,
+					    lookbehind = !!pattern.lookbehind,
+					    lookbehindLength = 0,
+					    alias = pattern.alias;
 
-			for (var j = 0; j < patterns.length; ++j) {
-				var pattern = patterns[j],
-					inside = pattern.inside,
-					lookbehind = !!pattern.lookbehind,
-					lookbehindLength = 0,
-					alias = pattern.alias;
+					pattern = pattern.pattern || pattern;
 
-				pattern = pattern.pattern || pattern;
+					for (var i = 0; i < strarr.length; i++) {
+						// Don’t cache length as it changes during the loop
 
-				for (var i=0; i<strarr.length; i++) { // Don’t cache length as it changes during the loop
+						var str = strarr[i];
 
-					var str = strarr[i];
-
-					if (strarr.length > text.length) {
-						// Something went terribly wrong, ABORT, ABORT!
-						break tokenloop;
-					}
-
-					if (str instanceof Token) {
-						continue;
-					}
-
-					pattern.lastIndex = 0;
-
-					var match = pattern.exec(str);
-
-					if (match) {
-						if(lookbehind) {
-							lookbehindLength = match[1].length;
+						if (strarr.length > text.length) {
+							// Something went terribly wrong, ABORT, ABORT!
+							break tokenloop;
 						}
 
-						var from = match.index - 1 + lookbehindLength,
-							match = match[0].slice(lookbehindLength),
-							len = match.length,
-							to = from + len,
-							before = str.slice(0, from + 1),
-							after = str.slice(to + 1);
-
-						var args = [i, 1];
-
-						if (before) {
-							args.push(before);
+						if (str instanceof Token) {
+							continue;
 						}
 
-						var wrapped = new Token(token, inside? _.tokenize(match, inside) : match, alias);
+						pattern.lastIndex = 0;
 
-						args.push(wrapped);
+						var match = pattern.exec(str);
 
-						if (after) {
-							args.push(after);
+						if (match) {
+							if (lookbehind) {
+								lookbehindLength = match[1].length;
+							}
+
+							var from = match.index - 1 + lookbehindLength,
+							    match = match[0].slice(lookbehindLength),
+							    len = match.length,
+							    to = from + len,
+							    before = str.slice(0, from + 1),
+							    after = str.slice(to + 1);
+
+							var args = [i, 1];
+
+							if (before) {
+								args.push(before);
+							}
+
+							var wrapped = new Token(token, inside ? _.tokenize(match, inside) : match, alias);
+
+							args.push(wrapped);
+
+							if (after) {
+								args.push(after);
+							}
+
+							Array.prototype.splice.apply(strarr, args);
 						}
-
-						Array.prototype.splice.apply(strarr, args);
 					}
 				}
 			}
-		}
 
-		return strarr;
-	},
-
-	hooks: {
-		all: {},
-
-		add: function (name, callback) {
-			var hooks = _.hooks.all;
-
-			hooks[name] = hooks[name] || [];
-
-			hooks[name].push(callback);
+			return strarr;
 		},
 
-		run: function (name, env) {
-			var callbacks = _.hooks.all[name];
+		hooks: {
+			all: {},
 
-			if (!callbacks || !callbacks.length) {
-				return;
-			}
+			add: function add(name, callback) {
+				var hooks = _.hooks.all;
 
-			for (var i=0, callback; callback = callbacks[i++];) {
-				callback(env);
+				hooks[name] = hooks[name] || [];
+
+				hooks[name].push(callback);
+			},
+
+			run: function run(name, env) {
+				var callbacks = _.hooks.all[name];
+
+				if (!callbacks || !callbacks.length) {
+					return;
+				}
+
+				for (var i = 0, callback; callback = callbacks[i++];) {
+					callback(env);
+				}
 			}
 		}
-	}
-};
-
-var Token = _.Token = function(type, content, alias) {
-	this.type = type;
-	this.content = content;
-	this.alias = alias;
-};
-
-Token.stringify = function(o, language, parent) {
-	if (typeof o == 'string') {
-		return o;
-	}
-
-	if (_.util.type(o) === 'Array') {
-		return o.map(function(element) {
-			return Token.stringify(element, language, o);
-		}).join('');
-	}
-
-	var env = {
-		type: o.type,
-		content: Token.stringify(o.content, language, parent),
-		tag: 'span',
-		classes: ['token', o.type],
-		attributes: {},
-		language: language,
-		parent: parent
 	};
 
-	if (env.type == 'comment') {
-		env.attributes['spellcheck'] = 'true';
-	}
+	var Token = _.Token = function (type, content, alias) {
+		this.type = type;
+		this.content = content;
+		this.alias = alias;
+	};
 
-	if (o.alias) {
-		var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-		Array.prototype.push.apply(env.classes, aliases);
-	}
+	Token.stringify = function (o, language, parent) {
+		if (typeof o == 'string') {
+			return o;
+		}
 
-	_.hooks.run('wrap', env);
+		if (_.util.type(o) === 'Array') {
+			return o.map(function (element) {
+				return Token.stringify(element, language, o);
+			}).join('');
+		}
 
-	var attributes = '';
+		var env = {
+			type: o.type,
+			content: Token.stringify(o.content, language, parent),
+			tag: 'span',
+			classes: ['token', o.type],
+			attributes: {},
+			language: language,
+			parent: parent
+		};
 
-	for (var name in env.attributes) {
-		attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
-	}
+		if (env.type == 'comment') {
+			env.attributes['spellcheck'] = 'true';
+		}
 
-	return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
+		if (o.alias) {
+			var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
+			Array.prototype.push.apply(env.classes, aliases);
+		}
 
-};
+		_.hooks.run('wrap', env);
 
-if (!_self.document) {
-	if (!_self.addEventListener) {
-		// in Node.js
+		var attributes = '';
+
+		for (var name in env.attributes) {
+			attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
+		}
+
+		return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
+	};
+
+	if (!_self.document) {
+		if (!_self.addEventListener) {
+			// in Node.js
+			return _self.Prism;
+		}
+		// In worker
+		_self.addEventListener('message', function (evt) {
+			var message = JSON.parse(evt.data),
+			    lang = message.language,
+			    code = message.code,
+			    immediateClose = message.immediateClose;
+
+			_self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
+			if (immediateClose) {
+				_self.close();
+			}
+		}, false);
+
 		return _self.Prism;
 	}
- 	// In worker
-	_self.addEventListener('message', function(evt) {
-		var message = JSON.parse(evt.data),
-		    lang = message.language,
-		    code = message.code,
-			immediateClose = message.immediateClose;
 
-		_self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
-		if (immediateClose) {
-			_self.close();
+	// Get current script and highlight
+	var script = document.getElementsByTagName('script');
+
+	script = script[script.length - 1];
+
+	if (script) {
+		_.filename = script.src;
+
+		if (document.addEventListener && !script.hasAttribute('data-manual')) {
+			document.addEventListener('DOMContentLoaded', _.highlightAll);
 		}
-	}, false);
+	}
 
 	return _self.Prism;
-}
-
-// Get current script and highlight
-var script = document.getElementsByTagName('script');
-
-script = script[script.length - 1];
-
-if (script) {
-	_.filename = script.src;
-
-	if (document.addEventListener && !script.hasAttribute('data-manual')) {
-		document.addEventListener('DOMContentLoaded', _.highlightAll);
-	}
-}
-
-return _self.Prism;
-
 })();
 
 if (typeof module !== 'undefined' && module.exports) {
@@ -7583,7 +6938,7 @@ Prism.languages.markup = {
 };
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
-Prism.hooks.add('wrap', function(env) {
+Prism.hooks.add('wrap', function (env) {
 
 	if (env.type === 'entity') {
 		env.attributes['title'] = env.content.replace(/&amp;/, '&');
@@ -7649,16 +7004,13 @@ if (Prism.languages.markup) {
 	}, Prism.languages.markup.tag);
 };
 Prism.languages.clike = {
-	'comment': [
-		{
-			pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
-			lookbehind: true
-		},
-		{
-			pattern: /(^|[^\\:])\/\/.*/,
-			lookbehind: true
-		}
-	],
+	'comment': [{
+		pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
+		lookbehind: true
+	}, {
+		pattern: /(^|[^\\:])\/\/.*/,
+		lookbehind: true
+	}],
 	'string': /("|')(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
 	'class-name': {
 		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
@@ -7726,7 +7078,6 @@ if (Prism.languages.markup) {
 
 Prism.languages.js = Prism.languages.javascript;
 
-
 /* =========================================================================
 * Svelto - Progressbar
 * =========================================================================
@@ -7736,30 +7087,29 @@ Prism.languages.js = Prism.languages.javascript;
 * @requires ../widget/factory.js
 * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* HELPER */
 
-  $.progressbar = function ( options ) {
+  $.progressbar = function (options) {
 
-    options = _.isNumber ( options ) ? { value: options } : options;
+    options = _.isNumber(options) ? { value: options } : options;
 
-    return new $.svelto.progressbar ( options );
-
+    return new $.svelto.progressbar(options);
   };
 
   /* PROGRESSBAR */
 
-  $.factory ( 'svelto.progressbar', {
+  $.factory('svelto.progressbar', {
 
     /* TEMPLATES */
 
     templates: {
-      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
-              '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
-            '</div>'
+      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' + '<div class="progressbar-highlight {%=o.colors.on%}"></div>' + '</div>'
     },
 
     /* OPTIONS */
@@ -7787,89 +7137,79 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.progressbar' ).each ( function () {
+      $root.find('.progressbar').each(function () {
 
         var $progressbar = $(this);
 
-        $progressbar.progressbar ({
-          value: $progressbar.data ( 'value' ),
-          decimals: $progressbar.data ( 'decimals ')
+        $progressbar.progressbar({
+          value: $progressbar.data('value'),
+          decimals: $progressbar.data('decimals ')
         });
-
       });
-
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$progressbar = this.$element;
-      this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
-
+      this.$highlight = this.$progressbar.find(this.options.selectors.highlight);
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this.options.value = this._sanitizeValue ( this.options.value );
+      this.options.value = this._sanitizeValue(this.options.value);
 
-      this._updateWidth ();
-      this._updateLabel ();
-
+      this._updateWidth();
+      this._updateLabel();
     },
 
     /* PRIVATE */
 
-    _sanitizeValue: function ( value ) {
+    _sanitizeValue: function _sanitizeValue(value) {
 
-      var nr = Number ( value );
+      var nr = Number(value);
 
-      return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
-
+      return _.clamp(0, _.isNaN(nr) ? 0 : nr, 100);
     },
 
-    _roundValue: function ( value ) {
+    _roundValue: function _roundValue(value) {
 
-      return value.toFixed ( this.options.decimals );
-
+      return value.toFixed(this.options.decimals);
     },
 
-    _updateWidth: function () {
+    _updateWidth: function _updateWidth() {
 
-      this.$highlight.css ( 'min-width', this.options.value + '%' );
-
+      this.$highlight.css('min-width', this.options.value + '%');
     },
 
-    _updateLabel: function () {
+    _updateLabel: function _updateLabel() {
 
-      this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
-
+      this.$highlight.attr('data-value', this._roundValue(this.options.value) + '%');
     },
 
-    _update: function () {
+    _update: function _update() {
 
-      this._updateWidth ();
-      this._updateLabel ();
-
+      this._updateWidth();
+      this._updateLabel();
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
       return this.options.value;
-
     },
 
-    set: function ( value ) {
+    set: function set(value) {
 
-      value = Number ( value );
+      value = Number(value);
 
-      if ( !_.isNaN ( value ) ) {
+      if (!_.isNaN(value)) {
 
-        value = this._sanitizeValue ( value );
+        value = this._sanitizeValue(value);
 
-        if ( value !== this.options.value ) {
+        if (value !== this.options.value) {
 
           var data = {
             previous: this.options.value,
@@ -7878,30 +7218,23 @@ Prism.languages.js = Prism.languages.javascript;
 
           this.options.value = value;
 
-          this._update ();
+          this._update();
 
-          this._trigger  ( 'change', data );
+          this._trigger('change', data);
 
-          if ( this.options.value === 0 ) {
+          if (this.options.value === 0) {
 
-            this._trigger  ( 'empty', data );
+            this._trigger('empty', data);
+          } else if (this.options.value === 100) {
 
-          } else if ( this.options.value === 100 ) {
-
-            this._trigger  ( 'full', data );
-
+            this._trigger('full', data);
           }
-
         }
-
       }
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Radio
@@ -7912,13 +7245,15 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* RADIO */
 
-  $.factory ( 'svelto.radio', {
+  $.factory('svelto.radio', {
 
     /* OPTIONS */
 
@@ -7932,102 +7267,90 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.radio' ).radio ();
-
+      $root.find('.radio').radio();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$radio = this.$element;
-      this.$input = this.$radio.find ( 'input' );
+      this.$input = this.$radio.find('input');
 
-      this.name = this.$input.attr ( 'name' );
+      this.name = this.$input.attr('name');
 
-      this.$container = this.$radio.parents ( 'form' ).first ();
+      this.$container = this.$radio.parents('form').first();
 
-      if ( this.$container.length === 0 ) {
+      if (this.$container.length === 0) {
 
         this.$container = $document;
-
       }
 
-      this.$otherRadios = this.$container.find ( this.name ? 'input[type="radio"][name="' + this.name + '"]' : 'input[type="radio"]' ).parent ( '.radio' ).not ( this.$radio );
-
+      this.$otherRadios = this.$container.find(this.name ? 'input[type="radio"][name="' + this.name + '"]' : 'input[type="radio"]').parent('.radio').not(this.$radio);
     },
 
-    _init: function () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init: function _init() {
+      //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-      var isChecked = this. get (),
-          hasClass = this.$radio.hasClass ( 'checked' );
+      var isChecked = this.get(),
+          hasClass = this.$radio.hasClass('checked');
 
-      if ( isChecked !== hasClass ) {
+      if (isChecked !== hasClass) {
 
-        this.$radio.toggleClass ( 'checked', isChecked );
-
+        this.$radio.toggleClass('checked', isChecked);
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( true, this.$input, 'change', this.__change );
+      this._on(true, this.$input, 'change', this.__change);
 
       /* CLICK */
 
-      this._on ( 'click', this.check );
-
+      this._on('click', this.check);
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      var isChecked = this.get ();
+      var isChecked = this.get();
 
-      if ( isChecked ) {
+      if (isChecked) {
 
-        this.$otherRadios.removeClass ( 'checked' );
-
+        this.$otherRadios.removeClass('checked');
       }
 
-      this.$radio.toggleClass ( 'checked', isChecked );
+      this.$radio.toggleClass('checked', isChecked);
 
-      this._trigger ( 'change', { checked: isChecked } );
-      this._trigger ( isChecked ? 'check' : 'uncheck' );
-
+      this._trigger('change', { checked: isChecked });
+      this._trigger(isChecked ? 'check' : 'uncheck');
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
-      return this.$input.prop ( 'checked' );
-
+      return this.$input.prop('checked');
     },
 
-    check: function () {
+    check: function check() {
 
-      var isChecked = this.get ();
+      var isChecked = this.get();
 
-      if ( !isChecked ) {
+      if (!isChecked) {
 
-        this.$input.prop ( 'checked', true ).trigger ( 'change' );
+        this.$input.prop('checked', true).trigger('change');
 
-        this._trigger ( 'change', { checked: true } );
-        this._trigger ( 'check' );
-
+        this._trigger('change', { checked: true });
+        this._trigger('check');
       }
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Rater
@@ -8040,23 +7363,21 @@ Prism.languages.js = Prism.languages.javascript;
 
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* SELECT */
 
-  $.factory ( 'svelto.rater', {
+  $.factory('svelto.rater', {
 
     /* TEMPLATES */
 
     templates: {
-      base: '<div class="rater">' +
-              '{% include ( "svelto.rater.stars", o ); %}' +
-            '</div>',
-      stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' +
-               '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' +
-             '{% } %}'
+      base: '<div class="rater">' + '{% include ( "svelto.rater.stars", o ); %}' + '</div>',
+      stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' + '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' + '{% } %}'
     },
 
     /* OPTIONS */
@@ -8075,112 +7396,99 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.rater' ).each ( function () {
+      $root.find('.rater').each(function () {
 
         var $rater = $(this);
 
-        $rater.rater ({
-          value: Number($rater.data ( 'value' ) || 0),
-          amount: Number($rater.data ( 'amount' ) || 5),
-          url: Number($rater.data ( 'url' ) || false)
+        $rater.rater({
+          value: Number($rater.data('value') || 0),
+          amount: Number($rater.data('amount') || 5),
+          url: Number($rater.data('url') || false)
         });
-
       });
-
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$rater = this.$element;
 
       this.alreadyRated = false;
       this.doingAjax = false;
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TAP */
 
-      this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
-
+      this._on(Pointer.tap, this.options.selectors.star, this.__tap);
     },
 
     /* TAP */
 
-    __tap: function ( event, star ) {
+    __tap: function __tap(event, star) {
 
-      if ( !this.alreadyRated && !this.doingAjax && this.options.url ) {
+      if (!this.alreadyRated && !this.doingAjax && this.options.url) {
 
-        var rating = this.$stars.index ( star ) + 1,
+        var rating = this.$stars.index(star) + 1,
             self = this;
 
-        $.ajax ({
+        $.ajax({
 
           data: { rating: rating },
           type: 'POST',
           url: this.options.url,
 
-          beforeSend: function () {
+          beforeSend: function beforeSend() {
 
             self.doingAjax = true;
-
           },
 
-          success: function ( res ) {
+          success: function success(res) {
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-            res = JSON.parse ( res );
+            res = JSON.parse(res);
 
-            _.merge ( this.options, res );
+            _.merge(this.options, res);
 
-            self.$rater.html ( self._tmpl ( 'stars', self.options ) );
+            self.$rater.html(self._tmpl('stars', self.options));
 
             self.alreadyRated = true;
 
-            self._trigger ( 'change', {
+            self._trigger('change', {
               value: self.options.value,
               amount: self.options.amount
             });
-
           },
 
-          error: function ( res ) {
+          error: function error(res) {
 
             throw 'RatingError';
-
           },
 
-          complete: function () {
+          complete: function complete() {
 
             self.doingAjax = false;
-
           }
 
         });
-
       }
-
     },
 
     /* API */
 
-    get: function () {
+    get: function get() {
 
       return {
         value: this.options.value,
         amount: this.options.amount
       };
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Ripple
@@ -8191,7 +7499,9 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../core/core.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
@@ -8204,42 +7514,37 @@ Prism.languages.js = Prism.languages.javascript;
       hide: 400
     },
 
-    show: function ( event, $element ) {
+    show: function show(event, $element) {
 
-      var $ripple = $( '<div class="ripple-circle">' ).appendTo ( $element ),
-          offset = $element.offset (),
-          eventXY = $.eventXY ( event ),
-          now = _.now ();
+      var $ripple = $('<div class="ripple-circle">').appendTo($element),
+          offset = $element.offset(),
+          eventXY = $.eventXY(event),
+          now = _.now();
 
-      $ripple.css ({
+      $ripple.css({
         top: eventXY.Y - offset.top,
         left: eventXY.X - offset.left
-      }).addClass ( 'ripple-circle-show' );
+      }).addClass('ripple-circle-show');
 
-      $element.on ( Pointer.up + ' ' + Pointer.cancel, function () {
+      $element.on(Pointer.up + ' ' + Pointer.cancel, function () {
 
-        Ripple.hide ( $ripple, now );
-
+        Ripple.hide($ripple, now);
       });
-
     },
 
-    hide: function ( $ripple, before ) {
+    hide: function hide($ripple, before) {
 
-      var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
+      var delay = Math.max(0, Ripple.delay.show + before - _.now());
 
-      setTimeout ( function () {
+      setTimeout(function () {
 
-        $ripple.addClass ( 'ripple-circle-hide' );
+        $ripple.addClass('ripple-circle-hide');
 
-        setTimeout ( function () {
+        setTimeout(function () {
 
-          $ripple.remove ();
-
-        }, Ripple.delay.hide );
-
-      }, delay );
-
+          $ripple.remove();
+        }, Ripple.delay.hide);
+      }, delay);
     }
   };
 
@@ -8247,18 +7552,14 @@ Prism.languages.js = Prism.languages.javascript;
 
   $(function () {
 
-    $body.on ( Pointer.down, '.ripple', function ( event ) {
+    $body.on(Pointer.down, '.ripple', function (event) {
 
-      if ( event.button === $.ui.mouseButton.RIGHT ) return;
+      if (event.button === $.ui.mouseButton.RIGHT) return;
 
-      Ripple.show ( event, $(this) );
-
+      Ripple.show(event, $(this));
     });
-
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Select
@@ -8272,31 +7573,23 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* SELECT */
 
-  $.factory ( 'svelto.select', {
+  $.factory('svelto.select', {
 
     /* TEMPLATES */
 
     templates: {
-      base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
-              '<div class="card-block">' +
-                '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
-                '{% } %}' +
-              '</div>' +
-            '</div>',
-      optgroup: '<div class="divider">' +
-                  '{%=o.prop%}' +
-                '</div>',
-      option: '<div class="button" data-value="{%=o.prop%}">' +
-                '{%=o.value%}' +
-              '</div>'
-     },
+      base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' + '<div class="card-block">' + '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' + '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' + '{% } %}' + '</div>' + '</div>',
+      optgroup: '<div class="divider">' + '{%=o.prop%}' + '</div>',
+      option: '<div class="button" data-value="{%=o.prop%}">' + '{%=o.value%}' + '</div>'
+    },
 
     /* OPTIONS */
 
@@ -8320,207 +7613,183 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.select-trigger' ).select ();
-
+      $root.find('.select-trigger').select();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$trigger = this.$element;
-      this.$select = this.$trigger.find ( this.options.selectors.select );
-      this.$options = this.$select.find ( this.options.selectors.option );
-      this.$label = this.$trigger.find ( this.options.selectors.label );
-      this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
+      this.$select = this.$trigger.find(this.options.selectors.select);
+      this.$options = this.$select.find(this.options.selectors.option);
+      this.$label = this.$trigger.find(this.options.selectors.label);
+      this.$valueholder = this.$trigger.find(this.options.selectors.valueholder);
 
-      this.id = this.$trigger.data ( 'select' );
+      this.id = this.$trigger.data('select');
 
-      if ( this.$valueholder.length === 0 ) {
+      if (this.$valueholder.length === 0) {
 
         this.$valueholder = this.$label;
-
       }
 
       this.selectOptions = [];
 
       this.$dropdown = false;
       this.$buttons = false;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this._updateValueholder ();
+      this._updateValueholder();
 
-      if ( !$.browser.is.touchDevice ) {
+      if (!$.browser.is.touchDevice) {
 
-        this.$select.addClass ( 'hidden' );
+        this.$select.addClass('hidden');
 
-        this.___selectOptions ();
-        this.___dropdown ();
-
+        this.___selectOptions();
+        this.___dropdown();
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( this.$select, 'change', this.__change );
+      this._on(this.$select, 'change', this.__change);
 
-      if ( !$.browser.is.touchDevice ) {
+      if (!$.browser.is.touchDevice) {
 
         /* BUTTON TAP */
 
-        this._on ( this.$buttons, Pointer.tap, this.__tap );
-
+        this._on(this.$buttons, Pointer.tap, this.__tap);
       }
-
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      this._update ();
+      this._update();
 
       console.log("CHANGED!");
 
-      this._trigger ( 'change' );
-
+      this._trigger('change');
     },
 
     /* BUTTON TAP */
 
-    __tap: function ( event, button ) {
+    __tap: function __tap(event, button) {
 
-      this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
-
+      this.$select.val($(button).data('value')).trigger('change');
     },
 
     /* PRIVATE */
 
-    ___selectOptions: function () { //FIXME: Add support for arbitrary number of optgroups levels
+    ___selectOptions: function ___selectOptions() {
+      //FIXME: Add support for arbitrary number of optgroups levels
 
-      var previousOptgroup,
-          currentOptgroup;
+      var previousOptgroup, currentOptgroup;
 
-      for ( var i = 0, l = this.$options.length; i < l; i++ ) {
+      for (var i = 0, l = this.$options.length; i < l; i++) {
 
-        var $option = this.$options.eq ( i ),
-            $parent = $option.parent ();
+        var $option = this.$options.eq(i),
+            $parent = $option.parent();
 
-        if ( $parent.is ( 'optgroup' ) ) {
+        if ($parent.is('optgroup')) {
 
-          currentOptgroup = $parent.attr ( 'label' );
+          currentOptgroup = $parent.attr('label');
 
-          if ( currentOptgroup !== previousOptgroup ) {
+          if (currentOptgroup !== previousOptgroup) {
 
             previousOptgroup = currentOptgroup;
 
-            this.selectOptions.push ({
+            this.selectOptions.push({
               prop: currentOptgroup
             });
-
           }
-
         }
 
-        this.selectOptions.push ({
-          value: $option.html (),
-          prop: $option.attr ( 'value' )
+        this.selectOptions.push({
+          value: $option.html(),
+          prop: $option.attr('value')
         });
-
       }
-
     },
 
-    ___dropdown: function () {
+    ___dropdown: function ___dropdown() {
 
-      var html = this._tmpl ( 'base', { id: this.id, options: this.selectOptions } );
+      var html = this._tmpl('base', { id: this.id, options: this.selectOptions });
 
-      this.$dropdown = $(html).appendTo ( $body );
-      this.$buttons = this.$dropdown.find ( this.options.selectors.button );
+      this.$dropdown = $(html).appendTo($body);
+      this.$buttons = this.$dropdown.find(this.options.selectors.button);
 
-      this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', this.id );
+      this.$trigger.addClass('dropdown-trigger').attr('data-dropdown', this.id);
 
       var self = this;
 
-      this.$dropdown.dropdown ({
+      this.$dropdown.dropdown({
         callbacks: {
-          beforeopen: function () {
-            self._setDropdownWidth ();
+          beforeopen: function beforeopen() {
+            self._setDropdownWidth();
           },
-          open: function () {
-            self._trigger ( 'open' );
+          open: function open() {
+            self._trigger('open');
           },
-          close: function () {
-            self._trigger ( 'close' );
+          close: function close() {
+            self._trigger('close');
           }
         }
       });
 
-      this._updateDropdown ();
-
+      this._updateDropdown();
     },
 
-    _setDropdownWidth: function () {
+    _setDropdownWidth: function _setDropdownWidth() {
 
-      this.$dropdown.css ( 'min-width', this.$trigger.outerWidth () );
-
+      this.$dropdown.css('min-width', this.$trigger.outerWidth());
     },
 
     /* UPDATE */
 
-    _updateValueholder: function () {
+    _updateValueholder: function _updateValueholder() {
 
-      var $selectedOption = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
+      var $selectedOption = this.$options.filter('[value="' + this.$select.val() + '"]');
 
-      this.$valueholder.html ( $selectedOption.html () );
-
+      this.$valueholder.html($selectedOption.html());
     },
 
-    _updateDropdown: function () {
+    _updateDropdown: function _updateDropdown() {
 
-      this.$buttons.removeClass ( this.options.classes.selected );
+      this.$buttons.removeClass(this.options.classes.selected);
 
-      this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
-
+      this.$buttons.filter('[data-value="' + this.$select.val() + '"]').addClass(this.options.classes.selected);
     },
 
+    _update: function _update() {
 
-    _update: function () {
+      this._updateValueholder();
 
-      this._updateValueholder ();
+      if (!$.browser.is.touchDevice) {
 
-      if ( !$.browser.is.touchDevice ) {
-
-        this._updateDropdown ();
-
+        this._updateDropdown();
       }
-
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
-      return this.$select.val ();
-
+      return this.$select.val();
     },
 
-    select: function ( value ) {
+    select: function select(value) {
 
-      this.$buttons.filter ( '[data-value="' + value + '"]' ).tap ();
-
+      this.$buttons.filter('[data-value="' + value + '"]').tap();
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Selectable
@@ -8535,17 +7804,17 @@ Prism.languages.js = Prism.languages.javascript;
 //FIXME: Add support tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 
-
 //FIXME: It doens't work without the cmd/ctrl key on desktop
 
+'use strict';
 
-(function ( $, _, window, document, undefined ) {
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* SELECTABLE */
 
-  $.factory ( 'svelto.selectable', {
+  $.factory('svelto.selectable', {
 
     /* OPTIONS */
 
@@ -8563,270 +7832,245 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( 'table.selectable' ).selectable ();
-
+      $root.find('table.selectable').selectable();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$selectable = this.$element;
-      this.$elements = this._getElements ();
+      this.$elements = this._getElements();
 
       this.$startElement = false;
       this.$endElement = false;
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* POINTER */
 
-      this._on ( Pointer.down, this.options.selectors.element, this.__down );
+      this._on(Pointer.down, this.options.selectors.element, this.__down);
 
       /* OTHERS */
 
-      this._on ( 'change sort', this.__change );
-
+      this._on('change sort', this.__change);
     },
 
     /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      if ( $.hasCtrlOrCmd ( event ) ) {
+      if ($.hasCtrlOrCmd(event)) {
 
-        if ( event.keyCode === 65 ) { //INFO: A
+        if (event.keyCode === 65) {
+          //INFO: A
 
-          event.preventDefault ();
-          event.stopImmediatePropagation ();
+          event.preventDefault();
+          event.stopImmediatePropagation();
 
-          this._resetPrev ();
+          this._resetPrev();
 
-          this.$elements.toggleClass ( this.options.classes.selected, !event.shiftKey ); //INFO: SHIFT or not //FIXME: It only works if the last character pushed is the `A`, but is it an unwanted behaviour?
+          this.$elements.toggleClass(this.options.classes.selected, !event.shiftKey); //INFO: SHIFT or not //FIXME: It only works if the last character pushed is the `A`, but is it an unwanted behaviour?
 
-          this._trigger ( 'change' );
+          this._trigger('change');
+        } else if (event.keyCode === 73) {
+          //INFO: I
 
-        } else if ( event.keyCode === 73 ) { //INFO: I
+          event.preventDefault();
+          event.stopImmediatePropagation();
 
-          event.preventDefault ();
-          event.stopImmediatePropagation ();
+          this._resetPrev();
 
-          this._resetPrev ();
+          this.$elements.toggleClass(this.options.classes.selected);
 
-          this.$elements.toggleClass ( this.options.classes.selected );
-
-          this._trigger ( 'change' );
-
+          this._trigger('change');
         }
-
       }
-
     },
 
     /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
-    __down: function ( event ) {
+    __down: function __down(event) {
 
-      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
+      if (event.button && event.button !== $.ui.mouseButton.LEFT) return; //INFO: Only the left click is allowed
 
-      event.preventDefault ();
+      event.preventDefault();
 
       this.$startElement = $(event.currentTarget);
 
-      if ( !$.browser.is.touchDevice ) {
+      if (!$.browser.is.touchDevice) {
 
-        this._on ( $document, Pointer.move, this.__move );
-
+        this._on($document, Pointer.move, this.__move);
       }
 
-      this._on ( Pointer.up, this.options.selectors.element, this.__up );
-
+      this._on(Pointer.up, this.options.selectors.element, this.__up);
     },
 
-    __move: function ( event ) {
+    __move: function __move(event) {
 
-      event.preventDefault ();
+      event.preventDefault();
 
-      this._off ( $document, Pointer.move, this.__move );
+      this._off($document, Pointer.move, this.__move);
 
-      this._off ( Pointer.up, this.__up );
+      this._off(Pointer.up, this.__up);
 
-      this.$elements.not ( this.$startElement ).removeClass ( this.options.classes.selected );
+      this.$elements.not(this.$startElement).removeClass(this.options.classes.selected);
 
-      this._resetPrev ();
+      this._resetPrev();
 
       this.$prevElement = this.$startElement;
 
-      this.$startElement.toggleClass ( this.options.classes.selected );
+      this.$startElement.toggleClass(this.options.classes.selected);
 
-      this._on ( Pointer.enter, this.options.selectors.element, this.__dragEnter );
+      this._on(Pointer.enter, this.options.selectors.element, this.__dragEnter);
 
-      this._on ( $document, Pointer.up, this.__dragMouseup );
+      this._on($document, Pointer.up, this.__dragMouseup);
 
-      this._trigger ( 'change' );
-
+      this._trigger('change');
     },
 
-    __dragEnter: function ( event ) {
+    __dragEnter: function __dragEnter(event) {
 
       //TODO: Remove previous
 
       this.$endElement = $(event.currentTarget);
 
-      var startIndex = this.$elements.index ( this.$startElement ),
-          endIndex = this.$elements.index ( this.$endElement ),
-          minIndex = Math.min ( startIndex, endIndex ),
-          maxIndex = Math.max ( startIndex, endIndex );
+      var startIndex = this.$elements.index(this.$startElement),
+          endIndex = this.$elements.index(this.$endElement),
+          minIndex = Math.min(startIndex, endIndex),
+          maxIndex = Math.max(startIndex, endIndex);
 
-      if ( minIndex === startIndex ) { //INFO: Direction: down
+      if (minIndex === startIndex) {
+        //INFO: Direction: down
 
         minIndex += 1;
         maxIndex += 1;
-
       }
 
-      var $newDragged = this.$elements.slice ( minIndex, maxIndex );
+      var $newDragged = this.$elements.slice(minIndex, maxIndex);
 
-      if ( this.$prevDragged ) {
+      if (this.$prevDragged) {
 
-        $newDragged.not ( this.$prevDragged ).toggleClass ( this.options.classes.selected );
+        $newDragged.not(this.$prevDragged).toggleClass(this.options.classes.selected);
 
-        this.$prevDragged.not ( $newDragged ).toggleClass ( this.options.classes.selected );
-
+        this.$prevDragged.not($newDragged).toggleClass(this.options.classes.selected);
       } else {
 
-        $newDragged.toggleClass ( this.options.classes.selected );
-
+        $newDragged.toggleClass(this.options.classes.selected);
       }
 
       this.$prevDragged = $newDragged;
 
-      this._trigger ( 'change' );
-
+      this._trigger('change');
     },
 
-    __dragMouseup: function () {
+    __dragMouseup: function __dragMouseup() {
 
-      this._off ( Pointer.enter, this.__dragEnter );
+      this._off(Pointer.enter, this.__dragEnter);
 
-      this._off ( $document, Pointer.up, this.__dragMouseup );
+      this._off($document, Pointer.up, this.__dragMouseup);
 
       this.$prevDragged = false;
-
     },
 
-    __up: function ( event ) {
+    __up: function __up(event) {
 
-      this._off ( $document, Pointer.move, this.__move );
+      this._off($document, Pointer.move, this.__move);
 
-      this._off ( Pointer.up, this.__up );
+      this._off(Pointer.up, this.__up);
 
-      if ( event.shiftKey ) {
+      if (event.shiftKey) {
 
-        var startIndex = this.$elements.index ( this.$prevElement ),
-            endIndex = this.$prevElement ? this.$elements.index ( this.$startElement ) : 0,
-            minIndex = Math.min ( startIndex, endIndex ),
-            maxIndex = Math.max ( startIndex, endIndex );
+        var startIndex = this.$elements.index(this.$prevElement),
+            endIndex = this.$prevElement ? this.$elements.index(this.$startElement) : 0,
+            minIndex = Math.min(startIndex, endIndex),
+            maxIndex = Math.max(startIndex, endIndex);
 
-        if ( minIndex === startIndex ) { //INFO: Direction: down
+        if (minIndex === startIndex) {
+          //INFO: Direction: down
 
           minIndex += 1;
           maxIndex += 1;
-
         }
 
-        var $newShifted = this.$elements.slice ( minIndex, maxIndex );
+        var $newShifted = this.$elements.slice(minIndex, maxIndex);
 
-        if ( this.$prevShifted ) {
+        if (this.$prevShifted) {
 
-          $newShifted.not ( this.$prevShifted ).toggleClass ( this.options.classes.selected );
+          $newShifted.not(this.$prevShifted).toggleClass(this.options.classes.selected);
 
-          this.$prevShifted.not ( $newShifted ).toggleClass ( this.options.classes.selected );
-
+          this.$prevShifted.not($newShifted).toggleClass(this.options.classes.selected);
         } else {
 
-          $newShifted.toggleClass ( this.options.classes.selected );
-
+          $newShifted.toggleClass(this.options.classes.selected);
         }
 
         this.$prevShifted = $newShifted;
+      } else if ($.hasCtrlOrCmd(event) || $.browser.is.touchDevice) {
+        //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
 
-      } else if ( $.hasCtrlOrCmd ( event ) || $.browser.is.touchDevice ) { //TODO: On mobile we behave like if the `ctrl` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+        this.$startElement.toggleClass(this.options.classes.selected);
 
-        this.$startElement.toggleClass ( this.options.classes.selected );
-
-        this._resetPrev ();
+        this._resetPrev();
 
         this.$prevElement = this.$startElement;
-
       } else {
 
-        var $selected = this.$elements.not ( this.$startElement );
+        var $selected = this.$elements.not(this.$startElement);
 
-        if ( $selected.length > 0 ) {
+        if ($selected.length > 0) {
 
-          $selected.removeClass ( this.options.classes.selected );
-
+          $selected.removeClass(this.options.classes.selected);
         } else {
 
-          this.$startElement.removeClass ( this.options.classes.selected );
-
+          this.$startElement.removeClass(this.options.classes.selected);
         }
 
-        this._resetPrev ();
+        this._resetPrev();
 
         this.$prevElement = this.$startElement;
-
       }
 
-      this._trigger ( 'change' );
-
+      this._trigger('change');
     },
 
     /* OTHER EVENTS */
 
-    __change: function () {
+    __change: function __change() {
 
-      this.$elements = this._getElements ();
+      this.$elements = this._getElements();
 
-      this._resetPrev ();
-
+      this._resetPrev();
     },
 
     /* PRIVATE */
 
-    _resetPrev: function () {
+    _resetPrev: function _resetPrev() {
 
       this.$prevElement = false;
       this.$prevShifted = false;
       this.$prevDragged = false;
-
     },
 
-    _getElements: function () {
+    _getElements: function _getElements() {
 
-      return this.$element.find ( this.options.selectors.element );
-
+      return this.$element.find(this.options.selectors.element);
     },
 
     /* API */
 
-    get: function () {
+    get: function get() {
 
-      return this.$elements.filter ( '.' + this.options.selectors.selected );
-
+      return this.$elements.filter('.' + this.options.selectors.selected);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Slider
@@ -8842,13 +8086,15 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* SLIDER */
 
-  $.factory ( 'svelto.slider', {
+  $.factory('svelto.slider', {
 
     /* OPTIONS */
 
@@ -8875,71 +8121,67 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.slider' ).each ( function () {
+      $root.find('.slider').each(function () {
 
         var $slider = $(this);
 
-        $slider.slider ({
-          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-          value: Number($slider.find ( 'input' ).val () || 0),
-          step: Number($slider.data ( 'step' ) || 1),
-          decimals: Number($slider.data ( 'decimals' ) || 0)
+        $slider.slider({
+          min: Number($slider.find('.slider-min').data('min') || 0),
+          max: Number($slider.find('.slider-max').data('max') || 100),
+          value: Number($slider.find('input').val() || 0),
+          step: Number($slider.data('step') || 1),
+          decimals: Number($slider.data('decimals') || 0)
         });
-
       });
-
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$slider = this.$element;
-      this.$input = this.$slider.find ( this.options.selectors.input );
-      this.$min = this.$slider.find ( this.options.selectors.min );
-      this.$max = this.$slider.find ( this.options.selectors.max );
-      this.$bar = this.$slider.find ( this.options.selectors.bar );
-      this.$unhighlight = this.$slider.find ( this.options.selectors.unhighlight );
-      this.$highlight = this.$slider.find ( this.options.selectors.highlight );
-      this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
-      this.$label = this.$handlerWrp.find ( this.options.selectors.label );
+      this.$input = this.$slider.find(this.options.selectors.input);
+      this.$min = this.$slider.find(this.options.selectors.min);
+      this.$max = this.$slider.find(this.options.selectors.max);
+      this.$bar = this.$slider.find(this.options.selectors.bar);
+      this.$unhighlight = this.$slider.find(this.options.selectors.unhighlight);
+      this.$highlight = this.$slider.find(this.options.selectors.highlight);
+      this.$handlerWrp = this.$slider.find(this.options.selectors.handlerWrp);
+      this.$label = this.$handlerWrp.find(this.options.selectors.label);
 
-      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
+      this.stepsNr = (this.options.max - this.options.min) / this.options.step;
 
-      this._updateVariables ();
-
+      this._updateVariables();
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this._updatePositions ();
-
+      this._updatePositions();
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* INPUT CHANGE */
 
-      this._on ( true, this.$input, 'change', this.__change );
+      this._on(true, this.$input, 'change', this.__change);
 
       /* WINDOW RESIZE */
 
-      this._on ( true, $window, 'resize', this.__resize );
+      this._on(true, $window, 'resize', this.__resize);
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* MIN / MAX BUTTONS */
 
-      this._on ( this.$min, Pointer.tap, this.decrease );
-      this._on ( this.$max, Pointer.tap, this.increase );
+      this._on(this.$min, Pointer.tap, this.decrease);
+      this._on(this.$max, Pointer.tap, this.increase);
 
       /* DRAG */
 
-      this.$handlerWrp.draggable ({
-        draggable: this.isEnabled.bind ( this ),
+      this.$handlerWrp.draggable({
+        draggable: this.isEnabled.bind(this),
         axis: 'x',
         $proxy: this.$bar,
         constrainer: {
@@ -8947,86 +8189,78 @@ Prism.languages.js = Prism.languages.javascript;
           constrainCenter: true
         },
         modifiers: {
-          x: this._dragModifierX.bind ( this )
+          x: this._dragModifierX.bind(this)
         },
         callbacks: {
-          move: this.__dragMove.bind ( this ),
-          end: this.__dragEnd.bind ( this )
+          move: this.__dragMove.bind(this),
+          end: this.__dragEnd.bind(this)
         }
       });
-
     },
 
     /* PRIVATE */
 
-    _roundValue: function ( value ) {
+    _roundValue: function _roundValue(value) {
 
-      return Number ( Number ( value ).toFixed ( this.options.decimals ) );
-
+      return Number(Number(value).toFixed(this.options.decimals));
     },
 
-    _updateVariables: function () {
+    _updateVariables: function _updateVariables() {
 
-      this.unhighlightWidth = this.$unhighlight.width ();
+      this.unhighlightWidth = this.$unhighlight.width();
 
       this.stepWidth = this.unhighlightWidth / this.stepsNr;
-
     },
 
-    _updatePositions: function () {
+    _updatePositions: function _updatePositions() {
 
-      var percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
+      var percentage = (this.options.value - this.options.min) / this.options.step * 100 / this.stepsNr,
           translateX = this.unhighlightWidth / 100 * percentage;
 
-      this.$handlerWrp.translateX ( translateX );
+      this.$handlerWrp.translateX(translateX);
 
-      this.$highlight.translateX ( translateX );
-
+      this.$highlight.translateX(translateX);
     },
 
-    _updateLabel: function ( value ) {
+    _updateLabel: function _updateLabel(value) {
 
-      this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
-
+      this.$label.html(_.isUndefined(value) ? this.options.value : value);
     },
 
-    _updateInput: function () {
+    _updateInput: function _updateInput() {
 
-      this.$input.val ( this.options.value ).trigger ( 'change' );
-
+      this.$input.val(this.options.value).trigger('change');
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      this.set ( this.$input.val () );
-
+      this.set(this.$input.val());
     },
 
     /* RESIZE */
 
-    __resize: function () {
+    __resize: function __resize() {
 
-      this._updateVariables ();
-      this._updatePositions ();
-
+      this._updateVariables();
+      this._updatePositions();
     },
 
     /* LEFT / RIGHT ARROWS */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.LEFT:
         case $.ui.keyCode.DOWN:
-          this.decrease ();
+          this.decrease();
           break;
 
         case $.ui.keyCode.RIGHT:
         case $.ui.keyCode.UP:
-          this.increase ();
+          this.increase();
           break;
 
         default:
@@ -9034,80 +8268,69 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
-
+      event.preventDefault();
+      event.stopImmediatePropagation();
     },
 
     /* DRAG */
 
-    _dragModifierX: function ( distance ) {
+    _dragModifierX: function _dragModifierX(distance) {
 
-      return _.roundCloser ( distance, this.stepWidth );
-
+      return _.roundCloser(distance, this.stepWidth);
     },
 
-    __dragMove: function ( data ) {
+    __dragMove: function __dragMove(data) {
 
-      this.$highlight.translateX ( data.moveXY.X );
+      this.$highlight.translateX(data.moveXY.X);
 
-      this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
-
+      this._updateLabel(this._roundValue(this.options.min + data.moveXY.X / this.stepWidth * this.options.step));
     },
 
-    __dragEnd: function ( data ) {
+    __dragEnd: function __dragEnd(data) {
 
-      this.set ( this.options.min + ( data.endXY.X / this.stepWidth * this.options.step ) );
-
+      this.set(this.options.min + data.endXY.X / this.stepWidth * this.options.step);
     },
 
     /* API */
 
-    get: function () {
+    get: function get() {
 
       return this.options.value;
-
     },
 
-    set: function ( value ) {
+    set: function set(value) {
 
-      value = _.clamp ( this.options.min, this._roundValue ( value ), this.options.max );
+      value = _.clamp(this.options.min, this._roundValue(value), this.options.max);
 
-      if ( value !== this.options.value ) {
+      if (value !== this.options.value) {
 
         var prevValue = this.options.value;
 
         this.options.value = value;
 
-        this._updatePositions ();
-        this._updateLabel ();
-        this._updateInput ();
+        this._updatePositions();
+        this._updateLabel();
+        this._updateInput();
 
-        this._trigger ( 'change', {
+        this._trigger('change', {
           previous: prevValue,
           value: this.options.value
         });
-
       }
-
     },
 
-    increase: function () {
+    increase: function increase() {
 
-      this.set ( this.options.value + this.options.step );
-
+      this.set(this.options.value + this.options.step);
     },
 
-    decrease: function () {
+    decrease: function decrease() {
 
-      this.set ( this.options.value - this.options.step );
-
+      this.set(this.options.value - this.options.step);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Sortable
@@ -9122,28 +8345,30 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Add support for sorting other things other than tables
 //TODO: If possible sort using flexbox's `order` property
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* SORTABLE */
 
-  $.factory ( 'svelto.sortable', {
+  $.factory('svelto.sortable', {
 
     /* OPTIONS */
 
     options: {
       sorters: {
-        int: function ( a, b ) {
-          return parseInt ( a, 10 ) - parseInt ( b, 10 );
+        int: function int(a, b) {
+          return parseInt(a, 10) - parseInt(b, 10);
         },
-        float: function ( a, b ) {
-          return parseFloat ( a ) - parseFloat ( b );
+        float: function float(a, b) {
+          return parseFloat(a) - parseFloat(b);
         },
-        string: function ( a, b ) {
-          a = a.toLocaleLowerCase ();
-          b = b.toLocaleLowerCase ();
-          return a.localeCompare ( b );
+        string: function string(a, b) {
+          a = a.toLocaleLowerCase();
+          b = b.toLocaleLowerCase();
+          return a.localeCompare(b);
         }
       },
       sortValue: 'sort-value',
@@ -9167,18 +8392,17 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( 'table.sortable' ).sortable ();
-
+      $root.find('table.sortable').sortable();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$table = this.$element;
-      this.$headers = this.$table.find ( this.options.selectors.header );
-      this.$sortables = this.$headers.filter ( this.options.selectors.sortable );
-      this.$tbody = this.$table.find ( this.options.selectors.body );
+      this.$headers = this.$table.find(this.options.selectors.header);
+      this.$sortables = this.$headers.filter(this.options.selectors.sortable);
+      this.$tbody = this.$table.find(this.options.selectors.body);
 
       this.table = this.element;
       this.tbody = this.$tbody[0];
@@ -9189,164 +8413,142 @@ Prism.languages.js = Prism.languages.javascript;
       this.$currentSortable = false;
       this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
       this.currentDirection = false;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      var $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
+      var $initial = this.$headers.filter('.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc).first();
 
-      if ( $initial.length === 1 ) {
+      if ($initial.length === 1) {
 
-        this.sort ( this.$headers.index ( $initial ), ( $initial.hasClass ( this.options.classes.sort.asc ) ? 'asc' : 'desc' ) );
-
+        this.sort(this.$headers.index($initial), $initial.hasClass(this.options.classes.sort.asc) ? 'asc' : 'desc');
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( true, 'change', this.__change ); //TODO: Update to support tableHelper
+      this._on(true, 'change', this.__change); //TODO: Update to support tableHelper
 
       /* TAP */
 
-      this._on ( this.$sortables, Pointer.tap, this.__tap );
-
+      this._on(this.$sortables, Pointer.tap, this.__tap);
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      if ( this.currentIndex !== false ) {
+      if (this.currentIndex !== false) {
 
         this.sortData = {};
         this.updated = false;
 
-        this.sort ( this.currentIndex, this.currentDirection );
-
+        this.sort(this.currentIndex, this.currentDirection);
       }
-
     },
 
     /* CLICK */
 
-    __tap: function ( event ) {
+    __tap: function __tap(event) {
 
-      var newIndex = this.$headers.index ( event.target ),
-          newDirection = this.currentIndex === newIndex
-                           ? this.currentDirection === 'asc'
-                             ? 'desc'
-                             : 'asc'
-                           : 'asc';
+      var newIndex = this.$headers.index(event.target),
+          newDirection = this.currentIndex === newIndex ? this.currentDirection === 'asc' ? 'desc' : 'asc' : 'asc';
 
-      this.sort ( newIndex, newDirection );
-
+      this.sort(newIndex, newDirection);
     },
 
     /* SORT */
 
-    sort: function ( index, direction ) {
+    sort: function sort(index, direction) {
 
       /* VALIDATE */
 
-      var $sortable = this.$headers.eq ( index );
+      var $sortable = this.$headers.eq(index);
 
-      if ( !$sortable.length ) return; //INFO: Bad index
+      if (!$sortable.length) return; //INFO: Bad index
 
-      var sorterName = $sortable.data ( 'sort' );
+      var sorterName = $sortable.data('sort');
 
-      if ( !sorterName ) return; //INFO: Unsortable column
+      if (!sorterName) return; //INFO: Unsortable column
 
       var sorter = this.options.sorters[sorterName];
 
-      if ( !sorter ) return; //INFO: Unsupported sorter
+      if (!sorter) return; //INFO: Unsupported sorter
 
-      direction = ( direction && direction.toLowerCase () === 'desc' ) ? 'desc' : 'asc';
+      direction = direction && direction.toLowerCase() === 'desc' ? 'desc' : 'asc';
 
       /* CHECKING CACHED DATAS */
 
-      if ( _.isUndefined ( this.sortData[index] ) || !this.updated ) {
+      if (_.isUndefined(this.sortData[index]) || !this.updated) {
 
         /* VARIABLES */
 
-        var $trs = this.$tbody.find ( this.options.selectors.notEmptyRow );
+        var $trs = this.$tbody.find(this.options.selectors.notEmptyRow);
 
-        this.sortData[index] = Array ( $trs.length );
+        this.sortData[index] = Array($trs.length);
 
         /* POPULATE */
 
-        for ( var i = 0, l = $trs.length; i < l; i++ ) {
+        for (var i = 0, l = $trs.length; i < l; i++) {
 
-          var $td = $trs.eq ( i ).find ( this.options.selectors.rowCell ).eq ( index ),
-              value = $td.data ( this.options.sortValue ) || $td.text ();
+          var $td = $trs.eq(i).find(this.options.selectors.rowCell).eq(index),
+              value = $td.data(this.options.sortValue) || $td.text();
 
           this.sortData[index][i] = [$trs[i], value];
-
         }
-
       }
 
       /* SORT */
 
-      if ( index !== this.currentIndex || !this.updated ) {
+      if (index !== this.currentIndex || !this.updated) {
 
-        this.sortData[index].sort ( function ( a, b ) {
+        this.sortData[index].sort(function (a, b) {
 
-          return sorter ( a[1], b[1] );
-
+          return sorter(a[1], b[1]);
         });
-
       }
 
       /* REVERSING */
 
-      if ( this.updated && index === this.currentIndex && this.currentDirection !== false  ) {
+      if (this.updated && index === this.currentIndex && this.currentDirection !== false) {
 
-        var needReversing = ( direction !== this.currentDirection );
-
+        var needReversing = direction !== this.currentDirection;
       } else {
 
-        var needReversing = ( direction === 'desc' );
-
+        var needReversing = direction === 'desc';
       }
 
-      if ( needReversing ) {
+      if (needReversing) {
 
-        this.sortData[index].reverse ();
-
+        this.sortData[index].reverse();
       }
 
       /* REORDER */
 
-      if ( index !== this.currentIndex || direction !== this.currentDirection || !this.updated ) {
+      if (index !== this.currentIndex || direction !== this.currentDirection || !this.updated) {
 
-        this.table.removeChild ( this.tbody ); //INFO: Detach
+        this.table.removeChild(this.tbody); //INFO: Detach
 
-        for ( var i = 0, l = this.sortData[index].length; i < l; i++ ) {
+        for (var i = 0, l = this.sortData[index].length; i < l; i++) {
 
-          this.tbody.appendChild ( this.sortData[index][i][0] ); //INFO: Reorder
-
+          this.tbody.appendChild(this.sortData[index][i][0]); //INFO: Reorder
         }
 
-        this.table.appendChild ( this.tbody ); //INFO: Attach
-
+        this.table.appendChild(this.tbody); //INFO: Attach
       }
 
       /* STYLE */
 
-      if ( index !== this.currentIndex || direction !== this.currentDirection ) {
+      if (index !== this.currentIndex || direction !== this.currentDirection) {
 
-        if ( this.$currentSortable ) {
+        if (this.$currentSortable) {
 
-          this.$currentSortable.removeClass ( this.options.classes.sort[this.currentDirection] );
-
+          this.$currentSortable.removeClass(this.options.classes.sort[this.currentDirection]);
         }
 
-        $sortable.addClass ( this.options.classes.sort[direction] );
-
+        $sortable.addClass(this.options.classes.sort[direction]);
       }
 
       /* UPDATE */
@@ -9359,17 +8561,14 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* TRIGGER */
 
-      this._trigger ( 'sort', {
+      this._trigger('sort', {
         index: this.currentIndex,
         direction: this.currentDirection
       });
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Stepper
@@ -9380,13 +8579,15 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* STEPPER */
 
-  $.factory ( 'svelto.stepper', {
+  $.factory('svelto.stepper', {
 
     /* OPTIONS */
 
@@ -9409,128 +8610,116 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.stepper' ).each ( function () {
+      $root.find('.stepper').each(function () {
 
         var $stepper = $(this);
 
-        $stepper.stepper ({
-          min: Number($stepper.data ( 'min' ) || 0),
-          max: Number($stepper.data ( 'max' ) || 100),
-          value: Number($stepper.find ( '.stepper-input' ).val () || 0),
-          step: Number($stepper.data ( 'step' ) || 1)
+        $stepper.stepper({
+          min: Number($stepper.data('min') || 0),
+          max: Number($stepper.data('max') || 100),
+          value: Number($stepper.find('.stepper-input').val() || 0),
+          step: Number($stepper.data('step') || 1)
         });
-
       });
-
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$stepper = this.$element;
-      this.$decreaser = this.$stepper.find ( this.options.selectors.decreaser );
-      this.$input = this.$stepper.find ( this.options.selectors.input );
-      this.$increaser = this.$stepper.find ( this.options.selectors.increaser );
+      this.$decreaser = this.$stepper.find(this.options.selectors.decreaser);
+      this.$input = this.$stepper.find(this.options.selectors.input);
+      this.$increaser = this.$stepper.find(this.options.selectors.increaser);
 
-      this.options.value = this._sanitizeValue ( this.options.value );
-
+      this.options.value = this._sanitizeValue(this.options.value);
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this._updateButtons ();
-
+      this._updateButtons();
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* INPUT / CHANGE */
 
-      this._on ( true, this.$input, 'input change', this.__inputChange );
+      this._on(true, this.$input, 'input change', this.__inputChange);
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* INCREASE */
 
-      this._on ( this.$decreaser, Pointer.tap, this.decrease );
+      this._on(this.$decreaser, Pointer.tap, this.decrease);
 
       /* DECREASE */
 
-      this._on ( this.$increaser, Pointer.tap, this.increase );
-
+      this._on(this.$increaser, Pointer.tap, this.increase);
     },
 
     /* PRIVATE */
 
-    _sanitizeValue: function ( value ) {
+    _sanitizeValue: function _sanitizeValue(value) {
 
-      var nr = Number ( value );
+      var nr = Number(value);
 
-      value = ( _.isNaN ( nr ) ? 0 : nr );
+      value = _.isNaN(nr) ? 0 : nr;
 
-      var remaining = ( value % this.options.step );
+      var remaining = value % this.options.step;
 
-      value = value - remaining + ( remaining >= this.options.step / 2 ? this.options.step : 0 );
+      value = value - remaining + (remaining >= this.options.step / 2 ? this.options.step : 0);
 
-      return _.clamp ( this.options.min, value, this.options.max );
-
+      return _.clamp(this.options.min, value, this.options.max);
     },
 
     /* UPDATE */
 
-    _updateInput: function () {
+    _updateInput: function _updateInput() {
 
-      this.$input.val ( this.options.value ).trigger ( 'change' );
-
+      this.$input.val(this.options.value).trigger('change');
     },
 
-    _updateButtons: function ( previous ) {
+    _updateButtons: function _updateButtons(previous) {
 
-      var isMin = ( this.options.value === this.options.min ),
-          isMax = ( this.options.value === this.options.max );
+      var isMin = this.options.value === this.options.min,
+          isMax = this.options.value === this.options.max;
 
-      if ( previous === this.options.min || isMin ) {
+      if (previous === this.options.min || isMin) {
 
-        this.$decreaser.toggleClass ( 'disabled', isMin );
+        this.$decreaser.toggleClass('disabled', isMin);
+      } else if (previous === this.options.max || isMax) {
 
-      } else if ( previous === this.options.max || isMax ) {
-
-        this.$increaser.toggleClass ( 'disabled', isMax );
-
+        this.$increaser.toggleClass('disabled', isMax);
       }
-
     },
 
-    _update: function ( previous ) {
+    _update: function _update(previous) {
 
-      this._updateInput ();
-      this._updateButtons ( previous );
-
+      this._updateInput();
+      this._updateButtons(previous);
     },
 
     /* CHANGE */
 
-    __inputChange: function () {
+    __inputChange: function __inputChange() {
 
-      this.set ( this.$input.val () );
-
+      this.set(this.$input.val());
     },
 
     /* LEFT / RIGHT ARROWS */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.UP:
-          this.increase ();
+          this.increase();
           break;
 
         case $.ui.keyCode.DOWN:
-          this.decrease ();
+          this.decrease();
           break;
 
         default:
@@ -9538,28 +8727,26 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
-
+      event.preventDefault();
+      event.stopImmediatePropagation();
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
       return this.options.value;
-
     },
 
-    set: function ( value ) {
+    set: function set(value) {
 
-      value = Number ( value );
+      value = Number(value);
 
-      if ( !_.isNaN ( value ) ) {
+      if (!_.isNaN(value)) {
 
-        value = this._sanitizeValue ( value );
+        value = this._sanitizeValue(value);
 
-        if ( value !== this.options.value ) {
+        if (value !== this.options.value) {
 
           var data = {
             previous: this.options.value,
@@ -9568,44 +8755,36 @@ Prism.languages.js = Prism.languages.javascript;
 
           this.options.value = value;
 
-          this._update ( data.previous );
+          this._update(data.previous);
 
-          this._trigger ( 'change', data );
+          this._trigger('change', data);
 
-          this._trigger ( ( data.previous < data.value ) ? 'increase' : 'decrease', data );
+          this._trigger(data.previous < data.value ? 'increase' : 'decrease', data);
 
           return;
-
         }
-
       }
 
       /* RESETTING IF WE ALTERED THE INPUT VALUE */
 
-      if ( this.$input.val () !== String ( this.options.value ) ) {
+      if (this.$input.val() !== String(this.options.value)) {
 
-        this._updateInput ();
-
+        this._updateInput();
       }
-
     },
 
-    increase: function () {
+    increase: function increase() {
 
-      this.set ( this.options.value + this.options.step );
-
+      this.set(this.options.value + this.options.step);
     },
 
-    decrease: function () {
+    decrease: function decrease() {
 
-      this.set ( this.options.value - this.options.step );
-
+      this.set(this.options.value - this.options.step);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Switch
@@ -9618,13 +8797,15 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-;(function ( $, window, document, undefined ) {
+'use strict';
+
+;(function ($, window, document, undefined) {
 
   'use strict';
 
   /* SWITCH */
 
-  $.factory ( 'svelto.switch', {
+  $.factory('svelto.switch', {
 
     /* OPTIONS */
 
@@ -9650,60 +8831,55 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.switch' ).each ( function () {
+      $root.find('.switch').each(function () {
 
         var $switch = $(this);
 
-        $switch.switch ({
+        $switch['switch']({
           colors: {
-            on: $switch.data ( 'color-on' ) || 'secondary',
-            off: $switch.data ( 'color-off' ) || 'gray'
+            on: $switch.data('color-on') || 'secondary',
+            off: $switch.data('color-off') || 'gray'
           }
         });
-
       });
-
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$switch = this.$element;
-      this.$input = this.$switch.find ( this.options.selectors.input );
-      this.$bar = this.$switch.find ( this.options.selectors.bar );
-      this.$handler = this.$switch.find ( this.options.selectors.handler );
+      this.$input = this.$switch.find(this.options.selectors.input);
+      this.$bar = this.$switch.find(this.options.selectors.bar);
+      this.$handler = this.$switch.find(this.options.selectors.handler);
 
       this.isChecked = false;
 
-      this.switchWidth = this.$switch.width ();
-      this.handlerWidth = this.$handler.width ();
-
+      this.switchWidth = this.$switch.width();
+      this.handlerWidth = this.$handler.width();
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      if ( this.$input.prop ( 'checked' ) ) {
+      if (this.$input.prop('checked')) {
 
-        this.check ();
-
+        this.check();
       }
-
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* CHANGE */
 
-      this._on ( true, this.$input, 'change', this.__change );
+      this._on(true, this.$input, 'change', this.__change);
 
       /* KEYDOWN */
 
-      this._onHover ( [$document, 'keydown', this.__keydown] );
+      this._onHover([$document, 'keydown', this.__keydown]);
 
       /* DRAG */
 
-      this.$handler.draggable ({
+      this.$handler.draggable({
         axis: 'x',
         $proxy: this.$switch,
         proxyWithoutMotion: false,
@@ -9711,36 +8887,34 @@ Prism.languages.js = Prism.languages.javascript;
           $element: this.$switch
         },
         callbacks: {
-          end: this.__dragEnd.bind ( this )
+          end: this.__dragEnd.bind(this)
         }
       });
-
     },
 
     /* CHANGE */
 
-    __change: function () {
+    __change: function __change() {
 
-      this.toggle ( this.$input.prop ( 'checked' ) );
-
+      this.toggle(this.$input.prop('checked'));
     },
 
     /* KEYS */
 
-    __keydown: function ( event ) {
+    __keydown: function __keydown(event) {
 
-      switch ( event.keyCode ) {
+      switch (event.keyCode) {
 
         case $.ui.keyCode.LEFT:
-          this.uncheck ();
+          this.uncheck();
           break;
 
         case $.ui.keyCode.RIGHT:
-          this.check ();
+          this.check();
           break;
 
         case $.ui.keyCode.SPACE:
-          this.toggle ();
+          this.toggle();
           break;
 
         default:
@@ -9748,112 +8922,96 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
-
+      event.preventDefault();
+      event.stopImmediatePropagation();
     },
 
     /* DRAG */
 
-    __dragEnd: function ( data ) {
+    __dragEnd: function __dragEnd(data) {
 
-      if ( data.motion ) {
+      if (data.motion) {
 
-        var isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+        var isChecked = data.endXY.X + this.handlerWidth / 2 >= this.switchWidth / 2;
 
-        this.toggle ( isChecked, true );
-
+        this.toggle(isChecked, true);
       } else {
 
-        this.toggle ();
-
+        this.toggle();
       }
-
     },
 
     /* UPDATE */
 
-    _updatePosition: function () {
+    _updatePosition: function _updatePosition() {
 
-      this.$handler.translateX ( this.isChecked ? this.switchWidth - this.handlerWidth : 0 );
-
+      this.$handler.translateX(this.isChecked ? this.switchWidth - this.handlerWidth : 0);
     },
 
-    _updateColors: function () {
+    _updateColors: function _updateColors() {
 
-      this.$bar.toggleClass ( this.options.colors.on, this.isChecked );
-      this.$bar.toggleClass ( this.options.colors.off, !this.isChecked );
+      this.$bar.toggleClass(this.options.colors.on, this.isChecked);
+      this.$bar.toggleClass(this.options.colors.off, !this.isChecked);
 
-      this.$handler.toggleClass ( this.options.colors.on, this.isChecked );
-      this.$handler.toggleClass ( this.options.colors.off, !this.isChecked );
-
+      this.$handler.toggleClass(this.options.colors.on, this.isChecked);
+      this.$handler.toggleClass(this.options.colors.off, !this.isChecked);
     },
 
-    _updateInput: function () {
+    _updateInput: function _updateInput() {
 
-      this.$input.prop ( 'checked', this.isChecked ).trigger ( 'change' );
-
+      this.$input.prop('checked', this.isChecked).trigger('change');
     },
 
     /* API */
 
-    get: function () {
+    get: function get() {
 
       return this.isChecked;
-
     },
 
-    toggle: function ( force, reset ) {
+    toggle: function toggle(force, reset) {
 
-      if ( !_.isBoolean ( force ) ) {
+      if (!_.isBoolean(force)) {
 
         force = !this.isChecked;
-
       }
 
-      if ( force !== this.isChecked ) {
+      if (force !== this.isChecked) {
 
         var prevChecked = this.isChecked;
 
         this.isChecked = force;
 
-        this.$switch.toggleClass ( this.options.classes.checked, this.isChecked );
+        this.$switch.toggleClass(this.options.classes.checked, this.isChecked);
 
-        this._updatePosition ();
-        this._updateColors ();
-        this._updateInput ();
+        this._updatePosition();
+        this._updateColors();
+        this._updateInput();
 
-        this._trigger ( 'change', {
+        this._trigger('change', {
           previous: prevChecked,
           checked: this.isChecked
         });
 
-        this._trigger ( this.isChecked ? 'check' : 'uncheck' );
+        this._trigger(this.isChecked ? 'check' : 'uncheck');
+      } else if (reset) {
 
-      } else if ( reset ) {
-
-        this._updatePosition ();
-
+        this._updatePosition();
       }
-
     },
 
-    check: function () {
+    check: function check() {
 
-      this.toggle ( true );
-
+      this.toggle(true);
     },
 
-    uncheck: function () {
+    uncheck: function uncheck() {
 
-      this.toggle ( false );
-
+      this.toggle(false);
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Table Helper
@@ -9864,27 +9022,20 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TABLE HELPER */
 
-  $.factory ( 'svelto.tableHelper', {
+  $.factory('svelto.tableHelper', {
 
     /* TEMPLATES */
 
     templates: {
-      row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
-             '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' +
-               '<td>' +
-                 '{%=o.datas[i]%}' +
-               '</td>' +
-             '{% } %}' +
-             '{% for ( var i = 0, l = o.missing; i < l; i++ ) { %}' +
-               '<td></td>' +
-             '{% } %}' +
-           '</tr>'
+      row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' + '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' + '<td>' + '{%=o.datas[i]%}' + '</td>' + '{% } %}' + '{% for ( var i = 0, l = o.missing; i < l; i++ ) { %}' + '<td></td>' + '{% } %}' + '</tr>'
     },
 
     /* OPTIONS */
@@ -9909,164 +9060,148 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( 'table.table' ).tableHelper ();
-
+      $root.find('table.table').tableHelper();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$table = this.$element;
-      this.$header = this.$table.find ( this.options.selectors.header );
-      this.$body = this.$table.find ( this.options.selectors.body );
-      this.$headerCells = this.$header.find ( this.options.selectors.headerCell );
-      this.$emptyRow = this.$body.find ( this.options.selectors.emptyRow );
+      this.$header = this.$table.find(this.options.selectors.header);
+      this.$body = this.$table.find(this.options.selectors.body);
+      this.$headerCells = this.$header.find(this.options.selectors.headerCell);
+      this.$emptyRow = this.$body.find(this.options.selectors.emptyRow);
 
       this.columnsNr = this.$headerCells.length;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this._checkEmpty ();
-
+      this._checkEmpty();
     },
 
     /* PRIVATE */
 
-    _checkEmpty: function () {
+    _checkEmpty: function _checkEmpty() {
 
-      var hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
+      var hasNonEmptyRows = this.$body.find(this.options.selectors.notEmptyRow).length > 0;
 
-      this.$emptyRow.toggleClass ( 'hidden', hasNonEmptyRows );
-
+      this.$emptyRow.toggleClass('hidden', hasNonEmptyRows);
     },
 
-    _getRowId: function ( id ) {
+    _getRowId: function _getRowId(id) {
 
       return this.options.rowIdPrefix + '_' + this.guid + '_' + id;
-
     },
 
     /* PUBLIC */
 
-    add: function ( id ) { //INFO: id, datas...
+    add: function add(id) {
+      //INFO: id, datas...
 
-      var datas = _.tail ( arguments ),
-          rowId = id ? this._getRowId ( id ) : false;
+      var datas = _.tail(arguments),
+          rowId = id ? this._getRowId(id) : false;
 
-      if ( datas.length > 0 ) {
+      if (datas.length > 0) {
 
-        if ( rowId && $( '.' + rowId ).length === 1 ) return this;
+        if (rowId && $('.' + rowId).length === 1) return this;
 
-        var chunks = _.chunk ( datas, this.columnsNr ),
+        var chunks = _.chunk(datas, this.columnsNr),
             $rows = $empty;
 
-        for ( var ci = 0, cl = chunks.length; ci < cl; ci++ ) {
+        for (var ci = 0, cl = chunks.length; ci < cl; ci++) {
 
           var chunk = chunks[ci],
-              rowHtml = this._tmpl ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
+              rowHtml = this._tmpl('row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length });
 
-          $rows = $rows.add ( rowHtml );
-
+          $rows = $rows.add(rowHtml);
         }
 
-        this.$body.append ( $rows );
+        this.$body.append($rows);
 
-        this._checkEmpty ();
+        this._checkEmpty();
 
-        this.$table.trigger ( 'change' );
+        this.$table.trigger('change');
 
-        this._trigger ( 'add', {
+        this._trigger('add', {
           $rows: $rows
         });
-
       }
 
       return this;
-
     },
 
-    update: function ( id ) { //INFO: id, datas...
+    update: function update(id) {
+      //INFO: id, datas...
 
-      var datas = _.tail ( arguments ),
-          $row = $( '.' + this._getRowId ( id ) );
+      var datas = _.tail(arguments),
+          $row = $('.' + this._getRowId(id));
 
-      if ( datas.length > 0 && $row.length === 1 ) {
+      if (datas.length > 0 && $row.length === 1) {
 
-        var $rowCells = $row.find ( this.options.selectors.rowCell );
+        var $rowCells = $row.find(this.options.selectors.rowCell);
 
-        for ( var i = 0, l = datas.length; i < l; i++ ) {
+        for (var i = 0, l = datas.length; i < l; i++) {
 
-          if ( _.isString ( datas[i] ) ) {
+          if (_.isString(datas[i])) {
 
-            $rowCells.eq ( i ).html ( datas[i] );
-
+            $rowCells.eq(i).html(datas[i]);
           }
-
         }
 
-        this.$table.trigger ( 'change' );
+        this.$table.trigger('change');
 
-        this._trigger ( 'update', {
+        this._trigger('update', {
           $row: $row
         });
-
       }
 
       return this;
-
     },
 
-    remove: function ( id ) {
+    remove: function remove(id) {
 
-      var $row = $( '.' + this._getRowId ( id ) );
+      var $row = $('.' + this._getRowId(id));
 
-      if ( $row.length === 1 ) {
+      if ($row.length === 1) {
 
-        $row.remove ();
+        $row.remove();
 
-        this._checkEmpty ();
+        this._checkEmpty();
 
-        this.$table.trigger ( 'change' );
+        this.$table.trigger('change');
 
-        this._trigger ( 'remove', {
+        this._trigger('remove', {
           $row: $row
         });
-
       }
 
       return this;
-
     },
 
-    clear: function () {
+    clear: function clear() {
 
-      var $rows = this.$body.find ( this.options.selectors.notEmptyRow );
+      var $rows = this.$body.find(this.options.selectors.notEmptyRow);
 
-      if ( $rows.length > 0 ) {
+      if ($rows.length > 0) {
 
-        $rows.remove ();
+        $rows.remove();
 
-        this._checkEmpty ();
+        this._checkEmpty();
 
-        this.$table.trigger ( 'change' );
+        this.$table.trigger('change');
 
-        this._trigger ( 'clear', {
+        this._trigger('clear', {
           $rows: $rows
         });
-
       }
 
       return this;
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Tabs
@@ -10079,13 +9214,15 @@ Prism.languages.js = Prism.languages.javascript;
 
 //TODO: Add again the indicator
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TABS */
 
-  $.factory ( 'svelto.tabs', {
+  $.factory('svelto.tabs', {
 
     /* OPTIONS */
 
@@ -10109,110 +9246,98 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.tabs' ).tabs ();
-
+      $root.find('.tabs').tabs();
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$tabs = this.$element;
-      this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
-      this.$containers = this.$tabs.find ( this.options.selectors.containers );
+      this.$triggers = this.$tabs.find(this.options.selectors.triggers);
+      this.$containers = this.$tabs.find(this.options.selectors.containers);
 
-      this.isVertical = this.$tabs.hasClass ( this.options.classes.vertical );
+      this.isVertical = this.$tabs.hasClass(this.options.classes.vertical);
 
       this.index = -1;
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      var $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
+      var $activeTrigger = this.$triggers.filter('.' + this.options.classes.active.trigger).first();
 
-      $activeTrigger = ( $activeTrigger.length > 0 ) ? $activeTrigger : this.$triggers.first ();
+      $activeTrigger = $activeTrigger.length > 0 ? $activeTrigger : this.$triggers.first();
 
-      var newIndex = this.$triggers.index ( $activeTrigger );
+      var newIndex = this.$triggers.index($activeTrigger);
 
-      this.set ( newIndex );
-
+      this.set(newIndex);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* TRIGGERS */
 
-      this._on ( this.$triggers, Pointer.tap, this.__tap );
-
+      this._on(this.$triggers, Pointer.tap, this.__tap);
     },
 
     /* PRIVATE */
 
-    __tap: function ( event, node ) {
+    __tap: function __tap(event, node) {
 
-      var newIndex = this.$triggers.index ( $(node) );
+      var newIndex = this.$triggers.index($(node));
 
-      this.set ( newIndex );
-
+      this.set(newIndex);
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
       return this.index;
-
     },
 
-    set: function ( index ) {
+    set: function set(index) {
 
-      if ( this.index !== index ) {
+      if (this.index !== index) {
 
         /* PREVIOUS */
 
-        var $prevTrigger = this.$triggers.eq ( this.index ),
-            $prevContainer = this.$containers.eq ( this.index );
+        var $prevTrigger = this.$triggers.eq(this.index),
+            $prevContainer = this.$containers.eq(this.index);
 
-        $prevTrigger.removeClass ( this.options.classes.active.trigger );
-        $prevContainer.removeClass ( this.options.classes.active.container );
+        $prevTrigger.removeClass(this.options.classes.active.trigger);
+        $prevContainer.removeClass(this.options.classes.active.container);
 
-        if ( this.options.highlight ) {
+        if (this.options.highlight) {
 
-          $prevTrigger.removeClass ( 'highlight highlight-bottom highlight-right' );
-
+          $prevTrigger.removeClass('highlight highlight-bottom highlight-right');
         }
 
         /* NEW */
 
         this.index = index;
 
-        var $trigger = this.$triggers.eq ( this.index ),
-            $container = this.$containers.eq ( this.index );
+        var $trigger = this.$triggers.eq(this.index),
+            $container = this.$containers.eq(this.index);
 
-        $trigger.addClass ( this.options.classes.active.trigger );
-        $container.addClass ( this.options.classes.active.container );
+        $trigger.addClass(this.options.classes.active.trigger);
+        $container.addClass(this.options.classes.active.container);
 
-        if ( this.options.highlight ) {
+        if (this.options.highlight) {
 
-          $trigger.addClass ( 'highlight' + ( this.isVertical ? ' highlight-right' : ' highlight-bottom' ) );
-
+          $trigger.addClass('highlight' + (this.isVertical ? ' highlight-right' : ' highlight-bottom'));
         }
 
         /* CALLBACKS */
 
-        this._trigger ( 'set', {
+        this._trigger('set', {
           index: this.index
         });
-
       }
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Tagbox
@@ -10229,27 +9354,20 @@ Prism.languages.js = Prism.languages.javascript;
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
 //FIXME: Partial's text cursor is not visible whan it's empty
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TAGBOX */
 
-  $.factory ( 'svelto.tagbox', {
+  $.factory('svelto.tagbox', {
 
     /* TEMPLATES */
 
     templates: {
-      tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
-              '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' +
-                '<span>' +
-                  '{%=o.value%}' +
-                '</span>' +
-                '<div class="sub right gray actionable tagbox-tag-remover">' +
-                  '<i class="icon">close</i>' +
-                '</div>' +
-              '</div>' +
-            '</div>'
+      tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' + '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' + '<span>' + '{%=o.value%}' + '</span>' + '<div class="sub right gray actionable tagbox-tag-remover">' + '<i class="icon">close</i>' + '</div>' + '</div>' + '</div>'
     },
 
     /* OPTIONS */
@@ -10264,7 +9382,7 @@ Prism.languages.js = Prism.languages.javascript;
         css: 'outlined'
       },
       characters: {
-        forbidden: [ '<', '>', ';', '`' ],
+        forbidden: ['<', '>', ';', '`'],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
         inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //INFO: They are keyCodes
       },
@@ -10289,443 +9407,386 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.tagbox' ).each ( function () {
+      $root.find('.tagbox').each(function () {
 
         var $tagbox = $(this);
 
-        $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
-
+        $tagbox.tagbox({ init: $tagbox.find('input').val() });
       });
-
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$tagbox = this.$element;
-      this.$tags = this.$tagbox.find ( this.options.selectors.tags );
-      this.$input = this.$tagbox.find ( this.options.selectors.input );
-      this.$partial = this.$tagbox.find ( this.options.selectors.partial );
-
+      this.$tags = this.$tagbox.find(this.options.selectors.tags);
+      this.$input = this.$tagbox.find(this.options.selectors.input);
+      this.$partial = this.$tagbox.find(this.options.selectors.partial);
     },
 
-    _init: function ( suppressTriggers ) {
+    _init: function _init(suppressTriggers) {
 
-      this.add ( this.options.init, suppressTriggers );
-
+      this.add(this.options.init, suppressTriggers);
     },
 
-    _events: function () {
+    _events: function _events() {
 
       /* PARTIAL */
 
-      this._on ( this.$partial, 'keypress keydown', this.__keypressKeydown ); //INFO: `keypress` is for printable characters, `keydown` for the others
+      this._on(this.$partial, 'keypress keydown', this.__keypressKeydown); //INFO: `keypress` is for printable characters, `keydown` for the others
 
-      this._on ( this.$partial, 'paste', this.__paste );
+      this._on(this.$partial, 'paste', this.__paste);
 
       /* TAP ON EMPTY */
 
-      this._on ( Pointer.tap, this.__tapOnEmpty );
+      this._on(Pointer.tap, this.__tapOnEmpty);
 
       /* TAP ON TAG REMOVER */
 
-      this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
-
+      this._on(Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover);
     },
 
     /* PRIVATE */
 
-    _sanitizeTag: function ( value ) {
+    _sanitizeTag: function _sanitizeTag(value) {
 
-      value = _.trim ( value );
+      value = _.trim(value);
 
-      if ( this.options.escape ) {
+      if (this.options.escape) {
 
-        value = _.escape ( value );
-
+        value = _.escape(value);
       }
 
-      if ( this.options.deburr ) {
+      if (this.options.deburr) {
 
-        value = _.deburr ( value );
-
+        value = _.deburr(value);
       }
 
       return value;
-
     },
 
-    _getTagHtml: function ( value ) {
+    _getTagHtml: function _getTagHtml(value) {
 
-      return this._tmpl ( 'tag', _.merge ( { value: value }, this.options.tag ) );
-
+      return this._tmpl('tag', _.merge({ value: value }, this.options.tag));
     },
 
-    _clearPartial: function () {
+    _clearPartial: function _clearPartial() {
 
-      this.$partial.val ( '' ).trigger ( 'change' );
-
+      this.$partial.val('').trigger('change');
     },
 
     /* UPDATE */
 
-    _updateInput: function () {
+    _updateInput: function _updateInput() {
 
-      this.$input.val ( this.options.tags.join ( this.options.characters.separator ) ).trigger ( 'change' );
-
+      this.$input.val(this.options.tags.join(this.options.characters.separator)).trigger('change');
     },
 
     /* TAG */
 
-    _add: function ( value ) {
+    _add: function _add(value) {
 
-      var valueTrimmed = _.trim ( value ),
-          value = this._sanitizeTag ( value );
+      var valueTrimmed = _.trim(value),
+          value = this._sanitizeTag(value);
 
-      if ( valueTrimmed.length < this.options.tag.minLength ) {
+      if (valueTrimmed.length < this.options.tag.minLength) {
 
-        if ( valueTrimmed.length > 0 ) { //INFO: So it won't be triggered when the user presses enter and the $partial is empty
+        if (valueTrimmed.length > 0) {
+          //INFO: So it won't be triggered when the user presses enter and the $partial is empty
 
-          $.noty ( '`' + value + '` is shorter than ' + this.options.tag.minLength + ' characters' );
-
+          $.noty('`' + value + '` is shorter than ' + this.options.tag.minLength + ' characters');
         }
+      } else if (_.contains(this.options.tags, value)) {
 
-      } else if ( _.contains ( this.options.tags, value ) ) {
-
-        $.noty ( '`' + value + '` is a duplicate' );
-
+        $.noty('`' + value + '` is a duplicate');
       } else {
 
-        this.options.tags.push ( value );
+        this.options.tags.push(value);
 
-        if ( this.options.sort ) {
+        if (this.options.sort) {
 
-          this.options.tags.sort ();
-
+          this.options.tags.sort();
         }
 
-        var tagHtml = this._getTagHtml ( value );
+        var tagHtml = this._getTagHtml(value);
 
-        if ( this.options.tags.length === 1 ) {
+        if (this.options.tags.length === 1) {
 
-          this.$tags.prepend ( tagHtml );
+          this.$tags.prepend(tagHtml);
+        } else if (!this.options.sort) {
 
-        } else if ( !this.options.sort ) {
-
-          this.$tagbox.find ( this.options.selectors.tag ).last ().after ( tagHtml );
-
+          this.$tagbox.find(this.options.selectors.tag).last().after(tagHtml);
         } else {
 
-          var index = this.options.tags.indexOf ( value );
+          var index = this.options.tags.indexOf(value);
 
-          if ( index === 0 ) {
+          if (index === 0) {
 
-            this.$tagbox.find ( this.options.selectors.tag ).first ().before ( tagHtml );
-
+            this.$tagbox.find(this.options.selectors.tag).first().before(tagHtml);
           } else {
 
-            this.$tagbox.find ( this.options.selectors.tag ).eq ( index - 1 ).after ( tagHtml );
-
+            this.$tagbox.find(this.options.selectors.tag).eq(index - 1).after(tagHtml);
           }
-
         }
 
         return true;
-
       }
 
       return false;
-
     },
 
-    _remove: function ( $tag, tag ) {
+    _remove: function _remove($tag, tag) {
 
-      $tag.remove ();
+      $tag.remove();
 
-      _.pull ( this.options.tags, tag );
-
+      _.pull(this.options.tags, tag);
     },
 
     /* KEYPRESS / KEYDOWN */
 
-    __keypressKeydown: function ( event ) {
+    __keypressKeydown: function __keypressKeydown(event) {
 
-      var value = this.$partial.val ();
+      var value = this.$partial.val();
 
-      if ( _.contains ( this.options.characters.inserters, event.keyCode ) || event.keyCode === this.options.characters.separator.charCodeAt ( 0 ) ) {
+      if (_.contains(this.options.characters.inserters, event.keyCode) || event.keyCode === this.options.characters.separator.charCodeAt(0)) {
 
-        var added = this.add ( value );
+        var added = this.add(value);
 
-        if ( added ) {
+        if (added) {
 
-          this._clearPartial ();
-
+          this._clearPartial();
         }
 
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      } else if (event.keyCode === $.ui.keyCode.BACKSPACE) {
 
-      } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
+        if (value.length === 0 && this.options.tags.length > 0) {
 
-        if ( value.length === 0 && this.options.tags.length > 0 ) {
+          var $tag = this.$tagbox.find(this.options.selectors.tag).last(),
+              edit = !$.hasCtrlOrCmd(event);
 
-          var $tag = this.$tagbox.find ( this.options.selectors.tag ).last (),
-              edit = !$.hasCtrlOrCmd ( event );
+          this.remove($tag, edit);
 
-          this.remove ( $tag, edit );
-
-          event.preventDefault ();
-          event.stopImmediatePropagation ();
-
+          event.preventDefault();
+          event.stopImmediatePropagation();
         }
+      } else if (_.contains(this.options.characters.forbidden, String.fromCharCode(event.keyCode))) {
 
-      } else if ( _.contains ( this.options.characters.forbidden, String.fromCharCode ( event.keyCode ) ) ) {
+        $.noty('The character you entered is forbidden');
 
-        $.noty ( 'The character you entered is forbidden' );
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
+        event.preventDefault();
+        event.stopImmediatePropagation();
       }
-
     },
 
     /* PASTE */
 
-    __paste: function ( event ) {
+    __paste: function __paste(event) {
 
-        this.add ( event.originalEvent.clipboardData.getData ( 'text' ) );
+      this.add(event.originalEvent.clipboardData.getData('text'));
 
-        event.preventDefault ();
-
+      event.preventDefault();
     },
 
     /* TAP ON CLOSE */
 
-    __tapOnTagRemover: function ( event, tagRemover ) {
+    __tapOnTagRemover: function __tapOnTagRemover(event, tagRemover) {
 
-      var $tag = $(tagRemover).parents ( this.options.selectors.tag );
+      var $tag = $(tagRemover).parents(this.options.selectors.tag);
 
-      this.remove ( $tag );
-
+      this.remove($tag);
     },
 
     /* TAP ON EMPTY */
 
-    __tapOnEmpty: function ( event ) {
+    __tapOnEmpty: function __tapOnEmpty(event) {
 
-      if ( document.activeElement !== this.$partial[0] && !$(event.target).is ( 'input, ' + this.options.selectors.tagLabel ) ) {
+      if (document.activeElement !== this.$partial[0] && !$(event.target).is('input, ' + this.options.selectors.tagLabel)) {
 
-        this.$partial.focus ();
-
+        this.$partial.focus();
       }
-
     },
 
     /* PUBLIC */
 
-    get: function () {
+    get: function get() {
 
-      return _.clone ( this.options.tags );
-
+      return _.clone(this.options.tags);
     },
 
-    add: function ( tag, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
+    add: function add(tag, suppressTriggers) {
+      //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
-      if ( _.isArray ( tag ) ) {
+      if (_.isArray(tag)) {
 
-        tag = _.flatten ( tag ).join ( this.options.characters.separator );
-
+        tag = _.flatten(tag).join(this.options.characters.separator);
       }
 
-      var previous = _.clone ( this.options.tag );
+      var previous = _.clone(this.options.tag);
 
-      var tags = tag.split ( this.options.characters.separator ),
-          adds = _.map ( tags, this._add, this );
+      var tags = tag.split(this.options.characters.separator),
+          adds = _.map(tags, this._add, this);
 
-      var added = ( _.compact ( adds ).length > 0 );
+      var added = _.compact(adds).length > 0;
 
-      if ( added ) {
+      if (added) {
 
-        this._updateInput ();
+        this._updateInput();
 
-        if ( !suppressTriggers ) {
+        if (!suppressTriggers) {
 
-          this._trigger ( 'change', {
+          this._trigger('change', {
             previous: previous,
-            tags: _.clone ( this.options.tags )
-          })
+            tags: _.clone(this.options.tags)
+          });
 
-          var addedTags = _.filter ( tags, function ( tag, index ) {
+          var addedTags = _.filter(tags, function (tag, index) {
             return adds[index];
           });
 
-          this._trigger ( 'add', addedTags );
-
+          this._trigger('add', addedTags);
         }
-
       }
 
       return added;
-
     },
 
-    remove: function ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
+    remove: function remove(tag, edit, suppressTriggers) {
+      //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
-      if ( tag instanceof $ ) {
+      if (tag instanceof $) {
 
         var $tags = [tag],
-            tags = [tag.data ( 'tag-value' )];
-
+            tags = [tag.data('tag-value')];
       } else {
 
         var $tags = [],
             tags = [];
 
-        if ( _.isArray ( tag ) ) {
+        if (_.isArray(tag)) {
 
-          tag = _.flatten ( tag ).join ( this.options.characters.separator );
-
+          tag = _.flatten(tag).join(this.options.characters.separator);
         }
 
-        tag = tag.split ( this.options.characters.separator );
+        tag = tag.split(this.options.characters.separator);
 
-        for ( var i = 0, l = tag.length; i < l; i++ ) {
+        for (var i = 0, l = tag.length; i < l; i++) {
 
-          var value = this._sanitizeTag ( tag[i] ),
-              $tag = this.$tagbox.find ( this.options.selectors.tag + '[data-tag-value="' + value + '"]' );
+          var value = this._sanitizeTag(tag[i]),
+              $tag = this.$tagbox.find(this.options.selectors.tag + '[data-tag-value="' + value + '"]');
 
-          if ( $tag.length === 1 ) {
+          if ($tag.length === 1) {
 
-            $tags.push ( $tag );
-            tags.push ( value );
-
+            $tags.push($tag);
+            tags.push(value);
           }
-
         }
-
       }
 
-      if ( tags.length > 0 ) {
+      if (tags.length > 0) {
 
-        var previous = _.clone ( this.options.tags );
+        var previous = _.clone(this.options.tags);
 
-        for ( var i = 0, l = tags.length; i < l; i++ ) {
+        for (var i = 0, l = tags.length; i < l; i++) {
 
-          this._remove ( $tags[i], tags[i] );
-
+          this._remove($tags[i], tags[i]);
         }
 
-        this._updateInput ();
+        this._updateInput();
 
-        if ( tags.length === 1 && edit === true ) {
+        if (tags.length === 1 && edit === true) {
 
-          this.$partial.val ( tags[0] ).trigger ( 'change' );
-
+          this.$partial.val(tags[0]).trigger('change');
         }
 
-        if ( !suppressTriggers ) {
+        if (!suppressTriggers) {
 
-          this._trigger ( 'change', {
+          this._trigger('change', {
             previous: previous,
-            tags: _.clone ( this.options.tags )
-          })
+            tags: _.clone(this.options.tags)
+          });
 
-          this._trigger ( 'remove', tags );
+          this._trigger('remove', tags);
 
-          if ( this.options.tags.length === 0 ) {
+          if (this.options.tags.length === 0) {
 
-            this._trigger ( 'empty' );
-
+            this._trigger('empty');
           }
-
         }
-
       }
-
     },
 
-    clear: function ( suppressTriggers ) {
+    clear: function clear(suppressTriggers) {
 
-      if ( this.options.tags.length > 0 ) {
+      if (this.options.tags.length > 0) {
 
         var data = {
-          previous: _.clone ( this.options.tags ),
+          previous: _.clone(this.options.tags),
           tags: []
         };
 
         this.options.tags = [];
 
-        this.$tagbox.find ( this.options.selectors.tag ).remove ();
+        this.$tagbox.find(this.options.selectors.tag).remove();
 
-        this._clearPartial ();
+        this._clearPartial();
 
-        this._updateInput ();
+        this._updateInput();
 
-        if ( !suppressTriggers ) {
+        if (!suppressTriggers) {
 
-          this._trigger ( 'change', data );
+          this._trigger('change', data);
 
-          if ( data.previous.length > 0 ) {
+          if (data.previous.length > 0) {
 
-            this._trigger ( 'remove', data.previous );
-
+            this._trigger('remove', data.previous);
           }
 
-          this._trigger ( 'empty' );
-
+          this._trigger('empty');
         }
-
       }
-
     },
 
-    reset: function () {
+    reset: function reset() {
 
-      var previous = _.clone ( this.options.tags );
+      var previous = _.clone(this.options.tags);
 
-      this.clear ( true );
+      this.clear(true);
 
-      this._init ( true );
+      this._init(true);
 
-      if ( !_.isEqual ( previous, this.options.tags ) ) {
+      if (!_.isEqual(previous, this.options.tags)) {
 
-        this._trigger ( 'change', {
+        this._trigger('change', {
           previous: previous,
-          tags: _.clone ( this.options.tags )
+          tags: _.clone(this.options.tags)
         });
 
-        var added = _.difference ( this.options.tags, previous );
+        var added = _.difference(this.options.tags, previous);
 
-        if ( added.length > 0 ) {
+        if (added.length > 0) {
 
-          this._trigger ( 'add', added );
-
+          this._trigger('add', added);
         }
 
-        var removed = _.difference ( previous, this.options.tags );
+        var removed = _.difference(previous, this.options.tags);
 
-        if ( removed.length > 0 ) {
+        if (removed.length > 0) {
 
-          this._trigger ( 'remove', removed );
-
+          this._trigger('remove', removed);
         }
 
-        if ( this.options.tags.length === 0 ) {
+        if (this.options.tags.length === 0) {
 
-          this._trigger ( 'empty' );
-
+          this._trigger('empty');
         }
-
       }
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Time Ago
@@ -10736,13 +9797,15 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TIME AGO */
 
-  $.factory ( 'svelto.timeAgo', {
+  $.factory('svelto.timeAgo', {
 
     /* OPTIONS */
 
@@ -10756,67 +9819,56 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '[data-timestamp]' ).timeAgo ();
-      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
-
+      $root.find('[data-timestamp]').timeAgo();
+      $root.find('[data-timestamp-title]').timeAgo({ title: true });
     },
 
-    _variables: function () {
+    _variables: function _variables() {
 
       this.$timeAgoElement = this.$element;
 
-      if ( !this.options.timestamp ) {
+      if (!this.options.timestamp) {
 
-        this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
-
+        this.options.timestamp = this.$timeAgoElement.data(this.options.title ? 'timestamp-title' : 'timestamp');
       }
-
     },
 
-    _init: function () {
+    _init: function _init() {
 
-      this._loop ( 0 );
-
+      this._loop(0);
     },
 
     /* PRIVATE */
 
-    _loop: function ( wait ) {
+    _loop: function _loop(wait) {
 
-      this._delay ( function () {
+      this._delay(function () {
 
-        this._loop ( this._update ().next );
-
-      }, wait * 1000 );
-
+        this._loop(this._update().next);
+      }, wait * 1000);
     },
 
-    _update: function () {
+    _update: function _update() {
 
-      var timeAgo = _.timeAgo ( this.options.timestamp );
+      var timeAgo = _.timeAgo(this.options.timestamp);
 
-      if ( this.options.title ) {
+      if (this.options.title) {
 
-        this.$timeAgoElement.attr ( 'title', timeAgo.str );
-
+        this.$timeAgoElement.attr('title', timeAgo.str);
       } else {
 
-        this.$timeAgoElement.html ( timeAgo.str );
-
+        this.$timeAgoElement.html(timeAgo.str);
       }
 
-      this._trigger ( 'change' );
+      this._trigger('change');
 
       return timeAgo;
-
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Timer
@@ -10827,169 +9879,147 @@ Prism.languages.js = Prism.languages.javascript;
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TIMER */
 
-  $.timer = function ( func, time, autostart ) {
+  $.timer = function (func, time, autostart) {
 
-    return new Timer ( func, time, autostart );
-
+    return new Timer(func, time, autostart);
   };
 
   /* TIMER OBJ */
 
-  var Timer = function ( func, time, autostart ) {
+  var Timer = function Timer(func, time, autostart) {
 
-    return this.set ( func, time, autostart );
-
+    return this.set(func, time, autostart);
   };
 
   Timer.prototype = {
 
-    set: function ( func, time, autostart ) {
+    set: function set(func, time, autostart) {
 
       this.init = true;
       this.action = func;
 
-      if ( !isNaN ( time ) ) this.intervalTime = time;
+      if (!isNaN(time)) this.intervalTime = time;
 
-      if ( autostart && !this.isActive ) {
+      if (autostart && !this.isActive) {
 
         this.isActive = true;
-        this.setTimer ();
-
+        this.setTimer();
       }
 
       return this;
-
     },
 
-    once: function ( time ) {
+    once: function once(time) {
 
       var timer = this;
 
-      if ( isNaN ( time ) ) time = 0;
+      if (isNaN(time)) time = 0;
 
-      setTimeout ( function () {
+      setTimeout(function () {
 
-        timer.action ();
-
-      }, time );
+        timer.action();
+      }, time);
 
       return this;
-
     },
 
-    play: function ( reset ) {
+    play: function play(reset) {
 
-      if ( !this.isActive ) {
+      if (!this.isActive) {
 
-        if ( reset ) this.setTimer ();
-        else this.setTimer ( this.remaining_time );
+        if (reset) this.setTimer();else this.setTimer(this.remaining_time);
 
         this.isActive = true;
-
       }
 
       return this;
-
     },
 
-    pause: function () {
+    pause: function pause() {
 
-      if ( this.isActive ) {
+      if (this.isActive) {
 
         this.isActive = false;
         this.remaining_time -= new Date() - this.last;
-        this.clearTimer ();
-
+        this.clearTimer();
       }
 
       return this;
-
     },
 
-    stop: function () {
+    stop: function stop() {
 
       this.isActive = false;
       this.remaining_time = this.intervalTime;
-      this.clearTimer ();
+      this.clearTimer();
 
       return this;
-
     },
 
-    toggle: function ( reset ) {
+    toggle: function toggle(reset) {
 
-      if ( this.isActive ) this.pause ();
-      else if ( reset ) this.play ( true );
-      else this.play ();
+      if (this.isActive) this.pause();else if (reset) this.play(true);else this.play();
 
       return this;
-
     },
 
-    reset: function () {
+    reset: function reset() {
 
       this.isActive = false;
-      this.play ( true );
+      this.play(true);
 
       return this;
-
     },
 
-    clearTimer: function () {
+    clearTimer: function clearTimer() {
 
-      clearTimeout ( this.timeoutObject );
-
+      clearTimeout(this.timeoutObject);
     },
 
-    setTimer: function ( time ) {
+    setTimer: function setTimer(time) {
 
       var timer = this;
 
-      if ( isNaN ( time ) ) time = this.intervalTime;
+      if (isNaN(time)) time = this.intervalTime;
 
       this.remaining_time = time;
-      this.last = new Date ();
-      this.clearTimer ();
+      this.last = new Date();
+      this.clearTimer();
 
-      this.timeoutObject = setTimeout ( function () {
+      this.timeoutObject = setTimeout(function () {
 
-        timer.go ()
-
-      }, time );
-
+        timer.go();
+      }, time);
     },
 
-    go: function () {
+    go: function go() {
 
-      if ( this.isActive ) {
+      if (this.isActive) {
 
-        this.action ();
-        this.setTimer ();
-
+        this.action();
+        this.setTimer();
       }
-
     },
 
-    remaining: function ( value ) {
+    remaining: function remaining(value) {
 
-      if ( _.isUndefined ( value ) ) return this.remaining_time;
+      if (_.isUndefined(value)) return this.remaining_time;
 
       this.remaining_time = value;
 
       return this;
-
     }
 
   };
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Tooltip
@@ -11000,13 +10030,15 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TOOLTIP */
 
-  $.factory ( 'svelto.tooltip', $.svelto.dropdown, {
+  $.factory('svelto.tooltip', $.svelto.dropdown, {
 
     /* OPTIONS */
 
@@ -11025,16 +10057,13 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize: function _widgetize($root) {
 
-      $root.find ( '.tooltip' ).tooltip ();
-
+      $root.find('.tooltip').tooltip();
     }
 
   });
-
-}( jQuery, _, window, document ));
-
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Touching
@@ -11046,18 +10075,20 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../bteach/btEach.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+'use strict';
+
+(function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TOUCHING */
 
-  $.fn.touching = function ( options ) {
+  $.fn.touching = function (options) {
 
     /* OPTIONS */
 
-    options = _.merge ({
-      startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+    options = _.merge({
+      startIndex: false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
       point: false, //INFO: Used for the punctual search
       //  {
       //    X: 0,
@@ -11067,116 +10098,95 @@ Prism.languages.js = Prism.languages.javascript;
       $comparer: false, //INFO: Used for the overlapping search
       $not: false,
       onlyBest: false
-    }, options );
+    }, options);
 
     /* SEARCHABLE */
 
-    var $searchable = options.$not ? this.not ( options.$not ) : this;
+    var $searchable = options.$not ? this.not(options.$not) : this;
 
     /* COMPARER */
 
-    if ( options.$comparer ) {
+    if (options.$comparer) {
 
-      var rect1 = options.$comparer.getRect (),
+      var rect1 = options.$comparer.getRect(),
           nodes = [],
           areas = [];
 
       var result = false;
 
-      for ( var i = 0, l = $searchable.length; i < l; i++ ) {
+      for (var i = 0, l = $searchable.length; i < l; i++) {
 
-        var rect2 = $.getRect ( $searchable[i] ),
-            area = $.getOverlappingArea ( rect1, rect2 );
+        var rect2 = $.getRect($searchable[i]),
+            area = $.getOverlappingArea(rect1, rect2);
 
-        if ( area > 0 ) {
+        if (area > 0) {
 
-          nodes.push ( $searchable[i] );
-          areas.push ( area );
-
+          nodes.push($searchable[i]);
+          areas.push(area);
         }
-
       }
 
-      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) )]) : $(nodes);
-
+      return options.onlyBest ? $(nodes[areas.indexOf(_.max(areas))]) : $(nodes);
     }
 
     /* PUNCTUAL */
 
-    if ( options.point ) {
+    if (options.point) {
 
       var $touched;
 
-      if ( options.binarySearch ) {
+      if (options.binarySearch) {
 
-        $searchable.btEach ( function () {
+        $searchable.btEach(function () {
 
-          var rect = $.getRect ( this );
+          var rect = $.getRect(this);
 
-          if ( options.point.Y >= rect.top ) {
+          if (options.point.Y >= rect.top) {
 
-            if ( options.point.Y <= rect.bottom ) {
+            if (options.point.Y <= rect.bottom) {
 
-              if ( options.point.X >= rect.left ) {
+              if (options.point.X >= rect.left) {
 
-                if ( options.point.X <= rect.right ) {
+                if (options.point.X <= rect.right) {
 
                   $touched = $(this);
 
                   return false;
-
                 } else {
 
                   return 1;
-
                 }
-
               } else {
 
                 return -1;
-
               }
-
             } else {
 
               return 1;
-
             }
-
-
           } else {
 
             return -1;
-
           }
-
-
-        }, options.startIndex );
+        }, options.startIndex);
 
         return $touched || $empty;
-
       } else {
 
-        for ( var i = 0, l = $searchable.length; i < l; i++ ) {
+        for (var i = 0, l = $searchable.length; i < l; i++) {
 
-          var rect = $.getRect ( $searchable[i] );
+          var rect = $.getRect($searchable[i]);
 
-          if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
+          if (options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right) {
 
-            $touched = $searchable.eq ( i );
+            $touched = $searchable.eq(i);
 
             break;
-
           }
-
         }
 
         return $touched || $empty;
-
       }
-
     }
-
   };
-
-}( jQuery, _, window, document ));
+})(jQuery, _, window, document);

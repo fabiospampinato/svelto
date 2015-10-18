@@ -186,59 +186,6 @@ mixin carousel-items
 
 
 //- =========================================================================
-//- Svelto - Checkbox
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- TODO: the value should be setted to 1 by default if is not provided
-
-//- Options
-  {
-    name: '', // Input name
-    title: '', // Checkbox title
-    value: '', // Input value
-    checked: '', // Input checked
-    colors: { // Colors to use for icons
-      on: '', // On color
-      off: '' // Off color
-    },
-    icons: { // Icons to use
-      on: '', // On icon
-      off: '' // Off icon
-    }
-  }
-
-mixin checkbox(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.value = options.value || "";
-  - options.colors = options.colors || {};
-  - options.colors.on = options.colors.on || "";
-  - options.colors.off = options.colors.off || "";
-  - options.icons = options.icons || {};
-  - options.icons.on = options.icons.on || "check_box";
-  - options.icons.off = options.icons.off || "check_box_outline_blank";
-  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
-    if options.title
-      span= options.title
-    +icons
-      +icon(options.icons.on)(class=options.colors.on).icon-on
-      +icon(options.icons.off)(class=options.colors.off).icon-off
-    if options.checked
-      if options.name
-        input(type="checkbox" name=options.name value=options.value checked)
-      else
-        input(type="checkbox" value=options.value checked)
-    else
-      if options.name
-        input(type="checkbox" name=options.name value=options.value)
-      else
-        input(type="checkbox" value=options.value)
-
-
-//- =========================================================================
 //- Svelto - Chat
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -304,6 +251,59 @@ mixin chat-msg(options)
 
 
 //- =========================================================================
+//- Svelto - Checkbox
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- TODO: the value should be setted to 1 by default if is not provided
+
+//- Options
+  {
+    name: '', // Input name
+    title: '', // Checkbox title
+    value: '', // Input value
+    checked: '', // Input checked
+    colors: { // Colors to use for icons
+      on: '', // On color
+      off: '' // Off color
+    },
+    icons: { // Icons to use
+      on: '', // On icon
+      off: '' // Off icon
+    }
+  }
+
+mixin checkbox(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.value = options.value || "";
+  - options.colors = options.colors || {};
+  - options.colors.on = options.colors.on || "";
+  - options.colors.off = options.colors.off || "";
+  - options.icons = options.icons || {};
+  - options.icons.on = options.icons.on || "check_box";
+  - options.icons.off = options.icons.off || "check_box_outline_blank";
+  +button(class=(options.checked ? "checked" : ""))&attributes(attributes).checkbox
+    if options.title
+      span= options.title
+    +icons
+      +icon(options.icons.on)(class=options.colors.on).icon-on
+      +icon(options.icons.off)(class=options.colors.off).icon-off
+    if options.checked
+      if options.name
+        input(type="checkbox" name=options.name value=options.value checked)
+      else
+        input(type="checkbox" value=options.value checked)
+    else
+      if options.name
+        input(type="checkbox" name=options.name value=options.value)
+      else
+        input(type="checkbox" value=options.value)
+
+
+//- =========================================================================
 //- Svelto - Colorpicker
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -331,6 +331,31 @@ mixin colorpicker
 
 mixin container
   .container&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Divider
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin divider
+  .divider&attributes(attributes)
+    block
+
+mixin divider-block
+  .divider.block
+    .divider-content&attributes(attributes)
+      block
+
+mixin divider-text
+  .divider&attributes(attributes).text
+    block
+
+mixin divider-spacer
+  .divider&attributes(attributes).spacer
     block
 
 
@@ -404,31 +429,6 @@ mixin datepicker
         .datepicker-day-next 4
         .datepicker-day-next 5
         .datepicker-day-next 6
-
-
-//- =========================================================================
-//- Svelto - Divider
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin divider
-  .divider&attributes(attributes)
-    block
-
-mixin divider-block
-  .divider.block
-    .divider-content&attributes(attributes)
-      block
-
-mixin divider-text
-  .divider&attributes(attributes).text
-    block
-
-mixin divider-spacer
-  .divider&attributes(attributes).spacer
-    block
 
 
 //- =========================================================================
@@ -1604,6 +1604,19 @@ mixin textarea(options)
 
 
 //- =========================================================================
+//- Svelto - Toolbar
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin toolbar
+  .toolbar&attributes(attributes)
+    +multiple
+      block
+
+
+//- =========================================================================
 //- Svelto - Tooltip
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1628,19 +1641,6 @@ mixin tooltip-btn(options)
 mixin tooltip(id)
   .container(id=id)&attributes(attributes).tooltip
     block
-
-
-//- =========================================================================
-//- Svelto - Toolbar
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin toolbar
-  .toolbar&attributes(attributes)
-    +multiple
-      block
 
 
 //- =========================================================================

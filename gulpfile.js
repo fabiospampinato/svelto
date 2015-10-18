@@ -55,6 +55,7 @@ var isProduction  = !!argv.production,
 
 /* IMAGES */
 
+//FIXME: We shoudn't compress images lossly
 //FIXME: It doesn't work with SVGs, the blur.svg doesn't work anymore after
 
 gulp.task ( 'images', function () {
@@ -76,7 +77,7 @@ gulp.task ( 'images', function () {
              .pipe ( gulpif ( isProduction, bytediff.stop () ) )
              .pipe ( flatten () )
              .pipe ( gulp.dest ( 'dist/images' ) )
-             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
+             .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
 
 });
 
@@ -96,7 +97,7 @@ gulp.task ( 'examples', function () {
              .pipe ( newer ({
                dest: 'examples',
                ext: '.html'
-             }) )
+             }))
              .pipe ( jade ({
                locals: {},
                pretty: false //INFO: Otherwise there are some bugs for example when outputting a block inside a textarea, it gets unneeed extra whitespaces at the beginning
@@ -105,7 +106,7 @@ gulp.task ( 'examples', function () {
                gutil.log ( err.message );
              })
              .pipe ( gulp.dest ( 'examples' ) )
-             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
+             .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
 
 });
 
@@ -125,51 +126,67 @@ gulp.task ( 'jade', ['examples-clean'], function () {
 /* JS */
 
 //TODO: Add support for sourcemaps
-//TODO: Re-add babel support, but with support for partial building (right now it populates the dest file with the same functions multiple times)
 
 gulp.task ( 'js-temp', function () {
 
   var dependencyIndex = 0;
 
-  return gulp.src ( 'src/components/**/*.js' )
-             .pipe ( sort () )
-             .pipe ( dependencies ({
-               pattern: /\* @requires [\s-]*(.*\.js)/g
-             }))
-             .pipe ( foreach ( function ( stream, file ) {
-               var basename = path.basename ( file.path );
-               file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex, 3, 0 ) + '-' + basename );
-               dependencyIndex++;
-               return stream;
-             }))
-             .pipe ( newer ({
-               dest: '.temp/js',
-               map: path.basename
-             }) )
-             .pipe ( flatten () )
-             .pipe ( gulp.dest ( '.temp/js' ) )
-             .pipe ( gulpif ( isProduction, uglify () ) )
-             .pipe ( gulp.dest ( '.temp/js/min' ) );
+  if ( isDevelopment ) {
+
+    return gulp.src ( 'src/components/**/*.js' )
+               .pipe ( sort () )
+               .pipe ( dependencies ({
+                 pattern: /\* @requires [\s-]*(.*\.js)/g
+               }))
+               .pipe ( foreach ( function ( stream, file ) {
+                 var basename = path.basename ( file.path );
+                 file.path = file.path.replace ( basename, _.padLeft ( dependencyIndex, 3, 0 ) + '-' + basename );
+                 dependencyIndex++;
+                 return stream;
+               }))
+               .pipe ( newer ({
+                 dest: '.temp/js',
+                 map: path.basename
+               }))
+               .pipe ( flatten () )
+               .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
+               .pipe ( gulp.dest ( '.temp/js' ) );
+
+  }
 
 });
 
 gulp.task ( 'js', ['js-temp'], function () {
 
-  var unminified = gulp.src ( '.temp/js/*.js' )
-                       .pipe ( newer ( 'dist/js/svelto.js' ) )
-                       .pipe ( sort () )
-                       .pipe ( concat ( 'svelto.js' ) )
-                       .pipe ( gulp.dest ( 'dist/js' ) )
-                       .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
+  if ( isDevelopment ) {
 
-  var minified = gulp.src ( '.temp/js/min/*.js' )
-                     .pipe ( newer ( 'dist/js/svelto.min.js' ) )
-                     .pipe ( sort () )
-                     .pipe ( concat ( 'svelto.min.js' ) )
-                     .pipe ( gulp.dest ( 'dist/js' ) )
-                     .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
+    return gulp.src ( '.temp/js/*.js' )
+               .pipe ( newer ( 'dist/js/svelto.js' ) )
+               .pipe ( sort () )
+               .pipe ( concat ( 'svelto.js' ) )
+               .pipe ( gulp.dest ( 'dist/js' ) )
+               .pipe ( rename ( 'svelto.min.js' ) )
+               .pipe ( gulp.dest ( 'dist/js' ) )
+               .pipe ( gulpif ( browserSync.active, gutil.noop () ) );
 
-  return merge ( unminified, minified );
+  } else {
+
+    return gulp.src ( 'src/components/**/*.js' )
+              //  .pipe ( newer ( 'dist/js/svelto.js' ) ) //FIXME: Maybe nothing is changed in the files, but we switched between development and production so we should recompile
+               .pipe ( sort () )
+               .pipe ( dependencies ({
+                 pattern: /\* @requires [\s-]*(.*\.js)/g
+               }))
+               .pipe ( flatten () )
+               .pipe ( concat ( 'svelto.js' ) )
+               .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
+               .pipe ( gulp.dest ( 'dist/js' ) )
+               .pipe ( uglify () )
+               .pipe ( rename ( 'svelto.min.js' ) )
+               .pipe ( gulp.dest ( 'dist/js' ) )
+               .pipe ( gulpif ( browserSync.active, gutil.noop () ) );
+
+  }
 
 });
 
@@ -178,7 +195,7 @@ gulp.task ( 'js', ['js-temp'], function () {
 //TODO: Add partial compilation
 //TODO: Add support for sourcemaps
 
-gulp.task ( 'css', function () {
+gulp.task ( 'scss', function () {
 
   return gulp.src ( 'src/components/**/*.scss' )
              .pipe ( newer ( 'dist/css/svelto.css' ) )
@@ -192,14 +209,13 @@ gulp.task ( 'css', function () {
                outputStyle: 'expanded',
                precision: 10
              }))
-            .pipe ( autoprefixer ({
+            .pipe ( gulpif ( isProduction, autoprefixer ({
                browsers: ['ie >= 11', 'ie_mob >= 11', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
                cascade: true,
                remove: true
-             }))
+             })))
              .pipe ( rename ( 'svelto.css' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () )
              .pipe ( gulpif ( isProduction, csso () ) )
              .pipe ( gulpif ( isProduction, minify_css ({
                keepSpecialComments: 0,
@@ -222,7 +238,7 @@ gulp.task ( 'clean', function () {
 
 /* BUILD */
 
-gulp.task ( 'build', sequence ( 'jade', ['images', 'js', 'css', 'examples'] ) );
+gulp.task ( 'build', sequence ( 'jade', ['images', 'js', 'scss', 'examples'] ) );
 
 /* WATCH */
 
@@ -231,7 +247,7 @@ var watcher = function () {
   gulp.watch ( 'src/components/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}', ['images'] );
   gulp.watch ( 'src/components/**/*.jade', ['jade'] );
   gulp.watch ( 'src/components/**/*.js', ['js'] );
-  gulp.watch ( 'src/components/**/*.scss', ['css'] );
+  gulp.watch ( 'src/components/**/*.scss', ['scss'] );
   gulp.watch ( ['dist/jade/svelto.mixins.jade', 'examples/**/*.jade'], ['examples'] );
 
 };
@@ -243,7 +259,7 @@ gulp.task ( 'watch', watcher );
 gulp.task ( 'serve', function () {
 
   browserSync.init ({
-    browser: "google chrome",
+    browser: 'google chrome',
     open: browserOpen,
     server: 'examples',
     serveStatic: ['dist/images', 'dist/css', 'dist/js'],
