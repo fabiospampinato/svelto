@@ -9555,7 +9555,7 @@ $raisable-transition-box-shadow-duration: $transition-duration-normal !default;
 
 
 /* =========================================================================
- * Svelto - Raisable v0.2.0
+ * Svelto - Raisable v0.3.0
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -9584,18 +9584,22 @@ $raisable-transition-box-shadow-duration: $transition-duration-normal !default;
 
   transition: box-shadow $raisable-transition-box-shadow-duration;
 
-  @each $depth, $shadow in $z-depths {
+  &:not(.disabled) {
 
-    @if $depth == 0 { //INFO: Raise it even if the `z-depth-0` class has not been included
+    @each $depth, $shadow in $z-depths {
 
-      &:hover {
+      @if $depth == 0 { //INFO: Raise it even if the `z-depth-0` class has not been included
+
+        &:hover {
+          @include z-depth-raised ( $depth, !important );
+        }
+
+      }
+
+      &.z-depth-#{$depth}:hover {
         @include z-depth-raised ( $depth, !important );
       }
 
-    }
-
-    &.z-depth-#{$depth}:hover {
-      @include z-depth-raised ( $depth, !important );
     }
 
   }
