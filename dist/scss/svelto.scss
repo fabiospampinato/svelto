@@ -1625,35 +1625,27 @@ $kbd-padding: 0.2em 0.3em !default;
   $link: nth($colors, 7);
   $link-hover: nth($colors, 8);
 
+  background: $bg #{$extra};
   border-color: $border #{$extra};
   color: $text #{$extra};
 
   @if $basic == false {
 
-    background: $bg #{$extra};
+    &.highlight:after {
+      border-color: $accent #{$extra};
+    }
 
     &.actionable {
 
+      &:not(.disabled):hover {
+        background: $bg-hover #{$extra};
+      }
+
+      &:not(.disabled):not(.ripple):active,
       &.active {
         background: $bg-active #{$extra};
       }
 
-      &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
-
-        &:hover {
-          background: $bg-hover #{$extra};
-        }
-
-        &:not(.ripple):active {
-          background: $bg-active #{$extra};
-        }
-
-      }
-
-    }
-
-    &.highlight:after {
-      border-color: $accent #{$extra};
     }
 
     &.inverted {
@@ -1664,34 +1656,20 @@ $kbd-padding: 0.2em 0.3em !default;
 
       &.actionable {
 
-        &.active {
-          background: $bg-active #{$extra};
-          border-color: $bg-active #{$extra};
+        &:not(.disabled):hover {
+          border-color: $bg-hover #{$extra};
           color: $text #{$extra};
         }
 
-        &:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']) {
-
-          &:hover {
-            background: $bg-hover #{$extra};
-            border-color: $bg-hover #{$extra};
-            color: $text #{$extra};
-          }
-
-          &:not(.ripple):active {
-            background: $bg-active #{$extra};
-            border-color: $bg-active #{$extra};
-          }
-
+        &:not(.disabled):not(.ripple):active,
+        &.active {
+          border-color: $bg-active #{$extra};
+          color: $text #{$extra};
         }
 
       }
 
     }
-
-  } @else {
-
-    background: $bg #{$extra};
 
   }
 

@@ -616,25 +616,24 @@ th {
 /* MIXIN */
 /* COLORS */
 .primary {
+  background: #1565c0 !important;
   border-color: #0d417b !important;
   color: #ffffff !important;
-  background: #1565c0 !important;
-}
-
-.primary.actionable.active, .primary.active.button, .primary.active.button-corner {
-  background: #1460b7 !important;
-}
-
-.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #166ac9 !important;
-}
-
-.primary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .primary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .primary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #1460b7 !important;
 }
 
 .primary.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.primary.actionable:not(.disabled):hover, .primary.button:not(.disabled):hover, .primary.button-corner:not(.disabled):hover {
+  background: #166ac9 !important;
+}
+
+.primary.actionable:not(.disabled):not(.ripple):active,
+.primary.button:not(.disabled):not(.ripple):active,
+.primary.button-corner:not(.disabled):not(.ripple):active,
+.primary.actionable.active, .primary.active.button, .primary.active.button-corner {
+  background: #1460b7 !important;
 }
 
 .primary.inverted {
@@ -643,21 +642,17 @@ th {
   color: #1565c0 !important;
 }
 
-.primary.inverted.actionable.active, .primary.inverted.active.button, .primary.inverted.active.button-corner {
-  background: #1460b7 !important;
-  border-color: #1460b7 !important;
-  color: #ffffff !important;
-}
-
-.primary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .primary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .primary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #166ac9 !important;
+.primary.inverted.actionable:not(.disabled):hover, .primary.inverted.button:not(.disabled):hover, .primary.inverted.button-corner:not(.disabled):hover {
   border-color: #166ac9 !important;
   color: #ffffff !important;
 }
 
-.primary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .primary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .primary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #1460b7 !important;
+.primary.inverted.actionable:not(.disabled):not(.ripple):active,
+.primary.inverted.button:not(.disabled):not(.ripple):active,
+.primary.inverted.button-corner:not(.disabled):not(.ripple):active,
+.primary.inverted.actionable.active, .primary.inverted.active.button, .primary.inverted.active.button-corner {
   border-color: #1460b7 !important;
+  color: #ffffff !important;
 }
 
 .primary p > a {
@@ -689,25 +684,24 @@ th {
 }
 
 .secondary {
+  background: #ef6c00 !important;
   border-color: #a34900 !important;
   color: #ffffff !important;
-  background: #ef6c00 !important;
-}
-
-.secondary.actionable.active, .secondary.active.button, .secondary.active.button-corner {
-  background: #e56700 !important;
-}
-
-.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #f97100 !important;
-}
-
-.secondary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .secondary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .secondary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e56700 !important;
 }
 
 .secondary.highlight:after {
   border-color: #1565c0 !important;
+}
+
+.secondary.actionable:not(.disabled):hover, .secondary.button:not(.disabled):hover, .secondary.button-corner:not(.disabled):hover {
+  background: #f97100 !important;
+}
+
+.secondary.actionable:not(.disabled):not(.ripple):active,
+.secondary.button:not(.disabled):not(.ripple):active,
+.secondary.button-corner:not(.disabled):not(.ripple):active,
+.secondary.actionable.active, .secondary.active.button, .secondary.active.button-corner {
+  background: #e56700 !important;
 }
 
 .secondary.inverted {
@@ -716,21 +710,17 @@ th {
   color: #ef6c00 !important;
 }
 
-.secondary.inverted.actionable.active, .secondary.inverted.active.button, .secondary.inverted.active.button-corner {
-  background: #e56700 !important;
-  border-color: #e56700 !important;
-  color: #ffffff !important;
-}
-
-.secondary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .secondary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .secondary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #f97100 !important;
+.secondary.inverted.actionable:not(.disabled):hover, .secondary.inverted.button:not(.disabled):hover, .secondary.inverted.button-corner:not(.disabled):hover {
   border-color: #f97100 !important;
   color: #ffffff !important;
 }
 
-.secondary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .secondary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .secondary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e56700 !important;
+.secondary.inverted.actionable:not(.disabled):not(.ripple):active,
+.secondary.inverted.button:not(.disabled):not(.ripple):active,
+.secondary.inverted.button-corner:not(.disabled):not(.ripple):active,
+.secondary.inverted.actionable.active, .secondary.inverted.active.button, .secondary.inverted.active.button-corner {
   border-color: #e56700 !important;
+  color: #ffffff !important;
 }
 
 .secondary p > a {
@@ -762,25 +752,24 @@ th {
 }
 
 .tertiary {
+  background: #6a1b9a !important;
   border-color: #3d1059 !important;
   color: #ffffff !important;
-  background: #6a1b9a !important;
-}
-
-.tertiary.actionable.active, .tertiary.active.button, .tertiary.active.button-corner {
-  background: #641991 !important;
-}
-
-.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #701da3 !important;
-}
-
-.tertiary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .tertiary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .tertiary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #641991 !important;
 }
 
 .tertiary.highlight:after {
   border-color: #2e7d32 !important;
+}
+
+.tertiary.actionable:not(.disabled):hover, .tertiary.button:not(.disabled):hover, .tertiary.button-corner:not(.disabled):hover {
+  background: #701da3 !important;
+}
+
+.tertiary.actionable:not(.disabled):not(.ripple):active,
+.tertiary.button:not(.disabled):not(.ripple):active,
+.tertiary.button-corner:not(.disabled):not(.ripple):active,
+.tertiary.actionable.active, .tertiary.active.button, .tertiary.active.button-corner {
+  background: #641991 !important;
 }
 
 .tertiary.inverted {
@@ -789,21 +778,17 @@ th {
   color: #6a1b9a !important;
 }
 
-.tertiary.inverted.actionable.active, .tertiary.inverted.active.button, .tertiary.inverted.active.button-corner {
-  background: #641991 !important;
-  border-color: #641991 !important;
-  color: #ffffff !important;
-}
-
-.tertiary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .tertiary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .tertiary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #701da3 !important;
+.tertiary.inverted.actionable:not(.disabled):hover, .tertiary.inverted.button:not(.disabled):hover, .tertiary.inverted.button-corner:not(.disabled):hover {
   border-color: #701da3 !important;
   color: #ffffff !important;
 }
 
-.tertiary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .tertiary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .tertiary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #641991 !important;
+.tertiary.inverted.actionable:not(.disabled):not(.ripple):active,
+.tertiary.inverted.button:not(.disabled):not(.ripple):active,
+.tertiary.inverted.button-corner:not(.disabled):not(.ripple):active,
+.tertiary.inverted.actionable.active, .tertiary.inverted.active.button, .tertiary.inverted.active.button-corner {
   border-color: #641991 !important;
+  color: #ffffff !important;
 }
 
 .tertiary p > a {
@@ -835,25 +820,24 @@ th {
 }
 
 .quaternary {
+  background: #2e7d32 !important;
   border-color: #19451c !important;
   color: #ffffff !important;
-  background: #2e7d32 !important;
-}
-
-.quaternary.actionable.active, .quaternary.active.button, .quaternary.active.button-corner {
-  background: #2b762f !important;
-}
-
-.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #318435 !important;
-}
-
-.quaternary.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .quaternary.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .quaternary.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #2b762f !important;
 }
 
 .quaternary.highlight:after {
   border-color: #6a1b9a !important;
+}
+
+.quaternary.actionable:not(.disabled):hover, .quaternary.button:not(.disabled):hover, .quaternary.button-corner:not(.disabled):hover {
+  background: #318435 !important;
+}
+
+.quaternary.actionable:not(.disabled):not(.ripple):active,
+.quaternary.button:not(.disabled):not(.ripple):active,
+.quaternary.button-corner:not(.disabled):not(.ripple):active,
+.quaternary.actionable.active, .quaternary.active.button, .quaternary.active.button-corner {
+  background: #2b762f !important;
 }
 
 .quaternary.inverted {
@@ -862,21 +846,17 @@ th {
   color: #2e7d32 !important;
 }
 
-.quaternary.inverted.actionable.active, .quaternary.inverted.active.button, .quaternary.inverted.active.button-corner {
-  background: #2b762f !important;
-  border-color: #2b762f !important;
-  color: #ffffff !important;
-}
-
-.quaternary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .quaternary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .quaternary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #318435 !important;
+.quaternary.inverted.actionable:not(.disabled):hover, .quaternary.inverted.button:not(.disabled):hover, .quaternary.inverted.button-corner:not(.disabled):hover {
   border-color: #318435 !important;
   color: #ffffff !important;
 }
 
-.quaternary.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .quaternary.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .quaternary.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #2b762f !important;
+.quaternary.inverted.actionable:not(.disabled):not(.ripple):active,
+.quaternary.inverted.button:not(.disabled):not(.ripple):active,
+.quaternary.inverted.button-corner:not(.disabled):not(.ripple):active,
+.quaternary.inverted.actionable.active, .quaternary.inverted.active.button, .quaternary.inverted.active.button-corner {
   border-color: #2b762f !important;
+  color: #ffffff !important;
 }
 
 .quaternary p > a {
@@ -908,25 +888,24 @@ th {
 }
 
 .white {
+  background: #ffffff !important;
   border-color: #d9d9d9 !important;
   color: #3f3f3f !important;
-  background: #ffffff !important;
-}
-
-.white.actionable.active, .white.active.button, .white.active.button-corner {
-  background: whitesmoke !important;
-}
-
-.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fafafa !important;
-}
-
-.white.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .white.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .white.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: whitesmoke !important;
 }
 
 .white.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.white.actionable:not(.disabled):hover, .white.button:not(.disabled):hover, .white.button-corner:not(.disabled):hover {
+  background: #fafafa !important;
+}
+
+.white.actionable:not(.disabled):not(.ripple):active,
+.white.button:not(.disabled):not(.ripple):active,
+.white.button-corner:not(.disabled):not(.ripple):active,
+.white.actionable.active, .white.active.button, .white.active.button-corner {
+  background: whitesmoke !important;
 }
 
 .white.inverted {
@@ -935,21 +914,17 @@ th {
   color: #ffffff !important;
 }
 
-.white.inverted.actionable.active, .white.inverted.active.button, .white.inverted.active.button-corner {
-  background: whitesmoke !important;
-  border-color: whitesmoke !important;
-  color: #3f3f3f !important;
-}
-
-.white.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .white.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .white.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fafafa !important;
+.white.inverted.actionable:not(.disabled):hover, .white.inverted.button:not(.disabled):hover, .white.inverted.button-corner:not(.disabled):hover {
   border-color: #fafafa !important;
   color: #3f3f3f !important;
 }
 
-.white.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .white.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .white.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: whitesmoke !important;
+.white.inverted.actionable:not(.disabled):not(.ripple):active,
+.white.inverted.button:not(.disabled):not(.ripple):active,
+.white.inverted.button-corner:not(.disabled):not(.ripple):active,
+.white.inverted.actionable.active, .white.inverted.active.button, .white.inverted.active.button-corner {
   border-color: whitesmoke !important;
+  color: #3f3f3f !important;
 }
 
 .white p > a {
@@ -981,25 +956,24 @@ th {
 }
 
 .gray {
+  background: #e0e0e0 !important;
   border-color: #bababa !important;
   color: #3f3f3f !important;
-  background: #e0e0e0 !important;
-}
-
-.gray.actionable.active, .gray.active.button, .gray.active.button-corner {
-  background: #dbdbdb !important;
-}
-
-.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #e5e5e5 !important;
-}
-
-.gray.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .gray.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .gray.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #dbdbdb !important;
 }
 
 .gray.highlight:after {
   border-color: #212121 !important;
+}
+
+.gray.actionable:not(.disabled):hover, .gray.button:not(.disabled):hover, .gray.button-corner:not(.disabled):hover {
+  background: #e5e5e5 !important;
+}
+
+.gray.actionable:not(.disabled):not(.ripple):active,
+.gray.button:not(.disabled):not(.ripple):active,
+.gray.button-corner:not(.disabled):not(.ripple):active,
+.gray.actionable.active, .gray.active.button, .gray.active.button-corner {
+  background: #dbdbdb !important;
 }
 
 .gray.inverted {
@@ -1008,21 +982,17 @@ th {
   color: #e0e0e0 !important;
 }
 
-.gray.inverted.actionable.active, .gray.inverted.active.button, .gray.inverted.active.button-corner {
-  background: #dbdbdb !important;
-  border-color: #dbdbdb !important;
-  color: #3f3f3f !important;
-}
-
-.gray.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .gray.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .gray.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #e5e5e5 !important;
+.gray.inverted.actionable:not(.disabled):hover, .gray.inverted.button:not(.disabled):hover, .gray.inverted.button-corner:not(.disabled):hover {
   border-color: #e5e5e5 !important;
   color: #3f3f3f !important;
 }
 
-.gray.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .gray.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .gray.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #dbdbdb !important;
+.gray.inverted.actionable:not(.disabled):not(.ripple):active,
+.gray.inverted.button:not(.disabled):not(.ripple):active,
+.gray.inverted.button-corner:not(.disabled):not(.ripple):active,
+.gray.inverted.actionable.active, .gray.inverted.active.button, .gray.inverted.active.button-corner {
   border-color: #dbdbdb !important;
+  color: #3f3f3f !important;
 }
 
 .gray p > a {
@@ -1054,25 +1024,24 @@ th {
 }
 
 .black {
+  background: #212121 !important;
   border-color: black !important;
   color: #ffffff !important;
-  background: #212121 !important;
-}
-
-.black.actionable.active, .black.active.button, .black.active.button-corner {
-  background: #1c1c1c !important;
-}
-
-.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #262626 !important;
-}
-
-.black.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .black.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .black.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #1c1c1c !important;
 }
 
 .black.highlight:after {
   border-color: #ffffff !important;
+}
+
+.black.actionable:not(.disabled):hover, .black.button:not(.disabled):hover, .black.button-corner:not(.disabled):hover {
+  background: #262626 !important;
+}
+
+.black.actionable:not(.disabled):not(.ripple):active,
+.black.button:not(.disabled):not(.ripple):active,
+.black.button-corner:not(.disabled):not(.ripple):active,
+.black.actionable.active, .black.active.button, .black.active.button-corner {
+  background: #1c1c1c !important;
 }
 
 .black.inverted {
@@ -1081,21 +1050,17 @@ th {
   color: #212121 !important;
 }
 
-.black.inverted.actionable.active, .black.inverted.active.button, .black.inverted.active.button-corner {
-  background: #1c1c1c !important;
-  border-color: #1c1c1c !important;
-  color: #ffffff !important;
-}
-
-.black.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .black.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .black.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #262626 !important;
+.black.inverted.actionable:not(.disabled):hover, .black.inverted.button:not(.disabled):hover, .black.inverted.button-corner:not(.disabled):hover {
   border-color: #262626 !important;
   color: #ffffff !important;
 }
 
-.black.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .black.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .black.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #1c1c1c !important;
+.black.inverted.actionable:not(.disabled):not(.ripple):active,
+.black.inverted.button:not(.disabled):not(.ripple):active,
+.black.inverted.button-corner:not(.disabled):not(.ripple):active,
+.black.inverted.actionable.active, .black.inverted.active.button, .black.inverted.active.button-corner {
   border-color: #1c1c1c !important;
+  color: #ffffff !important;
 }
 
 .black p > a {
@@ -1127,25 +1092,24 @@ th {
 }
 
 .yellow {
+  background: #fabf40 !important;
   border-color: #e7a006 !important;
   color: #ffffff !important;
-  background: #fabf40 !important;
-}
-
-.yellow.actionable.active, .yellow.active.button, .yellow.active.button-corner {
-  background: #fabc36 !important;
-}
-
-.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fac24a !important;
-}
-
-.yellow.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .yellow.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .yellow.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #fabc36 !important;
 }
 
 .yellow.highlight:after {
   border-color: #f44336 !important;
+}
+
+.yellow.actionable:not(.disabled):hover, .yellow.button:not(.disabled):hover, .yellow.button-corner:not(.disabled):hover {
+  background: #fac24a !important;
+}
+
+.yellow.actionable:not(.disabled):not(.ripple):active,
+.yellow.button:not(.disabled):not(.ripple):active,
+.yellow.button-corner:not(.disabled):not(.ripple):active,
+.yellow.actionable.active, .yellow.active.button, .yellow.active.button-corner {
+  background: #fabc36 !important;
 }
 
 .yellow.inverted {
@@ -1154,21 +1118,17 @@ th {
   color: #fabf40 !important;
 }
 
-.yellow.inverted.actionable.active, .yellow.inverted.active.button, .yellow.inverted.active.button-corner {
-  background: #fabc36 !important;
-  border-color: #fabc36 !important;
-  color: #ffffff !important;
-}
-
-.yellow.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .yellow.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .yellow.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fac24a !important;
+.yellow.inverted.actionable:not(.disabled):hover, .yellow.inverted.button:not(.disabled):hover, .yellow.inverted.button-corner:not(.disabled):hover {
   border-color: #fac24a !important;
   color: #ffffff !important;
 }
 
-.yellow.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .yellow.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .yellow.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #fabc36 !important;
+.yellow.inverted.actionable:not(.disabled):not(.ripple):active,
+.yellow.inverted.button:not(.disabled):not(.ripple):active,
+.yellow.inverted.button-corner:not(.disabled):not(.ripple):active,
+.yellow.inverted.actionable.active, .yellow.inverted.active.button, .yellow.inverted.active.button-corner {
   border-color: #fabc36 !important;
+  color: #ffffff !important;
 }
 
 .yellow p > a {
@@ -1200,25 +1160,24 @@ th {
 }
 
 .olive {
+  background: #cddc39 !important;
   border-color: #9daa1e !important;
   color: #ffffff !important;
-  background: #cddc39 !important;
-}
-
-.olive.actionable.active, .olive.active.button, .olive.active.button-corner {
-  background: #cbda30 !important;
-}
-
-.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #cfde42 !important;
-}
-
-.olive.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .olive.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .olive.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #cbda30 !important;
 }
 
 .olive.highlight:after {
   border-color: #ff9800 !important;
+}
+
+.olive.actionable:not(.disabled):hover, .olive.button:not(.disabled):hover, .olive.button-corner:not(.disabled):hover {
+  background: #cfde42 !important;
+}
+
+.olive.actionable:not(.disabled):not(.ripple):active,
+.olive.button:not(.disabled):not(.ripple):active,
+.olive.button-corner:not(.disabled):not(.ripple):active,
+.olive.actionable.active, .olive.active.button, .olive.active.button-corner {
+  background: #cbda30 !important;
 }
 
 .olive.inverted {
@@ -1227,21 +1186,17 @@ th {
   color: #cddc39 !important;
 }
 
-.olive.inverted.actionable.active, .olive.inverted.active.button, .olive.inverted.active.button-corner {
-  background: #cbda30 !important;
-  border-color: #cbda30 !important;
-  color: #ffffff !important;
-}
-
-.olive.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .olive.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .olive.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #cfde42 !important;
+.olive.inverted.actionable:not(.disabled):hover, .olive.inverted.button:not(.disabled):hover, .olive.inverted.button-corner:not(.disabled):hover {
   border-color: #cfde42 !important;
   color: #ffffff !important;
 }
 
-.olive.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .olive.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .olive.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #cbda30 !important;
+.olive.inverted.actionable:not(.disabled):not(.ripple):active,
+.olive.inverted.button:not(.disabled):not(.ripple):active,
+.olive.inverted.button-corner:not(.disabled):not(.ripple):active,
+.olive.inverted.actionable.active, .olive.inverted.active.button, .olive.inverted.active.button-corner {
   border-color: #cbda30 !important;
+  color: #ffffff !important;
 }
 
 .olive p > a {
@@ -1273,25 +1228,24 @@ th {
 }
 
 .green {
+  background: #4caf50 !important;
   border-color: #357a38 !important;
   color: #ffffff !important;
-  background: #4caf50 !important;
-}
-
-.green.actionable.active, .green.active.button, .green.active.button-corner {
-  background: #49a84d !important;
-}
-
-.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #52b455 !important;
-}
-
-.green.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .green.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .green.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #49a84d !important;
 }
 
 .green.highlight:after {
   border-color: #673ab7 !important;
+}
+
+.green.actionable:not(.disabled):hover, .green.button:not(.disabled):hover, .green.button-corner:not(.disabled):hover {
+  background: #52b455 !important;
+}
+
+.green.actionable:not(.disabled):not(.ripple):active,
+.green.button:not(.disabled):not(.ripple):active,
+.green.button-corner:not(.disabled):not(.ripple):active,
+.green.actionable.active, .green.active.button, .green.active.button-corner {
+  background: #49a84d !important;
 }
 
 .green.inverted {
@@ -1300,21 +1254,17 @@ th {
   color: #4caf50 !important;
 }
 
-.green.inverted.actionable.active, .green.inverted.active.button, .green.inverted.active.button-corner {
-  background: #49a84d !important;
-  border-color: #49a84d !important;
-  color: #ffffff !important;
-}
-
-.green.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .green.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .green.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #52b455 !important;
+.green.inverted.actionable:not(.disabled):hover, .green.inverted.button:not(.disabled):hover, .green.inverted.button-corner:not(.disabled):hover {
   border-color: #52b455 !important;
   color: #ffffff !important;
 }
 
-.green.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .green.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .green.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #49a84d !important;
+.green.inverted.actionable:not(.disabled):not(.ripple):active,
+.green.inverted.button:not(.disabled):not(.ripple):active,
+.green.inverted.button-corner:not(.disabled):not(.ripple):active,
+.green.inverted.actionable.active, .green.inverted.active.button, .green.inverted.active.button-corner {
   border-color: #49a84d !important;
+  color: #ffffff !important;
 }
 
 .green p > a {
@@ -1346,25 +1296,24 @@ th {
 }
 
 .blue {
+  background: #2196f3 !important;
   border-color: #0a6ebd !important;
   color: #ffffff !important;
-  background: #2196f3 !important;
-}
-
-.blue.actionable.active, .blue.active.button, .blue.active.button-corner {
-  background: #1791f2 !important;
-}
-
-.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #2b9bf4 !important;
-}
-
-.blue.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .blue.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .blue.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #1791f2 !important;
 }
 
 .blue.highlight:after {
   border-color: #f44336 !important;
+}
+
+.blue.actionable:not(.disabled):hover, .blue.button:not(.disabled):hover, .blue.button-corner:not(.disabled):hover {
+  background: #2b9bf4 !important;
+}
+
+.blue.actionable:not(.disabled):not(.ripple):active,
+.blue.button:not(.disabled):not(.ripple):active,
+.blue.button-corner:not(.disabled):not(.ripple):active,
+.blue.actionable.active, .blue.active.button, .blue.active.button-corner {
+  background: #1791f2 !important;
 }
 
 .blue.inverted {
@@ -1373,21 +1322,17 @@ th {
   color: #2196f3 !important;
 }
 
-.blue.inverted.actionable.active, .blue.inverted.active.button, .blue.inverted.active.button-corner {
-  background: #1791f2 !important;
-  border-color: #1791f2 !important;
-  color: #ffffff !important;
-}
-
-.blue.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .blue.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .blue.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #2b9bf4 !important;
+.blue.inverted.actionable:not(.disabled):hover, .blue.inverted.button:not(.disabled):hover, .blue.inverted.button-corner:not(.disabled):hover {
   border-color: #2b9bf4 !important;
   color: #ffffff !important;
 }
 
-.blue.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .blue.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .blue.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #1791f2 !important;
+.blue.inverted.actionable:not(.disabled):not(.ripple):active,
+.blue.inverted.button:not(.disabled):not(.ripple):active,
+.blue.inverted.button-corner:not(.disabled):not(.ripple):active,
+.blue.inverted.actionable.active, .blue.inverted.active.button, .blue.inverted.active.button-corner {
   border-color: #1791f2 !important;
+  color: #ffffff !important;
 }
 
 .blue p > a {
@@ -1419,25 +1364,24 @@ th {
 }
 
 .violet {
+  background: #673ab7 !important;
   border-color: #46287d !important;
   color: #ffffff !important;
-  background: #673ab7 !important;
-}
-
-.violet.actionable.active, .violet.active.button, .violet.active.button-corner {
-  background: #6338af !important;
-}
-
-.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #6b3cbf !important;
-}
-
-.violet.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .violet.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .violet.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #6338af !important;
 }
 
 .violet.highlight:after {
   border-color: #ff9800 !important;
+}
+
+.violet.actionable:not(.disabled):hover, .violet.button:not(.disabled):hover, .violet.button-corner:not(.disabled):hover {
+  background: #6b3cbf !important;
+}
+
+.violet.actionable:not(.disabled):not(.ripple):active,
+.violet.button:not(.disabled):not(.ripple):active,
+.violet.button-corner:not(.disabled):not(.ripple):active,
+.violet.actionable.active, .violet.active.button, .violet.active.button-corner {
+  background: #6338af !important;
 }
 
 .violet.inverted {
@@ -1446,21 +1390,17 @@ th {
   color: #673ab7 !important;
 }
 
-.violet.inverted.actionable.active, .violet.inverted.active.button, .violet.inverted.active.button-corner {
-  background: #6338af !important;
-  border-color: #6338af !important;
-  color: #ffffff !important;
-}
-
-.violet.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .violet.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .violet.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #6b3cbf !important;
+.violet.inverted.actionable:not(.disabled):hover, .violet.inverted.button:not(.disabled):hover, .violet.inverted.button-corner:not(.disabled):hover {
   border-color: #6b3cbf !important;
   color: #ffffff !important;
 }
 
-.violet.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .violet.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .violet.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #6338af !important;
+.violet.inverted.actionable:not(.disabled):not(.ripple):active,
+.violet.inverted.button:not(.disabled):not(.ripple):active,
+.violet.inverted.button-corner:not(.disabled):not(.ripple):active,
+.violet.inverted.actionable.active, .violet.inverted.active.button, .violet.inverted.active.button-corner {
   border-color: #6338af !important;
+  color: #ffffff !important;
 }
 
 .violet p > a {
@@ -1492,25 +1432,24 @@ th {
 }
 
 .orange {
+  background: #ff9800 !important;
   border-color: #b36a00 !important;
   color: #ffffff !important;
-  background: #ff9800 !important;
-}
-
-.orange.actionable.active, .orange.active.button, .orange.active.button-corner {
-  background: #f59200 !important;
-}
-
-.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #ff9c0a !important;
-}
-
-.orange.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .orange.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .orange.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #f59200 !important;
 }
 
 .orange.highlight:after {
   border-color: #2196f3 !important;
+}
+
+.orange.actionable:not(.disabled):hover, .orange.button:not(.disabled):hover, .orange.button-corner:not(.disabled):hover {
+  background: #ff9c0a !important;
+}
+
+.orange.actionable:not(.disabled):not(.ripple):active,
+.orange.button:not(.disabled):not(.ripple):active,
+.orange.button-corner:not(.disabled):not(.ripple):active,
+.orange.actionable.active, .orange.active.button, .orange.active.button-corner {
+  background: #f59200 !important;
 }
 
 .orange.inverted {
@@ -1519,21 +1458,17 @@ th {
   color: #ff9800 !important;
 }
 
-.orange.inverted.actionable.active, .orange.inverted.active.button, .orange.inverted.active.button-corner {
-  background: #f59200 !important;
-  border-color: #f59200 !important;
-  color: #ffffff !important;
-}
-
-.orange.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .orange.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .orange.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #ff9c0a !important;
+.orange.inverted.actionable:not(.disabled):hover, .orange.inverted.button:not(.disabled):hover, .orange.inverted.button-corner:not(.disabled):hover {
   border-color: #ff9c0a !important;
   color: #ffffff !important;
 }
 
-.orange.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .orange.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .orange.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #f59200 !important;
+.orange.inverted.actionable:not(.disabled):not(.ripple):active,
+.orange.inverted.button:not(.disabled):not(.ripple):active,
+.orange.inverted.button-corner:not(.disabled):not(.ripple):active,
+.orange.inverted.actionable.active, .orange.inverted.active.button, .orange.inverted.active.button-corner {
   border-color: #f59200 !important;
+  color: #ffffff !important;
 }
 
 .orange p > a {
@@ -1565,25 +1500,24 @@ th {
 }
 
 .purple {
+  background: #9c27b0 !important;
   border-color: #641971 !important;
   color: #ffffff !important;
-  background: #9c27b0 !important;
-}
-
-.purple.actionable.active, .purple.active.button, .purple.active.button-corner {
-  background: #9525a8 !important;
-}
-
-.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #a329b8 !important;
-}
-
-.purple.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .purple.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .purple.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #9525a8 !important;
 }
 
 .purple.highlight:after {
   border-color: #fabf40 !important;
+}
+
+.purple.actionable:not(.disabled):hover, .purple.button:not(.disabled):hover, .purple.button-corner:not(.disabled):hover {
+  background: #a329b8 !important;
+}
+
+.purple.actionable:not(.disabled):not(.ripple):active,
+.purple.button:not(.disabled):not(.ripple):active,
+.purple.button-corner:not(.disabled):not(.ripple):active,
+.purple.actionable.active, .purple.active.button, .purple.active.button-corner {
+  background: #9525a8 !important;
 }
 
 .purple.inverted {
@@ -1592,21 +1526,17 @@ th {
   color: #9c27b0 !important;
 }
 
-.purple.inverted.actionable.active, .purple.inverted.active.button, .purple.inverted.active.button-corner {
-  background: #9525a8 !important;
-  border-color: #9525a8 !important;
-  color: #ffffff !important;
-}
-
-.purple.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .purple.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .purple.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #a329b8 !important;
+.purple.inverted.actionable:not(.disabled):hover, .purple.inverted.button:not(.disabled):hover, .purple.inverted.button-corner:not(.disabled):hover {
   border-color: #a329b8 !important;
   color: #ffffff !important;
 }
 
-.purple.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .purple.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .purple.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #9525a8 !important;
+.purple.inverted.actionable:not(.disabled):not(.ripple):active,
+.purple.inverted.button:not(.disabled):not(.ripple):active,
+.purple.inverted.button-corner:not(.disabled):not(.ripple):active,
+.purple.inverted.actionable.active, .purple.inverted.active.button, .purple.inverted.active.button-corner {
   border-color: #9525a8 !important;
+  color: #ffffff !important;
 }
 
 .purple p > a {
@@ -1638,25 +1568,24 @@ th {
 }
 
 .red {
+  background: #f44336 !important;
   border-color: #d2190b !important;
   color: #ffffff !important;
-  background: #f44336 !important;
-}
-
-.red.actionable.active, .red.active.button, .red.active.button-corner {
-  background: #f33a2c !important;
-}
-
-.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #f54c40 !important;
-}
-
-.red.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .red.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .red.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #f33a2c !important;
 }
 
 .red.highlight:after {
   border-color: #fabf40 !important;
+}
+
+.red.actionable:not(.disabled):hover, .red.button:not(.disabled):hover, .red.button-corner:not(.disabled):hover {
+  background: #f54c40 !important;
+}
+
+.red.actionable:not(.disabled):not(.ripple):active,
+.red.button:not(.disabled):not(.ripple):active,
+.red.button-corner:not(.disabled):not(.ripple):active,
+.red.actionable.active, .red.active.button, .red.active.button-corner {
+  background: #f33a2c !important;
 }
 
 .red.inverted {
@@ -1665,21 +1594,17 @@ th {
   color: #f44336 !important;
 }
 
-.red.inverted.actionable.active, .red.inverted.active.button, .red.inverted.active.button-corner {
-  background: #f33a2c !important;
-  border-color: #f33a2c !important;
-  color: #ffffff !important;
-}
-
-.red.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .red.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .red.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #f54c40 !important;
+.red.inverted.actionable:not(.disabled):hover, .red.inverted.button:not(.disabled):hover, .red.inverted.button-corner:not(.disabled):hover {
   border-color: #f54c40 !important;
   color: #ffffff !important;
 }
 
-.red.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .red.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .red.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #f33a2c !important;
+.red.inverted.actionable:not(.disabled):not(.ripple):active,
+.red.inverted.button:not(.disabled):not(.ripple):active,
+.red.inverted.button-corner:not(.disabled):not(.ripple):active,
+.red.inverted.actionable.active, .red.inverted.active.button, .red.inverted.active.button-corner {
   border-color: #f33a2c !important;
+  color: #ffffff !important;
 }
 
 .red p > a {
@@ -1711,25 +1636,24 @@ th {
 }
 
 .pink {
+  background: #e91e63 !important;
   border-color: #aa1145 !important;
   color: #ffffff !important;
-  background: #e91e63 !important;
-}
-
-.pink.actionable.active, .pink.active.button, .pink.active.button-corner {
-  background: #e6175d !important;
-}
-
-.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #ea2769 !important;
-}
-
-.pink.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .pink.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .pink.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e6175d !important;
 }
 
 .pink.highlight:after {
   border-color: #009688 !important;
+}
+
+.pink.actionable:not(.disabled):hover, .pink.button:not(.disabled):hover, .pink.button-corner:not(.disabled):hover {
+  background: #ea2769 !important;
+}
+
+.pink.actionable:not(.disabled):not(.ripple):active,
+.pink.button:not(.disabled):not(.ripple):active,
+.pink.button-corner:not(.disabled):not(.ripple):active,
+.pink.actionable.active, .pink.active.button, .pink.active.button-corner {
+  background: #e6175d !important;
 }
 
 .pink.inverted {
@@ -1738,21 +1662,17 @@ th {
   color: #e91e63 !important;
 }
 
-.pink.inverted.actionable.active, .pink.inverted.active.button, .pink.inverted.active.button-corner {
-  background: #e6175d !important;
-  border-color: #e6175d !important;
-  color: #ffffff !important;
-}
-
-.pink.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .pink.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .pink.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #ea2769 !important;
+.pink.inverted.actionable:not(.disabled):hover, .pink.inverted.button:not(.disabled):hover, .pink.inverted.button-corner:not(.disabled):hover {
   border-color: #ea2769 !important;
   color: #ffffff !important;
 }
 
-.pink.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .pink.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .pink.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e6175d !important;
+.pink.inverted.actionable:not(.disabled):not(.ripple):active,
+.pink.inverted.button:not(.disabled):not(.ripple):active,
+.pink.inverted.button-corner:not(.disabled):not(.ripple):active,
+.pink.inverted.actionable.active, .pink.inverted.active.button, .pink.inverted.active.button-corner {
   border-color: #e6175d !important;
+  color: #ffffff !important;
 }
 
 .pink p > a {
@@ -1784,25 +1704,24 @@ th {
 }
 
 .teal {
+  background: #009688 !important;
   border-color: #004a43 !important;
   color: #ffffff !important;
-  background: #009688 !important;
-}
-
-.teal.actionable.active, .teal.active.button, .teal.active.button-corner {
-  background: #008c7f !important;
-}
-
-.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #00a091 !important;
-}
-
-.teal.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .teal.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .teal.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #008c7f !important;
 }
 
 .teal.highlight:after {
   border-color: #e91e63 !important;
+}
+
+.teal.actionable:not(.disabled):hover, .teal.button:not(.disabled):hover, .teal.button-corner:not(.disabled):hover {
+  background: #00a091 !important;
+}
+
+.teal.actionable:not(.disabled):not(.ripple):active,
+.teal.button:not(.disabled):not(.ripple):active,
+.teal.button-corner:not(.disabled):not(.ripple):active,
+.teal.actionable.active, .teal.active.button, .teal.active.button-corner {
+  background: #008c7f !important;
 }
 
 .teal.inverted {
@@ -1811,21 +1730,17 @@ th {
   color: #009688 !important;
 }
 
-.teal.inverted.actionable.active, .teal.inverted.active.button, .teal.inverted.active.button-corner {
-  background: #008c7f !important;
-  border-color: #008c7f !important;
-  color: #ffffff !important;
-}
-
-.teal.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .teal.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .teal.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #00a091 !important;
+.teal.inverted.actionable:not(.disabled):hover, .teal.inverted.button:not(.disabled):hover, .teal.inverted.button-corner:not(.disabled):hover {
   border-color: #00a091 !important;
   color: #ffffff !important;
 }
 
-.teal.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .teal.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .teal.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #008c7f !important;
+.teal.inverted.actionable:not(.disabled):not(.ripple):active,
+.teal.inverted.button:not(.disabled):not(.ripple):active,
+.teal.inverted.button-corner:not(.disabled):not(.ripple):active,
+.teal.inverted.actionable.active, .teal.inverted.active.button, .teal.inverted.active.button-corner {
   border-color: #008c7f !important;
+  color: #ffffff !important;
 }
 
 .teal p > a {
@@ -1857,25 +1772,24 @@ th {
 }
 
 .brown {
+  background: #795548 !important;
   border-color: #49332b !important;
   color: #ffffff !important;
-  background: #795548 !important;
-}
-
-.brown.actionable.active, .brown.active.button, .brown.active.button-corner {
-  background: #735144 !important;
-}
-
-.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #7f594c !important;
-}
-
-.brown.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .brown.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .brown.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #735144 !important;
 }
 
 .brown.highlight:after {
   border-color: #ff9800 !important;
+}
+
+.brown.actionable:not(.disabled):hover, .brown.button:not(.disabled):hover, .brown.button-corner:not(.disabled):hover {
+  background: #7f594c !important;
+}
+
+.brown.actionable:not(.disabled):not(.ripple):active,
+.brown.button:not(.disabled):not(.ripple):active,
+.brown.button-corner:not(.disabled):not(.ripple):active,
+.brown.actionable.active, .brown.active.button, .brown.active.button-corner {
+  background: #735144 !important;
 }
 
 .brown.inverted {
@@ -1884,21 +1798,17 @@ th {
   color: #795548 !important;
 }
 
-.brown.inverted.actionable.active, .brown.inverted.active.button, .brown.inverted.active.button-corner {
-  background: #735144 !important;
-  border-color: #735144 !important;
-  color: #ffffff !important;
-}
-
-.brown.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .brown.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .brown.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #7f594c !important;
+.brown.inverted.actionable:not(.disabled):hover, .brown.inverted.button:not(.disabled):hover, .brown.inverted.button-corner:not(.disabled):hover {
   border-color: #7f594c !important;
   color: #ffffff !important;
 }
 
-.brown.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .brown.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .brown.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #735144 !important;
+.brown.inverted.actionable:not(.disabled):not(.ripple):active,
+.brown.inverted.button:not(.disabled):not(.ripple):active,
+.brown.inverted.button-corner:not(.disabled):not(.ripple):active,
+.brown.inverted.actionable.active, .brown.inverted.active.button, .brown.inverted.active.button-corner {
   border-color: #735144 !important;
+  color: #ffffff !important;
 }
 
 .brown p > a {
@@ -1930,25 +1840,24 @@ th {
 }
 
 .error {
+  background: #f44336 !important;
   border-color: #d2190b !important;
   color: #ffffff !important;
-  background: #f44336 !important;
-}
-
-.error.actionable.active, .error.active.button, .error.active.button-corner {
-  background: #f33a2c !important;
-}
-
-.error.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #f54c40 !important;
-}
-
-.error.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .error.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .error.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #f33a2c !important;
 }
 
 .error.highlight:after {
   border-color: #fabf40 !important;
+}
+
+.error.actionable:not(.disabled):hover, .error.button:not(.disabled):hover, .error.button-corner:not(.disabled):hover {
+  background: #f54c40 !important;
+}
+
+.error.actionable:not(.disabled):not(.ripple):active,
+.error.button:not(.disabled):not(.ripple):active,
+.error.button-corner:not(.disabled):not(.ripple):active,
+.error.actionable.active, .error.active.button, .error.active.button-corner {
+  background: #f33a2c !important;
 }
 
 .error.inverted {
@@ -1957,21 +1866,17 @@ th {
   color: #f44336 !important;
 }
 
-.error.inverted.actionable.active, .error.inverted.active.button, .error.inverted.active.button-corner {
-  background: #f33a2c !important;
-  border-color: #f33a2c !important;
-  color: #ffffff !important;
-}
-
-.error.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .error.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .error.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #f54c40 !important;
+.error.inverted.actionable:not(.disabled):hover, .error.inverted.button:not(.disabled):hover, .error.inverted.button-corner:not(.disabled):hover {
   border-color: #f54c40 !important;
   color: #ffffff !important;
 }
 
-.error.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .error.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .error.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #f33a2c !important;
+.error.inverted.actionable:not(.disabled):not(.ripple):active,
+.error.inverted.button:not(.disabled):not(.ripple):active,
+.error.inverted.button-corner:not(.disabled):not(.ripple):active,
+.error.inverted.actionable.active, .error.inverted.active.button, .error.inverted.active.button-corner {
   border-color: #f33a2c !important;
+  color: #ffffff !important;
 }
 
 .error p > a {
@@ -2003,25 +1908,24 @@ th {
 }
 
 .warning {
+  background: #fabf40 !important;
   border-color: #e7a006 !important;
   color: #ffffff !important;
-  background: #fabf40 !important;
-}
-
-.warning.actionable.active, .warning.active.button, .warning.active.button-corner {
-  background: #fabc36 !important;
-}
-
-.warning.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fac24a !important;
-}
-
-.warning.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .warning.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .warning.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #fabc36 !important;
 }
 
 .warning.highlight:after {
   border-color: #f44336 !important;
+}
+
+.warning.actionable:not(.disabled):hover, .warning.button:not(.disabled):hover, .warning.button-corner:not(.disabled):hover {
+  background: #fac24a !important;
+}
+
+.warning.actionable:not(.disabled):not(.ripple):active,
+.warning.button:not(.disabled):not(.ripple):active,
+.warning.button-corner:not(.disabled):not(.ripple):active,
+.warning.actionable.active, .warning.active.button, .warning.active.button-corner {
+  background: #fabc36 !important;
 }
 
 .warning.inverted {
@@ -2030,21 +1934,17 @@ th {
   color: #fabf40 !important;
 }
 
-.warning.inverted.actionable.active, .warning.inverted.active.button, .warning.inverted.active.button-corner {
-  background: #fabc36 !important;
-  border-color: #fabc36 !important;
-  color: #ffffff !important;
-}
-
-.warning.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .warning.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .warning.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fac24a !important;
+.warning.inverted.actionable:not(.disabled):hover, .warning.inverted.button:not(.disabled):hover, .warning.inverted.button-corner:not(.disabled):hover {
   border-color: #fac24a !important;
   color: #ffffff !important;
 }
 
-.warning.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .warning.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .warning.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #fabc36 !important;
+.warning.inverted.actionable:not(.disabled):not(.ripple):active,
+.warning.inverted.button:not(.disabled):not(.ripple):active,
+.warning.inverted.button-corner:not(.disabled):not(.ripple):active,
+.warning.inverted.actionable.active, .warning.inverted.active.button, .warning.inverted.active.button-corner {
   border-color: #fabc36 !important;
+  color: #ffffff !important;
 }
 
 .warning p > a {
@@ -2076,25 +1976,24 @@ th {
 }
 
 .success {
+  background: #4caf50 !important;
   border-color: #357a38 !important;
   color: #ffffff !important;
-  background: #4caf50 !important;
-}
-
-.success.actionable.active, .success.active.button, .success.active.button-corner {
-  background: #49a84d !important;
-}
-
-.success.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #52b455 !important;
-}
-
-.success.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .success.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .success.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #49a84d !important;
 }
 
 .success.highlight:after {
   border-color: #673ab7 !important;
+}
+
+.success.actionable:not(.disabled):hover, .success.button:not(.disabled):hover, .success.button-corner:not(.disabled):hover {
+  background: #52b455 !important;
+}
+
+.success.actionable:not(.disabled):not(.ripple):active,
+.success.button:not(.disabled):not(.ripple):active,
+.success.button-corner:not(.disabled):not(.ripple):active,
+.success.actionable.active, .success.active.button, .success.active.button-corner {
+  background: #49a84d !important;
 }
 
 .success.inverted {
@@ -2103,21 +2002,17 @@ th {
   color: #4caf50 !important;
 }
 
-.success.inverted.actionable.active, .success.inverted.active.button, .success.inverted.active.button-corner {
-  background: #49a84d !important;
-  border-color: #49a84d !important;
-  color: #ffffff !important;
-}
-
-.success.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .success.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .success.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #52b455 !important;
+.success.inverted.actionable:not(.disabled):hover, .success.inverted.button:not(.disabled):hover, .success.inverted.button-corner:not(.disabled):hover {
   border-color: #52b455 !important;
   color: #ffffff !important;
 }
 
-.success.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .success.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .success.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #49a84d !important;
+.success.inverted.actionable:not(.disabled):not(.ripple):active,
+.success.inverted.button:not(.disabled):not(.ripple):active,
+.success.inverted.button-corner:not(.disabled):not(.ripple):active,
+.success.inverted.actionable.active, .success.inverted.active.button, .success.inverted.active.button-corner {
   border-color: #49a84d !important;
+  color: #ffffff !important;
 }
 
 .success p > a {
@@ -2149,25 +2044,24 @@ th {
 }
 
 .transparent {
+  background: transparent !important;
   border-color: transparent !important;
   color: inherit !important;
-  background: transparent !important;
-}
-
-.transparent.actionable.active, .transparent.active.button, .transparent.active.button-corner {
-  background: transparent !important;
-}
-
-.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: rgba(5, 5, 5, 0) !important;
-}
-
-.transparent.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .transparent.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .transparent.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: transparent !important;
 }
 
 .transparent.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.transparent.actionable:not(.disabled):hover, .transparent.button:not(.disabled):hover, .transparent.button-corner:not(.disabled):hover {
+  background: rgba(5, 5, 5, 0) !important;
+}
+
+.transparent.actionable:not(.disabled):not(.ripple):active,
+.transparent.button:not(.disabled):not(.ripple):active,
+.transparent.button-corner:not(.disabled):not(.ripple):active,
+.transparent.actionable.active, .transparent.active.button, .transparent.active.button-corner {
+  background: transparent !important;
 }
 
 .transparent.inverted {
@@ -2176,21 +2070,17 @@ th {
   color: transparent !important;
 }
 
-.transparent.inverted.actionable.active, .transparent.inverted.active.button, .transparent.inverted.active.button-corner {
-  background: transparent !important;
-  border-color: transparent !important;
-  color: inherit !important;
-}
-
-.transparent.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .transparent.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .transparent.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: rgba(5, 5, 5, 0) !important;
+.transparent.inverted.actionable:not(.disabled):hover, .transparent.inverted.button:not(.disabled):hover, .transparent.inverted.button-corner:not(.disabled):hover {
   border-color: rgba(5, 5, 5, 0) !important;
   color: inherit !important;
 }
 
-.transparent.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .transparent.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .transparent.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: transparent !important;
+.transparent.inverted.actionable:not(.disabled):not(.ripple):active,
+.transparent.inverted.button:not(.disabled):not(.ripple):active,
+.transparent.inverted.button-corner:not(.disabled):not(.ripple):active,
+.transparent.inverted.actionable.active, .transparent.inverted.active.button, .transparent.inverted.active.button-corner {
   border-color: transparent !important;
+  color: inherit !important;
 }
 
 .transparent p > a {
@@ -2222,25 +2112,24 @@ th {
 }
 
 .inherit {
+  background: inherit !important;
   border-color: inherit !important;
   color: inherit !important;
-  background: inherit !important;
-}
-
-.inherit.actionable.active, .inherit.active.button, .inherit.active.button-corner {
-  background: inherit !important;
-}
-
-.inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit !important;
-}
-
-.inherit.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .inherit.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .inherit.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit !important;
 }
 
 .inherit.highlight:after {
   border-color: inherit !important;
+}
+
+.inherit.actionable:not(.disabled):hover, .inherit.button:not(.disabled):hover, .inherit.button-corner:not(.disabled):hover {
+  background: inherit !important;
+}
+
+.inherit.actionable:not(.disabled):not(.ripple):active,
+.inherit.button:not(.disabled):not(.ripple):active,
+.inherit.button-corner:not(.disabled):not(.ripple):active,
+.inherit.actionable.active, .inherit.active.button, .inherit.active.button-corner {
+  background: inherit !important;
 }
 
 .inherit.inverted {
@@ -2249,21 +2138,17 @@ th {
   color: inherit !important;
 }
 
+.inherit.inverted.actionable:not(.disabled):hover, .inherit.inverted.button:not(.disabled):hover, .inherit.inverted.button-corner:not(.disabled):hover {
+  border-color: inherit !important;
+  color: inherit !important;
+}
+
+.inherit.inverted.actionable:not(.disabled):not(.ripple):active,
+.inherit.inverted.button:not(.disabled):not(.ripple):active,
+.inherit.inverted.button-corner:not(.disabled):not(.ripple):active,
 .inherit.inverted.actionable.active, .inherit.inverted.active.button, .inherit.inverted.active.button-corner {
-  background: inherit !important;
   border-color: inherit !important;
   color: inherit !important;
-}
-
-.inherit.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .inherit.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .inherit.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit !important;
-  border-color: inherit !important;
-  color: inherit !important;
-}
-
-.inherit.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .inherit.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .inherit.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit !important;
-  border-color: inherit !important;
 }
 
 .text-inherit {
@@ -2283,25 +2168,24 @@ th {
 }
 
 .base {
+  background: #eceff1 !important;
   border-color: #c0cad1 !important;
   color: #3f3f3f !important;
-  background: #eceff1 !important;
-}
-
-.base.actionable.active, .base.active.button, .base.active.button-corner {
-  background: #e0e5e8 !important;
-}
-
-.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #e6eaed !important;
-}
-
-.base.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .base.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .base.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e0e5e8 !important;
 }
 
 .base.highlight:after {
   border-color: #ef6c00 !important;
+}
+
+.base.actionable:not(.disabled):hover, .base.button:not(.disabled):hover, .base.button-corner:not(.disabled):hover {
+  background: #e6eaed !important;
+}
+
+.base.actionable:not(.disabled):not(.ripple):active,
+.base.button:not(.disabled):not(.ripple):active,
+.base.button-corner:not(.disabled):not(.ripple):active,
+.base.actionable.active, .base.active.button, .base.active.button-corner {
+  background: #e0e5e8 !important;
 }
 
 .base.inverted {
@@ -2310,21 +2194,17 @@ th {
   color: #eceff1 !important;
 }
 
-.base.inverted.actionable.active, .base.inverted.active.button, .base.inverted.active.button-corner {
-  background: #e0e5e8 !important;
-  border-color: #e0e5e8 !important;
-  color: #3f3f3f !important;
-}
-
-.base.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .base.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .base.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #e6eaed !important;
+.base.inverted.actionable:not(.disabled):hover, .base.inverted.button:not(.disabled):hover, .base.inverted.button-corner:not(.disabled):hover {
   border-color: #e6eaed !important;
   color: #3f3f3f !important;
 }
 
-.base.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .base.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .base.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: #e0e5e8 !important;
+.base.inverted.actionable:not(.disabled):not(.ripple):active,
+.base.inverted.button:not(.disabled):not(.ripple):active,
+.base.inverted.button-corner:not(.disabled):not(.ripple):active,
+.base.inverted.actionable.active, .base.inverted.active.button, .base.inverted.active.button-corner {
   border-color: #e0e5e8 !important;
+  color: #3f3f3f !important;
 }
 
 .base p > a {
@@ -2889,9 +2769,9 @@ html.dragging {
 
 /* BODY */
 body {
+  background: #eceff1 ;
   border-color: #c0cad1 ;
   color: #3f3f3f ;
-  background: #eceff1 ;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
   line-height: 1.4285714286;
@@ -3051,9 +2931,9 @@ label {
 
 /* LABEL */
 .label, .button {
+  background: #ffffff ;
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
-  background: #ffffff ;
   font-weight: bold;
   display: -webkit-inline-flex;
   display: inline-flex;
@@ -3079,20 +2959,19 @@ label {
   /* RIBBON */
 }
 
-.label.actionable.active, .active.button, .label.active.button-corner {
-  background: whitesmoke ;
+.label.highlight:after, .highlight.button:after {
+  border-color: #ef6c00 ;
 }
 
-.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
+.label.actionable:not(.disabled):hover, .button:not(.disabled):hover, .label.button-corner:not(.disabled):hover {
   background: #fafafa ;
 }
 
-.label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
+.label.actionable:not(.disabled):not(.ripple):active,
+.button:not(.disabled):not(.ripple):active,
+.label.button-corner:not(.disabled):not(.ripple):active,
+.label.actionable.active, .active.button, .label.active.button-corner {
   background: whitesmoke ;
-}
-
-.label.highlight:after, .highlight.button:after {
-  border-color: #ef6c00 ;
 }
 
 .label.inverted, .inverted.button {
@@ -3101,21 +2980,17 @@ label {
   color: #ffffff ;
 }
 
-.label.inverted.actionable.active, .inverted.active.button, .label.inverted.active.button-corner {
-  background: whitesmoke ;
-  border-color: whitesmoke ;
-  color: #3f3f3f ;
-}
-
-.label.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: #fafafa ;
+.label.inverted.actionable:not(.disabled):hover, .inverted.button:not(.disabled):hover, .label.inverted.button-corner:not(.disabled):hover {
   border-color: #fafafa ;
   color: #3f3f3f ;
 }
 
-.label.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: whitesmoke ;
+.label.inverted.actionable:not(.disabled):not(.ripple):active,
+.inverted.button:not(.disabled):not(.ripple):active,
+.label.inverted.button-corner:not(.disabled):not(.ripple):active,
+.label.inverted.actionable.active, .inverted.active.button, .label.inverted.active.button-corner {
   border-color: whitesmoke ;
+  color: #3f3f3f ;
 }
 
 .label p > a, .button p > a {
@@ -3491,9 +3366,9 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
 }
 
 .label-tag > *:before, .button-tag > *:before {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   z-index: -1;
 }
 
@@ -4026,9 +3901,9 @@ button {
 .container, .card-header,
 .card-block,
 .card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox {
+  background: #ffffff ;
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
-  background: #ffffff ;
   border-radius: 0.2665em;
   padding: 10px 10px;
 }
@@ -4070,9 +3945,9 @@ button {
  * ========================================================================= */
 /* CARD */
 .card {
+  background: #ffffff ;
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
-  background: #ffffff ;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
@@ -5188,9 +5063,9 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
 }
 
 .divider.block > .divider-content {
+  background: #f44336 ;
   border-color: #d2190b ;
   color: #ffffff ;
-  background: #f44336 ;
   display: inline-block;
   padding: 0.3em 0.6em;
   border-radius: 10000px 10000px;
@@ -7650,9 +7525,9 @@ img {
 
 /* IMAGE */
 .image-wrp {
+  background: #212121 ;
   border-color: black ;
   color: #ffffff ;
-  background: #212121 ;
   display: -webkit-flex;
   display: flex;
   -webkit-flex-direction: column;
@@ -7680,9 +7555,9 @@ img {
 }
 
 .image-wrp .image-caption {
+  background: #212121 ;
   border-color: black ;
   color: #ffffff ;
-  background: #212121 ;
   border-radius: 0;
   margin-bottom: 0;
   overflow: auto;
@@ -7861,9 +7736,9 @@ img {
  * ========================================================================= */
 /* INPUT */
 .input-wrp, .textarea-wrp {
+  background: #ffffff ;
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
-  background: #ffffff ;
   display: -webkit-inline-flex;
   display: inline-flex;
   -webkit-align-items: center;
@@ -7899,9 +7774,9 @@ img {
 }
 
 .input-wrp > .text-field, .textarea-wrp > .text-field {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   width: 100%;
   border: none;
   border-radius: inherit;
@@ -7912,9 +7787,9 @@ img {
   position: absolute;
   top: 50%;
   margin-top: -0.7142857143em;
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
   left: 0;
@@ -8446,9 +8321,9 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
  * ========================================================================= */
 /* MULTIPLE */
 .multiple {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   position: relative;
   display: -webkit-flex;
   display: flex;
@@ -9964,9 +9839,9 @@ table > :not(tfoot) td .multiple:only-child {
 }
 
 .overlay.dimmer {
+  background: #212121 ;
   border-color: black ;
   color: #ffffff ;
-  background: #212121 ;
   background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -10124,9 +9999,9 @@ table > :not(tfoot) td .multiple:only-child {
  * ========================================================================= */
 /* PLACEHOLDER */
 .placeholder {
+  background: #e0e0e0 ;
   border-color: #bababa ;
   color: #3f3f3f ;
-  background: #e0e0e0 ;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: center;
@@ -10243,9 +10118,9 @@ code[class*='language-'] .namespace {
  * ========================================================================= */
 /* PROGRESSBAR */
 .progressbar {
+  background: #e0e0e0 ;
   border-color: #bababa ;
   color: #3f3f3f ;
-  background: #e0e0e0 ;
   display: -webkit-flex;
   display: flex;
   overflow: hidden;
@@ -10273,9 +10148,9 @@ code[class*='language-'] .namespace {
 }
 
 .progressbar-highlight {
+  background: #ef6c00 ;
   border-color: #a34900 ;
   color: #ffffff ;
-  background: #ef6c00 ;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -10991,9 +10866,9 @@ table.table.selectable tbody tr.selected {
   width: 4em;
   height: 4em;
   background-color: #e0e0e0;
+  background: #e0e0e0 ;
   border-color: #bababa ;
   color: #3f3f3f ;
-  background: #e0e0e0 ;
   overflow: hidden;
   padding: 5px;
 }
@@ -11073,9 +10948,9 @@ table.table.selectable tbody tr.selected {
  * ========================================================================= */
 /* SLIDER */
 .slider {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   display: -webkit-flex;
   display: flex;
   -webkit-align-items: stretch;
@@ -11148,9 +11023,9 @@ table.table.selectable tbody tr.selected {
 }
 
 .slider-unhighlight {
+  background: #e0e0e0 ;
   border-color: #bababa ;
   color: #3f3f3f ;
-  background: #e0e0e0 ;
   position: relative;
   overflow: hidden;
   height: 0.5em;
@@ -11171,9 +11046,9 @@ table.table.selectable tbody tr.selected {
 }
 
 .slider-highlight {
+  background: #ef6c00 ;
   border-color: #a34900 ;
   color: #ffffff ;
-  background: #ef6c00 ;
   position: absolute;
   right: 100%;
   width: 100%;
@@ -11202,9 +11077,9 @@ table.table.selectable tbody tr.selected {
 }
 
 .slider-handler {
+  background: #ef6c00 ;
   border-color: #a34900 ;
   color: #ffffff ;
-  background: #ef6c00 ;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
   z-index: 1;
   width: 1.55em;
@@ -11264,9 +11139,9 @@ table.table.selectable tbody tr.selected {
 
 .slider.invalid .slider-highlight,
 .slider.invalid .slider-handler {
+  background: #f44336 !important;
   border-color: #d2190b !important;
   color: #ffffff !important;
-  background: #f44336 !important;
 }
 
 .slider.invalid .slider-highlight p > a,
@@ -11290,9 +11165,9 @@ table.table.selectable tbody tr.selected {
 
 .slider.valid .slider-highlight,
 .slider.valid .slider-handler {
+  background: #4caf50 !important;
   border-color: #357a38 !important;
   color: #ffffff !important;
-  background: #4caf50 !important;
 }
 
 .slider.valid .slider-highlight p > a,
@@ -11679,9 +11554,9 @@ svg.spinner.multicolor circle {
 
 /* SPINNER LABEL */
 .spinner-label {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
   display: -webkit-flex;
   display: flex;
@@ -11906,9 +11781,9 @@ svg.spinner.multicolor circle {
 }
 
 .switch-bar {
+  background: #e0e0e0 ;
   border-color: #bababa ;
   color: #3f3f3f ;
-  background: #e0e0e0 ;
   width: 1.73333em;
   height: 0.93333em;
   border-radius: 0.93333em;
@@ -11928,9 +11803,9 @@ svg.spinner.multicolor circle {
 }
 
 .switch-handler {
+  background: #e0e0e0 ;
   border-color: #bababa ;
   color: #3f3f3f ;
-  background: #e0e0e0 ;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
   position: absolute;
   left: 0;
@@ -11997,9 +11872,9 @@ svg.spinner.multicolor circle {
 
 .switch.invalid .switch-bar,
 .switch.invalid .switch-handler {
+  background: #f44336 !important;
   border-color: #d2190b !important;
   color: #ffffff !important;
-  background: #f44336 !important;
 }
 
 .switch.invalid .switch-bar p > a,
@@ -12023,9 +11898,9 @@ svg.spinner.multicolor circle {
 
 .switch.valid .switch-bar,
 .switch.valid .switch-handler {
+  background: #4caf50 !important;
   border-color: #357a38 !important;
   color: #ffffff !important;
-  background: #4caf50 !important;
 }
 
 .switch.valid .switch-bar p > a,
@@ -12091,9 +11966,9 @@ svg.spinner.multicolor circle {
  * ========================================================================= */
 /* TABLE */
 table.table {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   width: 100%;
   border-collapse: separate;
   border-radius: inherit;
@@ -12494,9 +12369,9 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
 }
 
 .tagbox-partial {
+  background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  background: inherit ;
   min-width: 6.5em;
 }
 
@@ -12684,9 +12559,9 @@ p {
 /* MARK */
 mark,
 .mark {
+  background: #fabf40 ;
   border-color: #e7a006 ;
   color: #ffffff ;
-  background: #fabf40 ;
   padding: 0.3em 0.325em;
   border-radius: 0.13325em;
 }
@@ -12797,9 +12672,9 @@ pre {
 
 /* KBD */
 kbd {
+  background: #ffffff ;
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
-  background: #ffffff ;
   font-size: 0.9em;
   font-weight: bold;
   display: inline-block;
