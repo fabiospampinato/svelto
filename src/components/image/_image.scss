@@ -26,7 +26,7 @@ img {
 .image-wrp {
 
   @extend .widget;
-  @include color ( $image-color, $image-color-basic );
+  @include color ( $image-color );
   display: flex;
   flex-direction: column;
 
@@ -42,7 +42,7 @@ img {
   .image-caption {
 
     @extend .container;
-    @include color ( $image-caption-color, $image-caption-color-basic );
+    @include color ( $image-caption-color );
     border-radius: 0;
     margin-bottom: 0;
     overflow: auto;

@@ -4738,57 +4738,6 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[d
   z-index: -1;
 }
 
-.label-tag > *:before.actionable.active, .button-tag > *:before.actionable.active, .label-tag > *.button:before.active, .button-tag > *.button:before.active, .label-tag > *.button-corner:before.active, .button-tag > *.button-corner:before.active, .carousel:not(.inset) .label-tag > *.carousel-prev:before.active,
-.carousel:not(.inset) .button-tag > *.carousel-prev:before.active,
-.carousel:not(.inset) .label-tag > *.carousel-next:before.active, .carousel:not(.inset) .button-tag > *.carousel-next:before.active {
-  background: inherit ;
-}
-
-.label-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .label-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.carousel:not(.inset) .button-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.carousel:not(.inset) .label-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .button-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit ;
-}
-
-.label-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *:before.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *.button:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *.button-corner:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .label-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.carousel:not(.inset) .button-tag > *.carousel-prev:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.carousel:not(.inset) .label-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .button-tag > *.carousel-next:before:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit ;
-}
-
-.label-tag > *:before.highlight:after, .button-tag > *:before.highlight:after {
-  border-color: inherit ;
-}
-
-.label-tag > *:before.inverted, .button-tag > *:before.inverted {
-  background: transparent ;
-  border-color: inherit ;
-  color: inherit ;
-}
-
-.label-tag > *:before.inverted.actionable.active, .button-tag > *:before.inverted.actionable.active, .label-tag > *.button:before.inverted.active, .button-tag > *.button:before.inverted.active, .label-tag > *.button-corner:before.inverted.active, .button-tag > *.button-corner:before.inverted.active, .carousel:not(.inset) .label-tag > *.carousel-prev:before.inverted.active,
-.carousel:not(.inset) .button-tag > *.carousel-prev:before.inverted.active,
-.carousel:not(.inset) .label-tag > *.carousel-next:before.inverted.active, .carousel:not(.inset) .button-tag > *.carousel-next:before.inverted.active {
-  background: inherit ;
-  border-color: inherit ;
-  color: inherit ;
-}
-
-.label-tag > *:before.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *:before.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label-tag > *.button:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *.button:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .label-tag > *.button-corner:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .button-tag > *.button-corner:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .label-tag > *.carousel-prev:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.carousel:not(.inset) .button-tag > *.carousel-prev:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.carousel:not(.inset) .label-tag > *.carousel-next:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .button-tag > *.carousel-next:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit ;
-  border-color: inherit ;
-  color: inherit ;
-}
-
-.label-tag > *:before.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *:before.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label-tag > *.button:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *.button:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .label-tag > *.button-corner:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .button-tag > *.button-corner:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .label-tag > *.carousel-prev:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.carousel:not(.inset) .button-tag > *.carousel-prev:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.carousel:not(.inset) .label-tag > *.carousel-next:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .button-tag > *.carousel-next:before.inverted:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit ;
-  border-color: inherit ;
-}
-
 .label-tag > *:after, .button-tag > *:after {
   background-color: #eceff1;
   border-radius: 50%;
@@ -13264,51 +13213,6 @@ svg.spinner.multicolor circle {
   padding: 0.495em 0.495em;
   /* SPINNER */
   /* COLORS */
-}
-
-.spinner-label.actionable.active, .spinner-label.active.button, .spinner-label.active.button-corner, .carousel:not(.inset) .spinner-label.active.carousel-prev,
-.carousel:not(.inset) .spinner-label.active.carousel-next {
-  background: inherit ;
-}
-
-.spinner-label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .spinner-label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .spinner-label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .spinner-label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.carousel:not(.inset) .spinner-label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit ;
-}
-
-.spinner-label.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .spinner-label.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .spinner-label.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .spinner-label.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.carousel:not(.inset) .spinner-label.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit ;
-}
-
-.spinner-label.highlight:after {
-  border-color: inherit ;
-}
-
-.spinner-label.inverted {
-  background: transparent ;
-  border-color: inherit ;
-  color: inherit ;
-}
-
-.spinner-label.inverted.actionable.active, .spinner-label.inverted.active.button, .spinner-label.inverted.active.button-corner, .carousel:not(.inset) .spinner-label.inverted.active.carousel-prev,
-.carousel:not(.inset) .spinner-label.inverted.active.carousel-next {
-  background: inherit ;
-  border-color: inherit ;
-  color: inherit ;
-}
-
-.spinner-label.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .spinner-label.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .spinner-label.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover, .carousel:not(.inset) .spinner-label.inverted.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover,
-.carousel:not(.inset) .spinner-label.inverted.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):hover {
-  background: inherit ;
-  border-color: inherit ;
-  color: inherit ;
-}
-
-.spinner-label.inverted.actionable:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .spinner-label.inverted.button:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .spinner-label.inverted.button-corner:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active, .carousel:not(.inset) .spinner-label.inverted.carousel-prev:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active,
-.carousel:not(.inset) .spinner-label.inverted.carousel-next:not(.active):not(.dragging):not(.disabled):not([class*='-disabled']):not(.ripple):active {
-  background: inherit ;
-  border-color: inherit ;
 }
 
 .spinner-label .spinner {

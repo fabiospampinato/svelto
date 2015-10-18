@@ -16,7 +16,7 @@
 .card {
 
   @extend .widget;
-  @include color ( $card-color, $card-color-basic );
+  @include color ( $card-color );
   display: flex;
   flex-direction: column;
   border-radius: $card-border-radius;

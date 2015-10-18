@@ -45,7 +45,6 @@ $small-font-size: 0.65em !default;
 /* MARK */
 
 $mark-color: 'yellow' !default;
-$mark-color-basic: true !default;
 
 $mark-padding: 0.3em 0.325em !default;
 $mark-border-radius: $border-radius-small !default;
@@ -82,7 +81,6 @@ $code-border-color: rgba(0, 0, 0, 0.15) !default;
 /* KBD */
 
 $kbd-color: 'white' !default;
-$kbd-color-basic: true !default;
 
 $kbd-border-width: $outline-width !default;
 $kbd-border-style: solid !default;

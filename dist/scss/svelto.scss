@@ -1554,7 +1554,6 @@ $small-font-size: 0.65em !default;
 /* MARK */
 
 $mark-color: 'yellow' !default;
-$mark-color-basic: true !default;
 
 $mark-padding: 0.3em 0.325em !default;
 $mark-border-radius: $border-radius-small !default;
@@ -1591,7 +1590,6 @@ $code-border-color: rgba(0, 0, 0, 0.15) !default;
 /* KBD */
 
 $kbd-color: 'white' !default;
-$kbd-color-basic: true !default;
 
 $kbd-border-width: $outline-width !default;
 $kbd-border-style: solid !default;
@@ -1615,7 +1613,7 @@ $kbd-padding: 0.2em 0.3em !default;
 
 /* MIXIN */
 
-@mixin color ( $color_name, $basic: false, $extra: '' ) {
+@mixin color ( $color_name, $basic: true, $extra: '' ) {
 
   $colors: map-get($colors, $color_name);
 
@@ -2342,7 +2340,6 @@ $base-selection-bg-color: lighten($color-primary-bg, 50) !default;
 /* BODY */
 
 $body-color: 'base' !default;
-$body-color-basic: true !default;
 
 /* MAIN HEADER */
 
@@ -2362,7 +2359,6 @@ $main-header-height: $toolbar-height !default;
 /* CONTAINER */
 
 $container-color: 'white' !default;
-$container-color-basic: true !default;
 
 $container-border-radius: $border-radius-medium !default;
 
@@ -2479,7 +2475,7 @@ html {
 /* BODY */
 
 body {
-  @include color ( $body-color, $body-color-basic );
+  @include color ( $body-color );
   font-family: $font-family;
   font-size: 1em;
   line-height: $line-height;
@@ -3604,7 +3600,6 @@ button {
 /* CARD */
 
 $card-color: $container-color !default;
-$card-color-basic: $container-color-basic !default;
 
 $card-border-radius: $container-border-radius !default;
 
@@ -3624,7 +3619,7 @@ $card-border-radius: $container-border-radius !default;
 .container {
 
   @extend .widget;
-  @include color ( $container-color, $container-color-basic );
+  @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-vertical $container-padding-horizontal;
 
@@ -3652,7 +3647,7 @@ $card-border-radius: $container-border-radius !default;
 .card {
 
   @extend .widget;
-  @include color ( $card-color, $card-color-basic );
+  @include color ( $card-color );
   display: flex;
   flex-direction: column;
   border-radius: $card-border-radius;
@@ -4973,8 +4968,7 @@ $datepicker-transition-all-duration: $transition-duration-fast !default;
 
 /* BLOCK */
 
-$divider-block-color: 'red' !default;
-$divider-block-color-basic: true !default;
+$divider-block-color: 'red' !default;;
 
 $divider-block-vertical-padding: 0.3em !default;
 $divider-block-horizontal-padding: 0.6em !default;
@@ -5121,7 +5115,7 @@ hr {
     /* CONTENT */
 
     > .divider-content {
-      @include color ( $divider-block-color, $divider-block-color-basic );
+      @include color ( $divider-block-color );
       @include last-child-no-gutter ();
       display: inline-block;
       padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
@@ -7242,12 +7236,10 @@ i.icon {
 /* IMAGE */
 
 $image-color: 'black' !default;
-$image-color-basic: true !default;
 
 /* CAPTION */
 
 $image-caption-color: 'black' !default;
-$image-caption-color-basic: true !default;
 
 /* TRANSITIONS */
 
@@ -7281,7 +7273,7 @@ img {
 .image-wrp {
 
   @extend .widget;
-  @include color ( $image-color, $image-color-basic );
+  @include color ( $image-color );
   display: flex;
   flex-direction: column;
 
@@ -7297,7 +7289,7 @@ img {
   .image-caption {
 
     @extend .container;
-    @include color ( $image-caption-color, $image-caption-color-basic );
+    @include color ( $image-caption-color );
     border-radius: 0;
     margin-bottom: 0;
     overflow: auto;
@@ -7460,7 +7452,6 @@ $infobar-title-size: 'large' !default;
 /* INPUT WRAPPER */
 
 $input-wrp-color: 'white' !default;
-$input-wrp-color-basic: true !default;
 
 $input-wrp-border-radius: $container-border-radius !default;
 
@@ -7521,7 +7512,7 @@ $input-transition-all-duration: $transition-duration-fast !default;
 .input-wrp {
 
   @extend .widget;
-  @include color ( $input-wrp-color, $input-wrp-color-basic );
+  @include color ( $input-wrp-color );
   display: inline-flex; //INFO: For some reasons it fixes a border problem, without it there might be a missing border at the bottom when outlined
   align-items: center;
   border-radius: $input-wrp-border-radius;
@@ -9176,7 +9167,6 @@ $overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-durat
 /* DIMMER */
 
 $overlay-dimmer-color: 'black' !default;
-$overlay-dimmer-color-basic: true !default;
 
 $overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacity) !default;
 
@@ -9231,7 +9221,7 @@ $overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacit
   /* DIMMER */
 
   &.dimmer {
-    @include color ( $overlay-dimmer-color, $overlay-dimmer-color-basic );
+    @include color ( $overlay-dimmer-color );
     background-color: $overlay-dimmer-background-color;
   }
 
@@ -9411,7 +9401,6 @@ $parallax-foreground-scale: 0.7 !default;
 /* PLACEHOLDER */
 
 $placeholder-color: 'gray' !default;
-$placeholder-color-basic: true !default;
 
 
 /* =========================================================================
@@ -9428,7 +9417,7 @@ $placeholder-color-basic: true !default;
 
 .placeholder {
   @extend .widget;
-  @include color ( $placeholder-color, $placeholder-color-basic );
+  @include color ( $placeholder-color );
   display: flex;
   align-items: center;
   justify-content: center;
@@ -9524,7 +9513,6 @@ code[class*='language-'] {
 /* PROGRESSBAR */
 
 $progressbar-color: 'gray' !default;
-$progressbar-color-basic: true !default;
 
 $progressbar-height: 1em !default;
 
@@ -9545,7 +9533,6 @@ $progressbar-slim-label-font-size: 0 !default;
 /* HIGHLIGHT */
 
 $progressbar-highlight-color: 'secondary' !default;
-$progressbar-highlight-color-basic: true !default;
 
 /* LABEL */
 
@@ -9587,7 +9574,7 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
 .progressbar {
 
   @extend .widget;
-  @include color ( $progressbar-color, $progressbar-color-basic );
+  @include color ( $progressbar-color );
   display: flex;
   overflow: hidden;
   height: $progressbar-height;
@@ -9597,7 +9584,7 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
   /* HIGHLIGHT */
 
   &-highlight {
-    @include color ( $progressbar-highlight-color, $progressbar-highlight-color-basic );
+    @include color ( $progressbar-highlight-color );
     @include text-truncate ();
     position: relative;
     display: flex;
@@ -10276,7 +10263,6 @@ $square-sample-p-size: 'xxsmall' !default;
 /* SLIDER */
 
 $slider-color: 'inherit' !default;
-$slider-color-basic: true !default;
 
 $slider-height: $line-height-em + ( $label-padding-vertical * 2 ) !default; //INFO: Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
 
@@ -10287,7 +10273,6 @@ $slider-min-max-min-width: $slider-height !default;
 /* UNHIGHLIGHT */
 
 $slider-unhighlight-color: 'gray' !default;
-$slider-unhighlight-color-basic: true !default;
 
 $slider-unhighlight-height: 0.5em !default;
 
@@ -10296,12 +10281,10 @@ $slider-unhighlight-border-radius: $slider-unhighlight-height !default;
 /* HIGHLIGHT */
 
 $slider-highlight-color: 'secondary' !default;
-$slider-highlight-color-basic: true !default;
 
 /* HANDLER */
 
 $slider-handler-color: 'secondary' !default;
-$slider-handler-color-basic: true !default;
 
 $slider-handler-z-depth: 3 !default;
 
@@ -10384,7 +10367,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
 .slider {
 
   @extend .widget;
-  @include color ( $slider-color, $slider-color-basic );
+  @include color ( $slider-color );
   display: flex;
   align-items: stretch;
   height: $slider-height;
@@ -10456,7 +10439,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
   /* UNHIGHLIGHT */
 
   &-unhighlight {
-    @include color ( $slider-unhighlight-color, $slider-unhighlight-color-basic );
+    @include color ( $slider-unhighlight-color );
     position: relative;
     overflow: hidden;
     height: $slider-unhighlight-height;
@@ -10467,7 +10450,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
   /* HIGHLIGHT */
 
   &-highlight {
-    @include color ( $slider-highlight-color, $slider-highlight-color-basic );
+    @include color ( $slider-highlight-color );
     position: absolute;
     right: 100%;
     width: 100%;
@@ -10487,7 +10470,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
 
   &-handler {
 
-    @include color ( $slider-handler-color, $slider-handler-color-basic );
+    @include color ( $slider-handler-color );
     @include z-depth ( $slider-handler-z-depth );
     z-index: 1;
     width: $slider-handler-size;
@@ -10848,7 +10831,6 @@ $spinner-stroke-animation-dash-duration: 1.5s !default;
 $spinner-label-z-depth: 3 !default;
 
 $spinner-label-color: 'inherit' !default;
-$spinner-label-color-basic: false !default;
 
 $spinner-label-padding-vertical: $label-compact-padding-vertical !default;
 $spinner-label-padding-horizontal: $label-compact-padding-horizontal !default;
@@ -10925,7 +10907,7 @@ svg.spinner {
 .spinner-label {
 
   @extend .widget;
-  @include color ( $spinner-label-color, $spinner-label-color-basic );
+  @include color ( $spinner-label-color );
   @include z-depth ( $spinner-label-z-depth );
   display: flex;
   border-radius: $spinner-label-border-radius !important;
@@ -11166,7 +11148,6 @@ svg.spinner {
 /* TABLE */
 
 $table-color: inherit !default;
-$table-color-basic: true !default;
 
 $table-header-footer-bg-color: rgba(0, 0, 0, 0.05) !default; //INFO: The same used in label sub left and right
 
@@ -11208,7 +11189,7 @@ $table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;
 table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
 
   @extend .widget;
-  @include color ( $table-color, $table-color-basic );
+  @include color ( $table-color );
   width: 100%;
   border-collapse: separate;
   border-radius: inherit;
@@ -11980,7 +11961,7 @@ p {
 
 mark,
 .mark {
-  @include color ( $mark-color, $mark-color-basic );
+  @include color ( $mark-color );
   padding: $mark-padding;
   border-radius: $mark-border-radius;
 }
@@ -12075,7 +12056,7 @@ pre {
 /* KBD */
 
 kbd {
-  @include color ( $kbd-color, $kbd-color-basic );
+  @include color ( $kbd-color );
   font-size: $kbd-font-size;
   font-weight: bold;
   display: inline-block;

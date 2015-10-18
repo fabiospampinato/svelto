@@ -105,7 +105,7 @@ p {
 
 mark,
 .mark {
-  @include color ( $mark-color, $mark-color-basic );
+  @include color ( $mark-color );
   padding: $mark-padding;
   border-radius: $mark-border-radius;
 }
@@ -200,7 +200,7 @@ pre {
 /* KBD */
 
 kbd {
-  @include color ( $kbd-color, $kbd-color-basic );
+  @include color ( $kbd-color );
   font-size: $kbd-font-size;
   font-weight: bold;
   display: inline-block;

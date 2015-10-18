@@ -49,7 +49,7 @@
   /* DIMMER */
 
   &.dimmer {
-    @include color ( $overlay-dimmer-color, $overlay-dimmer-color-basic );
+    @include color ( $overlay-dimmer-color );
     background-color: $overlay-dimmer-background-color;
   }
 

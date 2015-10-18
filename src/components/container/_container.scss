@@ -14,7 +14,7 @@
 .container {
 
   @extend .widget;
-  @include color ( $container-color, $container-color-basic );
+  @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-vertical $container-padding-horizontal;
 

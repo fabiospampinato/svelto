@@ -17,7 +17,7 @@
 table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
 
   @extend .widget;
-  @include color ( $table-color, $table-color-basic );
+  @include color ( $table-color );
   width: 100%;
   border-collapse: separate;
   border-radius: inherit;

@@ -55,7 +55,7 @@ html {
 /* BODY */
 
 body {
-  @include color ( $body-color, $body-color-basic );
+  @include color ( $body-color );
   font-family: $font-family;
   font-size: 1em;
   line-height: $line-height;

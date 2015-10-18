@@ -23,6 +23,5 @@ $overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-durat
 /* DIMMER */
 
 $overlay-dimmer-color: 'black' !default;
-$overlay-dimmer-color-basic: true !default;
 
 $overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacity) !default;

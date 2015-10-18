@@ -124,7 +124,7 @@ hr {
     /* CONTENT */
 
     > .divider-content {
-      @include color ( $divider-block-color, $divider-block-color-basic );
+      @include color ( $divider-block-color );
       @include last-child-no-gutter ();
       display: inline-block;
       padding: $divider-block-vertical-padding $divider-block-horizontal-padding;

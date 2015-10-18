@@ -13,7 +13,7 @@
 
 /* MIXIN */
 
-@mixin color ( $color_name, $basic: false, $extra: '' ) {
+@mixin color ( $color_name, $basic: true, $extra: '' ) {
 
   $colors: map-get($colors, $color_name);
 
