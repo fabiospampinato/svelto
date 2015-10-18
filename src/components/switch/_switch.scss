@@ -120,8 +120,7 @@
 
   /* ENABLED */
 
-  &:not(.disabled),
-  &:not(.switch-disabled) {
+  &:not(.disabled) {
 
     cursor: pointer;
 

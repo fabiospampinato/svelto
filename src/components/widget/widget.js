@@ -81,7 +81,7 @@
 
       // SET DISABLED
 
-      this.options.disabled = this.options.disabled || this.$element.hasClass ( this.name + '-disabled' );
+      this.options.disabled = this.options.disabled || this.$element.hasClass ( 'disabled' );
 
       // SAVE WIDGET INSTANCE
 
@@ -209,7 +209,7 @@
 
       if ( key === 'disabled' ) {
 
-        this.$element.toggleClass ( this.name + '-disabled', !!value );
+        this.$element.toggleClass ( 'disabled', !!value );
 
       }
 

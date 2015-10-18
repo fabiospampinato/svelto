@@ -85,7 +85,8 @@
 
   }
 
-  &.unresizable > .text-field, &.disabled > .text-field {
+  &.unresizable > .text-field,
+  &.disabled > .text-field {
     resize: none;
   }
 

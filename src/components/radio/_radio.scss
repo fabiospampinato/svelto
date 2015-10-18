@@ -10,14 +10,8 @@
 
 /* RADIO */
 
-//TODO: add better radio animation, closer to material design
+//TODO: Add cooler radio animation, closer to material design
 
 .radio {
-
   @extend .checkbox;
-
-  &.radio-disabled {
-    @extend .checkbox.checkbox-disabled;
-  }
-
 }

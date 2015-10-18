@@ -16,9 +16,8 @@
   position: relative;
   margin: 0 0 $gutter;
   transition: opacity $widget-transition-opacity-duration;
-  
-  &.disabled,
-  &[class*="-disabled"] {
+
+  &.disabled {
     cursor: default !important;
     opacity: $widget-disabled-opacity !important;
   }

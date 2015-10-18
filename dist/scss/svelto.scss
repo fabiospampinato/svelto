@@ -2023,9 +2023,8 @@ $widget-transition-opacity-duration: $transition-duration-fast !default;
   position: relative;
   margin: 0 0 $gutter;
   transition: opacity $widget-transition-opacity-duration;
-  
-  &.disabled,
-  &[class*="-disabled"] {
+
+  &.disabled {
     cursor: default !important;
     opacity: $widget-disabled-opacity !important;
   }
@@ -3424,7 +3423,7 @@ $dragging-z-index: 1000000 !default;
 
 }
 
-.actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator
+.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
   cursor: pointer;
 }
 
@@ -9473,7 +9472,7 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
       background-size: $progressbar-stripe-size $progressbar-stripe-size;
     }
 
-    &:not(.disabled):not([class*="-disabled"]) .progressbar-highlight:before {
+    &:not(.disabled) .progressbar-highlight:before {
       animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear 0s infinite;
     }
 
@@ -9532,16 +9531,10 @@ $progressbar-transition-all-duration: $transition-duration-fast !default;
 
 /* RADIO */
 
-//TODO: add better radio animation, closer to material design
+//TODO: Add cooler radio animation, closer to material design
 
 .radio {
-
   @extend .checkbox;
-
-  &.radio-disabled {
-    @extend .checkbox.checkbox-disabled;
-  }
-
 }
 
 
@@ -10382,8 +10375,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
 
   /* ENABLED */
 
-  &:not(.disabled),
-  &:not(.slider-disabled) {
+  &:not(.disabled) {
 
     /* MIN / MAX */
 
@@ -10958,8 +10950,7 @@ svg.spinner {
 
   /* ENABLED */
 
-  &:not(.disabled),
-  &:not(.switch-disabled) {
+  &:not(.disabled) {
 
     cursor: pointer;
 
@@ -11666,7 +11657,8 @@ $textarea-lines: 3 !default;
 
   }
 
-  &.unresizable > .text-field, &.disabled > .text-field {
+  &.unresizable > .text-field,
+  &.disabled > .text-field {
     resize: none;
   }
 

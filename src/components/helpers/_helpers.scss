@@ -324,6 +324,6 @@
 
 }
 
-.actionable:not([class*="disabled"]):not(.dragging) { //TODO: Move it to it's own decorator
+.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
   cursor: pointer;
 }
