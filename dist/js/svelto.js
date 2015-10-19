@@ -1922,50 +1922,67 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* AUTOGROW INPUT */
+  /* CONFIG */
 
-  $.factory('svelto.autogrowInput', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'autogrowInput',
     options: {
       minWidth: 0,
       callbacks: {
-        update: _.noop
+        update: function update() {}
       }
-    },
+    }
+  };
+
+  /* AUTOGROW INPUT */
+
+  var AutogrowInput = (function (_Svelto$Widget) {
+    _inherits(AutogrowInput, _Svelto$Widget);
+
+    function AutogrowInput() {
+      _classCallCheck(this, AutogrowInput);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    AutogrowInput.prototype._widgetize = function _widgetize($root) {
 
       $root.find('input.autogrow, .input-wrp.autogrow input').autogrowInput();
-    },
+      $root.filter('input.autogrow, .input-wrp.autogrow input').autogrowInput();
+    };
 
-    _variables: function _variables() {
+    AutogrowInput.prototype._variables = function _variables() {
 
       this.$input = this.$element;
-    },
+    };
 
-    _init: function _init() {
+    AutogrowInput.prototype._init = function _init() {
 
-      this.update();
-    },
+      this._update();
+    };
 
-    _events: function _events() {
+    AutogrowInput.prototype._events = function _events() {
 
       /* INPUT / CHANGE */
 
-      this._on('input change', this.update);
-    },
+      this._on('input change', this._update);
+    };
 
     /* PRIVATE */
 
-    _getNeededWidth: function _getNeededWidth() {
+    AutogrowInput.prototype._getNeededWidth = function _getNeededWidth() {
 
       //FIXME: Isn't it better to just detach it, or to leave it in the DOM?
 
@@ -1984,20 +2001,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       $span.remove();
 
       return width;
-    },
+    };
 
-    /* PUBLIC */
-
-    update: function update() {
+    AutogrowInput.prototype._update = function _update() {
 
       var neededWidth = this._getNeededWidth(this.$input);
 
       this.$input.width(Math.max(neededWidth, this.options.minWidth));
 
       this._trigger('update');
-    }
+    };
 
-  });
+    return AutogrowInput;
+  })(Svelto.Widget);
+
+  Svelto.AutogrowInput = AutogrowInput;
+  Svelto.AutogrowInput.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.AutogrowInput);
 })(jQuery, _, window, document);
 
 /* =========================================================================

@@ -16,46 +16,50 @@
 
   'use strict';
 
-  /* AUTOGROW INPUT */
+  /* CONFIG */
 
-  $.factory ( 'svelto.autogrowInput', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'autogrowInput',
     options: {
       minWidth: 0,
       callbacks: {
-        update: _.noop
+        update () {}
       }
-    },
+    }
+  };
+
+  /* AUTOGROW INPUT */
+
+  class AutogrowInput extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
+      $root.filter ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
 
-    },
+    }
 
     _variables () {
 
       this.$input = this.$element;
 
-    },
+    }
 
     _init () {
 
-      this.update ();
+      this._update ();
 
-    },
+    }
 
     _events () {
 
       /* INPUT / CHANGE */
 
-      this._on ( 'input change', this.update );
+      this._on ( 'input change', this._update );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -63,7 +67,7 @@
 
       //FIXME: Isn't it better to just detach it, or to leave it in the DOM?
 
-      var $span = $( '<span>' + this.$input.val () + '</span>' );
+      let $span = $( '<span>' + this.$input.val () + '</span>' );
 
       $span.css ({
         font: this.$input.css ( 'font' ),
@@ -73,19 +77,17 @@
 
       $span.appendTo ( $body );
 
-      var width = $span.width ();
+      let width = $span.width ();
 
       $span.remove ();
 
       return width;
 
-    },
+    }
 
-    /* PUBLIC */
+    _update () {
 
-    update () {
-
-      var neededWidth = this._getNeededWidth ( this.$input );
+      let neededWidth = this._getNeededWidth ( this.$input );
 
       this.$input.width ( Math.max ( neededWidth, this.options.minWidth ) );
 
@@ -93,6 +95,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.AutogrowInput = AutogrowInput;
+  Svelto.AutogrowInput.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.AutogrowInput );
 
 }( jQuery, _, window, document ));
