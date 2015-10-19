@@ -265,18 +265,18 @@
 
   /* CHECKS */
 
-  var is_iphone = /iphone/i.test(userAgent),
-      is_ipad = /ipad/i.test(userAgent),
-      is_ipod = /ipod/i.test(userAgent),
-      is_android = /android/i.test(userAgent),
-      is_androidPhone = is_android && /mobile/i.test(userAgent),
-      is_androidTablet = is_android && !is_androidPhone,
-      is_blackberry = /blackberry/i.test(userAgent) || /BB10/i.test(userAgent),
-      is_windows = /win/i.test(appVersion),
-      is_windowsPhone = is_windows && /phone/i.test(userAgent),
-      is_windowsTablet = is_windows && !is_windowsPhone && /touch/i.test(userAgent),
-      is_mobile = is_iphone || is_ipod || is_androidPhone || is_blackberry || is_windowsPhone,
-      is_tablet = is_ipad || is_androidTablet || is_windowsTablet;
+  var isIphone = /iphone/i.test(userAgent),
+      isIpad = /ipad/i.test(userAgent),
+      isIpod = /ipod/i.test(userAgent),
+      isAndroid = /android/i.test(userAgent),
+      isAndroidPhone = isAndroid && /mobile/i.test(userAgent),
+      isAndroidTablet = isAndroid && !isAndroidPhone,
+      isBlackberry = /blackberry/i.test(userAgent) || /BB10/i.test(userAgent),
+      isWindows = /win/i.test(appVersion),
+      isWindowsPhone = isWindows && /phone/i.test(userAgent),
+      isWindowsTablet = isWindows && !isWindowsPhone && /touch/i.test(userAgent),
+      isMobile = isIphone || isIpod || isAndroidPhone || isBlackberry || isWindowsPhone,
+      isTablet = isIpad || isAndroidTablet || isWindowsTablet;
 
   /* BROWSER */
 
@@ -287,22 +287,22 @@
       ie: /msie/i.test(userAgent) || 'ActiveXObject' in window, /* IE || EDGE */
       opera: /^Opera\//.test(userAgent) || /\x20OPR\//.test(userAgent), /* Opera <= 12 || Opera >= 15 */
       safari: /safari/i.test(userAgent) && /apple computer/i.test(vendor),
-      iphone: is_iphone,
-      ipad: is_ipad,
-      ipod: is_ipod,
-      ios: is_iphone || is_ipad || is_ipod,
-      android: is_android,
-      androidPhone: is_androidPhone,
-      androidTablet: is_androidTablet,
-      blackberry: is_blackberry,
+      iphone: isIphone,
+      ipad: isIpad,
+      ipod: isIpod,
+      ios: isIphone || isIpad || isIpod,
+      android: isAndroid,
+      androidPhone: isAndroidPhone,
+      androidTablet: isAndroidTablet,
+      blackberry: isBlackberry,
       linux: /linux/i.test(appVersion),
       mac: /mac/i.test(appVersion),
-      windows: is_windows,
-      windowsPhone: is_windowsPhone,
-      windowsTablet: is_windowsTablet,
-      mobile: is_mobile,
-      tablet: is_tablet,
-      desktop: !is_mobile && !is_tablet,
+      windows: isWindows,
+      windowsPhone: isWindowsPhone,
+      windowsTablet: isWindowsTablet,
+      mobile: isMobile,
+      tablet: isTablet,
+      desktop: !isMobile && !isTablet,
       online: function online() {
         return navigator.onLine;
       },
