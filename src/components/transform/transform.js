@@ -19,9 +19,9 @@
 
     } else {
 
-      var transformStr = this.css ( 'transform' );
+      let transformStr = this.css ( 'transform' );
 
-      return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( function ( value ) { return parseFloat ( value ); } ) : [1, 0, 0, 1, 0, 0];
+      return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( value ) ) : [1, 0, 0, 1, 0, 0];
 
     }
 
@@ -29,15 +29,15 @@
 
   /* TRANSFORMATIONS */
 
-  var transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //FIXME: Their index is also the corresponsing index when applying `transform: matrix()`
+  let transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //INFO: Their index is also the corresponsing index when applying `transform: matrix()`
 
-  for ( var i = 0, l = transformations.length; i < l; i++ ) {
+  for ( let i = 0, l = transformations.length; i < l; i++ ) {
 
     $.fn[transformations[i]] = (function ( index ) {
 
        return function ( value ) {
 
-         var matrix = this.matrix ();
+         let matrix = this.matrix ();
 
          if ( !_.isUndefined ( value ) ) {
 
@@ -61,7 +61,7 @@
 
   $.fn.translate = function ( X, Y ) {
 
-    var matrix = this.matrix ();
+    let matrix = this.matrix ();
 
     if ( !_.isUndefined ( X ) && !_.isUndefined ( Y ) ) {
 

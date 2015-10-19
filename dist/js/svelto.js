@@ -6065,7 +6065,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* TRANSFORMATIONS */
 
-  var transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //FIXME: Their index is also the corresponsing index when applying `transform: matrix()`
+  var transformations = ['scaleX', 'skewY', 'skewX', 'scaleY', 'translateX', 'translateY']; //INFO: Their index is also the corresponsing index when applying `transform: matrix()`
 
   for (var i = 0, l = transformations.length; i < l; i++) {
 
