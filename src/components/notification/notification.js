@@ -35,7 +35,7 @@
 
         if ( status === 'granted' ) {
 
-          var notification = new Notification ( options.title, { body: options.body, icon: options.img } );
+          let notification = new Notification ( options.title, { body: options.body, icon: options.img } );
 
         } else {
 

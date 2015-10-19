@@ -39,10 +39,10 @@
 
     timeAgo ( timestamp ) { //INFO: Timestamp is required in seconds
 
-      var elapsed = _.nowSecs () - timestamp,
+      let elapsed = _.nowSecs () - timestamp,
           justNow = 5;
 
-      var names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
+      let names = ['year', 'month', 'week', 'day', 'hour', 'minute', 'second'],
           times = [31536000, 2592000, 604800, 86400, 3600, 60, 1];
 
       if ( elapsed < justNow ) {
@@ -54,9 +54,9 @@
 
       } else {
 
-        for ( var i = 0, l = times.length; i < l; i++ ) {
+        for ( let i = 0, l = times.length; i < l; i++ ) {
 
-          var name = names[i],
+          let name = names[i],
               secs = times[i],
               number = _.floor ( elapsed / secs );
 
@@ -97,16 +97,16 @@
 
       }
 
-      var current_index = -1,
+      let currentIndex = -1,
           str_l = str.length;
 
-      for ( var search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
+      for ( let search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-        for ( var str_i = current_index + 1; str_i < str_l; str_i++ ) {
+        for ( let str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
 
           if ( str[str_i] === search[search_i] ) {
 
-            current_index = str_i;
+            currentIndex = str_i;
             str_i = str_l + 1;
 
           }
@@ -173,7 +173,7 @@
 
     btEach ( arr, callback, startIndex ) {
 
-      var start = 0,
+      let start = 0,
           end = arr.length - 1,
           center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
           direction;
@@ -248,7 +248,7 @@
 
       }
 
-      var left = ( number % step ),
+      let left = ( number % step ),
           halfStep = step / 2;
 
       return number - left + ( left >= halfStep ? step : 0 );

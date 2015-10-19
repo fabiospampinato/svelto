@@ -57,14 +57,14 @@
 
         for (var i = 0, l = times.length; i < l; i++) {
 
-          var name = names[i],
+          var _name = names[i],
               secs = times[i],
               number = _.floor(elapsed / secs);
 
           if (number >= 1) {
 
             return {
-              str: number + ' ' + name + (number > 1 ? 's' : '') + ' ago',
+              str: number + ' ' + _name + (number > 1 ? 's' : '') + ' ago',
               next: secs - (elapsed - number * secs)
             };
           }
@@ -93,17 +93,17 @@
         search = search.toLowerCase();
       }
 
-      var current_index = -1,
+      var currentIndex = -1,
           str_l = str.length;
 
       for (var search_i = 0, search_l = search.length; search_i < search_l; search_i++) {
 
-        for (var str_i = current_index + 1; str_i < str_l; str_i++) {
+        for (var _str_i = currentIndex + 1; _str_i < str_l; _str_i++) {
 
-          if (str[str_i] === search[search_i]) {
+          if (str[_str_i] === search[search_i]) {
 
-            current_index = str_i;
-            str_i = str_l + 1;
+            currentIndex = _str_i;
+            _str_i = str_l + 1;
           }
         }
 
@@ -162,7 +162,7 @@
       var start = 0,
           end = arr.length - 1,
           center = _.isNumber(startIndex) ? startIndex : _.ceil((start + end) / 2),
-          direction;
+          direction = undefined;
 
       while (start <= end) {
 
