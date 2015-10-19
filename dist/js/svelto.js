@@ -1661,14 +1661,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   'use strict';
 
+  /* CONFIG */
+
   var config = {
-
-    /* NAMES */
-
     name: 'expander',
-
-    /* OPTIONS */
-
     options: {
       classes: {
         open: 'open'
@@ -1678,11 +1674,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         toggler: '.expander-toggler'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open: function open() {},
+        close: function close() {}
       }
     }
-
   };
 
   /* EXPANDER */
@@ -1703,6 +1698,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     Expander.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.expander').expander();
+      $root.filter('.expander').expander();
     };
 
     Expander.prototype._variables = function _variables() {

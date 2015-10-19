@@ -170,7 +170,7 @@ gulp.task ( 'js', ['js-temp'], function () {
                .pipe ( gulp.dest ( 'dist/js' ) )
                .pipe ( rename ( 'svelto.min.js' ) )
                .pipe ( gulp.dest ( 'dist/js' ) )
-               .pipe ( gulpif ( browserSync.active, gutil.noop () ) );
+               .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
 
   } else {
 
@@ -190,7 +190,7 @@ gulp.task ( 'js', ['js-temp'], function () {
                .pipe ( uglify () )
                .pipe ( rename ( 'svelto.min.js' ) )
                .pipe ( gulp.dest ( 'dist/js' ) )
-               .pipe ( gulpif ( browserSync.active, gutil.noop () ) );
+               .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
 
   }
 
@@ -232,7 +232,7 @@ gulp.task ( 'scss', function () {
              })))
              .pipe ( rename ( 'svelto.min.css' ) )
              .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( browserSync.active ? browserSync.stream () : gutil.noop () );
+             .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
 
 });
 

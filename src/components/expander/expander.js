@@ -12,14 +12,10 @@
 
   'use strict';
 
+  /* CONFIG */
+
   var config = {
-
-    /* NAMES */
-
     name: 'expander',
-
-    /* OPTIONS */
-
     options: {
       classes: {
         open: 'open'
@@ -29,11 +25,10 @@
         toggler: '.expander-toggler'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open () {},
+        close () {}
       }
     }
-
   };
 
   /* EXPANDER */
@@ -45,6 +40,7 @@
     _widgetize ( $root ) {
 
       $root.find ( '.expander' ).expander ();
+      $root.filter ( '.expander' ).expander ();
 
     }
 
