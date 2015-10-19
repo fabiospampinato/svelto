@@ -14,7 +14,7 @@
 
   $.eventXY = function ( event ) {
 
-    if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction
+    if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction //FIXME: We should try to avoid the existence of this variable
 
       event = event.originalEvent;
 
@@ -59,7 +59,7 @@
 
   $.getOverlappingArea = function ( rect1, rect2 ) {
 
-    var overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
+    let overlapX = Math.max ( 0, Math.min ( rect1.right, rect2.right ) - Math.max ( rect1.left, rect2.left ) ),
         overlapY = Math.max ( 0, Math.min ( rect1.bottom, rect2.bottom ) - Math.max ( rect1.top, rect2.top ) );
 
     return overlapX * overlapY;
@@ -75,24 +75,12 @@
 
   };
 
-  $.fn.onHover = function () {
+  $.fn.onHover = function ( ...args ) {
 
     //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
 
-    var args = arguments,
-        self = this;
-
-    this.on ( Pointer.enter, function () {
-
-      self.on ( args );
-
-    });
-
-    this.on ( Pointer.leave, function () {
-
-      self.off ( args );
-
-    });
+    this.on ( Pointer.enter, () => this.on ( ...args ) );
+    this.on ( Pointer.leave, () => this.off ( ...args ) );
 
   };
 

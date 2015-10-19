@@ -16,7 +16,7 @@
 
   /* UTILITIES */
 
-  var encode = encodeURIComponent,
+  let encode = encodeURIComponent,
       decode = decodeURIComponent;
 
   /* COOKIE */
@@ -35,7 +35,7 @@
 
       if ( !key || /^(?:expires|max\-age|path|domain|secure)$/i.test ( key ) ) return false;
 
-      var expires = '';
+      let expires = '';
 
       if ( end ) {
 
@@ -83,9 +83,9 @@
 
     keys () {
 
-      var keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
+      let keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
 
-      for ( var i = 0, l = keys.length; i < l; i++ ) {
+      for ( let i = 0, l = keys.length; i < l; i++ ) {
 
         keys[i] = decode ( keys[i] );
 

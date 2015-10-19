@@ -332,7 +332,7 @@
   $.eventXY = function (event) {
 
     if (event.isPointerEvent) {
-      //INFO: Has been created using the `Pointer` abstraction
+      //INFO: Has been created using the `Pointer` abstraction //FIXME: We should try to avoid the existence of this variable
 
       event = event.originalEvent;
     }
@@ -385,20 +385,19 @@
   };
 
   $.fn.onHover = function () {
+    var _this = this;
+
+    for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
 
     //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
 
-    var args = arguments,
-        self = this;
-
     this.on(Pointer.enter, function () {
-
-      self.on(args);
+      return _this.on.apply(_this, args);
     });
-
     this.on(Pointer.leave, function () {
-
-      self.off(args);
+      return _this.off.apply(_this, args);
     });
   };
 
@@ -1059,13 +1058,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       this._on($element, Pointer.enter, function () {
-
-        _this2._on.apply(_this2, args);
+        return _this2._on.apply(_this2, args);
       });
-
-      this._on($element, Pointer.leave, function () {
-
-        _this2._off.apply(_this2, args);
+      this._on($element, Pointer.enter, function () {
+        return _this2._off.apply(_this2, args);
       });
 
       return this;
@@ -9281,8 +9277,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
   $(function () {
 
     $('.scroll-to-top').on(Pointer.tap, function () {
-
-      $body.animate({ scrollTop: 0 }, $.ui.animation.normal);
+      return $body.animate({ scrollTop: 0 }, $.ui.animation.normal);
     });
   });
 })(jQuery, _, window, document);
