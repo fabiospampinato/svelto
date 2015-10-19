@@ -18378,14 +18378,26 @@ Prism.languages.js = Prism.languages.javascript;
 
       var result = false;
 
-      for (var i = 0, l = $searchable.length; i < l; i++) {
+      for (var _iterator = $searchable, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-        var rect2 = $.getRect($searchable[i]),
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var searchable = _ref;
+
+        var rect2 = $.getRect(searchable),
             area = $.getOverlappingArea(rect1, rect2);
 
         if (area > 0) {
 
-          nodes.push($searchable[i]);
+          nodes.push(searchable);
           areas.push(area);
         }
       }
@@ -18397,7 +18409,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     if (options.point) {
 
-      var $touched;
+      var $touched = undefined;
 
       if (options.binarySearch) {
 
@@ -18437,13 +18449,25 @@ Prism.languages.js = Prism.languages.javascript;
         return $touched || $empty;
       } else {
 
-        for (var i = 0, l = $searchable.length; i < l; i++) {
+        for (var _iterator2 = $searchable, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+          var _ref2;
 
-          var rect = $.getRect($searchable[i]);
+          if (_isArray2) {
+            if (_i2 >= _iterator2.length) break;
+            _ref2 = _iterator2[_i2++];
+          } else {
+            _i2 = _iterator2.next();
+            if (_i2.done) break;
+            _ref2 = _i2.value;
+          }
+
+          var searchable = _ref2;
+
+          var rect = $.getRect(searchable);
 
           if (options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right) {
 
-            $touched = $searchable.eq(i);
+            $touched = $(searchable);
 
             break;
           }

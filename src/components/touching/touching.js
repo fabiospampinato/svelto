@@ -34,26 +34,26 @@
 
     /* SEARCHABLE */
 
-    var $searchable = options.$not ? this.not ( options.$not ) : this;
+    let $searchable = options.$not ? this.not ( options.$not ) : this;
 
     /* COMPARER */
 
     if ( options.$comparer ) {
 
-      var rect1 = options.$comparer.getRect (),
+      let rect1 = options.$comparer.getRect (),
           nodes = [],
           areas = [];
 
-      var result = false;
+      let result = false;
 
-      for ( var i = 0, l = $searchable.length; i < l; i++ ) {
+      for ( let searchable of $searchable ) {
 
-        var rect2 = $.getRect ( $searchable[i] ),
+        let rect2 = $.getRect ( searchable ),
             area = $.getOverlappingArea ( rect1, rect2 );
 
         if ( area > 0 ) {
 
-          nodes.push ( $searchable[i] );
+          nodes.push ( searchable );
           areas.push ( area );
 
         }
@@ -68,13 +68,13 @@
 
     if ( options.point ) {
 
-      var $touched;
+      let $touched;
 
       if ( options.binarySearch ) {
 
         $searchable.btEach ( function () {
 
-          var rect = $.getRect ( this );
+          let rect = $.getRect ( this );
 
           if ( options.point.Y >= rect.top ) {
 
@@ -120,13 +120,13 @@
 
       } else {
 
-        for ( var i = 0, l = $searchable.length; i < l; i++ ) {
+        for ( let searchable of $searchable ) {
 
-          var rect = $.getRect ( $searchable[i] );
+          let rect = $.getRect ( searchable );
 
           if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
 
-            $touched = $searchable.eq ( i );
+            $touched = $(searchable);
 
             break;
 
