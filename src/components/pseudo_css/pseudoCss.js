@@ -10,16 +10,16 @@
 
   /* VARIABLES */
 
-  var $stylesheet,
+  let $stylesheet,
       tree = {};
 
   /* UTILITIES */
 
-  var cssfy = function ( tree ) {
+  let cssfy = function ( tree ) {
 
-    var css = '';
+    let css = '';
 
-    for ( var selector in tree ) {
+    for ( let selector in tree ) {
 
       css += selector + '{';
 
@@ -29,7 +29,7 @@
 
       } else {
 
-        for ( var property in tree[selector] ) {
+        for ( let property in tree[selector] ) {
 
           css += property + ':' + tree[selector][property] + ';';
 
@@ -45,9 +45,9 @@
 
   };
 
-  var update = function () {
+  let update = function () {
 
-    var css = cssfy ( tree );
+    let css = cssfy ( tree );
 
     $stylesheet.html ( css );
 
@@ -63,7 +63,7 @@
 
     } else {
 
-      var rule = _.isUndefined ( value ) ? property : { property: value };
+      let rule = _.isUndefined ( value ) ? property : { property: value };
 
       tree[selector] = _.merge ( _.isString ( tree[selector] ) ? {} : tree[selector] || {}, rule );
 

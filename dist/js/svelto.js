@@ -428,7 +428,7 @@
 
   /* VARIABLES */
 
-  var $stylesheet,
+  var $stylesheet = undefined,
       tree = {};
 
   /* UTILITIES */
