@@ -22,19 +22,19 @@
 
     /* NAME */
 
-    var name = Widget.config.name;
+    let name = Widget.config.name,
+        nameLowerCase = name.toLowerCase ();
 
     /* CACHE TEMPLATES */
 
-    for ( var tmplName in Widget.config.templates ) {
+    for ( let tmplName in Widget.config.templates ) {
 
-      $.tmpl.cache[name + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
+      $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
 
     }
 
     /* WIDGETIZE */
 
-    console.log("Widgetize function:",Widget.prototype._widgetize);
     Widgetize.add ( Widget.prototype._widgetize );
 
     /* BRIDGE */
@@ -49,13 +49,13 @@
 
     /* NAME */
 
-    var name = Widget.config.name;
+    let name = Widget.config.name;
 
     /* JQUERY PLUGIN */
 
     $.fn[name] = function ( options, ...args ) { //FIXME: We should be able to extend options, not the entire config
 
-      var isMethodCall = _.isString ( options ),
+      let isMethodCall = _.isString ( options ),
           returnValue = this;
 
       if ( isMethodCall ) {
@@ -64,12 +64,11 @@
 
           /* METHOD CALL */
 
-          this.each ( function () {
+          for ( let element of this ) {
 
             /* VARIABLES */
 
-            var methodValue,
-                instance = $.factory.instance ( Widget, false, this );
+            let instance = $.factory.instance ( Widget, false, element );
 
             /* CHECKING VALID CALL */
 
@@ -77,37 +76,31 @@
 
             /* CALLING */
 
-            methodValue = instance[options]( args );
+            let methodValue = instance[options]( args );
 
             if ( !_.isUndefined ( methodValue ) ) {
 
               returnValue = methodValue;
 
-              return false;
+              break;
 
             }
 
-          });
+          }
 
         }
 
       } else {
 
-        /* SUPPORT FOR PASSING MULTIPLE CONFIG OBJECTS */
-
-        if ( args.length > 0 ) {
-
-          options = _.merge.apply ( null, [{}].concat ( [options] ).concat ( args ) );
-
-        }
+        let options = _.cloneDeep ( options );
 
         /* INSTANCE */
 
-        this.each ( function () {
+        for ( let element of this ) {
 
-          $.factory.instance ( Widget, options, this );
+          $.factory.instance ( Widget, options, element );
 
-        });
+        }
 
       }
 
@@ -121,54 +114,16 @@
 
   $.factory.instance = function ( Widget, options, element ) {
 
-    /* NAME */
-
-    var name = Widget.config.name;
-
-    /* INSTANCE */
-
-    var instance = $.data ( element, 'instance.' + name );
+    let name = Widget.config.name,
+        instance = $.data ( element, 'instance.' + name );
 
     if ( !instance ) {
 
-      instance = new Widget ( $.factory.config ( Widget, options ), element );
-
-      $.data ( element, 'instance.' + name, instance );
+      instance = new Widget ( options, element );
 
     }
 
     return instance;
-
-  };
-
-  /* FACTORY CONFIG */
-
-  $.factory.config = function ( Widget, options ) {
-
-    /* VARIABLES */
-
-    var configs = [{}],
-        prototype = Widget.prototype;
-
-    /* CHAIN */
-
-    while ( prototype ) {
-
-      configs.push ( prototype.constructor.config );
-
-      prototype = Object.getPrototypeOf ( prototype );
-
-    }
-
-    /* CONFIG */
-
-    if ( options ) {
-
-      configs.push ({ options: options });
-
-    }
-
-    return _.merge.apply ( null, configs );
 
   };
 

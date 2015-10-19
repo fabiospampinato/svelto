@@ -9,8 +9,8 @@
  * @requires ../tmpl/tmpl.js
  * ========================================================================= */
 
-//TODO: Add support for _trigger -> preventDefault //TODO: Check if it works right now
-//TODO: Add support for element-level options via `data-name-options`
+//TODO: Add support for element-level options via `data-nameLowerCase-options`
+//TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`
 
 (function ( $, _, window, document, undefined ) {
 
@@ -18,60 +18,52 @@
 
   /* CONFIG */
 
-  var config = {
-
-    /* NAMES */
-
-    namespace: false,
-    name: 'widget',
-    fullName: 'widget', //INFO: `namespace.name`
-
-    /* HTML */
-
-    html: '<div>', //INFO: It will be used as a constructor if no element or base template is provided
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    disabled: false, //INFO: Determines if the widget is enabled or disabled
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },
-
-    /* OPTIONS */
-
     options: {
-      errors: {}, //INFO: It contains all the errors that a widget can trigger
+      errors: { //INFO: It contains all the errors that a widget can trigger
+        uninitializable: 'WidgetUninitializable' //INFO: Triggered when the widget is not initializable
+      },
       datas: {}, //INFO: CSS data-* names
-      classes: {}, //INFO: CSS classes to attach inside the widget
+      classes: { //INFO: CSS classes to attach inside the widget
+        disabled: 'disabled' //INFO: Attached to disabled widgets
+      },
       selectors: {}, //INFO: Selectors to use inside the widget
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
-      callbacks: {}, //INFO: Callbacks to trigger on specific events
-      disabled: false //INFO: Determines if the widget is enabled or disabled
+      callbacks: {} //INFO: Callbacks to trigger on specific events
     }
-
   };
 
   /* WIDGET */
 
   class Widget {
 
-    constructor ( config, element ) {
+    constructor ( options, element ) {
 
       /* ATTACH CONFIG */
 
-      _.extend ( this, config );
+      _.extend ( this, this._getConfig ( options ) );
 
       /* CHECK IF INITIALIZABLE */
 
-      if ( !element && !this.templates.base && !this.html ) {
+      if ( !element && !this.templates.base ) {
 
-        throw 'WidgetUninitializable';
+        throw this.errors.uninitializable;
 
       }
 
       /* INIT ELEMENT */
 
-      this.$element = $(element || ( this.templates.base ? this._tmpl ( 'base', this.options ) : this.html ) );
+      this.$element = $(element || this._tmpl ( 'base', this.options ) );
       this.element = this.$element[0];
+
+      /* ATTACH INSTANCE */
+
+      $.data ( this.element, 'instance.' + this.name, this );
 
       /* SET GUID */
 
@@ -79,19 +71,7 @@
 
       /* SET DISABLED */
 
-      this.options.disabled = this.options.disabled || this.$element.hasClass ( 'disabled' );
-      
-      /* ON $ELEMENT REMOVE -> WIDGET DESTROY */
-
-      this._on ( true, 'remove', function ( event ) {
-
-        if ( event.target === this.element ) {
-
-          this.destroy ( event );
-
-        }
-
-      });
+      this.disabled = this.$element.hasClass ( this.options.classes.disabled );
 
       /* CALLBACKS */
 
@@ -101,21 +81,74 @@
 
     }
 
+    _getConfig ( options ) {
+
+      /* VARIABLES */
+
+      let configs = [],
+          prototype = Object.getPrototypeOf ( this );
+
+      /* PROTOTYPE CHAIN */
+
+      while ( prototype ) {
+
+        if ( prototype.constructor.config ) {
+
+          configs.push ( prototype.constructor.config );
+
+        }
+
+        prototype = Object.getPrototypeOf ( prototype );
+
+      }
+
+      /* CONFIG */
+
+      configs.push ( {} );
+
+      configs.reverse ();
+
+      if ( options ) {
+
+        configs.push ({ options: options });
+
+      }
+
+      let createOptions = this._createOptions ();
+
+      if ( createOptions ) {
+
+        configs.push ({ options: createOptions });
+
+      }
+
+      return _.merge ( ...configs );
+
+    }
+
+    destroy () {
+
+      this._destroy ();
+
+      $.removeData ( this.element, 'instance.' + this.name );
+
+      return this;
+
+    }
+
+    /* SPECIAL */
+
+    _createOptions () {} //INFO: Used to pass extra options
+
     _widgetize () {} //INFO: Gets a parent node, from it find and initialize all the widgets
 
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function
     _events () {} //INFO: Bind the event handlers inside this function
 
-    destroy () {
+    _destroy () {} //INFO: Clean the stuff, remove possible memory leaks
 
-      this._destroy ();
-
-      $.removeData ( this.element, this.fullName );
-
-    }
-
-    _destroy () {}
+    /* WIDGET */
 
     widget () {
 
@@ -123,17 +156,19 @@
 
     }
 
+    /* INSTANCE */
+
     instance () {
 
       return this;
 
     }
 
-    /* OPTIONS METHODS */
+    /* OPTIONS */
 
     option ( key, value ) {
 
-      if ( arguments.length === 0 ) { //INFO: Returns a clone of the options object
+      if ( !key ) { //INFO: Returns a clone of the options object
 
         return _.cloneDeep ( this.options );
 
@@ -141,19 +176,19 @@
 
       if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
 
-        var options = {},
+        let options = {},
             parts = key.split ( '.' );
 
         key = parts.shift ();
 
         if ( parts.length ) {
 
-          var curOption = options[key] = _.extend ( {}, this.options[key] );
+          let currentOption = options[key] = _.extend ( {}, this.options[key] );
 
-          for ( var i = 0; i < parts.length - 1; i++ ) {
+          for ( let part of parts ) {
 
-            curOption[parts[i]] = curOption[parts[i]] || {};
-            curOption = curOption[parts[i]];
+            currentOption[part] = currentOption[part] || {};
+            currentOption = currentOption[part];
 
           }
 
@@ -161,11 +196,11 @@
 
           if ( arguments.length === 1 ) {
 
-            return _.isUndefined ( curOption[key] ) ? null : curOption[key];
+            return _.isUndefined ( currentOption[key] ) ? null : currentOption[key];
 
           }
 
-          curOption[key] = value;
+          currentOption[key] = value;
 
         } else { //INFO: Handle single level property
 
@@ -191,7 +226,7 @@
 
     _setOptions ( options ) {
 
-      for ( var key in options ) {
+      for ( let key in options ) {
 
         this._setOption ( key, options[key] );
 
@@ -205,12 +240,6 @@
 
       this.options[key] = value;
 
-      if ( key === 'disabled' ) {
-
-        this.$element.toggleClass ( 'disabled', !!value );
-
-      }
-
       return this;
 
     }
@@ -219,13 +248,21 @@
 
     enable () {
 
-      return this._setOptions ({ disabled: false });
+      if ( this.disabled ) {
+
+        this.disabled = false;
+
+        this.$element.removeClass ( this.options.classes.disabled );
+
+      }
+
+      return this;
 
     }
 
     isEnabled () {
 
-      return !this.options.disabled;
+      return !this.disabled;
 
     }
 
@@ -233,13 +270,21 @@
 
     disable () {
 
-      return this._setOptions ({ disabled: true });
+      if ( !this.disabled ) {
+
+        this.disabled = true;
+
+        this.$element.addClass ( this.options.classes.disabled );
+
+      }
+
+      return this;
 
     }
 
     isDisabled () {
 
-      return this.options.disabled;
+      return this.disabled;
 
     }
 
@@ -248,10 +293,6 @@
     _on ( suppressDisabledCheck, $element, events, selector, handler, onlyOne ) {
 
       //TODO: Add support for custom data
-
-      /* SAVE A REFERENCE TO THIS */
-
-      var self = this;
 
       /* NORMALIZING PARAMETERS */
 
@@ -284,47 +325,31 @@
 
       }
 
-      /* SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD */
-
-      handler = _.isString ( handler ) ? this[handler] : handler;
-
       /* PROXY */
 
-      function handlerProxy () {
+      let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && self.options.disabled ) return;
+        if ( !suppressDisabledCheck && this.disabled ) return;
 
-        var args = _.slice ( arguments );
+        return handler.apply ( this, args );
 
-        args.push ( this );
-
-        return handler.apply ( self, args );
-
-      }
+      };
 
       /* PROXY GUID */
 
-      handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
+      handlerProxy.guid = handler.guid = ( handler.guid || $.guid++ );
 
       /* TRIGGERING */
 
-      if ( selector ) { //INFO: Delegated
-
-        $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
-
-      } else { //INFO: Normal
-
-        $element[onlyOne ? 'one' : 'on'] ( events, handlerProxy );
-
-      }
+      $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
       return this;
 
     }
 
-    _one ( ...args ) {
+    _one ( ...args ) { //FIXME: Does it work?
 
-      this._on.apply ( this, args );
+      return this._on ( ...args, true );
 
     }
 
@@ -339,17 +364,19 @@
 
       }
 
-      this._on ( $element, Pointer.enter, function () {
+      this._on ( $element, Pointer.enter, () => {
 
-        this._on.apply ( this, args );
+        this._on ( ...args );
+
+      });
+
+      this._on ( $element, Pointer.leave, () => {
+
+        this._off ( ...args );
 
       });
 
-      this._on ( $element, Pointer.leave, function () {
-
-        this._off.apply ( this, args );
-
-      });
+      return this;
 
     }
 
@@ -365,10 +392,6 @@
 
       }
 
-      /* SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD */
-
-      handler = _.isString ( handler ) ? this[handler] : handler;
-
       /* REMOVING HANDLER */
 
       $element.off ( events, handler );
@@ -377,21 +400,17 @@
 
     }
 
-    _trigger ( events, data ) {
+    _trigger ( events, data = {} ) {
 
-      data = data || {};
+      let name = this.name.toLowerCase ();
 
       events = events.split ( ' ' );
 
-      for ( var ei = 0, el = events.length; ei < el; ei++ ) {
+      for ( let event of events ) {
 
-        this.$element.trigger ( this.name + ':' + events[ei], data );
+        this.$element.trigger ( name + ':' + event, data );
 
-        if ( _.isFunction ( this.options.callbacks[events[ei]] ) ) {
-
-          this.options.callbacks[events[ei]].call ( this.element, data );
-
-        }
+        this.options.callbacks[event].call ( this.element, data );
 
       }
 
@@ -403,13 +422,7 @@
 
     _delay ( fn, delay ) {
 
-      var instance = this;
-
-      return setTimeout ( function () {
-
-        fn.apply ( instance );
-
-      }, delay || 0 );
+      return setTimeout ( () => fn (), delay || 0 );
 
     }
 
@@ -425,13 +438,7 @@
 
     _frame ( fn ) {
 
-      var instance = this;
-
-      return $.frame ( function () {
-
-        fn.apply ( instance );
-
-      });
+      return $.frame ( () => fn () );
 
     }
 
@@ -439,7 +446,11 @@
 
     _debounce ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
 
-      return _.debounce ( fn, wait, options );
+      let debounced = _.debounce ( fn, wait, options );
+
+      debounced.guid = fn.guid = ( fn.guid || $.guid++ );
+
+      return debounced;
 
     }
 
@@ -447,15 +458,19 @@
 
     _throttle ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
 
-      return _.throttle ( fn, wait, options );
+      let throttled = _.throttle ( fn, wait, options );
+
+      throttled.guid = fn.guid = ( fn.guid || $.guid++ );
+
+      return throttled;
 
     }
 
     /* TEMPLATE */
 
-    _tmpl ( name, options ) {
+    _tmpl ( name, options = {} ) {
 
-      return $.tmpl ( this.name + '.' + name, options || {} );
+      return $.tmpl ( this.name.toLowerCase () + '.' + name, options );
 
     }
 
