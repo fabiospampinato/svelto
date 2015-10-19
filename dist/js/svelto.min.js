@@ -3268,46 +3268,51 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 ;(function (_, window, document, undefined) {
 
   'use strict';
 
   /* COLOR HELPER */
 
-  window.ColorHelper = {
+  window.ColorHelper = (function () {
+    function _class() {
+      _classCallCheck(this, _class);
+    }
 
     /* COLOR SPACES CONVERTERS */
 
-    hex2rgb: function hex2rgb(hex) {
+    _class.hex2rgb = function hex2rgb(hex) {
 
       return {
-        r: this.hex2dec(hex.r),
-        g: this.hex2dec(hex.g),
-        b: this.hex2dec(hex.b)
+        r: ColorHelper.hex2dec(hex.r),
+        g: ColorHelper.hex2dec(hex.g),
+        b: ColorHelper.hex2dec(hex.b)
       };
-    },
+    };
 
-    hex2hsv: function hex2hsv(hex) {
+    _class.hex2hsv = function hex2hsv(hex) {
 
-      return this.rgb2hsv(this.hex2rgb(hex));
-    },
+      return ColorHelper.rgb2hsv(ColorHelper.hex2rgb(hex));
+    };
 
-    rgb2hex: function rgb2hex(rgb) {
+    _class.rgb2hex = function rgb2hex(rgb) {
 
       return {
-        r: this.dec2hex(rgb.r),
-        g: this.dec2hex(rgb.g),
-        b: this.dec2hex(rgb.b)
+        r: ColorHelper.dec2hex(rgb.r),
+        g: ColorHelper.dec2hex(rgb.g),
+        b: ColorHelper.dec2hex(rgb.b)
       };
-    },
+    };
 
-    rgb2hsv: function rgb2hsv(rgb) {
+    _class.rgb2hsv = function rgb2hsv(rgb) {
 
       var r = rgb.r / 255,
           g = rgb.g / 255,
           b = rgb.b / 255,
-          h,
-          s,
+          h = undefined,
+          s = undefined,
           v = Math.max(r, g, b),
           diff = v - Math.min(r, g, b),
           diffc = function diffc(c) {
@@ -3350,18 +3355,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         s: s * 100, //FIXME: removed Math.round, test if is ok
         v: v * 100 //FIXME: removed Math.round, test if is ok
       };
-    },
+    };
 
-    hsv2hex: function hsv2hex(hsv) {
+    _class.hsv2hex = function hsv2hex(hsv) {
 
-      return this.rgb2hex(this.hsv2rgb(hsv));
-    },
+      return ColorHelper.rgb2hex(ColorHelper.hsv2rgb(hsv));
+    };
 
-    hsv2rgb: function hsv2rgb(hsv) {
+    _class.hsv2rgb = function hsv2rgb(hsv) {
 
-      var r,
-          g,
-          b,
+      var r = undefined,
+          g = undefined,
+          b = undefined,
           h = hsv.h,
           s = hsv.s,
           v = hsv.v;
@@ -3374,7 +3379,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         r = g = b = v;
       } else {
 
-        var i, f, p, q, t;
+        var i = undefined,
+            f = undefined,
+            p = undefined,
+            q = undefined,
+            t = undefined;
 
         h /= 60;
         i = Math.floor(h);
@@ -3428,9 +3437,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         g: Math.round(g * 255),
         b: Math.round(b * 255)
       };
-    },
+    };
 
-    hsv2hsl: function hsv2hsl(hsv) {
+    _class.hsv2hsl = function hsv2hsl(hsv) {
 
       var s = hsv.s / 100,
           v = hsv.v / 100,
@@ -3442,9 +3451,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         s: tempS / (tempL <= 1 ? tempL : 2 - tempL) * 100,
         l: tempL / 2 * 100
       };
-    },
+    };
 
-    hsl2hsv: function hsl2hsv(hsl) {
+    _class.hsl2hsv = function hsl2hsv(hsl) {
 
       var l = hsl.l / 100 * 2,
           s = hsl.s / 100 * (l <= 1 ? l : 2 - l);
@@ -3454,21 +3463,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         s: 2 * s / (l + s) * 100,
         v: (l + s) / 2 * 100
       };
-    },
+    };
 
     /* SCALE CONVERTERS */
 
-    dec2hex: function dec2hex(dec) {
+    _class.dec2hex = function dec2hex(dec) {
 
       return _.padLeft(dec.toString(16), 2, '0');
-    },
+    };
 
-    hex2dec: function hex2dec(hex) {
+    _class.hex2dec = function hex2dec(hex) {
 
       return parseInt(hex, 16);
-    }
+    };
 
-  };
+    return _class;
+  })();
 })(_, window, document);
 
 /* =========================================================================

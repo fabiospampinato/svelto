@@ -12,39 +12,39 @@
 
   /* COLOR HELPER */
 
-  window.ColorHelper = {
+  window.ColorHelper = class {
 
     /* COLOR SPACES CONVERTERS */
 
-    hex2rgb ( hex ) {
+    static hex2rgb ( hex ) {
 
       return {
-        r: this.hex2dec ( hex.r ),
-        g: this.hex2dec ( hex.g ),
-        b: this.hex2dec ( hex.b )
+        r: ColorHelper.hex2dec ( hex.r ),
+        g: ColorHelper.hex2dec ( hex.g ),
+        b: ColorHelper.hex2dec ( hex.b )
       };
 
-    },
+    }
 
-    hex2hsv ( hex ) {
+    static hex2hsv ( hex ) {
 
-      return this.rgb2hsv ( this.hex2rgb ( hex ) );
+      return ColorHelper.rgb2hsv ( ColorHelper.hex2rgb ( hex ) );
 
-    },
+    }
 
-    rgb2hex ( rgb ) {
+    static rgb2hex ( rgb ) {
 
       return {
-        r: this.dec2hex ( rgb.r ),
-        g: this.dec2hex ( rgb.g ),
-        b: this.dec2hex ( rgb.b )
+        r: ColorHelper.dec2hex ( rgb.r ),
+        g: ColorHelper.dec2hex ( rgb.g ),
+        b: ColorHelper.dec2hex ( rgb.b )
       };
 
-    },
+    }
 
-    rgb2hsv ( rgb ) {
+    static rgb2hsv ( rgb ) {
 
-      var r = rgb.r / 255,
+      let r = rgb.r / 255,
           g = rgb.g / 255,
           b = rgb.b / 255,
           h,
@@ -63,7 +63,7 @@
 
         s = diff / v;
 
-        var rr = diffc ( r ),
+        let rr = diffc ( r ),
             gg = diffc ( g ),
             bb = diffc ( b );
 
@@ -98,17 +98,17 @@
         v: v * 100 //FIXME: removed Math.round, test if is ok
       };
 
-    },
+    }
 
-    hsv2hex ( hsv ) {
+    static hsv2hex ( hsv ) {
 
-      return this.rgb2hex ( this.hsv2rgb ( hsv ) );
+      return ColorHelper.rgb2hex ( ColorHelper.hsv2rgb ( hsv ) );
 
-    },
+    }
 
-    hsv2rgb ( hsv ) {
+    static hsv2rgb ( hsv ) {
 
-      var r,
+      let r,
           g,
           b,
           h = hsv.h,
@@ -124,7 +124,7 @@
 
       } else {
 
-        var i, f, p, q, t;
+        let i, f, p, q, t;
 
         h /= 60;
         i = Math.floor ( h );
@@ -180,11 +180,11 @@
         b: Math.round ( b * 255 )
       };
 
-    },
+    }
 
-    hsv2hsl ( hsv ) {
+    static hsv2hsl ( hsv ) {
 
-      var s = hsv.s / 100,
+      let s = hsv.s / 100,
           v = hsv.v / 100,
           tempL = ( 2 - s ) * v,
           tempS = s * v;
@@ -195,11 +195,11 @@
         l: ( tempL / 2 ) * 100
       };
 
-    },
+    }
 
-    hsl2hsv ( hsl ) {
+    static hsl2hsv ( hsl ) {
 
-      var l = hsl.l / 100 * 2,
+      let l = hsl.l / 100 * 2,
           s = ( hsl.s / 100 ) * ( l <= 1 ? l : 2 - l );
 
       return {
@@ -208,17 +208,17 @@
         v: ( l + s ) / 2 * 100
       };
 
-    },
+    }
 
     /* SCALE CONVERTERS */
 
-    dec2hex ( dec ) {
+    static dec2hex ( dec ) {
 
       return _.padLeft ( dec.toString ( 16 ), 2, '0' );
 
-    },
+    }
 
-    hex2dec ( hex ) {
+    static hex2dec ( hex ) {
 
       return parseInt ( hex, 16 );
 
