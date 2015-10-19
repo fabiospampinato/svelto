@@ -129,9 +129,9 @@ gulp.task ( 'jade', ['examples-clean'], function () {
 
 gulp.task ( 'js-temp', function () {
 
-  var dependencyIndex = 0;
-
   if ( isDevelopment ) {
+
+    var dependencyIndex = 0;
 
     return gulp.src ( 'src/components/**/*.js' )
                .pipe ( sort () )
@@ -150,6 +150,9 @@ gulp.task ( 'js-temp', function () {
                }))
                .pipe ( flatten () )
                .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
+               .on ( 'error', function ( err ) {
+                 gutil.log ( err.message );
+               })
                .pipe ( gulp.dest ( '.temp/js' ) );
 
   }
@@ -180,6 +183,9 @@ gulp.task ( 'js', ['js-temp'], function () {
                .pipe ( flatten () )
                .pipe ( concat ( 'svelto.js' ) )
                .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
+               .on ( 'error', function ( err ) {
+                 gutil.log ( err.message );
+               })
                .pipe ( gulp.dest ( 'dist/js' ) )
                .pipe ( uglify () )
                .pipe ( rename ( 'svelto.min.js' ) )
@@ -209,6 +215,9 @@ gulp.task ( 'scss', function () {
                outputStyle: 'expanded',
                precision: 10
              }))
+             .on ( 'error', function ( err ) {
+               gutil.log ( err.message );
+             })
             .pipe ( gulpif ( isProduction, autoprefixer ({
                browsers: ['ie >= 11', 'ie_mob >= 11', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
                cascade: true,

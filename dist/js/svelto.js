@@ -492,7 +492,6 @@
 
 /* =========================================================================
  * Svelto - UI
- * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -550,7 +549,6 @@
 
 /* =========================================================================
  * Svelto - Core
- * http://getsvelto.com/@FILE-NAME
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -701,19 +699,15 @@
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* WIDGET */
+  /* CONFIG */
 
-  $.Widget = function () {};
-
-  $.Widget._childConstructors = []; //TODO: Remove if not necessary
-
-  /* PROTOTYPE */
-
-  $.Widget.prototype = {
+  var config = {
 
     /* NAMES */
 
@@ -741,41 +735,41 @@
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       callbacks: {}, //INFO: Callbacks to trigger on specific events
       disabled: false //INFO: Determines if the widget is enabled or disabled
-    },
+    }
 
-    /* WIDGET METHODS */
+  };
 
-    _create: function _create(options, element) {
+  /* WIDGET */
 
-      // CHECK IF INITIALIZABLE
+  var Widget = (function () {
+    function Widget(config, element) {
+      _classCallCheck(this, Widget);
+
+      /* ATTACH CONFIG */
+
+      _.extend(this, config);
+
+      /* CHECK IF INITIALIZABLE */
 
       if (!element && !this.templates.base && !this.html) {
 
         throw 'WidgetUninitializable';
       }
 
-      // MERGE OPTIONS
-
-      this.options = _.merge({}, this.options, this._createOptions(), options);
-
-      // INIT ELEMENT
+      /* INIT ELEMENT */
 
       this.$element = $(element || (this.templates.base ? this._tmpl('base', this.options) : this.html));
       this.element = this.$element[0];
 
-      // SET GUID
+      /* SET GUID */
 
       this.guid = $.guid++;
 
-      // SET DISABLED
+      /* SET DISABLED */
 
       this.options.disabled = this.options.disabled || this.$element.hasClass('disabled');
 
-      // SAVE WIDGET INSTANCE
-
-      $.data(this.element, this.fullName, this);
-
-      // ON $ELEMENT REMOVE -> WIDGET DESTROY
+      /* ON $ELEMENT REMOVE -> WIDGET DESTROY */
 
       this._on(true, 'remove', function (event) {
 
@@ -785,39 +779,53 @@
         }
       });
 
-      // CALLBACKS
+      /* CALLBACKS */
 
       this._variables();
-
       this._init();
-
       this._events();
-    },
+    }
 
-    _createOptions: _.noop, //INFO: Returns an options object that will be used for the current widget instance, generated during widget instantiation
+    /* BINDING */
 
-    _widgetize: _.noop, //INFO: Gets a parent node, from it find and initialize all the widgets
-    _variables: _.noop, //INFO: Init your variables inside this function
-    _init: _.noop, //INFO: Perform the init stuff inside this function
-    _events: _.noop, //INFO: Bind the event handlers inside this function
+    Widget.prototype._widgetize = function _widgetize() {};
 
-    destroy: function destroy() {
+    //INFO: Gets a parent node, from it find and initialize all the widgets
+
+    Widget.prototype._variables = function _variables() {};
+
+    //INFO: Init your variables inside this function
+
+    Widget.prototype._init = function _init() {};
+
+    //INFO: Perform the init stuff inside this function
+
+    Widget.prototype._events = function _events() {};
+
+    //INFO: Bind the event handlers inside this function
+
+    Widget.prototype.destroy = function destroy() {
 
       this._destroy();
 
       $.removeData(this.element, this.fullName);
-    },
+    };
 
-    _destroy: _.noop,
+    Widget.prototype._destroy = function _destroy() {};
 
-    widget: function widget() {
+    Widget.prototype.widget = function widget() {
 
       return this.$element;
-    },
+    };
+
+    Widget.prototype.instance = function instance() {
+
+      return this;
+    };
 
     /* OPTIONS METHODS */
 
-    option: function option(key, value) {
+    Widget.prototype.option = function option(key, value) {
 
       if (arguments.length === 0) {
         //INFO: Returns a clone of the options object
@@ -868,9 +876,9 @@
       }
 
       return this;
-    },
+    };
 
-    _setOptions: function _setOptions(options) {
+    Widget.prototype._setOptions = function _setOptions(options) {
 
       for (var key in options) {
 
@@ -878,9 +886,9 @@
       }
 
       return this;
-    },
+    };
 
-    _setOption: function _setOption(key, value) {
+    Widget.prototype._setOption = function _setOption(key, value) {
 
       this.options[key] = value;
 
@@ -890,43 +898,43 @@
       }
 
       return this;
-    },
+    };
 
     /* ENABLED */
 
-    enable: function enable() {
+    Widget.prototype.enable = function enable() {
 
       return this._setOptions({ disabled: false });
-    },
+    };
 
-    isEnabled: function isEnabled() {
+    Widget.prototype.isEnabled = function isEnabled() {
 
       return !this.options.disabled;
-    },
+    };
 
     /* DISABLED */
 
-    disable: function disable() {
+    Widget.prototype.disable = function disable() {
 
       return this._setOptions({ disabled: true });
-    },
+    };
 
-    isDisabled: function isDisabled() {
+    Widget.prototype.isDisabled = function isDisabled() {
 
       return this.options.disabled;
-    },
+    };
 
     /* EVENTS */
 
-    _on: function _on(suppressDisabledCheck, $element, events, selector, handler, onlyOne) {
+    Widget.prototype._on = function _on(suppressDisabledCheck, $element, events, selector, handler, onlyOne) {
 
       //TODO: Add support for custom data
 
-      // SAVE A REFERENCE TO THIS
+      /* SAVE A REFERENCE TO THIS */
 
-      var instance = this;
+      var self = this;
 
-      // NORMALIZING OPTIONS
+      /* NORMALIZING PARAMETERS */
 
       if (!_.isBoolean(suppressDisabledCheck)) {
 
@@ -954,52 +962,51 @@
         selector = false;
       }
 
-      // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
+      /* SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD */
 
       handler = _.isString(handler) ? this[handler] : handler;
 
-      // PROXY
+      /* PROXY */
 
       function handlerProxy() {
 
-        if (!suppressDisabledCheck && instance.options.disabled) return;
+        if (!suppressDisabledCheck && self.options.disabled) return;
 
         var args = _.slice(arguments);
 
         args.push(this);
 
-        return handler.apply(instance, args);
+        return handler.apply(self, args);
       }
 
-      // PROXY GUID
+      /* PROXY GUID */
 
       handlerProxy.guid = handler.guid = handler.guid || handlerProxy.guid || $.guid++;
 
-      // TRIGGERING
+      /* TRIGGERING */
 
       if (selector) {
-        // DELEGATED
+        //INFO: Delegated
 
         $element[onlyOne ? 'one' : 'on'](events, selector, handlerProxy);
       } else {
-        // NORMAL
+        //INFO: Normal
 
         $element[onlyOne ? 'one' : 'on'](events, handlerProxy);
       }
 
       return this;
-    },
+    };
 
-    _one: function _one() {
-
-      var args = arguments;
-
-      Array.prototype.push.call(args, true);
+    Widget.prototype._one = function _one() {
+      for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
 
       this._on.apply(this, args);
-    },
+    };
 
-    _onHover: function _onHover($element, args) {
+    Widget.prototype._onHover = function _onHover($element, args) {
 
       //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
 
@@ -1018,11 +1025,11 @@
 
         this._off.apply(this, args);
       });
-    },
+    };
 
-    _off: function _off($element, events, handler) {
+    Widget.prototype._off = function _off($element, events, handler) {
 
-      // NORMALIZING OPTIONS
+      /* NORMALIZING PARAMETERS */
 
       if (!handler) {
 
@@ -1031,18 +1038,18 @@
         $element = this.$element;
       }
 
-      // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
+      /* SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD */
 
       handler = _.isString(handler) ? this[handler] : handler;
 
-      // REMOVING HANDLER
+      /* REMOVING HANDLER */
 
       $element.off(events, handler);
 
       return this;
-    },
+    };
 
-    _trigger: function _trigger(events, data) {
+    Widget.prototype._trigger = function _trigger(events, data) {
 
       data = data || {};
 
@@ -1059,11 +1066,11 @@
       }
 
       return this;
-    },
+    };
 
     /* DELAYING */
 
-    _delay: function _delay(fn, delay) {
+    Widget.prototype._delay = function _delay(fn, delay) {
 
       var instance = this;
 
@@ -1071,18 +1078,18 @@
 
         fn.apply(instance);
       }, delay || 0);
-    },
+    };
 
     /* DEFER */
 
-    _defer: function _defer(fn) {
+    Widget.prototype._defer = function _defer(fn) {
 
       return this._delay(fn);
-    },
+    };
 
     /* FRAME */
 
-    _frame: function _frame(fn) {
+    Widget.prototype._frame = function _frame(fn) {
 
       var instance = this;
 
@@ -1090,62 +1097,66 @@
 
         fn.apply(instance);
       });
-    },
+    };
 
     /* DEBOUNCING */
 
-    _debounce: function _debounce(fn, wait, options) {
+    Widget.prototype._debounce = function _debounce(fn, wait, options) {
       //TODO: Test it, expecially regarding the `this` variable
 
       return _.debounce(fn, wait, options);
-    },
+    };
 
     /* THROTTLING */
 
-    _throttle: function _throttle(fn, wait, options) {
+    Widget.prototype._throttle = function _throttle(fn, wait, options) {
       //TODO: Test it, expecially regarding the `this` variable
 
       return _.throttle(fn, wait, options);
-    },
+    };
 
     /* TEMPLATE */
 
-    _tmpl: function _tmpl(name, options) {
+    Widget.prototype._tmpl = function _tmpl(name, options) {
 
-      return $.tmpl(this.fullName + '.' + name, options || {});
-    },
+      return $.tmpl(this.name + '.' + name, options || {});
+    };
 
     /* INSERTION */
 
-    insertBefore: function insertBefore(selector) {
+    Widget.prototype.insertBefore = function insertBefore(selector) {
 
       this.$element.insertBefore(selector);
 
       return this;
-    },
+    };
 
-    insertAfter: function insertAfter(selector) {
+    Widget.prototype.insertAfter = function insertAfter(selector) {
 
       this.$element.insertAfter(selector);
 
       return this;
-    },
+    };
 
-    prependTo: function prependTo(selector) {
+    Widget.prototype.prependTo = function prependTo(selector) {
 
       this.$element.prependTo(selector);
 
       return this;
-    },
+    };
 
-    appendTo: function appendTo(selector) {
+    Widget.prototype.appendTo = function appendTo(selector) {
 
       this.$element.appendTo(selector);
 
       return this;
-    }
+    };
 
-  };
+    return Widget;
+  })();
+
+  Svelto.Widget = Widget;
+  Svelto.Widget.config = config;
 })(jQuery, _, window, document);
 
 /* =========================================================================
@@ -1440,8 +1451,6 @@
  * @requires ../pointer/Pointer.js
  *=========================================================================*/
 
-//FIXME: Extending widgets is not working!
-
 'use strict';
 
 (function ($, _, window, document, undefined) {
@@ -1450,240 +1459,148 @@
 
   /* FACTORY */
 
-  $.factory = function (originalName, base, prototype) {
+  $.factory = function (Widget) {
 
-    // NAME
+    /* NAME */
 
-    var nameParts = originalName.split('.'),
-        namespace = nameParts.length > 1 ? nameParts[0] : false,
-        name = nameParts.length > 1 ? nameParts[1] : nameParts[0],
-        fullName = namespace ? namespace + '.' + name : name;
+    var name = Widget.config.name;
 
-    // NO BASE -> DEFAULT WIDGET BASE
+    /* CACHE TEMPLATES */
 
-    if (!prototype) {
+    for (var tmplName in Widget.config.templates) {
 
-      prototype = base;
-      base = $.Widget;
+      $.tmpl.cache[name + '.' + tmplName] = $.tmpl(Widget.config.templates[tmplName]);
     }
 
-    // INIT NAMESPACE
+    /* WIDGETIZE */
 
-    if (namespace) {
+    console.log("Widgetize function:", Widget.prototype._widgetize);
+    Widgetize.add(Widget.prototype._widgetize);
 
-      $[namespace] = $[namespace] || {};
-    }
+    /* BRIDGE */
 
-    // CONSTRUCTOR
-
-    var existingConstructor = namespace ? $[namespace][name] : $[name];
-
-    var constructor = function constructor(options, element) {
-
-      this._create(options, element);
-    };
-
-    // SET CONSTRUCTOR
-
-    if (namespace) {
-
-      $[namespace][name] = constructor;
-    } else {
-
-      $[name] = constructor;
-    }
-
-    // EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES
-
-    _.extend(constructor, existingConstructor, {
-      _proto: _.extend({}, prototype),
-      _childConstructors: []
-    });
-
-    // BASE PROTOTYPE
-
-    var basePrototype = new base();
-
-    basePrototype.templates = _.merge({}, basePrototype.templates, prototype.templates); //INFO: We need to make the templates hash a property directly on the new instance otherwise we'll modify the templates hash on the prototype that we're inheriting from
-    basePrototype.options = _.merge({}, basePrototype.options, prototype.options); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
-
-    // PROXIED PROTOTYPE
-
-    var proxiedPrototype = {};
-
-    for (var prop in prototype) {
-
-      if (!_.isFunction(prototype[prop])) {
-
-        if (!_.isPlainObject(prototype[prop])) {
-
-          proxiedPrototype[prop] = prototype[prop];
-        }
-      } else {
-
-        proxiedPrototype[prop] = (function (prop) {
-
-          var _super = function _super() {
-            return base.prototype[prop].apply(this, arguments);
-          };
-
-          return function () {
-
-            var __super = this._super,
-                returnValue;
-
-            this._super = _super;
-
-            returnValue = prototype[prop].apply(this, arguments);
-
-            this._super = __super;
-
-            return returnValue;
-          };
-        })(prop);
-      }
-    }
-
-    // CONSTRUCTOR PROTOTYPE
-
-    constructor.prototype = _.extend(basePrototype, proxiedPrototype, {
-      constructor: constructor,
-      namespace: namespace,
-      name: name,
-      fullName: fullName
-    });
-
-    // CACHE TEMPLATES
-
-    for (var tmpl_name in prototype.templates) {
-
-      if (prototype.templates[tmpl_name]) {
-
-        $.tmpl.cache[fullName + '.' + tmpl_name] = $.tmpl(prototype.templates[tmpl_name]);
-      }
-    }
-
-    // UPDATE PROTOTYPE CHAIN
-
-    if (existingConstructor) {
-
-      for (var i = 0, l = existingConstructor._childConstructors.length; i < l; i++) {
-
-        var childPrototype = existingConstructor._childConstructors[i].prototype;
-
-        $.factory(childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.name : childPrototype.name, constructor, existingConstructor._childConstructors[i]._proto);
-      }
-
-      delete existingConstructor._childConstructors;
-    } else {
-
-      base._childConstructors.push(constructor);
-    }
-
-    // CONSTRUCT
-
-    $.factory.bridge(name, constructor);
-
-    Widgetize.add(constructor.prototype._widgetize);
-
-    // RETURN
-
-    return constructor;
+    $.factory.bridge(Widget);
   };
 
   /* FACTORY BRIDGE */
 
-  $.factory.bridge = function (name, object) {
+  $.factory.bridge = function (Widget) {
 
-    // NAME
+    /* NAME */
 
-    var fullName = object.prototype.fullName;
+    var name = Widget.config.name;
 
-    // PLUGIN
+    /* JQUERY PLUGIN */
 
     $.fn[name] = function (options) {
+      for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
 
-      if (this.length === 0 && !object.prototype.templates.base) return; //INFO: Nothing to work on
+      //FIXME: We should be able to extend options, not the entire config
 
       var isMethodCall = _.isString(options),
-          args = _.tail(arguments),
           returnValue = this;
 
       if (isMethodCall) {
 
-        // METHOD CALL
+        if (options.charAt(0) !== '_') {
+          //INFO: Not a private method or property
 
-        this.each(function () {
+          /* METHOD CALL */
 
-          // VARIABLES
+          this.each(function () {
 
-          var methodValue,
-              instance = $.data(this, fullName);
+            /* VARIABLES */
 
-          // NO INSTANCE
+            var methodValue,
+                instance = $.factory.instance(Widget, false, this);
 
-          if (!instance) {
+            /* CHECKING VALID CALL */
 
-            instance = new object({}, this);
+            if (!_.isFunction(instance[options])) return; //INFO: Not a method
 
-            $.data(this, fullName, instance);
-          }
+            /* CALLING */
 
-          // GETTING INSTANCE
+            methodValue = instance[options](args);
 
-          if (options === 'instance') {
+            if (!_.isUndefined(methodValue)) {
 
-            returnValue = instance;
+              returnValue = methodValue;
 
-            return false;
-          }
-
-          // CHECKING VALID CALL
-
-          if (!instance) return; //INFO: No instance found
-
-          if (!_.isFunction(instance[options]) || options.charAt(0) === '_') return; //INFO: Private method or property
-
-          // CALLING
-
-          methodValue = instance[options].apply(instance, args);
-
-          if (methodValue !== instance && !_.isUndefined(methodValue)) {
-
-            returnValue = methodValue;
-
-            return false;
-          }
-        });
+              return false;
+            }
+          });
+        }
       } else {
 
-        // SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS
+        /* SUPPORT FOR PASSING MULTIPLE CONFIG OBJECTS */
 
-        if (args.length) {
+        if (args.length > 0) {
 
-          options = _.extend.apply(null, [options].concat(args));
+          options = _.merge.apply(null, [{}].concat([options]).concat(args));
         }
+
+        /* INSTANCE */
 
         this.each(function () {
 
-          // GET INSTANCE
-
-          var instance = $.data(this, fullName);
-
-          if (instance) {
-            // SET OPTIONS
-
-            instance.option(options || {});
-          } else {
-            // INSTANCIATE
-
-            $.data(this, fullName, new object(options, this));
-          }
+          $.factory.instance(Widget, options, this);
         });
       }
 
       return returnValue;
     };
+  };
+
+  /* FACTORY INSTANCE */
+
+  $.factory.instance = function (Widget, options, element) {
+
+    /* NAME */
+
+    var name = Widget.config.name;
+
+    /* INSTANCE */
+
+    var instance = $.data(element, 'instance.' + name);
+
+    if (!instance) {
+
+      instance = new Widget($.factory.config(Widget, options), element);
+
+      $.data(element, 'instance.' + name, instance);
+    }
+
+    return instance;
+  };
+
+  /* FACTORY CONFIG */
+
+  $.factory.config = function (Widget, options) {
+
+    /* VARIABLES */
+
+    var configs = [{}],
+        prototype = Widget.prototype;
+
+    /* CHAIN */
+
+    while (prototype) {
+
+      configs.push(prototype.constructor.config);
+
+      prototype = Object.getPrototypeOf(prototype);
+    }
+
+    /* CONFIG */
+
+    if (options) {
+
+      configs.push({ options: options });
+    }
+
+    return _.merge.apply(null, configs);
   };
 })(jQuery, _, window, document);
 
@@ -1698,13 +1615,19 @@
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* EXPANDER */
+  var config = {
 
-  $.factory('svelto.expander', {
+    /* NAMES */
+
+    name: 'expander',
 
     /* OPTIONS */
 
@@ -1720,38 +1643,53 @@
         open: _.noop,
         close: _.noop
       }
-    },
+    }
+
+  };
+
+  /* EXPANDER */
+
+  var Expander = (function (_Svelto$Widget) {
+    _inherits(Expander, _Svelto$Widget);
+
+    function Expander() {
+      _classCallCheck(this, Expander);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Expander.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.expander').expander();
-    },
+    };
 
-    _variables: function _variables() {
+    Expander.prototype._variables = function _variables() {
 
       this.$expander = this.$element;
       this.$togglers = this.$expander.find(this.options.selectors.toggler);
 
       this._isOpen = this.$expander.hasClass(this.options.classes.open);
-    },
+    };
 
-    _events: function _events() {
+    Expander.prototype._events = function _events() {
 
       /* TOGGLER */
 
       this._on(this.$togglers, Pointer.tap, this.toggle);
-    },
+    };
 
-    /* PUBLIC */
+    /* API */
 
-    isOpen: function isOpen() {
+    Expander.prototype.isOpen = function isOpen() {
 
       return this._isOpen;
-    },
+    };
 
-    toggle: function toggle(force) {
+    Expander.prototype.toggle = function toggle(force) {
 
       if (!_.isBoolean(force)) {
 
@@ -1766,19 +1704,27 @@
 
         this._trigger(this._isOpen ? 'open' : 'close');
       }
-    },
+    };
 
-    open: function open() {
+    Expander.prototype.open = function open() {
 
       this.toggle(true);
-    },
+    };
 
-    close: function close() {
+    Expander.prototype.close = function close() {
 
       this.toggle(false);
-    }
+    };
 
-  });
+    return Expander;
+  })(Svelto.Widget);
+
+  Svelto.Expander = Expander;
+  Svelto.Expander.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Expander);
 })(jQuery, _, window, document);
 
 /* =========================================================================
@@ -2722,6 +2668,8 @@
 
   /* HEX COLOR */
 
+  var _this = this;
+
   window.HexColor = function (value) {
 
     if (_.isString(value)) {
@@ -2731,7 +2679,7 @@
       if (/^([0-9a-f]{3}){2}$/i.test(value)) {
         //INFO: full 6-chars color
 
-        this.hsv = ColorHelper.hex2hsv({
+        _this.hsv = ColorHelper.hex2hsv({
           r: value[0] + value[1],
           g: value[2] + value[3],
           b: value[4] + value[5]
@@ -2739,17 +2687,17 @@
       } else if (/^[0-9a-f]{3}$/i.test(value)) {
         //INFO: shorthand 3-chars color
 
-        this.hsv = ColorHelper.hex2hsv({
+        _this.hsv = ColorHelper.hex2hsv({
           r: value[0] + value[0],
           g: value[1] + value[1],
           b: value[2] + value[2]
         });
       } else {
 
-        return this;
+        return _this;
       }
 
-      this.isValid = true;
+      _this.isValid = true;
     }
   };
 
@@ -3185,7 +3133,7 @@
 //TODO: Add support for min and max date delimiter
 //FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
 //TODO: Add support for setting first day of the week
-//INFO: We use the ormat: YYYY-MM-DD
+//INFO: We use the format: YYYYMMDD
 
 'use strict';
 
@@ -4863,13 +4811,12 @@
 
       this.$noty.hover(function () {
 
-        _.each(notiesTimers, function (timer) {
-
-          timer.pause();
+        notiesTimers.forEach(function (timer) {
+          return timer.pause();
         });
       }, function () {
 
-        _.each(notiesTimers, function (timer) {
+        notiesTimers.forEach(function (timer) {
 
           timer.remaining(Math.max(instance.options.timerMinimumRemaining, timer.remaining() || 0));
 
@@ -4992,6 +4939,7 @@
  * ========================================================================= */
 
 //TODO: Check if it works, also for upload
+//TODO: Update to a widget
 
 'use strict';
 
@@ -5002,18 +4950,19 @@
   /* FORM AJAX */
 
   $.fn.formAjax = function () {
+    var _this = this;
 
     this.on('submit', function (event) {
 
       event.preventDefault();
 
-      var $form = $(this);
+      var $form = $(_this);
 
       $.ajax({
 
         cache: false,
         contentType: 'multipart/form-data',
-        data: new FormData(this),
+        data: new FormData(_this),
         processData: false,
         type: $form.attr('method') || 'POST',
         url: $form.attr('action'),
@@ -5109,6 +5058,7 @@
  * ========================================================================= */
 
 //TODO: Maybe sync at the init time also
+//TODO: Update to a widget
 
 'use strict';
 
@@ -5123,10 +5073,11 @@
   /* FORM SYNC */
 
   $.fn.formSync = function () {
+    var _this = this;
 
     this.each(function () {
 
-      var $form = $(this),
+      var $form = $(_this),
           group = $form.data('sync-group');
 
       if (groups.indexOf(group) !== -1) return;
@@ -5138,7 +5089,7 @@
 
       $eles.each(function () {
 
-        var $ele = $(this),
+        var $ele = $(_this),
             name = $ele.attr('name'),
             isCheckable = $ele.is('[type="radio"], [type="checkbox"]'),
             isRadio = isCheckable && $ele.is('[type="radio"]'),
@@ -5155,7 +5106,7 @@
 
           $otherEles.each(function () {
 
-            var $otherEle = $(this),
+            var $otherEle = $(_this),
                 otherValue = $otherEle.val(),
                 otherChecked = !!$otherEle.prop('checked');
 

@@ -16,15 +16,9 @@
 
   'use strict';
 
-  /* WIDGET */
+  /* CONFIG */
 
-  $.Widget = function () {};
-
-  $.Widget._childConstructors = []; //TODO: Remove if not necessary
-
-  /* PROTOTYPE */
-
-  $.Widget.prototype = {
+  var config = {
 
     /* NAMES */
 
@@ -52,13 +46,21 @@
       animations: {}, //INFO: Object storing all the milliseconds required for each animation to occur
       callbacks: {}, //INFO: Callbacks to trigger on specific events
       disabled: false //INFO: Determines if the widget is enabled or disabled
-    },
+    }
 
-    /* WIDGET METHODS */
+  };
 
-    _create ( options, element ) {
+  /* WIDGET */
 
-      // CHECK IF INITIALIZABLE
+  class Widget {
+
+    constructor ( config, element ) {
+
+      /* ATTACH CONFIG */
+
+      _.extend ( this, config );
+
+      /* CHECK IF INITIALIZABLE */
 
       if ( !element && !this.templates.base && !this.html ) {
 
@@ -66,28 +68,20 @@
 
       }
 
-      // MERGE OPTIONS
-
-      this.options = _.merge ( {}, this.options, this._createOptions (), options );
-
-      // INIT ELEMENT
+      /* INIT ELEMENT */
 
       this.$element = $(element || ( this.templates.base ? this._tmpl ( 'base', this.options ) : this.html ) );
       this.element = this.$element[0];
 
-      // SET GUID
+      /* SET GUID */
 
       this.guid = $.guid++;
 
-      // SET DISABLED
+      /* SET DISABLED */
 
       this.options.disabled = this.options.disabled || this.$element.hasClass ( 'disabled' );
-
-      // SAVE WIDGET INSTANCE
-
-      $.data ( this.element, this.fullName, this );
-
-      // ON $ELEMENT REMOVE -> WIDGET DESTROY
+      
+      /* ON $ELEMENT REMOVE -> WIDGET DESTROY */
 
       this._on ( true, 'remove', function ( event ) {
 
@@ -99,22 +93,19 @@
 
       });
 
-      // CALLBACKS
+      /* CALLBACKS */
 
       this._variables ();
-
       this._init ();
-
       this._events ();
 
-    },
+    }
 
-    _createOptions: _.noop, //INFO: Returns an options object that will be used for the current widget instance, generated during widget instantiation
+    _widgetize () {} //INFO: Gets a parent node, from it find and initialize all the widgets
 
-    _widgetize: _.noop, //INFO: Gets a parent node, from it find and initialize all the widgets
-    _variables: _.noop, //INFO: Init your variables inside this function
-    _init: _.noop, //INFO: Perform the init stuff inside this function
-    _events: _.noop, //INFO: Bind the event handlers inside this function
+    _variables () {} //INFO: Init your variables inside this function
+    _init () {} //INFO: Perform the init stuff inside this function
+    _events () {} //INFO: Bind the event handlers inside this function
 
     destroy () {
 
@@ -122,15 +113,21 @@
 
       $.removeData ( this.element, this.fullName );
 
-    },
+    }
 
-    _destroy: _.noop,
+    _destroy () {}
 
     widget () {
 
       return this.$element;
 
-    },
+    }
+
+    instance () {
+
+      return this;
+
+    }
 
     /* OPTIONS METHODS */
 
@@ -190,7 +187,7 @@
 
       return this;
 
-    },
+    }
 
     _setOptions ( options ) {
 
@@ -202,7 +199,7 @@
 
       return this;
 
-    },
+    }
 
     _setOption ( key, value ) {
 
@@ -216,7 +213,7 @@
 
       return this;
 
-    },
+    }
 
     /* ENABLED */
 
@@ -224,13 +221,13 @@
 
       return this._setOptions ({ disabled: false });
 
-    },
+    }
 
     isEnabled () {
 
       return !this.options.disabled;
 
-    },
+    }
 
     /* DISABLED */
 
@@ -238,13 +235,13 @@
 
       return this._setOptions ({ disabled: true });
 
-    },
+    }
 
     isDisabled () {
 
       return this.options.disabled;
 
-    },
+    }
 
     /* EVENTS */
 
@@ -252,11 +249,11 @@
 
       //TODO: Add support for custom data
 
-      // SAVE A REFERENCE TO THIS
+      /* SAVE A REFERENCE TO THIS */
 
-      var instance = this;
+      var self = this;
 
-      // NORMALIZING OPTIONS
+      /* NORMALIZING PARAMETERS */
 
       if ( !_.isBoolean ( suppressDisabledCheck ) ) {
 
@@ -287,35 +284,35 @@
 
       }
 
-      // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
+      /* SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD */
 
       handler = _.isString ( handler ) ? this[handler] : handler;
 
-      // PROXY
+      /* PROXY */
 
       function handlerProxy () {
 
-        if ( !suppressDisabledCheck && instance.options.disabled ) return;
+        if ( !suppressDisabledCheck && self.options.disabled ) return;
 
         var args = _.slice ( arguments );
 
         args.push ( this );
 
-        return handler.apply ( instance, args );
+        return handler.apply ( self, args );
 
       }
 
-      // PROXY GUID
+      /* PROXY GUID */
 
       handlerProxy.guid = handler.guid = ( handler.guid || handlerProxy.guid || $.guid++ );
 
-      // TRIGGERING
+      /* TRIGGERING */
 
-      if ( selector ) { // DELEGATED
+      if ( selector ) { //INFO: Delegated
 
         $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
-      } else { // NORMAL
+      } else { //INFO: Normal
 
         $element[onlyOne ? 'one' : 'on'] ( events, handlerProxy );
 
@@ -323,17 +320,13 @@
 
       return this;
 
-    },
+    }
 
-    _one () {
-
-      var args = arguments;
-
-      Array.prototype.push.call ( args, true );
+    _one ( ...args ) {
 
       this._on.apply ( this, args );
 
-    },
+    }
 
     _onHover ( $element, args ) {
 
@@ -358,11 +351,11 @@
 
       });
 
-    },
+    }
 
     _off ( $element, events, handler ) {
 
-      // NORMALIZING OPTIONS
+      /* NORMALIZING PARAMETERS */
 
       if ( !handler ) {
 
@@ -372,17 +365,17 @@
 
       }
 
-      // SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD
+      /* SUPPORT FOR STRING HANDLERS REFERRING TO A SELF METHOD */
 
       handler = _.isString ( handler ) ? this[handler] : handler;
 
-      // REMOVING HANDLER
+      /* REMOVING HANDLER */
 
       $element.off ( events, handler );
 
       return this;
 
-    },
+    }
 
     _trigger ( events, data ) {
 
@@ -404,7 +397,7 @@
 
       return this;
 
-    },
+    }
 
     /* DELAYING */
 
@@ -418,7 +411,7 @@
 
       }, delay || 0 );
 
-    },
+    }
 
     /* DEFER */
 
@@ -426,7 +419,7 @@
 
       return this._delay ( fn );
 
-    },
+    }
 
     /* FRAME */
 
@@ -440,7 +433,7 @@
 
       });
 
-    },
+    }
 
     /* DEBOUNCING */
 
@@ -448,7 +441,7 @@
 
       return _.debounce ( fn, wait, options );
 
-    },
+    }
 
     /* THROTTLING */
 
@@ -456,15 +449,15 @@
 
       return _.throttle ( fn, wait, options );
 
-    },
+    }
 
     /* TEMPLATE */
 
     _tmpl ( name, options ) {
 
-      return $.tmpl ( this.fullName + '.' + name, options || {} );
+      return $.tmpl ( this.name + '.' + name, options || {} );
 
-    },
+    }
 
     /* INSERTION */
 
@@ -474,7 +467,7 @@
 
       return this;
 
-    },
+    }
 
     insertAfter ( selector ) {
 
@@ -482,7 +475,7 @@
 
       return this;
 
-    },
+    }
 
     prependTo ( selector ) {
 
@@ -490,7 +483,7 @@
 
       return this;
 
-    },
+    }
 
     appendTo ( selector ) {
 
@@ -500,6 +493,11 @@
 
     }
 
-  };
+  }
+
+  /* BINDING */
+
+  Svelto.Widget = Widget;
+  Svelto.Widget.config = config;
 
 }( jQuery, _, window, document ));

@@ -51,7 +51,7 @@
           s,
           v = Math.max ( r, g, b ),
           diff = v - Math.min ( r, g, b ),
-          diffc ( c ) {
+          diffc = function ( c ) {
             return ( v - c ) / 6 / diff + 1 / 2;
           };
 

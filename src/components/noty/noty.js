@@ -20,7 +20,7 @@
 
   /* HELPER */
 
-  $.noty ( options ) {
+  $.noty = function ( options ) {
 
     /* OPTIONS */
 
@@ -206,7 +206,7 @@
 
       this.$noty.hover ( () => {
 
-        notiesTimers.forEach ( timer.pause );
+        notiesTimers.forEach ( timer => timer.pause () );
 
       }, () => {
 

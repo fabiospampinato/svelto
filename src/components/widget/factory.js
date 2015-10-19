@@ -12,266 +12,100 @@
  * @requires ../pointer/Pointer.js
  *=========================================================================*/
 
-//FIXME: Extending widgets is not working!
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
 
   /* FACTORY */
 
-  $.factory = function ( originalName, base, prototype ) {
+  $.factory = function ( Widget ) {
 
-    // NAME
+    /* NAME */
 
-    var nameParts = originalName.split ( '.' ),
-        namespace = nameParts.length > 1 ? nameParts[0] : false,
-        name = nameParts.length > 1 ? nameParts[1] : nameParts[0],
-        fullName = namespace ? namespace + '.' + name : name;
+    var name = Widget.config.name;
 
-    // NO BASE -> DEFAULT WIDGET BASE
+    /* CACHE TEMPLATES */
 
-    if ( !prototype ) {
+    for ( var tmplName in Widget.config.templates ) {
 
-      prototype = base;
-      base = $.Widget;
+      $.tmpl.cache[name + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
 
     }
 
-    // INIT NAMESPACE
+    /* WIDGETIZE */
 
-    if ( namespace ) {
+    console.log("Widgetize function:",Widget.prototype._widgetize);
+    Widgetize.add ( Widget.prototype._widgetize );
 
-      $[namespace] = $[namespace] || {};
+    /* BRIDGE */
 
-    }
-
-    // CONSTRUCTOR
-
-    var existingConstructor = namespace ? $[namespace][name] : $[name];
-
-    var constructor = function ( options, element ) {
-
-      this._create ( options, element );
-
-    };
-
-    // SET CONSTRUCTOR
-
-    if ( namespace ) {
-
-      $[namespace][name] = constructor;
-
-    } else {
-
-      $[name] = constructor;
-
-    }
-
-    // EXTENDING CONSTRUCTOR IN ORDER TO CARRY OVER STATIC PROPERTIES
-
-    _.extend ( constructor, existingConstructor, {
-      _proto: _.extend ( {}, prototype ),
-      _childConstructors: []
-    });
-
-    // BASE PROTOTYPE
-
-    var basePrototype = new base ();
-
-    basePrototype.templates = _.merge ( {}, basePrototype.templates, prototype.templates ); //INFO: We need to make the templates hash a property directly on the new instance otherwise we'll modify the templates hash on the prototype that we're inheriting from
-    basePrototype.options = _.merge ( {}, basePrototype.options, prototype.options ); //INFO: We need to make the options hash a property directly on the new instance otherwise we'll modify the options hash on the prototype that we're inheriting from
-
-    // PROXIED PROTOTYPE
-
-    var proxiedPrototype = {};
-
-    for ( var prop in prototype ) {
-
-      if ( !_.isFunction ( prototype[prop] ) ) {
-
-        if ( !_.isPlainObject ( prototype[prop] ) ) {
-
-          proxiedPrototype[prop] = prototype[prop];
-
-        }
-
-      } else {
-
-        proxiedPrototype[prop] = (function ( prop ) {
-
-          var _super = function () {
-              return base.prototype[prop].apply ( this, arguments );
-            };
-
-          return function () {
-
-            var __super = this._super,
-                returnValue;
-
-            this._super = _super;
-
-            returnValue = prototype[prop].apply ( this, arguments );
-
-            this._super = __super;
-
-            return returnValue;
-
-          };
-
-        })( prop );
-
-      }
-
-    }
-
-    // CONSTRUCTOR PROTOTYPE
-
-    constructor.prototype = _.extend ( basePrototype, proxiedPrototype, {
-      constructor: constructor,
-      namespace: namespace,
-      name: name,
-      fullName: fullName
-    });
-
-    // CACHE TEMPLATES
-
-    for ( var tmpl_name in prototype.templates ) {
-
-      if ( prototype.templates[tmpl_name] ) {
-
-        $.tmpl.cache[fullName + '.' + tmpl_name] = $.tmpl ( prototype.templates[tmpl_name] );
-
-      }
-
-    }
-
-    // UPDATE PROTOTYPE CHAIN
-
-    if ( existingConstructor ) {
-
-      for ( var i = 0, l = existingConstructor._childConstructors.length; i < l; i++ ) {
-
-        var childPrototype = existingConstructor._childConstructors[i].prototype;
-
-        $.factory ( ( childPrototype.namespace ? childPrototype.namespace + '.' + childPrototype.name : childPrototype.name ), constructor, existingConstructor._childConstructors[i]._proto );
-
-      }
-
-      delete existingConstructor._childConstructors;
-
-    } else {
-
-      base._childConstructors.push ( constructor );
-
-    }
-
-    // CONSTRUCT
-
-    $.factory.bridge ( name, constructor );
-
-    Widgetize.add ( constructor.prototype._widgetize );
-
-    // RETURN
-
-    return constructor;
+    $.factory.bridge ( Widget );
 
   };
 
   /* FACTORY BRIDGE */
 
-  $.factory.bridge = function ( name, object ) {
+  $.factory.bridge = function ( Widget ) {
 
-    // NAME
+    /* NAME */
 
-    var fullName = object.prototype.fullName;
+    var name = Widget.config.name;
 
-    // PLUGIN
+    /* JQUERY PLUGIN */
 
-    $.fn[name] = function ( options ) {
-
-      if ( this.length === 0 && !object.prototype.templates.base ) return; //INFO: Nothing to work on
+    $.fn[name] = function ( options, ...args ) { //FIXME: We should be able to extend options, not the entire config
 
       var isMethodCall = _.isString ( options ),
-          args = _.tail ( arguments ),
           returnValue = this;
 
       if ( isMethodCall ) {
 
-        // METHOD CALL
+        if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
 
-        this.each ( function () {
+          /* METHOD CALL */
 
-          // VARIABLES
+          this.each ( function () {
 
-          var methodValue,
-              instance = $.data ( this, fullName );
+            /* VARIABLES */
 
-          // NO INSTANCE
+            var methodValue,
+                instance = $.factory.instance ( Widget, false, this );
 
-          if ( !instance ) {
+            /* CHECKING VALID CALL */
 
-            instance = new object ( {}, this );
+            if ( !_.isFunction ( instance[options] ) ) return; //INFO: Not a method
 
-            $.data ( this, fullName, instance );
+            /* CALLING */
 
-          }
+            methodValue = instance[options]( args );
 
-          // GETTING INSTANCE
+            if ( !_.isUndefined ( methodValue ) ) {
 
-          if ( options === 'instance' ) {
+              returnValue = methodValue;
 
-            returnValue = instance;
+              return false;
 
-            return false;
+            }
 
-          }
-
-          // CHECKING VALID CALL
-
-          if ( !instance ) return; //INFO: No instance found
-
-          if ( !_.isFunction ( instance[options] ) || options.charAt ( 0 ) === '_' ) return; //INFO: Private method or property
-
-          // CALLING
-
-          methodValue = instance[options].apply ( instance, args );
-
-          if ( methodValue !== instance && !_.isUndefined ( methodValue ) ) {
-
-            returnValue = methodValue;
-
-            return false;
-
-          }
-
-        });
-
-      } else {
-
-        // SUPPORT FOR PASSING MULTIPLE OPTIONS OBJECTS
-
-        if ( args.length ) {
-
-          options = _.extend.apply ( null, [options].concat ( args ) );
+          });
 
         }
 
+      } else {
+
+        /* SUPPORT FOR PASSING MULTIPLE CONFIG OBJECTS */
+
+        if ( args.length > 0 ) {
+
+          options = _.merge.apply ( null, [{}].concat ( [options] ).concat ( args ) );
+
+        }
+
+        /* INSTANCE */
+
         this.each ( function () {
 
-          // GET INSTANCE
-
-          var instance = $.data ( this, fullName );
-
-          if ( instance ) { // SET OPTIONS
-
-            instance.option ( options || {} );
-
-          } else { // INSTANCIATE
-
-            $.data ( this, fullName, new object ( options, this ) );
-
-          }
+          $.factory.instance ( Widget, options, this );
 
         });
 
@@ -280,6 +114,61 @@
       return returnValue;
 
     };
+
+  };
+
+  /* FACTORY INSTANCE */
+
+  $.factory.instance = function ( Widget, options, element ) {
+
+    /* NAME */
+
+    var name = Widget.config.name;
+
+    /* INSTANCE */
+
+    var instance = $.data ( element, 'instance.' + name );
+
+    if ( !instance ) {
+
+      instance = new Widget ( $.factory.config ( Widget, options ), element );
+
+      $.data ( element, 'instance.' + name, instance );
+
+    }
+
+    return instance;
+
+  };
+
+  /* FACTORY CONFIG */
+
+  $.factory.config = function ( Widget, options ) {
+
+    /* VARIABLES */
+
+    var configs = [{}],
+        prototype = Widget.prototype;
+
+    /* CHAIN */
+
+    while ( prototype ) {
+
+      configs.push ( prototype.constructor.config );
+
+      prototype = Object.getPrototypeOf ( prototype );
+
+    }
+
+    /* CONFIG */
+
+    if ( options ) {
+
+      configs.push ({ options: options });
+
+    }
+
+    return _.merge.apply ( null, configs );
 
   };
 

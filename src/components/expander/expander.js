@@ -12,9 +12,11 @@
 
   'use strict';
 
-  /* EXPANDER */
+  var config = {
 
-  $.factory ( 'svelto.expander', {
+    /* NAMES */
+
+    name: 'expander',
 
     /* OPTIONS */
 
@@ -30,7 +32,13 @@
         open: _.noop,
         close: _.noop
       }
-    },
+    }
+
+  };
+
+  /* EXPANDER */
+
+  class Expander extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -38,7 +46,7 @@
 
       $root.find ( '.expander' ).expander ();
 
-    },
+    }
 
     _variables () {
 
@@ -47,7 +55,7 @@
 
       this._isOpen = this.$expander.hasClass ( this.options.classes.open );
 
-    },
+    }
 
     _events () {
 
@@ -55,15 +63,15 @@
 
       this._on ( this.$togglers, Pointer.tap, this.toggle );
 
-    },
+    }
 
-    /* PUBLIC */
+    /* API */
 
     isOpen () {
 
       return this._isOpen;
 
-    },
+    }
 
     toggle ( force ) {
 
@@ -83,13 +91,13 @@
 
       }
 
-    },
+    }
 
     open () {
 
       this.toggle ( true );
 
-    },
+    }
 
     close () {
 
@@ -97,6 +105,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Expander = Expander;
+  Svelto.Expander.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Expander );
 
 }( jQuery, _, window, document ));

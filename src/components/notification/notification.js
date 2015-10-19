@@ -17,7 +17,7 @@
 
   /* NOTIFICATION */
 
-  $.notification ( options ) {
+  $.notification = function ( options ) {
 
     /* OPTIONS */
 

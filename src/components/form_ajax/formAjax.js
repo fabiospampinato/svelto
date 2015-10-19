@@ -19,7 +19,7 @@
 
   /* FORM AJAX */
 
-  $.fn.formAjax () {
+  $.fn.formAjax = function () {
 
     this.on ( 'submit', ( event ) => {
 

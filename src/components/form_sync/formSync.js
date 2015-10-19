@@ -21,7 +21,7 @@
 
   /* FORM SYNC */
 
-  $.fn.formSync () {
+  $.fn.formSync = function () {
 
     this.each ( () => {
 

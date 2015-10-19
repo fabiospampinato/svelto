@@ -14,7 +14,7 @@
 
   /* BINARY TREE .each () */
 
-  $.fn.btEach ( callback, startIndex ) {
+  $.fn.btEach = function ( callback, startIndex ) {
 
     return _.btEach ( this, callback, startIndex );
 

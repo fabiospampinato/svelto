@@ -14,7 +14,7 @@
 
   /* BLURRED */
 
-  $.fn.blurred ( force ) {
+  $.fn.blurred = function ( force ) {
 
     return this.toggleClass ( 'blurred', force );
 
