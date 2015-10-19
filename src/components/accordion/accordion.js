@@ -13,12 +13,10 @@
 
   'use strict';
 
-  /* ACCORDION */
+  /* CONFIG */
 
-  $.factory ( 'svelto.accordion', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'accordion',
     options: {
       classes: {
         multiple: 'multiple-open'
@@ -27,48 +25,55 @@
         expander: '.expander'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open () {},
+        close () {}
       }
-    },
+    }
+  };
+
+  /* ACCORDION */
+
+  class Accordion extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.accordion' ).accordion ();
+      $root.filter ( '.accordion' ).accordion ();
 
-    },
+    }
 
     _variables () {
 
       this.$accordion = this.$element;
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
-      this.expandersNr = this.$expanders.length;
 
       this.expandersInstances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
 
       this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
 
-    },
+    }
 
     _events () {
 
       if ( !this.isMultiple ) {
 
+        /* EXPANDER OPEN */
+
         this._on ( this.$expanders, 'expander:open', this.__closeOthers );
 
       }
 
-    },
+    }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event, data, node ) {
+    __closeOthers ( event, data ) {
 
-      for ( var i = 0; i < this.expandersNr; i++ ) {
+      for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-        if ( this.$expanders[i] !== node ) {
+        if ( this.$expanders[i] !== event.target ) {
 
           this.expandersInstances[i].close ();
 
@@ -76,7 +81,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -84,11 +89,11 @@
 
       return this.expandersInstances.map ( instance => instance.isOpen () );
 
-    },
+    }
 
     toggle ( index, force ) {
 
-      var instance = this.expandersInstances[index],
+      let instance = this.expandersInstances[index],
           isOpen = instance.isOpen ();
 
       if ( !_.isBoolean ( force ) ) {
@@ -99,7 +104,7 @@
 
       if ( force !== isOpen ) {
 
-        var action = force ? 'open' : 'close';
+        let action = force ? 'open' : 'close';
 
         instance[action]();
 
@@ -109,13 +114,13 @@
 
       }
 
-    },
+    }
 
     open ( index ) {
 
       this.toggle ( index, true );
 
-    },
+    }
 
     close ( index ) {
 
@@ -123,6 +128,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Accordion = Accordion;
+  Svelto.Accordion.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Accordion );
 
 }( jQuery, _, window, document ));
