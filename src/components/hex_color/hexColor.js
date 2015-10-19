@@ -8,63 +8,67 @@
  * @requires ../color_helper/colorHelper.js
  * ========================================================================= */
 
-;(function ( _, window, document, undefined ) {
+//TODO: Add support for alpha
+
+(function ( _, window, document, undefined ) {
 
   'use strict';
 
   /* HEX COLOR */
 
-  window.HexColor = ( value ) => {
+  window.HexColor = class {
 
-    if ( _.isString ( value ) ) {
+    constructor ( color ) {
 
-      value = value.replace ( '#', '' );
+      if ( _.isString ( color ) ) {
 
-       if ( /^([0-9a-f]{3}){2}$/i.test ( value ) ) { //INFO: full 6-chars color
+        color = color.replace ( '#', '' );
 
-        this.hsv = ColorHelper.hex2hsv ({
-          r: value[0] + value[1],
-          g: value[2] + value[3],
-          b: value[4] + value[5]
-        });
+         if ( /^[0-9a-f]{6}$/i.test ( color ) ) { //INFO: Full 6-chars color notation
 
-      } else if ( /^[0-9a-f]{3}$/i.test ( value ) ) { //INFO: shorthand 3-chars color
+           this.import6chars ( color );
 
-        this.hsv = ColorHelper.hex2hsv ({
-          r: value[0] + value[0],
-          g: value[1] + value[1],
-          b: value[2] + value[2]
-        });
+        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { //INFO: Shorthand 3-chars color notation
 
-      } else {
+          this.import3chars ( color );
 
-        return this;
+        }
 
       }
 
-      this.isValid = true;
+    }
+
+    import6chars ( color ) {
+
+      this.hsv = ColorHelper.hex2hsv ({
+        r: color[0] + color[1],
+        g: color[2] + color[3],
+        b: color[4] + color[5]
+      });
 
     }
 
-  };
+    import3chars ( color ) {
 
-  /* HEX COLOR PROTOTYPE */
+      this.hsv = ColorHelper.hex2hsv ({
+        r: color[0].repeat ( 2 ),
+        g: color[1].repeat ( 2 ),
+        b: color[2].repeat ( 2 )
+      });
 
-  HexColor.prototype = {
-
-    isValid: false,
-
-    hsv: {
-      h: 0,
-      s: 0,
-      v: 0
-    },
+    }
 
     getHexStr () {
 
       var hex = ColorHelper.hsv2hex ( this.hsv );
 
       return '#' + hex.r + hex.g + hex.b;
+
+    }
+
+    isValid () {
+
+      return !!this.hsv;
 
     }
 

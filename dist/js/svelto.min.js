@@ -8,7 +8,7 @@
 
 'use strict';
 
-;(function (_, window, document, undefined) {
+(function (_, window, document, undefined) {
 
   'use strict';
 
@@ -3270,7 +3270,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
-;(function (_, window, document, undefined) {
+(function (_, window, document, undefined) {
 
   'use strict';
 
@@ -3865,67 +3865,70 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @requires ../color_helper/colorHelper.js
  * ========================================================================= */
 
+//TODO: Add support for alpha
+
 'use strict';
 
-;(function (_, window, document, undefined) {
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+(function (_, window, document, undefined) {
 
   'use strict';
 
   /* HEX COLOR */
 
-  var _this = this;
+  window.HexColor = (function () {
+    function _class(color) {
+      _classCallCheck(this, _class);
 
-  window.HexColor = function (value) {
+      if (_.isString(color)) {
 
-    if (_.isString(value)) {
+        color = color.replace('#', '');
 
-      value = value.replace('#', '');
+        if (/^[0-9a-f]{6}$/i.test(color)) {
+          //INFO: Full 6-chars color notation
 
-      if (/^([0-9a-f]{3}){2}$/i.test(value)) {
-        //INFO: full 6-chars color
+          this.import6chars(color);
+        } else if (/^[0-9a-f]{3}$/i.test(color)) {
+          //INFO: Shorthand 3-chars color notation
 
-        _this.hsv = ColorHelper.hex2hsv({
-          r: value[0] + value[1],
-          g: value[2] + value[3],
-          b: value[4] + value[5]
-        });
-      } else if (/^[0-9a-f]{3}$/i.test(value)) {
-        //INFO: shorthand 3-chars color
-
-        _this.hsv = ColorHelper.hex2hsv({
-          r: value[0] + value[0],
-          g: value[1] + value[1],
-          b: value[2] + value[2]
-        });
-      } else {
-
-        return _this;
+          this.import3chars(color);
+        }
       }
-
-      _this.isValid = true;
     }
-  };
 
-  /* HEX COLOR PROTOTYPE */
+    _class.prototype.import6chars = function import6chars(color) {
 
-  HexColor.prototype = {
+      this.hsv = ColorHelper.hex2hsv({
+        r: color[0] + color[1],
+        g: color[2] + color[3],
+        b: color[4] + color[5]
+      });
+    };
 
-    isValid: false,
+    _class.prototype.import3chars = function import3chars(color) {
 
-    hsv: {
-      h: 0,
-      s: 0,
-      v: 0
-    },
+      this.hsv = ColorHelper.hex2hsv({
+        r: color[0].repeat(2),
+        g: color[1].repeat(2),
+        b: color[2].repeat(2)
+      });
+    };
 
-    getHexStr: function getHexStr() {
+    _class.prototype.getHexStr = function getHexStr() {
 
       var hex = ColorHelper.hsv2hex(this.hsv);
 
       return '#' + hex.r + hex.g + hex.b;
-    }
+    };
 
-  };
+    _class.prototype.isValid = function isValid() {
+
+      return !!this.hsv;
+    };
+
+    return _class;
+  })();
 })(_, window, document);
 
 /* =========================================================================
