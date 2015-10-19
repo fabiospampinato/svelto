@@ -50,7 +50,7 @@
 
     }
 
-  }
+  };
 
   /* JQUERY PLUGIN */
 

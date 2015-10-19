@@ -568,8 +568,7 @@
  * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
  * ========================================================================= */
 
-/*
- ***************************
+/***************************
  *      Documentation      *
  ***************************
  *
@@ -614,8 +613,7 @@
  *   {% } %}
  * </ul>
  *
- ***************************
- */
+ ***************************/
 
 'use strict';
 
@@ -679,7 +677,7 @@
 
   tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
 
-  /* HELPER */
+  /* UTILITY */
 
   $.tmpl = tmpl;
 })(jQuery, _, window, document);
@@ -17975,32 +17973,30 @@ Prism.languages.js = Prism.languages.javascript;
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* TIMER */
 
-  $.timer = function (func, time, autostart) {
+  window.Timer = (function () {
+    function _class() {
+      _classCallCheck(this, _class);
 
-    return new Timer(func, time, autostart);
-  };
+      this.set.apply(this, arguments);
+    }
 
-  /* TIMER OBJ */
-
-  var Timer = function Timer(func, time, autostart) {
-
-    return this.set(func, time, autostart);
-  };
-
-  Timer.prototype = {
-
-    set: function set(func, time, autostart) {
+    _class.prototype.set = function set(fn, time, autostart) {
 
       this.init = true;
-      this.action = func;
+      this.action = fn;
 
-      if (!isNaN(time)) this.intervalTime = time;
+      if (!isNaN(time)) {
+
+        this.intervalTime = time;
+      }
 
       if (autostart && !this.isActive) {
 
@@ -18009,110 +18005,131 @@ Prism.languages.js = Prism.languages.javascript;
       }
 
       return this;
-    },
+    };
 
-    once: function once(time) {
+    _class.prototype.once = function once(time) {
+      var _this = this;
 
-      var timer = this;
+      if (isNaN(time)) {
 
-      if (isNaN(time)) time = 0;
+        time = 0;
+      }
 
       setTimeout(function () {
-
-        timer.action();
+        return _this.action();
       }, time);
 
       return this;
-    },
+    };
 
-    play: function play(reset) {
+    _class.prototype.play = function play(reset) {
 
       if (!this.isActive) {
 
-        if (reset) this.setTimer();else this.setTimer(this.remaining_time);
+        if (reset) {
+
+          this.setTimer();
+        } else {
+
+          this.setTimer(this.remainingTime);
+        }
 
         this.isActive = true;
       }
 
       return this;
-    },
+    };
 
-    pause: function pause() {
+    _class.prototype.pause = function pause() {
 
       if (this.isActive) {
 
         this.isActive = false;
-        this.remaining_time -= new Date() - this.last;
+        this.remainingTime -= new Date() - this.last;
         this.clearTimer();
       }
 
       return this;
-    },
+    };
 
-    stop: function stop() {
+    _class.prototype.stop = function stop() {
 
       this.isActive = false;
-      this.remaining_time = this.intervalTime;
+      this.remainingTime = this.intervalTime;
       this.clearTimer();
 
       return this;
-    },
+    };
 
-    toggle: function toggle(reset) {
+    _class.prototype.toggle = function toggle(reset) {
 
-      if (this.isActive) this.pause();else if (reset) this.play(true);else this.play();
+      if (this.isActive) {
+
+        this.pause();
+      } else if (reset) {
+
+        this.play(true);
+      } else {
+
+        this.play();
+      }
 
       return this;
-    },
+    };
 
-    reset: function reset() {
+    _class.prototype.reset = function reset() {
 
       this.isActive = false;
       this.play(true);
 
       return this;
-    },
+    };
 
-    clearTimer: function clearTimer() {
+    _class.prototype.clearTimer = function clearTimer() {
 
       clearTimeout(this.timeoutObject);
-    },
+    };
 
-    setTimer: function setTimer(time) {
+    _class.prototype.setTimer = function setTimer(time) {
+      var _this2 = this;
 
-      var timer = this;
+      if (isNaN(time)) {
 
-      if (isNaN(time)) time = this.intervalTime;
+        time = this.intervalTime;
+      }
 
-      this.remaining_time = time;
+      this.remainingTime = time;
       this.last = new Date();
       this.clearTimer();
 
       this.timeoutObject = setTimeout(function () {
-
-        timer.go();
+        return _this2.go();
       }, time);
-    },
+    };
 
-    go: function go() {
+    _class.prototype.go = function go() {
 
       if (this.isActive) {
 
         this.action();
         this.setTimer();
       }
-    },
+    };
 
-    remaining: function remaining(value) {
+    _class.prototype.remaining = function remaining(value) {
 
-      if (_.isUndefined(value)) return this.remaining_time;
+      if (_.isUndefined(value)) {
 
-      this.remaining_time = value;
+        return this.remainingTime;
+      }
+
+      this.remainingTime = value;
 
       return this;
-    }
+    };
 
-  };
+    return _class;
+  })();
 })(jQuery, _, window, document);
 
 /* =========================================================================

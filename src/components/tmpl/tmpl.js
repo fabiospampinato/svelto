@@ -8,8 +8,7 @@
  * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
  * ========================================================================= */
 
-/*
- ***************************
+/***************************
  *      Documentation      *
  ***************************
  *
@@ -54,8 +53,7 @@
  *   {% } %}
  * </ul>
  *
- ***************************
- */
+ ***************************/
 
 (function ( $, _, window, document, undefined ) {
 
@@ -63,15 +61,15 @@
 
   /* TMPL */
 
-  var tmpl = function ( str, data ) {
+  let tmpl = function ( str, data ) {
 
-    var f = !/[^\w\-\.:]/.test ( str )
+    let f = !/[^\w\-\.:]/.test ( str )
               ? tmpl.cache[str] = tmpl.cache[str] || tmpl ( document.getElementById ( str ).innerHTML )
               : new Function ( tmpl.arg + ',tmpl', "var _e=_.escape" + tmpl.helper + ",_s='" + str.replace ( tmpl.regexp, tmpl.func ) + "';return _s;" );
 
     return data
              ? f ( data, tmpl )
-             : function ( data ) { return f ( data, tmpl ); };
+             : data => f ( data, tmpl );
 
   };
 
@@ -122,7 +120,7 @@
 
   tmpl.helper = ",print=function(s,e){_s+=e?(s==null?'':s):_e(s);},include=function(s,d){_s+=tmpl(s,d);}";
 
-  /* HELPER */
+  /* UTILITY */
 
   $.tmpl = tmpl;
 

@@ -27,66 +27,44 @@ append body-end
     var timer = false;
 
     function timer_callback () {
-
       $.noty ({ body: 'Timer executed!', color: 'green' });
-
     }
 
     function timer_set () {
-
       var milliseconds = Number($('input[name="milliseconds"]').val ()),
         autostart = $('input[name="autostart"]').prop ( 'checked' );
-
-      timer = $.timer ( timer_callback, milliseconds, autostart );
-
+      timer = new Timer ( timer_callback, milliseconds, autostart );
     }
 
     function timer_once () {
-
       var milliseconds = Number($('input[name="milliseconds_once"]').val ());
-
       timer.once ( milliseconds );
-
     }
 
     function timer_play () {
-
       timer.play ();
-
     }
 
     function timer_pause () {
-
       timer.pause ();
-
     }
 
     function timer_stop () {
-
       timer.stop ();
-
     }
 
     function timer_toggle () {
-
       timer.toggle ();
-
     }
 
     function timer_reset () {
-
       timer.reset ();
-
     }
 
     function timer_go () {
-
       timer.go ();
-
     }
 
     function timer_remaining () {
-
       $.noty ( 'Remaining: ' + timer.remaining () );
-
     }

@@ -14,28 +14,24 @@
 
   /* TIMER */
 
-  $.timer = function ( func, time, autostart ) {
+  window.Timer = class {
 
-    return new Timer ( func, time, autostart );
+    constructor ( ...args ) {
 
-  };
+      this.set ( ...args );
 
-  /* TIMER OBJ */
+    }
 
-  var Timer = function ( func, time, autostart ) {
-
-    return this.set ( func, time, autostart );
-
-  };
-
-  Timer.prototype = {
-
-    set ( func, time, autostart ) {
+    set ( fn, time, autostart ) {
 
       this.init = true;
-      this.action = func;
+      this.action = fn;
 
-      if ( !isNaN ( time ) ) this.intervalTime = time;
+      if ( !isNaN ( time ) ) {
+
+        this.intervalTime = time;
+
+      }
 
       if ( autostart && !this.isActive ) {
 
@@ -46,30 +42,35 @@
 
       return this;
 
-    },
+    }
 
     once ( time ) {
 
-      var timer = this;
+      if ( isNaN ( time ) ) {
 
-      if ( isNaN ( time ) ) time = 0;
+        time = 0;
 
-      setTimeout ( function () {
+      }
 
-        timer.action ();
-
-      }, time );
+      setTimeout ( () => this.action (), time );
 
       return this;
 
-    },
+    }
 
     play ( reset ) {
 
       if ( !this.isActive ) {
 
-        if ( reset ) this.setTimer ();
-        else this.setTimer ( this.remaining_time );
+        if ( reset ) {
+
+          this.setTimer ();
+
+        } else {
+
+          this.setTimer ( this.remainingTime );
+
+        }
 
         this.isActive = true;
 
@@ -77,41 +78,51 @@
 
       return this;
 
-    },
+    }
 
     pause () {
 
       if ( this.isActive ) {
 
         this.isActive = false;
-        this.remaining_time -= new Date() - this.last;
+        this.remainingTime -= ( new Date() - this.last );
         this.clearTimer ();
 
       }
 
       return this;
 
-    },
+    }
 
     stop () {
 
       this.isActive = false;
-      this.remaining_time = this.intervalTime;
+      this.remainingTime = this.intervalTime;
       this.clearTimer ();
 
       return this;
 
-    },
+    }
 
     toggle ( reset ) {
 
-      if ( this.isActive ) this.pause ();
-      else if ( reset ) this.play ( true );
-      else this.play ();
+      if ( this.isActive ) {
+
+        this.pause ();
+
+      } else if ( reset ) {
+
+        this.play ( true );
+
+      } else {
+
+        this.play ();
+
+      }
 
       return this;
 
-    },
+    }
 
     reset () {
 
@@ -120,31 +131,29 @@
 
       return this;
 
-    },
+    }
 
     clearTimer () {
 
       clearTimeout ( this.timeoutObject );
 
-    },
+    }
 
     setTimer ( time ) {
 
-      var timer = this;
+      if ( isNaN ( time ) ) {
 
-      if ( isNaN ( time ) ) time = this.intervalTime;
+        time = this.intervalTime;
 
-      this.remaining_time = time;
+      }
+
+      this.remainingTime = time;
       this.last = new Date ();
       this.clearTimer ();
 
-      this.timeoutObject = setTimeout ( function () {
+      this.timeoutObject = setTimeout ( () => this.go (), time );
 
-        timer.go ()
-
-      }, time );
-
-    },
+    }
 
     go () {
 
@@ -155,13 +164,17 @@
 
       }
 
-    },
+    }
 
     remaining ( value ) {
 
-      if ( _.isUndefined ( value ) ) return this.remaining_time;
+      if ( _.isUndefined ( value ) ) {
 
-      this.remaining_time = value;
+        return this.remainingTime;
+
+      }
+
+      this.remainingTime = value;
 
       return this;
 
