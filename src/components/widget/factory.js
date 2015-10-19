@@ -29,7 +29,11 @@
 
     for ( let tmplName in Widget.config.templates ) {
 
-      $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
+      if ( Widget.config.templates[tmplName] ) {
+
+        $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
+
+      }
 
     }
 

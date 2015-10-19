@@ -1525,7 +1525,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     for (var tmplName in Widget.config.templates) {
 
-      $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl(Widget.config.templates[tmplName]);
+      if (Widget.config.templates[tmplName]) {
+
+        $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl(Widget.config.templates[tmplName]);
+      }
     }
 
     /* WIDGETIZE */
@@ -2038,59 +2041,84 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* AUTOGROW */
+  /* CONFIG */
 
-  $.factory('svelto.autogrowTextarea', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'autogrowTextarea',
     options: {
       minHeight: 0,
       callbacks: {
-        update: _.noop
+        update: function update() {}
       }
-    },
+    }
+  };
+
+  /* AUTOGROW TEXTAREA */
+
+  var AutogrowTextarea = (function (_Svelto$Widget) {
+    _inherits(AutogrowTextarea, _Svelto$Widget);
+
+    function AutogrowTextarea() {
+      _classCallCheck(this, AutogrowTextarea);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    AutogrowTextarea.prototype._widgetize = function _widgetize($root) {
 
       $root.find('textarea.autogrow, .textarea-wrp.autogrow textarea').autogrowTextarea();
-    },
+      $root.filter('textarea.autogrow, .textarea-wrp.autogrow textarea').autogrowTextarea();
+    };
 
-    _variables: function _variables() {
+    AutogrowTextarea.prototype._variables = function _variables() {
 
       this.$textarea = this.$element;
-    },
+    };
 
-    _init: function _init() {
+    AutogrowTextarea.prototype._init = function _init() {
 
-      this.update();
-    },
+      this._update();
+    };
 
-    _events: function _events() {
+    AutogrowTextarea.prototype._events = function _events() {
 
       /* INPUT / CHANGE */
 
-      this._on('input change', this.update);
-    },
+      this._on('input change', this._update);
+    };
 
-    /* PUBLIC */
+    /* PRIVATE */
 
-    update: function update() {
+    AutogrowTextarea.prototype._update = function _update() {
 
       var neededHeight = this.$textarea.height(1)[0].scrollHeight - parseFloat(this.$textarea.css('padding-top')) - parseFloat(this.$textarea.css('padding-bottom'));
 
       this.$textarea.height(Math.max(neededHeight, this.options.minHeight));
 
       this._trigger('update');
-    }
+    };
 
-  });
+    return AutogrowTextarea;
+  })(Svelto.Widget);
+
+  Svelto.AutogrowTextarea = AutogrowTextarea;
+  Svelto.AutogrowTextarea.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.AutogrowTextarea);
 })(jQuery, _, window, document);
 
 /* =========================================================================

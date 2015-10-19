@@ -15,7 +15,7 @@
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'accordion',
     options: {
       classes: {

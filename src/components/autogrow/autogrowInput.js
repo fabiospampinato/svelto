@@ -18,7 +18,7 @@
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'autogrowInput',
     options: {
       minWidth: 0,

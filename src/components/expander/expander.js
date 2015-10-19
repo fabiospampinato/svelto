@@ -14,7 +14,7 @@
 
   /* CONFIG */
 
-  var config = {
+  let config = {
     name: 'expander',
     options: {
       classes: {

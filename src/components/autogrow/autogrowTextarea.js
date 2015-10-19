@@ -16,50 +16,54 @@
 
   'use strict';
 
-  /* AUTOGROW */
+  /* CONFIG */
 
-  $.factory ( 'svelto.autogrowTextarea', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'autogrowTextarea',
     options: {
       minHeight: 0,
       callbacks: {
-        update: _.noop
+        update () {}
       }
-    },
+    }
+  };
+
+  /* AUTOGROW TEXTAREA */
+
+  class AutogrowTextarea extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
+      $root.filter ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
 
-    },
+    }
 
     _variables () {
 
       this.$textarea = this.$element;
 
-    },
+    }
 
     _init () {
 
-      this.update ();
+      this._update ();
 
-    },
+    }
 
     _events () {
 
       /* INPUT / CHANGE */
 
-      this._on ( 'input change', this.update );
+      this._on ( 'input change', this._update );
 
-    },
+    }
 
-    /* PUBLIC */
+    /* PRIVATE */
 
-    update () {
+    _update () {
 
       var neededHeight = this.$textarea.height ( 1 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
 
@@ -69,6 +73,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.AutogrowTextarea = AutogrowTextarea;
+  Svelto.AutogrowTextarea.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.AutogrowTextarea );
 
 }( jQuery, _, window, document ));
