@@ -12,41 +12,51 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  var widgetizers = [];
-
   /* WIDGETIZE */
 
-  window.Widgetize = function ( $root ) {
+  window.Widgetize = new class {
 
-    for ( var i = 0, l = widgetizers.length; i < l; i++ ) {
+    constructor () {
 
-      widgetizers[i]( $root );
+      this.widgetizers = [];
 
     }
 
-  };
+    add ( widgetizer ) {
 
-  /* METHODS */
+      this.widgetizers.push ( widgetizer );
 
-  Widgetize.add = function ( widgetizer ) {
+    }
 
-    widgetizers.push ( widgetizer );
+    get () {
 
-  };
+      return this.widgetizers;
 
-  Widgetize.get = function () {
+    }
 
-    return widgetizers;
+    remove ( widgetizer ) {
 
-  };
+      _.pull ( this.widgetizers, widgetizer );
+
+    }
+
+    on ( $root ) {
+
+      for ( let widgetizer of this.widgetizers ) {
+
+        widgetizer ( $root );
+
+      }
+
+    }
+
+  }
 
   /* JQUERY PLUGIN */
 
   $.fn.widgetize = function () {
 
-    Widgetize ( this );
+    Widgetize.on ( this );
 
     return this;
 

@@ -1225,41 +1225,64 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* VARIABLES */
-
-  var widgetizers = [];
-
   /* WIDGETIZE */
 
-  window.Widgetize = function ($root) {
+  window.Widgetize = new ((function () {
+    function _class() {
+      _classCallCheck(this, _class);
 
-    for (var i = 0, l = widgetizers.length; i < l; i++) {
-
-      widgetizers[i]($root);
+      this.widgetizers = [];
     }
-  };
 
-  /* METHODS */
+    _class.prototype.add = function add(widgetizer) {
 
-  Widgetize.add = function (widgetizer) {
+      this.widgetizers.push(widgetizer);
+    };
 
-    widgetizers.push(widgetizer);
-  };
+    _class.prototype.get = function get() {
 
-  Widgetize.get = function () {
+      return this.widgetizers;
+    };
 
-    return widgetizers;
-  };
+    _class.prototype.remove = function remove(widgetizer) {
+
+      _.pull(this.widgetizers, widgetizer);
+    };
+
+    _class.prototype.on = function on($root) {
+
+      for (var _iterator = this.widgetizers, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
+
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var widgetizer = _ref;
+
+        widgetizer($root);
+      }
+    };
+
+    return _class;
+  })())();
 
   /* JQUERY PLUGIN */
 
   $.fn.widgetize = function () {
 
-    Widgetize(this);
+    Widgetize.on(this);
 
     return this;
   };
