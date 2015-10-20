@@ -7794,31 +7794,21 @@ Prism.languages.js = Prism.languages.javascript;
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* HELPER */
+  /* CONFIG */
 
-  $.progressbar = function (options) {
-
-    options = _.isNumber(options) ? { value: options } : options;
-
-    return new $.svelto.progressbar(options);
-  };
-
-  /* PROGRESSBAR */
-
-  $.factory('svelto.progressbar', {
-
-    /* TEMPLATES */
-
+  var config = {
+    name: 'boilerplate',
     templates: {
       base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' + '<div class="progressbar-highlight {%=o.colors.on%}"></div>' + '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       value: 0, // Percentage
       colors: { // Colors to use for the progressbar
@@ -7830,19 +7820,45 @@ Prism.languages.js = Prism.languages.javascript;
       decimals: 0, // Amount of decimals to round the label value to
       size: '', // Size of the progressbar: '', 'compact', 'slim'
       css: '',
+      datas: {
+        value: 'value'
+      },
       selectors: {
         highlight: '.progressbar-highlight'
       },
       callbacks: {
-        change: _.noop,
-        empty: _.noop,
-        full: _.noop
+        change: function change() {},
+        empty: function empty() {},
+        full: function full() {}
       }
-    },
+    }
+  };
+
+  /* HELPER */
+
+  $.progressbar = function (options) {
+
+    options = _.isNumber(options) ? { value: options } : options;
+
+    return new Svelto.Progressbar(options);
+  };
+
+  /* PROGRESSBAR */
+
+  var Progressbar = (function (_Svelto$Widget) {
+    _inherits(Progressbar, _Svelto$Widget);
+
+    function Progressbar() {
+      _classCallCheck(this, Progressbar);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Progressbar.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.progressbar').each(function () {
 
@@ -7853,60 +7869,62 @@ Prism.languages.js = Prism.languages.javascript;
           decimals: $progressbar.data('decimals ')
         });
       });
-    },
 
-    _variables: function _variables() {
+      //TODO: Add support for $root.filter
+    };
+
+    Progressbar.prototype._variables = function _variables() {
 
       this.$progressbar = this.$element;
       this.$highlight = this.$progressbar.find(this.options.selectors.highlight);
-    },
+    };
 
-    _init: function _init() {
+    Progressbar.prototype._init = function _init() {
 
       this.options.value = this._sanitizeValue(this.options.value);
 
       this._updateWidth();
       this._updateLabel();
-    },
+    };
 
     /* PRIVATE */
 
-    _sanitizeValue: function _sanitizeValue(value) {
+    Progressbar.prototype._sanitizeValue = function _sanitizeValue(value) {
 
       var nr = Number(value);
 
       return _.clamp(0, _.isNaN(nr) ? 0 : nr, 100);
-    },
+    };
 
-    _roundValue: function _roundValue(value) {
+    Progressbar.prototype._roundValue = function _roundValue(value) {
 
       return value.toFixed(this.options.decimals);
-    },
+    };
 
-    _updateWidth: function _updateWidth() {
+    Progressbar.prototype._updateWidth = function _updateWidth() {
 
       this.$highlight.css('min-width', this.options.value + '%');
-    },
+    };
 
-    _updateLabel: function _updateLabel() {
+    Progressbar.prototype._updateLabel = function _updateLabel() {
 
-      this.$highlight.attr('data-value', this._roundValue(this.options.value) + '%');
-    },
+      this.$highlight.attr('data-' + this.options.datas.value, this._roundValue(this.options.value) + '%');
+    };
 
-    _update: function _update() {
+    Progressbar.prototype._update = function _update() {
 
       this._updateWidth();
       this._updateLabel();
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Progressbar.prototype.get = function get() {
 
       return this.options.value;
-    },
+    };
 
-    set: function set(value) {
+    Progressbar.prototype.set = function set(value) {
 
       value = Number(value);
 
@@ -7936,9 +7954,17 @@ Prism.languages.js = Prism.languages.javascript;
           }
         }
       }
-    }
+    };
 
-  });
+    return Progressbar;
+  })(Svelto.Widget);
+
+  Svelto.Progressbar = Progressbar;
+  Svelto.Progressbar.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Progressbar);
 })(jQuery, _, window, document);
 
 /* =========================================================================

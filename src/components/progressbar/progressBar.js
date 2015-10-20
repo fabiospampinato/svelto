@@ -12,30 +12,15 @@
 
   'use strict';
 
-  /* HELPER */
+  /* CONFIG */
 
-  $.progressbar = function ( options ) {
-
-    options = _.isNumber ( options ) ? { value: options } : options;
-
-    return new $.svelto.progressbar ( options );
-
-  };
-
-  /* PROGRESSBAR */
-
-  $.factory ( 'svelto.progressbar', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'boilerplate',
     templates: {
       base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
               '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
             '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       value: 0, // Percentage
       colors: { // Colors to use for the progressbar
@@ -47,15 +32,33 @@
       decimals: 0, // Amount of decimals to round the label value to
       size: '', // Size of the progressbar: '', 'compact', 'slim'
       css: '',
+      datas: {
+        value: 'value'
+      },
       selectors: {
         highlight: '.progressbar-highlight'
       },
       callbacks: {
-        change: _.noop,
-        empty: _.noop,
-        full: _.noop
+        change () {},
+        empty () {},
+        full () {}
       }
-    },
+    }
+  };
+
+  /* HELPER */
+
+  $.progressbar = function ( options ) {
+
+    options = _.isNumber ( options ) ? { value: options } : options;
+
+    return new Svelto.Progressbar ( options );
+
+  };
+
+  /* PROGRESSBAR */
+
+  class Progressbar extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -72,14 +75,16 @@
 
       });
 
-    },
+      //TODO: Add support for $root.filter
+
+    }
 
     _variables () {
 
       this.$progressbar = this.$element;
       this.$highlight = this.$progressbar.find ( this.options.selectors.highlight );
 
-    },
+    }
 
     _init () {
 
@@ -88,7 +93,7 @@
       this._updateWidth ();
       this._updateLabel ();
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -98,32 +103,32 @@
 
       return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
 
-    },
+    }
 
     _roundValue ( value ) {
 
       return value.toFixed ( this.options.decimals );
 
-    },
+    }
 
     _updateWidth () {
 
       this.$highlight.css ( 'min-width', this.options.value + '%' );
 
-    },
+    }
 
     _updateLabel () {
 
-      this.$highlight.attr ( 'data-value', this._roundValue ( this.options.value ) + '%' );
+      this.$highlight.attr ( 'data-' + this.options.datas.value, this._roundValue ( this.options.value ) + '%' );
 
-    },
+    }
 
     _update () {
 
       this._updateWidth ();
       this._updateLabel ();
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -131,7 +136,7 @@
 
       return this.options.value;
 
-    },
+    }
 
     set ( value ) {
 
@@ -170,6 +175,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Progressbar = Progressbar;
+  Svelto.Progressbar.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Progressbar );
 
 }( jQuery, _, window, document ));
