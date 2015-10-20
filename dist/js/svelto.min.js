@@ -11214,78 +11214,75 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     return _class;
   })();
 })(jQuery, _, window, document);
-"use strict";
 
-//
-// /* =========================================================================
-//  * Svelto - Tooltip
-//  * =========================================================================
-//  * Copyright (c) 2015 Fabio Spampinato
-//  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//  * =========================================================================
-//  * @requires ../widget/factory.js
-//  * ========================================================================= */
-//
-// (function ( $, _, window, document, undefined ) {
-//
-//   'use strict';
-//
-//   /* CONFIG */
-//
-//   let config = {
-//     name: 'boilerplate',
-//     templates: {
-//       base: false
-//     },
-//     options: {
-//       errors: {},
-//       datas: {},
-//       classes: {},
-//       selectors: {},
-//       animations: {},
-//       callbacks: {}
-//     }
-//   };
-//
-//   /* TOOLTIP */
-//
-//   $.factory ( 'svelto.tooltip', {
-//
-//     /* OPTIONS */
-//
-//     options: {
-//       hover: {
-//         triggerable: true
-//       },
-//       datas: {
-//         element: 'tooltip'
-//       },
-//       selectors: {
-//         closer: '.button, .tooltip-closer',
-//         trigger: '.tooltip-trigger'
-//       }
-//     },
-//
-//     /* SPECIAL */
-//
-//     _widgetize ( $root ) {
-//
-//       $root.find ( '.tooltip' ).tooltip ();
-//
-//     }
-//
-//   });
-//
-//   /* BINDING */
-//
-//   Svelto.Tooltip = Tooltip;
-//   Svelto.Tooltip.config = config;
-//
-//   /* FACTORY */
-//
-//   $.factory ( Svelto.Tooltip );
-//
-// }( jQuery, _, window, document ));
+/* =========================================================================
+ * Svelto - Tooltip
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/factory.js
+ * ========================================================================= */
+
+'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+(function ($, _, window, document, undefined) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'tooltip',
+    options: {
+      hover: {
+        triggerable: true
+      },
+      datas: {
+        element: 'tooltip'
+      },
+      selectors: {
+        closer: '.button, .tooltip-closer',
+        trigger: '.tooltip-trigger'
+      }
+    }
+  };
+
+  /* TOOLTIP */
+
+  var Tooltip = (function (_Svelto$Dropdown) {
+    _inherits(Tooltip, _Svelto$Dropdown);
+
+    function Tooltip() {
+      _classCallCheck(this, Tooltip);
+
+      _Svelto$Dropdown.apply(this, arguments);
+    }
+
+    /* BINDING */
+
+    /* SPECIAL */
+
+    Tooltip.prototype._widgetize = function _widgetize($root) {
+
+      $root.find('.tooltip').tooltip();
+      $root.filter('.tooltip').tooltip();
+    };
+
+    return Tooltip;
+  })(Svelto.Dropdown);
+
+  Svelto.Tooltip = Tooltip;
+  Svelto.Tooltip.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Tooltip);
+})(jQuery, _, window, document);
 
 /* =========================================================================
  * Svelto - Touching
