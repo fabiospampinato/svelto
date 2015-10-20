@@ -5020,22 +5020,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* SPINNER OVERLAY */
+  /* CONFIG */
 
-  $.factory('svelto.spinnerOverlay', {
-
-    /* TEMPLATES */
-
+  var config = {
+    name: 'spinnerOverlay',
     templates: {
       overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' + '<div class="spinner-label {%=(o.multicolor ? "" : o.color)%}">' + '<svg class="spinner {%=(o.multicolor ? "multicolor" : "")%}">' + '<circle />' + '</svg>' + '</div>' + '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       dimmer: false,
       blurrer: false,
@@ -5044,41 +5043,69 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       callbacks: {
         //TODO: Add callbacks, mimic those from $.svelto.overlay
       }
-    },
+    }
+  };
+
+  /* SPINNER OVERLAY */
+
+  var SpinnerOverlay = (function (_Svelto$Widget) {
+    _inherits(SpinnerOverlay, _Svelto$Widget);
+
+    function SpinnerOverlay() {
+      _classCallCheck(this, SpinnerOverlay);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _variables: function _variables() {
+    SpinnerOverlay.prototype._widgetize = function _widgetize($root) {
+
+      $root.find('.spinner-overlay').spinnerOverlay();
+      $root.filter('.spinner-overlay').spinnerOverlay();
+    };
+
+    SpinnerOverlay.prototype._variables = function _variables() {
 
       this.$overlayed = this.$element;
       this.$overlay = $(this._tmpl('overlay', this.options)).prependTo(this.$overlayed);
 
       this.overlay = this.$overlay.overlay('instance');
-    },
+    };
 
     /* API */
 
-    isOpen: function isOpen() {
+    SpinnerOverlay.prototype.isOpen = function isOpen() {
 
       return this.overlay.isOpen();
-    },
+    };
 
-    toggle: function toggle(force) {
+    SpinnerOverlay.prototype.toggle = function toggle(force) {
 
       this.overlay.toggle(force);
-    },
+    };
 
-    open: function open() {
+    SpinnerOverlay.prototype.open = function open() {
 
       this.overlay.open();
-    },
+    };
 
-    close: function close() {
+    SpinnerOverlay.prototype.close = function close() {
 
       this.overlay.close();
-    }
+    };
 
-  });
+    return SpinnerOverlay;
+  })(Svelto.Widget);
+
+  Svelto.SpinnerOverlay = SpinnerOverlay;
+  Svelto.SpinnerOverlay.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.SpinnerOverlay);
 })(jQuery, _, window, document);
 
 /* =========================================================================

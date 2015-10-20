@@ -12,12 +12,10 @@
 
   'use strict';
 
-  /* SPINNER OVERLAY */
+  /* CONFIG */
 
-  $.factory ( 'svelto.spinnerOverlay', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'spinnerOverlay',
     templates: {
       overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' +
                  '<div class="spinner-label {%=(o.multicolor ? "" : o.color)%}">' +
@@ -27,9 +25,6 @@
                  '</div>' +
                '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       dimmer: false,
       blurrer: false,
@@ -38,9 +33,21 @@
       callbacks: {
         //TODO: Add callbacks, mimic those from $.svelto.overlay
       }
-    },
+    }
+  };
+
+  /* SPINNER OVERLAY */
+
+  class SpinnerOverlay extends Svelto.Widget {
 
     /* SPECIAL */
+
+    _widgetize ( $root ) {
+
+      $root.find ( '.spinner-overlay' ).spinnerOverlay ();
+      $root.filter ( '.spinner-overlay' ).spinnerOverlay ();
+
+    }
 
     _variables () {
 
@@ -49,7 +56,7 @@
 
       this.overlay = this.$overlay.overlay ( 'instance' );
 
-    },
+    }
 
     /* API */
 
@@ -57,19 +64,19 @@
 
       return this.overlay.isOpen ();
 
-    },
+    }
 
     toggle ( force ) {
 
       this.overlay.toggle ( force );
 
-    },
+    }
 
     open () {
 
       this.overlay.open ();
 
-    },
+    }
 
     close () {
 
@@ -77,6 +84,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.SpinnerOverlay = SpinnerOverlay;
+  Svelto.SpinnerOverlay.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.SpinnerOverlay );
 
 }( jQuery, _, window, document ));
