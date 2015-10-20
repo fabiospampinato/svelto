@@ -20,16 +20,11 @@
 
   var isDragging = false;
 
-  /* DRAGGABLE */
+  /* CONFIG */
 
-  $.factory ( 'svelto.draggable', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'draggable',
     options: {
-      selectors: {
-        handler: '.draggable-handler'
-      },
       draggable: _.true, //INFO: Checks if we can drag it or not
       onlyHandlers: false, //INFO: Only an handler can drag it around
       revertable: false, //INFO: On dragend take it back to the starting position
@@ -48,20 +43,32 @@
         x: _.true,
         y: _.true
       },
+      classes: {
+        dragging: 'dragging'
+      },
+      selectors: {
+        handler: '.draggable-handler'
+      },
       callbacks: {
-        start: _.noop,
-        move: _.noop,
-        end: _.noop
+        start () {},
+        move () {},
+        end () {}
       }
-    },
+    }
+  };
+
+  /* DRAGGABLE */
+
+  class Draggable extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.draggable' ).draggable ();
+      $root.filter ( '.draggable' ).draggable ();
 
-    },
+    }
 
     _variables () {
 
@@ -70,7 +77,7 @@
 
       this.$handlers = this.options.onlyHandlers ? this.$draggable.find ( this.options.selectors.handler ) : this.$draggable;
 
-    },
+    }
 
     _events () {
 
@@ -86,7 +93,7 @@
 
       }
 
-    },
+    }
 
     /* ACTIONS */
 
@@ -101,7 +108,7 @@
 
       return this._actionMove ( deltaXY, suppressClasses );
 
-    },
+    }
 
     _actionMove ( deltaXY, suppressClasses ) {
 
@@ -141,8 +148,8 @@
 
         if ( !suppressClasses ) {
 
-          $html.addClass ( 'dragging' );
-          this.$draggable.addClass ( 'dragging' );
+          $html.addClass ( this.options.classes.dragging );
+          this.$draggable.addClass ( this.options.classes.dragging );
 
         }
 
@@ -188,7 +195,7 @@
 
       return endXY;
 
-    },
+    }
 
     /* HANDLERS */
 
@@ -216,7 +223,7 @@
 
       }
 
-    },
+    }
 
     __move ( event ) {
 
@@ -238,7 +245,7 @@
 
       this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
 
-    },
+    }
 
     __up ( event ) {
 
@@ -246,8 +253,8 @@
 
       if ( this.motion === true ) {
 
-        $html.removeClass ( 'dragging' );
-        this.$draggable.removeClass ( 'dragging' );
+        $html.removeClass ( this.options.classes.dragging );
+        this.$draggable.removeClass ( this.options.classes.dragging );
 
         /* REVERTABLE */
 
@@ -280,7 +287,7 @@
 
       this._trigger ( 'end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion } );
 
-    },
+    }
 
     __cancel () {
 
@@ -292,6 +299,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Draggable = Draggable;
+  Svelto.Draggable.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Draggable );
 
 }( jQuery, _, window, document ));

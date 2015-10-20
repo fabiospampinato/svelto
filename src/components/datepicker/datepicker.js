@@ -18,12 +18,10 @@
 
   'use strict';
 
-  /* DATEPICKER */
+  /* CONFIG */
 
-  $.factory ( 'svelto.datepicker', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'datepicker',
     options: {
       names: {
         months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -55,18 +53,24 @@
         input: 'input'
       },
       callbacks: {
-        change: _.noop,
-        refresh: _.noop
+        change () {},
+        refresh () {}
       }
-    },
+    }
+  };
+
+  /* DATEPICKER */
+
+  class Datepicker extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.datepicker' ).datepicker ();
+      $root.filter ( '.datepicker' ).datepicker ();
 
-    },
+    }
 
     _variables () {
 
@@ -97,13 +101,13 @@
       this.$dayToday = false;
       this.$daySelected = false;
 
-    },
+    }
 
     _init () {
 
       this._refresh ();
 
-    },
+    }
 
     _events () {
 
@@ -124,7 +128,7 @@
 
       this._on ( Pointer.tap, this.options.selectors.day.current, this.__dayTap );
 
-    },
+    }
 
     /* CHANGE */
 
@@ -132,7 +136,7 @@
 
       this.set ( this.$input.val () );
 
-    },
+    }
 
     /* KEYDOWN */
 
@@ -158,7 +162,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-    },
+    }
 
     /* NAVIGATION */
 
@@ -166,13 +170,13 @@
 
       this.prevMonth ();
 
-    },
+    }
 
     __nextTap () {
 
       this.nextMonth ();
 
-    },
+    }
 
     /* SELECTION */
 
@@ -180,7 +184,7 @@
 
       if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
 
-      var day = parseInt ( $(node).html (), 10 );
+      let day = parseInt ( $(node).html (), 10 );
 
       this._unhighlightSelected ();
 
@@ -190,13 +194,13 @@
 
       this._updateInput ();
 
-    },
+    }
 
     /* OTHERS */
 
     _buildCalendar () {
 
-      var prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
+      let prevMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 0 ).getDate (),
           currentMonthDays = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth () + 1, 0 ).getDate (),
           initialDayOfWeek = new Date ( this.options.date.current.getFullYear (), this.options.date.current.getMonth (), 1 ).getDay ();
 
@@ -206,7 +210,7 @@
 
       /* PREV */
 
-      var exceedingDays = 31 - prevMonthDays,
+      let exceedingDays = 31 - prevMonthDays,
           neededDays = initialDayOfWeek,
           leftDays = 9 - exceedingDays - neededDays;
 
@@ -219,17 +223,17 @@
 
       /* NEXT */
 
-      var leftDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
+      leftDays = ( ( currentMonthDays + initialDayOfWeek ) % 7 );
 
       this.$daysNext.slice ( ( leftDays === 0 ) ? 0 : 7 - leftDays ).addClass ( 'hidden' );
 
-    },
+    }
 
     _highlightDay ( day, cssClass ) {
 
       if ( day && day.getFullYear () === this.options.date.current.getFullYear () ) {
 
-        var deltaMonths = day.getMonth () - this.options.date.current.getMonth ();
+        let deltaMonths = day.getMonth () - this.options.date.current.getMonth ();
 
         switch ( deltaMonths ) {
 
@@ -248,7 +252,7 @@
 
       return false;
 
-    },
+    }
 
     _unhighlightSelected () {
 
@@ -258,13 +262,13 @@
 
       }
 
-    },
+    }
 
     _highlightSelected () {
 
       this.$daySelected = this._highlightDay ( this.options.date.selected, this.options.classes.selected );
 
-    },
+    }
 
     _unhighlightToday () {
 
@@ -274,19 +278,19 @@
 
       }
 
-    },
+    }
 
     _highlightToday () {
 
       this.$dayToday = this._highlightDay ( this.options.date.today, this.options.classes.today );
 
-    },
+    }
 
     _updateTitle () {
 
       this.$navigationTitle.html ( this.options.names.months[this.options.date.current.getMonth ()] + ' ' + this.options.date.current.getFullYear () );
 
-    },
+    }
 
     _updateInput () {
 
@@ -296,7 +300,7 @@
 
       }
 
-    },
+    }
 
     _exportDate ( date )  {
 
@@ -310,7 +314,7 @@
 
       }
 
-    },
+    }
 
     _importDate ( date )  {
 
@@ -319,7 +323,7 @@
         switch ( this.options.format.type ) {
 
           case 'YYYYMMDD':
-            var segments = date.split ( this.options.format.separator );
+            let segments = date.split ( this.options.format.separator );
             return new Date ( segments[0], parseInt ( segments[1], 10 ) - 1, segments[2] );
 
           default:
@@ -333,7 +337,7 @@
 
       }
 
-    },
+    }
 
     _refresh () {
 
@@ -346,7 +350,7 @@
 
       this._trigger ( 'refresh', this.options.date );
 
-    },
+    }
 
     /* API */
 
@@ -362,7 +366,7 @@
 
       }
 
-    },
+    }
 
     set ( date ) {
 
@@ -396,7 +400,7 @@
 
       }
 
-    },
+    }
 
     navigateMonth ( modifier ) {
 
@@ -408,13 +412,13 @@
 
       }
 
-    },
+    }
 
     prevMonth () {
 
       this.navigateMonth ( -1 );
 
-    },
+    }
 
     nextMonth () {
 
@@ -422,6 +426,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Datepicker = Datepicker;
+  Svelto.Datepicker.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Datepicker );
 
 }( jQuery, _, window, document ));

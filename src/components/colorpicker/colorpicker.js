@@ -36,7 +36,7 @@
         input: 'input'
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     }
   };

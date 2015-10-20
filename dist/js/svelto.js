@@ -3045,7 +3045,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         input: 'input'
       },
       callbacks: {
-        change: _.noop
+        change: function change() {}
       }
     }
   };
@@ -3441,16 +3441,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* DATEPICKER */
+  /* CONFIG */
 
-  $.factory('svelto.datepicker', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'datepicker',
     options: {
       names: {
         months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -3482,19 +3484,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         input: 'input'
       },
       callbacks: {
-        change: _.noop,
-        refresh: _.noop
+        change: function change() {},
+        refresh: function refresh() {}
       }
-    },
+    }
+  };
+
+  /* DATEPICKER */
+
+  var Datepicker = (function (_Svelto$Widget) {
+    _inherits(Datepicker, _Svelto$Widget);
+
+    function Datepicker() {
+      _classCallCheck(this, Datepicker);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Datepicker.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.datepicker').datepicker();
-    },
+      $root.filter('.datepicker').datepicker();
+    };
 
-    _variables: function _variables() {
+    Datepicker.prototype._variables = function _variables() {
 
       this.$datepicker = this.$element;
       this.$input = this.$datepicker.find(this.options.selectors.input);
@@ -3520,14 +3537,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       this.$dayToday = false;
       this.$daySelected = false;
-    },
+    };
 
-    _init: function _init() {
+    Datepicker.prototype._init = function _init() {
 
       this._refresh();
-    },
+    };
 
-    _events: function _events() {
+    Datepicker.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -3545,18 +3562,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* DAY TAP */
 
       this._on(Pointer.tap, this.options.selectors.day.current, this.__dayTap);
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Datepicker.prototype.__change = function __change() {
 
       this.set(this.$input.val());
-    },
+    };
 
     /* KEYDOWN */
 
-    __keydown: function __keydown(event) {
+    Datepicker.prototype.__keydown = function __keydown(event) {
 
       switch (event.keyCode) {
 
@@ -3577,23 +3594,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       event.preventDefault();
       event.stopImmediatePropagation();
-    },
+    };
 
     /* NAVIGATION */
 
-    __prevTap: function __prevTap() {
+    Datepicker.prototype.__prevTap = function __prevTap() {
 
       this.prevMonth();
-    },
+    };
 
-    __nextTap: function __nextTap() {
+    Datepicker.prototype.__nextTap = function __nextTap() {
 
       this.nextMonth();
-    },
+    };
 
     /* SELECTION */
 
-    __dayTap: function __dayTap(event, node) {
+    Datepicker.prototype.__dayTap = function __dayTap(event, node) {
 
       if (event.button && event.button !== $.ui.mouseButton.LEFT) return;
 
@@ -3606,11 +3623,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._highlightSelected();
 
       this._updateInput();
-    },
+    };
 
     /* OTHERS */
 
-    _buildCalendar: function _buildCalendar() {
+    Datepicker.prototype._buildCalendar = function _buildCalendar() {
 
       var prevMonthDays = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth(), 0).getDate(),
           currentMonthDays = new Date(this.options.date.current.getFullYear(), this.options.date.current.getMonth() + 1, 0).getDate(),
@@ -3635,12 +3652,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       /* NEXT */
 
-      var leftDays = (currentMonthDays + initialDayOfWeek) % 7;
+      leftDays = (currentMonthDays + initialDayOfWeek) % 7;
 
       this.$daysNext.slice(leftDays === 0 ? 0 : 7 - leftDays).addClass('hidden');
-    },
+    };
 
-    _highlightDay: function _highlightDay(day, cssClass) {
+    Datepicker.prototype._highlightDay = function _highlightDay(day, cssClass) {
 
       if (day && day.getFullYear() === this.options.date.current.getFullYear()) {
 
@@ -3661,48 +3678,48 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return false;
-    },
+    };
 
-    _unhighlightSelected: function _unhighlightSelected() {
+    Datepicker.prototype._unhighlightSelected = function _unhighlightSelected() {
 
       if (this.$daySelected) {
 
         this.$daySelected.removeClass(this.options.classes.selected);
       }
-    },
+    };
 
-    _highlightSelected: function _highlightSelected() {
+    Datepicker.prototype._highlightSelected = function _highlightSelected() {
 
       this.$daySelected = this._highlightDay(this.options.date.selected, this.options.classes.selected);
-    },
+    };
 
-    _unhighlightToday: function _unhighlightToday() {
+    Datepicker.prototype._unhighlightToday = function _unhighlightToday() {
 
       if (this.$dayToday) {
 
         this.$dayToday.removeClass(this.options.classes.today);
       }
-    },
+    };
 
-    _highlightToday: function _highlightToday() {
+    Datepicker.prototype._highlightToday = function _highlightToday() {
 
       this.$dayToday = this._highlightDay(this.options.date.today, this.options.classes.today);
-    },
+    };
 
-    _updateTitle: function _updateTitle() {
+    Datepicker.prototype._updateTitle = function _updateTitle() {
 
       this.$navigationTitle.html(this.options.names.months[this.options.date.current.getMonth()] + ' ' + this.options.date.current.getFullYear());
-    },
+    };
 
-    _updateInput: function _updateInput() {
+    Datepicker.prototype._updateInput = function _updateInput() {
 
       if (this.options.date.selected) {
 
         this.$input.val(this._exportDate(this.options.date.selected)).change();
       }
-    },
+    };
 
-    _exportDate: function _exportDate(date) {
+    Datepicker.prototype._exportDate = function _exportDate(date) {
 
       switch (this.options.format.type) {
 
@@ -3713,9 +3730,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           return date.toUTCString();
 
       }
-    },
+    };
 
-    _importDate: function _importDate(date) {
+    Datepicker.prototype._importDate = function _importDate(date) {
 
       if (_.isString(date)) {
 
@@ -3733,9 +3750,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         return new Date(date);
       }
-    },
+    };
 
-    _refresh: function _refresh() {
+    Datepicker.prototype._refresh = function _refresh() {
 
       this._unhighlightSelected();
       this._unhighlightToday();
@@ -3745,11 +3762,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._updateTitle();
 
       this._trigger('refresh', this.options.date);
-    },
+    };
 
     /* API */
 
-    get: function get(formatted) {
+    Datepicker.prototype.get = function get(formatted) {
 
       if (formatted && this.options.date.selected) {
 
@@ -3758,9 +3775,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         return this.options.date.selected;
       }
-    },
+    };
 
-    set: function set(date) {
+    Datepicker.prototype.set = function set(date) {
 
       date = this._importDate(date);
 
@@ -3787,9 +3804,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this._trigger('change', this.options.date);
         }
       }
-    },
+    };
 
-    navigateMonth: function navigateMonth(modifier) {
+    Datepicker.prototype.navigateMonth = function navigateMonth(modifier) {
 
       if (modifier) {
 
@@ -3797,19 +3814,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._refresh();
       }
-    },
+    };
 
-    prevMonth: function prevMonth() {
+    Datepicker.prototype.prevMonth = function prevMonth() {
 
       this.navigateMonth(-1);
-    },
+    };
 
-    nextMonth: function nextMonth() {
+    Datepicker.prototype.nextMonth = function nextMonth() {
 
       this.navigateMonth(1);
-    }
+    };
 
-  });
+    return Datepicker;
+  })(Svelto.Widget);
+
+  Svelto.Datepicker = Datepicker;
+  Svelto.Datepicker.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Datepicker);
 })(jQuery, _, window, document);
 
 /* =========================================================================
@@ -3827,6 +3852,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -3835,16 +3864,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   var isDragging = false;
 
-  /* DRAGGABLE */
+  /* CONFIG */
 
-  $.factory('svelto.draggable', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'draggable',
     options: {
-      selectors: {
-        handler: '.draggable-handler'
-      },
       draggable: _['true'], //INFO: Checks if we can drag it or not
       onlyHandlers: false, //INFO: Only an handler can drag it around
       revertable: false, //INFO: On dragend take it back to the starting position
@@ -3863,29 +3887,50 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         x: _['true'],
         y: _['true']
       },
+      classes: {
+        dragging: 'dragging'
+      },
+      selectors: {
+        handler: '.draggable-handler'
+      },
       callbacks: {
-        start: _.noop,
-        move: _.noop,
-        end: _.noop
+        start: function start() {},
+        move: function move() {},
+        end: function end() {}
       }
-    },
+    }
+  };
+
+  /* DRAGGABLE */
+
+  var Draggable = (function (_Svelto$Widget) {
+    _inherits(Draggable, _Svelto$Widget);
+
+    function Draggable() {
+      _classCallCheck(this, Draggable);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Draggable.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.draggable').draggable();
-    },
+      $root.filter('.draggable').draggable();
+    };
 
-    _variables: function _variables() {
+    Draggable.prototype._variables = function _variables() {
 
       this.draggable = this.element;
       this.$draggable = this.$element;
 
       this.$handlers = this.options.onlyHandlers ? this.$draggable.find(this.options.selectors.handler) : this.$draggable;
-    },
+    };
 
-    _events: function _events() {
+    Draggable.prototype._events = function _events() {
 
       /* DOWN */
 
@@ -3897,11 +3942,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._on(this.options.$proxy, Pointer.down, this.__down);
       }
-    },
+    };
 
     /* ACTIONS */
 
-    _centerToPoint: function _centerToPoint(point, suppressClasses) {
+    Draggable.prototype._centerToPoint = function _centerToPoint(point, suppressClasses) {
 
       var draggableOffset = this.$draggable.offset();
 
@@ -3911,9 +3956,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       };
 
       return this._actionMove(deltaXY, suppressClasses);
-    },
+    };
 
-    _actionMove: function _actionMove(deltaXY, suppressClasses) {
+    Draggable.prototype._actionMove = function _actionMove(deltaXY, suppressClasses) {
 
       var baseXY = {
         X: this.proxyXY ? this.proxyXY.X : this.initialXY.X,
@@ -3948,8 +3993,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         if (!suppressClasses) {
 
-          $html.addClass('dragging');
-          this.$draggable.addClass('dragging');
+          $html.addClass(this.options.classes.dragging);
+          this.$draggable.addClass(this.options.classes.dragging);
         }
       }
 
@@ -3988,11 +4033,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$draggable.translate(endXY.X, endXY.Y);
 
       return endXY;
-    },
+    };
 
     /* HANDLERS */
 
-    __down: function __down(event, trigger) {
+    Draggable.prototype.__down = function __down(event, trigger) {
 
       if (!isDragging && this.options.draggable()) {
 
@@ -4014,9 +4059,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         this._on($document, Pointer.up, this.__up);
         this._on($document, Pointer.cancel, this.__cancel);
       }
-    },
+    };
 
-    __move: function __move(event) {
+    Draggable.prototype.__move = function __move(event) {
 
       if (this.isProxyed && this.motion === false) {
 
@@ -4034,16 +4079,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       var modifiedXY = this._actionMove(deltaXY);
 
       this._trigger('move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY });
-    },
+    };
 
-    __up: function __up(event) {
+    Draggable.prototype.__up = function __up(event) {
 
       var modifiedXY = this.initialXY;
 
       if (this.motion === true) {
 
-        $html.removeClass('dragging');
-        this.$draggable.removeClass('dragging');
+        $html.removeClass(this.options.classes.dragging);
+        this.$draggable.removeClass(this.options.classes.dragging);
 
         /* REVERTABLE */
 
@@ -4070,18 +4115,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._off($document, Pointer.cancel, this.__cancel);
 
       this._trigger('end', { event: event, draggable: this.draggable, initialXY: this.initialXY, endXY: modifiedXY, motion: this.motion });
-    },
+    };
 
-    __cancel: function __cancel() {
+    Draggable.prototype.__cancel = function __cancel() {
 
       isDragging = false;
 
       this._off($document, Pointer.move, this.__move);
       this._off($document, Pointer.up, this.__up);
       this._off($document, Pointer.cancel, this.__cancel);
-    }
+    };
 
-  });
+    return Draggable;
+  })(Svelto.Widget);
+
+  Svelto.Draggable = Draggable;
+  Svelto.Draggable.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Draggable);
 })(jQuery, _, window, document);
 
 /* TRANSFORM UTILITIES */
