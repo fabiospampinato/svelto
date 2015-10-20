@@ -12,12 +12,10 @@
 
   'use strict';
 
-  /* FLIPPABLE */
+  /* CONFIG */
 
-  $.factory ( 'svelto.flippable', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'flippable',
     options: {
       classes: {
         flip: 'flipped'
@@ -28,18 +26,24 @@
         flipper: '.flippable-trigger'
       },
       callbacks: {
-        font: _.noop,
-        back: _.noop
+        font () {},
+        back () {}
       }
-    },
+    }
+  };
+
+  /* FLIPPABLE */
+
+  class Flippable extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.flippable' ).flippable ();
+      $root.filter ( '.flippable' ).flippable ();
 
-    },
+    }
 
     _variables () {
 
@@ -50,7 +54,7 @@
 
       this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
 
-    },
+    }
 
     _events () {
 
@@ -58,7 +62,7 @@
 
       this._on ( this.$flippers, Pointer.tap, this.flip );
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -80,13 +84,13 @@
 
       }
 
-    },
+    }
 
     front () {
 
       this.flip ( false );
 
-    },
+    }
 
     back () {
 
@@ -94,6 +98,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Flippable = Flippable;
+  Svelto.Flippable.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Flippable );
 
 }( jQuery, _, window, document ));

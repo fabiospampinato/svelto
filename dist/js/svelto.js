@@ -4900,16 +4900,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* FLIPPABLE */
+  /* CONFIG */
 
-  $.factory('svelto.flippable', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'flippable',
     options: {
       classes: {
         flip: 'flipped'
@@ -4920,19 +4922,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         flipper: '.flippable-trigger'
       },
       callbacks: {
-        font: _.noop,
-        back: _.noop
+        font: function font() {},
+        back: function back() {}
       }
-    },
+    }
+  };
+
+  /* FLIPPABLE */
+
+  var Flippable = (function (_Svelto$Widget) {
+    _inherits(Flippable, _Svelto$Widget);
+
+    function Flippable() {
+      _classCallCheck(this, Flippable);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Flippable.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.flippable').flippable();
-    },
+      $root.filter('.flippable').flippable();
+    };
 
-    _variables: function _variables() {
+    Flippable.prototype._variables = function _variables() {
 
       this.$flippable = this.$element;
       this.$front = this.$flippable.find(this.options.selectors.front);
@@ -4940,18 +4957,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$flippers = this.$flippable.find(this.options.selectors.flipper);
 
       this.isFlipped = this.$flippable.hasClass(this.options.classes.flip);
-    },
+    };
 
-    _events: function _events() {
+    Flippable.prototype._events = function _events() {
 
       /* FLIPPER */
 
       this._on(this.$flippers, Pointer.tap, this.flip);
-    },
+    };
 
     /* PUBLIC */
 
-    flip: function flip(force) {
+    Flippable.prototype.flip = function flip(force) {
 
       if (!_.isBoolean(force)) {
 
@@ -4966,19 +4983,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._trigger(this.isFlipped ? 'back' : 'front');
       }
-    },
+    };
 
-    front: function front() {
+    Flippable.prototype.front = function front() {
 
       this.flip(false);
-    },
+    };
 
-    back: function back() {
+    Flippable.prototype.back = function back() {
 
       this.flip(true);
-    }
+    };
 
-  });
+    return Flippable;
+  })(Svelto.Widget);
+
+  Svelto.Flippable = Flippable;
+  Svelto.Flippable.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Flippable);
 })(jQuery, _, window, document);
 
 /* =========================================================================
