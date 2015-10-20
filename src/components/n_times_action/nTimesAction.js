@@ -42,12 +42,12 @@
 
     if ( options.action ) {
 
-      var action = new Svelto.NTA.Action ({ group: options.group, name: options.action }),
+      let action = new Svelto.NTA.Action ({ group: options.group, name: options.action }),
           actionTimes = action.get ();
 
       if ( options.fn && actionTimes < options.times ) {
 
-        var value = options.fn ({
+        let value = options.fn ({
           group: options.group,
           action: options.action,
           time: actionTimes + 1
