@@ -20,6 +20,8 @@
       base: false
     },
     options: {
+      characters: {},
+      regexes: {},
       errors: {},
       attributes: {},
       datas: {},

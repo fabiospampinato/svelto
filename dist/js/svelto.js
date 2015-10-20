@@ -2198,6 +2198,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       base: false
     },
     options: {
+      characters: {},
+      regexes: {},
       errors: {},
       attributes: {},
       datas: {},
@@ -5734,16 +5736,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* FORM VALIDATE */
+  /* CONFIG */
 
-  $.factory('svelto.formValidate', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'formValidate',
     options: {
       validators: {
         /* TYPE */
@@ -5855,25 +5859,39 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       callbacks: {
         //TODO: Add some callbacks
       }
-    },
+    }
+  };
+
+  /* FORM VALIDATE */
+
+  var FormValidate = (function (_Svelto$Widget) {
+    _inherits(FormValidate, _Svelto$Widget);
+
+    function FormValidate() {
+      _classCallCheck(this, FormValidate);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    FormValidate.prototype._widgetize = function _widgetize($root) {
 
       $root.find('[data-validations]').parents('form').formValidate();
-    },
+    };
 
-    _variables: function _variables() {
+    FormValidate.prototype._variables = function _variables() {
 
       this.$form = this.$element;
       this.$elements = this.$element.find(this.options.selectors.element);
       this.$submitters = this.$element.find(this.options.selectors.submitter);
 
       this.___elements();
-    },
+    };
 
-    _events: function _events() {
+    FormValidate.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -5890,31 +5908,52 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* SUBMIT */
 
       this._on('submit', this.__submit);
-    },
+    };
 
     /* ELEMENTS */
 
-    ___elements: function ___elements() {
+    FormValidate.prototype.___elements = function ___elements() {
 
       this.elements = {};
 
-      for (var i = 0, l = this.$elements.length; i < l; i++) {
+      for (var _iterator = $elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-        var element = this.$elements[i],
-            $element = $(element),
-            name = element.name,
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var element = _ref;
+
+        var $element = $(element),
+            _name = element.name,
             validationsStr = $element.data(this.options.datas.validations);
 
         if (validationsStr) {
 
-          var validations = {};
+          var _validations = {},
+              validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
-          var validationsArr = validationsStr.split(this.options.characters.separators.validations);
+          for (var _iterator2 = validationsArr, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+            var _ref2;
 
-          for (var vi = 0, vl = validationsArr.length; vi < vl; vi++) {
+            if (_isArray2) {
+              if (_i2 >= _iterator2.length) break;
+              _ref2 = _iterator2[_i2++];
+            } else {
+              _i2 = _iterator2.next();
+              if (_i2.done) break;
+              _ref2 = _i2.value;
+            }
 
-            var validationStr = validationsArr[vi],
-                matches = validationStr.match(this.options.regexes.validation);
+            var validationStr = _ref2;
+
+            var matches = validationStr.match(this.options.regexes.validation);
 
             if (!matches) continue;
 
@@ -5924,36 +5963,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
             if (!validator) continue;
 
-            validations[validationName] = {
+            _validations[validationName] = {
               args: validationArgs,
               validator: validator
             };
           }
 
-          if (_.size(validations) === 0) {
+          if (_.size(_validations) === 0) {
 
-            validations = false;
+            _validations = false;
           }
         } else {
 
-          var validations = false;
+          var _validations2 = false;
         }
 
-        this.elements[name] = {
+        this.elements[_name] = {
           $element: $element,
           $wrapper: $element.parents(this.options.selectors.wrapper).first(),
-          name: name,
+          name: _name,
           dirty: false,
           value: $element.val(),
           validations: validations,
           isValid: undefined
         };
       }
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change(event, element) {
+    FormValidate.prototype.__change = function __change(event, element) {
 
       var elementObj = this.elements[element.name];
 
@@ -5980,42 +6019,42 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._validateWorker(elementObj);
       }
-    },
+    };
 
     /* FOCUS */
 
-    __focus: function __focus(event, element) {
+    FormValidate.prototype.__focus = function __focus(event, element) {
 
       var elementObj = this.elements[element.name];
 
       elementObj.isValid = undefined;
 
       this.__indeterminate(elementObj);
-    },
+    };
 
     /* BLUR */
 
-    __blur: function __blur(event, element) {
+    FormValidate.prototype.__blur = function __blur(event, element) {
 
       var elementObj = this.elements[element.name];
 
       this._validateWorker(elementObj);
-    },
+    };
 
     /* SUBMIT */
 
-    __submit: function __submit(event) {
+    FormValidate.prototype.__submit = function __submit(event) {
 
       if (!this.isValid()) {
 
         event.preventDefault();
         event.stopImmediatePropagation();
       }
-    },
+    };
 
     /* ELEMENT */
 
-    _validateWorker: function _validateWorker(elementObj) {
+    FormValidate.prototype._validateWorker = function _validateWorker(elementObj) {
 
       if (elementObj.isValid === undefined) {
 
@@ -6032,9 +6071,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this.__invalid(elementObj, result);
         }
       }
-    },
+    };
 
-    _validate: function _validate(elementObj) {
+    FormValidate.prototype._validate = function _validate(elementObj) {
 
       var errors = {},
           validations = elementObj.validations;
@@ -6063,26 +6102,26 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       var isValid = _.size(errors) === 0;
 
       return isValid ? true : errors;
-    },
+    };
 
-    __indeterminate: function __indeterminate(elementObj) {
+    FormValidate.prototype.__indeterminate = function __indeterminate(elementObj) {
 
       elementObj.$wrapper.removeClass(this.options.classes.invalid + ' ' + this.options.classes.valid);
-    },
+    };
 
-    __valid: function __valid(elementObj) {
+    FormValidate.prototype.__valid = function __valid(elementObj) {
 
       elementObj.$wrapper.removeClass(this.options.classes.invalid).addClass(this.options.classes.valid);
-    },
+    };
 
-    __invalid: function __invalid(elementObj, errors) {
+    FormValidate.prototype.__invalid = function __invalid(elementObj, errors) {
 
       elementObj.$wrapper.removeClass(this.options.classes.valid).addClass(this.options.classes.invalid);
-    },
+    };
 
     /* API */
 
-    isValid: function isValid() {
+    FormValidate.prototype.isValid = function isValid() {
 
       for (var name in this.elements) {
 
@@ -6105,9 +6144,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return true;
-    }
+    };
 
-  });
+    return FormValidate;
+  })(Svelto.Widget);
+
+  Svelto.FormValidate = FormValidate;
+  Svelto.FormValidate.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.FormValidate);
 })(jQuery, _, window, document);
 
 /* =========================================================================

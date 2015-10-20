@@ -16,12 +16,10 @@
 
   'use strict';
 
-  /* FORM VALIDATE */
+  /* CONFIG */
 
-  $.factory ( 'svelto.formValidate', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'formValidate',
     options: {
       validators: {
         /* TYPE */
@@ -133,7 +131,12 @@
       callbacks: {
         //TODO: Add some callbacks
       }
-    },
+    }
+  };
+
+  /* FORM VALIDATE */
+
+  class FormValidate extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -141,7 +144,7 @@
 
       $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
 
-    },
+    }
 
     _variables () {
 
@@ -151,7 +154,7 @@
 
       this.___elements ();
 
-    },
+    }
 
     _events () {
 
@@ -171,7 +174,7 @@
 
       this._on ( 'submit', this.__submit );
 
-    },
+    }
 
     /* ELEMENTS */
 
@@ -179,27 +182,24 @@
 
       this.elements = {};
 
-      for ( var i = 0, l = this.$elements.length; i < l; i++ ) {
+      for ( let element of $elements ) {
 
-        var element = this.$elements[i],
-            $element = $(element),
+        let $element = $(element),
             name = element.name,
             validationsStr = $element.data ( this.options.datas.validations );
 
         if ( validationsStr ) {
 
-          var validations = {};
+          let validations = {},
+              validationsArr = validationsStr.split ( this.options.characters.separators.validations );
 
-          var validationsArr = validationsStr.split ( this.options.characters.separators.validations );
+          for ( let validationStr of validationsArr ) {
 
-          for ( var vi = 0, vl = validationsArr.length; vi < vl; vi++ ) {
-
-            var validationStr = validationsArr[vi],
-                matches = validationStr.match ( this.options.regexes.validation );
+            let matches = validationStr.match ( this.options.regexes.validation );
 
             if ( !matches ) continue;
 
-            var validationName = matches[1],
+            let validationName = matches[1],
                 validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
                 validator = this.options.validators[validationName];
 
@@ -220,7 +220,7 @@
 
         } else {
 
-          var validations = false;
+          let validations = false;
 
         }
 
@@ -236,7 +236,7 @@
 
       }
 
-    },
+    }
 
     /* CHANGE */
 
@@ -272,7 +272,7 @@
 
       }
 
-    },
+    }
 
     /* FOCUS */
 
@@ -284,7 +284,7 @@
 
       this.__indeterminate ( elementObj );
 
-    },
+    }
 
     /* BLUR */
 
@@ -294,7 +294,7 @@
 
       this._validateWorker ( elementObj );
 
-    },
+    }
 
     /* SUBMIT */
 
@@ -307,7 +307,7 @@
 
       }
 
-    },
+    }
 
     /* ELEMENT */
 
@@ -332,7 +332,7 @@
 
       }
 
-    },
+    }
 
     _validate ( elementObj ) {
 
@@ -368,25 +368,25 @@
 
       return isValid ? true : errors;
 
-    },
+    }
 
     __indeterminate ( elementObj ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
 
-    },
+    }
 
     __valid ( elementObj ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
 
-    },
+    }
 
     __invalid ( elementObj, errors ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
 
-    },
+    }
 
     /* API */
 
@@ -420,6 +420,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.FormValidate = FormValidate;
+  Svelto.FormValidate.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.FormValidate );
 
 }( jQuery, _, window, document ));
