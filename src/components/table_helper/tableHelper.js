@@ -12,12 +12,10 @@
 
   'use strict';
 
-  /* TABLE HELPER */
+  /* CONFIG */
 
-  $.factory ( 'svelto.tableHelper', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'tableHelper',
     templates: {
       row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
              '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' +
@@ -30,9 +28,6 @@
              '{% } %}' +
            '</tr>'
     },
-
-    /* OPTIONS */
-
     options: {
       rowIdPrefix: 'rid',
       selectors: {
@@ -44,20 +39,26 @@
         notEmptyRow: 'tr:not(.table-row-empty)'
       },
       callbacks: {
-        add: _.noop,
-        update: _.noop,
-        remove: _.noop,
-        clear: _.noop
+        add () {},
+        update () {},
+        remove () {},
+        clear () {}
       }
     },
+  };
+
+  /* TABLE HELPER */
+
+  class TableHelper extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( 'table.table' ).tableHelper ();
+      $root.filter ( 'table.table' ).tableHelper ();
 
-    },
+    }
 
     _variables () {
 
@@ -69,13 +70,13 @@
 
       this.columnsNr = this.$headerCells.length;
 
-    },
+    }
 
     _init () {
 
       this._checkEmpty ();
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -85,13 +86,13 @@
 
       this.$emptyRow.toggleClass ( 'hidden', hasNonEmptyRows );
 
-    },
+    }
 
     _getRowId ( id ) {
 
       return this.options.rowIdPrefix + '_' + this.guid + '_' + id;
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -130,7 +131,7 @@
 
       return this;
 
-    },
+    }
 
     update ( id ) { //INFO: id, datas...
 
@@ -161,7 +162,7 @@
 
       return this;
 
-    },
+    }
 
     remove ( id ) {
 
@@ -183,7 +184,7 @@
 
       return this;
 
-    },
+    }
 
     clear () {
 
@@ -207,6 +208,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.TableHelper = TableHelper;
+  Svelto.TableHelper.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.TableHelper );
 
 }( jQuery, _, window, document ));

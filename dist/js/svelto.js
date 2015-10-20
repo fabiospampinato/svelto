@@ -10102,22 +10102,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* TABLE HELPER */
+  /* CONFIG */
 
-  $.factory('svelto.tableHelper', {
-
-    /* TEMPLATES */
-
+  var config = {
+    name: 'tableHelper',
     templates: {
       row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' + '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' + '<td>' + '{%=o.datas[i]%}' + '</td>' + '{% } %}' + '{% for ( var i = 0, l = o.missing; i < l; i++ ) { %}' + '<td></td>' + '{% } %}' + '</tr>'
     },
-
-    /* OPTIONS */
-
     options: {
       rowIdPrefix: 'rid',
       selectors: {
@@ -10129,21 +10128,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         notEmptyRow: 'tr:not(.table-row-empty)'
       },
       callbacks: {
-        add: _.noop,
-        update: _.noop,
-        remove: _.noop,
-        clear: _.noop
+        add: function add() {},
+        update: function update() {},
+        remove: function remove() {},
+        clear: function clear() {}
       }
-    },
+    }
+  };
+
+  /* TABLE HELPER */
+
+  var TableHelper = (function (_Svelto$Widget) {
+    _inherits(TableHelper, _Svelto$Widget);
+
+    function TableHelper() {
+      _classCallCheck(this, TableHelper);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    TableHelper.prototype._widgetize = function _widgetize($root) {
 
       $root.find('table.table').tableHelper();
-    },
+      $root.filter('table.table').tableHelper();
+    };
 
-    _variables: function _variables() {
+    TableHelper.prototype._variables = function _variables() {
 
       this.$table = this.$element;
       this.$header = this.$table.find(this.options.selectors.header);
@@ -10152,30 +10166,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$emptyRow = this.$body.find(this.options.selectors.emptyRow);
 
       this.columnsNr = this.$headerCells.length;
-    },
+    };
 
-    _init: function _init() {
+    TableHelper.prototype._init = function _init() {
 
       this._checkEmpty();
-    },
+    };
 
     /* PRIVATE */
 
-    _checkEmpty: function _checkEmpty() {
+    TableHelper.prototype._checkEmpty = function _checkEmpty() {
 
       var hasNonEmptyRows = this.$body.find(this.options.selectors.notEmptyRow).length > 0;
 
       this.$emptyRow.toggleClass('hidden', hasNonEmptyRows);
-    },
+    };
 
-    _getRowId: function _getRowId(id) {
+    TableHelper.prototype._getRowId = function _getRowId(id) {
 
       return this.options.rowIdPrefix + '_' + this.guid + '_' + id;
-    },
+    };
 
     /* PUBLIC */
 
-    add: function add(id) {
+    TableHelper.prototype.add = function add(id) {
       //INFO: id, datas...
 
       var datas = _.tail(arguments),
@@ -10208,9 +10222,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return this;
-    },
+    };
 
-    update: function update(id) {
+    TableHelper.prototype.update = function update(id) {
       //INFO: id, datas...
 
       var datas = _.tail(arguments),
@@ -10236,9 +10250,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return this;
-    },
+    };
 
-    remove: function remove(id) {
+    TableHelper.prototype.remove = function remove(id) {
 
       var $row = $('.' + this._getRowId(id));
 
@@ -10256,9 +10270,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return this;
-    },
+    };
 
-    clear: function clear() {
+    TableHelper.prototype.clear = function clear() {
 
       var $rows = this.$body.find(this.options.selectors.notEmptyRow);
 
@@ -10276,9 +10290,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return this;
-    }
+    };
 
-  });
+    return TableHelper;
+  })(Svelto.Widget);
+
+  Svelto.TableHelper = TableHelper;
+  Svelto.TableHelper.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.TableHelper);
 })(jQuery, _, window, document);
 
 /* =========================================================================
