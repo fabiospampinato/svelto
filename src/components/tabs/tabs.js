@@ -14,12 +14,10 @@
 
   'use strict';
 
-  /* TABS */
+  /* CONFIG */
 
-  $.factory ( 'svelto.tabs', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'tabs',
     options: {
       highlight: true,
       classes: {
@@ -36,15 +34,21 @@
       callbacks: {
         set: _.noop
       }
-    },
+    }
+  };
+
+  /* TABS */
+
+  class Tabs extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.tabs' ).tabs ();
+      $root.filter ( '.tabs' ).tabs ();
 
-    },
+    }
 
     _variables () {
 
@@ -56,7 +60,7 @@
 
       this.index = -1;
 
-    },
+    }
 
     _init () {
 
@@ -68,7 +72,7 @@
 
       this.set ( newIndex );
 
-    },
+    }
 
     _events () {
 
@@ -76,7 +80,7 @@
 
       this._on ( this.$triggers, Pointer.tap, this.__tap );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -86,7 +90,7 @@
 
       this.set ( newIndex );
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -94,7 +98,7 @@
 
       return this.index;
 
-    },
+    }
 
     set ( index ) {
 
@@ -140,6 +144,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Tabs = Tabs;
+  Svelto.Tabs.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Tabs );
 
 }( jQuery, _, window, document ));

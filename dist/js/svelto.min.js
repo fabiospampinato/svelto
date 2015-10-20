@@ -10316,16 +10316,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* TABS */
+  /* CONFIG */
 
-  $.factory('svelto.tabs', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'tabs',
     options: {
       highlight: true,
       classes: {
@@ -10342,16 +10344,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       callbacks: {
         set: _.noop
       }
-    },
+    }
+  };
+
+  /* TABS */
+
+  var Tabs = (function (_Svelto$Widget) {
+    _inherits(Tabs, _Svelto$Widget);
+
+    function Tabs() {
+      _classCallCheck(this, Tabs);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Tabs.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.tabs').tabs();
-    },
+      $root.filter('.tabs').tabs();
+    };
 
-    _variables: function _variables() {
+    Tabs.prototype._variables = function _variables() {
 
       this.$tabs = this.$element;
       this.$triggers = this.$tabs.find(this.options.selectors.triggers);
@@ -10360,9 +10377,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.isVertical = this.$tabs.hasClass(this.options.classes.vertical);
 
       this.index = -1;
-    },
+    };
 
-    _init: function _init() {
+    Tabs.prototype._init = function _init() {
 
       var $activeTrigger = this.$triggers.filter('.' + this.options.classes.active.trigger).first();
 
@@ -10371,32 +10388,32 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       var newIndex = this.$triggers.index($activeTrigger);
 
       this.set(newIndex);
-    },
+    };
 
-    _events: function _events() {
+    Tabs.prototype._events = function _events() {
 
       /* TRIGGERS */
 
       this._on(this.$triggers, Pointer.tap, this.__tap);
-    },
+    };
 
     /* PRIVATE */
 
-    __tap: function __tap(event, node) {
+    Tabs.prototype.__tap = function __tap(event, node) {
 
       var newIndex = this.$triggers.index($(node));
 
       this.set(newIndex);
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Tabs.prototype.get = function get() {
 
       return this.index;
-    },
+    };
 
-    set: function set(index) {
+    Tabs.prototype.set = function set(index) {
 
       if (this.index !== index) {
 
@@ -10434,9 +10451,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           index: this.index
         });
       }
-    }
+    };
 
-  });
+    return Tabs;
+  })(Svelto.Widget);
+
+  Svelto.Tabs = Tabs;
+  Svelto.Tabs.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Tabs);
 })(jQuery, _, window, document);
 
 /* =========================================================================
