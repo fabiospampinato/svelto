@@ -6196,55 +6196,80 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* INFOBAR */
+  /* CONFIG */
 
-  $.factory('svelto.infobar', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'infobar',
     options: {
       selectors: {
         closer: '.infobar-closer'
       },
       callbacks: {
-        close: _.noop
+        close: function close() {}
       }
-    },
+    }
+  };
+
+  /* INFOBAR */
+
+  var Infobar = (function (_Svelto$Widget) {
+    _inherits(Infobar, _Svelto$Widget);
+
+    function Infobar() {
+      _classCallCheck(this, Infobar);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Infobar.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.infobar').infobar();
-    },
+      $root.filter('.infobar').infobar();
+    };
 
-    _variables: function _variables() {
+    Infobar.prototype._variables = function _variables() {
 
       this.$infobar = this.$element;
       this.$closers = this.$infobar.find(this.options.selectors.closer);
-    },
+    };
 
-    _events: function _events() {
+    Infobar.prototype._events = function _events() {
 
       /* CLOSER */
 
       this._on(this.$closers, Pointer.tap, this.close);
-    },
+    };
 
-    /* PUBLIC */
+    /* API */
 
-    close: function close() {
+    Infobar.prototype.close = function close() {
 
       this.$infobar.remove();
 
       this._trigger('close');
-    }
+    };
 
-  });
+    return Infobar;
+  })(Svelto.Widget);
+
+  Svelto.Infobar = Infobar;
+  Svelto.Infobar.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Infobar);
 })(jQuery, _, window, document);
 
 /* =========================================================================

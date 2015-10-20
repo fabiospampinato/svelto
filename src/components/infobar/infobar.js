@@ -14,35 +14,39 @@
 
   'use strict';
 
-  /* INFOBAR */
+  /* CONFIG */
 
-  $.factory ( 'svelto.infobar', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'infobar',
     options: {
       selectors: {
         closer: '.infobar-closer'
       },
       callbacks: {
-        close: _.noop
+        close () {}
       }
-    },
+    }
+  };
+
+  /* INFOBAR */
+
+  class Infobar extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.infobar' ).infobar ();
+      $root.filter ( '.infobar' ).infobar ();
 
-    },
+    }
 
     _variables () {
 
       this.$infobar = this.$element;
       this.$closers = this.$infobar.find ( this.options.selectors.closer );
 
-    },
+    }
 
     _events () {
 
@@ -50,9 +54,9 @@
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
-    },
+    }
 
-    /* PUBLIC */
+    /* API */
 
     close () {
 
@@ -62,6 +66,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Infobar = Infobar;
+  Svelto.Infobar.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Infobar );
 
 }( jQuery, _, window, document ));
