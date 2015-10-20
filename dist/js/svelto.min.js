@@ -7978,39 +7978,66 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
+  /* CONFIG */
+
+  var config = {
+    name: 'boilerplate',
+    options: {
+      attributes: {
+        name: 'name'
+      },
+      classes: {
+        checked: 'checked'
+      },
+      selectors: {
+        input: 'input',
+        form: 'form'
+      },
+      callbacks: {
+        change: function change() {},
+        check: function check() {},
+        uncheck: function uncheck() {}
+      }
+    }
+  };
+
   /* RADIO */
 
-  $.factory('svelto.radio', {
+  var Radio = (function (_Svelto$Widget) {
+    _inherits(Radio, _Svelto$Widget);
 
-    /* OPTIONS */
+    function Radio() {
+      _classCallCheck(this, Radio);
 
-    options: {
-      callbacks: {
-        change: _.noop,
-        check: _.noop,
-        uncheck: _.noop
-      }
-    },
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Radio.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.radio').radio();
-    },
+      $root.filter('.radio').radio();
+    };
 
-    _variables: function _variables() {
+    Radio.prototype._variables = function _variables() {
 
       this.$radio = this.$element;
-      this.$input = this.$radio.find('input');
+      this.$input = this.$radio.find(this.options.selectors.input);
 
-      this.name = this.$input.attr('name');
+      this.name = this.$input.attr(this.options.attributes.name);
 
-      this.$container = this.$radio.parents('form').first();
+      this.$container = this.$radio.parents(this.options.selectors.form).first();
 
       if (this.$container.length === 0) {
 
@@ -8018,56 +8045,56 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       this.$otherRadios = this.$container.find(this.name ? 'input[type="radio"][name="' + this.name + '"]' : 'input[type="radio"]').parent('.radio').not(this.$radio);
-    },
+    };
 
-    _init: function _init() {
+    Radio.prototype._init = function _init() {
       //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
       var isChecked = this.get(),
-          hasClass = this.$radio.hasClass('checked');
+          hasClass = this.$radio.hasClass(this.options.classes.checked);
 
       if (isChecked !== hasClass) {
 
-        this.$radio.toggleClass('checked', isChecked);
+        this.$radio.toggleClass(this.options.classes.checked, isChecked);
       }
-    },
+    };
 
-    _events: function _events() {
+    Radio.prototype._events = function _events() {
 
       /* CHANGE */
 
       this._on(true, this.$input, 'change', this.__change);
 
-      /* CLICK */
+      /* TAP */
 
-      this._on('click', this.check);
-    },
+      this._on(Pointer.tap, this.check);
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Radio.prototype.__change = function __change() {
 
       var isChecked = this.get();
 
       if (isChecked) {
 
-        this.$otherRadios.removeClass('checked');
+        this.$otherRadios.removeClass(this.options.classes.checked);
       }
 
-      this.$radio.toggleClass('checked', isChecked);
+      this.$radio.toggleClass(this.options.classes.checked, isChecked);
 
       this._trigger('change', { checked: isChecked });
       this._trigger(isChecked ? 'check' : 'uncheck');
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Radio.prototype.get = function get() {
 
       return this.$input.prop('checked');
-    },
+    };
 
-    check: function check() {
+    Radio.prototype.check = function check() {
 
       var isChecked = this.get();
 
@@ -8078,9 +8105,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         this._trigger('change', { checked: true });
         this._trigger('check');
       }
-    }
+    };
 
-  });
+    return Radio;
+  })(Svelto.Widget);
+
+  Svelto.Radio = Radio;
+  Svelto.Radio.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Radio);
 })(jQuery, _, window, document);
 
 /* =========================================================================

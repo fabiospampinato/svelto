@@ -12,36 +12,50 @@
 
   'use strict';
 
+  /* CONFIG */
+
+  let config = {
+    name: 'boilerplate',
+    options: {
+      attributes: {
+        name: 'name'
+      },
+      classes: {
+        checked: 'checked'
+      },
+      selectors: {
+        input: 'input',
+        form: 'form'
+      },
+      callbacks: {
+        change () {},
+        check () {},
+        uncheck () {}
+      }
+    }
+  };
+
   /* RADIO */
 
-  $.factory ( 'svelto.radio', {
-
-    /* OPTIONS */
-
-    options: {
-      callbacks: {
-        change: _.noop,
-        check: _.noop,
-        uncheck: _.noop
-      }
-    },
+  class Radio extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.radio' ).radio ();
+      $root.filter ( '.radio' ).radio ();
 
-    },
+    }
 
     _variables () {
 
       this.$radio = this.$element;
-      this.$input = this.$radio.find ( 'input' );
+      this.$input = this.$radio.find ( this.options.selectors.input );
 
-      this.name = this.$input.attr ( 'name' );
+      this.name = this.$input.attr ( this.options.attributes.name );
 
-      this.$container = this.$radio.parents ( 'form' ).first ();
+      this.$container = this.$radio.parents ( this.options.selectors.form ).first ();
 
       if ( this.$container.length === 0 ) {
 
@@ -51,20 +65,20 @@
 
       this.$otherRadios = this.$container.find ( this.name ? 'input[type="radio"][name="' + this.name + '"]' : 'input[type="radio"]' ).parent ( '.radio' ).not ( this.$radio );
 
-    },
+    }
 
     _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
       var isChecked = this. get (),
-          hasClass = this.$radio.hasClass ( 'checked' );
+          hasClass = this.$radio.hasClass ( this.options.classes.checked );
 
       if ( isChecked !== hasClass ) {
 
-        this.$radio.toggleClass ( 'checked', isChecked );
+        this.$radio.toggleClass ( this.options.classes.checked, isChecked );
 
       }
 
-    },
+    }
 
     _events () {
 
@@ -72,11 +86,11 @@
 
       this._on ( true, this.$input, 'change', this.__change );
 
-      /* CLICK */
+      /* TAP */
 
-      this._on ( 'click', this.check );
+      this._on ( Pointer.tap, this.check );
 
-    },
+    }
 
     /* CHANGE */
 
@@ -86,16 +100,16 @@
 
       if ( isChecked ) {
 
-        this.$otherRadios.removeClass ( 'checked' );
+        this.$otherRadios.removeClass ( this.options.classes.checked );
 
       }
 
-      this.$radio.toggleClass ( 'checked', isChecked );
+      this.$radio.toggleClass ( this.options.classes.checked, isChecked );
 
       this._trigger ( 'change', { checked: isChecked } );
       this._trigger ( isChecked ? 'check' : 'uncheck' );
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -103,7 +117,7 @@
 
       return this.$input.prop ( 'checked' );
 
-    },
+    }
 
     check () {
 
@@ -120,6 +134,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Radio = Radio;
+  Svelto.Radio.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Radio );
 
 }( jQuery, _, window, document ));
