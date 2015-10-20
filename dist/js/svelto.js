@@ -10481,22 +10481,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* TAGBOX */
+  /* CONFIG */
 
-  $.factory('svelto.tagbox', {
-
-    /* TEMPLATES */
-
+  var config = {
+    name: 'tagbox',
     templates: {
       tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' + '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' + '<span>' + '{%=o.value%}' + '</span>' + '<div class="sub right gray actionable tagbox-tag-remover">' + '<i class="icon">close</i>' + '</div>' + '</div>' + '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       init: '',
       tags: [],
@@ -10523,16 +10522,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         tagRemover: '.tagbox-tag-remover'
       },
       callbacks: {
-        change: _.noop,
-        add: _.noop,
-        remove: _.noop,
-        empty: _.noop
+        change: function change() {},
+        add: function add() {},
+        remove: function remove() {},
+        empty: function empty() {}
       }
-    },
+    }
+  };
+
+  /* TAGBOX */
+
+  var Tagbox = (function (_Svelto$Widget) {
+    _inherits(Tagbox, _Svelto$Widget);
+
+    function Tagbox() {
+      _classCallCheck(this, Tagbox);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Tagbox.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.tagbox').each(function () {
 
@@ -10540,22 +10553,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         $tagbox.tagbox({ init: $tagbox.find('input').val() });
       });
-    },
 
-    _variables: function _variables() {
+      //TODO: add support for liter
+    };
+
+    Tagbox.prototype._variables = function _variables() {
 
       this.$tagbox = this.$element;
       this.$tags = this.$tagbox.find(this.options.selectors.tags);
       this.$input = this.$tagbox.find(this.options.selectors.input);
       this.$partial = this.$tagbox.find(this.options.selectors.partial);
-    },
+    };
 
-    _init: function _init(suppressTriggers) {
+    Tagbox.prototype._init = function _init(suppressTriggers) {
 
       this.add(this.options.init, suppressTriggers);
-    },
+    };
 
-    _events: function _events() {
+    Tagbox.prototype._events = function _events() {
 
       /* PARTIAL */
 
@@ -10570,11 +10585,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* TAP ON TAG REMOVER */
 
       this._on(Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover);
-    },
+    };
 
     /* PRIVATE */
 
-    _sanitizeTag: function _sanitizeTag(value) {
+    Tagbox.prototype._sanitizeTag = function _sanitizeTag(value) {
 
       value = _.trim(value);
 
@@ -10589,28 +10604,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return value;
-    },
+    };
 
-    _getTagHtml: function _getTagHtml(value) {
+    Tagbox.prototype._getTagHtml = function _getTagHtml(value) {
 
       return this._tmpl('tag', _.merge({ value: value }, this.options.tag));
-    },
+    };
 
-    _clearPartial: function _clearPartial() {
+    Tagbox.prototype._clearPartial = function _clearPartial() {
 
       this.$partial.val('').trigger('change');
-    },
+    };
 
     /* UPDATE */
 
-    _updateInput: function _updateInput() {
+    Tagbox.prototype._updateInput = function _updateInput() {
 
       this.$input.val(this.options.tags.join(this.options.characters.separator)).trigger('change');
-    },
+    };
 
     /* TAG */
 
-    _add: function _add(value) {
+    Tagbox.prototype._add = function _add(value) {
 
       var valueTrimmed = _.trim(value),
           value = this._sanitizeTag(value);
@@ -10659,18 +10674,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return false;
-    },
+    };
 
-    _remove: function _remove($tag, tag) {
+    Tagbox.prototype._remove = function _remove($tag, tag) {
 
       $tag.remove();
 
       _.pull(this.options.tags, tag);
-    },
+    };
 
     /* KEYPRESS / KEYDOWN */
 
-    __keypressKeydown: function __keypressKeydown(event) {
+    Tagbox.prototype.__keypressKeydown = function __keypressKeydown(event) {
 
       var value = this.$partial.val();
 
@@ -10704,44 +10719,44 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         event.preventDefault();
         event.stopImmediatePropagation();
       }
-    },
+    };
 
     /* PASTE */
 
-    __paste: function __paste(event) {
+    Tagbox.prototype.__paste = function __paste(event) {
 
       this.add(event.originalEvent.clipboardData.getData('text'));
 
       event.preventDefault();
-    },
+    };
 
     /* TAP ON CLOSE */
 
-    __tapOnTagRemover: function __tapOnTagRemover(event, tagRemover) {
+    Tagbox.prototype.__tapOnTagRemover = function __tapOnTagRemover(event, tagRemover) {
 
       var $tag = $(tagRemover).parents(this.options.selectors.tag);
 
       this.remove($tag);
-    },
+    };
 
     /* TAP ON EMPTY */
 
-    __tapOnEmpty: function __tapOnEmpty(event) {
+    Tagbox.prototype.__tapOnEmpty = function __tapOnEmpty(event) {
 
       if (document.activeElement !== this.$partial[0] && !$(event.target).is('input, ' + this.options.selectors.tagLabel)) {
 
         this.$partial.focus();
       }
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Tagbox.prototype.get = function get() {
 
       return _.clone(this.options.tags);
-    },
+    };
 
-    add: function add(tag, suppressTriggers) {
+    Tagbox.prototype.add = function add(tag, suppressTriggers) {
       //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
       if (_.isArray(tag)) {
@@ -10776,9 +10791,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       return added;
-    },
+    };
 
-    remove: function remove(tag, edit, suppressTriggers) {
+    Tagbox.prototype.remove = function remove(tag, edit, suppressTriggers) {
       //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
       if (tag instanceof $) {
@@ -10841,9 +10856,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           }
         }
       }
-    },
+    };
 
-    clear: function clear(suppressTriggers) {
+    Tagbox.prototype.clear = function clear(suppressTriggers) {
 
       if (this.options.tags.length > 0) {
 
@@ -10872,9 +10887,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this._trigger('empty');
         }
       }
-    },
+    };
 
-    reset: function reset() {
+    Tagbox.prototype.reset = function reset() {
 
       var previous = _.clone(this.options.tags);
 
@@ -10908,9 +10923,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this._trigger('empty');
         }
       }
-    }
+    };
 
-  });
+    return Tagbox;
+  })(Svelto.Widget);
+
+  Svelto.Tagbox = Tagbox;
+  Svelto.Tagbox.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Tagbox);
 })(jQuery, _, window, document);
 
 /* =========================================================================

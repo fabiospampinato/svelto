@@ -18,12 +18,10 @@
 
   'use strict';
 
-  /* TAGBOX */
+  /* CONFIG */
 
-  $.factory ( 'svelto.tagbox', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'tagbox',
     templates: {
       tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
               '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' +
@@ -36,9 +34,6 @@
               '</div>' +
             '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       init: '',
       tags: [],
@@ -65,12 +60,17 @@
         tagRemover: '.tagbox-tag-remover'
       },
       callbacks: {
-        change: _.noop,
-        add: _.noop,
-        remove: _.noop,
-        empty: _.noop
+        change () {},
+        add () {},
+        remove () {},
+        empty () {}
       }
-    },
+    }
+  };
+
+  /* TAGBOX */
+
+  class Tagbox extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -84,7 +84,9 @@
 
       });
 
-    },
+      //TODO: add support for liter
+
+    }
 
     _variables () {
 
@@ -93,13 +95,13 @@
       this.$input = this.$tagbox.find ( this.options.selectors.input );
       this.$partial = this.$tagbox.find ( this.options.selectors.partial );
 
-    },
+    }
 
     _init ( suppressTriggers ) {
 
       this.add ( this.options.init, suppressTriggers );
 
-    },
+    }
 
     _events () {
 
@@ -117,7 +119,7 @@
 
       this._on ( Pointer.tap, this.options.selectors.tagRemover, this.__tapOnTagRemover );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -139,19 +141,19 @@
 
       return value;
 
-    },
+    }
 
     _getTagHtml ( value ) {
 
       return this._tmpl ( 'tag', _.merge ( { value: value }, this.options.tag ) );
 
-    },
+    }
 
     _clearPartial () {
 
       this.$partial.val ( '' ).trigger ( 'change' );
 
-    },
+    }
 
     /* UPDATE */
 
@@ -159,7 +161,7 @@
 
       this.$input.val ( this.options.tags.join ( this.options.characters.separator ) ).trigger ( 'change' );
 
-    },
+    }
 
     /* TAG */
 
@@ -222,7 +224,7 @@
 
       return false;
 
-    },
+    }
 
     _remove ( $tag, tag ) {
 
@@ -230,7 +232,7 @@
 
       _.pull ( this.options.tags, tag );
 
-    },
+    }
 
     /* KEYPRESS / KEYDOWN */
 
@@ -274,7 +276,7 @@
 
       }
 
-    },
+    }
 
     /* PASTE */
 
@@ -284,7 +286,7 @@
 
         event.preventDefault ();
 
-    },
+    }
 
     /* TAP ON CLOSE */
 
@@ -294,7 +296,7 @@
 
       this.remove ( $tag );
 
-    },
+    }
 
     /* TAP ON EMPTY */
 
@@ -306,7 +308,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -314,7 +316,7 @@
 
       return _.clone ( this.options.tags );
 
-    },
+    }
 
     add ( tag, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings
 
@@ -354,7 +356,7 @@
 
       return added;
 
-    },
+    }
 
     remove ( tag, edit, suppressTriggers ) { //INFO: The tag can be a string containing a single tag, multiple tags separated by `this.options.characters.separator`, or it can be an array (nested or not) of those strings. In addition it can also be the jQuery object of that tag.
 
@@ -429,7 +431,7 @@
 
       }
 
-    },
+    }
 
     clear ( suppressTriggers ) {
 
@@ -464,7 +466,7 @@
 
       }
 
-    },
+    }
 
     reset () {
 
@@ -507,6 +509,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Tagbox = Tagbox;
+  Svelto.Tagbox.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Tagbox );
 
 }( jQuery, _, window, document ));
