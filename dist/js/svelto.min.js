@@ -5094,6 +5094,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -5101,6 +5105,54 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
   /* VARIABLES */
 
   var notiesTimers = [];
+
+  /* CONFIG */
+
+  var config = {
+    name: 'noty',
+    templates: {
+      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' + '<div class="infobar">' + '{% if ( o.img ) { %}' + '<img src="{%=o.img%}" class="noty-img infobar-left" />' + '{% } %}' + '{% if ( o.title || o.body ) { %}' + '<div class="infobar-center">' + '{% if ( o.title ) { %}' + '<p class="infobar-title">' + '{%#o.title%}' + '</p>' + '{% } %}' + '{% if ( o.body ) { %}' + '{%#o.body%}' + '{% } %}' + '</div>' + '{% } %}' + '{% if ( o.buttons.length === 1 ) { %}' + '<div class="infobar-right">' + '{% include ( "svelto.noty.button", o.buttons[0] ); %}' + '</div>' + '{% } %}' + '</div>' + '{% if ( o.buttons.length > 1 ) { %}' + '<div class="noty-buttons multiple centered">' + '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' + '{% include ( "svelto.noty.button", o.buttons[i] ); %}' + '{% } %}' + '</div>' + '{% } %}' + '</div>',
+      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' + '{%#(o.text || "")%}' + '</div>'
+    },
+    options: {
+      anchor: {
+        y: 'bottom',
+        x: 'left'
+      },
+      title: false,
+      body: false,
+      img: false,
+      buttons: [],
+      /*
+             : [{
+                color: 'white',
+                size: 'small',
+                css: '',
+                text: '',
+                onClick: _.noop
+             }],
+      */
+      type: 'alert',
+      color: 'black',
+      css: '',
+      ttl: 3500,
+      autoplay: true,
+      timerMinimumRemaining: 1000,
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        button: '.noty-buttons .button, .infobar-right .button'
+      },
+      animations: {
+        remove: $.ui.animation.normal
+      },
+      callbacks: {
+        open: function open() {},
+        close: function close() {}
+      }
+    }
+  };
 
   /* HELPER */
 
@@ -5117,73 +5169,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     /* NOTY */
 
-    return new $.svelto.noty(options);
+    return new Svelto.Noty(options);
   };
 
   /* NOTY */
 
-  $.factory('svelto.noty', {
+  var Noty = (function (_Svelto$Widget) {
+    _inherits(Noty, _Svelto$Widget);
 
-    /* TEMPLATES */
+    function Noty() {
+      _classCallCheck(this, Noty);
 
-    templates: {
-      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' + '<div class="infobar">' + '{% if ( o.img ) { %}' + '<img src="{%=o.img%}" class="noty-img infobar-left" />' + '{% } %}' + '{% if ( o.title || o.body ) { %}' + '<div class="infobar-center">' + '{% if ( o.title ) { %}' + '<p class="infobar-title">' + '{%#o.title%}' + '</p>' + '{% } %}' + '{% if ( o.body ) { %}' + '{%#o.body%}' + '{% } %}' + '</div>' + '{% } %}' + '{% if ( o.buttons.length === 1 ) { %}' + '<div class="infobar-right">' + '{% include ( "svelto.noty.button", o.buttons[0] ); %}' + '</div>' + '{% } %}' + '</div>' + '{% if ( o.buttons.length > 1 ) { %}' + '<div class="noty-buttons multiple centered">' + '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' + '{% include ( "svelto.noty.button", o.buttons[i] ); %}' + '{% } %}' + '</div>' + '{% } %}' + '</div>',
-      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' + '{%#(o.text || "")%}' + '</div>'
-    },
+      _Svelto$Widget.apply(this, arguments);
+    }
 
-    /* OPTIONS */
-
-    options: {
-      anchor: {
-        y: 'bottom',
-        x: 'left'
-      },
-
-      title: false,
-      body: false,
-      img: false,
-      buttons: [],
-      /*
-             : [{
-                color: 'white',
-                size: 'small',
-                css: '',
-                text: '',
-                onClick: _.noop
-             }],
-      */
-
-      type: 'alert',
-      color: 'black',
-      css: '',
-
-      ttl: 3500,
-      autoplay: true,
-      timerMinimumRemaining: 1000,
-
-      classes: {
-        open: 'open'
-      },
-
-      selectors: {
-        button: '.noty-buttons .button, .infobar-right .button'
-      },
-
-      animations: {
-        remove: $.ui.animation.normal
-      },
-
-      callbacks: {
-        open: _.noop,
-        close: _.noop
-      }
-    },
+    /* BINDING */
 
     /* SPECIAL */
 
-    //TODO: Add a `_widgetize` special function
+    Noty.prototype._widgetize = function _widgetize($root) {
 
-    _variables: function _variables() {
+      $root.find('.noty').noty();
+      $root.filter('.noty').noty();
+    };
+
+    Noty.prototype._variables = function _variables() {
 
       this.$noty = this.$element;
       this.$buttons = this.$noty.find(this.options.selectors.button);
@@ -5191,19 +5201,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.timer = false;
       this._isOpen = false;
       this.neverOpened = true;
-    },
+    };
 
-    _init: function _init() {
+    Noty.prototype._init = function _init() {
 
       if (this.options.autoplay) {
 
         this.open();
       }
-    },
+    };
 
     /* PRIVATE */
 
-    ___tap: function ___tap() {
+    Noty.prototype.___tap = function ___tap() {
 
       if (this.options.type !== 'action') {
 
@@ -5211,9 +5221,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._on(Pointer.tap, this.close);
       }
-    },
+    };
 
-    ___buttonTap: function ___buttonTap() {
+    Noty.prototype.___buttonTap = function ___buttonTap() {
 
       _.each(this.options.buttons, function (button, index) {
 
@@ -5227,19 +5237,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this.close();
         });
       }, this);
-    },
+    };
 
-    ___timer: function ___timer() {
+    Noty.prototype.___timer = function ___timer() {
 
       if (this.options.type !== 'action' && _.isNumber(this.options.ttl) && this.options.ttl !== Infinity) {
 
-        this.timer = $.timer(this.close.bind(this), this.options.ttl, true);
+        this.timer = new Timer(this.close.bind(this), this.options.ttl, true);
 
         notiesTimers.push(this.timer);
       }
-    },
+    };
 
-    ___hover: function ___hover() {
+    Noty.prototype.___hover = function ___hover() {
 
       var instance = this;
 
@@ -5257,9 +5267,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           timer.play();
         });
       });
-    },
+    };
 
-    ___flick: function ___flick() {
+    Noty.prototype.___flick = function ___flick() {
 
       if (this.options.type !== 'action') {
 
@@ -5271,9 +5281,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           }
         });
       }
-    },
+    };
 
-    __keydown: function __keydown(event) {
+    Noty.prototype.__keydown = function __keydown(event) {
 
       if (event.keyCode === $.ui.keyCode.ESCAPE) {
 
@@ -5282,16 +5292,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.close();
       }
-    },
+    };
 
     /* PUBLIC */
 
-    isOpen: function isOpen() {
+    Noty.prototype.isOpen = function isOpen() {
 
       return this._isOpen;
-    },
+    };
 
-    open: function open() {
+    Noty.prototype.open = function open() {
 
       if (!this._isOpen) {
 
@@ -5323,9 +5333,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._trigger('open');
       }
-    },
+    };
 
-    close: function close() {
+    Noty.prototype.close = function close() {
 
       if (this._isOpen) {
 
@@ -5349,9 +5359,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._trigger('close');
       }
-    }
+    };
 
-  });
+    return Noty;
+  })(Svelto.Widget);
+
+  Svelto.Noty = Noty;
+  Svelto.Noty.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Noty);
 
   /* READY */
 

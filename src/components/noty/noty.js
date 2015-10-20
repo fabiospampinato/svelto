@@ -16,34 +16,12 @@
 
   /* VARIABLES */
 
-  var notiesTimers = [];
+  let notiesTimers = [];
 
-  /* HELPER */
+  /* CONFIG */
 
-  $.noty = function ( options ) {
-
-    /* OPTIONS */
-
-    options = _.isString ( options ) ? { body: options } : ( options || {} );
-
-    if ( options.buttons ) {
-
-      options.type = 'action';
-
-    }
-
-    /* NOTY */
-
-    return new $.svelto.noty ( options );
-
-  };
-
-  /* NOTY */
-
-  $.factory ( 'svelto.noty', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'noty',
     templates: {
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
               '<div class="infobar">' +
@@ -80,15 +58,11 @@
                 '{%#(o.text || "")%}' +
               '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
       anchor: {
         y: 'bottom',
         x: 'left'
       },
-
       title: false,
       body: false,
       img: false,
@@ -102,36 +76,60 @@
                 onClick: _.noop
              }],
       */
-
       type: 'alert',
       color: 'black',
       css: '',
-
       ttl: 3500,
       autoplay: true,
       timerMinimumRemaining: 1000,
-
       classes: {
         open: 'open'
       },
-
       selectors: {
         button: '.noty-buttons .button, .infobar-right .button'
       },
-
       animations: {
         remove: $.ui.animation.normal
       },
-
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open () {},
+        close () {}
       }
-    },
+    }
+  };
+
+  /* HELPER */
+
+  $.noty = function ( options ) {
+
+    /* OPTIONS */
+
+    options = _.isString ( options ) ? { body: options } : ( options || {} );
+
+    if ( options.buttons ) {
+
+      options.type = 'action';
+
+    }
+
+    /* NOTY */
+
+    return new Svelto.Noty ( options );
+
+  };
+
+  /* NOTY */
+
+  class Noty extends Svelto.Widget {
 
     /* SPECIAL */
 
-    //TODO: Add a `_widgetize` special function
+    _widgetize ( $root ) {
+
+      $root.find ( '.noty' ).noty ();
+      $root.filter ( '.noty' ).noty ();
+
+    }
 
     _variables () {
 
@@ -142,7 +140,7 @@
       this._isOpen = false;
       this.neverOpened = true;
 
-    },
+    }
 
     _init () {
 
@@ -152,7 +150,7 @@
 
       }
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -166,7 +164,7 @@
 
       }
 
-    },
+    }
 
     ___buttonTap () {
 
@@ -186,19 +184,19 @@
 
       }, this );
 
-    },
+    }
 
     ___timer () {
 
       if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
-        this.timer = $.timer ( this.close.bind ( this ), this.options.ttl, true );
+        this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
 
         notiesTimers.push ( this.timer );
 
       }
 
-    },
+    }
 
     ___hover () {
 
@@ -220,7 +218,7 @@
 
       });
 
-    },
+    }
 
     ___flick () {
 
@@ -238,7 +236,7 @@
 
       }
 
-    },
+    }
 
     __keydown ( event ) {
 
@@ -251,7 +249,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -259,7 +257,7 @@
 
       return this._isOpen;
 
-    },
+    }
 
     open () {
 
@@ -298,7 +296,7 @@
 
       }
 
-    },
+    }
 
     close () {
 
@@ -330,7 +328,16 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Noty = Noty;
+  Svelto.Noty.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Noty );
 
   /* READY */
 
