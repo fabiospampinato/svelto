@@ -9036,16 +9036,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* SLIDER */
+  /* CONFIG */
 
-  $.factory('svelto.slider', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'slider',
     options: {
       min: 0,
       max: 100,
@@ -9063,13 +9065,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         label: '.slider-label'
       },
       callbacks: {
-        change: _.noop
+        change: function change() {}
       }
-    },
+    }
+  };
+
+  /* SLIDER */
+
+  var Slider = (function (_Svelto$Widget) {
+    _inherits(Slider, _Svelto$Widget);
+
+    function Slider() {
+      _classCallCheck(this, Slider);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Slider.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.slider').each(function () {
 
@@ -9083,9 +9099,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           decimals: Number($slider.data('decimals') || 0)
         });
       });
-    },
 
-    _variables: function _variables() {
+      //TODO: Add support for widgetize
+    };
+
+    Slider.prototype._variables = function _variables() {
 
       this.$slider = this.$element;
       this.$input = this.$slider.find(this.options.selectors.input);
@@ -9100,14 +9118,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.stepsNr = (this.options.max - this.options.min) / this.options.step;
 
       this._updateVariables();
-    },
+    };
 
-    _init: function _init() {
+    Slider.prototype._init = function _init() {
 
       this._updatePositions();
-    },
+    };
 
-    _events: function _events() {
+    Slider.prototype._events = function _events() {
 
       /* INPUT CHANGE */
 
@@ -9144,23 +9162,23 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           end: this.__dragEnd.bind(this)
         }
       });
-    },
+    };
 
     /* PRIVATE */
 
-    _roundValue: function _roundValue(value) {
+    Slider.prototype._roundValue = function _roundValue(value) {
 
       return Number(Number(value).toFixed(this.options.decimals));
-    },
+    };
 
-    _updateVariables: function _updateVariables() {
+    Slider.prototype._updateVariables = function _updateVariables() {
 
       this.unhighlightWidth = this.$unhighlight.width();
 
       this.stepWidth = this.unhighlightWidth / this.stepsNr;
-    },
+    };
 
-    _updatePositions: function _updatePositions() {
+    Slider.prototype._updatePositions = function _updatePositions() {
 
       var percentage = (this.options.value - this.options.min) / this.options.step * 100 / this.stepsNr,
           translateX = this.unhighlightWidth / 100 * percentage;
@@ -9168,36 +9186,36 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$handlerWrp.translateX(translateX);
 
       this.$highlight.translateX(translateX);
-    },
+    };
 
-    _updateLabel: function _updateLabel(value) {
+    Slider.prototype._updateLabel = function _updateLabel(value) {
 
       this.$label.html(_.isUndefined(value) ? this.options.value : value);
-    },
+    };
 
-    _updateInput: function _updateInput() {
+    Slider.prototype._updateInput = function _updateInput() {
 
       this.$input.val(this.options.value).trigger('change');
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Slider.prototype.__change = function __change() {
 
       this.set(this.$input.val());
-    },
+    };
 
     /* RESIZE */
 
-    __resize: function __resize() {
+    Slider.prototype.__resize = function __resize() {
 
       this._updateVariables();
       this._updatePositions();
-    },
+    };
 
     /* LEFT / RIGHT ARROWS */
 
-    __keydown: function __keydown(event) {
+    Slider.prototype.__keydown = function __keydown(event) {
 
       switch (event.keyCode) {
 
@@ -9218,35 +9236,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       event.preventDefault();
       event.stopImmediatePropagation();
-    },
+    };
 
     /* DRAG */
 
-    _dragModifierX: function _dragModifierX(distance) {
+    Slider.prototype._dragModifierX = function _dragModifierX(distance) {
 
       return _.roundCloser(distance, this.stepWidth);
-    },
+    };
 
-    __dragMove: function __dragMove(data) {
+    Slider.prototype.__dragMove = function __dragMove(data) {
 
       this.$highlight.translateX(data.moveXY.X);
 
       this._updateLabel(this._roundValue(this.options.min + data.moveXY.X / this.stepWidth * this.options.step));
-    },
+    };
 
-    __dragEnd: function __dragEnd(data) {
+    Slider.prototype.__dragEnd = function __dragEnd(data) {
 
       this.set(this.options.min + data.endXY.X / this.stepWidth * this.options.step);
-    },
+    };
 
     /* API */
 
-    get: function get() {
+    Slider.prototype.get = function get() {
 
       return this.options.value;
-    },
+    };
 
-    set: function set(value) {
+    Slider.prototype.set = function set(value) {
 
       value = _.clamp(this.options.min, this._roundValue(value), this.options.max);
 
@@ -9265,19 +9283,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           value: this.options.value
         });
       }
-    },
+    };
 
-    increase: function increase() {
+    Slider.prototype.increase = function increase() {
 
       this.set(this.options.value + this.options.step);
-    },
+    };
 
-    decrease: function decrease() {
+    Slider.prototype.decrease = function decrease() {
 
       this.set(this.options.value - this.options.step);
-    }
+    };
 
-  });
+    return Slider;
+  })(Svelto.Widget);
+
+  Svelto.Slider = Slider;
+  Svelto.Slider.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Slider);
 })(jQuery, _, window, document);
 
 /* =========================================================================

@@ -17,12 +17,10 @@
 
   'use strict';
 
-  /* SLIDER */
+  /* CONFIG */
 
-  $.factory ( 'svelto.slider', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'slider',
     options: {
       min: 0,
       max: 100,
@@ -40,9 +38,14 @@
         label: '.slider-label'
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
-    },
+    }
+  };
+
+  /* SLIDER */
+
+  class Slider extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -62,7 +65,9 @@
 
       });
 
-    },
+      //TODO: Add support for widgetize
+
+    }
 
     _variables () {
 
@@ -80,13 +85,13 @@
 
       this._updateVariables ();
 
-    },
+    }
 
     _init () {
 
       this._updatePositions ();
 
-    },
+    }
 
     _events () {
 
@@ -126,7 +131,7 @@
         }
       });
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -134,7 +139,7 @@
 
       return Number ( Number ( value ).toFixed ( this.options.decimals ) );
 
-    },
+    }
 
     _updateVariables () {
 
@@ -142,7 +147,7 @@
 
       this.stepWidth = this.unhighlightWidth / this.stepsNr;
 
-    },
+    }
 
     _updatePositions () {
 
@@ -153,19 +158,19 @@
 
       this.$highlight.translateX ( translateX );
 
-    },
+    }
 
     _updateLabel ( value ) {
 
       this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
 
-    },
+    }
 
     _updateInput () {
 
       this.$input.val ( this.options.value ).trigger ( 'change' );
 
-    },
+    }
 
     /* CHANGE */
 
@@ -173,7 +178,7 @@
 
       this.set ( this.$input.val () );
 
-    },
+    }
 
     /* RESIZE */
 
@@ -182,7 +187,7 @@
       this._updateVariables ();
       this._updatePositions ();
 
-    },
+    }
 
     /* LEFT / RIGHT ARROWS */
 
@@ -208,7 +213,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-    },
+    }
 
     /* DRAG */
 
@@ -216,7 +221,7 @@
 
       return _.roundCloser ( distance, this.stepWidth );
 
-    },
+    }
 
     __dragMove ( data ) {
 
@@ -224,13 +229,13 @@
 
       this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
 
-    },
+    }
 
     __dragEnd ( data ) {
 
       this.set ( this.options.min + ( data.endXY.X / this.stepWidth * this.options.step ) );
 
-    },
+    }
 
     /* API */
 
@@ -238,7 +243,7 @@
 
       return this.options.value;
 
-    },
+    }
 
     set ( value ) {
 
@@ -261,13 +266,13 @@
 
       }
 
-    },
+    }
 
     increase () {
 
       this.set ( this.options.value + this.options.step );
 
-    },
+    }
 
     decrease () {
 
@@ -275,6 +280,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Slider = Slider;
+  Svelto.Slider.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Slider );
 
 }( jQuery, _, window, document ));
