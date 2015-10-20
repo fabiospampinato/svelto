@@ -15,36 +15,33 @@
 
   'use strict';
 
-  /* GROUP */
+  /* CONFIG */
 
-  var Group = function ( name ) {
-
-    this.name = name;
-    this.actions = this.unserialize ( $.cookie.get ( this.name ) || '{}' );
-
+  let config = {
+    serializer: JSON.stringify,
+    unserializer: JSON.parse
   };
 
-  /* METHODS */
+  /* GROUP */
 
-  Group.prototype = {
+  class Group {
 
-    /* SERIALIZER */
+    constructor ( name ) {
 
-    serialize: JSON.stringify,
+      this.name = name;
+      this.actions = config.unserializer ( $.cookie.get ( this.name ) || '{}' );
 
-    unserialize: JSON.parse,
-
-    /* API */
+    }
 
     get ( action ) {
 
       return this.actions[action] || 0;
 
-    },
+    }
 
     set ( action, times ) {
 
-      times = Number(times);
+      times = Number ( times );
 
       if ( !_.isNaN ( times ) ) {
 
@@ -62,13 +59,13 @@
 
       }
 
-    },
+    }
 
     update () {
 
-      $.cookie.set ( this.name, this.serialize ( this.actions ), Infinity );
+      $.cookie.set ( this.name, config.serializer ( this.actions ), Infinity );
 
-    },
+    }
 
     reset ( action ) {
 
@@ -88,12 +85,12 @@
 
     }
 
-  };
+  }
 
   /* BINDING */
 
-  Svelto.NTA = {
-    Group: Group
-  };
+  Svelto.NTA = {};
+  Svelto.NTA.Group = Group;
+  Svelto.NTA.Group.config = config;
 
 }( jQuery, _, window, document ));

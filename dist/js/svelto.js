@@ -1311,7 +1311,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   'use strict';
 
-  /* OPTIONS */
+  /* CONFIG */
 
   window.Pointer = {
     options: {
@@ -1350,15 +1350,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EVENTS METHODS */
 
-  _.each(events, function (alias, name) {
+  var _loop = function (_name) {
 
-    Pointer[name] = alias;
+    Pointer[_name] = events[_name];
 
-    $.fn[name] = function (fn) {
+    $.fn[_name] = function (fn) {
 
-      return fn ? this.on(alias, fn) : this.trigger(alias);
+      return fn ? this.on(events[_name], fn) : this.tirgger(events[_name]); //FIXME: Does it work? not sure about that `events[name]` inside the function
     };
-  });
+  };
+
+  for (var _name in events) {
+    _loop(_name);
+  }
 
   /* POINTER LOGIC */
 
@@ -1368,14 +1372,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* VARIABLES */
 
     var $document = $(document),
-        target,
-        $target,
-        startEvent,
-        startTimestamp,
-        downTimestamp,
+        target = undefined,
+        $target = undefined,
+        startEvent = undefined,
+        startTimestamp = undefined,
+        downTimestamp = undefined,
         prevTapTimestamp = 0,
-        motion,
-        pressTimeout;
+        motion = undefined,
+        pressTimeout = undefined;
 
     /* EVENT CREATOR */
 
@@ -1384,7 +1388,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var event = $.Event(name);
 
       event.originalEvent = originalEvent;
-      event.isPointerEvent = true;
+      event.isPointerEvent = true; //TODO: Try not to need this extra property
 
       return event;
     };
@@ -1409,7 +1413,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     var pressHandler = function pressHandler() {
-      //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
 
       $target.trigger(createEvent(Pointer.press, startEvent));
 
@@ -1453,12 +1456,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           if (absDeltaXY.X > absDeltaXY.Y) {
 
-            var orientation = 'horizontal',
-                direction = deltaXY.X > 0 ? 1 : -1;
+            var _orientation = 'horizontal',
+                _direction = deltaXY.X > 0 ? 1 : -1;
           } else {
 
-            var orientation = 'vertical',
-                direction = deltaXY.Y > 0 ? 1 : -1;
+            var _orientation2 = 'vertical',
+                _direction2 = deltaXY.Y > 0 ? 1 : -1;
           }
 
           $target.trigger(createEvent(Pointer.flick, event), {
@@ -4211,7 +4214,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* BEST DIRECTION */
 
     var bestIndex = areas.indexOf(_.max(areas)),
-        bestDirection = directions[bestIndex];
+        bestDirection = directions[bestIndex],
+        coordinates = undefined;
 
     /* TOP / LEFT */
 
@@ -4219,7 +4223,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       case 'top':
       case 'bottom':
-        var coordinates = {
+        coordinates = {
           top: bestDirection === 'top' ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
           left: anchorRect.left + anchorRect.width / 2 - positionableRect.width / 2
         };
@@ -4227,7 +4231,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       case 'left':
       case 'right':
-        var coordinates = {
+        coordinates = {
           top: anchorRect.top + anchorRect.height / 2 - positionableRect.height / 2,
           left: bestDirection === 'left' ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
         };
@@ -4260,22 +4264,22 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     if (options.$anchor && options.$pointer) {
 
-      var $pointer = _.isFunction(options.$pointer) ? options.$pointer(datas) : options.$pointer;
+      var _$pointer = _.isFunction(options.$pointer) ? options.$pointer(datas) : options.$pointer,
+          _translateType = undefined,
+          _translateValue = undefined;
 
-      if ($pointer instanceof $) {
+      if (_$pointer instanceof $) {
 
         switch (bestDirection) {
 
           case 'top':
           case 'bottom':
-            var translateType = 'translateX',
-                translateValue = anchorRect.left - coordinates.left + anchorRect.width / 2;
+            _translateType = 'translateX', _translateValue = anchorRect.left - coordinates.left + anchorRect.width / 2;
             break;
 
           case 'left':
           case 'right':
-            var translateType = 'translateY',
-                translateValue = anchorRect.top - coordinates.top + anchorRect.height / 2;
+            _translateType = 'translateY', _translateValue = anchorRect.top - coordinates.top + anchorRect.height / 2;
             break;
 
         }
@@ -5989,36 +5993,37 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* GROUP */
+  /* CONFIG */
 
-  var Group = function Group(name) {
-
-    this.name = name;
-    this.actions = this.unserialize($.cookie.get(this.name) || '{}');
+  var config = {
+    serializer: JSON.stringify,
+    unserializer: JSON.parse
   };
 
-  /* METHODS */
+  /* GROUP */
 
-  Group.prototype = {
+  var Group = (function () {
+    function Group(name) {
+      _classCallCheck(this, Group);
 
-    /* SERIALIZER */
+      this.name = name;
+      this.actions = config.unserializer($.cookie.get(this.name) || '{}');
+    }
 
-    serialize: JSON.stringify,
+    /* BINDING */
 
-    unserialize: JSON.parse,
-
-    /* API */
-
-    get: function get(action) {
+    Group.prototype.get = function get(action) {
 
       return this.actions[action] || 0;
-    },
+    };
 
-    set: function set(action, times) {
+    Group.prototype.set = function set(action, times) {
 
       times = Number(times);
 
@@ -6034,14 +6039,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.update();
         }
       }
-    },
+    };
 
-    update: function update() {
+    Group.prototype.update = function update() {
 
-      $.cookie.set(this.name, this.serialize(this.actions), Infinity);
-    },
+      $.cookie.set(this.name, config.serializer(this.actions), Infinity);
+    };
 
-    reset: function reset(action) {
+    Group.prototype.reset = function reset(action) {
 
       if (action) {
 
@@ -6054,15 +6059,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         $.cookie.remove(this.name);
       }
-    }
+    };
 
-  };
+    return Group;
+  })();
 
-  /* BINDING */
-
-  Svelto.NTA = {
-    Group: Group
-  };
+  Svelto.NTA = {};
+  Svelto.NTA.Group = Group;
+  Svelto.NTA.Group.config = config;
 })(jQuery, _, window, document);
 
 /* =========================================================================
@@ -6077,42 +6081,41 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
   /* ACTION */
 
-  var Action = function Action(options) {
+  var Action = (function () {
+    function Action(options) {
+      _classCallCheck(this, Action);
 
-    this.group = new Svelto.NTA.Group(options.group);
-    this.name = options.name;
-  };
-
-  /* METHODS */
-
-  Action.prototype = {
-
-    /* API */
-
-    get: function get() {
-
-      return this.group.get(this.name);
-    },
-
-    set: function set(times) {
-
-      this.group.set(this.name, times);
-    },
-
-    reset: function reset() {
-
-      this.group.reset(this.name);
+      this.group = new Svelto.NTA.Group(options.group);
+      this.name = options.name;
     }
 
-  };
+    /* BINDING */
 
-  /* BINDING */
+    Action.prototype.get = function get() {
+
+      return this.group.get(this.name);
+    };
+
+    Action.prototype.set = function set(times) {
+
+      this.group.set(this.name, times);
+    };
+
+    Action.prototype.reset = function reset() {
+
+      this.group.reset(this.name);
+    };
+
+    return Action;
+  })();
 
   Svelto.NTA.Action = Action;
 })(jQuery, _, window, document);

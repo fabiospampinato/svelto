@@ -15,30 +15,26 @@
 
   /* ACTION */
 
-  var Action = function ( options ) {
+  class Action {
 
-    this.group = new Svelto.NTA.Group ( options.group );
-    this.name = options.name;
+    constructor ( options ) {
 
-  };
+      this.group = new Svelto.NTA.Group ( options.group );
+      this.name = options.name;
 
-  /* METHODS */
-
-  Action.prototype = {
-
-    /* API */
+    }
 
     get () {
 
       return this.group.get ( this.name );
 
-    },
+    }
 
     set ( times ) {
 
       this.group.set ( this.name, times );
 
-    },
+    }
 
     reset () {
 
@@ -46,7 +42,7 @@
 
     }
 
-  };
+  }
 
   /* BINDING */
 

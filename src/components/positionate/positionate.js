@@ -137,7 +137,8 @@
     /* BEST DIRECTION */
 
     let bestIndex = areas.indexOf ( _.max ( areas ) ),
-        bestDirection = directions[bestIndex];
+        bestDirection = directions[bestIndex],
+        coordinates;
 
     /* TOP / LEFT */
 
@@ -145,7 +146,7 @@
 
       case 'top':
       case 'bottom':
-        let coordinates = {
+        coordinates = {
           top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
           left: anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 )
         };
@@ -153,7 +154,7 @@
 
       case 'left':
       case 'right':
-        let coordinates = {
+        coordinates = {
           top: anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 ),
           left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
         };
@@ -188,7 +189,9 @@
 
     if ( options.$anchor && options.$pointer ) {
 
-      let $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+      let $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer,
+          translateType,
+          translateValue;
 
       if ( $pointer instanceof $ ) {
 
@@ -196,14 +199,14 @@
 
           case 'top':
           case 'bottom':
-            let translateType = 'translateX',
-                translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
+            translateType = 'translateX',
+            translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
             break;
 
           case 'left':
           case 'right':
-            let translateType = 'translateY',
-                translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
+            translateType = 'translateY',
+            translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
             break;
 
         }
