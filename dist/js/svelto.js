@@ -4453,6 +4453,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -4461,12 +4465,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   var assignments = {};
 
-  /* DROPDOWN */
+  /* CONFIG */
 
-  $.factory('svelto.dropdown', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'dropdown',
     options: {
       hover: {
         triggerable: false,
@@ -4494,20 +4496,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         trigger: '.dropdown-trigger'
       },
       callbacks: {
-        beforeopen: _.noop,
-        open: _.noop,
-        close: _.noop
+        beforeopen: function beforeopen() {},
+        open: function open() {},
+        close: function close() {}
       }
-    },
+    }
+  };
+
+  /* DROPDOWN */
+
+  var Dropdown = (function (_Svelto$Widget) {
+    _inherits(Dropdown, _Svelto$Widget);
+
+    function Dropdown() {
+      _classCallCheck(this, Dropdown);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Dropdown.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.dropdown').dropdown();
-    },
+      $root.filter('.dropdown').dropdown();
+    };
 
-    _variables: function _variables() {
+    Dropdown.prototype._variables = function _variables() {
 
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find(this.options.selectors.closer);
@@ -4519,9 +4536,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.isAttached = this.$dropdown.hasClass(this.options.classes.attached);
 
       this._isOpen = false;
-    },
+    };
 
-    _events: function _events() {
+    Dropdown.prototype._events = function _events() {
 
       /* TRIGGER */
 
@@ -4539,11 +4556,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._on(this.$triggers, Pointer.enter, this.__hoverTriggerEnter);
       }
-    },
+    };
 
     /* HOVER */
 
-    __hoverTriggerEnter: function __hoverTriggerEnter(event, trigger) {
+    Dropdown.prototype.__hoverTriggerEnter = function __hoverTriggerEnter(event, trigger) {
 
       if (!this._isOpen) {
 
@@ -4554,9 +4571,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._one($(trigger), Pointer.leave, this.__hoverTriggerLeave);
       }
-    },
+    };
 
-    __hoverOpen: function __hoverOpen() {
+    Dropdown.prototype.__hoverOpen = function __hoverOpen() {
 
       if (!this._isOpen) {
 
@@ -4566,9 +4583,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._hoverOpenTimeout = false;
       }
-    },
+    };
 
-    __hoverTriggerLeave: function __hoverTriggerLeave(event, trigger) {
+    Dropdown.prototype.__hoverTriggerLeave = function __hoverTriggerLeave(event, trigger) {
 
       if (this._hoverOpenTimeout) {
 
@@ -4583,9 +4600,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._on(Pointer.enter, this.__hoverDropdownEnter);
       }
-    },
+    };
 
-    __hoverClose: function __hoverClose() {
+    Dropdown.prototype.__hoverClose = function __hoverClose() {
 
       if (this._isHoverOpen) {
 
@@ -4597,9 +4614,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       this._off(Pointer.enter, this.__hoverDropdownEnter);
-    },
+    };
 
-    __hoverDropdownEnter: function __hoverDropdownEnter() {
+    Dropdown.prototype.__hoverDropdownEnter = function __hoverDropdownEnter() {
 
       if (this._hoverCloseTimeout) {
 
@@ -4612,41 +4629,41 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._one(Pointer.leave, this.__hoverDropdownLeave);
       }
-    },
+    };
 
-    __hoverDropdownLeave: function __hoverDropdownLeave() {
+    Dropdown.prototype.__hoverDropdownLeave = function __hoverDropdownLeave() {
 
       if (this._isHoverOpen) {
 
         this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
       }
-    },
+    };
 
     /* WINDOW RESIZE / SCROLL */
 
-    _bindWindowResizeScroll: function _bindWindowResizeScroll() {
+    Dropdown.prototype._bindWindowResizeScroll = function _bindWindowResizeScroll() {
 
       this._on($window, 'resize scroll', this._update);
-    },
+    };
 
-    _unbindWindowResizeScroll: function _unbindWindowResizeScroll() {
+    Dropdown.prototype._unbindWindowResizeScroll = function _unbindWindowResizeScroll() {
 
       this._off($window, 'resize scroll', this._update);
-    },
+    };
 
     /* WINDOW TAP */
 
-    _bindWindowTap: function _bindWindowTap() {
+    Dropdown.prototype._bindWindowTap = function _bindWindowTap() {
 
       this._on($window, Pointer.tap, this.__windowTap);
-    },
+    };
 
-    _unbindWindowTap: function _unbindWindowTap() {
+    Dropdown.prototype._unbindWindowTap = function _unbindWindowTap() {
 
       this._off($window, Pointer.tap, this.__windowTap);
-    },
+    };
 
-    __windowTap: function __windowTap(event) {
+    Dropdown.prototype.__windowTap = function __windowTap(event) {
 
       var $parents = $(event.target).parents();
 
@@ -4664,11 +4681,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.close();
       }
-    },
+    };
 
     /* POSITIONATE */
 
-    _positionate: function _positionate() {
+    Dropdown.prototype._positionate = function _positionate() {
 
       /* VARIABLES */
 
@@ -4696,31 +4713,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         $.pseudoCSS('#' + this.id + ':before', $mockTip.attr('style').slice(0, -1) + ' rotate(45deg)'); //FIXME: A bit to hacky, expecially that `rotate(45deg)`
       }
-    },
+    };
 
     /* PRIVATE */
 
-    _update: function _update() {
+    Dropdown.prototype._update = function _update() {
 
       if (this._isOpen) {
 
         this._positionate();
       }
-    },
+    };
 
     /* PUBLIC */
 
-    isOpen: function isOpen() {
+    Dropdown.prototype.isOpen = function isOpen() {
 
       return this._isOpen;
-    },
+    };
 
-    toggle: function toggle(event, trigger) {
+    Dropdown.prototype.toggle = function toggle(event, trigger) {
 
       this[this._isOpen && assignments[this.id] === trigger ? 'close' : 'open'](event, trigger);
-    },
+    };
 
-    open: function open(event, trigger) {
+    Dropdown.prototype.open = function open(event, trigger) {
 
       if (trigger) {
 
@@ -4748,9 +4765,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._bindWindowResizeScroll();
 
       this._trigger('open');
-    },
+    };
 
-    close: function close() {
+    Dropdown.prototype.close = function close() {
 
       $(assignments[this.id]).removeClass('dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open);
 
@@ -4762,9 +4779,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._unbindWindowResizeScroll();
 
       this._trigger('close');
-    }
+    };
 
-  });
+    return Dropdown;
+  })(Svelto.Widget);
+
+  Svelto.Dropdown = Dropdown;
+  Svelto.Dropdown.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Dropdown);
 })(jQuery, _, window, document);
 
 /* =========================================================================

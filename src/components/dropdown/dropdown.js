@@ -21,12 +21,10 @@
 
   var assignments = {};
 
-  /* DROPDOWN */
+  /* CONFIG */
 
-  $.factory ( 'svelto.dropdown', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'dropdown',
     options: {
       hover: {
         triggerable: false,
@@ -54,19 +52,25 @@
         trigger: '.dropdown-trigger'
       },
       callbacks: {
-        beforeopen: _.noop,
-        open: _.noop,
-        close: _.noop
+        beforeopen () {},
+        open () {},
+        close () {}
       }
-    },
+    }
+  };
+
+  /* DROPDOWN */
+
+  class Dropdown extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.dropdown' ).dropdown ();
+      $root.filter ( '.dropdown' ).dropdown ();
 
-    },
+    }
 
     _variables () {
 
@@ -81,7 +85,7 @@
 
       this._isOpen = false;
 
-    },
+    }
 
     _events () {
 
@@ -103,7 +107,7 @@
 
       }
 
-    },
+    }
 
     /* HOVER */
 
@@ -120,7 +124,7 @@
 
       }
 
-    },
+    }
 
     __hoverOpen () {
 
@@ -134,7 +138,7 @@
 
       }
 
-    },
+    }
 
     __hoverTriggerLeave ( event, trigger ) {
 
@@ -154,7 +158,7 @@
 
       }
 
-    },
+    }
 
     __hoverClose () {
 
@@ -170,7 +174,7 @@
 
       this._off ( Pointer.enter, this.__hoverDropdownEnter );
 
-    },
+    }
 
     __hoverDropdownEnter () {
 
@@ -188,7 +192,7 @@
 
       }
 
-    },
+    }
 
     __hoverDropdownLeave () {
 
@@ -198,7 +202,7 @@
 
       }
 
-    },
+    }
 
     /* WINDOW RESIZE / SCROLL */
 
@@ -206,13 +210,13 @@
 
       this._on ( $window, 'resize scroll', this._update );
 
-    },
+    }
 
     _unbindWindowResizeScroll () {
 
       this._off ( $window, 'resize scroll', this._update );
 
-    },
+    }
 
     /* WINDOW TAP */
 
@@ -220,13 +224,13 @@
 
       this._on ( $window, Pointer.tap, this.__windowTap );
 
-    },
+    }
 
     _unbindWindowTap () {
 
       this._off ( $window, Pointer.tap, this.__windowTap );
 
-    },
+    }
 
     __windowTap ( event ) {
 
@@ -248,7 +252,7 @@
 
       }
 
-    },
+    }
 
     /* POSITIONATE */
 
@@ -282,7 +286,7 @@
 
       }
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -294,7 +298,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -302,13 +306,13 @@
 
       return this._isOpen
 
-    },
+    }
 
     toggle ( event, trigger ) {
 
       this[( this._isOpen && assignments[this.id] === trigger ) ? 'close' : 'open']( event, trigger );
 
-    },
+    }
 
     open ( event, trigger ) {
 
@@ -341,7 +345,7 @@
 
       this._trigger ( 'open' );
 
-    },
+    }
 
     close () {
 
@@ -358,6 +362,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Dropdown = Dropdown;
+  Svelto.Dropdown.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Dropdown );
 
 }( jQuery, _, window, document ));
