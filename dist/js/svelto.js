@@ -9607,16 +9607,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* STEPPER */
+  /* CONFIG */
 
-  $.factory('svelto.stepper', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'stepper',
     options: {
       min: 0,
       max: 100,
@@ -9632,11 +9634,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         increase: _.noop,
         decrease: _.noop
       }
-    },
+    }
+  };
+
+  /* STEPPER */
+
+  var Stepper = (function (_Svelto$Widget) {
+    _inherits(Stepper, _Svelto$Widget);
+
+    function Stepper() {
+      _classCallCheck(this, Stepper);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Stepper.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.stepper').each(function () {
 
@@ -9649,9 +9665,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           step: Number($stepper.data('step') || 1)
         });
       });
-    },
 
-    _variables: function _variables() {
+      //TODO: Add support for $root.filter
+    };
+
+    Stepper.prototype._variables = function _variables() {
 
       this.$stepper = this.$element;
       this.$decreaser = this.$stepper.find(this.options.selectors.decreaser);
@@ -9659,14 +9677,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$increaser = this.$stepper.find(this.options.selectors.increaser);
 
       this.options.value = this._sanitizeValue(this.options.value);
-    },
+    };
 
-    _init: function _init() {
+    Stepper.prototype._init = function _init() {
 
       this._updateButtons();
-    },
+    };
 
-    _events: function _events() {
+    Stepper.prototype._events = function _events() {
 
       /* INPUT / CHANGE */
 
@@ -9683,11 +9701,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* DECREASE */
 
       this._on(this.$increaser, Pointer.tap, this.increase);
-    },
+    };
 
     /* PRIVATE */
 
-    _sanitizeValue: function _sanitizeValue(value) {
+    Stepper.prototype._sanitizeValue = function _sanitizeValue(value) {
 
       var nr = Number(value);
 
@@ -9698,16 +9716,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       value = value - remaining + (remaining >= this.options.step / 2 ? this.options.step : 0);
 
       return _.clamp(this.options.min, value, this.options.max);
-    },
+    };
 
     /* UPDATE */
 
-    _updateInput: function _updateInput() {
+    Stepper.prototype._updateInput = function _updateInput() {
 
       this.$input.val(this.options.value).trigger('change');
-    },
+    };
 
-    _updateButtons: function _updateButtons(previous) {
+    Stepper.prototype._updateButtons = function _updateButtons(previous) {
 
       var isMin = this.options.value === this.options.min,
           isMax = this.options.value === this.options.max;
@@ -9719,24 +9737,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.$increaser.toggleClass('disabled', isMax);
       }
-    },
+    };
 
-    _update: function _update(previous) {
+    Stepper.prototype._update = function _update(previous) {
 
       this._updateInput();
       this._updateButtons(previous);
-    },
+    };
 
     /* CHANGE */
 
-    __inputChange: function __inputChange() {
+    Stepper.prototype.__inputChange = function __inputChange() {
 
       this.set(this.$input.val());
-    },
+    };
 
     /* LEFT / RIGHT ARROWS */
 
-    __keydown: function __keydown(event) {
+    Stepper.prototype.__keydown = function __keydown(event) {
 
       switch (event.keyCode) {
 
@@ -9755,16 +9773,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       event.preventDefault();
       event.stopImmediatePropagation();
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Stepper.prototype.get = function get() {
 
       return this.options.value;
-    },
+    };
 
-    set: function set(value) {
+    Stepper.prototype.set = function set(value) {
 
       value = Number(value);
 
@@ -9797,19 +9815,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._updateInput();
       }
-    },
+    };
 
-    increase: function increase() {
+    Stepper.prototype.increase = function increase() {
 
       this.set(this.options.value + this.options.step);
-    },
+    };
 
-    decrease: function decrease() {
+    Stepper.prototype.decrease = function decrease() {
 
       this.set(this.options.value - this.options.step);
-    }
+    };
 
-  });
+    return Stepper;
+  })(Svelto.Widget);
+
+  Svelto.Stepper = Stepper;
+  Svelto.Stepper.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Stepper);
 })(jQuery, _, window, document);
 
 /* =========================================================================

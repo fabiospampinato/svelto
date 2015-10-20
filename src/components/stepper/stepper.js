@@ -12,12 +12,10 @@
 
   'use strict';
 
-  /* STEPPER */
+  /* CONFIG */
 
-  $.factory ( 'svelto.stepper', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'stepper',
     options: {
       min: 0,
       max: 100,
@@ -33,7 +31,12 @@
         increase: _.noop,
         decrease: _.noop
       }
-    },
+    }
+  };
+
+  /* STEPPER */
+
+  class Stepper extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -52,7 +55,9 @@
 
       });
 
-    },
+      //TODO: Add support for $root.filter
+
+    }
 
     _variables () {
 
@@ -63,13 +68,13 @@
 
       this.options.value = this._sanitizeValue ( this.options.value );
 
-    },
+    }
 
     _init () {
 
       this._updateButtons ();
 
-    },
+    }
 
     _events () {
 
@@ -89,7 +94,7 @@
 
       this._on ( this.$increaser, Pointer.tap, this.increase );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -105,7 +110,7 @@
 
       return _.clamp ( this.options.min, value, this.options.max );
 
-    },
+    }
 
     /* UPDATE */
 
@@ -113,7 +118,7 @@
 
       this.$input.val ( this.options.value ).trigger ( 'change' );
 
-    },
+    }
 
     _updateButtons ( previous ) {
 
@@ -130,14 +135,14 @@
 
       }
 
-    },
+    }
 
     _update ( previous ) {
 
       this._updateInput ();
       this._updateButtons ( previous );
 
-    },
+    }
 
     /* CHANGE */
 
@@ -145,7 +150,7 @@
 
       this.set ( this.$input.val () );
 
-    },
+    }
 
     /* LEFT / RIGHT ARROWS */
 
@@ -169,7 +174,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -177,7 +182,7 @@
 
       return this.options.value;
 
-    },
+    }
 
     set ( value ) {
 
@@ -216,13 +221,13 @@
 
       }
 
-    },
+    }
 
     increase () {
 
       this.set ( this.options.value + this.options.step );
 
-    },
+    }
 
     decrease () {
 
@@ -230,6 +235,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Stepper = Stepper;
+  Svelto.Stepper.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Stepper );
 
 }( jQuery, _, window, document ));
