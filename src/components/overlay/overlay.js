@@ -12,12 +12,13 @@
 
   'use strict';
 
-  /* OVERLAY */
+  /* CONFIG */
 
-  $.factory ( 'svelto.overlay', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'overlay',
+    templates: {
+      base: false
+    },
     options: {
       hover: {
         triggerable: false,
@@ -34,18 +35,24 @@
         closer: '.overlay-closer'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open () {},
+        close () {}
       }
-    },
+    }
+  };
+
+  /* OVERLAY */
+
+  class Overlay extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.overlay' ).overlay ();
+      $root.filter ( '.overlay' ).overlay ();
 
-    },
+    }
 
     _variables () {
 
@@ -57,7 +64,7 @@
 
       this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
 
-    },
+    }
 
     _events () {
 
@@ -77,7 +84,7 @@
 
       }
 
-    },
+    }
 
     /* HOVER */
 
@@ -93,7 +100,7 @@
 
       }
 
-    },
+    }
 
     __hoverOpen () {
 
@@ -107,7 +114,7 @@
 
       }
 
-    },
+    }
 
     __hoverLeave () {
 
@@ -125,7 +132,7 @@
 
       }
 
-    },
+    }
 
     __hoverClose () {
 
@@ -139,7 +146,7 @@
 
       }
 
-    },
+    }
 
     /* API */
 
@@ -147,7 +154,7 @@
 
       return this._isOpen;
 
-    },
+    }
 
     toggle ( force ) {
 
@@ -171,13 +178,13 @@
 
       }
 
-    },
+    }
 
     open () {
 
       this.toggle ( true );
 
-    },
+    }
 
     close () {
 
@@ -185,6 +192,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Overlay = Overlay;
+  Svelto.Overlay.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Overlay );
 
 }( jQuery, _, window, document ));

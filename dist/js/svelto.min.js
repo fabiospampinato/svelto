@@ -6985,16 +6985,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* OVERLAY */
+  /* CONFIG */
 
-  $.factory('svelto.overlay', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'overlay',
+    templates: {
+      base: false
+    },
     options: {
       hover: {
         triggerable: false,
@@ -7011,19 +7016,34 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         closer: '.overlay-closer'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open: function open() {},
+        close: function close() {}
       }
-    },
+    }
+  };
+
+  /* OVERLAY */
+
+  var Overlay = (function (_Svelto$Widget) {
+    _inherits(Overlay, _Svelto$Widget);
+
+    function Overlay() {
+      _classCallCheck(this, Overlay);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Overlay.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.overlay').overlay();
-    },
+      $root.filter('.overlay').overlay();
+    };
 
-    _variables: function _variables() {
+    Overlay.prototype._variables = function _variables() {
 
       this.$overlay = this.$element;
       this.$overlayed = this.$overlay.parent();
@@ -7032,9 +7052,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$closers = this.$overlayed.find(this.options.selectors.closer);
 
       this._isOpen = this.$overlay.hasClass(this.options.classes.open);
-    },
+    };
 
-    _events: function _events() {
+    Overlay.prototype._events = function _events() {
 
       /* TRIGGER */
 
@@ -7050,11 +7070,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._on(this.$overlayed, Pointer.enter, this.__hoverEnter);
       }
-    },
+    };
 
     /* HOVER */
 
-    __hoverEnter: function __hoverEnter() {
+    Overlay.prototype.__hoverEnter = function __hoverEnter() {
 
       if (!this._isOpen) {
 
@@ -7064,9 +7084,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._one(this.$overlayed, Pointer.leave, this.__hoverLeave);
       }
-    },
+    };
 
-    __hoverOpen: function __hoverOpen() {
+    Overlay.prototype.__hoverOpen = function __hoverOpen() {
 
       if (!this._isOpen) {
 
@@ -7076,9 +7096,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._hoverOpenTimeout = false;
       }
-    },
+    };
 
-    __hoverLeave: function __hoverLeave() {
+    Overlay.prototype.__hoverLeave = function __hoverLeave() {
 
       if (this._hoverOpenTimeout) {
 
@@ -7091,9 +7111,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._hoverCloseTimeout = this._delay(this.__hoverClose, this.options.hover.delays.close);
       }
-    },
+    };
 
-    __hoverClose: function __hoverClose() {
+    Overlay.prototype.__hoverClose = function __hoverClose() {
 
       if (this._isHoverOpen) {
 
@@ -7103,16 +7123,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._hoverCloseTimeout = false;
       }
-    },
+    };
 
     /* API */
 
-    isOpen: function isOpen() {
+    Overlay.prototype.isOpen = function isOpen() {
 
       return this._isOpen;
-    },
+    };
 
-    toggle: function toggle(force) {
+    Overlay.prototype.toggle = function toggle(force) {
 
       if (!_.isBoolean(force)) {
 
@@ -7130,19 +7150,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this._trigger(this._isOpen ? 'open' : 'close');
         });
       }
-    },
+    };
 
-    open: function open() {
+    Overlay.prototype.open = function open() {
 
       this.toggle(true);
-    },
+    };
 
-    close: function close() {
+    Overlay.prototype.close = function close() {
 
       this.toggle(false);
-    }
+    };
 
-  });
+    return Overlay;
+  })(Svelto.Widget);
+
+  Svelto.Overlay = Overlay;
+  Svelto.Overlay.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Overlay);
 })(jQuery, _, window, document);
 /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
 'use strict';
