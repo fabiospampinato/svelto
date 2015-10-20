@@ -8459,25 +8459,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* SELECT */
+  /* CONFIG */
 
-  $.factory('svelto.select', {
-
-    /* TEMPLATES */
-
+  var config = {
+    name: 'select',
     templates: {
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' + '<div class="card-block">' + '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' + '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' + '{% } %}' + '</div>' + '</div>',
       optgroup: '<div class="divider">' + '{%=o.prop%}' + '</div>',
       option: '<div class="button" data-value="{%=o.prop%}">' + '{%=o.value%}' + '</div>'
     },
-
-    /* OPTIONS */
-
     options: {
+      datas: {
+        element: 'select'
+      },
       classes: {
         selected: 'active'
       },
@@ -8489,20 +8491,35 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         button: '.button'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop,
-        change: _.noop
+        open: function open() {},
+        close: function close() {},
+        change: function change() {}
       }
-    },
+    }
+  };
+
+  /* SELECT */
+
+  var Select = (function (_Svelto$Widget) {
+    _inherits(Select, _Svelto$Widget);
+
+    function Select() {
+      _classCallCheck(this, Select);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Select.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.select-trigger').select();
-    },
+      $root.filter('.select-trigger').select();
+    };
 
-    _variables: function _variables() {
+    Select.prototype._variables = function _variables() {
 
       this.$trigger = this.$element;
       this.$select = this.$trigger.find(this.options.selectors.select);
@@ -8510,7 +8527,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$label = this.$trigger.find(this.options.selectors.label);
       this.$valueholder = this.$trigger.find(this.options.selectors.valueholder);
 
-      this.id = this.$trigger.data('select');
+      this.id = this.$trigger.data(this.options.datas.element);
 
       if (this.$valueholder.length === 0) {
 
@@ -8521,9 +8538,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       this.$dropdown = false;
       this.$buttons = false;
-    },
+    };
 
-    _init: function _init() {
+    Select.prototype._init = function _init() {
 
       this._updateValueholder();
 
@@ -8534,9 +8551,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         this.___selectOptions();
         this.___dropdown();
       }
-    },
+    };
 
-    _events: function _events() {
+    Select.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -8548,36 +8565,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._on(this.$buttons, Pointer.tap, this.__tap);
       }
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Select.prototype.__change = function __change() {
 
       this._update();
 
-      console.log("CHANGED!");
-
       this._trigger('change');
-    },
+    };
 
     /* BUTTON TAP */
 
-    __tap: function __tap(event, button) {
+    Select.prototype.__tap = function __tap(event, button) {
 
       this.$select.val($(button).data('value')).trigger('change');
-    },
+    };
 
     /* PRIVATE */
 
-    ___selectOptions: function ___selectOptions() {
+    Select.prototype.___selectOptions = function ___selectOptions() {
       //FIXME: Add support for arbitrary number of optgroups levels
 
-      var previousOptgroup, currentOptgroup;
+      var previousOptgroup = undefined,
+          currentOptgroup = undefined;
 
-      for (var i = 0, l = this.$options.length; i < l; i++) {
+      for (var _iterator = this.$options, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-        var $option = this.$options.eq(i),
+        if (_isArray) {
+          if (_i >= _iterator.length) break;
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) break;
+          _ref = _i.value;
+        }
+
+        var option = _ref;
+
+        var $option = $(option),
             $parent = $option.parent();
 
         if ($parent.is('optgroup')) {
@@ -8599,9 +8627,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           prop: $option.attr('value')
         });
       }
-    },
+    };
 
-    ___dropdown: function ___dropdown() {
+    Select.prototype.___dropdown = function ___dropdown() {
 
       var html = this._tmpl('base', { id: this.id, options: this.selectOptions });
 
@@ -8627,30 +8655,30 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       });
 
       this._updateDropdown();
-    },
+    };
 
-    _setDropdownWidth: function _setDropdownWidth() {
+    Select.prototype._setDropdownWidth = function _setDropdownWidth() {
 
       this.$dropdown.css('min-width', this.$trigger.outerWidth());
-    },
+    };
 
     /* UPDATE */
 
-    _updateValueholder: function _updateValueholder() {
+    Select.prototype._updateValueholder = function _updateValueholder() {
 
       var $selectedOption = this.$options.filter('[value="' + this.$select.val() + '"]');
 
       this.$valueholder.html($selectedOption.html());
-    },
+    };
 
-    _updateDropdown: function _updateDropdown() {
+    Select.prototype._updateDropdown = function _updateDropdown() {
 
       this.$buttons.removeClass(this.options.classes.selected);
 
       this.$buttons.filter('[data-value="' + this.$select.val() + '"]').addClass(this.options.classes.selected);
-    },
+    };
 
-    _update: function _update() {
+    Select.prototype._update = function _update() {
 
       this._updateValueholder();
 
@@ -8658,21 +8686,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._updateDropdown();
       }
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Select.prototype.get = function get() {
 
       return this.$select.val();
-    },
+    };
 
-    select: function select(value) {
+    Select.prototype.select = function select(value) {
 
       this.$buttons.filter('[data-value="' + value + '"]').tap();
-    }
+    };
 
-  });
+    return Select;
+  })(Svelto.Widget);
+
+  Svelto.Select = Select;
+  Svelto.Select.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Select);
 })(jQuery, _, window, document);
 
 /* =========================================================================

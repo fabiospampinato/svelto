@@ -15,12 +15,10 @@
 
   'use strict';
 
-  /* SELECT */
+  /* CONFIG */
 
-  $.factory ( 'svelto.select', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'select',
     templates: {
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
               '<div class="card-block">' +
@@ -35,11 +33,11 @@
       option: '<div class="button" data-value="{%=o.prop%}">' +
                 '{%=o.value%}' +
               '</div>'
-     },
-
-    /* OPTIONS */
-
+    },
     options: {
+      datas: {
+        element: 'select'
+      },
       classes: {
         selected: 'active'
       },
@@ -51,19 +49,25 @@
         button: '.button'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop,
-        change: _.noop
+        open () {},
+        close () {},
+        change () {}
       }
-    },
+    }
+  };
+
+  /* SELECT */
+
+  class Select extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.select-trigger' ).select ();
+      $root.filter ( '.select-trigger' ).select ();
 
-    },
+    }
 
     _variables () {
 
@@ -73,7 +77,7 @@
       this.$label = this.$trigger.find ( this.options.selectors.label );
       this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
 
-      this.id = this.$trigger.data ( 'select' );
+      this.id = this.$trigger.data ( this.options.datas.element );
 
       if ( this.$valueholder.length === 0 ) {
 
@@ -86,7 +90,7 @@
       this.$dropdown = false;
       this.$buttons = false;
 
-    },
+    }
 
     _init () {
 
@@ -101,7 +105,7 @@
 
       }
 
-    },
+    }
 
     _events () {
 
@@ -117,7 +121,7 @@
 
       }
 
-    },
+    }
 
     /* CHANGE */
 
@@ -125,11 +129,9 @@
 
       this._update ();
 
-      console.log("CHANGED!");
-
       this._trigger ( 'change' );
 
-    },
+    }
 
     /* BUTTON TAP */
 
@@ -137,18 +139,18 @@
 
       this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
 
-    },
+    }
 
     /* PRIVATE */
 
     ___selectOptions () { //FIXME: Add support for arbitrary number of optgroups levels
 
-      var previousOptgroup,
+      let previousOptgroup,
           currentOptgroup;
 
-      for ( var i = 0, l = this.$options.length; i < l; i++ ) {
+      for ( let option of this.$options ) {
 
-        var $option = this.$options.eq ( i ),
+        let $option = $(option),
             $parent = $option.parent ();
 
         if ( $parent.is ( 'optgroup' ) ) {
@@ -174,18 +176,18 @@
 
       }
 
-    },
+    }
 
     ___dropdown () {
 
-      var html = this._tmpl ( 'base', { id: this.id, options: this.selectOptions } );
+      let html = this._tmpl ( 'base', { id: this.id, options: this.selectOptions } );
 
       this.$dropdown = $(html).appendTo ( $body );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
       this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', this.id );
 
-      var self = this;
+      let self = this;
 
       this.$dropdown.dropdown ({
         callbacks: {
@@ -203,23 +205,23 @@
 
       this._updateDropdown ();
 
-    },
+    }
 
     _setDropdownWidth () {
 
       this.$dropdown.css ( 'min-width', this.$trigger.outerWidth () );
 
-    },
+    }
 
     /* UPDATE */
 
     _updateValueholder () {
 
-      var $selectedOption = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
+      let $selectedOption = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
 
       this.$valueholder.html ( $selectedOption.html () );
 
-    },
+    }
 
     _updateDropdown () {
 
@@ -227,7 +229,7 @@
 
       this.$buttons.filter ( '[data-value="' + this.$select.val () + '"]' ).addClass ( this.options.classes.selected );
 
-    },
+    }
 
 
     _update () {
@@ -240,7 +242,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -248,7 +250,7 @@
 
       return this.$select.val ();
 
-    },
+    }
 
     select ( value ) {
 
@@ -256,6 +258,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Select = Select;
+  Svelto.Select.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Select );
 
 }( jQuery, _, window, document ));
