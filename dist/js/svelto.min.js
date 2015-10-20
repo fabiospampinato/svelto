@@ -2313,7 +2313,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         cycle: $.ui.animation.normal
       },
       callbacks: {
-        change: _.noop
+        change: function change() {}
       }
     }
   };
@@ -2569,50 +2569,73 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
+  /* CONFIG */
+
+  var config = {
+    name: 'checkbox',
+    options: {
+      classes: {
+        checked: 'checked'
+      },
+      selectors: {
+        input: 'input'
+      },
+      callbacks: {
+        change: function change() {},
+        check: function check() {},
+        uncheck: function uncheck() {}
+      }
+    }
+  };
+
   /* CHECKBOX */
 
-  $.factory('svelto.checkbox', {
+  var Checkbox = (function (_Svelto$Widget) {
+    _inherits(Checkbox, _Svelto$Widget);
 
-    /* OPTIONS */
+    function Checkbox() {
+      _classCallCheck(this, Checkbox);
 
-    options: {
-      callbacks: {
-        change: _.noop,
-        check: _.noop,
-        uncheck: _.noop
-      }
-    },
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Checkbox.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.checkbox').checkbox();
-    },
+      $root.filter('.checkbox').checkbox();
+    };
 
-    _variables: function _variables() {
+    Checkbox.prototype._variables = function _variables() {
 
       this.$checkbox = this.$element;
-      this.$input = this.$checkbox.find('input');
-    },
+      this.$input = this.$checkbox.find(this.options.selectors.input);
+    };
 
-    _init: function _init() {
+    Checkbox.prototype._init = function _init() {
       //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
       var isChecked = this.get(),
-          hasClass = this.$checkbox.hasClass('checked');
+          hasClass = this.$checkbox.hasClass(this.options.classes.checked);
 
       if (isChecked !== hasClass) {
 
-        this.$checkbox.toggleclass('checked', isChecked);
+        this.$checkbox.toggleClass(this.options.classes.checked, isChecked);
       }
-    },
+    };
 
-    _events: function _events() {
+    Checkbox.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -2621,29 +2644,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* TAP */
 
       this._on(Pointer.tap, _.wrap(undefined, this.toggle));
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Checkbox.prototype.__change = function __change() {
 
       var isChecked = this.get();
 
-      this.$checkbox.toggleClass('checked', isChecked);
+      this.$checkbox.toggleClass(this.options.classes.checked, isChecked);
 
       this._trigger('change', { checked: isChecked });
       this._trigger(isChecked ? 'check' : 'uncheck');
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Checkbox.prototype.get = function get() {
       //FIXME: maybe this should return the value, and a isChecked equivalent should do this job
 
       return this.$input.prop('checked');
-    },
+    };
 
-    toggle: function toggle(force) {
+    Checkbox.prototype.toggle = function toggle(force) {
 
       var isChecked = this.get();
 
@@ -2659,19 +2682,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         this._trigger('change', { checked: force });
         this._trigger(force ? 'check' : 'uncheck'); //FIXME: is triggered twice per toggle
       }
-    },
+    };
 
-    check: function check() {
+    Checkbox.prototype.check = function check() {
 
       this.toggle(true);
-    },
+    };
 
-    uncheck: function uncheck() {
+    Checkbox.prototype.uncheck = function uncheck() {
 
       this.toggle(false);
-    }
+    };
 
-  });
+    return Checkbox;
+  })(Svelto.Widget);
+
+  Svelto.Checkbox = Checkbox;
+  Svelto.Checkbox.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Checkbox);
 })(jQuery, _, window, document);
 
 /* =========================================================================

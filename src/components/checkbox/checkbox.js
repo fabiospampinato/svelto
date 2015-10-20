@@ -12,47 +12,57 @@
 
   'use strict';
 
+  /* CONFIG */
+
+  let config = {
+    name: 'checkbox',
+    options: {
+      classes: {
+        checked: 'checked'
+      },
+      selectors: {
+        input: 'input'
+      },
+      callbacks: {
+        change () {},
+        check () {},
+        uncheck () {}
+      }
+    }
+  };
+
   /* CHECKBOX */
 
-  $.factory ( 'svelto.checkbox', {
-
-    /* OPTIONS */
-
-    options: {
-      callbacks: {
-        change: _.noop,
-        check: _.noop,
-        uncheck: _.noop
-      }
-    },
+  class Checkbox extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.checkbox' ).checkbox ();
+      $root.filter ( '.checkbox' ).checkbox ();
 
-    },
+    }
 
     _variables () {
 
       this.$checkbox = this.$element;
-      this.$input = this.$checkbox.find ( 'input' );
+      this.$input = this.$checkbox.find ( this.options.selectors.input );
 
-    },
+    }
 
     _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-      var isChecked = this.get (),
-          hasClass = this.$checkbox.hasClass ( 'checked' );
+      let isChecked = this.get (),
+          hasClass = this.$checkbox.hasClass ( this.options.classes.checked );
 
       if ( isChecked !== hasClass ) {
 
-        this.$checkbox.toggleclass ( 'checked', isChecked );
+        this.$checkbox.toggleClass ( this.options.classes.checked, isChecked );
 
       }
 
-    },
+    }
 
     _events () {
 
@@ -64,7 +74,7 @@
 
       this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
 
-    },
+    }
 
     /* CHANGE */
 
@@ -72,12 +82,12 @@
 
       var isChecked = this.get ();
 
-      this.$checkbox.toggleClass ( 'checked', isChecked );
+      this.$checkbox.toggleClass ( this.options.classes.checked, isChecked );
 
       this._trigger ( 'change', { checked: isChecked } );
       this._trigger ( isChecked ? 'check' : 'uncheck' );
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -85,7 +95,7 @@
 
       return this.$input.prop ( 'checked' );
 
-    },
+    }
 
     toggle ( force ) {
 
@@ -106,13 +116,13 @@
 
       }
 
-    },
+    }
 
     check () {
 
       this.toggle ( true );
 
-    },
+    }
 
     uncheck () {
 
@@ -120,6 +130,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Checkbox = Checkbox;
+  Svelto.Checkbox.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Checkbox );
 
 }( jQuery, _, window, document ));

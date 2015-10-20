@@ -38,7 +38,7 @@
         cycle: $.ui.animation.normal
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     },
   };
