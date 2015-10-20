@@ -14,12 +14,10 @@
 
   'use strict';
 
-  /* SWITCH */
+  /* CONFIG */
 
-  $.factory ( 'svelto.switch', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'switch',
     options: {
       colors: {
         on: 'secondary',
@@ -34,11 +32,16 @@
         handler: '.switch-handler'
       },
       callbacks: {
-        change: _.noop,
-        check: _.noop,
-        uncheck: _.noop
+        change () {},
+        check () {},
+        uncheck () {}
       }
-    },
+    }
+  };
+
+  /* SWITCH */
+
+  class Switch extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -57,7 +60,9 @@
 
       });
 
-    },
+      //TODO: add support for filter
+
+    }
 
     _variables () {
 
@@ -71,7 +76,7 @@
       this.switchWidth = this.$switch.width ();
       this.handlerWidth = this.$handler.width ();
 
-    },
+    }
 
     _init () {
 
@@ -81,7 +86,7 @@
 
       }
 
-    },
+    }
 
     _events () {
 
@@ -107,7 +112,7 @@
         }
       });
 
-    },
+    }
 
     /* CHANGE */
 
@@ -115,7 +120,7 @@
 
       this.toggle ( this.$input.prop ( 'checked' ) );
 
-    },
+    }
 
     /* KEYS */
 
@@ -143,7 +148,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-    },
+    }
 
     /* DRAG */
 
@@ -161,7 +166,7 @@
 
       }
 
-    },
+    }
 
     /* UPDATE */
 
@@ -169,7 +174,7 @@
 
       this.$handler.translateX ( this.isChecked ? this.switchWidth - this.handlerWidth : 0 );
 
-    },
+    }
 
     _updateColors () {
 
@@ -179,13 +184,13 @@
       this.$handler.toggleClass ( this.options.colors.on, this.isChecked );
       this.$handler.toggleClass ( this.options.colors.off, !this.isChecked );
 
-    },
+    }
 
     _updateInput () {
 
       this.$input.prop ( 'checked', this.isChecked ).trigger ( 'change' );
 
-    },
+    }
 
     /* API */
 
@@ -193,7 +198,7 @@
 
       return this.isChecked;
 
-    },
+    }
 
     toggle ( force, reset ) {
 
@@ -228,13 +233,13 @@
 
       }
 
-    },
+    }
 
     check () {
 
       this.toggle ( true );
 
-    },
+    }
 
     uncheck () {
 
@@ -242,6 +247,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Switch = Switch;
+  Svelto.Switch.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Switch );
 
 }( jQuery, _, window, document ));

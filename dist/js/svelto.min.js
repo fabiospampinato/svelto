@@ -9851,16 +9851,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 ;(function ($, window, document, undefined) {
 
   'use strict';
 
-  /* SWITCH */
+  /* CONFIG */
 
-  $.factory('svelto.switch', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'switch',
     options: {
       colors: {
         on: 'secondary',
@@ -9875,15 +9877,29 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         handler: '.switch-handler'
       },
       callbacks: {
-        change: _.noop,
-        check: _.noop,
-        uncheck: _.noop
+        change: function change() {},
+        check: function check() {},
+        uncheck: function uncheck() {}
       }
-    },
+    }
+  };
+
+  /* SWITCH */
+
+  var Switch = (function (_Svelto$Widget) {
+    _inherits(Switch, _Svelto$Widget);
+
+    function Switch() {
+      _classCallCheck(this, Switch);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Switch.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.switch').each(function () {
 
@@ -9896,9 +9912,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           }
         });
       });
-    },
 
-    _variables: function _variables() {
+      //TODO: add support for filter
+    };
+
+    Switch.prototype._variables = function _variables() {
 
       this.$switch = this.$element;
       this.$input = this.$switch.find(this.options.selectors.input);
@@ -9909,17 +9927,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       this.switchWidth = this.$switch.width();
       this.handlerWidth = this.$handler.width();
-    },
+    };
 
-    _init: function _init() {
+    Switch.prototype._init = function _init() {
 
       if (this.$input.prop('checked')) {
 
         this.check();
       }
-    },
+    };
 
-    _events: function _events() {
+    Switch.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -9942,18 +9960,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           end: this.__dragEnd.bind(this)
         }
       });
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Switch.prototype.__change = function __change() {
 
       this.toggle(this.$input.prop('checked'));
-    },
+    };
 
     /* KEYS */
 
-    __keydown: function __keydown(event) {
+    Switch.prototype.__keydown = function __keydown(event) {
 
       switch (event.keyCode) {
 
@@ -9976,11 +9994,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       event.preventDefault();
       event.stopImmediatePropagation();
-    },
+    };
 
     /* DRAG */
 
-    __dragEnd: function __dragEnd(data) {
+    Switch.prototype.__dragEnd = function __dragEnd(data) {
 
       if (data.motion) {
 
@@ -9991,37 +10009,37 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.toggle();
       }
-    },
+    };
 
     /* UPDATE */
 
-    _updatePosition: function _updatePosition() {
+    Switch.prototype._updatePosition = function _updatePosition() {
 
       this.$handler.translateX(this.isChecked ? this.switchWidth - this.handlerWidth : 0);
-    },
+    };
 
-    _updateColors: function _updateColors() {
+    Switch.prototype._updateColors = function _updateColors() {
 
       this.$bar.toggleClass(this.options.colors.on, this.isChecked);
       this.$bar.toggleClass(this.options.colors.off, !this.isChecked);
 
       this.$handler.toggleClass(this.options.colors.on, this.isChecked);
       this.$handler.toggleClass(this.options.colors.off, !this.isChecked);
-    },
+    };
 
-    _updateInput: function _updateInput() {
+    Switch.prototype._updateInput = function _updateInput() {
 
       this.$input.prop('checked', this.isChecked).trigger('change');
-    },
+    };
 
     /* API */
 
-    get: function get() {
+    Switch.prototype.get = function get() {
 
       return this.isChecked;
-    },
+    };
 
-    toggle: function toggle(force, reset) {
+    Switch.prototype.toggle = function toggle(force, reset) {
 
       if (!_.isBoolean(force)) {
 
@@ -10050,19 +10068,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._updatePosition();
       }
-    },
+    };
 
-    check: function check() {
+    Switch.prototype.check = function check() {
 
       this.toggle(true);
-    },
+    };
 
-    uncheck: function uncheck() {
+    Switch.prototype.uncheck = function uncheck() {
 
       this.toggle(false);
-    }
+    };
 
-  });
+    return Switch;
+  })(Svelto.Widget);
+
+  Svelto.Switch = Switch;
+  Svelto.Switch.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Switch);
 })(jQuery, _, window, document);
 
 /* =========================================================================
