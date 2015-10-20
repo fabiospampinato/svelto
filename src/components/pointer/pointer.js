@@ -18,7 +18,7 @@
 
   'use strict';
 
-  /* OPTIONS */
+  /* CONFIG */
 
   window.Pointer = {
     options: {
@@ -40,7 +40,7 @@
 
   /* EVENTS */
 
-  var events = {
+  let events = {
     tap: Pointer.options.events.prefix + 'tap',
     dbltap: Pointer.options.events.prefix + 'dbltap',
     press: Pointer.options.events.prefix + 'press',
@@ -57,17 +57,17 @@
 
   /* EVENTS METHODS */
 
-  _.each ( events, ( alias, name ) => {
+  for ( let name in events ) {
 
-    Pointer[name] = alias;
+    Pointer[name] = events[name];
 
     $.fn[name] = function ( fn ) {
 
-      return fn ? this.on ( alias, fn ) : this.trigger ( alias );
+      return fn ? this.on ( events[name], fn ) : this.tirgger ( events[name] ); //FIXME: Does it work? not sure about that `events[name]` inside the function
 
     };
 
-  });
+  }
 
   /* POINTER LOGIC */
 
@@ -75,7 +75,7 @@
 
     /* VARIABLES */
 
-    var $document = $(document),
+    let $document = $(document),
         target,
         $target,
         startEvent,
@@ -87,12 +87,12 @@
 
     /* EVENT CREATOR */
 
-    var createEvent = function ( name, originalEvent ) {
+    let createEvent = function ( name, originalEvent ) {
 
-      var event = $.Event ( name );
+      let event = $.Event ( name );
 
       event.originalEvent = originalEvent;
-      event.isPointerEvent = true;
+      event.isPointerEvent = true; //TODO: Try not to need this extra property
 
       return event;
 
@@ -100,7 +100,7 @@
 
     /* HANDLERS */
 
-    var downHandler = function ( event ) {
+    let downHandler = function ( event ) {
 
       target = event.target;
       $target = $(target);
@@ -118,7 +118,7 @@
 
     };
 
-    var pressHandler = function () { //FIXME: it doesn't get called if we do event.preventDefault () with dragstart
+    let pressHandler = function () {
 
       $target.trigger ( createEvent ( Pointer.press, startEvent ) );
 
@@ -126,7 +126,7 @@
 
     };
 
-    var moveHandler = function () {
+    let moveHandler = function () {
 
       if ( pressTimeout ) {
 
@@ -139,7 +139,7 @@
 
     };
 
-    var upHandler = function ( event ) {
+    let upHandler = function ( event ) {
 
       if ( pressTimeout ) {
 
@@ -151,7 +151,7 @@
 
       if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
 
-        var startXY = $.eventXY ( startEvent ),
+        let startXY = $.eventXY ( startEvent ),
             endXY = $.eventXY ( event ),
             deltaXY = {
               X: endXY.X - startXY.X,
@@ -166,12 +166,12 @@
 
           if ( absDeltaXY.X > absDeltaXY.Y ) {
 
-            var orientation = 'horizontal',
+            let orientation = 'horizontal',
                 direction = ( deltaXY.X > 0 ) ? 1 : -1;
 
           } else {
 
-            var orientation = 'vertical',
+            let orientation = 'vertical',
                 direction = ( deltaXY.Y > 0 ) ? 1 : -1;
 
           }
@@ -211,7 +211,7 @@
 
     };
 
-    var cancelHandler = function () {
+    let cancelHandler = function () {
 
       if ( pressTimeout ) {
 
