@@ -3018,16 +3018,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* COLORPICKER */
+  /* CONFIG */
 
-  $.factory('svelto.colorpicker', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'colorpicker',
     options: {
       defaultColor: '#ff0000',
       live: false,
@@ -3045,16 +3047,31 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       callbacks: {
         change: _.noop
       }
-    },
+    }
+  };
+
+  /* COLORPICKER */
+
+  var Colorpicker = (function (_Svelto$Widget) {
+    _inherits(Colorpicker, _Svelto$Widget);
+
+    function Colorpicker() {
+      _classCallCheck(this, Colorpicker);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Colorpicker.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.colorpicker').colorpicker();
-    },
+      $root.filter('.colorpicker').colorpicker();
+    };
 
-    _variables: function _variables() {
+    Colorpicker.prototype._variables = function _variables() {
 
       this.$colorpicker = this.$element;
       this.$sbWrp = this.$colorpicker.find(this.options.selectors.sb.wrp);
@@ -3070,9 +3087,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.color = new HexColor();
       this.hex = '';
-    },
+    };
 
-    _init: function _init() {
+    Colorpicker.prototype._init = function _init() {
 
       if (!this.set(this.$input.val())) {
 
@@ -3081,9 +3098,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this._updateSb();
         this._updateHue();
       }
-    },
+    };
 
-    _events: function _events() {
+    Colorpicker.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -3126,18 +3143,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           end: this.__hueDragEnd.bind(this)
         }
       });
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Colorpicker.prototype.__change = function __change() {
 
       this.set(this.$input.val());
-    },
+    };
 
     /* SB ARROWS */
 
-    __sbKeydown: function __sbKeydown(event) {
+    Colorpicker.prototype.__sbKeydown = function __sbKeydown(event) {
 
       switch (event.keyCode) {
 
@@ -3167,11 +3184,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this._updateSb();
       this._updateInput();
-    },
+    };
 
     /* SB DRAG */
 
-    _sbDragSet: function _sbDragSet(XY, update) {
+    Colorpicker.prototype._sbDragSet = function _sbDragSet(XY, update) {
 
       this.color.hsv.s = _.clamp(0, XY.X, this.sbWrpSize) * 100 / this.sbWrpSize;
       this.color.hsv.v = 100 - _.clamp(0, XY.Y, this.sbWrpSize) * 100 / this.sbWrpSize;
@@ -3182,21 +3199,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._updateInput();
       }
-    },
+    };
 
-    __sbDragMove: function __sbDragMove(data) {
+    Colorpicker.prototype.__sbDragMove = function __sbDragMove(data) {
 
       this._sbDragSet(data.moveXY, this.options.live);
-    },
+    };
 
-    __sbDragEnd: function __sbDragEnd(data) {
+    Colorpicker.prototype.__sbDragEnd = function __sbDragEnd(data) {
 
       this._sbDragSet(data.endXY, true);
-    },
+    };
 
     /* HUE ARROWS */
 
-    __hueKeydown: function __hueKeydown(event) {
+    Colorpicker.prototype.__hueKeydown = function __hueKeydown(event) {
 
       switch (event.keyCode) {
 
@@ -3218,11 +3235,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this._updateHue();
       this._updateInput();
-    },
+    };
 
     /* HUE DRAG */
 
-    _hueDragSet: function _hueDragSet(XY, update) {
+    Colorpicker.prototype._hueDragSet = function _hueDragSet(XY, update) {
 
       this.color.hsv.h = 359 - _.clamp(0, XY.Y, this.hueWrpHeight) * 359 / this.hueWrpHeight;
 
@@ -3232,30 +3249,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._updateInput();
       }
-    },
+    };
 
-    __hueDragMove: function __hueDragMove(data) {
+    Colorpicker.prototype.__hueDragMove = function __hueDragMove(data) {
 
       this._hueDragSet(data.moveXY, this.options.live);
-    },
+    };
 
-    __hueDragEnd: function __hueDragEnd(data) {
+    Colorpicker.prototype.__hueDragEnd = function __hueDragEnd(data) {
 
       this._hueDragSet(data.endXY, true);
-    },
+    };
 
     /* UPDATE */
 
-    _updateSb: function _updateSb() {
+    Colorpicker.prototype._updateSb = function _updateSb() {
 
       var hsl = ColorHelper.hsv2hsl(this.color.hsv),
           translateX = this.sbWrpSize / 100 * this.color.hsv.s,
           translateY = this.sbWrpSize / 100 * (100 - this.color.hsv.v);
 
       this.$sbHandler.hsl(hsl.h, hsl.s, hsl.l).translate(translateX, translateY);
-    },
+    };
 
-    _updateHue: function _updateHue() {
+    Colorpicker.prototype._updateHue = function _updateHue() {
 
       var hsl = ColorHelper.hsv2hsl(this.color.hsv),
           translateY = this.hueWrpHeight / 100 * (100 - this.color.hsv.h / 360 * 100);
@@ -3263,46 +3280,54 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$hueHandler.hsl(this.color.hsv.h, 100, 50).translateY(translateY);
       this.$sbHandler.hsl(hsl.h, hsl.s, hsl.l);
       this.$sbWrp.hsl(this.color.hsv.h, 100, 50);
-    },
+    };
 
-    _updateInput: function _updateInput() {
+    Colorpicker.prototype._updateInput = function _updateInput() {
 
       this.hex = this.color.getHexStr();
 
       this.$input.val(this.hex).trigger('change');
 
       this._trigger('change', { color: this.hex });
-    },
+    };
 
-    _update: function _update() {
+    Colorpicker.prototype._update = function _update() {
 
       this._updateSb();
       this._updateHue();
       this._updateInput();
-    },
+    };
 
     /* PUBLIC */
 
-    get: function get() {
+    Colorpicker.prototype.get = function get() {
 
       return this.color.getHexStr();
-    },
+    };
 
-    set: function set(color) {
+    Colorpicker.prototype.set = function set(color) {
 
       var newColor = new HexColor(color);
 
-      if (newColor.isValid && !_.isEqual(newColor.hsv, this.color.hsv)) {
+      if (newColor.isValid() && !_.isEqual(newColor.hsv, this.color.hsv)) {
 
         this.color = newColor;
 
         this._update();
       }
 
-      return newColor.isValid;
-    }
+      return newColor.isValid();
+    };
 
-  });
+    return Colorpicker;
+  })(Svelto.Widget);
+
+  Svelto.Colorpicker = Colorpicker;
+  Svelto.Colorpicker.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Colorpicker);
 })(jQuery, _, window, document);
 
 /* =========================================================================

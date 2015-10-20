@@ -17,12 +17,10 @@
 
   'use strict';
 
-  /* COLORPICKER */
+  /* CONFIG */
 
-  $.factory ( 'svelto.colorpicker', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'colorpicker',
     options: {
       defaultColor: '#ff0000',
       live: false,
@@ -40,15 +38,21 @@
       callbacks: {
         change: _.noop
       }
-    },
+    }
+  };
+
+  /* COLORPICKER */
+
+  class Colorpicker extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.colorpicker' ).colorpicker ();
+      $root.filter ( '.colorpicker' ).colorpicker ();
 
-    },
+    }
 
     _variables () {
 
@@ -67,7 +71,7 @@
       this.color = new HexColor ();
       this.hex = '';
 
-    },
+    }
 
     _init () {
 
@@ -80,7 +84,7 @@
 
       }
 
-    },
+    }
 
     _events () {
 
@@ -126,7 +130,7 @@
         }
       });
 
-    },
+    }
 
     /* CHANGE */
 
@@ -134,7 +138,7 @@
 
       this.set ( this.$input.val () );
 
-    },
+    }
 
     /* SB ARROWS */
 
@@ -169,7 +173,7 @@
       this._updateSb ();
       this._updateInput ();
 
-    },
+    }
 
     /* SB DRAG */
 
@@ -186,19 +190,19 @@
 
       }
 
-    },
+    }
 
     __sbDragMove ( data ) {
 
       this._sbDragSet ( data.moveXY, this.options.live );
 
-    },
+    }
 
     __sbDragEnd ( data ) {
 
       this._sbDragSet ( data.endXY, true );
 
-    },
+    }
 
     /* HUE ARROWS */
 
@@ -225,7 +229,7 @@
       this._updateHue ();
       this._updateInput ();
 
-    },
+    }
 
     /* HUE DRAG */
 
@@ -241,42 +245,42 @@
 
       }
 
-    },
+    }
 
     __hueDragMove ( data ) {
 
       this._hueDragSet ( data.moveXY, this.options.live );
 
-    },
+    }
 
     __hueDragEnd ( data ) {
 
       this._hueDragSet ( data.endXY, true );
 
-    },
+    }
 
     /* UPDATE */
 
     _updateSb () {
 
-      var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
+      let hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
           translateX = this.sbWrpSize / 100 * this.color.hsv.s,
           translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
 
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
 
-    },
+    }
 
     _updateHue () {
 
-      var hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
+      let hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
           translateY = this.hueWrpHeight / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) );
 
       this.$hueHandler.hsl ( this.color.hsv.h, 100, 50 ).translateY ( translateY );
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
       this.$sbWrp.hsl ( this.color.hsv.h, 100, 50 );
 
-    },
+    }
 
     _updateInput () {
 
@@ -286,7 +290,7 @@
 
       this._trigger ( 'change', { color: this.hex } );
 
-    },
+    }
 
     _update () {
 
@@ -294,7 +298,7 @@
       this._updateHue ();
       this._updateInput ();
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -302,13 +306,13 @@
 
       return this.color.getHexStr ();
 
-    },
+    }
 
     set ( color ) {
 
-      var newColor = new HexColor ( color );
+      let newColor = new HexColor ( color );
 
-      if ( newColor.isValid && !_.isEqual ( newColor.hsv, this.color.hsv ) ) {
+      if ( newColor.isValid () && !_.isEqual ( newColor.hsv, this.color.hsv ) ) {
 
         this.color = newColor;
 
@@ -316,10 +320,19 @@
 
       }
 
-      return newColor.isValid;
+      return newColor.isValid ();
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Colorpicker = Colorpicker;
+  Svelto.Colorpicker.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Colorpicker );
 
 }( jQuery, _, window, document ));
