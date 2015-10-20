@@ -6661,20 +6661,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* NAVBAR */
+  /* CONFIG */
 
-  $.factory('svelto.navbar', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
+      attributes: {
+        id: 'id'
+      },
       datas: {
-        direction: 'direction'
+        direction: 'direction',
+        element: 'navbar'
       },
       classes: {
         open: 'open',
@@ -6685,34 +6691,49 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         trigger: '.navbar-trigger'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open: function open() {},
+        close: function close() {}
       }
-    },
+    }
+  };
+
+  /* NAVBAR */
+
+  var Navbar = (function (_Svelto$Widget) {
+    _inherits(Navbar, _Svelto$Widget);
+
+    function Navbar() {
+      _classCallCheck(this, Navbar);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Navbar.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.navbar').navbar();
-    },
+      $root.filter('.navbar').navbar();
+    };
 
-    _variables: function _variables() {
+    Navbar.prototype._variables = function _variables() {
 
-      this.navbar = this.element;
       this.$navbar = this.$element;
+      this.navbar = this.element;
 
-      this.id = this.$navbar.attr('id');
+      this.id = this.$navbar.attr(this.options.attributes.id);
 
       this.$closers = this.$navbar.find(this.options.selectors.closer);
-      this.$triggers = $(this.options.selectors.trigger + '[data-navbar="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
 
       this.direction = this.$navbar.data(this.options.datas.direction);
       this._isOpen = this.$navbar.hasClass(this.options.classes.open);
       this.isFlickable = this.$navbar.hasClass(this.options.classes.flickable);
-    },
+    };
 
-    _events: function _events() {
+    Navbar.prototype._events = function _events() {
 
       /* TAP */
 
@@ -6736,21 +6757,21 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._on($document, Pointer.flick, this.__flick);
       }
-    },
+    };
 
     /* TAP */
 
-    __tap: function __tap(event) {
+    Navbar.prototype.__tap = function __tap(event) {
 
       if (event.target === this.navbar) {
 
         this.close();
       }
-    },
+    };
 
     /* KEYDOWN */
 
-    __keydown: function __keydown(event) {
+    Navbar.prototype.__keydown = function __keydown(event) {
 
       switch (event.keyCode) {
 
@@ -6765,11 +6786,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       event.preventDefault();
       event.stopImmediatePropagation();
-    },
+    };
 
     /* FLICK */
 
-    __flick: function __flick(event, data) {
+    Navbar.prototype.__flick = function __flick(event, data) {
 
       if (this._isOpen) return;
 
@@ -6814,16 +6835,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           break;
 
       }
-    },
+    };
 
     /* PUBLIC */
 
-    isOpen: function isOpen() {
+    Navbar.prototype.isOpen = function isOpen() {
 
       return this._isOpen;
-    },
+    };
 
-    toggle: function toggle(force) {
+    Navbar.prototype.toggle = function toggle(force) {
 
       if (_.isUndefined(force)) {
 
@@ -6838,19 +6859,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._trigger(this._isOpen ? 'open' : 'close');
       }
-    },
+    };
 
-    open: function open() {
+    Navbar.prototype.open = function open() {
 
       this.toggle(true);
-    },
+    };
 
-    close: function close() {
+    Navbar.prototype.close = function close() {
 
       this.toggle(false);
-    }
+    };
 
-  });
+    return Navbar;
+  })(Svelto.Widget);
+
+  Svelto.Navbar = Navbar;
+  Svelto.Navbar.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Navbar);
 })(jQuery, _, window, document);
 
 /* =========================================================================

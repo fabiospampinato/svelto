@@ -16,16 +16,18 @@
 
   'use strict';
 
-  /* NAVBAR */
+  /* CONFIG */
 
-  $.factory ( 'svelto.navbar', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
+      attributes: {
+        id: 'id'
+      },
       datas: {
-        direction: 'direction'
+        direction: 'direction',
+        element: 'navbar'
       },
       classes: {
         open: 'open',
@@ -36,34 +38,40 @@
         trigger: '.navbar-trigger'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open () {},
+        close () {}
       }
-    },
+    }
+  };
+
+  /* NAVBAR */
+
+  class Navbar extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.navbar' ).navbar ();
+      $root.filter ( '.navbar' ).navbar ();
 
-    },
+    }
 
     _variables () {
 
-      this.navbar = this.element;
       this.$navbar = this.$element;
+      this.navbar = this.element;
 
-      this.id = this.$navbar.attr ( 'id' );
+      this.id = this.$navbar.attr ( this.options.attributes.id );
 
       this.$closers = this.$navbar.find ( this.options.selectors.closer );
-      this.$triggers = $(this.options.selectors.trigger + '[data-navbar="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
 
       this.direction = this.$navbar.data ( this.options.datas.direction );
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
       this.isFlickable = this.$navbar.hasClass ( this.options.classes.flickable );
 
-    },
+    }
 
     _events () {
 
@@ -91,7 +99,7 @@
 
       }
 
-    },
+    }
 
     /* TAP */
 
@@ -103,7 +111,7 @@
 
       }
 
-    },
+    }
 
     /* KEYDOWN */
 
@@ -123,7 +131,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-    },
+    }
 
     /* FLICK */
 
@@ -173,7 +181,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -181,7 +189,7 @@
 
       return this._isOpen;
 
-    },
+    }
 
     toggle ( force ) {
 
@@ -201,13 +209,13 @@
 
       }
 
-    },
+    }
 
     open () {
 
       this.toggle ( true );
 
-    },
+    }
 
     close () {
 
@@ -215,6 +223,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Navbar = Navbar;
+  Svelto.Navbar.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Navbar );
 
 }( jQuery, _, window, document ));
