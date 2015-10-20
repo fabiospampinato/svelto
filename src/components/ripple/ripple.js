@@ -5,73 +5,146 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../core/core.js
+ * @requires ../widget/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
 
+  /* CONFIG */
+
+  let config = {
+    name: 'ripple',
+    templates: {
+      circle: '<div class="ripple-circle"></div>'
+    },
+    options: {
+      classes: {
+        circle: {
+          show: 'ripple-circle-show',
+          hide: 'ripple-circle-hide'
+        }
+      },
+      animations: {
+        show: 350,
+        hide: 400
+      },
+      callbacks: {
+        show () {},
+        hide () {}
+      }
+    }
+  };
+
   /* RIPPLE */
 
-  var Ripple = {
+  class Ripple extends Svelto.Widget {
 
-    delay: {
-      show: 350,
-      hide: 400
-    },
+    /* SPECIAL */
 
-    show ( event, $element ) {
+    _widgetize ( $root ) {
 
-      var $ripple = $( '<div class="ripple-circle">' ).appendTo ( $element ),
-          offset = $element.offset (),
+      $root.find ( '.ripple' ).ripple ();
+      $root.filter ( '.ripple' ).ripple ();
+
+    }
+
+    _variables () {
+
+      this.$ripple = this.$element;
+
+      this.circles = [];
+
+    }
+
+    _events () {
+
+      /* DOWN */
+
+      this._on ( Pointer.down, this.__down );
+
+      /* UP / CANCEL */
+
+      this._on ( Pointer.up + ' ' + Pointer.cancel, this.__upCancel );
+
+    }
+
+    /* DOWN */
+
+    __down ( event ) {
+
+      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
+
+      this._show ( event );
+
+    }
+
+    /* UP CANCEL */
+
+    __upCancel ( event ) {
+
+      for ( let [$circle, before] of this.circles ) {
+
+        this._hide ( $circle, before );
+
+      }
+
+      this.circles = [];
+
+    }
+
+    /* SHOW */
+
+    _show ( event ) {
+
+      let $circle = $(this._tmpl ( 'circle' )).prependTo ( this.$ripple ),
+          offset = this.$ripple.offset (),
           eventXY = $.eventXY ( event ),
           now = _.now ();
 
-      $ripple.css ({
+      $circle.css ({
         top: eventXY.Y - offset.top,
         left: eventXY.X - offset.left
-      }).addClass ( 'ripple-circle-show' );
+      }).addClass ( this.options.classes.circle.show );
 
-      $element.on ( Pointer.up + ' ' + Pointer.cancel, function () {
+      this.circles.push ( [$circle, now] );
 
-        Ripple.hide ( $ripple, now );
+      this._trigger ( 'show' );
 
-      });
+    }
 
-    },
+    /* HIDE */
 
-    hide ( $ripple, before ) {
+    _hide ( $circle, before ) {
 
-      var delay = Math.max ( 0, Ripple.delay.show + before - _.now () );
+      let delay = Math.max ( 0, this.options.animations.show + before - _.now () );
 
-      setTimeout ( function () {
+      this._delay ( function () {
 
-        $ripple.addClass ( 'ripple-circle-hide' );
+        $circle.addClass ( this.options.classes.circle.hide );
 
-        setTimeout ( function () {
+        this._delay ( function () {
 
-          $ripple.remove ();
+          $circle.remove ();
 
-        }, Ripple.delay.hide );
+          this._trigger ( 'hide' );
+
+        }, this.options.animations.hide );
 
       }, delay );
 
     }
-  };
 
-  /* READY */
+  }
 
-  $(function () {
+  /* BINDING */
 
-    $body.on ( Pointer.down, '.ripple', function ( event ) {
+  Svelto.Ripple = Ripple;
+  Svelto.Ripple.config = config;
 
-      if ( event.button === $.ui.mouseButton.RIGHT ) return;
+  /* FACTORY */
 
-      Ripple.show ( event, $(this) );
-
-    });
-
-  });
+  $.factory ( Svelto.Ripple );
 
 }( jQuery, _, window, document ));

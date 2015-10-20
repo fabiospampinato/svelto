@@ -413,7 +413,7 @@
 
     _delay ( fn, delay ) {
 
-      return setTimeout ( () => fn (), delay || 0 );
+      return setTimeout ( () => fn.apply ( this ), delay || 0 );
 
     }
 

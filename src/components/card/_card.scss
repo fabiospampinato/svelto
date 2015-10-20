@@ -53,14 +53,15 @@
 
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
 
-  > :not(.overlay) {
+  > :not(.overlay):not(.ripple-circle) {
     margin-bottom: 0 !important; //FIXME: The `!important` shouldn't be necessary
   }
 
   /* BORDER RADIUS INHERITANCE */
 
-  > :first-child:not(.overlay),
-  > .overlay + * {
+  > :first-child:not(.overlay):not(.ripple-circle),
+  > :first-child.overlay + *,
+  > :first-child.ripple-circle + * {
     @include border-top-radius ( inherit );
   }
 

@@ -20,6 +20,11 @@
 
   $.factory = function ( Widget ) {
 
+    if ( !Widget.config ) { //FIXME: REMOVE THIS
+      console.log(Widget + ' needs to be updated to es6');
+      return;
+    }
+
     /* NAME */
 
     let name = Widget.config.name,

@@ -154,9 +154,9 @@ label {
 
   /* CENTER */
 
-  > :not(.label):not(.button):not(.sub) { //INFO: Both `.label` and `.button`
+  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
 
-    & + :not(.sub):not(.icon):not(.ripple-circle) {
+    & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
       margin-left: $label-center-extra-spacing;
     }
 
@@ -168,9 +168,9 @@ label {
 
   &.compact {
 
-    > :not(.label):not(.button):not(.sub) { //INFO: Both `.label` and `.button`
+    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
 
-      & + :not(.sub):not(.icon):not(.ripple-circle) {
+      & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
         margin-left: $label-compact-center-extra-spacing;
       }
 

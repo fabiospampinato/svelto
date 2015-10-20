@@ -3032,31 +3032,31 @@ label {
   border-color: inherit !important;
 }
 
-.label > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle), .button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle) {
+.label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle), .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
   margin-left: 0.75em;
 }
 
-.label > :not(.label):not(.button):not(.sub) + i.icon, .button > :not(.label):not(.button):not(.sub) + i.icon, .carousel.inset .label > :not(.label):not(.button):not(.sub) + .carousel-prev:after,
-.carousel.inset .button > :not(.label):not(.button):not(.sub) + .carousel-prev:after,
-.carousel.inset .label > :not(.label):not(.button):not(.sub) + .carousel-next:after, .carousel.inset .button > :not(.label):not(.button):not(.sub) + .carousel-next:after, .label > :not(.label):not(.button):not(.sub) + .rater-star:before, .button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
-.slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
-.slider:not(.disabled) .label > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
-table.table.sortable .button > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
-table.table.sortable .label > :not(.label):not(.button):not(.sub) + th[data-sort]:after, table.table.sortable .button > :not(.label):not(.button):not(.sub) + th[data-sort]:after {
+.label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + i.icon, .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + i.icon, .carousel.inset .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-prev:after,
+.carousel.inset .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-prev:after,
+.carousel.inset .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-next:after, .carousel.inset .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-next:after, .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .rater-star:before, .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .rater-star:before, .slider:not(.disabled) .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-min:hover:after,
+.slider:not(.disabled) .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-min:hover:after,
+.slider:not(.disabled) .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-max:hover:after, .slider:not(.disabled) .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-max:hover:after, table.table.sortable .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:before,
+table.table.sortable .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:before,
+table.table.sortable .label > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:after, table.table.sortable .button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:after {
   margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle), .compact.button > :not(.label):not(.button):not(.sub) + :not(.sub):not(.icon):not(.ripple-circle) {
+.label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle), .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
   margin-left: 0.5em;
 }
 
-.label.compact > :not(.label):not(.button):not(.sub) + i.icon, .compact.button > :not(.label):not(.button):not(.sub) + i.icon, .carousel.inset .label.compact > :not(.label):not(.button):not(.sub) + .carousel-prev:after,
-.carousel.inset .compact.button > :not(.label):not(.button):not(.sub) + .carousel-prev:after,
-.carousel.inset .label.compact > :not(.label):not(.button):not(.sub) + .carousel-next:after, .carousel.inset .compact.button > :not(.label):not(.button):not(.sub) + .carousel-next:after, .label.compact > :not(.label):not(.button):not(.sub) + .rater-star:before, .compact.button > :not(.label):not(.button):not(.sub) + .rater-star:before, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
-.slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-min:hover:after,
-.slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub) + .slider-max:hover:after, table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
-table.table.sortable .compact.button > :not(.label):not(.button):not(.sub) + th[data-sort]:before,
-table.table.sortable .label.compact > :not(.label):not(.button):not(.sub) + th[data-sort]:after, table.table.sortable .compact.button > :not(.label):not(.button):not(.sub) + th[data-sort]:after {
+.label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + i.icon, .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + i.icon, .carousel.inset .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-prev:after,
+.carousel.inset .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-prev:after,
+.carousel.inset .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-next:after, .carousel.inset .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .carousel-next:after, .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .rater-star:before, .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .rater-star:before, .slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-min:hover:after,
+.slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-min:hover:after,
+.slider:not(.disabled) .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-max:hover:after, .slider:not(.disabled) .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + .slider-max:hover:after, table.table.sortable .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:before,
+table.table.sortable .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:before,
+table.table.sortable .label.compact > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:after, table.table.sortable .compact.button > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) + th[data-sort]:after {
   margin-left: 0.3333333333em;
 }
 
@@ -3884,12 +3884,13 @@ button {
   overflow: auto;
 }
 
-.card > :not(.overlay) {
+.card > :not(.overlay):not(.ripple-circle) {
   margin-bottom: 0 !important;
 }
 
-.card > :first-child:not(.overlay),
-.card > .overlay + * {
+.card > :first-child:not(.overlay):not(.ripple-circle),
+.card > :first-child.overlay + *,
+.card > :first-child.ripple-circle + * {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
 }
@@ -9923,6 +9924,7 @@ code[class*='language-'] .namespace {
   position: absolute;
   width: 300%;
   pointer-events: none;
+  z-index: 10;
   /* SHOW */
   /* HIDE */
 }
