@@ -16,12 +16,10 @@
 
   'use strict';
 
-  /* SORTABLE */
+  /* CONFIG */
 
-  $.factory ( 'svelto.sortable', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'sortable',
     options: {
       sorters: {
         int: function ( a, b ) {
@@ -53,17 +51,23 @@
       callbacks: {
         sort: _.noop
       }
-    },
+    }
+  };
+
+  /* SORTABLE */
+
+  class Sortable extends Svelto.Widget {
 
     /* SPECIAL */
 
-    _widgetize: function ( $root ) {
+    _widgetize ( $root ) {
 
       $root.find ( 'table.sortable' ).sortable ();
+      $root.filter ( 'table.sortable' ).sortable ();
 
-    },
+    }
 
-    _variables: function () {
+    _variables () {
 
       this.$table = this.$element;
       this.$headers = this.$table.find ( this.options.selectors.header );
@@ -80,9 +84,9 @@
       this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
       this.currentDirection = false;
 
-    },
+    }
 
-    _init: function () {
+    _init () {
 
       var $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
 
@@ -92,9 +96,9 @@
 
       }
 
-    },
+    }
 
-    _events: function () {
+    _events () {
 
       /* CHANGE */
 
@@ -104,11 +108,11 @@
 
       this._on ( this.$sortables, Pointer.tap, this.__tap );
 
-    },
+    }
 
     /* CHANGE */
 
-    __change: function () {
+    __change () {
 
       if ( this.currentIndex !== false ) {
 
@@ -119,11 +123,11 @@
 
       }
 
-    },
+    }
 
     /* CLICK */
 
-    __tap: function ( event ) {
+    __tap ( event ) {
 
       var newIndex = this.$headers.index ( event.target ),
           newDirection = this.currentIndex === newIndex
@@ -134,11 +138,11 @@
 
       this.sort ( newIndex, newDirection );
 
-    },
+    }
 
     /* SORT */
 
-    sort: function ( index, direction ) {
+    sort ( index, direction ) {
 
       /* VALIDATE */
 
@@ -256,6 +260,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Sortable = Sortable;
+  Svelto.Sortable.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Sortable );
 
 }( jQuery, _, window, document ));

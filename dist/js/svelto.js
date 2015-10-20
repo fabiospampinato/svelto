@@ -9321,16 +9321,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* SORTABLE */
+  /* CONFIG */
 
-  $.factory('svelto.sortable', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'sortable',
     options: {
       sorters: {
         int: function int(a, b) {
@@ -9362,16 +9364,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       callbacks: {
         sort: _.noop
       }
-    },
+    }
+  };
+
+  /* SORTABLE */
+
+  var Sortable = (function (_Svelto$Widget) {
+    _inherits(Sortable, _Svelto$Widget);
+
+    function Sortable() {
+      _classCallCheck(this, Sortable);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Sortable.prototype._widgetize = function _widgetize($root) {
 
       $root.find('table.sortable').sortable();
-    },
+      $root.filter('table.sortable').sortable();
+    };
 
-    _variables: function _variables() {
+    Sortable.prototype._variables = function _variables() {
 
       this.$table = this.$element;
       this.$headers = this.$table.find(this.options.selectors.header);
@@ -9387,9 +9404,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$currentSortable = false;
       this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
       this.currentDirection = false;
-    },
+    };
 
-    _init: function _init() {
+    Sortable.prototype._init = function _init() {
 
       var $initial = this.$headers.filter('.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc).first();
 
@@ -9397,9 +9414,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.sort(this.$headers.index($initial), $initial.hasClass(this.options.classes.sort.asc) ? 'asc' : 'desc');
       }
-    },
+    };
 
-    _events: function _events() {
+    Sortable.prototype._events = function _events() {
 
       /* CHANGE */
 
@@ -9408,11 +9425,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* TAP */
 
       this._on(this.$sortables, Pointer.tap, this.__tap);
-    },
+    };
 
     /* CHANGE */
 
-    __change: function __change() {
+    Sortable.prototype.__change = function __change() {
 
       if (this.currentIndex !== false) {
 
@@ -9421,21 +9438,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.sort(this.currentIndex, this.currentDirection);
       }
-    },
+    };
 
     /* CLICK */
 
-    __tap: function __tap(event) {
+    Sortable.prototype.__tap = function __tap(event) {
 
       var newIndex = this.$headers.index(event.target),
           newDirection = this.currentIndex === newIndex ? this.currentDirection === 'asc' ? 'desc' : 'asc' : 'asc';
 
       this.sort(newIndex, newDirection);
-    },
+    };
 
     /* SORT */
 
-    sort: function sort(index, direction) {
+    Sortable.prototype.sort = function sort(index, direction) {
 
       /* VALIDATE */
 
@@ -9539,9 +9556,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         index: this.currentIndex,
         direction: this.currentDirection
       });
-    }
+    };
 
-  });
+    return Sortable;
+  })(Svelto.Widget);
+
+  Svelto.Sortable = Sortable;
+  Svelto.Sortable.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Sortable);
 })(jQuery, _, window, document);
 
 /* =========================================================================
