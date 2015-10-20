@@ -20,12 +20,13 @@
 
   'use strict';
 
-  /* SELECTABLE */
+  /* CONFIG */
 
-  $.factory ( 'svelto.selectable', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'selectable',
+    templates: {
+      base: false
+    },
     options: {
       classes: {
         selected: 'selected'
@@ -36,15 +37,21 @@
       callbacks: {
         change: _.noop
       }
-    },
+    }
+  };
+
+  /* SELECTABLE */
+
+  class Selectable extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( 'table.selectable' ).selectable ();
+      $root.filter ( 'table.selectable' ).selectable ();
 
-    },
+    }
 
     _variables () {
 
@@ -54,7 +61,7 @@
       this.$startElement = false;
       this.$endElement = false;
 
-    },
+    }
 
     _events () {
 
@@ -70,7 +77,7 @@
 
       this._on ( 'change sort', this.__change );
 
-    },
+    }
 
     /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
@@ -104,7 +111,7 @@
 
       }
 
-    },
+    }
 
     /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
@@ -124,7 +131,7 @@
 
       this._on ( Pointer.up, this.options.selectors.element, this.__up );
 
-    },
+    }
 
     __move ( event ) {
 
@@ -148,7 +155,7 @@
 
       this._trigger ( 'change' );
 
-    },
+    }
 
     __dragEnter ( event ) {
 
@@ -186,7 +193,7 @@
 
       this._trigger ( 'change' );
 
-    },
+    }
 
     __dragMouseup () {
 
@@ -196,7 +203,7 @@
 
       this.$prevDragged = false;
 
-    },
+    }
 
     __up ( event ) {
 
@@ -264,7 +271,7 @@
 
       this._trigger ( 'change' );
 
-    },
+    }
 
     /* OTHER EVENTS */
 
@@ -274,7 +281,7 @@
 
       this._resetPrev ();
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -284,13 +291,13 @@
       this.$prevShifted = false;
       this.$prevDragged = false;
 
-    },
+    }
 
     _getElements () {
 
       return this.$element.find ( this.options.selectors.element );
 
-    },
+    }
 
     /* API */
 
@@ -300,6 +307,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Selectable = Selectable;
+  Svelto.Selectable.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Selectable );
 
 }( jQuery, _, window, document ));

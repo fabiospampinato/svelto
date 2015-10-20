@@ -8728,16 +8728,21 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* SELECTABLE */
+  /* CONFIG */
 
-  $.factory('svelto.selectable', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'selectable',
+    templates: {
+      base: false
+    },
     options: {
       classes: {
         selected: 'selected'
@@ -8748,25 +8753,40 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       callbacks: {
         change: _.noop
       }
-    },
+    }
+  };
+
+  /* SELECTABLE */
+
+  var Selectable = (function (_Svelto$Widget) {
+    _inherits(Selectable, _Svelto$Widget);
+
+    function Selectable() {
+      _classCallCheck(this, Selectable);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Selectable.prototype._widgetize = function _widgetize($root) {
 
       $root.find('table.selectable').selectable();
-    },
+      $root.filter('table.selectable').selectable();
+    };
 
-    _variables: function _variables() {
+    Selectable.prototype._variables = function _variables() {
 
       this.$selectable = this.$element;
       this.$elements = this._getElements();
 
       this.$startElement = false;
       this.$endElement = false;
-    },
+    };
 
-    _events: function _events() {
+    Selectable.prototype._events = function _events() {
 
       /* KEYDOWN */
 
@@ -8779,11 +8799,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* OTHERS */
 
       this._on('change sort', this.__change);
-    },
+    };
 
     /* CTRL + A / CTRL + SHIFT + A / CTRL + I */
 
-    __keydown: function __keydown(event) {
+    Selectable.prototype.__keydown = function __keydown(event) {
 
       if ($.hasCtrlOrCmd(event)) {
 
@@ -8811,11 +8831,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this._trigger('change');
         }
       }
-    },
+    };
 
     /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
-    __down: function __down(event) {
+    Selectable.prototype.__down = function __down(event) {
 
       if (event.button && event.button !== $.ui.mouseButton.LEFT) return; //INFO: Only the left click is allowed
 
@@ -8829,9 +8849,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       this._on(Pointer.up, this.options.selectors.element, this.__up);
-    },
+    };
 
-    __move: function __move(event) {
+    Selectable.prototype.__move = function __move(event) {
 
       event.preventDefault();
 
@@ -8852,9 +8872,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._on($document, Pointer.up, this.__dragMouseup);
 
       this._trigger('change');
-    },
+    };
 
-    __dragEnter: function __dragEnter(event) {
+    Selectable.prototype.__dragEnter = function __dragEnter(event) {
 
       //TODO: Remove previous
 
@@ -8887,18 +8907,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this.$prevDragged = $newDragged;
 
       this._trigger('change');
-    },
+    };
 
-    __dragMouseup: function __dragMouseup() {
+    Selectable.prototype.__dragMouseup = function __dragMouseup() {
 
       this._off(Pointer.enter, this.__dragEnter);
 
       this._off($document, Pointer.up, this.__dragMouseup);
 
       this.$prevDragged = false;
-    },
+    };
 
-    __up: function __up(event) {
+    Selectable.prototype.__up = function __up(event) {
 
       this._off($document, Pointer.move, this.__move);
 
@@ -8957,39 +8977,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       }
 
       this._trigger('change');
-    },
+    };
 
     /* OTHER EVENTS */
 
-    __change: function __change() {
+    Selectable.prototype.__change = function __change() {
 
       this.$elements = this._getElements();
 
       this._resetPrev();
-    },
+    };
 
     /* PRIVATE */
 
-    _resetPrev: function _resetPrev() {
+    Selectable.prototype._resetPrev = function _resetPrev() {
 
       this.$prevElement = false;
       this.$prevShifted = false;
       this.$prevDragged = false;
-    },
+    };
 
-    _getElements: function _getElements() {
+    Selectable.prototype._getElements = function _getElements() {
 
       return this.$element.find(this.options.selectors.element);
-    },
+    };
 
     /* API */
 
-    get: function get() {
+    Selectable.prototype.get = function get() {
 
       return this.$elements.filter('.' + this.options.selectors.selected);
-    }
+    };
 
-  });
+    return Selectable;
+  })(Svelto.Widget);
+
+  Svelto.Selectable = Selectable;
+  Svelto.Selectable.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Selectable);
 })(jQuery, _, window, document);
 
 /* =========================================================================
