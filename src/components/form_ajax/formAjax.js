@@ -11,7 +11,6 @@
  * ========================================================================= */
 
 //TODO: Check if it works, also for upload
-//TODO: Update to a widget
 
 (function ( $, _, window, document, undefined ) {
 

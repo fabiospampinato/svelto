@@ -2199,6 +2199,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     },
     options: {
       errors: {},
+      attributes: {},
       datas: {},
       classes: {},
       selectors: {},
@@ -5370,7 +5371,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * ========================================================================= */
 
 //TODO: Check if it works, also for upload
-//TODO: Update to a widget
 
 'use strict';
 
@@ -5550,10 +5550,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../core/core.js
  * ========================================================================= */
 
-//TODO: Maybe sync at the init time also
-//TODO: Update to a widget
+//TODO: Maybe sync at init time also
 
 'use strict';
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -5563,45 +5566,119 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   var groups = [];
 
+  /* CONFIG */
+
+  var config = {
+    name: 'formSync',
+    options: {
+      attributes: {
+        name: 'name'
+      },
+      datas: {
+        group: 'sync-group'
+      },
+      selectors: {
+        form: 'form',
+        elements: 'input, textarea, select',
+        checkable: '[type="radio"], [type="checkbox"]',
+        radio: '[type="radio"]',
+        checkbox: '[type="checkbox"]',
+        textfield: 'input, textarea'
+      }
+    }
+  };
+
   /* FORM SYNC */
 
-  $.fn.formSync = function () {
-    var _this = this;
+  var FormSync = (function (_Svelto$Widget) {
+    _inherits(FormSync, _Svelto$Widget);
 
-    this.each(function () {
+    function FormSync() {
+      _classCallCheck(this, FormSync);
 
-      var $form = $(_this),
-          group = $form.data('sync-group');
+      _Svelto$Widget.apply(this, arguments);
+    }
 
-      if (groups.indexOf(group) !== -1) return;
+    /* BINDING */
 
-      groups.push(group);
+    /* SPECIAL */
 
-      var $forms = $('form[data-sync-group="' + group + '"]'),
-          $eles = $forms.find('input, textarea, select');
+    FormSync.prototype._widgetize = function _widgetize($root) {
 
-      $eles.each(function () {
+      $root.find('form[data-sync-group]').formSync();
+      $root.filter('form[data-sync-group]').formSync();
+    };
 
-        var $ele = $(_this),
-            name = $ele.attr('name'),
-            isCheckable = $ele.is('[type="radio"], [type="checkbox"]'),
-            isRadio = isCheckable && $ele.is('[type="radio"]'),
-            isTextfield = $ele.is('input, textarea'),
+    FormSync.prototype._variables = function _variables() {
+
+      this.$form = this.$element;
+      this.group = this.$form.data(this.options.datas.group);
+
+      this.isNewGroup = groups.indexOf(group) !== -1;
+    };
+
+    FormSync.prototype._init = function _init() {
+
+      if (this.isNewGroup) {
+
+        groups.push(this.group);
+
+        this.___syncer();
+      }
+    };
+
+    /* PRIVATE */
+
+    FormSync.prototype.___syncer = function ___syncer() {
+      var _this = this;
+
+      var $forms = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]'),
+          $elements = $forms.find(this.options.selectors.elements);
+
+      var _loop = function () {
+        if (_isArray) {
+          if (_i >= _iterator.length) return 'break';
+          _ref = _iterator[_i++];
+        } else {
+          _i = _iterator.next();
+          if (_i.done) return 'break';
+          _ref = _i.value;
+        }
+
+        var element = _ref;
+
+        var $element = $(element),
+            name = $element.attr(_this.options.attributes.name),
+            isCheckable = $element.is(_this.options.selectors.checkable),
+            isRadio = isCheckable && $element.is(_this.options.selectors.radio),
+            isTextfield = $element.is(_this.options.selectors.textfield),
             events = isTextfield ? 'input change' : 'change',
-            $currentForm = $ele.parent('form'),
+            $currentForm = $element.parents(_this.options.selectors.form),
             $otherForms = $forms.not($currentForm),
-            $otherEles = $otherForms.find('[name="' + name + '"]');
+            $otherElements = $otherForms.find('[' + _this.attributes.name + '="' + name + '"]');
 
-        $ele.on(events, function () {
+        $element.on(events, function () {
 
-          var currentValue = $ele.val(),
-              currentChecked = !!$ele.prop('checked');
+          var currentValue = $element.val(),
+              currentChecked = !!$element.prop('checked');
 
-          $otherEles.each(function () {
+          for (var _iterator2 = $otherElements, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
+            var _ref2;
 
-            var $otherEle = $(_this),
-                otherValue = $otherEle.val(),
-                otherChecked = !!$otherEle.prop('checked');
+            if (_isArray2) {
+              if (_i2 >= _iterator2.length) break;
+              _ref2 = _iterator2[_i2++];
+            } else {
+              _i2 = _iterator2.next();
+              if (_i2.done) break;
+              _ref2 = _i2.value;
+            }
+
+            var otherElement = _ref2;
+
+            var $otherElement = $(otherElement),
+                otherValue = $otherElement.val(),
+                otherChecked = !!$otherElement.prop('checked');
 
             if (isRadio) {
 
@@ -5613,23 +5690,33 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
             if (isCheckable) {
 
-              $otherEle.prop('checked', currentChecked).trigger('change');
+              $otherElement.prop('checked', currentChecked).trigger('change');
             } else {
 
-              $otherEle.val(currentValue).trigger('change');
+              $otherElement.val(currentValue).trigger('change');
             }
-          });
+          }
         });
-      });
-    });
-  };
+      };
 
-  /* READY */
+      for (var _iterator = $elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
+        var _ref;
 
-  $(function () {
+        var _ret = _loop();
 
-    $('form[data-sync-group]').formSync();
-  });
+        if (_ret === 'break') break;
+      }
+    };
+
+    return FormSync;
+  })(Svelto.Widget);
+
+  Svelto.FormSync = FormSync;
+  Svelto.FormSync.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.FormSync);
 })(jQuery, _, window, document);
 
 /* =========================================================================

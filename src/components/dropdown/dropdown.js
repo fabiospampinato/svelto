@@ -19,7 +19,7 @@
 
   /* VARIABLES */
 
-  var assignments = {};
+  let assignments = {};
 
   /* CONFIG */
 

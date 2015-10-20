@@ -21,6 +21,7 @@
     },
     options: {
       errors: {},
+      attributes: {},
       datas: {},
       classes: {},
       selectors: {},

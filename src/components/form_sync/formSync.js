@@ -8,8 +8,7 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-//TODO: Maybe sync at the init time also
-//TODO: Update to a widget
+//TODO: Maybe sync at init time also
 
 (function ( $, _, window, document, undefined ) {
 
@@ -17,46 +16,93 @@
 
   /* VARIABLES */
 
-  var groups = [];
+  let groups = [];
+
+  /* CONFIG */
+
+  let config = {
+    name: 'formSync',
+    options: {
+      attributes: {
+        name: 'name'
+      },
+      datas: {
+        group: 'sync-group'
+      },
+      selectors: {
+        form: 'form',
+        elements: 'input, textarea, select',
+        checkable: '[type="radio"], [type="checkbox"]',
+        radio: '[type="radio"]',
+        checkbox: '[type="checkbox"]',
+        textfield: 'input, textarea'
+      }
+    }
+  };
 
   /* FORM SYNC */
 
-  $.fn.formSync = function () {
+  class FormSync extends Svelto.Widget {
 
-    this.each ( () => {
+    /* SPECIAL */
 
-      var $form = $(this),
-          group = $form.data ( 'sync-group' );
+    _widgetize ( $root ) {
 
-      if ( groups.indexOf ( group ) !== -1 ) return;
+      $root.find ( 'form[data-sync-group]' ).formSync ();
+      $root.filter ( 'form[data-sync-group]' ).formSync ();
 
-      groups.push ( group );
+    }
 
-      var $forms = $('form[data-sync-group="' + group + '"]'),
-          $eles = $forms.find ( 'input, textarea, select' );
+    _variables () {
 
-      $eles.each ( () => {
+      this.$form = this.$element;
+      this.group = this.$form.data ( this.options.datas.group );
 
-        var $ele = $(this),
-            name = $ele.attr ( 'name' ),
-            isCheckable = $ele.is ( '[type="radio"], [type="checkbox"]' ),
-            isRadio = isCheckable && $ele.is ( '[type="radio"]' ),
-            isTextfield = $ele.is ( 'input, textarea' ),
+      this.isNewGroup = ( groups.indexOf ( group ) !== -1 );
+
+    }
+
+    _init () {
+
+      if ( this.isNewGroup ) {
+
+        groups.push ( this.group );
+
+        this.___syncer ();
+
+      }
+
+    }
+
+    /* PRIVATE */
+
+    ___syncer () {
+
+      let $forms = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]'),
+          $elements = $forms.find ( this.options.selectors.elements );
+
+      for ( let element of $elements ) {
+
+        let $element = $(element),
+            name = $element.attr ( this.options.attributes.name ),
+            isCheckable = $element.is ( this.options.selectors.checkable ),
+            isRadio = isCheckable && $element.is ( this.options.selectors.radio ),
+            isTextfield = $element.is ( this.options.selectors.textfield ),
             events = isTextfield ? 'input change' : 'change',
-            $currentForm = $ele.parent ( 'form' ),
+            $currentForm = $element.parents ( this.options.selectors.form ),
             $otherForms = $forms.not ( $currentForm ),
-            $otherEles = $otherForms.find ( '[name="' + name + '"]' );
+            $otherElements  = $otherForms.find ( '[' + this.attributes.name + '="' + name + '"]' );
 
-        $ele.on ( events, () => {
+        $element.on ( events, () => {
 
-          var currentValue = $ele.val (),
-              currentChecked = !!$ele.prop ( 'checked' );
+          let currentValue = $element.val (),
+              currentChecked = !!$element.prop ( 'checked' );
 
-          $otherEles.each ( () => {
+          for ( let otherElement of $otherElements ) {
 
-            var $otherEle = $(this),
-                otherValue = $otherEle.val (),
-                otherChecked = !!$otherEle.prop ( 'checked' );
+            let $otherElement = $(otherElement),
+                otherValue = $otherElement.val (),
+                otherChecked = !!$otherElement.prop ( 'checked' );
 
             if ( isRadio ) {
 
@@ -70,30 +116,31 @@
 
             if ( isCheckable ) {
 
-              $otherEle.prop ( 'checked', currentChecked ).trigger ( 'change' );
+              $otherElement.prop ( 'checked', currentChecked ).trigger ( 'change' );
 
             } else {
 
-              $otherEle.val ( currentValue ).trigger ( 'change' );
+              $otherElement.val ( currentValue ).trigger ( 'change' );
 
             }
 
-          });
+          }
 
         });
 
-      });
+      }
 
-    });
+    }
 
-  };
+  }
 
-  /* READY */
+  /* BINDING */
 
-  $(function () {
+  Svelto.FormSync = FormSync;
+  Svelto.FormSync.config = config;
 
-    $('form[data-sync-group]').formSync ();
+  /* FACTORY */
 
-  });
+  $.factory ( Svelto.FormSync );
 
 }( jQuery, _, window, document ));
