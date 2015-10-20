@@ -12,28 +12,34 @@
 
   'use strict';
 
-  /* TIME AGO */
+  /* CONFIG */
 
-  $.factory ( 'svelto.timeAgo', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'timeAgo',
     options: {
       timestamp: false,
       title: false,
       callbacks: {
-        change: _.noop
+        change () {}
       }
-    },
+    }
+  };
+
+  /* TIME AGO */
+
+  class TimeAgo extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '[data-timestamp]' ).timeAgo ();
-      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+      $root.filter ( '[data-timestamp]' ).timeAgo ();
 
-    },
+      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+      $root.filter ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+
+    }
 
     _variables () {
 
@@ -45,13 +51,13 @@
 
       }
 
-    },
+    }
 
     _init () {
 
       this._loop ( 0 );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -63,7 +69,7 @@
 
       }, wait * 1000 );
 
-    },
+    }
 
     _update () {
 
@@ -85,6 +91,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.TimeAgo = TimeAgo;
+  Svelto.TimeAgo.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.TimeAgo );
 
 }( jQuery, _, window, document ));

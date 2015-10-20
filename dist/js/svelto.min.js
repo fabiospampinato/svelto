@@ -10947,33 +10947,52 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* TIME AGO */
+  /* CONFIG */
 
-  $.factory('svelto.timeAgo', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'timeAgo',
     options: {
       timestamp: false,
       title: false,
       callbacks: {
-        change: _.noop
+        change: function change() {}
       }
-    },
+    }
+  };
+
+  /* TIME AGO */
+
+  var TimeAgo = (function (_Svelto$Widget) {
+    _inherits(TimeAgo, _Svelto$Widget);
+
+    function TimeAgo() {
+      _classCallCheck(this, TimeAgo);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    TimeAgo.prototype._widgetize = function _widgetize($root) {
 
       $root.find('[data-timestamp]').timeAgo();
-      $root.find('[data-timestamp-title]').timeAgo({ title: true });
-    },
+      $root.filter('[data-timestamp]').timeAgo();
 
-    _variables: function _variables() {
+      $root.find('[data-timestamp-title]').timeAgo({ title: true });
+      $root.filter('[data-timestamp-title]').timeAgo({ title: true });
+    };
+
+    TimeAgo.prototype._variables = function _variables() {
 
       this.$timeAgoElement = this.$element;
 
@@ -10981,24 +11000,24 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.options.timestamp = this.$timeAgoElement.data(this.options.title ? 'timestamp-title' : 'timestamp');
       }
-    },
+    };
 
-    _init: function _init() {
+    TimeAgo.prototype._init = function _init() {
 
       this._loop(0);
-    },
+    };
 
     /* PRIVATE */
 
-    _loop: function _loop(wait) {
+    TimeAgo.prototype._loop = function _loop(wait) {
 
       this._delay(function () {
 
         this._loop(this._update().next);
       }, wait * 1000);
-    },
+    };
 
-    _update: function _update() {
+    TimeAgo.prototype._update = function _update() {
 
       var timeAgo = _.timeAgo(this.options.timestamp);
 
@@ -11013,9 +11032,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       this._trigger('change');
 
       return timeAgo;
-    }
+    };
 
-  });
+    return TimeAgo;
+  })(Svelto.Widget);
+
+  Svelto.TimeAgo = TimeAgo;
+  Svelto.TimeAgo.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.TimeAgo);
 })(jQuery, _, window, document);
 
 /* =========================================================================
