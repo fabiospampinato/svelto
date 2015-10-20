@@ -14,32 +14,34 @@
 
   'use strict';
 
-  /* DROPPABLE */
+  /* CONFIG */
 
-  $.factory ( 'svelto.droppable', {
-
-    /* OPTIONS */
-
-    options: {
+  let config = {
+    name: 'boilerplate',
       selector: '*',
       callbacks: {
-        drop: _.noop
+        drop () {}
       }
-    },
+  };
+
+  /* DROPPABLE */
+
+  class Droppable extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.droppable' ).droppable ();
+      $root.filter ( '.droppable' ).droppable ();
 
-    },
+    }
 
     _variables () {
 
       this.$droppable = this.$element;
 
-    },
+    }
 
     _events () {
 
@@ -47,7 +49,7 @@
 
       this._on ( $document, 'draggable:end', this.__dragEnd );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -74,6 +76,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Droppable = Droppable;
+  Svelto.Droppable.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Droppable );
 
 }( jQuery, _, window, document ));

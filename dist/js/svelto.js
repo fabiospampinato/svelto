@@ -4805,45 +4805,60 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
+  /* CONFIG */
+
+  var config = {
+    name: 'boilerplate',
+    selector: '*',
+    callbacks: {
+      drop: function drop() {}
+    }
+  };
+
   /* DROPPABLE */
 
-  $.factory('svelto.droppable', {
+  var Droppable = (function (_Svelto$Widget) {
+    _inherits(Droppable, _Svelto$Widget);
 
-    /* OPTIONS */
+    function Droppable() {
+      _classCallCheck(this, Droppable);
 
-    options: {
-      selector: '*',
-      callbacks: {
-        drop: _.noop
-      }
-    },
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Droppable.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.droppable').droppable();
-    },
+      $root.filter('.droppable').droppable();
+    };
 
-    _variables: function _variables() {
+    Droppable.prototype._variables = function _variables() {
 
       this.$droppable = this.$element;
-    },
+    };
 
-    _events: function _events() {
+    Droppable.prototype._events = function _events() {
 
       /* DRAG END */
 
       this._on($document, 'draggable:end', this.__dragEnd);
-    },
+    };
 
     /* PRIVATE */
 
-    __dragEnd: function __dragEnd(event, data) {
+    Droppable.prototype.__dragEnd = function __dragEnd(event, data) {
 
       var $draggable = $(data.draggable);
 
@@ -4861,9 +4876,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           this._trigger('drop', { draggable: data.draggable, droppable: this.element });
         }
       }
-    }
+    };
 
-  });
+    return Droppable;
+  })(Svelto.Widget);
+
+  Svelto.Droppable = Droppable;
+  Svelto.Droppable.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Droppable);
 })(jQuery, _, window, document);
 
 /* =========================================================================
