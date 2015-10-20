@@ -16,13 +16,17 @@
 
   'use strict';
 
-  /* MODAL */
+  /* CONFIG */
 
-  $.factory ( 'svelto.modal', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'modal',
     options: {
+      attributes: {
+        id: 'id'
+      },
+      datas: {
+        element: 'modal'
+      },
       classes: {
         open: 'open'
       },
@@ -31,32 +35,38 @@
         closer: '.modal-closer'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open () {},
+        close () {}
       }
-    },
+    }
+  };
+
+  /* MODAL */
+
+  class Modal extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.modal' ).modal ();
+      $root.filter ( '.modal' ).modal ();
 
-    },
+    }
 
     _variables () {
 
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.id = this.$modal.attr ( 'id' );
+      this.id = this.$modal.attr ( this.options.attributes.id );
 
-      this.$triggers = $(this.options.selectors.trigger + '[data-modal="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
-    },
+    }
 
     _events () {
 
@@ -71,7 +81,7 @@
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
-    },
+    }
 
     /* PRIVATE */
 
@@ -83,7 +93,7 @@
 
       }
 
-    },
+    }
 
     __keydown ( event ) {
 
@@ -96,7 +106,7 @@
 
       }
 
-    },
+    }
 
     /* PUBLIC */
 
@@ -104,7 +114,7 @@
 
       return this._isOpen;
 
-    },
+    }
 
     toggle ( force ) {
 
@@ -126,13 +136,13 @@
 
       }
 
-    },
+    }
 
     open () {
 
       this.toggle ( true );
 
-    },
+    }
 
     close () {
 
@@ -140,6 +150,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Modal = Modal;
+  Svelto.Modal.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Modal );
 
 }( jQuery, _, window, document ));

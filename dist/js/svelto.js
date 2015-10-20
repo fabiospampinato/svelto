@@ -6287,17 +6287,25 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* MODAL */
+  /* CONFIG */
 
-  $.factory('svelto.modal', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'modal',
     options: {
+      attributes: {
+        id: 'id'
+      },
+      datas: {
+        element: 'modal'
+      },
       classes: {
         open: 'open'
       },
@@ -6306,32 +6314,47 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         closer: '.modal-closer'
       },
       callbacks: {
-        open: _.noop,
-        close: _.noop
+        open: function open() {},
+        close: function close() {}
       }
-    },
+    }
+  };
+
+  /* MODAL */
+
+  var Modal = (function (_Svelto$Widget) {
+    _inherits(Modal, _Svelto$Widget);
+
+    function Modal() {
+      _classCallCheck(this, Modal);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Modal.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.modal').modal();
-    },
+      $root.filter('.modal').modal();
+    };
 
-    _variables: function _variables() {
+    Modal.prototype._variables = function _variables() {
 
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.id = this.$modal.attr('id');
+      this.id = this.$modal.attr(this.options.attributes.id);
 
-      this.$triggers = $(this.options.selectors.trigger + '[data-modal="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
       this.$closers = this.$modal.find(this.options.selectors.closer);
 
       this._isOpen = this.$modal.hasClass(this.options.classes.open);
-    },
+    };
 
-    _events: function _events() {
+    Modal.prototype._events = function _events() {
 
       /* TAP */
 
@@ -6343,19 +6366,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       /* CLOSER */
 
       this._on(this.$closers, Pointer.tap, this.close);
-    },
+    };
 
     /* PRIVATE */
 
-    __tap: function __tap(event) {
+    Modal.prototype.__tap = function __tap(event) {
 
       if (event.target === this.modal) {
 
         this.close();
       }
-    },
+    };
 
-    __keydown: function __keydown(event) {
+    Modal.prototype.__keydown = function __keydown(event) {
 
       if (event.keyCode === $.ui.keyCode.ESCAPE) {
 
@@ -6364,16 +6387,16 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.close();
       }
-    },
+    };
 
     /* PUBLIC */
 
-    isOpen: function isOpen() {
+    Modal.prototype.isOpen = function isOpen() {
 
       return this._isOpen;
-    },
+    };
 
-    toggle: function toggle(force) {
+    Modal.prototype.toggle = function toggle(force) {
 
       if (!_.isBoolean(force)) {
 
@@ -6390,19 +6413,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._trigger(this._isOpen ? 'open' : 'close');
       }
-    },
+    };
 
-    open: function open() {
+    Modal.prototype.open = function open() {
 
       this.toggle(true);
-    },
+    };
 
-    close: function close() {
+    Modal.prototype.close = function close() {
 
       this.toggle(false);
-    }
+    };
 
-  });
+    return Modal;
+  })(Svelto.Widget);
+
+  Svelto.Modal = Modal;
+  Svelto.Modal.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Modal);
 })(jQuery, _, window, document);
 
 /* =========================================================================
