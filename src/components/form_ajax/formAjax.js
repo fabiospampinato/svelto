@@ -17,28 +17,72 @@
 
   'use strict';
 
+  /* CONFIG */
+
+  let config = {
+    name: 'formAjax',
+    options: {
+      spinnerOverlay: true,
+      callbacks: {
+        beforesend () {},
+        complete () {}
+      }
+    }
+  };
+
   /* FORM AJAX */
 
-  $.fn.formAjax = function () {
+  class FormAjax extends Svelto.Widget {
 
-    this.on ( 'submit', ( event ) => {
+    /* SPECIAL */
+
+    _widgetize ( $root ) {
+
+      $root.find ( 'form.ajax' ).formAjax ();
+      $root.filter ( 'form.ajax' ).formAjax ();
+
+    }
+
+    _variables () {
+
+      this.$form = this.$element;
+      this.form = this.element;
+
+    }
+
+    _events () {
+
+      /* SUBMIT */
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
+
+    /* PRIVATE */
+
+    __submit ( event ) {
 
       event.preventDefault ();
-
-      var $form = $(this);
+      event.stopImmediatePropagation ();
 
       $.ajax ({
 
         cache: false,
         contentType: 'multipart/form-data',
-        data: new FormData ( this ),
+        data: new FormData ( this.form ),
         processData: false,
         type: $form.attr ( 'method' ) || 'POST',
         url: $form.attr ( 'action' ),
 
-        beforeSend () {
+        beforeSend: () => { //FIXME: Check it, expecially the `this` context
 
-          $form.spinnerOverlay ( 'show' );
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'show' );
+
+          }
+
+          this._trigger ( 'beforesend' );
 
         },
 
@@ -112,24 +156,31 @@
 
         },
 
-        complete () {
+        complete: () => { //FIXME: Check it, expecially the `this` context
 
-          $form.spinnerOverlay ( 'hide' );
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'hide' );
+
+          }
+
+          this._trigger ( 'complete' );
 
         }
 
       });
 
-    });
+    }
 
-  };
+  }
 
-  /* READY */
+  /* BINDING */
 
-  $(function () {
+  Svelto.FormAjax = FormAjax;
+  Svelto.FormAjax.config = config;
 
-    $('form.ajax').formAjax ();
+  /* FACTORY */
 
-  });
+  $.factory ( Svelto.FormAjax );
 
 }( jQuery, _, window, document ));

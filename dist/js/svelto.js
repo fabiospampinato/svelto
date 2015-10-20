@@ -5374,33 +5374,87 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
+  /* CONFIG */
+
+  var config = {
+    name: 'formAjax',
+    options: {
+      spinnerOverlay: true,
+      callbacks: {
+        beforesend: function beforesend() {},
+        complete: function complete() {}
+      }
+    }
+  };
+
   /* FORM AJAX */
 
-  $.fn.formAjax = function () {
-    var _this = this;
+  var FormAjax = (function (_Svelto$Widget) {
+    _inherits(FormAjax, _Svelto$Widget);
 
-    this.on('submit', function (event) {
+    function FormAjax() {
+      _classCallCheck(this, FormAjax);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
+
+    /* SPECIAL */
+
+    FormAjax.prototype._widgetize = function _widgetize($root) {
+
+      $root.find('form.ajax').formAjax();
+      $root.filter('form.ajax').formAjax();
+    };
+
+    FormAjax.prototype._variables = function _variables() {
+
+      this.$form = this.$element;
+      this.form = this.element;
+    };
+
+    FormAjax.prototype._events = function _events() {
+
+      /* SUBMIT */
+
+      this._on(true, 'submit', this.__submit);
+    };
+
+    /* PRIVATE */
+
+    FormAjax.prototype.__submit = function __submit(event) {
+      var _this = this;
 
       event.preventDefault();
-
-      var $form = $(_this);
+      event.stopImmediatePropagation();
 
       $.ajax({
 
         cache: false,
         contentType: 'multipart/form-data',
-        data: new FormData(_this),
+        data: new FormData(this.form),
         processData: false,
         type: $form.attr('method') || 'POST',
         url: $form.attr('action'),
 
         beforeSend: function beforeSend() {
+          //FIXME: Check it, expecially the `this` context
 
-          $form.spinnerOverlay('show');
+          if (_this.options.spinnerOverlay) {
+
+            _this.$form.spinnerOverlay('show');
+          }
+
+          _this._trigger('beforesend');
         },
 
         error: function error(res) {
@@ -5463,20 +5517,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         },
 
         complete: function complete() {
+          //FIXME: Check it, expecially the `this` context
 
-          $form.spinnerOverlay('hide');
+          if (_this.options.spinnerOverlay) {
+
+            _this.$form.spinnerOverlay('hide');
+          }
+
+          _this._trigger('complete');
         }
 
       });
-    });
-  };
+    };
 
-  /* READY */
+    return FormAjax;
+  })(Svelto.Widget);
 
-  $(function () {
+  Svelto.FormAjax = FormAjax;
+  Svelto.FormAjax.config = config;
 
-    $('form.ajax').formAjax();
-  });
+  /* FACTORY */
+
+  $.factory(Svelto.FormAjax);
 })(jQuery, _, window, document);
 
 /* =========================================================================
