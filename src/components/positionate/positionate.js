@@ -18,25 +18,25 @@
 
   /* UTILITES */
 
-  var isHorizontal = function ( direction ) {
+  let isHorizontal = function ( direction ) {
 
     return direction === 'left' || direction === 'right';
 
   };
 
-  var isVertical = function ( direction ) {
+  let isVertical = function ( direction ) {
 
     return !isHorizontal ( direction );
 
   };
 
-  var getOpposite = function ( direction ) {
+  let getOpposite = function ( direction ) {
 
-    var opposites = {
-      'top': 'bottom',
+    let opposites = {
+      'top'   : 'bottom',
       'bottom': 'top',
-      'left': 'right',
-      'right': 'left'
+      'left'  : 'right',
+      'right' : 'left'
     };
 
     return opposites[direction];
@@ -72,7 +72,7 @@
 
     /* VARIABLES */
 
-    var directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
+    let directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
         windowWidth = $window.width (),
         windowHeight = $window.height (),
         positionableRect = this.getRect (),
@@ -80,7 +80,7 @@
 
     /* SPACES */
 
-    var spaces = directions.map ( function ( direction ) {
+    let spaces = directions.map ( direction => {
 
       switch ( direction ) {
 
@@ -102,11 +102,11 @@
 
     /* SPACES PRIORITIZATION */
 
-    spaces.forEach ( function ( space, index ) {
+    spaces.forEach ( ( space, index ) => {
 
       if ( space < 0 ) {
 
-        var opposite = getOpposite ( directions[index] ),
+        let opposite = getOpposite ( directions[index] ),
             oppositeIndex = directions.indexOf ( opposite );
 
         _.move ( directions, oppositeIndex, 0 );
@@ -118,7 +118,7 @@
 
     /* AREAS */
 
-    var areas = directions.map ( function ( direction, index ) {
+    let areas = directions.map ( ( direction, index ) => {
 
       switch ( direction ) {
 
@@ -136,7 +136,7 @@
 
     /* BEST DIRECTION */
 
-    var bestIndex = areas.indexOf ( _.max ( areas ) ),
+    let bestIndex = areas.indexOf ( _.max ( areas ) ),
         bestDirection = directions[bestIndex];
 
     /* TOP / LEFT */
@@ -145,7 +145,7 @@
 
       case 'top':
       case 'bottom':
-        var coordinates = {
+        let coordinates = {
           top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
           left: anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 )
         };
@@ -153,7 +153,7 @@
 
       case 'left':
       case 'right':
-        var coordinates = {
+        let coordinates = {
           top: anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 ),
           left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
         };
@@ -164,7 +164,7 @@
 
     if ( options.$anchor ) {
 
-      var oppositeSpace = spaces[bestIndex],
+      let oppositeSpace = spaces[bestIndex],
           isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
       if ( isAnchorVisible ) {
@@ -178,7 +178,7 @@
 
     /* DATAS */
 
-    var datas = {
+    let datas = {
       coordinates: coordinates,
       direction: bestDirection,
       oppositeDirection: getOpposite ( bestDirection )
@@ -188,7 +188,7 @@
 
     if ( options.$anchor && options.$pointer ) {
 
-      var $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+      let $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
 
       if ( $pointer instanceof $ ) {
 
@@ -196,13 +196,13 @@
 
           case 'top':
           case 'bottom':
-            var translateType = 'translateX',
+            let translateType = 'translateX',
                 translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
             break;
 
           case 'left':
           case 'right':
-            var translateType = 'translateY',
+            let translateType = 'translateY',
                 translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
             break;
 
