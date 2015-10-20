@@ -14,12 +14,10 @@
 
   'use strict';
 
-  /* CAROUSEL */
+  /* CONFIG */
 
-  $.factory ( 'svelto.carousel', {
-
-    /* OPTIONS */
-
+  let config = {
+    name: 'carousel',
     options: {
       startingIndex: 0,
       cycle: false,
@@ -43,14 +41,20 @@
         change: _.noop
       }
     },
+  };
+
+  /* CAROUSEL */
+
+  class Carousel extends Svelto.Widget {
 
     /* SPECIAL */
 
     _widgetize ( $root ) {
 
       $root.find ( '.carousel' ).carousel ();
+      $root.filter ( '.carousel' ).carousel ();
 
-    },
+    }
 
     _variables () {
 
@@ -68,17 +72,15 @@
 
       if ( this.options.cycle ) {
 
-        this.timer = $.timer ( this.next.bind ( this ), this.options.interval, true );
+        this.timer = new Timer ( this.next.bind ( this ), this.options.interval, true );
 
       }
 
-    },
+    }
 
     _init () {
 
-      var $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
-
-      console.log($current.toArray());
+      let $current = this.$items.filter ( '.' + this.options.classes.current ).first ();
 
       if ( $current.length > 0 ) {
 
@@ -90,7 +92,7 @@
 
       }
 
-    },
+    }
 
     _events () {
 
@@ -123,7 +125,7 @@
 
       }
 
-    },
+    }
 
     /* KEYDOWN */
 
@@ -150,7 +152,7 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-    },
+    }
 
     /* CYCLE */
 
@@ -158,7 +160,7 @@
 
       this.timer.pause ();
 
-    },
+    }
 
     __cycleLeave () {
 
@@ -166,7 +168,7 @@
 
       this.timer.play ();
 
-    },
+    }
 
     /* INDICATOR TAP */
 
@@ -174,7 +176,7 @@
 
       this.set ( this.$indicators.index ( indicator ) );
 
-    },
+    }
 
     /* FLICK */
 
@@ -189,7 +191,7 @@
 
       }
 
-    },
+    }
 
     /* ITEM OBJ */
 
@@ -201,7 +203,7 @@
         $indicator: this.$indicators.eq ( index )
       };
 
-    },
+    }
 
     /* INDEX */
 
@@ -209,13 +211,13 @@
 
       return ( index > 0 ) ? index - 1 : this.maxIndex;
 
-    },
+    }
 
     _getNextIndex ( index ) {
 
       return ( index < this.maxIndex ) ? index + 1 : 0;
 
-    },
+    }
 
     /* API */
 
@@ -223,7 +225,7 @@
 
       return this._current.index;
 
-    },
+    }
 
     set ( index ) {
 
@@ -274,13 +276,13 @@
 
       }
 
-    },
+    }
 
     previous () {
 
       this.set ( this._getPrevIndex ( this._current.index ) );
 
-    },
+    }
 
     next () {
 
@@ -288,6 +290,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Carousel = Carousel;
+  Svelto.Carousel.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Carousel );
 
 }( jQuery, _, window, document ));

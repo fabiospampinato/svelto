@@ -2281,16 +2281,18 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* CAROUSEL */
+  /* CONFIG */
 
-  $.factory('svelto.carousel', {
-
-    /* OPTIONS */
-
+  var config = {
+    name: 'carousel',
     options: {
       startingIndex: 0,
       cycle: false,
@@ -2313,16 +2315,31 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       callbacks: {
         change: _.noop
       }
-    },
+    }
+  };
+
+  /* CAROUSEL */
+
+  var Carousel = (function (_Svelto$Widget) {
+    _inherits(Carousel, _Svelto$Widget);
+
+    function Carousel() {
+      _classCallCheck(this, Carousel);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Carousel.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.carousel').carousel();
-    },
+      $root.filter('.carousel').carousel();
+    };
 
-    _variables: function _variables() {
+    Carousel.prototype._variables = function _variables() {
 
       this.$carousel = this.$element;
       this.$prev = this.$carousel.find(this.options.selectors.prev);
@@ -2338,15 +2355,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       if (this.options.cycle) {
 
-        this.timer = $.timer(this.next.bind(this), this.options.interval, true);
+        this.timer = new Timer(this.next.bind(this), this.options.interval, true);
       }
-    },
+    };
 
-    _init: function _init() {
+    Carousel.prototype._init = function _init() {
 
       var $current = this.$items.filter('.' + this.options.classes.current).first();
-
-      console.log($current.toArray());
 
       if ($current.length > 0) {
 
@@ -2355,9 +2370,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this.set(this.options.startingIndex);
       }
-    },
+    };
 
-    _events: function _events() {
+    Carousel.prototype._events = function _events() {
 
       /* PREV */
 
@@ -2386,11 +2401,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         this._on(this.$itemsWrp, Pointer.enter, this.__cycleEnter);
         this._on(this.$itemsWrp, Pointer.leave, this.__cycleLeave);
       }
-    },
+    };
 
     /* KEYDOWN */
 
-    __keydown: function __keydown(event) {
+    Carousel.prototype.__keydown = function __keydown(event) {
 
       switch (event.keyCode) {
 
@@ -2412,32 +2427,32 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       event.preventDefault();
       event.stopImmediatePropagation();
-    },
+    };
 
     /* CYCLE */
 
-    __cycleEnter: function __cycleEnter() {
+    Carousel.prototype.__cycleEnter = function __cycleEnter() {
 
       this.timer.pause();
-    },
+    };
 
-    __cycleLeave: function __cycleLeave() {
+    Carousel.prototype.__cycleLeave = function __cycleLeave() {
 
       this.timer.remaining(Math.max(this.options.intervalMinimumRemaining, this.timer.remaining() || 0));
 
       this.timer.play();
-    },
+    };
 
     /* INDICATOR TAP */
 
-    __indicatorTap: function __indicatorTap(event, indicator) {
+    Carousel.prototype.__indicatorTap = function __indicatorTap(event, indicator) {
 
       this.set(this.$indicators.index(indicator));
-    },
+    };
 
     /* FLICK */
 
-    __flick: function __flick(event, data) {
+    Carousel.prototype.__flick = function __flick(event, data) {
 
       if (data.orientation === 'horizontal') {
 
@@ -2446,39 +2461,39 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this[data.direction === -1 ? 'next' : 'previous']();
       }
-    },
+    };
 
     /* ITEM OBJ */
 
-    _getItemObj: function _getItemObj(index) {
+    Carousel.prototype._getItemObj = function _getItemObj(index) {
 
       return {
         index: index,
         $item: this.$items.eq(index),
         $indicator: this.$indicators.eq(index)
       };
-    },
+    };
 
     /* INDEX */
 
-    _getPrevIndex: function _getPrevIndex(index) {
+    Carousel.prototype._getPrevIndex = function _getPrevIndex(index) {
 
       return index > 0 ? index - 1 : this.maxIndex;
-    },
+    };
 
-    _getNextIndex: function _getNextIndex(index) {
+    Carousel.prototype._getNextIndex = function _getNextIndex(index) {
 
       return index < this.maxIndex ? index + 1 : 0;
-    },
+    };
 
     /* API */
 
-    get: function get() {
+    Carousel.prototype.get = function get() {
 
       return this._current.index;
-    },
+    };
 
-    set: function set(index) {
+    Carousel.prototype.set = function set(index) {
 
       index = Number(index);
 
@@ -2520,19 +2535,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         this._trigger('change');
       }
-    },
+    };
 
-    previous: function previous() {
+    Carousel.prototype.previous = function previous() {
 
       this.set(this._getPrevIndex(this._current.index));
-    },
+    };
 
-    next: function next() {
+    Carousel.prototype.next = function next() {
 
       this.set(this._getNextIndex(this._current.index));
-    }
+    };
 
-  });
+    return Carousel;
+  })(Svelto.Widget);
+
+  Svelto.Carousel = Carousel;
+  Svelto.Carousel.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Carousel);
 })(jQuery, _, window, document);
 
 /* =========================================================================
