@@ -10739,6 +10739,56 @@ svg.spinner {
 
 
 /* =========================================================================
+ * Svelto - Statistic (Settings)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+
+/* PRIMARY */
+
+$statistic-primary-size: 'xlarge' !default;
+
+/* SECONDARY */
+
+$statistic-secondary-size: 'small' !default;
+
+
+/* =========================================================================
+ * Svelto - Statistic
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * @requires ../widget/_widget.scss
+ * ========================================================================= */
+
+/* STATISTIC */
+
+.statistic {
+
+  @extend .widget;
+  text-align: center;
+
+  /* PRIMARY */
+
+  &-primary {
+    @include size ( $statistic-primary-size );
+  }
+
+  /* SECONDARY */
+
+  &-secondary {
+    @include size ( $statistic-secondary-size );
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Stepper
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato

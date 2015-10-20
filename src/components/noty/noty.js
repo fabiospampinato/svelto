@@ -263,11 +263,11 @@
 
       if ( !this._isOpen ) {
 
-        this._frame ( function () {
+        this._frame ( () => {
 
             $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append ( this.$noty );
 
-            this._frame ( function () {
+            this._frame ( () => {
 
               this.$noty.addClass ( this.options.classes.open );
 

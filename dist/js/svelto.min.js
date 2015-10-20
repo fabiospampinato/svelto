@@ -5329,16 +5329,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     };
 
     Noty.prototype.open = function open() {
+      var _this = this;
 
       if (!this._isOpen) {
 
         this._frame(function () {
 
-          $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append(this.$noty);
+          $('.noty-queues.' + _this.options.anchor.y + ' .noty-queue.' + _this.options.anchor.x).append(_this.$noty);
 
-          this._frame(function () {
+          _this._frame(function () {
 
-            this.$noty.addClass(this.options.classes.open);
+            _this.$noty.addClass(_this.options.classes.open);
           });
         });
 

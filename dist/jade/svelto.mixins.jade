@@ -623,34 +623,6 @@ mixin image-sample
 
 
 //- =========================================================================
-//- Svelto - Input
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    type: '', // Input type
-    name: '', // Input name
-    value: '', // Input value
-    label: '' // Label
-  }
-
-mixin input(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.type = options.type || "text";
-  - options.name = options.name || "";
-  - options.value = options.value === undefined ? "" : options.value;
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
-
-
-//- =========================================================================
 //- Svelto - Infobar
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -707,6 +679,34 @@ mixin infobar-right
 mixin infobar-bottom
   .infobar-bottom&attributes(attributes)
     block
+
+
+//- =========================================================================
+//- Svelto - Input
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    type: '', // Input type
+    name: '', // Input name
+    value: '', // Input value
+    label: '' // Label
+  }
+
+mixin input(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.type = options.type || "text";
+  - options.name = options.name || "";
+  - options.value = options.value === undefined ? "" : options.value;
+  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
+    input(type=options.type value=options.value name=options.name required).text-field
+    if options.label
+      label= options.label
+    .text-field-bar
 
 
 //- =========================================================================
@@ -813,6 +813,24 @@ mixin multiple-sub-right
 
 
 //- =========================================================================
+//- Svelto - Notification
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    title: '', // Notification title
+    body: '', // Notification body
+    img: '' // Notification image
+  }
+
+mixin notification(options)
+  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
+
+
+//- =========================================================================
 //- Svelto - Navbar
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -860,24 +878,6 @@ mixin navbar(options)
 
 mixin noty(options)
   +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
-
-
-//- =========================================================================
-//- Svelto - Notification
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    title: '', // Notification title
-    body: '', // Notification body
-    img: '' // Notification image
-  }
-
-mixin notification(options)
-  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 
 //- =========================================================================
@@ -1003,48 +1003,6 @@ mixin pager(options)
 
 
 //- =========================================================================
-//- Svelto - Parallax
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin parallax
-  .parallax&attributes(attributes)
-    block
-
-mixin parallax-layers
-  .parallax-layers&attributes(attributes)
-    block
-
-mixin parallax-layer
-  .parallax-layer&attributes(attributes)
-    block
-
-mixin parallax-content-sample
-  .parallax-content-sample&attributes(attributes)
-    block
-
-//- Layers levels
-
-mixin parallax-layer-deep
-  +parallax-layer&attributes(attributes).parallax-layer-deep
-    block
-
-mixin parallax-layer-background
-  +parallax-layer&attributes(attributes).parallax-layer-background
-    block
-
-mixin parallax-layer-base
-  +parallax-layer&attributes(attributes).parallax-layer-base
-    block
-
-mixin parallax-layer-foreground
-  +parallax-layer&attributes(attributes).parallax-layer-foreground
-    block
-
-
-//- =========================================================================
 //- Svelto - Pagination
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1138,6 +1096,48 @@ mixin pagination(options)
 
 
 //- =========================================================================
+//- Svelto - Parallax
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin parallax
+  .parallax&attributes(attributes)
+    block
+
+mixin parallax-layers
+  .parallax-layers&attributes(attributes)
+    block
+
+mixin parallax-layer
+  .parallax-layer&attributes(attributes)
+    block
+
+mixin parallax-content-sample
+  .parallax-content-sample&attributes(attributes)
+    block
+
+//- Layers levels
+
+mixin parallax-layer-deep
+  +parallax-layer&attributes(attributes).parallax-layer-deep
+    block
+
+mixin parallax-layer-background
+  +parallax-layer&attributes(attributes).parallax-layer-background
+    block
+
+mixin parallax-layer-base
+  +parallax-layer&attributes(attributes).parallax-layer-base
+    block
+
+mixin parallax-layer-foreground
+  +parallax-layer&attributes(attributes).parallax-layer-foreground
+    block
+
+
+//- =========================================================================
 //- Svelto - Placeholder
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1167,6 +1167,18 @@ mixin placeholder(options)
 
 
 //- =========================================================================
+//- Svelto - Syntax
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin syntax(language)
+  code(class="language-" + language)&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Progressbar
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1191,18 +1203,6 @@ mixin progressbar(options)
   - options.decimals = options.decimals || 0;
   .progressbar(class=options.colors.off data-value=options.value, data-decimals=options.decimals)&attributes(attributes)
     .progressbar-highlight(class=options.colors.on, style="min-width: " + options.value + "%;")
-
-
-//- =========================================================================
-//- Svelto - Syntax
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin syntax(language)
-  code(class="language-" + language)&attributes(attributes)
-    block
 
 
 //- =========================================================================
@@ -1461,6 +1461,26 @@ mixin stepper(options)
 
 
 //- =========================================================================
+//- Svelto - Statistic
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin statistic
+  .statistic&attributes(attributes)
+    block
+      
+mixin statistic-primary
+  .statistic-primary&attributes(attributes)
+    block
+      
+mixin statistic-secondary
+  .statistic-secondary&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Switch
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1549,31 +1569,6 @@ mixin tabs-containers
 
 
 //- =========================================================================
-//- Svelto - Textarea
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    name: '', // Textarea name
-    label: '', // Label
-  }
-
-mixin textarea(options)
-  //- TODO: Make the markup lighter
-  - options = options || {};
-  - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
-
-
-//- =========================================================================
 //- Svelto - Tagbox
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1601,6 +1596,31 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+
+
+//- =========================================================================
+//- Svelto - Textarea
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    name: '', // Textarea name
+    label: '', // Label
+  }
+
+mixin textarea(options)
+  //- TODO: Make the markup lighter
+  - options = options || {};
+  - options.name = options.name || "";
+  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
+    textarea(name=options.name required).text-field
+      block
+    if options.label
+      label= options.label
+    .text-field-bar
 
 
 //- =========================================================================
