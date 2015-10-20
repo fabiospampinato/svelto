@@ -14,12 +14,10 @@
 
   'use strict';
 
-  /* SELECT */
+  /* CONFIG */
 
-  $.factory ( 'svelto.rater', {
-
-    /* TEMPLATES */
-
+  let config = {
+    name: 'boilerplate',
     templates: {
       base: '<div class="rater">' +
               '{% include ( "svelto.rater.stars", o ); %}' +
@@ -28,9 +26,6 @@
                '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' +
              '{% } %}'
     },
-
-    /* OPTIONS */
-
     options: {
       value: 0,
       amount: 5,
@@ -39,9 +34,14 @@
         star: '.rater-star'
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     },
+  };
+
+  /* SELECT */
+
+  class Rater extends Svelto.Widget {
 
     /* SPECIAL */
 
@@ -59,7 +59,9 @@
 
       });
 
-    },
+      //TODO: Add support for rater
+
+    }
 
     _variables () {
 
@@ -68,7 +70,7 @@
       this.alreadyRated = false;
       this.doingAjax = false;
 
-    },
+    }
 
     _events () {
 
@@ -76,7 +78,7 @@
 
       this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
 
-    },
+    }
 
     /* TAP */
 
@@ -134,7 +136,7 @@
 
       }
 
-    },
+    }
 
     /* API */
 
@@ -147,6 +149,15 @@
 
     }
 
-  });
+  }
+
+  /* BINDING */
+
+  Svelto.Rater = Rater;
+  Svelto.Rater.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Rater );
 
 }( jQuery, _, window, document ));

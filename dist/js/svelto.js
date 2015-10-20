@@ -4819,7 +4819,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
   /* CONFIG */
 
   var config = {
-    name: 'boilerplate',
+    name: 'droppable',
     selector: '*',
     callbacks: {
       drop: function drop() {}
@@ -7989,7 +7989,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
   /* CONFIG */
 
   var config = {
-    name: 'boilerplate',
+    name: 'radio',
     options: {
       attributes: {
         name: 'name'
@@ -8131,23 +8131,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 'use strict';
 
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
 (function ($, _, window, document, undefined) {
 
   'use strict';
 
-  /* SELECT */
+  /* CONFIG */
 
-  $.factory('svelto.rater', {
-
-    /* TEMPLATES */
-
+  var config = {
+    name: 'boilerplate',
     templates: {
       base: '<div class="rater">' + '{% include ( "svelto.rater.stars", o ); %}' + '</div>',
       stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' + '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' + '{% } %}'
     },
-
-    /* OPTIONS */
-
     options: {
       value: 0,
       amount: 5,
@@ -8156,13 +8155,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         star: '.rater-star'
       },
       callbacks: {
-        change: _.noop
+        change: function change() {}
       }
-    },
+    }
+  };
+
+  /* SELECT */
+
+  var Rater = (function (_Svelto$Widget) {
+    _inherits(Rater, _Svelto$Widget);
+
+    function Rater() {
+      _classCallCheck(this, Rater);
+
+      _Svelto$Widget.apply(this, arguments);
+    }
+
+    /* BINDING */
 
     /* SPECIAL */
 
-    _widgetize: function _widgetize($root) {
+    Rater.prototype._widgetize = function _widgetize($root) {
 
       $root.find('.rater').each(function () {
 
@@ -8174,26 +8187,28 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           url: Number($rater.data('url') || false)
         });
       });
-    },
 
-    _variables: function _variables() {
+      //TODO: Add support for rater
+    };
+
+    Rater.prototype._variables = function _variables() {
 
       this.$rater = this.$element;
 
       this.alreadyRated = false;
       this.doingAjax = false;
-    },
+    };
 
-    _events: function _events() {
+    Rater.prototype._events = function _events() {
 
       /* TAP */
 
       this._on(Pointer.tap, this.options.selectors.star, this.__tap);
-    },
+    };
 
     /* TAP */
 
-    __tap: function __tap(event, star) {
+    Rater.prototype.__tap = function __tap(event, star) {
 
       if (!this.alreadyRated && !this.doingAjax && this.options.url) {
 
@@ -8241,19 +8256,27 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         });
       }
-    },
+    };
 
     /* API */
 
-    get: function get() {
+    Rater.prototype.get = function get() {
 
       return {
         value: this.options.value,
         amount: this.options.amount
       };
-    }
+    };
 
-  });
+    return Rater;
+  })(Svelto.Widget);
+
+  Svelto.Rater = Rater;
+  Svelto.Rater.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.Rater);
 })(jQuery, _, window, document);
 
 /* =========================================================================

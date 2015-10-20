@@ -15,7 +15,7 @@
   /* CONFIG */
 
   let config = {
-    name: 'boilerplate',
+    name: 'radio',
     options: {
       attributes: {
         name: 'name'

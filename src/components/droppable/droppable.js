@@ -17,7 +17,7 @@
   /* CONFIG */
 
   let config = {
-    name: 'boilerplate',
+    name: 'droppable',
       selector: '*',
       callbacks: {
         drop () {}
