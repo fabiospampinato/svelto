@@ -108,10 +108,12 @@
   white-space: nowrap !important;
 }
 
+.text-ellipsis,
 .truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 100%; //INFO: Fixes a bug in IE 10
 }
 
 /* PADDING */

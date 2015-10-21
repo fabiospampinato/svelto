@@ -3598,10 +3598,12 @@ table.table.sortable .label.compact > :not(.label):not(.button):not(.sub):not(.o
   white-space: nowrap !important;
 }
 
+.text-ellipsis,
 .truncate {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
+  max-width: 100%;
 }
 
 /* PADDING */

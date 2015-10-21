@@ -13,7 +13,7 @@
   /* VARIABLES */
 
   let userAgent  = navigator.userAgent.toLowerCase (),
-      vendor     = navigator.vendor.toLowerCase (),
+      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', //INFO: Fixes an IE10 bug, `navigator.vendor` it's undefined there
       appVersion = navigator.appVersion.toLowerCase ();
 
   /* CHECKS */

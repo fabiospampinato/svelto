@@ -262,8 +262,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* VARIABLES */
 
   var userAgent = navigator.userAgent.toLowerCase(),
-      vendor = navigator.vendor.toLowerCase(),
-      appVersion = navigator.appVersion.toLowerCase();
+      vendor = navigator.vendor ? navigator.vendor.toLowerCase() : '',
+      //INFO: Fixes an IE10 bug, `navigator.vendor` it's undefined there
+  appVersion = navigator.appVersion.toLowerCase();
 
   /* CHECKS */
 

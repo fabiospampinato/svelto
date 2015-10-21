@@ -511,18 +511,6 @@ mixin flag(flag)
 
 
 //- =========================================================================
-//- Svelto - Footer
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin footer
-  footer&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Flippable
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -541,6 +529,18 @@ mixin flippable-front
 
 mixin flippable-back
   .flippable-back&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Footer
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin footer
+  footer&attributes(attributes)
     block
 
 
@@ -583,6 +583,24 @@ mixin header-bg(url)
 
 
 //- =========================================================================
+//- Svelto - Icons
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin icon(icon)
+  i&attributes(attributes).icon
+    if icon
+      = icon
+    block
+
+mixin icons
+  .icons&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Image
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -601,24 +619,6 @@ mixin image-caption
 
 mixin image-sample
   +image("/sample.png")&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Icons
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin icon(icon)
-  i&attributes(attributes).icon
-    if icon
-      = icon
-    block
-
-mixin icons
-  .icons&attributes(attributes)
     block
 
 
@@ -752,6 +752,32 @@ mixin label-tag
 
 
 //- =========================================================================
+//- Svelto - Modal
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    id: '', // Modal id
+    title: '' // Title
+    icon: '', // Icon to use
+  }
+
+mixin modal-btn(options)
+  +button(data-modal="modal-" + options.id)&attributes(attributes).modal-trigger
+    if options.title
+      span= options.title
+    if options.icon
+      +icon(options.icon)
+
+mixin modal(id)
+  .modal(id="modal-" + id)&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Multiple
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -784,32 +810,6 @@ mixin multiple-sub-right
     +multiple
       block
   .multiple-sub-spacer
-
-
-//- =========================================================================
-//- Svelto - Modal
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    id: '', // Modal id
-    title: '' // Title
-    icon: '', // Icon to use
-  }
-
-mixin modal-btn(options)
-  +button(data-modal="modal-" + options.id)&attributes(attributes).modal-trigger
-    if options.title
-      span= options.title
-    if options.icon
-      +icon(options.icon)
-
-mixin modal(id)
-  .modal(id="modal-" + id)&attributes(attributes)
-    block
 
 
 //- =========================================================================
@@ -1549,26 +1549,6 @@ mixin table-row-empty(empty_str)
 
 
 //- =========================================================================
-//- Svelto - Tabs
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin tabs
-  .tabs&attributes(attributes)
-    block
-
-mixin tabs-triggers
-  .tabs-triggers&attributes(attributes)
-    block
-
-mixin tabs-containers
-  .tabs-containers&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Tagbox
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1596,6 +1576,26 @@ mixin tagbox(options)
         +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
       else
         +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+
+
+//- =========================================================================
+//- Svelto - Tabs
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin tabs
+  .tabs&attributes(attributes)
+    block
+
+mixin tabs-triggers
+  .tabs-triggers&attributes(attributes)
+    block
+
+mixin tabs-containers
+  .tabs-containers&attributes(attributes)
+    block
 
 
 //- =========================================================================
