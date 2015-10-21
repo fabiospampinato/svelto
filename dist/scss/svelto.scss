@@ -2030,6 +2030,13 @@ $widget-transition-opacity-duration: $transition-duration-fast !default;
 
 }
 
+/* WIDGET (PSEUDO ELEMENT) */ //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+
+.widget-pseudo {
+  position: relative;
+  margin: 0 0 $gutter;
+}
+
 
 /* =========================================================================
  * Svelto - Expander (Settings)
@@ -2196,6 +2203,7 @@ $toolbar-padding-horizontal: 1em !default;
 
   > .multiple {
     flex-wrap: nowrap;
+    background-color: transparent;
   }
 
 }
@@ -2371,6 +2379,12 @@ body {
   transition: margin $navbar-transition-transform-duration;
   flex-grow: 1;
 
+  > header,
+  > main,
+  > footer {
+    width: 100vw; //INFO: It fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  }
+
   > header {
 
     margin-bottom: 0;
@@ -2490,7 +2504,7 @@ $label-color-basic: false !default;
 
 $label-border-radius: $container-border-radius !default;
 
-$label-padding-vertical: 0.495em !default;
+$label-padding-vertical: 0.5em !default;
 $label-padding-horizontal: $label-padding-vertical * 2 !default;
 
 /* LABEL COMPACT */
@@ -6933,7 +6947,7 @@ $highlight-size: $outline-width * 2 !default;
 /* ICON */
 
 i.icon {
-  @extend .widget;
+  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
   vertical-align: middle;

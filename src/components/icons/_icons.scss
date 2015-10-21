@@ -27,7 +27,7 @@
 /* ICON */
 
 i.icon {
-  @extend .widget;
+  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
   vertical-align: middle;

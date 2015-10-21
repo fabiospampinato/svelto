@@ -73,6 +73,12 @@ body {
   transition: margin $navbar-transition-transform-duration;
   flex-grow: 1;
 
+  > header,
+  > main,
+  > footer {
+    width: 100vw; //INFO: It fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  }
+
   > header {
 
     margin-bottom: 0;

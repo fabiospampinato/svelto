@@ -42,11 +42,16 @@ html(class="no-js" lang="en" dir="ltr")
     block body-end
       
     //- INFO: Debug all the errors we find, either via noty, if possible, or via alert
-    script.
+    +script.
+      var prevErrorId = '';
       window.onerror = function ( message, file, line ) {
-        try {
-          $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
-        } catch ( e ) {
-          alert ( file + ':' + line + '\n\n' + message );
+        var errorId = message + file + line;
+        if ( errorId !== prevErrorId ) {
+          prevErrorId = errorId;
+          try {
+            $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+          } catch ( e ) {
+            alert ( file + ':' + line + '\n\n' + message );
+          }
         }
       };

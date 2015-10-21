@@ -8,6 +8,10 @@
 
 'use strict';
 
+function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
+
 (function (_, window, document, undefined) {
 
   'use strict';
@@ -251,8 +255,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -322,8 +324,6 @@
  * =========================================================================
  * @requires ../browser/browser.js
  * ========================================================================= */
-
-'use strict';
 
 (function ($, _, window, document, undefined) {
 
@@ -419,8 +419,6 @@
 //TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
 //TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -495,8 +493,6 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-
-'use strict';
 
 (function ($, _, window, document, undefined) {
 
@@ -582,8 +578,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -594,7 +588,6 @@
     version: '0.1.0'
   };
 })(jQuery, _, window, document);
-"use strict";
 
 /* =========================================================================
  * Svelto - Core
@@ -664,8 +657,6 @@
  * </ul>
  *
  ***************************/
-
-'use strict';
 
 (function ($, _, window, document, undefined) {
 
@@ -744,10 +735,6 @@
 
 //TODO: Add support for element-level options via `data-nameLowerCase-options`
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
 
 (function ($, _, window, document, undefined) {
 
@@ -1032,7 +1019,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* EVENTS */
 
     Widget.prototype._on = function _on(suppressDisabledCheck, $element, events, selector, handler, onlyOne) {
-      var _this = this;
+      var _this2 = this;
 
       //TODO: Add support for custom data
 
@@ -1067,13 +1054,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       /* PROXY */
 
       var handlerProxy = function handlerProxy() {
-        for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
-          args[_key] = arguments[_key];
+        for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          args[_key2] = arguments[_key2];
         }
 
-        if (!suppressDisabledCheck && _this.disabled) return;
+        if (!suppressDisabledCheck && _this2.disabled) return;
 
-        return handler.apply(_this, args);
+        return handler.apply(_this2, args);
       };
 
       /* PROXY GUID */
@@ -1088,8 +1075,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     Widget.prototype._one = function _one() {
-      for (var _len2 = arguments.length, args = Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        args[_key2] = arguments[_key2];
+      for (var _len3 = arguments.length, args = Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        args[_key3] = arguments[_key3];
       }
 
       //FIXME: Does it work?
@@ -1098,7 +1085,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     Widget.prototype._onHover = function _onHover($element, args) {
-      var _this2 = this;
+      var _this3 = this;
 
       //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
 
@@ -1109,10 +1096,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       this._on($element, Pointer.enter, function () {
-        return _this2._on.apply(_this2, args);
+        return _this3._on.apply(_this3, args);
       });
       this._on($element, Pointer.enter, function () {
-        return _this2._off.apply(_this2, args);
+        return _this3._off.apply(_this3, args);
       });
 
       return this;
@@ -1168,10 +1155,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* DELAYING */
 
     Widget.prototype._delay = function _delay(fn, delay) {
-      var _this3 = this;
+      var _this4 = this;
 
       return setTimeout(function () {
-        return fn.apply(_this3);
+        return fn.apply(_this4);
       }, delay || 0);
     };
 
@@ -1269,10 +1256,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @requires ../core/core.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -1303,19 +1286,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     _class.prototype.on = function on($root) {
 
-      for (var _iterator = this.widgetizers, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator3 = this.widgetizers, _isArray3 = Array.isArray(_iterator3), _i3 = 0, _iterator3 = _isArray3 ? _iterator3 : _iterator3[Symbol.iterator]();;) {
+        var _ref3;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+        if (_isArray3) {
+          if (_i3 >= _iterator3.length) break;
+          _ref3 = _iterator3[_i3++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
+          _i3 = _iterator3.next();
+          if (_i3.done) break;
+          _ref3 = _i3.value;
         }
 
-        var widgetizer = _ref;
+        var widgetizer = _ref3;
 
         widgetizer($root);
       }
@@ -1355,8 +1338,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? (//TODO Test it!)
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
-
-'use strict';
 
 (function ($, _, window, document, undefined) {
 
@@ -1401,18 +1382,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* EVENTS METHODS */
 
-  var _loop = function (_name) {
+  var _loop2 = function (_name2) {
 
-    Pointer[_name] = events[_name];
+    Pointer[_name2] = events[_name2];
 
-    $.fn[_name] = function (fn) {
+    $.fn[_name2] = function (fn) {
 
-      return fn ? this.on(events[_name], fn) : this.tirgger(events[_name]); //FIXME: Does it work? not sure about that `events[name]` inside the function
+      return fn ? this.on(events[_name2], fn) : this.tirgger(events[_name2]); //FIXME: Does it work? not sure about that `events[name]` inside the function
     };
   };
 
-  for (var _name in events) {
-    _loop(_name);
+  for (var _name2 in events) {
+    _loop2(_name2);
   }
 
   /* POINTER LOGIC */
@@ -1505,14 +1486,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold) {
 
+          var orientation = undefined,
+              direction = undefined;
+
           if (absDeltaXY.X > absDeltaXY.Y) {
 
-            var _orientation = 'horizontal',
-                _direction = deltaXY.X > 0 ? 1 : -1;
+            orientation = 'horizontal', direction = deltaXY.X > 0 ? 1 : -1;
           } else {
 
-            var _orientation2 = 'vertical',
-                _direction2 = deltaXY.Y > 0 ? 1 : -1;
+            orientation = 'vertical', direction = deltaXY.Y > 0 ? 1 : -1;
           }
 
           $target.trigger(createEvent(Pointer.flick, event), {
@@ -1578,8 +1560,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @requires ../pointer/Pointer.js
  *=========================================================================*/
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -1637,27 +1617,27 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (isMethodCall) {
 
         if (options.charAt(0) !== '_') {
-          for (var _len = arguments.length, args = Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-            args[_key - 1] = arguments[_key];
+          for (var _len4 = arguments.length, args = Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+            args[_key4 - 1] = arguments[_key4];
           }
 
           //INFO: Not a private method or property
 
           /* METHOD CALL */
 
-          for (var _iterator = this, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-            var _ref;
+          for (var _iterator4 = this, _isArray4 = Array.isArray(_iterator4), _i4 = 0, _iterator4 = _isArray4 ? _iterator4 : _iterator4[Symbol.iterator]();;) {
+            var _ref4;
 
-            if (_isArray) {
-              if (_i >= _iterator.length) break;
-              _ref = _iterator[_i++];
+            if (_isArray4) {
+              if (_i4 >= _iterator4.length) break;
+              _ref4 = _iterator4[_i4++];
             } else {
-              _i = _iterator.next();
-              if (_i.done) break;
-              _ref = _i.value;
+              _i4 = _iterator4.next();
+              if (_i4.done) break;
+              _ref4 = _i4.value;
             }
 
-            var element = _ref;
+            var element = _ref4;
 
             /* VARIABLES */
 
@@ -1685,19 +1665,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         /* INSTANCE */
 
-        for (var _iterator2 = this, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-          var _ref2;
+        for (var _iterator5 = this, _isArray5 = Array.isArray(_iterator5), _i5 = 0, _iterator5 = _isArray5 ? _iterator5 : _iterator5[Symbol.iterator]();;) {
+          var _ref5;
 
-          if (_isArray2) {
-            if (_i2 >= _iterator2.length) break;
-            _ref2 = _iterator2[_i2++];
+          if (_isArray5) {
+            if (_i5 >= _iterator5.length) break;
+            _ref5 = _iterator5[_i5++];
           } else {
-            _i2 = _iterator2.next();
-            if (_i2.done) break;
-            _ref2 = _i2.value;
+            _i5 = _iterator5.next();
+            if (_i5.done) break;
+            _ref5 = _i5.value;
           }
 
-          var element = _ref2;
+          var element = _ref5;
 
           $.factory.instance(Widget, _options, element);
         }
@@ -1731,12 +1711,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -1852,12 +1826,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../expander/expander.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -1882,13 +1850,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* ACCORDION */
 
-  var Accordion = (function (_Svelto$Widget) {
-    _inherits(Accordion, _Svelto$Widget);
+  var Accordion = (function (_Svelto$Widget2) {
+    _inherits(Accordion, _Svelto$Widget2);
 
     function Accordion() {
       _classCallCheck(this, Accordion);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget2.apply(this, arguments);
     }
 
     /* BINDING */
@@ -2001,12 +1969,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -2025,13 +1987,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* AUTOGROW INPUT */
 
-  var AutogrowInput = (function (_Svelto$Widget) {
-    _inherits(AutogrowInput, _Svelto$Widget);
+  var AutogrowInput = (function (_Svelto$Widget3) {
+    _inherits(AutogrowInput, _Svelto$Widget3);
 
     function AutogrowInput() {
       _classCallCheck(this, AutogrowInput);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget3.apply(this, arguments);
     }
 
     /* BINDING */
@@ -2117,12 +2079,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //FIXME: Does it work with `.large` textareas?
 //TODO: Make it the same height as a normal input at minimum, for beautiness
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -2141,13 +2097,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* AUTOGROW TEXTAREA */
 
-  var AutogrowTextarea = (function (_Svelto$Widget) {
-    _inherits(AutogrowTextarea, _Svelto$Widget);
+  var AutogrowTextarea = (function (_Svelto$Widget4) {
+    _inherits(AutogrowTextarea, _Svelto$Widget4);
 
     function AutogrowTextarea() {
       _classCallCheck(this, AutogrowTextarea);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget4.apply(this, arguments);
     }
 
     /* BINDING */
@@ -2208,8 +2164,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../core/core.js
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -2230,12 +2184,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -2263,13 +2211,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* BOILERPLATE */
 
-  var Boilerplate = (function (_Svelto$Widget) {
-    _inherits(Boilerplate, _Svelto$Widget);
+  var Boilerplate = (function (_Svelto$Widget5) {
+    _inherits(Boilerplate, _Svelto$Widget5);
 
     function Boilerplate() {
       _classCallCheck(this, Boilerplate);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget5.apply(this, arguments);
     }
 
     /* BINDING */
@@ -2308,8 +2256,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../core/core.js
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -2332,12 +2278,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * ========================================================================= */
 
 //TODO: Add drag support instead of flick
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -2374,13 +2314,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* CAROUSEL */
 
-  var Carousel = (function (_Svelto$Widget) {
-    _inherits(Carousel, _Svelto$Widget);
+  var Carousel = (function (_Svelto$Widget6) {
+    _inherits(Carousel, _Svelto$Widget6);
 
     function Carousel() {
       _classCallCheck(this, Carousel);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget6.apply(this, arguments);
     }
 
     /* BINDING */
@@ -2621,12 +2561,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -2652,13 +2586,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* CHECKBOX */
 
-  var Checkbox = (function (_Svelto$Widget) {
-    _inherits(Checkbox, _Svelto$Widget);
+  var Checkbox = (function (_Svelto$Widget7) {
+    _inherits(Checkbox, _Svelto$Widget7);
 
     function Checkbox() {
       _classCallCheck(this, Checkbox);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget7.apply(this, arguments);
     }
 
     /* BINDING */
@@ -2766,10 +2700,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 (function (_, window, document, undefined) {
 
   'use strict';
@@ -2777,13 +2707,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* COLOR HELPER */
 
   window.ColorHelper = (function () {
-    function _class() {
-      _classCallCheck(this, _class);
+    function _class2() {
+      _classCallCheck(this, _class2);
     }
 
     /* COLOR SPACES CONVERTERS */
 
-    _class.hex2rgb = function hex2rgb(hex) {
+    _class2.hex2rgb = function hex2rgb(hex) {
 
       return {
         r: ColorHelper.hex2dec(hex.r),
@@ -2792,12 +2722,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     };
 
-    _class.hex2hsv = function hex2hsv(hex) {
+    _class2.hex2hsv = function hex2hsv(hex) {
 
       return ColorHelper.rgb2hsv(ColorHelper.hex2rgb(hex));
     };
 
-    _class.rgb2hex = function rgb2hex(rgb) {
+    _class2.rgb2hex = function rgb2hex(rgb) {
 
       return {
         r: ColorHelper.dec2hex(rgb.r),
@@ -2806,7 +2736,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     };
 
-    _class.rgb2hsv = function rgb2hsv(rgb) {
+    _class2.rgb2hsv = function rgb2hsv(rgb) {
 
       var r = rgb.r / 255,
           g = rgb.g / 255,
@@ -2857,12 +2787,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     };
 
-    _class.hsv2hex = function hsv2hex(hsv) {
+    _class2.hsv2hex = function hsv2hex(hsv) {
 
       return ColorHelper.rgb2hex(ColorHelper.hsv2rgb(hsv));
     };
 
-    _class.hsv2rgb = function hsv2rgb(hsv) {
+    _class2.hsv2rgb = function hsv2rgb(hsv) {
 
       var r = undefined,
           g = undefined,
@@ -2939,7 +2869,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     };
 
-    _class.hsv2hsl = function hsv2hsl(hsv) {
+    _class2.hsv2hsl = function hsv2hsl(hsv) {
 
       var s = hsv.s / 100,
           v = hsv.v / 100,
@@ -2953,7 +2883,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     };
 
-    _class.hsl2hsv = function hsl2hsv(hsl) {
+    _class2.hsl2hsv = function hsl2hsv(hsl) {
 
       var l = hsl.l / 100 * 2,
           s = hsl.s / 100 * (l <= 1 ? l : 2 - l);
@@ -2967,17 +2897,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* SCALE CONVERTERS */
 
-    _class.dec2hex = function dec2hex(dec) {
+    _class2.dec2hex = function dec2hex(dec) {
 
       return _.padLeft(dec.toString(16), 2, '0');
     };
 
-    _class.hex2dec = function hex2dec(hex) {
+    _class2.hex2dec = function hex2dec(hex) {
 
       return parseInt(hex, 16);
     };
 
-    return _class;
+    return _class2;
   })();
 })(_, window, document);
 
@@ -2992,10 +2922,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add support for alpha
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 (function (_, window, document, undefined) {
 
   'use strict';
@@ -3003,8 +2929,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* HEX COLOR */
 
   window.HexColor = (function () {
-    function _class(color) {
-      _classCallCheck(this, _class);
+    function _class3(color) {
+      _classCallCheck(this, _class3);
 
       if (_.isString(color)) {
 
@@ -3022,7 +2948,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     }
 
-    _class.prototype.import6chars = function import6chars(color) {
+    _class3.prototype.import6chars = function import6chars(color) {
 
       this.hsv = ColorHelper.hex2hsv({
         r: color[0] + color[1],
@@ -3031,7 +2957,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       });
     };
 
-    _class.prototype.import3chars = function import3chars(color) {
+    _class3.prototype.import3chars = function import3chars(color) {
 
       this.hsv = ColorHelper.hex2hsv({
         r: color[0].repeat(2),
@@ -3040,19 +2966,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       });
     };
 
-    _class.prototype.getHexStr = function getHexStr() {
+    _class3.prototype.getHexStr = function getHexStr() {
 
       var hex = ColorHelper.hsv2hex(this.hsv);
 
       return '#' + hex.r + hex.g + hex.b;
     };
 
-    _class.prototype.isValid = function isValid() {
+    _class3.prototype.isValid = function isValid() {
 
       return !!this.hsv;
     };
 
-    return _class;
+    return _class3;
   })();
 })(_, window, document);
 
@@ -3069,12 +2995,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Add support for alpha channel
 //TODO: Add a $bgs variable where we update the background
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -3106,13 +3026,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* COLORPICKER */
 
-  var Colorpicker = (function (_Svelto$Widget) {
-    _inherits(Colorpicker, _Svelto$Widget);
+  var Colorpicker = (function (_Svelto$Widget8) {
+    _inherits(Colorpicker, _Svelto$Widget8);
 
     function Colorpicker() {
       _classCallCheck(this, Colorpicker);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget8.apply(this, arguments);
     }
 
     /* BINDING */
@@ -3395,8 +3315,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 /* COOKIE */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -3493,12 +3411,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //TODO: Add support for setting first day of the week
 //INFO: We use the format: YYYYMMDD
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -3546,13 +3458,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* DATEPICKER */
 
-  var Datepicker = (function (_Svelto$Widget) {
-    _inherits(Datepicker, _Svelto$Widget);
+  var Datepicker = (function (_Svelto$Widget9) {
+    _inherits(Datepicker, _Svelto$Widget9);
 
     function Datepicker() {
       _classCallCheck(this, Datepicker);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget9.apply(this, arguments);
     }
 
     /* BINDING */
@@ -3904,12 +3816,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -3957,13 +3863,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* DRAGGABLE */
 
-  var Draggable = (function (_Svelto$Widget) {
-    _inherits(Draggable, _Svelto$Widget);
+  var Draggable = (function (_Svelto$Widget10) {
+    _inherits(Draggable, _Svelto$Widget10);
 
     function Draggable() {
       _classCallCheck(this, Draggable);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget10.apply(this, arguments);
     }
 
     /* BINDING */
@@ -4195,8 +4101,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //FIXME: Do we need to support -webkit- prefixing?
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -4279,8 +4183,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Add allignment, that is, if possibile don't center the dropdown but align it to one of the trigger edges
 //FIXME: Big elements gets positionated badly, for example try some tooltips in a small viewport
-
-'use strict';
 
 (function ($, _, window, document, undefined) {
 
@@ -4505,12 +4407,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //FIXME: Hover open, enter the dropdown and click it, it gets closed...
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -4559,13 +4455,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* DROPDOWN */
 
-  var Dropdown = (function (_Svelto$Widget) {
-    _inherits(Dropdown, _Svelto$Widget);
+  var Dropdown = (function (_Svelto$Widget11) {
+    _inherits(Dropdown, _Svelto$Widget11);
 
     function Dropdown() {
       _classCallCheck(this, Dropdown);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget11.apply(this, arguments);
     }
 
     /* BINDING */
@@ -4857,12 +4753,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Add a anction on hovering
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -4879,13 +4769,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* DROPPABLE */
 
-  var Droppable = (function (_Svelto$Widget) {
-    _inherits(Droppable, _Svelto$Widget);
+  var Droppable = (function (_Svelto$Widget12) {
+    _inherits(Droppable, _Svelto$Widget12);
 
     function Droppable() {
       _classCallCheck(this, Droppable);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget12.apply(this, arguments);
     }
 
     /* BINDING */
@@ -4952,12 +4842,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -4984,13 +4868,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* FLIPPABLE */
 
-  var Flippable = (function (_Svelto$Widget) {
-    _inherits(Flippable, _Svelto$Widget);
+  var Flippable = (function (_Svelto$Widget13) {
+    _inherits(Flippable, _Svelto$Widget13);
 
     function Flippable() {
       _classCallCheck(this, Flippable);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget13.apply(this, arguments);
     }
 
     /* BINDING */
@@ -5069,12 +4953,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -5099,13 +4977,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SPINNER OVERLAY */
 
-  var SpinnerOverlay = (function (_Svelto$Widget) {
-    _inherits(SpinnerOverlay, _Svelto$Widget);
+  var SpinnerOverlay = (function (_Svelto$Widget14) {
+    _inherits(SpinnerOverlay, _Svelto$Widget14);
 
     function SpinnerOverlay() {
       _classCallCheck(this, SpinnerOverlay);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget14.apply(this, arguments);
     }
 
     /* BINDING */
@@ -5169,12 +5047,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -5252,13 +5124,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* NOTY */
 
-  var Noty = (function (_Svelto$Widget) {
-    _inherits(Noty, _Svelto$Widget);
+  var Noty = (function (_Svelto$Widget15) {
+    _inherits(Noty, _Svelto$Widget15);
 
     function Noty() {
       _classCallCheck(this, Noty);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget15.apply(this, arguments);
     }
 
     /* BINDING */
@@ -5380,17 +5252,17 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     };
 
     Noty.prototype.open = function open() {
-      var _this = this;
+      var _this5 = this;
 
       if (!this._isOpen) {
 
         this._frame(function () {
 
-          $('.noty-queues.' + _this.options.anchor.y + ' .noty-queue.' + _this.options.anchor.x).append(_this.$noty);
+          $('.noty-queues.' + _this5.options.anchor.y + ' .noty-queue.' + _this5.options.anchor.x).append(_this5.$noty);
 
-          _this._frame(function () {
+          _this5._frame(function () {
 
-            _this.$noty.addClass(_this.options.classes.open);
+            _this5.$noty.addClass(_this5.options.classes.open);
           });
         });
 
@@ -5471,12 +5343,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Check if it works, also for upload
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -5496,13 +5362,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* FORM AJAX */
 
-  var FormAjax = (function (_Svelto$Widget) {
-    _inherits(FormAjax, _Svelto$Widget);
+  var FormAjax = (function (_Svelto$Widget16) {
+    _inherits(FormAjax, _Svelto$Widget16);
 
     function FormAjax() {
       _classCallCheck(this, FormAjax);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget16.apply(this, arguments);
     }
 
     /* BINDING */
@@ -5531,7 +5397,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     /* PRIVATE */
 
     FormAjax.prototype.__submit = function __submit(event) {
-      var _this = this;
+      var _this6 = this;
 
       event.preventDefault();
       event.stopImmediatePropagation();
@@ -5548,12 +5414,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         beforeSend: function beforeSend() {
           //FIXME: Check it, expecially the `this` context
 
-          if (_this.options.spinnerOverlay) {
+          if (_this6.options.spinnerOverlay) {
 
-            _this.$form.spinnerOverlay('show');
+            _this6.$form.spinnerOverlay('show');
           }
 
-          _this._trigger('beforesend');
+          _this6._trigger('beforesend');
         },
 
         error: function error(res) {
@@ -5618,12 +5484,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         complete: function complete() {
           //FIXME: Check it, expecially the `this` context
 
-          if (_this.options.spinnerOverlay) {
+          if (_this6.options.spinnerOverlay) {
 
-            _this.$form.spinnerOverlay('hide');
+            _this6.$form.spinnerOverlay('hide');
           }
 
-          _this._trigger('complete');
+          _this6._trigger('complete');
         }
 
       });
@@ -5650,12 +5516,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * ========================================================================= */
 
 //TODO: Maybe sync at init time also
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -5689,13 +5549,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* FORM SYNC */
 
-  var FormSync = (function (_Svelto$Widget) {
-    _inherits(FormSync, _Svelto$Widget);
+  var FormSync = (function (_Svelto$Widget17) {
+    _inherits(FormSync, _Svelto$Widget17);
 
     function FormSync() {
       _classCallCheck(this, FormSync);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget17.apply(this, arguments);
     }
 
     /* BINDING */
@@ -5729,51 +5589,51 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
     /* PRIVATE */
 
     FormSync.prototype.___syncer = function ___syncer() {
-      var _this = this;
+      var _this7 = this;
 
       var $forms = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]'),
           $elements = $forms.find(this.options.selectors.elements);
 
-      var _loop = function () {
-        if (_isArray) {
-          if (_i >= _iterator.length) return 'break';
-          _ref = _iterator[_i++];
+      var _loop3 = function () {
+        if (_isArray6) {
+          if (_i6 >= _iterator6.length) return 'break';
+          _ref6 = _iterator6[_i6++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) return 'break';
-          _ref = _i.value;
+          _i6 = _iterator6.next();
+          if (_i6.done) return 'break';
+          _ref6 = _i6.value;
         }
 
-        var element = _ref;
+        var element = _ref6;
 
         var $element = $(element),
-            name = $element.attr(_this.options.attributes.name),
-            isCheckable = $element.is(_this.options.selectors.checkable),
-            isRadio = isCheckable && $element.is(_this.options.selectors.radio),
-            isTextfield = $element.is(_this.options.selectors.textfield),
+            name = $element.attr(_this7.options.attributes.name),
+            isCheckable = $element.is(_this7.options.selectors.checkable),
+            isRadio = isCheckable && $element.is(_this7.options.selectors.radio),
+            isTextfield = $element.is(_this7.options.selectors.textfield),
             events = isTextfield ? 'input change' : 'change',
-            $currentForm = $element.parents(_this.options.selectors.form),
+            $currentForm = $element.parents(_this7.options.selectors.form),
             $otherForms = $forms.not($currentForm),
-            $otherElements = $otherForms.find('[' + _this.attributes.name + '="' + name + '"]');
+            $otherElements = $otherForms.find('[' + _this7.attributes.name + '="' + name + '"]');
 
         $element.on(events, function () {
 
           var currentValue = $element.val(),
               currentChecked = !!$element.prop('checked');
 
-          for (var _iterator2 = $otherElements, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-            var _ref2;
+          for (var _iterator7 = $otherElements, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+            var _ref7;
 
-            if (_isArray2) {
-              if (_i2 >= _iterator2.length) break;
-              _ref2 = _iterator2[_i2++];
+            if (_isArray7) {
+              if (_i7 >= _iterator7.length) break;
+              _ref7 = _iterator7[_i7++];
             } else {
-              _i2 = _iterator2.next();
-              if (_i2.done) break;
-              _ref2 = _i2.value;
+              _i7 = _iterator7.next();
+              if (_i7.done) break;
+              _ref7 = _i7.value;
             }
 
-            var otherElement = _ref2;
+            var otherElement = _ref7;
 
             var $otherElement = $(otherElement),
                 otherValue = $otherElement.val(),
@@ -5798,12 +5658,12 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         });
       };
 
-      for (var _iterator = $elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator6 = $elements, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+        var _ref6;
 
-        var _ret = _loop();
+        var _ret2 = _loop3();
 
-        if (_ret === 'break') break;
+        if (_ret2 === 'break') break;
       }
     };
 
@@ -5830,12 +5690,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Show error message
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -5961,13 +5815,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* FORM VALIDATE */
 
-  var FormValidate = (function (_Svelto$Widget) {
-    _inherits(FormValidate, _Svelto$Widget);
+  var FormValidate = (function (_Svelto$Widget18) {
+    _inherits(FormValidate, _Svelto$Widget18);
 
     function FormValidate() {
       _classCallCheck(this, FormValidate);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget18.apply(this, arguments);
     }
 
     /* BINDING */
@@ -6013,22 +5867,22 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       this.elements = {};
 
-      for (var _iterator = $elements, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator8 = $elements, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref8;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) break;
+          _ref8 = _iterator8[_i8++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
+          _i8 = _iterator8.next();
+          if (_i8.done) break;
+          _ref8 = _i8.value;
         }
 
-        var element = _ref;
+        var element = _ref8;
 
         var $element = $(element),
-            _name = element.name,
+            _name3 = element.name,
             validationsStr = $element.data(this.options.datas.validations);
 
         if (validationsStr) {
@@ -6036,19 +5890,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           var _validations = {},
               validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
-          for (var _iterator2 = validationsArr, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-            var _ref2;
+          for (var _iterator9 = validationsArr, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+            var _ref9;
 
-            if (_isArray2) {
-              if (_i2 >= _iterator2.length) break;
-              _ref2 = _iterator2[_i2++];
+            if (_isArray9) {
+              if (_i9 >= _iterator9.length) break;
+              _ref9 = _iterator9[_i9++];
             } else {
-              _i2 = _iterator2.next();
-              if (_i2.done) break;
-              _ref2 = _i2.value;
+              _i9 = _iterator9.next();
+              if (_i9.done) break;
+              _ref9 = _i9.value;
             }
 
-            var validationStr = _ref2;
+            var validationStr = _ref9;
 
             var matches = validationStr.match(this.options.regexes.validation);
 
@@ -6075,10 +5929,10 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           var _validations2 = false;
         }
 
-        this.elements[_name] = {
+        this.elements[_name3] = {
           $element: $element,
           $wrapper: $element.parents(this.options.selectors.wrapper).first(),
-          name: _name,
+          name: _name3,
           dirty: false,
           value: $element.val(),
           validations: validations,
@@ -6264,8 +6118,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../pointer/Pointer.js
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -6291,12 +6143,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Maybe add the ability to open it
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -6317,13 +6163,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* INFOBAR */
 
-  var Infobar = (function (_Svelto$Widget) {
-    _inherits(Infobar, _Svelto$Widget);
+  var Infobar = (function (_Svelto$Widget19) {
+    _inherits(Infobar, _Svelto$Widget19);
 
     function Infobar() {
       _classCallCheck(this, Infobar);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget19.apply(this, arguments);
     }
 
     /* BINDING */
@@ -6382,12 +6228,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Disable scrolling while the modal is open
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -6419,13 +6259,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* MODAL */
 
-  var Modal = (function (_Svelto$Widget) {
-    _inherits(Modal, _Svelto$Widget);
+  var Modal = (function (_Svelto$Widget20) {
+    _inherits(Modal, _Svelto$Widget20);
 
     function Modal() {
       _classCallCheck(this, Modal);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget20.apply(this, arguments);
     }
 
     /* BINDING */
@@ -6545,10 +6385,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Add support for cookie settable parameters
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -6633,10 +6469,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @requires NTA.Group.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -6685,8 +6517,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 //TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
-
-'use strict';
 
 (function ($, _, window, document, undefined) {
 
@@ -6756,12 +6586,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Disable scrolling while the navbar is open
 //TODO: Close with a flick
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -6796,13 +6620,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* NAVBAR */
 
-  var Navbar = (function (_Svelto$Widget) {
-    _inherits(Navbar, _Svelto$Widget);
+  var Navbar = (function (_Svelto$Widget21) {
+    _inherits(Navbar, _Svelto$Widget21);
 
     function Navbar() {
       _classCallCheck(this, Navbar);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget21.apply(this, arguments);
     }
 
     /* BINDING */
@@ -6991,8 +6815,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -7039,8 +6861,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../n_times_action/nTimesAction.js
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -7061,12 +6881,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -7103,13 +6917,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* OVERLAY */
 
-  var Overlay = (function (_Svelto$Widget) {
-    _inherits(Overlay, _Svelto$Widget);
+  var Overlay = (function (_Svelto$Widget22) {
+    _inherits(Overlay, _Svelto$Widget22);
 
     function Overlay() {
       _classCallCheck(this, Overlay);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget22.apply(this, arguments);
     }
 
     /* BINDING */
@@ -7251,9 +7065,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   $.factory(Svelto.Overlay);
 })(jQuery, _, window, document);
-/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
-'use strict';
 
+/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
 var _self = typeof window !== 'undefined' ? window // if in browser
 : typeof WorkerGlobalScope !== 'undefined' && self instanceof WorkerGlobalScope ? self // if in worker
 : {} // if in node js
@@ -7267,466 +7080,466 @@ var _self = typeof window !== 'undefined' ? window // if in browser
 
 var Prism = (function () {
 
-	// Private helper vars
-	var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
-
-	var _ = _self.Prism = {
-		util: {
-			encode: function encode(tokens) {
-				if (tokens instanceof Token) {
-					return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
-				} else if (_.util.type(tokens) === 'Array') {
-					return tokens.map(_.util.encode);
-				} else {
-					return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
-				}
-			},
-
-			type: function type(o) {
-				return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
-			},
-
-			// Deep clone a language definition (e.g. to extend it)
-			clone: function clone(o) {
-				var type = _.util.type(o);
-
-				switch (type) {
-					case 'Object':
-						var clone = {};
-
-						for (var key in o) {
-							if (o.hasOwnProperty(key)) {
-								clone[key] = _.util.clone(o[key]);
-							}
-						}
-
-						return clone;
-
-					case 'Array':
-						// Check for existence for IE8
-						return o.map && o.map(function (v) {
-							return _.util.clone(v);
-						});
-				}
-
-				return o;
-			}
-		},
-
-		languages: {
-			extend: function extend(id, redef) {
-				var lang = _.util.clone(_.languages[id]);
-
-				for (var key in redef) {
-					lang[key] = redef[key];
-				}
-
-				return lang;
-			},
-
-			/**
-    * Insert a token before another token in a language literal
-    * As this needs to recreate the object (we cannot actually insert before keys in object literals),
-    * we cannot just provide an object, we need anobject and a key.
-    * @param inside The key (or language id) of the parent
-    * @param before The key to insert before. If not provided, the function appends instead.
-    * @param insert Object with the key/value pairs to insert
-    * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
-    */
-			insertBefore: function insertBefore(inside, before, insert, root) {
-				root = root || _.languages;
-				var grammar = root[inside];
-
-				if (arguments.length == 2) {
-					insert = arguments[1];
-
-					for (var newToken in insert) {
-						if (insert.hasOwnProperty(newToken)) {
-							grammar[newToken] = insert[newToken];
-						}
-					}
-
-					return grammar;
-				}
-
-				var ret = {};
-
-				for (var token in grammar) {
-
-					if (grammar.hasOwnProperty(token)) {
-
-						if (token == before) {
-
-							for (var newToken in insert) {
-
-								if (insert.hasOwnProperty(newToken)) {
-									ret[newToken] = insert[newToken];
-								}
-							}
-						}
-
-						ret[token] = grammar[token];
-					}
-				}
-
-				// Update references in other language definitions
-				_.languages.DFS(_.languages, function (key, value) {
-					if (value === root[inside] && key != inside) {
-						this[key] = ret;
-					}
-				});
-
-				return root[inside] = ret;
-			},
-
-			// Traverse a language definition with Depth First Search
-			DFS: function DFS(o, callback, type) {
-				for (var i in o) {
-					if (o.hasOwnProperty(i)) {
-						callback.call(o, i, o[i], type || i);
-
-						if (_.util.type(o[i]) === 'Object') {
-							_.languages.DFS(o[i], callback);
-						} else if (_.util.type(o[i]) === 'Array') {
-							_.languages.DFS(o[i], callback, i);
-						}
-					}
-				}
-			}
-		},
-		plugins: {},
-
-		highlightAll: function highlightAll(async, callback) {
-			var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
-
-			for (var i = 0, element; element = elements[i++];) {
-				_.highlightElement(element, async === true, callback);
-			}
-		},
-
-		highlightElement: function highlightElement(element, async, callback) {
-			// Find language
-			var language,
-			    grammar,
-			    parent = element;
-
-			while (parent && !lang.test(parent.className)) {
-				parent = parent.parentNode;
-			}
-
-			if (parent) {
-				language = (parent.className.match(lang) || [, ''])[1];
-				grammar = _.languages[language];
-			}
-
-			// Set language on the element, if not present
-			element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+  // Private helper vars
+  var lang = /\blang(?:uage)?-(?!\*)(\w+)\b/i;
+
+  var _ = _self.Prism = {
+    util: {
+      encode: function encode(tokens) {
+        if (tokens instanceof Token) {
+          return new Token(tokens.type, _.util.encode(tokens.content), tokens.alias);
+        } else if (_.util.type(tokens) === 'Array') {
+          return tokens.map(_.util.encode);
+        } else {
+          return tokens.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/\u00a0/g, ' ');
+        }
+      },
+
+      type: function type(o) {
+        return Object.prototype.toString.call(o).match(/\[object (\w+)\]/)[1];
+      },
+
+      // Deep clone a language definition (e.g. to extend it)
+      clone: function clone(o) {
+        var type = _.util.type(o);
+
+        switch (type) {
+          case 'Object':
+            var clone = {};
+
+            for (var key in o) {
+              if (o.hasOwnProperty(key)) {
+                clone[key] = _.util.clone(o[key]);
+              }
+            }
+
+            return clone;
+
+          case 'Array':
+            // Check for existence for IE8
+            return o.map && o.map(function (v) {
+              return _.util.clone(v);
+            });
+        }
+
+        return o;
+      }
+    },
+
+    languages: {
+      extend: function extend(id, redef) {
+        var lang = _.util.clone(_.languages[id]);
+
+        for (var key in redef) {
+          lang[key] = redef[key];
+        }
+
+        return lang;
+      },
+
+      /**
+       * Insert a token before another token in a language literal
+       * As this needs to recreate the object (we cannot actually insert before keys in object literals),
+       * we cannot just provide an object, we need anobject and a key.
+       * @param inside The key (or language id) of the parent
+       * @param before The key to insert before. If not provided, the function appends instead.
+       * @param insert Object with the key/value pairs to insert
+       * @param root The object that contains `inside`. If equal to Prism.languages, it can be omitted.
+       */
+      insertBefore: function insertBefore(inside, before, insert, root) {
+        root = root || _.languages;
+        var grammar = root[inside];
+
+        if (arguments.length == 2) {
+          insert = arguments[1];
+
+          for (var newToken in insert) {
+            if (insert.hasOwnProperty(newToken)) {
+              grammar[newToken] = insert[newToken];
+            }
+          }
+
+          return grammar;
+        }
+
+        var ret = {};
+
+        for (var token in grammar) {
+
+          if (grammar.hasOwnProperty(token)) {
+
+            if (token == before) {
+
+              for (var newToken in insert) {
+
+                if (insert.hasOwnProperty(newToken)) {
+                  ret[newToken] = insert[newToken];
+                }
+              }
+            }
+
+            ret[token] = grammar[token];
+          }
+        }
+
+        // Update references in other language definitions
+        _.languages.DFS(_.languages, function (key, value) {
+          if (value === root[inside] && key != inside) {
+            this[key] = ret;
+          }
+        });
+
+        return root[inside] = ret;
+      },
+
+      // Traverse a language definition with Depth First Search
+      DFS: function DFS(o, callback, type) {
+        for (var i in o) {
+          if (o.hasOwnProperty(i)) {
+            callback.call(o, i, o[i], type || i);
+
+            if (_.util.type(o[i]) === 'Object') {
+              _.languages.DFS(o[i], callback);
+            } else if (_.util.type(o[i]) === 'Array') {
+              _.languages.DFS(o[i], callback, i);
+            }
+          }
+        }
+      }
+    },
+    plugins: {},
+
+    highlightAll: function highlightAll(async, callback) {
+      var elements = document.querySelectorAll('code[class*="language-"], [class*="language-"] code, code[class*="lang-"], [class*="lang-"] code');
+
+      for (var i = 0, element; element = elements[i++];) {
+        _.highlightElement(element, async === true, callback);
+      }
+    },
+
+    highlightElement: function highlightElement(element, async, callback) {
+      // Find language
+      var language,
+          grammar,
+          parent = element;
+
+      while (parent && !lang.test(parent.className)) {
+        parent = parent.parentNode;
+      }
+
+      if (parent) {
+        language = (parent.className.match(lang) || [, ''])[1];
+        grammar = _.languages[language];
+      }
+
+      // Set language on the element, if not present
+      element.className = element.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
 
-			// Set language on the parent, for styling
-			parent = element.parentNode;
-
-			if (/pre/i.test(parent.nodeName)) {
-				parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
-			}
-
-			var code = element.textContent;
+      // Set language on the parent, for styling
+      parent = element.parentNode;
+
+      if (/pre/i.test(parent.nodeName)) {
+        parent.className = parent.className.replace(lang, '').replace(/\s+/g, ' ') + ' language-' + language;
+      }
+
+      var code = element.textContent;
 
-			var env = {
-				element: element,
-				language: language,
-				grammar: grammar,
-				code: code
-			};
+      var env = {
+        element: element,
+        language: language,
+        grammar: grammar,
+        code: code
+      };
 
-			if (!code || !grammar) {
-				_.hooks.run('complete', env);
-				return;
-			}
+      if (!code || !grammar) {
+        _.hooks.run('complete', env);
+        return;
+      }
 
-			_.hooks.run('before-highlight', env);
-
-			if (async && _self.Worker) {
-				var worker = new Worker(_.filename);
+      _.hooks.run('before-highlight', env);
+
+      if (async && _self.Worker) {
+        var worker = new Worker(_.filename);
 
-				worker.onmessage = function (evt) {
-					env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
+        worker.onmessage = function (evt) {
+          env.highlightedCode = Token.stringify(JSON.parse(evt.data), language);
 
-					_.hooks.run('before-insert', env);
+          _.hooks.run('before-insert', env);
 
-					env.element.innerHTML = env.highlightedCode;
+          env.element.innerHTML = env.highlightedCode;
 
-					callback && callback.call(env.element);
-					_.hooks.run('after-highlight', env);
-					_.hooks.run('complete', env);
-				};
+          callback && callback.call(env.element);
+          _.hooks.run('after-highlight', env);
+          _.hooks.run('complete', env);
+        };
 
-				worker.postMessage(JSON.stringify({
-					language: env.language,
-					code: env.code,
-					immediateClose: true
-				}));
-			} else {
-				env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
+        worker.postMessage(JSON.stringify({
+          language: env.language,
+          code: env.code,
+          immediateClose: true
+        }));
+      } else {
+        env.highlightedCode = _.highlight(env.code, env.grammar, env.language);
 
-				_.hooks.run('before-insert', env);
+        _.hooks.run('before-insert', env);
 
-				env.element.innerHTML = env.highlightedCode;
+        env.element.innerHTML = env.highlightedCode;
 
-				callback && callback.call(element);
+        callback && callback.call(element);
 
-				_.hooks.run('after-highlight', env);
-				_.hooks.run('complete', env);
-			}
-		},
+        _.hooks.run('after-highlight', env);
+        _.hooks.run('complete', env);
+      }
+    },
 
-		highlight: function highlight(text, grammar, language) {
-			var tokens = _.tokenize(text, grammar);
-			return Token.stringify(_.util.encode(tokens), language);
-		},
+    highlight: function highlight(text, grammar, language) {
+      var tokens = _.tokenize(text, grammar);
+      return Token.stringify(_.util.encode(tokens), language);
+    },
 
-		tokenize: function tokenize(text, grammar, language) {
-			var Token = _.Token;
+    tokenize: function tokenize(text, grammar, language) {
+      var Token = _.Token;
 
-			var strarr = [text];
+      var strarr = [text];
 
-			var rest = grammar.rest;
+      var rest = grammar.rest;
 
-			if (rest) {
-				for (var token in rest) {
-					grammar[token] = rest[token];
-				}
+      if (rest) {
+        for (var token in rest) {
+          grammar[token] = rest[token];
+        }
 
-				delete grammar.rest;
-			}
+        delete grammar.rest;
+      }
 
-			tokenloop: for (var token in grammar) {
-				if (!grammar.hasOwnProperty(token) || !grammar[token]) {
-					continue;
-				}
+      tokenloop: for (var token in grammar) {
+        if (!grammar.hasOwnProperty(token) || !grammar[token]) {
+          continue;
+        }
 
-				var patterns = grammar[token];
-				patterns = _.util.type(patterns) === "Array" ? patterns : [patterns];
+        var patterns = grammar[token];
+        patterns = _.util.type(patterns) === "Array" ? patterns : [patterns];
 
-				for (var j = 0; j < patterns.length; ++j) {
-					var pattern = patterns[j],
-					    inside = pattern.inside,
-					    lookbehind = !!pattern.lookbehind,
-					    lookbehindLength = 0,
-					    alias = pattern.alias;
+        for (var j = 0; j < patterns.length; ++j) {
+          var pattern = patterns[j],
+              inside = pattern.inside,
+              lookbehind = !!pattern.lookbehind,
+              lookbehindLength = 0,
+              alias = pattern.alias;
 
-					pattern = pattern.pattern || pattern;
+          pattern = pattern.pattern || pattern;
 
-					for (var i = 0; i < strarr.length; i++) {
-						// Don’t cache length as it changes during the loop
-
-						var str = strarr[i];
-
-						if (strarr.length > text.length) {
-							// Something went terribly wrong, ABORT, ABORT!
-							break tokenloop;
-						}
-
-						if (str instanceof Token) {
-							continue;
-						}
-
-						pattern.lastIndex = 0;
-
-						var match = pattern.exec(str);
-
-						if (match) {
-							if (lookbehind) {
-								lookbehindLength = match[1].length;
-							}
+          for (var i = 0; i < strarr.length; i++) {
+            // Don’t cache length as it changes during the loop
+
+            var str = strarr[i];
+
+            if (strarr.length > text.length) {
+              // Something went terribly wrong, ABORT, ABORT!
+              break tokenloop;
+            }
+
+            if (str instanceof Token) {
+              continue;
+            }
+
+            pattern.lastIndex = 0;
+
+            var match = pattern.exec(str);
+
+            if (match) {
+              if (lookbehind) {
+                lookbehindLength = match[1].length;
+              }
 
-							var from = match.index - 1 + lookbehindLength,
-							    match = match[0].slice(lookbehindLength),
-							    len = match.length,
-							    to = from + len,
-							    before = str.slice(0, from + 1),
-							    after = str.slice(to + 1);
-
-							var args = [i, 1];
-
-							if (before) {
-								args.push(before);
-							}
-
-							var wrapped = new Token(token, inside ? _.tokenize(match, inside) : match, alias);
-
-							args.push(wrapped);
-
-							if (after) {
-								args.push(after);
-							}
-
-							Array.prototype.splice.apply(strarr, args);
-						}
-					}
-				}
-			}
-
-			return strarr;
-		},
-
-		hooks: {
-			all: {},
-
-			add: function add(name, callback) {
-				var hooks = _.hooks.all;
-
-				hooks[name] = hooks[name] || [];
-
-				hooks[name].push(callback);
-			},
-
-			run: function run(name, env) {
-				var callbacks = _.hooks.all[name];
-
-				if (!callbacks || !callbacks.length) {
-					return;
-				}
-
-				for (var i = 0, callback; callback = callbacks[i++];) {
-					callback(env);
-				}
-			}
-		}
-	};
-
-	var Token = _.Token = function (type, content, alias) {
-		this.type = type;
-		this.content = content;
-		this.alias = alias;
-	};
-
-	Token.stringify = function (o, language, parent) {
-		if (typeof o == 'string') {
-			return o;
-		}
-
-		if (_.util.type(o) === 'Array') {
-			return o.map(function (element) {
-				return Token.stringify(element, language, o);
-			}).join('');
-		}
-
-		var env = {
-			type: o.type,
-			content: Token.stringify(o.content, language, parent),
-			tag: 'span',
-			classes: ['token', o.type],
-			attributes: {},
-			language: language,
-			parent: parent
-		};
-
-		if (env.type == 'comment') {
-			env.attributes['spellcheck'] = 'true';
-		}
-
-		if (o.alias) {
-			var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
-			Array.prototype.push.apply(env.classes, aliases);
-		}
-
-		_.hooks.run('wrap', env);
-
-		var attributes = '';
-
-		for (var name in env.attributes) {
-			attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
-		}
-
-		return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
-	};
-
-	if (!_self.document) {
-		if (!_self.addEventListener) {
-			// in Node.js
-			return _self.Prism;
-		}
-		// In worker
-		_self.addEventListener('message', function (evt) {
-			var message = JSON.parse(evt.data),
-			    lang = message.language,
-			    code = message.code,
-			    immediateClose = message.immediateClose;
-
-			_self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
-			if (immediateClose) {
-				_self.close();
-			}
-		}, false);
-
-		return _self.Prism;
-	}
-
-	// Get current script and highlight
-	var script = document.getElementsByTagName('script');
-
-	script = script[script.length - 1];
-
-	if (script) {
-		_.filename = script.src;
-
-		if (document.addEventListener && !script.hasAttribute('data-manual')) {
-			document.addEventListener('DOMContentLoaded', _.highlightAll);
-		}
-	}
-
-	return _self.Prism;
+              var from = match.index - 1 + lookbehindLength,
+                  match = match[0].slice(lookbehindLength),
+                  len = match.length,
+                  to = from + len,
+                  before = str.slice(0, from + 1),
+                  after = str.slice(to + 1);
+
+              var args = [i, 1];
+
+              if (before) {
+                args.push(before);
+              }
+
+              var wrapped = new Token(token, inside ? _.tokenize(match, inside) : match, alias);
+
+              args.push(wrapped);
+
+              if (after) {
+                args.push(after);
+              }
+
+              Array.prototype.splice.apply(strarr, args);
+            }
+          }
+        }
+      }
+
+      return strarr;
+    },
+
+    hooks: {
+      all: {},
+
+      add: function add(name, callback) {
+        var hooks = _.hooks.all;
+
+        hooks[name] = hooks[name] || [];
+
+        hooks[name].push(callback);
+      },
+
+      run: function run(name, env) {
+        var callbacks = _.hooks.all[name];
+
+        if (!callbacks || !callbacks.length) {
+          return;
+        }
+
+        for (var i = 0, callback; callback = callbacks[i++];) {
+          callback(env);
+        }
+      }
+    }
+  };
+
+  var Token = _.Token = function (type, content, alias) {
+    this.type = type;
+    this.content = content;
+    this.alias = alias;
+  };
+
+  Token.stringify = function (o, language, parent) {
+    if (typeof o == 'string') {
+      return o;
+    }
+
+    if (_.util.type(o) === 'Array') {
+      return o.map(function (element) {
+        return Token.stringify(element, language, o);
+      }).join('');
+    }
+
+    var env = {
+      type: o.type,
+      content: Token.stringify(o.content, language, parent),
+      tag: 'span',
+      classes: ['token', o.type],
+      attributes: {},
+      language: language,
+      parent: parent
+    };
+
+    if (env.type == 'comment') {
+      env.attributes['spellcheck'] = 'true';
+    }
+
+    if (o.alias) {
+      var aliases = _.util.type(o.alias) === 'Array' ? o.alias : [o.alias];
+      Array.prototype.push.apply(env.classes, aliases);
+    }
+
+    _.hooks.run('wrap', env);
+
+    var attributes = '';
+
+    for (var name in env.attributes) {
+      attributes += (attributes ? ' ' : '') + name + '="' + (env.attributes[name] || '') + '"';
+    }
+
+    return '<' + env.tag + ' class="' + env.classes.join(' ') + '" ' + attributes + '>' + env.content + '</' + env.tag + '>';
+  };
+
+  if (!_self.document) {
+    if (!_self.addEventListener) {
+      // in Node.js
+      return _self.Prism;
+    }
+    // In worker
+    _self.addEventListener('message', function (evt) {
+      var message = JSON.parse(evt.data),
+          lang = message.language,
+          code = message.code,
+          immediateClose = message.immediateClose;
+
+      _self.postMessage(JSON.stringify(_.util.encode(_.tokenize(code, _.languages[lang]))));
+      if (immediateClose) {
+        _self.close();
+      }
+    }, false);
+
+    return _self.Prism;
+  }
+
+  // Get current script and highlight
+  var script = document.getElementsByTagName('script');
+
+  script = script[script.length - 1];
+
+  if (script) {
+    _.filename = script.src;
+
+    if (document.addEventListener && !script.hasAttribute('data-manual')) {
+      document.addEventListener('DOMContentLoaded', _.highlightAll);
+    }
+  }
+
+  return _self.Prism;
 })();
 
 if (typeof module !== 'undefined' && module.exports) {
-	module.exports = Prism;
+  module.exports = Prism;
 }
 
 // hack for components to work correctly in node.js
 if (typeof global !== 'undefined') {
-	global.Prism = Prism;
+  global.Prism = Prism;
 }
 ;
 Prism.languages.markup = {
-	'comment': /<!--[\w\W]*?-->/,
-	'prolog': /<\?[\w\W]+?\?>/,
-	'doctype': /<!DOCTYPE[\w\W]+?>/,
-	'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
-	'tag': {
-		pattern: /<\/?[^\s>\/=.]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
-		inside: {
-			'tag': {
-				pattern: /^<\/?[^\s>\/]+/i,
-				inside: {
-					'punctuation': /^<\/?/,
-					'namespace': /^[^\s>\/:]+:/
-				}
-			},
-			'attr-value': {
-				pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
-				inside: {
-					'punctuation': /[=>"']/
-				}
-			},
-			'punctuation': /\/?>/,
-			'attr-name': {
-				pattern: /[^\s>\/]+/,
-				inside: {
-					'namespace': /^[^\s>\/:]+:/
-				}
-			}
+  'comment': /<!--[\w\W]*?-->/,
+  'prolog': /<\?[\w\W]+?\?>/,
+  'doctype': /<!DOCTYPE[\w\W]+?>/,
+  'cdata': /<!\[CDATA\[[\w\W]*?]]>/i,
+  'tag': {
+    pattern: /<\/?[^\s>\/=.]+(?:\s+[^\s>\/=]+(?:=(?:("|')(?:\\\1|\\?(?!\1)[\w\W])*\1|[^\s'">=]+))?)*\s*\/?>/i,
+    inside: {
+      'tag': {
+        pattern: /^<\/?[^\s>\/]+/i,
+        inside: {
+          'punctuation': /^<\/?/,
+          'namespace': /^[^\s>\/:]+:/
+        }
+      },
+      'attr-value': {
+        pattern: /=(?:('|")[\w\W]*?(\1)|[^\s>]+)/i,
+        inside: {
+          'punctuation': /[=>"']/
+        }
+      },
+      'punctuation': /\/?>/,
+      'attr-name': {
+        pattern: /[^\s>\/]+/,
+        inside: {
+          'namespace': /^[^\s>\/:]+:/
+        }
+      }
 
-		}
-	},
-	'entity': /&#?[\da-z]{1,8};/i
+    }
+  },
+  'entity': /&#?[\da-z]{1,8};/i
 };
 
 // Plugin to make entity title show the real entity, idea by Roman Komarov
 Prism.hooks.add('wrap', function (env) {
 
-	if (env.type === 'entity') {
-		env.attributes['title'] = env.content.replace(/&amp;/, '&');
-	}
+  if (env.type === 'entity') {
+    env.attributes['title'] = env.content.replace(/&amp;/, '&');
+  }
 });
 
 Prism.languages.xml = Prism.languages.markup;
@@ -7735,129 +7548,129 @@ Prism.languages.mathml = Prism.languages.markup;
 Prism.languages.svg = Prism.languages.markup;
 
 Prism.languages.css = {
-	'comment': /\/\*[\w\W]*?\*\//,
-	'atrule': {
-		pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
-		inside: {
-			'rule': /@[\w-]+/
-			// See rest below
-		}
-	},
-	'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
-	'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
-	'string': /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
-	'property': /(\b|\B)[\w-]+(?=\s*:)/i,
-	'important': /\B!important\b/i,
-	'function': /[-a-z0-9]+(?=\()/i,
-	'punctuation': /[(){};:]/
+  'comment': /\/\*[\w\W]*?\*\//,
+  'atrule': {
+    pattern: /@[\w-]+?.*?(;|(?=\s*\{))/i,
+    inside: {
+      'rule': /@[\w-]+/
+      // See rest below
+    }
+  },
+  'url': /url\((?:(["'])(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1|.*?)\)/i,
+  'selector': /[^\{\}\s][^\{\};]*?(?=\s*\{)/,
+  'string': /("|')(\\(?:\r\n|[\w\W])|(?!\1)[^\\\r\n])*\1/,
+  'property': /(\b|\B)[\w-]+(?=\s*:)/i,
+  'important': /\B!important\b/i,
+  'function': /[-a-z0-9]+(?=\()/i,
+  'punctuation': /[(){};:]/
 };
 
 Prism.languages.css['atrule'].inside.rest = Prism.util.clone(Prism.languages.css);
 
 if (Prism.languages.markup) {
-	Prism.languages.insertBefore('markup', 'tag', {
-		'style': {
-			pattern: /<style[\w\W]*?>[\w\W]*?<\/style>/i,
-			inside: {
-				'tag': {
-					pattern: /<style[\w\W]*?>|<\/style>/i,
-					inside: Prism.languages.markup.tag.inside
-				},
-				rest: Prism.languages.css
-			},
-			alias: 'language-css'
-		}
-	});
+  Prism.languages.insertBefore('markup', 'tag', {
+    'style': {
+      pattern: /<style[\w\W]*?>[\w\W]*?<\/style>/i,
+      inside: {
+        'tag': {
+          pattern: /<style[\w\W]*?>|<\/style>/i,
+          inside: Prism.languages.markup.tag.inside
+        },
+        rest: Prism.languages.css
+      },
+      alias: 'language-css'
+    }
+  });
 
-	Prism.languages.insertBefore('inside', 'attr-value', {
-		'style-attr': {
-			pattern: /\s*style=("|').*?\1/i,
-			inside: {
-				'attr-name': {
-					pattern: /^\s*style/i,
-					inside: Prism.languages.markup.tag.inside
-				},
-				'punctuation': /^\s*=\s*['"]|['"]\s*$/,
-				'attr-value': {
-					pattern: /.+/i,
-					inside: Prism.languages.css
-				}
-			},
-			alias: 'language-css'
-		}
-	}, Prism.languages.markup.tag);
+  Prism.languages.insertBefore('inside', 'attr-value', {
+    'style-attr': {
+      pattern: /\s*style=("|').*?\1/i,
+      inside: {
+        'attr-name': {
+          pattern: /^\s*style/i,
+          inside: Prism.languages.markup.tag.inside
+        },
+        'punctuation': /^\s*=\s*['"]|['"]\s*$/,
+        'attr-value': {
+          pattern: /.+/i,
+          inside: Prism.languages.css
+        }
+      },
+      alias: 'language-css'
+    }
+  }, Prism.languages.markup.tag);
 };
 Prism.languages.clike = {
-	'comment': [{
-		pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
-		lookbehind: true
-	}, {
-		pattern: /(^|[^\\:])\/\/.*/,
-		lookbehind: true
-	}],
-	'string': /("|')(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
-	'class-name': {
-		pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
-		lookbehind: true,
-		inside: {
-			punctuation: /(\.|\\)/
-		}
-	},
-	'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
-	'boolean': /\b(true|false)\b/,
-	'function': /[a-z0-9_]+(?=\()/i,
-	'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
-	'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
-	'punctuation': /[{}[\];(),.:]/
+  'comment': [{
+    pattern: /(^|[^\\])\/\*[\w\W]*?\*\//,
+    lookbehind: true
+  }, {
+    pattern: /(^|[^\\:])\/\/.*/,
+    lookbehind: true
+  }],
+  'string': /("|')(\\(?:\r\n|[\s\S])|(?!\1)[^\\\r\n])*\1/,
+  'class-name': {
+    pattern: /((?:\b(?:class|interface|extends|implements|trait|instanceof|new)\s+)|(?:catch\s+\())[a-z0-9_\.\\]+/i,
+    lookbehind: true,
+    inside: {
+      punctuation: /(\.|\\)/
+    }
+  },
+  'keyword': /\b(if|else|while|do|for|return|in|instanceof|function|new|try|throw|catch|finally|null|break|continue)\b/,
+  'boolean': /\b(true|false)\b/,
+  'function': /[a-z0-9_]+(?=\()/i,
+  'number': /\b-?(?:0x[\da-f]+|\d*\.?\d+(?:e[+-]?\d+)?)\b/i,
+  'operator': /--?|\+\+?|!=?=?|<=?|>=?|==?=?|&&?|\|\|?|\?|\*|\/|~|\^|%/,
+  'punctuation': /[{}[\];(),.:]/
 };
 
 Prism.languages.javascript = Prism.languages.extend('clike', {
-	'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/,
-	'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
-	// Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
-	'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i
+  'keyword': /\b(as|async|await|break|case|catch|class|const|continue|debugger|default|delete|do|else|enum|export|extends|false|finally|for|from|function|get|if|implements|import|in|instanceof|interface|let|new|null|of|package|private|protected|public|return|set|static|super|switch|this|throw|true|try|typeof|var|void|while|with|yield)\b/,
+  'number': /\b-?(0x[\dA-Fa-f]+|0b[01]+|0o[0-7]+|\d*\.?\d+([Ee][+-]?\d+)?|NaN|Infinity)\b/,
+  // Allow for all non-ASCII characters (See http://stackoverflow.com/a/2008444)
+  'function': /[_$a-zA-Z\xA0-\uFFFF][_$a-zA-Z0-9\xA0-\uFFFF]*(?=\()/i
 });
 
 Prism.languages.insertBefore('javascript', 'keyword', {
-	'regex': {
-		pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
-		lookbehind: true
-	}
+  'regex': {
+    pattern: /(^|[^/])\/(?!\/)(\[.+?]|\\.|[^/\\\r\n])+\/[gimyu]{0,5}(?=\s*($|[\r\n,.;})]))/,
+    lookbehind: true
+  }
 });
 
 Prism.languages.insertBefore('javascript', 'class-name', {
-	'template-string': {
-		pattern: /`(?:\\`|\\?[^`])*`/,
-		inside: {
-			'interpolation': {
-				pattern: /\$\{[^}]+\}/,
-				inside: {
-					'interpolation-punctuation': {
-						pattern: /^\$\{|\}$/,
-						alias: 'punctuation'
-					},
-					rest: Prism.languages.javascript
-				}
-			},
-			'string': /[\s\S]+/
-		}
-	}
+  'template-string': {
+    pattern: /`(?:\\`|\\?[^`])*`/,
+    inside: {
+      'interpolation': {
+        pattern: /\$\{[^}]+\}/,
+        inside: {
+          'interpolation-punctuation': {
+            pattern: /^\$\{|\}$/,
+            alias: 'punctuation'
+          },
+          rest: Prism.languages.javascript
+        }
+      },
+      'string': /[\s\S]+/
+    }
+  }
 });
 
 if (Prism.languages.markup) {
-	Prism.languages.insertBefore('markup', 'tag', {
-		'script': {
-			pattern: /<script[\w\W]*?>[\w\W]*?<\/script>/i,
-			inside: {
-				'tag': {
-					pattern: /<script[\w\W]*?>|<\/script>/i,
-					inside: Prism.languages.markup.tag.inside
-				},
-				rest: Prism.languages.javascript
-			},
-			alias: 'language-javascript'
-		}
-	});
+  Prism.languages.insertBefore('markup', 'tag', {
+    'script': {
+      pattern: /<script[\w\W]*?>[\w\W]*?<\/script>/i,
+      inside: {
+        'tag': {
+          pattern: /<script[\w\W]*?>|<\/script>/i,
+          inside: Prism.languages.markup.tag.inside
+        },
+        rest: Prism.languages.javascript
+      },
+      alias: 'language-javascript'
+    }
+  });
 }
 
 Prism.languages.js = Prism.languages.javascript;
@@ -7870,12 +7683,6 @@ Prism.languages.js = Prism.languages.javascript;
 * =========================================================================
 * @requires ../widget/factory.js
 * ========================================================================= */
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -7924,13 +7731,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* PROGRESSBAR */
 
-  var Progressbar = (function (_Svelto$Widget) {
-    _inherits(Progressbar, _Svelto$Widget);
+  var Progressbar = (function (_Svelto$Widget23) {
+    _inherits(Progressbar, _Svelto$Widget23);
 
     function Progressbar() {
       _classCallCheck(this, Progressbar);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget23.apply(this, arguments);
     }
 
     /* BINDING */
@@ -8055,12 +7862,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -8090,13 +7891,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* RADIO */
 
-  var Radio = (function (_Svelto$Widget) {
-    _inherits(Radio, _Svelto$Widget);
+  var Radio = (function (_Svelto$Widget24) {
+    _inherits(Radio, _Svelto$Widget24);
 
     function Radio() {
       _classCallCheck(this, Radio);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget24.apply(this, arguments);
     }
 
     /* BINDING */
@@ -8208,12 +8009,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -8241,13 +8036,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SELECT */
 
-  var Rater = (function (_Svelto$Widget) {
-    _inherits(Rater, _Svelto$Widget);
+  var Rater = (function (_Svelto$Widget25) {
+    _inherits(Rater, _Svelto$Widget25);
 
     function Rater() {
       _classCallCheck(this, Rater);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget25.apply(this, arguments);
     }
 
     /* BINDING */
@@ -8367,12 +8162,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -8404,13 +8193,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* RIPPLE */
 
-  var Ripple = (function (_Svelto$Widget) {
-    _inherits(Ripple, _Svelto$Widget);
+  var Ripple = (function (_Svelto$Widget26) {
+    _inherits(Ripple, _Svelto$Widget26);
 
     function Ripple() {
       _classCallCheck(this, Ripple);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget26.apply(this, arguments);
     }
 
     /* BINDING */
@@ -8454,20 +8243,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     Ripple.prototype.__upCancel = function __upCancel(event) {
 
-      for (var _iterator = this.circles, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator10 = this.circles, _isArray10 = Array.isArray(_iterator10), _i10 = 0, _iterator10 = _isArray10 ? _iterator10 : _iterator10[Symbol.iterator]();;) {
+        var _ref10;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+        if (_isArray10) {
+          if (_i10 >= _iterator10.length) break;
+          _ref10 = _iterator10[_i10++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
+          _i10 = _iterator10.next();
+          if (_i10.done) break;
+          _ref10 = _i10.value;
         }
 
-        var $circle = _ref[0];
-        var before = _ref[1];
+        var $circle = _ref10[0];
+        var before = _ref10[1];
 
         this._hide($circle, before);
       }
@@ -8536,12 +8325,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -8579,13 +8362,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SELECT */
 
-  var Select = (function (_Svelto$Widget) {
-    _inherits(Select, _Svelto$Widget);
+  var Select = (function (_Svelto$Widget27) {
+    _inherits(Select, _Svelto$Widget27);
 
     function Select() {
       _classCallCheck(this, Select);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget27.apply(this, arguments);
     }
 
     /* BINDING */
@@ -8670,19 +8453,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       var previousOptgroup = undefined,
           currentOptgroup = undefined;
 
-      for (var _iterator = this.$options, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator11 = this.$options, _isArray11 = Array.isArray(_iterator11), _i11 = 0, _iterator11 = _isArray11 ? _iterator11 : _iterator11[Symbol.iterator]();;) {
+        var _ref11;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+        if (_isArray11) {
+          if (_i11 >= _iterator11.length) break;
+          _ref11 = _iterator11[_i11++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
+          _i11 = _iterator11.next();
+          if (_i11.done) break;
+          _ref11 = _i11.value;
         }
 
-        var option = _ref;
+        var option = _ref11;
 
         var $option = $(option),
             $parent = $option.parent();
@@ -8805,12 +8588,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //FIXME: It doens't work without the cmd/ctrl key on desktop
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -8837,13 +8614,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SELECTABLE */
 
-  var Selectable = (function (_Svelto$Widget) {
-    _inherits(Selectable, _Svelto$Widget);
+  var Selectable = (function (_Svelto$Widget28) {
+    _inherits(Selectable, _Svelto$Widget28);
 
     function Selectable() {
       _classCallCheck(this, Selectable);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget28.apply(this, arguments);
     }
 
     /* BINDING */
@@ -9113,12 +8890,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -9151,13 +8922,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SLIDER */
 
-  var Slider = (function (_Svelto$Widget) {
-    _inherits(Slider, _Svelto$Widget);
+  var Slider = (function (_Svelto$Widget29) {
+    _inherits(Slider, _Svelto$Widget29);
 
     function Slider() {
       _classCallCheck(this, Slider);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget29.apply(this, arguments);
     }
 
     /* BINDING */
@@ -9398,12 +9169,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //TODO: Add support for sorting other things other than tables
 //TODO: If possible sort using flexbox's `order` property
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -9448,13 +9213,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SORTABLE */
 
-  var Sortable = (function (_Svelto$Widget) {
-    _inherits(Sortable, _Svelto$Widget);
+  var Sortable = (function (_Svelto$Widget30) {
+    _inherits(Sortable, _Svelto$Widget30);
 
     function Sortable() {
       _classCallCheck(this, Sortable);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget30.apply(this, arguments);
     }
 
     /* BINDING */
@@ -9657,12 +9422,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -9691,13 +9450,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* STEPPER */
 
-  var Stepper = (function (_Svelto$Widget) {
-    _inherits(Stepper, _Svelto$Widget);
+  var Stepper = (function (_Svelto$Widget31) {
+    _inherits(Stepper, _Svelto$Widget31);
 
     function Stepper() {
       _classCallCheck(this, Stepper);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget31.apply(this, arguments);
     }
 
     /* BINDING */
@@ -9901,12 +9660,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 ;(function ($, window, document, undefined) {
 
   'use strict';
@@ -9938,13 +9691,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* SWITCH */
 
-  var Switch = (function (_Svelto$Widget) {
-    _inherits(Switch, _Svelto$Widget);
+  var Switch = (function (_Svelto$Widget32) {
+    _inherits(Switch, _Svelto$Widget32);
 
     function Switch() {
       _classCallCheck(this, Switch);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget32.apply(this, arguments);
     }
 
     /* BINDING */
@@ -10152,12 +9905,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -10190,13 +9937,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* TABLE HELPER */
 
-  var TableHelper = (function (_Svelto$Widget) {
-    _inherits(TableHelper, _Svelto$Widget);
+  var TableHelper = (function (_Svelto$Widget33) {
+    _inherits(TableHelper, _Svelto$Widget33);
 
     function TableHelper() {
       _classCallCheck(this, TableHelper);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget33.apply(this, arguments);
     }
 
     /* BINDING */
@@ -10366,12 +10113,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
 //TODO: Add again the indicator
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -10401,13 +10142,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* TABS */
 
-  var Tabs = (function (_Svelto$Widget) {
-    _inherits(Tabs, _Svelto$Widget);
+  var Tabs = (function (_Svelto$Widget34) {
+    _inherits(Tabs, _Svelto$Widget34);
 
     function Tabs() {
       _classCallCheck(this, Tabs);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget34.apply(this, arguments);
     }
 
     /* BINDING */
@@ -10531,12 +10272,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
 //FIXME: Partial's text cursor is not visible whan it's empty
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -10584,13 +10319,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* TAGBOX */
 
-  var Tagbox = (function (_Svelto$Widget) {
-    _inherits(Tagbox, _Svelto$Widget);
+  var Tagbox = (function (_Svelto$Widget35) {
+    _inherits(Tagbox, _Svelto$Widget35);
 
     function Tagbox() {
       _classCallCheck(this, Tagbox);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget35.apply(this, arguments);
     }
 
     /* BINDING */
@@ -10997,12 +10732,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../widget/factory.js
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -11022,13 +10751,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
   /* TIME AGO */
 
-  var TimeAgo = (function (_Svelto$Widget) {
-    _inherits(TimeAgo, _Svelto$Widget);
+  var TimeAgo = (function (_Svelto$Widget36) {
+    _inherits(TimeAgo, _Svelto$Widget36);
 
     function TimeAgo() {
       _classCallCheck(this, TimeAgo);
 
-      _Svelto$Widget.apply(this, arguments);
+      _Svelto$Widget36.apply(this, arguments);
     }
 
     /* BINDING */
@@ -11106,10 +10835,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
  * ========================================================================= */
 
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -11117,13 +10842,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* TIMER */
 
   window.Timer = (function () {
-    function _class() {
-      _classCallCheck(this, _class);
+    function _class4() {
+      _classCallCheck(this, _class4);
 
       this.set.apply(this, arguments);
     }
 
-    _class.prototype.set = function set(fn, time, autostart) {
+    _class4.prototype.set = function set(fn, time, autostart) {
 
       this.init = true;
       this.action = fn;
@@ -11142,8 +10867,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    _class.prototype.once = function once(time) {
-      var _this = this;
+    _class4.prototype.once = function once(time) {
+      var _this8 = this;
 
       if (isNaN(time)) {
 
@@ -11151,13 +10876,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
 
       setTimeout(function () {
-        return _this.action();
+        return _this8.action();
       }, time);
 
       return this;
     };
 
-    _class.prototype.play = function play(reset) {
+    _class4.prototype.play = function play(reset) {
 
       if (!this.isActive) {
 
@@ -11175,7 +10900,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    _class.prototype.pause = function pause() {
+    _class4.prototype.pause = function pause() {
 
       if (this.isActive) {
 
@@ -11187,7 +10912,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    _class.prototype.stop = function stop() {
+    _class4.prototype.stop = function stop() {
 
       this.isActive = false;
       this.remainingTime = this.intervalTime;
@@ -11196,7 +10921,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    _class.prototype.toggle = function toggle(reset) {
+    _class4.prototype.toggle = function toggle(reset) {
 
       if (this.isActive) {
 
@@ -11212,7 +10937,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    _class.prototype.reset = function reset() {
+    _class4.prototype.reset = function reset() {
 
       this.isActive = false;
       this.play(true);
@@ -11220,13 +10945,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    _class.prototype.clearTimer = function clearTimer() {
+    _class4.prototype.clearTimer = function clearTimer() {
 
       clearTimeout(this.timeoutObject);
     };
 
-    _class.prototype.setTimer = function setTimer(time) {
-      var _this2 = this;
+    _class4.prototype.setTimer = function setTimer(time) {
+      var _this9 = this;
 
       if (isNaN(time)) {
 
@@ -11238,11 +10963,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.clearTimer();
 
       this.timeoutObject = setTimeout(function () {
-        return _this2.go();
+        return _this9.go();
       }, time);
     };
 
-    _class.prototype.go = function go() {
+    _class4.prototype.go = function go() {
 
       if (this.isActive) {
 
@@ -11251,7 +10976,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     };
 
-    _class.prototype.remaining = function remaining(value) {
+    _class4.prototype.remaining = function remaining(value) {
 
       if (_.isUndefined(value)) {
 
@@ -11263,7 +10988,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this;
     };
 
-    return _class;
+    return _class4;
   })();
 })(jQuery, _, window, document);
 
@@ -11275,12 +11000,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
-
-'use strict';
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError('Cannot call a class as a function'); } }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== 'function' && superClass !== null) { throw new TypeError('Super expression must either be null or a function, not ' + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 (function ($, _, window, document, undefined) {
 
@@ -11346,8 +11065,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
  * @requires ../bteach/btEach.js
  * ========================================================================= */
 
-'use strict';
-
 (function ($, _, window, document, undefined) {
 
   'use strict';
@@ -11385,19 +11102,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       var result = false;
 
-      for (var _iterator = $searchable, _isArray = Array.isArray(_iterator), _i = 0, _iterator = _isArray ? _iterator : _iterator[Symbol.iterator]();;) {
-        var _ref;
+      for (var _iterator12 = $searchable, _isArray12 = Array.isArray(_iterator12), _i12 = 0, _iterator12 = _isArray12 ? _iterator12 : _iterator12[Symbol.iterator]();;) {
+        var _ref12;
 
-        if (_isArray) {
-          if (_i >= _iterator.length) break;
-          _ref = _iterator[_i++];
+        if (_isArray12) {
+          if (_i12 >= _iterator12.length) break;
+          _ref12 = _iterator12[_i12++];
         } else {
-          _i = _iterator.next();
-          if (_i.done) break;
-          _ref = _i.value;
+          _i12 = _iterator12.next();
+          if (_i12.done) break;
+          _ref12 = _i12.value;
         }
 
-        var searchable = _ref;
+        var searchable = _ref12;
 
         var rect2 = $.getRect(searchable),
             area = $.getOverlappingArea(rect1, rect2);
@@ -11456,19 +11173,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         return $touched || $empty;
       } else {
 
-        for (var _iterator2 = $searchable, _isArray2 = Array.isArray(_iterator2), _i2 = 0, _iterator2 = _isArray2 ? _iterator2 : _iterator2[Symbol.iterator]();;) {
-          var _ref2;
+        for (var _iterator13 = $searchable, _isArray13 = Array.isArray(_iterator13), _i13 = 0, _iterator13 = _isArray13 ? _iterator13 : _iterator13[Symbol.iterator]();;) {
+          var _ref13;
 
-          if (_isArray2) {
-            if (_i2 >= _iterator2.length) break;
-            _ref2 = _iterator2[_i2++];
+          if (_isArray13) {
+            if (_i13 >= _iterator13.length) break;
+            _ref13 = _iterator13[_i13++];
           } else {
-            _i2 = _iterator2.next();
-            if (_i2.done) break;
-            _ref2 = _i2.value;
+            _i13 = _iterator13.next();
+            if (_i13.done) break;
+            _ref13 = _i13.value;
           }
 
-          var searchable = _ref2;
+          var searchable = _ref13;
 
           var rect = $.getRect(searchable);
 

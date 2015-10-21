@@ -23,3 +23,10 @@
   }
 
 }
+
+/* WIDGET (PSEUDO ELEMENT) */ //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+
+.widget-pseudo {
+  position: relative;
+  margin: 0 0 $gutter;
+}

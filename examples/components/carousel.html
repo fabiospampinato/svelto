@@ -13,10 +13,15 @@ function carousel_api ( action ) {
 }  
 function carousel_set () {
   $('.carousel').carousel ( 'set', Number($('input[name="input_index"]').val ()) );
-}</script><script>window.onerror = function ( message, file, line ) {
-  try {
-    $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
-  } catch ( e ) {
-    alert ( file + ':' + line + '\n\n' + message );
+}</script><script>var prevErrorId = '';
+window.onerror = function ( message, file, line ) {
+  var errorId = message + file + line;
+  if ( errorId !== prevErrorId ) {
+    prevErrorId = errorId;
+    try {
+      $.noty ({ body: 'File: ' + file + '<br/>Line: ' + line + '<br/>Message: ' + message, ttl: 'forever', color: 'red' });
+    } catch ( e ) {
+      alert ( file + ':' + line + '\n\n' + message );
+    }
   }
 };</script></body></html>

@@ -164,15 +164,18 @@
 
         if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
 
+          let orientation,
+              direction;
+
           if ( absDeltaXY.X > absDeltaXY.Y ) {
 
-            let orientation = 'horizontal',
-                direction = ( deltaXY.X > 0 ) ? 1 : -1;
+            orientation = 'horizontal',
+            direction = ( deltaXY.X > 0 ) ? 1 : -1;
 
           } else {
 
-            let orientation = 'vertical',
-                direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+            orientation = 'vertical',
+            direction = ( deltaXY.Y > 0 ) ? 1 : -1;
 
           }
 
