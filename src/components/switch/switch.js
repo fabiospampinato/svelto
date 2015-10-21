@@ -128,15 +128,15 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.LEFT:
+        case UI.keyCode.LEFT:
           this.uncheck ();
           break;
 
-        case $.ui.keyCode.RIGHT:
+        case UI.keyCode.RIGHT:
           this.check ();
           break;
 
-        case $.ui.keyCode.SPACE:
+        case UI.keyCode.SPACE:
           this.toggle ();
           break;
 

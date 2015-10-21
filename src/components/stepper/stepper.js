@@ -158,11 +158,11 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.UP:
+        case UI.keyCode.UP:
           this.increase ();
           break;
 
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.DOWN:
           this.decrease ();
           break;
 

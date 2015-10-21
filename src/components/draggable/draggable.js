@@ -270,7 +270,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === $.ui.mouseButton.LEFT ) ) {
+        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === UI.mouseButton.LEFT ) ) {
 
           var endXY = $.eventXY ( event ),
               modifiedXY = this._centerToPoint ( endXY, true );

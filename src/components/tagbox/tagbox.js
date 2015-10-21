@@ -46,7 +46,7 @@
       characters: {
         forbidden: [ '<', '>', ';', '`' ],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //INFO: They are keyCodes
+        inserters: [UI.keyCode.ENTER, UI.keyCode.TAB] //INFO: They are keyCodes
       },
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
       escape: true, //INFO: Escape potential XSS characters
@@ -253,7 +253,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-      } else if ( event.keyCode === $.ui.keyCode.BACKSPACE ) {
+      } else if ( event.keyCode === UI.keyCode.BACKSPACE ) {
 
         if ( value.length === 0 && this.options.tags.length > 0 ) {
 

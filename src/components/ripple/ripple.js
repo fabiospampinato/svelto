@@ -74,7 +74,7 @@
 
     __down ( event ) {
 
-      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
+      if ( event.button && event.button !== UI.mouseButton.LEFT ) return;
 
       this._show ( event );
 

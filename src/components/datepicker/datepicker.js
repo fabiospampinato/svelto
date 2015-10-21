@@ -144,13 +144,13 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.UP:
-        case $.ui.keyCode.LEFT:
+        case UI.keyCode.UP:
+        case UI.keyCode.LEFT:
           this.prevMonth ();
           break;
 
-        case $.ui.keyCode.RIGHT:
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.RIGHT:
+        case UI.keyCode.DOWN:
           this.nextMonth ();
           break;
 
@@ -182,7 +182,7 @@
 
     __dayTap ( event, node ) {
 
-      if ( event.button && event.button !== $.ui.mouseButton.LEFT ) return;
+      if ( event.button && event.button !== UI.mouseButton.LEFT ) return;
 
       let day = parseInt ( $(node).html (), 10 );
 

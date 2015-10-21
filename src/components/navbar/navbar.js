@@ -119,7 +119,7 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.ESCAPE:
+        case UI.keyCode.ESCAPE:
           this.close ();
           break;
 

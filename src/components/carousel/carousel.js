@@ -35,7 +35,7 @@
         item: ' > *'
       },
       animations: {
-        cycle: $.ui.animation.normal
+        cycle: UI.animation.normal
       },
       callbacks: {
         change () {}
@@ -133,14 +133,14 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.LEFT:
-        case $.ui.keyCode.UP:
+        case UI.keyCode.LEFT:
+        case UI.keyCode.UP:
           this.previous ();
           break;
 
-        case $.ui.keyCode.RIGHT:
-        case $.ui.keyCode.DOWN:
-        case $.ui.keyCode.SPACE:
+        case UI.keyCode.RIGHT:
+        case UI.keyCode.DOWN:
+        case UI.keyCode.SPACE:
           this.next ();
           break;
 

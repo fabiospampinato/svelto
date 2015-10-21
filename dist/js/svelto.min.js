@@ -504,39 +504,89 @@
 
   /* UI */
 
-  $.ui = {
-    keyCode: {
-      BACKSPACE: 8,
-      COMMA: 188,
-      DELETE: 46,
-      DOWN: 40,
-      END: 35,
-      ENTER: 13,
-      ESCAPE: 27,
-      HOME: 36,
-      LEFT: 37,
-      PAGE_DOWN: 34,
-      PAGE_UP: 33,
-      PERIOD: 190,
-      RIGHT: 39,
-      SPACE: 32,
-      TAB: 9,
-      UP: 38
-    },
-    mouseButton: {
-      LEFT: 0,
-      MIDDLE: 1,
-      RIGHT: 2
-    }
+  window.UI = {};
+
+  /* KEY CODE */
+
+  UI.keyCode = {
+    BACKSPACE: 8,
+    COMMA: 188,
+    DELETE: 46,
+    DOWN: 40,
+    END: 35,
+    ENTER: 13,
+    ESCAPE: 27,
+    HOME: 36,
+    LEFT: 37,
+    PAGE_DOWN: 34,
+    PAGE_UP: 33,
+    PERIOD: 190,
+    RIGHT: 39,
+    SPACE: 32,
+    TAB: 9,
+    UP: 38
+  };
+
+  /* MOUSE BUTTON */
+
+  UI.mouseButton = {
+    LEFT: 0,
+    MIDDLE: 1,
+    RIGHT: 2
   };
 
   /* ANIMATION */
 
-  $.ui.animation = {
+  UI.animation = {
     slow: 500,
     normal: 350,
     fast: 150
   };
+
+  /* COLORS */
+
+  UI.colors = {
+    primary: '#1565c0',
+    secondary: '#ef6c00',
+    tertiary: '#6a1b9a',
+    quaternary: '#2e7d32',
+
+    white: '#ffffff',
+    gray: '#e0e0e0',
+    black: '#212121',
+    yellow: '#fabf40',
+    olive: '#cddc39',
+    green: '#4caf50',
+    blue: '#2196f3',
+    violet: '#673ab7',
+    orange: '#ff9800',
+    purple: '#9c27b0',
+    red: '#f44336',
+    pink: '#e91e63',
+    teal: '#009688',
+    brown: '#795548',
+
+    error: '#f44336',
+    warning: '#fabf40',
+    success: '#4caf50',
+
+    transparent: 'rgba(0, 0, 0, 0)',
+    base: '#eceff1'
+  };
+})(jQuery, _, window, document);
+
+/* =========================================================================
+ * Svelto - Svelto
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+'use strict';
+
+(function ($, _, window, document, undefined) {
+
+  'use strict';
 
   /* SVELTO */
 
@@ -556,6 +606,7 @@
  * @requires ../extras/jQuery-extra.js
  * @requires ../pseudo_css/pseudoCss.js
  * @requires ../ui/ui.js
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /* =========================================================================
@@ -2313,7 +2364,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         item: ' > *'
       },
       animations: {
-        cycle: $.ui.animation.normal
+        cycle: UI.animation.normal
       },
       callbacks: {
         change: function change() {}
@@ -2412,14 +2463,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.LEFT:
-        case $.ui.keyCode.UP:
+        case UI.keyCode.LEFT:
+        case UI.keyCode.UP:
           this.previous();
           break;
 
-        case $.ui.keyCode.RIGHT:
-        case $.ui.keyCode.DOWN:
-        case $.ui.keyCode.SPACE:
+        case UI.keyCode.RIGHT:
+        case UI.keyCode.DOWN:
+        case UI.keyCode.SPACE:
           this.next();
           break;
 
@@ -3161,19 +3212,19 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.UP:
+        case UI.keyCode.UP:
           this.color.hsv.v = Math.min(100, this.color.hsv.v + 1);
           break;
 
-        case $.ui.keyCode.RIGHT:
+        case UI.keyCode.RIGHT:
           this.color.hsv.s = Math.min(100, this.color.hsv.s + 1);
           break;
 
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.DOWN:
           this.color.hsv.v = Math.max(0, this.color.hsv.v - 1);
           break;
 
-        case $.ui.keyCode.LEFT:
+        case UI.keyCode.LEFT:
           this.color.hsv.s = Math.max(0, this.color.hsv.s - 1);
           break;
 
@@ -3220,11 +3271,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.UP:
+        case UI.keyCode.UP:
           this.color.hsv.h = Math.min(359, this.color.hsv.h + 1);
           break;
 
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.DOWN:
           this.color.hsv.h = Math.max(0, this.color.hsv.h - 1);
           break;
 
@@ -3580,13 +3631,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.UP:
-        case $.ui.keyCode.LEFT:
+        case UI.keyCode.UP:
+        case UI.keyCode.LEFT:
           this.prevMonth();
           break;
 
-        case $.ui.keyCode.RIGHT:
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.RIGHT:
+        case UI.keyCode.DOWN:
           this.nextMonth();
           break;
 
@@ -3615,7 +3666,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     Datepicker.prototype.__dayTap = function __dayTap(event, node) {
 
-      if (event.button && event.button !== $.ui.mouseButton.LEFT) return;
+      if (event.button && event.button !== UI.mouseButton.LEFT) return;
 
       var day = parseInt($(node).html(), 10);
 
@@ -4104,7 +4155,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
           }
       } else if (this.isProxyed) {
 
-        if (this.options.proxyWithoutMotion && (!event.button || event.button === $.ui.mouseButton.LEFT)) {
+        if (this.options.proxyWithoutMotion && (!event.button || event.button === UI.mouseButton.LEFT)) {
 
           var endXY = $.eventXY(event),
               modifiedXY = this._centerToPoint(endXY, true);
@@ -5172,7 +5223,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: $.ui.animation.normal
+        remove: UI.animation.normal
       },
       callbacks: {
         open: function open() {},
@@ -5312,7 +5363,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     Noty.prototype.__keydown = function __keydown(event) {
 
-      if (event.keyCode === $.ui.keyCode.ESCAPE) {
+      if (event.keyCode === UI.keyCode.ESCAPE) {
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -6224,7 +6275,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
   $(function () {
 
     $('.scroll-to-top').on(Pointer.tap, function () {
-      return $body.animate({ scrollTop: 0 }, $.ui.animation.normal);
+      return $body.animate({ scrollTop: 0 }, UI.animation.normal);
     });
   });
 })(jQuery, _, window, document);
@@ -6426,7 +6477,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     Modal.prototype.__keydown = function __keydown(event) {
 
-      if (event.keyCode === $.ui.keyCode.ESCAPE) {
+      if (event.keyCode === UI.keyCode.ESCAPE) {
 
         event.preventDefault();
         event.stopImmediatePropagation();
@@ -6821,7 +6872,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.ESCAPE:
+        case UI.keyCode.ESCAPE:
           this.close();
           break;
 
@@ -8394,7 +8445,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     Ripple.prototype.__down = function __down(event) {
 
-      if (event.button && event.button !== $.ui.mouseButton.LEFT) return;
+      if (event.button && event.button !== UI.mouseButton.LEFT) return;
 
       this._show(event);
     };
@@ -8865,7 +8916,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
     Selectable.prototype.__down = function __down(event) {
 
-      if (event.button && event.button !== $.ui.mouseButton.LEFT) return; //INFO: Only the left click is allowed
+      if (event.button && event.button !== UI.mouseButton.LEFT) return; //INFO: Only the left click is allowed
 
       event.preventDefault();
 
@@ -9247,13 +9298,13 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.LEFT:
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.LEFT:
+        case UI.keyCode.DOWN:
           this.decrease();
           break;
 
-        case $.ui.keyCode.RIGHT:
-        case $.ui.keyCode.UP:
+        case UI.keyCode.RIGHT:
+        case UI.keyCode.UP:
           this.increase();
           break;
 
@@ -9759,11 +9810,11 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.UP:
+        case UI.keyCode.UP:
           this.increase();
           break;
 
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.DOWN:
           this.decrease();
           break;
 
@@ -9976,15 +10027,15 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
       switch (event.keyCode) {
 
-        case $.ui.keyCode.LEFT:
+        case UI.keyCode.LEFT:
           this.uncheck();
           break;
 
-        case $.ui.keyCode.RIGHT:
+        case UI.keyCode.RIGHT:
           this.check();
           break;
 
-        case $.ui.keyCode.SPACE:
+        case UI.keyCode.SPACE:
           this.toggle();
           break;
 
@@ -10509,7 +10560,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
       characters: {
         forbidden: ['<', '>', ';', '`'],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [$.ui.keyCode.ENTER, $.ui.keyCode.TAB] //INFO: They are keyCodes
+        inserters: [UI.keyCode.ENTER, UI.keyCode.TAB] //INFO: They are keyCodes
       },
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
       escape: true, //INFO: Escape potential XSS characters
@@ -10701,7 +10752,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== 'function' 
 
         event.preventDefault();
         event.stopImmediatePropagation();
-      } else if (event.keyCode === $.ui.keyCode.BACKSPACE) {
+      } else if (event.keyCode === UI.keyCode.BACKSPACE) {
 
         if (value.length === 0 && this.options.tags.length > 0) {
 

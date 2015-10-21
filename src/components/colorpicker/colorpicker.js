@@ -146,19 +146,19 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.UP:
+        case UI.keyCode.UP:
           this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
           break;
 
-        case $.ui.keyCode.RIGHT:
+        case UI.keyCode.RIGHT:
           this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
           break;
 
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.DOWN:
           this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
           break;
 
-        case $.ui.keyCode.LEFT:
+        case UI.keyCode.LEFT:
           this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
           break;
 
@@ -210,11 +210,11 @@
 
       switch ( event.keyCode ) {
 
-        case $.ui.keyCode.UP:
+        case UI.keyCode.UP:
           this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
           break;
 
-        case $.ui.keyCode.DOWN:
+        case UI.keyCode.DOWN:
           this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
           break;
 

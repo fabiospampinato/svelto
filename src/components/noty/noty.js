@@ -89,7 +89,7 @@
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: $.ui.animation.normal
+        remove: UI.animation.normal
       },
       callbacks: {
         open () {},
@@ -240,7 +240,7 @@
 
     __keydown ( event ) {
 
-      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+      if ( event.keyCode === UI.keyCode.ESCAPE ) {
 
         event.preventDefault ();
         event.stopImmediatePropagation ();

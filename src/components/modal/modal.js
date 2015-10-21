@@ -97,7 +97,7 @@
 
     __keydown ( event ) {
 
-      if ( event.keyCode === $.ui.keyCode.ESCAPE ) {
+      if ( event.keyCode === UI.keyCode.ESCAPE ) {
 
         event.preventDefault ();
         event.stopImmediatePropagation ();

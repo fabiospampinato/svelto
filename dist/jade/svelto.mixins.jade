@@ -813,24 +813,6 @@ mixin multiple-sub-right
 
 
 //- =========================================================================
-//- Svelto - Notification
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    title: '', // Notification title
-    body: '', // Notification body
-    img: '' // Notification image
-  }
-
-mixin notification(options)
-  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
-
-
-//- =========================================================================
 //- Svelto - Navbar
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -865,6 +847,24 @@ mixin navbar(options)
   - options.slim = options.slim || false;
   .navbar(id=options.id class=(options.direction + " " + ( options.slim ? "slim" : "" ) + " " + ( options.flickable ? "flickable" : "" )  + " " + (options.attached ? ( options.attached === true ? "attached-xs" : options.attached ) : "" )) data-direction=options.direction)&attributes(attributes)
     block
+
+
+//- =========================================================================
+//- Svelto - Notification
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options
+  {
+    title: '', // Notification title
+    body: '', // Notification body
+    img: '' // Notification image
+  }
+
+mixin notification(options)
+  +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
 
 
 //- =========================================================================
@@ -1430,6 +1430,26 @@ mixin spinner-label
 
 
 //- =========================================================================
+//- Svelto - Statistic
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin statistic
+  .statistic&attributes(attributes)
+    block
+      
+mixin statistic-primary
+  .statistic-primary&attributes(attributes)
+    block
+      
+mixin statistic-secondary
+  .statistic-secondary&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Stepper
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1458,26 +1478,6 @@ mixin stepper(options)
     else
       +input({ value: options.value }).stepper-input.autogrow.compact
     +button-icon("add").compact.stepper-increaser
-
-
-//- =========================================================================
-//- Svelto - Statistic
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin statistic
-  .statistic&attributes(attributes)
-    block
-      
-mixin statistic-primary
-  .statistic-primary&attributes(attributes)
-    block
-      
-mixin statistic-secondary
-  .statistic-secondary&attributes(attributes)
-    block
 
 
 //- =========================================================================
