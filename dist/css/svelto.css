@@ -2703,10 +2703,7 @@ table.table.sortable th[data-sort]:after {
 html {
   font-size: 16px;
   box-sizing: border-box;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-width: 100%;
+  width: 100%;
   min-height: 100%;
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -2725,14 +2722,14 @@ body {
   background: #eceff1 ;
   border-color: #c0cad1 ;
   color: #3f3f3f ;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 1em;
   line-height: 1.4285714286;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  min-width: 100%;
-  min-height: 100%;
 }
 
 body p > a {
@@ -2759,12 +2756,6 @@ body p > a:hover {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
-}
-
-#content > header,
-#content > main,
-#content > footer {
-  width: 100vw;
 }
 
 #content > header {

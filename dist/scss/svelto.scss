@@ -2344,8 +2344,7 @@ html {
 
   font-size: $font-size;
   box-sizing: border-box;
-  display: flex;
-  min-width: 100%;
+  width: 100%;
   min-height: 100%;
 
   -webkit-tap-highlight-color: transparent;
@@ -2362,12 +2361,10 @@ html {
 
 body {
   @include color ( $body-color );
+  @include fill-absolute (); //INFO: It fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
   font-family: $font-family;
   font-size: 1em;
   line-height: $line-height;
-  display: flex;
-  min-width: 100%;
-  min-height: 100%;
 }
 
 /* #CONTENT */
@@ -2378,12 +2375,6 @@ body {
   flex-direction: column;
   transition: margin $navbar-transition-transform-duration;
   flex-grow: 1;
-
-  > header,
-  > main,
-  > footer {
-    width: 100vw; //INFO: It fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
-  }
 
   > header {
 

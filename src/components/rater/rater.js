@@ -17,7 +17,7 @@
   /* CONFIG */
 
   let config = {
-    name: 'boilerplate',
+    name: 'rater',
     templates: {
       base: '<div class="rater">' +
               '{% include ( "svelto.rater.stars", o ); %}' +

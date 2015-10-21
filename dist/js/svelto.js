@@ -6127,7 +6127,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   $(function () {
 
     $('.scroll-to-top').on(Pointer.tap, function () {
-      return $body.animate({ scrollTop: 0 }, UI.animation.normal);
+      return $body.add($html).animate({ scrollTop: 0 }, UI.animation.normal);
     });
   });
 })(jQuery, _, window, document);
@@ -7691,7 +7691,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* CONFIG */
 
   var config = {
-    name: 'boilerplate',
+    name: 'progressbar',
     templates: {
       base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' + '<div class="progressbar-highlight {%=o.colors.on%}"></div>' + '</div>'
     },
@@ -8016,7 +8016,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* CONFIG */
 
   var config = {
-    name: 'boilerplate',
+    name: 'rater',
     templates: {
       base: '<div class="rater">' + '{% include ( "svelto.rater.stars", o ); %}' + '</div>',
       stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' + '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' + '{% } %}'

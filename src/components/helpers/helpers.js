@@ -17,7 +17,7 @@
 
   $(function () {
 
-    $('.scroll-to-top').on ( Pointer.tap, () => $body.animate ({ scrollTop: 0 }, UI.animation.normal ) );
+    $('.scroll-to-top').on ( Pointer.tap, () => $body.add ( $html ).animate ({ scrollTop: 0 }, UI.animation.normal ) );
 
   });
 
