@@ -2334,18 +2334,17 @@ $navbar-slim-closed-vertical-spacing: $navbar-slim-vertical-width + $navbar-slim
 /* CUSTOM SELECTION COLOR */
 
 ::selection {
-    background: $base-selection-bg-color;
-    text-shadow: none;
+  background: $base-selection-bg-color;
+  text-shadow: none;
 }
 
 /* HTML */
 
 html {
 
+  @include fill-absolute (); //INFO: This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
   font-size: $font-size;
   box-sizing: border-box;
-  width: 100%;
-  min-height: 100%;
 
   -webkit-tap-highlight-color: transparent;
   -webkit-touch-callout: none;
@@ -2361,7 +2360,9 @@ html {
 
 body {
   @include color ( $body-color );
-  @include fill-absolute (); //INFO: It fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  display: flex;
+  min-height: 100%;
+  width: 100%;
   font-family: $font-family;
   font-size: 1em;
   line-height: $line-height;
@@ -2373,8 +2374,9 @@ body {
 
   display: flex;
   flex-direction: column;
-  transition: margin $navbar-transition-transform-duration;
   flex-grow: 1;
+  transition: margin $navbar-transition-transform-duration;
+  width: 100%;
 
   > header {
 
@@ -2404,7 +2406,7 @@ body {
     padding: $gutter;
   }
 
-  > footer {
+  > footer { //FIXME: Stick it to the bottom in IE10-11
     margin-bottom: 0;
   }
 
