@@ -20,11 +20,6 @@
 
   $.factory = function ( Widget ) {
 
-    if ( !Widget.config ) { //FIXME: REMOVE THIS
-      console.log(Widget + ' needs to be updated to es6');
-      return;
-    }
-
     /* NAME */
 
     let name = Widget.config.name,
@@ -101,13 +96,13 @@
 
       } else {
 
-        let options = _.cloneDeep ( options );
+        let clonedOptions = _.cloneDeep ( options );
 
         /* INSTANCE */
 
         for ( let element of this ) {
 
-          $.factory.instance ( Widget, options, element );
+          $.factory.instance ( Widget, clonedOptions, element );
 
         }
 

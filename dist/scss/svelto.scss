@@ -2203,7 +2203,6 @@ $toolbar-padding-horizontal: 1em !default;
 
   > .multiple {
     flex-wrap: nowrap;
-    background-color: transparent;
   }
 
 }
@@ -3509,6 +3508,7 @@ $card-border-radius: $container-border-radius !default;
   @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-vertical $container-padding-horizontal;
+  overflow-x: auto;
 
   &.compact {
     padding: $container-compact-padding-vertical $container-compact-padding-horizontal;
@@ -4121,6 +4121,8 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
  * @requires _settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
+
+//FIXME: Handle the case where clip-path is not supported
 
 /* CHAT */
 
@@ -4854,6 +4856,8 @@ $divider-spacer-height: $gutter-half !default;
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
+//FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
+
 /* DIVIDER */
 
 %divider {
@@ -4876,6 +4880,7 @@ hr {
 
   /* LINEAR */
 
+  &.linear,
   &:not(.block):not(.text):not(.spacer) { //INFO: The default one
 
     /* EMPTY */
@@ -4899,6 +4904,7 @@ hr {
         content: '';
         margin: 0;
         flex-grow: 1;
+        flex-basis: 0;
         min-width: $gutter;
       }
 
@@ -6661,6 +6667,8 @@ form {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
+//FIXME: Object-fit is not cross-browser
+
 /* HEADER */
 
 header {
@@ -7073,6 +7081,7 @@ img {
   border-color: $border;
   width: 100%;
   height: auto;
+  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
 }
 
 /* IMAGE */
@@ -7687,6 +7696,18 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-appearance: none;
 }
 
+/* RESET INVALID STYLE */
+
+input:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* REMOVE CLEAR ICON */
+
+input::-ms-clear {
+    display: none;
+}
+
 
 /* =========================================================================
  * Svelto - Keyframes
@@ -7847,7 +7868,7 @@ $multiple-z-depth-z-index: 5 !default;
 
 .multiple {
 
-  @include color ( 'inherit', true ); //INFO: So that when the children also inherit the border color is actually inherited
+  border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -8104,12 +8125,13 @@ $multiple-z-depth-z-index: 5 !default;
 
   /* MULTIPLE SUB */
 
-  & > .multiple-sub {
+  > .multiple-sub {
 
+    //FIXME: It doesn't work in IE-10-11
     //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
 
     flex-grow: 0 !important;
-    flex-basis: 0;
+    width: 0 !important; //INFO: Instead of `flex-basis: 0`, it doesn't work the same way on Firefox
     align-self: center;
     margin: 0 !important;
 
@@ -9108,6 +9130,7 @@ $parallax-foreground-scale: 0.7 !default;
 
 /* PARALLAX */
 
+//FIXME: Not working on Firefox, Edge and IE
 //TODO: Add a non scrollable, classic, parallax that react the mouse movements
 
 .parallax {
@@ -10627,6 +10650,8 @@ $spinner-label-border-radius: 50% !default;
 
 //TODO: Add support for icon at the center of the spinner, sometimes might be useful
 
+//FIXME: Not working on Firefox, Edge, and IE
+
 /* SPINNER */
 
 svg.spinner {
@@ -11018,7 +11043,19 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   border-collapse: separate;
   border-radius: inherit;
 
+  /* SECTIONS */
+
+  thead,
+  tbody,
+  tfoot {
+    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  }
+
   /* CELLS */
+
+  tr {
+    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  }
 
   tr > * {
     @include last-child-no-gutter ();
@@ -11645,6 +11682,12 @@ $textarea-lines: 3 !default;
     resize: none;
   }
 
+}
+
+/* RESET INVALID STYLE */
+
+textarea:-moz-ui-invalid {
+  box-shadow: none;
 }
 
 

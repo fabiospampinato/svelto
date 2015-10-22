@@ -2628,7 +2628,6 @@ table.table.sortable th[data-sort]:after {
   -webkit-flex-wrap: nowrap;
       -ms-flex-wrap: nowrap;
           flex-wrap: nowrap;
-  background-color: transparent;
 }
 
 /* =========================================================================
@@ -3878,6 +3877,7 @@ button {
   color: #3f3f3f ;
   border-radius: 0.2665em;
   padding: 10px 10px;
+  overflow-x: auto;
 }
 
 .container p > a, .card-header p > a,
@@ -4961,7 +4961,10 @@ button {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* DIVIDER */
-hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not(.text):not(.spacer):not(:empty):before,
+hr, .divider.linear:empty,
+.divider:not(.block):not(.text):not(.spacer):empty, .divider.linear:not(:empty):before,
+.divider.linear:not(:empty):after,
+.divider:not(.block):not(.text):not(.spacer):not(:empty):before,
 .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
   height: 1px;
   margin-top: -5px;
@@ -4979,12 +4982,14 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   /* SPACER */
 }
 
+.divider.linear,
 .divider:not(.block):not(.text):not(.spacer) {
   /* EMPTY */
   /* ADVANCED */
   /* VERTICAL */
 }
 
+.divider.linear:not(:empty),
 .divider:not(.block):not(.text):not(.spacer):not(:empty) {
   margin-bottom: 10px;
   display: -webkit-flex;
@@ -4995,14 +5000,18 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
           align-items: center;
 }
 
+.divider.linear:not(:empty) > :last-child,
 .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child {
   margin-bottom: 0 !important;
 }
 
+.divider.linear:not(:empty) > :last-child.multiple,
 .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
+.divider.linear:not(:empty):before,
+.divider.linear:not(:empty):after,
 .divider:not(.block):not(.text):not(.spacer):not(:empty):before,
 .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
   content: '';
@@ -5010,22 +5019,29 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
   min-width: 10px;
 }
 
+.divider.linear:not(:empty):before,
 .divider:not(.block):not(.text):not(.spacer):not(:empty):before {
   margin-right: 10px;
 }
 
+.divider.linear:not(:empty):after,
 .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
   margin-left: 10px;
 }
 
+.divider.linear.vertical,
 .divider:not(.block):not(.text):not(.spacer).vertical {
   /* EMPTY */
   /* ADVANCED */
 }
 
+.divider.linear.vertical:empty,
 .divider:not(.block):not(.text):not(.spacer).vertical:empty {
   height: auto;
   width: 1px;
@@ -5038,6 +5054,7 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin: 0 5px 10px;
 }
 
+.divider.linear.vertical:not(:empty),
 .divider:not(.block):not(.text):not(.spacer).vertical:not(:empty) {
   -webkit-flex-direction: column;
       -ms-flex-direction: column;
@@ -5051,6 +5068,8 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
   margin: 0 5px 10px;
 }
 
+.divider.linear.vertical:not(:empty):before,
+.divider.linear.vertical:not(:empty):after,
 .divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):before,
 .divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):after {
   margin: 0;
@@ -5062,10 +5081,12 @@ hr, .divider:not(.block):not(.text):not(.spacer):empty, .divider:not(.block):not
           flex-grow: 1;
 }
 
+.divider.linear.vertical:not(:empty):before,
 .divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):before {
   margin-bottom: 5px;
 }
 
+.divider.linear.vertical:not(:empty):after,
 .divider:not(.block):not(.text):not(.spacer).vertical:not(:empty):after {
   margin-top: 5px;
 }
@@ -7364,6 +7385,7 @@ img {
   border-color: black;
   width: 100%;
   height: auto;
+  min-height: 1px;
 }
 
 /* IMAGE */
@@ -8046,6 +8068,16 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-appearance: none;
 }
 
+/* RESET INVALID STYLE */
+input:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* REMOVE CLEAR ICON */
+input::-ms-clear {
+  display: none;
+}
+
 /* =========================================================================
  * Svelto - Keyframes
  * =========================================================================
@@ -8182,9 +8214,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
  * ========================================================================= */
 /* MULTIPLE */
 .multiple {
-  background: inherit ;
-  border-color: inherit ;
-  color: inherit ;
+  border-color: inherit;
   position: relative;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -8429,9 +8459,7 @@ input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer
   -webkit-flex-grow: 0 !important;
       -ms-flex-positive: 0 !important;
           flex-grow: 0 !important;
-  -webkit-flex-basis: 0;
-      -ms-flex-preferred-size: 0;
-          flex-basis: 0;
+  width: 0 !important;
   -webkit-align-self: center;
       -ms-flex-item-align: center;
           align-self: center;
@@ -11796,6 +11824,7 @@ table.table {
   width: 100%;
   border-collapse: separate;
   border-radius: inherit;
+  /* SECTIONS */
   /* CELLS */
   /* THEAD */
   /* TBODY */
@@ -11808,6 +11837,16 @@ table.table {
   /* STRIPED */
   /* HOVERABLE */
   /* STRIPED & HOVERABLE */
+}
+
+table.table thead,
+table.table tbody,
+table.table tfoot {
+  border-color: inherit;
+}
+
+table.table tr {
+  border-color: inherit;
 }
 
 table.table tr > * {
@@ -12277,6 +12316,11 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
 .textarea-wrp.unresizable > .text-field,
 .textarea-wrp.disabled > .text-field {
   resize: none;
+}
+
+/* RESET INVALID STYLE */
+textarea:-moz-ui-invalid {
+  box-shadow: none;
 }
 
 /* =========================================================================

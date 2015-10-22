@@ -22,7 +22,19 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
   border-collapse: separate;
   border-radius: inherit;
 
+  /* SECTIONS */
+
+  thead,
+  tbody,
+  tfoot {
+    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  }
+
   /* CELLS */
+
+  tr {
+    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  }
 
   tr > * {
     @include last-child-no-gutter ();

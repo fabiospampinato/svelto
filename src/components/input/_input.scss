@@ -387,3 +387,15 @@
 input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button {
   -webkit-appearance: none;
 }
+
+/* RESET INVALID STYLE */
+
+input:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* REMOVE CLEAR ICON */
+
+input::-ms-clear {
+    display: none;
+}

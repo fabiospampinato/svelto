@@ -9,6 +9,8 @@
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
+//FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
+
 /* DIVIDER */
 
 %divider {
@@ -31,6 +33,7 @@ hr {
 
   /* LINEAR */
 
+  &.linear,
   &:not(.block):not(.text):not(.spacer) { //INFO: The default one
 
     /* EMPTY */
@@ -54,6 +57,7 @@ hr {
         content: '';
         margin: 0;
         flex-grow: 1;
+        flex-basis: 0;
         min-width: $gutter;
       }
 

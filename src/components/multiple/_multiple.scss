@@ -14,7 +14,7 @@
 
 .multiple {
 
-  @include color ( 'inherit', true ); //INFO: So that when the children also inherit the border color is actually inherited
+  border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
   position: relative;
   display: flex;
   flex-wrap: wrap;
@@ -271,12 +271,13 @@
 
   /* MULTIPLE SUB */
 
-  & > .multiple-sub {
+  > .multiple-sub {
 
+    //FIXME: It doesn't work in IE-10-11
     //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
 
     flex-grow: 0 !important;
-    flex-basis: 0;
+    width: 0 !important; //INFO: Instead of `flex-basis: 0`, it doesn't work the same way on Firefox
     align-self: center;
     margin: 0 !important;
 

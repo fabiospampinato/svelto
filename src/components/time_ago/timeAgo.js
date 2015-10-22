@@ -73,7 +73,7 @@
 
     _update () {
 
-      var timeAgo = _.timeAgo ( this.options.timestamp );
+      let timeAgo = _.timeAgo ( this.options.timestamp );
 
       if ( this.options.title ) {
 

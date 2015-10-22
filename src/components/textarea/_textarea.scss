@@ -91,3 +91,9 @@
   }
 
 }
+
+/* RESET INVALID STYLE */
+
+textarea:-moz-ui-invalid {
+  box-shadow: none;
+}

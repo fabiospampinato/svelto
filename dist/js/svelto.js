@@ -287,6 +287,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     is: {
       chrome: /chrome|chromium/i.test(userAgent) && /google inc/.test(vendor),
       firefox: /firefox/i.test(userAgent),
+      edge: /(edge)\/((\d+)?[\w\.]+)/i.test(userAgent),
       ie: /msie/i.test(userAgent) || 'ActiveXObject' in window, /* IE || EDGE */
       opera: /^Opera\//.test(userAgent) || /\x20OPR\//.test(userAgent), /* Opera <= 12 || Opera >= 15 */
       safari: /safari/i.test(userAgent) && /apple computer/i.test(vendor),
@@ -1569,12 +1570,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   $.factory = function (Widget) {
 
-    if (!Widget.config) {
-      //FIXME: REMOVE THIS
-      console.log(Widget + ' needs to be updated to es6');
-      return;
-    }
-
     /* NAME */
 
     var name = Widget.config.name,
@@ -1662,7 +1657,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       } else {
 
-        var _options = _.cloneDeep(_options);
+        var clonedOptions = _.cloneDeep(options);
 
         /* INSTANCE */
 
@@ -1680,7 +1675,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var element = _ref5;
 
-          $.factory.instance(Widget, _options, element);
+          $.factory.instance(Widget, clonedOptions, element);
         }
       }
 
