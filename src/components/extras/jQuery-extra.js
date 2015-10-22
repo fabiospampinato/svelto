@@ -14,22 +14,22 @@
 
   $.eventXY = function ( event ) {
 
-    if ( event.isPointerEvent ) { //INFO: Has been created using the `Pointer` abstraction //FIXME: We should try to avoid the existence of this variable
+    if ( 'pageX' in event ) {
 
-      event = event.originalEvent;
+      return {
+        X: event.pageX,
+        Y: event.pageY
+      };
+
+    } else if ( 'originalEvent' in event ) {
+
+      return $.eventXY ( event.originalEvent );
+
+    } else {
+
+      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine
 
     }
-
-    if ( $.browser.is.touchDevice && event.originalEvent.touches ) {
-
-      event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
-
-    }
-
-    return {
-      X: event.pageX,
-      Y: event.pageY
-    };
 
   };
 

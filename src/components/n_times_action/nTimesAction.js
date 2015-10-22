@@ -47,11 +47,7 @@
 
       if ( options.fn && actionTimes < options.times ) {
 
-        let value = options.fn ({
-          group: options.group,
-          action: options.action,
-          time: actionTimes + 1
-        });
+        let value = options.fn ( options.group, options.action, actionTimes + 1 );
 
         if ( value !== false ) {
 

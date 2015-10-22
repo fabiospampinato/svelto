@@ -30,8 +30,8 @@ append body-end
         group: nta_input('group'),
         action: nta_input('action'),
         times: Number(nta_input('times')),
-        fn: function ( data ) {
-          $.noty ( data.group + '`s action: ' + data.action + ' has been executed for the ' + data.time + ' time' );
+        fn: function ( group, action, time ) {
+          $.noty ( group + '`s action: ' + action + ' has been executed for the ' + time + ' time' );
           return returnValue;
         }
       });

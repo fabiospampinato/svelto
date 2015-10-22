@@ -141,8 +141,6 @@
 
       this._off ( Pointer.up, this.__up );
 
-      this.$elements.not ( this.$startElement ).removeClass ( this.options.classes.selected );
-
       this._resetPrev ();
 
       this.$prevElement = this.$startElement;
@@ -251,21 +249,9 @@
 
       } else {
 
-        var $selected = this.$elements.not ( this.$startElement );
-
-        if ( $selected.length > 0 ) {
-
-          $selected.removeClass ( this.options.classes.selected );
-
-        } else {
-
-          this.$startElement.removeClass ( this.options.classes.selected );
-
-        }
+        this.$elements.removeClass ( this.options.classes.selected );
 
         this._resetPrev ();
-
-        this.$prevElement = this.$startElement;
 
       }
 

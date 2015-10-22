@@ -3877,7 +3877,6 @@ button {
   color: #3f3f3f ;
   border-radius: 0.2665em;
   padding: 10px 10px;
-  overflow-x: auto;
 }
 
 .container p > a, .card-header p > a,

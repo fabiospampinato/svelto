@@ -3114,7 +3114,7 @@ $dragging-z-index: 1000000 !default;
 
 /* BLURRED */
 
-%blurred {
+%blurred { //FIXME: Not working on Edge and IE
   filter: url('/blur.svg#blur') !important;
   filter: blur($blurred-blur-amount) !important;
 }
@@ -3508,7 +3508,6 @@ $card-border-radius: $container-border-radius !default;
   @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-vertical $container-padding-horizontal;
-  overflow-x: auto;
 
   &.compact {
     padding: $container-compact-padding-vertical $container-compact-padding-horizontal;

@@ -23,7 +23,7 @@
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
               '<div class="card-block">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                  '{% include ( "select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
                 '{% } %}' +
               '</div>' +
             '</div>',

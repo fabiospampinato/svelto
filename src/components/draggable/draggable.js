@@ -18,7 +18,7 @@
 
   /* VARIABLES */
 
-  var isDragging = false;
+  let isDragging = false;
 
   /* CONFIG */
 
@@ -99,9 +99,9 @@
 
     _centerToPoint ( point, suppressClasses ) {
 
-      var draggableOffset = this.$draggable.offset ();
+      let draggableOffset = this.$draggable.offset ();
 
-      var deltaXY = {
+      let deltaXY = {
         X: point.X - ( draggableOffset.left + ( this.$draggable.outerWidth () / 2 ) ),
         Y: point.Y - ( draggableOffset.top + ( this.$draggable.outerHeight () / 2 ) )
       };
@@ -112,7 +112,7 @@
 
     _actionMove ( deltaXY, suppressClasses ) {
 
-      var baseXY = {
+      let baseXY = {
         X: this.proxyXY ? this.proxyXY.X : this.initialXY.X,
         Y: this.proxyXY ? this.proxyXY.Y : this.initialXY.Y
       };
@@ -123,12 +123,12 @@
 
         if ( this.options.constrainer.$element ) {
 
-          var constrainerOffset = this.options.constrainer.$element.offset (),
+          let constrainerOffset = this.options.constrainer.$element.offset (),
               draggableOffset = this.$draggable.offset ();
 
           if ( this.options.axis !== 'y' ) {
 
-            var halfWidth = this.options.constrainer.constrainCenter ? this.$draggable.outerWidth () / 2 : 0;
+            let halfWidth = this.options.constrainer.constrainCenter ? this.$draggable.outerWidth () / 2 : 0;
 
             this.translateX_min = constrainerOffset.left - ( draggableOffset.left - baseXY.X ) - halfWidth;
             this.translateX_max = constrainerOffset.left + this.options.constrainer.$element.outerWidth () - ( ( draggableOffset.left - baseXY.X ) + this.$draggable.outerWidth () ) + halfWidth;
@@ -137,7 +137,7 @@
 
           if ( this.options.axis !== 'x' ) {
 
-            var halfHeight = this.options.constrainer.constrainCenter ? this.$draggable.outerHeight () / 2 : 0;
+            let halfHeight = this.options.constrainer.constrainCenter ? this.$draggable.outerHeight () / 2 : 0;
 
             this.translateY_min = constrainerOffset.top - ( draggableOffset.top - baseXY.Y ) - halfHeight;
             this.translateY_max = constrainerOffset.top + this.options.constrainer.$element.outerHeight () - ( ( draggableOffset.top - baseXY.Y ) + this.$draggable.outerHeight () ) + halfHeight;
@@ -155,7 +155,7 @@
 
       }
 
-      var translateX = baseXY.X,
+      let translateX = baseXY.X,
           translateY = baseXY.Y;
 
       if ( this.options.axis !== 'y' ) {
@@ -182,7 +182,7 @@
 
       }
 
-      var modifiedXY = {
+      let modifiedXY = {
             X: this.options.modifiers.x ( translateX ),
             Y: this.options.modifiers.y ( translateY )
           },
@@ -199,7 +199,7 @@
 
     /* HANDLERS */
 
-    __down ( event, trigger ) {
+    __down ( event ) {
 
       if ( !isDragging && this.options.draggable () ) {
 
@@ -212,7 +212,7 @@
         this.startXY = $.eventXY ( event );
         this.initialXY = this.$draggable.translate ();
 
-        this.isProxyed = ( this.options.$proxy && trigger === this.options.$proxy[0] );
+        this.isProxyed = ( this.options.$proxy && event.currentTarget === this.options.$proxy[0] );
         this.proxyXY = false;
 
         this._trigger ( 'start', { event: event, draggable: this.draggable, initialXY: this.initialXY } );
@@ -229,19 +229,19 @@
 
       if ( this.isProxyed && this.motion === false ) {
 
-        var modifiedXY = this._centerToPoint ( this.startXY );
+        let modifiedXY = this._centerToPoint ( this.startXY );
 
         this.proxyXY = this.$draggable.translate ();
 
       }
 
-      var moveXY = $.eventXY ( event ),
+      let moveXY = $.eventXY ( event ),
           deltaXY = {
             X: moveXY.X - this.startXY.X,
             Y: moveXY.Y - this.startXY.Y
           };
 
-      var modifiedXY = this._actionMove ( deltaXY );
+      let modifiedXY = this._actionMove ( deltaXY );
 
       this._trigger ( 'move', { event: event, draggable: this.draggable, initialXY: this.initialXY, moveXY: modifiedXY } );
 
@@ -249,7 +249,7 @@
 
     __up ( event ) {
 
-      var modifiedXY = this.initialXY;
+      let modifiedXY = this.initialXY;
 
       if ( this.motion === true ) {
 
@@ -264,7 +264,7 @@
 
         } else {
 
-          var modifiedXY = this.$draggable.translate ();
+          let modifiedXY = this.$draggable.translate ();
 
         }
 
@@ -272,7 +272,7 @@
 
         if ( this.options.proxyWithoutMotion && ( !event.button || event.button === UI.mouseButton.LEFT ) ) {
 
-          var endXY = $.eventXY ( event ),
+          let endXY = $.eventXY ( event ),
               modifiedXY = this._centerToPoint ( endXY, true );
 
         }

@@ -17,7 +17,6 @@
   @include color ( $container-color );
   border-radius: $container-border-radius;
   padding: $container-padding-vertical $container-padding-horizontal;
-  overflow-x: auto;
 
   &.compact {
     padding: $container-compact-padding-vertical $container-compact-padding-horizontal;

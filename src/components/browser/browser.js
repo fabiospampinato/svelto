@@ -39,7 +39,7 @@
       firefox: /firefox/i.test ( userAgent ),
       edge: /(edge)\/((\d+)?[\w\.]+)/i.test ( userAgent ),
       ie: /msie/i.test ( userAgent ) || 'ActiveXObject' in window, /* IE || EDGE */
-      opera:  /^Opera\//.test ( userAgent ) || /\x20OPR\//.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
+      opera:  /^Opera\//i.test ( userAgent ) || /\x20OPR\//i.test ( userAgent ), /* Opera <= 12 || Opera >= 15 */
       safari: /safari/i.test ( userAgent ) && /apple computer/i.test ( vendor ),
       iphone: isIphone,
       ipad: isIpad,
@@ -50,7 +50,7 @@
       androidTablet: isAndroidTablet,
       blackberry: isBlackberry,
       linux: /linux/i.test ( appVersion ),
-      mac: /mac/i.test ( appVersion ),
+      mac: !( isIphone || isIpad || isIpod ) && /mac/i.test ( appVersion ),
       windows: isWindows,
       windowsPhone: isWindowsPhone,
       windowsTablet: isWindowsTablet,

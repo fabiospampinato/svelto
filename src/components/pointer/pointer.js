@@ -83,6 +83,7 @@
         downTimestamp,
         prevTapTimestamp = 0,
         motion,
+        moveEvent,
         pressTimeout;
 
     /* EVENT CREATOR */
@@ -92,7 +93,6 @@
       let event = $.Event ( name );
 
       event.originalEvent = originalEvent;
-      event.isPointerEvent = true; //TODO: Try not to need this extra property
 
       return event;
 
@@ -112,7 +112,7 @@
 
       pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
 
-      $target.one ( Pointer.move, moveHandler );
+      $target.on ( Pointer.move, moveHandler );
       $target.one ( Pointer.up, upHandler );
       $target.one ( Pointer.cancel, cancelHandler );
 
@@ -126,16 +126,28 @@
 
     };
 
-    let moveHandler = function () {
+    let moveHandler = function ( event ) {
 
-      if ( pressTimeout ) {
+      if ( !motion ) {
 
-        clearTimeout ( pressTimeout );
-        pressTimeout = false;
+        if ( pressTimeout ) {
+
+          clearTimeout ( pressTimeout );
+          pressTimeout = false;
+
+        }
+
+        motion = true;
+
+        if ( !$.browser.is.touchDevice ) {
+
+          $target.off ( Pointer.move, moveHandler );
+
+        }
 
       }
 
-      motion = true;
+      moveEvent = event;
 
     };
 
@@ -152,7 +164,7 @@
       if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
 
         let startXY = $.eventXY ( startEvent ),
-            endXY = $.eventXY ( event ),
+            endXY = $.eventXY ( $.browser.is.touchDevice ? moveEvent : event ),
             deltaXY = {
               X: endXY.X - startXY.X,
               Y: endXY.Y - startXY.Y
@@ -204,7 +216,7 @@
 
       }
 
-      if ( !motion ) {
+      if ( !motion || $.browser.is.touchDevice ) {
 
         $target.off ( Pointer.move, moveHandler );
 
@@ -222,7 +234,7 @@
 
       }
 
-      if ( !motion ) {
+      if ( !motion || $.browser.is.touchDevice ) {
 
         $target.off ( Pointer.move, moveHandler );
 

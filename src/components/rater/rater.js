@@ -20,7 +20,7 @@
     name: 'rater',
     templates: {
       base: '<div class="rater">' +
-              '{% include ( "svelto.rater.stars", o ); %}' +
+              '{% include ( "rater.stars", o ); %}' +
             '</div>',
       stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' +
                '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' +

@@ -289,7 +289,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       firefox: /firefox/i.test(userAgent),
       edge: /(edge)\/((\d+)?[\w\.]+)/i.test(userAgent),
       ie: /msie/i.test(userAgent) || 'ActiveXObject' in window, /* IE || EDGE */
-      opera: /^Opera\//.test(userAgent) || /\x20OPR\//.test(userAgent), /* Opera <= 12 || Opera >= 15 */
+      opera: /^Opera\//i.test(userAgent) || /\x20OPR\//i.test(userAgent), /* Opera <= 12 || Opera >= 15 */
       safari: /safari/i.test(userAgent) && /apple computer/i.test(vendor),
       iphone: isIphone,
       ipad: isIpad,
@@ -300,7 +300,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       androidTablet: isAndroidTablet,
       blackberry: isBlackberry,
       linux: /linux/i.test(appVersion),
-      mac: /mac/i.test(appVersion),
+      mac: !(isIphone || isIpad || isIpod) && /mac/i.test(appVersion),
       windows: isWindows,
       windowsPhone: isWindowsPhone,
       windowsTablet: isWindowsTablet,
@@ -333,21 +333,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   $.eventXY = function (event) {
 
-    if (event.isPointerEvent) {
-      //INFO: Has been created using the `Pointer` abstraction //FIXME: We should try to avoid the existence of this variable
+    if ('pageX' in event) {
 
-      event = event.originalEvent;
+      return {
+        X: event.pageX,
+        Y: event.pageY
+      };
+    } else if ('originalEvent' in event) {
+
+      return $.eventXY(event.originalEvent);
+    } else {
+
+      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine
     }
-
-    if ($.browser.is.touchDevice && event.originalEvent.touches) {
-
-      event = event.originalEvent.changedTouches ? event.originalEvent.changedTouches[0] : event.originalEvent.touches[0];
-    }
-
-    return {
-      X: event.pageX,
-      Y: event.pageY
-    };
   };
 
   $.frame = function (callback) {
@@ -1413,6 +1411,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         downTimestamp = undefined,
         prevTapTimestamp = 0,
         motion = undefined,
+        moveEvent = undefined,
         pressTimeout = undefined;
 
     /* EVENT CREATOR */
@@ -1422,7 +1421,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       var event = $.Event(name);
 
       event.originalEvent = originalEvent;
-      event.isPointerEvent = true; //TODO: Try not to need this extra property
 
       return event;
     };
@@ -1441,7 +1439,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       pressTimeout = setTimeout(pressHandler, Pointer.options.press.duration);
 
-      $target.one(Pointer.move, moveHandler);
+      $target.on(Pointer.move, moveHandler);
       $target.one(Pointer.up, upHandler);
       $target.one(Pointer.cancel, cancelHandler);
     };
@@ -1453,15 +1451,25 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       pressTimeout = false;
     };
 
-    var moveHandler = function moveHandler() {
+    var moveHandler = function moveHandler(event) {
 
-      if (pressTimeout) {
+      if (!motion) {
 
-        clearTimeout(pressTimeout);
-        pressTimeout = false;
+        if (pressTimeout) {
+
+          clearTimeout(pressTimeout);
+          pressTimeout = false;
+        }
+
+        motion = true;
+
+        if (!$.browser.is.touchDevice) {
+
+          $target.off(Pointer.move, moveHandler);
+        }
       }
 
-      motion = true;
+      moveEvent = event;
     };
 
     var upHandler = function upHandler(event) {
@@ -1476,7 +1484,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       if (motion && downTimestamp - startTimestamp <= Pointer.options.flick.duration) {
 
         var startXY = $.eventXY(startEvent),
-            endXY = $.eventXY(event),
+            endXY = $.eventXY($.browser.is.touchDevice ? moveEvent : event),
             deltaXY = {
           X: endXY.X - startXY.X,
           Y: endXY.Y - startXY.Y
@@ -1520,7 +1528,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         prevTapTimestamp = downTimestamp;
       }
 
-      if (!motion) {
+      if (!motion || $.browser.is.touchDevice) {
 
         $target.off(Pointer.move, moveHandler);
       }
@@ -1535,7 +1543,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         clearTimeout(pressTimeout);
       }
 
-      if (!motion) {
+      if (!motion || $.browser.is.touchDevice) {
 
         $target.off(Pointer.move, moveHandler);
       }
@@ -1657,7 +1665,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       } else {
 
-        var clonedOptions = _.cloneDeep(options);
+        /* CLONED OPTIONS */ //INFO: So that the passed options array won't be modified
+
+        var clonedOptions = _.merge(options, function (value) {
+          return value instanceof $ ? value : undefined;
+        });
 
         /* INSTANCE */
 
@@ -3993,7 +4005,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* HANDLERS */
 
-    Draggable.prototype.__down = function __down(event, trigger) {
+    Draggable.prototype.__down = function __down(event) {
 
       if (!isDragging && this.options.draggable()) {
 
@@ -4006,7 +4018,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         this.startXY = $.eventXY(event);
         this.initialXY = this.$draggable.translate();
 
-        this.isProxyed = this.options.$proxy && trigger === this.options.$proxy[0];
+        this.isProxyed = this.options.$proxy && event.currentTarget === this.options.$proxy[0];
         this.proxyXY = false;
 
         this._trigger('start', { event: event, draggable: this.draggable, initialXY: this.initialXY });
@@ -4021,7 +4033,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       if (this.isProxyed && this.motion === false) {
 
-        var modifiedXY = this._centerToPoint(this.startXY);
+        var _modifiedXY = this._centerToPoint(this.startXY);
 
         this.proxyXY = this.$draggable.translate();
       }
@@ -4053,14 +4065,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.$draggable.translate(this.initialXY.X, this.initialXY.Y); //TODO: Animate it
         } else {
 
-            var modifiedXY = this.$draggable.translate();
+            var _modifiedXY2 = this.$draggable.translate();
           }
       } else if (this.isProxyed) {
 
         if (this.options.proxyWithoutMotion && (!event.button || event.button === UI.mouseButton.LEFT)) {
 
           var endXY = $.eventXY(event),
-              modifiedXY = this._centerToPoint(endXY, true);
+              _modifiedXY3 = this._centerToPoint(endXY, true);
         }
       }
 
@@ -5057,7 +5069,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var config = {
     name: 'noty',
     templates: {
-      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' + '<div class="infobar">' + '{% if ( o.img ) { %}' + '<img src="{%=o.img%}" class="noty-img infobar-left" />' + '{% } %}' + '{% if ( o.title || o.body ) { %}' + '<div class="infobar-center">' + '{% if ( o.title ) { %}' + '<p class="infobar-title">' + '{%#o.title%}' + '</p>' + '{% } %}' + '{% if ( o.body ) { %}' + '{%#o.body%}' + '{% } %}' + '</div>' + '{% } %}' + '{% if ( o.buttons.length === 1 ) { %}' + '<div class="infobar-right">' + '{% include ( "svelto.noty.button", o.buttons[0] ); %}' + '</div>' + '{% } %}' + '</div>' + '{% if ( o.buttons.length > 1 ) { %}' + '<div class="noty-buttons multiple centered">' + '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' + '{% include ( "svelto.noty.button", o.buttons[i] ); %}' + '{% } %}' + '</div>' + '{% } %}' + '</div>',
+      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' + '<div class="infobar">' + '{% if ( o.img ) { %}' + '<img src="{%=o.img%}" class="noty-img infobar-left" />' + '{% } %}' + '{% if ( o.title || o.body ) { %}' + '<div class="infobar-center">' + '{% if ( o.title ) { %}' + '<p class="infobar-title">' + '{%#o.title%}' + '</p>' + '{% } %}' + '{% if ( o.body ) { %}' + '{%#o.body%}' + '{% } %}' + '</div>' + '{% } %}' + '{% if ( o.buttons.length === 1 ) { %}' + '<div class="infobar-right">' + '{% include ( "noty.button", o.buttons[0] ); %}' + '</div>' + '{% } %}' + '</div>' + '{% if ( o.buttons.length > 1 ) { %}' + '<div class="noty-buttons multiple centered">' + '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' + '{% include ( "noty.button", o.buttons[i] ); %}' + '{% } %}' + '</div>' + '{% } %}' + '</div>',
       button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' + '{%#(o.text || "")%}' + '</div>'
     },
     options: {
@@ -6549,11 +6561,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       if (options.fn && actionTimes < options.times) {
 
-        var value = options.fn({
-          group: options.group,
-          action: options.action,
-          time: actionTimes + 1
-        });
+        var value = options.fn(options.group, options.action, actionTimes + 1);
 
         if (value !== false) {
 
@@ -8014,7 +8022,7 @@ Prism.languages.js = Prism.languages.javascript;
   var config = {
     name: 'rater',
     templates: {
-      base: '<div class="rater">' + '{% include ( "svelto.rater.stars", o ); %}' + '</div>',
+      base: '<div class="rater">' + '{% include ( "rater.stars", o ); %}' + '</div>',
       stars: '{% for ( var i = 1; i <= o.amount; i++ ) { %}' + '<div class="rater-star {%=( o.value >= i ? "active" : ( o.value >= i - 0.5 ? "half-active" : "" ) )%}"></div>' + '{% } %}'
     },
     options: {
@@ -8330,7 +8338,7 @@ Prism.languages.js = Prism.languages.javascript;
   var config = {
     name: 'select',
     templates: {
-      base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' + '<div class="card-block">' + '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' + '{% include ( "svelto.select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' + '{% } %}' + '</div>' + '</div>',
+      base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' + '<div class="card-block">' + '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' + '{% include ( "select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' + '{% } %}' + '</div>' + '</div>',
       optgroup: '<div class="divider">' + '{%=o.prop%}' + '</div>',
       option: '<div class="button" data-value="{%=o.prop%}">' + '{%=o.value%}' + '</div>'
     },
@@ -8711,8 +8719,6 @@ Prism.languages.js = Prism.languages.javascript;
 
       this._off(Pointer.up, this.__up);
 
-      this.$elements.not(this.$startElement).removeClass(this.options.classes.selected);
-
       this._resetPrev();
 
       this.$prevElement = this.$startElement;
@@ -8813,15 +8819,7 @@ Prism.languages.js = Prism.languages.javascript;
         this.$prevElement = this.$startElement;
       } else {
 
-        var $selected = this.$elements.not(this.$startElement);
-
-        if ($selected.length > 0) {
-
-          $selected.removeClass(this.options.classes.selected);
-        } else {
-
-          this.$startElement.removeClass(this.options.classes.selected);
-        }
+        this.$elements.removeClass(this.options.classes.selected);
 
         this._resetPrev();
 

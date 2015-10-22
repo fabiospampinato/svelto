@@ -96,7 +96,9 @@
 
       } else {
 
-        let clonedOptions = _.cloneDeep ( options );
+        /* CLONED OPTIONS */ //INFO: So that the passed options array won't be modified
+
+        let clonedOptions = _.merge ( options, value => value instanceof $ ? value : undefined );
 
         /* INSTANCE */
 
