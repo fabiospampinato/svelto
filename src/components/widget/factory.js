@@ -80,7 +80,7 @@
 
             /* CALLING */
 
-            let methodValue = instance[options]( args );
+            let methodValue = instance[options]( ...args );
 
             if ( !_.isUndefined ( methodValue ) ) {
 

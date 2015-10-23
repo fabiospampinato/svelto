@@ -1095,10 +1095,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $element = this.$element;
       }
 
+      console.log("setting onHover with args:", args);
+
       this._on($element, Pointer.enter, function () {
         return _this3._on.apply(_this3, args);
       });
-      this._on($element, Pointer.enter, function () {
+      this._on($element, Pointer.leave, function () {
         return _this3._off.apply(_this3, args);
       });
 
@@ -1653,7 +1655,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             /* CALLING */
 
-            var methodValue = instance[options](args);
+            var methodValue = instance[options].apply(instance, args);
 
             if (!_.isUndefined(methodValue)) {
 
@@ -3138,6 +3140,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     Colorpicker.prototype.__sbKeydown = function __sbKeydown(event) {
 
+      console.log("keydown!");
+
       switch (event.keyCode) {
 
         case UI.keyCode.UP:
@@ -3823,6 +3827,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
+//FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 
 (function ($, _, window, document, undefined) {
 
@@ -4065,14 +4070,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           this.$draggable.translate(this.initialXY.X, this.initialXY.Y); //TODO: Animate it
         } else {
 
-            var _modifiedXY2 = this.$draggable.translate();
+            modifiedXY = this.$draggable.translate();
           }
       } else if (this.isProxyed) {
 
         if (this.options.proxyWithoutMotion && (!event.button || event.button === UI.mouseButton.LEFT)) {
 
-          var endXY = $.eventXY(event),
-              _modifiedXY3 = this._centerToPoint(endXY, true);
+          var endXY = $.eventXY(event);
+
+          modifiedXY = this._centerToPoint(endXY, true);
         }
       }
 
@@ -8822,8 +8828,6 @@ Prism.languages.js = Prism.languages.javascript;
         this.$elements.removeClass(this.options.classes.selected);
 
         this._resetPrev();
-
-        this.$prevElement = this.$startElement;
       }
 
       this._trigger('change');

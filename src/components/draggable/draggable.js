@@ -11,6 +11,7 @@
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
+//FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 
 (function ( $, _, window, document, undefined ) {
 
@@ -264,7 +265,7 @@
 
         } else {
 
-          let modifiedXY = this.$draggable.translate ();
+          modifiedXY = this.$draggable.translate ();
 
         }
 
@@ -272,8 +273,9 @@
 
         if ( this.options.proxyWithoutMotion && ( !event.button || event.button === UI.mouseButton.LEFT ) ) {
 
-          let endXY = $.eventXY ( event ),
-              modifiedXY = this._centerToPoint ( endXY, true );
+          let endXY = $.eventXY ( event );
+
+          modifiedXY = this._centerToPoint ( endXY, true );
 
         }
 

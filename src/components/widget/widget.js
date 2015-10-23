@@ -364,8 +364,10 @@
 
       }
 
+      console.log("setting onHover with args:",args);
+
       this._on ( $element, Pointer.enter, () => this._on ( ...args ) );
-      this._on ( $element, Pointer.enter, () => this._off ( ...args ) );
+      this._on ( $element, Pointer.leave, () => this._off ( ...args ) );
 
       return this;
 
