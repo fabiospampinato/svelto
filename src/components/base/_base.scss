@@ -62,6 +62,14 @@ body {
   line-height: $line-height;
 }
 
+//INFO: Sticky footer at bottom fixes for IE10+
+//INFO: We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+
+_:-ms-input-placeholder, :root body,
+_:-ms-input-placeholder, :root #content {
+  min-height: 100vh;
+}
+
 /* #CONTENT */
 
 #content {
@@ -69,6 +77,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   transition: margin $navbar-transition-transform-duration;
   width: 100%;
 
@@ -97,6 +106,7 @@ body {
   > main {
     @include last-child-no-gutter ();
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     padding: $gutter;
   }
 

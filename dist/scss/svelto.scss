@@ -2367,6 +2367,14 @@ body {
   line-height: $line-height;
 }
 
+//INFO: Sticky footer at bottom fixes for IE10+
+//INFO: We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+
+_:-ms-input-placeholder, :root body,
+_:-ms-input-placeholder, :root #content {
+  min-height: 100vh;
+}
+
 /* #CONTENT */
 
 #content {
@@ -2374,6 +2382,7 @@ body {
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   transition: margin $navbar-transition-transform-duration;
   width: 100%;
 
@@ -2402,6 +2411,7 @@ body {
   > main {
     @include last-child-no-gutter ();
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     padding: $gutter;
   }
 
@@ -2599,6 +2609,7 @@ label {
 
   > :not(.sub):not(.icon):not(.icons):not(.ripple-circle) {
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   }
 
   /* OUTLINED */
@@ -2961,6 +2972,8 @@ label {
 }
 
 /* LABEL TAG */
+
+//FIXME: Missing pointer outline in IE10
 
 .label-tag {
 
@@ -3409,6 +3422,7 @@ $dragging-z-index: 1000000 !default;
 
 .spacer {
   flex-grow: $spacer-flex-grow !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   margin-bottom: $gutter;
 }
 
@@ -3565,6 +3579,7 @@ $card-border-radius: $container-border-radius !default;
 
   &-block {
     flex-grow: 1; //INFO: Takes the remaining space, if any
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     overflow: auto;
   }
 
@@ -3698,6 +3713,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
   @extend .widget;
   display: flex;
+  align-items: stretch;
   position: relative;
   min-height: $carousel-min-height;
 
@@ -3763,6 +3779,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
     position: relative;
     overflow: hidden;
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     background-color: $carousel-bg-color;
 
     /* ITEM */
@@ -4167,6 +4184,7 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
   .chat-msg-content {
 
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     margin-bottom: 0;
 
     /* HEADER */
@@ -4903,7 +4921,8 @@ hr {
         content: '';
         margin: 0;
         flex-grow: 1;
-        flex-basis: 0;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
         min-width: $gutter;
       }
 
@@ -4928,6 +4947,7 @@ hr {
         width: 1px;
         align-self: stretch;
         flex-grow: 0;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
         margin: 0 $gutter-half $gutter;
       }
 
@@ -4937,6 +4957,7 @@ hr {
 
         flex-direction: column;
         flex-grow: 0 !important;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
         align-self: stretch;
         // justify-content: center;
         margin: 0 $gutter-half $gutter;
@@ -4948,6 +4969,7 @@ hr {
           width: 1px;
           min-height: $gutter;
           flex-grow: 1;
+          flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
         }
 
         &:before {
@@ -5206,6 +5228,18 @@ hr {
   &:not(.open) {
     pointer-events: none;
     opacity: 0;
+  }
+
+}
+
+//INFO: Card dropdown max height fix for IE10+
+
+_:-ms-input-placeholder, :root .dropdown.card {
+
+  max-height: none;
+
+  .card-block {
+    max-height: $dropdown-max-height / 100 * 90;
   }
 
 }
@@ -6332,6 +6366,8 @@ $flippable-transition-flip-duration: $transition-duration-slow !default;
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
+//FIXME: It doesn't work on IE10-11
+
 /* FLIPPABLE */
 
 .flippable {
@@ -7091,6 +7127,7 @@ img {
   @include color ( $image-color );
   display: flex;
   flex-direction: column;
+  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
 
   /* IMAGE */
 
@@ -7223,7 +7260,7 @@ $infobar-title-size: 'large' !default;
   &-center {
 
     flex-grow: 1;
-    flex-basis: 0;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     order: 1;
 
     /* TITLE */
@@ -7798,7 +7835,7 @@ $modal-transition-all-duration: $transition-duration-normal !default;
     top: 50%;
     left: 50%;
     max-width: $modal-max-width;
-    max-height: $modal-max-height;
+    max-height: $modal-max-height; //FIXME: On iOS a value of 100vh will exceed the actual visible viewport, maybe instead of using vw and vh center using fill-absolute and margin: auto, but apply some positive values to the top, right, bottom and left properties, it should work, maybe...
   }
 
   /* FULLSCREEN */
@@ -7885,7 +7922,7 @@ $multiple-z-depth-z-index: 5 !default;
 
   }
 
-  &.no-wrap > :not(.multiple) { //INFO: Here we just need the gutter in between
+  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { //INFO: Here we just need the gutter in between
 
     &:not(:first-child) {
       margin-left: $gutter-half;
@@ -7953,7 +7990,7 @@ $multiple-z-depth-z-index: 5 !default;
 
       > .input-wrp,
       > input {
-        flex-basis: 0
+        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
       }
 
     }
@@ -7967,7 +8004,7 @@ $multiple-z-depth-z-index: 5 !default;
   /* EQUAL */
 
   &.equal > * {
-    flex-basis: 0;
+    flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
   }
 
   /* JOINED */
@@ -8072,6 +8109,7 @@ $multiple-z-depth-z-index: 5 !default;
 
       > * {
         flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
       }
 
     }
@@ -8108,7 +8146,8 @@ $multiple-z-depth-z-index: 5 !default;
     &:last-child {
       display: block;
       flex-grow: 1;
-      flex-basis: 0;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
       margin: 0;
     }
 
@@ -8130,6 +8169,7 @@ $multiple-z-depth-z-index: 5 !default;
     //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
 
     flex-grow: 0 !important;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     width: 0 !important; //INFO: Instead of `flex-basis: 0`, it doesn't work the same way on Firefox
     align-self: center;
     margin: 0 !important;
@@ -8194,6 +8234,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
  * ========================================================================= */
 
 //INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
+//TODO: Add a class that makes the navbar stays below the toolbar, in that case the toolbar should have an higher z-index than the navbar probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+//FIXME: On Safari there's a strange bug where the page is moving on load, like if the navbars where actually visible, probably some kind of viewport bug
 
 /* MIXINS */
 
@@ -8608,6 +8650,7 @@ $noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !defaul
  * ========================================================================= */
 
 //TODO: Add transparentize back, in a wise, space efficient way
+//FIXME: The columns doesn't shrink when necessary in IE-10-11
 
 /* MIXINS */
 
@@ -8685,9 +8728,62 @@ $noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !defaul
 
     }
 
+    /* QUEUE */
+
     .noty-queue {
       @include expand-queue ();
       box-shadow: none !important;
+    }
+
+  }
+
+}
+
+//INFO: IE-10-11 Fix so that noties won't expand over the viewport
+
+_:-ms-input-placeholder, :root .noty-queues  {
+
+  /* TOP */
+
+  &.top {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* QUEUES ROW */
+
+  .noty-queues-row {
+    align-items: flex-start;
+  }
+
+  /* QUEUE */
+
+  .noty-queue:not(.expanded) {
+
+    width: calc(100% - #{$gutter * 2});
+    margin-right: $gutter;
+
+    /* NOTY */
+
+    .noty {
+      max-width: 100%;
     }
 
   }
@@ -8702,6 +8798,7 @@ $noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !defaul
   z-index: $noty-z-index;
   display: flex;
   left: 0;
+  right: 0;
   flex-wrap: wrap;
   width: 100%;
   pointer-events: none;
@@ -9587,8 +9684,7 @@ $rater-star-active-color: $color-secondary !default;
 .rater {
 
   @extend .widget;
-  display: flex;
-  width: 0; //FIXME: $('.rater').outerWidth () returns 0 because of this, but this fixes the :hover on empty space
+  display: inline-flex; //INFO: Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
 
   /* STAR */
 
@@ -9987,6 +10083,7 @@ $square-sample-p-size: 'xxsmall' !default;
 
 %shape {
   flex-grow: 0 !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
 }
 
 /* TRIANGLE */
@@ -10232,6 +10329,7 @@ $switch-transition-all-duration: $transition-duration-fast !default;
     align-items: center;
     position: relative;
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   }
 
   /* UNHIGHLIGHT */
@@ -10649,7 +10747,7 @@ $spinner-label-border-radius: 50% !default;
 
 //TODO: Add support for icon at the center of the spinner, sometimes might be useful
 
-//FIXME: Not working on Firefox, Edge, and IE
+//FIXME: Firefox and Edge are not animating stroke-dashoffset, IE is not even animatin stroke-dasharray
 
 /* SPINNER */
 
@@ -10671,6 +10769,7 @@ svg.spinner {
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
+    stroke-dasharray: 0%, 240%; //INFO: Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
     animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 
@@ -10832,6 +10931,7 @@ $statistic-secondary-size: 'small' !default;
 
 .stepper .input-wrp {
   flex-grow: 1;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   justify-content: center;
 }
 
@@ -10880,6 +10980,7 @@ $statistic-secondary-size: 'small' !default;
     @include color ( $switch-color, true );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
+    top: 0;
     left: 0;
     z-index: 1;
     width: $switch-handler-size;
@@ -11387,7 +11488,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-//TODO: Add support for tabs in all directions
+//TODO: Add support for tabs in all directions, use `top, right, bottom, left` classes instead of the `horizontal, vertical` abstraction
 
 /* TABS */
 
@@ -11409,6 +11510,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
     > * {
       margin-bottom: 0;
       flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     }
 
   }
@@ -11520,12 +11622,14 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
 
       /* CONTAINER */
 
       > * {
         @include border-left-radius ( 0 );
         flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
         border-left-width: 0;
       }
 
@@ -11776,6 +11880,16 @@ p > a {
   margin-bottom: 0;
 }
 
+//INFO: Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
+
+_:-ms-input-placeholder, :root a {
+  display: block;
+}
+
+_:-ms-input-placeholder, :root p > a {
+  display: initial;
+}
+
 /* HEADERS */
 
 h1, h2, h3, h4, h5, h6 {
@@ -11822,6 +11936,7 @@ small {
 
 p {
   margin: 0 0 $gutter;
+  max-width: 100%; //INFO: This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
 }
 
 /* MARK */

@@ -172,9 +172,9 @@
 
     /* INDICATOR TAP */
 
-    __indicatorTap ( event, indicator ) {
+    __indicatorTap ( event ) {
 
-      this.set ( this.$indicators.index ( indicator ) );
+      this.set ( this.$indicators.index ( event.currentTarget ) );
 
     }
 

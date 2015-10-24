@@ -32,7 +32,7 @@
 
   }
 
-  &.no-wrap > :not(.multiple) { //INFO: Here we just need the gutter in between
+  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { //INFO: Here we just need the gutter in between
 
     &:not(:first-child) {
       margin-left: $gutter-half;
@@ -100,7 +100,7 @@
 
       > .input-wrp,
       > input {
-        flex-basis: 0
+        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
       }
 
     }
@@ -114,7 +114,7 @@
   /* EQUAL */
 
   &.equal > * {
-    flex-basis: 0;
+    flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
   }
 
   /* JOINED */
@@ -219,6 +219,7 @@
 
       > * {
         flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
       }
 
     }
@@ -255,7 +256,8 @@
     &:last-child {
       display: block;
       flex-grow: 1;
-      flex-basis: 0;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
       margin: 0;
     }
 
@@ -277,6 +279,7 @@
     //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
 
     flex-grow: 0 !important;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     width: 0 !important; //INFO: Instead of `flex-basis: 0`, it doesn't work the same way on Firefox
     align-self: center;
     margin: 0 !important;

@@ -290,9 +290,9 @@
 
     /* TAP ON CLOSE */
 
-    __tapOnTagRemover ( event, tagRemover ) {
+    __tapOnTagRemover ( event ) {
 
-      var $tag = $(tagRemover).parents ( this.options.selectors.tag );
+      var $tag = $(event.currentTarget).parents ( this.options.selectors.tag );
 
       this.remove ( $tag );
 

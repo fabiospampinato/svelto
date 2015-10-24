@@ -82,11 +82,11 @@
 
     /* TAP */
 
-    __tap ( event, star ) {
+    __tap ( event ) {
 
       if ( !this.alreadyRated && !this.doingAjax && this.options.url ) {
 
-        var rating = this.$stars.index ( star ) + 1,
+        var rating = this.$stars.index ( event.currentTarget ) + 1,
             self = this;
 
         $.ajax ({

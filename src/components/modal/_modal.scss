@@ -40,7 +40,7 @@
     top: 50%;
     left: 50%;
     max-width: $modal-max-width;
-    max-height: $modal-max-height;
+    max-height: $modal-max-height; //FIXME: On iOS a value of 100vh will exceed the actual visible viewport, maybe instead of using vw and vh center using fill-absolute and margin: auto, but apply some positive values to the top, right, bottom and left properties, it should work, maybe...
   }
 
   /* FULLSCREEN */

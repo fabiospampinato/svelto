@@ -16,8 +16,7 @@
 .rater {
 
   @extend .widget;
-  display: flex;
-  width: 0; //FIXME: $('.rater').outerWidth () returns 0 because of this, but this fixes the :hover on empty space
+  display: inline-flex; //INFO: Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
 
   /* STAR */
 

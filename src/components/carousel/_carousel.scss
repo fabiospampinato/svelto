@@ -19,6 +19,7 @@
 
   @extend .widget;
   display: flex;
+  align-items: stretch;
   position: relative;
   min-height: $carousel-min-height;
 
@@ -84,6 +85,7 @@
     position: relative;
     overflow: hidden;
     flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     background-color: $carousel-bg-color;
 
     /* ITEM */

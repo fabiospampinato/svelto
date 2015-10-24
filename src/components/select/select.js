@@ -135,9 +135,9 @@
 
     /* BUTTON TAP */
 
-    __tap ( event, button ) {
+    __tap ( event ) {
 
-      this.$select.val ( $(button).data ( 'value' ) ).trigger ( 'change' );
+      this.$select.val ( $(event.currentTarget).data ( 'value' ) ).trigger ( 'change' );
 
     }
 

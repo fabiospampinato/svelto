@@ -240,9 +240,9 @@
 
     /* CHANGE */
 
-    __change ( event, element ) {
+    __change ( event ) {
 
-      var elementObj = this.elements[element.name];
+      var elementObj = this.elements[event.currentTarget.name];
 
       elementObj.dirty = true;
 
@@ -276,9 +276,9 @@
 
     /* FOCUS */
 
-    __focus ( event, element ) {
+    __focus ( event ) {
 
-      var elementObj = this.elements[element.name];
+      var elementObj = this.elements[event.currentTarget.name];
 
       elementObj.isValid = undefined;
 
@@ -288,9 +288,9 @@
 
     /* BLUR */
 
-    __blur ( event, element ) {
+    __blur ( event ) {
 
-      var elementObj = this.elements[element.name];
+      var elementObj = this.elements[event.currentTarget.name];
 
       this._validateWorker ( elementObj );
 

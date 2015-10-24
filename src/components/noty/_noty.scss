@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Add transparentize back, in a wise, space efficient way
+//FIXME: The columns doesn't shrink when necessary in IE-10-11
 
 /* MIXINS */
 
@@ -86,9 +87,62 @@
 
     }
 
+    /* QUEUE */
+
     .noty-queue {
       @include expand-queue ();
       box-shadow: none !important;
+    }
+
+  }
+
+}
+
+//INFO: IE-10-11 Fix so that noties won't expand over the viewport
+
+_:-ms-input-placeholder, :root .noty-queues  {
+
+  /* TOP */
+
+  &.top {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* QUEUES ROW */
+
+  .noty-queues-row {
+    align-items: flex-start;
+  }
+
+  /* QUEUE */
+
+  .noty-queue:not(.expanded) {
+
+    width: calc(100% - #{$gutter * 2});
+    margin-right: $gutter;
+
+    /* NOTY */
+
+    .noty {
+      max-width: 100%;
     }
 
   }
@@ -103,6 +157,7 @@
   z-index: $noty-z-index;
   display: flex;
   left: 0;
+  right: 0;
   flex-wrap: wrap;
   width: 100%;
   pointer-events: none;

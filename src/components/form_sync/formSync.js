@@ -58,7 +58,7 @@
       this.$form = this.$element;
       this.group = this.$form.data ( this.options.datas.group );
 
-      this.isNewGroup = ( groups.indexOf ( group ) !== -1 );
+      this.isNewGroup = ( groups.indexOf ( this.group ) === -1 );
 
     }
 
@@ -91,7 +91,7 @@
             events = isTextfield ? 'input change' : 'change',
             $currentForm = $element.parents ( this.options.selectors.form ),
             $otherForms = $forms.not ( $currentForm ),
-            $otherElements  = $otherForms.find ( '[' + this.attributes.name + '="' + name + '"]' );
+            $otherElements  = $otherForms.find ( '[' + this.options.attributes.name + '="' + name + '"]' );
 
         $element.on ( events, () => {
 

@@ -342,6 +342,12 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     } else if ('originalEvent' in event) {
 
       return $.eventXY(event.originalEvent);
+    } else if ('touches' in event && event.touches.length > 0) {
+
+      return {
+        X: event.touches[0].pageX,
+        Y: event.touches[0].pageY
+      };
     } else {
 
       throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine
@@ -1095,8 +1101,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $element = this.$element;
       }
 
-      console.log("setting onHover with args:", args);
-
       this._on($element, Pointer.enter, function () {
         return _this3._on.apply(_this3, args);
       });
@@ -1643,11 +1647,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               _ref4 = _i4.value;
             }
 
-            var element = _ref4;
+            var _element = _ref4;
 
             /* VARIABLES */
 
-            var instance = $.factory.instance(Widget, false, element);
+            var instance = $.factory.instance(Widget, false, _element);
 
             /* CHECKING VALID CALL */
 
@@ -1687,9 +1691,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _ref5 = _i5.value;
           }
 
-          var element = _ref5;
+          var _element2 = _ref5;
 
-          $.factory.instance(Widget, clonedOptions, element);
+          $.factory.instance(Widget, clonedOptions, _element2);
         }
       }
 
@@ -2449,9 +2453,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* INDICATOR TAP */
 
-    Carousel.prototype.__indicatorTap = function __indicatorTap(event, indicator) {
+    Carousel.prototype.__indicatorTap = function __indicatorTap(event) {
 
-      this.set(this.$indicators.index(indicator));
+      this.set(this.$indicators.index(event.currentTarget));
     };
 
     /* FLICK */
@@ -3588,11 +3592,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* SELECTION */
 
-    Datepicker.prototype.__dayTap = function __dayTap(event, node) {
+    Datepicker.prototype.__dayTap = function __dayTap(event) {
 
       if (event.button && event.button !== UI.mouseButton.LEFT) return;
 
-      var day = parseInt($(node).html(), 10);
+      var day = parseInt($(event.currentTarget).html(), 10);
 
       this._unhighlightSelected();
 
@@ -3824,10 +3828,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * @requires ../widget/factory.js
  * ========================================================================= */
 
+//FIXME: Don't trigger the move events if we are not duing it more than a threashold, but just on touch devices, there is very difficoult to do an extremelly precise tap without moving the finger
+
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
+//FIXME: On iOS, if the draggable is to close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
 (function ($, _, window, document, undefined) {
 
@@ -4364,24 +4371,26 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* POINTER TOP / LEFT */
 
+    var $pointer = undefined,
+        translateType = undefined,
+        translateValue = undefined;
+
     if (options.$anchor && options.$pointer) {
 
-      var _$pointer = _.isFunction(options.$pointer) ? options.$pointer(datas) : options.$pointer,
-          _translateType = undefined,
-          _translateValue = undefined;
+      $pointer = _.isFunction(options.$pointer) ? options.$pointer(datas) : options.$pointer;
 
-      if (_$pointer instanceof $) {
+      if ($pointer instanceof $) {
 
         switch (bestDirection) {
 
           case 'top':
           case 'bottom':
-            _translateType = 'translateX', _translateValue = anchorRect.left - coordinates.left + anchorRect.width / 2;
+            translateType = 'translateX', translateValue = anchorRect.left - coordinates.left + anchorRect.width / 2;
             break;
 
           case 'left':
           case 'right':
-            _translateType = 'translateY', _translateValue = anchorRect.top - coordinates.top + anchorRect.height / 2;
+            translateType = 'translateY', translateValue = anchorRect.top - coordinates.top + anchorRect.height / 2;
             break;
 
         }
@@ -4524,16 +4533,16 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* HOVER */
 
-    Dropdown.prototype.__hoverTriggerEnter = function __hoverTriggerEnter(event, trigger) {
+    Dropdown.prototype.__hoverTriggerEnter = function __hoverTriggerEnter(event) {
 
       if (!this._isOpen) {
 
         this._isHoverOpen = false;
-        this._hoverTrigger = trigger;
+        this._hoverTrigger = event.currentTarget;
 
         this._hoverOpenTimeout = this._delay(this.__hoverOpen, this.options.hover.delays.open);
 
-        this._one($(trigger), Pointer.leave, this.__hoverTriggerLeave);
+        this._one($(event.currentTarget), Pointer.leave, this.__hoverTriggerLeave);
       }
     };
 
@@ -4549,7 +4558,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       }
     };
 
-    Dropdown.prototype.__hoverTriggerLeave = function __hoverTriggerLeave(event, trigger) {
+    Dropdown.prototype.__hoverTriggerLeave = function __hoverTriggerLeave(event) {
 
       if (this._hoverOpenTimeout) {
 
@@ -4696,12 +4705,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return this._isOpen;
     };
 
-    Dropdown.prototype.toggle = function toggle(event, trigger) {
+    Dropdown.prototype.toggle = function toggle(event) {
 
-      this[this._isOpen && assignments[this.id] === trigger ? 'close' : 'open'](event, trigger);
+      this[this._isOpen && assignments[this.id] === event.currentTarget ? 'close' : 'open'](event, event.currentTarget);
     };
 
     Dropdown.prototype.open = function open(event, trigger) {
+
+      trigger = trigger || event.currentTarget;
 
       if (trigger) {
 
@@ -4874,7 +4885,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         flipper: '.flippable-trigger'
       },
       callbacks: {
-        font: function font() {},
+        front: function front() {},
         back: function back() {}
       }
     }
@@ -5587,7 +5598,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$form = this.$element;
       this.group = this.$form.data(this.options.datas.group);
 
-      this.isNewGroup = groups.indexOf(group) !== -1;
+      this.isNewGroup = groups.indexOf(this.group) === -1;
     };
 
     FormSync.prototype._init = function _init() {
@@ -5628,7 +5639,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             events = isTextfield ? 'input change' : 'change',
             $currentForm = $element.parents(_this7.options.selectors.form),
             $otherForms = $forms.not($currentForm),
-            $otherElements = $otherForms.find('[' + _this7.attributes.name + '="' + name + '"]');
+            $otherElements = $otherForms.find('[' + _this7.options.attributes.name + '="' + name + '"]');
 
         $element.on(events, function () {
 
@@ -5893,10 +5904,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _ref8 = _i8.value;
         }
 
-        var element = _ref8;
+        var _element3 = _ref8;
 
-        var $element = $(element),
-            _name3 = element.name,
+        var $element = $(_element3),
+            _name3 = _element3.name,
             validationsStr = $element.data(this.options.datas.validations);
 
         if (validationsStr) {
@@ -5957,9 +5968,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* CHANGE */
 
-    FormValidate.prototype.__change = function __change(event, element) {
+    FormValidate.prototype.__change = function __change(event) {
 
-      var elementObj = this.elements[element.name];
+      var elementObj = this.elements[event.currentTarget.name];
 
       elementObj.dirty = true;
 
@@ -5988,9 +5999,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* FOCUS */
 
-    FormValidate.prototype.__focus = function __focus(event, element) {
+    FormValidate.prototype.__focus = function __focus(event) {
 
-      var elementObj = this.elements[element.name];
+      var elementObj = this.elements[event.currentTarget.name];
 
       elementObj.isValid = undefined;
 
@@ -5999,9 +6010,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     /* BLUR */
 
-    FormValidate.prototype.__blur = function __blur(event, element) {
+    FormValidate.prototype.__blur = function __blur(event) {
 
-      var elementObj = this.elements[element.name];
+      var elementObj = this.elements[event.currentTarget.name];
 
       this._validateWorker(elementObj);
     };
@@ -7036,6 +7047,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     };
 
     Overlay.prototype.toggle = function toggle(force) {
+      var _this8 = this;
 
       if (!_.isBoolean(force)) {
 
@@ -7048,9 +7060,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         this._frame(function () {
 
-          this.$overlay.toggleClass(this.options.classes.open, this._isOpen);
+          _this8.$overlay.toggleClass(_this8.options.classes.open, _this8._isOpen);
 
-          this._trigger(this._isOpen ? 'open' : 'close');
+          _this8._trigger(_this8._isOpen ? 'open' : 'close');
         });
       }
     };
@@ -8092,11 +8104,11 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* TAP */
 
-    Rater.prototype.__tap = function __tap(event, star) {
+    Rater.prototype.__tap = function __tap(event) {
 
       if (!this.alreadyRated && !this.doingAjax && this.options.url) {
 
-        var rating = this.$stars.index(star) + 1,
+        var rating = this.$stars.index(event.currentTarget) + 1,
             self = this;
 
         $.ajax({
@@ -8450,9 +8462,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* BUTTON TAP */
 
-    Select.prototype.__tap = function __tap(event, button) {
+    Select.prototype.__tap = function __tap(event) {
 
-      this.$select.val($(button).data('value')).trigger('change');
+      this.$select.val($(event.currentTarget).data('value')).trigger('change');
     };
 
     /* PRIVATE */
@@ -10190,9 +10202,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* PRIVATE */
 
-    Tabs.prototype.__tap = function __tap(event, node) {
+    Tabs.prototype.__tap = function __tap(event) {
 
-      var newIndex = this.$triggers.index($(node));
+      var newIndex = this.$triggers.index($(event.currentTarget));
 
       this.set(newIndex);
     };
@@ -10517,9 +10529,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* TAP ON CLOSE */
 
-    Tagbox.prototype.__tapOnTagRemover = function __tapOnTagRemover(event, tagRemover) {
+    Tagbox.prototype.__tapOnTagRemover = function __tapOnTagRemover(event) {
 
-      var $tag = $(tagRemover).parents(this.options.selectors.tag);
+      var $tag = $(event.currentTarget).parents(this.options.selectors.tag);
 
       this.remove($tag);
     };
@@ -10866,7 +10878,7 @@ Prism.languages.js = Prism.languages.javascript;
     };
 
     _class4.prototype.once = function once(time) {
-      var _this8 = this;
+      var _this9 = this;
 
       if (isNaN(time)) {
 
@@ -10874,7 +10886,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
 
       setTimeout(function () {
-        return _this8.action();
+        return _this9.action();
       }, time);
 
       return this;
@@ -10949,7 +10961,7 @@ Prism.languages.js = Prism.languages.javascript;
     };
 
     _class4.prototype.setTimer = function setTimer(time) {
-      var _this9 = this;
+      var _this10 = this;
 
       if (isNaN(time)) {
 
@@ -10961,7 +10973,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.clearTimer();
 
       this.timeoutObject = setTimeout(function () {
-        return _this9.go();
+        return _this10.go();
       }, time);
     };
 

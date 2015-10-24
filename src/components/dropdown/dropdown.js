@@ -111,16 +111,16 @@
 
     /* HOVER */
 
-    __hoverTriggerEnter ( event, trigger ) {
+    __hoverTriggerEnter ( event ) {
 
       if ( !this._isOpen ) {
 
         this._isHoverOpen = false;
-        this._hoverTrigger = trigger;
+        this._hoverTrigger = event.currentTarget;
 
         this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
 
-        this._one ( $(trigger), Pointer.leave, this.__hoverTriggerLeave );
+        this._one ( $(event.currentTarget), Pointer.leave, this.__hoverTriggerLeave );
 
       }
 
@@ -140,7 +140,7 @@
 
     }
 
-    __hoverTriggerLeave ( event, trigger ) {
+    __hoverTriggerLeave ( event ) {
 
       if ( this._hoverOpenTimeout ) {
 
@@ -308,13 +308,15 @@
 
     }
 
-    toggle ( event, trigger ) {
+    toggle ( event ) {
 
-      this[( this._isOpen && assignments[this.id] === trigger ) ? 'close' : 'open']( event, trigger );
+      this[( this._isOpen && assignments[this.id] === event.currentTarget ) ? 'close' : 'open']( event, event.currentTarget );
 
     }
 
     open ( event, trigger ) {
+
+      trigger = trigger || event.currentTarget;
 
       if ( trigger ) {
 

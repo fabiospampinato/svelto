@@ -8,7 +8,7 @@
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-//TODO: Add support for tabs in all directions
+//TODO: Add support for tabs in all directions, use `top, right, bottom, left` classes instead of the `horizontal, vertical` abstraction
 
 /* TABS */
 
@@ -30,6 +30,7 @@
     > * {
       margin-bottom: 0;
       flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     }
 
   }
@@ -141,12 +142,14 @@
       display: flex;
       flex-direction: column;
       flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
 
       /* CONTAINER */
 
       > * {
         @include border-left-radius ( 0 );
         flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
         border-left-width: 0;
       }
 

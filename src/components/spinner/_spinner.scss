@@ -13,7 +13,7 @@
 
 //TODO: Add support for icon at the center of the spinner, sometimes might be useful
 
-//FIXME: Not working on Firefox, Edge, and IE
+//FIXME: Firefox and Edge are not animating stroke-dashoffset, IE is not even animatin stroke-dasharray
 
 /* SPINNER */
 
@@ -35,6 +35,7 @@ svg.spinner {
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;
     stroke-linecap: round;
+    stroke-dasharray: 0%, 240%; //INFO: Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
     animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
   }
 

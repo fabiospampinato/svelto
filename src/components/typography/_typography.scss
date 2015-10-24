@@ -53,6 +53,16 @@ p > a {
   margin-bottom: 0;
 }
 
+//INFO: Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
+
+_:-ms-input-placeholder, :root a {
+  display: block;
+}
+
+_:-ms-input-placeholder, :root p > a {
+  display: initial;
+}
+
 /* HEADERS */
 
 h1, h2, h3, h4, h5, h6 {
@@ -99,6 +109,7 @@ small {
 
 p {
   margin: 0 0 $gutter;
+  max-width: 100%; //INFO: This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
 }
 
 /* MARK */

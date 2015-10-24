@@ -305,6 +305,7 @@
 
 .spacer {
   flex-grow: $spacer-flex-grow !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   margin-bottom: $gutter;
 }
 

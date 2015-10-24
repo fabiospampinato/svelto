@@ -25,6 +25,13 @@
 
       return $.eventXY ( event.originalEvent );
 
+    } else if ( 'touches' in event && event.touches.length > 0 ) {
+
+      return {
+        X: event.touches[0].pageX,
+        Y: event.touches[0].pageY
+      };
+
     } else {
 
       throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine

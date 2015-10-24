@@ -13,6 +13,7 @@
 
 %shape {
   flex-grow: 0 !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
 }
 
 /* TRIANGLE */

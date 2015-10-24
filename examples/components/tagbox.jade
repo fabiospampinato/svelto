@@ -11,25 +11,25 @@ append main
   +divider-block Actions
 
   +multiple.actions
-    +button("get ()").outlined Get
+    +button("tagbox_get ()").outlined Get
     +multiple.joined
       +input({ name: "add", label: "Add tags..." }).no-floating.white.text-field-primary.outlined
-      +button("add ()").primary.outlined Add
+      +button("tagbox_add ()").primary.outlined Add
     +multiple.joined
       +input({ name: "remove", label: "Remove tags..." }).no-floating.white.text-field-secondary.outlined
-      +button("remove ()").secondary.outlined Remove
+      +button("tagbox_remove ()").secondary.outlined Remove
     +button("tagbox_api ( 'clear' )").black.outlined Clear
     +button("tagbox_api ( 'reset' )").outlined Reset
 
 append body-end
   +script.
-    function get () {
+    function tagbox_get () {
       $.noty ( $('.tagbox').tagbox ( 'get' ).join ( ' - ' ) );
     }
-    function add () {
+    function tagbox_add () {
       $('.tagbox').tagbox ( 'add', $('input[name="add"]').val () );
     }
-    function remove () {
+    function tagbox_remove () {
       $('.tagbox').tagbox ( 'remove', $('input[name="remove"]').val () );
     }
     function tagbox_api ( action ) {

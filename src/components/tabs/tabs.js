@@ -84,9 +84,9 @@
 
     /* PRIVATE */
 
-    __tap ( event, node ) {
+    __tap ( event ) {
 
-      var newIndex = this.$triggers.index ( $(node) );
+      var newIndex = this.$triggers.index ( $(event.currentTarget) );
 
       this.set ( newIndex );
 

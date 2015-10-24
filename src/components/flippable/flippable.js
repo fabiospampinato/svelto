@@ -26,7 +26,7 @@
         flipper: '.flippable-trigger'
       },
       callbacks: {
-        font () {},
+        front () {},
         back () {}
       }
     }

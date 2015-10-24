@@ -180,11 +180,11 @@
 
     /* SELECTION */
 
-    __dayTap ( event, node ) {
+    __dayTap ( event ) {
 
       if ( event.button && event.button !== UI.mouseButton.LEFT ) return;
 
-      let day = parseInt ( $(node).html (), 10 );
+      let day = parseInt ( $(event.currentTarget).html (), 10 );
 
       this._unhighlightSelected ();
 

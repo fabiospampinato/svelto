@@ -187,11 +187,13 @@
 
     /* POINTER TOP / LEFT */
 
+    let $pointer,
+        translateType,
+        translateValue;
+
     if ( options.$anchor && options.$pointer ) {
 
-      let $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer,
-          translateType,
-          translateValue;
+      $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
 
       if ( $pointer instanceof $ ) {
 

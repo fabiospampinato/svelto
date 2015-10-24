@@ -207,3 +207,15 @@
   }
 
 }
+
+//INFO: Card dropdown max height fix for IE10+
+
+_:-ms-input-placeholder, :root .dropdown.card {
+
+  max-height: none;
+
+  .card-block {
+    max-height: $dropdown-max-height / 100 * 90;
+  }
+
+}

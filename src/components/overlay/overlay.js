@@ -168,7 +168,7 @@
 
         this._isOpen = force;
 
-        this._frame ( function () {
+        this._frame ( () => {
 
           this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
 
