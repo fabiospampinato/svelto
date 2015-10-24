@@ -125,6 +125,24 @@
       margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
     }
 
+    /* NO TIP */
+
+    &.no-tip {
+
+      /* IMAGE */
+
+      .chat-msg-img{
+        margin-right: $gutter;
+      }
+
+    }
+
+    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), & .chat-msg-img {
+      margin-right: $gutter;
+    }
+
     /* CONTENT */
 
     .chat-msg-content {
@@ -140,8 +158,16 @@
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: url('/chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
+
+      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+      _:-ms-lang(x), &:before {
+        display: none !important;
+      }
+
 
       /* TIP (OUTLINED) */
 
@@ -179,6 +205,24 @@
       margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
     }
 
+    /* NO TIP */
+
+    &.no-tip {
+
+      /* IMAGE */
+
+      .chat-msg-img{
+        margin-left: $gutter;
+      }
+
+    }
+
+    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), & .chat-msg-img {
+      margin-left: $gutter;
+    }
+
     /* CONTENT */
 
     .chat-msg-content {
@@ -194,7 +238,14 @@
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: url('/chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
+      }
+
+      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+      _:-ms-lang(x), &:before {
+        display: none !important;
       }
 
       /* TIP (OUTLINED) */

@@ -4987,13 +4987,17 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   var config = {
     name: 'spinnerOverlay',
     templates: {
-      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' + '<div class="spinner-label {%=(o.multicolor ? "" : o.color)%}">' + '<svg class="spinner {%=(o.multicolor ? "multicolor" : "")%}">' + '<circle />' + '</svg>' + '</div>' + '</div>'
+      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' + '{% if ( o.labeled ) { %}' + '<div class="spinner-label {%=(o.multicolor ? "" : o.colors.labeled)%}">' + '{% } %}' + '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.colors.unlabeled ))%}">' + '<circle cx="1.625em" cy="1.625em" r="1.25em" />' + '</svg>' + '{% if ( o.labeled ) { %}' + '</div>' + '{% } %}' + '</div>'
     },
     options: {
+      labeled: true,
       dimmer: false,
       blurrer: false,
       multicolor: false,
-      color: 'white',
+      colors: {
+        labeled: 'white',
+        unlabeled: 'secondary'
+      },
       callbacks: {
         //TODO: Add callbacks, mimic those from $.svelto.overlay
       }

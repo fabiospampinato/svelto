@@ -4254,6 +4254,24 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
       margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
     }
 
+    /* NO TIP */
+
+    &.no-tip {
+
+      /* IMAGE */
+
+      .chat-msg-img{
+        margin-right: $gutter;
+      }
+
+    }
+
+    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), & .chat-msg-img {
+      margin-right: $gutter;
+    }
+
     /* CONTENT */
 
     .chat-msg-content {
@@ -4269,8 +4287,16 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: url('/chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
+
+      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+      _:-ms-lang(x), &:before {
+        display: none !important;
+      }
+
 
       /* TIP (OUTLINED) */
 
@@ -4308,6 +4334,24 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
       margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
     }
 
+    /* NO TIP */
+
+    &.no-tip {
+
+      /* IMAGE */
+
+      .chat-msg-img{
+        margin-left: $gutter;
+      }
+
+    }
+
+    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), & .chat-msg-img {
+      margin-left: $gutter;
+    }
+
     /* CONTENT */
 
     .chat-msg-content {
@@ -4323,7 +4367,14 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: url('/chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
+      }
+
+      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+      _:-ms-lang(x), &:before {
+        display: none !important;
       }
 
       /* TIP (OUTLINED) */
@@ -5125,6 +5176,12 @@ hr {
     box-sizing: content-box;
   }
 
+  //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+  _:-ms-lang(x), &:before {
+    display: none;
+  }
+
   /* TIP (OUTLINED) */
 
   &.outlined:before {
@@ -5140,6 +5197,7 @@ hr {
     &:before {
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
+      clip-path: url('/dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
       box-shadow: $dropdown-top-tip-box-shadow;
     }
@@ -5162,6 +5220,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
+      clip-path: url('/dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(100% 0, 0 0, 0 100%);
       box-shadow: $dropdown-bottom-tip-box-shadow;
     }
@@ -5184,6 +5243,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
+      clip-path: url('/dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       box-shadow: $dropdown-left-tip-box-shadow;
     }
@@ -5206,6 +5266,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
+      clip-path: url('/dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       box-shadow: $dropdown-right-tip-box-shadow;
     }

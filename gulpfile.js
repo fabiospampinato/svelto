@@ -14,7 +14,8 @@ var _           = require ( 'lodash' ),
     fs          = require ( 'fs' ),
     merge       = require ( 'merge-stream' ),
     path        = require ( 'path' ),
-    pngquant    = require ( 'imagemin-pngquant' );
+    pngquant    = require ( 'imagemin-pngquant' ),
+    svgo        = require ( 'imagemin-svgo' );
 
 /* GULP */
 
@@ -66,13 +67,13 @@ gulp.task ( 'images', function () {
                map: path.basename
              }))
              .pipe ( gulpif ( isProduction, bytediff.start () ) )
-             .pipe ( gulpif ( isProduction, imagemin ({
+             .pipe ( gulpif ( isProduction && !isProduction, imagemin ({ //TODO: Reenable, but fix the svg compression, right not it strips out pretty much everything, even the image
                interlaced: true, //INFO: Affects GIF images
                progressive: true, //INFO: Affects JPG images
                optimizationLevel: 7, //INFO: Affects PNG images
                multipass: true, //INFO: Affects SVG images
                svgoPlugins: [{ removeViewBox: false }],
-               use: [pngquant ()]
+               use: [pngquant (), svgo ()]
              })))
              .pipe ( gulpif ( isProduction, bytediff.stop () ) )
              .pipe ( flatten () )

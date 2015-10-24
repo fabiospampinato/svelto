@@ -4508,6 +4508,7 @@ button {
 .chat-msg:not(.direction-right) {
   /* LEVELS */
   /* IMAGE */
+  /* NO TIP */
   /* CONTENT */
   /* HEADER */
 }
@@ -4532,6 +4533,18 @@ button {
   margin-right: calc(5px + 0.75em);
 }
 
+.chat-msg:not(.direction-right).no-tip {
+  /* IMAGE */
+}
+
+.chat-msg:not(.direction-right).no-tip .chat-msg-img {
+  margin-right: 10px;
+}
+
+.chat-msg:not(.direction-right) _:-ms-lang(x), .chat-msg:not(.direction-right) .chat-msg-img {
+  margin-right: 10px;
+}
+
 .chat-msg:not(.direction-right) .chat-msg-content {
   -webkit-order: 2;
       -ms-flex-order: 2;
@@ -4546,8 +4559,14 @@ button {
 .chat-msg:not(.direction-right) .card-header:before {
   left: -0.375em;
   margin-top: -0.375em;
+  -webkit-clip-path: url("/chat-clips.svg#clip-right");
+          clip-path: url("/chat-clips.svg#clip-right");
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
+}
+
+.chat-msg:not(.direction-right) .card-header _:-ms-lang(x), .chat-msg:not(.direction-right) .card-header:before {
+  display: none !important;
 }
 
 .chat-msg:not(.direction-right) .card-header.outlined:before {
@@ -4557,6 +4576,7 @@ button {
 .chat-msg.direction-right {
   /* LEVELS */
   /* IMAGE */
+  /* NO TIP */
   /* CONTENT */
   /* HEADER */
 }
@@ -4581,6 +4601,18 @@ button {
   margin-left: calc(5px + 0.75em);
 }
 
+.chat-msg.direction-right.no-tip {
+  /* IMAGE */
+}
+
+.chat-msg.direction-right.no-tip .chat-msg-img {
+  margin-left: 10px;
+}
+
+.chat-msg.direction-right _:-ms-lang(x), .chat-msg.direction-right .chat-msg-img {
+  margin-left: 10px;
+}
+
 .chat-msg.direction-right .chat-msg-content {
   -webkit-order: 1;
       -ms-flex-order: 1;
@@ -4595,8 +4627,14 @@ button {
 .chat-msg.direction-right .card-header:before {
   right: -0.375em;
   margin-top: -0.375em;
+  -webkit-clip-path: url("/chat-clips.svg#clip-left");
+          clip-path: url("/chat-clips.svg#clip-left");
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
+}
+
+.chat-msg.direction-right .card-header _:-ms-lang(x), .chat-msg.direction-right .card-header:before {
+  display: none !important;
 }
 
 .chat-msg.direction-right .card-header.outlined:before {
@@ -5271,6 +5309,10 @@ hr, .divider.linear:empty,
   box-sizing: content-box;
 }
 
+.dropdown _:-ms-lang(x), .tooltip _:-ms-lang(x), .dropdown:before, .tooltip:before {
+  display: none;
+}
+
 .dropdown.outlined:before, .outlined.tooltip:before {
   border-width: 1px;
   border-style: solid;
@@ -5284,6 +5326,8 @@ hr, .divider.linear:empty,
 .dropdown.positionate-top:before, .positionate-top.tooltip:before {
   left: -0.375em;
   bottom: -0.375em;
+  -webkit-clip-path: url("/dropdown-clips.svg#clip-top");
+          clip-path: url("/dropdown-clips.svg#clip-top");
   -webkit-clip-path: polygon(0 100%, 100% 100%, 100% 0);
           clip-path: polygon(0 100%, 100% 100%, 100% 0);
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7);
@@ -5301,6 +5345,8 @@ hr, .divider.linear:empty,
 .dropdown.positionate-bottom:before, .positionate-bottom.tooltip:before {
   top: -0.375em;
   left: -0.375em;
+  -webkit-clip-path: url("/dropdown-clips.svg#clip-bottom");
+          clip-path: url("/dropdown-clips.svg#clip-bottom");
   -webkit-clip-path: polygon(100% 0, 0 0, 0 100%);
           clip-path: polygon(100% 0, 0 0, 0 100%);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1);
@@ -5318,6 +5364,8 @@ hr, .divider.linear:empty,
 .dropdown.positionate-left:before, .positionate-left.tooltip:before {
   top: -0.375em;
   right: -0.375em;
+  -webkit-clip-path: url("/dropdown-clips.svg#clip-left");
+          clip-path: url("/dropdown-clips.svg#clip-left");
   -webkit-clip-path: polygon(0 0, 100% 100%, 100% 0);
           clip-path: polygon(0 0, 100% 100%, 100% 0);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35);
@@ -5335,6 +5383,8 @@ hr, .divider.linear:empty,
 .dropdown.positionate-right:before, .positionate-right.tooltip:before {
   top: -0.375em;
   left: -0.375em;
+  -webkit-clip-path: url("/dropdown-clips.svg#clip-right");
+          clip-path: url("/dropdown-clips.svg#clip-right");
   -webkit-clip-path: polygon(0 0, 100% 100%, 0 100%);
           clip-path: polygon(0 0, 100% 100%, 0 100%);
   box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35);
