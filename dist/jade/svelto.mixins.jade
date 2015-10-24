@@ -51,6 +51,30 @@ mixin breadcrumb-divider(icon)
 
 
 //- =========================================================================
+//- Svelto - Card
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin card
+  .card&attributes(attributes)
+    block
+
+mixin card-header
+  .card-header&attributes(attributes)
+      block
+
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Button
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -119,27 +143,69 @@ mixin button-tag
 
 
 //- =========================================================================
-//- Svelto - Card
+//- Svelto - Chat
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin card
-  .card&attributes(attributes)
-    block
+//- Options
+  {
+    sender: {
+      img: '' // Avatar url
+      name: '', //  Nickname
+      url: '', // Profile url
+    },
+    permissions: {
+      own: boolean, // Flag that decide if the chat is owned by you
+      reply: boolean, // Flat that decide if you can reply it
+      edit: boolean, // Flag that decide if you can edit it
+      delete: boolean, // Flag that decide if you can delete it
+    },
+    message: {
+      timestamp: number, // Unix timestamp of when the message as been sent
+      content: '', // The message content
+      group: '', // The ID of the group, useful for joining all the messages
+      level: '',
+      direction: 'left' // The direction of the message
+    }
+  }
 
-mixin card-header
-  .card-header&attributes(attributes)
-      block
-
-mixin card-block
-  .card-block&attributes(attributes)
-    block
-
-mixin card-footer
-  .card-footer&attributes(attributes)
-    block
+mixin chat-msg(options)
+  - options.message.level = options.message.level || 1;
+  - options.message.direction = options.message.direction || 'left';
+  - options.sender = options.sender || {};
+  - options.sender.name = options.sender.name || "Unknown";
+  .chat-msg(class=("level-" + options.message.level + " direction-" + options.message.direction + " sender-" + options.sender.name))&attributes(attributes)
+    if options.sender.img
+      if options.sender.url
+        +a(options.sender.url)(title=options.sender.name).chat-msg-img
+          +image(options.sender.img)(title=options.sender.name).rounded
+      else
+        +image(options.sender.img)(title=options.sender.name).chat-msg-img.rounded
+    .chat-msg-content.card.outlined
+      +card-header.inherit.outlined.compact
+        +sections
+          if options.sender.name !== "Unknown"
+            +section-left
+              if options.sender.url
+                a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
+              else
+                span= options.sender.name
+          +section-right
+            +multiple
+              +button-icon("access_time")(data-timestamp-title=options.message.timestamp).xsmall.outlined.compact
+              if options.permissions
+                if options.permissions.own
+                  +button-icon("account_circle")(title="You are the owner").xsmall.outlined.compact
+                if options.permissions.reply
+                  +button-icon("reply")(title="Reply").xsmall.outlined.compact
+                if options.permissions.edit
+                  +button-icon("mode_edit")(title="Edit").xsmall.outlined.compact
+                if options.permissions.delete
+                  +button-icon("delete")(title="Delete").xsmall.outlined.compact
+      +card-block
+        p= options.message.content
 
 
 //- =========================================================================
@@ -183,71 +249,6 @@ mixin carousel-next-btn
 mixin carousel-items
   .carousel-items&attributes(attributes)
     block
-
-
-//- =========================================================================
-//- Svelto - Chat
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options
-  {
-    sender: {
-      img: '' // Avatar url
-      name: '', //  Nickname
-      url: '', // Profile url
-    },
-    permissions: {
-      own: boolean, // Flag that decide if the chat is owned by you
-      reply: boolean, // Flat that decide if you can reply it
-      edit: boolean, // Flag that decide if you can edit it
-      delete: boolean, // Flag that decide if you can delete it
-    },
-    message: {
-      timestamp: number, // Unix timestamp of when the message as been sent
-      content: '', // The message content
-      group: '', // The ID of the group, useful for joining all the messages
-      level: '',
-      direction: 'left' // The direction of the message
-    }
-  }
-
-mixin chat-msg(options)
-  - options.message.level = options.message.level || 1;
-  - options.message.direction = options.message.direction || 'left';
-  - options.sender = options.sender || {};
-  - options.sender.name = options.sender.name || "Unknown";
-  .chat-msg(class=("level-" + options.message.level + " direction-" + options.message.direction + " sender-" + options.sender.name))&attributes(attributes)
-    if options.sender.img
-      if options.sender.url
-        +a(options.sender.url)(title=options.sender.name).chat-msg-img
-          +image(options.sender.img)(title=options.sender.name).rounded
-      else
-        +image(options.sender.img)(title=options.sender.name).chat-msg-img.rounded
-    .chat-msg-content.card.outlined
-      +card-header.inherit.outlined.compact
-        +multiple
-          if options.sender.name !== "Unknown"
-            +multiple-sub-left
-              if options.sender.url
-                a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
-              else
-                span= options.sender.name
-          +multiple-sub-right
-            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).xsmall.outlined.compact
-            if options.permissions
-              if options.permissions.own
-                +button-icon("account_circle")(title="You are the owner").xsmall.outlined.compact
-              if options.permissions.reply
-                +button-icon("reply")(title="Reply").xsmall.outlined.compact
-              if options.permissions.edit
-                +button-icon("mode_edit")(title="Edit").xsmall.outlined.compact
-              if options.permissions.delete
-                +button-icon("delete")(title="Delete").xsmall.outlined.compact
-      +card-block
-        p= options.message.content
 
 
 //- =========================================================================
@@ -511,14 +512,23 @@ mixin flag(flag)
 
 
 //- =========================================================================
-//- Svelto - Footer
+//- Svelto - Form
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin footer
-  footer&attributes(attributes)
+mixin form
+  form&attributes(attributes)
+    block
+
+mixin form-button
+  button(type="submit")&attributes(attributes).label.button.actionable
+    block
+
+mixin form-button-icon(icon)
+  button(type="submit")&attributes(attributes).label.button.actionable
+    +icon(icon)
     block
 
 
@@ -545,23 +555,14 @@ mixin flippable-back
 
 
 //- =========================================================================
-//- Svelto - Form
+//- Svelto - Footer
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin form
-  form&attributes(attributes)
-    block
-
-mixin form-button
-  button(type="submit")&attributes(attributes).label.button.actionable
-    block
-
-mixin form-button-icon(icon)
-  button(type="submit")&attributes(attributes).label.button.actionable
-    +icon(icon)
+mixin footer
+  footer&attributes(attributes)
     block
 
 
@@ -787,29 +788,6 @@ mixin modal(id)
 mixin multiple
   .multiple&attributes(attributes)
     block
-
-//- Multiple Subs
-
-mixin multiple-sub-left
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).left
-    +multiple
-      block
-  .multiple-sub-spacer
-
-mixin multiple-sub-center
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).center
-    +multiple
-      block
-  .multiple-sub-spacer
-
-mixin multiple-sub-right
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).right
-    +multiple
-      block
-  .multiple-sub-spacer
 
 
 //- =========================================================================
@@ -1281,6 +1259,30 @@ mixin rater(options)
 
 
 //- =========================================================================
+//- Svelto - Sections
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin sections
+  .sections&attributes(attributes)
+    block
+
+mixin section-left
+  .section-left&attributes(attributes)
+    block
+
+mixin section-center
+  .section-center&attributes(attributes)
+    block
+
+mixin section-right
+  .section-right&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Select
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1624,19 +1626,6 @@ mixin textarea(options)
 
 
 //- =========================================================================
-//- Svelto - Toolbar
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin toolbar
-  .toolbar&attributes(attributes)
-    +multiple
-      block
-
-
-//- =========================================================================
 //- Svelto - Tooltip
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1660,6 +1649,18 @@ mixin tooltip-btn(options)
 
 mixin tooltip(id)
   .container(id=id)&attributes(attributes).tooltip
+    block
+
+
+//- =========================================================================
+//- Svelto - Toolbar
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin toolbar
+  .toolbar&attributes(attributes)
     block
 
 

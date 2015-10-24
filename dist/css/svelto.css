@@ -8295,21 +8295,10 @@ input::-ms-clear {
 }
 
 /* =========================================================================
- * Svelto - Multiple (Settings)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-/* MULTIPLE */
-/* =========================================================================
  * Svelto - Multiple
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
  * ========================================================================= */
 /* MULTIPLE */
 .multiple {
@@ -8334,8 +8323,6 @@ input::-ms-clear {
   /* STRETCHED */
   /* VERTICAL */
   /* HORIZONTAL GUTTER */
-  /* MULTIPLE SUB SPACER */
-  /* MULTIPLE SUB */
 }
 
 .multiple:not(.no-wrap):not(.vertical):not(.joined) {
@@ -8527,100 +8514,6 @@ input::-ms-clear {
 
 .multiple > .multiple.no-wrap:not(:last-child) {
   margin-right: 5px;
-}
-
-.multiple > .multiple-sub-spacer {
-  display: none;
-}
-
-.multiple > .multiple-sub-spacer:first-child,
-.multiple > .multiple-sub-spacer:last-child {
-  display: block;
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-shrink: 1;
-      -ms-flex-negative: 1;
-          flex-shrink: 1;
-  -webkit-flex-basis: 0%;
-      -ms-flex-preferred-size: 0%;
-          flex-basis: 0%;
-  margin: 0;
-}
-
-.multiple > .multiple-sub-spacer:first-child {
-  -webkit-order: 1;
-      -ms-flex-order: 1;
-          order: 1;
-}
-
-.multiple > .multiple-sub-spacer:last-child {
-  -webkit-order: 3;
-      -ms-flex-order: 3;
-          order: 3;
-}
-
-.multiple > .multiple-sub {
-  -webkit-flex-grow: 0 !important;
-      -ms-flex-positive: 0 !important;
-          flex-grow: 0 !important;
-  -webkit-flex-shrink: 1;
-      -ms-flex-negative: 1;
-          flex-shrink: 1;
-  width: 0 !important;
-  -webkit-align-self: center;
-      -ms-flex-item-align: center;
-          align-self: center;
-  margin: 0 !important;
-}
-
-.multiple > .multiple-sub > .multiple {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-wrap: nowrap;
-      -ms-flex-wrap: nowrap;
-          flex-wrap: nowrap;
-}
-
-.multiple > .multiple-sub > .multiple > * {
-  -webkit-flex-shrink: 0;
-      -ms-flex-negative: 0;
-          flex-shrink: 0;
-}
-
-.multiple > .multiple-sub.left {
-  -webkit-order: 0;
-      -ms-flex-order: 0;
-          order: 0;
-  margin-right: -5px !important;
-  margin-left: 5px !important;
-}
-
-.multiple > .multiple-sub.center {
-  -webkit-order: 2;
-      -ms-flex-order: 2;
-          order: 2;
-}
-
-.multiple > .multiple-sub.center > .multiple {
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
-}
-
-.multiple > .multiple-sub.right {
-  -webkit-order: 4;
-      -ms-flex-order: 4;
-          order: 4;
-  margin-right: 5px !important;
-  margin-left: -5px !important;
-}
-
-.multiple > .multiple-sub.right > .multiple {
-  -webkit-justify-content: flex-end;
-      -ms-flex-pack: end;
-          justify-content: flex-end;
 }
 
 /* MULTIPLE IN TABLE CELL */
@@ -10642,6 +10535,102 @@ code[class*='language-'] .namespace {
 
 a.ripple > .ripple-circle {
   z-index: -1;
+}
+
+/* =========================================================================
+ * Svelto - Sections
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* SECTIONS */
+.sections {
+  position: relative;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  margin-bottom: 10px;
+  /* SEGMENTS */
+  /* CENTER */
+}
+
+.sections > * {
+  margin-bottom: 0 !important;
+}
+
+.sections > .section-center:first-child,
+.sections > .section-center:last-child {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+/* SEGMENTS */
+.section-left,
+.section-center,
+.section-right {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1;
+  -webkit-flex-shrink: 1;
+      -ms-flex-negative: 1;
+          flex-shrink: 1;
+  -webkit-flex-basis: auto;
+      -ms-flex-preferred-size: auto;
+          flex-basis: auto;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-bottom: 10px;
+}
+
+.section-left > :last-child,
+.section-center > :last-child,
+.section-right > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.section-left > :last-child.multiple,
+.section-center > :last-child.multiple,
+.section-right > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+/* LEFT */
+.section-left {
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+}
+
+/* CENTER */
+.section-center {
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.section-center.forced {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+/* RIGHT */
+.section-right {
+  -webkit-justify-content: flex-end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
 }
 
 /* =========================================================================

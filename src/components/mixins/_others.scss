@@ -26,7 +26,7 @@
 
 @mixin sub-multiple-centered () {
 
-  .multiple { //INFO: Both the immediate child and those inside a `.multiple-sub`
+  .multiple {
     align-items: center;
   }
 

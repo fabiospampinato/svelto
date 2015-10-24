@@ -12,49 +12,56 @@ append main
   +divider-block Multiple
 
   +toolbar.orange
-    +button-icon('menu').compact
-    .spacer.large Schedule
-    +button-icon("search").compact
-    +button-icon('more_vert').compact
+    +multiple
+      +button-icon('menu').compact
+      .spacer.large Schedule
+      +button-icon("search").compact
+      +button-icon('more_vert').compact
 
   +toolbar.violet
-    +button-icon('menu').compact
-    +breadcrumb.spacer.large
-      +a(title="Components") Components
-      +breadcrumb-divider.xsmall
-      +a(title="Toolbars") Toolbars
-    +button-icon('more_vert').compact
+    +multiple
+      +button-icon('menu').compact
+      +breadcrumb.spacer.large
+        +a(title="Components") Components
+        +breadcrumb-divider.xsmall
+        +a(title="Toolbars") Toolbars
+      +button-icon('more_vert').compact
 
   +toolbar.green
-    .spacer.large Toolbar
-    +button-icon("search").compact
-    +button-icon("person").compact
-    +button-icon('more_vert').compact
+    +multiple
+      .spacer.large Toolbar
+      +button-icon("search").compact
+      +button-icon("person").compact
+      +button-icon('more_vert').compact
 
   +toolbar.blue
-    +button-icon("arrow_back").compact
-    .spacer.large Main page
-    +button-icon('more_vert').compact
+    +multiple
+      +button-icon("arrow_back").compact
+      .spacer.large Main page
+      +button-icon('more_vert').compact
 
   +toolbar.red
-    +button-icon('menu').compact
-    +icon("image").xlarge
-    .spacer.large Title
-    +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "favorite", off: "favorite_outline" } })
-    +button-icon("search").compact
+    +multiple
+      +button-icon('menu').compact
+      +icon("image").xlarge
+      .spacer.large Title
+      +switch({ name: "name", value: "value", colors: { on: "orange", off: "blue" }, icons: { on: "favorite", off: "favorite_outline" } })
+      +button-icon("search").compact
 
   +divider-block Multiple subs
 
   +toolbar.yellow
-    +multiple-sub-left
-      +button-icon('menu').compact
-    +multiple-sub-center
-      span.large Application
-    +multiple-sub-right
-      +button-icon('more_vert').compact
+    +sections
+      +section-left
+        +button-icon('menu').compact
+      +section-center
+        span.large Application
+      +section-right
+        +button-icon('more_vert').compact
 
   +toolbar.brown
-    +multiple-sub-left
-      +button-icon("arrow_back").compact
-    +multiple-sub-center
-      span.large This is a page
+    +sections
+      +section-left
+        +button-icon("arrow_back").compact
+      +section-center
+        span.large This is a page

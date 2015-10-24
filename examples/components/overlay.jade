@@ -19,17 +19,19 @@ append main
       .xxlarge
         +icon("thumb_up").xxxxlarge
     +card-header.outlined.teal
-      +multiple
-        +multiple-sub-left
-          +button-icon('thumb_down').compact.xsmall
-          +button-icon("thumb_up").compact.xsmall
-        +multiple-sub-center 
+      +sections
+        +section-left
+          +multiple
+            +button-icon('thumb_down').compact.xsmall
+            +button-icon("thumb_up").compact.xsmall
+        +section-center.forced 
           p Header
-        +multiple-sub-right
-          +button-icon('apps').compact.xsmall
-          +button-icon('menu').compact.xsmall
-          +button-icon('more_vert').compact.xsmall
-          +button-icon('refresh').compact.xsmall
+        +section-right
+          +multiple
+            +button-icon('apps').compact.xsmall
+            +button-icon('menu').compact.xsmall
+            +button-icon('more_vert').compact.xsmall
+            +button-icon('refresh').compact.xsmall
     +card-block
       +paragraph-sample
     +card-footer.outlined.pink Footer
@@ -39,17 +41,19 @@ append main
   +container.outlined
     +overlay.card.advanced
       +card-header.outlined.teal
-        +multiple
-          +multiple-sub-left
-            +button-icon('thumb_down').compact.xsmall
-            +button-icon("thumb_up").compact.xsmall
-          +multiple-sub-center 
+        +sections
+          +section-left
+            +multiple
+              +button-icon('thumb_down').compact.xsmall
+              +button-icon("thumb_up").compact.xsmall
+          +section-center.forced 
             p Header
-          +multiple-sub-right
-            +button-icon('apps').compact.xsmall
-            +button-icon('menu').compact.xsmall
-            +button-icon('more_vert').compact.xsmall
-            +button-icon('refresh').compact.xsmall
+          +section-right
+            +multiple
+              +button-icon('apps').compact.xsmall
+              +button-icon('menu').compact.xsmall
+              +button-icon('more_vert').compact.xsmall
+              +button-icon('refresh').compact.xsmall
       +card-block
         +paragraph-sample
       +card-footer.outlined.pink Footer

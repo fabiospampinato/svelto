@@ -23,11 +23,12 @@ html(class="no-js" lang="en" dir="ltr")
     #content
       +header.fixed
         +toolbar.primary.z-depth-4
-          +button-icon('menu').compact.transparent
-          a.large(href="/") Svelto
-          +spacer
-          +button-icon('refresh').compact.transparent
-          +button-icon('more_vert').compact.transparent
+          +multiple
+            +button-icon('menu').compact.transparent
+            a.large(href="/") Svelto
+            +spacer
+            +button-icon('refresh').compact.transparent
+            +button-icon('more_vert').compact.transparent
         block header
       main
           block main

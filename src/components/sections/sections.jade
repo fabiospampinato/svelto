@@ -1,11 +1,23 @@
 
 //- =========================================================================
-//- Svelto - Toolbar
+//- Svelto - Sections
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
 //- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
 //- =========================================================================
 
-mixin toolbar
-  .toolbar&attributes(attributes)
+mixin sections
+  .sections&attributes(attributes)
+    block
+
+mixin section-left
+  .section-left&attributes(attributes)
+    block
+
+mixin section-center
+  .section-center&attributes(attributes)
+    block
+
+mixin section-right
+  .section-right&attributes(attributes)
     block

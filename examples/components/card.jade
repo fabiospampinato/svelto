@@ -35,9 +35,8 @@ append main
     +card.xs-12.sm-6.md-3
       +image('/sample-wide.jpg')
         +image-caption.top.transparent
-          +multiple
-            +multiple-sub-right
-              +button-icon("more_vert").compact.xsmall.black
+          +section-right
+            +button-icon("more_vert").compact.xsmall.black
       +card-footer Footer    
     +card.xs-12.sm-6.md-3
       +card-header Header
@@ -48,17 +47,19 @@ append main
 
   +card.advanced
     +card-header.teal
-      +multiple
-        +multiple-sub-left
-          +button-icon('thumb_down').compact.xsmall
-          +button-icon("thumb_up").compact.xsmall
-        +multiple-sub-center 
+      +sections
+        +section-left
+          +multiple
+            +button-icon('thumb_down').compact.xsmall
+            +button-icon("thumb_up").compact.xsmall
+        +section-center.forced 
           p Header
-        +multiple-sub-right
-          +button-icon('apps').compact.xsmall
-          +button-icon('menu').compact.xsmall
-          +button-icon('more_vert').compact.xsmall
-          +button-icon('refresh').compact.xsmall
+        +section-right
+          +multiple
+            +button-icon('apps').compact.xsmall
+            +button-icon('menu').compact.xsmall
+            +button-icon('more_vert').compact.xsmall
+            +button-icon('refresh').compact.xsmall
     +card-block
       +paragraph-sample
       +paragraph-sample

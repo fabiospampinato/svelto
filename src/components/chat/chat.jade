@@ -42,23 +42,24 @@ mixin chat-msg(options)
         +image(options.sender.img)(title=options.sender.name).chat-msg-img.rounded
     .chat-msg-content.card.outlined
       +card-header.inherit.outlined.compact
-        +multiple
+        +sections
           if options.sender.name !== "Unknown"
-            +multiple-sub-left
+            +section-left
               if options.sender.url
                 a(href=options.sender.url title=options.sender.name).chat-msg-sender-name= options.sender.name
               else
                 span= options.sender.name
-          +multiple-sub-right
-            +button-icon("access_time")(data-timestamp-title=options.message.timestamp).xsmall.outlined.compact
-            if options.permissions
-              if options.permissions.own
-                +button-icon("account_circle")(title="You are the owner").xsmall.outlined.compact
-              if options.permissions.reply
-                +button-icon("reply")(title="Reply").xsmall.outlined.compact
-              if options.permissions.edit
-                +button-icon("mode_edit")(title="Edit").xsmall.outlined.compact
-              if options.permissions.delete
-                +button-icon("delete")(title="Delete").xsmall.outlined.compact
+          +section-right
+            +multiple
+              +button-icon("access_time")(data-timestamp-title=options.message.timestamp).xsmall.outlined.compact
+              if options.permissions
+                if options.permissions.own
+                  +button-icon("account_circle")(title="You are the owner").xsmall.outlined.compact
+                if options.permissions.reply
+                  +button-icon("reply")(title="Reply").xsmall.outlined.compact
+                if options.permissions.edit
+                  +button-icon("mode_edit")(title="Edit").xsmall.outlined.compact
+                if options.permissions.delete
+                  +button-icon("delete")(title="Delete").xsmall.outlined.compact
       +card-block
         p= options.message.content

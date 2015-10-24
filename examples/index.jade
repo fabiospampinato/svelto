@@ -4,6 +4,14 @@ extends ./layout.jade
 //- Index
 
 append main
+  +divider-block Base
+
+  +multiple
+    +button("/components/grid.html").outlined.yellow Grid
+    +button("/components/multiple.html").outlined.yellow Multiple
+    +button("/components/sections.html").outlined.yellow Sections
+    +button("/components/typography.html").outlined.yellow Typography
+
   +divider-block Decorators
 
   +multiple
@@ -17,21 +25,13 @@ append main
     +button("/components/sizes.html").outlined.yellow Sizes
     +button("/components/z-depths.html").outlined.yellow Z-Depths
 
-  +divider-block Base
-
-  +multiple
-    +button("/components/grid.html").outlined.yellow Grid
-    +button("/components/multiple.html").outlined.yellow Multiple
-    +button("/components/multiple_subs.html").outlined.red Multiple subs
-    +button("/components/typography.html").outlined.yellow Typography
-
   +divider-block Components
 
   +multiple
     +button("/components/breadcrumb.html").outlined.yellow Breadcrumb
     +button("/components/button.html").outlined.yellow Button
     +button("/components/card.html").outlined.yellow Card
-    +button("/components/chat.html").outlined.red Chat
+    +button("/components/chat.html").outlined.yellow Chat
     +button("/components/container.html").outlined.yellow Container
     +button("/components/divider.html").outlined.red Divider
     +button("/components/embedded.html").outlined.yellow Embedded

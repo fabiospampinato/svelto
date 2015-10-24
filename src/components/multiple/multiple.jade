@@ -9,26 +9,3 @@
 mixin multiple
   .multiple&attributes(attributes)
     block
-
-//- Multiple Subs
-
-mixin multiple-sub-left
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).left
-    +multiple
-      block
-  .multiple-sub-spacer
-
-mixin multiple-sub-center
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).center
-    +multiple
-      block
-  .multiple-sub-spacer
-
-mixin multiple-sub-right
-  .multiple-sub-spacer
-  .multiple-sub&attributes(attributes).right
-    +multiple
-      block
-  .multiple-sub-spacer

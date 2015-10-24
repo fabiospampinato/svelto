@@ -1404,7 +1404,7 @@ $breakpoints: (
 
 @mixin sub-multiple-centered () {
 
-  .multiple { //INFO: Both the immediate child and those inside a `.multiple-sub`
+  .multiple {
     align-items: center;
   }
 
@@ -7937,26 +7937,10 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 
 
 /* =========================================================================
- * Svelto - Multiple (Settings)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/_core.scss
- * ========================================================================= */
-
-/* MULTIPLE */
-
-$multiple-z-depth-z-index: 5 !default;
-
-
-/* =========================================================================
  * Svelto - Multiple
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires _settings.scss
  * ========================================================================= */
 
 /* MULTIPLE */
@@ -8193,85 +8177,6 @@ $multiple-z-depth-z-index: 5 !default;
 
     &:not(:last-child) {
       margin-right: $gutter-half;
-    }
-
-  }
-
-  /* MULTIPLE SUB SPACER */
-
-  > .multiple-sub-spacer {
-
-    display: none;
-
-    &:first-child,
-    &:last-child {
-      display: block;
-      flex-grow: 1;
-      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-      flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
-      margin: 0;
-    }
-
-    &:first-child {
-      order: 1;
-    }
-
-    &:last-child {
-      order: 3;
-    }
-
-  }
-
-  /* MULTIPLE SUB */
-
-  > .multiple-sub {
-
-    //FIXME: It doesn't work in IE-10-11
-    //FIXME: It doesn't work very well if we don't wrap plain text in a `p` ( the `p` has a margin-bottom)
-
-    flex-grow: 0 !important;
-    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-    width: 0 !important; //INFO: Instead of `flex-basis: 0`, it doesn't work the same way on Firefox
-    align-self: center;
-    margin: 0 !important;
-
-    > .multiple {
-
-      display: flex;
-      flex-wrap: nowrap;
-
-      > * {
-        flex-shrink: 0;
-      }
-
-    }
-
-    &.left {
-      order: 0;
-      margin-right: - $gutter-half !important;
-      margin-left: $gutter-half !important;
-    }
-
-    &.center {
-
-      order: 2;
-
-      > .multiple {
-        justify-content: center;
-      }
-
-    }
-
-    &.right {
-
-      order: 4;
-      margin-right: $gutter-half !important;
-      margin-left: - $gutter-half !important;
-
-      > .multiple {
-        justify-content: flex-end;
-      }
-
     }
 
   }
@@ -9949,6 +9854,79 @@ $ripple-transition-hide-duration: $transition-duration-normal !default;
 
 a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
   z-index: -1;
+}
+
+
+/* =========================================================================
+ * Svelto - Sections
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SECTIONS */
+
+.sections {
+
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: $gutter;
+
+  /* SEGMENTS */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  /* CENTER */
+
+  //INFO: Centering the center segment, if the left one xor the right one is missing
+  //INFO: An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
+
+  > .section-center:first-child,
+  > .section-center:last-child {
+    @include center-transform-absolute ();
+  }
+
+}
+
+/* SEGMENTS */
+
+.section-left,
+.section-center,
+.section-right {
+  @include last-child-no-gutter ();
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-items: center;
+  margin-bottom: $gutter;
+}
+
+/* LEFT */
+
+.section-left {
+  justify-content: flex-start;
+}
+
+/* CENTER */
+
+.section-center {
+
+  justify-content: center;
+
+  &.forced {
+    @include center-transform-absolute ();
+  }
+
+}
+
+/* RIGHT */
+
+.section-right {
+  justify-content: flex-end;
 }
 
 

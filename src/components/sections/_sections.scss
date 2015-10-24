@@ -1,0 +1,72 @@
+
+/* =========================================================================
+ * Svelto - Sections
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SECTIONS */
+
+.sections {
+
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: $gutter;
+
+  /* SEGMENTS */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  /* CENTER */
+
+  //INFO: Centering the center segment, if the left one xor the right one is missing
+  //INFO: An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
+
+  > .section-center:first-child,
+  > .section-center:last-child {
+    @include center-transform-absolute ();
+  }
+
+}
+
+/* SEGMENTS */
+
+.section-left,
+.section-center,
+.section-right {
+  @include last-child-no-gutter ();
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-items: center;
+  margin-bottom: $gutter;
+}
+
+/* LEFT */
+
+.section-left {
+  justify-content: flex-start;
+}
+
+/* CENTER */
+
+.section-center {
+
+  justify-content: center;
+
+  &.forced {
+    @include center-transform-absolute ();
+  }
+
+}
+
+/* RIGHT */
+
+.section-right {
+  justify-content: flex-end;
+}
