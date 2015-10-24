@@ -8,11 +8,13 @@
 
 /* BREAKPOINTS */
 
-$breakpoint-xsmall: 0rem !default;
-$breakpoint-small: 32rem !default;
-$breakpoint-medium: 48rem !default;
-$breakpoint-large: 64rem !default;
-$breakpoint-xlarge: 76rem !default;
+//INFO: We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `navbar` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the navbar is matched on loading, where actually it should not
+
+$breakpoint-xsmall: 0px !default;
+$breakpoint-small: 512px !default;
+$breakpoint-medium: 768px !default;
+$breakpoint-large: 1024px !default;
+$breakpoint-xlarge: 1216px !default;
 
 /* BREAKPOINTS */
 

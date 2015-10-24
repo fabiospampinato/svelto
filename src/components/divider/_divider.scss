@@ -33,6 +33,8 @@ hr {
 
   /* LINEAR */
 
+  //FIXME: It doesn't work in IE10
+
   &.linear,
   &:not(.block):not(.text):not(.spacer) { //INFO: The default one
 

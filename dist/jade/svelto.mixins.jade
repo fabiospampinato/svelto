@@ -51,30 +51,6 @@ mixin breadcrumb-divider(icon)
 
 
 //- =========================================================================
-//- Svelto - Card
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin card
-  .card&attributes(attributes)
-    block
-
-mixin card-header
-  .card-header&attributes(attributes)
-      block
-
-mixin card-block
-  .card-block&attributes(attributes)
-    block
-
-mixin card-footer
-  .card-footer&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Button
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -143,6 +119,73 @@ mixin button-tag
 
 
 //- =========================================================================
+//- Svelto - Card
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin card
+  .card&attributes(attributes)
+    block
+
+mixin card-header
+  .card-header&attributes(attributes)
+      block
+
+mixin card-block
+  .card-block&attributes(attributes)
+    block
+
+mixin card-footer
+  .card-footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Carousel
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin carousel
+  .carousel&attributes(attributes)
+    block
+
+mixin carousel-indicators(amount)
+  .carousel-indicators&attributes(attributes)
+    - var nr = 1;
+    while nr <= amount
+      +carousel-indicator
+      - nr++;
+
+mixin carousel-indicator
+  .carousel-indicator&attributes(attributes)
+    block
+
+mixin carousel-prev
+  .carousel-prev&attributes(attributes)
+    block
+
+mixin carousel-prev-btn
+  .button.compact.rounded.white.z-depth-2.carousel-prev&attributes(attributes)
+    +icon("chevron_left")
+
+mixin carousel-next
+  .carousel-next&attributes(attributes)
+    block
+
+mixin carousel-next-btn
+  .button.compact.rounded.white.z-depth-2.carousel-next&attributes(attributes)
+    +icon("chevron_right")
+    
+mixin carousel-items
+  .carousel-items&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Chat
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -206,49 +249,6 @@ mixin chat-msg(options)
                   +button-icon("delete")(title="Delete").xsmall.outlined.compact
       +card-block
         p= options.message.content
-
-
-//- =========================================================================
-//- Svelto - Carousel
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin carousel
-  .carousel&attributes(attributes)
-    block
-
-mixin carousel-indicators(amount)
-  .carousel-indicators&attributes(attributes)
-    - var nr = 1;
-    while nr <= amount
-      +carousel-indicator
-      - nr++;
-
-mixin carousel-indicator
-  .carousel-indicator&attributes(attributes)
-    block
-
-mixin carousel-prev
-  .carousel-prev&attributes(attributes)
-    block
-
-mixin carousel-prev-btn
-  .button.compact.rounded.white.z-depth-2.carousel-prev&attributes(attributes)
-    +icon("chevron_left")
-
-mixin carousel-next
-  .carousel-next&attributes(attributes)
-    block
-
-mixin carousel-next-btn
-  .button.compact.rounded.white.z-depth-2.carousel-next&attributes(attributes)
-    +icon("chevron_right")
-    
-mixin carousel-items
-  .carousel-items&attributes(attributes)
-    block
 
 
 //- =========================================================================
@@ -500,39 +500,6 @@ mixin object(data)
 
 
 //- =========================================================================
-//- Svelto - Flags
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flag(flag)
-  i(class="flag-" + flag)&attributes(attributes)
-    block
-
-
-//- =========================================================================
-//- Svelto - Form
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin form
-  form&attributes(attributes)
-    block
-
-mixin form-button
-  button(type="submit")&attributes(attributes).label.button.actionable
-    block
-
-mixin form-button-icon(icon)
-  button(type="submit")&attributes(attributes).label.button.actionable
-    +icon(icon)
-    block
-
-
-//- =========================================================================
 //- Svelto - Flippable
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -555,6 +522,18 @@ mixin flippable-back
 
 
 //- =========================================================================
+//- Svelto - Flags
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flag(flag)
+  i(class="flag-" + flag)&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Footer
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -563,6 +542,27 @@ mixin flippable-back
 
 mixin footer
   footer&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Form
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin form
+  form&attributes(attributes)
+    block
+
+mixin form-button
+  button(type="submit")&attributes(attributes).label.button.actionable
+    block
+
+mixin form-button-icon(icon)
+  button(type="submit")&attributes(attributes).label.button.actionable
+    +icon(icon)
     block
 
 
@@ -828,6 +828,19 @@ mixin navbar(options)
 
 
 //- =========================================================================
+//- Svelto - Noty
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+//- Options: See noty component
+
+mixin noty(options)
+  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
+
+
+//- =========================================================================
 //- Svelto - Notification
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -843,19 +856,6 @@ mixin navbar(options)
 
 mixin notification(options)
   +script&attributes(attributes) $(function () { $.notification ( !{JSON.stringify(options)} ); });
-
-
-//- =========================================================================
-//- Svelto - Noty
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-//- Options: See noty component
-
-mixin noty(options)
-  +script&attributes(attributes) $(function () { $.noty ( !{JSON.stringify(options)} ); });
 
 
 //- =========================================================================
@@ -1432,26 +1432,6 @@ mixin spinner-label
 
 
 //- =========================================================================
-//- Svelto - Statistic
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin statistic
-  .statistic&attributes(attributes)
-    block
-      
-mixin statistic-primary
-  .statistic-primary&attributes(attributes)
-    block
-      
-mixin statistic-secondary
-  .statistic-secondary&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Stepper
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1480,6 +1460,26 @@ mixin stepper(options)
     else
       +input({ value: options.value }).stepper-input.autogrow.compact
     +button-icon("add").compact.stepper-increaser
+
+
+//- =========================================================================
+//- Svelto - Statistic
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin statistic
+  .statistic&attributes(attributes)
+    block
+      
+mixin statistic-primary
+  .statistic-primary&attributes(attributes)
+    block
+      
+mixin statistic-secondary
+  .statistic-secondary&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1626,6 +1626,18 @@ mixin textarea(options)
 
 
 //- =========================================================================
+//- Svelto - Toolbar
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin toolbar
+  .toolbar&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Tooltip
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1649,18 +1661,6 @@ mixin tooltip-btn(options)
 
 mixin tooltip(id)
   .container(id=id)&attributes(attributes).tooltip
-    block
-
-
-//- =========================================================================
-//- Svelto - Toolbar
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin toolbar
-  .toolbar&attributes(attributes)
     block
 
 
