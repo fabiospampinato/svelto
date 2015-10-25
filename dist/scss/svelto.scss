@@ -9185,6 +9185,8 @@ $overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacit
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
+//FIXME: There's a bug in Yandex browser, when doing `justify-content: space-between` the first elemenet doesn't move to the left
+
 /* PAGER */
 
 .pager {
@@ -9194,7 +9196,7 @@ $overlay-dimmer-background-color: transparentize(black, $overlay-siblings-opacit
   &:not(.joined) {
     justify-content: space-between !important;
   }
-  
+
 }
 
 
