@@ -6390,6 +6390,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         trigger: '.modal-trigger',
         closer: '.modal-closer'
       },
+      animations: {
+        open: UI.animation.normal,
+        close: UI.animation.normal
+      },
       callbacks: {
         open: function open() {},
         close: function close() {}
@@ -8288,6 +8292,99 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Rater);
+})(jQuery, _, window, document);
+
+/* =========================================================================
+ * Svelto - Remote Modal
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../modal/modal.js
+ * @requires ../noty/noty.js
+ * ========================================================================= */
+
+(function ($, _, window, document, undefined) {
+
+  'use strict';
+
+  /* REMOTE MODAL */
+
+  //TODO: Abort the request if the tempModal is closed before we get a result
+  //TODO: Animate the dimensions of the temp modal transitioning to the new modal
+  //TODO: Make it work with JSON responses instead of plain html
+
+  $.remoteModal = function (url, data) {
+
+    /* DATA */
+
+    if (!data) {
+
+      if (_.isPlainObject(url)) {
+
+        data = url;
+      } else {
+
+        data = { url: url };
+      }
+    } else {
+
+      data.url = url;
+    }
+
+    /* TEMPORARY MODAL */
+
+    /*
+      <div class="modal remote-modal-placeholder card">
+        <div class="card-block">
+          <svg class="spinner">
+            <circle cx="1.625em" cy="1.625em" r="1.25em" />
+          </svg>
+        </div>
+      </div>
+    */
+
+    var $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em" /></svg></div></div>').appendTo($body).modal();
+
+    /* AJAX */
+
+    $.ajax({
+
+      cache: false,
+      data: data,
+      processData: false,
+      type: 'GET',
+      url: data.url,
+
+      beforeSend: function beforeSend() {
+        //FIXME: Check it, expecially the `this` context
+
+        $tempModal.modal('open');
+      },
+
+      error: function error(res) {
+
+        $tempModal.modal('close');
+
+        setTimeout(function () {
+
+          $tempModal.remove();
+        }, Svelto.Modal.config.options.animations.close);
+
+        $.noty('An error occurred, please try again later');
+      },
+
+      success: function success(res) {
+
+        var $remoteModal = $(res); //FIXME: Make it better, it should return a JSON object maybe
+
+        $remoteModal.modal('open');
+
+        $tempModal.replaceWidth($remoteModal);
+      }
+
+    });
+  };
 })(jQuery, _, window, document);
 
 /* =========================================================================

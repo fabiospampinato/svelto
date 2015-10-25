@@ -34,6 +34,10 @@
         trigger: '.modal-trigger',
         closer: '.modal-closer'
       },
+      animations: {
+        open: UI.animation.normal,
+        close: UI.animation.normal
+      },
       callbacks: {
         open () {},
         close () {}

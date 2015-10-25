@@ -7910,6 +7910,10 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 
 /* MODAL */
 
+//FIXME: How does an overlay inside a modal work? Maybe it's buggy
+
+//INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
+
 .modal {
 
   @include z-depth ( $modal-z-depth );
@@ -7918,6 +7922,13 @@ $modal-transition-all-duration: $transition-duration-normal !default;
   transition-property: transform, opacity;
   transition-duration: $modal-transition-all-duration;
   margin: 0;
+  cursor: pointer;
+
+  /* CHILDREN */
+
+  > * {
+    cursor: auto;
+  }
 
   /* BEFORE (BACKGROUND) */
 
@@ -7929,7 +7940,6 @@ $modal-transition-all-duration: $transition-duration-normal !default;
     top: -200vh;
     left: -200vw;
     z-index: -1;
-    cursor: pointer;
     background-color: $modal-background-color;
   }
 
@@ -9788,6 +9798,40 @@ $rater-star-active-color: $color-secondary !default;
 
   }
 
+}
+
+
+/* =========================================================================
+ * Svelto - Remote Modal (Settings)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/_core.scss
+ * ========================================================================= */
+
+/* REMOTE MODAL PLACEHOLDER */
+
+$remote-modal-placeholder-size: 10rem;
+
+
+/* =========================================================================
+ * Svelto - Remote Modal
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+
+/* REMOTE MODAL PLACEHOLDER */
+
+.remote-modal-placeholder .card-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: $remote-modal-placeholder-size;
+  min-height: $remote-modal-placeholder-size;
 }
 
 

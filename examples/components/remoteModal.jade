@@ -1,0 +1,23 @@
+
+extends ../layout.jade
+
+//- Remote Modal
+
+//- TODO: Make it a meaningful test page
+
+append main
+  +divider-block Remote Modal
+
+  +multiple
+    +button("remoteModal_test1 ()") Load remote
+    +button("remoteModal_test2 ( 'primary' )") Load remote (Primary)
+    +button("remoteModal_test2 ( 'secondary' )") Load remote (Secondary)
+
+append body-end
+  +script.
+    function remoteModal_test1 () {
+      $.remoteModal ( '/remoteModal/test1' );
+    }
+    function remoteModal_test2 ( color ) {
+      $.remoteModal ( 'remoteModal/test2', { color: color } );
+    }

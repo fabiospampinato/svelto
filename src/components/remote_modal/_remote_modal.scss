@@ -1,0 +1,19 @@
+
+/* =========================================================================
+ * Svelto - Remote Modal
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires _settings.scss
+ * ========================================================================= */
+
+/* REMOTE MODAL PLACEHOLDER */
+
+.remote-modal-placeholder .card-block {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: $remote-modal-placeholder-size;
+  min-height: $remote-modal-placeholder-size;
+}
