@@ -7,6 +7,7 @@
  * =========================================================================
  * @requires ../ui/ui.js
  * @requires ../pointer/Pointer.js
+ * @requires vendor/screenfull.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -18,6 +19,16 @@
   $(function () {
 
     $('.scroll-to-top').on ( Pointer.tap, () => $body.add ( $html ).animate ({ scrollTop: 0 }, UI.animation.normal ) );
+
+  });
+
+  /* FULLSCREEN */
+
+  //TODO: Move it to its own component, add the ability to trigger the fullscreen for a specific element
+
+  $('.fullscreen-toggler').on ( Pointer.tap, () => {
+
+    screenfull.toggle ();
 
   });
 
