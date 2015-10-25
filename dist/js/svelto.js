@@ -6265,6 +6265,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FULLSCREEN */
 
   //TODO: Move it to its own component, add the ability to trigger the fullscreen for a specific element
+  //FIXME: It doesn't work in iOS's Safari and IE10
+  //TODO: Add support
 
   $('.fullscreen-toggler').on(Pointer.tap, function () {
 
