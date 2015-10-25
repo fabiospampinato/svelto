@@ -7,10 +7,8 @@
 //- =========================================================================
 
 mixin flippable
-  //- TODO: Make the markup lighter, remove the need for that "flippable-sizes"
   .flippable&attributes(attributes)
-    .flippable-sides
-      block
+    block
 
 mixin flippable-front
   .flippable-front&attributes(attributes)

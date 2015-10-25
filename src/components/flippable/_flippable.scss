@@ -17,14 +17,8 @@
 
   @extend .widget;
   perspective: $flippable-perspective;
-
-  /* SIDES */
-
-  &-sides {
-    @include fill ();
-    transition: transform $flippable-transition-flip-duration;
-    transform-style: preserve-3d;
-  }
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
 
   /* FRONT / BACK */
 
@@ -34,6 +28,7 @@
     @include fill ();
     @include last-child-no-gutter ();
     backface-visibility: hidden;
+    transition: transform $flippable-transition-flip-duration;
 
     > :only-child {
       @include fill ();
@@ -44,7 +39,7 @@
   /* FRONT */
 
   &-front {
-    transform: rotateY(0deg);
+    z-index: 1;
   }
 
   /* BACK */
@@ -52,31 +47,76 @@
   &-back {
     position: absolute;
     top: 0;
-    transform: rotateY(180deg);
   }
 
   /* HORIZONTAL */
 
-  &:not(.vertical).flipped .flippable-sides {
-    transform: rotateY(180deg);
+  &:not(.vertical) {
+
+    /* FRONT */
+
+    .flippable-front {
+      transform: rotateY(0deg);
+    }
+
+    /* BACK */
+
+    .flippable-back {
+      transform: rotateY(-180deg);
+    }
+
+    /* FLIPPED */
+
+    &.flipped {
+
+      /* FRONT */
+
+      .flippable-front {
+        transform: rotateY(180deg);
+      }
+
+      /* BACK */
+
+      .flippable-back {
+        transform: rotateY(0deg);
+      }
+
+    }
+
   }
 
   /* VERTICAL */
 
   &.vertical {
 
-    .flippable-sides {
+    /* FRONT */
 
-      transform-origin: 100% 50%;
+    .flippable-front {
+      transform: rotateX(0deg);
+    }
 
-      .flippable-back {
+    /* BACK */
+
+    .flippable-back {
+      transform: rotateX(-180deg);
+    }
+
+    /* FLIPPED */
+
+    &.flipped {
+
+      /* FRONT */
+
+      .flippable-front {
         transform: rotateX(180deg);
       }
 
-    }
+      /* BACK */
 
-    &.flipped .flippable-sides {
-      transform: rotateX(-180deg);
+      .flippable-back {
+        transform: rotateX(0deg);
+      }
+
     }
 
   }

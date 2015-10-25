@@ -500,28 +500,6 @@ mixin object(data)
 
 
 //- =========================================================================
-//- Svelto - Flippable
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin flippable
-  //- TODO: Make the markup lighter, remove the need for that "flippable-sizes"
-  .flippable&attributes(attributes)
-    .flippable-sides
-      block
-
-mixin flippable-front
-  .flippable-front&attributes(attributes)
-    block
-
-mixin flippable-back
-  .flippable-back&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Flags
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -530,6 +508,26 @@ mixin flippable-back
 
 mixin flag(flag)
   i(class="flag-" + flag)&attributes(attributes)
+    block
+
+
+//- =========================================================================
+//- Svelto - Flippable
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin flippable
+  .flippable&attributes(attributes)
+    block
+
+mixin flippable-front
+  .flippable-front&attributes(attributes)
+    block
+
+mixin flippable-back
+  .flippable-back&attributes(attributes)
     block
 
 
@@ -1432,6 +1430,26 @@ mixin spinner-label
 
 
 //- =========================================================================
+//- Svelto - Statistic
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin statistic
+  .statistic&attributes(attributes)
+    block
+      
+mixin statistic-primary
+  .statistic-primary&attributes(attributes)
+    block
+      
+mixin statistic-secondary
+  .statistic-secondary&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Stepper
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1460,26 +1478,6 @@ mixin stepper(options)
     else
       +input({ value: options.value }).stepper-input.autogrow.compact
     +button-icon("add").compact.stepper-increaser
-
-
-//- =========================================================================
-//- Svelto - Statistic
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin statistic
-  .statistic&attributes(attributes)
-    block
-      
-mixin statistic-primary
-  .statistic-primary&attributes(attributes)
-    block
-      
-mixin statistic-secondary
-  .statistic-secondary&attributes(attributes)
-    block
 
 
 //- =========================================================================
