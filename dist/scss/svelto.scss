@@ -1837,6 +1837,8 @@ $sizes: (
  * @requires _settings.scss
  * ========================================================================= */
 
+//FIXME: On the example page the XXXX-Large icon is not centered on Firefox Mobile
+
 /* MIXIN */
 
 @mixin size ( $size_name, $extra: '' ) {
@@ -2032,7 +2034,7 @@ $widget-transition-opacity-duration: $transition-duration-fast !default;
 
 }
 
-/* WIDGET (PSEUDO ELEMENT) */ //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
 
 .widget-pseudo {
   position: relative;
@@ -2785,7 +2787,9 @@ label {
 
   &.floating {
 
+    //TODO: Add it while scrolling to bottom, show him when scrolling to top
     //TODO: add sub floating actions
+
     @include z-depth ( $label-floating-z-depth );
     position: fixed;
     z-index: 10;
@@ -3518,6 +3522,8 @@ $card-border-radius: $container-border-radius !default;
 
 /* CONTAINER */
 
+//FIXME: It's expanding over the visible viewport on Dolphin Browser
+
 .container {
 
   @extend .widget;
@@ -3545,6 +3551,7 @@ $card-border-radius: $container-border-radius !default;
 /* CARD */
 
 //FIXME: There's an overflow bug when scrolling the block-content, it goes a bit over the footer, but not if we zoom the page
+//FIXME: It's not good on Dolphin browser
 
 .card {
 
@@ -4527,6 +4534,8 @@ $colorpicker-handler-hue-border-radius: $border-radius-small !default;
  * @requires _settings.scss
  * @requires ../widget/_widget.scss
  * ========================================================================= */
+
+//FIXME: Not working on Dolphin Browser
 
 /* COLORPICKER */
 
@@ -7328,6 +7337,8 @@ $infobar-title-size: 'large' !default;
 
 /* INFOBAR */
 
+//FIXME: It doesn't work really good on mobile
+
 .infobar {
 
   @extend .container;
@@ -7911,6 +7922,7 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 /* MODAL */
 
 //FIXME: How does an overlay inside a modal work? Maybe it's buggy
+//FIXME: Not centered on Dolphin Browser, probably translateX doesn't work, strange
 
 //INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
 
@@ -8255,6 +8267,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
 //INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
 //TODO: Add a class that makes the navbar stays below the toolbar, in that case the toolbar should have an higher z-index than the navbar probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+
+//TODO: Not working on Dolphin browser
 
 /* MIXINS */
 
@@ -10055,12 +10069,14 @@ $select-z-depth: 1 !default;
 
   select {
     @include fill-absolute ();
+    width: 100%; //INFO: Or it will not streatch on mobile Chrome
     border: none;
     appearance: none;
     border-radius: inherit;
     cursor: pointer;
     font-size: $font-size;
     opacity: 0;
+    margin: 0 !important;
     z-index: 1;
   }
 
@@ -10524,6 +10540,9 @@ $switch-transition-all-duration: $transition-duration-fast !default;
   }
 
   &-label {
+
+    //FIXME: It's not perfectly centered on Nexus 4 using Chrome
+
     display: inline-block;
     vertical-align: middle;
     font-size: $slider-handler-label-font-size;
@@ -10881,6 +10900,7 @@ $spinner-label-border-radius: 50% !default;
 //TODO: Add support for icon at the center of the spinner, sometimes might be useful
 
 //FIXME: Firefox and Edge are not animating stroke-dashoffset, IE is not even animatin stroke-dasharray
+//FIXME: Not working on Dolphin Browser
 
 /* SPINNER */
 
@@ -12082,6 +12102,8 @@ mark,
 }
 
 /* ABBR */
+
+//FIXME: There's a double border on Firefox Mobile
 
 abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
   cursor: help;

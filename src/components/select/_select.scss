@@ -16,12 +16,14 @@
 
   select {
     @include fill-absolute ();
+    width: 100%; //INFO: Or it will not streatch on mobile Chrome
     border: none;
     appearance: none;
     border-radius: inherit;
     cursor: pointer;
     font-size: $font-size;
     opacity: 0;
+    margin: 0 !important;
     z-index: 1;
   }
 

@@ -8,6 +8,8 @@
  * @requires _settings.scss
  * ========================================================================= */
 
+//FIXME: On the example page the XXXX-Large icon is not centered on Firefox Mobile
+
 /* MIXIN */
 
 @mixin size ( $size_name, $extra: '' ) {

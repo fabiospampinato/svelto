@@ -147,6 +147,9 @@
   }
 
   &-label {
+
+    //FIXME: It's not perfectly centered on Nexus 4 using Chrome
+
     display: inline-block;
     vertical-align: middle;
     font-size: $slider-handler-label-font-size;

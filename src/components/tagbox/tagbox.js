@@ -13,6 +13,7 @@
 //FIXME: Should we forbid characters or just escape them?
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
 //FIXME: Partial's text cursor is not visible whan it's empty
+//FIXME: Auto focus on the partial input doesn't work good on mobile
 
 (function ( $, _, window, document, undefined ) {
 

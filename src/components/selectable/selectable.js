@@ -14,6 +14,8 @@
 
 
 //FIXME: It doens't work without the cmd/ctrl key on desktop
+//FIXME: It doesn't really work good on mobile
+
 
 
 (function ( $, _, window, document, undefined ) {

@@ -14,16 +14,16 @@
 
   $.eventXY = function ( event ) {
 
-    if ( 'pageX' in event ) {
-
-      return {
-        X: event.pageX,
-        Y: event.pageY
-      };
-
-    } else if ( 'originalEvent' in event ) {
+    if ( 'originalEvent' in event ) {
 
       return $.eventXY ( event.originalEvent );
+
+    } else if ( 'changedTouches' in event && event.changedTouches.length > 0 ) {
+
+      return {
+        X: event.changedTouches[0].pageX,
+        Y: event.changedTouches[0].pageY
+      };
 
     } else if ( 'touches' in event && event.touches.length > 0 ) {
 
@@ -32,9 +32,16 @@
         Y: event.touches[0].pageY
       };
 
+    } else if ( 'pageX' in event ) {
+
+      return {
+        X: event.pageX,
+        Y: event.pageY
+      };
+
     } else {
 
-      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine
+      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine and cannot go wrong
 
     }
 

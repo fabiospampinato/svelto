@@ -216,7 +216,9 @@ label {
 
   &.floating {
 
+    //TODO: Add it while scrolling to bottom, show him when scrolling to top
     //TODO: add sub floating actions
+
     @include z-depth ( $label-floating-z-depth );
     position: fixed;
     z-index: 10;

@@ -334,24 +334,30 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   $.eventXY = function (event) {
 
-    if ('pageX' in event) {
-
-      return {
-        X: event.pageX,
-        Y: event.pageY
-      };
-    } else if ('originalEvent' in event) {
+    if ('originalEvent' in event) {
 
       return $.eventXY(event.originalEvent);
+    } else if ('changedTouches' in event && event.changedTouches.length > 0) {
+
+      return {
+        X: event.changedTouches[0].pageX,
+        Y: event.changedTouches[0].pageY
+      };
     } else if ('touches' in event && event.touches.length > 0) {
 
       return {
         X: event.touches[0].pageX,
         Y: event.touches[0].pageY
       };
+    } else if ('pageX' in event) {
+
+      return {
+        X: event.pageX,
+        Y: event.pageY
+      };
     } else {
 
-      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine
+      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine and cannot go wrong
     }
   };
 
@@ -8823,6 +8829,7 @@ Prism.languages.js = Prism.languages.javascript;
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 
 //FIXME: It doens't work without the cmd/ctrl key on desktop
+//FIXME: It doesn't really work good on mobile
 
 (function ($, _, window, document, undefined) {
 
@@ -10495,6 +10502,7 @@ Prism.languages.js = Prism.languages.javascript;
 //FIXME: Should we forbid characters or just escape them?
 //FIXME: If we disable the escaping, does it break using characters like `"`? `It does, at leas when calling `remove`
 //FIXME: Partial's text cursor is not visible whan it's empty
+//FIXME: Auto focus on the partial input doesn't work good on mobile
 
 (function ($, _, window, document, undefined) {
 
