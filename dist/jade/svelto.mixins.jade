@@ -143,49 +143,6 @@ mixin card-footer
 
 
 //- =========================================================================
-//- Svelto - Carousel
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin carousel
-  .carousel&attributes(attributes)
-    block
-
-mixin carousel-indicators(amount)
-  .carousel-indicators&attributes(attributes)
-    - var nr = 1;
-    while nr <= amount
-      +carousel-indicator
-      - nr++;
-
-mixin carousel-indicator
-  .carousel-indicator&attributes(attributes)
-    block
-
-mixin carousel-prev
-  .carousel-prev&attributes(attributes)
-    block
-
-mixin carousel-prev-btn
-  .button.compact.rounded.white.z-depth-2.carousel-prev&attributes(attributes)
-    +icon("chevron_left")
-
-mixin carousel-next
-  .carousel-next&attributes(attributes)
-    block
-
-mixin carousel-next-btn
-  .button.compact.rounded.white.z-depth-2.carousel-next&attributes(attributes)
-    +icon("chevron_right")
-    
-mixin carousel-items
-  .carousel-items&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Chat
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -249,6 +206,49 @@ mixin chat-msg(options)
                   +button-icon("delete")(title="Delete").xsmall.outlined.compact
       +card-block
         p= options.message.content
+
+
+//- =========================================================================
+//- Svelto - Carousel
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin carousel
+  .carousel&attributes(attributes)
+    block
+
+mixin carousel-indicators(amount)
+  .carousel-indicators&attributes(attributes)
+    - var nr = 1;
+    while nr <= amount
+      +carousel-indicator
+      - nr++;
+
+mixin carousel-indicator
+  .carousel-indicator&attributes(attributes)
+    block
+
+mixin carousel-prev
+  .carousel-prev&attributes(attributes)
+    block
+
+mixin carousel-prev-btn
+  .button.compact.rounded.white.z-depth-2.carousel-prev&attributes(attributes)
+    +icon("chevron_left")
+
+mixin carousel-next
+  .carousel-next&attributes(attributes)
+    block
+
+mixin carousel-next-btn
+  .button.compact.rounded.white.z-depth-2.carousel-next&attributes(attributes)
+    +icon("chevron_right")
+    
+mixin carousel-items
+  .carousel-items&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1254,6 +1254,30 @@ mixin rater(options)
 
 
 //- =========================================================================
+//- Svelto - Sections
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin sections
+  .sections&attributes(attributes)
+    block
+
+mixin section-left
+  .section-left&attributes(attributes)
+    block
+
+mixin section-center
+  .section-center&attributes(attributes)
+    block
+
+mixin section-right
+  .section-right&attributes(attributes)
+    block
+
+
+//- =========================================================================
 //- Svelto - Select
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1290,39 +1314,15 @@ mixin select(options)
       if typeof val === "object"
         optgroup(label=prop)
           each subval, subprop in val
-            if subprop === selected
+            if subprop === options.selected
               option(value=subprop selected)= subval
             else
               option(value=subprop)= subval
       else
-        if subprop === selected
+        if prop === options.selected
           option(value=prop selected)= val
         else
           option(value=prop)= val
-
-
-//- =========================================================================
-//- Svelto - Sections
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin sections
-  .sections&attributes(attributes)
-    block
-
-mixin section-left
-  .section-left&attributes(attributes)
-    block
-
-mixin section-center
-  .section-center&attributes(attributes)
-    block
-
-mixin section-right
-  .section-right&attributes(attributes)
-    block
 
 
 //- =========================================================================

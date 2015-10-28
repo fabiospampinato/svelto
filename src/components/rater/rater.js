@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
+ * @requires ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
@@ -86,8 +87,7 @@
 
       if ( !this.alreadyRated && !this.doingAjax && this.options.url ) {
 
-        var rating = this.$stars.index ( event.currentTarget ) + 1,
-            self = this;
+        var rating = this.$stars.index ( event.currentTarget ) + 1;
 
         $.ajax ({
 
@@ -101,7 +101,7 @@
 
           },
 
-          success ( res ) {
+          success: ( res ) => {
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
@@ -109,20 +109,20 @@
 
             _.merge ( this.options, res );
 
-            self.$rater.html ( self._tmpl ( 'stars', self.options ) );
+            this.$rater.html ( this._tmpl ( 'stars', this.options ) );
 
-            self.alreadyRated = true;
+            this.alreadyRated = true;
 
-            self._trigger ( 'change', {
-              value: self.options.value,
-              amount: self.options.amount
-            });
+            this._trigger ( 'change', {
+              value: this.options.value,
+              amount: this.options.amount
+            });s
 
           },
 
           error ( res ) {
 
-            throw 'RatingError';
+            $.noty ( 'An error occurred, please try again later' );
 
           },
 

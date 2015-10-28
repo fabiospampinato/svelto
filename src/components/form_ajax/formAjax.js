@@ -8,6 +8,7 @@
  * @requires ../core/core.js
  * @requires ../spinner_overlay/spinnerOverlay.js
  * @requires ../noty/noty.js
+ * @requires ../form_validate/formValidate.js
  * ========================================================================= */
 
 //TODO: Check if it works, also for upload
@@ -64,110 +65,74 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      $.ajax ({
+      if ( this.$form.formValidate ( 'isValid' ) ) {
 
-        cache: false,
-        contentType: 'multipart/form-data',
-        data: new FormData ( this.form ),
-        processData: false,
-        type: $form.attr ( 'method' ) || 'POST',
-        url: $form.attr ( 'action' ),
+        $.ajax ({
 
-        beforeSend: () => { //FIXME: Check it, expecially the `this` context
+          cache: false,
+          contentType: 'multipart/form-data',
+          data: new FormData ( this.form ),
+          processData: false,
+          type: this.$form.attr ( 'method' ) || 'POST',
+          url: this.$form.attr ( 'action' ),
 
-          if ( this.options.spinnerOverlay ) {
+          beforeSend: () => {
 
-            this.$form.spinnerOverlay ( 'show' );
+            if ( this.options.spinnerOverlay ) {
 
-          }
-
-          this._trigger ( 'beforesend' );
-
-        },
-
-        error ( res ) {
-
-          if ( _.isString ( res ) ) {
-
-            if ( res[0] === '<' ) { //INFO: Is HTML
-
-              $.noty ( 'There was an error, please try again later' );
-
-              $body.append ( res );
-
-            } else {
-
-              $.noty ( res );
+              this.$form.spinnerOverlay ( 'show' );
 
             }
 
-          } else {
+            this._trigger ( 'beforesend' );
 
-            $.noty ( 'There was an error, please try again later' );
+          },
 
-          }
+          error ( res ) {
 
-        },
+            $.noty ( 'An error occurred, please try again later' );
 
-        success ( res ) {
+          },
 
-          if ( _.isString ( res ) ) {
+          success ( res ) {
 
-            if ( res === 'refresh' ) {
+            res = JSON.parse ( res );
 
-              $.noty ( 'Done! Refreshing the page...' );
-
-              location.reload ();
-
-            } else if ( /^((\S*)?:\/\/)?\/?\S*$/.test ( res ) ) { //INFO: Is an url, either absolute or relative
-
-              if ( res === window.location.href || res === window.location.pathname ) {
+            if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
 
                 $.noty ( 'Done! Refreshing the page...' );
 
                 location.reload ();
 
-              } else {
+            } else if ( res.url ) {
 
-                $.noty ( 'Done! Redirecting...' );
+              $.noty ( 'Done! Redirecting...' );
 
-                location.assign ( res );
-
-              }
-
-            } else if ( res[0] === '<' ) { //INFO: Is HTML
-
-              $.noty ( 'Done! A page refresh may be needed' );
-
-              $body.append ( res );
+              location.assign ( res.url );
 
             } else {
 
-              $.noty ( res );
+              $.noty ( res.msg || 'Done! A page refresh may be needed' );
 
             }
 
-          } else {
+          },
 
-            $.noty ( 'Done! A page refresh may be needed' );
+          complete: () => {
 
-          }
+            if ( this.options.spinnerOverlay ) {
 
-        },
+              this.$form.spinnerOverlay ( 'hide' );
 
-        complete: () => { //FIXME: Check it, expecially the `this` context
+            }
 
-          if ( this.options.spinnerOverlay ) {
-
-            this.$form.spinnerOverlay ( 'hide' );
+            this._trigger ( 'complete' );
 
           }
 
-          this._trigger ( 'complete' );
+        });
 
-        }
-
-      });
+      }
 
     }
 

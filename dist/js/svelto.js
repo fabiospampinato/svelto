@@ -5367,354 +5367,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(jQuery, _, window, document);
 
 /* =========================================================================
- * Svelto - Form Ajax
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * @requires ../spinner_overlay/spinnerOverlay.js
- * @requires ../noty/noty.js
- * ========================================================================= */
-
-//TODO: Check if it works, also for upload
-
-(function ($, _, window, document, undefined) {
-
-  'use strict';
-
-  /* CONFIG */
-
-  var config = {
-    name: 'formAjax',
-    options: {
-      spinnerOverlay: true,
-      callbacks: {
-        beforesend: function beforesend() {},
-        complete: function complete() {}
-      }
-    }
-  };
-
-  /* FORM AJAX */
-
-  var FormAjax = (function (_Svelto$Widget16) {
-    _inherits(FormAjax, _Svelto$Widget16);
-
-    function FormAjax() {
-      _classCallCheck(this, FormAjax);
-
-      _Svelto$Widget16.apply(this, arguments);
-    }
-
-    /* BINDING */
-
-    /* SPECIAL */
-
-    FormAjax.prototype._widgetize = function _widgetize($root) {
-
-      $root.find('form.ajax').formAjax();
-      $root.filter('form.ajax').formAjax();
-    };
-
-    FormAjax.prototype._variables = function _variables() {
-
-      this.$form = this.$element;
-      this.form = this.element;
-    };
-
-    FormAjax.prototype._events = function _events() {
-
-      /* SUBMIT */
-
-      this._on(true, 'submit', this.__submit);
-    };
-
-    /* PRIVATE */
-
-    FormAjax.prototype.__submit = function __submit(event) {
-      var _this6 = this;
-
-      event.preventDefault();
-      event.stopImmediatePropagation();
-
-      $.ajax({
-
-        cache: false,
-        contentType: 'multipart/form-data',
-        data: new FormData(this.form),
-        processData: false,
-        type: $form.attr('method') || 'POST',
-        url: $form.attr('action'),
-
-        beforeSend: function beforeSend() {
-          //FIXME: Check it, expecially the `this` context
-
-          if (_this6.options.spinnerOverlay) {
-
-            _this6.$form.spinnerOverlay('show');
-          }
-
-          _this6._trigger('beforesend');
-        },
-
-        error: function error(res) {
-
-          if (_.isString(res)) {
-
-            if (res[0] === '<') {
-              //INFO: Is HTML
-
-              $.noty('There was an error, please try again later');
-
-              $body.append(res);
-            } else {
-
-              $.noty(res);
-            }
-          } else {
-
-            $.noty('There was an error, please try again later');
-          }
-        },
-
-        success: function success(res) {
-
-          if (_.isString(res)) {
-
-            if (res === 'refresh') {
-
-              $.noty('Done! Refreshing the page...');
-
-              location.reload();
-            } else if (/^((\S*)?:\/\/)?\/?\S*$/.test(res)) {
-              //INFO: Is an url, either absolute or relative
-
-              if (res === window.location.href || res === window.location.pathname) {
-
-                $.noty('Done! Refreshing the page...');
-
-                location.reload();
-              } else {
-
-                $.noty('Done! Redirecting...');
-
-                location.assign(res);
-              }
-            } else if (res[0] === '<') {
-              //INFO: Is HTML
-
-              $.noty('Done! A page refresh may be needed');
-
-              $body.append(res);
-            } else {
-
-              $.noty(res);
-            }
-          } else {
-
-            $.noty('Done! A page refresh may be needed');
-          }
-        },
-
-        complete: function complete() {
-          //FIXME: Check it, expecially the `this` context
-
-          if (_this6.options.spinnerOverlay) {
-
-            _this6.$form.spinnerOverlay('hide');
-          }
-
-          _this6._trigger('complete');
-        }
-
-      });
-    };
-
-    return FormAjax;
-  })(Svelto.Widget);
-
-  Svelto.FormAjax = FormAjax;
-  Svelto.FormAjax.config = config;
-
-  /* FACTORY */
-
-  $.factory(Svelto.FormAjax);
-})(jQuery, _, window, document);
-
-/* =========================================================================
- * Svelto - Form Sync
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * ========================================================================= */
-
-//TODO: Maybe sync at init time also
-
-(function ($, _, window, document, undefined) {
-
-  'use strict';
-
-  /* VARIABLES */
-
-  var groups = [];
-
-  /* CONFIG */
-
-  var config = {
-    name: 'formSync',
-    options: {
-      attributes: {
-        name: 'name'
-      },
-      datas: {
-        group: 'sync-group'
-      },
-      selectors: {
-        form: 'form',
-        elements: 'input, textarea, select',
-        checkable: '[type="radio"], [type="checkbox"]',
-        radio: '[type="radio"]',
-        checkbox: '[type="checkbox"]',
-        textfield: 'input, textarea'
-      }
-    }
-  };
-
-  /* FORM SYNC */
-
-  var FormSync = (function (_Svelto$Widget17) {
-    _inherits(FormSync, _Svelto$Widget17);
-
-    function FormSync() {
-      _classCallCheck(this, FormSync);
-
-      _Svelto$Widget17.apply(this, arguments);
-    }
-
-    /* BINDING */
-
-    /* SPECIAL */
-
-    FormSync.prototype._widgetize = function _widgetize($root) {
-
-      $root.find('form[data-sync-group]').formSync();
-      $root.filter('form[data-sync-group]').formSync();
-    };
-
-    FormSync.prototype._variables = function _variables() {
-
-      this.$form = this.$element;
-      this.group = this.$form.data(this.options.datas.group);
-
-      this.isNewGroup = groups.indexOf(this.group) === -1;
-    };
-
-    FormSync.prototype._init = function _init() {
-
-      if (this.isNewGroup) {
-
-        groups.push(this.group);
-
-        this.___syncer();
-      }
-    };
-
-    /* PRIVATE */
-
-    FormSync.prototype.___syncer = function ___syncer() {
-      var _this7 = this;
-
-      var $forms = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]'),
-          $elements = $forms.find(this.options.selectors.elements);
-
-      var _loop3 = function () {
-        if (_isArray6) {
-          if (_i6 >= _iterator6.length) return 'break';
-          _ref6 = _iterator6[_i6++];
-        } else {
-          _i6 = _iterator6.next();
-          if (_i6.done) return 'break';
-          _ref6 = _i6.value;
-        }
-
-        var element = _ref6;
-
-        var $element = $(element),
-            name = $element.attr(_this7.options.attributes.name),
-            isCheckable = $element.is(_this7.options.selectors.checkable),
-            isRadio = isCheckable && $element.is(_this7.options.selectors.radio),
-            isTextfield = $element.is(_this7.options.selectors.textfield),
-            events = isTextfield ? 'input change' : 'change',
-            $currentForm = $element.parents(_this7.options.selectors.form),
-            $otherForms = $forms.not($currentForm),
-            $otherElements = $otherForms.find('[' + _this7.options.attributes.name + '="' + name + '"]');
-
-        $element.on(events, function () {
-
-          var currentValue = $element.val(),
-              currentChecked = !!$element.prop('checked');
-
-          for (var _iterator7 = $otherElements, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
-            var _ref7;
-
-            if (_isArray7) {
-              if (_i7 >= _iterator7.length) break;
-              _ref7 = _iterator7[_i7++];
-            } else {
-              _i7 = _iterator7.next();
-              if (_i7.done) break;
-              _ref7 = _i7.value;
-            }
-
-            var otherElement = _ref7;
-
-            var $otherElement = $(otherElement),
-                otherValue = $otherElement.val(),
-                otherChecked = !!$otherElement.prop('checked');
-
-            if (isRadio) {
-
-              if (currentValue !== otherValue || currentChecked === otherChecked) return;
-            } else if (currentValue === otherValue && currentChecked === otherChecked) {
-
-              return;
-            }
-
-            if (isCheckable) {
-
-              $otherElement.prop('checked', currentChecked).trigger('change');
-            } else {
-
-              $otherElement.val(currentValue).trigger('change');
-            }
-          }
-        });
-      };
-
-      for (var _iterator6 = $elements, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
-        var _ref6;
-
-        var _ret2 = _loop3();
-
-        if (_ret2 === 'break') break;
-      }
-    };
-
-    return FormSync;
-  })(Svelto.Widget);
-
-  Svelto.FormSync = FormSync;
-  Svelto.FormSync.config = config;
-
-  /* FACTORY */
-
-  $.factory(Svelto.FormSync);
-})(jQuery, _, window, document);
-
-/* =========================================================================
  * Svelto - formValidate
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -5726,6 +5378,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 //TODO: Show error message
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
+
+//TODO: Add support for validating checkboxes and radios
 
 (function ($, _, window, document, undefined) {
 
@@ -5839,7 +5493,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         valid: 'valid'
       },
       selectors: {
-        element: 'input, textarea',
+        element: 'input, textarea, select',
         wrapper: '.button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
         submitter: 'input[type="submit"], button[type="submit"]'
       },
@@ -5851,13 +5505,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* FORM VALIDATE */
 
-  var FormValidate = (function (_Svelto$Widget18) {
-    _inherits(FormValidate, _Svelto$Widget18);
+  var FormValidate = (function (_Svelto$Widget16) {
+    _inherits(FormValidate, _Svelto$Widget16);
 
     function FormValidate() {
       _classCallCheck(this, FormValidate);
 
-      _Svelto$Widget18.apply(this, arguments);
+      _Svelto$Widget16.apply(this, arguments);
     }
 
     /* BINDING */
@@ -5874,6 +5528,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       this.$form = this.$element;
       this.$elements = this.$element.find(this.options.selectors.element);
       this.$submitters = this.$element.find(this.options.selectors.submitter);
+
+      this._isValid = undefined;
+      this.isDirty = true;
 
       this.___elements();
     };
@@ -5903,19 +5560,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.elements = {};
 
-      for (var _iterator8 = this.$elements, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
-        var _ref8;
+      for (var _iterator6 = this.$elements, _isArray6 = Array.isArray(_iterator6), _i6 = 0, _iterator6 = _isArray6 ? _iterator6 : _iterator6[Symbol.iterator]();;) {
+        var _ref6;
 
-        if (_isArray8) {
-          if (_i8 >= _iterator8.length) break;
-          _ref8 = _iterator8[_i8++];
+        if (_isArray6) {
+          if (_i6 >= _iterator6.length) break;
+          _ref6 = _iterator6[_i6++];
         } else {
-          _i8 = _iterator8.next();
-          if (_i8.done) break;
-          _ref8 = _i8.value;
+          _i6 = _iterator6.next();
+          if (_i6.done) break;
+          _ref6 = _i6.value;
         }
 
-        var element = _ref8;
+        var element = _ref6;
 
         var $element = $(element),
             _name3 = element.name,
@@ -5928,19 +5585,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
           var validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
-          for (var _iterator9 = validationsArr, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
-            var _ref9;
+          for (var _iterator7 = validationsArr, _isArray7 = Array.isArray(_iterator7), _i7 = 0, _iterator7 = _isArray7 ? _iterator7 : _iterator7[Symbol.iterator]();;) {
+            var _ref7;
 
-            if (_isArray9) {
-              if (_i9 >= _iterator9.length) break;
-              _ref9 = _iterator9[_i9++];
+            if (_isArray7) {
+              if (_i7 >= _iterator7.length) break;
+              _ref7 = _iterator7[_i7++];
             } else {
-              _i9 = _iterator9.next();
-              if (_i9.done) break;
-              _ref9 = _i9.value;
+              _i7 = _iterator7.next();
+              if (_i7.done) break;
+              _ref7 = _i7.value;
             }
 
-            var validationStr = _ref9;
+            var validationStr = _ref7;
 
             var matches = validationStr.match(this.options.regexes.validation);
 
@@ -5981,6 +5638,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     /* CHANGE */
 
     FormValidate.prototype.__change = function __change(event) {
+
+      this.isDirty = true;
 
       var elementObj = this.elements[event.currentTarget.name];
 
@@ -6111,27 +5770,35 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     FormValidate.prototype.isValid = function isValid() {
 
-      for (var name in this.elements) {
+      if (this.isDirty) {
 
-        var elementObj = this.elements[name];
+        for (var name in this.elements) {
 
-        if (elementObj.isValid === undefined) {
+          var elementObj = this.elements[name];
 
-          this._validateWorker(elementObj);
+          if (elementObj.isValid === undefined) {
+
+            this._validateWorker(elementObj);
+          }
         }
+
+        for (var name in this.elements) {
+
+          var elementObj = this.elements[name];
+
+          if (elementObj.isValid === false) {
+
+            this._isValid = false;
+            this.isDirty = false;
+            return this._isValid;
+          }
+        }
+
+        this._isValid = true;
+        this.isDirty = false;
       }
 
-      for (var name in this.elements) {
-
-        var elementObj = this.elements[name];
-
-        if (elementObj.isValid === false) {
-
-          return false;
-        }
-      }
-
-      return true;
+      return this._isValid;
     };
 
     return FormValidate;
@@ -6143,6 +5810,322 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.FormValidate);
+})(jQuery, _, window, document);
+
+/* =========================================================================
+ * Svelto - Form Ajax
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../spinner_overlay/spinnerOverlay.js
+ * @requires ../noty/noty.js
+ * @requires ../form_validate/formValidate.js
+ * ========================================================================= */
+
+//TODO: Check if it works, also for upload
+
+(function ($, _, window, document, undefined) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  var config = {
+    name: 'formAjax',
+    options: {
+      spinnerOverlay: true,
+      callbacks: {
+        beforesend: function beforesend() {},
+        complete: function complete() {}
+      }
+    }
+  };
+
+  /* FORM AJAX */
+
+  var FormAjax = (function (_Svelto$Widget17) {
+    _inherits(FormAjax, _Svelto$Widget17);
+
+    function FormAjax() {
+      _classCallCheck(this, FormAjax);
+
+      _Svelto$Widget17.apply(this, arguments);
+    }
+
+    /* BINDING */
+
+    /* SPECIAL */
+
+    FormAjax.prototype._widgetize = function _widgetize($root) {
+
+      $root.find('form.ajax').formAjax();
+      $root.filter('form.ajax').formAjax();
+    };
+
+    FormAjax.prototype._variables = function _variables() {
+
+      this.$form = this.$element;
+      this.form = this.element;
+    };
+
+    FormAjax.prototype._events = function _events() {
+
+      /* SUBMIT */
+
+      this._on(true, 'submit', this.__submit);
+    };
+
+    /* PRIVATE */
+
+    FormAjax.prototype.__submit = function __submit(event) {
+      var _this6 = this;
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      if (this.$form.formValidate('isValid')) {
+
+        $.ajax({
+
+          cache: false,
+          contentType: 'multipart/form-data',
+          data: new FormData(this.form),
+          processData: false,
+          type: this.$form.attr('method') || 'POST',
+          url: this.$form.attr('action'),
+
+          beforeSend: function beforeSend() {
+
+            if (_this6.options.spinnerOverlay) {
+
+              _this6.$form.spinnerOverlay('show');
+            }
+
+            _this6._trigger('beforesend');
+          },
+
+          error: function error(res) {
+
+            $.noty('An error occurred, please try again later');
+          },
+
+          success: function success(res) {
+
+            res = JSON.parse(res);
+
+            if (res.refresh || res.url === window.location.href || res.url === window.location.pathname) {
+
+              $.noty('Done! Refreshing the page...');
+
+              location.reload();
+            } else if (res.url) {
+
+              $.noty('Done! Redirecting...');
+
+              location.assign(res.url);
+            } else {
+
+              $.noty(res.msg || 'Done! A page refresh may be needed');
+            }
+          },
+
+          complete: function complete() {
+
+            if (_this6.options.spinnerOverlay) {
+
+              _this6.$form.spinnerOverlay('hide');
+            }
+
+            _this6._trigger('complete');
+          }
+
+        });
+      }
+    };
+
+    return FormAjax;
+  })(Svelto.Widget);
+
+  Svelto.FormAjax = FormAjax;
+  Svelto.FormAjax.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.FormAjax);
+})(jQuery, _, window, document);
+
+/* =========================================================================
+ * Svelto - Form Sync
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+//TODO: Maybe sync at init time also
+
+(function ($, _, window, document, undefined) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  var groups = [];
+
+  /* CONFIG */
+
+  var config = {
+    name: 'formSync',
+    options: {
+      attributes: {
+        name: 'name'
+      },
+      datas: {
+        group: 'sync-group'
+      },
+      selectors: {
+        form: 'form',
+        elements: 'input, textarea, select',
+        checkable: '[type="radio"], [type="checkbox"]',
+        radio: '[type="radio"]',
+        checkbox: '[type="checkbox"]',
+        textfield: 'input, textarea'
+      }
+    }
+  };
+
+  /* FORM SYNC */
+
+  var FormSync = (function (_Svelto$Widget18) {
+    _inherits(FormSync, _Svelto$Widget18);
+
+    function FormSync() {
+      _classCallCheck(this, FormSync);
+
+      _Svelto$Widget18.apply(this, arguments);
+    }
+
+    /* BINDING */
+
+    /* SPECIAL */
+
+    FormSync.prototype._widgetize = function _widgetize($root) {
+
+      $root.find('form[data-sync-group]').formSync();
+      $root.filter('form[data-sync-group]').formSync();
+    };
+
+    FormSync.prototype._variables = function _variables() {
+
+      this.$form = this.$element;
+      this.group = this.$form.data(this.options.datas.group);
+
+      this.isNewGroup = groups.indexOf(this.group) === -1;
+    };
+
+    FormSync.prototype._init = function _init() {
+
+      if (this.isNewGroup) {
+
+        groups.push(this.group);
+
+        this.___syncer();
+      }
+    };
+
+    /* PRIVATE */
+
+    FormSync.prototype.___syncer = function ___syncer() {
+      var _this7 = this;
+
+      var $forms = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]'),
+          $elements = $forms.find(this.options.selectors.elements);
+
+      var _loop3 = function () {
+        if (_isArray8) {
+          if (_i8 >= _iterator8.length) return 'break';
+          _ref8 = _iterator8[_i8++];
+        } else {
+          _i8 = _iterator8.next();
+          if (_i8.done) return 'break';
+          _ref8 = _i8.value;
+        }
+
+        var element = _ref8;
+
+        var $element = $(element),
+            name = $element.attr(_this7.options.attributes.name),
+            isCheckable = $element.is(_this7.options.selectors.checkable),
+            isRadio = isCheckable && $element.is(_this7.options.selectors.radio),
+            isTextfield = $element.is(_this7.options.selectors.textfield),
+            events = isTextfield ? 'input change' : 'change',
+            $currentForm = $element.parents(_this7.options.selectors.form),
+            $otherForms = $forms.not($currentForm),
+            $otherElements = $otherForms.find('[' + _this7.options.attributes.name + '="' + name + '"]');
+
+        $element.on(events, function () {
+
+          var currentValue = $element.val(),
+              currentChecked = !!$element.prop('checked');
+
+          for (var _iterator9 = $otherElements, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
+            var _ref9;
+
+            if (_isArray9) {
+              if (_i9 >= _iterator9.length) break;
+              _ref9 = _iterator9[_i9++];
+            } else {
+              _i9 = _iterator9.next();
+              if (_i9.done) break;
+              _ref9 = _i9.value;
+            }
+
+            var otherElement = _ref9;
+
+            var $otherElement = $(otherElement),
+                otherValue = $otherElement.val(),
+                otherChecked = !!$otherElement.prop('checked');
+
+            if (isRadio) {
+
+              if (currentValue !== otherValue || currentChecked === otherChecked) return;
+            } else if (currentValue === otherValue && currentChecked === otherChecked) {
+
+              return;
+            }
+
+            if (isCheckable) {
+
+              $otherElement.prop('checked', currentChecked).trigger('change');
+            } else {
+
+              $otherElement.val(currentValue).trigger('change');
+            }
+          }
+        });
+      };
+
+      for (var _iterator8 = $elements, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+        var _ref8;
+
+        var _ret2 = _loop3();
+
+        if (_ret2 === 'break') break;
+      }
+    };
+
+    return FormSync;
+  })(Svelto.Widget);
+
+  Svelto.FormSync = FormSync;
+  Svelto.FormSync.config = config;
+
+  /* FACTORY */
+
+  $.factory(Svelto.FormSync);
 })(jQuery, _, window, document);
 
 (function () {
@@ -8145,6 +8128,7 @@ Prism.languages.js = Prism.languages.javascript;
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/factory.js
+ * @requires ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
@@ -8223,11 +8207,11 @@ Prism.languages.js = Prism.languages.javascript;
     /* TAP */
 
     Rater.prototype.__tap = function __tap(event) {
+      var _this9 = this;
 
       if (!this.alreadyRated && !this.doingAjax && this.options.url) {
 
-        var rating = this.$stars.index(event.currentTarget) + 1,
-            self = this;
+        var rating = this.$stars.index(event.currentTarget) + 1;
 
         $.ajax({
 
@@ -8246,21 +8230,21 @@ Prism.languages.js = Prism.languages.javascript;
 
             res = JSON.parse(res);
 
-            _.merge(this.options, res);
+            _.merge(_this9.options, res);
 
-            self.$rater.html(self._tmpl('stars', self.options));
+            _this9.$rater.html(_this9._tmpl('stars', _this9.options));
 
-            self.alreadyRated = true;
+            _this9.alreadyRated = true;
 
-            self._trigger('change', {
-              value: self.options.value,
-              amount: self.options.amount
-            });
+            _this9._trigger('change', {
+              value: _this9.options.value,
+              amount: _this9.options.amount
+            });s;
           },
 
           error: function error(res) {
 
-            throw 'RatingError';
+            $.noty('An error occurred, please try again later');
           },
 
           complete: function complete() {
@@ -8375,7 +8359,19 @@ Prism.languages.js = Prism.languages.javascript;
 
       success: function success(res) {
 
-        var $remoteModal = $(res); //FIXME: Make it better, it should return a JSON object maybe
+        res = JSON.parse(res);
+
+        var $remoteModal = $(res.modal);
+
+        $remoteModal.modal({
+          callbacks: {
+            close: function close() {
+              setTimeout(function () {
+                $tempModal.remove();
+              }, Svelto.Modal.config.options.animations.close);
+            }
+          }
+        });
 
         $remoteModal.modal('open');
 
@@ -8557,6 +8553,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
+//FIXME: It shouldn't select the first one if none of them is selected
 
 (function ($, _, window, document, undefined) {
 
@@ -8761,9 +8758,14 @@ Prism.languages.js = Prism.languages.javascript;
 
     Select.prototype._updateValueholder = function _updateValueholder() {
 
-      var $selectedOption = this.$options.filter('[value="' + this.$select.val() + '"]');
+      var $value = this.$select.val();
 
-      this.$valueholder.html($selectedOption.html());
+      if ($value.length > 0) {
+
+        var $selectedOption = this.$options.filter('[value="' + $value + '"]');
+
+        this.$valueholder.html($selectedOption.html());
+      }
     };
 
     Select.prototype._updateDropdown = function _updateDropdown() {
@@ -11091,7 +11093,7 @@ Prism.languages.js = Prism.languages.javascript;
     };
 
     _class4.prototype.once = function once(time) {
-      var _this9 = this;
+      var _this10 = this;
 
       if (isNaN(time)) {
 
@@ -11099,7 +11101,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
 
       setTimeout(function () {
-        return _this9.action();
+        return _this10.action();
       }, time);
 
       return this;
@@ -11174,7 +11176,7 @@ Prism.languages.js = Prism.languages.javascript;
     };
 
     _class4.prototype.setTimer = function setTimer(time) {
-      var _this10 = this;
+      var _this11 = this;
 
       if (isNaN(time)) {
 
@@ -11186,7 +11188,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.clearTimer();
 
       this.timeoutObject = setTimeout(function () {
-        return _this10.go();
+        return _this11.go();
       }, time);
     };
 

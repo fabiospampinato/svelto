@@ -2481,29 +2481,29 @@ th {
  * @requires _settings.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, .toolbar, label, .label, .button, .container, .card-header,
-.card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .carousel, .colorpicker, .datepicker, .embedded, .flippable, form, header, .icons, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, blockquote, blockquote > footer {
+.widget, .accordion, .toolbar, label, .label, .button, .container, .card-header:not(.multiple),
+.card-block:not(.multiple),
+.card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .carousel, .colorpicker, .datepicker, .embedded, .flippable, form, header, .icons, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header > :last-child,
-.card-block > :last-child,
-.card-footer > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .carousel > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, form > :last-child, header > :last-child, .icons > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :last-child, .accordion > :last-child, .toolbar > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child,
+.card-block:not(.multiple) > :last-child,
+.card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .carousel > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, form > :last-child, header > :last-child, .icons > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header > :last-child.multiple,
-.card-block > :last-child.multiple,
-.card-footer > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .carousel > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, form > :last-child.multiple, header > :last-child.multiple, .icons > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, .toolbar > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple,
+.card-block:not(.multiple) > :last-child.multiple,
+.card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .carousel > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, form > :last-child.multiple, header > :last-child.multiple, .icons > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, .disabled.toolbar, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header,
-.disabled.card-block,
-.disabled.card-footer, footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.carousel, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, form.disabled, header.disabled, .disabled.icons, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, blockquote.disabled {
+.widget.disabled, .disabled.accordion, .disabled.toolbar, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple),
+.disabled.card-block:not(.multiple),
+.disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.carousel, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, form.disabled, header.disabled, .disabled.icons, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, blockquote.disabled {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3891,9 +3891,9 @@ button {
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 /* CONTAINER */
-.container, .card-header,
-.card-block,
-.card-footer, footer, .image-wrp .image-caption, .infobar, .tagbox {
+.container, .card-header:not(.multiple),
+.card-block:not(.multiple),
+.card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox {
   background: #ffffff ;
   border-color: #d9d9d9 ;
   color: #3f3f3f ;
@@ -3901,27 +3901,27 @@ button {
   padding: 10px 10px;
 }
 
-.container p > a, .card-header p > a,
-.card-block p > a,
-.card-footer p > a, footer p > a, .image-wrp .image-caption p > a, .infobar p > a, .tagbox p > a {
+.container p > a, .card-header:not(.multiple) p > a,
+.card-block:not(.multiple) p > a,
+.card-footer:not(.multiple) p > a, footer p > a, .image-wrp .image-caption p > a, .infobar p > a, .tagbox p > a {
   color: #1565c0 ;
 }
 
-.container p > a:after, .card-header p > a:after,
-.card-block p > a:after,
-.card-footer p > a:after, footer p > a:after, .image-wrp .image-caption p > a:after, .infobar p > a:after, .tagbox p > a:after {
+.container p > a:after, .card-header:not(.multiple) p > a:after,
+.card-block:not(.multiple) p > a:after,
+.card-footer:not(.multiple) p > a:after, footer p > a:after, .image-wrp .image-caption p > a:after, .infobar p > a:after, .tagbox p > a:after {
   border-color: #166ac9 ;
 }
 
-.container p > a:hover, .card-header p > a:hover,
-.card-block p > a:hover,
-.card-footer p > a:hover, footer p > a:hover, .image-wrp .image-caption p > a:hover, .infobar p > a:hover, .tagbox p > a:hover {
+.container p > a:hover, .card-header:not(.multiple) p > a:hover,
+.card-block:not(.multiple) p > a:hover,
+.card-footer:not(.multiple) p > a:hover, footer p > a:hover, .image-wrp .image-caption p > a:hover, .infobar p > a:hover, .tagbox p > a:hover {
   color: #166ac9 ;
 }
 
-.container.compact, .compact.card-header,
-.compact.card-block,
-.compact.card-footer, .card.compact .card-header,
+.container.compact, .compact.card-header:not(.multiple),
+.compact.card-block:not(.multiple),
+.compact.card-footer:not(.multiple), .card.compact .card-header,
 .card.compact .card-block,
 .card.compact .card-footer, footer.compact, .image-wrp .compact.image-caption, .compact.infobar, .compact.tagbox {
   padding: 5px 10px;
@@ -3968,10 +3968,23 @@ button {
   color: #166ac9 ;
 }
 
-.card-header,
-.card-block,
-.card-footer {
+.card-header:not(.multiple),
+.card-block:not(.multiple),
+.card-footer:not(.multiple) {
   border-radius: 0;
+}
+
+.card-header.multiple,
+.card-block.multiple,
+.card-footer.multiple {
+  margin-bottom: 0 !important;
+}
+
+.card-header.multiple > *,
+.card-block.multiple > *,
+.card-footer.multiple > * {
+  border-radius: 0;
+  margin-bottom: 0 !important;
 }
 
 .card-header,
@@ -4009,9 +4022,25 @@ button {
   border-top-left-radius: inherit;
 }
 
+.card > .multiple:first-child > :first-child {
+  border-top-left-radius: inherit;
+}
+
+.card > .multiple:first-child > :last-child {
+  border-top-right-radius: inherit;
+}
+
 .card > :last-child {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
+}
+
+.card > .multiple:last-child > :first-child {
+  border-bottom-left-radius: inherit;
+}
+
+.card > .multiple:last-child > :last-child {
+  border-bottom-right-radius: inherit;
 }
 
 .card.outlined {
@@ -9879,9 +9908,9 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   left: -1px;
 }
 
-.overlay.container, .overlay.card-header,
-.overlay.card-block,
-.overlay.card-footer, footer.overlay, .image-wrp .overlay.image-caption, .overlay.infobar, .overlay.tagbox {
+.overlay.container, .overlay.card-header:not(.multiple),
+.overlay.card-block:not(.multiple),
+.overlay.card-footer:not(.multiple), footer.overlay, .image-wrp .overlay.image-caption, .overlay.infobar, .overlay.tagbox {
   overflow: auto;
 }
 
@@ -12664,15 +12693,13 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
 /* TEXTAREA */
 textarea {
   resize: vertical;
-  min-height: 8.142857143em;
-  padding: 0.5em 1em;
+  min-height: 8.142857143em !important;
   /* COMPACT */
   /* UNRESIZABLE */
 }
 
 textarea.compact {
-  min-height: 8.142857143em;
-  padding: 0.5em 0.5em;
+  min-height: 8.142857143em !important;
 }
 
 textarea.unresizable,

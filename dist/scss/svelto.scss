@@ -3567,8 +3567,21 @@ $card-border-radius: $container-border-radius !default;
   &-block,
   &-footer {
 
-    @extend .container;
-    border-radius: 0;
+    &:not(.multiple) {
+      @extend .container;
+      border-radius: 0;
+    }
+
+    &.multiple {
+
+      margin-bottom: 0 !important;
+
+      > * {
+        border-radius: 0;
+        margin-bottom: 0 !important;
+      }
+
+    }
 
     .card.compact & {
       @extend .container.compact;
@@ -3606,8 +3619,32 @@ $card-border-radius: $container-border-radius !default;
     @include border-top-radius ( inherit );
   }
 
+  > .multiple:first-child {
+
+    > :first-child {
+      border-top-left-radius: inherit;
+    }
+
+    > :last-child {
+      border-top-right-radius: inherit;
+    }
+
+  }
+
   > :last-child {
     @include border-bottom-radius ( inherit );
+  }
+
+  > .multiple:last-child {
+
+    > :first-child {
+      border-bottom-left-radius: inherit;
+    }
+
+    > :last-child {
+      border-bottom-right-radius: inherit;
+    }
+
   }
 
   /* OUTLINED */
@@ -11550,14 +11587,12 @@ textarea {
 
   @extend input;
   resize: vertical;
-  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-  padding: $input-padding-vertical $input-padding-horizontal;
+  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
 
   /* COMPACT */
 
   &.compact {
-    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-    padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
+    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
   }
 
   /* UNRESIZABLE */

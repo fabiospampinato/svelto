@@ -12,6 +12,12 @@
 //TODO: Show error message
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
 
+
+
+//TODO: Add support for validating checkboxes and radios
+
+
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -124,7 +130,7 @@
         valid: 'valid'
       },
       selectors: {
-        element: 'input, textarea',
+        element: 'input, textarea, select',
         wrapper: '.button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
         submitter: 'input[type="submit"], button[type="submit"]'
       },
@@ -151,6 +157,9 @@
       this.$form = this.$element;
       this.$elements = this.$element.find ( this.options.selectors.element );
       this.$submitters = this.$element.find ( this.options.selectors.submitter );
+
+      this._isValid = undefined;
+      this.isDirty = true;
 
       this.___elements ();
 
@@ -241,6 +250,8 @@
     /* CHANGE */
 
     __change ( event ) {
+
+      this.isDirty = true;
 
       var elementObj = this.elements[event.currentTarget.name];
 
@@ -392,31 +403,40 @@
 
     isValid () {
 
-      for ( var name in this.elements ) {
+      if ( this.isDirty ) {
 
-        var elementObj = this.elements[name];
+        for ( var name in this.elements ) {
 
-        if ( elementObj.isValid === undefined ) {
+          var elementObj = this.elements[name];
 
-          this._validateWorker ( elementObj );
+          if ( elementObj.isValid === undefined ) {
 
-        }
+            this._validateWorker ( elementObj );
 
-      }
-
-      for ( var name in this.elements ) {
-
-        var elementObj = this.elements[name];
-
-        if ( elementObj.isValid === false ) {
-
-          return false;
+          }
 
         }
 
+        for ( var name in this.elements ) {
+
+          var elementObj = this.elements[name];
+
+          if ( elementObj.isValid === false ) {
+
+            this._isValid = false;
+            this.isDirty = false;
+            return this._isValid;
+
+          }
+
+        }
+
+        this._isValid = true;
+        this.isDirty = false;
+
       }
 
-      return true;
+      return this._isValid;
 
     }
 

@@ -10,6 +10,7 @@
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
+//FIXME: It shouldn't select the first one if none of them is selected
 
 (function ( $, _, window, document, undefined ) {
 
@@ -217,9 +218,15 @@
 
     _updateValueholder () {
 
-      let $selectedOption = this.$options.filter ( '[value="' + this.$select.val () + '"]' );
+      let $value = this.$select.val ();
 
-      this.$valueholder.html ( $selectedOption.html () );
+      if ( $value.length > 0 ) {
+
+        let $selectedOption = this.$options.filter ( '[value="' + $value + '"]' );
+
+        this.$valueholder.html ( $selectedOption.html () );
+
+      }
 
     }
 

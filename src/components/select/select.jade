@@ -36,12 +36,12 @@ mixin select(options)
       if typeof val === "object"
         optgroup(label=prop)
           each subval, subprop in val
-            if subprop === selected
+            if subprop === options.selected
               option(value=subprop selected)= subval
             else
               option(value=subprop)= subval
       else
-        if subprop === selected
+        if prop === options.selected
           option(value=prop selected)= val
         else
           option(value=prop)= val

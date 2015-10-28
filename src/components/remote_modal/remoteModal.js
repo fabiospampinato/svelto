@@ -87,7 +87,19 @@
 
       success ( res ) {
 
-        let $remoteModal = $(res); //FIXME: Make it better, it should return a JSON object maybe
+        res = JSON.parse ( res );
+
+        let $remoteModal = $(res.modal);
+
+        $remoteModal.modal ({
+          callbacks: {
+            close: function () {
+              setTimeout ( function () {
+                $tempModal.remove ();
+              }, Svelto.Modal.config.options.animations.close );
+            }
+          }
+        });
 
         $remoteModal.modal ( 'open' );
 
