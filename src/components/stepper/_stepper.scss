@@ -8,7 +8,7 @@
 
 /* STEPPER */
 
-.stepper .input-wrp {
+.stepper input {
   flex-grow: 1;
   flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   justify-content: center;

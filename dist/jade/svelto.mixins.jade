@@ -555,11 +555,11 @@ mixin form
     block
 
 mixin form-button
-  button(type="submit")&attributes(attributes).label.button.actionable
+  button(type="submit")&attributes(attributes).button
     block
 
 mixin form-button-icon(icon)
-  button(type="submit")&attributes(attributes).label.button.actionable
+  button(type="submit")&attributes(attributes).button
     +icon(icon)
     block
 
@@ -692,7 +692,7 @@ mixin infobar-bottom
     type: '', // Input type
     name: '', // Input name
     value: '', // Input value
-    label: '' // Label
+    placeholder: '' // Placeholder
   }
 
 mixin input(options)
@@ -700,12 +700,9 @@ mixin input(options)
   - options = options || {};
   - options.type = options.type || "text";
   - options.name = options.name || "";
+  - options.placeholder = options.placeholder || "";
   - options.value = options.value === undefined ? "" : options.value;
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
+  input(type=options.type value=options.value name=options.name placeholder=options.placeholder)&attributes(attributes)
 
 
 //- =========================================================================
@@ -1257,30 +1254,6 @@ mixin rater(options)
 
 
 //- =========================================================================
-//- Svelto - Sections
-//- =========================================================================
-//- Copyright (c) 2015 Fabio Spampinato
-//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-//- =========================================================================
-
-mixin sections
-  .sections&attributes(attributes)
-    block
-
-mixin section-left
-  .section-left&attributes(attributes)
-    block
-
-mixin section-center
-  .section-center&attributes(attributes)
-    block
-
-mixin section-right
-  .section-right&attributes(attributes)
-    block
-
-
-//- =========================================================================
 //- Svelto - Select
 //- =========================================================================
 //- Copyright (c) 2015 Fabio Spampinato
@@ -1326,6 +1299,30 @@ mixin select(options)
           option(value=prop selected)= val
         else
           option(value=prop)= val
+
+
+//- =========================================================================
+//- Svelto - Sections
+//- =========================================================================
+//- Copyright (c) 2015 Fabio Spampinato
+//- Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+//- =========================================================================
+
+mixin sections
+  .sections&attributes(attributes)
+    block
+
+mixin section-left
+  .section-left&attributes(attributes)
+    block
+
+mixin section-center
+  .section-center&attributes(attributes)
+    block
+
+mixin section-right
+  .section-right&attributes(attributes)
+    block
 
 
 //- =========================================================================
@@ -1474,7 +1471,7 @@ mixin stepper(options)
   +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
     +button-icon("remove").compact.stepper-decreaser
     if options.name
-      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
+      +input({ name: options.name, value: options.value }).autogrow.compact
     else
       +input({ value: options.value }).stepper-input.autogrow.compact
     +button-icon("add").compact.stepper-increaser
@@ -1579,13 +1576,13 @@ mixin tabs-containers
   {
     name: '', // Input name
     tags: '', // Comma (by default) separated list of tags
-    label: '' // New tag input partial
+    placeholder: '' // New tag input partial
   }
 
 mixin tagbox(options)
   - options = options || {};
   - options.tags = options.tags || "";
-  - options.label = options.label || "Add tag...";
+  - options.placeholder = options.placeholder || "Add tag...";
   .tagbox&attributes(attributes)
     if options.name
       input(type="text" name=options.name value=options.tags).hidden
@@ -1593,9 +1590,9 @@ mixin tagbox(options)
       input(type="text" value=options.tags).hidden
     +multiple.tagbox-tags
       if options.name
-        +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+        +input({ name: "partial_" + options.name, placeholder: options.placeholder }).tagbox-partial.autogrow.compact
       else
-        +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+        +input({ name: "partial", placeholder: options.placeholder }).tagbox-partial.autogrow.compact
 
 
 //- =========================================================================
@@ -1608,19 +1605,16 @@ mixin tagbox(options)
 //- Options
   {
     name: '', // Textarea name
-    label: '', // Label
+    placeholder: '', // Placeholder
   }
 
 mixin textarea(options)
   //- TODO: Make the markup lighter
   - options = options || {};
   - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
+  - options.placeholder = options.placeholder || "";
+  textarea(name=options.name placeholder=options.placeholder)&attributes(attributes)
+    block
 
 
 //- =========================================================================

@@ -96,8 +96,8 @@
         flex-shrink: 0;
       }
 
-      > .input-wrp,
-      > input {
+      > input,
+      > textarea {
         flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
       }
 

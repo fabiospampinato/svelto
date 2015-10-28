@@ -1,7 +1,6 @@
 (function () {
 	'use strict';
 
-	var isCommonjs = typeof module !== 'undefined' && module.exports;
 	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
 	var fn = (function () {
@@ -102,12 +101,7 @@
 	};
 
 	if (!fn) {
-		if (isCommonjs) {
-			module.exports = false;
-		} else {
-			window.screenfull = false;
-		}
-
+    window.screenfull = false;
 		return;
 	}
 
@@ -132,9 +126,5 @@
 		}
 	});
 
-	if (isCommonjs) {
-		module.exports = screenfull;
-	} else {
-		window.screenfull = screenfull;
-	}
+	window.screenfull = screenfull;
 })();

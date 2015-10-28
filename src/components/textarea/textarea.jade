@@ -9,16 +9,13 @@
 //- Options
   {
     name: '', // Textarea name
-    label: '', // Label
+    placeholder: '', // Placeholder
   }
 
 mixin textarea(options)
   //- TODO: Make the markup lighter
   - options = options || {};
   - options.name = options.name || "";
-  .textarea-wrp(class=(options.label ? "" : "no-floating"))&attributes(attributes)
-    textarea(name=options.name required).text-field
-      block
-    if options.label
-      label= options.label
-    .text-field-bar
+  - options.placeholder = options.placeholder || "";
+  textarea(name=options.name placeholder=options.placeholder)&attributes(attributes)
+    block

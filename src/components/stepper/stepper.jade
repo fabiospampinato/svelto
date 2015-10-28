@@ -24,7 +24,7 @@ mixin stepper(options)
   +multiple(data-min=options.min data-max=options.max data-step=options.step)&attributes(attributes).stepper.joined
     +button-icon("remove").compact.stepper-decreaser
     if options.name
-      +input({ name: options.name, value: options.value }).no-initial-bar.autogrow.compact
+      +input({ name: options.name, value: options.value }).autogrow.compact
     else
       +input({ value: options.value }).stepper-input.autogrow.compact
     +button-icon("add").compact.stepper-increaser

@@ -1654,11 +1654,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
               _ref4 = _i4.value;
             }
 
-            var _element = _ref4;
+            var element = _ref4;
 
             /* VARIABLES */
 
-            var instance = $.factory.instance(Widget, false, _element);
+            var instance = $.factory.instance(Widget, false, element);
 
             /* CHECKING VALID CALL */
 
@@ -1698,9 +1698,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             _ref5 = _i5.value;
           }
 
-          var _element2 = _ref5;
+          var element = _ref5;
 
-          $.factory.instance(Widget, clonedOptions, _element2);
+          $.factory.instance(Widget, clonedOptions, element);
         }
       }
 
@@ -2023,8 +2023,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     AutogrowInput.prototype._widgetize = function _widgetize($root) {
 
-      $root.find('input.autogrow, .input-wrp.autogrow input').autogrowInput();
-      $root.filter('input.autogrow, .input-wrp.autogrow input').autogrowInput();
+      $root.find('input.autogrow').autogrowInput();
+      $root.filter('input.autogrow').autogrowInput();
     };
 
     AutogrowInput.prototype._variables = function _variables() {
@@ -5840,7 +5840,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       },
       selectors: {
         element: 'input, textarea',
-        wrapper: '.input-wrp, .textarea-wrp, .button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
+        wrapper: '.button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
         submitter: 'input[type="submit"], button[type="submit"]'
       },
       callbacks: {
@@ -5903,7 +5903,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
       this.elements = {};
 
-      for (var _iterator8 = $elements, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
+      for (var _iterator8 = this.$elements, _isArray8 = Array.isArray(_iterator8), _i8 = 0, _iterator8 = _isArray8 ? _iterator8 : _iterator8[Symbol.iterator]();;) {
         var _ref8;
 
         if (_isArray8) {
@@ -5915,16 +5915,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           _ref8 = _i8.value;
         }
 
-        var _element3 = _ref8;
+        var element = _ref8;
 
-        var $element = $(_element3),
-            _name3 = _element3.name,
-            validationsStr = $element.data(this.options.datas.validations);
+        var $element = $(element),
+            _name3 = element.name,
+            validationsStr = $element.data(this.options.datas.validations),
+            validations = false;
 
         if (validationsStr) {
 
-          var _validations = {},
-              validationsArr = validationsStr.split(this.options.characters.separators.validations);
+          validations = {};
+
+          var validationsArr = validationsStr.split(this.options.characters.separators.validations);
 
           for (var _iterator9 = validationsArr, _isArray9 = Array.isArray(_iterator9), _i9 = 0, _iterator9 = _isArray9 ? _iterator9 : _iterator9[Symbol.iterator]();;) {
             var _ref9;
@@ -5950,24 +5952,23 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
             if (!validator) continue;
 
-            _validations[validationName] = {
+            validations[validationName] = {
               args: validationArgs,
               validator: validator
             };
           }
 
-          if (_.size(_validations) === 0) {
+          if (_.size(validations) === 0) {
 
-            _validations = false;
+            validations = false;
           }
-        } else {
-
-          var _validations2 = false;
         }
+
+        var $wrappers = $element.parents(this.options.selectors.wrapper);
 
         this.elements[_name3] = {
           $element: $element,
-          $wrapper: $element.parents(this.options.selectors.wrapper).first(),
+          $wrapper: $wrappers.length > 0 ? $wrappers.first() : $element,
           name: _name3,
           dirty: false,
           value: $element.val(),
@@ -6002,7 +6003,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
 
-      if (document.activeElement !== element) {
+      if (document.activeElement !== elementObj.$element[0]) {
 
         this._validateWorker(elementObj);
       }
@@ -6147,7 +6148,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 (function () {
   'use strict';
 
-  var isCommonjs = typeof module !== 'undefined' && module.exports;
   var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
 
   var fn = (function () {
@@ -6207,12 +6207,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   };
 
   if (!fn) {
-    if (isCommonjs) {
-      module.exports = false;
-    } else {
-      window.screenfull = false;
-    }
-
+    window.screenfull = false;
     return;
   }
 
@@ -6237,11 +6232,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     }
   });
 
-  if (isCommonjs) {
-    module.exports = screenfull;
-  } else {
-    window.screenfull = screenfull;
-  }
+  window.screenfull = screenfull;
 })();
 
 /* =========================================================================

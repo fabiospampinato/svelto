@@ -6,87 +6,29 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires _settings.scss
+ * @requires ../input/_input.scss
  * ========================================================================= */
 
 /* TEXTAREA */
 
-//FIXME: If we write a lot and we scrroll down the content goes under the label
-//TODO: set a default height
+textarea {
 
-.textarea-wrp {
+  @extend input;
+  resize: vertical;
+  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+  padding: $input-padding-vertical $input-padding-horizontal;
 
-  @extend .input-wrp;
+  /* COMPACT */
 
-  & > .text-field {
-    resize: vertical;
+  &.compact {
+    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+    padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
   }
 
-  &:not(.no-floating) {
+  /* UNRESIZABLE */
 
-    &:not(.outlined) {
-
-      & > .text-field {
-        height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) + ( $input-label-active-height / 2); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: ( $input-padding-vertical + ( $input-label-active-height / 2) ) $input-padding-horizontal $input-padding-vertical;
-      }
-
-      &.compact > .text-field {
-        height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) + ( $input-label-active-height / 2); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: ( $input-compact-padding-vertical + ( $input-label-active-height / 2) ) $input-compact-padding-horizontal $input-compact-padding-vertical;
-      }
-
-    }
-
-    &.outlined {
-
-      & > .text-field {
-        height: calc(#{( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-padding-vertical + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-padding-horizontal $input-padding-vertical;
-      }
-
-      &.compact > .text-field {
-        height: calc(#{( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) + ( $input-label-active-height / 2)} - #{2 * $outline-width}); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-compact-padding-vertical + ( $input-label-active-height / 2)} - #{2 * $outline-width}) $input-compact-padding-horizontal $input-compact-padding-vertical;
-      }
-
-    }
-
-  }
-
-  &.no-floating {
-
-    &:not(.outlined) {
-
-      & > .text-field {
-        height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: $input-padding-vertical $input-padding-horizontal;
-      }
-
-      &.compact > .text-field {
-        height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
-      }
-
-    }
-
-    &.outlined {
-
-      & > .text-field {
-        height: calc(#{( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 )} - #{2 * $outline-width}); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-padding-vertical} - #{2 * $outline-width}) $input-padding-horizontal $input-padding-vertical;
-      }
-
-      &.compact > .text-field {
-        height: calc(#{( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 )} - #{2 * $outline-width}); //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-        padding: calc(#{$input-compact-padding-vertical} - #{2 * $outline-width}) $input-compact-padding-horizontal $input-compact-padding-vertical;
-      }
-
-    }
-
-  }
-
-  &.unresizable > .text-field,
-  &.disabled > .text-field {
+  &.unresizable,
+  &.disabled {
     resize: none;
   }
 

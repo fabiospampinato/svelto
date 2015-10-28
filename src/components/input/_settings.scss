@@ -6,48 +6,23 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/_core.scss
- * @requires ../container/_settings.scss
  * @requires ../label/_settings.scss
- * @requires ../highlight/_settings.scss
  * ========================================================================= */
 
-/* INPUT WRAPPER */
-
-$input-wrp-color: 'white' !default;
-
-$input-wrp-border-radius: $container-border-radius !default;
-
 /* INPUT */
+
+$input-color: $label-color !default;
+
+$input-border-radius: $label-border-radius !default;
 
 $input-padding-vertical: $label-padding-vertical !default;
 $input-padding-horizontal: $label-padding-horizontal !default;
 
-/* INPUT COMPACT */
+/* COMPACT */
 
 $input-compact-padding-vertical: $label-compact-padding-vertical !default;
 $input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
 
-/* INPUT ACTIVE */
+/* PLACEHOLDER */
 
-$input-active-color: $color-secondary !default;
-
-/* LABEL */
-
-$input-label-opacity: 0.75 !default;
-$input-label-font-size: 1em !default;
-$input-label-height: $input-label-font-size * $line-height !default;
-
-/* LABEL ACTIVE */
-
-$input-label-active-opacity: 1 !default;
-$input-label-active-font-size: 0.8em !default;
-$input-label-active-height: $input-label-active-font-size * $line-height !default;
-
-/* BAR */
-
-$input-bar-z-index: 2 !default;
-$input-bar-height: $highlight-size !default;
-
-/* OTHERS */
-
-$input-transition-all-duration: $transition-duration-fast !default;
+$input-placeholder-opacity: 0.6 !default;

@@ -9,8 +9,6 @@
  * @requires ../widget/_widget.scss
  * ========================================================================= */
 
-//FIXME: It doesn't work on IE10-11
-
 /* FLIPPABLE */
 
 .flippable {
@@ -29,9 +27,11 @@
     @include last-child-no-gutter ();
     backface-visibility: hidden;
     transition: transform $flippable-transition-flip-duration;
+    border-radius: inherit;
 
     > :only-child {
       @include fill ();
+      border-radius: inherit;
     }
 
   }

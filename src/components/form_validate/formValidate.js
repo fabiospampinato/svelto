@@ -125,7 +125,7 @@
       },
       selectors: {
         element: 'input, textarea',
-        wrapper: '.input-wrp, .textarea-wrp, .button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
+        wrapper: '.button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
         submitter: 'input[type="submit"], button[type="submit"]'
       },
       callbacks: {
@@ -182,16 +182,18 @@
 
       this.elements = {};
 
-      for ( let element of $elements ) {
+      for ( let element of this.$elements ) {
 
         let $element = $(element),
             name = element.name,
-            validationsStr = $element.data ( this.options.datas.validations );
+            validationsStr = $element.data ( this.options.datas.validations ),
+            validations = false;
 
         if ( validationsStr ) {
 
-          let validations = {},
-              validationsArr = validationsStr.split ( this.options.characters.separators.validations );
+          validations = {};
+
+          let validationsArr = validationsStr.split ( this.options.characters.separators.validations );
 
           for ( let validationStr of validationsArr ) {
 
@@ -218,15 +220,13 @@
 
           }
 
-        } else {
-
-          let validations = false;
-
         }
+
+        let $wrappers = $element.parents ( this.options.selectors.wrapper );
 
         this.elements[name] = {
           $element: $element,
-          $wrapper: $element.parents ( this.options.selectors.wrapper ).first (),
+          $wrapper: ( $wrappers.length > 0 ) ? $wrappers.first () : $element,
           name: name,
           dirty: false,
           value: $element.val (),
@@ -266,7 +266,7 @@
 
       }
 
-      if ( document.activeElement !== element ) {
+      if ( document.activeElement !== elementObj.$element[0] ) {
 
         this._validateWorker ( elementObj );
 

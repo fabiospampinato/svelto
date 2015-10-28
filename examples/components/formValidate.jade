@@ -14,116 +14,47 @@ append main
       +card-block
         +divider-block No validations
       
-        .input-wrp.fluid.sharp
-          input(type="text" name="novalidations" required).text-field
-          label No validations...
-          .text-field-bar
+        +input({ name: "novalidations", placeholder: "No validations..." }).outlined.fluid
       
         +divider-block Type
         
-        .input-wrp.fluid.sharp
-          input(type="text" name="alpha" data-validations="alpha" required).text-field
-          label Alpha...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="alphanumeric" data-validations="alphanumeric" required).text-field
-          label Alphanumeric...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="hexadecimal" data-validations="hexadecimal" required).text-field
-          label Hexadecimal...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="number" data-validations="number" required).text-field
-          label Number...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="integer" data-validations="integer" required).text-field
-          label Integer...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="float" data-validations="float" required).text-field
-          label Float...
-          .text-field-bar
+        +input({ name: "alpha", placeholder: "Alpha..." })(data-validations="alpha").outlined.fluid
+        +input({ name: "alphanumeric", placeholder: "Alphanumeric..." })(data-validations="alphanumeric").outlined.fluid
+        +input({ name: "hexadecimal", placeholder: "Hexadecimal..." })(data-validations="hexadecimal").outlined.fluid
+        +input({ name: "number", placeholder: "Number..." })(data-validations="number").outlined.fluid
+        +input({ name: "integer", placeholder: "Integer..." })(data-validations="integer").outlined.fluid
+        +input({ name: "float", placeholder: "Float..." })(data-validations="float").outlined.fluid
             
         +divider-block Number
         
-        .input-wrp.fluid.sharp
-          input(type="text" name="min" data-validations="min[3]" required).text-field
-          label Min...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="max" data-validations="max[10]" required).text-field
-          label Max...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="range" data-validations="range[3,10]" required).text-field
-          label Range...
-          .text-field-bar
+        +input({ name: "min", placeholder: "Min..." })(data-validations="min[3]").outlined.fluid
+        +input({ name: "max", placeholder: "Max..." })(data-validations="max[10]").outlined.fluid
+        +input({ name: "range", placeholder: "Range..." })(data-validations="range[3,10]").outlined.fluid
             
         +divider-block String
             
-        .input-wrp.fluid.sharp
-          input(type="text" name="minLength" data-validations="minLength[3]" required).text-field
-          label Min length...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="maxLength" data-validations="maxLength[10]" required).text-field
-          label Max length...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="rangeLength" data-validations="rangeLength[3,10]" required).text-field
-          label Range length...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="exactLength" data-validations="exactLength[5]" required).text-field
-          label Exact length...
-          .text-field-bar
+        +input({ name: "minLength", placeholder: "Min length..." })(data-validations="minLength[3]").outlined.fluid
+        +input({ name: "maxLength", placeholder: "Max length..." })(data-validations="maxLength[10]").outlined.fluid
+        +input({ name: "rangeLength", placeholder: "Range length..." })(data-validations="rangeLength[3,10]").outlined.fluid
+        +input({ name: "exactLength", placeholder: "Exact length..." })(data-validations="exactLength[5]").outlined.fluid
 
         +divider-block Things
 
-        .input-wrp.fluid.sharp
-          input(type="text" name="email" data-validations="email" required).text-field
-          label Email...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="cc" data-validations="cc" required).text-field
-          label Credit card...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="ssn" data-validations="ssn" required).text-field
-          label Social security number...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="ipv4" data-validations="ipv4" required).text-field
-          label Ipv4...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="url" data-validations="url" required).text-field
-          label Url...
-          .text-field-bar
+        +input({ name: "email", placeholder: "Email..." })(data-validations="email").outlined.fluid
+        +input({ name: "cc", placeholder: "Credit card..." })(data-validations="cc").outlined.fluid
+        +input({ name: "ssn", placeholder: "Social security number..." })(data-validations="ssn").outlined.fluid
+        +input({ name: "ipv4", placeholder: "Ipv4..." })(data-validations="ipv4").outlined.fluid
+        +input({ name: "url", placeholder: "Url..." })(data-validations="url").outlined.fluid
 
         +divider-block Others
 
-        .input-wrp.fluid.sharp
-          input(type="text" name="required" data-validations="required" required).text-field
-          label Required...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="matches" data-validations="matches[true,yes,okay]" required).text-field
-          label Matches...
-          .text-field-bar
-        .input-wrp.fluid.sharp
-          input(type="text" name="matchesField" data-validations="matchesField[required]" required).text-field
-          label Matches field...
-          .text-field-bar
+        +input({ name: "required", placeholder: "Required..." })(data-validations="required").outlined.fluid
+        +input({ name: "matches", placeholder: "Matches..." })(data-validations="matches[true,yes,okay]").outlined.fluid
+        +input({ name: "matchesField", placeholder: "Matches field..." })(data-validations="matchesField[required]").outlined.fluid
 
         +divider-block Multiple
         
-        .input-wrp.fluid.sharp
-          input(type="text" name="multiple" data-validations="required|alphanumeric|minLength[3]" required).text-field
-          label Multiple...
-          .text-field-bar
+        +input({ name: "multiple", placeholder: "Multiple..." })(data-validations="required|alphanumeric|minLength[3]").outlined.fluid
         
       +card-footer.outlined.text-center
         +form-button.secondary.outlined Submit

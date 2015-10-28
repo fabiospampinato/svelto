@@ -11,7 +11,7 @@
     type: '', // Input type
     name: '', // Input name
     value: '', // Input value
-    label: '' // Label
+    placeholder: '' // Placeholder
   }
 
 mixin input(options)
@@ -19,9 +19,6 @@ mixin input(options)
   - options = options || {};
   - options.type = options.type || "text";
   - options.name = options.name || "";
+  - options.placeholder = options.placeholder || "";
   - options.value = options.value === undefined ? "" : options.value;
-  .input-wrp(class=(options.label ? '' : 'no-floating'))&attributes(attributes)
-    input(type=options.type value=options.value name=options.name required).text-field
-    if options.label
-      label= options.label
-    .text-field-bar
+  input(type=options.type value=options.value name=options.name placeholder=options.placeholder)&attributes(attributes)

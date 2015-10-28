@@ -11,10 +11,10 @@ mixin form
     block
 
 mixin form-button
-  button(type="submit")&attributes(attributes).label.button.actionable
+  button(type="submit")&attributes(attributes).button
     block
 
 mixin form-button-icon(icon)
-  button(type="submit")&attributes(attributes).label.button.actionable
+  button(type="submit")&attributes(attributes).button
     +icon(icon)
     block

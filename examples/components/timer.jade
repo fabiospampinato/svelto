@@ -8,11 +8,11 @@ append main
 
   +multiple
     +multiple.joined
-      +input({ name: 'milliseconds', label: 'Milliseconds...', value: 300 }).white.outlined.no-floating
+      +input({ name: 'milliseconds', placeholder: 'Milliseconds...', value: 300 }).outlined
       +checkbox({ name: 'autostart', title: 'Autostart', value: 1, checked: true }).outlined
       +button("timer_set ()").outlined Set
     +multiple.joined
-      +input({ name: 'milliseconds_once', label: 'Milliseconds...', value: 1000 }).white.outlined.no-floating
+      +input({ name: 'milliseconds_once', placeholder: 'Milliseconds...', value: 1000 }).outlined
       +button("timer_once ()").outlined Once
     +button("timer_play ()").outlined Play
     +button("timer_pause ()").outlined Pause

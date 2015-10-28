@@ -10,13 +10,13 @@
   {
     name: '', // Input name
     tags: '', // Comma (by default) separated list of tags
-    label: '' // New tag input partial
+    placeholder: '' // New tag input partial
   }
 
 mixin tagbox(options)
   - options = options || {};
   - options.tags = options.tags || "";
-  - options.label = options.label || "Add tag...";
+  - options.placeholder = options.placeholder || "Add tag...";
   .tagbox&attributes(attributes)
     if options.name
       input(type="text" name=options.name value=options.tags).hidden
@@ -24,6 +24,6 @@ mixin tagbox(options)
       input(type="text" value=options.tags).hidden
     +multiple.tagbox-tags
       if options.name
-        +input({ name: "partial_" + options.name, label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+        +input({ name: "partial_" + options.name, placeholder: options.placeholder }).tagbox-partial.autogrow.compact
       else
-        +input({ name: "partial", label: options.label }).tagbox-partial.autogrow.compact.no-floating.no-bar
+        +input({ name: "partial", placeholder: options.placeholder }).tagbox-partial.autogrow.compact

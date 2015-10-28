@@ -36,8 +36,8 @@
 
     _widgetize ( $root ) {
 
-      $root.find ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
-      $root.filter ( 'input.autogrow, .input-wrp.autogrow input' ).autogrowInput ();
+      $root.find ( 'input.autogrow' ).autogrowInput ();
+      $root.filter ( 'input.autogrow' ).autogrowInput ();
 
     }
 
