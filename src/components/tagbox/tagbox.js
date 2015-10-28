@@ -29,7 +29,7 @@
                 '<span>' +
                   '{%=o.value%}' +
                 '</span>' +
-                '<div class="sub right gray actionable tagbox-tag-remover">' +
+                '<div class="button gray compact xxsmall tagbox-tag-remover">' +
                   '<i class="icon">close</i>' +
                 '</div>' +
               '</div>' +

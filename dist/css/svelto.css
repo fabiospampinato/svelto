@@ -2988,7 +2988,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > :not(.sub):not(.icon):not(.icons):not(.ripple-circle), .button > :not(.sub):not(.icon):not(.icons):not(.ripple-circle) {
+.label > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(.ripple-circle), .button > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(.ripple-circle) {
   -webkit-flex-grow: 1;
       -ms-flex-positive: 1;
           flex-grow: 1;

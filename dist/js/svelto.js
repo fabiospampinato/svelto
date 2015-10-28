@@ -10506,7 +10506,7 @@ Prism.languages.js = Prism.languages.javascript;
   var config = {
     name: 'tagbox',
     templates: {
-      tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' + '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' + '<span>' + '{%=o.value%}' + '</span>' + '<div class="sub right gray actionable tagbox-tag-remover">' + '<i class="icon">close</i>' + '</div>' + '</div>' + '</div>'
+      tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' + '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' + '<span>' + '{%=o.value%}' + '</span>' + '<div class="button gray compact xxsmall tagbox-tag-remover">' + '<i class="icon">close</i>' + '</div>' + '</div>' + '</div>'
     },
     options: {
       init: '',
