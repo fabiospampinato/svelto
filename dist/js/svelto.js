@@ -5890,8 +5890,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         $.ajax({
 
           cache: false,
-          contentType: 'multipart/form-data',
+          contentType: false,
           data: new FormData(this.form),
+          dataType: 'JSON',
           processData: false,
           type: this.$form.attr('method') || 'POST',
           url: this.$form.attr('action'),
@@ -5912,8 +5913,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           },
 
           success: function success(res) {
-
-            res = JSON.parse(res);
 
             if (res.refresh || res.url === window.location.href || res.url === window.location.pathname) {
 
@@ -5942,6 +5941,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
           }
 
         });
+      } else {
+
+        $.noty('The form has some errors, fix them before sending it');
       }
     };
 

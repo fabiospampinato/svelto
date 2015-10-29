@@ -70,8 +70,9 @@
         $.ajax ({
 
           cache: false,
-          contentType: 'multipart/form-data',
+          contentType: false,
           data: new FormData ( this.form ),
+          dataType: 'JSON',
           processData: false,
           type: this.$form.attr ( 'method' ) || 'POST',
           url: this.$form.attr ( 'action' ),
@@ -96,13 +97,11 @@
 
           success ( res ) {
 
-            res = JSON.parse ( res );
-
             if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
 
-                $.noty ( 'Done! Refreshing the page...' );
+              $.noty ( 'Done! Refreshing the page...' );
 
-                location.reload ();
+              location.reload ();
 
             } else if ( res.url ) {
 
@@ -131,6 +130,10 @@
           }
 
         });
+
+      } else {
+
+        $.noty ( 'The form has some errors, fix them before sending it' );
 
       }
 
