@@ -63,7 +63,7 @@
 
     $.fn[name] = function ( fn ) {
 
-      return fn ? this.on ( events[name], fn ) : this.tirgger ( events[name] ); //FIXME: Does it work? not sure about that `events[name]` inside the function
+      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] ); //FIXME: Does it work? not sure about that `events[name]` inside the function
 
     };
 

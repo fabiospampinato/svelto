@@ -7735,6 +7735,9 @@ img {
   -webkit-flex-shrink: 1;
       -ms-flex-negative: 1;
           flex-shrink: 1;
+  -webkit-flex-basis: 0;
+      -ms-flex-preferred-size: 0;
+          flex-basis: 0;
   -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1;

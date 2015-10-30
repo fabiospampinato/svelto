@@ -1401,7 +1401,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $.fn[_name2] = function (fn) {
 
-      return fn ? this.on(events[_name2], fn) : this.tirgger(events[_name2]); //FIXME: Does it work? not sure about that `events[name]` inside the function
+      return fn ? this.on(events[_name2], fn) : this.trigger(events[_name2]); //FIXME: Does it work? not sure about that `events[name]` inside the function
     };
   };
 
@@ -4873,6 +4873,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * =========================================================================
  * @requires ../widget/factory.js
  * ========================================================================= */
+
+//FIXME: Right clicking on a `.flippable-trigger` flips it, it should just do nothing instead, probably a Pointer problem
 
 (function ($, _, window, document, undefined) {
 

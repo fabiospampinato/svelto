@@ -51,6 +51,7 @@
 
     flex-grow: 1;
     flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-basis: 0;
     order: 1;
 
     /* TITLE */

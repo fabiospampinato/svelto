@@ -8,6 +8,8 @@
  * @requires ../widget/factory.js
  * ========================================================================= */
 
+//FIXME: Right clicking on a `.flippable-trigger` flips it, it should just do nothing instead, probably a Pointer problem
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
