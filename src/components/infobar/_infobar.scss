@@ -54,6 +54,13 @@
     flex-basis: 0;
     order: 1;
 
+    /* TITLE / SUBTITLE */
+
+    .infobar-title,
+    .infobar-subtitle {
+      @include last-child-no-gutter ();
+    }
+
     /* TITLE */
 
     .infobar-title {

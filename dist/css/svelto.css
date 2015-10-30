@@ -7741,7 +7741,18 @@ img {
   -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1;
+  /* TITLE / SUBTITLE */
   /* TITLE */
+}
+
+.infobar-center .infobar-title > :last-child,
+.infobar-center .infobar-subtitle > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.infobar-center .infobar-title > :last-child.multiple,
+.infobar-center .infobar-subtitle > :last-child.multiple {
+  margin-bottom: -10px !important;
 }
 
 .infobar-center .infobar-title {
