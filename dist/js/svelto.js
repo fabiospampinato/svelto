@@ -268,9 +268,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* CHECKS */
 
-  var isIphone = /iphone/i.test(userAgent),
+  var isIpod = /ipod/i.test(userAgent),
+      isIphone = !isIpod && /iphone/i.test(userAgent),
       isIpad = /ipad/i.test(userAgent),
-      isIpod = /ipod/i.test(userAgent),
       isAndroid = /android/i.test(userAgent),
       isAndroidPhone = isAndroid && /mobile/i.test(userAgent),
       isAndroidTablet = isAndroid && !isAndroidPhone,
