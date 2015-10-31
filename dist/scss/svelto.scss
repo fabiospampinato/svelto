@@ -7656,6 +7656,8 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 //FIXME: How does an overlay inside a modal work? Maybe it's buggy
 //FIXME: Not centered on Dolphin Browser, probably translateX doesn't work, strange
 
+//FIXME: Not working on iPod's Safari
+
 //INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
 
 .modal {
@@ -8001,6 +8003,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 //TODO: Add a class that makes the navbar stays below the toolbar, in that case the toolbar should have an higher z-index than the navbar probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
 
 //TODO: Not working on Dolphin browser
+//FIXME: Not working on iPod's Safari
 
 /* MIXINS */
 

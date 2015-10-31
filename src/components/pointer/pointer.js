@@ -11,6 +11,7 @@
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
 //FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? (//TODO Test it!)
+//FIXME: Flick not working on iPod Touch
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
 
