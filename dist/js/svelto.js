@@ -4473,7 +4473,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         open: 'open'
       },
       selectors: {
-        closer: '.button, .dropdown-closer',
+        closer: '.dropdown-closer',
         trigger: '.dropdown-trigger'
       },
       callbacks: {

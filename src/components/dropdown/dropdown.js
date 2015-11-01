@@ -48,7 +48,7 @@
         open: 'open'
       },
       selectors: {
-        closer: '.button, .dropdown-closer',
+        closer: '.dropdown-closer',
         trigger: '.dropdown-trigger'
       },
       callbacks: {
