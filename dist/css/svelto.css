@@ -2837,6 +2837,9 @@ _:-ms-input-placeholder, :root #content {
   display: -webkit-inline-flex;
   display: -ms-inline-flexbox;
   display: inline-flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
