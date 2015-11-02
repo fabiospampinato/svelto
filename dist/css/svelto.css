@@ -7560,6 +7560,16 @@ img {
   min-height: 1px;
 }
 
+p > img,
+span > img {
+  display: -webkit-inline-flex;
+  display: -ms-inline-flexbox;
+  display: inline-flex;
+  vertical-align: middle;
+  max-width: 100%;
+  width: auto;
+}
+
 /* IMAGE */
 .image-wrp {
   background: #212121 ;

@@ -144,8 +144,6 @@
 
     __sbKeydown ( event ) {
 
-      console.log("keydown!");
-
       switch ( event.keyCode ) {
 
         case UI.keyCode.UP:

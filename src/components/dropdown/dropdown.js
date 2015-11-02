@@ -19,7 +19,8 @@
 
   /* VARIABLES */
 
-  let assignments = {};
+  let assignments = {},
+      openedNr = 0;
 
   /* CONFIG */
 
@@ -234,19 +235,10 @@
 
     __windowTap ( event ) {
 
-      var $parents = $(event.target).parents ();
+      let eventXY = $.eventXY ( event ),
+          rect = this.$dropdown.getRect ();
 
-      if ( $parents.index ( this.$dropdown ) === -1 ) { //INFO: Outside of the dropdown
-
-        for ( var i = 0, l = this.$triggers.length; i < l; i++ ) {
-
-          if ( event.target === this.$triggers[i] || $parents.index ( this.$triggers[i] ) !== -1 ) { //INFO: Another trigger or child of a another trigger
-
-            return;
-
-          }
-
-        }
+      if ( eventXY.X < rect.left || eventXY.X > rect.right || eventXY.Y < rect.top || eventXY.Y > rect.bottom ) {
 
         this.close ();
 
@@ -316,51 +308,67 @@
 
     open ( event, trigger ) {
 
-      trigger = trigger || event.currentTarget;
+      if ( !this._isOpen ) {
 
-      if ( trigger ) {
+        trigger = trigger || event.currentTarget;
 
-        $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+        if ( trigger ) {
 
-        if ( this._isOpen && assignments[this.id] !== trigger ) {
+          $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
 
-          this.$dropdown.addClass ( this.options.classes.moving );
+          if ( this._isOpen && assignments[this.id] !== trigger ) {
+
+            this.$dropdown.addClass ( this.options.classes.moving );
+
+          }
+
+          assignments[this.id] = trigger;
+
+          $(trigger).addClass ( this.options.classes.open );
 
         }
 
-        assignments[this.id] = trigger;
+        this._trigger ( 'beforeopen' );
 
-        $(trigger).addClass ( this.options.classes.open );
+        this._positionate ();
+
+        this.$dropdown.addClass ( this.options.classes.open );
+
+        this._isOpen = true;
+
+        openedNr += 1;
+
+        this._delay ( this._bindWindowTap ); //FIXME: Why without the delay it doesn't work?
+        this._bindWindowResizeScroll ();
+
+        this._trigger ( 'open' );
 
       }
-
-      this._trigger ( 'beforeopen' );
-
-      this._positionate ();
-
-      this.$dropdown.addClass ( this.options.classes.open );
-
-      this._isOpen = true;
-
-      this._delay ( this._bindWindowTap ); //FIXME: Why without the delay it doesn't work?
-      this._bindWindowResizeScroll ();
-
-      this._trigger ( 'open' );
 
     }
 
     close () {
 
-      $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+      if ( this._isOpen ) {
 
-      this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
+        $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
 
-      this._isOpen = false;
+        this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
 
-      this._unbindWindowTap ();
-      this._unbindWindowResizeScroll ();
+        this._isOpen = false;
 
-      this._trigger ( 'close' );
+        openedNr -= 1;
+
+        if ( openedNr === 0 ) {
+
+          this._unbindWindowTap ();
+          this._unbindWindowResizeScroll ();
+
+        }
+
+        this._trigger ( 'close' );
+
+      }
 
     }
 

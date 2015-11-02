@@ -191,6 +191,9 @@
       let self = this;
 
       this.$dropdown.dropdown ({
+        selectors: {
+          closer: '.button'
+        },
         callbacks: {
           beforeopen () {
             self._setDropdownWidth ();
