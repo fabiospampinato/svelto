@@ -30,6 +30,7 @@
 
   > * {
     @include last-child-no-gutter ();
+    margin-bottom: 0 !important;
   }
 
   /* SECTIONS GUTTER */
@@ -59,6 +60,8 @@
     .infobar-title,
     .infobar-subtitle {
       @include last-child-no-gutter ();
+      display: flex;
+      margin-bottom: 0 !important;
     }
 
     /* TITLE */

@@ -87,7 +87,8 @@
 
   /* FLUID / EQUAL */
 
-  &.fluid, &.equal {
+  &.fluid,
+  &.equal {
 
     &:not(.vertical) {
 
@@ -173,6 +174,12 @@
 
         &.multiple > * {
           @include border-bottom-radius ( 0 );
+        }
+
+        &.multiple.no-wrap > *,
+        &.multiple.joined > * {
+          margin-bottom: 0;
+          border-bottom-width: 0;
         }
 
       }

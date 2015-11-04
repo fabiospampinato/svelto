@@ -1677,7 +1677,8 @@ $kbd-padding: 0.2em 0.3em !default;
 
   @if $color_name != inherit { //INFO: Otherwise it will not work for example under `.container-content` that has color: `inherit`
 
-    p > a { //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+    p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+    span > a { //INFO: Same as `p > a` 
 
       color: $link #{$extra};
 
@@ -3197,14 +3198,17 @@ $dragging-z-index: 1000000 !default;
 /* TEXT ALIGNMENT */
 
 .text-left {
+  justify-content: flex-start !important;
   text-align: left !important;
 }
 
 .text-center {
+  justify-content: center !important;
   text-align: center !important;
 }
 
 .text-right {
+  justify-content: flex-end !important;
   text-align: right !important;
 }
 
@@ -7409,6 +7413,7 @@ $infobar-title-size: 'large' !default;
 
   > * {
     @include last-child-no-gutter ();
+    margin-bottom: 0 !important;
   }
 
   /* SECTIONS GUTTER */
@@ -7438,6 +7443,8 @@ $infobar-title-size: 'large' !default;
     .infobar-title,
     .infobar-subtitle {
       @include last-child-no-gutter ();
+      display: flex;
+      margin-bottom: 0 !important;
     }
 
     /* TITLE */
@@ -7833,7 +7840,8 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 
   /* FLUID / EQUAL */
 
-  &.fluid, &.equal {
+  &.fluid,
+  &.equal {
 
     &:not(.vertical) {
 
@@ -7919,6 +7927,12 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 
         &.multiple > * {
           @include border-bottom-radius ( 0 );
+        }
+
+        &.multiple.no-wrap > *,
+        &.multiple.joined > * {
+          margin-bottom: 0;
+          border-bottom-width: 0;
         }
 
       }
@@ -11683,6 +11697,7 @@ a,
 }
 
 p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+span > a, //INFO: Same reason as `p > a`
 .link {
 
   display: inline-block;
@@ -11713,7 +11728,8 @@ a {
 }
 
 p > span,
-p > a {
+p > a,
+span > a {
   margin-bottom: 0;
 }
 

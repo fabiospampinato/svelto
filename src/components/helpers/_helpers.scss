@@ -73,14 +73,17 @@
 /* TEXT ALIGNMENT */
 
 .text-left {
+  justify-content: flex-start !important;
   text-align: left !important;
 }
 
 .text-center {
+  justify-content: center !important;
   text-align: center !important;
 }
 
 .text-right {
+  justify-content: flex-end !important;
   text-align: right !important;
 }
 

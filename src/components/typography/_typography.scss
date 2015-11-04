@@ -19,6 +19,7 @@ a,
 }
 
 p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+span > a, //INFO: Same reason as `p > a`
 .link {
 
   display: inline-block;
@@ -49,7 +50,8 @@ a {
 }
 
 p > span,
-p > a {
+p > a,
+span > a {
   margin-bottom: 0;
 }
 
