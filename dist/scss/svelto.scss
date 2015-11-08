@@ -6641,8 +6641,8 @@ footer {
 
 /* DEFAULT FORM */
 
-form {
-  @extend .widget;
+form:not(.multiple) {
+  @include last-child-no-gutter ();
 }
 
 

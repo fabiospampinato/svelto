@@ -55,6 +55,8 @@
 
       this.name = this.$input.attr ( this.options.attributes.name );
 
+      this.isMultiple = this.name.endsWith ( ']' );
+
       this.$container = this.$radio.parents ( this.options.selectors.form ).first ();
 
       if ( this.$container.length === 0 ) {
@@ -69,7 +71,7 @@
 
     _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
 
-      var isChecked = this. get (),
+      var isChecked = this.get (),
           hasClass = this.$radio.hasClass ( this.options.classes.checked );
 
       if ( isChecked !== hasClass ) {

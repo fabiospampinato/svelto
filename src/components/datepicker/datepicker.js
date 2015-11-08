@@ -105,6 +105,18 @@
 
     _init () {
 
+      /* INITIAL VALUE */
+
+      this.set ( this.$input.val () );
+
+      if ( this.options.date.selected instanceof Date ) {
+
+        this.options.date.current = new Date ( this.options.date.selected.getFullYear (), this.options.date.selected.getMonth (), this.options.date.selected.getDate () );
+
+      }
+
+      /* REFRESH */
+
       this._refresh ();
 
     }
@@ -324,7 +336,7 @@
 
           case 'YYYYMMDD':
             let segments = date.split ( this.options.format.separator );
-            return new Date ( segments[0], parseInt ( segments[1], 10 ) - 1, segments[2] );
+            return new Date ( parseInt ( segments[0], 10 ), parseInt ( segments[1], 10 ) - 1, parseInt ( segments[2] ) );
 
           default:
             return new Date ( date );
