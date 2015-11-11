@@ -158,7 +158,7 @@
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('/chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
 
@@ -238,7 +238,7 @@
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('/chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
       }
 

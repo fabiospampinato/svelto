@@ -17,7 +17,7 @@ i[class^="flag-"] {
   vertical-align: middle;
   width: $flag-width;
   height: $flag-height;
-  background-image: url('/flags.png');
+  background-image: url('#{$basepath}flags.png');
 }
 
 /* FLAGS */

@@ -1029,17 +1029,17 @@ $colors: (
 
 @mixin image-retina ( $image-width, $image-height, $file-1x, $file-2x, $file-3x: false ) {
 
-  background-image: url($file-1x);
+  background-image: url(#{$basepath} $file-1x);
 
   @include hdpi ( 2 ) {
-    background-image: url($file-2x);
+    background-image: url(#{$basepath} $file-2x);
     background-size: $image-width $image-height;
   }
 
   @if $file-3x != false {
 
     @include hdpi ( 3 ) {
-      background-image: url($file-2x);
+      background-image: url(#{$basepath} $file-2x);
       background-size: $image-width $image-height;
     }
 
@@ -1492,6 +1492,10 @@ $border-radius-large: 0.39975em !default;
 $transition-duration-slow: 0.5s !default;
 $transition-duration-normal: 0.35s !default;
 $transition-duration-fast: 0.15s !default;
+
+/* PATHS */ //TODO: Not the appropriate file to be in, probably
+
+$basepath: '/';
 
 
 /* =========================================================================
@@ -3136,7 +3140,7 @@ $dragging-z-index: 1000000 !default;
 /* BLURRED */
 
 %blurred { //FIXME: Not working on Edge and IE
-  filter: url('/blur.svg#blur') !important;
+  filter: url('#{$basepath}blur.svg#blur') !important;
   filter: blur($blurred-blur-amount) !important;
 }
 
@@ -4338,7 +4342,7 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
       &:before {
         left: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('/chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 0 100%);
       }
 
@@ -4418,7 +4422,7 @@ $chat-msg-img-transition-duration: $transition-duration-fast !default;
       &:before {
         right: - ( $dropdown-tip-size / 2 );
         margin-top: - ( $dropdown-tip-size / 2 );
-        clip-path: url('/chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
         clip-path: polygon(0 0, 100% 100%, 100% 0);
       }
 
@@ -5252,7 +5256,7 @@ hr {
     &:before {
       left: - ( $dropdown-tip-size / 2 );
       bottom: - ( $dropdown-tip-size / 2 );
-      clip-path: url('/dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(0 100%, 100% 100%, 100% 0);
       box-shadow: $dropdown-top-tip-box-shadow;
     }
@@ -5275,7 +5279,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('/dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(100% 0, 0 0, 0 100%);
       box-shadow: $dropdown-bottom-tip-box-shadow;
     }
@@ -5298,7 +5302,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       right: - ( $dropdown-tip-size / 2 );
-      clip-path: url('/dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 100% 0);
       box-shadow: $dropdown-left-tip-box-shadow;
     }
@@ -5321,7 +5325,7 @@ hr {
     &:before {
       top: - ( $dropdown-tip-size / 2 );
       left: - ( $dropdown-tip-size / 2 );
-      clip-path: url('/dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
       clip-path: polygon(0 0, 100% 100%, 0 100%);
       box-shadow: $dropdown-right-tip-box-shadow;
     }
@@ -6440,7 +6444,7 @@ i[class^="flag-"] {
   vertical-align: middle;
   width: $flag-width;
   height: $flag-height;
-  background-image: url('/flags.png');
+  background-image: url('#{$basepath}flags.png');
 }
 
 /* FLAGS */
@@ -11042,6 +11046,7 @@ $table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;
 
 /* TABLE */
 
+//TODO: Add support for the case when there's no `thead` tag for example, so that the border radius and everything else will work just fine as well
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
 //FIXME: The striped table doesn't work anymore
