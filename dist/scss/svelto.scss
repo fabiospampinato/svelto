@@ -1029,17 +1029,17 @@ $colors: (
 
 @mixin image-retina ( $image-width, $image-height, $file-1x, $file-2x, $file-3x: false ) {
 
-  background-image: url(#{$basepath} $file-1x);
+  background-image: url('#{$basepath} #{$file-1x}');
 
   @include hdpi ( 2 ) {
-    background-image: url(#{$basepath} $file-2x);
+    background-image: url('#{$basepath} #{$file-2x}');
     background-size: $image-width $image-height;
   }
 
   @if $file-3x != false {
 
     @include hdpi ( 3 ) {
-      background-image: url(#{$basepath} $file-2x);
+      background-image: url('#{$basepath} #{$file-2x}');
       background-size: $image-width $image-height;
     }
 
@@ -1495,7 +1495,7 @@ $transition-duration-fast: 0.15s !default;
 
 /* PATHS */ //TODO: Not the appropriate file to be in, probably
 
-$basepath: '/';
+$basepath: '/' !default;
 
 
 /* =========================================================================

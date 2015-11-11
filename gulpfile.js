@@ -215,10 +215,7 @@ gulp.task ( 'scss', function () {
              .pipe ( sass ({
                outputStyle: 'expanded',
                precision: 10
-             }))
-             .on ( 'error', function ( err ) {
-               gutil.log ( err.message );
-             })
+             }).on ( 'error', sass.logError ) )
             .pipe ( gulpif ( isProduction, autoprefixer ({
                browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
                cascade: true,

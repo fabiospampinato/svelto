@@ -33,4 +33,4 @@ $transition-duration-fast: 0.15s !default;
 
 /* PATHS */ //TODO: Not the appropriate file to be in, probably
 
-$basepath: '/';
+$basepath: '/' !default;
