@@ -1,0 +1,73 @@
+
+/* =========================================================================
+ * Svelto - Shapes
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* SHAPE */
+
+%shape {
+  @extend .widget;
+  flex-grow: 0 !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+}
+
+/* TRIANGLE */
+
+.triangle {
+
+  @extend %shape;
+
+  &.up {
+    @include triangle ( $triangle-size, up );
+  }
+
+  &.down,
+  &:not(.up):not(.left):not(.right) { //INFO: Default direction if no one has been specified {
+    @include triangle ( $triangle-size, down );
+  }
+
+  &.left {
+    @include triangle ( $triangle-size, left );
+  }
+
+  &.right {
+    @include triangle ( $triangle-size, right );
+  }
+
+}
+
+/* SQUARE */
+
+.square {
+  @extend %shape;
+  @include square ( $square-size );
+}
+
+/* SQUARE SAMPLE */
+
+.square-sample {
+
+  @extend %shape;
+  @include square ( $square-sample-size );
+  overflow: hidden;
+  padding: $gutter-half;
+
+  /* P */
+
+  > p {
+    @include size ( $square-sample-p-size );
+  }
+
+}
+
+/* CIRCLE */
+
+.circle {
+  @extend %shape;
+  @include circle ( $circle-size );
+}

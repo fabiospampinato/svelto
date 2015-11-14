@@ -1,0 +1,15 @@
+
+/* =========================================================================
+ * Svelto - Footer (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * ========================================================================= */
+
+/* FOOTER */
+
+$footer-bg-color-darken-amount: 10 !default;
+
+$footer-bg-color: darken($color-base-bg, $footer-bg-color-darken-amount) !default;

@@ -1,0 +1,19 @@
+
+/* =========================================================================
+ * Svelto - Raisable (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* Z-DEPTH RAISED */
+
+@mixin z-depth-raised ( $depth, $extra: '' ) {
+
+  $z-depth-max: length(map-keys($z-depths)) - 1; //INFO: `-1` since we start from `0`
+
+  @include z-depth ( min($z-depth-max, $depth + $raisable-raise-amount), $extra );
+
+  transition: box-shadow $raisable-transition-box-shadow-duration;
+
+}

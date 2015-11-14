@@ -1,0 +1,32 @@
+
+/* =========================================================================
+ * Svelto - Divider (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* BLOCK */
+
+$divider-block-color: 'red' !default;;
+
+$divider-block-vertical-padding: 0.3em !default;
+$divider-block-horizontal-padding: 0.6em !default;
+
+/* LINEAR */
+
+$divider-linear-bg-color: rgba(0, 0, 0, 0.1) !default;
+
+/* TEXT */
+
+$divider-text-size: 'medium' !default;
+
+$divider-text-opacity: 0.75 !default;
+
+$divider-text-font-weight: bold !default;
+
+/* SPACER */
+
+$divider-spacer-height: $gutter-half !default;

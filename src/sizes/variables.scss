@@ -1,0 +1,69 @@
+
+/* =========================================================================
+ * Svelto - Sizes (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../icons/variables.scss
+ * @requires ../typography/variables.scss
+ * ========================================================================= */
+
+/* FUNCTION */
+
+@function get_size ( $icon_size ) {
+
+  //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+
+  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
+
+}
+
+/* ICON SIZES */
+
+//INFO: The wanted icon size for the particular size
+//INFO: The [RECOMMENDED] sizes are those where the icons look better
+
+$size-xxxxsmall-icon: 6px !default;
+$size-xxxsmall-icon: 9px !default;
+$size-xxsmall-icon: 12px !default;
+$size-xsmall-icon: 18px !default; //- [RECOMMENDED]
+$size-small-icon: 21px !default;
+$size-medium-icon: 24px !default; //- [RECOMMENDED]
+$size-large-icon: 30px !default;
+$size-xlarge-icon: 36px !default; //- [RECOMMENDED]
+$size-xxlarge-icon: 42px !default;
+$size-xxxlarge-icon: 48px !default; //- [RECOMMENDED]
+$size-xxxxlarge-icon: 60px !default;
+
+/* SIZES */
+
+//INFO: The [RECOMMENDED] sizes are those where the icons look better
+
+$size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
+$size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
+$size-xxsmall: get_size( $size-xxsmall-icon ) !default;
+$size-xsmall: get_size( $size-xsmall-icon ) !default; //- [RECOMMENDED]
+$size-small: get_size( $size-small-icon ) !default;
+$size-medium: get_size( $size-medium-icon ) !default; //- [RECOMMENDED]
+$size-large: get_size( $size-large-icon ) !default;
+$size-xlarge: get_size( $size-xlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxlarge: get_size( $size-xxlarge-icon ) !default;
+$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
+
+/* SIZES */
+
+$sizes: (
+  'xxxxsmall': $size-xxxxsmall,
+  'xxxsmall': $size-xxxsmall,
+  'xxsmall': $size-xxsmall,
+  'xsmall': $size-xsmall,
+  'small': $size-small,
+  'medium': $size-medium,
+  'large': $size-large,
+  'xlarge': $size-xlarge,
+  'xxlarge': $size-xxlarge,
+  'xxxlarge': $size-xxxlarge,
+  'xxxxlarge': $size-xxxxlarge
+) !default;

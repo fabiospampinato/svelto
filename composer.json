@@ -1,14 +1,16 @@
 {
   "name": "svelto/svelto",
   "type": "library",
-  "description": "A rich, modular, web framework for modern browsers. With jade mixins.",
+  "description": "Modular front end framework for modern browsers (IE10+) with battery included: 50+ components & 20+ tools.",
   "keywords": [
     "css",
+    "sass",
+    "scss",
     "js",
+    "es6",
     "html",
-    "jade",
     "framework",
-    "front-end",
+    "rich",
     "responsive",
     "modular"
   ],

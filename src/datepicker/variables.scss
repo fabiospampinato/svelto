@@ -1,0 +1,42 @@
+
+/* =========================================================================
+ * Svelto - Datepicker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* DATEPICKER */
+
+$datepicker-block-width: 100% / 7 !default;
+
+/* DAY NAME */
+
+$datepicker-day-name-font-weight: bold !default;
+$datepicker-day-name-height: 2.5em !default;
+
+/* DAY */
+
+$datepicker-day-height: 2.5em !default;
+$datepicker-day-prev-next-opacity: 0.25 !default;
+
+/* DAY CIRCLE */
+
+$datepicker-day-circle-size: 2.375em !default;
+
+$datepicker-day-hover-color: $color-secondary-text !default;
+$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25) !default;
+
+$datepicker-day-today-color: $color-secondary-bg !default;
+$datepicker-day-today-circle-color: transparent !default;
+
+$datepicker-day-selected-z-depth: 2 !default;
+$datepicker-day-selected-color: $color-secondary-text !default;
+$datepicker-day-selected-circle-color: $color-secondary-bg !default;
+
+/* TRANSITIONS */
+
+$datepicker-transition-all-duration: $transition-duration-fast !default;

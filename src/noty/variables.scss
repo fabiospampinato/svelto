@@ -1,0 +1,35 @@
+
+/* =========================================================================
+ * Svelto - Noty (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../breakpoints/variables.scss
+ * @requires ../container/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* NOTY */
+
+$noty-z-index: 1000 !default;
+$noty-z-depth: 8 !default;
+
+$noty-transparentize-amount: 0.05 !default; //TODO: Implement it
+
+$noty-border-radius: $container-border-radius !default;
+
+/* IMG */
+
+$noty-img-size: 38px !default;
+$noty-img-rounded: false !default;
+
+/* TRANSITIONS */
+
+$noty-transition-all-duration: $transition-duration-normal !default;
+
+/* BREAKPOINTS */
+
+$noty-full-enabled: true !default;
+$noty-full-breakpoint-size: 'small' !default;
+$noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !default;

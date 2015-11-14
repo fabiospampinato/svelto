@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Parallax (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PARALLAX */
+
+$parallax-height: 50vh !default;
+$parallax-perspective: 20rem !default;
+
+/* DEEP */
+
+$parallax-deep-translate-z: - $parallax-perspective * 2 !default;
+$parallax-deep-scale: 3 !default;
+
+/* BACKGROUND */
+
+$parallax-background-translate-z: - $parallax-perspective !default;
+$parallax-background-scale: 2 !default;
+
+/* FOREGROUND */
+
+$parallax-foreground-translate-z: $parallax-perspective / 3.3333333333 !default;
+$parallax-foreground-scale: 0.7 !default;

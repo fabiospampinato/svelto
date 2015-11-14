@@ -1,0 +1,30 @@
+
+/* =========================================================================
+ * Svelto - Helpers (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* BLUR */
+
+$blurred-blur-amount: 3px !default;
+$blurred-transition-duration: $transition-duration-fast !default;
+
+/* BORDER */
+
+$rounded-border-radius: 1000000px !default;
+$smooth-border-radius: $border-radius-medium !default;
+$sharp-border-radius: 0 !default;
+
+/* ROTATE */
+
+$rotating-animation-duration: 0.9s !default;
+
+/* OTHERS */
+
+$spacer-flex-grow: 1000000 !default;
+
+$dragging-z-index: 1000000 !default;

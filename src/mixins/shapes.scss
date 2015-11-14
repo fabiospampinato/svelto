@@ -1,0 +1,55 @@
+
+/* =========================================================================
+ * Svelto - Shapes (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TRIANGLE */
+
+@mixin triangle ( $size: 1em, $direction: up, $color: $color-gray ) {
+
+  $size: $size / 2;
+  border: $size solid transparent;
+
+  @if $direction == up {
+
+    border-top-width: 0;
+    border-bottom-color: $color;
+
+  } @else if $direction == right {
+
+    border-right-width: 0;
+    border-left-color: $color;
+
+
+  } @else if $direction == left {
+
+    border-left-width: 0;
+    border-right-color: $color;
+
+
+  } @else { //INFO: Defaulting to `down`
+
+    border-bottom-width: 0;
+    border-top-color: $color;
+
+  }
+
+}
+
+/* SQUARE */
+
+@mixin square ( $size: 1em, $color: $color-gray ) {
+  width: $size;
+  height: $size;
+  background-color: $color;
+}
+
+/* CIRCLE */
+
+@mixin circle ( $size: 1em, $color: $color-gray ) {
+  @include square ( $size, $color );
+  border-radius: 50%;
+}

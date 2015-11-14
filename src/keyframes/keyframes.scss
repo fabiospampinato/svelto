@@ -1,0 +1,20 @@
+
+/* =========================================================================
+ * Svelto - Keyframes
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Is it useful/needed?
+
+/* KEYFRAMES */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

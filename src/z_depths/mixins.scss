@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Z-Depths (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* Z-DEPTH */
+
+@mixin z-depth ( $depth, $extra: '' ) {
+
+  $z-depth: map-get($z-depths, $depth);
+
+  box-shadow: $z-depth #{$extra};
+
+}

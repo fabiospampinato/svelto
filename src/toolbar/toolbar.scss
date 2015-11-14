@@ -1,0 +1,24 @@
+
+/* =========================================================================
+ * Svelto - Toolbar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* TOOLBAR */
+
+.toolbar {
+
+  @extend .widget;
+  padding: $toolbar-padding-vertical $toolbar-padding-horizontal;
+
+  /* MULTIPLE */
+
+  > .multiple {
+    flex-wrap: nowrap;
+  }
+
+}

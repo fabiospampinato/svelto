@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Raisable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* RAISABLE */
+
+$raisable-raise-amount: 2 !default;
+
+/* TRANSIITION */
+
+$raisable-transition-box-shadow-duration: $transition-duration-normal !default;

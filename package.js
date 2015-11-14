@@ -1,8 +1,8 @@
 
 Package.describe ({
   name: 'svelto:svelto',
-  summary: 'A rich, modular, web framework for modern browsers. With jade mixins.',
-  version: '0.1.0',
+  summary: 'Modular front end framework for modern browsers (IE10+) with battery included: 50+ components & 20+ tools.',
+  version: '0.2.0',
   git: 'https://github.com/svelto/svelto.git'
 });
 
@@ -15,6 +15,10 @@ Package.onUse ( function ( api ) {
   // api.use ( 'ixdi:material-design-iconic-font', 'client' );
 
   var assets = [
+    'dist/fonts/MaterialIcons-Regular.eot',
+    'dist/fonts/MaterialIcons-Regular.ttf',
+    'dist/fonts/MaterialIcons-Regular.woff',
+    'dist/fonts/MaterialIcons-Regular.woff2',
     'dist/images/blur.svg',
     'dist/images/chat-clips.svg',
     'dist/images/dropdown-clips.svg',

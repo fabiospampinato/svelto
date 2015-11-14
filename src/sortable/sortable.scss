@@ -1,0 +1,82 @@
+
+/* =========================================================================
+ * Svelto - Sortable
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../icons/icons.scss
+ * ========================================================================= */
+
+/* SORTABLE TABLE */
+
+table.table.sortable {
+
+  /* HEADER */
+
+  th[data-sort] {
+
+    position: relative;
+    cursor: pointer;
+    padding-left: $table-th-sortable-padding-horizontal;
+    padding-right: $table-th-sortable-padding-horizontal;
+
+    /* HOVER */
+
+    &:hover {
+      background-color: $table-th-sortable-hover-bg-color;
+    }
+
+    /* ACTIVE */
+
+    &:active {
+      background-color: $table-th-sortable-active-bg-color;
+    }
+
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
+      @extend i.icon;
+      position: absolute;
+      right: $table-th-sortable-icon-right;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      opacity: 0;
+    }
+
+    /* BEFORE */
+
+    &:before {
+      content: 'arrow_drop_down';
+      top: 0.35em;
+    }
+
+    /* AFTER */
+
+    &:after {
+      content: 'arrow_drop_up';
+      bottom: 0.35em;
+    }
+
+    /* INACTIVE OPACITY */
+
+    &:hover:before,
+    &:hover:after,
+    &.sort-desc:before,
+    &.sort-asc:after {
+      opacity: $table-th-sortable-icon-inactive-opacity;
+    }
+
+    /* ACTIVE OPACITY */
+
+    &.sort-desc:after,
+    &.sort-asc:before {
+      opacity: $table-th-sortable-icon-active-opacity;
+    }
+
+  }
+
+}

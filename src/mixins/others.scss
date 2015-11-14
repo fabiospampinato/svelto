@@ -1,0 +1,25 @@
+
+/* =========================================================================
+ * Svelto - Others (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OTHERS */
+
+//TODO: Move to their own proper files
+
+@mixin last-child-no-gutter () {
+
+  > :last-child {
+
+    margin-bottom: 0 !important;
+
+    &.multiple {
+      margin-bottom: - $gutter !important; //FIXME: We should inherit this from the settings
+    }
+
+  }
+
+}

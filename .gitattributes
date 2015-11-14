@@ -1,7 +1,6 @@
 # Enforce Unix newlines
 *.css   text eol=lf
 *.html  text eol=lf
-*.jade  text eol=lf
 *.js    text eol=lf
 *.json  text eol=lf
 *.sass  text eol=lf

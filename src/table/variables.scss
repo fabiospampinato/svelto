@@ -1,0 +1,34 @@
+
+/* =========================================================================
+ * Svelto - Table (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../outline/variables.scss
+ * ========================================================================= */
+
+/* TABLE */
+
+$table-color: inherit !default;
+
+$table-header-footer-bg-color: rgba(0, 0, 0, 0.05) !default; //INFO: The same used in label sub left and right
+
+/* EMPTY */
+
+$table-row-empty-height: 4.5em !default;
+
+/* BORDERED */
+
+$table-bordered-border-width: $outline-width !default;
+$table-bordered-border-color: inherit !default;
+
+/* STRIPED */
+
+$table-striped-row-odd-color: rgba(0, 0, 0, 0.02) !default;
+$table-striped-row-even-color: rgba(0, 0, 0, 0) !default;
+
+/* HOVERABLE */
+
+$table-hoverable-row-odd-color-hover: rgba(0, 0, 0, 0.04) !default;
+$table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;

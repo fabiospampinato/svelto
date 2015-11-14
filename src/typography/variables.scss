@@ -1,0 +1,91 @@
+
+/* =========================================================================
+ * Svelto - Typography (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../outline/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* FONT FAMILY */
+
+$font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+/* FONT SIZE */
+
+$font-size: 16px !default;
+
+/* LINE HEIGHT */
+
+$line-height: 1.4285714286 !default; //INFO: 20/14
+$line-height-em: 1em * $line-height !default;
+
+/* LINK */
+
+$a-underline-height: 1px !default;
+$a-underline-transition-duration: $transition-duration-fast !default;
+
+/* HEADERS */
+
+$h1-size: 'xxlarge' !default;
+$h2-size: 'xlarge' !default;
+$h3-size: 'large' !default;
+$h4-size: 'medium' !default;
+$h5-size: 'small' !default;
+$h6-size: 'xsmall' !default;
+
+$header-small-opacity: 0.85 !default;
+
+/* SMALL */
+
+$small-font-size: 0.65em !default;
+
+/* MARK */
+
+$mark-color: 'yellow' !default;
+
+$mark-padding: 0.3em 0.325em !default;
+$mark-border-radius: $border-radius-small !default;
+
+/* ABBR */
+
+$abbr-border-width: 1px !default;
+$abbr-border-style: 'dotted' !default;
+$abbr-border-color: $color-gray-border !default;
+
+/* BLOCKQUOTE */
+
+$blockquote-bg-color: transparent !default;
+$blockquote-line-width: $gutter-half !default;
+$blockquote-line-bg-color: rgba(0, 0, 0, 0.15) !default;
+
+$blockquote-footer-font-size: 0.85em !default;
+$blockquote-footer-opacity: 0.85 !default;
+$blockquote-footer-bg-color: transparent !default;
+$blockquote-footer-padding-vertical: 0 !default;
+$blockquote-footer-padding-horizontal: 0 !default;
+
+/* LIST */
+
+$list-padding-left: $gutter * 2 !default;
+
+/* CODE */
+
+$code-bg-color: rgba(0, 0, 0, 0.03) !default;
+$code-border-radius: $border-radius-medium !default;
+$code-border-width: $outline-width !default;
+$code-border-color: rgba(0, 0, 0, 0.15) !default;
+
+/* KBD */
+
+$kbd-color: 'white' !default;
+
+$kbd-border-width: $outline-width !default;
+$kbd-border-style: solid !default;
+$kdb-border-radius: $border-radius-medium !default;
+
+$kbd-font-size: 0.9em !default;
+$kbd-padding: 0.2em 0.3em !default;

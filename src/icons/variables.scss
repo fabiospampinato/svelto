@@ -1,0 +1,14 @@
+
+/* =========================================================================
+ * Svelto - Icons (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../typography/variables.scss
+ * ========================================================================= */
+
+/* ICONS */
+
+$icon-best-size: 24px; //INFO: At this size the icons look the best
+$icon-scale-amount: $icon-best-size / $font-size !default; //INFO: This is the scale factor at which the icons are at their best dimensions at the default `medium` size

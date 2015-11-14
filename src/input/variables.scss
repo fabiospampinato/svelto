@@ -1,0 +1,27 @@
+
+/* =========================================================================
+ * Svelto - Input (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../label/variables.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+$input-color: $label-color !default;
+
+$input-border-radius: $label-border-radius !default;
+
+$input-padding-vertical: $label-padding-vertical !default;
+$input-padding-horizontal: $label-padding-horizontal !default;
+
+/* COMPACT */
+
+$input-compact-padding-vertical: $label-compact-padding-vertical !default;
+$input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
+
+/* PLACEHOLDER */
+
+$input-placeholder-opacity: 0.6 !default;

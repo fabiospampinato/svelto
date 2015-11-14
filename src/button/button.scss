@@ -1,0 +1,38 @@
+
+/* =========================================================================
+ * Svelto - Button
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../helpers/helpers.scss
+ * @requires ../label/label.scss
+ * ========================================================================= */
+
+/* DEFAULT BUTTON */
+
+button {
+  border: none;
+  padding: 0;
+}
+
+/* BUTTON */
+
+.button {
+  @extend .label;
+  @extend .actionable;
+}
+
+/* BUTTON CORNER */
+
+.button-corner {
+  @extend .label-corner;
+  @extend .actionable;
+}
+
+/* BUTTON TAG */
+
+.button-tag {
+  @extend .label-tag;
+}

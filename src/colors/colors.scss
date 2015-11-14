@@ -1,0 +1,28 @@
+
+/* =========================================================================
+ * Svelto - Colors
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
+//FIXME: .actionable should do it's work only it it's not child of .disabled or -disabled
+
+/* COLORS */
+
+@each $name, $datas in $colors {
+
+  .#{$name} {
+    @include color ( $name, false, !important );
+  }
+
+  .text-#{$name} {
+    color: nth($datas, 1);
+  }
+
+  .link-#{$name} {
+    @include color-link ( $name, !important );
+  }
+
+}

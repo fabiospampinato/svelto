@@ -1,9 +1,9 @@
 {
   "name": "svelto",
-  "description": "A rich, modular, web framework for modern browsers. With jade mixins.",
+  "description": "Modular front end framework for modern browsers (IE10+) with battery included: 50+ components & 20+ tools.",
   "main": [
-    "dist/css/svelto.css",
-    "dist/js/svelto.js"
+    "dist/js/svelto.js",
+    "dist/scss/svelto.scss"
   ],
   "dependencies": {
     "jquery": ">=2.0.0",
@@ -12,11 +12,13 @@
   "moduleType": "globals",
   "keywords": [
     "css",
+    "sass",
+    "scss",
     "js",
+    "es6",
     "html",
-    "jade",
     "framework",
-    "front-end",
+    "rich",
     "responsive",
     "modular"
   ],
@@ -31,13 +33,13 @@
   },
   "license": "MIT",
   "ignore": [
-    "examples",
     "src",
     "/.*",
     "composer.json",
     "CONTRIBUTING.md",
     "gulpfile.js",
     "LICENSE",
+    "package.js",
     "package.json",
     "README.md"
   ]

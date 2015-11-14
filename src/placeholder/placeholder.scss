@@ -1,0 +1,19 @@
+
+/* =========================================================================
+ * Svelto - Placeholder
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* PLACEHOLDER */
+
+.placeholder {
+  @extend .widget;
+  @include color ( $placeholder-color );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

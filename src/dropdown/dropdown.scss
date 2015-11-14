@@ -1,0 +1,229 @@
+
+/* =========================================================================
+ * Svelto - Dropdown
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Add tip shadow
+
+/* DROPDOWN */
+
+.dropdown {
+
+  @include z-depth ( $dropdown-z-depth );
+  z-index: $dropdown-z-index;
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: $dropdown-max-width;
+  margin-bottom: 0;
+  transition: opacity $dropdown-transition-all-duration;
+
+  /* NOT CONTAINER */
+
+  &:not(.container) {
+    max-height: $dropdown-max-height;
+  }
+
+  /* MOVING */
+
+  &.moving {
+
+    transition: transform $dropdown-transition-all-duration;
+
+    /* TIP */
+
+    &:before {
+      transition: transform $dropdown-transition-all-duration;
+    }
+
+  }
+
+  /* NO TIP / ATTACHED */
+
+  &.no-tip,
+  &.attached {
+
+    /* TIP */
+
+    &:before {
+      display: none !important;
+    }
+
+  }
+
+  /* ATTACHED */
+
+  &.attached {
+
+    /* TOP */
+
+    &.positionate-top {
+      margin-bottom: - $outline-width;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    /* BOTTOM */
+
+    &.positionate-bottom {
+      margin-top: - $outline-width;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    /* LEFT */
+
+    &.positionate-left {
+      margin-right: - $outline-width;
+    }
+
+    /* RIGHT */
+
+    &.positionate-right {
+      margin-left: - $outline-width;
+    }
+
+  }
+
+  /* TIP */
+
+  &:before {
+    @include square ( $dropdown-tip-size, inherit );
+    transform: rotate(45deg);
+    position: absolute;
+    content: '';
+    z-index: 1;
+    box-sizing: content-box;
+  }
+
+  //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+  _:-ms-lang(x), &:before {
+    display: none;
+  }
+
+  /* TIP (OUTLINED) */
+
+  &.outlined:before {
+    border-width: $outline-width;
+    border-style: solid;
+    border-color: inherit;
+  }
+
+  /* TIP (POSITION-RELATED) */
+
+  &.positionate-top {
+
+    &:before {
+      left: - ( $dropdown-tip-size / 2 );
+      bottom: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+      box-shadow: $dropdown-top-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-bottom: - $outline-width;
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-bottom {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(100% 0, 0 0, 0 100%);
+      box-shadow: $dropdown-bottom-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-top: - $outline-width;
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-left {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      right: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+      box-shadow: $dropdown-left-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-right: - $outline-width;
+        margin-top: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-right {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+      box-shadow: $dropdown-right-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-left: - $outline-width;
+        margin-top: - $outline-width;
+      }
+
+    }
+
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+}
+
+//INFO: Card dropdown max height fix for IE10+
+
+_:-ms-input-placeholder, :root .dropdown.card {
+
+  max-height: none;
+
+  .card-block {
+    max-height: $dropdown-max-height / 100 * 90;
+  }
+
+}

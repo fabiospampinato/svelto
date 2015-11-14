@@ -1,6 +1,4 @@
 {
-  "compact": false,
-  "nonStandard": false,
-  "stage": 2,
-  "loose": "all"
+  "presets": ["es2015"],
+  "compact": false
 }

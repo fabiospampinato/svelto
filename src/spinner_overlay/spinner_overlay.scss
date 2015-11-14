@@ -1,0 +1,56 @@
+
+/* =========================================================================
+ * Svelto - Spinner Overlay
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SPINNER OVERLAY */
+
+.spinner-overlay {
+
+  align-items: center;
+  justify-content: center;
+
+  /* SPINNER LABEL */
+
+  .spinner-label {
+    margin-bottom: 0;
+    transform: scale(0);
+    transition: transform $spinner-overlay-transition-transform-duration;
+  }
+
+  /* CLOSE */
+
+  &:not(.open) {
+
+    /* SPINNER */
+
+    .spinner {
+
+      animation-play-state: paused;
+
+      /* CIRCLE */
+
+      circle {
+        animation-play-state: paused;
+      }
+
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+
+    /* SPINNER LABEL */
+
+    .spinner-label {
+      transform: scale(1);
+    }
+
+  }
+
+}

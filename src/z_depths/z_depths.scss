@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Z-Depths
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* Z-DEPTHS */
+
+@each $depth, $shadow in $z-depths {
+
+  .z-depth-#{$depth} {
+    @include z-depth ( $depth, !important );
+  }
+
+}

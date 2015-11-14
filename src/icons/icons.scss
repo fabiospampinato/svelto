@@ -1,0 +1,114 @@
+
+/* =========================================================================
+ * Svelto - Icons
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* SCALED ICON SIZES */
+
+%scaled-icon-sizes {
+
+  @each $name, $font-size in $sizes {
+
+    &.#{$name} {
+      font-size: ( $font-size * $icon-scale-amount ) !important;
+    }
+
+  }
+
+}
+
+/* ICON */
+
+i.icon {
+  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em * $icon-scale-amount;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  /* Support for all WebKit browsers */
+  -webkit-font-smoothing: antialiased;
+  /* Support for all WebKit browsers */
+  text-rendering: optimizeLegibility;
+  /* Support for all WebKit browsers */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for all WebKit browsers */
+  font-feature-settings: 'liga';
+}
+
+/* ICONS */
+
+.icons {
+
+  @extend .widget;
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  width: 1em * $icon-scale-amount;
+  height: 1em * $icon-scale-amount;
+  position: relative;
+
+  /* ICON */
+
+  .icon {
+
+    margin-bottom: 0;
+
+    /* NOT CORNER */
+
+    &:not(.corner) {
+      @include fill-absolute ();
+    }
+
+    /* CORNER */
+
+    &.corner {
+
+      position: absolute;
+      font-size: 1em * $icon-scale-amount / 2;
+
+      /* TOP LEFT */
+
+      &.top-left {
+        top: 0;
+        left: 0;
+      }
+
+      /* TOP RIGHT */
+
+      &.top-right {
+        top: 0;
+        right: 0;
+      }
+
+      /* BOTTOM RIGHT */
+
+      &.bottom-right {
+        bottom: 0;
+        right: 0;
+      }
+
+      /* BOTTOM LEFT */
+
+      &.bottom-left {
+        bottom: 0;
+        left: 0;
+      }
+
+    }
+
+  }
+
+}

@@ -1,0 +1,181 @@
+
+/* =========================================================================
+ * Svelto - Datepicker
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* DATEPICKER */
+
+.datepicker {
+
+  @extend .widget;
+  border-radius: $border-radius-medium;
+
+  /* INPUT */
+
+  input {
+    display: none;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+    border: $outline-width solid $color-error;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border: $outline-width solid $color-success;
+  }
+
+  /* NAVIGATION */
+
+  &-navigation {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* BUTTON */
+
+    > .button { //INFO: We are referring to the `Prev` and `Next` navigation buttons
+      width: $datepicker-block-width;
+      margin-bottom: 0;
+    }
+
+    /* TITLE */
+
+    &-title {
+      margin: 0 $gutter;
+    }
+
+  }
+
+  /* CALENDAR */
+
+  &-calendar {
+
+    /* DAY NAMES */
+
+    .datepicker-days-names {
+
+      display: flex;
+      height: $datepicker-day-name-height;
+      align-items: center;
+
+      /* DAY NAME */
+
+      .datepicker-day-name {
+        font-weight: $datepicker-day-name-font-weight;
+        width: $datepicker-block-width;
+        text-align: center;
+      }
+
+    }
+
+    /* DAYS */
+
+    .datepicker-days {
+
+      display: flex;
+      flex-wrap: wrap;
+
+      /* DAY */
+
+      [class*='datepicker-day'] {
+
+        line-height: $datepicker-day-height;
+        position: relative;
+        z-index: 1;
+        width: $datepicker-block-width;
+        height: $datepicker-day-height;
+        text-align: center;
+
+        /* BEFORE */
+
+        &:before {
+          @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
+          z-index: -1;
+          width: $datepicker-day-circle-size;
+          height: $datepicker-day-circle-size;
+          content: '';
+          border-radius: 50%;
+          background-color: transparent;
+        }
+
+        /* TODAY */
+
+        &.datepicker-day-today {
+
+          color: $datepicker-day-today-color;
+
+          /* BEFORE */
+
+          &:before {
+            background-color: $datepicker-day-today-circle-color;
+          }
+
+        }
+
+        /* SELECTED */
+
+        &.datepicker-day-selected {
+
+          color: $datepicker-day-selected-color;
+          transition: color $datepicker-transition-all-duration;
+
+          /* BEFORE */
+
+          &:not(.datepicker-day-prev):not(.datepicker-day-next):before {
+            @include z-depth ( $datepicker-day-selected-z-depth );
+          }
+
+          &:before {
+            background-color: $datepicker-day-selected-circle-color;
+            transition-property: box-shadow, background-color;
+            transition-duration: $datepicker-transition-all-duration;
+          }
+
+        }
+
+      }
+
+      /* PREV / NEXT */
+
+      .datepicker-day-prev,
+      .datepicker-day-next {
+        opacity: $datepicker-day-prev-next-opacity;
+      }
+
+      /* DAY */
+
+      .datepicker-day {
+
+        cursor: pointer;
+
+        /* HOVER */
+
+        &:not(.datepicker-day-selected):hover {
+
+          color: $datepicker-day-hover-color;
+
+          /* BEFORE */
+
+          &:before {
+            background-color: $datepicker-day-hover-circle-color;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}

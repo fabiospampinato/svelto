@@ -1,0 +1,88 @@
+
+/* =========================================================================
+ * Svelto - Select
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* SELECT BTN */
+
+.select-btn {
+
+  /* DEFAULT SELECT */
+
+  select {
+    @include fill-absolute ();
+    width: 100%; //INFO: Or it will not streatch on mobile Chrome
+    border: none;
+    appearance: none;
+    border-radius: inherit;
+    cursor: pointer;
+    font-size: $font-size;
+    opacity: 0;
+    margin: 0 !important;
+    z-index: 1;
+  }
+
+  /* VALUEHOLDER */
+
+  .valueholder {
+
+    display: inline-block;
+
+    &.right:before, &.left:before {
+      content: '\a0'; // &nbsp;
+    }
+
+  }
+
+  /* TRIGGER DIRECTION */
+
+  &.dropdown-trigger-top {
+    @include border-top-radius ( 0 );
+  }
+
+  &.dropdown-trigger-bottom {
+    @include border-bottom-radius ( 0 );
+  }
+
+  &.dropdown-trigger-right {
+    @include border-right-radius ( 0 );
+  }
+
+  &.dropdown-trigger-left {
+    @include border-left-radius ( 0 );
+  }
+
+}
+
+/* SELECT DROPDOWN */
+
+.select-dropdown {
+
+  @include z-depth ( $select-z-depth );
+
+  /* CARD BLOCK */
+
+  .card-block {
+    padding: $gutter-half 0;
+  }
+
+  /* BUTTON */
+
+  .button {
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  /* DIVIDER */
+
+  .divider {
+    margin-top: $gutter-half;
+  }
+
+}

@@ -1,0 +1,65 @@
+
+/* =========================================================================
+ * Svelto - Checkbox
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CHECKBOX */
+
+.checkbox {
+
+  /* INPUT */
+
+  > input {
+    display: none;
+  }
+
+  /* ICONS */
+
+  .icons {
+
+    /* ICON */
+
+    .icon {
+
+      transition: opacity $checkbox-icon-transition-opacity-duration;
+
+      &.icon-on {
+        @include color-text ( $checkbox-icon-on-color );
+        opacity: 0;
+        z-index: 1;
+      }
+
+    }
+
+  }
+
+  /* CHECKED */
+
+  &.checked {
+
+    /* ICONS */
+
+    .icons {
+
+      /* ICON */
+
+      .icon {
+
+        &.icon-on {
+          opacity: 1;
+        }
+
+        &.icon-off {
+          opacity: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+}

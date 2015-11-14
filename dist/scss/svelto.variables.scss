@@ -1,0 +1,2947 @@
+
+/* =========================================================================
+ * Svelto - Colors (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//SOURCE: Colors taken from the here: http://zavoloklom.github.io/material-design-color-palette/colors.html
+//URL: Constrast ratio calculator: http://leaverou.github.io/contrast-ratio
+
+/* MODIFIERS */
+
+$color-hover-lighten-amount: 2 !default;
+$color-active-darken-amount: $color-hover-lighten-amount !default;
+$color-border-darken-amount: 15 !default;
+$color-link-hover-lighten-amount: $color-hover-lighten-amount !default;
+
+/* BASE */
+
+$color-primary: #1565c0 !default; //INFO: Blue-800
+$color-secondary: #ef6c00 !default; //INFO: Orange-800
+$color-tertiary: #6a1b9a !default; //INFO: Purple-800
+$color-quaternary: #2e7d32 !default; //INFO: Green-800
+
+$color-white: #ffffff !default;
+$color-gray: #e0e0e0 !default; //INFO: Gray-300
+$color-black: #212121 !default; //INFO: Gray-900
+$color-yellow: #fabf40 !default; //INFO: Yellow-700
+$color-olive: #cddc39 !default; //INFO: Lime-500
+$color-green: #4caf50 !default; //INFO: Green-500
+$color-blue: #2196f3 !default; //INFO: Blue-500
+$color-violet: #673ab7 !default; //INFO: Deep-Purple-500
+$color-orange: #ff9800 !default; //INFO: Orange-500
+$color-purple: #9c27b0 !default; //INFO: Purple-500
+$color-red: #f44336 !default; //INFO: Red-500
+$color-pink: #e91e63 !default; //INFO: Pink-500
+$color-teal: #009688 !default; //INFO: Teal-500
+$color-brown: #795548 !default; //INFO: Brown-500
+
+$color-error: $color-red !default;
+$color-warning: $color-yellow !default;
+$color-success: $color-green !default;
+
+$color-transparent: rgba(0, 0, 0, 0) !default;
+$color-inherit: inherit !default;
+$color-base: #eceff1 !default; //INFO: Blue-Gray-50
+
+/* PRIMARY */
+
+$color-primary-bg: $color-primary !default;
+$color-primary-bg-hover: lighten( $color-primary-bg, $color-hover-lighten-amount ) !default;
+$color-primary-bg-active: darken( $color-primary-bg, $color-active-darken-amount ) !default;
+$color-primary-border: darken( $color-primary-bg, $color-border-darken-amount ) !default;
+$color-primary-accent: $color-secondary !default;
+$color-primary-text: #ffffff !default; //INFO: Contrast ratio: 5.7
+$color-primary-link: $color-primary-accent !default;
+$color-primary-link-hover: lighten( $color-primary-link, $color-link-hover-lighten-amount ) !default;
+
+/* SECONDARY */
+
+$color-secondary-bg: $color-secondary !default;
+$color-secondary-bg-hover: lighten( $color-secondary-bg, $color-hover-lighten-amount ) !default;
+$color-secondary-bg-active: darken( $color-secondary-bg, $color-active-darken-amount ) !default;
+$color-secondary-border: darken( $color-secondary-bg, $color-border-darken-amount ) !default;
+$color-secondary-accent: $color-primary !default;
+$color-secondary-text: #ffffff !default; //INFO: Contrast ratio: 3.1
+$color-secondary-link: $color-secondary-accent !default;
+$color-secondary-link-hover: lighten( $color-secondary-link, $color-link-hover-lighten-amount ) !default;
+
+/* TERTIARY */
+
+$color-tertiary-bg: $color-tertiary !default;
+$color-tertiary-bg-hover: lighten( $color-tertiary-bg, $color-hover-lighten-amount ) !default;
+$color-tertiary-bg-active: darken( $color-tertiary-bg, $color-active-darken-amount ) !default;
+$color-tertiary-border: darken( $color-tertiary-bg, $color-border-darken-amount ) !default;
+$color-tertiary-accent: $color-quaternary !default;
+$color-tertiary-text: #ffffff !default; //INFO: Contrast ratio: 9.4
+$color-tertiary-link: $color-tertiary-accent !default;
+$color-tertiary-link-hover: lighten( $color-tertiary-link, $color-link-hover-lighten-amount ) !default;
+
+/* QUATERNARY */
+
+$color-quaternary-bg: $color-quaternary !default;
+$color-quaternary-bg-hover: lighten( $color-quaternary-bg, $color-hover-lighten-amount ) !default;
+$color-quaternary-bg-active: darken( $color-quaternary-bg, $color-active-darken-amount ) !default;
+$color-quaternary-border: darken( $color-quaternary-bg, $color-border-darken-amount ) !default;
+$color-quaternary-accent: $color-tertiary !default;
+$color-quaternary-text: #ffffff !default; //INFO: Contrast ratio: 5.1
+$color-quaternary-link: $color-quaternary-accent !default;
+$color-quaternary-link-hover: lighten( $color-quaternary-link, $color-link-hover-lighten-amount ) !default;
+
+/* WHITE */
+
+$color-white-bg: $color-white !default;
+$color-white-bg-hover: darken( $color-white-bg, $color-hover-lighten-amount ) !default;
+$color-white-bg-active: darken( $color-white-bg, $color-active-darken-amount * 2 ) !default;
+$color-white-border: darken( $color-white-bg, $color-border-darken-amount ) !default;
+$color-white-accent: $color-secondary !default;
+$color-white-text: #3f3f3f !default; //INFO: Contrast ratio: 10.5
+$color-white-link: $color-primary !default;
+$color-white-link-hover: lighten( $color-white-link, $color-link-hover-lighten-amount ) !default;
+
+/* GRAY */
+
+$color-gray-bg: $color-gray !default;
+$color-gray-bg-hover: lighten( $color-gray-bg, $color-hover-lighten-amount ) !default;
+$color-gray-bg-active: darken( $color-gray-bg, $color-active-darken-amount ) !default;
+$color-gray-border: darken( $color-gray-bg, $color-border-darken-amount ) !default;
+$color-gray-accent: $color-black !default;
+$color-gray-text: #3f3f3f !default; //INFO: Contrast ratio: 8
+$color-gray-link: $color-white !default;
+$color-gray-link-hover: lighten( $color-gray-link, $color-link-hover-lighten-amount ) !default;
+
+/* BLACK */
+
+$color-black-bg: $color-black !default;
+$color-black-bg-hover: lighten( $color-black-bg, $color-hover-lighten-amount ) !default;
+$color-black-bg-active: darken( $color-black-bg, $color-active-darken-amount ) !default;
+$color-black-border: darken( $color-black-bg, $color-border-darken-amount ) !default;
+$color-black-accent: $color-white !default;
+$color-black-text: #ffffff !default; //INFO: Contrast ratio: 16.1
+$color-black-link: $color-gray !default;
+$color-black-link-hover: lighten( $color-black-link, $color-link-hover-lighten-amount ) !default;
+
+/* YELLOW */
+
+$color-yellow-bg: $color-yellow !default;
+$color-yellow-bg-hover: lighten( $color-yellow-bg, $color-hover-lighten-amount ) !default;
+$color-yellow-bg-active: darken( $color-yellow-bg, $color-active-darken-amount ) !default;
+$color-yellow-border: darken( $color-yellow-bg, $color-border-darken-amount ) !default;
+$color-yellow-accent: $color-red !default;
+$color-yellow-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-yellow-link: $color-yellow-accent !default;
+$color-yellow-link-hover: lighten( $color-yellow-link, $color-link-hover-lighten-amount ) !default;
+
+/* OLIVE */
+
+$color-olive-bg: $color-olive !default;
+$color-olive-bg-hover: lighten( $color-olive-bg, $color-hover-lighten-amount ) !default;
+$color-olive-bg-active: darken( $color-olive-bg, $color-active-darken-amount ) !default;
+$color-olive-border: darken( $color-olive-bg, $color-border-darken-amount ) !default;
+$color-olive-accent: $color-orange !default;
+$color-olive-text: #ffffff !default; //INFO: Contrast ratio: 1.7
+$color-olive-link: $color-olive-accent !default;
+$color-olive-link-hover: lighten( $color-olive-link, $color-link-hover-lighten-amount ) !default;
+
+/* GREEN */
+
+$color-green-bg: $color-green !default;
+$color-green-bg-hover: lighten( $color-green-bg, $color-hover-lighten-amount ) !default;
+$color-green-bg-active: darken( $color-green-bg, $color-active-darken-amount ) !default;
+$color-green-border: darken( $color-green-bg, $color-border-darken-amount ) !default;
+$color-green-accent: $color-violet !default;
+$color-green-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-green-link: $color-green-accent !default;
+$color-green-link-hover: lighten( $color-green-link, $color-link-hover-lighten-amount ) !default;
+
+/* BLUE */
+
+$color-blue-bg: $color-blue !default;
+$color-blue-bg-hover: lighten( $color-blue-bg, $color-hover-lighten-amount ) !default;
+$color-blue-bg-active: darken( $color-blue-bg, $color-active-darken-amount ) !default;
+$color-blue-border: darken( $color-blue-bg, $color-border-darken-amount ) !default;
+$color-blue-accent: $color-red !default;
+$color-blue-text: #ffffff !default; //INFO: Contrast ratio: 3.1
+$color-blue-link: $color-blue-accent !default;
+$color-blue-link-hover: lighten( $color-blue-link, $color-link-hover-lighten-amount ) !default;
+
+/* VIOLET */
+
+$color-violet-bg: $color-violet !default;
+$color-violet-bg-hover: lighten( $color-violet-bg, $color-hover-lighten-amount ) !default;
+$color-violet-bg-active: darken( $color-violet-bg, $color-active-darken-amount ) !default;
+$color-violet-border: darken( $color-violet-bg, $color-border-darken-amount ) !default;
+$color-violet-accent: $color-orange !default;
+$color-violet-text: #ffffff !default; //INFO: Contrast ratio: 7.1
+$color-violet-link: $color-violet-accent !default;
+$color-violet-link-hover: lighten( $color-violet-link, $color-link-hover-lighten-amount ) !default;
+
+/* ORANGE */
+
+$color-orange-bg: $color-orange !default;
+$color-orange-bg-hover: lighten( $color-orange-bg, $color-hover-lighten-amount ) !default;
+$color-orange-bg-active: darken( $color-orange-bg, $color-active-darken-amount ) !default;
+$color-orange-border: darken( $color-orange-bg, $color-border-darken-amount ) !default;
+$color-orange-accent: $color-blue !default;
+$color-orange-text: #ffffff !default; //INFO: Contrast ratio 2.2
+$color-orange-link: $color-orange-accent !default;
+$color-orange-link-hover: lighten( $color-orange-link, $color-link-hover-lighten-amount ) !default;
+
+/* PURPLE */
+
+$color-purple-bg: $color-purple !default;
+$color-purple-bg-hover: lighten( $color-purple-bg, $color-hover-lighten-amount ) !default;
+$color-purple-bg-active: darken( $color-purple-bg, $color-active-darken-amount ) !default;
+$color-purple-border: darken( $color-purple-bg, $color-border-darken-amount ) !default;
+$color-purple-accent: $color-yellow !default;
+$color-purple-text: #ffffff !default; //INFO: Contrast ratio: 6.3
+$color-purple-link: $color-purple-accent !default;
+$color-purple-link-hover: lighten( $color-purple-link, $color-link-hover-lighten-amount ) !default;
+
+/* RED */
+
+$color-red-bg: $color-red !default;
+$color-red-bg-hover: lighten( $color-red-bg, $color-hover-lighten-amount ) !default;
+$color-red-bg-active: darken( $color-red-bg, $color-active-darken-amount ) !default;
+$color-red-border: darken( $color-red-bg, $color-border-darken-amount ) !default;
+$color-red-accent: $color-yellow !default;
+$color-red-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-red-link: $color-red-accent !default;
+$color-red-link-hover: lighten( $color-red-link, $color-link-hover-lighten-amount ) !default;
+
+/* PINK */
+
+$color-pink-bg: $color-pink !default;
+$color-pink-bg-hover: lighten( $color-pink-bg, $color-hover-lighten-amount ) !default;
+$color-pink-bg-active: darken( $color-pink-bg, $color-active-darken-amount ) !default;
+$color-pink-border: darken( $color-pink-bg, $color-border-darken-amount ) !default;
+$color-pink-accent: $color-teal !default;
+$color-pink-text: #ffffff !default; //INFO: Contrast ratio: 4.3
+$color-pink-link: $color-pink-accent !default;
+$color-pink-link-hover: lighten( $color-pink-link, $color-link-hover-lighten-amount ) !default;
+
+/* TEAL */
+
+$color-teal-bg: $color-teal !default;
+$color-teal-bg-hover: lighten( $color-teal-bg, $color-hover-lighten-amount ) !default;
+$color-teal-bg-active: darken( $color-teal-bg, $color-active-darken-amount ) !default;
+$color-teal-border: darken( $color-teal-bg, $color-border-darken-amount ) !default;
+$color-teal-accent: $color-pink !default;
+$color-teal-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-teal-link: $color-teal-accent !default;
+$color-teal-link-hover: lighten( $color-teal-link, $color-link-hover-lighten-amount ) !default;
+
+/* BROWN */
+
+$color-brown-bg: $color-brown !default;
+$color-brown-bg-hover: lighten( $color-brown-bg, $color-hover-lighten-amount ) !default;
+$color-brown-bg-active: darken( $color-brown-bg, $color-active-darken-amount ) !default;
+$color-brown-border: darken( $color-brown-bg, $color-border-darken-amount ) !default;
+$color-brown-accent: $color-orange !default;
+$color-brown-text: #ffffff !default; //INFO: Contrast ratio: 6.6
+$color-brown-link: $color-brown-accent !default;
+$color-brown-link-hover: lighten( $color-brown-link, $color-link-hover-lighten-amount ) !default;
+
+/* ERROR */
+
+$color-error-bg: $color-error !default;
+$color-error-bg-hover: lighten( $color-error-bg, $color-hover-lighten-amount ) !default;
+$color-error-bg-active: darken( $color-error-bg, $color-active-darken-amount ) !default;
+$color-error-border: darken( $color-error-bg, $color-border-darken-amount ) !default;
+$color-error-accent: $color-yellow !default;
+$color-error-text: #ffffff !default; //INFO: Contrast ratio: 3.7
+$color-error-link: $color-error-accent !default;
+$color-error-link-hover: lighten( $color-error-link, $color-link-hover-lighten-amount ) !default;
+
+/* WARNING */
+
+$color-warning-bg: $color-warning !default;
+$color-warning-bg-hover: lighten( $color-warning-bg, $color-hover-lighten-amount ) !default;
+$color-warning-bg-active: darken( $color-warning-bg, $color-active-darken-amount ) !default;
+$color-warning-border: darken( $color-warning-bg, $color-border-darken-amount ) !default;
+$color-warning-accent: $color-red !default;
+$color-warning-text: #ffffff !default; //INFO: Contrast ratio 1.7
+$color-warning-link: $color-warning-accent !default;
+$color-warning-link-hover: lighten( $color-warning-link, $color-link-hover-lighten-amount ) !default;
+
+/* SUCCESS */
+
+$color-success-bg: $color-success !default;
+$color-success-bg-hover: lighten( $color-success-bg, $color-hover-lighten-amount ) !default;
+$color-success-bg-active: darken( $color-success-bg, $color-active-darken-amount ) !default;
+$color-success-border: darken( $color-success-bg, $color-border-darken-amount ) !default;
+$color-success-accent: $color-violet !default;
+$color-success-text: #ffffff !default; //INFO: Contrast ratio: 2.8
+$color-success-link: $color-success-accent !default;
+$color-success-link-hover: lighten( $color-success-link, $color-link-hover-lighten-amount ) !default;
+
+/* TRANSPARENT */
+
+$color-transparent-bg: $color-transparent !default;
+$color-transparent-bg-hover: lighten( $color-transparent-bg, $color-hover-lighten-amount ) !default;
+$color-transparent-bg-active: darken( $color-transparent-bg, $color-active-darken-amount ) !default;
+$color-transparent-border: darken( $color-transparent-bg, $color-border-darken-amount ) !default;
+$color-transparent-accent: $color-secondary !default;
+$color-transparent-text: inherit !default;
+$color-transparent-link: $color-transparent-accent !default;
+$color-transparent-link-hover: lighten( $color-transparent-link, $color-link-hover-lighten-amount ) !default;
+
+/* INHERIT */
+
+$color-inherit-bg: $color-inherit !default;
+$color-inherit-bg-hover: $color-inherit !default;
+$color-inherit-bg-active: $color-inherit !default;
+$color-inherit-border: $color-inherit !default;
+$color-inherit-accent: $color-inherit !default;
+$color-inherit-text: $color-inherit !default;
+$color-inherit-link: $color-inherit !default;
+$color-inherit-link-hover: $color-inherit !default;
+
+/* BASE */
+
+$color-base-bg: $color-base !default;
+$color-base-bg-hover: darken( $color-base-bg, $color-hover-lighten-amount ) !default;
+$color-base-bg-active: darken( $color-base-bg,  $color-active-darken-amount * 2 ) !default;
+$color-base-border: darken( $color-base-bg, $color-border-darken-amount ) !default;
+$color-base-accent: $color-secondary !default;
+$color-base-text: #3f3f3f !default; //INFO: Contrast ratio: 9.1
+$color-base-link: $color-base-accent !default;
+$color-base-link-hover: lighten( $color-base-link, $color-link-hover-lighten-amount ) !default;
+
+/* COLORS */
+
+$colors: (
+  'primary' : ( $color-primary-bg, $color-primary-bg-hover, $color-primary-bg-active, $color-primary-border, $color-primary-accent, $color-primary-text, $color-primary-link, $color-primary-link-hover ),
+  'secondary' : ( $color-secondary-bg, $color-secondary-bg-hover, $color-secondary-bg-active, $color-secondary-border, $color-secondary-accent, $color-secondary-text, $color-secondary-link, $color-secondary-link-hover ),
+  'tertiary' : ( $color-tertiary-bg, $color-tertiary-bg-hover, $color-tertiary-bg-active, $color-tertiary-border, $color-tertiary-accent, $color-tertiary-text, $color-tertiary-link, $color-tertiary-link-hover ),
+  'quaternary' : ( $color-quaternary-bg, $color-quaternary-bg-hover, $color-quaternary-bg-active, $color-quaternary-border, $color-quaternary-accent, $color-quaternary-text, $color-quaternary-link, $color-quaternary-link-hover ),
+
+  'white' : ( $color-white-bg, $color-white-bg-hover, $color-white-bg-active, $color-white-border, $color-white-accent, $color-white-text, $color-white-link, $color-white-link-hover ),
+  'gray' : ( $color-gray-bg, $color-gray-bg-hover, $color-gray-bg-active, $color-gray-border, $color-gray-accent, $color-gray-text, $color-gray-link, $color-gray-link-hover ),
+  'black' : ( $color-black-bg, $color-black-bg-hover, $color-black-bg-active, $color-black-border, $color-black-accent, $color-black-text, $color-black-link, $color-black-link-hover ),
+  'yellow' : ( $color-yellow-bg, $color-yellow-bg-hover, $color-yellow-bg-active, $color-yellow-border, $color-yellow-accent, $color-yellow-text, $color-yellow-link, $color-yellow-link-hover ),
+  'olive' : ( $color-olive-bg, $color-olive-bg-hover, $color-olive-bg-active, $color-olive-border, $color-olive-accent, $color-olive-text, $color-olive-link, $color-olive-link-hover ),
+  'green' : ( $color-green-bg, $color-green-bg-hover, $color-green-bg-active, $color-green-border, $color-green-accent, $color-green-text, $color-green-link, $color-green-link-hover ),
+  'blue' : ( $color-blue-bg, $color-blue-bg-hover, $color-blue-bg-active, $color-blue-border, $color-blue-accent, $color-blue-text, $color-blue-link, $color-blue-link-hover ),
+  'violet' : ( $color-violet-bg, $color-violet-bg-hover, $color-violet-bg-active, $color-violet-border, $color-violet-accent, $color-violet-text, $color-violet-link, $color-violet-link-hover ),
+  'orange' : ( $color-orange-bg, $color-orange-bg-hover, $color-orange-bg-active, $color-orange-border, $color-orange-accent, $color-orange-text, $color-orange-link, $color-orange-link-hover ),
+  'purple' : ( $color-purple-bg, $color-purple-bg-hover, $color-purple-bg-active, $color-purple-border, $color-purple-accent, $color-purple-text, $color-purple-link, $color-purple-link-hover ),
+  'red' : ( $color-red-bg, $color-red-bg-hover, $color-red-bg-active, $color-red-border, $color-red-accent, $color-red-text, $color-red-link, $color-red-link-hover ),
+  'pink' : ( $color-pink-bg, $color-pink-bg-hover, $color-pink-bg-active, $color-pink-border, $color-pink-accent, $color-pink-text, $color-pink-link, $color-pink-link-hover ),
+  'teal' : ( $color-teal-bg, $color-teal-bg-hover, $color-teal-bg-active, $color-teal-border, $color-teal-accent, $color-teal-text, $color-teal-link, $color-teal-link-hover ),
+  'brown' : ( $color-brown-bg, $color-brown-bg-hover, $color-brown-bg-active, $color-brown-border, $color-brown-accent, $color-brown-text, $color-brown-link, $color-brown-link-hover ),
+
+  'error' : ( $color-error-bg, $color-error-bg-hover, $color-error-bg-active, $color-error-border, $color-error-accent, $color-error-text, $color-error-link, $color-error-link-hover ),
+  'warning' : ( $color-warning-bg, $color-warning-bg-hover, $color-warning-bg-active, $color-warning-border, $color-warning-accent, $color-warning-text, $color-warning-link, $color-warning-link-hover ),
+  'success' : ( $color-success-bg, $color-success-bg-hover, $color-success-bg-active, $color-success-border, $color-success-accent, $color-success-text, $color-success-link, $color-success-link-hover ),
+
+  'transparent' : ( $color-transparent-bg, $color-transparent-bg-hover, $color-transparent-bg-active, $color-transparent-border, $color-transparent-accent, $color-transparent-text, $color-transparent-link, $color-transparent-link-hover ),
+  'inherit' : ( $color-inherit-bg, $color-inherit-bg-hover, $color-inherit-bg-active, $color-inherit-border, $color-inherit-accent, $color-inherit-text, $color-inherit-link, $color-inherit-link-hover ),
+  'base' : ( $color-base-bg, $color-base-bg-hover, $color-base-bg-active, $color-base-border, $color-base-accent, $color-base-text, $color-base-link, $color-base-link-hover )
+) !default;
+
+
+/* =========================================================================
+ * Svelto - Breakpoints (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BREAKPOINTS */
+
+//INFO: We are using `px` instead of `rem` because if we use rem we have a buggy behaviour is Safari, for example when loading the `navbar` examples page there's a strange animation at the beginning, like if the media query for auto-attacching the navbar is matched on loading, where actually it should not
+
+$breakpoint-xsmall: 0px !default;
+$breakpoint-small: 512px !default;
+$breakpoint-medium: 768px !default;
+$breakpoint-large: 1024px !default;
+$breakpoint-xlarge: 1216px !default;
+
+/* BREAKPOINTS */
+
+$breakpoints: (
+  'xsmall': $breakpoint-xsmall,
+  'small': $breakpoint-small,
+  'medium': $breakpoint-medium,
+  'large': $breakpoint-large,
+  'xlarge': $breakpoint-xlarge
+) !default;
+
+
+/* =========================================================================
+ * Svelto - UI (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../breakpoints/variables.scss
+ * ========================================================================= */
+
+/* GUTTER */
+
+$gutter: 10px !default;
+$gutter-half: $gutter / 2;
+
+/* MAX WIDTH */
+
+$max-width-enabled: true !default;
+$max-width-size: 'xlarge' !default;
+$max-width: map-get($breakpoints, $max-width-size) !default; //TODO: Provide support for it
+
+/* BORDER RADIUS */
+
+$border-radius-small: 0.125em !default; //INFO: 2 / 16
+$border-radius-medium: 0.25em !default; //INFO: 4 / 16
+$border-radius-large: 0.375em !default; //INFO: 6 / 16
+
+/* TRANSITIONS */
+
+$transition-duration-slow: 0.5s !default;
+$transition-duration-normal: 0.35s !default;
+$transition-duration-fast: 0.15s !default;
+
+/* PATHS */ //TODO: Not the appropriate file to be in, probably
+
+$basepath: '/' !default;
+
+
+/* =========================================================================
+ * Svelto - Navbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* NAVBAR */
+
+$navbar-z-index: 120 !default;
+$navbar-z-depth: 5 !default;
+
+$navbar-transition-transform-duration: $transition-duration-normal !default;
+
+/* ATTACHED */
+
+$navbar-attached-z-depth: 5 !default;
+
+/* BACKGROUND */
+
+$navbar-background-color: rgba(0, 0, 0, 0.5) !default;
+
+$navbar-background-transition-opacity-duration: $transition-duration-normal !default;
+
+/* SIZES */
+
+$navbar-extra-distance: 2.6666666667rem !default;
+
+$navbar-horizontal-height: 7.5rem !default;
+$navbar-horizontal-extra-distance: $navbar-extra-distance !default;
+$navbar-closed-horizontal-spacing: $navbar-horizontal-height + $navbar-horizontal-extra-distance !default;
+
+$navbar-vertical-width: $navbar-horizontal-height * 2 !default;
+$navbar-vertical-extra-distance: $navbar-extra-distance !default;
+$navbar-closed-vertical-spacing: $navbar-vertical-width + $navbar-vertical-extra-distance !default;
+
+/* SLIM SIZES */
+
+$navbar-slim-horizontal-height: 4.2666666667rem !default;
+$navbar-slim-horizontal-extra-distance: $navbar-extra-distance !default;
+$navbar-slim-closed-horizontal-spacing: $navbar-slim-horizontal-height + $navbar-slim-horizontal-extra-distance !default;
+
+$navbar-slim-vertical-width: $navbar-slim-horizontal-height !default;
+$navbar-slim-vertical-extra-distance: $navbar-extra-distance !default;
+$navbar-slim-closed-vertical-spacing: $navbar-slim-vertical-width + $navbar-slim-vertical-extra-distance !default;
+
+
+/* =========================================================================
+ * Svelto - Base (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../navbar/variables.scss
+ * ========================================================================= */
+
+/* BASE */
+
+$base-selection-bg-color: lighten($color-primary-bg, 50) !default;
+
+$base-transition-all-duration: $navbar-transition-transform-duration !default;
+
+/* BODY */
+
+$body-color: 'base' !default;
+
+/* MAIN HEADER */
+
+$main-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
+
+
+/* =========================================================================
+ * Svelto - Breadcrumb (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BREADCRUMB */
+
+$breadcrumb-after-opacity: 0.5 !default;
+$breadcrumb-after-opacity-hover: 0.75 !default;
+
+/* DIVIDER */
+
+$breadcrumb-divider-padding-vertical: 0 !default;
+$breadcrumb-divider-padding-horizontal: 0.75em !default;
+
+
+/* =========================================================================
+ * Svelto - Container (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* CONTAINER */
+
+$container-color: 'white' !default;
+
+$container-border-radius: $border-radius-medium !default;
+
+$container-padding-vertical: $gutter !default;
+$container-padding-horizontal: $gutter !default;
+
+/* CONTAINER COMPACT */
+
+$container-compact-padding-vertical: $gutter-half !default;
+$container-compact-padding-horizontal: $gutter !default;
+
+
+/* =========================================================================
+ * Svelto - Card (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../container/variables.scss
+ * ========================================================================= */
+
+/* CARD */
+
+$card-color: $container-color !default;
+
+$card-border-radius: $container-border-radius !default;
+
+
+/* =========================================================================
+ * Svelto - Outline (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OUTLINE */
+
+$outline-width: 1px !default;
+$outline-style: solid !default;
+
+
+/* =========================================================================
+ * Svelto - Typography (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../outline/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* FONT FAMILY */
+
+$font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+/* FONT SIZE */
+
+$font-size: 16px !default;
+
+/* LINE HEIGHT */
+
+$line-height: 1.4285714286 !default; //INFO: 20/14
+$line-height-em: 1em * $line-height !default;
+
+/* LINK */
+
+$a-underline-height: 1px !default;
+$a-underline-transition-duration: $transition-duration-fast !default;
+
+/* HEADERS */
+
+$h1-size: 'xxlarge' !default;
+$h2-size: 'xlarge' !default;
+$h3-size: 'large' !default;
+$h4-size: 'medium' !default;
+$h5-size: 'small' !default;
+$h6-size: 'xsmall' !default;
+
+$header-small-opacity: 0.85 !default;
+
+/* SMALL */
+
+$small-font-size: 0.65em !default;
+
+/* MARK */
+
+$mark-color: 'yellow' !default;
+
+$mark-padding: 0.3em 0.325em !default;
+$mark-border-radius: $border-radius-small !default;
+
+/* ABBR */
+
+$abbr-border-width: 1px !default;
+$abbr-border-style: 'dotted' !default;
+$abbr-border-color: $color-gray-border !default;
+
+/* BLOCKQUOTE */
+
+$blockquote-bg-color: transparent !default;
+$blockquote-line-width: $gutter-half !default;
+$blockquote-line-bg-color: rgba(0, 0, 0, 0.15) !default;
+
+$blockquote-footer-font-size: 0.85em !default;
+$blockquote-footer-opacity: 0.85 !default;
+$blockquote-footer-bg-color: transparent !default;
+$blockquote-footer-padding-vertical: 0 !default;
+$blockquote-footer-padding-horizontal: 0 !default;
+
+/* LIST */
+
+$list-padding-left: $gutter * 2 !default;
+
+/* CODE */
+
+$code-bg-color: rgba(0, 0, 0, 0.03) !default;
+$code-border-radius: $border-radius-medium !default;
+$code-border-width: $outline-width !default;
+$code-border-color: rgba(0, 0, 0, 0.15) !default;
+
+/* KBD */
+
+$kbd-color: 'white' !default;
+
+$kbd-border-width: $outline-width !default;
+$kbd-border-style: solid !default;
+$kdb-border-radius: $border-radius-medium !default;
+
+$kbd-font-size: 0.9em !default;
+$kbd-padding: 0.2em 0.3em !default;
+
+
+/* =========================================================================
+ * Svelto - Icons (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../typography/variables.scss
+ * ========================================================================= */
+
+/* ICONS */
+
+$icon-best-size: 24px; //INFO: At this size the icons look the best
+$icon-scale-amount: $icon-best-size / $font-size !default; //INFO: This is the scale factor at which the icons are at their best dimensions at the default `medium` size
+
+
+/* =========================================================================
+ * Svelto - Carousel (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../icons/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* CAROUSEL */
+
+$carousel-height: 12.5em !default;
+
+$carousel-bg-color: $color-black !default;
+
+/* INDICATOR */
+
+$carousel-indicators-z-index: 10 !default;
+
+$carousel-indicator-color: $color-white !default;
+
+$carousel-indicator-size: 0.625em !default;
+$carousel-indicator-border-width: 2px !default;
+
+$carousel-indicator-opacity: 0.25 !default;
+$carousel-hover-indicator-opacity: 0.5 !default;
+$carousel-indicator-hover-opacity: 1 !default;
+
+$carousel-indicator-transition-all-duration: $transition-duration-normal !default;
+
+/* INSET (PREV / NEXT) */
+
+$carousel-inset-prev-next-z-index: 9 !default;
+
+$carousel-inset-prev-next-font-size: 1em * $icon-scale-amount !default;
+
+$carousel-inset-prev-width: 20% !default;
+$carousel-inset-next-width: 100% - $carousel-inset-prev-width !default;
+
+$carousel-inset-prev-next-color: $carousel-indicator-color !default;
+
+$carousel-inset-prev-next-opacity: $carousel-indicator-opacity !default;
+$carousel-inset-hover-prev-next-opacity: $carousel-hover-indicator-opacity !default;
+$carousel-inset-prev-next-hover-opacity: $carousel-indicator-hover-opacity !default;
+
+$carousel-inset-prev-next-transition-opacity-duration: $transition-duration-normal !default;
+
+/* SLIDE */
+
+$carousel-slide-transition-transform-duration: $transition-duration-normal !default;
+
+/* FADE */
+
+$carousel-fade-transition-opacity-duration: $transition-duration-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Dropdown (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+//FIXME: There might be a little glitch with the horizontal tip shadows, in that case try to tweak the other values, moving the shadow in the x axis
+
+/* DROPDOWN */
+
+$dropdown-z-index: 1000 !default;
+$dropdown-z-depth: 4 !default;
+
+$dropdown-max-width: 70vw !default;
+$dropdown-max-height: 40vh !default;
+
+/* TIP */
+
+$dropdown-tip-size: 0.75em !default;
+
+/* TIP BOX SHADOW */
+
+$dropdown-top-tip-box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.7) !default; //INFO: Taken from z-depths
+$dropdown-bottom-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.1) !default; //INFO: Taken from z-depths
+$dropdown-left-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default; //INFO: Taken from z-depths
+$dropdown-right-tip-box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.35) !default; //INFO: Taken from z-depths
+
+/* TRANSITIONS */
+
+$dropdown-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Chat (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../dropdown/variables.scss
+ * @requires ../outline/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* TIP */
+
+$chat-tip-size: $dropdown-tip-size !default;
+
+/* LEVELS */
+
+$chat-msg-level-3-spacing: 9em !default;
+$chat-msg-level-2-spacing: 4.5em !default;
+$chat-msg-level-1-spacing: 0 !default;
+
+/* IMAGE */
+
+$chat-msg-img-size: 3em !default;
+$chat-msg-img-border-width: $outline-width !default;
+$chat-msg-img-border-color: $color-black !default;
+$chat-msg-img-opacity-hover: 0.8 !default;
+
+/* TRANSITIONS */
+
+$chat-msg-img-transition-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Checkbox (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* CHECKBOX */
+
+$checkbox-icon-on-color: 'secondary' !default;
+$checkbox-icon-transition-opacity-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Colorpicker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../outline/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* COLORPICKER */
+
+$colorpicker-height: 11em !default;
+
+/* WRAPPERS */
+
+$colorpicker-wrp-border-width: $outline-width !default;
+$colorpicker-wrp-border-color: black !default;
+
+/* WRAPPER HUE */
+
+$colorpicker-hue-wrp-width: 1.5em !default;
+
+/* HANDLER */
+
+$colorpicker-handler-border-width: 2px !default;
+$colorpicker-handler-border-color: white !default;
+
+$colorpicker-handler-shadow: 0 0 0px 1px rgba(0, 0, 0, 0.2) !default;
+
+/* HANDLER SB */
+
+$colorpicker-handler-sb-height: 1em !default;
+$colorpicker-handler-sb-width: 1em !default;
+
+$colorpicker-handler-sb-border-radius: 50% !default;
+
+/* HANDLER HUE */
+
+$colorpicker-handler-hue-height: 0.5em !default;
+
+$colorpicker-handler-hue-border-radius: $border-radius-small !default;
+
+
+/* =========================================================================
+ * Svelto - Constants (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CONSTANTS */
+
+$GOLDEN-RATIO: 1.6180339887 !default;
+$PI: 3.1415926536 !default;
+$SQRT2: 1.4142135624 !default;
+
+
+/* =========================================================================
+ * Svelto - Datepicker (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* DATEPICKER */
+
+$datepicker-block-width: 100% / 7 !default;
+
+/* DAY NAME */
+
+$datepicker-day-name-font-weight: bold !default;
+$datepicker-day-name-height: 2.5em !default;
+
+/* DAY */
+
+$datepicker-day-height: 2.5em !default;
+$datepicker-day-prev-next-opacity: 0.25 !default;
+
+/* DAY CIRCLE */
+
+$datepicker-day-circle-size: 2.375em !default;
+
+$datepicker-day-hover-color: $color-secondary-text !default;
+$datepicker-day-hover-circle-color: transparentize($color-secondary-bg, 0.25) !default;
+
+$datepicker-day-today-color: $color-secondary-bg !default;
+$datepicker-day-today-circle-color: transparent !default;
+
+$datepicker-day-selected-z-depth: 2 !default;
+$datepicker-day-selected-color: $color-secondary-text !default;
+$datepicker-day-selected-circle-color: $color-secondary-bg !default;
+
+/* TRANSITIONS */
+
+$datepicker-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Divider (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* BLOCK */
+
+$divider-block-color: 'red' !default;;
+
+$divider-block-vertical-padding: 0.3em !default;
+$divider-block-horizontal-padding: 0.6em !default;
+
+/* LINEAR */
+
+$divider-linear-bg-color: rgba(0, 0, 0, 0.1) !default;
+
+/* TEXT */
+
+$divider-text-size: 'medium' !default;
+
+$divider-text-opacity: 0.75 !default;
+
+$divider-text-font-weight: bold !default;
+
+/* SPACER */
+
+$divider-spacer-height: $gutter-half !default;
+
+
+/* =========================================================================
+ * Svelto - Embedded (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* EMBEDDED */
+
+$embedded-ratios: ( 21 9 ) ( 16 9 ) ( 4 3 ) ( 1 1 ) !default;
+
+
+/* =========================================================================
+ * Svelto - Expander (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* EXPANDER */
+
+$expander-transition-all-duration: $transition-duration-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Flags (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FLAGS */
+
+$flags: (
+  'ad': (
+    'andorra',
+    ( -16px 0 )
+  ),
+  'ae': (
+    'united-arab-emirates',
+    ( -32px 0 )
+  ),
+  'af': (
+    'afghanistan',
+    ( -48px 0 )
+  ),
+  'ag': (
+    'antigua',
+    ( -64px 0 )
+  ),
+  'ai': (
+    'anguilla',
+    ( -80px 0 )
+  ),
+  'al': (
+    'albania',
+    ( -96px 0 )
+  ),
+  'am': (
+    'armenia',
+    ( -112px 0 )
+  ),
+  'an': (
+    'netherlands-antilles',
+    ( -128px 0 )
+  ),
+  'ao': (
+    'angola',
+    ( -144px 0 )
+  ),
+  'ar': (
+    'argentina',
+    ( -160px 0 )
+  ),
+  'as': (
+    'american-samoa',
+    ( -176px 0 )
+  ),
+  'at': (
+    'austria',
+    ( -192px 0 )
+  ),
+  'au': (
+    'australia',
+    ( -208px 0 )
+  ),
+  'aw': (
+    'aruba',
+    ( -224px 0 )
+  ),
+  'az': (
+    'azerbaijan',
+    ( -240px 0 )
+  ),
+  'ba': (
+    'bosnia',
+    ( 0 -11px )
+  ),
+  'bb': (
+    'barbados',
+    ( -16px -11px )
+  ),
+  'bd': (
+    'bangladesh',
+    ( -32px -11px )
+  ),
+  'be': (
+    'belgium',
+    ( -48px -11px )
+  ),
+  'bf': (
+    'burkina-faso',
+    ( -64px -11px )
+  ),
+  'bg': (
+    'bulgaria',
+    ( -80px -11px )
+  ),
+  'bh': (
+    'bahrain',
+    ( -96px -11px )
+  ),
+  'bi': (
+    'burundi',
+    ( -112px -11px )
+  ),
+  'bj': (
+    'benin',
+    ( -128px -11px )
+  ),
+  'bm': (
+    'bermuda',
+    ( -144px -11px )
+  ),
+  'bn': (
+    'brunei',
+    ( -160px -11px )
+  ),
+  'bo': (
+    'bolivia',
+    ( -176px -11px )
+  ),
+  'br': (
+    'brazil',
+    ( -192px -11px )
+  ),
+  'bs': (
+    'bahamas',
+    ( -208px -11px )
+  ),
+  'bt': (
+    'bhutan',
+    ( -224px -11px )
+  ),
+  'bv': (
+    'bouvet-island',
+    ( -240px -11px )
+  ),
+  'bw': (
+    'botswana',
+    ( 0 -22px )
+  ),
+  'by': (
+    'belarus',
+    ( -16px -22px )
+  ),
+  'bz': (
+    'belize',
+    ( -32px -22px )
+  ),
+  'ca': (
+    'canada',
+    ( -48px -22px )
+  ),
+  'cd': (
+    'congo',
+    ( -80px -22px )
+  ),
+  'cf': (
+    'central-african-republic',
+    ( -96px -22px )
+  ),
+  'cg': (
+    'congo-brazzaville',
+    ( -112px -22px )
+  ),
+  'ch': (
+    'switzerland',
+    ( -128px -22px )
+  ),
+  'ci': (
+    'cote-divoire',
+    ( -144px -22px )
+  ),
+  'ck': (
+    'cook-islands',
+    ( -160px -22px )
+  ),
+  'cl': (
+    'chile',
+    ( -176px -22px )
+  ),
+  'cm': (
+    'cameroon',
+    ( -192px -22px )
+  ),
+  'cn': (
+    'china',
+    ( -208px -22px )
+  ),
+  'co': (
+    'colombia',
+    ( -224px -22px )
+  ),
+  'cr': (
+    'costa-rica',
+    ( -240px -22px )
+  ),
+  'cu': (
+    'cuba',
+    ( 0 -33px )
+  ),
+  'cv': (
+    'cape-verde',
+    ( -16px -33px )
+  ),
+  'cw': (
+    'curacao',
+    ( -32px -33px )
+  ),
+  'cy': (
+    'cyprus',
+    ( -48px -33px )
+  ),
+  'cz': (
+    'czech-republic',
+    ( -64px -33px )
+  ),
+  'de': (
+    'germany',
+    ( -80px -33px )
+  ),
+  'dj': (
+    'djibouti',
+    ( -96px -33px )
+  ),
+  'dk': (
+    'denmark',
+    ( -112px -33px )
+  ),
+  'dm': (
+    'dominica',
+    ( -128px -33px )
+  ),
+  'do': (
+    'dominican-republic',
+    ( -144px -33px )
+  ),
+  'dz': (
+    'algeria',
+    ( -160px -33px )
+  ),
+  'ec': (
+    'ecuador',
+    ( -176px -33px )
+  ),
+  'ee': (
+    'estonia',
+    ( -192px -33px )
+  ),
+  'eg': (
+    'egypt',
+    ( -208px -33px )
+  ),
+  'eh': (
+    'western-sahara',
+    ( -224px -33px )
+  ),
+  'er': (
+    'eritrea',
+    ( 0 -44px )
+  ),
+  'es': (
+    'spain',
+    ( -16px -44px )
+  ),
+  'et': (
+    'ethiopia',
+    ( -32px -44px )
+  ),
+  'eu': (
+    'european-union',
+    ( -48px -44px )
+  ),
+  'fi': (
+    'finland',
+    ( -64px -44px )
+  ),
+  'fj': (
+    'fiji',
+    ( -80px -44px )
+  ),
+  'fk': (
+    'falkland-islands',
+    ( -96px -44px )
+  ),
+  'fm': (
+    'micronesia',
+    ( -112px -44px )
+  ),
+  'fo': (
+    'faroe-islands',
+    ( -128px -44px )
+  ),
+  'fr': (
+    'france',
+    ( -144px -44px )
+  ),
+  'ga': (
+    'gabon',
+    ( -160px -44px )
+  ),
+  'gb': (
+    'england',
+    ( -176px -44px )
+  ),
+  'gd': (
+    'grenada',
+    ( -192px -44px )
+  ),
+  'ge': (
+    'georgia',
+    ( -208px -44px )
+  ),
+  'gf': (
+    'french-guiana',
+    ( -224px -44px )
+  ),
+  'gg': (
+    'guernsey',
+    ( -240px -44px )
+  ),
+  'gh': (
+    'ghana',
+    ( 0 -55px )
+  ),
+  'gi': (
+    'gibraltar',
+    ( -16px -55px )
+  ),
+  'gl': (
+    'greenland',
+    ( -32px -55px )
+  ),
+  'gm': (
+    'gambia',
+    ( -48px -55px )
+  ),
+  'gn': (
+    'guinea',
+    ( -64px -55px )
+  ),
+  'gp': (
+    'guadeloupe',
+    ( -80px -55px )
+  ),
+  'gq': (
+    'equatorial-guinea',
+    ( -96px -55px )
+  ),
+  'gr': (
+    'greece',
+    ( -112px -55px )
+  ),
+  'gs': (
+    'sandwich-islands',
+    ( -128px -55px )
+  ),
+  'gt': (
+    'guatemala',
+    ( -144px -55px )
+  ),
+  'gu': (
+    'guam',
+    ( -160px -55px )
+  ),
+  'gw': (
+    'guinea-bissau',
+    ( -176px -55px )
+  ),
+  'gy': (
+    'guyana',
+    ( -192px -55px )
+  ),
+  'hk': (
+    'hong-kong',
+    ( -208px -55px )
+  ),
+  'hm': (
+    'heard-island',
+    ( -224px -55px )
+  ),
+  'hn': (
+    'honduras',
+    ( -240px -55px )
+  ),
+  'hr': (
+    'croatia',
+    ( 0 -66px )
+  ),
+  'ht': (
+    'haiti',
+    ( -16px -66px )
+  ),
+  'hu': (
+    'hungary',
+    ( -32px -66px )
+  ),
+  'ic': (
+    'canary-islands',
+    ( -48px -66px )
+  ),
+  'id': (
+    'indonesia',
+    ( -64px -66px )
+  ),
+  'ie': (
+    'ireland',
+    ( -80px -66px )
+  ),
+  'il': (
+    'israel',
+    ( -96px -66px )
+  ),
+  'im': (
+    'isle-of-man',
+    ( -112px -66px )
+  ),
+  'in': (
+    'india',
+    ( -128px -66px )
+  ),
+  'io': (
+    'indian-ocean-territory',
+    ( -144px -66px )
+  ),
+  'iq': (
+    'iraq',
+    ( -160px -66px )
+  ),
+  'ir': (
+    'iran',
+    ( -176px -66px )
+  ),
+  'is': (
+    'iceland',
+    ( -192px -66px )
+  ),
+  'it': (
+    'italy',
+    ( -208px -66px )
+  ),
+  'je': (
+    'jersey',
+    ( -224px -66px )
+  ),
+  'jm': (
+    'jamaica',
+    ( -240px -66px )
+  ),
+  'jo': (
+    'jordan',
+    ( 0 -77px )
+  ),
+  'jp': (
+    'japan',
+    ( -16px -77px )
+  ),
+  'ke': (
+    'kenya',
+    ( -32px -77px )
+  ),
+  'kg': (
+    'kyrgyzstan',
+    ( -48px -77px )
+  ),
+  'kh': (
+    'cambodia',
+    ( -64px -77px )
+  ),
+  'ki': (
+    'kiribati',
+    ( -80px -77px )
+  ),
+  'km': (
+    'comoros',
+    ( -96px -77px )
+  ),
+  'kn': (
+    'saint-kitts-and-nevis',
+    ( -112px -77px )
+  ),
+  'kp': (
+    'north-korea',
+    ( -128px -77px )
+  ),
+  'kr': (
+    'south-korea',
+    ( -144px -77px )
+  ),
+  'kw': (
+    'kuwait',
+    ( -176px -77px )
+  ),
+  'ky': (
+    'cayman-islands',
+    ( -192px -77px )
+  ),
+  'kz': (
+    'kazakhstan',
+    ( -208px -77px )
+  ),
+  'la': (
+    'laos',
+    ( -224px -77px )
+  ),
+  'lb': (
+    'lebanon',
+    ( -240px -77px )
+  ),
+  'lc': (
+    'saint-lucia',
+    ( 0 -88px )
+  ),
+  'li': (
+    'liechtenstein',
+    ( -16px -88px )
+  ),
+  'lk': (
+    'sri-lanka',
+    ( -32px -88px )
+  ),
+  'lr': (
+    'liberia',
+    ( -48px -88px )
+  ),
+  'ls': (
+    'lesotho',
+    ( -64px -88px )
+  ),
+  'lt': (
+    'lithuania',
+    ( -80px -88px )
+  ),
+  'lu': (
+    'luxembourg',
+    ( -96px -88px )
+  ),
+  'lv': (
+    'latvia',
+    ( -112px -88px )
+  ),
+  'ly': (
+    'libya',
+    ( -128px -88px )
+  ),
+  'ma': (
+    'morocco',
+    ( -144px -88px )
+  ),
+  'mc': (
+    'monaco',
+    ( -160px -88px )
+  ),
+  'md': (
+    'moldova',
+    ( -176px -88px )
+  ),
+  'me': (
+    'montenegro',
+    ( -192px -88px )
+  ),
+  'mg': (
+    'madagascar',
+    ( -208px -88px )
+  ),
+  'mh': (
+    'marshall-islands',
+    ( -224px -88px )
+  ),
+  'mk': (
+    'macedonia',
+    ( -240px -88px )
+  ),
+  'ml': (
+    'mali',
+    ( 0 -99px )
+  ),
+  'mm': (
+    'burma',
+    ( -16px -99px )
+  ),
+  'mn': (
+    'mongolia',
+    ( -32px -99px )
+  ),
+  'mo': (
+    'macau',
+    ( -48px -99px )
+  ),
+  'mp': (
+    'northern-mariana-islands',
+    ( -64px -99px )
+  ),
+  'mq': (
+    'martinique',
+    ( -80px -99px )
+  ),
+  'mr': (
+    'mauritania',
+    ( -96px -99px )
+  ),
+  'ms': (
+    'montserrat',
+    ( -112px -99px )
+  ),
+  'mt': (
+    'malta',
+    ( -128px -99px )
+  ),
+  'mu': (
+    'mauritius',
+    ( -144px -99px )
+  ),
+  'mv': (
+    'maldives',
+    ( -160px -99px )
+  ),
+  'mw': (
+    'malawi',
+    ( -176px -99px )
+  ),
+  'mx': (
+    'mexico',
+    ( -192px -99px )
+  ),
+  'my': (
+    'malaysia',
+    ( -208px -99px )
+  ),
+  'mz': (
+    'mozambique',
+    ( -224px -99px )
+  ),
+  'na': (
+    'namibia',
+    ( -240px -99px )
+  ),
+  'nc': (
+    'new-caledonia',
+    ( 0 -110px )
+  ),
+  'ne': (
+    'niger',
+    ( -16px -110px )
+  ),
+  'nf': (
+    'norfolk-island',
+    ( -32px -110px )
+  ),
+  'ng': (
+    'nigeria',
+    ( -48px -110px )
+  ),
+  'ni': (
+    'nicaragua',
+    ( -64px -110px )
+  ),
+  'nl': (
+    'netherlands',
+    ( -80px -110px )
+  ),
+  'no': (
+    'norway',
+    ( -96px -110px )
+  ),
+  'np': (
+    'nepal',
+    ( -112px -110px )
+  ),
+  'nr': (
+    'nauru',
+    ( -128px -110px )
+  ),
+  'nu': (
+    'niue',
+    ( -144px -110px )
+  ),
+  'nz': (
+    'new-zealand',
+    ( -160px -110px )
+  ),
+  'om': (
+    'oman',
+    ( -176px -110px )
+  ),
+  'pa': (
+    'panama',
+    ( -192px -110px )
+  ),
+  'pe': (
+    'peru',
+    ( -208px -110px )
+  ),
+  'pf': (
+    'french-polynesia',
+    ( -224px -110px )
+  ),
+  'pg': (
+    'new-guinea',
+    ( -240px -110px )
+  ),
+  'ph': (
+    'philippines',
+    ( 0 -121px )
+  ),
+  'pk': (
+    'pakistan',
+    ( -16px -121px )
+  ),
+  'pl': (
+    'poland',
+    ( -32px -121px )
+  ),
+  'pm': (
+    'saint-pierre',
+    ( -48px -121px )
+  ),
+  'pn': (
+    'pitcairn-islands',
+    ( -64px -121px )
+  ),
+  'pr': (
+    'puerto-rico',
+    ( -80px -121px )
+  ),
+  'ps': (
+    'palestine',
+    ( -96px -121px )
+  ),
+  'pt': (
+    'portugal',
+    ( -112px -121px )
+  ),
+  'pw': (
+    'palau',
+    ( -128px -121px )
+  ),
+  'py': (
+    'paraguay',
+    ( -144px -121px )
+  ),
+  'qa': (
+    'qatar',
+    ( -160px -121px )
+  ),
+  're': (
+    'reunion',
+    ( -176px -121px )
+  ),
+  'ro': (
+    'romania',
+    ( -192px -121px )
+  ),
+  'rs': (
+    'serbia',
+    ( -208px -121px )
+  ),
+  'ru': (
+    'russia',
+    ( -224px -121px )
+  ),
+  'rw': (
+    'rwanda',
+    ( -240px -121px )
+  ),
+  'sa': (
+    'saudi-arabia',
+    ( 0 -132px )
+  ),
+  'sb': (
+    'solomon-islands',
+    ( -16px -132px )
+  ),
+  'sc': (
+    'seychelles',
+    ( -32px -132px )
+  ),
+  'sd': (
+    'sudan',
+    ( -64px -132px )
+  ),
+  'se': (
+    'sweden',
+    ( -80px -132px )
+  ),
+  'sg': (
+    'singapore',
+    ( -96px -132px )
+  ),
+  'sh': (
+    'saint-helena',
+    ( -112px -132px )
+  ),
+  'si': (
+    'slovenia',
+    ( -128px -132px )
+  ),
+  'sk': (
+    'slovakia',
+    ( -144px -132px )
+  ),
+  'sl': (
+    'sierra-leone',
+    ( -160px -132px )
+  ),
+  'sm': (
+    'san-marino',
+    ( -176px -132px )
+  ),
+  'sn': (
+    'senegal',
+    ( -192px -132px )
+  ),
+  'so': (
+    'somalia',
+    ( -208px -132px )
+  ),
+  'sr': (
+    'suriname',
+    ( -240px -132px )
+  ),
+  'ss': (
+    'south-sudan',
+    ( 0 -143px )
+  ),
+  'st': (
+    'sao-tome',
+    ( -16px -143px )
+  ),
+  'sv': (
+    'el-salvador',
+    ( -32px -143px )
+  ),
+  'sx': (
+    'sint-maarten',
+    ( -48px -143px )
+  ),
+  'sy': (
+    'syria',
+    ( -64px -143px )
+  ),
+  'sz': (
+    'swaziland',
+    ( -80px -143px )
+  ),
+  'tc': (
+    'caicos-islands',
+    ( -96px -143px )
+  ),
+  'td': (
+    'chad',
+    ( -112px -143px )
+  ),
+  'tf': (
+    'french-territories',
+    ( -128px -143px )
+  ),
+  'tg': (
+    'togo',
+    ( -144px -143px )
+  ),
+  'th': (
+    'thailand',
+    ( -160px -143px )
+  ),
+  'tj': (
+    'tajikistan',
+    ( -192px -143px )
+  ),
+  'tk': (
+    'tokelau',
+    ( -208px -143px )
+  ),
+  'tl': (
+    'timorleste',
+    ( -224px -143px )
+  ),
+  'tm': (
+    'turkmenistan',
+    ( -240px -143px )
+  ),
+  'tn': (
+    'tunisia',
+    ( 0 -154px )
+  ),
+  'to': (
+    'tonga',
+    ( -16px -154px )
+  ),
+  'tr': (
+    'turkey',
+    ( -32px -154px )
+  ),
+  'tt': (
+    'trinidad',
+    ( -48px -154px )
+  ),
+  'tv': (
+    'tuvalu',
+    ( -64px -154px )
+  ),
+  'tw': (
+    'taiwan',
+    ( -80px -154px )
+  ),
+  'tz': (
+    'tanzania',
+    ( -96px -154px )
+  ),
+  'ua': (
+    'ukraine',
+    ( -112px -154px )
+  ),
+  'ug': (
+    'uganda',
+    ( -128px -154px )
+  ),
+  'um': (
+    'us-minor-islands',
+    ( -144px -154px )
+  ),
+  'us': (
+    'united-states',
+    ( -160px -154px )
+  ),
+  'uy': (
+    'uruguay',
+    ( -176px -154px )
+  ),
+  'uz': (
+    'uzbekistan',
+    ( -192px -154px )
+  ),
+  'va': (
+    'vatican-city',
+    ( -208px -154px )
+  ),
+  'vc': (
+    'saint-vincent',
+    ( -224px -154px )
+  ),
+  've': (
+    'venezuela',
+    ( -240px -154px )
+  ),
+  'vg': (
+    'british-virgin-islands',
+    ( 0 -165px )
+  ),
+  'vi': (
+    'us-virgin-islands',
+    ( -16px -165px )
+  ),
+  'vn': (
+    'vietnam',
+    ( -32px -165px )
+  ),
+  'vu': (
+    'vanuatu',
+    ( -48px -165px )
+  ),
+  'wf': (
+    'wallis-and-futuna',
+    ( -80px -165px )
+  ),
+  'ws': (
+    'samoa',
+    ( -96px -165px )
+  ),
+  'xk': (
+    'kosovo',
+    ( -112px -165px )
+  ),
+  'ye': (
+    'yemen',
+    ( -128px -165px )
+  ),
+  'yt': (
+    'mayotte',
+    ( -144px -165px )
+  ),
+  'za': (
+    'south-africa',
+    ( -160px -165px )
+  ),
+  'zm': (
+    'zambia',
+    ( -192px -165px )
+  ),
+  'zw': (
+    'zimbabwe',
+    ( -208px -165px )
+  )
+) !default;
+
+/* SIZE */
+
+$flag-width: 16px !default;
+$flag-height: 11px !default;
+
+
+/* =========================================================================
+ * Svelto - Flippable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* FLIPPABLE */
+
+$flippable-perspective: 1000px !default;
+
+$flippable-transition-flip-duration: $transition-duration-slow !default;
+
+
+/* =========================================================================
+ * Svelto - Footer (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * ========================================================================= */
+
+/* FOOTER */
+
+$footer-bg-color-darken-amount: 10 !default;
+
+$footer-bg-color: darken($color-base-bg, $footer-bg-color-darken-amount) !default;
+
+
+/* =========================================================================
+ * Svelto - Grid (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GRID */
+
+$grid-columns: 12 !default;
+
+
+/* =========================================================================
+ * Svelto - Helpers (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* BLUR */
+
+$blurred-blur-amount: 3px !default;
+$blurred-transition-duration: $transition-duration-fast !default;
+
+/* BORDER */
+
+$rounded-border-radius: 1000000px !default;
+$smooth-border-radius: $border-radius-medium !default;
+$sharp-border-radius: 0 !default;
+
+/* ROTATE */
+
+$rotating-animation-duration: 0.9s !default;
+
+/* OTHERS */
+
+$spacer-flex-grow: 1000000 !default;
+
+$dragging-z-index: 1000000 !default;
+
+
+/* =========================================================================
+ * Svelto - Highlight (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../outline/variables.scss
+ * ========================================================================= */
+
+/* HIGHLIGHT */
+
+$highlight-z-index: 2 !default;
+
+$highlight-size: 2px !default;
+
+
+/* =========================================================================
+ * Svelto - Image (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* IMAGE */
+
+$image-color: 'black' !default;
+
+/* CAPTION */
+
+$image-caption-color: 'black' !default;
+
+/* TRANSITIONS */
+
+$image-caption-transition-opacity-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Infobar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TITLE */
+
+$infobar-title-size: 'large' !default;
+
+
+/* =========================================================================
+ * Svelto - Label (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../constants/variables.scss
+ * @requires ../container/variables.scss
+ * @requires ../typography/variables.scss
+ * ========================================================================= */
+
+/* LABEL */
+
+$label-color: 'white' !default;
+$label-color-basic: false !default;
+
+$label-border-radius: $container-border-radius !default;
+
+$label-padding-vertical: 0.5em !default;
+$label-padding-horizontal: $label-padding-vertical * 2 !default;
+
+/* LABEL COMPACT */
+
+$label-compact-padding-vertical: $label-padding-vertical !default;
+$label-compact-padding-horizontal: $label-padding-vertical !default;
+
+/* LEFT / RIGHT */
+
+$label-sub-bg-color: rgba(0, 0, 0, 0.05) !default;
+
+/* CENTER EXTRA SPACING */
+
+$label-center-extra-spacing: 0.75em !default;
+$label-compact-center-extra-spacing: 0.5em !default;
+
+/* BADGE */
+
+$label-badge-spacing: -20% !default;
+
+/* TAG */
+
+$label-tag-sharp-size: ( $line-height-em + ( $label-padding-vertical * 2 ) ) / $SQRT2 !default;
+$label-tag-sharp-compact-size: ( $line-height-em + ( $label-compact-padding-vertical * 2 ) ) / $SQRT2 !default;
+
+$label-tag-smooth-size: $label-tag-sharp-size + ( $label-border-radius / 2 ) !default;
+$label-tag-smooth-compact-size: $label-tag-sharp-compact-size + ( $label-border-radius / 2 ) !default;
+
+/* TAG CIRCLE */
+
+$label-tag-circle-scale: 0.25 !default;
+$label-tab-circle-background-color: $color-base !default;
+$label-tag-circle-box-shadow: 0 -1px 1px 0 rgba(0, 0, 0, 0.3) !default;
+
+/* RIBBON */
+
+$label-ribbon-size: 8px !default;
+
+/* CORNER */
+
+$label-corner-padding-vertical: $label-compact-padding-vertical * 2 !default;
+$label-corner-padding-horizontal: $label-compact-padding-horizontal * 2 !default;
+
+/* FLOATING */
+
+$label-floating-z-depth: 4 !default;
+
+$label-floating-padding-vertical: $label-padding-vertical * 1.6 !default;
+$label-floating-padding-horizontal: $label-padding-vertical * 1.6 !default;
+
+$label-floating-right: 24px !default;
+$label-floating-bottom: 24px !default;
+
+/* FLOATING COMPACT */
+
+$label-floating-compact-padding-vertical: $label-floating-padding-vertical / 2 !default;
+$label-floating-compact-padding-horizontal: $label-floating-padding-horizontal / 2 !default;
+
+
+/* =========================================================================
+ * Svelto - Input (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../label/variables.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+$input-color: $label-color !default;
+
+$input-border-radius: $label-border-radius !default;
+
+$input-padding-vertical: $label-padding-vertical !default;
+$input-padding-horizontal: $label-padding-horizontal !default;
+
+/* COMPACT */
+
+$input-compact-padding-vertical: $label-compact-padding-vertical !default;
+$input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
+
+/* PLACEHOLDER */
+
+$input-placeholder-opacity: 0.6 !default;
+
+
+/* =========================================================================
+ * Svelto - Modal (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* MODAL */
+
+$modal-z-index: 200 !default;
+$modal-z-depth: 5 !default;
+
+$modal-closed-scale: 0.7 !default;
+
+/* NOT FULLSCREEN */
+
+$modal-max-width: 90vw !default;
+$modal-max-height: 90vh !default;
+
+/* BEFORE (BACKGROUND) */
+
+$modal-background-color: rgba(0, 0, 0, 0.5) !default;
+
+/* TRANSITIONS */
+
+$modal-transition-all-duration: $transition-duration-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Noty (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../breakpoints/variables.scss
+ * @requires ../container/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* NOTY */
+
+$noty-z-index: 1000 !default;
+$noty-z-depth: 8 !default;
+
+$noty-transparentize-amount: 0.05 !default; //TODO: Implement it
+
+$noty-border-radius: $container-border-radius !default;
+
+/* IMG */
+
+$noty-img-size: 38px !default;
+$noty-img-rounded: false !default;
+
+/* TRANSITIONS */
+
+$noty-transition-all-duration: $transition-duration-normal !default;
+
+/* BREAKPOINTS */
+
+$noty-full-enabled: true !default;
+$noty-full-breakpoint-size: 'small' !default;
+$noty-full-breakpoint: map-get($breakpoints, $noty-full-breakpoint-size) !default;
+
+
+/* =========================================================================
+ * Svelto - Widget (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* WIDGET */
+
+$widget-disabled-opacity: 0.5 !default;
+
+/* TRANSITION */
+
+$widget-transition-opacity-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Overlay (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../widget/variables.scss
+ * ========================================================================= */
+
+/* OVERLAY */
+
+$overlay-z-index: 50 !default;
+
+$overlay-transition-opacity-duration: $widget-transition-opacity-duration !default;
+
+/* SIBLINGS */
+
+$overlay-siblings-opacity: 0.2 !default;
+$overlay-siblings-transition-opacity-duration: $overlay-transition-opacity-duration !default;
+
+/* DIMMER */
+
+$overlay-dimmer-color: 'black' !default;
+
+$overlay-dimmer-background-color: transparentize($color-black, $overlay-siblings-opacity) !default;
+
+
+/* =========================================================================
+ * Svelto - Parallax (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PARALLAX */
+
+$parallax-height: 50vh !default;
+$parallax-perspective: 20rem !default;
+
+/* DEEP */
+
+$parallax-deep-translate-z: - $parallax-perspective * 2 !default;
+$parallax-deep-scale: 3 !default;
+
+/* BACKGROUND */
+
+$parallax-background-translate-z: - $parallax-perspective !default;
+$parallax-background-scale: 2 !default;
+
+/* FOREGROUND */
+
+$parallax-foreground-translate-z: $parallax-perspective / 3.3333333333 !default;
+$parallax-foreground-scale: 0.7 !default;
+
+
+/* =========================================================================
+ * Svelto - Placeholder (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PLACEHOLDER */
+
+$placeholder-color: 'gray' !default;
+
+
+/* =========================================================================
+ * Svelto - Progressbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* PROGRESSBAR */
+
+$progressbar-color: 'gray' !default;
+
+$progressbar-height: 1em !default;
+
+$progressbar-border-radius: $progressbar-height !default;
+
+/* COMPACT */
+
+$progressbar-compact-height: 0.5em !default;
+
+$progressbar-compact-label-font-size: 0.5em !default;
+
+/* SLIM */
+
+$progressbar-slim-height: 0.25em !default;
+
+$progressbar-slim-label-font-size: 0 !default;
+
+/* HIGHLIGHT */
+
+$progressbar-highlight-color: 'secondary' !default;
+
+/* LABEL */
+
+$progressbar-label-font-size: 0.75em !default;
+$progressbar-label-padding-vertical: 0 !default;
+$progressbar-label-padding-horizontal: 0.5em !default;
+
+/* STRIPE */
+
+$progressbar-stripe-size: 3.3333333333em !default;
+
+$progressbar-stripe-opacity: 0.05 !default;
+
+$progressbar-stripe-light-color: rgba(255, 255, 255, $progressbar-stripe-opacity) !default;
+$progressbar-stripe-dark-color: rgba(0, 0, 0, $progressbar-stripe-opacity) !default;
+
+$progressbar-stripes-transition-move-duration: 1s !default;
+
+/* OTHERS */
+
+$progressbar-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Raisable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* RAISABLE */
+
+$raisable-raise-amount: 2 !default;
+
+/* TRANSIITION */
+
+$raisable-transition-box-shadow-duration: $transition-duration-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Rater (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * ========================================================================= */
+
+/* RATER */
+
+$rater-star-active-color: $color-secondary !default;
+
+
+/* =========================================================================
+ * Svelto - Remote Modal (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* REMOTE MODAL PLACEHOLDER */
+
+$remote-modal-placeholder-size: 10rem;
+
+
+/* =========================================================================
+ * Svelto - Ripple (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* RIPPLE */
+
+$ripple-color-default: $color-black !default;
+
+$ripple-transparentize-amount: 0.8 !default;
+
+/* CIRCLE */
+
+$ripple-circle-z-width: 10 !default;
+$ripple-circle-width: 300% !default;
+$ripple-centered-circle-width: 200% !default;
+
+/* TRANSITIONS */
+
+$ripple-transition-timing-function: ease-out !default;
+$ripple-transition-show-duration: $transition-duration-slow !default;
+$ripple-transition-hide-duration: $transition-duration-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Select (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SELECT */
+
+$select-z-depth: 1 !default;
+
+
+/* =========================================================================
+ * Svelto - Selectable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * ========================================================================= */
+
+/* SELECTABLE */
+
+$table-selectable-row-selected-color: lighten($color-primary-bg, 50) !default;
+
+
+/* =========================================================================
+ * Svelto - Shapes (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SHAPE */
+
+$shape-size: 1em !default;
+
+/* TRIANGLE */
+
+$triangle-size: $shape-size !default;
+
+/* SQUARE */
+
+$square-size: $shape-size !default;
+
+/* CIRCLE */
+
+$circle-size: $shape-size !default;
+
+/* SQUARE SAMPLE */
+
+$square-sample-size: 4em !default;
+$square-sample-p-size: 'xxsmall' !default;
+
+
+/* =========================================================================
+ * Svelto - Sizes (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../icons/variables.scss
+ * @requires ../typography/variables.scss
+ * ========================================================================= */
+
+/* FUNCTION */
+
+@function get_size ( $icon_size ) {
+
+  //INFO: Returning the proper font-size at which the icons will look `$icon_size`x`$icon_size`
+
+  @return ( $icon_size / $font-size / $icon-scale-amount ) * 1em;
+
+}
+
+/* ICON SIZES */
+
+//INFO: The wanted icon size for the particular size
+//INFO: The [RECOMMENDED] sizes are those where the icons look better
+
+$size-xxxxsmall-icon: 6px !default;
+$size-xxxsmall-icon: 9px !default;
+$size-xxsmall-icon: 12px !default;
+$size-xsmall-icon: 18px !default; //- [RECOMMENDED]
+$size-small-icon: 21px !default;
+$size-medium-icon: 24px !default; //- [RECOMMENDED]
+$size-large-icon: 30px !default;
+$size-xlarge-icon: 36px !default; //- [RECOMMENDED]
+$size-xxlarge-icon: 42px !default;
+$size-xxxlarge-icon: 48px !default; //- [RECOMMENDED]
+$size-xxxxlarge-icon: 60px !default;
+
+/* SIZES */
+
+//INFO: The [RECOMMENDED] sizes are those where the icons look better
+
+$size-xxxxsmall: get_size( $size-xxxxsmall-icon ) !default;
+$size-xxxsmall: get_size( $size-xxxsmall-icon ) !default;
+$size-xxsmall: get_size( $size-xxsmall-icon ) !default;
+$size-xsmall: get_size( $size-xsmall-icon ) !default; //- [RECOMMENDED]
+$size-small: get_size( $size-small-icon ) !default;
+$size-medium: get_size( $size-medium-icon ) !default; //- [RECOMMENDED]
+$size-large: get_size( $size-large-icon ) !default;
+$size-xlarge: get_size( $size-xlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxlarge: get_size( $size-xxlarge-icon ) !default;
+$size-xxxlarge: get_size( $size-xxxlarge-icon ) !default; //- [RECOMMENDED]
+$size-xxxxlarge: get_size( $size-xxxxlarge-icon ) !default;
+
+/* SIZES */
+
+$sizes: (
+  'xxxxsmall': $size-xxxxsmall,
+  'xxxsmall': $size-xxxsmall,
+  'xxsmall': $size-xxsmall,
+  'xsmall': $size-xsmall,
+  'small': $size-small,
+  'medium': $size-medium,
+  'large': $size-large,
+  'xlarge': $size-xlarge,
+  'xxlarge': $size-xxlarge,
+  'xxxlarge': $size-xxxlarge,
+  'xxxxlarge': $size-xxxxlarge
+) !default;
+
+
+/* =========================================================================
+ * Svelto - Switch (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../constants/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* SWITCH */
+
+$switch-width: 2.2666666667em !default;
+
+$switch-color: 'gray' !default;
+
+/* BAR */
+
+$switch-bar-width: 1.7333333333em !default;
+$switch-bar-height: 0.9333333333em !default;
+
+/* HANDLER */
+
+$switch-handler-z-depth: 3 !default;
+
+$switch-handler-size: 1.3333333333em !default;
+$switch-handler-half-size: $switch-handler-size / 2 !default;
+
+/* HANDLER ICON */
+
+$switch-handler-icon-size: 1.6666666667em !default;
+$switch-handler-icon-font-size: 0.8em !default;
+
+/* HANDLER:BEFORE */
+
+$switch-handler-before-scale-inactive: 0 !default;
+$switch-handler-before-scale-active: $GOLDEN-RATIO !default;
+
+$switch-handler-before-active-opacity: 0.25 !default;
+
+/* OTHERS */
+
+$switch-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Slider (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../label/variables.scss
+ * @requires ../switch/variables.scss
+ * @requires ../typography/variables.scss
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* SLIDER */
+
+$slider-color: 'inherit' !default;
+
+$slider-height: $line-height-em + ( $label-padding-vertical * 2 ) !default; //INFO: Label min-height //TODO: Write it better, maybe create a variable for this in the labels' settings
+
+/* MIN / MAX */
+
+$slider-min-max-min-width: $slider-height !default;
+
+/* UNHIGHLIGHT */
+
+$slider-unhighlight-color: 'gray' !default;
+
+$slider-unhighlight-height: 0.5em !default;
+
+$slider-unhighlight-border-radius: $slider-unhighlight-height !default;
+
+/* HIGHLIGHT */
+
+$slider-highlight-color: 'secondary' !default;
+
+/* HANDLER */
+
+$slider-handler-color: 'secondary' !default;
+
+$slider-handler-z-depth: 3 !default;
+
+$slider-handler-size: 1.55em !default;
+$slider-handler-half-size: $slider-handler-size / 2 !default;
+
+$slider-handler-border-radius: 50% !default;
+
+$slider-handler-active-transform-scale: 1.35 !default;
+
+/* LABEL */
+
+$slider-handler-label-font-size: 0.6em !default;
+
+/* OTHERS */
+
+$slider-transition-all-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Sortable (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SORTABLE TABLE HEADER */
+
+$table-th-sortable-padding-horizontal: 1.75em !default;
+
+$table-th-sortable-hover-bg-color: rgba(255, 255, 255, 0.1) !default;
+$table-th-sortable-active-bg-color: rgba(0, 0, 0, 0.025) !default;
+
+/* SORTABLE TABLE HEADER ICON */
+
+$table-th-sortable-icon-inactive-opacity: 0.35 !default;
+$table-th-sortable-icon-active-opacity: 1 !default;
+
+$table-th-sortable-icon-right: 0.15em !default;
+
+
+/* =========================================================================
+ * Svelto - Spinner Overlay (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* SPINNER OVERLAY */
+
+$spinner-overlay-transition-transform-duration: $transition-duration-normal !default;
+
+
+/* =========================================================================
+ * Svelto - Spinner (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../colors/variables.scss
+ * @requires ../label/variables.scss
+ * ========================================================================= */
+
+/* SPINNER */
+
+$spinner-size: 3.25em !default;
+
+$spinner-radius: 1.25em !default;
+
+/* STROKE */
+
+$spinner-stroke-width: 0.25em !default;
+
+$spinner-stroke-color: $color-secondary !default;
+
+/* MULTICOLOR */
+
+$spinner-multicolor-stroke-color1: $color-blue !default;
+$spinner-multicolor-stroke-color2: $color-red !default;
+$spinner-multicolor-stroke-color3: $color-yellow !default;
+$spinner-multicolor-stroke-color4: $color-green !default;
+
+/* ANIMATION */
+
+$spinner-animation-rotate-duration: 2s !default;
+
+$spinner-stroke-animation-dash-duration: 1.5s !default;
+
+/* SPINNER LABEL */
+
+$spinner-label-z-depth: 3 !default;
+
+$spinner-label-color: 'inherit' !default;
+
+$spinner-label-padding-vertical: $label-compact-padding-vertical !default;
+$spinner-label-padding-horizontal: $label-compact-padding-horizontal !default;
+
+$spinner-label-border-radius: 50% !default;
+
+
+/* =========================================================================
+ * Svelto - Statistic (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PRIMARY */
+
+$statistic-primary-size: 'xlarge' !default;
+
+/* SECONDARY */
+
+$statistic-secondary-size: 'small' !default;
+
+
+/* =========================================================================
+ * Svelto - Table (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../outline/variables.scss
+ * ========================================================================= */
+
+/* TABLE */
+
+$table-color: inherit !default;
+
+$table-header-footer-bg-color: rgba(0, 0, 0, 0.05) !default; //INFO: The same used in label sub left and right
+
+/* EMPTY */
+
+$table-row-empty-height: 4.5em !default;
+
+/* BORDERED */
+
+$table-bordered-border-width: $outline-width !default;
+$table-bordered-border-color: inherit !default;
+
+/* STRIPED */
+
+$table-striped-row-odd-color: rgba(0, 0, 0, 0.02) !default;
+$table-striped-row-even-color: rgba(0, 0, 0, 0) !default;
+
+/* HOVERABLE */
+
+$table-hoverable-row-odd-color-hover: rgba(0, 0, 0, 0.04) !default;
+$table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;
+
+
+/* =========================================================================
+ * Svelto - Tagbox (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* PARTIAL */
+
+$tagbox-input-min-width: 6.5em !default;
+
+
+/* =========================================================================
+ * Svelto - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+$textarea-lines: 5 !default;
+
+
+/* =========================================================================
+ * Svelto - Toolbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TOOLBAR */
+
+$toolbar-padding-vertical: 0.5em !default;
+$toolbar-padding-horizontal: 1em !default;
+
+
+/* =========================================================================
+ * Svelto - Tooltip (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TOOLTIP */
+
+$tooltip-max-width: 20rem !default;
+
+
+/* =========================================================================
+ * Svelto - Z-Depths (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* Z-DEPTHS */
+
+$z-depth-0: none !default;
+$z-depth-1: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !default;
+$z-depth-2: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) !default;
+$z-depth-3: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) !default;
+$z-depth-4: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) !default;
+$z-depth-5: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) !default;
+$z-depth-6: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4) !default;
+$z-depth-7: 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 2px 16px 2px rgba(0, 0, 0, 0.12), 0 4px 5px -3px rgba(0, 0, 0, 0.4) !default;
+$z-depth-8: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) !default;
+$z-depth-9: 0 9px 12px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 6px -3px rgba(0, 0, 0, 0.4) !default;
+$z-depth-10: 0 10px 13px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 6px 6px -3px rgba(0, 0, 0, 0.4) !default;
+$z-depth-11: 0 11px 14px 1px rgba(0, 0, 0, 0.14), 0 4px 14px 3px rgba(0, 0, 0, 0.12), 0 6px 7px -4px rgba(0, 0, 0, 0.4) !default;
+$z-depth-12: 0 12px 16px 1px rgba(0, 0, 0, 0.14), 0 4px 14px 3px rgba(0, 0, 0, 0.12), 0 6px 8px -4px rgba(0, 0, 0, 0.4) !default;
+$z-depth-13: 0 13px 18px 1px rgba(0, 0, 0, 0.14), 0 4px 18px 3px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.4) !default;
+$z-depth-14: 0 14px 20px 1px rgba(0, 0, 0, 0.14), 0 5px 22px 4px rgba(0, 0, 0, 0.12), 0 7px 8px -4px rgba(0, 0, 0, 0.4) !default;
+$z-depth-15: 0 15px 22px 1px rgba(0, 0, 0, 0.14), 0 5px 26px 4px rgba(0, 0, 0, 0.12), 0 7px 9px -5px rgba(0, 0, 0, 0.4) !default;
+$z-depth-16: 0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 5px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4) !default;
+$z-depth-17: 0 17px 26px 3px rgba(0, 0, 0, 0.14), 0 5px 32px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.4) !default;
+$z-depth-18: 0 18px 28px 3px rgba(0, 0, 0, 0.14), 0 6px 34px 6px rgba(0, 0, 0, 0.12), 0 8px 11px -5px rgba(0, 0, 0, 0.4) !default;
+$z-depth-19: 0 19px 30px 3px rgba(0, 0, 0, 0.14), 0 6px 36px 6px rgba(0, 0, 0, 0.12), 0 9px 11px -6px rgba(0, 0, 0, 0.4) !default;
+$z-depth-20: 0 20px 32px 3px rgba(0, 0, 0, 0.14), 0 6px 38px 7px rgba(0, 0, 0, 0.12), 0 9px 12px -6px rgba(0, 0, 0, 0.4) !default;
+$z-depth-21: 0 21px 34px 4px rgba(0, 0, 0, 0.14), 0 7px 40px 7px rgba(0, 0, 0, 0.12), 0 9px 12px -6px rgba(0, 0, 0, 0.4) !default;
+$z-depth-22: 0 22px 36px 4px rgba(0, 0, 0, 0.14), 0 7px 42px 8px rgba(0, 0, 0, 0.12), 0 10px 13px -6px rgba(0, 0, 0, 0.4) !default;
+$z-depth-23: 0 23px 38px 4px rgba(0, 0, 0, 0.14), 0 7px 44px 8px rgba(0, 0, 0, 0.12), 0 10px 13px -7px rgba(0, 0, 0, 0.4) !default;
+$z-depth-24: 0 24px 40px 4px rgba(0, 0, 0, 0.14), 0 8px 46px 9px rgba(0, 0, 0, 0.12), 0 10px 10px -8px rgba(0, 0, 0, 0.4) !default;
+
+/* Z-DEPTHS */
+
+$z-depths: (
+  0: $z-depth-0,
+  1: $z-depth-1,
+  2: $z-depth-2,
+  3: $z-depth-3,
+  4: $z-depth-4,
+  5: $z-depth-5,
+  6: $z-depth-6,
+  7: $z-depth-7,
+  8: $z-depth-8,
+  9: $z-depth-9,
+  10: $z-depth-10,
+  11: $z-depth-11,
+  12: $z-depth-12,
+  13: $z-depth-13,
+  14: $z-depth-14,
+  15: $z-depth-15,
+  16: $z-depth-16,
+  17: $z-depth-17,
+  18: $z-depth-18,
+  19: $z-depth-19,
+  20: $z-depth-20,
+  21: $z-depth-21,
+  22: $z-depth-22,
+  23: $z-depth-23,
+  24: $z-depth-24
+) !default;

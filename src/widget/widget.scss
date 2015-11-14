@@ -1,0 +1,30 @@
+
+/* =========================================================================
+ * Svelto - Widget
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* WIDGET */
+
+.widget {
+
+  @include last-child-no-gutter ();
+  position: relative;
+  margin: 0 0 $gutter;
+  transition: opacity $widget-transition-opacity-duration;
+
+  &.disabled {
+    cursor: default !important;
+    opacity: $widget-disabled-opacity !important;
+  }
+
+}
+
+/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+
+.widget-pseudo {
+  position: relative;
+  margin: 0 0 $gutter;
+}

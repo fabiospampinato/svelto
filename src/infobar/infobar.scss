@@ -1,0 +1,89 @@
+
+/* =========================================================================
+ * Svelto - Infobar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../container/container.scss
+ * ========================================================================= */
+
+/* INFOBAR */
+
+//FIXME: It doesn't work really good on mobile
+
+.infobar {
+
+  @extend .container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  /* INSET */
+
+  &.inset {
+    padding: 0;
+  }
+
+  /* SECTIONS */
+
+  > * {
+    @include last-child-no-gutter ();
+    margin-bottom: 0 !important;
+  }
+
+  /* SECTIONS GUTTER */
+
+  > :not(:first-child):not(.infobar-bottom) {
+    margin-left: $gutter;
+  }
+
+  /* LEFT */
+
+  &-left {
+    flex-shrink: 0;
+    order: 0;
+  }
+
+  /* CENTER */
+
+  &-center {
+
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-basis: 0;
+    order: 1;
+
+    /* TITLE / SUBTITLE */
+
+    .infobar-title,
+    .infobar-subtitle {
+      @include last-child-no-gutter ();
+      display: flex;
+      margin-bottom: 0 !important;
+    }
+
+    /* TITLE */
+
+    .infobar-title {
+      @include size ( $infobar-title-size );
+    }
+
+  }
+
+  /* RIGHT */
+
+  &-right {
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  /* BOTTOM */
+
+  &-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
+    order: 3;
+    width: 100%;
+    margin-top: $gutter;
+  }
+
+}

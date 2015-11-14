@@ -1,0 +1,160 @@
+
+/* =========================================================================
+ * Svelto - Tabs
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for tabs in all directions, use `top, right, bottom, left` classes instead of the `horizontal, vertical` abstraction
+
+/* TABS */
+
+.tabs {
+
+  @extend .widget;
+
+  /* TRIGGERS */
+
+  &-triggers {
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: row;
+
+    /* TRIGGER */
+
+    > * {
+      margin-bottom: 0;
+      flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    }
+
+  }
+
+  /* CONTAINERS */
+
+  &-containers {
+
+    position: relative;
+
+    /* CONTAINER */
+
+    > * {
+
+      display: none;
+      margin-bottom: 0;
+
+      &.active {
+        display: block;
+      }
+
+    }
+
+  }
+
+  /* HORIZONTAL */
+
+  &:not(.vertical) {
+
+    /* TRIGGERS */
+
+    .tabs-triggers {
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-bottom-left-radius: 0;
+      }
+
+      > :not(:first-child) {
+        @include border-left-radius ( 0 );
+        border-left-width: 0;
+      }
+
+      > :not(:last-child) {
+        @include border-right-radius ( 0 );
+      }
+
+      > :last-child {
+        border-bottom-right-radius: 0;
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    .tabs-containers {
+
+      /* CONTAINER */
+
+      > * {
+        @include border-top-radius ( 0 );
+        border-top-width: 0;
+      }
+
+    }
+
+  }
+
+  /* VERTICAL */
+
+  &.vertical {
+
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+
+    /* TRIGGERS */
+
+    .tabs-triggers {
+
+      flex-direction: column;
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-top-right-radius: 0;
+      }
+
+      > :not(:first-child) {
+        @include border-top-radius ( 0 );
+        border-top-width: 0;
+      }
+
+      > :not(:last-child) {
+        @include border-bottom-radius ( 0 );
+      }
+
+      > :last-child {
+        border-bottom-right-radius: 0;
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    .tabs-containers {
+
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+
+      /* CONTAINER */
+
+      > * {
+        @include border-left-radius ( 0 );
+        flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        border-left-width: 0;
+      }
+
+    }
+
+  }
+
+}

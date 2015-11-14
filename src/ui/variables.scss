@@ -1,0 +1,36 @@
+
+/* =========================================================================
+ * Svelto - UI (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../breakpoints/variables.scss
+ * ========================================================================= */
+
+/* GUTTER */
+
+$gutter: 10px !default;
+$gutter-half: $gutter / 2;
+
+/* MAX WIDTH */
+
+$max-width-enabled: true !default;
+$max-width-size: 'xlarge' !default;
+$max-width: map-get($breakpoints, $max-width-size) !default; //TODO: Provide support for it
+
+/* BORDER RADIUS */
+
+$border-radius-small: 0.125em !default; //INFO: 2 / 16
+$border-radius-medium: 0.25em !default; //INFO: 4 / 16
+$border-radius-large: 0.375em !default; //INFO: 6 / 16
+
+/* TRANSITIONS */
+
+$transition-duration-slow: 0.5s !default;
+$transition-duration-normal: 0.35s !default;
+$transition-duration-fast: 0.15s !default;
+
+/* PATHS */ //TODO: Not the appropriate file to be in, probably
+
+$basepath: '/' !default;

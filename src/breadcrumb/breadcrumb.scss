@@ -1,0 +1,45 @@
+
+/* =========================================================================
+ * Svelto - Breadcrumb
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BREADCRUMB */
+
+//FIXME: The current shouldn't be clickable, probably
+
+.breadcrumb {
+
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: $gutter;
+
+  /* CHILDREN */
+
+  > * { //INFO: Remove children's margin bottom for proper vertical alignment
+    margin-bottom: 0;
+  }
+
+  /* DIVIDER */
+
+  &-divider {
+    @include last-child-no-gutter ();
+    padding: $breadcrumb-divider-padding-vertical $breadcrumb-divider-padding-horizontal;
+  }
+
+  /* HIGHLIGHTED */
+
+  &.highlighted > .current ~ * {
+
+    opacity: $breadcrumb-after-opacity;
+
+    &:not(.breadcrumb-divider):hover {
+      opacity: $breadcrumb-after-opacity-hover;
+    }
+
+  }
+
+}

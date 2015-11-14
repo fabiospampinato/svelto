@@ -1,0 +1,385 @@
+
+/* =========================================================================
+ * Svelto - Navbar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
+//TODO: Add a class that makes the navbar stays below the toolbar, in that case the toolbar should have an higher z-index than the navbar probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+
+//TODO: Not working on Dolphin browser
+//FIXME: Not working on iPod's Safari
+
+/* MIXINS */
+
+@mixin open () {
+
+  transform: translateX(0) translateY(0) !important;
+  pointer-events: auto;
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+}
+
+@mixin attach () {
+
+  @include z-depth ( $navbar-attached-z-depth );
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* LEFT */
+
+  &.left {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-left: $navbar-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        left: $navbar-vertical-width;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-left: $navbar-slim-vertical-width;
+
+        /* HEADER */
+
+        > header.fixed {
+          left: $navbar-slim-vertical-width;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-right: $navbar-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        right: $navbar-vertical-width;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-right: $navbar-slim-vertical-width;
+
+        /* HEADER */
+
+        > header.fixed {
+          right: $navbar-slim-vertical-width;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* TOP */
+
+  &.top {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-top: $navbar-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        top: $navbar-horizontal-height;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-top: $navbar-slim-horizontal-height;
+
+        /* HEADER */
+
+        > header.fixed {
+          top: $navbar-slim-horizontal-height;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-bottom: $navbar-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        bottom: $navbar-horizontal-height;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-bottom: $navbar-slim-horizontal-height;
+
+        /* HEADER */
+
+        > header.fixed {
+          bottom: $navbar-slim-horizontal-height;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+/* NAVBAR */
+
+.navbar {
+
+  @include z-depth ( $navbar-z-depth );
+  position: fixed;
+  z-index: $navbar-z-index;
+  margin-bottom: 0;
+  border-radius: 0;
+  pointer-events: none;
+  transition: transform $navbar-transition-transform-duration;
+
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right {
+
+    top: 0;
+    bottom: 0;
+    width: $navbar-vertical-width;
+
+    /* SLIM */
+
+    &.slim {
+      width: $navbar-slim-vertical-width;
+    }
+
+  }
+
+  /* LEFT */
+
+  &.left {
+
+    left: 0;
+    transform: translateX(- $navbar-closed-vertical-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateX(- $navbar-slim-closed-vertical-spacing);
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    right: 0;
+    transform: translateX($navbar-closed-vertical-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateX($navbar-slim-closed-vertical-spacing);
+    }
+
+  }
+
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
+
+    right: 0;
+    left: 0;
+    height: $navbar-horizontal-height;
+
+    /* SLIM */
+
+    &.slim {
+      height: $navbar-slim-horizontal-height;
+    }
+
+  }
+
+  /* TOP */
+
+  &.top {
+
+    top: 0;
+    transform: translateY(- $navbar-closed-horizontal-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateY(- $navbar-slim-closed-horizontal-spacing);
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    bottom: 0;
+    transform: translateY($navbar-closed-horizontal-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateY($navbar-slim-closed-horizontal-spacing);
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+    @include open ();
+  }
+
+  /* ATTACHED */
+
+  &.attached {
+    @include open ();
+    @include attach ();
+  }
+
+  @include xsmall-up {
+
+    &.attached-xs {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include small-up {
+
+    &.attached-sm {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include medium-up {
+
+    &.attached-md {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include large-up {
+
+    &.attached-lg {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include xlarge-up {
+
+    &.attached-xl {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 400vw;
+    height: 400vh;
+    top: -200vh;
+    left: -200vw;
+    z-index: -1;
+    cursor: pointer;
+    background-color: $navbar-background-color;
+    transition: opacity $navbar-background-transition-opacity-duration;
+  }
+
+}

@@ -1,0 +1,17 @@
+
+/* =========================================================================
+ * Svelto - Sizes (Mixins)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SIZE */
+
+@mixin size ( $size_name, $extra: '' ) {
+
+  $size: map-get($sizes, $size_name);
+
+  font-size: $size #{$extra};
+
+}

@@ -10,7 +10,6 @@
 
 var _           = require ( 'lodash' ),
     argv        = require ( 'yargs' ).argv,
-    browserSync = require ( 'browser-sync' ).create (),
     fs          = require ( 'fs' ),
     merge       = require ( 'merge-stream' ),
     path        = require ( 'path' ),
@@ -35,15 +34,11 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
     foreach      = require ( 'gulp-foreach' ),
     gulpif       = require ( 'gulp-if' ),
     gutil        = require ( 'gulp-util' ),
-    ignore       = require ( 'gulp-ignore' ),
     imagemin     = require ( 'gulp-imagemin' ),
-    jade         = require ( 'gulp-jade' ),
     minify_css   = require ( 'gulp-minify-css' ),
-    minify_html  = require ( 'gulp-minify-html' ),
     newer        = require ( 'gulp-newer' ),
     rename       = require ( 'gulp-rename' ),
     sass         = require ( 'gulp-sass' ),
-    sequence     = require ( 'gulp-sequence' ),
     sort         = require ( 'gulp-sort' ),
     sourcemaps   = require ( 'gulp-sourcemaps' ),
     uglify       = require ( 'gulp-uglify' );
@@ -51,8 +46,17 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
 /* FLAGS */
 
 var isProduction  = !!argv.production,
-    isDevelopment = !isProduction,
-    browserOpen   = !!argv.open;
+    isDevelopment = !isProduction;
+
+/* FONTS */
+
+gulp.task ( 'fonts', function () {
+
+  return gulp.src ( 'src/**/*.{eot,ttf,woff,woff2}' )
+             .pipe ( flatten () )
+             .pipe ( gulp.dest ( 'dist/fonts' ) );
+
+});
 
 /* IMAGES */
 
@@ -61,7 +65,7 @@ var isProduction  = !!argv.production,
 
 gulp.task ( 'images', function () {
 
-  return gulp.src ( 'src/components/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}' )
+  return gulp.src ( 'src/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}' )
              .pipe ( newer ({
                dest: 'dist/images',
                map: path.basename
@@ -72,55 +76,14 @@ gulp.task ( 'images', function () {
                progressive: true, //INFO: Affects JPG images
                optimizationLevel: 7, //INFO: Affects PNG images
                multipass: true, //INFO: Affects SVG images
-               svgoPlugins: [{ removeViewBox: false }],
+               svgoPlugins: [{
+                 removeViewBox: false
+               }],
                use: [pngquant (), svgo ()]
              })))
              .pipe ( gulpif ( isProduction, bytediff.stop () ) )
              .pipe ( flatten () )
-             .pipe ( gulp.dest ( 'dist/images' ) )
-             .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
-
-});
-
-/* EXAMPLES */
-
-gulp.task ( 'examples-clean', function () {
-
-  return gulp.src ( 'examples/**/*.html' )
-             .pipe ( clean () );
-
-});
-
-gulp.task ( 'examples', function () {
-
-  return gulp.src ( 'examples/**/*.jade' )
-             .pipe ( ignore.exclude ( '**/layout.jade' ) )
-             .pipe ( newer ({
-               dest: 'examples',
-               ext: '.html'
-             }))
-             .pipe ( jade ({
-               locals: {},
-               pretty: false //INFO: Otherwise there are some bugs for example when outputting a block inside a textarea, it gets unneeed extra whitespaces at the beginning
-             }))
-             .on ( 'error', function ( err ) {
-               gutil.log ( err.message );
-             })
-             .pipe ( gulp.dest ( 'examples' ) )
-             .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
-
-});
-
-/* JADE */
-
-gulp.task ( 'jade', ['examples-clean'], function () {
-
-  //TODO: Only perform `examples-clean` if we update the mixins file
-
-  return gulp.src ( 'src/components/**/*.jade' )
-             .pipe ( newer ( 'dist/jade/svelto.mixins.jade' ) )
-             .pipe ( concat ( 'svelto.mixins.jade' ) )
-             .pipe ( gulp.dest ( 'dist/jade' ) );
+             .pipe ( gulp.dest ( 'dist/images' ) );
 
 });
 
@@ -134,7 +97,7 @@ gulp.task ( 'js-temp', function () {
 
     var dependencyIndex = 0;
 
-    return gulp.src ( 'src/components/**/*.js' )
+    return gulp.src ( 'src/**/*.js' )
                .pipe ( sort () )
                .pipe ( dependencies ({
                  pattern: /\* @requires [\s-]*(.*\.js)/g
@@ -170,12 +133,11 @@ gulp.task ( 'js', ['js-temp'], function () {
                .pipe ( concat ( 'svelto.js' ) )
                .pipe ( gulp.dest ( 'dist/js' ) )
                .pipe ( rename ( 'svelto.min.js' ) )
-               .pipe ( gulp.dest ( 'dist/js' ) )
-               .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
+               .pipe ( gulp.dest ( 'dist/js' ) );
 
   } else {
 
-    return gulp.src ( 'src/components/**/*.js' )
+    return gulp.src ( 'src/**/*.js' )
               //  .pipe ( newer ( 'dist/js/svelto.js' ) ) //FIXME: Maybe nothing is changed in the files, but we switched between development and production so we should recompile
                .pipe ( sort () )
                .pipe ( dependencies ({
@@ -190,8 +152,7 @@ gulp.task ( 'js', ['js-temp'], function () {
                .pipe ( gulp.dest ( 'dist/js' ) )
                .pipe ( uglify () )
                .pipe ( rename ( 'svelto.min.js' ) )
-               .pipe ( gulp.dest ( 'dist/js' ) )
-               .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
+               .pipe ( gulp.dest ( 'dist/js' ) );
 
   }
 
@@ -202,35 +163,70 @@ gulp.task ( 'js', ['js-temp'], function () {
 //TODO: Add partial compilation
 //TODO: Add support for sourcemaps
 
-gulp.task ( 'scss', function () {
+gulp.task ( 'css', ['scss-full'], function () {
 
-  return gulp.src ( 'src/components/**/*.scss' )
-             .pipe ( newer ( 'dist/css/svelto.css' ) )
-             .pipe ( sort () )
-             .pipe ( dependencies ({
-               pattern: /\* @requires [\s-]*(.*\.scss)/g
-             }))
-             .pipe ( concat ( 'svelto.scss' ) )
-             .pipe ( gulp.dest ( 'dist/scss' ) )
-             .pipe ( sass ({
-               outputStyle: 'expanded',
-               precision: 10
-             }).on ( 'error', sass.logError ) )
+ return gulp.src ( 'dist/scss/svelto.scss' )
+            .pipe ( newer ( 'dist/css/svelto.css' ) )
+            .pipe ( sass ({
+              outputStyle: 'expanded',
+              precision: 10
+            }).on ( 'error', sass.logError ) )
             .pipe ( gulpif ( isProduction, autoprefixer ({
-               browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
-               cascade: true,
-               remove: true
-             })))
-             .pipe ( rename ( 'svelto.css' ) )
-             .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( gulpif ( isProduction, csso () ) )
-             .pipe ( gulpif ( isProduction, minify_css ({
-               keepSpecialComments: 0,
-               roundingPrecision: -1
-             })))
-             .pipe ( rename ( 'svelto.min.css' ) )
-             .pipe ( gulp.dest ( 'dist/css' ) )
-             .pipe ( gulpif ( browserSync.active, browserSync.stream () ) );
+              browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
+              cascade: true,
+              remove: true
+            })))
+            .pipe ( rename ( 'svelto.css' ) )
+            .pipe ( gulp.dest ( 'dist/css' ) )
+            .pipe ( gulpif ( isProduction, csso () ) )
+            .pipe ( gulpif ( isProduction, minify_css ({
+              keepSpecialComments: 0,
+              roundingPrecision: -1
+            })))
+            .pipe ( rename ( 'svelto.min.css' ) )
+            .pipe ( gulp.dest ( 'dist/css' ) );
+
+});
+
+gulp.task ( 'scss-full', ['scss-parts'], function () {
+
+ return gulp.src ( ['dist/scss/svelto.variables.scss', 'dist/scss/svelto.mixins.scss', 'dist/scss/svelto.components.scss'] )
+            .pipe ( newer ( 'dist/scss/svelto.scss' ) )
+            .pipe ( concat ( 'svelto.scss' ) )
+            .pipe ( gulp.dest ( 'dist/scss' ) );
+
+});
+
+gulp.task ( 'scss-parts', function () {
+
+  var stream_variables = gulp.src ( ['src/**/variables.scss', 'src/variables/**/*.scss'] )
+                             .pipe ( newer ( 'dist/scss/svelto.variables.scss' ) )
+                             .pipe ( sort () )
+                             .pipe ( dependencies ({
+                               pattern: /\* @requires [\s-]*(.*\.scss)/g
+                             }))
+                             .pipe ( concat ( 'svelto.variables.scss' ) )
+                             .pipe ( gulp.dest ( 'dist/scss' ) );
+
+  var stream_mixins = gulp.src ( ['src/**/mixins.scss', 'src/mixins/**/*.scss'] )
+                          .pipe ( newer ( 'dist/scss/svelto.mixins.scss' ) )
+                          .pipe ( sort () )
+                          .pipe ( dependencies ({
+                            pattern: /\* @requires [\s-]*(.*\.scss)/g
+                          }))
+                          .pipe ( concat ( 'svelto.mixins.scss' ) )
+                          .pipe ( gulp.dest ( 'dist/scss' ) );
+
+  var stream_others = gulp.src ( ['src/**/*.scss', '!src/**/variables.scss', '!src/variables/**/*.scss', '!src/**/mixins.scss', '!src/mixins/**/*.scss'] )
+                          .pipe ( newer ( 'dist/scss/svelto.components.scss' ) )
+                          .pipe ( sort () )
+                          .pipe ( dependencies ({
+                            pattern: /\* @requires [\s-]*(.*\.scss)/g
+                          }))
+                          .pipe ( concat ( 'svelto.components.scss' ) )
+                          .pipe ( gulp.dest ( 'dist/scss' ) );
+
+  return merge ( stream_variables, stream_mixins, stream_others );
 
 });
 
@@ -238,44 +234,27 @@ gulp.task ( 'scss', function () {
 
 gulp.task ( 'clean', function () {
 
-  return gulp.src ( ['.temp', 'dist', 'examples/**/*.html'] )
+  return gulp.src ( ['.temp', 'dist'] )
              .pipe ( clean () );
 
 });
 
 /* BUILD */
 
-gulp.task ( 'build', sequence ( 'jade', ['images', 'js', 'scss', 'examples'] ) );
+gulp.task ( 'build', ['fonts', 'images', 'js', 'css'] );
 
 /* WATCH */
 
 var watcher = function () {
 
-  gulp.watch ( 'src/components/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}', ['images'] );
-  gulp.watch ( 'src/components/**/*.jade', ['jade'] );
-  gulp.watch ( 'src/components/**/*.js', ['js'] );
-  gulp.watch ( 'src/components/**/*.scss', ['scss'] );
-  gulp.watch ( ['dist/jade/svelto.mixins.jade', 'examples/**/*.jade'], ['examples'] );
+  gulp.watch ( 'src/**/*.{eot,ttf,woff,woff2}', ['fonts'] );
+  gulp.watch ( 'src/**/*.{bmp,gif,ico,jpg,jpeg,png,svg}', ['images'] );
+  gulp.watch ( 'src/**/*.js', ['js'] );
+  gulp.watch ( 'src/**/*.scss', ['css'] );
 
 };
 
 gulp.task ( 'watch', watcher );
-
-/* SERVE */
-
-gulp.task ( 'serve', function () {
-
-  browserSync.init ({
-    browser: 'google chrome',
-    open: browserOpen,
-    server: 'examples',
-    serveStatic: ['dist/images', 'dist/css', 'dist/js'],
-    notify: false
-  });
-
-  watcher ();
-
-});
 
 /* DEFAULT */
 

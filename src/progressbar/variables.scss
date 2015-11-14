@@ -1,0 +1,54 @@
+
+/* =========================================================================
+ * Svelto - Progressbar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* PROGRESSBAR */
+
+$progressbar-color: 'gray' !default;
+
+$progressbar-height: 1em !default;
+
+$progressbar-border-radius: $progressbar-height !default;
+
+/* COMPACT */
+
+$progressbar-compact-height: 0.5em !default;
+
+$progressbar-compact-label-font-size: 0.5em !default;
+
+/* SLIM */
+
+$progressbar-slim-height: 0.25em !default;
+
+$progressbar-slim-label-font-size: 0 !default;
+
+/* HIGHLIGHT */
+
+$progressbar-highlight-color: 'secondary' !default;
+
+/* LABEL */
+
+$progressbar-label-font-size: 0.75em !default;
+$progressbar-label-padding-vertical: 0 !default;
+$progressbar-label-padding-horizontal: 0.5em !default;
+
+/* STRIPE */
+
+$progressbar-stripe-size: 3.3333333333em !default;
+
+$progressbar-stripe-opacity: 0.05 !default;
+
+$progressbar-stripe-light-color: rgba(255, 255, 255, $progressbar-stripe-opacity) !default;
+$progressbar-stripe-dark-color: rgba(0, 0, 0, $progressbar-stripe-opacity) !default;
+
+$progressbar-stripes-transition-move-duration: 1s !default;
+
+/* OTHERS */
+
+$progressbar-transition-all-duration: $transition-duration-fast !default;

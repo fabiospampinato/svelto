@@ -1,0 +1,29 @@
+
+/* =========================================================================
+ * Svelto - Modal (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../ui/variables.scss
+ * ========================================================================= */
+
+/* MODAL */
+
+$modal-z-index: 200 !default;
+$modal-z-depth: 5 !default;
+
+$modal-closed-scale: 0.7 !default;
+
+/* NOT FULLSCREEN */
+
+$modal-max-width: 90vw !default;
+$modal-max-height: 90vh !default;
+
+/* BEFORE (BACKGROUND) */
+
+$modal-background-color: rgba(0, 0, 0, 0.5) !default;
+
+/* TRANSITIONS */
+
+$modal-transition-all-duration: $transition-duration-normal !default;
