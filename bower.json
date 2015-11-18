@@ -1,6 +1,6 @@
 {
   "name": "svelto",
-  "description": "Modular front end framework for modern browsers (IE10+) with battery included: 50+ components & 20+ tools.",
+  "description": "Modular front end framework for modern browsers, with battery included: 50+ components & 20+ tools.",
   "main": [
     "dist/js/svelto.js",
     "dist/scss/svelto.scss"
