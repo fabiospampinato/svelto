@@ -165,4 +165,4 @@
 
   $.factory ( Svelto.Modal );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

@@ -106,4 +106,4 @@
 
   $.factory ( Svelto.AutogrowInput );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

@@ -271,4 +271,4 @@
 
   $.factory ( Svelto.Sortable );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

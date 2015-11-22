@@ -13,10 +13,46 @@ function _toConsumableArray(arr) { if (Array.isArray(arr)) { for (var i = 0, arr
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* =========================================================================
+ * Svelto - Svelto
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Remove the _ dependency, after all we use it only for a few functions
+
+(function (window, document, undefined) {
+  'use strict'
+
+  /* SVELTO */
+
+  ;
+  window.Svelto = {
+    version: '0.2.0-beta.2',
+    $: jQuery || Zepto || $ || false,
+    _: lodash || underscore || _ || false
+  };
+
+  /* ERRORS */
+
+  if (!Svelto.$) {
+
+    throw 'Svelto depends upon jQuery, dependency unmet.';
+  }
+
+  if (!Svelto._) {
+
+    throw 'Svelto depends upon lo-dash, dependency unmet.';
+  }
+})(window, document);
+
+/* =========================================================================
  * Svelto - Lo-dash (Extras)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 (function (_, window, document, undefined) {
@@ -253,7 +289,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     false: _.constant(false)
 
   });
-})(_, window, document);
+})(Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Browser
@@ -324,7 +360,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       touchDevice: 'ontouchstart' in window || 'DocumentTouch' in window && document instanceof DocumentTouch
     }
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - jQuery (Extras)
@@ -336,7 +372,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * ========================================================================= */
 
 (function ($, _, window, document, undefined) {
-  'use strict';
+  'use strict'
+
+  /* ITERATOR */
+
+  ;
+  $.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+  /* HELPERS */
 
   $.eventXY = function (event) {
 
@@ -431,87 +474,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     window.$body = $(document.body);
     window.$empty = $();
   });
-})(jQuery, _, window, document);
-
-/* =========================================================================
-* Svelto - Pseudo CSS
-* =========================================================================
-* Copyright (c) 2015 Fabio Spampinato
-* Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
-* ========================================================================= */
-
-/* PSEUDO CSS */
-
-//TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
-//TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
-
-(function ($, _, window, document, undefined) {
-  'use strict'
-
-  /* VARIABLES */
-
-  ;
-  var $stylesheet = void 0,
-      tree = {};
-
-  /* UTILITIES */
-
-  var cssfy = function cssfy(tree) {
-
-    var css = '';
-
-    for (var selector in tree) {
-
-      css += selector + '{';
-
-      if (_.isString(tree[selector])) {
-
-        css += tree[selector];
-      } else {
-
-        for (var property in tree[selector]) {
-
-          css += property + ':' + tree[selector][property] + ';';
-        }
-      }
-
-      css += '}';
-    }
-
-    return css;
-  };
-
-  var update = function update() {
-
-    var css = cssfy(tree);
-
-    $stylesheet.html(css);
-  };
-
-  /* PSEUDO CSS */
-
-  $.pseudoCSS = function (selector, property, value) {
-
-    if (_.isString(property)) {
-
-      tree[selector] = property;
-    } else {
-
-      var rule = _.isUndefined(value) ? property : { property: value };
-
-      tree[selector] = _.merge(_.isString(tree[selector]) ? {} : tree[selector] || {}, rule);
-    }
-
-    update();
-  };
-
-  /* READY */
-
-  $(function () {
-
-    $stylesheet = $('<style />').appendTo($head);
-  });
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - UI
@@ -595,25 +558,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     transparent: 'rgba(0, 0, 0, 0)',
     base: '#eceff1'
   };
-})(jQuery, _, window, document);
-
-/* =========================================================================
- * Svelto - Svelto
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-(function ($, _, window, document, undefined) {
-  'use strict'
-
-  /* SVELTO */
-
-  ;
-  window.Svelto = {
-    version: '0.2.0-beta.1'
-  };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Core
@@ -621,11 +566,10 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../svelto/svelto.js
  * @requires ../extras/lodash-extra.js
  * @requires ../extras/jQuery-extra.js
- * @requires ../pseudo_css/pseudo_css.js
  * @requires ../ui/ui.js
- * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /* =========================================================================
@@ -635,6 +579,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /***************************
@@ -747,7 +693,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* UTILITY */
 
   $.tmpl = tmpl;
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Widget
@@ -1328,13 +1274,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   Svelto.Widget = Widget;
   Svelto.Widget.config = config;
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Widgetize
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 (function ($, _, window, document, undefined) {
@@ -1417,7 +1365,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $body.widgetize();
   });
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Pointer
@@ -1651,7 +1599,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $document.on(Pointer.down, downHandler);
   })();
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Factory
@@ -1821,7 +1769,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return instance;
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Expander
@@ -1945,7 +1893,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Expander);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Accordion
@@ -2098,7 +2046,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Accordion);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Autogrow (Input)
@@ -2218,7 +2166,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.AutogrowInput);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Autogrow (Textarea)
@@ -2316,7 +2264,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.AutogrowTextarea);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Blurred
@@ -2337,7 +2285,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return this.toggleClass('blurred', force);
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Boilerplate
@@ -2416,7 +2364,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Boilerplate);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - BT (BinaryTree) Each
@@ -2437,7 +2385,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return _.btEach(this, callback, startIndex);
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Carousel
@@ -2747,7 +2695,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Carousel);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Checkbox
@@ -2902,13 +2850,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Checkbox);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Color Helper
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 (function (_, window, document, undefined) {
@@ -3134,7 +3084,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return _class2;
   })();
-})(_, window, document);
+})(Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Hex Color
@@ -3142,6 +3092,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../svelto/svelto.js
  * @requires ../color_helper/color_helper.js
  * ========================================================================= */
 
@@ -3211,7 +3162,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return _class3;
   })();
-})(_, window, document);
+})(Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Colorpicker
@@ -3562,7 +3513,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Colorpicker);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Cookie
@@ -3571,11 +3522,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie - Mozilla
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /* COOKIE */
 
-(function ($, _, window, document, undefined) {
+(function (_, window, document, undefined) {
   'use strict'
 
   /* UTILITIES */
@@ -3648,7 +3601,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return keys;
     }
   };
-})(jQuery, _, window, document);
+})(Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Datepicker
@@ -4100,7 +4053,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Datepicker);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Draggable
@@ -4413,13 +4366,15 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Draggable);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Transform (Utilties)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /* TRANSFORM UTILITIES */
@@ -4494,7 +4449,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       };
     }
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Positionate
@@ -4718,7 +4673,89 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return this;
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
+
+/* =========================================================================
+* Svelto - Pseudo CSS
+* =========================================================================
+* Copyright (c) 2015 Fabio Spampinato
+* Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+* =========================================================================
+* @requires ../svelto/svelto.js
+* ========================================================================= */
+
+/* PSEUDO CSS */
+
+//TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
+//TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
+
+(function ($, _, window, document, undefined) {
+  'use strict'
+
+  /* VARIABLES */
+
+  ;
+  var $stylesheet = void 0,
+      tree = {};
+
+  /* UTILITIES */
+
+  var cssfy = function cssfy(tree) {
+
+    var css = '';
+
+    for (var selector in tree) {
+
+      css += selector + '{';
+
+      if (_.isString(tree[selector])) {
+
+        css += tree[selector];
+      } else {
+
+        for (var property in tree[selector]) {
+
+          css += property + ':' + tree[selector][property] + ';';
+        }
+      }
+
+      css += '}';
+    }
+
+    return css;
+  };
+
+  var update = function update() {
+
+    var css = cssfy(tree);
+
+    $stylesheet.html(css);
+  };
+
+  /* PSEUDO CSS */
+
+  $.pseudoCSS = function (selector, property, value) {
+
+    if (_.isString(property)) {
+
+      tree[selector] = property;
+    } else {
+
+      var rule = _.isUndefined(value) ? property : { property: value };
+
+      tree[selector] = _.merge(_.isString(tree[selector]) ? {} : tree[selector] || {}, rule);
+    }
+
+    update();
+  };
+
+  /* READY */
+
+  $(function () {
+
+    $stylesheet = $('<style />').appendTo($head);
+  });
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Dropdown
@@ -4728,6 +4765,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * =========================================================================
  * @requires ../widget/factory.js
  * @requires ../positionate/positionate.js
+ * @requires ../pseudo_css/pseudo_css.js
  * ========================================================================= */
 
 //TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
@@ -5103,7 +5141,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Dropdown);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Droppable
@@ -5202,7 +5240,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Droppable);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Flippable
@@ -5325,7 +5363,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Flippable);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Spinner Overlay
@@ -5432,7 +5470,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.SpinnerOverlay);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Noty
@@ -5742,7 +5780,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $body.append('<div class="noty-queues top">' + '<div class="noty-queue expanded"></div>' + '<div class="noty-queues-row">' + '<div class="noty-queue left"></div>' + '<div class="noty-queue center"></div>' + '<div class="noty-queue right"></div>' + '</div>' + '</div>' + '<div class="noty-queues bottom">' + '<div class="noty-queues-row">' + '<div class="noty-queue left"></div>' + '<div class="noty-queue center"></div>' + '<div class="noty-queue right"></div>' + '</div>' + '<div class="noty-queue expanded"></div>' + '</div>');
   });
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - formValidate
@@ -6233,7 +6271,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.FormValidate);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Form Ajax
@@ -6386,7 +6424,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.FormAjax);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Form Sync
@@ -6580,7 +6618,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.FormSync);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Pointer
@@ -6814,7 +6852,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     $document.on(Pointer.down, downHandler);
   })();
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 (function () {
   'use strict';
@@ -6912,6 +6950,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../svelto/svelto.js
  * @requires ../ui/ui.js
  * @requires ../pointer/Pointer.js
  * @requires vendor/screenfull.js
@@ -6940,7 +6979,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     screenfull.toggle();
   });
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Infobar
@@ -7031,7 +7070,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Infobar);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Modal
@@ -7207,7 +7246,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Modal);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - N Times Action (Group)
@@ -7299,7 +7338,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   Svelto.NTA = {};
   Svelto.NTA.Group = Group;
   Svelto.NTA.Group.config = config;
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - N Times Action (Action)
@@ -7352,7 +7391,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* BINDING */
 
   Svelto.NTA.Action = Action;
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - N Times Action
@@ -7415,7 +7454,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       return new Svelto.NTA.Group(options.group);
     }
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Navbar
@@ -7662,7 +7701,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Navbar);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Notification
@@ -7711,7 +7750,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       $.noty(options);
     }
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - One Time Action
@@ -7732,7 +7771,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
     return $.nTimesAction(_.merge({ group: 'ota' }, options, { times: 1 }));
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Overlay
@@ -7942,7 +7981,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* FACTORY */
 
   $.factory(Svelto.Overlay);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript */
 var _self = typeof window !== 'undefined' ? window // if in browser
@@ -8744,7 +8783,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Progressbar);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Radio
@@ -8903,7 +8942,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Radio);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Rater
@@ -9067,7 +9106,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Rater);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Remote Modal
@@ -9169,7 +9208,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
     });
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Ripple
@@ -9353,7 +9392,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Ripple);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Select
@@ -9652,7 +9691,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Select);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Selectable
@@ -9965,7 +10004,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Selectable);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Slider
@@ -10273,7 +10312,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Slider);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Sortable
@@ -10543,7 +10582,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Sortable);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Stepper
@@ -10801,7 +10840,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Stepper);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Switch
@@ -11070,7 +11109,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Switch);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Table Helper
@@ -11290,7 +11329,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.TableHelper);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Tabs
@@ -11457,7 +11496,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Tabs);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Tagbox
@@ -11954,7 +11993,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Tagbox);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Time Ago
@@ -12066,7 +12105,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.TimeAgo);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Timer
@@ -12075,9 +12114,11 @@ Prism.languages.js = Prism.languages.javascript;
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ($, _, window, document, undefined) {
+(function (_, window, document, undefined) {
   'use strict'
 
   /* TIMER */
@@ -12245,7 +12286,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     return _class4;
   })();
-})(jQuery, _, window, document);
+})(Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Tooltip
@@ -12312,7 +12353,7 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory(Svelto.Tooltip);
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
  * Svelto - Touching
@@ -12476,4 +12517,4 @@ Prism.languages.js = Prism.languages.javascript;
       }
     }
   };
-})(jQuery, _, window, document);
+})(Svelto.$, Svelto._, window, document);

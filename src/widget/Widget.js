@@ -506,4 +506,4 @@
   Svelto.Widget = Widget;
   Svelto.Widget.config = config;
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

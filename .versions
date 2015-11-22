@@ -1,5 +1,13 @@
+babel-compiler@5.8.24_1
+babel-runtime@0.1.4
+base64@1.0.4
+check@1.1.0
+ecmascript@0.1.6
+ecmascript-runtime@0.2.6
+ejson@1.0.7
 jquery@1.11.4
 meteor@1.1.10
-stevezhu:lodash@0.1.0
-svelto:svelto@0.2.0-beta.0
+promise@0.5.1
+stevezhu:lodash@3.10.1
+svelto:svelto@0.2.0-beta.3
 underscore@1.0.4

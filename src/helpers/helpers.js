@@ -5,6 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../svelto/svelto.js
  * @requires ../ui/ui.js
  * @requires ../pointer/Pointer.js
  * @requires vendor/screenfull.js
@@ -26,7 +27,7 @@
 
   //TODO: Move it to its own component, add the ability to trigger the fullscreen for a specific element
   //FIXME: It doesn't work in iOS's Safari and IE10
-  //TODO: Add support 
+  //TODO: Add support
 
   $('.fullscreen-toggler').on ( Pointer.tap, () => {
 
@@ -34,4 +35,4 @@
 
   });
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

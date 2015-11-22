@@ -12,6 +12,12 @@
 
   'use strict';
 
+  /* ITERATOR */
+
+  $.prototype[Symbol.iterator] = Array.prototype[Symbol.iterator];
+
+  /* HELPERS */
+
   $.eventXY = function ( event ) {
 
     if ( 'originalEvent' in event ) {
@@ -111,4 +117,4 @@
 
   });
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

@@ -6,11 +6,13 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie - Mozilla
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /* COOKIE */
 
-(function ( $, _, window, document, undefined ) {
+(function ( _, window, document, undefined ) {
 
   'use strict';
 
@@ -97,4 +99,4 @@
 
   };
 
-}( jQuery, _, window, document ));
+}( Svelto._, window, document ));

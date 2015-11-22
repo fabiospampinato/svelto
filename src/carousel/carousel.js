@@ -301,4 +301,4 @@
 
   $.factory ( Svelto.Carousel );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

@@ -4,6 +4,8 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -68,4 +70,4 @@
 
   });
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

@@ -84,4 +84,4 @@
 
   $.factory ( Svelto.AutogrowTextarea );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

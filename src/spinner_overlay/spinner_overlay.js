@@ -103,4 +103,4 @@
 
   $.factory ( Svelto.SpinnerOverlay );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

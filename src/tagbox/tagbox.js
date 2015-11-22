@@ -521,4 +521,4 @@
 
   $.factory ( Svelto.Tagbox );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

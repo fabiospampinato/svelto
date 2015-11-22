@@ -7,6 +7,7 @@
  * =========================================================================
  * @requires ../widget/factory.js
  * @requires ../positionate/positionate.js
+ * @requires ../pseudo_css/pseudo_css.js
  * ========================================================================= */
 
 //TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
@@ -383,4 +384,4 @@
 
   $.factory ( Svelto.Dropdown );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

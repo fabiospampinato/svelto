@@ -6,14 +6,32 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+//TODO: Remove the _ dependency, after all we use it only for a few functions
+
+(function ( window, document, undefined ) {
 
   'use strict';
 
   /* SVELTO */
 
   window.Svelto = {
-    version: '0.2.0-beta.1'
+    version: '0.2.0-beta.2',
+    $: jQuery || Zepto || $ || false,
+    _: lodash || underscore || _ || false
   };
 
-}( jQuery, _, window, document ));
+  /* ERRORS */
+
+  if ( !Svelto.$ ) {
+
+    throw 'Svelto depends upon jQuery, dependency unmet.';
+
+  }
+
+  if ( !Svelto._ ) {
+
+    throw 'Svelto depends upon lo-dash, dependency unmet.'
+
+  }
+
+}( window, document ));

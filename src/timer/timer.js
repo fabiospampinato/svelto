@@ -6,9 +6,11 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of http://jchavannes.com/jquery-timer - Jason Chavannes
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-(function ( $, _, window, document, undefined ) {
+(function ( _, window, document, undefined ) {
 
   'use strict';
 
@@ -182,4 +184,4 @@
 
   };
 
-}( jQuery, _, window, document ));
+}( Svelto._, window, document ));

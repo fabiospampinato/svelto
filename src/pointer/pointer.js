@@ -251,4 +251,4 @@
 
   })();
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

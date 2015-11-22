@@ -48,4 +48,4 @@
 
   Svelto.NTA.Action = Action;
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

@@ -6,6 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * Fork of https://github.com/blueimp/JavaScript-Templates - Sebastian Tschan
+ * =========================================================================
+ * @requires ../svelto/svelto.js
  * ========================================================================= */
 
 /***************************
@@ -124,4 +126,4 @@
 
   $.tmpl = tmpl;
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

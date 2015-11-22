@@ -246,4 +246,4 @@
 
   $.factory ( Svelto.Stepper );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

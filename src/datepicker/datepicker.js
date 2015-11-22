@@ -449,4 +449,4 @@
 
   $.factory ( Svelto.Datepicker );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));

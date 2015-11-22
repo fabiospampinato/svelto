@@ -102,4 +102,4 @@
 
   $.factory ( Svelto.TimeAgo );
 
-}( jQuery, _, window, document ));
+}( Svelto.$, Svelto._, window, document ));
