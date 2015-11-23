@@ -79,6 +79,7 @@
       type: 'alert',
       color: 'black',
       css: '',
+      persistent: false,
       ttl: 3500,
       autoplay: true,
       timerMinimumRemaining: 1000,
@@ -238,6 +239,16 @@
 
     }
 
+    ___persistent () {
+
+      if ( !this.options.persistent ) {
+
+        this._on ( $window, 'route', this.close );
+
+      }
+
+    }
+
     __keydown ( event ) {
 
       if ( event.keyCode === UI.keyCode.ESCAPE ) {
@@ -250,6 +261,7 @@
       }
 
     }
+
 
     /* PUBLIC */
 
@@ -281,6 +293,7 @@
           this.___flick ();
           this.___buttonTap ();
           this.___hover ();
+          this.___persistent ();
 
           this.neverOpened = false;
 
