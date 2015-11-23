@@ -104,9 +104,11 @@
 
   };
 
-  /* COMMON OBJECTS */
+  /* READY */
 
   $(function () {
+
+    /* COMMON OBJECTS */
 
     window.$window = $(window);
     window.$document = $(document);
@@ -114,6 +116,54 @@
     window.$head = $(document.head);
     window.$body = $(document.body);
     window.$empty = $();
+
+    /* PUSHSTATE EVENT */
+
+    (function ( history ) {
+
+      let pushState = history.pushState;
+
+      history.pushState = function ( state ) {
+
+        if ( _.isFunction ( history.onpushstate ) ) {
+
+          history.onpushstate ( { state: state } );
+
+        }
+
+        $window.trigger ( 'pushstate' );
+
+        return pushState.apply ( history, arguments );
+
+      };
+
+    })( window.history );
+
+    /* ROUTE EVENT */
+
+    (function () {
+
+      let previous = window.location.href.split ( '#' )[0];
+
+      $window.on ( 'popstate pushstate', function () {
+
+        _.defer ( function () { //INFO: We need the `window.location.href` updated before
+
+          let current = window.location.href.split ( '#' )[0];
+
+          if ( current !== previous ) {
+
+            previous = current;
+
+            $window.trigger ( 'route' );
+
+          }
+
+        });
+
+      });
+
+    })();
 
   });
 
