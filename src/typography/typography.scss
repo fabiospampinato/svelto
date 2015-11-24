@@ -180,6 +180,10 @@ ol {
   padding-left: $list-padding-left;
 }
 
+li {
+  @include last-child-no-gutter ();
+}
+
 ul.unstyled {
 
   padding-left: 0;

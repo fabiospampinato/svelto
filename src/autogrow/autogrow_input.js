@@ -11,6 +11,7 @@
 //INFO: Only works with `box-sizing: border-box`
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
+//FIXME: When adding a space char it doesn't grow anymore (maybe don't make the span wrap)
 
 (function ( $, _, window, document, undefined ) {
 

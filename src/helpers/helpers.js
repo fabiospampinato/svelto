@@ -7,6 +7,7 @@
  * =========================================================================
  * @requires ../svelto/svelto.js
  * @requires ../ui/ui.js
+ * @requires ../widget/widgetize.js
  * @requires ../pointer/Pointer.js
  * @requires vendor/screenfull.js
  * ========================================================================= */
@@ -17,9 +18,9 @@
 
   /* SCROLL TO TOP */
 
-  $(function () {
+  Widgetize.add ( function () {
 
-    $('.scroll-to-top').on ( Pointer.tap, () => $body.add ( $html ).animate ({ scrollTop: 0 }, UI.animation.normal ) );
+    $('.scroll-to-top').on ( Pointer.tap, () => $body.add ( $html ).animate ( { scrollTop: 0 }, UI.animation.normal ) );
 
   });
 
@@ -29,9 +30,9 @@
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Add support
 
-  $('.fullscreen-toggler').on ( Pointer.tap, () => {
+  Widgetize.add ( function () {
 
-    screenfull.toggle ();
+    $('.fullscreen-toggler').on ( Pointer.tap, screenfull.toggle );
 
   });
 

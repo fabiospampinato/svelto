@@ -46,98 +46,6 @@
 
 }
 
-
-/* =========================================================================
- * Svelto - Widget
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* WIDGET */
-
-.widget {
-
-  @include last-child-no-gutter ();
-  position: relative;
-  margin: 0 0 $gutter;
-  transition: opacity $widget-transition-opacity-duration;
-
-  &.disabled {
-    cursor: default !important;
-    opacity: $widget-disabled-opacity !important;
-  }
-
-}
-
-/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
-
-.widget-pseudo {
-  position: relative;
-  margin: 0 0 $gutter;
-}
-
-
-/* =========================================================================
- * Svelto - Accordion
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../expander/expander.scss
- * @requires ../widget/widget.scss
- * ========================================================================= */
-
-//TODO: Add support for horizontal accordions, basically wait until horizontal expanders are supported
-
-.accordion {
-
-  @extend .widget;
-
-  /* EXPANDER */
-
-  .expander {
-
-    margin-bottom: 0;
-
-    &:not(:first-child) {
-
-      /* IS CARD */
-
-      &.card {
-
-        .card-header {
-          @include border-top-radius ( 0 );
-        }
-
-      }
-
-      /* OUTLINED */
-
-      &.outlined {
-        margin-top: - ( $outline-width * 2 );
-      }
-
-    }
-
-    &:not(:last-child) {
-
-      /* IS CARD */
-
-      &.card {
-
-        .card-header {
-          @include border-bottom-radius ( 0 );
-        }
-
-      }
-
-    }
-
-  }
-
-}
-
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 
 /**
@@ -561,6 +469,100 @@ table {
 td,
 th {
   padding: 0;
+}
+
+
+/* =========================================================================
+ * Svelto - Widget
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* WIDGET */
+
+.widget {
+
+  @include last-child-no-gutter ();
+  position: relative;
+  margin: 0 0 $gutter;
+  transition: opacity $widget-transition-opacity-duration;
+
+  &.disabled {
+    cursor: default !important;
+    opacity: $widget-disabled-opacity !important;
+  }
+
+}
+
+/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+
+.widget-pseudo {
+  position: relative;
+  margin: 0 0 $gutter;
+}
+
+
+/* =========================================================================
+ * Svelto - Accordion
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../expander/expander.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for horizontal accordions, basically wait until horizontal expanders are supported
+
+.accordion {
+
+  @extend .widget;
+
+  /* EXPANDER */
+
+  .expander {
+
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+
+      /* IS CARD */
+
+      &.card {
+
+        .card-header {
+          @include border-top-radius ( 0 );
+        }
+
+      }
+
+      /* OUTLINED */
+
+      &.outlined {
+        margin-top: - ( $outline-width * 2 );
+      }
+
+    }
+
+    &:not(:last-child) {
+
+      /* IS CARD */
+
+      &.card {
+
+        .card-header {
+          @include border-bottom-radius ( 0 );
+        }
+
+      }
+
+    }
+
+  }
+
 }
 
 
@@ -6705,6 +6707,7 @@ table.table.sortable {
 
 svg.spinner {
 
+  display: block;
   width: $spinner-size;
   height: $spinner-size;
   margin-bottom: $gutter;
@@ -7827,6 +7830,10 @@ ul,
 ol {
   margin: 0 0 $gutter;
   padding-left: $list-padding-left;
+}
+
+li {
+  @include last-child-no-gutter ();
 }
 
 ul.unstyled {

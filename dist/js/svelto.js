@@ -2104,6 +2104,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 //INFO: Only works with `box-sizing: border-box`
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
+//FIXME: When adding a space char it doesn't grow anymore (maybe don't make the span wrap)
 
 (function ($, _, window, document, undefined) {
   'use strict'
@@ -5727,16 +5728,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         if (!this.options.persistent) {
 
-          console.log("initing persistent, url:", this._openUrl);
-
           this._on($window, 'route', function (event, data) {
 
-            console.log("data.url:", data.url);
-            console.log("this._openUrl:", this._openUrl);
-
             if (data.url !== this._openUrl) {
-
-              console.log("then closing");
 
               this.close();
             }
@@ -6694,6 +6688,97 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 })(Svelto.$, Svelto._, window, document);
 
 /* =========================================================================
+ * Svelto - Widgetize
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ($, _, window, document, undefined) {
+  'use strict'
+
+  /* WIDGETIZE */
+
+  ;
+  window.Widgetize = new ((function () {
+    function _class4() {
+      _classCallCheck(this, _class4);
+
+      this.widgetizers = [];
+    }
+
+    _createClass(_class4, [{
+      key: 'add',
+      value: function add(widgetizer) {
+
+        this.widgetizers.push(widgetizer);
+      }
+    }, {
+      key: 'get',
+      value: function get() {
+
+        return this.widgetizers;
+      }
+    }, {
+      key: 'remove',
+      value: function remove(widgetizer) {
+
+        _.pull(this.widgetizers, widgetizer);
+      }
+    }, {
+      key: 'on',
+      value: function on($root) {
+        var _iteratorNormalCompletion10 = true;
+        var _didIteratorError10 = false;
+        var _iteratorError10 = undefined;
+
+        try {
+
+          for (var _iterator10 = this.widgetizers[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
+            var widgetizer = _step10.value;
+
+            widgetizer($root);
+          }
+        } catch (err) {
+          _didIteratorError10 = true;
+          _iteratorError10 = err;
+        } finally {
+          try {
+            if (!_iteratorNormalCompletion10 && _iterator10.return) {
+              _iterator10.return();
+            }
+          } finally {
+            if (_didIteratorError10) {
+              throw _iteratorError10;
+            }
+          }
+        }
+      }
+    }]);
+
+    return _class4;
+  })())();
+
+  /* JQUERY PLUGIN */
+
+  $.fn.widgetize = function () {
+
+    Widgetize.on(this);
+
+    return this;
+  };
+
+  /* READY */
+
+  $(function () {
+
+    $body.widgetize();
+  });
+})(Svelto.$, Svelto._, window, document);
+
+/* =========================================================================
  * Svelto - Pointer
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -7025,6 +7110,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
  * =========================================================================
  * @requires ../svelto/svelto.js
  * @requires ../ui/ui.js
+ * @requires ../widget/widgetize.js
  * @requires ../pointer/Pointer.js
  * @requires vendor/screenfull.js
  * ========================================================================= */
@@ -7035,7 +7121,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   /* SCROLL TO TOP */
 
   ;
-  $(function () {
+  Widgetize.add(function () {
 
     $('.scroll-to-top').on(Pointer.tap, function () {
       return $body.add($html).animate({ scrollTop: 0 }, UI.animation.normal);
@@ -7048,9 +7134,9 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Add support
 
-  $('.fullscreen-toggler').on(Pointer.tap, function () {
+  Widgetize.add(function () {
 
-    screenfull.toggle();
+    $('.fullscreen-toggler').on(Pointer.tap, screenfull.toggle);
   });
 })(Svelto.$, Svelto._, window, document);
 
@@ -9379,31 +9465,31 @@ Prism.languages.js = Prism.languages.javascript;
     }, {
       key: '__upCancel',
       value: function __upCancel(event) {
-        var _iteratorNormalCompletion10 = true;
-        var _didIteratorError10 = false;
-        var _iteratorError10 = undefined;
+        var _iteratorNormalCompletion11 = true;
+        var _didIteratorError11 = false;
+        var _iteratorError11 = undefined;
 
         try {
 
-          for (var _iterator10 = this.circles[Symbol.iterator](), _step10; !(_iteratorNormalCompletion10 = (_step10 = _iterator10.next()).done); _iteratorNormalCompletion10 = true) {
-            var _step10$value = _slicedToArray(_step10.value, 2);
+          for (var _iterator11 = this.circles[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
+            var _step11$value = _slicedToArray(_step11.value, 2);
 
-            var $circle = _step10$value[0];
-            var before = _step10$value[1];
+            var $circle = _step11$value[0];
+            var before = _step11$value[1];
 
             this._hide($circle, before);
           }
         } catch (err) {
-          _didIteratorError10 = true;
-          _iteratorError10 = err;
+          _didIteratorError11 = true;
+          _iteratorError11 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion10 && _iterator10.return) {
-              _iterator10.return();
+            if (!_iteratorNormalCompletion11 && _iterator11.return) {
+              _iterator11.return();
             }
           } finally {
-            if (_didIteratorError10) {
-              throw _iteratorError10;
+            if (_didIteratorError11) {
+              throw _iteratorError11;
             }
           }
         }
@@ -9618,13 +9704,13 @@ Prism.languages.js = Prism.languages.javascript;
         var previousOptgroup = void 0,
             currentOptgroup = void 0;
 
-        var _iteratorNormalCompletion11 = true;
-        var _didIteratorError11 = false;
-        var _iteratorError11 = undefined;
+        var _iteratorNormalCompletion12 = true;
+        var _didIteratorError12 = false;
+        var _iteratorError12 = undefined;
 
         try {
-          for (var _iterator11 = this.$options[Symbol.iterator](), _step11; !(_iteratorNormalCompletion11 = (_step11 = _iterator11.next()).done); _iteratorNormalCompletion11 = true) {
-            var option = _step11.value;
+          for (var _iterator12 = this.$options[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
+            var option = _step12.value;
 
             var $option = $(option),
                 $parent = $option.parent();
@@ -9649,16 +9735,16 @@ Prism.languages.js = Prism.languages.javascript;
             });
           }
         } catch (err) {
-          _didIteratorError11 = true;
-          _iteratorError11 = err;
+          _didIteratorError12 = true;
+          _iteratorError12 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion11 && _iterator11.return) {
-              _iterator11.return();
+            if (!_iteratorNormalCompletion12 && _iterator12.return) {
+              _iterator12.return();
             }
           } finally {
-            if (_didIteratorError11) {
-              throw _iteratorError11;
+            if (_didIteratorError12) {
+              throw _iteratorError12;
             }
           }
         }
@@ -12198,13 +12284,13 @@ Prism.languages.js = Prism.languages.javascript;
 
   ;
   window.Timer = (function () {
-    function _class4() {
-      _classCallCheck(this, _class4);
+    function _class5() {
+      _classCallCheck(this, _class5);
 
       this.set.apply(this, arguments);
     }
 
-    _createClass(_class4, [{
+    _createClass(_class5, [{
       key: 'set',
       value: function set(fn, time, autostart) {
 
@@ -12357,7 +12443,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
     }]);
 
-    return _class4;
+    return _class5;
   })();
 })(Svelto._, window, document);
 
@@ -12475,13 +12561,13 @@ Prism.languages.js = Prism.languages.javascript;
 
       var result = false;
 
-      var _iteratorNormalCompletion12 = true;
-      var _didIteratorError12 = false;
-      var _iteratorError12 = undefined;
+      var _iteratorNormalCompletion13 = true;
+      var _didIteratorError13 = false;
+      var _iteratorError13 = undefined;
 
       try {
-        for (var _iterator12 = $searchable[Symbol.iterator](), _step12; !(_iteratorNormalCompletion12 = (_step12 = _iterator12.next()).done); _iteratorNormalCompletion12 = true) {
-          var searchable = _step12.value;
+        for (var _iterator13 = $searchable[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
+          var searchable = _step13.value;
 
           var rect2 = $.getRect(searchable),
               area = $.getOverlappingArea(rect1, rect2);
@@ -12493,16 +12579,16 @@ Prism.languages.js = Prism.languages.javascript;
           }
         }
       } catch (err) {
-        _didIteratorError12 = true;
-        _iteratorError12 = err;
+        _didIteratorError13 = true;
+        _iteratorError13 = err;
       } finally {
         try {
-          if (!_iteratorNormalCompletion12 && _iterator12.return) {
-            _iterator12.return();
+          if (!_iteratorNormalCompletion13 && _iterator13.return) {
+            _iterator13.return();
           }
         } finally {
-          if (_didIteratorError12) {
-            throw _iteratorError12;
+          if (_didIteratorError13) {
+            throw _iteratorError13;
           }
         }
       }
@@ -12553,14 +12639,14 @@ Prism.languages.js = Prism.languages.javascript;
 
         return $touched || $empty;
       } else {
-        var _iteratorNormalCompletion13 = true;
-        var _didIteratorError13 = false;
-        var _iteratorError13 = undefined;
+        var _iteratorNormalCompletion14 = true;
+        var _didIteratorError14 = false;
+        var _iteratorError14 = undefined;
 
         try {
 
-          for (var _iterator13 = $searchable[Symbol.iterator](), _step13; !(_iteratorNormalCompletion13 = (_step13 = _iterator13.next()).done); _iteratorNormalCompletion13 = true) {
-            var searchable = _step13.value;
+          for (var _iterator14 = $searchable[Symbol.iterator](), _step14; !(_iteratorNormalCompletion14 = (_step14 = _iterator14.next()).done); _iteratorNormalCompletion14 = true) {
+            var searchable = _step14.value;
 
             var rect = $.getRect(searchable);
 
@@ -12572,16 +12658,16 @@ Prism.languages.js = Prism.languages.javascript;
             }
           }
         } catch (err) {
-          _didIteratorError13 = true;
-          _iteratorError13 = err;
+          _didIteratorError14 = true;
+          _iteratorError14 = err;
         } finally {
           try {
-            if (!_iteratorNormalCompletion13 && _iterator13.return) {
-              _iterator13.return();
+            if (!_iteratorNormalCompletion14 && _iterator14.return) {
+              _iterator14.return();
             }
           } finally {
-            if (_didIteratorError13) {
-              throw _iteratorError13;
+            if (_didIteratorError14) {
+              throw _iteratorError14;
             }
           }
         }

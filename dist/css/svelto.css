@@ -1179,80 +1179,6 @@
   display: none;
 }
 
-/* =========================================================================
- * Svelto - Widget
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* WIDGET */
-.widget, .accordion, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .colorpicker, .datepicker, .embedded, .flippable, header, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
-  position: relative;
-  margin: 0 0 10px;
-  transition: opacity 0.15s;
-}
-
-.widget > :last-child, .accordion > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
-  margin-bottom: 0 !important;
-}
-
-.widget > :last-child.multiple, .accordion > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
-  margin-bottom: -10px !important;
-}
-
-.widget.disabled, .disabled.accordion, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
-  cursor: default !important;
-  opacity: 0.5 !important;
-}
-
-/* WIDGET (PSEUDO ELEMENT) */
-.widget-pseudo, i.icon, .carousel.inset .carousel-prev:after,
-.carousel.inset .carousel-next:after, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
-.slider:not(.disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before, table.table.sortable th[data-sort]:after {
-  position: relative;
-  margin: 0 0 10px;
-}
-
-/* =========================================================================
- * Svelto - Accordion
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../expander/expander.scss
- * @requires ../widget/widget.scss
- * ========================================================================= */
-.accordion {
-  /* EXPANDER */
-}
-
-.accordion .expander {
-  margin-bottom: 0;
-}
-
-.accordion .expander:not(:first-child) {
-  /* IS CARD */
-  /* OUTLINED */
-}
-
-.accordion .expander:not(:first-child).card .card-header {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
-}
-
-.accordion .expander:not(:first-child).outlined {
-  margin-top: -2px;
-}
-
-.accordion .expander:not(:last-child) {
-  /* IS CARD */
-}
-
-.accordion .expander:not(:last-child).card .card-header {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
-}
-
 /*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
 /**
  * 1. Set default font family to sans-serif.
@@ -1655,6 +1581,82 @@ table {
 td,
 th {
   padding: 0;
+}
+
+/* =========================================================================
+ * Svelto - Widget
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+/* WIDGET */
+.widget, .accordion, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .colorpicker, .datepicker, .embedded, .flippable, header, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+  position: relative;
+  margin: 0 0 10px;
+  transition: opacity 0.15s;
+}
+
+.widget > :last-child, .accordion > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.widget > :last-child.multiple, .accordion > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+  margin-bottom: -10px !important;
+}
+
+.widget.disabled, .disabled.accordion, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+  cursor: default !important;
+  opacity: 0.5 !important;
+}
+
+/* WIDGET (PSEUDO ELEMENT) */
+.widget-pseudo, i.icon, .carousel.inset .carousel-prev:after,
+.carousel.inset .carousel-next:after, .rater-star:before, .slider:not(.disabled) .slider-min:hover:after,
+.slider:not(.disabled) .slider-max:hover:after, table.table.sortable th[data-sort]:before, table.table.sortable th[data-sort]:after {
+  position: relative;
+  margin: 0 0 10px;
+}
+
+/* =========================================================================
+ * Svelto - Accordion
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../expander/expander.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+.accordion {
+  /* EXPANDER */
+}
+
+.accordion .expander {
+  margin-bottom: 0;
+}
+
+.accordion .expander:not(:first-child) {
+  /* IS CARD */
+  /* OUTLINED */
+}
+
+.accordion .expander:not(:first-child).card .card-header {
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.accordion .expander:not(:first-child).outlined {
+  margin-top: -2px;
+}
+
+.accordion .expander:not(:last-child) {
+  /* IS CARD */
+}
+
+.accordion .expander:not(:last-child).card .card-header {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
 }
 
 /* =========================================================================
@@ -11374,6 +11376,7 @@ table.table.sortable th[data-sort].sort-desc:after, table.table.sortable th[data
  * ========================================================================= */
 /* SPINNER */
 svg.spinner {
+  display: block;
   width: 3.25em;
   height: 3.25em;
   margin-bottom: 10px;
@@ -12644,6 +12647,14 @@ ul,
 ol {
   margin: 0 0 10px;
   padding-left: 20px;
+}
+
+li > :last-child {
+  margin-bottom: 0 !important;
+}
+
+li > :last-child.multiple {
+  margin-bottom: -10px !important;
 }
 
 ul.unstyled {
