@@ -65,9 +65,9 @@ var isProduction  = !!argv.production,
 
 if ( isDevelopment ) {
 
+  DEST.css = '../svelto-website/app/svelto/client/stylesheet';
   DEST.images = '../svelto-website/app/public';
   DEST.js = '../svelto-website/app/svelto/client/lib';
-  DEST.scss = '../svelto-website/app/svelto/client/stylesheet';
 
 }
 
