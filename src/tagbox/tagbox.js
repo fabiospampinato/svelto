@@ -47,7 +47,7 @@
       characters: {
         forbidden: [ '<', '>', ';', '`' ],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [UI.keyCode.ENTER, UI.keyCode.TAB] //INFO: They are keyCodes
+        inserters: [Svelto.keyCode.ENTER, Svelto.keyCode.TAB] //INFO: They are keyCodes
       },
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
       escape: true, //INFO: Escape potential XSS characters
@@ -254,7 +254,7 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
-      } else if ( event.keyCode === UI.keyCode.BACKSPACE ) {
+      } else if ( event.keyCode === Svelto.keyCode.BACKSPACE ) {
 
         if ( value.length === 0 && this.options.tags.length > 0 ) {
 

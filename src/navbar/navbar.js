@@ -119,7 +119,7 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.ESCAPE:
+        case Svelto.keyCode.ESCAPE:
           this.close ();
           break;
 

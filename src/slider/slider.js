@@ -195,13 +195,13 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.LEFT:
-        case UI.keyCode.DOWN:
+        case Svelto.keyCode.LEFT:
+        case Svelto.keyCode.DOWN:
           this.decrease ();
           break;
 
-        case UI.keyCode.RIGHT:
-        case UI.keyCode.UP:
+        case Svelto.keyCode.RIGHT:
+        case Svelto.keyCode.UP:
           this.increase ();
           break;
 

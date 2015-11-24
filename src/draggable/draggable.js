@@ -274,7 +274,7 @@
 
       } else if ( this.isProxyed ) {
 
-        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === UI.mouseButton.LEFT ) ) {
+        if ( this.options.proxyWithoutMotion && ( !event.button || event.button === Svelto.mouseButton.LEFT ) ) {
 
           let endXY = $.eventXY ( event );
 

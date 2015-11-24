@@ -6,7 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../svelto/svelto.js
- * @requires ../ui/ui.js
  * @requires ../widget/widgetize.js
  * @requires ../pointer/Pointer.js
  * @requires vendor/screenfull.js
@@ -20,7 +19,7 @@
 
   Widgetize.add ( function () {
 
-    $('.scroll-to-top').on ( Pointer.tap, () => $body.add ( $html ).animate ( { scrollTop: 0 }, UI.animation.normal ) );
+    $('.scroll-to-top').on ( Pointer.tap, () => $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal ) );
 
   });
 

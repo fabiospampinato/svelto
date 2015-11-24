@@ -537,7 +537,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* KEY CODE */
 
-  UI.keyCode = {
+  Svelto.keyCode = {
     BACKSPACE: 8,
     COMMA: 188,
     DELETE: 46,
@@ -558,7 +558,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* MOUSE BUTTON */
 
-  UI.mouseButton = {
+  Svelto.mouseButton = {
     LEFT: 0,
     MIDDLE: 1,
     RIGHT: 2
@@ -566,7 +566,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
   /* ANIMATION */
 
-  UI.animation = {
+  Svelto.animation = {
     slow: 500,
     normal: 350,
     fast: 150
@@ -2468,7 +2468,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         item: ' > *'
       },
       animations: {
-        cycle: UI.animation.normal
+        cycle: Svelto.animation.normal
       },
       callbacks: {
         change: function change() {}
@@ -2573,14 +2573,14 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         switch (event.keyCode) {
 
-          case UI.keyCode.LEFT:
-          case UI.keyCode.UP:
+          case Svelto.keyCode.LEFT:
+          case Svelto.keyCode.UP:
             this.previous();
             break;
 
-          case UI.keyCode.RIGHT:
-          case UI.keyCode.DOWN:
-          case UI.keyCode.SPACE:
+          case Svelto.keyCode.RIGHT:
+          case Svelto.keyCode.DOWN:
+          case Svelto.keyCode.SPACE:
             this.next();
             break;
 
@@ -3367,19 +3367,19 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         switch (event.keyCode) {
 
-          case UI.keyCode.UP:
+          case Svelto.keyCode.UP:
             this.color.hsv.v = Math.min(100, this.color.hsv.v + 1);
             break;
 
-          case UI.keyCode.RIGHT:
+          case Svelto.keyCode.RIGHT:
             this.color.hsv.s = Math.min(100, this.color.hsv.s + 1);
             break;
 
-          case UI.keyCode.DOWN:
+          case Svelto.keyCode.DOWN:
             this.color.hsv.v = Math.max(0, this.color.hsv.v - 1);
             break;
 
-          case UI.keyCode.LEFT:
+          case Svelto.keyCode.LEFT:
             this.color.hsv.s = Math.max(0, this.color.hsv.s - 1);
             break;
 
@@ -3432,11 +3432,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         switch (event.keyCode) {
 
-          case UI.keyCode.UP:
+          case Svelto.keyCode.UP:
             this.color.hsv.h = Math.min(359, this.color.hsv.h + 1);
             break;
 
-          case UI.keyCode.DOWN:
+          case Svelto.keyCode.DOWN:
             this.color.hsv.h = Math.max(0, this.color.hsv.h - 1);
             break;
 
@@ -3814,13 +3814,13 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         switch (event.keyCode) {
 
-          case UI.keyCode.UP:
-          case UI.keyCode.LEFT:
+          case Svelto.keyCode.UP:
+          case Svelto.keyCode.LEFT:
             this.prevMonth();
             break;
 
-          case UI.keyCode.RIGHT:
-          case UI.keyCode.DOWN:
+          case Svelto.keyCode.RIGHT:
+          case Svelto.keyCode.DOWN:
             this.nextMonth();
             break;
 
@@ -3854,7 +3854,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__dayTap',
       value: function __dayTap(event) {
 
-        if (event.button && event.button !== UI.mouseButton.LEFT) return;
+        if (event.button && event.button !== Svelto.mouseButton.LEFT) return;
 
         var day = parseInt($(event.currentTarget).html(), 10);
 
@@ -4372,7 +4372,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             }
         } else if (this.isProxyed) {
 
-          if (this.options.proxyWithoutMotion && (!event.button || event.button === UI.mouseButton.LEFT)) {
+          if (this.options.proxyWithoutMotion && (!event.button || event.button === Svelto.mouseButton.LEFT)) {
 
             var endXY = $.eventXY(event);
 
@@ -5576,7 +5576,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: UI.animation.normal
+        remove: Svelto.animation.normal
       },
       callbacks: {
         open: function open() {},
@@ -5741,7 +5741,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__keydown',
       value: function __keydown(event) {
 
-        if (event.keyCode === UI.keyCode.ESCAPE) {
+        if (event.keyCode === Svelto.keyCode.ESCAPE) {
 
           event.preventDefault();
           event.stopImmediatePropagation();
@@ -7124,7 +7124,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
   Widgetize.add(function () {
 
     $('.scroll-to-top').on(Pointer.tap, function () {
-      return $body.add($html).animate({ scrollTop: 0 }, UI.animation.normal);
+      return $body.add($html).animate({ scrollTop: 0 }, Svelto.animation.normal);
     });
   });
 
@@ -7267,8 +7267,8 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         closer: '.modal-closer'
       },
       animations: {
-        open: UI.animation.normal,
-        close: UI.animation.normal
+        open: Svelto.animation.normal,
+        close: Svelto.animation.normal
       },
       callbacks: {
         open: function open() {},
@@ -7343,7 +7343,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       key: '__keydown',
       value: function __keydown(event) {
 
-        if (event.keyCode === UI.keyCode.ESCAPE) {
+        if (event.keyCode === Svelto.keyCode.ESCAPE) {
 
           event.preventDefault();
           event.stopImmediatePropagation();
@@ -7745,7 +7745,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
         switch (event.keyCode) {
 
-          case UI.keyCode.ESCAPE:
+          case Svelto.keyCode.ESCAPE:
             this.close();
             break;
 
@@ -9455,7 +9455,7 @@ Prism.languages.js = Prism.languages.javascript;
       key: '__down',
       value: function __down(event) {
 
-        if (event.button && event.button !== UI.mouseButton.LEFT) return;
+        if (event.button && event.button !== Svelto.mouseButton.LEFT) return;
 
         this._show(event);
       }
@@ -9980,7 +9980,7 @@ Prism.languages.js = Prism.languages.javascript;
       key: '__down',
       value: function __down(event) {
 
-        if (event.button && event.button !== UI.mouseButton.LEFT) return; //INFO: Only the left click is allowed
+        if (event.button && event.button !== Svelto.mouseButton.LEFT) return; //INFO: Only the left click is allowed
 
         event.preventDefault();
 
@@ -10374,13 +10374,13 @@ Prism.languages.js = Prism.languages.javascript;
 
         switch (event.keyCode) {
 
-          case UI.keyCode.LEFT:
-          case UI.keyCode.DOWN:
+          case Svelto.keyCode.LEFT:
+          case Svelto.keyCode.DOWN:
             this.decrease();
             break;
 
-          case UI.keyCode.RIGHT:
-          case UI.keyCode.UP:
+          case Svelto.keyCode.RIGHT:
+          case Svelto.keyCode.UP:
             this.increase();
             break;
 
@@ -10913,11 +10913,11 @@ Prism.languages.js = Prism.languages.javascript;
 
         switch (event.keyCode) {
 
-          case UI.keyCode.UP:
+          case Svelto.keyCode.UP:
             this.increase();
             break;
 
-          case UI.keyCode.DOWN:
+          case Svelto.keyCode.DOWN:
             this.decrease();
             break;
 
@@ -11140,15 +11140,15 @@ Prism.languages.js = Prism.languages.javascript;
 
         switch (event.keyCode) {
 
-          case UI.keyCode.LEFT:
+          case Svelto.keyCode.LEFT:
             this.uncheck();
             break;
 
-          case UI.keyCode.RIGHT:
+          case Svelto.keyCode.RIGHT:
             this.check();
             break;
 
-          case UI.keyCode.SPACE:
+          case Svelto.keyCode.SPACE:
             this.toggle();
             break;
 
@@ -11696,7 +11696,7 @@ Prism.languages.js = Prism.languages.javascript;
       characters: {
         forbidden: ['<', '>', ';', '`'],
         separator: ',', //INFO: It will also become kind of a forbidden character, used for insertion
-        inserters: [UI.keyCode.ENTER, UI.keyCode.TAB] //INFO: They are keyCodes
+        inserters: [Svelto.keyCode.ENTER, Svelto.keyCode.TAB] //INFO: They are keyCodes
       },
       sort: false, //INFO: The tags will be outputted in alphanumeric-sort order
       escape: true, //INFO: Escape potential XSS characters
@@ -11903,7 +11903,7 @@ Prism.languages.js = Prism.languages.javascript;
 
           event.preventDefault();
           event.stopImmediatePropagation();
-        } else if (event.keyCode === UI.keyCode.BACKSPACE) {
+        } else if (event.keyCode === Svelto.keyCode.BACKSPACE) {
 
           if (value.length === 0 && this.options.tags.length > 0) {
 

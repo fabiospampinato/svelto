@@ -35,8 +35,8 @@
         closer: '.modal-closer'
       },
       animations: {
-        open: UI.animation.normal,
-        close: UI.animation.normal
+        open: Svelto.animation.normal,
+        close: Svelto.animation.normal
       },
       callbacks: {
         open () {},
@@ -101,7 +101,7 @@
 
     __keydown ( event ) {
 
-      if ( event.keyCode === UI.keyCode.ESCAPE ) {
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
 
         event.preventDefault ();
         event.stopImmediatePropagation ();

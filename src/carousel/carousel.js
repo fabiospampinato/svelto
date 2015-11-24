@@ -35,7 +35,7 @@
         item: ' > *'
       },
       animations: {
-        cycle: UI.animation.normal
+        cycle: Svelto.animation.normal
       },
       callbacks: {
         change () {}
@@ -133,14 +133,14 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.LEFT:
-        case UI.keyCode.UP:
+        case Svelto.keyCode.LEFT:
+        case Svelto.keyCode.UP:
           this.previous ();
           break;
 
-        case UI.keyCode.RIGHT:
-        case UI.keyCode.DOWN:
-        case UI.keyCode.SPACE:
+        case Svelto.keyCode.RIGHT:
+        case Svelto.keyCode.DOWN:
+        case Svelto.keyCode.SPACE:
           this.next ();
           break;
 

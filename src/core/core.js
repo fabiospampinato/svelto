@@ -8,5 +8,4 @@
  * @requires ../svelto/svelto.js
  * @requires ../extras/lodash-extra.js
  * @requires ../extras/jQuery-extra.js
- * @requires ../ui/ui.js
  * ========================================================================= */

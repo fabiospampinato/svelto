@@ -158,11 +158,11 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.UP:
+        case Svelto.keyCode.UP:
           this.increase ();
           break;
 
-        case UI.keyCode.DOWN:
+        case Svelto.keyCode.DOWN:
           this.decrease ();
           break;
 

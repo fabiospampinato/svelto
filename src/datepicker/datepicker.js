@@ -156,13 +156,13 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.UP:
-        case UI.keyCode.LEFT:
+        case Svelto.keyCode.UP:
+        case Svelto.keyCode.LEFT:
           this.prevMonth ();
           break;
 
-        case UI.keyCode.RIGHT:
-        case UI.keyCode.DOWN:
+        case Svelto.keyCode.RIGHT:
+        case Svelto.keyCode.DOWN:
           this.nextMonth ();
           break;
 
@@ -194,7 +194,7 @@
 
     __dayTap ( event ) {
 
-      if ( event.button && event.button !== UI.mouseButton.LEFT ) return;
+      if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
 
       let day = parseInt ( $(event.currentTarget).html (), 10 );
 

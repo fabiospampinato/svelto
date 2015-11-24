@@ -58,7 +58,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* NAVBAR */
 /* ATTACHED */
@@ -91,7 +91,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* CONTAINER */
 /* CONTAINER COMPACT */
@@ -119,7 +119,7 @@
  * =========================================================================
  * @requires ../colors/variables.scss
  * @requires ../outline/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* FONT FAMILY */
 /* FONT SIZE */
@@ -150,7 +150,7 @@
  * =========================================================================
  * @requires ../colors/variables.scss
  * @requires ../icons/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* CAROUSEL */
 /* INDICATOR */
@@ -163,7 +163,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* DROPDOWN */
 /* TIP */
@@ -178,7 +178,7 @@
  * @requires ../colors/variables.scss
  * @requires ../dropdown/variables.scss
  * @requires ../outline/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* TIP */
 /* LEVELS */
@@ -190,7 +190,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* CHECKBOX */
 /* =========================================================================
@@ -200,7 +200,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../outline/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* COLORPICKER */
 /* WRAPPERS */
@@ -222,7 +222,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../colors/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* DATEPICKER */
 /* DAY NAME */
@@ -235,7 +235,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* BLOCK */
 /* LINEAR */
@@ -254,7 +254,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* EXPANDER */
 /* =========================================================================
@@ -271,7 +271,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* FLIPPABLE */
 /* =========================================================================
@@ -296,7 +296,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* BLUR */
 /* BORDER */
@@ -317,7 +317,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* IMAGE */
 /* CAPTION */
@@ -368,7 +368,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* MODAL */
 /* NOT FULLSCREEN */
@@ -382,7 +382,7 @@
  * =========================================================================
  * @requires ../breakpoints/variables.scss
  * @requires ../container/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* NOTY */
 /* IMG */
@@ -394,7 +394,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* WIDGET */
 /* TRANSITION */
@@ -433,7 +433,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* PROGRESSBAR */
 /* COMPACT */
@@ -448,7 +448,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* RAISABLE */
 /* TRANSIITION */
@@ -475,7 +475,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../colors/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* RIPPLE */
 /* CIRCLE */
@@ -527,7 +527,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../constants/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* SWITCH */
 /* BAR */
@@ -544,7 +544,7 @@
  * @requires ../label/variables.scss
  * @requires ../switch/variables.scss
  * @requires ../typography/variables.scss
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* SLIDER */
 /* MIN / MAX */
@@ -567,7 +567,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../ui/variables.scss
+ * @requires ../svelto/variables.scss
  * ========================================================================= */
 /* SPINNER OVERLAY */
 /* =========================================================================

@@ -128,15 +128,15 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.LEFT:
+        case Svelto.keyCode.LEFT:
           this.uncheck ();
           break;
 
-        case UI.keyCode.RIGHT:
+        case Svelto.keyCode.RIGHT:
           this.check ();
           break;
 
-        case UI.keyCode.SPACE:
+        case Svelto.keyCode.SPACE:
           this.toggle ();
           break;
 

@@ -90,7 +90,7 @@
         button: '.noty-buttons .button, .infobar-right .button'
       },
       animations: {
-        remove: UI.animation.normal
+        remove: Svelto.animation.normal
       },
       callbacks: {
         open () {},
@@ -259,7 +259,7 @@
 
     __keydown ( event ) {
 
-      if ( event.keyCode === UI.keyCode.ESCAPE ) {
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
 
         event.preventDefault ();
         event.stopImmediatePropagation ();

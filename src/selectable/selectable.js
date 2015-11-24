@@ -119,7 +119,7 @@
 
     __down ( event ) {
 
-      if ( event.button && event.button !== UI.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
+      if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
 
       event.preventDefault ();
 

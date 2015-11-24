@@ -146,19 +146,19 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.UP:
+        case Svelto.keyCode.UP:
           this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
           break;
 
-        case UI.keyCode.RIGHT:
+        case Svelto.keyCode.RIGHT:
           this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
           break;
 
-        case UI.keyCode.DOWN:
+        case Svelto.keyCode.DOWN:
           this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
           break;
 
-        case UI.keyCode.LEFT:
+        case Svelto.keyCode.LEFT:
           this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
           break;
 
@@ -210,11 +210,11 @@
 
       switch ( event.keyCode ) {
 
-        case UI.keyCode.UP:
+        case Svelto.keyCode.UP:
           this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
           break;
 
-        case UI.keyCode.DOWN:
+        case Svelto.keyCode.DOWN:
           this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
           break;
 
