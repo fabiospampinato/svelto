@@ -243,7 +243,15 @@
 
       if ( !this.options.persistent ) {
 
-        this._on ( $window, 'route', this.close );
+        this._on ( $window, 'route', function ( event, data ) {
+
+          if ( data.url !== this._openUrl ) {
+
+            this.close ();
+
+          }
+
+        });
 
       }
 
@@ -284,6 +292,12 @@
               this.$noty.addClass ( this.options.classes.open );
 
             });
+
+        });
+
+        this._defer ( function () {
+
+          this._openUrl = window.location.href.split ( '#' )[0];
 
         });
 

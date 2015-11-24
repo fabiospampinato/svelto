@@ -463,9 +463,11 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     });
   };
 
-  /* COMMON OBJECTS */
+  /* READY */
 
   $(function () {
+
+    /* COMMON OBJECTS */
 
     window.$window = $(window);
     window.$document = $(document);
@@ -473,6 +475,48 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
     window.$head = $(document.head);
     window.$body = $(document.body);
     window.$empty = $();
+
+    /* PUSHSTATE EVENT */
+
+    (function (history) {
+
+      var pushState = history.pushState;
+
+      history.pushState = function (state) {
+
+        if (_.isFunction(history.onpushstate)) {
+
+          history.onpushstate({ state: state });
+        }
+
+        $window.trigger('pushstate');
+
+        return pushState.apply(history, arguments);
+      };
+    })(window.history);
+
+    /* ROUTE EVENT */
+
+    (function () {
+
+      var previous = window.location.href.split('#')[0];
+
+      $window.on('popstate pushstate', function () {
+
+        _.defer(function () {
+          //INFO: We need the `window.location.href` updated before
+
+          var current = window.location.href.split('#')[0];
+
+          if (current !== previous) {
+
+            previous = current;
+
+            $window.trigger('route', { url: current });
+          }
+        });
+      });
+    })();
   });
 })(Svelto.$, Svelto._, window, document);
 
@@ -5520,6 +5564,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
       type: 'alert',
       color: 'black',
       css: '',
+      persistent: false,
       ttl: 3500,
       autoplay: true,
       timerMinimumRemaining: 1000,
@@ -5677,6 +5722,28 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
         }
       }
     }, {
+      key: '___persistent',
+      value: function ___persistent() {
+
+        if (!this.options.persistent) {
+
+          console.log("initing persistent, url:", this._openUrl);
+
+          this._on($window, 'route', function (event, data) {
+
+            console.log("data.url:", data.url);
+            console.log("this._openUrl:", this._openUrl);
+
+            if (data.url !== this._openUrl) {
+
+              console.log("then closing");
+
+              this.close();
+            }
+          });
+        }
+      }
+    }, {
       key: '__keydown',
       value: function __keydown(event) {
 
@@ -5714,12 +5781,18 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
             });
           });
 
+          this._defer(function () {
+
+            this._openUrl = window.location.href.split('#')[0];
+          });
+
           if (this.neverOpened) {
 
             this.___tap();
             this.___flick();
             this.___buttonTap();
             this.___hover();
+            this.___persistent();
 
             this.neverOpened = false;
           }

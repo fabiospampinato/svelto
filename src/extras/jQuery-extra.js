@@ -155,7 +155,7 @@
 
             previous = current;
 
-            $window.trigger ( 'route' );
+            $window.trigger ( 'route', { url: current } );
 
           }
 

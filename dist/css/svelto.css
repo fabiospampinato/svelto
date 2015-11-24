@@ -8321,10 +8321,25 @@ input::-ms-clear, textarea::-ms-clear {
   margin-right: 0;
 }
 
+.multiple.x-centered {
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.multiple.y-centered {
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
 .multiple.centered {
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 .multiple.limited {

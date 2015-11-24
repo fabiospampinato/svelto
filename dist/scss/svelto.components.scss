@@ -4307,8 +4307,17 @@ input::-ms-clear {
 
   /* CENTERED */
 
+  &.x-centered {
+    justify-content: center;
+  }
+
+  &.y-centered {
+    align-items: center;
+  }
+
   &.centered {
     justify-content: center;
+    align-items: center;
   }
 
   /* LIMITED */
