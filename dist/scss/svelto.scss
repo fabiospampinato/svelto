@@ -3784,7 +3784,7 @@ $z-depths: (
 
 @mixin last-child-no-gutter () {
 
-  > :last-child {
+  > :not(script):last-of-type {
 
     margin-bottom: 0 !important;
 
@@ -8255,11 +8255,11 @@ input::-ms-clear {
 
   /* CENTERED */
 
-  &.x-centered {
+  &.centered-x {
     justify-content: center;
   }
 
-  &.y-centered {
+  &.centered-y {
     align-items: center;
   }
 

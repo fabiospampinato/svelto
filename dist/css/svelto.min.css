@@ -1598,11 +1598,11 @@ th {
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :not(script):last-of-type, .accordion > :not(script):last-of-type, label > :not(script):last-of-type, .label > :not(script):last-of-type, .button > :not(script):last-of-type, .container > :not(script):last-of-type, .card-header:not(.multiple) > :not(script):last-of-type, .card-block:not(.multiple) > :not(script):last-of-type, .card-footer:not(.multiple) > :not(script):last-of-type, footer > :not(script):last-of-type, .image-wrp .image-caption > :not(script):last-of-type, .infobar > :not(script):last-of-type, .tagbox > :not(script):last-of-type, .card > :not(script):last-of-type, .icons > :not(script):last-of-type, .carousel > :not(script):last-of-type, .colorpicker > :not(script):last-of-type, .datepicker > :not(script):last-of-type, .embedded > :not(script):last-of-type, .flippable > :not(script):last-of-type, header > :not(script):last-of-type, .image-wrp > :not(script):last-of-type, input > :not(script):last-of-type, textarea > :not(script):last-of-type, .parallax > :not(script):last-of-type, .placeholder > :not(script):last-of-type, .progressbar > :not(script):last-of-type, .rater > :not(script):last-of-type, .triangle > :not(script):last-of-type, .square > :not(script):last-of-type, .square-sample > :not(script):last-of-type, .circle > :not(script):last-of-type, .slider > :not(script):last-of-type, .spinner-label > :not(script):last-of-type, .statistic > :not(script):last-of-type, .switch > :not(script):last-of-type, table.table > :not(script):last-of-type, .tabs > :not(script):last-of-type, .toolbar > :not(script):last-of-type, blockquote > :not(script):last-of-type, blockquote > footer > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple {
+.widget > :not(script):last-of-type.multiple, .accordion > :not(script):last-of-type.multiple, label > :not(script):last-of-type.multiple, .label > :not(script):last-of-type.multiple, .button > :not(script):last-of-type.multiple, .container > :not(script):last-of-type.multiple, .card-header:not(.multiple) > :not(script):last-of-type.multiple, .card-block:not(.multiple) > :not(script):last-of-type.multiple, .card-footer:not(.multiple) > :not(script):last-of-type.multiple, footer > :not(script):last-of-type.multiple, .image-wrp .image-caption > :not(script):last-of-type.multiple, .infobar > :not(script):last-of-type.multiple, .tagbox > :not(script):last-of-type.multiple, .card > :not(script):last-of-type.multiple, .icons > :not(script):last-of-type.multiple, .carousel > :not(script):last-of-type.multiple, .colorpicker > :not(script):last-of-type.multiple, .datepicker > :not(script):last-of-type.multiple, .embedded > :not(script):last-of-type.multiple, .flippable > :not(script):last-of-type.multiple, header > :not(script):last-of-type.multiple, .image-wrp > :not(script):last-of-type.multiple, input > :not(script):last-of-type.multiple, textarea > :not(script):last-of-type.multiple, .parallax > :not(script):last-of-type.multiple, .placeholder > :not(script):last-of-type.multiple, .progressbar > :not(script):last-of-type.multiple, .rater > :not(script):last-of-type.multiple, .triangle > :not(script):last-of-type.multiple, .square > :not(script):last-of-type.multiple, .square-sample > :not(script):last-of-type.multiple, .circle > :not(script):last-of-type.multiple, .slider > :not(script):last-of-type.multiple, .spinner-label > :not(script):last-of-type.multiple, .statistic > :not(script):last-of-type.multiple, .switch > :not(script):last-of-type.multiple, table.table > :not(script):last-of-type.multiple, .tabs > :not(script):last-of-type.multiple, .toolbar > :not(script):last-of-type.multiple, blockquote > :not(script):last-of-type.multiple, blockquote > footer > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -1770,11 +1770,11 @@ _:-ms-input-placeholder, :root #content {
   padding: 10px;
 }
 
-#content > main > :last-child {
+#content > main > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-#content > main > :last-child.multiple {
+#content > main > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -1807,11 +1807,11 @@ _:-ms-input-placeholder, :root #content {
   padding: 0 0.75em;
 }
 
-.breadcrumb-divider > :last-child {
+.breadcrumb-divider > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.breadcrumb-divider > :last-child.multiple {
+.breadcrumb-divider > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -2272,11 +2272,11 @@ label {
   min-width: 2.4285714286em;
 }
 
-.label > .sub > :last-child, .button > .sub > :last-child {
+.label > .sub > :not(script):last-of-type, .button > .sub > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple {
+.label > .sub > :not(script):last-of-type.multiple, .button > .sub > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -5412,11 +5412,11 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   align-items: center;
 }
 
-.divider.linear:not(:empty) > :last-child, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child {
+.divider.linear:not(:empty) > :not(script):last-of-type, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.divider.linear:not(:empty) > :last-child.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple {
+.divider.linear:not(:empty) > :not(script):last-of-type.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -5506,11 +5506,11 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   color: #fac24a ;
 }
 
-.divider.block > .divider-content > :last-child {
+.divider.block > .divider-content > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.divider.block > .divider-content > :last-child.multiple {
+.divider.block > .divider-content > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -6772,11 +6772,11 @@ i[class^="flag-"] {
   border-radius: inherit;
 }
 
-.flippable-front > :last-child, .flippable-back > :last-child {
+.flippable-front > :not(script):last-of-type, .flippable-back > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.flippable-front > :last-child.multiple, .flippable-back > :last-child.multiple {
+.flippable-front > :not(script):last-of-type.multiple, .flippable-back > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -6873,11 +6873,11 @@ footer {
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* DEFAULT FORM */
-form:not(.multiple) > :last-child {
+form:not(.multiple) > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-form:not(.multiple) > :last-child.multiple {
+form:not(.multiple) > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -7322,11 +7322,11 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar > * > :last-child {
+.infobar > * > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.infobar > * > :last-child.multiple {
+.infobar > * > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -7354,13 +7354,13 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar-center .infobar-title > :last-child,
-.infobar-center .infobar-subtitle > :last-child {
+.infobar-center .infobar-title > :not(script):last-of-type,
+.infobar-center .infobar-subtitle > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.infobar-center .infobar-title > :last-child.multiple,
-.infobar-center .infobar-subtitle > :last-child.multiple {
+.infobar-center .infobar-title > :not(script):last-of-type.multiple,
+.infobar-center .infobar-subtitle > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -7718,11 +7718,11 @@ input::-ms-clear, textarea::-ms-clear {
   margin-right: 0;
 }
 
-.multiple.x-centered {
+.multiple.centered-x {
   justify-content: center;
 }
 
-.multiple.y-centered {
+.multiple.centered-y {
   align-items: center;
 }
 
@@ -9053,11 +9053,11 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   /* OPEN */
 }
 
-.overlay > :last-child {
+.overlay > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.overlay > :last-child.multiple {
+.overlay > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -9873,15 +9873,15 @@ a.ripple > .ripple-circle {
   margin-bottom: 10px;
 }
 
-.section-left > :last-child,
-.section-center > :last-child,
-.section-right > :last-child {
+.section-left > :not(script):last-of-type,
+.section-center > :not(script):last-of-type,
+.section-right > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.section-left > :last-child.multiple,
-.section-center > :last-child.multiple,
-.section-right > :last-child.multiple {
+.section-left > :not(script):last-of-type.multiple,
+.section-center > :not(script):last-of-type.multiple,
+.section-right > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -11130,11 +11130,11 @@ table.table tr > * {
   border-color: inherit;
 }
 
-table.table tr > * > :last-child {
+table.table tr > * > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-table.table tr > * > :last-child.multiple {
+table.table tr > * > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -11699,11 +11699,11 @@ blockquote {
   background-color: transparent;
 }
 
-blockquote > :last-child {
+blockquote > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-blockquote > :last-child.multiple {
+blockquote > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -11725,11 +11725,11 @@ blockquote > footer {
   opacity: 0.85;
 }
 
-blockquote > footer > :last-child {
+blockquote > footer > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-blockquote > footer > :last-child.multiple {
+blockquote > footer > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
@@ -11745,11 +11745,11 @@ ol {
   padding-left: 20px;
 }
 
-li > :last-child {
+li > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-li > :last-child.multiple {
+li > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 

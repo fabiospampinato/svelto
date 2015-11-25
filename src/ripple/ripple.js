@@ -80,7 +80,7 @@
 
     }
 
-    /* UP CANCEL */
+    /* UP / CANCEL */
 
     __upCancel ( event ) {
 

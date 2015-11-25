@@ -15,7 +15,7 @@
   /* SVELTO */
 
   window.Svelto = {
-    version: '0.2.0-beta.5',
+    version: '0.2.0-beta.6',
     $: jQuery || Zepto || ( $ && ( 'jquery' in $() || 'zepto' in $ ) ? $ : false ),
     _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false )
   };
@@ -1449,8 +1449,6 @@
 
     let downHandler = function ( event ) {
 
-      console.log("down", event, event.target);
-
       target = event.target;
       $target = $(target);
 
@@ -1469,8 +1467,6 @@
 
     let pressHandler = function () {
 
-      console.log("press");
-
       $target.trigger ( createEvent ( Pointer.press, startEvent ) );
 
       pressTimeout = false;
@@ -1478,8 +1474,6 @@
     };
 
     let moveHandler = function ( event ) {
-
-      console.log("move");
 
       if ( !motion ) {
 
@@ -1505,8 +1499,6 @@
     };
 
     let upHandler = function ( event ) {
-
-      console.log("up", event);
 
       if ( pressTimeout ) {
 
@@ -1559,13 +1551,9 @@
 
       if ( !$.browser.is.touchDevice || !motion ) {
 
-        console.log("is tap");
-
         $target.trigger ( createEvent ( Pointer.tap, event ) );
 
         if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-          console.log("is also double tap");
 
           $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
@@ -1587,8 +1575,6 @@
 
     let cancelHandler = function () {
 
-      console.log("cancel", arguments);
-
       if ( pressTimeout ) {
 
         clearTimeout ( pressTimeout );
@@ -1606,8 +1592,6 @@
     };
 
     /* BIND */
-
-    console.log("binding pointer down event");
 
     $document.on ( Pointer.down, downHandler );
 
@@ -6739,12 +6723,7 @@
 
   Widgetize.add ( function () {
 
-    console.log("scrollToTop triggers:");
-    console.log($('.scroll-to-top'));
-
     $('.scroll-to-top').on ( Pointer.tap, () => {
-
-      console.log("scrolling to top!");
 
       $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal )
 
@@ -9078,7 +9057,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* UP CANCEL */
+    /* UP / CANCEL */
 
     __upCancel ( event ) {
 

@@ -103,8 +103,6 @@
 
     let downHandler = function ( event ) {
 
-      console.log("down", event, event.target);
-
       target = event.target;
       $target = $(target);
 
@@ -123,8 +121,6 @@
 
     let pressHandler = function () {
 
-      console.log("press");
-
       $target.trigger ( createEvent ( Pointer.press, startEvent ) );
 
       pressTimeout = false;
@@ -132,8 +128,6 @@
     };
 
     let moveHandler = function ( event ) {
-
-      console.log("move");
 
       if ( !motion ) {
 
@@ -159,8 +153,6 @@
     };
 
     let upHandler = function ( event ) {
-
-      console.log("up", event);
 
       if ( pressTimeout ) {
 
@@ -213,13 +205,9 @@
 
       if ( !$.browser.is.touchDevice || !motion ) {
 
-        console.log("is tap");
-
         $target.trigger ( createEvent ( Pointer.tap, event ) );
 
         if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-          console.log("is also double tap");
 
           $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
@@ -241,8 +229,6 @@
 
     let cancelHandler = function () {
 
-      console.log("cancel", arguments);
-
       if ( pressTimeout ) {
 
         clearTimeout ( pressTimeout );
@@ -260,8 +246,6 @@
     };
 
     /* BIND */
-
-    console.log("binding pointer down event");
 
     $document.on ( Pointer.down, downHandler );
 
