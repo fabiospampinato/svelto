@@ -1,0 +1,7902 @@
+
+/* =========================================================================
+ * Svelto - Expander
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* EXPANDER */
+
+//TODO: Add support for horizontal expander -> basically add support for horizontal cards
+//TODO: Add ability to rotate the proper icons (the pointing arrow for example) if the expander is open or close
+//TODO: Add a sliding animation
+
+.expander {
+
+  /* TOGGLER */
+
+  //INFO: The toggler should also have the `actionable` class to provide a better feedback
+
+  &-toggler {
+    cursor: pointer;
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+
+    /* IS A CARD */
+
+    &.card {
+
+      .card-header {
+        @include border-bottom-radius ( inherit );
+      }
+
+    }
+
+    /* CONTENT */
+
+    .expander-content {
+      display: none;
+    }
+
+  }
+
+}
+
+/*! normalize.css v3.0.3 | MIT License | github.com/necolas/normalize.css */
+
+/**
+ * 1. Set default font family to sans-serif.
+ * 2. Prevent iOS and IE text size adjust after device orientation change,
+ *    without disabling user zoom.
+ */
+
+html {
+  font-family: sans-serif; /* 1 */
+  -ms-text-size-adjust: 100%; /* 2 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/**
+ * Remove default margin.
+ */
+
+body {
+  margin: 0;
+}
+
+/* HTML5 display definitions
+   ========================================================================== */
+
+/**
+ * Correct `block` display not defined for any HTML5 element in IE 8/9.
+ * Correct `block` display not defined for `details` or `summary` in IE 10/11
+ * and Firefox.
+ * Correct `block` display not defined for `main` in IE 11.
+ */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+menu,
+nav,
+section,
+summary {
+  display: block;
+}
+
+/**
+ * 1. Correct `inline-block` display not defined in IE 8/9.
+ * 2. Normalize vertical alignment of `progress` in Chrome, Firefox, and Opera.
+ */
+
+audio,
+canvas,
+progress,
+video {
+  display: inline-block; /* 1 */
+  vertical-align: baseline; /* 2 */
+}
+
+/**
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+
+audio:not([controls]) {
+  display: none;
+  height: 0;
+}
+
+/**
+ * Address `[hidden]` styling not present in IE 8/9/10.
+ * Hide the `template` element in IE 8/9/10/11, Safari, and Firefox < 22.
+ */
+
+[hidden],
+template {
+  display: none;
+}
+
+/* Links
+   ========================================================================== */
+
+/**
+ * Remove the gray background color from active links in IE 10.
+ */
+
+a {
+  background-color: transparent;
+}
+
+/**
+ * Improve readability of focused elements when they are also in an
+ * active/hover state.
+ */
+
+a:active,
+a:hover {
+  outline: 0;
+}
+
+/* Text-level semantics
+   ========================================================================== */
+
+/**
+ * Address styling not present in IE 8/9/10/11, Safari, and Chrome.
+ */
+
+abbr[title] {
+  border-bottom: 1px dotted;
+}
+
+/**
+ * Address style set to `bolder` in Firefox 4+, Safari, and Chrome.
+ */
+
+b,
+strong {
+  font-weight: bold;
+}
+
+/**
+ * Address styling not present in Safari and Chrome.
+ */
+
+dfn {
+  font-style: italic;
+}
+
+/**
+ * Address variable `h1` font-size and margin within `section` and `article`
+ * contexts in Firefox 4+, Safari, and Chrome.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/**
+ * Address styling not present in IE 8/9.
+ */
+
+mark {
+  background: #ff0;
+  color: #000;
+}
+
+/**
+ * Address inconsistent and variable font size in all browsers.
+ */
+
+small {
+  font-size: 80%;
+}
+
+/**
+ * Prevent `sub` and `sup` affecting `line-height` in all browsers.
+ */
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sup {
+  top: -0.5em;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+/* Embedded content
+   ========================================================================== */
+
+/**
+ * Remove border when inside `a` element in IE 8/9/10.
+ */
+
+img {
+  border: 0;
+}
+
+/**
+ * Correct overflow not hidden in IE 9/10/11.
+ */
+
+svg:not(:root) {
+  overflow: hidden;
+}
+
+/* Grouping content
+   ========================================================================== */
+
+/**
+ * Address margin not present in IE 8/9 and Safari.
+ */
+
+figure {
+  margin: 1em 40px;
+}
+
+/**
+ * Address differences between Firefox and other browsers.
+ */
+
+hr {
+  box-sizing: content-box;
+  height: 0;
+}
+
+/**
+ * Contain overflow in all browsers.
+ */
+
+pre {
+  overflow: auto;
+}
+
+/**
+ * Address odd `em`-unit font size rendering in all browsers.
+ */
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+/* Forms
+   ========================================================================== */
+
+/**
+ * Known limitation: by default, Chrome and Safari on OS X allow very limited
+ * styling of `select`, unless a `border` property is set.
+ */
+
+/**
+ * 1. Correct color not being inherited.
+ *    Known issue: affects color of disabled elements.
+ * 2. Correct font properties not being inherited.
+ * 3. Address margins set differently in Firefox 4+, Safari, and Chrome.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  color: inherit; /* 1 */
+  font: inherit; /* 2 */
+  margin: 0; /* 3 */
+}
+
+/**
+ * Address `overflow` set to `hidden` in IE 8/9/10/11.
+ */
+
+button {
+  overflow: visible;
+}
+
+/**
+ * Address inconsistent `text-transform` inheritance for `button` and `select`.
+ * All other form control elements do not inherit `text-transform` values.
+ * Correct `button` style inheritance in Firefox, IE 8/9/10/11, and Opera.
+ * Correct `select` style inheritance in Firefox.
+ */
+
+button,
+select {
+  text-transform: none;
+}
+
+/**
+ * 1. Avoid the WebKit bug in Android 4.0.* where (2) destroys native `audio`
+ *    and `video` controls.
+ * 2. Correct inability to style clickable `input` types in iOS.
+ * 3. Improve usability and consistency of cursor style between image-type
+ *    `input` and others.
+ */
+
+button,
+html input[type="button"], /* 1 */
+input[type="reset"],
+input[type="submit"] {
+  -webkit-appearance: button; /* 2 */
+  cursor: pointer; /* 3 */
+}
+
+/**
+ * Re-set default cursor for disabled elements.
+ */
+
+button[disabled],
+html input[disabled] {
+  cursor: default;
+}
+
+/**
+ * Remove inner padding and border in Firefox 4+.
+ */
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+
+/**
+ * Address Firefox 4+ setting `line-height` on `input` using `!important` in
+ * the UA stylesheet.
+ */
+
+input {
+  line-height: normal;
+}
+
+/**
+ * It's recommended that you don't attempt to style these elements.
+ * Firefox's implementation doesn't respect box-sizing, padding, or width.
+ *
+ * 1. Address box sizing set to `content-box` in IE 8/9/10.
+ * 2. Remove excess padding in IE 8/9/10.
+ */
+
+input[type="checkbox"],
+input[type="radio"] {
+  box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Fix the cursor style for Chrome's increment/decrement buttons. For certain
+ * `font-size` values of the `input`, it causes the cursor style of the
+ * decrement button to change from `default` to `text`.
+ */
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Address `appearance` set to `searchfield` in Safari and Chrome.
+ * 2. Address `box-sizing` set to `border-box` in Safari and Chrome.
+ */
+
+input[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  box-sizing: content-box; /* 2 */
+}
+
+/**
+ * Remove inner padding and search cancel button in Safari and Chrome on OS X.
+ * Safari (but not Chrome) clips the cancel button when the search input has
+ * padding (and `textfield` appearance).
+ */
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * Define consistent border, margin, and padding.
+ */
+
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em;
+}
+
+/**
+ * 1. Correct `color` not being inherited in IE 8/9/10/11.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+
+legend {
+  border: 0; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Remove default vertical scrollbar in IE 8/9/10/11.
+ */
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * Don't inherit the `font-weight` (applied by a rule above).
+ * NOTE: the default cannot safely be changed in Chrome and Safari on OS X.
+ */
+
+optgroup {
+  font-weight: bold;
+}
+
+/* Tables
+   ========================================================================== */
+
+/**
+ * Remove most spacing between table cells.
+ */
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+td,
+th {
+  padding: 0;
+}
+
+
+/* =========================================================================
+ * Svelto - Widget
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* WIDGET */
+
+.widget {
+
+  @include last-child-no-gutter ();
+  position: relative;
+  margin: 0 0 $gutter;
+  transition: opacity $widget-transition-opacity-duration;
+
+  &.disabled {
+    cursor: default !important;
+    opacity: $widget-disabled-opacity !important;
+  }
+
+}
+
+/* WIDGET (PSEUDO ELEMENT) */ //INFO: It is used to fix a bug in Firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+
+.widget-pseudo {
+  position: relative;
+  margin: 0 0 $gutter;
+}
+
+
+/* =========================================================================
+ * Svelto - Accordion
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../expander/expander.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for horizontal accordions, basically wait until horizontal expanders are supported
+
+.accordion {
+
+  @extend .widget;
+
+  /* EXPANDER */
+
+  .expander {
+
+    margin-bottom: 0;
+
+    &:not(:first-child) {
+
+      /* IS CARD */
+
+      &.card {
+
+        .card-header {
+          @include border-top-radius ( 0 );
+        }
+
+      }
+
+      /* OUTLINED */
+
+      &.outlined {
+        margin-top: - ( $outline-width * 2 );
+      }
+
+    }
+
+    &:not(:last-child) {
+
+      /* IS CARD */
+
+      &.card {
+
+        .card-header {
+          @include border-bottom-radius ( 0 );
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Base
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* RESETTING BOX SIZING */
+
+//SOURCE: The idea cames from here: http://www.paulirish.com/2012/box-sizing-border-box-ftw
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+/* NO OUTLINE ON FOCUS */
+
+*:focus {
+  outline: none;
+}
+
+/* CUSTOM SELECTION COLOR */
+
+::selection {
+  background: $base-selection-bg-color;
+  text-shadow: none;
+}
+
+/* HTML */
+
+html {
+
+  @include fill-absolute (); //INFO: This fixes a bug in IE where flexbox children elements don't displays into multiple lines but into a long one if not stirctly forbidden by rules like this
+  font-size: $font-size;
+  box-sizing: border-box;
+
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+
+  &.dragging {
+    cursor: move !important;
+    user-select: none !important; //TODO: maybe set it as default, and override it when selectable... but doesn't it work???
+  }
+
+}
+
+/* BODY */
+
+body {
+  @include color ( $body-color );
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+  font-family: $font-family;
+  font-size: 1em;
+  line-height: $line-height;
+}
+
+//INFO: Sticky footer at bottom fixes for IE10+
+//INFO: We can't just use the following style because under iOS's Safari it will cause the footer to bo beyond the actual visible viewport height
+
+_:-ms-input-placeholder, :root body,
+_:-ms-input-placeholder, :root #content {
+  min-height: 100vh;
+}
+
+/* #CONTENT */
+
+#content {
+
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  transition: margin $base-transition-all-duration;
+  width: 100%;
+
+  > header {
+
+    margin-bottom: 0;
+
+    &.fixed {
+
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      left: 0;
+      transition-property: top, right, left;
+      transition-duration: $base-transition-all-duration;
+
+      + main {
+        margin-top: $main-header-height;
+      }
+
+    }
+
+  }
+
+  > main {
+    @include last-child-no-gutter ();
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    padding: $gutter;
+  }
+
+  > footer { //FIXME: Stick it to the bottom in IE10-11
+    margin-bottom: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Breadcrumb
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BREADCRUMB */
+
+//FIXME: The current shouldn't be clickable, probably
+
+.breadcrumb {
+
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: $gutter;
+
+  /* CHILDREN */
+
+  > * { //INFO: Remove children's margin bottom for proper vertical alignment
+    margin-bottom: 0;
+  }
+
+  /* DIVIDER */
+
+  &-divider {
+    @include last-child-no-gutter ();
+    padding: $breadcrumb-divider-padding-vertical $breadcrumb-divider-padding-horizontal;
+  }
+
+  /* HIGHLIGHTED */
+
+  &.highlighted > .current ~ * {
+
+    opacity: $breadcrumb-after-opacity;
+
+    &:not(.breadcrumb-divider):hover {
+      opacity: $breadcrumb-after-opacity-hover;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* BLURRED */
+
+%blurred { //FIXME: Not working on Edge and IE
+  filter: url('#{$basepath}blur.svg#blur') !important;
+  filter: blur($blurred-blur-amount) !important;
+}
+
+.blurred {
+  @extend %blurred;
+  transition: filter $blurred-transition-duration !important;
+  //TODO: If mobile remove the transition, it greatly improves performance
+}
+
+/* BORDER */
+
+.no-border {
+  border-width: 0 !important;
+}
+
+.rounded {
+  border-radius: $rounded-border-radius $rounded-border-radius !important;
+}
+
+.smooth {
+  border-radius: $smooth-border-radius !important;
+}
+
+.sharp {
+  border-radius: $sharp-border-radius !important;
+}
+
+/* DISPLAY */
+
+.show {
+  display: block !important;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/* VISIBILITY */
+
+.visible {
+  visibility: visible !important;
+}
+
+
+.invisible {
+  visibility: hidden !important;
+}
+
+/* FLOAT */
+
+.float-left {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+/* TEXT ALIGNMENT */
+
+.text-left {
+  justify-content: flex-start !important;
+  text-align: left !important;
+}
+
+.text-center {
+  justify-content: center !important;
+  text-align: center !important;
+}
+
+.text-right {
+  justify-content: flex-end !important;
+  text-align: right !important;
+}
+
+.text-justify {
+  text-align: justify !important;
+}
+
+/* TEXT TRANSFORMATION */
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  text-transform: capitalize !important;
+}
+
+/* TEXT OTHERS */
+
+.text-nowrap {
+  white-space: nowrap !important;
+}
+
+.text-ellipsis,
+.truncate {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 100%; //INFO: Fixes a bug in IE 10
+}
+
+/* PADDING */
+
+.no-padding {
+  padding: 0 !important;
+}
+
+.no-padding-top {
+  padding-top: 0 !important;
+}
+
+.no-padding-right {
+  padding-right: 0 !important;
+}
+
+.no-padding-bottom {
+  padding-bottom: 0 !important;
+}
+
+.no-padding-left {
+  padding-left: 0 !important;
+}
+
+.no-padding-horizontal {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.no-padding-vertical {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* MARGIN */
+
+.no-margin {
+  margin: 0 !important;
+}
+
+.no-margin-top {
+  margin-top: 0 !important;
+}
+
+.no-margin-right {
+  margin-right: 0 !important;
+}
+
+.no-margin-bottom {
+  margin-bottom: 0 !important;
+}
+
+.no-margin-left {
+  margin-left: 0 !important;
+}
+
+.no-margin-horizontal {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+.no-margin-vertical {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+/* OVERFLOW */
+
+.overflow-visible {
+  overflow: visible !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+/* FLIP */
+
+.flipX {
+  transform: rotateY(180deg) !important;
+}
+
+.flipY {
+  transform: rotateX(180deg) !important;
+}
+
+.flip {
+  transform: rotateY(180deg) rotateX(180deg) !important;
+}
+
+/* ROTATE */
+
+.rotate-left {
+  transform: rotate(-90deg) !important;
+}
+
+.rotate-right {
+  transform: rotate(90deg) !important;
+}
+
+.rotating { //TODO: Maybe move to an _helpers_animations
+  animation: rotate $rotating-animation-duration linear infinite !important;
+}
+
+/* ATTACHED */
+
+//INFO: The attached element shouldn't be placed at the bottom or it will cause issues with the gutter (read: the last child is attached, so previous one mantains its gutter)
+
+%attached {
+  margin-bottom: 0;
+}
+
+.attached-top {
+  @extend %attached;
+  @include border-top-radius ( inherit !important );
+  @include border-bottom-radius ( 0 !important );
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+}
+
+.attached-right {
+  @extend %attached;
+  @include border-right-radius ( inherit !important );
+  @include border-left-radius ( 0 !important );
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.attached-bottom {
+  @extend %attached;
+  @include border-top-radius ( 0 !important );
+  @include border-bottom-radius ( inherit !important );
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.attached-left {
+  @extend %attached;
+  @include border-right-radius ( 0 !important );
+  @include border-left-radius ( inherit !important );
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+}
+
+/* GROW */
+
+.grow {
+  flex-grow: 1 !important;
+}
+
+.no-grow {
+  flex-grow: 0 !important;
+}
+
+/* SHRINK */
+
+.shrink {
+  flex-shrink: 1 !important;
+}
+
+.no-shrink {
+  flex-shrink: 0 !important;
+}
+
+/* OTHERS */
+
+//TODO: Move to more appropriate files
+
+.centerer {
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: $gutter;
+
+  > :last-child {
+    margin-bottom: 0 !important;
+  }
+
+}
+
+.spacer {
+  flex-grow: $spacer-flex-grow !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  margin-bottom: $gutter;
+}
+
+.dragging { //TODO: Move it to it's own decorator
+  z-index: $dragging-z-index;
+}
+
+.centered:not(.multiple) { //TODO: Move it to it's own decorator
+  @include center-margin ();
+}
+
+.limited:not(.multiple) { //TODO: Move it to it's own decorator
+
+  @if $max-width-enabled {
+
+    @include center-margin ( $max-width );
+
+  }
+
+}
+
+.actionable:not(.disabled):not(.dragging) { //TODO: Move it to it's own decorator
+  cursor: pointer;
+}
+
+
+/* =========================================================================
+ * Svelto - Label
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+label {
+  @extend .widget;
+  display: block;
+}
+
+/* LABEL */
+
+.label {
+
+  @extend .widget;
+  @include color ( $label-color, $label-color-basic );
+  font-weight: bold;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: $label-border-radius;
+  padding: $label-padding-vertical $label-padding-horizontal;
+  min-height: $line-height-em + ( $label-padding-vertical * 2 );
+  min-width: $line-height-em + ( $label-padding-horizontal * 2 );
+
+  /* CHILDREN NO MARGIN BOTTOM */
+
+  > :not(.sub) {
+    margin-bottom: 0 !important;
+  }
+
+  /* TEXT GROW */
+
+  > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(.ripple-circle) {
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  }
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-height: calc(#{$line-height-em + ( $label-padding-vertical * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $label-padding-horizontal * 2 )} + #{$outline-width * 2});
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    border: $outline-width solid $color-error !important;
+
+    /* ICON */
+
+    .icon {
+      color: $color-error !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    border: $outline-width solid $color-success !important;
+
+    /* ICON */
+
+    .icon {
+      color: $color-success !important;
+    }
+
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    padding: $label-compact-padding-vertical $label-compact-padding-horizontal;
+    min-height: $line-height-em + ( $label-compact-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-compact-padding-horizontal * 2 );
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-height: calc(#{$line-height-em + ( $label-compact-padding-vertical * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $label-compact-padding-horizontal * 2 )} + #{$outline-width * 2});
+    }
+
+  }
+
+  /* FLUID */
+
+  &.fluid {
+    display: flex;
+  }
+
+  /* LEFT / RIGHT */
+
+  > .sub {
+
+    @include last-child-no-gutter ();
+    display: inline-flex;
+    align-self: stretch;
+    align-items: center;
+    justify-content: center;
+    background-color: $label-sub-bg-color;
+    padding: $label-compact-padding-vertical $label-compact-padding-horizontal;
+    min-height: $line-height-em + ( $label-compact-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-compact-padding-horizontal * 2 );
+
+    &.left {
+      @include border-left-radius ( inherit );
+      margin: ( - $label-padding-vertical ) $label-padding-horizontal ( - $label-padding-vertical ) ( - $label-padding-horizontal ) !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      @include border-right-radius ( inherit );
+      margin: ( - $label-padding-vertical ) ( - $label-padding-horizontal ) ( - $label-padding-vertical ) $label-padding-horizontal !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+  }
+
+  &.compact > .sub {
+
+    &.left {
+      margin: ( - $label-compact-padding-vertical ) $label-compact-padding-horizontal ( - $label-compact-padding-vertical ) ( - $label-compact-padding-horizontal ) !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      margin: ( - $label-compact-padding-vertical ) ( - $label-compact-padding-horizontal ) ( - $label-compact-padding-vertical ) $label-compact-padding-horizontal !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+  }
+
+  &.outlined > .sub {
+
+    &.left {
+      border-right: 1px solid;
+      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+    &.right {
+      border-left: 1px solid;
+      border-color: inherit !important; //FIXME: The `!important` shouldn't be needed
+    }
+
+  }
+
+  /* CENTER */
+
+  > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+
+    & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
+      margin-left: $label-center-extra-spacing;
+    }
+
+    & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+      margin-left: $label-center-extra-spacing / $icon-scale-amount;
+    }
+
+  }
+
+  &.compact {
+
+    > :not(.label):not(.button):not(.sub):not(.overlay):not(.ripple-circle) { //INFO: Both `.label` and `.button`
+
+      & + :not(.sub):not(.icon):not(.overlay):not(.ripple-circle) {
+        margin-left: $label-compact-center-extra-spacing;
+      }
+
+      & + i.icon { //FIXME: Ugly fix for normalizing the icons scale factor
+        margin-left: $label-compact-center-extra-spacing / $icon-scale-amount;
+      }
+
+    }
+
+  }
+
+  /* BADGE */
+
+  &.badge {
+
+    position: absolute;
+    margin: 0;
+
+    &.top-left {
+      top: $label-badge-spacing;
+      left: $label-badge-spacing;
+    }
+
+    &.top-right {
+      top: $label-badge-spacing;
+      right: $label-badge-spacing;
+    }
+
+    &.bottom-left {
+      bottom: $label-badge-spacing;
+      left: $label-badge-spacing;
+    }
+
+    &.bottom-right {
+      bottom: $label-badge-spacing;
+      right: $label-badge-spacing;
+    }
+
+  }
+
+  /* FLOATING */
+
+  &.floating {
+
+    //TODO: Add it while scrolling to bottom, show him when scrolling to top
+    //TODO: add sub floating actions
+
+    @include z-depth ( $label-floating-z-depth );
+    position: fixed;
+    z-index: 10;
+    right: $label-floating-right;
+    bottom: $label-floating-bottom;
+    margin-bottom: 0;
+    padding: $label-floating-padding-vertical $label-floating-padding-horizontal;
+    min-height: $line-height-em + ( $label-floating-padding-vertical * 2 );
+    min-width: $line-height-em + ( $label-floating-padding-horizontal * 2 );
+
+    &.compact {
+      padding: $label-floating-compact-padding-vertical $label-floating-compact-padding-horizontal;
+      min-height: $line-height-em + ( $label-floating-compact-padding-vertical * 2 );
+      min-width: $line-height-em + ( $label-floating-compact-padding-horizontal * 2 );
+    }
+
+  }
+
+  /* RIBBON */
+
+  &.ribbon {
+
+    position: absolute;
+
+    &.ribbon-left:before,
+    &.ribbon-right:after {
+      position: absolute;
+      z-index: -1;
+      content: '';
+      border: $label-ribbon-size solid transparent;
+      border-top-color: inherit;
+      bottom: - $label-ribbon-size * 2;
+    }
+
+    &.ribbon-left {
+
+      @include border-left-radius ( 0 );
+      left: - ( $gutter + $label-ribbon-size - ( $outline-width * 2 ) );
+      padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
+
+      &:before {
+        left: 0;
+        border-right-color: inherit;
+      }
+
+    }
+
+    &.ribbon-right {
+
+      @include border-right-radius ( 0 );
+      right: - ( $gutter + $label-ribbon-size - ( $outline-width * 2 ) );
+      padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
+
+      &:after {
+        right: 0;
+        border-left-color: inherit;
+      }
+
+    }
+
+    &.outlined {
+
+      &.ribbon-left:before,
+      &.ribbon-right:after {
+        bottom: - ( $label-ribbon-size * 2 + $outline-width );
+      }
+
+      &.ribbon-left:before {
+        left: - $outline-width;
+      }
+
+      &.ribbon-right:after {
+        right: - $outline-width;
+      }
+
+    }
+
+  }
+
+}
+
+/* LABEL CORNER */
+
+.label-corner {
+
+  position: absolute;
+  z-index: 10;
+  visibility: hidden;
+  overflow: hidden;
+  pointer-events: none;
+
+  &.top-left {
+
+    top: 0;
+    left: 0;
+    border-top-left-radius: inherit;
+
+    > * { //INFO: Both `.label` and `.button`
+      transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8 ));
+    }
+
+    &:before {
+      top: 0;
+      left: 0;
+      transform: translateX(-( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
+    }
+
+  }
+
+  &.top-right {
+
+    top: 0;
+    right: 0;
+    border-top-right-radius: inherit;
+
+    > * { //INFO: Both `.label` and `.button`
+      transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY(-($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8));
+    }
+
+    &:before {
+      top: 0;
+      right: 0;
+      transform: translateX(( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(-( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
+    }
+
+  }
+
+  &.bottom-left {
+
+    bottom: 0;
+    left: 0;
+    border-bottom-left-radius: inherit;
+
+    > * { //INFO: Both `.label` and `.button`
+      transform: translateX(-($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8)) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
+    }
+
+    &:before {
+      bottom: 0;
+      left: 0;
+      transform: translateX(-( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
+    }
+
+  }
+
+  &.bottom-right {
+
+    bottom: 0;
+    right: 0;
+    border-bottom-right-radius: inherit;
+
+    > * { //INFO: Both `.label` and `.button`
+      transform: translateX($label-corner-padding-horizontal * 2 / 4 + $line-height-em / 8) translateY($label-corner-padding-vertical * 2 / 4 + $line-height-em / 8);
+    }
+
+    &:before {
+      bottom: 0;
+      right: 0;
+      transform: translateX(( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) / $SQRT2) translateY(( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) / $SQRT2) rotate(45deg);
+    }
+
+  }
+
+  &:before {
+    pointer-events: auto;
+    position: absolute;
+    content: '';
+    height: ( $line-height-em + ( $label-corner-padding-vertical * 2 ) ) * $SQRT2;
+    width: ( $line-height-em + ( $label-corner-padding-horizontal * 2 ) ) * $SQRT2;
+    background-color: inherit;
+    visibility: visible;
+  }
+
+  > * { //INFO: Both `.label` and `.button`
+    padding: $label-corner-padding-vertical $label-corner-padding-horizontal;
+    height: $line-height-em + ( $label-corner-padding-vertical * 2 );
+    width: $line-height-em + ( $label-corner-padding-horizontal * 2 );
+    margin: 0;
+    border-radius: 0;
+    background-color: transparent !important;
+    color: inherit;
+    margin: 0;
+    visibility: visible;
+  }
+
+}
+
+/* LABEL TAG */
+
+//FIXME: Missing pointer outline in IE10
+
+.label-tag {
+
+  margin-bottom: $gutter;
+  z-index: 1;
+
+  & > * { //INFO: Both `.label` and `.button`
+
+    margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
+    margin-bottom: 0;
+
+    &:before,
+    &:after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      height: $label-tag-smooth-size;
+      width: $label-tag-smooth-size;
+      transform: translateX(50%) translateY(-50%) rotate(45deg);
+    }
+
+    &:before {
+      @include color ( 'inherit' );
+      z-index: -1;
+    }
+
+    &:after {
+      background-color: $label-tab-circle-background-color;
+      border-radius: 50%;
+      box-shadow: $label-tag-circle-box-shadow;
+      transform: translateX(50%) translateY(-50%) rotate(45deg) scale($label-tag-circle-scale);
+    }
+
+    &.compact {
+
+      margin-left: ( $label-tag-smooth-compact-size * $SQRT2 ) / 2 - $label-border-radius;
+
+      &:before,
+      &:after {
+        height: $label-tag-smooth-compact-size;
+        width: $label-tag-smooth-compact-size;
+      }
+
+    }
+
+    &.outlined {
+
+      border-left-width: 0;
+
+      &:before {
+        border-width: $outline-width;
+        border-style: solid;
+      }
+
+    }
+
+    &:not(.sharp) {
+
+      &:before,
+      &:after {
+        right: calc(100% - #{$label-border-radius / 2});
+      }
+
+      &:before {
+        border-radius: $label-border-radius;
+      }
+
+    }
+
+    &.sharp {
+
+      margin-left: ( $label-tag-sharp-size * $SQRT2 ) / 2;
+
+      &:before,
+      &:after {
+        height: $label-tag-sharp-size;
+        width: $label-tag-sharp-size;
+        right: 100%;
+      }
+
+      &.compact {
+
+        margin-left: ( $label-tag-sharp-compact-size * $SQRT2 ) / 2;
+
+        &:before,
+        &:after {
+          height: $label-tag-sharp-compact-size;
+          width: $label-tag-sharp-compact-size;
+        }
+
+      }
+
+    }
+
+    /* COLORS */
+
+    @each $name, $datas in $colors {
+
+      $bg: nth($datas, 1);
+
+      &.tag-circle-#{$name}:after {
+        background-color: $bg;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Button
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../helpers/helpers.scss
+ * @requires ../label/label.scss
+ * ========================================================================= */
+
+/* DEFAULT BUTTON */
+
+button {
+  border: none;
+  padding: 0;
+}
+
+/* BUTTON */
+
+.button {
+  @extend .label;
+  @extend .actionable;
+}
+
+/* BUTTON CORNER */
+
+.button-corner {
+  @extend .label-corner;
+  @extend .actionable;
+}
+
+/* BUTTON TAG */
+
+.button-tag {
+  @extend .label-tag;
+}
+
+
+/* =========================================================================
+ * Svelto - Container
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* CONTAINER */
+
+//FIXME: It's expanding over the visible viewport on Dolphin Browser
+
+.container {
+
+  @extend .widget;
+  @include color ( $container-color );
+  border-radius: $container-border-radius;
+  padding: $container-padding-vertical $container-padding-horizontal;
+
+  /* COMPACT */
+
+  &.compact {
+    padding: $container-compact-padding-vertical $container-compact-padding-horizontal;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Card
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../container/container.scss
+ * ========================================================================= */
+
+/* CARD */
+
+//FIXME: There's an overflow bug when scrolling the block-content, it goes a bit over the footer, but not if we zoom the page
+//FIXME: It's not good on Dolphin browser
+
+.card {
+
+  @extend .widget;
+  @include color ( $card-color );
+  display: flex;
+  flex-direction: column;
+  border-radius: $card-border-radius;
+
+  /* SECTIONS */
+
+  &-header,
+  &-block,
+  &-footer {
+
+    &:not(.multiple) {
+      @extend .container;
+      border-radius: 0;
+    }
+
+    &.multiple {
+
+      margin-bottom: 0 !important;
+
+      > * {
+        border-radius: 0;
+        margin-bottom: 0 !important;
+      }
+
+    }
+
+    .card.compact & {
+      @extend .container.compact;
+    }
+
+  }
+
+  /* HEADER / FOOTER */
+
+  &-header,
+  &-footer {
+    flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
+  }
+
+  /* BLOCK */
+
+  &-block {
+    flex-grow: 1; //INFO: Takes the remaining space, if any
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    overflow: auto;
+  }
+
+  /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
+
+  > :not(.overlay):not(.ripple-circle) {
+    margin-bottom: 0 !important; //FIXME: The `!important` shouldn't be necessary
+  }
+
+  /* BORDER RADIUS INHERITANCE */
+
+  > :first-child:not(.overlay):not(.ripple-circle),
+  > :first-child.overlay + *,
+  > :first-child.ripple-circle + * {
+    @include border-top-radius ( inherit );
+  }
+
+  > .multiple:first-child {
+
+    > :first-child {
+      border-top-left-radius: inherit;
+    }
+
+    > :last-child {
+      border-top-right-radius: inherit;
+    }
+
+  }
+
+  > :last-child {
+    @include border-bottom-radius ( inherit );
+  }
+
+  > .multiple:last-child {
+
+    > :first-child {
+      border-bottom-left-radius: inherit;
+    }
+
+    > :last-child {
+      border-bottom-right-radius: inherit;
+    }
+
+  }
+
+  /* OUTLINED */
+
+  &.outlined {
+
+    /* INSET OUTLINED */
+
+    > .outlined {
+
+      margin-left: - $outline-width;
+      margin-right: - $outline-width;
+
+      /* FIRST / LAST */
+
+      &:first-child {
+        margin-top: - $outline-width;
+      }
+
+      &:last-child {
+        margin-bottom: - $outline-width !important; //FIXME: The `!important` shouldn't be necessary
+      }
+
+    }
+
+    /* INSET IMAGE */ //FIXME: Ugly fix for better supporting inset outlined unwrapped images
+
+    > img.outlined {
+      width: calc(100% + #{$outline-width * 2}) !important;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Icons
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* SCALED ICON SIZES */
+
+%scaled-icon-sizes {
+
+  @each $name, $font-size in $sizes {
+
+    &.#{$name} {
+      font-size: ( $font-size * $icon-scale-amount ) !important;
+    }
+
+  }
+
+}
+
+/* ICON */
+
+i.icon {
+  @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  vertical-align: middle;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 1em * $icon-scale-amount;
+  width: 1em;
+  height: 1em;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  word-wrap: normal;
+  /* Support for all WebKit browsers */
+  -webkit-font-smoothing: antialiased;
+  /* Support for all WebKit browsers */
+  text-rendering: optimizeLegibility;
+  /* Support for all WebKit browsers */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for all WebKit browsers */
+  font-feature-settings: 'liga';
+}
+
+/* ICONS */
+
+.icons {
+
+  @extend .widget;
+  @extend %scaled-icon-sizes;
+  display: inline-block;
+  width: 1em * $icon-scale-amount;
+  height: 1em * $icon-scale-amount;
+  position: relative;
+
+  /* ICON */
+
+  .icon {
+
+    margin-bottom: 0;
+
+    /* NOT CORNER */
+
+    &:not(.corner) {
+      @include fill-absolute ();
+    }
+
+    /* CORNER */
+
+    &.corner {
+
+      position: absolute;
+      font-size: 1em * $icon-scale-amount / 2;
+
+      /* TOP LEFT */
+
+      &.top-left {
+        top: 0;
+        left: 0;
+      }
+
+      /* TOP RIGHT */
+
+      &.top-right {
+        top: 0;
+        right: 0;
+      }
+
+      /* BOTTOM RIGHT */
+
+      &.bottom-right {
+        bottom: 0;
+        right: 0;
+      }
+
+      /* BOTTOM LEFT */
+
+      &.bottom-left {
+        bottom: 0;
+        left: 0;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Carousel
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../icons/icons.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: When inset add proper dark shadow at the left and the right
+//TODO: Add better support for img tags, .image-wrp, container and card
+//TODO: Add support for custom buttons as prev/next or fall back to a default
+
+/* CAROUSEL */
+
+.carousel {
+
+  @extend .widget;
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  height: $carousel-height;
+
+  /* INDICATORS */
+
+  &-indicators {
+    z-index: $carousel-indicators-z-index;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    justify-self: center;
+    padding: $gutter;
+  }
+
+  /* INDICATOR */
+
+  &-indicator {
+
+    width: $carousel-indicator-size;
+    height: $carousel-indicator-size;
+    border: $carousel-indicator-border-width solid $carousel-indicator-color;
+    border-radius: 50%;
+    background-color: transparent;
+    cursor: pointer;
+    opacity: $carousel-indicator-opacity;
+    transition-property: background-color, opacity;
+    transition-duration: $carousel-indicator-transition-all-duration;
+
+    /* HOVER */
+
+    &:hover {
+      opacity: $carousel-indicator-hover-opacity !important;
+    }
+
+    /* NOT FIRST */
+
+    &:not(:first-child) {
+      margin-left: $gutter-half / 2;
+    }
+
+    /* NOT LAST */
+
+    &:not(:last-child) {
+      margin-right: $gutter-half / 2;
+    }
+
+    /* CURRENT */
+
+    &.current {
+      background-color: $carousel-indicator-color;
+    }
+
+  }
+
+  /* ITEMS */
+
+  &-items {
+
+    position: relative;
+    overflow: hidden;
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    background-color: $carousel-bg-color;
+
+    /* ITEM */
+
+    > * {
+      @include fill-absolute ();
+      margin-bottom: 0 !important;
+      border-radius: inherit;
+    }
+
+  }
+
+  /* SLIDE HORIZONTAL */
+
+  &.slide,
+  &.slide-horizontal,
+  &:not(.slide-vertical):not(.fade) {
+
+    /* ITEMS */
+
+    .carousel-items {
+
+      /* ITEM */
+
+      > * {
+        transition: transform $carousel-slide-transition-transform-duration;
+        transform: translateX(-100%);
+      }
+
+      /* PREV */
+
+      > .prev {
+        z-index: 2;
+      }
+
+      /* CURRENT */
+
+      > .current {
+
+        z-index: 3;
+        transform: translateX(0);
+
+        /* FOLLOWING */
+
+        ~ * {
+          transform: translateX(100%);
+        }
+
+      }
+
+    }
+
+  }
+
+  /* SLIDE VERTICAL */
+
+  &.slide-vertical {
+
+    /* ITEMS */
+
+    .carousel-items {
+
+      /* ITEM */
+
+      > * {
+        transition: transform $carousel-slide-transition-transform-duration;
+        transform: translateY(-100%);
+      }
+
+      /* PREV */
+
+      > .prev {
+        z-index: 2;
+      }
+
+      /* CURRENT */
+
+      > .current {
+
+        z-index: 3;
+        transform: translateY(0);
+
+        /* FOLLOWING */
+
+        ~ * {
+          transform: translateY(100%);
+        }
+
+      }
+
+    }
+
+  }
+
+  /* FADE */
+
+  &.fade {
+
+    /* ITEMS */
+
+    .carousel-items {
+
+      /* ITEM */
+
+      > * {
+        opacity: 0;
+        transition: opacity $carousel-fade-transition-opacity-duration;
+      }
+
+      /* PREV */
+
+      > .prev {
+        z-index: 2;
+        opacity: 0;
+      }
+
+      /* CURRENT */
+
+      > .current {
+        z-index: 3;
+        opacity: 1;
+      }
+
+    }
+
+  }
+
+  /* HOVER */
+
+  &:hover {
+
+    /* INDICATORS */
+
+    .carousel-indicators {
+
+      /* INDICATOR */
+
+      .carousel-indicator {
+        opacity: $carousel-hover-indicator-opacity;
+      }
+
+    }
+
+  }
+
+  /* OUTSET */
+
+  &:not(.inset) {
+
+    /* PREV / NEXT */
+
+    .carousel-prev,
+    .carousel-next {
+      align-self: center;
+      margin-bottom: 0;
+    }
+
+    /* PREV */
+
+    .carousel-prev {
+      order: 1;
+      margin-left: $gutter;
+      margin-right: $gutter;
+    }
+
+    /* NEXT */
+
+    .carousel-next {
+      order: 3;
+      margin-left: $gutter;
+      margin-right: $gutter;
+    }
+
+    /* ITEMS */
+
+    .carousel-items {
+      order: 2;
+    }
+
+  }
+
+  /* INSET */
+
+  &.inset {
+
+    /* PREV / NEXT */
+
+    .carousel-prev,
+    .carousel-next {
+
+      position: absolute;
+      z-index: $carousel-inset-prev-next-z-index;
+      display: flex;
+      align-items: center;
+      top: 0;
+      bottom: 0;
+      cursor: pointer;
+      font-size: $carousel-inset-prev-next-font-size;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        @extend i.icon;
+        margin-bottom: 0;
+        color: $carousel-inset-prev-next-color;
+        opacity: $carousel-inset-prev-next-opacity;
+        transition: opacity $carousel-inset-prev-next-transition-opacity-duration;
+      }
+
+    }
+
+    /* PREV */
+
+    .carousel-prev {
+
+      justify-content: flex-start;
+      left: 0;
+      padding-left: $gutter;
+      width: $carousel-inset-prev-width;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        content: 'chevron_left';
+      }
+
+    }
+
+    /* NEXT */
+
+    .carousel-next {
+
+      justify-content: flex-end;
+      right: 0;
+      padding-right: $gutter;
+      width: $carousel-inset-next-width;
+
+      /* AFTER (ICON) */
+
+      &:after {
+        content: 'chevron_right';
+      }
+
+    }
+
+    /* HOVER */
+
+    &:hover {
+
+      /* PREV / NEXT */
+
+      .carousel-prev,
+      .carousel-next {
+
+        /* AFTER (ICON) */
+
+        &:after {
+          opacity: $carousel-inset-hover-prev-next-opacity;
+        }
+
+        /* HOVER */
+
+        &:hover {
+
+          /* AFTER (ICON) */
+
+          &:after {
+            opacity: $carousel-inset-prev-next-hover-opacity;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Chat
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//FIXME: Handle the case where clip-path is not supported
+
+/* CHAT */
+
+.chat-msg {
+
+  display: flex;
+  margin-bottom: $gutter;
+
+  /* IMAGE */
+
+  .chat-msg-img {
+
+    width: $chat-msg-img-size;
+    height: $chat-msg-img-size;
+
+    .image-wrp {
+
+      transition: opacity $chat-msg-img-transition-duration;
+
+      img {
+        border-radius: 100%;
+        width: $chat-msg-img-size;
+        height: $chat-msg-img-size;
+        border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
+      }
+
+    }
+
+    /* TIP */
+
+    + .chat-msg-content .card-header:before {
+      display: block;
+    }
+
+  }
+
+  a.chat-msg-img:hover .image-wrp {
+    opacity: $chat-msg-img-opacity-hover;
+  }
+
+  /* CONTENT */
+
+  .chat-msg-content {
+
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    margin-bottom: 0;
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        @include square ( $chat-tip-size, inherit );
+        display: none;
+        transform: rotate(45deg);
+        position: absolute;
+        content: '';
+        z-index: 1;
+        box-sizing: content-box;
+        top: 50%;
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        border-width: $outline-width;
+        border-style: solid;
+        border-color: inherit;
+      }
+
+    }
+
+  }
+
+  /* NO TIP */
+
+  &.no-tip {
+
+    /* TIP */
+
+    .chat-msg-content .card-header:before {
+      display: none;
+    }
+
+  }
+
+  /* LEFT */
+
+  &:not(.direction-right) {
+
+    /* LEVELS */
+
+    &.level-3,
+    &[class*='level-'] {
+      margin-left: $chat-msg-level-3-spacing;
+    }
+
+    &.level-2 {
+      margin-left: $chat-msg-level-2-spacing;
+    }
+
+    &.level-1 {
+      margin-left: $chat-msg-level-1-spacing;
+    }
+
+    /* IMAGE */
+
+    .chat-msg-img {
+      order: 1;
+      margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* NO TIP */
+
+    &.no-tip {
+
+      /* IMAGE */
+
+      .chat-msg-img{
+        margin-right: $gutter;
+      }
+
+    }
+
+    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), & .chat-msg-img {
+      margin-right: $gutter;
+    }
+
+    /* CONTENT */
+
+    .chat-msg-content {
+      order: 2;
+    }
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        left: - ( $dropdown-tip-size / 2 );
+        margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: url('#{$basepath}chat-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+        clip-path: polygon(0 0, 100% 100%, 0 100%);
+      }
+
+      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+      _:-ms-lang(x), &:before {
+        display: none !important;
+      }
+
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.direction-right {
+
+    /* LEVELS */
+
+    &.level-3,
+    &[class*='level-'] {
+      margin-right: $chat-msg-level-3-spacing;
+    }
+
+    &.level-2 {
+      margin-right: $chat-msg-level-2-spacing;
+    }
+
+    &.level-1 {
+      margin-right: $chat-msg-level-1-spacing;
+    }
+
+    /* IMAGE */
+
+    .chat-msg-img {
+      order: 2;
+      margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* NO TIP */
+
+    &.no-tip {
+
+      /* IMAGE */
+
+      .chat-msg-img{
+        margin-left: $gutter;
+      }
+
+    }
+
+    //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
+
+    _:-ms-lang(x), & .chat-msg-img {
+      margin-left: $gutter;
+    }
+
+    /* CONTENT */
+
+    .chat-msg-content {
+      order: 1;
+    }
+
+    /* HEADER */
+
+    .card-header {
+
+      /* TIP */
+
+      &:before {
+        right: - ( $dropdown-tip-size / 2 );
+        margin-top: - ( $dropdown-tip-size / 2 );
+        clip-path: url('#{$basepath}chat-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+        clip-path: polygon(0 0, 100% 100%, 100% 0);
+      }
+
+      //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+      _:-ms-lang(x), &:before {
+        display: none !important;
+      }
+
+      /* TIP (OUTLINED) */
+
+      &.outlined:before {
+        margin-right: - $outline-width;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Checkbox
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* CHECKBOX */
+
+.checkbox {
+
+  /* INPUT */
+
+  > input {
+    display: none;
+  }
+
+  /* ICONS */
+
+  .icons {
+
+    /* ICON */
+
+    .icon {
+
+      transition: opacity $checkbox-icon-transition-opacity-duration;
+
+      &.icon-on {
+        @include color-text ( $checkbox-icon-on-color );
+        opacity: 0;
+        z-index: 1;
+      }
+
+    }
+
+  }
+
+  /* CHECKED */
+
+  &.checked {
+
+    /* ICONS */
+
+    .icons {
+
+      /* ICON */
+
+      .icon {
+
+        &.icon-on {
+          opacity: 1;
+        }
+
+        &.icon-off {
+          opacity: 0;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Colorpicker
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//FIXME: Not working on Dolphin Browser
+
+/* COLORPICKER */
+
+.colorpicker {
+
+  @extend .widget;
+  display: flex;
+
+  /* INPUT */
+
+  input {
+    display: none;
+  }
+
+  /* BRIGHTNESS / SATURATION / HUE */
+
+  &-brightness,
+  &-saturation,
+  &-hue {
+    @include fill-absolute ();
+    pointer-events: none;
+  }
+
+  /* HANDLER */
+
+  &-handler {
+    @include z-depth ( 2, ',' + $colorpicker-handler-shadow );
+    position: absolute;
+    z-index: 2;
+    box-sizing: border-box;
+    border: $colorpicker-handler-border-width solid $colorpicker-handler-border-color;
+    background-color: $colorpicker-handler-border-color;
+  }
+
+  /* WRAPPERS */
+
+  &-saturation-brightness-wrp,
+  &-hue-wrp {
+    position: relative;
+    box-sizing: content-box;
+    height: $colorpicker-height;
+    cursor: pointer;
+    border: $colorpicker-wrp-border-width solid $colorpicker-wrp-border-color;
+  }
+
+  /* SATURATION & BRIGHTNESS WRAPPER */
+
+  &-saturation-brightness-wrp {
+
+    width: $colorpicker-height;
+    background-color: red;
+
+    /* BRIGHTNESS */
+
+    .colorpicker-brightness {
+      @include gradient-horizontal ( white, transparent );
+    }
+
+    /* SATURATION */
+
+    .colorpicker-saturation {
+      @include gradient-vertical ( transparent, black );
+      z-index: 1;
+    }
+
+    /* HANDLER */
+
+    .colorpicker-handler {
+      width: $colorpicker-handler-sb-height;
+      height: $colorpicker-handler-sb-width;
+      margin: ( - $colorpicker-handler-sb-height / 2 ) 0 0 ( - $colorpicker-handler-sb-width / 2 );
+      cursor: move;
+      border-radius: $colorpicker-handler-sb-border-radius;
+    }
+
+  }
+
+  /* HUE WRAPPER */
+
+  &-hue-wrp {
+
+    width: $colorpicker-hue-wrp-width;
+    margin-left: $gutter;
+
+    /* HUE */
+
+    .colorpicker-hue {
+      background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);
+    }
+
+    /* HANDLER */
+
+    .colorpicker-handler {
+      width: 100%;
+      height: $colorpicker-handler-hue-height;
+      margin-top: - ( $colorpicker-handler-hue-height / 2 );
+      cursor: ns-resize;
+      border-radius: $colorpicker-handler-hue-border-radius;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* SATURATION & BRIGHTNESS WRAPPER */
+
+    .colorpicker-saturation-brightness-wrp,
+    .colorpicker-hue-wrp {
+      border: $outline-width solid $color-error !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* SATURATION & BRIGHTNESS WRAPPER */
+
+    .colorpicker-saturation-brightness-wrp,
+    .colorpicker-hue-wrp {
+      border: $outline-width solid $color-success !important;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Colors
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
+//FIXME: .actionable should do it's work only it it's not child of .disabled or -disabled
+
+/* COLORS */
+
+@each $name, $datas in $colors {
+
+  .#{$name} {
+    @include color ( $name, false, !important );
+  }
+
+  .text-#{$name} {
+    color: nth($datas, 1);
+  }
+
+  .link-#{$name} {
+    @include color-link ( $name, !important );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Datepicker
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* DATEPICKER */
+
+.datepicker {
+
+  @extend .widget;
+  border-radius: $border-radius-medium;
+
+  /* INPUT */
+
+  input {
+    display: none;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+    border: $outline-width solid $color-error;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border: $outline-width solid $color-success;
+  }
+
+  /* NAVIGATION */
+
+  &-navigation {
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    /* BUTTON */
+
+    > .button { //INFO: We are referring to the `Prev` and `Next` navigation buttons
+      width: $datepicker-block-width;
+      margin-bottom: 0;
+    }
+
+    /* TITLE */
+
+    &-title {
+      margin: 0 $gutter;
+    }
+
+  }
+
+  /* CALENDAR */
+
+  &-calendar {
+
+    /* DAY NAMES */
+
+    .datepicker-days-names {
+
+      display: flex;
+      height: $datepicker-day-name-height;
+      align-items: center;
+
+      /* DAY NAME */
+
+      .datepicker-day-name {
+        font-weight: $datepicker-day-name-font-weight;
+        width: $datepicker-block-width;
+        text-align: center;
+      }
+
+    }
+
+    /* DAYS */
+
+    .datepicker-days {
+
+      display: flex;
+      flex-wrap: wrap;
+
+      /* DAY */
+
+      [class*='datepicker-day'] {
+
+        line-height: $datepicker-day-height;
+        position: relative;
+        z-index: 1;
+        width: $datepicker-block-width;
+        height: $datepicker-day-height;
+        text-align: center;
+
+        /* BEFORE */
+
+        &:before {
+          @include center-absolute ( $datepicker-day-circle-size, $datepicker-day-circle-size );
+          z-index: -1;
+          width: $datepicker-day-circle-size;
+          height: $datepicker-day-circle-size;
+          content: '';
+          border-radius: 50%;
+          background-color: transparent;
+        }
+
+        /* TODAY */
+
+        &.datepicker-day-today {
+
+          color: $datepicker-day-today-color;
+
+          /* BEFORE */
+
+          &:before {
+            background-color: $datepicker-day-today-circle-color;
+          }
+
+        }
+
+        /* SELECTED */
+
+        &.datepicker-day-selected {
+
+          color: $datepicker-day-selected-color;
+          transition: color $datepicker-transition-all-duration;
+
+          /* BEFORE */
+
+          &:not(.datepicker-day-prev):not(.datepicker-day-next):before {
+            @include z-depth ( $datepicker-day-selected-z-depth );
+          }
+
+          &:before {
+            background-color: $datepicker-day-selected-circle-color;
+            transition-property: box-shadow, background-color;
+            transition-duration: $datepicker-transition-all-duration;
+          }
+
+        }
+
+      }
+
+      /* PREV / NEXT */
+
+      .datepicker-day-prev,
+      .datepicker-day-next {
+        opacity: $datepicker-day-prev-next-opacity;
+      }
+
+      /* DAY */
+
+      .datepicker-day {
+
+        cursor: pointer;
+
+        /* HOVER */
+
+        &:not(.datepicker-day-selected):hover {
+
+          color: $datepicker-day-hover-color;
+
+          /* BEFORE */
+
+          &:before {
+            background-color: $datepicker-day-hover-circle-color;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Divider
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+//FIXME: If we put an infobar inside a divider it doesn't get displayed well in Edge / IE10-11
+
+/* DIVIDER */
+
+%divider {
+  height: 1px;
+  margin-top: - $gutter-half;
+  margin-bottom: $gutter-half;
+  border: none;
+  background-color: $divider-linear-bg-color;
+}
+
+/* DEFAULT DIVIDER */
+
+hr {
+  @extend %divider;
+}
+
+/* DIVIDER */
+
+.divider {
+
+  /* LINEAR */
+
+  //FIXME: It doesn't work in IE10
+
+  &.linear,
+  &:not(.block):not(.text):not(.spacer) { //INFO: The default one
+
+    /* EMPTY */
+
+    &:empty {
+      @extend %divider;
+    }
+
+    /* ADVANCED */
+
+    &:not(:empty) {
+
+      @include last-child-no-gutter ();
+      margin-bottom: $gutter;
+      display: flex;
+      align-items: center;
+
+      &:before,
+      &:after {
+        @extend %divider;
+        content: '';
+        margin: 0;
+        flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+        min-width: $gutter;
+      }
+
+      &:before {
+        margin-right: $gutter;
+      }
+
+      &:after {
+        margin-left: $gutter;
+      }
+
+    }
+
+    /* VERTICAL */
+
+    &.vertical {
+
+      /* EMPTY */
+
+      &:empty {
+        height: auto;
+        width: 1px;
+        align-self: stretch;
+        flex-grow: 0;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        margin: 0 $gutter-half $gutter;
+      }
+
+      /* ADVANCED */
+
+      &:not(:empty) {
+
+        flex-direction: column;
+        flex-grow: 0 !important;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        align-self: stretch;
+        // justify-content: center;
+        margin: 0 $gutter-half $gutter;
+
+        &:before,
+        &:after {
+          margin: 0;
+          min-width: 0;
+          width: 1px;
+          min-height: $gutter;
+          flex-grow: 1;
+          flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        }
+
+        &:before {
+          margin-bottom: $gutter-half;
+        }
+
+        &:after {
+          margin-top: $gutter-half;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* BLOCK */
+
+  &.block {
+
+    margin-bottom: $gutter;
+    text-align: center;
+
+    /* CONTENT */
+
+    > .divider-content {
+      @include color ( $divider-block-color );
+      @include last-child-no-gutter ();
+      display: inline-block;
+      padding: $divider-block-vertical-padding $divider-block-horizontal-padding;
+      border-radius: 10000px 10000px;
+    }
+
+  }
+
+  /* TEXT */
+
+  &.text {
+    @include size ( $divider-text-size );
+    font-weight: $divider-text-font-weight;
+    margin: 0 $gutter-half $gutter-half;
+    opacity: $divider-text-opacity;
+  }
+
+  /* SPACER */
+
+  &.spacer { //TODO: Maybe remove it, it's not very useful nor required...
+    height: $divider-spacer-height;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Dropdown
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Add tip shadow
+
+/* DROPDOWN */
+
+.dropdown {
+
+  @include z-depth ( $dropdown-z-depth );
+  z-index: $dropdown-z-index;
+  position: fixed;
+  top: 0;
+  left: 0;
+  max-width: $dropdown-max-width;
+  margin-bottom: 0;
+  transition: opacity $dropdown-transition-all-duration;
+
+  /* NOT CONTAINER */
+
+  &:not(.container) {
+    max-height: $dropdown-max-height;
+  }
+
+  /* MOVING */
+
+  &.moving {
+
+    transition: transform $dropdown-transition-all-duration;
+
+    /* TIP */
+
+    &:before {
+      transition: transform $dropdown-transition-all-duration;
+    }
+
+  }
+
+  /* NO TIP / ATTACHED */
+
+  &.no-tip,
+  &.attached {
+
+    /* TIP */
+
+    &:before {
+      display: none !important;
+    }
+
+  }
+
+  /* ATTACHED */
+
+  &.attached {
+
+    /* TOP */
+
+    &.positionate-top {
+      margin-bottom: - $outline-width;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
+    }
+
+    /* BOTTOM */
+
+    &.positionate-bottom {
+      margin-top: - $outline-width;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+
+    /* LEFT */
+
+    &.positionate-left {
+      margin-right: - $outline-width;
+    }
+
+    /* RIGHT */
+
+    &.positionate-right {
+      margin-left: - $outline-width;
+    }
+
+  }
+
+  /* TIP */
+
+  &:before {
+    @include square ( $dropdown-tip-size, inherit );
+    transform: rotate(45deg);
+    position: absolute;
+    content: '';
+    z-index: 1;
+    box-sizing: content-box;
+  }
+
+  //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip //FIXME: Not future proff, use feature detection instead
+
+  _:-ms-lang(x), &:before {
+    display: none;
+  }
+
+  /* TIP (OUTLINED) */
+
+  &.outlined:before {
+    border-width: $outline-width;
+    border-style: solid;
+    border-color: inherit;
+  }
+
+  /* TIP (POSITION-RELATED) */
+
+  &.positionate-top {
+
+    &:before {
+      left: - ( $dropdown-tip-size / 2 );
+      bottom: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-top'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(0 100%, 100% 100%, 100% 0);
+      box-shadow: $dropdown-top-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-bottom: - $outline-width;
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-bottom {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-bottom'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(100% 0, 0 0, 0 100%);
+      box-shadow: $dropdown-bottom-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-top: - $outline-width;
+        margin-left: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-left {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      right: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-left'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(0 0, 100% 100%, 100% 0);
+      box-shadow: $dropdown-left-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-right: - $outline-width;
+        margin-top: - $outline-width;
+      }
+
+    }
+
+  }
+
+  &.positionate-right {
+
+    &:before {
+      top: - ( $dropdown-tip-size / 2 );
+      left: - ( $dropdown-tip-size / 2 );
+      clip-path: url('#{$basepath}dropdown-clips.svg#clip-right'); //INFO: The polygon is not supported on Firefox
+      clip-path: polygon(0 0, 100% 100%, 0 100%);
+      box-shadow: $dropdown-right-tip-box-shadow;
+    }
+
+    /* OUTLINED */
+
+    &.outlined {
+
+      &:before {
+        margin-left: - $outline-width;
+        margin-top: - $outline-width;
+      }
+
+    }
+
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+}
+
+//INFO: Card dropdown max height fix for IE10+
+
+_:-ms-input-placeholder, :root .dropdown.card {
+
+  max-height: none;
+
+  .card-block {
+    max-height: $dropdown-max-height / 100 * 90;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Embedded
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* EMBEDDED */
+
+//FIXME: There's an extra pixel at the bottom of the demo video
+//FIXME: If we add a border-radius it won't be used after we press play on the video
+
+.embedded {
+
+  @extend .widget;
+  display: block;
+  height: 0;
+  padding: 0;
+  overflow: hidden;
+
+  /* RATIOS */
+
+  @each $ratio in $embedded-ratios {
+
+    $width: nth($ratio, 1);
+    $height: nth($ratio, 2);
+
+    &.ratio-#{$width}-#{$height} {
+      padding-bottom: ( $height * 100 / $width ) * 1%;
+    }
+
+  }
+
+  /* IFRAME / EMBED / VIDEO / OBJECT */
+
+  & > * {
+    @include fill ();
+    @include fill-absolute ();
+    border: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Flags
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * Flags from https://www.flag-sprites.com/ - Blogpotato.de - FamFamFam
+ * ========================================================================= */
+
+/* FLAG */
+
+i[class^="flag-"] {
+  display: inline-block;
+  vertical-align: middle;
+  width: $flag-width;
+  height: $flag-height;
+  background-image: url('#{$basepath}flags.png');
+}
+
+/* FLAGS */
+
+@each $country, $datas in $flags {
+
+  $background-position: nth($datas, 2);
+
+  .flag-#{$country} {
+    background-position: $background-position;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Flippable
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* FLIPPABLE */
+
+.flippable {
+
+  @extend .widget;
+  perspective: $flippable-perspective;
+  transform-style: preserve-3d;
+  transform-origin: 50% 50%;
+
+  /* FRONT / BACK */
+
+  &-front,
+  &-back {
+
+    @include fill ();
+    @include last-child-no-gutter ();
+    backface-visibility: hidden;
+    transition: transform $flippable-transition-flip-duration;
+    border-radius: inherit;
+
+    > :only-child {
+      @include fill ();
+      border-radius: inherit;
+    }
+
+  }
+
+  /* FRONT */
+
+  &-front {
+    z-index: 1;
+  }
+
+  /* BACK */
+
+  &-back {
+    position: absolute;
+    top: 0;
+  }
+
+  /* HORIZONTAL */
+
+  &:not(.vertical) {
+
+    /* FRONT */
+
+    .flippable-front {
+      transform: rotateY(0deg);
+    }
+
+    /* BACK */
+
+    .flippable-back {
+      transform: rotateY(-180deg);
+    }
+
+    /* FLIPPED */
+
+    &.flipped {
+
+      /* FRONT */
+
+      .flippable-front {
+        transform: rotateY(180deg);
+      }
+
+      /* BACK */
+
+      .flippable-back {
+        transform: rotateY(0deg);
+      }
+
+    }
+
+  }
+
+  /* VERTICAL */
+
+  &.vertical {
+
+    /* FRONT */
+
+    .flippable-front {
+      transform: rotateX(0deg);
+    }
+
+    /* BACK */
+
+    .flippable-back {
+      transform: rotateX(-180deg);
+    }
+
+    /* FLIPPED */
+
+    &.flipped {
+
+      /* FRONT */
+
+      .flippable-front {
+        transform: rotateX(180deg);
+      }
+
+      /* BACK */
+
+      .flippable-back {
+        transform: rotateX(0deg);
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Footer
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../container/container.scss
+ * ========================================================================= */
+
+/* FOOTER */
+
+footer {
+  @extend .container;
+  border-radius: 0;
+  background-color: $footer-bg-color;
+}
+
+
+/* =========================================================================
+ * Svelto - Form
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* DEFAULT FORM */
+
+form:not(.multiple) {
+  @include last-child-no-gutter ();
+}
+
+
+/* =========================================================================
+ * Svelto - Header
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//FIXME: Object-fit is not cross-browser
+
+/* HEADER */
+
+header {
+
+  @extend .widget;
+
+  /* BAKGROUND */
+
+  .header-background { //TODO: scale it, make the image fill the space
+    @include fill-absolute ();
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; //FIXME: Not supported by IE, not even Edge
+    z-index: -1;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Helpers Responsive
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HIDDEN-*-UP */
+
+//INFO: Screen equal or greater than breakpoint
+
+@include xsmall-up {
+
+  .hidden-xs-up {
+    display: none !important;
+  }
+
+}
+
+@include small-up {
+
+  .hidden-sm-up {
+    display: none !important;
+  }
+
+}
+
+@include medium-up {
+
+  .hidden-md-up {
+    display: none !important;
+  }
+
+}
+
+@include large-up {
+
+  .hidden-lg-up {
+    display: none !important;
+  }
+
+}
+
+@include xlarge-up {
+
+  .hidden-xl-up {
+    display: none !important;
+  }
+
+}
+
+/* HIDDEN-*-DOWN */
+
+//INFO: Screen equal or lesser than next breakpoint
+
+@include xsmall-down {
+
+  .hidden-xs-down {
+    display: none !important;
+  }
+
+}
+
+@include small-down {
+
+  .hidden-sm-down {
+    display: none !important;
+  }
+
+}
+
+@include medium-down {
+
+  .hidden-md-down {
+    display: none !important;
+  }
+
+}
+
+@include large-down {
+
+  .hidden-lg-down {
+    display: none !important;
+  }
+
+}
+
+@include xlarge-down {
+
+  .hidden-xl-down {
+    display: none !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Highlight
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* HIGHLIGHT:AFTER */
+
+%highlight-after {
+  @include fill-absolute ();
+  z-index: $highlight-z-index;
+  content: '';
+  pointer-events: none;
+  border-width: 0;
+  border-style: solid;
+  border-radius: inherit;
+}
+
+/* HIGHLIGHT */
+
+.highlight {
+
+  &:after {
+    @extend %highlight-after;
+  }
+
+  /* STYLES */
+
+  &.highlight-solid:after {
+    border-style: solid;
+  }
+
+  &.highlight-dotted:after {
+    border-style: dotted;
+  }
+
+  &.highlight-dashed:after {
+    border-style: dashed;
+  }
+
+  /* DIRECTIONS */
+
+  &.highlight-top,
+  &.highlight-all {
+
+    &:after {
+      border-top-width: $highlight-size;
+    }
+
+    /* OUTLINED */
+
+    &.outlined:after {
+      top: - $outline-width;
+    }
+
+  }
+
+  &.highlight-right,
+  &.highlight-all {
+
+    &:after {
+      border-right-width: $highlight-size;
+    }
+    /* OUTLINED */
+
+    &.outlined:after {
+      right: - $outline-width;
+    }
+
+  }
+
+  &:not(.highlight-top):not(.highlight-right):not(.highlight-left), //INFO: Default direction if no one has been specified
+  &.highlight-bottom,
+  &.highlight-all {
+
+    &:after {
+      border-bottom-width: $highlight-size;
+    }
+
+    /* OUTLINED */
+
+    &.outlined:after {
+      bottom: - $outline-width;
+    }
+
+  }
+
+  &.highlight-left, &.highlight-all {
+
+    &:after {
+      border-left-width: $highlight-size;
+    }
+
+    /* OUTLINED */
+
+    &.outlined:after {
+      left: - $outline-width;
+    }
+
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $bg: nth($datas, 1);
+
+    &.highlight-#{$name}:after {
+      border-color: $bg !important;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Image
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * @requires ../container/container.scss
+ * ========================================================================= */
+
+/* DEFAULT */
+
+img {
+  $colors: map-get($colors, $image-color);
+  $border: nth($colors, 4);
+  display: flex;
+  border-color: $border;
+  width: 100%;
+  height: auto;
+  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+}
+
+p > img,
+span > img {
+  display: inline-flex;
+  vertical-align: middle;
+  max-width: 100%;
+  width: auto;
+}
+
+/* IMAGE */
+
+.image-wrp {
+
+  @extend .widget;
+  @include color ( $image-color );
+  display: flex;
+  flex-direction: column;
+  min-height: 1px; //INFO: It fixes a bug in IE11 where the images are stretched vertically
+
+  /* LINK */
+
+  > a {
+    margin-bottom: 0 !important;
+  }
+
+  /* IMAGE */
+
+  img {
+    order: 2;
+    border-radius: inherit;
+  }
+
+  /* CAPTION */
+
+  .image-caption {
+
+    @extend .container;
+    @include color ( $image-caption-color );
+    border-radius: 0;
+    margin-bottom: 0;
+    overflow: auto;
+    z-index: 1;
+
+    &:not(.attached) {
+
+      position: absolute;
+      left: 0;
+      right: 0;
+
+      &.on-hover {
+        opacity: 0;
+        transition: opacity $image-caption-transition-opacity-duration;
+      }
+
+      &:not(.top) {
+        bottom: 0;
+      }
+
+      &.top {
+        top: 0;
+      }
+
+    }
+
+    &.attached {
+
+      &:not(.top) {
+        order: 3;
+      }
+
+      &.top {
+        order: 1;
+      }
+
+    }
+
+    &:not(.top) {
+      @include border-bottom-radius ( inherit );
+    }
+
+    &.top {
+      @include border-top-radius ( inherit );
+    }
+
+  }
+
+  &:hover .image-caption:not(.attached).on-hover {
+    opacity: 1;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Infobar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../container/container.scss
+ * ========================================================================= */
+
+/* INFOBAR */
+
+//FIXME: It doesn't work really good on mobile
+
+.infobar {
+
+  @extend .container;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+
+  /* INSET */
+
+  &.inset {
+    padding: 0;
+  }
+
+  /* SECTIONS */
+
+  > * {
+    @include last-child-no-gutter ();
+    margin-bottom: 0 !important;
+  }
+
+  /* SECTIONS GUTTER */
+
+  > :not(:first-child):not(.infobar-bottom) {
+    margin-left: $gutter;
+  }
+
+  /* LEFT */
+
+  &-left {
+    flex-shrink: 0;
+    order: 0;
+  }
+
+  /* CENTER */
+
+  &-center {
+
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    flex-basis: 0;
+    order: 1;
+
+    /* TITLE / SUBTITLE */
+
+    .infobar-title,
+    .infobar-subtitle {
+      @include last-child-no-gutter ();
+      display: flex;
+      margin-bottom: 0 !important;
+    }
+
+    /* TITLE */
+
+    .infobar-title {
+      @include size ( $infobar-title-size );
+    }
+
+  }
+
+  /* RIGHT */
+
+  &-right {
+    flex-shrink: 0;
+    order: 2;
+  }
+
+  /* BOTTOM */
+
+  &-bottom { //FIXME: Cannot be used for not 100% wider elements, or the .infobar will be bigger than needed (for instance take a look at `noty`)
+    order: 3;
+    width: 100%;
+    margin-top: $gutter;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Input
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+input {
+
+  @extend .widget;
+  @include color ( $input-color );
+  display: flex;
+  flex-shrink: 1;
+  border-radius: $input-border-radius;
+  min-height: $line-height-em + ( $input-padding-vertical * 2 );
+  padding: $input-padding-vertical $input-padding-horizontal;
+
+  /* PLACEHOLDER */
+
+  &::placeholder {
+    color: nth(map-get($colors, $input-color), 6);
+    opacity: $input-placeholder-opacity;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $text: nth($datas, 6);
+
+    &.#{$name}::placeholder {
+      color: $text !important;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+    border-color: $color-error !important;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border-color: $color-success !important;
+  }
+
+  /* UNOUTLINED */
+
+  &:not(.outlined) {
+    border: none;
+  }
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-height: calc(#{$line-height-em + ( $input-padding-vertical * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $input-padding-horizontal * 2 )} + #{$outline-width * 2});
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-height: calc(#{$line-height-em + ( $input-compact-padding-vertical * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $input-compact-padding-horizontal * 2 )} + #{$outline-width * 2});
+    }
+
+  }
+
+  /* FLUID */
+
+  &.fluid {
+    width: 100%;
+  }
+
+}
+
+/* RESET NUMBER INPUTS */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* RESET INVALID STYLE */
+
+input:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* REMOVE CLEAR ICON */
+
+input::-ms-clear {
+    display: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Keyframes
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Is it useful/needed?
+
+/* KEYFRAMES */
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Modal
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MODAL */
+
+//FIXME: How does an overlay inside a modal work? Maybe it's buggy
+//FIXME: Not centered on Dolphin Browser, probably translateX doesn't work, strange
+
+//FIXME: Not working on iPod's Safari
+
+//INFO: In theory pretty much everything can be a modal but it works as expected with `card` and `card`-like markups
+
+.modal {
+
+  @include z-depth ( $modal-z-depth );
+  position: fixed;
+  z-index: $modal-z-index;
+  transition-property: transform, opacity;
+  transition-duration: $modal-transition-all-duration;
+  margin: 0;
+  cursor: pointer;
+
+  /* CHILDREN */
+
+  > * {
+    cursor: auto;
+  }
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    content: '';
+    position: absolute;
+    width: 400vw;
+    height: 400vh;
+    top: -200vh;
+    left: -200vw;
+    z-index: -1;
+    background-color: $modal-background-color;
+  }
+
+  /* NOT FULLSCREEN */
+
+  &:not(.fullscreen) {
+    transform: translate(-50%, -50%) scale(1);
+    top: 50%;
+    left: 50%;
+    max-width: $modal-max-width;
+    max-height: $modal-max-height; //FIXME: On iOS a value of 100vh will exceed the actual visible viewport, maybe instead of using vw and vh center using fill-absolute and margin: auto, but apply some positive values to the top, right, bottom and left properties, it should work, maybe...
+  }
+
+  /* FULLSCREEN */
+
+  &.fullscreen {
+    @include fill-fixed ();
+    transform: scale(1);
+    border-width: 0;
+    border-radius: 0;
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+
+    /* MODAL & BACKGROUND */
+
+    & {
+      pointer-events: none;
+      opacity: 0;
+    }
+
+    /* NOT FULLSCREEN */
+
+    &:not(.fullscreen) {
+      transform: translate(-50%, -50%) scale($modal-closed-scale);
+    }
+
+    /* FULLSCREEN */
+
+    &.fullscreen {
+      transform: scale($modal-closed-scale);
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Multiple
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* MULTIPLE */
+
+//TODO: Add a 'lefted', 'righted' (like 'centered') classes for aligning the content to the left or right
+
+.multiple {
+
+  border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+
+  /* HORIZONTAL GUTTER */
+
+  &:not(.no-wrap):not(.vertical):not(.joined) { //INFO: Here the gutter is needed
+
+    @include margin-horizontal ( - $gutter-half );
+
+    > * {
+      @include margin-horizontal ( $gutter-half );
+    }
+
+  }
+
+  &.no-wrap:not(.joined):not(.vertical) > :not(.multiple) { //INFO: Here we just need the gutter in between
+
+    &:not(:first-child) {
+      margin-left: $gutter-half;
+    }
+
+    &:not(:last-child) {
+      margin-right: $gutter-half;
+    }
+
+  }
+
+  &.vertical > .multiple {
+
+    @include margin-horizontal ( 0 !important ); //FIXME: We shouldn't use `!important`
+
+    > :first-child {
+      margin-left: 0;
+    }
+
+    > :last-child {
+      margin-right: 0;
+    }
+
+  }
+
+  /* CENTERED */
+
+  &.x-centered {
+    justify-content: center;
+  }
+
+  &.y-centered {
+    align-items: center;
+  }
+
+  &.centered {
+    justify-content: center;
+    align-items: center;
+  }
+
+  /* LIMITED */
+
+  &.limited { //FIXME: It's not perfect... It's padded by the gutter
+
+    @if $max-width-enabled {
+
+      max-width: $max-width;
+
+      @include min-screen ( $max-width ) {
+        @include margin-horizontal ( auto !important );
+        display: flex;
+      }
+
+    }
+
+  }
+
+  /* NO WRAP */
+
+  &.no-wrap {
+    flex-wrap: nowrap;
+  }
+
+  /* FLUID / EQUAL */
+
+  &.fluid,
+  &.equal {
+
+    &:not(.vertical) {
+
+      > * {
+        flex-grow: 1;
+        flex-shrink: 0;
+      }
+
+      > input,
+      > textarea {
+        flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+      }
+
+    }
+
+    &.vertical > * {
+      width: 100%;
+    }
+
+  }
+
+  /* EQUAL */
+
+  &.equal > * {
+    flex-basis: 0%; //INFO: IE-10-11 misinterpreter a unitless 0 flex-basis
+  }
+
+  /* JOINED */
+
+  &.joined {
+
+    flex-wrap: nowrap;
+    align-items: stretch;
+
+    &:not(.vertical) {
+
+      > :not(:last-child) {
+
+        @include border-right-radius ( 0 );
+        margin-right: 0;
+        border-right-width: 0;
+
+        &.multiple > :last-child {
+          @include border-right-radius ( 0 );
+        }
+
+      }
+
+      > :not(:first-child) {
+
+        @include border-left-radius ( 0 );
+        margin-left: 0;
+
+        &.multiple > :not(:last-child) {
+          @include border-left-radius ( 0 );
+        }
+
+      }
+
+      &.no-separators {
+
+        > :not(:first-child) {
+
+          border-left-width: 0;
+
+          &.multiple > * {
+            border-left-width: 0;
+          }
+
+        }
+
+      }
+
+    }
+
+    &.vertical {
+
+      > :not(:last-child) {
+
+        @include border-bottom-radius ( 0 );
+        margin-bottom: 0;
+        border-bottom-width: 0;
+
+        &.multiple > * {
+          @include border-bottom-radius ( 0 );
+        }
+
+        &.multiple.no-wrap > *,
+        &.multiple.joined > * {
+          margin-bottom: 0;
+          border-bottom-width: 0;
+        }
+
+      }
+
+      > :not(:first-child) {
+
+        @include border-top-radius ( 0 );
+
+        &.multiple > * {
+          @include border-top-radius ( 0 );
+        }
+
+      }
+
+      &.no-separators {
+
+        > :not(:first-child) {
+
+          border-top-width: 0;
+
+          &.multiple > * {
+            border-top-width: 0;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  /* STRETCHED */
+
+  &.stretched {
+
+    align-items: stretch;
+
+    > .multiple.vertical {
+
+      display: flex;
+
+      > * {
+        flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      }
+
+    }
+
+  }
+
+  /* VERTICAL */
+
+  &.vertical {
+    flex-direction: column;
+  }
+
+  /* HORIZONTAL GUTTER */
+
+  > .multiple.no-wrap {
+
+    &:not(:first-child) {
+      margin-left: $gutter-half;
+    }
+
+    &:not(:last-child) {
+      margin-right: $gutter-half;
+    }
+
+  }
+
+}
+
+/* MULTIPLE IN TABLE CELL */
+
+table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` shouldn't take as much space as possible (`display: flex`) but just the required, so that the columns can be better spaced //FIXME: It's ugly
+  display: inline-flex;
+}
+
+
+/* =========================================================================
+ * Svelto - Navbar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//INFO: The `attached-*` navbar must be placed before the header tag, otherwise the CSS selectors will not work
+//TODO: Add a class that makes the navbar stays below the toolbar, in that case the toolbar should have an higher z-index than the navbar probably, or maybe pulling it down it's enough (probably not since the background is much larger than the visible part)
+
+//TODO: Not working on Dolphin browser
+//FIXME: Not working on iPod's Safari
+
+/* MIXINS */
+
+@mixin open () {
+
+  transform: translateX(0) translateY(0) !important;
+  pointer-events: auto;
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+}
+
+@mixin attach () {
+
+  @include z-depth ( $navbar-attached-z-depth );
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    pointer-events: none;
+    opacity: 0;
+  }
+
+  /* LEFT */
+
+  &.left {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-left: $navbar-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        left: $navbar-vertical-width;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-left: $navbar-slim-vertical-width;
+
+        /* HEADER */
+
+        > header.fixed {
+          left: $navbar-slim-vertical-width;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-right: $navbar-vertical-width;
+
+      /* HEADER */
+
+      > header.fixed {
+        right: $navbar-vertical-width;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-right: $navbar-slim-vertical-width;
+
+        /* HEADER */
+
+        > header.fixed {
+          right: $navbar-slim-vertical-width;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* TOP */
+
+  &.top {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-top: $navbar-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        top: $navbar-horizontal-height;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-top: $navbar-slim-horizontal-height;
+
+        /* HEADER */
+
+        > header.fixed {
+          top: $navbar-slim-horizontal-height;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* CONTENT */
+
+    ~ #content {
+
+      margin-bottom: $navbar-horizontal-height;
+
+      /* HEADER */
+
+      > header.fixed {
+        bottom: $navbar-horizontal-height;
+      }
+
+    }
+
+    /* SLIM */
+
+    &.slim {
+
+      /* CONTENT */
+
+      ~ #content {
+
+        margin-bottom: $navbar-slim-horizontal-height;
+
+        /* HEADER */
+
+        > header.fixed {
+          bottom: $navbar-slim-horizontal-height;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+/* NAVBAR */
+
+.navbar {
+
+  @include z-depth ( $navbar-z-depth );
+  position: fixed;
+  z-index: $navbar-z-index;
+  margin-bottom: 0;
+  border-radius: 0;
+  pointer-events: none;
+  transition: transform $navbar-transition-transform-duration;
+
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right {
+
+    top: 0;
+    bottom: 0;
+    width: $navbar-vertical-width;
+
+    /* SLIM */
+
+    &.slim {
+      width: $navbar-slim-vertical-width;
+    }
+
+  }
+
+  /* LEFT */
+
+  &.left {
+
+    left: 0;
+    transform: translateX(- $navbar-closed-vertical-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateX(- $navbar-slim-closed-vertical-spacing);
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    right: 0;
+    transform: translateX($navbar-closed-vertical-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateX($navbar-slim-closed-vertical-spacing);
+    }
+
+  }
+
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom {
+
+    right: 0;
+    left: 0;
+    height: $navbar-horizontal-height;
+
+    /* SLIM */
+
+    &.slim {
+      height: $navbar-slim-horizontal-height;
+    }
+
+  }
+
+  /* TOP */
+
+  &.top {
+
+    top: 0;
+    transform: translateY(- $navbar-closed-horizontal-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateY(- $navbar-slim-closed-horizontal-spacing);
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    bottom: 0;
+    transform: translateY($navbar-closed-horizontal-spacing);
+
+    /* SLIM */
+
+    &.slim {
+      transform: translateY($navbar-slim-closed-horizontal-spacing);
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+    @include open ();
+  }
+
+  /* ATTACHED */
+
+  &.attached {
+    @include open ();
+    @include attach ();
+  }
+
+  @include xsmall-up {
+
+    &.attached-xs {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include small-up {
+
+    &.attached-sm {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include medium-up {
+
+    &.attached-md {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include large-up {
+
+    &.attached-lg {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  @include xlarge-up {
+
+    &.attached-xl {
+      @include open ();
+      @include attach ();
+    }
+
+  }
+
+  /* BEFORE (BACKGROUND) */
+
+  &:before {
+    content: '';
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+    width: 400vw;
+    height: 400vh;
+    top: -200vh;
+    left: -200vw;
+    z-index: -1;
+    cursor: pointer;
+    background-color: $navbar-background-color;
+    transition: opacity $navbar-background-transition-opacity-duration;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Noty
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//TODO: Add transparentize back, in a wise, space efficient way
+//FIXME: The columns doesn't shrink when necessary in IE-10-11
+
+/* MIXINS */
+
+@mixin expand-queue {
+
+  width: 100%;
+  margin: 0 !important;
+
+  &:not(:empty) {
+    @include z-depth ( $noty-z-depth );
+  }
+
+  .noty {
+    @include z-depth ( 0 );
+    width: 100%;
+    margin: 0 !important;
+    border-right-width: 0;
+    border-left-width: 0;
+    border-radius: 0;
+  }
+
+}
+
+/* MEDIA QUERIES */
+
+@if $noty-full-enabled == true {
+
+  @include max-screen ( $noty-full-breakpoint ) {
+
+    /* QUEUES */
+
+    .noty-queues {
+
+      // @include z-depth ( $noty-z-depth ); //FIXME: We should attach the z-depth only if actually there are some noties
+
+      /* TOP */
+
+      &.top {
+
+        /* ROW */
+
+        .noty-queues-row {
+          flex-direction: column;
+        }
+
+        /* NOTY */
+
+        .noty {
+          border-top-width: 0;
+          border-bottom-width: $outline-width;
+          border-bottom-style: solid;
+        }
+
+      }
+
+      /* BOTTOM */
+
+      &.bottom {
+
+        /* ROW */
+
+        .noty-queues-row {
+          flex-direction: column-reverse;
+        }
+
+        /* NOTY */
+
+        .noty {
+          border-bottom-width: 0;
+          border-top-width: $outline-width;
+          border-top-style: solid;
+        }
+
+      }
+
+    }
+
+    /* QUEUE */
+
+    .noty-queue {
+      @include expand-queue ();
+      box-shadow: none !important;
+    }
+
+  }
+
+}
+
+//INFO: IE-10-11 Fix so that noties won't expand over the viewport
+
+_:-ms-input-placeholder, :root .noty-queues  {
+
+  /* TOP */
+
+  &.top {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    /* ROW */
+
+    .noty-queues-row {
+      flex-direction: column;
+    }
+
+  }
+
+  /* QUEUES ROW */
+
+  .noty-queues-row {
+    align-items: flex-start;
+  }
+
+  /* QUEUE */
+
+  .noty-queue:not(.expanded) {
+
+    width: calc(100% - #{$gutter * 2});
+    margin-right: $gutter;
+
+    /* NOTY */
+
+    .noty {
+      max-width: 100%;
+    }
+
+  }
+
+}
+
+/* NOTY QUEUES */
+
+.noty-queues {
+
+  position: fixed;
+  z-index: $noty-z-index;
+  display: flex;
+  left: 0;
+  right: 0;
+  flex-wrap: wrap;
+  width: 100%;
+  pointer-events: none;
+
+  /* TOP */
+
+  &.top {
+
+    top: 0;
+
+    /* ROW */
+
+    .noty-queues-row {
+      align-items: flex-start;
+    }
+
+    /* QUEUE */
+
+    .noty-queue {
+
+      flex-direction: column;
+
+      /* NOTY */
+
+      .noty {
+        margin-top: $gutter;
+      }
+
+      /* EXPANDED */
+
+      &.expanded .noty {
+        border-top-width: 0;
+        border-bottom-width: $outline-width;
+        border-bottom-style: solid;
+      }
+
+    }
+
+  }
+
+  /* BOTTOM */
+
+  &.bottom {
+
+    bottom: 0;
+
+    /* ROW */
+
+    .noty-queues-row {
+      align-items: flex-end;
+    }
+
+    /* QUEUE */
+
+    .noty-queue {
+
+      flex-direction: column-reverse;
+
+      /* NOTY */
+
+      .noty {
+        margin-bottom: $gutter;
+      }
+
+      /* EXPANDED */
+
+      &.expanded .noty {
+        border-bottom-width: 0;
+        border-top-width: $outline-width;
+        border-top-style: solid;
+      }
+
+    }
+
+  }
+
+  /* ROW */
+
+  &-row {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+}
+
+/* NOTY QUEUE */
+
+.noty-queue {
+
+  display: flex;
+
+  /* LEFT */
+
+  &.left {
+
+    align-items: flex-start;
+
+    &:not(:empty) {
+      margin-left: $gutter;
+    }
+
+  }
+
+  /* CENTER */
+
+  &.center {
+
+    align-items: center;
+    margin-right: $gutter;
+    margin-left: $gutter;
+
+    &:empty {
+      margin-right: $gutter-half;
+      margin-left: $gutter-half;
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    align-items: flex-end;
+
+    &:not(:empty) {
+      margin-right: $gutter;
+    }
+
+  }
+
+  /* EXPANDED */
+
+  &.expanded {
+    @include expand-queue ();
+  }
+
+}
+
+/* NOTY */
+
+.noty {
+
+  @include z-depth ( $noty-z-depth );
+  border-radius: $noty-border-radius;
+  pointer-events: auto;
+  transition-property: opacity, font-size, padding, margin;
+  transition-duration: $noty-transition-all-duration;
+  transform: translateZ(0);
+
+  /* INFOBAR */
+
+  .infobar {
+    background-color: transparent;
+    color: inherit;
+    margin-bottom: 0;
+    border-radius: inherit;
+  }
+
+  /* BUTTONS */
+
+  &-buttons {
+    padding-left: $gutter;
+    padding-right: $gutter;
+  }
+
+  /* IMG */
+
+  &-img {
+
+    width: $noty-img-size;
+
+    @if $noty-img-rounded == true {
+      border-radius: 10000px 10000px;
+    } @else {
+      border-radius: $noty-border-radius;
+    }
+
+  }
+
+  /* CLOSED */
+
+  &:not(.open) {
+    opacity: 0;
+    font-size: 0; //FIXME: this one should be enough for both padding and margin, but we are not using ems everywhere
+    padding: 0;
+    margin: 0;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Outline
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* OUTLINE */
+
+.outlined {
+
+  border-width: $outline-width;
+  border-style: $outline-style;
+
+  /* STYLES */
+
+  &.outlined-solid {
+    border-style: solid;
+  }
+
+  &.outlined-dotted {
+    border-style: dotted;
+  }
+
+  &.outlined-dashed {
+    border-style: dashed;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $bg: nth($datas, 1);
+
+    &.outlined-#{$name} {
+      border-color: $bg !important;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Overlay
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//INFO: An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
+//FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
+//FIXME: `blurrer` doesn't work
+
+/* OVERLAY */
+
+.overlay {
+
+  @include center-absolute-fill ();
+  @include last-child-no-gutter ();
+  z-index: $overlay-z-index;
+  display: flex;
+  opacity: 0;
+  transition: opacity $overlay-transition-opacity-duration;
+  pointer-events: none;
+  background-color: transparent;
+  border-radius: inherit;
+
+  /* OUTLINED PARENT */
+
+  .outlined > & {
+    top: - $outline-width;
+    right: - $outline-width;
+    bottom: - $outline-width;
+    left: - $outline-width;
+  }
+
+  /* CONTAINER */
+
+  &.container {
+    overflow: auto;
+  }
+
+  /* SIBLINGS */
+
+  ~ * {
+    transition: opacity $overlay-siblings-transition-opacity-duration; //INFO: It interferes with other widgets probably //FIXME
+  }
+
+  /* DIMMER */
+
+  &.dimmer {
+    @include color ( $overlay-dimmer-color );
+    background-color: $overlay-dimmer-background-color;
+  }
+
+  /* BLURRER */
+
+  &.blurrer {
+
+    /* SIBLINGS */
+
+    ~ * {
+      transition-property: opacity, filter !important;
+      transition-duration: $overlay-siblings-transition-opacity-duration !important;
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+
+    opacity: 1;
+    pointer-events: auto;
+
+    /* SIBLINGS */
+
+    ~ * {
+      opacity: $overlay-siblings-opacity;
+      pointer-events: none;
+    }
+
+
+    /* BLURRER */
+
+    &.blurrer {
+
+      /* SIBLINGS */
+
+      ~ * {
+        @extend %blurred;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Pager
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//FIXME: There's a bug in Yandex browser, when doing `justify-content: space-between` the first elemenet doesn't move to the left
+
+/* PAGER */
+
+.pager {
+
+  /* SEPARATED */
+
+  &:not(.joined) {
+    justify-content: space-between !important;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Parallax
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* PARALLAX */
+
+//FIXME: Not working on Firefox, Edge and IE
+//TODO: Add a non scrollable, classic, parallax that react the mouse movements
+
+.parallax {
+
+  @extend .widget;
+  height: $parallax-height;
+  overflow-x: hidden;
+  overflow-y: auto;
+  perspective: $parallax-perspective;
+
+  /* LAYERS */
+
+  &-layers {
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+  }
+
+  /* LAYER */
+
+  &-layer {
+
+    @include fill-absolute ();
+
+    /* LAYER LEVEL */
+
+    &-deep {
+      transform: translateZ($parallax-deep-translate-z) scale($parallax-deep-scale);
+      z-index: 1;
+    }
+
+    &-background {
+      transform: translateZ($parallax-background-translate-z) scale($parallax-background-scale);
+      z-index: 2;
+    }
+
+    &-base {
+      transform: translateZ(0);
+      z-index: 3;
+    }
+
+    &-foreground {
+      transform: translateZ($parallax-foreground-translate-z) scale($parallax-foreground-scale);
+      z-index: 4;
+    }
+
+  }
+
+  /* SAMPLE CONTENT */
+
+  &-content-sample { //FIXME: Remove this component, it shouldn't be needed
+    @include center-transform-absolute ();
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Placeholder
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* PLACEHOLDER */
+
+.placeholder {
+  @extend .widget;
+  @include color ( $placeholder-color );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================================================================
+ * Svelto - Prism
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+//SOURCE: http://prismjs.com/download.html?themes=prism&languages=markup+css+css-extras+clike+javascript
+
+/* PRISM */
+
+code[class*='language-'] {
+
+  font-family: Consolas, Monaco, 'Andale Mono', monospace;
+  direction: ltr;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  line-height: 1.5;
+  tab-size: 4;
+  hyphens: none;
+
+  .token {
+
+    &.comment,
+    &.prolog,
+    &.doctype,
+    &.cdata {
+      color: darken($color-teal, 15);
+    }
+
+    &.punctuation {
+      color: darken($color-gray, 15);
+    }
+
+    &.property,
+    &.tag,
+    &.boolean,
+    &.number,
+    &.constant,
+    &.symbol,
+    &.deleted {
+      color: darken($color-pink, 15);
+    }
+
+    &.selector,
+    &.attr-name,
+    &.string,
+    &.char,
+    &.builtin,
+    &.inserted {
+      color: darken($color-green, 15);
+    }
+
+    &.atrule,
+    &.attr-value,
+    &.keyword {
+      color: darken($color-blue, 15);
+    }
+
+    &.function {
+      color: darken($color-red, 15);
+    }
+
+    &.regex,
+    &.important,
+    &.variable {
+      color: darken($color-orange, 15);
+    }
+
+    &.important {
+      font-weight: bold;
+    }
+
+    &.entity {
+      cursor: help;
+    }
+
+    &.operator,
+    &.entity,
+    &.url {
+      color: darken($color-teal, 15);
+      background: hsla(0, 0%, 100%, .5);
+    }
+
+  }
+
+  .namespace {
+  	opacity: 0.7;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Progressbar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for vertical progressbar (not particularly useful, but when attached it will be an appropriate example of horizontally attached widget)
+//TODO: Add an infinite linear loading progressbar, like before downloading something from the play store
+
+/* PROGRESSBAR */
+
+.progressbar {
+
+  @extend .widget;
+  @include color ( $progressbar-color );
+  display: flex;
+  overflow: hidden;
+  height: $progressbar-height;
+  border-radius: $progressbar-border-radius;
+  transform: translateZ(0); //INFO: Fixes an overflowing bug, it happens only on helpers -> attached as far as I could see
+
+  /* HIGHLIGHT */
+
+  &-highlight {
+    @include color ( $progressbar-highlight-color );
+    @include text-truncate ();
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: min-width $progressbar-transition-all-duration;
+  }
+
+  /* LABELED */
+
+  &.labeled {
+
+    /* AFTER (LABEL) */
+
+    .progressbar-highlight:after {
+      content: attr(data-value);
+      font-size: $progressbar-label-font-size;
+      padding: 0 $gutter-half;
+    }
+
+  }
+
+  /* STRIPED */
+
+  &.striped {
+
+    .progressbar-highlight {
+      transform: translateZ(0);
+    }
+
+    .progressbar-highlight:before {
+      @include fill-absolute ();
+      background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
+      content: '';
+      pointer-events: none;
+      background-size: $progressbar-stripe-size $progressbar-stripe-size;
+    }
+
+    &:not(.disabled) .progressbar-highlight:before {
+      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear 0s infinite;
+    }
+
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    height: $progressbar-compact-height;
+
+    /* AFTER (LABEL) */
+
+    .progressbar-highlight:after {
+      font-size: $progressbar-compact-label-font-size;
+    }
+
+  }
+
+  /* SLIM */
+
+  &.slim {
+
+    height: $progressbar-slim-height;
+
+    /* AFTER (LABEL) */
+
+    .progressbar-highlight:after {
+      font-size: $progressbar-slim-label-font-size;
+    }
+
+  }
+
+}
+
+/* KEYFRAMES */
+
+@keyframes progressbar-stripes-move {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: $progressbar-stripe-size $progressbar-stripe-size;
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Radio
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../checkbox/checkbox.scss
+ * ========================================================================= */
+
+/* RADIO */
+
+//TODO: Add cooler radio animation, closer to material design
+
+.radio {
+  @extend .checkbox;
+}
+
+
+/* =========================================================================
+ * Svelto - Raisable
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//INFO: The maximum `z-depth` value cannot be raised since we don't provide any greater `z-depth` value
+
+/* RAISABLE */
+
+.raisable {
+
+  transition: box-shadow $raisable-transition-box-shadow-duration;
+
+  &:not(.disabled) {
+
+    @each $depth, $shadow in $z-depths {
+
+      @if $depth == 0 { //INFO: Raise it even if the `z-depth-0` class has not been included
+
+        &:hover {
+          @include z-depth-raised ( $depth, !important );
+        }
+
+      }
+
+      &.z-depth-#{$depth}:hover {
+        @include z-depth-raised ( $depth, !important );
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Rater
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../icons/icons.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* RATER */
+
+//FIXME: Only do the rating stuff if .ratable
+
+.rater {
+
+  @extend .widget;
+  display: inline-flex; //INFO: Instead of `flex`, so that when we are hovering it we are also actually overing a star, with `flex` it will expand and we may hover no stars but still trigger the styling
+
+  /* STAR */
+
+  &-star {
+
+    /* BEFORE (ICON) */
+
+    &:before {
+      @extend i.icon;
+      content: 'star_border';
+      margin-bottom: 0;
+    }
+
+    /* ACTIVE */
+
+    &.active {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: 'star';
+        color: $rater-star-active-color;
+      }
+
+    }
+
+    /* HALF ACTIVE */
+
+    &.half-active {
+
+      /* BEFORE (ICON) */
+
+      &:before {
+        content: 'star_half';
+        color: $rater-star-active-color;
+      }
+
+    }
+
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* HOVER / ACTIVE */
+
+    &:hover,
+    &:active {
+
+      /* STAR */
+
+      .rater-star {
+
+        /* BEFORE (ICON) */
+
+        &:before {
+          content: 'star';
+          color: $rater-star-active-color;
+        }
+
+        /* NEXT STARS */
+
+        &:hover ~ .rater-star,
+        &:active ~ .rater-star {
+
+          /* BEFORE (ICON) */
+
+          &:before {
+            content: 'star_border';
+            color: inherit;
+          }
+
+        }
+
+      }
+
+    }
+
+    /* STAR */
+
+    .rater-star {
+      cursor: pointer;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Remote Modal
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* REMOTE MODAL PLACEHOLDER */
+
+.remote-modal-placeholder {
+
+  /* CARD BLOCK */
+
+  > .card-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: $remote-modal-placeholder-size;
+    min-height: $remote-modal-placeholder-size;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Ripple
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* RIPPLE */
+
+//FIXME: There's a strange border, try to click the brown button, when zoomed there's a small white border at the bottom that gets removed after the animation finished (it's caused by the overflow:hidden, but why?!)
+
+.ripple {
+
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
+
+  /* CIRCLE */
+
+  > .ripple-circle {
+
+    position: absolute;
+    width: $ripple-circle-width;
+    pointer-events: none;
+    z-index: $ripple-circle-z-width;
+
+    &:before {
+      position: absolute;
+      left: -50%;
+      width: 100%;
+      margin-top: -50%;
+      padding-bottom: 100%;
+      content: '';
+      transition-property: transform, opacity;
+      transition-duration: $ripple-transition-show-duration;
+      transition-timing-function: $ripple-transition-timing-function;
+      transform: scale(0);
+      opacity: 0;
+      border-radius: 50%;
+      background-color: $ripple-color-default;
+    }
+
+    /* SHOW */
+
+    &.ripple-circle-show:before {
+      transform: scale(1);
+      opacity: 1 - $ripple-transparentize-amount;
+    }
+
+    /* HIDE */
+
+    &.ripple-circle-hide:before {
+      transition-duration: $ripple-transition-hide-duration;
+      opacity: 0;
+    }
+
+  }
+
+  /* CENTEED */
+
+  &-centered > .ripple-circle {
+    top: 50% !important;
+    left: 50% !important;
+    width: $ripple-centered-circle-width; //FIXME: In this way the behavior is not consistent, but it generally looks better...
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $bg: nth($datas, 1);
+
+    &.ripple-#{$name} > .ripple-circle:before {
+      background-color: $bg;
+    }
+
+  }
+
+}
+
+a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
+  z-index: -1;
+}
+
+
+/* =========================================================================
+ * Svelto - Sections
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SECTIONS */
+
+.sections {
+
+  position: relative;
+  display: flex;
+  flex-wrap: nowrap;
+  margin-bottom: $gutter;
+
+  /* SEGMENTS */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  /* CENTER */
+
+  //INFO: Centering the center segment, if the left one xor the right one is missing
+  //INFO: An obvious `left + center + right` or `right + center + left` (RTL languages) order is assumed
+
+  > .section-center:first-child,
+  > .section-center:last-child {
+    @include center-transform-absolute ();
+  }
+
+}
+
+/* SEGMENTS */
+
+.section-left,
+.section-center,
+.section-right {
+  @include last-child-no-gutter ();
+  display: flex;
+  flex-grow: 1;
+  flex-shrink: 1;
+  flex-basis: auto;
+  align-items: center;
+  margin-bottom: $gutter;
+}
+
+/* LEFT */
+
+.section-left {
+  justify-content: flex-start;
+}
+
+/* CENTER */
+
+.section-center {
+
+  justify-content: center;
+
+  &.forced {
+    @include center-transform-absolute ();
+  }
+
+}
+
+/* RIGHT */
+
+.section-right {
+  justify-content: flex-end;
+}
+
+
+/* =========================================================================
+ * Svelto - Select
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* SELECT BTN */
+
+.select-btn {
+
+  /* DEFAULT SELECT */
+
+  select {
+    @include fill-absolute ();
+    width: 100%; //INFO: Or it will not streatch on mobile Chrome
+    border: none;
+    appearance: none;
+    border-radius: inherit;
+    cursor: pointer;
+    font-size: $font-size;
+    opacity: 0;
+    margin: 0 !important;
+    z-index: 1;
+  }
+
+  /* VALUEHOLDER */
+
+  .valueholder {
+
+    display: inline-block;
+
+    &.right:before, &.left:before {
+      content: '\a0'; // &nbsp;
+    }
+
+  }
+
+  /* TRIGGER DIRECTION */
+
+  &.dropdown-trigger-top {
+    @include border-top-radius ( 0 );
+  }
+
+  &.dropdown-trigger-bottom {
+    @include border-bottom-radius ( 0 );
+  }
+
+  &.dropdown-trigger-right {
+    @include border-right-radius ( 0 );
+  }
+
+  &.dropdown-trigger-left {
+    @include border-left-radius ( 0 );
+  }
+
+}
+
+/* SELECT DROPDOWN */
+
+.select-dropdown {
+
+  @include z-depth ( $select-z-depth );
+
+  /* CARD BLOCK */
+
+  .card-block {
+    padding: $gutter-half 0;
+  }
+
+  /* BUTTON */
+
+  .button {
+    display: block;
+    border-radius: 0;
+    margin-bottom: 0;
+  }
+
+  /* DIVIDER */
+
+  .divider {
+    margin-top: $gutter-half;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Selectable
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* SELECTABLE TABLE */
+
+table.table.selectable {
+
+  /* ROW */
+
+  tbody tr {
+
+    /* SELECTABLE */
+
+    &:not(.empty) {
+      cursor: pointer;
+    }
+
+    /* SELECTED */
+
+    &.selected {
+      background-color: $table-selectable-row-selected-color !important;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Shapes
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* SHAPE */
+
+%shape {
+  @extend .widget;
+  flex-grow: 0 !important;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+}
+
+/* TRIANGLE */
+
+.triangle {
+
+  @extend %shape;
+
+  &.up {
+    @include triangle ( $triangle-size, up );
+  }
+
+  &.down,
+  &:not(.up):not(.left):not(.right) { //INFO: Default direction if no one has been specified {
+    @include triangle ( $triangle-size, down );
+  }
+
+  &.left {
+    @include triangle ( $triangle-size, left );
+  }
+
+  &.right {
+    @include triangle ( $triangle-size, right );
+  }
+
+}
+
+/* SQUARE */
+
+.square {
+  @extend %shape;
+  @include square ( $square-size );
+}
+
+/* SQUARE SAMPLE */
+
+.square-sample {
+
+  @extend %shape;
+  @include square ( $square-sample-size );
+  overflow: hidden;
+  padding: $gutter-half;
+
+  /* P */
+
+  > p {
+    @include size ( $square-sample-p-size );
+  }
+
+}
+
+/* CIRCLE */
+
+.circle {
+  @extend %shape;
+  @include circle ( $circle-size );
+}
+
+
+/* =========================================================================
+ * Svelto - Sizes
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+//FIXME: On the example page the XXXX-Large icon is not centered on Firefox Mobile
+
+/* SIZES */
+
+@each $name, $font-size in $sizes {
+
+  .#{$name} {
+    @include size ( $name, !important );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Slider
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../icons/icons.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* SLIDER */
+
+//TODO: Maybe use a tooltip with the number inside instead of the handler we are using right now
+
+.slider {
+
+  @extend .widget;
+  @include color ( $slider-color );
+  display: flex;
+  align-items: stretch;
+  height: $slider-height;
+  border-radius: $border-radius-medium;
+
+  /* OUTLINED */
+
+  &.outlined {
+
+    .slider-min {
+      padding-left: $gutter;
+    }
+
+    .slider-max {
+      padding-right: $gutter;
+    }
+
+  }
+
+  /* INPUT */
+
+  input {
+    display: none;
+  }
+
+  /* MIN / MAX */
+
+  &-min,
+  &-max {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: $slider-min-max-min-width;
+  }
+
+  /* MIN */
+
+  &-min {
+
+    margin-right: $slider-handler-half-size;
+
+    &:after {
+      content: attr(data-min);
+    }
+
+  }
+
+  /* MAX */
+
+  &-max {
+
+    margin-left: $slider-handler-half-size;
+
+    &:after {
+      content: attr(data-max);
+    }
+
+  }
+
+  /* BAR */
+
+  &-bar {
+    display: flex;
+    align-items: center;
+    position: relative;
+    flex-grow: 1;
+    flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  }
+
+  /* UNHIGHLIGHT */
+
+  &-unhighlight {
+    @include color ( $slider-unhighlight-color );
+    position: relative;
+    overflow: hidden;
+    height: $slider-unhighlight-height;
+    border-radius: $slider-unhighlight-border-radius;
+    width: 100%;
+  }
+
+  /* HIGHLIGHT */
+
+  &-highlight {
+    @include color ( $slider-highlight-color );
+    position: absolute;
+    right: 100%;
+    width: 100%;
+    height: 100%;
+    transition: background-color $slider-transition-all-duration;
+  }
+
+  /* HANDLER WRAPPER */
+
+  &-handler-wrp {
+    @include center-absolute ( false, $slider-handler-size );
+    left: 0;
+    margin-left: - $slider-handler-half-size;
+  }
+
+  /* HANDLER */
+
+  &-handler {
+
+    @include color ( $slider-handler-color );
+    @include z-depth ( $slider-handler-z-depth );
+    z-index: 1;
+    width: $slider-handler-size;
+    height: $slider-handler-size;
+    transition-property: transform, background-color;
+    transition-duration: $slider-transition-all-duration;
+    border-radius: $slider-handler-border-radius;
+    text-align: center;
+
+    &:before {
+      @include fill-absolute ();
+      z-index: -1;
+      content: '';
+      transition-property: opacity, transform;
+      transform: scale($switch-handler-before-scale-inactive);
+      transition-duration: $slider-transition-all-duration;
+      opacity: 0;
+      border-radius: $slider-handler-border-radius;
+      background-color: inherit;
+    }
+
+  }
+
+  &-label {
+
+    //FIXME: It's not perfectly centered on Nexus 4 using Chrome
+
+    display: inline-block;
+    vertical-align: middle;
+    font-size: $slider-handler-label-font-size;
+    transition-property: opacity, transform;
+    transition-duration: $slider-transition-all-duration;
+    transform: scale(0);
+    opacity: 0;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* HIGHLIGHT / HANDLER */
+
+    .slider-highlight,
+    .slider-handler {
+      @include color ( 'error', true, !important );
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* HIGHLIGHT / HANDLER */
+
+    .slider-highlight,
+    .slider-handler {
+      @include color ( 'success', true, !important );
+    }
+
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* MIN / MAX */
+
+    .slider-min,
+    .slider-max {
+
+      cursor: pointer;
+
+      &:hover:after {
+        @extend i.icon;
+        margin-bottom: 0;
+      }
+
+    }
+
+    /* MIN */
+
+    .slider-min:hover:after {
+      content: 'remove';
+    }
+
+    /* MAX */
+
+    .slider-max:hover:after {
+      content: 'add';
+    }
+
+    /* BAR */
+
+    .slider-bar {
+
+      cursor: pointer;
+
+      &:active,
+      .slider-handler-wrp.dragging {
+
+        .slider-handler {
+
+          transform: scale($slider-handler-active-transform-scale);
+
+          &:before {
+            transform: scale($switch-handler-before-scale-active);
+            opacity: $switch-handler-before-active-opacity;
+          }
+
+        }
+
+      }
+
+    }
+
+    /* HANDLER */
+
+    .slider-handler {
+      cursor: move;
+    }
+
+  }
+
+  /* HOVER / ACTIVE */
+
+  &:hover,
+  &:active,
+  .slider-handler-wrp.dragging {
+
+    /* LABEL */
+
+    .slider-label {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Sortable
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../icons/icons.scss
+ * ========================================================================= */
+
+/* SORTABLE TABLE */
+
+table.table.sortable {
+
+  /* HEADER */
+
+  th[data-sort] {
+
+    position: relative;
+    cursor: pointer;
+    padding-left: $table-th-sortable-padding-horizontal;
+    padding-right: $table-th-sortable-padding-horizontal;
+
+    /* HOVER */
+
+    &:hover {
+      background-color: $table-th-sortable-hover-bg-color;
+    }
+
+    /* ACTIVE */
+
+    &:active {
+      background-color: $table-th-sortable-active-bg-color;
+    }
+
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
+      @extend i.icon;
+      position: absolute;
+      right: $table-th-sortable-icon-right;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      opacity: 0;
+    }
+
+    /* BEFORE */
+
+    &:before {
+      content: 'arrow_drop_down';
+      top: 0.35em;
+    }
+
+    /* AFTER */
+
+    &:after {
+      content: 'arrow_drop_up';
+      bottom: 0.35em;
+    }
+
+    /* INACTIVE OPACITY */
+
+    &:hover:before,
+    &:hover:after,
+    &.sort-desc:before,
+    &.sort-asc:after {
+      opacity: $table-th-sortable-icon-inactive-opacity;
+    }
+
+    /* ACTIVE OPACITY */
+
+    &.sort-desc:after,
+    &.sort-asc:before {
+      opacity: $table-th-sortable-icon-active-opacity;
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Spinner Overlay
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* SPINNER OVERLAY */
+
+.spinner-overlay {
+
+  align-items: center;
+  justify-content: center;
+
+  /* SPINNER LABEL */
+
+  .spinner-label {
+    margin-bottom: 0;
+    transform: scale(0);
+    transition: transform $spinner-overlay-transition-transform-duration;
+  }
+
+  /* CLOSE */
+
+  &:not(.open) {
+
+    /* SPINNER */
+
+    .spinner {
+
+      animation-play-state: paused;
+
+      /* CIRCLE */
+
+      circle {
+        animation-play-state: paused;
+      }
+
+    }
+
+  }
+
+  /* OPEN */
+
+  &.open {
+
+    /* SPINNER LABEL */
+
+    .spinner-label {
+      transform: scale(1);
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Spinner
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * Fork of http://codepen.io/Bodokh/pen/jEadzj - Eran Bodokh
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for icon at the center of the spinner, sometimes might be useful
+
+//FIXME: Firefox and Edge are not animating stroke-dashoffset, IE is not even animatin stroke-dasharray
+//FIXME: Not working on Dolphin Browser
+
+/* SPINNER */
+
+svg.spinner {
+
+  display: block;
+  width: $spinner-size;
+  height: $spinner-size;
+  margin-bottom: $gutter;
+  background-color: transparent !important;
+  animation: rotate $spinner-animation-rotate-duration linear infinite;
+
+  /* CIRCLE */
+
+  circle {
+    cx: $spinner-size / 2;
+    cy: $spinner-size / 2;
+    r: $spinner-radius;
+    fill: none;
+    stroke-width: $spinner-stroke-width;
+    stroke: $spinner-stroke-color;
+    stroke-linecap: round;
+    stroke-dasharray: 0%, 240%; //INFO: Since IE-10-11 won't animate this we are setting the initial value, so that it will degrade to a rotating dot
+    animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $bg: nth($datas, 1);
+
+    &.#{$name} circle {
+      stroke: $bg !important;
+    }
+
+  }
+
+  /* MULTICOLOR */
+
+  &.multicolor {
+
+    /* CIRCLE */
+
+    circle {
+      animation: dash $spinner-stroke-animation-dash-duration ease-in-out infinite,
+                 multicolor ( $spinner-stroke-animation-dash-duration * 4 ) ease-in-out infinite;
+    }
+
+  }
+
+}
+
+/* SPINNER LABEL */
+
+.spinner-label {
+
+  @extend .widget;
+  @include color ( $spinner-label-color );
+  @include z-depth ( $spinner-label-z-depth );
+  display: flex;
+  border-radius: $spinner-label-border-radius !important;
+  padding: $spinner-label-padding-vertical $spinner-label-padding-horizontal;
+
+  /* SPINNER */
+
+  .spinner {
+    margin-bottom: 0;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $accent: nth($datas, 5);
+
+    &.#{$name} .spinner circle {
+      stroke: $accent !important;
+    }
+
+  }
+
+}
+
+/* KEYFRAMES */
+
+@keyframes rotate {
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dasharray: 0%, 240%;
+    stroke-dashoffset: 0;
+  }
+  50% {
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -60%;
+  }
+  100% {
+    stroke-dasharray: 181%, 240%;
+    stroke-dashoffset: -240%;
+  }
+}
+
+@keyframes multicolor {
+  0%, 24% {
+    stroke: $spinner-multicolor-stroke-color1;
+  }
+  25%, 49% {
+    stroke: $spinner-multicolor-stroke-color2;
+  }
+  50%, 74% {
+    stroke: $spinner-multicolor-stroke-color3;
+  }
+  75%, 99% {
+    stroke: $spinner-multicolor-stroke-color4;
+  }
+}
+
+
+/* =========================================================================
+ * Svelto - Statistic
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* STATISTIC */
+
+.statistic {
+
+  @extend .widget;
+  text-align: center;
+
+  /* PRIMARY */
+
+  &-primary {
+    @include size ( $statistic-primary-size );
+  }
+
+  /* SECONDARY */
+
+  &-secondary {
+    @include size ( $statistic-secondary-size );
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Stepper
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * ========================================================================= */
+
+/* STEPPER */
+
+.stepper input {
+  flex-grow: 1;
+  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+  justify-content: center;
+}
+
+
+/* =========================================================================
+ * Svelto - Switch
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* SWITCH */
+
+.switch {
+
+  @extend .widget;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $switch-handler-size;
+  width: $switch-bar-width + $switch-handler-size;
+
+  /* INPUT */
+
+  input {
+    display: none;
+  }
+
+  /* BAR */
+
+  &-bar {
+    @include color ( $switch-color, true );
+    width: $switch-bar-width;
+    height: $switch-bar-height;
+    border-radius: $switch-bar-height;
+    transition: background-color $switch-transition-all-duration;
+  }
+
+  /* HANDLER */
+
+  &-handler {
+
+    @include color ( $switch-color, true );
+    @include z-depth ( $switch-handler-z-depth );
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: $switch-handler-size;
+    height: $switch-handler-size;
+    border-radius: $switch-handler-size;
+    transition-property: background-color, transform;
+    transition-duration: $switch-transition-all-duration;
+
+    &:before {
+      @include fill-absolute ();
+      background-color: inherit;
+      content: '';
+      border-radius: $switch-handler-size;
+      z-index: -1;
+      opacity: 0;
+      transform: scale($switch-handler-before-scale-inactive);
+      transition-property: opacity, transform, background-color;
+      transition-duration: $switch-transition-all-duration;
+    }
+
+    /* DRAGGING */
+
+    &.dragging {
+      transition-property: background-color;
+    }
+
+    /* ICON */
+
+    .icon {
+      position: absolute;
+      font-size: $switch-handler-icon-font-size;
+      width: $switch-handler-icon-size;
+      height: $switch-handler-icon-size;
+      line-height: $switch-handler-icon-size;
+      text-align: center;
+      transition-property: opacity, color;
+      transition-duration: $switch-transition-all-duration;
+      opacity: 0;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    /* BAR / HANDLER */
+
+    .switch-bar,
+    .switch-handler {
+      @include color ( 'error', true, !important );
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* BAR / HANDLER */
+
+    .switch-bar,
+    .switch-handler {
+      @include color ( 'success', true, !important );
+    }
+
+  }
+
+  /* ICON ON / OFF */
+
+  &:not(.checked) .icon-off,
+  &.checked .icon-on {
+    opacity: 1 !important;
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    cursor: pointer;
+
+    /* HANDLER */
+
+    .switch-handler {
+
+      cursor: move;
+
+      &:active,
+      &.dragging {
+
+        &:before {
+          opacity: $switch-handler-before-active-opacity;
+          transform: scale($switch-handler-before-scale-active);
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Table
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* TABLE */
+
+//TODO: Add support for the case when there's no `thead` tag for example, so that the border radius and everything else will work just fine as well
+//TODO: Add responsive tables
+//TODO: Add .reflow (see bootstrap v4)
+//FIXME: The striped table doesn't work anymore
+
+table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
+
+  @extend .widget;
+  @include color ( $table-color );
+  width: 100%;
+  border-collapse: separate;
+  border-radius: inherit;
+
+  /* SECTIONS */
+
+  thead,
+  tbody,
+  tfoot {
+    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  }
+
+  /* CELLS */
+
+  tr {
+    border-color: inherit; //INFO: So that when the children also inherit the border color is actually inherited
+  }
+
+  tr > * {
+    @include last-child-no-gutter ();
+    padding: $gutter;
+    text-align: left;
+    border-width: 0;
+    border-style: solid;
+    border-color: $table-bordered-border-color;
+  }
+
+  /* THEAD */
+
+  thead {
+
+    @include border-top-radius ( inherit );
+    background-color: $table-header-footer-bg-color;
+
+    tr {
+
+      @include border-top-radius ( inherit );
+
+      &:first-child th {
+
+        &:first-child {
+          border-top-left-radius: inherit;
+        }
+
+        &:last-child {
+          border-top-right-radius: inherit;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* TBODY */
+
+  tbody {
+
+    border-radius: inherit;
+
+    tr {
+
+      &.table-row-empty td {
+        height: $table-row-empty-height;
+        text-align: center;
+      }
+
+      &:first-child,
+      &.table-row-empty + tr {
+
+        @include border-top-radius ( inherit );
+
+        td {
+
+          &:first-child {
+            border-top-left-radius: inherit;
+          }
+
+          &:last-child {
+            border-top-right-radius: inherit;
+          }
+
+        }
+
+      }
+
+      &:last-child {
+
+        @include border-bottom-radius ( inherit );
+
+        td {
+
+          &:first-child {
+            border-bottom-left-radius: inherit;
+          }
+
+          &:last-child {
+            border-bottom-right-radius: inherit;
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  thead ~ tbody tr:first-child td,
+  thead ~ tbody .table-row-empty + tr td {
+
+    &:first-child {
+      border-top-left-radius: 0;
+    }
+
+    &:last-child {
+      border-top-right-radius: 0;
+    }
+
+  }
+
+  tfoot + tbody tr:last-child td {
+
+    &:first-child {
+      border-bottom-left-radius: 0;
+    }
+
+    &:last-child {
+      border-bottom-right-radius: 0;
+    }
+
+  }
+
+  /* TFOOT */
+
+  tfoot {
+
+    @include border-bottom-radius ( inherit );
+    background-color: $table-header-footer-bg-color;
+
+    tr {
+
+      @include border-bottom-radius ( inherit );
+
+      &:last-child td {
+
+        &:first-child {
+          border-bottom-left-radius: inherit;
+        }
+
+        &:last-child {
+          border-bottom-right-radius: inherit;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* COMPACT */
+
+  &.compact tr > * {
+    padding: $gutter-half;
+  }
+
+  /* COLLAPSE */
+
+  &.collapse {
+    width: auto;
+  }
+
+  /* EQUAL */
+
+  &.equal {
+
+    table-layout: fixed;
+
+    tr > * {
+      width: 100%;
+    }
+
+  }
+
+  /* SEPARATED / BORDERED */
+
+  &.separated,
+  &.bordered {
+
+    thead th {
+      border-bottom-width: $table-bordered-border-width;
+    }
+
+    tbody tr:not(:last-child) td {
+      border-bottom-width: $table-bordered-border-width;
+    }
+
+    tfoot td {
+      border-top-width: $table-bordered-border-width;
+    }
+
+  }
+
+  /* BORDERED */
+
+  &.bordered {
+
+    tr > * {
+
+      border-left-width: $table-bordered-border-width;
+
+      &:last-child {
+        border-right-width: $table-bordered-border-width;
+      }
+
+    }
+
+    tbody tr {
+
+      &:first-child td,
+      &.table-row-empty + tr td {
+        border-top-width: $table-bordered-border-width;
+      }
+
+      &:last-child td {
+        border-bottom-width: $table-bordered-border-width;
+      }
+
+    }
+
+    thead {
+
+      th {
+        border-top-width: $table-bordered-border-width;
+      }
+
+      ~ tbody tr:first-child td,
+      ~ tbody tr.table-row-empty + tr td {
+        border-top-width: 0;
+      }
+
+    }
+
+    tfoot {
+
+      td {
+        border-bottom-width: $table-bordered-border-width;
+      }
+
+      + tbody tr:last-child td {
+        border-bottom-width: 0;
+      }
+
+    }
+
+  }
+
+  /* STRIPED */
+
+  &.striped tbody tr {
+
+    &:first-child.table-row-empty ~ tr {
+
+      &:nth-child(even) {
+        background-color: $table-striped-row-even-color;
+      }
+
+      &:nth-child(odd) {
+        background-color: $table-striped-row-odd-color;
+      }
+
+    }
+
+    &:first-child:not(.table-row-empty) {
+
+      background-color: $table-striped-row-even-color;
+
+      ~ tr {
+
+        &:nth-child(odd) {
+          background-color: $table-striped-row-even-color;
+        }
+
+        &:nth-child(even) {
+          background-color: $table-striped-row-odd-color;
+        }
+
+      }
+
+    }
+
+  }
+
+  /* HOVERABLE */
+
+  &.hoverable tbody tr:not(.table-row-empty):hover {
+    background-color: $table-hoverable-row-even-color-hover;
+  }
+
+  /* STRIPED & HOVERABLE */
+
+  &.striped.hoverable tbody tr {
+
+    &:first-child.table-row-empty ~ tr {
+
+      &:nth-child(even):hover {
+        background-color: $table-hoverable-row-even-color-hover;
+      }
+
+      &:nth-child(odd):hover {
+        background-color: $table-hoverable-row-odd-color-hover;
+      }
+
+    }
+
+    &:first-child:not(.table-row-empty) {
+
+      &:hover {
+        background-color: $table-hoverable-row-even-color-hover;
+      }
+
+      ~ tr {
+
+        &:nth-child(odd):hover {
+          background-color: $table-hoverable-row-even-color-hover;
+        }
+
+        &:nth-child(even):hover {
+          background-color: $table-hoverable-row-odd-color-hover;
+        }
+
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Tabs
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+//TODO: Add support for tabs in all directions, use `top, right, bottom, left` classes instead of the `horizontal, vertical` abstraction
+
+/* TABS */
+
+.tabs {
+
+  @extend .widget;
+
+  /* TRIGGERS */
+
+  &-triggers {
+
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: stretch;
+    flex-direction: row;
+
+    /* TRIGGER */
+
+    > * {
+      margin-bottom: 0;
+      flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+    }
+
+  }
+
+  /* CONTAINERS */
+
+  &-containers {
+
+    position: relative;
+
+    /* CONTAINER */
+
+    > * {
+
+      display: none;
+      margin-bottom: 0;
+
+      &.active {
+        display: block;
+      }
+
+    }
+
+  }
+
+  /* HORIZONTAL */
+
+  &:not(.vertical) {
+
+    /* TRIGGERS */
+
+    .tabs-triggers {
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-bottom-left-radius: 0;
+      }
+
+      > :not(:first-child) {
+        @include border-left-radius ( 0 );
+        border-left-width: 0;
+      }
+
+      > :not(:last-child) {
+        @include border-right-radius ( 0 );
+      }
+
+      > :last-child {
+        border-bottom-right-radius: 0;
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    .tabs-containers {
+
+      /* CONTAINER */
+
+      > * {
+        @include border-top-radius ( 0 );
+        border-top-width: 0;
+      }
+
+    }
+
+  }
+
+  /* VERTICAL */
+
+  &.vertical {
+
+    display: flex;
+    align-items: stretch;
+    flex-direction: row;
+
+    /* TRIGGERS */
+
+    .tabs-triggers {
+
+      flex-direction: column;
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-top-right-radius: 0;
+      }
+
+      > :not(:first-child) {
+        @include border-top-radius ( 0 );
+        border-top-width: 0;
+      }
+
+      > :not(:last-child) {
+        @include border-bottom-radius ( 0 );
+      }
+
+      > :last-child {
+        border-bottom-right-radius: 0;
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    .tabs-containers {
+
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+
+      /* CONTAINER */
+
+      > * {
+        @include border-left-radius ( 0 );
+        flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+        border-left-width: 0;
+      }
+
+    }
+
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Tagbox
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../container/container.scss
+ * ========================================================================= */
+
+/* TAGBOX */
+
+.tagbox {
+
+  @extend .container;
+
+  /* PARTIAL */
+
+  &-partial {
+    @include color ( inherit, true );
+    min-width: $tagbox-input-min-width;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Textarea
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../input/input.scss
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+textarea {
+
+  @extend input;
+  resize: vertical;
+  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+
+  /* COMPACT */
+
+  &.compact {
+    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+  }
+
+  /* UNRESIZABLE */
+
+  &.unresizable,
+  &.disabled {
+    resize: none;
+  }
+
+}
+
+/* RESET INVALID STYLE */
+
+textarea:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Toolbar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* TOOLBAR */
+
+.toolbar {
+
+  @extend .widget;
+  padding: $toolbar-padding-vertical $toolbar-padding-horizontal;
+
+  /* MULTIPLE */
+
+  > .multiple {
+    flex-wrap: nowrap;
+  }
+
+}
+
+
+/* =========================================================================
+ * Svelto - Toolip
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../dropdown/dropdown.scss
+ * ========================================================================= */
+
+/* TOOLTIP */
+
+.tooltip {
+  @extend .dropdown;
+  max-width: $tooltip-max-width;
+}
+
+
+/* =========================================================================
+ * Svelto - Typography
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../highlight/highlight.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* LINK */
+
+a,
+.link {
+  position: relative;
+  text-decoration: none;
+  color: inherit;
+}
+
+p > a, //INFO: We do it just under `p`s, because elsewhere might be an unwanted style
+span > a, //INFO: Same reason as `p > a`
+.link {
+
+  display: inline-block;
+  cursor: pointer;
+
+  &:after {
+    @extend %highlight-after;
+    border-bottom-width: $a-underline-height;
+    opacity: 0;
+    transform: scaleX(0);
+    transition-property: opacity, transform;
+    transition-duration: $a-underline-transition-duration;
+  }
+
+  &:hover:after {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+}
+
+
+/* SPAN / A */ //FIXME: Ugly fix for making them widgets when they are not in a paragraph
+
+span,
+a {
+  margin-bottom: $gutter;
+}
+
+p > span,
+p > a,
+span > a {
+  margin-bottom: 0;
+}
+
+//INFO: Fixes a bug in IE10 where the margin-bottom is not applied to `a` elements //FIXME: The following browser hack also matches IE11, that behaves correctly by default
+
+_:-ms-input-placeholder, :root a {
+  display: block;
+}
+
+_:-ms-input-placeholder, :root p > a {
+  display: initial;
+}
+
+/* HEADERS */
+
+h1, h2, h3, h4, h5, h6 {
+
+  margin: 0 0 $gutter;
+
+  & > small {
+    opacity: $header-small-opacity;
+  }
+
+}
+
+h1 {
+  @include size ( $h1-size );
+}
+
+h2 {
+  @include size ( $h2-size );
+}
+
+h3 {
+  @include size ( $h3-size );
+}
+
+h4 {
+  @include size ( $h4-size );
+}
+
+h5 {
+  @include size ( $h5-size );
+}
+
+h6 {
+  @include size ( $h6-size );
+}
+
+/* SMALL */
+
+small {
+  font-size: $small-font-size;
+}
+
+/* PARAGRAPH */
+
+p {
+  margin: 0 0 $gutter;
+  max-width: 100%; //INFO: This fixes a bug in IE10 where it may not wrap and contain the entire text all in one line
+}
+
+/* MARK */
+
+mark,
+.mark {
+  @include color ( $mark-color );
+  padding: $mark-padding;
+  border-radius: $mark-border-radius;
+}
+
+/* ABBR */
+
+//FIXME: There's a double border on Firefox Mobile
+
+abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
+  cursor: help;
+  border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
+}
+
+/* BLOCKQUOTE */
+
+blockquote {
+
+  @extend .widget;
+  @include last-child-no-gutter ();
+  padding: $gutter-half $gutter $gutter-half ( $gutter + $blockquote-line-width );
+  border-radius: $blockquote-line-width;
+  background-color: $blockquote-bg-color;
+
+  &:before {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: $blockquote-line-width;
+    content: '';
+    border-radius: $blockquote-line-width;
+    background-color: $blockquote-line-bg-color;
+  }
+
+  > footer {
+
+    @extend .widget;
+    @include last-child-no-gutter ();
+    background-color: $blockquote-footer-bg-color;
+    padding: $blockquote-footer-padding-vertical $blockquote-footer-padding-horizontal;
+    font-size: $blockquote-footer-font-size;
+    opacity: $blockquote-footer-opacity;
+
+    &:before {
+      content: '\2014 \00A0';
+      opacity: $blockquote-footer-opacity;
+    }
+
+  }
+
+}
+
+/* LIST */
+
+ul,
+ol {
+  margin: 0 0 $gutter;
+  padding-left: $list-padding-left;
+}
+
+li {
+  @include last-child-no-gutter ();
+}
+
+ul.unstyled {
+
+  padding-left: 0;
+  list-style-type: none;
+
+  ul {
+    list-style-type: none;
+  }
+
+}
+
+dl {
+  margin: 0;
+}
+
+dd {
+  margin-left: $gutter * 2;
+}
+
+/* CODE */
+
+code,
+section,
+pre {
+  display: block;
+  overflow-x: auto;
+  margin: 0;
+  padding: $gutter;
+  border: $code-border-width solid $code-border-color;
+  border-radius: $code-border-radius;
+  background-color: $code-bg-color;
+}
+
+/* KBD */
+
+kbd {
+  @include color ( $kbd-color );
+  font-size: $kbd-font-size;
+  font-weight: bold;
+  display: inline-block;
+  padding: $kbd-padding;
+  white-space: nowrap;
+  border-width: $kbd-border-width;
+  border-style: $kbd-border-style;
+  border-radius: $kdb-border-radius;
+}
+
+
+/* =========================================================================
+ * Svelto - Z-Depths
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* Z-DEPTHS */
+
+@each $depth, $shadow in $z-depths {
+
+  .z-depth-#{$depth} {
+    @include z-depth ( $depth, !important );
+  }
+
+}

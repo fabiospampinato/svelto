@@ -15,9 +15,15 @@ var DEST = {
   images: 'dist/images',
   js: 'dist/js',
   jsMin: 'dist/js',
+  jsTemp: '.temp/js',
   scss: 'dist/scss',
-  scssParts: 'dist/scss'
+  scssParts: 'dist/scss',
+  scssTemp: '.temp/scss'
 };
+
+/* CLEAN DIRECTORIES */
+
+var CLEAN_DIRS = ['.temp', 'dist'];
 
 /* REQUIRES */
 
@@ -61,13 +67,19 @@ var autoprefixer = require ( 'gulp-autoprefixer' ),
 var isProduction  = !!argv.production,
     isDevelopment = !isProduction;
 
-/* DEVELOPMENT DESTS */
+/* DEVELOPMENT */
 
 if ( isDevelopment ) {
 
+  /* DESTINATIONS */
+
   DEST.css = '../svelto-website/app/svelto/client/stylesheet';
   DEST.images = '../svelto-website/app/public';
-  DEST.js = '../svelto-website/app/svelto/client/lib';
+  DEST.jsTemp = '../svelto-website/app/svelto/client/lib';
+
+  /* CLEAN DIRECTIORIES */
+
+  CLEAN_DIRS.push ( '../svelto-website/app/svelto' );
 
 }
 
@@ -132,15 +144,15 @@ gulp.task ( 'js-temp', function () {
                  return stream;
                }))
                .pipe ( newer ({
-                 dest: '.temp/js',
+                 dest: DEST.jsTemp,
                  map: path.basename
                }))
                .pipe ( flatten () )
-               .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) )
+              //  .pipe ( babel ( JSON.parse ( fs.readFileSync ( '.babelrc' ) ) ) ) //INFO: Not needed anymore since we are outputing to the Meteor website
                .on ( 'error', function ( err ) {
                  gutil.log ( err.message );
                })
-               .pipe ( gulp.dest ( '.temp/js' ) );
+               .pipe ( gulp.dest ( DEST.jsTemp ) );
 
   }
 
@@ -150,7 +162,7 @@ gulp.task ( 'js', ['js-temp'], function () {
 
   if ( isDevelopment ) {
 
-    return gulp.src ( '.temp/js/*.js' )
+    return gulp.src ( DEST.jsTemp + '/*.js' )
                .pipe ( newer ( DEST.js + '/svelto.js' ) )
                .pipe ( sort () )
                .pipe ( concat ( 'svelto.js' ) )
@@ -257,8 +269,8 @@ gulp.task ( 'scss-parts', function () {
 
 gulp.task ( 'clean', function () {
 
-  return gulp.src ( ['.temp', 'dist'] )
-             .pipe ( clean () );
+  return gulp.src ( CLEAN_DIRS )
+             .pipe ( clean ( { force: true }) );
 
 });
 
