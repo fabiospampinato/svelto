@@ -10,3 +10,8 @@
 
 $toolbar-padding-vertical: 0.5em !default;
 $toolbar-padding-horizontal: 1em !default;
+
+/* VERTICAL */
+
+$toolbar-vertical-padding-vertical: $toolbar-padding-horizontal !default;
+$toolbar-vertical-padding-horizontal: $toolbar-padding-vertical !default;

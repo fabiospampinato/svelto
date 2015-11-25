@@ -626,6 +626,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* TOOLBAR */
+/* VERTICAL */
 /* =========================================================================
  * Svelto - Tooltip (Variables)
  * =========================================================================
@@ -11529,7 +11530,13 @@ textarea:-moz-ui-invalid {
 /* TOOLBAR */
 .toolbar {
   padding: 0.5em 1em;
+  /* VERTICAL */
   /* MULTIPLE */
+}
+
+.toolbar.vertical {
+  display: inline-flex;
+  padding: 1em 0.5em;
 }
 
 .toolbar > .multiple {
