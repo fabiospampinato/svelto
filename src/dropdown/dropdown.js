@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/factory.js
+ * @requires ../factory/factory.js
  * @requires ../positionate/positionate.js
  * @requires ../pseudo_css/pseudo_css.js
  * ========================================================================= */

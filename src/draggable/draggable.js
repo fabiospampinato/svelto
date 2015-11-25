@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/factory.js
+ * @requires ../factory/factory.js
  * ========================================================================= */
 
 //FIXME: Don't trigger the move events if we are not duing it more than a threashold, but just on touch devices, there is very difficoult to do an extremelly precise tap without moving the finger

@@ -5,7 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../widget/factory.js
+ * @requires ../factory/factory.js
  * ========================================================================= */
 
 //TODO: Add support for tableHelper, just put the new addded row in the right position, good performance gain here!
