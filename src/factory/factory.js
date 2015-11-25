@@ -6,8 +6,8 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../core/core.js
- * @requires Widget.js
- * @requires Widgetize.js
+ * @requires ../widget/widget.js
+ * @requires ../widgetize/widgetize.js
  * @requires ../tmpl/tmpl.js
  * @requires ../pointer/pointer.js
  *=========================================================================*/

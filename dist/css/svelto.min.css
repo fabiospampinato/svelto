@@ -40,7 +40,7 @@
 /* BREAKPOINTS */
 /* BREAKPOINTS */
 /* =========================================================================
- * Svelto - UI (Variables)
+ * Svelto - Svelto (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11662,7 +11662,7 @@ mark,
   border-color: #e7a006 ;
   color: #ffffff ;
   padding: 0.3em 0.325em;
-  border-radius: 0.125em;
+  border-radius: 0.25em;
 }
 
 mark p > a,

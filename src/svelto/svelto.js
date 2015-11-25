@@ -16,8 +16,8 @@
 
   window.Svelto = {
     version: '0.2.0-beta.3',
-    $: jQuery || Zepto || $ || false,
-    _: lodash || _ || underscore || false
+    $: jQuery || Zepto || ( $ && ( 'jquery' in $() || 'zepto' in $ ) ? $ : false ),
+    _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false )
   };
 
   /* KEY CODE */
