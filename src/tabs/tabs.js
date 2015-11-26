@@ -8,7 +8,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add again the indicator
+//TODO: Add again the super cool moving indicator
 
 (function ( $, _, window, document, undefined ) {
 
@@ -19,9 +19,9 @@
   let config = {
     name: 'tabs',
     options: {
+      direction: undefined,
       highlight: true,
       classes: {
-        vertical: 'vertical',
         active: {
           trigger: 'active',
           container: 'active'
@@ -56,7 +56,7 @@
       this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
       this.$containers = this.$tabs.find ( this.options.selectors.containers );
 
-      this.isVertical = this.$tabs.hasClass ( this.options.classes.vertical );
+      this.options.direction = this.options.direction || ( this.$tabs.hasClass ( 'top' ) ? 'top' : ( this.$tabs.hasClass ( 'right' ) ? 'right' : ( this.$tabs.hasClass ( 'bottom' ) ? 'bottom' : ( this.$tabs.hasClass ( 'left' ) ? 'left' : 'top' ) ) ) );
 
       this.index = -1;
 
@@ -130,7 +130,30 @@
 
         if ( this.options.highlight ) {
 
-          $trigger.addClass ( 'highlight' + ( this.isVertical ? ' highlight-right' : ' highlight-bottom' ) );
+          let highlightDirection;
+
+          switch ( this.options.direction ) {
+
+            case 'bottom':
+              highlightDirection = 'top';
+              break;
+
+            case 'left':
+              highlightDirection = 'right';
+              break;
+
+            case 'right':
+              highlightDirection = 'left';
+              break;
+
+            case 'top':
+            default:
+              highlightDirection = 'bottom';
+              break;
+
+          }
+
+          $trigger.addClass ( 'highlight' + ( ' highlight-' + highlightDirection ) );
 
         }
 

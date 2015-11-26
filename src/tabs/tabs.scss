@@ -8,17 +8,18 @@
  * @requires ../widget/widget.scss
  * ========================================================================= */
 
-//TODO: Add support for tabs in all directions, use `top, right, bottom, left` classes instead of the `horizontal, vertical` abstraction
+ //TODO: Update the highlight dynamically when we add top, bottom, left or rigth
 
 /* TABS */
 
 .tabs {
 
   @extend .widget;
+  display: flex;
 
   /* TRIGGERS */
 
-  &-triggers {
+  > .tabs-triggers {
 
     display: flex;
     flex-wrap: nowrap;
@@ -37,7 +38,7 @@
 
   /* CONTAINERS */
 
-  &-containers {
+  > .tabs-containers {
 
     position: relative;
 
@@ -56,19 +57,58 @@
 
   }
 
-  /* HORIZONTAL */
+  /* TOP / LEFT */
 
-  &:not(.vertical) {
+  &.top,
+  &.left,
+  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
 
     /* TRIGGERS */
 
-    .tabs-triggers {
+    > .tabs-triggers {
+      order: 0;
+    }
+
+    /* CONTAINERS */
+
+    > .tabs-containers {
+      order: 1;
+    }
+
+  }
+
+  /* BOTTOM / RIGHT */
+
+  &.bottom,
+  &.right {
+
+    /* TRIGGERS */
+
+    > .tabs-triggers {
+      order: 1;
+    }
+
+    /* CONTAINERS */
+
+    > .tabs-containers {
+      order: 0;
+    }
+
+  }
+
+  /* TOP / BOTTOM */
+
+  &.top,
+  &.bottom,
+  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+
+    flex-direction: column;
+
+    /* TRIGGERS */
+
+    > .tabs-triggers {
 
       /* TRIGGER */
-
-      > :first-child {
-        border-bottom-left-radius: 0;
-      }
 
       > :not(:first-child) {
         @include border-left-radius ( 0 );
@@ -79,6 +119,25 @@
         @include border-right-radius ( 0 );
       }
 
+    }
+
+  }
+
+  /* TOP */
+
+  &.top,
+  &:not(.bottom):not(.left):not(.right) { //INFO: Default case
+
+    /* TRIGGERS */
+
+    > .tabs-triggers {
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-bottom-left-radius: 0;
+      }
+
       > :last-child {
         border-bottom-right-radius: 0;
       }
@@ -87,7 +146,7 @@
 
     /* CONTAINERS */
 
-    .tabs-containers {
+    > .tabs-containers {
 
       /* CONTAINER */
 
@@ -100,25 +159,56 @@
 
   }
 
-  /* VERTICAL */
+  /* BOTTOM */
 
-  &.vertical {
+  &.bottom {
 
-    display: flex;
+    /* TRIGGERS */
+
+    > .tabs-triggers {
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-top-left-radius: 0;
+      }
+
+      > :last-child {
+        border-top-right-radius: 0;
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    > .tabs-containers {
+
+      /* CONTAINER */
+
+      > * {
+        @include border-bottom-radius ( 0 );
+        border-bottom-width: 0;
+      }
+
+    }
+
+  }
+
+  /* LEFT / RIGHT */
+
+  &.left,
+  &.right {
+
     align-items: stretch;
     flex-direction: row;
 
     /* TRIGGERS */
 
-    .tabs-triggers {
+    > .tabs-triggers {
 
       flex-direction: column;
 
       /* TRIGGER */
-
-      > :first-child {
-        border-top-right-radius: 0;
-      }
 
       > :not(:first-child) {
         @include border-top-radius ( 0 );
@@ -127,6 +217,42 @@
 
       > :not(:last-child) {
         @include border-bottom-radius ( 0 );
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    > .tabs-containers {
+
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+
+      /* CONTAINER */
+
+      > * {
+        flex-grow: 1;
+        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
+      }
+
+    }
+
+  }
+
+  /* LEFT */
+
+  &.left {
+
+    /* TRIGGERS */
+
+    > .tabs-triggers {
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-top-right-radius: 0;
       }
 
       > :last-child {
@@ -139,18 +265,46 @@
 
     .tabs-containers {
 
-      display: flex;
-      flex-direction: column;
-      flex-grow: 1;
-      flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-
       /* CONTAINER */
 
       > * {
         @include border-left-radius ( 0 );
-        flex-grow: 1;
-        flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
         border-left-width: 0;
+      }
+
+    }
+
+  }
+
+  /* RIGHT */
+
+  &.right {
+
+    /* TRIGGERS */
+
+    > .tabs-triggers {
+
+      /* TRIGGER */
+
+      > :first-child {
+        border-top-left-radius: 0;
+      }
+
+      > :last-child {
+        border-bottom-left-radius: 0;
+      }
+
+    }
+
+    /* CONTAINERS */
+
+    .tabs-containers {
+
+      /* CONTAINER */
+
+      > * {
+        @include border-right-radius ( 0 );
+        border-right-width: 0;
       }
 
     }

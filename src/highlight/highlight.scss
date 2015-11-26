@@ -71,9 +71,9 @@
 
   }
 
-  &:not(.highlight-top):not(.highlight-right):not(.highlight-left), //INFO: Default direction if no one has been specified
   &.highlight-bottom,
-  &.highlight-all {
+  &.highlight-all,
+  &:not(.highlight-top):not(.highlight-right):not(.highlight-left) { //INFO: Default direction if no one has been specified
 
     &:after {
       border-bottom-width: $highlight-size;
