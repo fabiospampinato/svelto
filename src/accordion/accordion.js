@@ -18,6 +18,7 @@
   let config = {
     name: 'accordion',
     options: {
+      isMultiple: undefined,
       classes: {
         multiple: 'multiple-open'
       },
@@ -51,25 +52,29 @@
 
       this.expandersInstances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
 
-      this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
+      this.options.isMultiple = _.isBoolean ( this.options.isMultiple ) ? this.options.isMultiple : this.$accordion.hasClass ( this.options.classes.multiple );
 
     }
 
     _events () {
 
-      if ( !this.isMultiple ) {
+      /* EXPANDER OPEN */
 
-        /* EXPANDER OPEN */
+      this._on ( this.$expanders, 'expander:open', function ( event ) {
 
-        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
+        if ( !this.options.isMultiple ) {
 
-      }
+          this.__closeOthers ( event );
+
+        }
+
+      });
 
     }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event, data ) {
+    __closeOthers ( event ) {
 
       for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 

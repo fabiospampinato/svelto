@@ -930,6 +930,8 @@
 
     option ( key, value ) {
 
+      //FIXME: It doesn't work for setting nested properties, maybe just merge the objects instead
+
       if ( !key ) { //INFO: Returns a clone of the options object
 
         return _.cloneDeep ( this.options );
@@ -937,6 +939,8 @@
       }
 
       if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
+
+        //FIXME: It doesn't work for nested properties
 
         let options = {},
             parts = key.split ( '.' );
@@ -1872,6 +1876,7 @@
   let config = {
     name: 'accordion',
     options: {
+      isMultiple: undefined,
       classes: {
         multiple: 'multiple-open'
       },
@@ -1905,25 +1910,29 @@
 
       this.expandersInstances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
 
-      this.isMultiple = this.$accordion.hasClass ( this.options.classes.multiple );
+      this.options.isMultiple = _.isBoolean ( this.options.isMultiple ) ? this.options.isMultiple : this.$accordion.hasClass ( this.options.classes.multiple );
 
     }
 
     _events () {
 
-      if ( !this.isMultiple ) {
+      /* EXPANDER OPEN */
 
-        /* EXPANDER OPEN */
+      this._on ( this.$expanders, 'expander:open', function ( event ) {
 
-        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
+        if ( !this.options.isMultiple ) {
 
-      }
+          this.__closeOthers ( event );
+
+        }
+
+      });
 
     }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event, data ) {
+    __closeOthers ( event ) {
 
       for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 
@@ -2326,6 +2335,7 @@
  * ========================================================================= */
 
 //TODO: Add drag support instead of flick
+//TODO: API for setting interval
 
 (function ( $, _, window, document, undefined ) {
 
@@ -2387,11 +2397,7 @@
       this._previous = false;
       this._current = false;
 
-      if ( this.options.cycle ) {
-
-        this.timer = new Timer ( this.next.bind ( this ), this.options.interval, true );
-
-      }
+      this.timer = new Timer ( this.next.bind ( this ), this.options.interval, false );
 
     }
 
@@ -2435,12 +2441,8 @@
 
       /* CYCLE */
 
-      if ( this.options.cycle ) {
-
-        this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
-        this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
-
-      }
+      this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
+      this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
 
     }
 
@@ -2475,15 +2477,23 @@
 
     __cycleEnter () {
 
-      this.timer.pause ();
+      if ( this.options.cycle ) {
+
+        this.timer.pause ();
+
+      }
 
     }
 
     __cycleLeave () {
 
-      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      if ( this.options.cycle ) {
 
-      this.timer.play ();
+        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+
+        this.timer.play ();
+
+      }
 
     }
 
@@ -2604,6 +2614,28 @@
     next () {
 
       this.set ( this._getNextIndex ( this._current.index ) );
+
+    }
+
+    play () {
+
+      this.options.cycle = true;
+      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      this.timer.play ();
+
+    }
+
+    pause () {
+
+      this.options.cycle = false;
+      this.timer.pause ();
+
+    }
+
+    stop () {
+
+      this.options.cycle = false;
+      this.timer.stop ();
 
     }
 

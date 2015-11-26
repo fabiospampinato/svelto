@@ -168,6 +168,8 @@
 
     option ( key, value ) {
 
+      //FIXME: It doesn't work for setting nested properties, maybe just merge the objects instead
+
       if ( !key ) { //INFO: Returns a clone of the options object
 
         return _.cloneDeep ( this.options );
@@ -175,6 +177,8 @@
       }
 
       if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
+
+        //FIXME: It doesn't work for nested properties
 
         let options = {},
             parts = key.split ( '.' );

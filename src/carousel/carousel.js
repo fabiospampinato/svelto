@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Add drag support instead of flick
+//TODO: API for setting interval
 
 (function ( $, _, window, document, undefined ) {
 
@@ -70,11 +71,7 @@
       this._previous = false;
       this._current = false;
 
-      if ( this.options.cycle ) {
-
-        this.timer = new Timer ( this.next.bind ( this ), this.options.interval, true );
-
-      }
+      this.timer = new Timer ( this.next.bind ( this ), this.options.interval, false );
 
     }
 
@@ -118,12 +115,8 @@
 
       /* CYCLE */
 
-      if ( this.options.cycle ) {
-
-        this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
-        this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
-
-      }
+      this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
+      this._on ( this.$itemsWrp, Pointer.leave, this.__cycleLeave );
 
     }
 
@@ -158,15 +151,23 @@
 
     __cycleEnter () {
 
-      this.timer.pause ();
+      if ( this.options.cycle ) {
+
+        this.timer.pause ();
+
+      }
 
     }
 
     __cycleLeave () {
 
-      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      if ( this.options.cycle ) {
 
-      this.timer.play ();
+        this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+
+        this.timer.play ();
+
+      }
 
     }
 
@@ -287,6 +288,28 @@
     next () {
 
       this.set ( this._getNextIndex ( this._current.index ) );
+
+    }
+
+    play () {
+
+      this.options.cycle = true;
+      this.timer.remaining ( Math.max ( this.options.intervalMinimumRemaining, this.timer.remaining () || 0 ) );
+      this.timer.play ();
+
+    }
+
+    pause () {
+
+      this.options.cycle = false;
+      this.timer.pause ();
+
+    }
+
+    stop () {
+
+      this.options.cycle = false;
+      this.timer.stop ();
 
     }
 
