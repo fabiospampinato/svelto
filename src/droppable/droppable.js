@@ -64,8 +64,6 @@
 
     __dragMove ( event, data ) {
 
-      console.log("moving");
-
       let isInside = this._isInside ( event, data );
 
       if ( isInside !== this._wasInside ) {
