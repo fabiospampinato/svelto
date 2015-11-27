@@ -51,6 +51,8 @@ i.icon {
 
 /* ICONS */
 
+//FIXME: Scaling to large size for example doesn't work
+
 .icons {
 
   @extend .widget;

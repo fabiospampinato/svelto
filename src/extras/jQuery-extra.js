@@ -45,10 +45,6 @@
         Y: event.pageY
       };
 
-    } else {
-
-      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine and cannot go wrong
-
     }
 
   };
@@ -97,10 +93,24 @@
 
   $.fn.onHover = function ( ...args ) {
 
-    //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+    //FIXME: If we remove the target we are still attaching and removing thos events though (just performing the functions calls actually, probably)
 
     this.on ( Pointer.enter, () => this.on ( ...args ) );
     this.on ( Pointer.leave, () => this.off ( ...args ) );
+
+  };
+
+  $.fn.unscrollable = function () {
+
+    //TODO: Preserve the scrollbars if possible
+
+    return this.addClass ( 'overflow-hidden' );
+
+  };
+
+  $.fn.scrollable = function () {
+
+    return this.removeClass ( 'overflow-hidden' );
 
   };
 

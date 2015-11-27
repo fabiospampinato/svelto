@@ -10,8 +10,6 @@
 
 //INFO: Since we check the `event.target` in order to detect a click on the background it will fail when using a `.container` as a modal, so effectively we are shrinking the supported groups of element to `card` and `card`-like
 
-//TODO: Disable scrolling while the modal is open
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -135,6 +133,8 @@
         this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
 
         this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
+
+        $body[this._isOpen ? 'unscrollable' : 'scrollable']();
 
         this._trigger ( this._isOpen ? 'open' : 'close' );
 

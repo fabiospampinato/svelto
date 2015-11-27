@@ -95,9 +95,9 @@
       }
 
       return {
-        h: h * 360, //FIXME: removed Math.round, test if is ok
-        s: s * 100, //FIXME: removed Math.round, test if is ok
-        v: v * 100 //FIXME: removed Math.round, test if is ok
+        h: h * 360, 
+        s: s * 100, 
+        v: v * 100 
       };
 
     }

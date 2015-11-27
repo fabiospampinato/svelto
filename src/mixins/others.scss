@@ -12,12 +12,12 @@
 
 @mixin last-child-no-gutter () {
 
-  > :not(script):last-of-type {
+  > :not(script):last-of-type { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
 
     margin-bottom: 0 !important;
 
     &.multiple {
-      margin-bottom: - $gutter !important; //FIXME: We should inherit this from the settings
+      margin-bottom: - $gutter !important;
     }
 
   }

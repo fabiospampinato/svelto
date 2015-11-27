@@ -11,6 +11,8 @@
  * @requires vendor/screenfull.js
  * ========================================================================= */
 
+//TODO: Move to their own folders/files
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -29,7 +31,7 @@
 
   /* FULLSCREEN */
 
-  //TODO: Move it to its own component, add the ability to trigger the fullscreen for a specific element
+  //TODO: Add the ability to trigger the fullscreen for a specific element
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Add support
 

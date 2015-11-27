@@ -19,7 +19,7 @@ header {
 
   /* BAKGROUND */
 
-  .header-background { //TODO: scale it, make the image fill the space
+  .header-background { //TODO: Scale it, make the image fill the space
     @include fill-absolute ();
     margin: auto;
     width: 100%;

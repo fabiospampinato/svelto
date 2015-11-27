@@ -44,7 +44,7 @@ html {
 
   &.dragging {
     cursor: move !important;
-    user-select: none !important; //TODO: maybe set it as default, and override it when selectable... but doesn't it work???
+    user-select: none !important; //TODO: Maybe set it as default, and override it when selectable... but doesn't it work???
   }
 
 }
@@ -109,7 +109,7 @@ _:-ms-input-placeholder, :root #content {
     padding: $gutter;
   }
 
-  > footer { //FIXME: Stick it to the bottom in IE10-11
+  > footer {
     margin-bottom: 0;
   }
 

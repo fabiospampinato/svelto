@@ -128,7 +128,7 @@ mark,
 
 //FIXME: There's a double border on Firefox Mobile
 
-abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
+abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
   cursor: help;
   border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
 }

@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Remove the _ dependency, after all we use it only for a few functions
+//TODO: Remove the _ dependency, after all we use it only for a few functions (or create a slimmed down version of lodash to load only when needed)
 
 (function ( window, document, undefined ) {
 

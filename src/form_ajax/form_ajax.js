@@ -11,7 +11,7 @@
  * @requires ../form_validate/form_validate.js
  * ========================================================================= */
 
-//TODO: Check if it works, also for upload
+//TODO: Check if it works, also for file uploading
 
 (function ( $, _, window, document, undefined ) {
 

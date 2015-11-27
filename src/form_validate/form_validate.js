@@ -14,7 +14,7 @@
 
 
 
-//TODO: Add support for validating checkboxes and radios
+//TODO: Add support for validating checkboxes and radios (radios have the same `name` attribute, that it's currently not supported)
 
 
 
@@ -42,7 +42,7 @@
           return value.match ( re ) ? true : 'Only hexadecimal characters are allowed';
         },
         number ( value ) {
-          var re = /^-?[0-9]+$/; //FIXME: It is supposed to match both integers and floats, but it doesn't
+          var re = /^-?[0-9]+.?(?:[0-9]?)+$/;
           return value.match ( re ) ? true : 'Only numbers are allowed';
         },
         integer ( value ) {

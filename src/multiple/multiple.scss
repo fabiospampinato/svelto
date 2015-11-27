@@ -73,7 +73,7 @@
 
   /* LIMITED */
 
-  &.limited { //FIXME: It's not perfect... It's padded by the gutter
+  &.limited { //FIXME: It's not perfect... It's padded by the gutter, fix it if possible, or just remove it
 
     @if $max-width-enabled {
 

@@ -611,7 +611,7 @@ html {
 
   &.dragging {
     cursor: move !important;
-    user-select: none !important; //TODO: maybe set it as default, and override it when selectable... but doesn't it work???
+    user-select: none !important; //TODO: Maybe set it as default, and override it when selectable... but doesn't it work???
   }
 
 }
@@ -676,7 +676,7 @@ _:-ms-input-placeholder, :root #content {
     padding: $gutter;
   }
 
-  > footer { //FIXME: Stick it to the bottom in IE10-11
+  > footer {
     margin-bottom: 0;
   }
 
@@ -1280,7 +1280,7 @@ label {
   &.floating {
 
     //TODO: Add it while scrolling to bottom, show him when scrolling to top
-    //TODO: add sub floating actions
+    //TODO: Add sub floating actions
 
     @include z-depth ( $label-floating-z-depth );
     position: fixed;
@@ -1844,6 +1844,8 @@ i.icon {
 
 /* ICONS */
 
+//FIXME: Scaling to large size for example doesn't work
+
 .icons {
 
   @extend .widget;
@@ -1919,7 +1921,6 @@ i.icon {
 
 //TODO: When inset add proper dark shadow at the left and the right
 //TODO: Add better support for img tags, .image-wrp, container and card
-//TODO: Add support for custom buttons as prev/next or fall back to a default
 
 /* CAROUSEL */
 
@@ -2281,8 +2282,6 @@ i.icon {
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-
-//FIXME: Handle the case where clip-path is not supported
 
 /* CHAT */
 
@@ -2749,7 +2748,7 @@ i.icon {
  * ========================================================================= */
 
 //TODO: Maybe add the `transparent-initial` class, that output an inherited background color, when not hovering or pressing
-//FIXME: .actionable should do it's work only it it's not child of .disabled or -disabled
+//FIXME: .actionable should do it's work only if it's not child of .disabled or -disabled
 
 /* COLORS */
 
@@ -3104,12 +3103,6 @@ hr {
     opacity: $divider-text-opacity;
   }
 
-  /* SPACER */
-
-  &.spacer { //TODO: Maybe remove it, it's not very useful nor required...
-    height: $divider-spacer-height;
-  }
-
 }
 
 
@@ -3119,8 +3112,6 @@ hr {
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
-
-//TODO: Add tip shadow
 
 /* DROPDOWN */
 
@@ -3600,7 +3591,7 @@ header {
 
   /* BAKGROUND */
 
-  .header-background { //TODO: scale it, make the image fill the space
+  .header-background { //TODO: Scale it, make the image fill the space
     @include fill-absolute ();
     margin: auto;
     width: 100%;
@@ -4324,7 +4315,7 @@ input::-ms-clear {
 
   /* LIMITED */
 
-  &.limited { //FIXME: It's not perfect... It's padded by the gutter
+  &.limited { //FIXME: It's not perfect... It's padded by the gutter, fix it if possible, or just remove it
 
     @if $max-width-enabled {
 
@@ -5307,7 +5298,6 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
 //INFO: An overlay must be the :first-child among it's siblings, so that we can control their opacity via `~ *`
 //FIXME: For some reasons the `padding-bottom` is missing, when the .overlay.container has to scroll
-//FIXME: `blurrer` doesn't work
 
 /* OVERLAY */
 
@@ -5614,7 +5604,6 @@ code[class*='language-'] {
  * ========================================================================= */
 
 //TODO: Add support for vertical progressbar (not particularly useful, but when attached it will be an appropriate example of horizontally attached widget)
-//TODO: Add an infinite linear loading progressbar, like before downloading something from the play store
 
 /* PROGRESSBAR */
 
@@ -5658,12 +5647,12 @@ code[class*='language-'] {
 
   &.striped {
 
-    .progressbar-highlight {
-      transform: translateZ(0);
-    }
-
     .progressbar-highlight:before {
-      @include fill-absolute ();
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: - $progressbar-stripe-size;
+      right: - $progressbar-stripe-size;
       background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
       content: '';
       pointer-events: none;
@@ -5671,7 +5660,26 @@ code[class*='language-'] {
     }
 
     &:not(.disabled) .progressbar-highlight:before {
-      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear 0s infinite;
+      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
+    }
+
+  }
+
+  /* INDETERMINATE */
+
+  &.indeterminate {
+
+    .progressbar-highlight {
+
+      animation: progressbar-indeterminate-highlight $progressbar-indeterminate-animation-duration linear infinite;
+
+      /* STRIPES / LABEL */
+
+      &:before,
+      &:after {
+        display: none;
+      }
+
     }
 
   }
@@ -5710,10 +5718,24 @@ code[class*='language-'] {
 
 @keyframes progressbar-stripes-move {
   0% {
-    background-position: 0 0;
+    transform: translateX(0);
   }
   100% {
-    background-position: $progressbar-stripe-size $progressbar-stripe-size;
+    transform: translateX($progressbar-stripe-size);
+  }
+}
+
+@keyframes progressbar-indeterminate-highlight {
+  0% {
+    width: 100%;
+    transform: translateX(-60%) scaleX(0.15);
+  }
+  35% {
+    transform: translateX(-15%) scaleX(0.5);
+  }
+  100% {
+    width: 100%;
+    transform: translateX(51%) scaleX(0.05);
   }
 }
 
@@ -7039,7 +7061,6 @@ svg.spinner {
 //TODO: Add support for the case when there's no `thead` tag for example, so that the border radius and everything else will work just fine as well
 //TODO: Add responsive tables
 //TODO: Add .reflow (see bootstrap v4)
-//FIXME: The striped table doesn't work anymore
 
 table.table { //INFO: So that if someone need a plain basic table he can, just by don't using the `table` class
 
@@ -7943,7 +7964,7 @@ mark,
 
 //FIXME: There's a double border on Firefox Mobile
 
-abbr[title] { //TODO: add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
+abbr[title] { //TODO: Add a more advanced abbr, that triggers a tooltip, maybe even pure CSS
   cursor: help;
   border-bottom: $abbr-border-width $abbr-border-style $abbr-border-color;
 }

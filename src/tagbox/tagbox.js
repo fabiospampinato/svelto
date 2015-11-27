@@ -85,7 +85,7 @@
 
       });
 
-      //TODO: add support for liter
+      //TODO: add support for $root.filter
 
     }
 

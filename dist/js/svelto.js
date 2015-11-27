@@ -6,7 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Remove the _ dependency, after all we use it only for a few functions
+//TODO: Remove the _ dependency, after all we use it only for a few functions (or create a slimmed down version of lodash to load only when needed)
 
 (function ( window, document, undefined ) {
 
@@ -494,10 +494,6 @@
         Y: event.pageY
       };
 
-    } else {
-
-      throw 'UngettableEventXY'; //FIXME: Maybe remove this if everything is working fine and cannot go wrong
-
     }
 
   };
@@ -546,10 +542,24 @@
 
   $.fn.onHover = function ( ...args ) {
 
-    //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+    //FIXME: If we remove the target we are still attaching and removing thos events though (just performing the functions calls actually, probably)
 
     this.on ( Pointer.enter, () => this.on ( ...args ) );
     this.on ( Pointer.leave, () => this.off ( ...args ) );
+
+  };
+
+  $.fn.unscrollable = function () {
+
+    //TODO: Preserve the scrollbars if possible
+
+    return this.addClass ( 'overflow-hidden' );
+
+  };
+
+  $.fn.scrollable = function () {
+
+    return this.removeClass ( 'overflow-hidden' );
 
   };
 
@@ -930,81 +940,31 @@
 
     option ( key, value ) {
 
-      //FIXME: It doesn't work for setting nested properties, maybe just merge the objects instead
-
-      if ( !key ) { //INFO: Returns a clone of the options object
+      if ( !key ) {
 
         return _.cloneDeep ( this.options );
 
-      }
+      } else if ( _.isString ( key ) ) {
 
-      if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
+        if ( _.isUndefined ( value ) ) {
 
-        //FIXME: It doesn't work for nested properties
+          return _.cloneDeep ( _.get ( this.options, key ) );
 
-        let options = {},
-            parts = key.split ( '.' );
+        } else {
 
-        key = parts.shift ();
-
-        if ( parts.length ) {
-
-          let currentOption = options[key] = _.extend ( {}, this.options[key] );
-
-          for ( let part of parts ) {
-
-            currentOption[part] = currentOption[part] || {};
-            currentOption = currentOption[part];
-
-          }
-
-          key = parts.pop ();
-
-          if ( arguments.length === 1 ) {
-
-            return _.isUndefined ( currentOption[key] ) ? null : currentOption[key];
-
-          }
-
-          currentOption[key] = value;
-
-        } else { //INFO: Handle single level property
-
-          if ( arguments.length === 1 ) {
-
-            return _.isUndefined ( this.options[key] ) ? null : this.options[key];
-
-          }
-
-          options[key] = value;
+          _.set ( this.options, key, value );
 
         }
 
-      } else if ( _.isPlainObject ( key ) ) { //INFO: Set multiple properties
+      } else if ( _.isPlainObject ( key ) ) {
 
-        this._setOptions ( key );
+        for ( let prop in key ) {
 
-      }
+          _.set ( this.options, prop, key[prop] );
 
-      return this;
-
-    }
-
-    _setOptions ( options ) {
-
-      for ( let key in options ) {
-
-        this._setOption ( key, options[key] );
+        }
 
       }
-
-      return this;
-
-    }
-
-    _setOption ( key, value ) {
-
-      this.options[key] = value;
 
       return this;
 
@@ -1121,7 +1081,7 @@
 
     _onHover ( $element, args ) {
 
-      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+      //FIXME: If we remove the target we are still attaching and removing those events though (just performing the functions calls actually, probably)
 
       if ( !args ) {
 
@@ -1201,7 +1161,7 @@
 
     /* DEBOUNCING */
 
-    _debounce ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _debounce ( fn, wait, options ) {
 
       let debounced = _.debounce ( fn, wait, options );
 
@@ -1213,7 +1173,7 @@
 
     /* THROTTLING */
 
-    _throttle ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _throttle ( fn, wait, options ) {
 
       let throttled = _.throttle ( fn, wait, options );
 
@@ -1360,7 +1320,7 @@
  * ========================================================================= */
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
-//FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? (//TODO Test it!)
+//FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? //TODO Test it!
 //FIXME: Flick not working on iPod Touch
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
@@ -1414,7 +1374,7 @@
 
     $.fn[name] = function ( fn ) {
 
-      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] ); //FIXME: Does it work? not sure about that `events[name]` inside the function
+      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] );
 
     };
 
@@ -1422,184 +1382,180 @@
 
   /* POINTER LOGIC */
 
-  (function () { //TODO: Maybe remove this
+  /* VARIABLES */
 
-    /* VARIABLES */
+  let $document = $(document),
+      target,
+      $target,
+      startEvent,
+      startTimestamp,
+      downTimestamp,
+      prevTapTimestamp = 0,
+      motion,
+      moveEvent,
+      pressTimeout;
 
-    let $document = $(document),
-        target,
-        $target,
-        startEvent,
-        startTimestamp,
-        downTimestamp,
-        prevTapTimestamp = 0,
-        motion,
-        moveEvent,
-        pressTimeout;
+  /* EVENT CREATOR */
 
-    /* EVENT CREATOR */
+  let createEvent = function ( name, originalEvent ) {
 
-    let createEvent = function ( name, originalEvent ) {
+    let event = $.Event ( name );
 
-      let event = $.Event ( name );
+    event.originalEvent = originalEvent;
 
-      event.originalEvent = originalEvent;
+    return event;
 
-      return event;
+  };
 
-    };
+  /* HANDLERS */
 
-    /* HANDLERS */
+  let downHandler = function ( event ) {
 
-    let downHandler = function ( event ) {
+    target = event.target;
+    $target = $(target);
 
-      target = event.target;
-      $target = $(target);
+    startEvent = event;
+    startTimestamp = event.timeStamp || Date.now ();
 
-      startEvent = event;
-      startTimestamp = event.timeStamp || Date.now ();
+    motion = false;
 
-      motion = false;
+    pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
 
-      pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
+    $target.on ( Pointer.move, moveHandler );
+    $target.one ( Pointer.up, upHandler );
+    $target.one ( Pointer.cancel, cancelHandler );
 
-      $target.on ( Pointer.move, moveHandler );
-      $target.one ( Pointer.up, upHandler );
-      $target.one ( Pointer.cancel, cancelHandler );
+  };
 
-    };
+  let pressHandler = function () {
 
-    let pressHandler = function () {
+    $target.trigger ( createEvent ( Pointer.press, startEvent ) );
 
-      $target.trigger ( createEvent ( Pointer.press, startEvent ) );
+    pressTimeout = false;
 
-      pressTimeout = false;
+  };
 
-    };
+  let moveHandler = function ( event ) {
 
-    let moveHandler = function ( event ) {
-
-      if ( !motion ) {
-
-        if ( pressTimeout ) {
-
-          clearTimeout ( pressTimeout );
-          pressTimeout = false;
-
-        }
-
-        motion = true;
-
-        if ( !$.browser.is.touchDevice ) {
-
-          $target.off ( Pointer.move, moveHandler );
-
-        }
-
-      }
-
-      moveEvent = event;
-
-    };
-
-    let upHandler = function ( event ) {
+    if ( !motion ) {
 
       if ( pressTimeout ) {
 
         clearTimeout ( pressTimeout );
+        pressTimeout = false;
 
       }
 
-      downTimestamp = event.timeStamp || Date.now ();
+      motion = true;
 
-      if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
-
-        let startXY = $.eventXY ( startEvent ),
-            endXY = $.eventXY ( $.browser.is.touchDevice ? moveEvent : event ),
-            deltaXY = {
-              X: endXY.X - startXY.X,
-              Y: endXY.Y - startXY.Y
-            },
-            absDeltaXY = {
-              X: Math.abs ( deltaXY.X ),
-              Y: Math.abs ( deltaXY.Y )
-            };
-
-        if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
-
-          let orientation,
-              direction;
-
-          if ( absDeltaXY.X > absDeltaXY.Y ) {
-
-            orientation = 'horizontal',
-            direction = ( deltaXY.X > 0 ) ? 1 : -1;
-
-          } else {
-
-            orientation = 'vertical',
-            direction = ( deltaXY.Y > 0 ) ? 1 : -1;
-
-          }
-
-          $target.trigger ( createEvent ( Pointer.flick, event ), {
-            orientation: orientation,
-            direction: direction,
-            startXY: startXY,
-            endXY: endXY
-          });
-
-        }
-
-      }
-
-      if ( !$.browser.is.touchDevice || !motion ) {
-
-        $target.trigger ( createEvent ( Pointer.tap, event ) );
-
-        if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
-        }
-
-        prevTapTimestamp = downTimestamp;
-
-      }
-
-      if ( !motion || $.browser.is.touchDevice ) {
+      if ( !$.browser.is.touchDevice ) {
 
         $target.off ( Pointer.move, moveHandler );
 
       }
 
-      $target.off ( Pointer.cancel, cancelHandler );
+    }
 
-    };
+    moveEvent = event;
 
-    let cancelHandler = function () {
+  };
 
-      if ( pressTimeout ) {
+  let upHandler = function ( event ) {
 
-        clearTimeout ( pressTimeout );
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+
+    }
+
+    downTimestamp = event.timeStamp || Date.now ();
+
+    if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
+
+      let startXY = $.eventXY ( startEvent ),
+          endXY = $.eventXY ( $.browser.is.touchDevice ? moveEvent : event ),
+          deltaXY = {
+            X: endXY.X - startXY.X,
+            Y: endXY.Y - startXY.Y
+          },
+          absDeltaXY = {
+            X: Math.abs ( deltaXY.X ),
+            Y: Math.abs ( deltaXY.Y )
+          };
+
+      if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
+
+        let orientation,
+            direction;
+
+        if ( absDeltaXY.X > absDeltaXY.Y ) {
+
+          orientation = 'horizontal',
+          direction = ( deltaXY.X > 0 ) ? 1 : -1;
+
+        } else {
+
+          orientation = 'vertical',
+          direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+
+        }
+
+        $target.trigger ( createEvent ( Pointer.flick, event ), {
+          orientation: orientation,
+          direction: direction,
+          startXY: startXY,
+          endXY: endXY
+        });
 
       }
 
-      if ( !motion || $.browser.is.touchDevice ) {
+    }
 
-        $target.off ( Pointer.move, moveHandler );
+    if ( !$.browser.is.touchDevice || !motion ) {
+
+      $target.trigger ( createEvent ( Pointer.tap, event ) );
+
+      if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+
+        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
       }
 
-      $target.off ( Pointer.up, upHandler );
+      prevTapTimestamp = downTimestamp;
 
-    };
+    }
 
-    /* BIND */
+    if ( !motion || $.browser.is.touchDevice ) {
 
-    $document.on ( Pointer.down, downHandler );
+      $target.off ( Pointer.move, moveHandler );
 
-  })();
+    }
+
+    $target.off ( Pointer.cancel, cancelHandler );
+
+  };
+
+  let cancelHandler = function () {
+
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+
+    }
+
+    if ( !motion || $.browser.is.touchDevice ) {
+
+      $target.off ( Pointer.move, moveHandler );
+
+    }
+
+    $target.off ( Pointer.up, upHandler );
+
+  };
+
+  /* BIND */
+
+  $document.on ( Pointer.down, downHandler );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -2705,7 +2661,7 @@
 
     }
 
-    _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init () {
 
       let isChecked = this.get (),
           hasClass = this.$checkbox.hasClass ( this.options.classes.checked );
@@ -2894,9 +2850,9 @@
       }
 
       return {
-        h: h * 360, //FIXME: removed Math.round, test if is ok
-        s: s * 100, //FIXME: removed Math.round, test if is ok
-        v: v * 100 //FIXME: removed Math.round, test if is ok
+        h: h * 360, 
+        s: s * 100, 
+        v: v * 100 
       };
 
     }
@@ -4013,13 +3969,13 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//FIXME: Don't trigger the move events if we are not duing it more than a threashold, but just on touch devices, there is very difficoult to do an extremelly precise tap without moving the finger
+//FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
-//FIXME: On iOS, if the draggable is to close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
+//FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
 (function ( $, _, window, document, undefined ) {
 
@@ -5149,8 +5105,6 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add a anction on hovering
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -5159,10 +5113,14 @@
 
   let config = {
     name: 'droppable',
+    options: {
       selector: '*',
       callbacks: {
+        enter () {},
+        leave () {},
         drop () {}
       }
+    }
   };
 
   /* DROPPABLE */
@@ -5180,11 +5138,18 @@
 
     _variables () {
 
+      this.droppable = this.element;
       this.$droppable = this.$element;
+
+      this._wasInside = false;
 
     }
 
     _events () {
+
+      /* DRAG MOVE */
+
+      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
 
       /* DRAG END */
 
@@ -5194,7 +5159,47 @@
 
     /* PRIVATE */
 
+    __dragMove ( event, data ) {
+
+      console.log("moving");
+
+      let isInside = this._isInside ( event, data );
+
+      if ( isInside !== this._wasInside ) {
+
+        if ( isInside ) {
+
+          this._trigger ( 'enter', { draggable: data.draggable, droppable: this.droppable } );
+
+        } else {
+
+          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+
+        }
+
+      }
+
+      this._wasInside = isInside;
+
+    }
+
     __dragEnd ( event, data ) {
+
+      if ( this._isInside ( event, data ) ) {
+
+        if ( this._wasInside ) {
+
+          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+
+        }
+
+        this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
+
+      }
+
+    }
+
+    _isInside ( event, data ) {
 
       var $draggable = $(data.draggable);
 
@@ -5209,11 +5214,13 @@
 
         if ( pointXY.X >= rect.left && pointXY.X <= rect.right && pointXY.Y >= rect.top && pointXY.Y <= rect.bottom ) {
 
-          this._trigger ( 'drop', { draggable: data.draggable, droppable: this.element } );
+          return true;
 
         }
 
       }
+
+      return false;
 
     }
 
@@ -5239,8 +5246,6 @@
  * =========================================================================
  * @requires ../factory/factory.js
  * ========================================================================= */
-
-//FIXME: Right clicking on a `.flippable-trigger` flips it, it should just do nothing instead, probably a Pointer problem
 
 (function ( $, _, window, document, undefined ) {
 
@@ -5613,8 +5618,6 @@
 
       if ( this.options.type !== 'action' ) {
 
-        //FIXME: If mouse only if left mouse button click
-
         this._on ( Pointer.tap, this.close );
 
       }
@@ -5863,7 +5866,7 @@
 
 
 
-//TODO: Add support for validating checkboxes and radios
+//TODO: Add support for validating checkboxes and radios (radios have the same `name` attribute, that it's currently not supported)
 
 
 
@@ -5891,7 +5894,7 @@
           return value.match ( re ) ? true : 'Only hexadecimal characters are allowed';
         },
         number ( value ) {
-          var re = /^-?[0-9]+$/; //FIXME: It is supposed to match both integers and floats, but it doesn't
+          var re = /^-?[0-9]+.?(?:[0-9]?)+$/;
           return value.match ( re ) ? true : 'Only numbers are allowed';
         },
         integer ( value ) {
@@ -6315,7 +6318,7 @@
  * @requires ../form_validate/form_validate.js
  * ========================================================================= */
 
-//TODO: Check if it works, also for upload
+//TODO: Check if it works, also for file uploading
 
 (function ( $, _, window, document, undefined ) {
 
@@ -6747,6 +6750,8 @@
  * @requires vendor/screenfull.js
  * ========================================================================= */
 
+//TODO: Move to their own folders/files
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -6765,7 +6770,7 @@
 
   /* FULLSCREEN */
 
-  //TODO: Move it to its own component, add the ability to trigger the fullscreen for a specific element
+  //TODO: Add the ability to trigger the fullscreen for a specific element
   //FIXME: It doesn't work in iOS's Safari and IE10
   //TODO: Add support
 
@@ -6869,8 +6874,6 @@
  * ========================================================================= */
 
 //INFO: Since we check the `event.target` in order to detect a click on the background it will fail when using a `.container` as a modal, so effectively we are shrinking the supported groups of element to `card` and `card`-like
-
-//TODO: Disable scrolling while the modal is open
 
 (function ( $, _, window, document, undefined ) {
 
@@ -6995,6 +6998,8 @@
         this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
 
         this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
+
+        $body[this._isOpen ? 'unscrollable' : 'scrollable']();
 
         this._trigger ( this._isOpen ? 'open' : 'close' );
 
@@ -7258,7 +7263,6 @@
  * ========================================================================= */
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-//TODO: Disable scrolling while the navbar is open
 //TODO: Close with a flick
 
 (function ( $, _, window, document, undefined ) {
@@ -7270,7 +7274,7 @@
   let config = {
     name: 'navbar',
     options: {
-      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
+      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
       attributes: {
         id: 'id'
       },
@@ -7453,6 +7457,8 @@
         this._isOpen = force;
 
         this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
+
+        $body[this._isOpen ? 'unscrollable' : 'scrollable']();
 
         this._trigger ( this._isOpen ? 'open' : 'close' );
 
@@ -8648,7 +8654,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init () { 
 
       var isChecked = this.get (),
           hasClass = this.$radio.hasClass ( this.options.classes.checked );
@@ -8911,7 +8917,6 @@ Prism.languages.js = Prism.languages.javascript;
 
   //TODO: Abort the request if the tempModal is closed before we get a result
   //TODO: Animate the dimensions of the temp modal transitioning to the new modal
-  //TODO: Make it work with JSON responses instead of plain html
 
   $.remoteModal = function ( url, data ) {
 
@@ -9818,7 +9823,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       });
 
-      //TODO: Add support for widgetize
+      //TODO: Add support for $root.filter
 
     }
 
@@ -10058,7 +10063,6 @@ Prism.languages.js = Prism.languages.javascript;
 
 //TODO: Add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: Add support for sorting other things other than tables
-//TODO: If possible sort using flexbox's `order` property
 
 (function ( $, _, window, document, undefined ) {
 
@@ -11325,7 +11329,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       });
 
-      //TODO: add support for liter
+      //TODO: add support for $root.filter
 
     }
 

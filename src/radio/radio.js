@@ -69,7 +69,7 @@
 
     }
 
-    _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init () { 
 
       var isChecked = this.get (),
           hasClass = this.$radio.hasClass ( this.options.classes.checked );

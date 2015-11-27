@@ -10,7 +10,7 @@
  * ========================================================================= */
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
-//FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? (//TODO Test it!)
+//FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? //TODO Test it!
 //FIXME: Flick not working on iPod Touch
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
@@ -64,7 +64,7 @@
 
     $.fn[name] = function ( fn ) {
 
-      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] ); //FIXME: Does it work? not sure about that `events[name]` inside the function
+      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] );
 
     };
 
@@ -72,183 +72,179 @@
 
   /* POINTER LOGIC */
 
-  (function () { //TODO: Maybe remove this
+  /* VARIABLES */
 
-    /* VARIABLES */
+  let $document = $(document),
+      target,
+      $target,
+      startEvent,
+      startTimestamp,
+      downTimestamp,
+      prevTapTimestamp = 0,
+      motion,
+      moveEvent,
+      pressTimeout;
 
-    let $document = $(document),
-        target,
-        $target,
-        startEvent,
-        startTimestamp,
-        downTimestamp,
-        prevTapTimestamp = 0,
-        motion,
-        moveEvent,
-        pressTimeout;
+  /* EVENT CREATOR */
 
-    /* EVENT CREATOR */
+  let createEvent = function ( name, originalEvent ) {
 
-    let createEvent = function ( name, originalEvent ) {
+    let event = $.Event ( name );
 
-      let event = $.Event ( name );
+    event.originalEvent = originalEvent;
 
-      event.originalEvent = originalEvent;
+    return event;
 
-      return event;
+  };
 
-    };
+  /* HANDLERS */
 
-    /* HANDLERS */
+  let downHandler = function ( event ) {
 
-    let downHandler = function ( event ) {
+    target = event.target;
+    $target = $(target);
 
-      target = event.target;
-      $target = $(target);
+    startEvent = event;
+    startTimestamp = event.timeStamp || Date.now ();
 
-      startEvent = event;
-      startTimestamp = event.timeStamp || Date.now ();
+    motion = false;
 
-      motion = false;
+    pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
 
-      pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
+    $target.on ( Pointer.move, moveHandler );
+    $target.one ( Pointer.up, upHandler );
+    $target.one ( Pointer.cancel, cancelHandler );
 
-      $target.on ( Pointer.move, moveHandler );
-      $target.one ( Pointer.up, upHandler );
-      $target.one ( Pointer.cancel, cancelHandler );
+  };
 
-    };
+  let pressHandler = function () {
 
-    let pressHandler = function () {
+    $target.trigger ( createEvent ( Pointer.press, startEvent ) );
 
-      $target.trigger ( createEvent ( Pointer.press, startEvent ) );
+    pressTimeout = false;
 
-      pressTimeout = false;
+  };
 
-    };
+  let moveHandler = function ( event ) {
 
-    let moveHandler = function ( event ) {
-
-      if ( !motion ) {
-
-        if ( pressTimeout ) {
-
-          clearTimeout ( pressTimeout );
-          pressTimeout = false;
-
-        }
-
-        motion = true;
-
-        if ( !$.browser.is.touchDevice ) {
-
-          $target.off ( Pointer.move, moveHandler );
-
-        }
-
-      }
-
-      moveEvent = event;
-
-    };
-
-    let upHandler = function ( event ) {
+    if ( !motion ) {
 
       if ( pressTimeout ) {
 
         clearTimeout ( pressTimeout );
+        pressTimeout = false;
 
       }
 
-      downTimestamp = event.timeStamp || Date.now ();
+      motion = true;
 
-      if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
-
-        let startXY = $.eventXY ( startEvent ),
-            endXY = $.eventXY ( $.browser.is.touchDevice ? moveEvent : event ),
-            deltaXY = {
-              X: endXY.X - startXY.X,
-              Y: endXY.Y - startXY.Y
-            },
-            absDeltaXY = {
-              X: Math.abs ( deltaXY.X ),
-              Y: Math.abs ( deltaXY.Y )
-            };
-
-        if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
-
-          let orientation,
-              direction;
-
-          if ( absDeltaXY.X > absDeltaXY.Y ) {
-
-            orientation = 'horizontal',
-            direction = ( deltaXY.X > 0 ) ? 1 : -1;
-
-          } else {
-
-            orientation = 'vertical',
-            direction = ( deltaXY.Y > 0 ) ? 1 : -1;
-
-          }
-
-          $target.trigger ( createEvent ( Pointer.flick, event ), {
-            orientation: orientation,
-            direction: direction,
-            startXY: startXY,
-            endXY: endXY
-          });
-
-        }
-
-      }
-
-      if ( !$.browser.is.touchDevice || !motion ) {
-
-        $target.trigger ( createEvent ( Pointer.tap, event ) );
-
-        if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
-
-          $target.trigger ( createEvent ( Pointer.dbltap, event ) );
-
-        }
-
-        prevTapTimestamp = downTimestamp;
-
-      }
-
-      if ( !motion || $.browser.is.touchDevice ) {
+      if ( !$.browser.is.touchDevice ) {
 
         $target.off ( Pointer.move, moveHandler );
 
       }
 
-      $target.off ( Pointer.cancel, cancelHandler );
+    }
 
-    };
+    moveEvent = event;
 
-    let cancelHandler = function () {
+  };
 
-      if ( pressTimeout ) {
+  let upHandler = function ( event ) {
 
-        clearTimeout ( pressTimeout );
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+
+    }
+
+    downTimestamp = event.timeStamp || Date.now ();
+
+    if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
+
+      let startXY = $.eventXY ( startEvent ),
+          endXY = $.eventXY ( $.browser.is.touchDevice ? moveEvent : event ),
+          deltaXY = {
+            X: endXY.X - startXY.X,
+            Y: endXY.Y - startXY.Y
+          },
+          absDeltaXY = {
+            X: Math.abs ( deltaXY.X ),
+            Y: Math.abs ( deltaXY.Y )
+          };
+
+      if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
+
+        let orientation,
+            direction;
+
+        if ( absDeltaXY.X > absDeltaXY.Y ) {
+
+          orientation = 'horizontal',
+          direction = ( deltaXY.X > 0 ) ? 1 : -1;
+
+        } else {
+
+          orientation = 'vertical',
+          direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+
+        }
+
+        $target.trigger ( createEvent ( Pointer.flick, event ), {
+          orientation: orientation,
+          direction: direction,
+          startXY: startXY,
+          endXY: endXY
+        });
 
       }
 
-      if ( !motion || $.browser.is.touchDevice ) {
+    }
 
-        $target.off ( Pointer.move, moveHandler );
+    if ( !$.browser.is.touchDevice || !motion ) {
+
+      $target.trigger ( createEvent ( Pointer.tap, event ) );
+
+      if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+
+        $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
       }
 
-      $target.off ( Pointer.up, upHandler );
+      prevTapTimestamp = downTimestamp;
 
-    };
+    }
 
-    /* BIND */
+    if ( !motion || $.browser.is.touchDevice ) {
 
-    $document.on ( Pointer.down, downHandler );
+      $target.off ( Pointer.move, moveHandler );
 
-  })();
+    }
+
+    $target.off ( Pointer.cancel, cancelHandler );
+
+  };
+
+  let cancelHandler = function () {
+
+    if ( pressTimeout ) {
+
+      clearTimeout ( pressTimeout );
+
+    }
+
+    if ( !motion || $.browser.is.touchDevice ) {
+
+      $target.off ( Pointer.move, moveHandler );
+
+    }
+
+    $target.off ( Pointer.up, upHandler );
+
+  };
+
+  /* BIND */
+
+  $document.on ( Pointer.down, downHandler );
 
 }( Svelto.$, Svelto._, window, document ));

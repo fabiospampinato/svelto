@@ -8,8 +8,6 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add a anction on hovering
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -18,10 +16,14 @@
 
   let config = {
     name: 'droppable',
+    options: {
       selector: '*',
       callbacks: {
+        enter () {},
+        leave () {},
         drop () {}
       }
+    }
   };
 
   /* DROPPABLE */
@@ -39,11 +41,18 @@
 
     _variables () {
 
+      this.droppable = this.element;
       this.$droppable = this.$element;
+
+      this._wasInside = false;
 
     }
 
     _events () {
+
+      /* DRAG MOVE */
+
+      this._on ( $document, 'draggable:move', this._throttle ( this.__dragMove, 100 ) );
 
       /* DRAG END */
 
@@ -53,7 +62,47 @@
 
     /* PRIVATE */
 
+    __dragMove ( event, data ) {
+
+      console.log("moving");
+
+      let isInside = this._isInside ( event, data );
+
+      if ( isInside !== this._wasInside ) {
+
+        if ( isInside ) {
+
+          this._trigger ( 'enter', { draggable: data.draggable, droppable: this.droppable } );
+
+        } else {
+
+          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+
+        }
+
+      }
+
+      this._wasInside = isInside;
+
+    }
+
     __dragEnd ( event, data ) {
+
+      if ( this._isInside ( event, data ) ) {
+
+        if ( this._wasInside ) {
+
+          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+
+        }
+
+        this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
+
+      }
+
+    }
+
+    _isInside ( event, data ) {
 
       var $draggable = $(data.draggable);
 
@@ -68,11 +117,13 @@
 
         if ( pointXY.X >= rect.left && pointXY.X <= rect.right && pointXY.Y >= rect.top && pointXY.Y <= rect.bottom ) {
 
-          this._trigger ( 'drop', { draggable: data.draggable, droppable: this.element } );
+          return true;
 
         }
 
       }
+
+      return false;
 
     }
 

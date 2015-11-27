@@ -2392,7 +2392,11 @@ $progressbar-stripe-opacity: 0.05 !default;
 $progressbar-stripe-light-color: rgba(255, 255, 255, $progressbar-stripe-opacity) !default;
 $progressbar-stripe-dark-color: rgba(0, 0, 0, $progressbar-stripe-opacity) !default;
 
-$progressbar-stripes-transition-move-duration: 1s !default;
+$progressbar-stripes-transition-move-duration: 0.5s !default;
+
+/* INDETERMIMNATE */
+
+$progressbar-indeterminate-animation-duration: 1.5s !default;
 
 /* OTHERS */
 
@@ -2823,13 +2827,13 @@ $table-bordered-border-color: inherit !default;
 
 /* STRIPED */
 
-$table-striped-row-odd-color: rgba(0, 0, 0, 0.02) !default;
+$table-striped-row-odd-color: rgba(0, 0, 0, 0.035) !default;
 $table-striped-row-even-color: rgba(0, 0, 0, 0) !default;
 
 /* HOVERABLE */
 
-$table-hoverable-row-odd-color-hover: rgba(0, 0, 0, 0.04) !default;
-$table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.04) !default;
+$table-hoverable-row-odd-color-hover: rgba(0, 0, 0, 0.06) !default;
+$table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.06) !default;
 
 
 /* =========================================================================

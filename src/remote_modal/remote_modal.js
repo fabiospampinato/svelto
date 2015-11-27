@@ -17,7 +17,6 @@
 
   //TODO: Abort the request if the tempModal is closed before we get a result
   //TODO: Animate the dimensions of the temp modal transitioning to the new modal
-  //TODO: Make it work with JSON responses instead of plain html
 
   $.remoteModal = function ( url, data ) {
 

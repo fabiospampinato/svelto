@@ -9,7 +9,6 @@
  * ========================================================================= */
 
 //TODO: Add support for vertical progressbar (not particularly useful, but when attached it will be an appropriate example of horizontally attached widget)
-//TODO: Add an infinite linear loading progressbar, like before downloading something from the play store
 
 /* PROGRESSBAR */
 
@@ -53,12 +52,12 @@
 
   &.striped {
 
-    .progressbar-highlight {
-      transform: translateZ(0);
-    }
-
     .progressbar-highlight:before {
-      @include fill-absolute ();
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: - $progressbar-stripe-size;
+      right: - $progressbar-stripe-size;
       background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
       content: '';
       pointer-events: none;
@@ -66,7 +65,26 @@
     }
 
     &:not(.disabled) .progressbar-highlight:before {
-      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear 0s infinite;
+      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
+    }
+
+  }
+
+  /* INDETERMINATE */
+
+  &.indeterminate {
+
+    .progressbar-highlight {
+
+      animation: progressbar-indeterminate-highlight $progressbar-indeterminate-animation-duration linear infinite;
+
+      /* STRIPES / LABEL */
+
+      &:before,
+      &:after {
+        display: none;
+      }
+
     }
 
   }
@@ -105,9 +123,23 @@
 
 @keyframes progressbar-stripes-move {
   0% {
-    background-position: 0 0;
+    transform: translateX(0);
   }
   100% {
-    background-position: $progressbar-stripe-size $progressbar-stripe-size;
+    transform: translateX($progressbar-stripe-size);
+  }
+}
+
+@keyframes progressbar-indeterminate-highlight {
+  0% {
+    width: 100%;
+    transform: translateX(-60%) scaleX(0.15);
+  }
+  35% {
+    transform: translateX(-15%) scaleX(0.5);
+  }
+  100% {
+    width: 100%;
+    transform: translateX(51%) scaleX(0.05);
   }
 }

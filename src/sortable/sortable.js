@@ -10,7 +10,6 @@
 
 //TODO: Add support for tableHelper, just put the new addded row in the right position, good performance gain here!
 //TODO: Add support for sorting other things other than tables
-//TODO: If possible sort using flexbox's `order` property
 
 (function ( $, _, window, document, undefined ) {
 

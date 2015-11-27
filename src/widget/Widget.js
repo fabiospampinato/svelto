@@ -168,81 +168,31 @@
 
     option ( key, value ) {
 
-      //FIXME: It doesn't work for setting nested properties, maybe just merge the objects instead
-
-      if ( !key ) { //INFO: Returns a clone of the options object
+      if ( !key ) {
 
         return _.cloneDeep ( this.options );
 
-      }
+      } else if ( _.isString ( key ) ) {
 
-      if ( _.isString ( key ) ) { //INFO: Handle nested keys, for example: 'foo.bar' => { foo: { bar: '' } }
+        if ( _.isUndefined ( value ) ) {
 
-        //FIXME: It doesn't work for nested properties
+          return _.cloneDeep ( _.get ( this.options, key ) );
 
-        let options = {},
-            parts = key.split ( '.' );
+        } else {
 
-        key = parts.shift ();
-
-        if ( parts.length ) {
-
-          let currentOption = options[key] = _.extend ( {}, this.options[key] );
-
-          for ( let part of parts ) {
-
-            currentOption[part] = currentOption[part] || {};
-            currentOption = currentOption[part];
-
-          }
-
-          key = parts.pop ();
-
-          if ( arguments.length === 1 ) {
-
-            return _.isUndefined ( currentOption[key] ) ? null : currentOption[key];
-
-          }
-
-          currentOption[key] = value;
-
-        } else { //INFO: Handle single level property
-
-          if ( arguments.length === 1 ) {
-
-            return _.isUndefined ( this.options[key] ) ? null : this.options[key];
-
-          }
-
-          options[key] = value;
+          _.set ( this.options, key, value );
 
         }
 
-      } else if ( _.isPlainObject ( key ) ) { //INFO: Set multiple properties
+      } else if ( _.isPlainObject ( key ) ) {
 
-        this._setOptions ( key );
+        for ( let prop in key ) {
 
-      }
+          _.set ( this.options, prop, key[prop] );
 
-      return this;
-
-    }
-
-    _setOptions ( options ) {
-
-      for ( let key in options ) {
-
-        this._setOption ( key, options[key] );
+        }
 
       }
-
-      return this;
-
-    }
-
-    _setOption ( key, value ) {
-
-      this.options[key] = value;
 
       return this;
 
@@ -359,7 +309,7 @@
 
     _onHover ( $element, args ) {
 
-      //FIXME: If we remove the target we are still attaching and removing thos events thoug (just performing the functions calls actually, probably)
+      //FIXME: If we remove the target we are still attaching and removing those events though (just performing the functions calls actually, probably)
 
       if ( !args ) {
 
@@ -439,7 +389,7 @@
 
     /* DEBOUNCING */
 
-    _debounce ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _debounce ( fn, wait, options ) {
 
       let debounced = _.debounce ( fn, wait, options );
 
@@ -451,7 +401,7 @@
 
     /* THROTTLING */
 
-    _throttle ( fn, wait, options ) { //TODO: Test it, expecially regarding the `this` variable
+    _throttle ( fn, wait, options ) {
 
       let throttled = _.throttle ( fn, wait, options );
 

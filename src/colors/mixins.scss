@@ -31,38 +31,34 @@
       border-color: $accent #{$extra};
     }
 
-    &.actionable {
+    &.hover,
+    &.actionable:not(.disabled):hover {
+      background: $bg-hover #{$extra};
+    }
 
-      &:not(.disabled):hover {
-        background: $bg-hover #{$extra};
-      }
-
-      &:not(.disabled):not(.ripple):active,
-      &.active {
-        background: $bg-active #{$extra};
-      }
-
+    &.active,
+    &.actionable:not(.disabled):not(.ripple):active {
+      background: $bg-active #{$extra};
     }
 
     &.inverted {
 
-      background: transparent #{$extra};
+      background: inherit #{$extra};
       border-color: $bg #{$extra};
       color: $bg #{$extra};
 
-      &.actionable {
+      &.hover,
+      &.actionable:not(.disabled):hover {
+        background: $bg-hover #{$extra};
+        border-color: $bg #{$extra};
+        color: $text #{$extra};
+      }
 
-        &:not(.disabled):hover {
-          border-color: $bg #{$extra};
-          color: $text #{$extra};
-        }
-
-        &:not(.disabled):not(.ripple):active,
-        &.active {
-          border-color: $bg-active #{$extra};
-          color: $text #{$extra};
-        }
-
+      &.active,
+      &.actionable:not(.disabled):not(.ripple):active {
+        background: $bg-active #{$extra};
+        border-color: $bg-active #{$extra};
+        color: $text #{$extra};
       }
 
     }

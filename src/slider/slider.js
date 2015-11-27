@@ -65,7 +65,7 @@
 
       });
 
-      //TODO: Add support for widgetize
+      //TODO: Add support for $root.filter
 
     }
 

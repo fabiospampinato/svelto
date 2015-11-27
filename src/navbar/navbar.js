@@ -9,7 +9,6 @@
  * ========================================================================= */
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-//TODO: Disable scrolling while the navbar is open
 //TODO: Close with a flick
 
 (function ( $, _, window, document, undefined ) {
@@ -21,7 +20,7 @@
   let config = {
     name: 'navbar',
     options: {
-      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional //FIXME: Should be consistend within different DPIs
+      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
       attributes: {
         id: 'id'
       },
@@ -204,6 +203,8 @@
         this._isOpen = force;
 
         this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
+
+        $body[this._isOpen ? 'unscrollable' : 'scrollable']();
 
         this._trigger ( this._isOpen ? 'open' : 'close' );
 

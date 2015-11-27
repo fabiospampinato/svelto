@@ -8,13 +8,13 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//FIXME: Don't trigger the move events if we are not duing it more than a threashold, but just on touch devices, there is very difficoult to do an extremelly precise tap without moving the finger
+//FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
-//FIXME: On iOS, if the draggable is to close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
+//FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
 (function ( $, _, window, document, undefined ) {
 

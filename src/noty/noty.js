@@ -159,8 +159,6 @@
 
       if ( this.options.type !== 'action' ) {
 
-        //FIXME: If mouse only if left mouse button click
-
         this._on ( Pointer.tap, this.close );
 
       }

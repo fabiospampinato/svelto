@@ -31,38 +31,34 @@
       border-color: $accent #{$extra};
     }
 
-    &.actionable {
+    &.hover,
+    &.actionable:not(.disabled):hover {
+      background: $bg-hover #{$extra};
+    }
 
-      &:not(.disabled):hover {
-        background: $bg-hover #{$extra};
-      }
-
-      &:not(.disabled):not(.ripple):active,
-      &.active {
-        background: $bg-active #{$extra};
-      }
-
+    &.active,
+    &.actionable:not(.disabled):not(.ripple):active {
+      background: $bg-active #{$extra};
     }
 
     &.inverted {
 
-      background: transparent #{$extra};
+      background: inherit #{$extra};
       border-color: $bg #{$extra};
       color: $bg #{$extra};
 
-      &.actionable {
+      &.hover,
+      &.actionable:not(.disabled):hover {
+        background: $bg-hover #{$extra};
+        border-color: $bg #{$extra};
+        color: $text #{$extra};
+      }
 
-        &:not(.disabled):hover {
-          border-color: $bg #{$extra};
-          color: $text #{$extra};
-        }
-
-        &:not(.disabled):not(.ripple):active,
-        &.active {
-          border-color: $bg-active #{$extra};
-          color: $text #{$extra};
-        }
-
+      &.active,
+      &.actionable:not(.disabled):not(.ripple):active {
+        background: $bg-active #{$extra};
+        border-color: $bg-active #{$extra};
+        color: $text #{$extra};
       }
 
     }
@@ -836,12 +832,12 @@
 
 @mixin last-child-no-gutter () {
 
-  > :not(script):last-of-type {
+  > :not(script):last-of-type { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
 
     margin-bottom: 0 !important;
 
     &.multiple {
-      margin-bottom: - $gutter !important; //FIXME: We should inherit this from the settings
+      margin-bottom: - $gutter !important;
     }
 
   }

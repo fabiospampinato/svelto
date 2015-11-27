@@ -151,10 +151,4 @@ hr {
     opacity: $divider-text-opacity;
   }
 
-  /* SPACER */
-
-  &.spacer { //TODO: Maybe remove it, it's not very useful nor required...
-    height: $divider-spacer-height;
-  }
-
 }

@@ -195,7 +195,6 @@ gulp.task ( 'js', ['js-temp'], function () {
 
 /* CSS */
 
-//TODO: Add partial compilation
 //TODO: Add support for sourcemaps
 
 gulp.task ( 'css', ['scss-full'], function () {

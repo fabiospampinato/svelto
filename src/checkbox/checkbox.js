@@ -51,7 +51,7 @@
 
     }
 
-    _init () { //FIXME: is it necessary to include it? Maybe we should fix mistakes with the markup...
+    _init () {
 
       let isChecked = this.get (),
           hasClass = this.$checkbox.hasClass ( this.options.classes.checked );

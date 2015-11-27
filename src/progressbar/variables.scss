@@ -47,7 +47,11 @@ $progressbar-stripe-opacity: 0.05 !default;
 $progressbar-stripe-light-color: rgba(255, 255, 255, $progressbar-stripe-opacity) !default;
 $progressbar-stripe-dark-color: rgba(0, 0, 0, $progressbar-stripe-opacity) !default;
 
-$progressbar-stripes-transition-move-duration: 1s !default;
+$progressbar-stripes-transition-move-duration: 0.5s !default;
+
+/* INDETERMIMNATE */
+
+$progressbar-indeterminate-animation-duration: 1.5s !default;
 
 /* OTHERS */
 
