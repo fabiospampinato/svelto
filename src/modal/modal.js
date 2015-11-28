@@ -24,7 +24,7 @@
         id: 'id'
       },
       datas: {
-        element: 'modal'
+        target: 'target'
       },
       classes: {
         open: 'open'
@@ -57,7 +57,7 @@
 
       this.id = this.$modal.attr ( this.options.attributes.id );
 
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );

@@ -38,7 +38,7 @@
     },
     options: {
       datas: {
-        element: 'select'
+        target: 'target'
       },
       classes: {
         selected: 'active'
@@ -72,7 +72,7 @@
       this.$label = this.$trigger.find ( this.options.selectors.label );
       this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
 
-      this.id = this.$trigger.data ( this.options.datas.element );
+      this.id = this.$trigger.data ( this.options.datas.target );
 
       if ( this.$valueholder.length === 0 ) {
 

@@ -42,7 +42,7 @@
         normal: 14
       },
       datas: {
-        element: 'dropdown'
+        target: 'target'
       },
       classes: {
         noTip: 'no-tip',
@@ -74,7 +74,7 @@
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.id = this.$dropdown.attr ( 'id' );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );

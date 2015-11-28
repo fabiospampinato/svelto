@@ -21,9 +21,6 @@
       hover: {
         triggerable: true
       },
-      datas: {
-        element: 'tooltip'
-      },
       selectors: {
         closer: '.button, .tooltip-closer',
         trigger: '.tooltip-trigger'

@@ -824,13 +824,31 @@
 
       /* ATTACH CONFIG */
 
-      _.extend ( this, this._getConfig ( options ) );
+      _.extend ( this, this._getConfig ( options, element ) );
 
       /* CHECK IF INITIALIZABLE */
 
       if ( !element && !this.templates.base ) {
 
         throw this.errors.uninitializable;
+
+      }
+
+      /* CACHE TEMPLATES */
+
+      for ( let tmpl in this.templates ) {
+
+        if ( this.templates[tmpl] ) {
+
+          let tmplName = this.name + '.' + tmpl;
+
+          if ( !(tmplName in $.tmpl.cache) ) {
+
+            $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+
+          }
+
+        }
 
       }
 
@@ -859,14 +877,17 @@
 
     }
 
-    _getConfig ( options ) {
+    _getConfig ( options, element ) {
+
+      console.log("----- CONFIGS -----");
 
       /* VARIABLES */
 
-      let configs = [],
-          prototype = Object.getPrototypeOf ( this );
+      let configs = [];
 
       /* PROTOTYPE CHAIN */
+
+      let prototype = Object.getPrototypeOf ( this );
 
       while ( prototype ) {
 
@@ -880,17 +901,42 @@
 
       }
 
-      /* CONFIG */
-
-      configs.push ( {} );
+      configs.push ( {} ); //INFO: So that we merge them to a new object
 
       configs.reverse ();
+
+      /* DATA OPTIONS */
+
+      if ( element ) {
+
+        let $element = $(element),
+            name = _.last ( configs )['name'].toLowerCase (),
+            dataOptions = $element.data ( 'options' ),
+            dataNameOptions = $element.data ( name + '-options' );
+
+        if ( dataOptions ) {
+
+          configs.push ({ options: dataOptions });
+
+        }
+
+        if ( dataNameOptions ) {
+
+          configs.push ({ options: dataNameOptions })
+
+        }
+
+      }
+
+      /* OPTIONS */
 
       if ( options ) {
 
         configs.push ({ options: options });
 
       }
+
+      /* CREATE OPTIONS */
 
       let createOptions = this._createOptions ();
 
@@ -899,6 +945,12 @@
         configs.push ({ options: createOptions });
 
       }
+
+      for ( let config of configs ) {
+        console.log(config);
+      }
+
+      /* RETURN */
 
       return _.merge ( ...configs );
 
@@ -1198,12 +1250,6 @@
     _tmpl ( name, options = {} ) {
 
       let tmplName = this.name + '.' + name;
-
-      if ( !(tmplName in $.tmpl.cache) ) {
-
-        $.tmpl.cache[tmplName] = $.tmpl ( this.templates[name] );
-
-      }
 
       return $.tmpl ( tmplName, options );
 
@@ -4731,7 +4777,7 @@
         normal: 14
       },
       datas: {
-        element: 'dropdown'
+        target: 'target'
       },
       classes: {
         noTip: 'no-tip',
@@ -4763,7 +4809,7 @@
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.id = this.$dropdown.attr ( 'id' );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
@@ -6947,7 +6993,7 @@
         id: 'id'
       },
       datas: {
-        element: 'modal'
+        target: 'target'
       },
       classes: {
         open: 'open'
@@ -6980,7 +7026,7 @@
 
       this.id = this.$modal.attr ( this.options.attributes.id );
 
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
@@ -7334,7 +7380,7 @@
       },
       datas: {
         direction: 'direction',
-        element: 'navbar'
+        target: 'target'
       },
       classes: {
         open: 'open',
@@ -7365,7 +7411,7 @@
       this.id = this.$navbar.attr ( this.options.attributes.id );
 
       this.$closers = this.$navbar.find ( this.options.selectors.closer );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
 
       this.direction = this.$navbar.data ( this.options.datas.direction );
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
@@ -9217,7 +9263,7 @@ Prism.languages.js = Prism.languages.javascript;
     },
     options: {
       datas: {
-        element: 'select'
+        target: 'target'
       },
       classes: {
         selected: 'active'
@@ -9251,7 +9297,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.$label = this.$trigger.find ( this.options.selectors.label );
       this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
 
-      this.id = this.$trigger.data ( this.options.datas.element );
+      this.id = this.$trigger.data ( this.options.datas.target );
 
       if ( this.$valueholder.length === 0 ) {
 
@@ -12046,9 +12092,6 @@ Prism.languages.js = Prism.languages.javascript;
     options: {
       hover: {
         triggerable: true
-      },
-      datas: {
-        element: 'tooltip'
       },
       selectors: {
         closer: '.button, .tooltip-closer',

@@ -47,13 +47,31 @@
 
       /* ATTACH CONFIG */
 
-      _.extend ( this, this._getConfig ( options ) );
+      _.extend ( this, this._getConfig ( options, element ) );
 
       /* CHECK IF INITIALIZABLE */
 
       if ( !element && !this.templates.base ) {
 
         throw this.errors.uninitializable;
+
+      }
+
+      /* CACHE TEMPLATES */
+
+      for ( let tmpl in this.templates ) {
+
+        if ( this.templates[tmpl] ) {
+
+          let tmplName = this.name + '.' + tmpl;
+
+          if ( !(tmplName in $.tmpl.cache) ) {
+
+            $.tmpl.cache[tmplName] = $.tmpl ( this.templates[tmpl] );
+
+          }
+
+        }
 
       }
 
@@ -82,14 +100,17 @@
 
     }
 
-    _getConfig ( options ) {
+    _getConfig ( options, element ) {
+
+      console.log("----- CONFIGS -----");
 
       /* VARIABLES */
 
-      let configs = [],
-          prototype = Object.getPrototypeOf ( this );
+      let configs = [];
 
       /* PROTOTYPE CHAIN */
+
+      let prototype = Object.getPrototypeOf ( this );
 
       while ( prototype ) {
 
@@ -103,17 +124,42 @@
 
       }
 
-      /* CONFIG */
-
-      configs.push ( {} );
+      configs.push ( {} ); //INFO: So that we merge them to a new object
 
       configs.reverse ();
+
+      /* DATA OPTIONS */
+
+      if ( element ) {
+
+        let $element = $(element),
+            name = _.last ( configs )['name'].toLowerCase (),
+            dataOptions = $element.data ( 'options' ),
+            dataNameOptions = $element.data ( name + '-options' );
+
+        if ( dataOptions ) {
+
+          configs.push ({ options: dataOptions });
+
+        }
+
+        if ( dataNameOptions ) {
+
+          configs.push ({ options: dataNameOptions })
+
+        }
+
+      }
+
+      /* OPTIONS */
 
       if ( options ) {
 
         configs.push ({ options: options });
 
       }
+
+      /* CREATE OPTIONS */
 
       let createOptions = this._createOptions ();
 
@@ -122,6 +168,12 @@
         configs.push ({ options: createOptions });
 
       }
+
+      for ( let config of configs ) {
+        console.log(config);
+      }
+
+      /* RETURN */
 
       return _.merge ( ...configs );
 
@@ -421,12 +473,6 @@
     _tmpl ( name, options = {} ) {
 
       let tmplName = this.name + '.' + name;
-
-      if ( !(tmplName in $.tmpl.cache) ) {
-
-        $.tmpl.cache[tmplName] = $.tmpl ( this.templates[name] );
-
-      }
 
       return $.tmpl ( tmplName, options );
 

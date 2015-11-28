@@ -28,7 +28,7 @@
       },
       datas: {
         direction: 'direction',
-        element: 'navbar'
+        target: 'target'
       },
       classes: {
         open: 'open',
@@ -59,7 +59,7 @@
       this.id = this.$navbar.attr ( this.options.attributes.id );
 
       this.$closers = this.$navbar.find ( this.options.selectors.closer );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.element + '="' + this.id + '"]');
+      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
 
       this.direction = this.$navbar.data ( this.options.datas.direction );
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
