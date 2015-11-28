@@ -21,6 +21,7 @@
 
   let config = {
     name: 'formAjax',
+    selector: 'form.ajax',
     options: {
       spinnerOverlay: true,
       callbacks: {
@@ -35,13 +36,6 @@
   class FormAjax extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'form.ajax' ).formAjax ();
-      $root.filter ( 'form.ajax' ).formAjax ();
-
-    }
 
     _variables () {
 

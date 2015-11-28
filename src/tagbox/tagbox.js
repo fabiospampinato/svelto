@@ -23,6 +23,7 @@
 
   let config = {
     name: 'tagbox',
+    selector: '.tagbox',
     templates: {
       tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
               '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' +
@@ -75,17 +76,9 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $tagbox ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.tagbox' ).each ( function () {
-
-        var $tagbox = $(this);
-
-        $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
-
-      });
-
-      //TODO: add support for $root.filter
+      $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
 
     }
 

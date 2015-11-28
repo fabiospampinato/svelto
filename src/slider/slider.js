@@ -12,6 +12,7 @@
 
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
+//TODO: Add a live option
 
 (function ( $, _, window, document, undefined ) {
 
@@ -21,12 +22,14 @@
 
   let config = {
     name: 'slider',
+    selector: '.slider',
     options: {
       min: 0,
       max: 100,
       value: 0,
       step: 1,
       decimals: 0,
+      live: false,
       selectors: {
         input: 'input',
         min: '.slider-min',
@@ -49,23 +52,15 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $slider ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.slider' ).each ( function () {
-
-        var $slider = $(this);
-
-        $slider.slider ({
-          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-          value: Number($slider.find ( 'input' ).val () || 0),
-          step: Number($slider.data ( 'step' ) || 1),
-          decimals: Number($slider.data ( 'decimals' ) || 0)
-        });
-
+      $slider.slider ({
+        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+        value: Number($slider.find ( 'input' ).val () || 0),
+        step: Number($slider.data ( 'step' ) || 1),
+        decimals: Number($slider.data ( 'decimals' ) || 0)
       });
-
-      //TODO: Add support for $root.filter
 
     }
 
@@ -101,7 +96,7 @@
 
       /* WINDOW RESIZE */
 
-      this._on ( true, $window, 'resize', this.__resize );
+      this._on ( true, $window, 'resize', this._throttle ( this.__resize, 250 ) );
 
       /* KEYDOWN */
 
@@ -225,9 +220,17 @@
 
     __dragMove ( data ) {
 
-      this.$highlight.translateX ( data.moveXY.X );
+      if ( this.options.live ) {
 
-      this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
+        this.set ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) );
+
+      } else {
+
+        this.$highlight.translateX ( data.moveXY.X );
+
+        this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
+
+      }
 
     }
 

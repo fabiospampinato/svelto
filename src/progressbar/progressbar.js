@@ -16,8 +16,9 @@
 
   let config = {
     name: 'progressbar',
+    selector: '.progressbar',
     templates: {
-      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.indeterminate ? "indeterminate" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
               '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
             '</div>'
     },
@@ -28,6 +29,7 @@
         off: '' // Color of `.progressbar`
       },
       striped: false, // Draw striped over it
+      indeterminate: false, //Indeterminate state
       labeled: false, // Draw a label inside
       decimals: 0, // Amount of decimals to round the label value to
       size: '', // Size of the progressbar: '', 'compact', 'slim'
@@ -62,20 +64,12 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $progressbar ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.progressbar' ).each ( function () {
-
-        var $progressbar = $(this);
-
-        $progressbar.progressbar ({
-          value: $progressbar.data ( 'value' ),
-          decimals: $progressbar.data ( 'decimals ')
-        });
-
+      $progressbar.progressbar ({
+        value: $progressbar.data ( 'value' ),
+        decimals: $progressbar.data ( 'decimals ')
       });
-
-      //TODO: Add support for $root.filter
 
     }
 
@@ -90,8 +84,7 @@
 
       this.options.value = this._sanitizeValue ( this.options.value );
 
-      this._updateWidth ();
-      this._updateLabel ();
+      this._update ();
 
     }
 
@@ -157,15 +150,15 @@
 
           this._update ();
 
-          this._trigger  ( 'change', data );
+          this._trigger ( 'change', data );
 
           if ( this.options.value === 0 ) {
 
-            this._trigger  ( 'empty', data );
+            this._trigger ( 'empty', data );
 
           } else if ( this.options.value === 100 ) {
 
-            this._trigger  ( 'full', data );
+            this._trigger ( 'full', data );
 
           }
 

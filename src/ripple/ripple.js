@@ -16,6 +16,7 @@
 
   let config = {
     name: 'ripple',
+    selector: '.ripple',
     templates: {
       circle: '<div class="ripple-circle"></div>'
     },
@@ -43,13 +44,6 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.ripple' ).ripple ();
-      $root.filter ( '.ripple' ).ripple ();
-
-    }
-
     _variables () {
 
       this.$ripple = this.$element;
@@ -76,7 +70,7 @@
 
       if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
 
-      this._show ( event );
+      this._show ( $.eventXY ( event ) );
 
     }
 
@@ -96,16 +90,15 @@
 
     /* SHOW */
 
-    _show ( event ) {
+    _show ( point ) {
 
       let $circle = $(this._tmpl ( 'circle' )).prependTo ( this.$ripple ),
           offset = this.$ripple.offset (),
-          eventXY = $.eventXY ( event ),
           now = _.now ();
 
       $circle.css ({
-        top: eventXY.Y - offset.top,
-        left: eventXY.X - offset.left
+        top: point.Y - offset.top,
+        left: point.X - offset.left
       }).addClass ( this.options.classes.circle.show );
 
       this.circles.push ( [$circle, now] );

@@ -20,26 +20,9 @@
 
   $.factory = function ( Widget ) {
 
-    /* NAME */
-
-    let name = Widget.config.name,
-        nameLowerCase = name.toLowerCase ();
-
-    /* CACHE TEMPLATES */
-
-    for ( let tmplName in Widget.config.templates ) {
-
-      if ( Widget.config.templates[tmplName] ) {
-
-        $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
-
-      }
-
-    }
-
     /* WIDGETIZE */
 
-    Widgetize.add ( Widget.prototype._widgetize );
+    Widgetize.add ( Widget.config.selector, Widget.prototype._widgetize.bind ( Widget.config ) ); //FIXME: Make it static instead of using `.bind ()`, that would be better
 
     /* BRIDGE */
 

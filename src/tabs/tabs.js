@@ -18,6 +18,7 @@
 
   let config = {
     name: 'tabs',
+    selector: '.tabs',
     options: {
       direction: undefined,
       highlight: true,
@@ -32,7 +33,7 @@
         containers: '.tabs-containers > *'
       },
       callbacks: {
-        set: _.noop
+        set () {}
       }
     }
   };
@@ -42,13 +43,6 @@
   class Tabs extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.tabs' ).tabs ();
-      $root.filter ( '.tabs' ).tabs ();
-
-    }
 
     _variables () {
 

@@ -93,6 +93,7 @@
 
   $.fn.onHover = function ( ...args ) {
 
+    //FIXME: Does it handle `Pointer.cancel` properly?
     //FIXME: If we remove the target we are still attaching and removing thos events though (just performing the functions calls actually, probably)
 
     this.on ( Pointer.enter, () => this.on ( ...args ) );

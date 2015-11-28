@@ -16,6 +16,7 @@
 
   let config = {
     name: 'expander',
+    selector: '.expander',
     options: {
       classes: {
         open: 'open'
@@ -36,13 +37,6 @@
   class Expander extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.expander' ).expander ();
-      $root.filter ( '.expander' ).expander ();
-
-    }
 
     _variables () {
 

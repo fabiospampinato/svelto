@@ -19,6 +19,7 @@
 
   let config = {
     name: 'carousel',
+    selector: '.carousel',
     options: {
       startingIndex: 0,
       cycle: false,
@@ -49,13 +50,6 @@
   class Carousel extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.carousel' ).carousel ();
-      $root.filter ( '.carousel' ).carousel ();
-
-    }
 
     _variables () {
 
@@ -249,7 +243,7 @@
         this._current.$item.addClass ( this.options.classes.current );
         this._current.$indicator.addClass ( this.options.classes.current );
 
-        if ( this.options.timer ) {
+        if ( this.options.cycle ) {
 
           this.timer.stop ();
 
@@ -265,7 +259,7 @@
 
           }
 
-          if ( this.options.timer ) {
+          if ( this.options.cycle ) {
 
             this.timer.play ();
 

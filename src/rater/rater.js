@@ -19,6 +19,7 @@
 
   let config = {
     name: 'rater',
+    selector: '.rater',
     templates: {
       base: '<div class="rater">' +
               '{% include ( "rater.stars", o ); %}' +
@@ -46,21 +47,13 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $rater ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.rater' ).each ( function () {
-
-        var $rater = $(this);
-
-        $rater.rater ({
-          value: Number($rater.data ( 'value' ) || 0),
-          amount: Number($rater.data ( 'amount' ) || 5),
-          url: Number($rater.data ( 'url' ) || false)
-        });
-
+      $rater.rater ({
+        value: Number($rater.data ( 'value' ) || 0),
+        amount: Number($rater.data ( 'amount' ) || 5),
+        url: Number($rater.data ( 'url' ) || false)
       });
-
-      //TODO: Add support for rater
 
     }
 

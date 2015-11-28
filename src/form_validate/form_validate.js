@@ -26,6 +26,7 @@
 
   let config = {
     name: 'formValidate',
+    selector: 'form.validate', //FIXME: Deduce from [data-validations] on child node instead, like: $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
     options: {
       validators: {
         /* TYPE */
@@ -145,12 +146,6 @@
   class FormValidate extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
-
-    }
 
     _variables () {
 

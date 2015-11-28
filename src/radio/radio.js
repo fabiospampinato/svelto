@@ -16,6 +16,7 @@
 
   let config = {
     name: 'radio',
+    selector: '.radio',
     options: {
       attributes: {
         name: 'name'
@@ -41,21 +42,12 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.radio' ).radio ();
-      $root.filter ( '.radio' ).radio ();
-
-    }
-
     _variables () {
 
       this.$radio = this.$element;
       this.$input = this.$radio.find ( this.options.selectors.input );
 
       this.name = this.$input.attr ( this.options.attributes.name );
-
-      this.isMultiple = this.name.endsWith ( ']' );
 
       this.$container = this.$radio.parents ( this.options.selectors.form ).first ();
 
@@ -69,7 +61,7 @@
 
     }
 
-    _init () { 
+    _init () {
 
       var isChecked = this.get (),
           hasClass = this.$radio.hasClass ( this.options.classes.checked );
@@ -118,6 +110,12 @@
     get () {
 
       return this.$input.prop ( 'checked' );
+
+    }
+
+    val () { //TODO: Update demo for it
+
+      return this.$input.val ();
 
     }
 

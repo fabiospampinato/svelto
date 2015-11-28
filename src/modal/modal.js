@@ -18,6 +18,7 @@
 
   let config = {
     name: 'modal',
+    selector: '.modal',
     options: {
       attributes: {
         id: 'id'
@@ -48,13 +49,6 @@
   class Modal extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.modal' ).modal ();
-      $root.filter ( '.modal' ).modal ();
-
-    }
 
     _variables () {
 

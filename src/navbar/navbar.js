@@ -10,6 +10,7 @@
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Close with a flick
+//TODO: Add close with the ESC key
 
 (function ( $, _, window, document, undefined ) {
 
@@ -19,6 +20,7 @@
 
   let config = {
     name: 'navbar',
+    selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
       attributes: {
@@ -48,13 +50,6 @@
   class Navbar extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.navbar' ).navbar ();
-      $root.filter ( '.navbar' ).navbar ();
-
-    }
 
     _variables () {
 
@@ -192,7 +187,7 @@
 
     toggle ( force ) {
 
-      if ( _.isUndefined ( force ) ) {
+      if ( !_.isBoolean ( force ) ) {
 
         force = !this._isOpen;
 

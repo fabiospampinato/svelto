@@ -17,6 +17,7 @@
 
   let config = {
     name: 'accordion',
+    selector: '.accordion',
     options: {
       isMultiple: undefined,
       classes: {
@@ -38,19 +39,12 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.accordion' ).accordion ();
-      $root.filter ( '.accordion' ).accordion ();
-
-    }
-
     _variables () {
 
       this.$accordion = this.$element;
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
 
-      this.expandersInstances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
+      this.instances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
 
       this.options.isMultiple = _.isBoolean ( this.options.isMultiple ) ? this.options.isMultiple : this.$accordion.hasClass ( this.options.classes.multiple );
 
@@ -64,7 +58,7 @@
 
         if ( !this.options.isMultiple ) {
 
-          this.__closeOthers ( event );
+          this.__closeOthers ( event.target );
 
         }
 
@@ -74,13 +68,13 @@
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event ) {
+    __closeOthers ( expander ) {
 
       for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-        if ( this.$expanders[i] !== event.target ) {
+        if ( this.$expanders[i] !== expander ) {
 
-          this.expandersInstances[i].close ();
+          this.instances[i].close ();
 
         }
 
@@ -92,13 +86,13 @@
 
     areOpen () {
 
-      return this.expandersInstances.map ( instance => instance.isOpen () );
+      return this.instances.map ( instance => instance.isOpen () );
 
     }
 
     toggle ( index, force ) {
 
-      let instance = this.expandersInstances[index],
+      let instance = this.instances[index],
           isOpen = instance.isOpen ();
 
       if ( !_.isBoolean ( force ) ) {

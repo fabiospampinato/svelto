@@ -21,6 +21,7 @@
 
   let config = {
     name: 'colorpicker',
+    selector: '.colorpicker',
     options: {
       defaultColor: '#ff0000',
       live: false,
@@ -46,13 +47,6 @@
   class Colorpicker extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.colorpicker' ).colorpicker ();
-      $root.filter ( '.colorpicker' ).colorpicker ();
-
-    }
 
     _variables () {
 
@@ -90,7 +84,7 @@
 
       /* CHANGE */
 
-      this._on ( this.$input, 'change', this.__change );
+      this._on ( true, this.$input, 'change', this.__change );
 
       /* SB KEYDOWN */
 

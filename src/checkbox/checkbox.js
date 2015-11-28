@@ -16,6 +16,7 @@
 
   let config = {
     name: 'checkbox',
+    selector: '.checkbox',
     options: {
       classes: {
         checked: 'checked'
@@ -36,13 +37,6 @@
   class Checkbox extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.checkbox' ).checkbox ();
-      $root.filter ( '.checkbox' ).checkbox ();
-
-    }
 
     _variables () {
 
@@ -72,7 +66,7 @@
 
       /* TAP */
 
-      this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
+      this._on ( Pointer.tap, this.toggle );
 
     }
 
@@ -97,11 +91,17 @@
 
     }
 
+    val () { //TODO: Update demo for it
+
+      return this.$input.val ();
+
+    }
+
     toggle ( force ) {
 
       var isChecked = this.get ();
 
-      if ( _.isUndefined ( force ) ) {
+      if ( !_.isBoolean ( force ) ) {
 
         force = !isChecked;
 

@@ -18,6 +18,7 @@
 
   let config = {
     name: 'switch',
+    selector: '.switch',
     options: {
       colors: {
         on: 'secondary',
@@ -45,22 +46,14 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $switch ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.switch' ).each ( function () {
-
-        var $switch = $(this);
-
-        $switch.switch ({
-          colors: {
-            on: $switch.data ( 'color-on' ) || 'secondary',
-            off: $switch.data ( 'color-off' ) || 'gray'
-          }
-        });
-
+      $switch.switch ({
+        colors: {
+          on: $switch.data ( 'color-on' ) || 'secondary',
+          off: $switch.data ( 'color-off' ) || 'gray'
+        }
       });
-
-      //TODO: add support for filter
 
     }
 

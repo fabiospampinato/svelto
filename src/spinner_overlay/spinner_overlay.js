@@ -50,13 +50,6 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.spinner-overlay' ).spinnerOverlay ();
-      $root.filter ( '.spinner-overlay' ).spinnerOverlay ();
-
-    }
-
     _variables () {
 
       this.$overlayed = this.$element;

@@ -16,6 +16,7 @@
 
   let config = {
     name: 'tableHelper',
+    selector: 'table.table',
     templates: {
       row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
              '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' +
@@ -52,13 +53,6 @@
   class TableHelper extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'table.table' ).tableHelper ();
-      $root.filter ( 'table.table' ).tableHelper ();
-
-    }
 
     _variables () {
 

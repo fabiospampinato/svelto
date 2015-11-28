@@ -16,13 +16,12 @@
 
   let config = {
     name: 'flippable',
+    selector: '.flippable',
     options: {
       classes: {
-        flip: 'flipped'
+        flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
       selectors: {
-        front: '.flippable-front',
-        back: '.flippable-back',
         flipper: '.flippable-trigger'
       },
       callbacks: {
@@ -38,18 +37,9 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.flippable' ).flippable ();
-      $root.filter ( '.flippable' ).flippable ();
-
-    }
-
     _variables () {
 
       this.$flippable = this.$element;
-      this.$front = this.$flippable.find ( this.options.selectors.front );
-      this.$back = this.$flippable.find ( this.options.selectors.back );
       this.$flippers = this.$flippable.find ( this.options.selectors.flipper );
 
       this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );

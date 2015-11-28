@@ -15,7 +15,7 @@
   /* SVELTO */
 
   window.Svelto = {
-    version: '0.2.0-beta.6',
+    version: '0.2.0-beta.7',
     $: jQuery || Zepto || ( $ && ( 'jquery' in $() || 'zepto' in $ ) ? $ : false ),
     _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false )
   };
@@ -113,6 +113,8 @@
  * =========================================================================
  * @requires ../svelto/svelto.js
  * ========================================================================= */
+
+//TODO: Add something like a _.oppositeDirection ( direction )
 
 (function ( _, window, document, undefined ) {
 
@@ -328,13 +330,15 @@
 
      mkize ( number ) {
 
+      //TODO: Add support for a `precision` extra argument
+
     	if ( number >= 1000000 ) {
 
-    		return ( number / 1000000 ) + 'M';
+    		return Math.floor ( number / 1000000 ) + 'M';
 
     	} else if ( number >= 1000 ) {
 
-    		return ( number / 1000 ) + 'K';
+    		return Math.floor ( number / 1000 ) + 'K';
 
     	} else {
 
@@ -542,6 +546,7 @@
 
   $.fn.onHover = function ( ...args ) {
 
+    //FIXME: Does it handle `Pointer.cancel` properly?
     //FIXME: If we remove the target we are still attaching and removing thos events though (just performing the functions calls actually, probably)
 
     this.on ( Pointer.enter, () => this.on ( ...args ) );
@@ -792,6 +797,7 @@
 
   let config = {
     name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    selector: undefined, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
     disabled: false, //INFO: Determines if the widget is enabled or disabled
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
@@ -912,7 +918,11 @@
 
     _createOptions () {} //INFO: Used to pass extra options
 
-    _widgetize () {} //INFO: Gets a parent node, from it find and initialize all the widgets
+    _widgetize ( $widget ) { //INFO: Gets a parent node, from it find and initialize all the widgets //TODO: Update, at least the description //TODO: Make it static
+
+      $widget[this.name]();
+
+    }
 
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function
@@ -1155,19 +1165,7 @@
 
     _frame ( fn ) {
 
-      return $.frame ( () => fn () );
-
-    }
-
-    /* DEBOUNCING */
-
-    _debounce ( fn, wait, options ) {
-
-      let debounced = _.debounce ( fn, wait, options );
-
-      debounced.guid = fn.guid = ( fn.guid || $.guid++ );
-
-      return debounced;
+      return $.frame ( fn.bind ( this ) );
 
     }
 
@@ -1183,11 +1181,31 @@
 
     }
 
+    /* DEBOUNCING */
+
+    _debounce ( fn, wait, options ) {
+
+      let debounced = _.debounce ( fn, wait, options );
+
+      debounced.guid = fn.guid = ( fn.guid || $.guid++ );
+
+      return debounced;
+
+    }
+
     /* TEMPLATE */
 
     _tmpl ( name, options = {} ) {
 
-      return $.tmpl ( this.name.toLowerCase () + '.' + name, options );
+      let tmplName = this.name + '.' + name;
+
+      if ( !(tmplName in $.tmpl.cache) ) {
+
+        $.tmpl.cache[tmplName] = $.tmpl ( this.templates[name] );
+
+      }
+
+      return $.tmpl ( tmplName, options );
 
     }
 
@@ -1254,13 +1272,19 @@
 
     constructor () {
 
-      this.widgetizers = [];
+      this.widgetizers = {};
 
     }
 
-    add ( widgetizer ) {
+    add ( selector, widgetizer ) {
 
-      this.widgetizers.push ( widgetizer );
+      if ( !(selector in this.widgetizers) ) {
+
+        this.widgetizers[selector] = [];
+
+      }
+
+      this.widgetizers[selector].push ( widgetizer );
 
     }
 
@@ -1270,17 +1294,42 @@
 
     }
 
-    remove ( widgetizer ) {
+    remove ( selector, widgetizer ) {
 
-      _.pull ( this.widgetizers, widgetizer );
+      if ( selector in this.widgetizers ) {
+
+        _.pull ( this.widgetizers[selector], widgetizer );
+
+        if ( this.widgetizers[selector].length === 0 ) {
+
+          delete this.widgetizers[selector];
+
+        }
+
+      }
 
     }
 
-    on ( $root ) {
+    on ( $roots ) {
 
-      for ( let widgetizer of this.widgetizers ) {
+      for ( let selector in this.widgetizers ) {
 
-        widgetizer ( $root );
+        this.trigger ( selector, $roots.filter ( selector ) );
+        this.trigger ( selector, $roots.find ( selector ) );
+
+      }
+
+    }
+
+    trigger ( selector, $widgets ) {
+
+      for ( let widget of $widgets ) {
+
+        for ( let widgetizer of this.widgetizers[selector] ) {
+
+          widgetizer ( $(widget) );
+
+        }
 
       }
 
@@ -1581,26 +1630,9 @@
 
   $.factory = function ( Widget ) {
 
-    /* NAME */
-
-    let name = Widget.config.name,
-        nameLowerCase = name.toLowerCase ();
-
-    /* CACHE TEMPLATES */
-
-    for ( let tmplName in Widget.config.templates ) {
-
-      if ( Widget.config.templates[tmplName] ) {
-
-        $.tmpl.cache[nameLowerCase + '.' + tmplName] = $.tmpl ( Widget.config.templates[tmplName] );
-
-      }
-
-    }
-
     /* WIDGETIZE */
 
-    Widgetize.add ( Widget.prototype._widgetize );
+    Widgetize.add ( Widget.config.selector, Widget.prototype._widgetize.bind ( Widget.config ) ); //FIXME: Make it static instead of using `.bind ()`, that would be better
 
     /* BRIDGE */
 
@@ -1714,6 +1746,7 @@
 
   let config = {
     name: 'expander',
+    selector: '.expander',
     options: {
       classes: {
         open: 'open'
@@ -1734,13 +1767,6 @@
   class Expander extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.expander' ).expander ();
-      $root.filter ( '.expander' ).expander ();
-
-    }
 
     _variables () {
 
@@ -1831,6 +1857,7 @@
 
   let config = {
     name: 'accordion',
+    selector: '.accordion',
     options: {
       isMultiple: undefined,
       classes: {
@@ -1852,19 +1879,12 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.accordion' ).accordion ();
-      $root.filter ( '.accordion' ).accordion ();
-
-    }
-
     _variables () {
 
       this.$accordion = this.$element;
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
 
-      this.expandersInstances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
+      this.instances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
 
       this.options.isMultiple = _.isBoolean ( this.options.isMultiple ) ? this.options.isMultiple : this.$accordion.hasClass ( this.options.classes.multiple );
 
@@ -1878,7 +1898,7 @@
 
         if ( !this.options.isMultiple ) {
 
-          this.__closeOthers ( event );
+          this.__closeOthers ( event.target );
 
         }
 
@@ -1888,13 +1908,13 @@
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event ) {
+    __closeOthers ( expander ) {
 
       for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-        if ( this.$expanders[i] !== event.target ) {
+        if ( this.$expanders[i] !== expander ) {
 
-          this.expandersInstances[i].close ();
+          this.instances[i].close ();
 
         }
 
@@ -1906,13 +1926,13 @@
 
     areOpen () {
 
-      return this.expandersInstances.map ( instance => instance.isOpen () );
+      return this.instances.map ( instance => instance.isOpen () );
 
     }
 
     toggle ( index, force ) {
 
-      let instance = this.expandersInstances[index],
+      let instance = this.instances[index],
           isOpen = instance.isOpen ();
 
       if ( !_.isBoolean ( force ) ) {
@@ -1973,7 +1993,6 @@
 //INFO: Only works with `box-sizing: border-box`
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
-//FIXME: When adding a space char it doesn't grow anymore (maybe don't make the span wrap)
 
 (function ( $, _, window, document, undefined ) {
 
@@ -1983,6 +2002,7 @@
 
   let config = {
     name: 'autogrowInput',
+    selector: 'input.autogrow',
     options: {
       minWidth: 0,
       callbacks: {
@@ -1996,13 +2016,6 @@
   class AutogrowInput extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'input.autogrow' ).autogrowInput ();
-      $root.filter ( 'input.autogrow' ).autogrowInput ();
-
-    }
 
     _variables () {
 
@@ -2034,6 +2047,7 @@
 
       $span.css ({
         font: this.$input.css ( 'font' ),
+        whiteSpace: 'nowrap',
         position: 'absolute',
         opacity: 0
       });
@@ -2093,6 +2107,7 @@
 
   let config = {
     name: 'autogrowTextarea',
+    selector: 'textarea.autogrow',
     options: {
       minHeight: 0,
       callbacks: {
@@ -2106,13 +2121,6 @@
   class AutogrowTextarea extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
-      $root.filter ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
-
-    }
 
     _variables () {
 
@@ -2223,10 +2231,6 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-    }
-
     _variables () {
 
     }
@@ -2301,6 +2305,7 @@
 
   let config = {
     name: 'carousel',
+    selector: '.carousel',
     options: {
       startingIndex: 0,
       cycle: false,
@@ -2331,13 +2336,6 @@
   class Carousel extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.carousel' ).carousel ();
-      $root.filter ( '.carousel' ).carousel ();
-
-    }
 
     _variables () {
 
@@ -2531,7 +2529,7 @@
         this._current.$item.addClass ( this.options.classes.current );
         this._current.$indicator.addClass ( this.options.classes.current );
 
-        if ( this.options.timer ) {
+        if ( this.options.cycle ) {
 
           this.timer.stop ();
 
@@ -2547,7 +2545,7 @@
 
           }
 
-          if ( this.options.timer ) {
+          if ( this.options.cycle ) {
 
             this.timer.play ();
 
@@ -2626,6 +2624,7 @@
 
   let config = {
     name: 'checkbox',
+    selector: '.checkbox',
     options: {
       classes: {
         checked: 'checked'
@@ -2646,13 +2645,6 @@
   class Checkbox extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.checkbox' ).checkbox ();
-      $root.filter ( '.checkbox' ).checkbox ();
-
-    }
 
     _variables () {
 
@@ -2682,7 +2674,7 @@
 
       /* TAP */
 
-      this._on ( Pointer.tap, _.wrap ( undefined, this.toggle ) );
+      this._on ( Pointer.tap, this.toggle );
 
     }
 
@@ -2707,11 +2699,17 @@
 
     }
 
+    val () { //TODO: Update demo for it
+
+      return this.$input.val ();
+
+    }
+
     toggle ( force ) {
 
       var isChecked = this.get ();
 
-      if ( _.isUndefined ( force ) ) {
+      if ( !_.isBoolean ( force ) ) {
 
         force = !isChecked;
 
@@ -3087,6 +3085,7 @@
 
   let config = {
     name: 'colorpicker',
+    selector: '.colorpicker',
     options: {
       defaultColor: '#ff0000',
       live: false,
@@ -3112,13 +3111,6 @@
   class Colorpicker extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.colorpicker' ).colorpicker ();
-      $root.filter ( '.colorpicker' ).colorpicker ();
-
-    }
 
     _variables () {
 
@@ -3156,7 +3148,7 @@
 
       /* CHANGE */
 
-      this._on ( this.$input, 'change', this.__change );
+      this._on ( true, this.$input, 'change', this.__change );
 
       /* SB KEYDOWN */
 
@@ -3530,6 +3522,7 @@
 
   let config = {
     name: 'datepicker',
+    selector: '.datepicker',
     options: {
       names: {
         months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -3572,13 +3565,6 @@
   class Datepicker extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.datepicker' ).datepicker ();
-      $root.filter ( '.datepicker' ).datepicker ();
-
-    }
 
     _variables () {
 
@@ -3989,6 +3975,7 @@
 
   let config = {
     name: 'draggable',
+    selector: '.draggable',
     options: {
       draggable: _.true, //INFO: Checks if we can drag it or not
       onlyHandlers: false, //INFO: Only an handler can drag it around
@@ -4027,13 +4014,6 @@
   class Draggable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.draggable' ).draggable ();
-      $root.filter ( '.draggable' ).draggable ();
-
-    }
 
     _variables () {
 
@@ -4290,11 +4270,13 @@
 
 /* TRANSFORM UTILITIES */
 
-//FIXME: Do we need to support -webkit- prefixing?
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
+
+  /* VARIABLES */
+
+  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform'; //FIXME: Does it work?
 
   /* MATRIX */
 
@@ -4302,13 +4284,13 @@
 
     if ( values ) {
 
-      this.css ( 'transform', 'matrix(' + values.join ( ',' ) + ')' );
+      this.css ( property, 'matrix(' + values.join ( ',' ) + ')' );
 
       return this;
 
     } else {
 
-      let transformStr = this.css ( 'transform' );
+      let transformStr = this.css ( property );
 
       return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( value ) ) : [1, 0, 0, 1, 0, 0];
 
@@ -4436,7 +4418,7 @@
         all: ['bottom', 'right', 'left', 'top']
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     }, options );
 
@@ -4671,9 +4653,7 @@
 
   let update = function () {
 
-    let css = cssfy ( tree );
-
-    $stylesheet.html ( css );
+    $stylesheet.html ( cssfy ( tree ) );
 
   };
 
@@ -4701,7 +4681,7 @@
 
   $(function () {
 
-    $stylesheet = $('<style />').appendTo ( $head );
+    $stylesheet = $('<style class="pseudo" />').appendTo ( $head );
 
   });
 
@@ -4736,6 +4716,7 @@
 
   let config = {
     name: 'dropdown',
+    selector: '.dropdown',
     options: {
       hover: {
         triggerable: false,
@@ -4775,13 +4756,6 @@
   class Dropdown extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.dropdown' ).dropdown ();
-      $root.filter ( '.dropdown' ).dropdown ();
-
-    }
 
     _variables () {
 
@@ -5097,12 +5071,159 @@
 
 
 /* =========================================================================
+ * Svelto - Touching
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../bteach/bteach.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* TOUCHING */
+
+  $.fn.touching = function ( options ) {
+
+    /* OPTIONS */
+
+    options = _.merge ({
+      startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
+      point: false, //INFO: Used for the punctual search
+      //  {
+      //    X: 0,
+      //    Y: 0
+      //  },
+      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
+      $comparer: false, //INFO: Used for the overlapping search
+      $not: false,
+      onlyBest: false
+    }, options );
+
+    /* SEARCHABLE */
+
+    let $searchable = options.$not ? this.not ( options.$not ) : this;
+
+    /* COMPARER */
+
+    if ( options.$comparer ) {
+
+      let rect1 = options.$comparer.getRect (),
+          nodes = [],
+          areas = [];
+
+      let result = false;
+
+      for ( let searchable of $searchable ) {
+
+        let rect2 = $.getRect ( searchable ),
+            area = $.getOverlappingArea ( rect1, rect2 );
+
+        if ( area > 0 ) {
+
+          nodes.push ( searchable );
+          areas.push ( area );
+
+        }
+
+      }
+
+      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) )]) : $(nodes);
+
+    }
+
+    /* PUNCTUAL */
+
+    if ( options.point ) {
+
+      let $touched;
+
+      if ( options.binarySearch ) {
+
+        $searchable.btEach ( function () {
+
+          let rect = $.getRect ( this );
+
+          if ( options.point.Y >= rect.top ) {
+
+            if ( options.point.Y <= rect.bottom ) {
+
+              if ( options.point.X >= rect.left ) {
+
+                if ( options.point.X <= rect.right ) {
+
+                  $touched = $(this);
+
+                  return false;
+
+                } else {
+
+                  return 1;
+
+                }
+
+              } else {
+
+                return -1;
+
+              }
+
+            } else {
+
+              return 1;
+
+            }
+
+
+          } else {
+
+            return -1;
+
+          }
+
+
+        }, options.startIndex );
+
+        return $touched || $empty;
+
+      } else {
+
+        for ( let searchable of $searchable ) {
+
+          let rect = $.getRect ( searchable );
+
+          if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
+
+            $touched = $(searchable);
+
+            break;
+
+          }
+
+        }
+
+        return $touched || $empty;
+
+      }
+
+    }
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
  * Svelto - Droppable
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
+ * @requires ../touching/touching.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -5113,6 +5234,7 @@
 
   let config = {
     name: 'droppable',
+    selector: '.droppable',
     options: {
       selector: '*',
       callbacks: {
@@ -5128,13 +5250,6 @@
   class Droppable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.droppable' ).droppable ();
-      $root.filter ( '.droppable' ).droppable ();
-
-    }
 
     _variables () {
 
@@ -5185,7 +5300,7 @@
 
       if ( this._isInside ( event, data ) ) {
 
-        if ( this._wasInside ) {
+        if ( this._wasInside ) { //FIXME: Should it be fired???
 
           this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
 
@@ -5203,18 +5318,7 @@
 
       if ( $draggable.is ( this.options.selector ) ) {
 
-        var rect = this.$droppable.getRect (),
-            eventXY = $.eventXY ( data.event ),
-            pointXY = {
-              X: eventXY.X - $window.scrollTop (),
-              Y: eventXY.Y - $window.scrollLeft ()
-            };
-
-        if ( pointXY.X >= rect.left && pointXY.X <= rect.right && pointXY.Y >= rect.top && pointXY.Y <= rect.bottom ) {
-
-          return true;
-
-        }
+        return this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0;
 
       }
 
@@ -5253,13 +5357,12 @@
 
   let config = {
     name: 'flippable',
+    selector: '.flippable',
     options: {
       classes: {
-        flip: 'flipped'
+        flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
       selectors: {
-        front: '.flippable-front',
-        back: '.flippable-back',
         flipper: '.flippable-trigger'
       },
       callbacks: {
@@ -5275,18 +5378,9 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.flippable' ).flippable ();
-      $root.filter ( '.flippable' ).flippable ();
-
-    }
-
     _variables () {
 
       this.$flippable = this.$element;
-      this.$front = this.$flippable.find ( this.options.selectors.front );
-      this.$back = this.$flippable.find ( this.options.selectors.back );
       this.$flippers = this.$flippable.find ( this.options.selectors.flipper );
 
       this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
@@ -5400,13 +5494,6 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.spinner-overlay' ).spinnerOverlay ();
-      $root.filter ( '.spinner-overlay' ).spinnerOverlay ();
-
-    }
-
     _variables () {
 
       this.$overlayed = this.$element;
@@ -5479,6 +5566,7 @@
 
   let config = {
     name: 'noty',
+    selector: '.noty',
     templates: {
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
               '<div class="infobar">' +
@@ -5530,7 +5618,7 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick: _.noop
+                onClick () {}
              }],
       */
       type: 'alert',
@@ -5581,13 +5669,6 @@
   class Noty extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.noty' ).noty ();
-      $root.filter ( '.noty' ).noty ();
-
-    }
 
     _variables () {
 
@@ -5876,6 +5957,7 @@
 
   let config = {
     name: 'formValidate',
+    selector: 'form.validate', //FIXME: Deduce from [data-validations] on child node instead, like: $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
     options: {
       validators: {
         /* TYPE */
@@ -5995,12 +6077,6 @@
   class FormValidate extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
-
-    }
 
     _variables () {
 
@@ -6326,6 +6402,7 @@
 
   let config = {
     name: 'formAjax',
+    selector: 'form.ajax',
     options: {
       spinnerOverlay: true,
       callbacks: {
@@ -6340,13 +6417,6 @@
   class FormAjax extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'form.ajax' ).formAjax ();
-      $root.filter ( 'form.ajax' ).formAjax ();
-
-    }
 
     _variables () {
 
@@ -6481,6 +6551,7 @@
 
   let config = {
     name: 'formSync',
+    selector: 'form[data-sync-group]',
     options: {
       attributes: {
         name: 'name'
@@ -6504,13 +6575,6 @@
   class FormSync extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'form[data-sync-group]' ).formSync ();
-      $root.filter ( 'form[data-sync-group]' ).formSync ();
-
-    }
 
     _variables () {
 
@@ -6756,11 +6820,11 @@
 
   /* SCROLL TO TOP */
 
-  Widgetize.add ( function () {
+  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
-    $('.scroll-to-top').on ( Pointer.tap, () => {
+    $scroller.on ( Pointer.tap, () => {
 
-      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal )
+      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal );
 
     });
 
@@ -6770,11 +6834,11 @@
 
   //TODO: Add the ability to trigger the fullscreen for a specific element
   //FIXME: It doesn't work in iOS's Safari and IE10
-  //TODO: Add support
+  //TODO: Rewrite a component for it
 
-  Widgetize.add ( function () {
+  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
 
-    $('.fullscreen-toggler').on ( Pointer.tap, screenfull.toggle );
+    $toggler.on ( Pointer.tap, screenfull.toggle );
 
   });
 
@@ -6800,6 +6864,7 @@
 
   let config = {
     name: 'infobar',
+    selector: '.infobar',
     options: {
       selectors: {
         closer: '.infobar-closer'
@@ -6815,13 +6880,6 @@
   class Infobar extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.infobar' ).infobar ();
-      $root.filter ( '.infobar' ).infobar ();
-
-    }
 
     _variables () {
 
@@ -6841,6 +6899,8 @@
     /* API */
 
     close () {
+
+      //INFO: Maybe just detach it, so that we can open it again
 
       this.$infobar.remove ();
 
@@ -6881,6 +6941,7 @@
 
   let config = {
     name: 'modal',
+    selector: '.modal',
     options: {
       attributes: {
         id: 'id'
@@ -6911,13 +6972,6 @@
   class Modal extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.modal' ).modal ();
-      $root.filter ( '.modal' ).modal ();
-
-    }
 
     _variables () {
 
@@ -7262,6 +7316,7 @@
 
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Close with a flick
+//TODO: Add close with the ESC key
 
 (function ( $, _, window, document, undefined ) {
 
@@ -7271,6 +7326,7 @@
 
   let config = {
     name: 'navbar',
+    selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
       attributes: {
@@ -7300,13 +7356,6 @@
   class Navbar extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.navbar' ).navbar ();
-      $root.filter ( '.navbar' ).navbar ();
-
-    }
 
     _variables () {
 
@@ -7444,7 +7493,7 @@
 
     toggle ( force ) {
 
-      if ( _.isUndefined ( force ) ) {
+      if ( !_.isBoolean ( force ) ) {
 
         force = !this._isOpen;
 
@@ -7588,6 +7637,7 @@
 
   let config = {
     name: 'overlay',
+    selector: '.overlay',
     templates: {
       base: false
     },
@@ -7618,13 +7668,6 @@
   class Overlay extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.overlay' ).overlay ();
-      $root.filter ( '.overlay' ).overlay ();
-
-    }
 
     _variables () {
 
@@ -7740,13 +7783,9 @@
 
         this._isOpen = force;
 
-        this._frame ( () => {
+        this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
 
-          this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
-
-          this._trigger ( this._isOpen ? 'open' : 'close' );
-
-        });
+        this._trigger ( this._isOpen ? 'open' : 'close' );
 
       }
 
@@ -8409,8 +8448,9 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'progressbar',
+    selector: '.progressbar',
     templates: {
-      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
+      base: '<div class="progressbar {%=(o.striped ? "striped" : "")%} {%=(o.indeterminate ? "indeterminate" : "")%} {%=(o.labeled ? "labeled" : "")%} {%=o.colors.off%} {%=o.size%} {%=o.css%}">' +
               '<div class="progressbar-highlight {%=o.colors.on%}"></div>' +
             '</div>'
     },
@@ -8421,6 +8461,7 @@ Prism.languages.js = Prism.languages.javascript;
         off: '' // Color of `.progressbar`
       },
       striped: false, // Draw striped over it
+      indeterminate: false, //Indeterminate state
       labeled: false, // Draw a label inside
       decimals: 0, // Amount of decimals to round the label value to
       size: '', // Size of the progressbar: '', 'compact', 'slim'
@@ -8455,20 +8496,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $progressbar ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.progressbar' ).each ( function () {
-
-        var $progressbar = $(this);
-
-        $progressbar.progressbar ({
-          value: $progressbar.data ( 'value' ),
-          decimals: $progressbar.data ( 'decimals ')
-        });
-
+      $progressbar.progressbar ({
+        value: $progressbar.data ( 'value' ),
+        decimals: $progressbar.data ( 'decimals ')
       });
-
-      //TODO: Add support for $root.filter
 
     }
 
@@ -8483,8 +8516,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       this.options.value = this._sanitizeValue ( this.options.value );
 
-      this._updateWidth ();
-      this._updateLabel ();
+      this._update ();
 
     }
 
@@ -8550,15 +8582,15 @@ Prism.languages.js = Prism.languages.javascript;
 
           this._update ();
 
-          this._trigger  ( 'change', data );
+          this._trigger ( 'change', data );
 
           if ( this.options.value === 0 ) {
 
-            this._trigger  ( 'empty', data );
+            this._trigger ( 'empty', data );
 
           } else if ( this.options.value === 100 ) {
 
-            this._trigger  ( 'full', data );
+            this._trigger ( 'full', data );
 
           }
 
@@ -8599,6 +8631,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'radio',
+    selector: '.radio',
     options: {
       attributes: {
         name: 'name'
@@ -8624,21 +8657,12 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.radio' ).radio ();
-      $root.filter ( '.radio' ).radio ();
-
-    }
-
     _variables () {
 
       this.$radio = this.$element;
       this.$input = this.$radio.find ( this.options.selectors.input );
 
       this.name = this.$input.attr ( this.options.attributes.name );
-
-      this.isMultiple = this.name.endsWith ( ']' );
 
       this.$container = this.$radio.parents ( this.options.selectors.form ).first ();
 
@@ -8652,7 +8676,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    _init () { 
+    _init () {
 
       var isChecked = this.get (),
           hasClass = this.$radio.hasClass ( this.options.classes.checked );
@@ -8701,6 +8725,12 @@ Prism.languages.js = Prism.languages.javascript;
     get () {
 
       return this.$input.prop ( 'checked' );
+
+    }
+
+    val () { //TODO: Update demo for it
+
+      return this.$input.val ();
 
     }
 
@@ -8753,6 +8783,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'rater',
+    selector: '.rater',
     templates: {
       base: '<div class="rater">' +
               '{% include ( "rater.stars", o ); %}' +
@@ -8780,21 +8811,13 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $rater ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.rater' ).each ( function () {
-
-        var $rater = $(this);
-
-        $rater.rater ({
-          value: Number($rater.data ( 'value' ) || 0),
-          amount: Number($rater.data ( 'amount' ) || 5),
-          url: Number($rater.data ( 'url' ) || false)
-        });
-
+      $rater.rater ({
+        value: Number($rater.data ( 'value' ) || 0),
+        amount: Number($rater.data ( 'amount' ) || 5),
+        url: Number($rater.data ( 'url' ) || false)
       });
-
-      //TODO: Add support for rater
 
     }
 
@@ -9028,6 +9051,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'ripple',
+    selector: '.ripple',
     templates: {
       circle: '<div class="ripple-circle"></div>'
     },
@@ -9055,13 +9079,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-      $root.find ( '.ripple' ).ripple ();
-      $root.filter ( '.ripple' ).ripple ();
-
-    }
-
     _variables () {
 
       this.$ripple = this.$element;
@@ -9088,7 +9105,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
 
-      this._show ( event );
+      this._show ( $.eventXY ( event ) );
 
     }
 
@@ -9108,16 +9125,15 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SHOW */
 
-    _show ( event ) {
+    _show ( point ) {
 
       let $circle = $(this._tmpl ( 'circle' )).prependTo ( this.$ripple ),
           offset = this.$ripple.offset (),
-          eventXY = $.eventXY ( event ),
           now = _.now ();
 
       $circle.css ({
-        top: eventXY.Y - offset.top,
-        left: eventXY.X - offset.left
+        top: point.Y - offset.top,
+        left: point.X - offset.left
       }).addClass ( this.options.classes.circle.show );
 
       this.circles.push ( [$circle, now] );
@@ -9183,6 +9199,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'select',
+    selector: '.select-trigger',
     templates: {
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
               '<div class="card-block">' +
@@ -9225,13 +9242,6 @@ Prism.languages.js = Prism.languages.javascript;
   class Select extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.select-trigger' ).select ();
-      $root.filter ( '.select-trigger' ).select ();
-
-    }
 
     _variables () {
 
@@ -9472,6 +9482,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'selectable',
+    selector: 'table.selectable',
     templates: {
       base: false
     },
@@ -9483,7 +9494,7 @@ Prism.languages.js = Prism.languages.javascript;
         element: 'tbody tr:not(.empty)'
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     }
   };
@@ -9493,13 +9504,6 @@ Prism.languages.js = Prism.languages.javascript;
   class Selectable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'table.selectable' ).selectable ();
-      $root.filter ( 'table.selectable' ).selectable ();
-
-    }
 
     _variables () {
 
@@ -9768,6 +9772,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 //TODO: Add vertical slider
 //TODO: Make it work without the window resize bind, before we where transforming the transform to a left
+//TODO: Add a live option
 
 (function ( $, _, window, document, undefined ) {
 
@@ -9777,12 +9782,14 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'slider',
+    selector: '.slider',
     options: {
       min: 0,
       max: 100,
       value: 0,
       step: 1,
       decimals: 0,
+      live: false,
       selectors: {
         input: 'input',
         min: '.slider-min',
@@ -9805,23 +9812,15 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $slider ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.slider' ).each ( function () {
-
-        var $slider = $(this);
-
-        $slider.slider ({
-          min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-          max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-          value: Number($slider.find ( 'input' ).val () || 0),
-          step: Number($slider.data ( 'step' ) || 1),
-          decimals: Number($slider.data ( 'decimals' ) || 0)
-        });
-
+      $slider.slider ({
+        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
+        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
+        value: Number($slider.find ( 'input' ).val () || 0),
+        step: Number($slider.data ( 'step' ) || 1),
+        decimals: Number($slider.data ( 'decimals' ) || 0)
       });
-
-      //TODO: Add support for $root.filter
 
     }
 
@@ -9857,7 +9856,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* WINDOW RESIZE */
 
-      this._on ( true, $window, 'resize', this.__resize );
+      this._on ( true, $window, 'resize', this._throttle ( this.__resize, 250 ) );
 
       /* KEYDOWN */
 
@@ -9981,9 +9980,17 @@ Prism.languages.js = Prism.languages.javascript;
 
     __dragMove ( data ) {
 
-      this.$highlight.translateX ( data.moveXY.X );
+      if ( this.options.live ) {
 
-      this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
+        this.set ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) );
+
+      } else {
+
+        this.$highlight.translateX ( data.moveXY.X );
+
+        this._updateLabel ( this._roundValue ( this.options.min + ( data.moveXY.X / this.stepWidth * this.options.step ) ) );
+
+      }
 
     }
 
@@ -10070,6 +10077,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'sortable',
+    selector: 'table.sortable',
     options: {
       sorters: {
         int: function ( a, b ) {
@@ -10099,7 +10107,7 @@ Prism.languages.js = Prism.languages.javascript;
         rowCell: 'td'
       },
       callbacks: {
-        sort: _.noop
+        sort () {}
       }
     }
   };
@@ -10109,13 +10117,6 @@ Prism.languages.js = Prism.languages.javascript;
   class Sortable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'table.sortable' ).sortable ();
-      $root.filter ( 'table.sortable' ).sortable ();
-
-    }
 
     _variables () {
 
@@ -10341,6 +10342,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'stepper',
+    selector: '.stepper',
     options: {
       min: 0,
       max: 100,
@@ -10352,9 +10354,9 @@ Prism.languages.js = Prism.languages.javascript;
         increaser: '.stepper-increaser'
       },
       callbacks: {
-        change: _.noop,
-        increase: _.noop,
-        decrease: _.noop
+        change () {},
+        increase () {},
+        decrease () {}
       }
     }
   };
@@ -10365,22 +10367,14 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $stepper ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.stepper' ).each ( function () {
-
-        var $stepper = $(this);
-
-        $stepper.stepper ({
-          min: Number($stepper.data ( 'min' ) || 0),
-          max: Number($stepper.data ( 'max' ) || 100),
-          value: Number($stepper.find ( '.stepper-input' ).val () || 0),
-          step: Number($stepper.data ( 'step' ) || 1)
-        });
-
+      $stepper.stepper ({
+        min: Number($stepper.data ( 'min' ) || 0),
+        max: Number($stepper.data ( 'max' ) || 100),
+        value: Number($stepper.find ( '.stepper-input' ).val () || 0),
+        step: Number($stepper.data ( 'step' ) || 1)
       });
-
-      //TODO: Add support for $root.filter
 
     }
 
@@ -10593,6 +10587,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'switch',
+    selector: '.switch',
     options: {
       colors: {
         on: 'secondary',
@@ -10620,22 +10615,14 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $switch ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.switch' ).each ( function () {
-
-        var $switch = $(this);
-
-        $switch.switch ({
-          colors: {
-            on: $switch.data ( 'color-on' ) || 'secondary',
-            off: $switch.data ( 'color-off' ) || 'gray'
-          }
-        });
-
+      $switch.switch ({
+        colors: {
+          on: $switch.data ( 'color-on' ) || 'secondary',
+          off: $switch.data ( 'color-off' ) || 'gray'
+        }
       });
-
-      //TODO: add support for filter
 
     }
 
@@ -10853,6 +10840,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tableHelper',
+    selector: 'table.table',
     templates: {
       row: '<tr {%= ( o.id ? "class=" + o.id : "" ) %} >' +
              '{% for ( var i = 0, l = o.datas.length; i < l; i++ ) { %}' +
@@ -10889,13 +10877,6 @@ Prism.languages.js = Prism.languages.javascript;
   class TableHelper extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'table.table' ).tableHelper ();
-      $root.filter ( 'table.table' ).tableHelper ();
-
-    }
 
     _variables () {
 
@@ -11078,6 +11059,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tabs',
+    selector: '.tabs',
     options: {
       direction: undefined,
       highlight: true,
@@ -11092,7 +11074,7 @@ Prism.languages.js = Prism.languages.javascript;
         containers: '.tabs-containers > *'
       },
       callbacks: {
-        set: _.noop
+        set () {}
       }
     }
   };
@@ -11102,13 +11084,6 @@ Prism.languages.js = Prism.languages.javascript;
   class Tabs extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.tabs' ).tabs ();
-      $root.filter ( '.tabs' ).tabs ();
-
-    }
 
     _variables () {
 
@@ -11265,6 +11240,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tagbox',
+    selector: '.tagbox',
     templates: {
       tag: '<div class="label-tag tagbox-tag" data-tag-value="{%=o.value%}">' +
               '<div class="label {%=o.color%} {%=o.size%} {%=o.css%}">' +
@@ -11317,17 +11293,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $tagbox ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.tagbox' ).each ( function () {
-
-        var $tagbox = $(this);
-
-        $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
-
-      });
-
-      //TODO: add support for $root.filter
+      $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
 
     }
 
@@ -11783,6 +11751,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'timeAgo',
+    selector: '[data-timestamp], [data-timestamp-title]',
     options: {
       timestamp: false,
       title: false,
@@ -11798,13 +11767,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $element ) {
 
-      $root.find ( '[data-timestamp]' ).timeAgo ();
-      $root.filter ( '[data-timestamp]' ).timeAgo ();
-
-      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
-      $root.filter ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+      $element.timeAgo ({ title: $element.is ( '[data-timestamp-title]' ) });
 
     }
 
@@ -12077,6 +12042,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tooltip',
+    selector: '.tooltip',
     options: {
       hover: {
         triggerable: true
@@ -12093,18 +12059,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* TOOLTIP */
 
-  class Tooltip extends Svelto.Dropdown {
-
-    /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.tooltip' ).tooltip ();
-      $root.filter ( '.tooltip' ).tooltip ();
-
-    }
-
-  }
+  class Tooltip extends Svelto.Dropdown {}
 
   /* BINDING */
 
@@ -12114,151 +12069,5 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory ( Svelto.Tooltip );
-
-}( Svelto.$, Svelto._, window, document ));
-
-
-/* =========================================================================
- * Svelto - Touching
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../core/core.js
- * @requires ../bteach/bteach.js
- * ========================================================================= */
-
-(function ( $, _, window, document, undefined ) {
-
-  'use strict';
-
-  /* TOUCHING */
-
-  $.fn.touching = function ( options ) {
-
-    /* OPTIONS */
-
-    options = _.merge ({
-      startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
-      point: false, //INFO: Used for the punctual search
-      //  {
-      //    X: 0,
-      //    Y: 0
-      //  },
-      binarySearch: true, //INFO: toggle the binary search when performing a punctual search
-      $comparer: false, //INFO: Used for the overlapping search
-      $not: false,
-      onlyBest: false
-    }, options );
-
-    /* SEARCHABLE */
-
-    let $searchable = options.$not ? this.not ( options.$not ) : this;
-
-    /* COMPARER */
-
-    if ( options.$comparer ) {
-
-      let rect1 = options.$comparer.getRect (),
-          nodes = [],
-          areas = [];
-
-      let result = false;
-
-      for ( let searchable of $searchable ) {
-
-        let rect2 = $.getRect ( searchable ),
-            area = $.getOverlappingArea ( rect1, rect2 );
-
-        if ( area > 0 ) {
-
-          nodes.push ( searchable );
-          areas.push ( area );
-
-        }
-
-      }
-
-      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) )]) : $(nodes);
-
-    }
-
-    /* PUNCTUAL */
-
-    if ( options.point ) {
-
-      let $touched;
-
-      if ( options.binarySearch ) {
-
-        $searchable.btEach ( function () {
-
-          let rect = $.getRect ( this );
-
-          if ( options.point.Y >= rect.top ) {
-
-            if ( options.point.Y <= rect.bottom ) {
-
-              if ( options.point.X >= rect.left ) {
-
-                if ( options.point.X <= rect.right ) {
-
-                  $touched = $(this);
-
-                  return false;
-
-                } else {
-
-                  return 1;
-
-                }
-
-              } else {
-
-                return -1;
-
-              }
-
-            } else {
-
-              return 1;
-
-            }
-
-
-          } else {
-
-            return -1;
-
-          }
-
-
-        }, options.startIndex );
-
-        return $touched || $empty;
-
-      } else {
-
-        for ( let searchable of $searchable ) {
-
-          let rect = $.getRect ( searchable );
-
-          if ( options.point.Y >= rect.top && options.point.Y <= rect.bottom && options.point.X >= rect.left && options.point.X <= rect.right ) {
-
-            $touched = $(searchable);
-
-            break;
-
-          }
-
-        }
-
-        return $touched || $empty;
-
-      }
-
-    }
-
-  };
 
 }( Svelto.$, Svelto._, window, document ));

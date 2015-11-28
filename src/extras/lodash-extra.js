@@ -8,6 +8,8 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
+//TODO: Add something like a _.oppositeDirection ( direction )
+
 (function ( _, window, document, undefined ) {
 
   'use strict';
@@ -222,13 +224,15 @@
 
      mkize ( number ) {
 
+      //TODO: Add support for a `precision` extra argument
+
     	if ( number >= 1000000 ) {
 
-    		return ( number / 1000000 ) + 'M';
+    		return Math.floor ( number / 1000000 ) + 'M';
 
     	} else if ( number >= 1000 ) {
 
-    		return ( number / 1000 ) + 'K';
+    		return Math.floor ( number / 1000 ) + 'K';
 
     	} else {
 

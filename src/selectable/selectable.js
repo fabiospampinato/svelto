@@ -26,6 +26,7 @@
 
   let config = {
     name: 'selectable',
+    selector: 'table.selectable',
     templates: {
       base: false
     },
@@ -37,7 +38,7 @@
         element: 'tbody tr:not(.empty)'
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     }
   };
@@ -47,13 +48,6 @@
   class Selectable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'table.selectable' ).selectable ();
-      $root.filter ( 'table.selectable' ).selectable ();
-
-    }
 
     _variables () {
 

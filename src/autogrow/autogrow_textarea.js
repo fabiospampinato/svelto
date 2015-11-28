@@ -20,6 +20,7 @@
 
   let config = {
     name: 'autogrowTextarea',
+    selector: 'textarea.autogrow',
     options: {
       minHeight: 0,
       callbacks: {
@@ -33,13 +34,6 @@
   class AutogrowTextarea extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
-      $root.filter ( 'textarea.autogrow, .textarea-wrp.autogrow textarea' ).autogrowTextarea ();
-
-    }
 
     _variables () {
 

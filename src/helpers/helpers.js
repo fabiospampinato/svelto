@@ -19,11 +19,11 @@
 
   /* SCROLL TO TOP */
 
-  Widgetize.add ( function () {
+  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
-    $('.scroll-to-top').on ( Pointer.tap, () => {
+    $scroller.on ( Pointer.tap, () => {
 
-      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal )
+      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal );
 
     });
 
@@ -33,11 +33,11 @@
 
   //TODO: Add the ability to trigger the fullscreen for a specific element
   //FIXME: It doesn't work in iOS's Safari and IE10
-  //TODO: Add support
+  //TODO: Rewrite a component for it
 
-  Widgetize.add ( function () {
+  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
 
-    $('.fullscreen-toggler').on ( Pointer.tap, screenfull.toggle );
+    $toggler.on ( Pointer.tap, screenfull.toggle );
 
   });
 

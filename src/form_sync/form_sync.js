@@ -22,6 +22,7 @@
 
   let config = {
     name: 'formSync',
+    selector: 'form[data-sync-group]',
     options: {
       attributes: {
         name: 'name'
@@ -45,13 +46,6 @@
   class FormSync extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'form[data-sync-group]' ).formSync ();
-      $root.filter ( 'form[data-sync-group]' ).formSync ();
-
-    }
 
     _variables () {
 

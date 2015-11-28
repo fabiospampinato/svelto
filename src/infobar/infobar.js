@@ -18,6 +18,7 @@
 
   let config = {
     name: 'infobar',
+    selector: '.infobar',
     options: {
       selectors: {
         closer: '.infobar-closer'
@@ -33,13 +34,6 @@
   class Infobar extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.infobar' ).infobar ();
-      $root.filter ( '.infobar' ).infobar ();
-
-    }
 
     _variables () {
 
@@ -59,6 +53,8 @@
     /* API */
 
     close () {
+
+      //INFO: Maybe just detach it, so that we can open it again
 
       this.$infobar.remove ();
 

@@ -19,6 +19,7 @@
 
   let config = {
     name: 'sortable',
+    selector: 'table.sortable',
     options: {
       sorters: {
         int: function ( a, b ) {
@@ -48,7 +49,7 @@
         rowCell: 'td'
       },
       callbacks: {
-        sort: _.noop
+        sort () {}
       }
     }
   };
@@ -58,13 +59,6 @@
   class Sortable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'table.sortable' ).sortable ();
-      $root.filter ( 'table.sortable' ).sortable ();
-
-    }
 
     _variables () {
 

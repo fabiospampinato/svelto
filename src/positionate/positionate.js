@@ -62,7 +62,7 @@
         all: ['bottom', 'right', 'left', 'top']
       },
       callbacks: {
-        change: _.noop
+        change () {}
       }
     }, options );
 

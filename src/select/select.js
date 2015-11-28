@@ -20,6 +20,7 @@
 
   let config = {
     name: 'select',
+    selector: '.select-trigger',
     templates: {
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
               '<div class="card-block">' +
@@ -62,13 +63,6 @@
   class Select extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.select-trigger' ).select ();
-      $root.filter ( '.select-trigger' ).select ();
-
-    }
 
     _variables () {
 

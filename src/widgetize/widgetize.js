@@ -18,13 +18,19 @@
 
     constructor () {
 
-      this.widgetizers = [];
+      this.widgetizers = {};
 
     }
 
-    add ( widgetizer ) {
+    add ( selector, widgetizer ) {
 
-      this.widgetizers.push ( widgetizer );
+      if ( !(selector in this.widgetizers) ) {
+
+        this.widgetizers[selector] = [];
+
+      }
+
+      this.widgetizers[selector].push ( widgetizer );
 
     }
 
@@ -34,17 +40,42 @@
 
     }
 
-    remove ( widgetizer ) {
+    remove ( selector, widgetizer ) {
 
-      _.pull ( this.widgetizers, widgetizer );
+      if ( selector in this.widgetizers ) {
+
+        _.pull ( this.widgetizers[selector], widgetizer );
+
+        if ( this.widgetizers[selector].length === 0 ) {
+
+          delete this.widgetizers[selector];
+
+        }
+
+      }
 
     }
 
-    on ( $root ) {
+    on ( $roots ) {
 
-      for ( let widgetizer of this.widgetizers ) {
+      for ( let selector in this.widgetizers ) {
 
-        widgetizer ( $root );
+        this.trigger ( selector, $roots.filter ( selector ) );
+        this.trigger ( selector, $roots.find ( selector ) );
+
+      }
+
+    }
+
+    trigger ( selector, $widgets ) {
+
+      for ( let widget of $widgets ) {
+
+        for ( let widgetizer of this.widgetizers[selector] ) {
+
+          widgetizer ( $(widget) );
+
+        }
 
       }
 

@@ -22,6 +22,7 @@
 
   let config = {
     name: 'datepicker',
+    selector: '.datepicker',
     options: {
       names: {
         months: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
@@ -64,13 +65,6 @@
   class Datepicker extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.datepicker' ).datepicker ();
-      $root.filter ( '.datepicker' ).datepicker ();
-
-    }
 
     _variables () {
 

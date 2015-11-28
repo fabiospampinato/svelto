@@ -10,11 +10,13 @@
 
 /* TRANSFORM UTILITIES */
 
-//FIXME: Do we need to support -webkit- prefixing?
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
+
+  /* VARIABLES */
+
+  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform'; //FIXME: Does it work?
 
   /* MATRIX */
 
@@ -22,13 +24,13 @@
 
     if ( values ) {
 
-      this.css ( 'transform', 'matrix(' + values.join ( ',' ) + ')' );
+      this.css ( property, 'matrix(' + values.join ( ',' ) + ')' );
 
       return this;
 
     } else {
 
-      let transformStr = this.css ( 'transform' );
+      let transformStr = this.css ( property );
 
       return ( transformStr && transformStr !== 'none' ) ? transformStr.match ( /[0-9., e-]+/ )[0].split ( ', ' ).map ( value => parseFloat ( value ) ) : [1, 0, 0, 1, 0, 0];
 

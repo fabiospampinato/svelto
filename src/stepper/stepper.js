@@ -16,6 +16,7 @@
 
   let config = {
     name: 'stepper',
+    selector: '.stepper',
     options: {
       min: 0,
       max: 100,
@@ -27,9 +28,9 @@
         increaser: '.stepper-increaser'
       },
       callbacks: {
-        change: _.noop,
-        increase: _.noop,
-        decrease: _.noop
+        change () {},
+        increase () {},
+        decrease () {}
       }
     }
   };
@@ -40,22 +41,14 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $stepper ) { //TODO: Just use the generic data-options maybe
 
-      $root.find ( '.stepper' ).each ( function () {
-
-        var $stepper = $(this);
-
-        $stepper.stepper ({
-          min: Number($stepper.data ( 'min' ) || 0),
-          max: Number($stepper.data ( 'max' ) || 100),
-          value: Number($stepper.find ( '.stepper-input' ).val () || 0),
-          step: Number($stepper.data ( 'step' ) || 1)
-        });
-
+      $stepper.stepper ({
+        min: Number($stepper.data ( 'min' ) || 0),
+        max: Number($stepper.data ( 'max' ) || 100),
+        value: Number($stepper.find ( '.stepper-input' ).val () || 0),
+        step: Number($stepper.data ( 'step' ) || 1)
       });
-
-      //TODO: Add support for $root.filter
 
     }
 

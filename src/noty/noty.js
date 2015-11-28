@@ -22,6 +22,7 @@
 
   let config = {
     name: 'noty',
+    selector: '.noty',
     templates: {
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
               '<div class="infobar">' +
@@ -73,7 +74,7 @@
                 size: 'small',
                 css: '',
                 text: '',
-                onClick: _.noop
+                onClick () {}
              }],
       */
       type: 'alert',
@@ -124,13 +125,6 @@
   class Noty extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.noty' ).noty ();
-      $root.filter ( '.noty' ).noty ();
-
-    }
 
     _variables () {
 

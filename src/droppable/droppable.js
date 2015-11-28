@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
+ * @requires ../touching/touching.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,6 +17,7 @@
 
   let config = {
     name: 'droppable',
+    selector: '.droppable',
     options: {
       selector: '*',
       callbacks: {
@@ -31,13 +33,6 @@
   class Droppable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.droppable' ).droppable ();
-      $root.filter ( '.droppable' ).droppable ();
-
-    }
 
     _variables () {
 
@@ -88,7 +83,7 @@
 
       if ( this._isInside ( event, data ) ) {
 
-        if ( this._wasInside ) {
+        if ( this._wasInside ) { //FIXME: Should it be fired???
 
           this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
 
@@ -106,18 +101,7 @@
 
       if ( $draggable.is ( this.options.selector ) ) {
 
-        var rect = this.$droppable.getRect (),
-            eventXY = $.eventXY ( data.event ),
-            pointXY = {
-              X: eventXY.X - $window.scrollTop (),
-              Y: eventXY.Y - $window.scrollLeft ()
-            };
-
-        if ( pointXY.X >= rect.left && pointXY.X <= rect.right && pointXY.Y >= rect.top && pointXY.Y <= rect.bottom ) {
-
-          return true;
-
-        }
+        return this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0;
 
       }
 

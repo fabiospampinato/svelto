@@ -16,6 +16,7 @@
 
   let config = {
     name: 'tooltip',
+    selector: '.tooltip',
     options: {
       hover: {
         triggerable: true
@@ -32,18 +33,7 @@
 
   /* TOOLTIP */
 
-  class Tooltip extends Svelto.Dropdown {
-
-    /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.tooltip' ).tooltip ();
-      $root.filter ( '.tooltip' ).tooltip ();
-
-    }
-
-  }
+  class Tooltip extends Svelto.Dropdown {}
 
   /* BINDING */
 

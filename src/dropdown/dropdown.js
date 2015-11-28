@@ -27,6 +27,7 @@
 
   let config = {
     name: 'dropdown',
+    selector: '.dropdown',
     options: {
       hover: {
         triggerable: false,
@@ -66,13 +67,6 @@
   class Dropdown extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.dropdown' ).dropdown ();
-      $root.filter ( '.dropdown' ).dropdown ();
-
-    }
 
     _variables () {
 

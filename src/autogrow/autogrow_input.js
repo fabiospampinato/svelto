@@ -11,7 +11,6 @@
 //INFO: Only works with `box-sizing: border-box`
 //FIXME: Does it work with `.large` inputs?
 //FIXME: Add an extra pixel, or the text cursor won't be displayed
-//FIXME: When adding a space char it doesn't grow anymore (maybe don't make the span wrap)
 
 (function ( $, _, window, document, undefined ) {
 
@@ -21,6 +20,7 @@
 
   let config = {
     name: 'autogrowInput',
+    selector: 'input.autogrow',
     options: {
       minWidth: 0,
       callbacks: {
@@ -34,13 +34,6 @@
   class AutogrowInput extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( 'input.autogrow' ).autogrowInput ();
-      $root.filter ( 'input.autogrow' ).autogrowInput ();
-
-    }
 
     _variables () {
 
@@ -72,6 +65,7 @@
 
       $span.css ({
         font: this.$input.css ( 'font' ),
+        whiteSpace: 'nowrap',
         position: 'absolute',
         opacity: 0
       });

@@ -56,9 +56,7 @@
 
   let update = function () {
 
-    let css = cssfy ( tree );
-
-    $stylesheet.html ( css );
+    $stylesheet.html ( cssfy ( tree ) );
 
   };
 
@@ -86,7 +84,7 @@
 
   $(function () {
 
-    $stylesheet = $('<style />').appendTo ( $head );
+    $stylesheet = $('<style class="pseudo" />').appendTo ( $head );
 
   });
 

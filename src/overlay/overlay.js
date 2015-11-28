@@ -16,6 +16,7 @@
 
   let config = {
     name: 'overlay',
+    selector: '.overlay',
     templates: {
       base: false
     },
@@ -46,13 +47,6 @@
   class Overlay extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.overlay' ).overlay ();
-      $root.filter ( '.overlay' ).overlay ();
-
-    }
 
     _variables () {
 
@@ -168,13 +162,9 @@
 
         this._isOpen = force;
 
-        this._frame ( () => {
+        this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
 
-          this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
-
-          this._trigger ( this._isOpen ? 'open' : 'close' );
-
-        });
+        this._trigger ( this._isOpen ? 'open' : 'close' );
 
       }
 

@@ -20,6 +20,7 @@
 
   let config = {
     name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
+    selector: undefined, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
     disabled: false, //INFO: Determines if the widget is enabled or disabled
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
@@ -140,7 +141,11 @@
 
     _createOptions () {} //INFO: Used to pass extra options
 
-    _widgetize () {} //INFO: Gets a parent node, from it find and initialize all the widgets
+    _widgetize ( $widget ) { //INFO: Gets a parent node, from it find and initialize all the widgets //TODO: Update, at least the description //TODO: Make it static
+
+      $widget[this.name]();
+
+    }
 
     _variables () {} //INFO: Init your variables inside this function
     _init () {} //INFO: Perform the init stuff inside this function
@@ -383,19 +388,7 @@
 
     _frame ( fn ) {
 
-      return $.frame ( () => fn () );
-
-    }
-
-    /* DEBOUNCING */
-
-    _debounce ( fn, wait, options ) {
-
-      let debounced = _.debounce ( fn, wait, options );
-
-      debounced.guid = fn.guid = ( fn.guid || $.guid++ );
-
-      return debounced;
+      return $.frame ( fn.bind ( this ) );
 
     }
 
@@ -411,11 +404,31 @@
 
     }
 
+    /* DEBOUNCING */
+
+    _debounce ( fn, wait, options ) {
+
+      let debounced = _.debounce ( fn, wait, options );
+
+      debounced.guid = fn.guid = ( fn.guid || $.guid++ );
+
+      return debounced;
+
+    }
+
     /* TEMPLATE */
 
     _tmpl ( name, options = {} ) {
 
-      return $.tmpl ( this.name.toLowerCase () + '.' + name, options );
+      let tmplName = this.name + '.' + name;
+
+      if ( !(tmplName in $.tmpl.cache) ) {
+
+        $.tmpl.cache[tmplName] = $.tmpl ( this.templates[name] );
+
+      }
+
+      return $.tmpl ( tmplName, options );
 
     }
 

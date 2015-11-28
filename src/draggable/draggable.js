@@ -28,6 +28,7 @@
 
   let config = {
     name: 'draggable',
+    selector: '.draggable',
     options: {
       draggable: _.true, //INFO: Checks if we can drag it or not
       onlyHandlers: false, //INFO: Only an handler can drag it around
@@ -66,13 +67,6 @@
   class Draggable extends Svelto.Widget {
 
     /* SPECIAL */
-
-    _widgetize ( $root ) {
-
-      $root.find ( '.draggable' ).draggable ();
-      $root.filter ( '.draggable' ).draggable ();
-
-    }
 
     _variables () {
 

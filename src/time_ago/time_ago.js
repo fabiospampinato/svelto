@@ -16,6 +16,7 @@
 
   let config = {
     name: 'timeAgo',
+    selector: '[data-timestamp], [data-timestamp-title]',
     options: {
       timestamp: false,
       title: false,
@@ -31,13 +32,9 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
+    _widgetize ( $element ) {
 
-      $root.find ( '[data-timestamp]' ).timeAgo ();
-      $root.filter ( '[data-timestamp]' ).timeAgo ();
-
-      $root.find ( '[data-timestamp-title]' ).timeAgo ({ title: true });
-      $root.filter ( '[data-timestamp-title]' ).timeAgo ({ title: true });
+      $element.timeAgo ({ title: $element.is ( '[data-timestamp-title]' ) });
 
     }
 

@@ -38,10 +38,6 @@
 
     /* SPECIAL */
 
-    _widgetize ( $root ) {
-
-    }
-
     _variables () {
 
     }
