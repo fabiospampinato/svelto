@@ -3164,7 +3164,7 @@
           constrainCenter: true
         },
         callbacks: {
-          move: this.__sbDragMove.bind ( this ),
+          move: this._throttle ( this.__sbDragMove.bind ( this ), 100 ),
           end: this.__sbDragEnd.bind ( this )
         }
       });
@@ -3183,7 +3183,7 @@
           $element: this.$hueWrp
         },
         callbacks: {
-          move: this.__hueDragMove.bind ( this ),
+          move: this._throttle ( this.__hueDragMove.bind ( this ), 50 ),
           end: this.__hueDragEnd.bind ( this )
         }
       });
@@ -9881,7 +9881,7 @@ Prism.languages.js = Prism.languages.javascript;
           x: this._dragModifierX.bind ( this )
         },
         callbacks: {
-          move: this.__dragMove.bind ( this ),
+          move: this.__dragMove.bind ( this ), //TODO: Maybe throttle it after we do the layers analysis
           end: this.__dragEnd.bind ( this )
         }
       });
