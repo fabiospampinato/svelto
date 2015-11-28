@@ -7618,6 +7618,11 @@ input::-ms-clear, textarea::-ms-clear {
   display: none;
 }
 
+/* REMOVE iOS SHADOW */
+input, textarea {
+  appearance: none !important;
+}
+
 /* =========================================================================
  * Svelto - Keyframes
  * =========================================================================
@@ -9364,6 +9369,8 @@ code[class*='language-'] .namespace {
   border-radius: 1em;
   transform: translateZ(0);
   /* HIGHLIGHT */
+  /* INVALID */
+  /* VALID */
   /* LABELED */
   /* STRIPED */
   /* INDETERMINATE */
@@ -9413,6 +9420,24 @@ code[class*='language-'] .namespace {
 .progressbar-highlight p > a:hover,
 .progressbar-highlight span > a:hover {
   color: #166ac9 ;
+}
+
+.progressbar.invalid {
+  border-color: #f44336 !important;
+  /* HIGHLIGHT */
+}
+
+.progressbar.invalid .progressbar-highlight {
+  background-color: #f44336 !important;
+}
+
+.progressbar.valid {
+  border-color: #4caf50 !important;
+  /* HIGHLIGHT */
+}
+
+.progressbar.valid .progressbar-highlight {
+  background-color: #4caf50 !important;
 }
 
 .progressbar.labeled {

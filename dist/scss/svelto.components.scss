@@ -4124,7 +4124,13 @@ input:-moz-ui-invalid {
 /* REMOVE CLEAR ICON */
 
 input::-ms-clear {
-    display: none;
+  display: none;
+}
+
+/* REMOVE iOS SHADOW */
+
+input {
+  appearance: none !important; //FIXME: Does it work?
 }
 
 
@@ -5627,6 +5633,34 @@ code[class*='language-'] {
     justify-content: center;
     align-items: center;
     transition: min-width $progressbar-transition-all-duration;
+  }
+
+  /* INVALID */
+
+  &.invalid {
+
+    border-color: $color-error !important;
+
+    /* HIGHLIGHT */
+
+    .progressbar-highlight {
+      background-color: $color-error !important;
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    border-color: $color-success !important;
+
+    /* HIGHLIGHT */
+
+    .progressbar-highlight {
+      background-color: $color-success !important;
+    }
+
   }
 
   /* LABELED */

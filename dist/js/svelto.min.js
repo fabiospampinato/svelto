@@ -879,8 +879,6 @@
 
     _getConfig ( options, element ) {
 
-      console.log("----- CONFIGS -----");
-
       /* VARIABLES */
 
       let configs = [];
@@ -946,10 +944,6 @@
 
       }
 
-      for ( let config of configs ) {
-        console.log(config);
-      }
-
       /* RETURN */
 
       return _.merge ( ...configs );
@@ -961,8 +955,6 @@
       this._destroy ();
 
       $.removeData ( this.element, 'instance.' + this.name );
-
-      return this;
 
     }
 
@@ -1028,8 +1020,6 @@
 
       }
 
-      return this;
-
     }
 
     /* ENABLED */
@@ -1043,8 +1033,6 @@
         this.$element.removeClass ( this.options.classes.disabled );
 
       }
-
-      return this;
 
     }
 
@@ -1065,8 +1053,6 @@
         this.$element.addClass ( this.options.classes.disabled );
 
       }
-
-      return this;
 
     }
 
@@ -1131,8 +1117,6 @@
 
       $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
 
-      return this;
-
     }
 
     _one ( ...args ) { //FIXME: Does it work?
@@ -1155,8 +1139,6 @@
       this._on ( $element, Pointer.enter, () => this._on ( ...args ) );
       this._on ( $element, Pointer.leave, () => this._off ( ...args ) );
 
-      return this;
-
     }
 
     _off ( $element, events, handler ) {
@@ -1175,8 +1157,6 @@
 
       $element.off ( events, handler );
 
-      return this;
-
     }
 
     _trigger ( events, data = {} ) {
@@ -1192,8 +1172,6 @@
         this.options.callbacks[event].call ( this.element, data );
 
       }
-
-      return this;
 
     }
 
@@ -1261,15 +1239,11 @@
 
       this.$element.insertBefore ( selector );
 
-      return this;
-
     }
 
     insertAfter ( selector ) {
 
       this.$element.insertAfter ( selector );
-
-      return this;
 
     }
 
@@ -1277,15 +1251,11 @@
 
       this.$element.prependTo ( selector );
 
-      return this;
-
     }
 
     appendTo ( selector ) {
 
       this.$element.appendTo ( selector );
-
-      return this;
 
     }
 

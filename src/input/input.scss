@@ -102,5 +102,11 @@ input:-moz-ui-invalid {
 /* REMOVE CLEAR ICON */
 
 input::-ms-clear {
-    display: none;
+  display: none;
+}
+
+/* REMOVE iOS SHADOW */
+
+input {
+  appearance: none !important; //FIXME: Does it work?
 }
