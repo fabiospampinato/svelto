@@ -136,23 +136,23 @@
 
       > :not(:last-child) {
 
-        @include border-right-radius ( 0 );
+        @include border-right-radius ( 0 !important );
         margin-right: 0;
         border-right-width: 0;
 
         &.multiple > :last-child {
-          @include border-right-radius ( 0 );
+          @include border-right-radius ( 0 !important );
         }
 
       }
 
       > :not(:first-child) {
 
-        @include border-left-radius ( 0 );
+        @include border-left-radius ( 0 !important );
         margin-left: 0;
 
         &.multiple > :not(:last-child) {
-          @include border-left-radius ( 0 );
+          @include border-left-radius ( 0 !important );
         }
 
       }
@@ -177,12 +177,12 @@
 
       > :not(:last-child) {
 
-        @include border-bottom-radius ( 0 );
+        @include border-bottom-radius ( 0 !important );
         margin-bottom: 0;
         border-bottom-width: 0;
 
         &.multiple > * {
-          @include border-bottom-radius ( 0 );
+          @include border-bottom-radius ( 0 !important );
         }
 
         &.multiple.no-wrap > *,
@@ -195,10 +195,10 @@
 
       > :not(:first-child) {
 
-        @include border-top-radius ( 0 );
+        @include border-top-radius ( 0 !important );
 
         &.multiple > * {
-          @include border-top-radius ( 0 );
+          @include border-top-radius ( 0 !important );
         }
 
       }

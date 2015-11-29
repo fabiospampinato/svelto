@@ -4442,7 +4442,8 @@ th {
   transition: opacity $widget-transition-opacity-duration;
 
   &.disabled {
-    cursor: default !important;
+    //TODO: Disable clicks
+    cursor: default !important; //FIXME: Doesn't work for the embedded component for example
     opacity: $widget-disabled-opacity !important;
   }
 
@@ -6232,14 +6233,16 @@ i.icon {
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 
 /* CHAT */
 
 .chat-msg {
 
+  @extend .widget;
   display: flex;
-  margin-bottom: $gutter;
 
   /* IMAGE */
 
@@ -8335,23 +8338,23 @@ input {
 
       > :not(:last-child) {
 
-        @include border-right-radius ( 0 );
+        @include border-right-radius ( 0 !important );
         margin-right: 0;
         border-right-width: 0;
 
         &.multiple > :last-child {
-          @include border-right-radius ( 0 );
+          @include border-right-radius ( 0 !important );
         }
 
       }
 
       > :not(:first-child) {
 
-        @include border-left-radius ( 0 );
+        @include border-left-radius ( 0 !important );
         margin-left: 0;
 
         &.multiple > :not(:last-child) {
-          @include border-left-radius ( 0 );
+          @include border-left-radius ( 0 !important );
         }
 
       }
@@ -8376,12 +8379,12 @@ input {
 
       > :not(:last-child) {
 
-        @include border-bottom-radius ( 0 );
+        @include border-bottom-radius ( 0 !important );
         margin-bottom: 0;
         border-bottom-width: 0;
 
         &.multiple > * {
-          @include border-bottom-radius ( 0 );
+          @include border-bottom-radius ( 0 !important );
         }
 
         &.multiple.no-wrap > *,
@@ -8394,10 +8397,10 @@ input {
 
       > :not(:first-child) {
 
-        @include border-top-radius ( 0 );
+        @include border-top-radius ( 0 !important );
 
         &.multiple > * {
-          @include border-top-radius ( 0 );
+          @include border-top-radius ( 0 !important );
         }
 
       }

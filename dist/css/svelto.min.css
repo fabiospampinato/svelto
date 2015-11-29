@@ -1594,21 +1594,21 @@ th {
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .colorpicker, .datepicker, .embedded, .flippable, header, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+.widget, .accordion, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .chat-msg, .colorpicker, .datepicker, .embedded, .flippable, header, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :not(script):last-of-type, .accordion > :not(script):last-of-type, label > :not(script):last-of-type, .label > :not(script):last-of-type, .button > :not(script):last-of-type, .container > :not(script):last-of-type, .card-header:not(.multiple) > :not(script):last-of-type, .card-block:not(.multiple) > :not(script):last-of-type, .card-footer:not(.multiple) > :not(script):last-of-type, footer > :not(script):last-of-type, .image-wrp .image-caption > :not(script):last-of-type, .infobar > :not(script):last-of-type, .tagbox > :not(script):last-of-type, .card > :not(script):last-of-type, .icons > :not(script):last-of-type, .carousel > :not(script):last-of-type, .colorpicker > :not(script):last-of-type, .datepicker > :not(script):last-of-type, .embedded > :not(script):last-of-type, .flippable > :not(script):last-of-type, header > :not(script):last-of-type, .image-wrp > :not(script):last-of-type, input > :not(script):last-of-type, textarea > :not(script):last-of-type, .parallax > :not(script):last-of-type, .placeholder > :not(script):last-of-type, .progressbar > :not(script):last-of-type, .rater > :not(script):last-of-type, .triangle > :not(script):last-of-type, .square > :not(script):last-of-type, .square-sample > :not(script):last-of-type, .circle > :not(script):last-of-type, .slider > :not(script):last-of-type, .spinner-label > :not(script):last-of-type, .statistic > :not(script):last-of-type, .switch > :not(script):last-of-type, table.table > :not(script):last-of-type, .tabs > :not(script):last-of-type, .toolbar > :not(script):last-of-type, blockquote > :not(script):last-of-type, blockquote > footer > :not(script):last-of-type {
+.widget > :not(script):last-of-type, .accordion > :not(script):last-of-type, label > :not(script):last-of-type, .label > :not(script):last-of-type, .button > :not(script):last-of-type, .container > :not(script):last-of-type, .card-header:not(.multiple) > :not(script):last-of-type, .card-block:not(.multiple) > :not(script):last-of-type, .card-footer:not(.multiple) > :not(script):last-of-type, footer > :not(script):last-of-type, .image-wrp .image-caption > :not(script):last-of-type, .infobar > :not(script):last-of-type, .tagbox > :not(script):last-of-type, .card > :not(script):last-of-type, .icons > :not(script):last-of-type, .carousel > :not(script):last-of-type, .chat-msg > :not(script):last-of-type, .colorpicker > :not(script):last-of-type, .datepicker > :not(script):last-of-type, .embedded > :not(script):last-of-type, .flippable > :not(script):last-of-type, header > :not(script):last-of-type, .image-wrp > :not(script):last-of-type, input > :not(script):last-of-type, textarea > :not(script):last-of-type, .parallax > :not(script):last-of-type, .placeholder > :not(script):last-of-type, .progressbar > :not(script):last-of-type, .rater > :not(script):last-of-type, .triangle > :not(script):last-of-type, .square > :not(script):last-of-type, .square-sample > :not(script):last-of-type, .circle > :not(script):last-of-type, .slider > :not(script):last-of-type, .spinner-label > :not(script):last-of-type, .statistic > :not(script):last-of-type, .switch > :not(script):last-of-type, table.table > :not(script):last-of-type, .tabs > :not(script):last-of-type, .toolbar > :not(script):last-of-type, blockquote > :not(script):last-of-type, blockquote > footer > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-.widget > :not(script):last-of-type.multiple, .accordion > :not(script):last-of-type.multiple, label > :not(script):last-of-type.multiple, .label > :not(script):last-of-type.multiple, .button > :not(script):last-of-type.multiple, .container > :not(script):last-of-type.multiple, .card-header:not(.multiple) > :not(script):last-of-type.multiple, .card-block:not(.multiple) > :not(script):last-of-type.multiple, .card-footer:not(.multiple) > :not(script):last-of-type.multiple, footer > :not(script):last-of-type.multiple, .image-wrp .image-caption > :not(script):last-of-type.multiple, .infobar > :not(script):last-of-type.multiple, .tagbox > :not(script):last-of-type.multiple, .card > :not(script):last-of-type.multiple, .icons > :not(script):last-of-type.multiple, .carousel > :not(script):last-of-type.multiple, .colorpicker > :not(script):last-of-type.multiple, .datepicker > :not(script):last-of-type.multiple, .embedded > :not(script):last-of-type.multiple, .flippable > :not(script):last-of-type.multiple, header > :not(script):last-of-type.multiple, .image-wrp > :not(script):last-of-type.multiple, input > :not(script):last-of-type.multiple, textarea > :not(script):last-of-type.multiple, .parallax > :not(script):last-of-type.multiple, .placeholder > :not(script):last-of-type.multiple, .progressbar > :not(script):last-of-type.multiple, .rater > :not(script):last-of-type.multiple, .triangle > :not(script):last-of-type.multiple, .square > :not(script):last-of-type.multiple, .square-sample > :not(script):last-of-type.multiple, .circle > :not(script):last-of-type.multiple, .slider > :not(script):last-of-type.multiple, .spinner-label > :not(script):last-of-type.multiple, .statistic > :not(script):last-of-type.multiple, .switch > :not(script):last-of-type.multiple, table.table > :not(script):last-of-type.multiple, .tabs > :not(script):last-of-type.multiple, .toolbar > :not(script):last-of-type.multiple, blockquote > :not(script):last-of-type.multiple, blockquote > footer > :not(script):last-of-type.multiple {
+.widget > :not(script):last-of-type.multiple, .accordion > :not(script):last-of-type.multiple, label > :not(script):last-of-type.multiple, .label > :not(script):last-of-type.multiple, .button > :not(script):last-of-type.multiple, .container > :not(script):last-of-type.multiple, .card-header:not(.multiple) > :not(script):last-of-type.multiple, .card-block:not(.multiple) > :not(script):last-of-type.multiple, .card-footer:not(.multiple) > :not(script):last-of-type.multiple, footer > :not(script):last-of-type.multiple, .image-wrp .image-caption > :not(script):last-of-type.multiple, .infobar > :not(script):last-of-type.multiple, .tagbox > :not(script):last-of-type.multiple, .card > :not(script):last-of-type.multiple, .icons > :not(script):last-of-type.multiple, .carousel > :not(script):last-of-type.multiple, .chat-msg > :not(script):last-of-type.multiple, .colorpicker > :not(script):last-of-type.multiple, .datepicker > :not(script):last-of-type.multiple, .embedded > :not(script):last-of-type.multiple, .flippable > :not(script):last-of-type.multiple, header > :not(script):last-of-type.multiple, .image-wrp > :not(script):last-of-type.multiple, input > :not(script):last-of-type.multiple, textarea > :not(script):last-of-type.multiple, .parallax > :not(script):last-of-type.multiple, .placeholder > :not(script):last-of-type.multiple, .progressbar > :not(script):last-of-type.multiple, .rater > :not(script):last-of-type.multiple, .triangle > :not(script):last-of-type.multiple, .square > :not(script):last-of-type.multiple, .square-sample > :not(script):last-of-type.multiple, .circle > :not(script):last-of-type.multiple, .slider > :not(script):last-of-type.multiple, .spinner-label > :not(script):last-of-type.multiple, .statistic > :not(script):last-of-type.multiple, .switch > :not(script):last-of-type.multiple, table.table > :not(script):last-of-type.multiple, .tabs > :not(script):last-of-type.multiple, .toolbar > :not(script):last-of-type.multiple, blockquote > :not(script):last-of-type.multiple, blockquote > footer > :not(script):last-of-type.multiple {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+.widget.disabled, .disabled.accordion, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   cursor: default !important;
   opacity: 0.5 !important;
 }
@@ -3323,11 +3323,12 @@ i.icon, .carousel.inset .carousel-prev:after,
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 /* CHAT */
 .chat-msg {
   display: flex;
-  margin-bottom: 10px;
   /* IMAGE */
   /* CONTENT */
   /* NO TIP */
@@ -7824,26 +7825,26 @@ input, textarea {
 }
 
 .multiple.joined:not(.vertical) > :not(:last-child) {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
   margin-right: 0;
   border-right-width: 0;
 }
 
 .multiple.joined:not(.vertical) > :not(:last-child).multiple > :last-child {
-  border-bottom-right-radius: 0;
-  border-top-right-radius: 0;
+  border-bottom-right-radius: 0 !important;
+  border-top-right-radius: 0 !important;
 }
 
 .multiple.joined:not(.vertical) > :not(:first-child) {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
   margin-left: 0;
 }
 
 .multiple.joined:not(.vertical) > :not(:first-child).multiple > :not(:last-child) {
-  border-bottom-left-radius: 0;
-  border-top-left-radius: 0;
+  border-bottom-left-radius: 0 !important;
+  border-top-left-radius: 0 !important;
 }
 
 .multiple.joined:not(.vertical).no-separators > :not(:first-child) {
@@ -7855,15 +7856,15 @@ input, textarea {
 }
 
 .multiple.joined.vertical > :not(:last-child) {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
   margin-bottom: 0;
   border-bottom-width: 0;
 }
 
 .multiple.joined.vertical > :not(:last-child).multiple > * {
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
 }
 
 .multiple.joined.vertical > :not(:last-child).multiple.no-wrap > *,
@@ -7873,13 +7874,13 @@ input, textarea {
 }
 
 .multiple.joined.vertical > :not(:first-child) {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
 }
 
 .multiple.joined.vertical > :not(:first-child).multiple > * {
-  border-top-right-radius: 0;
-  border-top-left-radius: 0;
+  border-top-right-radius: 0 !important;
+  border-top-left-radius: 0 !important;
 }
 
 .multiple.joined.vertical.no-separators > :not(:first-child) {

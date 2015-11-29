@@ -18,7 +18,8 @@
   transition: opacity $widget-transition-opacity-duration;
 
   &.disabled {
-    cursor: default !important;
+    //TODO: Disable clicks
+    cursor: default !important; //FIXME: Doesn't work for the embedded component for example
     opacity: $widget-disabled-opacity !important;
   }
 
