@@ -6895,21 +6895,31 @@ i.icon {
       /* DAY */
 
       .datepicker-day {
-
         cursor: pointer;
+      }
 
-        /* HOVER */
+    }
 
-        &:not(.datepicker-day-selected):hover {
+  }
 
-          color: $datepicker-day-hover-color;
+  /* ENABLED */
 
-          /* BEFORE */
+  &:not(.disabled) {
 
-          &:before {
-            background-color: $datepicker-day-hover-circle-color;
-          }
+    /* DAY */
 
+    .datepicker-calendar .datepicker-days .datepicker-day {
+
+      /* HOVER */
+
+      &:not(.datepicker-day-selected):hover {
+
+        color: $datepicker-day-hover-color;
+
+        /* BEFORE */
+
+        &:before {
+          background-color: $datepicker-day-hover-circle-color;
         }
 
       }

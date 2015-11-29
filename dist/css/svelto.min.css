@@ -5318,6 +5318,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* VALID */
   /* NAVIGATION */
   /* CALENDAR */
+  /* ENABLED */
 }
 
 .datepicker input, .datepicker textarea {
@@ -5433,15 +5434,22 @@ i.icon, .carousel.inset .carousel-prev:after,
 
 .datepicker-calendar .datepicker-days .datepicker-day {
   cursor: pointer;
+}
+
+.datepicker:not(.disabled) {
+  /* DAY */
+}
+
+.datepicker:not(.disabled) .datepicker-calendar .datepicker-days .datepicker-day {
   /* HOVER */
 }
 
-.datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover {
+.datepicker:not(.disabled) .datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover {
   color: #ffffff;
   /* BEFORE */
 }
 
-.datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover:before {
+.datepicker:not(.disabled) .datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover:before {
   background-color: rgba(239, 108, 0, 0.75);
 }
 
