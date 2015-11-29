@@ -4483,6 +4483,10 @@ th {
 
     margin-bottom: 0;
 
+    &.card.outlined > .card-header {
+      margin-bottom: 0 !important;
+    }
+
     &:not(:first-child) {
 
       /* IS CARD */
@@ -4491,20 +4495,36 @@ th {
         @include border-top-radius ( 0 );
       }
 
-      // /* OUTLINED */
-      //
-      // &.outlined {
-      //   margin-top: - ( $outline-width * 2 );
-      // }
-
     }
 
     &:not(:last-child) {
 
+      @include border-bottom-radius ( 0 );
+
+      /* OUTLINED */
+
+      &.outlined {
+        border-bottom-width: 0;
+      }
+
       /* IS CARD */
 
-      &.card > .card-header {
-        @include border-bottom-radius ( 0 );
+      &.card {
+
+        > .card-header {
+          @include border-bottom-radius ( 0 );
+        }
+
+        /* CLOSED */
+
+        &:not(.open) {
+
+          > .card-header {
+            border-bottom: 0;
+          }
+
+        }
+
       }
 
     }

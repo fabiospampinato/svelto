@@ -1642,6 +1642,10 @@ th {
   margin-bottom: 0;
 }
 
+.accordion .expander.card.outlined > .card-header {
+  margin-bottom: 0 !important;
+}
+
 .accordion .expander:not(:first-child) {
   /* IS CARD */
 }
@@ -1652,12 +1656,27 @@ th {
 }
 
 .accordion .expander:not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+  /* OUTLINED */
   /* IS CARD */
+}
+
+.accordion .expander:not(:last-child).outlined {
+  border-bottom-width: 0;
+}
+
+.accordion .expander:not(:last-child).card {
+  /* CLOSED */
 }
 
 .accordion .expander:not(:last-child).card > .card-header {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
+}
+
+.accordion .expander:not(:last-child).card:not(.open) > .card-header {
+  border-bottom: 0;
 }
 
 /* =========================================================================
