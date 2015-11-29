@@ -25,19 +25,15 @@
 
       /* IS CARD */
 
-      &.card {
-
-        .card-header {
-          @include border-top-radius ( 0 );
-        }
-
+      &.card > .card-header {
+        @include border-top-radius ( 0 );
       }
 
-      /* OUTLINED */
-
-      &.outlined {
-        margin-top: - ( $outline-width * 2 );
-      }
+      // /* OUTLINED */
+      //
+      // &.outlined {
+      //   margin-top: - ( $outline-width * 2 );
+      // }
 
     }
 
@@ -45,12 +41,8 @@
 
       /* IS CARD */
 
-      &.card {
-
-        .card-header {
-          @include border-bottom-radius ( 0 );
-        }
-
+      &.card > .card-header {
+        @include border-bottom-radius ( 0 );
       }
 
     }

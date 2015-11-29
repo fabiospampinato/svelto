@@ -1172,12 +1172,16 @@
   /* CONTENT */
 }
 
-.expander:not(.open).card .card-header {
+.expander:not(.open).card > .card-header {
   border-bottom-right-radius: inherit;
   border-bottom-left-radius: inherit;
 }
 
-.expander:not(.open) .expander-content {
+.expander:not(.open).card.outlined > .card-header {
+  margin-bottom: -1px !important;
+}
+
+.expander:not(.open) > .expander-content {
   display: none;
 }
 
@@ -1640,23 +1644,18 @@ th {
 
 .accordion .expander:not(:first-child) {
   /* IS CARD */
-  /* OUTLINED */
 }
 
-.accordion .expander:not(:first-child).card .card-header {
+.accordion .expander:not(:first-child).card > .card-header {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
-}
-
-.accordion .expander:not(:first-child).outlined {
-  margin-top: -2px;
 }
 
 .accordion .expander:not(:last-child) {
   /* IS CARD */
 }
 
-.accordion .expander:not(:last-child).card .card-header {
+.accordion .expander:not(:last-child).card > .card-header {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }

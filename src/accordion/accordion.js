@@ -66,6 +66,34 @@
 
     }
 
+    /* ENABLE */
+
+    enable () {
+
+      if ( this.disabled ) {
+
+        this.disabled = false;
+
+        _.invoke ( this.instances, 'enable' );
+
+      }
+
+    }
+
+    /* DISABLE */
+
+    disable () {
+
+      if ( !this.disabled ) {
+
+        this.disabled = true;
+
+        _.invoke ( this.instances, 'disable' );
+
+      }
+
+    }
+
     /* EXPANDER OPEN */
 
     __closeOthers ( expander ) {

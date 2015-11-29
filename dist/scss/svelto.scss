@@ -3981,15 +3981,19 @@ $z-depths: (
 
     &.card {
 
-      .card-header {
+      > .card-header {
         @include border-bottom-radius ( inherit );
+      }
+
+      &.outlined > .card-header {
+        margin-bottom: -1px !important;
       }
 
     }
 
     /* CONTENT */
 
-    .expander-content {
+    > .expander-content {
       display: none;
     }
 
@@ -4483,19 +4487,15 @@ th {
 
       /* IS CARD */
 
-      &.card {
-
-        .card-header {
-          @include border-top-radius ( 0 );
-        }
-
+      &.card > .card-header {
+        @include border-top-radius ( 0 );
       }
 
-      /* OUTLINED */
-
-      &.outlined {
-        margin-top: - ( $outline-width * 2 );
-      }
+      // /* OUTLINED */
+      //
+      // &.outlined {
+      //   margin-top: - ( $outline-width * 2 );
+      // }
 
     }
 
@@ -4503,12 +4503,8 @@ th {
 
       /* IS CARD */
 
-      &.card {
-
-        .card-header {
-          @include border-bottom-radius ( 0 );
-        }
-
+      &.card > .card-header {
+        @include border-bottom-radius ( 0 );
       }
 
     }

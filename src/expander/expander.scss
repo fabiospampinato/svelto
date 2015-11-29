@@ -30,15 +30,19 @@
 
     &.card {
 
-      .card-header {
+      > .card-header {
         @include border-bottom-radius ( inherit );
+      }
+
+      &.outlined > .card-header {
+        margin-bottom: -1px !important;
       }
 
     }
 
     /* CONTENT */
 
-    .expander-content {
+    > .expander-content {
       display: none;
     }
 
