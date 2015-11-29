@@ -160,11 +160,15 @@
 
       if ( force !== this._isOpen ) {
 
-        this._isOpen = force;
+        this._frame ( function () { //INFO: Needed since `spinnerOverlay` may attach the overlay and then request to open it, if those things happen in the same frame we won't see the animation
 
-        this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
+          this._isOpen = force;
 
-        this._trigger ( this._isOpen ? 'open' : 'close' );
+          this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
+
+          this._trigger ( this._isOpen ? 'open' : 'close' );
+
+        });
 
       }
 

@@ -6486,6 +6486,7 @@ table.table.selectable {
     height: $slider-unhighlight-height;
     border-radius: $slider-unhighlight-border-radius;
     width: 100%;
+    transform: translateZ(0); //INFO: Otherwise the border radius is not always respected
   }
 
   /* HIGHLIGHT */
@@ -6974,6 +6975,8 @@ svg.spinner {
  * ========================================================================= */
 
 /* STEPPER */
+
+//TODO: Make it a widget
 
 .stepper input {
   flex-grow: 1;

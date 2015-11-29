@@ -95,6 +95,7 @@
     height: $slider-unhighlight-height;
     border-radius: $slider-unhighlight-border-radius;
     width: 100%;
+    transform: translateZ(0); //INFO: Otherwise the border radius is not always respected
   }
 
   /* HIGHLIGHT */

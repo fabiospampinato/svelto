@@ -10359,6 +10359,7 @@ table.table.selectable tbody tr.selected {
   height: 0.5em;
   border-radius: 0.5em;
   width: 100%;
+  transform: translateZ(0);
 }
 
 .slider-unhighlight p > a,

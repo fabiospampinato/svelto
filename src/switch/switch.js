@@ -94,6 +94,7 @@
       /* DRAG */
 
       this.$handler.draggable ({
+        draggable: this.isEnabled.bind ( this ),
         axis: 'x',
         $proxy: this.$switch,
         proxyWithoutMotion: false,
