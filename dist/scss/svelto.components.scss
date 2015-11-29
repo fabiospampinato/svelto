@@ -3977,6 +3977,7 @@ span > img {
 /* INFOBAR */
 
 //FIXME: It doesn't work really good on mobile
+//TODO: Add support for .infobar-title and .infobar-subtitle also outside of the .infobar-center, in order to simplify the markup
 
 .infobar {
 
@@ -5725,10 +5726,25 @@ code[class*='language-'] {
       content: '';
       pointer-events: none;
       background-size: $progressbar-stripe-size $progressbar-stripe-size;
+      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
     }
 
-    &:not(.disabled) .progressbar-highlight:before {
-      animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
+    /* COMPACT */
+
+    &.compact .progressbar-highlight:before {
+      background-size: ( $progressbar-stripe-size / 2 ) ( $progressbar-stripe-size / 2 );
+    }
+
+    /* SLIM */
+
+    &.slim .progressbar-highlight:before {
+      background-size: ( $progressbar-stripe-size / 4 ) ( $progressbar-stripe-size / 4 );
+    }
+
+    /* DISABLED */
+
+    &.disabled .progressbar-highlight:before {
+      animation-play-state: paused;
     }
 
   }

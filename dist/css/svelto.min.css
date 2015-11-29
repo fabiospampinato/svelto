@@ -9482,6 +9482,12 @@ code[class*='language-'] .namespace {
   padding: 0 5px;
 }
 
+.progressbar.striped {
+  /* COMPACT */
+  /* SLIM */
+  /* DISABLED */
+}
+
 .progressbar.striped .progressbar-highlight:before {
   position: absolute;
   top: 0;
@@ -9492,10 +9498,19 @@ code[class*='language-'] .namespace {
   content: '';
   pointer-events: none;
   background-size: 3.3333333333em 3.3333333333em;
+  animation: progressbar-stripes-move 0.5s linear infinite;
 }
 
-.progressbar.striped:not(.disabled) .progressbar-highlight:before {
-  animation: progressbar-stripes-move 0.5s linear infinite;
+.progressbar.striped.compact .progressbar-highlight:before {
+  background-size: 1.6666666667em 1.6666666667em;
+}
+
+.progressbar.striped.slim .progressbar-highlight:before {
+  background-size: 0.8333333333em 0.8333333333em;
+}
+
+.progressbar.striped.disabled .progressbar-highlight:before {
+  animation-play-state: paused;
 }
 
 .progressbar.indeterminate .progressbar-highlight {
