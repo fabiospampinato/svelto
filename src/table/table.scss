@@ -314,7 +314,7 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
 
   /* HOVERABLE */
 
-  &.hoverable tbody tr:not(.table-row-empty):hover {
+  &:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
     background-color: $table-hoverable-row-even-color-hover;
   }
 

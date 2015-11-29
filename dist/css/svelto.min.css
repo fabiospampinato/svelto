@@ -11412,7 +11412,7 @@ table.table.striped tbody tr:first-child:not(.table-row-empty) ~ tr:nth-child(ev
   background-color: rgba(0, 0, 0, 0.035);
 }
 
-table.table.hoverable tbody tr:not(.table-row-empty):hover {
+table.table:not(.disabled).hoverable tbody tr:not(.table-row-empty):hover {
   background-color: rgba(0, 0, 0, 0.06);
 }
 
