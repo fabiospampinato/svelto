@@ -7340,6 +7340,11 @@ span > img {
   opacity: 1;
 }
 
+.image-wrp.disabled .image-caption:not(.attached).on-hover,
+.disabled .image-wrp .image-caption:not(.attached).on-hover {
+  display: none;
+}
+
 /* =========================================================================
  * Svelto - Infobar
  * =========================================================================

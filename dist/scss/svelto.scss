@@ -7882,6 +7882,11 @@ span > img {
     opacity: 1;
   }
 
+  &.disabled .image-caption:not(.attached).on-hover,
+  .disabled & .image-caption:not(.attached).on-hover {
+    display: none;
+  }
+
 }
 
 
