@@ -11,6 +11,7 @@
 
 //TODO: Add support for element-level options via `data-nameLowerCase-options`
 //TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`
+//TODO: Maybe we should just check for the `disabled` class, or we have to see it for every widget instance associated with the node
 
 (function ( $, _, window, document, undefined ) {
 

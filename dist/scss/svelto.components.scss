@@ -495,9 +495,15 @@ th {
   transition: opacity $widget-transition-opacity-duration;
 
   &.disabled {
-    //TODO: Disable clicks
-    cursor: default !important; //FIXME: Doesn't work for the embedded component for example
+
+    pointer-events: none !important;
+    cursor: default !important;
     opacity: $widget-disabled-opacity !important;
+
+    * {
+      cursor: default !important;
+    }
+
   }
 
 }
@@ -7860,7 +7866,9 @@ textarea {
   /* UNRESIZABLE */
 
   &.unresizable,
-  &.disabled {
+  &[disabled],
+  &.disabled,
+  .disabled & {
     resize: none;
   }
 
