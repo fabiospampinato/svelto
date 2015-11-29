@@ -1922,34 +1922,6 @@
 
     }
 
-    /* ENABLE */
-
-    enable () {
-
-      if ( this.disabled ) {
-
-        this.disabled = false;
-
-        _.invoke ( this.instances, 'enable' );
-
-      }
-
-    }
-
-    /* DISABLE */
-
-    disable () {
-
-      if ( !this.disabled ) {
-
-        this.disabled = true;
-
-        _.invoke ( this.instances, 'disable' );
-
-      }
-
-    }
-
     /* EXPANDER OPEN */
 
     __closeOthers ( expander ) {
@@ -1966,7 +1938,33 @@
 
     }
 
-    /* PUBLIC */
+    /* API OVERRIDES */
+
+    enable () {
+
+      if ( this.disabled ) {
+
+        this.disabled = false;
+
+        _.invoke ( this.instances, 'enable' );
+
+      }
+
+    }
+
+    disable () {
+
+      if ( !this.disabled ) {
+
+        this.disabled = true;
+
+        _.invoke ( this.instances, 'disable' );
+
+      }
+
+    }
+
+    /* API */
 
     areOpen () {
 
@@ -2541,6 +2539,30 @@
     _getNextIndex ( index ) {
 
       return ( index < this.maxIndex ) ? index + 1 : 0;
+
+    }
+
+    /* API OVERRIDES */
+
+    enable () {
+
+      super.enable ();
+
+      if ( this.options.cycle || this._wasCycle ) {
+
+        this.play ();
+
+      }
+
+    }
+
+    disable () {
+
+      super.disable ();
+
+      this._wasCycle = this.options.cycle;
+
+      this.stop ();
 
     }
 

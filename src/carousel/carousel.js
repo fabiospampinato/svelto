@@ -214,6 +214,30 @@
 
     }
 
+    /* API OVERRIDES */
+
+    enable () {
+
+      super.enable ();
+
+      if ( this.options.cycle || this._wasCycle ) {
+
+        this.play ();
+
+      }
+
+    }
+
+    disable () {
+
+      super.disable ();
+
+      this._wasCycle = this.options.cycle;
+
+      this.stop ();
+
+    }
+
     /* API */
 
     get () {
