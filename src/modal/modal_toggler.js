@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Tooltip
+ * Svelto - Modal (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires modal.js
+ * @requires ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -15,29 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'tooltip',
-    selector: '.tooltip',
+    name: 'modalToggler',
+    selector: '.modal-toggler',
     options: {
-      hover: {
-        triggerable: true
-      },
-      selectors: {
-        closer: '.button, .tooltip-closer'
-      }
+      widget: Svelto.Modal
     }
   };
 
-  /* TOOLTIP */
+  /* MODAL TOGGLER */
 
-  class Tooltip extends Svelto.Dropdown {}
+  class ModalToggler extends Svelto.Toggler {}
 
   /* BINDING */
 
-  Svelto.Tooltip = Tooltip;
-  Svelto.Tooltip.config = config;
+  Svelto.ModalToggler = ModalToggler;
+  Svelto.ModalToggler.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Tooltip );
+  $.factory ( Svelto.ModalToggler );
 
 }( Svelto.$, Svelto._, window, document ));

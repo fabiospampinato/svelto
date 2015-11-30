@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Tooltip
+ * Svelto - Dropdown (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires dropdown.js
+ * @requires ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -15,29 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'tooltip',
-    selector: '.tooltip',
+    name: 'dropdownToggler',
+    selector: '.dropdown-toggler',
     options: {
-      hover: {
-        triggerable: true
-      },
-      selectors: {
-        closer: '.button, .tooltip-closer'
-      }
+      widget: Svelto.Dropdown
     }
   };
 
-  /* TOOLTIP */
+  /* DROPDOWN TOGGLER */
 
-  class Tooltip extends Svelto.Dropdown {}
+  class DropdownToggler extends Svelto.Toggler {}
 
   /* BINDING */
 
-  Svelto.Tooltip = Tooltip;
-  Svelto.Tooltip.config = config;
+  Svelto.DropdownToggler = DropdownToggler;
+  Svelto.DropdownToggler.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Tooltip );
+  $.factory ( Svelto.DropdownToggler );
 
 }( Svelto.$, Svelto._, window, document ));

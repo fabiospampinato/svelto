@@ -4797,9 +4797,6 @@
         noTip: 7,
         normal: 14
       },
-      datas: {
-        target: 'target'
-      },
       classes: {
         noTip: 'no-tip',
         attached: 'attached',
@@ -4807,8 +4804,7 @@
         open: 'open'
       },
       selectors: {
-        closer: '.dropdown-closer',
-        trigger: '.dropdown-trigger'
+        closer: '.dropdown-closer'
       },
       callbacks: {
         beforeopen () {},
@@ -4829,8 +4825,7 @@
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
-      this.id = this.$dropdown.attr ( 'id' );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
+      this.id = this.$dropdown.attr ( 'id' ); //FIXME: Remove this requirement
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
@@ -4840,10 +4835,6 @@
     }
 
     _events () {
-
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.toggle );
 
       /* CLOSER */
 
@@ -5133,6 +5124,120 @@
   /* FACTORY */
 
   $.factory ( Svelto.Dropdown );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Toggler
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'toggler',
+    selector: undefined,
+    options: {
+      widget: false,
+      datas: {
+        target: 'target'
+      }
+    }
+  };
+
+  /* TOGGLER */
+
+  class Toggler extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$toggler = this.$element;
+
+      this.targetSelector = this.$toggler.data ( this.options.datas.target );
+
+      this.$target = $(this.targetSelector);
+
+      this.instance = this.$target[this.options.widget.config.name]( 'instance' );
+
+    }
+
+    _events () {
+
+      /* TAP */
+
+      this._on ( Pointer.tap, this.toggle );
+
+    }
+
+    /* PUBLIC */
+
+    toggle ( force ) {
+
+      return this.instance.toggle ( force );
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Toggler = Toggler;
+  Svelto.Toggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Toggler );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Dropdown (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires dropdown.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'dropdownToggler',
+    selector: '.dropdown-toggler',
+    options: {
+      widget: Svelto.Dropdown
+    }
+  };
+
+  /* DROPDOWN TOGGLER */
+
+  class DropdownToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.DropdownToggler = DropdownToggler;
+  Svelto.DropdownToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.DropdownToggler );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7010,17 +7115,10 @@
     name: 'modal',
     selector: '.modal',
     options: {
-      attributes: {
-        id: 'id'
-      },
-      datas: {
-        target: 'target'
-      },
       classes: {
         open: 'open'
       },
       selectors: {
-        trigger: '.modal-trigger',
         closer: '.modal-closer'
       },
       animations: {
@@ -7045,9 +7143,6 @@
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.id = this.$modal.attr ( this.options.attributes.id );
-
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
@@ -7060,9 +7155,6 @@
 
       this._on ( Pointer.tap, this.__tap );
 
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.open );
       /* CLOSER */
 
       this._on ( this.$closers, Pointer.tap, this.close );
@@ -7148,6 +7240,46 @@
   /* FACTORY */
 
   $.factory ( Svelto.Modal );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Modal (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires modal.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'modalToggler',
+    selector: '.modal-toggler',
+    options: {
+      widget: Svelto.Modal
+    }
+  };
+
+  /* MODAL TOGGLER */
+
+  class ModalToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.ModalToggler = ModalToggler;
+  Svelto.ModalToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.ModalToggler );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7396,20 +7528,15 @@
     selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
-      attributes: {
-        id: 'id'
-      },
       datas: {
-        direction: 'direction',
-        target: 'target'
+        direction: 'direction'
       },
       classes: {
         open: 'open',
         flickable: 'flickable'
       },
       selectors: {
-        closer: '.navbar-closer',
-        trigger: '.navbar-trigger'
+        closer: '.navbar-closer'
       },
       callbacks: {
         open () {},
@@ -7429,10 +7556,7 @@
       this.$navbar = this.$element;
       this.navbar = this.element;
 
-      this.id = this.$navbar.attr ( this.options.attributes.id );
-
       this.$closers = this.$navbar.find ( this.options.selectors.closer );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
 
       this.direction = this.$navbar.data ( this.options.datas.direction );
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
@@ -7445,10 +7569,6 @@
       /* TAP */
 
       this._on ( Pointer.tap, this.__tap );
-
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.open );
 
       /* CLOSER */
 
@@ -7602,6 +7722,46 @@
   /* FACTORY */
 
   $.factory ( Svelto.Navbar );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Navbar (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires navbar.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'navbarToggler',
+    selector: '.navbar-toggler',
+    options: {
+      widget: Svelto.Navbar
+    }
+  };
+
+  /* NAVBAR TOGGLER */
+
+  class NavbarToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.NavbarToggler = NavbarToggler;
+  Svelto.NavbarToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.NavbarToggler );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -9270,7 +9430,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'select',
-    selector: '.select-trigger',
+    selector: '.select-toggler',
     templates: {
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
               '<div class="card-block">' +
@@ -9322,7 +9482,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.$label = this.$trigger.find ( this.options.selectors.label );
       this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
 
-      this.id = this.$trigger.data ( this.options.datas.target );
+      this.id = this.$trigger.data ( this.options.datas.target ).trim ( '#' );
 
       if ( this.$valueholder.length === 0 ) {
 
@@ -12120,8 +12280,7 @@ Prism.languages.js = Prism.languages.javascript;
         triggerable: true
       },
       selectors: {
-        closer: '.button, .tooltip-closer',
-        trigger: '.tooltip-trigger'
+        closer: '.button, .tooltip-closer'
       }
     }
   };
@@ -12138,5 +12297,45 @@ Prism.languages.js = Prism.languages.javascript;
   /* FACTORY */
 
   $.factory ( Svelto.Tooltip );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Tooltip (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires tooltip.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'tooltipToggler',
+    selector: '.tooltip-toggler',
+    options: {
+      widget: Svelto.Tooltip
+    }
+  };
+
+  /* TOOLTIP TOGGLER */
+
+  class TooltipToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.TooltipToggler = TooltipToggler;
+  Svelto.TooltipToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.TooltipToggler );
 
 }( Svelto.$, Svelto._, window, document ));

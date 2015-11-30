@@ -20,7 +20,7 @@
 
   let config = {
     name: 'select',
-    selector: '.select-trigger',
+    selector: '.select-toggler',
     templates: {
       base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
               '<div class="card-block">' +
@@ -72,7 +72,7 @@
       this.$label = this.$trigger.find ( this.options.selectors.label );
       this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
 
-      this.id = this.$trigger.data ( this.options.datas.target );
+      this.id = this.$trigger.data ( this.options.datas.target ).trim ( '#' );
 
       if ( this.$valueholder.length === 0 ) {
 

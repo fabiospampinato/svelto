@@ -20,17 +20,10 @@
     name: 'modal',
     selector: '.modal',
     options: {
-      attributes: {
-        id: 'id'
-      },
-      datas: {
-        target: 'target'
-      },
       classes: {
         open: 'open'
       },
       selectors: {
-        trigger: '.modal-trigger',
         closer: '.modal-closer'
       },
       animations: {
@@ -55,9 +48,6 @@
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.id = this.$modal.attr ( this.options.attributes.id );
-
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
       this.$closers = this.$modal.find ( this.options.selectors.closer );
 
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
@@ -70,9 +60,6 @@
 
       this._on ( Pointer.tap, this.__tap );
 
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.open );
       /* CLOSER */
 
       this._on ( this.$closers, Pointer.tap, this.close );

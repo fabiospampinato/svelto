@@ -41,9 +41,6 @@
         noTip: 7,
         normal: 14
       },
-      datas: {
-        target: 'target'
-      },
       classes: {
         noTip: 'no-tip',
         attached: 'attached',
@@ -51,8 +48,7 @@
         open: 'open'
       },
       selectors: {
-        closer: '.dropdown-closer',
-        trigger: '.dropdown-trigger'
+        closer: '.dropdown-closer'
       },
       callbacks: {
         beforeopen () {},
@@ -73,8 +69,7 @@
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
-      this.id = this.$dropdown.attr ( 'id' );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
+      this.id = this.$dropdown.attr ( 'id' ); //FIXME: Remove this requirement
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
@@ -84,10 +79,6 @@
     }
 
     _events () {
-
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.toggle );
 
       /* CLOSER */
 

@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Tooltip
+ * Svelto - Navbar (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires navbar.js
+ * @requires ../toggler/toggler.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -15,29 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'tooltip',
-    selector: '.tooltip',
+    name: 'navbarToggler',
+    selector: '.navbar-toggler',
     options: {
-      hover: {
-        triggerable: true
-      },
-      selectors: {
-        closer: '.button, .tooltip-closer'
-      }
+      widget: Svelto.Navbar
     }
   };
 
-  /* TOOLTIP */
+  /* NAVBAR TOGGLER */
 
-  class Tooltip extends Svelto.Dropdown {}
+  class NavbarToggler extends Svelto.Toggler {}
 
   /* BINDING */
 
-  Svelto.Tooltip = Tooltip;
-  Svelto.Tooltip.config = config;
+  Svelto.NavbarToggler = NavbarToggler;
+  Svelto.NavbarToggler.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Tooltip );
+  $.factory ( Svelto.NavbarToggler );
 
 }( Svelto.$, Svelto._, window, document ));

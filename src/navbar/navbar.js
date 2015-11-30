@@ -23,20 +23,15 @@
     selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
-      attributes: {
-        id: 'id'
-      },
       datas: {
-        direction: 'direction',
-        target: 'target'
+        direction: 'direction'
       },
       classes: {
         open: 'open',
         flickable: 'flickable'
       },
       selectors: {
-        closer: '.navbar-closer',
-        trigger: '.navbar-trigger'
+        closer: '.navbar-closer'
       },
       callbacks: {
         open () {},
@@ -56,10 +51,7 @@
       this.$navbar = this.$element;
       this.navbar = this.element;
 
-      this.id = this.$navbar.attr ( this.options.attributes.id );
-
       this.$closers = this.$navbar.find ( this.options.selectors.closer );
-      this.$triggers = $(this.options.selectors.trigger + '[data-' + this.options.datas.target + '="' + this.id + '"]');
 
       this.direction = this.$navbar.data ( this.options.datas.direction );
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
@@ -72,10 +64,6 @@
       /* TAP */
 
       this._on ( Pointer.tap, this.__tap );
-
-      /* TRIGGER */
-
-      this._on ( this.$triggers, Pointer.tap, this.open );
 
       /* CLOSER */
 
