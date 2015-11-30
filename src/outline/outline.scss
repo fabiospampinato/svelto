@@ -15,15 +15,15 @@
 
   /* STYLES */
 
-  &.outlined-solid {
+  &.outline-solid {
     border-style: solid;
   }
 
-  &.outlined-dotted {
+  &.outline-dotted {
     border-style: dotted;
   }
 
-  &.outlined-dashed {
+  &.outline-dashed {
     border-style: dashed;
   }
 
@@ -33,7 +33,7 @@
 
     $bg: nth($datas, 1);
 
-    &.outlined-#{$name} {
+    &.outline-#{$name} {
       border-color: $bg !important;
     }
 

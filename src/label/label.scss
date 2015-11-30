@@ -414,7 +414,7 @@ label {
   margin-bottom: $gutter;
   z-index: 1;
 
-  & > * { //INFO: Both `.label` and `.button`
+  > * { //INFO: Both `.label` and `.button`
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;

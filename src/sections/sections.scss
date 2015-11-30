@@ -61,7 +61,7 @@
 
   justify-content: center;
 
-  &.forced {
+  &:not(:only-child).forced {
     @include center-transform-absolute ();
   }
 

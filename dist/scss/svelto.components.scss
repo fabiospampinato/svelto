@@ -715,36 +715,34 @@ _:-ms-input-placeholder, :root #content {
 
 /* BREADCRUMB */
 
-//FIXME: The current shouldn't be clickable, probably
-
 .breadcrumb {
 
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: $gutter;
 
-  /* CHILDREN */
+  /* SEGMENTS */
 
-  > * { //INFO: Remove children's margin bottom for proper vertical alignment
-    margin-bottom: 0;
+  > :nth-child(even) {
+
+    &:not(:first-child) {
+      margin-left: $breadcrumb-gutter;
+    }
+
+    &:not(:last-child) {
+      margin-right: $breadcrumb-gutter;
+    }
+
   }
 
-  /* DIVIDER */
+  /* AFTER CURRENT */
 
-  &-divider {
-    @include last-child-no-gutter ();
-    padding: $breadcrumb-divider-padding-vertical $breadcrumb-divider-padding-horizontal;
-  }
+  > .current ~ * {
 
-  /* HIGHLIGHTED */
+    opacity: $breadcrumb-after-current-opacity;
 
-  &.highlighted > .current ~ * {
-
-    opacity: $breadcrumb-after-opacity;
-
-    &:not(.breadcrumb-divider):hover {
-      opacity: $breadcrumb-after-opacity-hover;
+    &:not(:nth-child(even)):hover {
+      opacity: $breadcrumb-after-current-opacity-hover;
     }
 
   }
@@ -774,9 +772,31 @@ _:-ms-input-placeholder, :root #content {
 
 /* BORDER */
 
-.no-border {
+.b-a-0 {
   border-width: 0 !important;
 }
+
+.b-t-0,
+.b-y-0 {
+  border-top-width: 0 !important;
+}
+
+.b-r-0,
+.b-x-0 {
+  border-right-width: 0 !important;
+}
+
+.b-b-0,
+.b-y-0 {
+  border-bottom-width: 0 !important;
+}
+
+.b-l-0,
+.b-x-0 {
+  border-left-width: 0 !important;
+}
+
+/* BORDER RADIUS */
 
 .rounded {
   border-radius: $rounded-border-radius $rounded-border-radius !important;
@@ -805,7 +825,6 @@ _:-ms-input-placeholder, :root #content {
 .visible {
   visibility: visible !important;
 }
-
 
 .invisible {
   visibility: hidden !important;
@@ -872,66 +891,54 @@ _:-ms-input-placeholder, :root #content {
 
 /* PADDING */
 
-.no-padding {
+.p-a-0 {
   padding: 0 !important;
 }
 
-.no-padding-top {
+.p-t-0,
+.p-y-0 {
   padding-top: 0 !important;
 }
 
-.no-padding-right {
+.p-r-0,
+.p-x-0 {
   padding-right: 0 !important;
 }
 
-.no-padding-bottom {
+.p-b-0,
+.p-y-0 {
   padding-bottom: 0 !important;
 }
 
-.no-padding-left {
+.p-l-0,
+.p-x-0 {
   padding-left: 0 !important;
-}
-
-.no-padding-horizontal {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.no-padding-vertical {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
 }
 
 /* MARGIN */
 
-.no-margin {
+.m-a-0 {
   margin: 0 !important;
 }
 
-.no-margin-top {
+.m-t-0,
+.m-y-0 {
   margin-top: 0 !important;
 }
 
-.no-margin-right {
+.m-r-0,
+.m-x-0 {
   margin-right: 0 !important;
 }
 
-.no-margin-bottom {
+.m-b-0,
+.m-y-0 {
   margin-bottom: 0 !important;
 }
 
-.no-margin-left {
+.m-l-0,
+.m-x-0 {
   margin-left: 0 !important;
-}
-
-.no-margin-horizontal {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.no-margin-vertical {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
 }
 
 /* OVERFLOW */
@@ -946,11 +953,11 @@ _:-ms-input-placeholder, :root #content {
 
 /* FLIP */
 
-.flipX {
+.flip-x {
   transform: rotateY(180deg) !important;
 }
 
-.flipY {
+.flip-y {
   transform: rotateX(180deg) !important;
 }
 
@@ -1501,7 +1508,7 @@ label {
   margin-bottom: $gutter;
   z-index: 1;
 
-  & > * { //INFO: Both `.label` and `.button`
+  > * { //INFO: Both `.label` and `.button`
 
     margin-left: ( $label-tag-smooth-size * $SQRT2 ) / 2 - $label-border-radius;
     margin-bottom: 0;
@@ -3406,7 +3413,7 @@ _:-ms-input-placeholder, :root .dropdown.card {
 
   /* IFRAME / EMBED / VIDEO / OBJECT */
 
-  & > * {
+  > * {
     @include fill ();
     @include fill-absolute ();
     border: 0;
@@ -3755,7 +3762,7 @@ header {
 
 /* HIGHLIGHT */
 
-.highlight {
+.highlighted {
 
   &:after {
     @extend %highlight-after;
@@ -4347,16 +4354,13 @@ input {
 
   /* CENTERED */
 
-  &.centered-x {
-    justify-content: center;
-  }
-
-  &.centered-y {
-    align-items: center;
-  }
-
+  &.centered-x,
   &.centered {
     justify-content: center;
+  }
+
+  &.centered-y,
+  &.centered {
     align-items: center;
   }
 
@@ -5309,15 +5313,15 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
   /* STYLES */
 
-  &.outlined-solid {
+  &.outline-solid {
     border-style: solid;
   }
 
-  &.outlined-dotted {
+  &.outline-dotted {
     border-style: dotted;
   }
 
-  &.outlined-dashed {
+  &.outline-dashed {
     border-style: dashed;
   }
 
@@ -5327,7 +5331,7 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
     $bg: nth($datas, 1);
 
-    &.outlined-#{$name} {
+    &.outline-#{$name} {
       border-color: $bg !important;
     }
 
@@ -6166,7 +6170,7 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
   justify-content: center;
 
-  &.forced {
+  &:not(:only-child).forced {
     @include center-transform-absolute ();
   }
 
@@ -8003,7 +8007,7 @@ h1, h2, h3, h4, h5, h6 {
 
   margin: 0 0 $gutter;
 
-  & > small {
+  > small {
     opacity: $header-small-opacity;
   }
 
@@ -8120,7 +8124,7 @@ ul.unstyled {
   padding-left: 0;
   list-style-type: none;
 
-  ul {
+  li > ul {
     list-style-type: none;
   }
 

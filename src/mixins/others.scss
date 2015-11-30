@@ -16,7 +16,8 @@
 
     margin-bottom: 0 !important;
 
-    &.multiple {
+    &.multiple,
+    &.breadcrumb {
       margin-bottom: - $gutter !important;
     }
 

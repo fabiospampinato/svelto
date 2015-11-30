@@ -27,7 +27,7 @@
 
   @if $basic == false {
 
-    &.highlight:after {
+    &.highlighted:after {
       border-color: $accent #{$extra};
     }
 

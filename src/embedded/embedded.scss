@@ -36,7 +36,7 @@
 
   /* IFRAME / EMBED / VIDEO / OBJECT */
 
-  & > * {
+  > * {
     @include fill ();
     @include fill-absolute ();
     border: 0;

@@ -72,7 +72,7 @@ h1, h2, h3, h4, h5, h6 {
 
   margin: 0 0 $gutter;
 
-  & > small {
+  > small {
     opacity: $header-small-opacity;
   }
 
@@ -189,7 +189,7 @@ ul.unstyled {
   padding-left: 0;
   list-style-type: none;
 
-  ul {
+  li > ul {
     list-style-type: none;
   }
 

@@ -8,10 +8,9 @@
 
 /* BREADCRUMB */
 
-$breadcrumb-after-opacity: 0.5 !default;
-$breadcrumb-after-opacity-hover: 0.75 !default;
+$breadcrumb-gutter: 0.6em !default;
 
-/* DIVIDER */
+/* AFTER CURRENT */
 
-$breadcrumb-divider-padding-vertical: 0 !default;
-$breadcrumb-divider-padding-horizontal: 0.75em !default;
+$breadcrumb-after-current-opacity: 0.5 !default;
+$breadcrumb-after-current-opacity-hover: 0.75 !default;

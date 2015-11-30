@@ -58,16 +58,13 @@
 
   /* CENTERED */
 
-  &.centered-x {
-    justify-content: center;
-  }
-
-  &.centered-y {
-    align-items: center;
-  }
-
+  &.centered-x,
   &.centered {
     justify-content: center;
+  }
+
+  &.centered-y,
+  &.centered {
     align-items: center;
   }
 

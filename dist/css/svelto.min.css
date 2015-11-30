@@ -84,7 +84,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* BREADCRUMB */
-/* DIVIDER */
+/* AFTER CURRENT */
 /* =========================================================================
  * Svelto - Container (Variables)
  * =========================================================================
@@ -1608,7 +1608,7 @@ th {
   margin-bottom: 0 !important;
 }
 
-.widget > :not(script):last-of-type.multiple, .accordion > :not(script):last-of-type.multiple, label > :not(script):last-of-type.multiple, .label > :not(script):last-of-type.multiple, .button > :not(script):last-of-type.multiple, .container > :not(script):last-of-type.multiple, .card-header:not(.multiple) > :not(script):last-of-type.multiple, .card-block:not(.multiple) > :not(script):last-of-type.multiple, .card-footer:not(.multiple) > :not(script):last-of-type.multiple, footer > :not(script):last-of-type.multiple, .image-wrp .image-caption > :not(script):last-of-type.multiple, .infobar > :not(script):last-of-type.multiple, .tagbox > :not(script):last-of-type.multiple, .card > :not(script):last-of-type.multiple, .icons > :not(script):last-of-type.multiple, .carousel > :not(script):last-of-type.multiple, .chat-msg > :not(script):last-of-type.multiple, .colorpicker > :not(script):last-of-type.multiple, .datepicker > :not(script):last-of-type.multiple, .embedded > :not(script):last-of-type.multiple, .flippable > :not(script):last-of-type.multiple, header > :not(script):last-of-type.multiple, .image-wrp > :not(script):last-of-type.multiple, input > :not(script):last-of-type.multiple, textarea > :not(script):last-of-type.multiple, .parallax > :not(script):last-of-type.multiple, .placeholder > :not(script):last-of-type.multiple, .progressbar > :not(script):last-of-type.multiple, .rater > :not(script):last-of-type.multiple, .triangle > :not(script):last-of-type.multiple, .square > :not(script):last-of-type.multiple, .square-sample > :not(script):last-of-type.multiple, .circle > :not(script):last-of-type.multiple, .slider > :not(script):last-of-type.multiple, .spinner-label > :not(script):last-of-type.multiple, .statistic > :not(script):last-of-type.multiple, .switch > :not(script):last-of-type.multiple, table.table > :not(script):last-of-type.multiple, .tabs > :not(script):last-of-type.multiple, .toolbar > :not(script):last-of-type.multiple, blockquote > :not(script):last-of-type.multiple, blockquote > footer > :not(script):last-of-type.multiple {
+.widget > :not(script):last-of-type.multiple, .accordion > :not(script):last-of-type.multiple, label > :not(script):last-of-type.multiple, .label > :not(script):last-of-type.multiple, .button > :not(script):last-of-type.multiple, .container > :not(script):last-of-type.multiple, .card-header:not(.multiple) > :not(script):last-of-type.multiple, .card-block:not(.multiple) > :not(script):last-of-type.multiple, .card-footer:not(.multiple) > :not(script):last-of-type.multiple, footer > :not(script):last-of-type.multiple, .image-wrp .image-caption > :not(script):last-of-type.multiple, .infobar > :not(script):last-of-type.multiple, .tagbox > :not(script):last-of-type.multiple, .card > :not(script):last-of-type.multiple, .icons > :not(script):last-of-type.multiple, .carousel > :not(script):last-of-type.multiple, .chat-msg > :not(script):last-of-type.multiple, .colorpicker > :not(script):last-of-type.multiple, .datepicker > :not(script):last-of-type.multiple, .embedded > :not(script):last-of-type.multiple, .flippable > :not(script):last-of-type.multiple, header > :not(script):last-of-type.multiple, .image-wrp > :not(script):last-of-type.multiple, input > :not(script):last-of-type.multiple, textarea > :not(script):last-of-type.multiple, .parallax > :not(script):last-of-type.multiple, .placeholder > :not(script):last-of-type.multiple, .progressbar > :not(script):last-of-type.multiple, .rater > :not(script):last-of-type.multiple, .triangle > :not(script):last-of-type.multiple, .square > :not(script):last-of-type.multiple, .square-sample > :not(script):last-of-type.multiple, .circle > :not(script):last-of-type.multiple, .slider > :not(script):last-of-type.multiple, .spinner-label > :not(script):last-of-type.multiple, .statistic > :not(script):last-of-type.multiple, .switch > :not(script):last-of-type.multiple, table.table > :not(script):last-of-type.multiple, .tabs > :not(script):last-of-type.multiple, .toolbar > :not(script):last-of-type.multiple, blockquote > :not(script):last-of-type.multiple, blockquote > footer > :not(script):last-of-type.multiple, .widget > :not(script):last-of-type.breadcrumb, .accordion > :not(script):last-of-type.breadcrumb, label > :not(script):last-of-type.breadcrumb, .label > :not(script):last-of-type.breadcrumb, .button > :not(script):last-of-type.breadcrumb, .container > :not(script):last-of-type.breadcrumb, .card-header:not(.multiple) > :not(script):last-of-type.breadcrumb, .card-block:not(.multiple) > :not(script):last-of-type.breadcrumb, .card-footer:not(.multiple) > :not(script):last-of-type.breadcrumb, footer > :not(script):last-of-type.breadcrumb, .image-wrp .image-caption > :not(script):last-of-type.breadcrumb, .infobar > :not(script):last-of-type.breadcrumb, .tagbox > :not(script):last-of-type.breadcrumb, .card > :not(script):last-of-type.breadcrumb, .icons > :not(script):last-of-type.breadcrumb, .carousel > :not(script):last-of-type.breadcrumb, .chat-msg > :not(script):last-of-type.breadcrumb, .colorpicker > :not(script):last-of-type.breadcrumb, .datepicker > :not(script):last-of-type.breadcrumb, .embedded > :not(script):last-of-type.breadcrumb, .flippable > :not(script):last-of-type.breadcrumb, header > :not(script):last-of-type.breadcrumb, .image-wrp > :not(script):last-of-type.breadcrumb, input > :not(script):last-of-type.breadcrumb, textarea > :not(script):last-of-type.breadcrumb, .parallax > :not(script):last-of-type.breadcrumb, .placeholder > :not(script):last-of-type.breadcrumb, .progressbar > :not(script):last-of-type.breadcrumb, .rater > :not(script):last-of-type.breadcrumb, .triangle > :not(script):last-of-type.breadcrumb, .square > :not(script):last-of-type.breadcrumb, .square-sample > :not(script):last-of-type.breadcrumb, .circle > :not(script):last-of-type.breadcrumb, .slider > :not(script):last-of-type.breadcrumb, .spinner-label > :not(script):last-of-type.breadcrumb, .statistic > :not(script):last-of-type.breadcrumb, .switch > :not(script):last-of-type.breadcrumb, table.table > :not(script):last-of-type.breadcrumb, .tabs > :not(script):last-of-type.breadcrumb, .toolbar > :not(script):last-of-type.breadcrumb, blockquote > :not(script):last-of-type.breadcrumb, blockquote > footer > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -1799,7 +1799,7 @@ _:-ms-input-placeholder, :root #content {
   margin-bottom: 0 !important;
 }
 
-#content > main > :not(script):last-of-type.multiple {
+#content > main > :not(script):last-of-type.multiple, #content > main > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -1818,33 +1818,23 @@ _:-ms-input-placeholder, :root #content {
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 10px;
-  /* CHILDREN */
-  /* DIVIDER */
-  /* HIGHLIGHTED */
+  /* SEGMENTS */
+  /* AFTER CURRENT */
 }
 
-.breadcrumb > * {
-  margin-bottom: 0;
+.breadcrumb > :nth-child(even):not(:first-child) {
+  margin-left: 0.6em;
 }
 
-.breadcrumb-divider {
-  padding: 0 0.75em;
+.breadcrumb > :nth-child(even):not(:last-child) {
+  margin-right: 0.6em;
 }
 
-.breadcrumb-divider > :not(script):last-of-type {
-  margin-bottom: 0 !important;
-}
-
-.breadcrumb-divider > :not(script):last-of-type.multiple {
-  margin-bottom: -10px !important;
-}
-
-.breadcrumb.highlighted > .current ~ * {
+.breadcrumb > .current ~ * {
   opacity: 0.5;
 }
 
-.breadcrumb.highlighted > .current ~ *:not(.breadcrumb-divider):hover {
+.breadcrumb > .current ~ *:not(:nth-child(even)):hover {
   opacity: 0.75;
 }
 
@@ -1865,10 +1855,31 @@ _:-ms-input-placeholder, :root #content {
 }
 
 /* BORDER */
-.no-border {
+.b-a-0 {
   border-width: 0 !important;
 }
 
+.b-t-0,
+.b-y-0 {
+  border-top-width: 0 !important;
+}
+
+.b-r-0,
+.b-x-0 {
+  border-right-width: 0 !important;
+}
+
+.b-b-0,
+.b-y-0 {
+  border-bottom-width: 0 !important;
+}
+
+.b-l-0,
+.b-x-0 {
+  border-left-width: 0 !important;
+}
+
+/* BORDER RADIUS */
 .rounded {
   border-radius: 1000000px 1000000px !important;
 }
@@ -1955,65 +1966,53 @@ _:-ms-input-placeholder, :root #content {
 }
 
 /* PADDING */
-.no-padding {
+.p-a-0 {
   padding: 0 !important;
 }
 
-.no-padding-top {
+.p-t-0,
+.p-y-0 {
   padding-top: 0 !important;
 }
 
-.no-padding-right {
+.p-r-0,
+.p-x-0 {
   padding-right: 0 !important;
 }
 
-.no-padding-bottom {
+.p-b-0,
+.p-y-0 {
   padding-bottom: 0 !important;
 }
 
-.no-padding-left {
+.p-l-0,
+.p-x-0 {
   padding-left: 0 !important;
-}
-
-.no-padding-horizontal {
-  padding-left: 0 !important;
-  padding-right: 0 !important;
-}
-
-.no-padding-vertical {
-  padding-top: 0 !important;
-  padding-bottom: 0 !important;
 }
 
 /* MARGIN */
-.no-margin {
+.m-a-0 {
   margin: 0 !important;
 }
 
-.no-margin-top {
+.m-t-0,
+.m-y-0 {
   margin-top: 0 !important;
 }
 
-.no-margin-right {
+.m-r-0,
+.m-x-0 {
   margin-right: 0 !important;
 }
 
-.no-margin-bottom {
+.m-b-0,
+.m-y-0 {
   margin-bottom: 0 !important;
 }
 
-.no-margin-left {
+.m-l-0,
+.m-x-0 {
   margin-left: 0 !important;
-}
-
-.no-margin-horizontal {
-  margin-left: 0 !important;
-  margin-right: 0 !important;
-}
-
-.no-margin-vertical {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
 }
 
 /* OVERFLOW */
@@ -2026,11 +2025,11 @@ _:-ms-input-placeholder, :root #content {
 }
 
 /* FLIP */
-.flipX {
+.flip-x {
   transform: rotateY(180deg) !important;
 }
 
-.flipY {
+.flip-y {
   transform: rotateX(180deg) !important;
 }
 
@@ -2196,7 +2195,7 @@ label {
   /* RIBBON */
 }
 
-.label.highlight:after, .highlight.button:after {
+.label.highlighted:after, .highlighted.button:after {
   border-color: #ef6c00 ;
 }
 
@@ -2303,7 +2302,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > .sub > :not(script):last-of-type.multiple, .button > .sub > :not(script):last-of-type.multiple {
+.label > .sub > :not(script):last-of-type.multiple, .button > .sub > :not(script):last-of-type.multiple, .label > .sub > :not(script):last-of-type.breadcrumb, .button > .sub > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -3720,7 +3719,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.primary.highlight:after {
+.primary.highlighted:after {
   border-color: #ef6c00 !important;
 }
 
@@ -3787,7 +3786,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.secondary.highlight:after {
+.secondary.highlighted:after {
   border-color: #1565c0 !important;
 }
 
@@ -3854,7 +3853,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.tertiary.highlight:after {
+.tertiary.highlighted:after {
   border-color: #2e7d32 !important;
 }
 
@@ -3921,7 +3920,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.quaternary.highlight:after {
+.quaternary.highlighted:after {
   border-color: #6a1b9a !important;
 }
 
@@ -3988,7 +3987,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #3f3f3f !important;
 }
 
-.white.highlight:after {
+.white.highlighted:after {
   border-color: #ef6c00 !important;
 }
 
@@ -4055,7 +4054,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #3f3f3f !important;
 }
 
-.gray.highlight:after {
+.gray.highlighted:after {
   border-color: #212121 !important;
 }
 
@@ -4122,7 +4121,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.black.highlight:after {
+.black.highlighted:after {
   border-color: #ffffff !important;
 }
 
@@ -4189,7 +4188,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.yellow.highlight:after {
+.yellow.highlighted:after {
   border-color: #f44336 !important;
 }
 
@@ -4256,7 +4255,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.olive.highlight:after {
+.olive.highlighted:after {
   border-color: #ff9800 !important;
 }
 
@@ -4323,7 +4322,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.green.highlight:after {
+.green.highlighted:after {
   border-color: #673ab7 !important;
 }
 
@@ -4390,7 +4389,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.blue.highlight:after {
+.blue.highlighted:after {
   border-color: #f44336 !important;
 }
 
@@ -4457,7 +4456,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.violet.highlight:after {
+.violet.highlighted:after {
   border-color: #ff9800 !important;
 }
 
@@ -4524,7 +4523,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.orange.highlight:after {
+.orange.highlighted:after {
   border-color: #2196f3 !important;
 }
 
@@ -4591,7 +4590,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.purple.highlight:after {
+.purple.highlighted:after {
   border-color: #fabf40 !important;
 }
 
@@ -4658,7 +4657,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.red.highlight:after {
+.red.highlighted:after {
   border-color: #fabf40 !important;
 }
 
@@ -4725,7 +4724,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.pink.highlight:after {
+.pink.highlighted:after {
   border-color: #009688 !important;
 }
 
@@ -4792,7 +4791,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.teal.highlight:after {
+.teal.highlighted:after {
   border-color: #e91e63 !important;
 }
 
@@ -4859,7 +4858,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.brown.highlight:after {
+.brown.highlighted:after {
   border-color: #ff9800 !important;
 }
 
@@ -4926,7 +4925,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.error.highlight:after {
+.error.highlighted:after {
   border-color: #fabf40 !important;
 }
 
@@ -4993,7 +4992,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.warning.highlight:after {
+.warning.highlighted:after {
   border-color: #f44336 !important;
 }
 
@@ -5060,7 +5059,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #ffffff !important;
 }
 
-.success.highlight:after {
+.success.highlighted:after {
   border-color: #673ab7 !important;
 }
 
@@ -5127,7 +5126,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: inherit !important;
 }
 
-.transparent.highlight:after {
+.transparent.highlighted:after {
   border-color: #ef6c00 !important;
 }
 
@@ -5194,7 +5193,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: inherit !important;
 }
 
-.inherit.highlight:after {
+.inherit.highlighted:after {
   border-color: inherit !important;
 }
 
@@ -5246,7 +5245,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   color: #3f3f3f !important;
 }
 
-.base.highlight:after {
+.base.highlighted:after {
   border-color: #ef6c00 !important;
 }
 
@@ -5499,7 +5498,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 0 !important;
 }
 
-.divider.linear:not(:empty) > :not(script):last-of-type.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :not(script):last-of-type.multiple {
+.divider.linear:not(:empty) > :not(script):last-of-type.multiple, .divider.linear:not(:empty) > :not(script):last-of-type.breadcrumb, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :not(script):last-of-type.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -5593,7 +5592,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 0 !important;
 }
 
-.divider.block > .divider-content > :not(script):last-of-type.multiple {
+.divider.block > .divider-content > :not(script):last-of-type.multiple, .divider.block > .divider-content > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -6855,7 +6854,7 @@ i[class^="flag-"] {
   margin-bottom: 0 !important;
 }
 
-.flippable-front > :not(script):last-of-type.multiple, .flippable-back > :not(script):last-of-type.multiple {
+.flippable-front > :not(script):last-of-type.multiple, .flippable-front > :not(script):last-of-type.breadcrumb, .flippable-back > :not(script):last-of-type.multiple, .flippable-back > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -6956,7 +6955,7 @@ form:not(.multiple) > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-form:not(.multiple) > :not(script):last-of-type.multiple {
+form:not(.multiple) > :not(script):last-of-type.multiple, form:not(.multiple) > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -7062,7 +7061,7 @@ header .header-background {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* HIGHLIGHT:AFTER */
-.highlight:after, p > a:after,
+.highlighted:after, p > a:after,
 span > a:after,
 .link:after {
   position: absolute;
@@ -7079,165 +7078,165 @@ span > a:after,
 }
 
 /* HIGHLIGHT */
-.highlight {
+.highlighted {
   /* STYLES */
   /* DIRECTIONS */
   /* COLORS */
 }
 
-.highlight.highlight-solid:after {
+.highlighted.highlight-solid:after {
   border-style: solid;
 }
 
-.highlight.highlight-dotted:after {
+.highlighted.highlight-dotted:after {
   border-style: dotted;
 }
 
-.highlight.highlight-dashed:after {
+.highlighted.highlight-dashed:after {
   border-style: dashed;
 }
 
-.highlight.highlight-top, .highlight.highlight-all {
+.highlighted.highlight-top, .highlighted.highlight-all {
   /* OUTLINED */
 }
 
-.highlight.highlight-top:after, .highlight.highlight-all:after {
+.highlighted.highlight-top:after, .highlighted.highlight-all:after {
   border-top-width: 2px;
 }
 
-.highlight.highlight-top.outlined:after, .highlight.highlight-all.outlined:after {
+.highlighted.highlight-top.outlined:after, .highlighted.highlight-all.outlined:after {
   top: -1px;
 }
 
-.highlight.highlight-right, .highlight.highlight-all {
+.highlighted.highlight-right, .highlighted.highlight-all {
   /* OUTLINED */
 }
 
-.highlight.highlight-right:after, .highlight.highlight-all:after {
+.highlighted.highlight-right:after, .highlighted.highlight-all:after {
   border-right-width: 2px;
 }
 
-.highlight.highlight-right.outlined:after, .highlight.highlight-all.outlined:after {
+.highlighted.highlight-right.outlined:after, .highlighted.highlight-all.outlined:after {
   right: -1px;
 }
 
-.highlight.highlight-bottom, .highlight.highlight-all, .highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left) {
+.highlighted.highlight-bottom, .highlighted.highlight-all, .highlighted:not(.highlight-top):not(.highlight-right):not(.highlight-left) {
   /* OUTLINED */
 }
 
-.highlight.highlight-bottom:after, .highlight.highlight-all:after, .highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left):after {
+.highlighted.highlight-bottom:after, .highlighted.highlight-all:after, .highlighted:not(.highlight-top):not(.highlight-right):not(.highlight-left):after {
   border-bottom-width: 2px;
 }
 
-.highlight.highlight-bottom.outlined:after, .highlight.highlight-all.outlined:after, .highlight:not(.highlight-top):not(.highlight-right):not(.highlight-left).outlined:after {
+.highlighted.highlight-bottom.outlined:after, .highlighted.highlight-all.outlined:after, .highlighted:not(.highlight-top):not(.highlight-right):not(.highlight-left).outlined:after {
   bottom: -1px;
 }
 
-.highlight.highlight-left, .highlight.highlight-all {
+.highlighted.highlight-left, .highlighted.highlight-all {
   /* OUTLINED */
 }
 
-.highlight.highlight-left:after, .highlight.highlight-all:after {
+.highlighted.highlight-left:after, .highlighted.highlight-all:after {
   border-left-width: 2px;
 }
 
-.highlight.highlight-left.outlined:after, .highlight.highlight-all.outlined:after {
+.highlighted.highlight-left.outlined:after, .highlighted.highlight-all.outlined:after {
   left: -1px;
 }
 
-.highlight.highlight-primary:after {
+.highlighted.highlight-primary:after {
   border-color: #1565c0 !important;
 }
 
-.highlight.highlight-secondary:after {
+.highlighted.highlight-secondary:after {
   border-color: #ef6c00 !important;
 }
 
-.highlight.highlight-tertiary:after {
+.highlighted.highlight-tertiary:after {
   border-color: #6a1b9a !important;
 }
 
-.highlight.highlight-quaternary:after {
+.highlighted.highlight-quaternary:after {
   border-color: #2e7d32 !important;
 }
 
-.highlight.highlight-white:after {
+.highlighted.highlight-white:after {
   border-color: #ffffff !important;
 }
 
-.highlight.highlight-gray:after {
+.highlighted.highlight-gray:after {
   border-color: #e0e0e0 !important;
 }
 
-.highlight.highlight-black:after {
+.highlighted.highlight-black:after {
   border-color: #212121 !important;
 }
 
-.highlight.highlight-yellow:after {
+.highlighted.highlight-yellow:after {
   border-color: #fabf40 !important;
 }
 
-.highlight.highlight-olive:after {
+.highlighted.highlight-olive:after {
   border-color: #cddc39 !important;
 }
 
-.highlight.highlight-green:after {
+.highlighted.highlight-green:after {
   border-color: #4caf50 !important;
 }
 
-.highlight.highlight-blue:after {
+.highlighted.highlight-blue:after {
   border-color: #2196f3 !important;
 }
 
-.highlight.highlight-violet:after {
+.highlighted.highlight-violet:after {
   border-color: #673ab7 !important;
 }
 
-.highlight.highlight-orange:after {
+.highlighted.highlight-orange:after {
   border-color: #ff9800 !important;
 }
 
-.highlight.highlight-purple:after {
+.highlighted.highlight-purple:after {
   border-color: #9c27b0 !important;
 }
 
-.highlight.highlight-red:after {
+.highlighted.highlight-red:after {
   border-color: #f44336 !important;
 }
 
-.highlight.highlight-pink:after {
+.highlighted.highlight-pink:after {
   border-color: #e91e63 !important;
 }
 
-.highlight.highlight-teal:after {
+.highlighted.highlight-teal:after {
   border-color: #009688 !important;
 }
 
-.highlight.highlight-brown:after {
+.highlighted.highlight-brown:after {
   border-color: #795548 !important;
 }
 
-.highlight.highlight-error:after {
+.highlighted.highlight-error:after {
   border-color: #f44336 !important;
 }
 
-.highlight.highlight-warning:after {
+.highlighted.highlight-warning:after {
   border-color: #fabf40 !important;
 }
 
-.highlight.highlight-success:after {
+.highlighted.highlight-success:after {
   border-color: #4caf50 !important;
 }
 
-.highlight.highlight-transparent:after {
+.highlighted.highlight-transparent:after {
   border-color: transparent !important;
 }
 
-.highlight.highlight-inherit:after {
+.highlighted.highlight-inherit:after {
   border-color: inherit !important;
 }
 
-.highlight.highlight-base:after {
+.highlighted.highlight-base:after {
   border-color: #eceff1 !important;
 }
 
@@ -7410,7 +7409,7 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar > * > :not(script):last-of-type.multiple {
+.infobar > * > :not(script):last-of-type.multiple, .infobar > * > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -7443,8 +7442,9 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar-center .infobar-title > :not(script):last-of-type.multiple,
-.infobar-center .infobar-subtitle > :not(script):last-of-type.multiple {
+.infobar-center .infobar-title > :not(script):last-of-type.multiple, .infobar-center .infobar-title > :not(script):last-of-type.breadcrumb,
+.infobar-center .infobar-subtitle > :not(script):last-of-type.multiple,
+.infobar-center .infobar-subtitle > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -7807,16 +7807,11 @@ input, textarea {
   margin-right: 0;
 }
 
-.multiple.centered-x {
+.multiple.centered-x, .multiple.centered {
   justify-content: center;
 }
 
-.multiple.centered-y {
-  align-items: center;
-}
-
-.multiple.centered {
-  justify-content: center;
+.multiple.centered-y, .multiple.centered {
   align-items: center;
 }
 
@@ -9005,111 +9000,111 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   /* COLORS */
 }
 
-.outlined.outlined-solid {
+.outlined.outline-solid {
   border-style: solid;
 }
 
-.outlined.outlined-dotted {
+.outlined.outline-dotted {
   border-style: dotted;
 }
 
-.outlined.outlined-dashed {
+.outlined.outline-dashed {
   border-style: dashed;
 }
 
-.outlined.outlined-primary {
+.outlined.outline-primary {
   border-color: #1565c0 !important;
 }
 
-.outlined.outlined-secondary {
+.outlined.outline-secondary {
   border-color: #ef6c00 !important;
 }
 
-.outlined.outlined-tertiary {
+.outlined.outline-tertiary {
   border-color: #6a1b9a !important;
 }
 
-.outlined.outlined-quaternary {
+.outlined.outline-quaternary {
   border-color: #2e7d32 !important;
 }
 
-.outlined.outlined-white {
+.outlined.outline-white {
   border-color: #ffffff !important;
 }
 
-.outlined.outlined-gray {
+.outlined.outline-gray {
   border-color: #e0e0e0 !important;
 }
 
-.outlined.outlined-black {
+.outlined.outline-black {
   border-color: #212121 !important;
 }
 
-.outlined.outlined-yellow {
+.outlined.outline-yellow {
   border-color: #fabf40 !important;
 }
 
-.outlined.outlined-olive {
+.outlined.outline-olive {
   border-color: #cddc39 !important;
 }
 
-.outlined.outlined-green {
+.outlined.outline-green {
   border-color: #4caf50 !important;
 }
 
-.outlined.outlined-blue {
+.outlined.outline-blue {
   border-color: #2196f3 !important;
 }
 
-.outlined.outlined-violet {
+.outlined.outline-violet {
   border-color: #673ab7 !important;
 }
 
-.outlined.outlined-orange {
+.outlined.outline-orange {
   border-color: #ff9800 !important;
 }
 
-.outlined.outlined-purple {
+.outlined.outline-purple {
   border-color: #9c27b0 !important;
 }
 
-.outlined.outlined-red {
+.outlined.outline-red {
   border-color: #f44336 !important;
 }
 
-.outlined.outlined-pink {
+.outlined.outline-pink {
   border-color: #e91e63 !important;
 }
 
-.outlined.outlined-teal {
+.outlined.outline-teal {
   border-color: #009688 !important;
 }
 
-.outlined.outlined-brown {
+.outlined.outline-brown {
   border-color: #795548 !important;
 }
 
-.outlined.outlined-error {
+.outlined.outline-error {
   border-color: #f44336 !important;
 }
 
-.outlined.outlined-warning {
+.outlined.outline-warning {
   border-color: #fabf40 !important;
 }
 
-.outlined.outlined-success {
+.outlined.outline-success {
   border-color: #4caf50 !important;
 }
 
-.outlined.outlined-transparent {
+.outlined.outline-transparent {
   border-color: transparent !important;
 }
 
-.outlined.outlined-inherit {
+.outlined.outline-inherit {
   border-color: inherit !important;
 }
 
-.outlined.outlined-base {
+.outlined.outline-base {
   border-color: #eceff1 !important;
 }
 
@@ -9146,7 +9141,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   margin-bottom: 0 !important;
 }
 
-.overlay > :not(script):last-of-type.multiple {
+.overlay > :not(script):last-of-type.multiple, .overlay > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -10023,9 +10018,11 @@ a.ripple > .ripple-circle {
   margin-bottom: 0 !important;
 }
 
-.section-left > :not(script):last-of-type.multiple,
+.section-left > :not(script):last-of-type.multiple, .section-left > :not(script):last-of-type.breadcrumb,
 .section-center > :not(script):last-of-type.multiple,
-.section-right > :not(script):last-of-type.multiple {
+.section-center > :not(script):last-of-type.breadcrumb,
+.section-right > :not(script):last-of-type.multiple,
+.section-right > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -10039,7 +10036,7 @@ a.ripple > .ripple-circle {
   justify-content: center;
 }
 
-.section-center.forced {
+.section-center:not(:only-child).forced {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -11279,7 +11276,7 @@ table.table tr > * > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-table.table tr > * > :not(script):last-of-type.multiple {
+table.table tr > * > :not(script):last-of-type.multiple, table.table tr > * > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -11966,7 +11963,7 @@ blockquote > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-blockquote > :not(script):last-of-type.multiple {
+blockquote > :not(script):last-of-type.multiple, blockquote > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -11992,7 +11989,7 @@ blockquote > footer > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-blockquote > footer > :not(script):last-of-type.multiple {
+blockquote > footer > :not(script):last-of-type.multiple, blockquote > footer > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -12012,7 +12009,7 @@ li > :not(script):last-of-type {
   margin-bottom: 0 !important;
 }
 
-li > :not(script):last-of-type.multiple {
+li > :not(script):last-of-type.multiple, li > :not(script):last-of-type.breadcrumb {
   margin-bottom: -10px !important;
 }
 
@@ -12021,7 +12018,7 @@ ul.unstyled {
   list-style-type: none;
 }
 
-ul.unstyled ul {
+ul.unstyled li > ul {
   list-style-type: none;
 }
 

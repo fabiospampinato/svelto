@@ -36,7 +36,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %xs-#{$nr}-without-gutter;
         }
 
@@ -74,7 +76,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %sm-#{$nr}-without-gutter;
         }
 
@@ -112,7 +116,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %md-#{$nr}-without-gutter;
         }
 
@@ -150,7 +156,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %lg-#{$nr}-without-gutter;
         }
 
@@ -188,7 +196,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %xl-#{$nr}-without-gutter;
         }
 

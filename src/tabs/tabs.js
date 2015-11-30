@@ -108,7 +108,7 @@
 
         if ( this.options.highlight ) {
 
-          $prevTrigger.removeClass ( 'highlight highlight-bottom highlight-right' );
+          $prevTrigger.removeClass ( 'highlighted highlight-bottom highlight-right' );
 
         }
 

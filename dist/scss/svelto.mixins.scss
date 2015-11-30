@@ -27,7 +27,7 @@
 
   @if $basic == false {
 
-    &.highlight:after {
+    &.highlighted:after {
       border-color: $accent #{$extra};
     }
 
@@ -297,7 +297,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %xs-#{$nr}-without-gutter;
         }
 
@@ -335,7 +337,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %sm-#{$nr}-without-gutter;
         }
 
@@ -373,7 +377,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %md-#{$nr}-without-gutter;
         }
 
@@ -411,7 +417,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %lg-#{$nr}-without-gutter;
         }
 
@@ -449,7 +457,9 @@
 
       &.multiple {
 
-        &.no-wrap, &.vertical, &.joined {
+        &.no-wrap,
+        &.vertical,
+        &.joined {
           @extend %xl-#{$nr}-without-gutter;
         }
 
@@ -836,7 +846,8 @@
 
     margin-bottom: 0 !important;
 
-    &.multiple {
+    &.multiple,
+    &.breadcrumb {
       margin-bottom: - $gutter !important;
     }
 

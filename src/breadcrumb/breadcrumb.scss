@@ -8,36 +8,34 @@
 
 /* BREADCRUMB */
 
-//FIXME: The current shouldn't be clickable, probably
-
 .breadcrumb {
 
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: $gutter;
 
-  /* CHILDREN */
+  /* SEGMENTS */
 
-  > * { //INFO: Remove children's margin bottom for proper vertical alignment
-    margin-bottom: 0;
+  > :nth-child(even) {
+
+    &:not(:first-child) {
+      margin-left: $breadcrumb-gutter;
+    }
+
+    &:not(:last-child) {
+      margin-right: $breadcrumb-gutter;
+    }
+
   }
 
-  /* DIVIDER */
+  /* AFTER CURRENT */
 
-  &-divider {
-    @include last-child-no-gutter ();
-    padding: $breadcrumb-divider-padding-vertical $breadcrumb-divider-padding-horizontal;
-  }
+  > .current ~ * {
 
-  /* HIGHLIGHTED */
+    opacity: $breadcrumb-after-current-opacity;
 
-  &.highlighted > .current ~ * {
-
-    opacity: $breadcrumb-after-opacity;
-
-    &:not(.breadcrumb-divider):hover {
-      opacity: $breadcrumb-after-opacity-hover;
+    &:not(:nth-child(even)):hover {
+      opacity: $breadcrumb-after-current-opacity-hover;
     }
 
   }
