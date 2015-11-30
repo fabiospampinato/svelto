@@ -2797,10 +2797,12 @@ button {
   border-radius: 0.25em;
   /* SECTIONS */
   /* HEADER / FOOTER */
+  /* FOOTER */
   /* BLOCK */
   /* NO MARGIN BOTTOM FOR CHILDREN (WIDGETS) */
   /* BORDER RADIUS INHERITANCE */
   /* OUTLINED */
+  /* NEXT CHILDREN OUTLINED */
 }
 
 .card p > a,
@@ -2833,6 +2835,10 @@ button {
 
 .card-header, .card-footer {
   flex-shrink: 0;
+}
+
+.card div.card-footer.multiple[class*="multiple"] {
+  margin-bottom: 0 !important;
 }
 
 .card-block {
@@ -2894,6 +2900,10 @@ button {
 
 .card.outlined > img.outlined {
   width: calc(100% + 2px) !important;
+}
+
+.card > .outlined + .outlined:not(img) {
+  border-top-width: 0;
 }
 
 /* =========================================================================
@@ -5468,10 +5478,11 @@ i.icon, .carousel.inset .carousel-prev:after,
 /* DIVIDER */
 hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .divider.linear:not(:empty):before, .divider.linear:not(:empty):after, .divider:not(.block):not(.text):not(.spacer):not(:empty):before, .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
   height: 1px;
-  margin-top: -5px;
-  margin-bottom: 5px;
+  margin-top: -5px !important;
+  margin-bottom: 5px !important;
   border: none;
   background-color: rgba(0, 0, 0, 0.1);
+  z-index: 2;
 }
 
 /* DEFAULT DIVIDER */

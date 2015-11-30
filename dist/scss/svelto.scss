@@ -5699,6 +5699,12 @@ button {
     flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
   }
 
+  /* FOOTER */
+
+  div.&-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
+    margin-bottom: 0 !important;
+  }
+
   /* BLOCK */
 
   &-block {
@@ -5778,6 +5784,12 @@ button {
       width: calc(100% + #{$outline-width * 2}) !important;
     }
 
+  }
+
+  /* NEXT CHILDREN OUTLINED */
+
+  > .outlined + .outlined:not(img) {
+    border-top-width: 0;
   }
 
 }
@@ -6969,10 +6981,11 @@ i.icon {
 
 %divider {
   height: 1px;
-  margin-top: - $gutter-half;
-  margin-bottom: $gutter-half;
+  margin-top: - $gutter-half !important;
+  margin-bottom: $gutter-half !important;
   border: none;
   background-color: $divider-linear-bg-color;
+  z-index: 2;
 }
 
 /* DEFAULT DIVIDER */

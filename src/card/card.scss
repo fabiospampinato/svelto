@@ -56,6 +56,12 @@
     flex-shrink: 0; //INFO: So that when there's an overflow just `.card-block` scrolls
   }
 
+  /* FOOTER */
+
+  div.&-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
+    margin-bottom: 0 !important;
+  }
+
   /* BLOCK */
 
   &-block {
@@ -135,6 +141,12 @@
       width: calc(100% + #{$outline-width * 2}) !important;
     }
 
+  }
+
+  /* NEXT CHILDREN OUTLINED */
+
+  > .outlined + .outlined:not(img) {
+    border-top-width: 0;
   }
 
 }

@@ -14,10 +14,11 @@
 
 %divider {
   height: 1px;
-  margin-top: - $gutter-half;
-  margin-bottom: $gutter-half;
+  margin-top: - $gutter-half !important;
+  margin-bottom: $gutter-half !important;
   border: none;
   background-color: $divider-linear-bg-color;
+  z-index: 2;
 }
 
 /* DEFAULT DIVIDER */
