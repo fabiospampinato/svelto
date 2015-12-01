@@ -1598,27 +1598,27 @@ th {
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .chat-msg, .colorpicker, .datepicker, .embedded, .flippable, header, img, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+.widget, .accordion, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .chat-msg, .colorpicker, .datepicker, .embedded, .flippable, header, img, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .chat-msg > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :last-child, .accordion > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .chat-msg > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.breadcrumb, .accordion > :last-child.breadcrumb, label > :last-child.breadcrumb, .label > :last-child.breadcrumb, .button > :last-child.breadcrumb, .container > :last-child.breadcrumb, .card-header:not(.multiple) > :last-child.breadcrumb, .card-block:not(.multiple) > :last-child.breadcrumb, .card-footer:not(.multiple) > :last-child.breadcrumb, footer > :last-child.breadcrumb, .image-wrp .image-caption > :last-child.breadcrumb, .infobar > :last-child.breadcrumb, .tagbox > :last-child.breadcrumb, .card > :last-child.breadcrumb, .icons > :last-child.breadcrumb, .carousel > :last-child.breadcrumb, .chat-msg > :last-child.breadcrumb, .colorpicker > :last-child.breadcrumb, .datepicker > :last-child.breadcrumb, .embedded > :last-child.breadcrumb, .flippable > :last-child.breadcrumb, header > :last-child.breadcrumb, img > :last-child.breadcrumb, .image-wrp > :last-child.breadcrumb, input > :last-child.breadcrumb, textarea > :last-child.breadcrumb, .parallax > :last-child.breadcrumb, .placeholder > :last-child.breadcrumb, .progressbar > :last-child.breadcrumb, .rater > :last-child.breadcrumb, .triangle > :last-child.breadcrumb, .square > :last-child.breadcrumb, .square-sample > :last-child.breadcrumb, .circle > :last-child.breadcrumb, .slider > :last-child.breadcrumb, .spinner-label > :last-child.breadcrumb, .statistic > :last-child.breadcrumb, .switch > :last-child.breadcrumb, table.table > :last-child.breadcrumb, .tabs > :last-child.breadcrumb, .toolbar > :last-child.breadcrumb, blockquote > :last-child.breadcrumb, blockquote > footer > :last-child.breadcrumb, .widget > :last-child.pager, .accordion > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, img.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+.widget.disabled, .disabled.accordion, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, img.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   pointer-events: none !important;
   cursor: default !important;
   opacity: 0.5 !important;
 }
 
-.widget.disabled *, .disabled.accordion *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .disabled.carousel *, .disabled.chat-msg *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, header.disabled *, img.disabled *, .disabled.image-wrp *, input.disabled *, textarea.disabled *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
+.widget.disabled *, .disabled.accordion *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .disabled.carousel *, .disabled.chat-msg *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, header.disabled *, img.disabled *, .disabled.image-wrp *, input.disabled *, textarea.disabled *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
   cursor: default !important;
 }
 
@@ -1820,7 +1820,7 @@ _:-ms-input-placeholder, :root #content {
   margin-bottom: 0 !important;
 }
 
-#content > main > :last-child.multiple, #content > main > :last-child.breadcrumb, #content > main > :last-child.pager {
+#content > main > :last-child.multiple, #content > main > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -1833,6 +1833,8 @@ _:-ms-input-placeholder, :root #content {
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 /* BREADCRUMB */
 .breadcrumb {
@@ -1845,8 +1847,14 @@ _:-ms-input-placeholder, :root #content {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
+  /* CHILDREN */
   /* SEGMENTS */
   /* AFTER CURRENT */
+  /* ENABLED */
+}
+
+.breadcrumb > * {
+  margin-bottom: 0 !important;
 }
 
 .breadcrumb > :nth-child(even):not(:first-child) {
@@ -1861,7 +1869,11 @@ _:-ms-input-placeholder, :root #content {
   opacity: 0.5;
 }
 
-.breadcrumb > .current ~ *:not(:nth-child(even)):hover {
+.breadcrumb:not(.disabled) {
+  /* AFTER CURRENT */
+}
+
+.breadcrumb:not(.disabled) > .current ~ :not(:nth-child(even)):hover {
   opacity: 0.75;
 }
 
@@ -2383,7 +2395,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple, .label > .sub > :last-child.breadcrumb, .button > .sub > :last-child.breadcrumb, .label > .sub > :last-child.pager, .button > .sub > :last-child.pager {
+.label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple, .label > .sub > :last-child.pager, .button > .sub > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -3821,26 +3833,16 @@ i.icon, .carousel.inset .carousel-prev:after,
   display: -ms-flexbox;
   display: flex;
   /* INPUT */
-  /* BRIGHTNESS / SATURATION / HUE */
   /* HANDLER */
-  /* WRAPPERS */
-  /* SATURATION & BRIGHTNESS WRAPPER */
-  /* HUE WRAPPER */
+  /* SATURATION & BRIGHTNESS / HUE */
+  /* SATURATION & BRIGHTNESS */
+  /* HUE */
   /* INVALID */
   /* VALID */
 }
 
 .colorpicker input, .colorpicker textarea {
   display: none;
-}
-
-.colorpicker-brightness, .colorpicker-saturation, .colorpicker-hue {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  pointer-events: none;
 }
 
 .colorpicker-handler {
@@ -3852,7 +3854,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   background-color: white;
 }
 
-.colorpicker-saturation-brightness-wrp, .colorpicker-hue-wrp {
+.colorpicker-sb, .colorpicker-hue {
   position: relative;
   box-sizing: content-box;
   height: 11em;
@@ -3860,26 +3862,36 @@ i.icon, .carousel.inset .carousel-prev:after,
   border: 1px solid black;
 }
 
-.colorpicker-saturation-brightness-wrp {
+.colorpicker-sb {
   width: 11em;
   background-color: red;
-  /* BRIGHTNESS */
-  /* SATURATION */
+  /* BEFORE / AFTER */
+  /* BEFORE */
+  /* AFTER */
   /* HANDLER */
 }
 
-.colorpicker-saturation-brightness-wrp .colorpicker-brightness {
+.colorpicker-sb:before, .colorpicker-sb:after {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+}
+
+.colorpicker-sb:before {
   background-image: linear-gradient(to right, white 0%, transparent 100%) ;
   background-repeat: repeat-x ;
 }
 
-.colorpicker-saturation-brightness-wrp .colorpicker-saturation {
+.colorpicker-sb:after {
   background-image: linear-gradient(to bottom, transparent 0%, black 100%) ;
   background-repeat: repeat-x ;
   z-index: 1;
 }
 
-.colorpicker-saturation-brightness-wrp .colorpicker-handler {
+.colorpicker-sb .colorpicker-handler {
   width: 1em;
   height: 1em;
   margin: -0.5em 0 0 -0.5em;
@@ -3887,18 +3899,24 @@ i.icon, .carousel.inset .carousel-prev:after,
   border-radius: 50%;
 }
 
-.colorpicker-hue-wrp {
+.colorpicker-hue {
   width: 1.5em;
   margin-left: 10px;
-  /* HUE */
+  /* BEFORE */
   /* HANDLER */
 }
 
-.colorpicker-hue-wrp .colorpicker-hue {
-  background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);
+.colorpicker-hue:before {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  content: '';
+  background: linear-gradient(to bottom, red 0%, fuchsia 16.6666666666%, blue 33.3333333333%, aqua 50%, lime 66.6666666666%, yellow 83.3333333333%, red 100%);
 }
 
-.colorpicker-hue-wrp .colorpicker-handler {
+.colorpicker-hue .colorpicker-handler {
   width: 100%;
   height: 0.5em;
   margin-top: -0.25em;
@@ -3907,20 +3925,20 @@ i.icon, .carousel.inset .carousel-prev:after,
 }
 
 .colorpicker.invalid {
-  /* SATURATION & BRIGHTNESS WRAPPER */
+  /* SATURATION & BRIGHTNESS */
 }
 
-.colorpicker.invalid .colorpicker-saturation-brightness-wrp,
-.colorpicker.invalid .colorpicker-hue-wrp {
+.colorpicker.invalid .colorpicker-sb,
+.colorpicker.invalid .colorpicker-hue {
   border: 1px solid #f44336 !important;
 }
 
 .colorpicker.valid {
-  /* SATURATION & BRIGHTNESS WRAPPER */
+  /* SATURATION & BRIGHTNESS */
 }
 
-.colorpicker.valid .colorpicker-saturation-brightness-wrp,
-.colorpicker.valid .colorpicker-hue-wrp {
+.colorpicker.valid .colorpicker-sb,
+.colorpicker.valid .colorpicker-hue {
   border: 1px solid #4caf50 !important;
 }
 
@@ -5735,7 +5753,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 0 !important;
 }
 
-.divider.linear:not(:empty) > :last-child.multiple, .divider.linear:not(:empty) > :last-child.breadcrumb, .divider.linear:not(:empty) > :last-child.pager, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.breadcrumb, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.pager {
+.divider.linear:not(:empty) > :last-child.multiple, .divider.linear:not(:empty) > :last-child.pager, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -5853,7 +5871,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 0 !important;
 }
 
-.divider.block > .divider-content > :last-child.multiple, .divider.block > .divider-content > :last-child.breadcrumb, .divider.block > .divider-content > :last-child.pager {
+.divider.block > .divider-content > :last-child.multiple, .divider.block > .divider-content > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -7134,7 +7152,7 @@ i[class^="flag-"] {
   margin-bottom: 0 !important;
 }
 
-.flippable-front > :last-child.multiple, .flippable-front > :last-child.breadcrumb, .flippable-front > :last-child.pager, .flippable-back > :last-child.multiple, .flippable-back > :last-child.breadcrumb, .flippable-back > :last-child.pager {
+.flippable-front > :last-child.multiple, .flippable-front > :last-child.pager, .flippable-back > :last-child.multiple, .flippable-back > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -7243,7 +7261,7 @@ form:not(.multiple) > :last-child {
   margin-bottom: 0 !important;
 }
 
-form:not(.multiple) > :last-child.multiple, form:not(.multiple) > :last-child.breadcrumb, form:not(.multiple) > :last-child.pager {
+form:not(.multiple) > :last-child.multiple, form:not(.multiple) > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -7719,7 +7737,7 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar > * > :last-child.multiple, .infobar > * > :last-child.breadcrumb, .infobar > * > :last-child.pager {
+.infobar > * > :last-child.multiple, .infobar > * > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -7766,9 +7784,8 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar-center .infobar-title > :last-child.multiple, .infobar-center .infobar-title > :last-child.breadcrumb, .infobar-center .infobar-title > :last-child.pager,
+.infobar-center .infobar-title > :last-child.multiple, .infobar-center .infobar-title > :last-child.pager,
 .infobar-center .infobar-subtitle > :last-child.multiple,
-.infobar-center .infobar-subtitle > :last-child.breadcrumb,
 .infobar-center .infobar-subtitle > :last-child.pager {
   margin-bottom: -10px !important;
 }
@@ -9888,7 +9905,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   margin-bottom: 0 !important;
 }
 
-.overlay > :last-child.multiple, .overlay > :last-child.breadcrumb, .overlay > :last-child.pager {
+.overlay > :last-child.multiple, .overlay > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -10860,12 +10877,10 @@ a.ripple > .ripple-circle {
   margin-bottom: 0 !important;
 }
 
-.section-left > :last-child.multiple, .section-left > :last-child.breadcrumb, .section-left > :last-child.pager,
+.section-left > :last-child.multiple, .section-left > :last-child.pager,
 .section-center > :last-child.multiple,
-.section-center > :last-child.breadcrumb,
 .section-center > :last-child.pager,
 .section-right > :last-child.multiple,
-.section-right > :last-child.breadcrumb,
 .section-right > :last-child.pager {
   margin-bottom: -10px !important;
 }
@@ -11927,16 +11942,22 @@ svg.spinner.multicolor circle {
 /* STATISTIC */
 .statistic {
   text-align: center;
-  /* PRIMARY */
-  /* SECONDARY */
+  /* VALUE */
+  /* DESCRIPTION */
 }
 
-.statistic-primary {
+.statistic > .value {
   font-size: 1.5em ;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
-.statistic-secondary {
+.statistic > .description {
   font-size: 0.875em ;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 /* =========================================================================
@@ -12227,7 +12248,7 @@ table.table tr > * > :last-child {
   margin-bottom: 0 !important;
 }
 
-table.table tr > * > :last-child.multiple, table.table tr > * > :last-child.breadcrumb, table.table tr > * > :last-child.pager {
+table.table tr > * > :last-child.multiple, table.table tr > * > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -12964,7 +12985,7 @@ blockquote > :last-child {
   margin-bottom: 0 !important;
 }
 
-blockquote > :last-child.multiple, blockquote > :last-child.breadcrumb, blockquote > :last-child.pager {
+blockquote > :last-child.multiple, blockquote > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -12990,7 +13011,7 @@ blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-blockquote > footer > :last-child.multiple, blockquote > footer > :last-child.breadcrumb, blockquote > footer > :last-child.pager {
+blockquote > footer > :last-child.multiple, blockquote > footer > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
@@ -13010,7 +13031,7 @@ li > :last-child {
   margin-bottom: 0 !important;
 }
 
-li > :last-child.multiple, li > :last-child.breadcrumb, li > :last-child.pager {
+li > :last-child.multiple, li > :last-child.pager {
   margin-bottom: -10px !important;
 }
 

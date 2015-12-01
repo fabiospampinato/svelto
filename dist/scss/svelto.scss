@@ -3803,7 +3803,6 @@ $z-depths: (
     margin-bottom: 0 !important;
 
     &.multiple,
-    &.breadcrumb,
     &.pager {
       margin-bottom: - $gutter !important;
     }
@@ -4673,15 +4672,24 @@ _:-ms-input-placeholder, :root #content {
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 
 /* BREADCRUMB */
 
 .breadcrumb {
 
+  @extend .widget;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
+
+  /* CHILDREN */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
 
   /* SEGMENTS */
 
@@ -4700,10 +4708,16 @@ _:-ms-input-placeholder, :root #content {
   /* AFTER CURRENT */
 
   > .current ~ * {
-
     opacity: $breadcrumb-after-current-opacity;
+  }
 
-    &:not(:nth-child(even)):hover {
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* AFTER CURRENT */
+
+    > .current ~ :not(:nth-child(even)):hover {
       opacity: $breadcrumb-after-current-opacity-hover;
     }
 
@@ -6702,15 +6716,6 @@ i.icon {
     display: none;
   }
 
-  /* BRIGHTNESS / SATURATION / HUE */
-
-  &-brightness,
-  &-saturation,
-  &-hue {
-    @include fill-absolute ();
-    pointer-events: none;
-  }
-
   /* HANDLER */
 
   &-handler {
@@ -6722,10 +6727,10 @@ i.icon {
     background-color: $colorpicker-handler-border-color;
   }
 
-  /* WRAPPERS */
+  /* SATURATION & BRIGHTNESS / HUE */
 
-  &-saturation-brightness-wrp,
-  &-hue-wrp {
+  &-sb,
+  &-hue {
     position: relative;
     box-sizing: content-box;
     height: $colorpicker-height;
@@ -6733,22 +6738,30 @@ i.icon {
     border: $colorpicker-wrp-border-width solid $colorpicker-wrp-border-color;
   }
 
-  /* SATURATION & BRIGHTNESS WRAPPER */
+  /* SATURATION & BRIGHTNESS */
 
-  &-saturation-brightness-wrp {
+  &-sb {
 
     width: $colorpicker-height;
     background-color: red;
 
-    /* BRIGHTNESS */
+    /* BEFORE / AFTER */
 
-    .colorpicker-brightness {
+    &:before,
+    &:after {
+      @include fill-absolute ();
+      content: '';
+    }
+
+    /* BEFORE */
+
+    &:before {
       @include gradient-horizontal ( white, transparent );
     }
 
-    /* SATURATION */
+    /* AFTER */
 
-    .colorpicker-saturation {
+    &:after {
       @include gradient-vertical ( transparent, black );
       z-index: 1;
     }
@@ -6765,17 +6778,19 @@ i.icon {
 
   }
 
-  /* HUE WRAPPER */
+  /* HUE */
 
-  &-hue-wrp {
+  &-hue {
 
     width: $colorpicker-hue-wrp-width;
     margin-left: $gutter;
 
-    /* HUE */
+    /* BEFORE */
 
-    .colorpicker-hue {
-      background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);
+    &:before {
+      @include fill-absolute ();
+      content: '';
+      background: linear-gradient(to bottom, red 0%, fuchsia 16.6666666666%, blue 33.3333333333%, aqua 50%, lime 66.6666666666%, yellow 83.3333333333%, red 100%);
     }
 
     /* HANDLER */
@@ -6794,10 +6809,10 @@ i.icon {
 
   &.invalid {
 
-    /* SATURATION & BRIGHTNESS WRAPPER */
+    /* SATURATION & BRIGHTNESS */
 
-    .colorpicker-saturation-brightness-wrp,
-    .colorpicker-hue-wrp {
+    .colorpicker-sb,
+    .colorpicker-hue {
       border: $outline-width solid $color-error !important;
     }
 
@@ -6807,10 +6822,10 @@ i.icon {
 
   &.valid {
 
-    /* SATURATION & BRIGHTNESS WRAPPER */
+    /* SATURATION & BRIGHTNESS */
 
-    .colorpicker-saturation-brightness-wrp,
-    .colorpicker-hue-wrp {
+    .colorpicker-sb,
+    .colorpicker-hue {
       border: $outline-width solid $color-success !important;
     }
 
@@ -10890,9 +10905,9 @@ svg.spinner {
   /* CIRCLE */
 
   circle {
-    cx: $spinner-size / 2;
-    cy: $spinner-size / 2;
-    r: $spinner-radius;
+    cx: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
+    cy: $spinner-size / 2; //INFO: This only works on Chrome //TODO: Maybe just strip them off
+    r: $spinner-radius; //INFO: This only works on Chrome //TODO: Maybe just strip them off
     fill: none;
     stroke-width: $spinner-stroke-width;
     stroke: $spinner-stroke-color;
@@ -11009,21 +11024,25 @@ svg.spinner {
 
 /* STATISTIC */
 
+//TODO: Add better support for icon + text
+
 .statistic {
 
   @extend .widget;
   text-align: center;
 
-  /* PRIMARY */
+  /* VALUE */
 
-  &-primary {
+  > .value {
     @include size ( $statistic-primary-size );
+    justify-content: center;
   }
 
-  /* SECONDARY */
+  /* DESCRIPTION */
 
-  &-secondary {
+  > .description {
     @include size ( $statistic-secondary-size );
+    justify-content: center;
   }
 
 }

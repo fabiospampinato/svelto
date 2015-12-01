@@ -10,21 +10,25 @@
 
 /* STATISTIC */
 
+//TODO: Add better support for icon + text
+
 .statistic {
 
   @extend .widget;
   text-align: center;
 
-  /* PRIMARY */
+  /* VALUE */
 
-  &-primary {
+  > .value {
     @include size ( $statistic-primary-size );
+    justify-content: center;
   }
 
-  /* SECONDARY */
+  /* DESCRIPTION */
 
-  &-secondary {
+  > .description {
     @include size ( $statistic-secondary-size );
+    justify-content: center;
   }
 
 }

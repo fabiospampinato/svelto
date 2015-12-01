@@ -19,7 +19,7 @@
     name: 'accordion',
     selector: '.accordion',
     options: {
-      isMultiple: undefined,
+      isMultiple: false,
       classes: {
         multiple: 'multiple-open'
       },
@@ -45,8 +45,6 @@
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
 
       this.instances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
-
-      this.options.isMultiple = _.isBoolean ( this.options.isMultiple ) ? this.options.isMultiple : this.$accordion.hasClass ( this.options.classes.multiple );
 
     }
 

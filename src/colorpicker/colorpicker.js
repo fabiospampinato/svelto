@@ -27,11 +27,11 @@
       live: false,
       selectors: {
         sb: {
-          wrp: '.colorpicker-saturation-brightness-wrp',
+          wrp: '.colorpicker-sb',
           handler: '.colorpicker-handler'
         },
         hue: {
-          wrp: '.colorpicker-hue-wrp',
+          wrp: '.colorpicker-hue',
           handler: '.colorpicker-handler'
         },
         input: 'input'

@@ -23,15 +23,6 @@
     display: none;
   }
 
-  /* BRIGHTNESS / SATURATION / HUE */
-
-  &-brightness,
-  &-saturation,
-  &-hue {
-    @include fill-absolute ();
-    pointer-events: none;
-  }
-
   /* HANDLER */
 
   &-handler {
@@ -43,10 +34,10 @@
     background-color: $colorpicker-handler-border-color;
   }
 
-  /* WRAPPERS */
+  /* SATURATION & BRIGHTNESS / HUE */
 
-  &-saturation-brightness-wrp,
-  &-hue-wrp {
+  &-sb,
+  &-hue {
     position: relative;
     box-sizing: content-box;
     height: $colorpicker-height;
@@ -54,22 +45,30 @@
     border: $colorpicker-wrp-border-width solid $colorpicker-wrp-border-color;
   }
 
-  /* SATURATION & BRIGHTNESS WRAPPER */
+  /* SATURATION & BRIGHTNESS */
 
-  &-saturation-brightness-wrp {
+  &-sb {
 
     width: $colorpicker-height;
     background-color: red;
 
-    /* BRIGHTNESS */
+    /* BEFORE / AFTER */
 
-    .colorpicker-brightness {
+    &:before,
+    &:after {
+      @include fill-absolute ();
+      content: '';
+    }
+
+    /* BEFORE */
+
+    &:before {
       @include gradient-horizontal ( white, transparent );
     }
 
-    /* SATURATION */
+    /* AFTER */
 
-    .colorpicker-saturation {
+    &:after {
       @include gradient-vertical ( transparent, black );
       z-index: 1;
     }
@@ -86,17 +85,19 @@
 
   }
 
-  /* HUE WRAPPER */
+  /* HUE */
 
-  &-hue-wrp {
+  &-hue {
 
     width: $colorpicker-hue-wrp-width;
     margin-left: $gutter;
 
-    /* HUE */
+    /* BEFORE */
 
-    .colorpicker-hue {
-      background: linear-gradient(to bottom, red 0%, fuchsia 17%, blue 33%, aqua 50%, lime 67%, yellow 83%, red 100%);
+    &:before {
+      @include fill-absolute ();
+      content: '';
+      background: linear-gradient(to bottom, red 0%, fuchsia 16.6666666666%, blue 33.3333333333%, aqua 50%, lime 66.6666666666%, yellow 83.3333333333%, red 100%);
     }
 
     /* HANDLER */
@@ -115,10 +116,10 @@
 
   &.invalid {
 
-    /* SATURATION & BRIGHTNESS WRAPPER */
+    /* SATURATION & BRIGHTNESS */
 
-    .colorpicker-saturation-brightness-wrp,
-    .colorpicker-hue-wrp {
+    .colorpicker-sb,
+    .colorpicker-hue {
       border: $outline-width solid $color-error !important;
     }
 
@@ -128,10 +129,10 @@
 
   &.valid {
 
-    /* SATURATION & BRIGHTNESS WRAPPER */
+    /* SATURATION & BRIGHTNESS */
 
-    .colorpicker-saturation-brightness-wrp,
-    .colorpicker-hue-wrp {
+    .colorpicker-sb,
+    .colorpicker-hue {
       border: $outline-width solid $color-success !important;
     }
 

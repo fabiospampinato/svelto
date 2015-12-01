@@ -4,15 +4,24 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 
 /* BREADCRUMB */
 
 .breadcrumb {
 
+  @extend .widget;
   display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
+
+  /* CHILDREN */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
 
   /* SEGMENTS */
 
@@ -31,10 +40,16 @@
   /* AFTER CURRENT */
 
   > .current ~ * {
-
     opacity: $breadcrumb-after-current-opacity;
+  }
 
-    &:not(:nth-child(even)):hover {
+  /* ENABLED */
+
+  &:not(.disabled) {
+
+    /* AFTER CURRENT */
+
+    > .current ~ :not(:nth-child(even)):hover {
       opacity: $breadcrumb-after-current-opacity-hover;
     }
 
