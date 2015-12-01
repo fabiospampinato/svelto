@@ -3134,7 +3134,7 @@ hr {
         align-self: stretch;
         flex-grow: 0;
         flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-        margin: 0 $gutter-half $gutter;
+        margin: 0 $gutter-half $gutter !important;
       }
 
       /* ADVANCED */
@@ -3150,7 +3150,7 @@ hr {
 
         &:before,
         &:after {
-          margin: 0;
+          margin: 0 !important;
           min-width: 0;
           width: 1px;
           min-height: $gutter;
