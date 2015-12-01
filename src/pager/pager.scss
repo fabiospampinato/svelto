@@ -12,10 +12,19 @@
 
 .pager {
 
-  /* SEPARATED */
+  display: block;
 
-  &:not(.joined) {
-    justify-content: space-between !important;
+  /* NEXT */
+
+  > :nth-child(2),
+  > .next {
+    float: right;
+  }
+
+  /* CLEARFIX */
+
+  + {
+    clear: both;
   }
 
 }

@@ -1278,6 +1278,8 @@ label {
 
   /* BADGE */
 
+  //TODO: Maybe move to it's own component
+
   &.badge {
 
     position: absolute;
@@ -1331,6 +1333,8 @@ label {
   }
 
   /* RIBBON */
+
+  //TODO: Maybe move it to it's own component
 
   &.ribbon {
 
@@ -5535,10 +5539,19 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
 .pager {
 
-  /* SEPARATED */
+  display: block;
 
-  &:not(.joined) {
-    justify-content: space-between !important;
+  /* NEXT */
+
+  > :nth-child(2),
+  > .next {
+    float: right;
+  }
+
+  /* CLEARFIX */
+
+  + {
+    clear: both;
   }
 
 }
