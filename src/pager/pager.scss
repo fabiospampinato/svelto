@@ -12,19 +12,13 @@
 
 .pager {
 
-  display: block;
+  display: flex;
 
   /* NEXT */
 
   > :nth-child(2),
   > .next {
-    float: right;
-  }
-
-  /* CLEARFIX */
-
-  + {
-    clear: both;
+    margin-left: auto;
   }
 
 }

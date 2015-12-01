@@ -9964,18 +9964,15 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
  * ========================================================================= */
 /* PAGER */
 .pager {
-  display: block;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
   /* NEXT */
-  /* CLEARFIX */
 }
 
 .pager > :nth-child(2),
 .pager > .next {
-  float: right;
-}
-
-.pager + {
-  clear: both;
+  margin-left: auto;
 }
 
 /* =========================================================================
