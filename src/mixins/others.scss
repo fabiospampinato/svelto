@@ -12,7 +12,7 @@
 
 @mixin last-child-no-gutter () {
 
-  > :not(script):last-of-type { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
+  > :last-child { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
 
     margin-bottom: 0 !important;
 

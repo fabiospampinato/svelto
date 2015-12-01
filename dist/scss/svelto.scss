@@ -3798,7 +3798,7 @@ $z-depths: (
 
 @mixin last-child-no-gutter () {
 
-  > :not(script):last-of-type { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
+  > :last-child { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
 
     margin-bottom: 0 !important;
 
@@ -7888,6 +7888,7 @@ header {
 /* DEFAULT */
 
 img {
+  @extend .widget;
   $colors: map-get($colors, $image-color);
   $border: nth($colors, 4);
   display: flex;
@@ -7903,6 +7904,7 @@ span > img {
   vertical-align: middle;
   max-width: 100%;
   width: auto;
+  margin-bottom: 0 !important;
 }
 
 /* IMAGE */
@@ -7926,6 +7928,7 @@ span > img {
   img {
     order: 2;
     border-radius: inherit;
+    margin-bottom: 0 !important;
   }
 
   /* CAPTION */
