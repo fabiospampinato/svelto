@@ -5295,7 +5295,7 @@ label {
 
   &.ribbon {
 
-    position: absolute;
+    /* BEFORE / AFTER */
 
     &.ribbon-left:before,
     &.ribbon-right:after {
@@ -5307,10 +5307,12 @@ label {
       bottom: - $label-ribbon-size * 2;
     }
 
+    /* LEFT */
+
     &.ribbon-left {
 
       @include border-left-radius ( 0 );
-      left: - ( $gutter + $label-ribbon-size - ( $outline-width * 2 ) );
+      left: - ( $gutter + ( $label-ribbon-size * 2 ) );
       padding-left: calc(#{$label-padding-horizontal} + #{$gutter});
 
       &:before {
@@ -5320,10 +5322,17 @@ label {
 
     }
 
+    /* LEFT & RIGHT */
+
+    &.ribbon-left.ribbon-right {
+      width: calc(100% + #{( $gutter * 2 ) + ( $label-ribbon-size * 4)});
+    }
+
+    /* RIGHT */
+
     &.ribbon-right {
 
       @include border-right-radius ( 0 );
-      right: - ( $gutter + $label-ribbon-size - ( $outline-width * 2 ) );
       padding-right: calc(#{$label-padding-horizontal} + #{$gutter});
 
       &:after {
@@ -5333,16 +5342,33 @@ label {
 
     }
 
+    /* ONLY RIGHT */
+
+    //FIXME: It is a pixel too far
+
+    &.ribbon-right:not(.ribbon-left) {
+      left: calc(100% + #{( $gutter * 2 ) + $label-ribbon-size});
+      transform: translateX(-100%);
+    }
+
+    /* OUTLINED */
+
     &.outlined {
+
+      /* BEFORE / AFTER */
 
       &.ribbon-left:before,
       &.ribbon-right:after {
         bottom: - ( $label-ribbon-size * 2 + $outline-width );
       }
 
+      /* BEFORE */
+
       &.ribbon-left:before {
         left: - $outline-width;
       }
+
+      /* AFTER */
 
       &.ribbon-right:after {
         right: - $outline-width;
@@ -5463,6 +5489,7 @@ label {
 /* LABEL TAG */
 
 //FIXME: Missing pointer outline in IE10
+//FIXME: The pointer is not clickable
 
 .label-tag {
 

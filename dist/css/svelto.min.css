@@ -2485,7 +2485,12 @@ label {
 }
 
 .label.ribbon, .ribbon.button {
-  position: absolute;
+  /* BEFORE / AFTER */
+  /* LEFT */
+  /* LEFT & RIGHT */
+  /* RIGHT */
+  /* ONLY RIGHT */
+  /* OUTLINED */
 }
 
 .label.ribbon.ribbon-left:before, .ribbon.ribbon-left.button:before, .label.ribbon.ribbon-right:after, .ribbon.ribbon-right.button:after {
@@ -2500,7 +2505,7 @@ label {
 .label.ribbon.ribbon-left, .ribbon.ribbon-left.button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
-  left: -16px;
+  left: -26px;
   padding-left: calc(1em + 10px);
 }
 
@@ -2509,16 +2514,31 @@ label {
   border-right-color: inherit;
 }
 
+.label.ribbon.ribbon-left.ribbon-right, .ribbon.ribbon-left.ribbon-right.button {
+  width: calc(100% + 52px);
+}
+
 .label.ribbon.ribbon-right, .ribbon.ribbon-right.button {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
-  right: -16px;
   padding-right: calc(1em + 10px);
 }
 
 .label.ribbon.ribbon-right:after, .ribbon.ribbon-right.button:after {
   right: 0;
   border-left-color: inherit;
+}
+
+.label.ribbon.ribbon-right:not(.ribbon-left), .ribbon.ribbon-right.button:not(.ribbon-left) {
+  left: calc(100% + 28px);
+  -webkit-transform: translateX(-100%);
+          transform: translateX(-100%);
+}
+
+.label.ribbon.outlined, .ribbon.outlined.button {
+  /* BEFORE / AFTER */
+  /* BEFORE */
+  /* AFTER */
 }
 
 .label.ribbon.outlined.ribbon-left:before, .ribbon.outlined.ribbon-left.button:before, .label.ribbon.outlined.ribbon-right:after, .ribbon.outlined.ribbon-right.button:after {
