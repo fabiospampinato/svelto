@@ -22,7 +22,7 @@
         flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
       selectors: {
-        flipper: '.flippable-trigger'
+        flipper: '.flippable-flipper'
       },
       callbacks: {
         front () {},

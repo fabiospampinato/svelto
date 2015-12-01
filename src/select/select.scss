@@ -39,21 +39,21 @@
 
   }
 
-  /* TRIGGER DIRECTION */
+  /* TOGGLER DIRECTION */
 
-  &.dropdown-trigger-top {
+  &.dropdown-toggler-top {
     @include border-top-radius ( 0 );
   }
 
-  &.dropdown-trigger-bottom {
+  &.dropdown-toggler-bottom {
     @include border-bottom-radius ( 0 );
   }
 
-  &.dropdown-trigger-right {
+  &.dropdown-toggler-right {
     @include border-right-radius ( 0 );
   }
 
-  &.dropdown-trigger-left {
+  &.dropdown-toggler-left {
     @include border-left-radius ( 0 );
   }
 

@@ -5005,7 +5005,7 @@
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
           change ( data ) {
-            $trigger.addClass ( 'dropdown-trigger-' + data.direction );
+            $trigger.addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
       });
@@ -5054,7 +5054,7 @@
 
         if ( trigger ) {
 
-          $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+          $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
 
           if ( this._isOpen && assignments[this.id] !== trigger ) {
 
@@ -5091,7 +5091,7 @@
 
       if ( this._isOpen ) {
 
-        $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+        $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
 
         this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
 
@@ -5533,7 +5533,7 @@
         flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
       selectors: {
-        flipper: '.flippable-trigger'
+        flipper: '.flippable-flipper'
       },
       callbacks: {
         front () {},
@@ -9588,7 +9588,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.$dropdown = $(html).appendTo ( $body );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
-      this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', this.id );
+      this.$trigger.addClass ( 'dropdown-toggler' ).attr ( 'data-dropdown', this.id );
 
       let self = this;
 

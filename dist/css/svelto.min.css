@@ -7724,6 +7724,8 @@ span > img {
   /* CENTER */
   /* RIGHT */
   /* BOTTOM */
+  /* TITLE / SUBTITLE */
+  /* TITLE */
 }
 
 .infobar.inset {
@@ -7742,7 +7744,7 @@ span > img {
   margin-bottom: -10px !important;
 }
 
-.infobar > :not(:first-child):not(.infobar-bottom) {
+.infobar > :not(:first-child):not(.infobar-title):not(.infobar-subtitle):not(.infobar-bottom) {
   margin-left: 10px;
 }
 
@@ -7768,31 +7770,6 @@ span > img {
   -webkit-order: 1;
       -ms-flex-order: 1;
           order: 1;
-  /* TITLE / SUBTITLE */
-  /* TITLE */
-}
-
-.infobar-center .infobar-title,
-.infobar-center .infobar-subtitle {
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  margin-bottom: 0 !important;
-}
-
-.infobar-center .infobar-title > :last-child,
-.infobar-center .infobar-subtitle > :last-child {
-  margin-bottom: 0 !important;
-}
-
-.infobar-center .infobar-title > :last-child.multiple, .infobar-center .infobar-title > :last-child.pager,
-.infobar-center .infobar-subtitle > :last-child.multiple,
-.infobar-center .infobar-subtitle > :last-child.pager {
-  margin-bottom: -10px !important;
-}
-
-.infobar-center .infobar-title {
-  font-size: 1.25em ;
 }
 
 .infobar-right {
@@ -7810,6 +7787,25 @@ span > img {
           order: 3;
   width: 100%;
   margin-top: 10px;
+}
+
+.infobar-title, .infobar-subtitle {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  margin-bottom: 0 !important;
+}
+
+.infobar-title > :last-child, .infobar-subtitle > :last-child {
+  margin-bottom: 0 !important;
+}
+
+.infobar-title > :last-child.multiple, .infobar-title > :last-child.pager, .infobar-subtitle > :last-child.multiple, .infobar-subtitle > :last-child.pager {
+  margin-bottom: -10px !important;
+}
+
+.infobar-title {
+  font-size: 1.25em ;
 }
 
 /* =========================================================================
@@ -10927,7 +10923,7 @@ a.ripple > .ripple-circle {
 .select-btn {
   /* DEFAULT SELECT */
   /* VALUEHOLDER */
-  /* TRIGGER DIRECTION */
+  /* TOGGLER DIRECTION */
 }
 
 .select-btn select {
@@ -10957,22 +10953,22 @@ a.ripple > .ripple-circle {
   content: '\a0';
 }
 
-.select-btn.dropdown-trigger-top {
+.select-btn.dropdown-toggler-top {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 
-.select-btn.dropdown-trigger-bottom {
+.select-btn.dropdown-toggler-bottom {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.select-btn.dropdown-trigger-right {
+.select-btn.dropdown-toggler-right {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-.select-btn.dropdown-trigger-left {
+.select-btn.dropdown-toggler-left {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
@@ -11947,14 +11943,14 @@ svg.spinner.multicolor circle {
   /* DESCRIPTION */
 }
 
-.statistic > .value {
+.statistic > .statistic-value {
   font-size: 1.5em ;
   -webkit-justify-content: center;
       -ms-flex-pack: center;
           justify-content: center;
 }
 
-.statistic > .description {
+.statistic > .statistic-description {
   font-size: 0.875em ;
   -webkit-justify-content: center;
       -ms-flex-pack: center;

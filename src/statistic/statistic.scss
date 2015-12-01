@@ -19,14 +19,14 @@
 
   /* VALUE */
 
-  > .value {
+  > .statistic-value {
     @include size ( $statistic-primary-size );
     justify-content: center;
   }
 
   /* DESCRIPTION */
 
-  > .description {
+  > .statistic-description {
     @include size ( $statistic-secondary-size );
     justify-content: center;
   }

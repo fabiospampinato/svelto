@@ -180,7 +180,7 @@
       this.$dropdown = $(html).appendTo ( $body );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
-      this.$trigger.addClass ( 'dropdown-trigger' ).attr ( 'data-dropdown', this.id );
+      this.$trigger.addClass ( 'dropdown-toggler' ).attr ( 'data-dropdown', this.id );
 
       let self = this;
 

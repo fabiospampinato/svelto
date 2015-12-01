@@ -251,7 +251,7 @@
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
           change ( data ) {
-            $trigger.addClass ( 'dropdown-trigger-' + data.direction );
+            $trigger.addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
       });
@@ -300,7 +300,7 @@
 
         if ( trigger ) {
 
-          $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+          $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
 
           if ( this._isOpen && assignments[this.id] !== trigger ) {
 
@@ -337,7 +337,7 @@
 
       if ( this._isOpen ) {
 
-        $(assignments[this.id]).removeClass ( 'dropdown-trigger-top dropdown-trigger-bottom dropdown-trigger-left dropdown-trigger-right ' + this.options.classes.open );
+        $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
 
         this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
 

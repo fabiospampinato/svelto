@@ -4120,7 +4120,7 @@ span > img {
 
   /* SECTIONS GUTTER */
 
-  > :not(:first-child):not(.infobar-bottom) {
+  > :not(:first-child):not(.infobar-title):not(.infobar-subtitle):not(.infobar-bottom) {
     margin-left: $gutter;
   }
 
@@ -4134,27 +4134,10 @@ span > img {
   /* CENTER */
 
   &-center {
-
     flex-grow: 1;
     flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
     flex-basis: 0;
     order: 1;
-
-    /* TITLE / SUBTITLE */
-
-    .infobar-title,
-    .infobar-subtitle {
-      @include last-child-no-gutter ();
-      display: flex;
-      margin-bottom: 0 !important;
-    }
-
-    /* TITLE */
-
-    .infobar-title {
-      @include size ( $infobar-title-size );
-    }
-
   }
 
   /* RIGHT */
@@ -4170,6 +4153,21 @@ span > img {
     order: 3;
     width: 100%;
     margin-top: $gutter;
+  }
+
+  /* TITLE / SUBTITLE */
+
+  &-title,
+  &-subtitle {
+    @include last-child-no-gutter ();
+    display: flex;
+    margin-bottom: 0 !important;
+  }
+
+  /* TITLE */
+
+  &-title {
+    @include size ( $infobar-title-size );
   }
 
 }
@@ -6332,21 +6330,21 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
   }
 
-  /* TRIGGER DIRECTION */
+  /* TOGGLER DIRECTION */
 
-  &.dropdown-trigger-top {
+  &.dropdown-toggler-top {
     @include border-top-radius ( 0 );
   }
 
-  &.dropdown-trigger-bottom {
+  &.dropdown-toggler-bottom {
     @include border-bottom-radius ( 0 );
   }
 
-  &.dropdown-trigger-right {
+  &.dropdown-toggler-right {
     @include border-right-radius ( 0 );
   }
 
-  &.dropdown-trigger-left {
+  &.dropdown-toggler-left {
     @include border-left-radius ( 0 );
   }
 
@@ -7073,14 +7071,14 @@ svg.spinner {
 
   /* VALUE */
 
-  > .value {
+  > .statistic-value {
     @include size ( $statistic-primary-size );
     justify-content: center;
   }
 
   /* DESCRIPTION */
 
-  > .description {
+  > .statistic-description {
     @include size ( $statistic-secondary-size );
     justify-content: center;
   }
