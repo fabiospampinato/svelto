@@ -58,7 +58,7 @@
 
   /* FOOTER */
 
-  div.&-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
+  div.card-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
     margin-bottom: 0 !important;
   }
 

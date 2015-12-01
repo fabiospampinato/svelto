@@ -205,11 +205,11 @@ gulp.task ( 'css', ['scss-full'], function () {
               outputStyle: 'expanded',
               precision: 10
             }).on ( 'error', sass.logError ) )
-            .pipe ( gulpif ( isProduction, autoprefixer ({
+            .pipe ( autoprefixer ({
               browsers: ['ie >= 10', 'ie_mob >= 10', 'ff >= 30', 'chrome >= 34', 'safari >= 7', 'opera >= 23', 'ios >= 7', 'android >= 4.4', 'bb >= 10'], //INFO: Pointer events is available on IE 11+
               cascade: true,
               remove: true
-            })))
+            }))
             .pipe ( rename ( 'svelto.css' ) )
             .pipe ( gulp.dest ( DEST.css ) )
             .pipe ( gulpif ( isProduction, csso () ) )

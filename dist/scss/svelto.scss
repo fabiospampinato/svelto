@@ -5701,7 +5701,7 @@ button {
 
   /* FOOTER */
 
-  div.&-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
+  div.card-footer.multiple[class*="multiple"] { //FIXME: Ugly fix
     margin-bottom: 0 !important;
   }
 
@@ -6299,32 +6299,34 @@ i.icon {
 
   .chat-msg-img {
 
+    box-sizing: content-box;
     width: $chat-msg-img-size;
     height: $chat-msg-img-size;
+    border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
+    border-radius: 100%;
+    overflow: hidden;
 
-    .image-wrp {
-
+    img {
       transition: opacity $chat-msg-img-transition-duration;
-
-      img {
-        border-radius: 100%;
-        width: $chat-msg-img-size;
-        height: $chat-msg-img-size;
-        border: $chat-msg-img-border-width solid $chat-msg-img-border-color;
-      }
-
-    }
-
-    /* TIP */
-
-    + .chat-msg-content .card-header:before {
-      display: block;
+      width: $chat-msg-img-size;
+      height: $chat-msg-img-size;
+      border-radius: 100%;
+      overflow: hidden;
     }
 
   }
 
-  a.chat-msg-img:hover .image-wrp {
-    opacity: $chat-msg-img-opacity-hover;
+  a.chat-msg-img:hover {
+
+    img {
+      opacity: $chat-msg-img-opacity-hover;
+    }
+
+    .overlay + img,
+    .overlay + * > img {
+      opacity: 1;
+    }
+
   }
 
   /* CONTENT */
@@ -6343,7 +6345,7 @@ i.icon {
 
       &:before {
         @include square ( $chat-tip-size, inherit );
-        display: none;
+        display: block;
         transform: rotate(45deg);
         position: absolute;
         content: '';
@@ -6376,6 +6378,18 @@ i.icon {
 
   }
 
+  /* NO IMG */
+
+  &.no-img {
+
+    /* IMG */
+
+    .chat-msg-img {
+      display: none;
+    }
+
+  }
+
   /* LEFT */
 
   &:not(.direction-right) {
@@ -6399,25 +6413,32 @@ i.icon {
 
     .chat-msg-img {
       order: 1;
-      margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* TIP */
+
+    &:not(.no-tip) {
+
+      .chat-msg-content {
+        margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+      }
+
     }
 
     /* NO TIP */
 
     &.no-tip {
 
-      /* IMAGE */
-
-      .chat-msg-img{
-        margin-right: $gutter;
+      .chat-msg-content {
+        margin-left: $gutter;
       }
 
     }
 
     //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
 
-    _:-ms-lang(x), & .chat-msg-img {
-      margin-right: $gutter;
+    _:-ms-lang(x), & .chat-msg-content {
+      margin-left: $gutter;
     }
 
     /* CONTENT */
@@ -6444,7 +6465,6 @@ i.icon {
       _:-ms-lang(x), &:before {
         display: none !important;
       }
-
 
       /* TIP (OUTLINED) */
 
@@ -6479,25 +6499,33 @@ i.icon {
 
     .chat-msg-img {
       order: 2;
-      margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+      // margin-left: calc(#{$gutter-half} + #{$chat-tip-size});
+    }
+
+    /* TIP */
+
+    &:not(.no-tip) {
+
+      .chat-msg-content {
+        margin-right: calc(#{$gutter-half} + #{$chat-tip-size});
+      }
+
     }
 
     /* NO TIP */
 
     &.no-tip {
 
-      /* IMAGE */
-
-      .chat-msg-img{
-        margin-left: $gutter;
+      .chat-msg-content {
+        margin-right: $gutter;
       }
 
     }
 
     //INFO: No kind of usable clip-path property is supported by IE and Edge so we are just removing the tip, so we should also modify the spacing //FIXME: Not future proff, use feature detection instead
 
-    _:-ms-lang(x), & .chat-msg-img {
-      margin-left: $gutter;
+    _:-ms-lang(x), & .chat-msg-content {
+      margin-right: $gutter;
     }
 
     /* CONTENT */
