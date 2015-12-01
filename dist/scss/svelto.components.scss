@@ -2944,16 +2944,17 @@ i.icon {
     justify-content: space-between;
     align-items: center;
 
-    /* BUTTON */
+    /* PREVIOUS / NEXT */
 
-    > .button { //INFO: We are referring to the `Prev` and `Next` navigation buttons
+    .previous,
+    .next {
       width: $datepicker-block-width;
       margin-bottom: 0;
     }
 
     /* TITLE */
 
-    &-title {
+    .datepicker-title {
       margin: 0 $gutter;
     }
 
@@ -2973,7 +2974,7 @@ i.icon {
 
       /* DAY NAME */
 
-      .datepicker-day-name {
+      > * {
         font-weight: $datepicker-day-name-font-weight;
         width: $datepicker-block-width;
         text-align: center;
@@ -2990,7 +2991,7 @@ i.icon {
 
       /* DAY */
 
-      [class*='datepicker-day'] {
+      > * {
 
         line-height: $datepicker-day-height;
         position: relative;
@@ -3034,7 +3035,7 @@ i.icon {
 
           /* BEFORE */
 
-          &:not(.datepicker-day-prev):not(.datepicker-day-next):before {
+          &:not(.previous):not(.next):before {
             @include z-depth ( $datepicker-day-selected-z-depth );
           }
 
@@ -3048,16 +3049,16 @@ i.icon {
 
       }
 
-      /* PREV / NEXT */
+      /* PREVIOUS / NEXT */
 
-      .datepicker-day-prev,
-      .datepicker-day-next {
+      .previous,
+      .next {
         opacity: $datepicker-day-prev-next-opacity;
       }
 
       /* DAY */
 
-      .datepicker-day {
+      :not(.previous):not(.next) {
         cursor: pointer;
       }
 
@@ -3071,7 +3072,7 @@ i.icon {
 
     /* DAY */
 
-    .datepicker-calendar .datepicker-days .datepicker-day {
+    .datepicker-calendar .datepicker-days > :not(.previous):not(.next) {
 
       /* HOVER */
 

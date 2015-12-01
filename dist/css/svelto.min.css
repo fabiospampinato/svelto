@@ -5583,16 +5583,17 @@ i.icon, .carousel.inset .carousel-prev:after,
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  /* BUTTON */
+  /* PREVIOUS / NEXT */
   /* TITLE */
 }
 
-.datepicker-navigation > .button {
+.datepicker-navigation .previous,
+.datepicker-navigation .next {
   width: 14.2857142857%;
   margin-bottom: 0;
 }
 
-.datepicker-navigation-title {
+.datepicker-navigation .datepicker-title {
   margin: 0 10px;
 }
 
@@ -5612,7 +5613,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* DAY NAME */
 }
 
-.datepicker-calendar .datepicker-days-names .datepicker-day-name {
+.datepicker-calendar .datepicker-days-names > * {
   font-weight: bold;
   width: 14.2857142857%;
   text-align: center;
@@ -5626,11 +5627,11 @@ i.icon, .carousel.inset .carousel-prev:after,
       -ms-flex-wrap: wrap;
           flex-wrap: wrap;
   /* DAY */
-  /* PREV / NEXT */
+  /* PREVIOUS / NEXT */
   /* DAY */
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day'] {
+.datepicker-calendar .datepicker-days > * {
   line-height: 2.5em;
   position: relative;
   z-index: 1;
@@ -5642,7 +5643,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* SELECTED */
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day']:before {
+.datepicker-calendar .datepicker-days > *:before {
   position: absolute;
   left: 50%;
   margin-left: -1.1875em;
@@ -5656,37 +5657,37 @@ i.icon, .carousel.inset .carousel-prev:after,
   background-color: transparent;
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-today {
+.datepicker-calendar .datepicker-days > *.datepicker-day-today {
   color: #ef6c00;
   /* BEFORE */
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-today:before {
+.datepicker-calendar .datepicker-days > *.datepicker-day-today:before {
   background-color: transparent;
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-selected {
+.datepicker-calendar .datepicker-days > *.datepicker-day-selected {
   color: #ffffff;
   transition: color 0.15s;
   /* BEFORE */
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-selected:not(.datepicker-day-prev):not(.datepicker-day-next):before {
+.datepicker-calendar .datepicker-days > *.datepicker-day-selected:not(.previous):not(.next):before {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
 }
 
-.datepicker-calendar .datepicker-days [class*='datepicker-day'].datepicker-day-selected:before {
+.datepicker-calendar .datepicker-days > *.datepicker-day-selected:before {
   background-color: #ef6c00;
   transition-property: box-shadow, background-color;
   transition-duration: 0.15s;
 }
 
-.datepicker-calendar .datepicker-days .datepicker-day-prev,
-.datepicker-calendar .datepicker-days .datepicker-day-next {
+.datepicker-calendar .datepicker-days .previous,
+.datepicker-calendar .datepicker-days .next {
   opacity: 0.25;
 }
 
-.datepicker-calendar .datepicker-days .datepicker-day {
+.datepicker-calendar .datepicker-days :not(.previous):not(.next) {
   cursor: pointer;
 }
 
@@ -5694,16 +5695,16 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* DAY */
 }
 
-.datepicker:not(.disabled) .datepicker-calendar .datepicker-days .datepicker-day {
+.datepicker:not(.disabled) .datepicker-calendar .datepicker-days > :not(.previous):not(.next) {
   /* HOVER */
 }
 
-.datepicker:not(.disabled) .datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover {
+.datepicker:not(.disabled) .datepicker-calendar .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-selected):hover {
   color: #ffffff;
   /* BEFORE */
 }
 
-.datepicker:not(.disabled) .datepicker-calendar .datepicker-days .datepicker-day:not(.datepicker-day-selected):hover:before {
+.datepicker:not(.disabled) .datepicker-calendar .datepicker-days > :not(.previous):not(.next):not(.datepicker-day-selected):hover:before {
   background-color: rgba(239, 108, 0, 0.75);
 }
 

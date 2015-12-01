@@ -42,15 +42,15 @@
       },
       selectors: {
         navigation: {
-          prev: '.datepicker-navigation-prev',
-          title: '.datepicker-navigation-title',
-          next: '.datepicker-navigation-next'
+          prev: '.datepicker-navigation .previous',
+          next: '.datepicker-navigation .next'
         },
         day: {
-          prev: '.datepicker-day-prev',
-          current: '.datepicker-day',
-          next: '.datepicker-day-next'
+          prev: '.datepicker-days .previous',
+          current: '.datepicker-days :not(.previous):not(.next)',
+          next: '.datepicker-days .next'
         },
+        title: '.datepicker-title',
         input: 'input'
       },
       callbacks: {
@@ -72,7 +72,7 @@
       this.$input = this.$datepicker.find ( this.options.selectors.input );
 
       this.$navigationPrev = this.$datepicker.find ( this.options.selectors.navigation.prev );
-      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.navigation.title );
+      this.$navigationTitle = this.$datepicker.find ( this.options.selectors.title );
       this.$navigationNext = this.$datepicker.find ( this.options.selectors.navigation.next );
 
       this.$daysPrev = this.$datepicker.find ( this.options.selectors.day.prev );
