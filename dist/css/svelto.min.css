@@ -2849,6 +2849,7 @@ button {
   border-radius: 0.25em;
   padding: 10px 10px;
   /* COMPACT */
+  /* SCROLLABLE */
 }
 
 .container p > a, .card-header:not(.multiple) p > a, .card-block:not(.multiple) p > a, .card-footer:not(.multiple) p > a, footer p > a, .image-wrp .image-caption p > a, .infobar p > a, .tagbox p > a,
@@ -2868,6 +2869,18 @@ button {
 
 .container.compact, .compact.card-header:not(.multiple), .compact.card-block:not(.multiple), .compact.card-footer:not(.multiple), .card.compact .card-header, .card.compact .card-block, .card.compact .card-footer, footer.compact, .image-wrp .compact.image-caption, .compact.infobar, .compact.tagbox {
   padding: 5px 10px;
+}
+
+.container.scrollable-x, .scrollable-x.card-header:not(.multiple), .scrollable-x.card-block:not(.multiple), .scrollable-x.card-footer:not(.multiple), footer.scrollable-x, .image-wrp .scrollable-x.image-caption, .scrollable-x.infobar, .scrollable-x.tagbox {
+  overflow-x: auto;
+}
+
+.container.scrollable-y, .scrollable-y.card-header:not(.multiple), .scrollable-y.card-block:not(.multiple), .scrollable-y.card-footer:not(.multiple), footer.scrollable-y, .image-wrp .scrollable-y.image-caption, .scrollable-y.infobar, .scrollable-y.tagbox {
+  overflow-y: auto;
+}
+
+.container.scrollable, .scrollable.card-header:not(.multiple), .scrollable.card-block:not(.multiple), .scrollable.card-footer:not(.multiple), footer.scrollable, .image-wrp .scrollable.image-caption, .scrollable.infobar, .scrollable.tagbox {
+  overflow: auto;
 }
 
 /* =========================================================================

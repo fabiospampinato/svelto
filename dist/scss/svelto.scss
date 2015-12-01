@@ -5639,6 +5639,20 @@ button {
     padding: $container-compact-padding-vertical $container-compact-padding-horizontal;
   }
 
+  /* SCROLLABLE */
+
+  &.scrollable-x {
+    overflow-x: auto;
+  }
+
+  &.scrollable-y {
+    overflow-y: auto;
+  }
+
+  &.scrollable {
+    overflow: auto;
+  }
+
 }
 
 
