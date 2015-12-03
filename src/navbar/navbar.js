@@ -27,11 +27,16 @@
         direction: 'direction'
       },
       classes: {
+        show: 'show',
         open: 'open',
         flickable: 'flickable'
       },
       selectors: {
         closer: '.navbar-closer'
+      },
+      animations: {
+        open: Svelto.animation.normal,
+        close: Svelto.animation.normal,
       },
       callbacks: {
         open () {},
@@ -183,13 +188,33 @@
 
       if ( force !== this._isOpen ) {
 
-        this._isOpen = force;
+        if ( force === true ) {
 
-        this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
+          this.$navbar.addClass ( this.options.classes.show );
 
-        $body[this._isOpen ? 'unscrollable' : 'scrollable']();
+        }
 
-        this._trigger ( this._isOpen ? 'open' : 'close' );
+        this._frame ( function () {
+
+          this._isOpen = force;
+
+          this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
+
+          if ( !this._isOpen ) {
+
+            this._delay ( function () {
+
+              this.$navbar.removeClass ( this.options.classes.show );
+              
+            }, this.options.animations.close );
+
+          }
+
+          $body[this._isOpen ? 'unscrollable' : 'scrollable']();
+
+          this._trigger ( this._isOpen ? 'open' : 'close' );
+
+        });
 
       }
 

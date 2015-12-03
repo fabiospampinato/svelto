@@ -8678,11 +8678,11 @@ table > :not(tfoot) td .multiple:only-child {
 /* NAVBAR */
 .navbar {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+  display: none;
   position: fixed;
   z-index: 120;
   margin-bottom: 0;
   border-radius: 0;
-  pointer-events: none;
   transition: -webkit-transform 0.35s;
   transition: transform 0.35s;
   transition: transform 0.35s, -webkit-transform 0.35s;
@@ -8692,6 +8692,7 @@ table > :not(tfoot) td .multiple:only-child {
   /* TOP / BOTTOM */
   /* TOP */
   /* BOTTOM */
+  /* SHOW */
   /* OPEN */
   /* ATTACHED */
   /* BEFORE (BACKGROUND) */
@@ -8767,22 +8768,31 @@ table > :not(tfoot) td .multiple:only-child {
           transform: translateY(6.9333333334rem);
 }
 
+.navbar.show {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
 .navbar.open {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
   -webkit-transform: translateX(0) translateY(0) !important;
           transform: translateX(0) translateY(0) !important;
-  pointer-events: auto;
   /* BEFORE (BACKGROUND) */
 }
 
 .navbar.open:before {
   opacity: 1;
-  pointer-events: auto;
 }
 
 .navbar.attached {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
   -webkit-transform: translateX(0) translateY(0) !important;
           transform: translateX(0) translateY(0) !important;
-  pointer-events: auto;
   /* BEFORE (BACKGROUND) */
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   /* BEFORE (BACKGROUND) */
@@ -8794,11 +8804,10 @@ table > :not(tfoot) td .multiple:only-child {
 
 .navbar.attached:before {
   opacity: 1;
-  pointer-events: auto;
 }
 
 .navbar.attached:before {
-  pointer-events: none;
+  display: none;
   opacity: 0;
 }
 
@@ -8912,9 +8921,11 @@ table > :not(tfoot) td .multiple:only-child {
 
 @media screen and (min-width: 0px) {
   .navbar.attached-xs {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
-    pointer-events: auto;
     /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
     /* BEFORE (BACKGROUND) */
@@ -8925,10 +8936,9 @@ table > :not(tfoot) td .multiple:only-child {
   }
   .navbar.attached-xs:before {
     opacity: 1;
-    pointer-events: auto;
   }
   .navbar.attached-xs:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
   .navbar.attached-xs.left {
@@ -9019,9 +9029,11 @@ table > :not(tfoot) td .multiple:only-child {
 
 @media screen and (min-width: 512px) {
   .navbar.attached-sm {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
-    pointer-events: auto;
     /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
     /* BEFORE (BACKGROUND) */
@@ -9032,10 +9044,9 @@ table > :not(tfoot) td .multiple:only-child {
   }
   .navbar.attached-sm:before {
     opacity: 1;
-    pointer-events: auto;
   }
   .navbar.attached-sm:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
   .navbar.attached-sm.left {
@@ -9126,9 +9137,11 @@ table > :not(tfoot) td .multiple:only-child {
 
 @media screen and (min-width: 768px) {
   .navbar.attached-md {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
-    pointer-events: auto;
     /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
     /* BEFORE (BACKGROUND) */
@@ -9139,10 +9152,9 @@ table > :not(tfoot) td .multiple:only-child {
   }
   .navbar.attached-md:before {
     opacity: 1;
-    pointer-events: auto;
   }
   .navbar.attached-md:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
   .navbar.attached-md.left {
@@ -9233,9 +9245,11 @@ table > :not(tfoot) td .multiple:only-child {
 
 @media screen and (min-width: 1024px) {
   .navbar.attached-lg {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
-    pointer-events: auto;
     /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
     /* BEFORE (BACKGROUND) */
@@ -9246,10 +9260,9 @@ table > :not(tfoot) td .multiple:only-child {
   }
   .navbar.attached-lg:before {
     opacity: 1;
-    pointer-events: auto;
   }
   .navbar.attached-lg:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
   .navbar.attached-lg.left {
@@ -9340,9 +9353,11 @@ table > :not(tfoot) td .multiple:only-child {
 
 @media screen and (min-width: 1216px) {
   .navbar.attached-xl {
+    display: -webkit-flex !important;
+    display: -ms-flexbox !important;
+    display: flex !important;
     -webkit-transform: translateX(0) translateY(0) !important;
             transform: translateX(0) translateY(0) !important;
-    pointer-events: auto;
     /* BEFORE (BACKGROUND) */
     box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
     /* BEFORE (BACKGROUND) */
@@ -9353,10 +9368,9 @@ table > :not(tfoot) td .multiple:only-child {
   }
   .navbar.attached-xl:before {
     opacity: 1;
-    pointer-events: auto;
   }
   .navbar.attached-xl:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
   .navbar.attached-xl.left {
@@ -9449,7 +9463,6 @@ table > :not(tfoot) td .multiple:only-child {
   content: '';
   position: absolute;
   opacity: 0;
-  pointer-events: none;
   width: 400vw;
   height: 400vh;
   top: -200vh;

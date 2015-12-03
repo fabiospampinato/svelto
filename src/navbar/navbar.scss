@@ -14,16 +14,18 @@
 
 /* MIXINS */
 
+@mixin show () {
+  display: flex !important;
+}
+
 @mixin open () {
 
   transform: translateX(0) translateY(0) !important;
-  pointer-events: auto;
 
   /* BEFORE (BACKGROUND) */
 
   &:before {
     opacity: 1;
-    pointer-events: auto;
   }
 
 }
@@ -35,7 +37,7 @@
   /* BEFORE (BACKGROUND) */
 
   &:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
 
@@ -206,11 +208,11 @@
 .navbar {
 
   @include z-depth ( $navbar-z-depth );
+  display: none;
   position: fixed;
   z-index: $navbar-z-index;
   margin-bottom: 0;
   border-radius: 0;
-  pointer-events: none;
   transition: transform $navbar-transition-transform-duration;
 
   /* LEFT / RIGHT */
@@ -307,15 +309,23 @@
 
   }
 
+  /* SHOW */
+
+  &.show {
+    @include show ();
+  }
+
   /* OPEN */
 
   &.open {
+    @include show ();
     @include open ();
   }
 
   /* ATTACHED */
 
   &.attached {
+    @include show ();
     @include open ();
     @include attach ();
   }
@@ -323,6 +333,7 @@
   @include xsmall-up {
 
     &.attached-xs {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -332,6 +343,7 @@
   @include small-up {
 
     &.attached-sm {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -341,6 +353,7 @@
   @include medium-up {
 
     &.attached-md {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -350,6 +363,7 @@
   @include large-up {
 
     &.attached-lg {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -359,6 +373,7 @@
   @include xlarge-up {
 
     &.attached-xl {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -371,7 +386,6 @@
     content: '';
     position: absolute;
     opacity: 0;
-    pointer-events: none;
     width: 400vw;
     height: 400vh;
     top: -200vh;

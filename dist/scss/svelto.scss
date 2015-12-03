@@ -8650,16 +8650,18 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
 /* MIXINS */
 
+@mixin show () {
+  display: flex !important;
+}
+
 @mixin open () {
 
   transform: translateX(0) translateY(0) !important;
-  pointer-events: auto;
 
   /* BEFORE (BACKGROUND) */
 
   &:before {
     opacity: 1;
-    pointer-events: auto;
   }
 
 }
@@ -8671,7 +8673,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   /* BEFORE (BACKGROUND) */
 
   &:before {
-    pointer-events: none;
+    display: none;
     opacity: 0;
   }
 
@@ -8842,11 +8844,11 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 .navbar {
 
   @include z-depth ( $navbar-z-depth );
+  display: none;
   position: fixed;
   z-index: $navbar-z-index;
   margin-bottom: 0;
   border-radius: 0;
-  pointer-events: none;
   transition: transform $navbar-transition-transform-duration;
 
   /* LEFT / RIGHT */
@@ -8943,15 +8945,23 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   }
 
+  /* SHOW */
+
+  &.show {
+    @include show ();
+  }
+
   /* OPEN */
 
   &.open {
+    @include show ();
     @include open ();
   }
 
   /* ATTACHED */
 
   &.attached {
+    @include show ();
     @include open ();
     @include attach ();
   }
@@ -8959,6 +8969,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   @include xsmall-up {
 
     &.attached-xs {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -8968,6 +8979,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   @include small-up {
 
     &.attached-sm {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -8977,6 +8989,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   @include medium-up {
 
     &.attached-md {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -8986,6 +8999,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   @include large-up {
 
     &.attached-lg {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -8995,6 +9009,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   @include xlarge-up {
 
     &.attached-xl {
+      @include show ();
       @include open ();
       @include attach ();
     }
@@ -9007,7 +9022,6 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
     content: '';
     position: absolute;
     opacity: 0;
-    pointer-events: none;
     width: 400vw;
     height: 400vh;
     top: -200vh;
