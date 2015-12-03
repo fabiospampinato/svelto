@@ -88,7 +88,6 @@
       right: 0;
       background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
       content: '';
-      pointer-events: none;
       background-size: $progressbar-stripe-size $progressbar-stripe-size;
       animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
     }

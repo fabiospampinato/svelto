@@ -7875,11 +7875,16 @@
         }
       },
       classes: {
+        show: 'show',
         open: 'open'
       },
       selectors: {
         trigger: '.overlay-trigger',
         closer: '.overlay-closer'
+      },
+      animations: {
+        open: Svelto.animation.fast,
+        close: Svelto.animation.fast
       },
       callbacks: {
         open () {},
@@ -8006,11 +8011,27 @@
 
       if ( force !== this._isOpen ) {
 
+        if ( force === true ) {
+
+          this.$overlay.addClass ( this.options.classes.show );
+
+        }
+
         this._frame ( function () { //INFO: Needed since `spinnerOverlay` may attach the overlay and then request to open it, if those things happen in the same frame we won't see the animation
 
           this._isOpen = force;
 
           this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
+
+          if ( !this._isOpen ) {
+
+            this._delay ( function () {
+
+              this.$overlay.removeClass ( this.options.classes.show );
+
+            }, this.options.animations.close );
+
+          }
 
           this._trigger ( this._isOpen ? 'open' : 'close' );
 

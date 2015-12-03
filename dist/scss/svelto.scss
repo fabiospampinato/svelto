@@ -9430,10 +9430,9 @@ _:-ms-input-placeholder, :root .noty-queues  {
   @include center-absolute-fill ();
   @include last-child-no-gutter ();
   z-index: $overlay-z-index;
-  display: flex;
+  display: none;
   opacity: 0;
   transition: opacity $overlay-transition-opacity-duration;
-  pointer-events: none;
   background-color: transparent;
   border-radius: inherit;
 
@@ -9478,20 +9477,24 @@ _:-ms-input-placeholder, :root .noty-queues  {
 
   }
 
+  /* SHOW / OPEN */
+
+  &.show,
+  &.open {
+    display: flex !important;
+  }
+
   /* OPEN */
 
   &.open {
 
     opacity: 1;
-    pointer-events: auto;
 
     /* SIBLINGS */
 
     ~ * {
       opacity: $overlay-siblings-opacity;
-      pointer-events: none;
     }
-
 
     /* BLURRER */
 
@@ -9810,7 +9813,6 @@ code[class*='language-'] {
       right: 0;
       background: linear-gradient(-45deg, $progressbar-stripe-light-color 25%, $progressbar-stripe-dark-color 25%, $progressbar-stripe-dark-color 50%, $progressbar-stripe-light-color 50%, $progressbar-stripe-light-color 75%, $progressbar-stripe-dark-color 75%, $progressbar-stripe-dark-color);
       content: '';
-      pointer-events: none;
       background-size: $progressbar-stripe-size $progressbar-stripe-size;
       animation: progressbar-stripes-move $progressbar-stripes-transition-move-duration linear infinite;
     }

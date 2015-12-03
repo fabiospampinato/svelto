@@ -9888,12 +9888,9 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   left: 0;
   margin: auto;
   z-index: 50;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   opacity: 0;
   transition: opacity 0.15s;
-  pointer-events: none;
   background-color: transparent;
   border-radius: inherit;
   /* OUTLINED PARENT */
@@ -9901,6 +9898,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   /* SIBLINGS */
   /* DIMMER */
   /* BLURRER */
+  /* SHOW / OPEN */
   /* OPEN */
 }
 
@@ -9960,16 +9958,20 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   transition-duration: 0.15s !important;
 }
 
+.overlay.show, .overlay.open {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
 .overlay.open {
   opacity: 1;
-  pointer-events: auto;
   /* SIBLINGS */
   /* BLURRER */
 }
 
 .overlay.open ~ * {
   opacity: 0.2;
-  pointer-events: none;
 }
 
 .overlay.open.blurrer {
@@ -10295,7 +10297,6 @@ code[class*='language-'] .namespace {
   right: 0;
   background: linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05));
   content: '';
-  pointer-events: none;
   background-size: 3.3333333333em 3.3333333333em;
   -webkit-animation: progressbar-stripes-move 0.5s linear infinite;
           animation: progressbar-stripes-move 0.5s linear infinite;

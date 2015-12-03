@@ -16,10 +16,9 @@
   @include center-absolute-fill ();
   @include last-child-no-gutter ();
   z-index: $overlay-z-index;
-  display: flex;
+  display: none;
   opacity: 0;
   transition: opacity $overlay-transition-opacity-duration;
-  pointer-events: none;
   background-color: transparent;
   border-radius: inherit;
 
@@ -64,20 +63,24 @@
 
   }
 
+  /* SHOW / OPEN */
+
+  &.show,
+  &.open {
+    display: flex !important;
+  }
+
   /* OPEN */
 
   &.open {
 
     opacity: 1;
-    pointer-events: auto;
 
     /* SIBLINGS */
 
     ~ * {
       opacity: $overlay-siblings-opacity;
-      pointer-events: none;
     }
-
 
     /* BLURRER */
 
