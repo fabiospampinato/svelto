@@ -5,15 +5,44 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../widget/widget.scss
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 
 /* STEPPER */
 
-//TODO: Make it a widget
+//TODO: Add valid/invalid classes
 
-.stepper input {
-  flex-grow: 1;
-  flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
-  justify-content: center;
+.stepper {
+
+  @extend .widget;
+  @include color ( $label-color );
+  display: flex;
+  border-radius: $label-border-radius;
+  
+  /* SEGMENTS */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > :not(:first-child) {
+    @include border-left-radius ( 0 );
+    border-left-width: 0;
+  }
+
+  > :not(:last-child) {
+    @include border-right-radius ( 0 );
+    border-right-width: 0;
+  }
+
+  /* INPUT */
+
+  input {
+    text-align: center;
+    // display: flex;
+    // flex-grow: 1;
+
+  }
+
 }

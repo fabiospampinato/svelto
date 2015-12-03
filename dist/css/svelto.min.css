@@ -1598,27 +1598,27 @@ th {
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .chat-msg, .colorpicker, .datepicker, .embedded, .flippable, header, img, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+.widget, .accordion, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .carousel, .chat-msg, .colorpicker, .datepicker, .embedded, .flippable, header, img, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .chat-msg > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :last-child, .accordion > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .carousel > :last-child, .chat-msg > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager {
   margin-bottom: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, img.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+.widget.disabled, .disabled.accordion, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, img.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   pointer-events: none !important;
   cursor: default !important;
   opacity: 0.5 !important;
 }
 
-.widget.disabled *, .disabled.accordion *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .disabled.carousel *, .disabled.chat-msg *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, header.disabled *, img.disabled *, .disabled.image-wrp *, input.disabled *, textarea.disabled *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
+.widget.disabled *, .disabled.accordion *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .disabled.carousel *, .disabled.chat-msg *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, header.disabled *, img.disabled *, .disabled.image-wrp *, input.disabled *, textarea.disabled *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
   cursor: default !important;
 }
 
@@ -3027,6 +3027,7 @@ button {
 
 .card.outlined {
   /* INSET OUTLINED */
+  /* INSET OUTLINED */
   /* INSET IMAGE */
 }
 
@@ -3036,12 +3037,17 @@ button {
   /* FIRST / LAST */
 }
 
-.card.outlined > .outlined:first-child {
+.card.outlined > .outlined:first-child:not(.overlay):not(.ripple-circle) {
   margin-top: -1px;
 }
 
 .card.outlined > .outlined:last-child {
   margin-bottom: -1px !important;
+}
+
+.card.outlined > :first-child.overlay + .outlined,
+.card.outlined > :first-child.ripple-circle + .outlined {
+  margin-top: -1px;
 }
 
 .card.outlined > img.outlined {
@@ -10286,7 +10292,7 @@ code[class*='language-'] .namespace {
   top: 0;
   bottom: 0;
   left: -3.3333333333em;
-  right: -3.3333333333em;
+  right: 0;
   background: linear-gradient(-45deg, rgba(255, 255, 255, 0.05) 25%, rgba(0, 0, 0, 0.05) 25%, rgba(0, 0, 0, 0.05) 50%, rgba(255, 255, 255, 0.05) 50%, rgba(255, 255, 255, 0.05) 75%, rgba(0, 0, 0, 0.05) 75%, rgba(0, 0, 0, 0.05));
   content: '';
   pointer-events: none;
@@ -11963,19 +11969,55 @@ svg.spinner.multicolor circle {
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../widget/widget.scss
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* STEPPER */
+.stepper {
+  background: #ffffff ;
+  border-color: #d9d9d9 ;
+  color: #3f3f3f ;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  border-radius: 0.25em;
+  /* SEGMENTS */
+  /* INPUT */
+}
+
+.stepper p > a,
+.stepper span > a {
+  color: #1565c0 ;
+}
+
+.stepper p > a:after,
+.stepper span > a:after {
+  border-color: #166ac9 ;
+}
+
+.stepper p > a:hover,
+.stepper span > a:hover {
+  color: #166ac9 ;
+}
+
+.stepper > * {
+  margin-bottom: 0 !important;
+}
+
+.stepper > :not(:first-child) {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+  border-left-width: 0;
+}
+
+.stepper > :not(:last-child) {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+  border-right-width: 0;
+}
+
 .stepper input, .stepper textarea {
-  -webkit-flex-grow: 1;
-      -ms-flex-positive: 1;
-          flex-grow: 1;
-  -webkit-flex-shrink: 1;
-      -ms-flex-negative: 1;
-          flex-shrink: 1;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
+  text-align: center;
 }
 
 /* =========================================================================

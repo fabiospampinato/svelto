@@ -125,7 +125,7 @@
 
       /* FIRST / LAST */
 
-      &:first-child {
+      &:first-child:not(.overlay):not(.ripple-circle) {
         margin-top: - $outline-width;
       }
 
@@ -133,6 +133,13 @@
         margin-bottom: - $outline-width !important; //FIXME: The `!important` shouldn't be necessary
       }
 
+    }
+
+    /* INSET OUTLINED */
+
+    > :first-child.overlay + .outlined,
+    > :first-child.ripple-circle + .outlined {
+      margin-top: - $outline-width;
     }
 
     /* INSET IMAGE */ //FIXME: Ugly fix for better supporting inset outlined unwrapped images
