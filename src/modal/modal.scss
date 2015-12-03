@@ -18,6 +18,7 @@
 .modal {
 
   @include z-depth ( $modal-z-depth );
+  display: none;
   position: fixed;
   z-index: $modal-z-index;
   transition-property: transform, opacity;
@@ -63,16 +64,18 @@
     border-radius: 0;
   }
 
+  /* SHOW / OPEN */
+
+  &.show,
+  &.open {
+    display: flex !important;
+  }
+
   /* CLOSED */
 
   &:not(.open) {
 
-    /* MODAL & BACKGROUND */
-
-    & {
-      pointer-events: none;
-      opacity: 0;
-    }
+    opacity: 0;
 
     /* NOT FULLSCREEN */
 

@@ -8357,6 +8357,7 @@ input, textarea {
 /* MODAL */
 .modal {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+  display: none;
   position: fixed;
   z-index: 200;
   transition-property: opacity, -webkit-transform;
@@ -8369,6 +8370,7 @@ input, textarea {
   /* BEFORE (BACKGROUND) */
   /* NOT FULLSCREEN */
   /* FULLSCREEN */
+  /* SHOW / OPEN */
   /* CLOSED */
 }
 
@@ -8408,15 +8410,16 @@ input, textarea {
   border-radius: 0;
 }
 
-.modal:not(.open) {
-  /* MODAL & BACKGROUND */
-  /* NOT FULLSCREEN */
-  /* FULLSCREEN */
+.modal.show, .modal.open {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
 }
 
 .modal:not(.open) {
-  pointer-events: none;
   opacity: 0;
+  /* NOT FULLSCREEN */
+  /* FULLSCREEN */
 }
 
 .modal:not(.open):not(.fullscreen) {
