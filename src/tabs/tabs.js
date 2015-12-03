@@ -147,7 +147,7 @@
 
           }
 
-          $trigger.addClass ( 'highlight' + ( ' highlight-' + highlightDirection ) );
+          $trigger.addClass ( 'highlighted' + ( ' highlight-' + highlightDirection ) );
 
         }
 

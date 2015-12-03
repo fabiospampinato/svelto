@@ -1608,7 +1608,7 @@ th {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -1820,7 +1820,7 @@ _:-ms-input-placeholder, :root #content {
   margin-bottom: 0 !important;
 }
 
-#content > main > :last-child.multiple, #content > main > :last-child.pager {
+#content > main > :last-child.multiple, #content > main > :last-child.pager, #content > main > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -2395,7 +2395,7 @@ label {
   margin-bottom: 0 !important;
 }
 
-.label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple, .label > .sub > :last-child.pager, .button > .sub > :last-child.pager {
+.label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple, .label > .sub > :last-child.pager, .button > .sub > :last-child.pager, .label > .sub > :last-child.tagbox-tags, .button > .sub > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -5760,7 +5760,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 0 !important;
 }
 
-.divider.linear:not(:empty) > :last-child.multiple, .divider.linear:not(:empty) > :last-child.pager, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.pager {
+.divider.linear:not(:empty) > :last-child.multiple, .divider.linear:not(:empty) > :last-child.pager, .divider.linear:not(:empty) > :last-child.tagbox-tags, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.multiple, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.pager, .divider:not(.block):not(.text):not(.spacer):not(:empty) > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -5878,7 +5878,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 0 !important;
 }
 
-.divider.block > .divider-content > :last-child.multiple, .divider.block > .divider-content > :last-child.pager {
+.divider.block > .divider-content > :last-child.multiple, .divider.block > .divider-content > :last-child.pager, .divider.block > .divider-content > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -7159,7 +7159,7 @@ i[class^="flag-"] {
   margin-bottom: 0 !important;
 }
 
-.flippable-front > :last-child.multiple, .flippable-front > :last-child.pager, .flippable-back > :last-child.multiple, .flippable-back > :last-child.pager {
+.flippable-front > :last-child.multiple, .flippable-front > :last-child.pager, .flippable-front > :last-child.tagbox-tags, .flippable-back > :last-child.multiple, .flippable-back > :last-child.pager, .flippable-back > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -7268,7 +7268,7 @@ form:not(.multiple) > :last-child {
   margin-bottom: 0 !important;
 }
 
-form:not(.multiple) > :last-child.multiple, form:not(.multiple) > :last-child.pager {
+form:not(.multiple) > :last-child.multiple, form:not(.multiple) > :last-child.pager, form:not(.multiple) > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -7746,7 +7746,7 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar > * > :last-child.multiple, .infobar > * > :last-child.pager {
+.infobar > * > :last-child.multiple, .infobar > * > :last-child.pager, .infobar > * > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -7806,7 +7806,7 @@ span > img {
   margin-bottom: 0 !important;
 }
 
-.infobar-title > :last-child.multiple, .infobar-title > :last-child.pager, .infobar-subtitle > :last-child.multiple, .infobar-subtitle > :last-child.pager {
+.infobar-title > :last-child.multiple, .infobar-title > :last-child.pager, .infobar-title > :last-child.tagbox-tags, .infobar-subtitle > :last-child.multiple, .infobar-subtitle > :last-child.pager, .infobar-subtitle > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -9908,7 +9908,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   margin-bottom: 0 !important;
 }
 
-.overlay > :last-child.multiple, .overlay > :last-child.pager {
+.overlay > :last-child.multiple, .overlay > :last-child.pager, .overlay > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -10880,11 +10880,13 @@ a.ripple > .ripple-circle {
   margin-bottom: 0 !important;
 }
 
-.section-left > :last-child.multiple, .section-left > :last-child.pager,
+.section-left > :last-child.multiple, .section-left > :last-child.pager, .section-left > :last-child.tagbox-tags,
 .section-center > :last-child.multiple,
 .section-center > :last-child.pager,
+.section-center > :last-child.tagbox-tags,
 .section-right > :last-child.multiple,
-.section-right > :last-child.pager {
+.section-right > :last-child.pager,
+.section-right > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -12287,7 +12289,7 @@ table.table tr > * > :last-child {
   margin-bottom: 0 !important;
 }
 
-table.table tr > * > :last-child.multiple, table.table tr > * > :last-child.pager {
+table.table tr > * > :last-child.multiple, table.table tr > * > :last-child.pager, table.table tr > * > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -12784,7 +12786,25 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
  * ========================================================================= */
 /* TAGBOX */
 .tagbox {
+  /* TAGS */
   /* PARTIAL */
+}
+
+.tagbox-tags {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+      -ms-flex-wrap: wrap;
+          flex-wrap: wrap;
+  margin-left: -5px;
+  margin-right: -5px;
+  /* TAG */
+}
+
+.tagbox-tags > .tagbox-tag {
+  margin-left: 5px;
+  margin-right: 5px;
 }
 
 .tagbox-partial {
@@ -13024,7 +13044,7 @@ blockquote > :last-child {
   margin-bottom: 0 !important;
 }
 
-blockquote > :last-child.multiple, blockquote > :last-child.pager {
+blockquote > :last-child.multiple, blockquote > :last-child.pager, blockquote > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -13050,7 +13070,7 @@ blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-blockquote > footer > :last-child.multiple, blockquote > footer > :last-child.pager {
+blockquote > footer > :last-child.multiple, blockquote > footer > :last-child.pager, blockquote > footer > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
@@ -13070,7 +13090,7 @@ li > :last-child {
   margin-bottom: 0 !important;
 }
 
-li > :last-child.multiple, li > :last-child.pager {
+li > :last-child.multiple, li > :last-child.pager, li > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 

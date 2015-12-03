@@ -847,7 +847,8 @@
     margin-bottom: 0 !important;
 
     &.multiple,
-    &.pager {
+    &.pager,
+    &.tagbox-tags {
       margin-bottom: - $gutter !important;
     }
 

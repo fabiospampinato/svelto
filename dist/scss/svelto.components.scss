@@ -7980,10 +7980,28 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
 
   @extend .container;
 
+  /* TAGS */
+
+  &-tags {
+
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: - $gutter-half;
+    margin-right: - $gutter-half;
+
+    /* TAG */
+
+    > .tagbox-tag {
+      margin-left: $gutter-half;
+      margin-right: $gutter-half;
+    }
+
+  }
+
   /* PARTIAL */
 
   &-partial {
-    @include color ( inherit, true );
+    @include color ( inherit );
     min-width: $tagbox-input-min-width;
   }
 

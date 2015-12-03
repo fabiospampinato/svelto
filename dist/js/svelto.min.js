@@ -11418,7 +11418,7 @@ Prism.languages.js = Prism.languages.javascript;
 
           }
 
-          $trigger.addClass ( 'highlight' + ( ' highlight-' + highlightDirection ) );
+          $trigger.addClass ( 'highlighted' + ( ' highlight-' + highlightDirection ) );
 
         }
 
