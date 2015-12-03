@@ -5898,6 +5898,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
 /* DROPDOWN */
 .dropdown, .tooltip {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
+  display: none;
   z-index: 1000;
   position: fixed;
   top: 0;
@@ -5912,6 +5913,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   /* TIP */
   /* TIP (OUTLINED) */
   /* TIP (POSITION-RELATED) */
+  /* SHOW / OPEN */
   /* CLOSED */
 }
 
@@ -6065,8 +6067,22 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-top: -1px;
 }
 
+.dropdown.show, .show.tooltip, .dropdown.open, .open.tooltip {
+  /* CARD */
+  /* OTHER */
+}
+
+.dropdown.show.card, .show.card.tooltip, .dropdown.open.card, .open.card.tooltip {
+  display: -webkit-flex !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.dropdown.show:not(.card), .show.tooltip:not(.card), .dropdown.open:not(.card), .open.tooltip:not(.card) {
+  display: block !important;
+}
+
 .dropdown:not(.open), .tooltip:not(.open) {
-  pointer-events: none;
   opacity: 0;
 }
 

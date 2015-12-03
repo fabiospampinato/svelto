@@ -11,6 +11,7 @@
 .dropdown {
 
   @include z-depth ( $dropdown-z-depth );
+  display: none;
   z-index: $dropdown-z-index;
   position: fixed;
   top: 0;
@@ -205,10 +206,28 @@
 
   }
 
+  /* SHOW / OPEN */
+
+  &.show,
+  &.open {
+
+    /* CARD */
+
+    &.card {
+      display: flex !important;
+    }
+
+    /* OTHER */
+
+    &:not(.card) {
+      display: block !important;
+    }
+
+  }
+
   /* CLOSED */
 
   &:not(.open) {
-    pointer-events: none;
     opacity: 0;
   }
 

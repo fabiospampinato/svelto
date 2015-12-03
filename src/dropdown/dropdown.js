@@ -45,10 +45,15 @@
         noTip: 'no-tip',
         attached: 'attached',
         moving: 'moving',
+        show: 'show',
         open: 'open'
       },
       selectors: {
         closer: '.dropdown-closer'
+      },
+      animations: {
+        open: Svelto.animation.fast,
+        close: Svelto.animation.fast
       },
       callbacks: {
         beforeopen () {},
@@ -316,9 +321,15 @@
 
         this._trigger ( 'beforeopen' );
 
+        this.$dropdown.addClass ( 'show' );
+
         this._positionate ();
 
-        this.$dropdown.addClass ( this.options.classes.open );
+        this._frame ( function () {
+
+          this.$dropdown.addClass ( this.options.classes.open );
+
+        });
 
         this._isOpen = true;
 
@@ -339,7 +350,17 @@
 
         $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
 
-        this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
+        this._frame ( function () {
+
+          this.$dropdown.removeClass ( this.options.classes.open + ' ' + this.options.classes.moving );
+
+          this._delay ( function () {
+
+            this.$dropdown.removeClass ( this.options.classes.show );
+
+          }, this.options.animations.close );
+
+        });
 
         this._isOpen = false;
 
