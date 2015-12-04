@@ -18,7 +18,7 @@
   margin-bottom: $gutter-half !important;
   border: none;
   background-color: $divider-linear-bg-color;
-  z-index: 2;
+  z-index: $divider-linear-z-index;
 }
 
 /* DEFAULT DIVIDER */

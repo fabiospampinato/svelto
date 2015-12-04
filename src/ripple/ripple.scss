@@ -24,7 +24,7 @@
     position: absolute;
     width: $ripple-circle-width;
     pointer-events: none;
-    z-index: $ripple-circle-z-width;
+    z-index: $ripple-circle-z-index;
 
     &:before {
       position: absolute;

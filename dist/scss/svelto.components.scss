@@ -677,7 +677,7 @@ _:-ms-input-placeholder, :root #content {
     &.fixed {
 
       position: fixed;
-      z-index: 100;
+      z-index: $main-header-fixed-z-index;
       top: 0;
       right: 0;
       left: 0;
@@ -1331,7 +1331,7 @@ label {
 
     @include z-depth ( $label-floating-z-depth );
     position: fixed;
-    z-index: 10;
+    z-index: $label-floating-z-index;
     right: $label-floating-right;
     bottom: $label-floating-bottom;
     margin-bottom: 0;
@@ -1443,7 +1443,7 @@ label {
 .label-corner {
 
   position: absolute;
-  z-index: 10;
+  z-index: $label-corner-z-index;
   visibility: hidden;
   overflow: hidden;
   pointer-events: none;
@@ -3121,7 +3121,7 @@ i.icon {
   margin-bottom: $gutter-half !important;
   border: none;
   background-color: $divider-linear-bg-color;
-  z-index: 2;
+  z-index: $divider-linear-z-index;
 }
 
 /* DEFAULT DIVIDER */
@@ -4053,11 +4053,11 @@ span > img {
     border-radius: 0;
     margin-bottom: 0;
     overflow: auto;
-    z-index: 1;
 
     &:not(.attached) {
 
       position: absolute;
+      z-index: $image-caption-z-index;
       left: 0;
       right: 0;
 
@@ -6199,7 +6199,7 @@ code[class*='language-'] {
     position: absolute;
     width: $ripple-circle-width;
     pointer-events: none;
-    z-index: $ripple-circle-z-width;
+    z-index: $ripple-circle-z-index;
 
     &:before {
       position: absolute;
@@ -7223,9 +7223,9 @@ svg.spinner {
     @include color ( $switch-color, true );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
-    z-index: 1;
     width: $switch-handler-size;
     height: $switch-handler-size;
     border-radius: $switch-handler-size;

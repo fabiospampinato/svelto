@@ -222,7 +222,7 @@ label {
 
     @include z-depth ( $label-floating-z-depth );
     position: fixed;
-    z-index: 10;
+    z-index: $label-floating-z-index;
     right: $label-floating-right;
     bottom: $label-floating-bottom;
     margin-bottom: 0;
@@ -334,7 +334,7 @@ label {
 .label-corner {
 
   position: absolute;
-  z-index: 10;
+  z-index: $label-corner-z-index;
   visibility: hidden;
   overflow: hidden;
   pointer-events: none;

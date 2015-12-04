@@ -87,7 +87,7 @@ _:-ms-input-placeholder, :root #content {
     &.fixed {
 
       position: fixed;
-      z-index: 100;
+      z-index: $main-header-fixed-z-index;
       top: 0;
       right: 0;
       left: 0;

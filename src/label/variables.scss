@@ -59,11 +59,14 @@ $label-ribbon-size: 8px !default;
 
 /* CORNER */
 
+$label-corner-z-index: 70 !default;
+
 $label-corner-padding-vertical: $label-compact-padding-vertical * 2 !default;
 $label-corner-padding-horizontal: $label-compact-padding-horizontal * 2 !default;
 
 /* FLOATING */
 
+$label-floating-z-index: 150 !default;
 $label-floating-z-depth: 4 !default;
 
 $label-floating-padding-vertical: $label-padding-vertical * 1.6 !default;

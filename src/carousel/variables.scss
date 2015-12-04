@@ -18,7 +18,7 @@ $carousel-bg-color: $color-black !default;
 
 /* INDICATOR */
 
-$carousel-indicators-z-index: 10 !default;
+$carousel-indicators-z-index: 80 !default;
 
 $carousel-indicator-color: $color-white !default;
 
@@ -33,7 +33,7 @@ $carousel-indicator-transition-all-duration: $transition-duration-normal !defaul
 
 /* INSET (PREV / NEXT) */
 
-$carousel-inset-prev-next-z-index: 9 !default;
+$carousel-inset-prev-next-z-index: $carousel-indicators-z-index - 1 !default;
 
 $carousel-inset-prev-next-font-size: 1em * $icon-scale-amount !default;
 

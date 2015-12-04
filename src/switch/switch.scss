@@ -42,9 +42,9 @@
     @include color ( $switch-color, true );
     @include z-depth ( $switch-handler-z-depth );
     position: absolute;
+    z-index: 1;
     top: 0;
     left: 0;
-    z-index: 1;
     width: $switch-handler-size;
     height: $switch-handler-size;
     border-radius: $switch-handler-size;

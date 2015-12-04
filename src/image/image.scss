@@ -65,11 +65,11 @@ span > img {
     border-radius: 0;
     margin-bottom: 0;
     overflow: auto;
-    z-index: 1;
 
     &:not(.attached) {
 
       position: absolute;
+      z-index: $image-caption-z-index;
       left: 0;
       right: 0;
 

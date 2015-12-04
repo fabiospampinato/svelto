@@ -1794,7 +1794,7 @@ _:-ms-input-placeholder, :root #content {
 
 #content > header.fixed {
   position: fixed;
-  z-index: 100;
+  z-index: 300;
   top: 0;
   right: 0;
   left: 0;
@@ -2481,7 +2481,7 @@ label {
 .label.floating, .floating.button {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   position: fixed;
-  z-index: 10;
+  z-index: 150;
   right: 24px;
   bottom: 24px;
   margin-bottom: 0;
@@ -2568,7 +2568,7 @@ label {
 /* LABEL CORNER */
 .label-corner, .button-corner {
   position: absolute;
-  z-index: 10;
+  z-index: 70;
   visibility: hidden;
   overflow: hidden;
   pointer-events: none;
@@ -3244,7 +3244,7 @@ i.icon, .carousel.inset .carousel-prev:after,
 }
 
 .carousel-indicators {
-  z-index: 10;
+  z-index: 80;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -3470,7 +3470,7 @@ i.icon, .carousel.inset .carousel-prev:after,
 .carousel.inset .carousel-prev,
 .carousel.inset .carousel-next {
   position: absolute;
-  z-index: 9;
+  z-index: 79;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -5729,7 +5729,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: 5px !important;
   border: none;
   background-color: rgba(0, 0, 0, 0.1);
-  z-index: 2;
+  z-index: 40;
 }
 
 /* DEFAULT DIVIDER */
@@ -5899,7 +5899,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
 .dropdown, .tooltip {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   display: none;
-  z-index: 1000;
+  z-index: 200;
   position: fixed;
   top: 0;
   left: 0;
@@ -7398,7 +7398,7 @@ span > a:after,
   right: 0;
   bottom: 0;
   left: 0;
-  z-index: 2;
+  z-index: 60;
   content: '';
   pointer-events: none;
   border-width: 0;
@@ -7652,7 +7652,6 @@ span > img {
   border-radius: 0;
   margin-bottom: 0;
   overflow: auto;
-  z-index: 1;
 }
 
 .image-wrp .image-caption p > a,
@@ -7672,6 +7671,7 @@ span > img {
 
 .image-wrp .image-caption:not(.attached) {
   position: absolute;
+  z-index: 30;
   left: 0;
   right: 0;
 }
@@ -8375,7 +8375,7 @@ input, textarea {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   display: none;
   position: fixed;
-  z-index: 200;
+  z-index: 500;
   transition-property: opacity, -webkit-transform;
   transition-property: transform, opacity;
   transition-property: transform, opacity, -webkit-transform;
@@ -8699,7 +8699,7 @@ table > :not(tfoot) td .multiple:only-child {
   box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
   display: none;
   position: fixed;
-  z-index: 120;
+  z-index: 400;
   margin-bottom: 0;
   border-radius: 0;
   transition: -webkit-transform 0.35s;
@@ -9596,7 +9596,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 /* NOTY QUEUES */
 .noty-queues {
   position: fixed;
-  z-index: 1000;
+  z-index: 600;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -9919,7 +9919,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   bottom: 0;
   left: 0;
   margin: auto;
-  z-index: 50;
+  z-index: 100;
   display: none;
   opacity: 0;
   transition: opacity 0.15s;
@@ -10711,7 +10711,7 @@ code[class*='language-'] .namespace {
   position: absolute;
   width: 300%;
   pointer-events: none;
-  z-index: 10;
+  z-index: 50;
   /* SHOW */
   /* HIDE */
 }
@@ -12120,9 +12120,9 @@ svg.spinner.multicolor circle {
   color: #3f3f3f ;
   box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
   position: absolute;
+  z-index: 1;
   top: 0;
   left: 0;
-  z-index: 1;
   width: 1.3333333333em;
   height: 1.3333333333em;
   border-radius: 1.3333333333em;

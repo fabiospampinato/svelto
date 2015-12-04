@@ -22,3 +22,4 @@ $body-color: 'base' !default;
 /* MAIN HEADER */
 
 $main-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
+$main-header-fixed-z-index: 300 !default;

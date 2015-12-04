@@ -419,7 +419,7 @@ $basepath: '/' !default;
 
 /* NAVBAR */
 
-$navbar-z-index: 120 !default;
+$navbar-z-index: 400 !default;
 $navbar-z-depth: 5 !default;
 
 $navbar-transition-transform-duration: $transition-duration-normal !default;
@@ -480,6 +480,7 @@ $body-color: 'base' !default;
 /* MAIN HEADER */
 
 $main-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
+$main-header-fixed-z-index: 300 !default;
 
 
 /* =========================================================================
@@ -678,7 +679,7 @@ $carousel-bg-color: $color-black !default;
 
 /* INDICATOR */
 
-$carousel-indicators-z-index: 10 !default;
+$carousel-indicators-z-index: 80 !default;
 
 $carousel-indicator-color: $color-white !default;
 
@@ -693,7 +694,7 @@ $carousel-indicator-transition-all-duration: $transition-duration-normal !defaul
 
 /* INSET (PREV / NEXT) */
 
-$carousel-inset-prev-next-z-index: 9 !default;
+$carousel-inset-prev-next-z-index: $carousel-indicators-z-index - 1 !default;
 
 $carousel-inset-prev-next-font-size: 1em * $icon-scale-amount !default;
 
@@ -730,7 +731,7 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
 /* DROPDOWN */
 
-$dropdown-z-index: 1000 !default;
+$dropdown-z-index: 200 !default;
 $dropdown-z-depth: 4 !default;
 
 $dropdown-max-width: 70vw !default;
@@ -920,6 +921,7 @@ $divider-block-horizontal-padding: 0.6em !default;
 
 /* LINEAR */
 
+$divider-linear-z-index: 40 !default;
 $divider-linear-bg-color: rgba(0, 0, 0, 0.1) !default;
 
 /* TEXT */
@@ -2045,7 +2047,7 @@ $dragging-z-index: 1000000 !default;
 
 /* HIGHLIGHT */
 
-$highlight-z-index: 2 !default;
+$highlight-z-index: 60 !default;
 
 $highlight-size: 2px !default;
 
@@ -2066,6 +2068,7 @@ $image-color: 'black' !default;
 /* CAPTION */
 
 $image-caption-color: 'black' !default;
+$image-caption-z-index: 30 !default;
 
 /* TRANSITIONS */
 
@@ -2144,11 +2147,14 @@ $label-ribbon-size: 8px !default;
 
 /* CORNER */
 
+$label-corner-z-index: 70 !default;
+
 $label-corner-padding-vertical: $label-compact-padding-vertical * 2 !default;
 $label-corner-padding-horizontal: $label-compact-padding-horizontal * 2 !default;
 
 /* FLOATING */
 
+$label-floating-z-index: 150 !default;
 $label-floating-z-depth: 4 !default;
 
 $label-floating-padding-vertical: $label-padding-vertical * 1.6 !default;
@@ -2202,7 +2208,7 @@ $input-placeholder-opacity: 0.6 !default;
 
 /* MODAL */
 
-$modal-z-index: 200 !default;
+$modal-z-index: 500 !default;
 $modal-z-depth: 5 !default;
 
 $modal-closed-scale: 0.7 !default;
@@ -2234,7 +2240,7 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 
 /* NOTY */
 
-$noty-z-index: 1000 !default;
+$noty-z-index: 600 !default;
 $noty-z-depth: 8 !default;
 
 $noty-transparentize-amount: 0.05 !default; //TODO: Implement it
@@ -2287,7 +2293,7 @@ $widget-transition-opacity-duration: $transition-duration-fast !default;
 
 /* OVERLAY */
 
-$overlay-z-index: 50 !default;
+$overlay-z-index: 100 !default;
 
 $overlay-transition-opacity-duration: $widget-transition-opacity-duration !default;
 
@@ -2464,7 +2470,7 @@ $ripple-transparentize-amount: 0.8 !default;
 
 /* CIRCLE */
 
-$ripple-circle-z-width: 10 !default;
+$ripple-circle-z-index: 50 !default;
 $ripple-circle-width: 300% !default;
 $ripple-centered-circle-width: 200% !default;
 
