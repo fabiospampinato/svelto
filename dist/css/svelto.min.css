@@ -8372,7 +8372,7 @@ input, textarea {
  * ========================================================================= */
 /* MODAL */
 .modal {
-  box-shadow: 0 5px 8px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 2px 5px -1px rgba(0, 0, 0, 0.4) ;
+  box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4) ;
   display: none;
   position: fixed;
   z-index: 500;
@@ -9541,7 +9541,7 @@ table > :not(tfoot) td .multiple:only-child {
     box-shadow: none !important;
   }
   .noty-queue:not(:empty) {
-    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
+    box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 2px 16px 2px rgba(0, 0, 0, 0.12), 0 4px 5px -3px rgba(0, 0, 0, 0.4) ;
   }
   .noty-queue .noty {
     box-shadow: none ;
@@ -9732,7 +9732,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 }
 
 .noty-queue.expanded:not(:empty) {
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
+  box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 2px 16px 2px rgba(0, 0, 0, 0.12), 0 4px 5px -3px rgba(0, 0, 0, 0.4) ;
 }
 
 .noty-queue.expanded .noty {
@@ -9746,7 +9746,7 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
 
 /* NOTY */
 .noty {
-  box-shadow: 0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12), 0 5px 5px -3px rgba(0, 0, 0, 0.4) ;
+  box-shadow: 0 7px 10px 1px rgba(0, 0, 0, 0.14), 0 2px 16px 2px rgba(0, 0, 0, 0.12), 0 4px 5px -3px rgba(0, 0, 0, 0.4) ;
   border-radius: 0.25em;
   pointer-events: auto;
   transition-property: opacity, font-size, padding, margin;
@@ -11791,7 +11791,7 @@ svg.spinner.multicolor circle {
   background: inherit ;
   border-color: inherit ;
   color: inherit ;
-  box-shadow: 0 3px 4px 0 rgba(0, 0, 0, 0.14), 0 1px 8px 0 rgba(0, 0, 0, 0.12), 0 3px 3px -2px rgba(0, 0, 0, 0.4) ;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2) ;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;

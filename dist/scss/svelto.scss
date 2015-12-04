@@ -2209,7 +2209,7 @@ $input-placeholder-opacity: 0.6 !default;
 /* MODAL */
 
 $modal-z-index: 500 !default;
-$modal-z-depth: 5 !default;
+$modal-z-depth: 6 !default;
 
 $modal-closed-scale: 0.7 !default;
 
@@ -2241,7 +2241,7 @@ $modal-transition-all-duration: $transition-duration-normal !default;
 /* NOTY */
 
 $noty-z-index: 600 !default;
-$noty-z-depth: 8 !default;
+$noty-z-depth: 7 !default;
 
 $noty-transparentize-amount: 0.05 !default; //TODO: Implement it
 
@@ -2780,7 +2780,7 @@ $spinner-stroke-animation-dash-duration: 1.5s !default;
 
 /* SPINNER LABEL */
 
-$spinner-label-z-depth: 3 !default;
+$spinner-label-z-depth: 1 !default;
 
 $spinner-label-color: 'inherit' !default;
 
