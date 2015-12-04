@@ -27,7 +27,7 @@
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
               '<div class="infobar">' +
                 '{% if ( o.img ) { %}' +
-                  '<img src="{%=o.img%}" class="noty-img infobar-left" />' +
+                  '<img src="{%=o.img%}" class="noty-img infobar-left">' +
                 '{% } %}' +
                 '{% if ( o.title || o.body ) { %}' +
                   '<div class="infobar-center">' +

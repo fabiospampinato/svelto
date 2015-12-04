@@ -8189,6 +8189,29 @@ input {
   min-height: $line-height-em + ( $input-padding-vertical * 2 );
   padding: $input-padding-vertical $input-padding-horizontal;
 
+  /* FILE */
+
+  &[type="file"] {
+
+    @include fill-absolute ();
+    width: 100%; //INFO: Or it will not stretch on mobile Chrome
+    border: none;
+    appearance: none;
+    border-radius: inherit;
+    cursor: pointer;
+    font-size: 0;
+    opacity: 0;
+    margin-top: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    z-index: 99;
+
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+
+  }
+
   /* PLACEHOLDER */
 
   &::placeholder {
@@ -10310,6 +10333,7 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../normalize/normalize.scss
+ * @requires ../input/input.scss
  * ========================================================================= */
 
 /* SELECT BTN */
@@ -10319,16 +10343,7 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
   /* DEFAULT SELECT */
 
   select {
-    @include fill-absolute ();
-    width: 100%; //INFO: Or it will not streatch on mobile Chrome
-    border: none;
-    appearance: none;
-    border-radius: inherit;
-    cursor: pointer;
-    font-size: $font-size;
-    opacity: 0;
-    margin: 0 !important;
-    z-index: 1;
+    @extend input[type="file"];
   }
 
   /* VALUEHOLDER */

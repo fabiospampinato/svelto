@@ -4746,7 +4746,7 @@
 
   $(function () {
 
-    $stylesheet = $('<style class="pseudo" />').appendTo ( $head );
+    $stylesheet = $('<style class="pseudo">').appendTo ( $head );
 
   });
 
@@ -5657,7 +5657,7 @@
                    '<div class="spinner-label {%=(o.multicolor ? "" : o.colors.labeled)%}">' +
                  '{% } %}' +
                    '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.colors.unlabeled ))%}">' +
-                     '<circle cx="1.625em" cy="1.625em" r="1.25em" />' +
+                     '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
                    '</svg>' +
                  '{% if ( o.labeled ) { %}' +
                    '</div>' +
@@ -5762,7 +5762,7 @@
       base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
               '<div class="infobar">' +
                 '{% if ( o.img ) { %}' +
-                  '<img src="{%=o.img%}" class="noty-img infobar-left" />' +
+                  '<img src="{%=o.img%}" class="noty-img infobar-left">' +
                 '{% } %}' +
                 '{% if ( o.title || o.body ) { %}' +
                   '<div class="infobar-center">' +
@@ -9284,13 +9284,13 @@ Prism.languages.js = Prism.languages.javascript;
       <div class="modal remote-modal-placeholder card">
         <div class="card-block">
           <svg class="spinner">
-            <circle cx="1.625em" cy="1.625em" r="1.25em" />
+            <circle cx="1.625em" cy="1.625em" r="1.25em">
           </svg>
         </div>
       </div>
     */
 
-    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em" /></svg></div></div>').appendTo ( $body ).modal ();
+    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body ).modal ();
 
     /* AJAX */
 

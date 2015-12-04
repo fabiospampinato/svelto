@@ -84,7 +84,7 @@
 
   $(function () {
 
-    $stylesheet = $('<style class="pseudo" />').appendTo ( $head );
+    $stylesheet = $('<style class="pseudo">').appendTo ( $head );
 
   });
 

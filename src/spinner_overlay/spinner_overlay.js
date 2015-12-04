@@ -22,7 +22,7 @@
                    '<div class="spinner-label {%=(o.multicolor ? "" : o.colors.labeled)%}">' +
                  '{% } %}' +
                    '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.colors.unlabeled ))%}">' +
-                     '<circle cx="1.625em" cy="1.625em" r="1.25em" />' +
+                     '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
                    '</svg>' +
                  '{% if ( o.labeled ) { %}' +
                    '</div>' +

@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../normalize/normalize.scss
+ * @requires ../input/input.scss
  * ========================================================================= */
 
 /* SELECT BTN */
@@ -15,16 +16,7 @@
   /* DEFAULT SELECT */
 
   select {
-    @include fill-absolute ();
-    width: 100%; //INFO: Or it will not streatch on mobile Chrome
-    border: none;
-    appearance: none;
-    border-radius: inherit;
-    cursor: pointer;
-    font-size: $font-size;
-    opacity: 0;
-    margin: 0 !important;
-    z-index: 1;
+    @extend input[type="file"];
   }
 
   /* VALUEHOLDER */

@@ -7853,6 +7853,7 @@ input, textarea {
   border-radius: 0.25em;
   min-height: 2.4285714286em;
   padding: 0.5em 1em;
+  /* FILE */
   /* PLACEHOLDER */
   /* COLORS */
   /* INVALID */
@@ -7876,6 +7877,31 @@ input span > a:after, textarea span > a:after {
 input p > a:hover, textarea p > a:hover,
 input span > a:hover, textarea span > a:hover {
   color: #166ac9 ;
+}
+
+input[type="file"], .select-btn select, textarea[type="file"] {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: inherit;
+  cursor: pointer;
+  font-size: 0;
+  opacity: 0;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  z-index: 99;
+}
+
+input[type="file"]::-webkit-file-upload-button, .select-btn select::-webkit-file-upload-button, textarea[type="file"]::-webkit-file-upload-button {
+  display: none;
 }
 
 input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
@@ -10959,31 +10985,13 @@ a.ripple > .ripple-circle {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../normalize/normalize.scss
+ * @requires ../input/input.scss
  * ========================================================================= */
 /* SELECT BTN */
 .select-btn {
   /* DEFAULT SELECT */
   /* VALUEHOLDER */
   /* TOGGLER DIRECTION */
-}
-
-.select-btn select {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  border: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border-radius: inherit;
-  cursor: pointer;
-  font-size: 16px;
-  opacity: 0;
-  margin: 0 !important;
-  z-index: 1;
 }
 
 .select-btn .valueholder {

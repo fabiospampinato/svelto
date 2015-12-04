@@ -46,13 +46,13 @@
       <div class="modal remote-modal-placeholder card">
         <div class="card-block">
           <svg class="spinner">
-            <circle cx="1.625em" cy="1.625em" r="1.25em" />
+            <circle cx="1.625em" cy="1.625em" r="1.25em">
           </svg>
         </div>
       </div>
     */
 
-    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em" /></svg></div></div>').appendTo ( $body ).modal ();
+    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body ).modal ();
 
     /* AJAX */
 
