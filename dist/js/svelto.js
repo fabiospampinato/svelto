@@ -1387,7 +1387,6 @@
 
 //FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
 //FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? //TODO Test it!
-//FIXME: Flick not working on iPod Touch
 
 //INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
 
@@ -1408,10 +1407,6 @@
       dbltap: {
         interval: 300
       },
-      flick: {
-        duration: 150,
-        threshold: 5
-      }
     }
   };
 
@@ -1421,7 +1416,6 @@
     tap: Pointer.options.events.prefix + 'tap',
     dbltap: Pointer.options.events.prefix + 'dbltap',
     press: Pointer.options.events.prefix + 'press',
-    flick: Pointer.options.events.prefix + 'flick',
     down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
     move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
     up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
@@ -1454,11 +1448,8 @@
       target,
       $target,
       startEvent,
-      startTimestamp,
-      downTimestamp,
       prevTapTimestamp = 0,
       motion,
-      moveEvent,
       pressTimeout;
 
   /* EVENT CREATOR */
@@ -1481,13 +1472,12 @@
     $target = $(target);
 
     startEvent = event;
-    startTimestamp = event.timeStamp || Date.now ();
 
     motion = false;
 
     pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
 
-    $target.on ( Pointer.move, moveHandler );
+    $target.one ( Pointer.move, moveHandler );
     $target.one ( Pointer.up, upHandler );
     $target.one ( Pointer.cancel, cancelHandler );
 
@@ -1503,26 +1493,14 @@
 
   let moveHandler = function ( event ) {
 
-    if ( !motion ) {
+    if ( pressTimeout ) {
 
-      if ( pressTimeout ) {
-
-        clearTimeout ( pressTimeout );
-        pressTimeout = false;
-
-      }
-
-      motion = true;
-
-      if ( !$.browser.is.touchDevice ) {
-
-        $target.off ( Pointer.move, moveHandler );
-
-      }
+      clearTimeout ( pressTimeout );
+      pressTimeout = false;
 
     }
 
-    moveEvent = event;
+    motion = true;
 
   };
 
@@ -1534,64 +1512,23 @@
 
     }
 
-    downTimestamp = event.timeStamp || Date.now ();
-
-    if ( motion && ( downTimestamp - startTimestamp <= Pointer.options.flick.duration ) ) {
-
-      let startXY = $.eventXY ( startEvent ),
-          endXY = $.eventXY ( $.browser.is.touchDevice ? moveEvent : event ),
-          deltaXY = {
-            X: endXY.X - startXY.X,
-            Y: endXY.Y - startXY.Y
-          },
-          absDeltaXY = {
-            X: Math.abs ( deltaXY.X ),
-            Y: Math.abs ( deltaXY.Y )
-          };
-
-      if ( absDeltaXY.X >= Pointer.options.flick.threshold || absDeltaXY.Y >= Pointer.options.flick.threshold ) {
-
-        let orientation,
-            direction;
-
-        if ( absDeltaXY.X > absDeltaXY.Y ) {
-
-          orientation = 'horizontal',
-          direction = ( deltaXY.X > 0 ) ? 1 : -1;
-
-        } else {
-
-          orientation = 'vertical',
-          direction = ( deltaXY.Y > 0 ) ? 1 : -1;
-
-        }
-
-        $target.trigger ( createEvent ( Pointer.flick, event ), {
-          orientation: orientation,
-          direction: direction,
-          startXY: startXY,
-          endXY: endXY
-        });
-
-      }
-
-    }
+    let endTimestamp = event.timeStamp || Date.now ();
 
     if ( !$.browser.is.touchDevice || !motion ) {
 
       $target.trigger ( createEvent ( Pointer.tap, event ) );
 
-      if ( downTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+      if ( endTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
         $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
       }
 
-      prevTapTimestamp = downTimestamp;
+      prevTapTimestamp = endTimestamp;
 
     }
 
-    if ( !motion || $.browser.is.touchDevice ) {
+    if ( !motion ) {
 
       $target.off ( Pointer.move, moveHandler );
 
@@ -1609,7 +1546,7 @@
 
     }
 
-    if ( !motion || $.browser.is.touchDevice ) {
+    if ( !motion ) {
 
       $target.off ( Pointer.move, moveHandler );
 
@@ -5527,6 +5464,148 @@
   /* FACTORY */
 
   $.factory ( Svelto.Droppable );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Flickable
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+//FIXME: Not working on iPod Touch
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'flickable',
+    options: {
+      duration: 150, //INFO: Maximum duration of the flick
+      threshold: 5, //INFO: Minimum moving treshold
+      callbacks: {
+        flick () {}
+      }
+    }
+  };
+
+  /* FLICKABLE */
+
+  class Flickable extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _events () {
+
+      /* DOWN */
+
+      this._on ( Pointer.down, this.__down );
+
+    }
+
+    /* HANDLERS */
+
+    __down ( event ) {
+
+      this._startEvent = event;
+      this._startTimestamp = event.timeStamp || Date.now ();
+
+      this._motion = false;
+
+      this._one ( true, Pointer.move, this.__move );
+      this._one ( true, Pointer.up, this.__up );
+      this._one ( true, Pointer.cancel, this.__cancel );
+
+    }
+
+    __move () {
+
+      this._motion = true;
+
+    }
+
+    __up ( event ) {
+
+      this._endTimestamp = event.timeStamp || Date.now ();
+
+      if ( this._motion && ( this._endTimestamp - this._startTimestamp <= this.options.duration ) ) {
+
+        let startXY = $.eventXY ( this._startEvent ),
+            endXY = $.eventXY ( event ),
+            deltaXY = {
+              X: endXY.X - startXY.X,
+              Y: endXY.Y - startXY.Y
+            },
+            absDeltaXY = {
+              X: Math.abs ( deltaXY.X ),
+              Y: Math.abs ( deltaXY.Y )
+            };
+
+        if ( absDeltaXY.X >= this.options.threshold || absDeltaXY.Y >= this.options.threshold ) {
+
+          let orientation,
+              direction;
+
+          if ( absDeltaXY.X > absDeltaXY.Y ) {
+
+            orientation = 'horizontal',
+            direction = ( deltaXY.X > 0 ) ? 1 : -1;
+
+          } else {
+
+            orientation = 'vertical',
+            direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+
+          }
+
+          this._trigger ( 'flick', {
+            orientation: orientation,
+            direction: direction
+          });
+
+        }
+
+      }
+
+      if ( !this._motion ) {
+
+        this._off ( Pointer.move, this.__move );
+
+      }
+
+      this._off ( Pointer.cancel, this.__cancel );
+
+    }
+
+    __cancel () {
+
+      if ( !this._motion ) {
+
+        this._off ( Pointer.move, this.__move );
+
+      }
+
+      this._off ( Pointer.up, this.__up );
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Flickable = Flickable;
+  Svelto.Flickable.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Flickable );
 
 }( Svelto.$, Svelto._, window, document ));
 
