@@ -1401,9 +1401,6 @@
       events: {
         prefix: 'pointer'
       },
-      press: {
-        duration: 300
-      },
       dbltap: {
         interval: 300
       },
@@ -1415,7 +1412,6 @@
   let events = {
     tap: Pointer.options.events.prefix + 'tap',
     dbltap: Pointer.options.events.prefix + 'dbltap',
-    press: Pointer.options.events.prefix + 'press',
     down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
     move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
     up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
@@ -1449,8 +1445,7 @@
       $target,
       startEvent,
       prevTapTimestamp = 0,
-      motion,
-      pressTimeout;
+      motion;
 
   /* EVENT CREATOR */
 
@@ -1475,42 +1470,19 @@
 
     motion = false;
 
-    pressTimeout = setTimeout ( pressHandler, Pointer.options.press.duration );
-
     $target.one ( Pointer.move, moveHandler );
     $target.one ( Pointer.up, upHandler );
     $target.one ( Pointer.cancel, cancelHandler );
 
   };
 
-  let pressHandler = function () {
-
-    $target.trigger ( createEvent ( Pointer.press, startEvent ) );
-
-    pressTimeout = false;
-
-  };
-
   let moveHandler = function ( event ) {
-
-    if ( pressTimeout ) {
-
-      clearTimeout ( pressTimeout );
-      pressTimeout = false;
-
-    }
 
     motion = true;
 
   };
 
   let upHandler = function ( event ) {
-
-    if ( pressTimeout ) {
-
-      clearTimeout ( pressTimeout );
-
-    }
 
     let endTimestamp = event.timeStamp || Date.now ();
 
@@ -1539,12 +1511,6 @@
   };
 
   let cancelHandler = function () {
-
-    if ( pressTimeout ) {
-
-      clearTimeout ( pressTimeout );
-
-    }
 
     if ( !motion ) {
 
