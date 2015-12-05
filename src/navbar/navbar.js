@@ -82,7 +82,11 @@
 
       if ( this.isFlickable ) {
 
-        this._on ( $document, Pointer.flick, this.__flick );
+        $document.flickable ({
+          callbacks: {
+            flick: this.__flick.bind ( this )
+          }
+        });
 
       }
 
@@ -122,7 +126,7 @@
 
     /* FLICK */
 
-    __flick ( event, data ) {
+    __flick ( data ) {
 
       if ( this._isOpen ) return;
 
@@ -132,13 +136,13 @@
         case 'right':
           if ( data.orientation === 'horizontal' ) {
             if ( this.direction === 'left' ) {
-              if ( data.direction === 1 ) {
+              if ( data.direction === 'right' ) {
                 if ( data.startXY.X <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
             } else if ( this.direction === 'right' ) {
-              if ( data.direction === -1 ) {
+              if ( data.direction === 'left' ) {
                 if ( $window.width () - data.startXY.X <= this.options.flickableRange ) {
                   this.open ();
                 }
@@ -151,13 +155,13 @@
         case 'bottom':
           if ( data.orientation === 'vertical' ) {
             if ( this.direction === 'top' ) {
-              if ( data.direction === -1 ) {
+              if ( data.direction === 'bottom' ) {
                 if ( data.startXY.Y <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
             } else if ( this.direction === 'bottom' ) {
-              if ( data.direction === 1 ) {
+              if ( data.direction === 'top' ) {
                 if ( $window.height () - data.startXY.Y <= this.options.flickableRange ) {
                   this.open ();
                 }
@@ -205,7 +209,7 @@
             this._delay ( function () {
 
               this.$navbar.removeClass ( this.options.classes.show );
-              
+
             }, this.options.animations.close );
 
           }

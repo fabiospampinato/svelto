@@ -2333,10 +2333,6 @@
 
       this._on ( this.$indicators, Pointer.tap, this.__indicatorTap );
 
-      /* FLICK */
-
-      this._on ( Pointer.flick, this.__flick );
-
       /* CYCLE */
 
       this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
@@ -2400,21 +2396,6 @@
     __indicatorTap ( event ) {
 
       this.set ( this.$indicators.index ( event.currentTarget ) );
-
-    }
-
-    /* FLICK */
-
-    __flick ( event, data ) {
-
-      if ( data.orientation === 'horizontal' ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this[data.direction === -1 ? 'next' : 'previous']();
-
-      }
 
     }
 
@@ -5443,6 +5424,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//FIXME: Add support for multiple callbacks
 //FIXME: Not working on iPod Touch
 
 (function ( $, _, window, document, undefined ) {
@@ -5485,9 +5467,9 @@
 
       this._motion = false;
 
-      this._one ( true, Pointer.move, this.__move );
-      this._one ( true, Pointer.up, this.__up );
-      this._one ( true, Pointer.cancel, this.__cancel );
+      this._one ( true, $document, Pointer.move, this.__move );
+      this._one ( true, $document, Pointer.up, this.__up );
+      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -5522,18 +5504,22 @@
           if ( absDeltaXY.X > absDeltaXY.Y ) {
 
             orientation = 'horizontal',
-            direction = ( deltaXY.X > 0 ) ? 1 : -1;
+            direction = ( deltaXY.X > 0 ) ? 'right' : 'left';
 
           } else {
 
             orientation = 'vertical',
-            direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+            direction = ( deltaXY.Y > 0 ) ? 'bottom' : 'top';
 
           }
 
           this._trigger ( 'flick', {
             orientation: orientation,
-            direction: direction
+            direction: direction,
+            startEvent: this._startEvent,
+            startXY: startXY,
+            endEvent: event,
+            endXY: endXY
           });
 
         }
@@ -5542,11 +5528,11 @@
 
       if ( !this._motion ) {
 
-        this._off ( Pointer.move, this.__move );
+        this._off ( $document, Pointer.move, this.__move );
 
       }
 
-      this._off ( Pointer.cancel, this.__cancel );
+      this._off ( $document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -5554,11 +5540,11 @@
 
       if ( !this._motion ) {
 
-        this._off ( Pointer.move, this.__move );
+        this._off ( $document, Pointer.move, this.__move );
 
       }
 
-      this._off ( Pointer.up, this.__up );
+      this._off ( $document, Pointer.up, this.__up );
 
     }
 
@@ -5997,14 +5983,14 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this._on ( Pointer.flick, function ( event, data ) {
-
-          if ( data.orientation === 'horizontal' ) {
-
-            this.close ();
-
+        this.$noty.flickable ({
+          callbacks: {
+            flick: function ( data ) {
+              if ( data.orientation === 'horizontal' ) {
+                this.close ();
+              }
+            }.bind ( this )
           }
-
         });
 
       }
@@ -7672,7 +7658,11 @@
 
       if ( this.isFlickable ) {
 
-        this._on ( $document, Pointer.flick, this.__flick );
+        $document.flickable ({
+          callbacks: {
+            flick: this.__flick.bind ( this )
+          }
+        });
 
       }
 
@@ -7712,7 +7702,7 @@
 
     /* FLICK */
 
-    __flick ( event, data ) {
+    __flick ( data ) {
 
       if ( this._isOpen ) return;
 
@@ -7722,13 +7712,13 @@
         case 'right':
           if ( data.orientation === 'horizontal' ) {
             if ( this.direction === 'left' ) {
-              if ( data.direction === 1 ) {
+              if ( data.direction === 'right' ) {
                 if ( data.startXY.X <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
             } else if ( this.direction === 'right' ) {
-              if ( data.direction === -1 ) {
+              if ( data.direction === 'left' ) {
                 if ( $window.width () - data.startXY.X <= this.options.flickableRange ) {
                   this.open ();
                 }
@@ -7741,13 +7731,13 @@
         case 'bottom':
           if ( data.orientation === 'vertical' ) {
             if ( this.direction === 'top' ) {
-              if ( data.direction === -1 ) {
+              if ( data.direction === 'bottom' ) {
                 if ( data.startXY.Y <= this.options.flickableRange ) {
                   this.open ();
                 }
               }
             } else if ( this.direction === 'bottom' ) {
-              if ( data.direction === 1 ) {
+              if ( data.direction === 'top' ) {
                 if ( $window.height () - data.startXY.Y <= this.options.flickableRange ) {
                   this.open ();
                 }
@@ -7795,7 +7785,7 @@
             this._delay ( function () {
 
               this.$navbar.removeClass ( this.options.classes.show );
-              
+
             }, this.options.animations.close );
 
           }

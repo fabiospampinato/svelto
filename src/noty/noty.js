@@ -217,14 +217,14 @@
 
       if ( this.options.type !== 'action' ) {
 
-        this._on ( Pointer.flick, function ( event, data ) {
-
-          if ( data.orientation === 'horizontal' ) {
-
-            this.close ();
-
+        this.$noty.flickable ({
+          callbacks: {
+            flick: function ( data ) {
+              if ( data.orientation === 'horizontal' ) {
+                this.close ();
+              }
+            }.bind ( this )
           }
-
         });
 
       }

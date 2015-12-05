@@ -8,6 +8,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//FIXME: Add support for multiple callbacks
 //FIXME: Not working on iPod Touch
 
 (function ( $, _, window, document, undefined ) {
@@ -50,9 +51,9 @@
 
       this._motion = false;
 
-      this._one ( true, Pointer.move, this.__move );
-      this._one ( true, Pointer.up, this.__up );
-      this._one ( true, Pointer.cancel, this.__cancel );
+      this._one ( true, $document, Pointer.move, this.__move );
+      this._one ( true, $document, Pointer.up, this.__up );
+      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -87,18 +88,22 @@
           if ( absDeltaXY.X > absDeltaXY.Y ) {
 
             orientation = 'horizontal',
-            direction = ( deltaXY.X > 0 ) ? 1 : -1;
+            direction = ( deltaXY.X > 0 ) ? 'right' : 'left';
 
           } else {
 
             orientation = 'vertical',
-            direction = ( deltaXY.Y > 0 ) ? 1 : -1;
+            direction = ( deltaXY.Y > 0 ) ? 'bottom' : 'top';
 
           }
 
           this._trigger ( 'flick', {
             orientation: orientation,
-            direction: direction
+            direction: direction,
+            startEvent: this._startEvent,
+            startXY: startXY,
+            endEvent: event,
+            endXY: endXY
           });
 
         }
@@ -107,11 +112,11 @@
 
       if ( !this._motion ) {
 
-        this._off ( Pointer.move, this.__move );
+        this._off ( $document, Pointer.move, this.__move );
 
       }
 
-      this._off ( Pointer.cancel, this.__cancel );
+      this._off ( $document, Pointer.cancel, this.__cancel );
 
     }
 
@@ -119,11 +124,11 @@
 
       if ( !this._motion ) {
 
-        this._off ( Pointer.move, this.__move );
+        this._off ( $document, Pointer.move, this.__move );
 
       }
 
-      this._off ( Pointer.up, this.__up );
+      this._off ( $document, Pointer.up, this.__up );
 
     }
 

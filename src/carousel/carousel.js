@@ -103,10 +103,6 @@
 
       this._on ( this.$indicators, Pointer.tap, this.__indicatorTap );
 
-      /* FLICK */
-
-      this._on ( Pointer.flick, this.__flick );
-
       /* CYCLE */
 
       this._on ( this.$itemsWrp, Pointer.enter, this.__cycleEnter );
@@ -170,21 +166,6 @@
     __indicatorTap ( event ) {
 
       this.set ( this.$indicators.index ( event.currentTarget ) );
-
-    }
-
-    /* FLICK */
-
-    __flick ( event, data ) {
-
-      if ( data.orientation === 'horizontal' ) {
-
-        event.preventDefault ();
-        event.stopImmediatePropagation ();
-
-        this[data.direction === -1 ? 'next' : 'previous']();
-
-      }
 
     }
 
