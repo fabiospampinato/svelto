@@ -3788,7 +3788,6 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* INPUT */
   /* INVALID */
   /* VALID */
-  /* CHECKED */
   /* ENABLED */
 }
 
@@ -3807,6 +3806,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   /* BEFORE */
   /* AFTER */
   /* CUSTOM BEFORE / AFTER */
+  /* CHECKED */
 }
 
 .checkbox > input:before, .radio > input:before, .checkbox > textarea:before, .radio > textarea:before, .checkbox > input:after, .radio > input:after, .checkbox > textarea:after, .radio > textarea:after {
@@ -3839,6 +3839,19 @@ i.icon, .carousel.inset .carousel-prev:after,
   content: attr(data-icon-on);
 }
 
+.checkbox > input:checked, .radio > input:checked, .checkbox > textarea:checked, .radio > textarea:checked {
+  /* BEFORE */
+  /* AFTER */
+}
+
+.checkbox > input:checked:before, .radio > input:checked:before, .checkbox > textarea:checked:before, .radio > textarea:checked:before {
+  opacity: 0;
+}
+
+.checkbox > input:checked:after, .radio > input:checked:after, .checkbox > textarea:checked:after, .radio > textarea:checked:after {
+  opacity: 1;
+}
+
 .checkbox.invalid, .invalid.radio {
   /* INPUT */
 }
@@ -3861,23 +3874,6 @@ i.icon, .carousel.inset .carousel-prev:after,
 
 .checkbox.valid > input:before, .valid.radio > input:before, .checkbox.valid > textarea:before, .valid.radio > textarea:before, .checkbox.valid > input:after, .valid.radio > input:after, .checkbox.valid > textarea:after, .valid.radio > textarea:after {
   color: #4caf50 !important;
-}
-
-.checkbox.checked, .checked.radio {
-  /* INPUT */
-}
-
-.checkbox.checked > input, .checked.radio > input, .checkbox.checked > textarea, .checked.radio > textarea {
-  /* BEFORE */
-  /* AFTER */
-}
-
-.checkbox.checked > input:before, .checked.radio > input:before, .checkbox.checked > textarea:before, .checked.radio > textarea:before {
-  opacity: 0;
-}
-
-.checkbox.checked > input:after, .checked.radio > input:after, .checkbox.checked > textarea:after, .checked.radio > textarea:after {
-  opacity: 1;
 }
 
 .checkbox:not(.disabled), .radio:not(.disabled) {

@@ -70,6 +70,24 @@
       content: attr(data-icon-on);
     }
 
+    /* CHECKED */
+
+    &:checked {
+
+      /* BEFORE */
+
+      &:before {
+        opacity: 0;
+      }
+
+      /* AFTER */
+
+      &:after {
+        opacity: 1;
+      }
+
+    }
+
   }
 
   /* INVALID */
@@ -104,30 +122,6 @@
       &:before,
       &:after {
         color: $color-success !important;
-      }
-
-    }
-
-  }
-
-  /* CHECKED */
-
-  &.checked {
-
-    /* INPUT */
-
-    > input {
-
-      /* BEFORE */
-
-      &:before {
-        opacity: 0;
-      }
-
-      /* AFTER */
-
-      &:after {
-        opacity: 1;
       }
 
     }
