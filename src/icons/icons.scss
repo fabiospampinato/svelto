@@ -24,7 +24,7 @@
 
 /* ICON */
 
-i.icon {
+%icon {
   @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
@@ -47,6 +47,10 @@ i.icon {
   -moz-osx-font-smoothing: grayscale;
   /* Support for all WebKit browsers */
   font-feature-settings: 'liga';
+}
+
+i.icon {
+  @extend %icon;
 }
 
 /* ICONS */

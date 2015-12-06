@@ -6159,7 +6159,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
- * @requires ../noty/noty.js
  * ========================================================================= */
 
 //TODO: Show error message

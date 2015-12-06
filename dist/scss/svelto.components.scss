@@ -1926,7 +1926,7 @@ button {
 
 /* ICON */
 
-i.icon {
+%icon {
   @extend .widget-pseudo; //INFO: It fixes a bug in firefox, where selectors like `.foo:after.bar` don't get ignored but cause the entire block to not be processed, stupid
   @extend %scaled-icon-sizes;
   display: inline-block;
@@ -1949,6 +1949,10 @@ i.icon {
   -moz-osx-font-smoothing: grayscale;
   /* Support for all WebKit browsers */
   font-feature-settings: 'liga';
+}
+
+i.icon {
+  @extend %icon;
 }
 
 /* ICONS */
@@ -2306,7 +2310,7 @@ i.icon {
       /* AFTER (ICON) */
 
       &:after {
-        @extend i.icon;
+        @extend %icon;
         margin-bottom: 0;
         color: $carousel-inset-prev-next-color;
         opacity: $carousel-inset-prev-next-opacity;
@@ -2677,32 +2681,106 @@ i.icon {
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * @requires ../icons/icons.scss
  * ========================================================================= */
 
 /* CHECKBOX */
 
 .checkbox {
 
+  @extend .widget;
+  display: inline-flex;
+
+  /* CHILDREN */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > :not(:first-child) {
+    margin-left: $label-compact-center-extra-spacing;
+  }
+
   /* INPUT */
 
   > input {
-    display: none;
+
+    @extend .icons;
+    min-height: 0;
+    background-color: transparent;
+
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
+      @extend %icon;
+      @include fill-absolute ();
+      transition: opacity $checkbox-icon-transition-opacity-duration;
+      margin-bottom: 0 !important;
+    }
+
+    /* BEFORE */
+
+    &:before {
+      content: 'check_box_outline_blank';
+      opacity: 1;
+    }
+
+    /* AFTER */
+
+    &:after {
+      @include color-text ( $checkbox-icon-on-color );
+      content: 'check_box';
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* CUSTOM BEFORE / AFTER */
+
+    &[data-icon-off]:before {
+      content: attr(data-icon-off);
+    }
+
+    &[data-icon-on]:after {
+      content: attr(data-icon-on);
+    }
+
   }
 
-  /* ICONS */
+  /* INVALID */
 
-  .icons {
+  &.invalid {
 
-    /* ICON */
+    /* INPUT */
 
-    .icon {
+    > input {
 
-      transition: opacity $checkbox-icon-transition-opacity-duration;
+      /* BEFORE / AFTER */
 
-      &.icon-on {
-        @include color-text ( $checkbox-icon-on-color );
-        opacity: 0;
-        z-index: 1;
+      &:before,
+      &:after {
+        color: $color-error !important;
+      }
+
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* INPUT */
+
+    > input {
+
+      /* BEFORE / AFTER */
+
+      &:before,
+      &:after {
+        color: $color-success !important;
       }
 
     }
@@ -2713,26 +2791,30 @@ i.icon {
 
   &.checked {
 
-    /* ICONS */
+    /* INPUT */
 
-    .icons {
+    > input {
 
-      /* ICON */
+      /* BEFORE */
 
-      .icon {
+      &:before {
+        opacity: 0;
+      }
 
-        &.icon-on {
-          opacity: 1;
-        }
+      /* AFTER */
 
-        &.icon-off {
-          opacity: 0;
-        }
-
+      &:after {
+        opacity: 1;
       }
 
     }
 
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+    cursor: pointer;
   }
 
 }
@@ -6091,7 +6173,7 @@ code[class*='language-'] {
     /* BEFORE (ICON) */
 
     &:before {
-      @extend i.icon;
+      @extend %icon;
       content: 'star_border';
       margin-bottom: 0;
     }
@@ -6764,7 +6846,7 @@ table.table.selectable {
       cursor: pointer;
 
       &:hover:after {
-        @extend i.icon;
+        @extend %icon;
         margin-bottom: 0;
       }
 
@@ -6871,7 +6953,7 @@ table.table.sortable {
 
     &:before,
     &:after {
-      @extend i.icon;
+      @extend %icon;
       position: absolute;
       right: $table-th-sortable-icon-right;
       top: 0;

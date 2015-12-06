@@ -196,7 +196,7 @@
       cursor: pointer;
 
       &:hover:after {
-        @extend i.icon;
+        @extend %icon;
         margin-bottom: 0;
       }
 

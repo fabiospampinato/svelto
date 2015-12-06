@@ -4,32 +4,106 @@
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../widget/widget.scss
+ * @requires ../icons/icons.scss
  * ========================================================================= */
 
 /* CHECKBOX */
 
 .checkbox {
 
+  @extend .widget;
+  display: inline-flex;
+
+  /* CHILDREN */
+
+  > * {
+    margin-bottom: 0 !important;
+  }
+
+  > :not(:first-child) {
+    margin-left: $label-compact-center-extra-spacing;
+  }
+
   /* INPUT */
 
   > input {
-    display: none;
+
+    @extend .icons;
+    min-height: 0;
+    background-color: transparent;
+
+    /* BEFORE / AFTER */
+
+    &:before,
+    &:after {
+      @extend %icon;
+      @include fill-absolute ();
+      transition: opacity $checkbox-icon-transition-opacity-duration;
+      margin-bottom: 0 !important;
+    }
+
+    /* BEFORE */
+
+    &:before {
+      content: 'check_box_outline_blank';
+      opacity: 1;
+    }
+
+    /* AFTER */
+
+    &:after {
+      @include color-text ( $checkbox-icon-on-color );
+      content: 'check_box';
+      opacity: 0;
+      z-index: 1;
+    }
+
+    /* CUSTOM BEFORE / AFTER */
+
+    &[data-icon-off]:before {
+      content: attr(data-icon-off);
+    }
+
+    &[data-icon-on]:after {
+      content: attr(data-icon-on);
+    }
+
   }
 
-  /* ICONS */
+  /* INVALID */
 
-  .icons {
+  &.invalid {
 
-    /* ICON */
+    /* INPUT */
 
-    .icon {
+    > input {
 
-      transition: opacity $checkbox-icon-transition-opacity-duration;
+      /* BEFORE / AFTER */
 
-      &.icon-on {
-        @include color-text ( $checkbox-icon-on-color );
-        opacity: 0;
-        z-index: 1;
+      &:before,
+      &:after {
+        color: $color-error !important;
+      }
+
+    }
+
+  }
+
+  /* VALID */
+
+  &.valid {
+
+    /* INPUT */
+
+    > input {
+
+      /* BEFORE / AFTER */
+
+      &:before,
+      &:after {
+        color: $color-success !important;
       }
 
     }
@@ -40,26 +114,30 @@
 
   &.checked {
 
-    /* ICONS */
+    /* INPUT */
 
-    .icons {
+    > input {
 
-      /* ICON */
+      /* BEFORE */
 
-      .icon {
+      &:before {
+        opacity: 0;
+      }
 
-        &.icon-on {
-          opacity: 1;
-        }
+      /* AFTER */
 
-        &.icon-off {
-          opacity: 0;
-        }
-
+      &:after {
+        opacity: 1;
       }
 
     }
 
+  }
+
+  /* ENABLED */
+
+  &:not(.disabled) {
+    cursor: pointer;
   }
 
 }

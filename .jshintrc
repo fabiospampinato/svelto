@@ -4,7 +4,7 @@
   // Enforcing
   "bitwise"       : true,     // true: Prohibit bitwise operators (&, |, ^, etc.)
   "camelcase"     : false,    // true: Identifiers must be in camelCase
-  "curly"         : true,     // true: Require {} for every new block or scope
+  "curly"         : false,    // true: Require {} for every new block or scope
   "eqeqeq"        : true,     // true: Require triple equals (===) for comparison
   "forin"         : true,     // true: Require filtering for..in loops with obj.hasOwnProperty()
   "freeze"        : true,     // true: prohibits overwriting prototypes of native objects such as Array, Date etc.
@@ -40,8 +40,8 @@
   "boss"          : false,     // true: Tolerate assignments where comparisons would be expected
   "debug"         : false,     // true: Allow debugger statements e.g. browser breakpoints.
   "eqnull"        : false,     // true: Tolerate use of `== null`
-  "es5"           : true,      // true: Allow ES5 syntax (ex: getters and setters)
-  "esnext"        : false,     // true: Allow ES.next (ES6) syntax (ex: `const`)
+  "es5"           : false,     // true: Allow ES5 syntax (ex: getters and setters)
+  "esnext"        : true,      // true: Allow ES.next (ES6) syntax (ex: `const`)
   "moz"           : false,     // true: Allow Mozilla specific syntax (extends and overrides esnext features)
   // (ex: `for each`, multiple try/catch, function expression…)
   "evil"          : false,     // true: Tolerate use of `eval` and `new Function()`
@@ -67,7 +67,7 @@
   "browser"       : true,     // Web Browser (window, document, etc)
   "browserify"    : false,    // Browserify (node.js code in the browser)
   "couch"         : false,    // CouchDB
-  "devel"         : true,     // Development/debugging (alert, confirm, etc)
+  "devel"         : false,     // Development/debugging (alert, confirm, etc)
   "dojo"          : false,    // Dojo Toolkit
   "jasmine"       : false,    // Jasmine
   "jquery"        : true,     // jQuery
@@ -87,6 +87,8 @@
 
   // Custom Globals
   "globals"       : {         // additional predefined global variables
-    "_"           : true      // Lodash
+    "_"           : true,     // Lo-dash
+    "Svelto"      : true,     // Svelto global object
+    "Pointer"     : true      // Pointer global object
   }
 }

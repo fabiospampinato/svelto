@@ -38,7 +38,7 @@ table.table.sortable {
 
     &:before,
     &:after {
-      @extend i.icon;
+      @extend %icon;
       position: absolute;
       right: $table-th-sortable-icon-right;
       top: 0;
