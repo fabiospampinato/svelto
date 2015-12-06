@@ -28,7 +28,7 @@
 
   /* INPUT */
 
-  > input {
+  input {
 
     @extend .icons;
     min-height: 0;
@@ -96,7 +96,7 @@
 
     /* INPUT */
 
-    > input {
+    input {
 
       /* BEFORE / AFTER */
 
@@ -115,7 +115,7 @@
 
     /* INPUT */
 
-    > input {
+    input {
 
       /* BEFORE / AFTER */
 
@@ -131,7 +131,15 @@
   /* ENABLED */
 
   &:not(.disabled) {
+
     cursor: pointer;
+
+    /* INPUT */
+
+    input {
+      cursor: pointer;
+    }
+
   }
 
 }

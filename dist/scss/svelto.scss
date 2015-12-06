@@ -6673,7 +6673,7 @@ i.icon {
 
   /* INPUT */
 
-  > input {
+  input {
 
     @extend .icons;
     min-height: 0;
@@ -6741,7 +6741,7 @@ i.icon {
 
     /* INPUT */
 
-    > input {
+    input {
 
       /* BEFORE / AFTER */
 
@@ -6760,7 +6760,7 @@ i.icon {
 
     /* INPUT */
 
-    > input {
+    input {
 
       /* BEFORE / AFTER */
 
@@ -6776,7 +6776,15 @@ i.icon {
   /* ENABLED */
 
   &:not(.disabled) {
+
     cursor: pointer;
+
+    /* INPUT */
+
+    input {
+      cursor: pointer;
+    }
+
   }
 
 }
@@ -10072,7 +10080,7 @@ code[class*='language-'] {
 
   /* INPUT */
 
-  > input {
+  input {
 
     /* BEFORE */
 
