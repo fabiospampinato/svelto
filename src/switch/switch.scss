@@ -6,6 +6,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../widget/widget.scss
+ * @requires ../icons/icons.scss
  * ========================================================================= */
 
 /* SWITCH */
@@ -51,6 +52,8 @@
     transition-property: background-color, transform;
     transition-duration: $switch-transition-all-duration;
 
+    /* BEFORE */
+
     &:before {
       @include fill-absolute ();
       background-color: inherit;
@@ -63,24 +66,24 @@
       transition-duration: $switch-transition-all-duration;
     }
 
-    /* DRAGGING */
+    /* AFTER */
 
-    &.dragging {
-      transition-property: background-color;
-    }
-
-    /* ICON */
-
-    .icon {
+    &:after {
+      @extend %icon;
       position: absolute;
       font-size: $switch-handler-icon-font-size;
       width: $switch-handler-icon-size;
       height: $switch-handler-icon-size;
       line-height: $switch-handler-icon-size;
       text-align: center;
-      transition-property: opacity, color;
+      transition-property: color;
       transition-duration: $switch-transition-all-duration;
-      opacity: 0;
+    }
+
+    /* DRAGGING */
+
+    &.dragging {
+      transition-property: background-color;
     }
 
   }
@@ -111,11 +114,40 @@
 
   }
 
-  /* ICON ON / OFF */
+  /* UNCHECKED */
 
-  &:not(.checked) .icon-off,
-  &.checked .icon-on {
-    opacity: 1 !important;
+  &:not(.checked) {
+
+    /* HANDLER */
+
+    .switch-handler[data-icon-off] {
+
+      /* AFTER */
+
+      &:after {
+        content: attr(data-icon-off);
+      }
+
+    }
+
+  }
+
+  /* CHECKED */
+
+  &.checked {
+
+    /* HANDLER */
+
+    .switch-handler[data-icon-on] {
+
+      /* AFTER */
+
+      &:after {
+        content: attr(data-icon-on);
+      }
+
+    }
+
   }
 
   /* ENABLED */
@@ -128,7 +160,7 @@
 
     .switch-handler {
 
-      cursor: move;
+      cursor: ew-resize;
 
       &:active,
       &.dragging {

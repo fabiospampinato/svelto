@@ -131,7 +131,7 @@
       },
       selectors: {
         element: 'input, textarea, select',
-        wrapper: '.button.checkbox, .button.radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
+        wrapper: '.checkbox, .radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
         submitter: 'input[type="submit"], button[type="submit"]'
       },
       callbacks: {

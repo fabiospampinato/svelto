@@ -10,7 +10,9 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-;(function ( $, window, document, undefined ) {
+//TODO: Add flick support
+
+(function ( $, window, document, undefined ) {
 
   'use strict';
 
