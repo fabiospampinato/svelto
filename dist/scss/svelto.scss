@@ -10073,7 +10073,27 @@ code[class*='language-'] {
 //TODO: Add cooler radio animation, closer to material design
 
 .radio {
+
   @extend .checkbox;
+
+  /* INPUT */
+
+  > input {
+
+    /* BEFORE */
+
+    &:before {
+      content: 'radio_button_unchecked';
+    }
+
+    /* AFTER */
+
+    &:after {
+      content: 'radio_button_checked';
+    }
+
+  }
+
 }
 
 

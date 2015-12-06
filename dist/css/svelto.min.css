@@ -10525,6 +10525,23 @@ code[class*='language-'] .namespace {
  * @requires ../checkbox/checkbox.scss
  * ========================================================================= */
 /* RADIO */
+.radio {
+  /* INPUT */
+}
+
+.radio > input, .radio > textarea {
+  /* BEFORE */
+  /* AFTER */
+}
+
+.radio > input:before, .radio > textarea:before {
+  content: 'radio_button_unchecked';
+}
+
+.radio > input:after, .radio > textarea:after {
+  content: 'radio_button_checked';
+}
+
 /* =========================================================================
  * Svelto - Raisable
  * =========================================================================
