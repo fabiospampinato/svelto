@@ -9,7 +9,6 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-//TODO: Add allignment, that is, if possibile don't center the dropdown but align it to one of the trigger edges
 //FIXME: Big elements gets positionated badly, for example try some tooltips in a small viewport
 
 (function ( $, _, window, document, undefined ) {
@@ -52,6 +51,11 @@
     options = _.merge ({
       direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
       axis: false, //INFO: Set a preferred axis
+      alignment: { //INFO: Set the alignment of the positionable relative to the anchor
+        x: 'center', //INFO: `left, center, right`
+        y: 'center' //INFOL `top, center, bottom`
+      },
+      strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
       $anchor: false, //INFO: Positionate next to an $anchor element
       $pointer: false, //INFO: The element who is pointing to the anchor
       point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
@@ -72,7 +76,7 @@
 
     /* VARIABLES */
 
-    let directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], options.ranks.all ) ),
+    let directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.ranks.all : [] ) ),
         windowWidth = $window.width (),
         windowHeight = $window.height (),
         positionableRect = this.getRect (),
@@ -109,8 +113,12 @@
         let opposite = getOpposite ( directions[index] ),
             oppositeIndex = directions.indexOf ( opposite );
 
-        _.move ( directions, oppositeIndex, 0 );
-        _.move ( spaces, oppositeIndex, 0 );
+        if ( oppositeIndex !== -1 ) {
+
+          _.move ( directions, oppositeIndex, 0 );
+          _.move ( spaces, oppositeIndex, 0 );
+
+        }
 
       }
 
@@ -138,42 +146,73 @@
 
     let bestIndex = areas.indexOf ( _.max ( areas ) ),
         bestDirection = directions[bestIndex],
-        coordinates;
+        coordinates = {};
 
     /* TOP / LEFT */
 
     switch ( bestDirection ) {
 
       case 'top':
+        coordinates.top = anchorRect.top - positionableRect.height - options.spacing;
+        break;
+
       case 'bottom':
-        coordinates = {
-          top: ( bestDirection === 'top' ) ? anchorRect.top - positionableRect.height - options.spacing : anchorRect.bottom + options.spacing,
-          left: anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 )
-        };
+        coordinates.top = anchorRect.bottom + options.spacing;
+        break;
+
+      case 'left':
+        coordinates.left = anchorRect.left - positionableRect.width - options.spacing;
+        break;
+
+      case 'right':
+        coordinates.left = anchorRect.right + options.spacing;
+        break;
+
+    }
+
+    switch ( bestDirection ) {
+
+      case 'top':
+      case 'bottom':
+        switch ( options.alignment.x ) {
+          case 'left':
+            coordinates.left = anchorRect.left;
+            break;
+          case 'center':
+            coordinates.left = anchorRect.left + ( anchorRect.width / 2 ) - ( positionableRect.width / 2 );
+            break;
+          case 'right':
+            coordinates.left = anchorRect.right - positionableRect.width;
+            break;
+        }
         break;
 
       case 'left':
       case 'right':
-        coordinates = {
-          top: anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 ),
-          left: ( bestDirection === 'left' ) ? anchorRect.left - positionableRect.width - options.spacing : anchorRect.right + options.spacing
-        };
+        switch ( options.alignment.y ) {
+          case 'top':
+            coordinates.top = anchorRect.top;
+            break;
+          case 'center':
+            coordinates.top = anchorRect.top + ( anchorRect.height / 2 ) - ( positionableRect.height / 2 );
+            break;
+          case 'bottom':
+            coordinates.top = anchorRect.bottom - positionableRect.height;
+            break;
+        }
+        break;
 
     }
 
     /* CONSTRAIN TO THE WINDOW */
 
-    if ( options.$anchor ) {
+    let oppositeSpace = spaces[bestIndex],
+        isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
 
-      let oppositeSpace = spaces[bestIndex],
-          isAnchorVisible = isVertical ( bestDirection ) ? oppositeSpace <= windowHeight : oppositeSpace <= windowWidth;
+    if ( isAnchorVisible ) {
 
-      if ( isAnchorVisible ) {
-
-        coordinates.top = _.clamp ( options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing );
-        coordinates.left = _.clamp ( options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing );
-
-      }
+      coordinates.top = _.clamp ( options.spacing, coordinates.top, windowHeight - positionableRect.height - options.spacing );
+      coordinates.left = _.clamp ( options.spacing, coordinates.left, windowWidth - positionableRect.width - options.spacing );
 
     }
 
@@ -187,31 +226,24 @@
 
     /* POINTER TOP / LEFT */
 
-    let $pointer,
-        translateType,
+    let translateType,
         translateValue;
 
     if ( options.$anchor && options.$pointer ) {
 
-      $pointer = _.isFunction ( options.$pointer ) ? options.$pointer ( datas ) : options.$pointer;
+      switch ( bestDirection ) {
 
-      if ( $pointer instanceof $ ) {
+        case 'top':
+        case 'bottom':
+          translateType = 'translateX';
+          translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
+          break;
 
-        switch ( bestDirection ) {
-
-          case 'top':
-          case 'bottom':
-            translateType = 'translateX',
-            translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
-            break;
-
-          case 'left':
-          case 'right':
-            translateType = 'translateY',
-            translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
-            break;
-
-        }
+        case 'left':
+        case 'right':
+          translateType = 'translateY';
+          translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
+          break;
 
       }
 
@@ -223,15 +255,17 @@
 
     this.addClass ( 'positionate-' + bestDirection );
 
-    if ( options.$anchor && options.$pointer && $pointer instanceof $ ) {
+    if ( options.$anchor && options.$pointer ) {
 
-      $pointer[translateType] ( translateValue );
+      options.$pointer[translateType] ( translateValue );
 
     }
 
     /* CALLBACK */
 
     options.callbacks.change ( datas );
+
+    /* RETURN */
 
     return this;
 

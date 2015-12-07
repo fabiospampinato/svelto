@@ -30,7 +30,7 @@
     name: 'draggable',
     selector: '.draggable',
     options: {
-      draggable: _.true, //INFO: Checks if we can drag it or not
+      draggable: () => true, //INFO: Checks if we can drag it or not
       onlyHandlers: false, //INFO: Only an handler can drag it around
       revertable: false, //INFO: On dragend take it back to the starting position
       axis: false, //INFO: Limit the movements to this axis
@@ -45,8 +45,8 @@
         }
       },
       modifiers: { //INFO: It can modify the setted X and Y transforms values
-        x: _.true,
-        y: _.true
+        x: () => true,
+        y: () => true
       },
       classes: {
         dragging: 'dragging'

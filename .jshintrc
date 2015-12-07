@@ -89,6 +89,12 @@
   "globals"       : {         // additional predefined global variables
     "_"           : true,     // Lo-dash
     "Svelto"      : true,     // Svelto global object
-    "Pointer"     : true      // Pointer global object
+    "Pointer"     : true,     // Pointer global object
+    "$window"     : true,     // jQuery-extras' global
+    "$document"   : true,     // jQuery-extras' global
+    "$html"       : true,     // jQuery-extras' global
+    "$head"       : true,     // jQuery-extras' global
+    "$body"       : true,     // jQuery-extras' global
+    "$empty"      : true      // jQuery-extras' global
   }
 }

@@ -2209,7 +2209,7 @@ _:-ms-input-placeholder, :root #content {
 }
 
 .dragging {
-  z-index: 1000000;
+  z-index: 1000000 !important;
 }
 
 .centered:not(.multiple) {

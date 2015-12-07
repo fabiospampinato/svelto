@@ -106,7 +106,7 @@
 
       for ( let search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-        for ( let str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
+        for ( var str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
 
           if ( str[str_i] === search[search_i] ) {
 
@@ -259,19 +259,7 @@
 
       return number - left + ( left >= halfStep ? step : 0 );
 
-    },
-
-    /**
-     * Returns true
-     */
-
-    true: _.constant ( true ),
-
-    /**
-     * Returns false
-     */
-
-    false: _.constant ( false )
+    }
 
   });
 
