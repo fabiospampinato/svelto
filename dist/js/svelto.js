@@ -4979,10 +4979,6 @@
   Svelto.Toggler = Toggler;
   Svelto.Toggler.config = config;
 
-  /* FACTORY */
-
-  $.factory ( Svelto.Toggler );
-
 }( Svelto.$, Svelto._, window, document ));
 
 
