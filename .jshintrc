@@ -90,6 +90,7 @@
     "_"           : true,     // Lo-dash
     "Svelto"      : true,     // Svelto global object
     "Pointer"     : true,     // Pointer global object
+    "Widgetize"   : true,     // Widgetize global object
     "$window"     : true,     // jQuery-extras' global
     "$document"   : true,     // jQuery-extras' global
     "$html"       : true,     // jQuery-extras' global

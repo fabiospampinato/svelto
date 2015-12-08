@@ -1540,7 +1540,11 @@
 
     /* WIDGETIZE */
 
-    Widgetize.add ( Widget.config.selector, Widget.prototype._widgetize.bind ( Widget.config ) ); //FIXME: Make it static instead of using `.bind ()`, that would be better
+    if ( Widget.config.selector ) {
+
+      Widgetize.add ( Widget.config.selector, Widget.prototype._widgetize.bind ( Widget.config ) ); //FIXME: Make it static instead of using `.bind ()`, that would be better
+
+    }
 
     /* BRIDGE */
 
@@ -9267,6 +9271,7 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
+//TODO: Add an input field for searching through the options
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 //FIXME: It shouldn't select the first one if none of them is selected
 

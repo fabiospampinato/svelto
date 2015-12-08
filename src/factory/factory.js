@@ -22,7 +22,11 @@
 
     /* WIDGETIZE */
 
-    Widgetize.add ( Widget.config.selector, Widget.prototype._widgetize.bind ( Widget.config ) ); //FIXME: Make it static instead of using `.bind ()`, that would be better
+    if ( Widget.config.selector ) {
+
+      Widgetize.add ( Widget.config.selector, Widget.prototype._widgetize.bind ( Widget.config ) ); //FIXME: Make it static instead of using `.bind ()`, that would be better
+
+    }
 
     /* BRIDGE */
 
