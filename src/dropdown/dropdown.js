@@ -29,13 +29,6 @@
     name: 'dropdown',
     selector: '.dropdown',
     options: {
-      hover: {
-        triggerable: false,
-        delays: {
-          open: 750,
-          close: 250
-        }
-      },
       spacing: {
         attached: 0,
         noTip: 7,
@@ -91,109 +84,6 @@
 
       // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
-      /* HOVER */
-
-      if ( this.options.hover.triggerable ) {
-
-        this._on ( this.$triggers, Pointer.enter, this.__hoverTriggerEnter );
-
-      }
-
-    }
-
-    /* HOVER */
-
-    __hoverTriggerEnter ( event ) {
-
-      if ( !this._isOpen ) {
-
-        this._isHoverOpen = false;
-        this._hoverTrigger = event.currentTarget;
-
-        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
-
-        this._one ( $(event.currentTarget), Pointer.leave, this.__hoverTriggerLeave );
-
-      }
-
-    }
-
-    __hoverOpen () {
-
-      if ( !this._isOpen ) {
-
-        this.open ( false, this._hoverTrigger );
-
-        this._isHoverOpen = true;
-
-        this._hoverOpenTimeout = false;
-
-      }
-
-    }
-
-    __hoverTriggerLeave ( event ) {
-
-      if ( this._hoverOpenTimeout ) {
-
-        clearTimeout ( this._hoverOpenTimeout );
-
-        this._hoverOpenTimeout = false;
-
-      }
-
-      if ( this._isHoverOpen ) {
-
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
-        this._on ( Pointer.enter, this.__hoverDropdownEnter );
-
-      }
-
-    }
-
-    __hoverClose () {
-
-      if ( this._isHoverOpen ) {
-
-        this.close ();
-
-        this._isHoverOpen = false;
-
-        this._hoverCloseTimeout = false;
-
-      }
-
-      this._off ( Pointer.enter, this.__hoverDropdownEnter );
-
-    }
-
-    __hoverDropdownEnter () {
-
-      if ( this._hoverCloseTimeout ) {
-
-        clearTimeout ( this._hoverCloseTimeout );
-
-        this._hoverCloseTimeout = false;
-
-      }
-
-      if ( this._isHoverOpen ) {
-
-        this._one ( Pointer.leave, this.__hoverDropdownLeave );
-
-      }
-
-    }
-
-    __hoverDropdownLeave () {
-
-      if ( this._isHoverOpen ) {
-
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
-      }
-
     }
 
     /* WINDOW RESIZE / SCROLL */
@@ -226,6 +116,8 @@
 
     __windowTap ( event ) {
 
+      //TODO: Use $.touching instead
+
       let eventXY = $.eventXY ( event ),
           rect = this.$dropdown.getRect ();
 
@@ -245,8 +137,7 @@
 
       var $trigger = $(assignments[this.id]),
           $mockTip = $('<div>'),
-          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
-          self = this;
+          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached;
 
       /* POSITIONATE */
 
@@ -265,7 +156,7 @@
 
       if ( !noTip ) {
 
-        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: A bit to hacky, expecially that `rotate(45deg)`
+        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
@@ -287,7 +178,7 @@
 
     isOpen () {
 
-      return this._isOpen
+      return this._isOpen;
 
     }
 

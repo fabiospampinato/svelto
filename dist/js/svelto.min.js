@@ -98,7 +98,7 @@
 
   if ( !Svelto._ ) {
 
-    throw 'Svelto depends upon lo-dash, dependency unmet.'
+    throw 'Svelto depends upon lo-dash, dependency unmet.';
 
   }
 
@@ -4548,13 +4548,6 @@
     name: 'dropdown',
     selector: '.dropdown',
     options: {
-      hover: {
-        triggerable: false,
-        delays: {
-          open: 750,
-          close: 250
-        }
-      },
       spacing: {
         attached: 0,
         noTip: 7,
@@ -4610,109 +4603,6 @@
 
       // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
 
-      /* HOVER */
-
-      if ( this.options.hover.triggerable ) {
-
-        this._on ( this.$triggers, Pointer.enter, this.__hoverTriggerEnter );
-
-      }
-
-    }
-
-    /* HOVER */
-
-    __hoverTriggerEnter ( event ) {
-
-      if ( !this._isOpen ) {
-
-        this._isHoverOpen = false;
-        this._hoverTrigger = event.currentTarget;
-
-        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
-
-        this._one ( $(event.currentTarget), Pointer.leave, this.__hoverTriggerLeave );
-
-      }
-
-    }
-
-    __hoverOpen () {
-
-      if ( !this._isOpen ) {
-
-        this.open ( false, this._hoverTrigger );
-
-        this._isHoverOpen = true;
-
-        this._hoverOpenTimeout = false;
-
-      }
-
-    }
-
-    __hoverTriggerLeave ( event ) {
-
-      if ( this._hoverOpenTimeout ) {
-
-        clearTimeout ( this._hoverOpenTimeout );
-
-        this._hoverOpenTimeout = false;
-
-      }
-
-      if ( this._isHoverOpen ) {
-
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
-        this._on ( Pointer.enter, this.__hoverDropdownEnter );
-
-      }
-
-    }
-
-    __hoverClose () {
-
-      if ( this._isHoverOpen ) {
-
-        this.close ();
-
-        this._isHoverOpen = false;
-
-        this._hoverCloseTimeout = false;
-
-      }
-
-      this._off ( Pointer.enter, this.__hoverDropdownEnter );
-
-    }
-
-    __hoverDropdownEnter () {
-
-      if ( this._hoverCloseTimeout ) {
-
-        clearTimeout ( this._hoverCloseTimeout );
-
-        this._hoverCloseTimeout = false;
-
-      }
-
-      if ( this._isHoverOpen ) {
-
-        this._one ( Pointer.leave, this.__hoverDropdownLeave );
-
-      }
-
-    }
-
-    __hoverDropdownLeave () {
-
-      if ( this._isHoverOpen ) {
-
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
-      }
-
     }
 
     /* WINDOW RESIZE / SCROLL */
@@ -4745,6 +4635,8 @@
 
     __windowTap ( event ) {
 
+      //TODO: Use $.touching instead
+
       let eventXY = $.eventXY ( event ),
           rect = this.$dropdown.getRect ();
 
@@ -4764,8 +4656,7 @@
 
       var $trigger = $(assignments[this.id]),
           $mockTip = $('<div>'),
-          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
-          self = this;
+          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached;
 
       /* POSITIONATE */
 
@@ -4784,7 +4675,7 @@
 
       if ( !noTip ) {
 
-        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: A bit to hacky, expecially that `rotate(45deg)`
+        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
@@ -4806,7 +4697,7 @@
 
     isOpen () {
 
-      return this._isOpen
+      return this._isOpen;
 
     }
 
@@ -4921,6 +4812,8 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//TODO: Detect the widget in use, not add the extra property -> no need to extend it every time and no need for the extra .widget-toggler class
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -4931,7 +4824,14 @@
     name: 'toggler',
     selector: undefined,
     options: {
-      widget: false,
+      widget: false, //INFO: The widget class to toggle
+      hover: {
+        triggerable: false,
+        delays: {
+          open: 750,
+          close: 250
+        }
+      },
       datas: {
         target: 'target'
       }
@@ -4946,6 +4846,7 @@
 
     _variables () {
 
+      this.toggler = this.element;
       this.$toggler = this.$element;
 
       this.targetSelector = this.$toggler.data ( this.options.datas.target );
@@ -4961,6 +4862,120 @@
       /* TAP */
 
       this._on ( Pointer.tap, this.toggle );
+
+      /* HOVER */
+
+      if ( this.options.hover.triggerable ) {
+
+        this._on ( Pointer.enter, this.__hoverEnter );
+
+      }
+
+    }
+
+    /* HOVER */
+
+    __hoverEnter () {
+
+      if ( !this.isOpen () ) {
+
+        this._isHoverOpen = false;
+
+        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+
+      } else if ( this._isHoverOpen ) {
+
+        if ( this._hoverCloseTimeout ) {
+
+          clearTimeout ( this._hoverCloseTimeout );
+
+          this._hoverCloseTimeout = false;
+
+        }
+
+        this._one ( Pointer.leave, this.__hoverLeave );
+
+      }
+
+    }
+
+    __hoverOpen () {
+
+      if ( !this.isOpen () ) {
+
+        this.open ( this.toggler );
+
+        this._isHoverOpen = true;
+
+      }
+
+      this._hoverOpenTimeout = false;
+
+    }
+
+    __hoverLeave  () {
+
+      if ( this._hoverOpenTimeout ) {
+
+        clearTimeout ( this._hoverOpenTimeout );
+
+        this._hoverOpenTimeout = false;
+
+      }
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+        this._one ( this.$target, Pointer.enter, this.__hoverTargetEnter );
+
+      }
+
+    }
+
+    __hoverClose () {
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this.close ();
+
+      }
+
+      this._isHoverOpen = false;
+
+      this._hoverCloseTimeout = false;
+
+      this._off ( this.$target, Pointer.enter, this.__hoverTargetEnter );
+
+    }
+
+    __hoverTargetEnter () {
+
+      if ( this._hoverCloseTimeout ) {
+
+        clearTimeout ( this._hoverCloseTimeout );
+
+        this._hoverCloseTimeout = false;
+
+      }
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this._one ( this.$target, Pointer.leave, this.__hoverTargetLeave );
+
+      }
+
+    }
+
+    __hoverTargetLeave () {
+
+      if ( this.isOpen () && this._isHoverOpen ) {
+
+        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
+
+        this._one ( this.$target, Pointer.enter, this.__hoverTargetEnter );
+
+      }
 
     }
 
@@ -12127,9 +12142,6 @@ Prism.languages.js = Prism.languages.javascript;
     name: 'tooltip',
     selector: '.tooltip',
     options: {
-      hover: {
-        triggerable: true
-      },
       selectors: {
         closer: '.button, .tooltip-closer'
       }
@@ -12172,7 +12184,10 @@ Prism.languages.js = Prism.languages.javascript;
     name: 'tooltipToggler',
     selector: '.tooltip-toggler',
     options: {
-      widget: Svelto.Tooltip
+      widget: Svelto.Tooltip,
+      hover: {
+        triggerable: true
+      }
     }
   };
 

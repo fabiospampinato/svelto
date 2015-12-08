@@ -98,7 +98,7 @@
 
   if ( !Svelto._ ) {
 
-    throw 'Svelto depends upon lo-dash, dependency unmet.'
+    throw 'Svelto depends upon lo-dash, dependency unmet.';
 
   }
 

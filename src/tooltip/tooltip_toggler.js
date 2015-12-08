@@ -19,7 +19,10 @@
     name: 'tooltipToggler',
     selector: '.tooltip-toggler',
     options: {
-      widget: Svelto.Tooltip
+      widget: Svelto.Tooltip,
+      hover: {
+        triggerable: true
+      }
     }
   };
 

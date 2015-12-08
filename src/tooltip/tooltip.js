@@ -18,9 +18,6 @@
     name: 'tooltip',
     selector: '.tooltip',
     options: {
-      hover: {
-        triggerable: true
-      },
       selectors: {
         closer: '.button, .tooltip-closer'
       }
