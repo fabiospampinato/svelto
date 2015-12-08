@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Detect the widget in use, not add the extra property -> no need to extend it every time and no need for the extra .widget-toggler class
+//FIXME: Hover open, enter the dropdown and click it, it gets closed...
 
 (function ( $, _, window, document, undefined ) {
 
@@ -49,7 +50,7 @@
 
       this.$target = $(this.targetSelector);
 
-      this.instance = this.$target[this.options.widget.config.name]( 'instance' );
+      this._instance = this.$target[this.options.widget.config.name]( 'instance' );
 
     }
 
@@ -57,7 +58,11 @@
 
       /* TAP */
 
-      this._on ( Pointer.tap, this.toggle );
+      this._on ( Pointer.tap, function ( event ) {
+
+        return this._instance.toggle ( undefined, this.toggler, event );
+
+      });
 
       /* HOVER */
 
@@ -73,11 +78,13 @@
 
     __hoverEnter () {
 
-      if ( !this.isOpen () ) {
+      if ( !this._instance.isOpen () ) {
 
         this._isHoverOpen = false;
 
         this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
+
+        this._one ( Pointer.leave, this.__hoverLeave );
 
       } else if ( this._isHoverOpen ) {
 
@@ -97,9 +104,9 @@
 
     __hoverOpen () {
 
-      if ( !this.isOpen () ) {
+      if ( !this._instance.isOpen () ) {
 
-        this.open ( this.toggler );
+        this._instance.open ( this.toggler );
 
         this._isHoverOpen = true;
 
@@ -119,7 +126,7 @@
 
       }
 
-      if ( this.isOpen () && this._isHoverOpen ) {
+      if ( this._instance.isOpen () && this._isHoverOpen ) {
 
         this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
@@ -131,9 +138,9 @@
 
     __hoverClose () {
 
-      if ( this.isOpen () && this._isHoverOpen ) {
+      if ( this._instance.isOpen () && this._isHoverOpen ) {
 
-        this.close ();
+        this._instance.close ( this.toggler );
 
       }
 
@@ -155,7 +162,7 @@
 
       }
 
-      if ( this.isOpen () && this._isHoverOpen ) {
+      if ( this._instance.isOpen () && this._isHoverOpen ) {
 
         this._one ( this.$target, Pointer.leave, this.__hoverTargetLeave );
 
@@ -165,7 +172,7 @@
 
     __hoverTargetLeave () {
 
-      if ( this.isOpen () && this._isHoverOpen ) {
+      if ( this._instance.isOpen () && this._isHoverOpen ) {
 
         this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
 
@@ -179,7 +186,7 @@
 
     toggle ( force ) {
 
-      return this.instance.toggle ( force );
+      return this._instance.toggle ( force, this.toggler );
 
     }
 

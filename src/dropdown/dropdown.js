@@ -10,10 +10,6 @@
  * @requires ../pseudo_css/pseudo_css.js
  * ========================================================================= */
 
-//TODO: Add support for delegating the trigger click, so that we support the case when a trigger has been added to the DOM dynamically
-
-//FIXME: Hover open, enter the dropdown and click it, it gets closed...
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -21,7 +17,7 @@
   /* VARIABLES */
 
   let assignments = {},
-      openedNr = 0;
+      prevAssignments = {};
 
   /* CONFIG */
 
@@ -29,6 +25,7 @@
     name: 'dropdown',
     selector: '.dropdown',
     options: {
+      positionate: {}, //INFO: Overriding `$.positionate` options
       spacing: {
         attached: 0,
         noTip: 7,
@@ -67,7 +64,13 @@
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
-      this.id = this.$dropdown.attr ( 'id' ); //FIXME: Remove this requirement
+      this.$mockTip = $('<div>');
+
+      this.$dropdownParents = this.$dropdown.parents ();
+      this.$togglerParents = $empty;
+
+      this.guc = 'dropdown-' + this.guid;
+      this.$dropdown.addClass ( this.guc );
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
@@ -82,21 +85,19 @@
 
       this._on ( this.$closers, Pointer.tap, this.close );
 
-      // this.$btn_parents.on ( 'scroll', this.update ); //FIXME: If we are doing it into a scrollable content it will be a problem if we don't handle it, the dropdown will not move
-
     }
 
     /* WINDOW RESIZE / SCROLL */
 
-    _bindWindowResizeScroll () {
+    _bindParentsResizeScroll () {
 
-      this._on ( $window, 'resize scroll', this._update );
+      this._on ( this.$dropdownParents.add ( this.$togglerParents ), 'resize scroll', this._repositionate );
 
     }
 
-    _unbindWindowResizeScroll () {
+    _unbindParentsResizeScroll () {
 
-      this._off ( $window, 'resize scroll', this._update );
+      this._off ( this.$dropdownParents.add ( this.$togglerParents ), 'resize scroll', this._repositionate );
 
     }
 
@@ -116,14 +117,15 @@
 
     __windowTap ( event ) {
 
-      //TODO: Use $.touching instead
+      console.log("window tap for:",this.element);
 
-      let eventXY = $.eventXY ( event ),
-          rect = this.$dropdown.getRect ();
+      if ( this._isOpen && event !== this._toggleEvent ) {
 
-      if ( eventXY.X < rect.left || eventXY.X > rect.right || eventXY.Y < rect.top || eventXY.Y > rect.bottom ) {
+        if ( this.$dropdown.touching ({ point: $.eventXY ( event )} ).length === 0 ) {
 
-        this.close ();
+          this.close ();
+
+        }
 
       }
 
@@ -135,36 +137,33 @@
 
       /* VARIABLES */
 
-      var $trigger = $(assignments[this.id]),
-          $mockTip = $('<div>'),
-          noTip = $trigger.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached;
+      var $toggler = assignments[this.guid],
+          noTip = $toggler.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached;
 
       /* POSITIONATE */
 
-      this.$dropdown.positionate ({
-        $anchor: $trigger,
-        $pointer: noTip ? false : $mockTip,
+      this.$dropdown.positionate ( _.extend ( {}, this.options.positionate, {
+        $anchor: $toggler,
+        $pointer: noTip ? false : this.$mockTip,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
           change ( data ) {
-            $trigger.addClass ( 'dropdown-toggler-' + data.direction );
+            $toggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' ).addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
-      });
+      }));
 
       /* MOCK TIP */
 
       if ( !noTip ) {
 
-        $.pseudoCSS ( '#' + this.id + ':before', $mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg)' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
+        $.pseudoCSS ( '.' + this.guc + ':before', this.$mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
     }
 
-    /* PRIVATE */
-
-    _update () {
+    _repositionate () {
 
       if ( this._isOpen ) {
 
@@ -182,33 +181,49 @@
 
     }
 
-    toggle ( event ) {
+    toggle ( force, toggler, event ) {
 
-      this[( this._isOpen && assignments[this.id] === event.currentTarget ) ? 'close' : 'open']( event, event.currentTarget );
+      this._toggleEvent = event;
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = toggler && assignments[this.guid] && assignments[this.guid][0] !== toggler ? true : !this._isOpen;
+
+      }
+
+      this[force ? 'open' : 'close']( toggler );
 
     }
 
-    open ( event, trigger ) {
+    open ( toggler ) {
 
-      if ( !this._isOpen ) {
+      //FIXME: Add support for opening relative to a point
 
-        trigger = trigger || event.currentTarget;
+      if ( !toggler && prevAssignments[this.guid] ) {
 
-        if ( trigger ) {
+        toggler = prevAssignments[this.guid][0];
 
-          $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
+      }
 
-          if ( this._isOpen && assignments[this.id] !== trigger ) {
+      if ( !this._isOpen || !assignments[this.guid] && toggler || assignments[this.guid][0] !== toggler ) {
+
+        if ( assignments[this.guid] ) {
+
+          prevAssignments[this.guid] = assignments[this.guid];
+
+          prevAssignments[this.guid].removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+
+          if ( this._isOpen ) {
 
             this.$dropdown.addClass ( this.options.classes.moving );
 
           }
 
-          assignments[this.id] = trigger;
-
-          $(trigger).addClass ( this.options.classes.open );
-
         }
+
+        let $toggler = $(toggler);
+
+        assignments[this.guid] = $toggler;
 
         this._trigger ( 'beforeopen' );
 
@@ -222,12 +237,27 @@
 
         });
 
+        if ( prevAssignments[this.guid] !== assignments[this.guid] ) {
+
+          if ( this._isOpen ) {
+
+            this._unbindParentsResizeScroll ();
+
+          }
+
+          this.$togglerParents = $toggler.parents ();
+
+          this._bindParentsResizeScroll ();
+
+        }
+
+        if ( !this._isOpen ) {
+
+          this._delay ( this._bindWindowTap );
+
+        }
+
         this._isOpen = true;
-
-        openedNr += 1;
-
-        this._delay ( this._bindWindowTap ); //FIXME: Why without the delay it doesn't work?
-        this._bindWindowResizeScroll ();
 
         this._trigger ( 'open' );
 
@@ -239,7 +269,11 @@
 
       if ( this._isOpen ) {
 
-        $(assignments[this.id]).removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right ' + this.options.classes.open );
+        prevAssignments[this.guid] = assignments[this.guid];
+
+        prevAssignments[this.guid].removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+
+        delete assignments[this.guid];
 
         this._frame ( function () {
 
@@ -253,16 +287,11 @@
 
         });
 
+        this._unbindParentsResizeScroll ();
+
+        this._unbindWindowTap ();
+
         this._isOpen = false;
-
-        openedNr -= 1;
-
-        if ( openedNr === 0 ) {
-
-          this._unbindWindowTap ();
-          this._unbindWindowResizeScroll ();
-
-        }
 
         this._trigger ( 'close' );
 

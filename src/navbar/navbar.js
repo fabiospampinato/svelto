@@ -192,31 +192,35 @@
 
       if ( force !== this._isOpen ) {
 
-        if ( force === true ) {
-
-          this.$navbar.addClass ( this.options.classes.show );
-
-        }
-
         this._frame ( function () {
 
-          this._isOpen = force;
+          if ( force === true ) {
 
-          this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
-
-          if ( !this._isOpen ) {
-
-            this._delay ( function () {
-
-              this.$navbar.removeClass ( this.options.classes.show );
-
-            }, this.options.animations.close );
+            this.$navbar.addClass ( this.options.classes.show );
 
           }
 
-          $body[this._isOpen ? 'unscrollable' : 'scrollable']();
+          this._frame ( function () {
 
-          this._trigger ( this._isOpen ? 'open' : 'close' );
+            this._isOpen = force;
+
+            this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
+
+            if ( !this._isOpen ) {
+
+              this._delay ( function () {
+
+                this.$navbar.removeClass ( this.options.classes.show );
+
+              }, this.options.animations.close );
+
+            }
+
+            $body[this._isOpen ? 'unscrollable' : 'scrollable']();
+
+            this._trigger ( this._isOpen ? 'open' : 'close' );
+
+          });
 
         });
 

@@ -110,33 +110,37 @@
 
       if ( force !== this._isOpen ) {
 
-        if ( force === true ) {
-
-          this.$modal.addClass ( this.options.classes.show );
-
-        }
-
         this._frame ( function () {
 
-          this._isOpen = force;
+          if ( force === true ) {
 
-          this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
-
-          if ( !this._isOpen ) {
-
-            this._delay ( function () {
-
-              this.$modal.removeClass ( this.options.classes.show );
-
-            }, this.options.animations.close );
+            this.$modal.addClass ( this.options.classes.show );
 
           }
 
-          this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
+          this._frame ( function () {
 
-          $body[this._isOpen ? 'unscrollable' : 'scrollable']();
+            this._isOpen = force;
 
-          this._trigger ( this._isOpen ? 'open' : 'close' );
+            this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
+
+            if ( !this._isOpen ) {
+
+              this._delay ( function () {
+
+                this.$modal.removeClass ( this.options.classes.show );
+
+              }, this.options.animations.close );
+
+            }
+
+            this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
+
+            $body[this._isOpen ? 'unscrollable' : 'scrollable']();
+
+            this._trigger ( this._isOpen ? 'open' : 'close' );
+
+          });
 
         });
 

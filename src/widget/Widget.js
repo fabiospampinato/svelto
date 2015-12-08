@@ -337,6 +337,10 @@
 
       handlerProxy.guid = handler.guid = ( handler.guid || $.guid++ );
 
+      /* EVENTS NAMESPACING */
+
+      events = events.split ( /\s+/ ).map ( event => event + '.swns' + this.guid ).join ( ' ' );
+
       /* TRIGGERING */
 
       $element[onlyOne ? 'one' : 'on'] ( events, selector, handlerProxy );
@@ -376,6 +380,10 @@
         $element = this.$element;
 
       }
+
+      /* EVENTS NAMESPACING */
+
+      events = events.split ( /\s+/ ).map ( event => event + '.swns' + this.guid ).join ( ' ' );
 
       /* REMOVING HANDLER */
 
