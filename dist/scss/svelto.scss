@@ -480,7 +480,7 @@ $body-color: 'base' !default;
 /* MAIN HEADER */
 
 $main-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
-$main-header-fixed-z-index: 300 !default;
+$main-header-fixed-z-index: 200 !default;
 
 
 /* =========================================================================
@@ -731,11 +731,11 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
 /* DROPDOWN */
 
-$dropdown-z-index: 200 !default;
+$dropdown-z-index: 300 !default;
 $dropdown-z-depth: 4 !default;
 
 $dropdown-max-width: 70vw !default;
-$dropdown-max-height: 40vh !default;
+$dropdown-max-height: 60vh !default;
 
 /* TIP */
 
@@ -6678,6 +6678,7 @@ i.icon {
   input {
 
     @extend .icons;
+    flex-grow: 0;
     min-height: 0;
     background-color: transparent;
 
@@ -10443,9 +10444,9 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
  * @requires ../input/input.scss
  * ========================================================================= */
 
-/* SELECT BTN */
+/* SELECT TOGGLER */
 
-.select-btn {
+.select-toggler {
 
   /* DEFAULT SELECT */
 
@@ -10459,7 +10460,8 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
     display: inline-block;
 
-    &.right:before, &.left:before {
+    &.right:before,
+    &.left:before {
       content: '\a0'; // &nbsp;
     }
 

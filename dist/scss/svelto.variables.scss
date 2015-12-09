@@ -480,7 +480,7 @@ $body-color: 'base' !default;
 /* MAIN HEADER */
 
 $main-header-height: 56px !default; //FIXME: Shouldn't exist, or should be calculated automatically
-$main-header-fixed-z-index: 300 !default;
+$main-header-fixed-z-index: 200 !default;
 
 
 /* =========================================================================
@@ -731,11 +731,11 @@ $carousel-fade-transition-opacity-duration: $transition-duration-normal !default
 
 /* DROPDOWN */
 
-$dropdown-z-index: 200 !default;
+$dropdown-z-index: 300 !default;
 $dropdown-z-depth: 4 !default;
 
 $dropdown-max-width: 70vw !default;
-$dropdown-max-height: 40vh !default;
+$dropdown-max-height: 60vh !default;
 
 /* TIP */
 

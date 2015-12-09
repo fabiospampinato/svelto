@@ -64,9 +64,7 @@
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
-      this.$mockTip = $('<div>');
-
-      this.$dropdownParents = this.$dropdown.parents ();
+      this.$dropdownParents = this.$dropdown.parents ().add ( $window );
       this.$togglerParents = $empty;
 
       this.guc = 'dropdown-' + this.guid;
@@ -117,8 +115,6 @@
 
     __windowTap ( event ) {
 
-      console.log("window tap for:",this.element);
-
       if ( this._isOpen && event !== this._toggleEvent ) {
 
         if ( this.$dropdown.touching ({ point: $.eventXY ( event )} ).length === 0 ) {
@@ -137,14 +133,15 @@
 
       /* VARIABLES */
 
-      var $toggler = assignments[this.guid],
-          noTip = $toggler.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached;
+      let $toggler = assignments[this.guid],
+          noTip = $toggler.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
+          $pointer = noTip ? false : $('<div>');
 
       /* POSITIONATE */
 
       this.$dropdown.positionate ( _.extend ( {}, this.options.positionate, {
         $anchor: $toggler,
-        $pointer: noTip ? false : this.$mockTip,
+        $pointer: $pointer,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
         callbacks: {
           change ( data ) {
@@ -157,7 +154,7 @@
 
       if ( !noTip ) {
 
-        $.pseudoCSS ( '.' + this.guc + ':before', this.$mockTip.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
+        $.pseudoCSS ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 

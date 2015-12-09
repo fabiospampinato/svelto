@@ -218,7 +218,7 @@
 
     /* DATAS */
 
-    let datas = {
+    let data = {
       coordinates: coordinates,
       direction: bestDirection,
       oppositeDirection: getOpposite ( bestDirection )
@@ -263,7 +263,7 @@
 
     /* CALLBACK */
 
-    options.callbacks.change ( datas );
+    options.callbacks.change ( data );
 
     /* RETURN */
 

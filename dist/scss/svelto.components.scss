@@ -2710,6 +2710,7 @@ i.icon {
   input {
 
     @extend .icons;
+    flex-grow: 0;
     min-height: 0;
     background-color: transparent;
 
@@ -6475,9 +6476,9 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
  * @requires ../input/input.scss
  * ========================================================================= */
 
-/* SELECT BTN */
+/* SELECT TOGGLER */
 
-.select-btn {
+.select-toggler {
 
   /* DEFAULT SELECT */
 
@@ -6491,7 +6492,8 @@ a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
 
     display: inline-block;
 
-    &.right:before, &.left:before {
+    &.right:before,
+    &.left:before {
       content: '\a0'; // &nbsp;
     }
 

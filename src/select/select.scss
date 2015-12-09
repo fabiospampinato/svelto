@@ -9,9 +9,9 @@
  * @requires ../input/input.scss
  * ========================================================================= */
 
-/* SELECT BTN */
+/* SELECT TOGGLER */
 
-.select-btn {
+.select-toggler {
 
   /* DEFAULT SELECT */
 
@@ -25,7 +25,8 @@
 
     display: inline-block;
 
-    &.right:before, &.left:before {
+    &.right:before,
+    &.left:before {
       content: '\a0'; // &nbsp;
     }
 

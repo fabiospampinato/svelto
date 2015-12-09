@@ -235,7 +235,7 @@
 
       if ( !this.options.persistent ) {
 
-        this._on ( $window, 'route', function ( event, data ) {
+        this._on ( $window, 'route', function ( event, data ) { //FIXME: Going back it doesn't work
 
           if ( data.url !== this._openUrl ) {
 

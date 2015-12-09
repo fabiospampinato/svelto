@@ -23,7 +23,7 @@
      * (1 January 1970 00:00:00 UTC).
      *
      * _.defer(function(stamp) {
-     *   console.log(_.nowSecs() - stamp);
+     *   log(_.nowSecs() - stamp);
      * }, _.nowSecs());
      * // => logs the number of seconds it took for the deferred function to be invoked
      */
@@ -147,21 +147,21 @@
 
     clamp ( minimum, value, maximum ) {
 
-      if ( !_.isUndefined ( minimum ) ) {
-
-        if ( value < minimum ) {
-
-          value = minimum;
-
-        }
-
-      }
-
       if ( !_.isUndefined ( maximum ) ) {
 
         if ( value > maximum ) {
 
           value = maximum;
+
+        }
+
+      }
+
+      if ( !_.isUndefined ( minimum ) ) {
+
+        if ( value < minimum ) {
+
+          value = minimum;
 
         }
 

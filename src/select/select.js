@@ -1,11 +1,12 @@
 
 /* =========================================================================
- * Svelto - Select
+ * Svelto - Select (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
+ * @requires ../dropdown/dropdown.js
  * ========================================================================= */
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
@@ -20,13 +21,13 @@
   /* CONFIG */
 
   let config = {
-    name: 'select',
+    name: 'selectToggler',
     selector: '.select-toggler',
     templates: {
-      base: '<div id="{%=o.id%}" class="dropdown select-dropdown attached card outlined">' +
+      base: '<div class="dropdown select-dropdown attached card outlined {%=o.guc%}">' +
               '<div class="card-block">' +
                 '{% for ( var i = 0, l = o.options.length; i < l; i++ ) { %}' +
-                  '{% include ( "select." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
+                  '{% include ( "selectToggler." + ( o.options[i].value ? "option" : "optgroup" ), o.options[i] ); %}' +
                 '{% } %}' +
               '</div>' +
             '</div>',
@@ -38,9 +39,6 @@
               '</div>'
     },
     options: {
-      datas: {
-        target: 'target'
-      },
       classes: {
         selected: 'active'
       },
@@ -59,21 +57,21 @@
     }
   };
 
-  /* SELECT */
+  /* SELECT TOGGLER */
 
-  class Select extends Svelto.Widget {
+  class SelectToggler extends Svelto.Widget {
 
     /* SPECIAL */
 
     _variables () {
 
-      this.$trigger = this.$element;
-      this.$select = this.$trigger.find ( this.options.selectors.select );
+      this.$toggler = this.$element;
+      this.$select = this.$toggler.find ( this.options.selectors.select );
       this.$options = this.$select.find ( this.options.selectors.option );
-      this.$label = this.$trigger.find ( this.options.selectors.label );
-      this.$valueholder = this.$trigger.find ( this.options.selectors.valueholder );
+      this.$label = this.$toggler.find ( this.options.selectors.label );
+      this.$valueholder = this.$toggler.find ( this.options.selectors.valueholder );
 
-      this.id = this.$trigger.data ( this.options.datas.target ).trim ( '#' );
+      this.guc = 'select-dropdown-' + this.guid;
 
       if ( this.$valueholder.length === 0 ) {
 
@@ -176,16 +174,18 @@
 
     ___dropdown () {
 
-      let html = this._tmpl ( 'base', { id: this.id, options: this.selectOptions } );
+      let html = this._tmpl ( 'base', { guc: this.guc, options: this.selectOptions } );
 
       this.$dropdown = $(html).appendTo ( $body );
       this.$buttons = this.$dropdown.find ( this.options.selectors.button );
 
-      this.$trigger.addClass ( 'dropdown-toggler' ).attr ( 'data-dropdown', this.id );
-
       let self = this;
 
       this.$dropdown.dropdown ({
+        positionate: {
+          axis: 'y',
+          strict: true
+        },
         selectors: {
           closer: '.button'
         },
@@ -202,13 +202,15 @@
         }
       });
 
+      this.$toggler.attr ( 'data-target', '.' + this.guc ).dropdownToggler ();
+
       this._updateDropdown ();
 
     }
 
     _setDropdownWidth () {
 
-      this.$dropdown.css ( 'min-width', this.$trigger.outerWidth () );
+      this.$dropdown.css ( 'min-width', this.$toggler.outerWidth () );
 
     }
 
@@ -267,11 +269,11 @@
 
   /* BINDING */
 
-  Svelto.Select = Select;
-  Svelto.Select.config = config;
+  Svelto.SelectToggler = SelectToggler;
+  Svelto.SelectToggler.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Select );
+  $.factory ( Svelto.SelectToggler );
 
 }( Svelto.$, Svelto._, window, document ));

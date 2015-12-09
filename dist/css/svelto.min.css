@@ -1794,7 +1794,7 @@ _:-ms-input-placeholder, :root #content {
 
 #content > header.fixed {
   position: fixed;
-  z-index: 300;
+  z-index: 200;
   top: 0;
   right: 0;
   left: 0;
@@ -3800,6 +3800,9 @@ i.icon, .carousel.inset .carousel-prev:after,
 }
 
 .checkbox input, .radio input, .checkbox textarea, .radio textarea {
+  -webkit-flex-grow: 0;
+      -ms-flex-positive: 0;
+          flex-grow: 0;
   min-height: 0;
   background-color: transparent;
   /* BEFORE / AFTER */
@@ -5959,7 +5962,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
 .dropdown, .tooltip {
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12), 0 2px 4px -1px rgba(0, 0, 0, 0.4) ;
   display: none;
-  z-index: 200;
+  z-index: 300;
   position: fixed;
   top: 0;
   left: 0;
@@ -5978,7 +5981,7 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
 }
 
 .dropdown:not(.container), .tooltip:not(.container) {
-  max-height: 40vh;
+  max-height: 60vh;
 }
 
 .dropdown.moving, .moving.tooltip {
@@ -6151,7 +6154,7 @@ _:-ms-input-placeholder, :root .dropdown.card, :root .card.tooltip {
 }
 
 _:-ms-input-placeholder .card-block, :root .dropdown.card .card-block, :root .card.tooltip .card-block {
-  max-height: 36vh;
+  max-height: 54vh;
 }
 
 /* =========================================================================
@@ -7939,7 +7942,7 @@ input span > a:hover, textarea span > a:hover {
   color: #166ac9 ;
 }
 
-input[type="file"], .select-btn select, textarea[type="file"] {
+input[type="file"], .select-toggler select, textarea[type="file"] {
   position: absolute;
   top: 0;
   right: 0;
@@ -7960,7 +7963,7 @@ input[type="file"], .select-btn select, textarea[type="file"] {
   z-index: 99;
 }
 
-input[type="file"]::-webkit-file-upload-button, .select-btn select::-webkit-file-upload-button, textarea[type="file"]::-webkit-file-upload-button {
+input[type="file"]::-webkit-file-upload-button, .select-toggler select::-webkit-file-upload-button, textarea[type="file"]::-webkit-file-upload-button {
   display: none;
 }
 
@@ -11064,37 +11067,37 @@ a.ripple > .ripple-circle {
  * @requires ../normalize/normalize.scss
  * @requires ../input/input.scss
  * ========================================================================= */
-/* SELECT BTN */
-.select-btn {
+/* SELECT TOGGLER */
+.select-toggler {
   /* DEFAULT SELECT */
   /* VALUEHOLDER */
   /* TOGGLER DIRECTION */
 }
 
-.select-btn .valueholder {
+.select-toggler .valueholder {
   display: inline-block;
 }
 
-.select-btn .valueholder.right:before, .select-btn .valueholder.left:before {
+.select-toggler .valueholder.right:before, .select-toggler .valueholder.left:before {
   content: '\a0';
 }
 
-.select-btn.dropdown-toggler-top {
+.select-toggler.dropdown-toggler-top {
   border-top-right-radius: 0;
   border-top-left-radius: 0;
 }
 
-.select-btn.dropdown-toggler-bottom {
+.select-toggler.dropdown-toggler-bottom {
   border-bottom-right-radius: 0;
   border-bottom-left-radius: 0;
 }
 
-.select-btn.dropdown-toggler-right {
+.select-toggler.dropdown-toggler-right {
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
 
-.select-btn.dropdown-toggler-left {
+.select-toggler.dropdown-toggler-left {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
