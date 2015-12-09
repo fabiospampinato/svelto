@@ -17,9 +17,6 @@
   let config = {
     name: 'overlay',
     selector: '.overlay',
-    templates: {
-      base: false
-    },
     options: {
       hover: {
         triggerable: false,

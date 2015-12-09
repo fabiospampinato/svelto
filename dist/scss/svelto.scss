@@ -5116,7 +5116,7 @@ label {
 
   /* TEXT GROW */
 
-  > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(.ripple-circle) {
+  > :not(.sub):not(.label):not(.button):not(.icon):not(.icons):not(input):not(.ripple-circle) {
     flex-grow: 1;
     flex-shrink: 1; //INFO: IE-10-11 default it to 0 instead
   }
@@ -6678,7 +6678,6 @@ i.icon {
   input {
 
     @extend .icons;
-    flex-grow: 0;
     min-height: 0;
     background-color: transparent;
 
