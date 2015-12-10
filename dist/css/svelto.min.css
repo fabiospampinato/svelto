@@ -7394,6 +7394,10 @@ footer {
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* DEFAULT FORM */
+form {
+  position: relative;
+}
+
 form:not(.multiple) > :last-child {
   margin-bottom: 0 !important;
 }

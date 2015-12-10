@@ -10,6 +10,12 @@
 
 /* DEFAULT FORM */
 
-form:not(.multiple) {
-  @include last-child-no-gutter ();
+form {
+
+  position: relative;
+
+  &:not(.multiple) {
+    @include last-child-no-gutter ();
+  }
+
 }

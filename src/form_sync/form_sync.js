@@ -58,13 +58,13 @@
 
       /* CHANGE */
 
-      this._on ( this.$elements, 'change', this.__sync );
+      this._on ( true, this.$elements, 'change', this.__sync );
 
       /* INPUT */
 
       if ( this.options.live ) {
 
-        this._on ( this.$elements.filter ( this.options.selectors.textfield ), 'input', this.__sync );
+        this._on ( true, this.$elements.filter ( this.options.selectors.textfield ), 'input', this.__sync );
 
       }
 

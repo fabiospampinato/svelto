@@ -6546,6 +6546,8 @@
  * @requires ../form_validate/form_validate.js
  * ========================================================================= */
 
+//FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
+
 //TODO: Check if it works, also for file uploading
 
 (function ( $, _, window, document, undefined ) {
@@ -6576,8 +6578,8 @@
 
     _variables () {
 
-      this.$form = this.$element;
       this.form = this.element;
+      this.$form = this.$element;
 
     }
 
@@ -6596,12 +6598,6 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      if ( !this.$form.formValidate ( 'isValid' ) ) {
-
-        return $.noty ( 'The form has some errors, fix them before submitting it' );
-
-      }
-
       $.ajax ({
 
         cache: false,
@@ -6615,7 +6611,7 @@
 
           if ( this.options.spinnerOverlay ) {
 
-            this.$form.spinnerOverlay ( 'show' );
+            this.$form.spinnerOverlay ( 'open' );
 
           }
 
@@ -6623,7 +6619,7 @@
 
         },
 
-        error ( res ) {
+        error: ( res ) => {
 
           res = _.attempt ( JSON.parse, res );
 
@@ -6633,39 +6629,39 @@
 
         },
 
-        success ( res ) {
+        success: ( res ) => {
 
           res = _.attempt ( JSON.parse, res );
 
-          if ( _.isError ( res ) ) {
+          let msg = 'Done! A page refresh may be needed';
 
-            $.noty ( 'Done! A page refresh may be needed' );
+          if ( !_.isError ( res ) ) {
 
-          } else {
+            if ( res.refresh || res.url === window.location.href || _.trim ( res.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-            if ( 'msg' in res ) {
-
-              $.noty ( res.msg );
-
-            } else if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
-
-              $.noty ( 'Done! Refreshing the page...' );
+              msg = 'Done! Refreshing the page...';
 
               location.reload ();
 
             } else if ( res.url ) {
 
-              $.noty ( 'Done! Redirecting...' );
+              //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+              msg = 'Done! Redirecting...';
 
               location.assign ( res.url );
 
-            } else {
+            }
 
-              $.noty ( 'Done! A page refresh may be needed' );
+            if ( 'msg' in res ) {
+
+              msg = res.msg;
 
             }
 
           }
+
+          $.noty ( msg );
 
           this._trigger ( 'success' );
 
@@ -6675,7 +6671,7 @@
 
           if ( this.options.spinnerOverlay ) {
 
-            this.$form.spinnerOverlay ( 'hide' );
+            this.$form.spinnerOverlay ( 'close' );
 
           }
 
@@ -6760,13 +6756,13 @@
 
       /* CHANGE */
 
-      this._on ( this.$elements, 'change', this.__sync );
+      this._on ( true, this.$elements, 'change', this.__sync );
 
       /* INPUT */
 
       if ( this.options.live ) {
 
-        this._on ( this.$elements.filter ( this.options.selectors.textfield ), 'input', this.__sync );
+        this._on ( true, this.$elements.filter ( this.options.selectors.textfield ), 'input', this.__sync );
 
       }
 
