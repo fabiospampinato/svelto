@@ -15,7 +15,6 @@
 
   /* REMOTE MODAL */
 
-  //TODO: Abort the request if the tempModal is closed before we get a result
   //TODO: Animate the dimensions of the temp modal transitioning to the new modal
 
   $.remoteModal = function ( url, data ) {
@@ -24,15 +23,7 @@
 
     if ( !data ) {
 
-      if ( _.isPlainObject ( url ) ) {
-
-        data = url;
-
-      } else {
-
-        data = { url: url };
-
-      }
+      data = _.isPlainObject ( url ) ? url : { url: url };
 
     } else {
 
@@ -52,57 +43,76 @@
       </div>
     */
 
-    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body ).modal ();
+    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body );
+
+    /* VARIABLES */
+
+    let isAborted = false;
 
     /* AJAX */
 
     $.ajax ({
 
       cache: false,
-      data: data,
-      processData: false,
-      type: 'GET',
+      data: _.omit ( data, 'url' ),
+      type: _.size ( data ) > 1 ? 'POST' : 'GET',
       url: data.url,
 
-      beforeSend () { //FIXME: Check it, expecially the `this` context
+      beforeSend () {
 
-        $tempModal.modal ( 'open' );
+        $tempModal.modal ({
+          callbacks: {
+            close () {
+              isAborted = true;
+            }
+          }
+        }).modal ( 'open' );
 
       },
 
       error ( res ) {
 
-        $tempModal.modal ( 'close' );
+        if ( isAborted ) return;
 
-        setTimeout ( function () {
+        res = _.attempt ( JSON.parse, res );
 
-          $tempModal.remove ();
+        $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
 
-        }, Svelto.Modal.config.options.animations.close );
-
-        $.noty ( 'An error occurred, please try again later' );
+        $tempModal.modal ( 'remove' );
 
       },
 
       success ( res ) {
 
-        res = JSON.parse ( res );
+        if ( isAborted ) return;
 
-        let $remoteModal = $(res.modal);
+        res = _.attempt ( JSON.parse, res );
 
-        $remoteModal.modal ({
-          callbacks: {
-            close: function () {
-              setTimeout ( function () {
-                $tempModal.remove ();
-              }, Svelto.Modal.config.options.animations.close );
+        if ( _.isError ( res ) || !( 'modal' in res ) ) {
+
+          $.noty ( 'An error occurred, please try again later' );
+
+          $tempModal.modal ( 'remove' );
+
+        } else {
+
+          let $remoteModal = $(res.modal);
+
+          $remoteModal.modal ({
+            callbacks: {
+              close: function () {
+                setTimeout ( function () {
+                  $remoteModal.remove ();
+                }, Svelto.Modal.config.options.animations.close );
+              }
             }
-          }
-        });
+          });
 
-        $remoteModal.modal ( 'open' );
+          $remoteModal.addClass ( Svelto.Modal.config.options.classes.show ).addClass ( Svelto.Modal.config.options.classes.open ).modal ( 'open' ); //FIXME: This is hacky
 
-        $tempModal.replaceWidth ( $remoteModal );
+          $tempModal.replaceWith ( $remoteModal );
+
+        }
 
       }
 

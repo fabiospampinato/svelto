@@ -94,28 +94,34 @@
 
           },
 
+          error ( res ) {
+
+            res = _.attempt ( JSON.parse, res );
+
+            $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+
+          },
+
           success: ( res ) => {
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-            res = JSON.parse ( res );
+            res = _.attempt ( JSON.parse, res );
 
-            _.merge ( this.options, res );
+            if ( !_.isError ( res ) ) {
 
-            this.$rater.html ( this._tmpl ( 'stars', this.options ) );
+              _.merge ( this.options, res );
 
-            this.alreadyRated = true;
+              this.$rater.html ( this._tmpl ( 'stars', this.options ) );
 
-            this._trigger ( 'change', {
-              value: this.options.value,
-              amount: this.options.amount
-            });s
+              this.alreadyRated = true;
 
-          },
+              this._trigger ( 'change', {
+                value: this.options.value,
+                amount: this.options.amount
+              });
 
-          error ( res ) {
-
-            $.noty ( 'An error occurred, please try again later' );
+            }
 
           },
 

@@ -160,6 +160,26 @@
 
     }
 
+    remove () { //TODO: Detach it automatically when removing it
+
+      if ( this._isOpen ) {
+
+        this.close ();
+
+        this._delay ( function () {
+
+          this.$modal.detach ();
+
+        }, this.options.animations.close );
+
+      } else {
+
+        this.$modal.detach ();
+
+      }
+
+    }
+
   }
 
   /* BINDING */

@@ -26,6 +26,8 @@
       spinnerOverlay: true,
       callbacks: {
         beforesend () {},
+        error () {},
+        success () {},
         complete () {}
       }
     }
@@ -59,39 +61,58 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      if ( this.$form.formValidate ( 'isValid' ) ) {
+      if ( !this.$form.formValidate ( 'isValid' ) ) {
 
-        $.ajax ({
+        return $.noty ( 'The form has some errors, fix them before submitting it' );
 
-          cache: false,
-          contentType: false,
-          data: new FormData ( this.form ),
-          dataType: 'JSON',
-          processData: false,
-          type: this.$form.attr ( 'method' ) || 'POST',
-          url: this.$form.attr ( 'action' ),
+      }
 
-          beforeSend: () => {
+      $.ajax ({
 
-            if ( this.options.spinnerOverlay ) {
+        cache: false,
+        contentType: false,
+        data: new FormData ( this.form ),
+        processData: false, //FIXME: Does it work?
+        type: this.$form.attr ( 'method' ) || 'POST',
+        url: this.$form.attr ( 'action' ),
 
-              this.$form.spinnerOverlay ( 'show' );
+        beforeSend: () => {
 
-            }
+          if ( this.options.spinnerOverlay ) {
 
-            this._trigger ( 'beforesend' );
+            this.$form.spinnerOverlay ( 'show' );
 
-          },
+          }
 
-          error ( res ) {
+          this._trigger ( 'beforesend' );
 
-            $.noty ( 'An error occurred, please try again later' );
+        },
 
-          },
+        error ( res ) {
 
-          success ( res ) {
+          res = _.attempt ( JSON.parse, res );
 
-            if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
+          $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+
+          this._trigger ( 'error' );
+
+        },
+
+        success ( res ) {
+
+          res = _.attempt ( JSON.parse, res );
+
+          if ( _.isError ( res ) ) {
+
+            $.noty ( 'Done! A page refresh may be needed' );
+
+          } else {
+
+            if ( 'msg' in res ) {
+
+              $.noty ( res.msg );
+
+            } else if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
 
               $.noty ( 'Done! Refreshing the page...' );
 
@@ -105,31 +126,29 @@
 
             } else {
 
-              $.noty ( res.msg || 'Done! A page refresh may be needed' );
+              $.noty ( 'Done! A page refresh may be needed' );
 
             }
-
-          },
-
-          complete: () => {
-
-            if ( this.options.spinnerOverlay ) {
-
-              this.$form.spinnerOverlay ( 'hide' );
-
-            }
-
-            this._trigger ( 'complete' );
 
           }
 
-        });
+          this._trigger ( 'success' );
 
-      } else {
+        },
 
-        $.noty ( 'The form has some errors, fix them before sending it' );
+        complete: () => {
 
-      }
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'hide' );
+
+          }
+
+          this._trigger ( 'complete' );
+
+        }
+
+      });
 
     }
 

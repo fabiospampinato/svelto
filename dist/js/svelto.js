@@ -6561,6 +6561,8 @@
       spinnerOverlay: true,
       callbacks: {
         beforesend () {},
+        error () {},
+        success () {},
         complete () {}
       }
     }
@@ -6594,39 +6596,58 @@
       event.preventDefault ();
       event.stopImmediatePropagation ();
 
-      if ( this.$form.formValidate ( 'isValid' ) ) {
+      if ( !this.$form.formValidate ( 'isValid' ) ) {
 
-        $.ajax ({
+        return $.noty ( 'The form has some errors, fix them before submitting it' );
 
-          cache: false,
-          contentType: false,
-          data: new FormData ( this.form ),
-          dataType: 'JSON',
-          processData: false,
-          type: this.$form.attr ( 'method' ) || 'POST',
-          url: this.$form.attr ( 'action' ),
+      }
 
-          beforeSend: () => {
+      $.ajax ({
 
-            if ( this.options.spinnerOverlay ) {
+        cache: false,
+        contentType: false,
+        data: new FormData ( this.form ),
+        processData: false, //FIXME: Does it work?
+        type: this.$form.attr ( 'method' ) || 'POST',
+        url: this.$form.attr ( 'action' ),
 
-              this.$form.spinnerOverlay ( 'show' );
+        beforeSend: () => {
 
-            }
+          if ( this.options.spinnerOverlay ) {
 
-            this._trigger ( 'beforesend' );
+            this.$form.spinnerOverlay ( 'show' );
 
-          },
+          }
 
-          error ( res ) {
+          this._trigger ( 'beforesend' );
 
-            $.noty ( 'An error occurred, please try again later' );
+        },
 
-          },
+        error ( res ) {
 
-          success ( res ) {
+          res = _.attempt ( JSON.parse, res );
 
-            if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
+          $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+
+          this._trigger ( 'error' );
+
+        },
+
+        success ( res ) {
+
+          res = _.attempt ( JSON.parse, res );
+
+          if ( _.isError ( res ) ) {
+
+            $.noty ( 'Done! A page refresh may be needed' );
+
+          } else {
+
+            if ( 'msg' in res ) {
+
+              $.noty ( res.msg );
+
+            } else if ( res.refresh || res.url === window.location.href || res.url === window.location.pathname ) {
 
               $.noty ( 'Done! Refreshing the page...' );
 
@@ -6640,31 +6661,29 @@
 
             } else {
 
-              $.noty ( res.msg || 'Done! A page refresh may be needed' );
+              $.noty ( 'Done! A page refresh may be needed' );
 
             }
-
-          },
-
-          complete: () => {
-
-            if ( this.options.spinnerOverlay ) {
-
-              this.$form.spinnerOverlay ( 'hide' );
-
-            }
-
-            this._trigger ( 'complete' );
 
           }
 
-        });
+          this._trigger ( 'success' );
 
-      } else {
+        },
 
-        $.noty ( 'The form has some errors, fix them before sending it' );
+        complete: () => {
 
-      }
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'hide' );
+
+          }
+
+          this._trigger ( 'complete' );
+
+        }
+
+      });
 
     }
 
@@ -7234,6 +7253,26 @@
     close () {
 
       this.toggle ( false );
+
+    }
+
+    remove () { //TODO: Detach it automatically when removing it
+
+      if ( this._isOpen ) {
+
+        this.close ();
+
+        this._delay ( function () {
+
+          this.$modal.detach ();
+
+        }, this.options.animations.close );
+
+      } else {
+
+        this.$modal.detach ();
+
+      }
 
     }
 
@@ -8998,28 +9037,34 @@ Prism.languages.js = Prism.languages.javascript;
 
           },
 
+          error ( res ) {
+
+            res = _.attempt ( JSON.parse, res );
+
+            $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+
+          },
+
           success: ( res ) => {
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-            res = JSON.parse ( res );
+            res = _.attempt ( JSON.parse, res );
 
-            _.merge ( this.options, res );
+            if ( !_.isError ( res ) ) {
 
-            this.$rater.html ( this._tmpl ( 'stars', this.options ) );
+              _.merge ( this.options, res );
 
-            this.alreadyRated = true;
+              this.$rater.html ( this._tmpl ( 'stars', this.options ) );
 
-            this._trigger ( 'change', {
-              value: this.options.value,
-              amount: this.options.amount
-            });s
+              this.alreadyRated = true;
 
-          },
+              this._trigger ( 'change', {
+                value: this.options.value,
+                amount: this.options.amount
+              });
 
-          error ( res ) {
-
-            $.noty ( 'An error occurred, please try again later' );
+            }
 
           },
 
@@ -9076,7 +9121,6 @@ Prism.languages.js = Prism.languages.javascript;
 
   /* REMOTE MODAL */
 
-  //TODO: Abort the request if the tempModal is closed before we get a result
   //TODO: Animate the dimensions of the temp modal transitioning to the new modal
 
   $.remoteModal = function ( url, data ) {
@@ -9085,15 +9129,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     if ( !data ) {
 
-      if ( _.isPlainObject ( url ) ) {
-
-        data = url;
-
-      } else {
-
-        data = { url: url };
-
-      }
+      data = _.isPlainObject ( url ) ? url : { url: url };
 
     } else {
 
@@ -9113,57 +9149,76 @@ Prism.languages.js = Prism.languages.javascript;
       </div>
     */
 
-    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body ).modal ();
+    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body );
+
+    /* VARIABLES */
+
+    let isAborted = false;
 
     /* AJAX */
 
     $.ajax ({
 
       cache: false,
-      data: data,
-      processData: false,
-      type: 'GET',
+      data: _.omit ( data, 'url' ),
+      type: _.size ( data ) > 1 ? 'POST' : 'GET',
       url: data.url,
 
-      beforeSend () { //FIXME: Check it, expecially the `this` context
+      beforeSend () {
 
-        $tempModal.modal ( 'open' );
+        $tempModal.modal ({
+          callbacks: {
+            close () {
+              isAborted = true;
+            }
+          }
+        }).modal ( 'open' );
 
       },
 
       error ( res ) {
 
-        $tempModal.modal ( 'close' );
+        if ( isAborted ) return;
 
-        setTimeout ( function () {
+        res = _.attempt ( JSON.parse, res );
 
-          $tempModal.remove ();
+        $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
 
-        }, Svelto.Modal.config.options.animations.close );
-
-        $.noty ( 'An error occurred, please try again later' );
+        $tempModal.modal ( 'remove' );
 
       },
 
       success ( res ) {
 
-        res = JSON.parse ( res );
+        if ( isAborted ) return;
 
-        let $remoteModal = $(res.modal);
+        res = _.attempt ( JSON.parse, res );
 
-        $remoteModal.modal ({
-          callbacks: {
-            close: function () {
-              setTimeout ( function () {
-                $tempModal.remove ();
-              }, Svelto.Modal.config.options.animations.close );
+        if ( _.isError ( res ) || !( 'modal' in res ) ) {
+
+          $.noty ( 'An error occurred, please try again later' );
+
+          $tempModal.modal ( 'remove' );
+
+        } else {
+
+          let $remoteModal = $(res.modal);
+
+          $remoteModal.modal ({
+            callbacks: {
+              close: function () {
+                setTimeout ( function () {
+                  $remoteModal.remove ();
+                }, Svelto.Modal.config.options.animations.close );
+              }
             }
-          }
-        });
+          });
 
-        $remoteModal.modal ( 'open' );
+          $remoteModal.addClass ( Svelto.Modal.config.options.classes.show ).addClass ( Svelto.Modal.config.options.classes.open ).modal ( 'open' ); //FIXME: This is hacky
 
-        $tempModal.replaceWidth ( $remoteModal );
+          $tempModal.replaceWith ( $remoteModal );
+
+        }
 
       }
 
