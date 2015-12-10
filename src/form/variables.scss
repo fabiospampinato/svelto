@@ -1,32 +1,16 @@
 
 /* =========================================================================
- * Svelto - Form
+ * Svelto - Form (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../normalize/normalize.scss
- * @requires ../widget/widget.scss
+ * @requires ../svelto/variables.scss
+ * @requires ../input/variables.scss
  * ========================================================================= */
-
-/* DEFAULT FORM */
-
-form {
-
-  position: relative;
-
-  &:not(.multiple) {
-    @include last-child-no-gutter ();
-  }
-
-}
 
 /* FIELDSET */
 
-fieldset {
-  @extend .widget;
-  background-color: $fieldset-bg-color;
-  border-radius: $fieldset-border-radius;
-  border-color: inherit;
-  padding: $fieldset-padding;
-}
+$fieldset-bg-color: rgba(0, 0, 0, 0.035) !default;
+$fieldset-padding: $gutter !default;
+$fieldset-border-radius: $input-border-radius !default;

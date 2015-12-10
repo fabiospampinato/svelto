@@ -1994,100 +1994,6 @@ $footer-bg-color: darken($color-base-bg, $footer-bg-color-darken-amount) !defaul
 
 
 /* =========================================================================
- * Svelto - Grid (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* GRID */
-
-$grid-columns: 12 !default;
-
-
-/* =========================================================================
- * Svelto - Helpers (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/variables.scss
- * ========================================================================= */
-
-/* BLUR */
-
-$blurred-blur-amount: 3px !default;
-$blurred-transition-duration: $transition-duration-fast !default;
-
-/* BORDER */
-
-$rounded-border-radius: 1000000px !default;
-$smooth-border-radius: $border-radius-medium !default;
-$sharp-border-radius: 0 !default;
-
-/* ROTATE */
-
-$rotating-animation-duration: 0.9s !default;
-
-/* OTHERS */
-
-$spacer-flex-grow: 1000000 !default;
-
-$dragging-z-index: 1000000 !default;
-
-
-/* =========================================================================
- * Svelto - Highlight (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../outline/variables.scss
- * ========================================================================= */
-
-/* HIGHLIGHT */
-
-$highlight-z-index: 60 !default;
-
-$highlight-size: 2px !default;
-
-
-/* =========================================================================
- * Svelto - Image (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/variables.scss
- * ========================================================================= */
-
-/* IMAGE */
-
-$image-color: 'black' !default;
-
-/* CAPTION */
-
-$image-caption-color: 'black' !default;
-$image-caption-z-index: 30 !default;
-
-/* TRANSITIONS */
-
-$image-caption-transition-opacity-duration: $transition-duration-fast !default;
-
-
-/* =========================================================================
- * Svelto - Infobar (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TITLE */
-
-$infobar-title-size: 'large' !default;
-
-
-/* =========================================================================
  * Svelto - Label (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2195,6 +2101,117 @@ $input-compact-padding-horizontal: $label-compact-padding-horizontal !default;
 /* PLACEHOLDER */
 
 $input-placeholder-opacity: 0.6 !default;
+
+
+/* =========================================================================
+ * Svelto - Form (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * @requires ../input/variables.scss
+ * ========================================================================= */
+
+/* FIELDSET */
+
+$fieldset-bg-color: rgba(0, 0, 0, 0.035) !default;
+$fieldset-padding: $gutter !default;
+$fieldset-border-radius: $input-border-radius !default;
+
+
+/* =========================================================================
+ * Svelto - Grid (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* GRID */
+
+$grid-columns: 12 !default;
+
+
+/* =========================================================================
+ * Svelto - Helpers (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+
+/* BLUR */
+
+$blurred-blur-amount: 3px !default;
+$blurred-transition-duration: $transition-duration-fast !default;
+
+/* BORDER */
+
+$rounded-border-radius: 1000000px !default;
+$smooth-border-radius: $border-radius-medium !default;
+$sharp-border-radius: 0 !default;
+
+/* ROTATE */
+
+$rotating-animation-duration: 0.9s !default;
+
+/* OTHERS */
+
+$spacer-flex-grow: 1000000 !default;
+
+$dragging-z-index: 1000000 !default;
+
+
+/* =========================================================================
+ * Svelto - Highlight (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../outline/variables.scss
+ * ========================================================================= */
+
+/* HIGHLIGHT */
+
+$highlight-z-index: 60 !default;
+
+$highlight-size: 2px !default;
+
+
+/* =========================================================================
+ * Svelto - Image (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/variables.scss
+ * ========================================================================= */
+
+/* IMAGE */
+
+$image-color: 'black' !default;
+
+/* CAPTION */
+
+$image-caption-color: 'black' !default;
+$image-caption-z-index: 30 !default;
+
+/* TRANSITIONS */
+
+$image-caption-transition-opacity-duration: $transition-duration-fast !default;
+
+
+/* =========================================================================
+ * Svelto - Infobar (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TITLE */
+
+$infobar-title-size: 'large' !default;
 
 
 /* =========================================================================
@@ -7796,6 +7813,7 @@ footer {
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
  * ========================================================================= */
 
 /* DEFAULT FORM */
@@ -7808,6 +7826,16 @@ form {
     @include last-child-no-gutter ();
   }
 
+}
+
+/* FIELDSET */
+
+fieldset {
+  @extend .widget;
+  background-color: $fieldset-bg-color;
+  border-radius: $fieldset-border-radius;
+  border-color: inherit;
+  padding: $fieldset-padding;
 }
 
 
