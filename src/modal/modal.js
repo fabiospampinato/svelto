@@ -110,6 +110,8 @@
 
       if ( force !== this._isOpen ) {
 
+        this._isOpen = force;
+
         this._frame ( function () {
 
           if ( force === true ) {
@@ -119,8 +121,6 @@
           }
 
           this._frame ( function () {
-
-            this._isOpen = force;
 
             this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
 

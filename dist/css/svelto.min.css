@@ -1612,6 +1612,15 @@ th {
   margin-bottom: -10px !important;
 }
 
+.widget > script:last-child, .accordion > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, input > script:last-child, textarea > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 .widget.disabled, .disabled.accordion, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, header.disabled, img.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   pointer-events: none !important;
   cursor: default !important;
@@ -1822,6 +1831,15 @@ _:-ms-input-placeholder, :root #content {
 
 #content > main > :last-child.multiple, #content > main > :last-child.pager, #content > main > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+#content > main > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 #content > footer {
@@ -2397,6 +2415,15 @@ label {
 
 .label > .sub > :last-child.multiple, .button > .sub > :last-child.multiple, .label > .sub > :last-child.pager, .button > .sub > :last-child.pager, .label > .sub > :last-child.tagbox-tags, .button > .sub > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+.label > .sub > script:last-child, .button > .sub > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 .label > .sub.left, .button > .sub.left {
@@ -5824,6 +5851,15 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
   margin-bottom: -10px !important;
 }
 
+.divider.linear:not(:empty) > script:last-child, .divider:not(.block):not(.text):not(.spacer):not(:empty) > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 .divider.linear:not(:empty):before, .divider.linear:not(:empty):after, .divider:not(.block):not(.text):not(.spacer):not(:empty):before, .divider:not(.block):not(.text):not(.spacer):not(:empty):after {
   content: '';
   margin: 0;
@@ -5940,6 +5976,15 @@ hr, .divider.linear:empty, .divider:not(.block):not(.text):not(.spacer):empty, .
 
 .divider.block > .divider-content > :last-child.multiple, .divider.block > .divider-content > :last-child.pager, .divider.block > .divider-content > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+.divider.block > .divider-content > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 .divider.text {
@@ -7239,6 +7284,15 @@ i[class^="flag-"] {
   margin-bottom: -10px !important;
 }
 
+.flippable-front > script:last-child, .flippable-back > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 .flippable-front > :only-child, .flippable-back > :only-child {
   width: 100%;
   height: 100%;
@@ -7346,6 +7400,15 @@ form:not(.multiple) > :last-child {
 
 form:not(.multiple) > :last-child.multiple, form:not(.multiple) > :last-child.pager, form:not(.multiple) > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+form:not(.multiple) > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 /* =========================================================================
@@ -7826,6 +7889,15 @@ span > img {
   margin-bottom: -10px !important;
 }
 
+.infobar > * > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 .infobar > :not(:first-child):not(.infobar-title):not(.infobar-subtitle):not(.infobar-bottom) {
   margin-left: 10px;
 }
@@ -7884,6 +7956,15 @@ span > img {
 
 .infobar-title > :last-child.multiple, .infobar-title > :last-child.pager, .infobar-title > :last-child.tagbox-tags, .infobar-subtitle > :last-child.multiple, .infobar-subtitle > :last-child.pager, .infobar-subtitle > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+.infobar-title > script:last-child, .infobar-subtitle > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 .infobar-title {
@@ -10028,6 +10109,15 @@ _:-ms-input-placeholder .noty-queue:not(.expanded) .noty, :root .noty-queues .no
   margin-bottom: -10px !important;
 }
 
+.overlay > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 .outlined > .overlay {
   top: -1px;
   right: -1px;
@@ -11024,6 +11114,17 @@ a.ripple > .ripple-circle {
 .section-right > :last-child.pager,
 .section-right > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+.section-left > script:last-child,
+.section-center > script:last-child,
+.section-right > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 /* LEFT */
@@ -12432,6 +12533,15 @@ table.table tr > * > :last-child.multiple, table.table tr > * > :last-child.page
   margin-bottom: -10px !important;
 }
 
+table.table tr > * > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 table.table thead {
   border-top-right-radius: inherit;
   border-top-left-radius: inherit;
@@ -13187,6 +13297,15 @@ blockquote > :last-child.multiple, blockquote > :last-child.pager, blockquote > 
   margin-bottom: -10px !important;
 }
 
+blockquote > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 blockquote:before {
   position: absolute;
   top: 0;
@@ -13213,6 +13332,15 @@ blockquote > footer > :last-child.multiple, blockquote > footer > :last-child.pa
   margin-bottom: -10px !important;
 }
 
+blockquote > footer > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
+}
+
 blockquote > footer:before {
   content: '\2014 \00A0';
   opacity: 0.85;
@@ -13231,6 +13359,15 @@ li > :last-child {
 
 li > :last-child.multiple, li > :last-child.pager, li > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
+}
+
+li > script:last-child {
+  display: block;
+  font-size: 0;
+  height: 0;
+  visibility: hidden;
+  pointer-events: none;
+  margin-top: -10px !important;
 }
 
 ul.unstyled {

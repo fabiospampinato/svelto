@@ -12,7 +12,7 @@
 
 @mixin last-child-no-gutter () {
 
-  > :last-child { //FIXME: Doesn't work as expeceted, take a look at the `form` demo page
+  > :last-child {
 
     margin-bottom: 0 !important;
 
@@ -22,6 +22,15 @@
       margin-bottom: - $gutter !important;
     }
 
+  }
+
+  > script:last-child {
+    display: block;
+    font-size: 0;
+    height: 0;
+    visibility: hidden;
+    pointer-events: none;
+    margin-top: - $gutter !important;
   }
 
 }

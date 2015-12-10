@@ -9,14 +9,11 @@
  * ========================================================================= */
 
 //TODO: Maybe sync at init time also
+//FIXME: Probably not good performance, expecially when syncing live stuff, like a live colorpicker
 
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
-
-  /* VARIABLES */
-
-  let groups = [];
 
   /* CONFIG */
 
@@ -24,6 +21,7 @@
     name: 'formSync',
     selector: 'form[data-sync-group]',
     options: {
+      live: false,
       attributes: {
         name: 'name'
       },
@@ -32,11 +30,11 @@
       },
       selectors: {
         form: 'form',
-        elements: 'input, textarea, select',
+        elements: 'input[name], textarea[name], select[name]',
         checkable: '[type="radio"], [type="checkbox"]',
         radio: '[type="radio"]',
         checkbox: '[type="checkbox"]',
-        textfield: 'input, textarea'
+        textfield: 'input:not(button):not([type="checkbox"]):not([type="radio"]), textarea'
       }
     }
   };
@@ -50,77 +48,64 @@
     _variables () {
 
       this.$form = this.$element;
-      this.group = this.$form.data ( this.options.datas.group );
+      this.$elements = this.$form.find ( this.options.selectors.elements );
 
-      this.isNewGroup = ( groups.indexOf ( this.group ) === -1 );
+      this.group = this.$form.data ( this.options.datas.group );
 
     }
 
-    _init () {
+    _events () {
 
-      if ( this.isNewGroup ) {
+      /* CHANGE */
 
-        groups.push ( this.group );
+      this._on ( this.$elements, 'change', this.__sync );
 
-        this.___syncer ();
+      /* INPUT */
+
+      if ( this.options.live ) {
+
+        this._on ( this.$elements.filter ( this.options.selectors.textfield ), 'input', this.__sync );
 
       }
 
     }
 
-    /* PRIVATE */
+    /* SYNC */
 
-    ___syncer () {
+    __sync ( event, data ) {
 
-      let $forms = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]'),
-          $elements = $forms.find ( this.options.selectors.elements );
+      if ( data && data._synced ) return;
 
-      for ( let element of $elements ) {
+      let $element = $(event.target),
+          name = $element.attr ( this.options.attributes.name ),
+          $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
 
-        let $element = $(element),
-            name = $element.attr ( this.options.attributes.name ),
-            isCheckable = $element.is ( this.options.selectors.checkable ),
-            isRadio = isCheckable && $element.is ( this.options.selectors.radio ),
-            isTextfield = $element.is ( this.options.selectors.textfield ),
-            events = isTextfield ? 'input change' : 'change',
-            $currentForm = $element.parents ( this.options.selectors.form ),
-            $otherForms = $forms.not ( $currentForm ),
-            $otherElements  = $otherForms.find ( '[' + this.options.attributes.name + '="' + name + '"]' );
+      if ( $otherElements.length > 0 ) {
 
-        $element.on ( events, () => {
+        let value = $element.val (),
+            checked = !!$element.prop ( 'checked' );
 
-          let currentValue = $element.val (),
-              currentChecked = !!$element.prop ( 'checked' );
+        for ( let otherElement of $otherElements ) {
 
-          for ( let otherElement of $otherElements ) {
+          let $otherElement = $(otherElement),
+              otherValue = $otherElement.val (),
+              otherChecked = !!$otherElement.prop ( 'checked' );
 
-            let $otherElement = $(otherElement),
-                otherValue = $otherElement.val (),
-                otherChecked = !!$otherElement.prop ( 'checked' );
+          if ( value === otherValue && checked === otherChecked ) continue;
 
-            if ( isRadio ) {
+          if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
 
-              if ( currentValue !== otherValue || currentChecked === otherChecked ) return;
+          if ( $element.is ( this.options.selectors.checkable ) ) {
 
-            } else if ( currentValue === otherValue && currentChecked === otherChecked ) {
+            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _synced: true } );
 
-              return;
+          } else {
 
-            }
-
-            if ( isCheckable ) {
-
-              $otherElement.prop ( 'checked', currentChecked ).trigger ( 'change' );
-
-            } else {
-
-              $otherElement.val ( currentValue ).trigger ( 'change' );
-
-            }
+            $otherElement.val ( value ).trigger ( 'change', { _synced: true } );
 
           }
 
-        });
+        }
 
       }
 
