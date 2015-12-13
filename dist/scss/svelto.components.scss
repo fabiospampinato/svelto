@@ -3813,6 +3813,32 @@ footer {
 
 
 /* =========================================================================
+ * Svelto - formValidate
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* FORM VALIDATION MESSAGE */
+
+.form-validate-message {
+
+  /* INVALID */
+
+  &.invalid {
+    color: $color-error !important;
+  }
+
+  /* VALID */
+
+  &.valid {
+    color: $color-success !important;
+  }
+
+}
+
+
+/* =========================================================================
  * Svelto - Form
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato

@@ -13,6 +13,7 @@
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
+//TODO: Add support for ghost element, that will happear when dragging instead of the element itself, it should also work well with droppable
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 

@@ -3764,6 +3764,7 @@
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
+//TODO: Add support for ghost element, that will happear when dragging instead of the element itself, it should also work well with droppable
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 
@@ -6094,14 +6095,9 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Show error message
-//TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure oneOf[email,url,alphanumeric] etc... maybe write it this way: oneOf[matches(1-2-3)/matches(a-b-c)]
-
-
-
-//TODO: Add support for validating checkboxes and radios (radios have the same `name` attribute, that it's currently not supported)
-
-
+//TODO: Maybe also disable submitters when it's not valid
+//TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url,alphanumeric] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
+//FIXME: Handle the case where a textfield changes but is also focused, will happen if we are validating a live synced form
 
 (function ( $, _, window, document, undefined ) {
 
@@ -6112,31 +6108,41 @@
   let config = {
     name: 'formValidate',
     selector: 'form.validate', //FIXME: Deduce from [data-validations] on child node instead, like: $root.find ( '[data-validations]' ).parents ( 'form' ).formValidate ();
+    templates: {
+      message: '<p class="form-validate-message {%=o.validity%}">' +
+                 '{%=o.message%}' +
+               '</p>',
+      messages: '<ul class="form-validate-message {%=o.validity%}">' +
+                  '{% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %}' +
+                    '<li>{%=o.messages[i]%}</li>' +
+                  '{% } %}' +
+                '</ul>'
+    },
     options: {
       validators: {
         /* TYPE */
         alpha ( value ) {
-          var re = /^[a-zA-Z]+$/;
+          let re = /^[a-zA-Z]+$/;
           return value.match ( re ) ? true : 'Only alphabetical characters are allowed';
         },
         alphanumeric ( value ) {
-          var re = /^([a-zA-Z0-9]+)$/;
+          let re = /^([a-zA-Z0-9]+)$/;
           return value.match ( re ) ? true : 'Only alphanumeric characters are allowed';
         },
         hexadecimal ( value ) {
-          var re = /^[0-9a-fA-F]+$/;
+          let re = /^[0-9a-fA-F]+$/;
           return value.match ( re ) ? true : 'Only hexadecimal characters are allowed';
         },
         number ( value ) {
-          var re = /^-?[0-9]+.?(?:[0-9]?)+$/;
+          let re = /^-?[0-9]+.?(?:[0-9]?)+$/;
           return value.match ( re ) ? true : 'Only numbers are allowed';
         },
         integer ( value ) {
-          var re = /^(?:-?(?:0|[1-9][0-9]*))$/;
+          let re = /^(?:-?(?:0|[1-9][0-9]*))$/;
           return value.match ( re ) ? true : 'Only integers numbers are allowed';
         },
         float ( value ) {
-          var re = /^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/; //FIXME: We are also matching the scientific notation here, this might be unwanted, expecially if a language that doesn't support this notation has to take care of it
+          let re = /^(?:-?(?:[0-9]+))?(?:\.[0-9]*)?(?:[eE][\+\-]?(?:[0-9]+))?$/; //FIXME: We are also matching the scientific notation here, this might be unwanted, expecially if a language that doesn't support this notation has to take care of it //FIXME: We are also matching the empty string
           return value.match ( re ) ? true : 'Only floating point numbers are allowed';
         },
         /* NUMBER */
@@ -6166,23 +6172,23 @@
         },
         /* THINGS */
         email ( value ) {
-          var re = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
+          let re = /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i;
           return value.match ( re ) ? true : 'Enter a valid email address';
         },
         cc ( value ) {
-          var re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
+          let re = /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/;
           return value.match ( re ) ? true : 'Enter a valid credit card number';
         },
         ssn ( value ) {
-          var re = /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
+          let re = /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/;
           return value.match ( re ) ? true : 'Enter a valid Social Security Number';
         },
         ipv4 ( value ) {
-          var re = /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
+          let re = /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/;
           return value.match ( re ) ? true : 'Enter a valid IPv4 address';
         },
         url ( value ) {
-          var re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
+          let re = /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i;
           return value.match ( re ) ? true : 'Enter a valid URL';
         },
         /* OTHERS */
@@ -6190,12 +6196,15 @@
           return ( value.trim ().length > 0 ) ? true : 'This field is required';
         },
         matches ( value ) {
-          var matches = _.slice ( arguments, 1 );
+          let matches = _.slice ( arguments, 1 );
           return ( matches.indexOf ( value.toLowerCase () ) !== -1 ) ? true : 'This value is not allowed';
         },
         matchesField ( value, fieldName ) {
-          var fieldValue = _.find ( this, { name: fieldName } ).value;
+          let fieldValue = _.find ( this.elements, { name: fieldName } ).value;
           return ( value === fieldValue ) ? true : 'The two fields don\'t match';
+        },
+        checked () {
+          return this.element.$element.prop ( 'checked' ) ? true : 'This must be checked';
         }
       },
       characters: {
@@ -6208,7 +6217,12 @@
         validation: /^([^\[]+)(?:\[(.*)\])?$/
       },
       datas: {
-        validations: 'validations'
+        id: '_fveid',
+        validations: 'validations',
+        messages: {
+          invalid: 'invalid',
+          valid: 'valid'
+        }
       },
       classes: {
         disabled: 'disabled',
@@ -6217,11 +6231,9 @@
       },
       selectors: {
         element: 'input, textarea, select',
-        wrapper: '.checkbox, .radio, .select-btn, .slider, .switch, .datepicker, .colorpicker',
+        textfield: 'input:not(button):not([type="checkbox"]):not([type="radio"]), textarea',
+        wrapper: '.checkbox, .radio, .select-toggler, .slider, .switch, .datepicker, .colorpicker',
         submitter: 'input[type="submit"], button[type="submit"]'
-      },
-      callbacks: {
-        //TODO: Add some callbacks
       }
     }
   };
@@ -6235,11 +6247,9 @@
     _variables () {
 
       this.$form = this.$element;
-      this.$elements = this.$element.find ( this.options.selectors.element );
-      this.$submitters = this.$element.find ( this.options.selectors.submitter );
-
-      this._isValid = undefined;
-      this.isDirty = true;
+      this.$elements = this.$form.find ( this.options.selectors.element );
+      this.$textfields = this.$elements.filter ( this.options.selectors.textfield );
+      this.$submitters = this.$form.find ( this.options.selectors.submitter );
 
       this.___elements ();
 
@@ -6253,11 +6263,11 @@
 
       /* FOCUS */
 
-      this._on ( this.$elements, 'focus', this.__focus );
+      this._on ( this.$textfields, 'focus', this.__focus );
 
       /* BLUR */
 
-      this._on ( this.$elements, 'blur', this.__blur );
+      this._on ( this.$textfields, 'blur', this.__blur );
 
       /* SUBMIT */
 
@@ -6274,7 +6284,9 @@
       for ( let element of this.$elements ) {
 
         let $element = $(element),
-            name = element.name,
+            $wrappers = $element.parents ( this.options.selectors.wrapper ),
+            $wrapper = ( $wrappers.length > 0 ) ? $wrappers.first () : $element,
+            id = $.guid++,
             validationsStr = $element.data ( this.options.datas.validations ),
             validations = false;
 
@@ -6303,7 +6315,7 @@
 
           }
 
-          if ( _.size ( validations ) === 0 ) {
+          if ( _.isEmpty ( validations ) ) {
 
             validations = false;
 
@@ -6311,16 +6323,22 @@
 
         }
 
-        let $wrappers = $element.parents ( this.options.selectors.wrapper );
+        element[this.options.datas.id] = id;
 
-        this.elements[name] = {
+        this.elements[id] = {
+          id: id,
           $element: $element,
-          $wrapper: ( $wrappers.length > 0 ) ? $wrappers.first () : $element,
-          name: name,
-          dirty: false,
+          $wrapper: $wrapper,
+          $message: false,
+          name: element.name,
           value: $element.val (),
           validations: validations,
-          isValid: undefined
+          isDirty: false,
+          isValid: undefined,
+          messages: {
+            invalid: $wrapper.data ( this.options.datas.messages.invalid ),
+            valid: $wrapper.data ( this.options.datas.messages.valid )
+          }
         };
 
       }
@@ -6331,35 +6349,36 @@
 
     __change ( event ) {
 
-      this.isDirty = true;
+      /* FORM */
 
-      var elementObj = this.elements[event.currentTarget.name];
+      this._isValid = undefined;
 
-      elementObj.dirty = true;
+      /* ELEMENT */
 
-      if ( elementObj.isValid !== undefined ) {
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
 
-        elementObj.isValid = undefined;
+      elementObj.isDirty = true;
+      elementObj.isValid = undefined;
 
-        this.__indeterminate ( elementObj );
+      this._validateWorker ( elementObj );
 
-      }
+      /* OTHERS */
 
-      for ( var name in this.elements ) {
+      for ( let id in this.elements ) {
 
-        var relativeElementObj = this.elements[name];
+        if ( id === elementObj.id ) continue;
 
-        if ( relativeElementObj.validations && relativeElementObj.validations['matchesField'] && relativeElementObj.validations['matchesField'].args.indexOf ( elementObj.name ) !== -1 ) {
+        let otherElementObj = this.elements[id],
+            isDepending = otherElementObj.validations && 'matchesField' in otherElementObj.validations && otherElementObj.validations.matchesField.args.indexOf ( elementObj.name ) !== -1,
+            hasSameName = !_.isEmpty ( elementObj.name ) && otherElementObj.name === elementObj.name;
 
-          this.__indeterminate ( relativeElementObj );
+        if ( isDepending || hasSameName ) {
+
+          otherElementObj.isValid = undefined;
+
+          this._validateWorker ( otherElementObj );
 
         }
-
-      }
-
-      if ( document.activeElement !== elementObj.$element[0] ) {
-
-        this._validateWorker ( elementObj );
 
       }
 
@@ -6369,7 +6388,7 @@
 
     __focus ( event ) {
 
-      var elementObj = this.elements[event.currentTarget.name];
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
 
       elementObj.isValid = undefined;
 
@@ -6381,7 +6400,7 @@
 
     __blur ( event ) {
 
-      var elementObj = this.elements[event.currentTarget.name];
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
 
       this._validateWorker ( elementObj );
 
@@ -6396,17 +6415,19 @@
         event.preventDefault ();
         event.stopImmediatePropagation ();
 
+        $.noty ( 'The form contains some errors' );
+
       }
 
     }
 
-    /* ELEMENT */
+    /* VALIDATION */
 
     _validateWorker ( elementObj ) {
 
-      if ( elementObj.isValid === undefined ) {
+      if ( _.isUndefined ( elementObj.isValid ) ) {
 
-        var result = this._validate ( elementObj ),
+        let result = this._validate ( elementObj ),
             isValid = ( result === true );
 
         elementObj.isValid = isValid;
@@ -6427,27 +6448,27 @@
 
     _validate ( elementObj ) {
 
-      var errors = {},
+      let errors = [],
           validations = elementObj.validations;
 
-      if ( elementObj.dirty ) {
+      if ( elementObj.isDirty ) {
 
         elementObj.value = elementObj.$element.val ();
 
-        elementObj.dirty = false;
+        elementObj.isDirty = false;
 
       }
 
       if ( validations ) {
 
-        for ( var name in validations ) {
+        for ( let name in validations ) {
 
-          var validation = validations[name],
-              result = validation.validator.apply ( this.elements, [elementObj.value].concat ( validation.args ) );
+          let validation = validations[name],
+              result = validation.validator.apply ( { elements: this.elements, element: elementObj }, [elementObj.value].concat ( validation.args ) );
 
           if ( result !== true ) {
 
-            errors[name] = !_.isString ( result ) ? 'This value is not valid' : result;
+            errors.push ( !_.isString ( result ) ? 'This value is not valid' : result );
 
           }
 
@@ -6455,15 +6476,17 @@
 
       }
 
-      var isValid = ( _.size ( errors ) === 0 );
-
-      return isValid ? true : errors;
+      return _.isEmpty ( errors ) ? true : errors;
 
     }
+
+    /* STATE */
 
     __indeterminate ( elementObj ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
+
+      this._updateMessage ( elementObj, false );
 
     }
 
@@ -6471,11 +6494,46 @@
 
       elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
 
+      this._updateMessage ( elementObj, elementObj.messages.valid );
+
     }
 
     __invalid ( elementObj, errors ) {
 
       elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
+
+      this._updateMessage ( elementObj, elementObj.messages.invalid || errors );
+
+    }
+
+    /* ERRORS */
+
+    _updateMessage ( elementObj, message ) {
+
+      if ( elementObj.$message ) {
+
+        elementObj.$message.remove ();
+
+      }
+
+      if ( message ) {
+
+        let validity = elementObj.isValid ? this.options.classes.valid : this.options.classes.invalid,
+            msgHtml = _.isString ( message )
+                        ? this._tmpl ( 'message', { message: message, validity: validity } )
+                        : message.length === 1
+                          ? this._tmpl ( 'message', { message: message[0], validity: validity } )
+                          : this._tmpl ( 'messages', { messages: message, validity: validity } );
+
+        elementObj.$message = $(msgHtml);
+
+        elementObj.$wrapper.after ( elementObj.$message );
+
+      } else {
+
+        elementObj.$message = false;
+
+      }
 
     }
 
@@ -6483,36 +6541,31 @@
 
     isValid () {
 
-      if ( this.isDirty ) {
+      if ( _.isUndefined ( this._isValid ) ) {
 
-        for ( var name in this.elements ) {
+        for ( let id in this.elements ) {
 
-          var elementObj = this.elements[name];
+          let elementObj = this.elements[id];
 
-          if ( elementObj.isValid === undefined ) {
+          if ( _.isUndefined ( elementObj.isValid ) ) {
 
             this._validateWorker ( elementObj );
 
           }
 
-        }
-
-        for ( var name in this.elements ) {
-
-          var elementObj = this.elements[name];
-
-          if ( elementObj.isValid === false ) {
+          if ( !elementObj.isValid ) {
 
             this._isValid = false;
-            this.isDirty = false;
-            return this._isValid;
 
           }
 
         }
 
-        this._isValid = true;
-        this.isDirty = false;
+        if ( _.isUndefined ( this._isValid ) ) {
+
+          this._isValid = true;
+
+        }
 
       }
 
