@@ -787,7 +787,6 @@
   let config = {
     name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     selector: undefined, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
-    disabled: false, //INFO: Determines if the widget is enabled or disabled
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },
@@ -853,10 +852,6 @@
       /* SET GUID */
 
       this.guid = $.guid++;
-
-      /* SET DISABLED */
-
-      this.disabled = this.$element.hasClass ( this.options.classes.disabled );
 
       /* CALLBACKS */
 
@@ -1015,19 +1010,13 @@
 
     enable () {
 
-      if ( this.disabled ) {
-
-        this.disabled = false;
-
-        this.$element.removeClass ( this.options.classes.disabled );
-
-      }
+      this.$element.removeClass ( this.options.classes.disabled );
 
     }
 
     isEnabled () {
 
-      return !this.disabled;
+      return !this.isDisabled ();
 
     }
 
@@ -1035,19 +1024,13 @@
 
     disable () {
 
-      if ( !this.disabled ) {
-
-        this.disabled = true;
-
-        this.$element.addClass ( this.options.classes.disabled );
-
-      }
+      this.$element.addClass ( this.options.classes.disabled );
 
     }
 
     isDisabled () {
 
-      return this.disabled;
+      return this.$element.hasClass ( this.options.classes.disabled );
 
     }
 
@@ -1092,7 +1075,7 @@
 
       let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && this.disabled ) return;
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return;
 
         return handler.apply ( this, args );
 
@@ -1765,8 +1748,8 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../expander/expander.js
+ * @requires ../factory/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -1779,16 +1762,9 @@
     name: 'accordion',
     selector: '.accordion',
     options: {
-      isMultiple: false,
-      classes: {
-        multiple: 'multiple-open'
-      },
+      multiple: false, //INFO: Wheter to keep multiple expanders open or just one
       selectors: {
-        expander: '.expander'
-      },
-      callbacks: {
-        open () {},
-        close () {}
+        expander: Svelto.Expander.config.selector
       }
     }
   };
@@ -1804,33 +1780,45 @@
       this.$accordion = this.$element;
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
 
-      this.instances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
+      this.instances = this.$expanders.get ().map ( expander => $(expander).expander ( 'instance' ) );
 
     }
 
     _events () {
 
-      /* EXPANDER OPEN */
+      /* SINGLE */
 
-      this._on ( this.$expanders, 'expander:open', function ( event ) {
+      if ( !this.options.multiple ) {
 
-        if ( !this.options.isMultiple ) {
+        /* EXPANDER OPEN */
 
-          this.__closeOthers ( event.target );
+        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
 
-        }
+      }
 
-      });
+    }
+
+    _destroy () {
+
+      /* SINGLE */
+
+      if ( !this.options.multiple ) {
+
+        /* EXPANDER OPEN */
+
+        this._off ( this.$expanders, 'expander:open', this.__closeOthers );
+
+      }
 
     }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( expander ) {
+    __closeOthers ( event ) {
 
       for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-        if ( this.$expanders[i] !== expander ) {
+        if ( this.$expanders[i] !== event.target ) {
 
           this.instances[i].close ();
 
@@ -1844,25 +1832,13 @@
 
     enable () {
 
-      if ( this.disabled ) {
-
-        this.disabled = false;
-
-        _.invoke ( this.instances, 'enable' );
-
-      }
+      _.invoke ( this.instances, 'enable' );
 
     }
 
     disable () {
 
-      if ( !this.disabled ) {
-
-        this.disabled = true;
-
-        _.invoke ( this.instances, 'disable' );
-
-      }
+      _.invoke ( this.instances, 'disable' );
 
     }
 
@@ -1870,32 +1846,13 @@
 
     areOpen () {
 
-      return this.instances.map ( instance => instance.isOpen () );
+      return _.invoke ( this.instances, 'isOpen' );
 
     }
 
     toggle ( index, force ) {
 
-      let instance = this.instances[index],
-          isOpen = instance.isOpen ();
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !isOpen;
-
-      }
-
-      if ( force !== isOpen ) {
-
-        let action = force ? 'open' : 'close';
-
-        instance[action]();
-
-        this._trigger ( action, {
-          index: index
-        });
-
-      }
+      this.instances[index].toggle ( force );
 
     }
 

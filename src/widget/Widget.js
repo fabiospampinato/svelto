@@ -22,7 +22,6 @@
   let config = {
     name: 'widget', //INFO: The name of widget, it will be used for the the jquery pluing `$.fn[name]` and for triggering widget events `name + ':' + event`
     selector: undefined, //INFO: The selector used to select the website in the DOM, used for `Widgetize`
-    disabled: false, //INFO: Determines if the widget is enabled or disabled
     templates: {
       base: false //INFO: It will be used as the constructor if no element is provided
     },
@@ -88,10 +87,6 @@
       /* SET GUID */
 
       this.guid = $.guid++;
-
-      /* SET DISABLED */
-
-      this.disabled = this.$element.hasClass ( this.options.classes.disabled );
 
       /* CALLBACKS */
 
@@ -250,19 +245,13 @@
 
     enable () {
 
-      if ( this.disabled ) {
-
-        this.disabled = false;
-
-        this.$element.removeClass ( this.options.classes.disabled );
-
-      }
+      this.$element.removeClass ( this.options.classes.disabled );
 
     }
 
     isEnabled () {
 
-      return !this.disabled;
+      return !this.isDisabled ();
 
     }
 
@@ -270,19 +259,13 @@
 
     disable () {
 
-      if ( !this.disabled ) {
-
-        this.disabled = true;
-
-        this.$element.addClass ( this.options.classes.disabled );
-
-      }
+      this.$element.addClass ( this.options.classes.disabled );
 
     }
 
     isDisabled () {
 
-      return this.disabled;
+      return this.$element.hasClass ( this.options.classes.disabled );
 
     }
 
@@ -327,7 +310,7 @@
 
       let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && this.disabled ) return;
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return;
 
         return handler.apply ( this, args );
 

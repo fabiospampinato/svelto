@@ -5,8 +5,8 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
  * @requires ../expander/expander.js
+ * @requires ../factory/factory.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -19,16 +19,9 @@
     name: 'accordion',
     selector: '.accordion',
     options: {
-      isMultiple: false,
-      classes: {
-        multiple: 'multiple-open'
-      },
+      multiple: false, //INFO: Wheter to keep multiple expanders open or just one
       selectors: {
-        expander: '.expander'
-      },
-      callbacks: {
-        open () {},
-        close () {}
+        expander: Svelto.Expander.config.selector
       }
     }
   };
@@ -44,33 +37,45 @@
       this.$accordion = this.$element;
       this.$expanders = this.$accordion.children ( this.options.selectors.expander );
 
-      this.instances = this.$expanders.toArray ().map ( expander => $(expander).expander ( 'instance' ) );
+      this.instances = this.$expanders.get ().map ( expander => $(expander).expander ( 'instance' ) );
 
     }
 
     _events () {
 
-      /* EXPANDER OPEN */
+      /* SINGLE */
 
-      this._on ( this.$expanders, 'expander:open', function ( event ) {
+      if ( !this.options.multiple ) {
 
-        if ( !this.options.isMultiple ) {
+        /* EXPANDER OPEN */
 
-          this.__closeOthers ( event.target );
+        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
 
-        }
+      }
 
-      });
+    }
+
+    _destroy () {
+
+      /* SINGLE */
+
+      if ( !this.options.multiple ) {
+
+        /* EXPANDER OPEN */
+
+        this._off ( this.$expanders, 'expander:open', this.__closeOthers );
+
+      }
 
     }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( expander ) {
+    __closeOthers ( event ) {
 
       for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
 
-        if ( this.$expanders[i] !== expander ) {
+        if ( this.$expanders[i] !== event.target ) {
 
           this.instances[i].close ();
 
@@ -84,25 +89,13 @@
 
     enable () {
 
-      if ( this.disabled ) {
-
-        this.disabled = false;
-
-        _.invoke ( this.instances, 'enable' );
-
-      }
+      _.invoke ( this.instances, 'enable' );
 
     }
 
     disable () {
 
-      if ( !this.disabled ) {
-
-        this.disabled = true;
-
-        _.invoke ( this.instances, 'disable' );
-
-      }
+      _.invoke ( this.instances, 'disable' );
 
     }
 
@@ -110,32 +103,13 @@
 
     areOpen () {
 
-      return this.instances.map ( instance => instance.isOpen () );
+      return _.invoke ( this.instances, 'isOpen' );
 
     }
 
     toggle ( index, force ) {
 
-      let instance = this.instances[index],
-          isOpen = instance.isOpen ();
-
-      if ( !_.isBoolean ( force ) ) {
-
-        force = !isOpen;
-
-      }
-
-      if ( force !== isOpen ) {
-
-        let action = force ? 'open' : 'close';
-
-        instance[action]();
-
-        this._trigger ( action, {
-          index: index
-        });
-
-      }
+      this.instances[index].toggle ( force );
 
     }
 
