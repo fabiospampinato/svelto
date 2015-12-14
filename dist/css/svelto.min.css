@@ -1608,21 +1608,21 @@ th {
  * @requires ../normalize/normalize.scss
  * ========================================================================= */
 /* WIDGET */
-.widget, .accordion, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, input, textarea, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
+.widget, .accordion, input, textarea, .breadcrumb, label, .label, .button, .container, .card-header:not(.multiple), .card-block:not(.multiple), .card-footer:not(.multiple), footer, .image-wrp .image-caption, .infobar, .tagbox, .card, .icons, .checkbox input, .radio input, .checkbox textarea, .radio textarea, .carousel, .chat-msg, .checkbox, .radio, .colorpicker, .datepicker, .embedded, .flippable, fieldset, header, img, .image-wrp, .parallax, .placeholder, .progressbar, .rater, .triangle, .square, .square-sample, .circle, .slider, .spinner-label, .statistic, .stepper, .switch, table.table, .tabs, .toolbar, blockquote, blockquote > footer {
   position: relative;
   margin: 0 0 10px;
   transition: opacity 0.15s;
 }
 
-.widget > :last-child, .accordion > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .checkbox input > :last-child, .radio input > :last-child, .checkbox textarea > :last-child, .radio textarea > :last-child, .carousel > :last-child, .chat-msg > :last-child, .checkbox > :last-child, .radio > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, fieldset > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, input > :last-child, textarea > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
+.widget > :last-child, .accordion > :last-child, input > :last-child, textarea > :last-child, .breadcrumb > :last-child, label > :last-child, .label > :last-child, .button > :last-child, .container > :last-child, .card-header:not(.multiple) > :last-child, .card-block:not(.multiple) > :last-child, .card-footer:not(.multiple) > :last-child, footer > :last-child, .image-wrp .image-caption > :last-child, .infobar > :last-child, .tagbox > :last-child, .card > :last-child, .icons > :last-child, .checkbox input > :last-child, .radio input > :last-child, .checkbox textarea > :last-child, .radio textarea > :last-child, .carousel > :last-child, .chat-msg > :last-child, .checkbox > :last-child, .radio > :last-child, .colorpicker > :last-child, .datepicker > :last-child, .embedded > :last-child, .flippable > :last-child, fieldset > :last-child, header > :last-child, img > :last-child, .image-wrp > :last-child, .parallax > :last-child, .placeholder > :last-child, .progressbar > :last-child, .rater > :last-child, .triangle > :last-child, .square > :last-child, .square-sample > :last-child, .circle > :last-child, .slider > :last-child, .spinner-label > :last-child, .statistic > :last-child, .stepper > :last-child, .switch > :last-child, table.table > :last-child, .tabs > :last-child, .toolbar > :last-child, blockquote > :last-child, blockquote > footer > :last-child {
   margin-bottom: 0 !important;
 }
 
-.widget > :last-child.multiple, .accordion > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .checkbox input > :last-child.multiple, .radio input > :last-child.multiple, .checkbox textarea > :last-child.multiple, .radio textarea > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .checkbox > :last-child.multiple, .radio > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, fieldset > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .checkbox input > :last-child.pager, .radio input > :last-child.pager, .checkbox textarea > :last-child.pager, .radio textarea > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .checkbox > :last-child.pager, .radio > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, fieldset > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .checkbox input > :last-child.tagbox-tags, .radio input > :last-child.tagbox-tags, .checkbox textarea > :last-child.tagbox-tags, .radio textarea > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .checkbox > :last-child.tagbox-tags, .radio > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, fieldset > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
+.widget > :last-child.multiple, .accordion > :last-child.multiple, input > :last-child.multiple, textarea > :last-child.multiple, .breadcrumb > :last-child.multiple, label > :last-child.multiple, .label > :last-child.multiple, .button > :last-child.multiple, .container > :last-child.multiple, .card-header:not(.multiple) > :last-child.multiple, .card-block:not(.multiple) > :last-child.multiple, .card-footer:not(.multiple) > :last-child.multiple, footer > :last-child.multiple, .image-wrp .image-caption > :last-child.multiple, .infobar > :last-child.multiple, .tagbox > :last-child.multiple, .card > :last-child.multiple, .icons > :last-child.multiple, .checkbox input > :last-child.multiple, .radio input > :last-child.multiple, .checkbox textarea > :last-child.multiple, .radio textarea > :last-child.multiple, .carousel > :last-child.multiple, .chat-msg > :last-child.multiple, .checkbox > :last-child.multiple, .radio > :last-child.multiple, .colorpicker > :last-child.multiple, .datepicker > :last-child.multiple, .embedded > :last-child.multiple, .flippable > :last-child.multiple, fieldset > :last-child.multiple, header > :last-child.multiple, img > :last-child.multiple, .image-wrp > :last-child.multiple, .parallax > :last-child.multiple, .placeholder > :last-child.multiple, .progressbar > :last-child.multiple, .rater > :last-child.multiple, .triangle > :last-child.multiple, .square > :last-child.multiple, .square-sample > :last-child.multiple, .circle > :last-child.multiple, .slider > :last-child.multiple, .spinner-label > :last-child.multiple, .statistic > :last-child.multiple, .stepper > :last-child.multiple, .switch > :last-child.multiple, table.table > :last-child.multiple, .tabs > :last-child.multiple, .toolbar > :last-child.multiple, blockquote > :last-child.multiple, blockquote > footer > :last-child.multiple, .widget > :last-child.pager, .accordion > :last-child.pager, input > :last-child.pager, textarea > :last-child.pager, .breadcrumb > :last-child.pager, label > :last-child.pager, .label > :last-child.pager, .button > :last-child.pager, .container > :last-child.pager, .card-header:not(.multiple) > :last-child.pager, .card-block:not(.multiple) > :last-child.pager, .card-footer:not(.multiple) > :last-child.pager, footer > :last-child.pager, .image-wrp .image-caption > :last-child.pager, .infobar > :last-child.pager, .tagbox > :last-child.pager, .card > :last-child.pager, .icons > :last-child.pager, .checkbox input > :last-child.pager, .radio input > :last-child.pager, .checkbox textarea > :last-child.pager, .radio textarea > :last-child.pager, .carousel > :last-child.pager, .chat-msg > :last-child.pager, .checkbox > :last-child.pager, .radio > :last-child.pager, .colorpicker > :last-child.pager, .datepicker > :last-child.pager, .embedded > :last-child.pager, .flippable > :last-child.pager, fieldset > :last-child.pager, header > :last-child.pager, img > :last-child.pager, .image-wrp > :last-child.pager, .parallax > :last-child.pager, .placeholder > :last-child.pager, .progressbar > :last-child.pager, .rater > :last-child.pager, .triangle > :last-child.pager, .square > :last-child.pager, .square-sample > :last-child.pager, .circle > :last-child.pager, .slider > :last-child.pager, .spinner-label > :last-child.pager, .statistic > :last-child.pager, .stepper > :last-child.pager, .switch > :last-child.pager, table.table > :last-child.pager, .tabs > :last-child.pager, .toolbar > :last-child.pager, blockquote > :last-child.pager, blockquote > footer > :last-child.pager, .widget > :last-child.tagbox-tags, .accordion > :last-child.tagbox-tags, input > :last-child.tagbox-tags, textarea > :last-child.tagbox-tags, .breadcrumb > :last-child.tagbox-tags, label > :last-child.tagbox-tags, .label > :last-child.tagbox-tags, .button > :last-child.tagbox-tags, .container > :last-child.tagbox-tags, .card-header:not(.multiple) > :last-child.tagbox-tags, .card-block:not(.multiple) > :last-child.tagbox-tags, .card-footer:not(.multiple) > :last-child.tagbox-tags, footer > :last-child.tagbox-tags, .image-wrp .image-caption > :last-child.tagbox-tags, .infobar > :last-child.tagbox-tags, .tagbox > :last-child.tagbox-tags, .card > :last-child.tagbox-tags, .icons > :last-child.tagbox-tags, .checkbox input > :last-child.tagbox-tags, .radio input > :last-child.tagbox-tags, .checkbox textarea > :last-child.tagbox-tags, .radio textarea > :last-child.tagbox-tags, .carousel > :last-child.tagbox-tags, .chat-msg > :last-child.tagbox-tags, .checkbox > :last-child.tagbox-tags, .radio > :last-child.tagbox-tags, .colorpicker > :last-child.tagbox-tags, .datepicker > :last-child.tagbox-tags, .embedded > :last-child.tagbox-tags, .flippable > :last-child.tagbox-tags, fieldset > :last-child.tagbox-tags, header > :last-child.tagbox-tags, img > :last-child.tagbox-tags, .image-wrp > :last-child.tagbox-tags, .parallax > :last-child.tagbox-tags, .placeholder > :last-child.tagbox-tags, .progressbar > :last-child.tagbox-tags, .rater > :last-child.tagbox-tags, .triangle > :last-child.tagbox-tags, .square > :last-child.tagbox-tags, .square-sample > :last-child.tagbox-tags, .circle > :last-child.tagbox-tags, .slider > :last-child.tagbox-tags, .spinner-label > :last-child.tagbox-tags, .statistic > :last-child.tagbox-tags, .stepper > :last-child.tagbox-tags, .switch > :last-child.tagbox-tags, table.table > :last-child.tagbox-tags, .tabs > :last-child.tagbox-tags, .toolbar > :last-child.tagbox-tags, blockquote > :last-child.tagbox-tags, blockquote > footer > :last-child.tagbox-tags {
   margin-bottom: -10px !important;
 }
 
-.widget > script:last-child, .accordion > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, fieldset > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, input > script:last-child, textarea > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
+.widget > script:last-child, .accordion > script:last-child, input > script:last-child, textarea > script:last-child, .breadcrumb > script:last-child, label > script:last-child, .label > script:last-child, .button > script:last-child, .container > script:last-child, .card-header:not(.multiple) > script:last-child, .card-block:not(.multiple) > script:last-child, .card-footer:not(.multiple) > script:last-child, footer > script:last-child, .image-wrp .image-caption > script:last-child, .infobar > script:last-child, .tagbox > script:last-child, .card > script:last-child, .icons > script:last-child, .checkbox input > script:last-child, .radio input > script:last-child, .checkbox textarea > script:last-child, .radio textarea > script:last-child, .carousel > script:last-child, .chat-msg > script:last-child, .checkbox > script:last-child, .radio > script:last-child, .colorpicker > script:last-child, .datepicker > script:last-child, .embedded > script:last-child, .flippable > script:last-child, fieldset > script:last-child, header > script:last-child, img > script:last-child, .image-wrp > script:last-child, .parallax > script:last-child, .placeholder > script:last-child, .progressbar > script:last-child, .rater > script:last-child, .triangle > script:last-child, .square > script:last-child, .square-sample > script:last-child, .circle > script:last-child, .slider > script:last-child, .spinner-label > script:last-child, .statistic > script:last-child, .stepper > script:last-child, .switch > script:last-child, table.table > script:last-child, .tabs > script:last-child, .toolbar > script:last-child, blockquote > script:last-child, blockquote > footer > script:last-child {
   display: block;
   font-size: 0;
   height: 0;
@@ -1631,13 +1631,13 @@ th {
   margin-top: -10px !important;
 }
 
-.widget.disabled, .disabled.accordion, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, fieldset.disabled, header.disabled, img.disabled, .disabled.image-wrp, input.disabled, textarea.disabled, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
+.widget.disabled, .disabled.accordion, input.disabled, textarea.disabled, .disabled.breadcrumb, label.disabled, .disabled.label, .disabled.button, .disabled.container, .disabled.card-header:not(.multiple), .disabled.card-block:not(.multiple), .disabled.card-footer:not(.multiple), footer.disabled, .image-wrp .disabled.image-caption, .disabled.infobar, .disabled.tagbox, .disabled.card, .disabled.icons, .disabled.carousel, .disabled.chat-msg, .disabled.checkbox, .disabled.radio, .disabled.colorpicker, .disabled.datepicker, .disabled.embedded, .disabled.flippable, fieldset.disabled, header.disabled, img.disabled, .disabled.image-wrp, .disabled.parallax, .disabled.placeholder, .disabled.progressbar, .disabled.rater, .disabled.triangle, .disabled.square, .disabled.square-sample, .disabled.circle, .disabled.slider, .disabled.spinner-label, .disabled.statistic, .disabled.stepper, .disabled.switch, table.disabled.table, .disabled.tabs, .disabled.toolbar, blockquote.disabled {
   pointer-events: none !important;
   cursor: default !important;
   opacity: 0.5 !important;
 }
 
-.widget.disabled *, .disabled.accordion *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .checkbox input.disabled *, .radio input.disabled *, .checkbox textarea.disabled *, .radio textarea.disabled *, .disabled.carousel *, .disabled.chat-msg *, .disabled.checkbox *, .disabled.radio *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, fieldset.disabled *, header.disabled *, img.disabled *, .disabled.image-wrp *, input.disabled *, textarea.disabled *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
+.widget.disabled *, .disabled.accordion *, input.disabled *, textarea.disabled *, .disabled.breadcrumb *, label.disabled *, .disabled.label *, .disabled.button *, .disabled.container *, .disabled.card-header:not(.multiple) *, .disabled.card-block:not(.multiple) *, .disabled.card-footer:not(.multiple) *, footer.disabled *, .image-wrp .disabled.image-caption *, .disabled.infobar *, .disabled.tagbox *, .disabled.card *, .disabled.icons *, .checkbox input.disabled *, .radio input.disabled *, .checkbox textarea.disabled *, .radio textarea.disabled *, .disabled.carousel *, .disabled.chat-msg *, .disabled.checkbox *, .disabled.radio *, .disabled.colorpicker *, .disabled.datepicker *, .disabled.embedded *, .disabled.flippable *, fieldset.disabled *, header.disabled *, img.disabled *, .disabled.image-wrp *, .disabled.parallax *, .disabled.placeholder *, .disabled.progressbar *, .disabled.rater *, .disabled.triangle *, .disabled.square *, .disabled.square-sample *, .disabled.circle *, .disabled.slider *, .disabled.spinner-label *, .disabled.statistic *, .disabled.stepper *, .disabled.switch *, table.disabled.table *, .disabled.tabs *, .disabled.toolbar *, blockquote.disabled *, blockquote > footer.disabled * {
   cursor: default !important;
 }
 
@@ -1701,6 +1701,595 @@ th {
 
 .accordion .expander:not(:last-child).card:not(.open) > .card-header {
   border-bottom: 0;
+}
+
+/* =========================================================================
+ * Svelto - Input
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+/* INPUT */
+input, textarea {
+  background: #ffffff ;
+  border-color: #d9d9d9 ;
+  color: #3f3f3f ;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-shrink: 1;
+      -ms-flex-negative: 1;
+          flex-shrink: 1;
+  border-radius: 0.25em;
+  min-height: 2.4285714286em;
+  padding: 0.5em 1em;
+  /* FILE */
+  /* PLACEHOLDER */
+  /* COLORS */
+  /* INVALID */
+  /* VALID */
+  /* UNOUTLINED */
+  /* OUTLINED */
+  /* COMPACT */
+  /* FLUID */
+}
+
+input p > a, textarea p > a,
+input span > a, textarea span > a {
+  color: #1565c0 ;
+}
+
+input p > a:after, textarea p > a:after,
+input span > a:after, textarea span > a:after {
+  border-color: #166ac9 ;
+}
+
+input p > a:hover, textarea p > a:hover,
+input span > a:hover, textarea span > a:hover {
+  color: #166ac9 ;
+}
+
+input[type="file"], textarea[type="file"], .select-toggler select {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  border: none;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border-radius: inherit;
+  cursor: pointer;
+  font-size: 0;
+  opacity: 0;
+  margin-top: 0 !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
+  z-index: 99;
+}
+
+input[type="file"]::-webkit-file-upload-button, textarea[type="file"]::-webkit-file-upload-button, .select-toggler select::-webkit-file-upload-button {
+  display: none;
+}
+
+input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+  color: #3f3f3f;
+  opacity: 0.6;
+}
+
+input::-moz-placeholder, textarea::-moz-placeholder {
+  color: #3f3f3f;
+  opacity: 0.6;
+}
+
+input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+  color: #3f3f3f;
+  opacity: 0.6;
+}
+
+input::placeholder, textarea::placeholder {
+  color: #3f3f3f;
+  opacity: 0.6;
+}
+
+input.primary::-webkit-input-placeholder, textarea.primary::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.primary::-moz-placeholder, textarea.primary::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.primary:-ms-input-placeholder, textarea.primary:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.primary::placeholder, textarea.primary::placeholder {
+  color: #ffffff !important;
+}
+
+input.secondary::-webkit-input-placeholder, textarea.secondary::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.secondary::-moz-placeholder, textarea.secondary::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.secondary:-ms-input-placeholder, textarea.secondary:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.secondary::placeholder, textarea.secondary::placeholder {
+  color: #ffffff !important;
+}
+
+input.tertiary::-webkit-input-placeholder, textarea.tertiary::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.tertiary::-moz-placeholder, textarea.tertiary::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.tertiary:-ms-input-placeholder, textarea.tertiary:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.tertiary::placeholder, textarea.tertiary::placeholder {
+  color: #ffffff !important;
+}
+
+input.quaternary::-webkit-input-placeholder, textarea.quaternary::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.quaternary::-moz-placeholder, textarea.quaternary::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.quaternary:-ms-input-placeholder, textarea.quaternary:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.quaternary::placeholder, textarea.quaternary::placeholder {
+  color: #ffffff !important;
+}
+
+input.white::-webkit-input-placeholder, textarea.white::-webkit-input-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.white::-moz-placeholder, textarea.white::-moz-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.white:-ms-input-placeholder, textarea.white:-ms-input-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.white::placeholder, textarea.white::placeholder {
+  color: #3f3f3f !important;
+}
+
+input.gray::-webkit-input-placeholder, textarea.gray::-webkit-input-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.gray::-moz-placeholder, textarea.gray::-moz-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.gray:-ms-input-placeholder, textarea.gray:-ms-input-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.gray::placeholder, textarea.gray::placeholder {
+  color: #3f3f3f !important;
+}
+
+input.black::-webkit-input-placeholder, textarea.black::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.black::-moz-placeholder, textarea.black::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.black:-ms-input-placeholder, textarea.black:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.black::placeholder, textarea.black::placeholder {
+  color: #ffffff !important;
+}
+
+input.yellow::-webkit-input-placeholder, textarea.yellow::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.yellow::-moz-placeholder, textarea.yellow::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.yellow:-ms-input-placeholder, textarea.yellow:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.yellow::placeholder, textarea.yellow::placeholder {
+  color: #ffffff !important;
+}
+
+input.olive::-webkit-input-placeholder, textarea.olive::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.olive::-moz-placeholder, textarea.olive::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.olive:-ms-input-placeholder, textarea.olive:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.olive::placeholder, textarea.olive::placeholder {
+  color: #ffffff !important;
+}
+
+input.green::-webkit-input-placeholder, textarea.green::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.green::-moz-placeholder, textarea.green::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.green:-ms-input-placeholder, textarea.green:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.green::placeholder, textarea.green::placeholder {
+  color: #ffffff !important;
+}
+
+input.blue::-webkit-input-placeholder, textarea.blue::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.blue::-moz-placeholder, textarea.blue::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.blue:-ms-input-placeholder, textarea.blue:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.blue::placeholder, textarea.blue::placeholder {
+  color: #ffffff !important;
+}
+
+input.violet::-webkit-input-placeholder, textarea.violet::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.violet::-moz-placeholder, textarea.violet::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.violet:-ms-input-placeholder, textarea.violet:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.violet::placeholder, textarea.violet::placeholder {
+  color: #ffffff !important;
+}
+
+input.orange::-webkit-input-placeholder, textarea.orange::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.orange::-moz-placeholder, textarea.orange::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.orange:-ms-input-placeholder, textarea.orange:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.orange::placeholder, textarea.orange::placeholder {
+  color: #ffffff !important;
+}
+
+input.purple::-webkit-input-placeholder, textarea.purple::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.purple::-moz-placeholder, textarea.purple::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.purple:-ms-input-placeholder, textarea.purple:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.purple::placeholder, textarea.purple::placeholder {
+  color: #ffffff !important;
+}
+
+input.red::-webkit-input-placeholder, textarea.red::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.red::-moz-placeholder, textarea.red::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.red:-ms-input-placeholder, textarea.red:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.red::placeholder, textarea.red::placeholder {
+  color: #ffffff !important;
+}
+
+input.pink::-webkit-input-placeholder, textarea.pink::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.pink::-moz-placeholder, textarea.pink::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.pink:-ms-input-placeholder, textarea.pink:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.pink::placeholder, textarea.pink::placeholder {
+  color: #ffffff !important;
+}
+
+input.teal::-webkit-input-placeholder, textarea.teal::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.teal::-moz-placeholder, textarea.teal::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.teal:-ms-input-placeholder, textarea.teal:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.teal::placeholder, textarea.teal::placeholder {
+  color: #ffffff !important;
+}
+
+input.brown::-webkit-input-placeholder, textarea.brown::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.brown::-moz-placeholder, textarea.brown::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.brown:-ms-input-placeholder, textarea.brown:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.brown::placeholder, textarea.brown::placeholder {
+  color: #ffffff !important;
+}
+
+input.error::-webkit-input-placeholder, textarea.error::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.error::-moz-placeholder, textarea.error::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.error:-ms-input-placeholder, textarea.error:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.error::placeholder, textarea.error::placeholder {
+  color: #ffffff !important;
+}
+
+input.warning::-webkit-input-placeholder, textarea.warning::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.warning::-moz-placeholder, textarea.warning::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.warning:-ms-input-placeholder, textarea.warning:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.warning::placeholder, textarea.warning::placeholder {
+  color: #ffffff !important;
+}
+
+input.success::-webkit-input-placeholder, textarea.success::-webkit-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.success::-moz-placeholder, textarea.success::-moz-placeholder {
+  color: #ffffff !important;
+}
+
+input.success:-ms-input-placeholder, textarea.success:-ms-input-placeholder {
+  color: #ffffff !important;
+}
+
+input.success::placeholder, textarea.success::placeholder {
+  color: #ffffff !important;
+}
+
+input.transparent::-webkit-input-placeholder, textarea.transparent::-webkit-input-placeholder {
+  color: inherit !important;
+}
+
+input.transparent::-moz-placeholder, textarea.transparent::-moz-placeholder {
+  color: inherit !important;
+}
+
+input.transparent:-ms-input-placeholder, textarea.transparent:-ms-input-placeholder {
+  color: inherit !important;
+}
+
+input.transparent::placeholder, textarea.transparent::placeholder {
+  color: inherit !important;
+}
+
+input.inherit::-webkit-input-placeholder, textarea.inherit::-webkit-input-placeholder {
+  color: inherit !important;
+}
+
+input.inherit::-moz-placeholder, textarea.inherit::-moz-placeholder {
+  color: inherit !important;
+}
+
+input.inherit:-ms-input-placeholder, textarea.inherit:-ms-input-placeholder {
+  color: inherit !important;
+}
+
+input.inherit::placeholder, textarea.inherit::placeholder {
+  color: inherit !important;
+}
+
+input.base::-webkit-input-placeholder, textarea.base::-webkit-input-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.base::-moz-placeholder, textarea.base::-moz-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.base:-ms-input-placeholder, textarea.base:-ms-input-placeholder {
+  color: #3f3f3f !important;
+}
+
+input.base::placeholder, textarea.base::placeholder {
+  color: #3f3f3f !important;
+}
+
+input.invalid, textarea.invalid {
+  border-color: #f44336 !important;
+}
+
+input.valid, textarea.valid {
+  border-color: #4caf50 !important;
+}
+
+input:not(.outlined), textarea:not(.outlined) {
+  border: none;
+}
+
+input.outlined, textarea.outlined {
+  min-height: calc(2.4285714286em + 2px);
+  min-width: calc(3.4285714286em + 2px);
+}
+
+input.compact, textarea.compact {
+  padding: 0.5em 0.5em;
+}
+
+input.compact.outlined, textarea.compact.outlined {
+  min-height: calc(2.4285714286em + 2px);
+  min-width: calc(2.4285714286em + 2px);
+}
+
+input.fluid, textarea.fluid {
+  width: 100%;
+}
+
+/* RESET NUMBER INPUTS */
+input[type=number]::-webkit-inner-spin-button, textarea[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button,
+textarea[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* RESET INVALID STYLE */
+input:-moz-ui-invalid, textarea:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* REMOVE CLEAR ICON */
+input::-ms-clear, textarea::-ms-clear {
+  display: none;
+}
+
+/* REMOVE iOS SHADOW */
+input, textarea {
+  -webkit-appearance: none !important;
+     -moz-appearance: none !important;
+          appearance: none !important;
+}
+
+/* =========================================================================
+ * Svelto - Autogrow (Input)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../input/input.scss
+ * ========================================================================= */
+/* INPUT AUTOGROW */
+input.autogrow, textarea.autogrow {
+  min-width: 0;
+}
+
+/* =========================================================================
+ * Svelto - Textarea
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../input/input.scss
+ * ========================================================================= */
+/* TEXTAREA */
+textarea {
+  resize: vertical;
+  min-height: 8.142857143em !important;
+  /* COMPACT */
+  /* UNRESIZABLE */
+}
+
+textarea.compact {
+  min-height: 8.142857143em !important;
+}
+
+textarea.unresizable, textarea[disabled], textarea.disabled,
+.disabled textarea {
+  resize: none;
+}
+
+/* RESET INVALID STYLE */
+textarea:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* =========================================================================
+ * Svelto - Autogrow (Textarea)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../textarea/textarea.scss
+ * ========================================================================= */
+/* TEXTAREA AUTOGROW */
+textarea.autogrow {
+  min-height: 0;
 }
 
 /* =========================================================================
@@ -8015,538 +8604,6 @@ span > img {
 }
 
 /* =========================================================================
- * Svelto - Input
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../normalize/normalize.scss
- * @requires ../widget/widget.scss
- * ========================================================================= */
-/* INPUT */
-input, textarea {
-  background: #ffffff ;
-  border-color: #d9d9d9 ;
-  color: #3f3f3f ;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-shrink: 1;
-      -ms-flex-negative: 1;
-          flex-shrink: 1;
-  border-radius: 0.25em;
-  min-height: 2.4285714286em;
-  padding: 0.5em 1em;
-  /* FILE */
-  /* PLACEHOLDER */
-  /* COLORS */
-  /* INVALID */
-  /* VALID */
-  /* UNOUTLINED */
-  /* OUTLINED */
-  /* COMPACT */
-  /* FLUID */
-}
-
-input p > a, textarea p > a,
-input span > a, textarea span > a {
-  color: #1565c0 ;
-}
-
-input p > a:after, textarea p > a:after,
-input span > a:after, textarea span > a:after {
-  border-color: #166ac9 ;
-}
-
-input p > a:hover, textarea p > a:hover,
-input span > a:hover, textarea span > a:hover {
-  color: #166ac9 ;
-}
-
-input[type="file"], .select-toggler select, textarea[type="file"] {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  border: none;
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  border-radius: inherit;
-  cursor: pointer;
-  font-size: 0;
-  opacity: 0;
-  margin-top: 0 !important;
-  margin-right: 0 !important;
-  margin-left: 0 !important;
-  z-index: 99;
-}
-
-input[type="file"]::-webkit-file-upload-button, .select-toggler select::-webkit-file-upload-button, textarea[type="file"]::-webkit-file-upload-button {
-  display: none;
-}
-
-input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
-  color: #3f3f3f;
-  opacity: 0.6;
-}
-
-input::-moz-placeholder, textarea::-moz-placeholder {
-  color: #3f3f3f;
-  opacity: 0.6;
-}
-
-input:-ms-input-placeholder, textarea:-ms-input-placeholder {
-  color: #3f3f3f;
-  opacity: 0.6;
-}
-
-input::placeholder, textarea::placeholder {
-  color: #3f3f3f;
-  opacity: 0.6;
-}
-
-input.primary::-webkit-input-placeholder, textarea.primary::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.primary::-moz-placeholder, textarea.primary::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.primary:-ms-input-placeholder, textarea.primary:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.primary::placeholder, textarea.primary::placeholder {
-  color: #ffffff !important;
-}
-
-input.secondary::-webkit-input-placeholder, textarea.secondary::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.secondary::-moz-placeholder, textarea.secondary::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.secondary:-ms-input-placeholder, textarea.secondary:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.secondary::placeholder, textarea.secondary::placeholder {
-  color: #ffffff !important;
-}
-
-input.tertiary::-webkit-input-placeholder, textarea.tertiary::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.tertiary::-moz-placeholder, textarea.tertiary::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.tertiary:-ms-input-placeholder, textarea.tertiary:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.tertiary::placeholder, textarea.tertiary::placeholder {
-  color: #ffffff !important;
-}
-
-input.quaternary::-webkit-input-placeholder, textarea.quaternary::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.quaternary::-moz-placeholder, textarea.quaternary::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.quaternary:-ms-input-placeholder, textarea.quaternary:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.quaternary::placeholder, textarea.quaternary::placeholder {
-  color: #ffffff !important;
-}
-
-input.white::-webkit-input-placeholder, textarea.white::-webkit-input-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.white::-moz-placeholder, textarea.white::-moz-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.white:-ms-input-placeholder, textarea.white:-ms-input-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.white::placeholder, textarea.white::placeholder {
-  color: #3f3f3f !important;
-}
-
-input.gray::-webkit-input-placeholder, textarea.gray::-webkit-input-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.gray::-moz-placeholder, textarea.gray::-moz-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.gray:-ms-input-placeholder, textarea.gray:-ms-input-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.gray::placeholder, textarea.gray::placeholder {
-  color: #3f3f3f !important;
-}
-
-input.black::-webkit-input-placeholder, textarea.black::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.black::-moz-placeholder, textarea.black::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.black:-ms-input-placeholder, textarea.black:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.black::placeholder, textarea.black::placeholder {
-  color: #ffffff !important;
-}
-
-input.yellow::-webkit-input-placeholder, textarea.yellow::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.yellow::-moz-placeholder, textarea.yellow::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.yellow:-ms-input-placeholder, textarea.yellow:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.yellow::placeholder, textarea.yellow::placeholder {
-  color: #ffffff !important;
-}
-
-input.olive::-webkit-input-placeholder, textarea.olive::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.olive::-moz-placeholder, textarea.olive::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.olive:-ms-input-placeholder, textarea.olive:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.olive::placeholder, textarea.olive::placeholder {
-  color: #ffffff !important;
-}
-
-input.green::-webkit-input-placeholder, textarea.green::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.green::-moz-placeholder, textarea.green::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.green:-ms-input-placeholder, textarea.green:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.green::placeholder, textarea.green::placeholder {
-  color: #ffffff !important;
-}
-
-input.blue::-webkit-input-placeholder, textarea.blue::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.blue::-moz-placeholder, textarea.blue::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.blue:-ms-input-placeholder, textarea.blue:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.blue::placeholder, textarea.blue::placeholder {
-  color: #ffffff !important;
-}
-
-input.violet::-webkit-input-placeholder, textarea.violet::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.violet::-moz-placeholder, textarea.violet::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.violet:-ms-input-placeholder, textarea.violet:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.violet::placeholder, textarea.violet::placeholder {
-  color: #ffffff !important;
-}
-
-input.orange::-webkit-input-placeholder, textarea.orange::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.orange::-moz-placeholder, textarea.orange::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.orange:-ms-input-placeholder, textarea.orange:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.orange::placeholder, textarea.orange::placeholder {
-  color: #ffffff !important;
-}
-
-input.purple::-webkit-input-placeholder, textarea.purple::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.purple::-moz-placeholder, textarea.purple::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.purple:-ms-input-placeholder, textarea.purple:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.purple::placeholder, textarea.purple::placeholder {
-  color: #ffffff !important;
-}
-
-input.red::-webkit-input-placeholder, textarea.red::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.red::-moz-placeholder, textarea.red::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.red:-ms-input-placeholder, textarea.red:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.red::placeholder, textarea.red::placeholder {
-  color: #ffffff !important;
-}
-
-input.pink::-webkit-input-placeholder, textarea.pink::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.pink::-moz-placeholder, textarea.pink::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.pink:-ms-input-placeholder, textarea.pink:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.pink::placeholder, textarea.pink::placeholder {
-  color: #ffffff !important;
-}
-
-input.teal::-webkit-input-placeholder, textarea.teal::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.teal::-moz-placeholder, textarea.teal::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.teal:-ms-input-placeholder, textarea.teal:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.teal::placeholder, textarea.teal::placeholder {
-  color: #ffffff !important;
-}
-
-input.brown::-webkit-input-placeholder, textarea.brown::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.brown::-moz-placeholder, textarea.brown::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.brown:-ms-input-placeholder, textarea.brown:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.brown::placeholder, textarea.brown::placeholder {
-  color: #ffffff !important;
-}
-
-input.error::-webkit-input-placeholder, textarea.error::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.error::-moz-placeholder, textarea.error::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.error:-ms-input-placeholder, textarea.error:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.error::placeholder, textarea.error::placeholder {
-  color: #ffffff !important;
-}
-
-input.warning::-webkit-input-placeholder, textarea.warning::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.warning::-moz-placeholder, textarea.warning::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.warning:-ms-input-placeholder, textarea.warning:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.warning::placeholder, textarea.warning::placeholder {
-  color: #ffffff !important;
-}
-
-input.success::-webkit-input-placeholder, textarea.success::-webkit-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.success::-moz-placeholder, textarea.success::-moz-placeholder {
-  color: #ffffff !important;
-}
-
-input.success:-ms-input-placeholder, textarea.success:-ms-input-placeholder {
-  color: #ffffff !important;
-}
-
-input.success::placeholder, textarea.success::placeholder {
-  color: #ffffff !important;
-}
-
-input.transparent::-webkit-input-placeholder, textarea.transparent::-webkit-input-placeholder {
-  color: inherit !important;
-}
-
-input.transparent::-moz-placeholder, textarea.transparent::-moz-placeholder {
-  color: inherit !important;
-}
-
-input.transparent:-ms-input-placeholder, textarea.transparent:-ms-input-placeholder {
-  color: inherit !important;
-}
-
-input.transparent::placeholder, textarea.transparent::placeholder {
-  color: inherit !important;
-}
-
-input.inherit::-webkit-input-placeholder, textarea.inherit::-webkit-input-placeholder {
-  color: inherit !important;
-}
-
-input.inherit::-moz-placeholder, textarea.inherit::-moz-placeholder {
-  color: inherit !important;
-}
-
-input.inherit:-ms-input-placeholder, textarea.inherit:-ms-input-placeholder {
-  color: inherit !important;
-}
-
-input.inherit::placeholder, textarea.inherit::placeholder {
-  color: inherit !important;
-}
-
-input.base::-webkit-input-placeholder, textarea.base::-webkit-input-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.base::-moz-placeholder, textarea.base::-moz-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.base:-ms-input-placeholder, textarea.base:-ms-input-placeholder {
-  color: #3f3f3f !important;
-}
-
-input.base::placeholder, textarea.base::placeholder {
-  color: #3f3f3f !important;
-}
-
-input.invalid, textarea.invalid {
-  border-color: #f44336 !important;
-}
-
-input.valid, textarea.valid {
-  border-color: #4caf50 !important;
-}
-
-input:not(.outlined), textarea:not(.outlined) {
-  border: none;
-}
-
-input.outlined, textarea.outlined {
-  min-height: calc(2.4285714286em + 2px);
-  min-width: calc(3.4285714286em + 2px);
-}
-
-input.compact, textarea.compact {
-  padding: 0.5em 0.5em;
-}
-
-input.compact.outlined, textarea.compact.outlined {
-  min-height: calc(2.4285714286em + 2px);
-  min-width: calc(2.4285714286em + 2px);
-}
-
-input.fluid, textarea.fluid {
-  width: 100%;
-}
-
-/* RESET NUMBER INPUTS */
-input[type=number]::-webkit-inner-spin-button, textarea[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button,
-textarea[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
-
-/* RESET INVALID STYLE */
-input:-moz-ui-invalid, textarea:-moz-ui-invalid {
-  box-shadow: none;
-}
-
-/* REMOVE CLEAR ICON */
-input::-ms-clear, textarea::-ms-clear {
-  display: none;
-}
-
-/* REMOVE iOS SHADOW */
-input, textarea {
-  -webkit-appearance: none !important;
-     -moz-appearance: none !important;
-          appearance: none !important;
-}
-
-/* =========================================================================
  * Svelto - Keyframes
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -13104,37 +13161,6 @@ table.table.striped.hoverable tbody tr:first-child:not(.table-row-empty) ~ tr:nt
   border-color: inherit ;
   color: inherit ;
   min-width: 6.5em;
-}
-
-/* =========================================================================
- * Svelto - Textarea
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../normalize/normalize.scss
- * @requires ../input/input.scss
- * ========================================================================= */
-/* TEXTAREA */
-textarea {
-  resize: vertical;
-  min-height: 8.142857143em !important;
-  /* COMPACT */
-  /* UNRESIZABLE */
-}
-
-textarea.compact {
-  min-height: 8.142857143em !important;
-}
-
-textarea.unresizable, textarea[disabled], textarea.disabled,
-.disabled textarea {
-  resize: none;
-}
-
-/* RESET INVALID STYLE */
-textarea:-moz-ui-invalid {
-  box-shadow: none;
 }
 
 /* =========================================================================

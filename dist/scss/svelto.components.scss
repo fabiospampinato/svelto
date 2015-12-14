@@ -590,6 +590,216 @@ th {
 
 
 /* =========================================================================
+ * Svelto - Input
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../widget/widget.scss
+ * ========================================================================= */
+
+/* INPUT */
+
+input {
+
+  @extend .widget;
+  @include color ( $input-color );
+  display: flex;
+  flex-shrink: 1;
+  border-radius: $input-border-radius;
+  min-height: $line-height-em + ( $input-padding-vertical * 2 );
+  padding: $input-padding-vertical $input-padding-horizontal;
+
+  /* FILE */
+
+  &[type="file"] {
+
+    @include fill-absolute ();
+    width: 100%; //INFO: Or it will not stretch on mobile Chrome
+    border: none;
+    appearance: none;
+    border-radius: inherit;
+    cursor: pointer;
+    font-size: 0;
+    opacity: 0;
+    margin-top: 0 !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    z-index: 99;
+
+    &::-webkit-file-upload-button {
+      display: none;
+    }
+
+  }
+
+  /* PLACEHOLDER */
+
+  &::placeholder {
+    color: nth(map-get($colors, $input-color), 6);
+    opacity: $input-placeholder-opacity;
+  }
+
+  /* COLORS */
+
+  @each $name, $datas in $colors {
+
+    $text: nth($datas, 6);
+
+    &.#{$name}::placeholder {
+      color: $text !important;
+    }
+
+  }
+
+  /* INVALID */
+
+  &.invalid {
+    border-color: $color-error !important;
+  }
+
+  /* VALID */
+
+  &.valid {
+    border-color: $color-success !important;
+  }
+
+  /* UNOUTLINED */
+
+  &:not(.outlined) {
+    border: none;
+  }
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-height: calc(#{$line-height-em + ( $input-padding-vertical * 2 )} + #{$outline-width * 2});
+    min-width: calc(#{$line-height-em + ( $input-padding-horizontal * 2 )} + #{$outline-width * 2});
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-height: calc(#{$line-height-em + ( $input-compact-padding-vertical * 2 )} + #{$outline-width * 2});
+      min-width: calc(#{$line-height-em + ( $input-compact-padding-horizontal * 2 )} + #{$outline-width * 2});
+    }
+
+  }
+
+  /* FLUID */
+
+  &.fluid {
+    width: 100%;
+  }
+
+}
+
+/* RESET NUMBER INPUTS */
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
+/* RESET INVALID STYLE */
+
+input:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+/* REMOVE CLEAR ICON */
+
+input::-ms-clear {
+  display: none;
+}
+
+/* REMOVE iOS SHADOW */
+
+input {
+  appearance: none !important; //FIXME: Does it work?
+}
+
+
+/* =========================================================================
+ * Svelto - Autogrow (Input)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../input/input.scss
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+input.autogrow {
+  min-width: 0;
+}
+
+
+/* =========================================================================
+ * Svelto - Textarea
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../normalize/normalize.scss
+ * @requires ../input/input.scss
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+textarea {
+
+  @extend input;
+  resize: vertical;
+  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+
+  /* COMPACT */
+
+  &.compact {
+    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+  }
+
+  /* UNRESIZABLE */
+
+  &.unresizable,
+  &[disabled],
+  &.disabled,
+  .disabled & {
+    resize: none;
+  }
+
+}
+
+/* RESET INVALID STYLE */
+
+textarea:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+
+/* =========================================================================
+ * Svelto - Autogrow (Textarea)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../textarea/textarea.scss
+ * ========================================================================= */
+
+/* TEXTAREA AUTOGROW */
+
+textarea.autogrow {
+  min-height: 0;
+}
+
+
+/* =========================================================================
  * Svelto - Base
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -4325,142 +4535,6 @@ span > img {
     @include size ( $infobar-title-size );
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Input
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../normalize/normalize.scss
- * @requires ../widget/widget.scss
- * ========================================================================= */
-
-/* INPUT */
-
-input {
-
-  @extend .widget;
-  @include color ( $input-color );
-  display: flex;
-  flex-shrink: 1;
-  border-radius: $input-border-radius;
-  min-height: $line-height-em + ( $input-padding-vertical * 2 );
-  padding: $input-padding-vertical $input-padding-horizontal;
-
-  /* FILE */
-
-  &[type="file"] {
-
-    @include fill-absolute ();
-    width: 100%; //INFO: Or it will not stretch on mobile Chrome
-    border: none;
-    appearance: none;
-    border-radius: inherit;
-    cursor: pointer;
-    font-size: 0;
-    opacity: 0;
-    margin-top: 0 !important;
-    margin-right: 0 !important;
-    margin-left: 0 !important;
-    z-index: 99;
-
-    &::-webkit-file-upload-button {
-      display: none;
-    }
-
-  }
-
-  /* PLACEHOLDER */
-
-  &::placeholder {
-    color: nth(map-get($colors, $input-color), 6);
-    opacity: $input-placeholder-opacity;
-  }
-
-  /* COLORS */
-
-  @each $name, $datas in $colors {
-
-    $text: nth($datas, 6);
-
-    &.#{$name}::placeholder {
-      color: $text !important;
-    }
-
-  }
-
-  /* INVALID */
-
-  &.invalid {
-    border-color: $color-error !important;
-  }
-
-  /* VALID */
-
-  &.valid {
-    border-color: $color-success !important;
-  }
-
-  /* UNOUTLINED */
-
-  &:not(.outlined) {
-    border: none;
-  }
-
-  /* OUTLINED */
-
-  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-    min-height: calc(#{$line-height-em + ( $input-padding-vertical * 2 )} + #{$outline-width * 2});
-    min-width: calc(#{$line-height-em + ( $input-padding-horizontal * 2 )} + #{$outline-width * 2});
-  }
-
-  /* COMPACT */
-
-  &.compact {
-
-    padding: $input-compact-padding-vertical $input-compact-padding-horizontal;
-
-    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
-      min-height: calc(#{$line-height-em + ( $input-compact-padding-vertical * 2 )} + #{$outline-width * 2});
-      min-width: calc(#{$line-height-em + ( $input-compact-padding-horizontal * 2 )} + #{$outline-width * 2});
-    }
-
-  }
-
-  /* FLUID */
-
-  &.fluid {
-    width: 100%;
-  }
-
-}
-
-/* RESET NUMBER INPUTS */
-
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-}
-
-/* RESET INVALID STYLE */
-
-input:-moz-ui-invalid {
-  box-shadow: none;
-}
-
-/* REMOVE CLEAR ICON */
-
-input::-ms-clear {
-  display: none;
-}
-
-/* REMOVE iOS SHADOW */
-
-input {
-  appearance: none !important; //FIXME: Does it work?
 }
 
 
@@ -8241,48 +8315,6 @@ table.table { //INFO: So that if someone need a plain basic table he can, just b
     min-width: $tagbox-input-min-width;
   }
 
-}
-
-
-/* =========================================================================
- * Svelto - Textarea
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../normalize/normalize.scss
- * @requires ../input/input.scss
- * ========================================================================= */
-
-/* TEXTAREA */
-
-textarea {
-
-  @extend input;
-  resize: vertical;
-  min-height: ( $line-height-em * $textarea-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-
-  /* COMPACT */
-
-  &.compact {
-    min-height: ( $line-height-em * $textarea-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
-  }
-
-  /* UNRESIZABLE */
-
-  &.unresizable,
-  &[disabled],
-  &.disabled,
-  .disabled & {
-    resize: none;
-  }
-
-}
-
-/* RESET INVALID STYLE */
-
-textarea:-moz-ui-invalid {
-  box-shadow: none;
 }
 
 

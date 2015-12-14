@@ -5,10 +5,11 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../../factory/factory.js
  * ========================================================================= */
 
-//INFO: Only works with `box-sizing: border-box`
+//INFO: It only supports `box-sizing: border-box` textareas
+
 //FIXME: Does it work with `.large` textareas?
 //TODO: Make it the same height as a normal input at minimum, for beautiness
 

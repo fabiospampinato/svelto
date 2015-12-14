@@ -1792,7 +1792,7 @@
 
         /* EXPANDER OPEN */
 
-        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
+        this._on ( true, this.$expanders, 'expander:open', this.__closeOthers );
 
       }
 
@@ -1888,12 +1888,10 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../../factory/factory.js
  * ========================================================================= */
 
-//INFO: Only works with `box-sizing: border-box`
-//FIXME: Does it work with `.large` inputs?
-//FIXME: Add an extra pixel, or the text cursor won't be displayed
+//INFO: It only supports `box-sizing: border-box` inputs
 
 (function ( $, _, window, document, undefined ) {
 
@@ -1905,10 +1903,7 @@
     name: 'autogrowInput',
     selector: 'input.autogrow',
     options: {
-      minWidth: 0,
-      callbacks: {
-        update () {}
-      }
+      minWidth: 1 //INFO: In order for the text cursor to be displayed
     }
   };
 
@@ -1922,6 +1917,8 @@
 
       this.$input = this.$element;
 
+      this.ctx = document.createElement ( 'canvas' ).getContext ( '2d' );
+
     }
 
     _init () {
@@ -1934,7 +1931,7 @@
 
       /* INPUT / CHANGE */
 
-      this._on ( 'input change', this._update );
+      this._on ( true, 'input change', this._update );
 
     }
 
@@ -1942,34 +1939,15 @@
 
     _getNeededWidth () {
 
-      //FIXME: Isn't it better to just detach it, or to leave it in the DOM?
+      this.ctx.font = this.$input.css ( 'font' );
 
-      let $span = $( '<span>' + this.$input.val () + '</span>' );
-
-      $span.css ({
-        font: this.$input.css ( 'font' ),
-        whiteSpace: 'nowrap',
-        position: 'absolute',
-        opacity: 0
-      });
-
-      $span.appendTo ( $body );
-
-      let width = $span.width ();
-
-      $span.remove ();
-
-      return width;
+      return this.ctx.measureText ( this.$input.val () ).width;
 
     }
 
     _update () {
 
-      let neededWidth = this._getNeededWidth ( this.$input );
-
-      this.$input.width ( Math.max ( neededWidth, this.options.minWidth ) );
-
-      this._trigger ( 'update' );
+      this.$input.width ( Math.max ( this.options.minWidth, this._getNeededWidth () ) );
 
     }
 
@@ -1993,10 +1971,11 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires ../../factory/factory.js
  * ========================================================================= */
 
-//INFO: Only works with `box-sizing: border-box`
+//INFO: It only supports `box-sizing: border-box` textareas
+
 //FIXME: Does it work with `.large` textareas?
 //TODO: Make it the same height as a normal input at minimum, for beautiness
 

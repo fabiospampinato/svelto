@@ -49,7 +49,7 @@
 
         /* EXPANDER OPEN */
 
-        this._on ( this.$expanders, 'expander:open', this.__closeOthers );
+        this._on ( true, this.$expanders, 'expander:open', this.__closeOthers );
 
       }
 
