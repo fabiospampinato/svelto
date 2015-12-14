@@ -2711,7 +2711,7 @@
 
       return {
         h: hsv.h,
-        s: ( tempS / ( ( tempL <= 1 ) ? tempL : 2 - tempL ) ) * 100,
+        s: ( tempS !== 0 ) ? ( tempS / ( ( tempL <= 1 ) ? tempL : 2 - tempL ) ) * 100 : 0,
         l: ( tempL / 2 ) * 100
       };
 
@@ -2738,7 +2738,7 @@
 
       return {
         h: hsl.h,
-        s: ( 2 * s ) / ( l + s ) * 100,
+        s: ( l + s !== 0 ) ? ( 2 * s ) / ( l + s ) * 100 : 0,
         v: ( l + s ) / 2 * 100
       };
 
