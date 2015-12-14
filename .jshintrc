@@ -28,7 +28,7 @@
   "maxparams"     : 5,        // {int} Max number of formal params allowed per function
   "maxdepth"      : 3,        // {int} Max depth of nested blocks (within functions)
   "maxstatements" : false,    // {int} Max number statements per function
-  "maxcomplexity" : 5,        // {int} Max cyclomatic complexity per function
+  "maxcomplexity" : false,    // {int} Max cyclomatic complexity per function
   "maxlen"        : false,    // {int} Max number of characters per line
   "varstmt"       : true,     // true: Disallow any var statements. Only `let` and `const` are allowed.
 
@@ -88,6 +88,8 @@
     "Svelto"      : true,     // Svelto global object
     "Pointer"     : true,     // Pointer global object
     "Widgetize"   : true,     // Widgetize global object
+    "Timer"       : true,     // Timer global object
+    "ColorHelper" : true,     // ColorHelper global object
     "$window"     : true,     // jQuery-extras' global
     "$document"   : true,     // jQuery-extras' global
     "$html"       : true,     // jQuery-extras' global

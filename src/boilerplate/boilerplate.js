@@ -16,6 +16,7 @@
 
   let config = {
     name: 'boilerplate',
+    selector: undefined,
     templates: {
       base: false
     },
@@ -39,6 +40,10 @@
     /* SPECIAL */
 
     _variables () {
+
+    }
+
+    _init () {
 
     }
 

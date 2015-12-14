@@ -12,9 +12,9 @@
 
   /* VARIABLES */
 
-  let userAgent  = navigator.userAgent.toLowerCase (),
-      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', //INFO: Fixes an IE10 bug, `navigator.vendor` it's undefined there
-      appVersion = navigator.appVersion.toLowerCase ();
+  let userAgent  = navigator.userAgent ? navigator.userAgent.toLowerCase () : '',
+      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', //INFO: Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
+      appVersion = navigator.appVersion ? navigator.appVersion.toLowerCase () : '';
 
   /* CHECKS */
 
@@ -60,7 +60,7 @@
       desktop: !isMobile && !isTablet,
       online: () => navigator.onLine,
       offline: () => !navigator.onLine,
-      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof DocumentTouch )
+      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof window.DocumentTouch )
     }
   };
 

@@ -16,7 +16,7 @@
 
   window.ColorHelper = class {
 
-    /* COLOR SPACES CONVERTERS */
+    /* HEX */
 
     static hex2rgb ( hex ) {
 
@@ -33,6 +33,14 @@
       return ColorHelper.rgb2hsv ( ColorHelper.hex2rgb ( hex ) );
 
     }
+
+    static hex2hsl ( hex ) {
+
+      return ColorHelper.hsv2hsl ( ColorHelper.hex2hsv ( hex ) );
+
+    }
+
+    /* RGB */
 
     static rgb2hex ( rgb ) {
 
@@ -95,12 +103,20 @@
       }
 
       return {
-        h: h * 360, 
-        s: s * 100, 
-        v: v * 100 
+        h: h * 360,
+        s: s * 100,
+        v: v * 100
       };
 
     }
+
+    static rgb2hsl ( rgb ) {
+
+      return ColorHelper.hsv2hsl ( ColorHelper.rgb2hsv ( rgb ) );
+
+    }
+
+    /* HSV */
 
     static hsv2hex ( hsv ) {
 
@@ -199,6 +215,20 @@
 
     }
 
+    /* HSL */
+
+    static hsl2hex ( hsl ) {
+
+      return ColorHelper.hsv2hex ( ColorHelper.hsl2hsv ( hsl ) );
+
+    }
+
+    static hsl2rgb ( hsl ) {
+
+      return ColorHelper.hsv2rgb ( ColorHelper.hsl2hsv ( hsl ) );
+
+    }
+
     static hsl2hsv ( hsl ) {
 
       let l = hsl.l / 100 * 2,
@@ -212,11 +242,11 @@
 
     }
 
-    /* SCALE CONVERTERS */
+    /* DECIMAL / HEX */
 
     static dec2hex ( dec ) {
 
-      return _.padLeft ( dec.toString ( 16 ), 2, '0' );
+      return _.padLeft ( parseInt ( dec, 10 ).toString ( 16 ), 2, '0' );
 
     }
 

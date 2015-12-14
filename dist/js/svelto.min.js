@@ -385,9 +385,9 @@
 
   /* VARIABLES */
 
-  let userAgent  = navigator.userAgent.toLowerCase (),
-      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', //INFO: Fixes an IE10 bug, `navigator.vendor` it's undefined there
-      appVersion = navigator.appVersion.toLowerCase ();
+  let userAgent  = navigator.userAgent ? navigator.userAgent.toLowerCase () : '',
+      vendor     = navigator.vendor ? navigator.vendor.toLowerCase () : '', //INFO: Fixes an IE10 bug, `navigator.vendor` it's `undefined` there
+      appVersion = navigator.appVersion ? navigator.appVersion.toLowerCase () : '';
 
   /* CHECKS */
 
@@ -433,7 +433,7 @@
       desktop: !isMobile && !isTablet,
       online: () => navigator.onLine,
       offline: () => !navigator.onLine,
-      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof DocumentTouch )
+      touchDevice: 'ontouchstart' in window || ( 'DocumentTouch' in window && document instanceof window.DocumentTouch )
     }
   };
 
@@ -2081,6 +2081,7 @@
 
   let config = {
     name: 'boilerplate',
+    selector: undefined,
     templates: {
       base: false
     },
@@ -2104,6 +2105,10 @@
     /* SPECIAL */
 
     _variables () {
+
+    }
+
+    _init () {
 
     }
 
@@ -2166,8 +2171,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add drag support instead of flick
-//TODO: API for setting interval
+//TODO: Add slides drag support
 
 (function ( $, _, window, document, undefined ) {
 
@@ -2179,7 +2183,7 @@
     name: 'carousel',
     selector: '.carousel',
     options: {
-      startingIndex: 0,
+      startIndex: 0,
       cycle: false,
       interval: 5000,
       intervalMinimumRemaining: 1000,
@@ -2237,7 +2241,7 @@
 
       } else {
 
-        this.set ( this.options.startingIndex );
+        this.set ( this.options.startIndex );
 
       }
 
@@ -2373,7 +2377,11 @@
 
       this._wasCycle = this.options.cycle;
 
-      this.stop ();
+      if ( this.options.cycle ) {
+
+        this.stop ();
+
+      }
 
     }
 
@@ -2448,6 +2456,8 @@
 
     }
 
+    /* API TIMER */
+
     play () {
 
       this.options.cycle = true;
@@ -2467,6 +2477,13 @@
 
       this.options.cycle = false;
       this.timer.stop ();
+
+    }
+
+    reset () {
+
+      this.options.cycle = true;
+      this.timer.reset ();
 
     }
 
@@ -2501,7 +2518,7 @@
 
   window.ColorHelper = class {
 
-    /* COLOR SPACES CONVERTERS */
+    /* HEX */
 
     static hex2rgb ( hex ) {
 
@@ -2518,6 +2535,14 @@
       return ColorHelper.rgb2hsv ( ColorHelper.hex2rgb ( hex ) );
 
     }
+
+    static hex2hsl ( hex ) {
+
+      return ColorHelper.hsv2hsl ( ColorHelper.hex2hsv ( hex ) );
+
+    }
+
+    /* RGB */
 
     static rgb2hex ( rgb ) {
 
@@ -2580,12 +2605,20 @@
       }
 
       return {
-        h: h * 360, 
-        s: s * 100, 
-        v: v * 100 
+        h: h * 360,
+        s: s * 100,
+        v: v * 100
       };
 
     }
+
+    static rgb2hsl ( rgb ) {
+
+      return ColorHelper.hsv2hsl ( ColorHelper.rgb2hsv ( rgb ) );
+
+    }
+
+    /* HSV */
 
     static hsv2hex ( hsv ) {
 
@@ -2684,6 +2717,20 @@
 
     }
 
+    /* HSL */
+
+    static hsl2hex ( hsl ) {
+
+      return ColorHelper.hsv2hex ( ColorHelper.hsl2hsv ( hsl ) );
+
+    }
+
+    static hsl2rgb ( hsl ) {
+
+      return ColorHelper.hsv2rgb ( ColorHelper.hsl2hsv ( hsl ) );
+
+    }
+
     static hsl2hsv ( hsl ) {
 
       let l = hsl.l / 100 * 2,
@@ -2697,11 +2744,11 @@
 
     }
 
-    /* SCALE CONVERTERS */
+    /* DECIMAL / HEX */
 
     static dec2hex ( dec ) {
 
-      return _.padLeft ( dec.toString ( 16 ), 2, '0' );
+      return _.padLeft ( parseInt ( dec, 10 ).toString ( 16 ), 2, '0' );
 
     }
 

@@ -8,8 +8,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add drag support instead of flick
-//TODO: API for setting interval
+//TODO: Add slides drag support
 
 (function ( $, _, window, document, undefined ) {
 
@@ -21,7 +20,7 @@
     name: 'carousel',
     selector: '.carousel',
     options: {
-      startingIndex: 0,
+      startIndex: 0,
       cycle: false,
       interval: 5000,
       intervalMinimumRemaining: 1000,
@@ -79,7 +78,7 @@
 
       } else {
 
-        this.set ( this.options.startingIndex );
+        this.set ( this.options.startIndex );
 
       }
 
@@ -215,7 +214,11 @@
 
       this._wasCycle = this.options.cycle;
 
-      this.stop ();
+      if ( this.options.cycle ) {
+
+        this.stop ();
+
+      }
 
     }
 
@@ -290,6 +293,8 @@
 
     }
 
+    /* API TIMER */
+
     play () {
 
       this.options.cycle = true;
@@ -309,6 +314,13 @@
 
       this.options.cycle = false;
       this.timer.stop ();
+
+    }
+
+    reset () {
+
+      this.options.cycle = true;
+      this.timer.reset ();
 
     }
 
