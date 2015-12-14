@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Autogrow (Input)
+ * Svelto - Autogrow - Input
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,7 +8,7 @@
  * @requires ../../factory/factory.js
  * ========================================================================= */
 
-//INFO: It only supports `box-sizing: border-box` inputs
+//INFO: It supports only `box-sizing: border-box` inputs
 
 (function ( $, _, window, document, undefined ) {
 
@@ -18,10 +18,7 @@
 
   let config = {
     name: 'autogrowInput',
-    selector: 'input.autogrow',
-    options: {
-      minWidth: 1 //INFO: In order for the text cursor to be displayed
-    }
+    selector: 'input.autogrow'
   };
 
   /* AUTOGROW INPUT */
@@ -64,7 +61,7 @@
 
     _update () {
 
-      this.$input.width ( Math.max ( this.options.minWidth, this._getNeededWidth () ) );
+      this.$input.width ( this._getNeededWidth () );
 
     }
 

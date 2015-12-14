@@ -1,4 +1,27 @@
 /* =========================================================================
+ * Svelto - Autogrow - Input (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* INPUT AUTOGROW */
+/* =========================================================================
+ * Svelto - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+/* TEXTAREA */
+/* =========================================================================
+ * Svelto - Autogrow - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../textarea/variables.scss
+ * ========================================================================= */
+/* INPUT AUTOGROW */
+/* =========================================================================
  * Svelto - Colors (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -623,13 +646,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* PARTIAL */
-/* =========================================================================
- * Svelto - Textarea (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-/* TEXTAREA */
 /* =========================================================================
  * Svelto - Toolbar (Variables)
  * =========================================================================
@@ -2236,7 +2252,7 @@ input, textarea {
 }
 
 /* =========================================================================
- * Svelto - Autogrow (Input)
+ * Svelto - Autogrow - Input
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2245,7 +2261,16 @@ input, textarea {
  * ========================================================================= */
 /* INPUT AUTOGROW */
 input.autogrow, textarea.autogrow {
-  min-width: 0;
+  /* OUTLINED */
+  /* COMPACT */
+}
+
+input.autogrow.outlined, textarea.autogrow.outlined {
+  min-width: calc(2em + 2px + 1px);
+}
+
+input.autogrow.compact.outlined, textarea.autogrow.compact.outlined {
+  min-width: calc(1em + 2px + 1px);
 }
 
 /* =========================================================================
@@ -2280,7 +2305,7 @@ textarea:-moz-ui-invalid {
 }
 
 /* =========================================================================
- * Svelto - Autogrow (Textarea)
+ * Svelto - Autogrow - Textarea
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2289,7 +2314,12 @@ textarea:-moz-ui-invalid {
  * ========================================================================= */
 /* TEXTAREA AUTOGROW */
 textarea.autogrow {
-  min-height: 0;
+  min-height: 8.142857143em !important;
+  /* COMPACT */
+}
+
+textarea.autogrow.compact {
+  min-height: 8.142857143em !important;
 }
 
 /* =========================================================================

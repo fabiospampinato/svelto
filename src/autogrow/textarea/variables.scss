@@ -1,0 +1,13 @@
+
+/* =========================================================================
+ * Svelto - Autogrow - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../textarea/variables.scss
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+$textarea-autogrow-min-lines: $textarea-lines !default; //INFO: So that the cursor icon is displayed if empty

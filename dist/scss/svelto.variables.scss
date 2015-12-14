@@ -1,5 +1,43 @@
 
 /* =========================================================================
+ * Svelto - Autogrow - Input (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+$input-autogrow-min-width: 1px !default; //INFO: So that the cursor icon is displayed if empty
+
+
+/* =========================================================================
+ * Svelto - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+$textarea-lines: 5 !default;
+
+
+/* =========================================================================
+ * Svelto - Autogrow - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../textarea/variables.scss
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+$textarea-autogrow-min-lines: $textarea-lines !default; //INFO: So that the cursor icon is displayed if empty
+
+
+/* =========================================================================
  * Svelto - Colors (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2868,18 +2906,6 @@ $table-hoverable-row-even-color-hover: rgba(0, 0, 0, 0.06) !default;
 /* PARTIAL */
 
 $tagbox-input-min-width: 6.5em !default;
-
-
-/* =========================================================================
- * Svelto - Textarea (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TEXTAREA */
-
-$textarea-lines: 5 !default;
 
 
 /* =========================================================================

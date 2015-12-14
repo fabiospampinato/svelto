@@ -1,5 +1,43 @@
 
 /* =========================================================================
+ * Svelto - Autogrow - Input (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+$input-autogrow-min-width: 1px !default; //INFO: So that the cursor icon is displayed if empty
+
+
+/* =========================================================================
+ * Svelto - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * ========================================================================= */
+
+/* TEXTAREA */
+
+$textarea-lines: 5 !default;
+
+
+/* =========================================================================
+ * Svelto - Autogrow - Textarea (Variables)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../../textarea/variables.scss
+ * ========================================================================= */
+
+/* INPUT AUTOGROW */
+
+$textarea-autogrow-min-lines: $textarea-lines !default; //INFO: So that the cursor icon is displayed if empty
+
+
+/* =========================================================================
  * Svelto - Colors (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -2871,18 +2909,6 @@ $tagbox-input-min-width: 6.5em !default;
 
 
 /* =========================================================================
- * Svelto - Textarea (Variables)
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * ========================================================================= */
-
-/* TEXTAREA */
-
-$textarea-lines: 5 !default;
-
-
-/* =========================================================================
  * Svelto - Toolbar (Variables)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -4720,7 +4746,7 @@ input {
 
 
 /* =========================================================================
- * Svelto - Autogrow (Input)
+ * Svelto - Autogrow - Input
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4731,7 +4757,23 @@ input {
 /* INPUT AUTOGROW */
 
 input.autogrow {
-  min-width: 0;
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-width: calc(#{( $input-padding-horizontal * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-width: calc(#{( $input-compact-padding-horizontal * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
+    }
+
+  }
+
 }
 
 
@@ -4778,7 +4820,7 @@ textarea:-moz-ui-invalid {
 
 
 /* =========================================================================
- * Svelto - Autogrow (Textarea)
+ * Svelto - Autogrow - Textarea
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4789,7 +4831,15 @@ textarea:-moz-ui-invalid {
 /* TEXTAREA AUTOGROW */
 
 textarea.autogrow {
-  min-height: 0;
+
+  min-height: ( $line-height-em * $textarea-autogrow-min-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+
+  /* COMPACT */
+
+  &.compact {
+    min-height: ( $line-height-em * $textarea-autogrow-min-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+  }
+
 }
 
 

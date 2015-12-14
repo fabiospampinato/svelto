@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Autogrow (Textarea)
+ * Svelto - Autogrow - Textarea
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,10 +8,7 @@
  * @requires ../../factory/factory.js
  * ========================================================================= */
 
-//INFO: It only supports `box-sizing: border-box` textareas
-
-//FIXME: Does it work with `.large` textareas?
-//TODO: Make it the same height as a normal input at minimum, for beautiness
+//INFO: It supports only `box-sizing: border-box` textareas
 
 (function ( $, _, window, document, undefined ) {
 
@@ -21,13 +18,7 @@
 
   let config = {
     name: 'autogrowTextarea',
-    selector: 'textarea.autogrow',
-    options: {
-      minHeight: 0,
-      callbacks: {
-        update () {}
-      }
-    }
+    selector: 'textarea.autogrow'
   };
 
   /* AUTOGROW TEXTAREA */
@@ -52,19 +43,23 @@
 
       /* INPUT / CHANGE */
 
-      this._on ( 'input change', this._update );
+      this._on ( true, 'input change', this._update );
 
     }
 
     /* PRIVATE */
 
+    _getNeededHeight () {
+
+      //TODO: Do it with canvas, if possible, improve the performance in general
+
+      return this.$textarea.height ( 0 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
+
+    }
+
     _update () {
 
-      var neededHeight = this.$textarea.height ( 1 )[0].scrollHeight - parseFloat ( this.$textarea.css ( 'padding-top' ) ) - parseFloat ( this.$textarea.css ( 'padding-bottom' ) );
-
-      this.$textarea.height ( Math.max ( neededHeight, this.options.minHeight ) );
-
-      this._trigger ( 'update' );
+      this.$textarea.height ( this._getNeededHeight () );
 
     }
 

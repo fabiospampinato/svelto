@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Autogrow (Input)
+ * Svelto - Autogrow - Input
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,5 +11,21 @@
 /* INPUT AUTOGROW */
 
 input.autogrow {
-  min-width: 0;
+
+  /* OUTLINED */
+
+  &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+    min-width: calc(#{( $input-padding-horizontal * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
+  }
+
+  /* COMPACT */
+
+  &.compact {
+
+    &.outlined { //FIXME: Ugly fix for keeping the aspect ratio even in this condition
+      min-width: calc(#{( $input-compact-padding-horizontal * 2 )} + #{$outline-width * 2} + #{$input-autogrow-min-width});
+    }
+
+  }
+
 }

@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Autogrow (Textarea)
+ * Svelto - Autogrow - Textarea
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -11,5 +11,13 @@
 /* TEXTAREA AUTOGROW */
 
 textarea.autogrow {
-  min-height: 0;
+
+  min-height: ( $line-height-em * $textarea-autogrow-min-lines ) + ( $input-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+
+  /* COMPACT */
+
+  &.compact {
+    min-height: ( $line-height-em * $textarea-autogrow-min-lines ) + ( $input-compact-padding-vertical * 2 ) !important; //FIXME: It shouldn't be fixed... but otherwise the height is greater, why?
+  }
+
 }
