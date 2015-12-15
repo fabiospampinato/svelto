@@ -18,7 +18,10 @@
 
   let config = {
     name: 'autogrowInput',
-    selector: 'input.autogrow'
+    selector: 'input.autogrow',
+    callbacks: {
+      update () {}
+    }
   };
 
   /* AUTOGROW INPUT */
@@ -62,6 +65,8 @@
     _update () {
 
       this.$input.width ( this._getNeededWidth () );
+
+      this._trigger ( 'update' );
 
     }
 

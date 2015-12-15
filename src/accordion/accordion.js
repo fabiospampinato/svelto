@@ -22,6 +22,10 @@
       multiple: false, //INFO: Wheter to keep multiple expanders open or just one
       selectors: {
         expander: Svelto.Expander.config.selector
+      },
+      callbacks: {
+        open () {},
+        close () {}
       }
     }
   };
@@ -43,45 +47,47 @@
 
     _events () {
 
-      /* SINGLE */
+      /* EXPANDER OPEN */
 
-      if ( !this.options.multiple ) {
+      this._on ( true, this.$expanders, 'expander:open', this.__open );
 
-        /* EXPANDER OPEN */
+      /* EXPANDER CLOSE */
 
-        this._on ( true, this.$expanders, 'expander:open', this.__closeOthers );
-
-      }
-
-    }
-
-    _destroy () {
-
-      /* SINGLE */
-
-      if ( !this.options.multiple ) {
-
-        /* EXPANDER OPEN */
-
-        this._off ( this.$expanders, 'expander:open', this.__closeOthers );
-
-      }
+      this._on ( true, this.$expanders, 'expander:close', this.__close );
 
     }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event ) {
+    __open ( event ) {
 
-      for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
+      this._trigger ( 'open', { index: this.$expanders.index ( event.target) } );
 
-        if ( this.$expanders[i] !== event.target ) {
+      /* SINGLE */
 
-          this.instances[i].close ();
+      if ( !this.options.multiple ) {
+
+        /* CLOSE OTHERS */
+
+        for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
+
+          if ( this.$expanders[i] !== event.target ) {
+
+            this.instances[i].close ();
+
+          }
 
         }
 
       }
+
+    }
+
+    /* EXPANDER CLOSE */
+
+    __close ( event ) {
+
+      this._trigger ( 'close', { index: this.$expanders.index ( event.target) } );
 
     }
 

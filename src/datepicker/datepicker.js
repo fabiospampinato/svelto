@@ -8,11 +8,11 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Deal with UTC time etc...
 //TODO: Add support for min and max date delimiter
-//FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
 //TODO: Add support for setting first day of the week
-//INFO: We use the format: YYYYMMDD
+
+//FIXME: Deal with UTC time etc...
+//FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
 
 (function ( $, _, window, document, undefined ) {
 

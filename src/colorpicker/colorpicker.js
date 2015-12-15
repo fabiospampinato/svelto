@@ -10,8 +10,7 @@
  * @requires ../color_helper/color_helper.js
  * ========================================================================= */
 
-//TODO: Add support for alpha channel
-//TODO: Add a $bgs variable where we update the background
+//TODO: Add support for alpha channel, by adding a slider at the bottom of the sbWrp, it should be optional
 
 (function ( $, _, window, document, undefined ) {
 
@@ -63,7 +62,6 @@
       this.hueWrpHeight = this.sbWrpSize;
 
       this.color = new HexColor ();
-      this.hex = '';
 
     }
 
@@ -278,11 +276,11 @@
 
     _updateInput () {
 
-      this.hex = this.color.getHexStr ();
+      let hex = this.color.getHexStr ();
 
-      this.$input.val ( this.hex ).trigger ( 'change' );
+      this.$input.val ( hex ).trigger ( 'change' );
 
-      this._trigger ( 'change', { color: this.hex } );
+      this._trigger ( 'change', { color: hex } );
 
     }
 

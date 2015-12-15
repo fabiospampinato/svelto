@@ -8,6 +8,8 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
+//TODO: Add support for alpha channel
+
 (function ( _, window, document, undefined ) {
 
   'use strict';

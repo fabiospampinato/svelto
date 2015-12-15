@@ -18,8 +18,10 @@
 
   /* UTILITIES */
 
-  let encode = encodeURIComponent,
-      decode = decodeURIComponent;
+  let config = {
+    encoder: encodeURIComponent,
+    decoder: decodeURIComponent
+  };
 
   /* COOKIE */
 
@@ -29,7 +31,7 @@
 
       if ( !key ) return null;
 
-      return decode ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
+      return config.decoder ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + config.encoder ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
 
     },
 
@@ -59,7 +61,7 @@
 
       }
 
-      document.cookie = encode ( key ) + '=' + encode ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
+      document.cookie = config.encoder ( key ) + '=' + config.encoder ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
 
       return true;
 
@@ -69,7 +71,7 @@
 
       if ( !this.has ( key ) ) return false;
 
-      document.cookie = encode ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
+      document.cookie = config.encoder ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
 
       return true;
 
@@ -79,7 +81,7 @@
 
       if ( !key ) return false;
 
-      return ( new RegExp ( '(?:^|;\\s*)' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
+      return ( new RegExp ( '(?:^|;\\s*)' + config.encoder ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
 
     },
 
@@ -87,13 +89,7 @@
 
       let keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
 
-      for ( let i = 0, l = keys.length; i < l; i++ ) {
-
-        keys[i] = decode ( keys[i] );
-
-      }
-
-      return keys;
+      return _.map ( keys, config.decoder );
 
     }
 

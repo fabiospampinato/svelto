@@ -1765,6 +1765,10 @@
       multiple: false, //INFO: Wheter to keep multiple expanders open or just one
       selectors: {
         expander: Svelto.Expander.config.selector
+      },
+      callbacks: {
+        open () {},
+        close () {}
       }
     }
   };
@@ -1786,45 +1790,47 @@
 
     _events () {
 
-      /* SINGLE */
+      /* EXPANDER OPEN */
 
-      if ( !this.options.multiple ) {
+      this._on ( true, this.$expanders, 'expander:open', this.__open );
 
-        /* EXPANDER OPEN */
+      /* EXPANDER CLOSE */
 
-        this._on ( true, this.$expanders, 'expander:open', this.__closeOthers );
-
-      }
-
-    }
-
-    _destroy () {
-
-      /* SINGLE */
-
-      if ( !this.options.multiple ) {
-
-        /* EXPANDER OPEN */
-
-        this._off ( this.$expanders, 'expander:open', this.__closeOthers );
-
-      }
+      this._on ( true, this.$expanders, 'expander:close', this.__close );
 
     }
 
     /* EXPANDER OPEN */
 
-    __closeOthers ( event ) {
+    __open ( event ) {
 
-      for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
+      this._trigger ( 'open', { index: this.$expanders.index ( event.target) } );
 
-        if ( this.$expanders[i] !== event.target ) {
+      /* SINGLE */
 
-          this.instances[i].close ();
+      if ( !this.options.multiple ) {
+
+        /* CLOSE OTHERS */
+
+        for ( let i = 0, l = this.$expanders.length; i < l; i++ ) {
+
+          if ( this.$expanders[i] !== event.target ) {
+
+            this.instances[i].close ();
+
+          }
 
         }
 
       }
+
+    }
+
+    /* EXPANDER CLOSE */
+
+    __close ( event ) {
+
+      this._trigger ( 'close', { index: this.$expanders.index ( event.target) } );
 
     }
 
@@ -1901,7 +1907,10 @@
 
   let config = {
     name: 'autogrowInput',
-    selector: 'input.autogrow'
+    selector: 'input.autogrow',
+    callbacks: {
+      update () {}
+    }
   };
 
   /* AUTOGROW INPUT */
@@ -1946,6 +1955,8 @@
 
       this.$input.width ( this._getNeededWidth () );
 
+      this._trigger ( 'update' );
+
     }
 
   }
@@ -1981,7 +1992,10 @@
 
   let config = {
     name: 'autogrowTextarea',
-    selector: 'textarea.autogrow'
+    selector: 'textarea.autogrow',
+    callbacks: {
+      update () {}
+    }
   };
 
   /* AUTOGROW TEXTAREA */
@@ -2023,6 +2037,8 @@
     _update () {
 
       this.$textarea.height ( this._getNeededHeight () );
+
+      this._tigger ( 'update' );
 
     }
 
@@ -2510,6 +2526,8 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
+//TODO: Add support for alpha channel
+
 (function ( _, window, document, undefined ) {
 
   'use strict';
@@ -2853,8 +2871,7 @@
  * @requires ../color_helper/color_helper.js
  * ========================================================================= */
 
-//TODO: Add support for alpha channel
-//TODO: Add a $bgs variable where we update the background
+//TODO: Add support for alpha channel, by adding a slider at the bottom of the sbWrp, it should be optional
 
 (function ( $, _, window, document, undefined ) {
 
@@ -2906,7 +2923,6 @@
       this.hueWrpHeight = this.sbWrpSize;
 
       this.color = new HexColor ();
-      this.hex = '';
 
     }
 
@@ -3121,11 +3137,11 @@
 
     _updateInput () {
 
-      this.hex = this.color.getHexStr ();
+      let hex = this.color.getHexStr ();
 
-      this.$input.val ( this.hex ).trigger ( 'change' );
+      this.$input.val ( hex ).trigger ( 'change' );
 
-      this._trigger ( 'change', { color: this.hex } );
+      this._trigger ( 'change', { color: hex } );
 
     }
 
@@ -3194,8 +3210,10 @@
 
   /* UTILITIES */
 
-  let encode = encodeURIComponent,
-      decode = decodeURIComponent;
+  let config = {
+    encoder: encodeURIComponent,
+    decoder: decodeURIComponent
+  };
 
   /* COOKIE */
 
@@ -3205,7 +3223,7 @@
 
       if ( !key ) return null;
 
-      return decode ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
+      return config.decoder ( document.cookie.replace ( new RegExp ( '(?:(?:^|.*;)\\s*' + config.encoder ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=\\s*([^;]*).*$)|^.*$' ), '$1' ) ) || null;
 
     },
 
@@ -3235,7 +3253,7 @@
 
       }
 
-      document.cookie = encode ( key ) + '=' + encode ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
+      document.cookie = config.encoder ( key ) + '=' + config.encoder ( value ) + expires + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' ) + ( secure ? '; secure' : '' );
 
       return true;
 
@@ -3245,7 +3263,7 @@
 
       if ( !this.has ( key ) ) return false;
 
-      document.cookie = encode ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
+      document.cookie = config.encoder ( key ) + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT' + ( domain ? '; domain=' + domain : '' ) + ( path ? '; path=' + path : '' );
 
       return true;
 
@@ -3255,7 +3273,7 @@
 
       if ( !key ) return false;
 
-      return ( new RegExp ( '(?:^|;\\s*)' + encode ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
+      return ( new RegExp ( '(?:^|;\\s*)' + config.encoder ( key ).replace ( /[\-\.\+\*]/g, '\\$&' ) + '\\s*\\=' ) ).test ( document.cookie );
 
     },
 
@@ -3263,13 +3281,7 @@
 
       let keys = document.cookie.replace ( /((?:^|\s*;)[^\=]+)(?=;|$)|^\s*|\s*(?:\=[^;]*)?(?:\1|$)/g, '' ).split ( /\s*(?:\=[^;]*)?;\s*/ );
 
-      for ( let i = 0, l = keys.length; i < l; i++ ) {
-
-        keys[i] = decode ( keys[i] );
-
-      }
-
-      return keys;
+      return _.map ( keys, config.decoder );
 
     }
 
@@ -3287,11 +3299,11 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Deal with UTC time etc...
 //TODO: Add support for min and max date delimiter
-//FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
 //TODO: Add support for setting first day of the week
-//INFO: We use the format: YYYYMMDD
+
+//FIXME: Deal with UTC time etc...
+//FIXME: When using the arrows the prev day still remains hovered even if it's not below the cursor (chrome)
 
 (function ( $, _, window, document, undefined ) {
 
@@ -3733,13 +3745,13 @@
  * =========================================================================
  * @requires ../factory/factory.js
  * ========================================================================= */
-
-//FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
-
+ 
 //TODO: Add page autoscroll capabilities
 //TODO: [MAYBE] Add support for handlers outside of the draggable element itself
 //TODO: Add unhandlers
 //TODO: Add support for ghost element, that will happear when dragging instead of the element itself, it should also work well with droppable
+
+//FIXME: Don't trigger the move events if we are not doing it more than a threashold, but just on touch devices, there is very difficult to do an extremelly precise tap without moving the finger
 //FIXME: Handler drag cancel, for example in firefox and IE dragging outside of the window
 //FIXME: On iOS, if the draggable is too close to the left edge of the screen dragging it will cause a `scroll to go back` event/animation on safari
 

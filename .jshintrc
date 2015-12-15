@@ -90,6 +90,7 @@
     "Widgetize"   : true,     // Widgetize global object
     "Timer"       : true,     // Timer global object
     "ColorHelper" : true,     // ColorHelper global object
+    "HexColor"    : true,     // HexColor global object
     "$window"     : true,     // jQuery-extras' global
     "$document"   : true,     // jQuery-extras' global
     "$html"       : true,     // jQuery-extras' global
