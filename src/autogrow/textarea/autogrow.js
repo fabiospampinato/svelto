@@ -19,8 +19,10 @@
   let config = {
     name: 'autogrowTextarea',
     selector: 'textarea.autogrow',
-    callbacks: {
-      update () {}
+    options: {
+      callbacks: {
+        update () {}
+      }
     }
   };
 
@@ -64,7 +66,7 @@
 
       this.$textarea.height ( this._getNeededHeight () );
 
-      this._tigger ( 'update' );
+      this._trigger ( 'update' );
 
     }
 

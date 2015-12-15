@@ -52,7 +52,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $slider ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $slider ) { //TODO: Just use the generic data-options maybe
 
       $slider.slider ({
         min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),

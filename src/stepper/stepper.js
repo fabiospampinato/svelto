@@ -41,7 +41,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $stepper ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $stepper ) { //TODO: Just use the generic data-options maybe
 
       $stepper.stepper ({
         min: Number($stepper.data ( 'min' ) || 0),

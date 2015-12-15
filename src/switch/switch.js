@@ -48,7 +48,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $switch ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $switch ) { //TODO: Just use the generic data-options maybe
 
       $switch.switch ({
         colors: {

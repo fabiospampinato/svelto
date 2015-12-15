@@ -9,9 +9,7 @@
  * @requires ../tmpl/tmpl.js
  * ========================================================================= */
 
-//TODO: Add support for element-level options via `data-nameLowerCase-options`
-//TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`
-//TODO: Maybe we should just check for the `disabled` class, or we have to see it for every widget instance associated with the node
+//TODO: Add support for remove, right know it doesn't get triggered on `.remove ()` but only on `.trigger ( 'remove' )`, but maybe there's no way of doing it...
 
 (function ( $, _, window, document, undefined ) {
 
@@ -26,9 +24,12 @@
       base: false //INFO: It will be used as the constructor if no element is provided
     },
     options: {
+      characters: {}, //INFO: Used to store some characters needed by the widget
+      regexes: {}, //INFO: Contains the used regexes
       errors: { //INFO: It contains all the errors that a widget can trigger
         uninitializable: 'WidgetUninitializable' //INFO: Triggered when the widget is not initializable
       },
+      attributes: {}, //INFO: Attributes used by the widget
       datas: {}, //INFO: CSS data-* names
       classes: { //INFO: CSS classes to attach inside the widget
         disabled: 'disabled' //INFO: Attached to disabled widgets
@@ -77,7 +78,7 @@
 
       /* INIT ELEMENT */
 
-      this.$element = $(element || this._tmpl ( 'base', this.options ) );
+      this.$element = $( element || this._tmpl ( 'base', this.options ) );
       this.element = this.$element[0];
 
       /* ATTACH INSTANCE */
@@ -127,7 +128,7 @@
       if ( element ) {
 
         let $element = $(element),
-            name = _.last ( configs )['name'].toLowerCase (),
+            name = _.last ( configs ).name.toLowerCase (),
             dataOptions = $element.data ( 'options' ),
             dataNameOptions = $element.data ( name + '-options' );
 
@@ -139,7 +140,7 @@
 
         if ( dataNameOptions ) {
 
-          configs.push ({ options: dataNameOptions })
+          configs.push ({ options: dataNameOptions });
 
         }
 
@@ -181,9 +182,9 @@
 
     _createOptions () {} //INFO: Used to pass extra options
 
-    _widgetize ( $widget ) { //INFO: Gets a parent node, from it find and initialize all the widgets //TODO: Update, at least the description //TODO: Make it static
+    static widgetize ( $widget, name ) { //INFO: Add a widget instance to the $widget
 
-      $widget[this.name]();
+      $widget[name]();
 
     }
 
@@ -233,7 +234,11 @@
 
         for ( let prop in key ) {
 
-          _.set ( this.options, prop, key[prop] );
+          if ( key.hasOwnProperty ( prop ) ) {
+
+            _.set ( this.options, prop, key[prop] );
+
+          }
 
         }
 
@@ -310,7 +315,7 @@
 
       let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return;
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return; //FIXME: Is taking a reference to `suppressDisabledCheck` a memory leak
 
         return handler.apply ( this, args );
 
@@ -330,7 +335,7 @@
 
     }
 
-    _one ( ...args ) { //FIXME: Does it work?
+    _one ( ...args ) {
 
       return this._on ( ...args, true );
 
@@ -351,6 +356,8 @@
       this._on ( $element, Pointer.leave, () => this._off ( ...args ) );
 
     }
+
+    //TODO: Add a _offHover
 
     _off ( $element, events, handler ) {
 

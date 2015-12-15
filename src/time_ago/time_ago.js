@@ -32,7 +32,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $element ) {
+    static widgetize ( $element ) {
 
       $element.timeAgo ({ title: $element.is ( '[data-timestamp-title]' ) });
 

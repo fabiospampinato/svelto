@@ -19,8 +19,10 @@
   let config = {
     name: 'autogrowInput',
     selector: 'input.autogrow',
-    callbacks: {
-      update () {}
+    options: {
+      callbacks: {
+        update () {}
+      }
     }
   };
 

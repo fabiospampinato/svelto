@@ -47,7 +47,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $rater ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $rater ) { //TODO: Just use the generic data-options maybe
 
       $rater.rater ({
         value: Number($rater.data ( 'value' ) || 0),

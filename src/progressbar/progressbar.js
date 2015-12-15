@@ -64,7 +64,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $progressbar ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $progressbar ) { //TODO: Just use the generic data-options maybe
 
       $progressbar.progressbar ({
         value: $progressbar.data ( 'value' ),

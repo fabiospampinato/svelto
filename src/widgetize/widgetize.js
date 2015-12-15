@@ -22,7 +22,7 @@
 
     }
 
-    add ( selector, widgetizer ) {
+    add ( selector, widgetizer, data ) {
 
       if ( !(selector in this.widgetizers) ) {
 
@@ -30,7 +30,7 @@
 
       }
 
-      this.widgetizers[selector].push ( widgetizer );
+      this.widgetizers[selector].push ( [widgetizer, data] );
 
     }
 
@@ -44,7 +44,15 @@
 
       if ( selector in this.widgetizers ) {
 
-        _.pull ( this.widgetizers[selector], widgetizer );
+        for ( let i = 0, l = this.widgetizers[selector].length; i < l; i++ ) {
+
+          if ( this.widgetizers[selector][i][0] === widgetizer ) {
+
+            this.widgetizers[selector].splice ( i, 1 );
+
+          }
+
+        }
 
         if ( this.widgetizers[selector].length === 0 ) {
 
@@ -60,8 +68,12 @@
 
       for ( let selector in this.widgetizers ) {
 
-        this.trigger ( selector, $roots.filter ( selector ) );
-        this.trigger ( selector, $roots.find ( selector ) );
+        if ( this.widgetizers.hasOwnProperty ( selector ) ) {
+
+          this.trigger ( selector, $roots.filter ( selector ) );
+          this.trigger ( selector, $roots.find ( selector ) );
+
+        }
 
       }
 
@@ -71,9 +83,9 @@
 
       for ( let widget of $widgets ) {
 
-        for ( let widgetizer of this.widgetizers[selector] ) {
+        for ( let [widgetizer, data] of this.widgetizers[selector] ) {
 
-          widgetizer ( $(widget) );
+          widgetizer ( $(widget), data );
 
         }
 

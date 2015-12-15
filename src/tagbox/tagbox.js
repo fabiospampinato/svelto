@@ -76,7 +76,7 @@
 
     /* SPECIAL */
 
-    _widgetize ( $tagbox ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $tagbox ) { //TODO: Just use the generic data-options maybe
 
       $tagbox.tagbox ({ init: $tagbox.find ( 'input' ).val () });
 
