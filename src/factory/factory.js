@@ -22,21 +22,29 @@
 
     /* WIDGETIZE */
 
+    $.factory.widgetize ( Widget );
+
+    /* PLUGIN */
+
+    $.factory.plugin ( Widget );
+
+  };
+
+  /* FACTORY WIDGETIZE */
+
+  $.factory.widgetize = function ( Widget ) {
+
     if ( Widget.config.selector ) {
 
       Widgetize.add ( Widget.config.selector, Widget.widgetize, Widget.config.name );
 
     }
 
-    /* BRIDGE */
-
-    $.factory.bridge ( Widget );
-
   };
 
-  /* FACTORY BRIDGE */
+  /* FACTORY PLUGIN */
 
-  $.factory.bridge = function ( Widget ) {
+  $.factory.plugin = function ( Widget ) {
 
     /* NAME */
 
@@ -44,12 +52,9 @@
 
     /* JQUERY PLUGIN */
 
-    $.fn[name] = function ( options, ...args ) { //FIXME: We should be able to extend options, not the entire config
+    $.fn[name] = function ( options, ...args ) {
 
-      let isMethodCall = _.isString ( options ),
-          returnValue = this;
-
-      if ( isMethodCall ) {
+      if ( _.isString ( options ) ) { //INFO: Calling a method
 
         if ( options.charAt ( 0 ) !== '_' ) { //INFO: Not a private method or property
 
@@ -63,17 +68,15 @@
 
             /* CHECKING VALID CALL */
 
-            if ( !_.isFunction ( instance[options] ) ) return; //INFO: Not a method
+            if ( !_.isFunction ( instance[options] ) ) continue; //INFO: Not a method
 
             /* CALLING */
 
-            let methodValue = instance[options]( ...args );
+            let returnValue = instance[options]( ...args );
 
-            if ( !_.isUndefined ( methodValue ) ) {
+            if ( !_.isUndefined ( returnValue ) ) {
 
-              returnValue = methodValue;
-
-              break;
+              return returnValue;
 
             }
 
@@ -83,21 +86,17 @@
 
       } else {
 
-        /* CLONED OPTIONS */ //INFO: So that the passed options array won't be modified
-
-        let clonedOptions = _.merge ( options, value => value instanceof $ ? value : undefined );
-
         /* INSTANCE */
 
         for ( let element of this ) {
 
-          $.factory.instance ( Widget, clonedOptions, element );
+          $.factory.instance ( Widget, options, element );
 
         }
 
       }
 
-      return returnValue;
+      return this;
 
     };
 

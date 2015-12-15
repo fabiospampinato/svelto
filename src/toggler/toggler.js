@@ -8,6 +8,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//TODO: Remove the use of modal-closer etc, since it will work anyway with a .modal-toggler located inside of it
 //TODO: Detect the widget in use, not add the extra property -> no need to extend it every time and no need for the extra .widget-toggler class
 //FIXME: Hover open, enter the dropdown and click it, it gets closed...
 
