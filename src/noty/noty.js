@@ -9,6 +9,7 @@
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
+//TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
 (function ( $, _, window, document, undefined ) {
 

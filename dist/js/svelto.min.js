@@ -5391,9 +5391,6 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//FIXME: Add support for multiple callbacks
-//FIXME: Not working on iPod Touch
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -5403,8 +5400,8 @@
   let config = {
     name: 'flickable',
     options: {
-      duration: 150, //INFO: Maximum duration of the flick
-      threshold: 5, //INFO: Minimum moving treshold
+      duration: 150, //INFO: Maximum duration of the flick gesture
+      threshold: 5, //INFO: Minimum moving treshold of the flick gesture
       callbacks: {
         flick () {}
       }
@@ -5429,7 +5426,7 @@
 
     __down ( event ) {
 
-      this._startEvent = event;
+      this._startXY = $.eventXY ( event );
       this._startTimestamp = event.timeStamp || Date.now ();
 
       this._motion = false;
@@ -5452,11 +5449,10 @@
 
       if ( this._motion && ( this._endTimestamp - this._startTimestamp <= this.options.duration ) ) {
 
-        let startXY = $.eventXY ( this._startEvent ),
-            endXY = $.eventXY ( event ),
+        let endXY = $.eventXY ( event ),
             deltaXY = {
-              X: endXY.X - startXY.X,
-              Y: endXY.Y - startXY.Y
+              X: endXY.X - this._startXY.X,
+              Y: endXY.Y - this._startXY.Y
             },
             absDeltaXY = {
               X: Math.abs ( deltaXY.X ),
@@ -5470,12 +5466,12 @@
 
           if ( absDeltaXY.X > absDeltaXY.Y ) {
 
-            orientation = 'horizontal',
+            orientation = 'horizontal';
             direction = ( deltaXY.X > 0 ) ? 'right' : 'left';
 
           } else {
 
-            orientation = 'vertical',
+            orientation = 'vertical';
             direction = ( deltaXY.Y > 0 ) ? 'bottom' : 'top';
 
           }
@@ -5484,7 +5480,7 @@
             orientation: orientation,
             direction: direction,
             startEvent: this._startEvent,
-            startXY: startXY,
+            startXY: this._startXY,
             endEvent: event,
             endXY: endXY
           });
@@ -5742,6 +5738,7 @@
  * ========================================================================= */
 
 //TODO: Add better support for swipe to dismiss
+//TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
 
 (function ( $, _, window, document, undefined ) {
 
