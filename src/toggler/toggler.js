@@ -48,7 +48,7 @@
 
       this.targetSelector = this.$toggler.data ( this.options.datas.target );
 
-      this.$target = $(this.targetSelector);
+      this.$target = this.targetSelector ? $(this.targetSelector) : this.$toggler.closest ( this.options.widget.config.selector );
 
       this._instance = this.$target[this.options.widget.config.name]( 'instance' );
 
