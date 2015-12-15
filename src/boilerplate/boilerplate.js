@@ -24,6 +24,7 @@
       characters: {},
       regexes: {},
       errors: {},
+      messages: {},
       attributes: {},
       datas: {},
       classes: {},
@@ -38,6 +39,10 @@
   class Boilerplate extends Svelto.Widget {
 
     /* SPECIAL */
+
+    static widgetize () {
+
+    }
 
     _variables () {
 

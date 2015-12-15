@@ -11,9 +11,10 @@
  * @requires ../form_validate/form_validate.js
  * ========================================================================= */
 
-//FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
+//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
+//TODO: Test it with `input[type="file"]`
 
-//TODO: Check if it works, also for file uploading
+//FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
 
 (function ( $, _, window, document, undefined ) {
 
@@ -26,6 +27,13 @@
     selector: 'form.ajax',
     options: {
       spinnerOverlay: true,
+      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      messages: {
+        error: 'An error occurred, please try again later',
+        done: 'Done! A page refresh may be needed',
+        refresh: 'Done! Refreshing the page...',
+        redirect: 'Done! Redirecting...'
+      },
       callbacks: {
         beforesend () {},
         error () {},
@@ -68,7 +76,8 @@
         cache: false,
         contentType: false,
         data: new FormData ( this.form ),
-        processData: false, //FIXME: Does it work?
+        processData: false,
+        timeout: this.options.timeout,
         type: this.$form.attr ( 'method' ) || 'POST',
         url: this.$form.attr ( 'action' ),
 
@@ -86,9 +95,17 @@
 
         error: ( res ) => {
 
-          res = _.attempt ( JSON.parse, res );
+          let resj = _.attempt ( JSON.parse, res );
 
-          $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+          if ( !_.isError ( resj ) ) {
+
+            $.noty ( resj.msg || this.options.messages.error );
+
+          } else {
+
+            $.noty ( this.options.messages.error );
+
+          }
 
           this._trigger ( 'error' );
 
@@ -96,37 +113,35 @@
 
         success: ( res ) => {
 
-          res = _.attempt ( JSON.parse, res );
+          let resj = _.attempt ( JSON.parse, res );
 
-          let msg = 'Done! A page refresh may be needed';
+          if ( !_.isError ( resj ) ) {
 
-          if ( !_.isError ( res ) ) {
+            if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-            if ( res.refresh || res.url === window.location.href || _.trim ( res.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
-
-              msg = 'Done! Refreshing the page...';
+              $.noty ( resj.msg || this.options.messages.refresh );
 
               location.reload ();
 
-            } else if ( res.url ) {
+            } else if ( resj.url ) {
 
               //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-              msg = 'Done! Redirecting...';
+              $.noty ( resj.msg || this.options.messages.redirect );
 
-              location.assign ( res.url );
+              location.assign ( resj.url );
 
-            }
+            } else {
 
-            if ( 'msg' in res ) {
-
-              msg = res.msg;
+              $.noty ( resj.msg || this.options.messages.success );
 
             }
+
+          } else {
+
+            $.noty ( this.options.messages.success );
 
           }
-
-          $.noty ( msg );
 
           this._trigger ( 'success' );
 

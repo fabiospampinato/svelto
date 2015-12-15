@@ -92,13 +92,13 @@
 
   if ( !Svelto.$ ) {
 
-    throw 'Svelto depends upon jQuery, dependency unmet.';
+    throw new Error ( 'Svelto depends upon jQuery, dependency unmet' );
 
   }
 
   if ( !Svelto._ ) {
 
-    throw 'Svelto depends upon lo-dash, dependency unmet.';
+    throw new Error ( 'Svelto depends upon lo-dash, dependency unmet' );
 
   }
 
@@ -792,8 +792,9 @@
       characters: {}, //INFO: Used to store some characters needed by the widget
       regexes: {}, //INFO: Contains the used regexes
       errors: { //INFO: It contains all the errors that a widget can trigger
-        uninitializable: 'WidgetUninitializable' //INFO: Triggered when the widget is not initializable
+        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' //INFO: Triggered when the widget is not initializable
       },
+      messages: {}, //INFO: Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
       attributes: {}, //INFO: Attributes used by the widget
       datas: {}, //INFO: CSS data-* names
       classes: { //INFO: CSS classes to attach inside the widget
@@ -819,7 +820,7 @@
 
       if ( !element && !this.templates.base ) {
 
-        throw this.errors.uninitializable;
+        this._throw ( this.errors.uninitializable );
 
       }
 
@@ -1183,6 +1184,14 @@
     _frame ( fn ) {
 
       return $.frame ( fn.bind ( this ) );
+
+    }
+
+    /* THROW */
+
+    _throw ( msg ) {
+
+      throw new Error ( msg );
 
     }
 
@@ -2127,6 +2136,7 @@
       characters: {},
       regexes: {},
       errors: {},
+      messages: {},
       attributes: {},
       datas: {},
       classes: {},
@@ -2141,6 +2151,10 @@
   class Boilerplate extends Svelto.Widget {
 
     /* SPECIAL */
+
+    static widgetize () {
+
+    }
 
     _variables () {
 
@@ -4856,6 +4870,8 @@
 
 //TODO: Remove the use of modal-closer etc, since it will work anyway with a .modal-toggler located inside of it
 //TODO: Detect the widget in use, not add the extra property -> no need to extend it every time and no need for the extra .widget-toggler class
+//TODO: Better general support, so that it could be use also by Flippable for example
+
 //FIXME: Hover open, enter the dropdown and click it, it gets closed...
 
 (function ( $, _, window, document, undefined ) {
@@ -6629,9 +6645,10 @@
  * @requires ../form_validate/form_validate.js
  * ========================================================================= */
 
-//FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
+//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
+//TODO: Test it with `input[type="file"]`
 
-//TODO: Check if it works, also for file uploading
+//FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
 
 (function ( $, _, window, document, undefined ) {
 
@@ -6644,6 +6661,13 @@
     selector: 'form.ajax',
     options: {
       spinnerOverlay: true,
+      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      messages: {
+        error: 'An error occurred, please try again later',
+        done: 'Done! A page refresh may be needed',
+        refresh: 'Done! Refreshing the page...',
+        redirect: 'Done! Redirecting...'
+      },
       callbacks: {
         beforesend () {},
         error () {},
@@ -6686,7 +6710,8 @@
         cache: false,
         contentType: false,
         data: new FormData ( this.form ),
-        processData: false, //FIXME: Does it work?
+        processData: false,
+        timeout: this.options.timeout,
         type: this.$form.attr ( 'method' ) || 'POST',
         url: this.$form.attr ( 'action' ),
 
@@ -6704,9 +6729,17 @@
 
         error: ( res ) => {
 
-          res = _.attempt ( JSON.parse, res );
+          let resj = _.attempt ( JSON.parse, res );
 
-          $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+          if ( !_.isError ( resj ) ) {
+
+            $.noty ( resj.msg || this.options.messages.error );
+
+          } else {
+
+            $.noty ( this.options.messages.error );
+
+          }
 
           this._trigger ( 'error' );
 
@@ -6714,37 +6747,35 @@
 
         success: ( res ) => {
 
-          res = _.attempt ( JSON.parse, res );
+          let resj = _.attempt ( JSON.parse, res );
 
-          let msg = 'Done! A page refresh may be needed';
+          if ( !_.isError ( resj ) ) {
 
-          if ( !_.isError ( res ) ) {
+            if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
 
-            if ( res.refresh || res.url === window.location.href || _.trim ( res.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
-
-              msg = 'Done! Refreshing the page...';
+              $.noty ( resj.msg || this.options.messages.refresh );
 
               location.reload ();
 
-            } else if ( res.url ) {
+            } else if ( resj.url ) {
 
               //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
 
-              msg = 'Done! Redirecting...';
+              $.noty ( resj.msg || this.options.messages.redirect );
 
-              location.assign ( res.url );
+              location.assign ( resj.url );
 
-            }
+            } else {
 
-            if ( 'msg' in res ) {
-
-              msg = res.msg;
+              $.noty ( resj.msg || this.options.messages.success );
 
             }
+
+          } else {
+
+            $.noty ( this.options.messages.success );
 
           }
-
-          $.noty ( msg );
 
           this._trigger ( 'success' );
 

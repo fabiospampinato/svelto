@@ -92,13 +92,13 @@
 
   if ( !Svelto.$ ) {
 
-    throw 'Svelto depends upon jQuery, dependency unmet.';
+    throw new Error ( 'Svelto depends upon jQuery, dependency unmet' );
 
   }
 
   if ( !Svelto._ ) {
 
-    throw 'Svelto depends upon lo-dash, dependency unmet.';
+    throw new Error ( 'Svelto depends upon lo-dash, dependency unmet' );
 
   }
 

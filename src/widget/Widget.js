@@ -27,8 +27,9 @@
       characters: {}, //INFO: Used to store some characters needed by the widget
       regexes: {}, //INFO: Contains the used regexes
       errors: { //INFO: It contains all the errors that a widget can trigger
-        uninitializable: 'WidgetUninitializable' //INFO: Triggered when the widget is not initializable
+        uninitializable: 'This widget can\'t be initialized, no element or base template have been provided' //INFO: Triggered when the widget is not initializable
       },
+      messages: {}, //INFO: Messages that the widget somewhere outputs, maybe with a `$.noty`, maybe just logs it
       attributes: {}, //INFO: Attributes used by the widget
       datas: {}, //INFO: CSS data-* names
       classes: { //INFO: CSS classes to attach inside the widget
@@ -54,7 +55,7 @@
 
       if ( !element && !this.templates.base ) {
 
-        throw this.errors.uninitializable;
+        this._throw ( this.errors.uninitializable );
 
       }
 
@@ -418,6 +419,14 @@
     _frame ( fn ) {
 
       return $.frame ( fn.bind ( this ) );
+
+    }
+
+    /* THROW */
+
+    _throw ( msg ) {
+
+      throw new Error ( msg );
 
     }
 
