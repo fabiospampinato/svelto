@@ -20,6 +20,10 @@
     selector: '.droppable',
     options: {
       selector: '*',
+      classes: {
+        droppable: false, //INFO: The class to attach to the droppable if the draggable can be dropped inside of it
+        hover: false //INFO: The class to attach to the droppable when hovered by a draggable
+      },
       callbacks: {
         enter () {},
         leave () {},
@@ -39,7 +43,8 @@
       this.droppable = this.element;
       this.$droppable = this.$element;
 
-      this._wasInside = false;
+      this.__isCompatible = undefined;
+      this._wasHovering = false;
 
     }
 
@@ -57,55 +62,75 @@
 
     /* PRIVATE */
 
-    __dragMove ( event, data ) {
+    _isCompatible ( element ) {
 
-      let isInside = this._isInside ( event, data );
+      if ( _.isUndefined ( this.__isCompatible ) ) {
 
-      if ( isInside !== this._wasInside ) {
+        this.__isCompatible = $(element).is ( this.options.selector );
 
-        if ( isInside ) {
+        if ( this.__isCompatible ) {
 
-          this._trigger ( 'enter', { draggable: data.draggable, droppable: this.droppable } );
-
-        } else {
-
-          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+          this.$droppable.addClass ( this.options.classes.droppable );
 
         }
 
       }
 
-      this._wasInside = isInside;
+      return this.__isCompatible;
 
     }
+
+    _isHovering ( event, data ) {
+
+      return ( this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0 );
+
+    }
+
+    /* DRAG MOVE */
+
+    __dragMove ( event, data ) {
+
+      if ( this._isCompatible ( data.draggable ) ) {
+
+        let isHovering = this._isHovering ( event, data );
+
+        if ( isHovering !== this._wasHovering ) {
+
+          this.$droppable.toggleClass ( this.options.classes.hover, isHovering );
+
+          this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, droppable: this.droppable } );
+
+        }
+
+        this._wasHovering = isHovering;
+
+      }
+
+    }
+
+    /* DRAG END */
 
     __dragEnd ( event, data ) {
 
-      if ( this._isInside ( event, data ) ) {
+      if ( this._isCompatible ( data.draggable ) ) {
 
-        if ( this._wasInside ) { //FIXME: Should it be fired???
+        this.$droppable.removeClass ( this.options.classes.droppable );
 
-          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+        if ( this._isHovering ( event, data ) ) {
+
+          if ( this._wasHovering ) {
+
+            this.$droppable.removeClass ( this.options.classes.hover );
+
+          }
+
+          this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
 
         }
 
-        this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
-
       }
 
-    }
-
-    _isInside ( event, data ) {
-
-      var $draggable = $(data.draggable);
-
-      if ( $draggable.is ( this.options.selector ) ) {
-
-        return this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0;
-
-      }
-
-      return false;
+      this.__isCompatible = undefined;
 
     }
 

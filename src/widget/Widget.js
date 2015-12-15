@@ -315,7 +315,7 @@
 
       let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return; //FIXME: Is taking a reference to `suppressDisabledCheck` a memory leak
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return; //FIXME: Is keeping a reference to `suppressDisabledCheck` wasted leak? Even if so tiny
 
         return handler.apply ( this, args );
 
@@ -357,7 +357,7 @@
 
     }
 
-    //TODO: Add a _offHover
+    //TODO: Add a _offHover (Is it needed?)
 
     _off ( $element, events, handler ) {
 

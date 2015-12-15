@@ -14,11 +14,6 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let assignments = {},
-      prevAssignments = {};
-
   /* CONFIG */
 
   let config = {
@@ -64,7 +59,7 @@
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
-      this.$dropdownParents = this.$dropdown.parents ().add ( $window );
+      this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
       this.$togglerParents = $empty;
 
       this.guc = 'dropdown-' + this.guid;
@@ -72,6 +67,9 @@
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
+
+      this._toggler = false;
+      this._prevToggler = false;
 
       this._isOpen = false;
 
@@ -133,13 +131,13 @@
 
       /* VARIABLES */
 
-      let $toggler = assignments[this.guid],
+      let $toggler = this._toggler,
           noTip = $toggler.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
           $pointer = noTip ? false : $('<div>');
 
       /* POSITIONATE */
 
-      this.$dropdown.positionate ( _.extend ( {}, this.options.positionate, {
+      this.$dropdown.positionate ( _.extend ( {
         $anchor: $toggler,
         $pointer: $pointer,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
@@ -148,7 +146,7 @@
             $toggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' ).addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
-      }));
+      }, this.options.positionate ));
 
       /* MOCK TIP */
 
@@ -184,7 +182,7 @@
 
       if ( !_.isBoolean ( force ) ) {
 
-        force = toggler && assignments[this.guid] && assignments[this.guid][0] !== toggler ? true : !this._isOpen;
+        force = toggler && ( !this._toggler || this._toggler && this._toggler[0] !== toggler ) ? true : !this._isOpen;
 
       }
 
@@ -196,19 +194,19 @@
 
       //FIXME: Add support for opening relative to a point
 
-      if ( !toggler && prevAssignments[this.guid] ) {
+      if ( !toggler && this._prevToggler ) {
 
-        toggler = prevAssignments[this.guid][0];
+        toggler = this._prevToggler[0];
 
       }
 
-      if ( !this._isOpen || !assignments[this.guid] && toggler || assignments[this.guid][0] !== toggler ) {
+      if ( !this._isOpen || ( toggler && toggler !== this._toggler[0] ) ) {
 
-        if ( assignments[this.guid] ) {
+        if ( this._toggler ) {
 
-          prevAssignments[this.guid] = assignments[this.guid];
+          this._prevToggler = this._toggler;
 
-          prevAssignments[this.guid].removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+          this._prevToggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
 
           if ( this._isOpen ) {
 
@@ -220,7 +218,7 @@
 
         let $toggler = $(toggler);
 
-        assignments[this.guid] = $toggler;
+        this._toggler = $toggler;
 
         this._trigger ( 'beforeopen' );
 
@@ -234,7 +232,7 @@
 
         });
 
-        if ( prevAssignments[this.guid] !== assignments[this.guid] ) {
+        if ( this._prevToggler !== this._toggler ) {
 
           if ( this._isOpen ) {
 
@@ -266,11 +264,11 @@
 
       if ( this._isOpen ) {
 
-        prevAssignments[this.guid] = assignments[this.guid];
+        this._prevToggler = this._toggler;
 
-        prevAssignments[this.guid].removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+        this._prevToggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
 
-        delete assignments[this.guid];
+        delete this._toggler;
 
         this._frame ( function () {
 

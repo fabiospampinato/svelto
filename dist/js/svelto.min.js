@@ -1080,7 +1080,7 @@
 
       let handlerProxy = ( ...args ) => {
 
-        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return; //FIXME: Is taking a reference to `suppressDisabledCheck` a memory leak
+        if ( !suppressDisabledCheck && this.$element.hasClass ( this.options.classes.disabled ) ) return; //FIXME: Is keeping a reference to `suppressDisabledCheck` wasted leak? Even if so tiny
 
         return handler.apply ( this, args );
 
@@ -1122,7 +1122,7 @@
 
     }
 
-    //TODO: Add a _offHover
+    //TODO: Add a _offHover (Is it needed?)
 
     _off ( $element, events, handler ) {
 
@@ -4552,11 +4552,6 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let assignments = {},
-      prevAssignments = {};
-
   /* CONFIG */
 
   let config = {
@@ -4602,7 +4597,7 @@
       this.$dropdown = this.$element;
       this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
-      this.$dropdownParents = this.$dropdown.parents ().add ( $window );
+      this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
       this.$togglerParents = $empty;
 
       this.guc = 'dropdown-' + this.guid;
@@ -4610,6 +4605,9 @@
 
       this.hasTip = !this.$dropdown.hasClass ( this.options.classes.noTip );
       this.isAttached = this.$dropdown.hasClass ( this.options.classes.attached );
+
+      this._toggler = false;
+      this._prevToggler = false;
 
       this._isOpen = false;
 
@@ -4671,13 +4669,13 @@
 
       /* VARIABLES */
 
-      let $toggler = assignments[this.guid],
+      let $toggler = this._toggler,
           noTip = $toggler.hasClass ( this.options.classes.noTip ) || !this.hasTip || this.isAttached,
           $pointer = noTip ? false : $('<div>');
 
       /* POSITIONATE */
 
-      this.$dropdown.positionate ( _.extend ( {}, this.options.positionate, {
+      this.$dropdown.positionate ( _.extend ( {
         $anchor: $toggler,
         $pointer: $pointer,
         spacing:  this.isAttached ? this.options.spacing.attached : ( noTip ? this.options.spacing.noTip : this.options.spacing.normal ),
@@ -4686,7 +4684,7 @@
             $toggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' ).addClass ( 'dropdown-toggler-' + data.direction );
           }
         }
-      }));
+      }, this.options.positionate ));
 
       /* MOCK TIP */
 
@@ -4722,7 +4720,7 @@
 
       if ( !_.isBoolean ( force ) ) {
 
-        force = toggler && assignments[this.guid] && assignments[this.guid][0] !== toggler ? true : !this._isOpen;
+        force = toggler && ( !this._toggler || this._toggler && this._toggler[0] !== toggler ) ? true : !this._isOpen;
 
       }
 
@@ -4734,19 +4732,19 @@
 
       //FIXME: Add support for opening relative to a point
 
-      if ( !toggler && prevAssignments[this.guid] ) {
+      if ( !toggler && this._prevToggler ) {
 
-        toggler = prevAssignments[this.guid][0];
+        toggler = this._prevToggler[0];
 
       }
 
-      if ( !this._isOpen || !assignments[this.guid] && toggler || assignments[this.guid][0] !== toggler ) {
+      if ( !this._isOpen || ( toggler && toggler !== this._toggler[0] ) ) {
 
-        if ( assignments[this.guid] ) {
+        if ( this._toggler ) {
 
-          prevAssignments[this.guid] = assignments[this.guid];
+          this._prevToggler = this._toggler;
 
-          prevAssignments[this.guid].removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+          this._prevToggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
 
           if ( this._isOpen ) {
 
@@ -4758,7 +4756,7 @@
 
         let $toggler = $(toggler);
 
-        assignments[this.guid] = $toggler;
+        this._toggler = $toggler;
 
         this._trigger ( 'beforeopen' );
 
@@ -4772,7 +4770,7 @@
 
         });
 
-        if ( prevAssignments[this.guid] !== assignments[this.guid] ) {
+        if ( this._prevToggler !== this._toggler ) {
 
           if ( this._isOpen ) {
 
@@ -4804,11 +4802,11 @@
 
       if ( this._isOpen ) {
 
-        prevAssignments[this.guid] = assignments[this.guid];
+        this._prevToggler = this._toggler;
 
-        prevAssignments[this.guid].removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
+        this._prevToggler.removeClass ( 'dropdown-toggler-top dropdown-toggler-bottom dropdown-toggler-left dropdown-toggler-right' );
 
-        delete assignments[this.guid];
+        delete this._toggler;
 
         this._frame ( function () {
 
@@ -5256,6 +5254,10 @@
     selector: '.droppable',
     options: {
       selector: '*',
+      classes: {
+        droppable: false, //INFO: The class to attach to the droppable if the draggable can be dropped inside of it
+        hover: false //INFO: The class to attach to the droppable when hovered by a draggable
+      },
       callbacks: {
         enter () {},
         leave () {},
@@ -5275,7 +5277,8 @@
       this.droppable = this.element;
       this.$droppable = this.$element;
 
-      this._wasInside = false;
+      this.__isCompatible = undefined;
+      this._wasHovering = false;
 
     }
 
@@ -5293,55 +5296,75 @@
 
     /* PRIVATE */
 
-    __dragMove ( event, data ) {
+    _isCompatible ( element ) {
 
-      let isInside = this._isInside ( event, data );
+      if ( _.isUndefined ( this.__isCompatible ) ) {
 
-      if ( isInside !== this._wasInside ) {
+        this.__isCompatible = $(element).is ( this.options.selector );
 
-        if ( isInside ) {
+        if ( this.__isCompatible ) {
 
-          this._trigger ( 'enter', { draggable: data.draggable, droppable: this.droppable } );
-
-        } else {
-
-          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+          this.$droppable.addClass ( this.options.classes.droppable );
 
         }
 
       }
 
-      this._wasInside = isInside;
+      return this.__isCompatible;
 
     }
+
+    _isHovering ( event, data ) {
+
+      return ( this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0 );
+
+    }
+
+    /* DRAG MOVE */
+
+    __dragMove ( event, data ) {
+
+      if ( this._isCompatible ( data.draggable ) ) {
+
+        let isHovering = this._isHovering ( event, data );
+
+        if ( isHovering !== this._wasHovering ) {
+
+          this.$droppable.toggleClass ( this.options.classes.hover, isHovering );
+
+          this._trigger ( isHovering ? 'enter' : 'leave', { draggable: data.draggable, droppable: this.droppable } );
+
+        }
+
+        this._wasHovering = isHovering;
+
+      }
+
+    }
+
+    /* DRAG END */
 
     __dragEnd ( event, data ) {
 
-      if ( this._isInside ( event, data ) ) {
+      if ( this._isCompatible ( data.draggable ) ) {
 
-        if ( this._wasInside ) { //FIXME: Should it be fired???
+        this.$droppable.removeClass ( this.options.classes.droppable );
 
-          this._trigger ( 'leave', { draggable: data.draggable, droppable: this.droppable } );
+        if ( this._isHovering ( event, data ) ) {
+
+          if ( this._wasHovering ) {
+
+            this.$droppable.removeClass ( this.options.classes.hover );
+
+          }
+
+          this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
 
         }
 
-        this._trigger ( 'drop', { draggable: data.draggable, droppable: this.droppable } );
-
       }
 
-    }
-
-    _isInside ( event, data ) {
-
-      var $draggable = $(data.draggable);
-
-      if ( $draggable.is ( this.options.selector ) ) {
-
-        return this.$droppable.touching ({ point: $.eventXY ( data.event ) }).length > 0;
-
-      }
-
-      return false;
+      this.__isCompatible = undefined;
 
     }
 
