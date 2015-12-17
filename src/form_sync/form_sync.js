@@ -8,8 +8,7 @@
  * @requires ../core/core.js
  * ========================================================================= */
 
-//TODO: Maybe sync at init time also
-//FIXME: Probably not good performance, expecially when syncing live stuff, like a live colorpicker
+//TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
 
 (function ( $, _, window, document, undefined ) {
 
@@ -21,7 +20,7 @@
     name: 'formSync',
     selector: 'form[data-sync-group]',
     options: {
-      live: false,
+      live: false, //INFO: Basically it triggers the syncing also when the `input` event is fired
       attributes: {
         name: 'name'
       },
@@ -30,11 +29,11 @@
       },
       selectors: {
         form: 'form',
-        elements: 'input[name], textarea[name], select[name]',
+        elements: 'input:not([type="button"]), textarea, select',
         checkable: '[type="radio"], [type="checkbox"]',
         radio: '[type="radio"]',
         checkbox: '[type="checkbox"]',
-        textfield: 'input:not(button):not([type="checkbox"]):not([type="radio"]), textarea'
+        textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea'
       }
     }
   };
@@ -58,13 +57,15 @@
 
       /* CHANGE */
 
-      this._on ( true, this.$elements, 'change', this.__sync );
+      this._on ( true, this.$elements, 'change', this._throttle ( this.__sync, 100 ) );
 
       /* INPUT */
 
       if ( this.options.live ) {
 
-        this._on ( true, this.$elements.filter ( this.options.selectors.textfield ), 'input', this.__sync );
+        let $textfields = this.$elements.filter ( this.options.selectors.textfield );
+
+        this._on ( true, $textfields, 'input', this._throttle ( this.__sync, 100 ) );
 
       }
 
@@ -74,7 +75,7 @@
 
     __sync ( event, data ) {
 
-      if ( data && data._synced ) return;
+      if ( data && data._form_synced ) return;
 
       let $element = $(event.target),
           name = $element.attr ( this.options.attributes.name ),
@@ -97,11 +98,11 @@
 
           if ( $element.is ( this.options.selectors.checkable ) ) {
 
-            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _synced: true } );
+            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _form_synced: true } );
 
           } else {
 
-            $otherElement.val ( value ).trigger ( 'change', { _synced: true } );
+            $otherElement.val ( value ).trigger ( 'change', { _form_synced: true } );
 
           }
 
