@@ -2554,7 +2554,7 @@
 
 
 /* =========================================================================
- * Svelto - Color Helper
+ * Svelto - Color
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -2562,37 +2562,178 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-//TODO: Add support for alpha channel
+//TODO: Add support for the alpha channel
+//TODO: Maybe add better support for hex color provided as string, basically Color.hex2hsl should also accept an hex color in string format
 
 (function ( _, window, document, undefined ) {
 
   'use strict';
 
-  /* COLOR HELPER */
+  /* COLOR */
 
-  window.ColorHelper = class {
+  window.Color = class {
+
+    constructor ( color, colorspace ) {
+
+      this.set ( color, colorspace );
+
+    }
+
+    /* ----- API ----- */
+
+    /* SET */
+
+    set ( color, colorspace ) {
+
+      if ( colorspace ) {
+
+        switch ( colorspace.toLowerCase () ) {
+
+          case 'hex':
+            return this.setHex ( color );
+
+          case 'rgb':
+            return this.setRgb ( color );
+
+          case 'hsv':
+            return this.setHsv ( color );
+
+          case 'hsl':
+            return this.setHsl ( color );
+
+        }
+
+      }
+
+      if ( _.isPlainObject ( color ) ) {
+
+        if ( 'r' in color && 'g' in color && 'b' in color ) {
+
+          if ( Number ( color.r ) > 99 || Number ( color.g ) > 99 || Number ( color.b ) > 99 ) {
+
+            return this.setRgb ( color );
+
+          } else {
+
+            return this.setHex ( color );
+
+          }
+
+        } else if ( 'h' in color && 's' in color ) {
+
+          if ( 'l' in color ) {
+
+            return this.setHsl ( color );
+
+          } else if ( 'v' in color ) {
+
+            return this.setHsv ( color );
+
+          }
+
+        }
+
+      } else if ( _.isString ( color ) ) {
+
+        color = _.trim ( color, '#' );
+
+        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { //INFO: Full 6-chars hex color notation
+
+          return this.setHex ({
+            r: color[0] + color[1],
+            g: color[2] + color[3],
+            b: color[4] + color[5]
+          });
+
+        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { //INFO: Shorthand 3-chars hex color notation
+
+          return this.setHex ({
+            r: color[0].repeat ( 2 ),
+            g: color[1].repeat ( 2 ),
+            b: color[2].repeat ( 2 )
+          });
+
+        }
+
+      }
+
+      throw new Error ( 'Invalid color' );
+
+    }
+
+    setHex ( color ) {
+
+      this.hex = _.cloneDeep ( color );
+
+    }
+
+    setRgb ( color ) {
+
+      this.hex = Color.rgb2hex ( color );
+
+    }
+
+    setHsv ( color ) {
+
+      this.hex = Color.hsv2hex ( color );
+
+    }
+
+    setHsl ( color ) {
+
+      this.hex = Color.hsl2hex ( color );
+
+    }
+
+    /* GET */
+
+    getHex () {
+
+      return this.hex;
+
+    }
+
+    getRgb () {
+
+      return Color.hex2rgb ( this.hex );
+
+    }
+
+    getHsv () {
+
+      return Color.hex2hsv ( this.hex );
+
+    }
+
+    getHsl () {
+
+      return Color.hex2hsl ( this.hex );
+
+    }
+
+    /* ----- STATICS ----- */
 
     /* HEX */
 
     static hex2rgb ( hex ) {
 
       return {
-        r: ColorHelper.hex2dec ( hex.r ),
-        g: ColorHelper.hex2dec ( hex.g ),
-        b: ColorHelper.hex2dec ( hex.b )
+        r: Color.hex2dec ( hex.r ),
+        g: Color.hex2dec ( hex.g ),
+        b: Color.hex2dec ( hex.b )
       };
 
     }
 
     static hex2hsv ( hex ) {
 
-      return ColorHelper.rgb2hsv ( ColorHelper.hex2rgb ( hex ) );
+      return Color.rgb2hsv ( Color.hex2rgb ( hex ) );
 
     }
 
     static hex2hsl ( hex ) {
 
-      return ColorHelper.hsv2hsl ( ColorHelper.hex2hsv ( hex ) );
+      return Color.hsv2hsl ( Color.hex2hsv ( hex ) );
 
     }
 
@@ -2601,9 +2742,9 @@
     static rgb2hex ( rgb ) {
 
       return {
-        r: ColorHelper.dec2hex ( rgb.r ),
-        g: ColorHelper.dec2hex ( rgb.g ),
-        b: ColorHelper.dec2hex ( rgb.b )
+        r: Color.dec2hex ( rgb.r ),
+        g: Color.dec2hex ( rgb.g ),
+        b: Color.dec2hex ( rgb.b )
       };
 
     }
@@ -2668,7 +2809,7 @@
 
     static rgb2hsl ( rgb ) {
 
-      return ColorHelper.hsv2hsl ( ColorHelper.rgb2hsv ( rgb ) );
+      return Color.hsv2hsl ( Color.rgb2hsv ( rgb ) );
 
     }
 
@@ -2676,7 +2817,7 @@
 
     static hsv2hex ( hsv ) {
 
-      return ColorHelper.rgb2hex ( ColorHelper.hsv2rgb ( hsv ) );
+      return Color.rgb2hex ( Color.hsv2rgb ( hsv ) );
 
     }
 
@@ -2775,13 +2916,13 @@
 
     static hsl2hex ( hsl ) {
 
-      return ColorHelper.hsv2hex ( ColorHelper.hsl2hsv ( hsl ) );
+      return Color.hsv2hex ( Color.hsl2hsv ( hsl ) );
 
     }
 
     static hsl2rgb ( hsl ) {
 
-      return ColorHelper.hsv2rgb ( ColorHelper.hsl2hsv ( hsl ) );
+      return Color.hsv2rgb ( Color.hsl2hsv ( hsl ) );
 
     }
 
@@ -2818,96 +2959,16 @@
 
 
 /* =========================================================================
- * Svelto - Hex Color
- * =========================================================================
- * Copyright (c) 2015 Fabio Spampinato
- * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
- * =========================================================================
- * @requires ../svelto/svelto.js
- * @requires ../color_helper/color_helper.js
- * ========================================================================= */
-
-//TODO: Add support for alpha
-
-(function ( _, window, document, undefined ) {
-
-  'use strict';
-
-  /* HEX COLOR */
-
-  window.HexColor = class {
-
-    constructor ( color ) {
-
-      if ( _.isString ( color ) ) {
-
-        color = color.replace ( '#', '' );
-
-         if ( /^[0-9a-f]{6}$/i.test ( color ) ) { //INFO: Full 6-chars color notation
-
-           this.import6chars ( color );
-
-        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { //INFO: Shorthand 3-chars color notation
-
-          this.import3chars ( color );
-
-        }
-
-      }
-
-    }
-
-    import6chars ( color ) {
-
-      this.hsv = ColorHelper.hex2hsv ({
-        r: color[0] + color[1],
-        g: color[2] + color[3],
-        b: color[4] + color[5]
-      });
-
-    }
-
-    import3chars ( color ) {
-
-      this.hsv = ColorHelper.hex2hsv ({
-        r: color[0].repeat ( 2 ),
-        g: color[1].repeat ( 2 ),
-        b: color[2].repeat ( 2 )
-      });
-
-    }
-
-    getHexStr () {
-
-      var hex = ColorHelper.hsv2hex ( this.hsv );
-
-      return '#' + hex.r + hex.g + hex.b;
-
-    }
-
-    isValid () {
-
-      return !!this.hsv;
-
-    }
-
-  };
-
-}( Svelto._, window, document ));
-
-
-/* =========================================================================
  * Svelto - Colorpicker
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
- * @requires ../hex_color/hex_color.js
- * @requires ../color_helper/color_helper.js
+ * @requires ../color/color.js
  * ========================================================================= */
 
-//TODO: Add support for alpha channel, by adding a slider at the bottom of the sbWrp, it should be optional
+//TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
 (function ( $, _, window, document, undefined ) {
 
@@ -2919,7 +2980,7 @@
     name: 'colorpicker',
     selector: '.colorpicker',
     options: {
-      defaultColor: '#ff0000',
+      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
       live: false,
       selectors: {
         sb: {
@@ -2958,7 +3019,7 @@
 
       this.hueWrpHeight = this.sbWrpSize;
 
-      this.color = new HexColor ();
+      this.hsv = false;
 
     }
 
@@ -2966,10 +3027,7 @@
 
       if ( !this.set ( this.$input.val () ) ) {
 
-        this.color = new HexColor ( this.options.defaultColor );
-
-        this._updateSb ();
-        this._updateHue ();
+        this.set ( this.options.defaultColor );
 
       }
 
@@ -3036,19 +3094,19 @@
       switch ( event.keyCode ) {
 
         case Svelto.keyCode.UP:
-          this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
+          this.hsv.v = Math.min ( 100, this.hsv.v + 1 );
           break;
 
         case Svelto.keyCode.RIGHT:
-          this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
+          this.hsv.s = Math.min ( 100, this.hsv.s + 1 );
           break;
 
         case Svelto.keyCode.DOWN:
-          this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
+          this.hsv.v = Math.max ( 0, this.hsv.v - 1 );
           break;
 
         case Svelto.keyCode.LEFT:
-          this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
+          this.hsv.s = Math.max ( 0, this.hsv.s - 1 );
           break;
 
         default:
@@ -3068,8 +3126,8 @@
 
     _sbDragSet ( XY, update ) {
 
-      this.color.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
       this._updateSb ();
 
@@ -3100,11 +3158,11 @@
       switch ( event.keyCode ) {
 
         case Svelto.keyCode.UP:
-          this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
+          this.hsv.h = Math.min ( 359, this.hsv.h + 1 );
           break;
 
         case Svelto.keyCode.DOWN:
-          this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
+          this.hsv.h = Math.max ( 0, this.hsv.h - 1 );
           break;
 
         default:
@@ -3124,7 +3182,7 @@
 
     _hueDragSet ( XY, update ) {
 
-      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
       this._updateHue ();
 
@@ -3152,9 +3210,9 @@
 
     _updateSb () {
 
-      let hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
-          translateX = this.sbWrpSize / 100 * this.color.hsv.s,
-          translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
+      let hsl = Color.hsv2hsl ( this.hsv ),
+          translateX = this.sbWrpSize / 100 * this.hsv.s,
+          translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
 
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
 
@@ -3162,22 +3220,22 @@
 
     _updateHue () {
 
-      let hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
-          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) );
+      let hsl = Color.hsv2hsl ( this.hsv ),
+          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
-      this.$hueHandler.hsl ( this.color.hsv.h, 100, 50 ).translateY ( translateY );
+      this.$hueHandler.hsl ( this.hsv.h, 100, 50 ).translateY ( translateY );
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
-      this.$sbWrp.hsl ( this.color.hsv.h, 100, 50 );
+      this.$sbWrp.hsl ( this.hsv.h, 100, 50 );
 
     }
 
     _updateInput () {
 
-      let hex = this.color.getHexStr ();
+      let hexStr = this._getHexStr ();
 
-      this.$input.val ( hex ).trigger ( 'change' );
+      this.$input.val ( hexStr ).trigger ( 'change' );
 
-      this._trigger ( 'change', { color: hex } );
+      this._trigger ( 'change', { color: hexStr } );
 
     }
 
@@ -3189,27 +3247,45 @@
 
     }
 
+    /* OTHERS */
+
+    _getHexStr () {
+
+      let hex = Color.hsv2hex ( this.hsv );
+
+      return '#' + hex.r + hex.g + hex.b;
+
+    }
+
     /* PUBLIC */
 
     get () {
 
-      return this.color.getHexStr ();
+      return this._getHexStr ();
 
     }
 
     set ( color ) {
 
-      let newColor = new HexColor ( color );
+      color = _.attempt ( () => new Color ( color ) );
 
-      if ( newColor.isValid () && !_.isEqual ( newColor.hsv, this.color.hsv ) ) {
+      if ( !_.isError ( color ) ) {
 
-        this.color = newColor;
+        let hsv = color.getHsv ();
 
-        this._update ();
+        if ( !_.isEqual ( this.hsv, hsv ) ) {
+
+          this.hsv = hsv;
+
+          this._update ();
+
+          return true;
+
+        }
 
       }
 
-      return newColor.isValid ();
+      return false;
 
     }
 
@@ -6141,8 +6217,10 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//TODO: Make it general by adding a $.validate ( 'validator', 'value' ); that can also be used elsewhere
 //TODO: Maybe also disable submitters when it's not valid
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url,alphanumeric] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
+
 //FIXME: Handle the case where a textfield changes but is also focused, will happen if we are validating a live synced form
 
 (function ( $, _, window, document, undefined ) {
@@ -7088,6 +7166,8 @@
   'use strict';
 
   /* SCROLL TO TOP */
+
+  //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
 
   Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 

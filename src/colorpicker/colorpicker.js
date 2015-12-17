@@ -6,11 +6,10 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
- * @requires ../hex_color/hex_color.js
- * @requires ../color_helper/color_helper.js
+ * @requires ../color/color.js
  * ========================================================================= */
 
-//TODO: Add support for alpha channel, by adding a slider at the bottom of the sbWrp, it should be optional
+//TODO: Add support for alpha channel, by adding an opacity slider at the bottom of the sbWrp, it should be optional
 
 (function ( $, _, window, document, undefined ) {
 
@@ -22,7 +21,7 @@
     name: 'colorpicker',
     selector: '.colorpicker',
     options: {
-      defaultColor: '#ff0000',
+      defaultColor: '#ff0000', //INFO: It can be anything supported by the `Color` obj
       live: false,
       selectors: {
         sb: {
@@ -61,7 +60,7 @@
 
       this.hueWrpHeight = this.sbWrpSize;
 
-      this.color = new HexColor ();
+      this.hsv = false;
 
     }
 
@@ -69,10 +68,7 @@
 
       if ( !this.set ( this.$input.val () ) ) {
 
-        this.color = new HexColor ( this.options.defaultColor );
-
-        this._updateSb ();
-        this._updateHue ();
+        this.set ( this.options.defaultColor );
 
       }
 
@@ -139,19 +135,19 @@
       switch ( event.keyCode ) {
 
         case Svelto.keyCode.UP:
-          this.color.hsv.v = Math.min ( 100, this.color.hsv.v + 1 );
+          this.hsv.v = Math.min ( 100, this.hsv.v + 1 );
           break;
 
         case Svelto.keyCode.RIGHT:
-          this.color.hsv.s = Math.min ( 100, this.color.hsv.s + 1 );
+          this.hsv.s = Math.min ( 100, this.hsv.s + 1 );
           break;
 
         case Svelto.keyCode.DOWN:
-          this.color.hsv.v = Math.max ( 0, this.color.hsv.v - 1 );
+          this.hsv.v = Math.max ( 0, this.hsv.v - 1 );
           break;
 
         case Svelto.keyCode.LEFT:
-          this.color.hsv.s = Math.max ( 0, this.color.hsv.s - 1 );
+          this.hsv.s = Math.max ( 0, this.hsv.s - 1 );
           break;
 
         default:
@@ -171,8 +167,8 @@
 
     _sbDragSet ( XY, update ) {
 
-      this.color.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
-      this.color.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
+      this.hsv.s =  _.clamp ( 0, XY.X, this.sbWrpSize ) * 100 / this.sbWrpSize;
+      this.hsv.v =  100 - ( _.clamp ( 0, XY.Y, this.sbWrpSize ) * 100 / this.sbWrpSize );
 
       this._updateSb ();
 
@@ -203,11 +199,11 @@
       switch ( event.keyCode ) {
 
         case Svelto.keyCode.UP:
-          this.color.hsv.h = Math.min ( 359, this.color.hsv.h + 1 );
+          this.hsv.h = Math.min ( 359, this.hsv.h + 1 );
           break;
 
         case Svelto.keyCode.DOWN:
-          this.color.hsv.h = Math.max ( 0, this.color.hsv.h - 1 );
+          this.hsv.h = Math.max ( 0, this.hsv.h - 1 );
           break;
 
         default:
@@ -227,7 +223,7 @@
 
     _hueDragSet ( XY, update ) {
 
-      this.color.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
+      this.hsv.h = 359 - ( _.clamp ( 0, XY.Y, this.hueWrpHeight ) * 359 / this.hueWrpHeight );
 
       this._updateHue ();
 
@@ -255,9 +251,9 @@
 
     _updateSb () {
 
-      let hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
-          translateX = this.sbWrpSize / 100 * this.color.hsv.s,
-          translateY = this.sbWrpSize / 100 * ( 100 - this.color.hsv.v );
+      let hsl = Color.hsv2hsl ( this.hsv ),
+          translateX = this.sbWrpSize / 100 * this.hsv.s,
+          translateY = this.sbWrpSize / 100 * ( 100 - this.hsv.v );
 
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l ).translate ( translateX, translateY );
 
@@ -265,22 +261,22 @@
 
     _updateHue () {
 
-      let hsl = ColorHelper.hsv2hsl ( this.color.hsv ),
-          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.color.hsv.h / 360 * 100 ) );
+      let hsl = Color.hsv2hsl ( this.hsv ),
+          translateY = this.hueWrpHeight / 100 * ( 100 - ( this.hsv.h / 360 * 100 ) );
 
-      this.$hueHandler.hsl ( this.color.hsv.h, 100, 50 ).translateY ( translateY );
+      this.$hueHandler.hsl ( this.hsv.h, 100, 50 ).translateY ( translateY );
       this.$sbHandler.hsl ( hsl.h, hsl.s, hsl.l );
-      this.$sbWrp.hsl ( this.color.hsv.h, 100, 50 );
+      this.$sbWrp.hsl ( this.hsv.h, 100, 50 );
 
     }
 
     _updateInput () {
 
-      let hex = this.color.getHexStr ();
+      let hexStr = this._getHexStr ();
 
-      this.$input.val ( hex ).trigger ( 'change' );
+      this.$input.val ( hexStr ).trigger ( 'change' );
 
-      this._trigger ( 'change', { color: hex } );
+      this._trigger ( 'change', { color: hexStr } );
 
     }
 
@@ -292,27 +288,45 @@
 
     }
 
+    /* OTHERS */
+
+    _getHexStr () {
+
+      let hex = Color.hsv2hex ( this.hsv );
+
+      return '#' + hex.r + hex.g + hex.b;
+
+    }
+
     /* PUBLIC */
 
     get () {
 
-      return this.color.getHexStr ();
+      return this._getHexStr ();
 
     }
 
     set ( color ) {
 
-      let newColor = new HexColor ( color );
+      color = _.attempt ( () => new Color ( color ) );
 
-      if ( newColor.isValid () && !_.isEqual ( newColor.hsv, this.color.hsv ) ) {
+      if ( !_.isError ( color ) ) {
 
-        this.color = newColor;
+        let hsv = color.getHsv ();
 
-        this._update ();
+        if ( !_.isEqual ( this.hsv, hsv ) ) {
+
+          this.hsv = hsv;
+
+          this._update ();
+
+          return true;
+
+        }
 
       }
 
-      return newColor.isValid ();
+      return false;
 
     }
 

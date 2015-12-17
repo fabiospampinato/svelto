@@ -1,6 +1,6 @@
 
 /* =========================================================================
- * Svelto - Color Helper
+ * Svelto - Color
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,37 +8,178 @@
  * @requires ../svelto/svelto.js
  * ========================================================================= */
 
-//TODO: Add support for alpha channel
+//TODO: Add support for the alpha channel
+//TODO: Maybe add better support for hex color provided as string, basically Color.hex2hsl should also accept an hex color in string format
 
 (function ( _, window, document, undefined ) {
 
   'use strict';
 
-  /* COLOR HELPER */
+  /* COLOR */
 
-  window.ColorHelper = class {
+  window.Color = class {
+
+    constructor ( color, colorspace ) {
+
+      this.set ( color, colorspace );
+
+    }
+
+    /* ----- API ----- */
+
+    /* SET */
+
+    set ( color, colorspace ) {
+
+      if ( colorspace ) {
+
+        switch ( colorspace.toLowerCase () ) {
+
+          case 'hex':
+            return this.setHex ( color );
+
+          case 'rgb':
+            return this.setRgb ( color );
+
+          case 'hsv':
+            return this.setHsv ( color );
+
+          case 'hsl':
+            return this.setHsl ( color );
+
+        }
+
+      }
+
+      if ( _.isPlainObject ( color ) ) {
+
+        if ( 'r' in color && 'g' in color && 'b' in color ) {
+
+          if ( Number ( color.r ) > 99 || Number ( color.g ) > 99 || Number ( color.b ) > 99 ) {
+
+            return this.setRgb ( color );
+
+          } else {
+
+            return this.setHex ( color );
+
+          }
+
+        } else if ( 'h' in color && 's' in color ) {
+
+          if ( 'l' in color ) {
+
+            return this.setHsl ( color );
+
+          } else if ( 'v' in color ) {
+
+            return this.setHsv ( color );
+
+          }
+
+        }
+
+      } else if ( _.isString ( color ) ) {
+
+        color = _.trim ( color, '#' );
+
+        if ( /^[0-9a-f]{6}$/i.test ( color ) ) { //INFO: Full 6-chars hex color notation
+
+          return this.setHex ({
+            r: color[0] + color[1],
+            g: color[2] + color[3],
+            b: color[4] + color[5]
+          });
+
+        } else if ( /^[0-9a-f]{3}$/i.test ( color ) ) { //INFO: Shorthand 3-chars hex color notation
+
+          return this.setHex ({
+            r: color[0].repeat ( 2 ),
+            g: color[1].repeat ( 2 ),
+            b: color[2].repeat ( 2 )
+          });
+
+        }
+
+      }
+
+      throw new Error ( 'Invalid color' );
+
+    }
+
+    setHex ( color ) {
+
+      this.hex = _.cloneDeep ( color );
+
+    }
+
+    setRgb ( color ) {
+
+      this.hex = Color.rgb2hex ( color );
+
+    }
+
+    setHsv ( color ) {
+
+      this.hex = Color.hsv2hex ( color );
+
+    }
+
+    setHsl ( color ) {
+
+      this.hex = Color.hsl2hex ( color );
+
+    }
+
+    /* GET */
+
+    getHex () {
+
+      return this.hex;
+
+    }
+
+    getRgb () {
+
+      return Color.hex2rgb ( this.hex );
+
+    }
+
+    getHsv () {
+
+      return Color.hex2hsv ( this.hex );
+
+    }
+
+    getHsl () {
+
+      return Color.hex2hsl ( this.hex );
+
+    }
+
+    /* ----- STATICS ----- */
 
     /* HEX */
 
     static hex2rgb ( hex ) {
 
       return {
-        r: ColorHelper.hex2dec ( hex.r ),
-        g: ColorHelper.hex2dec ( hex.g ),
-        b: ColorHelper.hex2dec ( hex.b )
+        r: Color.hex2dec ( hex.r ),
+        g: Color.hex2dec ( hex.g ),
+        b: Color.hex2dec ( hex.b )
       };
 
     }
 
     static hex2hsv ( hex ) {
 
-      return ColorHelper.rgb2hsv ( ColorHelper.hex2rgb ( hex ) );
+      return Color.rgb2hsv ( Color.hex2rgb ( hex ) );
 
     }
 
     static hex2hsl ( hex ) {
 
-      return ColorHelper.hsv2hsl ( ColorHelper.hex2hsv ( hex ) );
+      return Color.hsv2hsl ( Color.hex2hsv ( hex ) );
 
     }
 
@@ -47,9 +188,9 @@
     static rgb2hex ( rgb ) {
 
       return {
-        r: ColorHelper.dec2hex ( rgb.r ),
-        g: ColorHelper.dec2hex ( rgb.g ),
-        b: ColorHelper.dec2hex ( rgb.b )
+        r: Color.dec2hex ( rgb.r ),
+        g: Color.dec2hex ( rgb.g ),
+        b: Color.dec2hex ( rgb.b )
       };
 
     }
@@ -114,7 +255,7 @@
 
     static rgb2hsl ( rgb ) {
 
-      return ColorHelper.hsv2hsl ( ColorHelper.rgb2hsv ( rgb ) );
+      return Color.hsv2hsl ( Color.rgb2hsv ( rgb ) );
 
     }
 
@@ -122,7 +263,7 @@
 
     static hsv2hex ( hsv ) {
 
-      return ColorHelper.rgb2hex ( ColorHelper.hsv2rgb ( hsv ) );
+      return Color.rgb2hex ( Color.hsv2rgb ( hsv ) );
 
     }
 
@@ -221,13 +362,13 @@
 
     static hsl2hex ( hsl ) {
 
-      return ColorHelper.hsv2hex ( ColorHelper.hsl2hsv ( hsl ) );
+      return Color.hsv2hex ( Color.hsl2hsv ( hsl ) );
 
     }
 
     static hsl2rgb ( hsl ) {
 
-      return ColorHelper.hsv2rgb ( ColorHelper.hsl2hsv ( hsl ) );
+      return Color.hsv2rgb ( Color.hsl2hsv ( hsl ) );
 
     }
 

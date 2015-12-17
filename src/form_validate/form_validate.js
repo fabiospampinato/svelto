@@ -8,8 +8,10 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//TODO: Make it general by adding a $.validate ( 'validator', 'value' ); that can also be used elsewhere
 //TODO: Maybe also disable submitters when it's not valid
 //TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url,alphanumeric] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
+
 //FIXME: Handle the case where a textfield changes but is also focused, will happen if we are validating a live synced form
 
 (function ( $, _, window, document, undefined ) {

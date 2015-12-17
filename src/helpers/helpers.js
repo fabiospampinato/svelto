@@ -19,6 +19,8 @@
 
   /* SCROLL TO TOP */
 
+  //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
+
   Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
 
     $scroller.on ( Pointer.tap, () => {
