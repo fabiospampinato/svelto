@@ -2175,6 +2175,7 @@ button {
   letter-spacing: normal;
   text-transform: none;
   word-wrap: normal;
+  overflow: hidden; //INFO: So that in case the font doesn't get loaded the text won't overflow the icon box
   /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
   /* Support for all WebKit browsers */

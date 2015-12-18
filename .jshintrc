@@ -90,6 +90,8 @@
     "Widgetize"   : true,     // Widgetize global object
     "Timer"       : true,     // Timer global object
     "Color"       : true,     // Color global object
+    "RegExes"     : true,     // RegExes global object
+    "Validator"   : true,     // Validator global object
     "$window"     : true,     // jQuery-extras' global
     "$document"   : true,     // jQuery-extras' global
     "$html"       : true,     // jQuery-extras' global

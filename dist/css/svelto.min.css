@@ -3797,6 +3797,7 @@ i.icon, .carousel.inset .carousel-prev:after,
   letter-spacing: normal;
   text-transform: none;
   word-wrap: normal;
+  overflow: hidden;
   /* Support for all WebKit browsers */
   -webkit-font-smoothing: antialiased;
   /* Support for all WebKit browsers */
