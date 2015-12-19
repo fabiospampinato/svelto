@@ -1539,7 +1539,8 @@ label {
       left: $label-badge-spacing;
     }
 
-    &.top-right {
+    &.top-right,
+    &:not(.top-left):not(.bottom-left):not(.bottom-right) { //INFO: Default case
       top: $label-badge-spacing;
       right: $label-badge-spacing;
     }
@@ -4990,7 +4991,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   /* LEFT */
 
-  &.left {
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
 
     /* CONTENT */
 
@@ -5165,7 +5167,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   /* LEFT / RIGHT */
 
   &.left,
-  &.right {
+  &.right,
+  &:not(.top):not(.bottom) { //INFO: Default case
 
     top: 0;
     bottom: 0;
@@ -5181,7 +5184,8 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
 
   /* LEFT */
 
-  &.left {
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
 
     left: 0;
     transform: translateX(- $navbar-closed-vertical-spacing);

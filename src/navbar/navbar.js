@@ -9,9 +9,11 @@
  * ========================================================================= */
 
 //INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
+
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
-//TODO: Close with a flick
-//TODO: Add close with the ESC key
+//TODO: Close with a flick (if not attached)
+//TODO: Add close with the ESC key (if not attached)
+//TODO: Maybe control the attaching process via js, so that we no longer have to put the navbar in any particular position also
 
 (function ( $, _, window, document, undefined ) {
 
@@ -24,16 +26,12 @@
     selector: '.navbar',
     options: {
       flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
-      datas: {
-        direction: 'direction'
-      },
       classes: {
+        defaultDirection: 'left',
+        directions: ['top', 'right', 'bottom', 'left'],
         show: 'show',
         open: 'open',
         flickable: 'flickable'
-      },
-      selectors: {
-        closer: '.navbar-closer'
       },
       animations: {
         open: Svelto.animation.normal,
@@ -57,9 +55,19 @@
       this.$navbar = this.$element;
       this.navbar = this.element;
 
-      this.$closers = this.$navbar.find ( this.options.selectors.closer );
+      this.direction = this.options.classes.defaultDirection;
 
-      this.direction = this.$navbar.data ( this.options.datas.direction );
+      for ( let direction of this.options.classes.directions ) {
+
+        if ( this.$navbar.hasClass ( direction ) ) {
+
+          this.direction = direction;
+          break;
+
+        }
+
+      }
+
       this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
       this.isFlickable = this.$navbar.hasClass ( this.options.classes.flickable );
 
@@ -70,10 +78,6 @@
       /* TAP */
 
       this._on ( Pointer.tap, this.__tap );
-
-      /* CLOSER */
-
-      this._on ( this.$closers, Pointer.tap, this.close );
 
       /* KEYDOWN */
 
@@ -109,19 +113,14 @@
 
     __keydown ( event ) {
 
-      switch ( event.keyCode ) {
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
 
-        case Svelto.keyCode.ESCAPE:
-          this.close ();
-          break;
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
 
-        default:
-          return;
+        this.close ();
 
       }
-
-      event.preventDefault ();
-      event.stopImmediatePropagation ();
 
     }
 
@@ -193,33 +192,29 @@
 
       if ( force !== this._isOpen ) {
 
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        $body.unscrollable ();
+
         this._frame ( function () {
 
-          if ( force === true ) {
-
-            this.$navbar.addClass ( this.options.classes.show );
-
-          }
+          this.$navbar.addClass ( this.options.classes.show );
 
           this._frame ( function () {
 
-            this._isOpen = force;
+            this.$navbar.addClass ( this.options.classes.open );
 
-            this.$navbar.toggleClass ( this.options.classes.open, this._isOpen );
-
-            if ( !this._isOpen ) {
-
-              this._delay ( function () {
-
-                this.$navbar.removeClass ( this.options.classes.show );
-
-              }, this.options.animations.close );
-
-            }
-
-            $body[this._isOpen ? 'unscrollable' : 'scrollable']();
-
-            this._trigger ( this._isOpen ? 'open' : 'close' );
+            this._trigger ( 'open' );
 
           });
 
@@ -229,15 +224,29 @@
 
     }
 
-    open () {
-
-      this.toggle ( true );
-
-    }
-
     close () {
 
-      this.toggle ( false );
+      if ( this._isOpen ) {
+
+        this._isOpen = false;
+
+        this._frame ( function () {
+
+          this.$navbar.removeClass ( this.options.classes.open );
+
+          this._delay ( function () {
+
+            this.$navbar.removeClass ( this.options.classes.show );
+
+            $body.scrollable ();
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
+
+      }
 
     }
 

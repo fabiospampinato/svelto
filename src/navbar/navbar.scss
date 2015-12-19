@@ -43,7 +43,8 @@
 
   /* LEFT */
 
-  &.left {
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
 
     /* CONTENT */
 
@@ -218,7 +219,8 @@
   /* LEFT / RIGHT */
 
   &.left,
-  &.right {
+  &.right,
+  &:not(.top):not(.bottom) { //INFO: Default case
 
     top: 0;
     bottom: 0;
@@ -234,7 +236,8 @@
 
   /* LEFT */
 
-  &.left {
+  &.left,
+  &:not(.right):not(.top):not(.bottom) { //INFO: Default case
 
     left: 0;
     transform: translateX(- $navbar-closed-vertical-spacing);

@@ -17,7 +17,7 @@
 
   let config = {
     name: 'navbarToggler',
-    selector: '.navbar-toggler',
+    selector: '.navbar-toggler, .navbar-closer',
     options: {
       widget: Svelto.Navbar
     }

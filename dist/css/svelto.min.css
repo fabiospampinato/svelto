@@ -3111,7 +3111,7 @@ label {
   left: -20%;
 }
 
-.label.badge.top-right, .badge.top-right.button {
+.label.badge.top-right, .badge.top-right.button, .label.badge:not(.top-left):not(.bottom-left):not(.bottom-right), .badge.button:not(.top-left):not(.bottom-left):not(.bottom-right) {
   top: -20%;
   right: -20%;
 }
@@ -9015,25 +9015,25 @@ table > :not(tfoot) td .multiple:only-child {
   /* BEFORE (BACKGROUND) */
 }
 
-.navbar.left, .navbar.right {
+.navbar.left, .navbar.right, .navbar:not(.top):not(.bottom) {
   top: 0;
   bottom: 0;
   width: 15rem;
   /* SLIM */
 }
 
-.navbar.left.slim, .navbar.right.slim {
+.navbar.left.slim, .navbar.right.slim, .navbar:not(.top):not(.bottom).slim {
   width: 4.2666666667rem;
 }
 
-.navbar.left {
+.navbar.left, .navbar:not(.right):not(.top):not(.bottom) {
   left: 0;
   -webkit-transform: translateX(-17.6666666667rem);
           transform: translateX(-17.6666666667rem);
   /* SLIM */
 }
 
-.navbar.left.slim {
+.navbar.left.slim, .navbar:not(.right):not(.top):not(.bottom).slim {
   -webkit-transform: translateX(-6.9333333334rem);
           transform: translateX(-6.9333333334rem);
 }
@@ -9128,30 +9128,30 @@ table > :not(tfoot) td .multiple:only-child {
   opacity: 0;
 }
 
-.navbar.attached.left {
+.navbar.attached.left, .navbar.attached:not(.right):not(.top):not(.bottom) {
   /* CONTENT */
   /* SLIM */
 }
 
-.navbar.attached.left ~ #content {
+.navbar.attached.left ~ #content, .navbar.attached:not(.right):not(.top):not(.bottom) ~ #content {
   margin-left: 15rem;
   /* HEADER */
 }
 
-.navbar.attached.left ~ #content > header.fixed {
+.navbar.attached.left ~ #content > header.fixed, .navbar.attached:not(.right):not(.top):not(.bottom) ~ #content > header.fixed {
   left: 15rem;
 }
 
-.navbar.attached.left.slim {
+.navbar.attached.left.slim, .navbar.attached:not(.right):not(.top):not(.bottom).slim {
   /* CONTENT */
 }
 
-.navbar.attached.left.slim ~ #content {
+.navbar.attached.left.slim ~ #content, .navbar.attached:not(.right):not(.top):not(.bottom).slim ~ #content {
   margin-left: 4.2666666667rem;
   /* HEADER */
 }
 
-.navbar.attached.left.slim ~ #content > header.fixed {
+.navbar.attached.left.slim ~ #content > header.fixed, .navbar.attached:not(.right):not(.top):not(.bottom).slim ~ #content > header.fixed {
   left: 4.2666666667rem;
 }
 
@@ -9258,25 +9258,25 @@ table > :not(tfoot) td .multiple:only-child {
     display: none;
     opacity: 0;
   }
-  .navbar.attached-xs.left {
+  .navbar.attached-xs.left, .navbar.attached-xs:not(.right):not(.top):not(.bottom) {
     /* CONTENT */
     /* SLIM */
   }
-  .navbar.attached-xs.left ~ #content {
+  .navbar.attached-xs.left ~ #content, .navbar.attached-xs:not(.right):not(.top):not(.bottom) ~ #content {
     margin-left: 15rem;
     /* HEADER */
   }
-  .navbar.attached-xs.left ~ #content > header.fixed {
+  .navbar.attached-xs.left ~ #content > header.fixed, .navbar.attached-xs:not(.right):not(.top):not(.bottom) ~ #content > header.fixed {
     left: 15rem;
   }
-  .navbar.attached-xs.left.slim {
+  .navbar.attached-xs.left.slim, .navbar.attached-xs:not(.right):not(.top):not(.bottom).slim {
     /* CONTENT */
   }
-  .navbar.attached-xs.left.slim ~ #content {
+  .navbar.attached-xs.left.slim ~ #content, .navbar.attached-xs:not(.right):not(.top):not(.bottom).slim ~ #content {
     margin-left: 4.2666666667rem;
     /* HEADER */
   }
-  .navbar.attached-xs.left.slim ~ #content > header.fixed {
+  .navbar.attached-xs.left.slim ~ #content > header.fixed, .navbar.attached-xs:not(.right):not(.top):not(.bottom).slim ~ #content > header.fixed {
     left: 4.2666666667rem;
   }
   .navbar.attached-xs.right {
@@ -9366,25 +9366,25 @@ table > :not(tfoot) td .multiple:only-child {
     display: none;
     opacity: 0;
   }
-  .navbar.attached-sm.left {
+  .navbar.attached-sm.left, .navbar.attached-sm:not(.right):not(.top):not(.bottom) {
     /* CONTENT */
     /* SLIM */
   }
-  .navbar.attached-sm.left ~ #content {
+  .navbar.attached-sm.left ~ #content, .navbar.attached-sm:not(.right):not(.top):not(.bottom) ~ #content {
     margin-left: 15rem;
     /* HEADER */
   }
-  .navbar.attached-sm.left ~ #content > header.fixed {
+  .navbar.attached-sm.left ~ #content > header.fixed, .navbar.attached-sm:not(.right):not(.top):not(.bottom) ~ #content > header.fixed {
     left: 15rem;
   }
-  .navbar.attached-sm.left.slim {
+  .navbar.attached-sm.left.slim, .navbar.attached-sm:not(.right):not(.top):not(.bottom).slim {
     /* CONTENT */
   }
-  .navbar.attached-sm.left.slim ~ #content {
+  .navbar.attached-sm.left.slim ~ #content, .navbar.attached-sm:not(.right):not(.top):not(.bottom).slim ~ #content {
     margin-left: 4.2666666667rem;
     /* HEADER */
   }
-  .navbar.attached-sm.left.slim ~ #content > header.fixed {
+  .navbar.attached-sm.left.slim ~ #content > header.fixed, .navbar.attached-sm:not(.right):not(.top):not(.bottom).slim ~ #content > header.fixed {
     left: 4.2666666667rem;
   }
   .navbar.attached-sm.right {
@@ -9474,25 +9474,25 @@ table > :not(tfoot) td .multiple:only-child {
     display: none;
     opacity: 0;
   }
-  .navbar.attached-md.left {
+  .navbar.attached-md.left, .navbar.attached-md:not(.right):not(.top):not(.bottom) {
     /* CONTENT */
     /* SLIM */
   }
-  .navbar.attached-md.left ~ #content {
+  .navbar.attached-md.left ~ #content, .navbar.attached-md:not(.right):not(.top):not(.bottom) ~ #content {
     margin-left: 15rem;
     /* HEADER */
   }
-  .navbar.attached-md.left ~ #content > header.fixed {
+  .navbar.attached-md.left ~ #content > header.fixed, .navbar.attached-md:not(.right):not(.top):not(.bottom) ~ #content > header.fixed {
     left: 15rem;
   }
-  .navbar.attached-md.left.slim {
+  .navbar.attached-md.left.slim, .navbar.attached-md:not(.right):not(.top):not(.bottom).slim {
     /* CONTENT */
   }
-  .navbar.attached-md.left.slim ~ #content {
+  .navbar.attached-md.left.slim ~ #content, .navbar.attached-md:not(.right):not(.top):not(.bottom).slim ~ #content {
     margin-left: 4.2666666667rem;
     /* HEADER */
   }
-  .navbar.attached-md.left.slim ~ #content > header.fixed {
+  .navbar.attached-md.left.slim ~ #content > header.fixed, .navbar.attached-md:not(.right):not(.top):not(.bottom).slim ~ #content > header.fixed {
     left: 4.2666666667rem;
   }
   .navbar.attached-md.right {
@@ -9582,25 +9582,25 @@ table > :not(tfoot) td .multiple:only-child {
     display: none;
     opacity: 0;
   }
-  .navbar.attached-lg.left {
+  .navbar.attached-lg.left, .navbar.attached-lg:not(.right):not(.top):not(.bottom) {
     /* CONTENT */
     /* SLIM */
   }
-  .navbar.attached-lg.left ~ #content {
+  .navbar.attached-lg.left ~ #content, .navbar.attached-lg:not(.right):not(.top):not(.bottom) ~ #content {
     margin-left: 15rem;
     /* HEADER */
   }
-  .navbar.attached-lg.left ~ #content > header.fixed {
+  .navbar.attached-lg.left ~ #content > header.fixed, .navbar.attached-lg:not(.right):not(.top):not(.bottom) ~ #content > header.fixed {
     left: 15rem;
   }
-  .navbar.attached-lg.left.slim {
+  .navbar.attached-lg.left.slim, .navbar.attached-lg:not(.right):not(.top):not(.bottom).slim {
     /* CONTENT */
   }
-  .navbar.attached-lg.left.slim ~ #content {
+  .navbar.attached-lg.left.slim ~ #content, .navbar.attached-lg:not(.right):not(.top):not(.bottom).slim ~ #content {
     margin-left: 4.2666666667rem;
     /* HEADER */
   }
-  .navbar.attached-lg.left.slim ~ #content > header.fixed {
+  .navbar.attached-lg.left.slim ~ #content > header.fixed, .navbar.attached-lg:not(.right):not(.top):not(.bottom).slim ~ #content > header.fixed {
     left: 4.2666666667rem;
   }
   .navbar.attached-lg.right {
@@ -9690,25 +9690,25 @@ table > :not(tfoot) td .multiple:only-child {
     display: none;
     opacity: 0;
   }
-  .navbar.attached-xl.left {
+  .navbar.attached-xl.left, .navbar.attached-xl:not(.right):not(.top):not(.bottom) {
     /* CONTENT */
     /* SLIM */
   }
-  .navbar.attached-xl.left ~ #content {
+  .navbar.attached-xl.left ~ #content, .navbar.attached-xl:not(.right):not(.top):not(.bottom) ~ #content {
     margin-left: 15rem;
     /* HEADER */
   }
-  .navbar.attached-xl.left ~ #content > header.fixed {
+  .navbar.attached-xl.left ~ #content > header.fixed, .navbar.attached-xl:not(.right):not(.top):not(.bottom) ~ #content > header.fixed {
     left: 15rem;
   }
-  .navbar.attached-xl.left.slim {
+  .navbar.attached-xl.left.slim, .navbar.attached-xl:not(.right):not(.top):not(.bottom).slim {
     /* CONTENT */
   }
-  .navbar.attached-xl.left.slim ~ #content {
+  .navbar.attached-xl.left.slim ~ #content, .navbar.attached-xl:not(.right):not(.top):not(.bottom).slim ~ #content {
     margin-left: 4.2666666667rem;
     /* HEADER */
   }
-  .navbar.attached-xl.left.slim ~ #content > header.fixed {
+  .navbar.attached-xl.left.slim ~ #content > header.fixed, .navbar.attached-xl:not(.right):not(.top):not(.bottom).slim ~ #content > header.fixed {
     left: 4.2666666667rem;
   }
   .navbar.attached-xl.right {
