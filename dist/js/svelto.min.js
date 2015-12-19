@@ -124,28 +124,11 @@
 
   _.mixin ({
 
-    /**
-     * Gets the number of seconds that have elapsed since the Unix epoch
-     * (1 January 1970 00:00:00 UTC).
-     *
-     * _.defer(function(stamp) {
-     *   log(_.nowSecs() - stamp);
-     * }, _.nowSecs());
-     * // => logs the number of seconds it took for the deferred function to be invoked
-     */
-
     nowSecs () {
 
-      return _.floor ( _.now () / 1000 );
+      return Math.floor ( _.now () / 1000 );
 
     },
-
-    /**
-     * Gets a string format of number of seconds elapsed.
-     *
-     * _.timeAgo ( _.nowSecs () )
-     * // => Just now
-     */
 
     timeAgo ( timestamp ) { //INFO: Timestamp is required in seconds
 
@@ -168,7 +151,7 @@
 
           let name = names[i],
               secs = times[i],
-              number = _.floor ( elapsed / secs );
+              number = Math.floor ( elapsed / secs );
 
           if ( number >= 1 ) {
 
@@ -185,19 +168,6 @@
 
     },
 
-    /**
-     * Return a boolean if the string is fuzzy matched with the search string.
-     *
-     * _.fuzzyMatch ( 'something', 'smTng' );
-     * // => true
-     *
-     * _.fuzzyMatch ( 'something', 'smTng', false );
-     * // => false
-     *
-     * _.fuzzyMatch ( 'something', 'semthing' );
-     * // => false
-     */
-
     fuzzyMatch ( str, search, isCaseSensitive ) {
 
       if ( isCaseSensitive !== false ) {
@@ -208,11 +178,12 @@
       }
 
       let currentIndex = -1,
+          str_i,
           str_l = str.length;
 
       for ( let search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-        for ( var str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
+        for ( str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
 
           if ( str[str_i] === search[search_i] ) {
 
@@ -234,22 +205,6 @@
       return true;
 
     },
-
-    /**
-     * Returns a number clamped between a minimum and maximum value.
-     * If the maximum isn't provided, only clamps from the bottom.
-     *
-     * @param {number} minimum The minimum value.
-     * @param {number} value The value to clamp.
-     * @param {number} maximum The maximum value.
-     * @returns {number} A value between minimum and maximum.
-     *
-     * @example
-     *
-     * _.clamp(2, 4, 6); // => 4
-     * _.clamp(3, 2, 5); // => 3
-     * _.clamp(2, 7, 5); // => 5
-     */
 
     clamp ( minimum, value, maximum ) {
 
@@ -277,15 +232,11 @@
 
     },
 
-    /**
-     * Performs a binary each of the array
-     */
-
     btEach ( arr, callback, startIndex ) {
 
       let start = 0,
           end = arr.length - 1,
-          center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+          center = _.isNumber ( startIndex ) ? startIndex : Math.ceil ( ( start + end ) / 2 ),
           direction;
 
       while ( start <= end ) {
@@ -306,7 +257,7 @@
 
         }
 
-        center = _.ceil ( ( start + end ) / 2 );
+        center = Math.ceil ( ( start + end ) / 2 );
 
       }
 
@@ -314,19 +265,12 @@
 
     },
 
-    /**
-     * Move the item at `from` index inside the array to the `to` index
-     */
 
      move ( arr, from, to ) {
 
        arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
 
      },
-
-    /**
-     * Shorten the numer using common K and M syntax
-     */
 
      mkize ( number ) {
 
@@ -347,10 +291,6 @@
     	}
 
     },
-
-    /**
-     * Round `number` so that it becames the closer `step` multiple
-     */
 
     roundCloser ( number, step ) {
 
@@ -607,7 +547,7 @@
 
             previous = current;
 
-            $window.trigger ( 'route', { url: current } );
+            $window.trigger ( 'route' );
 
           }
 
@@ -1183,7 +1123,7 @@
 
     _frame ( fn ) {
 
-      return $.frame ( fn.bind ( this ) );
+      return requestAnimationFrame ( fn.bind ( this ) );
 
     }
 
@@ -1682,7 +1622,6 @@
         open: 'open'
       },
       selectors: {
-        expander: '.expander',
         toggler: '.expander-toggler'
       },
       callbacks: {
@@ -7403,7 +7342,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//INFO: Since we check the `event.target` in order to detect a click on the background it will fail when using a `.container` as a modal, so effectively we are shrinking the supported groups of element to `card` and `card`-like
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
 (function ( $, _, window, document, undefined ) {
 
@@ -7418,9 +7357,6 @@
       classes: {
         show: 'show',
         open: 'open'
-      },
-      selectors: {
-        closer: '.modal-closer'
       },
       animations: {
         open: Svelto.animation.normal,
@@ -7444,8 +7380,6 @@
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.$closers = this.$modal.find ( this.options.selectors.closer );
-
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
     }
@@ -7454,11 +7388,7 @@
 
       /* TAP */
 
-      this._on ( Pointer.tap, this.__tap );
-
-      /* CLOSER */
-
-      this._on ( this.$closers, Pointer.tap, this.close );
+      this._on ( true, Pointer.tap, this.__tap );
 
     }
 
@@ -7505,35 +7435,31 @@
 
       if ( force !== this._isOpen ) {
 
-        this._isOpen = force;
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        $body.unscrollable ();
 
         this._frame ( function () {
 
-          if ( force === true ) {
-
-            this.$modal.addClass ( this.options.classes.show );
-
-          }
+          this.$modal.addClass ( this.options.classes.show );
 
           this._frame ( function () {
 
-            this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
+            this.$modal.addClass ( this.options.classes.open );
 
-            if ( !this._isOpen ) {
+            this._on ( true, $document, 'keydown', this.__keydown );
 
-              this._delay ( function () {
-
-                this.$modal.removeClass ( this.options.classes.show );
-
-              }, this.options.animations.close );
-
-            }
-
-            this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
-
-            $body[this._isOpen ? 'unscrollable' : 'scrollable']();
-
-            this._trigger ( this._isOpen ? 'open' : 'close' );
+            this._trigger ( 'open' );
 
           });
 
@@ -7543,33 +7469,29 @@
 
     }
 
-    open () {
-
-      this.toggle ( true );
-
-    }
-
     close () {
-
-      this.toggle ( false );
-
-    }
-
-    remove () { //TODO: Detach it automatically when removing it
 
       if ( this._isOpen ) {
 
-        this.close ();
+        this._isOpen = false;
 
-        this._delay ( function () {
+        this._frame ( function () {
 
-          this.$modal.detach ();
+          this.$modal.removeClass ( this.options.classes.open );
 
-        }, this.options.animations.close );
+          this._delay ( function () {
 
-      } else {
+            this.$modal.removeClass ( this.options.classes.show );
 
-        this.$modal.detach ();
+            $body.scrollable ();
+
+            this._off ( $document, 'keydown', this.__keydown );
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
 
       }
 
@@ -7607,7 +7529,7 @@
 
   let config = {
     name: 'modalToggler',
-    selector: '.modal-toggler',
+    selector: '.modal-toggler, .modal-closer',
     options: {
       widget: Svelto.Modal
     }
@@ -7639,53 +7561,111 @@
  * @requires ../cookie/cookie.js
  * ========================================================================= */
 
-//TODO: Add support for cookie settable parameters
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
 
+  /* TOOLS */
+
+  let getExpiry = function ( expiry ) {
+
+    if ( expiry ) {
+
+      switch ( expiry.constructor ) {
+
+        case Number:
+          return ( expiry === Infinity ) ? false : _.nowSecs () + expiry;
+
+        case String:
+          return getExpiry ( new Date ( expiry ) );
+
+        case Date:
+          let timestamp = expiry.getTime ();
+          return _.isNaN ( timestamp ) ? false : Math.floor ( timestamp / 1000 );
+
+      }
+
+    }
+
+    return false;
+
+  };
+
   /* CONFIG */
 
   let config = {
-    serializer: JSON.stringify,
-    unserializer: JSON.parse
+    encoder: JSON.stringify,
+    decoder: JSON.parse
   };
 
   /* GROUP */
 
   class Group {
 
-    constructor ( name ) {
+    constructor ( options ) {
 
-      this.name = name;
-      this.actions = config.unserializer ( $.cookie.get ( this.name ) || '{}' );
+      this.name = options.name;
+      this.cookie = options.cookie;
+
+      this.actions = config.decoder ( $.cookie.get ( this.name ) || '{}' );
 
     }
 
     get ( action ) {
 
-      return this.actions[action] || 0;
+      let actionj = this.actions[action];
+
+      if ( actionj ) {
+
+        if ( actionj.x && actionj.x < _.nowSecs () ) {
+
+          this.remove ( action );
+
+        } else {
+
+          return actionj.t;
+
+        }
+
+      }
+
+      return 0;
 
     }
 
-    set ( action, times ) {
+    set ( action, times, expiry ) {
 
       times = Number ( times );
 
       if ( !_.isNaN ( times ) ) {
 
-        if ( times === 0 ) {
+        if ( action in this.actions ) {
 
-          this.reset ( action );
+          if ( times === 0 && !this.actions[action].x ) {
+
+            return this.remove ( action );
+
+          } else {
+
+            this.actions[action].t = times;
+
+          }
 
         } else {
 
-          this.actions[action] = times;
+          this.actions[action] = { t: times };
 
-          this.update ();
+          expiry = getExpiry ( expiry );
+
+          if ( expiry ) {
+
+            this.actions[action].x = expiry;
+
+          }
 
         }
+
+        this.update ();
 
       }
 
@@ -7693,23 +7673,31 @@
 
     update () {
 
-      $.cookie.set ( this.name, config.serializer ( this.actions ), Infinity );
+      $.cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
 
     }
 
-    reset ( action ) {
+    remove ( action ) {
 
       if ( action ) {
 
-        delete this.actions[action];
+        if ( _.size ( this.actions ) > 1 ) {
 
-        this.update ();
+          delete this.actions[action];
+
+          this.update ();
+
+        } else {
+
+          this.remove ();
+
+        }
 
       } else {
 
         this.actions = {};
 
-        $.cookie.remove ( this.name );
+        $.cookie.remove ( this.name, this.cookie.path, this.cookie.domain );
 
       }
 
@@ -7721,7 +7709,6 @@
 
   Svelto.NTA = {};
   Svelto.NTA.Group = Group;
-  Svelto.NTA.Group.config = config;
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7746,8 +7733,9 @@
 
     constructor ( options ) {
 
-      this.group = new Svelto.NTA.Group ( options.group );
+      this.group = new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
       this.name = options.name;
+      this.expiry = options.expiry;
 
     }
 
@@ -7757,15 +7745,15 @@
 
     }
 
-    set ( times ) {
+    set ( times, expiry ) {
 
-      this.group.set ( this.name, times );
+      this.group.set ( this.name, times, expiry || this.expiry );
 
     }
 
-    reset () {
+    remove () {
 
-      this.group.reset ( this.name );
+      this.group.remove ( this.name );
 
     }
 
@@ -7788,8 +7776,6 @@
  * @requires NTA.Action.js
  * ========================================================================= */
 
-//TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -7804,31 +7790,32 @@
       group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
       action: false, //INFO: The action name
       times: Infinity, //INFO: The times an action can be executed
-      fn: false //INFO: The function to execute
+      expiry: false, //INFO: When a single action will expire and will then get removed from its group
+      fn: false, //INFO: The function to execute
+      cookie: { //INFO: Values that will get passed to `$.cookie` when appropriate
+        end: Infinity,
+        path: undefined,
+        domain: undefined,
+        secure: undefined
+      }
     }, options );
-
-    /* NORMALIZING TIMES */
-
-    options.times = Number(options.times);
-
-    if ( _.isNaN ( options.times ) ) {
-
-      options.times = 0;
-
-    }
 
     /* N TIMES ACTION */
 
     if ( options.action ) {
 
-      let action = new Svelto.NTA.Action ({ group: options.group, name: options.action }),
+      let action = new Svelto.NTA.Action ({ group: options.group, name: options.action, expiry: options.expiry, cookie: options.cookie }),
           actionTimes = action.get ();
+
+      /* EXECUTE */
 
       if ( options.fn && actionTimes < options.times ) {
 
-        let value = options.fn ( options.group, options.action, actionTimes + 1 );
+        let returnValue = options.fn ( options.group, options.action, actionTimes + 1 );
 
-        if ( value !== false ) {
+        /* INCREMENT */
+
+        if ( returnValue !== false ) {
 
           action.set ( actionTimes + 1 );
 
@@ -7840,7 +7827,7 @@
 
     } else if ( options.group ) {
 
-      return new Svelto.NTA.Group ( options.group );
+      return new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
 
     }
 
@@ -7858,6 +7845,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Close with a flick
 //TODO: Add close with the ESC key

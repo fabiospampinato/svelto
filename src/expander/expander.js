@@ -22,7 +22,6 @@
         open: 'open'
       },
       selectors: {
-        expander: '.expander',
         toggler: '.expander-toggler'
       },
       callbacks: {

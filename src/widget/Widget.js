@@ -418,7 +418,7 @@
 
     _frame ( fn ) {
 
-      return $.frame ( fn.bind ( this ) );
+      return requestAnimationFrame ( fn.bind ( this ) );
 
     }
 

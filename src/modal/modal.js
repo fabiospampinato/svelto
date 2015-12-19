@@ -8,7 +8,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//INFO: Since we check the `event.target` in order to detect a click on the background it will fail when using a `.container` as a modal, so effectively we are shrinking the supported groups of element to `card` and `card`-like
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
 
 (function ( $, _, window, document, undefined ) {
 
@@ -23,9 +23,6 @@
       classes: {
         show: 'show',
         open: 'open'
-      },
-      selectors: {
-        closer: '.modal-closer'
       },
       animations: {
         open: Svelto.animation.normal,
@@ -49,8 +46,6 @@
       this.modal = this.element;
       this.$modal = this.$element;
 
-      this.$closers = this.$modal.find ( this.options.selectors.closer );
-
       this._isOpen = this.$modal.hasClass ( this.options.classes.open );
 
     }
@@ -59,11 +54,7 @@
 
       /* TAP */
 
-      this._on ( Pointer.tap, this.__tap );
-
-      /* CLOSER */
-
-      this._on ( this.$closers, Pointer.tap, this.close );
+      this._on ( true, Pointer.tap, this.__tap );
 
     }
 
@@ -110,35 +101,31 @@
 
       if ( force !== this._isOpen ) {
 
-        this._isOpen = force;
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        $body.unscrollable ();
 
         this._frame ( function () {
 
-          if ( force === true ) {
-
-            this.$modal.addClass ( this.options.classes.show );
-
-          }
+          this.$modal.addClass ( this.options.classes.show );
 
           this._frame ( function () {
 
-            this.$modal.toggleClass ( this.options.classes.open, this._isOpen );
+            this.$modal.addClass ( this.options.classes.open );
 
-            if ( !this._isOpen ) {
+            this._on ( true, $document, 'keydown', this.__keydown );
 
-              this._delay ( function () {
-
-                this.$modal.removeClass ( this.options.classes.show );
-
-              }, this.options.animations.close );
-
-            }
-
-            this[this._isOpen ? '_on' : '_off']( $document, 'keydown', this.__keydown );
-
-            $body[this._isOpen ? 'unscrollable' : 'scrollable']();
-
-            this._trigger ( this._isOpen ? 'open' : 'close' );
+            this._trigger ( 'open' );
 
           });
 
@@ -148,33 +135,29 @@
 
     }
 
-    open () {
-
-      this.toggle ( true );
-
-    }
-
     close () {
-
-      this.toggle ( false );
-
-    }
-
-    remove () { //TODO: Detach it automatically when removing it
 
       if ( this._isOpen ) {
 
-        this.close ();
+        this._isOpen = false;
 
-        this._delay ( function () {
+        this._frame ( function () {
 
-          this.$modal.detach ();
+          this.$modal.removeClass ( this.options.classes.open );
 
-        }, this.options.animations.close );
+          this._delay ( function () {
 
-      } else {
+            this.$modal.removeClass ( this.options.classes.show );
 
-        this.$modal.detach ();
+            $body.scrollable ();
+
+            this._off ( $document, 'keydown', this.__keydown );
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
 
       }
 

@@ -9,8 +9,6 @@
  * @requires NTA.Action.js
  * ========================================================================= */
 
-//TODO: Add an action expiry parameter, so that we can run an action N times during a range of period, like once a week, once a month and so on
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -25,31 +23,32 @@
       group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
       action: false, //INFO: The action name
       times: Infinity, //INFO: The times an action can be executed
-      fn: false //INFO: The function to execute
+      expiry: false, //INFO: When a single action will expire and will then get removed from its group
+      fn: false, //INFO: The function to execute
+      cookie: { //INFO: Values that will get passed to `$.cookie` when appropriate
+        end: Infinity,
+        path: undefined,
+        domain: undefined,
+        secure: undefined
+      }
     }, options );
-
-    /* NORMALIZING TIMES */
-
-    options.times = Number(options.times);
-
-    if ( _.isNaN ( options.times ) ) {
-
-      options.times = 0;
-
-    }
 
     /* N TIMES ACTION */
 
     if ( options.action ) {
 
-      let action = new Svelto.NTA.Action ({ group: options.group, name: options.action }),
+      let action = new Svelto.NTA.Action ({ group: options.group, name: options.action, expiry: options.expiry, cookie: options.cookie }),
           actionTimes = action.get ();
+
+      /* EXECUTE */
 
       if ( options.fn && actionTimes < options.times ) {
 
-        let value = options.fn ( options.group, options.action, actionTimes + 1 );
+        let returnValue = options.fn ( options.group, options.action, actionTimes + 1 );
 
-        if ( value !== false ) {
+        /* INCREMENT */
+
+        if ( returnValue !== false ) {
 
           action.set ( actionTimes + 1 );
 
@@ -61,7 +60,7 @@
 
     } else if ( options.group ) {
 
-      return new Svelto.NTA.Group ( options.group );
+      return new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
 
     }
 

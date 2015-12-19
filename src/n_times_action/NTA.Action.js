@@ -19,8 +19,9 @@
 
     constructor ( options ) {
 
-      this.group = new Svelto.NTA.Group ( options.group );
+      this.group = new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
       this.name = options.name;
+      this.expiry = options.expiry;
 
     }
 
@@ -30,15 +31,15 @@
 
     }
 
-    set ( times ) {
+    set ( times, expiry ) {
 
-      this.group.set ( this.name, times );
+      this.group.set ( this.name, times, expiry || this.expiry );
 
     }
 
-    reset () {
+    remove () {
 
-      this.group.reset ( this.name );
+      this.group.remove ( this.name );
 
     }
 

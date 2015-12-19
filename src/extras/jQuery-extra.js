@@ -166,7 +166,7 @@
 
             previous = current;
 
-            $window.trigger ( 'route', { url: current } );
+            $window.trigger ( 'route' );
 
           }
 

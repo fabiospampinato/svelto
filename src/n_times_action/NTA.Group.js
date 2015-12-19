@@ -9,53 +9,111 @@
  * @requires ../cookie/cookie.js
  * ========================================================================= */
 
-//TODO: Add support for cookie settable parameters
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
 
+  /* TOOLS */
+
+  let getExpiry = function ( expiry ) {
+
+    if ( expiry ) {
+
+      switch ( expiry.constructor ) {
+
+        case Number:
+          return ( expiry === Infinity ) ? false : _.nowSecs () + expiry;
+
+        case String:
+          return getExpiry ( new Date ( expiry ) );
+
+        case Date:
+          let timestamp = expiry.getTime ();
+          return _.isNaN ( timestamp ) ? false : Math.floor ( timestamp / 1000 );
+
+      }
+
+    }
+
+    return false;
+
+  };
+
   /* CONFIG */
 
   let config = {
-    serializer: JSON.stringify,
-    unserializer: JSON.parse
+    encoder: JSON.stringify,
+    decoder: JSON.parse
   };
 
   /* GROUP */
 
   class Group {
 
-    constructor ( name ) {
+    constructor ( options ) {
 
-      this.name = name;
-      this.actions = config.unserializer ( $.cookie.get ( this.name ) || '{}' );
+      this.name = options.name;
+      this.cookie = options.cookie;
+
+      this.actions = config.decoder ( $.cookie.get ( this.name ) || '{}' );
 
     }
 
     get ( action ) {
 
-      return this.actions[action] || 0;
+      let actionj = this.actions[action];
+
+      if ( actionj ) {
+
+        if ( actionj.x && actionj.x < _.nowSecs () ) {
+
+          this.remove ( action );
+
+        } else {
+
+          return actionj.t;
+
+        }
+
+      }
+
+      return 0;
 
     }
 
-    set ( action, times ) {
+    set ( action, times, expiry ) {
 
       times = Number ( times );
 
       if ( !_.isNaN ( times ) ) {
 
-        if ( times === 0 ) {
+        if ( action in this.actions ) {
 
-          this.reset ( action );
+          if ( times === 0 && !this.actions[action].x ) {
+
+            return this.remove ( action );
+
+          } else {
+
+            this.actions[action].t = times;
+
+          }
 
         } else {
 
-          this.actions[action] = times;
+          this.actions[action] = { t: times };
 
-          this.update ();
+          expiry = getExpiry ( expiry );
+
+          if ( expiry ) {
+
+            this.actions[action].x = expiry;
+
+          }
 
         }
+
+        this.update ();
 
       }
 
@@ -63,23 +121,31 @@
 
     update () {
 
-      $.cookie.set ( this.name, config.serializer ( this.actions ), Infinity );
+      $.cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
 
     }
 
-    reset ( action ) {
+    remove ( action ) {
 
       if ( action ) {
 
-        delete this.actions[action];
+        if ( _.size ( this.actions ) > 1 ) {
 
-        this.update ();
+          delete this.actions[action];
+
+          this.update ();
+
+        } else {
+
+          this.remove ();
+
+        }
 
       } else {
 
         this.actions = {};
 
-        $.cookie.remove ( this.name );
+        $.cookie.remove ( this.name, this.cookie.path, this.cookie.domain );
 
       }
 
@@ -91,6 +157,5 @@
 
   Svelto.NTA = {};
   Svelto.NTA.Group = Group;
-  Svelto.NTA.Group.config = config;
 
 }( Svelto.$, Svelto._, window, document ));

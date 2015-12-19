@@ -18,28 +18,11 @@
 
   _.mixin ({
 
-    /**
-     * Gets the number of seconds that have elapsed since the Unix epoch
-     * (1 January 1970 00:00:00 UTC).
-     *
-     * _.defer(function(stamp) {
-     *   log(_.nowSecs() - stamp);
-     * }, _.nowSecs());
-     * // => logs the number of seconds it took for the deferred function to be invoked
-     */
-
     nowSecs () {
 
-      return _.floor ( _.now () / 1000 );
+      return Math.floor ( _.now () / 1000 );
 
     },
-
-    /**
-     * Gets a string format of number of seconds elapsed.
-     *
-     * _.timeAgo ( _.nowSecs () )
-     * // => Just now
-     */
 
     timeAgo ( timestamp ) { //INFO: Timestamp is required in seconds
 
@@ -62,7 +45,7 @@
 
           let name = names[i],
               secs = times[i],
-              number = _.floor ( elapsed / secs );
+              number = Math.floor ( elapsed / secs );
 
           if ( number >= 1 ) {
 
@@ -79,19 +62,6 @@
 
     },
 
-    /**
-     * Return a boolean if the string is fuzzy matched with the search string.
-     *
-     * _.fuzzyMatch ( 'something', 'smTng' );
-     * // => true
-     *
-     * _.fuzzyMatch ( 'something', 'smTng', false );
-     * // => false
-     *
-     * _.fuzzyMatch ( 'something', 'semthing' );
-     * // => false
-     */
-
     fuzzyMatch ( str, search, isCaseSensitive ) {
 
       if ( isCaseSensitive !== false ) {
@@ -102,11 +72,12 @@
       }
 
       let currentIndex = -1,
+          str_i,
           str_l = str.length;
 
       for ( let search_i = 0, search_l = search.length; search_i < search_l; search_i++ ) {
 
-        for ( var str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
+        for ( str_i = currentIndex + 1; str_i < str_l; str_i++ ) {
 
           if ( str[str_i] === search[search_i] ) {
 
@@ -128,22 +99,6 @@
       return true;
 
     },
-
-    /**
-     * Returns a number clamped between a minimum and maximum value.
-     * If the maximum isn't provided, only clamps from the bottom.
-     *
-     * @param {number} minimum The minimum value.
-     * @param {number} value The value to clamp.
-     * @param {number} maximum The maximum value.
-     * @returns {number} A value between minimum and maximum.
-     *
-     * @example
-     *
-     * _.clamp(2, 4, 6); // => 4
-     * _.clamp(3, 2, 5); // => 3
-     * _.clamp(2, 7, 5); // => 5
-     */
 
     clamp ( minimum, value, maximum ) {
 
@@ -171,15 +126,11 @@
 
     },
 
-    /**
-     * Performs a binary each of the array
-     */
-
     btEach ( arr, callback, startIndex ) {
 
       let start = 0,
           end = arr.length - 1,
-          center = _.isNumber ( startIndex ) ? startIndex : _.ceil ( ( start + end ) / 2 ),
+          center = _.isNumber ( startIndex ) ? startIndex : Math.ceil ( ( start + end ) / 2 ),
           direction;
 
       while ( start <= end ) {
@@ -200,7 +151,7 @@
 
         }
 
-        center = _.ceil ( ( start + end ) / 2 );
+        center = Math.ceil ( ( start + end ) / 2 );
 
       }
 
@@ -208,19 +159,12 @@
 
     },
 
-    /**
-     * Move the item at `from` index inside the array to the `to` index
-     */
 
      move ( arr, from, to ) {
 
        arr.splice ( to, 0, arr.splice ( from, 1 )[0] );
 
      },
-
-    /**
-     * Shorten the numer using common K and M syntax
-     */
 
      mkize ( number ) {
 
@@ -241,10 +185,6 @@
     	}
 
     },
-
-    /**
-     * Round `number` so that it becames the closer `step` multiple
-     */
 
     roundCloser ( number, step ) {
 

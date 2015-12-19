@@ -8,6 +8,7 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
 //TODO: Replace flickable support with a smooth moving navbar, so operate on drag
 //TODO: Close with a flick
 //TODO: Add close with the ESC key
