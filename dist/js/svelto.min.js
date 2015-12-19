@@ -5942,7 +5942,7 @@
 
     ___timer () {
 
-      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
         this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
 
@@ -8166,18 +8166,29 @@
     options = _.merge ({
       title: false,
       body: false,
-      img: false
+      img: false,
+      ttl: Svelto.Noty.config.options.ttl
     }, options );
 
     /* NOTIFICATIONS */
 
     if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
 
-      Notification.requestPermission ( ( status ) => {
+      Notification.requestPermission ( function ( status ) {
 
         if ( status === 'granted' ) {
 
           let notification = new Notification ( options.title, { body: options.body, icon: options.img } );
+
+          if ( _.isNumber ( options.ttl ) && !_.isNaN ( options.ttl ) && options.ttl !== Infinity ) {
+
+            setTimeout ( function () {
+
+              notification.close ();
+
+            }, options.ttl );
+
+          }
 
         } else {
 

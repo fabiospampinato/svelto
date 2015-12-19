@@ -182,7 +182,7 @@
 
     ___timer () {
 
-      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
 
         this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
 
