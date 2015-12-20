@@ -9,10 +9,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
-//FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? //TODO Test it!
-
-//INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
+//INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
 (function ( $, _, window, document, undefined ) {
 
@@ -23,7 +20,7 @@
   window.Pointer = {
     options: {
       events: {
-        prefix: 'pointer'
+        prefix: 'spointer'
       },
       dbltap: {
         interval: 300
@@ -36,6 +33,8 @@
   let events = {
     tap: Pointer.options.events.prefix + 'tap',
     dbltap: Pointer.options.events.prefix + 'dbltap',
+    click: 'click',
+    dblclick: 'dblclick',
     down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
     move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
     up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
@@ -50,30 +49,37 @@
 
   for ( let name in events ) {
 
-    Pointer[name] = events[name];
+    if ( events.hasOwnProperty ( name ) ) {
 
-    $.fn[name] = function ( fn ) {
+      Pointer[name] = events[name];
 
-      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] );
+      if ( !( name in $.fn ) ) {
 
-    };
+        $.fn[name] = function ( fn ) {
+
+          return fn ? this.on ( Pointer[name], fn ) : this.trigger ( Pointer[name] );
+
+        };
+
+      }
+
+    }
 
   }
 
-  /* POINTER LOGIC */
+  /* ----- POINTER LOGIC ----- */
 
   /* VARIABLES */
 
   let $document = $(document),
       target,
       $target,
-      startEvent,
       prevTapTimestamp = 0,
       motion;
 
   /* EVENT CREATOR */
 
-  let createEvent = function ( name, originalEvent ) {
+  function createEvent ( name, originalEvent ) {
 
     let event = $.Event ( name );
 
@@ -81,16 +87,14 @@
 
     return event;
 
-  };
+  }
 
   /* HANDLERS */
 
-  let downHandler = function ( event ) {
+  function downHandler ( event ) {
 
     target = event.target;
     $target = $(target);
-
-    startEvent = event;
 
     motion = false;
 
@@ -98,29 +102,29 @@
     $target.one ( Pointer.up, upHandler );
     $target.one ( Pointer.cancel, cancelHandler );
 
-  };
+  }
 
-  let moveHandler = function ( event ) {
+  function moveHandler () {
 
     motion = true;
 
-  };
+  }
 
-  let upHandler = function ( event ) {
-
-    let endTimestamp = event.timeStamp || Date.now ();
+  function upHandler ( event ) {
 
     if ( !$.browser.is.touchDevice || !motion ) {
 
+      let tapTimestamp = event.timeStamp || Date.now ();
+
       $target.trigger ( createEvent ( Pointer.tap, event ) );
 
-      if ( endTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+      if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
         $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
       }
 
-      prevTapTimestamp = endTimestamp;
+      prevTapTimestamp = tapTimestamp;
 
     }
 
@@ -132,9 +136,9 @@
 
     $target.off ( Pointer.cancel, cancelHandler );
 
-  };
+  }
 
-  let cancelHandler = function () {
+  function cancelHandler () {
 
     if ( !motion ) {
 
@@ -144,7 +148,7 @@
 
     $target.off ( Pointer.up, upHandler );
 
-  };
+  }
 
   /* BIND */
 

@@ -8370,7 +8370,7 @@ img {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
-  border-color: black;
+  border-color: inherit;
   width: 100%;
   height: auto;
   min-height: 1px;
@@ -8389,9 +8389,9 @@ span > img {
 
 /* IMAGE */
 .image-wrp {
-  background: #212121 ;
-  border-color: black ;
-  color: #ffffff ;
+  background: inherit ;
+  border-color: inherit ;
+  color: inherit ;
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -8402,21 +8402,6 @@ span > img {
   /* LINK */
   /* IMAGE */
   /* CAPTION */
-}
-
-.image-wrp p > a,
-.image-wrp span > a {
-  color: #e0e0e0 ;
-}
-
-.image-wrp p > a:after,
-.image-wrp span > a:after {
-  border-color: #e5e5e5 ;
-}
-
-.image-wrp p > a:hover,
-.image-wrp span > a:hover {
-  color: #e5e5e5 ;
 }
 
 .image-wrp > a {

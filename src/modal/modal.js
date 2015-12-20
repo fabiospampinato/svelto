@@ -58,7 +58,7 @@
 
     }
 
-    /* PRIVATE */
+    /* TAP */
 
     __tap ( event ) {
 
@@ -69,6 +69,8 @@
       }
 
     }
+
+    /* KEYDOWN */
 
     __keydown ( event ) {
 

@@ -1332,10 +1332,7 @@
  * @requires ../browser/browser.js
  * ========================================================================= */
 
-//FIXME: Right now how can we bind an event handler on just tap? (when doubletap doesn't happen later) (basically a click, maybe (what about a dblclick?))
-//FIXME: Does it handle devices where you can use both a touch event or a mouse event such when using a mouse connected to an android device? //TODO Test it!
-
-//INFO: Proposed draft: http://www.w3.org/TR/pointerevents/
+//INFO: Basically it exists other than to provide the convinient `Pointer` global also for removing the 300ms delay on click by providing the `tap` event
 
 (function ( $, _, window, document, undefined ) {
 
@@ -1346,7 +1343,7 @@
   window.Pointer = {
     options: {
       events: {
-        prefix: 'pointer'
+        prefix: 'spointer'
       },
       dbltap: {
         interval: 300
@@ -1359,6 +1356,8 @@
   let events = {
     tap: Pointer.options.events.prefix + 'tap',
     dbltap: Pointer.options.events.prefix + 'dbltap',
+    click: 'click',
+    dblclick: 'dblclick',
     down: $.browser.is.touchDevice ? 'touchstart' : 'mousedown',
     move: $.browser.is.touchDevice ? 'touchmove' : 'mousemove',
     up: $.browser.is.touchDevice ? 'touchend' : 'mouseup',
@@ -1373,30 +1372,37 @@
 
   for ( let name in events ) {
 
-    Pointer[name] = events[name];
+    if ( events.hasOwnProperty ( name ) ) {
 
-    $.fn[name] = function ( fn ) {
+      Pointer[name] = events[name];
 
-      return fn ? this.on ( events[name], fn ) : this.trigger ( events[name] );
+      if ( !( name in $.fn ) ) {
 
-    };
+        $.fn[name] = function ( fn ) {
+
+          return fn ? this.on ( Pointer[name], fn ) : this.trigger ( Pointer[name] );
+
+        };
+
+      }
+
+    }
 
   }
 
-  /* POINTER LOGIC */
+  /* ----- POINTER LOGIC ----- */
 
   /* VARIABLES */
 
   let $document = $(document),
       target,
       $target,
-      startEvent,
       prevTapTimestamp = 0,
       motion;
 
   /* EVENT CREATOR */
 
-  let createEvent = function ( name, originalEvent ) {
+  function createEvent ( name, originalEvent ) {
 
     let event = $.Event ( name );
 
@@ -1404,16 +1410,14 @@
 
     return event;
 
-  };
+  }
 
   /* HANDLERS */
 
-  let downHandler = function ( event ) {
+  function downHandler ( event ) {
 
     target = event.target;
     $target = $(target);
-
-    startEvent = event;
 
     motion = false;
 
@@ -1421,29 +1425,29 @@
     $target.one ( Pointer.up, upHandler );
     $target.one ( Pointer.cancel, cancelHandler );
 
-  };
+  }
 
-  let moveHandler = function ( event ) {
+  function moveHandler () {
 
     motion = true;
 
-  };
+  }
 
-  let upHandler = function ( event ) {
-
-    let endTimestamp = event.timeStamp || Date.now ();
+  function upHandler ( event ) {
 
     if ( !$.browser.is.touchDevice || !motion ) {
 
+      let tapTimestamp = event.timeStamp || Date.now ();
+
       $target.trigger ( createEvent ( Pointer.tap, event ) );
 
-      if ( endTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
+      if ( tapTimestamp - prevTapTimestamp <= Pointer.options.dbltap.interval ) {
 
         $target.trigger ( createEvent ( Pointer.dbltap, event ) );
 
       }
 
-      prevTapTimestamp = endTimestamp;
+      prevTapTimestamp = tapTimestamp;
 
     }
 
@@ -1455,9 +1459,9 @@
 
     $target.off ( Pointer.cancel, cancelHandler );
 
-  };
+  }
 
-  let cancelHandler = function () {
+  function cancelHandler () {
 
     if ( !motion ) {
 
@@ -1467,7 +1471,7 @@
 
     $target.off ( Pointer.up, upHandler );
 
-  };
+  }
 
   /* BIND */
 
@@ -7392,7 +7396,7 @@
 
     }
 
-    /* PRIVATE */
+    /* TAP */
 
     __tap ( event ) {
 
@@ -7403,6 +7407,8 @@
       }
 
     }
+
+    /* KEYDOWN */
 
     __keydown ( event ) {
 
@@ -8252,20 +8258,9 @@
     name: 'overlay',
     selector: '.overlay',
     options: {
-      hover: {
-        triggerable: false,
-        delays: {
-          open: 750,
-          close: 250
-        }
-      },
       classes: {
         show: 'show',
         open: 'open'
-      },
-      selectors: {
-        trigger: '.overlay-trigger',
-        closer: '.overlay-closer'
       },
       animations: {
         open: Svelto.animation.fast,
@@ -8287,10 +8282,6 @@
     _variables () {
 
       this.$overlay = this.$element;
-      this.$overlayed = this.$overlay.parent ();
-
-      this.$triggers = this.$overlayed.find ( this.options.selectors.trigger );
-      this.$closers = this.$overlayed.find ( this.options.selectors.closer );
 
       this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
 
@@ -8298,81 +8289,22 @@
 
     _events () {
 
-      /* TRIGGER */
+      /* KEYDOWN */
 
-      this._on ( this.$triggers, Pointer.tap, this.open );
-
-      /* CLOSER */
-
-      this._on ( this.$closers, Pointer.tap, this.close );
-
-      /* HOVER */
-
-      if ( this.options.hover.triggerable ) {
-
-        this._on ( this.$overlayed, Pointer.enter, this.__hoverEnter );
-
-      }
+      this._onHover ( [$document, 'keydown', this.__keydown] );
 
     }
 
-    /* HOVER */
+    /* KEYDOWN */
 
-    __hoverEnter () {
+    __keydown ( event ) {
 
-      if ( !this._isOpen ) {
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
 
-        this._isHoverOpen = false;
-
-        this._hoverOpenTimeout = this._delay ( this.__hoverOpen, this.options.hover.delays.open );
-
-        this._one ( this.$overlayed, Pointer.leave, this.__hoverLeave );
-
-      }
-
-    }
-
-    __hoverOpen () {
-
-      if ( !this._isOpen ) {
-
-        this.open ();
-
-        this._isHoverOpen = true;
-
-        this._hoverOpenTimeout = false;
-
-      }
-
-    }
-
-    __hoverLeave () {
-
-      if ( this._hoverOpenTimeout ) {
-
-        clearTimeout ( this._hoverOpenTimeout );
-
-        this._hoverOpenTimeout = false;
-
-      }
-
-      if ( this._isHoverOpen ) {
-
-        this._hoverCloseTimeout = this._delay ( this.__hoverClose, this.options.hover.delays.close );
-
-      }
-
-    }
-
-    __hoverClose () {
-
-      if ( this._isHoverOpen ) {
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
 
         this.close ();
-
-        this._isHoverOpen = false;
-
-        this._hoverCloseTimeout = false;
 
       }
 
@@ -8396,31 +8328,7 @@
 
       if ( force !== this._isOpen ) {
 
-        if ( force === true ) {
-
-          this.$overlay.addClass ( this.options.classes.show );
-
-        }
-
-        this._frame ( function () { //INFO: Needed since `spinnerOverlay` may attach the overlay and then request to open it, if those things happen in the same frame we won't see the animation
-
-          this._isOpen = force;
-
-          this.$overlay.toggleClass ( this.options.classes.open, this._isOpen );
-
-          if ( !this._isOpen ) {
-
-            this._delay ( function () {
-
-              this.$overlay.removeClass ( this.options.classes.show );
-
-            }, this.options.animations.close );
-
-          }
-
-          this._trigger ( this._isOpen ? 'open' : 'close' );
-
-        });
+        this[force ? 'open' : 'close']();
 
       }
 
@@ -8428,13 +8336,49 @@
 
     open () {
 
-      this.toggle ( true );
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        this._frame ( function () {
+
+          this.$overlay.addClass ( this.options.classes.show );
+
+          this._frame ( function () {
+
+            this.$overlay.addClass ( this.options.classes.open );
+
+            this._trigger ( 'open' );
+
+          });
+
+        });
+
+      }
 
     }
 
     close () {
 
-      this.toggle ( false );
+      if ( this._isOpen ) {
+
+        this._isOpen = false;
+
+        this._frame ( function () {
+
+          this.$overlay.removeClass ( this.options.classes.open );
+
+          this._delay ( function () {
+
+            this.$overlay.removeClass ( this.options.classes.show );
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
+
+      }
 
     }
 
@@ -8448,6 +8392,46 @@
   /* FACTORY */
 
   $.factory ( Svelto.Overlay );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Overlay (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires overlay.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'overlayToggler',
+    selector: '.overlay-toggler, .overlay-closer',
+    options: {
+      widget: Svelto.Overlay
+    }
+  };
+
+  /* OVERLAY TOGGLER */
+
+  class OverlayToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.OverlayToggler = OverlayToggler;
+  Svelto.OverlayToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.OverlayToggler );
 
 }( Svelto.$, Svelto._, window, document ));
 
