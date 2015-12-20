@@ -13,7 +13,7 @@
 
   'use strict';
 
-  /* TOOLS */
+  /* UTILITIES */
 
   let getExpiry = function ( expiry ) {
 

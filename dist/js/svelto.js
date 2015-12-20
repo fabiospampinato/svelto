@@ -4212,8 +4212,6 @@
  * @requires ../transform/transform.js
  * ========================================================================= */
 
-//FIXME: Big elements gets positionated badly, for example try some tooltips in a small viewport
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -4249,19 +4247,23 @@
 
   $.fn.positionate = function ( options ) {
 
+    /* NO ELEMENTS */
+
+    if ( this.length === 0 ) return this;
+
     /* OPTIONS */
 
     options = _.merge ({
       direction: false, //INFO: Set a preferred direction, it has greater priority over the axis
       axis: false, //INFO: Set a preferred axis
       alignment: { //INFO: Set the alignment of the positionable relative to the anchor
-        x: 'center', //INFO: `left, center, right`
-        y: 'center' //INFOL `top, center, bottom`
+        x: 'center', //INFO: `left`, center`, `right`
+        y: 'center' //INFOL `top`, center`, `bottom`
       },
       strict: false, //INFO: If enabled only use the setted axis/direction, even if it won't be the optimial choice
       $anchor: false, //INFO: Positionate next to an $anchor element
       $pointer: false, //INFO: The element who is pointing to the anchor
-      point: false, //INFO: Positioante at coordinates, ex: { x: number, y: number }
+      point: false, //INFO: Positionate at coordinates, ex: { x: number, y: number }
       spacing: 0, //INFO: Extra space to leave around the positionable element
       ranks: { //INFO: How the directions should be prioritized when selecting the `x` axis, the `y` axis, or all of them
         x: ['right', 'left'],
@@ -4273,16 +4275,14 @@
       }
     }, options );
 
-    /* RESET */
-
-    this.removeClass ( 'positionate-top positionate-bottom positionate-left positionate-right' );
-
     /* VARIABLES */
 
-    let directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.ranks.all : [] ) ),
+    let positionable = this[0],
+        $positionable = $(positionable),
+        positionableRect = $positionable.getRect (),
         windowWidth = $window.width (),
         windowHeight = $window.height (),
-        positionableRect = this.getRect (),
+        directions = _.unique ( _.union ( options.direction ? [options.direction] : [], options.axis ? options.ranks[options.axis] : [], !options.strict || !options.direction && !options.axis ? options.ranks.all : [] ) ),
         anchorRect = options.$anchor ? options.$anchor.getRect () : { top: options.point.y, bottom: options.point.y, left: options.point.x, right: options.point.x, width: 0, height: 0 };
 
     /* SPACES */
@@ -4422,15 +4422,28 @@
     /* DATAS */
 
     let data = {
+      positionable: positionable,
       coordinates: coordinates,
-      direction: bestDirection,
-      oppositeDirection: getOpposite ( bestDirection )
+      direction: bestDirection
     };
 
-    /* POINTER TOP / LEFT */
+    /* TRANSLATE */
 
-    let translateType,
-        translateValue;
+    $positionable.translate ( coordinates.left, coordinates.top );
+
+    /* CSS CLASS */
+
+    let prevDirection = positionable._prevDirection;
+
+    if ( prevDirection !== bestDirection ) {
+
+      $positionable.removeClass ( 'positionate-' + prevDirection ).addClass ( 'positionate-' + bestDirection );
+
+      positionable._prevDirection = bestDirection;
+
+    }
+
+    /* POINTER */
 
     if ( options.$anchor && options.$pointer ) {
 
@@ -4438,29 +4451,15 @@
 
         case 'top':
         case 'bottom':
-          translateType = 'translateX';
-          translateValue = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
+          options.$pointer.translateX = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
           break;
 
         case 'left':
         case 'right':
-          translateType = 'translateY';
-          translateValue = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
+          options.$pointer.translateY = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
           break;
 
       }
-
-    }
-
-    /* SETTING */
-
-    this.translate ( coordinates.left, coordinates.top );
-
-    this.addClass ( 'positionate-' + bestDirection );
-
-    if ( options.$anchor && options.$pointer ) {
-
-      options.$pointer[translateType] ( translateValue );
 
     }
 
@@ -7571,7 +7570,7 @@
 
   'use strict';
 
-  /* TOOLS */
+  /* UTILITIES */
 
   let getExpiry = function ( expiry ) {
 
