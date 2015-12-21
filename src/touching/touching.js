@@ -19,7 +19,7 @@
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.extend ({
       startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
       point: false, //INFO: Used for the punctual search
       //  {
@@ -44,8 +44,6 @@
           nodes = [],
           areas = [];
 
-      let result = false;
-
       for ( let searchable of $searchable ) {
 
         let rect2 = $.getRect ( searchable ),
@@ -60,7 +58,7 @@
 
       }
 
-      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) )]) : $(nodes);
+      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) ) ]) : $(nodes);
 
     }
 

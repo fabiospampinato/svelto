@@ -4477,7 +4477,7 @@
 
 
 /* =========================================================================
-* Svelto - Pseudo CSS
+* Svelto - Embed CSS
 * =========================================================================
 * Copyright (c) 2015 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -4485,10 +4485,7 @@
 * @requires ../svelto/svelto.js
 * ========================================================================= */
 
-/* PSEUDO CSS */
-
-//TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
-//TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
+/* EMBED CSS */
 
 (function ( $, _, window, document, undefined ) {
 
@@ -4507,23 +4504,31 @@
 
     for ( let selector in tree ) {
 
-      css += selector + '{';
+      if ( tree.hasOwnProperty ( selector ) ) {
 
-      if ( _.isString ( tree[selector] ) ) {
+        css += selector + '{';
 
-        css += tree[selector];
+        if ( _.isString ( tree[selector] ) ) {
 
-      } else {
+          css += tree[selector];
 
-        for ( let property in tree[selector] ) {
+        } else {
 
-          css += property + ':' + tree[selector][property] + ';';
+          for ( let property in tree[selector] ) {
+
+            if ( tree[selector].hasOwnProperty ( property ) ) {
+
+              css += property + ':' + tree[selector][property] + ';';
+
+            }
+
+          }
 
         }
 
-      }
+        css += '}';
 
-      css += '}';
+      }
 
     }
 
@@ -4537,11 +4542,17 @@
 
   };
 
-  /* PSEUDO CSS */
+  /* EMBED CSS */
 
-  $.pseudoCSS = function ( selector, property, value ) {
+  $.embedCSS = function ( selector, property, value ) {
 
-    if ( _.isString ( property ) ) {
+    if ( property === false ) {
+
+      if ( !( selector in tree ) ) return;
+
+      delete tree[selector];
+
+    } else if ( _.isString ( property ) ) {
 
       tree[selector] = property;
 
@@ -4561,7 +4572,7 @@
 
   $(function () {
 
-    $stylesheet = $('<style class="pseudo">').appendTo ( $head );
+    $stylesheet = $('<style class="svelto-embedded">').appendTo ( $head );
 
   });
 
@@ -4576,7 +4587,7 @@
  * =========================================================================
  * @requires ../factory/factory.js
  * @requires ../positionate/positionate.js
- * @requires ../pseudo_css/pseudo_css.js
+ * @requires ../embed_css/embed_css.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -4721,7 +4732,7 @@
 
       if ( !noTip ) {
 
-        $.pseudoCSS ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
+        $.embedCSS ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 
@@ -5141,7 +5152,7 @@
 
     /* OPTIONS */
 
-    options = _.merge ({
+    options = _.extend ({
       startIndex : false, //INFO: Useful for speeding up the searching process if we may already guess the initial position...
       point: false, //INFO: Used for the punctual search
       //  {
@@ -5166,8 +5177,6 @@
           nodes = [],
           areas = [];
 
-      let result = false;
-
       for ( let searchable of $searchable ) {
 
         let rect2 = $.getRect ( searchable ),
@@ -5182,7 +5191,7 @@
 
       }
 
-      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) )]) : $(nodes);
+      return options.onlyBest ? $(nodes[ areas.indexOf ( _.max ( areas ) ) ]) : $(nodes);
 
     }
 
@@ -9073,16 +9082,16 @@ Prism.languages.js = Prism.languages.javascript;
             '</div>'
     },
     options: {
-      value: 0, // Percentage
-      colors: { // Colors to use for the progressbar
-        on: '', // Color of `.progressbar-highlight`
-        off: '' // Color of `.progressbar`
+      value: 0, //INFO: Percentage
+      colors: { //INFO: Colors to use for the progressbar
+        on: '', //INFO: Color of `.progressbar-highlight`
+        off: '' //INFO: Color of `.progressbar`
       },
-      striped: false, // Draw striped over it
-      indeterminate: false, //Indeterminate state
-      labeled: false, // Draw a label inside
-      decimals: 0, // Amount of decimals to round the label value to
-      size: '', // Size of the progressbar: '', 'compact', 'slim'
+      striped: false, //INFO: Draw striped over it
+      indeterminate: false, //INFO: Indeterminate state
+      labeled: false, //INFO: Draw a label inside
+      decimals: 0, //INFO: Amount of decimals to round the label value to
+      size: '', //INFO: Size of the progressbar: '', 'compact', 'slim'
       css: '',
       datas: {
         value: 'value'
@@ -9114,7 +9123,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $progressbar ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $progressbar ) {
 
       $progressbar.progressbar ({
         value: $progressbar.data ( 'value' ),
@@ -9138,21 +9147,23 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    /* PRIVATE */
+    /* VALUE */
 
     _sanitizeValue ( value ) {
 
-      var nr = Number ( value );
+      let nr = Number ( value );
 
-      return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
+      return _.clamp ( 0, _.isNaN ( nr ) ? 0 : nr, 100 );
 
     }
 
     _roundValue ( value ) {
 
-      return value.toFixed ( this.options.decimals );
+      return Number ( value.toFixed ( this.options.decimals ) );
 
     }
+
+    /* UPDATE */
 
     _updateWidth () {
 
@@ -9183,34 +9194,23 @@ Prism.languages.js = Prism.languages.javascript;
 
     set ( value ) {
 
-      value = Number ( value );
+      value = this._sanitizeValue ( value );
 
-      if ( !_.isNaN ( value ) ) {
+      if ( value !== this.options.value ) {
 
-        value = this._sanitizeValue ( value );
+        this.options.value = value;
 
-        if ( value !== this.options.value ) {
+        this._update ();
 
-          var data = {
-            previous: this.options.value,
-            value: value
-          };
+        this._trigger ( 'change' );
 
-          this.options.value = value;
+        if ( this.options.value === 0 ) {
 
-          this._update ();
+          this._trigger ( 'empty' );
 
-          this._trigger ( 'change', data );
+        } else if ( this.options.value === 100 ) {
 
-          if ( this.options.value === 0 ) {
-
-            this._trigger ( 'empty', data );
-
-          } else if ( this.options.value === 100 ) {
-
-            this._trigger ( 'full', data );
-
-          }
+          this._trigger ( 'full' );
 
         }
 
@@ -9675,6 +9675,7 @@ Prism.languages.js = Prism.languages.javascript;
 
 //TODO: Add support for selecting multiple options (with checkboxes maybe)
 //TODO: Add an input field for searching through the options
+
 //FIXME: Doesn't work when the page is scrolled (check in the components/form)
 //FIXME: It shouldn't select the first one if none of them is selected
 
@@ -9953,9 +9954,10 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 //TODO: Add dropdown for actions AND/OR right click for action (This is a good fit for a new component)
-//FIXME: Add support for tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 //TODO: Store the current selected rows, it makes it faster than retrieving it at every change event
+
+//FIXME: Add support for tableHelper and sortable
 
 (function ( $, _, window, document, undefined ) {
 

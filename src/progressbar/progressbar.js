@@ -23,16 +23,16 @@
             '</div>'
     },
     options: {
-      value: 0, // Percentage
-      colors: { // Colors to use for the progressbar
-        on: '', // Color of `.progressbar-highlight`
-        off: '' // Color of `.progressbar`
+      value: 0, //INFO: Percentage
+      colors: { //INFO: Colors to use for the progressbar
+        on: '', //INFO: Color of `.progressbar-highlight`
+        off: '' //INFO: Color of `.progressbar`
       },
-      striped: false, // Draw striped over it
-      indeterminate: false, //Indeterminate state
-      labeled: false, // Draw a label inside
-      decimals: 0, // Amount of decimals to round the label value to
-      size: '', // Size of the progressbar: '', 'compact', 'slim'
+      striped: false, //INFO: Draw striped over it
+      indeterminate: false, //INFO: Indeterminate state
+      labeled: false, //INFO: Draw a label inside
+      decimals: 0, //INFO: Amount of decimals to round the label value to
+      size: '', //INFO: Size of the progressbar: '', 'compact', 'slim'
       css: '',
       datas: {
         value: 'value'
@@ -64,7 +64,7 @@
 
     /* SPECIAL */
 
-    static widgetize ( $progressbar ) { //TODO: Just use the generic data-options maybe
+    static widgetize ( $progressbar ) {
 
       $progressbar.progressbar ({
         value: $progressbar.data ( 'value' ),
@@ -88,21 +88,23 @@
 
     }
 
-    /* PRIVATE */
+    /* VALUE */
 
     _sanitizeValue ( value ) {
 
-      var nr = Number ( value );
+      let nr = Number ( value );
 
-      return _.clamp ( 0, ( _.isNaN ( nr ) ? 0 : nr ), 100 );
+      return _.clamp ( 0, _.isNaN ( nr ) ? 0 : nr, 100 );
 
     }
 
     _roundValue ( value ) {
 
-      return value.toFixed ( this.options.decimals );
+      return Number ( value.toFixed ( this.options.decimals ) );
 
     }
+
+    /* UPDATE */
 
     _updateWidth () {
 
@@ -133,34 +135,23 @@
 
     set ( value ) {
 
-      value = Number ( value );
+      value = this._sanitizeValue ( value );
 
-      if ( !_.isNaN ( value ) ) {
+      if ( value !== this.options.value ) {
 
-        value = this._sanitizeValue ( value );
+        this.options.value = value;
 
-        if ( value !== this.options.value ) {
+        this._update ();
 
-          var data = {
-            previous: this.options.value,
-            value: value
-          };
+        this._trigger ( 'change' );
 
-          this.options.value = value;
+        if ( this.options.value === 0 ) {
 
-          this._update ();
+          this._trigger ( 'empty' );
 
-          this._trigger ( 'change', data );
+        } else if ( this.options.value === 100 ) {
 
-          if ( this.options.value === 0 ) {
-
-            this._trigger ( 'empty', data );
-
-          } else if ( this.options.value === 100 ) {
-
-            this._trigger ( 'full', data );
-
-          }
+          this._trigger ( 'full' );
 
         }
 

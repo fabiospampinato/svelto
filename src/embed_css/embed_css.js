@@ -1,6 +1,6 @@
 
 /* =========================================================================
-* Svelto - Pseudo CSS
+* Svelto - Embed CSS
 * =========================================================================
 * Copyright (c) 2015 Fabio Spampinato
 * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
@@ -8,10 +8,7 @@
 * @requires ../svelto/svelto.js
 * ========================================================================= */
 
-/* PSEUDO CSS */
-
-//TODO: Rename it, it's not limited to pseudo-elements, even if that it's pretty much the only use case
-//TODO: Memory leaks here, for example when we remove an element it's pseudo styles are still being attached to the dynamically attached stylesheet
+/* EMBED CSS */
 
 (function ( $, _, window, document, undefined ) {
 
@@ -30,23 +27,31 @@
 
     for ( let selector in tree ) {
 
-      css += selector + '{';
+      if ( tree.hasOwnProperty ( selector ) ) {
 
-      if ( _.isString ( tree[selector] ) ) {
+        css += selector + '{';
 
-        css += tree[selector];
+        if ( _.isString ( tree[selector] ) ) {
 
-      } else {
+          css += tree[selector];
 
-        for ( let property in tree[selector] ) {
+        } else {
 
-          css += property + ':' + tree[selector][property] + ';';
+          for ( let property in tree[selector] ) {
+
+            if ( tree[selector].hasOwnProperty ( property ) ) {
+
+              css += property + ':' + tree[selector][property] + ';';
+
+            }
+
+          }
 
         }
 
-      }
+        css += '}';
 
-      css += '}';
+      }
 
     }
 
@@ -60,11 +65,17 @@
 
   };
 
-  /* PSEUDO CSS */
+  /* EMBED CSS */
 
-  $.pseudoCSS = function ( selector, property, value ) {
+  $.embedCSS = function ( selector, property, value ) {
 
-    if ( _.isString ( property ) ) {
+    if ( property === false ) {
+
+      if ( !( selector in tree ) ) return;
+
+      delete tree[selector];
+
+    } else if ( _.isString ( property ) ) {
 
       tree[selector] = property;
 
@@ -84,7 +95,7 @@
 
   $(function () {
 
-    $stylesheet = $('<style class="pseudo">').appendTo ( $head );
+    $stylesheet = $('<style class="svelto-embedded">').appendTo ( $head );
 
   });
 

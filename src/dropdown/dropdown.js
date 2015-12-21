@@ -7,7 +7,7 @@
  * =========================================================================
  * @requires ../factory/factory.js
  * @requires ../positionate/positionate.js
- * @requires ../pseudo_css/pseudo_css.js
+ * @requires ../embed_css/embed_css.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -152,7 +152,7 @@
 
       if ( !noTip ) {
 
-        $.pseudoCSS ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
+        $.embedCSS ( '.' + this.guc + ':before', $pointer.attr ( 'style' ).slice ( 0, -1 ) + ' rotate(45deg);' ); //FIXME: Too hacky, expecially that `rotate(45deg)`
 
       }
 

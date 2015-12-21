@@ -9,9 +9,10 @@
  * ========================================================================= */
 
 //TODO: Add dropdown for actions AND/OR right click for action (This is a good fit for a new component)
-//FIXME: Add support for tableHelper and sortable
 //TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
 //TODO: Store the current selected rows, it makes it faster than retrieving it at every change event
+
+//FIXME: Add support for tableHelper and sortable
 
 (function ( $, _, window, document, undefined ) {
 
