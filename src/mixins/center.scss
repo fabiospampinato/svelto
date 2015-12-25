@@ -44,6 +44,13 @@
 
 }
 
+@mixin center-fixed-fill () {
+
+  @include fill-fixed ();
+  margin: auto;
+
+}
+
 @mixin center-transform-absolute ( $axis: false ) { //INFO: The allowed values for `$axis` are: `x`, `y` or `false` for both
 
   position: absolute;

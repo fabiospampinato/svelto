@@ -10,14 +10,67 @@
 
 .remote-modal-placeholder {
 
-  /* CARD BLOCK */
+  /* CHILDREN */
 
-  > .card-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: $remote-modal-placeholder-size;
-    min-height: $remote-modal-placeholder-size;
+  > * {
+    overflow: hidden;
+  }
+
+  /* NOT LOADED */
+
+  &:not(.loaded) {
+
+    width: $remote-modal-placeholder-size;
+    height: $remote-modal-placeholder-size;
+
+    /* CARD BLOCK */
+
+    > .card-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+  /* LOADED */
+
+  &.loaded {
+
+    /* CHILDREN */
+
+    > * {
+
+      transition: color $remote-modal-transition-all-duration;
+
+      /* CHILDREN */
+
+      > * {
+        transition: opacity $remote-modal-transition-all-duration;
+      }
+
+    }
+
+    /* NOT ANIMATING */
+
+    &:not(.animating) {
+
+      /* CHILDREN */
+
+      > * {
+
+        color: transparent;
+
+        /* CHILDREN */
+
+        > * {
+          opacity: 0;
+        }
+
+      }
+
+    }
+
   }
 
 }

@@ -215,6 +215,7 @@
   margin-bottom: 0;
   border-radius: 0;
   transition: transform $navbar-transition-transform-duration;
+  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
 

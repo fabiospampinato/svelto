@@ -18,6 +18,9 @@
 .modal {
 
   @include z-depth ( $modal-z-depth );
+  transform: translate(-50%, -50%) scale(1);
+  top: 50%;
+  left: 50%;
   display: none;
   position: fixed;
   z-index: $modal-z-index;
@@ -25,6 +28,7 @@
   transition-duration: $modal-transition-all-duration;
   margin: 0;
   cursor: pointer;
+  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
 
   /* CHILDREN */
 
@@ -48,9 +52,6 @@
   /* NOT FULLSCREEN */
 
   &:not(.fullscreen) {
-    transform: translate(-50%, -50%) scale(1);
-    top: 50%;
-    left: 50%;
     max-width: $modal-max-width;
     max-height: $modal-max-height; //FIXME: On iOS a value of 100vh will exceed the actual visible viewport, maybe instead of using vw and vh center using fill-absolute and margin: auto, but apply some positive values to the top, right, bottom and left properties, it should work, maybe...
   }
@@ -58,10 +59,10 @@
   /* FULLSCREEN */
 
   &.fullscreen {
-    @include fill-fixed ();
-    transform: scale(1);
     border-width: 0;
     border-radius: 0;
+    width: 100vw;
+    height: 100vh;
   }
 
   /* SHOW / OPEN */
@@ -74,21 +75,8 @@
   /* CLOSED */
 
   &:not(.open) {
-
     opacity: 0;
-
-    /* NOT FULLSCREEN */
-
-    &:not(.fullscreen) {
-      transform: translate(-50%, -50%) scale($modal-closed-scale);
-    }
-
-    /* FULLSCREEN */
-
-    &.fullscreen {
-      transform: scale($modal-closed-scale);
-    }
-
+    transform: translate(-50%, -50%) scale($modal-closed-scale);
   }
 
 }

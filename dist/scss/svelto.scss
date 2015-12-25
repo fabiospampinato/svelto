@@ -2504,7 +2504,11 @@ $rater-star-active-color: $color-secondary !default;
 
 /* REMOTE MODAL PLACEHOLDER */
 
-$remote-modal-placeholder-size: 10rem;
+$remote-modal-placeholder-size: 9.25rem;
+
+/* TRANSITIONS */
+
+$remote-modal-transition-all-duration: $transition-duration-normal !default;
 
 
 /* =========================================================================
@@ -3604,6 +3608,13 @@ $z-depths: (
 @mixin center-absolute-fill () {
 
   @include fill-absolute ();
+  margin: auto;
+
+}
+
+@mixin center-fixed-fill () {
+
+  @include fill-fixed ();
   margin: auto;
 
 }
@@ -8624,6 +8635,9 @@ span > img {
 .modal {
 
   @include z-depth ( $modal-z-depth );
+  transform: translate(-50%, -50%) scale(1);
+  top: 50%;
+  left: 50%;
   display: none;
   position: fixed;
   z-index: $modal-z-index;
@@ -8631,6 +8645,7 @@ span > img {
   transition-duration: $modal-transition-all-duration;
   margin: 0;
   cursor: pointer;
+  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
 
   /* CHILDREN */
 
@@ -8654,9 +8669,6 @@ span > img {
   /* NOT FULLSCREEN */
 
   &:not(.fullscreen) {
-    transform: translate(-50%, -50%) scale(1);
-    top: 50%;
-    left: 50%;
     max-width: $modal-max-width;
     max-height: $modal-max-height; //FIXME: On iOS a value of 100vh will exceed the actual visible viewport, maybe instead of using vw and vh center using fill-absolute and margin: auto, but apply some positive values to the top, right, bottom and left properties, it should work, maybe...
   }
@@ -8664,10 +8676,10 @@ span > img {
   /* FULLSCREEN */
 
   &.fullscreen {
-    @include fill-fixed ();
-    transform: scale(1);
     border-width: 0;
     border-radius: 0;
+    width: 100vw;
+    height: 100vh;
   }
 
   /* SHOW / OPEN */
@@ -8680,21 +8692,8 @@ span > img {
   /* CLOSED */
 
   &:not(.open) {
-
     opacity: 0;
-
-    /* NOT FULLSCREEN */
-
-    &:not(.fullscreen) {
-      transform: translate(-50%, -50%) scale($modal-closed-scale);
-    }
-
-    /* FULLSCREEN */
-
-    &.fullscreen {
-      transform: scale($modal-closed-scale);
-    }
-
+    transform: translate(-50%, -50%) scale($modal-closed-scale);
   }
 
 }
@@ -9183,6 +9182,7 @@ table > :not(tfoot) td .multiple:only-child { //INFO: Here the `multiple` should
   margin-bottom: 0;
   border-radius: 0;
   transition: transform $navbar-transition-transform-duration;
+  overflow: visible !important; //INFO: Since we need the pseudo element to be showed
 
   /* LEFT / RIGHT */
 
@@ -10458,14 +10458,67 @@ code[class*='language-'] {
 
 .remote-modal-placeholder {
 
-  /* CARD BLOCK */
+  /* CHILDREN */
 
-  > .card-block {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-width: $remote-modal-placeholder-size;
-    min-height: $remote-modal-placeholder-size;
+  > * {
+    overflow: hidden;
+  }
+
+  /* NOT LOADED */
+
+  &:not(.loaded) {
+
+    width: $remote-modal-placeholder-size;
+    height: $remote-modal-placeholder-size;
+
+    /* CARD BLOCK */
+
+    > .card-block {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+  }
+
+  /* LOADED */
+
+  &.loaded {
+
+    /* CHILDREN */
+
+    > * {
+
+      transition: color $remote-modal-transition-all-duration;
+
+      /* CHILDREN */
+
+      > * {
+        transition: opacity $remote-modal-transition-all-duration;
+      }
+
+    }
+
+    /* NOT ANIMATING */
+
+    &:not(.animating) {
+
+      /* CHILDREN */
+
+      > * {
+
+        color: transparent;
+
+        /* CHILDREN */
+
+        > * {
+          opacity: 0;
+        }
+
+      }
+
+    }
+
   }
 
 }

@@ -502,6 +502,7 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 /* REMOTE MODAL PLACEHOLDER */
+/* TRANSITIONS */
 /* =========================================================================
  * Svelto - Ripple (Variables)
  * =========================================================================
@@ -8656,6 +8657,10 @@ span > img {
 /* MODAL */
 .modal {
   box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12), 0 3px 5px -1px rgba(0, 0, 0, 0.4) ;
+  -webkit-transform: translate(-50%, -50%) scale(1);
+          transform: translate(-50%, -50%) scale(1);
+  top: 50%;
+  left: 50%;
   display: none;
   position: fixed;
   z-index: 500;
@@ -8665,6 +8670,7 @@ span > img {
   transition-duration: 0.35s;
   margin: 0;
   cursor: pointer;
+  overflow: visible !important;
   /* CHILDREN */
   /* BEFORE (BACKGROUND) */
   /* NOT FULLSCREEN */
@@ -8689,24 +8695,15 @@ span > img {
 }
 
 .modal:not(.fullscreen) {
-  -webkit-transform: translate(-50%, -50%) scale(1);
-          transform: translate(-50%, -50%) scale(1);
-  top: 50%;
-  left: 50%;
   max-width: 90vw;
   max-height: 90vh;
 }
 
 .modal.fullscreen {
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  -webkit-transform: scale(1);
-          transform: scale(1);
   border-width: 0;
   border-radius: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .modal.show, .modal.open {
@@ -8717,18 +8714,8 @@ span > img {
 
 .modal:not(.open) {
   opacity: 0;
-  /* NOT FULLSCREEN */
-  /* FULLSCREEN */
-}
-
-.modal:not(.open):not(.fullscreen) {
   -webkit-transform: translate(-50%, -50%) scale(0.7);
           transform: translate(-50%, -50%) scale(0.7);
-}
-
-.modal:not(.open).fullscreen {
-  -webkit-transform: scale(0.7);
-          transform: scale(0.7);
 }
 
 /* =========================================================================
@@ -8988,6 +8975,7 @@ table > :not(tfoot) td .multiple:only-child {
   transition: -webkit-transform 0.35s;
   transition: transform 0.35s;
   transition: transform 0.35s, -webkit-transform 0.35s;
+  overflow: visible !important;
   /* LEFT / RIGHT */
   /* LEFT */
   /* RIGHT */
@@ -10981,10 +10969,22 @@ code[class*='language-'] .namespace {
  * ========================================================================= */
 /* REMOTE MODAL PLACEHOLDER */
 .remote-modal-placeholder {
+  /* CHILDREN */
+  /* NOT LOADED */
+  /* LOADED */
+}
+
+.remote-modal-placeholder > * {
+  overflow: hidden;
+}
+
+.remote-modal-placeholder:not(.loaded) {
+  width: 9.25rem;
+  height: 9.25rem;
   /* CARD BLOCK */
 }
 
-.remote-modal-placeholder > .card-block {
+.remote-modal-placeholder:not(.loaded) > .card-block {
   display: -webkit-flex;
   display: -ms-flexbox;
   display: flex;
@@ -10994,8 +10994,33 @@ code[class*='language-'] .namespace {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  min-width: 10rem;
-  min-height: 10rem;
+}
+
+.remote-modal-placeholder.loaded {
+  /* CHILDREN */
+  /* NOT ANIMATING */
+}
+
+.remote-modal-placeholder.loaded > * {
+  transition: color 0.35s;
+  /* CHILDREN */
+}
+
+.remote-modal-placeholder.loaded > * > * {
+  transition: opacity 0.35s;
+}
+
+.remote-modal-placeholder.loaded:not(.animating) {
+  /* CHILDREN */
+}
+
+.remote-modal-placeholder.loaded:not(.animating) > * {
+  color: transparent;
+  /* CHILDREN */
+}
+
+.remote-modal-placeholder.loaded:not(.animating) > * > * {
+  opacity: 0;
 }
 
 /* =========================================================================

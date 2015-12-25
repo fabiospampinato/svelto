@@ -2504,7 +2504,11 @@ $rater-star-active-color: $color-secondary !default;
 
 /* REMOTE MODAL PLACEHOLDER */
 
-$remote-modal-placeholder-size: 10rem;
+$remote-modal-placeholder-size: 9.25rem;
+
+/* TRANSITIONS */
+
+$remote-modal-transition-all-duration: $transition-duration-normal !default;
 
 
 /* =========================================================================

@@ -6010,11 +6010,11 @@
 
         this._on ( $window, 'route', function ( event, data ) { //FIXME: Going back it doesn't work
 
-          if ( data.url !== this._openUrl ) {
+          // if ( data.url !== this._openUrl ) {
 
-            this.close ();
+            // this.close ();
 
-          }
+          // }
 
         });
 
@@ -9409,9 +9409,21 @@ Prism.languages.js = Prism.languages.javascript;
 
   'use strict';
 
-  /* REMOTE MODAL */
+  /* UTILITIES */
 
-  //TODO: Animate the dimensions of the temp modal transitioning to the new modal
+  let destroyModal = function ( $modal ) {
+
+    $modal.modal ( 'close' );
+
+    setTimeout ( function () {
+
+      $modal.remove ();
+
+    }, Svelto.Modal.config.options.animations.close );
+
+  };
+
+  /* REMOTE MODAL */
 
   $.remoteModal = function ( url, data ) {
 
@@ -9439,7 +9451,7 @@ Prism.languages.js = Prism.languages.javascript;
       </div>
     */
 
-    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>').appendTo ( $body );
+    let $tempModal = $('<div class="modal remote-modal-placeholder card"><div class="card-block"><svg class="spinner"><circle cx="1.625em" cy="1.625em" r="1.25em"></svg></div></div>');
 
     /* VARIABLES */
 
@@ -9451,18 +9463,22 @@ Prism.languages.js = Prism.languages.javascript;
 
       cache: false,
       data: _.omit ( data, 'url' ),
+      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
       type: _.size ( data ) > 1 ? 'POST' : 'GET',
       url: data.url,
 
       beforeSend () {
 
-        $tempModal.modal ({
-          callbacks: {
-            close () {
-              isAborted = true;
-            }
-          }
-        }).modal ( 'open' );
+        $tempModal.appendTo ( $body )
+                  .modal ({
+                    callbacks: {
+                      close () {
+                        isAborted = true;
+                        destroyModal ( $tempModal );
+                      }
+                    }
+                  })
+                  .modal ( 'open' );
 
       },
 
@@ -9470,11 +9486,11 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( isAborted ) return;
 
-        res = _.attempt ( JSON.parse, res );
+        let resj = _.attempt ( JSON.parse, res );
 
-        $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+        $.noty ( _.isError ( resj ) || !( 'msg' in resj ) ? 'An error occurred, please try again later' : resj.msg );
 
-        $tempModal.modal ( 'remove' );
+        destroyModal ( $tempModal );
 
       },
 
@@ -9482,31 +9498,64 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( isAborted ) return;
 
-        res = _.attempt ( JSON.parse, res );
+        let resj = _.attempt ( JSON.parse, res );
 
-        if ( _.isError ( res ) || !( 'modal' in res ) ) {
+        if ( _.isError ( resj ) || !( 'modal' in resj ) ) {
 
-          $.noty ( 'An error occurred, please try again later' );
-
-          $tempModal.modal ( 'remove' );
+          this.error ( res );
 
         } else {
 
-          let $remoteModal = $(res.modal);
+          let prevRect = $tempModal.getRect (),
+              $remoteModal = $(resj.modal),
+              attributes = Array.from ( $remoteModal.prop ( 'attributes' ) );
 
-          $remoteModal.modal ({
-            callbacks: {
-              close: function () {
-                setTimeout ( function () {
-                  $remoteModal.remove ();
-                }, Svelto.Modal.config.options.animations.close );
-              }
+          for ( let attribute of attributes ) {
+
+            if ( attribute.name !== 'class' ) {
+
+              $tempModal.attr ( attribute.name, attribute.value );
+
             }
+
+          }
+
+          $tempModal.addClass ( $remoteModal.attr ( 'class' ) );
+
+          $.frame ( function () {
+
+            $tempModal.addClass ( 'loaded' );
+
+            $tempModal.html ( $remoteModal.html () );
+
+            let newRect = $tempModal.getRect ();
+
+            $tempModal.css ({
+              width: prevRect.width,
+              height: prevRect.height
+            });
+
+            $.frame ( function () {
+
+              $tempModal.addClass ( 'animating' );
+
+              $tempModal.animate ({
+                width: newRect.width,
+                height: newRect.height
+              }, Svelto.animation.normal, function () {
+
+                $tempModal.css ({
+                  width: '',
+                  height: ''
+                }).removeClass ( 'remote-modal-placeholder loaded animating' );
+
+              });
+
+              $tempModal.widgetize ();
+
+            });
+
           });
-
-          $remoteModal.addClass ( Svelto.Modal.config.options.classes.show ).addClass ( Svelto.Modal.config.options.classes.open ).modal ( 'open' ); //FIXME: This is hacky
-
-          $tempModal.replaceWith ( $remoteModal );
 
         }
 
