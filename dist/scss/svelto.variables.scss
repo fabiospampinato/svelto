@@ -437,9 +437,11 @@ $border-radius-large: 0.375em !default; //INFO: 6 / 16
 
 /* TRANSITIONS */
 
+$transition-duration-xslow: 0.9s !default;
 $transition-duration-slow: 0.5s !default;
 $transition-duration-normal: 0.35s !default;
 $transition-duration-fast: 0.15s !default;
+$transition-duration-xfast: 0.075s !default;
 
 /* PATHS */ //TODO: Not the appropriate file to be in, probably
 
@@ -2530,14 +2532,12 @@ $ripple-transparentize-amount: 0.8 !default;
 /* CIRCLE */
 
 $ripple-circle-z-index: 50 !default;
-$ripple-circle-width: 300% !default;
-$ripple-centered-circle-width: 200% !default;
 
 /* TRANSITIONS */
 
-$ripple-transition-timing-function: ease-out !default;
-$ripple-transition-show-duration: $transition-duration-slow !default;
-$ripple-transition-hide-duration: $transition-duration-normal !default;
+$ripple-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default; //INFO: Taken from Angular Material
+$ripple-transition-show-duration: $transition-duration-xslow !default;
+$ripple-transition-hide-duration: $transition-duration-xslow !default;
 
 
 /* =========================================================================

@@ -9,6 +9,8 @@
  * @requires ../noty/noty.js
  * ========================================================================= */
 
+//FIXME: Not beautifully written
+
 (function ( $, _, window, document, undefined ) {
 
   'use strict';

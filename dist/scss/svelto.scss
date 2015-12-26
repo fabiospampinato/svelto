@@ -437,9 +437,11 @@ $border-radius-large: 0.375em !default; //INFO: 6 / 16
 
 /* TRANSITIONS */
 
+$transition-duration-xslow: 0.9s !default;
 $transition-duration-slow: 0.5s !default;
 $transition-duration-normal: 0.35s !default;
 $transition-duration-fast: 0.15s !default;
+$transition-duration-xfast: 0.075s !default;
 
 /* PATHS */ //TODO: Not the appropriate file to be in, probably
 
@@ -2530,14 +2532,12 @@ $ripple-transparentize-amount: 0.8 !default;
 /* CIRCLE */
 
 $ripple-circle-z-index: 50 !default;
-$ripple-circle-width: 300% !default;
-$ripple-centered-circle-width: 200% !default;
 
 /* TRANSITIONS */
 
-$ripple-transition-timing-function: ease-out !default;
-$ripple-transition-show-duration: $transition-duration-slow !default;
-$ripple-transition-hide-duration: $transition-duration-normal !default;
+$ripple-transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1) !default; //INFO: Taken from Angular Material
+$ripple-transition-show-duration: $transition-duration-xslow !default;
+$ripple-transition-hide-duration: $transition-duration-xslow !default;
 
 
 /* =========================================================================
@@ -10539,7 +10539,6 @@ code[class*='language-'] {
 
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   transform: translateZ(0); //INFO: For some reason it fixes the bug of ripples exceeding the border-radius, overflow: hidden, combo
 
   /* CIRCLE */
@@ -10547,48 +10546,38 @@ code[class*='language-'] {
   > .ripple-circle {
 
     position: absolute;
-    width: $ripple-circle-width;
     pointer-events: none;
     z-index: $ripple-circle-z-index;
 
     &:before {
       position: absolute;
       left: -50%;
+      top: -50%;
       width: 100%;
-      margin-top: -50%;
-      padding-bottom: 100%;
+      height: 100%;
       content: '';
-      transition-property: transform, opacity;
-      transition-duration: $ripple-transition-show-duration;
-      transition-timing-function: $ripple-transition-timing-function;
-      transform: scale(0);
-      opacity: 0;
       border-radius: 50%;
       background-color: $ripple-color-default;
+      opacity: 0;
+      transform: scale(0);
+      transition-property: opacity, transform;
+      transition-duration: $ripple-transition-show-duration;
+      transition-timing-function: $ripple-transition-timing-function;
     }
 
     /* SHOW */
 
     &.ripple-circle-show:before {
-      transform: scale(1);
       opacity: 1 - $ripple-transparentize-amount;
+      transform: scale(1);
     }
 
     /* HIDE */
 
     &.ripple-circle-hide:before {
-      transition-duration: $ripple-transition-hide-duration;
       opacity: 0;
     }
 
-  }
-
-  /* CENTEED */
-
-  &-centered > .ripple-circle {
-    top: 50% !important;
-    left: 50% !important;
-    width: $ripple-centered-circle-width; //FIXME: In this way the behavior is not consistent, but it generally looks better...
   }
 
   /* COLORS */
@@ -10603,9 +10592,15 @@ code[class*='language-'] {
 
   }
 
+  /* ENABLED */
+
+  &:not(.disabled) {
+    cursor: pointer;
+  }
+
 }
 
-a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered
+a.ripple > .ripple-circle { //INFO: Firefox Bug: link not triggered //FIXME: Sure?
   z-index: -1;
 }
 

@@ -25,11 +25,13 @@
         circle: {
           show: 'ripple-circle-show',
           hide: 'ripple-circle-hide'
-        }
+        },
+        centered: 'ripple-centered'
       },
       animations: {
-        show: 350,
-        hide: 400
+        show: Svelto.animation.xslow,
+        hide: Svelto.animation.xslow,
+        overlap: Svelto.animation.xslow / 100 * 58
       },
       callbacks: {
         show () {},
@@ -54,33 +56,44 @@
 
     _events () {
 
-      /* DOWN */
+      /* DOWN / TAP */
 
-      this._on ( Pointer.down, this.__down );
-
-      /* UP / CANCEL */
-
-      this._on ( Pointer.up + ' ' + Pointer.cancel, this.__upCancel );
+      this._on ( $.browser.is.touchDevice ? Pointer.tap : Pointer.down, this.__downTap );
 
     }
 
-    /* DOWN */
+    /* DOWN / TAP */
 
-    __down ( event ) {
+    __downTap ( event ) {
 
       if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return;
 
-      this._show ( $.eventXY ( event ) );
+      if ( this.$ripple.hasClass ( this.options.classes.centered ) ) {
+
+        let offset = this.$ripple.offset ();
+
+        this._show ({
+          X: offset.left + ( this.$ripple.outerWidth () / 2 ),
+          Y: offset.top + ( this.$ripple.outerHeight () / 2 )
+        });
+
+      } else {
+
+        this._show ( $.eventXY ( event ) );
+
+      }
+
+      this._one ( true, $document, Pointer.up, this.__up );
 
     }
 
-    /* UP / CANCEL */
+    /* UP */
 
-    __upCancel ( event ) {
+    __up () {
 
-      for ( let [$circle, before] of this.circles ) {
+      for ( let [$circle, timestamp] of this.circles ) {
 
-        this._hide ( $circle, before );
+        this._hide ( $circle, timestamp );
 
       }
 
@@ -92,26 +105,54 @@
 
     _show ( point ) {
 
-      let $circle = $(this._tmpl ( 'circle' )).prependTo ( this.$ripple ),
-          offset = this.$ripple.offset (),
-          now = _.now ();
+      let $circle = $(this._tmpl ( 'circle' ));
 
-      $circle.css ({
-        top: point.Y - offset.top,
-        left: point.X - offset.left
-      }).addClass ( this.options.classes.circle.show );
+      /* SIZE */
 
-      this.circles.push ( [$circle, now] );
+      let offset = this.$ripple.offset (),
+          insetX = point.X - offset.left,
+          insetY = point.Y - offset.top,
+          sideX = Math.max ( insetX, this.$ripple.outerWidth () - insetX ),
+          sideY = Math.max ( insetY, this.$ripple.outerHeight () - insetY ),
+          radius = Math.sqrt ( Math.pow ( sideX, 2 ) + Math.pow ( sideY, 2 ) ), //INFO: Basically the max the distances from the point to the corners
+          diameter = radius * 2;
 
-      this._trigger ( 'show' );
+      /* ADDING */
+
+      this.circles.push ( [$circle, _.now ()] );
+
+      /* SHOW */
+
+      this._frame ( function () {
+
+        /* PREPEND */
+
+        $circle.css ({
+          width: diameter,
+          height: diameter,
+          top: insetY,
+          left: insetX,
+        }).prependTo ( this.$ripple );
+
+        /* SHOW */
+
+        this._frame ( function () {
+
+          $circle.addClass ( this.options.classes.circle.show );
+
+          this._trigger ( 'show' );
+
+        });
+
+      });
 
     }
 
     /* HIDE */
 
-    _hide ( $circle, before ) {
+    _hide ( $circle, timestamp ) {
 
-      let delay = Math.max ( 0, this.options.animations.show + before - _.now () );
+      let remaining = Math.max ( 0, this.options.animations.show - this.options.animations.overlap + timestamp - _.now () );
 
       this._delay ( function () {
 
@@ -125,7 +166,7 @@
 
         }, this.options.animations.hide );
 
-      }, delay );
+      }, remaining );
 
     }
 

@@ -11033,17 +11033,15 @@ code[class*='language-'] .namespace {
 .ripple {
   position: relative;
   overflow: hidden;
-  cursor: pointer;
   -webkit-transform: translateZ(0);
           transform: translateZ(0);
   /* CIRCLE */
-  /* CENTEED */
   /* COLORS */
+  /* ENABLED */
 }
 
 .ripple > .ripple-circle {
   position: absolute;
-  width: 300%;
   pointer-events: none;
   z-index: 50;
   /* SHOW */
@@ -11053,37 +11051,30 @@ code[class*='language-'] .namespace {
 .ripple > .ripple-circle:before {
   position: absolute;
   left: -50%;
+  top: -50%;
   width: 100%;
-  margin-top: -50%;
-  padding-bottom: 100%;
+  height: 100%;
   content: '';
-  transition-property: opacity, -webkit-transform;
-  transition-property: transform, opacity;
-  transition-property: transform, opacity, -webkit-transform;
-  transition-duration: 0.5s;
-  transition-timing-function: ease-out;
-  -webkit-transform: scale(0);
-          transform: scale(0);
-  opacity: 0;
   border-radius: 50%;
   background-color: #212121;
+  opacity: 0;
+  -webkit-transform: scale(0);
+          transform: scale(0);
+  transition-property: opacity, -webkit-transform;
+  transition-property: opacity, transform;
+  transition-property: opacity, transform, -webkit-transform;
+  transition-duration: 0.9s;
+  transition-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
 .ripple > .ripple-circle.ripple-circle-show:before {
+  opacity: 0.2;
   -webkit-transform: scale(1);
           transform: scale(1);
-  opacity: 0.2;
 }
 
 .ripple > .ripple-circle.ripple-circle-hide:before {
-  transition-duration: 0.35s;
   opacity: 0;
-}
-
-.ripple-centered > .ripple-circle {
-  top: 50% !important;
-  left: 50% !important;
-  width: 200%;
 }
 
 .ripple.ripple-primary > .ripple-circle:before {
@@ -11180,6 +11171,10 @@ code[class*='language-'] .namespace {
 
 .ripple.ripple-base > .ripple-circle:before {
   background-color: #eceff1;
+}
+
+.ripple:not(.disabled) {
+  cursor: pointer;
 }
 
 a.ripple > .ripple-circle {

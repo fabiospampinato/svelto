@@ -52,9 +52,11 @@
   /* ANIMATION */
 
   Svelto.animation = {
+    xslow: 900,
     slow: 500,
     normal: 350,
-    fast: 150
+    fast: 150,
+    xfast: 75
   };
 
   /* COLORS */

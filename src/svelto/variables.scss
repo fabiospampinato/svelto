@@ -27,9 +27,11 @@ $border-radius-large: 0.375em !default; //INFO: 6 / 16
 
 /* TRANSITIONS */
 
+$transition-duration-xslow: 0.9s !default;
 $transition-duration-slow: 0.5s !default;
 $transition-duration-normal: 0.35s !default;
 $transition-duration-fast: 0.15s !default;
+$transition-duration-xfast: 0.075s !default;
 
 /* PATHS */ //TODO: Not the appropriate file to be in, probably
 
