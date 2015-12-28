@@ -8,12 +8,6 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add dropdown for actions AND/OR right click for action (This is a good fit for a new component)
-//TODO: Make it work with checkboxes (basically use checkboxes instead of the entire row)
-//TODO: Store the current selected rows, it makes it faster than retrieving it at every change event
-
-//FIXME: Add support for tableHelper and sortable
-
 (function ( $, _, window, document, undefined ) {
 
   'use strict';
@@ -48,28 +42,29 @@
       this.$selectable = this.$element;
       this.$elements = this._getElements ();
 
-      this.$startElement = false;
-      this.$endElement = false;
-
     }
 
     _events () {
 
-      /* KEYDOWN */
+      if ( $.browser.is.touchDevice ) {
 
-      if ( !$.browser.is.touchDevice ) {
+        this._on ( Pointer.tap, this.options.selectors.element, this.__tapTouch );
+
+      } else {
+
+        /* KEYDOWN */
 
         this._onHover ( [$document, 'keydown', this.__keydown] );
 
+        /* DOWN */
+
+        this._on ( Pointer.down, this.options.selectors.element, this.__down );
+
       }
 
-      /* POINTER */
+      /* CHANGE */
 
-      this._on ( Pointer.down, this.options.selectors.element, this.__down );
-
-      /* OTHERS */
-
-      this._on ( 'change sort', this.__change );
+      this._on ( 'tablehelper:change sortable:sort', this.__change );
 
     }
 
@@ -82,7 +77,7 @@
         switch ( event.keyCode ) {
 
           case 65: //INFO: `A`
-            this.$elements.toggleClass ( this.options.classes.selected, !event.shiftKey ); //INFO: SHIFT or not //FIXME: It only works if the last character pushed is the `A`, but is it an unwanted behaviour?
+            this.$elements.toggleClass ( this.options.classes.selected, !event.shiftKey ); //INFO: Shift: all or none
             break;
 
           case 73: //INFO: `I`
@@ -105,193 +100,71 @@
 
     }
 
+    /* TAP */ //INFO: Just for touch devices
+
+    __tapTouch ( event ) {
+
+      event.preventDefault ();
+
+      $(event.currentTarget).toggleClass ( this.options.classes.selected );
+
+    }
+
     /* CLICK / CTRL + CLICK / SHIFT + CLICK / CLICK -> DRAG */
 
     __down ( event ) {
 
       if ( event.button && event.button !== Svelto.mouseButton.LEFT ) return; //INFO: Only the left click is allowed
 
-      if ( !$.browser.is.touchDevice ) {
-
-        event.preventDefault ();
-
-      }
+      event.preventDefault ();
 
       this.startEvent = event;
       this.$startElement = $(event.currentTarget);
 
-      this.motion = false;
+      this._on ( true, $document, Pointer.move, this.__move );
 
-      this._on ( $document, Pointer.move, this.__move );
+      this._one ( true, $document, Pointer.up, this.__up );
 
-      this._one ( Pointer.up, this.options.selectors.element, this.__up );
-
-      this._one ( Pointer.cancel, this.options.selectors.element, this.__cancel );
+      this._one ( true, $document, Pointer.cancel, this.__cancel );
 
     }
 
     __move ( event ) {
 
-      this.motion = true;
+      event.preventDefault ();
 
-      if ( !$.browser.is.touchDevice ) {
+      let startXY = $.eventXY ( this.startEvent ),
+          endXY = $.eventXY ( event ),
+          deltaXY = {
+            X: endXY.X - startXY.X,
+            Y: endXY.Y - startXY.Y
+          },
+          absDeltaXY = {
+            X: Math.abs ( deltaXY.X ),
+            Y: Math.abs ( deltaXY.Y )
+          };
 
-        event.preventDefault ();
-
-        let startXY = $.eventXY ( this.startEvent ),
-        endXY = $.eventXY ( event ),
-        deltaXY = {
-          X: endXY.X - startXY.X,
-          Y: endXY.Y - startXY.Y
-        },
-        absDeltaXY = {
-          X: Math.abs ( deltaXY.X ),
-          Y: Math.abs ( deltaXY.Y )
-        };
-
-        if ( absDeltaXY.X >= this.options.moveThreshold || absDeltaXY.Y >= this.options.moveThreshold ) {
-
-          this._off ( $document, Pointer.move, this.__move );
-
-          if ( !$.hasCtrlOrCmd ( event ) ) {
-
-            this.$elements.removeClass ( this.options.classes.selected );
-
-          }
-
-          this._off ( Pointer.up, this.__up );
-
-          this._off ( Pointer.cancel, this.__cancel );
-
-          this._resetPrev ();
-
-          this.$prevElement = this.$startElement;
-
-          this.$startElement.toggleClass ( this.options.classes.selected );
-
-          this._on ( Pointer.enter, this.options.selectors.element, this.__dragEnter );
-
-          this._one ( $document, Pointer.up, this.__dragEnd );
-          this._one ( $document, Pointer.cancel, this.__dragEnd );
-
-          this._trigger ( 'change' );
-
-        }
-
-      } else {
+      if ( absDeltaXY.X >= this.options.moveThreshold || absDeltaXY.Y >= this.options.moveThreshold ) {
 
         this._off ( $document, Pointer.move, this.__move );
 
-      }
+        this._off ( $document, Pointer.up, this.__up );
 
-    }
+        this._off ( $document, Pointer.cancel, this.__cancel );
 
-    __dragEnter ( event ) {
+        this._resetPrev ();
 
-      this.$endElement = $(event.currentTarget);
-
-      let startIndex = this.$elements.index ( this.$startElement ),
-          endIndex = this.$elements.index ( this.$endElement ),
-          minIndex = Math.min ( startIndex, endIndex ),
-          maxIndex = Math.max ( startIndex, endIndex );
-
-      if ( minIndex === startIndex ) { //INFO: Direction: down
-
-        minIndex += 1;
-        maxIndex += 1;
-
-      }
-
-      let $newDragged = this.$elements.slice ( minIndex, maxIndex );
-
-      if ( this.$prevDragged ) {
-
-        $newDragged.not ( this.$prevDragged ).toggleClass ( this.options.classes.selected );
-
-        this.$prevDragged.not ( $newDragged ).toggleClass ( this.options.classes.selected );
-
-      } else {
-
-        $newDragged.toggleClass ( this.options.classes.selected );
-
-      }
-
-      this.$prevDragged = $newDragged;
-
-      this._trigger ( 'change' );
-
-    }
-
-    __dragEnd () {
-
-      if ( !$.browser.is.touchDevice ) {
-
-        this._off ( $document, Pointer.move, this.__move );
-
-        this._off ( Pointer.enter, this.__dragEnter );
-
-        this._off ( Pointer.up, this.__dragEnd );
-        this._off ( Pointer.cancel, this.__dragEnd );
-
-      }
-
-      this.$prevDragged = false;
-
-    }
-
-    __up ( event ) {
-
-      this._off ( $document, Pointer.move, this.__move );
-
-      this._off ( Pointer.cancel, this.__cancel );
-
-      if ( !$.browser.is.touchDevice || !this.motion ) {
-
-        if ( event.shiftKey ) {
-
-          let startIndex = this.$elements.index ( this.$prevElement ),
-              endIndex = this.$prevElement ? this.$elements.index ( this.$startElement ) : 0,
-              minIndex = Math.min ( startIndex, endIndex ),
-              maxIndex = Math.max ( startIndex, endIndex );
-
-          if ( minIndex === startIndex ) { //INFO: Direction: down
-
-            minIndex += 1;
-            maxIndex += 1;
-
-          }
-
-          let $newShifted = this.$elements.slice ( minIndex, maxIndex );
-
-          if ( this.$prevShifted ) {
-
-            $newShifted.not ( this.$prevShifted ).toggleClass ( this.options.classes.selected );
-
-            this.$prevShifted.not ( $newShifted ).toggleClass ( this.options.classes.selected );
-
-          } else {
-
-            $newShifted.toggleClass ( this.options.classes.selected );
-
-          }
-
-          this.$prevShifted = $newShifted;
-
-        } else if ( $.hasCtrlOrCmd ( event ) || $.browser.is.touchDevice ) { //TODO: On mobile we behave like if the `ctrl`/`cmd` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
-
-          this.$startElement.toggleClass ( this.options.classes.selected );
-
-          this._resetPrev ();
-
-          this.$prevElement = this.$startElement;
-
-        } else {
+        if ( !$.hasCtrlOrCmd ( event ) ) {
 
           this.$elements.removeClass ( this.options.classes.selected );
 
-          this._resetPrev ();
-
         }
+
+        this.$startElement.toggleClass ( this.options.classes.selected );
+
+        this._on ( true, Pointer.enter, this.options.selectors.element, this.__dragEnter );
+
+        this._one ( true, $document, Pointer.up + ' ' + Pointer.cancel, this.__dragEnd );
 
         this._trigger ( 'change' );
 
@@ -299,11 +172,66 @@
 
     }
 
+    __dragEnter ( event ) {
+
+      this._toggleGroup ( this.$startElement, $(event.currentTarget) );
+
+      this._trigger ( 'change' );
+
+    }
+
+    __dragEnd () {
+
+      this._off ( Pointer.enter, this.__dragEnter );
+
+    }
+
+    __up ( event ) {
+
+      this._off ( $document, Pointer.move, this.__move );
+
+      this._off ( $document, Pointer.cancel, this.__cancel );
+
+      if ( event.shiftKey ) {
+
+        this._toggleGroup ( this.$prevElement, this.$startElement );
+
+      } else if ( $.hasCtrlOrCmd ( event ) ) { //TODO: On mobile we behave like if the `ctrl`/`cmd` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+
+        this.$startElement.toggleClass ( this.options.classes.selected );
+
+        this._resetPrev ( this.$startElement );
+
+      } else {
+
+        let $selected = this.get (),
+            $others = $selected.not ( this.$startElement );
+
+        if ( $others.length > 0  ) {
+
+          $others.removeClass ( this.options.classes.selected );
+
+          this.$startElement.addClass ( this.options.classes.selected );
+
+        } else {
+
+          this.$startElement.toggleClass ( this.options.classes.selected );
+
+        }
+
+        this._resetPrev ( this.$startElement );
+
+      }
+
+      this._trigger ( 'change' );
+
+    }
+
     __cancel () {
 
       this._off ( $document, Pointer.move, this.__move );
 
-      this._off ( Pointer.up, this.__up );
+      this._off ( $document, Pointer.up, this.__up );
 
     }
 
@@ -319,11 +247,35 @@
 
     /* PRIVATE */
 
-    _resetPrev () {
+    _toggleGroup ( $start, $end ) {
 
-      this.$prevElement = false;
-      this.$prevShifted = false;
-      this.$prevDragged = false;
+      let startIndex = $start ? this.$elements.index ( $start ) : 0,
+          endIndex = this.$elements.index ( $end ),
+          minIndex = Math.min ( startIndex, endIndex ),
+          maxIndex = Math.max ( startIndex, endIndex );
+
+      if ( minIndex === startIndex ) { //INFO: Direction: down
+
+        minIndex += 1;
+        maxIndex += 1;
+
+      }
+
+      let $newGroup = this.$elements.slice ( minIndex, maxIndex );
+
+      if ( this.$prevGroup ) {
+
+        $newGroup.not ( this.$prevGroup ).toggleClass ( this.options.classes.selected );
+
+        this.$prevGroup.not ( $newGroup ).toggleClass ( this.options.classes.selected );
+
+      } else {
+
+        $newGroup.toggleClass ( this.options.classes.selected );
+
+      }
+
+      this.$prevGroup = $newGroup;
 
     }
 
@@ -333,11 +285,18 @@
 
     }
 
+    _resetPrev ( $element = false, $group = false ) {
+
+      this.$prevElement = $element;
+      this.$prevGroup = $group;
+
+    }
+
     /* API */
 
     get () {
 
-      return this.$elements.filter ( '.' + this.options.selectors.selected );
+      return this.$elements.filter ( '.' + this.options.classes.selected );
 
     }
 
