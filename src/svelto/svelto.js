@@ -6,8 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Remove the _ dependency, after all we use it only for a few functions (or create a slimmed down version of lodash to load only when needed)
-
 (function ( window, document, undefined ) {
 
   'use strict';
@@ -15,9 +13,9 @@
   /* SVELTO */
 
   window.Svelto = {
-    version: '0.2.0-beta.7',
+    version: '0.3.0-beta1',
     $: jQuery || Zepto || ( $ && ( 'jquery' in $() || 'zepto' in $ ) ? $ : false ),
-    _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false )
+    _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false ) //INFO: Checking the version also in order to distinguish it from `underscore`
   };
 
   /* KEY CODE */

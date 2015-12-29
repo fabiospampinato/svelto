@@ -17,7 +17,7 @@
 
   let config = {
     name: 'dropdownToggler',
-    selector: '.dropdown-toggler',
+    selector: '.dropdown-toggler, .dropdown-closer',
     options: {
       widget: Svelto.Dropdown
     }

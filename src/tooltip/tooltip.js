@@ -16,12 +16,7 @@
 
   let config = {
     name: 'tooltip',
-    selector: '.tooltip',
-    options: {
-      selectors: {
-        closer: '.button, .tooltip-closer'
-      }
-    }
+    selector: '.tooltip'
   };
 
   /* TOOLTIP */

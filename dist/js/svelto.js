@@ -6,8 +6,6 @@
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * ========================================================================= */
 
-//TODO: Remove the _ dependency, after all we use it only for a few functions (or create a slimmed down version of lodash to load only when needed)
-
 (function ( window, document, undefined ) {
 
   'use strict';
@@ -15,9 +13,9 @@
   /* SVELTO */
 
   window.Svelto = {
-    version: '0.2.0-beta.7',
+    version: '0.3.0-beta1',
     $: jQuery || Zepto || ( $ && ( 'jquery' in $() || 'zepto' in $ ) ? $ : false ),
-    _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false )
+    _: lodash || ( _ && 'VERSION' in _ && Number ( _.VERSION[0] ) >= 3 ? _ : false ) //INFO: Checking the version also in order to distinguish it from `underscore`
   };
 
   /* KEY CODE */
@@ -4123,11 +4121,9 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform'; //FIXME: Does it work?
-
   /* MATRIX */
+
+  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform';
 
   $.fn.matrix = function ( values ) {
 
@@ -4615,9 +4611,6 @@
         show: 'show',
         open: 'open'
       },
-      selectors: {
-        closer: '.dropdown-closer'
-      },
       animations: {
         open: Svelto.animation.fast,
         close: Svelto.animation.fast
@@ -4639,7 +4632,6 @@
     _variables () {
 
       this.$dropdown = this.$element;
-      this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
       this.$togglerParents = $empty;
@@ -4654,14 +4646,6 @@
       this._prevToggler = false;
 
       this._isOpen = false;
-
-    }
-
-    _events () {
-
-      /* CLOSER */
-
-      this._on ( this.$closers, Pointer.tap, this.close );
 
     }
 
@@ -5111,7 +5095,7 @@
 
   let config = {
     name: 'dropdownToggler',
-    selector: '.dropdown-toggler',
+    selector: '.dropdown-toggler, .dropdown-closer',
     options: {
       widget: Svelto.Dropdown
     }
@@ -12008,6 +11992,7 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../noty/noty.js
  * ========================================================================= */
 
+//FIXME: Crappy, not working atm, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
 (function ( $, _, window, document, undefined ) {
@@ -12031,6 +12016,18 @@ Prism.languages.js = Prism.languages.javascript;
       value: 0,
       amount: 5,
       url: false,
+      rated: false,
+      messages: {
+        error: 'An error occurred, please try again later'
+      },
+      datas: {
+        value: 'value',
+        amount: 'amount',
+        url: 'url'
+      },
+      classes: {
+        rated: 'rated'
+      },
       selectors: {
         star: '.rater-star'
       },
@@ -12046,30 +12043,34 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $rater ) { //TODO: Just use the generic data-options maybe
-
-      $rater.rater ({
-        value: Number($rater.data ( 'value' ) || 0),
-        amount: Number($rater.data ( 'amount' ) || 5),
-        url: Number($rater.data ( 'url' ) || false)
-      });
-
-    }
-
     _variables () {
 
       this.$rater = this.$element;
 
-      this.alreadyRated = false;
       this.doingAjax = false;
+
+    }
+
+    _init () {
+
+      this.options.value = Number ( this.$rater.data ( this.options.datas.value ) ) || this.options.value;
+      this.options.amount = Number ( this.$rater.data ( this.options.datas.amount ) ) || this.options.amount;
+      this.options.url = Number ( this.$rater.data ( this.options.datas.url ) ) || this.options.url;
+      this.options.rated = this.$rater.hasClass ( this.options.classes.rated );
 
     }
 
     _events () {
 
-      /* TAP */
+      /* UNRATED */
 
-      this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
+      if ( !this.options.rated ) {
+
+        /* TAP */
+
+        this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
+
+      }
 
     }
 
@@ -12077,9 +12078,9 @@ Prism.languages.js = Prism.languages.javascript;
 
     __tap ( event ) {
 
-      if ( !this.alreadyRated && !this.doingAjax && this.options.url ) {
+      if ( !this.options.rated && !this.doingAjax && this.options.url ) {
 
-        var rating = this.$stars.index ( event.currentTarget ) + 1;
+        let rating = this.$stars.index ( event.currentTarget ) + 1;
 
         $.ajax ({
 
@@ -12087,17 +12088,17 @@ Prism.languages.js = Prism.languages.javascript;
           type: 'POST',
           url: this.options.url,
 
-          beforeSend () {
+          beforeSend: () => {
 
-            self.doingAjax = true;
+            this.doingAjax = true;
 
           },
 
-          error ( res ) {
+          error: ( res ) => {
 
-            res = _.attempt ( JSON.parse, res );
+            let resj = _.attempt ( JSON.parse, res );
 
-            $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+            $.noty ( _.isError ( resj ) || !( 'msg' in resj ) ? this.options.messages.error : resj.msg );
 
           },
 
@@ -12105,15 +12106,15 @@ Prism.languages.js = Prism.languages.javascript;
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-            res = _.attempt ( JSON.parse, res );
+            let resj = _.attempt ( JSON.parse, res );
 
-            if ( !_.isError ( res ) ) {
+            if ( !_.isError ( resj ) ) {
 
-              _.merge ( this.options, res );
+              _.merge ( this.options, resj );
 
               this.$rater.html ( this._tmpl ( 'stars', this.options ) );
 
-              this.alreadyRated = true;
+              this.options.rated = true;
 
               this._trigger ( 'change', {
                 value: this.options.value,
@@ -12124,9 +12125,9 @@ Prism.languages.js = Prism.languages.javascript;
 
           },
 
-          complete () {
+          complete: () => {
 
-            self.doingAjax = false;
+            this.doingAjax = false;
 
           }
 
@@ -13969,6 +13970,12 @@ Prism.languages.js = Prism.languages.javascript;
         on: 'secondary',
         off: 'gray'
       },
+      datas: {
+        colors: {
+          on: 'color-on',
+          off: 'color-off'
+        }
+      },
       classes: {
         checked: 'checked'
       },
@@ -13991,17 +13998,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $switch ) { //TODO: Just use the generic data-options maybe
-
-      $switch.switch ({
-        colors: {
-          on: $switch.data ( 'color-on' ) || 'secondary',
-          off: $switch.data ( 'color-off' ) || 'gray'
-        }
-      });
-
-    }
-
     _variables () {
 
       this.$switch = this.$element;
@@ -14017,6 +14013,13 @@ Prism.languages.js = Prism.languages.javascript;
     }
 
     _init () {
+
+      /* CONFIG */
+
+      this.options.colors.on = this.$switch.data ( this.options.datas.colors.on ) || this.options.colors.on;
+      this.options.colors.off = this.$switch.data ( this.options.datas.colors.off ) || this.options.colors.off;
+
+      /* CHECKED */
 
       if ( this.$input.prop ( 'checked' ) ) {
 
@@ -14095,7 +14098,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( data.motion ) {
 
-        var isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+        let isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
 
         this.toggle ( isChecked, true );
 
@@ -14131,6 +14134,14 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    _update () {
+
+      this._updatePosition ();
+      this._updateColors ();
+      this._updateInput ();
+
+    }
+
     /* API */
 
     get () {
@@ -14139,7 +14150,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    toggle ( force, reset ) {
+    toggle ( force, _reset ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -14149,24 +14160,17 @@ Prism.languages.js = Prism.languages.javascript;
 
       if ( force !== this.isChecked ) {
 
-        var prevChecked = this.isChecked;
-
         this.isChecked = force;
 
         this.$switch.toggleClass ( this.options.classes.checked, this.isChecked );
 
-        this._updatePosition ();
-        this._updateColors ();
-        this._updateInput ();
+        this._update ();
 
-        this._trigger ( 'change', {
-          previous: prevChecked,
-          checked: this.isChecked
-        });
+        this._trigger ( 'change' );
 
         this._trigger ( this.isChecked ? 'check' : 'uncheck' );
 
-      } else if ( reset ) {
+      } else if ( _reset ) {
 
         this._updatePosition ();
 
@@ -14277,7 +14281,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _checkEmpty () {
 
-      var hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
+      let hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
 
       this.$emptyRow.toggleClass ( 'hidden', hasNonEmptyRows );
 
@@ -14291,22 +14295,20 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* PUBLIC */
 
-    add ( id ) { //INFO: id, datas...
+    add ( id, ...datas ) {
 
-      var datas = _.tail ( arguments ),
-          rowId = id ? this._getRowId ( id ) : false;
+      let rowId = id ? this._getRowId ( id ) : false;
 
       if ( datas.length > 0 ) {
 
         if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
-        var chunks = _.chunk ( datas, this.columnsNr ),
+        let chunks = _.chunk ( datas, this.columnsNr ),
             $rows = $empty;
 
-        for ( var ci = 0, cl = chunks.length; ci < cl; ci++ ) {
+        for ( let chunk of chunks ) {
 
-          var chunk = chunks[ci],
-              rowHtml = this._tmpl ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
+          let rowHtml = this._tmpl ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
 
           $rows = $rows.add ( rowHtml );
 
@@ -14324,20 +14326,17 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      return this;
-
     }
 
-    update ( id ) { //INFO: id, datas...
+    update ( id, ...datas ) {
 
-      var datas = _.tail ( arguments ),
-          $row = $( '.' + this._getRowId ( id ) );
+      let $row = $( '.' + this._getRowId ( id ) );
 
       if ( datas.length > 0 && $row.length === 1 ) {
 
-        var $rowCells = $row.find ( this.options.selectors.rowCell );
+        let $rowCells = $row.find ( this.options.selectors.rowCell );
 
-        for ( var i = 0, l = datas.length; i < l; i++ ) {
+        for ( let i = 0, l = datas.length; i < l; i++ ) {
 
           if ( _.isString ( datas[i] ) ) {
 
@@ -14355,13 +14354,11 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      return this;
-
     }
 
     remove ( id ) {
 
-      var $row = $( '.' + this._getRowId ( id ) );
+      let $row = $( '.' + this._getRowId ( id ) );
 
       if ( $row.length === 1 ) {
 
@@ -14377,13 +14374,11 @@ Prism.languages.js = Prism.languages.javascript;
 
       }
 
-      return this;
-
     }
 
     clear () {
 
-      var $rows = this.$body.find ( this.options.selectors.notEmptyRow );
+      let $rows = this.$body.find ( this.options.selectors.notEmptyRow );
 
       if ( $rows.length > 0 ) {
 
@@ -14398,8 +14393,6 @@ Prism.languages.js = Prism.languages.javascript;
         });
 
       }
-
-      return this;
 
     }
 
@@ -14427,6 +14420,8 @@ Prism.languages.js = Prism.languages.javascript;
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
+//TODO: Not well written, make it better
+//TODO: Doesn't handle properly a change of the direction
 
 (function ( $, _, window, document, undefined ) {
 
@@ -14438,7 +14433,7 @@ Prism.languages.js = Prism.languages.javascript;
     name: 'tabs',
     selector: '.tabs',
     options: {
-      direction: undefined,
+      direction: 'top',
       highlight: true,
       classes: {
         active: {
@@ -14468,7 +14463,21 @@ Prism.languages.js = Prism.languages.javascript;
       this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
       this.$containers = this.$tabs.find ( this.options.selectors.containers );
 
-      this.options.direction = this.options.direction || ( this.$tabs.hasClass ( 'top' ) ? 'top' : ( this.$tabs.hasClass ( 'right' ) ? 'right' : ( this.$tabs.hasClass ( 'bottom' ) ? 'bottom' : ( this.$tabs.hasClass ( 'left' ) ? 'left' : 'top' ) ) ) );
+      /* DIRECTION */
+
+      let directions = ['top', 'right', 'bottom', 'left'];
+
+      for ( let direction of directions ) {
+
+        if ( this.$tabs.hasClass ( direction ) ) {
+
+          this.options.direction = direction;
+
+          break;
+
+        }
+
+      }
 
       this.index = -1;
 
@@ -14476,11 +14485,11 @@ Prism.languages.js = Prism.languages.javascript;
 
     _init () {
 
-      var $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
+      let $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
 
       $activeTrigger = ( $activeTrigger.length > 0 ) ? $activeTrigger : this.$triggers.first ();
 
-      var newIndex = this.$triggers.index ( $activeTrigger );
+      let newIndex = this.$triggers.index ( $activeTrigger );
 
       this.set ( newIndex );
 
@@ -14498,7 +14507,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     __tap ( event ) {
 
-      var newIndex = this.$triggers.index ( $(event.currentTarget) );
+      let newIndex = this.$triggers.index ( $(event.currentTarget) );
 
       this.set ( newIndex );
 
@@ -14518,7 +14527,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         /* PREVIOUS */
 
-        var $prevTrigger = this.$triggers.eq ( this.index ),
+        let $prevTrigger = this.$triggers.eq ( this.index ),
             $prevContainer = this.$containers.eq ( this.index );
 
         $prevTrigger.removeClass ( this.options.classes.active.trigger );
@@ -14526,7 +14535,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( this.options.highlight ) {
 
-          $prevTrigger.removeClass ( 'highlighted highlight-bottom highlight-right' );
+          $prevTrigger.removeClass ( 'highlighted highlight-top highlight-bottom highlight-left highlight-right' );
 
         }
 
@@ -14534,7 +14543,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this.index = index;
 
-        var $trigger = this.$triggers.eq ( this.index ),
+        let $trigger = this.$triggers.eq ( this.index ),
             $container = this.$containers.eq ( this.index );
 
         $trigger.addClass ( this.options.classes.active.trigger );
@@ -14542,38 +14551,20 @@ Prism.languages.js = Prism.languages.javascript;
 
         if ( this.options.highlight ) {
 
-          let highlightDirection;
+          let opposites = {
+            'top'   : 'bottom',
+            'bottom': 'top',
+            'left'  : 'right',
+            'right' : 'left'
+          };
 
-          switch ( this.options.direction ) {
-
-            case 'bottom':
-              highlightDirection = 'top';
-              break;
-
-            case 'left':
-              highlightDirection = 'right';
-              break;
-
-            case 'right':
-              highlightDirection = 'left';
-              break;
-
-            case 'top':
-            default:
-              highlightDirection = 'bottom';
-              break;
-
-          }
-
-          $trigger.addClass ( 'highlighted' + ( ' highlight-' + highlightDirection ) );
+          $trigger.addClass ( 'highlighted' + ( ' highlight-' + opposites[this.options.direction] ) );
 
         }
 
         /* CALLBACKS */
 
-        this._trigger ( 'set', {
-          index: this.index
-        });
+        this._trigger ( 'set' );
 
       }
 
@@ -15154,15 +15145,15 @@ Prism.languages.js = Prism.languages.javascript;
 
       this.$timeAgoElement = this.$element;
 
+    }
+
+    _init () {
+
       if ( !this.options.timestamp ) {
 
         this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
 
       }
-
-    }
-
-    _init () {
 
       this._loop ( 0 );
 
@@ -15170,13 +15161,13 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* PRIVATE */
 
-    _loop ( wait ) {
+    _loop ( seconds ) {
 
       this._delay ( function () {
 
         this._loop ( this._update ().next );
 
-      }, wait * 1000 );
+      }, seconds * 1000 );
 
     }
 
@@ -15239,10 +15230,10 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
-    set ( fn, time, autostart ) {
+    set ( callback, time, autostart ) {
 
       this.init = true;
-      this.action = fn;
+      this.action = callback;
 
       if ( !isNaN ( time ) ) {
 
@@ -15302,7 +15293,7 @@ Prism.languages.js = Prism.languages.javascript;
       if ( this.isActive ) {
 
         this.isActive = false;
-        this.remainingTime -= ( new Date() - this.last );
+        this.remainingTime -= Date.now () - this.last;
         this.clearTimer ();
 
       }
@@ -15344,6 +15335,7 @@ Prism.languages.js = Prism.languages.javascript;
     reset () {
 
       this.isActive = false;
+
       this.play ( true );
 
       return this;
@@ -15365,7 +15357,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
 
       this.remainingTime = time;
-      this.last = new Date ();
+      this.last = Date.now ();
       this.clearTimer ();
 
       this.timeoutObject = setTimeout ( () => this.go (), time );
@@ -15382,6 +15374,7 @@ Prism.languages.js = Prism.languages.javascript;
       }
 
     }
+
 
     remaining ( value ) {
 
@@ -15419,12 +15412,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tooltip',
-    selector: '.tooltip',
-    options: {
-      selectors: {
-        closer: '.button, .tooltip-closer'
-      }
-    }
+    selector: '.tooltip'
   };
 
   /* TOOLTIP */
@@ -15461,7 +15449,7 @@ Prism.languages.js = Prism.languages.javascript;
 
   let config = {
     name: 'tooltipToggler',
-    selector: '.tooltip-toggler',
+    selector: '.tooltip-toggler, .tooltip-closer, .tooltip .button',
     options: {
       widget: Svelto.Tooltip,
       hover: {

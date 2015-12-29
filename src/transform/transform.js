@@ -14,11 +14,9 @@
 
   'use strict';
 
-  /* VARIABLES */
-
-  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform'; //FIXME: Does it work?
-
   /* MATRIX */
+
+  let property = ( 'webkitTransform' in document.documentElement.style ) ? '-webkit-transform' : 'transform';
 
   $.fn.matrix = function ( values ) {
 

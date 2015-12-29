@@ -17,7 +17,7 @@
 
   let config = {
     name: 'tooltipToggler',
-    selector: '.tooltip-toggler',
+    selector: '.tooltip-toggler, .tooltip-closer, .tooltip .button',
     options: {
       widget: Svelto.Tooltip,
       hover: {

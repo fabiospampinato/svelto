@@ -76,7 +76,7 @@
 
     _checkEmpty () {
 
-      var hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
+      let hasNonEmptyRows = this.$body.find ( this.options.selectors.notEmptyRow ).length > 0;
 
       this.$emptyRow.toggleClass ( 'hidden', hasNonEmptyRows );
 
@@ -90,22 +90,20 @@
 
     /* PUBLIC */
 
-    add ( id ) { //INFO: id, datas...
+    add ( id, ...datas ) {
 
-      var datas = _.tail ( arguments ),
-          rowId = id ? this._getRowId ( id ) : false;
+      let rowId = id ? this._getRowId ( id ) : false;
 
       if ( datas.length > 0 ) {
 
         if ( rowId && $( '.' + rowId ).length === 1 ) return this;
 
-        var chunks = _.chunk ( datas, this.columnsNr ),
+        let chunks = _.chunk ( datas, this.columnsNr ),
             $rows = $empty;
 
-        for ( var ci = 0, cl = chunks.length; ci < cl; ci++ ) {
+        for ( let chunk of chunks ) {
 
-          var chunk = chunks[ci],
-              rowHtml = this._tmpl ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
+          let rowHtml = this._tmpl ( 'row', { id: rowId, datas: chunk, missing: this.columnsNr - chunk.length } );
 
           $rows = $rows.add ( rowHtml );
 
@@ -123,20 +121,17 @@
 
       }
 
-      return this;
-
     }
 
-    update ( id ) { //INFO: id, datas...
+    update ( id, ...datas ) {
 
-      var datas = _.tail ( arguments ),
-          $row = $( '.' + this._getRowId ( id ) );
+      let $row = $( '.' + this._getRowId ( id ) );
 
       if ( datas.length > 0 && $row.length === 1 ) {
 
-        var $rowCells = $row.find ( this.options.selectors.rowCell );
+        let $rowCells = $row.find ( this.options.selectors.rowCell );
 
-        for ( var i = 0, l = datas.length; i < l; i++ ) {
+        for ( let i = 0, l = datas.length; i < l; i++ ) {
 
           if ( _.isString ( datas[i] ) ) {
 
@@ -154,13 +149,11 @@
 
       }
 
-      return this;
-
     }
 
     remove ( id ) {
 
-      var $row = $( '.' + this._getRowId ( id ) );
+      let $row = $( '.' + this._getRowId ( id ) );
 
       if ( $row.length === 1 ) {
 
@@ -176,13 +169,11 @@
 
       }
 
-      return this;
-
     }
 
     clear () {
 
-      var $rows = this.$body.find ( this.options.selectors.notEmptyRow );
+      let $rows = this.$body.find ( this.options.selectors.notEmptyRow );
 
       if ( $rows.length > 0 ) {
 
@@ -197,8 +188,6 @@
         });
 
       }
-
-      return this;
 
     }
 

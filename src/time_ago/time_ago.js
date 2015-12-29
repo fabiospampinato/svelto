@@ -42,15 +42,15 @@
 
       this.$timeAgoElement = this.$element;
 
+    }
+
+    _init () {
+
       if ( !this.options.timestamp ) {
 
         this.options.timestamp = this.$timeAgoElement.data ( this.options.title ? 'timestamp-title' : 'timestamp' );
 
       }
-
-    }
-
-    _init () {
 
       this._loop ( 0 );
 
@@ -58,13 +58,13 @@
 
     /* PRIVATE */
 
-    _loop ( wait ) {
+    _loop ( seconds ) {
 
       this._delay ( function () {
 
         this._loop ( this._update ().next );
 
-      }, wait * 1000 );
+      }, seconds * 1000 );
 
     }
 

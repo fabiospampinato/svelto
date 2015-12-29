@@ -9,6 +9,7 @@
  * @requires ../noty/noty.js
  * ========================================================================= */
 
+//FIXME: Crappy, not working atm, maybe should get removed
 //TODO: Support the use of the rater as an input, basically don't perform any ajax operation but instead update an input field
 
 (function ( $, _, window, document, undefined ) {
@@ -32,6 +33,18 @@
       value: 0,
       amount: 5,
       url: false,
+      rated: false,
+      messages: {
+        error: 'An error occurred, please try again later'
+      },
+      datas: {
+        value: 'value',
+        amount: 'amount',
+        url: 'url'
+      },
+      classes: {
+        rated: 'rated'
+      },
       selectors: {
         star: '.rater-star'
       },
@@ -47,30 +60,34 @@
 
     /* SPECIAL */
 
-    static widgetize ( $rater ) { //TODO: Just use the generic data-options maybe
-
-      $rater.rater ({
-        value: Number($rater.data ( 'value' ) || 0),
-        amount: Number($rater.data ( 'amount' ) || 5),
-        url: Number($rater.data ( 'url' ) || false)
-      });
-
-    }
-
     _variables () {
 
       this.$rater = this.$element;
 
-      this.alreadyRated = false;
       this.doingAjax = false;
+
+    }
+
+    _init () {
+
+      this.options.value = Number ( this.$rater.data ( this.options.datas.value ) ) || this.options.value;
+      this.options.amount = Number ( this.$rater.data ( this.options.datas.amount ) ) || this.options.amount;
+      this.options.url = Number ( this.$rater.data ( this.options.datas.url ) ) || this.options.url;
+      this.options.rated = this.$rater.hasClass ( this.options.classes.rated );
 
     }
 
     _events () {
 
-      /* TAP */
+      /* UNRATED */
 
-      this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
+      if ( !this.options.rated ) {
+
+        /* TAP */
+
+        this._on ( Pointer.tap, this.options.selectors.star, this.__tap );
+
+      }
 
     }
 
@@ -78,9 +95,9 @@
 
     __tap ( event ) {
 
-      if ( !this.alreadyRated && !this.doingAjax && this.options.url ) {
+      if ( !this.options.rated && !this.doingAjax && this.options.url ) {
 
-        var rating = this.$stars.index ( event.currentTarget ) + 1;
+        let rating = this.$stars.index ( event.currentTarget ) + 1;
 
         $.ajax ({
 
@@ -88,17 +105,17 @@
           type: 'POST',
           url: this.options.url,
 
-          beforeSend () {
+          beforeSend: () => {
 
-            self.doingAjax = true;
+            this.doingAjax = true;
 
           },
 
-          error ( res ) {
+          error: ( res ) => {
 
-            res = _.attempt ( JSON.parse, res );
+            let resj = _.attempt ( JSON.parse, res );
 
-            $.noty ( _.isError ( res ) || !( 'msg' in res ) ? 'An error occurred, please try again later' : res.msg );
+            $.noty ( _.isError ( resj ) || !( 'msg' in resj ) ? this.options.messages.error : resj.msg );
 
           },
 
@@ -106,15 +123,15 @@
 
             //FIXME: Handle the case where the server requests succeeded but the user already rated or for whatever reason this rating is not processed
 
-            res = _.attempt ( JSON.parse, res );
+            let resj = _.attempt ( JSON.parse, res );
 
-            if ( !_.isError ( res ) ) {
+            if ( !_.isError ( resj ) ) {
 
-              _.merge ( this.options, res );
+              _.merge ( this.options, resj );
 
               this.$rater.html ( this._tmpl ( 'stars', this.options ) );
 
-              this.alreadyRated = true;
+              this.options.rated = true;
 
               this._trigger ( 'change', {
                 value: this.options.value,
@@ -125,9 +142,9 @@
 
           },
 
-          complete () {
+          complete: () => {
 
-            self.doingAjax = false;
+            this.doingAjax = false;
 
           }
 

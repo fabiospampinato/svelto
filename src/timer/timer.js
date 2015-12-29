@@ -24,10 +24,10 @@
 
     }
 
-    set ( fn, time, autostart ) {
+    set ( callback, time, autostart ) {
 
       this.init = true;
-      this.action = fn;
+      this.action = callback;
 
       if ( !isNaN ( time ) ) {
 
@@ -87,7 +87,7 @@
       if ( this.isActive ) {
 
         this.isActive = false;
-        this.remainingTime -= ( new Date() - this.last );
+        this.remainingTime -= Date.now () - this.last;
         this.clearTimer ();
 
       }
@@ -129,6 +129,7 @@
     reset () {
 
       this.isActive = false;
+
       this.play ( true );
 
       return this;
@@ -150,7 +151,7 @@
       }
 
       this.remainingTime = time;
-      this.last = new Date ();
+      this.last = Date.now ();
       this.clearTimer ();
 
       this.timeoutObject = setTimeout ( () => this.go (), time );
@@ -167,6 +168,7 @@
       }
 
     }
+
 
     remaining ( value ) {
 

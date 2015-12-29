@@ -33,9 +33,6 @@
         show: 'show',
         open: 'open'
       },
-      selectors: {
-        closer: '.dropdown-closer'
-      },
       animations: {
         open: Svelto.animation.fast,
         close: Svelto.animation.fast
@@ -57,7 +54,6 @@
     _variables () {
 
       this.$dropdown = this.$element;
-      this.$closers = this.$dropdown.find ( this.options.selectors.closer );
 
       this.$dropdownParents = this.$dropdown.parents ().add ( $window ); //INFO: We are adding `$window` so that the scroll/resize handlers work as expexted
       this.$togglerParents = $empty;
@@ -72,14 +68,6 @@
       this._prevToggler = false;
 
       this._isOpen = false;
-
-    }
-
-    _events () {
-
-      /* CLOSER */
-
-      this._on ( this.$closers, Pointer.tap, this.close );
 
     }
 

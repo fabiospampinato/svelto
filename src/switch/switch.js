@@ -26,6 +26,12 @@
         on: 'secondary',
         off: 'gray'
       },
+      datas: {
+        colors: {
+          on: 'color-on',
+          off: 'color-off'
+        }
+      },
       classes: {
         checked: 'checked'
       },
@@ -48,17 +54,6 @@
 
     /* SPECIAL */
 
-    static widgetize ( $switch ) { //TODO: Just use the generic data-options maybe
-
-      $switch.switch ({
-        colors: {
-          on: $switch.data ( 'color-on' ) || 'secondary',
-          off: $switch.data ( 'color-off' ) || 'gray'
-        }
-      });
-
-    }
-
     _variables () {
 
       this.$switch = this.$element;
@@ -74,6 +69,13 @@
     }
 
     _init () {
+
+      /* CONFIG */
+
+      this.options.colors.on = this.$switch.data ( this.options.datas.colors.on ) || this.options.colors.on;
+      this.options.colors.off = this.$switch.data ( this.options.datas.colors.off ) || this.options.colors.off;
+
+      /* CHECKED */
 
       if ( this.$input.prop ( 'checked' ) ) {
 
@@ -152,7 +154,7 @@
 
       if ( data.motion ) {
 
-        var isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
+        let isChecked = ( data.endXY.X + ( this.handlerWidth / 2 ) ) >= ( this.switchWidth / 2 );
 
         this.toggle ( isChecked, true );
 
@@ -188,6 +190,14 @@
 
     }
 
+    _update () {
+
+      this._updatePosition ();
+      this._updateColors ();
+      this._updateInput ();
+
+    }
+
     /* API */
 
     get () {
@@ -196,7 +206,7 @@
 
     }
 
-    toggle ( force, reset ) {
+    toggle ( force, _reset ) {
 
       if ( !_.isBoolean ( force ) ) {
 
@@ -206,24 +216,17 @@
 
       if ( force !== this.isChecked ) {
 
-        var prevChecked = this.isChecked;
-
         this.isChecked = force;
 
         this.$switch.toggleClass ( this.options.classes.checked, this.isChecked );
 
-        this._updatePosition ();
-        this._updateColors ();
-        this._updateInput ();
+        this._update ();
 
-        this._trigger ( 'change', {
-          previous: prevChecked,
-          checked: this.isChecked
-        });
+        this._trigger ( 'change' );
 
         this._trigger ( this.isChecked ? 'check' : 'uncheck' );
 
-      } else if ( reset ) {
+      } else if ( _reset ) {
 
         this._updatePosition ();
 

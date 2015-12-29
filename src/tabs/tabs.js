@@ -9,6 +9,8 @@
  * ========================================================================= */
 
 //TODO: Add again the super cool moving indicator
+//TODO: Not well written, make it better
+//TODO: Doesn't handle properly a change of the direction
 
 (function ( $, _, window, document, undefined ) {
 
@@ -20,7 +22,7 @@
     name: 'tabs',
     selector: '.tabs',
     options: {
-      direction: undefined,
+      direction: 'top',
       highlight: true,
       classes: {
         active: {
@@ -50,7 +52,21 @@
       this.$triggers = this.$tabs.find ( this.options.selectors.triggers );
       this.$containers = this.$tabs.find ( this.options.selectors.containers );
 
-      this.options.direction = this.options.direction || ( this.$tabs.hasClass ( 'top' ) ? 'top' : ( this.$tabs.hasClass ( 'right' ) ? 'right' : ( this.$tabs.hasClass ( 'bottom' ) ? 'bottom' : ( this.$tabs.hasClass ( 'left' ) ? 'left' : 'top' ) ) ) );
+      /* DIRECTION */
+
+      let directions = ['top', 'right', 'bottom', 'left'];
+
+      for ( let direction of directions ) {
+
+        if ( this.$tabs.hasClass ( direction ) ) {
+
+          this.options.direction = direction;
+
+          break;
+
+        }
+
+      }
 
       this.index = -1;
 
@@ -58,11 +74,11 @@
 
     _init () {
 
-      var $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
+      let $activeTrigger = this.$triggers.filter ( '.' + this.options.classes.active.trigger ).first ();
 
       $activeTrigger = ( $activeTrigger.length > 0 ) ? $activeTrigger : this.$triggers.first ();
 
-      var newIndex = this.$triggers.index ( $activeTrigger );
+      let newIndex = this.$triggers.index ( $activeTrigger );
 
       this.set ( newIndex );
 
@@ -80,7 +96,7 @@
 
     __tap ( event ) {
 
-      var newIndex = this.$triggers.index ( $(event.currentTarget) );
+      let newIndex = this.$triggers.index ( $(event.currentTarget) );
 
       this.set ( newIndex );
 
@@ -100,7 +116,7 @@
 
         /* PREVIOUS */
 
-        var $prevTrigger = this.$triggers.eq ( this.index ),
+        let $prevTrigger = this.$triggers.eq ( this.index ),
             $prevContainer = this.$containers.eq ( this.index );
 
         $prevTrigger.removeClass ( this.options.classes.active.trigger );
@@ -108,7 +124,7 @@
 
         if ( this.options.highlight ) {
 
-          $prevTrigger.removeClass ( 'highlighted highlight-bottom highlight-right' );
+          $prevTrigger.removeClass ( 'highlighted highlight-top highlight-bottom highlight-left highlight-right' );
 
         }
 
@@ -116,7 +132,7 @@
 
         this.index = index;
 
-        var $trigger = this.$triggers.eq ( this.index ),
+        let $trigger = this.$triggers.eq ( this.index ),
             $container = this.$containers.eq ( this.index );
 
         $trigger.addClass ( this.options.classes.active.trigger );
@@ -124,38 +140,20 @@
 
         if ( this.options.highlight ) {
 
-          let highlightDirection;
+          let opposites = {
+            'top'   : 'bottom',
+            'bottom': 'top',
+            'left'  : 'right',
+            'right' : 'left'
+          };
 
-          switch ( this.options.direction ) {
-
-            case 'bottom':
-              highlightDirection = 'top';
-              break;
-
-            case 'left':
-              highlightDirection = 'right';
-              break;
-
-            case 'right':
-              highlightDirection = 'left';
-              break;
-
-            case 'top':
-            default:
-              highlightDirection = 'bottom';
-              break;
-
-          }
-
-          $trigger.addClass ( 'highlighted' + ( ' highlight-' + highlightDirection ) );
+          $trigger.addClass ( 'highlighted' + ( ' highlight-' + opposites[this.options.direction] ) );
 
         }
 
         /* CALLBACKS */
 
-        this._trigger ( 'set', {
-          index: this.index
-        });
+        this._trigger ( 'set' );
 
       }
 
