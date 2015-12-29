@@ -22,6 +22,11 @@
       max: 100,
       value: 0,
       step: 1,
+      datas: {
+        min: 'min',
+        max: 'max',
+        step: 'step'
+      },
       selectors: {
         decreaser: '.stepper-decreaser',
         input: 'input',
@@ -41,29 +46,27 @@
 
     /* SPECIAL */
 
-    static widgetize ( $stepper ) { //TODO: Just use the generic data-options maybe
-
-      $stepper.stepper ({
-        min: Number($stepper.data ( 'min' ) || 0),
-        max: Number($stepper.data ( 'max' ) || 100),
-        value: Number($stepper.find ( '.stepper-input' ).val () || 0),
-        step: Number($stepper.data ( 'step' ) || 1)
-      });
-
-    }
-
     _variables () {
 
       this.$stepper = this.$element;
-      this.$decreaser = this.$stepper.find ( this.options.selectors.decreaser );
       this.$input = this.$stepper.find ( this.options.selectors.input );
+      this.$decreaser = this.$stepper.find ( this.options.selectors.decreaser );
       this.$increaser = this.$stepper.find ( this.options.selectors.increaser );
 
-      this.options.value = this._sanitizeValue ( this.options.value );
+      this._prevValue = false;
 
     }
 
     _init () {
+
+      /* CONFIG */
+
+      this.options.min = Number ( this.$stepper.data ( this.options.datas.min ) || this.options.min );
+      this.options.max = Number ( this.$stepper.data ( this.options.datas.max ) || this.options.max );
+      this.options.step = Number ( this.$stepper.data ( this.options.datas.step ) || this.options.step );
+      this.options.value = this._sanitizeValue ( Number ( this.$input.val () ) || this.options.value );
+
+      /* UPDATE */
 
       this._updateButtons ();
 
@@ -93,13 +96,9 @@
 
     _sanitizeValue ( value ) {
 
-      var nr = Number ( value );
+      value = Number ( value );
 
-      value = ( _.isNaN ( nr ) ? 0 : nr );
-
-      var remaining = ( value % this.options.step );
-
-      value = value - remaining + ( remaining >= this.options.step / 2 ? this.options.step : 0 );
+      value = _.isNaN ( value ) ? 0 : _.roundCloser ( value, this.options.step );
 
       return _.clamp ( this.options.min, value, this.options.max );
 
@@ -113,16 +112,16 @@
 
     }
 
-    _updateButtons ( previous ) {
+    _updateButtons () {
 
-      var isMin = ( this.options.value === this.options.min ),
+      let isMin = ( this.options.value === this.options.min ),
           isMax = ( this.options.value === this.options.max );
 
-      if ( previous === this.options.min || isMin ) {
+      if ( isMin || this._prevValue === this.options.min ) {
 
         this.$decreaser.toggleClass ( 'disabled', isMin );
 
-      } else if ( previous === this.options.max || isMax ) {
+      } else if ( isMax || this._prevValue === this.options.max ) {
 
         this.$increaser.toggleClass ( 'disabled', isMax );
 
@@ -130,10 +129,10 @@
 
     }
 
-    _update ( previous ) {
+    _update () {
 
       this._updateInput ();
-      this._updateButtons ( previous );
+      this._updateButtons ();
 
     }
 
@@ -151,12 +150,14 @@
 
       switch ( event.keyCode ) {
 
+        case Svelto.keyCode.LEFT:
+        case Svelto.keyCode.DOWN:
+        this.decrease ();
+        break;
+
+        case Svelto.keyCode.RIGHT:
         case Svelto.keyCode.UP:
           this.increase ();
-          break;
-
-        case Svelto.keyCode.DOWN:
-          this.decrease ();
           break;
 
         default:
@@ -187,18 +188,15 @@
 
         if ( value !== this.options.value ) {
 
-          var data = {
-            previous: this.options.value,
-            value: value
-          };
+          this._prevValue = this.options.value;
 
           this.options.value = value;
 
-          this._update ( data.previous );
+          this._update ();
 
-          this._trigger ( 'change', data );
+          this._trigger ( 'change' );
 
-          this._trigger ( ( data.previous < data.value ) ? 'increase' : 'decrease', data );
+          this._trigger ( ( this.options.value > this._prevValue ) ? 'increase' : 'decrease' );
 
           return;
 
