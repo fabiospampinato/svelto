@@ -29,6 +29,12 @@
       step: 1,
       decimals: 0,
       live: false,
+      datas: {
+        min: 'min',
+        max: 'max',
+        step: 'step',
+        decimals: 'decimals'
+      },
       selectors: {
         input: 'input',
         min: '.slider-min',
@@ -51,18 +57,6 @@
 
     /* SPECIAL */
 
-    static widgetize ( $slider ) { //TODO: Just use the generic data-options maybe
-
-      $slider.slider ({
-        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-        value: Number($slider.find ( 'input' ).val () || 0),
-        step: Number($slider.data ( 'step' ) || 1),
-        decimals: Number($slider.data ( 'decimals' ) || 0)
-      });
-
-    }
-
     _variables () {
 
       this.$slider = this.$element;
@@ -75,14 +69,25 @@
       this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
       this.$label = this.$handlerWrp.find ( this.options.selectors.label );
 
-      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
-
-      this._updateVariables ();
-
     }
 
     _init () {
 
+      /* CONFIG */
+
+      this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
+      this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
+      this.options.value = Number ( this.$input.val () ) || this.options.value;
+      this.options.step = Number ( this.$slider.data ( this.options.datas.step ) ) || this.options.step;
+      this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) ) || this.options.decimals;
+
+      /* STEPS NR */
+
+      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
+
+      /* UPDATE */
+
+      this._updateVariables ();
       this._updatePositions ();
 
     }
@@ -135,6 +140,8 @@
 
     }
 
+    /* UPDATE */
+
     _updateVariables () {
 
       this.unhighlightWidth = this.$unhighlight.width ();
@@ -145,7 +152,7 @@
 
     _updatePositions () {
 
-      var percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
+      let percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
           translateX = this.unhighlightWidth / 100 * percentage;
 
       this.$handlerWrp.translateX ( translateX );
@@ -156,13 +163,21 @@
 
     _updateLabel ( value ) {
 
-      this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
+      this.$label.html ( value || this.options.value );
 
     }
 
     _updateInput () {
 
       this.$input.val ( this.options.value ).trigger ( 'change' );
+
+    }
+
+    _update () {
+
+      this._updatePositions ();
+      this._updateLabel ();
+      this._updateInput ();
 
     }
 
@@ -249,22 +264,21 @@
 
     set ( value ) {
 
-      value = _.clamp ( this.options.min, this._roundValue ( value ), this.options.max );
+      value = this._roundValue ( value );
 
-      if ( value !== this.options.value ) {
+      if ( !_.isNaN ( value ) ) {
 
-        var prevValue = this.options.value;
+        value = _.clamp ( this.options.min, value, this.options.max );
 
-        this.options.value = value;
+        if ( value !== this.options.value ) {
 
-        this._updatePositions ();
-        this._updateLabel ();
-        this._updateInput ();
+          this.options.value = value;
 
-        this._trigger ( 'change', {
-          previous: prevValue,
-          value: this.options.value
-        });
+          this._update ();
+
+          this._trigger ( 'change' );
+
+        }
 
       }
 

@@ -5,6 +5,7 @@
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
+ * @requires ../overlay/overlay.js
  * @requires ../factory/factory.js
  * ========================================================================= */
 
@@ -39,7 +40,8 @@
         unlabeled: 'secondary'
       },
       callbacks: {
-        //TODO: Add callbacks, mimic those from $.svelto.overlay
+        open () {},
+        close () {}
       }
     }
   };
@@ -53,9 +55,9 @@
     _variables () {
 
       this.$overlayed = this.$element;
-      this.$overlay = $(this._tmpl ( 'overlay', this.options )).prependTo ( this.$overlayed );
+      this.$overlay = $(this._tmpl ( 'overlay', this.options ));
 
-      this.overlay = this.$overlay.overlay ( 'instance' );
+      this.instance = this.$overlay.overlay ( 'instance' );
 
     }
 
@@ -63,25 +65,55 @@
 
     isOpen () {
 
-      return this.overlay.isOpen ();
+      return this.instance.isOpen ();
 
     }
 
     toggle ( force ) {
 
-      this.overlay.toggle ( force );
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this.isOpen ();
+
+      }
+
+      if ( force !== this.isOpen () ) {
+
+        this[force ? 'open' : 'close']();
+
+      }
 
     }
 
     open () {
 
-      this.overlay.open ();
+      if ( !this.isOpen () ) {
+
+        this.$overlay.prependTo ( this.$overlayed );
+
+        this.instance.open ();
+
+        this._trigger ( 'open' );
+
+      }
 
     }
 
     close () {
 
-      this.overlay.close ();
+      if ( this.isOpen () ) {
+
+        this.instance.close ();
+
+        this._delay ( function () {
+
+          this.$overlay.detach ();
+
+          this._trigger ( 'close' );
+
+        }, Svelto.Overlay.config.options.animations.close );
+
+      }
 
     }
 

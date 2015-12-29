@@ -5673,6 +5673,163 @@
 
 
 /* =========================================================================
+ * Svelto - Overlay
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'overlay',
+    selector: '.overlay',
+    options: {
+      classes: {
+        show: 'show',
+        open: 'open'
+      },
+      animations: {
+        open: Svelto.animation.fast,
+        close: Svelto.animation.fast
+      },
+      callbacks: {
+        open () {},
+        close () {}
+      }
+    }
+  };
+
+  /* OVERLAY */
+
+  class Overlay extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$overlay = this.$element;
+
+      this._isOpen = this.$overlay.hasClass ( this.options.classes.open );
+
+    }
+
+    _events () {
+
+      /* KEYDOWN */
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+    }
+
+    /* KEYDOWN */
+
+    __keydown ( event ) {
+
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
+        this.close ();
+
+      }
+
+    }
+
+    /* API */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        this._frame ( function () {
+
+          this.$overlay.addClass ( this.options.classes.show );
+
+          this._frame ( function () {
+
+            this.$overlay.addClass ( this.options.classes.open );
+
+            this._trigger ( 'open' );
+
+          });
+
+        });
+
+      }
+
+    }
+
+    close () {
+
+      if ( this._isOpen ) {
+
+        this._isOpen = false;
+
+        this._frame ( function () {
+
+          this.$overlay.removeClass ( this.options.classes.open );
+
+          this._delay ( function () {
+
+            this.$overlay.removeClass ( this.options.classes.show );
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Overlay = Overlay;
+  Svelto.Overlay.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Overlay );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
  * Svelto - Spinner Overlay
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -6161,6 +6318,564 @@
 
 
 /* =========================================================================
+ * Svelto - Spinner Overlay
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../overlay/overlay.js
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'spinnerOverlay',
+    templates: {
+      overlay: '<div class="overlay spinner-overlay {%=(o.dimmer ? "dimmer" : "")%} {%=(o.blurrer ? "blurrer" : "")%}">' +
+                 '{% if ( o.labeled ) { %}' +
+                   '<div class="spinner-label {%=(o.multicolor ? "" : o.colors.labeled)%}">' +
+                 '{% } %}' +
+                   '<svg class="spinner {%=(o.multicolor ? "multicolor" : ( o.labeled ? "" : o.colors.unlabeled ))%}">' +
+                     '<circle cx="1.625em" cy="1.625em" r="1.25em">' +
+                   '</svg>' +
+                 '{% if ( o.labeled ) { %}' +
+                   '</div>' +
+                 '{% } %}' +
+               '</div>'
+    },
+    options: {
+      labeled: true,
+      dimmer: false,
+      blurrer: false,
+      multicolor: false,
+      colors: {
+        labeled: 'white',
+        unlabeled: 'secondary'
+      },
+      callbacks: {
+        open () {},
+        close () {}
+      }
+    }
+  };
+
+  /* SPINNER OVERLAY */
+
+  class SpinnerOverlay extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$overlayed = this.$element;
+      this.$overlay = $(this._tmpl ( 'overlay', this.options ));
+
+      this.instance = this.$overlay.overlay ( 'instance' );
+
+    }
+
+    /* API */
+
+    isOpen () {
+
+      return this.instance.isOpen ();
+
+    }
+
+    toggle ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this.isOpen ();
+
+      }
+
+      if ( force !== this.isOpen () ) {
+
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this.isOpen () ) {
+
+        this.$overlay.prependTo ( this.$overlayed );
+
+        this.instance.open ();
+
+        this._trigger ( 'open' );
+
+      }
+
+    }
+
+    close () {
+
+      if ( this.isOpen () ) {
+
+        this.instance.close ();
+
+        this._delay ( function () {
+
+          this.$overlay.detach ();
+
+          this._trigger ( 'close' );
+
+        }, Svelto.Overlay.config.options.animations.close );
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.SpinnerOverlay = SpinnerOverlay;
+  Svelto.SpinnerOverlay.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.SpinnerOverlay );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Noty
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+//TODO: Add better support for swipe to dismiss
+//TODO: Clicking it from a iPod touch makes the click go through it (just on Chrome, not Safari)
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* VARIABLES */
+
+  let notiesTimers = [];
+
+  /* CONFIG */
+
+  let config = {
+    name: 'noty',
+    selector: '.noty',
+    templates: {
+      base: '<div class="noty {%=o.type%} {%=(o.type !== "action" ? "actionable" : "")%} {%=o.color%} {%=o.css%}">' +
+              '<div class="infobar">' +
+                '{% if ( o.img ) { %}' +
+                  '<img src="{%=o.img%}" class="noty-img infobar-left">' +
+                '{% } %}' +
+                '{% if ( o.title || o.body ) { %}' +
+                  '<div class="infobar-center">' +
+                    '{% if ( o.title ) { %}' +
+                      '<p class="infobar-title">' +
+                         '{%#o.title%}' +
+                       '</p>' +
+                    '{% } %}' +
+                    '{% if ( o.body ) { %}' +
+                      '{%#o.body%}' +
+                    '{% } %}' +
+                  '</div>' +
+                '{% } %}' +
+                '{% if ( o.buttons.length === 1 ) { %}' +
+                  '<div class="infobar-right">' +
+                    '{% include ( "noty.button", o.buttons[0] ); %}' +
+                  '</div>' +
+                '{% } %}' +
+              '</div>' +
+              '{% if ( o.buttons.length > 1 ) { %}' +
+                '<div class="noty-buttons multiple centered">' +
+                  '{% for ( var i = 0; i < o.buttons.length; i++ ) { %}' +
+                    '{% include ( "noty.button", o.buttons[i] ); %}' +
+                  '{% } %}' +
+                '</div>' +
+              '{% } %}' +
+            '</div>',
+      button: '<div class="button {%=(o.color || "white")%} {%=(o.size || "small")%} {%=(o.css || "")%}">' +
+                '{%#(o.text || "")%}' +
+              '</div>'
+    },
+    options: {
+      anchor: {
+        y: 'bottom',
+        x: 'left'
+      },
+      title: false,
+      body: false,
+      img: false,
+      buttons: [],
+      /*
+             : [{
+                color: 'white',
+                size: 'small',
+                css: '',
+                text: '',
+                onClick () {}
+             }],
+      */
+      type: 'alert',
+      color: 'black',
+      css: '',
+      persistent: false,
+      ttl: 3500,
+      autoplay: true,
+      timerMinimumRemaining: 1000,
+      classes: {
+        open: 'open'
+      },
+      selectors: {
+        button: '.noty-buttons .button, .infobar-right .button'
+      },
+      animations: {
+        remove: Svelto.animation.normal
+      },
+      callbacks: {
+        open () {},
+        close () {}
+      }
+    }
+  };
+
+  /* HELPER */
+
+  $.noty = function ( options ) {
+
+    /* OPTIONS */
+
+    options = _.isString ( options ) ? { body: options } : ( options || {} );
+
+    if ( options.buttons ) {
+
+      options.type = 'action';
+
+    }
+
+    /* NOTY */
+
+    return new Svelto.Noty ( options );
+
+  };
+
+  /* NOTY */
+
+  class Noty extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$noty = this.$element;
+      this.$buttons = this.$noty.find ( this.options.selectors.button );
+
+      this.timer = false;
+      this._isOpen = false;
+      this.neverOpened = true;
+
+    }
+
+    _init () {
+
+      if ( this.options.autoplay ) {
+
+        this.open ();
+
+      }
+
+    }
+
+    /* PRIVATE */
+
+    ___tap () {
+
+      if ( this.options.type !== 'action' ) {
+
+        this._on ( Pointer.tap, this.close );
+
+      }
+
+    }
+
+    ___buttonTap () {
+
+      _.each ( this.options.buttons, function ( button, index ) {
+
+        this._on ( this.$buttons.eq ( index ), Pointer.tap, function ( event, data ) {
+
+          if ( button.onClick ) {
+
+            if ( button.onClick.apply ( this.$buttons[index], [event, data] ) === false ) return;
+
+          }
+
+          this.close ();
+
+        });
+
+      }, this );
+
+    }
+
+    ___timer () {
+
+      if ( this.options.type !== 'action' && _.isNumber ( this.options.ttl ) && !_.isNaN ( this.options.ttl ) && this.options.ttl !== Infinity ) {
+
+        this.timer = new Timer ( this.close.bind ( this ), this.options.ttl, true );
+
+        notiesTimers.push ( this.timer );
+
+      }
+
+    }
+
+    ___hover () {
+
+      var instance = this;
+
+      this.$noty.hover ( () => {
+
+        notiesTimers.forEach ( timer => timer.pause () );
+
+      }, () => {
+
+        notiesTimers.forEach ( timer => {
+
+          timer.remaining ( Math.max ( instance.options.timerMinimumRemaining, timer.remaining () || 0 ) );
+
+          timer.play ();
+
+        });
+
+      });
+
+    }
+
+    ___flick () {
+
+      if ( this.options.type !== 'action' ) {
+
+        this.$noty.flickable ({
+          callbacks: {
+            flick: function ( data ) {
+              if ( data.orientation === 'horizontal' ) {
+                this.close ();
+              }
+            }.bind ( this )
+          }
+        });
+
+      }
+
+    }
+
+    ___persistent () {
+
+      if ( !this.options.persistent ) {
+
+        this._on ( $window, 'route', function ( event, data ) { //FIXME: Going back it doesn't work
+
+          // if ( data.url !== this._openUrl ) {
+
+            // this.close ();
+
+          // }
+
+        });
+
+      }
+
+    }
+
+    __keydown ( event ) {
+
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
+        this.close ();
+
+      }
+
+    }
+
+
+    /* PUBLIC */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._frame ( () => {
+
+            $('.noty-queues.' + this.options.anchor.y + ' .noty-queue.' + this.options.anchor.x).append ( this.$noty );
+
+            this._frame ( () => {
+
+              this.$noty.addClass ( this.options.classes.open );
+
+            });
+
+        });
+
+        this._defer ( function () {
+
+          this._openUrl = window.location.href.split ( '#' )[0];
+
+        });
+
+        if ( this.neverOpened ) {
+
+          this.___tap ();
+          this.___flick ();
+          this.___buttonTap ();
+          this.___hover ();
+          this.___persistent ();
+
+          this.neverOpened = false;
+
+        }
+
+        this.___timer ();
+
+        this._on ( $document, 'keydown', this.__keydown );
+
+        this._isOpen = true;
+
+        this._trigger ( 'open' );
+
+      }
+
+    }
+
+    close () {
+
+      if ( this._isOpen ) {
+
+        this.$noty.removeClass ( this.options.classes.open );
+
+        this._delay ( function () {
+
+          this.$noty.detach ();
+
+        }, this.options.animations.remove );
+
+        if ( this.timer ) {
+
+          _.pull ( notiesTimers, this.timer );
+
+          this.timer.stop ();
+
+        }
+
+        this._off ( $document, 'keydown', this.__keydown );
+
+        this._isOpen = false;
+
+        this._trigger ( 'close' );
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Noty = Noty;
+  Svelto.Noty.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Noty );
+
+  /* READY */
+
+  $(function () {
+
+    $body.append (
+      '<div class="noty-queues top">' +
+        '<div class="noty-queue expanded"></div>' +
+        '<div class="noty-queues-row">' +
+          '<div class="noty-queue left"></div>' +
+          '<div class="noty-queue center"></div>' +
+          '<div class="noty-queue right"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div class="noty-queues bottom">' +
+        '<div class="noty-queues-row">' +
+          '<div class="noty-queue left"></div>' +
+          '<div class="noty-queue center"></div>' +
+          '<div class="noty-queue right"></div>' +
+        '</div>' +
+        '<div class="noty-queue expanded"></div>' +
+      '</div>'
+    );
+
+  });
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - RegExes
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* REGEXES */
+
+  window.RegExes = {
+
+    /* TYPE */
+
+    alpha: /^[a-zA-Z]+$/,
+    alphanumeric: /^[a-zA-Z0-9]+$/,
+    hexadecimal: /^[a-fA-F0-9]+$/,
+    integer: /^(?:-?(?:0|[1-9][0-9]*))$/,
+    float: /^-?(?:(?:\d+)(?:\.\d*)?|(?:\.\d+)+)$/,
+
+    /* THINGS */
+
+    email: /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$/i,
+    cc: /^(?:(4[0-9]{12}(?:[0-9]{3})?)|(5[1-5][0-9]{14})|(6(?:011|5[0-9]{2})[0-9]{12})|(3[47][0-9]{13})|(3(?:0[0-5]|[68][0-9])[0-9]{11})|((?:2131|1800|35[0-9]{3})[0-9]{11}))$/,
+    ssn: /^(?!000|666)[0-8][0-9]{2}-(?!00)[0-9]{2}-(?!0000)[0-9]{4}$/,
+    ipv4: /^(?:(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])\.){3}(?:\d|[1-9]\d|1\d{2}|2[0-4]\d|25[0-5])$/,
+    url: /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/i
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
  * Svelto - RegExes
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -6299,6 +7014,772 @@
     }
 
   };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - formValidate
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * @requires ../validator/validator.js
+ * ========================================================================= */
+
+//TODO: Add meta validators that accepts other validators as arguments, for example not[email], oppure not[matches[1,2,3]] oppure or[email,url] etc... maybe write it this way: or[matches(1-2-3)/matches(a-b-c)], or just use a smarter regex
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'formValidate',
+    selector: 'form.validate',
+    templates: {
+      message: '<p class="form-validate-message {%=o.validity%}">' +
+                 '{%=o.message%}' +
+               '</p>',
+      messages: '<ul class="form-validate-message {%=o.validity%}">' +
+                  '{% for ( var i = 0, l = o.messages.length; i < l; i++ ) { %}' +
+                    '<li>{%=o.messages[i]%}</li>' +
+                  '{% } %}' +
+                '</ul>'
+    },
+    options: {
+      validators: {
+        required ( value ) {
+          return !Validator.empty ( value );
+        },
+        values ( value, ...values ) {
+          return Validator.included ( value, values );
+        },
+        field ( value, fieldName ) {
+          let fieldValue = _.find ( this.elements, { name: fieldName } ).value;
+          return ( value === fieldValue );
+        },
+        checked () {
+          return this.element.$element.prop ( 'checked' );
+        }
+      },
+      messages: {
+        form: {
+          invalid: 'The form contains some errors',
+        },
+        validators: {
+          invalid: {
+            general: 'This value is not valid',
+            alpha: 'Only alphabetical characters are allowed',
+            alphanumeric: 'Only alphanumeric characters are allowed',
+            hexadecimal: 'Only hexadecimal characters are allowed',
+            number: 'Only numbers are allowed',
+            integer: 'Only integers numbers are allowed',
+            float: 'Only floating point numbers are allowed',
+            min: 'The number must be at least $1',
+            max: 'The number must be at maximum $1',
+            range: 'The number must be between $1 and $2',
+            minLength: 'The lenght must be at least $1',
+            maxLength: 'The lenght must be at maximum $1',
+            rangeLength: 'The length must be between $1 and $2',
+            exactLength: 'The length must be exactly $1',
+            email: 'Enter a valid email address',
+            cc: 'Enter a valid credit card number',
+            ssn: 'Enter a valid Social Security Number',
+            ipv4: 'Enter a valid IPv4 address',
+            url: 'Enter a valid URL',
+            required: 'This field is required',
+            values: 'This value is not allowed',
+            field: 'The two fields don\'t match',
+            checked: 'This must be checked'
+          }
+        }
+      },
+      characters: {
+        separators: {
+          validations: '|',
+          arguments: ','
+        }
+      },
+      regexes: {
+        validation: /^([^\[]+)(?:\[(.*)\])?$/
+      },
+      datas: {
+        id: '_fveid',
+        validations: 'validations',
+        messages: {
+          invalid: 'invalid',
+          valid: 'valid'
+        }
+      },
+      classes: {
+        disabled: 'disabled',
+        invalid: 'invalid',
+        valid: 'valid'
+      },
+      selectors: {
+        element: 'input, textarea, select',
+        textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea',
+        wrapper: '.checkbox, .radio, .select-toggler, .slider, .switch, .datepicker, .colorpicker'
+      }
+    }
+  };
+
+  /* FORM VALIDATE */
+
+  class FormValidate extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$form = this.$element;
+      this.$elements = this.$form.find ( this.options.selectors.element );
+      this.$textfields = this.$elements.filter ( this.options.selectors.textfield );
+
+      this.___elements ();
+
+    }
+
+    _events () {
+
+      /* CHANGE */
+
+      this._on ( this.$elements, 'change', this.__change );
+
+      /* FOCUS */
+
+      this._on ( this.$textfields, 'focus', this.__focus );
+
+      /* BLUR */
+
+      this._on ( this.$textfields, 'blur', this.__blur );
+
+      /* SUBMIT */
+
+      this._on ( 'submit', this.__submit );
+
+    }
+
+    /* ELEMENTS */
+
+    ___elements () {
+
+      this.elements = {};
+
+      for ( let element of this.$elements ) {
+
+        let $element = $(element),
+            $wrappers = $element.parents ( this.options.selectors.wrapper ),
+            $wrapper = ( $wrappers.length > 0 ) ? $wrappers.first () : $element,
+            id = $.guid++,
+            validationsStr = $element.data ( this.options.datas.validations ),
+            validations = false;
+
+        if ( validationsStr ) {
+
+          validations = {};
+
+          let validationsArr = validationsStr.split ( this.options.characters.separators.validations );
+
+          for ( let validationStr of validationsArr ) {
+
+            let matches = validationStr.match ( this.options.regexes.validation );
+
+            if ( !matches ) continue;
+
+            let validationName = matches[1],
+                validationArgs = matches[2] ? matches[2].split ( this.options.characters.separators.arguments ) : [],
+                validator = this.options.validators[validationName] || Validator[validationName];
+
+            if ( !validator ) continue;
+
+            validations[validationName] = {
+              args: validationArgs,
+              validator: validator
+            };
+
+          }
+
+          if ( _.isEmpty ( validations ) ) {
+
+            validations = false;
+
+          }
+
+        }
+
+        element[this.options.datas.id] = id;
+
+        this.elements[id] = {
+          id: id,
+          $element: $element,
+          $wrapper: $wrapper,
+          $message: false,
+          name: element.name,
+          value: $element.val (),
+          validations: validations,
+          isDirty: false,
+          isValid: undefined,
+          messages: {
+            invalid: $wrapper.data ( this.options.datas.messages.invalid ),
+            valid: $wrapper.data ( this.options.datas.messages.valid )
+          }
+        };
+
+      }
+
+    }
+
+    /* CHANGE */
+
+    __change ( event ) {
+
+      /* FORM */
+
+      this._isValid = undefined;
+
+      /* ELEMENT */
+
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+
+      elementObj.isDirty = true;
+      elementObj.isValid = undefined;
+
+      this._validateWorker ( elementObj );
+
+      /* OTHERS */
+
+      for ( let id in this.elements ) {
+
+        if ( this.elements.hasOwnProperty ( id ) ) {
+
+          if ( id === elementObj.id ) continue;
+
+          let otherElementObj = this.elements[id],
+              isDepending = otherElementObj.validations && 'field' in otherElementObj.validations && otherElementObj.validations.field.args.indexOf ( elementObj.name ) !== -1,
+              hasSameName = !_.isEmpty ( elementObj.name ) && otherElementObj.name === elementObj.name;
+
+          if ( isDepending || hasSameName ) {
+
+            otherElementObj.isValid = undefined;
+
+            this._validateWorker ( otherElementObj );
+
+          }
+
+        }
+
+      }
+
+    }
+
+    /* FOCUS */
+
+    __focus ( event ) {
+
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+
+      elementObj.isValid = undefined;
+
+      this.__indeterminate ( elementObj );
+
+    }
+
+    /* BLUR */
+
+    __blur ( event ) {
+
+      let elementObj = this.elements[event.currentTarget[this.options.datas.id]];
+
+      this._validateWorker ( elementObj );
+
+    }
+
+    /* SUBMIT */
+
+    __submit ( event ) {
+
+      if ( !this.isValid () ) {
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
+        $.noty ( this.messages.invalid );
+
+      }
+
+    }
+
+    /* VALIDATION */
+
+    _validateWorker ( elementObj ) {
+
+      if ( _.isUndefined ( elementObj.isValid ) ) {
+
+        let result = this._validate ( elementObj ),
+            isValid = ( result === true );
+
+        elementObj.isValid = isValid;
+
+        if ( isValid ) {
+
+          this.__valid ( elementObj );
+
+        } else {
+
+          this.__invalid ( elementObj, result );
+
+        }
+
+      }
+
+    }
+
+    _validate ( elementObj ) {
+
+      let errors = [],
+          validations = elementObj.validations;
+
+      if ( elementObj.isDirty ) {
+
+        elementObj.value = elementObj.$element.val ();
+
+        elementObj.isDirty = false;
+
+      }
+
+      if ( validations ) {
+
+        for ( let name in validations ) {
+
+          if ( validations.hasOwnProperty ( name ) ) {
+
+            let validation = validations[name],
+                isValid = validation.validator.apply ( { elements: this.elements, element: elementObj }, [elementObj.value].concat ( validation.args ) );
+
+            if ( !isValid ) {
+
+              let error = this._parseValidationInvalidMsg ( this.options.messages.validators.invalid[name] || this.options.messages.validators.invalid.general, elementObj.value, ...validation.args );
+
+              errors.push ( error );
+
+            }
+
+          }
+
+        }
+
+      }
+
+      return _.isEmpty ( errors ) ? true : errors;
+
+    }
+
+    /* STATE */
+
+    __indeterminate ( elementObj ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.invalid + ' ' + this.options.classes.valid );
+
+      this._updateMessage ( elementObj, false );
+
+    }
+
+    __valid ( elementObj ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.invalid ).addClass ( this.options.classes.valid );
+
+      this._updateMessage ( elementObj, elementObj.messages.valid );
+
+    }
+
+    __invalid ( elementObj, errors ) {
+
+      elementObj.$wrapper.removeClass ( this.options.classes.valid ).addClass ( this.options.classes.invalid );
+
+      this._updateMessage ( elementObj, elementObj.messages.invalid || errors );
+
+    }
+
+    /* ERRORS */
+
+    _parseValidationInvalidMsg ( msg, ...args ) {
+
+      for ( let i = 0, l = args.length; i < l; i++ ) {
+
+        msg = msg.replace ( '$' + i, args[i] );
+
+      }
+
+      return msg;
+
+    }
+
+    _updateMessage ( elementObj, message ) {
+
+      if ( elementObj.$message ) {
+
+        elementObj.$message.remove ();
+
+      }
+
+      if ( message ) {
+
+        let validity = elementObj.isValid ? this.options.classes.valid : this.options.classes.invalid,
+            msgHtml = _.isString ( message )
+                        ? this._tmpl ( 'message', { message: message, validity: validity } )
+                        : message.length === 1
+                          ? this._tmpl ( 'message', { message: message[0], validity: validity } )
+                          : this._tmpl ( 'messages', { messages: message, validity: validity } );
+
+        elementObj.$message = $(msgHtml);
+
+        elementObj.$wrapper.after ( elementObj.$message );
+
+      } else {
+
+        elementObj.$message = false;
+
+      }
+
+    }
+
+    /* API */
+
+    isValid () {
+
+      if ( _.isUndefined ( this._isValid ) ) {
+
+        for ( let id in this.elements ) {
+
+          if ( this.elements.hasOwnProperty ( id ) ) {
+
+            let elementObj = this.elements[id];
+
+            if ( _.isUndefined ( elementObj.isValid ) ) {
+
+              this._validateWorker ( elementObj );
+
+            }
+
+            if ( !elementObj.isValid ) {
+
+              this._isValid = false;
+
+            }
+
+          }
+
+        }
+
+        if ( _.isUndefined ( this._isValid ) ) {
+
+          this._isValid = true;
+
+        }
+
+      }
+
+      return this._isValid;
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.FormValidate = FormValidate;
+  Svelto.FormValidate.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.FormValidate );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Validator
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * @requires ../regexes/regexes.js
+ * ========================================================================= */
+
+//INFO: `value` is supposed to be a string
+//INFO: Strings will be trimmed inside some validators
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* VALIDATOR */
+
+  window.Validator = {
+
+    /* TYPE */
+
+    alpha ( value ) {
+      return !!value.match ( RegExes.alpha );
+    },
+    alphanumeric ( value ) {
+      return !!value.match ( RegExes.alphanumeric );
+    },
+    hexadecimal ( value ) {
+      return !!value.match ( RegExes.hexadecimal );
+    },
+    number ( value ) {
+      return !!value.match ( RegExes.integer ) || !!value.match ( RegExes.float );
+    },
+    integer ( value ) {
+      return !!value.match ( RegExes.integer );
+    },
+    float ( value ) {
+      return !!value.match ( RegExes.float );
+    },
+
+    /* NUMBER */
+
+    min ( value, min ) {
+      return ( Number ( value ) >= Number ( min ) );
+    },
+    max ( value, max ) {
+      return ( Number ( value ) <= Number ( max ) );
+    },
+    range ( value, min, max ) {
+      value = Number ( value );
+      return ( value >= Number ( min ) && value <= Number ( max ) );
+    },
+
+    /* LENGTH */
+
+    minLength ( value, minLength ) {
+      return ( value.trim ().length >= Number ( minLength ) );
+    },
+    maxLength ( value, maxLength ) {
+      return ( value.trim ().length <= Number ( maxLength ) );
+    },
+    rangeLength ( value, minLength, maxLength ) {
+      value = value.trim ();
+      return ( value.length >= Number ( minLength ) && value.length <= Number ( maxLength ) );
+    },
+    exactLength ( value, length ) {
+      return ( value.trim ().length === Number ( length ) );
+    },
+
+    /* THINGS */
+
+    email ( value ) {
+      return !!value.match ( RegExes.email );
+    },
+    cc ( value ) {
+      return !!value.match ( RegExes.cc );
+    },
+    ssn ( value ) {
+      return !!value.match ( RegExes.ssn );
+    },
+    ipv4 ( value ) {
+      return !!value.match ( RegExes.ipv4 );
+    },
+    url ( value ) {
+      return !!value.match ( RegExes.url );
+    },
+
+    /* OTHERS */
+
+    empty ( value ) {
+      return _.isEmpty ( value.trim () );
+    },
+    included ( value, values ) {
+      value = value.toLowerCase ();
+      values = values.map ( value => value.toLowerCase () );
+      return _.includes ( values, value );
+    }
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Form Ajax
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../spinner_overlay/spinner_overlay.js
+ * @requires ../noty/noty.js
+ * @requires ../form_validate/form_validate.js
+ * ========================================================================= */
+
+//TODO: Add a way to abort it, maybe hovering the spinner a clickable X will be displayed and abort the request if tapped (or something more intuitive and easier to implement...)
+//TODO: Test it with `input[type="file"]`
+
+//FIXME: `formValidate` is listed as a requirement just because it need to be executed before `formAjax`
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'formAjax',
+    selector: 'form.ajax',
+    options: {
+      spinnerOverlay: true,
+      timeout: 31000, //INFO: 1 second more than the default value of PHP's `max_execution_time` setting
+      messages: {
+        error: 'An error occurred, please try again later',
+        done: 'Done! A page refresh may be needed',
+        refresh: 'Done! Refreshing the page...',
+        redirect: 'Done! Redirecting...'
+      },
+      callbacks: {
+        beforesend () {},
+        error () {},
+        success () {},
+        complete () {}
+      }
+    }
+  };
+
+  /* FORM AJAX */
+
+  class FormAjax extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.form = this.element;
+      this.$form = this.$element;
+
+    }
+
+    _events () {
+
+      /* SUBMIT */
+
+      this._on ( true, 'submit', this.__submit );
+
+    }
+
+    /* PRIVATE */
+
+    __submit ( event ) {
+
+      event.preventDefault ();
+      event.stopImmediatePropagation ();
+
+      $.ajax ({
+
+        cache: false,
+        contentType: false,
+        data: new FormData ( this.form ),
+        processData: false,
+        timeout: this.options.timeout,
+        type: this.$form.attr ( 'method' ) || 'POST',
+        url: this.$form.attr ( 'action' ),
+
+        beforeSend: () => {
+
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'open' );
+
+          }
+
+          this._trigger ( 'beforesend' );
+
+        },
+
+        error: ( res ) => {
+
+          let resj = _.attempt ( JSON.parse, res );
+
+          if ( !_.isError ( resj ) ) {
+
+            $.noty ( resj.msg || this.options.messages.error );
+
+          } else {
+
+            $.noty ( this.options.messages.error );
+
+          }
+
+          this._trigger ( 'error' );
+
+        },
+
+        success: ( res ) => {
+
+          let resj = _.attempt ( JSON.parse, res );
+
+          if ( !_.isError ( resj ) ) {
+
+            if ( resj.refresh || resj.url === window.location.href || _.trim ( resj.url, '/' ) === _.trim ( window.location.pathname, '/' ) ) {
+
+              $.noty ( resj.msg || this.options.messages.refresh );
+
+              location.reload ();
+
+            } else if ( resj.url ) {
+
+              //INFO: In order to redirect to another domain the protocol must be provided. For instance `http://www.domain.tld` will work while `www.domain.tld` won't
+
+              $.noty ( resj.msg || this.options.messages.redirect );
+
+              location.assign ( resj.url );
+
+            } else {
+
+              $.noty ( resj.msg || this.options.messages.success );
+
+            }
+
+          } else {
+
+            $.noty ( this.options.messages.success );
+
+          }
+
+          this._trigger ( 'success' );
+
+        },
+
+        complete: () => {
+
+          if ( this.options.spinnerOverlay ) {
+
+            this.$form.spinnerOverlay ( 'close' );
+
+          }
+
+          this._trigger ( 'complete' );
+
+        }
+
+      });
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.FormAjax = FormAjax;
+  Svelto.FormAjax.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.FormAjax );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7090,6 +8571,311 @@
 
 }( Svelto.$, Svelto._, window, document ));
 
+
+/* =========================================================================
+ * Svelto - Form Sync
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * ========================================================================= */
+
+//TODO: Maybe add the ability to trigger a sync when widgetizing a new form in the group, so that if we are appending a new one it gets synced (as a base or not, if not maybe we can get a data-target or the first of othe others in the group as a base)
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'formSync',
+    selector: 'form[data-sync-group]',
+    options: {
+      live: false, //INFO: Basically it triggers the syncing also when the `input` event is fired
+      attributes: {
+        name: 'name'
+      },
+      datas: {
+        group: 'sync-group'
+      },
+      selectors: {
+        form: 'form',
+        elements: 'input:not([type="button"]), textarea, select',
+        checkable: '[type="radio"], [type="checkbox"]',
+        radio: '[type="radio"]',
+        checkbox: '[type="checkbox"]',
+        textfield: 'input:not([type="button"]):not([type="checkbox"]):not([type="radio"]), textarea'
+      }
+    }
+  };
+
+  /* FORM SYNC */
+
+  class FormSync extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$form = this.$element;
+      this.$elements = this.$form.find ( this.options.selectors.elements );
+
+      this.group = this.$form.data ( this.options.datas.group );
+
+    }
+
+    _events () {
+
+      /* CHANGE */
+
+      this._on ( true, this.$elements, 'change', this._throttle ( this.__sync, 100 ) );
+
+      /* INPUT */
+
+      if ( this.options.live ) {
+
+        let $textfields = this.$elements.filter ( this.options.selectors.textfield );
+
+        this._on ( true, $textfields, 'input', this._throttle ( this.__sync, 100 ) );
+
+      }
+
+    }
+
+    /* SYNC */
+
+    __sync ( event, data ) {
+
+      if ( data && data._form_synced ) return;
+
+      let $element = $(event.target),
+          name = $element.attr ( this.options.attributes.name ),
+          $otherElements = $(this.options.selectors.form + '[data-' + this.options.datas.group + '="' + this.group + '"]').not ( this.$form ).find ( '[' + this.options.attributes.name + '="' + name + '"]').not ( $element );
+
+      if ( $otherElements.length > 0 ) {
+
+        let value = $element.val (),
+            checked = !!$element.prop ( 'checked' );
+
+        for ( let otherElement of $otherElements ) {
+
+          let $otherElement = $(otherElement),
+              otherValue = $otherElement.val (),
+              otherChecked = !!$otherElement.prop ( 'checked' );
+
+          if ( value === otherValue && checked === otherChecked ) continue;
+
+          if ( $element.is ( this.options.selectors.radio ) && ( value !== otherValue || checked === otherChecked ) ) continue;
+
+          if ( $element.is ( this.options.selectors.checkable ) ) {
+
+            $otherElement.prop ( 'checked', checked ).trigger ( 'change', { _form_synced: true } );
+
+          } else {
+
+            $otherElement.val ( value ).trigger ( 'change', { _form_synced: true } );
+
+          }
+
+        }
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.FormSync = FormSync;
+  Svelto.FormSync.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.FormSync );
+
+}( Svelto.$, Svelto._, window, document ));
+
+(function () {
+	'use strict';
+
+	var keyboardAllowed = typeof Element !== 'undefined' && 'ALLOW_KEYBOARD_INPUT' in Element;
+
+	var fn = (function () {
+		var val;
+		var valLength;
+
+		var fnMap = [
+			[
+				'requestFullscreen',
+				'exitFullscreen',
+				'fullscreenElement',
+				'fullscreenEnabled',
+				'fullscreenchange',
+				'fullscreenerror'
+			],
+			// new WebKit
+			[
+				'webkitRequestFullscreen',
+				'webkitExitFullscreen',
+				'webkitFullscreenElement',
+				'webkitFullscreenEnabled',
+				'webkitfullscreenchange',
+				'webkitfullscreenerror'
+
+			],
+			// old WebKit (Safari 5.1)
+			[
+				'webkitRequestFullScreen',
+				'webkitCancelFullScreen',
+				'webkitCurrentFullScreenElement',
+				'webkitCancelFullScreen',
+				'webkitfullscreenchange',
+				'webkitfullscreenerror'
+
+			],
+			[
+				'mozRequestFullScreen',
+				'mozCancelFullScreen',
+				'mozFullScreenElement',
+				'mozFullScreenEnabled',
+				'mozfullscreenchange',
+				'mozfullscreenerror'
+			],
+			[
+				'msRequestFullscreen',
+				'msExitFullscreen',
+				'msFullscreenElement',
+				'msFullscreenEnabled',
+				'MSFullscreenChange',
+				'MSFullscreenError'
+			]
+		];
+
+		var i = 0;
+		var l = fnMap.length;
+		var ret = {};
+
+		for (; i < l; i++) {
+			val = fnMap[i];
+			if (val && val[1] in document) {
+				for (i = 0, valLength = val.length; i < valLength; i++) {
+					ret[fnMap[0][i]] = val[i];
+				}
+				return ret;
+			}
+		}
+
+		return false;
+	})();
+
+	var screenfull = {
+		request: function (elem) {
+			var request = fn.requestFullscreen;
+
+			elem = elem || document.documentElement;
+
+			// Work around Safari 5.1 bug: reports support for
+			// keyboard in fullscreen even though it doesn't.
+			// Browser sniffing, since the alternative with
+			// setTimeout is even worse.
+			if (/5\.1[\.\d]* Safari/.test(navigator.userAgent)) {
+				elem[request]();
+			} else {
+				elem[request](keyboardAllowed && Element.ALLOW_KEYBOARD_INPUT);
+			}
+		},
+		exit: function () {
+			document[fn.exitFullscreen]();
+		},
+		toggle: function (elem) {
+			if (this.isFullscreen) {
+				this.exit();
+			} else {
+				this.request(elem);
+			}
+		},
+		raw: fn
+	};
+
+	if (!fn) {
+    window.screenfull = false;
+		return;
+	}
+
+	Object.defineProperties(screenfull, {
+		isFullscreen: {
+			get: function () {
+				return !!document[fn.fullscreenElement];
+			}
+		},
+		element: {
+			enumerable: true,
+			get: function () {
+				return document[fn.fullscreenElement];
+			}
+		},
+		enabled: {
+			enumerable: true,
+			get: function () {
+				// Coerce to boolean in case of old WebKit
+				return !!document[fn.fullscreenEnabled];
+			}
+		}
+	});
+
+	window.screenfull = screenfull;
+})();
+
+
+/* =========================================================================
+ * Svelto - Helpers
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../svelto/svelto.js
+ * @requires ../widgetize/widgetize.js
+ * @requires ../pointer/pointer.js
+ * @requires vendor/screenfull.js
+ * ========================================================================= */
+
+//TODO: Move to their own folders/files
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* SCROLL TO TOP */
+
+  //TODO: Add a .scroll-to-target widget, with data-target and awareness of the attached stuff
+
+  Widgetize.add ( '.scroll-to-top', function ( $scroller ) {
+
+    $scroller.on ( Pointer.tap, () => {
+
+      $body.add ( $html ).animate ( { scrollTop: 0 }, Svelto.animation.normal );
+
+    });
+
+  });
+
+  /* FULLSCREEN */
+
+  //TODO: Add the ability to trigger the fullscreen for a specific element
+  //FIXME: It doesn't work in iOS's Safari and IE10
+  //TODO: Rewrite a component for it
+
+  Widgetize.add ( '.fullscreen-toggler', function ( $toggler ) {
+
+    $toggler.on ( Pointer.tap, screenfull.toggle );
+
+  });
+
+}( Svelto.$, Svelto._, window, document ));
+
 (function () {
 	'use strict';
 
@@ -7342,6 +9128,303 @@
   /* FACTORY */
 
   $.factory ( Svelto.Infobar );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Infobar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+//TODO: Maybe add the ability to open it
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'infobar',
+    selector: '.infobar',
+    options: {
+      selectors: {
+        closer: '.infobar-closer'
+      },
+      callbacks: {
+        close () {}
+      }
+    }
+  };
+
+  /* INFOBAR */
+
+  class Infobar extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$infobar = this.$element;
+      this.$closers = this.$infobar.find ( this.options.selectors.closer );
+
+    }
+
+    _events () {
+
+      /* CLOSER */
+
+      this._on ( this.$closers, Pointer.tap, this.close );
+
+    }
+
+    /* API */
+
+    close () {
+
+      //INFO: Maybe just detach it, so that we can open it again
+
+      this.$infobar.remove ();
+
+      this._trigger ( 'close' );
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Infobar = Infobar;
+  Svelto.Infobar.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Infobar );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Modal
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.modal`
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'modal',
+    selector: '.modal',
+    options: {
+      classes: {
+        show: 'show',
+        open: 'open'
+      },
+      animations: {
+        open: Svelto.animation.normal,
+        close: Svelto.animation.normal
+      },
+      callbacks: {
+        open () {},
+        close () {}
+      }
+    }
+  };
+
+  /* MODAL */
+
+  class Modal extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.modal = this.element;
+      this.$modal = this.$element;
+
+      this._isOpen = this.$modal.hasClass ( this.options.classes.open );
+
+    }
+
+    _events () {
+
+      /* TAP */
+
+      this._on ( true, Pointer.tap, this.__tap );
+
+    }
+
+    /* TAP */
+
+    __tap ( event ) {
+
+      if ( event.target === this.modal ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* KEYDOWN */
+
+    __keydown ( event ) {
+
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
+        this.close ();
+
+      }
+
+    }
+
+    /* PUBLIC */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        $body.unscrollable ();
+
+        this._frame ( function () {
+
+          this.$modal.addClass ( this.options.classes.show );
+
+          this._frame ( function () {
+
+            this.$modal.addClass ( this.options.classes.open );
+
+            this._on ( true, $document, 'keydown', this.__keydown );
+
+            this._trigger ( 'open' );
+
+          });
+
+        });
+
+      }
+
+    }
+
+    close () {
+
+      if ( this._isOpen ) {
+
+        this._isOpen = false;
+
+        this._frame ( function () {
+
+          this.$modal.removeClass ( this.options.classes.open );
+
+          this._delay ( function () {
+
+            this.$modal.removeClass ( this.options.classes.show );
+
+            $body.scrollable ();
+
+            this._off ( $document, 'keydown', this.__keydown );
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Modal = Modal;
+  Svelto.Modal.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Modal );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Modal (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires modal.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'modalToggler',
+    selector: '.modal-toggler, .modal-closer',
+    options: {
+      widget: Svelto.Modal
+    }
+  };
+
+  /* MODAL TOGGLER */
+
+  class ModalToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.ModalToggler = ModalToggler;
+  Svelto.ModalToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.ModalToggler );
 
 }( Svelto.$, Svelto._, window, document ));
 
@@ -7782,6 +9865,291 @@
 
 
 /* =========================================================================
+ * Svelto - N Times Action (Group)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../cookie/cookie.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* UTILITIES */
+
+  let getExpiry = function ( expiry ) {
+
+    if ( expiry ) {
+
+      switch ( expiry.constructor ) {
+
+        case Number:
+          return ( expiry === Infinity ) ? false : _.nowSecs () + expiry;
+
+        case String:
+          return getExpiry ( new Date ( expiry ) );
+
+        case Date:
+          let timestamp = expiry.getTime ();
+          return _.isNaN ( timestamp ) ? false : Math.floor ( timestamp / 1000 );
+
+      }
+
+    }
+
+    return false;
+
+  };
+
+  /* CONFIG */
+
+  let config = {
+    encoder: JSON.stringify,
+    decoder: JSON.parse
+  };
+
+  /* GROUP */
+
+  class Group {
+
+    constructor ( options ) {
+
+      this.name = options.name;
+      this.cookie = options.cookie;
+
+      this.actions = config.decoder ( $.cookie.get ( this.name ) || '{}' );
+
+    }
+
+    get ( action ) {
+
+      let actionj = this.actions[action];
+
+      if ( actionj ) {
+
+        if ( actionj.x && actionj.x < _.nowSecs () ) {
+
+          this.remove ( action );
+
+        } else {
+
+          return actionj.t;
+
+        }
+
+      }
+
+      return 0;
+
+    }
+
+    set ( action, times, expiry ) {
+
+      times = Number ( times );
+
+      if ( !_.isNaN ( times ) ) {
+
+        if ( action in this.actions ) {
+
+          if ( times === 0 && !this.actions[action].x ) {
+
+            return this.remove ( action );
+
+          } else {
+
+            this.actions[action].t = times;
+
+          }
+
+        } else {
+
+          this.actions[action] = { t: times };
+
+          expiry = getExpiry ( expiry );
+
+          if ( expiry ) {
+
+            this.actions[action].x = expiry;
+
+          }
+
+        }
+
+        this.update ();
+
+      }
+
+    }
+
+    update () {
+
+      $.cookie.set ( this.name, config.encoder ( this.actions ), this.cookie.end, this.cookie.path, this.cookie.domain, this.cookie.secure );
+
+    }
+
+    remove ( action ) {
+
+      if ( action ) {
+
+        if ( _.size ( this.actions ) > 1 ) {
+
+          delete this.actions[action];
+
+          this.update ();
+
+        } else {
+
+          this.remove ();
+
+        }
+
+      } else {
+
+        this.actions = {};
+
+        $.cookie.remove ( this.name, this.cookie.path, this.cookie.domain );
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.NTA = {};
+  Svelto.NTA.Group = Group;
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - N Times Action
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires NTA.Action.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* N TIMES ACTION */
+
+  $.nTimesAction = function ( options ) {
+
+    /* OPTIONS */
+
+    options = _.merge ({
+      group: 'nta', //INFO: The cookie name that holds the actions, a namespace for related actions basically
+      action: false, //INFO: The action name
+      times: Infinity, //INFO: The times an action can be executed
+      expiry: false, //INFO: When a single action will expire and will then get removed from its group
+      fn: false, //INFO: The function to execute
+      cookie: { //INFO: Values that will get passed to `$.cookie` when appropriate
+        end: Infinity,
+        path: undefined,
+        domain: undefined,
+        secure: undefined
+      }
+    }, options );
+
+    /* N TIMES ACTION */
+
+    if ( options.action ) {
+
+      let action = new Svelto.NTA.Action ({ group: options.group, name: options.action, expiry: options.expiry, cookie: options.cookie }),
+          actionTimes = action.get ();
+
+      /* EXECUTE */
+
+      if ( options.fn && actionTimes < options.times ) {
+
+        let returnValue = options.fn ( options.group, options.action, actionTimes + 1 );
+
+        /* INCREMENT */
+
+        if ( returnValue !== false ) {
+
+          action.set ( actionTimes + 1 );
+
+        }
+
+      }
+
+      return action;
+
+    } else if ( options.group ) {
+
+      return new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
+
+    }
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - N Times Action (Action)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires NTA.Group.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* ACTION */
+
+  class Action {
+
+    constructor ( options ) {
+
+      this.group = new Svelto.NTA.Group ({ name: options.group, cookie: options.cookie });
+      this.name = options.name;
+      this.expiry = options.expiry;
+
+    }
+
+    get () {
+
+      return this.group.get ( this.name );
+
+    }
+
+    set ( times, expiry ) {
+
+      this.group.set ( this.name, times, expiry || this.expiry );
+
+    }
+
+    remove () {
+
+      this.group.remove ( this.name );
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.NTA.Action = Action;
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
  * Svelto - N Times Action
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -8157,6 +10525,311 @@
 
 
 /* =========================================================================
+ * Svelto - Navbar
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../factory/factory.js
+ * ========================================================================= */
+
+//INFO: Since we are using a pseudo element as the background, in order to simplify the markup, only `.card` and `.card`-like elements can be effectively `.navbar`
+
+//TODO: Replace flickable support with a smooth moving navbar, so operate on drag
+//TODO: Close with a flick (if not attached)
+//TODO: Add close with the ESC key (if not attached)
+//TODO: Maybe control the attaching process via js, so that we no longer have to put the navbar in any particular position also
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'navbar',
+    selector: '.navbar',
+    options: {
+      flickableRange: 20, //INFO: Amount of pixels close to the viewport border where the flick should be considered intentional
+      classes: {
+        defaultDirection: 'left',
+        directions: ['top', 'right', 'bottom', 'left'],
+        show: 'show',
+        open: 'open',
+        flickable: 'flickable'
+      },
+      animations: {
+        open: Svelto.animation.normal,
+        close: Svelto.animation.normal,
+      },
+      callbacks: {
+        open () {},
+        close () {}
+      }
+    }
+  };
+
+  /* NAVBAR */
+
+  class Navbar extends Svelto.Widget {
+
+    /* SPECIAL */
+
+    _variables () {
+
+      this.$navbar = this.$element;
+      this.navbar = this.element;
+
+      this.direction = this.options.classes.defaultDirection;
+
+      for ( let direction of this.options.classes.directions ) {
+
+        if ( this.$navbar.hasClass ( direction ) ) {
+
+          this.direction = direction;
+          break;
+
+        }
+
+      }
+
+      this._isOpen = this.$navbar.hasClass ( this.options.classes.open );
+      this.isFlickable = this.$navbar.hasClass ( this.options.classes.flickable );
+
+    }
+
+    _events () {
+
+      /* TAP */
+
+      this._on ( Pointer.tap, this.__tap );
+
+      /* KEYDOWN */
+
+      this._onHover ( [$document, 'keydown', this.__keydown] );
+
+      /* FLICK */
+
+      if ( this.isFlickable ) {
+
+        $document.flickable ({
+          callbacks: {
+            flick: this.__flick.bind ( this )
+          }
+        });
+
+      }
+
+    }
+
+    /* TAP */
+
+    __tap ( event ) {
+
+      if ( event.target === this.navbar ) {
+
+        this.close ();
+
+      }
+
+    }
+
+    /* KEYDOWN */
+
+    __keydown ( event ) {
+
+      if ( event.keyCode === Svelto.keyCode.ESCAPE ) {
+
+        event.preventDefault ();
+        event.stopImmediatePropagation ();
+
+        this.close ();
+
+      }
+
+    }
+
+    /* FLICK */
+
+    __flick ( data ) {
+
+      if ( this._isOpen ) return;
+
+      switch ( this.direction ) {
+
+        case 'left':
+        case 'right':
+          if ( data.orientation === 'horizontal' ) {
+            if ( this.direction === 'left' ) {
+              if ( data.direction === 'right' ) {
+                if ( data.startXY.X <= this.options.flickableRange ) {
+                  this.open ();
+                }
+              }
+            } else if ( this.direction === 'right' ) {
+              if ( data.direction === 'left' ) {
+                if ( $window.width () - data.startXY.X <= this.options.flickableRange ) {
+                  this.open ();
+                }
+              }
+            }
+          }
+          break;
+
+        case 'top':
+        case 'bottom':
+          if ( data.orientation === 'vertical' ) {
+            if ( this.direction === 'top' ) {
+              if ( data.direction === 'bottom' ) {
+                if ( data.startXY.Y <= this.options.flickableRange ) {
+                  this.open ();
+                }
+              }
+            } else if ( this.direction === 'bottom' ) {
+              if ( data.direction === 'top' ) {
+                if ( $window.height () - data.startXY.Y <= this.options.flickableRange ) {
+                  this.open ();
+                }
+              }
+            }
+          }
+          break;
+
+      }
+
+    }
+
+    /* PUBLIC */
+
+    isOpen () {
+
+      return this._isOpen;
+
+    }
+
+    toggle ( force ) {
+
+      if ( !_.isBoolean ( force ) ) {
+
+        force = !this._isOpen;
+
+      }
+
+      if ( force !== this._isOpen ) {
+
+        this[force ? 'open' : 'close']();
+
+      }
+
+    }
+
+    open () {
+
+      if ( !this._isOpen ) {
+
+        this._isOpen = true;
+
+        $body.unscrollable ();
+
+        this._frame ( function () {
+
+          this.$navbar.addClass ( this.options.classes.show );
+
+          this._frame ( function () {
+
+            this.$navbar.addClass ( this.options.classes.open );
+
+            this._trigger ( 'open' );
+
+          });
+
+        });
+
+      }
+
+    }
+
+    close () {
+
+      if ( this._isOpen ) {
+
+        this._isOpen = false;
+
+        this._frame ( function () {
+
+          this.$navbar.removeClass ( this.options.classes.open );
+
+          this._delay ( function () {
+
+            this.$navbar.removeClass ( this.options.classes.show );
+
+            $body.scrollable ();
+
+            this._trigger ( 'close' );
+
+          }, this.options.animations.close );
+
+        });
+
+      }
+
+    }
+
+  }
+
+  /* BINDING */
+
+  Svelto.Navbar = Navbar;
+  Svelto.Navbar.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.Navbar );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Navbar (Toggler)
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires navbar.js
+ * @requires ../toggler/toggler.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* CONFIG */
+
+  let config = {
+    name: 'navbarToggler',
+    selector: '.navbar-toggler, .navbar-closer',
+    options: {
+      widget: Svelto.Navbar
+    }
+  };
+
+  /* NAVBAR TOGGLER */
+
+  class NavbarToggler extends Svelto.Toggler {}
+
+  /* BINDING */
+
+  Svelto.NavbarToggler = NavbarToggler;
+  Svelto.NavbarToggler.config = config;
+
+  /* FACTORY */
+
+  $.factory ( Svelto.NavbarToggler );
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
  * Svelto - Notification
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
@@ -8218,6 +10891,98 @@
       $.noty ( options );
 
     }
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - Notification
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../core/core.js
+ * @requires ../noty/noty.js
+ * ========================================================================= */
+
+//INFO: If the tab hasn't the focus and we can use the native notifications than we'll send a native notification, otherwise we will fallback to a noty
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* NOTIFICATION */
+
+  $.notification = function ( options ) {
+
+    /* OPTIONS */
+
+    options = _.merge ({
+      title: false,
+      body: false,
+      img: false,
+      ttl: Svelto.Noty.config.options.ttl
+    }, options );
+
+    /* NOTIFICATIONS */
+
+    if ( !document.hasFocus () && window.Notification && Notification.permission !== 'denied' ) {
+
+      Notification.requestPermission ( function ( status ) {
+
+        if ( status === 'granted' ) {
+
+          let notification = new Notification ( options.title, { body: options.body, icon: options.img } );
+
+          if ( _.isNumber ( options.ttl ) && !_.isNaN ( options.ttl ) && options.ttl !== Infinity ) {
+
+            setTimeout ( function () {
+
+              notification.close ();
+
+            }, options.ttl );
+
+          }
+
+        } else {
+
+          $.noty ( options );
+
+        }
+
+      });
+
+    } else {
+
+      $.noty ( options );
+
+    }
+
+  };
+
+}( Svelto.$, Svelto._, window, document ));
+
+
+/* =========================================================================
+ * Svelto - One Time Action
+ * =========================================================================
+ * Copyright (c) 2015 Fabio Spampinato
+ * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
+ * =========================================================================
+ * @requires ../n_times_action/n_times_action.js
+ * ========================================================================= */
+
+(function ( $, _, window, document, undefined ) {
+
+  'use strict';
+
+  /* ONE TIME ACTION */
+
+  $.oneTimeAction = function ( options ) {
+
+    return $.nTimesAction ( _.merge ( { group: 'ota' }, options, { times: 1 } ) );
 
   };
 
@@ -10102,7 +12867,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* CHANGE */
 
-      this._on ( 'tablehelper:change sortable:sort', this.__change );
+      this._on ( 'change sortable:sort', this.__change );
 
     }
 
@@ -10234,7 +12999,7 @@ Prism.languages.js = Prism.languages.javascript;
 
         this._toggleGroup ( this.$prevElement, this.$startElement );
 
-      } else if ( $.hasCtrlOrCmd ( event ) ) { //TODO: On mobile we behave like if the `ctrl`/`cmd` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+      } else if ( $.hasCtrlOrCmd ( event ) ) {
 
         this.$startElement.toggleClass ( this.options.classes.selected );
 
@@ -10382,6 +13147,12 @@ Prism.languages.js = Prism.languages.javascript;
       step: 1,
       decimals: 0,
       live: false,
+      datas: {
+        min: 'min',
+        max: 'max',
+        step: 'step',
+        decimals: 'decimals'
+      },
       selectors: {
         input: 'input',
         min: '.slider-min',
@@ -10404,18 +13175,6 @@ Prism.languages.js = Prism.languages.javascript;
 
     /* SPECIAL */
 
-    static widgetize ( $slider ) { //TODO: Just use the generic data-options maybe
-
-      $slider.slider ({
-        min: Number($slider.find ( '.slider-min' ).data ( 'min' ) || 0),
-        max: Number($slider.find ( '.slider-max' ).data ( 'max' ) || 100),
-        value: Number($slider.find ( 'input' ).val () || 0),
-        step: Number($slider.data ( 'step' ) || 1),
-        decimals: Number($slider.data ( 'decimals' ) || 0)
-      });
-
-    }
-
     _variables () {
 
       this.$slider = this.$element;
@@ -10428,14 +13187,25 @@ Prism.languages.js = Prism.languages.javascript;
       this.$handlerWrp = this.$slider.find ( this.options.selectors.handlerWrp );
       this.$label = this.$handlerWrp.find ( this.options.selectors.label );
 
-      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
-
-      this._updateVariables ();
-
     }
 
     _init () {
 
+      /* CONFIG */
+
+      this.options.min = Number ( this.$min.data ( this.options.datas.min ) ) || this.options.min;
+      this.options.max = Number ( this.$max.data ( this.options.datas.max ) ) || this.options.max;
+      this.options.value = Number ( this.$input.val () ) || this.options.value;
+      this.options.step = Number ( this.$slider.data ( this.options.datas.step ) ) || this.options.step;
+      this.options.decimals = Number ( this.$slider.data ( this.options.datas.decimals ) ) || this.options.decimals;
+
+      /* STEPS NR */
+
+      this.stepsNr = ( this.options.max - this.options.min ) / this.options.step;
+
+      /* UPDATE */
+
+      this._updateVariables ();
       this._updatePositions ();
 
     }
@@ -10488,6 +13258,8 @@ Prism.languages.js = Prism.languages.javascript;
 
     }
 
+    /* UPDATE */
+
     _updateVariables () {
 
       this.unhighlightWidth = this.$unhighlight.width ();
@@ -10498,7 +13270,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _updatePositions () {
 
-      var percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
+      let percentage = ( this.options.value - this.options.min ) / this.options.step * 100 / this.stepsNr,
           translateX = this.unhighlightWidth / 100 * percentage;
 
       this.$handlerWrp.translateX ( translateX );
@@ -10509,13 +13281,21 @@ Prism.languages.js = Prism.languages.javascript;
 
     _updateLabel ( value ) {
 
-      this.$label.html ( _.isUndefined ( value ) ? this.options.value : value );
+      this.$label.html ( value || this.options.value );
 
     }
 
     _updateInput () {
 
       this.$input.val ( this.options.value ).trigger ( 'change' );
+
+    }
+
+    _update () {
+
+      this._updatePositions ();
+      this._updateLabel ();
+      this._updateInput ();
 
     }
 
@@ -10602,22 +13382,21 @@ Prism.languages.js = Prism.languages.javascript;
 
     set ( value ) {
 
-      value = _.clamp ( this.options.min, this._roundValue ( value ), this.options.max );
+      value = this._roundValue ( value );
 
-      if ( value !== this.options.value ) {
+      if ( !_.isNaN ( value ) ) {
 
-        var prevValue = this.options.value;
+        value = _.clamp ( this.options.min, value, this.options.max );
 
-        this.options.value = value;
+        if ( value !== this.options.value ) {
 
-        this._updatePositions ();
-        this._updateLabel ();
-        this._updateInput ();
+          this.options.value = value;
 
-        this._trigger ( 'change', {
-          previous: prevValue,
-          value: this.options.value
-        });
+          this._update ();
+
+          this._trigger ( 'change' );
+
+        }
 
       }
 
@@ -10658,8 +13437,8 @@ Prism.languages.js = Prism.languages.javascript;
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add support for tableHelper, just put the new addded row in the right position, good performance gain here!
-//TODO: Add support for sorting other things other than tables
+//TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
+//TODO: Add support for sorting other things other than tables' rows
 
 (function ( $, _, window, document, undefined ) {
 
@@ -10684,7 +13463,10 @@ Prism.languages.js = Prism.languages.javascript;
           return a.localeCompare ( b );
         }
       },
-      sortValue: 'sort-value',
+      datas: {
+        sorter: 'sort',
+        value: 'sort-value'
+      },
       classes: {
         sort: {
           asc: 'sort-asc',
@@ -10721,7 +13503,7 @@ Prism.languages.js = Prism.languages.javascript;
       this.tbody = this.$tbody[0];
 
       this.sortData = {}; //INFO: Caching object for datas and references to rows
-      this.updated = false;
+      this.isDirty = true;
 
       this.$currentSortable = false;
       this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
@@ -10731,7 +13513,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     _init () {
 
-      var $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
+      let $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
 
       if ( $initial.length === 1 ) {
 
@@ -10745,7 +13527,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* CHANGE */
 
-      this._on ( true, 'change', this.__change ); //TODO: Update to support tableHelper
+      this._on ( true, 'change', this.__change );
 
       /* TAP */
 
@@ -10760,7 +13542,7 @@ Prism.languages.js = Prism.languages.javascript;
       if ( this.currentIndex !== false ) {
 
         this.sortData = {};
-        this.updated = false;
+        this.isDirty = true;
 
         this.sort ( this.currentIndex, this.currentDirection );
 
@@ -10772,7 +13554,7 @@ Prism.languages.js = Prism.languages.javascript;
 
     __tap ( event ) {
 
-      var newIndex = this.$headers.index ( event.target ),
+      let newIndex = this.$headers.index ( event.target ),
           newDirection = this.currentIndex === newIndex
                            ? this.currentDirection === 'asc'
                              ? 'desc'
@@ -10789,15 +13571,15 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* VALIDATE */
 
-      var $sortable = this.$headers.eq ( index );
+      let $sortable = this.$headers.eq ( index );
 
       if ( !$sortable.length ) return; //INFO: Bad index
 
-      var sorterName = $sortable.data ( 'sort' );
+      let sorterName = $sortable.data ( this.options.datas.sorter );
 
       if ( !sorterName ) return; //INFO: Unsortable column
 
-      var sorter = this.options.sorters[sorterName];
+      let sorter = this.options.sorters[sorterName];
 
       if ( !sorter ) return; //INFO: Unsupported sorter
 
@@ -10805,20 +13587,20 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* CHECKING CACHED DATAS */
 
-      if ( _.isUndefined ( this.sortData[index] ) || !this.updated ) {
+      if ( _.isUndefined ( this.sortData[index] ) || this.isDirty ) {
 
         /* VARIABLES */
 
-        var $trs = this.$tbody.find ( this.options.selectors.notEmptyRow );
+        let $trs = this.$tbody.find ( this.options.selectors.notEmptyRow );
 
-        this.sortData[index] = Array ( $trs.length );
+        this.sortData[index] = new Array ( $trs.length );
 
         /* POPULATE */
 
-        for ( var i = 0, l = $trs.length; i < l; i++ ) {
+        for ( let i = 0, l = $trs.length; i < l; i++ ) {
 
-          var $td = $trs.eq ( i ).find ( this.options.selectors.rowCell ).eq ( index ),
-              value = $td.data ( this.options.sortValue ) || $td.text ();
+          let $td = $trs.eq ( i ).find ( this.options.selectors.rowCell ).eq ( index ),
+              value = $td.data ( this.options.datas.value ) || $td.text ();
 
           this.sortData[index][i] = [$trs[i], value];
 
@@ -10828,7 +13610,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* SORT */
 
-      if ( index !== this.currentIndex || !this.updated ) {
+      if ( index !== this.currentIndex || this.isDirty ) {
 
         this.sortData[index].sort ( function ( a, b ) {
 
@@ -10840,13 +13622,15 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* REVERSING */
 
-      if ( this.updated && index === this.currentIndex && this.currentDirection !== false  ) {
+      let needReversing = false;
 
-        var needReversing = ( direction !== this.currentDirection );
+      if ( !this.isDirty && index === this.currentIndex && this.currentDirection !== false  ) {
+
+        needReversing = ( direction !== this.currentDirection );
 
       } else {
 
-        var needReversing = ( direction === 'desc' );
+        needReversing = ( direction === 'desc' );
 
       }
 
@@ -10858,11 +13642,11 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* REORDER */
 
-      if ( index !== this.currentIndex || direction !== this.currentDirection || !this.updated ) {
+      if ( index !== this.currentIndex || direction !== this.currentDirection || this.isDirty ) {
 
         this.table.removeChild ( this.tbody ); //INFO: Detach
 
-        for ( var i = 0, l = this.sortData[index].length; i < l; i++ ) {
+        for ( let i = 0, l = this.sortData[index].length; i < l; i++ ) {
 
           this.tbody.appendChild ( this.sortData[index][i][0] ); //INFO: Reorder
 
@@ -10888,7 +13672,7 @@ Prism.languages.js = Prism.languages.javascript;
 
       /* UPDATE */
 
-      this.updated = true;
+      this.isDirty = false;
 
       this.$currentSortable = $sortable;
       this.currentIndex = index;

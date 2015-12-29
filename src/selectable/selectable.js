@@ -64,7 +64,7 @@
 
       /* CHANGE */
 
-      this._on ( 'tablehelper:change sortable:sort', this.__change );
+      this._on ( 'change sortable:sort', this.__change );
 
     }
 
@@ -196,7 +196,7 @@
 
         this._toggleGroup ( this.$prevElement, this.$startElement );
 
-      } else if ( $.hasCtrlOrCmd ( event ) ) { //TODO: On mobile we behave like if the `ctrl`/`cmd` key is always pressed, so that we can support selecting multiple rows even there //FIXME: Is this the wanted behavious?
+      } else if ( $.hasCtrlOrCmd ( event ) ) {
 
         this.$startElement.toggleClass ( this.options.classes.selected );
 

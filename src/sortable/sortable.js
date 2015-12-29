@@ -8,8 +8,8 @@
  * @requires ../factory/factory.js
  * ========================================================================= */
 
-//TODO: Add support for tableHelper, just put the new addded row in the right position, good performance gain here!
-//TODO: Add support for sorting other things other than tables
+//TODO: Better performance with tableHelper, just put the new addded row in the right position, performance boost
+//TODO: Add support for sorting other things other than tables' rows
 
 (function ( $, _, window, document, undefined ) {
 
@@ -34,7 +34,10 @@
           return a.localeCompare ( b );
         }
       },
-      sortValue: 'sort-value',
+      datas: {
+        sorter: 'sort',
+        value: 'sort-value'
+      },
       classes: {
         sort: {
           asc: 'sort-asc',
@@ -71,7 +74,7 @@
       this.tbody = this.$tbody[0];
 
       this.sortData = {}; //INFO: Caching object for datas and references to rows
-      this.updated = false;
+      this.isDirty = true;
 
       this.$currentSortable = false;
       this.currentIndex = false; //INFO: `$headers` index, not `$sortables` index
@@ -81,7 +84,7 @@
 
     _init () {
 
-      var $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
+      let $initial = this.$headers.filter ( '.' + this.options.classes.sort.asc + ', .' + this.options.classes.sort.desc ).first ();
 
       if ( $initial.length === 1 ) {
 
@@ -95,7 +98,7 @@
 
       /* CHANGE */
 
-      this._on ( true, 'change', this.__change ); //TODO: Update to support tableHelper
+      this._on ( true, 'change', this.__change );
 
       /* TAP */
 
@@ -110,7 +113,7 @@
       if ( this.currentIndex !== false ) {
 
         this.sortData = {};
-        this.updated = false;
+        this.isDirty = true;
 
         this.sort ( this.currentIndex, this.currentDirection );
 
@@ -122,7 +125,7 @@
 
     __tap ( event ) {
 
-      var newIndex = this.$headers.index ( event.target ),
+      let newIndex = this.$headers.index ( event.target ),
           newDirection = this.currentIndex === newIndex
                            ? this.currentDirection === 'asc'
                              ? 'desc'
@@ -139,15 +142,15 @@
 
       /* VALIDATE */
 
-      var $sortable = this.$headers.eq ( index );
+      let $sortable = this.$headers.eq ( index );
 
       if ( !$sortable.length ) return; //INFO: Bad index
 
-      var sorterName = $sortable.data ( 'sort' );
+      let sorterName = $sortable.data ( this.options.datas.sorter );
 
       if ( !sorterName ) return; //INFO: Unsortable column
 
-      var sorter = this.options.sorters[sorterName];
+      let sorter = this.options.sorters[sorterName];
 
       if ( !sorter ) return; //INFO: Unsupported sorter
 
@@ -155,20 +158,20 @@
 
       /* CHECKING CACHED DATAS */
 
-      if ( _.isUndefined ( this.sortData[index] ) || !this.updated ) {
+      if ( _.isUndefined ( this.sortData[index] ) || this.isDirty ) {
 
         /* VARIABLES */
 
-        var $trs = this.$tbody.find ( this.options.selectors.notEmptyRow );
+        let $trs = this.$tbody.find ( this.options.selectors.notEmptyRow );
 
-        this.sortData[index] = Array ( $trs.length );
+        this.sortData[index] = new Array ( $trs.length );
 
         /* POPULATE */
 
-        for ( var i = 0, l = $trs.length; i < l; i++ ) {
+        for ( let i = 0, l = $trs.length; i < l; i++ ) {
 
-          var $td = $trs.eq ( i ).find ( this.options.selectors.rowCell ).eq ( index ),
-              value = $td.data ( this.options.sortValue ) || $td.text ();
+          let $td = $trs.eq ( i ).find ( this.options.selectors.rowCell ).eq ( index ),
+              value = $td.data ( this.options.datas.value ) || $td.text ();
 
           this.sortData[index][i] = [$trs[i], value];
 
@@ -178,7 +181,7 @@
 
       /* SORT */
 
-      if ( index !== this.currentIndex || !this.updated ) {
+      if ( index !== this.currentIndex || this.isDirty ) {
 
         this.sortData[index].sort ( function ( a, b ) {
 
@@ -190,13 +193,15 @@
 
       /* REVERSING */
 
-      if ( this.updated && index === this.currentIndex && this.currentDirection !== false  ) {
+      let needReversing = false;
 
-        var needReversing = ( direction !== this.currentDirection );
+      if ( !this.isDirty && index === this.currentIndex && this.currentDirection !== false  ) {
+
+        needReversing = ( direction !== this.currentDirection );
 
       } else {
 
-        var needReversing = ( direction === 'desc' );
+        needReversing = ( direction === 'desc' );
 
       }
 
@@ -208,11 +213,11 @@
 
       /* REORDER */
 
-      if ( index !== this.currentIndex || direction !== this.currentDirection || !this.updated ) {
+      if ( index !== this.currentIndex || direction !== this.currentDirection || this.isDirty ) {
 
         this.table.removeChild ( this.tbody ); //INFO: Detach
 
-        for ( var i = 0, l = this.sortData[index].length; i < l; i++ ) {
+        for ( let i = 0, l = this.sortData[index].length; i < l; i++ ) {
 
           this.tbody.appendChild ( this.sortData[index][i][0] ); //INFO: Reorder
 
@@ -238,7 +243,7 @@
 
       /* UPDATE */
 
-      this.updated = true;
+      this.isDirty = false;
 
       this.$currentSortable = $sortable;
       this.currentIndex = index;
