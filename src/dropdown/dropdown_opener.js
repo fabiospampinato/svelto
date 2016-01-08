@@ -34,6 +34,6 @@
 
   /* FACTORY */
 
-  $.factory ( Svelto.ModalOpener );
+  $.factory ( Svelto.DropdownOpener );
 
 }( Svelto.$, Svelto._, window, document ));
