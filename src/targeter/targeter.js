@@ -1,12 +1,11 @@
 
 /* =========================================================================
- * Svelto - Toggler
+ * Svelto - Targeter
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
- * @requires ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,32 +15,29 @@
   /* CONFIG */
 
   let config = {
-    name: 'toggler',
+    name: 'targeter',
     selector: undefined,
     options: {
-      methods: {
-        toggle: 'toggle'
+      widget: false, //INFO: The target's widget class
+      datas: {
+        target: 'target'
       }
     }
   };
 
-  /* TOGGLER */
+  /* TARGETER */
 
-  class Toggler extends Svelto.Opener {
+  class Targeter extends Svelto.Widget {
 
-    /* TAP */
+    /* SPECIAL */
 
-    __tap ( event ) {
+    _variables () {
 
-      this._targetInstance[this.options.methods.toggle]( undefined, this.element, event );
+      this._targetSelector = this.$element.data ( this.options.datas.target );
 
-    }
+      this.$target = this._targetSelector ? $(this._targetSelector) : this.$element.closest ( this.options.widget.config.selector );
 
-    /* PUBLIC */
-
-    toggle ( force ) {
-
-      return this._targetInstance[this.options.methods.toggle]( force, this.element );
+      this._targetInstance = this.$target[this.options.widget.config.name]( 'instance' );
 
     }
 
@@ -49,7 +45,7 @@
 
   /* BINDING */
 
-  Svelto.Toggler = Toggler;
-  Svelto.Toggler.config = config;
+  Svelto.Targeter = Targeter;
+  Svelto.Targeter.config = config;
 
 }( Svelto.$, Svelto._, window, document ));

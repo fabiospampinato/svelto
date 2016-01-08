@@ -1,11 +1,11 @@
 
 /* =========================================================================
- * Svelto - Dropdown (Toggler)
+ * Svelto - Flippable (Flipper)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
+ * @requires flippable.js
  * @requires ../toggler/toggler.js
  * ========================================================================= */
 
@@ -16,24 +16,29 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownToggler',
-    selector: '.dropdown-toggler',
+    name: 'flippableFlipper',
+    selector: '.flippable-flipper, .flippable .flipper',
     options: {
-      widget: Svelto.Dropdown
+      widget: Svelto.Flippable,
+      methods: {
+        toggle: 'flip',
+        open: 'front',
+        close: 'back'
+      }
     }
   };
 
-  /* DROPDOWN TOGGLER */
+  /* FLIPPABLE FLIPPER */
 
-  class DropdownToggler extends Svelto.Toggler {}
+  class FlippableFlipper extends Svelto.Toggler {}
 
   /* BINDING */
 
-  Svelto.DropdownToggler = DropdownToggler;
-  Svelto.DropdownToggler.config = config;
+  Svelto.FlippableFlipper = FlippableFlipper;
+  Svelto.FlippableFlipper.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownToggler );
+  $.factory ( Svelto.FlippableFlipper );
 
 }( Svelto.$, Svelto._, window, document ));

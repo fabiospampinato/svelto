@@ -248,12 +248,12 @@
 
         case 'top':
         case 'bottom':
-          options.$pointer.translateX = anchorRect.left - coordinates.left + ( anchorRect.width / 2 );
+          options.$pointer.translateX ( anchorRect.left - coordinates.left + ( anchorRect.width / 2 ) );
           break;
 
         case 'left':
         case 'right':
-          options.$pointer.translateY = anchorRect.top - coordinates.top + ( anchorRect.height / 2 );
+          options.$pointer.translateY ( anchorRect.top - coordinates.top + ( anchorRect.height / 2 ) );
           break;
 
       }

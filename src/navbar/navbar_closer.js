@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Dropdown (Toggler)
+ * Svelto - Navbar (Closer)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
- * @requires ../toggler/toggler.js
+ * @requires navbar.js
+ * @requires ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,24 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownToggler',
-    selector: '.dropdown-toggler',
+    name: 'navbarCloser',
+    selector: '.navbar-closer',
     options: {
-      widget: Svelto.Dropdown
+      widget: Svelto.Navbar
     }
   };
 
-  /* DROPDOWN TOGGLER */
+  /* NAVBAR CLOSER */
 
-  class DropdownToggler extends Svelto.Toggler {}
+  class NavbarCloser extends Svelto.Closer {}
 
   /* BINDING */
 
-  Svelto.DropdownToggler = DropdownToggler;
-  Svelto.DropdownToggler.config = config;
+  Svelto.NavbarCloser = NavbarCloser;
+  Svelto.NavbarCloser.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownToggler );
+  $.factory ( Svelto.NavbarCloser );
 
 }( Svelto.$, Svelto._, window, document ));

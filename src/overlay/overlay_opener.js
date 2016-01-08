@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Dropdown (Toggler)
+ * Svelto - Overlay (Opener)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
- * @requires ../toggler/toggler.js
+ * @requires overlay.js
+ * @requires ../opener/opener.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,24 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownToggler',
-    selector: '.dropdown-toggler',
+    name: 'overlayOpener',
+    selector: '.overlay-opener',
     options: {
-      widget: Svelto.Dropdown
+      widget: Svelto.Overlay
     }
   };
 
-  /* DROPDOWN TOGGLER */
+  /* OVERLAY OPENER */
 
-  class DropdownToggler extends Svelto.Toggler {}
+  class OverlayOpener extends Svelto.Opener {}
 
   /* BINDING */
 
-  Svelto.DropdownToggler = DropdownToggler;
-  Svelto.DropdownToggler.config = config;
+  Svelto.OverlayOpener = OverlayOpener;
+  Svelto.OverlayOpener.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownToggler );
+  $.factory ( Svelto.OverlayOpener );
 
 }( Svelto.$, Svelto._, window, document ));

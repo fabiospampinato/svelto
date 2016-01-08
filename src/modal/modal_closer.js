@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Dropdown (Toggler)
+ * Svelto - Modal (Closer)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires dropdown.js
- * @requires ../toggler/toggler.js
+ * @requires modal.js
+ * @requires ../closer/closer.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,24 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'dropdownToggler',
-    selector: '.dropdown-toggler',
+    name: 'modalCloser',
+    selector: '.modal-closer',
     options: {
-      widget: Svelto.Dropdown
+      widget: Svelto.Modal
     }
   };
 
-  /* DROPDOWN TOGGLER */
+  /* MODAL CLOSER */
 
-  class DropdownToggler extends Svelto.Toggler {}
+  class ModalCloser extends Svelto.Closer {}
 
   /* BINDING */
 
-  Svelto.DropdownToggler = DropdownToggler;
-  Svelto.DropdownToggler.config = config;
+  Svelto.ModalCloser = ModalCloser;
+  Svelto.ModalCloser.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.DropdownToggler );
+  $.factory ( Svelto.ModalCloser );
 
 }( Svelto.$, Svelto._, window, document ));

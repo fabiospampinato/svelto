@@ -17,11 +17,11 @@
 
   let config = {
     name: 'tooltipToggler',
-    selector: '.tooltip-toggler, .tooltip-closer, .tooltip .button',
+    selector: '.tooltip-toggler',
     options: {
       widget: Svelto.Tooltip,
       hover: {
-        triggerable: true
+        active: true
       }
     }
   };

@@ -17,7 +17,7 @@
 
   let config = {
     name: 'modalToggler',
-    selector: '.modal-toggler, .modal-closer',
+    selector: '.modal-toggler',
     options: {
       widget: Svelto.Modal
     }

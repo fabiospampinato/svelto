@@ -17,7 +17,7 @@
 
   let config = {
     name: 'overlayToggler',
-    selector: '.overlay-toggler, .overlay-closer',
+    selector: '.overlay-toggler',
     options: {
       widget: Svelto.Overlay
     }

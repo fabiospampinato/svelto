@@ -1,12 +1,12 @@
 
 /* =========================================================================
- * Svelto - Toggler
+ * Svelto - Closer
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
  * @requires ../factory/factory.js
- * @requires ../opener/opener.js
+ * @requires ../targeter/targeter.js
  * ========================================================================= */
 
 (function ( $, _, window, document, undefined ) {
@@ -16,32 +16,49 @@
   /* CONFIG */
 
   let config = {
-    name: 'toggler',
+    name: 'closer',
     selector: undefined,
     options: {
       methods: {
-        toggle: 'toggle'
+        isOpen: 'isOpen',
+        close: 'close'
       }
     }
   };
 
-  /* TOGGLER */
+  /* CLOSER */
 
-  class Toggler extends Svelto.Opener {
+  class Closer extends Svelto.Targeter {
+
+    /* SPECIAL */
+
+    _events () {
+
+      /* TAP */
+
+      this._on ( Pointer.tap, this.__tap );
+
+    }
 
     /* TAP */
 
-    __tap ( event ) {
+    __tap () {
 
-      this._targetInstance[this.options.methods.toggle]( undefined, this.element, event );
+      this.close ();
 
     }
 
     /* PUBLIC */
 
-    toggle ( force ) {
+    isOpen () {
 
-      return this._targetInstance[this.options.methods.toggle]( force, this.element );
+      return this._targetInstance[this.options.methods.isOpen]();
+
+    }
+
+    close () {
+
+      return this._targetInstance[this.options.methods.close]( this.element );
 
     }
 
@@ -49,7 +66,7 @@
 
   /* BINDING */
 
-  Svelto.Toggler = Toggler;
-  Svelto.Toggler.config = config;
+  Svelto.Closer = Closer;
+  Svelto.Closer.config = config;
 
 }( Svelto.$, Svelto._, window, document ));
