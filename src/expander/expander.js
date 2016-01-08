@@ -21,9 +21,6 @@
       classes: {
         open: 'open'
       },
-      selectors: {
-        toggler: '.expander-toggler'
-      },
       callbacks: {
         open () {},
         close () {}
@@ -40,17 +37,8 @@
     _variables () {
 
       this.$expander = this.$element;
-      this.$togglers = this.$expander.find ( this.options.selectors.toggler );
 
       this._isOpen = this.$expander.hasClass ( this.options.classes.open );
-
-    }
-
-    _events () {
-
-      /* TOGGLER */
-
-      this._on ( this.$togglers, Pointer.tap, this.toggle );
 
     }
 

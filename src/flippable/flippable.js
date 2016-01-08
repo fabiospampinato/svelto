@@ -21,9 +21,6 @@
       classes: {
         flip: 'flipped' //TODO: Maybe rename to flip (Be aware that there's also an helper with the same name at the moment)
       },
-      selectors: {
-        flipper: '.flippable-flipper'
-      },
       callbacks: {
         front () {},
         back () {}
@@ -40,17 +37,8 @@
     _variables () {
 
       this.$flippable = this.$element;
-      this.$flippers = this.$flippable.find ( this.options.selectors.flipper );
 
       this.isFlipped = this.$flippable.hasClass ( this.options.classes.flip );
-
-    }
-
-    _events () {
-
-      /* FLIPPER */
-
-      this._on ( this.$flippers, Pointer.tap, this.flip );
 
     }
 

@@ -1,14 +1,13 @@
 
 /* =========================================================================
- * Svelto - Infobar
+ * Svelto - Expander (Opener)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires expander.js
+ * @requires ../opener/opener.js
  * ========================================================================= */
-
-//TODO: Maybe add the ability to open it
 
 (function ( $, _, window, document, undefined ) {
 
@@ -17,48 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'infobar',
-    selector: '.infobar',
+    name: 'expanderOpener',
+    selector: '.expander-opener',
     options: {
-      callbacks: {
-        close () {}
-      }
+      widget: Svelto.Expander
     }
   };
 
-  /* INFOBAR */
+  /* EXPANDER OPENER */
 
-  class Infobar extends Svelto.Widget {
-
-    /* SPECIAL */
-
-    _variables () {
-
-      this.$infobar = this.$element;
-
-    }
-
-    /* API */
-
-    close () {
-
-      //INFO: Maybe just detach it, so that we can open it again
-
-      this.$infobar.remove ();
-
-      this._trigger ( 'close' );
-
-    }
-
-  }
+  class ExpanderOpener extends Svelto.Opener {}
 
   /* BINDING */
 
-  Svelto.Infobar = Infobar;
-  Svelto.Infobar.config = config;
+  Svelto.ExpanderOpener = ExpanderOpener;
+  Svelto.ExpanderOpener.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Infobar );
+  $.factory ( Svelto.ExpanderOpener );
 
 }( Svelto.$, Svelto._, window, document ));

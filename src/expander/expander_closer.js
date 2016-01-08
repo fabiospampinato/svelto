@@ -1,14 +1,13 @@
 
 /* =========================================================================
- * Svelto - Infobar
+ * Svelto - Expander (Closer)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires expander.js
+ * @requires ../closer/closer.js
  * ========================================================================= */
-
-//TODO: Maybe add the ability to open it
 
 (function ( $, _, window, document, undefined ) {
 
@@ -17,48 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'infobar',
-    selector: '.infobar',
+    name: 'expanderCloser',
+    selector: '.expander-closer',
     options: {
-      callbacks: {
-        close () {}
-      }
+      widget: Svelto.Expander
     }
   };
 
-  /* INFOBAR */
+  /* EXPANDER CLOSER */
 
-  class Infobar extends Svelto.Widget {
-
-    /* SPECIAL */
-
-    _variables () {
-
-      this.$infobar = this.$element;
-
-    }
-
-    /* API */
-
-    close () {
-
-      //INFO: Maybe just detach it, so that we can open it again
-
-      this.$infobar.remove ();
-
-      this._trigger ( 'close' );
-
-    }
-
-  }
+  class ExpanderCloser extends Svelto.Closer {}
 
   /* BINDING */
 
-  Svelto.Infobar = Infobar;
-  Svelto.Infobar.config = config;
+  Svelto.ExpanderCloser = ExpanderCloser;
+  Svelto.ExpanderCloser.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Infobar );
+  $.factory ( Svelto.ExpanderCloser );
 
 }( Svelto.$, Svelto._, window, document ));

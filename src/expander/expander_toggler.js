@@ -1,14 +1,13 @@
 
 /* =========================================================================
- * Svelto - Infobar
+ * Svelto - Expander (Toggler)
  * =========================================================================
  * Copyright (c) 2015 Fabio Spampinato
  * Licensed under MIT (https://github.com/svelto/svelto/blob/master/LICENSE)
  * =========================================================================
- * @requires ../factory/factory.js
+ * @requires expander.js
+ * @requires ../toggler/toggler.js
  * ========================================================================= */
-
-//TODO: Maybe add the ability to open it
 
 (function ( $, _, window, document, undefined ) {
 
@@ -17,48 +16,24 @@
   /* CONFIG */
 
   let config = {
-    name: 'infobar',
-    selector: '.infobar',
+    name: 'expanderToggler',
+    selector: '.expander-toggler',
     options: {
-      callbacks: {
-        close () {}
-      }
+      widget: Svelto.Expander
     }
   };
 
-  /* INFOBAR */
+  /* EXPANDER TOGGLER */
 
-  class Infobar extends Svelto.Widget {
-
-    /* SPECIAL */
-
-    _variables () {
-
-      this.$infobar = this.$element;
-
-    }
-
-    /* API */
-
-    close () {
-
-      //INFO: Maybe just detach it, so that we can open it again
-
-      this.$infobar.remove ();
-
-      this._trigger ( 'close' );
-
-    }
-
-  }
+  class ExpanderToggler extends Svelto.Toggler {}
 
   /* BINDING */
 
-  Svelto.Infobar = Infobar;
-  Svelto.Infobar.config = config;
+  Svelto.ExpanderToggler = ExpanderToggler;
+  Svelto.ExpanderToggler.config = config;
 
   /* FACTORY */
 
-  $.factory ( Svelto.Infobar );
+  $.factory ( Svelto.ExpanderToggler );
 
 }( Svelto.$, Svelto._, window, document ));
